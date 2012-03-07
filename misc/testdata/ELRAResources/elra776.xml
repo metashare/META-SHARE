@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<identificationInfo>
+<resourceName lang="English">Mandarin Chinese Desktop Speech Recognition Corpus - Spontaneous Speech (849 people)</resourceName>
+<resourceName lang="French">Corpus de reconnaissance de parole microphone en chinois mandarin – parole spontanée (849 locuteurs)</resourceName>
+<description lang="English">This corpus comprises spontaneous speech (elicited) from 849 speakers of different dialects, ages and various educational levels (420 males and 429 females), who uttered 40 different topics, recorded over 2 channels (Mic1: SHURE SM58; Mic2: Labtec Axis-002). Speech samples are stored as a sequence of 16-bit 44.1kHz WAV for a total of 208 hours of speech per channel. The total capacity of the data is 122.8 Gb.Each speaker read 15 items. Text files are stored in Unicode format. All data have been proofread manually.The transcriptions include non-speech markers (background noise, background speech, speaker sounds) as well as markers for mispronunciation, channel distortions, words left-out and duplicates.The corpus aims to be applied to the testing and telephone natural speech recognition system.</description>
+<description lang="French">Ce corpus comprend de la parole spontanée (dirigée) de 849 locuteurs de dialectes, d’âges et de niveaux d’éducation différents (420 hommes et 429 femmes), qui ont enregistré 40 thèmes différents, via 2 canaux (Mic1: SHURE SM58; Mic2: Labtec Axis-002). Les échantillons de parole sont stockés sous la forme de séquences 16-bit 44,1kHz WAV pour un total de 208 heures de parole. La taille totale des données est de 122,8 Go.Les fichiers textes sont stockés au format Unicode. Toutes les données ont été vérifiées manuellement.Les transcriptions comprennent des balises d’événements acoustiques (bruits de fond, sons émis par les locuteurs) ainsi que des balises de mauvaise prononciation, distorsions du canal, omissions de mots et répétitions.</description>
+<resourceShortName/>
+<metaShareId>n/a</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=927</url>
+<identifier>ELRA-S0228_25</identifier>
+</identificationInfo>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+<metadataCreator>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipcode>75013</zipcode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</metadataCreator>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<lastDateUpdated>2009-09-24</lastDateUpdated>
+</versionInfo>
+<distributionInfo>
+<availability>available-restrictedUse</availability>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 59516.00€</price>
+<price>Academic org. ELRA Non Member: 59516.00€</price>
+<price>Commercial org. ELRA Member: 59516.00€</price>
+<price>Academic org. ELRA Member: 59516.00€</price>
+<availabilityStartDate>2007-01-17</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 59516.00€</price>
+<price>Academic org. ELRA Non Member: 59516.00€</price>
+<price>Commercial org. ELRA Member: 59516.00€</price>
+<price>Academic org. ELRA Member: 59516.00€</price>
+<availabilityStartDate>2007-01-17</availabilityStartDate>
+</licenceInfo>
+</distributionInfo>
+<resourceComponentType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>chi/zho</languageId>
+<languageName>Chinese</languageName>
+</languageInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
+</resourceComponentType>
+</resourceInfo>

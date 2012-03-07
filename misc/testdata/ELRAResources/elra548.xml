@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<identificationInfo>
+<resourceName lang="English">"Le Monde Diplomatique" Text corpus in Arabic</resourceName>
+<resourceName lang="French">Corpus de textes du journal "Le Monde Diplomatique" en arabe</resourceName>
+<description lang="English">Electronic archiving of "Le Monde Diplomatique" articles in Arabic from 2000. The corpus is available in HTML. Each HTML file contains one article.Number of articles available per year :•	2000: 61 articles (November and December available only) (75,305 words)•	2001: 346 articles (479,435 words)•	2002: 369 articles (461,803 words)•	2003: 343 articles (344,376 words)•	2004: 291 articles (178,046 words)</description>
+<description lang="French">L’archivage des articles du journal "Le Monde Diplomatique" dans leur version arabe est disponible à partir de l’année 2000. Le corpus est disponible en HTML. Chaque fichier HTML contient un article.Nombre d’articles disponibles par année :•	2000: 61 articles (novembre et décembre disponibles uniquement)•	2001: 346 articles (479 435 mots)•	2002: 369 articles (461 803 mots)•	2003: 343 articles (344 376 mots)•	2004: 291 articles (178 046 mots)</description>
+<resourceShortName/>
+<metaShareId>n/a</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=717</url>
+<identifier>ELRA-W0036_04</identifier>
+</identificationInfo>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+<metadataCreator>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipcode>75013</zipcode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</metadataCreator>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<lastDateUpdated>2006-04-10</lastDateUpdated>
+</versionInfo>
+<distributionInfo>
+<availability>available-restrictedUse</availability>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 69.00€</price>
+<price>Academic org. ELRA Non Member: 69.00€</price>
+<price>Commercial org. ELRA Member: 46.00€</price>
+<price>Academic org. ELRA Member: 46.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2004-06-04</availabilityStartDate>
+</licenceInfo>
+</distributionInfo>
+<resourceComponentType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusTextInfo>
+<mediaType>text</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>ara</languageId>
+<languageName>Arabic</languageName>
+</languageInfo>
+</corpusTextInfo>
+</corpusMediaType>
+</corpusInfo>
+</resourceComponentType>
+</resourceInfo>

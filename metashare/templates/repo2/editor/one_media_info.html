@@ -1,0 +1,12 @@
+<input type="hidden" id="id_{{name}}" name="{{prefix}}{{name}}" value="{{node_pk}}"/>
+<h1>
+  <a id="edit_id_{{name}}" 
+     proto-href="/{{DJANGO_BASE}}{{baseurl}}"
+     href="/{{DJANGO_BASE}}{{baseurl}}{{node_pk}}/" 
+     onclick="return showAddAnotherPopup(this);" 
+     style="display:{% if node_pk %}inline{% else %}none{% endif %}; font-weight:bold;">Edit {{prettyname}}</a>
+  <a id="add_id_{{name}}"
+     href="/{{DJANGO_BASE}}{{baseurl}}add/"
+     onclick="return showAddAnotherPopup(this);"
+     style="display:{% if node_pk %}none{% else %}inline{% endif %};">Add {{prettyname}}</a>
+</h1>

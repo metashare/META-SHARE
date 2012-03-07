@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<identificationInfo>
+<resourceName lang="English">Qualified POS Tagged Corpus</resourceName>
+<resourceName lang="French">Corpus avec étiquetage des parties du discours</resourceName>
+<description lang="English">Monolingual corpus in a .txt format, produced by KAIST KORTERM, containing 1020000 eojeols (Korean terms) in Korean. This corpus is morphologically analyzed, POS tagged, and rectified 3 times by specialists.</description>
+<description lang="French">Corpus monolingue au format .txt produit par Kaist Korterm. Ce corpus contient 1 020 000 eojeols (termes coréens) en coréen. Il a été analysé au niveau morphologique, étiqueté au niveau des parties du discours, et revu 3 fois.</description>
+<resourceShortName/>
+<metaShareId>n/a</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=654</url>
+<identifier>ELRA-W0034</identifier>
+</identificationInfo>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+<metadataCreator>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipcode>75013</zipcode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</metadataCreator>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<lastDateUpdated>2004-05-12</lastDateUpdated>
+</versionInfo>
+<distributionInfo>
+<availability>available-restrictedUse</availability>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Member: 4000.00€</price>
+<price>Academic org. ELRA Member: 667.00€</price>
+<price>Academic org. ELRA Non Member: 1333.00€</price>
+<price>Commercial org. ELRA Non Member: 8000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2002-09-12</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Member: 4000.00€</price>
+<price>Academic org. ELRA Member: 4000.00€</price>
+<price>Academic org. ELRA Non Member: 8000.00€</price>
+<price>Commercial org. ELRA Non Member: 8000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2002-09-12</availabilityStartDate>
+</licenceInfo>
+</distributionInfo>
+<resourceComponentType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusTextInfo>
+<mediaType>text</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>kor</languageId>
+<languageName>Korean</languageName>
+</languageInfo>
+</corpusTextInfo>
+</corpusMediaType>
+</corpusInfo>
+</resourceComponentType>
+</resourceInfo>

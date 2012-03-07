@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<identificationInfo>
+<resourceName lang="English">AURORA Project Database - Aurora 4b - Evaluation Package</resourceName>
+<resourceName lang="French">Base de données du projet AURORA - Aurora 4b - Package d'évaluation</resourceName>
+<description lang="English">The Aurora project was originally set up to establish a worldwide standard for the feature extraction software which forms the core of the front-end of a DSR (Distributed Speech Recognition) system. ETSI formally adopted this activity as work items 007 and 008. The two work items within ETSI are :  ETSI DES/STQ WI007 : DSR - Front-end feature extraction algorithm &amp; compression algorithm  ETSI DES/STQ WI008 : DSR - Advanced feature extraction algorithm The Aurora project has released a number of list files for performing the training and testing on the Wall Street Journal (WSJ0) data at two sampling rates -8 kHz and 16 kHz. The Aurora 4b, has been released. It contains noisy versions of the Nov'92 WSJ0 development set. Two original copies of the contract (pdf | doc | rtf) must be sent to ELDA.</description>
+<description lang="French">DESCRIPTION DISPONIBLE EN FRANCAIS PROCHAINEMENT.The Aurora project was originally set up to establish a worldwide standard for the feature extraction software which forms the core of the front-end of a DSR (Distributed Speech Recognition) system. ETSI formally adopted this activity as work items 007 and 008. The two work items within ETSI are :  ETSI DES/STQ WI007 : DSR - Front-end feature extraction algorithm &amp; compression algorithm  ETSI DES/STQ WI008 : DSR - Advanced feature extraction algorithm The Aurora project has released a number of list files for performing the training and testing on the Wall Street Journal (WSJ0) data at two sampling rates -8 kHz and 16 kHz. The Aurora 4b, has been released. It contains noisy versions of the Nov'92 WSJ0 development set. Two original copies of the contract (pdf | doc | rtf) must be sent to ELDA.</description>
+<resourceShortName/>
+<metaShareId>n/a</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=695</url>
+<identifier>ELRA-AURORA-CD0004_02</identifier>
+</identificationInfo>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+<metadataCreator>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipcode>75013</zipcode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</metadataCreator>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<lastDateUpdated>2008-01-09</lastDateUpdated>
+</versionInfo>
+<distributionInfo>
+<availability>available-restrictedUse</availability>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 250.00€</price>
+<price>Academic org. ELRA Non Member: 250.00€</price>
+<price>Commercial org. ELRA Member: 250.00€</price>
+<price>Academic org. ELRA Member: 250.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2003-04-16</availabilityStartDate>
+</licenceInfo>
+</distributionInfo>
+<usageInfo>
+<actualUseInfo>
+<actualUse>nlpApplications</actualUse>
+<useNLPSpecific>speechRecognition</useNLPSpecific>
+</actualUseInfo>
+</usageInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>AURORA</projectName>
+<fundingType>ownFunds</fundingType>
+</fundingProject>
+</resourceCreationInfo>
+<resourceComponentType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>eng</languageId>
+<languageName>English</languageName>
+</languageInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
+</resourceComponentType>
+</resourceInfo>

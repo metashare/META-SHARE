@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<identificationInfo>
+<resourceName lang="English">Corpus of Contemporaneous Spanish Novels</resourceName>
+<resourceName lang="French">Corpus de fictions contemporaines en espagnol</resourceName>
+<description lang="English">This corpus consists of 11 novels written in Castilian Spanish by Inmaculada Ferrer-Vidal Turull, a contemporaneous author. The list of novels consists of:-	La búsqueda: 113,639 words-	Tristeza: 41,125 words-	Cuarto menguante: 42,419 words-	Recuerdos: 55,694 words-	Sucedió en Abril: 46,040 words-	Viejos amigos: 84,082 words-	Soledad &amp; Cia: 69,848 words-	El chispazo, la hoguera y las brasas: 108,877 words-	Un giro en la vida : 70,736 words-	Adiós: 2,016 words-	Vacaciones: 3,623 wordsThe novels are available in Word format.</description>
+<description lang="French">Ce corpus comprend 11 fictions écrites en espagnol castillan par l’auteur contemporain Inmaculada Ferrer-Vidal Turull. La liste des fictions consiste en :-	La búsqueda: 113,639 words-	Tristeza: 41,125 words-	Cuarto menguante: 42,419 words-	Recuerdos: 55,694 words-	Sucedió en Abril: 46,040 words-	Viejos amigos: 84,082 words-	Soledad &amp; Cia: 69,848 words-	El chispazo, la hoguera y las brasas: 108,877 words-	Un giro en la vida : 70,736 words-	Adiós: 2,016 words-	Vacaciones: 3,623 wordsCes fictions sont fournies au format Word.</description>
+<resourceShortName/>
+<metaShareId>n/a</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=847</url>
+<identifier>ELRA-W0041</identifier>
+</identificationInfo>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+<metadataCreator>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipcode>75013</zipcode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</metadataCreator>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<lastDateUpdated>2006-03-16</lastDateUpdated>
+</versionInfo>
+<distributionInfo>
+<availability>available-restrictedUse</availability>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 1000.00€</price>
+<price>Academic org. ELRA Non Member: 500.00€</price>
+<price>Commercial org. ELRA Member: 800.00€</price>
+<price>Academic org. ELRA Member: 400.00€</price>
+<availabilityStartDate>2006-03-16</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 1000.00€</price>
+<price>Academic org. ELRA Non Member: 1000.00€</price>
+<price>Commercial org. ELRA Member: 800.00€</price>
+<price>Academic org. ELRA Member: 800.00€</price>
+<availabilityStartDate>2006-03-16</availabilityStartDate>
+</licenceInfo>
+</distributionInfo>
+<resourceComponentType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusTextInfo>
+<mediaType>text</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>spa</languageId>
+<languageName>Spanish</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Castilian</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
+</languageInfo>
+<textFormatInfo>
+<mimeType>MS Word</mimeType>
+</textFormatInfo>
+</corpusTextInfo>
+</corpusMediaType>
+</corpusInfo>
+</resourceComponentType>
+</resourceInfo>

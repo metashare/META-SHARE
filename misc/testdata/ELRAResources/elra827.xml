@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<identificationInfo>
+<resourceName lang="English">Persian Multext-East framework lexicon</resourceName>
+<resourceName lang="French">Lexique persan (dans le cadre de Multext-East)</resourceName>
+<description lang="English">This is a Persian (Farsi) morphosyntactic lexicon derived from the Persian 1984 corpus (Multext-East framework) (see ELRA-W0054). It contains the full inflectional paradigms of a superset of lemmas that appear in the Persian 1984 corpus. Each entry gives the word-form, its lemma and morphosyntactic description. The lexicon contains 13,247 entries.</description>
+<description lang="French">Ce lexique morpho-syntaxique persan (farsi) est dérivé du corpus 1984 en persan (Multext-East) (voir ELRA-W0054). Il contient les paradigmes flexionnels complets d’un surensemble de lemmes qui apparaissent dans le corpus 1984 en persan. Chaque entrée présente la forme du mot, son lemme et sa description morpho-syntaxique. Le lexique contient 13 247 entrées.</description>
+<resourceShortName/>
+<metaShareId>n/a</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1125</url>
+<identifier>ELRA-L0086</identifier>
+</identificationInfo>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+<metadataCreator>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipcode>75013</zipcode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</metadataCreator>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<lastDateUpdated>2010-09-27</lastDateUpdated>
+</versionInfo>
+<distributionInfo>
+<availability>available-restrictedUse</availability>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Academic org. ELRA Member: 45.00€</price>
+<price>Commercial org. ELRA Member: 500.00€</price>
+<price>Academic org. ELRA Non Member: 45.00€</price>
+<price>Commercial org. ELRA Non Member: 2000.00€</price>
+<availabilityStartDate>2010-09-27</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Academic org. ELRA Member: 500.00€</price>
+<price>Commercial org. ELRA Member: 500.00€</price>
+<price>Academic org. ELRA Non Member: 2000.00€</price>
+<price>Commercial org. ELRA Non Member: 2000.00€</price>
+<availabilityStartDate>2010-09-27</availabilityStartDate>
+</licenceInfo>
+</distributionInfo>
+<resourceCreationInfo>
+<creationEndDate>2009-01-01</creationEndDate>
+</resourceCreationInfo>
+<resourceComponentType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>per/fas</languageId>
+<languageName>Persian</languageName>
+</languageInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
+</resourceComponentType>
+</resourceInfo>

@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<table><tr><td bgcolor=#dddddd nowrap><font size=+1>Top 10</font>&nbsp;&nbsp;</td><td nowrap>&nbsp;&nbsp;<font size=+1><a href="{% url metashare.views.frontpage %}stats/repo/">Repository statistics</a></font>&nbsp;&nbsp; </td>
+<td width=80%></td></tr>
+<tr><td bgcolor=#dddddd colspan=3>
+
+<div class="content_box">
+
+<form class="form_helper" name="topform" id="topform" action="{% url metashare.views.frontpage %}stats/top/" method="get">
+<table>
+<tr><td>
+<select name='view' onchange="topform.submit();">
+<option value='topviewed' style="background-image: url({% url metashare.views.frontpage %}site_media/stats/img/v_icon.gif); background-repeat: no-repeat;"
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Most Viewed Resources
+<option value='topdownloaded' style="background-image: url({% url metashare.views.frontpage %}site_media/stats/img/d_icon.gif); background-repeat: no-repeat;"
+{% ifequal view "topdownloaded" %}
+        selected
+{% endifequal %}
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Top Downloaded Resources
+
+<option value='latestupdated' style="background-image: url({% url metashare.views.frontpage %}site_media/stats/img/u_icon.gif); background-repeat: no-repeat;"
+{% ifequal view "latestupdated" %}
+        selected
+{% endifequal %}
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Latest Updated Resources
+
+<option value='latestqueries' style="background-image: url({% url metashare.views.frontpage %}site_media/stats/img/r_icon.gif); background-repeat: no-repeat;"
+{% ifequal view "latestqueries" %} 
+	selected
+{% endifequal %}
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Latest Queries
+</select>
+</td>
+</tr>
+</table>
+</form>
+
+{% if topdata|length <= 0 %}
+    <center><strong>No data found</strong></center>
+{% else %}
+<div id="results">
+<table width=100% class="result_table">
+<tr class="result_table_head" style="">
+{% ifequal view "latestqueries" %}
+  <td width="60%" nowrap>Query</td>
+  <td width="15%" nowrap>Found results</td>
+  <td width="25%">Time</td>
+{% else %}
+  <td width="5%">Id</td>
+  <td width="70%">Title</td>
+  {% ifequal view "latestupdated" %}
+    <td width="25%">Date</td>
+  {% else %}
+    <td width="25%">Num.</td>
+  {% endifequal %}
+{% endifequal %}
+</tr>
+
+{% for stat in topdata %}
+<tr class="{% cycle odd,even %}">
+{% ifequal view "latestqueries" %}  
+   <td nowrap><a href="{% url metashare.views.frontpage %}repo2/search2/?q={{ stat.0 }}">{{ stat.0 }}</a></th>
+   <td width=100%><i>{{ stat.2 }}</i></td>
+   <td nowrap>{{ stat.1 }}</td>
+{% else %} 
+   <th style="text-align:right;" nowrap>{{ stat.0 }}</th>
+   <td width=100%><a href="{{ stat.1 }}">{{ stat.3 }}</a></td>
+   <td nowrap>
+   {% ifequal view "latestupdated" %}
+        {{ stat.2 }}
+   {% else %}
+        <b>{{ stat.2 }}</b>
+   {% endifequal %}
+   </td>
+{% endifequal %}
+</tr>
+{% endfor %}
+
+</table>
+{% endif %}
+
+</div>
+</td></tr></table>
+
+{% endblock %}

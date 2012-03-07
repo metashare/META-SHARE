@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<identificationInfo>
+<resourceName lang="English">TEDphone (Polyphone-like Translanguage English Database)</resourceName>
+<resourceName lang="French">TEDPhone (Polyphone-like Translanguage English database)</resourceName>
+<description lang="English">TEDphone (1 CD) is part of the TED speech database, described in this catalogue. It is a Polyphone-like recordings for 64 speakers in English and in their native language. For 25 of the speakers there are also simultaneous laryngograph recordings. The TED (Transnational English Database) corpus contains recordings of speeches made at the Eurospeech-93 conference in Berlin. The name of the corpus --- and its nickname, ``The Terrible English Database'' --- reflects the fact that a high percentage of the presentations at Eurospeech-93 were given in English by non-native speakers of English.</description>
+<description lang="French">TEDphone est la partie "polyphone" de la base de données TED, décrite dans ce catalogue. Elle consiste en des enregistrements téléphoniques de 64 locuteurs, en anglais et dans la langue maternelle des locuteurs. Pour 25 d'entre eux on dispose des enregistrements laryngographiques.</description>
+<resourceShortName>TEDPhone</resourceShortName>
+<metaShareId>n/a</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=79</url>
+<identifier>ELRA-S0032</identifier>
+</identificationInfo>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+<metadataCreator>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipcode>75013</zipcode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</metadataCreator>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<lastDateUpdated>2007-02-22</lastDateUpdated>
+</versionInfo>
+<distributionInfo>
+<availability>available-restrictedUse</availability>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 100.00€</price>
+<price>Academic org. ELRA Non Member: 100.00€</price>
+<price>Commercial org. ELRA Member: 35.00€</price>
+<price>Academic org. ELRA Member: 35.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 100.00€</price>
+<price>Academic org. ELRA Non Member: 100.00€</price>
+<price>Commercial org. ELRA Member: 35.00€</price>
+<price>Academic org. ELRA Member: 35.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
+</licenceInfo>
+</distributionInfo>
+<resourceComponentType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>eng</languageId>
+<languageName>English</languageName>
+</languageInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
+</resourceComponentType>
+</resourceInfo>

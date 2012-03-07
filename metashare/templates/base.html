@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>MetaShare</title>
+
+    <link rel="stylesheet" href="{% url metashare.views.frontpage %}site_media/css/blueprint/screen.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="{% url metashare.views.frontpage %}site_media/css/blueprint/print.css" type="text/css" media="print">
+    <!--[if lt IE 8]><link rel="stylesheet" href="{% url metashare.views.frontpage %}site_media/css/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+    <link rel="stylesheet" href="{% url metashare.views.frontpage %}site_media/css/sexybuttons/sexybuttons.css" type="text/css" media="screen">
+    
+    <link rel="stylesheet" href="{% url metashare.views.frontpage %}site_media/css/screen.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="{% url metashare.views.frontpage %}site_media/css/typo.css" type="text/css" media="screen">
+    
+    <script type="text/javascript" src="{% url metashare.views.frontpage %}site_media/js/jquery-1.7.1.min.js"></script>
+
+	<link href='http://fonts.googleapis.com/css?family=Rokkitt' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Cantarell:regular,italic,bold,bolditalic&v1' rel='stylesheet' type='text/css'>
+	{% block links %}{% endblock %}
+
+  </head>
+    
+  <body>
+  	<div id="banner_top" class="gradient_orange" style="float:left;">
+ 	  <div id="inner">
+  		<div class="inner_box" style="width:280px;float:left;">
+  			<div class="short popup_box">
+	  			<a href="{% url metashare.views.frontpage %}"><div class="icon" onmouseover="$('#popup1').show();" onmouseout="$('#popup1').hide();"><img src="{% url metashare.views.frontpage %}site_media/images/home.png" /></div></a>
+  				<img class="inner" src="{% url metashare.views.frontpage %}site_media/images/trenner.png" />
+  				<div id="popup1" class="popup" style="left:5px;"><img style="left:20px;" src="{% url metashare.views.frontpage %}site_media/images/adv_search_pfeil.png" />Home</div>
+  			</div>
+
+   			<div class="short popup_box">
+		  		<a href="{% url metashare.views.frontpage %}site_media/documentation.pdf"><div class="icon" onmouseover="$('#popup5').show();" onmouseout="$('#popup5').hide();"><img src="{% url metashare.views.frontpage %}site_media/images/help.png" /></div></a>
+	  			<div id="popup5" class="popup" style="left:98px;"><img  style="padding-left:40px;" src="{% url metashare.views.frontpage %}site_media/images/adv_search_pfeil.png" />Documentation</div>
+  			</div>
+ 
+  		</div>
+  		
+		<span>
+			<img class="icon" src="{% url metashare.views.frontpage %}site_media/images/metashare.png" /> <sup><sup><i>beta</i></sup></sup>
+		</span>
+
+  		<div class="inner_box" style="float:right;padding-right:20px;">
+			{% if user.is_staff %}
+				<a href="{% url editor:index %}"><div class="button middle_button">Editor</div></a>
+			{% endif %}
+			{% if user.username %}
+				{% if user.username != 'MetaShareUser' %}
+					<a href="{% url metashare.accounts.views.edit_profile %}"><div class="button middle_button">Profile</div></a>
+				{% endif %}
+				<a href="{% url metashare.views.logout %}"><div class="button middle_button">Logout</div></a>
+			{% else %}
+				<a href="{% url metashare.accounts.views.create %}"><div class="button middle_button">Register</div></a>
+				<a href="{% url metashare.views.login %}"><div class="button middle_button">Login</div></a>
+			{% endif %}
+		</div>
+	 </div><!-- end inner -->	 
+	 
+   </div><!-- end banner_top -->
+   	
+   <div class="container">
+<!--    	<div class="span-22" style="height: 410px; margin-top: 20px; text-align:center; margin-left:20px;">
+    		<img src="{% url metashare.views.frontpage %}site_media/images/teaser01.png" />
+    	</div>-->
+
+	<div id="content">
+
+	    <div id="messages">
+			{% block messages %}{% endblock %}
+			{% if messages %}
+			{% for message in messages %}
+			<p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|safe }}</p>
+			{% endfor %}
+			{% endif %}
+
+			<!--
+			<p class="success">Success message</p>
+			<p class="notice">Notice message</p>
+			<p class="info">Info message</p>
+			<p class="error">Error message</p>
+			-->
+		</div>
+
+		<div style="height: 60px;">
+		{% if user.username %}
+			<p style="font-size:8pt;text-align:right;"><i>Username: {{user.username}}</i></p>
+		{% endif %}
+		</div>
+
+	  {% block content %}{% endblock %}
+		
+	</div>
+		
+		<div class="split span-24" style="">
+			&nbsp;
+		</div>
+
+		<div id="footer" class="prepend-2 span-20 append-2 last" style="text-align:center;  margin-bottom:100px;">Co-funded by the 7th Framework Programme and the ICT Policy Support Programme of the European Commission through the contracts T4ME (grant agreement no.: 249119), CESAR (grant agreement no.: 271022), METANET4U (grant agreement no.: 270893) and META-NORD (grant agreement no.: 270899). <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>
+		</div>
+	 </div>
+		
+    </div>
+	
+	<script type="text/javascript">
+	  addFormHelper();
+	  
+	  
+	</script>
+
+	
+  </body>
+
+</html>

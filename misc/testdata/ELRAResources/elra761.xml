@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<identificationInfo>
+<resourceName lang="English">LORETO Thesaurus</resourceName>
+<resourceName lang="French">Thesaurus LORETO</resourceName>
+<description lang="English">Entries: 800Languages: French, Spanish, German, Polish, Turkish, Italian, Portuguese, EnglishFormat: ASCIIMedium: Floppy disk (Mac or PC)Card Description: This thesaurus is an interesting basis for starting up an information system in this area. 3 languages can be displayed at a time. The thesaurus contains hierarchical and cross-reference relations.</description>
+<description lang="French">Ce thésaurus est une base intéressante pour démarrer un système dans ce domaine. 3 langues peuvent être affichées en même temps. Le thésaurus contient des relations hierarchiques et transversales.</description>
+<resourceShortName/>
+<metaShareId>n/a</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=68</url>
+<identifier>ELRA-T0089</identifier>
+</identificationInfo>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+<metadataCreator>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipcode>75013</zipcode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</metadataCreator>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<lastDateUpdated>2005-06-13</lastDateUpdated>
+</versionInfo>
+<distributionInfo>
+<availability>available-restrictedUse</availability>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 200.00€</price>
+<price>Academic org. ELRA Non Member: 200.00€</price>
+<price>Commercial org. ELRA Member: 150.00€</price>
+<price>Academic org. ELRA Member: 150.00€</price>
+<distributionAccessMedium>other</distributionAccessMedium>
+<availabilityStartDate>1997-01-23</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 200.00€</price>
+<price>Academic org. ELRA Non Member: 200.00€</price>
+<price>Commercial org. ELRA Member: 150.00€</price>
+<price>Academic org. ELRA Member: 150.00€</price>
+<distributionAccessMedium>other</distributionAccessMedium>
+<availabilityStartDate>1997-01-23</availabilityStartDate>
+</licenceInfo>
+</distributionInfo>
+<resourceComponentType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>terminologicalResource</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>eng</languageId>
+<languageName>English</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>ger/deu</languageId>
+<languageName>German</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>ita</languageId>
+<languageName>Italian</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>pol</languageId>
+<languageName>Polish</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>por</languageId>
+<languageName>Portuguese</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>spa</languageId>
+<languageName>Spanish</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Castilian</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
+</languageInfo>
+<languageInfo>
+<languageId>tur</languageId>
+<languageName>Turkish</languageName>
+</languageInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
+</resourceComponentType>
+</resourceInfo>

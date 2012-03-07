@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<identificationInfo>
+<resourceName lang="English">Venice Italian Treebank (VIT)</resourceName>
+<resourceName lang="French">Treebank italien de Venise</resourceName>
+<description lang="English">The VIT, Venice Italian Treebank is the effort of the collaboration of people working at the Laboratory of Computational Linguistics of the University of Venice in the years 1995-2005. It is partly the result of annotation carried out internally with no specific project in mind and no financial support. This work was partly related to the development of a lexicon, a morphological analyzer, a tagger, a deep parser of Italian. All these resources were finally ready at the beginning of the ‘90s when the LCL got involved in the first national projects. The VIT contains about 272,000 words distributed over six different domains, and this is what makes it so relevant for the study of the structure of Italian language. The following domains were annotated: Domain                          Number of words         Time spanBureaucratic                    20,000                       1986 Politics                            40,000                       1984Economic &amp; financial         12,000                       1987Literary                           10,000                       1984Scientific                         20,000                       1985News                              170,000                     1994In addition, some 60,000 tokens of spoken dialogues in different Italian varieties were annotated.The annotation follows general X-bar criteria with 29 constituency labels and 102 PoS tags. VIT is also made available in a broad annotation version with 10 constituency labels and 22 PoS tags for machine learning purposes.The format is plain text with square bracketing. However, a UPenn style version which is readable by the open source query language CorpusSearch is also provided.</description>
+<description lang="French">Le Treebank italien de Venise (VIT) est le fruit d’un travail de 10 ans (1995-2005) effectué par des chercheurs du Laboratoire de linguistique computationnelle (LCL) de l’université de Venise. Réalisé en interne, en dehors de tout projet spécifique et sans aucun soutien financier, le Treebank est issu à la fois d’un travail d'annotation et du développement d’un lexique, d’un analyseur morphologique, d’un étiqueteur et d’un analyseur syntaxique approfondi de l’italien.Toutes ces ressources étaient prêtes dès le début des années 90 lorsque le LCL s’est impliqué dans les premiers projets nationaux. Le VIT comprend environ 272 000 mots répartis sur six domaines différents, ce qui en fait un outil très utile pour l’étude de la structure de la langue italienne. Les domaines suivants ont été annotés : Domaine                             Nombre de mots         PériodeBureaucratique                    20,000                     1986 Politique                              40,000                     1984Economique &amp; financier        12,000                     1987Littéraire                             10,000                     1984Scientifique                         20,000                      1985Actualités                            170,000                    1994En outre, quelque 60 000 tokens de dialogue oral avec plusieurs variantes de l’italien ont été annotés.L’annotation est conforme au critère général X-bar avec 29 constituants et 102 étiquettes de partie du discours. Le VIT est également proposé dans une version d’annotation de 10 constituants et de 22 étiquettes de partie du discours pour l’apprentissage automatique.Les données sont au format texte avec crochets. Cependant, une version de type UPenn visualisable avec CorpusSearch (langage d’interrogation open source) est également fournie.</description>
+<resourceShortName/>
+<metaShareId>n/a</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=831</url>
+<identifier>ELRA-W0040</identifier>
+</identificationInfo>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+<metadataCreator>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipcode>75013</zipcode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</metadataCreator>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<revision>Update frequency: yearly</revision>
+<lastDateUpdated>2006-02-13</lastDateUpdated>
+</versionInfo>
+<distributionInfo>
+<availability>available-restrictedUse</availability>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 10000.00€</price>
+<price>Academic org. ELRA Non Member: 4000.00€</price>
+<price>Commercial org. ELRA Member: 7000.00€</price>
+<price>Academic org. ELRA Member: 3000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2006-02-13</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 10000.00€</price>
+<price>Academic org. ELRA Non Member: 10000.00€</price>
+<price>Commercial org. ELRA Member: 7000.00€</price>
+<price>Academic org. ELRA Member: 7000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2006-02-13</availabilityStartDate>
+</licenceInfo>
+</distributionInfo>
+<validationInfo>
+<validationModeDetails> Internal validation</validationModeDetails>
+</validationInfo>
+<usageInfo>
+<actualUseInfo>
+<actualUse>nlpApplications</actualUse>
+<useNLPSpecific>speechSynthesis</useNLPSpecific>
+</actualUseInfo>
+</usageInfo>
+<resourceCreationInfo>
+<creationEndDate>2005-01-01</creationEndDate>
+</resourceCreationInfo>
+<resourceComponentType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusTextInfo>
+<mediaType>text</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>ita</languageId>
+<languageName>Italian</languageName>
+</languageInfo>
+<sizeInfo>
+<size>120</size>
+<sizeUnit>mb</sizeUnit>
+</sizeInfo>
+<textFormatInfo>
+<mimeType>Plain text</mimeType>
+</textFormatInfo>
+</corpusTextInfo>
+</corpusMediaType>
+</corpusInfo>
+</resourceComponentType>
+</resourceInfo>

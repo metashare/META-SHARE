@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<identificationInfo>
+<resourceName lang="English">SIEMENS 100 - SI100</resourceName>
+<resourceName lang="French">SIEMENS 100 - SI100</resourceName>
+<description lang="English">The corpus contains read speech of 101 different speakers. Each speaker has read approximately 100 sentences from a German newspaper corpus from the SuedDeutch Zeitungen (SZ), consiting of two sub-corpus known as the SZ subcorpus (contains 544 sentences from newspaper articles) and the CeBit subcorpus (contains 483 sentences from newspaper articles about CeBit 1995). Each subcorpus is divided into 5 parts of approximately 100 utterances each. Every speaker read only part of one subcorpus (with some exceptions), thus resulting in a total of approximately 10100 recorded utterances (7 CDROMs).</description>
+<description lang="French">The corpus contains read speech of 101 different speakers. Each speaker has read approximately 100 sentences from a German newspaper corpus from the SuedDeutch Zeitungen (SZ), consiting of two sub-corpus known as the SZ subcorpus (contains 544 sentences from newspaper articles) and the CeBit subcorpus (contains 483 sentences from newspaper articles about CeBit 1995). Each subcorpus is divided into 5 parts of approximately 100 utterances each. Every speaker read only part of one subcorpus (with some exceptions), thus resulting in a total of approximately 10100 recorded utterances (7 CDROMs).</description>
+<resourceShortName/>
+<metaShareId>n/a</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=65</url>
+<identifier>ELRA-S0025</identifier>
+</identificationInfo>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+<metadataCreator>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipcode>75013</zipcode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</metadataCreator>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<lastDateUpdated>2007-02-22</lastDateUpdated>
+</versionInfo>
+<distributionInfo>
+<availability>available-restrictedUse</availability>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 9970.19€</price>
+<price>Academic org. ELRA Non Member: 1789.52€</price>
+<price>Commercial org. ELRA Member: 8052.85€</price>
+<price>Academic org. ELRA Member: 894.76€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 9970.19€</price>
+<price>Academic org. ELRA Non Member: 9970.19€</price>
+<price>Commercial org. ELRA Member: 8052.85€</price>
+<price>Academic org. ELRA Member: 8052.85€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
+</licenceInfo>
+</distributionInfo>
+<resourceComponentType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>ger/deu</languageId>
+<languageName>German</languageName>
+</languageInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
+</resourceComponentType>
+</resourceInfo>

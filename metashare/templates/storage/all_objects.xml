@@ -1,0 +1,5 @@
+<storage-objects>
+{% for storage_object_xml in storage_objects %}
+  {{storage_object_xml}}
+{% endfor %}
+</storage-objects>

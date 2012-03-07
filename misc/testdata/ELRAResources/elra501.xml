@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<identificationInfo>
+<resourceName lang="English">Original Short-Message Data Collation I in Chinese (PinYin)</resourceName>
+<resourceName lang="French">Collection d’origine de SMS I en chinois (PinYin)</resourceName>
+<description lang="English">This corpus comprises 5,891,275 characters, corresponding to 51,568 short messages (SMS) from radio/TV stations and 213,694 daily life short messages. This subset contains original messages together with PinYin transcription.All data have been proofread manually with PinYin.</description>
+<description lang="French">Ce corpus comprend 5 891 275 caractères, correspondant à 51 568 SMS provenant de stations de radio/télé et 213 694 messages quotidiens. Ce sous-ensemble comprend les messages d'origine avec leur transcription en PinYin.Toutes les données ont été vérifiées manuellement avec PinYin.</description>
+<resourceShortName/>
+<metaShareId>n/a</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=970</url>
+<identifier>ELRA-W0045_02</identifier>
+</identificationInfo>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+<metadataCreator>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipcode>75013</zipcode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</metadataCreator>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<lastDateUpdated>2007-01-17</lastDateUpdated>
+</versionInfo>
+<distributionInfo>
+<availability>available-restrictedUse</availability>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 18659.00€</price>
+<price>Academic org. ELRA Non Member: 18659.00€</price>
+<price>Commercial org. ELRA Member: 18659.00€</price>
+<price>Academic org. ELRA Member: 18659.00€</price>
+<availabilityStartDate>2007-01-17</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 18659.00€</price>
+<price>Academic org. ELRA Non Member: 18659.00€</price>
+<price>Commercial org. ELRA Member: 18659.00€</price>
+<price>Academic org. ELRA Member: 18659.00€</price>
+<availabilityStartDate>2007-01-17</availabilityStartDate>
+</licenceInfo>
+</distributionInfo>
+<resourceComponentType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusTextInfo>
+<mediaType>text</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>chi/zho</languageId>
+<languageName>Chinese</languageName>
+</languageInfo>
+</corpusTextInfo>
+</corpusMediaType>
+</corpusInfo>
+</resourceComponentType>
+</resourceInfo>

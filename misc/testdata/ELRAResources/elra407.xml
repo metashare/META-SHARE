@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<identificationInfo>
+<resourceName lang="English">French-English Lexicon (LanTmark)</resourceName>
+<resourceName lang="French">Lexique français-anglais (LanTmark)</resourceName>
+<description lang="English">General vocabulary for transferEntries: 39,453Format: ASCII format with ISO 8859-1 character set. A lexicon file contains entries with feature-value pairs on each line and separators between entries.Medium: Floppy Disk, QIC 150 MB Cartridge Tape The French-English LanTmark lexicon is divided into the following lexical categories: nouns (about 21,000), verbs (about 9,000), adjectives (about 3,000), adverbs (about 1,000).Each entry contains adomain information, source language disambiguation, features, and target language actions.</description>
+<description lang="French">Vocabulaire général pour le transfert.Entrées : 39 453 Format: ASCIISupport : disquette, cartouche QIC 150 MBCe lexique anglais-français est réparti selon les catégories lexicales suivantes : noms (env. 21 000), verbes (env. 9 000), adjectifs (env. 3 000), adverbes (env. 1 000).Chaque entrée contient une information sur le domaine, désambiguisation sur la langue source, des traits, des actions sur la langue cible.</description>
+<resourceShortName/>
+<metaShareId>n/a</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=106</url>
+<identifier>ELRA-M0007</identifier>
+</identificationInfo>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+<metadataCreator>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipcode>75013</zipcode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</metadataCreator>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<lastDateUpdated>2005-05-30</lastDateUpdated>
+</versionInfo>
+<distributionInfo>
+<availability>available-restrictedUse</availability>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 63124.80€</price>
+<price>Academic org. ELRA Non Member: 7890.60€</price>
+<price>Commercial org. ELRA Member: 37874.90€</price>
+<price>Academic org. ELRA Member: 4734.40€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1997-01-23</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 63124.80€</price>
+<price>Academic org. ELRA Non Member: 63124.80€</price>
+<price>Commercial org. ELRA Member: 37874.90€</price>
+<price>Academic org. ELRA Member: 37874.90€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1997-01-23</availabilityStartDate>
+</licenceInfo>
+</distributionInfo>
+<resourceComponentType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>eng</languageId>
+<languageName>English</languageName>
+</languageInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
+</resourceComponentType>
+</resourceInfo>

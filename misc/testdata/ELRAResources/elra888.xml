@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<identificationInfo>
+<resourceName lang="English">Original Short-Message Data Collation II in Chinese (named entities)</resourceName>
+<resourceName lang="French">Collection d’origine de SMS II en chinois (entités nommées)</resourceName>
+<description lang="English">This corpus comprises 2,604,901 characters, corresponding to 202,277 daily life short messages (SMS). This subset contains original messages together with named entities.All data have been proofread manually.</description>
+<description lang="French">Ce corpus comprend 2 604 901 caractères, correspondant à 202 277 messages quotidiens. Ce sous-ensemble comprend les messages d'origine avec les entités nommées.Toutes les données ont été vérifiées manuellement.</description>
+<resourceShortName/>
+<metaShareId>n/a</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=968</url>
+<identifier>ELRA-W0045_08</identifier>
+</identificationInfo>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+<metadataCreator>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipcode>75013</zipcode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</metadataCreator>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<lastDateUpdated>2007-01-17</lastDateUpdated>
+</versionInfo>
+<distributionInfo>
+<availability>available-restrictedUse</availability>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 14928.00€</price>
+<price>Academic org. ELRA Non Member: 14928.00€</price>
+<price>Commercial org. ELRA Member: 14928.00€</price>
+<price>Academic org. ELRA Member: 14928.00€</price>
+<availabilityStartDate>2007-01-17</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 14928.00€</price>
+<price>Academic org. ELRA Non Member: 14928.00€</price>
+<price>Commercial org. ELRA Member: 14928.00€</price>
+<price>Academic org. ELRA Member: 14928.00€</price>
+<availabilityStartDate>2007-01-17</availabilityStartDate>
+</licenceInfo>
+</distributionInfo>
+<resourceComponentType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusTextInfo>
+<mediaType>text</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>chi/zho</languageId>
+<languageName>Chinese</languageName>
+</languageInfo>
+</corpusTextInfo>
+</corpusMediaType>
+</corpusInfo>
+</resourceComponentType>
+</resourceInfo>

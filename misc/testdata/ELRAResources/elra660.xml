@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<identificationInfo>
+<resourceName lang="English">Tagged text in French (MEMODATA)</resourceName>
+<resourceName lang="French">Textes balisés en français (MEMODATA)</resourceName>
+<description lang="English">More than 170 books (classical novels, legal texts...) are tagged without rules of morphological disambiguation. A tagged corpus of 50 books is available for research. It consists of several authors of the 19th century (Balzac, Hugo, Stendhal).See also W0012.</description>
+<description lang="French">Plus de 170 livres balisés sont disponibles avec ou sans règles de désambiguisation morphologique. Un corpus balisé de 50 livres est disponible pour la recherche. Il s'agit essentiellement de romans du 19ème siècle (Balzac, Hugo, Stendhal, ...) et de textes juridiques.Voir aussi W0012.</description>
+<resourceShortName/>
+<metaShareId>n/a</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=49</url>
+<identifier>ELRA-W0011</identifier>
+</identificationInfo>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+<metadataCreator>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipcode>75013</zipcode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</metadataCreator>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<lastDateUpdated>2008-01-10</lastDateUpdated>
+</versionInfo>
+<distributionInfo>
+<availability>available-restrictedUse</availability>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 2692.00€</price>
+<price>Academic org. ELRA Non Member: 2154.00€</price>
+<price>Commercial org. ELRA Member: 2154.00€</price>
+<price>Academic org. ELRA Member: 1723.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1997-01-23</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 2692.00€</price>
+<price>Academic org. ELRA Non Member: 2692.00€</price>
+<price>Commercial org. ELRA Member: 2154.00€</price>
+<price>Academic org. ELRA Member: 2154.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1997-01-23</availabilityStartDate>
+</licenceInfo>
+</distributionInfo>
+<resourceComponentType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusTextInfo>
+<mediaType>text</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
+</languageInfo>
+</corpusTextInfo>
+</corpusMediaType>
+</corpusInfo>
+</resourceComponentType>
+</resourceInfo>

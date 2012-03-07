@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<identificationInfo>
+<resourceName lang="English">Twin database - TWINDB1</resourceName>
+<resourceName lang="French">TWINDB1 - Base de données de jumeaux</resourceName>
+<description lang="English">The Twin database named TWINDB1 includes recordings of 45 French speakers, consisting of 9 pairs of identical twins (8 males and 10 females) with similar voices, and 27 other speakers (13 males and 14 females) including 4 none-twin siblings. Each twin or sibling spoke for a total of 24 to 30 minutes in three sessions conducted with at least one week interval between sessions.In each session subjects were asked to read three different texts of one page. These texts consists of one paragraph of about 10 lines extracted from the journal SVM Mac July 1994, some short phrases, digits, credit card numbers, etc. extracted from the Polyphone French database corpus. The speakers called from their office or from their home. Subjects were recorded over the telephone using an OROS AU32 PC-board at 16 bits linear form, 8KHz sampling frequency.</description>
+<description lang="French">La base de données TWINDB1 contient des enregistrements de 45 locuteurs français, dont 9 paires de vrais jumeaux (8 hommes et 10 femmes) avec des voix similaires, ainsi que 27 autres locuteurs (13 hommes et 14 femmes) dont 4 membres d'une famille. Chaque jumeau ou membre d'une famille a été enregistré pendant 24 à 30 minutes en trois sessions menées au moins à une semaine d'intervalle chacune.A chaque session, les locuteurs ont lu trois textes différents d'une page. Ces textes consistaient en un paragraphe d'environ 10 lignes extraites du journal "SVM Mac" de juillet 1994, quelques phrases courtes, des chiffres, des numéros de cartes de crédit, etc., extraites du corpus de la base de données Polyphone du suisse-romand (ELRA-S0030). Les locuteurs ont appelé depuis leur bureau ou depuis leur domicile. Ils ont été enregistrés par téléphone par l'intermédiaire d'une carte d'acquisition OROS AU32 à une fréquence d'échantillonnage de 8 kHz et 16 bit linéaire.</description>
+<resourceShortName/>
+<metaShareId>n/a</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=579</url>
+<identifier>ELRA-S0088</identifier>
+</identificationInfo>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+<metadataCreator>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipcode>75013</zipcode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</metadataCreator>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<lastDateUpdated>2007-02-22</lastDateUpdated>
+</versionInfo>
+<distributionInfo>
+<availability>available-restrictedUse</availability>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 800.00€</price>
+<price>Academic org. ELRA Non Member: 400.00€</price>
+<price>Commercial org. ELRA Member: 400.00€</price>
+<price>Academic org. ELRA Member: 200.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2000-12-15</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 800.00€</price>
+<price>Academic org. ELRA Non Member: 800.00€</price>
+<price>Commercial org. ELRA Member: 400.00€</price>
+<price>Academic org. ELRA Member: 400.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2000-12-15</availabilityStartDate>
+</licenceInfo>
+</distributionInfo>
+<resourceComponentType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
+</languageInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
+</resourceComponentType>
+</resourceInfo>

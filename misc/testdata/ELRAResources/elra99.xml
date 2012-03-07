@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<identificationInfo>
+<resourceName lang="English">Toponymic Geography</resourceName>
+<resourceName lang="French">Géographie toponymique (MEMODATA)</resourceName>
+<description lang="English">Entries: 70 000Languages: FrenchFormat: ASCIIMedium: Floppy disk or CD-ROMCard Description: About 70,000 structured toponyms with two main sets of information: nature (cities, towns, rivers, plains...) and localisation. It is possible to extract terms associated with toponyms ("japonais" - "Japon").</description>
+<description lang="French">Entrées : 70 000Langues : FrançaisFormat: ASCIISupport: disquette ou CD-ROMDescription de la fiche : Environ 70 000 toponymes structurés avec deux informations principales : nature (villes, villages, rivières, plaines...) et localisation. Il est possible d'extraire les termes associés aux toponymes (japonais -&gt; Japon).</description>
+<resourceShortName/>
+<metaShareId>n/a</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=112</url>
+<identifier>ELRA-T0100</identifier>
+</identificationInfo>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+<metadataCreator>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipcode>75013</zipcode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</metadataCreator>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<lastDateUpdated>2005-06-03</lastDateUpdated>
+</versionInfo>
+<distributionInfo>
+<availability>available-restrictedUse</availability>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Member: 8492.00€</price>
+<price>Academic org. ELRA Member: 6794.00€</price>
+<price>Academic org. ELRA Non Member: 8492.00€</price>
+<price>Commercial org. ELRA Non Member: 10615.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1997-01-23</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Member: 8492.00€</price>
+<price>Academic org. ELRA Member: 8492.00€</price>
+<price>Academic org. ELRA Non Member: 10615.00€</price>
+<price>Commercial org. ELRA Non Member: 10615.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1997-01-23</availabilityStartDate>
+</licenceInfo>
+</distributionInfo>
+<resourceComponentType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>terminologicalResource</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
+</languageInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
+</resourceComponentType>
+</resourceInfo>

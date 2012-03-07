@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<identificationInfo>
+<resourceName lang="English">Turkish Continuous and Isolated Word Speech Database</resourceName>
+<resourceName lang="French">Base de données orale du turc</resourceName>
+<description lang="English">This Turkish speech database was produced by the department of Théorie des Circuits et Traitement de Signal at the Faculté Polytechnique de Mons. The corpus was designed to provide read speech data for speech recognition purposes. The database contains 14 hours of speech (1618 words) from 43 Turkish speakers (adults over 18; 22 males, 21 females) from Belgium, Germany and Turkey (Istanbul, Ankara, Malatya), recorded at 32 kHz on DAT by Sennheiser MD-441-U microphone. The speech signal was sampled at 16 kHz and digitised with 16 bits. Each speaker read a predetermined text of 215 sentences and 100 isolated words, in quiet conditions. Parts of the corpus were labelled and segmented phonemically. Phonetic and orthographic transcriptions of sentences and isolated words are provided.</description>
+<description lang="French">Cette base de données orale du turc a été produite par le département de Théorie des Circuits et Traitement de Signal de la Faculté Polytechnique de Mons. Le corpus oral lu pourra être utilisé pour la reconnaissance de la parole. La base de données contient au total 14 heures (1618 mots) de discours lu par 43 locuteurs turcs (adultes âgés de plus de 18 ans; 22 hommes, 21 femmes) de Belgique, d'Allemagne et de Turquie (Istanboul, Ankara, Malatya), enregistrés à 32 kHz sur un système DAT par un microphone Sennheiser MD-441-U. Les signaux sont échantillonnés à 16 KHz avec une résolution de 16 bits. Chaque locuteur a lu un texte de 215 phrases et 100 mots isolés, dans un environnement calme. Quelques parties du corpus ont été étiquetées et segmentées de façon phonémique. Les transcriptions phonétiques et orthographiques des phrases et des mots isolés sont également fournies.</description>
+<resourceShortName/>
+<metaShareId>n/a</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=638</url>
+<identifier>ELRA-S0121</identifier>
+</identificationInfo>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+<metadataCreator>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipcode>75013</zipcode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</metadataCreator>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<lastDateUpdated>2005-05-10</lastDateUpdated>
+</versionInfo>
+<distributionInfo>
+<availability>available-restrictedUse</availability>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Member: 3000.00€</price>
+<price>Academic org. ELRA Member: 400.00€</price>
+<price>Academic org. ELRA Non Member: 800.00€</price>
+<price>Commercial org. ELRA Non Member: 6000.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2002-04-04</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Member: 3000.00€</price>
+<price>Academic org. ELRA Member: 3000.00€</price>
+<price>Academic org. ELRA Non Member: 6000.00€</price>
+<price>Commercial org. ELRA Non Member: 6000.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2002-04-04</availabilityStartDate>
+</licenceInfo>
+</distributionInfo>
+<resourceComponentType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>tur</languageId>
+<languageName>Turkish</languageName>
+</languageInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
+</resourceComponentType>
+</resourceInfo>

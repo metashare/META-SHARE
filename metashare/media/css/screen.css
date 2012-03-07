@@ -1,0 +1,588 @@
+div.container{
+	margin-top: 60px;
+}
+/* banner */
+div#banner_top{
+	height: 		50px;
+	width: 			100%;
+	position:fixed;
+	top:0;	
+	z-index: 2000;
+	margin: 0px 0px 0px 0px;		
+	
+	-moz-box-shadow: 	0px  5px 10px #CCCCCC;
+	-webkit-box-shadow: 0px  5px 10px #CCCCCC;
+	box-shadow: 		0px  5px 10px #CCCCCC;
+}
+div#banner_top div#inner{	
+	padding-top: 5px;
+	min-width: 960px;
+	max-width: 1440px;
+	margin: auto;
+	text-align: center;
+}
+div.popup{
+	font-weight: bold;
+	padding-top: 1px;
+	display: 	none;
+	position: absolute;
+	top:	70px;
+	background-color: 	#999999;
+	color: 				white;
+	
+	height: 	25px;
+	width: 		160px;
+	
+	font-size: 	16px;
+	text-shadow: 0px -1px 1px #333333;	
+	
+    -webkit-border-radius: 	5px;
+    -khtml-border-radius: 	5px;
+    -moz-border-radius: 	5px;
+    border-radius: 			5px;
+    z-index: 				20;	
+    
+}
+div.popup img{
+	position:	absolute; 
+	top:		-13px; 
+	left: 33px		;
+}
+div.inner_box a, img.inner{
+	float: left;
+	padding-left: 20px;
+}
+div.inner_box div.popup_box{
+	position: relative;
+}
+
+.icon{
+	padding-top: 4px;
+}
+
+.middle_button{
+	background-image: url(../images/button_top_bg.png);
+	background-repeat: repeat-x;
+	
+	border: 		none;
+	display: 		block;
+	
+	margin-top: 		6px;
+	height: 			29px;
+	color: 				white;
+	font-size: 					18px;
+	width: 						150px;
+
+	text-decoration: 			none;
+	
+    -webkit-border-radius: 		5px;
+    -khtml-border-radius: 		5px;
+    -moz-border-radius: 		5px;
+    border-radius: 				5px;
+}
+.middle_button:hover{
+	background-image: url(../images/button_top_bg2.png);
+
+}
+
+
+.middle_gray_button{
+	background-image: url(../images/button_top_gray_bg.png);
+	background-repeat: repeat-x;
+	
+	border: 		none;
+	display: 		block;
+	
+	margin-top: 		6px;
+	height: 			29px;
+	color: 				white;
+	font-size: 					18px;
+	width: 						150px;
+
+	text-decoration: 			none;
+	
+    -webkit-border-radius: 		5px;
+    -khtml-border-radius: 		5px;
+    -moz-border-radius: 		5px;
+    border-radius: 				5px;
+}
+.middle_gray_button:hover{
+	background-image: url(../images/button_top_gray_bg2.png);
+
+}
+
+
+.big_button{
+	background-image: url(../images/button_bg.png);
+	background-repeat: repeat-x;
+	
+	border: 		none;
+	display: 		block;
+	
+	margin-top: 		2px;
+	padding-top: 		4px;
+	height: 			49px;
+	width: 250px; 				;
+  	text-shadow: 				0px -1px 1px #bbbaba;
+	text-decoration: 			none;
+	
+    -webkit-border-radius: 		8px;
+    -khtml-border-radius: 		8px;
+    -moz-border-radius: 		8px;
+    border-radius: 				8px;
+
+}
+.big_button:hover{
+	background-image: url(../images/button_bg2.png);
+}
+button.search_hover{
+	background-image: url(../images/button_bg2.png);
+
+}
+
+
+
+
+div#banner_top a:link, a:visited,a:hover,a:active{
+	text-decoration: none;
+}
+
+/* banner end */
+
+
+/* advanced search panel */
+search_box{
+	overflow-x: hidden;
+	text-align: center;
+	
+	padding-top: 15px;
+	padding-bottom: 40px;
+	
+	margin-bottom: 10px;
+}
+
+input{
+	background-image: 		url(../images/bg_search.png);
+	background-repeat: 		repeat-x;
+	
+    -webkit-border-radius: 	10px;
+    -khtml-border-radius: 	10px;
+    -moz-border-radius: 	10px;
+    border-radius: 			10px;	
+    
+	-moz-box-shadow: 	0px  1px 1px #CCCCCC;
+	-webkit-box-shadow: 0px  1px 1px #CCCCCC;
+	box-shadow: 		0px  1px 1px #CCCCCC;   
+	
+	border: none;
+}
+input.big_input{
+	height: 60px;
+}
+input.middle_input{
+	height: 50px;
+}
+
+div.search_box input{
+	word-spacing: 	2px;
+
+	padding-left: 	20px;
+	margin-top: 	3px;
+}
+div#advanced_search_panel div#background{
+	background-image: url(../images/carbon_fibre.png);
+    -webkit-border-radius: 	5px;
+    -khtml-border-radius: 	5px;
+    -moz-border-radius: 	5px;
+    border-radius: 			5px;		
+}
+div#advanced_search_panel input{
+	width: 		480px;
+	
+	padding-top:		0px;
+	padding-bottom: 	0px;
+	padding-left: 		160px;
+}
+div.search_box{
+	margin-top:		25px;
+	margin-bottom:	0px;
+	text-align: center;
+}
+
+div.search_panel {
+    position: relative;
+    margin-top: 3px;
+    margin-bottom: 16px;
+    height: 55px;
+}
+div.search_label {
+    position: 	absolute;
+    top: 		28px;
+    left: 		162px;
+    color: 		#999999;
+    line-height: 1.8;
+    
+	height: 	20px;
+	width: 		100px;
+	font-size: 	12px;
+    text-shadow: 0px 1px 1px black;
+
+	text-align: 	right;
+	padding-right: 	10px;
+	padding-top: 0px;
+
+	border-top-left-radius:1em;
+	-moz-border-radius-topleft:1em;
+	-webkit-border-top-left-radius:1em;
+	
+	border-bottom-left-radius:1em;
+	-moz-border-radius-bottomleft:1em;
+	-webkit-border-bottom-left-radius:1em;
+}
+/* advanced search panel end */
+
+/* cfedermann patches */
+
+div.content_box table tbody tr td {
+    vertical-align: top;
+    min-height: 18px;
+    color: #999999;
+    font-size: 10.5pt;
+    max-width: 1000px;
+}
+
+#content #messages p {
+    font-size: 10pt;
+    padding: 2px;
+    padding-left: 4px;
+    margin-bottom: 2px;
+}
+
+.help_text {
+    font-size: 10pt;
+    color: #999999;
+    font-style:italic;
+}
+
+form.form_helper td input,
+form.form_helper td select,
+form.form_helper td textarea {
+    color: #999999;
+	border: solid 2px #999999;
+	padding: 3px;
+}
+form.form_helper td input:focus,
+form.form_helper td select:focus,
+form.form_helper td textarea:focus {
+	border: solid 2px #99CCFF;
+}
+form.form_helper td input.button, form.form_helper td input.button:focus {
+    border: none;
+    color: white;
+}
+
+form.form_helper th, form.form_helper td {
+    vertical-align:top;
+}
+
+form.form_helper td input {
+    margin-top: 5px;
+}
+
+/* Marc Schroeder, 9 August 2011: Deactivating the hiding code: */
+/*
+form.form_helper td ul {
+    display:none;
+}
+*/
+
+
+form.form_helper div.component_left {
+	margin-top: 5px;
+	height: 	18px;
+	padding-left: 10px;
+	min-width: 		100px;
+	font-size: 	14px;
+	background-color: #666666;
+	color: 			white;
+	text-align: 	right;
+	padding-right: 	10px;
+	padding-top: 0px;
+	padding-bottom: 4px;
+	float: right;
+	font-weight: 600;
+	border-top-left-radius:1em;
+	-moz-border-radius-topleft:1em;
+	-webkit-border-top-left-radius:1em;
+	
+	border-bottom-left-radius:1em;
+	-moz-border-radius-bottomleft:1em;
+	-webkit-border-bottom-left-radius:1em;
+}
+
+form.form_helper div.component_right {
+	margin-top: 5px;
+	height: 	18px;
+	padding-left: 10px;
+	min-width: 		100px;
+	font-size: 	14px;
+	background-color: #666666;
+	color: 			white;
+	text-align: 	left;
+	padding-right: 	10px;
+	padding-top: 0px;
+	padding-bottom: 4px;
+	float: left;
+	font-weight: 600;
+	border-top-right-radius:1em;
+	-moz-border-radius-topright:1em;
+	-webkit-border-top-right-radius:1em;
+	
+	border-bottom-right-radius:1em;
+	-moz-border-radius-bottomright:1em;
+	-webkit-border-bottom-right-radius:1em;
+}
+
+form.form_helper label.required {
+    background-color: #666666;
+}
+
+form.form_helper label.missing {
+    background-color: red;
+}
+
+form.form_helper label {
+	margin-top: 5px;
+	height: 	18px;
+	padding-left: 10px;
+	min-width: 		100px;
+	font-size: 	14px;
+	background-color: #CCCCCC;
+	color: 			white;
+	text-align: 	right;
+	padding-right: 	10px;
+	padding-top: 0px;
+	padding-bottom: 4px;
+	float: right;
+	font-weight: 600;
+	border-top-left-radius:1em;
+	-moz-border-radius-topleft:1em;
+	-webkit-border-top-left-radius:1em;
+	
+	border-bottom-left-radius:1em;
+	-moz-border-radius-bottomleft:1em;
+	-webkit-border-bottom-left-radius:1em;
+}
+
+/* cfedermann patches end */
+
+/* Marc Schroeder, 9 August 2011: 
+ * classes for displaying required/error state of 
+ * form fields in create_account.html
+ * (modified as_table() as used in accounts.forms.RegistrationRequestForm)  
+ */ 
+
+form.form_helper tr.required th label {
+	    background-color: #666666;
+}
+
+form.form_helper tr.error th label {
+	    background-color: red;
+}
+
+
+form.form_helper th ul.errorlist {
+	clear:both;
+	list-style-type:none;
+	margin:0px;
+	padding:0px;
+	color:#FF6633;
+	text-align:right;
+}
+
+form.form_helper tr.error {
+	background:white;
+}
+
+
+/* profile editor stuff */
+
+form.form_helper tr td textarea {
+    background-image: url("../images/bg_search.png");
+    background-repeat: repeat-x;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 0 1px 1px #CCCCCC;
+	width:350px;
+	height:150px;
+	padding:5px;
+}
+
+form.form_helper tr td input {
+	width:350px;
+}
+
+form.form_helper td.readonly {
+	font-family: 	'TitilliumText25L', "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: 			#999999;
+	font-size: 		28px;
+	font-weight: 	600;
+}
+
+/* Marc Schroeder end */
+
+
+
+/* license */
+
+div.text_label{
+	margin-top: 5px;
+	height: 	18px;
+	width: 		100px;
+	font-size: 	14px;
+	background-color: #CCCCCC;
+	color: 			white;
+	text-align: 	right;
+	padding-right: 	10px;
+	padding-top: 0px;
+	padding-bottom: 4px;
+	float: right;
+	font-weight: 600;
+	border-top-left-radius:1em;
+	-moz-border-radius-topleft:1em;
+	-webkit-border-top-left-radius:1em;
+	
+	border-bottom-left-radius:1em;
+	-moz-border-radius-bottomleft:1em;
+	-webkit-border-bottom-left-radius:1em;
+}
+div.text_content{
+	font-size: 16px;
+	color: #666666;
+	line-height: 2.0;
+}
+div.bold_text{
+	font-weight: 600;
+}
+div.text_header{
+	margin-top: 40px;
+	margin-bottom: 5px;
+}
+/* license end */
+
+div.more_details{
+	width: 200px;
+	height: 50px;
+	background-image: url(../images/more_details.png);
+	background-repeat: no-repeat;
+}
+
+div.less_details{
+	width: 200px;
+	height: 50px;
+	background-image: url(../images/less_details.png);
+	background-repeat: no-repeat;
+}
+
+div.content_box{
+    position: relative;
+	background-color: white;
+	padding: 20px 20px 20px 20px;
+	
+	-webkit-box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
+	-moz-box-shadow: 	0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
+	box-shadow: 		0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
+    float: left
+}
+
+div.filter_box{
+    vertical-align: top;
+    position: relative;
+    font-size: 9pt;
+    height: 100%;
+    width: 180px;
+    float: left;
+}
+
+
+a.sexybutton{
+	text-align: center;
+}
+body{
+	background-image: url(../images/handmadepaper.png);
+	overflow-x: hidden;
+}
+div.teaser_box{
+	height: 350px;
+	vertical-align: middle;
+}
+div.teaser_box div{
+	height: 100%;
+}
+div#content{
+	height: 	100%;
+	min-height: 500px;
+}
+
+
+
+
+
+.gradient_orange{
+	background: #FF6633;
+	background: -moz-linear-gradient(top, #FFCC00, #FF6633);
+	background: -webkit-gradient(linear, left top, left bottom, from(#FFCC00), to(#FF6633));	
+	filter:progid:DXImageTransform.Microsoft.Gradient(endColorstr='#FFCC00', startColorstr='#FF6633', gradientType='0');
+	}
+
+.gradient_black{
+	background: #000000;
+	background: -moz-linear-gradient(top, #999999, #000000);
+	background: -webkit-gradient(linear, left top, left bottom, from(#999999), to(#000000));	
+	filter:progid:DXImageTransform.Microsoft.Gradient(endColorstr='#999999', startColorstr='#000000', gradientType='0');
+}
+
+
+
+div.split{
+	background-image: url(../images/trenner02.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	z-index: 	10;
+	height: 	50px;
+	margin-top: 0px;
+	margin-bottom: 00px;
+	padding-left: 0px;
+	padding-right: 0px;
+	overflow: hidden;
+}
+
+
+table.result_table tr.result_table_head{
+	text-shadow: 0px 1px 1px white;
+	font-size: 12px;
+	color: #999999;
+	font-weight: 200;
+
+	background-image: url(../images/table_bg.png);
+	background-repeat: repeat-x;
+}
+table.result_table td, th{
+	padding-left: 30px;
+	vertical-align:top;
+}
+table.result_table tbody tr{
+	color: 			#666666;
+	font-weight: 	200;
+	font-size: 		12px;
+}
+table.result_table tbody th{
+	color: #666666;
+	font-weight: 800;
+}
+table.result_table tr{
+	background-color: white;
+}
+table.result_table tr.odd{
+	background-color: #EFF;
+	background-repeat: repeat-x;
+}

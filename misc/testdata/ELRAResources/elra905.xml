@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<identificationInfo>
+<resourceName lang="English">Concise Oxford Spanish Dictionary</resourceName>
+<resourceName lang="French">Dictionnaire bilingue abrégé anglais-espagnol "Concise Oxford Spanish Dictionary"</resourceName>
+<description lang="English">Based on the highly-acclaimed Oxford Spanish Dictionary, described by John Butt in the TLS as `indispensable for all serious Hispanists', this dictionary provides an authoritative, up-to-date guide to world Spanish. It is the only Concise Spanish dictionary to present the full wealth of Spanish from both sides of the Atlantic, with coverage of 24 varieties of Spanish as it is written and spoken throughout the Spanish-speaking world There are thousands of real, authentic example sentences carefully selected to illustrate the full range of meanings and typical contexts. It contains 170,000 words and phrases, and 240,000 translations, and is available in SGML and XML.</description>
+<description lang="French">Dérivé du "Oxford Spanish Dictionary", décrit comme "l’outil indispensable pour tous les hispanistes" par John Butt, dans TLS, ce dictionnaire fournit un guide de référence à jour pour le monde hispanophone. C’est le seul dictionnaire abrégé de l’espagnol qui présente des variantes de la langue espagnole parlée des deux côtés de l’Atlantique, à savoir 24 variétés d’espagnol écrit et parlé dans le monde hispanophone. Quelques milliers d’exemples triés sur le volet pour illustrer les sens et contextes spécifiques peuvent être consultés. Le dictionnaire contient 170 000 mots et expressions, et 240 000 traductions. Il est disponible aux formats SGML et XML.</description>
+<resourceShortName/>
+<metaShareId>n/a</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=686</url>
+<identifier>ELRA-M0030</identifier>
+</identificationInfo>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+<metadataCreator>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipcode>75013</zipcode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</metadataCreator>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<lastDateUpdated>2005-10-05</lastDateUpdated>
+</versionInfo>
+<distributionInfo>
+<availability>available-restrictedUse</availability>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Academic org. ELRA Non Member: 7000.00€</price>
+<price>Academic org. ELRA Member: 4900.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2002-10-23</availabilityStartDate>
+</licenceInfo>
+</distributionInfo>
+<resourceComponentType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>eng</languageId>
+<languageName>English</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>spa</languageId>
+<languageName>Spanish</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Castilian</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
+</languageInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
+</resourceComponentType>
+</resourceInfo>

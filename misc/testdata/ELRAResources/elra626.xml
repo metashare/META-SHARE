@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<identificationInfo>
+<resourceName lang="English">Catalan-SpeechDat For the Fixed Telephone Network Database</resourceName>
+<resourceName lang="French">Base de données SpeechDat catalan pour le réseau téléphonique fixe</resourceName>
+<description lang="English">This speech database contains the recordings of 2000 Catalan speakers who called from Fixed telephones and who are recorded over the fixed PSTN using and ISDN-BRI interface. Each speaker uttered around 50 read and spontaneous items. The speech database follows the specifications made within the SpeechDat (II) project. The database was validated by UVIGO. The Catalan-SpeechDat for the Fixed Telephone Network Database was funded by the Catalan Government.</description>
+<description lang="French">Cette base de données comprend les enregistrements de 2000 locuteurs du catalan ayant appelé depuis des téléphones fixes et enregistrés sur un réseau fixe PSTN et une interface ISDN-BRI. Chaque locuteur a prononcé 50 éléments lus et spontanés. Cette base de données de parole suit les specifications réalisées dans le cadre du projet SpeechDat (II). Elle a été validée par UVIGO. La base de données SpeechDat catalan pour le réseau téléphonique fixe a été financée par le gouvernement catalan.</description>
+<resourceShortName/>
+<metaShareId>n/a</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1146</url>
+<identifier>ELRA-S0324</identifier>
+</identificationInfo>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+<metadataCreator>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipcode>75013</zipcode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</metadataCreator>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<lastDateUpdated>2012-01-05</lastDateUpdated>
+</versionInfo>
+<distributionInfo>
+<availability>available-restrictedUse</availability>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 4000.00€</price>
+<price>Academic org. ELRA Non Member: 0.00€</price>
+<price>Commercial org. ELRA Member: 2000.00€</price>
+<price>Academic org. ELRA Member: 0.00€</price>
+<availabilityStartDate>2011-12-23</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 4000.00€</price>
+<price>Academic org. ELRA Non Member: 4000.00€</price>
+<price>Commercial org. ELRA Member: 2000.00€</price>
+<price>Academic org. ELRA Member: 2000.00€</price>
+<availabilityStartDate>2011-12-23</availabilityStartDate>
+</licenceInfo>
+</distributionInfo>
+<resourceComponentType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>cat</languageId>
+<languageName>Catalan</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Valencian</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
+</languageInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
+</resourceComponentType>
+</resourceInfo>

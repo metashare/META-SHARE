@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<identificationInfo>
+<resourceName lang="English">DICO-SYNT</resourceName>
+<resourceName lang="French">DICO-SYNT</resourceName>
+<description lang="English">Entries: 90 000 inflectional formsLanguage: FrenchFormat: ASCIIMedium: Floppy diskThis resource gives the morpho-syntactical information for DICO-MORPH_lemme: proper noun, transitive verb, ... There are around 800 categories of verbs. The lexical categories are: nouns (25,000), verbs (8.000 that generate 25,000 verb/models), adjectives (1,000), Adverbs (1,500).For more information: http://www.elda.org/catalogue/fr/text/doc/dicosynt.html</description>
+<description lang="French">Entrées : 90 000 formes fléchiesLangue : FrançaisFormat: ASCIISupport : DisquetteCette ressource donne l'information morpho-lexicale pour DICO-MORPH_lemme: nom propre, verbe transitif...Il y a environ 800 catégories de verbes. Les catégories lexicales sont les suivantes :noms (25 000), verbes (8 000 qui génèrent 25 000 verbes ou modèles), adjectifs (1 000), adverbes (1 500).Pour plus d'informations : http://www.elda.org/catalogue/fr/text/doc/dicosynt.html</description>
+<resourceShortName/>
+<metaShareId>n/a</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=54</url>
+<identifier>ELRA-L0003</identifier>
+</identificationInfo>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+<metadataCreator>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipcode>75013</zipcode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</metadataCreator>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<lastDateUpdated>2005-10-05</lastDateUpdated>
+</versionInfo>
+<distributionInfo>
+<availability>available-restrictedUse</availability>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 13846.00€</price>
+<price>Academic org. ELRA Non Member: 11077.00€</price>
+<price>Commercial org. ELRA Member: 11077.00€</price>
+<price>Academic org. ELRA Member: 8861.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1997-01-23</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 13846.00€</price>
+<price>Academic org. ELRA Non Member: 13846.00€</price>
+<price>Commercial org. ELRA Member: 11077.00€</price>
+<price>Academic org. ELRA Member: 11077.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1997-01-23</availabilityStartDate>
+</licenceInfo>
+</distributionInfo>
+<resourceComponentType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
+</languageInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
+</resourceComponentType>
+</resourceInfo>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<identificationInfo>
+<resourceName lang="English">Siemens VoiceMail</resourceName>
+<resourceName lang="French">Siemens VoiceMail</resourceName>
+<description lang="English">VoiceMail consists of 17,5 hours of read acoustic speech divided into 9,5 hours of transliterated speech and 8 hours of non-transliterated speech recorded over the digital telephone network (ISDN) with 921 speakers originated from the USA. It contains orthographic transliteration for about 25,000 utterances (of 34,912 utterances in total).Standard in use: headerless, one separate transliteration file comprising all utterances of all speakersSampling rate: 8 kHzSpeakers: 377 males and 544 femalesSize: 17,5 hoursMedium: 2 CD-ROM</description>
+<description lang="French">VoiceMail est une base de données orale qui comprend 17,5 heures d'enregistrement de parole lue dont 9,5 heures de parole transcrite et 8 heures de parole non-transcrite enregistrées à travers le réseau numérique (ISDN) avec 921 locuteurs originaires des Etats-Unis. Elle contient une transcription orthographique pour environ 25000 occurrences (sur 34912 occurrences au total).Standard utilisé : sans en-tête, avec un fichier à part de transcriptions comprenant la totalité des occurrences prononcées par la totalité des locuteursFréquence d'échantillonnage : 8 kHzLocuteurs : 377 hommes et 544 femmesTaille : 17,5 heuresSupport : 2 CD-ROM</description>
+<resourceShortName/>
+<metaShareId>n/a</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=718</url>
+<identifier>ELRA-S0038</identifier>
+</identificationInfo>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+<metadataCreator>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipcode>75013</zipcode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</metadataCreator>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<lastDateUpdated>2005-05-02</lastDateUpdated>
+</versionInfo>
+<distributionInfo>
+<availability>available-restrictedUse</availability>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Academic org. ELRA Member: 11000.00€</price>
+<price>Commercial org. ELRA Member: 11000.00€</price>
+<price>Academic org. ELRA Non Member: 15000.00€</price>
+<price>Commercial org. ELRA Non Member: 15000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1997-05-21</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Academic org. ELRA Member: 11000.00€</price>
+<price>Commercial org. ELRA Member: 11000.00€</price>
+<price>Academic org. ELRA Non Member: 15000.00€</price>
+<price>Commercial org. ELRA Non Member: 15000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1997-05-21</availabilityStartDate>
+</licenceInfo>
+</distributionInfo>
+<resourceComponentType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>eng</languageId>
+<languageName>English</languageName>
+</languageInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
+</resourceComponentType>
+</resourceInfo>

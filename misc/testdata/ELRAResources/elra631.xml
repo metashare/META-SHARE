@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<identificationInfo>
+<resourceName lang="English">"Le Monde Diplomatique" Arabic tagged corpus</resourceName>
+<resourceName lang="French">Corpus étiqueté du journal "Le Monde Diplomatique" en arabe</resourceName>
+<description lang="English">This corpus contains 102,960 vowelised, lemmatised and tagged words (58 texts from Le Monde Diplomatique Arabic, see also ELRA-W0036-04). To each text are associated 3 files :-	raw text in Arabic,-	vowelized text in Arabic,-	one XML file containing the morphological annotation of the text. Each text word associates a certain number of information, such as word size, rank of the word in the text, paragraph number where the word was found, etc. Each word associates a node in the XML file. Each node contains the following positional features of the word in the text:-	Paragraph number in the text, i.e. paragraph where the word can be found,-	Sentence number in the paragraph,-	Sentence number in the text,-	Rank of the word in the text,-	Rank of the first character of the word in the text,-	Word size.Information about word annotation are added as « sub-nodes »:-	Word of non vowelised text,-	Vowelised word,-	Word lemma,-	Grammatical category of the word.</description>
+<description lang="French">Ce corpus contient 102 960 mots (58 textes du monde diplomatique, voir aussi ELRA-W0036-04) voyellés, lemmatisés et étiquetés. A chaque texte sont associés 3 fichiers :-	le texte arabe brut,-	le texte arabe voyellé,-	le fichier contenant l’annotation morphologique du texte en XML.A chaque mot du texte sont associées un certain nombre d’informations telles que la taille du mot, le rang du mot dans le texte, le numéro du paragraphe dont est issu le mot, etc. A chaque mot est associé un nœud dans le fichier XML. Chaque nœud contient les « attributs » positionnels du mot dans le texte:-	le numéro du paragraphe où se trouve le mot dans le texte,-	le numéro de la phrase dans le paragraphe,-	le numéro de la phrase dans le texte,-	le rang du mot dans le texte,-	le rang du premier caractère du mot dans le texte.-	la taille du mot.Les informations concernant l’annotation du mot sont les sous-nœuds suivants:-	le mot du texte non voyellé,-	le mot voyellé,-	le lemme du mot,-	la catégorie grammaticale du mot.</description>
+<resourceShortName/>
+<metaShareId>n/a</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1096</url>
+<identifier>ELRA-W0049</identifier>
+</identificationInfo>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+<metadataCreator>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipcode>75013</zipcode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</metadataCreator>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<lastDateUpdated>2009-03-31</lastDateUpdated>
+</versionInfo>
+<distributionInfo>
+<availability>available-restrictedUse</availability>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 2000.00€</price>
+<price>Academic org. ELRA Non Member: 400.00€</price>
+<price>Commercial org. ELRA Member: 975.00€</price>
+<price>Academic org. ELRA Member: 185.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2009-03-31</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 2000.00€</price>
+<price>Academic org. ELRA Non Member: 2000.00€</price>
+<price>Commercial org. ELRA Member: 975.00€</price>
+<price>Academic org. ELRA Member: 975.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2009-03-31</availabilityStartDate>
+</licenceInfo>
+</distributionInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>EURADIC</projectName>
+<fundingType>nationalFunds</fundingType>
+</fundingProject>
+</resourceCreationInfo>
+<resourceComponentType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusTextInfo>
+<mediaType>text</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>ara</languageId>
+<languageName>Arabic</languageName>
+</languageInfo>
+</corpusTextInfo>
+</corpusMediaType>
+</corpusInfo>
+</resourceComponentType>
+</resourceInfo>

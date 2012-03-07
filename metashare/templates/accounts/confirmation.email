@@ -1,0 +1,8 @@
+Dear {{firstname}} {{lastname}},
+
+We have received a registration request for your META-SHARE
+user account "{{shortname}}". You can confirm that registration
+request and create your account by clicking the following link:
+- {{confirmation_url}}
+
+Welcome to META-SHARE!

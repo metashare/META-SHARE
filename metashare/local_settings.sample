@@ -1,0 +1,96 @@
+"""
+Project: META-SHARE prototype implementation
+ Author: Christian Federmann <cfedermann@dfki.de>
+"""
+from os.path import abspath, dirname, join
+ROOT_PATH = abspath(dirname(__file__))
+
+# The URL for this META-SHARE node django application.  Do not use trailing /.
+DJANGO_URL = 'http://www.example.com/path/to/metashare'
+
+# The base path under which django is deployed at DJANGO_URL.  Use trailing /.
+# Do not use leading / though.  Leave empty if META-SHARE is deployed directly
+# under the given DJANGO_URL.
+DJANGO_BASE = 'path/to/metashare/'
+
+# Required if deployed with lighttpd.
+# FORCE_SCRIPT_NAME = ""
+
+# Make this unique, and don't share it with anybody.
+# You can generate a new SECRET_KEY like this:
+#
+# import string
+# from random import choice
+# alphabet = string.letters + string.digits + string.punctuation
+# SECRET_KEY = ''.join([choice(alphabet) for i in range(50)])
+SECRET_KEY = '7h$+o^h4f%q#d$u7d^1!3s#a-+u5p*+p*lpz++z^q^9^+a5p--'
+
+# Path to the local private key used for decryption of content.
+PRIVATE_KEY_PATH = '/path/to/private/key'
+
+# Path to the local storage layer path used for persistent object storage.
+STORAGE_PATH = '/path/to/storage/path'
+
+# Debug settings, setting DEBUG=True will give exception stacktraces.
+DEBUG = False
+TEMPLATE_DEBUG = DEBUG
+DEBUG_JS = DEBUG
+
+# Configure administrators for this django project.  If DEBUG=False, errors
+# will be reported as emails to these persons...
+ADMINS = (
+    # ('Your Name', 'your_email@domain.com'),
+)
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql',
+                                         # 'sqlite3', 'oracle'.
+        'NAME': '',                      # user name of the database user, or
+                                         # path to file if using sqlite3, e.g.
+                                         # '{0}/testing.db'.format(ROOT_PATH)
+        'USER': '',                      # Not used with sqlite3.
+        'PASSWORD': '',                  # Not used with sqlite3.
+        'HOST': '',                      # Set to 'localhost' for localhost.
+                                         # Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default.
+                                         # Not used with sqlite3.
+                                         # Use the following for PostgreSQL.
+        #'OPTIONS': {
+        #  'autocommit': True,
+        #}
+    }
+}
+
+# the URL of the Solr server (or server core) which is used as a search backend
+SOLR_URL = 'http://127.0.0.1:8983/solr/main'
+# the URL of the Solr server (or server core) which is used as a search backend
+# when running tests
+TESTING_SOLR_URL = 'http://127.0.0.1:8983/solr/testing'
+
+# Instead of using an email server, print emails to server console:
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# For testing, use a builtin email server (not for production use):
+EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
+
+# For production use, you have to configure a proper mail server:
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#
+# See the Django documentation for more detais:
+# - https://docs.djangoproject.com/en/dev/topics/email/#smtp-backend
+
+# Local time zone for this installation. Choices can be found here:
+# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
+# although not all choices may be available on all operating systems.
+# If running in a Windows environment this must be set to the same as your
+# system time zone.
+TIME_ZONE = 'Europe/Berlin'
+
+# Shared secret used for Single-Sign-On between META-SHARE core nodes.
+SSO_SECRET_KEY = '6736d82b807811e0a1e51093e908621ab4e0e5225bde4fbcb1aa160fbd198e2a'
+
+# The URL for META-SHARE statistics server.
+STATS_SERVER_URL = "http://metastats.fbk.eu/"
+
+# The location of the xdiff tool to compare XML files.
+XDIFF_LOCATION = "{0}/../misc/tools/xdiff-src/xdiff".format(ROOT_PATH)

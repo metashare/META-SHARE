@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<identificationInfo>
+<resourceName lang="English">Text corpus of "Le Monde"</resourceName>
+<resourceName lang="French">Corpus de textes du journal "Le Monde"</resourceName>
+<description lang="English">Electronic archiving of "Le Monde" articles started on 1 January 1987. Some 200 articles are added every day, and as of October 1997 the database contains more than 500,000 articles, making it the biggest of its kind for all French daily newspapers.Years 1987 to 2002 are available in an ASCII text format. Years 2003 to 2007 are available in .XML format. Each month consists of some 10 MB of data (circa 120 MB per year).The number of words available since 2005 is given below:- 2005: 19 million words- 2006: 17 million words- 2007: 21 million wordsData ranging from 1987 until 2007 are available through ELRA.</description>
+<description lang="French">L'archivage des articles du quotidien français "Le Monde" a débuté le 1er janvier 1987. Chaque jour, la base s'enrichit d'environ 200 articles, et compte en octobre 1997 plus de 500 000 articles, constituant ainsi la plus grosse base de données en texte intégral de la presse quotidienne française.Les années 1987 à 2002 sont disponibles au format texte ASCII. Les années 2003 à 2007 sont disponibles au format .xml. Chaque mois comprend environ 10MB de données (soit 120 MB par an). Le nombre de mots disponibles depuis 2005 est donné ci-dessous:- 2005: 19 million de mots- 2006: 17 million de mots- 2007: 21 million de motsUn choix de données de 1987 jusqu'à 2007 est disponible à ELRA.</description>
+<resourceShortName/>
+<metaShareId>n/a</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=438</url>
+<identifier>ELRA-W0015</identifier>
+</identificationInfo>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+<metadataCreator>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipcode>75013</zipcode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</metadataCreator>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<lastDateUpdated>2011-09-20</lastDateUpdated>
+</versionInfo>
+<distributionInfo>
+<availability>available-restrictedUse</availability>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 313.18€</price>
+<price>Academic org. ELRA Non Member: 313.18€</price>
+<price>Commercial org. ELRA Member: 240.91€</price>
+<price>Academic org. ELRA Member: 240.91€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1997-09-15</availabilityStartDate>
+</licenceInfo>
+</distributionInfo>
+<resourceComponentType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusTextInfo>
+<mediaType>text</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
+</languageInfo>
+</corpusTextInfo>
+</corpusMediaType>
+</corpusInfo>
+</resourceComponentType>
+</resourceInfo>

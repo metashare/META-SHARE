@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block messages %}
+{% if form.errors %}
+<p class="error">Your username and password didn't match. Please try again.</p>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<h2>User Authentication</h2>
+<div class="content_box">
+<form class="form_helper" method="post" action="{% url metashare.views.login %}">
+{% csrf_token %}
+<table>
+  {{ form.as_table }}
+</table>
+<input class="button middle_button" style="margin-left:auto;margin-right:auto;" type="submit" value="Login" />
+<input type="hidden" name="next" value="{{ next }}" />  
+</form>
+
+<p><br/>
+<a href="{% url metashare.accounts.views.reset %}">Forgotten your username or password? Click here to reset your account.</a></p>
+</div>
+{% endblock %}

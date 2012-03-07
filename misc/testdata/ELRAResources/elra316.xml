@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<identificationInfo>
+<resourceName lang="English">euLEX (Lexical Database for Basque)</resourceName>
+<resourceName lang="French">euLEX (Base de données lexicale basque)</resourceName>
+<description lang="English">euLEX is a general lexicon which contains 115,000 entries, divided into 94,000 dictionary entries or lemmas, 12,000 allomorphs, 7,500 verb forms and about 1,200 dependent morphemes. All entries include linguistic information such as morphology and usage.The lexicon includes general purpose entries and terms (each of them with its corresponding thematic classification). The non-standard entries, specifically marked by the Academy of the Basque Language, are included and linked to the correct entry.The lexicon is in XML format and is constantly updated following the latest normalization decisions from the Academy of the Basque Language.Potential applications for this resource are PoS tagging, lemmatizing, and term detection and correction.All this information is used as the basis for the automatic lemmatizer tLEMA and the morphological analyzer built up in UZEI, together with the term checker.</description>
+<description lang="French">euLEX est un lexique général contenant 115 000 entrées, réparties en 94 000 entrées du dictionnaire ou lemmes, 12 000 allomorphes, 7 500 formes verbales et environ 1 200 morphèmes dépendants. Toutes les entrées comprennent des informations linguistiques telles que la morphologie et l’usage.Le lexique comprend des entrées et des termes de vocabulaire général (chacun avec sa classification thématique correspondante). Les entrées non standards, spécifiquement marquées par l’Académie de la Langue Basque, sont incluses et reliées à l’entrée correcte.Le lexique est fourni au format XML et  régulièrement mis à jour en fonction des dernières décisions de normalisation de l’Académie de la Langue Basque.Les applications potentielles pour cette ressource sont l’étiquetage de la partie du discours, la lemmatisation et la détection et la correction de termes.Toutes ces informations sont utilisées comme base pour le lemmatiseur automatique tLEMA, ainsi que l’analyseur morphologique et que le correcteur de termes, réalisés par UZEI.</description>
+<resourceShortName/>
+<metaShareId>n/a</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1065</url>
+<identifier>ELRA-L0085</identifier>
+</identificationInfo>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+<metadataCreator>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipcode>75013</zipcode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</metadataCreator>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<revision>Last update: 31 January 2008</revision>
+<lastDateUpdated>2008-06-30</lastDateUpdated>
+</versionInfo>
+<distributionInfo>
+<availability>available-restrictedUse</availability>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 10000.00€</price>
+<price>Academic org. ELRA Non Member: 6000.00€</price>
+<price>Commercial org. ELRA Member: 6000.00€</price>
+<price>Academic org. ELRA Member: 3000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2008-06-30</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 20000.00€</price>
+<price>Academic org. ELRA Non Member: 20000.00€</price>
+<price>Commercial org. ELRA Member: 15000.00€</price>
+<price>Academic org. ELRA Member: 15000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2008-06-30</availabilityStartDate>
+</licenceInfo>
+</distributionInfo>
+<resourceCreationInfo>
+<creationEndDate>2007-01-01</creationEndDate>
+</resourceCreationInfo>
+<resourceComponentType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>baq/eus</languageId>
+<languageName>Basque</languageName>
+</languageInfo>
+<sizeInfo>
+<size>33</size>
+<sizeUnit>mb</sizeUnit>
+</sizeInfo>
+<textFormatInfo>
+<mimeType>Plain text</mimeType>
+</textFormatInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
+</resourceComponentType>
+</resourceInfo>

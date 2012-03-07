@@ -1,0 +1,142 @@
+/* This file can be used to override any CSS rules from base.css, */
+/* as well as define new formatting rules. */
+
+/* ******************* */
+/* Overriding base.css */
+/* ******************* */
+
+#header {
+	background: #FF6633;
+	background: -moz-linear-gradient(top, #FFCC00, #FF6633);
+	background: -webkit-gradient(linear, left top, left bottom, from(#FFCC00), to(#FF6633));	
+	filter:progid:DXImageTransform.Microsoft.Gradient(endColorstr='#FFCC00', startColorstr='#FF6633', gradientType='0');
+}
+
+#branding h1 {
+	color: white;
+}
+
+.module h2, .module caption, .inline-group h2 {
+	/*background: -moz-linear-gradient(center top , #FFCC00, #FF6633) repeat scroll 0 0 transparent;*/
+}
+
+.module h2 {
+	background: #FF6633;
+	background: -moz-linear-gradient(top, #FFCC00, #FF6633);
+	background: -webkit-gradient(linear, left top, left bottom, from(#FFCC00), to(#FF6633));	
+	filter:progid:DXImageTransform.Microsoft.Gradient(endColorstr='#FFCC00', startColorstr='#FF6633', gradientType='0');
+		
+}
+
+.inline-group h2, .form-row h2 {
+	background: url("../img/admin/default-bg.gif") repeat-x scroll left top #7CA0C7;	
+}
+
+.module .inline-group {
+	margin: 10px;	
+}
+
+a:link, a:visited {
+    /*color: #FF9900;*/
+}
+
+
+/* ******************* */
+/* Editor-specific CSS */
+/* ******************* */
+
+	
+div#editornavi li {
+ 	float:left;
+	margin-right:20px;
+	padding-bottom:10px;
+	list-style-type: none;
+	font-weight: bold;
+}
+
+.display_none {
+	display: none;	
+}
+
+/* *********************** */
+/* JQueryTabs-specific CSS */
+/* *********************** */
+
+
+.accordion ul{
+	display: inline;
+	margin: 0 0 0 0;
+}
+.accordion li {
+	display: inline;
+}
+
+.accordion li a {
+	border: 1px solid #ccc;
+	display: block;
+	padding: 4px 4px 4px 4px;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 14px;
+	background-color: #eee;
+	border: none;
+	outline: none;
+	margin-top: 0px;
+	margin-bottom: 8px;
+	margin-left: 20px;
+	width: 210px;
+	border-radius: 0 10px 10px 0;
+}
+.accordion li a:hover {
+	background-color: #ccc;
+	padding: 4px 4px 4px 4px;
+}
+.accordion li.active a {
+
+	background-color: #ddd;
+	padding: 4px 4px 4px 4px;
+	border-right: none;
+}
+.accordion li.active a:hover {
+	background-color: #bbb;
+	padding: 4px 4px 4px 4px;
+	border-right: none;
+}
+
+#tabs_container {
+	float:left;
+	margin-right: 15px;
+}
+
+#tabs_content_container {
+
+	width: 1100px;      
+	padding: 10px 10px 10px 10px;
+	margin: 0 10px 0 10px;
+}
+.tab_content {
+	display: none;
+}
+
+a.error{
+	color: red;
+} 
+
+/* *********************** */
+/* Accordion-specific CSS */
+/* *********************** */
+.accordion h1 {
+	background-color: #eee;
+	padding: 4px 4px 4px 4px;
+	width: 300px;
+	font-size: 14px;
+	margin: .9em 0 .3em 0;
+	color: #777;
+	font-weight: bold;
+	border-radius: 0 10px 10px 0;
+}
+
+.accordion {
+	width: 310px;
+}
+

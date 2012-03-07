@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<identificationInfo>
+<resourceName lang="English">DICO-MORPH_Lemme</resourceName>
+<resourceName lang="French">DICO-MORPH_Lemme</resourceName>
+<description lang="English">Entries: more than 400 000 Language: French Format: ASCII with separators Medium: CD-ROM French reusable lexicon for morphological works which produces the canonical form from the inflexional form. This lexicon is divided into the following lexical categories: nouns (55,000), verbs (8,000), adjectives (16,850), adverbs (2,000), other words (30,000).</description>
+<description lang="French">Entrées : plus de 400 000Langues : françaisFormat: ASCIISupport : CD-ROMLexique français pour des applications morphologiques. Ce lexique permet d'obtenir la forme canonique à partir de la forme fléchie. Le lexique est réparti selon les catégories lexicales suivantes : noms (55 000), verbes (8 000), adjectifs (16 850), adverbes (2 000).</description>
+<resourceShortName/>
+<metaShareId>n/a</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=52</url>
+<identifier>ELRA-L0001</identifier>
+</identificationInfo>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+<metadataCreator>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipcode>75013</zipcode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</metadataCreator>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<lastDateUpdated>2005-02-07</lastDateUpdated>
+</versionInfo>
+<distributionInfo>
+<availability>available-restrictedUse</availability>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 18890.00€</price>
+<price>Academic org. ELRA Non Member: 15112.00€</price>
+<price>Commercial org. ELRA Member: 15112.00€</price>
+<price>Academic org. ELRA Member: 12090.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1997-01-23</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 18890.00€</price>
+<price>Academic org. ELRA Non Member: 18890.00€</price>
+<price>Commercial org. ELRA Member: 15112.00€</price>
+<price>Academic org. ELRA Member: 15112.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1997-01-23</availabilityStartDate>
+</licenceInfo>
+</distributionInfo>
+<resourceComponentType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
+</languageInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
+</resourceComponentType>
+</resourceInfo>

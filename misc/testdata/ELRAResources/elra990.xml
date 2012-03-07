@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<identificationInfo>
+<resourceName lang="English">Persian 1984 corpus (Multext-East framework)</resourceName>
+<resourceName lang="French">Corpus 1984 en persan (Multext-East)</resourceName>
+<description lang="English">This corpus contains the Persian (Farsi) translation of a part of the novel “1984” (G. Orwell) annotated in the Multext-East framework (Multilingual Text Tools and Corpora for Eastern and Central European Languages). The aim of the Multext-East project was to develop standardized language resources.The package comprises: (i) the specifications for morphosyntactic encoding of Persian Language, based on the EAGLES/MULTEXT model and specific resources of MULTEXT-East, (ii) the annotated Persian version of Orwell’s 1984 corpus. The corpus contains extensive headers and markup for document structure, sentences, and various sub-sentence annotations in the XML-format following the TEI guidelines. Annotation includes POS (part-of-speech) and lemmas. The corpus contains approximately 100,000 words (6,604 sentences, 13,247 lemmas) and can easily be aligned with other corpora in the MULTEXT-East framework.</description>
+<description lang="French">Ce corpus contient la traduction en persan (farsi) d’une partie du roman “1984” (G. Orwell) annoté dans le cadre du projet Multext-East (Outils et corpus de textes multilingues pour les langues d’Europe centrale et de l’est). L’objectif du projet Multext-East était de développer des ressources linguistiques standardisées.L’ensemble fourni comprend: (i) les spécifications pour le codage morpho-syntaxique de la langue persane, basées sur le modèle EAGLES/MULTEXT et les ressources spécifiques de MULTEXT-East, (ii) la version annotée en persan du corpus 1984 d’Orwell. Le corpus contient les en-têtes et les balises étendues pour la structure de documents, les phrases, et diverses annotations de sous-phrases au format XML selon les directives TEI. L’annotation inclut la partie du discours (POS) et les lemmes. Le corpus contient approximativement 100 000 mots (6 604 phrases, 13 247 lemmes) et peut être facilement aligné avec d’autres corpus du projet MULTEXT-East.</description>
+<resourceShortName/>
+<metaShareId>n/a</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1124</url>
+<identifier>ELRA-W0054</identifier>
+</identificationInfo>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+<metadataCreator>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipcode>75013</zipcode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</metadataCreator>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<revision>First created in 2006, compiled and finalized on 27/02/2009Last update: 15/04/2009</revision>
+<lastDateUpdated>2010-09-27</lastDateUpdated>
+</versionInfo>
+<distributionInfo>
+<availability>available-restrictedUse</availability>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 5000.00€</price>
+<price>Academic org. ELRA Non Member: 100.00€</price>
+<price>Commercial org. ELRA Member: 2000.00€</price>
+<price>Academic org. ELRA Member: 45.00€</price>
+<availabilityStartDate>2010-09-27</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 5000.00€</price>
+<price>Academic org. ELRA Non Member: 5000.00€</price>
+<price>Commercial org. ELRA Member: 2000.00€</price>
+<price>Academic org. ELRA Member: 2000.00€</price>
+<availabilityStartDate>2010-09-27</availabilityStartDate>
+</licenceInfo>
+</distributionInfo>
+<validationInfo>
+<validated>true</validated>
+<validationModeDetails>MULTEXT-East </validationModeDetails>
+</validationInfo>
+<usageInfo>
+<foreseenUseInfo>
+<foreseenUse>nlpApplications</foreseenUse>
+<useNLPSpecific>speechSynthesis</useNLPSpecific>
+</foreseenUseInfo>
+</usageInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>MULTEXT-East</projectName>
+<fundingType>euFunds</fundingType>
+</fundingProject>
+<creationEndDate>2009-01-01</creationEndDate>
+</resourceCreationInfo>
+<resourceComponentType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusTextInfo>
+<mediaType>text</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+<multilingualityType>parallel</multilingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>per/fas</languageId>
+<languageName>Persian</languageName>
+</languageInfo>
+<annotationInfo>
+<annotationType>other</annotationType>
+<conformanceToStandardsBestPractices>TEI</conformanceToStandardsBestPractices>
+</annotationInfo>
+</corpusTextInfo>
+</corpusMediaType>
+</corpusInfo>
+</resourceComponentType>
+</resourceInfo>

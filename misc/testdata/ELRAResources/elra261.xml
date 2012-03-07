@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<identificationInfo>
+<resourceName lang="English">EPAC Corpus: orthographic transcriptions</resourceName>
+<resourceName lang="French">Corpus EPAC: transcriptions orthographiques</resourceName>
+<description lang="English">This corpus consists of approx. 100 hours of manual orthographic transcriptions, which were produced from 1,677 hours of non transcribed recordings from the ESTER Evaluation Campaign (Technolangue programme, see also ELRA-E0021). This corpus also consists of automatic transcriptions of the full 1,677 hours.</description>
+<description lang="French">Ce corpus contient environ 100 heures de transcriptions orthographiques manuelles réalisées à partir des 1 677 heures d'enregistrements non transcrits de la campagne d'évaluation ESTER (programme Technolangue, voir aussi ELRA-E0021). Ce corpus contient également les transcriptions automatiques de l'intégralité de ces 1 677 heures.</description>
+<resourceShortName/>
+<metaShareId>n/a</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1119</url>
+<identifier>ELRA-S0305</identifier>
+</identificationInfo>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+<metadataCreator>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipcode>75013</zipcode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</metadataCreator>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<lastDateUpdated>2011-07-01</lastDateUpdated>
+</versionInfo>
+<distributionInfo>
+<availability>available-restrictedUse</availability>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 7500.00€</price>
+<price>Academic org. ELRA Non Member: 2000.00€</price>
+<price>Commercial org. ELRA Member: 5000.00€</price>
+<price>Academic org. ELRA Member: 300.00€</price>
+<availabilityStartDate>2010-03-29</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 25000.00€</price>
+<price>Academic org. ELRA Non Member: 25000.00€</price>
+<price>Commercial org. ELRA Member: 20000.00€</price>
+<price>Academic org. ELRA Member: 20000.00€</price>
+<availabilityStartDate>2010-03-29</availabilityStartDate>
+</licenceInfo>
+</distributionInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>ESTER</projectName>
+<fundingType>nationalFunds</fundingType>
+</fundingProject>
+</resourceCreationInfo>
+<resourceComponentType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
+</languageInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
+</resourceComponentType>
+</resourceInfo>

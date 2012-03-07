@@ -1,0 +1,335 @@
+<head>
+<title>META-SHARE Statictics</title>
+<style type="text/css">
+    html * { padding:0; margin:0; }
+    body * { padding:10px 10px; }
+    body * * { padding:0; }
+    body { font-family:"Trebuchet MS", Helvetica, sans-serif; font-size:0.8em; }
+      #header { background:#ffffff; padding-left:370px; padding-bottom:20px; }
+    #header img { position:absolute; top:10px; left:10px; height:40px; border:0px; }
+h1, h2, h3, h4, h5, h6 { font-weight:normal; }
+  .grey_dark { color:#696969; }
+     </style>
+
+<script type="text/javascript" src="{{ media_prefix }}js/jquery.js"></script>
+
+
+<script type="text/javascript" src="{{ media_prefix }}js/highcharts.js"></script>
+<script type="text/javascript">
+var example = 'combo',
+	theme = 'default';
+	//theme = 'gray';
+
+	Highcharts.theme = { colors: ['#4572A7'] };// prevent errors in default theme
+	var highchartsOptions = Highcharts.getOptions(); 
+
+//enter refresh time in "minutes:seconds" Minutes should range from 0 to inifinity. Seconds should range from 0 to 59
+var limit="5:00"
+var refreshedtime=3
+
+if (document.images){
+var parselimit=limit.split(":")
+parselimit=parselimit[0]*60+parselimit[1]*1
+}
+function beginrefresh(){
+
+if (parselimit<=1)
+    window.location.reload()
+else{ 
+    parselimit-=refreshedtime
+    curmin=Math.floor(parselimit/60)
+    cursec=parselimit%60
+    if (curmin!=0)
+        curtime= "This page will automatically refresh in " +curmin+" minutes and "+cursec+" seconds"
+    else
+        curtime= "This page will automatically refresh in " +cursec+" seconds"
+    window.status=curtime
+    setTimeout("beginrefresh()",refreshedtime*1000)
+}
+}
+
+window.onload=beginrefresh
+
+</script>
+
+<link rel="stylesheet" href="{{ media_prefix }}js/bluetable.css" type="text/css" />
+</head>
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<body bgcolor=#c9c9c9>
+<div id="header">
+    <a href="http://www.meta-share.org/"><img src="{{ media_prefix }}images/meta-share-logo.png" /></a>
+    
+   <h1 class="grey_dark">Statistics</h1>
+</div>
+  
+<table width=100% border=0>
+<td valign=top>
+{% if traffic|length <= 1 %}
+    No data found
+</td>
+</table>
+{% else %}
+<div align=right>
+<form method="get" action=".">
+{% csrf_token %}
+Show statistics at <select onchange="submit()" name="date">
+{% for day in date %}
+    <option value="{{ day.date|date:"Y-m-d" }}"
+    {% if day.date|date:"Y-m-d" == currdate %}
+    selected
+    {% endif %}
+    >{{ day.date|date:"Y/m/d" }}
+{% endfor %}
+</select>
+</form>
+</div>
+<table id="nodes" cellspacing=1 class="tablesorter">
+	<thead><tr>
+	    <th class="header">Node</th>
+	    <th class="header">Last check</th>
+	    <th class="header">Users</th>
+	    <th class="header" width=60>Viewed LRs</th>
+	    <th class="header" width=60>Updated LRs</th>
+	    <th class="header" width=60>Downloaded LRs</th>
+	    <th class="header">Queries</th>
+	    <th class="header">Average time per query (ms)</th>
+	    <th class="header">Queries < average time</th>
+	    
+	</tr></thead> 
+	<tbody>
+	{% for host,info in traffic.items %}
+	<tr>
+	    {% if host == "#TOTAL" %}
+	        <td align=right>TOTAL:</td>
+	        <td></td>
+	    {% else %}
+	        <td> 
+	        {% if info.0 == 1 %}
+	            <img src="{{ media_prefix }}images/available_icon.png" title="This node is running" width=16>
+	        {% else %}
+	            <img src="{{ media_prefix }}images/unavailable_icon.png" title="This node is down or some unexpected result to getting statistics occurred" width=18>	            
+	        {% endif %}
+	        <a href='{{ host }}' target=_new><font color=blue><strong>{{ host }}</strong></font></a>
+	        </td>
+	        <td>
+	          {{ info.1 }}
+	        </td>
+	    {% endif %}
+	<td align=right>{{ info.2 }} </td>
+	<td align=right>{{ info.3 }} </td>
+	<td align=right>{{ info.4 }} </td>
+	<td align=right>{{ info.5 }} </td>
+	<td align=right>{{ info.6 }} </td>
+	<td align=right>{{ info.7 }} </td>
+	<td align=right>{{ info.8 }} </td>
+	</tr>
+	{% endfor %}
+	</tbody> 
+</table>
+
+<script type="text/javascript">
+var chart;
+jQuery(document).ready(function() {
+    chart = new Highcharts.Chart({
+        chart: {
+            renderTo: 'timeline',
+            type: 'spline',
+            zoomType: 'x',
+
+        },
+        credits: {
+            enabled: false
+        },
+        exporting: {
+            enabled: false
+        },
+        navigation: {
+            buttonOptions: {
+                enabled: false
+            }
+        },
+        title: {
+            text: 'User actions timeline'
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            type: 'datetime',
+            maxZoom: 8 * 24 * 3600000, // fourteen days
+
+            dateTimeLabelFormats: { // don't display the dummy year
+                day: '%Y %b %e ',
+                month: '%Y %b ',
+                year: '%Y %b ',
+                hour: '%Y %b %e '
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Linguistic Resources'
+            },
+            min: 0
+        },
+        tooltip: {
+            formatter: function() {
+                return  Highcharts.dateFormat('%Y %b %e', this.x) +': '+ this.y +' '+this.series.name;
+            }
+        },
+        plotOptions: {
+            series: {
+                cursor: 'pointer',
+                point: {
+                    events: {
+                        click: function() {
+                            location.href = this.options.url;
+                            location.target = this.options.target;
+                        }
+                    }
+                },
+                lineWidth: 2,
+                marker: {
+                    enabled: true,
+                    radius: 2,
+                    fillColor: '#FFFFFF',
+                    lineWidth: 2,
+                    lineColor: null, // inherit from series
+                    states: {
+                        hover: {
+                            enabled: true,
+                            fillColor: '#FF0000',
+
+                            radius: 5
+                        }
+                    }
+                }
+            }
+        },
+        legend: {
+            enabled: false
+        },
+
+        series: [
+        	{% for action,val in actions_bydate.items %}
+		  {name: '{{action}}',
+            data: [
+            	{% for date,val in val.items %}
+					{x: Date.UTC({{date}}),y:{{ val }}, url: "?date={{date}}" },
+				{% endfor %}
+			]},
+		  
+		{% endfor %}
+            
+			]
+    });
+
+
+});
+</script>
+<br><div id="timeline" class="highcharts-container" style="margin: 0pt 2em; height: 250px; width: 800px;"></div>
+
+<br>
+<script type="text/javascript">
+    var chart;
+    jQuery(document).ready(function() {
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'nodetraffic'
+                
+            },
+            title: {
+                text: 'User actions on the META-SHARE nodes'
+            },
+            xAxis: {
+                categories: ['{{ traffic.keys|join:"','"  }}'] 
+            },
+            yAxis: {
+                title: {
+                    text: 'Linguistic Resources'
+                },
+                min: 0
+            },
+            credits: {
+               enabled: false
+            },
+            exporting: {
+                enabled: false
+            },
+            navigation: {
+                buttonOptions: {
+                    enabled: false
+                }
+            },
+            tooltip: {
+                formatter: function() {
+                    var s;
+                    if (this.point.name) { // the pie chart
+                        s = ''+
+                            this.point.name +': '+ this.y +' LRs';
+                    } else {
+                        s = ''+
+                            this.x  +': '+ this.y +' LRs';
+                    }
+                    return s;
+                }
+            },
+            labels: {
+                items: [{
+                    html: 'Total',
+                    style: {
+                        left: '18px',
+                        top: '250px',
+                        color: 'black'				
+                    }
+                }]
+            },
+            series: [
+            {% for action,val in actions_byhost.items %}
+            { type: 'column',
+                name: '{{ action }}',
+                data: {{ val }}
+            },
+            {% endfor %}
+            /*{
+                type: 'spline',
+                name: 'Average',
+                data: [
+                {% for host,info in traffic.items %}
+                ({{ info.0 }}/{{ traffic|length }}),
+                {% endfor %}
+                ]
+            },*/
+            {
+                type: 'pie',
+                name: 'Total data monitoring',
+                data: [
+                {% for action,val in actions.items %}
+                    { type: 'column',
+                        name: '{{ action }}',
+                        y: {{ val }},
+                        color: highchartsOptions.colors[{{ forloop.counter }} -1] 
+                },
+                {% endfor %}
+            ],
+                center: [-10, 280],
+                size: 70,
+                showInLegend: false,
+                dataLabels: {
+                    enabled: false
+                }
+            }]
+        });
+        
+        
+    });
+</script>	
+<div id="nodetraffic" class="highcharts-container" style="margin: 0pt 2em; height: 350px; width: 800px;"></div>
+	
+	
+{% endif %}
+{% endblock %}
+
