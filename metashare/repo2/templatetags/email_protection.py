@@ -28,6 +28,8 @@ class EncryptEmail(template.Node):
         Renders a given email address as obfuscated JavaScript code.
         """
         email_address = self.context_var.resolve(context)
+        email_id = 'e' + str(randrange(1, 999999999))
+        
         character_set = '+-.0123456789@ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghi' \
           'jklmnopqrstuvwxyz'
         character_list = list(character_set)
@@ -35,20 +37,21 @@ class EncryptEmail(template.Node):
         
         key = ''.join(character_list)
         
-        cipher_text = ''
-        _id = 'e' + str(randrange(1, 999999999))
+        crypted = ''.join([key[character_set.find(c)] for c in email_address])
         
-        for character in email_address:
-            cipher_text += key[character_set.find(character)]
+        # Create JavaScript-based, obfuscated email address representation.
+        script = 'var a="{}";var b=a.split("").sort().join("");var c="{}";' \
+          'var d="";for(var e=0;e<c.length;e++)d+=b.charAt(a.indexOf(c.cha' \
+          'rAt(e)));document.getElementById("{}").innerHTML="<a href=\\"ma' \
+          'ilto:"+d+"\\">"+d+"</a>"'.format(key, crypted, email_id)
         
-        script = 'var a="'+key+'";var b=a.split("").sort().join("");var c="'+cipher_text+'";var d="";'
-        script += 'for(var e=0;e<c.length;e++)d+=b.charAt(a.indexOf(c.charAt(e)));'
-        script += 'document.getElementById("'+_id+'").innerHTML="<a href=\\"mailto:"+d+"\\">"+d+"</a>"'
+        script = script.replace("\\","\\\\").replace('"','\\"')
         
-        script = "eval(\""+ script.replace("\\","\\\\").replace('"','\\"') + "\")"
-        script = '<script type="text/javascript">/*<![CDATA[*/'+script+'/*]]>*/</script>'
+        obfuscated = '<span id="{}">[javascript protected email address]</' \
+          'span><script type="text/javascript">/*<![CDATA[*/eval("{}")/*]]' \
+          '>*/</script>'.format(email_id, script)
         
-        return '<span id="'+ _id + '">[javascript protected email address]</span>'+ script
+        return obfuscated
 
 
 def encrypt_email(parser, token):
