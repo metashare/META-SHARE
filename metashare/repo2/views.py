@@ -175,7 +175,7 @@ def download(request, object_id):
         if agreement == 1:
             sessionid = ""
             if request.COOKIES:
-                sessionid = request.COOKIES['sessionid']
+                sessionid = request.COOKIES.get('sessionid', '')
                     
             if resource.storage_object.has_local_download_copy():
                 try:
@@ -277,7 +277,7 @@ def view(request, object_id=None):
         if hasattr(resource.storage_object, 'identifier'):
             sessionid = ""
             if request.COOKIES:
-                sessionid = request.COOKIES['sessionid']
+                sessionid = request.COOKIES.get('sessionid', '')
             saveLRStats(request.user.username,
               resource.storage_object.identifier, sessionid, VIEW_STAT)
             context['LR_STATS'] = getLRStats(resource.storage_object.identifier)
