@@ -1,9 +1,0 @@
-<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema C:/develop/metashare/transform/schemaTransform/v2.0/META-SHARE-Resource.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema"><identificationInfo><resourceName>Spanish EUROM.1</resourceName><description>EUROM1 is a multilingual European speech database. It contains over 60 speakers per language who pronounced numbers, sentences, isolated words ... using close talking microphone in an anecoic room. Equivalent corpora for each of the European languages exist already, with the same number of speakers selected in the same way, and recorded in the same conditions with common file formats.</description><metaShareId>n/a</metaShareId><identifier>ELRA-S0328</identifier></identificationInfo><distributionInfo><availability>available-restrictedUse</availability></distributionInfo>
-<contactPerson>
-	<surname>n/a</surname>
-	<communicationInfo>
-		<email>test@example.com</email>
-	</communicationInfo>
-
-</contactPerson>
-<metadataInfo><metadataCreationDate>2012-01-30</metadataCreationDate></metadataInfo><resourceComponentType><corpusInfo><resourceType>corpus</resourceType><corpusMediaType></corpusMediaType></corpusInfo></resourceComponentType></resourceInfo>

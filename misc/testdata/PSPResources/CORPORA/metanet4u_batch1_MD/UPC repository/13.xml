@@ -1,9 +1,0 @@
-<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema C:/develop/metashare/transform/schemaTransform/v2.0/META-SHARE-Resource.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema"><identificationInfo><resourceName>Spanish Festival voice male</resourceName><description>This database contains the recordings of one male Spanish speaker recorded in a noise-reduced room simultaneously through a close talk microphone, a mid distance microphone and a laryngograph signal. This comprises read text material of approximately 10 hours of speech for baseline applications (Text-to-Speech systems). The database includes Festival-compatible annotations. The recordings can be also found under TC-STAR Spanish Baseline Male Speech Database.</description><metaShareId>n/a</metaShareId><identifier>ELRA-S0336</identifier></identificationInfo><distributionInfo><availability>available-restrictedUse</availability></distributionInfo>
-<contactPerson>
-	<surname>n/a</surname>
-	<communicationInfo>
-		<email>test@example.com</email>
-	</communicationInfo>
-
-</contactPerson>
-<metadataInfo><metadataCreationDate>2012-01-30</metadataCreationDate></metadataInfo><resourceComponentType><corpusInfo><resourceType>corpus</resourceType><corpusMediaType></corpusMediaType></corpusInfo></resourceComponentType></resourceInfo>

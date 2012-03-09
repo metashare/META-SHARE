@@ -1,9 +1,0 @@
-<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema C:/develop/metashare/transform/schemaTransform/v2.0/META-SHARE-Resource.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema"><identificationInfo><resourceName>Bilingual (Spanish English) Speech synthesis HTS models</resourceName><description>This database contains Bilingual (English and Spanish) Festival HTS models. Models were trained with 9h of speech from 2 female bilingual speakers and 2 male bilingual speakers. Each speaker recorded 2h 15 min per language. The speech data can be found in the TC-STAR Bilingual Voice-Conversion Spanish Speech Database and in the TC-STAR Bilingual Expressive Spanish Speech Database.</description><metaShareId>n/a</metaShareId><identifier>ELRA-S0335</identifier></identificationInfo><distributionInfo><availability>available-restrictedUse</availability></distributionInfo>
-<contactPerson>
-	<surname>n/a</surname>
-	<communicationInfo>
-		<email>test@example.com</email>
-	</communicationInfo>
-
-</contactPerson>
-<metadataInfo><metadataCreationDate>2012-01-30</metadataCreationDate></metadataInfo><resourceComponentType><corpusInfo><resourceType>corpus</resourceType><corpusMediaType></corpusMediaType></corpusInfo></resourceComponentType></resourceInfo>
