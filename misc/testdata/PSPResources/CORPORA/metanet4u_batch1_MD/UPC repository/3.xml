@@ -1,0 +1,9 @@
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema C:/develop/metashare/transform/schemaTransform/v2.0/META-SHARE-Resource.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema"><identificationInfo><resourceName>SpeechDat-Car Catalan</resourceName><description>The Catalan SpeechDat-Car database contains the in-car recordings of 300 speakers who uttered from around 120 read and spontaneous items. Each speaker recorded two sessions. Recordings have been made through 4 different channels, of which 4 were in-car microphones (1 close-talk microphone, 3 far-talk microphones). The 300 Catalan speakers were selected from 5 different dialectal regions, are balanced in gendre and age groups. The database was validated by UVIGO. The Catalan-SpeechDat-Car Database was funded by the Catalan Government.</description><metaShareId>n/a</metaShareId><identifier>ELRA-S0326</identifier></identificationInfo><distributionInfo><availability>available-restrictedUse</availability></distributionInfo>
+<contactPerson>
+	<surname>n/a</surname>
+	<communicationInfo>
+		<email>test@example.com</email>
+	</communicationInfo>
+
+</contactPerson>
+<metadataInfo><metadataCreationDate>2012-01-30</metadataCreationDate></metadataInfo><resourceComponentType><corpusInfo><resourceType>corpus</resourceType><corpusMediaType></corpusMediaType></corpusInfo></resourceComponentType></resourceInfo>

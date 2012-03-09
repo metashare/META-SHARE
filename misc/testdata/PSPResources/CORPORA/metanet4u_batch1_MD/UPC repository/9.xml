@@ -1,0 +1,9 @@
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema C:/develop/metashare/transform/schemaTransform/v2.0/META-SHARE-Resource.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema"><identificationInfo><resourceName>FESTCAT Catalan TTS Baseline 8 spks x 1h</resourceName><description>This database contains the recordings of four female and four male Catalan professional speakers recorded in a noise-reduced room simultaneously through a close talk microphone, a mid distance microphone and a laryngograph signal. It consists of the recordings and annotations of read text material of approximately 1 hour of speech per speaker for baseline applications (Text-to-Speech systems). The FESTCAT Catalan TTS Baseline 8spks x 1h Speech Database was created within the scope of the FESTCAT project funded by the Catalan Government.</description><metaShareId>n/a</metaShareId><identifier>ELRA-S0332</identifier></identificationInfo><distributionInfo><availability>available-restrictedUse</availability></distributionInfo>
+<contactPerson>
+	<surname>n/a</surname>
+	<communicationInfo>
+		<email>test@example.com</email>
+	</communicationInfo>
+
+</contactPerson>
+<metadataInfo><metadataCreationDate>2012-01-30</metadataCreationDate></metadataInfo><resourceComponentType><corpusInfo><resourceType>corpus</resourceType><corpusMediaType></corpusMediaType></corpusInfo></resourceComponentType></resourceInfo>

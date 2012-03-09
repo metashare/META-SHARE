@@ -1,0 +1,9 @@
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema C:/develop/metashare/transform/schemaTransform/v2.0/META-SHARE-Resource.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema"><identificationInfo><resourceName>FESTCAT Catalan TTS Baseline male 10h</resourceName><description>This database contains the recordings of one male Catalan professional speaker recorded in a noise-reduced room simultaneously through a close talk microphone, a mid distance microphone and a laryngograph signal. This database consists in the recordings and annotations of read text material of approximately 10 hours of speech for baseline applications (Text-to-Speech systems). The FESTCAT Catalan TTS Baseline Male Speech Database was created within the scope of the FESTCAT project, funded by the Catalan Government.</description><metaShareId>n/a</metaShareId><identifier>ELRA-S0330</identifier></identificationInfo><distributionInfo><availability>available-restrictedUse</availability></distributionInfo>
+<contactPerson>
+	<surname>n/a</surname>
+	<communicationInfo>
+		<email>test@example.com</email>
+	</communicationInfo>
+
+</contactPerson>
+<metadataInfo><metadataCreationDate>2012-01-30</metadataCreationDate></metadataInfo><resourceComponentType><corpusInfo><resourceType>corpus</resourceType><corpusMediaType></corpusMediaType></corpusInfo></resourceComponentType></resourceInfo>
