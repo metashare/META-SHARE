@@ -6,7 +6,6 @@
 	<xs:include schemaLocation="./META-SHARE-RoleTypes.xsd"/>
 	<xs:include schemaLocation="./META-SHARE-LicenseMetadata.xsd"/>
 	<xs:include schemaLocation="./META-SHARE-LanguageMetadata.xsd"/>
-	<xs:include schemaLocation="./META-SHARE-BaseTypes.xsd"/>
 	<!-- definition of complex types -->
 	<!-- media type info TextInfo/imageInfo/AudioInfo/VideInfo etc-->
 	<!--
