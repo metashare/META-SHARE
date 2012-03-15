@@ -106,10 +106,21 @@ class EditorTest(TestCase):
         response = client.get(ADMINROOT+"repo2/resourceinfotype_model/add/", follow=True)
         self.assertContains(response, 'Add Resource')
 
+    def test_staff_cannot_see_resource_add(self):
+        client = self.client_with_user_logged_in(self.staff_login)
+        response = client.get(ADMINROOT+'repo2/resourceinfotype_model/add/', follow=True)
+        self.assertContains(response, 'User Authentication', status_code=200)
+
     def test_editor_can_see_corpus_add(self):
         client = self.client_with_user_logged_in(self.editor_login)
         response = client.get(ADMINROOT+"repo2/corpusinfotype_model/add/", follow=True)
         self.assertEquals(200, response.status_code)
+
+    def test_staff_cannot_see_corpus_add(self):
+        client = self.client_with_user_logged_in(self.staff_login)
+        response = client.get(ADMINROOT+'repo2/corpusinfotype_model/add/')
+        self.assertContains(response, 'Permission denied', status_code=403)
+
 
     if False:
         def test_can_see_models_add(self):
