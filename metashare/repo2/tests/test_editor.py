@@ -2,13 +2,14 @@ from django.test import TestCase
 import django.db.models
 from django.contrib.auth.models import User, Group
 from django.test.client import Client
-from metashare.settings import DJANGO_BASE
+from metashare.settings import DJANGO_BASE, ROOT_PATH
 from metashare.repo2 import models
 from django.contrib import admin
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.admin.sites import LOGIN_FORM_KEY
 from metashare.repo2.models import languageDescriptionInfoType_model,\
-    lexicalConceptualResourceInfoType_model
+    lexicalConceptualResourceInfoType_model, resourceInfoType_model
+from metashare import test_utils
 
 ADMINROOT = '/{0}admin/'.format(DJANGO_BASE)
 
@@ -63,6 +64,9 @@ class EditorTest(TestCase):
             'username': 'editoruser',
             'password': 'secret',
         }
+        
+    def tearDown(self):
+        resourceInfoType_model.objects.all().delete()
     
     
     def client_with_user_logged_in(self, user_credentials):
@@ -73,6 +77,10 @@ class EditorTest(TestCase):
             raise Exception, 'could not log in user with credentials: {}\nresponse was: {}'\
                 .format(user_credentials, response)
         return client
+
+    def import_test_resource(self):
+        test_utils.setup_test_storage()
+        test_utils.import_xml('{}/repo2/fixtures/testfixture.xml'.format(ROOT_PATH))
 
     def test_can_log_in_staff(self):
         client = Client()
@@ -164,12 +172,11 @@ class EditorTest(TestCase):
         print 'Checked models: {0}'.format(num)
 
 
-    if False:
-        def test_resource_list_contains_publish_action(self):
-            client = Client()
-            client.login(username='staffuser', password='secret')
-            response = client.get(ADMINROOT+"repo2/resourceinfotype_model/", follow=True)
-            self.assertContains(response, 'Publish selected resources', msg_prefix='response: {0}'.format(response))
+    def test_resource_list_contains_publish_action(self):
+        self.import_test_resource()
+        client = self.client_with_user_logged_in(self.editor_login)
+        response = client.get(ADMINROOT+"repo2/resourceinfotype_model/", follow=True)
+        self.assertContains(response, 'Publish selected resources', msg_prefix='response: {0}'.format(response))
         
 
     
