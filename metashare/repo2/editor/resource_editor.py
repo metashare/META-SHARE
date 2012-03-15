@@ -16,6 +16,8 @@ from django.utils.safestring import mark_safe
 from django.template.context import RequestContext
 from django.shortcuts import render_to_response
 from metashare import settings
+from django.contrib.auth.decorators import permission_required
+from django.utils.decorators import method_decorator
 
     
 class ResourceComponentInlineFormSet(ReverseInlineFormSet):
@@ -59,7 +61,7 @@ class ResourceComponentInlineFormSet(ReverseInlineFormSet):
                 continue
             value = self.data[modelfieldname]
             if not value:
-              # print error
+                # print error
                 #raise AssertionError("Meaningful error message")                
                 error = error + format(modelfieldname)+' error. '
                 
@@ -391,6 +393,7 @@ class ResourceModelAdmin(ReverseModelAdmin):
             return request.POST['resourceComponentId']
         return None
 
+    @method_decorator(permission_required('repo2.add_resourceinfotype_model'))
     def add_view(self, request, form_url='', extra_context=None):
         _extra_context = extra_context or {}
         _extra_context.update({'DJANGO_BASE':settings.DJANGO_BASE})
