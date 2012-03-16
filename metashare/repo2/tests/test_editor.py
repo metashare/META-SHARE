@@ -7,11 +7,15 @@ from metashare.repo2 import models
 from django.contrib import admin
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.admin.sites import LOGIN_FORM_KEY
-from metashare.repo2.models import languageDescriptionInfoType_model,\
+from metashare.repo2.models import languageDescriptionInfoType_model, \
     lexicalConceptualResourceInfoType_model, resourceInfoType_model
 from metashare import test_utils
 
-ADMINROOT = '/{0}admin/'.format(DJANGO_BASE)
+ADMINROOT = '/{0}editor/'.format(DJANGO_BASE)
+TESTFIXTURE_XML = '{}/repo2/fixtures/testfixture.xml'.format(ROOT_PATH)
+BROKENFIXTURE_XML = '{}/repo2/fixtures/broken.xml'.format(ROOT_PATH)
+TESTFIXTURES_ZIP = '{}/repo2/fixtures/tworesources.zip'.format(ROOT_PATH)
+BROKENFIXTURES_ZIP = '{}/repo2/fixtures/onegood_onebroken.zip'.format(ROOT_PATH)
 
 class EditorTest(TestCase):
     """
@@ -80,7 +84,7 @@ class EditorTest(TestCase):
 
     def import_test_resource(self):
         test_utils.setup_test_storage()
-        test_utils.import_xml('{}/repo2/fixtures/testfixture.xml'.format(ROOT_PATH))
+        test_utils.import_xml(TESTFIXTURE_XML)
 
     def test_can_log_in_staff(self):
         client = Client()
@@ -179,5 +183,38 @@ class EditorTest(TestCase):
         self.assertContains(response, 'Publish selected resources', msg_prefix='response: {0}'.format(response))
         
 
+    def test_upload_single_xml(self):
+        client = self.client_with_user_logged_in(self.editor_login)
+        xmlfile = open(TESTFIXTURE_XML)
+        response = client.post(ADMINROOT+'upload_xml/', {'description': xmlfile, 'uploadTerms':'on' }, follow=True)
+        self.assertContains(response, 'Successfully uploaded file')
+        
+    def test_upload_broken_xml(self):
+        client = self.client_with_user_logged_in(self.editor_login)
+        xmlfile = open(BROKENFIXTURE_XML)
+        response = client.post(ADMINROOT+'upload_xml/', {'description': xmlfile, 'uploadTerms':'on' }, follow=True)
+        self.assertContains(response, 'Import failed', msg_prefix='response: {0}'.format(response))
+        
+    def test_upload_single_xml_unchecked(self):
+        client = self.client_with_user_logged_in(self.editor_login)
+        xmlfile = open(TESTFIXTURE_XML)
+        response = client.post(ADMINROOT+'upload_xml/', {'description': xmlfile }, follow=True)
+        self.assertFormError(response, 'form', 'uploadTerms', 'This field is required.')
     
-    
+    def test_upload_zip(self):
+        client = self.client_with_user_logged_in(self.editor_login)
+        xmlfile = open(TESTFIXTURES_ZIP)
+        response = client.post(ADMINROOT+'upload_xml/', {'description': xmlfile, 'uploadTerms':'on' }, follow=True)
+        self.assertContains(response, 'Successfully uploaded 2 resource descriptions')
+        self.assertNotContains(response, 'Import failed')
+        # And verify that we have more than zero resources on the "my resources" page where we are being redirected:
+        self.assertContains(response, "My Resources")
+        self.assertNotContains(response, '0 Resources')
+
+    def test_upload_broken_zip(self):
+        client = self.client_with_user_logged_in(self.editor_login)
+        xmlfile = open(BROKENFIXTURES_ZIP)
+        response = client.post(ADMINROOT+'upload_xml/', {'description': xmlfile, 'uploadTerms':'on' }, follow=True)
+        self.assertContains(response, 'Successfully uploaded 1 resource descriptions')
+        self.assertContains(response, 'Import failed for 1 files')
+        
