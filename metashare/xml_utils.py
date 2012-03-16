@@ -9,6 +9,8 @@ import sys
 import os
 import logging
 from metashare.settings import LOG_LEVEL, LOG_HANDLER, XDIFF_LOCATION
+from metashare.stats.model_utils import saveLRStats, UPDATE_STAT
+from zipfile import is_zipfile, ZipFile
 
 # Setup logging support.
 logging.basicConfig(level=LOG_LEVEL)
@@ -50,4 +52,81 @@ if __name__ == "__main__":
         print "equal"
     else :
         print "not equal"
+
+
+def import_from_string(xml_string, targetstatus, owner_id=None):
+    """
+    Import a single resource from a string representation of its XML tree, 
+    and save it with the given target status.
+    
+    Returns the imported resource object on success, raises and Exception on failure.
+    """
+    from metashare.repo2.models import resourceInfoType_model
+    result = resourceInfoType_model.import_from_string(xml_string)
+    
+    if not result[0]:
+        msg = u'could not import XML string: "{}"'.format(xml_string)
+        if len(result) > 2:
+            msg += '\nError message: {}'.format(result[2])
+        raise Exception, msg
+    
+    resource = result[0]
+    
+    # Set publication_status for new object.
+    resource.storage_object.publication_status = targetstatus
+    if owner_id:
+        resource.owners.add(owner_id)
+        
+    resource.storage_object.save()
+
+    # Update statistics
+    saveLRStats("", resource.storage_object.identifier, "", UPDATE_STAT)
+    return resource
+    
+def import_from_file(filehandle, descriptor, targetstatus, owner_id=None):
+    """
+    Import the xml metadata record(s) contained in the opened file identified by filehandle.
+    filehandle: an opened file handle to either a single XML file or a zip archive containing
+        only XML files.
+    descriptor: a descriptor for the file handle, e.g. the file name.
+    targetstatus: one of PUBLISHED, INGESTED or INTERNAL. 
+        All imported records will be assigned this status.
+    owner_id (optional): if present, the given user ID will be added to the list of owners of the
+        resource.
+
+    Returns a pair of lists, the first list containing the successfully imported resource objects,
+         the second the descriptors of the erroneous XML file(s) which produced import errors.
+    """
+    imported_resources = []
+    erroneous_descriptors = []
+
+    handling_zip_file = is_zipfile(filehandle)
+    # Reset file handle for proper reading of the file contents.
+    filehandle.seek(0)
+
+    if not handling_zip_file:
+        try:
+            print 'Importing XML file: "{0}"'.format(descriptor)
+            xml_string = filehandle.read()
+            resource = import_from_string(xml_string, targetstatus, owner_id)
+            imported_resources.append(resource)
+        except:
+            erroneous_descriptors.append(descriptor)
+    
+    else:
+        temp_zip = ZipFile(filehandle)
+        
+        print 'Importing ZIP file: "{0}"'.format(descriptor)
+        for xml_name in temp_zip.namelist():
+            try:
+                if xml_name.endswith('/') or xml_name.endswith('\\'):
+                    continue
+                
+                print 'Importing extracted XML file: "{0}"'.format(xml_name)
+                xml_string = temp_zip.read(xml_name)
+                resource = import_from_string(xml_string, targetstatus, owner_id)
+                imported_resources.append(resource)
+            except:
+                erroneous_descriptors.append(descriptor)
+    return imported_resources, erroneous_descriptors
 
