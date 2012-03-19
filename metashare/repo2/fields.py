@@ -189,6 +189,9 @@ class MultiTextField(models.Field):
 from django import forms
 
 class MultiSelectFormField(forms.MultipleChoiceField):
+    """
+    Simple SelectMultiple form field that allows to select multiple choices.
+    """
     widget = forms.SelectMultiple
     
     def __init__(self, *args, **kwargs):
@@ -201,6 +204,7 @@ class MultiSelectField(models.Field):
     """
     __metaclass__ = models.SubfieldBase
     
+    # Maps 1-digit hexadecimal numbers to their corresponding bit quadruples.
     __HEX_TO_BITS__ = {
       'f': (1,1,1,1), 'e': (1,1,1,0), 'd': (1,1,0,1), 'c': (1,1,0,0),
       'b': (1,0,1,1), 'a': (1,0,1,0), '9': (1,0,0,1), '8': (1,0,0,0),
@@ -208,6 +212,7 @@ class MultiSelectField(models.Field):
       '3': (0,0,1,1), '2': (0,0,1,0), '1': (0,0,0,1), '0': (0,0,0,0)
     }
     
+    # Maps bit quadruples to their hexadecimal correspondents.
     __BITS_TO_HEX__ = {
       (1,1,1,1): 'f', (1,1,1,0): 'e', (1,1,0,1): 'd', (1,1,0,0): 'c',
       (1,0,1,1): 'b', (1,0,1,0): 'a', (1,0,0,1): '9', (1,0,0,0): '8',
@@ -219,9 +224,11 @@ class MultiSelectField(models.Field):
         return "CharField"
 
     def formfield(self, **kwargs):
-        defaults = {'required': not self.blank, 'choices': self.choices,
-          'label': capfirst(self.verbose_name), 'help_text': self.help_text}
+        # Collect form field data inside defaults dictionary.
+        defaults = {'choices': self.choices, 'help_text': self.help_text,
+          'label': capfirst(self.verbose_name), 'required': not self.blank}
 
+        # If this field has a default value, add it to the dictionary.
         if self.has_default:
             defaults['initial'] = self.get_default()
 
@@ -233,72 +240,101 @@ class MultiSelectField(models.Field):
         return MultiSelectFormField(**defaults)
 
     def clean(self, value, model_instance):
-        # TODO: this needs to be fixed!
-        return value
+        """
+        Convert to the value's type and run validation.  Returns the cleaned
+        value if no ValidationError is raised.
+        """
+        values = self.to_python(value)
+
+        if not len(values) and not self.blank:
+            raise ValidationError(u'This field cannot be blank.')
+
+        for value in values:
+            self.validate(value, model_instance)
+            self.run_validators(value)
+
+        return values
 
     def get_prep_value(self, value):
+        """
+        Takes a Python value and converts it into a database String.
+        """
+        # If the value is empty or None, we return an empty String for it.
         if not value:
-            value = []
-        
-        assert(isinstance(value, list) or isinstance(value, basestring))
+            return ''
+
+        # If the value is already a String, we simply return the value.
         if isinstance(value, basestring):
             return value
-        
-        bits = [0] * (1+len(self.choices)/4)*4
-        
+
+        # Otherwise, we assert that we are working on a list.  This will raise
+        # an exception for ill-typed values.
+        assert(isinstance(value, list))
+
+        # We now want to convert the list of values into a bit vector matching
+        # the values' index positions inside list(enumerate(self.choices))...
+        #
+        # For this, we first create a list of "bits", defaulting to 0.  The
+        # length of this list is (1 + len(self.choices) / 4) * 4 as we will
+        # convert quadruples of (a,b,c,d) to their hexadecimal counterparts.
+        # 
+        # The resulting list already has the right amount of zero padding.
+        bits = [0] * (1 + len(self.choices) / 4) * 4
+
+        # We iterate over the enumerated choices and compare each choice value
+        # with the current list of selected values.  If there is a match, we
+        # store a 1 in the right index position of the bits list.
+        #
+        # Example: if we have 3 possible choices A, B, C and our value list
+        # contains [A, C], we would create the following bits list [1,0,1].
         for index, choice in enumerate(self.choices):
             if choice[0] in value:
                 bits[index] = 1
-        
-        print bits
-        
+
+        # The bits list has to be converted into a hexadecimal String.  To do
+        # so, we take all (1 + len(self.choicese) / 4) quadruples inside the
+        # bits list and map them to their hexadecimal correspondent.
         values = ''
-        
-        for x in range(len(bits)/4):
-            offset = x * 4
+        for index in range(len(bits)/4):
+            offset = index * 4
             values += self.__BITS_TO_HEX__[tuple(bits[offset:offset+4])]
-        
-        print values
-        
+
+        # Finally, we return the resulting hexadecimal String.
         return values
-        
+
     def to_python(self, value):
-        print "TO_PYTHON: {}".format(value)
-        
+        """
+        Takes a hexadecimal String value and converts it into a Python list.
+        """
+        # If the value is empty or None, we return an empty list.
+        if not value:
+            return []
+
+        # If the value is already a list, we simply return the value.
         if isinstance(value, list):
             return value
-        
+
+        # Otherwise, we assert that we are working on a String.  This will
+        # raise an exception for ill-typed values.
         assert(isinstance(value, basestring))
-        
-        # f == 0b1111 == True,  True,  True,  True
-        # e == 0b1110 == True,  True,  True,  False
-        # d == 0b1101 == True,  True,  False, True
-        # c == 0b1100 == True,  True,  False, False
-        # b == 0b1011 == True,  False, True,  True
-        # a == 0b1010 == True,  False, True,  False
-        # 9 == 0b1001 == True,  False, False, True
-        # 8 == 0b1000 == True,  False, False, False
-        # 7 == 0b0111 == False, True,  True,  True
-        # 6 == 0b0110 == False, True,  True,  False
-        # 5 == 0b0101 == False, True,  False, True
-        # 4 == 0b0100 == False, True,  False, False
-        # 3 == 0b0011 == False, False, True,  True
-        # 2 == 0b0010 == False, False, True,  False
-        # 1 == 0b0001 == False, False, False, True
-        # 0 == 0b0000 == False, False, False, False
-        
+
+        # We iterate over all characters of the hexadecimal String and convert
+        # it to the corresponding bits quadruple.  Using these data, we can
+        # then compute the index positions of selected choices for this field.
         indices = []
-        
         for index in range(len(value.lower())):
-            offset = index*4
+            offset = index * 4
             _value = self.__HEX_TO_BITS__[value[index]]
             for _pos in range(4):
                 if _value[_pos]:
                     indices.append(offset + _pos)
-        
+
+        # Now that we know the index positions of all selected choices, we
+        # simply have to convert these to the corresponding choice values.
         values = []
         for index, choice in enumerate(self.choices):
             if index in indices:
                 values.append(choice[0])
-        
+
+        # Finally, we return the list of selected choice values.
         return values
