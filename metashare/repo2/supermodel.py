@@ -98,11 +98,6 @@ def _classify(class_name):
         return None
 
 
-# TODO: This class will be replaced by MultiTextFieldWithLanguageAttribute.
-class MultiMyStringField(models.TextField):
-    pass
-
-
 def _make_choices_from_list(source_list):
     """
     Converts a given list of Strings to tuple choices.
