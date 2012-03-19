@@ -58,6 +58,6 @@ if __name__ == "__main__":
       "occurred in {1} cases.".format(len(successful_imports), len(erroneous_imports))
     if len(erroneous_imports) > 0:
         print "The following files could not be imported:"
-        for descriptor in erroneous_imports:
-            print "\t", descriptor
+        for descriptor, exception in erroneous_imports:
+            print "\t{}: {}".format(descriptor, ' '.join(exception.args))
       

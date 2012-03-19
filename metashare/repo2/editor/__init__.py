@@ -46,41 +46,21 @@ class MetashareBackendSite(AdminSite):
         Allows to upload a resource description into the Django database.
         """
         # Check if the current user is actually allowed to upload...
-        _perm = 'repo2.add_resourceinfotype_model'
-        if not request.user.is_superuser and not request.user.has_perm(_perm):
+        if not request.user.is_superuser and not request.user.has_perm('repo2.add_resourceinfotype_model'):
             raise PermissionDenied
 
         if request.method == 'POST':
             form = ResourceDescriptionUploadForm(request.POST, request.FILES)
-            form_validated = form.is_valid()
-
-            if form_validated:
+            if form.is_valid():
                 # Retrieve the upload resource description file.
                 description = request.FILES['description']
-
                 successes, failures = import_from_file(description, description.name, INTERNAL, request.user.id)
-                
                 
                 if len(successes) == 1 and len(failures) == 0: # single resource successfully uploaded
                     resource_object = successes[0]
                     # Construct redirect URL for the new object.
-                    redirect_url = reverse('editor:repo2_resourceinfotype_model_change',
-                      args=[resource_object.id])
-                    
-                    # Create log ADDITION message for the new object.
-                    LogEntry.objects.log_action(
-                      user_id         = request.user.pk,
-                      content_type_id = ContentType.objects.get_for_model(
-                        resource_object).pk,
-                      object_id       = resource_object.pk,
-                      object_repr     = force_unicode(resource_object),
-                      action_flag     = ADDITION
-                    )
-                    
-                    _msg = u'Successfully uploaded file: {}'.format(description.name)
-                    messages.info(request, _msg)
-                    return HttpResponseRedirect(redirect_url)
-
+                    redirect_url = reverse('editor:repo2_resourceinfotype_model_change', args=[resource_object.id])
+                    messages.info(request, u'Successfully uploaded file: {}'.format(description.name))
                 else:
                     # Default case: either at least one failure, or more than one success
                     # We will redirect to upload page if we have no successes at all,
@@ -88,76 +68,14 @@ class MetashareBackendSite(AdminSite):
                     redirect_url = reverse('editor:upload_xml')
                     if len(successes) > 0:
                         redirect_url = reverse('editor:repo2_resourceinfotype_model_myresources')
-                        _msg = u'Successfully uploaded {} resource descriptions'.format(len(successes))
-                        messages.info(request, _msg)
+                        messages.info(request, u'Successfully uploaded {} resource descriptions'.format(len(successes)))
                     if len(failures) > 0:
                         _msg = u'Import failed for {} files:\n'.format(len(failures))
-                        for entry in failures:
-                            _msg += u'\t{}\n'.format(entry)
+                        for descriptor, exception in failures:
+                            _msg += u'\t{}: {}\n'.format(descriptor, ' '.join(exception.args))
                         messages.error(request, _msg)
-                    return HttpResponseRedirect(redirect_url)
-                
-#                # Extract the raw XML String and create an ElementTree for it.
-#                _xml_raw = ''
-#                for _chunk in description.chunks():
-#                    _xml_raw += _chunk
-#                
-#                # We can assume that this will work as the form validated.
-#                _xml_tree = fromstring(_xml_raw)
-#                
-#                # Try to import the created ElementTree into the Django DB.
-#                _factory = getattr(sys.modules['metashare.repo2.models'],
-#                  'resourceInfoType_model', None)
-#                
-#                if _factory is not None:
-#                    result = _factory.import_from_elementtree(_xml_tree)
-#                    
-#                    # If the import has failed, result[0] will be set to None.
-#                    if not result[0]:
-#                        _msg = u'An error occured for: {}'.format(
-#                          description.name)
-#                        
-#                        # Try to append the error message from result[2].
-#                        if len(result) > 2:
-#                            _msg += u' - {}'.format(result[2])
-#                        
-#                        # Generate an error message for the current user.
-#                        messages.error(request, _msg)
-#                    
-#                    else:
-#                        # The new resource object is available in result[0].
-#                        resource_object = result[0]
-#                        
-#                        # Add current user to list of owners for this object.
-#                        resource_object.owners.add(request.user.id)
-#                        resource_object.save()
-#                        
-#                        # Make sure that the new object is INTERNAL!
-#                        storage_object = resource_object.storage_object
-#                        storage_object.published = INTERNAL
-#                        storage_object.save()
-#                        
-#                        # Construct redirect URL for the new object.
-#                        redirect_url = reverse('editor:{}_{}_change'.format(
-#                          'repo2', 'resourceinfotype_model'),
-#                          args=[resource_object.id])
-#                        
-#                        # Create log ADDITION message for the new object.
-#                        LogEntry.objects.log_action(
-#                          user_id         = request.user.pk,
-#                          content_type_id = ContentType.objects.get_for_model(
-#                            resource_object).pk,
-#                          object_id       = resource_object.pk,
-#                          object_repr     = force_unicode(resource_object),
-#                          action_flag     = ADDITION
-#                        )
-#                        
-#                        _msg = u'Sucessfully uploaded file: {}'.format(
-#                          description.name)
-#                        messages.info(request, _msg)
-#                        return HttpResponseRedirect(redirect_url)
-
-        else:
+                return HttpResponseRedirect(redirect_url)
+        else: # not a POST request
             form = ResourceDescriptionUploadForm()
 
         context = {
@@ -167,8 +85,7 @@ class MetashareBackendSite(AdminSite):
           'root_path': self.root_path,
         }
         context.update(extra_context or {})
-        context_instance = template.RequestContext(request,
-          current_app=self.name)
+        context_instance = template.RequestContext(request, current_app=self.name)
         return render_to_response(
           ['admin/repo2/resourceinfotype_model/upload_description.html'],
           context, context_instance)
