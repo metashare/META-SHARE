@@ -139,7 +139,6 @@ class SchemaModel(models.Model):
 
         return ''
 
-
     # TODO: move to resourceInfoType_model class
     def resource_type(self):
         """
@@ -149,8 +148,6 @@ class SchemaModel(models.Model):
         if not resource_component:
             return None
         return resource_component.as_subclass()._meta.verbose_name
-        
-            
 
     @classmethod
     def get_many_to_many_fields(cls):
@@ -158,7 +155,6 @@ class SchemaModel(models.Model):
         Returns a list containing all ManyToManyField fields for this model.
         """
         return [field.name for field in cls._meta.local_many_to_many]
-
 
     @classmethod
     def get_fields_flat(cls, unique_values=True):
@@ -170,10 +166,9 @@ class SchemaModel(models.Model):
             if unique_values and _field in _fields:
                 continue
             _fields.append(_field)
-            
+
         return _fields
-    
-    
+
     @classmethod
     def get_fields(cls, unique_values=True):
         """
@@ -200,7 +195,6 @@ class SchemaModel(models.Model):
                 _fields['optional'].append(_field)
 
         return _fields
-
 
     @classmethod
     def get_field_sets(cls, unique_values=True):
@@ -229,8 +223,7 @@ class SchemaModel(models.Model):
                     _field_sets['optional'].append(_field)
 
         return _field_sets
-    
-    
+
     @classmethod
     def get_verbose_name(cls, fieldname):
         """
@@ -250,7 +243,6 @@ class SchemaModel(models.Model):
             if isinstance(remote, ForeignRelatedObjectsDescriptor):
                 return remote.related.model._meta.verbose_name
             return fieldname
-    
 
     @staticmethod
     def _python_to_xml(value):
@@ -314,9 +306,9 @@ class SchemaModel(models.Model):
         if self.__schema_name__ == "SUBCLASSABLE":
             # pylint: disable-msg=E1101
             return self.as_subclass().export_to_elementtree()
-        
+
         _root = Element(self.__schema_name__)
-        
+
         # Fix namespace attributes for the resourceInfo root element.
         if _root.tag == 'resourceInfo':
             _root.attrib['xmlns:ms'] = "http://www.ilsp.gr/META-XMLSchema"
@@ -378,15 +370,15 @@ class SchemaModel(models.Model):
                         _clazz_name = _clazz.__class__.__name__
                         _choice_name = None
                         _xsd_name = _xsd_field.split('/')[-1]
-                        
+
                         if _xsd_name in self.__schema_classes__.keys():
                             _choice_name = self.__schema_classes__[_xsd_name]
-                        
+
                         if _clazz_name != _choice_name:
                             LOGGER.debug(u'Skipping choice value {}'.format(
                               _xsd_name))
                             continue
-                        
+
                         # If this is the correct sub class type, copy _clazz
                         # to the _sub_value variable for further processing...
                         _sub_value = _clazz
@@ -420,7 +412,7 @@ class SchemaModel(models.Model):
                             _element = Element(_xsd_name)
                             _element.text = SchemaModel._python_to_xml(_sub_value.value)
                             _current_node.append(_element)
-                        
+
                         else:
                             _sub_value = _sub_value.export_to_elementtree()
 
@@ -558,7 +550,7 @@ class SchemaModel(models.Model):
             if obj.id:
                 try:
                     obj.delete()
-                
+
                 except ObjectDoesNotExist:
                     continue
 
@@ -697,11 +689,11 @@ class SchemaModel(models.Model):
                     _text = SchemaModel._xml_to_python(_value.text, _field)
                     LOGGER.debug(u'_value.tag: {}, _value.text: {}'.format(
                       _value.tag, _text))
-                    
+
                     # We skipt empty, simple-typed elements.
                     if not _text:
                         continue
-                    
+
                     if _value.tag in cls.__schema_classes__.keys():
                         LOGGER.debug(u'_schema_classes__[{}] = {}'.format(
                           _value.tag, cls.__schema_classes__[_value.tag]))
@@ -715,7 +707,7 @@ class SchemaModel(models.Model):
                             _instance.save()
                             _created.append(_instance)
                             _text = _instance
-                    
+
                     _values.append(_text)
 
                 # Otherwise, we have to handle the complex structure of value.
@@ -752,7 +744,7 @@ class SchemaModel(models.Model):
                       _value.tag))
                     _sub_result = _sub_cls.import_from_elementtree(_value,
                       _parent)
-                    
+
                     _sub_object = _sub_result[0]
                     _sub_created = _sub_result[1]
                     _sub_error = None
@@ -911,11 +903,11 @@ class SchemaModel(models.Model):
         Returns (None, []) in case of errors.
         """
         return cls.import_from_elementtree(fromstring(element_string), parent)
-    
+
     def get_unicode(self, field_spec, separator):
         field_path = re.split(r'/', field_spec)
         return self.get_unicode_rec_(field_path, separator)
-        
+
     def get_unicode_rec_(self, field_path, separator):
         field_spec = field_path[0]
         if len(field_path) == 1:
@@ -947,7 +939,7 @@ class SchemaModel(models.Model):
                   isinstance(model_field[0], models.BooleanField) or \
                   isinstance(model_field[0], models.IntegerField)):
                     return u'{}'.format(value)
-                
+
                 return u'*{}*'.format(value)
         else:
             for xsd_name, field_name , _not_used in self.__schema_fields__:
@@ -1006,7 +998,7 @@ class SchemaModel(models.Model):
             #sys.stdout.write('+')
             #print u'CACHED: {} -> >>{}<<'.format(cache_key, cached)
             pass
-        return cached            
+        return cached
     
     def save(self, force_insert=False, force_update=False, using=None):
         '''
@@ -1017,9 +1009,6 @@ class SchemaModel(models.Model):
         #print u'deleting {}_{}'.format(self.__schema_name__, self.id)
         cache.delete(cache_key)
 
-        
-            
-
 
 class SubclassableModel(SchemaModel):
     """
@@ -1029,7 +1018,7 @@ class SubclassableModel(SchemaModel):
     """
     def get_class_name(self):
         return self.__class__.__name__
-    
+
     def as_subclass(self):
         # pylint: disable-msg=E1101
         subclasses = self.__class__.__subclasses__()
@@ -1060,7 +1049,7 @@ class InvisibleStringModel(SchemaModel):
     __schema_name__ = 'STRINGMODEL'
 
     value = models.TextField()
-    
+
     def __unicode__(self):
         if not self.value:
             return u''
