@@ -88,11 +88,13 @@ class ResourceDescriptionUploadForm(forms.Form):
     """
     Form to upload a resource description into the Django database.
     """
-    description = forms.FileField(label="Resource Description",
-      help_text="You can upload a new resource description in XML format " \
-      "using this widget.", validators=[_validate_resource_description])
+    description = forms.FileField(label="Resource Description(s)",
+      help_text="You can upload a new resource description in XML format, " \
+      "or many resource descriptions in a ZIP file containing XML files. " \
+      "Please make sure the XML files are Schema-valid before proceeding.",
+      validators=[_validate_resource_description])
 
     uploadTerms = forms.BooleanField(label="Upload Terms",
       help_text="By clicking this checkbox, you confirm that you have " \
-      "cleared permissions for the description you intend to upload.")
+      "cleared permissions for the description(s) you intend to upload.")
 
