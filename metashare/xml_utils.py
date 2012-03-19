@@ -11,6 +11,9 @@ import logging
 from metashare.settings import LOG_LEVEL, LOG_HANDLER, XDIFF_LOCATION
 from metashare.stats.model_utils import saveLRStats, UPDATE_STAT
 from zipfile import is_zipfile, ZipFile
+from django.contrib.admin.models import LogEntry, ADDITION
+from django.contrib.contenttypes.models import ContentType
+from django.utils.encoding import force_unicode
 
 # Setup logging support.
 logging.basicConfig(level=LOG_LEVEL)
@@ -79,9 +82,20 @@ def import_from_string(xml_string, targetstatus, owner_id=None):
         
     resource.storage_object.save()
 
+    # Create log ADDITION message for the new object.
+    LogEntry.objects.log_action(
+        user_id         = owner_id,
+        content_type_id = ContentType.objects.get_for_model(resource).pk,
+        object_id       = resource.pk,
+        object_repr     = force_unicode(resource),
+        action_flag     = ADDITION
+    )
+
     # Update statistics
     saveLRStats("", resource.storage_object.identifier, "", UPDATE_STAT)
+
     return resource
+    
     
 def import_from_file(filehandle, descriptor, targetstatus, owner_id=None):
     """
