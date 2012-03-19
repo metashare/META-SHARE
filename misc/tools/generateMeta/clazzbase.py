@@ -417,8 +417,6 @@ class Clazz(object):
             child_clazz = cls.ClazzDict[data_type]
             return isinstance(child_clazz.backreference, ClazzBaseMember)
 
-
-
     @classmethod
     def establish_one_to_many(cls):
         for clazz in cls.ClazzDict.values():
@@ -476,17 +474,18 @@ class Clazz(object):
     def is_empty(self):
         return not self.members
 
-
-    """ This method will generate all the anonymous choice types,
+    def collect_data(self):
+        """
+        This method will generate all the anonymous choice types,
         as well as compute the __schema_XXX__ fields of Christian
 
-        Furthermore, it collects information which types depend on others either
-        because:
+        Furthermore, it collects information which types depend on others
+        either because:
         - a member of self points to another type
         - self has a back reference and depends on the "parent" type
         - self is a choice type (depends on the choice types)
-    """
-    def collect_data(self):
+        
+        """
         class_name = self.name
 
         # Luckily, back references are not a dependency, only schema_classes!
@@ -496,10 +495,6 @@ class Clazz(object):
         #    back_clazz = self.ClazzDict[data_type]
         #    back_clazz.dependants.append(self)
 
-        # cfedermann: multi_id is NOT used within collect_data(), remove!
-        #
-        #multi_id = 0
-
         for member in self.members:
             name = member.get_generated_name()
             data_type = member.get_generated_type(member.get_data_type())
@@ -508,12 +503,13 @@ class Clazz(object):
                     if self.ClazzDict.has_key(data_type):
                         choice_type = self.ClazzDict[data_type]
                         self.choice_of.append((member.name, choice_type))
-                        # self must be defined before choice_type since it's is
-                        # superclass
+                        # self must be defined before choice_type since it's
+                        # its superclass
                         if not choice_type in self.dependants:
                             self.dependants.append(choice_type)
                         if choice_type.choice_parent:
-                            logging.error('Element used twice in choice: {}'.format(data_type))
+                            logging.error('Element used twice in choice: ' \
+                              '{}'.format(data_type))
                         else:
                             choice_type.choice_parent = self
 
@@ -526,8 +522,8 @@ class Clazz(object):
                     continue
                 else:
                     if self.choice_of:
-                        logging.warn('Mixture of choice and non-choice members: {}'
-                          .format(name))
+                        logging.warn('Mixture of choice and non-choice ' \
+                          'members: {}'.format(name))
             else:
                 #print(member.child)
                 pass
@@ -558,17 +554,11 @@ class Clazz(object):
                         
                         _choice_values.append(_line)
                         
-                        self.embedded_enums.append('\n{}_{}_CHOICES = _make_choices_from_list([\n{}\n])\n' \
-                          .format(_choice_name, name.upper(), '\n'.join(_choice_values)))
+                        self.embedded_enums.append('\n{}_{}_CHOICES = ' \
+                          '_make_choices_from_list([\n{}\n])\n'.format(
+                            _choice_name, name.upper(),
+                            '\n'.join(_choice_values)))
 
-                    # cfedermann: this block is unused, remove later!
-                    #
-                    #if not member.is_unbounded():
-                    #    # Simple Text Field
-                    #    pass
-                    #else:
-                    #    # MultiTextField
-                    #    multi_id = multi_id + 1
                 else:
                     logging.warn('Unhandled simple type: %s %s\n' % (
                         name, data_type, ))
@@ -634,8 +624,8 @@ class Clazz(object):
                   .format(_choice_name, name.upper(), member.get_values())
                 maxlen = member.get_maxlength()
                 if maxlen:
-                    logging.warn("max_length overwritten for choice of strings: {}"\
-                        .format(member))
+                    logging.warn("max_length overwritten for choice of ' \
+                      'strings: {}".format(member))
                     choice_options = \
                       CHOICES_TEMPLATE_MAXLEN.format(choice_name, maxlen)
                 else:
@@ -667,9 +657,6 @@ class Clazz(object):
             logging.warn('Unhandled simple type: {} {}\n'.format(name, data_type))
         return multi_id
 
-
-    # currently mostly inactivated because of
-    # cfedermann: MultiMyStringField patch
     def generate_myString_member(self, member, name, multi_id, options):
         help_string = member.child.getHelpText()
         if help_string:
@@ -679,33 +666,11 @@ class Clazz(object):
         if not member.is_required():
             options += 'blank=True'
 
-        # cfedermann: MultiMyStringField patch
         self.wrtmodels(
           '    %s = MultiTextField(widget = MultiFieldWidget(widget_id=%d), %s)\n' % (
             name, multi_id, options, ))
         multi_id += 1
         return multi_id
-
-        # cfedermann: this block is unused, remove later()
-        #
-        # TODO: add options like max_length and widget (with widget id?)
-        #if not member.is_required():
-        #    options += 'blank=True, '
-        #
-        #if member.is_unbounded():
-        #    self.wrtmodels('    %s = MultiMyStringField(%s)\n' % (
-        #            name, options, ))
-        #    self.wrtforms(
-        #        '    %s = MultipleMyStringField(%s)### TODO: FIX_ME\n' % (
-        #            name, options, ))
-        #else:
-        #    self.wrtmodels(
-        #        '    %s = MyStringField(%s)\n' % (
-        #            name, options, ))
-        #    self.wrtforms(
-        #        '    %s = MyStringField(%s)### TODO: FIX_ME\n' % (
-        #            name, options, ))
-
 
     def generate_complex_member(self, member, name, data_type, options):
         help_string = member.child.getHelpText()
@@ -753,12 +718,13 @@ class Clazz(object):
                 self.wrtmodels('    # OneToMany field: {0}\n'.format(name))
                 self.wrtforms('    # OneToMany field: {0}\n'.format(name))
 
-    """
-    Generate a backreference (inverse one-to-many pointer)
-
-    This only generates a back reference if it's in this Clazz object
-    """
     def generate_backref_member(self):
+        """
+        Generate a backreference (inverse one-to-many pointer)
+
+        This only generates a back reference if it's in this Clazz object.
+        
+        """
         # treat a one-to-many relation as reverse foreign key
         if isinstance(self.backreference, ClazzBaseMember):
             member = self.backreference
@@ -801,13 +767,13 @@ class Clazz(object):
             self.wrtmodels(UNICODE_METHOD_TEMPLATE.format(formatstring,
               formatargs))
 
-
-    """
-    Generate a model for the given choice class
-
-    choices is a list of the choice classes that this class represents
-    """
     def generate_choice_model_(self):
+        """
+        Generate a model for the given choice class
+
+        choices is a list of the choice classes that this class represents.
+        
+        """
         verbose_name = self.schema_element.getAppInfo("label")
         if not verbose_name:
             verbose_name = getVerboseName(self.name)
@@ -817,34 +783,12 @@ class Clazz(object):
         
         self.wrtforms('\nclass %s_form(forms.Form):\n' % (self.name, ))
 
-#        if False: # Solution 2: difficult for im-/export, to delete later
-#            self.wrtmodels('    __schema_fields__ = (\n')
-#            for choice in self.choice_of:
-#                if isinstance(choice, Clazz):
-#                    name = choice[1].name
-#                else:
-#                    name = '{}'.format(choice[1])
-#                self.wrtmodels('      ( {!r}, None, OPTIONAL ),\n'.format(name))
-#            self.wrtmodels('    )\n\n')
-#            self.wrtmodels("    __schema_classes__ = {\n")
-#            for choice in self.choice_of:
-#                if isinstance(choice, Clazz):
-#                    name = choice.name
-#                else:
-#                    name = '{!r}'.format(choice)
-#                self.wrtmodels('      {!r}: "{}_model",\n'.format(choice[0], name))
-#            self.wrtmodels('    }\n')
-#            self.wrtmodels('\n    class Meta:\n        abstract = True\n\n')
-
         self.generate_backref_member()
-        #self.generate_unicode_method() needs a special unicode method
-        #self.wrtmodels(UNICODE_CHOICE_TYPE_TEMPLATE)
-    # end generate_choice_model_
 
-    """
-    Generate a model for the given clazz self
-    """
     def generate_model_(self):
+        """
+        Generate a model for the given clazz self
+        """
         for enum in self.embedded_enums:
             self.wrtmodels(enum)
 
@@ -930,16 +874,6 @@ class Clazz(object):
                   data_type))
             self.wrtmodels('    }\n')
 
-        # cfedermann: this block is unused, remove later!
-        #
-        # shadow members, one-to-many relations represented by pointing
-        # backwards from child
-        #if schema_data[2]:
-        #    self.wrtmodels("    __shadow_classes__ = {\n")
-        #    for key, value in schema_data[2].items():
-        #        self.wrtmodels('      {!r}: {}_model,\n'.format(key, value))
-        #    self.wrtmodels('    }\n')
-
         self.wrtmodels('\n')
 
         # cfedermann: is this block EVER reached? If not, remove it!
@@ -1009,7 +943,6 @@ class Clazz(object):
                 cls.topo_sort_rec(clazz, result)
         result.reverse()
         return result
-
 
     @classmethod
     def generate(cls, prefix, root, package_prefix):
@@ -1122,7 +1055,6 @@ class Clazz(object):
         print 'Wrote %d lines to admin.py' % (admin_writer.get_count(), )
 
 
-
 class ClazzBaseMember(object):
     def get_name(self):
         return self.name
@@ -1164,6 +1096,7 @@ class ClazzBaseMember(object):
         if isinstance(self.child, XschemaElement):
             return self.child.getAppInfo('maxlen')
         return None
+
 
 class ClazzAttributeMember(ClazzBaseMember):
     def __init__(self, source_clazz, name, child):
@@ -1238,7 +1171,4 @@ class ClazzMember(ClazzBaseMember):
     def __str__(self):
         return "{}->{}->{}".format(self.source.name, self.name,
           self.get_data_type())
-
-
-
 
