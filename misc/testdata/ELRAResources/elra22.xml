@@ -55,7 +55,7 @@
 </licenceInfo>
 </distributionInfo>
 <validationInfo>
-<validated>true</validated>
+<validated>True</validated>
 <validationModeDetails>SpeechDat(E) This speech database was validated by SPEX (the Netherlands) to assess its compliance with the SpeechDat(E) format and content specifications.</validationModeDetails>
 </validationInfo>
 <usageInfo>
