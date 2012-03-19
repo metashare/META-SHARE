@@ -15,6 +15,12 @@ from django.utils.translation import ugettext_lazy as _
 
 from metashare.repo2.editor.widgets import TextInputWithLanguageAttribute
 
+# NOTE: Custom fields for Django are described in the Django docs:
+# - https://docs.djangoproject.com/en/dev/howto/custom-model-fields/
+#
+# At least basic understanding of the linked docs is required to understand
+# the custom field code in this file.  Make sure to consult the docs or the
+# related Django code inside django.db.models.fields in case of problems.
 
 # TODO: create MultiTextFieldWithLanguageAttribute...
 
