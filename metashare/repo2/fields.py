@@ -11,6 +11,7 @@ except:
 
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils.encoding import force_unicode
 from django.utils.text import capfirst
 from django.utils.translation import ugettext_lazy as _
 
@@ -338,3 +339,19 @@ class MultiSelectField(models.Field):
 
         # Finally, we return the list of selected choice values.
         return values
+
+    def _get_display(field):
+        def _inner(self):
+            values = getattr(self, field.attname)
+            return ', '.join([force_unicode(
+                field.choices_dict.get(value, value),
+                strings_only=True
+            ) for value in values])
+        return _inner
+
+    def contribute_to_class(self, cls, name):
+        self.set_attributes_from_name(name)
+        self.model = cls
+        cls._meta.add_field(self)
+        self.choices_dict = dict(self.choices)
+        setattr(cls, 'get_%s_display' % self.name, self._get_display())
