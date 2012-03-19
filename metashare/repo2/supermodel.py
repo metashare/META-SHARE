@@ -902,6 +902,20 @@ class SchemaModel(models.Model):
         # we return a tuple containing a reference to the object and the list
         # of related object instances that have been created during import.
         return (_object, set(_created))
+
+    @classmethod
+    def import_from_string(cls, element_string, parent=None):
+        """
+        Imports the given string representation of an XML element tree
+        into an instance of type cls.
+
+        Returns a tuple containing a reference to the created object instance
+        as first value and the list of all objects that have been created when
+        import the given XML ElementTree as second value.
+
+        Returns (None, []) in case of errors.
+        """
+        return cls.import_from_elementtree(fromstring(element_string), parent)
     
     def get_unicode(self, field_spec, separator):
         field_path = re.split(r'/', field_spec)

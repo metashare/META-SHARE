@@ -20,18 +20,35 @@ class ImportTest(TestCase):
         """
         resourceInfoType_model.objects.all().delete()
     
-    def testImportELRA(self):      
-        """
-        run tests on ELRA resources
-        """
-        _path = '{0}/../misc/testdata/ELRAResources/'.format(ROOT_PATH)
-        
-        _files = os.listdir(_path)
-        for _file in _files:
-            _currfile =  "%s%s" % (_path, _file)
-            _result = test_utils.import_xml(_currfile)            
-            self.assertNotEqual(_result[:2], (None, []))
+    if False:
+        def testImportELRA(self):      
+            """
+            run tests on ELRA resources
+            """
+            _path = '{0}/../misc/testdata/ELRAResources/'.format(ROOT_PATH)
             
+            _files = os.listdir(_path)
+            for _file in _files:
+                _currfile =  "%s%s" % (_path, _file)
+                successes, failures = test_utils.import_xml_or_zip(_currfile)
+                self.assertEqual(1, len(successes), 'Could not import file {}'.format(_currfile))
+                self.assertEqual(0, len(failures), 'Could not import file {}'.format(_currfile))
+            
+    def test_import_xml(self):
+        _currfile = '{}/repo2/fixtures/testfixture.xml'.format(ROOT_PATH)
+        successes, failures = test_utils.import_xml_or_zip(_currfile)
+        self.assertEqual(1, len(successes), 'Could not import file {}'.format(_currfile))
+        self.assertEqual(0, len(failures), 'Could not import file {}'.format(_currfile))
+
+    def test_broken_xml(self):
+        _currfile = '{}/repo2/fixtures/broken.xml'.format(ROOT_PATH)
+        successes, failures = test_utils.import_xml_or_zip(_currfile)
+        self.assertEqual(0, len(successes), 'Should not have been able to import file {}'.format(_currfile))
+        self.assertEqual(1, len(failures), 'Should not have been able to import file {}'.format(_currfile))
         
-        
-        
+    def test_import_zip(self):
+        _currfile = '{}/repo2/fixtures/tworesources.zip'.format(ROOT_PATH)
+        successes, failures = test_utils.import_xml_or_zip(_currfile)
+        self.assertEqual(2, len(successes), 'Could not import file {}'.format(_currfile))
+        self.assertEqual(0, len(failures), 'Could not import file {}'.format(_currfile))
+    
