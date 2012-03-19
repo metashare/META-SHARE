@@ -67,6 +67,8 @@ def import_from_string(xml_string, targetstatus, owner_id=None):
     from metashare.repo2.models import resourceInfoType_model
     result = resourceInfoType_model.import_from_string(xml_string)
     
+    print "************************************* import result: {}".format(result)
+    
     if not result[0]:
         msg = u'could not import XML string: "{}"'.format(xml_string)
         if len(result) > 2:
@@ -82,14 +84,15 @@ def import_from_string(xml_string, targetstatus, owner_id=None):
         
     resource.storage_object.save()
 
-    # Create log ADDITION message for the new object.
-    LogEntry.objects.log_action(
-        user_id         = owner_id,
-        content_type_id = ContentType.objects.get_for_model(resource).pk,
-        object_id       = resource.pk,
-        object_repr     = force_unicode(resource),
-        action_flag     = ADDITION
-    )
+    # Create log ADDITION message for the new object, but only if we have a user:
+    if owner_id:
+        LogEntry.objects.log_action(
+            user_id         = owner_id,
+            content_type_id = ContentType.objects.get_for_model(resource).pk,
+            object_id       = resource.pk,
+            object_repr     = force_unicode(resource),
+            action_flag     = ADDITION
+        )
 
     # Update statistics
     saveLRStats("", resource.storage_object.identifier, "", UPDATE_STAT)
@@ -125,7 +128,8 @@ def import_from_file(filehandle, descriptor, targetstatus, owner_id=None):
             resource = import_from_string(xml_string, targetstatus, owner_id)
             imported_resources.append(resource)
         except:
-            erroneous_descriptors.append(descriptor)
+            problem = sys.exc_info()[0]
+            erroneous_descriptors.append((descriptor, problem))
     
     else:
         temp_zip = ZipFile(filehandle)
