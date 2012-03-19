@@ -1,9 +1,134 @@
-<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema E:/kperi/tests/schemaTransform/v2.0/META-SHARE-Resource.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema"><identificationInfo><resourceName>Estonian-Latvian dictionary</resourceName>
-<description>The bilingual online Estonian-Latvian dictionary is based on Karl’s Aben’s Estonian-Latvian dictionary published in 1967. The initial disctionary has been revised by Andra Kalnača, Ērika Krautmane, Jana Šteinberga-Ranki and Urve Aivare. During revision obsolote words were removed and about 2000 new lexical entries and 1000 terminology entries were added.</description>
-<resourceShortName>n/a</resourceShortName><url>http://eesti.letonika.lv</url><metaShareId>75b556d76bde469d880b99af93e25288</metaShareId><identifier>75b556d76bde469d880b99af93e25288</identifier></identificationInfo>
-
-
-
-<distributionInfo><availability>available-restrictedUse</availability><licenceInfo><licence>proprietary</licence><restrictionsOfUse>other</restrictionsOfUse><distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium><executionLocation>http://eesti.letonika.lv</executionLocation></licenceInfo><iprHolder><personInfo>
-<surname>n/a</surname>
-<communicationInfo><email>tilde@tilde.lv</email></communicationInfo><affiliation><organizationName>Tilde</organizationName><communicationInfo><email>tilde@tilde.lv</email></communicationInfo></affiliation></personInfo></iprHolder><iprHolder><organizationInfo><organizationName>Tilde</organizationName><communicationInfo><email>tilde@tilde.lv</email></communicationInfo></organizationInfo></iprHolder><iprHolder><organizationInfo><organizationName>Tilde</organizationName><communicationInfo><email>tilde@tilde.lv</email></communicationInfo></organizationInfo></iprHolder></distributionInfo><contactPerson><surname>Rozis</surname><givenName>Roberts</givenName><communicationInfo><email>roberts.rozis@tilde.lv</email></communicationInfo><affiliation><organizationName>Tilde</organizationName><communicationInfo><email>tilde@tilde.lv</email></communicationInfo></affiliation></contactPerson><contactPerson><surname>Anita</surname><givenName>Vasiļjeva</givenName><communicationInfo><email>anita.vasiljeva@tilde.lv</email></communicationInfo><affiliation><organizationName>Tilde</organizationName><communicationInfo><email>tilde@tilde.lv</email></communicationInfo></affiliation></contactPerson><metadataInfo><metadataCreationDate>2011-11-30</metadataCreationDate><metadataCreator><surname>Skadiņa</surname><givenName>Inguna</givenName><communicationInfo><email>inguna.skadina@tilde.lv</email></communicationInfo><affiliation><organizationName>Tilde</organizationName><communicationInfo><email>inguna.skadina@tilde.lv</email></communicationInfo></affiliation></metadataCreator><source>META-NORD</source><metadataLastDateUpdated>2012-01-01</metadataLastDateUpdated></metadataInfo><validationInfo><validated>False</validated><validationType>content</validationType><validationMode>manual</validationMode></validationInfo><usageInfo></usageInfo><resourceComponentType><lexicalConceptualResourceInfo><resourceType>lexicalConceptualResource</resourceType><lexicalConceptualResourceType>computationalLexicon</lexicalConceptualResourceType><creationInfo><creationMode>mixed</creationMode></creationInfo><lexicalConceptualResourceMediaType><lexicalConceptualResourceTextInfo><mediaType>text</mediaType><lingualityInfo><lingualityType>bilingual</lingualityType></lingualityInfo><languageInfo><languageId>n/a</languageId><languageName>Estonian</languageName></languageInfo><languageInfo><languageId>n/a</languageId><languageName>Latvian</languageName></languageInfo><sizeInfo><size>26000</size><sizeUnit>entries</sizeUnit></sizeInfo><characterEncodingInfo><characterEncoding>UTF-8</characterEncoding></characterEncodingInfo><domainInfo><domain>general</domain></domainInfo></lexicalConceptualResourceTextInfo></lexicalConceptualResourceMediaType></lexicalConceptualResourceInfo></resourceComponentType></resourceInfo>
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema E:/kperi/tests/schemaTransform/v2.0/META-SHARE-Resource.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+	<identificationInfo>
+		<resourceName>Estonian-Latvian dictionary</resourceName>
+		<description>The bilingual online Estonian-Latvian dictionary is based on Karl’s Aben’s Estonian-Latvian dictionary published in 1967. The initial disctionary has been revised by Andra Kalnača, Ērika Krautmane, Jana Šteinberga-Ranki and Urve Aivare. During revision obsolote words were removed and about 2000 new lexical entries and 1000 terminology entries were added.</description>
+		<resourceShortName>n/a</resourceShortName>
+		<url>http://eesti.letonika.lv</url>
+		<metaShareId>75b556d76bde469d880b99af93e25288</metaShareId>
+		<identifier>75b556d76bde469d880b99af93e25288</identifier>
+	</identificationInfo>
+	<distributionInfo>
+		<availability>available-restrictedUse</availability>
+		<licenceInfo>
+			<licence>proprietary</licence>
+			<restrictionsOfUse>other</restrictionsOfUse>
+			<distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
+			<executionLocation>http://eesti.letonika.lv</executionLocation>
+		</licenceInfo>
+		<iprHolder>
+			<personInfo>
+				<surname>n/a</surname>
+				<communicationInfo>
+					<email>tilde@tilde.lv</email>
+				</communicationInfo>
+				<affiliation>
+					<organizationName>Tilde</organizationName>
+					<communicationInfo>
+						<email>tilde@tilde.lv</email>
+					</communicationInfo>
+				</affiliation>
+			</personInfo>
+		</iprHolder>
+		<iprHolder>
+			<organizationInfo>
+				<organizationName>Tilde</organizationName>
+				<communicationInfo>
+					<email>tilde@tilde.lv</email>
+				</communicationInfo>
+			</organizationInfo>
+		</iprHolder>
+		<iprHolder>
+			<organizationInfo>
+				<organizationName>Tilde</organizationName>
+				<communicationInfo>
+					<email>tilde@tilde.lv</email>
+				</communicationInfo>
+			</organizationInfo>
+		</iprHolder>
+	</distributionInfo>
+	<contactPerson>
+		<surname>Rozis</surname>
+		<givenName>Roberts</givenName>
+		<communicationInfo>
+			<email>roberts.rozis@tilde.lv</email>
+		</communicationInfo>
+		<affiliation>
+			<organizationName>Tilde</organizationName>
+			<communicationInfo>
+				<email>tilde@tilde.lv</email>
+			</communicationInfo>
+		</affiliation>
+	</contactPerson>
+	<contactPerson>
+		<surname>Anita</surname>
+		<givenName>Vasiļjeva</givenName>
+		<communicationInfo>
+			<email>anita.vasiljeva@tilde.lv</email>
+		</communicationInfo>
+		<affiliation>
+			<organizationName>Tilde</organizationName>
+			<communicationInfo>
+				<email>tilde@tilde.lv</email>
+			</communicationInfo>
+		</affiliation>
+	</contactPerson>
+	<metadataInfo>
+		<metadataCreationDate>2011-11-30</metadataCreationDate>
+		<metadataCreator>
+			<surname>Skadiņa</surname>
+			<givenName>Inguna</givenName>
+			<communicationInfo>
+				<email>inguna.skadina@tilde.lv</email>
+			</communicationInfo>
+			<affiliation>
+				<organizationName>Tilde</organizationName>
+				<communicationInfo>
+					<email>inguna.skadina@tilde.lv</email>
+				</communicationInfo>
+			</affiliation>
+		</metadataCreator>
+		<source>META-NORD</source>
+		<metadataLastDateUpdated>2012-01-01</metadataLastDateUpdated>
+	</metadataInfo>
+	<validationInfo>
+		<validated>False</validated>
+		<validationType>content</validationType>
+		<validationMode>manual</validationMode>
+	</validationInfo>
+	<usageInfo/>
+	<resourceComponentType>
+		<lexicalConceptualResourceInfo>
+			<resourceType>lexicalConceptualResource</resourceType>
+			<lexicalConceptualResourceType>computationalLexicon</lexicalConceptualResourceType>
+			<creationInfo>
+				<creationMode>mixed</creationMode>
+			</creationInfo>
+			<lexicalConceptualResourceMediaType>
+				<lexicalConceptualResourceTextInfo>
+					<mediaType>text</mediaType>
+					<lingualityInfo>
+						<lingualityType>bilingual</lingualityType>
+					</lingualityInfo>
+					<languageInfo>
+						<languageId>n/a</languageId>
+						<languageName>Estonian</languageName>
+					</languageInfo>
+					<languageInfo>
+						<languageId>n/a</languageId>
+						<languageName>Latvian</languageName>
+					</languageInfo>
+					<sizeInfo>
+						<size>26000</size>
+						<sizeUnit>entries</sizeUnit>
+					</sizeInfo>
+					<characterEncodingInfo>
+						<characterEncoding>UTF-8</characterEncoding>
+					</characterEncodingInfo>
+					<domainInfo>
+						<domain>general</domain>
+					</domainInfo>
+				</lexicalConceptualResourceTextInfo>
+			</lexicalConceptualResourceMediaType>
+		</lexicalConceptualResourceInfo>
+	</resourceComponentType>
+</resourceInfo>

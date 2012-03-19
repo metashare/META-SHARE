@@ -1,6 +1,7 @@
-<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema E:/kperi/tests/schemaTransform/v2.0/META-SHARE-Resource.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema"><identificationInfo><resourceName>WordNet web service</resourceName>
-
-<description>The Bulgarian WordNet is a network of lexical-semantic relations, an electronic thesaurus with a structure modelled on that of the Princeton WordNet and those constructed in the EuroWordNet and BlakaNet project. 
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema E:/kperi/tests/schemaTransform/v2.0/META-SHARE-Resource.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+	<identificationInfo>
+		<resourceName>WordNet web service</resourceName>
+		<description>The Bulgarian WordNet is a network of lexical-semantic relations, an electronic thesaurus with a structure modelled on that of the Princeton WordNet and those constructed in the EuroWordNet and BlakaNet project. 
 		
 Wordnet service is an online service that gives the users access to a subset of the Bulgarian wordnet (BulNet), containing over 1200 synonym sets (synsets) from the so called Base Consepts sunset 1 and to the entire database of the Princeton Wordnet (PWN).
 
@@ -15,17 +16,114 @@ pass: bulnet
 The two sorts of queries support nonobligatory parameter (format) showing the type of the result. If the value of the format is json, the result is coded as json, otherwise it is not coded.
 
 Users can search for synonyms, hypernyms, antonyms, and translation equivalents of different words and lemmas in the following language pairs: English-English, English-Bulgarian, Bulgarian-English, and Bulgarian-Bulgarian.</description>
-
-<resourceShortName>WordNetWeb</resourceShortName><url>http://dcl.bas.bg/BulNet/general_en.html</url><metaShareId>n/a</metaShareId><identifier></identifier></identificationInfo>
-
-<distributionInfo><availability>available-restrictedUse</availability><licenceInfo><licence>other</licence><restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse><distributionAccessMedium>webExecutable</distributionAccessMedium><executionLocation>http://dcl.bas.bg/wn/?cmd=query&amp;query=word('дума’)</executionLocation>
-</licenceInfo><iprHolder><organizationInfo><organizationName>Institute for Bulgarian Language</organizationName><organizationShortName>IBL</organizationShortName><departmentName>Department of Computational Linguistics</departmentName><communicationInfo><email>bulnet@dcl.bas.bg</email><url>http://dcl.bas.bg</url><address>52 Shipchenski prohod Blvd., Bl. 17</address><zipCode>1113</zipCode><city>Sofia</city><country>Bulgaria</country><telephoneNumber>+35 92 97 92 969</telephoneNumber></communicationInfo></organizationInfo></iprHolder>
-<availabilityStartDate>2011-11-20</availabilityStartDate>
-</distributionInfo><contactPerson><surname>Koeva</surname><givenName>Svetla</givenName><communicationInfo><email>svetla@dcl.bas.bg</email><url>http://dcl.bas.bg/PersonalPages/svetla/svetla.html</url><address>52 Shipchenski prohod Blvd., Bl. 17</address><zipCode>1113</zipCode><city>Sofia</city><country>Bulgaria</country><telephoneNumber>+35 92 97 92 969</telephoneNumber><faxNumber>+35 92 87 22 302</faxNumber></communicationInfo><position>professor</position></contactPerson><metadataInfo><metadataCreationDate>2011-11-20</metadataCreationDate></metadataInfo><versionInfo><version>1.0</version><lastDateUpdated>2011-11-20</lastDateUpdated></versionInfo><validationInfo><validated>True</validated></validationInfo><usageInfo>
-<foreseenUseInfo>
-	
-	<foreseenUse>nlpApplications</foreseenUse>
-	
-</foreseenUseInfo>
-
-<actualUseInfo><actualUse>humanUse</actualUse></actualUseInfo></usageInfo><resourceCreationInfo><fundingProject><projectName>BalkaNet</projectName><fundingType>euFunds</fundingType></fundingProject><fundingProject><projectName>BulNet - А Lexical-Semantic Network of Bulgarian</projectName><fundingType>nationalFunds</fundingType></fundingProject><fundingProject><projectName>Central and South-East European Resources</projectName><fundingType>euFunds</fundingType></fundingProject><creationStartDate>2001-09-01</creationStartDate></resourceCreationInfo><resourceComponentType><toolServiceInfo><resourceType>toolService</resourceType><toolServiceType>service</toolServiceType><languageDependent>False</languageDependent><inputInfo><mediaType>text</mediaType></inputInfo><outputInfo><mediaType>text</mediaType></outputInfo><toolServiceOperationInfo><operatingSystem>os-independent</operatingSystem></toolServiceOperationInfo><toolServiceEvaluationInfo><evaluated>True</evaluated><evaluationLevel>diagnostic</evaluationLevel><evaluator><personInfo><surname>Rizov</surname><givenName>Borislav</givenName><communicationInfo><email>boby@dcl.bas.bg</email><url>http://dcl.bas.bg/en/people_en/boby.html</url></communicationInfo><position>Assistant</position></personInfo></evaluator></toolServiceEvaluationInfo></toolServiceInfo></resourceComponentType></resourceInfo>
+		<resourceShortName>WordNetWeb</resourceShortName>
+		<url>http://dcl.bas.bg/BulNet/general_en.html</url>
+		<metaShareId>n/a</metaShareId>
+		<identifier/>
+	</identificationInfo>
+	<distributionInfo>
+		<availability>available-restrictedUse</availability>
+		<licenceInfo>
+			<licence>other</licence>
+			<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+			<distributionAccessMedium>webExecutable</distributionAccessMedium>
+			<executionLocation>http://dcl.bas.bg/wn/?cmd=query&amp;query=word('дума’)</executionLocation>
+		</licenceInfo>
+		<iprHolder>
+			<organizationInfo>
+				<organizationName>Institute for Bulgarian Language</organizationName>
+				<organizationShortName>IBL</organizationShortName>
+				<departmentName>Department of Computational Linguistics</departmentName>
+				<communicationInfo>
+					<email>bulnet@dcl.bas.bg</email>
+					<url>http://dcl.bas.bg</url>
+					<address>52 Shipchenski prohod Blvd., Bl. 17</address>
+					<zipCode>1113</zipCode>
+					<city>Sofia</city>
+					<country>Bulgaria</country>
+					<telephoneNumber>+35 92 97 92 969</telephoneNumber>
+				</communicationInfo>
+			</organizationInfo>
+		</iprHolder>
+		<availabilityStartDate>2011-11-20</availabilityStartDate>
+	</distributionInfo>
+	<contactPerson>
+		<surname>Koeva</surname>
+		<givenName>Svetla</givenName>
+		<communicationInfo>
+			<email>svetla@dcl.bas.bg</email>
+			<url>http://dcl.bas.bg/PersonalPages/svetla/svetla.html</url>
+			<address>52 Shipchenski prohod Blvd., Bl. 17</address>
+			<zipCode>1113</zipCode>
+			<city>Sofia</city>
+			<country>Bulgaria</country>
+			<telephoneNumber>+35 92 97 92 969</telephoneNumber>
+			<faxNumber>+35 92 87 22 302</faxNumber>
+		</communicationInfo>
+		<position>professor</position>
+	</contactPerson>
+	<metadataInfo>
+		<metadataCreationDate>2011-11-20</metadataCreationDate>
+	</metadataInfo>
+	<versionInfo>
+		<version>1.0</version>
+		<lastDateUpdated>2011-11-20</lastDateUpdated>
+	</versionInfo>
+	<validationInfo>
+		<validated>True</validated>
+	</validationInfo>
+	<usageInfo>
+		<foreseenUseInfo>
+			<foreseenUse>nlpApplications</foreseenUse>
+		</foreseenUseInfo>
+		<actualUseInfo>
+			<actualUse>humanUse</actualUse>
+		</actualUseInfo>
+	</usageInfo>
+	<resourceCreationInfo>
+		<fundingProject>
+			<projectName>BalkaNet</projectName>
+			<fundingType>euFunds</fundingType>
+		</fundingProject>
+		<fundingProject>
+			<projectName>BulNet - А Lexical-Semantic Network of Bulgarian</projectName>
+			<fundingType>nationalFunds</fundingType>
+		</fundingProject>
+		<fundingProject>
+			<projectName>Central and South-East European Resources</projectName>
+			<fundingType>euFunds</fundingType>
+		</fundingProject>
+		<creationStartDate>2001-09-01</creationStartDate>
+	</resourceCreationInfo>
+	<resourceComponentType>
+		<toolServiceInfo>
+			<resourceType>toolService</resourceType>
+			<toolServiceType>service</toolServiceType>
+			<languageDependent>False</languageDependent>
+			<inputInfo>
+				<mediaType>text</mediaType>
+			</inputInfo>
+			<outputInfo>
+				<mediaType>text</mediaType>
+			</outputInfo>
+			<toolServiceOperationInfo>
+				<operatingSystem>os-independent</operatingSystem>
+			</toolServiceOperationInfo>
+			<toolServiceEvaluationInfo>
+				<evaluated>True</evaluated>
+				<evaluationLevel>diagnostic</evaluationLevel>
+				<evaluator>
+					<personInfo>
+						<surname>Rizov</surname>
+						<givenName>Borislav</givenName>
+						<communicationInfo>
+							<email>boby@dcl.bas.bg</email>
+							<url>http://dcl.bas.bg/en/people_en/boby.html</url>
+						</communicationInfo>
+						<position>Assistant</position>
+					</personInfo>
+				</evaluator>
+			</toolServiceEvaluationInfo>
+		</toolServiceInfo>
+	</resourceComponentType>
+</resourceInfo>
