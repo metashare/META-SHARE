@@ -37,8 +37,8 @@ class ImportTest(TestCase):
     def test_import_xml(self):
         _currfile = '{}/repo2/fixtures/testfixture.xml'.format(ROOT_PATH)
         successes, failures = test_utils.import_xml_or_zip(_currfile)
-        self.assertEqual(1, len(successes), 'Could not import file {}'.format(_currfile))
-        self.assertEqual(0, len(failures), 'Could not import file {}'.format(_currfile))
+        self.assertEqual(1, len(successes), 'Could not import file {} -- successes is {}, failures is {}'.format(_currfile, successes, failures))
+        self.assertEqual(0, len(failures), 'Could not import file {} -- successes is {}, failures is {}'.format(_currfile, successes, failures))
 
     def test_broken_xml(self):
         _currfile = '{}/repo2/fixtures/broken.xml'.format(ROOT_PATH)
@@ -51,4 +51,11 @@ class ImportTest(TestCase):
         successes, failures = test_utils.import_xml_or_zip(_currfile)
         self.assertEqual(2, len(successes), 'Could not import file {}'.format(_currfile))
         self.assertEqual(0, len(failures), 'Could not import file {}'.format(_currfile))
+
+    def test_import_broken_zip(self):
+        _currfile = '{}/repo2/fixtures/onegood_onebroken.zip'.format(ROOT_PATH)
+        successes, failures = test_utils.import_xml_or_zip(_currfile)
+        self.assertEqual(1, len(successes), 'Could not import file {} -- successes is {}, failures is {}'.format(_currfile, successes, failures))
+        self.assertEqual(1, len(failures), 'Could not import file {} -- successes is {}, failures is {}'.format(_currfile, successes, failures))
+        self.assertEquals('broken.xml', failures[0][0])
     

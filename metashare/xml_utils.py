@@ -11,6 +11,9 @@ import logging
 from metashare.settings import LOG_LEVEL, LOG_HANDLER, XDIFF_LOCATION
 from metashare.stats.model_utils import saveLRStats, UPDATE_STAT
 from zipfile import is_zipfile, ZipFile
+from django.contrib.admin.models import LogEntry, ADDITION
+from django.contrib.contenttypes.models import ContentType
+from django.utils.encoding import force_unicode
 
 # Setup logging support.
 logging.basicConfig(level=LOG_LEVEL)
@@ -65,10 +68,10 @@ def import_from_string(xml_string, targetstatus, owner_id=None):
     result = resourceInfoType_model.import_from_string(xml_string)
     
     if not result[0]:
-        msg = u'could not import XML string: "{}"'.format(xml_string)
+        msg = u''
         if len(result) > 2:
-            msg += '\nError message: {}'.format(result[2])
-        raise Exception, msg
+            msg = u'{}'.format(result[2])
+        raise Exception(msg)
     
     resource = result[0]
     
@@ -79,9 +82,21 @@ def import_from_string(xml_string, targetstatus, owner_id=None):
         
     resource.storage_object.save()
 
+    # Create log ADDITION message for the new object, but only if we have a user:
+    if owner_id:
+        LogEntry.objects.log_action(
+            user_id         = owner_id,
+            content_type_id = ContentType.objects.get_for_model(resource).pk,
+            object_id       = resource.pk,
+            object_repr     = force_unicode(resource),
+            action_flag     = ADDITION
+        )
+
     # Update statistics
     saveLRStats("", resource.storage_object.identifier, "", UPDATE_STAT)
+
     return resource
+    
     
 def import_from_file(filehandle, descriptor, targetstatus, owner_id=None):
     """
@@ -95,7 +110,7 @@ def import_from_file(filehandle, descriptor, targetstatus, owner_id=None):
         resource.
 
     Returns a pair of lists, the first list containing the successfully imported resource objects,
-         the second the descriptors of the erroneous XML file(s) which produced import errors.
+         the second containing pairs of descriptors of the erroneous XML file(s) and error messages.
     """
     imported_resources = []
     erroneous_descriptors = []
@@ -110,8 +125,8 @@ def import_from_file(filehandle, descriptor, targetstatus, owner_id=None):
             xml_string = filehandle.read()
             resource = import_from_string(xml_string, targetstatus, owner_id)
             imported_resources.append(resource)
-        except:
-            erroneous_descriptors.append(descriptor)
+        except Exception as problem:
+            erroneous_descriptors.append((descriptor, problem))
     
     else:
         temp_zip = ZipFile(filehandle)
@@ -126,7 +141,7 @@ def import_from_file(filehandle, descriptor, targetstatus, owner_id=None):
                 xml_string = temp_zip.read(xml_name)
                 resource = import_from_string(xml_string, targetstatus, owner_id)
                 imported_resources.append(resource)
-            except:
-                erroneous_descriptors.append(descriptor)
+            except Exception as problem:
+                erroneous_descriptors.append((xml_name, problem))
     return imported_resources, erroneous_descriptors
 
