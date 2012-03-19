@@ -11,6 +11,7 @@ except:
 
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils.text import capfirst
 from django.utils.translation import ugettext_lazy as _
 
 from metashare.repo2.editor.widgets import TextInputWithLanguageAttribute
@@ -184,3 +185,120 @@ class MultiTextField(models.Field):
         # a pickle'd representation of value.
         return base64.b64encode(pickle.dumps(value))
 
+
+from django import forms
+
+class MultiSelectFormField(forms.MultipleChoiceField):
+    widget = forms.SelectMultiple
+    
+    def __init__(self, *args, **kwargs):
+        super(MultiSelectFormField, self).__init__(*args, **kwargs)
+
+
+class MultiSelectField(models.Field):
+    """
+    Model field which allows to select one or several choices.
+    """
+    __metaclass__ = models.SubfieldBase
+    
+    __HEX_TO_BITS__ = {
+      'f': (1,1,1,1), 'e': (1,1,1,0), 'd': (1,1,0,1), 'c': (1,1,0,0),
+      'b': (1,0,1,1), 'a': (1,0,1,0), '9': (1,0,0,1), '8': (1,0,0,0),
+      '7': (0,1,1,1), '6': (0,1,1,0), '5': (0,1,0,1), '4': (0,1,0,0),
+      '3': (0,0,1,1), '2': (0,0,1,0), '1': (0,0,0,1), '0': (0,0,0,0)
+    }
+    
+    __BITS_TO_HEX__ = {
+      (1,1,1,1): 'f', (1,1,1,0): 'e', (1,1,0,1): 'd', (1,1,0,0): 'c',
+      (1,0,1,1): 'b', (1,0,1,0): 'a', (1,0,0,1): '9', (1,0,0,0): '8',
+      (0,1,1,1): '7', (0,1,1,0): '6', (0,1,0,1): '5', (0,1,0,0): '4',
+      (0,0,1,1): '3', (0,0,1,0): '2', (0,0,0,1): '1', (0,0,0,0): '0'
+    }
+
+    def get_internal_type(self):
+        return "CharField"
+
+    def formfield(self, **kwargs):
+        defaults = {'required': not self.blank, 'choices': self.choices,
+          'label': capfirst(self.verbose_name), 'help_text': self.help_text}
+
+        if self.has_default:
+            defaults['initial'] = self.get_default()
+
+        # If the given kwargs contain widget as key, remove it!
+        if 'widget' in kwargs:
+            kwargs.pop('widget')
+
+        defaults.update(kwargs)
+        return MultiSelectFormField(**defaults)
+
+    def clean(self, value, model_instance):
+        # TODO: this needs to be fixed!
+        return value
+
+    def get_prep_value(self, value):
+        if not value:
+            value = []
+        
+        assert(isinstance(value, list) or isinstance(value, basestring))
+        if isinstance(value, basestring):
+            return value
+        
+        bits = [0] * (1+len(self.choices)/4)*4
+        
+        for index, choice in enumerate(self.choices):
+            if choice[0] in value:
+                bits[index] = 1
+        
+        print bits
+        
+        values = ''
+        
+        for x in range(len(bits)/4):
+            offset = x * 4
+            values += self.__BITS_TO_HEX__[tuple(bits[offset:offset+4])]
+        
+        print values
+        
+        return values
+        
+    def to_python(self, value):
+        print "TO_PYTHON: {}".format(value)
+        
+        if isinstance(value, list):
+            return value
+        
+        assert(isinstance(value, basestring))
+        
+        # f == 0b1111 == True,  True,  True,  True
+        # e == 0b1110 == True,  True,  True,  False
+        # d == 0b1101 == True,  True,  False, True
+        # c == 0b1100 == True,  True,  False, False
+        # b == 0b1011 == True,  False, True,  True
+        # a == 0b1010 == True,  False, True,  False
+        # 9 == 0b1001 == True,  False, False, True
+        # 8 == 0b1000 == True,  False, False, False
+        # 7 == 0b0111 == False, True,  True,  True
+        # 6 == 0b0110 == False, True,  True,  False
+        # 5 == 0b0101 == False, True,  False, True
+        # 4 == 0b0100 == False, True,  False, False
+        # 3 == 0b0011 == False, False, True,  True
+        # 2 == 0b0010 == False, False, True,  False
+        # 1 == 0b0001 == False, False, False, True
+        # 0 == 0b0000 == False, False, False, False
+        
+        indices = []
+        
+        for index in range(len(value.lower())):
+            offset = index*4
+            _value = self.__HEX_TO_BITS__[value[index]]
+            for _pos in range(4):
+                if _value[_pos]:
+                    indices.append(offset + _pos)
+        
+        values = []
+        for index, choice in enumerate(self.choices):
+            if index in indices:
+                values.append(choice[0])
+        
+        return values
