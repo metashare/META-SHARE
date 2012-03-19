@@ -55,7 +55,7 @@
 </licenceInfo>
 </distributionInfo>
 <validationInfo>
-<validated>true</validated>
+<validated>True</validated>
 <validationModeDetails>SpeechDat-Car This speech database was validated by SPEX (the Netherlands) to assess its compliance with the SpeechDat-Car format and content specifications.</validationModeDetails>
 </validationInfo>
 <usageInfo>
