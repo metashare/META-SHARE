@@ -67,13 +67,11 @@ def import_from_string(xml_string, targetstatus, owner_id=None):
     from metashare.repo2.models import resourceInfoType_model
     result = resourceInfoType_model.import_from_string(xml_string)
     
-    print "************************************* import result: {}".format(result)
-    
     if not result[0]:
-        msg = u'could not import XML string: "{}"'.format(xml_string)
+        msg = u''
         if len(result) > 2:
-            msg += '\nError message: {}'.format(result[2])
-        raise Exception, msg
+            msg = u'{}'.format(result[2])
+        raise Exception(msg)
     
     resource = result[0]
     
@@ -112,7 +110,7 @@ def import_from_file(filehandle, descriptor, targetstatus, owner_id=None):
         resource.
 
     Returns a pair of lists, the first list containing the successfully imported resource objects,
-         the second the descriptors of the erroneous XML file(s) which produced import errors.
+         the second containing pairs of descriptors of the erroneous XML file(s) and error messages.
     """
     imported_resources = []
     erroneous_descriptors = []
@@ -127,8 +125,7 @@ def import_from_file(filehandle, descriptor, targetstatus, owner_id=None):
             xml_string = filehandle.read()
             resource = import_from_string(xml_string, targetstatus, owner_id)
             imported_resources.append(resource)
-        except:
-            problem = sys.exc_info()[0]
+        except Exception as problem:
             erroneous_descriptors.append((descriptor, problem))
     
     else:
@@ -144,7 +141,7 @@ def import_from_file(filehandle, descriptor, targetstatus, owner_id=None):
                 xml_string = temp_zip.read(xml_name)
                 resource = import_from_string(xml_string, targetstatus, owner_id)
                 imported_resources.append(resource)
-            except:
-                erroneous_descriptors.append(descriptor)
+            except Exception as problem:
+                erroneous_descriptors.append((xml_name, problem))
     return imported_resources, erroneous_descriptors
 

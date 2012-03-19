@@ -71,8 +71,8 @@ class MetashareBackendSite(AdminSite):
                         messages.info(request, u'Successfully uploaded {} resource descriptions'.format(len(successes)))
                     if len(failures) > 0:
                         _msg = u'Import failed for {} files:\n'.format(len(failures))
-                        for entry in failures:
-                            _msg += u'\t{}\n'.format(entry)
+                        for descriptor, exception in failures:
+                            _msg += u'\t{}: {}\n'.format(descriptor, ' '.join(exception.args))
                         messages.error(request, _msg)
                 return HttpResponseRedirect(redirect_url)
         else: # not a POST request

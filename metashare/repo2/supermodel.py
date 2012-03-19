@@ -879,8 +879,20 @@ class SchemaModel(models.Model):
                 _created.append(_object)
 
         except (IntegrityError, ValidationError) as _exc:
+            detail = u''
+            if hasattr(_exc, 'message_dict'):
+                for key in _exc.message_dict:
+                    value = _exc.message_dict[key]
+                    if isinstance(value, list):
+                        value = ', '.join(value)
+                    if len(detail) > 0:
+                        detail += '; '
+                    detail += u"'{}': {}".format(key, value)
+            else:
+                detail = str(_exc)
+            
             _msg = u'Could not import <{}>! ({})'.format(element_tree.tag,
-              _exc)
+              detail)
             LOGGER.error(_msg)
 
             LOGGER.error(u'cls.__schema_parent__: {0}'.format(
