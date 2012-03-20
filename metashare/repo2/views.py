@@ -25,6 +25,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse, Http404
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
+from django.utils.translation import ugettext as _
 
 from haystack.views import FacetedSearchView
 
@@ -261,7 +262,10 @@ def download(request, object_id):
                 == "SignatureRequired":
             signature_req = 1
 
-    title = resource.identificationInfo.resourceName
+    if resource.identificationInfo.resourceName:
+        title = resource.identificationInfo.resourceName[0]
+    else:
+        title = _('Unnamed Resource')
     dictionary = { 'title': title,
                    'object_id': object_id,
                    'signature_req': signature_req }
