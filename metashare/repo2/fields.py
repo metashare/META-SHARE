@@ -9,9 +9,11 @@ try:
 except:
     import pickle
 
-from django.core.exceptions import ValidationError
+from django import forms
+from django.core import exceptions, validators
 from django.db import models
 from django.utils.encoding import force_unicode
+from django.utils.functional import curry
 from django.utils.text import capfirst
 from django.utils.translation import ugettext_lazy as _
 
@@ -60,7 +62,7 @@ class MetaBooleanField(models.NullBooleanField):
         if value in ('f', 'False', '0'):
             return False
 
-        raise ValidationError(self.error_messages['invalid'])
+        raise exceptions.ValidationError(self.error_messages['invalid'])
 
 
 class TextFieldWithLanguageAttribute(models.TextField):
@@ -112,7 +114,38 @@ class MultiTextField(models.Field):
 
         super(MultiTextField, self).__init__(*args, **kwargs)
 
+    def clean(self, value, model_instance):
+        """
+        Convert to the value's type and run validation. Validation errors
+        from to_python and validate are propagated. The correct value is
+        returned iff no error is raised.
+        """
+        values = self.to_python(value)
+        validation_errors = {}
+
+        if not len(values) and not self.blank:
+            raise exceptions.ValidationError(u'This field cannot be blank.')
+
+        for value in values:
+            try:
+                self.validate(value, model_instance)
+                self.run_validators(value)
+
+            except exceptions.ValidationError, exc:
+                validation_errors[value] = exc.messages[0]
+
+        if len(validation_errors.keys()) > 0:
+            self.widget.errors.clear()
+            self.widget.errors.update(validation_errors)
+            raise exceptions.ValidationError(u'Some fields did not validate.')
+
+        self.widget.errors = {}
+        return values
+
     def get_internal_type(self):
+        """
+        Returns internal type for this field.
+        """
         return "TextField"
 
     def formfield(self, **kwargs):
@@ -126,33 +159,20 @@ class MultiTextField(models.Field):
         defaults.update(kwargs)
         return super(MultiTextField, self).formfield(**defaults)
 
-    def clean(self, value, model_instance):
+    def get_prep_value(self, value):
         """
-        Convert to the value's type and run validation. Validation errors
-        from to_python and validate are propagated. The correct value is
-        returned iff no error is raised.
+        Takes a Python value and converts it into a database String.
         """
-        values = self.to_python(value)
-        validation_errors = {}
+        if not value:
+            value = []
 
-        if not len(values) and not self.blank:
-            raise ValidationError(u'This field cannot be blank.')
-
-        for value in values:
-            try:
-                self.validate(value, model_instance)
-                self.run_validators(value)
-
-            except ValidationError, exc:
-                validation_errors[value] = exc.messages[0]
-
-        if len(validation_errors.keys()) > 0:
-            self.widget.errors.clear()
-            self.widget.errors.update(validation_errors)
-            raise ValidationError(u'Some fields did not validate.')
-
-        self.widget.errors = {}
-        return values
+        # Before converting the value to Base64-encoded, pickle'd format, we
+        # have to assert that we are treating a list or tuple type!
+        assert(isinstance(value, list) or isinstance(value, tuple))
+        
+        # We convert the value list into a Base64-encoded String that contains
+        # a pickle'd representation of value.
+        return base64.b64encode(pickle.dumps(value))
 
     def to_python(self, value):
         # If we don't have a value, we return an empty list.
@@ -173,30 +193,6 @@ class MultiTextField(models.Field):
         # the exception we have encountered. This is useful for debugging.
         except  :
             return [u'Exception for value {} ({})'.format(value, type(value))]
-
-    def get_prep_value(self, value):
-        if not value:
-            value = []
-
-        # Before converting the value to Base64-encoded, pickle'd format, we
-        # have to assert that we are treating a list or tuple type!
-        assert(isinstance(value, list) or isinstance(value, tuple))
-        
-        # We convert the value list into a Base64-encoded String that contains
-        # a pickle'd representation of value.
-        return base64.b64encode(pickle.dumps(value))
-
-
-from django import forms
-
-class MultiSelectFormField(forms.MultipleChoiceField):
-    """
-    Simple SelectMultiple form field that allows to select multiple choices.
-    """
-    widget = forms.SelectMultiple
-    
-    def __init__(self, *args, **kwargs):
-        super(MultiSelectFormField, self).__init__(*args, **kwargs)
 
 
 class MultiSelectField(models.Field):
@@ -221,40 +217,63 @@ class MultiSelectField(models.Field):
       (0,0,1,1): '3', (0,0,1,0): '2', (0,0,0,1): '1', (0,0,0,0): '0'
     }
 
-    def get_internal_type(self):
-        return "CharField"
+    @classmethod
+    def _get_FIELD_display(cls, self, field):
+        """
+        Returns a String containing the "human-readable" values of the field.
+        """
+        values = getattr(self, field.attname)
+        choices_dict = dict(field.choices)
+        return u', '.join([force_unicode(choices_dict.get(value, value),
+          strings_only=True) for value in values])
 
-    def formfield(self, **kwargs):
-        # Collect form field data inside defaults dictionary.
-        defaults = {'choices': self.choices, 'help_text': self.help_text,
-          'label': capfirst(self.verbose_name), 'required': not self.blank}
+    def contribute_to_class(self, cls, name):
+        """
+        Adds get_FOO_display() method to this class.
+        """
+        self.set_attributes_from_name(name)
+        # pylint: disable-msg=W0201
+        self.model = cls
+        cls._meta.add_field(self)
+        setattr(cls, 'get_%s_display' % self.name,
+          curry(self._get_FIELD_display, field=self))
 
-        # If this field has a default value, add it to the dictionary.
-        if self.has_default:
-            defaults['initial'] = self.get_default()
+    def formfield(self, form_class=forms.MultipleChoiceField, **kwargs):
+        """
+        Returns a django.forms.Field instance for this database Field.
+        
+        Using super() won't work because this would replace the form_class!
+        
+        """
+        defaults = {
+          'choices': self.get_choices(include_blank=False),
+          'help_text': self.help_text,
+          'label': capfirst(self.verbose_name),
+          'required': not self.blank,
+        }
 
-        # If the given kwargs contain widget as key, remove it!
-        if 'widget' in kwargs:
-            kwargs.pop('widget')
+        if self.has_default():
+            if callable(self.default):
+                defaults['initial'] = self.default
+                defaults['show_hidden_initial'] = True
+
+            else:
+                defaults['initial'] = self.get_default()
 
         defaults.update(kwargs)
-        return MultiSelectFormField(**defaults)
+        return form_class(**defaults)
 
-    def clean(self, value, model_instance):
+    def get_choices_default(self):
         """
-        Convert to the value's type and run validation.  Returns the cleaned
-        value if no ValidationError is raised.
+        Returns choices without the default blank choice.
         """
-        values = self.to_python(value)
+        return self.get_choices(include_blank=False)
 
-        if not len(values) and not self.blank:
-            raise ValidationError(u'This field cannot be blank.')
-
-        for value in values:
-            self.validate(value, model_instance)
-            self.run_validators(value)
-
-        return values
+    def get_internal_type(self):
+        """
+        Returns internal type for this field.
+        """
+        return "CharField"
 
     def get_prep_value(self, value):
         """
@@ -340,18 +359,25 @@ class MultiSelectField(models.Field):
         # Finally, we return the list of selected choice values.
         return values
 
-    def _get_display(field):
-        def _inner(self):
-            values = getattr(self, field.attname)
-            return ', '.join([force_unicode(
-                field.choices_dict.get(value, value),
-                strings_only=True
-            ) for value in values])
-        return _inner
+    def validate(self, value, model_instance):
+        """
+        Validates value and throws ValidationError.
+        """
+        if isinstance(value, list):
+            valid_choices = [k for k, _unused_value in self.choices]
+            for choice in value:
+                if choice not in valid_choices:
+                    _msg = self.error_messages['invalid_choice'] % choice
+                    raise exceptions.ValidationError(_msg)
 
-    def contribute_to_class(self, cls, name):
-        self.set_attributes_from_name(name)
-        self.model = cls
-        cls._meta.add_field(self)
-        self.choices_dict = dict(self.choices)
-        setattr(cls, 'get_%s_display' % self.name, self._get_display())
+        if value is None and not self.null:
+            raise exceptions.ValidationError(self.error_messages['null'])
+
+        if not self.blank and value in validators.EMPTY_VALUES:
+            raise exceptions.ValidationError(self.error_messages['blank'])
+
+    def value_to_string(self, obj):
+        """
+        Used by the serialisers to convert the field into a string for output.
+        """
+        return self.get_db_prep_value(self._get_val_from_obj(obj))
