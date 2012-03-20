@@ -119,6 +119,11 @@ CHOICES_TEMPLATE = """
       choices={0}['choices'],
       """
 
+MULTI_CHOICES_TEMPLATE = """
+      max_length=1 + len({0}['choices']) / 4,
+      choices={0}['choices'],
+      """
+
 CHOICES_TEMPLATE_MAXLEN = """
       max_length={1},
       choices={0}['choices'],
@@ -139,7 +144,8 @@ from {0}supermodel import SchemaModel, SubclassableModel, \\
   _make_choices_from_list, InvisibleStringModel, pretty_xml, \\
   REQUIRED, OPTIONAL, RECOMMENDED
 from {0}editor.widgets import MultiFieldWidget
-from {0}fields import MultiTextField, MetaBooleanField
+from {0}fields import MultiTextField, MetaBooleanField, \\
+  MultiSelectField
 
 from metashare.storage.models import StorageObject
 
@@ -584,7 +590,10 @@ class Clazz(object):
 
     def generate_simple_field(self, name, field_name, options, required):
         options += required
-        if field_name == 'MetaBooleanField':
+        
+        # cfedermann: MetaBooleanField and MultiSelectField don't need the
+        # models. prefix as they are custom fields imported from repo2.fields.
+        if field_name in ('MetaBooleanField', 'MultiSelectField'):
             self.wrtmodels('    %s = %s(%s)\n' % ( name, field_name, options, ))
         else:
             self.wrtmodels('    %s = models.%s(%s)\n' % ( name, field_name, options, ))
@@ -624,18 +633,23 @@ class Clazz(object):
                   .format(_choice_name, name.upper(), member.get_values())
                 maxlen = member.get_maxlength()
                 if maxlen:
-                    logging.warn("max_length overwritten for choice of ' \
-                      'strings: {}".format(member))
+                    logging.warn("max_length overwritten for choice of " \
+                      "strings: {}".format(member))
                     choice_options = \
                       CHOICES_TEMPLATE_MAXLEN.format(choice_name, maxlen)
                 else:
                     choice_options = CHOICES_TEMPLATE.format(choice_name)
+                
+                # cfedermann: MultiSelectField generation...
                 if member.is_unbounded():
-                    # TODO: this has to be replaced by a MultiSelectCharField
-                    pass
+                    choice_options = MULTI_CHOICES_TEMPLATE.format(choice_name)
+                    
+                    self.generate_simple_field(name, 'MultiSelectField',
+                      options + choice_options, '')
 
-                self.generate_simple_field(name, 'CharField',
-                  options + choice_options, '')
+                else:
+                    self.generate_simple_field(name, 'CharField',
+                      options + choice_options, '')
             else:
                 maxlen = member.get_maxlength()
                 if not maxlen:

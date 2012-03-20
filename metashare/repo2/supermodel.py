@@ -12,7 +12,7 @@ from django.db import models, IntegrityError
 from traceback import format_exc
 from xml.etree.ElementTree import Element, fromstring, tostring
 
-from metashare.repo2.fields import MultiTextField
+from metashare.repo2.fields import MultiSelectField, MultiTextField
 
 from metashare.settings import LOG_LEVEL, LOG_HANDLER
 from django.db.models.fields.related import ForeignRelatedObjectsDescriptor
@@ -823,6 +823,10 @@ class SchemaModel(models.Model):
                 # Loop over all values and add each value to field set.
                 for _value in _values:
                     _model_setter.add(_value)
+
+            # For MultiSelectField instances, we have to assign the list.
+            elif isinstance(_field, MultiSelectField):
+                setattr(_object, _model_field, _values)
 
             # If the model field is a MultiTextField, we have to retrieve the
             # model field setter and append values to the field list.
