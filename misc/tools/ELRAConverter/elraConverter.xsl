@@ -215,8 +215,8 @@
             
                 <xsl:if test='$vsg!="" or $vr!="" or $vp!=""'>            	
                     <validationInfo>
-                        <xsl:if test='$vsg!=""'>
-                            <validated>true</validated>
+                        <xsl:if test='$vsg!="" or $vp!="" or $vr!=""'>
+                            <validated>True</validated>
                         </xsl:if>
                         <xsl:if test='$vsg!="" or $vp!=""'>   
                             <validationModeDetails>
