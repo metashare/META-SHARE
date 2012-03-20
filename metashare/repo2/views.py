@@ -3,35 +3,35 @@ Project: META-SHARE prototype implementation
  Author: Christian Federmann <cfedermann@dfki.de>
 """
 
-import types
+import base64
+import logging
 import operator
 import re
-    
-from collections import defaultdict, OrderedDict
-from urllib import urlopen
-from os.path import split
-from urlparse import urlparse
-import base64
+import types
 try:
     import cPickle as pickle
 except:
     import pickle
+
+from collections import defaultdict, OrderedDict
+from datetime import datetime
+from os.path import split
+from urllib import urlopen
+from urlparse import urlparse
                         
 from django.contrib.auth.decorators import login_required
-from django.core.urlresolvers import reverse
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.urlresolvers import reverse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
-from django.http import HttpResponse, Http404
-from datetime import datetime
 
 from haystack.views import FacetedSearchView
 
 from metashare.repo2.forms import SimpleSearchForm
-# pylint: disable-msg=W0401, W0614
-from metashare.repo2.models import *
-
-from metashare.settings import DJANGO_URL
+from metashare.repo2.models import licenceInfoType_model, \
+    resourceInfoType_model, LICENCEINFOTYPE_LICENCE_CHOICES
+from metashare.settings import DJANGO_URL, DJANGO_BASE, LOG_LEVEL, LOG_HANDLER
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
 
