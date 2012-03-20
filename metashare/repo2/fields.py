@@ -380,4 +380,4 @@ class MultiSelectField(models.Field):
         """
         Used by the serialisers to convert the field into a string for output.
         """
-        return self.get_db_prep_value(self._get_val_from_obj(obj))
+        return self.get_prep_value(self._get_val_from_obj(obj))
