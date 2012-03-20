@@ -27,7 +27,8 @@ sqs = SearchQuerySet() \
   .facet("domainFilter") \
   .facet("geographicCoverageFilter") \
   .facet("timeCoverageFilter") \
-  .facet("subjectFilter")
+  .facet("subjectFilter") \
+  .order_by("resourceNameSort_exact")
 
 urlpatterns = patterns('metashare.repo2.views',
   (r'^browse/$',
