@@ -22,7 +22,6 @@ logging.basicConfig(level=LOG_LEVEL)
 LOGGER = logging.getLogger('metashare.repo2.search_indexes')
 LOGGER.addHandler(LOG_HANDLER)
 
-
 # pylint: disable-msg=C0103
 class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
     """
@@ -30,6 +29,9 @@ class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
     """
     # in the text field we list all resource model field that shall be searched
     text = CharField(document=True, use_template=True, stored=False)
+    
+    resourceNameSort = CharField(indexed=True, faceted=True)
+
     # whether the resource has been published or not; used only to filter what
     # a searching user may see
     published = BooleanField(stored=False)
@@ -173,6 +175,14 @@ class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
         super(resourceInfoType_modelIndex, self).remove_object(instance,
                                                                using=using,
                                                                **kwargs)
+
+    def prepare_resourceNameSort(self, obj):
+        import re
+
+        resourceNameSort = re.sub('[\W_]', '', obj.identificationInfo.resourceName[0])
+        resourceNameSort = resourceNameSort.lower()
+        
+        return resourceNameSort
 
     def prepare_published(self, obj):
         return obj.storage_object and obj.storage_object.published
