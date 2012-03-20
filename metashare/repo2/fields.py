@@ -227,9 +227,19 @@ class MultiSelectField(models.Field):
         return u', '.join([force_unicode(choices_dict.get(value, value),
           strings_only=True) for value in values])
 
+    @classmethod
+    def _get_FIELD_display_list(cls, self, field):
+        """
+        Returns a list containing the "human-readable" values of the field.
+        """
+        values = getattr(self, field.attname)
+        choices_dict = dict(field.choices)
+        return [force_unicode(choices_dict.get(value, value), strings_only=True)
+                for value in values]
+
     def contribute_to_class(self, cls, name):
         """
-        Adds get_FOO_display() method to this class.
+        Adds get_FOO_display() and get_FOO_display_list() methods to this class.
         """
         self.set_attributes_from_name(name)
         # pylint: disable-msg=W0201
@@ -237,6 +247,8 @@ class MultiSelectField(models.Field):
         cls._meta.add_field(self)
         setattr(cls, 'get_%s_display' % self.name,
           curry(self._get_FIELD_display, field=self))
+        setattr(cls, 'get_%s_display_list' % self.name,
+          curry(self._get_FIELD_display_list, field=self))
 
     def formfield(self, form_class=forms.MultipleChoiceField, **kwargs):
         """
