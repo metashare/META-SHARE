@@ -3,10 +3,8 @@ Project: META-SHARE prototype implementation
  Author: Christian Federmann <cfedermann@dfki.de>
 """
 from django import template
-from random import randrange, shuffle
 
-from metashare.repo2.models import resourceInfoType_model, \
-    identificationInfoType_model, corpusInfoType_model, \
+from metashare.repo2.models import corpusInfoType_model, \
     toolServiceInfoType_model, lexicalConceptualResourceInfoType_model, \
     languageDescriptionInfoType_model
 
