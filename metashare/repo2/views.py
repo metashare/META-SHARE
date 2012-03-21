@@ -77,51 +77,52 @@ def _convert_to_template_tuples(element_tree):
 
 
 
-# The following most be kept here, rather than in models.py, 
-# because models.py is automatically generated from the XML Schema.
-LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {'AGPL': ['/site_media/licences/GNU_agpl-3.0.htm', ''],
-  'LGPL': ['/site_media/licences/GNU_lgpl-2.0.htm',''],
-  'LGPLv3': ['/site_media/licences/GNU_lgpl-3.0.htm',''],
-  'CC': ['/site_media/licences/CC0v1.0.htm',''],
-  'CC_BY-SA_3.0': ['/site_media/licences/CC-BYSAv3.0.htm',''],
-  'CC_BY-NC-ND': ['/site_media/licences/CC-BYNCNDv3.0.htm',''],
-  'CC_BY-NC-SA': ['/site_media/licences/CC-BYNCSAv2.5.pdf',''],
-  'CC_BY-NC': ['/site_media/licences/CC-BYNCv3.0.htm',''],
-  'CC_BY-ND': ['/site_media/licences/CC-BYNDv3.0.htm',''],
-  'CC_BY-SA': ['/site_media/licences/CC-BYSAv2.5.pdf',''],
-  'CC_BY': ['/site_media/licences/CC-BYv3.0.htm',''],
-  'CC_BY-NC-SA_3.0': ['/site_media/licences/CC-BYNCSAv3.0.htm',''],
-  'MSCommons_BY': ['/site_media/licences/META-SHARE_COMMONS_BY_v1.0.htm',''],
-  'MSCommons_BY-NC': ['/site_media/licences/META-SHARE_COMMONS_BYNC_v1.0.htm',''],
-  'MSCommons_BY-NC-ND': ['/site_media/licences/META-SHARE_COMMONS_BYNCND_v1.0.htm',''],
-  'MSCommons_BY-NC-SA': ['/site_media/licences/META-SHARE_COMMONS_BYNCSA_v1.0.htm',''],
-  'MSCommons_BY-ND': ['/site_media/licences/META-SHARE_COMMONS_BYND_v1.0.htm',''],
-  'MSCommons_BY-SA': ['/site_media/licences/META-SHARE_COMMONS_BYSA_v1.0.htm',''],
-  'MSCommons_COM-NR-FF': ['/site_media/licences/META-SHARE_Commercial_NoRedistribution_For-a-Fee_v0.7.htm','SignatureRequired'], 
-  'MSCommons_COM-NR': ['/site_media/licences/META-SHARE_Commercial_NoRedistribution_v0.7.htm',''],
-  'MSCommons_COM-NR-ND-FF': ['/site_media/licences/META-SHARE_Commercial_NoRedistribution_NoDerivatives_For-a-fee-v1.0.htm','SignatureRequired'],
-  'MSCommons_COM-NR-ND': ['/site_media/licences/META-SHARE_Commercial_NoRedistribution_NoDerivatives-v1.0.htm',''],
-  'MSCommons_NoCOM-NC-NR-ND-FF': ['/site_media/licences/META-SHARE_NonCommercial_NoRedistribution_NoDerivatives_For-a-fee-v1.0.htm','SignatureRequired'],
-  'MSCommons_NoCOM-NC-NR-ND': ['/site_media/licences/META-SHARE_Commercial_NoRedistribution_NoDerivatives-v1.0.htm',''],
-  'MSCommons_NoCOM-NC-NR-FF': ['/site_media/licences/META-SHARE_NonCommercial_NoRedistribution_For-a-Fee-v1.0.htm','SignatureRequired'],
-  'MSCommons_NoCOM-NC-NR': ['/site_media/licences/META-SHARE_NonCommercial_NoRedistribution-v1.0.htm',''],
-  'ELRA_EVALUATION': ['/site_media/licences/EVALUATION.pdf','SignatureRequired'],
-  'ELRA_VAR': ['/site_media/licences/VAR-v3_2007.pdf','SignatureRequired'],
-  'ELRA_END_USER': ['/site_media/licences/ENDUSER-v3_2007.pdf','SignatureRequired'],
-  'ELRA_LIMITED': ['/site_media/licences/Var-E-v2.pdf','SignatureRequired'],
-  'proprietary': ['','SignatureRequired'],
-  'CLARIN_PUB': ['','SignatureRequired'],
-  'CLARIN_ACA-NC': ['','SignatureRequired'],
-  'CLARIN_ACA': ['','SignatureRequired'],
-  'CLARIN_RES': ['','SignatureRequired'],
-  'Princeton_Wordnet': ['/site_media/licences/WordNet-3.0.pdf',''],
-  'GPL': ['/site_media/licences/GNU_gpl-3.0.pdf',''],
-  'GeneralLicenceGrant': ['','SignatureRequired'],
-  'GFDL': ['/site_media/licences/GNU_fdl-1.3.pdf',''],
-  'ApacheLicence_V2.0': ['/site_media/licences/Apache-2.0.htm',''],
-  'BSD-style': ['/site_media/licences/BSD_license.pdf',''],
-  'underNegotiation': ['','SignatureRequired'],
-  'other': ['','SignatureRequired']
+# The following dictionary keeps info about licence document (as relative file system path)
+# and if a licence is required an explicit signature or not (second value of the array)
+LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
+  'AGPL': ['/site_media/licences/GNU_agpl-3.0.htm', False],
+  'LGPL': ['/site_media/licences/GNU_lgpl-2.0.htm', False],
+  'LGPLv3': ['/site_media/licences/GNU_lgpl-3.0.htm', False],
+  'CC': ['/site_media/licences/CC0v1.0.htm', False],
+  'CC_BY-SA_3.0': ['/site_media/licences/CC-BYSAv3.0.htm', False],
+  'CC_BY-NC-ND': ['/site_media/licences/CC-BYNCNDv3.0.htm', False],
+  'CC_BY-NC-SA': ['/site_media/licences/CC-BYNCSAv2.5.pdf', False],
+  'CC_BY-NC': ['/site_media/licences/CC-BYNCv3.0.htm', False],
+  'CC_BY-ND': ['/site_media/licences/CC-BYNDv3.0.htm', False],
+  'CC_BY-SA': ['/site_media/licences/CC-BYSAv2.5.pdf', False],
+  'CC_BY': ['/site_media/licences/CC-BYv3.0.htm', False],
+  'CC_BY-NC-SA_3.0': ['/site_media/licences/CC-BYNCSAv3.0.htm', False],
+  'MSCommons_BY': ['/site_media/licences/META-SHARE_COMMONS_BY_v1.0.htm', False],
+  'MSCommons_BY-NC': ['/site_media/licences/META-SHARE_COMMONS_BYNC_v1.0.htm', False],
+  'MSCommons_BY-NC-ND': ['/site_media/licences/META-SHARE_COMMONS_BYNCND_v1.0.htm', False],
+  'MSCommons_BY-NC-SA': ['/site_media/licences/META-SHARE_COMMONS_BYNCSA_v1.0.htm', False],
+  'MSCommons_BY-ND': ['/site_media/licences/META-SHARE_COMMONS_BYND_v1.0.htm', False],
+  'MSCommons_BY-SA': ['/site_media/licences/META-SHARE_COMMONS_BYSA_v1.0.htm', False],
+  'MSCommons_COM-NR-FF': ['/site_media/licences/META-SHARE_Commercial_NoRedistribution_For-a-Fee_v0.7.htm', True], 
+  'MSCommons_COM-NR': ['/site_media/licences/META-SHARE_Commercial_NoRedistribution_v0.7.htm', False],
+  'MSCommons_COM-NR-ND-FF': ['/site_media/licences/META-SHARE_Commercial_NoRedistribution_NoDerivatives_For-a-fee-v1.0.htm', True],
+  'MSCommons_COM-NR-ND': ['/site_media/licences/META-SHARE_Commercial_NoRedistribution_NoDerivatives-v1.0.htm', False],
+  'MSCommons_NoCOM-NC-NR-ND-FF': ['/site_media/licences/META-SHARE_NonCommercial_NoRedistribution_NoDerivatives_For-a-fee-v1.0.htm', True],
+  'MSCommons_NoCOM-NC-NR-ND': ['/site_media/licences/META-SHARE_Commercial_NoRedistribution_NoDerivatives-v1.0.htm', False],
+  'MSCommons_NoCOM-NC-NR-FF': ['/site_media/licences/META-SHARE_NonCommercial_NoRedistribution_For-a-Fee-v1.0.htm', True],
+  'MSCommons_NoCOM-NC-NR': ['/site_media/licences/META-SHARE_NonCommercial_NoRedistribution-v1.0.htm', False],
+  'ELRA_EVALUATION': ['/site_media/licences/EVALUATION.pdf', True],
+  'ELRA_VAR': ['/site_media/licences/VAR-v3_2007.pdf', True],
+  'ELRA_END_USER': ['/site_media/licences/ENDUSER-v3_2007.pdf', True],
+  'ELRA_LIMITED': ['/site_media/licences/Var-E-v2.pdf', True],
+  'proprietary': ['', True],
+  'CLARIN_PUB': ['', True],
+  'CLARIN_ACA-NC': ['', True],
+  'CLARIN_ACA': ['', True],
+  'CLARIN_RES': ['', True],
+  'Princeton_Wordnet': ['/site_media/licences/WordNet-3.0.pdf', False],
+  'GPL': ['/site_media/licences/GNU_gpl-3.0.htm', False],
+  'GeneralLicenceGrant': ['', True],
+  'GFDL': ['/site_media/licences/GNU_fdl-1.3.pdf',  False],
+  'ApacheLicence_V2.0': ['/site_media/licences/Apache-2.0.htm', False],
+  'BSD-style': ['/site_media/licences/BSD_license.pdf', False],
+  'underNegotiation': ['', True],
+  'other': ['', True]
 }
 
 
@@ -150,7 +151,7 @@ def getlicence(request, object_id):
                 #   this by adding an <object> containing the license to get
                 #   the v2.0 release done...  This has to be checked/cleaned
                 #   up somewhen later!
-                content = '<object data="{0}" type="text/html" id=pdf width="700" height="80%"><a href="{0}">View PDF licence</a></object>'.format(url) 
+                content = '<object data="{0}" type="text/html" id=pdf width="700" height="80%"><a href="{0}">View licence</a></object>'.format(url) 
 #                handle = urlopen(url)
 #                content = handle.read()
 #                handle.close()    
@@ -160,6 +161,7 @@ def getlicence(request, object_id):
 @login_required   
 def download(request, object_id):
     """ Renders the repository download view. """
+    signature_req = 0
     if object_id and request.user.is_active:       
         resource = get_object_or_404(resourceInfoType_model, pk=object_id)
         
@@ -214,11 +216,10 @@ def download(request, object_id):
             
             raise Http404
     
-    signature_req = 0
-    for licenceinfo in licences:
-        licencelabel = LICENCEINFOTYPE_LICENCE_CHOICES['choices'][int(licenceinfo['licence'])][1]
-        if LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licencelabel][1] == "SignatureRequired":
-            signature_req = 1
+        for licenceinfo in licences:
+            licencelabel = LICENCEINFOTYPE_LICENCE_CHOICES['choices'][int(licenceinfo['licence'])][1]
+            if LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licencelabel][1]:
+                signature_req = 1
 
     title = resource.identificationInfo.resourceName
     dictionary = {'title': title, 'object_id': object_id, 'signature_req': signature_req }

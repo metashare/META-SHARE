@@ -3,22 +3,25 @@ Project: META-SHARE
 Author: Christian Girardi <cgirardi@fbk.eu>
 """
 
-from django.shortcuts import render_to_response     
+from metashare.settings import DJANGO_URL, STATS_SERVER_URL
 from metashare.stats.models import LRStats, QueryStats
 from metashare.stats.model_utils import getLRTop, getLastQuery, getLRLast, statDays, VIEW_STAT, UPDATE_STAT, DOWNLOAD_STAT
+# pylint: disable-msg=W0611, W0401
+from metashare.repo2.models import *
+
+from django.shortcuts import render_to_response     
 from django.db.models import Count, Max, Min, Avg
 from django.http import HttpResponse
 from json import JSONEncoder
 from datetime import datetime, date
-import urllib
+import urllib, urllib2
+from threading import Timer
 import base64
 try:
     import cPickle as pickle
 except:
     import pickle
 
-# pylint: disable-msg=W0611, W0401
-from metashare.repo2.models import *
 
 #possible models and their default field
 SELECT_MODEL = {'Language': ['languageInfoType_model', 'languageName'],
@@ -28,13 +31,25 @@ SELECT_MODEL = {'Language': ['languageInfoType_model', 'languageName'],
                 'Distribution': ['distributionInfoType_model', 'availability'],
                 'Linguality': ['lingualityInfoType_model', 'lingualityType'],
                 'Annotation': ['annotationInfoType_model', 'annotationFormat']}
-#no accessable field
+#no accessable fields
 NOACCESS_FIELDS = ["downloadLocation", "executionLocation"]
 
 # Setup logging support.
 logging.basicConfig(level=LOG_LEVEL)
 LOGGER = logging.getLogger('metashare.stats.views')
 LOGGER.addHandler(LOG_HANDLER)
+
+
+def callServerStats():
+    url = urllib.urlencode({'url': DJANGO_URL})
+    try:
+        req = urllib2.Request("{0}stats/addnode?{1}".format(STATS_SERVER_URL, url))
+        urllib2.urlopen(req)
+    except:
+        LOGGER.debug('WARNING! Failed contacting statistics server on %s' % STATS_SERVER_URL)
+                  
+thread = Timer(2.0, callServerStats)
+thread.start()
 
 def repostats (request):    
     selected_menu_value = []
@@ -81,11 +96,10 @@ def repostats (request):
                 if (isinstance(value, basestring)):
                     if (hasattr(value, 'encode')):
                         value = value.encode("utf-8")
-                        print "VAL: " +str(value)
                     try:
                         value = pickle.loads(base64.b64decode(str(value)))              
                     except:
-                        LOGGER.debug("Warning! Value of field {0} is not encoded base64: {1}".format(dbfield,value))
+                        LOGGER.debug("Warning! Value of field {0} is not encoded base64: {1}".format(dbfield, value))
                                             
                 if (isinstance(value, list)):
                     for val in value:      
