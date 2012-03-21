@@ -234,26 +234,22 @@ def download(request, object_id):
                 
                 except:
                     raise Http404
-            #redirect on download location
+            # redirect to download location
             else:
-                try:
-                    if (len(licences) >0 ):
-                        for licenceinfo in licences:
-                            urldown = pickle.loads(base64.b64decode(
+                for licenceinfo in licences:
+                    download_urls = pickle.loads(base64.b64decode(
                                         str(licenceinfo['downloadLocation'])))
-                            if isinstance(urldown, list) and len(urldown) > 0:
-                                code = urlopen(urldown[0]).code
-                                if (code / 100 < 4):
-                                    saveLRStats(request.user.username,
-                                        resource.storage_object.identifier,
-                                        sessionid, DOWNLOAD_STAT)
-                                    return redirect(urldown[0])
-                except ObjectDoesNotExist:
-                    LOGGER.debug("Warning! Info about licence or " \
-                                 "downloadLocation is wrong.")
-            
+                    assert isinstance(download_urls, list)
+                    for url in download_urls:
+                        if (urlopen(url).code / 100 < 4):
+                            saveLRStats(request.user.username,
+                                resource.storage_object.identifier,
+                                sessionid, DOWNLOAD_STAT)
+                            return redirect(url)
+                LOGGER.info("No download could be offered for resource #{0}." \
+                            .format(object_id))
             raise Http404
-    
+
     signature_req = 0
     for licenceinfo in licences:
         licencelabel = LICENCEINFOTYPE_LICENCE_CHOICES['choices'] \
