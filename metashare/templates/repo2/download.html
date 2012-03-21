@@ -23,7 +23,7 @@
 <font size=-1>loading... </font>
 </div>
 
-{% if signature_req == 0 %}
+{% if not signature_req %}
   <form id="downloadbox" action="{% url metashare.repo2.views.download object_id %}" method="post">
     {% csrf_token %}
     <p><input name="license_agree" type="checkbox" /> I <strong>agree</strong> to these license terms and want to download the resource.</p>

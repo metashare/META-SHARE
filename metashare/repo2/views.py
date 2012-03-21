@@ -250,13 +250,13 @@ def download(request, object_id):
                             .format(object_id))
             raise Http404
 
-    signature_req = 0
+    signature_req = False
     for licenceinfo in licences:
         licencelabel = LICENCEINFOTYPE_LICENCE_CHOICES['choices'] \
                             [int(licenceinfo['licence'])][1]
         if LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licencelabel][1] \
                 == "SignatureRequired":
-            signature_req = 1
+            signature_req = True
 
     if resource.identificationInfo.resourceName:
         title = resource.identificationInfo.resourceName[0]
