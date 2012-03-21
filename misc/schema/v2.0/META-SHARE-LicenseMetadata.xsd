@@ -303,7 +303,7 @@
 				<xs:annotation>
 					<xs:documentation>The conditions imposed by the user being member of some association/institution (e.g., ELRA, LDC) distributing the resource. This indicates the availability conditions (and prices) for users who are members or not</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-many</relation>
+						<relation>many-to-many</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
