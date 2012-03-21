@@ -12,7 +12,8 @@ from metashare.repo2.supermodel import SchemaModel, SubclassableModel, \
   _make_choices_from_list, InvisibleStringModel, pretty_xml, \
   REQUIRED, OPTIONAL, RECOMMENDED
 from metashare.repo2.editor.widgets import MultiFieldWidget
-from metashare.repo2.fields import MultiTextField, MetaBooleanField
+from metashare.repo2.fields import MultiTextField, MetaBooleanField, \
+  MultiSelectField
 
 from metashare.storage.models import StorageObject
 
@@ -859,12 +860,12 @@ class resourceDocumentationInfoType_model(SchemaModel):
       'ools, of samples of the output',
       blank=True, )
 
-    toolDocumentationType = models.CharField(
+    toolDocumentationType = MultiSelectField(
       verbose_name='Tool documentation', 
       help_text='Specifies the type of documentation for tool or service' \
       '',
       blank=True, 
-      max_length=200,
+      max_length=1 + len(RESOURCEDOCUMENTATIONINFOTYPE_TOOLDOCUMENTATIONTYPE_CHOICES['choices']) / 4,
       choices=RESOURCEDOCUMENTATIONINFOTYPE_TOOLDOCUMENTATIONTYPE_CHOICES['choices'],
       )
 
@@ -1040,12 +1041,12 @@ class annotationInfoType_model(SchemaModel):
       choices=ANNOTATIONINFOTYPE_ANNOTATIONTYPE_CHOICES['choices'],
       )
 
-    annotatedElements = models.CharField(
+    annotatedElements = MultiSelectField(
       verbose_name='Annotated elements', 
       help_text='Specifies the elements annotated in each annotation lev' \
       'el',
       blank=True, 
-      max_length=30,
+      max_length=1 + len(ANNOTATIONINFOTYPE_ANNOTATEDELEMENTS_CHOICES['choices']) / 4,
       choices=ANNOTATIONINFOTYPE_ANNOTATEDELEMENTS_CHOICES['choices'],
       )
 
@@ -1055,13 +1056,13 @@ class annotationInfoType_model(SchemaModel):
       'n a stand-off fashion',
       blank=True, )
 
-    segmentationLevel = models.CharField(
+    segmentationLevel = MultiSelectField(
       verbose_name='Segmentation level', 
       help_text='Specifies the segmentation unit in terms of which the r' \
       'esource has been segmented or the level of segmentation a tool/se' \
       'rvice requires/outputs',
       blank=True, 
-      max_length=ANNOTATIONINFOTYPE_SEGMENTATIONLEVEL_CHOICES['max_length'],
+      max_length=1 + len(ANNOTATIONINFOTYPE_SEGMENTATIONLEVEL_CHOICES['choices']) / 4,
       choices=ANNOTATIONINFOTYPE_SEGMENTATIONLEVEL_CHOICES['choices'],
       )
 
@@ -1090,12 +1091,12 @@ class annotationInfoType_model(SchemaModel):
       ' of IETF BP47',
       blank=True, max_length=100, )
 
-    conformanceToStandardsBestPractices = models.CharField(
+    conformanceToStandardsBestPractices = MultiSelectField(
       verbose_name='Conformance to standards best practices', 
       help_text='Specifies the standards or the best practices to which ' \
       'the tagset used for the annotation conforms',
       blank=True, 
-      max_length=ANNOTATIONINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES['max_length'],
+      max_length=1 + len(ANNOTATIONINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES['choices']) / 4,
       choices=ANNOTATIONINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES['choices'],
       )
 
@@ -1260,12 +1261,12 @@ class modalityInfoType_model(SchemaModel):
       u'sizePerModality': "sizeInfoType_model",
     }
 
-    modalityType = models.CharField(
+    modalityType = MultiSelectField(
       verbose_name='Modality', 
       help_text='Specifies the type of the modality represented in the r' \
       'esource or processed by a tool/service',
       
-      max_length=35,
+      max_length=1 + len(MODALITYINFOTYPE_MODALITYTYPE_CHOICES['choices']) / 4,
       choices=MODALITYINFOTYPE_MODALITYTYPE_CHOICES['choices'],
       )
 
@@ -1498,11 +1499,11 @@ class captureInfoType_model(SchemaModel):
       u'personSourceSetInfo': "personSourceSetInfoType_model",
     }
 
-    capturingDeviceType = models.CharField(
+    capturingDeviceType = MultiSelectField(
       verbose_name='Capturing device', 
       help_text='The transducers through which the data is captured',
       blank=True, 
-      max_length=30,
+      max_length=1 + len(CAPTUREINFOTYPE_CAPTURINGDEVICETYPE_CHOICES['choices']) / 4,
       choices=CAPTUREINFOTYPE_CAPTURINGDEVICETYPE_CHOICES['choices'],
       )
 
@@ -1609,12 +1610,12 @@ class personSourceSetInfoType_model(SchemaModel):
       ' video part of the resource',
       blank=True, null=True, )
 
-    ageOfPersons = models.CharField(
+    ageOfPersons = MultiSelectField(
       verbose_name='Age of persons', 
       help_text='The age range of the group of participants; repeat the ' \
       'element if needed',
       blank=True, 
-      max_length=30,
+      max_length=1 + len(PERSONSOURCESETINFOTYPE_AGEOFPERSONS_CHOICES['choices']) / 4,
       choices=PERSONSOURCESETINFOTYPE_AGEOFPERSONS_CHOICES['choices'],
       )
 
@@ -1680,11 +1681,11 @@ class personSourceSetInfoType_model(SchemaModel):
       'he specific task',
       blank=True, null=True, )
 
-    speechInfluences = models.CharField(
+    speechInfluences = MultiSelectField(
       verbose_name='Speech influences', 
       help_text='Specifies the factors influencing speech',
       blank=True, 
-      max_length=30,
+      max_length=1 + len(PERSONSOURCESETINFOTYPE_SPEECHINFLUENCES_CHOICES['choices']) / 4,
       choices=PERSONSOURCESETINFOTYPE_SPEECHINFLUENCES_CHOICES['choices'],
       )
 
@@ -1826,12 +1827,12 @@ class runningEnvironmentInfoType_model(SchemaModel):
       'computational grammar',
       blank=True, null=True, related_name="requiredSoftware_%(class)s_related", )
 
-    requiredHardware = models.CharField(
+    requiredHardware = MultiSelectField(
       verbose_name='Required hardware', 
       help_text='Hardware required for running a tool and/or computation' \
       'al grammar',
       blank=True, 
-      max_length=100,
+      max_length=1 + len(RUNNINGENVIRONMENTINFOTYPE_REQUIREDHARDWARE_CHOICES['choices']) / 4,
       choices=RUNNINGENVIRONMENTINFOTYPE_REQUIREDHARDWARE_CHOICES['choices'],
       )
 
@@ -1900,12 +1901,12 @@ class recordingInfoType_model(SchemaModel):
       u'personInfo': "personInfoType_model",
     }
 
-    recordingDeviceType = models.CharField(
+    recordingDeviceType = MultiSelectField(
       verbose_name='Recording device', 
       help_text='The nature of the recording platform hardware and the s' \
       'torage medium',
       blank=True, 
-      max_length=30,
+      max_length=1 + len(RECORDINGINFOTYPE_RECORDINGDEVICETYPE_CHOICES['choices']) / 4,
       choices=RECORDINGINFOTYPE_RECORDINGDEVICETYPE_CHOICES['choices'],
       )
 
@@ -1919,27 +1920,27 @@ class recordingInfoType_model(SchemaModel):
       help_text='The software used for the recording platform',
       blank=True, )
 
-    recordingEnvironment = models.CharField(
+    recordingEnvironment = MultiSelectField(
       verbose_name='Recording environment', 
       help_text='Where the recording took place',
       blank=True, 
-      max_length=30,
+      max_length=1 + len(RECORDINGINFOTYPE_RECORDINGENVIRONMENT_CHOICES['choices']) / 4,
       choices=RECORDINGINFOTYPE_RECORDINGENVIRONMENT_CHOICES['choices'],
       )
 
-    sourceChannel = models.CharField(
+    sourceChannel = MultiSelectField(
       verbose_name='Source channel', 
       help_text='Information on the source channel',
       blank=True, 
-      max_length=30,
+      max_length=1 + len(RECORDINGINFOTYPE_SOURCECHANNEL_CHOICES['choices']) / 4,
       choices=RECORDINGINFOTYPE_SOURCECHANNEL_CHOICES['choices'],
       )
 
-    sourceChannelType = models.CharField(
+    sourceChannelType = MultiSelectField(
       verbose_name='Source channel', 
       help_text='Type of the source channel',
       blank=True, 
-      max_length=30,
+      max_length=1 + len(RECORDINGINFOTYPE_SOURCECHANNELTYPE_CHOICES['choices']) / 4,
       choices=RECORDINGINFOTYPE_SOURCECHANNELTYPE_CHOICES['choices'],
       )
 
@@ -2033,11 +2034,11 @@ class compressionInfoType_model(SchemaModel):
       help_text='Whether the audio, video or image is compressed or not',
       )
 
-    compressionName = models.CharField(
+    compressionName = MultiSelectField(
       verbose_name='Compression name', 
       help_text='The name of the compression applied',
       blank=True, 
-      max_length=100,
+      max_length=1 + len(COMPRESSIONINFOTYPE_COMPRESSIONNAME_CHOICES['choices']) / 4,
       choices=COMPRESSIONINFOTYPE_COMPRESSIONNAME_CHOICES['choices'],
       )
 
@@ -2506,20 +2507,20 @@ class membershipInfoType_model(SchemaModel):
       help_text='Whether the user is a member or not',
       )
 
-    membershipInstitution = models.CharField(
+    membershipInstitution = MultiSelectField(
       verbose_name='Membership institution', 
       help_text='This lists the different institutions releasing the res' \
       'ources and establishing membership conditions',
       
-      max_length=50,
+      max_length=1 + len(MEMBERSHIPINFOTYPE_MEMBERSHIPINSTITUTION_CHOICES['choices']) / 4,
       choices=MEMBERSHIPINFOTYPE_MEMBERSHIPINSTITUTION_CHOICES['choices'],
       )
 
-    back_to_licenceinfotype_model = models.ForeignKey("licenceInfoType_model", )
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+    def real_unicode_(self):
+        # pylint: disable-msg=C0301
+        formatargs = ['member', 'membershipInstitution', ]
+        formatstring = u'member:{} {}'
+        return self.unicode_(formatstring, formatargs)
 
 LICENCEINFOTYPE_LICENCE_CHOICES = _make_choices_from_list([
   u'AGPL', u'LGPL', u'CC_BY-NC-ND', u'CC_BY-NC-SA', u'CC_BY-NC',
@@ -2578,7 +2579,7 @@ class licenceInfoType_model(SchemaModel):
       ( 'distributionRightsHolder/personInfo', 'distributionRightsHolder', RECOMMENDED ),
       ( 'distributionRightsHolder/organizationInfo', 'distributionRightsHolder', RECOMMENDED ),
       ( u'userNature', u'userNature', OPTIONAL ),
-      ( u'membershipInfo', u'membershipinfotype_model_set', OPTIONAL ),
+      ( u'membershipInfo', u'membershipInfo', OPTIONAL ),
     )
     __schema_classes__ = {
       u'membershipInfo': "membershipInfoType_model",
@@ -2586,29 +2587,29 @@ class licenceInfoType_model(SchemaModel):
       u'personInfo': "personInfoType_model",
     }
 
-    licence = models.CharField(
+    licence = MultiSelectField(
       verbose_name='Licence', 
       help_text='The licence of use for the resource',
       
-      max_length=100,
+      max_length=1 + len(LICENCEINFOTYPE_LICENCE_CHOICES['choices']) / 4,
       choices=LICENCEINFOTYPE_LICENCE_CHOICES['choices'],
       )
 
-    restrictionsOfUse = models.CharField(
+    restrictionsOfUse = MultiSelectField(
       verbose_name='Restrictions of use', 
       help_text='Specifies the restrictions imposed by the type of the l' \
       'icence',
       blank=True, 
-      max_length=100,
+      max_length=1 + len(LICENCEINFOTYPE_RESTRICTIONSOFUSE_CHOICES['choices']) / 4,
       choices=LICENCEINFOTYPE_RESTRICTIONSOFUSE_CHOICES['choices'],
       )
 
-    distributionAccessMedium = models.CharField(
+    distributionAccessMedium = MultiSelectField(
       verbose_name='Distribution access medium', 
       help_text='Specifies the medium (channel) used for delivery or pro' \
       'viding access to the resource',
       blank=True, 
-      max_length=30,
+      max_length=1 + len(LICENCEINFOTYPE_DISTRIBUTIONACCESSMEDIUM_CHOICES['choices']) / 4,
       choices=LICENCEINFOTYPE_DISTRIBUTIONACCESSMEDIUM_CHOICES['choices'],
       )
 
@@ -2664,17 +2665,23 @@ class licenceInfoType_model(SchemaModel):
       ' of the work that are not defined in the distribution agreement)',
       blank=True, null=True, related_name="distributionRightsHolder_%(class)s_related", )
 
-    userNature = models.CharField(
+    userNature = MultiSelectField(
       verbose_name='User nature', 
       help_text='The conditions imposed by the nature of the user (for i' \
       'nstance, a research use may have different implications depending' \
       ' on this)',
       blank=True, 
-      max_length=50,
+      max_length=1 + len(LICENCEINFOTYPE_USERNATURE_CHOICES['choices']) / 4,
       choices=LICENCEINFOTYPE_USERNATURE_CHOICES['choices'],
       )
 
-    # OneToMany field: membershipInfo
+    membershipInfo = models.ManyToManyField("membershipInfoType_model", 
+      verbose_name='Membership', 
+      help_text='The conditions imposed by the user being member of some' \
+      ' association/institution (e.g., ELRA, LDC) distributing the resou' \
+      'rce. This indicates the availability conditions (and prices) for ' \
+      'users who are members or not',
+      blank=True, null=True, related_name="membershipInfo_%(class)s_related", )
 
     back_to_distributioninfotype_model = models.ForeignKey("distributionInfoType_model", )
 
@@ -3034,11 +3041,11 @@ class projectInfoType_model(SchemaModel):
       'ment etc.) is located',
       blank=True, )
 
-    fundingType = models.CharField(
+    fundingType = MultiSelectField(
       verbose_name='Funding', 
       help_text='Specifies the type of funding of the project',
       
-      max_length=30,
+      max_length=1 + len(PROJECTINFOTYPE_FUNDINGTYPE_CHOICES['choices']) / 4,
       choices=PROJECTINFOTYPE_FUNDINGTYPE_CHOICES['choices'],
       )
 
@@ -3177,12 +3184,12 @@ class foreseenUseInfoType_model(SchemaModel):
       choices=FORESEENUSEINFOTYPE_FORESEENUSE_CHOICES['choices'],
       )
 
-    useNLPSpecific = models.CharField(
+    useNLPSpecific = MultiSelectField(
       verbose_name='Use nlpspecific', 
       help_text='Specifies the NLP application for which the resource is' \
       'created or the application in which it has actually been used.',
       blank=True, 
-      max_length=FORESEENUSEINFOTYPE_USENLPSPECIFIC_CHOICES['max_length'],
+      max_length=1 + len(FORESEENUSEINFOTYPE_USENLPSPECIFIC_CHOICES['choices']) / 4,
       choices=FORESEENUSEINFOTYPE_USENLPSPECIFIC_CHOICES['choices'],
       )
 
@@ -3266,12 +3273,12 @@ class actualUseInfoType_model(SchemaModel):
       choices=ACTUALUSEINFOTYPE_ACTUALUSE_CHOICES['choices'],
       )
 
-    useNLPSpecific = models.CharField(
+    useNLPSpecific = MultiSelectField(
       verbose_name='Use nlpspecific', 
       help_text='Specifies the NLP application for which the resource is' \
       'created or the application in which it has actually been used.',
       blank=True, 
-      max_length=ACTUALUSEINFOTYPE_USENLPSPECIFIC_CHOICES['max_length'],
+      max_length=1 + len(ACTUALUSEINFOTYPE_USENLPSPECIFIC_CHOICES['choices']) / 4,
       choices=ACTUALUSEINFOTYPE_USENLPSPECIFIC_CHOICES['choices'],
       )
 
@@ -3527,21 +3534,21 @@ class audioContentInfoType_model(SchemaModel):
       ( u'noiseLevel', u'noiseLevel', OPTIONAL ),
     )
 
-    speechItems = models.CharField(
+    speechItems = MultiSelectField(
       verbose_name='Speech items', 
       help_text='Specifies the distinct elements that are pronounced and' \
       ' annotated as such',
       blank=True, 
-      max_length=30,
+      max_length=1 + len(AUDIOCONTENTINFOTYPE_SPEECHITEMS_CHOICES['choices']) / 4,
       choices=AUDIOCONTENTINFOTYPE_SPEECHITEMS_CHOICES['choices'],
       )
 
-    nonSpeechItems = models.CharField(
+    nonSpeechItems = MultiSelectField(
       verbose_name='Non speech items', 
       help_text='Specifies the distinct elements that maybe included in ' \
       'the audio corpus',
       blank=True, 
-      max_length=30,
+      max_length=1 + len(AUDIOCONTENTINFOTYPE_NONSPEECHITEMS_CHOICES['choices']) / 4,
       choices=AUDIOCONTENTINFOTYPE_NONSPEECHITEMS_CHOICES['choices'],
       )
 
@@ -3738,11 +3745,11 @@ class audioFormatInfoType_model(SchemaModel):
       '.org/)',
       max_length=1000, )
 
-    signalEncoding = models.CharField(
+    signalEncoding = MultiSelectField(
       verbose_name='Signal encoding', 
       help_text='Specifies the encoding the audio type uses',
       blank=True, 
-      max_length=30,
+      max_length=1 + len(AUDIOFORMATINFOTYPE_SIGNALENCODING_CHOICES['choices']) / 4,
       choices=AUDIOFORMATINFOTYPE_SIGNALENCODING_CHOICES['choices'],
       )
 
@@ -4359,12 +4366,12 @@ class videoContentInfoType_model(SchemaModel):
       help_text='Main type of object or people represented in the video',
       )
 
-    textIncludedInVideo = models.CharField(
+    textIncludedInVideo = MultiSelectField(
       verbose_name='Text included in video', 
       help_text='Indicates if text is present in or in conjunction with ' \
       'the video',
       blank=True, 
-      max_length=VIDEOCONTENTINFOTYPE_TEXTINCLUDEDINVIDEO_CHOICES['max_length'],
+      max_length=1 + len(VIDEOCONTENTINFOTYPE_TEXTINCLUDEDINVIDEO_CHOICES['choices']) / 4,
       choices=VIDEOCONTENTINFOTYPE_TEXTINCLUDEDINVIDEO_CHOICES['choices'],
       )
 
@@ -4423,11 +4430,11 @@ class videoFormatInfoType_model(SchemaModel):
       '.org/)',
       max_length=1000, )
 
-    colourSpace = models.CharField(
+    colourSpace = MultiSelectField(
       verbose_name='Colour space', 
       help_text='Defines the colour space for the video',
       blank=True, 
-      max_length=VIDEOFORMATINFOTYPE_COLOURSPACE_CHOICES['max_length'],
+      max_length=1 + len(VIDEOFORMATINFOTYPE_COLOURSPACE_CHOICES['choices']) / 4,
       choices=VIDEOFORMATINFOTYPE_COLOURSPACE_CHOICES['choices'],
       )
 
@@ -4718,12 +4725,12 @@ class imageContentInfoType_model(SchemaModel):
       'mage corpus',
       )
 
-    textIncludedInImage = models.CharField(
+    textIncludedInImage = MultiSelectField(
       verbose_name='Text included in image', 
       help_text='Provides information on the type of text that may be on' \
       ' the image',
       blank=True, 
-      max_length=IMAGECONTENTINFOTYPE_TEXTINCLUDEDINIMAGE_CHOICES['max_length'],
+      max_length=1 + len(IMAGECONTENTINFOTYPE_TEXTINCLUDEDINIMAGE_CHOICES['choices']) / 4,
       choices=IMAGECONTENTINFOTYPE_TEXTINCLUDEDINIMAGE_CHOICES['choices'],
       )
 
@@ -4790,11 +4797,11 @@ class imageFormatInfoType_model(SchemaModel):
       '.org/)',
       max_length=1000, )
 
-    colourSpace = models.CharField(
+    colourSpace = MultiSelectField(
       verbose_name='Colour space', 
       help_text='Defines the colour space for the video',
       blank=True, 
-      max_length=IMAGEFORMATINFOTYPE_COLOURSPACE_CHOICES['max_length'],
+      max_length=1 + len(IMAGEFORMATINFOTYPE_COLOURSPACE_CHOICES['choices']) / 4,
       choices=IMAGEFORMATINFOTYPE_COLOURSPACE_CHOICES['choices'],
       )
 
@@ -5258,12 +5265,12 @@ class ngramInfoType_model(SchemaModel):
       ( u'interpolated', u'interpolated', OPTIONAL ),
     )
 
-    baseItem = models.CharField(
+    baseItem = MultiSelectField(
       verbose_name='Base item', 
       help_text='Type of item that is represented in the n-gram resource' \
       '',
       
-      max_length=50,
+      max_length=1 + len(NGRAMINFOTYPE_BASEITEM_CHOICES['choices']) / 4,
       choices=NGRAMINFOTYPE_BASEITEM_CHOICES['choices'],
       )
 
@@ -5346,12 +5353,12 @@ class relatedLexiconInfoType_model(SchemaModel):
       'he grammar',
       blank=True, max_length=500, )
 
-    compatibleLexiconType = models.CharField(
+    compatibleLexiconType = MultiSelectField(
       verbose_name='Compatible lexicon', 
       help_text='Type of (external) lexicon that can be used with the gr' \
       'ammar',
       blank=True, 
-      max_length=30,
+      max_length=1 + len(RELATEDLEXICONINFOTYPE_COMPATIBLELEXICONTYPE_CHOICES['choices']) / 4,
       choices=RELATEDLEXICONINFOTYPE_COMPATIBLELEXICONTYPE_CHOICES['choices'],
       )
 
@@ -5396,12 +5403,12 @@ class languageDescriptionEncodingInfoType_model(SchemaModel):
       ( u'weightedGrammar', u'weightedGrammar', OPTIONAL ),
     )
 
-    encodingLevel = models.CharField(
+    encodingLevel = MultiSelectField(
       verbose_name='Encoding level', 
       help_text='Information on the linguistic levels covered by the res' \
       'ource (grammar or lexical/conceptual resource)',
       
-      max_length=30,
+      max_length=1 + len(LANGUAGEDESCRIPTIONENCODINGINFOTYPE_ENCODINGLEVEL_CHOICES['choices']) / 4,
       choices=LANGUAGEDESCRIPTIONENCODINGINFOTYPE_ENCODINGLEVEL_CHOICES['choices'],
       )
 
@@ -5426,20 +5433,20 @@ class languageDescriptionEncodingInfoType_model(SchemaModel):
       'rce (grammar or tool/service)',
       blank=True, max_length=1000, )
 
-    task = models.CharField(
+    task = MultiSelectField(
       verbose_name='Task', 
       help_text='An indication of the task performed by the grammar',
       blank=True, 
-      max_length=30,
+      max_length=1 + len(LANGUAGEDESCRIPTIONENCODINGINFOTYPE_TASK_CHOICES['choices']) / 4,
       choices=LANGUAGEDESCRIPTIONENCODINGINFOTYPE_TASK_CHOICES['choices'],
       )
 
-    grammaticalPhenomenaCoverage = models.CharField(
+    grammaticalPhenomenaCoverage = MultiSelectField(
       verbose_name='Grammatical phenomena coverage', 
       help_text='An indication of the grammatical phenomena covered by t' \
       'he grammar',
       blank=True, 
-      max_length=30,
+      max_length=1 + len(LANGUAGEDESCRIPTIONENCODINGINFOTYPE_GRAMMATICALPHENOMENACOVERAGE_CHOICES['choices']) / 4,
       choices=LANGUAGEDESCRIPTIONENCODINGINFOTYPE_GRAMMATICALPHENOMENACOVERAGE_CHOICES['choices'],
       )
 
@@ -5978,21 +5985,21 @@ class lexicalConceptualResourceEncodingInfoType_model(SchemaModel):
       ( u'extraTextualInformationUnit', u'extraTextualInformationUnit', OPTIONAL ),
     )
 
-    encodingLevel = models.CharField(
+    encodingLevel = MultiSelectField(
       verbose_name='Encoding level', 
       help_text='Information on the contents of the lexicalConceptualRes' \
       'ource as regards the linguistic level of analysis',
       
-      max_length=30,
+      max_length=1 + len(LEXICALCONCEPTUALRESOURCEENCODINGINFOTYPE_ENCODINGLEVEL_CHOICES['choices']) / 4,
       choices=LEXICALCONCEPTUALRESOURCEENCODINGINFOTYPE_ENCODINGLEVEL_CHOICES['choices'],
       )
 
-    linguisticInformation = models.CharField(
+    linguisticInformation = MultiSelectField(
       verbose_name='Linguisticrmation', 
       help_text='A more detailed account of the linguistic information c' \
       'ontained in the lexicalConceptualResource',
       blank=True, 
-      max_length=50,
+      max_length=1 + len(LEXICALCONCEPTUALRESOURCEENCODINGINFOTYPE_LINGUISTICINFORMATION_CHOICES['choices']) / 4,
       choices=LEXICALCONCEPTUALRESOURCEENCODINGINFOTYPE_LINGUISTICINFORMATION_CHOICES['choices'],
       )
 
@@ -6016,23 +6023,23 @@ class lexicalConceptualResourceEncodingInfoType_model(SchemaModel):
       ' is linked (e.g. link to a wordnet or ontology)',
       blank=True, )
 
-    extratextualInformation = models.CharField(
+    extratextualInformation = MultiSelectField(
       verbose_name='Extratextualrmation', 
       help_text='An indication of the extratextual information contained' \
       ' in the lexicalConceptualResouce; can be used as an alternative t' \
       'o audio, image, videos etc. for cases where these are not conside' \
       'red an important part of the lcr',
       blank=True, 
-      max_length=30,
+      max_length=1 + len(LEXICALCONCEPTUALRESOURCEENCODINGINFOTYPE_EXTRATEXTUALINFORMATION_CHOICES['choices']) / 4,
       choices=LEXICALCONCEPTUALRESOURCEENCODINGINFOTYPE_EXTRATEXTUALINFORMATION_CHOICES['choices'],
       )
 
-    extraTextualInformationUnit = models.CharField(
+    extraTextualInformationUnit = MultiSelectField(
       verbose_name='Extra textualrmation unit', 
       help_text='The unit of the extratextual information contained in t' \
       'he lexical conceptual resource',
       blank=True, 
-      max_length=30,
+      max_length=1 + len(LEXICALCONCEPTUALRESOURCEENCODINGINFOTYPE_EXTRATEXTUALINFORMATIONUNIT_CHOICES['choices']) / 4,
       choices=LEXICALCONCEPTUALRESOURCEENCODINGINFOTYPE_EXTRATEXTUALINFORMATIONUNIT_CHOICES['choices'],
       )
 
@@ -6605,7 +6612,7 @@ class inputInfoType_model(SchemaModel):
       ( u'conformanceToStandardsBestPractices', u'conformanceToStandardsBestPractices', OPTIONAL ),
     )
 
-    mediaType = models.CharField(
+    mediaType = MultiSelectField(
       verbose_name='Media', 
       help_text='Specifies the media type of the resource and basically ' \
       'corresponds to the physical medium of the content representation.' \
@@ -6614,25 +6621,25 @@ class inputInfoType_model(SchemaModel):
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
       
-      max_length=INPUTINFOTYPE_MEDIATYPE_CHOICES['max_length'],
+      max_length=1 + len(INPUTINFOTYPE_MEDIATYPE_CHOICES['choices']) / 4,
       choices=INPUTINFOTYPE_MEDIATYPE_CHOICES['choices'],
       )
 
-    resourceType = models.CharField(
+    resourceType = MultiSelectField(
       verbose_name='Resource', 
       help_text='The type of the resource that a tool or service takes a' \
       's input or produces as output',
       blank=True, 
-      max_length=30,
+      max_length=1 + len(INPUTINFOTYPE_RESOURCETYPE_CHOICES['choices']) / 4,
       choices=INPUTINFOTYPE_RESOURCETYPE_CHOICES['choices'],
       )
 
-    modalityType = models.CharField(
+    modalityType = MultiSelectField(
       verbose_name='Modality', 
       help_text='Specifies the type of the modality represented in the r' \
       'esource or processed by a tool/service',
       blank=True, 
-      max_length=INPUTINFOTYPE_MODALITYTYPE_CHOICES['max_length'],
+      max_length=1 + len(INPUTINFOTYPE_MODALITYTYPE_CHOICES['choices']) / 4,
       choices=INPUTINFOTYPE_MODALITYTYPE_CHOICES['choices'],
       )
 
@@ -6665,21 +6672,21 @@ class inputInfoType_model(SchemaModel):
       '.org/)',
       blank=True, )
 
-    characterEncoding = models.CharField(
+    characterEncoding = MultiSelectField(
       verbose_name='Character encoding', 
       help_text='The name of the character encoding used in the resource' \
       ' or accepted by the tool/service',
       blank=True, 
-      max_length=INPUTINFOTYPE_CHARACTERENCODING_CHOICES['max_length'],
+      max_length=1 + len(INPUTINFOTYPE_CHARACTERENCODING_CHOICES['choices']) / 4,
       choices=INPUTINFOTYPE_CHARACTERENCODING_CHOICES['choices'],
       )
 
-    annotationType = models.CharField(
+    annotationType = MultiSelectField(
       verbose_name='Annotation', 
       help_text='Specifies the annotation level of the resource or the a' \
       'nnotation type a tool/ service requires or produces as an output',
       blank=True, 
-      max_length=INPUTINFOTYPE_ANNOTATIONTYPE_CHOICES['max_length'],
+      max_length=1 + len(INPUTINFOTYPE_ANNOTATIONTYPE_CHOICES['choices']) / 4,
       choices=INPUTINFOTYPE_ANNOTATIONTYPE_CHOICES['choices'],
       )
 
@@ -6696,22 +6703,22 @@ class inputInfoType_model(SchemaModel):
       'otation of the resource or used by the tool/service',
       blank=True, )
 
-    segmentationLevel = models.CharField(
+    segmentationLevel = MultiSelectField(
       verbose_name='Segmentation level', 
       help_text='Specifies the segmentation unit in terms of which the r' \
       'esource has been segmented or the level of segmentation a tool/se' \
       'rvice requires/outputs',
       blank=True, 
-      max_length=INPUTINFOTYPE_SEGMENTATIONLEVEL_CHOICES['max_length'],
+      max_length=1 + len(INPUTINFOTYPE_SEGMENTATIONLEVEL_CHOICES['choices']) / 4,
       choices=INPUTINFOTYPE_SEGMENTATIONLEVEL_CHOICES['choices'],
       )
 
-    conformanceToStandardsBestPractices = models.CharField(
+    conformanceToStandardsBestPractices = MultiSelectField(
       verbose_name='Conformance to standards best practices', 
       help_text='Specifies the standards or the best practices to which ' \
       'the tagset used for the annotation conforms',
       blank=True, 
-      max_length=INPUTINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES['max_length'],
+      max_length=1 + len(INPUTINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES['choices']) / 4,
       choices=INPUTINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES['choices'],
       )
 
@@ -6841,7 +6848,7 @@ class outputInfoType_model(SchemaModel):
       ( u'conformanceToStandardsBestPractices', u'conformanceToStandardsBestPractices', OPTIONAL ),
     )
 
-    mediaType = models.CharField(
+    mediaType = MultiSelectField(
       verbose_name='Media', 
       help_text='Specifies the media type of the resource and basically ' \
       'corresponds to the physical medium of the content representation.' \
@@ -6850,25 +6857,25 @@ class outputInfoType_model(SchemaModel):
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
       
-      max_length=OUTPUTINFOTYPE_MEDIATYPE_CHOICES['max_length'],
+      max_length=1 + len(OUTPUTINFOTYPE_MEDIATYPE_CHOICES['choices']) / 4,
       choices=OUTPUTINFOTYPE_MEDIATYPE_CHOICES['choices'],
       )
 
-    resourceType = models.CharField(
+    resourceType = MultiSelectField(
       verbose_name='Resource', 
       help_text='The type of the resource that a tool or service takes a' \
       's input or produces as output',
       blank=True, 
-      max_length=30,
+      max_length=1 + len(OUTPUTINFOTYPE_RESOURCETYPE_CHOICES['choices']) / 4,
       choices=OUTPUTINFOTYPE_RESOURCETYPE_CHOICES['choices'],
       )
 
-    modalityType = models.CharField(
+    modalityType = MultiSelectField(
       verbose_name='Modality', 
       help_text='Specifies the type of the modality represented in the r' \
       'esource or processed by a tool/service',
       blank=True, 
-      max_length=OUTPUTINFOTYPE_MODALITYTYPE_CHOICES['max_length'],
+      max_length=1 + len(OUTPUTINFOTYPE_MODALITYTYPE_CHOICES['choices']) / 4,
       choices=OUTPUTINFOTYPE_MODALITYTYPE_CHOICES['choices'],
       )
 
@@ -6901,21 +6908,21 @@ class outputInfoType_model(SchemaModel):
       '.org/)',
       blank=True, )
 
-    characterEncoding = models.CharField(
+    characterEncoding = MultiSelectField(
       verbose_name='Character encoding', 
       help_text='The name of the character encoding used in the resource' \
       ' or accepted by the tool/service',
       blank=True, 
-      max_length=OUTPUTINFOTYPE_CHARACTERENCODING_CHOICES['max_length'],
+      max_length=1 + len(OUTPUTINFOTYPE_CHARACTERENCODING_CHOICES['choices']) / 4,
       choices=OUTPUTINFOTYPE_CHARACTERENCODING_CHOICES['choices'],
       )
 
-    annotationType = models.CharField(
+    annotationType = MultiSelectField(
       verbose_name='Annotation', 
       help_text='Specifies the annotation level of the resource or the a' \
       'nnotation type a tool/ service requires or produces as an output',
       blank=True, 
-      max_length=OUTPUTINFOTYPE_ANNOTATIONTYPE_CHOICES['max_length'],
+      max_length=1 + len(OUTPUTINFOTYPE_ANNOTATIONTYPE_CHOICES['choices']) / 4,
       choices=OUTPUTINFOTYPE_ANNOTATIONTYPE_CHOICES['choices'],
       )
 
@@ -6932,22 +6939,22 @@ class outputInfoType_model(SchemaModel):
       'otation of the resource or used by the tool/service',
       blank=True, )
 
-    segmentationLevel = models.CharField(
+    segmentationLevel = MultiSelectField(
       verbose_name='Segmentation level', 
       help_text='Specifies the segmentation unit in terms of which the r' \
       'esource has been segmented or the level of segmentation a tool/se' \
       'rvice requires/outputs',
       blank=True, 
-      max_length=OUTPUTINFOTYPE_SEGMENTATIONLEVEL_CHOICES['max_length'],
+      max_length=1 + len(OUTPUTINFOTYPE_SEGMENTATIONLEVEL_CHOICES['choices']) / 4,
       choices=OUTPUTINFOTYPE_SEGMENTATIONLEVEL_CHOICES['choices'],
       )
 
-    conformanceToStandardsBestPractices = models.CharField(
+    conformanceToStandardsBestPractices = MultiSelectField(
       verbose_name='Conformance to standards best practices', 
       help_text='Specifies the standards or the best practices to which ' \
       'the tagset used for the annotation conforms',
       blank=True, 
-      max_length=OUTPUTINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES['max_length'],
+      max_length=1 + len(OUTPUTINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES['choices']) / 4,
       choices=OUTPUTINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES['choices'],
       )
 
@@ -7009,36 +7016,36 @@ class toolServiceEvaluationInfoType_model(SchemaModel):
       'd',
       )
 
-    evaluationLevel = models.CharField(
+    evaluationLevel = MultiSelectField(
       verbose_name='Evaluation level', 
       help_text='Indicates the evaluation level',
       blank=True, 
-      max_length=30,
+      max_length=1 + len(TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONLEVEL_CHOICES['choices']) / 4,
       choices=TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONLEVEL_CHOICES['choices'],
       )
 
-    evaluationType = models.CharField(
+    evaluationType = MultiSelectField(
       verbose_name='Evaluation', 
       help_text='Indicates the evaluation type',
       blank=True, 
-      max_length=20,
+      max_length=1 + len(TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONTYPE_CHOICES['choices']) / 4,
       choices=TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONTYPE_CHOICES['choices'],
       )
 
-    evaluationCriteria = models.CharField(
+    evaluationCriteria = MultiSelectField(
       verbose_name='Evaluation criteria', 
       help_text='Defines the criteria of the evaluation of a tool',
       blank=True, 
-      max_length=30,
+      max_length=1 + len(TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONCRITERIA_CHOICES['choices']) / 4,
       choices=TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONCRITERIA_CHOICES['choices'],
       )
 
-    evaluationMeasure = models.CharField(
+    evaluationMeasure = MultiSelectField(
       verbose_name='Evaluation measure', 
       help_text='Defines whether the evaluation measure is human or auto' \
       'matic',
       blank=True, 
-      max_length=30,
+      max_length=1 + len(TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONMEASURE_CHOICES['choices']) / 4,
       choices=TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONMEASURE_CHOICES['choices'],
       )
 
@@ -7094,11 +7101,11 @@ class toolServiceOperationInfoType_model(SchemaModel):
       u'runningEnvironmentInfo': "runningEnvironmentInfoType_model",
     }
 
-    operatingSystem = models.CharField(
+    operatingSystem = MultiSelectField(
       verbose_name='Operating system', 
       help_text='The operating system on which the tool will be running',
       
-      max_length=50,
+      max_length=1 + len(TOOLSERVICEOPERATIONINFOTYPE_OPERATINGSYSTEM_CHOICES['choices']) / 4,
       choices=TOOLSERVICEOPERATIONINFOTYPE_OPERATINGSYSTEM_CHOICES['choices'],
       )
 
@@ -7578,12 +7585,12 @@ class dynamicElementInfoType_model(SchemaModel):
       'ideo or image part of the resource',
       blank=True, )
 
-    bodyParts = models.CharField(
+    bodyParts = MultiSelectField(
       verbose_name='Body parts', 
       help_text='The body parts visible in the video or image part of th' \
       'e resource',
       blank=True, 
-      max_length=DYNAMICELEMENTINFOTYPE_BODYPARTS_CHOICES['max_length'],
+      max_length=1 + len(DYNAMICELEMENTINFOTYPE_BODYPARTS_CHOICES['choices']) / 4,
       choices=DYNAMICELEMENTINFOTYPE_BODYPARTS_CHOICES['choices'],
       )
 
@@ -7685,12 +7692,12 @@ class staticElementInfoType_model(SchemaModel):
       'ideo or image part of the resource',
       blank=True, )
 
-    bodyParts = models.CharField(
+    bodyParts = MultiSelectField(
       verbose_name='Body parts', 
       help_text='The body parts visible in the video or image part of th' \
       'e resource',
       blank=True, 
-      max_length=STATICELEMENTINFOTYPE_BODYPARTS_CHOICES['max_length'],
+      max_length=1 + len(STATICELEMENTINFOTYPE_BODYPARTS_CHOICES['choices']) / 4,
       choices=STATICELEMENTINFOTYPE_BODYPARTS_CHOICES['choices'],
       )
 

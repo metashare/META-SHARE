@@ -2,11 +2,11 @@
 
 {% block header %}
   <h1 class="grey_dark">Browse metadata catalogue</h1>
-  <h3 class="grey_light">{{title}}</h3>
+  <h3 class="grey_light">{{ title }}</h3>
 {% endblock %}
 
 {% block content %}    
-<h2>{{ title.0 }}</h2>
+<h2>{{ title }}</h2>
 <div class="content_box">
 
 <script type="text/javascript">
@@ -14,19 +14,23 @@
  $.ajaxSetup({
     cache: false
 });
+{% if not signature_req %}
  $("#licence").load("{% url metashare.repo2.views.getlicence object_id %}");
+{% endif %}
 });
 </script>
 <h3>Licence Agreement</h3>
 
+{% if not signature_req %}
 <div style="border:1px solid #EEE; margin:1px 1px 0;padding-right:2px;padding-left:2px" id="licence">
 <font size=-1>loading... </font>
 </div>
+{% endif %}
 
-{% if signature_req == 0 %}
+{% if not signature_req %}
   <form id="downloadbox" action="{% url metashare.repo2.views.download object_id %}" method="post">
     {% csrf_token %}
-    <p><input name="license_agree" type="checkbox" /> I <strong>agree</strong> to these license terms and want to download the resource.</p>
+    <p><input name="license_agree" value="1" type="checkbox" /> I <strong>agree</strong> to these license terms and want to download the resource.</p>
     <input class="span-8 button middle_button" type="submit" value="Download Resource" />
   </form>
 {% else %}

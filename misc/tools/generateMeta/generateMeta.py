@@ -94,6 +94,22 @@ from parse_xsd import mapName, cleanupName, ElementDict, SimpleTypeDict, \
 from clazzbase import Clazz, ClazzAttributeMember, ClazzMember
 
 
+# Magic setting of PYTHONPATH, to simplify use on multiple platforms:
+# Magic python path, based on http://djangosnippets.org/snippets/281/
+from os.path import abspath, dirname, join
+thisdir = dirname(abspath(__file__))
+# Rootdir is three levels up
+rootdir = dirname(dirname(dirname(thisdir)))
+# Insert our dependencies:
+sys.path.insert(0, join(rootdir, 'lib', 'python2.7', 'site-packages'))
+# Insert our parent directory (the one containing the folder metashare/):
+sys.path.insert(0, thisdir)
+
+
+
+
+
+
 # Default logger configuration
 ## logging.basicConfig(level=logging.DEBUG,
 ##                     format='%(asctime)s %(levelname)s %(message)s')

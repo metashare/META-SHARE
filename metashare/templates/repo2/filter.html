@@ -1,11 +1,8 @@
   {% if filter %}
     {# Don't display the filter if its first element count is 0 (others will be then) #}
-    {% if filter.0.1 != 0 %}
       <div>
         <dt>{{ title }}:</dt>
           {% for item in filter|slice:":4" %}
-            {% if item.1 != 0 %}
-              &middot;
               {# Building of the url #}
 	          {# for each element of the request #}
                 {# if one of them is 'selected_facets' #}
@@ -14,26 +11,18 @@
 	              {# if item not in values then display new facet #}
 	              {# else allow to disable the facet #}
 	          {# if 'selected_facets' is not in the request then display new facet #}
-	          <a href="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key = 'selected_facets' %}{% for facet in values %}{% if facet|urlencode != filter_exact|add:":"|add:item.0|urlencode %}&amp;selected_facets={{ facet|urlencode }}{% endif %}{% endfor %}{% if filter_exact|add:":"|add:item.0 not in values %}&amp;selected_facets={{ filter_exact|urlencode }}%3A{{ item.0|urlencode }}"{% else %}" style="font-weight:bold ;"{% endif %}{% endif %}{% endfor %}{% if 'selected_facets' not in request.GET %}&amp;selected_facets={{ filter_exact|urlencode }}%3A{{ item.0|urlencode }}"{% endif %}>{{ item.0 }}</a> ({{ item.1 }})
-	          {# Display cross if filter is selected #} 
-	          {% for key, values in request.GET.iterlists %}{% if key = 'selected_facets' %}{% if filter_exact|add:":"|add:item.0 in values %}<a href="?q={{ query|urlencode }}{% for facet in values %}{% if facet|urlencode != filter_exact|add:":"|add:item.0|urlencode %}&amp;selected_facets={{ facet|urlencode }}{% endif %}{% endfor %}"><img src="/media/css/sexybuttons/images/icons/silk/bullet_cross.png"/></a>{% endif %}{% endif %}{% endfor %}
+	          <a href="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key = 'selected_facets' %}{% for facet in values %}{% if facet != filter_exact|add:":"|add:item.0 %}&amp;selected_facets={{ facet|urlencode }}{% endif %}{% endfor %}{% if filter_exact|add:":"|add:item.0 not in values %}&amp;selected_facets={{ filter_exact|add:":"|add:item.0|urlencode }}" class="addableFacet{% else %}" class="removableFacet{% endif %}{% endif %}{% endfor %}{% if 'selected_facets' not in request.GET %}&amp;selected_facets={{ filter_exact|add:":"|add:item.0|urlencode }}" class="addableFacet{% endif %}">{{ item.0 }}</a> ({{ item.1 }})
               <br>
-            {% endif %}
 	      {% endfor %}
 		  {% if filter|length > 4 %}
 		    <a id="displayText_{{ filter_exact }}" href="javascript:toggle('{{ filter_exact }}');">more</a><br>
 	      {% endif %}
 	      <div id="addElements_{{ filter_exact }}" style="display:none">
 		    {% for item in filter|slice:"4:" %}
-              {% if item.1 != 0 %}
-	            &middot;
-                <a href="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key = 'selected_facets' %}{% for facet in values %}{% if facet|urlencode != filter_exact|add:":"|add:item.0|urlencode %}&amp;selected_facets={{ facet|urlencode }}{% endif %}{% endfor %}{% if filter_exact|add:":"|add:item.0 not in values %}&amp;selected_facets={{ filter_exact|urlencode }}%3A{{ item.0|urlencode }}"{% else %}" style="font-weight:bold ;"{% endif %}{% endif %}{% endfor %}{% if 'selected_facets' not in request.GET %}&amp;selected_facets={{ filter_exact|urlencode }}%3A{{ item.0|urlencode }}"{% endif %}>{{ item.0 }}</a> ({{ item.1 }})
-                {% for key, values in request.GET.iterlists %}{% if key = 'selected_facets' %}{% if filter_exact|add:":"|add:item.0 in values %}<a href="?q={{ query|urlencode }}{% for facet in values %}{% if facet|urlencode != filter_exact|add:":"|add:item.0|urlencode %}&amp;selected_facets={{ facet|urlencode }}{% endif %}{% endfor %}"><img src="/media/css/sexybuttons/images/icons/silk/bullet_cross.png"/></a>{% endif %}{% endif %}{% endfor %}
+	            <a href="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key = 'selected_facets' %}{% for facet in values %}{% if facet != filter_exact|add:":"|add:item.0 %}&amp;selected_facets={{ facet|urlencode }}{% endif %}{% endfor %}{% if filter_exact|add:":"|add:item.0 not in values %}&amp;selected_facets={{ filter_exact|add:":"|add:item.0|urlencode }}" class="addableFacet{% else %}" class="removableFacet{% endif %}{% endif %}{% endfor %}{% if 'selected_facets' not in request.GET %}&amp;selected_facets={{ filter_exact|add:":"|add:item.0|urlencode }}" class="addableFacet{% endif %}">{{ item.0 }}</a> ({{ item.1 }})
     		    <br>
-    		  {% endif %}
 		    {% endfor %}
 		  </div>
 	  </div>
-    {% endif %}
   {% endif %}
   

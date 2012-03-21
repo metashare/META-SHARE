@@ -503,6 +503,16 @@ div.filter_box{
     float: left;
 }
 
+a.addableFacet:before {
+    content: " " url(sexybuttons/images/icons/silk/bullet_plus.png);
+    vertical-align: top;
+}
+
+a.removableFacet:before {
+    content: " " url(sexybuttons/images/icons/silk/bullet_minus.png);
+    vertical-align: top;
+}
+
 
 a.sexybutton{
 	text-align: center;

@@ -79,7 +79,7 @@ class MetashareBackendSite(AdminSite):
             form = ResourceDescriptionUploadForm()
 
         context = {
-          'title': _('Upload new resource description'),
+          'title': _('Upload new resource description(s)'),
           'form': form,
           'form_url': request.path,
           'root_path': self.root_path,
