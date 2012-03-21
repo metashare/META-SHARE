@@ -190,21 +190,20 @@ def getlicence(request, object_id):
 @login_required
 def download(request, object_id):
     """ Renders the repository download view. """
-    if object_id and request.user.is_active:
-        resource = get_object_or_404(resourceInfoType_model, pk=object_id)
+    resource = get_object_or_404(resourceInfoType_model, pk=object_id)
+    licences = licenceInfoType_model.objects \
+        .filter(back_to_distributioninfotype_model__id=object_id) \
+        .values("licence", "downloadLocation")
 
-        agreement = 0
+    if request.user.is_active:
+        agreement = False
         if request.method == "POST":
-            if request.POST.get('license_agree', False):
-                agreement = 1
-
+            la_val = request.POST.get('license_agree', '0')
+            agreement = la_val == '1'
         elif request.method == "GET":
-            agreement = int(request.GET.get('license_agree', '0'))
-
-        licences = licenceInfoType_model.objects.values("licence",
-                                                        "downloadLocation") \
-                    .filter(back_to_distributioninfotype_model__id=object_id)
-        if agreement == 1:
+            la_val = request.GET.get('license_agree', '0')
+            agreement = la_val == '1'
+        if agreement:
             sessionid = ""
             if request.COOKIES:
                 sessionid = request.COOKIES.get('sessionid', '')
@@ -232,7 +231,7 @@ def download(request, object_id):
 
                 except:
                     raise Http404
-            # redirect to download location
+            # redirect to download location, if available
             else:
                 for licenceinfo in licences:
                     download_urls = pickle.loads(base64.b64decode(

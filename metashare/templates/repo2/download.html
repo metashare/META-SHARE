@@ -26,7 +26,7 @@
 {% if not signature_req %}
   <form id="downloadbox" action="{% url metashare.repo2.views.download object_id %}" method="post">
     {% csrf_token %}
-    <p><input name="license_agree" type="checkbox" /> I <strong>agree</strong> to these license terms and want to download the resource.</p>
+    <p><input name="license_agree" value="1" type="checkbox" /> I <strong>agree</strong> to these license terms and want to download the resource.</p>
     <input class="span-8 button middle_button" type="submit" value="Download Resource" />
   </form>
 {% else %}
