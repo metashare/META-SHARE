@@ -10,7 +10,6 @@ from metashare.repo2.models import corpusInfoType_model, \
 
 register = template.Library()
 
-
 class ResourceLanguages(template.Node):
     """
     Template tag that allows to obfuscate email addresses in page templates.
