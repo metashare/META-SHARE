@@ -12,10 +12,7 @@ register = template.Library()
 
 class ResourceLanguages(template.Node):
     """
-    Template tag that allows to obfuscate email addresses in page templates.
-    
-    Based on http://djangosnippets.org/snippets/1907/
-    
+    Template tag that allows to display languages in result page template.    
     """
     
     def __init__(self, context_var):
@@ -27,7 +24,7 @@ class ResourceLanguages(template.Node):
         
     def render(self, context):
         """
-        Renders a given email address as obfuscated JavaScript code.
+        Renders languages.
         """
         result = []
         corpus_media = self.context_var.resolve(context)
@@ -92,7 +89,7 @@ class ResourceLanguages(template.Node):
 
 def resource_languages(parser, token):
     """
-    Use it like this: {% load_languages object.resourceComponentType %}
+    Use it like this: {% load_languages object.resourceComponentType.as_subclass %}
     """
     tokens = token.contents.split()
     if len(tokens) != 2:
