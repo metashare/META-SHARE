@@ -3,37 +3,38 @@ Project: META-SHARE prototype implementation
  Author: Christian Federmann <cfedermann@dfki.de>
 """
 
-import types
+import base64
+import logging
 import operator
 import re
-    
-from collections import defaultdict, OrderedDict
-from urllib import urlopen
-from os.path import split
-from urlparse import urlparse
-import base64
+import types
 try:
     import cPickle as pickle
 except:
     import pickle
+
+from collections import defaultdict, OrderedDict
+from datetime import datetime
+from os.path import split
+from urllib import urlopen
+from urlparse import urlparse
                         
 from django.contrib.auth.decorators import login_required
-from django.core.urlresolvers import reverse
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.urlresolvers import reverse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
-from django.http import HttpResponse, Http404
-from datetime import datetime
+from django.utils.translation import ugettext as _
 
 from haystack.views import FacetedSearchView
 
 from metashare.repo2.forms import SimpleSearchForm
-# pylint: disable-msg=W0401, W0614
-from metashare.repo2.models import *
-
-from metashare.settings import DJANGO_URL
-from metashare.stats.model_utils import getLRStats, saveLRStats, saveQueryStats, \
-  VIEW_STAT, DOWNLOAD_STAT
+from metashare.repo2.models import licenceInfoType_model, \
+    resourceInfoType_model, LICENCEINFOTYPE_LICENCE_CHOICES
+from metashare.settings import DJANGO_URL, DJANGO_BASE, LOG_LEVEL, LOG_HANDLER
+from metashare.stats.model_utils import getLRStats, saveLRStats, \
+    saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
 
 
 MAXIMUM_READ_BLOCK_SIZE = 4096
@@ -74,7 +75,6 @@ def _convert_to_template_tuples(element_tree):
     # Otherwise, we return a tuple containg (key, value), i.e., (tag, text).
     else:
         return ((element_tree.tag, element_tree.text),)
-
 
 
 # The following dictionary keeps info about licence document (as relative file system path)
@@ -134,24 +134,31 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
 def getlicence(request, object_id):
     """ Renders the resource licence. """
     content = "<p>No license terms have been released for this resource.<br/>"
-    licences = licenceInfoType_model.objects.values("licence").filter(back_to_distributioninfotype_model__id=object_id)
-    #licenceinfo = licenceInfoType_model.objects.get(back_to_distributioninfotype_model__id=object_id)
+    licences = licenceInfoType_model.objects.values("licence").filter(
+                            back_to_distributioninfotype_model__id=object_id)
+    #licenceinfo = licenceInfoType_model.objects.get(
+    #                        back_to_distributioninfotype_model__id=object_id)
     if (len(licences) > 0):
-        licencelabel = LICENCEINFOTYPE_LICENCE_CHOICES['choices'][int(licences[0]['licence'])][1]
+        licencelabel = LICENCEINFOTYPE_LICENCE_CHOICES['choices'] \
+                                            [int(licences[0]['licence'])][1]
         url = LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licencelabel][0]
         if url != "":
             urlparser = urlparse(url)
             if urlparser[1] == "":
                 url =  '{0}{1}'.format(DJANGO_URL, url)
             if ".pdf" in url:
-                content = '<object data="{0}" type="application/pdf" id=pdf width="700" height="80%"><a href="{0}">View PDF licence</a></object>'.format(url) 
+                content = '<object data="{0}" type="application/pdf" id=pdf ' \
+                    'width="700" height="80%"><a href="{0}">View PDF licence' \
+                    '</a></object>'.format(url) 
             else:
                 # cfedermann: it is NOT a good idea to use urlopen to read in
                 #   a media file served by the same Django instance.  I fix
                 #   this by adding an <object> containing the license to get
                 #   the v2.0 release done...  This has to be checked/cleaned
                 #   up somewhen later!
-                content = '<object data="{0}" type="text/html" id=pdf width="700" height="80%"><a href="{0}">View licence</a></object>'.format(url) 
+                content = '<object data="{0}" type="text/html" id=pdf ' \
+                    'width="700" height="80%"><a href="{0}">View licence' \
+                    '</a></object>'.format(url) 
 #                handle = urlopen(url)
 #                content = handle.read()
 #                handle.close()    
@@ -161,7 +168,7 @@ def getlicence(request, object_id):
 @login_required   
 def download(request, object_id):
     """ Renders the repository download view. """
-    signature_req = 0
+    signature_req = True
     if object_id and request.user.is_active:       
         resource = get_object_or_404(resourceInfoType_model, pk=object_id)
         
@@ -173,7 +180,9 @@ def download(request, object_id):
         elif request.method == "GET":
             agreement = int(request.GET.get('license_agree', '0'))
 
-        licences = licenceInfoType_model.objects.values("licence","downloadLocation").filter(back_to_distributioninfotype_model__id=object_id)
+        licences = licenceInfoType_model.objects.values("licence",
+                                                        "downloadLocation") \
+                    .filter(back_to_distributioninfotype_model__id=object_id)
         if agreement == 1:
             sessionid = ""
             if request.COOKIES:
@@ -195,34 +204,47 @@ def download(request, object_id):
                             response.write(_chunk)
                             _chunk = _local_data.read(MAXIMUM_READ_BLOCK_SIZE)
                     
-                    saveLRStats(request.user.username, resource.storage_object.identifier, sessionid, DOWNLOAD_STAT)
+                    saveLRStats(request.user.username,
+                                resource.storage_object.identifier, sessionid,
+                                DOWNLOAD_STAT)
                     return response
                 
                 except:
                     raise Http404
-            #redirect on download location
+            # redirect to download location
             else:
-                try:
-                    if (len(licences) >0 ):
-                        for licenceinfo in licences:
-                            urldown = pickle.loads(base64.b64decode(str(licenceinfo['downloadLocation'])))
-                            if isinstance(urldown, list) and len(urldown) > 0:
-                                code = urlopen(urldown[0]).code
-                                if (code / 100 < 4):
-                                    saveLRStats(request.user.username, resource.storage_object.identifier, sessionid, DOWNLOAD_STAT)
-                                    return redirect(urldown[0])
-                except ObjectDoesNotExist:
-                    LOGGER.debug("Warning! Info about licence or downloadLocation is wrong.")
-            
+                for licenceinfo in licences:
+                    download_urls = pickle.loads(base64.b64decode(
+                                        str(licenceinfo['downloadLocation'])))
+                    assert isinstance(download_urls, list)
+                    for url in download_urls:
+                        if (urlopen(url).code / 100 < 4):
+                            saveLRStats(request.user.username,
+                                resource.storage_object.identifier,
+                                sessionid, DOWNLOAD_STAT)
+                            return redirect(url)
+                LOGGER.info("No download could be offered for resource #{0}." \
+                            .format(object_id))
             raise Http404
     
-        for licenceinfo in licences:
-            licencelabel = LICENCEINFOTYPE_LICENCE_CHOICES['choices'][int(licenceinfo['licence'])][1]
-            if LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licencelabel][1]:
-                signature_req = 1
+        try:
+            for licenceinfo in licences:
+                licencelabel = LICENCEINFOTYPE_LICENCE_CHOICES['choices'] \
+                    [int(licenceinfo['licence'])][1]
+                if LICENCEINFOTYPE_URLS_LICENCE_CHOICES.has_key(licencelabel) and \
+                    LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licencelabel][1]:
+                        signature_req = False
+        except:
+            print "ERROR! Licence choices code ({0}) doesn't exist.".format(str(licenceinfo['licence']))
+        
 
-    title = resource.identificationInfo.resourceName
-    dictionary = {'title': title, 'object_id': object_id, 'signature_req': signature_req }
+    if resource.identificationInfo.resourceName:
+        title = resource.identificationInfo.resourceName[0]
+    else:
+        title = _('Unnamed Resource')
+    dictionary = { 'title': title,
+                   'object_id': object_id,
+                   'signature_req': signature_req }
     return render_to_response('repo2/download.html', dictionary,
             context_instance=RequestContext(request))
 
@@ -266,13 +288,18 @@ def view(request, object_id=None):
             
         context['LR_DOWNLOAD'] = ""                
         try:
-            licences = licenceInfoType_model.objects.values("downloadLocation").filter(back_to_distributioninfotype_model__id=object_id)
-            if resource.storage_object.has_download() or resource.storage_object.has_local_download_copy() or len(licences) > 0:
-                context['LR_DOWNLOAD'] = '/{0}repo2/download/{1}/'.format(DJANGO_BASE, object_id)
+            licences = licenceInfoType_model.objects \
+                .values("downloadLocation") \
+                .filter(back_to_distributioninfotype_model__id=object_id)
+            if resource.storage_object.has_download() \
+                    or resource.storage_object.has_local_download_copy() \
+                    or len(licences) > 0:
+                context['LR_DOWNLOAD'] = \
+                    '/{0}repo2/download/{1}/'.format(DJANGO_BASE, object_id)
                 if (not request.user.is_active):
                     context['LR_DOWNLOAD'] = "restricted"
         except ObjectDoesNotExist:
-            print "Info about licence doesn't exist."
+            print "ERROR! Info about licence doesn't exist."
             
         # Update statistics and create a report about the user actions on LR
         if hasattr(resource.storage_object, 'identifier'):
@@ -337,7 +364,8 @@ def _get_resource_ids_from_filter_class(filter_name,
     Retrieve the ids of the resources from a complex filter (i.e. with variation
     of the filter type), with the intersection of an original list of ids.
     
-    The variation of the filter type is managed with two sub part of the filter type
+    The variation of the filter type is managed with two sub parts of the filter
+    type.
     
     If the filter is not None, then return the updated list of ids
     Else return the original list of ids.
@@ -370,7 +398,7 @@ def _get_dictionary_from_filter_class(filter_type_class,
     type_info = []
     for filter_type in filter_type_class:
         for object_ids in resourceInfoType_model.objects.values_list(
-                                                   filter_type, flat = True).distinct():
+                                        filter_type, flat = True).distinct():
             type_info.append(object_ids)
     # Remove duplicates
     type_info = list(set(type_info))
@@ -486,10 +514,15 @@ class MetashareFacetedSearchView(FacetedSearchView):
     be returned that are accessible by the current user. 
     """
     def get_results(self):
-        starttime = datetime.now()
         sqs = super(MetashareFacetedSearchView, self).get_results()
         if not self.request.user.is_staff:
             sqs = sqs.filter(published=True)
-        if (len(sqs) > 0 and len(self.query) > 0):
-            saveQueryStats(self.request.user.username, '', self.query, len(sqs), (datetime.now() - starttime).microseconds)
+
+        # collect statistics about the query
+        starttime = datetime.now()
+        results_count = sqs.count()
+        if results_count and self.query:
+            saveQueryStats(self.request.user.username, '', self.query,
+                results_count, (datetime.now() - starttime).microseconds)
+
         return sqs

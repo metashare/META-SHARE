@@ -1,12 +1,62 @@
-<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema E:/kperi/tests/schemaTransform/v2.0/META-SHARE-Resource.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema"><identificationInfo><resourceName>morphdb.hu</resourceName><resourceShortName>n/a</resourceShortName>
-<metaShareId>107</metaShareId>
-<identifier>107</identifier>
-<description>Hungarian lexical database and morphological grammar</description>
-</identificationInfo><distributionInfo><availability>available-restrictedUse</availability><licenseInfo><license>CC_BY</license><restrictionsOfUse>other</restrictionsOfUse><distributionAccessMedium>downloadable</distributionAccessMedium><downloadLocation>http://mokk.bme.hu/resources/morphdb-hu</downloadLocation></licenseInfo></distributionInfo>
-<contactPerson>
-<surname>n/a</surname>
-<communicationInfo><email>daniel@mokk.bme.hu</email>
-</communicationInfo></contactPerson>
-<metadataInfo><metadataCreationDate>2011-11-13</metadataCreationDate><metadataCreator>
-<surname>n/a</surname>
-<communicationInfo><email>daniel@mokk.bme.hu</email></communicationInfo><affiliation><organizationName>Budapest University of Technology and Economics</organizationName><communicationInfo><email>daniel@mokk.bme.hu</email></communicationInfo></affiliation></metadataCreator><metadataLastDateUpdated>2012-01-01</metadataLastDateUpdated></metadataInfo><resourceComponentType><lexicalConceptualResourceInfo><resourceType>lexicalConceptualResource</resourceType><lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType><lexicalConceptualResourceMediaType><lexicalConceptualResourceTextInfo><mediaType>text</mediaType><lingualityInfo><lingualityType>monolingual</lingualityType></lingualityInfo><languageInfo><languageId>HU</languageId><languageName>Hungarian</languageName></languageInfo><sizeInfo><size>400000</size><sizeUnit>items</sizeUnit></sizeInfo></lexicalConceptualResourceTextInfo></lexicalConceptualResourceMediaType></lexicalConceptualResourceInfo></resourceComponentType></resourceInfo>
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema E:/kperi/tests/schemaTransform/v2.0/META-SHARE-Resource.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+	<identificationInfo>
+		<resourceName>morphdb.hu</resourceName>
+		<resourceShortName>n/a</resourceShortName>
+		<metaShareId>107</metaShareId>
+		<identifier>107</identifier>
+		<description>Hungarian lexical database and morphological grammar</description>
+	</identificationInfo>
+	<distributionInfo>
+		<availability>available-restrictedUse</availability>
+		<licenseInfo>
+			<license>CC_BY</license>
+			<restrictionsOfUse>other</restrictionsOfUse>
+			<distributionAccessMedium>downloadable</distributionAccessMedium>
+			<downloadLocation>http://mokk.bme.hu/resources/morphdb-hu</downloadLocation>
+		</licenseInfo>
+	</distributionInfo>
+	<contactPerson>
+		<surname>n/a</surname>
+		<communicationInfo>
+			<email>daniel@mokk.bme.hu</email>
+		</communicationInfo>
+	</contactPerson>
+	<metadataInfo>
+		<metadataCreationDate>2011-11-13</metadataCreationDate>
+		<metadataCreator>
+			<surname>n/a</surname>
+			<communicationInfo>
+				<email>daniel@mokk.bme.hu</email>
+			</communicationInfo>
+			<affiliation>
+				<organizationName>Budapest University of Technology and Economics</organizationName>
+				<communicationInfo>
+					<email>daniel@mokk.bme.hu</email>
+				</communicationInfo>
+			</affiliation>
+		</metadataCreator>
+		<metadataLastDateUpdated>2012-01-01</metadataLastDateUpdated>
+	</metadataInfo>
+	<resourceComponentType>
+		<lexicalConceptualResourceInfo>
+			<resourceType>lexicalConceptualResource</resourceType>
+			<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+			<lexicalConceptualResourceMediaType>
+				<lexicalConceptualResourceTextInfo>
+					<mediaType>text</mediaType>
+					<lingualityInfo>
+						<lingualityType>monolingual</lingualityType>
+					</lingualityInfo>
+					<languageInfo>
+						<languageId>HU</languageId>
+						<languageName>Hungarian</languageName>
+					</languageInfo>
+					<sizeInfo>
+						<size>400000</size>
+						<sizeUnit>items</sizeUnit>
+					</sizeInfo>
+				</lexicalConceptualResourceTextInfo>
+			</lexicalConceptualResourceMediaType>
+		</lexicalConceptualResourceInfo>
+	</resourceComponentType>
+</resourceInfo>
