@@ -3,37 +3,38 @@ Project: META-SHARE prototype implementation
  Author: Christian Federmann <cfedermann@dfki.de>
 """
 
-import types
+import base64
+import logging
 import operator
 import re
-    
-from collections import defaultdict, OrderedDict
-from urllib import urlopen
-from os.path import split
-from urlparse import urlparse
-import base64
+import types
 try:
     import cPickle as pickle
 except:
     import pickle
+
+from collections import defaultdict, OrderedDict
+from datetime import datetime
+from os.path import split
+from urllib import urlopen
+from urlparse import urlparse
                         
 from django.contrib.auth.decorators import login_required
-from django.core.urlresolvers import reverse
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.urlresolvers import reverse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
-from django.http import HttpResponse, Http404
-from datetime import datetime
+from django.utils.translation import ugettext as _
 
 from haystack.views import FacetedSearchView
 
 from metashare.repo2.forms import SimpleSearchForm
-# pylint: disable-msg=W0401, W0614
-from metashare.repo2.models import *
-
-from metashare.settings import DJANGO_URL
-from metashare.stats.model_utils import getLRStats, saveLRStats, saveQueryStats, \
-  VIEW_STAT, DOWNLOAD_STAT
+from metashare.repo2.models import licenceInfoType_model, \
+    resourceInfoType_model, LICENCEINFOTYPE_LICENCE_CHOICES
+from metashare.settings import DJANGO_URL, DJANGO_BASE, LOG_LEVEL, LOG_HANDLER
+from metashare.stats.model_utils import getLRStats, saveLRStats, \
+    saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
 
 
 MAXIMUM_READ_BLOCK_SIZE = 4096
@@ -79,49 +80,73 @@ def _convert_to_template_tuples(element_tree):
 
 # The following most be kept here, rather than in models.py, 
 # because models.py is automatically generated from the XML Schema.
-LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {'AGPL': ['/site_media/licences/GNU_agpl-3.0.htm', ''],
-  'LGPL': ['/site_media/licences/GNU_lgpl-2.0.htm',''],
-  'LGPLv3': ['/site_media/licences/GNU_lgpl-3.0.htm',''],
-  'CC': ['/site_media/licences/CC0v1.0.htm',''],
-  'CC_BY-SA_3.0': ['/site_media/licences/CC-BYSAv3.0.htm',''],
-  'CC_BY-NC-ND': ['/site_media/licences/CC-BYNCNDv3.0.htm',''],
-  'CC_BY-NC-SA': ['/site_media/licences/CC-BYNCSAv2.5.pdf',''],
-  'CC_BY-NC': ['/site_media/licences/CC-BYNCv3.0.htm',''],
-  'CC_BY-ND': ['/site_media/licences/CC-BYNDv3.0.htm',''],
-  'CC_BY-SA': ['/site_media/licences/CC-BYSAv2.5.pdf',''],
-  'CC_BY': ['/site_media/licences/CC-BYv3.0.htm',''],
-  'CC_BY-NC-SA_3.0': ['/site_media/licences/CC-BYNCSAv3.0.htm',''],
-  'MSCommons_BY': ['/site_media/licences/META-SHARE_COMMONS_BY_v1.0.htm',''],
-  'MSCommons_BY-NC': ['/site_media/licences/META-SHARE_COMMONS_BYNC_v1.0.htm',''],
-  'MSCommons_BY-NC-ND': ['/site_media/licences/META-SHARE_COMMONS_BYNCND_v1.0.htm',''],
-  'MSCommons_BY-NC-SA': ['/site_media/licences/META-SHARE_COMMONS_BYNCSA_v1.0.htm',''],
-  'MSCommons_BY-ND': ['/site_media/licences/META-SHARE_COMMONS_BYND_v1.0.htm',''],
-  'MSCommons_BY-SA': ['/site_media/licences/META-SHARE_COMMONS_BYSA_v1.0.htm',''],
-  'MSCommons_COM-NR-FF': ['/site_media/licences/META-SHARE_Commercial_NoRedistribution_For-a-Fee_v0.7.htm','SignatureRequired'], 
-  'MSCommons_COM-NR': ['/site_media/licences/META-SHARE_Commercial_NoRedistribution_v0.7.htm',''],
-  'MSCommons_COM-NR-ND-FF': ['/site_media/licences/META-SHARE_Commercial_NoRedistribution_NoDerivatives_For-a-fee-v1.0.htm','SignatureRequired'],
-  'MSCommons_COM-NR-ND': ['/site_media/licences/META-SHARE_Commercial_NoRedistribution_NoDerivatives-v1.0.htm',''],
-  'MSCommons_NoCOM-NC-NR-ND-FF': ['/site_media/licences/META-SHARE_NonCommercial_NoRedistribution_NoDerivatives_For-a-fee-v1.0.htm','SignatureRequired'],
-  'MSCommons_NoCOM-NC-NR-ND': ['/site_media/licences/META-SHARE_Commercial_NoRedistribution_NoDerivatives-v1.0.htm',''],
-  'MSCommons_NoCOM-NC-NR-FF': ['/site_media/licences/META-SHARE_NonCommercial_NoRedistribution_For-a-Fee-v1.0.htm','SignatureRequired'],
-  'MSCommons_NoCOM-NC-NR': ['/site_media/licences/META-SHARE_NonCommercial_NoRedistribution-v1.0.htm',''],
-  'ELRA_EVALUATION': ['/site_media/licences/EVALUATION.pdf','SignatureRequired'],
-  'ELRA_VAR': ['/site_media/licences/VAR-v3_2007.pdf','SignatureRequired'],
-  'ELRA_END_USER': ['/site_media/licences/ENDUSER-v3_2007.pdf','SignatureRequired'],
-  'ELRA_LIMITED': ['/site_media/licences/Var-E-v2.pdf','SignatureRequired'],
-  'proprietary': ['','SignatureRequired'],
-  'CLARIN_PUB': ['','SignatureRequired'],
-  'CLARIN_ACA-NC': ['','SignatureRequired'],
-  'CLARIN_ACA': ['','SignatureRequired'],
-  'CLARIN_RES': ['','SignatureRequired'],
-  'Princeton_Wordnet': ['/site_media/licences/WordNet-3.0.pdf',''],
-  'GPL': ['/site_media/licences/GNU_gpl-3.0.pdf',''],
-  'GeneralLicenceGrant': ['','SignatureRequired'],
-  'GFDL': ['/site_media/licences/GNU_fdl-1.3.pdf',''],
-  'ApacheLicence_V2.0': ['/site_media/licences/Apache-2.0.htm',''],
-  'BSD-style': ['/site_media/licences/BSD_license.pdf',''],
-  'underNegotiation': ['','SignatureRequired'],
-  'other': ['','SignatureRequired']
+LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
+  'AGPL': ['/site_media/licences/GNU_agpl-3.0.htm', ''],
+  'LGPL': ['/site_media/licences/GNU_lgpl-2.0.htm', ''],
+  'LGPLv3': ['/site_media/licences/GNU_lgpl-3.0.htm', ''],
+  'CC': ['/site_media/licences/CC0v1.0.htm', ''],
+  'CC_BY-SA_3.0': ['/site_media/licences/CC-BYSAv3.0.htm', ''],
+  'CC_BY-NC-ND': ['/site_media/licences/CC-BYNCNDv3.0.htm', ''],
+  'CC_BY-NC-SA': ['/site_media/licences/CC-BYNCSAv2.5.pdf', ''],
+  'CC_BY-NC': ['/site_media/licences/CC-BYNCv3.0.htm', ''],
+  'CC_BY-ND': ['/site_media/licences/CC-BYNDv3.0.htm', ''],
+  'CC_BY-SA': ['/site_media/licences/CC-BYSAv2.5.pdf', ''],
+  'CC_BY': ['/site_media/licences/CC-BYv3.0.htm', ''],
+  'CC_BY-NC-SA_3.0': ['/site_media/licences/CC-BYNCSAv3.0.htm', ''],
+  'MSCommons_BY': ['/site_media/licences/META-SHARE_COMMONS_BY_v1.0.htm', ''],
+  'MSCommons_BY-NC': \
+    ['/site_media/licences/META-SHARE_COMMONS_BYNC_v1.0.htm', ''],
+  'MSCommons_BY-NC-ND': \
+    ['/site_media/licences/META-SHARE_COMMONS_BYNCND_v1.0.htm', ''],
+  'MSCommons_BY-NC-SA': \
+    ['/site_media/licences/META-SHARE_COMMONS_BYNCSA_v1.0.htm', ''],
+  'MSCommons_BY-ND': \
+    ['/site_media/licences/META-SHARE_COMMONS_BYND_v1.0.htm', ''],
+  'MSCommons_BY-SA': \
+    ['/site_media/licences/META-SHARE_COMMONS_BYSA_v1.0.htm', ''],
+  'MSCommons_COM-NR-FF': \
+    ['/site_media/licences/META-SHARE_Commercial_NoRedistribution_For-a-Fee' \
+     '_v0.7.htm', 'SignatureRequired'], 
+  'MSCommons_COM-NR': \
+    ['/site_media/licences/META-SHARE_Commercial_NoRedistribution_v0.7.htm',
+     ''],
+  'MSCommons_COM-NR-ND-FF': \
+    ['/site_media/licences/META-SHARE_Commercial_NoRedistribution_' \
+     'NoDerivatives_For-a-fee-v1.0.htm', 'SignatureRequired'],
+  'MSCommons_COM-NR-ND': \
+    ['/site_media/licences/META-SHARE_Commercial_NoRedistribution_' \
+     'NoDerivatives-v1.0.htm', ''],
+  'MSCommons_NoCOM-NC-NR-ND-FF': \
+    ['/site_media/licences/META-SHARE_NonCommercial_NoRedistribution_' \
+     'NoDerivatives_For-a-fee-v1.0.htm', 'SignatureRequired'],
+  'MSCommons_NoCOM-NC-NR-ND': \
+    ['/site_media/licences/META-SHARE_Commercial_NoRedistribution_' \
+     'NoDerivatives-v1.0.htm', ''],
+  'MSCommons_NoCOM-NC-NR-FF': \
+    ['/site_media/licences/META-SHARE_NonCommercial_NoRedistribution_' \
+     'For-a-Fee-v1.0.htm', 'SignatureRequired'],
+  'MSCommons_NoCOM-NC-NR': \
+    ['/site_media/licences/META-SHARE_NonCommercial_NoRedistribution-v1.0.htm',
+     ''],
+  'ELRA_EVALUATION': \
+    ['/site_media/licences/EVALUATION.pdf', 'SignatureRequired'],
+  'ELRA_VAR': ['/site_media/licences/VAR-v3_2007.pdf', 'SignatureRequired'],
+  'ELRA_END_USER': \
+    ['/site_media/licences/ENDUSER-v3_2007.pdf', 'SignatureRequired'],
+  'ELRA_LIMITED': ['/site_media/licences/Var-E-v2.pdf', 'SignatureRequired'],
+  'proprietary': ['', 'SignatureRequired'],
+  'CLARIN_PUB': ['', 'SignatureRequired'],
+  'CLARIN_ACA-NC': ['', 'SignatureRequired'],
+  'CLARIN_ACA': ['', 'SignatureRequired'],
+  'CLARIN_RES': ['', 'SignatureRequired'],
+  'Princeton_Wordnet': ['/site_media/licences/WordNet-3.0.pdf', ''],
+  'GPL': ['/site_media/licences/GNU_gpl-3.0.pdf', ''],
+  'GeneralLicenceGrant': ['', 'SignatureRequired'],
+  'GFDL': ['/site_media/licences/GNU_fdl-1.3.pdf', ''],
+  'ApacheLicence_V2.0': ['/site_media/licences/Apache-2.0.htm', ''],
+  'BSD-style': ['/site_media/licences/BSD_license.pdf', ''],
+  'underNegotiation': ['', 'SignatureRequired'],
+  'other': ['', 'SignatureRequired']
 }
 
 
@@ -133,24 +158,31 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {'AGPL': ['/site_media/licences/GNU_agpl-
 def getlicence(request, object_id):
     """ Renders the resource licence. """
     content = "<p>No license terms have been released for this resource.<br/>"
-    licences = licenceInfoType_model.objects.values("licence").filter(back_to_distributioninfotype_model__id=object_id)
-    #licenceinfo = licenceInfoType_model.objects.get(back_to_distributioninfotype_model__id=object_id)
+    licences = licenceInfoType_model.objects.values("licence").filter(
+                            back_to_distributioninfotype_model__id=object_id)
+    #licenceinfo = licenceInfoType_model.objects.get(
+    #                        back_to_distributioninfotype_model__id=object_id)
     if (len(licences) > 0):
-        licencelabel = LICENCEINFOTYPE_LICENCE_CHOICES['choices'][int(licences[0]['licence'])][1]
+        licencelabel = LICENCEINFOTYPE_LICENCE_CHOICES['choices'] \
+                                            [int(licences[0]['licence'])][1]
         url = LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licencelabel][0]
         if url != "":
             urlparser = urlparse(url)
             if urlparser[1] == "":
                 url =  '{0}{1}'.format(DJANGO_URL, url)
             if ".pdf" in url:
-                content = '<object data="{0}" type="application/pdf" id=pdf width="700" height="80%"><a href="{0}">View PDF licence</a></object>'.format(url) 
+                content = '<object data="{0}" type="application/pdf" id=pdf ' \
+                    'width="700" height="80%"><a href="{0}">View PDF licence' \
+                    '</a></object>'.format(url) 
             else:
                 # cfedermann: it is NOT a good idea to use urlopen to read in
                 #   a media file served by the same Django instance.  I fix
                 #   this by adding an <object> containing the license to get
                 #   the v2.0 release done...  This has to be checked/cleaned
                 #   up somewhen later!
-                content = '<object data="{0}" type="text/html" id=pdf width="700" height="80%"><a href="{0}">View PDF licence</a></object>'.format(url) 
+                content = '<object data="{0}" type="text/html" id=pdf ' \
+                    'width="700" height="80%"><a href="{0}">View PDF licence' \
+                    '</a></object>'.format(url) 
 #                handle = urlopen(url)
 #                content = handle.read()
 #                handle.close()    
@@ -171,7 +203,9 @@ def download(request, object_id):
         elif request.method == "GET":
             agreement = int(request.GET.get('license_agree', '0'))
 
-        licences = licenceInfoType_model.objects.values("licence","downloadLocation").filter(back_to_distributioninfotype_model__id=object_id)
+        licences = licenceInfoType_model.objects.values("licence",
+                                                        "downloadLocation") \
+                    .filter(back_to_distributioninfotype_model__id=object_id)
         if agreement == 1:
             sessionid = ""
             if request.COOKIES:
@@ -193,35 +227,44 @@ def download(request, object_id):
                             response.write(_chunk)
                             _chunk = _local_data.read(MAXIMUM_READ_BLOCK_SIZE)
                     
-                    saveLRStats(request.user.username, resource.storage_object.identifier, sessionid, DOWNLOAD_STAT)
+                    saveLRStats(request.user.username,
+                                resource.storage_object.identifier, sessionid,
+                                DOWNLOAD_STAT)
                     return response
                 
                 except:
                     raise Http404
-            #redirect on download location
+            # redirect to download location
             else:
-                try:
-                    if (len(licences) >0 ):
-                        for licenceinfo in licences:
-                            urldown = pickle.loads(base64.b64decode(str(licenceinfo['downloadLocation'])))
-                            if isinstance(urldown, list) and len(urldown) > 0:
-                                code = urlopen(urldown[0]).code
-                                if (code / 100 < 4):
-                                    saveLRStats(request.user.username, resource.storage_object.identifier, sessionid, DOWNLOAD_STAT)
-                                    return redirect(urldown[0])
-                except ObjectDoesNotExist:
-                    LOGGER.debug("Warning! Info about licence or downloadLocation is wrong.")
-            
+                for licenceinfo in licences:
+                    download_urls = pickle.loads(base64.b64decode(
+                                        str(licenceinfo['downloadLocation'])))
+                    assert isinstance(download_urls, list)
+                    for url in download_urls:
+                        if (urlopen(url).code / 100 < 4):
+                            saveLRStats(request.user.username,
+                                resource.storage_object.identifier,
+                                sessionid, DOWNLOAD_STAT)
+                            return redirect(url)
+                LOGGER.info("No download could be offered for resource #{0}." \
+                            .format(object_id))
             raise Http404
-    
-    signature_req = 0
-    for licenceinfo in licences:
-        licencelabel = LICENCEINFOTYPE_LICENCE_CHOICES['choices'][int(licenceinfo['licence'])][1]
-        if LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licencelabel][1] == "SignatureRequired":
-            signature_req = 1
 
-    title = resource.identificationInfo.resourceName
-    dictionary = {'title': title, 'object_id': object_id, 'signature_req': signature_req }
+    signature_req = False
+    for licenceinfo in licences:
+        licencelabel = LICENCEINFOTYPE_LICENCE_CHOICES['choices'] \
+                            [int(licenceinfo['licence'])][1]
+        if LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licencelabel][1] \
+                == "SignatureRequired":
+            signature_req = True
+
+    if resource.identificationInfo.resourceName:
+        title = resource.identificationInfo.resourceName[0]
+    else:
+        title = _('Unnamed Resource')
+    dictionary = { 'title': title,
+                   'object_id': object_id,
+                   'signature_req': signature_req }
     return render_to_response('repo2/download.html', dictionary,
             context_instance=RequestContext(request))
 
@@ -265,9 +308,14 @@ def view(request, object_id=None):
             
         context['LR_DOWNLOAD'] = ""                
         try:
-            licences = licenceInfoType_model.objects.values("downloadLocation").filter(back_to_distributioninfotype_model__id=object_id)
-            if resource.storage_object.has_download() or resource.storage_object.has_local_download_copy() or len(licences) > 0:
-                context['LR_DOWNLOAD'] = '/{0}repo2/download/{1}/'.format(DJANGO_BASE, object_id)
+            licences = licenceInfoType_model.objects \
+                .values("downloadLocation") \
+                .filter(back_to_distributioninfotype_model__id=object_id)
+            if resource.storage_object.has_download() \
+                    or resource.storage_object.has_local_download_copy() \
+                    or len(licences) > 0:
+                context['LR_DOWNLOAD'] = \
+                    '/{0}repo2/download/{1}/'.format(DJANGO_BASE, object_id)
                 if (not request.user.is_active):
                     context['LR_DOWNLOAD'] = "restricted"
         except ObjectDoesNotExist:
@@ -336,7 +384,8 @@ def _get_resource_ids_from_filter_class(filter_name,
     Retrieve the ids of the resources from a complex filter (i.e. with variation
     of the filter type), with the intersection of an original list of ids.
     
-    The variation of the filter type is managed with two sub part of the filter type
+    The variation of the filter type is managed with two sub parts of the filter
+    type.
     
     If the filter is not None, then return the updated list of ids
     Else return the original list of ids.
@@ -369,7 +418,7 @@ def _get_dictionary_from_filter_class(filter_type_class,
     type_info = []
     for filter_type in filter_type_class:
         for object_ids in resourceInfoType_model.objects.values_list(
-                                                   filter_type, flat = True).distinct():
+                                        filter_type, flat = True).distinct():
             type_info.append(object_ids)
     # Remove duplicates
     type_info = list(set(type_info))
