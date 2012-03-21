@@ -178,11 +178,13 @@ TEST_MODE_NAME = 'testing'
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-        'URL': SOLR_URL
+        'URL': SOLR_URL,
+        'SILENTLY_FAIL': False
     },
     TEST_MODE_NAME: {
         'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-        'URL': TESTING_SOLR_URL
+        'URL': TESTING_SOLR_URL,
+        'SILENTLY_FAIL': False
     },
 }
 
