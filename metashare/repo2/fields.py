@@ -195,12 +195,13 @@ class MultiTextField(models.Field):
             return [u'Exception for value {} ({})'.format(value, type(value))]
 
 
+# pylint: disable-msg=W0201
 class MultiSelectField(models.Field):
     """
     Model field which allows to select one or several choices.
     """
     __metaclass__ = models.SubfieldBase
-    
+
     # Maps 1-digit hexadecimal numbers to their corresponding bit quadruples.
     __HEX_TO_BITS__ = {
       'f': (1,1,1,1), 'e': (1,1,1,0), 'd': (1,1,0,1), 'c': (1,1,0,0),
@@ -227,16 +228,27 @@ class MultiSelectField(models.Field):
         return u', '.join([force_unicode(choices_dict.get(value, value),
           strings_only=True) for value in values])
 
+    @classmethod
+    def _get_FIELD_display_list(cls, self, field):
+        """
+        Returns a list containing the "human-readable" values of the field.
+        """
+        values = getattr(self, field.attname)
+        choices_dict = dict(field.choices)
+        return [force_unicode(choices_dict.get(value, value),
+          strings_only=True) for value in values]
+
     def contribute_to_class(self, cls, name):
         """
-        Adds get_FOO_display() method to this class.
+        Adds get_FOO_display(), get_FOO_display_list() methods to this class.
         """
         self.set_attributes_from_name(name)
-        # pylint: disable-msg=W0201
         self.model = cls
         cls._meta.add_field(self)
         setattr(cls, 'get_%s_display' % self.name,
           curry(self._get_FIELD_display, field=self))
+        setattr(cls, 'get_%s_display_list' % self.name,
+          curry(self._get_FIELD_display_list, field=self))
 
     def formfield(self, form_class=forms.MultipleChoiceField, **kwargs):
         """

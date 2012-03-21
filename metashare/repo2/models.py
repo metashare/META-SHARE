@@ -2516,11 +2516,11 @@ class membershipInfoType_model(SchemaModel):
       choices=MEMBERSHIPINFOTYPE_MEMBERSHIPINSTITUTION_CHOICES['choices'],
       )
 
-    back_to_licenceinfotype_model = models.ForeignKey("licenceInfoType_model", )
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+    def real_unicode_(self):
+        # pylint: disable-msg=C0301
+        formatargs = ['member', 'membershipInstitution', ]
+        formatstring = u'member:{} {}'
+        return self.unicode_(formatstring, formatargs)
 
 LICENCEINFOTYPE_LICENCE_CHOICES = _make_choices_from_list([
   u'AGPL', u'LGPL', u'CC_BY-NC-ND', u'CC_BY-NC-SA', u'CC_BY-NC',
@@ -2579,7 +2579,7 @@ class licenceInfoType_model(SchemaModel):
       ( 'distributionRightsHolder/personInfo', 'distributionRightsHolder', RECOMMENDED ),
       ( 'distributionRightsHolder/organizationInfo', 'distributionRightsHolder', RECOMMENDED ),
       ( u'userNature', u'userNature', OPTIONAL ),
-      ( u'membershipInfo', u'membershipinfotype_model_set', OPTIONAL ),
+      ( u'membershipInfo', u'membershipInfo', OPTIONAL ),
     )
     __schema_classes__ = {
       u'membershipInfo': "membershipInfoType_model",
@@ -2675,7 +2675,13 @@ class licenceInfoType_model(SchemaModel):
       choices=LICENCEINFOTYPE_USERNATURE_CHOICES['choices'],
       )
 
-    # OneToMany field: membershipInfo
+    membershipInfo = models.ManyToManyField("membershipInfoType_model", 
+      verbose_name='Membership', 
+      help_text='The conditions imposed by the user being member of some' \
+      ' association/institution (e.g., ELRA, LDC) distributing the resou' \
+      'rce. This indicates the availability conditions (and prices) for ' \
+      'users who are members or not',
+      blank=True, null=True, related_name="membershipInfo_%(class)s_related", )
 
     back_to_distributioninfotype_model = models.ForeignKey("distributionInfoType_model", )
 
