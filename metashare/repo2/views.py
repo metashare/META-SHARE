@@ -191,9 +191,8 @@ def getlicence(request, object_id):
 def download(request, object_id):
     """ Renders the repository download view. """
     resource = get_object_or_404(resourceInfoType_model, pk=object_id)
-    licences = licenceInfoType_model.objects \
-        .filter(back_to_distributioninfotype_model__id=object_id) \
-        .values("licence", "downloadLocation")
+    licences = tuple(licenceInfoType_model.objects \
+        .filter(back_to_distributioninfotype_model__id=object_id))
 
     if request.user.is_active:
         agreement = False
@@ -204,56 +203,17 @@ def download(request, object_id):
             la_val = request.GET.get('license_agree', '0')
             agreement = la_val == '1'
         if agreement:
-            sessionid = ""
-            if request.COOKIES:
-                sessionid = request.COOKIES.get('sessionid', '')
+            provide_download(request, resource, licences)
 
-            if resource.storage_object.has_local_download_copy():
-                try:
-                    #return HttpResponse(resource.storage_object.get_download())
-                    _binary_data = resource.storage_object.get_download()
-
-                    # We use a generic, binary mime type here for version v1.
-                    response = HttpResponse(mimetype="application/octet-stream")
-                    response['Content-Disposition'] = 'attachment; ' \
-                      'filename={0}'.format(split(_binary_data)[1])
-
-                    with open(_binary_data, 'rb') as _local_data:
-                        _chunk = _local_data.read(MAXIMUM_READ_BLOCK_SIZE)
-                        while _chunk:
-                            response.write(_chunk)
-                            _chunk = _local_data.read(MAXIMUM_READ_BLOCK_SIZE)
-
-                    saveLRStats(request.user.username,
-                                resource.storage_object.identifier, sessionid,
-                                DOWNLOAD_STAT)
-                    return response
-
-                except:
-                    raise Http404
-            # redirect to download location, if available
-            else:
-                for licenceinfo in licences:
-                    download_urls = pickle.loads(base64.b64decode(
-                                        str(licenceinfo['downloadLocation'])))
-                    assert isinstance(download_urls, list)
-                    for url in download_urls:
-                        if (urlopen(url).code / 100 < 4):
-                            saveLRStats(request.user.username,
-                                resource.storage_object.identifier,
-                                sessionid, DOWNLOAD_STAT)
-                            return redirect(url)
-                LOGGER.info("No download could be offered for resource #{0}." \
-                            .format(object_id))
-            raise Http404
-
-    signature_req = False
-    for licenceinfo in licences:
-        licencelabel = LICENCEINFOTYPE_LICENCE_CHOICES['choices'] \
-                            [int(licenceinfo['licence'])][1]
-        if LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licencelabel][1]:
-            signature_req = True
-
+    signature_req = True
+    for licence in [name for licence_info in licences if u'downloadable' in
+                    licence_info.get_distributionAccessMedium_display_list()
+                    for name in licence_info.get_licence_display_list()]:
+        if not LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence][1]:
+            signature_req = False
+            # for now we break as soon as we have found the first download
+            # licence for which there is no signature required
+            break
     if resource.identificationInfo.resourceName:
         title = resource.identificationInfo.resourceName[0]
     else:
@@ -262,7 +222,48 @@ def download(request, object_id):
                    'object_id': object_id,
                    'signature_req': signature_req }
     return render_to_response('repo2/download.html', dictionary,
-            context_instance=RequestContext(request))
+                              context_instance=RequestContext(request))
+
+
+def provide_download(request, resource, licences):
+    sessionid = ""
+    if request.COOKIES:
+        sessionid = request.COOKIES.get('sessionid', '')
+
+    if resource.storage_object.has_local_download_copy():
+        try:
+            _binary_data = resource.storage_object.get_download()
+
+            # We use a generic, binary mime type here for version v1.
+            response = HttpResponse(mimetype="application/octet-stream")
+            response['Content-Disposition'] = 'attachment; filename={0}' \
+                                                .format(split(_binary_data)[1])
+            with open(_binary_data, 'rb') as _local_data:
+                _chunk = _local_data.read(MAXIMUM_READ_BLOCK_SIZE)
+                while _chunk:
+                    response.write(_chunk)
+                    _chunk = _local_data.read(MAXIMUM_READ_BLOCK_SIZE)
+
+            saveLRStats(request.user.username,
+                        resource.storage_object.identifier, sessionid,
+                        DOWNLOAD_STAT)
+            return response
+        except:
+            raise Http404
+    # redirect to download location, if available
+    else:
+        for url in [loc for licence_info in licences
+                    if u'downloadable' in licence_info \
+                        .get_distributionAccessMedium_display_list()
+                    for loc in licence_info.downloadLocation]:
+            if (urlopen(url).code / 100 < 4):
+                saveLRStats(request.user.username,
+                            resource.storage_object.identifier,
+                            sessionid, DOWNLOAD_STAT)
+                return redirect(url)
+        LOGGER.info("No download could be offered for resource #{0}." \
+                    .format(resource.id))
+    raise Http404
 
 
 @login_required
