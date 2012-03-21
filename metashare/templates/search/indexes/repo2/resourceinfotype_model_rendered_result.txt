@@ -1,3 +1,6 @@
+{% load resource_languages %}
+{% load resource_media_types %}
+
 <th style="text-align:left;{% if not object.storage_object.published %} font-style:italic;{% endif %}">
   <a href="{{ object.get_absolute_url }}">{{ object.identificationInfo.resourceName.0 }}</a><br/>
   {% if object.identificationInfo.resourceShortName.0 %}{{ object.identificationInfo.resourceShortName.0 }}{% endif %}
@@ -8,43 +11,10 @@
 </td>
 
 <td style="text-align:left;{% if not object.storage_object.published %} font-style:italic;{% endif %}">
-
-	{% for corpus_info in object.resourceComponentType.as_subclass.corpusMediaType.corpustextinfotype_model_set.all %}
-	  {{ corpus_info.get_mediaType_display }}
-	{% endfor %}
-	{% for corpus_info in object.resourceComponentType.as_subclass.corpusMediaType.corpusvideoinfotype_model_set.all %}
-	  {{ corpus_info.get_mediaType_display }}
-	{% endfor %}
-	{{ object.resourceComponentType.as_subclass.corpusMediaType.corpusAudioInfo.get_mediaType_display }}
-	{{ object.resourceComponentType.as_subclass.corpusMediaType.corpusTextNgramInfo.get_mediaType_display }}
-	{{ object.resourceComponentType.as_subclass.corpusMediaType.corpusImageInfo.get_mediaType_display }}
-	{{ object.resourceComponentType.as_subclass.corpusMediaType.corpusTextNumericalInfo.get_mediaType_display }}
-	{{ object.resourceComponentType.as_subclass.lexicalConceptualResourceMediaType.lexicalConceptualResourceAudioInfo.get_mediaType_display }}
-	{{ object.resourceComponentType.as_subclass.lexicalConceptualResourceMediaType.lexicalConceptualResourceTextInfo.get_mediaType_display }}
-	{{ object.resourceComponentType.as_subclass.lexicalConceptualResourceMediaType.lexicalConceptualResourceVideoInfo.get_mediaType_display }}
-	{{ object.resourceComponentType.as_subclass.lexicalConceptualResourceMediaType.lexicalConceptualResourceImageInfo.get_mediaType_display }}
-	{{ object.resourceComponentType.as_subclass.languageDescriptionMediaType.languageDescriptionTextInfo.get_mediaType_display }}
-	{{ object.resourceComponentType.as_subclass.languageDescriptionMediaType.languageDescriptionVideoInfo.get_mediaType_display }}
-	{{ object.resourceComponentType.as_subclass.languageDescriptionMediaType.languageDescriptionImageInfo.get_mediaType_display }}
-
+  {% resource_media_types object.resourceComponentType.as_subclass %}
 </td>
 
 <td style="text-align:left;{% if not object.storage_object.published %} font-style:italic;{% endif %}">
-    {% for corpus_info in object.resourceComponentType.as_subclass.corpusMediaType.corpustextinfotype_model_set.all %}
-      {{ corpus_info.languageInfo.all|join:", " }}
-    {% endfor %}
-    {{ object.resourceComponentType.as_subclass.corpusMediaType.corpusAudioInfo.languageInfo.all|join:", " }}
-    {% for corpus_info in object.resourceComponentType.as_subclass.corpusMediaType.corpusvideoinfotype_model_set.all %}
-      {{ corpus_info.languageInfo.all|join:", " }}
-    {% endfor %}
-    {{ object.resourceComponentType.as_subclass.corpusMediaType.corpusTextNgramInfo.languageInfo.all|join:", " }}
-    {{ object.resourceComponentType.as_subclass.corpusMediaType.corpusImageInfo.languageInfo.all|join:", " }}
-    {{ object.resourceComponentType.as_subclass.lexicalConceptualResourceMediaType.lexicalConceptualResourceAudioInfo.languageInfo.all|join:", " }}
-    {{ object.resourceComponentType.as_subclass.lexicalConceptualResourceMediaType.lexicalConceptualResourceTextInfo.languageInfo.all|join:", " }}
-    {{ object.resourceComponentType.as_subclass.lexicalConceptualResourceMediaType.lexicalConceptualResourceVideoInfo.languageInfo.all|join:", " }}
-    {{ object.resourceComponentType.as_subclass.lexicalConceptualResourceMediaType.lexicalConceptualResourceImageInfo.languageInfo.all|join:", " }}
-    {{ object.resourceComponentType.as_subclass.languageDescriptionMediaType.languageDescriptionTextInfo.languageInfo.all|join:", " }}
-    {{ object.resourceComponentType.as_subclass.languageDescriptionMediaType.languageDescriptionVideoInfo.languageInfo.all|join:", " }}
-    {{ object.resourceComponentType.as_subclass.languageDescriptionMediaType.languageDescriptionImageInfo.languageInfo.all|join:", " }}
+  {% resource_languages object.resourceComponentType.as_subclass %}
 </td>
 
