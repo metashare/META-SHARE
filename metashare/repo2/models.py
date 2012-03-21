@@ -2516,9 +2516,11 @@ class membershipInfoType_model(SchemaModel):
       choices=MEMBERSHIPINFOTYPE_MEMBERSHIPINSTITUTION_CHOICES['choices'],
       )
 
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+    def real_unicode_(self):
+        # pylint: disable-msg=C0301
+        formatargs = ['member', 'membershipInstitution', ]
+        formatstring = u'member:{} {}'
+        return self.unicode_(formatstring, formatargs)
 
 LICENCEINFOTYPE_LICENCE_CHOICES = _make_choices_from_list([
   u'AGPL', u'LGPL', u'CC_BY-NC-ND', u'CC_BY-NC-SA', u'CC_BY-NC',
