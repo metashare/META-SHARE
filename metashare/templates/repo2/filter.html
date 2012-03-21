@@ -1,10 +1,8 @@
   {% if filter %}
     {# Don't display the filter if its first element count is 0 (others will be then) #}
-    {% if filter.0.1 != 0 %}
       <div>
         <dt>{{ title }}:</dt>
           {% for item in filter|slice:":4" %}
-            {% if item.1 != 0 %}
               {# Building of the url #}
 	          {# for each element of the request #}
                 {# if one of them is 'selected_facets' #}
@@ -15,20 +13,16 @@
 	          {# if 'selected_facets' is not in the request then display new facet #}
 	          <a href="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key = 'selected_facets' %}{% for facet in values %}{% if facet != filter_exact|add:":"|add:item.0 %}&amp;selected_facets={{ facet|urlencode }}{% endif %}{% endfor %}{% if filter_exact|add:":"|add:item.0 not in values %}&amp;selected_facets={{ filter_exact|add:":"|add:item.0|urlencode }}" class="addableFacet{% else %}" class="removableFacet{% endif %}{% endif %}{% endfor %}{% if 'selected_facets' not in request.GET %}&amp;selected_facets={{ filter_exact|add:":"|add:item.0|urlencode }}" class="addableFacet{% endif %}">{{ item.0 }}</a> ({{ item.1 }})
               <br>
-            {% endif %}
 	      {% endfor %}
 		  {% if filter|length > 4 %}
 		    <a id="displayText_{{ filter_exact }}" href="javascript:toggle('{{ filter_exact }}');">more</a><br>
 	      {% endif %}
 	      <div id="addElements_{{ filter_exact }}" style="display:none">
 		    {% for item in filter|slice:"4:" %}
-              {% if item.1 != 0 %}
 	            <a href="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key = 'selected_facets' %}{% for facet in values %}{% if facet != filter_exact|add:":"|add:item.0 %}&amp;selected_facets={{ facet|urlencode }}{% endif %}{% endfor %}{% if filter_exact|add:":"|add:item.0 not in values %}&amp;selected_facets={{ filter_exact|add:":"|add:item.0|urlencode }}" class="addableFacet{% else %}" class="removableFacet{% endif %}{% endif %}{% endfor %}{% if 'selected_facets' not in request.GET %}&amp;selected_facets={{ filter_exact|add:":"|add:item.0|urlencode }}" class="addableFacet{% endif %}">{{ item.0 }}</a> ({{ item.1 }})
     		    <br>
-    		  {% endif %}
 		    {% endfor %}
 		  </div>
 	  </div>
-    {% endif %}
   {% endif %}
   
