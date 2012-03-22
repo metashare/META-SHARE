@@ -3,17 +3,8 @@ Project: META-SHARE prototype implementation
  Author: Christian Federmann <cfedermann@dfki.de>
 """
 
-import base64
 import logging
-import operator
-import re
-import types
-try:
-    import cPickle as pickle
-except:
-    import pickle
 
-from collections import defaultdict, OrderedDict
 from datetime import datetime
 from os.path import split
 from urllib import urlopen
@@ -29,19 +20,14 @@ from django.utils.translation import ugettext as _
 
 from haystack.views import FacetedSearchView
 
-from metashare.repo2.forms import SimpleSearchForm
 from metashare.repo2.models import licenceInfoType_model, \
     resourceInfoType_model, LICENCEINFOTYPE_LICENCE_CHOICES
-from metashare.settings import DJANGO_URL, DJANGO_BASE, LOG_LEVEL, LOG_HANDLER
+from metashare.settings import DJANGO_URL, LOG_LEVEL, LOG_HANDLER
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
 
 
 MAXIMUM_READ_BLOCK_SIZE = 4096
-
-# Used for the group_keywords method
-GET_TERMS_RE = re.compile(r'"([^"]+)"|(\S+)').findall
-GROUPING_RE = re.compile(r'\s{2,}').sub
 
 # Setup logging support.
 logging.basicConfig(level=LOG_LEVEL)
@@ -299,9 +285,8 @@ def view(request, object_id=None):
         # For staff users, we have to add LR_EDIT which contains the URL of
         # the Django admin backend page for this resource.
         if request.user.is_staff:
-            lr_edit_url = '/{}admin/repo2/resourceinfotype_model/{}/'.format(
-              DJANGO_BASE, object_id)
-            context['LR_EDIT'] = lr_edit_url
+            context['LR_EDIT'] = reverse(
+                'admin:repo2_resourceinfotype_model_change', args=(object_id,))
 
         context['LR_DOWNLOAD'] = ""
         try:
@@ -311,8 +296,7 @@ def view(request, object_id=None):
             if resource.storage_object.has_download() \
                     or resource.storage_object.has_local_download_copy() \
                     or len(licences) > 0:
-                context['LR_DOWNLOAD'] = \
-                    '/{0}repo2/download/{1}/'.format(DJANGO_BASE, object_id)
+                context['LR_DOWNLOAD'] = reverse(download, args=(object_id,))
                 if (not request.user.is_active):
                     context['LR_DOWNLOAD'] = "restricted"
         except ObjectDoesNotExist:
@@ -338,190 +322,6 @@ def view(request, object_id=None):
     # Render and return template with the defined context.
     ctx = RequestContext(request)
     return render_to_response(template, context, context_instance=ctx)
-
-
-def __save_search_keywords_in_session(session, form_data):
-    """
-    Saves the search keywords of the given form data in the given session.
-    
-    After returning, the given session will only contain `search_kws` if the
-    form data is valid and there were any keywords available.
-    
-    Returns a `SimpleSearchForm` which is bound with the given form data.
-    """
-    form = SimpleSearchForm(form_data)
-    if form.is_valid() and form.cleaned_data['keywords']:
-        # Save search parameters in the current session object.
-        session['search_kws'] = form.cleaned_data['keywords']
-    # Otherwise reset the search keywords inside the current session.
-    elif 'search_kws' in session:
-        del session['search_kws']
-    return form
-
-
-def __save_or_get_filter_from_session(filter_name, filter_val, session):
-    """
-    Saves the given filter in the given session object.
-    
-    If the `filter_val` is None and there is another value for the filter in the
-    given session, then the filter value is taken from the session. Returns the
-    filter value which is eventually saved in the session (may be None).
-    """
-    if filter_val != None:
-        session[filter_name] = filter_val
-    elif filter_name in session:
-        filter_val = session[filter_name]
-    return filter_val
-
-
-def _get_resource_ids_from_filter_class(filter_name,
-                                        filter_class,
-                                        resourceinfotypemodel_objs_ids):
-    """
-    Retrieve the ids of the resources from a complex filter (i.e. with variation
-    of the filter type), with the intersection of an original list of ids.
-    
-    The variation of the filter type is managed with two sub parts of the filter
-    type.
-    
-    If the filter is not None, then return the updated list of ids
-    Else return the original list of ids.
-    """
-    if filter_name != "None" and filter_name != None:
-        resourceinfotypemodel_objs_tmp = []
-        for filter_type in filter_class:
-            kwargs = { filter_type: filter_name }
-            new_object_ids = resourceInfoType_model.objects.filter(**kwargs)
-            resourceinfotypemodel_objs_tmp.extend(
-                new_object_ids.values_list('pk', flat=True))
-        resourceinfotypemodel_objs_ids = list(
-          set(resourceinfotypemodel_objs_tmp)
-            & set(resourceinfotypemodel_objs_ids))
-
-    return resourceinfotypemodel_objs_ids
-
-
-def _get_dictionary_from_filter_class(filter_type_class,
-                                      resourceinfotype_model_objects,
-                                      filter_choices):
-    """
-    Build the dictionary of filter names on the resources
-    that are already in the database
-    
-    filter_choices can be None if there is no choice list to describe
-    the name of the resource type (see for instance languageName)
-    
-    Return a sorted list of results
-    """
-    type_info = []
-    for filter_type in filter_type_class:
-        for object_ids in resourceInfoType_model.objects.values_list(
-                                        filter_type, flat = True).distinct():
-            type_info.append(object_ids)
-    # Remove duplicates
-    type_info = list(set(type_info))
-
-    dictionary = []
-    for result in type_info:
-        if (result != None) and (result != ''):
-            resourceinfotypemodel_objs_tmp = []
-            for filter_type in filter_type_class:
-                kwargs = { filter_type: result }
-                new_object_ids = \
-                    resourceinfotype_model_objects.filter(**kwargs).distinct()
-                resourceinfotypemodel_objs_tmp.extend(
-                  new_object_ids.values_list('pk', flat=True))
-            result_lr_count = len(resourceinfotypemodel_objs_tmp)
-
-            if filter_choices == None:
-                text_result = result
-            else:
-                text_result = filter_choices['choices'][int(result)][1]
-            if result_lr_count != 0:
-                dictionary.append((result, result_lr_count, text_result))
-
-    dictionary_sorted = sorted(dictionary, reverse=True,
-      key=operator.itemgetter(1))
-
-    return dictionary_sorted
-
-
-def simple_search(request):
-    """
-    Google-like search in LR.
-    TODO: Make results appear sorted by a field
-    """
-    LOGGER.info('Rendering simple search view for user "{0}".'.format(
-      request.user.username or "Anonymous"))
-
-    context = {'title': 'Metadata search interface',
-                  'mode' : 'browse',
-                  'form': 'ModelFormTemplate',
-#                  'results': paginated_results,
-#                  'total_results': len(patched_results),
-                  'keywords': ' ',
-                  # The following items in the dictionary are used
-                  # by filtering.
-                 }
-    return render_to_response('repo2/search2.html', context,
-      context_instance=RequestContext(request))
-
-
-def _create_flat_tuple_list(items):
-    """
-    Takes a list of items and returns a list of (key, value) items.
-
-    This will recursively descend for lists and dictionary typed values.
-    In a sense, this will create a "flat" representation of items.  Keys
-    named "id" will be skipped as they are not needed for visualization.
-
-    """
-    _tuples = []
-
-    if not type(items) in (types.ListType, types.DictType, OrderedDict):
-        return _tuples
-
-    if type(items) == types.ListType:
-        for item in items:
-            _tuples.extend(_create_flat_tuple_list(item))
-
-    if type(items) in (types.DictType, OrderedDict):
-        for key, value in items.items():
-            if type(value) in (types.ListType, types.DictType, OrderedDict):
-                _tuples.extend(_create_flat_tuple_list(value))
-
-            elif key != 'id' and value:
-                _tuples.append((key, value))
-
-    return _tuples
-
-
-### Added by D. Mavroeidis ###
-def get_items_and_counts(all_items):
-    """
-    Returns a list of unique items with their respective counts.
-    """
-
-    items_dic = defaultdict(int)
-    for item in all_items:
-        if item:
-            items_dic[item] += 1
-
-    return items_dic
-
-
-### Added by D. Mavroeidis ###
-def group_keywords(keywords, get_terms=GET_TERMS_RE, grouping=GROUPING_RE):
-    """
-    Removes whitespace and treats strings in double quotes as a unity.
-    Returns a list of keywords.
-    Usage:
-    group_keywords('my search string "with double quotes"')
-    returns
-    ['my', 'search', 'string', 'with double quotes']
-    """
-
-    return [grouping(' ', (s[0] or s[1]).strip()) for s in get_terms(keywords)]
 
 
 class MetashareFacetedSearchView(FacetedSearchView):

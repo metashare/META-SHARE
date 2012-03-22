@@ -1,7 +1,6 @@
 import logging
-from django import forms
-from metashare.settings import LOG_LEVEL, LOG_HANDLER
 
+from metashare.settings import LOG_LEVEL, LOG_HANDLER
 
 from haystack.forms import FacetedSearchForm
 
@@ -9,15 +8,6 @@ from haystack.forms import FacetedSearchForm
 logging.basicConfig(level=LOG_LEVEL)
 LOGGER = logging.getLogger('metashare.repo2.forms')
 LOGGER.addHandler(LOG_HANDLER)
-
-
-class SimpleSearchForm(forms.Form):
-    """
-    A SimpleSearch form basically renders a single text input a la Google.
-    """
-    keywords = forms.CharField(max_length=200, required=False,
-      label="Keywords:",
-      widget=forms.TextInput(attrs={'class':'advancedbox'}))
 
 
 class FacetedBrowseForm(FacetedSearchForm):
