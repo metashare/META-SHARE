@@ -3,15 +3,10 @@ Project: META-SHARE prototype implementation
  Author: Christian Federmann <cfedermann@dfki.de>
 """
 
-import base64
 import logging
 import operator
 import re
 import types
-try:
-    import cPickle as pickle
-except:
-    import pickle
 
 from collections import defaultdict, OrderedDict
 from datetime import datetime
