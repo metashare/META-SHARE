@@ -25,7 +25,7 @@ def import_xml(filename):
     return result
 
 def import_xml_or_zip(filename):
-    _xml = open(filename)
+    _xml = open(filename, 'rb')
     return import_from_file(_xml, filename, PUBLISHED)
 
 class IndexAwareTestCase(TestCase):

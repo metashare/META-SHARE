@@ -3,15 +3,10 @@ Project: META-SHARE prototype implementation
  Author: Christian Federmann <cfedermann@dfki.de>
 """
 
-import base64
 import logging
 import operator
 import re
 import types
-try:
-    import cPickle as pickle
-except:
-    import pickle
 
 from collections import defaultdict, OrderedDict
 from datetime import datetime
@@ -32,7 +27,7 @@ from haystack.views import FacetedSearchView
 from metashare.repo2.forms import SimpleSearchForm
 from metashare.repo2.models import licenceInfoType_model, \
     resourceInfoType_model, LICENCEINFOTYPE_LICENCE_CHOICES
-from metashare.settings import DJANGO_URL, DJANGO_BASE, LOG_LEVEL, LOG_HANDLER
+from metashare.settings import DJANGO_URL, LOG_LEVEL, LOG_HANDLER
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
 
@@ -299,9 +294,8 @@ def view(request, object_id=None):
         # For staff users, we have to add LR_EDIT which contains the URL of
         # the Django admin backend page for this resource.
         if request.user.is_staff:
-            lr_edit_url = '/{}admin/repo2/resourceinfotype_model/{}/'.format(
-              DJANGO_BASE, object_id)
-            context['LR_EDIT'] = lr_edit_url
+            context['LR_EDIT'] = reverse(
+                'admin:repo2_resourceinfotype_model_change', args=(object_id,))
 
         context['LR_DOWNLOAD'] = ""
         try:
@@ -311,8 +305,7 @@ def view(request, object_id=None):
             if resource.storage_object.has_download() \
                     or resource.storage_object.has_local_download_copy() \
                     or len(licences) > 0:
-                context['LR_DOWNLOAD'] = \
-                    '/{0}repo2/download/{1}/'.format(DJANGO_BASE, object_id)
+                context['LR_DOWNLOAD'] = reverse(download, args=(object_id,))
                 if (not request.user.is_active):
                     context['LR_DOWNLOAD'] = "restricted"
         except ObjectDoesNotExist:
