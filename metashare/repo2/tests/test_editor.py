@@ -203,7 +203,7 @@ class EditorTest(TestCase):
     
     def test_upload_zip(self):
         client = self.client_with_user_logged_in(self.editor_login)
-        xmlfile = open(TESTFIXTURES_ZIP)
+        xmlfile = open(TESTFIXTURES_ZIP, 'rb')
         response = client.post(ADMINROOT+'upload_xml/', {'description': xmlfile, 'uploadTerms':'on' }, follow=True)
         self.assertContains(response, 'Successfully uploaded 2 resource descriptions')
         self.assertNotContains(response, 'Import failed')
@@ -213,7 +213,7 @@ class EditorTest(TestCase):
 
     def test_upload_broken_zip(self):
         client = self.client_with_user_logged_in(self.editor_login)
-        xmlfile = open(BROKENFIXTURES_ZIP)
+        xmlfile = open(BROKENFIXTURES_ZIP, 'rb')
         response = client.post(ADMINROOT+'upload_xml/', {'description': xmlfile, 'uploadTerms':'on' }, follow=True)
         self.assertContains(response, 'Successfully uploaded 1 resource descriptions')
         self.assertContains(response, 'Import failed for 1 files')
