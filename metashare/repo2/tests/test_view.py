@@ -36,22 +36,6 @@ class ViewTest(TestCase):
         """
         resourceInfoType_model.objects.all().delete()
 
-# pylint: disable-msg=W0105
-    '''
-    # 201203021340 - Disabled the test temporarily so that testing can continue
-    def testBrowseHasOneResult(self):
-        """
-        Tries to browse the repository
-        """
-        client = Client()
-        response = client.get('/{0}repo2/browse/'.format(DJANGO_BASE), follow=True)
-        self.assertEqual('repo2/search2.html', response.templates[0].name)
-        self.assertContains(response, "1 language resource found" \
-          , status_code=200, msg_prefix='unexpected output: {0}'.format(response))
-    '''
-    
-    
-    
     def testView(self):
         """
         Tries to view a resource
