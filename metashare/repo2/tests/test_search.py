@@ -190,7 +190,7 @@ class SearchTest(test_utils.IndexAwareTestCase):
         response = client.get('/{0}repo2/search2/'.format(DJANGO_BASE), follow=True, data={'selected_facets':'availabilityFilter_exact:available-restrictedUse'})
         self.assertEqual('repo2/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
-  '''      
+        '''      
     def testLicenceFacet(self):   
         client = Client()
         response = client.get('/{0}repo2/search2/'.format(DJANGO_BASE), follow=True, data={'selected_facets':'licenceFilter_exact:ELRA_END_USER'})
