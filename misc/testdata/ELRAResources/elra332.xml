@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Mandarin Chinese Speech Recognition Corpus (desktop) - short message (120 people)</resourceName>
-<resourceName lang="French">Corpus de  reconnaissance de parole microphone du chinois mandarin – SMS (120 locuteurs)</resourceName>
-<description lang="English">This corpus comprises 3,600 speech files uttered by 120 speakers of different dialects, ages and various educational levels, recorded over 3 channels (Mic 1: SHURE Beta53; Mic 2: AKG C4000b; Mic 3: Labtec Axis 002). The database comprises 7,161 Chinese short messages (SMS) in total. Speech samples are stored as a sequence of 16-bit 48kHz WAV for 5.86 hours of speech per channel. The total capacity of the data is 5.65 Gb.Text files are stored in Unicode format. All data have been proofread manually.The corpus aims to be applied to the testing and telephone natural speech recognition system.</description>
-<description lang="French">Le corpus de chinois mandarin de reconnaissance de parole au microphone comprend 3 600 fichiers de parole prononcés par 120 locuteurs de dialectes, d’âges et de niveaux d’éducation différents, enregistrées via 3 canaux (Mic1: SHURE Beta53; Mic2: AKG C4000b; Mic3: Labtec Axis-002). La base de données contient 7 161 SMS en chinois. Les échantillons de parole sont stockés sous la forme de séquences 16-bit 48kHz WAV pour un total de 5,86 heures de parole par canal. La taille totale des données est de 5,65 Go.Les fichiers textes sont stockés au format Unicode. Toutes les données ont été vérifiées manuellement.Cette base de données a été conçue pour l’évaluation et le développement de systèmes de reconnaissance de la parole naturelle par téléphone.</description>
+<resourceName lang="English">SmartWeb Video Corpus (SVC)</resourceName>
+<resourceName lang="French">Corpus SVC (SmartWeb Video Corpus)</resourceName>
+<description lang="English">The SMARTWEB UMTS data collection was created within the publicly funded German SmartWeb project in the years 2004-2006.  It comprises a collection of user queries to a naturally spoken Web interface with the main focus on the soccer world series in 2006. The recordings include field recordings using a hand-held UMTS device (one person, SmartWeb Handheld Corpus SHC, ref. ELRA-S0278), field recordings with video capture of the primary speaker and a secondary speaker (SmartWeb Video Corpus SVC, ref. ELRA-S0279), as well as mobile recordings performed on a BMW motorbike (one speaker, SmartWeb Motorbike Corpus SMC, ref. ELRA-S0280). This multimodal corpus corresponds to the video capture of the primary speaker and a secondary speaker (SmartWeb Video Corpus) and contains 99 recordings each containing a human-human-machine dialogue: one speaker (which is being recorded) interacts with a human partner as well with a dialogue system via a smart phone (SmartWeb system).The speaker uses a client-server based dialogue system (SmartWeb) for spoken access to Internet contents in a natural environment (office, hallway, street, park, cafe, etc.). Speech was captured over a Bluetooth headset and transferred via an UMTS cellular line to the server; a second collar attached microphone was captured on a portable iRiver recorder to yield an undisturbed, high quality reference signal. The face of the speaker was captured by the build-in face camera of the smart phone. The speech signal was segmented into queries (automatically by the prompting system) and a second time manually into turns and transcribed according to Verbmobil transliteration standard. The video signal was labelled manually into OnView / OffView and - partly - spatially segmented for face detection.The motivation for this corpus was to capture realistic multimodal (speech + face) data in a realistic human machine interaction as well as to capture as many OffTalk situations as possible (OffTalk being all speech uttered by the speaker that is not intended as input to the system).The corpus contains:-	number of dialogues / recorded speakers: 99-	number of segmented turns: 2,218-	total duration: 971 minutes-	formats:    o collar mic: WAV 44,1kHz, 16 bit    o Bluetooth/UMTS-channel: ALAW 8kHz 8bit    o video: 176x144, 24bpp, 15fps, 3GPP + MPEG1    o Verbmobil Transliteration (TRS), BAS Partitur Format (BPF), ATLAS Annotation Graph (XML)    o meta data: speaker and recording protocol (XML) -	segmentation: automatic segmentation into input queries by the prompting system; manual segmentation into turns; OffTalk labelling; OffView labelling, spatially segmentation of face (partly manually)-	distribution: 5 DVD-R See also ELRA-S0278 and ELRA-S0279.</description>
+<description lang="French">La collection de données SMARTWEB UMTS a été produite dans le cadre du projet SmartWeb financé par le gouvernement allemand de 2004 à 2006. Il comprend une collection de questions utilisateurs posées à une interface web de parole naturelle et avec comme thème principal la coupe du monde de football 2006. La collection comprend des enregistrements de champs via un appareil portable UMTS (une personne, corpus SHC-SmartWeb Handheld, réf. ELRA-S0278), des enregistrements de champs avec une capture vidéo d’un locuteur premier et d’un locuteur secondaire (corpus SVC-SmartWeb Video, réf. ELRA-S0279), ainsi que des enregistrements via des téléphones portables réalisés sur une moto BMW (un locuteur, corpus SMC-SmartWeb Motorbike, réf. ELRA-S0280).Ce corpus multimodal correspond aux captures vidéo d’un locuteur premier et d’un locuteur secondaire (SmartWeb Video) et contient 99 enregistrements de dialogues personne-personne-machine : un locuteur (qui est enregistré) interagit avec un partenaire humain ainsi qu’avec un système de dialogue via un smartphone (système SmartWeb).Le locuteur utilise un système de dialogue client-serveur (SmartWeb) pour accéder vocalement au contenu d’internet dans un environnement naturel (bureau, hall d’entrée, rue, parc, bar, etc.). La parole a été enregistrée via un micro-casque Bluetooth et transférée vers le  serveur via une ligne cellulaire UMTS ; un deuxième micro collier a été utilisé sur un lecteur enregistreur portable iRiver afin de produire un signal de référence sans distortion de haute qualité. Le visage du locuteur a été filmé par la caméra du smartphone. Le signal de parole a été une première fois segmenté en requêtes (automatiquement réalisé par le système de prompt) et une deuxième fois en tours de parole, puis transcrit selon le standard de transcription Verbmobil. Le signal vidéo a été étiqueté manuellement en situations OnView / OffView (selon si le locuteur regarde ou non la caméra)  et – partiellement – segmenté au niveau spatial pour la détection du visage.L’objectif moteur pour la constitution de ce corpus était de collecter des données multimodales réalistes (parole + visage) dans une interaction humaine réaliste, mais également de les collecter dans autant de situations OffTalk que possible (l’OffTalk étant composé de toutes les données de parole prononcées par le locuteur mais n’ayant pas pour but d’être utilisées comme entrées du système).Le corpus comprend :-	nombre de dialogues / locuteurs enregistrés : 99-	nombre de tours segmentés : 2218-	durée totale : 971 minutes-	formats :    o micro collier : WAV 44,1kHz, 16 bit    o canal Bluetooth/UMTS : ALAW 8kHz 8bit    o video : 176x144, 24bpp, 15fps, 3GPP + MPEG1    o transcription Verbmobil (TRS), format de partition BAS (BPF), graphe d’annotation ATLAS (XML)    o méta-données : locuteur et protocole d’enregistrement (XML) -	segmentation : segmentation automatique en requêtes d’entrée de système par le système de prompt ; segmentation manuelle en tours de parole ; étiquetage OffTalk ; étiquetage OffView, segmentation spatiale du visage (en partie manuelle)-	distribution : 5 DVD-R Voir aussi ELRA-S0278 et ELRA-S0279.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=936</url>
-<identifier>ELRA-S0228_34</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1070</url>
+<identifier>ELRA-S0280</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,29 +29,44 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-01-17</lastDateUpdated>
+<lastDateUpdated>2008-07-11</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 1119.00€</price>
-<price>Commercial org. ELRA Member: 1119.00€</price>
-<price>Academic org. ELRA Non Member: 1119.00€</price>
-<price>Commercial org. ELRA Non Member: 1119.00€</price>
-<availabilityStartDate>2007-01-17</availabilityStartDate>
+<price>Academic org. ELRA Member: 635.00€</price>
+<price>Commercial org. ELRA Member: 1635.00€</price>
+<price>Academic org. ELRA Non Member: 1275.00€</price>
+<price>Commercial org. ELRA Non Member: 2275.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2008-07-11</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 1119.00€</price>
-<price>Commercial org. ELRA Member: 1119.00€</price>
-<price>Academic org. ELRA Non Member: 1119.00€</price>
-<price>Commercial org. ELRA Non Member: 1119.00€</price>
-<availabilityStartDate>2007-01-17</availabilityStartDate>
+<price>Academic org. ELRA Member: 1635.00€</price>
+<price>Commercial org. ELRA Member: 1635.00€</price>
+<price>Academic org. ELRA Non Member: 2275.00€</price>
+<price>Commercial org. ELRA Non Member: 2275.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2008-07-11</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<usageInfo>
+<actualUseInfo>
+<actualUse>nlpApplications</actualUse>
+<useNLPSpecific>speechRecognition</useNLPSpecific>
+</actualUseInfo>
+</usageInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>SmartWeb</projectName>
+<fundingType>nationalFunds</fundingType>
+</fundingProject>
+<creationEndDate>2006-01-01</creationEndDate>
+</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
@@ -62,10 +77,20 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>chi/zho</languageId>
-<languageName>Chinese</languageName>
+<languageId>ger/deu</languageId>
+<languageName>German</languageName>
 </languageInfo>
 </corpusAudioInfo>
+<corpusVideoInfo>
+<mediaType>video</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>ger/deu</languageId>
+<languageName>German</languageName>
+</languageInfo>
+</corpusVideoInfo>
 </corpusMediaType>
 </corpusInfo>
 </resourceComponentType>

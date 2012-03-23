@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Original Short-Message Data Collation I in Chinese (named entities)</resourceName>
-<resourceName lang="French">Collection d’origine de SMS I en chinois (entités nommées)</resourceName>
-<description lang="English">This corpus comprises 5,891,275 characters, corresponding to 51,568 short messages (SMS) from radio/TV stations and 213,694 daily life short messages. This subset contains original messages together with named entities.All data have been proofread and tagged manually.</description>
-<description lang="French">Ce corpus comprend 5 891 275 caractères, correspondant à 51 568 SMS provenant de stations de radio/télé et 213 694 messages quotidiens. Ce sous-ensemble comprend les messages d'origine avec les entités nommées.Toutes les données ont été vérifiées et étiquetées manuellement.</description>
+<resourceName lang="English">Al-Hayat Arabic Corpus</resourceName>
+<resourceName lang="French">Corpus arabe Al-Hayat</resourceName>
+<description lang="English">The corpus was developed in the course of a research project at the University of Essex, in collaboration with the Open University.The corpus contains Al-Hayat newspaper articles with value added for Language Engineering and Information Retrieval applications development purposes.The data have been distributed into 7 subject-specific databases, thus following the Al-Hayat subject tags: General, Car, Computer, News, Economics, Science, and Sport.Mark-up, numbers, special characters and punctuation have been removed. The size of the total file is 268 MB. The dataset contains 18,639,264 distinct tokens in 42,591 articles, organised in 7 domains.</description>
+<description lang="French">Ce corpus a été développé dans le cadre d'un projet de recherche de l'Université d'Essex, en collaboration avec Open University.Ce corpus est constitué d'articles extraits du journal Al-Hayat, qui pourront être utilisés pour le développement d'applications en ingénierie linguistique et pour l'extraction d'information.Les données sont réparties dans 7 bases spécifiques, suivant les critères de répartition des sujets du journal Al-Hayat : rubrique Général, rubrique Automobile, rubrique Informatique, rubrique Actualités, rubrique Economie, rubrique Sciences, et rubrique Sport.Tout balisage, les nombres, les caractères spéciaux et la ponctuation ont été supprimés. La taille totale du fichier est de 268 Mo. Il contient 18 639 264 unités lexicales, 42 591 articles, répartis dans 7 domaines différents.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=972</url>
-<identifier>ELRA-W0045_04</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=632</url>
+<identifier>ELRA-W0030</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,27 +29,29 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-01-17</lastDateUpdated>
+<lastDateUpdated>2008-11-19</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 18659.00€</price>
-<price>Academic org. ELRA Non Member: 18659.00€</price>
-<price>Commercial org. ELRA Member: 18659.00€</price>
-<price>Academic org. ELRA Member: 18659.00€</price>
-<availabilityStartDate>2007-01-17</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 1440.00€</price>
+<price>Academic org. ELRA Non Member: 720.00€</price>
+<price>Commercial org. ELRA Member: 960.00€</price>
+<price>Academic org. ELRA Member: 480.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2002-01-15</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 18659.00€</price>
-<price>Academic org. ELRA Non Member: 18659.00€</price>
-<price>Commercial org. ELRA Member: 18659.00€</price>
-<price>Academic org. ELRA Member: 18659.00€</price>
-<availabilityStartDate>2007-01-17</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 1440.00€</price>
+<price>Academic org. ELRA Non Member: 1440.00€</price>
+<price>Commercial org. ELRA Member: 960.00€</price>
+<price>Academic org. ELRA Member: 960.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2002-01-15</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceComponentType>
@@ -62,8 +64,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>chi/zho</languageId>
-<languageName>Chinese</languageName>
+<languageId>ara</languageId>
+<languageName>Arabic</languageName>
 </languageInfo>
 </corpusTextInfo>
 </corpusMediaType>

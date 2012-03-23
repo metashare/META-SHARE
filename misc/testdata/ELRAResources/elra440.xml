@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Albayzin corpus</resourceName>
-<resourceName lang="French">Corpus Albayzin</resourceName>
-<description lang="English">This corpus consists of 3 sub-corpora of 16 kHz 16 bits signals, recorded by 304 Castillian speakers.The 3 sub-corpora are:- Phonetic corpus: 6,800 utterances of phonetically balanced sentences, including 1000 with phonetic segmentation.- Geographic corpus: 6,800 utterances of sentences extracted from a Spanish geographic database.- "Lombard" corpus: 2,000 utterances from various corpora.</description>
-<description lang="French">Ce corpus comprend 3 sous-corpus de signaux échantillonnés à 16 kHz 16 bits, enregistrés par 304 locuteurs espagnols (castillans).Les 3 sous-corpus sont:- Corpus phonétique : 6 800 occurrences de phrases phonétiquement équilibrées, dont 1000 occurrences comprenant une segmentation phonétique.- Corpus géographique : 6 800 occurrences de phrases extraites d'une base de données géographiques espagnoles.- Corpus "Lombard" : 2 000 occurrences de divers corpus enregistrés dans un environnement acoustique prenant en considération l'effet "Lombard".</description>
+<resourceName lang="English">Strange Corpus 1 - SC1 (ACCENTS)</resourceName>
+<resourceName lang="French">Strange Corpus 1 - SC1 (ACCENTS)</resourceName>
+<description lang="English">The story 'Nordwind und Sonne' read by 72 speakers with foreign accents and 16 native German speakers. The latter are phonologically segmented by hand, (1 CDROM).</description>
+<description lang="French">Il s'agit de l'histoire "Nordwind und Sonne" lue en allemand par 72 locuteurs ayant un accent étranger et 16 locuteurs allemands. Cette dernière partie est fournie avec une segmentation phonologique manuelle.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=746</url>
-<identifier>ELRA-S0089</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=78</url>
+<identifier>ELRA-S0029</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,29 +29,29 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-06-03</lastDateUpdated>
+<lastDateUpdated>2005-04-01</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 12000.00€</price>
-<price>Academic org. ELRA Non Member: 2000.00€</price>
-<price>Commercial org. ELRA Member: 10000.00€</price>
-<price>Academic org. ELRA Member: 1000.00€</price>
+<price>Academic org. ELRA Member: 127.82€</price>
+<price>Commercial org. ELRA Member: 127.82€</price>
+<price>Academic org. ELRA Non Member: 255.65€</price>
+<price>Commercial org. ELRA Non Member: 255.65€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2000-12-15</availabilityStartDate>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 12000.00€</price>
-<price>Academic org. ELRA Non Member: 12000.00€</price>
-<price>Commercial org. ELRA Member: 10000.00€</price>
-<price>Academic org. ELRA Member: 10000.00€</price>
+<price>Academic org. ELRA Member: 127.82€</price>
+<price>Commercial org. ELRA Member: 127.82€</price>
+<price>Academic org. ELRA Non Member: 255.65€</price>
+<price>Commercial org. ELRA Non Member: 255.65€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2000-12-15</availabilityStartDate>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceComponentType>
@@ -64,16 +64,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>spa</languageId>
-<languageName>Spanish</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Castilian</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
+<languageId>ger/deu</languageId>
+<languageName>German</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

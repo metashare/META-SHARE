@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Eleftherotypia Journal Speech database</resourceName>
-<resourceName lang="French">Base de données orale du journal Eleftherotypia</resourceName>
-<description lang="English">The Eleftherotypia Speech Database (13 CD-ROMs) consists of read material collected in order to be used for the development of continuous speech recognition systems for the Greek language. All recorded sentences were selected from extracts of the Elefterotypia-journal text corpus and provide a vocabulary of about 40,000 words. The total number of utterances is over 32,000 (aproximately 72 hours of speech material from 120 different speakers, male and female).Detailed orthographic transcription files are also included in the distribution. There are markings for the utterance's orthography and several speech and non-speech events (e.g. mispronunciations, truncation, noise etc).The recording procedure took place in three different environments : a sound proof room, a quiet environment and an office environment. Two different microphones were used : a desk microphone and a head-mounted close-talking microphone. The format of the waveform files is NIST. Waveforms are encoded using PCM coding format, 16000 sampling rate, 2 bytes per sample.</description>
-<description lang="French">La base de données orale Eleftherotypia (13 CD-ROM) est composée de matériel lu et a été collectée dans le but d'être utilisée pour le développement de systèmes de reconnaissance de la parole continue pour le grec. Toutes les phrases enregistrées proviennent d'extraits du corpus de textes du journal Eleftherotypia et fournit un vocabulaire d'environ 40 000 mots. Le nombre total d'occurrences s'élève à plus de 32 000 (ce qui représente environ 72 heures de parole de 120 locuteurs hommes et femmes différents).Des fichiers de transcription orthographique détaillés sont également inclus. L'orthographe de chaque occurrence ainsi que plusieurs événement de parole et de non-parole ont été marqués (défauts de prononciation, troncations, bruit, etc.).Les enregistrements se sont déroulés dans trois environnement différents : salle insonorisée, environnement calme et environnement de bureau. Deux microphones différents ont été utilisés, ainsi qu'un micro-casque. Les signaux sont échantillonnés à 16 KHz avec une résolution de 16 bits et codés au format PCM-NIST.</description>
+<resourceName lang="English">Mandarin Chinese Desktop Speech Recognition Corpus - Person Name, Place Name (70 people)</resourceName>
+<resourceName lang="French">Corpus de reconnaissance de parole microphone en chinois mandarin – noms de personnes et de lieux (70 locuteurs)</resourceName>
+<description lang="English">This corpus comprises 9,667 entries uttered by 70 speakers of different dialects, ages and various educational levels (38 males and 32 females), recorded through head-mounted noise-canceling microphone. The database comprises 12,596 items. Speech samples are stored as a sequence of 16-bit 22.05kHz WAV for a total of 15 hours of speech. The total capacity of the data is 2.17 Gb.Each speaker read 60 person names, 20 country names, 10 Chinese city names, 30 street names, 50 company and organization names, 10 geographical names. Text files are stored in Unicode format. All data have been proofread manually.The transcriptions include non-speech markers (background noise, background speech, speaker sounds) as well as markers for mispronunciation, channel distortions, words left-out and duplicates.The corpus aims to be applied to the testing and telephone natural speech recognition system.</description>
+<description lang="French">Ce corpus comprend 9 667 entrées prononcées par 70 locuteurs de dialectes, d’âges et de niveaux d’éducation différents (38 hommes et 32 femmes), enregistrées via un micro-casque à élimination de bruit. La base de données contient 12 596 éléments. Les échantillons de parole sont stockés sous la forme de séquences 16-bit 22,05kHz WAV pour un total de 15 heures de parole. La taille totale des données est de 2,17 Go.Chaque locuteur a lu 60 noms de personnes, 20 noms de pays, 10 noms de villes chinoises, 30 noms de rues, 50 noms de sociétés et organisations, 10 noms de géographie. Les fichiers textes sont stockés au format Unicode. Toutes les données ont été vérifiées manuellement.Les transcriptions comprennent des balises d’événements acoustiques (bruits de fond, sons émis par les locuteurs) ainsi que des balises de mauvaise prononciation, distorsions du canal, omissions de mots et répétitions.Cette base de données a été conçue pour l’évaluation et le développement de systèmes de reconnaissance de la parole naturelle par téléphone.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=747</url>
-<identifier>ELRA-S0111</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=906</url>
+<identifier>ELRA-S0228_17</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,29 +29,27 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-02-22</lastDateUpdated>
+<lastDateUpdated>2009-09-24</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 15000.00€</price>
-<price>Academic org. ELRA Non Member: 4000.00€</price>
-<price>Commercial org. ELRA Member: 10000.00€</price>
-<price>Academic org. ELRA Member: 2500.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2001-07-10</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 1991.00€</price>
+<price>Academic org. ELRA Non Member: 1991.00€</price>
+<price>Commercial org. ELRA Member: 1991.00€</price>
+<price>Academic org. ELRA Member: 1991.00€</price>
+<availabilityStartDate>2007-01-17</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 15000.00€</price>
-<price>Academic org. ELRA Non Member: 15000.00€</price>
-<price>Commercial org. ELRA Member: 10000.00€</price>
-<price>Academic org. ELRA Member: 10000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2001-07-10</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 1991.00€</price>
+<price>Academic org. ELRA Non Member: 1991.00€</price>
+<price>Commercial org. ELRA Member: 1991.00€</price>
+<price>Academic org. ELRA Member: 1991.00€</price>
+<availabilityStartDate>2007-01-17</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceComponentType>
@@ -64,16 +62,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>gre/ell</languageId>
-<languageName>Greek</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Modern (1453-)</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
+<languageId>chi/zho</languageId>
+<languageName>Chinese</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

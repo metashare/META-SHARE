@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">VERBA Polytechnic and Plurilingual Terminological Database - L-AG Sea Shipping</resourceName>
-<resourceName lang="French">Base de données terminologique polytechnique et plurilingue VERBA - L-AG Transport maritime</resourceName>
-<description lang="English">* Entries for English-Spanish: Scientific research &amp; mathematical sciences (906 entries), Geosciences (10,215), Computer science, electronics &amp; telecommunications (70,580), Industry (47,578), Transport &amp; Maintenance (12,291), Economy (145,572), Biological sciences (38,989), Communication &amp; media (8,143), Chemical &amp; physical sciences (27,467). * Entries for English-French-German-Spanish: Environment (36,658), Health (66,727), Agriculture &amp; food (25,975), Construction &amp; public works (8,429), Law &amp; policy (56,578), Sports &amp; Leisure (17,312) * Two specialized lexicons: Spanish-English and English-French-German without domain codes: electronics, telematics, law, taxes, customs, etc. (550,000 entries). * Two general lexicons: Spanish-English-French-German and Spanish-English-French-German-Portuguese-Italian (83,000 entries).This terminological database contains, for each domain, a sub-domain indication is given (from 2 sub-domains for Scientific research to 39 for Sports &amp; leisure). Each entry consists of a definition, phraseological unit, abbreviation, usage information, grammatical labels. Format: ASCIIMedium: floppy disk</description>
-<description lang="French">* Entrées anglais-espagnol : Recherche scientifique &amp; sciences mathématiques (906 entrées), géosciences (10 215), informatique, électronique &amp; télécommunications (70 580), industrie (47 578), transports &amp; maintenance (12 291), économie (145 572), sciences biologiques (38 989), communication &amp; média (8 143), sciences chimiques &amp; physiques (27 467).* Entrées allemand-anglais-espagnol-français : Environnement (36 658), santé (66 727), agriculture &amp; alimentation (25 975), construction &amp; travaux publics (8 429), droit &amp; politique (56 578), sports &amp; loisirs (17 312).* Deux lexiques spécialisés: Espagnol-anglais et allemand-anglais-français sans codes de domaine : électronique, télématique, droit, taxes, douanes, etc. (550 000 entrées).* Deux lexiques généraux: Allemand-anglais-espagnol-français et allemand-anglais-espagnol-français-italien-portugais. (83 000 entrées).Cette base de données terminologique contient, pour chaque domaine, l'indication de sous-domaines (de 2 sous-domaines pour la recherche scientifique à 39 pour les sports et loisirs). Chaque entrée comporte une définition, une unité phraséologique, une abréviation, une information sur l'usage et des étiquettes grammaticales.Format: ASCIISupport : disquette</description>
+<resourceName lang="English">BABEL Romanian database</resourceName>
+<resourceName lang="French">Base de données BABEL du roumain</resourceName>
+<description lang="English">The BABEL Romanian Database is a speech database that was produced by a research consortium funded by the European Union under the COPERNICUS programme (COPERNICUS Project 1304). The project began in March 1995 and was completed in December 1998. The objective was to create a database of languages of Central and Eastern Europe in parallel to the EUROM1 databases produced by the SAM Project (funded by the ESPRIT programme).The BABEL consortium included six partners from Central and Eastern Europe (who had the major responsibility of planning and carrying out the recording and labelling) and six from Western Europe (whose role was mainly to advise and in some cases to act as host to BABEL researchers). The five databases collected within the project concern the Bulgarian, Estonian, Hungarian, Polish, and Romanian languages.The Romanian database consists of the basic "common" set which is:    * The Many Talker Set: 50 males, 50 females; each to read 4 connected passages, 1 block of 2-3 "filler" sentences, 4 phonemically compact sentences, 3-7 individual sentences, and 26 numbers.    * The Few Talker Set: 5 males, 5 females from the Many Talker Set; each to read additionally 3 blocks of syllables and, in 4 supplemental sessions, 16 connected passages, 4 blocks of 2-3 "filler" sentences, 4 repetitions of the 26 numbers.    * The Very Few Talker Set: 1 male, 1 female from the Few Talker Set; each to read additionally 5 pairs of context words and the syllables in these 5 contexts.</description>
+<description lang="French">BABEL est une base de données qui a été produite par un consortium de recherche financé par la Commission européenne dans le cadre du programme COPERNICUS (Projet COPERNICUS 1304). Le projet a débuté en mars 1995 et s'est terminé en décembre 1998. Son objectif était de créer une base de données des langues d'Europe Centrale et de l'Est en parallèle à EUROM1 produit dans le cadre du projet SAM (financé par le programme ESPRIT) pour les langues de l'Union Européenne.Le consortium de BABEL comprenait six partenaires d'Europe Centrale et de l'Est (ayant pour charge de planifier et réaliser l'enregistrement et l'annotation) et six partenaires de l'Europe de l'Ouest (dont le rôle principal a été de conseiller, et dans certains cas, d'héberger des chercheurs de BABEL). Les cinq bases de données collectées au cours de ce projet concernent les langues suivantes : bulgare, estonien, hongrois, polonais et roumain.La base de données du roumain est composée d'un ensemble générique "commun":    * Le grand groupe de locuteurs : ensemble comportant 50 hommes et 50 femmes. Chaque locuteur a lu 4 passages connectés, 1 bloc de 2-3 phrases complémentaires, 4 phrases compactes au niveau phonémique, 3-7 phrases individuelles et 26 nombres.    * Le petit groupe de locuteurs : ensemble comportant 5 hommes et 5 femmes issus du grand groupe de locuteurs. Chaque locuteur a lu 3 blocs de syllabes, ainsi que au cours de 4 sessions supplémentaires, 16 passages connectés, 4 blocs de 2-3 phrases complémentaires, 4 répétitions et 26 nombres.    * Le très petit groupe de locuteurs : ensemble comportant 1 homme et 1 femme issus du petit groupe de locuteurs. Chaque locuteur a lu 5 paires de mots contextuels et les syllabes dans ces 5 contextes.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=302</url>
-<identifier>ELRA-T0227</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=756</url>
+<identifier>ELRA-S0170</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,46 +29,52 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2006-09-27</lastDateUpdated>
+<lastDateUpdated>2007-02-22</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 6000.00€</price>
+<price>Academic org. ELRA Non Member: 600.00€</price>
+<price>Commercial org. ELRA Member: 4000.00€</price>
+<price>Academic org. ELRA Member: 300.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2004-11-23</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 0.70€</price>
-<price>Commercial org. ELRA Non Member: 1.00€</price>
-<availabilityStartDate>1997-04-11</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 6000.00€</price>
+<price>Academic org. ELRA Non Member: 6000.00€</price>
+<price>Commercial org. ELRA Member: 4000.00€</price>
+<price>Academic org. ELRA Member: 4000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2004-11-23</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>BABEL</projectName>
+<fundingType>euFunds</fundingType>
+</fundingProject>
+</resourceCreationInfo>
 <resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>terminologicalResource</lexicalConceptualResourceType>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
-<mediaType>text</mediaType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
+<languageId>rum/ron</languageId>
+<languageName>Romanian</languageName>
 </languageInfo>
-<languageInfo>
-<languageId>spa</languageId>
-<languageName>Spanish</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Castilian</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
-</languageInfo>
-</lexicalConceptualResourceTextInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
 </resourceComponentType>
 </resourceInfo>

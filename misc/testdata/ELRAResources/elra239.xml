@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">DixAF (Bilingual Dictionary French Arabic, Arabic French)</resourceName>
-<resourceName lang="French">DixAF (Dictionnaire bilingue français arabe, arabe français)</resourceName>
-<description lang="English">DixAF (Dictionnaire bilingue français arabe, arabe français - Bilingual Dictionary French Arabic, Arabic French) is a joint ownership of CNRS/ENS lettres et sciences humaines. It was developed by Mr Fathi Debili, a CNRS officer, and it consists of around 125,000 binary links between ca. 43,800 French entries and ca. 35,000 Arabic entries. This dictionary is available as in Access format. The majority of Arabic words are voweled. A number of grammatical categories are indicated (names, adjectives, verbs, adverbs, pronouns, prepositions, etc.). This dictionary may be used for applications such as bilingual French-Arabic, Arabic-French indexing, translation, information retrieval, etc.</description>
-<description lang="French">Le DixAF (Dictionnaire bilingue français arabe, arabe français), copropriété CNRS/ENS lettres et sciences humaines développé par Monsieur Fathi Debili, agent CNRS, est constitué de près de 125 000 liens binaires établis entre 43 800 entrées françaises environ et près de 35 000 entrées arabes. Il est disponible sous format Access. Les mots arabes sont majoritairement voyellés. Un certain nombre de catégories grammaticales sont également indiquées (noms, adjectifs, verbes, adverbes, pronoms, prépositions, etc.) Ce dictionnaire peut être utilisé pour des applications d'indexation bilingue français-arabe arabe-français, de traduction, d'interrogation bilingue, etc.</description>
-<resourceShortName>DixAF</resourceShortName>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=698</url>
-<identifier>ELRA-M0040</identifier>
+<resourceName lang="English">VERBMOBIL - VM CD 5.1 (new edition)</resourceName>
+<resourceName lang="French">VERBMOBIL - VM CD 5.1 - VM51 (nouvelle édition)</resourceName>
+<description lang="English">Verbmobil is a long-term project of the German Federal Ministry of Education, Science, Research and Technology (BMBF, Projekträger DLR). Its aim is to give Germany an international top position in language technology and its economical application in the next millenium by cooperation and concentration of as many as possible specialists from industry and science. The long-sighted aim is the development of a mobile translation system for the translation of spontaneous speech in face-to-face situations.The following resources are spontaneous speech databases recorded in a dialogue task (appointment scheduling) .VM CD 5.1 (new edition) consists of 1 CD-ROM with 101 Dialogues, 256 Appointments 2,154 Turns in German.This new edition contains the transliterations of all dialogues, signal files with PhonDat 2 Header structure, software and speaker documentation and partitur files. All files were validated according to BAS guidelines.</description>
+<description lang="French">Verbmobil est un projet du Ministère fédéral allemand de l'Education, des Sciences, de la Recherche et des Technologies (BMBF, Projekträger DLR), qui vise à placer l'Allemagne en position de force dans le domaine de l'ingénierie de la langue. Son objectif , à long terme, est de développer un système de traduction vocale automatique, pour la traduction de conversations spontanées. Ces ressources sont des enregistrements de conversation pour la prise de rendez-vous. Le corpus allemand comprend 13 910 occurrences (échanges). L'édition de BAS de la partie allemande est entièrement étiquetée et segmentée en unités phonémiques/phonétiques (alphabet SAM-PA) par le système MAUS et partiellement segmentée de manière manuelle.VM CD 5.1 - VM51 (nouvelle édition) contient 1 CD-ROM composé de 101 dialogues, 256 rendez-vous 2,154 échanges en allemand. Cette nouvelle édition contient les transcriptions de tous les dialogues, les fichiers de signaux dans la structure d'en-tête PhonDat 2, le logiciel et la documentation sur les locuteurs. Tous les fichiers ont été validés selon les directives BAS.</description>
+<resourceShortName/>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=466</url>
+<identifier>ELRA-S0034_10</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,51 +29,52 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-03-31</lastDateUpdated>
+<lastDateUpdated>2009-01-14</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 35000.00€</price>
-<price>Academic org. ELRA Member: 15000.00€</price>
-<price>Academic org. ELRA Non Member: 18000.00€</price>
-<price>Commercial org. ELRA Non Member: 41000.00€</price>
+<price>Commercial org. ELRA Non Member: 255.65€</price>
+<price>Academic org. ELRA Non Member: 255.65€</price>
+<price>Commercial org. ELRA Member: 127.82€</price>
+<price>Academic org. ELRA Member: 127.82€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2004-01-20</availabilityStartDate>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 35000.00€</price>
-<price>Academic org. ELRA Member: 35000.00€</price>
-<price>Academic org. ELRA Non Member: 41000.00€</price>
-<price>Commercial org. ELRA Non Member: 41000.00€</price>
+<price>Commercial org. ELRA Non Member: 255.65€</price>
+<price>Academic org. ELRA Non Member: 255.65€</price>
+<price>Commercial org. ELRA Member: 127.82€</price>
+<price>Academic org. ELRA Member: 127.82€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2004-01-20</availabilityStartDate>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>Verbmobil</projectName>
+<fundingType>other</fundingType>
+</fundingProject>
+</resourceCreationInfo>
 <resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
-<mediaType>text</mediaType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>ara</languageId>
-<languageName>Arabic</languageName>
+<languageId>ger/deu</languageId>
+<languageName>German</languageName>
 </languageInfo>
-<languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
-</languageInfo>
-</lexicalConceptualResourceTextInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
 </resourceComponentType>
 </resourceInfo>

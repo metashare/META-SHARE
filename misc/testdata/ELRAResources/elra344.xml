@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">PAROLE Portuguese Corpus - tagged subset</resourceName>
-<resourceName lang="French">Corpus PAROLE du portugais - sous-ensemble étiqueté</resourceName>
-<description lang="English">The parole Portuguese corpus contains approximately 3 million running words of European Portuguese distributed by Medium, as follows:    * Newspaper: about 65%, covering the period 1996-1997 of 3 titles;    * Book: about 20%, concerning 12 titles from 3 editing houses;    * Periodical: about 5%, concerning 7 weekly issues of 1 title, 1996;    * Miscellaneous: about 10%, concerning several files distributed by 8 titles.The corpus was classified and encoded according to the common core parole encoding standard. The file format of this corpus is SGML.A subcorpus of the PAROLE Portuguese Corpus, which reproduces approximately the whole Corpus distribution by Medium (Newspaper: about 65%, Book: ab. 20%, Periodical: ab. 5%, Miscellaneous: ab. 10%) is also available.It has about 250,000 words morpho-syntactically tagged accordingly to the parole common tagset and morpho-syntactic annotation standards. Disambiguation was manually checked.</description>
-<description lang="French">Le corpus PAROLE du portuguais contient environ 3 millions de mots courants du portugais européen, regroupés selon le type de supports :    * Journaux: environ 65%, tirés de 3 titres couvrant la période 1996-1997;    * Ouvrages: environ 20%, tirés de 12 titres de trois maisons d'édition différentes;    * Périodiques: environ 5%, tirés de 7 numéros d'un hebdomadaire, 1996;    * Divers: environ 10%, provenant de 7 fichiers fournis par 8 titres.Le corpus a été classé et annoté conformément au noyau commun du standard de codage PAROLE. Il est au format SGML.Un sous-ensemble du corpus PAROLE du portugais en reprend le schéma de distribution par support (Journaux: env. 65%, Ouvrages: env. 20%, Périodiques: env. 5%, divers: env. 10%). Il contient 250 000 mots étiquetés au niveau morpho-syntaxique conformément aux standards d'étiquetage et d'annotation morpho-syntaxique PAROLE. La désambiguïsation a été vérifiée manuellement. Les fichiers sont au format SGML.</description>
+<resourceName lang="English">CELEX Dutch lexical database - Derivational Morphology Subset</resourceName>
+<resourceName lang="French">CELEX - Base de données lexicale du hollandais - sous-ensemble "morphologie dérivationnelle"</resourceName>
+<description lang="English">The Dutch CELEX data is derived from R.H. Baayen, R. Piepenbrock &amp; L. Gulikers, The CELEX Lexical Database (CD-ROM), Release 2, Dutch Version 3.1, Linguistic Data Consortium, University of Pennsylvania, Philadelphia, PA, 1995.Apart from orthographic features, the CELEX database comprises representations of the phonological, morphological, syntactic and frequency properties of lemmata. For the Dutch data, frequencies have been disambiguated on the basis of the 42.4m Dutch Instituut voor Nederlandse Lexicologie text corpora.To make for greater compatibility with other operating systems, the databases have not been tailored to fit any particular database management program. Instead, the information is presented in a series of plain ASCII files, which can be queried with tools such as AWK and ICON. Unique identity numbers allow the linking of information from different files.This database can be divided into different subsets:· orthography: with or without diacritics, with or without word division positions, alternative spellings, number of letters/syllables;· phonology: phonetic transcriptions with syllable boundaries or primary and secondary stress markers, consonant-vowel patterns, number of  phonemes/syllables, alternative pronunciations, frequency per phonetic syllable within words;· morphology: division into stems and affixes, flat or hierarchical representations, stems and their inflections;· syntax: word class, subcategorisations per word class;· frequency of the entries: disambiguated for homographic lemmata.</description>
+<description lang="French">Les données en hollandais de CELEX sont extraites de la base de données lexicale CELEX (CD-ROM) de R.H. Baayen, R. Piepenbrock &amp; L. Gulikers, seconde édition, version hollandaise 3.1, Linguistic Data Consortium, Université de Pennsylvanie, Philadelphie, PA, 1995.En-dehors des traits orthographiques, la base de données CELEX comprend des représentations des propriétés phonologiques, morphologiques, syntaxiques et fréquentielles des lemmes. En ce qui concerne les données du hollandais, les fréquences ont été désambigüisées sur la base du corpus de textes de l\'Instituut voor Nederlandse Lexicologie.Afin de permettre une meilleure compatibilité avec d\'autres systèmes, les bases ne sont adaptées à aucun système de gestion de base de données spécifique. Au contraire, l\'information est présentée dans une série de fichiers textes ASCII, pouvant être interrogés par des outils tels que AWK et ICON. Des numéros d\'identification uniques permettent d\'accéder et d\'établir les relations entre les informations provenant de différents fichiers.Cette base de données peut être divisée en cinq sous-ensembles selon les niveaux d\'informations suivants :    * orthographe: avec ou sans diacritiques, avec ou sans la position de la coupure de mot (césure), option d\'orthographe, nombre de lettres/syllabes ;    * phonologie : transcriptions phonétiques avec segmentation des syllabes ou balisage des accents primaires ou secondaires, schémas consonne-voyelle, nombre de phonèmes/syllabes, options de prononciation, fréquence par syllabe phonétique dans les mots ;· morphologie : division en radical et affixes, représentations à plat ou hiérarchisées, radicaux et leurs flexions ;· syntaxe : classe de mot, sous-catégorisation par classe de mot ;· fréquence des entrées : désambigüisation des lemmes homographes.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=766</url>
-<identifier>ELRA-W0024_02</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=443</url>
+<identifier>ELRA-L0029_05</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,52 +29,61 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2004-05-12</lastDateUpdated>
+<lastDateUpdated>2005-10-05</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 1250.00€</price>
-<price>Academic org. ELRA Non Member: 750.00€</price>
-<price>Commercial org. ELRA Member: 875.00€</price>
-<price>Academic org. ELRA Member: 525.00€</price>
+<price>Commercial org. ELRA Non Member: 22689.01€</price>
+<price>Academic org. ELRA Non Member: 22689.01€</price>
+<price>Commercial org. ELRA Member: 13613.41€</price>
+<price>Academic org. ELRA Member: 13613.41€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2000-05-19</availabilityStartDate>
+<availabilityStartDate>1997-09-15</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 2500.00€</price>
-<price>Academic org. ELRA Non Member: 2500.00€</price>
-<price>Commercial org. ELRA Member: 1750.00€</price>
-<price>Academic org. ELRA Member: 1750.00€</price>
+<price>Commercial org. ELRA Non Member: 22689.01€</price>
+<price>Academic org. ELRA Non Member: 22689.01€</price>
+<price>Commercial org. ELRA Member: 13613.41€</price>
+<price>Academic org. ELRA Member: 13613.41€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2000-05-19</availabilityStartDate>
+<availabilityStartDate>1997-09-15</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceCreationInfo>
 <fundingProject>
-<projectName>PAROLE</projectName>
-<fundingType>euFunds</fundingType>
+<projectName>CELEX</projectName>
+<fundingType>nationalFunds</fundingType>
 </fundingProject>
 </resourceCreationInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusTextInfo>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
 <mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>por</languageId>
-<languageName>Portuguese</languageName>
+<languageId>dut/nld</languageId>
+<languageName>Dutch</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Flemish</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
 </languageInfo>
-</corpusTextInfo>
-</corpusMediaType>
-</corpusInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">ICE-GB (British English component of the International Corpus of English)</resourceName>
-<resourceName lang="French">ICE-GB (partie britannique du corpus international de l'anglais)</resourceName>
-<description lang="English">ICE-GB is the British component of the International Corpus of English (ICE). ICE began in 1990 with the primary aim of providing material for comparative studies of varieties of English throughout the world. Twenty centres around the world are preparing corpora of their own national or regional variety of English.ICE-GB is fully grammatically analysed. Like all the ICE corpora, ICE-GB consists of a million words of spoken and written English and adheres to the common corpus design. 200 written and 300 spoken texts make up the million words. Every text is grammatically annotated, allowing complex and detailed searches across the whole corpus. ICE-GB contains 83,394 parse trees, including 59,640 in the spoken part of the corpus.ICE-GB has been fully checked. It was checked by linguists at several stages in its completion, using both a traditional 'post-checking' strategy and also by cross-sectional error-based searches. ICE-GB is distributed with the retrieval software ICECUP (the International Corpus of English Corpus Utility Program). ICECUP supports a variety of query types, including the use of the parse analyses to construct Fuzzy Tree Fragments to search the corpus.</description>
-<description lang="French">ICE-GB est la partie britannique du corpus international de l'anglais (ICE - International Corpus of English). ICE a débuté en 1990 avec comme but premier de fournir du matériel pour les études comparatives des différentes variantes de l'anglais à travers le monde. Vingt centres dans le monde ont ainsi préparé des corpus de leur variante nationale ou régionale de l'anglais.ICE-GB est entièrement analysé d'un point de vue grammatical. Comme tous les corpus ICE, ICE-GB comprend un million de mots de l'anglais oral et écrit et est conforme au concept du corpus commun. 200 textes écrits et 300 textes parlés forment le corpus d'un million de mots. Chaque texte est annoté grammaticalement, permettant des recherches complexes et détaillées à travers tout le corpus. ICE-GB comprend 83 394 arbres syntaxiques, dont 59 640 pour la partie orale du corpus.ICE-GB a été vérifié intégralement par des linguistes à différents niveaux de sa réalisation, en procédant non seulement par une stratégie de "post-vérification" traditionnelle et par des recherches croisées basées sur les erreurs. ICE-GB est distribué avec le logiciel de recherche ICECUP (International Corpus of English Corpus Utility Program ). ICECUP permet différents types de requêtes, dont l'usage d'analyses syntaxiques pour la construction de fragments d'arbre flou permettant la recherche dans le corpus.</description>
-<resourceShortName>ICE-GB</resourceShortName>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=762</url>
-<identifier>ELRA-W0021</identifier>
+<resourceName lang="English">GlobalPhone German</resourceName>
+<resourceName lang="French">GlobalPhone allemand</resourceName>
+<description lang="English">The GlobalPhone corpus developed in collaboration with the Karlsruhe Institute of Technology (KIT) was designed to provide read speech data for the development and evaluation of large continuous speech recognition systems in the most widespread languages of the world, and to provide a uniform, multilingual speech and text database for language independent and language adaptive speech recognition as well as for language identification tasks. The entire GlobalPhone corpus enables the acquisition of acoustic-phonetic knowledge of the following 19 spoken languages: Arabic, Bulgarian, Chinese-Mandarin, Chinese-Shanghai, Croatian, Czech, French, German, Japanese, Korean, Polish, Portuguese (Brazilian), Russian, Spanish (Latin America), Swedish, Tamil, Thai, Turkish, Vietnamese. In each language about 100 sentences were read from each of the 100 speakers. The read texts were selected from national newspapers available via Internet to provide a large vocabulary (up to 65,000 words). The read articles cover national and international political news as well as economic news. The speech is available in 16bit, 16kHz mono quality, recorded with a close-speaking microphone (Sennheiser 440-6) and same recording equipment for all languages. The transcriptions are internally validated and supplemented by special markers for spontaneous effects like stuttering, false starts, and non-verbal effects like laughing and hesitations. Speaker information like age, gender, occupation, etc. as well as information about the recording setup complement the database. The entire GlobalPhone corpus contains over 450 hours of speech spoken by more than 1900 native adult speakers.Data is shortened by means of the shorten program written by Tony Robinson, available from Softsound's web page:  http://www.softsound.com/  linux distributions, or simulated versions such as cygwin. Alternatively, the data could be delivered unshorten.The German corpus was produced using the Frankfurter Allgemeine und Sueddeutsche Zeitung newspaper. It contains recordings of 77 speakers (70 males, 7 females) recorded in Karlsruhe, Germany. No age distribution is available.</description>
+<description lang="French">Le corpus GlobalPhone, développé avec la collaboration du Karlsruhe Institute of Technology (KIT),  a été conçu afin de fournir des données de parole lue pour le développement et l’évaluation de systèmes de reconnaissance de la parole continue à large vocabulaire dans les langues les plus répandues dans le monde, l’objectif étant de fournir une base de données audio et textuelles uniforme et multilingue pour la reconnaissance de la parole indépendante de la langue et adaptable à la langue, ainsi que pour des tâches d’identification de la langue. Le corpus GlobalPhone complet permet l’acquisition d’une connaissance acoustico-phonétique pour les 19 langues parlées suivantes: allemand, arabe (arabe standard moderne), bulgare, chinois-mandarin, chinois de Shanghai, coréen, croate, espagnol (d’Amérique latine), français, japonais, polonais, portugais (brésilien), russe, suédois, tamoul, thaï, tchèque, turc et vietnamien.Dans chaque langue, environ 100 phrases ont été lues par chacun des 100 locuteurs. Les textes lus sont extraits d’articles de journaux nationaux disponibles sur internet afin de fournir un large vocabulaire (jusqu’à 65000 mots). Les articles lus couvrent des actualités politiques nationales et internationales, ainsi que des nouvelles économiques. Les données de parole ont été enregistrées en 16 bit, 16 kHz (qualité mono) avec un micro-casque (Sennheiser 440-6) et le même équipement d’enregistrement pour l’ensemble des langues. Les transcriptions ont été validées en interne et annotées au moyen de balises spéciales pour marquer les effets spontanés, tels que le bégaiement, les faux démarrages, et les effets non verbaux comme le rire et les hésitations. La base contient également des informations sur les locuteurs, telles que l’âge, le genre, la profession, etc. ainsi que des informations sur la mise en place de l’enregistrement. Le corpus GlobalPhone dans son entier comprend plus de 450 heures de parole enregistrées par plus de 1900 locuteurs adultes natifs.Les données sont compressées au moyen du programme Shorten écrit par Tony Robinson, disponible depuis la page web de Softsound: http://www.softsound.com/ (distributions linux ou versions simulées telles que cygwin). Au besoin, les données peuvent être fournies non compressées.Le corpus allemand a été produit à partir du journal Frankfurter Allgemeine und Sueddeutsche Zeitung. comprend les enregistrements de 77 locuteurs (70 hommes, 7 femmes) enregistrés à Karlsruhe, Allemagne. Les classes d’âge ne sont pas disponibles.</description>
+<resourceShortName/>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=822</url>
+<identifier>ELRA-S0198</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,55 +29,61 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2004-05-12</lastDateUpdated>
+<lastDateUpdated>2011-09-21</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 8500.00€</price>
-<price>Academic org. ELRA Member: 780.00€</price>
-<price>Academic org. ELRA Non Member: 1500.00€</price>
-<price>Commercial org. ELRA Non Member: 15000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2000-03-06</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 3600.00€</price>
+<price>Academic org. ELRA Non Member: 700.00€</price>
+<price>Commercial org. ELRA Member: 3000.00€</price>
+<price>Academic org. ELRA Member: 600.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2006-01-30</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 8500.00€</price>
-<price>Academic org. ELRA Member: 8500.00€</price>
-<price>Academic org. ELRA Non Member: 15000.00€</price>
-<price>Commercial org. ELRA Non Member: 15000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2000-03-06</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 3600.00€</price>
+<price>Academic org. ELRA Non Member: 3600.00€</price>
+<price>Commercial org. ELRA Member: 3000.00€</price>
+<price>Academic org. ELRA Member: 3000.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2006-01-30</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>ICE (International Corpus of English)</projectName>
-<fundingType>other</fundingType>
-</fundingProject>
-<creationEndDate>1990-01-01</creationEndDate>
-</resourceCreationInfo>
+<validationInfo>
+<validated>True</validated>
+<validationModeDetails> Most of the GlobalPhone data have been validated in-house</validationModeDetails>
+</validationInfo>
+<usageInfo>
+<actualUseInfo>
+<actualUse>nlpApplications</actualUse>
+<useNLPSpecific>speechRecognition</useNLPSpecific>
+</actualUseInfo>
+</usageInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
 <corpusMediaType>
-<corpusTextInfo>
-<mediaType>text</mediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
+<languageId>ger/deu</languageId>
+<languageName>German</languageName>
 </languageInfo>
-<timeCoverageInfo>
-<timeCoverage>Early 1990s</timeCoverage>
-</timeCoverageInfo>
-</corpusTextInfo>
+<audioSizeInfo>
+<sizeInfo>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizeInfo>
+</audioSizeInfo>
+</corpusAudioInfo>
 </corpusMediaType>
 </corpusInfo>
 </resourceComponentType>

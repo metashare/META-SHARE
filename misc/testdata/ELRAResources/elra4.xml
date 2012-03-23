@@ -6,7 +6,7 @@
 <description lang="English">This CD-ROM contains a set of lexicons developed in the MULTEXT project financed by the European Commission (LRE 62-050). The set contains the following languages: English 66,214 Word formsFrench 306,795 Word formsGerman 233,861 Word formsItalian 145,530 Word formsSpanish 510,710 Word formsThe MULTEXT lexicons are three-column tables, separated with a tabulation: the first column contains the word-form, the second column contains the lemma, and the third column contains the morpho-syntactic information associated to that form. This information is conformant with the MULTEXT/EAGLES specifications.Additional information: http://www.lpl.univ-aix.fr/projects/multext</description>
 <description lang="French">Ce CD-ROM contient un ensemble de lexiques développés dans le cadre du projet MULTEXT financé par la Commission européenne (LRE 62-050). Cet ensemble comprend les langues suivantes : allemand : 233 861 formesanglais : 66 214 formesespagnol : 510 710 formesfrançais : 306 795 formesitalien : 145 530 formesLes lexiques MULTEXT se présentent sous la forme de tableaux en 3 colonnes séparées par une tabulation : la première colonne contient la forme du mot, la seconde colonne contient le lemme et la troisième colonne contient l'information morpho-syntaxique associée à la forme. Cette information est conforme aux spécifications du projet MULTEXT/EAGLES.Pour plus d'information, visiter le site Web suivant : http://www.lpl.univ-aix.fr/projects/multext</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=29</url>
 <identifier>ELRA-L0010</identifier>
 </identificationInfo>

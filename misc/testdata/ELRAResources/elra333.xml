@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Belgian-French SpeechDat(II) FDB-1000</resourceName>
-<resourceName lang="French">Base de données SpeechDat(II) du wallon FDB-1000</resourceName>
-<description lang="English">The Belgian-French SpeechDat(II) FDB-1000 database contains the recordings of 1,011 Belgian-French speakers (493 Males, 518 Females) recorded over the Belgian fixed telephone network. This database is partitioned into 4 CDs, which comprise 250 speakers’ sessions each. Speech samples are stored as sequences of 8-bit 8 kHz A-law. Each prompted utterance is stored in a separate file. Each signal file is accompanied by an ASCII SAM label file, which contains the relevant descriptive information.This speech database was validated by SPEX (the Netherlands) to assess its compliance with the SpeechDat format and content specifications.Each speaker uttered the following items. Each phrase or word was repeated about 2 times.7 application words 4 isolated digits 1 sequence of 10 isolated digits 5 connected digits (1 area code, 1 spontaneous phone number, 1 credit card number –15/16 digits, etc. 3 dates (1 spontaneous date e.g. birthday, 1 prompted date, 1 general and relative date expression) 1 embedded application word 4 spelled words 1 currency money amount 1 natural number 6 directory assistance names (1 forename, 1 city of birth, 1 most frequent city, 1 city name, 1 company name, 1 "forename surname") 2 yes/no questions (1 predominantly "yes" question, 1 predominantly "no" question) 10 phonetically rich sentences 2 time phrases (1 spontaneous time of day, 1 time phrase) 6 phonetically rich words The following age distribution has been obtained: 13 speakers are under 16, 257 speakers are between 16 and 30, 425 speakers are between 31 and 45, 229 speakers are between 46 and 60 and 87 are over 60.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
-<description lang="French">La base de données SpeechDat(II) FDB-1000 du wallon contient les enregistrements de 1000 locuteurs (493 hommes, 518 femmes), enregistrés à travers le réseau téléphonique fixe belge. La base de données est répartie sur 4 CDs, chacun comprenant 250 sessions.. Les bases de données SpeechDat(II) ont été réalisées selon les spécifications du projet SpeechDat(II) et validées par SPEX, Pays-Bas.Les fichiers de parole sont stockés en séquences d'échantillons de 8 bit, 8 kHz, loi-A.Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM.Les éléments suivants ont été enregistrés : 7 mots de commande ; 4 chiffres isolés ; 1 séquence de 10 chiffres isolés ; 5 chiffres connectés : par exemple. 1 code postal, 1 numéro de téléphone, 1 numéro de carte bancaire, etc ; 3 dates: 1 date spontanée (date de naissance), 1 date lue, 1 date relative et générale ; 1 expression utilisant un mot de commande ; 3 mots épelés ; 1 montant en devises ; 1 nombre entier naturel ; 6 noms provenant d'un annuaire de renseignements téléphoniques : 1 nom de famille, 1 nom de ville parmi les plus courantes, 1 nom de société, etc. ; 4 questions oui/non ; 10 phrases phonétiquement riches ; 2 phrases comportant une notion de temps : 1 jour (spontané), 1 phrase comportant une notion de temps) ; 6 mots phonétiquement riches. Les classes d'âge sont réparties comme suit : 13 locuteurs de moins de 16 ans, 257 locuteurs entre 16 et 30 ans, 425 locuteurs entre 31 et 45 ans, 229 locuteurs entre 46 et 60 ans et 87 locuteurs de plus de 60 ans.Un lexique de prononciation comprenant une transcription phonétique en SAMPA est également fourni.</description>
-<resourceShortName>FIXED1BF</resourceShortName>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=729</url>
-<identifier>ELRA-S0108</identifier>
+<resourceName lang="English">Mandarin Chinese Speech Recognition Corpus (desktop) - short message (120 people)</resourceName>
+<resourceName lang="French">Corpus de  reconnaissance de parole microphone du chinois mandarin – SMS (120 locuteurs)</resourceName>
+<description lang="English">This corpus comprises 3,600 speech files uttered by 120 speakers of different dialects, ages and various educational levels, recorded over 3 channels (Mic 1: SHURE Beta53; Mic 2: AKG C4000b; Mic 3: Labtec Axis 002). The database comprises 7,161 Chinese short messages (SMS) in total. Speech samples are stored as a sequence of 16-bit 48kHz WAV for 5.86 hours of speech per channel. The total capacity of the data is 5.65 Gb.Text files are stored in Unicode format. All data have been proofread manually.The corpus aims to be applied to the testing and telephone natural speech recognition system.</description>
+<description lang="French">Le corpus de chinois mandarin de reconnaissance de parole au microphone comprend 3 600 fichiers de parole prononcés par 120 locuteurs de dialectes, d’âges et de niveaux d’éducation différents, enregistrées via 3 canaux (Mic1: SHURE Beta53; Mic2: AKG C4000b; Mic3: Labtec Axis-002). La base de données contient 7 161 SMS en chinois. Les échantillons de parole sont stockés sous la forme de séquences 16-bit 48kHz WAV pour un total de 5,86 heures de parole par canal. La taille totale des données est de 5,65 Go.Les fichiers textes sont stockés au format Unicode. Toutes les données ont été vérifiées manuellement.Cette base de données a été conçue pour l’évaluation et le développement de systèmes de reconnaissance de la parole naturelle par téléphone.</description>
+<resourceShortName/>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=936</url>
+<identifier>ELRA-S0228_34</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,47 +29,29 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2006-03-13</lastDateUpdated>
+<lastDateUpdated>2007-01-17</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 25200.00€</price>
-<price>Academic org. ELRA Non Member: 25200.00€</price>
-<price>Commercial org. ELRA Member: 18000.00€</price>
-<price>Academic org. ELRA Member: 14400.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2001-05-23</availabilityStartDate>
+<price>Academic org. ELRA Member: 1119.00€</price>
+<price>Commercial org. ELRA Member: 1119.00€</price>
+<price>Academic org. ELRA Non Member: 1119.00€</price>
+<price>Commercial org. ELRA Non Member: 1119.00€</price>
+<availabilityStartDate>2007-01-17</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 25200.00€</price>
-<price>Academic org. ELRA Non Member: 25200.00€</price>
-<price>Commercial org. ELRA Member: 18000.00€</price>
-<price>Academic org. ELRA Member: 18000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2001-05-23</availabilityStartDate>
+<price>Academic org. ELRA Member: 1119.00€</price>
+<price>Commercial org. ELRA Member: 1119.00€</price>
+<price>Academic org. ELRA Non Member: 1119.00€</price>
+<price>Commercial org. ELRA Non Member: 1119.00€</price>
+<availabilityStartDate>2007-01-17</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<validationInfo>
-<validated>True</validated>
-<validationModeDetails>SpeechDat(II) This speech database was validated by SPEX (the Netherlands) to assess its compliance with the SpeechDat format and content specifications.</validationModeDetails>
-</validationInfo>
-<usageInfo>
-<actualUseInfo>
-<actualUse>nlpApplications</actualUse>
-<useNLPSpecific>speechRecognition</useNLPSpecific>
-</actualUseInfo>
-</usageInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>SpeechDat(II) LE2-4001</projectName>
-<fundingType>euFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
@@ -80,45 +62,11 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
+<languageId>chi/zho</languageId>
+<languageName>Chinese</languageName>
 </languageInfo>
-<creationInfo>
-<creationMode>manual</creationMode>
-</creationInfo>
 </corpusAudioInfo>
 </corpusMediaType>
 </corpusInfo>
-</resourceComponentType>
-<resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
-<creationInfo>
-<creationMode>manual</creationMode>
-</creationInfo>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
-<mediaType>text</mediaType>
-<lingualityInfo>
-<lingualityType>monolingual</lingualityType>
-</lingualityInfo>
-<languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
-</languageInfo>
-</lexicalConceptualResourceTextInfo>
-<lexicalConceptualResourceAudioInfo>
-<mediaType>audio</mediaType>
-<lingualityInfo>
-<lingualityType>monolingual</lingualityType>
-</lingualityInfo>
-<languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
-</languageInfo>
-</lexicalConceptualResourceAudioInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

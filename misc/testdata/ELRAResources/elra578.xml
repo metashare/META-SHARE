@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">English SpeechDat(M) Polyphone database DB2</resourceName>
-<resourceName lang="French">Base de données "Polyphone" en anglais (SpeechDat(M)) DB2</resourceName>
-<description lang="English">The (polyphone-like) English SpeechDat(M) database contains the recordings of 1,000 speakers who were recorded over the fixed telephone network. It is divided into two sub-sets: the phonetically rich sentences (one CD) known as DB2, and the application-oriented utterances (two CDs) known as DB1.It was validated by SPEX (the Netherlands) to assess its compliance with the SpeechDat format and content specifications.Each speaker uttered the following items: number and letter sequences, common control keywords, dates, times, money amounts, etc.This provides a realistic basis for using these resources for the training and assessment of speaker-independent recognition of both isolated and continuous speech utterances, employing either whole-word modeling and/or phoneme based approaches.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
-<description lang="French">Il s'agit de la base de données SpeechDat (M) anglaise enregistrée selon les règles des bases de données "polyphone". Elle contient des enregistrements de 1000 locuteurs, choisis selon les critères démographiques (âge, sexe, lieu, ...) et enregistrés à travers le réseau téléphonique.La base de données est répartie en deux ensembles: les phrases phonétiquement riches et les mots de commandes, orientés vers des applications (il s'agit de chiffres, nombres, séquences de lettres, mots de commande usuels, etc.). Ce qui fourni une base solide pour la réalisation de systèmes de reconnaissance de la parole, indépendant du locuteur aussi bien en mode mots isolés qu'en mode parole continue, utilisant des modèles phonétiques ou des modèles de "mots".La fréquence d'échantillonnage est de 8 KHz, un codage sur 8 bit, la loi a, donnant un débit de 64 kB/s.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
+<resourceName lang="English">Turkish Continuous and Isolated Word Speech Database</resourceName>
+<resourceName lang="French">Base de données orale du turc</resourceName>
+<description lang="English">This Turkish speech database was produced by the department of Théorie des Circuits et Traitement de Signal at the Faculté Polytechnique de Mons. The corpus was designed to provide read speech data for speech recognition purposes. The database contains 14 hours of speech (1618 words) from 43 Turkish speakers (adults over 18; 22 males, 21 females) from Belgium, Germany and Turkey (Istanbul, Ankara, Malatya), recorded at 32 kHz on DAT by Sennheiser MD-441-U microphone. The speech signal was sampled at 16 kHz and digitised with 16 bits. Each speaker read a predetermined text of 215 sentences and 100 isolated words, in quiet conditions. Parts of the corpus were labelled and segmented phonemically. Phonetic and orthographic transcriptions of sentences and isolated words are provided.</description>
+<description lang="French">Cette base de données orale du turc a été produite par le département de Théorie des Circuits et Traitement de Signal de la Faculté Polytechnique de Mons. Le corpus oral lu pourra être utilisé pour la reconnaissance de la parole. La base de données contient au total 14 heures (1618 mots) de discours lu par 43 locuteurs turcs (adultes âgés de plus de 18 ans; 22 hommes, 21 femmes) de Belgique, d'Allemagne et de Turquie (Istanboul, Ankara, Malatya), enregistrés à 32 kHz sur un système DAT par un microphone Sennheiser MD-441-U. Les signaux sont échantillonnés à 16 KHz avec une résolution de 16 bits. Chaque locuteur a lu un texte de 215 phrases et 100 mots isolés, dans un environnement calme. Quelques parties du corpus ont été étiquetées et segmentées de façon phonémique. Les transcriptions phonétiques et orthographiques des phrases et des mots isolés sont également fournies.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=42</url>
-<identifier>ELRA-S0012</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=638</url>
+<identifier>ELRA-S0121</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,37 +29,31 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2009-01-14</lastDateUpdated>
+<lastDateUpdated>2005-05-10</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 20000.00€</price>
-<price>Academic org. ELRA Non Member: 10000.00€</price>
-<price>Commercial org. ELRA Member: 12000.00€</price>
-<price>Academic org. ELRA Member: 6000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-01-23</availabilityStartDate>
+<price>Commercial org. ELRA Member: 3000.00€</price>
+<price>Academic org. ELRA Member: 400.00€</price>
+<price>Academic org. ELRA Non Member: 800.00€</price>
+<price>Commercial org. ELRA Non Member: 6000.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2002-04-04</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 20000.00€</price>
-<price>Academic org. ELRA Non Member: 20000.00€</price>
-<price>Commercial org. ELRA Member: 12000.00€</price>
-<price>Academic org. ELRA Member: 12000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-01-23</availabilityStartDate>
+<price>Commercial org. ELRA Member: 3000.00€</price>
+<price>Academic org. ELRA Member: 3000.00€</price>
+<price>Academic org. ELRA Non Member: 6000.00€</price>
+<price>Commercial org. ELRA Non Member: 6000.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2002-04-04</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>SpeechDat(M)</projectName>
-<fundingType>euFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
@@ -70,8 +64,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
+<languageId>tur</languageId>
+<languageName>Turkish</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

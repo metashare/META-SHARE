@@ -6,7 +6,7 @@
 <description lang="English">The ILC Italian Morphological Lexicon consists of a set of lemmas/lexical entries (about 60,000) with the corresponding inflected word-forms, and a morphological engine for morphological analysis and generation. Lemmas and word-forms are encoded with grammatical codes compatible with the EAGLES recommendations for lexicon encoding at the morphosyntactic level.</description>
 <description lang="French">Entrées: 60 000 Ce lexique italien de plus de 60 000 entrées avec les formes fléchies correspondantes. Un outil d'analyse morphologique et de génération est fourni. Le codage est compatible avec les recommandations d'EAGLES pour le codage du niveau morphosyntaxique.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=26</url>
 <identifier>ELRA-L0006</identifier>
 </identificationInfo>

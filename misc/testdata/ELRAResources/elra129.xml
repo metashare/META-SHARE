@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">VERBA Polytechnic and Plurilingual Terminological Database - B-MR Thermodynamics</resourceName>
-<resourceName lang="French">Base de données terminologique polytechnique et plurilingue VERBA - B-MR Thermodynamiques</resourceName>
-<description lang="English">* Entries for English-Spanish: Scientific research &amp; mathematical sciences (906 entries), Geosciences (10,215), Computer science, electronics &amp; telecommunications (70,580), Industry (47,578), Transport &amp; Maintenance (12,291), Economy (145,572), Biological sciences (38,989), Communication &amp; media (8,143), Chemical &amp; physical sciences (27,467). * Entries for English-French-German-Spanish: Environment (36,658), Health (66,727), Agriculture &amp; food (25,975), Construction &amp; public works (8,429), Law &amp; policy (56,578), Sports &amp; Leisure (17,312) * Two specialized lexicons: Spanish-English and English-French-German without domain codes: electronics, telematics, law, taxes, customs, etc. (550,000 entries). * Two general lexicons: Spanish-English-French-German and Spanish-English-French-German-Portuguese-Italian (83,000 entries).This terminological database contains, for each domain, a sub-domain indication is given (from 2 sub-domains for Scientific research to 39 for Sports &amp; leisure). Each entry consists of a definition, phraseological unit, abbreviation, usage information, grammatical labels. Format: ASCIIMedium: floppy disk</description>
-<description lang="French">* Entrées anglais-espagnol : Recherche scientifique &amp; sciences mathématiques (906 entrées), géosciences (10 215), informatique, électronique &amp; télécommunications (70 580), industrie (47 578), transports &amp; maintenance (12 291), économie (145 572), sciences biologiques (38 989), communication &amp; média (8 143), sciences chimiques &amp; physiques (27 467).* Entrées allemand-anglais-espagnol-français : Environnement (36 658), santé (66 727), agriculture &amp; alimentation (25 975), construction &amp; travaux publics (8 429), droit &amp; politique (56 578), sports &amp; loisirs (17 312).* Deux lexiques spécialisés: Espagnol-anglais et allemand-anglais-français sans codes de domaine : électronique, télématique, droit, taxes, douanes, etc. (550 000 entrées).* Deux lexiques généraux: Allemand-anglais-espagnol-français et allemand-anglais-espagnol-français-italien-portugais. (83 000 entrées).Cette base de données terminologique contient, pour chaque domaine, l'indication de sous-domaines (de 2 sous-domaines pour la recherche scientifique à 39 pour les sports et loisirs). Chaque entrée comporte une définition, une unité phraséologique, une abréviation, une information sur l'usage et des étiquettes grammaticales.Format: ASCIISupport : disquette</description>
+<resourceName lang="English">Finnish-Swedish Speechdat(II) FDB-1000</resourceName>
+<resourceName lang="French">Base de données Speechdat(II) FDB-1000 du suédois parlé en finlande</resourceName>
+<description lang="English">The Finnish-Swedish SpeechDat(II) FDB-1000 contains the recordings of 1,000 Finnish speakers (455 males, 545 females) recorded over the Finnish fixed telephone network. The FDB-1000 database is partitioned into 4 CDs, the first 3 CDs comprise 300 speakers sessions, the 4th comprises 100 speakers.Speech samples are stored as sequences of 8-bit 8 kHz A-law. Each prompted utterance is stored in a separate file. Each signal file is accompanied by an ASCII SAM label file which contains the relevant descriptive information.This speech database was validated by SPEX (the Netherlands) to assess its compliance with the SpeechDat format and content specifications.Each speaker uttered the following items, in the variant of Swedish spoken in Finland:    * 1 isolated digit    * 1 sequence of 10 isolated digits    * 4 connected digits (1 sheet number -5 digits, 1 telephone number –9/10 digits, 1 credit card number -16 digits, 1 PIN code -6 digits)    * 1 currency money amount    * 1 natural number    * 3 dates (1 spontaneous date e.g. birthday, 1 prompted date, 1 relative or general date expression)    * 2 time phrases (1 spontaneous time of day, 1 time phrase)    * 3 spelled words (1 spontaneous e.g. own forename, 1 city name, 1 phonetically rich word)    * 5 directory assistance names (1 spontaneous e.g. own forename, 1 spontaneous city of growing up, 1 frequent city name, 1 frequent company name, 1 common forename surname)    * 2 yes/no questions (1 predominantly "yes" question, 1 predominantly "no" question)    * 6 application words    * 1 word spotting phrase using an embedded application word    * 4 phonetically rich words    * 9 phonetically rich sentencesThe following age distribution has been obtained: 178 speakers are under 16, 412 speakers are between 16 and 30, 216 speakers are between 31 and 45, 160 speakers are between 46 and 60, and 34 speakers are over 60.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
+<description lang="French">La base de données SpeechDat(II) FDB-1000 du suédois parlé en finlande contient 1000 locuteurs finlandais (455 hommes, 545 femmes) enregistrés à travers le réseau téléphonique fixe finlandais. Cette base est répartie sur 4 CD-ROM, 3 comprenant 300 sessions, et le 4e comprenant 100 sessions. Les bases de données SpeechDat(II) ont été réalisées selon les spécifications du projet SpeechDat(II) et validées par SPEX, Pays-Bas.Les fichiers de parole sont stockés en séquences d'échantillons de 8 bits, 8 kHz, loi-A. Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM.Chaque locuteur a prononcé les éléments suivants :    * 1 chiffre isolé ;    * 1 séquence de 10 chiffres isolés ;    * 4 nombres : 1 numéro permettant d'identifier la feuille de prompt (5 chiffres), 1 numéro de téléphone (9-10 chiffres), 1 numéro de carte de crédit (16 chiffres), 1 code confidentiel (6 chiffres) ;    * 1 montant en devises ;    * 1 nombre naturel ;    * 3 dates : 1 date spontanée (date de naissance), 1 date lue, 1 date relative et générale ;    * 2 phrases comportant une notion de temps : 1 jour (spontané), 1 phrase comportant une notion de temps ;    * 3 mots épelés : 1 spontané (prénom), 1 nom de ville, 1 mot phonétiquement riche ;    * 5 noms provenant d'un annuaire de renseignements téléphoniques: 1 spontané (prénom), 1 nom de ville où le locuteur a grandi (spontané), 1 nom de ville parmi les plus courantes, 1 nom de compagnie/société , 1 "prénom nom" ;    * 2 questions oui/non : 1 question à prédominance "oui", 1 question à prédominance "non" ;    * 6 mots de commande ;    * 1 expression utilisant un mot de commande ;    * 4 mots phonétiquement riches.    * 9 phrases phonétiquement riches ;Les classes d'âge sont réparties comme suit : 178 locuteurs de moins de 16 ans, 412 locuteurs entre 16 et 30 ans, 216 locuteurs entre 31 et 45 ans, 160 locuteurs entre 46 et 60 ans et 34 locuteurs de plus de 60 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=203</url>
-<identifier>ELRA-T0128</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=724</url>
+<identifier>ELRA-S0080</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,46 +29,52 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2006-09-27</lastDateUpdated>
+<lastDateUpdated>2007-02-22</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 25000.00€</price>
+<price>Academic org. ELRA Non Member: 22000.00€</price>
+<price>Commercial org. ELRA Member: 18000.00€</price>
+<price>Academic org. ELRA Member: 9000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2000-03-06</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 0.70€</price>
-<price>Commercial org. ELRA Non Member: 1.00€</price>
-<availabilityStartDate>1997-04-11</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 25000.00€</price>
+<price>Academic org. ELRA Non Member: 25000.00€</price>
+<price>Commercial org. ELRA Member: 18000.00€</price>
+<price>Academic org. ELRA Member: 18000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2000-03-06</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>SpeechDat(II)</projectName>
+<fundingType>euFunds</fundingType>
+</fundingProject>
+</resourceCreationInfo>
 <resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>terminologicalResource</lexicalConceptualResourceType>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
-<mediaType>text</mediaType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
+<languageId>swe</languageId>
+<languageName>Swedish</languageName>
 </languageInfo>
-<languageInfo>
-<languageId>spa</languageId>
-<languageName>Spanish</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Castilian</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
-</languageInfo>
-</lexicalConceptualResourceTextInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
 </resourceComponentType>
 </resourceInfo>

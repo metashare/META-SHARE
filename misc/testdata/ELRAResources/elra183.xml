@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">PHONOLEX (BAS/DFKI)</resourceName>
-<resourceName lang="French">PHONOLEX (BAS/DFKI)</resourceName>
-<description lang="English">PHONOLEX consists of a simple list of word forms (approx. 1,6 Mio entries ) with a set of features e.g. orthography (German 'Umlauts' in LaTeX format, capital nouns, old German spelling rules), linguistic information (nouns, verbs, etc.), pronunciation and a list of empirical pronunciations.Format: ASCIIMark-up: extended SAM-PA (PhonDat-Verbmobil)</description>
-<description lang="French">PHONOLEX est composé d'une simple liste de mots fléchis (approx. 1,6 Millions d'entrées) avec un ensemble de traits comme l'orthographe (indication de l''Umlaut' allemand en format LaTeX, noms en majuscule, règles orthographiques de l'ancien allemand), information linguistique (noms, verbes, etc.), prononciation courante et une liste de prononciations empiriques.Format : ASCIIBalisage : SAM-PA étendu (dans le cadre des travaux PhonDat de Verbmobil)</description>
+<resourceName lang="English">Dutch from the Netherlands Speecon Database</resourceName>
+<resourceName lang="French">Base de données Speecon du hollandais des Pays-Bas</resourceName>
+<description lang="English">The Dutch from the Netherlands Speecon database comprises the recordings of 550 adult speakers and 50 child speakers who uttered respectively over 290 items and 210 items (read and spontaneous).Prices available upon request. Please contact us.</description>
+<description lang="French">La base de données Speecon du hollandais des Pays-Bas se compose d’enregistrements de 550 locuteurs adultes et 50 locuteurs enfants qui ont prononcé respectivement plus de 290 et 210 éléments (lus et spontanés).Prix disponibles à la demande. Merci de nous contacter.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=82</url>
-<url>http://catalog.elra.info/product_info.php?products_id=772</url>
-<identifier>ELRA-S0035</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1050</url>
+<identifier>ELRA-S0266</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -30,57 +29,48 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-06-15</lastDateUpdated>
+<lastDateUpdated>2008-09-30</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
-<licenceInfo>
-<licence>ELRA_END_USER</licence>
-<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 6081.82€</price>
-<price>Academic org. ELRA Non Member: 1030.25€</price>
-<price>Commercial org. ELRA Member: 3423.10€</price>
-<price>Academic org. ELRA Member: 631.45€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-05-13</availabilityStartDate>
-</licenceInfo>
-<licenceInfo>
-<licence>ELRA_VAR</licence>
-<restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 6081.82€</price>
-<price>Academic org. ELRA Non Member: 6081.82€</price>
-<price>Commercial org. ELRA Member: 3423.10€</price>
-<price>Academic org. ELRA Member: 3423.10€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-05-13</availabilityStartDate>
-</licenceInfo>
 </distributionInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>Speecon</projectName>
+<fundingType>euFunds</fundingType>
+</fundingProject>
+</resourceCreationInfo>
 <resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
-<mediaType>text</mediaType>
-<lingualityInfo>
-<lingualityType>monolingual</lingualityType>
-</lingualityInfo>
-<languageInfo>
-<languageId>ger/deu</languageId>
-<languageName>German</languageName>
-</languageInfo>
-</lexicalConceptualResourceTextInfo>
-<lexicalConceptualResourceAudioInfo>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
 <mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>ger/deu</languageId>
-<languageName>German</languageName>
+<languageId>dut/nld</languageId>
+<languageName>Dutch</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Flemish</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
+<languageVarietyInfo>
+<languageVarietyName>Netherlands</languageVarietyName>
+<languageVarietyType>other</languageVarietyType>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
 </languageInfo>
-</lexicalConceptualResourceAudioInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
 </resourceComponentType>
 </resourceInfo>

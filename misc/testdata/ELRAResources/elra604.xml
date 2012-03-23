@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Mandarin Chinese Desktop Speech Recognition Corpus - Person Name, Place Name (70 people)</resourceName>
-<resourceName lang="French">Corpus de reconnaissance de parole microphone en chinois mandarin – noms de personnes et de lieux (70 locuteurs)</resourceName>
-<description lang="English">This corpus comprises 9,667 entries uttered by 70 speakers of different dialects, ages and various educational levels (38 males and 32 females), recorded through head-mounted noise-canceling microphone. The database comprises 12,596 items. Speech samples are stored as a sequence of 16-bit 22.05kHz WAV for a total of 15 hours of speech. The total capacity of the data is 2.17 Gb.Each speaker read 60 person names, 20 country names, 10 Chinese city names, 30 street names, 50 company and organization names, 10 geographical names. Text files are stored in Unicode format. All data have been proofread manually.The transcriptions include non-speech markers (background noise, background speech, speaker sounds) as well as markers for mispronunciation, channel distortions, words left-out and duplicates.The corpus aims to be applied to the testing and telephone natural speech recognition system.</description>
-<description lang="French">Ce corpus comprend 9 667 entrées prononcées par 70 locuteurs de dialectes, d’âges et de niveaux d’éducation différents (38 hommes et 32 femmes), enregistrées via un micro-casque à élimination de bruit. La base de données contient 12 596 éléments. Les échantillons de parole sont stockés sous la forme de séquences 16-bit 22,05kHz WAV pour un total de 15 heures de parole. La taille totale des données est de 2,17 Go.Chaque locuteur a lu 60 noms de personnes, 20 noms de pays, 10 noms de villes chinoises, 30 noms de rues, 50 noms de sociétés et organisations, 10 noms de géographie. Les fichiers textes sont stockés au format Unicode. Toutes les données ont été vérifiées manuellement.Les transcriptions comprennent des balises d’événements acoustiques (bruits de fond, sons émis par les locuteurs) ainsi que des balises de mauvaise prononciation, distorsions du canal, omissions de mots et répétitions.Cette base de données a été conçue pour l’évaluation et le développement de systèmes de reconnaissance de la parole naturelle par téléphone.</description>
+<resourceName lang="English">Korean Speecon database</resourceName>
+<resourceName lang="French">Base de données Speecon du coréen</resourceName>
+<description lang="English">The Korean Speecon database is divided into 2 sets: 1) The first set comprises the recordings of 568 adult Korean speakers (259 males, 309 females), recorded over 4 microphone channels in 4 recording environments (office, entertainment, car, public place). 2) The second set comprises the recordings of 58 child Korean speakers (25 boys, 33 girls), recorded over 4 microphone channels in 1 recording environment (children room). This database is partitioned into 30 DVDs (first set) and 4 DVDs (second set).	The speech databases made within the Speecon project were validated by SPEX, the Netherlands, to assess their compliance with the Speecon format and content specifications.Each of the four speech channels is recorded at 16 kHz, 16 bit, uncompressed unsigned integers in Intel format (lo-hi byte order). To each signal file corresponds an ASCII SAM label file which contains the relevant descriptive information.Each speaker uttered the following items:Calibration data: 6 noise recordingsThe “silence word” recordingFree spontaneous items (adults only):3 minutes  (session time) of free spontaneous, rich context items (story telling) (an open number of  spontaneous topics out of a set of 30 topics)17 Elicited spontaneous items (adults only):3 dates, 2 times, 3 proper names, 2 city name, 1 letter sequence, 2 answers to questions, 3 telephone numbers, 1 language Read speech:30 phonetically  rich sentences uttered by adults and 60 uttered by children5 phonetically rich words (adults only)4 isolated digits1 isolated digit sequence4 connected digit sequences1 telephone number3 natural numbers1 money amount2 time phrases (T1 : analogue, T2 : digital)3 dates (D1 : analogue, D2 : relative and general date, D3 : digital)3 letter sequences1 proper name2 city or street names2 questions2 special keyboard characters 1 Web address1 email address220-221 application specific words and phrases per session (adults)74 toy commands, 34 general commands, 14 phone commands and 5 application word synonyms (children)The following age distribution has been obtained: Adults: 250 speakers are between 15 and 30, 223 speakers are between 31 and 45, and 95 speakers are over 46.Children: 25 speakers are between 8 and 10, 33 speakers are between 11 and 15.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
+<description lang="French">La base de données Speecon du coréen est répartie en deux sous-ensembles :1) Le premier sous-ensemble est composé de 568 locuteurs coréens adultes (259 hommes, 309 femmes) enregistrés à partir de 4 canaux de microphone dans 4 environnements différents (bureau, divertissement, voiture, lieu publique). 2) Le deuxième sous-ensemble est composé de 58 locuteurs coréens enfants (25 garçons, 33 filles) enregistrés à partir de 4 canaux de microphone dans un seul environnement (chambre d’enfant).Elle est distribuée sur 30 DVD (adultes) et 4 DVD (enfants). Les bases orales réalisées lors du projet Speecon ont été validées par SPEX, Pays-Bas, afin de contrôler leur adéquation avec le format Speecon et les spécifications de contenu. Les fichiers sont stockés en séquences d'échantillons de 16 kHz, 16 bit ; les canaux sont multiplexés dans un fichier unique, avec une séquence de 0-1-2-3. A chaque énoncé correspond un fichier d'étiquetage ASCII SAM.Chaque locuteur a prononcé les éléments suivants :Données de calibrage : 6 bruits1 “silence”Eléments libres spontanés (adultes uniquement) :3  minutes  (par session) de discours libre spontané, en contexte riche (raconter une histoire) (nombre ouvert de thèmes spontanés à partir de 30 thèmes donnés)17 éléments spontanés dirigés (adultes uniquement) :3 dates, 2 périodes de temps, 3 noms propres, 2 noms de ville, 1 séquence de lettres, 2 réponses à des questions, 3 numéros de téléphone, 1 langue Parole lue : 30 phrases phonétiquement riches prononcées par les adultes et 60 prononcées par les enfants5 mots phonétiquement riches (adultes uniquement)4 chiffres isolés1 séquences de chiffres isolés4 séquences de chiffres connectés1 numéro de téléphone3 nombres naturels 1 montant en devise2 phrases comportant une notion de temps (T1 : analogique, T2 : numérique)3 dates (D1 : analogique, D2 : date relative et générale, D3 : numérique)3 séquences de lettres1 nom propre2 noms de ville ou de rue2 questions2 caractères clavier 1 adresse Web1 adresse email220-221 mots et phrases de commande par sessions (adultes)74 commandes de jouets, 34 commandes générales, 14 commandes de téléphone et 5 synonymes de mots d’applications (enfants)Les classes d'âge sont réparties comme suit : Adultes : 250 locuteurs ont entre 15 et  30 ans, 223 entre 31 et 45 ans, et 95 ont plus de 46 ans.Enfants: 25 locuteurs ont entre 8 et 10 ans, 33 entre 11 et 15 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=906</url>
-<identifier>ELRA-S0228_17</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=799</url>
+<identifier>ELRA-S0177</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,29 +29,37 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2009-09-24</lastDateUpdated>
+<lastDateUpdated>2007-02-22</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 1991.00€</price>
-<price>Academic org. ELRA Non Member: 1991.00€</price>
-<price>Commercial org. ELRA Member: 1991.00€</price>
-<price>Academic org. ELRA Member: 1991.00€</price>
-<availabilityStartDate>2007-01-17</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 75000.00€</price>
+<price>Academic org. ELRA Non Member: 60000.00€</price>
+<price>Commercial org. ELRA Member: 67000.00€</price>
+<price>Academic org. ELRA Member: 50000.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2005-08-02</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 1991.00€</price>
-<price>Academic org. ELRA Non Member: 1991.00€</price>
-<price>Commercial org. ELRA Member: 1991.00€</price>
-<price>Academic org. ELRA Member: 1991.00€</price>
-<availabilityStartDate>2007-01-17</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 75000.00€</price>
+<price>Academic org. ELRA Non Member: 75000.00€</price>
+<price>Commercial org. ELRA Member: 67000.00€</price>
+<price>Academic org. ELRA Member: 67000.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2005-08-02</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>Speecon</projectName>
+<fundingType>euFunds</fundingType>
+</fundingProject>
+</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
@@ -62,8 +70,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>chi/zho</languageId>
-<languageName>Chinese</languageName>
+<languageId>kor</languageId>
+<languageName>Korean</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">MEDIA Evaluation Package</resourceName>
-<resourceName lang="French">Package d’évaluation MEDIA</resourceName>
-<description lang="English">The MEDIA Evaluation Package was produced within the French national project MEDIA (Automatic evaluation of man-machine dialogue systems), as part of the Technolangue programme funded by the French Ministry of Research and New Technologies (MRNT). The MEDIA project enabled to carry out a campaign for the evaluation of man-machine dialogue systems for French. This package includes the material that was used for the MEDIA evaluation campaign. It includes resources, protocols, scoring tools, results of the campaign, etc., that were used or produced during the campaign. The aim of these evaluation packages is to enable external players to evaluate their own system and compare their results with those obtained during the campaign itself. The campaign is distributed over two actions: 1)	Evaluation taking into account the dialogue context: it consists in producing semantic annotation outside dialogue context for each of the 3,000 test prompts.2)	Evaluation not taking into account the dialogue context: it consists in evaluating the capacity of understanding systems a) from orthographic transcriptions only and b) from transcriptions and reference annotations outside dialogue context.The MEDIA evaluation package contains the following data and tools:1)	Corpus of 1,258 dialogues (WoZ) recorded for a tourist information task, with transcriptions and annotations in dialogue acts and in semantic segments within or outside dialogue context. The annotations follow the XML formalism. This corpus consists of 18,831 user prompts used for the adaptation of systems and for evaluation.2)	The text corpus (200 dialogues) is annotated with meta-annotations in order to proceed with a diagnosis study of the systems output. These meta-annotations consist of annotations of speech-oriented phenomena such as repetitions, auto-corrections, incises, etc.3)	The Semantizer annotation tool.4)	The Mediaval HC (outside context) evaluation tool.5)	The Mediaval EC (within context) evaluation tool. A description of the project is available at the following address:http://www.technolangue.net/article.php3?id_article=62 (in French language)</description>
-<description lang="French">Le package d’évaluation MEDIA a été produit dans le cadre du projet national français MEDIA (« Méthodologie d'Evaluation automatique de la compréhension hors et en contexte du DIAlogue »), issu du programme Technolangue, financé par le Ministère français délégué à la Recherche et aux Nouvelles Technologies (MRNT). Le projet MEDIA a permis de réaliser une campagne d'évaluation de la compréhension des systèmes de dialogue pour le français.  Ce package comprend l’ensemble des données utilisées lors de la campagne d’évaluation MEDIA. Il regroupe des ressources, des protocoles, des outils de notation, les résultats de la campagne officielle, etc., qui ont été utilisés ou produits pendant la campagne. Le but de ce « package » d’évaluation est de permettre à tout acteur externe de pouvoir évaluer son propre système et ainsi de pouvoir comparer ses résultats à ceux obtenus pendant la campagne.La campagne se décompose en deux tâches: 1)	Evaluation du dialogue hors contexte : consiste à produire l’annotation sémantique hors contexte du dialogue de chacun des 3000 énoncés de test.2)	Evaluation du dialogue en contexte : consiste à évaluer la capacité des systèmes de compréhension a) à partir des transcriptions orthographiques seules et b) à partir des transcriptions et des annotations hors contexte de référence.Le package d’évaluation MEDIA contient les données et outils suivants :1)	Corpus de 1258 dialogues enregistrés (WoZ)  pour la tâche d’informations touristiques, transcrit et annoté en actes de dialogues et en segments sémantiques hors et en contexte de dialogue. Les annotations respectent le formalisme XML. Ce corpus comprend 18 831  énoncés utilisateur utilisés pour l'adaption des systèmes et pour l'évaluation. 2)	Le corpus de test (200 dialogues) est annoté en méta-annotations afin de procéder à une étude diagnostique des sorties des systèmes. Ces méta-annotations comprennent des annotations de phénomènes liés à l’oral telles les répétitions, les auto-corrections, les incises, etc.3)	L’outil d’annotation Semantizer.4)	L’outil d’évaluation Mediaval HC hors contexte.5)	L'outil d'évaluation Mediaval EC en contexte de dialogue .Une description du projet est disponible à l'adresse suivante :http://www.technolangue.net/article.php3?id_article=62</description>
+<resourceName lang="English">Phonetically Balanced Words (2)</resourceName>
+<resourceName lang="French">Mots phonétiquement équilibrées (2)</resourceName>
+<description lang="English">Large acoustic corpus of read text in Korean produced by Kaist Korterm. Native Korean speakers (males and females) have uttered 36 geographical proper nouns. Information such as the size and the level of studies of the speakers are provided. The recordings took place in a soundproof room. The data are stored in a 8-bit A-law speech file, with a 16 kHz sampling rate. The standard in use is NIST.</description>
+<description lang="French">Important corpus de textes lus en coréen produit par Kaist Korterm. Des locuteurs natifs (hommes et femmes) ont prononcé 36 noms propres relatifs à la géographies. Des informations comme la taille du locuteur ou son niveau d'études sont fournies. Les enregistrements ont été effectués dans une pièce insonorisée. Les données sont stockées dans un fichier de parole de 8 bits, loi-A, avec une fréquence d'échantillonnage de 16 kHz. La norme suivie est NIST.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=998</url>
-<identifier>ELRA-E0024</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=648</url>
+<identifier>ELRA-S0125</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,42 +29,31 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-06-28</lastDateUpdated>
+<lastDateUpdated>2005-05-10</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 7500.00€</price>
-<price>Academic org. ELRA Non Member: 2000.00€</price>
-<price>Commercial org. ELRA Member: 5000.00€</price>
-<price>Academic org. ELRA Member: 300.00€</price>
-<availabilityStartDate>2007-06-28</availabilityStartDate>
-</licenceInfo>
-<licenceInfo>
-<licence>ELRA_EVALUATION</licence>
-<restrictionsOfUse>evaluationUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 6500.00€</price>
-<price>Commercial org. ELRA Member: 1000.00€</price>
-<availabilityStartDate>2007-06-28</availabilityStartDate>
+<price>Commercial org. ELRA Member: 200.00€</price>
+<price>Academic org. ELRA Member: 50.00€</price>
+<price>Academic org. ELRA Non Member: 100.00€</price>
+<price>Commercial org. ELRA Non Member: 400.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2002-09-12</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 25000.00€</price>
-<price>Academic org. ELRA Non Member: 25000.00€</price>
-<price>Commercial org. ELRA Member: 20000.00€</price>
-<price>Academic org. ELRA Member: 20000.00€</price>
-<availabilityStartDate>2007-06-28</availabilityStartDate>
+<price>Commercial org. ELRA Member: 200.00€</price>
+<price>Academic org. ELRA Member: 200.00€</price>
+<price>Academic org. ELRA Non Member: 400.00€</price>
+<price>Commercial org. ELRA Non Member: 400.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2002-09-12</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>EVALDA</projectName>
-<fundingType>nationalFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
@@ -75,8 +64,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
+<languageId>kor</languageId>
+<languageName>Korean</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

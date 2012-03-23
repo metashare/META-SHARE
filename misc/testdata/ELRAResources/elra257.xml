@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Mandarin Chinese Speech Synthesis Corpus</resourceName>
-<resourceName lang="French">Corpus de synthèse de la parole du chinois mandarin (corpus accessoire)</resourceName>
-<description lang="English">This corpus contains the recordings of 1 native Chinese speaker (female).The corpus is complementing the Basic Corpus (ELRA-S0228/01) and aims at covering a variety of speech context data which does not include syllables.The corpus is composed of 28 texts with 75,841 words and has been proofread manually. The corpus contents include: text of statements, digit strings, uncommon words, letter strings, measurement units, neutral tone, final retroflexion, latin alphabet, interrogative sentences, English words and room-ordering stimulation.The speaker has been recorded in a professional recording studio over 2 channels: microphone and glottis wave (fundamental frequency) signals for a total of 30.2 hours.</description>
-<description lang="French">Ce corpus contient les enregistrements d’une locutrice de langue maternelle chinoise.Le corpus vient compléter le corpus de base (ELRA-S0228/01) et a pour but de couvrir une variété de contextes de parole n’incluant pas les syllabes.Le corpus est composé de 28 textes de 75 841 mots et a été vérifié manuellement. Le corpus contient des locutions, des séquences de chiffres, de lettres, des mots peu fréquents, des unités de mesure, le ton neutre, la rétroflexion, l’alphabet latin, des phrases interrogatives, des mots anglais et des simulations de réservations de chambres.</description>
+<resourceName lang="English">Mandarin Chinese Speech Recognition Corpus (desktop) - single Chinese sentence (200 people)</resourceName>
+<resourceName lang="French">Corpus de  reconnaissance de parole microphone du chinois mandarin – phrases (200 locuteurs)</resourceName>
+<description lang="English">This corpus comprises 8,000 Chinese sentences uttered by 200 speakers of different dialects, ages and various educational levels, recorded over 2 channels. Speech samples are stored as a sequence of 16-bit 44.1kHz WAV for 12.21 hours of speech per channel. The total capacity of the data is 7.2 Gb.Each speaker read 40 items. Text files are stored in Unicode format. All data have been proofread manually.The corpus aims to be applied to the testing and telephone natural speech recognition system.</description>
+<description lang="French">Ce corpus comprend 8 000 phrases en chinois prononcées par 200 locuteurs de dialectes, d’âges et de niveaux d’éducation différents, enregistrés via 2 canaux. Les échantillons de parole sont stockés sous la forme de séquences 16-bit 44,1kHz WAV pour un total de 12,21 heures de parole par canal. La taille totale des données est de 7,2 Go.Chaque locuteur a lu 40 éléments. Les fichiers textes sont stockés au format Unicode. Toutes les données ont été vérifiées manuellement.Cette base de données a été conçue pour l’évaluation et le développement de systèmes de reconnaissance de la parole naturelle par téléphone.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=921</url>
-<identifier>ELRA-S0228_02</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=944</url>
+<identifier>ELRA-S0228_42</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,26 +29,26 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-01-17</lastDateUpdated>
+<lastDateUpdated>2009-09-24</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 5971.00€</price>
-<price>Academic org. ELRA Non Member: 5971.00€</price>
-<price>Commercial org. ELRA Member: 5971.00€</price>
-<price>Academic org. ELRA Member: 5971.00€</price>
+<price>Commercial org. ELRA Non Member: 2360.00€</price>
+<price>Academic org. ELRA Non Member: 2360.00€</price>
+<price>Commercial org. ELRA Member: 2360.00€</price>
+<price>Academic org. ELRA Member: 2360.00€</price>
 <availabilityStartDate>2007-01-17</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 5971.00€</price>
-<price>Academic org. ELRA Non Member: 5971.00€</price>
-<price>Commercial org. ELRA Member: 5971.00€</price>
-<price>Academic org. ELRA Member: 5971.00€</price>
+<price>Commercial org. ELRA Non Member: 2360.00€</price>
+<price>Academic org. ELRA Non Member: 2360.00€</price>
+<price>Commercial org. ELRA Member: 2360.00€</price>
+<price>Academic org. ELRA Member: 2360.00€</price>
 <availabilityStartDate>2007-01-17</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>

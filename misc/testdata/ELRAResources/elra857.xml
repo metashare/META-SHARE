@@ -6,7 +6,7 @@
 <description lang="English">General vocabulary for transferEntries: 33287Format: ASCII format with ISO 8859-1 character set. A lexicon file contains entries with feature-value pairs on each line and separators between entries.Medium: Floppy Disk, QIC 150 MB Cartridge Tape English-French LanTmark lexicon is divided into the following lexical categories: nouns (about 14,000), verbs (about 7,000), adjectives (about 5,000), Adverbs (about 1,000).Each entry contains a domain information, source language disambiguation, features, target language actions.</description>
 <description lang="French">Vocabulaire général pour transfertEntrées : 33287Format: ASCIISupport : disquette, cartouche QIC 150 MBCe lexique anglais-français est réparti selon les catégories lexicales suivantes : noms (env. 14 000), verbes (env. 7 000), adjectifs (env. 5 000), adverbes (env. 1 000).Chaque entrée contient une information sur le domaine, désambiguisation sur la langue source, des traits, des actions sur la langue cible.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=104</url>
 <identifier>ELRA-M0005</identifier>
 </identificationInfo>

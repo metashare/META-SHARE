@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Mandarin Chinese Desktop Speech Recognition Corpus - Monosyllabic (98 people)</resourceName>
-<resourceName lang="French">Corpus de reconnaissance de parole microphone en chinois mandarin – monosyllabes (98 locuteurs)</resourceName>
-<description lang="English">This corpus comprises 1,267 entries uttered by 98 speakers of different dialects, ages and various educational levels (46 males and 52 females), recorded over 3 channels (Mic 1: SHURE SM58; Mic 2: Labtec Axis-002; Mic 3: ATR 60C). The database comprises monosyllables. Speech samples are stored as a sequence of 16-bit 44.1kHz WAV for 88 hours of speech per channel. The total capacity of the data is 78 Gb.Text files are stored in Unicode format. All data have been proofread manually.The corpus aims to be applied to the testing and telephone natural speech recognition system.</description>
-<description lang="French">Ce corpus comprend 1 267 entrées prononcées par 98 locuteurs de dialectes, d’âges et de niveaux d’éducation différents (46 hommes et 52 femmes), enregistrées via 3 canaux (Mic1: SHURE SM58; Mic2: Labtec Axis-002; Mic3: ATR 60C). La base de données contient des monosyllabes. Les échantillons de parole sont stockés sous la forme de séquences 16-bit 44,1kHz WAV pour un total de 88 heures de parole. La taille totale des données est de 78 Go.Chaque locuteur a lu 120 éléments. Les fichiers textes sont stockés au format Unicode. Toutes les données ont été vérifiées manuellement.Cette base de données a été conçue pour l’évaluation et le développement de systèmes de reconnaissance de la parole naturelle par téléphone.</description>
+<resourceName lang="English">Danish SpeechDat(II) FDB-1000</resourceName>
+<resourceName lang="French">Base de données SpeechDat(II) FDB-1000 du danois</resourceName>
+<description lang="English">The Danish SpeechDat(II) FDB-1000 contains the recordings of 1,000 Danish speakers (1940 males, 2060 females) recorded over the Danish fixed telephone network. This speech database was validated by SPEX (the Netherlands) to assess its compliance with the SpeechDat format and content specifications.Speech samples are stored as sequences of 8-bit 8 kHz A-law. Each prompted utterance is stored in a separate file. Each signal file is accompanied by an ASCII SAM label file which contains the relevant descriptive information.Each speaker uttered the following items:    * 3 application words    * 1 sequence of 10 isolated digits    * 4 connected digits (1 sheet number –5/10 digits, 1 telephone number –9/11 digits, 1 credit card number -16 digits, 1 PIN code -6 digits)    * 3 dates (1 spontaneous e.g. birthday, 1 word style prompted date, 1 relative and general date expression)    * 1 word spotting phrase using an embedded application word    * 1 isolated digit    * 3 spelled word (1 spontaneous e.g. own forename, 1 spelling of directory city name, 1 real word for coverage)    * 1 currency money amount    * 1 natural number    * 5 directory assistance names (1 spontaneous e.g. own forename, 1 city of school at 7 years, 1most frequent cities out of a set of 500, 1 most frequent company/agency out of a set of 500 names, 1 "forename surname" out of a set of 500 names)    * 2 yes/no questions (1 predominantly "yes" question, 1 predominantly "no" question)    * 9 phonetically rich sentences    * 2 time phrases (1 spontaneous time of day, 1 word style time phrase)    * 4 phonetically rich wordsA pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
+<description lang="French">La base de données SpeechDat(II) FDB-1000 du danois contient 1000 locuteurs danois enregistrés à travers le réseau téléphonique fixe danois. Les bases de données SpeechDat(II) ont été réalisées selon les spécifications du projet SpeechDat(II) et validées par SPEX, Pays-Bas.Les fichiers de parole sont stockés en séquences d'échantillons de 8 bits, 8 kHz, loi-A. Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM.Chaque locuteur a prononcé les éléments suivants :    * 3 mots de commande ;    * 1 séquence de 10 chiffres isolés ;    * 4 nombres : 1 numéro permettant d'identifier la feuille de prompt (5-10 chiffres), 1 numéro de téléphone (9-11 chiffres), 1 numéro de carte de crédit (16 chiffres), 1 code confidentiel (6 chiffres) ;    * 3 dates : 1 date spontanée (date de naissance), 1 date lue, 1 date relative et générale ;    * 1 expression utilisant un mot de commande ;    * 1 chiffre isolé ;    * 3 mots épelés : 1 spontané (prénom), 1 nom de ville provenant d'un annuaire de renseignements téléphoniques, 1 mot réel pour couverture ;    * 1 montant en devises ;    * 1 nombre naturel ;    * 5 noms provenant d'un annuaire de renseignements téléphoniques : 1 spontané (prénom), 1 nom de ville de l'école du locuteur à 7 ans (spontané), 1 nom de ville parmi les plus courantes (sur 500 noms), 1 nom de compagnie/société (sur 500 noms), 1 "prénom nom" (sur 500 noms) ;    * questions oui/non : 1 question à prédominance "oui", 1 question à prédominance "non" ;    * 9 phrases phonétiquement riches ;    * 2 phrases comportant une notion de temps : 1 jour (spontané), 1 phrase comportant une notion de temps) ;    * 4 mots phonétiquement riches.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=933</url>
-<identifier>ELRA-S0228_31</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=556</url>
+<identifier>ELRA-S0072</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,29 +29,37 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2009-09-24</lastDateUpdated>
+<lastDateUpdated>2007-02-22</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 4657.00€</price>
-<price>Academic org. ELRA Non Member: 4657.00€</price>
-<price>Commercial org. ELRA Member: 4657.00€</price>
-<price>Academic org. ELRA Member: 4657.00€</price>
-<availabilityStartDate>2007-01-17</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 25000.00€</price>
+<price>Academic org. ELRA Non Member: 22000.00€</price>
+<price>Commercial org. ELRA Member: 18000.00€</price>
+<price>Academic org. ELRA Member: 9000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1999-10-18</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 4657.00€</price>
-<price>Academic org. ELRA Non Member: 4657.00€</price>
-<price>Commercial org. ELRA Member: 4657.00€</price>
-<price>Academic org. ELRA Member: 4657.00€</price>
-<availabilityStartDate>2007-01-17</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 25000.00€</price>
+<price>Academic org. ELRA Non Member: 25000.00€</price>
+<price>Commercial org. ELRA Member: 18000.00€</price>
+<price>Academic org. ELRA Member: 18000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1999-10-18</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>SpeechDat(II)</projectName>
+<fundingType>euFunds</fundingType>
+</fundingProject>
+</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
@@ -62,8 +70,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>chi/zho</languageId>
-<languageName>Chinese</languageName>
+<languageId>dan</languageId>
+<languageName>Danish</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

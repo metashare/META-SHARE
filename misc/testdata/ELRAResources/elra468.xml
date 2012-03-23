@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">TC-STAR 2005 Evaluation Package - SLT Chinese-to-English</resourceName>
-<resourceName lang="French">Package d’évaluation TC-STAR 2005 – SLT chinois-anglais</resourceName>
-<description lang="English">TC-STAR is a European integrated project focusing on Speech-to-Speech Translation (SST). To encourage significant breakthrough in all SST technologies, annual open competitive evaluations are organized. Automatic Speech Recognition (ASR), Spoken Language Translation (SLT) and Text-To-Speech (TTS) are evaluated independently and within an end-to-end system.The first TC-STAR evaluation campaign took place in March 2005. Two core technologies were evaluated during the campaign:• Automatic Speech Recognition (ASR),• Spoken Language Translation (SLT).Each evaluation package includes resources, protocols, scoring tools, results of the official campaign, etc., that were used or produced during the first evaluation campaign. The aim of these evaluation packages is to enable external players to evaluate their own system and compare their results with those obtained during the campaign itself.The speech databases made within the TC-STAR project were validated by SPEX, in the Netherlands, to assess their compliance with the TC-STAR format and content specifications.This package includes the material used for the TC-STAR 2005 Spoken Language Translation (SLT) first evaluation campaign for Spanish-to-English translation. The same packages are available for English (ELRA-E0002), Spanish (ELRA-E0003) and Mandarin Chinese (ELRA-E0004) for ASR and for SLT in 3 directions, English-to-Spanish (ELRA-E0005) and Spanish-to-English (ELRA-E0006).To be able to chain the components, ASR and SLT evaluation tasks were designed to use common sets of raw data and conditions. Two evaluation tasks, common to ASR and SLT, were selected: EPPS (European Parliament Plenary Sessions) task and VOA (Voice of America) task. This package was used within the VOA task and consists of 2 data sets:- Development data set: built upon the ASR development data set, in order to enable end-to-end evaluation. Subsets of 25,000 characters were selected from the VOA verbatim transcriptions. The source texts were then translated into English by two independent translation agencies. All source text sets and reference translations were formatted using the same SGML DTD that has been used for the NIST Machine Translation evaluations.- Test data set: as for the development set, the same procedure was followed to produce the test data, i.e.: subsets of 25.000 characters were selected from the test data set from the manual transcriptions. The source data were then translated into English by two independent agencies</description>
-<description lang="French">TC-STAR est un projet intégré européen basé sur la traduction parole-parole (ou SST pour Speech-to-Speech Translation). Pour encourager de manière conséquente l’avancée dans toutes les technologies de la SST, des évaluations ouvertes à la concurrence sont organisées sur une base annuelle. Les technologies de la reconnaissance automatique de la parole (ou ASR pour « Automatic Speech Recognition »), de la traduction de la langue parlée (ou SLT pour « Spoken Language Translation ») et les technologies texte-parole (ou TTS pour « Text-to-Speech ») sont évaluées à la fois de façon indépendante et intégrée à un système « end-to-end » (de « bout en bout »).La première campagne d’évaluation TC-STAR s’est déroulée en mars 2005. Deux technologies de base ont été évaluées lors de cette campagne:• la reconnaissance automatique de la parole (ASR),• la traduction de la langue parlée (SLT).Chaque package d’évaluation regroupe des ressources, des protocoles, des outils de notation, les résultats de la campagne officielle, etc., qui ont été utilisés ou produits pendant la première campagne d’évaluation. Le but de ces packages d’évaluation est de permettre à des acteurs externes d’évaluer leur propre système et de comparer leurs résultats à ceux obtenus pendant la campagne.Les bases de données orales produites dans le projet TC-STAR ont été validées par SPEX, Pays-Bas, selon le format et les spécifications de contenu TC-STAR.Ce package comprend le matériel utilisé pour la première campagne d’évaluation TC-STAR 2005 Spoken Language Translation (SLT) pour la traduction de l’anglais vers l’espagnol. Des packages similaires sont également disponibles pour l’anglais (ELRA-E0002), l’espagnol (ELRA-E0003) et le mandarin (ELRA-E0004) pour l’ASR, ainsi que pour la SLT dans 2 autres sens, anglais vers espagnol (ELRA-E0005), espagnol vers anglais (ELRA-E0006).Pour permettre de regrouper les composants, les tâches d’évaluation ASR et SLT ont été conçues en utilisant des données brutes et des conditions communes. Deux tâches d’évaluation, communes à l’ASR et à la SLT, ont été choisies : la tâche EPPS (« European Parliament Plenary Sessions » – Sessions plénières du Parlement européen) et la tâche VOA (« Voice of America » - La voix de l’Amérique). Le présent package a été utilisé dans le cadre de la tâche VOA et comprend 2 ensembles de données :- L’ensemble de données de développement : il a été construit à partir des données de développement de l’ASR, afin de permettre l’évaluation « end-to-end ». Un sous-ensemble de  25 000 caractères a été choisi à partir des transcriptions mot-à-mot VOA. Les textes sources ont été ensuite traduits en anglais par deux agences de traductions indépendantes. Tous les ensembles de textes sources, ainsi que les traductions de référence ont été formatées en utilisant la même DTD SGML déjà utilisée par les évaluations NIST en traduction automatique.- L’ensemble de données de test : comme pour l’ensemble de développement, la même procédure a été suivie pour produire les données de test, soit : un sous-ensemble de 25 000 caractères a été choisi à partir de l’ensemble de données de test à partir des transcriptions manuelles. Les données sources ont été ensuite traduites vers l’anglais par deux sociétés indépendantes.</description>
+<resourceName lang="English">VERBMOBIL II - VM CD 45.1 - VM45.1 (BAS edition)</resourceName>
+<resourceName lang="French">VERBMOBIL II - VM CD 45.1 - VM45.1 (édition BAS)</resourceName>
+<description lang="English">Verbmobil is a long-term project of the German Federal Ministry of Education, Science, Research and Technology (BMBF, Projekträger DLR). Its aim is to give Germany an international top position in language technology and its economical application in the next millenium by cooperation and concentration of as many as possible specialists from industry and science. The long-sighted aim is the development of a mobile translation system for the translation of spontaneous speech in face-to-face situations.The following resources are spontaneous speech databases recorded in a dialogue task (appointment scheduling) .VERBMOBIL II - VM CD 45.1 - VM45.1 (BAS edition) consists of 1 CD-ROM with 21 spontaneous dialogues (21 close mic, 0 room mic, 0 phone line (fixed network, GSM) recordings), 1293 turns, transliteration (Verbmobil II Format) in Japanese.</description>
+<description lang="French">Verbmobil est un projet du Ministère fédéral allemand de l'Education, des Sciences, de la Recherche et des Technologies (BMBF, Projekträger DLR), qui vise à placer l'Allemagne en position de force dans le domaine de l'ingénierie de la langue. Son objectif , à long terme, est de développer un système de traduction vocale automatique, pour la traduction de conversations spontanées. Ces ressources sont des enregistrements de conversation pour la prise de rendez-vous. Le corpus allemand comprend 13 910 occurrences (échanges). L'édition de BAS de la partie allemande est entièrement étiquetée et segmentée en unités phonémiques/phonétiques (alphabet SAM-PA) par le système MAUS et partiellement segmentée de manière manuelle.VERBMOBIL II - VM CD 45.1 - VM45.1 (édition BAS) contient 1 CD-ROM composé de 21 dialogues spontanés (21 dialogues enregistrés avec un micro-casque très près de la bouche, 0 avec un microphone situé dans la pièce, 0 à travers le réseau téléphonique (GSM)), 1293 échanges, transcription (au format Verbmobil II) en japonais.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=853</url>
-<identifier>ELRA-E0007</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=613</url>
+<identifier>ELRA-S0034_53</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,25 +29,35 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-02-22</lastDateUpdated>
+<lastDateUpdated>2005-04-21</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
-<licence>ELRA_EVALUATION</licence>
-<restrictionsOfUse>evaluationUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 750.00€</price>
-<price>Academic org. ELRA Non Member: 750.00€</price>
-<price>Commercial org. ELRA Member: 500.00€</price>
-<price>Academic org. ELRA Member: 500.00€</price>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 255.65€</price>
+<price>Academic org. ELRA Non Member: 255.65€</price>
+<price>Commercial org. ELRA Member: 127.82€</price>
+<price>Academic org. ELRA Member: 127.82€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2006-03-22</availabilityStartDate>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 255.65€</price>
+<price>Academic org. ELRA Non Member: 255.65€</price>
+<price>Commercial org. ELRA Member: 127.82€</price>
+<price>Academic org. ELRA Member: 127.82€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceCreationInfo>
 <fundingProject>
-<projectName>TC-STAR</projectName>
-<fundingType>euFunds</fundingType>
+<projectName>Verbmobil II</projectName>
+<fundingType>other</fundingType>
 </fundingProject>
 </resourceCreationInfo>
 <resourceComponentType>
@@ -60,12 +70,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>chi/zho</languageId>
-<languageName>Chinese</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
+<languageId>jpn</languageId>
+<languageName>Japanese</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

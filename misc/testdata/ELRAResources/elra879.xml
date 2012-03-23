@@ -6,7 +6,7 @@
 <description lang="English">This corpus contains more than 100 million words and it contains 10 years of bilingual articles from “El Periódico de Catalunya”. Both language data are rather close as the Catalan text is a translation of the Spanish one, partly achieved by means of Machine translation and then post-edited.The data are aligned at sentence level and stored in text files, in a one sentence per line basis. The data are provided in plain text, with no encoding whatsoever.</description>
 <description lang="French">Ce corpus comprend plus de 100 millions de mots et consiste en 10 années d’articles bilingues de “El Periódico de Catalunya”. Les données des deux langues sont très proches puisque le texte catalan est une traduction de la version espagnole, achevée en partie au moyen d’une traduction automatique puis post-éditée.Les données sont alignées au niveau de la phrase et stockées en fichiers texte, sur la base d’une phrase par ligne. Les données sont fournies au format texte plein, sans aucun codage.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=1122</url>
 <identifier>ELRA-W0053</identifier>
 </identificationInfo>

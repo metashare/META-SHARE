@@ -6,7 +6,7 @@
 <description lang="English">MACPLEX comprises two dictionaries: a dictionary of lemmas (over 80,000 entries) and a dictionary of word forms (over 1,300,000 entries). Morphological information (PoS, gender, case, definiteness, number for nouns, tense, person, etc. for verbs) is available for each entry. Out of the more than 1,300,000 word forms, there are 345,350 nouns, 467,744 adjectives, 500,220 verbs and 19,472 adverbs. The remaining entries correspond to pronouns, adpositions, conjunctions and numerals. The lexicon is available in Unicode.</description>
 <description lang="French">MACPLEX est composé de deux dictionnaires : un dictionnaire de lemmes (plus de 80 000 entrées) et un dictionnaire de formes nominales (plus de 1 300 000 entrées). L’information morphologique (Partie du discours, genre, cas, définitude, nombre pour les noms, temps, personne, etc., pour les verbes) est disponible pour chaque entrée. Parmi les plus de 1 300 000 formes nominales, on dénombre 345 350 noms, 467 744 adjectifs, 500 220 verbes et 19 472 adverbes. Le reste des entrées correspond aux pronoms, adpositions, conjonctions et numéraux. Le lexique est disponible en Unicode.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=1026</url>
 <identifier>ELRA-L0084</identifier>
 </identificationInfo>

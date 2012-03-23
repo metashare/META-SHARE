@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">VERBA Polytechnic and Plurilingual Terminological Database - V-AS American Football</resourceName>
-<resourceName lang="French">Base de données terminologique polytechnique et plurilingue VERBA - V-AS Football américain</resourceName>
-<description lang="English">* Entries for English-Spanish: Scientific research &amp; mathematical sciences (906 entries), Geosciences (10,215), Computer science, electronics &amp; telecommunications (70,580), Industry (47,578), Transport &amp; Maintenance (12,291), Economy (145,572), Biological sciences (38,989), Communication &amp; media (8,143), Chemical &amp; physical sciences (27,467). * Entries for English-French-German-Spanish: Environment (36,658), Health (66,727), Agriculture &amp; food (25,975), Construction &amp; public works (8,429), Law &amp; policy (56,578), Sports &amp; Leisure (17,312) * Two specialized lexicons: Spanish-English and English-French-German without domain codes: electronics, telematics, law, taxes, customs, etc. (550,000 entries). * Two general lexicons: Spanish-English-French-German and Spanish-English-French-German-Portuguese-Italian (83,000 entries).This terminological database contains, for each domain, a sub-domain indication is given (from 2 sub-domains for Scientific research to 39 for Sports &amp; leisure). Each entry consists of a definition, phraseological unit, abbreviation, usage information, grammatical labels. Format: ASCIIMedium: floppy disk</description>
-<description lang="French">* Entrées anglais-espagnol : Recherche scientifique &amp; sciences mathématiques (906 entrées), géosciences (10 215), informatique, électronique &amp; télécommunications (70 580), industrie (47 578), transports &amp; maintenance (12 291), économie (145 572), sciences biologiques (38 989), communication &amp; média (8 143), sciences chimiques &amp; physiques (27 467).* Entrées allemand-anglais-espagnol-français : Environnement (36 658), santé (66 727), agriculture &amp; alimentation (25 975), construction &amp; travaux publics (8 429), droit &amp; politique (56 578), sports &amp; loisirs (17 312).* Deux lexiques spécialisés: Espagnol-anglais et allemand-anglais-français sans codes de domaine : électronique, télématique, droit, taxes, douanes, etc. (550 000 entrées).* Deux lexiques généraux: Allemand-anglais-espagnol-français et allemand-anglais-espagnol-français-italien-portugais. (83 000 entrées).Cette base de données terminologique contient, pour chaque domaine, l'indication de sous-domaines (de 2 sous-domaines pour la recherche scientifique à 39 pour les sports et loisirs). Chaque entrée comporte une définition, une unité phraséologique, une abréviation, une information sur l'usage et des étiquettes grammaticales.Format: ASCIISupport : disquette</description>
+<resourceName lang="English">Polderland Dutch Lexicon of Names</resourceName>
+<resourceName lang="French">Lexique de noms hollandais (Polderland)</resourceName>
+<description lang="English">The lexicon contains 24,247 Dutch proper names. Various sorts of proper names are included, such as first names, last names, geographical names etc. Each entry contains an ID, word form, lemma, part of speech and proper name type.The lexicon is delivered in human-readable UNIX ANSI-format, with just a linefeed at the end of every line instead of a carriage return. The character set used is ISO Latin-1 (ISO/IEC 8859-1). All fields are separated by horizontal tabs, with no empty fields.</description>
+<description lang="French">Ce lexique comprend 24 247 noms propres hollandais. Différents types de noms propres sont inclus, tels que les prénoms, noms de familles, noms géographiques, etc. entrée contient un identifiant, la forme du mot, le lemme, la partie du discours et le type de nom propre.Le lexique est fourni au format UNIX ANSI lisible par l’homme, avec un simple saut de ligne en fin de chaque ligne au lieu d’un retour chariot. La table de caractères utilisée est ISO Latin-1 (ISO/IEC 8859-1). Tous les champs sont séparés par des tabulations horizontales, sans champs vides.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=403</url>
-<identifier>ELRA-T0328</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1001</url>
+<identifier>ELRA-L0078</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,22 +29,38 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2006-09-27</lastDateUpdated>
+<lastDateUpdated>2007-08-06</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 3800.00€</price>
+<price>Academic org. ELRA Non Member: 2900.00€</price>
+<price>Commercial org. ELRA Member: 2900.00€</price>
+<price>Academic org. ELRA Member: 2300.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2007-08-02</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 0.70€</price>
-<price>Commercial org. ELRA Non Member: 1.00€</price>
-<availabilityStartDate>1997-04-11</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 3800.00€</price>
+<price>Academic org. ELRA Non Member: 3800.00€</price>
+<price>Commercial org. ELRA Member: 2900.00€</price>
+<price>Academic org. ELRA Member: 2900.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2007-08-02</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<resourceCreationInfo>
+<creationEndDate>2007-01-01</creationEndDate>
+</resourceCreationInfo>
 <resourceComponentType>
 <lexicalConceptualResourceInfo>
 <resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>terminologicalResource</lexicalConceptualResourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
 <lexicalConceptualResourceMediaType>
 <lexicalConceptualResourceTextInfo>
 <mediaType>text</mediaType>
@@ -52,29 +68,21 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>spa</languageId>
-<languageName>Spanish</languageName>
+<languageId>dut/nld</languageId>
+<languageName>Dutch</languageName>
 <languageVarietyInfo>
 <languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Castilian</languageVarietyName>
+<languageVarietyName>Flemish</languageVarietyName>
 <sizePerLanguageVariety>
 <size>2</size>
 <sizeUnit>gb</sizeUnit>
 </sizePerLanguageVariety>
 </languageVarietyInfo>
 </languageInfo>
-<languageInfo>
-<languageId>ger/deu</languageId>
-<languageName>German</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
-</languageInfo>
+<sizeInfo>
+<size>844</size>
+<sizeUnit>kb</sizeUnit>
+</sizeInfo>
 </lexicalConceptualResourceTextInfo>
 </lexicalConceptualResourceMediaType>
 </lexicalConceptualResourceInfo>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">euLEX (Lexical Database for Basque)</resourceName>
-<resourceName lang="French">euLEX (Base de données lexicale basque)</resourceName>
-<description lang="English">euLEX is a general lexicon which contains 115,000 entries, divided into 94,000 dictionary entries or lemmas, 12,000 allomorphs, 7,500 verb forms and about 1,200 dependent morphemes. All entries include linguistic information such as morphology and usage.The lexicon includes general purpose entries and terms (each of them with its corresponding thematic classification). The non-standard entries, specifically marked by the Academy of the Basque Language, are included and linked to the correct entry.The lexicon is in XML format and is constantly updated following the latest normalization decisions from the Academy of the Basque Language.Potential applications for this resource are PoS tagging, lemmatizing, and term detection and correction.All this information is used as the basis for the automatic lemmatizer tLEMA and the morphological analyzer built up in UZEI, together with the term checker.</description>
-<description lang="French">euLEX est un lexique général contenant 115 000 entrées, réparties en 94 000 entrées du dictionnaire ou lemmes, 12 000 allomorphes, 7 500 formes verbales et environ 1 200 morphèmes dépendants. Toutes les entrées comprennent des informations linguistiques telles que la morphologie et l’usage.Le lexique comprend des entrées et des termes de vocabulaire général (chacun avec sa classification thématique correspondante). Les entrées non standards, spécifiquement marquées par l’Académie de la Langue Basque, sont incluses et reliées à l’entrée correcte.Le lexique est fourni au format XML et  régulièrement mis à jour en fonction des dernières décisions de normalisation de l’Académie de la Langue Basque.Les applications potentielles pour cette ressource sont l’étiquetage de la partie du discours, la lemmatisation et la détection et la correction de termes.Toutes ces informations sont utilisées comme base pour le lemmatiseur automatique tLEMA, ainsi que l’analyseur morphologique et que le correcteur de termes, réalisés par UZEI.</description>
+<resourceName lang="English">VERBA Polytechnic and Plurilingual Terminological Database - G-GY Integrated Circuits</resourceName>
+<resourceName lang="French">Base de données terminologique polytechnique et plurilingue VERBA - G-GY Circuits intégrés</resourceName>
+<description lang="English">* Entries for English-Spanish: Scientific research &amp; mathematical sciences (906 entries), Geosciences (10,215), Computer science, electronics &amp; telecommunications (70,580), Industry (47,578), Transport &amp; Maintenance (12,291), Economy (145,572), Biological sciences (38,989), Communication &amp; media (8,143), Chemical &amp; physical sciences (27,467). * Entries for English-French-German-Spanish: Environment (36,658), Health (66,727), Agriculture &amp; food (25,975), Construction &amp; public works (8,429), Law &amp; policy (56,578), Sports &amp; Leisure (17,312) * Two specialized lexicons: Spanish-English and English-French-German without domain codes: electronics, telematics, law, taxes, customs, etc. (550,000 entries). * Two general lexicons: Spanish-English-French-German and Spanish-English-French-German-Portuguese-Italian (83,000 entries).This terminological database contains, for each domain, a sub-domain indication is given (from 2 sub-domains for Scientific research to 39 for Sports &amp; leisure). Each entry consists of a definition, phraseological unit, abbreviation, usage information, grammatical labels. Format: ASCIIMedium: floppy disk</description>
+<description lang="French">* Entrées anglais-espagnol : Recherche scientifique &amp; sciences mathématiques (906 entrées), géosciences (10 215), informatique, électronique &amp; télécommunications (70 580), industrie (47 578), transports &amp; maintenance (12 291), économie (145 572), sciences biologiques (38 989), communication &amp; média (8 143), sciences chimiques &amp; physiques (27 467).* Entrées allemand-anglais-espagnol-français : Environnement (36 658), santé (66 727), agriculture &amp; alimentation (25 975), construction &amp; travaux publics (8 429), droit &amp; politique (56 578), sports &amp; loisirs (17 312).* Deux lexiques spécialisés: Espagnol-anglais et allemand-anglais-français sans codes de domaine : électronique, télématique, droit, taxes, douanes, etc. (550 000 entrées).* Deux lexiques généraux: Allemand-anglais-espagnol-français et allemand-anglais-espagnol-français-italien-portugais. (83 000 entrées).Cette base de données terminologique contient, pour chaque domaine, l'indication de sous-domaines (de 2 sous-domaines pour la recherche scientifique à 39 pour les sports et loisirs). Chaque entrée comporte une définition, une unité phraséologique, une abréviation, une information sur l'usage et des étiquettes grammaticales.Format: ASCIISupport : disquette</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1065</url>
-<identifier>ELRA-L0085</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=261</url>
+<identifier>ELRA-T0186</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,39 +29,22 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<revision>Last update: 31 January 2008</revision>
-<lastDateUpdated>2008-06-30</lastDateUpdated>
+<lastDateUpdated>2006-09-27</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
-<licence>ELRA_END_USER</licence>
-<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 10000.00€</price>
-<price>Academic org. ELRA Non Member: 6000.00€</price>
-<price>Commercial org. ELRA Member: 6000.00€</price>
-<price>Academic org. ELRA Member: 3000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2008-06-30</availabilityStartDate>
-</licenceInfo>
-<licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 20000.00€</price>
-<price>Academic org. ELRA Non Member: 20000.00€</price>
-<price>Commercial org. ELRA Member: 15000.00€</price>
-<price>Academic org. ELRA Member: 15000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2008-06-30</availabilityStartDate>
+<price>Commercial org. ELRA Member: 0.70€</price>
+<price>Commercial org. ELRA Non Member: 1.00€</price>
+<availabilityStartDate>1997-04-11</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<creationEndDate>2007-01-01</creationEndDate>
-</resourceCreationInfo>
 <resourceComponentType>
 <lexicalConceptualResourceInfo>
 <resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceType>terminologicalResource</lexicalConceptualResourceType>
 <lexicalConceptualResourceMediaType>
 <lexicalConceptualResourceTextInfo>
 <mediaType>text</mediaType>
@@ -69,16 +52,21 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>baq/eus</languageId>
-<languageName>Basque</languageName>
+<languageId>eng</languageId>
+<languageName>English</languageName>
 </languageInfo>
-<sizeInfo>
-<size>33</size>
-<sizeUnit>mb</sizeUnit>
-</sizeInfo>
-<textFormatInfo>
-<mimeType>Plain text</mimeType>
-</textFormatInfo>
+<languageInfo>
+<languageId>spa</languageId>
+<languageName>Spanish</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Castilian</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
+</languageInfo>
 </lexicalConceptualResourceTextInfo>
 </lexicalConceptualResourceMediaType>
 </lexicalConceptualResourceInfo>

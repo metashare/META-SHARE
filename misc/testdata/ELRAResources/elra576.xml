@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">MULTEXT JOC Corpus</resourceName>
-<resourceName lang="French">Corpus JOC MULTEXT</resourceName>
-<description lang="English">This CD-ROM contains a part of the corpus developed in the MULTEXT project financed by the European Commission (LRE 62-050). This part contains raw, tagged and aligned data from the Written Questions and Answers of the Official Journal of the European Community. The corpus contains approx. 5 million words in English, French, German, Italian and Spanish (approx. 1 million words per language). About 800,000 words were grammatically tagged and manually checked for English, French, Italian and Spanish, i.e. roughly 200,000 words per language. The same subset for French, German, Italian and Spanish was aligned to English at the sentence level.The JOC corpus is delivered in Corpus Encoding Standard conformant format at each level of treatment : paragraph annotation level, conformant to the CESDOC specifications (1 M words * 5 languages); morpho-syntactic annotation level (PoS Tagging), conformant to CESANA specifications (200,000 words * 4 languages); parallel text alignment at sentence level, conformant to CESALIGN specifications (200,000 words * 4 languages). Additional information: http://www.lpl.univ-aix.fr/projects/multext</description>
-<description lang="French">Ce corpus contient une partie du corpus développé dans le cadre du projet MULTEXT financé par la Commission européenne (LRE 62-050). Cette partie comprend des données brutes, étiquetées et alignées des questions écrites et des réponses du Journal Officiel de la Communauté Européenne. Ce corpus contient environ 5 millions de mots en allemand, anglais, espagnol, français et italien (env. 1 million de mots par langue). Près de 800 000 mots ont été étiquetés grammaticalement et vérifiés manuellement pour l'anglais, le français, l'italien et l'espagnol (env. 200 000 mots par langue). Le même sous-ensemble pour le français, l'allemand, l'italien et l'espagnol a été aligné à l'anglais au niveau de la phrase.Le corpus JOC est fourni sous un format conforme au standard de codage CES (Corpus Encoding Standard) pour chaque niveau de traitement : niveau d'annotation du paragraphe, conforme aux spécifications CESDOC (1 M mots * 5 langues), niveau d'annotation morpho-syntaxique (étiquetage des parties du discours), conforme aux spécifications CESANA (200 000 mots * 4 langues), alignement de texte parallèle au niveau de la phrase, conforme aux spécifications CESALIGN (200 000 mots * 4 langues). Pour plus d'informations, visiter le site Web suivant : http://www.lpl.univ-aix.fr/projects/multext</description>
+<resourceName lang="English">Mandarin Chinese Speech Recognition Corpus (desktop)- person name (200 people)</resourceName>
+<resourceName lang="French">Corpus de  reconnaissance de parole microphone du chinois mandarin – noms de personnes (200 locuteurs)</resourceName>
+<description lang="English">This corpus comprises 8,000 person names uttered by 200 speakers of different dialects, ages and various educational levels, recorded over 2 channels. Speech samples are stored as a sequence of 16-bit 44.1kHz WAV for 10 hours of speech per channel. The total capacity of the data is 5.92 Gb.Each speaker read 40 items. Text files are stored in Unicode format. All data have been proofread manually.The corpus aims to be applied to the testing and telephone natural speech recognition system.</description>
+<description lang="French">Ce corpus comprend 8 000 noms de personnes prononcés par 200 locuteurs de dialectes, d’âges et de niveaux d’éducation différents, enregistrés via 2 canaux. Les échantillons de parole sont stockés sous la forme de séquences 16-bit 44,1kHz WAV pour un total de 10 heures de parole par canal. La taille totale des données est de 5,92 Go.Chaque locuteur a lu 40 éléments. Les fichiers textes sont stockés au format Unicode. Toutes les données ont été vérifiées manuellement.Cette base de données a été conçue pour l’évaluation et le développement de systèmes de reconnaissance de la parole naturelle par téléphone.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=534</url>
-<identifier>ELRA-W0017</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=945</url>
+<identifier>ELRA-S0228_43</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,127 +29,43 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2004-05-12</lastDateUpdated>
+<lastDateUpdated>2009-09-24</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 2000.00€</price>
-<price>Academic org. ELRA Member: 45.00€</price>
-<price>Academic org. ELRA Non Member: 100.00€</price>
-<price>Commercial org. ELRA Non Member: 5000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1998-11-23</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 1971.00€</price>
+<price>Academic org. ELRA Non Member: 1971.00€</price>
+<price>Commercial org. ELRA Member: 1971.00€</price>
+<price>Academic org. ELRA Member: 1971.00€</price>
+<availabilityStartDate>2007-01-17</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 2000.00€</price>
-<price>Academic org. ELRA Member: 2000.00€</price>
-<price>Academic org. ELRA Non Member: 5000.00€</price>
-<price>Commercial org. ELRA Non Member: 5000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1998-11-23</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 1971.00€</price>
+<price>Academic org. ELRA Non Member: 1971.00€</price>
+<price>Commercial org. ELRA Member: 1971.00€</price>
+<price>Academic org. ELRA Member: 1971.00€</price>
+<availabilityStartDate>2007-01-17</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>MULTEXT (LRE 62-050)</projectName>
-<fundingType>euFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
 <corpusMediaType>
-<corpusTextInfo>
-<mediaType>text</mediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
+<languageId>chi/zho</languageId>
+<languageName>Chinese</languageName>
 </languageInfo>
-<languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>ger/deu</languageId>
-<languageName>German</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>ita</languageId>
-<languageName>Italian</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>spa</languageId>
-<languageName>Spanish</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Castilian</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
-</languageInfo>
-<languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>ita</languageId>
-<languageName>Italian</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>spa</languageId>
-<languageName>Spanish</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Castilian</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
-</languageInfo>
-<languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>ger/deu</languageId>
-<languageName>German</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>ita</languageId>
-<languageName>Italian</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>spa</languageId>
-<languageName>Spanish</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Castilian</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
-</languageInfo>
-<sizeInfo>
-<size>5000000</size>
-<sizeUnit>words</sizeUnit>
-</sizeInfo>
-</corpusTextInfo>
+</corpusAudioInfo>
 </corpusMediaType>
 </corpusInfo>
 </resourceComponentType>

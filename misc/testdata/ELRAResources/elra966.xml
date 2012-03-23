@@ -6,7 +6,7 @@
 <description lang="English">EUROM1 is a multilingual European speech database. It contains over 60 speakers per language who pronounced numbers, sentences, isolated words ... using close talking microphone in an anecoic room. Equivalent corpora for each of the European languages exist already, with the same number of speakers selected in the same way, and recorded in the same conditions with common file formats.</description>
 <description lang="French">EUROM1 est une base de données de parole européenne multilingue. Elle comprend plus de 60 locuteurs par langue qui ont prononcé des nombres, des phrases, des mots isolés, etc. en utilisant un microphone « close talk » dans une chambre anéchoïque. Des corpus équivalents existent pour chacune des langues européennes, avec le même nombre de locuteurs sélectionnés de la même manière et enregistrés dans les mêmes conditions avec des formats de fichiers communs.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=1150</url>
 <identifier>ELRA-S0328</identifier>
 </identificationInfo>

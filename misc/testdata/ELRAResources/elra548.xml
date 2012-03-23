@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">"Le Monde Diplomatique" Text corpus in Arabic</resourceName>
-<resourceName lang="French">Corpus de textes du journal "Le Monde Diplomatique" en arabe</resourceName>
-<description lang="English">Electronic archiving of "Le Monde Diplomatique" articles in Arabic from 2000. The corpus is available in HTML. Each HTML file contains one article.Number of articles available per year :•	2000: 61 articles (November and December available only) (75,305 words)•	2001: 346 articles (479,435 words)•	2002: 369 articles (461,803 words)•	2003: 343 articles (344,376 words)•	2004: 291 articles (178,046 words)</description>
-<description lang="French">L’archivage des articles du journal "Le Monde Diplomatique" dans leur version arabe est disponible à partir de l’année 2000. Le corpus est disponible en HTML. Chaque fichier HTML contient un article.Nombre d’articles disponibles par année :•	2000: 61 articles (novembre et décembre disponibles uniquement)•	2001: 346 articles (479 435 mots)•	2002: 369 articles (461 803 mots)•	2003: 343 articles (344 376 mots)•	2004: 291 articles (178 046 mots)</description>
+<resourceName lang="English">VERBMOBIL II - VM CD 50.1 - VM50.1 (BAS edition)</resourceName>
+<resourceName lang="French">VERBMOBIL II - VM CD 50.1 - VM50.1 (édition BAS)</resourceName>
+<description lang="English">Verbmobil is a long-term project of the German Federal Ministry of Education, Science, Research and Technology (BMBF, Projekträger DLR). Its aim is to give Germany an international top position in language technology and its economical application in the next millenium by cooperation and concentration of as many as possible specialists from industry and science. The long-sighted aim is the development of a mobile translation system for the translation of spontaneous speech in face-to-face situations.The following resources are spontaneous speech databases recorded in a dialogue task (appointment scheduling) .VERBMOBIL II - VM CD 50.1 - VM50.1 (BAS edition) consists of 1 CD-ROM with 8 spontaneous dialogues (8 close mic, 0 room mic, 0 phone line (fixed network, GSM) recordings), 679 turns, transliteration (Verbmobil II Format) in American English.</description>
+<description lang="French">Verbmobil est un projet du Ministère fédéral allemand de l'Education, des Sciences, de la Recherche et des Technologies (BMBF, Projekträger DLR), qui vise à placer l'Allemagne en position de force dans le domaine de l'ingénierie de la langue. Son objectif , à long terme, est de développer un système de traduction vocale automatique, pour la traduction de conversations spontanées. Ces ressources sont des enregistrements de conversation pour la prise de rendez-vous. Le corpus allemand comprend 13 910 occurrences (échanges). L'édition de BAS de la partie allemande est entièrement étiquetée et segmentée en unités phonémiques/phonétiques (alphabet SAM-PA) par le système MAUS et partiellement segmentée de manière manuelle.VERBMOBIL II - VM CD 50.1 - VM50.1 (édition BAS) contient 1 CD-ROM composé de 8 dialogues spontanés (0 dialogues enregistrés avec un micro-casque très près de la bouche, 0 avec un microphone situé dans la pièce, 0 à travers le réseau téléphonique (GSM)), 679 échanges, transcription (au format Verbmobil II) en anglais-américai.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=717</url>
-<identifier>ELRA-W0036_04</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=20</url>
+<identifier>ELRA-S0034_50</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,35 +29,51 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2006-04-10</lastDateUpdated>
+<lastDateUpdated>2005-04-21</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 69.00€</price>
-<price>Academic org. ELRA Non Member: 69.00€</price>
-<price>Commercial org. ELRA Member: 46.00€</price>
-<price>Academic org. ELRA Member: 46.00€</price>
+<price>Commercial org. ELRA Non Member: 255.65€</price>
+<price>Academic org. ELRA Non Member: 255.65€</price>
+<price>Commercial org. ELRA Member: 127.82€</price>
+<price>Academic org. ELRA Member: 127.82€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2004-06-04</availabilityStartDate>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 255.65€</price>
+<price>Academic org. ELRA Non Member: 255.65€</price>
+<price>Commercial org. ELRA Member: 127.82€</price>
+<price>Academic org. ELRA Member: 127.82€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>Verbmobil II</projectName>
+<fundingType>other</fundingType>
+</fundingProject>
+</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
 <corpusMediaType>
-<corpusTextInfo>
-<mediaType>text</mediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>ara</languageId>
-<languageName>Arabic</languageName>
+<languageId>eng</languageId>
+<languageName>English</languageName>
 </languageInfo>
-</corpusTextInfo>
+</corpusAudioInfo>
 </corpusMediaType>
 </corpusInfo>
 </resourceComponentType>

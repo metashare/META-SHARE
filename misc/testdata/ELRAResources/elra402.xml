@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Dutch PAROLE lexicon</resourceName>
-<resourceName lang="French">Lexique PAROLE hollandais</resourceName>
-<description lang="English">The entry list of the lexicon consists of about 20,200 entries distributed over 13 parts of speech (POS). The entries have been described along the dimensions of morphosyntax and syntax. Morphosyntactic information consists of various lexical properties, like gender, number, case, person, inflection, etc. Syntactic descriptions consist of typical complementation patterns associated with the various lemmata.The composition of the entry list of the lexicon is based on 3 corpora from the Instituut voor Nederlandse Lexicologie (INL) and 2 lexica. The corpora contain a total of about 54 million words and have been automatically annotated for part-of-speech and lemma. The lexica contain morphosyntactic information of various kinds. For verbs, nouns, adjectives and adverbs, lemmata that were covered by at least 2 corpora and the 2 lexica were selected on the basis of cumulative frequency, coverage (distribution over sources) and inflected forms. For the smaller parts of speech, these selection requirements appeared to be too strict. Entry selection for these parts of speech was based on ranked frequency.The entries, uniquely defined by the combination of part of speech (e.g. noun) and subtype (e.g. common vs. proper noun), are provided with morphosyntactic information according to the Dutch set of PAROLE categories and features, and, where available, with syntactic information. Morphosyntactic information is automatically extracted from the INL lexica. Syntactic data have been collected manually, by inspection of corpus data and - where necessary - consultation of reference works. The corpus consulted consists of the newspaper component and the varied component of the 38 Million Words Corpus 1996.Word forms in the Dutch PAROLE lexicon are not inflected according to general paradigms, but are related to their lemma by a set of string procedures. These procedures are not unique. They can be shared by many other word forms. An example is suffixation with -e for adjectives, which produces "goede"/good from "goed". Inflected forms can be derived directly by applying the string procedures to the lemma they are connected with.The lexicon is set up as an SGML file (over 30 MB of plain ASCII). Its contents have been encoded in a distributed manner: all formative entities (like lemmata, syntactic phrases, feature bundles) are SGML entities, related by a pointer mechanism to other entities. The lexicon contains the following categories : adjectives (3,298 entries), adpositions (80 entries), adverbs (554 entries), articles (3 entries), conjunctions (70 entries), determiners (59 entries), interjections (235 entries), nouns (12,279 entries), numerals (77 entries), pronouns (85 entries), residuals (186 entries), unique (1 entry), verb (3,274 entries).More info on the Parole project: http://www.elda.org/catalogue/en/text/doc/parole.html</description>
-<description lang="French">Le lexique comprend environ 20 200 entrées distribuées sur 13 étiquettes " parties du discours ". Les entrées sont décrites avec des informations morpho-syntaxiques et syntaxiques. Les informations morpho-syntaxiques contiennent de nombreuses propriétés lexicales, telles que genre, nombre, cas, personne, flexion, etc. Les descriptions syntaxiques contiennent des modèles de compléments types associés à de nombreux lemmes.La composition des entrées du lexique est basée sur 3 corpus de l'Instituut voor Nederlandse Lexicologie (INL) et de 2 lexiques. Les corpus totalisent environ 54 millions de mots et les parties du discours et les lemmes ont été annotés automatiquement. Le lexique contient des informations morpho-syntaxiques de toutes sortes. Pour les verbes, les noms, les adjectifs et les adverbes, les lemmes qui étaient couverts par au moins 2 corpus et 2 lexiques, ont été sélectionnés d'après un cumul des fréquences, la couverture (distribution sur les sources) et les formes fléchies. Pour les parties du discours plus petites, ces besoins de sélection se sont avérés trop stricts. Ainsi, la sélection sur ces parties du discours s'est basée sur un classement des fréquences. Les entrées, définies uniquement selon la combinaison de la partie du discours (par ex. le nom) et le sous-type (par ex. nom commun par opposition à nom propre), sont fournies avec des informations morpho-syntaxiques établies d'après les catégories et attributs de l'ensemble PAROLE hollandais, et, quand cela était possible, avec des informations syntaxiques. Les informations morpho-syntaxiques ont été extraites automatiquement des lexiques de l'INL. Les données syntaxiques ont été collectées manuellement, en inspectant les données du corpus et, si nécessaire, en consultant d'autres travaux de référence. Le corpus consulté est composé des données de journaux et de données d'origines diverses provenant du corpus de 38 millions de mots de 1996.Le lexique se présente sous la forme d'un fichier SGML (plus de 30 MB de texte ASCII). Le contenu du fichier a été codé de manière distributive : toutes les entités "formatrices" (lemmes, phrases syntaxiques, ensembles de traits) sont des entités SGML reliées à d'autres entités par un mécanisme de pointeur. Le lexique contient les catégories suivantes : adjectifs (3 298 entrées), pré- et post-positions (80 entrées), adverbes (554 entrées), articles (3 entrées), conjonctions (70 entrées), déterminants (59 entrées), interjections (235 entrées), noms (12 279 entrées), numéraux (77 entrées), pronoms (85 entrées), catégorie résiduelle (186 entrées), catégorie unique (1 entrée), verbes (3 274 entrées).Plus d'informations sur le projet Parole: http://www.elda.org/catalogue/en/text/doc/parole.html</description>
+<resourceName lang="English">Portuguese SpeechDat(M) database</resourceName>
+<resourceName lang="French">Base de données SpeechDat(M) du portugais</resourceName>
+<description lang="English">The Portuguese SpeechDat(M) database contains the recordings of 1,001 speakers (453 males, 548 females). This speech database was collected by Portugal Telecom within the European SpeechDat project.Speech signals are stored as sequences of 8 kHz, 8-bit A-law. Files are stored according to the file specifications proposed in the SpeechDat database format specification. The file formats and headers follow the SAM recommendations (header files separated from signal files).This speech database was validated by SPEX (the Netherlands) to assess its compliance with the SpeechDat format and content specifications.Each speaker uttered the following items:    * 3 natural numbers    * 1 isolated digit    * 2 connected digits (1 credit card number, 1 telephone number)    * 2 money amounts    * 2 dates    * 1 time phrase    * 6 application words    * 3 spelled-out words    * 3 word spotting phrases    * 9 sentences    * 4 yes/no questions    * 1 spontaneous date    * 1 spontaneous time    * 1 region nameThe approach adopted for speaker recruitment involved selecting speakers among the employees of Portugal Telecom (about 20,000) and their relatives. The company has a wide geographical coverage, thus guaranteeing a good representation of many regional accents.The following age distribution has been obtained: 12 speakers are under 16, 345 speakers are between 17 and 30, 436 speakers are between 31 and 45, 196 speakers are between 46 and 60 and 8 speakers are over 60; the age of two speakers is unknown and two others said they were born in 1996.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
+<description lang="French">La base de données SpeechDat(M) du portugais contient les enregistrements de 1001 locuteurs (453 locuteurs hommes et 548 locuteurs femmes). Chaque locuteur a prononcé les éléments suivants :    * 3 nombres entiers naturels,    * 1 chiffre isolé,    * 1 numéro de carte de crédit,    * 1 numéro de téléphone,    * 2 montants en devise,    * 2 dates,    * 1 phrase comportant une notion de temps,    * 6 mots de commande,    * 3 mots épelés,    * 3 phrases incluant des mots-clés,    * 9 phrases,    * 4 questions oui/non,    * 1 date spontanée,    * 1 phrase spontanée comportant une notion de temps,    * 1 nom de région.Les locuteurs ont été sélectionnés parmi les 20 000 employés de Portugal Telecom. La compagnie a une couverture géographique suffisamment large pour garantir une bonne représentation des différents accents régionaux.Les classes d'âge sont réparties comme suit : 12 locuteurs de moins de 16 ans, 345 locuteurs entre 17 et 30 ans, 436 locuteurs entre 31 et 45 ans, 196 locuteurs entre 46 et 60 ans et 8 locuteurs de plus de 60 ans (ajouter à ces chiffres, 2 locuteurs qui n'ont pas mentionné leur âge et 2 autres qui ont dit être né en 1996).Les signaux de parole ont été échantillonnés à 8 kHz et enregistrés en séquences de 8 bits, loi-A. Les fichiers ont été stockés conformément aux spécifications de SpeechDat(M). Les formats des fichiers et les en-têtes suivent les recommandations SAM (les fichiers d'en-têtes sont séparés des fichiers de signaux). Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.CARACTERISTIQUES :Type de ressource : Enregistrements de parole (acoustique)Mode de parole : Lu (sauf si marqué spontané)Conditions d'enregistrement : Réseau de téléphone fixeLangue : PortugaisDomaine/Source : Phrases extraites du quotidien portugais PÚBLICOSexe et nombre de locuteurs : 1001 locuteurs (453 hommes et 548 femmes)Annotation linguistique : OrthographiqueFormat de fichier : 8 bits, loi-AStandard utilisé : SAMFréquence d'échantillonnage (kHz) : 8 kHzMode de distribution : 3 CD-ROMRessources connexes : Ressources SpeechDat(M) en d'autres langues : danois (ELRA-S0040), anglais (ELRA-S0011), français (ELRA-S0016), allemand (ELRA-S0018), italien (ELRA-S0052), espagnol (ELRA-S0065).Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=544</url>
-<identifier>ELRA-L0031</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=538</url>
+<identifier>ELRA-S0068</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,73 +29,52 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-10-05</lastDateUpdated>
+<lastDateUpdated>2007-08-28</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 3000.00€</price>
-<price>Academic org. ELRA Non Member: 400.00€</price>
-<price>Commercial org. ELRA Member: 1600.00€</price>
-<price>Academic org. ELRA Member: 300.00€</price>
+<price>Commercial org. ELRA Non Member: 20000.00€</price>
+<price>Academic org. ELRA Non Member: 14000.00€</price>
+<price>Commercial org. ELRA Member: 14000.00€</price>
+<price>Academic org. ELRA Member: 11000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1999-07-12</availabilityStartDate>
+<availabilityStartDate>1999-03-05</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 10000.00€</price>
-<price>Academic org. ELRA Non Member: 10000.00€</price>
-<price>Commercial org. ELRA Member: 8000.00€</price>
-<price>Academic org. ELRA Member: 8000.00€</price>
+<price>Commercial org. ELRA Non Member: 20000.00€</price>
+<price>Academic org. ELRA Non Member: 20000.00€</price>
+<price>Commercial org. ELRA Member: 14000.00€</price>
+<price>Academic org. ELRA Member: 14000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1999-07-12</availabilityStartDate>
+<availabilityStartDate>1999-03-05</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<validationInfo>
-<validated>True</validated>
-<validationModeDetails>EAGLES </validationModeDetails>
-</validationInfo>
 <resourceCreationInfo>
 <fundingProject>
-<projectName>LE-PAROLE project (MLAP/LE2-4017)</projectName>
+<projectName>SpeechDat(M)</projectName>
 <fundingType>euFunds</fundingType>
 </fundingProject>
-<creationEndDate>1998-01-01</creationEndDate>
 </resourceCreationInfo>
 <resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
-<mediaType>text</mediaType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>dut/nld</languageId>
-<languageName>Dutch</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Flemish</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
+<languageId>por</languageId>
+<languageName>Portuguese</languageName>
 </languageInfo>
-<sizeInfo>
-<size>30</size>
-<sizeUnit>mb</sizeUnit>
-</sizeInfo>
-<textFormatInfo>
-<mimeType>Plain text</mimeType>
-</textFormatInfo>
-</lexicalConceptualResourceTextInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
 </resourceComponentType>
 </resourceInfo>

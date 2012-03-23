@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">VERBMOBIL II - VM CD 57.1 - VM57.1 (BAS edition)</resourceName>
-<resourceName lang="French">VERBMOBIL II - VM CD 57.1 - VM57.1 (édition BAS)</resourceName>
-<description lang="English">Verbmobil is a long-term project of the German Federal Ministry of Education, Science, Research and Technology (BMBF, Projekträger DLR). Its aim is to give Germany an international top position in language technology and its economical application in the next millenium by cooperation and concentration of as many as possible specialists from industry and science. The long-sighted aim is the development of a mobile translation system for the translation of spontaneous speech in face-to-face situations.The following resources are spontaneous speech databases recorded in a dialogue task (appointment scheduling) .VERBMOBIL II - VM CD 57.1 - VM57.1 (BAS edition) consists of 1 CD-ROM with 11 spontaneous dialogues (11 close mic, 0 room mic, 0 phone line (fixed network, GSM) recordings) - 702 turns, transliteration (VM II Format) (Multilingual German/Japanese with 2 human interpreters (4 channels).</description>
-<description lang="French">Verbmobil est un projet du Ministère fédéral allemand de l'Education, des Sciences, de la Recherche et des Technologies (BMBF, Projekträger DLR), qui vise à placer l'Allemagne en position de force dans le domaine de l'ingénierie de la langue. Son objectif , à long terme, est de développer un système de traduction vocale automatique, pour la traduction de conversations spontanées. Ces ressources sont des enregistrements de conversation pour la prise de rendez-vous. Le corpus allemand comprend 13 910 occurrences (échanges). L'édition de BAS de la partie allemande est entièrement étiquetée et segmentée en unités phonémiques/phonétiques (alphabet SAM-PA) par le système MAUS et partiellement segmentée de manière manuelle.VERBMOBIL II - VM CD 57.1 - VM57.1 (édition BAS) contient 1 CD-ROM composé de 11 dialogues spontanés (11 dialogues enregistrés avec un micro-casque très près de la bouche, 0 avec un microphone situé dans la pièce, 0 à travers le réseau téléphonique (GSM)) - 702 échanges, transcription (au format Verbmobil II) (Multilingue avec 2 interprètes humains (4 canaux) allemand/japonais).</description>
+<resourceName lang="English">Phonetically Balanced Words (4)</resourceName>
+<resourceName lang="French">Mots phonétiquement équilibrés (4)</resourceName>
+<description lang="English">Large acoustic corpus in Korean produced by Kaist Korterm. 70 native Korean speakers (males and females) read 4 times 32 cardinal numbers and 9 determinatives of one syllable. Two announcers read these only 2 times. Information such as the size and the level of studies of the speakers are provided. The recordings took place in a soundproof room. The data are stored in a 8-bit A-law speech file, with a 16 kHz sampling rate. The standard in use is NIST.</description>
+<description lang="French">Important corpus de textes lus en coréen produit par Kaist Korterm. 70 locuteurs natifs (hommes et femmes) ont répété 4 fois 32 nombres cardinaux et 9 déterminants d'une seule syllabe. Deux présentateurs ne les ont lus que 2 fois. Des informations comme la taille du locuteur ou son niveau d'études sont fournies. Les enregistrements ont été effectués dans une pièce insonorisée. Les données sont stockées dans un fichier de parole de 8 bits, loi-A, avec une fréquence d'échantillonnage de 16 kHz. La norme suivie est NIST.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=791</url>
-<identifier>ELRA-S0034_71</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=650</url>
+<identifier>ELRA-S0127</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,37 +29,31 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-04-21</lastDateUpdated>
+<lastDateUpdated>2005-05-10</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 127.82€</price>
-<price>Commercial org. ELRA Member: 127.82€</price>
-<price>Academic org. ELRA Non Member: 255.65€</price>
-<price>Commercial org. ELRA Non Member: 255.65€</price>
+<price>Commercial org. ELRA Member: 800.00€</price>
+<price>Academic org. ELRA Member: 200.00€</price>
+<price>Academic org. ELRA Non Member: 400.00€</price>
+<price>Commercial org. ELRA Non Member: 1600.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1996-09-01</availabilityStartDate>
+<availabilityStartDate>2002-09-12</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 127.82€</price>
-<price>Commercial org. ELRA Member: 127.82€</price>
-<price>Academic org. ELRA Non Member: 255.65€</price>
-<price>Commercial org. ELRA Non Member: 255.65€</price>
+<price>Commercial org. ELRA Member: 800.00€</price>
+<price>Academic org. ELRA Member: 800.00€</price>
+<price>Academic org. ELRA Non Member: 1600.00€</price>
+<price>Commercial org. ELRA Non Member: 1600.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1996-09-01</availabilityStartDate>
+<availabilityStartDate>2002-09-12</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>Verbmobil II</projectName>
-<fundingType>other</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
@@ -70,12 +64,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>ger/deu</languageId>
-<languageName>German</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>jpn</languageId>
-<languageName>Japanese</languageName>
+<languageId>kor</languageId>
+<languageName>Korean</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

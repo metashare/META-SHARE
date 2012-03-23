@@ -6,7 +6,7 @@
 <description lang="English">This speech database contains the recordings of 2000 Catalan speakers who called from Fixed telephones and who are recorded over the fixed PSTN using and ISDN-BRI interface. Each speaker uttered around 50 read and spontaneous items. The speech database follows the specifications made within the SpeechDat (II) project. The database was validated by UVIGO. The Catalan-SpeechDat for the Fixed Telephone Network Database was funded by the Catalan Government.</description>
 <description lang="French">Cette base de données comprend les enregistrements de 2000 locuteurs du catalan ayant appelé depuis des téléphones fixes et enregistrés sur un réseau fixe PSTN et une interface ISDN-BRI. Chaque locuteur a prononcé 50 éléments lus et spontanés. Cette base de données de parole suit les specifications réalisées dans le cadre du projet SpeechDat (II). Elle a été validée par UVIGO. La base de données SpeechDat catalan pour le réseau téléphonique fixe a été financée par le gouvernement catalan.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=1146</url>
 <identifier>ELRA-S0324</identifier>
 </identificationInfo>

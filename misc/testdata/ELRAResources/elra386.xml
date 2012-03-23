@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">German Pronunciation Rules Set - PHONRUL 9.0</resourceName>
-<resourceName lang="French">Ensemble de règles de prononciation de l'allemand - PHONRUL 9.0</resourceName>
-<description lang="English">PHONRUL is a collection of computer-readable underspecifying pronunciation rules of standard German. This set describes the most common known effects in German pronunciation if deviating from the so-called canonic or citation form of words. The knowledge of this rule set was derived from empirical analysis of speech corpora as well as from a multitude of publications about German phonetics. The set does not contain any dialect-specific rules, however the line between Standard German and dialects is indistinct. Presently, this rule set is used at the University of Munich to aid automatic segmentation and labelling of unknown speech utterances.The rule set, in its present form, consists of approximately 1,500 complex rules which expand to 5,546 simple replacement rules. The rule set was designed for extended German SAM-PA, but can be translated into other alphabets (e.g. Worldbet, IPA) without much effort.</description>
-<description lang="French">PHONRUL est un ensemble de règles de prononciation de l'allemand "standard". Cet ensemble décrit les effets les plus connus de la prononciation allemande lorsqu'elle est déviée de sa forme dite canonique ou locutive. Cet ensemble de règles provient d'une analyse empirique de corpus oraux, ainsi que d'un nombre très important de publications sur la phonétique allemande. L'ensemble ne contient pas de règles spécifiques aux dialectes, même si la frontière entre l'allemand standard et les dialectes est peu distincte. Actuellement, cet ensemble de règles est utilisé à l'Université de Munich pour l'aide à la segmentation automatique et à l'étiquetage d'occurrences de parole, non connues.PHONRUL, dans sa forme actuelle, comprend environ 1 500 règles complexes qui permettent d'obtenir environ 5 546 règles simples de remplacement. L'ensemble de règles est conçu pour l'alphabet SAM-PA tel qu'étendu à l'allemand, mais peut être facilement traduit en d'autres alphabets tels que Worldbet et IPA.</description>
+<resourceName lang="English">SpeechDat Catalan FDB database</resourceName>
+<resourceName lang="French">Base de données SpeechDat FDB du catalan</resourceName>
+<description lang="English">The SpeechDat Catalan FDB database contains the recordings of 1,005 Catalan speakers (474 males, 531 females) recorded over the Spanish fixed telephone network. The database is partitioned into 4 CD-ROMs, in ISO 9660 format.Speech samples are stored as sequences of 8-bit 8 kHz A-law, uncompressed. Each prompted utterance is stored in a separate file, and each signal file is accompanied by an ASCII SAM label file which contains the relevant descriptive information.Each speaker uttered the following items:-	3 application words-	1 sequence of 10 isolated digits-	4 connected digits (prompt sheet number -6 digits, telephone number –9/11 digits, credit card number –14/16 digits, PIN code –6 digits)-	3 dates (spontaneous date e.g. birthday, prompted date, relative and general date expression)-	1 word spotting phrase using embedded application words-	1 isolated digit-	3 spelled words (1 surname, 1 directory assistance city name, 1 real/artificial name for coverage) -	1 currency money amount-	1 natural number-	5 directory assistance names (1 spontaneous, e.g. own surname, 1 city of birth/growing up, 1 most frequent city out of a set of 500, 1 most frequent company/agency out of a set of 500, 1 “forename surname” out of a set of 150 )-	2 yes/no questions (1 predominantly “yes” question, 1 predominantly “no” question, including fuzzy questions) -	9 phonetically rich sentences-	2 time phrases (1 spontaneous time of day, 1 word style time phrase) -	4 phonetically rich wordsThe following age distribution has been obtained: 13 speakers are under 16, 473 are between 16 and 30, 286 are between 31 and 45, 192 are between 46 and 60, and 41 speakers are over 60.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
+<description lang="French">La base de données SpeechDat FDB du ctalan comprend les enregistrements de 1005 locuteurs du catalan (474 hommes, 531 femmes) enregistrés à travers le réseau téléphonique fixe espagnol. La base de données est répartie sur 4 CD-ROM, et dans le format de la norme ISO 9660. Les fichiers de parole sont stockés en séquences d’échantillons au format 8bit, 8 kHz, A-law, et décompressés. Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM. Chaque locuteur a prononcé les éléments suivants :-	3 mots de commande ; -	1 séquence de 10 chiffres isolés ; -	4 chiffres connectés : 1 numéro permettant d'identifier la feuille de prompt (6 chiffres), 1 numéro de téléphone (9-11 chiffres), 1 numéro de carte de crédit (14-16 chiffres), 1 code confidentiel (6 chiffres) ; -	3 dates : 1 date spontanée (ex. anniversaire), 1 date lue, 1 date générale ; -	1 expression utilisant un mot de commande ; -	1 chiffre isolé ;-	3 mots épelés : 1 prénom, 1 nom de ville provenant d'un annuaire de renseignements téléphoniques, 1 mot réel/artificiel pour couverture ; -	1 montant en devises ; -	1 nombre entier naturel ; -	5 noms provenant d'un annuaire de renseignements téléphoniques : 1 spontané (par ex. nom de famille), 1 ville de naissance/d'origine du locuteur (spontané), 1 nom de ville parmi les plus fréquentes (sur 500), 1 nom de compagnie parmi les plus fréquentes (sur 500), 1 répétition de "prénom nom" ; -	2 questions oui/non : 1 question à prédominance "oui", 1 question à prédominance "non" (y compris questions potentiellement floues) ; -	9 phrases phonétiquement riches ; -	2 phrases comportant une notion de temps : 1 jour (spontané), 1 phrase comportant une notion de temps ; -	4 mots phonétiquement riches.Les classes d’âge sont réparties comme suit : 13 locuteurs ont moins de 16 ans, 473 locuteurs ont entre 16 et 30 ans, 286 locuteurs entre 31 et 45 ans, 192 locuteurs entre 46 et 60 ans, 41 locuteurs de plus de 60 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=447</url>
-<identifier>ELRA-S0045</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1014</url>
+<identifier>ELRA-S0243</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,57 +29,54 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-05-02</lastDateUpdated>
+<lastDateUpdated>2007-10-03</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 631.45€</price>
-<price>Academic org. ELRA Member: 127.82€</price>
-<price>Academic org. ELRA Non Member: 255.65€</price>
-<price>Commercial org. ELRA Non Member: 1262.89€</price>
+<price>Academic org. ELRA Member: 9000.00€</price>
+<price>Commercial org. ELRA Member: 14000.00€</price>
+<price>Academic org. ELRA Non Member: 20000.00€</price>
+<price>Commercial org. ELRA Non Member: 25000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-10-28</availabilityStartDate>
+<availabilityStartDate>2007-10-03</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 631.45€</price>
-<price>Academic org. ELRA Member: 631.45€</price>
-<price>Academic org. ELRA Non Member: 1262.89€</price>
-<price>Commercial org. ELRA Non Member: 1262.89€</price>
+<price>Academic org. ELRA Member: 14000.00€</price>
+<price>Commercial org. ELRA Member: 14000.00€</price>
+<price>Academic org. ELRA Non Member: 25000.00€</price>
+<price>Commercial org. ELRA Non Member: 25000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-10-28</availabilityStartDate>
+<availabilityStartDate>2007-10-03</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
-<mediaType>text</mediaType>
-<lingualityInfo>
-<lingualityType>monolingual</lingualityType>
-</lingualityInfo>
-<languageInfo>
-<languageId>ger/deu</languageId>
-<languageName>German</languageName>
-</languageInfo>
-</lexicalConceptualResourceTextInfo>
-<lexicalConceptualResourceAudioInfo>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
 <mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>ger/deu</languageId>
-<languageName>German</languageName>
+<languageId>cat</languageId>
+<languageName>Catalan</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Valencian</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
 </languageInfo>
-</lexicalConceptualResourceAudioInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
 </resourceComponentType>
 </resourceInfo>

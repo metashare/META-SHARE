@@ -6,7 +6,7 @@
 <description lang="English">Electronic archiving of "Le Monde" articles started on 1 January 1987. Some 200 articles are added every day, and as of October 1997 the database contains more than 500,000 articles, making it the biggest of its kind for all French daily newspapers.Years 1987 to 2002 are available in an ASCII text format. Years 2003 to 2007 are available in .XML format. Each month consists of some 10 MB of data (circa 120 MB per year).The number of words available since 2005 is given below:- 2005: 19 million words- 2006: 17 million words- 2007: 21 million wordsData ranging from 1987 until 2007 are available through ELRA.</description>
 <description lang="French">L'archivage des articles du quotidien français "Le Monde" a débuté le 1er janvier 1987. Chaque jour, la base s'enrichit d'environ 200 articles, et compte en octobre 1997 plus de 500 000 articles, constituant ainsi la plus grosse base de données en texte intégral de la presse quotidienne française.Les années 1987 à 2002 sont disponibles au format texte ASCII. Les années 2003 à 2007 sont disponibles au format .xml. Chaque mois comprend environ 10MB de données (soit 120 MB par an). Le nombre de mots disponibles depuis 2005 est donné ci-dessous:- 2005: 19 million de mots- 2006: 17 million de mots- 2007: 21 million de motsUn choix de données de 1987 jusqu'à 2007 est disponible à ELRA.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=438</url>
 <identifier>ELRA-W0015</identifier>
 </identificationInfo>
