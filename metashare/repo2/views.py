@@ -184,8 +184,7 @@ def download(request, object_id):
                 LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][1] })
     elif len(licences) > 1:
         return render_to_response('repo2/licence_selection.html',
-            { 'form': LicenseSelectionForm([(name, name) for name in licences]),
-              'resource': resource })
+            { 'form': LicenseSelectionForm(licences), 'resource': resource })
     else:
         return render_to_response('repo2/lr_not_downloadable.html',
                                   { 'resource': resource })

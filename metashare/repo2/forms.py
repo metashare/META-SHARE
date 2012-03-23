@@ -1,6 +1,8 @@
 import logging
 
 from django import forms
+from django.utils.encoding import force_unicode
+from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 
 
@@ -46,8 +48,44 @@ class LicenseSelectionForm(forms.Form):
         Initializes the `LicenseSelectionForm` with the given licenses.
         """
         super(LicenseSelectionForm, self).__init__(*args, **kwargs)
-        self.fields['licence'] = forms.ChoiceField(choices=licences,
-                                            widget=forms.widgets.RadioSelect())
+        class _LicenseSelectionRenderer(forms.widgets.RadioFieldRenderer):
+            """
+            A custom `RadioSelectRenderer` for rendering license selections.
+        
+            This widget does not only contain radio buttons with license name
+            labels but additionally short license information blocks for each
+            license.
+            """
+            def __iter__(self):
+                for i, choice in enumerate(self.choices):
+                    yield (licences[choice[0]],
+                           forms.widgets.RadioInput(self.name, self.value,
+                                                self.attrs.copy(), choice, i))
+
+            def render(self):
+                return mark_safe(u'<ul>{0}\n</ul>'.format(
+                    u'\n'.join([u'<li><div>{0}</div>\n{1}</li>' \
+                                    .format(force_unicode(w),
+                                            self._create_restrictions_block(l))
+                                for (l, w) in self])))
+
+            def _create_restrictions_block(self, licence_info):
+                """
+                Creates an HTML block element string containing the restrictions
+                of the given license information.
+                """
+                r_list = licence_info.get_restrictionsOfUse_display_list()
+                if r_list:
+                    return u'<div><p>{0}</p>\n<ul>{1}</ul></div>'.format(
+                        _('Restrictions of use:'),
+                        u''.join([u'<li>{0}</li>'.format(r) for r in r_list]))
+                else:
+                    return ''
+
+        self.fields['licence'] = \
+            forms.ChoiceField(choices=[(name, name) for name in licences],
+                              widget=forms.widgets.RadioSelect(
+                                        renderer=_LicenseSelectionRenderer))
 
 
 class LicenseAgreementForm(forms.Form):
