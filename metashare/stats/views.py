@@ -111,7 +111,7 @@ def repostats (request):
                         repodata.append([str(value), item[dbfield + "__count"]])
                     
     return render_to_response('stats/repostats.html',
-        {'result': repodata, 'selected_menu_value': selected_menu_value, 'models': SELECT_MODEL.keys(), 'fields': dbfields, "subfields": relational_fields})
+        {'user': request.user, 'result': repodata, 'selected_menu_value': selected_menu_value, 'models': SELECT_MODEL.keys(), 'fields': dbfields, "subfields": relational_fields})
 
 
 def usagestats (request):
@@ -125,7 +125,7 @@ def usagestats (request):
         topdata.append([value, item["query__count"]])       
          
     return render_to_response('stats/usagestats.html',
-        {'result': topdata})
+        {'user': request.user, 'result': topdata})
 
     
 def topstats (request):
@@ -165,7 +165,7 @@ def topstats (request):
             topdata.append([query, pretty_timeago(item['lasttime']), item['found']])       
              
     return render_to_response('stats/topstats.html',
-      {'topdata': topdata[:10], 'view': view})
+      {'user': request.user, 'topdata': topdata[:10], 'view': view})
 
 def statdays (request):
     """ get dates where there are some statistics """

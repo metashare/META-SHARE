@@ -86,10 +86,10 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
   'CC': ['/site_media/licences/CC0v1.0.htm', False],
   'CC_BY-SA_3.0': ['/site_media/licences/CC-BYSAv3.0.htm', False],
   'CC_BY-NC-ND': ['/site_media/licences/CC-BYNCNDv3.0.htm', False],
-  'CC_BY-NC-SA': ['/site_media/licences/CC-BYNCSAv2.5.pdf', False],
+  'CC_BY-NC-SA': ['/site_media/licences/CC-BYNCSAv2.5.htm', False],
   'CC_BY-NC': ['/site_media/licences/CC-BYNCv3.0.htm', False],
   'CC_BY-ND': ['/site_media/licences/CC-BYNDv3.0.htm', False],
-  'CC_BY-SA': ['/site_media/licences/CC-BYSAv2.5.pdf', False],
+  'CC_BY-SA': ['/site_media/licences/CC-BYSAv2.5.htm', False],
   'CC_BY': ['/site_media/licences/CC-BYv3.0.htm', False],
   'CC_BY-NC-SA_3.0': ['/site_media/licences/CC-BYNCSAv3.0.htm', False],
   'MSCommons_BY': ['/site_media/licences/META-SHARE_COMMONS_BY_v1.0.htm', False],
@@ -106,21 +106,21 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
   'MSCommons_NoCOM-NC-NR-ND': ['/site_media/licences/META-SHARE_Commercial_NoRedistribution_NoDerivatives-v1.0.htm', False],
   'MSCommons_NoCOM-NC-NR-FF': ['/site_media/licences/META-SHARE_NonCommercial_NoRedistribution_For-a-Fee-v1.0.htm', True],
   'MSCommons_NoCOM-NC-NR': ['/site_media/licences/META-SHARE_NonCommercial_NoRedistribution-v1.0.htm', False],
-  'ELRA_EVALUATION': ['/site_media/licences/EVALUATION.pdf', True],
-  'ELRA_VAR': ['/site_media/licences/VAR-v3_2007.pdf', True],
-  'ELRA_END_USER': ['/site_media/licences/ENDUSER-v3_2007.pdf', True],
-  'ELRA_LIMITED': ['/site_media/licences/Var-E-v2.pdf', True],
+  'ELRA_EVALUATION': ['/site_media/licences/EVALUATION.htm', True],
+  'ELRA_VAR': ['/site_media/licences/VAR-v3_2007.htm', True],
+  'ELRA_END_USER': ['/site_media/licences/ENDUSER-v3_2007.htm', True],
+  'ELRA_LIMITED': ['/site_media/licences/Var-E-v2.htm', True],
   'proprietary': ['', True],
   'CLARIN_PUB': ['', True],
   'CLARIN_ACA-NC': ['', True],
   'CLARIN_ACA': ['', True],
   'CLARIN_RES': ['', True],
-  'Princeton_Wordnet': ['/site_media/licences/WordNet-3.0.pdf', False],
+  'Princeton_Wordnet': ['/site_media/licences/WordNet-3.0.txt', False],
   'GPL': ['/site_media/licences/GNU_gpl-3.0.htm', False],
   'GeneralLicenceGrant': ['', True],
-  'GFDL': ['/site_media/licences/GNU_fdl-1.3.pdf',  False],
+  'GFDL': ['/site_media/licences/GNU_fdl-1.3.htm',  False],
   'ApacheLicence_V2.0': ['/site_media/licences/Apache-2.0.htm', False],
-  'BSD-style': ['/site_media/licences/BSD_license.pdf', False],
+  'BSD-style': ['/site_media/licences/BSD_licence.htm', False],
   'underNegotiation': ['', True],
   'other': ['', True]
 }
@@ -227,15 +227,15 @@ def download(request, object_id):
                             .format(object_id))
             raise Http404
     
-        try:
-            for licenceinfo in licences:
-                licencelabel = LICENCEINFOTYPE_LICENCE_CHOICES['choices'] \
-                    [int(licenceinfo['licence'])][1]
-                if LICENCEINFOTYPE_URLS_LICENCE_CHOICES.has_key(licencelabel) and \
-                    LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licencelabel][1]:
-                        signature_req = False
-        except:
-            print "ERROR! Licence choices code ({0}) doesn't exist.".format(str(licenceinfo['licence']))
+        #try:
+        for licenceinfo in licences:
+            licencelabel = LICENCEINFOTYPE_LICENCE_CHOICES['choices'] \
+                [int(licenceinfo['licence'])][1]
+            if LICENCEINFOTYPE_URLS_LICENCE_CHOICES.has_key(licencelabel) and \
+                LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licencelabel][1]:
+                signature_req = False
+        ##except:
+          #  print "ERROR! Licence choices code ({0}) doesn't exist.".format(str(licenceinfo['licence']))
         
 
     if resource.identificationInfo.resourceName:
