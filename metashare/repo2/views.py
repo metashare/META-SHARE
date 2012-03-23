@@ -12,7 +12,7 @@ from urllib import urlopen
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse, Http404, HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
 
@@ -197,35 +197,46 @@ def _provide_download(request, resource, download_urls):
     """
     if resource.storage_object.has_local_download_copy():
         try:
-            _binary_data = resource.storage_object.get_download()
+            dl_path = resource.storage_object.get_download()
 
-            # We use a generic, binary mime type here for version v1.
+            # build HTTP response with a generic, binary mime type
             response = HttpResponse(mimetype="application/octet-stream")
             response['Content-Disposition'] = 'attachment; filename={0}' \
-                                                .format(split(_binary_data)[1])
-            with open(_binary_data, 'rb') as _local_data:
+                                                .format(split(dl_path)[1])
+            with open(dl_path, 'rb') as _local_data:
                 _chunk = _local_data.read(MAXIMUM_READ_BLOCK_SIZE)
                 while _chunk:
                     response.write(_chunk)
                     _chunk = _local_data.read(MAXIMUM_READ_BLOCK_SIZE)
 
+            # maintain download statistics and return the response for download
             saveLRStats(request.user.username,
                         resource.storage_object.identifier,
                         _get_sessionid(request), DOWNLOAD_STAT)
+            LOGGER.info("Offering a local download of resource #{0}." \
+                        .format(resource.id))
             return response
         except:
-            raise Http404
-    # redirect to download location, if available
-    else:
+            LOGGER.warn("An error has occurred while trying to provide the " \
+                        "local download copy of resource #{0}." \
+                        .format(resource.id))
+    # redirect to a download location, if available
+    elif download_urls:
         for url in download_urls:
-            if (urlopen(url).code / 100 < 4):
+            status_code = urlopen(url).getcode()
+            if not status_code or status_code < 400:
                 saveLRStats(request.user.username,
                             resource.storage_object.identifier,
                             _get_sessionid(request), DOWNLOAD_STAT)
+                LOGGER.info("Redirecting to {0} for the download of resource " \
+                            "#{1}.".format(url, resource.id))
                 return redirect(url)
-        LOGGER.info("No download could be offered for resource #{0}." \
-                    .format(resource.id))
-    raise Http404
+        LOGGER.warn("No download could be offered for resource #{0}. These " \
+                    "URLs were tried: {1}".format(resource.id, download_urls))
+
+    # no download could be provided
+    return render_to_response('repo2/lr_not_downloadable.html',
+                              { 'resource': resource })
 
 
 def _get_sessionid(request):
