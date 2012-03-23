@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Cebuano =&gt; English Bilingual Lexicon</resourceName>
-<resourceName lang="French">Lexique bilingue cebuano =&gt; anglais</resourceName>
-<description lang="English">This is a bilingual Cebuano=&gt;English lexicon, provided in structured XML of OLIF (Open Lexicon Interchange Format) format. The XML conversion is provided by Digital Sonata Pty Ltd.The lexicon comprises 1,988 entries in Cebuano and 1,990 in English. In terms of entry types, the lexicon comprises 1,052 nous, 462 adjectives, 405 verbs and 69 closed-class entries.The entries contain semantic information in terms of domain specification or style information (e.g., colloquial, regional use, etc.). Collocational information is also available for 500 entries.</description>
-<description lang="French">Ce lexique bilingue cebuano=&gt;anglais est fourni en format XML structuré selon le standard OLIF (Open Lexicon Interchange Format). La conversion XML a été fournie par Digital Sonata Pty Ltd.Le lexique contient 1 988 entrées en cebuano et 1 990 entrées en anglais. En termes de types d’entrées, le lexique comprend 1,052 noms, 462 adjectifs, 405 verbes et 69 entrées de classe fermée.Les entrées contiennent des informations sémantiques en termes de spécification de domaine et information de style (par exemple, usage conversationnel, régional, etc.). L’information collocationnelle est également disponible pour 500 entrées.</description>
+<resourceName lang="English">Bilingual Spanish-English and English-Spanish lexicons (INCYTA) - Data Processing</resourceName>
+<resourceName lang="French">Lexiques bilingues espagnol-anglais et anglais-espagnol (INCYTA) - Traitement de données</resourceName>
+<description lang="English">3,565 entries for Data Processing. The entries contain morphological information for part-of-speech and inflectional class. The information on multi-word terms is provided by the headword.</description>
+<description lang="French">3565 entrées, domaine Traitement de données. Les entrées contiennent des informations morphologiques pour les différentes classes de mots. Les informations sur les termes composés sont fournies par la tête du terme (tête du syntagme).</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1059</url>
-<identifier>ELRA-M0045</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=136</url>
+<identifier>ELRA-M0002_10</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,35 +29,31 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<revision>Creation date:  November 15, 2007Last update:   November 15, 2007</revision>
-<lastDateUpdated>2008-04-22</lastDateUpdated>
+<lastDateUpdated>2005-02-25</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 45.00€</price>
-<price>Academic org. ELRA Non Member: 45.00€</price>
-<price>Commercial org. ELRA Member: 45.00€</price>
-<price>Academic org. ELRA Member: 45.00€</price>
+<price>Commercial org. ELRA Non Member: 5704.00€</price>
+<price>Academic org. ELRA Non Member: 713.00€</price>
+<price>Commercial org. ELRA Member: 3422.40€</price>
+<price>Academic org. ELRA Member: 427.80€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2008-04-22</availabilityStartDate>
+<availabilityStartDate>1997-01-23</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 45.00€</price>
-<price>Academic org. ELRA Non Member: 45.00€</price>
-<price>Commercial org. ELRA Member: 45.00€</price>
-<price>Academic org. ELRA Member: 45.00€</price>
+<price>Commercial org. ELRA Non Member: 5704.00€</price>
+<price>Academic org. ELRA Non Member: 5704.00€</price>
+<price>Commercial org. ELRA Member: 3422.40€</price>
+<price>Academic org. ELRA Member: 3422.40€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2008-04-22</availabilityStartDate>
+<availabilityStartDate>1997-01-23</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<creationEndDate>2007-01-01</creationEndDate>
-</resourceCreationInfo>
 <resourceComponentType>
 <lexicalConceptualResourceInfo>
 <resourceType>lexicalConceptualResource</resourceType>
@@ -68,9 +64,22 @@
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
-<textFormatInfo>
-<mimeType>Plain text</mimeType>
-</textFormatInfo>
+<languageInfo>
+<languageId>eng</languageId>
+<languageName>English</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>spa</languageId>
+<languageName>Spanish</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Castilian</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
+</languageInfo>
 </lexicalConceptualResourceTextInfo>
 </lexicalConceptualResourceMediaType>
 </lexicalConceptualResourceInfo>

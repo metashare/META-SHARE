@@ -6,7 +6,7 @@
 <description lang="English">TEDphone (1 CD) is part of the TED speech database, described in this catalogue. It is a Polyphone-like recordings for 64 speakers in English and in their native language. For 25 of the speakers there are also simultaneous laryngograph recordings. The TED (Transnational English Database) corpus contains recordings of speeches made at the Eurospeech-93 conference in Berlin. The name of the corpus --- and its nickname, ``The Terrible English Database'' --- reflects the fact that a high percentage of the presentations at Eurospeech-93 were given in English by non-native speakers of English.</description>
 <description lang="French">TEDphone est la partie "polyphone" de la base de données TED, décrite dans ce catalogue. Elle consiste en des enregistrements téléphoniques de 64 locuteurs, en anglais et dans la langue maternelle des locuteurs. Pour 25 d'entre eux on dispose des enregistrements laryngographiques.</description>
 <resourceShortName>TEDPhone</resourceShortName>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=79</url>
 <identifier>ELRA-S0032</identifier>
 </identificationInfo>

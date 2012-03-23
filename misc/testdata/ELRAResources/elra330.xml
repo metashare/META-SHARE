@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">EQueR Evaluation Package</resourceName>
-<resourceName lang="French">Package d’évaluation EQueR</resourceName>
-<description lang="English">The EQueR Evaluation Package was produced within the French national project EQueR (Evaluation campaign for Question-Answering systems), as part of the Technolangue programme funded by the French Ministry of Research and New Technologies (MRNT). The EQueR project enabled to carry out a campaign for the evaluation of Question-Answering systems in French.This package includes the material that was used for the EQueR evaluation campaign. It includes resources, protocols, scoring tools, results of the campaign, etc., that were used or produced during the campaign. The aim of these evaluation packages is to enable external players to evaluate their own system and compare their results with those obtained during the campaign itself. The campaign is distributed over two actions: 1)	Generic task: it consists in evaluating the performances of question-answering systems on a collection of heterogeneous texts.2)	Specialised task: it consists in evaluating the performances of question-answering systems on a collection of texts from the medical domain.The EQueR evaluation package contains the following data and tools: 1)	Two text collections:-	General corpus: about 1.5 Gb of data consisting of news articles of several years from Le Monde and Le Monde Diplomatique, press releases and information reports from the French Senate dealing with various subjects.-	Medical corpus: about 140 Mb of data mainly consisting of scientific articles and guidelines for good medical practice, selected by the CISMeF (Catalogue et Index des Sites Médicaux Francophones) from the University Hospital Centre of Rouen.1)	Two corpora of questions :-	500 questions for the generic task and 200 questions for the specialised task.-	For each question in the two corpora, the first 100 identifiers are provided (from Pertimm’s search engine).2)	Two Pertimm’ sub-corpora, created from the document identifiers and returned by the search engine.3)	The whole results provided by the participants.4)	A help software for the evaluation of results within the evaluation of question-answering systems (with detailed documentation).A description of the project is available at the following address:http://www.technolangue.net/article.php3?id_article=195 (in French language)</description>
-<description lang="French">Le package d’évaluation EQueR a été produit dans le cadre du projet national français EQueR (« Evaluation en Question-Réponse »), issu du programme Technolangue, financé par le Ministère français délégué à la Recherche et aux Nouvelles Technologies (MRNT). Le projet EQueR a permis de réaliser une campagne d'évaluation des systèmes de question-réponse pour le français. Ce package comprend l’ensemble des données utilisées lors de la campagne d’évaluation EQueR. Il regroupe des ressources, des protocoles, des outils de notation, les résultats de la campagne officielle, etc., qui ont été utilisés ou produits pendant la campagne. Le but de ce « package » d’évaluation est de permettre à tout acteur externe de pouvoir évaluer son propre système et ainsi, de pouvoir comparer ses résultats à ceux obtenus pendant la campagne.La campagne se décompose en deux actions : 1)	Une tâche générique : consiste à évaluer les performances des systèmes de question-réponse sur une collection hétérogène de textes.2)	Une tâche spécialisée : consiste à évaluer les performances des systèmes de question-réponse sur une collection de textes du domaine médical.Le package d’évaluation EQueR contient les données et outils suivants :1)	Deux collections textuelles:-	corpus général : environ 1,5 Go de données composées d’articles de presse de plusieurs années des journaux Le Monde et Le Monde Diplomatique, de dépêches de presse et de rapports d’information du Sénat français portant sur des sujets très variés.-	corpus médical : environ 140 Mo de données composées principalement d’articles scientifiques et de recommandations de bonne pratique médicale, sélectionnés par le CISMeF (Catalogue et Index des Sites Médicaux Francophones) du Centre Hospitalier Universitaire de Rouen.2)	Deux corpus de questions :-	500 questions pour la tâche générique et 200 questions pour la tâche spécialisée.-	pour chaque question des deux corpus, les 100 premiers identifiants sont fournis (par le moteur de recherche Pertimm).3)	Deux sous-corpus Pertimm créés à partir des identifiants de documents renvoyés par le moteur de recherche.4)	L’ensemble des résultats fournis aux participants.5)	Logiciel d’aide à l’évaluation des résultats dans le cadre d’une évaluation de systèmes de question-réponse (avec documentation détaillée).Une description du projet est disponible à l'adresse suivante :http://www.technolangue.net/article.php3?id_article=195</description>
+<resourceName lang="English">Basque FDB-1060 database (SpeechDat-like)</resourceName>
+<resourceName lang="French">Base de données FDB-1060 du basque</resourceName>
+<description lang="English">The Basque FDB-1060 database contains the recordings of 1,060 speakers (480 males, 580 females) of Basque recorded over the fixed telephone network. This database is partitioned into 4 CDs. The database complies with the common specifications created in the SpeechDat project.Speech samples are stored as sequences of 8-bit 8 kHz A-law. Each prompted utterance is stored in a separate file. Each signal file is accompanied by an ASCII SAM label file which contains the relevant descriptive information.Each speaker uttered the following items:    * 6 common application words    * 1 sequence of isolated digits    * 4 digit strings : prompt sheet number, telephone number, credit card number, PIN code    * 3 dates : spontaneous, date (birth date), Prompted date (word style), relative and general date expr.    * 1 application word phrase    * 1 isolated digit    * 3 spelled word : spontaneous, spelled own forename, spelled directory city name, spelled artificial words    * 1 money amount    * 1 natural number    * 5 directory assistance: forename (spontaneous), city of origin (spontaneous), country name (most frequent city), most frequent company/agency name, forename &amp; surname    * 2 spontaneous yes/no questions    * 9 phonetically rich sentences    * 2 time phrases : time of day (spontaneous), time phrase    * 4 phonetically rich words The following age distribution has been obtained: 8 speakers are under 16, 474 are between 16 and 30, 320 are between 31 and 45, 236 are between 46 and 60, and 13 speakers are over 60. (The age of 9 speakers was not determined.)A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
+<description lang="French">La base de données FDB-1060 du basque comprend les enregistrements de 1060 locuteurs basques (480 hommes, 580 femmes) enregistrés à travers le réseau téléphonique fixe. La base de données est répartie sur 4 CD-ROM. Cette base est conforme aux spécifications du projet SpeechDat.Les fichiers de parole sont stockés en séquences d'échantillons au format 8bit, 8 kHz, A-law, et décompressés. Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM.Chaque locuteur a prononcé les 43 éléments suivants :    * 6 mots de commande    * 1 séquence de chiffres isolés    * 4 séries de chiffres connectés (1 numéro permettant d'identifier la feuille de prompt, 1 numéro de téléphone, 1 numéro de carte de crédit, 1 code confidentiel)    * 3 dates (une date spontanée - date d'anniversaire, une date lue, une date relative et générale)     * 1 expression utilisant un mot de commande     * 1 chiffre isolé    * 3 mots épelés (un spontané - prénom, un nom de ville extrait de l'annuaire de renseignements téléphoniques, un nom de ville artificiel)    * 1 montants en devises    * 1 nombre naturel    * 5 noms extraits d'un annuaire de renseignements téléphoniques (nom spontané - prénom, la ville de naissance du locuteur, un nom de ville parmi les plus courants, un nom de société parmi les plus courantes, prénom et nom)    * 2 questions oui / non spontanées    * 9 phrases phonétiquement riches    * 2 expressions comportant une notion de temps (un moment de la journée, spontané, une expression lue)    * 4 mots phonétiquement riches Les classes d'âge sont réparties comme suit : 8 locuteurs ont moins de 16 ans, 474 locuteurs ont entre 16 et 30 ans, 320 locuteurs entre 31 et 45 ans, 236 locuteurs entre 46 et 60 ans, 13 locuteurs de plus de 60 ans (l'âge de 9 locuteurs n'est pas précisé).Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=996</url>
-<identifier>ELRA-E0022</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=5</url>
+<identifier>ELRA-S0152</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,76 +29,45 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-06-28</lastDateUpdated>
+<lastDateUpdated>2006-03-13</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
-<licence>ELRA_EVALUATION</licence>
-<restrictionsOfUse>evaluationUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 150.00€</price>
-<price>Commercial org. ELRA Member: 500.00€</price>
-<price>Academic org. ELRA Non Member: 300.00€</price>
-<price>Commercial org. ELRA Non Member: 1000.00€</price>
-<availabilityStartDate>2007-06-28</availabilityStartDate>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 20000.00€</price>
+<price>Academic org. ELRA Non Member: 16000.00€</price>
+<price>Commercial org. ELRA Member: 16000.00€</price>
+<price>Academic org. ELRA Member: 13000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2003-10-17</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 20000.00€</price>
+<price>Academic org. ELRA Non Member: 20000.00€</price>
+<price>Commercial org. ELRA Member: 16000.00€</price>
+<price>Academic org. ELRA Member: 16000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2003-10-17</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceDocumentationInfo>
-<documentation>
-<documentInfo>
-<documentType>unpublished</documentType>
-<title>SMP_E0022_diplo9200_f.pdf</title>
-</documentInfo>
-</documentation>
-<samplesLocation>http://catalog.elra.info/product_info.php?action=download&amp;filename=SMP_E0022_diplo9200_f.pdf</samplesLocation>
-</resourceDocumentationInfo>
-<resourceDocumentationInfo>
-<documentation>
-<documentInfo>
-<documentType>unpublished</documentType>
-<title>SMP_E0022_LM00_f.pdf</title>
-</documentInfo>
-</documentation>
-<samplesLocation>http://catalog.elra.info/product_info.php?action=download&amp;filename=SMP_E0022_LM00_f.pdf</samplesLocation>
-</resourceDocumentationInfo>
-<resourceDocumentationInfo>
-<documentation>
-<documentInfo>
-<documentType>unpublished</documentType>
-<title>SMP_E0022_lois_f.pdf</title>
-</documentInfo>
-</documentation>
-<samplesLocation>http://catalog.elra.info/product_info.php?action=download&amp;filename=SMP_E0022_lois_f.pdf</samplesLocation>
-</resourceDocumentationInfo>
-<resourceDocumentationInfo>
-<documentation>
-<documentInfo>
-<documentType>unpublished</documentType>
-<title>SMP_E0022_sda9495_f.pdf</title>
-</documentInfo>
-</documentation>
-<samplesLocation>http://catalog.elra.info/product_info.php?action=download&amp;filename=SMP_E0022_sda9495_f.pdf</samplesLocation>
-</resourceDocumentationInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>EVALDA</projectName>
-<fundingType>nationalFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
 <corpusMediaType>
-<corpusTextInfo>
-<mediaType>text</mediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
+<languageId>baq/eus</languageId>
+<languageName>Basque</languageName>
 </languageInfo>
-</corpusTextInfo>
+</corpusAudioInfo>
 </corpusMediaType>
 </corpusInfo>
 </resourceComponentType>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">ItalWordNet (Italian WordNet)</resourceName>
-<resourceName lang="French">ItalWordNet (WordNet italien)</resourceName>
-<description lang="English">ItalWordNet (Italian WordNet) is an updated version of the EuroWordNet Italian database. The ItalWordNet database was produced within a national Italian programme called SI-TAL. It contains a total of 49,360 synsets. Unlike the EuroWordNet database, the ItalWordNet is provided in XML format. However, it remains partially compatible with the EuroWordNet, as both models are similar, except for some new relations created for adjectives and which were added to ItalWordNet.ItalWordNet is composed of the following contents:- The Inter-Lingual-Index, which is a list of records (ILI-records), in the form of synsets mainly taken from WordNet1.5 or manually created.- A top-ontology which consists of an ontology of 63 basic semantic classes based on fundamental distinctions. - A domain-ontology which consists of an ontology of subject-domains optionally assigned to ILI-records.- A selection of ILI-records, the so-called Base-Concepts, which play a major role in the different wordnets. - WordNet1.5 (91591 synsets; 168217 meanings; 126520 entry words) in EuroWordNet format.The original EuroWordNet Italian database is also included in this package.</description>
-<description lang="French">ItalWordNet (WordNet italien) est une version mise à jour de la base de données EuroWordNet italien. La base de données ItalWordNet a été produite dans le cadre du programme national italien intitulé SI-TAL. Elle comprend un total de 49360 synsets. Contrairement à la base de données EuroWordNet, ItalWordNet est fourni sous un format XML. Cependant, il reste compatible partiellement avec EuroWordNet, les deux modèles étant similaires, hormis pour certaines relations nouvelles créées pour les adjectifs et qui ont été ajoutées dans ItalWordNet.ItalWordNet est constituée des elements suivants:- L’index inter-lingue, qui consiste en une liste d’enregistrements sous la forme de « synsets » (ensembles/réseaux sémantiques, principalement issus de WordNet5.1 ou créés manuellement).- Ontologie supérieure : une ontologie de 63 classes sémantiques de base reposant sur des distinctions fondamentales.- Ontologie de domaine : une ontologie de domaines sujets assignés aux enregistrements de l’index inter-lingue.- Une sélection d’enregistrements de l’index inter-lingue, concepts de base, qui jouent un rôle majeur dans les différents wordnets.- WordNet1.5 (91591 synsets; 168217 sens; 126520 mots d’entrée) au format EuroWordNet.La base de données EuroWordNet italien d’origine est également incluse.</description>
+<resourceName lang="English">Speecon manually pitch-marked reference database for Spanish</resourceName>
+<resourceName lang="French">Base de données Speecon des mesures de la fréquence fondamentale (pitch marking) de l’espagnol</resourceName>
+<description lang="English">This database is intended for the development and the evaluation of noise robust pitch marking (PMA) and/or pitch determination (PDA) algorithms. The audio data used for the construction of the database was selected as a subset of the Speecon Spanish database (see ELRA-S0160)The acoustical environments found in this database comprise those of the car interior, the office, and living rooms. The office environment is mostly quiet, and slightly affected by stationary and white noises from computer fans or air-conditioning devices. However, in some of the offices the recordings contain also background voices. The living room recordings (entertainment environment) contain a wider range of noises, less stationary and more colored than the office noises. In some utterances, the radio or TV set is on; consequently, voices can be found in the recordings, as well as music, etc. The reverberations are mostly present in office and entertainment environments. The Speecon Spanish database was recorded at 16 kHz sampling frequency and quantized using 16-bit linear coding. From this database the recordings of 60 speakers was selected (30 male and 30 female speakers, speaker age from 19 to 79 years). In order to manually construct the reference pitch-marked database under low noise conditions and without reverberation the close talking microphone recordings in the amount of 1 minute per speaker were selected. Thus the reference database comprises 60 minutes of pitch-marked speech signal. In the first step, the 60 minutes of selected close-talking channel speech signal were automatically pitch-marked (epoch marked). In the next step accurate manual rechecking and correcting of pitch marks is performed thus resulting in reference pitch-marked database. Each session consists of 17 utterances:•	1 isolated digit sequence•	1 money amount•	10 phonetically rich sentences•	5 phonetically rich isolated wordsThe following age distribution has been obtained: 40 speakers are between 15 and 30, 11 speakers are between 31 and 45, 8 speakers are between 46 and 60, and 1 speaker is over 60.</description>
+<description lang="French">Cette base de données a été conçue pour le développement et l’évaluation d’algorithmes pour les mesures de la fréquence fondamentale robustes au bruit (Pitch Marking Algorithm, PMA) et/ou pour la détermination de la fréquence fondamentale (Pith Determination Algorithm, PDA). Les données audio utilisées pour la construction de la base sont extraites de la base de données Speecon de l’espagnol (voir ELRA-S0160)Les environnements acoustiques extraits de cette base correspondent aux environnements « voiture », « bureau » et « pièce à vivre ». L’environnement « bureau » est principalement calme, légèrement altéré par des bruits de petit matériel de bureau et des bruits « blancs » tels que les ventilateurs d’ordinateurs ou le matériel d’air conditionné. Cependant, pour certains bureaux, les enregistrements contiennent également des voix de fond.  Les enregistrements en « pièce à vivre » (environnement « divertissement ») contiennent une plus large gamme de bruits, moins de bruits de petit matériel, et plus de bruits colorés qu’en bureau. Dans quelques occurrences, la radio ou la télé est allumée ; par conséquent, des voix, ainsi que de la musique, peuvent être trouvés dans les enregistrements. Des réverbérations sont principalement présentes dans les environnements « bureau » et « divertissement ». La base de données Speecon a été enregistrée à une fréquence d’échantillonnage de 16 kHz et à une quantisation de 16-bit linéaire. Les enregistrements de 60 locuteurs ont été sélectionnés à partir de cette base de données (30 hommes et 30 femmes, de 19 à 79 ans). Afin de construire manuellement la base de référence avec des mesures de la fréquence fondamentale dans des conditions de bruits peu élevés et sans réverbération, les enregistrements au micro-casque ont été sélectionnés avec un total d’une minute par locuteur. Ainsi, la base de référence comprend 60 minutes de signal de parole avec des mesures de la fréquence fondamentale. Dans un premier temps, les 60 minutes de signal de parole au micro-casque ont été automatiquement marquées au niveau de la fréquence fondamentale (instant de fermeture glottique). Puis, dans un deuxième temps, une vérification manuelle précise et une correction des mesures de la fréquence fondamentale ont été réalisées pour obtenir la base de référence. Chaque session est composée de 17 occurrences:•	1 séquence de chiffres isolés•	1 montant en monnaie•	10 phrases phonétiquement riches•	5 mots isolés phonétiquement richesLes classes d'âge sont réparties comme suit : 40 locuteurs ont entre 15 et 30 ans, 11 entre 31 et 45, 8 entre 46 et 60, et 1 a plus de 60 ans.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1110</url>
-<identifier>ELRA-M0042</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=872</url>
+<identifier>ELRA-S0218</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,62 +29,50 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2009-07-07</lastDateUpdated>
+<lastDateUpdated>2006-06-21</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 8000.00€</price>
-<price>Academic org. ELRA Non Member: 800.00€</price>
-<price>Commercial org. ELRA Member: 4000.00€</price>
-<price>Academic org. ELRA Member: 400.00€</price>
+<price>Commercial org. ELRA Non Member: 2000.00€</price>
+<price>Academic org. ELRA Non Member: 900.00€</price>
+<price>Commercial org. ELRA Member: 300.00€</price>
+<price>Academic org. ELRA Member: 150.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2009-07-07</availabilityStartDate>
-</licenceInfo>
-<licenceInfo>
-<licence>ELRA_VAR</licence>
-<restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 12000.00€</price>
-<price>Academic org. ELRA Non Member: 12000.00€</price>
-<price>Commercial org. ELRA Member: 6000.00€</price>
-<price>Academic org. ELRA Member: 6000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2009-07-07</availabilityStartDate>
+<availabilityStartDate>2006-06-21</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<usageInfo>
-<actualUseInfo>
-<actualUse>nlpApplications</actualUse>
-<useNLPSpecific>textMining</useNLPSpecific>
-</actualUseInfo>
-</usageInfo>
 <resourceCreationInfo>
 <fundingProject>
-<projectName>ItalWordNet</projectName>
-<fundingType>nationalFunds</fundingType>
+<projectName>Speecon</projectName>
+<fundingType>euFunds</fundingType>
 </fundingProject>
 </resourceCreationInfo>
 <resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
-<mediaType>text</mediaType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>ita</languageId>
-<languageName>Italian</languageName>
+<languageId>spa</languageId>
+<languageName>Spanish</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Castilian</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
 </languageInfo>
-<textFormatInfo>
-<mimeType>Plain text</mimeType>
-</textFormatInfo>
-</lexicalConceptualResourceTextInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
 </resourceComponentType>
 </resourceInfo>

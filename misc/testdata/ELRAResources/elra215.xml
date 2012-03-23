@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">FASiL English unimodal “fasil-uk” corpus</resourceName>
-<resourceName lang="French">Corpus unimodal anglais FASiL “fasil-uk”</resourceName>
-<description lang="English">The corpus was collected in the context of the FASiL project, EU FP5 IST-2001-38685 (http://www.fasil.co.uk), as a wizard-of-oz experiment. Therefore, there are sound recordings of subject and wizard. A total of 70 subjects were recorded. The corpus is formatted as .wav files (u-law) for audio, plain ASCII text (.txt) for transcriptions, and a masterfile which binds .txt and .wav together. The masterfile is a “lattice” of the interaction in time, and contains the exact order of the interaction plus timings. The masterfile is loosely related to the HTK-SLF lattice format.The woz experiment is about the voice interaction with a Virtual Personal Assistent (VPA) for an email, calender and contacts task. Hesitations are marked as “UH”, noise as “NOISE” and other irrelevant stuff as “IRRELEVANT”. All annotations are in lower case, except for the former mentioned cases.Exact documentation of experiment in FASiL deliverable D.2.2The interactions contain mostly sentences but also spelled names, email addresses, telephone numbers, yes/no questions.See also S0174-02, S0174-03, S0174-04, and S0174-05.</description>
-<description lang="French">Ce corpus a été collecté dans le cadre du projet FASiL, EU FP5 IST-2001-38685 (http://www.fasil.co.uk), pour une expérience en magicien d’oz. Ainsi, il comprend les enregistrements des sujets et du magicien pour un total de 70 sujets. Le corpus est formaté en fichiers .wav (u-law) pour la partie audio, ASCII pour la partie transcriptions (.txt), et un fichier maître relie les .txt et les .wav. Le fichier maître est une sorte de réseau d’interaction temporelle qui contient l’ordre exact des interactions et des mesures de temps. Le fichier maître correspond approximativement au format de réseau HTK-SLF.L’expérience magicien d’oz tient dans l’interaction orale avec un « assistant personnel virtuel » (Virtual Personal Assistent (VPA)) dans une tâche d’email, de gestion de calendrier et de contacts. Les hésitations sont marquées par la balise “UH”, le bruit par la balise “NOISE” et les autres éléments non pertinents par la balise “IRRELEVANT”. Toutes les annotations sont en minuscules, excepté les balises précédemment citées.Une documentation précise de l’expérience est présentée dans le livrable FASiL D.2.2.Les interactions comprennent principalement des phrases mais également des noms épelés, des adresses email, des numéros de téléphone, des questions fermées.</description>
-<resourceShortName>fasil-uk</resourceShortName>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=699</url>
-<identifier>ELRA-S0174_01</identifier>
+<resourceName lang="English">Dutch-French Lexicon (LanTmark)</resourceName>
+<resourceName lang="French">Lexique hollandais-français (LanTmark)</resourceName>
+<description lang="English">General and Specialised vocabularies for transferEntries: General Vocabulary (26 000), Administrative (32 000), Data processing (10 000).Format: ASCII format with ISO 8859-1 character set. A lexicon file contains entries with feature value pairs on each line and separators between entries.Medium: Floppy Disk, QIC 150 MB Cartridge TapeGeneral Dutch-French LanTmark lexicon is divided into the following categories: nouns (14,000), verbs (6,000), adjectives (5,000), Adverbs (1,000). Administrative vocabulary is divided into the following categories: nouns (30,000), verbs (2,000). Data processing vocabulary has 10 000 transfer nouns.Each entry contains a domain information, source language disambiguation, features, target language actions.</description>
+<description lang="French">Vocabulaires génériques et spécialisés pour le transfert.Vocabulaire général : 26 000, Administratif : 32000, Traitement de données : 10 000Format: ASCII : jeu de caractères ISO 8859-1.Support : disquette, cartouche QIC 150 MBCe lexique général hollandais-français est réparti selon les catégories suivantes : noms (14.000), verbes (6.000), adjectifs (5.000), adverbes (1.000).Le vocabulaire administratif est réparti selon les catégories suivantes : noms (30.000), verbes (2.000).Le vocabulaire traitement de données dispose de 10 000 noms de transfert.Chaque entrée contient des informations sur le domaine, désambiguisation sur la langue source, des traits, des actions sur la langue cible.</description>
+<resourceShortName/>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=103</url>
+<identifier>ELRA-M0004_01</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,46 +29,59 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-06-02</lastDateUpdated>
+<lastDateUpdated>2005-02-25</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 10000.00€</price>
-<price>Academic org. ELRA Non Member: 8000.00€</price>
-<price>Commercial org. ELRA Member: 8000.00€</price>
-<price>Academic org. ELRA Member: 4000.00€</price>
+<price>Commercial org. ELRA Member: 24960.00€</price>
+<price>Academic org. ELRA Member: 3120.00€</price>
+<price>Academic org. ELRA Non Member: 5200.00€</price>
+<price>Commercial org. ELRA Non Member: 41600.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2005-04-07</availabilityStartDate>
+<availabilityStartDate>1997-01-23</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 10000.00€</price>
-<price>Academic org. ELRA Non Member: 10000.00€</price>
-<price>Commercial org. ELRA Member: 8000.00€</price>
-<price>Academic org. ELRA Member: 8000.00€</price>
+<price>Commercial org. ELRA Member: 24960.00€</price>
+<price>Academic org. ELRA Member: 24960.00€</price>
+<price>Academic org. ELRA Non Member: 41600.00€</price>
+<price>Commercial org. ELRA Non Member: 41600.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2005-04-07</availabilityStartDate>
+<availabilityStartDate>1997-01-23</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
+<languageId>dut/nld</languageId>
+<languageName>Dutch</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Flemish</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
 </languageInfo>
-</corpusAudioInfo>
-</corpusMediaType>
-</corpusInfo>
+<languageInfo>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
+</languageInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

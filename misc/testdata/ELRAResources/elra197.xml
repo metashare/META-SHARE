@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">VERBMOBIL II - VM CD 16.1 - VM16.1 (new edition)</resourceName>
-<resourceName lang="French">VERBMOBIL II - VM CD 16.1 - VM16.1 (1 CD-ROM, nouvelle édition)</resourceName>
-<description lang="English">Verbmobil is a long-term project of the German Federal Ministry of Education, Science, Research and Technology (BMBF, Projekträger DLR). Its aim is to give Germany an international top position in language technology and its economical application in the next millenium by cooperation and concentration of as many as possible specialists from industry and science. The long-sighted aim is the development of a mobile translation system for the translation of spontaneous speech in face-to-face situations.The following resources are spontaneous speech databases recorded in a dialogue task (appointment scheduling) .VERBMOBIL II - VM CD 16.1 - VM16.1 (new edition) consists of 1 CD-ROM with  200 dialogues, 200 appointment schedulings - 3311 turns in Japanese.</description>
-<description lang="French">Verbmobil est un projet du Ministère fédéral allemand de l'Education, des Sciences, de la Recherche et des Technologies (BMBF, Projekträger DLR), qui vise à placer l'Allemagne en position de force dans le domaine de l'ingénierie de la langue. Son objectif , à long terme, est de développer un système de traduction vocale automatique, pour la traduction de conversations spontanées. Ces ressources sont des enregistrements de conversation pour la prise de rendez-vous. Le corpus allemand comprend 13 910 occurrences (échanges). L'édition de BAS de la partie allemande est entièrement étiquetée et segmentée en unités phonémiques/phonétiques (alphabet SAM-PA) par le système MAUS et partiellement segmentée de manière manuelle.VERBMOBIL II - VM CD 16.1 - VM16.1 (1 CD-ROM, nouvelle édition) contient 1 CD-ROM composé de 200 dialogues, 200 enregistrements pour la prise de rendez-vous - 2911 échanges en japonais.</description>
-<resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=616</url>
-<identifier>ELRA-S0034_59</identifier>
+<resourceName lang="English">Laboratory Conditions Czech Audio-Visual Speech Corpus</resourceName>
+<resourceName lang="French">Corpus tchèque audio-visuel enregistré en conditions de laboratoire</resourceName>
+<description lang="English">This is an audio-visual speech database for training and testing of Czech audio-visual continuous speech recognition systems. The corpus consists of about 25 hours of audio-visual records of 65 speakers in laboratory conditions. Data collection was done with static illumination, and recorded subjects were instructed to remain static.The average speaker age was 22 years old. Speakers were asked to read 200 sentences each (50 common for all speakers and 150 specific to each speaker). The average total length of recording per speaker is 23 minutes.All audio-visual data are transcribed (.trs files) and divided into sentences (one sentence per file). For each video file we get the description file containing information about the position and size of the region of interest.Acoustic data are stored in wave files using PCM format, sampling frequency 44kHz, resolution 16 bits. Each speaker’s acoustic data set represents about 140 MB of disk space (about 9 GB as a whole).Visual data are stored in video files (.avi format) using the digital video (DV) codec. Visual data per speaker take about 3 GB of disk (about 195 GB as a whole) and are stored on an IDE hard disk (NTFS format).</description>
+<description lang="French">Cette base de données audio-visuelle a été constituée pour entraîner et tester les systèmes de reconnaissance audio-visuelle en langue tchèque. Le corpus comprend environ 25 heures d’enregistrements audio-visuels de 65 locuteurs enregistrés en conditions de laboratoire. La collecte des données a été réalisée par éclairage statique. On a donc demandé aux sujets enregistrés de rester en position statique.La moyenne d’âge des locuteurs est de 22 ans. On a demandé aux locuteurs de lire 200 phrases chacun (50 en commun pour tous les locuteurs et 150 spécifiques à chaque locuteur). La durée moyenne totale d’enregistrement par locuteur est de 23 minutes.Toutes les données audio-visuelles ont été transcrites (.trs files) et découpées par phrases (une phrase par fichier). A chaque fichier vidéo correspond un fichier de description contenant l’information sur la position et la taille de la région d’intérêt.Les données acoustiques ont été stockées en fichiers wave en utilisant le format PCM, une fréquence d’échantillonnage de 44kHz et une résolution de 16 bits. Un ensemble de données acoustiques pour chaque locuteur représente environ 140 Mo d’espace-disque (environ 9 Go en totalité).Les données visuelles sont stockées en fichiers vidéo (format .avi) utilisant le codec vidéo numérique DV. Les données visuelles par locuteur prennent environ 3 Go de disque (environ 195 Go en totalité) et sont stockées sur un disque dur IDE au format NTFS.</description>
+<resourceShortName>UWB-05-LCAVC</resourceShortName>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1081</url>
+<identifier>ELRA-S0283</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,37 +29,35 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-05-24</lastDateUpdated>
+<lastDateUpdated>2008-11-05</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 127.82€</price>
-<price>Commercial org. ELRA Member: 127.82€</price>
-<price>Academic org. ELRA Non Member: 255.65€</price>
-<price>Commercial org. ELRA Non Member: 255.65€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1996-09-01</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 1050.00€</price>
+<price>Academic org. ELRA Non Member: 1050.00€</price>
+<price>Commercial org. ELRA Member: 550.00€</price>
+<price>Academic org. ELRA Member: 550.00€</price>
+<availabilityStartDate>2008-11-05</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 127.82€</price>
-<price>Commercial org. ELRA Member: 127.82€</price>
-<price>Academic org. ELRA Non Member: 255.65€</price>
-<price>Commercial org. ELRA Non Member: 255.65€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1996-09-01</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 3050.00€</price>
+<price>Academic org. ELRA Non Member: 3050.00€</price>
+<price>Commercial org. ELRA Member: 2050.00€</price>
+<price>Academic org. ELRA Member: 2050.00€</price>
+<availabilityStartDate>2008-11-05</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>Verbmobil II</projectName>
-<fundingType>other</fundingType>
-</fundingProject>
-</resourceCreationInfo>
+<usageInfo>
+<actualUseInfo>
+<actualUse>nlpApplications</actualUse>
+<useNLPSpecific>speechRecognition</useNLPSpecific>
+</actualUseInfo>
+</usageInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
@@ -70,10 +68,20 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>jpn</languageId>
-<languageName>Japanese</languageName>
+<languageId>cze/ces</languageId>
+<languageName>Czech</languageName>
 </languageInfo>
 </corpusAudioInfo>
+<corpusVideoInfo>
+<mediaType>video</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>cze/ces</languageId>
+<languageName>Czech</languageName>
+</languageInfo>
+</corpusVideoInfo>
 </corpusMediaType>
 </corpusInfo>
 </resourceComponentType>

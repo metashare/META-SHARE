@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">WEBCOMMAND</resourceName>
-<resourceName lang="French">WEBCOMMAND</resourceName>
-<description lang="English">WEBCOMMAND contains recording sessions of 49 native speakers of France and Great Britain in two different quiet office rooms. In each session one speaker reads a list of 130 prompts from a screen. There are two prompt lists of 130 items each for each language; therefore most of the speakers have read 260 items in two different rooms. Speakers are recorded with two microphones: a high quality headset and a high quality microphone fixed to a 'webpad' hold on the lap. The corpus contains a total of 15600 two-channel recordings in 120 sessions.    - Length of each recording: 5.7 sec    - Total: 49.4 h    - Formats and distribution: SpeechDat Exchange Format    - Transcription: SpeechDat</description>
-<description lang="French">WEBCOMMAND comprend des sessions d’enregistrements de 49 locuteurs ayant pour langue maternelle l’anglais et le français, enregistrés dans deux environnements calmes (bureaux). A chaque session, un locuteur a lu sur un écran une liste de 130 énoncés. Deux listes d’énoncés de 130 éléments chacune ont été produites pour chaque langue. Presque tous les locuteurs ont donc lu 260 éléments dans deux bureaux différents. Les locuteurs ont été enregistrés sur deux microphones haute qualité : un micro-casque et un micro fixé sur un « webpad » posé sur les genoux. Le corpus comprend 120 sessions pour un total de 15 600 enregistrements bi-canaux.    * Longueur de chaque enregistrement : 5,7 secondes    * Total : 49,4 heures    * Formats et distribution : Format d’Echange SpeechDat    * Transcription : SpeechDat</description>
+<resourceName lang="English">Mandarin Chinese Speech Synthesis Corpus (Basic Corpus)</resourceName>
+<resourceName lang="French">Corpus de synthèse de la parole du chinois mandarin (corpus de base)</resourceName>
+<description lang="English">This corpus contains the recordings of 1 native Chinese speaker (female).The corpus is composed of 20 texts with 109,227 words and has been proofread manually. The corpus contents include: phrases, digit strings, letter strings, uncommon words, neutral tone, final retroflexion, Latin alphabet, interrogative sentences, 282 English words.The speaker has been recorded in a professional recording studio over 2 channels: microphone and glottis wave (fundamental frequency) signals for a total of 18.2 hours.Speech samples are stored as sequences of 16-bit 44,1 kHz PCM on two channels. The total data size is 5.67 Gb for a total of 12,679 files. The data is encoded in GB-2312 format.The transcriptions include labels for four-class pause boundaries.This database is aimed to be used within text-to-speech and speech synthesis applications.</description>
+<description lang="French">Ce corpus contient les enregistrements d’une locutrice de langue maternelle chinoise.Le corpus est composé de 20 textes de 109 227 mots et a été vérifié manuellement. Le corpus contient des locutions, des séquences de chiffres, de lettres, des mots peu fréquents, le ton neutre, la rétroflexion, l’alphabet latin, des phrases interrogatives, et 282 mots anglais.La locutrice a été enregistrée dans un studio d’enregistrement professionnel sur deux canaux : microphone et signaux de la glotte (fréquence fondamentale), pour un total de 18,2 heures.Les échantillons de parole sont stockés sous la forme de séquences 16-bit 44,1 kHz PCM sur deux canaux. La taille totale des données est de 5,67 Go pour un total de 12 679 fichiers. Les données sont codées au format GB-2312.Les transcriptions comprennent la segmentation utilisant quatre types de balises.Cette base de données a été conçue pour des applications relatives aux technologies texte-parole (« text-to-speech ») et à la synthèse de la parole.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=10</url>
-<identifier>ELRA-S0154</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=922</url>
+<identifier>ELRA-S0228_01</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,27 +29,27 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2004-05-12</lastDateUpdated>
+<lastDateUpdated>2007-01-17</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 3566.95€</price>
-<price>Academic org. ELRA Member: 3566.95€</price>
-<price>Academic org. ELRA Non Member: 3566.95€</price>
-<price>Commercial org. ELRA Non Member: 3566.95€</price>
-<availabilityStartDate>2004-01-20</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 13932.00€</price>
+<price>Academic org. ELRA Non Member: 13932.00€</price>
+<price>Commercial org. ELRA Member: 13932.00€</price>
+<price>Academic org. ELRA Member: 13932.00€</price>
+<availabilityStartDate>2007-01-17</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 3566.95€</price>
-<price>Academic org. ELRA Member: 3566.95€</price>
-<price>Academic org. ELRA Non Member: 3566.95€</price>
-<price>Commercial org. ELRA Non Member: 3566.95€</price>
-<availabilityStartDate>2004-01-20</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 13932.00€</price>
+<price>Academic org. ELRA Non Member: 13932.00€</price>
+<price>Commercial org. ELRA Member: 13932.00€</price>
+<price>Academic org. ELRA Member: 13932.00€</price>
+<availabilityStartDate>2007-01-17</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceComponentType>
@@ -62,16 +62,9 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
+<languageId>chi/zho</languageId>
+<languageName>Chinese</languageName>
 </languageInfo>
-<languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
-</languageInfo>
-<creationInfo>
-<creationMode>automatic</creationMode>
-</creationInfo>
 </corpusAudioInfo>
 </corpusMediaType>
 </corpusInfo>

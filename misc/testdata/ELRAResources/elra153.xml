@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">CLEF Domain Specific Test Suites (2004-2008) – Evaluation Package</resourceName>
-<resourceName lang="French">Séquences de test CLEF Domain Specific (2004-2008) – Package d’évaluation</resourceName>
-<description lang="English">The Cross-Language Evaluation Forum (CLEF) promotes R&amp;D in multilingual information access (MLIA) by (i) developing an infrastructure for the testing, tuning and evaluation of information retrieval systems operating on European languages in both monolingual and cross-language contexts, and (ii) creating test-suites of reusable data which can be employed by system developers for benchmarking purposes.The CLEF Domain SpecificTest Suites (2004-2008) contain the data used for the Domain Specific track of the CLEF campaigns carried out from 2004 to 2008. This track tested the performance of monolingual, bilingual and multilingual Information Retrieval (IR) systems on multilingual collections of scientific articles.The CLEF Test Suite is composed of: •	Data Collections•	Topics•	Guidelines•	Relevance assessments•	Official campaign results•	Working notes papersThe Data Collections consist of the following datasets: •	German Indexing and Retrieval Test database (302,638 documents, 524 Mb):Data collection (social sciences) including a German corpus (151,319 documents) and a pseudo-English corpus which is in fact a translation of the German corpus into English (does not contain as much textual information as the German version).•	Cambridge Scientific Abstracts - Sociological Abstracts (20,000 documents, 38.5 Mb):Database of Sociological Abstracts from Cambridge Scientific Abstracts.•	Russian Social Science Corpus (94,581 documents, 65 Mb):Russian sociology database data from the Russian Social Science Corpus.•	Institute of Scientific Information for Social Sciences (Russian Academy of Science) (145,802 documents, 12 Mb):The INION-ISISS corpus consists of bibliographical data from the ISISS database (03.02.2006) covering economics (~99,000 documents) and social sciences (46,000 documents).The full package consists of 617 Mb and is stored on 1 CD.</description>
-<description lang="French">Le forum CLEF (Cross-Language Evaluation Forum) a pour but de promouvoir les travaux de R&amp;D pour l’accès à l’information multilingue (i) en développant une infrastructure pour le test, le réglage et l’évaluation des systèmes de recherche d’information fonctionnant sur des langues européennes dans des contextes à la fois monolingues et cross-lingues, et (ii) en créant des séquences de test de données réutilisables qui peuvent être utilisées par des développeurs de systèmes dans des objectifs de  benchmarking.Les séquences de test CLEF Domain Specific (2004-2008) contiennent les données utilisées pendant la tâche Domain Specific des campagnes CLEF réalisées de 2004 à 2008. Cette tâche a testé la performance de systèmes de recherche d’information monolingue, bilingue et multilingue sur des collections d’articles scientifiques.Le package CLEF est composé de: •	Collections de textes •	Topics•	Manuels•	Jugements de pertinence•	Résultats de la campagne officielle•	Notes de travailLes collections de textes comprennent les ensembles de données suivants: •	Base de données de test d’indexation et de recherche en allemand (302 638 documents, 524 Mo):Collection de textes (sciences sociales) comprenant un corpus allemand (151 319 documents) et un “pseudo” corpus anglais qui est en fait une traduction du corpus allemand (ne contient pas autant d’information textuelle que la version allemande).•	Extraits scientifiques de Cambridge – Extraits sociologiques (20 000 documents, 38,5 Mo):Base de données d’extraits sociologiques issues des extraits scientifiques de Cambridge.•	Corpus des sciences sociales russe (94 581 documents, 65 Mo):Base de données sociologiques russes extraite du corpus des sciences sociales russes.•	Institut d’information scientifique pour les sciences sociales (ISISS - Académie des sciences russe) (145 802 documents, 12 Mo):Le corpus INION-ISISS consiste en des données bibliographiques de la base de données ISISS (03.02.2006) qui couvre les domaines de l’économie (~99 000 documents) et des sciences sociales (46 000 documents).Le package complet consiste en 617 Mo et est stocké sur 1 CD.</description>
+<resourceName lang="English">VERBA Polytechnic and Plurilingual Terminological Database - I-TC Manufacturing, General Topics</resourceName>
+<resourceName lang="French">Base de données terminologique polytechnique et plurilingue VERBA - I-TC Manufacture - général</resourceName>
+<description lang="English">* Entries for English-Spanish: Scientific research &amp; mathematical sciences (906 entries), Geosciences (10,215), Computer science, electronics &amp; telecommunications (70,580), Industry (47,578), Transport &amp; Maintenance (12,291), Economy (145,572), Biological sciences (38,989), Communication &amp; media (8,143), Chemical &amp; physical sciences (27,467). * Entries for English-French-German-Spanish: Environment (36,658), Health (66,727), Agriculture &amp; food (25,975), Construction &amp; public works (8,429), Law &amp; policy (56,578), Sports &amp; Leisure (17,312) * Two specialized lexicons: Spanish-English and English-French-German without domain codes: electronics, telematics, law, taxes, customs, etc. (550,000 entries). * Two general lexicons: Spanish-English-French-German and Spanish-English-French-German-Portuguese-Italian (83,000 entries).This terminological database contains, for each domain, a sub-domain indication is given (from 2 sub-domains for Scientific research to 39 for Sports &amp; leisure). Each entry consists of a definition, phraseological unit, abbreviation, usage information, grammatical labels. Format: ASCIIMedium: floppy disk</description>
+<description lang="French">* Entrées anglais-espagnol : Recherche scientifique &amp; sciences mathématiques (906 entrées), géosciences (10 215), informatique, électronique &amp; télécommunications (70 580), industrie (47 578), transports &amp; maintenance (12 291), économie (145 572), sciences biologiques (38 989), communication &amp; média (8 143), sciences chimiques &amp; physiques (27 467).* Entrées allemand-anglais-espagnol-français : Environnement (36 658), santé (66 727), agriculture &amp; alimentation (25 975), construction &amp; travaux publics (8 429), droit &amp; politique (56 578), sports &amp; loisirs (17 312).* Deux lexiques spécialisés: Espagnol-anglais et allemand-anglais-français sans codes de domaine : électronique, télématique, droit, taxes, douanes, etc. (550 000 entrées).* Deux lexiques généraux: Allemand-anglais-espagnol-français et allemand-anglais-espagnol-français-italien-portugais. (83 000 entrées).Cette base de données terminologique contient, pour chaque domaine, l'indication de sous-domaines (de 2 sous-domaines pour la recherche scientifique à 39 pour les sports et loisirs). Chaque entrée comporte une définition, une unité phraséologique, une abréviation, une information sur l'usage et des étiquettes grammaticales.Format: ASCIISupport : disquette</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1128</url>
-<identifier>ELRA-E0037</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=299</url>
+<identifier>ELRA-T0224</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,39 +29,24 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2010-11-03</lastDateUpdated>
+<lastDateUpdated>2006-09-27</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
-<licence>ELRA_EVALUATION</licence>
-<restrictionsOfUse>evaluationUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 150.00€</price>
-<price>Commercial org. ELRA Member: 500.00€</price>
-<price>Academic org. ELRA Non Member: 300.00€</price>
-<price>Commercial org. ELRA Non Member: 1000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2010-11-03</availabilityStartDate>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Member: 0.70€</price>
+<price>Commercial org. ELRA Non Member: 1.00€</price>
+<availabilityStartDate>1997-04-11</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<usageInfo>
-<actualUseInfo>
-<actualUse>nlpApplications</actualUse>
-<useNLPSpecific>textMining</useNLPSpecific>
-</actualUseInfo>
-</usageInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>CLEF (Cross Language Evaluation Forum)</projectName>
-<fundingType>euFunds</fundingType>
-</fundingProject>
-<creationEndDate>2008-01-01</creationEndDate>
-</resourceCreationInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusTextInfo>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>terminologicalResource</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
 <mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
@@ -71,19 +56,19 @@
 <languageName>English</languageName>
 </languageInfo>
 <languageInfo>
-<languageId>ger/deu</languageId>
-<languageName>German</languageName>
+<languageId>spa</languageId>
+<languageName>Spanish</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Castilian</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
 </languageInfo>
-<languageInfo>
-<languageId>rus</languageId>
-<languageName>Russian</languageName>
-</languageInfo>
-<sizeInfo>
-<size>617</size>
-<sizeUnit>mb</sizeUnit>
-</sizeInfo>
-</corpusTextInfo>
-</corpusMediaType>
-</corpusInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

@@ -6,7 +6,7 @@
 <description lang="English">This database contains the recordings of four female and four male Catalan professional speakers recorded in a noise-reduced room simultaneously through a close talk microphone, a mid distance microphone and a laryngograph signal. It consists of the recordings and annotations of read text material of approximately 1 hour of speech per speaker for baseline applications (Text-to-Speech systems). The FESTCAT Catalan TTS baseline speech database - 8 speakers was created within the scope of the FESTCAT project funded by the Catalan Government.</description>
 <description lang="French">Cette base de données comprend les enregistrements de 4 locuteurs hommes et 4 locuteurs femmes professionnels du catalan dans une salle à bruit réduit réalisés simultanément via un microphone “close talk”, un microphone à moyenne distance et un signal laryngographique. Elle consiste en des enregistrements et annotations de matériel textuel lu pour environ 1 heure de parole par locuteur pour des applications de référence (systèmes texte-parole). La voix de référence TTS du projet FESTCAT catalan – 8 locuteurs a été créée dans le cadre du projet FESTCAT, financé par le gouvernement catalan.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=1154</url>
 <identifier>ELRA-S0332</identifier>
 </identificationInfo>

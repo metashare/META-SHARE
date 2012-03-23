@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Swiss-French Polyphone Database 4000 speakers</resourceName>
-<resourceName lang="French">Base de données "Polyphone" en suisse romand 4000 locuteurs</resourceName>
-<description lang="English">Like the Dutch and German polyphone corpora, this is a Polyphone-like database recorded in Switzerland to cover the French language as spoken in the Roman area.The database consists of 5,000 speakers who answered several questions (around 10), leading to spontaneous speech, and reading about 28 items from a form supplied by IDIAP.This form contains several speech sequences, including sentences from different sources (local newspapers, existing corpora, law articles, etc.) to ensure a good phonetic coverage, application words from a defined list of command words, currency amounts, quantities, credit card numbers, spelled words (mainly names), etc.The database is divided into two subsets: the first one comprises 1,000 speakers and the second one 4,000 speakers (1,000 speakers are not available). Each subset is divided into two subsets: the phonetically rich sentences and the application-oriented data.</description>
-<description lang="French">L'enregistrement a été réalisé pour constituer une base "polyphone" en suisse roman. 5000 locuteurs ont participé à la réalisation de cette base constituée de parole spontanée (réponses à des questions types) et de parole lue (articles de journaux locaux, articles de lois etc.)</description>
+<resourceName lang="English">Bilingual Spanish-English and English-Spanish lexicons (INCYTA) - Natural and medical sciences</resourceName>
+<resourceName lang="French">Lexiques bilingues espagnol-anglais et anglais-espagnol (INCYTA) - Sciences naturelles et médicales</resourceName>
+<description lang="English">10,535 entries for Natural and medical sciences. The entries contain morphological information for part-of-speech and inflectional class. The information on multi-word terms is provided by the headword.</description>
+<description lang="French">10535 entrées, domaine Sciences naturelles et médicales. Les entrées contiennent des informations morphologiques pour les différentes classes de mots. Les informations sur les termes composés sont fournies par la tête du terme (tête du syntagme).</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=709</url>
-<identifier>ELRA-S0030_02</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=131</url>
+<identifier>ELRA-M0002_05</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,46 +29,59 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2006-03-13</lastDateUpdated>
+<lastDateUpdated>2005-02-25</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 38000.00€</price>
-<price>Academic org. ELRA Non Member: 20000.00€</price>
-<price>Commercial org. ELRA Member: 30000.00€</price>
-<price>Academic org. ELRA Member: 12000.00€</price>
+<price>Academic org. ELRA Member: 1264.20€</price>
+<price>Commercial org. ELRA Member: 10113.60€</price>
+<price>Academic org. ELRA Non Member: 2107.00€</price>
+<price>Commercial org. ELRA Non Member: 16856.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1996-09-01</availabilityStartDate>
+<availabilityStartDate>1997-01-23</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 38000.00€</price>
-<price>Academic org. ELRA Non Member: 38000.00€</price>
-<price>Commercial org. ELRA Member: 30000.00€</price>
-<price>Academic org. ELRA Member: 30000.00€</price>
+<price>Academic org. ELRA Member: 10113.60€</price>
+<price>Commercial org. ELRA Member: 10113.60€</price>
+<price>Academic org. ELRA Non Member: 16856.00€</price>
+<price>Commercial org. ELRA Non Member: 16856.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1996-09-01</availabilityStartDate>
+<availabilityStartDate>1997-01-23</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
+<languageId>eng</languageId>
+<languageName>English</languageName>
 </languageInfo>
-</corpusAudioInfo>
-</corpusMediaType>
-</corpusInfo>
+<languageInfo>
+<languageId>spa</languageId>
+<languageName>Spanish</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Castilian</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
+</languageInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

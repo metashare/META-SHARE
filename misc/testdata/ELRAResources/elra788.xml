@@ -6,7 +6,7 @@
 <description lang="English">The corpus contains read speech of 101 different speakers. Each speaker has read approximately 100 sentences from a German newspaper corpus from the SuedDeutch Zeitungen (SZ), consiting of two sub-corpus known as the SZ subcorpus (contains 544 sentences from newspaper articles) and the CeBit subcorpus (contains 483 sentences from newspaper articles about CeBit 1995). Each subcorpus is divided into 5 parts of approximately 100 utterances each. Every speaker read only part of one subcorpus (with some exceptions), thus resulting in a total of approximately 10100 recorded utterances (7 CDROMs).</description>
 <description lang="French">The corpus contains read speech of 101 different speakers. Each speaker has read approximately 100 sentences from a German newspaper corpus from the SuedDeutch Zeitungen (SZ), consiting of two sub-corpus known as the SZ subcorpus (contains 544 sentences from newspaper articles) and the CeBit subcorpus (contains 483 sentences from newspaper articles about CeBit 1995). Each subcorpus is divided into 5 parts of approximately 100 utterances each. Every speaker read only part of one subcorpus (with some exceptions), thus resulting in a total of approximately 10100 recorded utterances (7 CDROMs).</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=65</url>
 <identifier>ELRA-S0025</identifier>
 </identificationInfo>

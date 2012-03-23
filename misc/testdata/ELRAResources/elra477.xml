@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">TC-STAR 2005 Evaluation Package - ASR Mandarin Chinese</resourceName>
-<resourceName lang="French">Package d’évaluation TC-STAR 2005 - ASR chinois mandarin</resourceName>
-<description lang="English">TC-STAR is a European integrated project focusing on Speech-to-Speech Translation (SST). To encourage significant breakthrough in all SST technologies, annual open competitive evaluations are organized. Automatic Speech Recognition (ASR), Spoken Language Translation (SLT) and Text-To-Speech (TTS) are evaluated independently and within an end-to-end system.The first TC-STAR evaluation campaign took place in March 2005. Two core technologies were evaluated during the campaign:• Automatic Speech Recognition (ASR),• Spoken Language Translation (SLT).Each evaluation package includes resources, protocols, scoring tools, results of the official campaign, etc., that were used or produced during the first evaluation campaign. The aim of these evaluation packages is to enable external players to evaluate their own system and compare their results with those obtained during the campaign itself.The speech databases made within the TC-STAR project were validated by SPEX, in the Netherlands, to assess their compliance with the TC-STAR format and content specifications.This package includes the material used for the TC-STAR 2005 Automatic Speech Recognition (ASR) first evaluation campaign for the Mandarin Chinese language. The same packages are available for both English (ELRA-E0002) and Spanish (ELRA-E0003) for ASR and for SLT in 3 directions, English-to-Spanish (ELRA-E0005), Spanish-to-English (ELRA-E0006), Chinese-to-English (ELRA-E0007).To be able to chain the components, ASR and SLT evaluation tasks were designed to use common sets of raw data and conditions. Two evaluation tasks, common to ASR and SLT, were selected: EPPS (European Parliament Plenary Sessions) task and VOA (Voice of America) task. This package was used within the VOA task and consists of 2 data sets:- Development data set: consists of 3 hours of audio recordings from the broadcast news of Mandarin Voice of America between 1 and 3 December 1998 which corresponds more or less to 42,000 Chinese characters.- Test data set: consists of 3 hours of audio recordings from news broadcast between 14 and 22 December 1998 and corresponds to 44,000 Chinese characters.</description>
-<description lang="French">TC-STAR est un projet intégré européen basé sur la traduction parole-parole (ou SST pour Speech-to-Speech Translation). Pour encourager de manière conséquente l’avancée dans toutes les technologies de la SST, des évaluations ouvertes à la concurrence sont organisées sur une base annuelle. Les technologies de la reconnaissance automatique de la parole (ou ASR pour « Automatic Speech Recognition »), de la traduction de la langue parlée (ou SLT pour « Spoken Language Translation ») et les technologies texte-parole (ou TTS pour « Text-to-Speech ») sont évaluées à la fois de façon indépendante et intégrée à un système « end-to-end » (de « bout en bout »).La première campagne d’évaluation TC-STAR s’est déroulée en mars 2005. Deux technologies de base ont été évaluées lors de cette campagne:• la reconnaissance automatique de la parole (ASR),• la traduction de la langue parlée (SLT).Chaque package d’évaluation regroupe des ressources, des protocoles, des outils de notation, les résultats de la campagne officielle, etc., qui ont été utilisés ou produits pendant la première campagne d’évaluation. Le but de ces packages d’évaluation est de permettre à des acteurs externes d’évaluer leur propre système et de comparer leurs résultats à ceux obtenus pendant la campagne.Les bases de données orales produites dans le projet TC-STAR ont été validées par SPEX, Pays-Bas, selon le format et les spécifications de contenu TC-STAR.Ce package comprend le matériel utilisé pour la première campagne d’évaluation TC-STAR 2005 Automatic Speech Recognition (ASR) pour l’espagnol. Des packages similaires sont également disponibles pour l’anglais (ELRA-E0002) et l’espagnol (ELRA-E0003) pour l’ASR, ainsi que pour la SLT dans 3 sens, anglais vers espagnol (ELRA-E0005), espagnol vers anglais (ELRA-E0006), chinois vers anglais (ELRA-E0007).Pour permettre de regrouper les composants, les tâches d’évaluation ASR et SLT ont été conçues en utilisant des données brutes et des conditions communes. Deux tâches d’évaluation, communes à l’ASR et à la SLT, ont été choisies : la tâche EPPS (« European Parliament Plenary Sessions » – Sessions plénières du Parlement européen) et la tâche VOA (« Voice of America » - La voix de l’Amérique). Le présent package a été utilisé dans le cadre de la tâche VOA et comprend 2 ensembles de données :- L’ensemble de données de développement : il comprend 3 heures d’enregistrements audio d’actualités diffusées par « Voice of America » en mandarin entre le 1er et le 3 décembre 1998, ce qui correspond à environ 42 000 caractères chinois.- L’ensemble de données de test : il comprend 3 heures d’enregistrements d’actualités diffusées entre le 14 et le 22 décembre 1998 et correspond à 44 000 caractères chinois.</description>
-<resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=850</url>
-<identifier>ELRA-E0004</identifier>
+<resourceName lang="English">Norwegian EUROM1</resourceName>
+<resourceName lang="French">EUROM1 norvégien</resourceName>
+<description lang="English">EUROM1 is the first really multilingual speech database produced in Europe. Equivalent corpora for each of the European languages were collected with the same number of speakers selected in the same way, and recorded in the same conditions with common file formats. Initially eight European countries have made recordings: Italy, United Kingdom, Germany, Netherlands, Denmark, Sweden, Norway, France. Additional recordings have been then completed (thanks to CEE Esprit Project SAM-A), in Greece, Spain and Portugal. More than sixty speakers were recorded per language.The content consists of:1)	Continuous speech:40 passages made of five task related sentences.2)	Numbers:The numbers were divided into five blocks, each containing twenty numbers. Each block was recorded as one single take. 3)	CVC words:The CVC word lists contain five list types and also carrier phrases of the suggested type.</description>
+<description lang="French">EUROM1 est la première base de données de parole produite en Europe. Des corpus équivalents pour chaque langue européenne ont été collectés avec le même nombre de locuteurs sélectionnés de la même manière et enregistrés dans les même conditions et mêmes formats de fichiers. Au départ, huit pays d'Europe ont participé aux enregistrements : l'Italie, le Royaume-Uni, l'Allemagne, les Pays-Bas, le Danemark, la Suède, la Norvège et la France. Cette base a ensuite été complétée par les enregistrements réalisés en Grèce, au Portugal, et en Espagne (grâce au projet SAM-A du programme européen Esprit). Plus de soixante locuteurs ont été enregistrés pour chaque langue.Le contenu consiste en:1)	De la parole continue: 40 passages composés de phrases en relation avec cinq tâches.2)	Des nombres:Les nombres ont été divisés en cinq blocs, chacun contenant vingt nombres. Chaque bloc a été enregistré d’un seul trait. 3)	Des mots CVC:Les listes de mots CVC contiennent cinq types de listes ainsi que des phrases porteuses correspondant au type.</description>
+<resourceShortName>EUROM1_N</resourceShortName>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1114</url>
+<identifier>ELRA-S0301</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,31 +29,35 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2011-01-06</lastDateUpdated>
+<lastDateUpdated>2011-09-22</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
-<licence>ELRA_EVALUATION</licence>
-<restrictionsOfUse>evaluationUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 750.00€</price>
-<price>Academic org. ELRA Non Member: 750.00€</price>
-<price>Commercial org. ELRA Member: 500.00€</price>
-<price>Academic org. ELRA Member: 500.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2006-03-22</availabilityStartDate>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 1600.00€</price>
+<price>Academic org. ELRA Non Member: 1600.00€</price>
+<price>Commercial org. ELRA Member: 800.00€</price>
+<price>Academic org. ELRA Member: 800.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2009-09-07</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 1600.00€</price>
+<price>Academic org. ELRA Non Member: 1600.00€</price>
+<price>Commercial org. ELRA Member: 800.00€</price>
+<price>Academic org. ELRA Member: 800.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2009-09-07</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<usageInfo>
-<actualUseInfo>
-<actualUse>nlpApplications</actualUse>
-<useNLPSpecific>speechRecognition</useNLPSpecific>
-</actualUseInfo>
-</usageInfo>
 <resourceCreationInfo>
 <fundingProject>
-<projectName>TC-STAR</projectName>
-<fundingType>euFunds</fundingType>
+<projectName>EUROM.1</projectName>
+<fundingType>other</fundingType>
 </fundingProject>
 </resourceCreationInfo>
 <resourceComponentType>
@@ -66,8 +70,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>chi/zho</languageId>
-<languageName>Chinese</languageName>
+<languageId>nor</languageId>
+<languageName>Norwegian</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

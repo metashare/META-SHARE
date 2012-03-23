@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Bilingual Spanish-English and English-Spanish lexicons (INCYTA) - Data Processing, Electronics, Telecoms</resourceName>
-<resourceName lang="French">Lexiques bilingues espagnol-anglais et anglais-espagnol (INCYTA) - Traitement données, électronique, télécoms</resourceName>
-<description lang="English">4,904 entries for Data Processing, Electronics, Telecoms. The entries contain morphological information for part-of-speech and inflectional class. The information on multi-word terms is provided by the headword.</description>
-<description lang="French">4904 entrées, domaine Traitement données, électronique, télécoms. Les entrées contiennent des informations morphologiques pour les différentes classes de mots. Les informations sur les termes composés sont fournies par la tête du terme (tête du syntagme).</description>
+<resourceName lang="English">French-Dutch Lexicon (LanTmark)</resourceName>
+<resourceName lang="French">Lexique français-hollandais (LanTmark)</resourceName>
+<description lang="English">General and Specialised vocabularies for transferEntries: General Vocabulary (34 000), Administrative (18 000), Data processing (10 000).Format: ASCII format with ISO 8859-1 character set. A lexicon file contains entries with feature-value pairs on each line and separators between entries. Medium: Floppy disk, QIC 150 MB cartridge tape General French-Dutch LanTmark lexicon is divided into the following categories: nouns (25,000), verbs (3,000), adjectives (5,000), Adverbs (1,000).Administrative vocabulary is divided into the following categories: nouns (16,000), verbs (2,000).Data processing vocabulary has 10,000 transfer nouns.Each entry contains domain information, source language disambiguation, features, and target language actions.</description>
+<description lang="French">Vocabulaires génériques et spécialisés pour le transfertVocabulaire général : 34 000, Administratif, 18 000, Traitement de données : 10 000Format: ASCII : jeu de caractères ISO 8859-1.Support : disquette, cartouche QIC 150 MBCe lexique général français-hollandais est réparti selon les catégories suivantes : noms (25.000), verbes (3.000), adjectifs (5.000), adverbes (1.000).Le vocabulaire Administratif est réparti selon les catégories suivantes : noms (16.000), verbes (2.000).Le vocabulaire traitement de données contient 10 000 noms de transfert.Chaque entrée contient information sur le domaine, désambiguisation sur la langue source, des traits, des actions sur la langue cible.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=133</url>
-<identifier>ELRA-M0002_07</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=105</url>
+<identifier>ELRA-M0006_01</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -36,20 +36,20 @@
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 588.48€</price>
-<price>Commercial org. ELRA Member: 4707.84€</price>
-<price>Academic org. ELRA Non Member: 980.80€</price>
-<price>Commercial org. ELRA Non Member: 7846.40€</price>
+<price>Commercial org. ELRA Member: 32640.00€</price>
+<price>Academic org. ELRA Member: 4080.00€</price>
+<price>Academic org. ELRA Non Member: 6800.00€</price>
+<price>Commercial org. ELRA Non Member: 54400.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
 <availabilityStartDate>1997-01-23</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 4707.84€</price>
-<price>Commercial org. ELRA Member: 4707.84€</price>
-<price>Academic org. ELRA Non Member: 7846.40€</price>
-<price>Commercial org. ELRA Non Member: 7846.40€</price>
+<price>Commercial org. ELRA Member: 32640.00€</price>
+<price>Academic org. ELRA Member: 32640.00€</price>
+<price>Academic org. ELRA Non Member: 54400.00€</price>
+<price>Commercial org. ELRA Non Member: 54400.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
 <availabilityStartDate>1997-01-23</availabilityStartDate>
 </licenceInfo>
@@ -65,15 +65,15 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
 </languageInfo>
 <languageInfo>
-<languageId>spa</languageId>
-<languageName>Spanish</languageName>
+<languageId>dut/nld</languageId>
+<languageName>Dutch</languageName>
 <languageVarietyInfo>
 <languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Castilian</languageVarietyName>
+<languageVarietyName>Flemish</languageVarietyName>
 <sizePerLanguageVariety>
 <size>2</size>
 <sizeUnit>gb</sizeUnit>

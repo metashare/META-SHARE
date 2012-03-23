@@ -6,7 +6,7 @@
 <description lang="English">The lexicon contains 17,115 Dutch words from the medical domain, comprising 12,638 nouns, 3,107 adjectives, 1,273 verbs, 11 adverbs and 86 items from other categories. It complies with the official Dutch Spelling (2005/6). Each entry contains an ID, word form and part of speech.The lexicon is delivered in human-readable UNIX ANSI-format, with just a linefeed at the end of every line instead of a carriage return. The character set used is ISO Latin-1 (ISO/IEC 8859-1). All fields are separated by horizontal tabs, with no empty fields.</description>
 <description lang="French">Ce lexique comprend 17 115 mots hollandais du domaine médical, incluant 12 638 noms, 3 107 adjectifs, 1 273 verbes, 11 adverbes et 86 éléments d'autres catégories. Il est conforme à l'orthographe officielle du hollandais (2005/6). Chaque entrée contient un identifiant, la forme du mot et la partie du discours.Le lexique est fourni au format UNIX ANSI lisible par l’homme, avec un simple saut de ligne en fin de chaque ligne au lieu d’un retour chariot. La table de caractères utilisée est ISO Latin-1 (ISO/IEC 8859-1). Tous les champs sont séparés par des tabulations horizontales, sans champs vides.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=1004</url>
 <identifier>ELRA-L0081</identifier>
 </identificationInfo>

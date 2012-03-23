@@ -6,7 +6,7 @@
 <description lang="English">The TSNLP project (LRE 62-089) has produced a database of test suites for English, French and German containing over 4,000 test items (sentences or fragment of sentences) per language which have been constructed for evaluating natural language processing systems, but which may also be useful for other purposes. The examples have been systematically constructed with detailed annotations about grammatical and other information, and are relevant to developers or users of systems with grammatical components who wish to test, benchmark, or evaluate them. A three-volume user manual documents major project results, including a description of the test data, the underlying methodology and the tools developed to aid test suite construction and use.</description>
 <description lang="French">Le projet TSNLP (LRE n° 62089) a produit une base de données de séquences de test qui contient plus de 4 000 entrées (phrases et fragments de phrases) pour le français, l'anglais et l'allemand. Celles-ci illustrent des phénomènes syntaxiques essentiels et sont d'un grand intérêt pour les développeurs et les utilisateurs de systèmes dont les composants grammaticaux doivent être testés, calibrés ou évalués. Un manuel d'utilisation documente les principaux résultats et décrit également les données de test, la méthodologie sous-jacente et les outils développés pour construire et utiliser les séquences de test.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=51</url>
 <identifier>ELRA-W0013</identifier>
 </identificationInfo>

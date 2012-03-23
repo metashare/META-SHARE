@@ -6,7 +6,7 @@
 <description lang="English">This corpus comprises 1,500 entries uttered by 98 speakers of different dialects, ages and various educational levels (46 males and 52 females), recorded over 4 channels (Mic 1: SHURE SM58; Mic 2: Labtec Axis-002; Mic 3: KOSS; Mic 4: ATR 60C). The database comprises digit strings. Speech samples are stored as a sequence of 16-bit 44.1kHz WAV for 8.7 hours of speech per channel. The total capacity of the data is 10 Gb.Each speaker read 50 items. Text files are stored in Unicode format. All data have been proofread manually.The corpus aims to be applied to the testing and telephone natural speech recognition system.</description>
 <description lang="French">Ce corpus comprend 1 500 entrées prononcées par 98 locuteurs de dialectes, d’âges et de niveaux d’éducation différents (46 hommes et 52 femmes), enregistrées via 4 canaux (Mic1: SHURE SM58; Mic2: Labtec Axis-002; Mic3: KOSS; Mic4: ATR 60C). La base de données contient des séquences de chiffres. Les échantillons de parole sont stockés sous la forme de séquences 16-bit 44,1kHz WAV pour un total de 8,7 heures de parole. La taille totale des données est de 10 Go.Chaque locuteur a lu 50 éléments. Les fichiers textes sont stockés au format Unicode. Toutes les données ont été vérifiées manuellement.Cette base de données a été conçue pour l’évaluation et le développement de systèmes de reconnaissance de la parole naturelle par téléphone.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=934</url>
 <identifier>ELRA-S0228_32</identifier>
 </identificationInfo>

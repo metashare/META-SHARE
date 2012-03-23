@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Dutch-French Lexicon (LanTmark)</resourceName>
-<resourceName lang="French">Lexique hollandais-français (LanTmark)</resourceName>
-<description lang="English">General and Specialised vocabularies for transferEntries: General Vocabulary (26 000), Administrative (32 000), Data processing (10 000).Format: ASCII format with ISO 8859-1 character set. A lexicon file contains entries with feature value pairs on each line and separators between entries.Medium: Floppy Disk, QIC 150 MB Cartridge TapeGeneral Dutch-French LanTmark lexicon is divided into the following categories: nouns (14,000), verbs (6,000), adjectives (5,000), Adverbs (1,000). Administrative vocabulary is divided into the following categories: nouns (30,000), verbs (2,000). Data processing vocabulary has 10 000 transfer nouns.Each entry contains a domain information, source language disambiguation, features, target language actions.</description>
-<description lang="French">Vocabulaires génériques et spécialisés pour le transfert.Vocabulaire général : 26 000, Administratif : 32000, Traitement de données : 10 000Format: ASCII : jeu de caractères ISO 8859-1.Support : disquette, cartouche QIC 150 MBCe lexique général hollandais-français est réparti selon les catégories suivantes : noms (14.000), verbes (6.000), adjectifs (5.000), adverbes (1.000).Le vocabulaire administratif est réparti selon les catégories suivantes : noms (30.000), verbes (2.000).Le vocabulaire traitement de données dispose de 10 000 noms de transfert.Chaque entrée contient des informations sur le domaine, désambiguisation sur la langue source, des traits, des actions sur la langue cible.</description>
+<resourceName lang="English">French-English Lexicon (LanTmark)</resourceName>
+<resourceName lang="French">Lexique français-anglais (LanTmark)</resourceName>
+<description lang="English">General vocabulary for transferEntries: 39,453Format: ASCII format with ISO 8859-1 character set. A lexicon file contains entries with feature-value pairs on each line and separators between entries.Medium: Floppy Disk, QIC 150 MB Cartridge Tape The French-English LanTmark lexicon is divided into the following lexical categories: nouns (about 21,000), verbs (about 9,000), adjectives (about 3,000), adverbs (about 1,000).Each entry contains adomain information, source language disambiguation, features, and target language actions.</description>
+<description lang="French">Vocabulaire général pour le transfert.Entrées : 39 453 Format: ASCIISupport : disquette, cartouche QIC 150 MBCe lexique anglais-français est réparti selon les catégories lexicales suivantes : noms (env. 21 000), verbes (env. 9 000), adjectifs (env. 3 000), adverbes (env. 1 000).Chaque entrée contient une information sur le domaine, désambiguisation sur la langue source, des traits, des actions sur la langue cible.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=142</url>
-<identifier>ELRA-M0004_03</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=106</url>
+<identifier>ELRA-M0007</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,27 +29,27 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-02-25</lastDateUpdated>
+<lastDateUpdated>2005-05-30</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 9600.00€</price>
-<price>Academic org. ELRA Member: 1200.00€</price>
-<price>Academic org. ELRA Non Member: 2000.00€</price>
-<price>Commercial org. ELRA Non Member: 16000.00€</price>
+<price>Commercial org. ELRA Non Member: 63124.80€</price>
+<price>Academic org. ELRA Non Member: 7890.60€</price>
+<price>Commercial org. ELRA Member: 37874.90€</price>
+<price>Academic org. ELRA Member: 4734.40€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
 <availabilityStartDate>1997-01-23</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 9600.00€</price>
-<price>Academic org. ELRA Member: 9600.00€</price>
-<price>Academic org. ELRA Non Member: 16000.00€</price>
-<price>Commercial org. ELRA Non Member: 16000.00€</price>
+<price>Commercial org. ELRA Non Member: 63124.80€</price>
+<price>Academic org. ELRA Non Member: 63124.80€</price>
+<price>Commercial org. ELRA Member: 37874.90€</price>
+<price>Academic org. ELRA Member: 37874.90€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
 <availabilityStartDate>1997-01-23</availabilityStartDate>
 </licenceInfo>
@@ -65,20 +65,12 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>dut/nld</languageId>
-<languageName>Dutch</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Flemish</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
-</languageInfo>
-<languageInfo>
 <languageId>fre/fra</languageId>
 <languageName>French</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>eng</languageId>
+<languageName>English</languageName>
 </languageInfo>
 </lexicalConceptualResourceTextInfo>
 </lexicalConceptualResourceMediaType>

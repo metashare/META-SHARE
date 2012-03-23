@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">TC-STAR 2007 Evaluation Package - ASR Spanish - CORTES</resourceName>
-<resourceName lang="French">Package d’évaluation TC-STAR 2006 - ASR espagnol - CORTES</resourceName>
-<description lang="English">TC-STAR is a European integrated project focusing on Speech-to-Speech Translation (SST). To encourage significant breakthrough in all SST technologies, annual open competitive evaluations are organized. Automatic Speech Recognition (ASR), Spoken Language Translation (SLT) and Text-To-Speech (TTS) are evaluated independently and within an end-to-end system.The third TC-STAR evaluation campaign took place in March 2007. Three core technologies were evaluated during the campaign:• Automatic Speech Recognition (ASR),• Spoken Language Translation (SLT),• Text to Speech (TTS).Each evaluation package includes resources, protocols, scoring tools, results of the official campaign, etc., that were used or produced during the second evaluation campaign. The aim of these evaluation packages is to enable external players to evaluate their own system and compare their results with those obtained during the campaign itself.The speech databases made within the TC-STAR project were validated by SPEX, in the Netherlands, to assess their compliance with the TC-STAR format and content specifications.This package includes the material used for the TC-STAR 2007 Automatic Speech Recognition (ASR) third evaluation campaign for Spanish. The same packages are available for both English (ELRA-E0025) and Mandarin (ELRA-E0027), and for the EPPS task for Spanish (ELRA-E0026/02), for ASR and for SLT in 3 directions, English-to-Spanish (ELRA-E0028), Spanish-to-English (ELRA-E0029-01 and E0029-02), Chinese-to-English (ELRA-E0030).To be able to chain the components, ASR, SLT and TTS evaluation tasks were designed to use common sets of raw data and conditions. Three evaluation tasks, common to ASR, SLT and TTS, were selected: EPPS (European Parliament Plenary Sessions) task, CORTES (Spanish Parliament Sessions) task and VOA (Voice of America) task. The CORTES data were used in addition to the EPPS data to evaluate ASR in Spanish and SLT from Spanish into English.This package was used within the CORTES task and consists of one test data set, composed of audio recordings of CORTES’ sessions of June 2006. The test data set is made of 3 hours (33,920 running words).</description>
-<description lang="French">TC-STAR est un projet intégré européen basé sur la traduction parole-parole (ou SST pour Speech-to-Speech Translation). Pour encourager de manière conséquente l’avancée dans toutes les technologies de la SST, des évaluations ouvertes à la concurrence sont organisées sur une base annuelle. Les technologies de la reconnaissance automatique de la parole (ou ASR pour « Automatic Speech Recognition »), de la traduction de la langue parlée (ou SLT pour « Spoken Language Translation ») et les technologies texte-parole (ou TTS pour « Text-to-Speech ») sont évaluées à la fois de façon indépendante et intégrées à un système « end-to-end » (de « bout en bout »).La troisième campagne d’évaluation TC-STAR s’est déroulée en mars 2007. Trois technologies de base ont été évaluées lors de cette campagne:• la reconnaissance automatique de la parole (ASR),• la traduction de la langue parlée (SLT),• la synthèse texte-parole (TTS).Chaque package d’évaluation regroupe des ressources, des protocoles, des outils de notation, les résultats de la campagne officielle, etc., qui ont été utilisés ou produits pendant la seconde campagne d’évaluation. Le but de ces packages d’évaluation est de permettre à des acteurs externes d’évaluer leur propre système et de comparer leurs résultats à ceux obtenus pendant la campagne.Les bases de données orales produites dans le projet TC-STAR ont été validées par SPEX, Pays-Bas, selon le format et les spécifications de contenu TC-STAR.Ce package comprend le matériel utilisé pour la troisième campagne d’évaluation TC-STAR 2007 Automatic Speech Recognition (ASR) de l’espagnol pour la tâche CORTES. Des packages similaires sont également disponibles pour l’anglais (ELRA-E0025) et le chinois mandarin (ELRA-E0027) et l’espagnol pour la tâche EPPS (ELRA-E0026-02),  pour l’ASR, ainsi que pour la SLT dans 3 sens, anglais vers espagnol (ELRA-E0028), espagnol vers anglais (ELRA-E0029), chinois vers anglais (ELRA-E0030).Pour permettre de regrouper les composants, les tâches d’évaluation ASR, SLT et TTS ont été conçues en utilisant des données brutes et des conditions communes. Trois tâches d’évaluation, communes à l’ASR, la SLT, et la TTS ont été choisies : la tâche EPPS (« European Parliament Plenary Sessions » – Sessions plénières du Parlement européen), la tâche CORTES (« Spanish Parliament Sessions ») et la tâche VOA (« Voice of America » - La voix de l’Amérique). Les données CORTES ont été utilisées en complement des données EPPS pour l’évaluation ASR en espagnol et SLT de l’espagnol vers l’anglais.Le présent package a été utilisé dans le cadre de la tâche CORTES et comprend un ensemble de données de test, composé des enregistrements audio des sessions de CORTES de juin 2006. Les données de test comprennent 3 heures d’enregistrements (33 920 mots courants).</description>
+<resourceName lang="English">Russian Speecon database</resourceName>
+<resourceName lang="French">Base de données Speecon du russe</resourceName>
+<description lang="English">The Russian Speecon database is divided into 2 sets:   1. The first set comprises the recordings of 550 adult Russian speakers (271 males, 279 females), recorded over 4 microphone channels in 4 recording environments (office, entertainment, car, public place).   2. The second set comprises the recordings of 50 child Russian speakers (31 boys, 19 girls), recorded over 4 microphone channels in 1 recording environment (children room). This database is partitioned into 21 DVDs (first set) and 3 DVDs (second set).The speech databases made within the Speecon project were validated by SPEX, the Netherlands, to assess their compliance with the Speecon format and content specifications. Each of the four speech channels is recorded at 16 kHz, 16 bit, uncompressed unsigned integers in Intel format (lo-hi byte order). To each signal file corresponds an ASCII SAM label file which contains the relevant descriptive information.Each speaker uttered the following items:    * Calibration data:          o 6 noise recordings          o The “silence word” recording     * Free spontaneous items (adults only):          o 5 minutes (session time) of free spontaneous, rich context items (story telling) (an open number of spontaneous topics out of a set of 30 topics)     * 17 Elicited spontaneous items (adults only):          o 3 dates          o 2 times          o 3 proper names          o 2 city names          o 1 letter sequence          o 2 answers to questions          o 3 telephone numbers          o 1 language     * Read speech:          o 30 phonetically rich sentences uttered by adults and 60 uttered by children          o 5 phonetically rich words (adults only)          o 4 isolated digits          o 1 isolated digit sequence          o 4 connected digit sequences          o 1 telephone number          o 3 natural numbers          o 1 money amount          o 2 time phrases (T1 : analogue, T2 : digital)          o 3 dates (D1 : analogue, D2 : relative and general date, D3 : digital)          o 3 letter sequences          o 1 proper name          o 2 city or street names          o 2 questions          o 2 special keyboard characters          o 1 Web address          o 1 email address          o 208 application specific words and phrases per session (adults)          o 74 toy commands and 48 general commands (children) The following age distribution has been obtained:    * Adults: 290 speakers are between 15 and 30, 187 speakers are between 31 and 45, 73 speakers are between 46 and 60.    * Children: 28 speakers are between 8 and 10, 22 speakers are between 11 and 14. A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
+<description lang="French">La base de données Speecon du russe est répartie en deux sous-ensembles :   1. Le premier sous-ensemble est composé de 550 locuteurs russes adultes (271 hommes, 279 femmes) enregistrés à partir de 4 canaux de microphone dans 4 environnements différents (bureau, divertissement, voiture, lieu publique).   2. Le deuxième sous-ensemble est composé de 50 locuteurs russes enfants (31 garçons, 19 filles) enregistrés à partir de 4 canaux de microphone dans un seul environnement (chambre d’enfant). Elle est distribuée sur 21 DVD (adultes) et 3 DVD (enfants). Les bases orales réalisées lors du projet Speecon ont été validées par SPEX, Pays-Bas, afin de contrôler leur adéquation avec le format Speecon et les spécifications de contenu.Les fichiers sont stockés en séquences d'échantillons de 16 kHz, 16 bit ; les canaux sont multiplexés dans un fichier unique, avec une séquence de 0-1-2-3. A chaque énoncé correspond un fichier d'étiquetage ASCII SAM.Chaque locuteur a prononcé les éléments suivants :    * Données de calibrage :          o 6 bruits          o 1 “silence”     * Eléments libres spontanés (adultes uniquement) :          o 5 minutes (par session) de discours libre spontané, en contexte riche (raconter une histoire) (nombre ouvert de thèmes spontanés à partir de 30 thèmes donnés)     * 17 éléments spontanés dirigés (adultes uniquement) :          o 3 dates          o 2 périodes de temps          o 3 noms propres          o 2 noms de ville          o 1 séquence de lettres          o 2 réponses à des questions          o 3 numéros de téléphone          o 1 langue     * Parole lue :          o 30 phrases phonétiquement riches prononcées par les adultes et 60 prononcées par les enfants          o 5 mots phonétiquement riches (adultes uniquement)          o 4 chiffres isolés          o 1 séquences de chiffres isolés          o 4 séquences de chiffres connectés          o 1 numéro de téléphone          o 3 nombres naturels          o 1 montant en devise          o 2 phrases comportant une notion de temps (T1 : analogique, T2 : numérique)          o 3 dates (D1 : analogique, D2 : date relative et générale, D3 : numérique)          o 3 séquences de lettres          o 1 nom propre          o 2 noms de ville ou de rue          o 2 questions          o 2 caractères clavier          o 1 adresse Web          o 1 adresse email          o 208 mots et phrases de commande par sessions (adultes)          o 74 commandes de jouets et 48 commandes générales (enfants) Les classes d'âge sont réparties comme suit :    * Adultes : 290 locuteurs ont entre 15 et 30 ans, 187 entre 31 et 45 ans, 73 entre 46 et 60.    * Enfants: 28 locuteurs ont entre 8 et 10 ans, 22 entre 11 et 14. Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1017</url>
-<identifier>ELRA-E0026_01</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=751</url>
+<identifier>ELRA-S0161</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,24 +29,34 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-10-09</lastDateUpdated>
+<lastDateUpdated>2007-02-22</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
-<licence>ELRA_EVALUATION</licence>
-<restrictionsOfUse>evaluationUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 750.00€</price>
-<price>Academic org. ELRA Non Member: 750.00€</price>
-<price>Commercial org. ELRA Member: 500.00€</price>
-<price>Academic org. ELRA Member: 500.00€</price>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 75000.00€</price>
+<price>Academic org. ELRA Non Member: 60000.00€</price>
+<price>Commercial org. ELRA Member: 67000.00€</price>
+<price>Academic org. ELRA Member: 50000.00€</price>
 <distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2007-10-09</availabilityStartDate>
+<availabilityStartDate>2004-06-07</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 75000.00€</price>
+<price>Academic org. ELRA Non Member: 75000.00€</price>
+<price>Commercial org. ELRA Member: 67000.00€</price>
+<price>Academic org. ELRA Member: 67000.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2004-06-07</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceCreationInfo>
 <fundingProject>
-<projectName>TC-STAR</projectName>
+<projectName>Speecon</projectName>
 <fundingType>euFunds</fundingType>
 </fundingProject>
 </resourceCreationInfo>
@@ -60,16 +70,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>spa</languageId>
-<languageName>Spanish</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Castilian</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
+<languageId>rus</languageId>
+<languageName>Russian</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

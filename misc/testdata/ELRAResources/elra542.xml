@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Catalan SpeechDat-Car database</resourceName>
-<resourceName lang="French">Base de données SpeechDat-Car catalan</resourceName>
-<description lang="English">The Catalan SpeechDat-Car database contains the in-car recordings of 300 speakers who uttered from around 120 read and spontaneous items. Each speaker recorded two sessions. Recordings have been made through 4 different channels, via in-car microphones (1 close-talk microphone, 3 far-talk microphones). The 300 Catalan speakers were selected from 5 different dialectal regions and are balanced in gender and age groups. The database was validated by UVIGO. The Catalan-SpeechDat-Car Database was funded by the Catalan Government.</description>
-<description lang="French">La base de données SpeechDat-Car catalan comprend les enregistrements de 300 locuteurs ayant enregistré environ 120 éléments lus et spontanés dans une voiture. Chaque locuteur a enregistré deux sessions. Les enregistrements ont été réalisés à travers 4 canaux différents, via des microphones placés dans la voiture (1 proche, et 3 éloignés). Les 300 locuteurs catalans ont été sélectionnés selon 5 régions dialectales différentes et sont équilibrés en genre et par groupe d’âge. La base de données a été validée par UVIGO. La base de données SpeechDat-Car catalan a été financée par le gouvernement catalan.</description>
+<resourceName lang="English">THAMUS Bilingual dictionaries - Computer Science</resourceName>
+<resourceName lang="French">THAMUS Dictionnaires bilingues -  Informatique</resourceName>
+<description lang="English">Technical bilingual Italian dictionaries with a morphological coding which can generate all full forms using a software engine written in C. Multi-word terms contain morphological coding for the head word.Computer Science, inflected forms: 35,000 entries, Italian=&gt;German.</description>
+<description lang="French">Les dictionnaires techniques bilingues disposent d'une codification morphologique qui permet de générer toutes les formes fléchies grâce à un logiciel écrit en langage C. Les mots composés contiennent une codification morphologique sur la tête des mots.Domaine informatique, formes fléchies, 35 000 entrées, italien=&gt;allemand.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1148</url>
-<identifier>ELRA-S0326</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=157</url>
+<identifier>ELRA-M0009_04</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,52 +29,51 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2012-01-05</lastDateUpdated>
+<lastDateUpdated>2005-03-04</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 4000.00€</price>
-<price>Academic org. ELRA Non Member: 0.00€</price>
-<price>Commercial org. ELRA Member: 2000.00€</price>
-<price>Academic org. ELRA Member: 0.00€</price>
-<availabilityStartDate>2011-12-23</availabilityStartDate>
+<price>Commercial org. ELRA Member: 38500.00€</price>
+<price>Academic org. ELRA Member: 7700.00€</price>
+<price>Academic org. ELRA Non Member: 8400.00€</price>
+<price>Commercial org. ELRA Non Member: 42000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1997-05-13</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 4000.00€</price>
-<price>Academic org. ELRA Non Member: 4000.00€</price>
-<price>Commercial org. ELRA Member: 2000.00€</price>
-<price>Academic org. ELRA Member: 2000.00€</price>
-<availabilityStartDate>2011-12-23</availabilityStartDate>
+<price>Commercial org. ELRA Member: 38500.00€</price>
+<price>Academic org. ELRA Member: 38500.00€</price>
+<price>Academic org. ELRA Non Member: 42000.00€</price>
+<price>Commercial org. ELRA Non Member: 42000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1997-05-13</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>cat</languageId>
-<languageName>Catalan</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Valencian</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
+<languageId>ita</languageId>
+<languageName>Italian</languageName>
 </languageInfo>
-</corpusAudioInfo>
-</corpusMediaType>
-</corpusInfo>
+<languageInfo>
+<languageId>ger/deu</languageId>
+<languageName>German</languageName>
+</languageInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

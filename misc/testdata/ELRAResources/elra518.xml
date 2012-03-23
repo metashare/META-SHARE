@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Labelling of WordNet 1.6 with semantic fields (WordNet Domains)</resourceName>
-<resourceName lang="French">Etiquetage WordNet 1.6 avec champs sémantiques (Domaines WordNet)</resourceName>
-<description lang="English">MultiWordNet is a multilingual lexical database including information about English and Italian words. It is an extension of WordNet 1.6, a lexical database for English developed at the Princeton University. MultiWordNet contains information about the following aspects of the English and Italian lexical:- lexical relations between words- semantic relations between lexical concepts- correspondences between Italian and English lexical concepts- semantic fieldsThe basic lexical relationship in MultiWordNet is synonymy. Groups of synonyms are used to identify lexical concepts, which are also called synsets. Synsets are the most important unit in MultiWordNet. A lot of interesting information is attached to them, such as semantic fields and semantic relationships.MultiWordNet can be used for a variety of NLP tasks including:- Information Retrieval: synonymy relations are used for query expansion to improve the recall of IR; cross language correspondences between Italian and English synsets are used for Cross Language Information Retrieval. - Semantic tagging: MultiWordNet constitutes a large coverage sense inventory which is the basis for semantic tagging, i.e. texts are tagged with synset identifiers.- Disambiguation: Semantic relationships are used to measure the semantic distance between words, which can be used to disambiguate the meaning of words in texts. Also semantic fields have proved to be very useful for the disambiguation task.- Ontologies: MultiWordNet can be seen as an ontology to be used for a variety of knowledge-based NLP tasks.- Terminologies: MultiWordNet constitutes a robust framework supporting the development of specific structured terminologies.The release 1.1 of MultiWordNet is currently available. It includes information about 51,000 Italian word meanings and 28,000 synsets (incorrespondence with the English equivalents). It also includes a labelling of most WordNet 1.6 synsets with semantic field labels.Work on MultiWordNet is going on. The next release will contain at least 10,000 new word meanings.Data are contained in a specialized database server, which can be accessed by clients through a socket connection. The database server has been implemented in Lisp under the Unix and Windows environments. An application program interface and graphical browsing interface are provided with the database. A Java implementation of the database is planned for the next release.For more information, visit: http://multiwordnet.itc.it</description>
-<description lang="French">MultiWordNet is a multilingual lexical database including information about English and Italian words. It is an extension of WordNet 1.6, a lexical database for English developed at the Princeton University. MultiWordNet contains information about the following aspects of the English and Italian lexical:lexical relations between words semantic relations between lexical concepts correspondences between Italian and English lexical concepts semantic fields The basic lexical relationship in MultiWordNet is synonymy. Groups of synonyms are used to identify lexical concepts, which are also called synsets. Synsets are the most important unit in MultiWordNet. A lot of interesting information is attached to them, such as semantic fields and semantic relationships.MultiWordNet can be used for a variety of NLP tasks including:Information Retrieval: synonymy relations are used for query expansion to improve the recall of IR; cross language correspondences between Italian and English synsets are used for Cross Language Information Retrieval. Semantic tagging: MultiWordNet constitutes a large coverage sense inventory which is the basis for semantic tagging, i.e. texts are tagged with synset identifiers. Disambiguation: Semantic relationships are used to measure the semantic distance between words, which can be used to disambiguate the meaning of words in texts. Also semantic fields have proved to be very useful for the disambiguation task. Ontologies: MultiWordNet can be seen as an ontology to be used for a variety of knowledge-based NLP tasks. Terminologies: MultiWordNet constitutes a robust framework supporting the development of specific structured terminologies. The release 1.1 of MultiWordNet is currently available. It includes information about 51,000 Italian word meanings and 28,000 synsets (in correspondence with the English equivalents). It also includes a labelling of most WordNet 1.6 synsets with semantic field labels.Work on MultiWordNet is going on. The next release will contain at least 10,000 new word meanings.Data are contained in a specialized database server, which can be accessed by clients through a socket connection. The database server has been implemented in Lisp under the Unix and Windows environments. An application program interface and graphical browsing interface are provided with the database. A Java implementation of the database is planned for the next release.Pour plus d'informations: http://multiwordnet.itc.it</description>
-<resourceShortName>MultiWordNet</resourceShortName>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=645</url>
-<identifier>ELRA-M0026_02</identifier>
+<resourceName lang="English">French lexicon with morphological information</resourceName>
+<resourceName lang="French">Lexique français avec information morphologique</resourceName>
+<description lang="English">This French lexicon is made up of 424,000 inflected forms corresponding to 55,000 simple word lemmas. It contains:- 34,400 nouns, with gender, number and inflected forms (including irregular forms)- 7,300 verbs, with mood, tense, person, gender, number and inflected forms (including irregular forms),- 11,700 adjectives, with gender, number and inflected forms (including irregular forms),- 1,400 adverbs, - 200 pronouns, articles, prepositions/postpositions and conjunctions. Each line in the resource file shows an inflected form, its part of speech, its related lemma and its morphological information. The inflected forms were generated using two databases: one containing the lemmas with the related root(s) and paradigm number(s), the other one containing the paradigm numbers with the related terminations and morphological information.Each row in the resource file consists of four fields following the structure below:            Lemma|part of speech|inflected form|morphological informationThe part of speech and the morphological information are encoded using our internal standard (an abbreviation key file is also provided).</description>
+<description lang="French">Ce lexique français est constitué de 424 000 formes fléchies correspondant à 55 000 mots-lemmes simples. Il comprend :- 34 400 noms, incluant le genre, le nombre et les formes fléchies (dont les formes irrégulières), - 7 300 verbes, incluant le mode, le temps, la personne, le genre, le nombre et les formes fléchies (dont les formes irrégulières),- 11 700 adjectifs, incluant le genre, le nombre et les formes fléchies (dont les formes irrégulières),- 1 400 adverbes, - 200 pronoms, articles, prépositions/postpositions et conjonctions. Chaque ligne de fichier présente une forme fléchie, la partie du discours, le lemme correspondant et l’information morphologique. Les formes fléchies sont générées en utilisant deux bases de données, l’une contenant les lemmes avec la ou les racines correspondantes et le ou les nombres de paradigmes, tandis que la deuxième comprend les nombres de paradigmes avec les terminaisons correspondantes et l’information morphologique. Chaque ligne de fichier est constituée de quatre champs présentés selon la structure suivante :            Lemme|partie du discours|forme fléchie|information morphologiqueLa partie du discours et l’information morphologique sont codées selon un standard interne (un fichier des abréviations utilisées est également fourni).</description>
+<resourceShortName/>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=868</url>
+<identifier>ELRA-L0068</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,46 +29,33 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<revision>The release 1.1 of MultiWordNet is currently available. It includes information about 51,000 Italian word meanings and 28,000 synsets (in correspondence with the English equivalents). It also includes a labelling of most WordNet 1.6 synsets with semantic field labels.Work on MultiWordNet is going on. The next release will contain at least 10,000 new word meanings.</revision>
-<lastDateUpdated>2010-03-10</lastDateUpdated>
+<revision>Last update: 2005</revision>
+<lastDateUpdated>2006-06-19</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 1200.00€</price>
-<price>Academic org. ELRA Non Member: 0.00€</price>
-<price>Commercial org. ELRA Member: 600.00€</price>
-<price>Academic org. ELRA Member: 0.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2002-07-08</availabilityStartDate>
-</licenceInfo>
-<licenceInfo>
-<licence>ELRA_EVALUATION</licence>
-<restrictionsOfUse>evaluationUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 100.00€</price>
-<price>Commercial org. ELRA Member: 50.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2002-07-08</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 7000.00€</price>
+<price>Academic org. ELRA Non Member: 4500.00€</price>
+<price>Commercial org. ELRA Member: 5000.00€</price>
+<price>Academic org. ELRA Member: 3500.00€</price>
+<availabilityStartDate>2006-06-19</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 2000.00€</price>
-<price>Academic org. ELRA Non Member: 2000.00€</price>
-<price>Commercial org. ELRA Member: 1000.00€</price>
-<price>Academic org. ELRA Member: 1000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2002-07-08</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 8500.00€</price>
+<price>Academic org. ELRA Non Member: 8500.00€</price>
+<price>Commercial org. ELRA Member: 6000.00€</price>
+<price>Academic org. ELRA Member: 6000.00€</price>
+<availabilityStartDate>2006-06-19</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<usageInfo>
-<actualUseInfo>
-<actualUse>nlpApplications</actualUse>
-<useNLPSpecific>textMining</useNLPSpecific>
-</actualUseInfo>
-</usageInfo>
+<resourceCreationInfo>
+<creationEndDate>2002-01-01</creationEndDate>
+</resourceCreationInfo>
 <resourceComponentType>
 <lexicalConceptualResourceInfo>
 <resourceType>lexicalConceptualResource</resourceType>
@@ -80,13 +67,13 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
 </languageInfo>
-<languageInfo>
-<languageId>ita</languageId>
-<languageName>Italian</languageName>
-</languageInfo>
+<sizeInfo>
+<size>17</size>
+<sizeUnit>mb</sizeUnit>
+</sizeInfo>
 </lexicalConceptualResourceTextInfo>
 </lexicalConceptualResourceMediaType>
 </lexicalConceptualResourceInfo>

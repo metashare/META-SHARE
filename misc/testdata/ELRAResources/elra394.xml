@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Polderland Dutch Lexicon of Names</resourceName>
-<resourceName lang="French">Lexique de noms hollandais (Polderland)</resourceName>
-<description lang="English">The lexicon contains 24,247 Dutch proper names. Various sorts of proper names are included, such as first names, last names, geographical names etc. Each entry contains an ID, word form, lemma, part of speech and proper name type.The lexicon is delivered in human-readable UNIX ANSI-format, with just a linefeed at the end of every line instead of a carriage return. The character set used is ISO Latin-1 (ISO/IEC 8859-1). All fields are separated by horizontal tabs, with no empty fields.</description>
-<description lang="French">Ce lexique comprend 24 247 noms propres hollandais. Différents types de noms propres sont inclus, tels que les prénoms, noms de familles, noms géographiques, etc. entrée contient un identifiant, la forme du mot, le lemme, la partie du discours et le type de nom propre.Le lexique est fourni au format UNIX ANSI lisible par l’homme, avec un simple saut de ligne en fin de chaque ligne au lieu d’un retour chariot. La table de caractères utilisée est ISO Latin-1 (ISO/IEC 8859-1). Tous les champs sont séparés par des tabulations horizontales, sans champs vides.</description>
+<resourceName lang="English">ItalWordNet (Italian WordNet)</resourceName>
+<resourceName lang="French">ItalWordNet (WordNet italien)</resourceName>
+<description lang="English">ItalWordNet (Italian WordNet) is an updated version of the EuroWordNet Italian database. The ItalWordNet database was produced within a national Italian programme called SI-TAL. It contains a total of 49,360 synsets. Unlike the EuroWordNet database, the ItalWordNet is provided in XML format. However, it remains partially compatible with the EuroWordNet, as both models are similar, except for some new relations created for adjectives and which were added to ItalWordNet.ItalWordNet is composed of the following contents:- The Inter-Lingual-Index, which is a list of records (ILI-records), in the form of synsets mainly taken from WordNet1.5 or manually created.- A top-ontology which consists of an ontology of 63 basic semantic classes based on fundamental distinctions. - A domain-ontology which consists of an ontology of subject-domains optionally assigned to ILI-records.- A selection of ILI-records, the so-called Base-Concepts, which play a major role in the different wordnets. - WordNet1.5 (91591 synsets; 168217 meanings; 126520 entry words) in EuroWordNet format.The original EuroWordNet Italian database is also included in this package.</description>
+<description lang="French">ItalWordNet (WordNet italien) est une version mise à jour de la base de données EuroWordNet italien. La base de données ItalWordNet a été produite dans le cadre du programme national italien intitulé SI-TAL. Elle comprend un total de 49360 synsets. Contrairement à la base de données EuroWordNet, ItalWordNet est fourni sous un format XML. Cependant, il reste compatible partiellement avec EuroWordNet, les deux modèles étant similaires, hormis pour certaines relations nouvelles créées pour les adjectifs et qui ont été ajoutées dans ItalWordNet.ItalWordNet est constituée des elements suivants:- L’index inter-lingue, qui consiste en une liste d’enregistrements sous la forme de « synsets » (ensembles/réseaux sémantiques, principalement issus de WordNet5.1 ou créés manuellement).- Ontologie supérieure : une ontologie de 63 classes sémantiques de base reposant sur des distinctions fondamentales.- Ontologie de domaine : une ontologie de domaines sujets assignés aux enregistrements de l’index inter-lingue.- Une sélection d’enregistrements de l’index inter-lingue, concepts de base, qui jouent un rôle majeur dans les différents wordnets.- WordNet1.5 (91591 synsets; 168217 sens; 126520 mots d’entrée) au format EuroWordNet.La base de données EuroWordNet italien d’origine est également incluse.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1001</url>
-<identifier>ELRA-L0078</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1110</url>
+<identifier>ELRA-M0042</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,33 +29,42 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-08-06</lastDateUpdated>
+<lastDateUpdated>2009-07-07</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 3800.00€</price>
-<price>Academic org. ELRA Non Member: 2900.00€</price>
-<price>Commercial org. ELRA Member: 2900.00€</price>
-<price>Academic org. ELRA Member: 2300.00€</price>
+<price>Commercial org. ELRA Non Member: 8000.00€</price>
+<price>Academic org. ELRA Non Member: 800.00€</price>
+<price>Commercial org. ELRA Member: 4000.00€</price>
+<price>Academic org. ELRA Member: 400.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2007-08-02</availabilityStartDate>
+<availabilityStartDate>2009-07-07</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 3800.00€</price>
-<price>Academic org. ELRA Non Member: 3800.00€</price>
-<price>Commercial org. ELRA Member: 2900.00€</price>
-<price>Academic org. ELRA Member: 2900.00€</price>
+<price>Commercial org. ELRA Non Member: 12000.00€</price>
+<price>Academic org. ELRA Non Member: 12000.00€</price>
+<price>Commercial org. ELRA Member: 6000.00€</price>
+<price>Academic org. ELRA Member: 6000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2007-08-02</availabilityStartDate>
+<availabilityStartDate>2009-07-07</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<usageInfo>
+<actualUseInfo>
+<actualUse>nlpApplications</actualUse>
+<useNLPSpecific>textMining</useNLPSpecific>
+</actualUseInfo>
+</usageInfo>
 <resourceCreationInfo>
-<creationEndDate>2007-01-01</creationEndDate>
+<fundingProject>
+<projectName>ItalWordNet</projectName>
+<fundingType>nationalFunds</fundingType>
+</fundingProject>
 </resourceCreationInfo>
 <resourceComponentType>
 <lexicalConceptualResourceInfo>
@@ -68,21 +77,12 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>dut/nld</languageId>
-<languageName>Dutch</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Flemish</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
+<languageId>ita</languageId>
+<languageName>Italian</languageName>
 </languageInfo>
-<sizeInfo>
-<size>844</size>
-<sizeUnit>kb</sizeUnit>
-</sizeInfo>
+<textFormatInfo>
+<mimeType>Plain text</mimeType>
+</textFormatInfo>
 </lexicalConceptualResourceTextInfo>
 </lexicalConceptualResourceMediaType>
 </lexicalConceptualResourceInfo>

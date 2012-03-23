@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">TC-STAR Bilingual Voice-Conversion English Speech Database</resourceName>
-<resourceName lang="French">Base de données orale de conversion vocale bilingue TC-STAR pour l’anglais</resourceName>
-<description lang="English">4 hours and 80 minutes of speech as spoken by 2 female speakers and 2 male speakers, covering both mimics and parallel voice conversion data.</description>
-<description lang="French">4 heures et 80 minutes de parole parlée par 2 locuteurs femmes et 2 locuteurs homes, couvrant à la fois des données de conversion mimique et de voix en parallèle.</description>
+<resourceName lang="English">German Pronunciation Rules Set - PHONRUL 9.0</resourceName>
+<resourceName lang="French">Ensemble de règles de prononciation de l'allemand - PHONRUL 9.0</resourceName>
+<description lang="English">PHONRUL is a collection of computer-readable underspecifying pronunciation rules of standard German. This set describes the most common known effects in German pronunciation if deviating from the so-called canonic or citation form of words. The knowledge of this rule set was derived from empirical analysis of speech corpora as well as from a multitude of publications about German phonetics. The set does not contain any dialect-specific rules, however the line between Standard German and dialects is indistinct. Presently, this rule set is used at the University of Munich to aid automatic segmentation and labelling of unknown speech utterances.The rule set, in its present form, consists of approximately 1,500 complex rules which expand to 5,546 simple replacement rules. The rule set was designed for extended German SAM-PA, but can be translated into other alphabets (e.g. Worldbet, IPA) without much effort.</description>
+<description lang="French">PHONRUL est un ensemble de règles de prononciation de l'allemand "standard". Cet ensemble décrit les effets les plus connus de la prononciation allemande lorsqu'elle est déviée de sa forme dite canonique ou locutive. Cet ensemble de règles provient d'une analyse empirique de corpus oraux, ainsi que d'un nombre très important de publications sur la phonétique allemande. L'ensemble ne contient pas de règles spécifiques aux dialectes, même si la frontière entre l'allemand standard et les dialectes est peu distincte. Actuellement, cet ensemble de règles est utilisé à l'Université de Munich pour l'aide à la segmentation automatique et à l'étiquetage d'occurrences de parole, non connues.PHONRUL, dans sa forme actuelle, comprend environ 1 500 règles complexes qui permettent d'obtenir environ 5 546 règles simples de remplacement. L'ensemble de règles est conçu pour l'alphabet SAM-PA tel qu'étendu à l'allemand, mais peut être facilement traduit en d'autres alphabets tels que Worldbet et IPA.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1134</url>
-<identifier>ELRA-S0312</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=447</url>
+<identifier>ELRA-S0045</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,58 +29,57 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2010-12-21</lastDateUpdated>
+<lastDateUpdated>2005-05-02</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 1650.00€</price>
-<price>Commercial org. ELRA Member: 3150.00€</price>
-<price>Academic org. ELRA Non Member: 2200.00€</price>
-<price>Commercial org. ELRA Non Member: 4200.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2010-12-21</availabilityStartDate>
+<price>Commercial org. ELRA Member: 631.45€</price>
+<price>Academic org. ELRA Member: 127.82€</price>
+<price>Academic org. ELRA Non Member: 255.65€</price>
+<price>Commercial org. ELRA Non Member: 1262.89€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1997-10-28</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 3150.00€</price>
-<price>Commercial org. ELRA Member: 3150.00€</price>
-<price>Academic org. ELRA Non Member: 4200.00€</price>
-<price>Commercial org. ELRA Non Member: 4200.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2010-12-21</availabilityStartDate>
+<price>Commercial org. ELRA Member: 631.45€</price>
+<price>Academic org. ELRA Member: 631.45€</price>
+<price>Academic org. ELRA Non Member: 1262.89€</price>
+<price>Commercial org. ELRA Non Member: 1262.89€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1997-10-28</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<usageInfo>
-<actualUseInfo>
-<actualUse>nlpApplications</actualUse>
-<useNLPSpecific>speechSynthesis</useNLPSpecific>
-</actualUseInfo>
-</usageInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>TC-STAR</projectName>
-<fundingType>euFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusAudioInfo>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>ger/deu</languageId>
+<languageName>German</languageName>
+</languageInfo>
+</lexicalConceptualResourceTextInfo>
+<lexicalConceptualResourceAudioInfo>
 <mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
+<languageId>ger/deu</languageId>
+<languageName>German</languageName>
 </languageInfo>
-</corpusAudioInfo>
-</corpusMediaType>
-</corpusInfo>
+</lexicalConceptualResourceAudioInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

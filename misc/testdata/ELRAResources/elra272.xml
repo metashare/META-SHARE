@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">POLYCOST</resourceName>
-<resourceName lang="French">POLYCOST</resourceName>
-<description lang="English">The POLYCOST speech database was recorded during January-March 1996 as a common initiative entitled ''Speaker Recognition in Telephony'' within the COST 250 action (http://www.fub.it/cost250). The main purpose of the database is to compare and validate speaker recognition algorithms. The data was collected via international telephone lines, with more than five sessions per speaker, and with English spoken by foreigners.The database contains 1 285 calls (around 10 sessions per speaker) recorded by 133 subjects (74 male and 59 female speakers) from 13 different countries. Approximately 10 speakers per country were provided by each partner.Each session comprises 15 prompts, including one prompt for DTMF detection, 10 prompts with connected digits uttered in English, 2 prompts with sentences uttered in English and 2 prompts in the speaker?s mother tongue. One of the prompts in the speaker?s mother tongue consists of free speech.* English:  - 4 prompts distributed throughout the session in which the speaker pronounces his or her 7-digit client code;  - 5 prompts distributed throughout the session in which the speaker pronounces a sequence of 10 digits (the same from session to session and from speaker to speaker);  - 2 prompts in which the speaker pronounces the sentences: ''Joe took father's green shoe bench out'' and ''He eats several light tacos'', as fixed password phrases which are common to all speakers;  - 1 prompt in which the speaker is supposed to give his or her international phone number.* Mother tongue  - 1 prompt in which the speaker gives his or her first name, family name, gender (female/male), town and country;  - 1 prompt with free speech.The database was collected through the European telephone network and was recorded through an ISDN card on XTL SUN platform with an 8 kHz sampling rate. Most of the calls were automatically classified by DTMF detection. Manual classification has been used in the case of no DTMF or wrong DTMF PIN code (circa 10% of the database).The English prompts are segmented and labelled at the word level (orthographic transcription and word stretches). The prompts in mother tongue are simply labelled (an orthographic transcription will be given). The conventions used for the annotation are those defined within the SpeechDat project.Character set: ISO-8859-1Medium: CD-ROMs. The first CD contains speech data from speakers M001-M069, and the second CD contains data from speakers F001-F060 plus M070-M074.  Total size CD1: 636 MB  Total size CD2: 610 MBFile format: A-law, 8 kHz sampling rate, 8 bits/sample, with no file header.For more information: http://circhp.epfl.ch/polycost</description>
-<description lang="French">La base de données POLYCOST a été enregistrée entre janvier et mars 1996 dans le cadre d'une initiative commune intitulée "Speaker Recognition in Telephony - Reconnaissance du locuteur en téléphonie" de l'action COST 250 (http://www.fub.it/cost250). Le principal objectif de cette base est de comparer et valider les algorithmes de reconnaissance du locuteur. Les données ont été collectées à travers les lignes téléphoniques internationales. Les enregistrements sont essentiellement en anglais, parlé par des locuteurs dont l'anglais n'est pas la langue maternelle, avec quelques enregistrements dans leur propre langue.La base de données contient un total de 1 285 appels (environ 10 sessions par locuteur) enregistrés par 133 sujets (74 hommes et 59 femmes) de 13 pays différents. Chaque partenaire a proposé environ 10 locuteurs.Chaque session comprend 15 prompts, dont un pour la détection DTMF, 10 pour la prononciation d'une série de chiffres en anglais, 2 présentant des phrases à lire en anglais et 2 prompts dans la langue maternelle du locuteur (dont un étant du discours libre).* Anglais :    * 4 prompts distribués lors de la session au cours de laquelle le locuteur prononce son code client de 7 chiffres ;    * 5 prompts distribués lors de la session au cours de laquelle le locuteur prononce une séquence de 10 chiffres (la même d'une session à une autre et d'un locuteur à un autre) ;    * 2 prompts dans lesquels le locuteur prononce les phrases : "Joe took father's green shoe bench out" et "He eats several light tacos", en tant que phrases "mots de passe" communes à tous les locuteurs ;    * 1 prompt dans lequel le locuteur est supposé donner son numéro de téléphone international.* Langue maternelle :    * 1 prompt dans lequel le locuteur donne son prénom, son nom de famille, son sexe (femme/homme), sa ville et son pays ;    * 1 prompt comportant du discours libre.Dans chaque répertoire correspondant à un locuteur, on trouve un fichier comprenant un résumé des informations disponibles sur ce locuteur. Ce fichier contient des données sur le code client, la nationalité, le nombre de sessions enregistrées, ainsi que la date, l'heure et le lieu d'enregistrement de chaque sessions.Cette base de données a été collectée à travers le réseau téléphonique européen et enregistrée grâce à une carte ISDN sur une plate-forme SUN XTL avec une fréquence d'échantillonnage de 8 kHz. La plupart des appels ont été classés automatiquement par détection DTMF. Dans les cas d'appels non DTMF ou de code PIN DTMF erroné, une classification manuelle a été faite (environ 10% de la base de données).Jeu de caractères: ISO-8859-1Support électronique: CD-ROMs. Le premier CD contient les données des locuteurs M001 à M069, le second CD contient les données des locuteurs F001 à F060 et M070 à M074.Taille du CD1: 636 MB. Taille du CD2: 610 MB.Format de fichier: Loi-a, fréquence d'échantillonnage de 8 kHz, 8 bit/échantillon, aucun fichier d'en-tête.Pour plus d'informations : http://circhp.epfl.ch/polycost</description>
+<resourceName lang="English">THAMUS Bilingual dictionaries - Medicine</resourceName>
+<resourceName lang="French">THAMUS Dictionnaires bilingues - Médecine</resourceName>
+<description lang="English">Technical domainsLanguages: English =&gt; ItalianFormat: ASCII format with ISO 8859-1 character setMedium: QIC 150 MB Cartridge TapeDomain: Medicine, 20,000 entries, canonical formsTechnical bilingual Italian dictionaries with a morphological coding which can generate all full forms using a software engine written in C. Multi-word terms contain morphological coding for the head word.</description>
+<description lang="French">Domaines techniquesLangues : Anglais =&gt; ItalienDomaine: Médecine, 20 000 entrées, formes canoniquesLes dictionnaires techniques bilingues disposent d'une codification morphologique qui permet de générer toutes les formes fléchies grâce à un logiciel écrit en langage C. Les mots composés contiennent une codification morphologique sur la tête des mots.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=436</url>
-<identifier>ELRA-S0042</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=151</url>
+<identifier>ELRA-M0010_11</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,43 +29,38 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-06-14</lastDateUpdated>
+<lastDateUpdated>2005-03-04</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 1200.00€</price>
-<price>Academic org. ELRA Non Member: 600.00€</price>
-<price>Commercial org. ELRA Member: 1000.00€</price>
-<price>Academic org. ELRA Member: 500.00€</price>
+<price>Commercial org. ELRA Non Member: 24000.00€</price>
+<price>Academic org. ELRA Non Member: 4800.00€</price>
+<price>Commercial org. ELRA Member: 22000.00€</price>
+<price>Academic org. ELRA Member: 4400.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-09-15</availabilityStartDate>
+<availabilityStartDate>1997-05-13</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 1200.00€</price>
-<price>Academic org. ELRA Non Member: 1200.00€</price>
-<price>Commercial org. ELRA Member: 1000.00€</price>
-<price>Academic org. ELRA Member: 1000.00€</price>
+<price>Commercial org. ELRA Non Member: 24000.00€</price>
+<price>Academic org. ELRA Non Member: 24000.00€</price>
+<price>Commercial org. ELRA Member: 22000.00€</price>
+<price>Academic org. ELRA Member: 22000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-09-15</availabilityStartDate>
+<availabilityStartDate>1997-05-13</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>COST 250</projectName>
-<fundingType>euFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
@@ -73,8 +68,12 @@
 <languageId>eng</languageId>
 <languageName>English</languageName>
 </languageInfo>
-</corpusAudioInfo>
-</corpusMediaType>
-</corpusInfo>
+<languageInfo>
+<languageId>ita</languageId>
+<languageName>Italian</languageName>
+</languageInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

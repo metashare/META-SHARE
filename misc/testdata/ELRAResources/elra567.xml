@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Bilingual Spanish-English and English-Spanish lexicons (INCYTA) - Aeronautics, Navigation, Mechanical Engineering</resourceName>
-<resourceName lang="French">Lexiques bilingues espagnol-anglais et anglais-espagnol (INCYTA) - Aéronautique, navigation, ingénierie mécanique</resourceName>
-<description lang="English">23,170 entries for Aeronautics, Navigation, Mechanical Engineering. The entries contain morphological information for part-of-speech and inflectional class. The information on multi-word terms is provided by the headword.</description>
-<description lang="French">23170 entrées, domaine Aéronautique, navigation, ingénierie mécanique. Les entrées contiennent des informations morphologiques pour les différentes classes de mots. Les informations sur les termes composés sont fournies par la tête du terme (tête du syntagme).</description>
+<resourceName lang="English">Bilingual Spanish-English and English-Spanish lexicons (INCYTA) - Data Processing, Electronics, Telecoms</resourceName>
+<resourceName lang="French">Lexiques bilingues espagnol-anglais et anglais-espagnol (INCYTA) - Traitement données, électronique, télécoms</resourceName>
+<description lang="English">4,904 entries for Data Processing, Electronics, Telecoms. The entries contain morphological information for part-of-speech and inflectional class. The information on multi-word terms is provided by the headword.</description>
+<description lang="French">4904 entrées, domaine Traitement données, électronique, télécoms. Les entrées contiennent des informations morphologiques pour les différentes classes de mots. Les informations sur les termes composés sont fournies par la tête du terme (tête du syntagme).</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=140</url>
-<identifier>ELRA-M0002_14</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=133</url>
+<identifier>ELRA-M0002_07</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -36,20 +36,20 @@
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 2780.40€</price>
-<price>Commercial org. ELRA Member: 22243.20€</price>
-<price>Academic org. ELRA Non Member: 4634.00€</price>
-<price>Commercial org. ELRA Non Member: 37072.00€</price>
+<price>Academic org. ELRA Member: 588.48€</price>
+<price>Commercial org. ELRA Member: 4707.84€</price>
+<price>Academic org. ELRA Non Member: 980.80€</price>
+<price>Commercial org. ELRA Non Member: 7846.40€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
 <availabilityStartDate>1997-01-23</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 22243.20€</price>
-<price>Commercial org. ELRA Member: 22243.20€</price>
-<price>Academic org. ELRA Non Member: 37072.00€</price>
-<price>Commercial org. ELRA Non Member: 37072.00€</price>
+<price>Academic org. ELRA Member: 4707.84€</price>
+<price>Commercial org. ELRA Member: 4707.84€</price>
+<price>Academic org. ELRA Non Member: 7846.40€</price>
+<price>Commercial org. ELRA Non Member: 7846.40€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
 <availabilityStartDate>1997-01-23</availabilityStartDate>
 </licenceInfo>

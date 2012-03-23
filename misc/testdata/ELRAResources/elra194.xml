@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">NEMLAR Speech Synthesis Corpus</resourceName>
-<resourceName lang="French">Corpus de synthèse de parole NEMLAR</resourceName>
-<description lang="English">This corpus was produced within the NEMLAR project (http://www.nemlar.org). Two other resources, produced within the same project, are also available: NEMLAR Written Corpus (ELRA-W0042) and the NEMLAR Broadcast News Speech Corpus (ELRA-S0219).The NEMLAR Speech Synthesis Corpus contains the recordings of 2 native Egyptian Arabic speakers (male and female, 35 and 27 years old respectively) recorded in a studio over 2 channels (voice + laryngograph). The recordings comprise more than 10 hours of data with transcriptions.Speech samples are stored in 96 kHz, 24 bit with the least significant byte first (“lohi” or Intel format) as (signed) integers.The speaker read 2,032 prompted sentences covering approx. 42,000 words in three categories: transcribed speech (6,600 words - 20%), written text (16,500 words - 50%), and constructed phrases (10,300 - 30%).The transcribed speech consists of text from different domains, being produced in the Broadcast news task. The written text consists of news excerpts, novels and short stories with short sentences. Each paragraph is presented on a separate prompt sheet.Constructed phrases consist of frequent phrases and diphone coverage sentences. The frequent used phrases are designed as derived from written text (article, news paper, etc.) and have been divided into six sub-domains: •	Frequently used colloquial expressions•	Sports/Games•	News•	Finance•	Culture/Entertainment•	Consumer InformationThe diphone coverage sentences cover the missing and rare diphones in all the data. To cover these diphones a large corpus about 150,000 words was used and from which the sentences were extracted.The database is provided with orthographic, prosodic and phonetic transcriptions in SAMPA. All transcriptions are segmented at the utterance (sentence/command word) level, annotated at the word level and checked manually. A pronunciation lexicon including 3,589 headwords with phonetics in SAMPA is also available.The database is distributed on 3 ISO 9660 DVD-ROM volumes. It has been validated by an external partner and a validation report is provided.</description>
-<description lang="French">Ce corpus a été produit dans le cadre du projet NEMLAR (http://www.nemlar.org). Deux autres ressources, produites dans le cadre du même projet, sont également disponibles : le corpus écrit NEMLAR (ELRA-W0042) et le corpus oral d’actualités radiophoniques NEMLAR (ELRA-S0219).Le corpus de synthèse de parole NEMLAR comprend les enregistrements de 2 locuteurs de langue maternelle arabe égyptien (homme et femme, respectivement de 35 et 27 ans), réalisés dans un studio depuis 2 canaux (voix et laryngographe). Les enregistrements sont constitués de plus de 10 heures de données avec leurs transcriptions.Les échantillons de parole sont stockés en 96 kHz, 24 bit avec l’octet le moins significatif en premier (“lohi” ou format Intel) en entiers (signés).Le locuteur a lu 2 032 phrases énoncées couvrant environ 42 000 mots en trois catégories : parole transcrite (6,600 words - 20%), texte écrit (16,500 words - 50%), et phrases construites (10,300 - 30%).La parole transcrite consiste en du texte de différents domaines, produit dans la tâche d’actualités radiophoniques. Le texte écrit est composé d’extraits de phrases courtes d’actualités, de romans et d’histoires courtes. Chaque paragraphe est présenté sur une feuille d’énoncé (prompt).Les phrases construites sont constituées de phrases fréquentes et de phrases pour la couverture de diphones. Les phrases fréquentes sont formées telles qu’obtenues à partir de textes écrits (articles, actualités, etc.) et sont subdivisées en six sous-domaines : •	Expressions familières fréquemment usitées•	Sports/Jeux•	Actualités•	Finances•	Culture/Divertissement•	Information au consommateurLes phrases pour la couverture des diphones couvrent les diphones manquants ou rares dans toutes les données. Pour couvrir ces diphones, un grand corpus d’environ 150 000 mots a été utilisé, à partir duquel les phrases ont été extraites.La base de données est fournie avec la transcription orthographique, prosodique et phonétique en SAMPA. Toutes les transcriptions sont segmentées au niveau de l’occurrence (phrase/mot de commande), annotées au niveau du mot et vérifiées manuellement. Un lexique de prononciation comprenant 3 589 mots avec leur représentation phonétique en SAMPA est également disponible.La base de données est distribuée sur 3 DVD-ROM ISO 9660. Elle a été validée par un partenaire externe et un rapport de validation est fourni.</description>
+<resourceName lang="English">VERBA Polytechnic and Plurilingual Terminological Database - B-MG Atomic Physics</resourceName>
+<resourceName lang="French">Base de données terminologique polytechnique et plurilingue VERBA - B-MG Physique Atomique</resourceName>
+<description lang="English">* Entries for English-Spanish: Scientific research &amp; mathematical sciences (906 entries), Geosciences (10,215), Computer science, electronics &amp; telecommunications (70,580), Industry (47,578), Transport &amp; Maintenance (12,291), Economy (145,572), Biological sciences (38,989), Communication &amp; media (8,143), Chemical &amp; physical sciences (27,467). * Entries for English-French-German-Spanish: Environment (36,658), Health (66,727), Agriculture &amp; food (25,975), Construction &amp; public works (8,429), Law &amp; policy (56,578), Sports &amp; Leisure (17,312) * Two specialized lexicons: Spanish-English and English-French-German without domain codes: electronics, telematics, law, taxes, customs, etc. (550,000 entries). * Two general lexicons: Spanish-English-French-German and Spanish-English-French-German-Portuguese-Italian (83,000 entries).This terminological database contains, for each domain, a sub-domain indication is given (from 2 sub-domains for Scientific research to 39 for Sports &amp; leisure). Each entry consists of a definition, phraseological unit, abbreviation, usage information, grammatical labels. Format: ASCIIMedium: floppy disk</description>
+<description lang="French">* Entrées anglais-espagnol : Recherche scientifique &amp; sciences mathématiques (906 entrées), géosciences (10 215), informatique, électronique &amp; télécommunications (70 580), industrie (47 578), transports &amp; maintenance (12 291), économie (145 572), sciences biologiques (38 989), communication &amp; média (8 143), sciences chimiques &amp; physiques (27 467).* Entrées allemand-anglais-espagnol-français : Environnement (36 658), santé (66 727), agriculture &amp; alimentation (25 975), construction &amp; travaux publics (8 429), droit &amp; politique (56 578), sports &amp; loisirs (17 312).* Deux lexiques spécialisés: Espagnol-anglais et allemand-anglais-français sans codes de domaine : électronique, télématique, droit, taxes, douanes, etc. (550 000 entrées).* Deux lexiques généraux: Allemand-anglais-espagnol-français et allemand-anglais-espagnol-français-italien-portugais. (83 000 entrées).Cette base de données terminologique contient, pour chaque domaine, l'indication de sous-domaines (de 2 sous-domaines pour la recherche scientifique à 39 pour les sports et loisirs). Chaque entrée comporte une définition, une unité phraséologique, une abréviation, une information sur l'usage et des étiquettes grammaticales.Format: ASCIISupport : disquette</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=875</url>
-<identifier>ELRA-S0220</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=192</url>
+<identifier>ELRA-T0117</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,52 +29,46 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-02-22</lastDateUpdated>
+<lastDateUpdated>2006-09-27</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
-<licence>ELRA_END_USER</licence>
-<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 2500.00€</price>
-<price>Academic org. ELRA Non Member: 1000.00€</price>
-<price>Commercial org. ELRA Member: 1250.00€</price>
-<price>Academic org. ELRA Member: 500.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2006-08-11</availabilityStartDate>
-</licenceInfo>
-<licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 10000.00€</price>
-<price>Academic org. ELRA Non Member: 10000.00€</price>
-<price>Commercial org. ELRA Member: 5000.00€</price>
-<price>Academic org. ELRA Member: 5000.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2006-08-11</availabilityStartDate>
+<price>Commercial org. ELRA Member: 0.70€</price>
+<price>Commercial org. ELRA Non Member: 1.00€</price>
+<availabilityStartDate>1997-04-11</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>NEMLAR (Network for Euro-Mediterranean LAnguage Resources)</projectName>
-<fundingType>euFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>terminologicalResource</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>ara</languageId>
-<languageName>Arabic</languageName>
+<languageId>eng</languageId>
+<languageName>English</languageName>
 </languageInfo>
-</corpusAudioInfo>
-</corpusMediaType>
-</corpusInfo>
+<languageInfo>
+<languageId>spa</languageId>
+<languageName>Spanish</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Castilian</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
+</languageInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

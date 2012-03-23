@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">THAMUS Bilingual dictionaries - Computer science</resourceName>
-<resourceName lang="French">THAMUS Dictionnaires bilingues - Informatique</resourceName>
-<description lang="English">Technical domainsLanguages: Italian=&gt;EnglishFormat: ASCII format with ISO 8859-1 character setMedium: QIC 150 MB Cartridge TapeDomain: Computer science, 32,000 entries, inflected formsTechnical bilingual Italian dictionaries with a morphological coding which can generate all full forms using a software engine written in C. Multi-word terms contain morphological coding for the head word.</description>
-<description lang="French">Domaines techniquesLangues : italien=&gt;anglaisDomaine: Informatique, 32 000 entrées, formes fléchiesLes dictionnaires techniques bilingues disposent d'une codification morphologique qui permet de générer toutes les formes fléchies grâce à un logiciel écrit en langage C. Les mots composés contiennent une codification morphologique sur la tête des mots.</description>
+<resourceName lang="English">EPAC Corpus: orthographic transcriptions</resourceName>
+<resourceName lang="French">Corpus EPAC: transcriptions orthographiques</resourceName>
+<description lang="English">This corpus consists of approx. 100 hours of manual orthographic transcriptions, which were produced from 1,677 hours of non transcribed recordings from the ESTER Evaluation Campaign (Technolangue programme, see also ELRA-E0021). This corpus also consists of automatic transcriptions of the full 1,677 hours.</description>
+<description lang="French">Ce corpus contient environ 100 heures de transcriptions orthographiques manuelles réalisées à partir des 1 677 heures d'enregistrements non transcrits de la campagne d'évaluation ESTER (programme Technolangue, voir aussi ELRA-E0021). Ce corpus contient également les transcriptions automatiques de l'intégralité de ces 1 677 heures.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=162</url>
-<identifier>ELRA-M0010_10</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1119</url>
+<identifier>ELRA-S0305</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,51 +29,50 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-03-04</lastDateUpdated>
+<lastDateUpdated>2011-07-01</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 35200.00€</price>
-<price>Academic org. ELRA Member: 7040.00€</price>
-<price>Academic org. ELRA Non Member: 7680.00€</price>
-<price>Commercial org. ELRA Non Member: 38400.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-05-13</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 7500.00€</price>
+<price>Academic org. ELRA Non Member: 2000.00€</price>
+<price>Commercial org. ELRA Member: 5000.00€</price>
+<price>Academic org. ELRA Member: 300.00€</price>
+<availabilityStartDate>2010-03-29</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 35200.00€</price>
-<price>Academic org. ELRA Member: 35200.00€</price>
-<price>Academic org. ELRA Non Member: 38400.00€</price>
-<price>Commercial org. ELRA Non Member: 38400.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-05-13</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 25000.00€</price>
+<price>Academic org. ELRA Non Member: 25000.00€</price>
+<price>Commercial org. ELRA Member: 20000.00€</price>
+<price>Academic org. ELRA Member: 20000.00€</price>
+<availabilityStartDate>2010-03-29</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>ESTER</projectName>
+<fundingType>nationalFunds</fundingType>
+</fundingProject>
+</resourceCreationInfo>
 <resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
-<mediaType>text</mediaType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>ita</languageId>
-<languageName>Italian</languageName>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
 </languageInfo>
-<languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
-</languageInfo>
-</lexicalConceptualResourceTextInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
 </resourceComponentType>
 </resourceInfo>

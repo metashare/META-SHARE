@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Spanish Festival HTS models - male speech</resourceName>
-<resourceName lang="French">Modèles HTS en espagnol du projet Festival - voix d'homme</resourceName>
-<description lang="English">This database contains the Festival HTS models trained with 10h of speech from the TC-STAR Spanish Baseline Male Speech Database (ELRA-S0310).</description>
-<description lang="French">Cette base de données comprend les modèles HTS Festival entraînés à partir de 10 heures de parole de la voix d’homme de référence TC-STAR espagnol (ELRA-S0310).</description>
+<resourceName lang="English">PAROLE Portuguese Corpus - tagged subset</resourceName>
+<resourceName lang="French">Corpus PAROLE du portugais - sous-ensemble étiqueté</resourceName>
+<description lang="English">The parole Portuguese corpus contains approximately 3 million running words of European Portuguese distributed by Medium, as follows:    * Newspaper: about 65%, covering the period 1996-1997 of 3 titles;    * Book: about 20%, concerning 12 titles from 3 editing houses;    * Periodical: about 5%, concerning 7 weekly issues of 1 title, 1996;    * Miscellaneous: about 10%, concerning several files distributed by 8 titles.The corpus was classified and encoded according to the common core parole encoding standard. The file format of this corpus is SGML.A subcorpus of the PAROLE Portuguese Corpus, which reproduces approximately the whole Corpus distribution by Medium (Newspaper: about 65%, Book: ab. 20%, Periodical: ab. 5%, Miscellaneous: ab. 10%) is also available.It has about 250,000 words morpho-syntactically tagged accordingly to the parole common tagset and morpho-syntactic annotation standards. Disambiguation was manually checked.</description>
+<description lang="French">Le corpus PAROLE du portuguais contient environ 3 millions de mots courants du portugais européen, regroupés selon le type de supports :    * Journaux: environ 65%, tirés de 3 titres couvrant la période 1996-1997;    * Ouvrages: environ 20%, tirés de 12 titres de trois maisons d'édition différentes;    * Périodiques: environ 5%, tirés de 7 numéros d'un hebdomadaire, 1996;    * Divers: environ 10%, provenant de 7 fichiers fournis par 8 titres.Le corpus a été classé et annoté conformément au noyau commun du standard de codage PAROLE. Il est au format SGML.Un sous-ensemble du corpus PAROLE du portugais en reprend le schéma de distribution par support (Journaux: env. 65%, Ouvrages: env. 20%, Périodiques: env. 5%, divers: env. 10%). Il contient 250 000 mots étiquetés au niveau morpho-syntaxique conformément aux standards d'étiquetage et d'annotation morpho-syntaxique PAROLE. La désambiguïsation a été vérifiée manuellement. Les fichiers sont au format SGML.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1155</url>
-<identifier>ELRA-S0333</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=766</url>
+<identifier>ELRA-W0024_02</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,51 +29,51 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2012-01-05</lastDateUpdated>
+<lastDateUpdated>2004-05-12</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 0.00€</price>
-<price>Academic org. ELRA Non Member: 0.00€</price>
-<price>Commercial org. ELRA Member: 0.00€</price>
-<price>Academic org. ELRA Member: 0.00€</price>
-<availabilityStartDate>2011-12-23</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 1250.00€</price>
+<price>Academic org. ELRA Non Member: 750.00€</price>
+<price>Commercial org. ELRA Member: 875.00€</price>
+<price>Academic org. ELRA Member: 525.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2000-05-19</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 0.00€</price>
-<price>Academic org. ELRA Non Member: 0.00€</price>
-<price>Commercial org. ELRA Member: 0.00€</price>
-<price>Academic org. ELRA Member: 0.00€</price>
-<availabilityStartDate>2011-12-23</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 2500.00€</price>
+<price>Academic org. ELRA Non Member: 2500.00€</price>
+<price>Commercial org. ELRA Member: 1750.00€</price>
+<price>Academic org. ELRA Member: 1750.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2000-05-19</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>PAROLE</projectName>
+<fundingType>euFunds</fundingType>
+</fundingProject>
+</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
 <corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<corpusTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>spa</languageId>
-<languageName>Spanish</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Castilian</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
+<languageId>por</languageId>
+<languageName>Portuguese</languageName>
 </languageInfo>
-</corpusAudioInfo>
+</corpusTextInfo>
 </corpusMediaType>
 </corpusInfo>
 </resourceComponentType>

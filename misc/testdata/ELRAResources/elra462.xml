@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">RVG1 (Regional Variants of German 1, Part 1)</resourceName>
-<resourceName lang="French">RVG1 (Variantes régionales de l'allemand 1)</resourceName>
-<description lang="English">The corpus consists of single digits, connected digits, phone numbers, phonetically balanced sentences, computer command phrases and spontaneous speech. Each speaker has read a subcorpus of 85 items:    * 11 single digits (0-9, with the two pronunciations of 2 (`zwei', `zwo')),    * 19 connected digits (10-19, 20-100 in steps of ten),    * 12 computer command phrases,    * 30 phonetically balanced sentences,    * 5 6-digit phone numbers,    * 5 7-digit phone numbers,    * 2 phone numbers with area code,    * 1 minute spontaneous speech (monologue).The speaker was placed in front of a standard IBM-compatible PC. The backround noise was limited to the usual noise in office environment, eg. door slam, backround crosstalk, phone ringing, paper rustle, PC noise, etc. The head of the speaker is in a range between 2-4 feet to the screen, 1-2 feet from the desktop microphones. The speaker is not forced into a special position. The speaker is wearing a Sennheiser HD 410 and is free to use the keyboard or the mouse in front of him. The three desktop microphones are: Sennheiser MD 441 U, Telex (Soundblaster) and Talk Back (AT&amp;T). Speakers were selected to achieve the demoscopic density of the German spoken areas in Europe (including Austria and Switzerland).The recorded sound samples are stored in NIST SPHERE format. The resolution is 16 Bits. The sampling frequency is 22.050 Hz except for speakers 001 to 036 which were recorded with 11.025 Hz. Each microphone channel is stored into a separate file. A transliteration of spontaneous speech according to Verbmobil Format is also provided.RVG1, Part 1 contains 197 speakers recorded through 2 microphones.(RVG1, Part 2, with 303 speakers recorded through 2 microphones will be available from the beginning of 1999.)</description>
-<description lang="French">Le corpus comprend des chiffres isolés, des chiffres connectés, des numéros de téléphone, des phrases phonétiquement équilibrées, des phrases de commandes d'ordinateur et de la parole spontanée. Chacun des 498 locuteurs a lu un sous-corpus de 85 éléments:    * 11 chiffres isolés (0-9, avec les deux prononciations du 2 (" zwei ", " zwo ")),    * 19 chiffres connectés (10-19, 20-100 par groupes de dix),    * 12 phrases de commandes d'ordinateur,    * 30 phrases phonétiquement équilibrées,    * 5 numéros de téléphone à 6 chiffres,    * 5 numéros de téléphone à 7 chiffres,    * 2 numéros de téléphone avec le code régional,    * 1 minute de parole spontanée (monologue).Chaque locuteur était placé en face d'un PC standard. Le bruit de fond était limité au bruit habituel d'un environnement de bureau, par exemple, un claquement de porte, une conversation, une sonnerie de téléphone, un froissement de papier, le bruit du PC, etc. La tête de chaque locuteur se trouve à une distance de 60 à 120 cm de l'écran et de 30 à 60 cm des micros de table. Le locuteur n'est pas obligé de s'installer dans une position particulière. Le locuteur porte un Sennheiser HD 410 et est libre d'utiliser le clavier ou la souris posés en face de lui. Les trois micros de table sont les suivants : un Sennheiser MD 441 U, un Telex (Soundblaster) et un Talk Back (AT&amp;T). Les locuteurs ont été sélectionnés pour couvrir la densité démographique des régions germanophones d'Europe (y compris l'Autriche et la Suisse).Les échantillons de sons enregistrés sont stockés sous le format NIST SPHERE. La résolution est de 16 Bits. La fréquence d'échantillonnage est de 22 050 Hz sauf pour les locuteurs 001 à 036 qui ont été enregistrés à 11 025 Hz. Chaque canal de micro est stocké dans un fichier séparé. Une transcription de la parole spontanée d'après le format Verbmobil est également fournie. RVG1, Partie 1 comprend 498 locuteurs enregistrés à travers des microphones basse qualité. RVG1, Partie 2 comprend 421 locuteurs enregistrés à travers des microphones haute qualité.</description>
+<resourceName lang="English">THAMUS Bilingual dictionaries - Law</resourceName>
+<resourceName lang="French">THAMUS Dictionnaires bilingues - Droit</resourceName>
+<description lang="English">Technical domainsLanguages: English =&gt; ItalianFormat: ASCII format with ISO 8859-1 character setMedium: QIC 150 MB Cartridge TapeDomain: Law, 18,000 entries, inflected formsTechnical bilingual Italian dictionaries with a morphological coding which can generate all full forms using a software engine written in C. Multi-word terms contain morphological coding for the head word.</description>
+<description lang="French">Domaines techniquesLangues : Anglais =&gt; ItalienDomaine: Droit, 18 000 entrées, formes fléchiesLes dictionnaires techniques bilingues disposent d'une codification morphologique qui permet de générer toutes les formes fléchies grâce à un logiciel écrit en langage C. Les mots composés contiennent une codification morphologique sur la tête des mots.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=190</url>
-<identifier>ELRA-S0058</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=148</url>
+<identifier>ELRA-M0010_05</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,46 +29,51 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-05-02</lastDateUpdated>
+<lastDateUpdated>2005-03-04</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 7669.38€</price>
-<price>Commercial org. ELRA Member: 11759.71€</price>
-<price>Academic org. ELRA Non Member: 11759.71€</price>
-<price>Commercial org. ELRA Non Member: 16872.63€</price>
+<price>Commercial org. ELRA Non Member: 21600.00€</price>
+<price>Academic org. ELRA Non Member: 4320.00€</price>
+<price>Commercial org. ELRA Member: 19800.00€</price>
+<price>Academic org. ELRA Member: 3960.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1998-07-08</availabilityStartDate>
+<availabilityStartDate>1997-05-13</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 11759.71€</price>
-<price>Commercial org. ELRA Member: 11759.71€</price>
-<price>Academic org. ELRA Non Member: 16872.63€</price>
-<price>Commercial org. ELRA Non Member: 16872.63€</price>
+<price>Commercial org. ELRA Non Member: 21600.00€</price>
+<price>Academic org. ELRA Non Member: 21600.00€</price>
+<price>Commercial org. ELRA Member: 19800.00€</price>
+<price>Academic org. ELRA Member: 19800.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1998-07-08</availabilityStartDate>
+<availabilityStartDate>1997-05-13</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>ger/deu</languageId>
-<languageName>German</languageName>
+<languageId>eng</languageId>
+<languageName>English</languageName>
 </languageInfo>
-</corpusAudioInfo>
-</corpusMediaType>
-</corpusInfo>
+<languageInfo>
+<languageId>ita</languageId>
+<languageName>Italian</languageName>
+</languageInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

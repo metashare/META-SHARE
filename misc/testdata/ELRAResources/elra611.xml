@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">COLLECT</resourceName>
-<resourceName lang="French">COLLECT</resourceName>
-<description lang="English">The COLLECT speech database, supplied by CSELT, was recorded in Italy, in 1987 by 500 speakers; half of them called using Turin phones and the other half from all over the country. They were automatically prompted to utter 15 words (the 10 Italian digits and 5 command words - Yes, No, I accept, I refuse, Yes I accept). Each word was collected by digitally recording the utterances.</description>
-<description lang="French">Collect est une base de données orale, enregistrée en Italie en 1987 par 500 locuteurs, la moitié ayant utilisés le réseau téléphonique local (celui de Turin), l'autre moitié utilisant le réseau national italien. Les enregistrements sont constitués de 10 chiffres et de 5 mots de commandes (Oui, Non, J'accepte, Je refuse, Oui j'accepte).</description>
+<resourceName lang="English">LatinWordNet</resourceName>
+<resourceName lang="French">LatinWordNet</resourceName>
+<description lang="English">LatinWordNet contains information about the following aspects of the Latin and English lexicon:-	lexical relations between words-	semantic relations between lexical concepts-	correspondences between Latin and English lexical conceptsThe data model of LatinWordNet is fully compatible with MultiWordNet (M0026-01) and is an extension of WordNet 1.6, a lexical database for English developed at the Princeton University. The compatibility with the framework of MultiWordNet permits the usage of MultiWordNet semantic field labels (not included in the distribution) for NLP tasks.LatinWordNet covers nouns, verbs, adjectives and adverbs, and contains 8,978 synsets in correspondence with the English equivalents (and with all the MultiWordNet-based wordnets).LatinWordNet includes:- 8973 Synsets: 5621 nouns, 2283 verbs, 775 adjectives, 294 adverbs- 9124 Lemmas: 4777 nouns, 2609 verbs, 1259 adjectives, 479 adverbs- 25908 Word senses: 13060 nouns, 10062 verbs, 2054 adjectives, 732	 adverbs</description>
+<description lang="French">LatinWordNet comprend des informations sur les aspects des lexiques latin et anglais suivants:-	relations lexicales entre les mots-	relations sémantiques entre les concepts lexicaux-	correspondances entre les concepts lexicaux latins et anglaisLe modèle de données du LatinWordNet est entièrement compatible avec MultiWordNet (M0026-01) et est une extension de WordNet 1.6, une base de données lexicale pour l’anglais développée à l’université de Princeton. La compatibilité avec le réseau MultiWordNet permet l’usage d’étiquettes de champ sémantique MultiWordNet (non incluses dans l’offre présente) pour des tâches en TAL.LatinWordNet couvre les noms, verbes, adjectives et adverbs, et contient 8 978 synsets en correspondance avec les équivalents anglais (ainsi qu’avec tous les wordnets basés sur MultiWordNet).LatinWordNet contient:- 8973 Synsets: 5621 noms, 2283 verbes, 775 adjectifs, 294 adverbes- 9124 Lemmes: 4777 noms, 2609 verbes, 1259 adjectifs, 479 adverbes- 25908 Sens des mots: 13060 noms, 10062 verbes, 2054 adjectifs, 732	 adverbes</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=38</url>
-<identifier>ELRA-S0008</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1098</url>
+<identifier>ELRA-M0048</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,46 +29,45 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-03-31</lastDateUpdated>
+<lastDateUpdated>2009-05-20</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 4000.00€</price>
-<price>Academic org. ELRA Member: 4000.00€</price>
-<price>Academic org. ELRA Non Member: 6000.00€</price>
-<price>Commercial org. ELRA Non Member: 6000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1996-09-01</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 200.00€</price>
+<price>Academic org. ELRA Non Member: 20.00€</price>
+<price>Commercial org. ELRA Member: 100.00€</price>
+<price>Academic org. ELRA Member: 10.00€</price>
+<availabilityStartDate>2009-05-19</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 4000.00€</price>
-<price>Academic org. ELRA Member: 4000.00€</price>
-<price>Academic org. ELRA Non Member: 6000.00€</price>
-<price>Commercial org. ELRA Non Member: 6000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1996-09-01</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 300.00€</price>
+<price>Academic org. ELRA Non Member: 300.00€</price>
+<price>Commercial org. ELRA Member: 150.00€</price>
+<price>Academic org. ELRA Member: 150.00€</price>
+<availabilityStartDate>2009-05-19</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>ita</languageId>
-<languageName>Italian</languageName>
+<languageId>lat</languageId>
+<languageName>Latin</languageName>
 </languageInfo>
-</corpusAudioInfo>
-</corpusMediaType>
-</corpusInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

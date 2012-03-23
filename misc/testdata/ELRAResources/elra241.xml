@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">English =&gt; Czech Bilingual Lexicon</resourceName>
-<resourceName lang="French">Lexique bilingue anglais =&gt; tchèque</resourceName>
-<description lang="English">This is a bilingual English=&gt;Czech lexicon, provided in structured XML of OLIF (Open Lexicon Interchange Format) format. The XML conversion is provided by Digital Sonata Pty Ltd.The lexicon comprises 31,718 entries in English and 32,125 in Czech. In terms of entry types, the lexicon comprises 17,797 nouns, 7,748 adjectives, 6,039 verbs and 134 closed-class entries.The entries contain semantic information in terms of domain specification or style information (e.g., colloquial, regional use, etc.). Collocational information is also available for 3,065 entries.</description>
-<description lang="French">Ce lexique bilingue anglais=&gt;tchèque est fourni en format XML structuré selon le standard OLIF (Open Lexicon Interchange Format). La conversion XML a été fournie par Digital Sonata Pty Ltd.Le lexique contient 31 718 entrées en anglais et 32 125 entrées en tchèque. En termes de types d’entrées, le lexique comprend 17 797 noms, 7 748 adjectifs, 6 039 verbes et 134 entrées de classe fermée.Les entrées contiennent des informations sémantiques en termes de spécification de domaine et information de style (par exemple, usage conversationnel, régional, etc.). L’information collocationnelle est également disponible pour 3 065 entrées.</description>
+<resourceName lang="English">BITS Logatome Synthesis Corpus – BITS-LG</resourceName>
+<resourceName lang="French">Corpus de synthèse de logatomes BITS-LG</resourceName>
+<description lang="English">BITS stands for "BAS Infrastructures for Technical Speech Processing" and was funded by the German Ministry of Science and Education during 2003-2005. The BITS synthesis corpus consists of two parts: a set of logatome recordings for controlled diphone synthesis (ELRA-S0217) and a set of sentence recordings for unit selection techniques (ELRA-S0224).This corpus contains 11,036 recordings of logatomes spoken by 4 professional German speakers covering all German diphone combinations as well as the most prominent combination German - French – English (each speaker had at least foreign language competence in English).The data is stored on 4 DVDs. Each DVD contains the recordings, the annotation files and the meta data files of one of the four professional speakers, and the entire corpus' documentation. Each speaker was recorded in an insulated room with low reverberation.  Each logatome was recorded in three channels: close microphone, large membrane microphone and laryngographic signal. All diphones are segmented and labelled into phonemic units. Total number of recordings: 11036Total duration: 187 minutesFormat: WAV 48 kHz, 16 bit, Praat TextGrid, BAS Partitur Format (BPF)Segmentation: extended German SAM-PA</description>
+<description lang="French">BITS ("BAS Infrastructures for Technical Speech Processing" - Infrastructures BAS pour le traitement de la parole technique) a été financé par le ministère allemand des sciences et de l’éducation entre 2003 et 2005. Le corpus de synthèse BITS est constitué de deux parties : un ensemble d’enregistrements de logatomes pour la synthèse de diphones contrôlés (ELRA-S0217) et un ensemble d’enregistrements de phrases pour les techniques de sélection d’unités (ELRA-S0224).Ce corpus comprend 11 036 enregistrements de logatomes prononcés par 4 locuteurs professionnels allemands et couvre toutes les combinaisons de diphones allemands, ainsi que les combinaisons allemand - français - anglais les plus importantes (chaque locuteur a au moins des connaissances de l’anglais en tant que langue étrangère).Les données sont fournies sur 4 DVD. Chaque DVD contient les enregistrements, les fichiers d’annotation et les fichiers de méta-données pour un locuteur, ainsi que la documentation complète du corpus. Chaque locuteur a été enregistré dans une salle isolée avec une réverbération basse.  Chaque logatome a été enregistré sur 3 canaux : un micro-casque, un microphone à membrane large et un signal laryngographique. Tous les diphones sont segmentés et étiquetés en unités phonémiques. Nombre total d’enregistrements : 11 036Durée totale : 187 minutesFormat: WAV 48 kHz, 16 bit, Praat TextGrid, Format « Partitur » de BAS Segmentation: SAM-PA étendu à l’allemand</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1061</url>
-<identifier>ELRA-M0046</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=866</url>
+<identifier>ELRA-S0217</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,58 +29,60 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<revision>Creation date:  November 15, 2007Last update:   November 15, 2007</revision>
-<lastDateUpdated>2008-04-22</lastDateUpdated>
+<revision>15.03.06 : Version 1.027.04.06 : Version 1.1 : Documentation re-worked, BAS Partitur Format files added</revision>
+<lastDateUpdated>2006-09-04</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 45.00€</price>
-<price>Academic org. ELRA Non Member: 45.00€</price>
-<price>Commercial org. ELRA Member: 45.00€</price>
-<price>Academic org. ELRA Member: 45.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2008-04-22</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 9000.00€</price>
+<price>Academic org. ELRA Non Member: 754.35€</price>
+<price>Commercial org. ELRA Member: 4627.17€</price>
+<price>Academic org. ELRA Member: 627.17€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2006-06-19</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 45.00€</price>
-<price>Academic org. ELRA Non Member: 45.00€</price>
-<price>Commercial org. ELRA Member: 45.00€</price>
-<price>Academic org. ELRA Member: 45.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2008-04-22</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 9000.00€</price>
+<price>Academic org. ELRA Non Member: 9000.00€</price>
+<price>Commercial org. ELRA Member: 4627.17€</price>
+<price>Academic org. ELRA Member: 4627.17€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2006-06-19</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceCreationInfo>
-<creationEndDate>2007-01-01</creationEndDate>
+<fundingProject>
+<projectName>BITS (BAS Infrastructures for Technical Speech Processing)</projectName>
+<fundingType>nationalFunds</fundingType>
+</fundingProject>
+<creationEndDate>2006-01-01</creationEndDate>
 </resourceCreationInfo>
 <resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
-<mediaType>text</mediaType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
+<languageId>ger/deu</languageId>
+<languageName>German</languageName>
 </languageInfo>
-<languageInfo>
-<languageId>cze/ces</languageId>
-<languageName>Czech</languageName>
-</languageInfo>
-<textFormatInfo>
-<mimeType>Plain text</mimeType>
-</textFormatInfo>
-</lexicalConceptualResourceTextInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
+<audioSizeInfo>
+<sizeInfo>
+<size>187</size>
+<sizeUnit>minutes</sizeUnit>
+</sizeInfo>
+</audioSizeInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
 </resourceComponentType>
 </resourceInfo>

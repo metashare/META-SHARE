@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Portuguese SpeechDat(M) database</resourceName>
-<resourceName lang="French">Base de données SpeechDat(M) du portugais</resourceName>
-<description lang="English">The Portuguese SpeechDat(M) database contains the recordings of 1,001 speakers (453 males, 548 females). This speech database was collected by Portugal Telecom within the European SpeechDat project.Speech signals are stored as sequences of 8 kHz, 8-bit A-law. Files are stored according to the file specifications proposed in the SpeechDat database format specification. The file formats and headers follow the SAM recommendations (header files separated from signal files).This speech database was validated by SPEX (the Netherlands) to assess its compliance with the SpeechDat format and content specifications.Each speaker uttered the following items:    * 3 natural numbers    * 1 isolated digit    * 2 connected digits (1 credit card number, 1 telephone number)    * 2 money amounts    * 2 dates    * 1 time phrase    * 6 application words    * 3 spelled-out words    * 3 word spotting phrases    * 9 sentences    * 4 yes/no questions    * 1 spontaneous date    * 1 spontaneous time    * 1 region nameThe approach adopted for speaker recruitment involved selecting speakers among the employees of Portugal Telecom (about 20,000) and their relatives. The company has a wide geographical coverage, thus guaranteeing a good representation of many regional accents.The following age distribution has been obtained: 12 speakers are under 16, 345 speakers are between 17 and 30, 436 speakers are between 31 and 45, 196 speakers are between 46 and 60 and 8 speakers are over 60; the age of two speakers is unknown and two others said they were born in 1996.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
-<description lang="French">La base de données SpeechDat(M) du portugais contient les enregistrements de 1001 locuteurs (453 locuteurs hommes et 548 locuteurs femmes). Chaque locuteur a prononcé les éléments suivants :    * 3 nombres entiers naturels,    * 1 chiffre isolé,    * 1 numéro de carte de crédit,    * 1 numéro de téléphone,    * 2 montants en devise,    * 2 dates,    * 1 phrase comportant une notion de temps,    * 6 mots de commande,    * 3 mots épelés,    * 3 phrases incluant des mots-clés,    * 9 phrases,    * 4 questions oui/non,    * 1 date spontanée,    * 1 phrase spontanée comportant une notion de temps,    * 1 nom de région.Les locuteurs ont été sélectionnés parmi les 20 000 employés de Portugal Telecom. La compagnie a une couverture géographique suffisamment large pour garantir une bonne représentation des différents accents régionaux.Les classes d'âge sont réparties comme suit : 12 locuteurs de moins de 16 ans, 345 locuteurs entre 17 et 30 ans, 436 locuteurs entre 31 et 45 ans, 196 locuteurs entre 46 et 60 ans et 8 locuteurs de plus de 60 ans (ajouter à ces chiffres, 2 locuteurs qui n'ont pas mentionné leur âge et 2 autres qui ont dit être né en 1996).Les signaux de parole ont été échantillonnés à 8 kHz et enregistrés en séquences de 8 bits, loi-A. Les fichiers ont été stockés conformément aux spécifications de SpeechDat(M). Les formats des fichiers et les en-têtes suivent les recommandations SAM (les fichiers d'en-têtes sont séparés des fichiers de signaux). Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.CARACTERISTIQUES :Type de ressource : Enregistrements de parole (acoustique)Mode de parole : Lu (sauf si marqué spontané)Conditions d'enregistrement : Réseau de téléphone fixeLangue : PortugaisDomaine/Source : Phrases extraites du quotidien portugais PÚBLICOSexe et nombre de locuteurs : 1001 locuteurs (453 hommes et 548 femmes)Annotation linguistique : OrthographiqueFormat de fichier : 8 bits, loi-AStandard utilisé : SAMFréquence d'échantillonnage (kHz) : 8 kHzMode de distribution : 3 CD-ROMRessources connexes : Ressources SpeechDat(M) en d'autres langues : danois (ELRA-S0040), anglais (ELRA-S0011), français (ELRA-S0016), allemand (ELRA-S0018), italien (ELRA-S0052), espagnol (ELRA-S0065).Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
+<resourceName lang="English">PAROLE-SIMPLE-CLIPS PISA Italian Lexicon – Full lexicon</resourceName>
+<resourceName lang="French">Lexique italien PAROLE-SIMPLE-CLIPS de Pise – Lexique complet</resourceName>
+<description lang="English">This lexicon is subdivided into five different subsets:L0072-01 Full lexiconL0072-02 Phonetic layerL0072-03 Morphological layerL0072-04 Syntactic layerL0072-05 Semantic layerPAROLE-SIMPLE-CLIPS is a four-level, general purpose lexicon that has been elaborated over three different projects. The kernel of the morphological and syntactic lexicons was built in the framework of the LE-PAROLE project. The linguistic model and the core of the semantic lexicon were elaborated in the LE-SIMPLE project, while the phonological level of description and the extension of the lexical coverage were performed in the context of the Italian project Corpora e Lessici dell'Italiano Parlato e Scritto (CLIPS). The PAROLE-SIMPLE-CLIPS Pisa Italian Lexicon comprises a total of 387,267 phonetic units, 53,044 morphological units (53,044 lemmas), 37,406 syntactic units (28,111 lemmas) and 28,346 semantic units (19,216 lemmas). It was encoded at the semantic level, in full accordance with the international standards set out in the PAROLE-SIMPLE model and based on EAGLES. Syntactic and semantic encoding were performed jointly with Thamus (Consortium for Multilingual Documentary Engineering), which is responsible for 25,000 extra entries (to be released soon).PAROLE-SIMPLE-CLIPS offers therefore the advantage of being compatible with the other eleven PAROLE-SIMPLE lexicons that were built for European languages and that share a common theoretical model, representation language and building methodology.A PAROLE-SIMPLE-CLIPS entry gathers together all the phonological, morphological and inherent syntactic and semantic properties of a headword. Its subcategorization pattern is (or are) described in terms of optionality, syntactic function, syntagmatic realization as well as morpho-syntactic, syntactic and lexical properties of each slot filler. At the semantic level, the theoretical approach adopted by the SIMPLE model is essentially grounded on a revisited version of some fundamental aspects of the Generative Lexicon. A SIMPLE-CLIPS semantic unit is richly endowed with a wide range of fine-grained, structured information, most relevant for NLP applications. First among them, the ontological typing: the lexicon is in fact structured in terms of a multidimensional type system based on both hierarchical and non-hierarchical conceptual relations, taking into account the principle of orthogonal inheritance. Other relevant information types in a word entry are its domain of use; type of denoted event; synonymy and morphological derivation relations; membership in a class of regular polysemy as well as any relevant distinctive semantic features. Particularly outstanding is the information encoded in the Extended Qualia Structure (a set of 60 semantic relations that allow modelling both the different meaning dimensions of a word sense and its relationships to other lexical units) and the Predicative Representation which describes the semantic scenario the word sense considered is involved in and characterizes its participants in terms of thematic roles and semantic constraints.In a word’s description, lexical information is interrelated across the four description levels. Syntactic and semantic information, in particular, is related to each other through the projection of the predicate-argument structure onto its syntactic realization(s).References :Ruimy N., Corazzari O., Gola E., Spanu A., Calzolari N., Zampolli A. 2003. The PAROLE model and the Italian Syntactic lexicon. In A. Zampolli, N. Calzolari, L. Cignoni, (eds.), Computational Linguistics in Pisa - Linguistica Computazionale a Pisa. Linguistica Computazionale, Special Issue, XVIII-XIX, (2003). Pisa-Roma, IEPI. Tomo II, 793-820.Lenci A., Busa F., Ruimy N., Gola E., Monachini M., Calzolari N., Zampolli A. et al., 2000. SIMPLE Linguistic Specifications, SIMPLE LE4-8346 EC Project, Deliverable D2.1 &amp; D2.2, WP02, Final version, March 2000, ILC and University of Pisa, 404 pp. (http://www.ub.es/gilcub/SIMPLE/simple.html#Specifications).Ruimy N., Monachini M., Gola E., Calzolari N., Del Fiorentino M.C., Ulivieri M., Rossi S. 2003. A computational semantic lexicon of Italian: SIMPLE. In A. Zampolli, N. Calzolari, L. Cignoni, (eds.), Computational Linguistics in Pisa - Linguistica Computazionale a Pisa. Linguistica Computazionale, Special Issue, XVIII-XIX, (2003). Pisa-Roma, IEPI. Tomo II, 821-864.Ruimy N., Monachini M., Distante R., Guazzini E., Molino S., Ulivieri M., Calzolari N., Zampolli A. 2002. CLIPS, A Multi-level Italian Computational Lexicon: a Glimpse to Data. LREC 2002: Third LREC. Las Palmas de Gran Canaria, Spain 29th, 30th &amp; 31 May 2002. Proceedings, Volume III, Paris, The European Languages Resources Association (ELRA). 792-799.</description>
+<description lang="French">Ce lexique est divisé en cinq sous-ensembles :L0072-01 Lexique completL0072-02 Niveau phonétiqueL0072-03 Niveau morphologiqueL0072-04 Niveau syntaxiqueL0072-05 Niveau sémantiquePAROLE-SIMPLE-CLIPS est un lexique générique à quatre niveaux qui a été élaboré au cours de trois projets différents. Le noyau des lexiques morphologique et syntaxique a été realisé dans le cadre du projet LE-PAROLE. Le modèle linguistique et le noyau du lexique sémantique ont été élaborés dans le projet LE-SIMPLE, tandis que le niveau phonologique de description et l’extension de la couverture lexicale ont été réalisés dans le contexte du projet italien Corpora e Lessici dell'Italiano Parlato e Scritto (CLIPS). Le lexique italien PAROLE-SIMPLE-CLIPS de Pise comprend un total de 387 267 unités phonétiques, 53 044 unités morphologiques (53 044 lemmes), 37 406 unités syntaxiques (28 111 lemmes) et 28 346 unités sémantiques (19 216 lemmes). Il a été codé au niveau sémantique, en respectant entièrement les standards internationaux fixés dans le modèle PAROLE-SIMPLE et basés sur EAGLES. Le codage syntaxique et sémantique ont été réalisés conjointement avec Thamus (Consortium pour l’ingénierie documentaire multilingue), qui est l’auteur de 25 000 entrées (à paraître).Ainsi, PAROLE-SIMPLE-CLIPS offre l’avantage d’être compatible avec les onze autres lexiques PAROLE-SIMPLE qui ont été construits pour les langues européennes et qui partagent un modèle théorique commun, un langage de représentation et une méthodologie de construction.Une entrée de type PAROLE-SIMPLE-CLIPS regroupe toutes les propriétés phonologiques, morphologiques et inhérentes à la syntaxe et à la sémantique d’un mot-tête (« headword »). Son modèle de sous-catégorisation est décrit en termes d’optionalité, de fonction syntaxique, de réalisation syntagmatique, ainsi qu’en termes de propriétés morpho-syntaxiques, syntaxiques et lexicales de chaque catégorie fonctionnelle (« slot-filler »). Au niveau sémantique, l’approche théorique adoptée par le modèle SIMPLE est essentiellement basée sur une version revisitée de quelques aspects fondamentaux du Lexique Génératif. Une unité sémantique SIMPLE-CLIPS est richement doté d’une grande variété d’informations fines et structurées, des plus importantes pour les applications en TAL. En tête de ces informations, la typologie ontologique : le lexique est en fait structuré en termes de systèmes de types multidimensionnels basé sur des relations conceptuelles hiérarchiques et non hiérarchiques, prenant en compte le principe d’héritage orthogonal. D’autres types d’information intéressants dans une entrée de mot sont son domaine d’usage, le type d’événement indiqué, la synonymie et les relations de dérivation morphologique, affectation à une classe de polysémie régulière, ainsi qu’à des traits sémantiques distinctifs. Une information particulièrement intéressante est l’information codée dans la Structure de Qualia étendue (un ensemble de 60 relations sémantiques qui permettente de modéliser à la fois les différentes dimensions de signification du sens d’un mot et ses relations avec les autres unités lexicales) et la Représentation prédicative qui décrit le scénario sémantique dans lequel est impliqué le sens du mot considéré et qui caractérise les participants en termes de rôles thématiques et de contraintes sémantiques.Dans une description de mot, l’information lexicale est étroitement liée entre les quatre nivaux de description. Les informations syntaxique et sémantique, en particulier, sont reliées entre elles grâce à la projection de la structure de l’argument-prédicat sur la ou ses réalisations syntaxiques.Références :Ruimy N., Corazzari O., Gola E., Spanu A., Calzolari N., Zampolli A. 2003. The PAROLE model and the Italian Syntactic lexicon. In A. Zampolli, N. Calzolari, L. Cignoni, (eds.), Computational Linguistics in Pisa - Linguistica Computazionale a Pisa. Linguistica Computazionale, Special Issue, XVIII-XIX, (2003). Pisa-Roma, IEPI. Tomo II, 793-820.Lenci A., Busa F., Ruimy N., Gola E., Monachini M., Calzolari N., Zampolli A. et al., 2000. SIMPLE Linguistic Specifications, SIMPLE LE4-8346 EC Project, Deliverable D2.1 &amp; D2.2, WP02, Final version, March 2000, ILC et Université de Pisa, 404 pp. (http://www.ub.es/gilcub/SIMPLE/simple.html#Specifications).Ruimy N., Monachini M., Gola E., Calzolari N., Del Fiorentino M.C., Ulivieri M., Rossi S. 2003. A computational semantic lexicon of Italian: SIMPLE. In A. Zampolli, N. Calzolari, L. Cignoni, (eds.), Computational Linguistics in Pisa - Linguistica Computazionale a Pisa. Linguistica Computazionale, Special Issue, XVIII-XIX, (2003). Pisa-Roma, IEPI. Tomo II, 821-864.Ruimy N., Monachini M., Distante R., Guazzini E., Molino S., Ulivieri M., Calzolari N., Zampolli A. 2002. CLIPS, A Multi-level Italian Computational Lexicon: a Glimpse to Data. LREC 2002: Troisième LREC, Las Palmas de Gran Canaria, Espagne 29, 30 &amp; 31 mai 2002. Proceedings, Volume III, Paris, The European Languages Resources Association (ELRA). 792-799.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=538</url>
-<identifier>ELRA-S0068</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=881</url>
+<identifier>ELRA-L0072_01</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,52 +29,56 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-08-28</lastDateUpdated>
+<revision>Update frequencly: monthlyLast update: May 2005</revision>
+<lastDateUpdated>2009-01-14</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 20000.00€</price>
-<price>Academic org. ELRA Non Member: 14000.00€</price>
-<price>Commercial org. ELRA Member: 14000.00€</price>
-<price>Academic org. ELRA Member: 11000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1999-03-05</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 15600.00€</price>
+<price>Academic org. ELRA Non Member: 2000.00€</price>
+<price>Commercial org. ELRA Member: 12000.00€</price>
+<price>Academic org. ELRA Member: 1500.00€</price>
+<availabilityStartDate>2006-09-18</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 20000.00€</price>
-<price>Academic org. ELRA Non Member: 20000.00€</price>
-<price>Commercial org. ELRA Member: 14000.00€</price>
-<price>Academic org. ELRA Member: 14000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1999-03-05</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 15600.00€</price>
+<price>Academic org. ELRA Non Member: 15600.00€</price>
+<price>Commercial org. ELRA Member: 12000.00€</price>
+<price>Academic org. ELRA Member: 12000.00€</price>
+<availabilityStartDate>2006-09-18</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceCreationInfo>
 <fundingProject>
-<projectName>SpeechDat(M)</projectName>
+<projectName>PAROLE-SIMPLE-CLIPS</projectName>
 <fundingType>euFunds</fundingType>
 </fundingProject>
+<creationEndDate>2003-01-01</creationEndDate>
 </resourceCreationInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>por</languageId>
-<languageName>Portuguese</languageName>
+<languageId>ita</languageId>
+<languageName>Italian</languageName>
 </languageInfo>
-</corpusAudioInfo>
-</corpusMediaType>
-</corpusInfo>
+<textFormatInfo>
+<mimeType>Plain text</mimeType>
+</textFormatInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

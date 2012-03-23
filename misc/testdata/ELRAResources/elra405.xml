@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">ACCOR - English</resourceName>
-<resourceName lang="French">ACCOR - anglais</resourceName>
-<description lang="English">ACCOR is a unique acoustic and articulatory database recorded as part of the ESPRIT- ACCOR project investigating cross-language acoustic-articulatory correlations in coarticulatory processes. The European Languages covered are: Catalan, English, French, German, Irish Gaelic, Italian and Swedish. Recording Conditions: Simultaneous digital recording of the acoustic signal and of additional channels for physiological and aerodynamic data. electropalatograph to measure the timing and location of tongue contacts with the palate, pneumotachograph with Rothenberg mask (for recording volume velocity of air flow from nose and mouth), laryngograph (for recording details of vocal fold vibration). Sampling rates: Speech signal: 20,000 Hz; Laryngograph: 10,000 Hz; Oral air flow: 500 Hz; Nasal air flow: 500 Hz; EPG data: 200 Hz.Corpora: a common corpus was used for all languages (with a few exceptions when sequences were not phonotactically permissible). It covers nonsense items: (Vowels /i, a, u/ in isolation, VCV sequences, where C= /p, b, t, d, k, s, z, n, l, S, tS/ and the sequences /kl, st/; V = /i, u, a/ ; real words which match the VCV nonsense sequences above as closely as possible; and short sentences constructed in each language to illustrate the main connected speech processes in that language (assimilations, weak forms, etc.).Speakers: Five speakers from each language recorded a total of 10 repetitions of the full corpus. Five of these repetitions have electropalatography, electrolaryngography and audio signal data. The other five repetitions have electropalatography, electrolaryngography, audio signal, and pneumotachography (separate nasal and oral airflow velocity).Currently, only English is available.</description>
-<description lang="French">ACCOR est une base de données unique d'enregistrements acoustiques et articulatoires, enregistrée dans le cadre du projet européen ESPRIT-ACCOR pour la recherche des corrélations acoustico-articulatoires pour différentes langues européennes. Le signal acoustique et des données physiologiques et aérodynamiques ont été enregistrés simultanément (exemples : un éléctropalatographe pour mesurer le temps et la position de la langue par rapport au palais; un pneumotachographe avec un masque de Rothenberg pour mesurer la vélocité de l'air; un laryngographe pour les détails des vibrations des cordes vocales,...).Ce corpus est commun à toutes les langues (sauf quelques exceptions lorsque des séquences ne sont pas phonétiquement permises). Il comporte des voyelles isolées (i, a, u), des séquences VCV (avec C=/p, b, t, d, k, s, z, n, l, S, tS'/ et les séquences /kl, st/ et V=/i, u, a/), des mots courts, des phrases courtes qui reflètent les phénomènes de coarticulation de la langue (ex : assimilation). Cinq locuteurs ont répété 10 fois le corpus entier pour chaque langue.Actuellement, seul l’anglais est disponible.</description>
+<resourceName lang="English">An-Nahar Newspaper Text Corpus</resourceName>
+<resourceName lang="French">Corpus de textes du quotidien An-Nahar</resourceName>
+<description lang="English">The An-Nahar Lebanon Newspaper Text Corpus comprises articles in standard Arabic from 1995 to 2000 (6 years) stored as HTML files on CDRom media. Each year contains 45 000 articles and 24 million words. Each article includes information such as title, newspaper's name, date, country, type, page, etc. For each year, the size in byte is as follows:1995 :	128 MB1996 :	138 MB1997 :	152 MB1998 :	140 MB1999 :	130 MB2000 :	118 MB</description>
+<description lang="French">Le corpus de textes du quotidien libanais An-Nahar est constitué d'articles en arabe standard de 1995 à 2000 (6 ans), stockés sous la forme de fichiers HTML sur CD-ROM. Chaque année contient 45 000 articles et 24 millions de mots. Chaque article contient des informations telles que le titre, le nom du quotidien, la date, le pays, le type, la page, etc.La taille du fichier, pour chaque année, est comme suit :1995 :	128 MB1996 :	138 MB1997 :	152 MB1998 :	140 MB1999 :	130 MB2000 :	118 MB</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=32</url>
-<identifier>ELRA-S0001</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=767</url>
+<identifier>ELRA-W0027</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,51 +29,35 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2006-03-20</lastDateUpdated>
+<lastDateUpdated>2010-07-06</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 75.00€</price>
-<price>Academic org. ELRA Non Member: 75.00€</price>
-<price>Commercial org. ELRA Member: 25.00€</price>
-<price>Academic org. ELRA Member: 25.00€</price>
+<price>Commercial org. ELRA Non Member: 1008.00€</price>
+<price>Academic org. ELRA Non Member: 504.00€</price>
+<price>Commercial org. ELRA Member: 672.00€</price>
+<price>Academic org. ELRA Member: 336.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-01-23</availabilityStartDate>
-</licenceInfo>
-<licenceInfo>
-<licence>ELRA_VAR</licence>
-<restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 75.00€</price>
-<price>Academic org. ELRA Non Member: 75.00€</price>
-<price>Commercial org. ELRA Member: 25.00€</price>
-<price>Academic org. ELRA Member: 25.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-01-23</availabilityStartDate>
+<availabilityStartDate>2001-07-25</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>ESPRIT- ACCOR</projectName>
-<fundingType>euFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
 <corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<corpusTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
+<languageId>ara</languageId>
+<languageName>Arabic</languageName>
 </languageInfo>
-</corpusAudioInfo>
+</corpusTextInfo>
 </corpusMediaType>
 </corpusInfo>
 </resourceComponentType>

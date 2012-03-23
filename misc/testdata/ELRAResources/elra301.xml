@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Italian SpeechDat(II) MDB-250</resourceName>
-<resourceName lang="French">Base de données SpeechDat(II) MDB-250 de l'italien</resourceName>
-<description lang="English">The Italian SpeechDat(II) MDB-250 comprises 375 Italian speakers recorded over the Italian mobile telephone network. The MDB-250 database is partitioned into 6 CDs in ISO 9660 format. The speech databases made within the SpeechDat(II) project were validated by SPEX, the Netherlands, to assess their compliance with the SpeechDat format and content specifications.Speech samples are stored as sequences of 8-bit 8 kHz A-law. Each prompted utterance is stored in a separate file. Each signal file is accompanied by an ASCII SAM label file which contains the relevant descriptive information.Each speaker uttered the following items:? 2 isolated digits? 1 sequence of 10 isolated digits? 4 connected digits: 1 prompt sheet number (5+ digits), 1 telephone number (9-11 digits), 1 credit card number (14-16 digits), 1 PIN code (6 digits) ? 3 dates: 1 spontaneous date (e.g. birthday), 1 prompted date (word style), 1 relative and general date expression.? 1 word spotting phrase using an application word (embedded).? 6 application words? 3 spelled words: 1 spontaneous name (own forename), 1 city name, 1 real / artificial word for coverage.? 1 Lira currency money amount.? 1 natural number.? 7 directory assistance names: 1 spontaneous name (own forename), 1 city of birth / growing up (spontaneous), 2 most frequent cities (set of 25), 2 most frequent company / agency (set of 25), 1 ?forename surname? (set of 150 ?full? names)? 2 questions including ?fuzzy? yes / no: 1 predominantly ?Yes? question, 1 predominantly ?No? question.? 9 phonetically rich sentences. ? 2 time phrases: 1 time of day (spontaneous), 1 time phrase (word style).? 4 phonetically rich words.5 more items were added to the Italian corpus (4 spontaneous, 1 read).The following age distribution has been obtained: 3 speaker are below 16 years old, 147 speakers are between 16 and 30, 149 speakers are between 31 and 45, 56 speakers are between 46 and 60, 48 speakers are over 60.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
-<description lang="French">La base de données SpeechDat(II) MDB-250 de l'italien contient les enregistrments de plus de 375 locuteurs italiens, enregistrés à travers le réseau téléphonique mobile italien. Elle est répartie sur 6 CD-ROM, dans le format de la norme ISO 9660. Les bases de données SpeechDat(II) ont été réalisées selon les spécifications du projet SpeechDat(II) et validées par SPEX, Pays-Bas.Les fichiers de parole sont stockés en séquences d'échantillons de 8 bits, 8 kHz, loi-A. Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM.Chaque locuteur a prononcé les éléments suivants :    * 2 chiffres isolés ;    * 1 séquence de 10 chiffres isolés ;    * 4 séries de chiffres connectés : 1 numéro permettant d'identifier la feuille de prompt (+5 chiffres), 1 numéro de téléphone (9-11 chiffres), 1 numéro de carte de crédit (14-16 chiffres), 1 code confidentiel (6 chiffres) ;    * 3 dates : 1 date spontanée (date de naissance), 1 date lue, 1 date relative et générale ;    * 1 expression utilisant un mot de commande ;    * 6 mots d'application ;    * 3 mots épelés : 1 spontané (prénom), 1 nom de ville provenant d'un annuaire de renseignements téléphoniques, 1 mot réel / artificiel pour couverture ;    * 1 montant en devise italienne ;    * 1 nombre naturel ;    * 7 noms extraits d'un annuaire de renseignements téléphoniques : 1 spontané (prénom), 1 nom de ville spontané (ville de naissance / d'enfance du locuteur), 1 nom de ville parmi les plus courantes (sur 25 noms), 1 nom de société (sur 25), 1 ‘prénom nom' (sur 150) :    * 2 questions oui / non : 1 question à prédominance 'oui', 1 question à prédominance 'non' ;    * 9 phrases phonétiquement riches    * 2 phrases comportant une notion de temps : 1 jour (spontané), 1 phrase comportant une notion de temps ;    * 4 mots phonétiquement riches.5 éléments supplémentaires ont été ajoutés à ce corpus : 4 spontanés, 1 lu.Les classes d'âge sont réparties comme suit : 3 locuteurs de moins de 16 ans, 147 locuteurs entre 16 et 30 ans, 149 locuteurs entre 31 et 45 ans, 56 locuteurs entre 46 et 60 ans, 48 locuteurs de plus de 60 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
-<resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=630</url>
-<identifier>ELRA-S0116</identifier>
+<resourceName lang="English">French Speechdat(II) FDB-5000 database</resourceName>
+<resourceName lang="French">Base de données Speechdat(II) FDB-5000 du français</resourceName>
+<description lang="English">The French SpeechDat(II) FDB-5000 database contains the recordings of 5,040 French speakers (2,693 females, 2,347 males) recorded over the French fixed telephone network. 40 speakers have been added to the original 5,000 speakers to fit the requirements of the database. This database is partitioned into 18 CDs, which comprise 300 speakers sessions each (except for CD 4, with 100 speakers sessions). Speech samples are stored as sequences of 8-bit, 8kHz A-law and are not compressed. They contain a file header of 16 bytes. Each prompt utterance is stored within a separate file (file extension FRA) and has an accompanying ASCII SAM label file (file extension FRO).This speech database was validated by SPEX (the Netherlands) to assess its compliance with the SpeechDat format and content specifications.Each speaker uttered the following items:5 application words 1 sequence of 10 isolated digits 4 connected digits (1 sheet number -5+ digits, 1 telephone number –9/11 digits, 1 credit card number –14/16 digits, 1 PIN code -6 digits) 3 dates (1 spontaneous date e.g. birthday, 1 word style prompted date, 1 relative and general date expression) 2 word spotting phrases using an embedded application word 1 isolated digit 3 spelled words (1 spontaneous e.g. own forename, 1 spelling of directory assistance city name, 1 real/artificial name for coverage) 1 currency money amount 1 natural number 5 directory assistance names and 1 spelled name (1 spontaneous e.g. own forename, 1 city of birth/hometown, 1 most frequent city out of a set of 500, 1 most frequent company/agency out of a set of 500, 1 "forename surname", 1 spelled-out city of birth) 2 yes/no questions (1 predominantly "yes" question, 1 predominantly "no" question) 9 phonetically rich sentences 2 time phrases (1 spontaneous time of day, 1 word style time phrase) 8 phonetically rich words. The following age distribution has been obtained: 215 speakers are under 16, 2531 speakers are between 16 and 30, 1208 speakers are between 31 and 45, 910 speakers are between 46 and 60, and 176 speakers are over 60.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
+<description lang="French">La base de données SpeechDat(II) FDB-5000 du français contient 5040 locuteurs français (2347 hommes, 2693 femmes) enregistrés à travers le réseau téléphonique fixe français. Cette base est répartie sur 18 CD-ROM, chacun comprenant 300 sessions (sauf pour le CD-ROM 4, qui comprend 100 sessions). Les bases de données SpeechDat(II) ont été réalisées selon les spécifications du projet SpeechDat(II) et validées par SPEX, Pays-Bas.Les fichiers de parole sont stockés en séquences d'échantillons de 8 bit, 8 kHz, loi-A avec un en-tête de fichier de 16 bytes et ne sont pas compressés, selon les spécifications de SpeechDat. Chaque énoncé est stocké dans un fichier séparé (extension de fichier FRA) et est accompagné d'un fichier d'étiquetage ASCII SAM (extension de fichier FRO).Contenu du corpus : 5 mots de commande ; 1 séquence de 10 chiffres isolés ; 4 chiffres connectés : 1 numéro permettant d'identifier la feuille de prompt (5+ chiffres), 1 numéro de téléphone (9-11 chiffres), 1 numéro de carte de crédit (14-16 chiffres), 1 code confidentiel (6 chiffres) ; 3 dates : 1 date spontanée (ex. anniversaire), 1 date lue, 1 date générale ; 2 expressions utilisant un mot de commande ; 1 chiffre isolé ;· 3 mots épelés (séquences de lettres) : 1 spontané, ex. prénom du locuteur, 1 nom de ville provenant d'un annuaire de renseignements téléphoniques, 1 mot réel/artificiel pour couverture ; 1 montant en devises ; 1 nombre entier naturel ; 5 noms provenant d'un annuaire de renseignements téléphoniques + 1 nom épelé : 1 spontané, ex. prénom du locuteur, 1 ville de naissance/d'origine du locuteur (spontané), 1 nom de ville parmi les plus fréquentes (sur 500), 1 nom de compagnie parmi les plus fréquentes (sur 500), 1 répétition de "prénom nom", 1 ville de naissance épelée ; 2 questions incluant des oui/non "vagues" : 1 question à prédominance "oui", 1 question à prédominance "non" ; 9 phrases phonétiquement riches ; 2 phrases comportant une notion de temps : 1 jour (spontané), 1 phrase comportant une notion de temps ; 8 mots phonétiquement riches. Les classes d'âge sont réparties comme suit : 215 locuteurs de moins de 16 ans, 2531 locuteurs entre 16 et 30 ans, 1208 locuteurs entre 31 et 45 ans, 910 locuteurs entre 46 et 60 ans et 176 locuteurs de plus de 60 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
+<resourceShortName>FIXED1FR</resourceShortName>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=641</url>
+<identifier>ELRA-S0076</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -36,27 +36,37 @@
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 26250.00€</price>
-<price>Academic org. ELRA Non Member: 18750.00€</price>
-<price>Commercial org. ELRA Member: 21000.00€</price>
-<price>Academic org. ELRA Member: 15000.00€</price>
+<price>Commercial org. ELRA Non Member: 70000.00€</price>
+<price>Academic org. ELRA Non Member: 60000.00€</price>
+<price>Commercial org. ELRA Member: 50000.00€</price>
+<price>Academic org. ELRA Member: 35000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2001-11-05</availabilityStartDate>
+<availabilityStartDate>2000-01-20</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 26250.00€</price>
-<price>Academic org. ELRA Non Member: 26250.00€</price>
-<price>Commercial org. ELRA Member: 21000.00€</price>
-<price>Academic org. ELRA Member: 21000.00€</price>
+<price>Commercial org. ELRA Non Member: 70000.00€</price>
+<price>Academic org. ELRA Non Member: 70000.00€</price>
+<price>Commercial org. ELRA Member: 50000.00€</price>
+<price>Academic org. ELRA Member: 50000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2001-11-05</availabilityStartDate>
+<availabilityStartDate>2000-01-20</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<validationInfo>
+<validated>True</validated>
+<validationModeDetails>SpeechDat This speech database was validated by SPEX (the Netherlands) to assess its compliance with the SpeechDat format and content specifications.</validationModeDetails>
+</validationInfo>
+<usageInfo>
+<actualUseInfo>
+<actualUse>nlpApplications</actualUse>
+<useNLPSpecific/>
+</actualUseInfo>
+</usageInfo>
 <resourceCreationInfo>
 <fundingProject>
-<projectName>SpeechDat(II)</projectName>
+<projectName>SpeechDat(II) LE2-4001</projectName>
 <fundingType>euFunds</fundingType>
 </fundingProject>
 </resourceCreationInfo>
@@ -70,9 +80,12 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>ita</languageId>
-<languageName>Italian</languageName>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
 </languageInfo>
+<creationInfo>
+<creationMode>manual</creationMode>
+</creationInfo>
 </corpusAudioInfo>
 </corpusMediaType>
 </corpusInfo>

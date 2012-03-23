@@ -6,7 +6,7 @@
 <description lang="English">This corpus (in recording studio) comprises 8,000 Chinese sentences uttered by 200 speakers of different dialects, ages and various educational levels, recorded over 4 channels. Speech samples are stored as a sequence of 16-bit 44.1kHz WAV for 12 hours of speech per channel. The total capacity of the data is 14.22 Gb.Each speaker read 40 items. Text files are stored in Unicode format. All data have been proofread manually.The corpus aims to be applied to the testing and telephone natural speech recognition system.</description>
 <description lang="French">Ce corpus comprend 8 000 phrases en chinois prononcées par 200 locuteurs de dialectes, d’âges et de niveaux d’éducation différents, enregistrés via 4 canaux. Les échantillons de parole sont stockés sous la forme de séquences 16-bit 44,1kHz WAV pour un total de 12 heures de parole par canal. La taille totale des données est de 14,22 Go.Chaque locuteur a lu 40 éléments. Les fichiers textes sont stockés au format Unicode. Toutes les données ont été vérifiées manuellement.Cette base de données a été conçue pour l’évaluation et le développement de systèmes de reconnaissance de la parole naturelle par téléphone.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=948</url>
 <identifier>ELRA-S0228_46</identifier>
 </identificationInfo>

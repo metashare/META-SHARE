@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">GlobalPhone Swedish</resourceName>
-<resourceName lang="French">GlobalPhone suédois</resourceName>
-<description lang="English">The GlobalPhone corpus developed in collaboration with the Karlsruhe Institute of Technology (KIT) was designed to provide read speech data for the development and evaluation of large continuous speech recognition systems in the most widespread languages of the world, and to provide a uniform, multilingual speech and text database for language independent and language adaptive speech recognition as well as for language identification tasks. The entire GlobalPhone corpus enables the acquisition of acoustic-phonetic knowledge of the following 19 spoken languages: Arabic, Bulgarian, Chinese-Mandarin, Chinese-Shanghai, Croatian, Czech, French, German, Japanese, Korean, Polish, Portuguese (Brazilian), Russian, Spanish (Latin America), Swedish, Tamil, Thai, Turkish, Vietnamese. In each language about 100 sentences were read from each of the 100 speakers. The read texts were selected from national newspapers available via Internet to provide a large vocabulary (up to 65,000 words). The read articles cover national and international political news as well as economic news. The speech is available in 16bit, 16kHz mono quality, recorded with a close-speaking microphone (Sennheiser 440-6) and same recording equipment for all languages. The transcriptions are internally validated and supplemented by special markers for spontaneous effects like stuttering, false starts, and non-verbal effects like laughing and hesitations. Speaker information like age, gender, occupation, etc. as well as information about the recording setup complement the database. The entire GlobalPhone corpus contains over 450 hours of speech spoken by more than 1900 native adult speakers.Data is shortened by means of the shorten program written by Tony Robinson, available from Softsound's web page:  http://www.softsound.com/  linux distributions, or simulated versions such as cygwin. Alternatively, the data could be delivered unshorten.The Swedish corpus was produced using the Goeteborgs-Posten newspaper. It contains recordings of 98 speakers (50 males, 48 females) recorded in Stockholm and Vaernamo, Sweden. The following age distribution has been obtained: 9 speakers are below 19, 50 speakers are between 20 and 29, 12 speakers are between 30 and 39, 11 speakers are between 40 and 49, and 16 speakers are over 50.</description>
-<description lang="French">Le corpus GlobalPhone, développé avec la collaboration du Karlsruhe Institute of Technology (KIT),  a été conçu afin de fournir des données de parole lue pour le développement et l’évaluation de systèmes de reconnaissance de la parole continue à large vocabulaire dans les langues les plus répandues dans le monde, l’objectif étant de fournir une base de données audio et textuelles uniforme et multilingue pour la reconnaissance de la parole indépendante de la langue et adaptable à la langue, ainsi que pour des tâches d’identification de la langue. Le corpus GlobalPhone complet permet l’acquisition d’une connaissance acoustico-phonétique pour les 19 langues parlées suivantes: allemand, arabe (arabe standard moderne), bulgare, chinois-mandarin, chinois de Shanghai, coréen, croate, espagnol (d’Amérique latine), français, japonais, polonais, portugais (brésilien), russe, suédois, tamoul, thaï, tchèque, turc et vietnamien.Dans chaque langue, environ 100 phrases ont été lues par chacun des 100 locuteurs. Les textes lus sont extraits d’articles de journaux nationaux disponibles sur internet afin de fournir un large vocabulaire (jusqu’à 65000 mots). Les articles lus couvrent des actualités politiques nationales et internationales, ainsi que des nouvelles économiques. Les données de parole ont été enregistrées en 16 bit, 16 kHz (qualité mono) avec un micro-casque (Sennheiser 440-6) et le même équipement d’enregistrement pour l’ensemble des langues. Les transcriptions ont été validées en interne et annotées au moyen de balises spéciales pour marquer les effets spontanés, tels que le bégaiement, les faux démarrages, et les effets non verbaux comme le rire et les hésitations. La base contient également des informations sur les locuteurs, telles que l’âge, le genre, la profession, etc. ainsi que des informations sur la mise en place de l’enregistrement. Le corpus GlobalPhone dans son entier comprend plus de 450 heures de parole enregistrées par plus de 1900 locuteurs adultes natifs.Les données sont compressées au moyen du programme Shorten écrit par Tony Robinson, disponible depuis la page web de Softsound: http://www.softsound.com/ (distributions linux ou versions simulées telles que cygwin). Au besoin, les données peuvent être fournies non compressées.Le corpus suédois a été produit à partir du journal Goeteborgs-Posten. Il comprend les enregistrements de 98 locuteurs (50 hommes, 48 femmes) enregistrés à Stockholm et Vaernamo, Suède. Les classes d'âge sont réparties comme suit : 9 locuteurs de moins de 19 ans, 50 locuteurs entre 20 et 29 ans, 12 locuteurs entre 30 et 39 ans, 11 locuteurs entre 40 et 49 ans, et 16 locuteurs de plus de 50 ans.</description>
+<resourceName lang="English">IBNC - An Italian Broadcast News Corpus</resourceName>
+<resourceName lang="French">Un corpus d'actualités radio-diffusées italiennes (IBNC)</resourceName>
+<description lang="English">The Italian Broadcast News Corpus (IBNC) was produced by the ITC-IRST (Italy) through a funding from ELRA in the framework of the European Commission project LRsP&amp;P (Language Resources Production &amp; Packaging - LE4-8335). RAI, the major Italian broadcast company, supplied studio quality recordings of radio news programs sampled from its internal digital archive. The collection consists of 150 programs, for a total time of about 30 hours, issued in 36 different days, between 1992 and 1999. Recordings were supplied by RAI on Digital Audio Tapes (DAT), with 44kHz sampling rate and 16 bit resolution. Each DAT was manually processed to transfer each single program issue into a single file. During this operation, the signal was down-sampled to 16kHz with a resolution of 16 bits, and encoded into the NIST Sphere PCM format. Speech recordings present variations of topic, speaker, acoustic channel, speaking mode, etc. The corpus has been segmented, labelled and transcribed manually using the tool developed by DGA (Délégation Générale pour l'Armement, France) and LDC (Linguistic Data Consortium, USA), called "Transcriber", with conventions similar to those adopted by LDC for the DARPA HUB-4 corpora.The transcription text consists of mixed-case ASCII characters of the ISO-8859-1 extended set. A validation work was carried out by an external validator. It consisted of checking audio files, documentation and transcriptions.</description>
+<description lang="French">Le corpus d'actualités radio-diffusées italiennes (IBNC) a été réalisé par l'ITC-IRST (Italie) dans le cadre du projet européen LRsP&amp;P (Language Resources Production &amp; Packaging - Production et mise au format des ressources linguistiques - LE4-8335) soutenu par la Commission Européenne. La RAI, principale société de télé-radio-diffusion en Italie, a fourni des enregistrements en qualité studio de programmes d'actualités radio-diffusées, extraits d'archives numériques internes.Cette collection est composée de 150 programmes, d'une durée totale d'environ 30 heures, extraites de 36 jours de diffusion différents entre 1992 et 1999. Les enregistrements ont été fournis par la RAI sous la forme de DAT (Digital Audio Tapes - cassettes audio numériques), échantillonnées à 44 kHz, avec une résolution de 16 bits. Chaque DAT a été traitée manuellement pour transférer chaque édition de programme vers un fichier unique. Au cours de cette opération, le signal a été sous-échantillonné à 16kHz, avec une résolution de 16 bits, et codé au format PCM Sphere NIST.Les enregistrements de parole varient en termes de thèmes, de locuteurs, de canaux acoustiques, de modes de locution, etc. Le corpus a été segmenté, étiqueté et transcrit manuellement au moyen de l'outil "Transcriber" développé par la DGA (Délégation Générale pour l'Armement, France) et le LDC (Linguistic Data Consortium, Etats-Unis), en suivant des conventions similaires à celles adoptées par le LDC pour les corpus HUB-4 de DARPA. Le texte de transcription utilise le jeu de caractères ASCII étendu, norme ISO-8859-1. Un travail de validation, effectué par un validateur externe, a permis de vérifier la qualité des fichiers audio, de la documentation et des transcriptions.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=828</url>
-<identifier>ELRA-S0204</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=593</url>
+<identifier>ELRA-S0093</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,34 +29,24 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2011-09-21</lastDateUpdated>
+<lastDateUpdated>2007-02-22</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 3600.00€</price>
-<price>Academic org. ELRA Non Member: 700.00€</price>
-<price>Commercial org. ELRA Member: 3000.00€</price>
-<price>Academic org. ELRA Member: 600.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2006-01-30</availabilityStartDate>
-</licenceInfo>
-<licenceInfo>
-<licence>ELRA_VAR</licence>
-<restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 3600.00€</price>
-<price>Academic org. ELRA Non Member: 3600.00€</price>
-<price>Commercial org. ELRA Member: 3000.00€</price>
-<price>Academic org. ELRA Member: 3000.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2006-01-30</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 25000.00€</price>
+<price>Academic org. ELRA Non Member: 8000.00€</price>
+<price>Commercial org. ELRA Member: 15000.00€</price>
+<price>Academic org. ELRA Member: 5000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2000-12-15</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <validationInfo>
 <validated>True</validated>
-<validationModeDetails> Most of the GlobalPhone data have been validated in-house</validationModeDetails>
+<validationModeDetails> A validation work was carried out by an external validator. It consisted of checking audio files, documentation and transcriptions.</validationModeDetails>
 </validationInfo>
 <usageInfo>
 <actualUseInfo>
@@ -64,6 +54,12 @@
 <useNLPSpecific>speechRecognition</useNLPSpecific>
 </actualUseInfo>
 </usageInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>LRsP&amp;P (Language Resources Production &amp; Packaging - LE4-8335)</projectName>
+<fundingType>euFunds</fundingType>
+</fundingProject>
+</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
@@ -74,15 +70,21 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>swe</languageId>
-<languageName>Swedish</languageName>
+<languageId>ita</languageId>
+<languageName>Italian</languageName>
 </languageInfo>
 <audioSizeInfo>
 <sizeInfo>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
+<size>30</size>
+<sizeUnit>hours</sizeUnit>
 </sizeInfo>
 </audioSizeInfo>
+<timeCoverageInfo>
+<timeCoverage>Between 1992 and 1999</timeCoverage>
+</timeCoverageInfo>
+<creationInfo>
+<creationMode>manual</creationMode>
+</creationInfo>
 </corpusAudioInfo>
 </corpusMediaType>
 </corpusInfo>

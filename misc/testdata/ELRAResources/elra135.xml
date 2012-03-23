@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">TC-STAR Transcriptions of Spanish Parliamentary Speech</resourceName>
-<resourceName lang="French">Transcriptions des discours du parlement espagnol TC-STAR</resourceName>
-<description lang="English">TC-STAR is a European integrated project focusing on all core technologies for Speech-to-Speech Translation (SST): Automatic Speech Recognition (ASR), Spoken Language Translation (SLT), and Text to Speech Synthesis (TTS).This corpus consists of the transcriptions of 100 hours of Spanish Parliamentary speech. These comprise the following: a) 38:24 hours of speech recorded from the Spanish Parliament during plenary sessions and commissions between September 2004 and December 2004, and b) 61:53 hours of speech recorded from the European Parliament speaking in the parliamentary plenary sessions as well as recordings of interpreters, between May 2004 and January 2005. The corresponding recordings are made available separately in this catalogue as TC-STAR Spanish Training Corpora for ASR: Recordings of EPPS Speech (ref. ELRA-S0252).</description>
-<description lang="French">TC-STAR est un projet intégré européen dédié à toutes les technologies de base pour la traduction parole-parole (ou SST pour Speech-to-Speech Translation) : reconnaissance automatique de la parole (ou ASR pour « Automatic Speech Recognition »), traduction de la langue parlée (ou SLT pour « Spoken Language Translation ») et technologies texte-parole (ou TTS pour « Text-to-Speech »).Ce corpus comprend les transcriptions de 100 heures de parole du Parlement espagnol. Celles-ci sont composées comme suit: a) 38:24 heures de parole enregistrées par le Parlement espagnol pendant les sessions plénières et les commissions entre septembre 2004 et décembre 2004, et b) 61:53 heures de parole enregistrées par le Parlement espagnol pendant les sessions plénières parlementaires ainsi que les enregistrements des interprètes, entre mai 2004 et janvier 2005. Les enregistrements correspondants sont disponibles de façon distincte dans ce catalogue dans le Corpus d’entraînement TC-STAR espagnol pour l’ASR: Enregistrements EPPS (réf. ELRA-S0252).</description>
+<resourceName lang="English">The CINTIL Corpus – International Corpus of Portuguese</resourceName>
+<resourceName lang="French">Corpus CINTIL – Corpus international du portugais</resourceName>
+<description lang="English">CINTIL-Corpus Internacional do Português is a linguistically interpreted written and spoken corpus of European Portuguese. It is composed of one million annotated tokens, each one of which verified by human expert annotators. The annotation comprises information on part-of-speech, open class lemma and inflection, multi-word expressions pertaining to the class of adverbs and to the closed POS classes, and multi-word proper names (for named entity recognition). The corpus is developed over raw textual materials of several types, of which 30% are spoken materials. This spoken subcorpus includes materials from several registers (ranging from formal to informal) and several communicative situations (e.g. phone calls, media broadcasts, conversations, monologues, formal exposition, etc.). The CINTIL corpus comprises the transcriptions of spoken texts but does not include the sound files with the recorded interviews. The remaining subcorpus is composed of written texts from several genres: newspaper, books, magazines, journals and miscellaneous (proceedings, dissertations, pamphlets, etc.).  A detailed overview of the corpus composition is presented below:• Written = 689,124 tokens:    o	News: 58.7% - 404,690 tokens    o	Fiction: 29% - 200,194 tokens    o	Other: 12.2% - 84,240 tokens• Spoken = 502,622 tokens:    o	Informal/Private: 43.2% - 217,604 tokens    o	Informal/Public: 9.5% - 48,221 tokens    o	Informal/Phone: 0.4% - 2,287 tokens    o	Formal/Natural: 19.3% - 97,499 tokens    o	Formal/Media: 17.6% - 88,727 tokens    o	Formal/Phone: 9.6% - 48,284 tokens• Total = 1,191,746 tokensLinguistic information:The corpus associates to raw text linguistic information of different nature and from different levels of sophistication. This information is encoded under the usual format of tags, checked for their accuracy by trained linguists, covering four levels of information:•	Segmentation: The boundaries of each sentence are tagged and every token is circumscribed by blanks. Contractions are expanded, clitics in enclisis and mesoclisis are detached into autonomous tokens, and punctuation is associated with explicit information concerning the blanks surrounding them in the raw version. Multi-word expressions from some POS classes (e.g. Conjunctions, Prepositions, etc) are identified as forming a lexical unit.•	POS: By means of POS tags, each token is associated with the indication of its morpho-syntactic category.•	Inflection: Information concerning inflectional morphology: every inflected token is associated with the corresponding lemma, and with explicit information encoding their values for Mood, Tense, Person and Number, if they are from verbal classes, or Number and Gender if they are nominals. Nominals include also information about their degree, namely superlative for Adjectives, and diminutive for both Adjectives and Nouns.•	Multiword Lexical Units (MWU) for Named Entity Recognition (NER): Delimitation and classification of multi-word expressions for Named Entities following the usual IOB tagging schema for NER, and the typical classes of Number, Date, Person, Location, etc.The annotation manual is provided together with the corpus.The corpus can be browsed online: http://cintil.ul.pt/</description>
+<description lang="French">CINTIL-Corpus Internacional do Português est un corpus du portugais européen écrit et parlé, fourni avec une interprétation linguistique. Il est composé d’un million d’entrées annotées, chacune d’entre elles ayant été vérifiée par des annotateurs experts humains. L’annotation consiste en des informations sur la partie du discours, les lemmes de classe ouverte et les flexions, ainsi que les expressions composées appartenant à la classe des adverbes et aux classes fermées de la partie du discours, et enfin les noms propres composés (pour la reconnaissance d’entités nommées). Le corpus a été développé sur la base de matériel textuel brut de plusieurs types, dont 30% de matériel parlé. Le sous-corpus parlé comprend du matériel de divers registres (tant formel qu’informel) et de diverses situations de communication (par exemple, des appels téléphoniques, des émissions télé-radio-diffusées, des conversations, des monologues, des exposés formels, etc.). Le corpus CINTIL comprend les transcriptions des textes parlés mais n’inclut pas les fichiers sons des interviews enregistrés. Le sous-corpus restant est composé de textes écrits de différents genres: journaux, livres, magazines, périodiques et divers (actes, thèses, essais, etc.). Une vue détaillée de la composition du corpus est présentée ci-dessous:• Ecrit= 689 124 tokens:    o	Actualités: 58,7% - 404 690 tokens    o	Fictions: 29% - 200 194 tokens    o	Autres: 12,2% - 84 240 tokens• Parlé = 502,622 tokens:    o	Informel/Privé: 43,2% - 217 604 tokens    o	Informel/Publique: 9,5% - 48 221 tokens    o	Informel/Téléphone: 0,4% - 2 287 tokens    o	Formel/Naturel: 19,3% - 97 499 tokens    o	Formel/Médias: 17,6% - 88 727 tokens    o	Formel/Téléphone: 9,6% - 48 284 tokens• Total = 1 191 746 tokensInformations linguistiques:Le corpus met en relation des informations linguistiques de textes bruts de différente nature et de différents niveaux de complexité. Ces informations sont codées selon un format habituel d’étiquettes, dont l’exactitude a été vérifiée par des linguistes entraînés, recouvrant quatre niveaux d’informations :•	Segmentation: Les limites de chaque phrase sont étiquetées et chaque élément est limité par des espaces. Les contractions sont étendues, les clitiques en enclise et mésoclise sont décomposés en éléments autonomes, et la ponctuation est associée à des informations explicites concernant les espaces les limitant dans la version brute. Les expressions composées venant de certaines classes de la partie du discours (par exemple les conjonctions, les prépositions, etc.) sont identifiées comme formant une unité lexicale.•	Partie du discours: Chaque entrée est associée à une information sur sa catégorie morpho-syntaxique au moyen d’étiquettes correspondant à la partie du discours.•	Flexion: Informations concernant la morphologie flexionnelle: chaque entrée fléchie est associée au lemme correspondant et présente une information explicite des valeurs correspondant au mode, temps, personne et nombre pour les classes verbales, ou au nombre et genre pour les classes nominales. Les classes nominales comprennent également des informations sur le degré, c’est-à-dire les superlatifs pour les adjectifs et les diminutifs à la fois pour les adjectifs et les noms.•	Unités lexicales composées (« Multiword Lexical Units ») pour la reconnaissance d’entités nommées: Délimitation et classification des expressions composées pour les entités nommées en suivant le schéma d’étiquetage habituel IOB pour la reconnaissance d’entités nommées, et les classes classiques de nombre, date, personne, lieux, etc.Le manuel d’annotation est fourni avec le corpus.Une recherche dans le corpus peut être effectuée en ligne: http://cintil.ul.pt/</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1130</url>
-<identifier>ELRA-S0306</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1102</url>
+<identifier>ELRA-W0050</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,63 +29,48 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2010-12-21</lastDateUpdated>
+<lastDateUpdated>2009-06-09</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 4400.00€</price>
-<price>Commercial org. ELRA Member: 6250.00€</price>
-<price>Academic org. ELRA Non Member: 5750.00€</price>
-<price>Commercial org. ELRA Non Member: 8200.00€</price>
-<availabilityStartDate>2010-12-21</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 15000.00€</price>
+<price>Academic org. ELRA Non Member: 250.00€</price>
+<price>Commercial org. ELRA Member: 10000.00€</price>
+<price>Academic org. ELRA Member: 250.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2009-06-09</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 6250.00€</price>
-<price>Commercial org. ELRA Member: 6250.00€</price>
-<price>Academic org. ELRA Non Member: 8200.00€</price>
-<price>Commercial org. ELRA Non Member: 8200.00€</price>
-<availabilityStartDate>2010-12-21</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 15000.00€</price>
+<price>Academic org. ELRA Non Member: 15000.00€</price>
+<price>Commercial org. ELRA Member: 10000.00€</price>
+<price>Academic org. ELRA Member: 10000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2009-06-09</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<usageInfo>
-<actualUseInfo>
-<actualUse>nlpApplications</actualUse>
-<useNLPSpecific>speechRecognition</useNLPSpecific>
-</actualUseInfo>
-</usageInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>TC-STAR</projectName>
-<fundingType>euFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
 <corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<corpusTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>spa</languageId>
-<languageName>Spanish</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Castilian</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
+<languageId>por</languageId>
+<languageName>Portuguese</languageName>
 </languageInfo>
-</corpusAudioInfo>
+<textFormatInfo>
+<mimeType>Plain text</mimeType>
+</textFormatInfo>
+</corpusTextInfo>
 </corpusMediaType>
 </corpusInfo>
 </resourceComponentType>
