@@ -187,8 +187,8 @@ def download(request, object_id):
             { 'form': LicenseSelectionForm([(name, name) for name in licences]),
               'resource': resource })
     else:
-        # TODO resource is not downloadable; inform the user
-        raise Http404
+        return render_to_response('repo2/lr_not_downloadable.html',
+                                  { 'resource': resource })
 
 
 def _provide_download(request, resource, download_urls):
