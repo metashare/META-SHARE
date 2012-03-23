@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">The Lancaster Corpus of Mandarin Chinese (LCMC)</resourceName>
-<resourceName lang="French">Corpus Lancaster du chinois mandarin (LCMC)</resourceName>
-<description lang="English">The Lancaster Corpus of Mandarin Chinese (LCMC) is designed as a Chinese match for the FLOB and FROWN corpora for modern British and American English. The corpus is suitable for use in both monolingual research into modern Mandarin Chinese and cross-linguistic contrast of Chinese and British/American English. The corpus sampled 15 written text categories including news, literary texts, academic prose and official documents etc published in P. R. China in the earlier 1990s for a total of approximately 1 million words. The same sampling frame and period as FLOB/FROWN were used in LCMC. The corpus is marked up for text categories, sample file numbers, paragraphs, sentences and tokens. Linguistic annotations undertaken on the corpus include tokenization and part-of-speech tagging. The whole corpus is annotated at the word level and includes orthographic and morphological annotations. The tagging system used was produced by the Institute of Computing Science Chinese Lexical Analysis System (ICTCLAS), the Chinese Academy of Sciences. The corpus is encoded in Unicode (UTF-8) and marked up in XML. The corpus comes with a User Manual detailing corpus design specifications and part-of-speech tags. The XML structure of the corpus was validated using the parser built in Xaira. Part-of-speech tagging of all aspect markers was manually checked. References: McEnery, A., Xiao, Z. and Mo, L. 2003. ‘Aspect marking in English and Chinese: using the Lancaster Corpus of Mandarin Chinese for contrastive language study’. Literary and Linguistic Computing 18/4: 361-378. Xiao, Z, McEnery, A., Baker, P. and Hardie, A. 2004. ‘Developing Asian language corpora: standards and practice’ in Sornlertlamvanich, V., Tokunaga, T. and Huang, C. (eds.) Proceedings of the Fourth Workshop on Asian Language Resources, pp. 1-8. March 25, Sanya. McEnery, A and Xiao, Z. 2004. ‘The Lancaster Corpus of Mandarin Chinese: A Corpus for Monolingual and Contrastive Language Study’. Paper presented at LREC 2004. May 2004, Lisbon. For more information on the LCMC: http://www.ling.lancs.ac.uk/corplang/lcmc</description>
-<description lang="French">Le corpus Lancaster du chinois mandarin (LCMC) est l’équivalent chinois des corpus FLOB et FROWN conçus pour l’anglais britannique et l’anglais américain. Ce corpus peut être utilisé aussi bien pour la recherche monolingue en chinois mandarin moderne, que pour des études linguistiques comparatives en chinois et anglais britannique/américain.Il présente une quinzaine de types de textes écrits, par exemple des actualités, des textes littéraires, de la prose académique, des documents officiels, etc., publiés en République Populaire de Chine au début des années 1990. Le corpus contient un total d’environ 1 million de mots. Le corpus LCMC couvre la même période et les mêmes éléments informatifs que les corpus FLOB/FROWN. Il est segmenté en types de textes, numéros d’échantillons, paragraphes, phrases et tokens. Les annotations linguistiques contenues au sein du corpus sont la tokenisation et le balisage des parties du discours. Le corpus est annoté au niveau du mot, et inclut des informations orthographiques et morphologiques. Le système de balisage utilisé a été conçu à l’ICTCLAS (Institute of Computing Science Chinese Lexical Analysis System), l’Académie des sciences chinoise. Ce corpus est codé en Unicode (UTF-8), au format XML. Il est accompagné d’un manuel utilisateur qui présente les spécifications et les étiquettes des parties du discours. La structure XML du corpus a été validée grâce au parser Xaira. L’étiquetage des parties du discours a été vérifié manuellement. Références: McEnery, A., Xiao, Z. et Mo, L. 2003. ‘Aspect marking in English and Chinese: using the Lancaster Corpus of Mandarin Chinese for contrastive language study’. Literary and Linguistic Computing 18/4: 361-378. Xiao, Z, McEnery, A., Baker, P. and Hardie, A. 2004. ‘Developing Asian language corpora: standards and practice’ in Sornlertlamvanich, V., Tokunaga, T. et Huang, C. (eds.) Proceedings of the Fourth Workshop on Asian Language Resources, pp. 1-8. 25 Mars, Sanya. McEnery, A et Xiao, Z. 2004. ‘The Lancaster Corpus of Mandarin Chinese: A Corpus for Monolingual and Contrastive Language Study’. Papier presenté à LREC 2004. Mai 2004, Lisbonne. Plus d’informations sur le corpus LCMC sont disponibles ici : http://www.ling.lancs.ac.uk/corplang/lcmc.</description>
+<resourceName lang="English">EUROM1f French</resourceName>
+<resourceName lang="French">EUROM1f français</resourceName>
+<description lang="English">The first really multilingual speech database produced in Europe. Equivalent corpora for each of the European languages: same number of speakers selected in the same way, and recorded in the same conditions with common file formats. Initially eight European countries have made recordings: Italy, United Kingdom, Germany, Netherlands, Denmark, Sweden, Norway, France. Additional recordings have been then completed (thanks to CEE Esprit Project SAM-A), in Greece, Spain and Portugal. The content consists of Numbers, Passages, Sentences and CVC. More than sixty speakers per language.</description>
+<description lang="French">La première base de données européenne de parole. Au départ, huit pays d'Europe ont participé aux enregistrements : l'Italie, le Royaume-Uni, l'Allemagne, les Pays-Bas, le Danemark, la Suède, la Norvège et la France. Cette base a ensuite été complétée par les enregistrements réalisés en Grèce, au Portugal, et en Espagne. Les données proviennent de plus de soixante locuteurs pour chaque langue.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=715</url>
-<identifier>ELRA-W0039</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=44</url>
+<identifier>ELRA-S0014_01</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,48 +29,51 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2004-05-12</lastDateUpdated>
+<lastDateUpdated>2011-09-22</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 7500.00€</price>
-<price>Academic org. ELRA Member: 0.00€</price>
-<price>Academic org. ELRA Non Member: 0.00€</price>
-<price>Commercial org. ELRA Non Member: 12000.00€</price>
+<price>Commercial org. ELRA Non Member: 1600.00€</price>
+<price>Academic org. ELRA Non Member: 1600.00€</price>
+<price>Commercial org. ELRA Member: 800.00€</price>
+<price>Academic org. ELRA Member: 800.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2004-09-15</availabilityStartDate>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 7500.00€</price>
-<price>Academic org. ELRA Member: 7500.00€</price>
-<price>Academic org. ELRA Non Member: 12000.00€</price>
-<price>Commercial org. ELRA Non Member: 12000.00€</price>
+<price>Commercial org. ELRA Non Member: 1600.00€</price>
+<price>Academic org. ELRA Non Member: 1600.00€</price>
+<price>Commercial org. ELRA Member: 800.00€</price>
+<price>Academic org. ELRA Member: 800.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2004-09-15</availabilityStartDate>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>EUROM.1</projectName>
+<fundingType>other</fundingType>
+</fundingProject>
+</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
 <corpusMediaType>
-<corpusTextInfo>
-<mediaType>text</mediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>chi/zho</languageId>
-<languageName>Chinese</languageName>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
 </languageInfo>
-<timeCoverageInfo>
-<timeCoverage>Early 1990s</timeCoverage>
-</timeCoverageInfo>
-</corpusTextInfo>
+</corpusAudioInfo>
 </corpusMediaType>
 </corpusInfo>
 </resourceComponentType>

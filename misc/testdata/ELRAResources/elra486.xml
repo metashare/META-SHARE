@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Swiss-German SpeechDat(II) FDB-2000</resourceName>
-<resourceName lang="French">Base de données SpeechDat (II) du suisse-allemand FDB-2000</resourceName>
-<description lang="English">The Swiss-German SpeechDat(II) FDB-2000 comprises 2000 Swiss-German speakers (992 males, 1008 females) recorded over the Swiss fixed telephone network. This database is partitioned into 6 CDs. The speech databases made within the SpeechDat(II) project were validated by SPEX, the Netherlands, to assess their compliance with the SpeechDat format and content specifications.Speech samples are stored as sequences of 8-bit 8 kHz A-law. Each prompted utterance is stored in a separate file. Each signal file is accompanied by an ASCII SAM label file which contains the relevant descriptive information.The following items were recorded:3 application words1 sequence of 9 isolated digits including the hash (#) and the star (*)1 sequence of isolated digits ? only digits which are not representing in B13 connected digits: 1 area code, 1 spontaneous phone number, 1 credit card number (16 or 15 digits)3 dates: 1 spontaneous date, e.g. birthday, 2 prompted dates3 word spotting phrases using an application word (embedded)1 isolated digit4 spelled words from a list of proper names and cities1 currency money amount1 natural number1 place of education (spontaneous)1 type of telephone used (spontaneous)1 query to telephone directory (spontaneous) 2 yes/no questions: one about smoker/non smoker and another about sex gender.9 phonetically rich sentences2 time phrases: 1 time of day (spontaneous), 1 time phrase (word style)4 phonetically rich wordsThe following age distribution has been obtained: 33 speakers are below 16 years old, 565 speakers are between 16 and 30, 623 speakers are between  31 and 45, 442 speakers are between 46 and 60, and 337 speakers are over 60.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
-<description lang="French">La base de données SpeechDat(II) FDB-2000 du suisse allemand contient les enregistrements de 2000 locuteurs suisses allemands (992 hommes, 1008 femmes), enregistrés à travers le réseau téléphonique fixe suisse. Cette base est répartie sur 6 CD-ROM. Les bases de données SpeechDat(II) ont été réalisées selon les spécifications du projet SpeechDat(II) et validées par SPEX, Pays-Bas.Les fichiers de parole sont stockés en séquences d'échantillons de 8 bit, 8 kHz, loi-A.Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM.Les éléments suivants ont été enregistrés :    * 3 mots de commande ;    * 1 séquence de 9 chiffres isolés qui inclut les signes (*) et (#) ;    * 1 séquence de chiffres isolés (différents de ceux contenus dans B1) ;    * 3 chiffres connectés : 1 numéro de téléphone (spontané), 1 numéro de carte de crédit (15-16 chiffres), 1 code postal ;    * 3 dates : 1 date spontanée (ex. anniversaire), 2 dates lues ;    * 3 expressions utilisant un mot de commande ;    * 1 chiffre isolé ;    * 4 mots épelés (séquences de lettres) extraits d'une liste de noms propres et de noms de villes ;    * 1 montant en devises ;    * 1 nombre entier naturel ;    * 1 lieu d'éducation ;    * 1 type de téléphone utilisé ;    * 1 requête adressée aux renseignements téléphoniqes ;    * 2 questions oui/non ;    * 9 phrases phonétiquement riches ;    * 2 phrases comportant une notion de temps : 1 jour (spontané), 1 phrase comportant une notion de temps ;    * 4 mots phonétiquement riches.Les classes d'âge sont réparties comme suit : 33 locuteurs de moins de 16 ans, 565 locuteurs entre 16 et 30 ans, 623 locuteurs entre 31 et 45 ans, 442 locuteurs entre 46 et 60 ans et 337 locuteurs de plus de 60 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
+<resourceName lang="English">Dutch-French Lexicon (LanTmark)</resourceName>
+<resourceName lang="French">Lexique hollandais-français (LanTmark)</resourceName>
+<description lang="English">General and Specialised vocabularies for transferEntries: General Vocabulary (26 000), Administrative (32 000), Data processing (10 000).Format: ASCII format with ISO 8859-1 character set. A lexicon file contains entries with feature value pairs on each line and separators between entries.Medium: Floppy Disk, QIC 150 MB Cartridge TapeGeneral Dutch-French LanTmark lexicon is divided into the following categories: nouns (14,000), verbs (6,000), adjectives (5,000), Adverbs (1,000). Administrative vocabulary is divided into the following categories: nouns (30,000), verbs (2,000). Data processing vocabulary has 10 000 transfer nouns.Each entry contains a domain information, source language disambiguation, features, target language actions.</description>
+<description lang="French">Vocabulaires génériques et spécialisés pour le transfert.Vocabulaire général : 26 000, Administratif : 32000, Traitement de données : 10 000Format: ASCII : jeu de caractères ISO 8859-1.Support : disquette, cartouche QIC 150 MBCe lexique général hollandais-français est réparti selon les catégories suivantes : noms (14.000), verbes (6.000), adjectifs (5.000), adverbes (1.000).Le vocabulaire administratif est réparti selon les catégories suivantes : noms (30.000), verbes (2.000).Le vocabulaire traitement de données dispose de 10 000 noms de transfert.Chaque entrée contient des informations sur le domaine, désambiguisation sur la langue source, des traits, des actions sur la langue cible.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=610</url>
-<identifier>ELRA-S0105</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=141</url>
+<identifier>ELRA-M0004_02</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,52 +29,59 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-08-28</lastDateUpdated>
+<lastDateUpdated>2005-02-25</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 38000.00€</price>
-<price>Academic org. ELRA Non Member: 26000.00€</price>
-<price>Commercial org. ELRA Member: 32000.00€</price>
-<price>Academic org. ELRA Member: 20000.00€</price>
+<price>Commercial org. ELRA Member: 30720.00€</price>
+<price>Academic org. ELRA Member: 3840.00€</price>
+<price>Academic org. ELRA Non Member: 6400.00€</price>
+<price>Commercial org. ELRA Non Member: 51200.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2001-04-26</availabilityStartDate>
+<availabilityStartDate>1997-01-23</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 38000.00€</price>
-<price>Academic org. ELRA Non Member: 38000.00€</price>
-<price>Commercial org. ELRA Member: 32000.00€</price>
-<price>Academic org. ELRA Member: 32000.00€</price>
+<price>Commercial org. ELRA Member: 30720.00€</price>
+<price>Academic org. ELRA Member: 30720.00€</price>
+<price>Academic org. ELRA Non Member: 51200.00€</price>
+<price>Commercial org. ELRA Non Member: 51200.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2001-04-26</availabilityStartDate>
+<availabilityStartDate>1997-01-23</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>SpeechDat(II)</projectName>
-<fundingType>euFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>ger/deu</languageId>
-<languageName>German</languageName>
+<languageId>dut/nld</languageId>
+<languageName>Dutch</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Flemish</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
 </languageInfo>
-</corpusAudioInfo>
-</corpusMediaType>
-</corpusInfo>
+<languageInfo>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
+</languageInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

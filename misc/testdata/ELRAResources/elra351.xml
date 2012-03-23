@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">BioLexicon</resourceName>
-<resourceName lang="French">BioLexicon</resourceName>
-<description lang="English">BioLexicon is a large-scale English terminological resource which has been developed to address the needs emerging in text mining efforts in the biomedical domain. It contains information on:-	terminological nouns, including nominalised verbs and proper names (e.g., gene names)-	terminological adjectives-	terminological adverbs-	terminological verbs-	general English words frequently used in the biology domainExisting information on terms was integrated, augmented, complemented and linked, through processing of massive amounts of biomedical text, to yield inter alia over 2.2M lexical entries (over 3.3M semantic relations), and information on over 1.8M variants and on over 2M synonymy relations. Moreover, extensive information is provided on how verbs and nominalised verbs in the domain behave at both syntactic and semantic levels, supporting thus applications aiming at discovery of relations and events involving biological entities in text. It contains domain specific verbs (658), includes both automatically-extracted syntactic subcategorization frames (1710), as well as semantic event frames (850) that are based on corpus annotation by domain experts.This comprehensive coverage of biological terms makes BioLexicon a unique linguistic resource within the domain. It is primarily intended to support text mining and information retrieval in the biomedical domain, however its standards-based structure and rich content make it a valuable resource for many other kinds of application.In the first stage of the construction of BioLexicon, potential terms were pooled together from several resources representing selected semantic types of entities, such as genes and proteins, chemical compounds, species, enzymes, as well as various entities found in biological ontologies. Terms were then organized into sets of synonymous variants and annotated with a number of static features which improve the resolution of term ambiguity. Once populated with terms from existing repositories, BioLexicon was augmented with term variants extracted from the scientific literature and complemented with manually selected lexical items, such as biologically relevant verbs and multiword token expressions. Linguistic information was added to entries, on the basis of corpus processing, including syntactic subcategorisation information for verbs and nominalised verbs, and semantic event frame information. Last but not least, a subset of terms in BioLexicon was linked to Gene Regulation Ontology concepts to support the identification of gene regulatory events.The schema of BioLexicon preserves term annotations and metadata derived from the original data resources. At the same time, it provides consistent lexical representation for terms of different semantic types. BioLexicon thus offers the clear advantage of a uniform lexical format for a wide coverage of biological terminology, with accompanying linguistic information. BioLexicon is available in a relational database format (MySQL dump format) and it adheres to the EAGLES/ISO standards for lexical resources.</description>
-<description lang="French">BioLexicon est une ressource terminologique en anglais de grande envergure développée dans l’objectif de répondre aux besoins grandissants des efforts de text mining dans le domaine biomédical. Elle comprend des informations concernant :-	les noms terminologiques, y compris les verbes nominalisés et les noms propres (par exemple, les noms des gènes)-	les adjectifs terminologiques-	les adverbes terminologiques-	les verbes terminologiques-	des mots de l’anglais général fréquemment utilisés dans le domaine de la biologieLes informations sur les termes déjà existantes ont été intégrées, augmentées, completées et mises en relation, grâce au traitement d’un large nombre de textes du domaine biomédical, pour finalement produire entre autres plus de 2,2 millions d’entrées lexicales (plus de 3,3 millions de relations sémantiques), ainsi que des informations sur plus de 1,8 millions de variantes et plus de 2 millions de relations synonymiques. De plus, des informations très complètes sont fournies sur la manière dont les verbes (notamment les verbes nominalisés dans le domaine) se comportent aux niveaux à la fois syntaxique et sémantique, permettant ainsi son utilisation dans des applications visant à mettre en évidence des relations et des événements impliquant des entités biologiques dans le texte. BioLexicon contient des verbes spécifiques au domaine (658), inclut des cadres de sous-catégorisation syntaxique extraits automatiquement (1710), ainsi que des cadres des situations sémantiques (850), qui sont basés sur l’annotation de corpus par des experts du domaine.Cette couverture très complète des termes de biologie fait de BioLexicon une ressource linguistique unique dans ce domaine. Elle a pour but premier d’aider les travaux de text mining et de recherche d’information dans le domaine biomédical, même si sa structure basée sur des standards et un contenu riche en font une ressource de qualité pour beaucoup d’autres types d’applications.Dans la première phase de construction de BioLexicon, les termes potentiels ont été rassemblés à partir de différentes ressources représentant des types sémantiques sélectionnés pour traiter différentes entités telles que les gènes et les protéines, les composants chimiques, les espèces, les enzymes, ainsi que diverses entités identifiées dans les ontologies relatives à la biologie. Les termes ont été alors organisés en ensembles de variantes synonymiques et annotés avec un certain nombre de traits statiques qui améliorent la résolution de l’ambiguïté du terme. Une fois alimenté de termes provenant d’inventaires existants, des variantes des termes extraits de littérature scientifique et complétés par des éléments lexicaux sélectionnés manuellement ont été ajoutés dans BioLexicon (tels que des verbes et des expressions de mot composés pertinents en biologie). Des informations linquistiques ont été ajoutées aux entrées, sur la base du traitement de corpus, y compris des informations sur la sous-catégorisation syntaxique des verbes  et les verbes nominalisés, ainsi que des informations sur les cadres d’événements sémantiques. Enfin, un sous-ensemble de termes de BioLexicon sont reliés aux concepts d’ontologie en régulation génétique afin d’assurer l’identification d’événements dans le domaine de la régulation génétique.Le schéma de BioLexicon conserve les annotations des termes et les métadonnées dérivées des données d’origine. Dans un même temps, il propose une représentation lexicale cohérente des termes de types sémantiques différents. Ainsi, BioLexicon présente l’avantage évident d’un format lexical uniforme pour une large couverture de la terminologie relative à la biologie, accompagné d’informations linguistiques. BioLexicon est disponible sous la forme d’une base de données relationnelle (format dump MySQL). Il adhère également aux standards EAGLES/ISO relatifs aux ressources lexicales.</description>
+<resourceName lang="English">TC-STAR Spanish Baseline Male Speech Database</resourceName>
+<resourceName lang="French">Voix d’homme de référence TC-STAR espagnol</resourceName>
+<description lang="English">The TC-STAR Spanish Baseline Male Speech Database was created within the scope of the TC-STAR project (IST- FP6-506738) funded by the European Commission.It contains the recordings of one male Spanish speaker recorded simultaneously through a close talk microphone, a mid distance microphone and a laryngograph signal in a noise-reduced room. It consists of the recordings and annotations of read text material of approximately 10 hours of speech for baseline applications (Text-to-Speech systems). This database is distributed on 9 DVDs. The database complies with the common specifications created in the TC-STAR project.The annotation of the database includes manual orthographic transcriptions, the automatic segmentation into phonemes and automatic generation of pitch marks. A certain percentage of phonetic segments and pitch marks has been manually checked. A pronunciation lexicon in SAMPA with POS, lemma and phonetic transcription of all the words prompted and spoken is also provided.Speech samples are stored as sequences of 24-bit 96 kHz with the least significant byte first (“lohi” or Intel format) as (signed) integers. Each prompted utterance is stored in a separate file. Each signal file is accompanied by an ASCII SAM label file which contains the relevant descriptive information.The TC-STAR Spanish Baseline Female Speech Database is also available via ELRA under reference ELRA-S0309.</description>
+<description lang="French">Cette voix d’homme de référence TC-STAR espagnol a été créée dans le cadre du projet TC-STAR (IST- FP6-506738) financé par la Commission européenne.Elle comprend les enregistrements d’un locuteur espagnol homme enregistré de façon simultanée par micro-casque, microphone à distance moyenne et signal larygographique dans une salle à bruit réduit. Elle consiste en des enregistrements et annotations de matériel textuel lu pour environ 10 heures de parole pour des applications de référence (systèmes texte-parole). Cette base de données est distribuée sur 9 DVD. Elle respecte les spécifications communes créées dans le projet TC-STAR.L’annotation de la base de données inclut les transcriptions orthographiques réalisées manuellement, la segmentation automatique en phonèmes et la génération automatiques des marques de pitch. Un certain pourcentage de segments phonétiques et de marques de pitch a été vérifié manuellement. Un lexique de prononciation en SAMPA avec partie du discours, lemmes et transcription phonétique de tous les mots lus et prononcés est également fourni.Les fichiers de parole sont stockés en séquences d’échantillons de 24-bit 96 kHz avec l’octet le moins significatif en premier (“lohi” ou format Intel) en entiers (signés). Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM.La voix de femme de référence TC-STAR espagnol est également disponible via ELRA sous la référence ELRA-S0309.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1113</url>
-<identifier>ELRA-T0373</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1132</url>
+<url>http://catalog.elra.info/product_info.php?products_id=1161</url>
+<identifier>ELRA-S0310</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,45 +30,66 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2009-09-03</lastDateUpdated>
+<lastDateUpdated>2010-12-21</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 6000.00€</price>
-<price>Academic org. ELRA Non Member: 320.00€</price>
-<price>Commercial org. ELRA Member: 4500.00€</price>
-<price>Academic org. ELRA Member: 200.00€</price>
-<availabilityStartDate>2009-09-03</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 15600.00€</price>
+<price>Academic org. ELRA Non Member: 10000.00€</price>
+<price>Commercial org. ELRA Member: 12000.00€</price>
+<price>Academic org. ELRA Member: 7700.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2010-12-21</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 11000.00€</price>
-<price>Academic org. ELRA Non Member: 11000.00€</price>
-<price>Commercial org. ELRA Member: 9000.00€</price>
-<price>Academic org. ELRA Member: 9000.00€</price>
-<availabilityStartDate>2009-09-03</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 15600.00€</price>
+<price>Academic org. ELRA Non Member: 15600.00€</price>
+<price>Commercial org. ELRA Member: 12000.00€</price>
+<price>Academic org. ELRA Member: 12000.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2010-12-21</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<usageInfo>
+<actualUseInfo>
+<actualUse>nlpApplications</actualUse>
+<useNLPSpecific>speechSynthesis</useNLPSpecific>
+</actualUseInfo>
+</usageInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>TC-STAR</projectName>
+<fundingType>euFunds</fundingType>
+</fundingProject>
+</resourceCreationInfo>
 <resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>terminologicalResource</lexicalConceptualResourceType>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
-<mediaType>text</mediaType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
+<languageId>spa</languageId>
+<languageName>Spanish</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Castilian</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
 </languageInfo>
-</lexicalConceptualResourceTextInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
 </resourceComponentType>
 </resourceInfo>

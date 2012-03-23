@@ -6,7 +6,7 @@
 <description lang="English">A French speech database dedicated to the study of the perturbations of speech production due to noisy environments, and especially the Lombard effect. Environment: 4 noise conditions and the reference condition (quiet). The 2 noises used (a "white noise" and a "cocktail-party noise") were both produced to the ears of the speaker first without then with the feedback of his own voice. 10 speakers: 5 male and 5 female (4 CDROMs, approximately 2.2 Gigabytes)Corpora: · 30 Sentences (among the 50 "patching sentences" from EUROM1) · 30 Numbers: digits (0 - 9) and 20 numbers ( 0 - 9999) from the fifth number group of EUROM1. · "Logatomes" : 82 CVC with variation of initial and final consonant and the vowels [a,i,u] (EUROM1 set).</description>
 <description lang="French">Cette base de donnée a été réalisée pour étudier la perturbation de la production en milieu bruité et l'effet Lombard en particulier.Environnement : 4 conditions de bruit (bruit blanc (2) et cocktail-party (2)) + une condition de référence (sans bruit).10 locuteurs (5 hommes, 5 femmes) ont participé à l'enregistrement, en français.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=80</url>
 <identifier>ELRA-S0033</identifier>
 </identificationInfo>

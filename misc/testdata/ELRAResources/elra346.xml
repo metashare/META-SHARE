@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Emotional speech synthesis database</resourceName>
-<resourceName lang="French">Base de données d'émotions pour la synthèse vocale</resourceName>
-<description lang="English">This database contains the recordings of one male and one female Spanish professional speakers recorded in a noise-reduced room. It consists in recordings and annotations of read text material in neutral style plus six MPEG expressions, all in fast, slow, soft and loud speech styles. The text material is composed of 184 items including phonetically balanced sentences, digits and isolated words. The text material was the same for all the modes and styles, giving a total of 3h 59min recorded speech for the male speaker and 3h 53min for the female speaker. The Emotional speech synthesis database was created within the scope of the Interface EU funded project.</description>
-<description lang="French">Cette base de données comprend les enregistrements de locuteurs espagnols professionnels, un homme et une femme, dans une salle à bruit réduit. Elle consiste en des enregistrements et annotations de matériel textuel lu dans un style neutre ainsi que six expressions MPEG, le tout en styles de parole rapide, lent, bas et fort. Le matériel textuel se compose de 184 éléments incluant des phrases phonétiquement équilibrées, des chiffres et des mots isolés. Le matériel textuel est identique pour tous les modes et styles, pour un total de 3h 59min de parole enregistrée pour le locuteur homme et 3h 53min pour le locuteur femme. La base de données d'émotions pour la synthèse vocale a été créée dans le cadre du projet Interface  financé par l’UE.</description>
+<resourceName lang="English">Spanish Festival HTS models - male speech</resourceName>
+<resourceName lang="French">Modèles HTS en espagnol du projet Festival - voix d'homme</resourceName>
+<description lang="English">This database contains the Festival HTS models trained with 10h of speech from the TC-STAR Spanish Baseline Male Speech Database (ELRA-S0310).</description>
+<description lang="French">Cette base de données comprend les modèles HTS Festival entraînés à partir de 10 heures de parole de la voix d’homme de référence TC-STAR espagnol (ELRA-S0310).</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1151</url>
-<identifier>ELRA-S0329</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1155</url>
+<identifier>ELRA-S0333</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -36,19 +36,19 @@
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 4000.00€</price>
+<price>Commercial org. ELRA Non Member: 0.00€</price>
 <price>Academic org. ELRA Non Member: 0.00€</price>
-<price>Commercial org. ELRA Member: 2000.00€</price>
+<price>Commercial org. ELRA Member: 0.00€</price>
 <price>Academic org. ELRA Member: 0.00€</price>
 <availabilityStartDate>2011-12-23</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 4000.00€</price>
-<price>Academic org. ELRA Non Member: 4000.00€</price>
-<price>Commercial org. ELRA Member: 2000.00€</price>
-<price>Academic org. ELRA Member: 2000.00€</price>
+<price>Commercial org. ELRA Non Member: 0.00€</price>
+<price>Academic org. ELRA Non Member: 0.00€</price>
+<price>Commercial org. ELRA Member: 0.00€</price>
+<price>Academic org. ELRA Member: 0.00€</price>
 <availabilityStartDate>2011-12-23</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>

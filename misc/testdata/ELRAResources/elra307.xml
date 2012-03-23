@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">English lexicon with morphological information</resourceName>
-<resourceName lang="French">Lexique anglais avec information morphologique</resourceName>
-<description lang="English">This English lexicon is made up of 174,000 inflected forms corresponding to 68,000 simple word lemmas. It contains:- 31,900 nouns, with number and inflected forms (including irregular forms), - 11,800 verbs, with mood, tense, person, number and inflected forms (including irregular forms),- 19,900 adjectives, - 4,100 adverbs, - 300 pronouns, articles, prepositions/postpositions and conjunctions. Each line in the resource file shows an inflected form, its part of speech, its related lemma and its morphological information. The inflected forms were generated using two databases: one containing the lemmas with the related root(s) and paradigm number(s), the other one containing the paradigm numbers with the related terminations and morphological information. Each row in the resource file consists of four fields following the structure below:            Lemma|part of speech|inflected form|morphological informationThe part of speech and the morphological information are encoded using an internal standard (an abbreviation key file is also provided).</description>
-<description lang="French">Ce lexique anglais est constitué de 174 000 formes fléchies correspondant à 68 000 mots-lemmes simples. Il comprend :- 31 900 noms, incluant le nombre et les formes fléchies (dont les formes irrégulières), - 11 800 verbes, incluant le mode, le temps, la personne, le nombre et les formes fléchies (dont les formes irrégulières),- 19 900 adjectifs, - 4 100 adverbes, - 300 pronoms, articles, prépositions/postpositions et conjonctions. Chaque ligne de fichier présente une forme fléchie, la partie du discours, le lemme correspondant et l’information morphologique. Les formes fléchies sont générées en utilisant deux bases de données, l’une contenant les lemmes avec la ou les racines correspondantes et le ou les nombres de paradigmes, tandis que la deuxième comprend les nombres de paradigmes avec les terminaisons correspondantes et l’information morphologique. Chaque ligne de fichier est constituée de quatre champs présentés selon la structure suivante :            Lemme|partie du discours|forme fléchie|information morphologiqueLa partie du discours et l’information morphologique sont codées selon un standard interne (un fichier des abréviations utilisées est également fourni).</description>
+<resourceName lang="English">DICO-MORPH_Collocation</resourceName>
+<resourceName lang="French">DICO-MORPH_Collocation</resourceName>
+<description lang="English">Entries: up to 35000Language: FrenchFormat: ASCIIMedium: Floppy diskThis is an adding for the French lexicon for morphological works (referenced herein as ELRA-L0001 DICO-MORPH_Lemme MEMODATA).For more information: http://www.elda.org/catalogue/fr/text/doc/dicomor1.html</description>
+<description lang="French">Entrées : jusqu'à 35 000Langue : françaisIl s'agit d'un complément au lexique français (DICO-MORPH_lemme (MEMODATA) pour des travaux morphologiques.Pour plus d'informations : http://www.elda.org/catalogue/fr/text/doc/dicomor1.html</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=867</url>
-<identifier>ELRA-L0067</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=53</url>
+<identifier>ELRA-L0002</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,33 +29,31 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<revision>Last update:2005</revision>
-<lastDateUpdated>2006-06-19</lastDateUpdated>
+<lastDateUpdated>2005-05-24</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 7000.00€</price>
-<price>Academic org. ELRA Non Member: 4500.00€</price>
-<price>Commercial org. ELRA Member: 5000.00€</price>
-<price>Academic org. ELRA Member: 3500.00€</price>
-<availabilityStartDate>2006-06-19</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 10925.00€</price>
+<price>Academic org. ELRA Non Member: 8740.00€</price>
+<price>Commercial org. ELRA Member: 8740.00€</price>
+<price>Academic org. ELRA Member: 6992.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1997-01-23</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 8500.00€</price>
-<price>Academic org. ELRA Non Member: 8500.00€</price>
-<price>Commercial org. ELRA Member: 6000.00€</price>
-<price>Academic org. ELRA Member: 6000.00€</price>
-<availabilityStartDate>2006-06-19</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 10925.00€</price>
+<price>Academic org. ELRA Non Member: 10925.00€</price>
+<price>Commercial org. ELRA Member: 8740.00€</price>
+<price>Academic org. ELRA Member: 8740.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1997-01-23</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<creationEndDate>2001-01-01</creationEndDate>
-</resourceCreationInfo>
 <resourceComponentType>
 <lexicalConceptualResourceInfo>
 <resourceType>lexicalConceptualResource</resourceType>
@@ -67,13 +65,9 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
 </languageInfo>
-<sizeInfo>
-<size>6</size>
-<sizeUnit>mb</sizeUnit>
-</sizeInfo>
 </lexicalConceptualResourceTextInfo>
 </lexicalConceptualResourceMediaType>
 </lexicalConceptualResourceInfo>

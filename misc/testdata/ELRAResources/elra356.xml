@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Oxford Business Spanish Dictionary</resourceName>
-<resourceName lang="French">Dictionnaire bilingue anglais-espagnol du vocabulaire des affaires Oxford</resourceName>
-<description lang="English">This dictionary covers the general language of Business across a range of core areas. It contains over 50,000 words and phrases, and is available in SGML</description>
-<description lang="French">Ce dictionnaire bilingue anglais-espagnol contient 50 000 mots et expressions appartenant au domaine des affaires. Quelques mots sont du domaine général également. Ce dictionnaire est disponible au format SGML.</description>
+<resourceName lang="English">Mandarin Chinese Desktop Speech Recognition Corpus - Stock&amp;#12289; Person Name &amp;#12289;Digit String&amp;#12289;Simple Chinese sentences&amp;#12289;Spontaneous Speech (50 people)</resourceName>
+<resourceName lang="French">Corpus de reconnaissance de parole microphone en chinois mandarin – stocks, noms de personnes, séquences de chiffres, phrases en chinois (50 locuteurs)</resourceName>
+<description lang="English">This corpus comprises 8,206 entries including stocks, person names, digit strings and 8,511 speech files composed of spontaneous speech, uttered by 50 speakers of different dialects, ages and various educational levels (22 males and 28 females), recorded from a stand microphone (SHURE SM58). Speech samples are stored as a sequence of 16-bit 44.1kHz WAV for a total of 24 hours of speech. The total capacity of the data is 7 Gb.Text files are stored in Unicode format. All data have been proofread manually.The transcriptions include non-speech markers (background noise, background speech, speaker sounds) as well as markers for mispronunciation, channel distortions, words left-out and duplicates.The corpus aims to be applied to the testing and telephone natural speech recognition system.</description>
+<description lang="French">Ce corpus comprend 8 206 entrées incluant des noms de personnes, des séquences de chiffres et 8 511 fichiers de parole spontanée, enregistrées par 50 locuteurs de dialectes, d’âges et de niveaux d’éducation différents (22 hommes et 28 femmes), via un micro sur pied (SHURE SM58). Les échantillons de parole sont stockés sous la forme de séquences 16-bit 44,1kHz WAV pour un total de 24 heures de parole. La taille totale des données est de 7 Go.Les fichiers textes sont stockés au format Unicode. Toutes les données ont été vérifiées manuellement.Les transcriptions comprennent des balises d’événements acoustiques (bruits de fond, sons émis par les locuteurs) ainsi que des balises de mauvaise prononciation, distorsions du canal, omissions de mots et répétitions.Cette base de données a été conçue pour l’évaluation et le développement de systèmes de reconnaissance de la parole naturelle par téléphone.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=688</url>
-<identifier>ELRA-M0032</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=903</url>
+<identifier>ELRA-S0228_20</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,35 +29,44 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-10-05</lastDateUpdated>
+<lastDateUpdated>2009-09-24</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Non Member: 7000.00€</price>
-<price>Academic org. ELRA Member: 4900.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2002-10-23</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 2192.00€</price>
+<price>Academic org. ELRA Non Member: 2192.00€</price>
+<price>Commercial org. ELRA Member: 2192.00€</price>
+<price>Academic org. ELRA Member: 2192.00€</price>
+<availabilityStartDate>2007-01-17</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 2192.00€</price>
+<price>Academic org. ELRA Non Member: 2192.00€</price>
+<price>Commercial org. ELRA Member: 2192.00€</price>
+<price>Academic org. ELRA Member: 2192.00€</price>
+<availabilityStartDate>2007-01-17</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
-<mediaType>text</mediaType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
+<languageId>chi/zho</languageId>
+<languageName>Chinese</languageName>
 </languageInfo>
-</lexicalConceptualResourceTextInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
 </resourceComponentType>
 </resourceInfo>

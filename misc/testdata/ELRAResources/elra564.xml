@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">KORLEX – Serbian Lexicon</resourceName>
-<resourceName lang="French">Lexique serbe KORLEX</resourceName>
-<description lang="English">This lexical resource was developed as part of the bilingual lexicon for English-Serbian built for the following project: http://www.rjecnik.com.The lexicon data is compiled with the objective of covering the majority of text circulating in everyday use, such as in the news (e.g., newswire articles), in business, technological documentation, legal documentation, and politics. The words that are primarily used in literary and religious contexts, and which are not part of every-day usage, are generally not included in the lexicon.The KORLEX-Serbian Lexicon provides a list of 108,491 Serbian lemmas, i.e., words in canonical form, annotated with part-of-speech (POS) tag and lexical features. Among these 108,491 entries, there are 52,027 nouns, 9,153 adverbs, 15,522 verbs and 31,052 adjectives. Remaining entries are pronouns, determiners, prepositions/postpositions, conjunctions and numerals.The resource is a flat textual file in which each textual line contains information about one lemma. The format of a line can be captured with the following Perl regular expressions:                                                                                                                                                          # Characters appearing in a word (ISO-8859-2)$c = qr/[-{}|.\/\d\w\xA9\xAE\xB9\xBE\xC6\xC8\xD0\xE6\xE8\xF0]/# A lemma$m = qr/$c+(?: $c+)*/;# A lemma specification (each line in the resource)/^($m(?:#$m)?)\s+:(\w+)([\w:]+)\r?$/                                                                                                                                                       In the last expression, $1 is a lemma, $2 is the POS tag, and $3 is a concatenated list of features. A typical line is:                                                                                                                                                       	vrata	:nn:fin which "vrata" is a lemma, with POS being "nn", and features including "f" gender.A lemma may contain the hash sign (#), in which case it denotes a frequently misspelled form. For example, in: 	bidem#budem	:spec:x                                                                                                                                                       "bidem" is an incorrect form, followed by a correct form "budem".Additionally, the incorrect forms are marked with the feature ":x".Local linguistic variants are tagged with :ek and :ije tags for ekavian and ijekavian forms respectively. Ekavian is spoken in Serbia, while ijekavian is spoken in Montenegro and Republika Srpska (Bosnia).For example, in	mesec	:nn:m:ek	mjesec	:nn:m:ijeThe resource is encoded using ISO-8859-2 encoding, and sorted according to the standard Serbian lexicographic order.</description>
-<description lang="French">Cette ressource lexicale a été développée pour la constitution d’un lexique bilingue anglais-serbe dans le cadre du projet suivant : http://www.rjecnik.com.Les données du lexique ont été compilées avec pour but de couvrir la majorité des textes utilisés au quotidien, tels que dans les actualités (par exemple, des articles de journaux), les affaires, les documentations technologiques, juridiques et politiques. Les mots utilisés principalement dans des contextes littéraires et religieux, et qui ne font pas partie de l’usage quotidien, sont généralement exclus du lexique.Le lexique serbe KORLEX propose une liste de 108 491 lemmes du serbe, c’est-à-dire des mots sous leur forme canonique, annotés avec des étiquettes indiquant la partie du discours (POS) et d’autres informations lexicales. Parmi ces 108 491 entrées, on peut compter 52 027 noms, 9 153 adverbes, 15 522 verbes et 31 052 adjectifs. Les entrées restantes sont constituées de pronoms, déterminants, prépositions/postpositions, conjonctions et numéraux.La ressource est présentée dans un fichier texte à plat dans lequel chaque ligne de texte comprend des attributs par lemme. Le format d’une ligne peut être traduit par les expressions régulières Perl suivantes : # Caractères apparaissant dans le mot (ISO-8859-2)$c = qr/[-{}|.\/\d\w\xA9\xAE\xB9\xBE\xC6\xC8\xD0\xE6\xE8\xF0]/# Lemme$m = qr/$c+(?: $c+)*/;# Spécifications d’un lemme (chaque ligne de la ressource)/^($m(?:#$m)?)\s+:(\w+)([\w:]+)\r?$/                                                                                                                                                       Dans la dernière expression, $1 est un lemme, $2 est une étiquette POS, et $3 est une liste concaténée d’attributs. Une ligne type se présente comme suit : 	vrata	:nn:foù "vrata" est le lemme, avec comme étiquette POS "nn", et des attributs incluant le genre "f".Un lemme peut contenir le signe dièse (#), auquel cas il indique une forme fréquemment mal orthographiée. Par exemple, dans: 	bidem#budem	:spec:x                                                                                                                                                       "bidem" est une forme incorrecte, suivie par une forme correcte "budem".De plus, les formes incorrectes sont marquées par l’attribut ":x".Les variantes linguistiques locales sont marquées par les étiquettes :ek et :ije correspondant respectivement aux formes ekavien et ijekavien. L’ekavien est parlé en Serbie, tandis que l’ijekavien est parlé au Monténégro et en Republika Srpska (Bosnia).Par exemple, dans	mesec	:nn:m:ek	mjesec	:nn:m:ijeLa ressource utilise le format de codage ISO-8859-2, et est classée dans l’ordre alphabétique lexicographique standard du serbe.</description>
-<resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=859</url>
-<identifier>ELRA-L0066</identifier>
+<resourceName lang="English">ICE-GB (British English component of the International Corpus of English)</resourceName>
+<resourceName lang="French">ICE-GB (partie britannique du corpus international de l'anglais)</resourceName>
+<description lang="English">ICE-GB is the British component of the International Corpus of English (ICE). ICE began in 1990 with the primary aim of providing material for comparative studies of varieties of English throughout the world. Twenty centres around the world are preparing corpora of their own national or regional variety of English.ICE-GB is fully grammatically analysed. Like all the ICE corpora, ICE-GB consists of a million words of spoken and written English and adheres to the common corpus design. 200 written and 300 spoken texts make up the million words. Every text is grammatically annotated, allowing complex and detailed searches across the whole corpus. ICE-GB contains 83,394 parse trees, including 59,640 in the spoken part of the corpus.ICE-GB has been fully checked. It was checked by linguists at several stages in its completion, using both a traditional 'post-checking' strategy and also by cross-sectional error-based searches. ICE-GB is distributed with the retrieval software ICECUP (the International Corpus of English Corpus Utility Program). ICECUP supports a variety of query types, including the use of the parse analyses to construct Fuzzy Tree Fragments to search the corpus.</description>
+<description lang="French">ICE-GB est la partie britannique du corpus international de l'anglais (ICE - International Corpus of English). ICE a débuté en 1990 avec comme but premier de fournir du matériel pour les études comparatives des différentes variantes de l'anglais à travers le monde. Vingt centres dans le monde ont ainsi préparé des corpus de leur variante nationale ou régionale de l'anglais.ICE-GB est entièrement analysé d'un point de vue grammatical. Comme tous les corpus ICE, ICE-GB comprend un million de mots de l'anglais oral et écrit et est conforme au concept du corpus commun. 200 textes écrits et 300 textes parlés forment le corpus d'un million de mots. Chaque texte est annoté grammaticalement, permettant des recherches complexes et détaillées à travers tout le corpus. ICE-GB comprend 83 394 arbres syntaxiques, dont 59 640 pour la partie orale du corpus.ICE-GB a été vérifié intégralement par des linguistes à différents niveaux de sa réalisation, en procédant non seulement par une stratégie de "post-vérification" traditionnelle et par des recherches croisées basées sur les erreurs. ICE-GB est distribué avec le logiciel de recherche ICECUP (International Corpus of English Corpus Utility Program ). ICECUP permet différents types de requêtes, dont l'usage d'analyses syntaxiques pour la construction de fragments d'arbre flou permettant la recherche dans le corpus.</description>
+<resourceShortName>ICE-GB</resourceShortName>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=762</url>
+<identifier>ELRA-W0021</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,48 +29,56 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2006-03-31</lastDateUpdated>
+<lastDateUpdated>2004-05-12</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 1000.00€</price>
-<price>Commercial org. ELRA Member: 2000.00€</price>
-<price>Academic org. ELRA Non Member: 2000.00€</price>
-<price>Commercial org. ELRA Non Member: 5000.00€</price>
-<availabilityStartDate>2006-03-31</availabilityStartDate>
+<price>Commercial org. ELRA Member: 8500.00€</price>
+<price>Academic org. ELRA Member: 780.00€</price>
+<price>Academic org. ELRA Non Member: 1500.00€</price>
+<price>Commercial org. ELRA Non Member: 15000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2000-03-06</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 2000.00€</price>
-<price>Commercial org. ELRA Member: 2000.00€</price>
-<price>Academic org. ELRA Non Member: 5000.00€</price>
-<price>Commercial org. ELRA Non Member: 5000.00€</price>
-<availabilityStartDate>2006-03-31</availabilityStartDate>
+<price>Commercial org. ELRA Member: 8500.00€</price>
+<price>Academic org. ELRA Member: 8500.00€</price>
+<price>Academic org. ELRA Non Member: 15000.00€</price>
+<price>Commercial org. ELRA Non Member: 15000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2000-03-06</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceCreationInfo>
-<creationEndDate>2005-01-01</creationEndDate>
+<fundingProject>
+<projectName>ICE (International Corpus of English)</projectName>
+<fundingType>other</fundingType>
+</fundingProject>
+<creationEndDate>1990-01-01</creationEndDate>
 </resourceCreationInfo>
 <resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusTextInfo>
 <mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>scc/srp</languageId>
-<languageName>Serbian</languageName>
+<languageId>eng</languageId>
+<languageName>English</languageName>
 </languageInfo>
-</lexicalConceptualResourceTextInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
+<timeCoverageInfo>
+<timeCoverage>Early 1990s</timeCoverage>
+</timeCoverageInfo>
+</corpusTextInfo>
+</corpusMediaType>
+</corpusInfo>
 </resourceComponentType>
 </resourceInfo>

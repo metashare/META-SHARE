@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">The EMILLE/CIIL Corpus</resourceName>
-<resourceName lang="French">Corpus EMILLE/CIIL</resourceName>
-<description lang="English">The EMILLE/CIIL Corpus consists of three components: monolingual, parallel and annotated corpora. There are fourteen monolingual corpora, including both written and (for some languages) spoken data for fourteen South Asian languages: Assamese, Bengali, Gujarati, Hindi, Kannada, Kashmiri, Malayalam, Marathi, Oriya, Punjabi, Sinhala, Tamil, Telegu and Urdu. The EMILLE monolingual corpora contain approximately 92,799,000 words (including 2,627,000 words of transcribed spoken data for Bengali, Gujarati, Hindi, Punjabi and Urdu). The parallel corpus consists of 200,000 words of text in English and its accompanying translations in Hindi, Bengali, Punjabi, Gujarati and Urdu. The annotated component includes the Urdu monolingual and parallel corpora automatically annotated for parts-of-speech, together with twenty written Hindi corpus files annotated to show the nature of demonstrative use. All other components are annotated at the sentence level. The corpus is marked up using CES-compliant SGML and encoded using Unicode. References: Xiao, Z, McEnery, A., Baker, P. and Hardie, A. 2004. ‘Developing Asian language corpora: standards and practice’ in Sornlertlamvanich, V., Tokunaga, T. and Huang, C. (eds.) Proceedings of the Fourth Workshop on Asian Language Resources, pp. 1-8.  March 25, Sanya.This database is available for research use by academic organisations only. For a use by commercial organisations, a subset of the EMILLE/CIIL Corpus is available under the reference ELRA-W0038 The EMILLE Lancaster Corpus.</description>
-<description lang="French">Le corpus EMILLE/CIIL regroupe 3 composants : des corpus monolingues, des corpus parallèles et des corpus annotés.Les corpus monolingues sont disponibles pour 14 langues parlées en Asie du sud : l’assamais, le bengali, le gujarati, l’hindi, le kannada, le kashmiri, le malayalam, le marathi, l’oriya, le punjabi, le sinhala, le tamil, le telegu et l’ourdou. Ces corpus présentent des données écrites et, pour certaines langues, des données de l’oral. Au total, les corpus monolingues contiennent environ 92 799 000 mots, dont 2 627 000 sont des transcriptions de données audio pour le bengali, le gujarati, l’hindi, le punjabi et l’ourdou. Le corpus parallèle présente quant à lui 200 000 mots en anglais avec leurs traductions en hindi, bengali, punjabi, gujarati et ourdou. Enfin, la partie annotée regroupe les corpus monolingues et parallèles traitant la langue ourdou, annotés de façon automatique sur les parties du discours, ainsi qu’une vingtaine de corpus écrits en langue hindi annotés dans le but de montrer le type d’usage des démonstratifs.. Tous les autres composants sont annotés au niveau de la phrase. Les corpus sont annotés au format SGML conforme avec la norme CES (Corpus Encoding Standards) et codés en Unicode. Références: Xiao, Z, McEnery, A., Baker, P. et Hardie, A. 2004. ‘Developing Asian language corpora: standards and practice’ in Sornlertlamvanich, V., Tokunaga, T. et Huang, C. (eds.) Proceedings of the Fourth Workshop on Asian Language Resources, pp. 1-8.  25 Mars, Sanya.Cette ressource est disponible pour un usage de recherche par des organisations  académiques uniquement. Un sous-ensemble du corpus EMILLE/CIIL est disponible pour les organisations commerciales : référence ELRA-W0038, le corpus EMILLE Lancaster.</description>
+<resourceName lang="English">RVG1 (Regional Variants of German 1, Part 1)</resourceName>
+<resourceName lang="French">RVG1 (Variantes régionales de l'allemand 1)</resourceName>
+<description lang="English">The corpus consists of single digits, connected digits, phone numbers, phonetically balanced sentences, computer command phrases and spontaneous speech. Each speaker has read a subcorpus of 85 items:    * 11 single digits (0-9, with the two pronunciations of 2 (`zwei', `zwo')),    * 19 connected digits (10-19, 20-100 in steps of ten),    * 12 computer command phrases,    * 30 phonetically balanced sentences,    * 5 6-digit phone numbers,    * 5 7-digit phone numbers,    * 2 phone numbers with area code,    * 1 minute spontaneous speech (monologue).The speaker was placed in front of a standard IBM-compatible PC. The backround noise was limited to the usual noise in office environment, eg. door slam, backround crosstalk, phone ringing, paper rustle, PC noise, etc. The head of the speaker is in a range between 2-4 feet to the screen, 1-2 feet from the desktop microphones. The speaker is not forced into a special position. The speaker is wearing a Sennheiser HD 410 and is free to use the keyboard or the mouse in front of him. The three desktop microphones are: Sennheiser MD 441 U, Telex (Soundblaster) and Talk Back (AT&amp;T). Speakers were selected to achieve the demoscopic density of the German spoken areas in Europe (including Austria and Switzerland).The recorded sound samples are stored in NIST SPHERE format. The resolution is 16 Bits. The sampling frequency is 22.050 Hz except for speakers 001 to 036 which were recorded with 11.025 Hz. Each microphone channel is stored into a separate file. A transliteration of spontaneous speech according to Verbmobil Format is also provided.RVG1, Part 1 contains 197 speakers recorded through 2 microphones.(RVG1, Part 2, with 303 speakers recorded through 2 microphones will be available from the beginning of 1999.)</description>
+<description lang="French">Le corpus comprend des chiffres isolés, des chiffres connectés, des numéros de téléphone, des phrases phonétiquement équilibrées, des phrases de commandes d'ordinateur et de la parole spontanée. Chacun des 498 locuteurs a lu un sous-corpus de 85 éléments:    * 11 chiffres isolés (0-9, avec les deux prononciations du 2 (" zwei ", " zwo ")),    * 19 chiffres connectés (10-19, 20-100 par groupes de dix),    * 12 phrases de commandes d'ordinateur,    * 30 phrases phonétiquement équilibrées,    * 5 numéros de téléphone à 6 chiffres,    * 5 numéros de téléphone à 7 chiffres,    * 2 numéros de téléphone avec le code régional,    * 1 minute de parole spontanée (monologue).Chaque locuteur était placé en face d'un PC standard. Le bruit de fond était limité au bruit habituel d'un environnement de bureau, par exemple, un claquement de porte, une conversation, une sonnerie de téléphone, un froissement de papier, le bruit du PC, etc. La tête de chaque locuteur se trouve à une distance de 60 à 120 cm de l'écran et de 30 à 60 cm des micros de table. Le locuteur n'est pas obligé de s'installer dans une position particulière. Le locuteur porte un Sennheiser HD 410 et est libre d'utiliser le clavier ou la souris posés en face de lui. Les trois micros de table sont les suivants : un Sennheiser MD 441 U, un Telex (Soundblaster) et un Talk Back (AT&amp;T). Les locuteurs ont été sélectionnés pour couvrir la densité démographique des régions germanophones d'Europe (y compris l'Autriche et la Suisse).Les échantillons de sons enregistrés sont stockés sous le format NIST SPHERE. La résolution est de 16 Bits. La fréquence d'échantillonnage est de 22 050 Hz sauf pour les locuteurs 001 à 036 qui ont été enregistrés à 11 025 Hz. Chaque canal de micro est stocké dans un fichier séparé. Une transcription de la parole spontanée d'après le format Verbmobil est également fournie. RVG1, Partie 1 comprend 498 locuteurs enregistrés à travers des microphones basse qualité. RVG1, Partie 2 comprend 421 locuteurs enregistrés à travers des microphones haute qualité.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=696</url>
-<identifier>ELRA-W0037</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=190</url>
+<identifier>ELRA-S0058</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,135 +29,45 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2009-03-06</lastDateUpdated>
+<lastDateUpdated>2005-05-02</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Non Member: 0.00€</price>
-<price>Academic org. ELRA Member: 0.00€</price>
+<price>Academic org. ELRA Member: 7669.38€</price>
+<price>Commercial org. ELRA Member: 11759.71€</price>
+<price>Academic org. ELRA Non Member: 11759.71€</price>
+<price>Commercial org. ELRA Non Member: 16872.63€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2004-09-15</availabilityStartDate>
+<availabilityStartDate>1998-07-08</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Academic org. ELRA Member: 11759.71€</price>
+<price>Commercial org. ELRA Member: 11759.71€</price>
+<price>Academic org. ELRA Non Member: 16872.63€</price>
+<price>Commercial org. ELRA Non Member: 16872.63€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1998-07-08</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>EMILLE (Enabling Minority Language Engineering) - UK EPSRC</projectName>
-<fundingType>ownFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
 <corpusMediaType>
-<corpusTextInfo>
-<mediaType>text</mediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>urd</languageId>
-<languageName>Urdu</languageName>
+<languageId>ger/deu</languageId>
+<languageName>German</languageName>
 </languageInfo>
-<languageInfo>
-<languageId>tel</languageId>
-<languageName>Telugu</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>tam</languageId>
-<languageName>Tamil</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>sin</languageId>
-<languageName>Sinhalese</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>pan</languageId>
-<languageName>Panjabi</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Punjabi</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
-</languageInfo>
-<languageInfo>
-<languageId>ori</languageId>
-<languageName>Oriya</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>mar</languageId>
-<languageName>Marathi</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>mal</languageId>
-<languageName>Malayalam</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>kas</languageId>
-<languageName>Kashmiri</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>kan</languageId>
-<languageName>Kannada</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>hin</languageId>
-<languageName>Hindi</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>guj</languageId>
-<languageName>Gujarati</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>ben</languageId>
-<languageName>Bengali</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>asm</languageId>
-<languageName>Assamese</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>hin</languageId>
-<languageName>Hindi</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>ben</languageId>
-<languageName>Bengali</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>pan</languageId>
-<languageName>Panjabi</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Punjabi</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
-</languageInfo>
-<languageInfo>
-<languageId>guj</languageId>
-<languageName>Gujarati</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>urd</languageId>
-<languageName>Urdu</languageName>
-</languageInfo>
-<sizeInfo>
-<size>1.82</size>
-<sizeUnit>gb</sizeUnit>
-</sizeInfo>
-</corpusTextInfo>
+</corpusAudioInfo>
 </corpusMediaType>
 </corpusInfo>
 </resourceComponentType>

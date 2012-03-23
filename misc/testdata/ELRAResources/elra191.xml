@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">VERBA Polytechnic and Plurilingual Terminological Database - F-AJ Food Plants</resourceName>
-<resourceName lang="French">Base de données terminologique polytechnique et plurilingue VERBA - F-AJ Plantes alimentaires</resourceName>
-<description lang="English">* Entries for English-Spanish: Scientific research &amp; mathematical sciences (906 entries), Geosciences (10,215), Computer science, electronics &amp; telecommunications (70,580), Industry (47,578), Transport &amp; Maintenance (12,291), Economy (145,572), Biological sciences (38,989), Communication &amp; media (8,143), Chemical &amp; physical sciences (27,467). * Entries for English-French-German-Spanish: Environment (36,658), Health (66,727), Agriculture &amp; food (25,975), Construction &amp; public works (8,429), Law &amp; policy (56,578), Sports &amp; Leisure (17,312) * Two specialized lexicons: Spanish-English and English-French-German without domain codes: electronics, telematics, law, taxes, customs, etc. (550,000 entries). * Two general lexicons: Spanish-English-French-German and Spanish-English-French-German-Portuguese-Italian (83,000 entries).This terminological database contains, for each domain, a sub-domain indication is given (from 2 sub-domains for Scientific research to 39 for Sports &amp; leisure). Each entry consists of a definition, phraseological unit, abbreviation, usage information, grammatical labels. Format: ASCIIMedium: floppy disk</description>
-<description lang="French">* Entrées anglais-espagnol : Recherche scientifique &amp; sciences mathématiques (906 entrées), géosciences (10 215), informatique, électronique &amp; télécommunications (70 580), industrie (47 578), transports &amp; maintenance (12 291), économie (145 572), sciences biologiques (38 989), communication &amp; média (8 143), sciences chimiques &amp; physiques (27 467).* Entrées allemand-anglais-espagnol-français : Environnement (36 658), santé (66 727), agriculture &amp; alimentation (25 975), construction &amp; travaux publics (8 429), droit &amp; politique (56 578), sports &amp; loisirs (17 312).* Deux lexiques spécialisés: Espagnol-anglais et allemand-anglais-français sans codes de domaine : électronique, télématique, droit, taxes, douanes, etc. (550 000 entrées).* Deux lexiques généraux: Allemand-anglais-espagnol-français et allemand-anglais-espagnol-français-italien-portugais. (83 000 entrées).Cette base de données terminologique contient, pour chaque domaine, l'indication de sous-domaines (de 2 sous-domaines pour la recherche scientifique à 39 pour les sports et loisirs). Chaque entrée comporte une définition, une unité phraséologique, une abréviation, une information sur l'usage et des étiquettes grammaticales.Format: ASCIISupport : disquette</description>
+<resourceName lang="English">SALA II Spanish from Mexico database</resourceName>
+<resourceName lang="French">Base de données SALA II de l'espagnol mexicain</resourceName>
+<description lang="English">The SALA II Spanish from Mexico database collected in Mexico was recorded within the scope of the SALA II project.The SALA II Spanish from Mexico database contains the recordings of 1,075 Mexican speakers (539 males and 536 females) recorded over the Mexican mobile telephone network.The following acoustic conditions were selected as representative of a mobile user's environment:    * Passenger in moving car, railway, bus, etc. (155 speakers)    * Public place (279 speakers)    * Stationary pedestrian by road side (223 speakers)    * Home/office environment (364 speakers)    * Passenger in moving car using a hands-free kit (54 speakers) This database is distributed as 1 DVD-ROM The speech files are stored as sequences of 8-bit, 8kHz a-law speech files and are not compressed, according to the specifications of SALA II. Each prompt utterance is stored within a separate file and has an accompanying ASCII SAM label file.This speech database was validated by SPEX (the Netherlands) to assess its compliance with the SALA II format and content specifications.Each speaker uttered the following items:    * 6 application words    * 1 sequence of 10 isolated digits    * 4 connected digits (1 sheet number -6 digits, 1 telephone number -9/11 digits, 1 credit card number -14/16 digits, 1 PIN code -6 digits)    * 3 dates (1 spontaneous date e.g. birthday, 1 word style prompted date, 1 relative and general date expression)    * 2 spotting phrase using an embedded application word    * 2 isolated digits    * 3 spelled words (1surname, 1 directory assistance city name, 1 real/artificial name for coverage)    * 1 currency money amount    * 1 natural number    * 5 directory assistance names (1 surname out of a set of 500, 1 city of birth/growing up, 1 most frequent city out of a set of 500, 1 most frequent company/agency out of a set of 500, 1 "forename surname" out of a set of 150 )    * 2 yes/no questions (1 predominantly "yes" question, 1 predominantly "no" question)    * 9 phonetically rich sentences    * 2 time phrases (1 spontaneous time of day, 1word style time phrase)    * 4 phonetically rich words The following age distribution has been obtained: 7 speakers are under 16, 643 speakers are between 16 and 30, 248 speakers are between 31 and 45, 169 speakers are between 46 and 60, and 8 speakers are over 60.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
+<description lang="French">La base de données SALA II de l'espagnol collectée au Mexique en réseau mobile a été enregistrée dans le cadre du projet SALA II.La base de données SALA de l'espagnol mexicain contient les enregistrements de 1075 locuteurs mexicains (539 hommes, 536 femmes) enregistrés à travers le réseau téléphonique mobile mexicain.Les conditions acoustiques suivantes ont été choisies comme l'environnement représentatif d'un utilisateur de portable:    * Passager dans une voiture en marche, en train, en bus, etc. (155 locuteurs)    * Lieu public (279 locuteurs)    * Piéton à l'arrêt à côté d'une route (223 locuteurs)    * Environnement domicile/bureau (364 locuteurs)    * Passager dans une voiture en marche utilisant un kit mains-libres (54 locuteurs) Cette base est distribuée sur 1 DVD-ROM. Selon les spécifications de SALA II, les fichiers de parole sont stockés en séquences d'échantillons de 8 bit, 8 kHz, loi-A et ne sont pas compressés. Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM.Cette base de données a été validée par SPEX (Pays-Bas) afin de vérifier sa conformité avec le format SALA II et les spécifications du contenu.Contenu du corpus :    * 6 mots de commande ;    * 1 séquence de 10 chiffres isolés ;    * 4 chiffres connectés : 1 numéro permettant d'identifier la feuille de prompt (6 chiffres), 1 numéro de téléphone (9-11 chiffres), 1 numéro de carte de crédit (14-16 chiffres), 1 code confidentiel (6 chiffres) ;    * 3 dates : 1 date spontanée (ex. anniversaire), 1 date lue, 1 date générale ;    * 2 expressions utilisant un mot de commande ;    * 2 chiffres isolés ;·    * 3 mots épelés : 1 prénom, 1 nom de ville provenant d'un annuaire de renseignements téléphoniques, 1 mot réel/artificiel pour couverture ;    * 1 montant en devises ;    * 1 nombre entier naturel ;    * 5 noms provenant d'un annuaire de renseignements téléphoniques : 1 prénom (sur 500), 1 ville de naissance/d'origine du locuteur (spontané), 1 nom de ville parmi les plus fréquentes (sur 500), 1 nom de compagnie parmi les plus fréquentes (sur 500), 1 répétition de "prénom nom" ;    * 2 questions oui/non : 1 question à prédominance "oui", 1 question à prédominance "non" ;    * 9 phrases phonétiquement riches ;    * 2 phrases comportant une notion de temps : 1 jour (spontané), 1 phrase comportant une notion de temps ;    * 4 mots phonétiquement riches. Les classes d'âge sont réparties comme suit : 7 locuteurs ont moins de 16 ans, 643 locuteurs ont entre 16 et 30 ans, 248 locuteurs ont entre 31 et 45 ans, 169 locuteurs ont entre 46 et 60 ans et 8 locuteurs ont plus de 60 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=237</url>
-<identifier>ELRA-T0162</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=741</url>
+<identifier>ELRA-S0171</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,32 +29,46 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2006-09-27</lastDateUpdated>
+<lastDateUpdated>2007-08-28</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 51000.00€</price>
+<price>Academic org. ELRA Non Member: 40000.00€</price>
+<price>Commercial org. ELRA Member: 45000.00€</price>
+<price>Academic org. ELRA Member: 34000.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2004-12-23</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 0.70€</price>
-<price>Commercial org. ELRA Non Member: 1.00€</price>
-<availabilityStartDate>1997-04-11</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 51000.00€</price>
+<price>Academic org. ELRA Non Member: 51000.00€</price>
+<price>Commercial org. ELRA Member: 45000.00€</price>
+<price>Academic org. ELRA Member: 45000.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2004-12-23</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>SALA II</projectName>
+<fundingType>euFunds</fundingType>
+</fundingProject>
+</resourceCreationInfo>
 <resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>terminologicalResource</lexicalConceptualResourceType>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
-<mediaType>text</mediaType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
-<languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
-</languageInfo>
 <languageInfo>
 <languageId>spa</languageId>
 <languageName>Spanish</languageName>
@@ -66,17 +80,17 @@
 <sizeUnit>gb</sizeUnit>
 </sizePerLanguageVariety>
 </languageVarietyInfo>
+<languageVarietyInfo>
+<languageVarietyName>Mexico</languageVarietyName>
+<languageVarietyType>other</languageVarietyType>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
 </languageInfo>
-<languageInfo>
-<languageId>ger/deu</languageId>
-<languageName>German</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
-</languageInfo>
-</lexicalConceptualResourceTextInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
 </resourceComponentType>
 </resourceInfo>

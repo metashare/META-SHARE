@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">VERBMOBIL II - VM CD 65.0 - VM65.0 (original edition)</resourceName>
-<resourceName lang="French">VERBMOBIL II - VM CD 65.0 - VM65.0 (édition originale)</resourceName>
-<description lang="English">Verbmobil is a long-term project of the German Federal Ministry of Education, Science, Research and Technology (BMBF, Projekträger DLR). Its aim is to give Germany an international top position in language technology and its economical application in the next millenium by cooperation and concentration of as many as possible specialists from industry and science. The long-sighted aim is the development of a mobile translation system for the translation of spontaneous speech in face-to-face situations.The following resources are spontaneous speech databases recorded in a dialogue task (appointment scheduling) .VERBMOBIL II - VM CD 65.0 - VM65.0 (original edition) consists of 1 CD-ROM with 13 WOZ dialogues designed to evoke emotions (mainnly anger) - transliteration, emotion labeling in German.</description>
-<description lang="French">Verbmobil est un projet du Ministère fédéral allemand de l'Education, des Sciences, de la Recherche et des Technologies (BMBF, Projekträger DLR), qui vise à placer l'Allemagne en position de force dans le domaine de l'ingénierie de la langue. Son objectif , à long terme, est de développer un système de traduction vocale automatique, pour la traduction de conversations spontanées. Ces ressources sont des enregistrements de conversation pour la prise de rendez-vous. Le corpus allemand comprend 13 910 occurrences (échanges). L'édition de BAS de la partie allemande est entièrement étiquetée et segmentée en unités phonémiques/phonétiques (alphabet SAM-PA) par le système MAUS et partiellement segmentée de manière manuelle.VERBMOBIL II - VM CD 65.0 - VM65.0 (édition originale) contient 1 CD-ROM composé de 13 dialogues obtenus par la technique du magicien d'Oz (WOZ) pour évoquer des émotions (la colère principalement) - transcription, étiquetage des émotions en allemand.</description>
+<resourceName lang="English">SIelex (Siemens Phonetic lexicon)</resourceName>
+<resourceName lang="French">SIelex (Lexique Phonétique de Siemens)</resourceName>
+<description lang="English">The lexicon consists of  a list of 186.600 entries, including proper names, place names, no-native entries and abbreviations, with phonetic transcriptions, main stress markers and syllable boundary markers. Most of the entries were selected from the political and economical parts of two German newspapers namely the 'Süddeutsche Zeitung' (SZ) and the 'Frankfurter Allgemeine Zeitung' (FAZ). The transcription follows in most parts the so-called standard German pronunciation. Departures are described in the documentation. For some entries multiple pronunciations are taken into account especially in the case of homographs and abbreviations.The alphabet chosen is extended German SAM-PA, but  it can easily be translated into other alphabets. The character set chosen is ISO-8859-1, a tool for conversion into LATEX is provided with the CD-ROM.</description>
+<description lang="French">Ce lexique comprend une liste de 186 600 entrées, comprenant des noms propres, noms de lieux, entrées non-natives et abréviations, avec transcriptions phonétiques, principales marques d'accentuation et séparateurs de syllabes. La plupart de ces entrées sont extraites des rubriques politiques et économiques des quotidiens allemands Süddeutsche Zeitung (SZ) et Frankfurter Allgemeine Zeitung (FAZ). La transcription suit les grandes lignes du standard de prononciation allemande. Les exceptions sont décrites dans la documentation. Pour certaines entrées, les prononciations multiples sont prises en compte en particulier dans le cas d'homographes et d'abréviations.L'alphabet utilisé est l'extension SAM-PA à l'allemand, mais il peut être facilement traduit dans d'autres alphabets. Le jeu de caractère utilisé est ISO-8859-1. Un outil de conversion vers LATEX est également fourni avec le CD-ROM.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=621</url>
-<identifier>ELRA-S0034_76</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=449</url>
+<url>http://catalog.elra.info/product_info.php?products_id=772</url>
+<identifier>ELRA-S0048</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,42 +30,50 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-04-21</lastDateUpdated>
+<lastDateUpdated>2007-09-27</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 127.82€</price>
-<price>Commercial org. ELRA Member: 127.82€</price>
-<price>Academic org. ELRA Non Member: 255.65€</price>
-<price>Commercial org. ELRA Non Member: 255.65€</price>
+<price>Commercial org. ELRA Non Member: 35000.00€</price>
+<price>Academic org. ELRA Non Member: 35000.00€</price>
+<price>Commercial org. ELRA Member: 27500.00€</price>
+<price>Academic org. ELRA Member: 27500.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1996-09-01</availabilityStartDate>
+<availabilityStartDate>1998-03-20</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 127.82€</price>
-<price>Commercial org. ELRA Member: 127.82€</price>
-<price>Academic org. ELRA Non Member: 255.65€</price>
-<price>Commercial org. ELRA Non Member: 255.65€</price>
+<price>Commercial org. ELRA Non Member: 35000.00€</price>
+<price>Academic org. ELRA Non Member: 35000.00€</price>
+<price>Commercial org. ELRA Member: 27500.00€</price>
+<price>Academic org. ELRA Member: 27500.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1996-09-01</availabilityStartDate>
+<availabilityStartDate>1998-03-20</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>Verbmobil II</projectName>
-<fundingType>other</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusAudioInfo>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>ger/deu</languageId>
+<languageName>German</languageName>
+</languageInfo>
+<textFormatInfo>
+<mimeType>Plain text</mimeType>
+</textFormatInfo>
+</lexicalConceptualResourceTextInfo>
+<lexicalConceptualResourceAudioInfo>
 <mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
@@ -73,8 +82,8 @@
 <languageId>ger/deu</languageId>
 <languageName>German</languageName>
 </languageInfo>
-</corpusAudioInfo>
-</corpusMediaType>
-</corpusInfo>
+</lexicalConceptualResourceAudioInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

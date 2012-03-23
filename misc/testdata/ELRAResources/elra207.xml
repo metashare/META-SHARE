@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">VERBMOBIL - VM CD 2.1 (new edition)</resourceName>
-<resourceName lang="French">VERBMOBIL - VM CD 2.1 - VM21 (nouvelle édition)</resourceName>
-<description lang="English">Verbmobil is a long-term project of the German Federal Ministry of Education, Science, Research and Technology (BMBF, Projekträger DLR). Its aim is to give Germany an international top position in language technology and its economical application in the next millenium by cooperation and concentration of as many as possible specialists from industry and science. The long-sighted aim is the development of a mobile translation system for the translation of spontaneous speech in face-to-face situations.The following resources are spontaneous speech databases recorded in a dialogue task (appointment scheduling) .VM CD 2.1 (new edition) consists of 1 CD-ROM with 81 Dialogues 227 Appointments, 1538 Turns in German. This new edition contains the transliterations of all dialogues, signal files with PhonDat 2 Header structure, software and speaker documentations. All files were validaed according to BAS guidelines.</description>
-<description lang="French">Verbmobil est un projet du Ministère fédéral allemand de l'Education, des Sciences, de la Recherche et des Technologies (BMBF, Projekträger DLR), qui vise à placer l'Allemagne en position de force dans le domaine de l'ingénierie de la langue. Son objectif , à long terme, est de développer un système de traduction vocale automatique, pour la traduction de conversations spontanées. Ces ressources sont des enregistrements de conversation pour la prise de rendez-vous. Le corpus allemand comprend 13 910 occurrences (échanges). L'édition de BAS de la partie allemande est entièrement étiquetée et segmentée en unités phonémiques/phonétiques (alphabet SAM-PA) par le système MAUS et partiellement segmentée de manière manuelle.VM CD 2.1 - VM21 (nouvelle édition) contient 1 CD-ROM composé de 81 dialogues, 227 rendez-vous, 1538 échanges en allemand. Cette nouvelle édition contient les transcriptions de tous les dialogues, les fichiers de signaux dans la structure d'en-tête PhonDat 2, le logiciel et la documentation sur les locuteurs. Tous les fichiers ont été validés selon les directives BAS.</description>
+<resourceName lang="English">The "SIVA" Speech Database for Speaker Verification and Identification</resourceName>
+<resourceName lang="French">SIVA, base de données orale pour la vérification et l'identification du locuteur</resourceName>
+<description lang="English">The Italian speech database SIVA (?Speaker Identification and Verification Archives: SIVA?), is a database comprising more than two thousands calls, collected over the public switched telephone network, and available very soon via ELRA. The SIVA database consists of four speaker categories: male users, female users, male impostors, female impostors. Speakers were contacted via mail before the test, and they were asked to read the information and the instructions provided carefully before making the call. About 500 speakers were recruited using a company specialized in selection of population samples. The others were volunteers contacted by the institute concerned. Speakers access the recording system by calling a toll free number. An automatic answering system guides them through the three sessions that make up a recording. In the first session, a list of 28 words (including digits and some commands) is recorded using a standard enumerated prompt. The second session is a simple unidirectional dialogue (the caller answers prompted questions) where personal information is asked (name, age, etc.). In the third session, the speaker is asked to read a continuous passage of phonetically balanced text that resembles a short curriculum vitae. The signal is a standard 8kHz sampled signal, coded using 8 bits mu-law format. The data collected so far consists of:· MU: male users 18 speakers, 20 repetitions· FU: female users 16 speakers, 26 repetitions· MI: male impostors: 189 speakers, 2 repetitions, and 128 speakers, 1 repetition· FI: female impostors: 213 speakers, 2 repetitions, and 107 speakers, 1 repetition.</description>
+<description lang="French">La base de données orales de l'italien SIVA (Identification du locuteur et archives de vérifications - Speaker Identification and Verification Archives), contient plus de 2 000 enregistrements téléphoniques.SIVA est composée de quatre catégories de locuteurs : "utilisateurs" hommes, "utilisateurs" femmes, "imposteurs" hommes, "imposteurs" femmes. Les locuteurs ont d'abord été contactés par courrier avant le test, puis on leur a demandé de lire les informations et les instructions soigneusement fournies avant d'effectuer l'appel. Environ 500 locuteurs ont été recrutés par une société spécialisée dans la sélection d'échantillons de population. Les autres sont des volontaires contactés par l'institut concerné.Les locuteurs ont accédé au système d'enregistrement en appelant un numéro vert. Un système de réponse automatique les guide à travers les trois sessions qui constituent un enregistrement. La première session qui contient une liste de 28 mots (y compris des chiffres et quelques mots de commande) a été enregistrée en utilisant un énoncé numéroté standard. La deuxième session consiste en un simple dialogue unidirectionnel (le locuteur répond à des questions énoncées) où l'on demande des informations personnelles (nom, âge, etc.). Dans la troisième session, le locuteur doit lire un passage continu d'un texte phonétiquement équilibré similaire à un bref curriculum vitae.La fréquence d'échantillonnage est de 8kHz, le codage utilise 8 bits selon la loi µ.Les données collectées sont constituées comme suit :    * 18 répétitions par 20 locuteurs hommes,    * 18 répétitions par 20 locuteurs femmes,    * 1 répétition par 400 "imposteurs" hommes,    * 1 répétition par 400 "imposteurs" femmes</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=460</url>
-<identifier>ELRA-S0034_04</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=77</url>
+<identifier>ELRA-S0028</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,37 +29,31 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2009-01-14</lastDateUpdated>
+<lastDateUpdated>2005-06-14</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 255.65€</price>
-<price>Academic org. ELRA Non Member: 255.65€</price>
-<price>Commercial org. ELRA Member: 127.82€</price>
-<price>Academic org. ELRA Member: 127.82€</price>
+<price>Commercial org. ELRA Non Member: 4500.00€</price>
+<price>Academic org. ELRA Non Member: 3000.00€</price>
+<price>Commercial org. ELRA Member: 3000.00€</price>
+<price>Academic org. ELRA Member: 1000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1996-09-01</availabilityStartDate>
+<availabilityStartDate>1998-11-23</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 255.65€</price>
-<price>Academic org. ELRA Non Member: 255.65€</price>
-<price>Commercial org. ELRA Member: 127.82€</price>
-<price>Academic org. ELRA Member: 127.82€</price>
+<price>Commercial org. ELRA Non Member: 4500.00€</price>
+<price>Academic org. ELRA Non Member: 4500.00€</price>
+<price>Commercial org. ELRA Member: 3000.00€</price>
+<price>Academic org. ELRA Member: 3000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1996-09-01</availabilityStartDate>
+<availabilityStartDate>1998-11-23</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>Verbmobil</projectName>
-<fundingType>other</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
@@ -70,8 +64,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>ger/deu</languageId>
-<languageName>German</languageName>
+<languageId>ita</languageId>
+<languageName>Italian</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

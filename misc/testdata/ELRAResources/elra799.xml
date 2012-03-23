@@ -6,7 +6,7 @@
 <description lang="English">General VocabularyEntries: 64000 Format: ASCII format with ISO 8859-1 character set. A lexicon file contains entries with  feature value pairs on each line and separators between entries.Medium: Floppy Disk, QIC 150 MB Cartridge Tape The Dutch LanTmark lexicon is divided into the following categories: nouns (50,000), verbs (7,000), adjectives (6,000), adverbs (1,000).Each entry contains morphological information (morphological flexes, comparative and superlative markers), syntactic information (such as positional features, gender, complement markers and verb arguments), semantic information (lexical semantics for nouns, adverbs and adjectives).</description>
 <description lang="French">Vocabulaire généralEntrées : 64 000Format : ASCIISupport : disquette, cartouche QIC 150 MBLe lexique hollandais LanTmark est divisé dans les catégories suivantes : noms (50.000), verbes (7.000), adjectifs (6.000), adverbes (1.000).Chaque entrée contient des informations morphologiques (flexions, marques de superlatif et comparatif), informations syntaxiques (traits de position, genre, marqueurs de complément et arguments de verbe), informations sémantiques (lexico-sémantiques pour les noms et les adjectifs).</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=55</url>
 <identifier>ELRA-L0004</identifier>
 </identificationInfo>

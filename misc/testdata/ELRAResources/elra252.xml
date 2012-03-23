@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Mechanical Engineering</resourceName>
-<resourceName lang="French">Ingénierie mécanique (Universität Hildesheim)</resourceName>
-<description lang="English">Cards available: 2210Languages: German, English, French,SpanishCard Description: Each card in this terminological database contains a definition, relation between concepts, graphics, abbreviations, notes, sub-domains, sources, grammatical labels.</description>
-<description lang="French">Fiches disponibles : 2210Description de la fiche : Chaque fiche de cette base terminologique contient une définition, des relations entre les concepts, des graphiques, des abréviations, des notes, des sous-domaines, des sources et des étiques grammaticales.</description>
+<resourceName lang="English">Siemens Shanghai Mandarin FDB-1000</resourceName>
+<resourceName lang="French">Base de données FDB-1000 du mandarin de Shanghai</resourceName>
+<description lang="English">The Shanghai Mandarin FDB-1000 database contains the recordings of 1,000 speakers (500 males, 500 females) recorded over the fixed telephone network. This acoustic database gathers Mandarin data, as spoken in Shanghai as a first or second Chinese dialect/language.The corpus consists of read speech, including digits and application words for teleservices, recorded through an ISDN card. Chinese characters and English translation are included, as well as canonical Pinyin transcription including tone markers, and several categories of non-speech events.Speech samples are stored as sequences of 8 bits 8 kHz A-law. Signal and annotation files are stored separately.Each speaker uttered about 70 items, which consist of isolated digits, yes/no questions, common application words and phrases.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
+<description lang="French">Cette base orale contient des données du mandarin, tel qu'il est parlé à Shanghai en première ou deuxième langue/dialecte chinois. Le corpus comprend de la parole lue, y compris des chiffres et des mots de commandes choisis pour la réalisation de services télématiques. La base a été enregistrée au moyen d'une carte ISDN. Un total de 70 énoncés a été enregistré par chacun des quelques 1000 locuteurs (500 hommes, 500 femmes).Chaque locuteur a prononcé les éléments suivants :    * chiffres isolés,    * oui/non,    * mots et phrases de commande courants.La bases de données est fournie avec les caractères chinois et leur traduction en anglais, une transcription canonique en Pinyin et les marqueurs de tons, ainsi que plusieurs catégories d'événements acoustiques clairement audibles.Les fichiers de parole sont stockés en séquences d'échantillons de 8 bits, 8 kHz, loi-A. Les fichiers d'annotation et de signaux sont stockés séparément.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=110</url>
-<identifier>ELRA-T0098</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=189</url>
+<identifier>ELRA-S0057</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,67 +29,46 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-06-13</lastDateUpdated>
+<lastDateUpdated>2007-08-28</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 2.05€</price>
-<price>Academic org. ELRA Non Member: 2.05€</price>
-<price>Commercial org. ELRA Member: 1.23€</price>
-<price>Academic org. ELRA Member: 1.23€</price>
-<distributionAccessMedium>other</distributionAccessMedium>
-<availabilityStartDate>1997-01-23</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 15000.00€</price>
+<price>Academic org. ELRA Non Member: 15000.00€</price>
+<price>Commercial org. ELRA Member: 10000.00€</price>
+<price>Academic org. ELRA Member: 10000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1998-11-23</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 2.05€</price>
-<price>Academic org. ELRA Non Member: 2.05€</price>
-<price>Commercial org. ELRA Member: 1.23€</price>
-<price>Academic org. ELRA Member: 1.23€</price>
-<distributionAccessMedium>other</distributionAccessMedium>
-<availabilityStartDate>1997-01-23</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 15000.00€</price>
+<price>Academic org. ELRA Non Member: 15000.00€</price>
+<price>Commercial org. ELRA Member: 10000.00€</price>
+<price>Academic org. ELRA Member: 10000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1998-11-23</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>terminologicalResource</lexicalConceptualResourceType>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
-<mediaType>text</mediaType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
+<languageId>chi/zho</languageId>
+<languageName>Chinese</languageName>
 </languageInfo>
-<languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>ger/deu</languageId>
-<languageName>German</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>spa</languageId>
-<languageName>Spanish</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Castilian</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
-</languageInfo>
-</lexicalConceptualResourceTextInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
 </resourceComponentType>
 </resourceInfo>

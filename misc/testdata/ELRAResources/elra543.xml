@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Mandarin Chinese Telephone Speech Recognition Corpus – SMS (Mobile telephone 64)</resourceName>
-<resourceName lang="French">Corpus de reconnaissance de parole téléphonique en chinois mandarin – SMS (téléphone mobile 64)</resourceName>
-<description lang="English">This corpus comprises 1,079 entries uttered by 64 speakers of different dialects, ages and various educational levels (52 males and 12 females), recorded over the mobile telephone network. The database comprises 3,190 Chinese short messages (SMS). Speech samples are stored as a sequence of 16-bit 8kHz WAV for a total of 3 hours of speech. The total capacity of the data is 161 Mb.Each speaker read 50 items. Text files are stored in Unicode format. All data have been proofread manually.The transcriptions include non-speech markers (background noise, background speech, speaker sounds) as well as markers for mispronunciation, channel distortions, words left-out and duplicates.The corpus aims to be applied to the testing and telephone natural speech recognition system.</description>
-<description lang="French">Ce corpus comprend 1 079 entrées prononcées par 64 locuteurs de dialectes, d’âges et de niveaux d’éducation différents (52 hommes et 12 femmes), enregistrées à travers le réseau téléphonique mobile. La base de données contient 3 190 SMS. Les échantillons de parole sont stockés sous la forme de séquences 16-bit 8kHz WAV pour un total de 3 heures de parole. La taille totale des données est de 161 Mo.Chaque locuteur a lu 50 éléments. Les fichiers textes sont stockés au format Unicode. Toutes les données ont été vérifiées manuellement.Les transcriptions comprennent des balises d’événements acoustiques (bruits de fond, sons émis par les locuteurs) ainsi que des balises de mauvaise prononciation, distorsions du canal, omissions de mots et répétitions.Cette base de données a été conçue pour l’évaluation et le développement de systèmes de reconnaissance de la parole naturelle par téléphone.</description>
+<resourceName lang="English">Catalan SpeechDat-Car database</resourceName>
+<resourceName lang="French">Base de données SpeechDat-Car catalan</resourceName>
+<description lang="English">The Catalan SpeechDat-Car database contains the in-car recordings of 300 speakers who uttered from around 120 read and spontaneous items. Each speaker recorded two sessions. Recordings have been made through 4 different channels, via in-car microphones (1 close-talk microphone, 3 far-talk microphones). The 300 Catalan speakers were selected from 5 different dialectal regions and are balanced in gender and age groups. The database was validated by UVIGO. The Catalan-SpeechDat-Car Database was funded by the Catalan Government.</description>
+<description lang="French">La base de données SpeechDat-Car catalan comprend les enregistrements de 300 locuteurs ayant enregistré environ 120 éléments lus et spontanés dans une voiture. Chaque locuteur a enregistré deux sessions. Les enregistrements ont été réalisés à travers 4 canaux différents, via des microphones placés dans la voiture (1 proche, et 3 éloignés). Les 300 locuteurs catalans ont été sélectionnés selon 5 régions dialectales différentes et sont équilibrés en genre et par groupe d’âge. La base de données a été validée par UVIGO. La base de données SpeechDat-Car catalan a été financée par le gouvernement catalan.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=913</url>
-<identifier>ELRA-S0228_10</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1148</url>
+<identifier>ELRA-S0326</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,27 +29,27 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2009-09-24</lastDateUpdated>
+<lastDateUpdated>2012-01-05</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 796.00€</price>
-<price>Academic org. ELRA Non Member: 796.00€</price>
-<price>Commercial org. ELRA Member: 796.00€</price>
-<price>Academic org. ELRA Member: 796.00€</price>
-<availabilityStartDate>2007-01-17</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 4000.00€</price>
+<price>Academic org. ELRA Non Member: 0.00€</price>
+<price>Commercial org. ELRA Member: 2000.00€</price>
+<price>Academic org. ELRA Member: 0.00€</price>
+<availabilityStartDate>2011-12-23</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 796.00€</price>
-<price>Academic org. ELRA Non Member: 796.00€</price>
-<price>Commercial org. ELRA Member: 796.00€</price>
-<price>Academic org. ELRA Member: 796.00€</price>
-<availabilityStartDate>2007-01-17</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 4000.00€</price>
+<price>Academic org. ELRA Non Member: 4000.00€</price>
+<price>Commercial org. ELRA Member: 2000.00€</price>
+<price>Academic org. ELRA Member: 2000.00€</price>
+<availabilityStartDate>2011-12-23</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceComponentType>
@@ -62,8 +62,16 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>chi/zho</languageId>
-<languageName>Chinese</languageName>
+<languageId>cat</languageId>
+<languageName>Catalan</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Valencian</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

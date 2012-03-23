@@ -6,7 +6,7 @@
 <description lang="English">Large acoustic corpus in Korean produced by Kaist Korterm. Two announcers and 70 native speakers (males and females) read 2 times one paragraph. . Information such as the size and the level of studies of the speakers are provided. The recordings took place in a soundproof room. The data are stored in a 8-bit A-law speech file, with a 16 kHz sampling rate. The standard in use is NIST.</description>
 <description lang="French">Important corpus de textes lus en coréen produit par Kaist Korterm. Deux présentateurs et 70 locuteurs natifs coréens (hommes et femmes) ont lu deux fois le même paragraphe. Des informations comme la taille du locuteur ou son niveau d'études sont fournies. Les enregistrements ont été effectués dans une pièce insonorisée. Les données sont stockées dans un fichier de parole de 8 bits, loi-A, avec une fréquence d'échantillonnage de 16 kHz. La norme suivie est NIST.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=649</url>
 <identifier>ELRA-S0126</identifier>
 </identificationInfo>

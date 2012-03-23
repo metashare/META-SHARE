@@ -6,7 +6,7 @@
 <description lang="English">The corpus contains read speech of 201 different speakers. Each speaker has read a subcorpus of 450 different sentences (including alphanumericals and two short passages of prose text); 8 speakers have read the whole sentence corpus. The speakers were recorded at four different sites in Germany (University of Kiel, University of Bonn, University of Bochum, University of Munich). The language is German. The corpus contains a total of 21.681 recorded utterances. It is provided with a phonological segmentation by hand of a small subset and an automatic alignment of the whole corpus. (4 CDROMs).</description>
 <description lang="French">The corpus contains read speech of 201 different speakers. Each speaker has read a subcorpus of 450 different sentences (including alphanumericals and two short passages of prose text); 8 speakers have read the whole sentence corpus. The speakers were recorded at four different sites in Germany (University of Kiel, University of Bonn, University of Bochum, University of Munich). The language is German. The corpus contains a total of 21.681 recorded utterances. It is provided with a phonological segmentation by hand of a small subset and an automatic alignment of the whole corpus. (4 CDROMs).</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=63</url>
 <identifier>ELRA-S0023</identifier>
 </identificationInfo>

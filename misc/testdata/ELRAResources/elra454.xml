@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">THAMUS Bilingual dictionaries - Computer science</resourceName>
-<resourceName lang="French">THAMUS Dictionnaires bilingues - Informatique</resourceName>
-<description lang="English">Technical domainsLanguages: Italian=&gt;EnglishFormat: ASCII format with ISO 8859-1 character setMedium: QIC 150 MB Cartridge TapeDomain: Computer science, 15,700 entries, canonical formsTechnical bilingual Italian dictionaries with a morphological coding which can generate all full forms using a software engine written in C. Multi-word terms contain morphological coding for the head word.</description>
-<description lang="French">Domaines techniquesLangues : italien=&gt;anglaisDomaine: Informatique, 15 700 entrées, formes canoniquesLes dictionnaires techniques bilingues disposent d'une codification morphologique qui permet de générer toutes les formes fléchies grâce à un logiciel écrit en langage C. Les mots composés contiennent une codification morphologique sur la tête des mots.</description>
+<resourceName lang="English">Offensive Word Filter 2</resourceName>
+<resourceName lang="French">Liste de mots « injurieux » 2</resourceName>
+<description lang="English">Oxford University Press has developed two lists of offensive words and expressions, specifically developed for filter applications in the contexts of web pages and email. Each list features a grading system describing vocabulary type and offensive strength for each term, plus collocational information to help identify the terms in context.Coverage: over 2000 words and expressions;  13-category classification system;  US and UK usage coveredFeatures: graded by category/subcategory (eg abusive/sexist etc); rated by strength (extreme/moderate/mild); collocational information included; regional usage/source labelling; glosses for obscure sensesFormat: Excel spreadsheetFile Size: 237 kB</description>
+<description lang="French">Oxford University Press a développé deux listes de mots et expressions « injurieux », développés spécialement pour des applications de filtrage dans le contexte de pages web et de méls.  Chaque liste présente un système de graduation décrivant le type de vocabulaire et l’intensité d’offense pour chaque terme, ainsi que des informations sur les collocations afin d’aider à identifier les termes en contexte.Couverture : plus de 2000 mots et expressions ;  système de classification en 13 catégories ; couverture de l’anglais britannique et anglais américainType d’information : graduation par catégorie/sous-catégorie (abusif/sexiste, etc) ; notation par intensité (extrême/modéré/faible) ; information sur les collocations ; étiquetage de l’usage ou la source régional ; commentaires des sens peu clairsFormat: feuille ExcelTaille du fichier : 237 ko</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=161</url>
-<identifier>ELRA-M0010_08</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=836</url>
+<identifier>ELRA-L0060</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,29 +29,16 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-03-04</lastDateUpdated>
+<lastDateUpdated>2006-04-03</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 17270.00€</price>
-<price>Academic org. ELRA Member: 3454.00€</price>
-<price>Academic org. ELRA Non Member: 3768.00€</price>
-<price>Commercial org. ELRA Non Member: 18840.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-05-13</availabilityStartDate>
-</licenceInfo>
-<licenceInfo>
-<licence>ELRA_VAR</licence>
-<restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 17270.00€</price>
-<price>Academic org. ELRA Member: 17270.00€</price>
-<price>Academic org. ELRA Non Member: 18840.00€</price>
-<price>Commercial org. ELRA Non Member: 18840.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-05-13</availabilityStartDate>
+<price>Academic org. ELRA Non Member: 2500.00€</price>
+<price>Academic org. ELRA Member: 2000.00€</price>
+<availabilityStartDate>2006-03-13</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceComponentType>
@@ -65,13 +52,16 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>ita</languageId>
-<languageName>Italian</languageName>
-</languageInfo>
-<languageInfo>
 <languageId>eng</languageId>
 <languageName>English</languageName>
 </languageInfo>
+<sizeInfo>
+<size>237</size>
+<sizeUnit>kb</sizeUnit>
+</sizeInfo>
+<textFormatInfo>
+<mimeType>MS Excel</mimeType>
+</textFormatInfo>
 </lexicalConceptualResourceTextInfo>
 </lexicalConceptualResourceMediaType>
 </lexicalConceptualResourceInfo>

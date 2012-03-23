@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">TC-STAR 2006 Evaluation Package - ASR English</resourceName>
-<resourceName lang="French">Package d’évaluation TC-STAR 2006 - ASR anglais</resourceName>
-<description lang="English">TC-STAR is a European integrated project focusing on Speech-to-Speech Translation (SST). To encourage significant breakthrough in all SST technologies, annual open competitive evaluations are organized. Automatic Speech Recognition (ASR), Spoken Language Translation (SLT) and Text-To-Speech (TTS) are evaluated independently and within an end-to-end system.The second TC-STAR evaluation campaign took place in March 2006. Three core technologies were evaluated during the campaign:• Automatic Speech Recognition (ASR),• Spoken Language Translation (SLT),• Text to Speech (TTS).Each evaluation package includes resources, protocols, scoring tools, results of the official campaign, etc., that were used or produced during the second evaluation campaign. The aim of these evaluation packages is to enable external players to evaluate their own system and compare their results with those obtained during the campaign itself.The speech databases made within the TC-STAR project were validated by SPEX, in the Netherlands, to assess their compliance with the TC-STAR format and content specifications.This package includes the material used for the TC-STAR 2006 Automatic Speech Recognition (ASR) second evaluation campaign for English. The same packages are available for both Spanish (ELRA-E0012) and Mandarin (ELRA-E0013) for ASR and for SLT in 3 directions, English-to-Spanish (ELRA-E0014), Spanish-to-English (ELRA-E0015), Chinese-to-English (ELRA-E0016).To be able to chain the components, ASR, SLT and TTS evaluation tasks were designed to use common sets of raw data and conditions. Three evaluation tasks, common to ASR, SLT and TTS, were selected: EPPS (European Parliament Plenary Sessions) task, CORTES (Spanish Parliament Sessions) task and VOA (Voice of America) task. The CORTES data were used in addition to the EPPS data to evaluate ASR in Spanish and SLT from Spanish into English.This package was used within the EPPS task and consists of 2 data sets:-	Development data set: consists of audio recordings of Parliament’s sessions from 6 June to 7 July 2005, manually transcribed. Approximately 3 hours of recordings were selected and transcribed, corresponding to approximately 35,000 running words in English.-	Test data set: consists of audio recordings of Parliament’s sessions from September to November 2005. As for the development set, the test data set is made of 3 hours (35,000 running words).</description>
-<description lang="French">TC-STAR est un projet intégré européen basé sur la traduction parole-parole (ou SST pour Speech-to-Speech Translation). Pour encourager de manière conséquente l’avancée dans toutes les technologies de la SST, des évaluations ouvertes à la concurrence sont organisées sur une base annuelle. Les technologies de la reconnaissance automatique de la parole (ou ASR pour « Automatic Speech Recognition »), de la traduction de la langue parlée (ou SLT pour « Spoken Language Translation ») et les technologies texte-parole (ou TTS pour « Text-to-Speech ») sont évaluées à la fois de façon indépendante et intégrées à un système « end-to-end » (de « bout en bout »).La deuxième campagne d’évaluation TC-STAR s’est déroulée en mars 2006. Trois technologies de base ont été évaluées lors de cette campagne:• la reconnaissance automatique de la parole (ASR),• la traduction de la langue parlée (SLT),• la synthèse texte-parole (TTS).Chaque package d’évaluation regroupe des ressources, des protocoles, des outils de notation, les résultats de la campagne officielle, etc., qui ont été utilisés ou produits pendant la seconde campagne d’évaluation. Le but de ces packages d’évaluation est de permettre à des acteurs externes d’évaluer leur propre système et de comparer leurs résultats à ceux obtenus pendant la campagne.Les bases de données orales produites dans le projet TC-STAR ont été validées par SPEX, Pays-Bas, selon le format et les spécifications de contenu TC-STAR.Ce package comprend le matériel utilisé pour la seconde campagne d’évaluation TC-STAR 2006 Automatic Speech Recognition (ASR) de l’anglais. Des packages similaires sont également disponibles pour l’espagnol (ELRA-E0012) et le chinois mandarin (ELRA-E0013) pour l’ASR, ainsi que pour la SLT dans 3 sens, anglais vers espagnol (ELRA-E0014), espagnol vers anglais (ELRA-E0015), chinois vers anglais (ELRA-E0016).Pour permettre de regrouper les composants, les tâches d’évaluation ASR, SLT et TTS ont été conçues en utilisant des données brutes et des conditions communes. Trois tâches d’évaluation, communes à l’ASR, la SLT, et la TTS ont été choisies : la tâche EPPS (« European Parliament Plenary Sessions » – Sessions plénières du Parlement européen), la tâche CORTES (« Spanish Parliament Sessions ») et la tâche VOA (« Voice of America » - La voix de l’Amérique). Les données CORTES ont été utilisées en complement des données EPPS pour l’évaluation ASR en espagnol et SLT de l’espagnol vers l’anglais.Le présent package a été utilisé dans le cadre de la tâche EPPS et comprend 2 ensembles de données :-	L’ensemble de données de développement : il comprend les enregistrements audio des sessions du Parlement du 6 juin au 7 juillet 2005, transcrites manuellement. Environ 3 heures d’enregistrements ont été choisies et transcrites, et correspondent à environ 35 000 mots courants de l’anglais.-	L’ensemble de données de test : il comprend les enregistrements audio des sessions du Parlement de septembre à novembre 2005. Comme pour l’ensemble de développement, les données de test comprennent 3 heures d’enregistrements (35 000 mots courants).</description>
-<resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=896</url>
-<identifier>ELRA-E0011</identifier>
+<resourceName lang="English">SCIPER-ES-EURADIC Spanish Monolingual Dictionary</resourceName>
+<resourceName lang="French">SCIPER-ES-EURADIC Dictionnaire monolingue espagnol</resourceName>
+<description lang="English">This Spanish monolingual dictionary was increased and improved within the French national project EurRADic (European and Arabic Dictionaries and Corpora), as part of the Technolangue programme funded by the French Ministry of Industry. It contains 83,952 lemmas (838,391 inflected forms), with their part of speech and some information related to their inflexion. The data are presented in a table format, where information related to each entry is separated by ";".Other formats and other services may be supplied by the data owner upon request (e.g. conversion into buyer's formalism, selection of subsets of the words missing from your own dictionary).A description of the project is available at the following address: http://www.technolangue.net/article.php3?id_article=203 (in French language).See also ELRA-L0049, ELRA-L0050, ELRA-L0051, ELRA-L0053, ELRA-M0033, ELRA-M0034, ELRA-M0035, ELRA-M0036, ELRA-M0037, ELRA-M0038.</description>
+<description lang="French">Ce dictionnaire monolingue espagnol a été augmenté et amélioré dans le cadre du projet national français EuRADic (Dictionnaire et corpus européens et arabe), du programme Technolangue, financé par le ministère français de l'industrie. Il contient environ 83 952 lemmes (838 391 formes fléchies), avec leur partie du discours complétée par des informations flexionnelles. Les données sont présentées sous un format tabulaire et les informations relatives à chaque entrée séparées par des ";".D'autres formats et services peuvent être proposés par le fournisseur de ces données à la demande (par exemple, conversion vers le formalisme de l'acquéreur, sélection de sous-ensembles de mots en complément de votre propre dictionnaire).Une description du projet est disponible à l'adresse suivante : http://www.technolangue.net/article.php3?id_article=203.Voir aussi : ELRA-L0049, ELRA-L0050, ELRA-L0051, ELRA-L0053, ELRA-M0033, ELRA-M0034, ELRA-M0035, ELRA-M0036, ELRA-M0037, ELRA-M0038.</description>
+<resourceShortName>SCIPER-ES-EURADIC</resourceShortName>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=676</url>
+<identifier>ELRA-L0052</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,48 +29,61 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-03-27</lastDateUpdated>
+<lastDateUpdated>2007-06-19</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
-<licence>ELRA_EVALUATION</licence>
-<restrictionsOfUse>evaluationUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 750.00€</price>
-<price>Academic org. ELRA Non Member: 750.00€</price>
-<price>Commercial org. ELRA Member: 500.00€</price>
-<price>Academic org. ELRA Member: 500.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2006-12-18</availabilityStartDate>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 9000.00€</price>
+<price>Academic org. ELRA Non Member: 1600.00€</price>
+<price>Commercial org. ELRA Member: 6500.00€</price>
+<price>Academic org. ELRA Member: 800.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2003-04-16</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 9000.00€</price>
+<price>Academic org. ELRA Non Member: 9000.00€</price>
+<price>Commercial org. ELRA Member: 6500.00€</price>
+<price>Academic org. ELRA Member: 6500.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2003-04-16</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<usageInfo>
-<actualUseInfo>
-<actualUse>nlpApplications</actualUse>
-<useNLPSpecific>speechRecognition</useNLPSpecific>
-</actualUseInfo>
-</usageInfo>
 <resourceCreationInfo>
 <fundingProject>
-<projectName>TC-STAR</projectName>
-<fundingType>euFunds</fundingType>
+<projectName>EURADIC</projectName>
+<fundingType>nationalFunds</fundingType>
 </fundingProject>
 </resourceCreationInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
+<languageId>spa</languageId>
+<languageName>Spanish</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Castilian</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
 </languageInfo>
-</corpusAudioInfo>
-</corpusMediaType>
-</corpusInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

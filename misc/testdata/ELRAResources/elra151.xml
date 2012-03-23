@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">AURORA Project database - Subset of SpeechDat-Car - Danish database - Evaluation Package</resourceName>
-<resourceName lang="French">Base de données du projet AURORA - sous-ensemble de la base de données SpeechDat-Car du danois - Package d'évaluation</resourceName>
-<description lang="English">The Aurora project was originally set up to establish a world wide standard for the feature extraction software which forms the core of the front-end of a DSR (Distributed Speech Recognition) system. ETSI formally adopted this activity as work items 007 and 008.The two work items within ETSI are :-  ETSI DES/STQ WI007 : Distributed Speech Recognition - Front-End Feature Extraction Algorithm &amp; Compression Algorithm-  ETSI DES/STQ WI008 : Distributed Speech Recognition - Advanced Feature Extraction Algorithm.This database is a subset of the SpeechDat-Car database in Danish language which has been collected as part of the European Union funded SpeechDat-Car project. It contains isolated and connected Danish digits spoken in the following noise and driving conditions inside a car :   1. High speed good road   2. Low speed rough road   3. Stopped with motor running   4. Town traffic</description>
-<description lang="French">DESCRIPTION DISPONIBLE EN FRANCAIS PROCHAINEMENT.The Aurora project was originally set up to establish a world wide standard for the feature extraction software which forms the core of the front-end of a DSR (Distributed Speech Recognition) system. ETSI formally adopted this activity as work items 007 and 008.The two work items within ETSI are :-  ETSI DES/STQ WI007 : Distributed Speech Recognition - Front-End Feature Extraction Algorithm &amp; Compression Algorithm-  ETSI DES/STQ WI008 : Distributed Speech Recognition - Advanced Feature Extraction Algorithm.This database is a subset of the SpeechDat-Car database in Danish language which has been collected as part of the European Union funded SpeechDat-Car project. It contains isolated and connected Danish digits spoken in the following noise and driving conditions inside a car :   1. High speed good road   2. Low speed rough road   3. Stopped with motor running   4. Town traffic</description>
+<resourceName lang="English">Catalan Speecon database</resourceName>
+<resourceName lang="French">Base de données Speecon catalan</resourceName>
+<description lang="English">The Catalan Speecon database comprises the recordings of 550 adult Catalan speakers who uttered over 290 items (read and spontaneous). The data were recorded over 4 microphone channels in 4 recording environments (office, entertainment, car, public place). The speech database follows the specifications made within the UE funded Speecon project. The database was validated by UVIGO. The Catalan-Speecon Database was funded by the Catalan Government.</description>
+<description lang="French">La base de données Speecon catalan comprend les enregistrements de 550 locuteurs adultes du catalan qui ont prononcé plus de 290 éléments (lus et spontanés). Les données ont été enregistrées sur 4 canaux de microphones dans 4 environnements différents (bureau, divertissement, voiture, lieu public). La base de données de parole suit les spécifications réalisées dans le cadre du projet Speecon financé par l’UE. Elle a été validée par UVIGO. La base de données Speecon catalan a été financée par le gouvernement catalan.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=602</url>
-<identifier>ELRA-AURORA-CD0003_04</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1149</url>
+<identifier>ELRA-S0327</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,33 +29,29 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2006-09-18</lastDateUpdated>
+<lastDateUpdated>2012-01-05</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 1000.00€</price>
-<price>Academic org. ELRA Non Member: 200.00€</price>
-<price>Commercial org. ELRA Member: 1000.00€</price>
-<price>Academic org. ELRA Member: 200.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2001-04-25</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 8000.00€</price>
+<price>Academic org. ELRA Non Member: 0.00€</price>
+<price>Commercial org. ELRA Member: 4000.00€</price>
+<price>Academic org. ELRA Member: 0.00€</price>
+<availabilityStartDate>2011-12-23</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 8000.00€</price>
+<price>Academic org. ELRA Non Member: 8000.00€</price>
+<price>Commercial org. ELRA Member: 4000.00€</price>
+<price>Academic org. ELRA Member: 4000.00€</price>
+<availabilityStartDate>2011-12-23</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<usageInfo>
-<actualUseInfo>
-<actualUse>nlpApplications</actualUse>
-<useNLPSpecific>speechRecognition</useNLPSpecific>
-</actualUseInfo>
-</usageInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>AURORA</projectName>
-<fundingType>ownFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
@@ -66,8 +62,16 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>dan</languageId>
-<languageName>Danish</languageName>
+<languageId>cat</languageId>
+<languageName>Catalan</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Valencian</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

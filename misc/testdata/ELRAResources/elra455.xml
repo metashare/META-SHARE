@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">SALA II Spanish Mobile Network Database collected in Venezuela</resourceName>
-<resourceName lang="French">Base de données SALA II de l'espagnol collectée au Venezuela en réseau mobile</resourceName>
-<description lang="English">The SALA II Spanish Mobile Network Database collected in Venezuela was recorded within the scope of the SALA II project.The SALA II Spanish Venezuelan database contains the recordings of 1,179 Venezuelan speakers (576 males and 603 females) recorded over the Venezuelan mobile telephone network.The following acoustic conditions were selected as representative of a mobile user's environment:    * Passenger in moving car (160 speakers)    * Public place (461 speakers)    * Stationary pedestrian by road side (236 speakers)    * Home/Office environment (272 speakers)    * Passenger in moving car using a hands-free kit (160 speakers) This database is distributed as 1 DVD-ROMs The speech files are stored as sequences of 8-bit, 8kHz a-law speech files and are not compressed, according to the specifications of SALA II. Each prompt utterance is stored within a separate file and has an accompanying ASCII SAM label file. This speech database was validated by SPEX (the Netherlands) to assess its compliance with the SALA II format and content specifications.Each speaker uttered the following items:    * 6 application words    * 1 sequence of 10 isolated digits    * 4 connected digits (1 sheet number -6 digits, 1 telephone number –9/11 digits, 1 credit card number –14/16 digits, 1 PIN code -6 digits)    * 3 dates (1 spontaneous date e.g. birthday, 1 word style prompted date, 1 relative and general date expression)    * 1 spotting phrase using an embedded application word    * 1 isolated digit    * 3 spelled words (1surname, 1 directory assistance city name, 1 real/artificial name for coverage)    * 1 currency money amount    * 1 natural number    * 5 directory assistance names (1 surname out of a set of 500, 1 city of birth/growing up, 1 most frequent city out of a set of 500, 1 most frequent company/agency out of a set of 500, 1 “forename surname” out of a set of 150 )    * 2 yes/no questions (1 predominantly “yes” question, 1 predominantly “no” question)    * 9 phonetically rich sentences    * 2 time phrases (1 spontaneous time of day, 1word style time phrase)    * 4 phonetically rich words The following age distribution has been obtained: 7 speakers are under 16, 624 speakers are between 16 and 30, 368 speakers are between 31 and 45, 160 speakers are between 46 and 60, and 20 speakers are over 60.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
-<description lang="French">La base de données SALA II de l’espagnol collectée au Venezuela en réseau mobile a été enregistrée dans le cadre du projet SALA II. La base de données SALA de l'espagnol vénézuélien contient les enregistrements de 1179 locuteurs vénézuéliens (576 hommes, 603 femmes) enregistrés à travers le réseau téléphonique mobile vénézuélien. Les conditions acoustiques suivantes ont été choisies comme l’environnement représentatif d’un utilisateur de portable:    * Passager dans une voiture en marche (160 locuteurs)    * Lieu public (461 locuteurs)    * Piéton à l’arrêt à côté d’une route (236 locuteurs)    * Environnement domicile/bureau (272 locuteurs)    * Passager dans une voiture en marche utilisant un kit mains-libres (160 locuteurs) Cette base est distribuée sur 1 DVD-ROM. Selon les spécifications de SALA II, les fichiers de parole sont stockés en séquences d'échantillons de 8 bit, 8 kHz, loi-A et ne sont pas compressées. Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM. Cette base de données a été validée par SPEX (Pays-Bas) afin de vérifier sa conformité avec le format SALA II et les spécifications du contenu.Contenu du corpus :    * 6 mots de commande ;    * 1 séquence de 10 chiffres isolés ;    * 4 chiffres connectés : 1 numéro permettant d'identifier la feuille de prompt (6 chiffres), 1 numéro de téléphone (9-11 chiffres), 1 numéro de carte de crédit (14-16 chiffres), 1 code confidentiel (6 chiffres) ;    * 3 dates : 1 date spontanée (ex. anniversaire), 1 date lue, 1 date générale ;    * 1 expression utilisant un mot de commande ;    * 1 chiffre isolé ;•    * 3 mots épelés : 1 prénom, 1 nom de ville provenant d'un annuaire de renseignements téléphoniques, 1 mot réel/artificiel pour couverture ;    * 1 montant en devises ;    * 1 nombre entier naturel ;    * 5 noms provenant d'un annuaire de renseignements téléphoniques : 1 prénom (sur 500), 1 ville de naissance/d'origine du locuteur (spontané), 1 nom de ville parmi les plus fréquentes (sur 500), 1 nom de compagnie parmi les plus fréquentes (sur 500), 1 répétition de "prénom nom" ;    * 2 questions oui/non : 1 question à prédominance "oui", 1 question à prédominance "non" ;    * 9 phrases phonétiquement riches ;    * 2 phrases comportant une notion de temps : 1 jour (spontané), 1 phrase comportant une notion de temps ;    * 4 mots phonétiquement riches. Les classes d'âge sont réparties comme suit : 7 locuteurs ont moins de 16 ans, 624 locuteurs ont entre 16 et 30 ans, 368 locuteurs ont entre 31 et 45 ans, 160 locuteurs ont entre 46 et 60 ans et 20 locuteurs ont plus de 60 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
+<resourceName lang="English">THAMUS Bilingual dictionaries - Computer science</resourceName>
+<resourceName lang="French">THAMUS Dictionnaires bilingues - Informatique</resourceName>
+<description lang="English">Technical domainsLanguages: Italian=&gt;EnglishFormat: ASCII format with ISO 8859-1 character setMedium: QIC 150 MB Cartridge TapeDomain: Computer science, 15,700 entries, canonical formsTechnical bilingual Italian dictionaries with a morphological coding which can generate all full forms using a software engine written in C. Multi-word terms contain morphological coding for the head word.</description>
+<description lang="French">Domaines techniquesLangues : italien=&gt;anglaisDomaine: Informatique, 15 700 entrées, formes canoniquesLes dictionnaires techniques bilingues disposent d'une codification morphologique qui permet de générer toutes les formes fléchies grâce à un logiciel écrit en langage C. Les mots composés contiennent une codification morphologique sur la tête des mots.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=740</url>
-<identifier>ELRA-S0167</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=161</url>
+<identifier>ELRA-M0010_08</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,68 +29,51 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-08-28</lastDateUpdated>
+<lastDateUpdated>2005-03-04</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 30000.00€</price>
-<price>Academic org. ELRA Non Member: 22500.00€</price>
-<price>Commercial org. ELRA Member: 25000.00€</price>
-<price>Academic org. ELRA Member: 20000.00€</price>
+<price>Commercial org. ELRA Member: 17270.00€</price>
+<price>Academic org. ELRA Member: 3454.00€</price>
+<price>Academic org. ELRA Non Member: 3768.00€</price>
+<price>Commercial org. ELRA Non Member: 18840.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2004-11-19</availabilityStartDate>
+<availabilityStartDate>1997-05-13</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 30000.00€</price>
-<price>Academic org. ELRA Non Member: 30000.00€</price>
-<price>Commercial org. ELRA Member: 25000.00€</price>
-<price>Academic org. ELRA Member: 25000.00€</price>
+<price>Commercial org. ELRA Member: 17270.00€</price>
+<price>Academic org. ELRA Member: 17270.00€</price>
+<price>Academic org. ELRA Non Member: 18840.00€</price>
+<price>Commercial org. ELRA Non Member: 18840.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2004-11-19</availabilityStartDate>
+<availabilityStartDate>1997-05-13</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>SALA II</projectName>
-<fundingType>euFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>spa</languageId>
-<languageName>Spanish</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Castilian</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
-<languageVarietyInfo>
-<languageVarietyName>Venezuela</languageVarietyName>
-<languageVarietyType>other</languageVarietyType>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
+<languageId>ita</languageId>
+<languageName>Italian</languageName>
 </languageInfo>
-</corpusAudioInfo>
-</corpusMediaType>
-</corpusInfo>
+<languageInfo>
+<languageId>eng</languageId>
+<languageName>English</languageName>
+</languageInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

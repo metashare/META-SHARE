@@ -6,7 +6,7 @@
 <description lang="English">Large acoustic corpus of read text in Korean. 2 announcers and 70 native speakers have been recorded (38 males, 32 females), distributed according to 4 age classes. They read two times 452 eojeols (Korean terms), and 2 announcers read one time 2000 eojeols. In these 2000 eojeols, the above 452 eojeols are included. Other information such as the size and the level of studies of the speakers are provided. The recordings took place in a soundproof room. The data are stored in a 8-bit A-law speech file, with a 16 kHz sampling rate. The standard in use is NIST.</description>
 <description lang="French">Important corpus de textes lus en coréen produit par Kaist Korterm. 2 présentateurs et 70 locuteurs natifs ont été enregistrés (38 hommes, 32 femmes), répartis en 4 tranches d'âges. Ils ont lu 2 fois 452 eojeols (termes coréens), et 2 présentateurs ont lu une fois 2000 autres eojeols. Des informations comme la taille du locuteur ou son niveau d'études sont fournies. Ces 2000 eojeols incluent les 452 eojeols lus par les locuteurs. Les enregistrements ont été effectués dans une pièce insonorisée. Les données sont stockées dans un fichier de parole de 8 bits, loi-A, avec une fréquence d'échantillonnage de 16 kHz. La norme suivie est NIST.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=647</url>
 <identifier>ELRA-S0124</identifier>
 </identificationInfo>

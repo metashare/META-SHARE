@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Spanish SpeechDat(M) - DB1</resourceName>
-<resourceName lang="French">Base de données SpeechDat(M) de l'espagnol - DB1</resourceName>
-<description lang="English">The SpeechDat(M) Spanish database contains the recordings of 1,002 Spanish speakers (508 males, 494 females), recorded over the Spanish fixed telephone network. A pronunciation dictionary for the correctly spoken items is also available.It was agreed that the ESPRIT Project SAM standards be followed for speech file storage. Speech samples are stored as sequences of 8-bit 8 kHz A-law speech files (before compression).Each prompted utterance is stored in a separate file. Each signal file is accompanied by an ASCII SAM label file which contains the relevant descriptive information.This speech database was validated by SPEX (the Netherlands) to assess its compliance with the SpeechDat format and content specifications.Each speaker uttered the following items:    * 1 isolated digit    * 4 connected digits (1 sheet number –4 digits, 1 telephone number –9 digits, 1 credit card number –16 digits, 1 spontaneous home telephone number)    * 2 natural numbers    * 1 natural number with decimal point    * 2 money amounts (1 large amount, 1 small amount)    * 3 spelled-out words (7 letter sequences)    * 2 time phrases (1 spontaneous time of day, 1 time phrase -prompted, word style)    * 3 dates (1 spontaneous date e.g. birthdayn 2 prompted dates)    * 3 yes/no questions (Are you calling from the same province? (as P1), Do you speak another language fluently?, Are you calling from a public phonebox?),    * 1 place (province of longest residence)    * 6 application keywords (out of a set of 54 words)    * 2 additional application keywords (out of a set of 18 words)    * 3 embedded application word phrases (from A1-6 vocabulary)    * 9 read sentences for phonetic coverageThe set of phonetically balanced sentences was automatically transcribed and manually checked by the Department de Filologia Espanyola of the Universitat Autonoma de Barcelona. Standard Castillian transcription was used. No dialectal variations were considered.The following age distribution has been obtained: 530 speakers are between 15 and 29 years old, 283 speakers are between 30 and 45, 156 speakers are between 46 and 60, and 23 speakers are over 60; the age of 10 speakers is unknown.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
-<description lang="French">La base de données SpeechDat(M) de l'espagnol comprend des enregistrements téléphoniques de 1002 locuteurs (508 hommes et 494 femmes) enregistrés directement à travers le réseau téléphonique fixe utilisant une interface numérique E-1. Un dictionnaire de prononciation est également fourni pour les éléments correctement prononcés. Le stockage des fichiers de parole suit les standards du projet ESPRIT SAM. Les fichiers de parole ont été échantillonnés à 8 kHz, enregistrés en séquences de 8 bits, loi-A, et ensuite compressés. Chaque énoncé a été stocké dans un fichier séparé. Chaque fichier signal est accompagné d'un fichier d'en-tête au format ASCII SAM qui contient la description du fichier parole correspondant.Toutes les occurrences sont par défaut lues, excepté certaines marquées comme spontanées. La liste des occurrences est la suivante :    * 1 chiffre isolé ;    * 4 chiffres et nombres connectés : 1 numéro d'identification à 4 chiffres, 1 numéro de téléphone à 9 chiffres, 1 numéro de carte de crédit à 16 chiffres, 1 numéro de téléphone du domicile du locuteur (spontané), 2 nombres entiers naturels ;    * 1 nombre avec un chiffre après la virgule ;    * 2 montants en devises : 1 gros montant et 1 petit montant ;    * 3 mots épelés (séquences de 7 lettres) ;    * 1 jour (spontané) ;    * 1 phrase comportant une notion de temps ;    * 1 date (spontanée, la date d'anniversaire du locuteur) ;    * 2 dates ;    * 3 questions oui/non : Appelez-vous de la même province ? (par rapport à une province donnée P1), Parlez-vous couramment d'autres langues?, Appelez-vous d'une cabine publique ? ;    * 1 lieu (province où le locuteur a résidé le plus longtemps) ;    * 6 mots de commande (extraits d'un vocabulaire de 54 mots) ;    * 2 mots de commande supplémentaires (extraits d'un vocabulaire de 18 mots) ;    * 3 phrases incluant des mots de commande ;    * 9 phrases lues pour la couverture phonétique.L'ensemble des phrases phonétiquement équilibrées a été transcrit automatiquement et vérifié manuellement par le département de philologie espagnole de l'Université Autonome de Barcelone. Une transcription du castillan standard a été utilisée. Aucune variation dialectale n'a été prise en compte.Les classes d'âge sont réparties comme suit : 530 locuteurs entre 15 et 29 ans, 283 locuteurs entre 30 et 45 ans, 156 locuteurs entre 46 et 60 ans, et 23 locuteurs de plus de 60 ans ; l'âge de 10 locuteurs est inconnu.CARACTERISTIQUES :Type de ressource : Enregistrements de parole (acoustique)Mode de parole : Lu (parfois spontané)Conditions d'enregistrement : Réseau téléphonique fixeType de microphone/téléphone : Interface E-1Langue : Espagnol (castillan)Sexe et nombre de locuteurs : 1002 locuteurs (508 hommes et 494 femmes)Annotation linguistique : OrthographiqueFormat de fichier : 8 bits, loi AStandard utilisé : SAMFréquence d'échantillonnage (kHz) : 8 kHzMode de distribution : 3 CD-ROMRessources connexes : Ressources SpeechDat(M) en d'autres langues : danois (ELRA-S0040), anglais (ELRA-S0011), français (ELRA-S0016), allemand (ELRA-S0018), italien (ELRA-S0052), portugais (ELRA-S0068).Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
+<resourceName lang="English">FIXED0IT - DB2</resourceName>
+<resourceName lang="French">FIXED0IT - DB2</resourceName>
+<description lang="English">DB1 Phonetically rich sentences &amp; application oriented utterancesThe Italian Fixed Network Speech SpeechDat(M) Corpus version 1.0 was recorded within the scope of the SpeechDat(M) project (LRE-63314), funded by the European Commission. Recording was done by using a primary rate ISDN interface, yielding 8 kHz, 8 bits per sample, A-law coded signal. The data files are formatted according to the SAM European project. The speech data are compressed with the GNU gzip program. All software needed to use the corpus is provided on the CDs.The corpus contains the speech of about 1,000 speakers (about 500 males and 500 females) and was designed to support the creation of voice-driven teleservices. The callers spoke at least 39 items, comprising:    * isolated and connected digits    * natural numbers    * money amounts    * spelled words    * time and date phrases    * yes/no questions    * city names    * common application words    * application words in phrases    * phonetically rich sentencesMost items are read, some are spontaneously spoken.The recordings come with extensive and standardised documentation. All speech is carefully transcribed at the orthographic level; in addition, a number of clearly audible non-speech events are included in the transcription. Moreover, age and regional background of the speakers are provided. A pronunciation dictionary is added, containing all words that occur in the corpus, with a corresponding SAMPA broad-class phonemic transcription.Validation and premastering of the CD-ROMs were performed by the Speech Processing Expertise Centre (SPEX), Leidschendam, The Netherlands.DB2 Phonetically rich sentences sub-set (S0053)See ELRA-S0052 for description. DB2 is a sub-set of DB1; it contains only the phonetically rich sentences items</description>
+<description lang="French">La version 1.0 du corpus de parole italien sur réseau fixe a été enregistrée dans le cadre du projet SpeechDat(M) (LRE-63314), soutenu par la Commission Européenne. L'enregistrement a été réalisé en utilisant une interface numéris (ISDN), avec une fréquence d'échantillonnage de 8 kHz, de 8 bits par échantillon et un signal codé en loi-A. Les données ont été formatées d'après les standards du projet européen SAM. Les données sont compressées par le programme GNU gzip. Les logiciels nécessaires à la bonne utilisation du corpus sont fournis avec les données sur les CD.Le corpus contient des enregistrements d'environ 1000 locuteurs (500 hommes et 500 femmes). Il a pour but d'aider à la réalisation de services télématiques vocaux. Chaque locuteur a prononcé plus de 39 éléments, dont :    * chiffres isolés et connectés,    * nombres entiers naturels,    * montants,    * mots épelés,    * dates et phrases comportant une notion de temps,    * questions oui/non,    * noms de villes,    * mots de commande courants    * mots de commandes inclus dans des phrases,    * phrases phonétiquement riches.La plupart de ces éléments sont lus, certains sont spontanés.Les enregistrements sont fournis avec une documentation complète selon les standards SpeechDat(M). L'intégralité des enregistrements a été soigneusement transcrite au niveau orthographique ; de même, un certain nombre d'événements acoustiques clairement audibles sont inclus dans la transcription. L'âge et l'origine régionale des locuteurs sont également fournis. Un dictionnaire de prononciation est inclus dans les CD. Celui-ci contient tous les mots apparaissant dans le corpus, avec une transcription phonémique correspondante (utilisation de SAMPA).La validation et la préparation des CD-ROM ont été réalisées par SPEX, Leidschendam, Pays-Bas.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=721</url>
-<identifier>ELRA-S0065</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=186</url>
+<identifier>ELRA-S0053</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,7 +29,7 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-08-28</lastDateUpdated>
+<lastDateUpdated>2007-02-22</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
@@ -37,11 +37,11 @@
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
 <price>Commercial org. ELRA Non Member: 20000.00€</price>
-<price>Academic org. ELRA Non Member: 20000.00€</price>
+<price>Academic org. ELRA Non Member: 14000.00€</price>
 <price>Commercial org. ELRA Member: 14000.00€</price>
-<price>Academic org. ELRA Member: 11000.00€</price>
+<price>Academic org. ELRA Member: 8800.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1999-03-05</availabilityStartDate>
+<availabilityStartDate>1998-07-08</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
@@ -51,7 +51,7 @@
 <price>Commercial org. ELRA Member: 14000.00€</price>
 <price>Academic org. ELRA Member: 14000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1999-03-05</availabilityStartDate>
+<availabilityStartDate>1998-07-08</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceCreationInfo>
@@ -70,16 +70,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>spa</languageId>
-<languageName>Spanish</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Castilian</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
+<languageId>ita</languageId>
+<languageName>Italian</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

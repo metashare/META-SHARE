@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">CELEX Dutch lexical database - Inflectional Morphology Subset</resourceName>
-<resourceName lang="French">CELEX - Base de données lexicale du hollandais - sous-ensemble  "morphologie flexionnelle"</resourceName>
-<description lang="English">The Dutch CELEX data is derived from R.H. Baayen, R. Piepenbrock &amp; L. Gulikers, The CELEX Lexical Database (CD-ROM), Release 2, Dutch Version 3.1, Linguistic Data Consortium, University of Pennsylvania, Philadelphia, PA, 1995.Apart from orthographic features, the CELEX database comprises representations of the phonological, morphological, syntactic and frequency properties of lemmata. For the Dutch data, frequencies have been disambiguated on the basis of the 42.4m Dutch Instituut voor Nederlandse Lexicologie text corpora.To make for greater compatibility with other operating systems, the databases have not been tailored to fit any particular database management program. Instead, the information is presented in a series of plain ASCII files, which can be queried with tools such as AWK and ICON. Unique identity numbers allow the linking of information from different files.This database can be divided into different subsets:· orthography: with or without diacritics, with or without word division positions, alternative spellings, number of letters/syllables;· phonology: phonetic transcriptions with syllable boundaries or primary and secondary stress markers, consonant-vowel patterns, number of  phonemes/syllables, alternative pronunciations, frequency per phonetic syllable within words;· morphology: division into stems and affixes, flat or hierarchical representations, stems and their inflections;· syntax: word class, subcategorisations per word class;· frequency of the entries: disambiguated for homographic lemmata.</description>
-<description lang="French">Les données en hollandais de CELEX sont extraites de la base de données lexicale CELEX (CD-ROM) de R.H. Baayen, R. Piepenbrock &amp; L. Gulikers, seconde édition, version hollandaise 3.1, Linguistic Data Consortium, Université de Pennsylvanie, Philadelphie, PA, 1995.En-dehors des traits orthographiques, la base de données CELEX comprend des représentations des propriétés phonologiques, morphologiques, syntaxiques et fréquentielles des lemmes. En ce qui concerne les données du hollandais, les fréquences ont été désambigüisées sur la base du corpus de textes de l'Instituut voor Nederlandse Lexicologie.Afin de permettre une meilleure compatibilité avec d'autres systèmes, les bases ne sont adaptées à aucun système de gestion de base de données spécifique. Au contraire, l'information est présentée dans une série de fichiers textes ASCII, pouvant être interrogés par des outils tels que AWK et ICON. Des numéros d'identification uniques permettent d'accéder et d'établir les relations entre les informations provenant de différents fichiers.Cette base de données peut être divisée en cinq sous-ensembles selon les niveaux d'informations suivants :· orthographe: avec ou sans diacritiques, avec ou sans la position de la coupure de mot (césure), option d'orthographe, nombre de lettres/syllabes ;· phonologie : transcriptions phonétiques avec segmentation des syllabes ou balisage des accents primaires ou secondaires, schémas consonne-voyelle, nombre de phonèmes/syllabes, options de prononciation, fréquence par syllabe phonétique dans les mots ;· morphologie : division en radical et affixes, représentations à plat ou hiérarchisées, radicaux et leurs flexions ;· syntaxe : classe de mot, sous-catégorisation par classe de mot ;· fréquence des entrées : désambigüisation des lemmes homographes.</description>
+<resourceName lang="English">THAMUS Bilingual dictionaries - Law</resourceName>
+<resourceName lang="French">THAMUS Dictionnaires bilingues - Droit</resourceName>
+<description lang="English">Technical domainsLanguages: Italian=&gt;EnglishFormat: ASCII format with ISO 8859-1 character setMedium: QIC 150 MB Cartridge TapeDomain: Law, 18,000 entries, inflected formsTechnical bilingual Italian dictionaries with a morphological coding which can generate all full forms using a software engine written in C. Multi-word terms contain morphological coding for the head word.</description>
+<description lang="French">Domaines techniquesLangues : italien=&gt;anglaisDomaine: Droit, 18 000 entrées, formes fléchiesLes dictionnaires techniques bilingues disposent d'une codification morphologique qui permet de générer toutes les formes fléchies grâce à un logiciel écrit en langage C. Les mots composés contiennent une codification morphologique sur la tête des mots.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=442</url>
-<identifier>ELRA-L0029_04</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=160</url>
+<identifier>ELRA-M0010_06</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,37 +29,31 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-10-05</lastDateUpdated>
+<lastDateUpdated>2005-03-04</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 9983.16€</price>
-<price>Academic org. ELRA Non Member: 9983.16€</price>
-<price>Commercial org. ELRA Member: 5989.90€</price>
-<price>Academic org. ELRA Member: 5989.90€</price>
+<price>Commercial org. ELRA Member: 19800.00€</price>
+<price>Academic org. ELRA Member: 3960.00€</price>
+<price>Academic org. ELRA Non Member: 4320.00€</price>
+<price>Commercial org. ELRA Non Member: 21600.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-09-15</availabilityStartDate>
+<availabilityStartDate>1997-05-13</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 9983.16€</price>
-<price>Academic org. ELRA Non Member: 9983.16€</price>
-<price>Commercial org. ELRA Member: 5989.90€</price>
-<price>Academic org. ELRA Member: 5989.90€</price>
+<price>Commercial org. ELRA Member: 19800.00€</price>
+<price>Academic org. ELRA Member: 19800.00€</price>
+<price>Academic org. ELRA Non Member: 21600.00€</price>
+<price>Commercial org. ELRA Non Member: 21600.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-09-15</availabilityStartDate>
+<availabilityStartDate>1997-05-13</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>CELEX</projectName>
-<fundingType>nationalFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
 <lexicalConceptualResourceInfo>
 <resourceType>lexicalConceptualResource</resourceType>
@@ -71,16 +65,12 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>dut/nld</languageId>
-<languageName>Dutch</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Flemish</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
+<languageId>ita</languageId>
+<languageName>Italian</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>eng</languageId>
+<languageName>English</languageName>
 </languageInfo>
 </lexicalConceptualResourceTextInfo>
 </lexicalConceptualResourceMediaType>

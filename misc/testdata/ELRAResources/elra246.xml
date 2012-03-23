@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">VERBA Polytechnic and Plurilingual Terminological Database - I-QN Industry, General Topics</resourceName>
-<resourceName lang="French">Base de données terminologique polytechnique et plurilingue VERBA - I-QN Industrie - général</resourceName>
-<description lang="English">* Entries for English-Spanish: Scientific research &amp; mathematical sciences (906 entries), Geosciences (10,215), Computer science, electronics &amp; telecommunications (70,580), Industry (47,578), Transport &amp; Maintenance (12,291), Economy (145,572), Biological sciences (38,989), Communication &amp; media (8,143), Chemical &amp; physical sciences (27,467). * Entries for English-French-German-Spanish: Environment (36,658), Health (66,727), Agriculture &amp; food (25,975), Construction &amp; public works (8,429), Law &amp; policy (56,578), Sports &amp; Leisure (17,312) * Two specialized lexicons: Spanish-English and English-French-German without domain codes: electronics, telematics, law, taxes, customs, etc. (550,000 entries). * Two general lexicons: Spanish-English-French-German and Spanish-English-French-German-Portuguese-Italian (83,000 entries).This terminological database contains, for each domain, a sub-domain indication is given (from 2 sub-domains for Scientific research to 39 for Sports &amp; leisure). Each entry consists of a definition, phraseological unit, abbreviation, usage information, grammatical labels. Format: ASCIIMedium: floppy disk</description>
-<description lang="French">* Entrées anglais-espagnol : Recherche scientifique &amp; sciences mathématiques (906 entrées), géosciences (10 215), informatique, électronique &amp; télécommunications (70 580), industrie (47 578), transports &amp; maintenance (12 291), économie (145 572), sciences biologiques (38 989), communication &amp; média (8 143), sciences chimiques &amp; physiques (27 467).* Entrées allemand-anglais-espagnol-français : Environnement (36 658), santé (66 727), agriculture &amp; alimentation (25 975), construction &amp; travaux publics (8 429), droit &amp; politique (56 578), sports &amp; loisirs (17 312).* Deux lexiques spécialisés: Espagnol-anglais et allemand-anglais-français sans codes de domaine : électronique, télématique, droit, taxes, douanes, etc. (550 000 entrées).* Deux lexiques généraux: Allemand-anglais-espagnol-français et allemand-anglais-espagnol-français-italien-portugais. (83 000 entrées).Cette base de données terminologique contient, pour chaque domaine, l'indication de sous-domaines (de 2 sous-domaines pour la recherche scientifique à 39 pour les sports et loisirs). Chaque entrée comporte une définition, une unité phraséologique, une abréviation, une information sur l'usage et des étiquettes grammaticales.Format: ASCIISupport : disquette</description>
+<resourceName lang="English">GlobalPhone Swedish</resourceName>
+<resourceName lang="French">GlobalPhone suédois</resourceName>
+<description lang="English">The GlobalPhone corpus developed in collaboration with the Karlsruhe Institute of Technology (KIT) was designed to provide read speech data for the development and evaluation of large continuous speech recognition systems in the most widespread languages of the world, and to provide a uniform, multilingual speech and text database for language independent and language adaptive speech recognition as well as for language identification tasks. The entire GlobalPhone corpus enables the acquisition of acoustic-phonetic knowledge of the following 19 spoken languages: Arabic, Bulgarian, Chinese-Mandarin, Chinese-Shanghai, Croatian, Czech, French, German, Japanese, Korean, Polish, Portuguese (Brazilian), Russian, Spanish (Latin America), Swedish, Tamil, Thai, Turkish, Vietnamese. In each language about 100 sentences were read from each of the 100 speakers. The read texts were selected from national newspapers available via Internet to provide a large vocabulary (up to 65,000 words). The read articles cover national and international political news as well as economic news. The speech is available in 16bit, 16kHz mono quality, recorded with a close-speaking microphone (Sennheiser 440-6) and same recording equipment for all languages. The transcriptions are internally validated and supplemented by special markers for spontaneous effects like stuttering, false starts, and non-verbal effects like laughing and hesitations. Speaker information like age, gender, occupation, etc. as well as information about the recording setup complement the database. The entire GlobalPhone corpus contains over 450 hours of speech spoken by more than 1900 native adult speakers.Data is shortened by means of the shorten program written by Tony Robinson, available from Softsound's web page:  http://www.softsound.com/  linux distributions, or simulated versions such as cygwin. Alternatively, the data could be delivered unshorten.The Swedish corpus was produced using the Goeteborgs-Posten newspaper. It contains recordings of 98 speakers (50 males, 48 females) recorded in Stockholm and Vaernamo, Sweden. The following age distribution has been obtained: 9 speakers are below 19, 50 speakers are between 20 and 29, 12 speakers are between 30 and 39, 11 speakers are between 40 and 49, and 16 speakers are over 50.</description>
+<description lang="French">Le corpus GlobalPhone, développé avec la collaboration du Karlsruhe Institute of Technology (KIT),  a été conçu afin de fournir des données de parole lue pour le développement et l’évaluation de systèmes de reconnaissance de la parole continue à large vocabulaire dans les langues les plus répandues dans le monde, l’objectif étant de fournir une base de données audio et textuelles uniforme et multilingue pour la reconnaissance de la parole indépendante de la langue et adaptable à la langue, ainsi que pour des tâches d’identification de la langue. Le corpus GlobalPhone complet permet l’acquisition d’une connaissance acoustico-phonétique pour les 19 langues parlées suivantes: allemand, arabe (arabe standard moderne), bulgare, chinois-mandarin, chinois de Shanghai, coréen, croate, espagnol (d’Amérique latine), français, japonais, polonais, portugais (brésilien), russe, suédois, tamoul, thaï, tchèque, turc et vietnamien.Dans chaque langue, environ 100 phrases ont été lues par chacun des 100 locuteurs. Les textes lus sont extraits d’articles de journaux nationaux disponibles sur internet afin de fournir un large vocabulaire (jusqu’à 65000 mots). Les articles lus couvrent des actualités politiques nationales et internationales, ainsi que des nouvelles économiques. Les données de parole ont été enregistrées en 16 bit, 16 kHz (qualité mono) avec un micro-casque (Sennheiser 440-6) et le même équipement d’enregistrement pour l’ensemble des langues. Les transcriptions ont été validées en interne et annotées au moyen de balises spéciales pour marquer les effets spontanés, tels que le bégaiement, les faux démarrages, et les effets non verbaux comme le rire et les hésitations. La base contient également des informations sur les locuteurs, telles que l’âge, le genre, la profession, etc. ainsi que des informations sur la mise en place de l’enregistrement. Le corpus GlobalPhone dans son entier comprend plus de 450 heures de parole enregistrées par plus de 1900 locuteurs adultes natifs.Les données sont compressées au moyen du programme Shorten écrit par Tony Robinson, disponible depuis la page web de Softsound: http://www.softsound.com/ (distributions linux ou versions simulées telles que cygwin). Au besoin, les données peuvent être fournies non compressées.Le corpus suédois a été produit à partir du journal Goeteborgs-Posten. Il comprend les enregistrements de 98 locuteurs (50 hommes, 48 femmes) enregistrés à Stockholm et Vaernamo, Suède. Les classes d'âge sont réparties comme suit : 9 locuteurs de moins de 19 ans, 50 locuteurs entre 20 et 29 ans, 12 locuteurs entre 30 et 39 ans, 11 locuteurs entre 40 et 49 ans, et 16 locuteurs de plus de 50 ans.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=296</url>
-<identifier>ELRA-T0221</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=828</url>
+<identifier>ELRA-S0204</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,46 +29,62 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2006-09-27</lastDateUpdated>
+<lastDateUpdated>2011-09-21</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 3600.00€</price>
+<price>Academic org. ELRA Non Member: 700.00€</price>
+<price>Commercial org. ELRA Member: 3000.00€</price>
+<price>Academic org. ELRA Member: 600.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2006-01-30</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 0.70€</price>
-<price>Commercial org. ELRA Non Member: 1.00€</price>
-<availabilityStartDate>1997-04-11</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 3600.00€</price>
+<price>Academic org. ELRA Non Member: 3600.00€</price>
+<price>Commercial org. ELRA Member: 3000.00€</price>
+<price>Academic org. ELRA Member: 3000.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2006-01-30</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<validationInfo>
+<validated>True</validated>
+<validationModeDetails> Most of the GlobalPhone data have been validated in-house</validationModeDetails>
+</validationInfo>
+<usageInfo>
+<actualUseInfo>
+<actualUse>nlpApplications</actualUse>
+<useNLPSpecific>speechRecognition</useNLPSpecific>
+</actualUseInfo>
+</usageInfo>
 <resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>terminologicalResource</lexicalConceptualResourceType>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
-<mediaType>text</mediaType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
+<languageId>swe</languageId>
+<languageName>Swedish</languageName>
 </languageInfo>
-<languageInfo>
-<languageId>spa</languageId>
-<languageName>Spanish</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Castilian</languageVarietyName>
-<sizePerLanguageVariety>
+<audioSizeInfo>
+<sizeInfo>
 <size>2</size>
 <sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
-</languageInfo>
-</lexicalConceptualResourceTextInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
+</sizeInfo>
+</audioSizeInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
 </resourceComponentType>
 </resourceInfo>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Bilingual Spanish-English and English-Spanish lexicons (INCYTA) - Natural and medical sciences</resourceName>
-<resourceName lang="French">Lexiques bilingues espagnol-anglais et anglais-espagnol (INCYTA) - Sciences naturelles et médicales</resourceName>
-<description lang="English">10,535 entries for Natural and medical sciences. The entries contain morphological information for part-of-speech and inflectional class. The information on multi-word terms is provided by the headword.</description>
-<description lang="French">10535 entrées, domaine Sciences naturelles et médicales. Les entrées contiennent des informations morphologiques pour les différentes classes de mots. Les informations sur les termes composés sont fournies par la tête du terme (tête du syntagme).</description>
+<resourceName lang="English">The HIWIRE database, a noisy and non-native English speech corpus for cockpit communication</resourceName>
+<resourceName lang="French">Base de données HIWIRE, corpus de parole en anglais pour la communication en cockpit en milieu bruité</resourceName>
+<description lang="English">This database has been collected and packaged under the auspices of the IST-EU STREP project HIWIRE (Human Input that Works In Real Environments). The database was designed to be used as a tool for development and test of speech processing and recognition techniques dealing with robust non-native speech recognition.The database contains 8,099 English utterances pronounced by non-native speakers (31 French, 20 Greek, 20 Italian, and 10 Spanish speakers). The collected utterances correspond to human input in a command and control aeronautics application. The data was recorded in studio with a close-talking microphone and real noise recorded in an airplane cockpit was artificially added to the data. The signals are provided in clean (studio recordings with close talking microphone), low, mid and high noise conditions. The three noise levels correspond approximately to signal-to-noise ratios of 10dB, 5dB and -5 dB respectively.Clean audio data has been recorded in different office rooms using a close-talking microphone for lowest ambient acoustic effects (Plantronics USB-45). The used sampling frequency is 16 kHz and data is stored in Windows PCM WAV 16 bits mono format.Recordings correspond to prompts extracted from an aeronautic command and control application. A total of 8,099 utterances have been recorded corresponding to 81 speakers pronouncing 100 utterances each. The speaker distribution is as follows:&lt;table  border="0" width="100%" cellspacing="0" cellpadding="2" class="infoBoxContents"&gt;&lt;tr align=center&gt;&lt;td&gt;Country&lt;/td&gt;&lt;td&gt;# Speakers&lt;/td&gt;&lt;td&gt;# Utterances&lt;/td&gt;&lt;/tr&gt;	&lt;tr align=center&gt;&lt;td&gt;France&lt;/td&gt;&lt;td&gt;31 (38.3%)&lt;/td&gt;&lt;td&gt;3100&lt;/td&gt;&lt;/tr&gt;	&lt;tr align=center&gt;&lt;td&gt;Greece&lt;/td&gt;&lt;td&gt;20 (24.7%)&lt;/td&gt;&lt;td&gt;2000&lt;/td&gt;&lt;/tr&gt;	&lt;tr align=center&gt;&lt;td&gt;Italy&lt;/td&gt;&lt;td&gt;20 (24.7%)&lt;/td&gt;&lt;td&gt;2000&lt;/td&gt;&lt;/tr&gt;	&lt;tr align=center&gt;&lt;td&gt;Spain&lt;/td&gt;&lt;td&gt;10 (12.3%)&lt;/td&gt;&lt;td&gt;999&lt;/td&gt;&lt;/tr&gt;	&lt;tr align=center&gt;&lt;td&gt;Total&lt;/td&gt;&lt;td&gt;81&lt;/td&gt;&lt;td&gt;8099&lt;/td&gt;&lt;/tr&gt;	&lt;/table&gt;	To generate the noisy data utterances, the speech level is maintained and only the noise amplitude is modified to obtain the desired SNR. The noise amplitude is adjusted to obtain three different averaged SNR values of 10dB, 5dB and -5dB which are referenced as low noise (LN), mid noise (MN) and high noise (HN) conditions. For each given condition the noise level remains constant.The speech data are pcm-wav files (16kHz / 16 bits / mono) stored on one DVD. The total size is 3.03 Gbytes for 33.053 files.</description>
+<description lang="French">Cette base de données a été collectée et finalisée sous les auspices du projet IST-EU STREP HIWIRE  (« Human Input that Works In Real Environments »). La base de données a été conçue pour être utilisée comme outil de développement et de test des techniques de traitement et reconnaissance de la parole en relation avec la reconnaissance de la parole robuste « non native ».La base de données comprend 8099 occurrences en anglais prononcées par des locuteurs non natifs de l’anglais (31 locuteurs français, 20 grecs, 20 italiens et 10 espagnols). Les occurrences collectées correspondent à des entrées humaines dans une application de commande et de contrôle aéronautique. Les données ont été enregistrées en studio avec un microphone « close-talk » et du bruit réel enregistré dans un cockpit d’avion a été ajouté aux données. Les signaux sont fournis dans 4 conditions: propre (enregistrements studio avec microphone « close talk »), milieu bruité faible, milieu bruité moyen et milieu bruité élevé. Les trois niveaux de bruit correspondent approximativement et respectivement aux ratios signal-bruit de 10dB, 5dB and -5 dB.Les données audio propres ont été enregistrées dans différents bureaux en utilisant un microphone « close-talk » pour effets acoustiques ambiants faibles (Plantronics USB-45). La fréquence d’échantillonnage utilisée est de 16 kHz et les données sont stockées au format Windows PCM WAV 16 bits mono.Les enregistrements correspondent à des prompts extraits d’applications de commande et de contrôle aéronautique. Un total de 8099 occurrences a été enregistré par 81 locuteurs ayant prononcé 100 occurrences chacun. La répartition des locuteurs est la suivante:&lt;table  border="0" width="100%" cellspacing="0" cellpadding="2" class="infoBoxContents"&gt;&lt;tr align=center&gt;&lt;td&gt;Pays&lt;/td&gt;&lt;td&gt;# Locuteurs&lt;/td&gt;&lt;td&gt;# Occurrences&lt;/td&gt;&lt;/tr&gt;	&lt;tr align=center&gt;&lt;td&gt;France&lt;/td&gt;&lt;td&gt;31 (38.3%)&lt;/td&gt;&lt;td&gt;3100&lt;/td&gt;&lt;/tr&gt;	&lt;tr align=center&gt;&lt;td&gt;Grèce&lt;/td&gt;&lt;td&gt;20 (24.7%)&lt;/td&gt;&lt;td&gt;2000&lt;/td&gt;&lt;/tr&gt;	&lt;tr align=center&gt;&lt;td&gt;Italie&lt;/td&gt;&lt;td&gt;20 (24.7%)&lt;/td&gt;&lt;td&gt;2000&lt;/td&gt;&lt;/tr&gt;	&lt;tr align=center&gt;&lt;td&gt;Espagne&lt;/td&gt;&lt;td&gt;10 (12.3%)&lt;/td&gt;&lt;td&gt;999&lt;/td&gt;&lt;/tr&gt;	&lt;tr align=center&gt;&lt;td&gt;Total&lt;/td&gt;&lt;td&gt;81&lt;/td&gt;&lt;td&gt;8099&lt;/td&gt;&lt;/tr&gt;	&lt;/table&gt;Pour générer les occurrences des données bruitées, le niveau de parole est maintenu et seule l’amplitude du bruit est modifiée pour obtenir le SNR souhaité. L’amplitude du bruit est ajustée pour obtenir trois valeurs SNR moyennes de 10dB, 5dB and -5dB qui sont référencées en conditions « low noise » (LN), « mid noise » (MN) et « high noise » (HN). Pour chaque condition donnée, le niveau de bruit reste constant.Les données de parole sont des fichiers pcm-wav (16kHz / 16 bits / mono) stockées sur un DVD. La taille totale est de 3,03 Goctets pour 33053 fichiers.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=131</url>
-<identifier>ELRA-M0002_05</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1088</url>
+<identifier>ELRA-S0293</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,38 +29,50 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-02-25</lastDateUpdated>
+<lastDateUpdated>2008-11-25</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 1264.20€</price>
-<price>Commercial org. ELRA Member: 10113.60€</price>
-<price>Academic org. ELRA Non Member: 2107.00€</price>
-<price>Commercial org. ELRA Non Member: 16856.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-01-23</availabilityStartDate>
+<price>Academic org. ELRA Member: 50.00€</price>
+<price>Commercial org. ELRA Member: 50.00€</price>
+<price>Academic org. ELRA Non Member: 50.00€</price>
+<price>Commercial org. ELRA Non Member: 50.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2008-11-25</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 10113.60€</price>
-<price>Commercial org. ELRA Member: 10113.60€</price>
-<price>Academic org. ELRA Non Member: 16856.00€</price>
-<price>Commercial org. ELRA Non Member: 16856.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-01-23</availabilityStartDate>
+<price>Academic org. ELRA Member: 2500.00€</price>
+<price>Commercial org. ELRA Member: 2500.00€</price>
+<price>Academic org. ELRA Non Member: 3500.00€</price>
+<price>Commercial org. ELRA Non Member: 3500.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2008-11-25</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<usageInfo>
+<actualUseInfo>
+<actualUse>nlpApplications</actualUse>
+<useNLPSpecific>speechRecognition</useNLPSpecific>
+</actualUseInfo>
+</usageInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>HIWIRE (Human Input that Works In Real Environments)</projectName>
+<fundingType>euFunds</fundingType>
+</fundingProject>
+<creationEndDate>2007-01-01</creationEndDate>
+</resourceCreationInfo>
 <resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
-<mediaType>text</mediaType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
@@ -69,19 +81,19 @@
 <languageName>English</languageName>
 </languageInfo>
 <languageInfo>
-<languageId>spa</languageId>
-<languageName>Spanish</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Castilian</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
+<languageId>eng</languageId>
+<languageName>English</languageName>
 </languageInfo>
-</lexicalConceptualResourceTextInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
+<languageInfo>
+<languageId>eng</languageId>
+<languageName>English</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>eng</languageId>
+<languageName>English</languageName>
+</languageInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
 </resourceComponentType>
 </resourceInfo>

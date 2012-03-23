@@ -6,7 +6,7 @@
 <description lang="English">This database contains Bilingual (English and Spanish) Festival HTS models. Models were trained with 9h of speech from 2 female bilingual speakers and 2 male bilingual speakers. Each speaker recorded 2h 15 min per language.  The speech data can be found in the TC-STAR Bilingual Voice-Conversion Spanish Speech Database (ELRA-S0311) and in the TC-STAR Bilingual Expressive Spanish Speech Database (ELRA-S0313).</description>
 <description lang="French">Cette base de données comprend les modèles HTS Festival bilingues (anglais et espagnol). Les modèles ont été entraînés à partir de 9 heures de parole réalisés par 2 locuteurs bilingues femmes et 2 locuteurs bilingues hommes. Chaque locuteur a enregistré 2h 15 min par langue. La base de données de parole peut être trouvée dans la base de données orale de conversion vocale bilingue TC-STAR pour l’espagnol (ELRA-S0311) et dans la base de données de parole expressive bilingue TC-STAR (ELRA-S0313).</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=1157</url>
 <identifier>ELRA-S0335</identifier>
 </identificationInfo>
