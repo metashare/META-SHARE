@@ -158,17 +158,9 @@ def getlicence(request, object_id):
                     'width="700" height="80%"><a href="{0}">View PDF licence' \
                     '</a></object>'.format(url)
             else:
-                # cfedermann: it is NOT a good idea to use urlopen to read in
-                #   a media file served by the same Django instance.  I fix
-                #   this by adding an <object> containing the license to get
-                #   the v2.0 release done...  This has to be checked/cleaned
-                #   up somewhen later!
-                content = '<object data="{0}" type="text/html" id=pdf ' \
-                    'width="700" height="80%"><a href="{0}">View licence' \
-                    '</a></object>'.format(url) 
-#                handle = urlopen(url)
-#                content = handle.read()
-#                handle.close()
+                content = '<iframe id=pdf width="420" height="345" src="{0}" ' \
+                    'frameborder="0" scrolling=auto><a href="{0}">View licence' \
+                    '</a></iframe>'.format(url)
     return HttpResponse(content)
 
 
