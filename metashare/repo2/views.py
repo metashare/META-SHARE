@@ -134,37 +134,6 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
 }
 
 
-<<<<<<< HEAD
-
-@login_required
-def getlicence(request, object_id):
-    """ Renders the resource licence. """
-    content = "<p>No license terms have been released for this resource.<br/>"
-    licences = licenceInfoType_model.objects.values("licence").filter(
-                            back_to_distributioninfotype_model__id=object_id)
-    #licenceinfo = licenceInfoType_model.objects.get(
-    #                        back_to_distributioninfotype_model__id=object_id)
-    if (len(licences) > 0):
-        licencelabel = LICENCEINFOTYPE_LICENCE_CHOICES['choices'] \
-                                            [int(licences[0]['licence'])][1]
-        url = LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licencelabel][0]
-        if url != "":
-            urlparser = urlparse(url)
-            if urlparser[1] == "":
-                url =  '{0}{1}'.format(DJANGO_URL, url)
-            if ".pdf" in url:
-                content = '<object data="{0}" type="application/pdf" id=pdf ' \
-                    'width="700" height="80%"><a href="{0}">View PDF licence' \
-                    '</a></object>'.format(url)
-            else:
-                content = '<iframe id=pdf width="420" height="345" src="{0}" ' \
-                    'frameborder="0" scrolling=auto><a href="{0}">View licence' \
-                    '</a></iframe>'.format(url)
-    return HttpResponse(content)
-
-
-=======
->>>>>>> upstream/master
 @login_required
 def download(request, object_id):
     """
