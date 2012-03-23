@@ -150,7 +150,7 @@
 			</xs:restriction>
 		</xs:simpleType>
 	</xs:element>
-	<xs:element name="mediaType">
+	<xs:element name="mediaTypes">
 		<xs:annotation>
 			<xs:documentation>Specifies the media type of the resource and basically corresponds to the physical medium of the content representation. Each media type is described through a 				distinctive set of features. A resource may consist of parts attributed to different types of media.</xs:documentation>
 			<xs:appinfo>
