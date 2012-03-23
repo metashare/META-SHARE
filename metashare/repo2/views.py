@@ -8,21 +8,19 @@ import logging
 from datetime import datetime
 from os.path import split
 from urllib import urlopen
-from urlparse import urlparse
 
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
-from django.utils.translation import ugettext as _
 
 from haystack.views import FacetedSearchView
 
-from metashare.repo2.models import licenceInfoType_model, \
-    resourceInfoType_model, LICENCEINFOTYPE_LICENCE_CHOICES
-from metashare.settings import DJANGO_URL, LOG_LEVEL, LOG_HANDLER
+from metashare.repo2.forms import LicenseSelectionForm, LicenseAgreementForm
+from metashare.repo2.models import licenceInfoType_model, resourceInfoType_model
+from metashare.settings import LOG_LEVEL, LOG_HANDLER
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
 
@@ -136,6 +134,7 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
 }
 
 
+<<<<<<< HEAD
 
 @login_required
 def getlicence(request, object_id):
@@ -164,83 +163,121 @@ def getlicence(request, object_id):
     return HttpResponse(content)
 
 
+=======
+>>>>>>> upstream/master
 @login_required
 def download(request, object_id):
-    """ Renders the repository download view. """
+    """
+    Renders the resource download view including license selection, etc.
+    """
+    if not request.user.is_active:
+        return HttpResponseForbidden()
+
+    # here we are only interested in licenses (or their names) of the specified
+    # resource that allow a download
     resource = get_object_or_404(resourceInfoType_model, pk=object_id)
-    licences = tuple(licenceInfoType_model.objects \
+    licence_infos = tuple(licenceInfoType_model.objects \
         .filter(back_to_distributioninfotype_model__id=object_id))
+    licences = dict([(l_name, l_info) for l_info in licence_infos
+        if u'downloadable' in l_info.get_distributionAccessMedium_display_list()
+        for l_name in l_info.get_licence_display_list()])
 
-    if request.user.is_active:
-        agreement = False
-        if request.method == "POST":
-            la_val = request.POST.get('license_agree', '0')
-            agreement = la_val == '1'
-        elif request.method == "GET":
-            la_val = request.GET.get('license_agree', '0')
-            agreement = la_val == '1'
-        if agreement:
-            provide_download(request, resource, licences)
+    licence_choice = None
+    if request.method == "POST":
+        licence_choice = request.POST.get('licence', None)
+        if licence_choice and 'in_licence_agree_form' in request.POST:
+            la_form = LicenseAgreementForm(licence_choice, data=request.POST)
+            if la_form.is_valid():
+                return _provide_download(request, resource,
+                                    licences[licence_choice].downloadLocation)
+            else:
+                return render_to_response('repo2/licence_agreement.html',
+                    { 'form': la_form, 'resource': resource,
+                      'licence_path': \
+                      LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
+                      'requires_sig': \
+                      LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][1] })
+        elif licence_choice and not licence_choice in licences:
+            licence_choice = None
 
-    signature_req = True
-    for licence in [name for licence_info in licences if u'downloadable' in
-                    licence_info.get_distributionAccessMedium_display_list()
-                    for name in licence_info.get_licence_display_list()]:
-        if not LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence][1]:
-            signature_req = False
-            # for now we break as soon as we have found the first download
-            # licence for which there is no signature required
-            break
-    if resource.identificationInfo.resourceName:
-        title = resource.identificationInfo.resourceName[0]
+    if len(licences) == 1:
+        # no need to manually choose amongst 1 license ...
+        licence_choice = licences.iterkeys().next()
+
+    if licence_choice:
+        return render_to_response('repo2/licence_agreement.html',
+            { 'form': LicenseAgreementForm(licence_choice),
+              'resource': resource,
+              'licence_path': \
+                LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
+              'requires_sig': \
+                LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][1] })
+    elif len(licences) > 1:
+        return render_to_response('repo2/licence_selection.html',
+            { 'form': LicenseSelectionForm([(name, name) for name in licences]),
+              'resource': resource })
     else:
-        title = _('Unnamed Resource')
-    dictionary = { 'title': title,
-                   'object_id': object_id,
-                   'signature_req': signature_req }
-    return render_to_response('repo2/download.html', dictionary,
-                              context_instance=RequestContext(request))
+        return render_to_response('repo2/lr_not_downloadable.html',
+                                  { 'resource': resource })
 
 
-def provide_download(request, resource, licences):
-    sessionid = ""
-    if request.COOKIES:
-        sessionid = request.COOKIES.get('sessionid', '')
-
+def _provide_download(request, resource, download_urls):
+    """
+    Returns an HTTP response with a download of the given resource.
+    """
     if resource.storage_object.has_local_download_copy():
         try:
-            _binary_data = resource.storage_object.get_download()
+            dl_path = resource.storage_object.get_download()
 
-            # We use a generic, binary mime type here for version v1.
+            # build HTTP response with a generic, binary mime type
             response = HttpResponse(mimetype="application/octet-stream")
             response['Content-Disposition'] = 'attachment; filename={0}' \
-                                                .format(split(_binary_data)[1])
-            with open(_binary_data, 'rb') as _local_data:
+                                                .format(split(dl_path)[1])
+            with open(dl_path, 'rb') as _local_data:
                 _chunk = _local_data.read(MAXIMUM_READ_BLOCK_SIZE)
                 while _chunk:
                     response.write(_chunk)
                     _chunk = _local_data.read(MAXIMUM_READ_BLOCK_SIZE)
 
+            # maintain download statistics and return the response for download
             saveLRStats(request.user.username,
-                        resource.storage_object.identifier, sessionid,
-                        DOWNLOAD_STAT)
+                        resource.storage_object.identifier,
+                        _get_sessionid(request), DOWNLOAD_STAT)
+            LOGGER.info("Offering a local download of resource #{0}." \
+                        .format(resource.id))
             return response
         except:
-            raise Http404
-    # redirect to download location, if available
-    else:
-        for url in [loc for licence_info in licences
-                    if u'downloadable' in licence_info \
-                        .get_distributionAccessMedium_display_list()
-                    for loc in licence_info.downloadLocation]:
-            if (urlopen(url).code / 100 < 4):
+            LOGGER.warn("An error has occurred while trying to provide the " \
+                        "local download copy of resource #{0}." \
+                        .format(resource.id))
+    # redirect to a download location, if available
+    elif download_urls:
+        for url in download_urls:
+            status_code = urlopen(url).getcode()
+            if not status_code or status_code < 400:
                 saveLRStats(request.user.username,
                             resource.storage_object.identifier,
-                            sessionid, DOWNLOAD_STAT)
+                            _get_sessionid(request), DOWNLOAD_STAT)
+                LOGGER.info("Redirecting to {0} for the download of resource " \
+                            "#{1}.".format(url, resource.id))
                 return redirect(url)
-        LOGGER.info("No download could be offered for resource #{0}." \
-                    .format(resource.id))
-    raise Http404
+        LOGGER.warn("No download could be offered for resource #{0}. These " \
+                    "URLs were tried: {1}".format(resource.id, download_urls))
+
+    # no download could be provided
+    return render_to_response('repo2/lr_not_downloadable.html',
+                              { 'resource': resource })
+
+
+def _get_sessionid(request):
+    """
+    Returns the session ID stored in the cookies of the given request.
+    
+    The empty string is returned, if there is no session ID available.
+    """
+    if request.COOKIES:
+        return request.COOKIES.get('sessionid', '')
+    return ''
 
 
 @login_required
