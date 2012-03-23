@@ -8,21 +8,19 @@ import logging
 from datetime import datetime
 from os.path import split
 from urllib import urlopen
-from urlparse import urlparse
 
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponseForbidden
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
-from django.utils.translation import ugettext as _
 
 from haystack.views import FacetedSearchView
 
-from metashare.repo2.models import licenceInfoType_model, \
-    resourceInfoType_model, LICENCEINFOTYPE_LICENCE_CHOICES
-from metashare.settings import DJANGO_URL, LOG_LEVEL, LOG_HANDLER
+from metashare.repo2.forms import LicenseSelectionForm, LicenseAgreementForm
+from metashare.repo2.models import licenceInfoType_model, resourceInfoType_model
+from metashare.settings import LOG_LEVEL, LOG_HANDLER
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
 
@@ -137,81 +135,66 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
 }
 
 
-
-@login_required
-def getlicence(request, object_id):
-    """ Renders the resource licence. """
-    content = "<p>No license terms have been released for this resource.<br/>"
-    licences = licenceInfoType_model.objects.values("licence").filter(
-                            back_to_distributioninfotype_model__id=object_id)
-    #licenceinfo = licenceInfoType_model.objects.get(
-    #                        back_to_distributioninfotype_model__id=object_id)
-    if (len(licences) > 0):
-        licencelabel = LICENCEINFOTYPE_LICENCE_CHOICES['choices'] \
-                                            [int(licences[0]['licence'])][1]
-        url = LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licencelabel][0]
-        if url != "":
-            urlparser = urlparse(url)
-            if urlparser[1] == "":
-                url =  '{0}{1}'.format(DJANGO_URL, url)
-            if ".pdf" in url:
-                content = '<object data="{0}" type="application/pdf" id=pdf ' \
-                    'width="700" height="80%"><a href="{0}">View PDF licence' \
-                    '</a></object>'.format(url)
-            else:
-                # cfedermann: it is NOT a good idea to use urlopen to read in
-                #   a media file served by the same Django instance.  I fix
-                #   this by adding an <object> containing the license to get
-                #   the v2.0 release done...  This has to be checked/cleaned
-                #   up somewhen later!
-                content = '<object data="{0}" type="text/html" id=pdf ' \
-                    'width="700" height="80%"><a href="{0}">View PDF licence' \
-                    '</a></object>'.format(url)
-#                handle = urlopen(url)
-#                content = handle.read()
-#                handle.close()
-    return HttpResponse(content)
-
-
 @login_required
 def download(request, object_id):
-    """ Renders the repository download view. """
+    """
+    Renders the resource download view including license selection, etc.
+    """
+    if not request.user.is_active:
+        return HttpResponseForbidden()
+
+    # here we are only interested in licenses (or their names) of the specified
+    # resource that allow a download
     resource = get_object_or_404(resourceInfoType_model, pk=object_id)
-    licences = tuple(licenceInfoType_model.objects \
+    licence_infos = tuple(licenceInfoType_model.objects \
         .filter(back_to_distributioninfotype_model__id=object_id))
+    licences = dict([(l_name, l_info) for l_info in licence_infos
+        if u'downloadable' in l_info.get_distributionAccessMedium_display_list()
+        for l_name in l_info.get_licence_display_list()])
 
-    if request.user.is_active:
-        agreement = False
-        if request.method == "POST":
-            la_val = request.POST.get('license_agree', '0')
-            agreement = la_val == '1'
-        elif request.method == "GET":
-            la_val = request.GET.get('license_agree', '0')
-            agreement = la_val == '1'
-        if agreement:
-            provide_download(request, resource, licences)
+    licence_choice = None
+    if request.method == "POST":
+        licence_choice = request.POST.get('licence', None)
+        if licence_choice and 'in_licence_agree_form' in request.POST:
+            la_form = LicenseAgreementForm(licence_choice, data=request.POST)
+            if la_form.is_valid():
+                return _provide_download(request, resource,
+                                    licences[licence_choice].downloadLocation)
+            else:
+                return render_to_response('repo2/licence_agreement.html',
+                    { 'form': la_form, 'resource': resource,
+                      'licence_path': \
+                      LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
+                      'requires_sig': \
+                      LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][1] })
+        elif licence_choice and not licence_choice in licences:
+            licence_choice = None
 
-    signature_req = True
-    for licence in [name for licence_info in licences if u'downloadable' in
-                    licence_info.get_distributionAccessMedium_display_list()
-                    for name in licence_info.get_licence_display_list()]:
-        if not LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence][1]:
-            signature_req = False
-            # for now we break as soon as we have found the first download
-            # licence for which there is no signature required
-            break
-    if resource.identificationInfo.resourceName:
-        title = resource.identificationInfo.resourceName[0]
+    if len(licences) == 1:
+        # no need to manually choose amongst 1 license ...
+        licence_choice = licences.iterkeys().next()
+
+    if licence_choice:
+        return render_to_response('repo2/licence_agreement.html',
+            { 'form': LicenseAgreementForm(licence_choice),
+              'resource': resource,
+              'licence_path': \
+                LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
+              'requires_sig': \
+                LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][1] })
+    elif len(licences) > 1:
+        return render_to_response('repo2/licence_selection.html',
+            { 'form': LicenseSelectionForm([(name, name) for name in licences]),
+              'resource': resource })
     else:
-        title = _('Unnamed Resource')
-    dictionary = { 'title': title,
-                   'object_id': object_id,
-                   'signature_req': signature_req }
-    return render_to_response('repo2/download.html', dictionary,
-                              context_instance=RequestContext(request))
+        # TODO resource is not downloadable; inform the user
+        raise Http404
 
 
-def provide_download(request, resource, licences):
+def _provide_download(request, resource, download_urls):
+    """
+    Returns an HTTP response with a download of the given resource.
+    """
     sessionid = ""
     if request.COOKIES:
         sessionid = request.COOKIES.get('sessionid', '')
@@ -238,10 +221,7 @@ def provide_download(request, resource, licences):
             raise Http404
     # redirect to download location, if available
     else:
-        for url in [loc for licence_info in licences
-                    if u'downloadable' in licence_info \
-                        .get_distributionAccessMedium_display_list()
-                    for loc in licence_info.downloadLocation]:
+        for url in download_urls:
             if (urlopen(url).code / 100 < 4):
                 saveLRStats(request.user.username,
                             resource.storage_object.identifier,
