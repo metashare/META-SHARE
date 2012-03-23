@@ -31,17 +31,12 @@ sqs = SearchQuerySet() \
   .order_by("resourceNameSort_exact")
 
 urlpatterns = patterns('metashare.repo2.views',
-  (r'^browse/$',
-    'simple_search'),
-  (r'^browse/(?P<object_id>\d+)/$',
+  (r'^browse/(?P<object_id>[123456789]\d*)/$',
     'view'),
-  (r'^download/(?P<object_id>.+)/$',
+  (r'^download/(?P<object_id>[123456789]\d*)/$',
     'download'),
-  (r'^licence/(?P<object_id>.+)/$',
+  (r'^licence/(?P<object_id>[123456789]\d*)/$',
     'getlicence'),
-
-  # TODO: at some later stage replace the above URL configurations so that they
-  # work with Haystack; the following URL pattern won't be needed anymore then:
   url(r'^search2/$',
     search_view_factory(view_class=MetashareFacetedSearchView,
                         form_class=FacetedBrowseForm,
