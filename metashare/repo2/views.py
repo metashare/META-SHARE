@@ -195,10 +195,6 @@ def _provide_download(request, resource, download_urls):
     """
     Returns an HTTP response with a download of the given resource.
     """
-    sessionid = ""
-    if request.COOKIES:
-        sessionid = request.COOKIES.get('sessionid', '')
-
     if resource.storage_object.has_local_download_copy():
         try:
             _binary_data = resource.storage_object.get_download()
@@ -214,8 +210,8 @@ def _provide_download(request, resource, download_urls):
                     _chunk = _local_data.read(MAXIMUM_READ_BLOCK_SIZE)
 
             saveLRStats(request.user.username,
-                        resource.storage_object.identifier, sessionid,
-                        DOWNLOAD_STAT)
+                        resource.storage_object.identifier,
+                        _get_sessionid(request), DOWNLOAD_STAT)
             return response
         except:
             raise Http404
@@ -225,11 +221,22 @@ def _provide_download(request, resource, download_urls):
             if (urlopen(url).code / 100 < 4):
                 saveLRStats(request.user.username,
                             resource.storage_object.identifier,
-                            sessionid, DOWNLOAD_STAT)
+                            _get_sessionid(request), DOWNLOAD_STAT)
                 return redirect(url)
         LOGGER.info("No download could be offered for resource #{0}." \
                     .format(resource.id))
     raise Http404
+
+
+def _get_sessionid(request):
+    """
+    Returns the session ID stored in the cookies of the given request.
+    
+    The empty string is returned, if there is no session ID available.
+    """
+    if request.COOKIES:
+        return request.COOKIES.get('sessionid', '')
+    return ''
 
 
 @login_required
