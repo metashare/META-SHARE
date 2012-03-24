@@ -64,71 +64,71 @@ def _convert_to_template_tuples(element_tree):
 # The following dictionary keeps info about licence document (as relative file system path)
 # and if a licence is required an explicit signature or not (second value of the array)
 LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
-  'AGPL': ('/site_media/licences/GNU_agpl-3.0.htm', False),
-  'LGPL': ('/site_media/licences/GNU_lgpl-2.0.htm', False),
-  'LGPLv3': ('/site_media/licences/GNU_lgpl-3.0.htm', False),
-  'CC': ('/site_media/licences/CC0v1.0.htm', False),
-  'CC_BY-SA_3.0': ('/site_media/licences/CC-BYSAv3.0.htm', False),
-  'CC_BY-NC-ND': ('/site_media/licences/CC-BYNCNDv3.0.htm', False),
-  'CC_BY-NC-SA': ('/site_media/licences/CC-BYNCSAv2.5.htm', False),
-  'CC_BY-NC': ('/site_media/licences/CC-BYNCv3.0.htm', False),
-  'CC_BY-ND': ('/site_media/licences/CC-BYNDv3.0.htm', False),
-  'CC_BY-SA': ('/site_media/licences/CC-BYSAv2.5.htm', False),
-  'CC_BY': ('/site_media/licences/CC-BYv3.0.htm', False),
-  'CC_BY-NC-SA_3.0': ('/site_media/licences/CC-BYNCSAv3.0.htm', False),
+  'AGPL': ('site_media/licences/GNU_agpl-3.0.htm', False),
+  'LGPL': ('site_media/licences/GNU_lgpl-2.0.htm', False),
+  'LGPLv3': ('site_media/licences/GNU_lgpl-3.0.htm', False),
+  'CC': ('site_media/licences/CC0v1.0.htm', False),
+  'CC_BY-SA_3.0': ('site_media/licences/CC-BYSAv3.0.htm', False),
+  'CC_BY-NC-ND': ('site_media/licences/CC-BYNCNDv3.0.htm', False),
+  'CC_BY-NC-SA': ('site_media/licences/CC-BYNCSAv2.5.htm', False),
+  'CC_BY-NC': ('site_media/licences/CC-BYNCv3.0.htm', False),
+  'CC_BY-ND': ('site_media/licences/CC-BYNDv3.0.htm', False),
+  'CC_BY-SA': ('site_media/licences/CC-BYSAv2.5.htm', False),
+  'CC_BY': ('site_media/licences/CC-BYv3.0.htm', False),
+  'CC_BY-NC-SA_3.0': ('site_media/licences/CC-BYNCSAv3.0.htm', False),
   'MSCommons_BY': \
-    ('/site_media/licences/META-SHARE_COMMONS_BY_v1.0.htm', False),
+    ('site_media/licences/META-SHARE_COMMONS_BY_v1.0.htm', False),
   'MSCommons_BY-NC': \
-    ('/site_media/licences/META-SHARE_COMMONS_BYNC_v1.0.htm', False),
+    ('site_media/licences/META-SHARE_COMMONS_BYNC_v1.0.htm', False),
   'MSCommons_BY-NC-ND': \
-    ('/site_media/licences/META-SHARE_COMMONS_BYNCND_v1.0.htm', False),
+    ('site_media/licences/META-SHARE_COMMONS_BYNCND_v1.0.htm', False),
   'MSCommons_BY-NC-SA': \
-    ('/site_media/licences/META-SHARE_COMMONS_BYNCSA_v1.0.htm', False),
+    ('site_media/licences/META-SHARE_COMMONS_BYNCSA_v1.0.htm', False),
   'MSCommons_BY-ND': \
-    ('/site_media/licences/META-SHARE_COMMONS_BYND_v1.0.htm', False),
+    ('site_media/licences/META-SHARE_COMMONS_BYND_v1.0.htm', False),
   'MSCommons_BY-SA': \
-    ('/site_media/licences/META-SHARE_COMMONS_BYSA_v1.0.htm', False),
+    ('site_media/licences/META-SHARE_COMMONS_BYSA_v1.0.htm', False),
   'MSCommons_COM-NR-FF': \
-    ('/site_media/licences/META-SHARE_Commercial_NoRedistribution_For-a-Fee' \
+    ('site_media/licences/META-SHARE_Commercial_NoRedistribution_For-a-Fee' \
      '_v0.7.htm', True),
   'MSCommons_COM-NR': \
-    ('/site_media/licences/META-SHARE_Commercial_NoRedistribution_v0.7.htm',
+    ('site_media/licences/META-SHARE_Commercial_NoRedistribution_v0.7.htm',
      False),
   'MSCommons_COM-NR-ND-FF': \
-    ('/site_media/licences/META-SHARE_Commercial_NoRedistribution_' \
+    ('site_media/licences/META-SHARE_Commercial_NoRedistribution_' \
      'NoDerivatives_For-a-fee-v1.0.htm', True),
   'MSCommons_COM-NR-ND': \
-    ('/site_media/licences/META-SHARE_Commercial_NoRedistribution_' \
+    ('site_media/licences/META-SHARE_Commercial_NoRedistribution_' \
      'NoDerivatives-v1.0.htm', False),
   'MSCommons_NoCOM-NC-NR-ND-FF': \
-    ('/site_media/licences/META-SHARE_NonCommercial_NoRedistribution_' \
+    ('site_media/licences/META-SHARE_NonCommercial_NoRedistribution_' \
      'NoDerivatives_For-a-fee-v1.0.htm', True),
   'MSCommons_NoCOM-NC-NR-ND': \
-    ('/site_media/licences/META-SHARE_Commercial_NoRedistribution_' \
+    ('site_media/licences/META-SHARE_Commercial_NoRedistribution_' \
      'NoDerivatives-v1.0.htm', False),
   'MSCommons_NoCOM-NC-NR-FF': \
-    ('/site_media/licences/META-SHARE_NonCommercial_NoRedistribution_' \
+    ('site_media/licences/META-SHARE_NonCommercial_NoRedistribution_' \
      'For-a-Fee-v1.0.htm', True),
   'MSCommons_NoCOM-NC-NR': \
-    ('/site_media/licences/META-SHARE_NonCommercial_NoRedistribution-v1.0.htm',
+    ('site_media/licences/META-SHARE_NonCommercial_NoRedistribution-v1.0.htm',
      False),
   'ELRA_EVALUATION': \
-    ('/site_media/licences/EVALUATION.htm', True),
-  'ELRA_VAR': ('/site_media/licences/VAR-v3_2007.htm', True),
+    ('site_media/licences/EVALUATION.htm', True),
+  'ELRA_VAR': ('site_media/licences/VAR-v3_2007.htm', True),
   'ELRA_END_USER': \
-    ('/site_media/licences/ENDUSER-v3_2007.htm', True),
-  'ELRA_LIMITED': ('/site_media/licences/Var-E-v2.htm', True),
+    ('site_media/licences/ENDUSER-v3_2007.htm', True),
+  'ELRA_LIMITED': ('site_media/licences/Var-E-v2.htm', True),
   'proprietary': ('', True),
   'CLARIN_PUB': ('', True),
   'CLARIN_ACA-NC': ('', True),
   'CLARIN_ACA': ('', True),
   'CLARIN_RES': ('', True),
-  'Princeton_Wordnet': ('/site_media/licences/WordNet-3.0.txt', False),
-  'GPL': ('/site_media/licences/GNU_gpl-3.0.htm', False),
+  'Princeton_Wordnet': ('site_media/licences/WordNet-3.0.txt', False),
+  'GPL': ('site_media/licences/GNU_gpl-3.0.htm', False),
   'GeneralLicenceGrant': ('', True),
-  'GFDL': ('/site_media/licences/GNU_fdl-1.3.htm', False),
-  'ApacheLicence_V2.0': ('/site_media/licences/Apache-2.0.htm', False),
-  'BSD-style': ('/site_media/licences/BSD_licence.htm', False),
+  'GFDL': ('site_media/licences/GNU_fdl-1.3.htm', False),
+  'ApacheLicence_V2.0': ('site_media/licences/Apache-2.0.htm', False),
+  'BSD-style': ('site_media/licences/BSD_licence.htm', False),
   'underNegotiation': ('', True),
   'other': ('', True)
 }
@@ -183,11 +183,11 @@ def download(request, object_id):
                 LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][1] })
     elif len(licences) > 1:
         return render_to_response('repo2/licence_selection.html',
-            { 'form': LicenseSelectionForm([(name, name) for name in licences]),
-              'resource': resource })
+            { 'form': LicenseSelectionForm(licences), 'resource': resource })
+        
     else:
-        return render_to_response('repo2/lr_not_downloadable.html',
-                                  { 'resource': resource })
+        return render_to_response('repo2/lr_not_downloadable.html', 
+            { 'resource': resource, 'object_id': object_id })
 
 
 def _provide_download(request, resource, download_urls):
@@ -235,7 +235,7 @@ def _provide_download(request, resource, download_urls):
 
     # no download could be provided
     return render_to_response('repo2/lr_not_downloadable.html',
-                              { 'resource': resource })
+        { 'resource': resource, 'object_id': resource.id})
 
 
 def _get_sessionid(request):
@@ -327,12 +327,12 @@ class MetashareFacetedSearchView(FacetedSearchView):
     be returned that are accessible by the current user.
     """
     def get_results(self):
+        # collect statistics about the query
+        starttime = datetime.now()
         sqs = super(MetashareFacetedSearchView, self).get_results()
         if not self.request.user.is_staff:
             sqs = sqs.filter(published=True)
 
-        # collect statistics about the query
-        starttime = datetime.now()
         results_count = sqs.count()
         if results_count and self.query:
             saveQueryStats(self.request.user.username, '', self.query,
