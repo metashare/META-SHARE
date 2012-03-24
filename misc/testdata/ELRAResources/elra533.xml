@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Spanish Festival HTS models - female speech</resourceName>
-<resourceName lang="French">Modèles HTS en espagnol du projet Festival - voix de femme</resourceName>
-<description lang="English">This database contains the Festival HTS models trained with 10h of speech from the TC-STAR Spanish Baseline Female Speech Database (ELRA-S0309).</description>
-<description lang="French">Cette base de données comprend les modèles HTS Festival entraînés à partir de 10 heures de parole de la voix de femme de référence TC-STAR espagnol (ELRA-S0309).</description>
+<resourceName lang="English">TC-STAR 2007 Evaluation Package - ASR Spanish - EPPS</resourceName>
+<resourceName lang="French">Package d’évaluation TC-STAR 2006 - ASR espagnol - EPPS</resourceName>
+<description lang="English">TC-STAR is a European integrated project focusing on Speech-to-Speech Translation (SST). To encourage significant breakthrough in all SST technologies, annual open competitive evaluations are organized. Automatic Speech Recognition (ASR), Spoken Language Translation (SLT) and Text-To-Speech (TTS) are evaluated independently and within an end-to-end system.The third TC-STAR evaluation campaign took place in March 2007. Three core technologies were evaluated during the campaign:• Automatic Speech Recognition (ASR),• Spoken Language Translation (SLT),• Text to Speech (TTS).Each evaluation package includes resources, protocols, scoring tools, results of the official campaign, etc., that were used or produced during the second evaluation campaign. The aim of these evaluation packages is to enable external players to evaluate their own system and compare their results with those obtained during the campaign itself.The speech databases made within the TC-STAR project were validated by SPEX, in the Netherlands, to assess their compliance with the TC-STAR format and content specifications.This package includes the material used for the TC-STAR 2007 Automatic Speech Recognition (ASR) third evaluation campaign for Spanish. The same packages are available for both English (ELRA-E0025) and Mandarin (ELRA-E0027), and for the CORTES task for Spanish (ELRA-E0026/01), for ASR and for SLT in 3 directions, English-to-Spanish (ELRA-E0028), Spanish-to-English (ELRA-E0029-01 and E0029-02), Chinese-to-English (ELRA-E0030).To be able to chain the components, ASR, SLT and TTS evaluation tasks were designed to use common sets of raw data and conditions. Three evaluation tasks, common to ASR, SLT and TTS, were selected: EPPS (European Parliament Plenary Sessions) task, CORTES (Spanish Parliament Sessions) task and VOA (Voice of America) task. The CORTES data were used in addition to the EPPS data to evaluate ASR in Spanish and SLT from Spanish into English.This package was used within the EPPS task and consists of one test data set, composed of audio recordings of Parliament’s sessions from June to September 2006. The test data set is made of 3 hours (28,823 running words).</description>
+<description lang="French">TC-STAR est un projet intégré européen basé sur la traduction parole-parole (ou SST pour Speech-to-Speech Translation). Pour encourager de manière conséquente l’avancée dans toutes les technologies de la SST, des évaluations ouvertes à la concurrence sont organisées sur une base annuelle. Les technologies de la reconnaissance automatique de la parole (ou ASR pour « Automatic Speech Recognition »), de la traduction de la langue parlée (ou SLT pour « Spoken Language Translation ») et les technologies texte-parole (ou TTS pour « Text-to-Speech ») sont évaluées à la fois de façon indépendante et intégrées à un système « end-to-end » (de « bout en bout »).La troisième campagne d’évaluation TC-STAR s’est déroulée en mars 2007. Trois technologies de base ont été évaluées lors de cette campagne:• la reconnaissance automatique de la parole (ASR),• la traduction de la langue parlée (SLT),• la synthèse texte-parole (TTS).Chaque package d’évaluation regroupe des ressources, des protocoles, des outils de notation, les résultats de la campagne officielle, etc., qui ont été utilisés ou produits pendant la seconde campagne d’évaluation. Le but de ces packages d’évaluation est de permettre à des acteurs externes d’évaluer leur propre système et de comparer leurs résultats à ceux obtenus pendant la campagne.Les bases de données orales produites dans le projet TC-STAR ont été validées par SPEX, Pays-Bas, selon le format et les spécifications de contenu TC-STAR.Ce package comprend le matériel utilisé pour la troisième campagne d’évaluation TC-STAR 2007 Automatic Speech Recognition (ASR) de l’espagnol pour la tâche CORTES. Des packages similaires sont également disponibles pour l’anglais (ELRA-E0025) et le chinois mandarin (ELRA-E0027) et l’espagnol pour la tâche CORTES (ELRA-E0026-01),  pour l’ASR, ainsi que pour la SLT dans 3 sens, anglais vers espagnol (ELRA-E0028), espagnol vers anglais (ELRA-E0029), chinois vers anglais (ELRA-E0030).Pour permettre de regrouper les composants, les tâches d’évaluation ASR, SLT et TTS ont été conçues en utilisant des données brutes et des conditions communes. Trois tâches d’évaluation, communes à l’ASR, la SLT, et la TTS ont été choisies : la tâche EPPS (« European Parliament Plenary Sessions » – Sessions plénières du Parlement européen), la tâche CORTES (« Spanish Parliament Sessions ») et la tâche VOA (« Voice of America » - La voix de l’Amérique). Les données CORTES ont été utilisées en complement des données EPPS pour l’évaluation ASR en espagnol et SLT de l’espagnol vers l’anglais.Le présent package a été utilisé dans le cadre de la tâche EPPS et comprend un ensemble de données de test, composé des enregistrements audio des sessions du Parlement de juin à septembre 2006. Les données de test comprennent 3 heures d’enregistrements (28 823 mots courants).</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1156</url>
-<identifier>ELRA-S0334</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1018</url>
+<identifier>ELRA-E0026_02</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,29 +29,27 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2012-01-05</lastDateUpdated>
+<lastDateUpdated>2007-10-09</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
-<licence>ELRA_END_USER</licence>
-<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 0.00€</price>
-<price>Academic org. ELRA Non Member: 0.00€</price>
-<price>Commercial org. ELRA Member: 0.00€</price>
-<price>Academic org. ELRA Member: 0.00€</price>
-<availabilityStartDate>2011-12-23</availabilityStartDate>
-</licenceInfo>
-<licenceInfo>
-<licence>ELRA_VAR</licence>
-<restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 0.00€</price>
-<price>Academic org. ELRA Non Member: 0.00€</price>
-<price>Commercial org. ELRA Member: 0.00€</price>
-<price>Academic org. ELRA Member: 0.00€</price>
-<availabilityStartDate>2011-12-23</availabilityStartDate>
+<licence>ELRA_EVALUATION</licence>
+<restrictionsOfUse>evaluationUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 750.00€</price>
+<price>Academic org. ELRA Non Member: 750.00€</price>
+<price>Commercial org. ELRA Member: 500.00€</price>
+<price>Academic org. ELRA Member: 500.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2007-10-09</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>TC-STAR</projectName>
+<fundingType>euFunds</fundingType>
+</fundingProject>
+</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>

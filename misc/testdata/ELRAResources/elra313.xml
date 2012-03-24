@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">FASiL multimodal “fasil-mm” corpus</resourceName>
-<resourceName lang="French">Corpus multimodal FASiL “fasil-mm”</resourceName>
-<description lang="English">The corpus was collected in the context of the FASiL project, EU FP5 IST-2001-38685 (http://www.fasil.co.uk), as a wizard-of-oz experiment. Therefore, there are sound and interaction recordings of subject and wizard. A total of 90 subjects were recorded (30 per language: English, Portuguese and Swedish). The corpus is formatted as .wav files (u-law) for audio, plain ASCII text (.txt) for transcriptions, and a TASX .XML for annotations which binds everything together. The multimodal woz experiment is about the voice interaction with a Virtual Personal Assistent (VPA) for an email, calender and contacts task. Hesitations are marked as “UH”, noise as “NOISE” and other irrelevant stuff as “IRRELEVANT”. All annotations are in lower case, except for the former mentioned cases.Exact documentation of experiment in FASiL deliverable D.2.2_b.See also S0174-01, S0174-02, S0174-03, and S0174-04.</description>
-<description lang="French">Ce corpus a été collecté dans le cadre du projet FASiL, EU FP5 IST-2001-38685 (http://www.fasil.co.uk), pour une expérience en magicien d’oz. Ainsi, il comprend les enregistrements de voix et les interactions des sujets et du magicien pour un total de 90 sujets (30 par langue : anglais, portugais et suédois). Le corpus est formaté en fichiers .wav (u-law) pour la partie audio, ASCII pour la partie transcriptions (.txt), et un fichier maître TASX.XML relie les .txt et les .wav.L’expérience magicien d’oz tient dans l’interaction orale avec un « assistant personnel virtuel » (Virtual Personal Assistent (VPA)) dans une tâche d’email, de gestion de calendrier et de contacts. Les hésitations sont marquées par la balise “UH”, le bruit par la balise “NOISE” et les autres éléments non pertinents par la balise “IRRELEVANT”. Toutes les annotations sont en minuscules, excepté les balises précédemment citées.Une documentation précise de l’expérience est présentée dans le livrable FASiL D.2.2.Voir aussi S0174-01, S0174-02, S0174-03 et S0174-04.</description>
-<resourceShortName>fasil-mm</resourceShortName>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=706</url>
-<identifier>ELRA-S0174_05</identifier>
+<resourceName lang="English">Mandarin Chinese Telephone Speech Recognition Corpus - Digit String (649 people)</resourceName>
+<resourceName lang="French">Corpus de reconnaissance de parole téléphonique en chinois mandarin – séquences de chiffres (650 locuteurs)</resourceName>
+<description lang="English">This corpus comprises 750 entries uttered by 649 speakers of different dialects, ages and various educational levels (340 males and 309 females), recorded over the fixed telephone network. The database comprises 9,750 digit strings. Speech samples are stored as a sequence of 16-bit 8kHz WAV for a total of 16.28 hours of speech.Each speaker read 15 items. Text files are stored in Unicode format. All data have been proofread manually.The transcriptions include non-speech markers (background noise, background speech, speaker sounds) as well as markers for mispronunciation, channel distortions, words left-out and duplicates.The corpus aims to be applied to the testing and telephone natural speech recognition system.</description>
+<description lang="French">Ce corpus comprend 750 entrées prononcées par 649 locuteurs de dialectes, d’âges et de niveaux d’éducation différents (340 hommes et 309 femmes), enregistrées à travers le réseau téléphonique fixe. La base de données contient 9 750 séquences de chiffres. Les échantillons de parole sont stockés sous la forme de séquences 16-bit 8kHz WAV pour un total de 16,28 heures de parole.Chaque locuteur a lu 15 éléments. Les fichiers textes sont stockés au format Unicode. Toutes les données ont été vérifiées manuellement.Les transcriptions comprennent des balises d’événements acoustiques (bruits de fond, sons émis par les locuteurs) ainsi que des balises de mauvaise prononciation, distorsions du canal, omissions de mots et répétitions.Cette base de données a été conçue pour l’évaluation et le développement de systèmes de reconnaissance de la parole naturelle par téléphone.</description>
+<resourceShortName/>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=929</url>
+<identifier>ELRA-S0228_27</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,29 +29,27 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-04-08</lastDateUpdated>
+<lastDateUpdated>2009-09-24</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 30000.00€</price>
-<price>Academic org. ELRA Non Member: 20000.00€</price>
-<price>Commercial org. ELRA Member: 30000.00€</price>
-<price>Academic org. ELRA Member: 9000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2005-04-07</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 3044.00€</price>
+<price>Academic org. ELRA Non Member: 3044.00€</price>
+<price>Commercial org. ELRA Member: 3044.00€</price>
+<price>Academic org. ELRA Member: 3044.00€</price>
+<availabilityStartDate>2007-01-17</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 30000.00€</price>
-<price>Academic org. ELRA Non Member: 30000.00€</price>
-<price>Commercial org. ELRA Member: 30000.00€</price>
-<price>Academic org. ELRA Member: 30000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2005-04-07</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 3044.00€</price>
+<price>Academic org. ELRA Non Member: 3044.00€</price>
+<price>Commercial org. ELRA Member: 3044.00€</price>
+<price>Academic org. ELRA Member: 3044.00€</price>
+<availabilityStartDate>2007-01-17</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceComponentType>
@@ -64,60 +62,10 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>por</languageId>
-<languageName>Portuguese</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>swe</languageId>
-<languageName>Swedish</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>por</languageId>
-<languageName>Portuguese</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>swe</languageId>
-<languageName>Swedish</languageName>
+<languageId>chi/zho</languageId>
+<languageName>Chinese</languageName>
 </languageInfo>
 </corpusAudioInfo>
-<corpusVideoInfo>
-<mediaType>video</mediaType>
-<lingualityInfo>
-<lingualityType>monolingual</lingualityType>
-</lingualityInfo>
-<languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>por</languageId>
-<languageName>Portuguese</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>swe</languageId>
-<languageName>Swedish</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>por</languageId>
-<languageName>Portuguese</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>swe</languageId>
-<languageName>Swedish</languageName>
-</languageInfo>
-</corpusVideoInfo>
 </corpusMediaType>
 </corpusInfo>
 </resourceComponentType>

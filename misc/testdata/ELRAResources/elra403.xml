@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">VERBA Polytechnic and Plurilingual Terminological Database - V-BJ Hockey</resourceName>
-<resourceName lang="French">Base de données terminologique polytechnique et plurilingue VERBA - V-BJ Hockey</resourceName>
-<description lang="English">* Entries for English-Spanish: Scientific research &amp; mathematical sciences (906 entries), Geosciences (10,215), Computer science, electronics &amp; telecommunications (70,580), Industry (47,578), Transport &amp; Maintenance (12,291), Economy (145,572), Biological sciences (38,989), Communication &amp; media (8,143), Chemical &amp; physical sciences (27,467). * Entries for English-French-German-Spanish: Environment (36,658), Health (66,727), Agriculture &amp; food (25,975), Construction &amp; public works (8,429), Law &amp; policy (56,578), Sports &amp; Leisure (17,312) * Two specialized lexicons: Spanish-English and English-French-German without domain codes: electronics, telematics, law, taxes, customs, etc. (550,000 entries). * Two general lexicons: Spanish-English-French-German and Spanish-English-French-German-Portuguese-Italian (83,000 entries).This terminological database contains, for each domain, a sub-domain indication is given (from 2 sub-domains for Scientific research to 39 for Sports &amp; leisure). Each entry consists of a definition, phraseological unit, abbreviation, usage information, grammatical labels. Format: ASCIIMedium: floppy disk</description>
-<description lang="French">* Entrées anglais-espagnol : Recherche scientifique &amp; sciences mathématiques (906 entrées), géosciences (10 215), informatique, électronique &amp; télécommunications (70 580), industrie (47 578), transports &amp; maintenance (12 291), économie (145 572), sciences biologiques (38 989), communication &amp; média (8 143), sciences chimiques &amp; physiques (27 467).* Entrées allemand-anglais-espagnol-français : Environnement (36 658), santé (66 727), agriculture &amp; alimentation (25 975), construction &amp; travaux publics (8 429), droit &amp; politique (56 578), sports &amp; loisirs (17 312).* Deux lexiques spécialisés: Espagnol-anglais et allemand-anglais-français sans codes de domaine : électronique, télématique, droit, taxes, douanes, etc. (550 000 entrées).* Deux lexiques généraux: Allemand-anglais-espagnol-français et allemand-anglais-espagnol-français-italien-portugais. (83 000 entrées).Cette base de données terminologique contient, pour chaque domaine, l'indication de sous-domaines (de 2 sous-domaines pour la recherche scientifique à 39 pour les sports et loisirs). Chaque entrée comporte une définition, une unité phraséologique, une abréviation, une information sur l'usage et des étiquettes grammaticales.Format: ASCIISupport : disquette</description>
+<resourceName lang="English">Dutch PAROLE lexicon</resourceName>
+<resourceName lang="French">Lexique PAROLE hollandais</resourceName>
+<description lang="English">The entry list of the lexicon consists of about 20,200 entries distributed over 13 parts of speech (POS). The entries have been described along the dimensions of morphosyntax and syntax. Morphosyntactic information consists of various lexical properties, like gender, number, case, person, inflection, etc. Syntactic descriptions consist of typical complementation patterns associated with the various lemmata.The composition of the entry list of the lexicon is based on 3 corpora from the Instituut voor Nederlandse Lexicologie (INL) and 2 lexica. The corpora contain a total of about 54 million words and have been automatically annotated for part-of-speech and lemma. The lexica contain morphosyntactic information of various kinds. For verbs, nouns, adjectives and adverbs, lemmata that were covered by at least 2 corpora and the 2 lexica were selected on the basis of cumulative frequency, coverage (distribution over sources) and inflected forms. For the smaller parts of speech, these selection requirements appeared to be too strict. Entry selection for these parts of speech was based on ranked frequency.The entries, uniquely defined by the combination of part of speech (e.g. noun) and subtype (e.g. common vs. proper noun), are provided with morphosyntactic information according to the Dutch set of PAROLE categories and features, and, where available, with syntactic information. Morphosyntactic information is automatically extracted from the INL lexica. Syntactic data have been collected manually, by inspection of corpus data and - where necessary - consultation of reference works. The corpus consulted consists of the newspaper component and the varied component of the 38 Million Words Corpus 1996.Word forms in the Dutch PAROLE lexicon are not inflected according to general paradigms, but are related to their lemma by a set of string procedures. These procedures are not unique. They can be shared by many other word forms. An example is suffixation with -e for adjectives, which produces "goede"/good from "goed". Inflected forms can be derived directly by applying the string procedures to the lemma they are connected with.The lexicon is set up as an SGML file (over 30 MB of plain ASCII). Its contents have been encoded in a distributed manner: all formative entities (like lemmata, syntactic phrases, feature bundles) are SGML entities, related by a pointer mechanism to other entities. The lexicon contains the following categories : adjectives (3,298 entries), adpositions (80 entries), adverbs (554 entries), articles (3 entries), conjunctions (70 entries), determiners (59 entries), interjections (235 entries), nouns (12,279 entries), numerals (77 entries), pronouns (85 entries), residuals (186 entries), unique (1 entry), verb (3,274 entries).More info on the Parole project: http://www.elda.org/catalogue/en/text/doc/parole.html</description>
+<description lang="French">Le lexique comprend environ 20 200 entrées distribuées sur 13 étiquettes " parties du discours ". Les entrées sont décrites avec des informations morpho-syntaxiques et syntaxiques. Les informations morpho-syntaxiques contiennent de nombreuses propriétés lexicales, telles que genre, nombre, cas, personne, flexion, etc. Les descriptions syntaxiques contiennent des modèles de compléments types associés à de nombreux lemmes.La composition des entrées du lexique est basée sur 3 corpus de l'Instituut voor Nederlandse Lexicologie (INL) et de 2 lexiques. Les corpus totalisent environ 54 millions de mots et les parties du discours et les lemmes ont été annotés automatiquement. Le lexique contient des informations morpho-syntaxiques de toutes sortes. Pour les verbes, les noms, les adjectifs et les adverbes, les lemmes qui étaient couverts par au moins 2 corpus et 2 lexiques, ont été sélectionnés d'après un cumul des fréquences, la couverture (distribution sur les sources) et les formes fléchies. Pour les parties du discours plus petites, ces besoins de sélection se sont avérés trop stricts. Ainsi, la sélection sur ces parties du discours s'est basée sur un classement des fréquences. Les entrées, définies uniquement selon la combinaison de la partie du discours (par ex. le nom) et le sous-type (par ex. nom commun par opposition à nom propre), sont fournies avec des informations morpho-syntaxiques établies d'après les catégories et attributs de l'ensemble PAROLE hollandais, et, quand cela était possible, avec des informations syntaxiques. Les informations morpho-syntaxiques ont été extraites automatiquement des lexiques de l'INL. Les données syntaxiques ont été collectées manuellement, en inspectant les données du corpus et, si nécessaire, en consultant d'autres travaux de référence. Le corpus consulté est composé des données de journaux et de données d'origines diverses provenant du corpus de 38 millions de mots de 1996.Le lexique se présente sous la forme d'un fichier SGML (plus de 30 MB de texte ASCII). Le contenu du fichier a été codé de manière distributive : toutes les entités "formatrices" (lemmes, phrases syntaxiques, ensembles de traits) sont des entités SGML reliées à d'autres entités par un mécanisme de pointeur. Le lexique contient les catégories suivantes : adjectifs (3 298 entrées), pré- et post-positions (80 entrées), adverbes (554 entrées), articles (3 entrées), conjonctions (70 entrées), déterminants (59 entrées), interjections (235 entrées), noms (12 279 entrées), numéraux (77 entrées), pronoms (85 entrées), catégorie résiduelle (186 entrées), catégorie unique (1 entrée), verbes (3 274 entrées).Plus d'informations sur le projet Parole: http://www.elda.org/catalogue/en/text/doc/parole.html</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=419</url>
-<identifier>ELRA-T0344</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=544</url>
+<identifier>ELRA-L0031</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,22 +29,46 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2006-09-27</lastDateUpdated>
+<lastDateUpdated>2005-10-05</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 3000.00€</price>
+<price>Academic org. ELRA Non Member: 400.00€</price>
+<price>Commercial org. ELRA Member: 1600.00€</price>
+<price>Academic org. ELRA Member: 300.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1999-07-12</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 0.70€</price>
-<price>Commercial org. ELRA Non Member: 1.00€</price>
-<availabilityStartDate>1997-04-11</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 10000.00€</price>
+<price>Academic org. ELRA Non Member: 10000.00€</price>
+<price>Commercial org. ELRA Member: 8000.00€</price>
+<price>Academic org. ELRA Member: 8000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1999-07-12</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<validationInfo>
+<validated>True</validated>
+<validationModeDetails>EAGLES </validationModeDetails>
+</validationInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>LE-PAROLE project (MLAP/LE2-4017)</projectName>
+<fundingType>euFunds</fundingType>
+</fundingProject>
+<creationEndDate>1998-01-01</creationEndDate>
+</resourceCreationInfo>
 <resourceComponentType>
 <lexicalConceptualResourceInfo>
 <resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>terminologicalResource</lexicalConceptualResourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
 <lexicalConceptualResourceMediaType>
 <lexicalConceptualResourceTextInfo>
 <mediaType>text</mediaType>
@@ -52,29 +76,24 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>spa</languageId>
-<languageName>Spanish</languageName>
+<languageId>dut/nld</languageId>
+<languageName>Dutch</languageName>
 <languageVarietyInfo>
 <languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Castilian</languageVarietyName>
+<languageVarietyName>Flemish</languageVarietyName>
 <sizePerLanguageVariety>
 <size>2</size>
 <sizeUnit>gb</sizeUnit>
 </sizePerLanguageVariety>
 </languageVarietyInfo>
 </languageInfo>
-<languageInfo>
-<languageId>ger/deu</languageId>
-<languageName>German</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
-</languageInfo>
+<sizeInfo>
+<size>30</size>
+<sizeUnit>mb</sizeUnit>
+</sizeInfo>
+<textFormatInfo>
+<mimeType>Plain text</mimeType>
+</textFormatInfo>
 </lexicalConceptualResourceTextInfo>
 </lexicalConceptualResourceMediaType>
 </lexicalConceptualResourceInfo>

@@ -6,7 +6,7 @@
 <description lang="English">This corpus comprises 9,599 speech files uttered by 20 speakers of different dialects, ages and various educational levels, recorded over 2 channels. The database comprises person names, place names in Beijing, stocks, digit strings. Speech samples are stored as a sequence of 16-bit 22.05kHz WAV for 10.45 hours of speech per channel. The total capacity of the data is 3.08 Gb.Each speaker read 15 items. Text files are stored in Unicode format. All data have been proofread manually.The corpus aims to be applied to the testing and telephone natural speech recognition system.</description>
 <description lang="French">Ce corpus comprend 9 599 fichiers de parole prononcés par 20 locuteurs de dialectes, d’âges et de niveaux d’éducation différents, enregistrées via 2 canaux. La base de données contient des noms de personnes, des lieux de Beijing, des ‘stocks’ et des séquences de chiffres. Les échantillons de parole sont stockés sous la forme de séquences 16-bit 22,05kHz WAV pour un total de 10,45 heures de parole par canal. La taille totale des données est de 3,08 Go.Chaque locuteur a lu 15 éléments. Les fichiers textes sont stockés au format Unicode. Toutes les données ont été vérifiées manuellement.Cette base de données a été conçue pour l’évaluation et le développement de systèmes de reconnaissance de la parole naturelle par téléphone.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=939</url>
 <identifier>ELRA-S0228_37</identifier>
 </identificationInfo>

@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">IDIOLOGOS 1 “Bootstrap” (NEOLOGOS Project)</resourceName>
-<resourceName lang="French">IDIOLOGOS 1 “Bootstrap” (projet NEOLOGOS)</resourceName>
-<description lang="English">The IDIOLOGOS 1 “Bootstrap” database was produced within the French national project NEOLOGOS, as part of the Technolangue programme funded by the French Ministry of Research and New Technologies (MRNT). The databases produced in the framework of the NEOLOGOS project are designed for the development and the assessment of French speech or speaker recognizers and speech synthesizers. They consist of:1)	the IDIOLOGOS databases are made of adults voices and are available in 2 subsets:-	the “Bootstrap” database (catalogue ref. ELRA-S0226-01), -	the “Eingenspeakers” database (catalogue ref. ELRA-S0226-02);2)	the PAIDIALOGOS database (catalogue ref. ELRA-S0227) is made of children’s and teenagers’ voices.The IDIOLOGOS 1 “Bootstrap” database contains the recordings of 1000 adult French speakers (470 males and 530 females) recorded over the French fixed telephone network. The speakers uttered 45 phonetically rich sentences. The 45 sentences are the same for all speakers. This database is distributed as 1 DVD-ROM. The speech files are stored as sequences of 8-bit, 8kHz A-law speech files and are not compressed, according to the specifications of NEOLOGOS. Each prompt utterance is stored within a separate file and has an accompanying ASCII SAM label file.This speech database was validated by SPEX (the Netherlands) to assess its compliance with the NEOLOGOS format and content specifications.Each speaker uttered the following items: -	1 digit sequence (5+ digits)-	1 telephone number (10 digits)-	1 credit card number (16 digits)-	1 spelling of directory assistance city name-	1 real/artificial for coverage-	45 phonetically rich sentences The following age distribution has been obtained: 288 speakers are between 18 and 30, 264 speakers are between 31 and 45, 247 speakers are between 46 and 61, and 201 speakers are over 61.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
-<description lang="French">La base de données IDIOLOGOS 1 “Bootstrap” a été produite dans le cadre du projet national français NEOLOGOS, du programme Technolangue, financé par le ministère français chargé de la recherche et des nouvelles technologies (MRNT). Les bases de données produites dans le cadre du projet NEOLOGOS ont été conçues pour le développement et la vérification de systèmes de reconnaissance de la parole ou du locuteur en français, ainsi que pour les synthétiseurs de parole. Elle consistent en :1)	les bases IDIOLOGOS sont composées de voix adultes et sont disponibles sous la forme de 2 sous-ensembles :    -	la base de données “Bootstrap” (réf. catalogue ELRA-S0226-01),     -	la base de données “Eingenspeakers” (réf. catalogue ELRA-S0226-02) ;2)	la base de données PAIDIALOGOS (réf. catalogue ELRA-S0227) est composée de voix d’enfants et d’adolescents.La base de données IDIOLOGOS 1 “Bootstrap” contient les enregistrements de 1000 locuteurs français adultes (470 hommes, 530 femmes) enregistrés à travers le réseau téléphonique fixe français. Les locuteurs ont prononcé 45 phrases phonétiquement riches. Ces 45 phrases sont identiques pour tous les locuteursCette base est distribuée sur 1 DVD-ROM. Selon les spécifications de NEOLOGOS, les fichiers de parole sont stockés en séquences d'échantillons de 8 bit, 8 kHz, loi-A et ne sont pas compressés. Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM. Cette base de données a été validée par SPEX (Pays-Bas) afin de vérifier sa conformité avec le format NEOLOGOS et les spécifications du contenu.Contenu du corpus : •	1 séquence de chiffres (5+ chiffres) ; •	1 numéro de téléphone (10 chiffres) ;•	1 numéro de carte de crédit (16 chiffres) ; •	1 prénom, 1 nom de ville provenant d'un annuaire de renseignements téléphoniques ; •	1 mot réel/artificiel pour la couverture ; •	45 phrases phonétiquement riches ; Les classes d'âge sont réparties comme suit : 288 locuteurs ont entre 18 et 30 ans, 264 locuteurs ont entre 31 et 45 ans, 247 locuteurs ont entre 46 et 61 ans et 201 locuteurs ont plus de 61 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
+<resourceName lang="English">Original Short-Message Data Collation I in Chinese (PinYin)</resourceName>
+<resourceName lang="French">Collection d’origine de SMS I en chinois (PinYin)</resourceName>
+<description lang="English">This corpus comprises 5,891,275 characters, corresponding to 51,568 short messages (SMS) from radio/TV stations and 213,694 daily life short messages. This subset contains original messages together with PinYin transcription.All data have been proofread manually with PinYin.</description>
+<description lang="French">Ce corpus comprend 5 891 275 caractères, correspondant à 51 568 SMS provenant de stations de radio/télé et 213 694 messages quotidiens. Ce sous-ensemble comprend les messages d'origine avec leur transcription en PinYin.Toutes les données ont été vérifiées manuellement avec PinYin.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=890</url>
-<url>http://catalog.elra.info/product_info.php?products_id=892</url>
-<identifier>ELRA-S0226_01</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=970</url>
+<identifier>ELRA-W0045_02</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -30,57 +29,43 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-08-28</lastDateUpdated>
+<lastDateUpdated>2007-01-17</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 16000.00€</price>
-<price>Academic org. ELRA Non Member: 1000.00€</price>
-<price>Commercial org. ELRA Member: 10000.00€</price>
-<price>Academic org. ELRA Member: 1000.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2006-11-16</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 18659.00€</price>
+<price>Academic org. ELRA Non Member: 18659.00€</price>
+<price>Commercial org. ELRA Member: 18659.00€</price>
+<price>Academic org. ELRA Member: 18659.00€</price>
+<availabilityStartDate>2007-01-17</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 16000.00€</price>
-<price>Academic org. ELRA Non Member: 16000.00€</price>
-<price>Commercial org. ELRA Member: 10000.00€</price>
-<price>Academic org. ELRA Member: 10000.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2006-11-16</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 18659.00€</price>
+<price>Academic org. ELRA Non Member: 18659.00€</price>
+<price>Commercial org. ELRA Member: 18659.00€</price>
+<price>Academic org. ELRA Member: 18659.00€</price>
+<availabilityStartDate>2007-01-17</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<usageInfo>
-<actualUseInfo>
-<actualUse>nlpApplications</actualUse>
-<useNLPSpecific>speechRecognition</useNLPSpecific>
-</actualUseInfo>
-</usageInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>NEOLOGOS</projectName>
-<fundingType>nationalFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
 <corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<corpusTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
+<languageId>chi/zho</languageId>
+<languageName>Chinese</languageName>
 </languageInfo>
-</corpusAudioInfo>
+</corpusTextInfo>
 </corpusMediaType>
 </corpusInfo>
 </resourceComponentType>

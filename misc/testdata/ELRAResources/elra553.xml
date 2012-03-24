@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Orientel United Arab Emirates MCA (Modern Colloquial Arabic)</resourceName>
-<resourceName lang="French">Base de données OrienTel des Emirats Arabes Unis MCA (arabe parlé moderne)</resourceName>
-<description lang="English">The OrienTel United Arab Emirates MCA (Modern Colloquial Arabic) database comprises 880 speakers (432 males, 448 females) recorded over the local fixed and mobile telephone network. This database is partitioned into 1 DVD. The speech databases made within the OrienTel project were validated by SPEX, the Netherlands, to assess their compliance with the OrienTel format and content specifications.Speech samples are stored as sequences of 8-bit 8 kHz A-law. Each prompted utterance is stored in a separate file. Each signal file is accompanied by an ASCII SAM label file which contains the relevant descriptive information.Each speaker uttered the following items:•	1 isolated single digit•	1 sequence of 10 isolated digits•	4 connected digits : 1 prompt sheet number (6 digits), 1 telephone number (6-15 digits), 1 credit card number (14/16 digits), 1 PIN •	code (6 digits), 1 spontaneous phone number•	2 currency money amounts•	1 natural number•	4 dates : 1 spontaneous (date or year of birth), 1 prompted date, 1 relative or general date expression, 1 prompted date •	phrase (Islamic calendar)•	2 time phrases : 1 time of day (spontaneous), 1 time phrase (word style)•	3 spelled words : 1 spontaneous (own forename), 1 city name, 1 real/artificial word for coverage•	5 directory assistance utterances : 1 spontaneous forename, 1 city of childhood (spontaneous), 1 frequent city name, 1 frequent company name, 1 common forename and surname•	2 yes/no questions : 1 predominantly yes question, 1 predominantly no question•	6 application keywords/keyphrases•	1 word spotting phrase using embedded application words•	4 phonetically rich words•	9 phonetically rich sentences•	3 spontaneous items (for control)The following age distribution has been obtained: 488 speakers are between 16 and 30, 309 speakers are between 31 and 45, 83 speakers are over 46.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
-<description lang="French">La base de données OrienTel des Emirats Arabes Unis MCA (arabe parlé moderne) contient 880 locuteurs (432 hommes, 448 femmes) enregistrés à travers le réseau téléphonique fixe et mobile local. Cette base est répartie sur 1 DVD. Les bases de données OrienTel ont été réalisées selon les spécifications du projet SpeechDat(II) et validées par SPEX, Pays-Bas.Les fichiers de parole sont stockés en séquences d’échantillons de 8 bits, 8 kHz, loi-A. Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM.Chaque locuteur a prononcé les éléments suivants :•	1 chiffre isolé ;•	1 séquence de 10 chiffres isolés ;•	4 chiffres connectés : 1 numéro permettant d'identifier la feuille de prompt (6 chiffres), 1 numéro de téléphone (6-15 chiffres), 1 numéro de carte de crédit (14-16 chiffres), 1 code confidentiel (6 chiffres);•	2 montants en devises ;•	1 nombre naturel ;•	4 dates : 1 date spontanée (date de naissance), 1 date lue, 1 date relative et générale, 1 expression de date lue (calendrier islamique) ;•	2 phrases comportant une notion de temps : 1 jour (spontané), 1 phrase comportant une notion de temps ;•	3 mots épelés : 1 spontané (prénom), 1 nom de ville provenant d'un annuaire de renseignements téléphoniques, 1 mot réel pour couverture ;•	5 noms provenant d'un annuaire de renseignements téléphoniques : 1 spontané (prénom), 1 nom de ville de naissance/d'origine du locuteur (spontané), 1 nom de ville parmi les plus courantes (sur 500 noms), 1 nom de compagnie/société (sur 500 noms), 1 ”prénom nom” (sur 500 noms) ;•	2 questions oui/non : 1 question à prédominance "oui", 1 question à prédominance "non" ;•	6 mots/expressions de commande ;•	1 expression utilisant un mot de commande ;•	4 mots phonétiquement riches ;•	9 phrases phonétiquement riches•	3 éléments spontanés (pour contrôle).Les classes d’âge sont réparties comme suit : 488 locuteurs entre 16 et 30 ans, 309 locuteurs entre 31 et 45 ans, 83 ont plus de 46 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
+<resourceName lang="English">TC-STAR 2007 Evaluation Package - SLT Chinese-to-English</resourceName>
+<resourceName lang="French">Package d’évaluation TC-STAR 2007 – SLT chinois-anglais</resourceName>
+<description lang="English">TC-STAR is a European integrated project focusing on Speech-to-Speech Translation (SST). To encourage significant breakthrough in all SST technologies, annual open competitive evaluations are organized. Automatic Speech Recognition (ASR), Spoken Language Translation (SLT) and Text-To-Speech (TTS) are evaluated independently and within an end-to-end system.The third TC-STAR evaluation campaign took place in March 2007. Three core technologies were evaluated during the campaign:• Automatic Speech Recognition (ASR),• Spoken Language Translation (SLT),• Text to Speech (TTS).Each evaluation package includes resources, protocols, scoring tools, results of the official campaign, etc., that were used or produced during the second evaluation campaign. The aim of these evaluation packages is to enable external players to evaluate their own system and compare their results with those obtained during the campaign itself.The speech databases made within the TC-STAR project were validated by SPEX, in the Netherlands, to assess their compliance with the TC-STAR format and content specifications.This package includes the material used for the TC-STAR 2007 Spoken Language Translation (SLT) third evaluation campaign for Chinese-to-English translation. The same packages are available for English (ELRA-E0025), Spanish (ELRA-E0026-01 and E0026-02) and Mandarin Chinese (ELRA-E0027) for ASR and for SLT in 2 other directions, English-to-Spanish (ELRA-E0028) and Spanish-to-English (ELRA-E0029-01 and E0029-02).To be able to chain the components, ASR, SLT and TTS evaluation tasks were designed to use common sets of raw data and conditions. Three evaluation tasks, common to ASR, SLT and TTS, were selected: EPPS (European Parliament Plenary Sessions) task, CORTES (Spanish Parliament Sessions) task and VOA (Voice of America) task. The CORTES data were used in addition to the EPPS data to evaluate ASR in Spanish and SLT from Spanish into English.This package was used within the VOA task and consists of one test data set, composed of two subsets of about 20,000 words each (one subset from the manual and one subset from automatic transcriptions), from 26 and 27 December 1998. The source data were then translated into English by two independent agencies.</description>
+<description lang="French">TC-STAR est un projet intégré européen basé sur la traduction parole-parole (ou SST pour Speech-to-Speech Translation). Pour encourager de manière conséquente l’avancée dans toutes les technologies de la SST, des évaluations ouvertes à la concurrence sont organisées sur une base annuelle. Les technologies de la reconnaissance automatique de la parole (ou ASR pour « Automatic Speech Recognition »), de la traduction de la langue parlée (ou SLT pour « Spoken Language Translation ») et les technologies texte-parole (ou TTS pour « Text-to-Speech ») sont évaluées à la fois de façon indépendante et intégrées à un système « end-to-end » (de « bout en bout »).La troisième campagne d’évaluation TC-STAR s’est déroulée en mars 2007. Trois technologies de base ont été évaluées lors de cette campagne:• la reconnaissance automatique de la parole (ASR),• la traduction de la langue parlée (SLT),• la synthèse texte-parole (TTS).Chaque package d’évaluation regroupe des ressources, des protocoles, des outils de notation, les résultats de la campagne officielle, etc., qui ont été utilisés ou produits pendant la seconde campagne d’évaluation. Le but de ces packages d’évaluation est de permettre à des acteurs externes d’évaluer leur propre système et de comparer leurs résultats à ceux obtenus pendant la campagne.Les bases de données orales produites dans le projet TC-STAR ont été validées par SPEX, Pays-Bas, selon le format et les spécifications de contenu TC-STAR.Ce package comprend le matériel utilisé pour la troisième campagne d’évaluation TC-STAR 2007 Spoken Language Translation (SLT) pour la traduction du chinois vers l’anglais. Des packages similaires sont également disponibles pour l’anglais (ELRA-E0025), l’espagnol (ELRA-E0026-01 et E0026-02) et le mandarin (ELRA-E0027) pour l’ASR, ainsi que pour la SLT dans 2 autres sens, anglais vers espagnol (ELRA-E0028), espagnol vers anglais (ELRA-E0029-01 et E0029-02).Pour permettre de regrouper les composants, les tâches d’évaluation ASR, SLT et TTS ont été conçues en utilisant des données brutes et des conditions communes. Trois tâches d’évaluation, communes à l’ASR, la SLT, et la TTS ont été choisies : la tâche EPPS (« European Parliament Plenary Sessions » – Sessions plénières du Parlement européen), la tâche CORTES (« Spanish Parliament Sessions ») et la tâche VOA (« Voice of America » - La voix de l’Amérique). Les données CORTES ont été utilisées en complement des données EPPS pour l’évaluation ASR en espagnol et SLT de l’espagnol vers l’anglais.Le présent package a été utilisé dans le cadre de la tâche VOA et comprend un ensemble de données de test, composé de deux sous-ensembles d’environ 20 000 mots chacun (un sous-ensemble à partir des transcriptions manuelles et le deuxième à partir des transcriptions automatiques) des 26 et 27 décembre 1998. Les données sources ont été ensuite traduites vers l’anglais par deux sociétés indépendantes.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1042</url>
-<url>http://catalog.elra.info/product_info.php?products_id=1052</url>
-<identifier>ELRA-S0258</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1023</url>
+<identifier>ELRA-E0030</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -30,34 +29,24 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2011-05-13</lastDateUpdated>
+<lastDateUpdated>2007-10-09</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
-<licence>ELRA_END_USER</licence>
-<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 35000.00€</price>
-<price>Academic org. ELRA Non Member: 33250.00€</price>
-<price>Commercial org. ELRA Member: 28000.00€</price>
-<price>Academic org. ELRA Member: 26600.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2007-12-18</availabilityStartDate>
-</licenceInfo>
-<licenceInfo>
-<licence>ELRA_VAR</licence>
-<restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 35000.00€</price>
-<price>Academic org. ELRA Non Member: 35000.00€</price>
-<price>Commercial org. ELRA Member: 28000.00€</price>
-<price>Academic org. ELRA Member: 28000.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2007-12-18</availabilityStartDate>
+<licence>ELRA_EVALUATION</licence>
+<restrictionsOfUse>evaluationUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 750.00€</price>
+<price>Academic org. ELRA Non Member: 750.00€</price>
+<price>Commercial org. ELRA Member: 500.00€</price>
+<price>Academic org. ELRA Member: 500.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2007-10-09</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceCreationInfo>
 <fundingProject>
-<projectName>Orientel</projectName>
+<projectName>TC-STAR</projectName>
 <fundingType>euFunds</fundingType>
 </fundingProject>
 </resourceCreationInfo>
@@ -71,8 +60,12 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>ara</languageId>
-<languageName>Arabic</languageName>
+<languageId>chi/zho</languageId>
+<languageName>Chinese</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>eng</languageId>
+<languageName>English</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

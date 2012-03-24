@@ -184,7 +184,6 @@ def download(request, object_id):
     elif len(licences) > 1:
         return render_to_response('repo2/licence_selection.html',
             { 'form': LicenseSelectionForm(licences), 'resource': resource })
-        
     else:
         return render_to_response('repo2/lr_not_downloadable.html', 
             { 'resource': resource, 'object_id': object_id })

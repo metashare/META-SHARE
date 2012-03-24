@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">VERBMOBIL II - VM CD 56.1 - VM56.1 (BAS edition)</resourceName>
-<resourceName lang="French">VERBMOBIL II - VM CD 56.1 - VM56.1 (édition BAS)</resourceName>
-<description lang="English">Verbmobil is a long-term project of the German Federal Ministry of Education, Science, Research and Technology (BMBF, Projekträger DLR). Its aim is to give Germany an international top position in language technology and its economical application in the next millenium by cooperation and concentration of as many as possible specialists from industry and science. The long-sighted aim is the development of a mobile translation system for the translation of spontaneous speech in face-to-face situations.The following resources are spontaneous speech databases recorded in a dialogue task (appointment scheduling) .VERBMOBIL II - VM CD 56.1 - VM56.1 (BAS edition) consists of 1 CD-ROM with 12 spontaneous dialogues (12 close mic, 0 room mic, 0 phone line (fixed network, GSM) recordings) - 620 turns, transliteration (VM II Format) (Multilingual German/English with human interpreter (3 channels)).</description>
-<description lang="French">Verbmobil est un projet du Ministère fédéral allemand de l'Education, des Sciences, de la Recherche et des Technologies (BMBF, Projekträger DLR), qui vise à placer l'Allemagne en position de force dans le domaine de l'ingénierie de la langue. Son objectif , à long terme, est de développer un système de traduction vocale automatique, pour la traduction de conversations spontanées. Ces ressources sont des enregistrements de conversation pour la prise de rendez-vous. Le corpus allemand comprend 13 910 occurrences (échanges). L'édition de BAS de la partie allemande est entièrement étiquetée et segmentée en unités phonémiques/phonétiques (alphabet SAM-PA) par le système MAUS et partiellement segmentée de manière manuelle.VERBMOBIL II - VM CD 56.1 - VM56.1 (édition BAS) contient 1 CD-ROM composé de 12 dialogues spontanés (12 dialogues enregistrés avec un micro-casque très près de la bouche, 0 avec un microphone situé dans la pièce, 0 à travers le réseau téléphonique (GSM)) - 620 échanges, transcription (au format Verbmobil II) (Multilingue avec interprète humain (3 canaux) allemand/anglais).</description>
+<resourceName lang="English">Spanish gilcUB-M Dictionary</resourceName>
+<resourceName lang="French">Dictionnaire espagnol gilcUB-M</resourceName>
+<description lang="English">General vocabularyEntries: 60000 Format: ASCII format with ISO 8859-1 character set. Available versions include atribute-value pairs and tag-style encoding.The Spanish gilcUB-M-Dictionary is a full form lexicon derived from 60,000 lemmas of general vocabulary (9,700 verbs, 35,500 nouns, 14,300 adjectives and 120 adverbs). Possible adverbs derived from adjectival forms are also included as full forms and are about 10,000 forms. Morphosyntactic information encoded is compatible with EAGLES recommendations for morphosyntactic encoding as well as the associated lemma.For more information: http://www.elda.org/catalogue/en/text/doc/gilcub.html</description>
+<description lang="French">Vocabulaire généralEntrées : 60 000Format: ASCII Le dictionnaire espagnol gilcUB-M est un lexique de formes expansées dérivées à partir de 60000 lemmes d'un vocabulaire générique. Les catégories lexicales sont : 9,700 verbes, 35,500 noms, 14,300 adjectifs et 120 adverbes. On y trouve aussi sous forme expansée des adverbes dérivés à partir des formes adjectivales. Il y a environ 10,000 formes.L'information morpho-syntaxique est compatible avec les recommandations d'EAGLES aussi bien pour le codage morpho-syntaxique que pour les lemmes associés. Lexique morphologique portugaisPour plus d'informations : http://www.elda.org/catalogue/en/text/doc/gilcub.html</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=790</url>
-<identifier>ELRA-S0034_70</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=30</url>
+<identifier>ELRA-L0012</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,56 +29,62 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-04-21</lastDateUpdated>
+<lastDateUpdated>2005-06-02</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 127.82€</price>
-<price>Commercial org. ELRA Member: 127.82€</price>
-<price>Academic org. ELRA Non Member: 255.65€</price>
-<price>Commercial org. ELRA Non Member: 255.65€</price>
+<price>Commercial org. ELRA Non Member: 10300.00€</price>
+<price>Academic org. ELRA Non Member: 8225.00€</price>
+<price>Commercial org. ELRA Member: 8250.00€</price>
+<price>Academic org. ELRA Member: 6500.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1996-09-01</availabilityStartDate>
+<availabilityStartDate>1997-01-23</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 127.82€</price>
-<price>Commercial org. ELRA Member: 127.82€</price>
-<price>Academic org. ELRA Non Member: 255.65€</price>
-<price>Commercial org. ELRA Non Member: 255.65€</price>
+<price>Commercial org. ELRA Non Member: 10300.00€</price>
+<price>Academic org. ELRA Non Member: 10300.00€</price>
+<price>Commercial org. ELRA Member: 8250.00€</price>
+<price>Academic org. ELRA Member: 8250.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1996-09-01</availabilityStartDate>
+<availabilityStartDate>1997-01-23</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>Verbmobil II</projectName>
-<fundingType>other</fundingType>
-</fundingProject>
-</resourceCreationInfo>
+<validationInfo>
+<validated>True</validated>
+<validationModeDetails>EAGLES </validationModeDetails>
+</validationInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>ger/deu</languageId>
-<languageName>German</languageName>
+<languageId>spa</languageId>
+<languageName>Spanish</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Castilian</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
 </languageInfo>
-<languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
-</languageInfo>
-</corpusAudioInfo>
-</corpusMediaType>
-</corpusInfo>
+<textFormatInfo>
+<mimeType>Plain text</mimeType>
+</textFormatInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

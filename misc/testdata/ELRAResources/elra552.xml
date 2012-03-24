@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">TC-STAR 2007 Evaluation Package - SLT Chinese-to-English</resourceName>
-<resourceName lang="French">Package d’évaluation TC-STAR 2007 – SLT chinois-anglais</resourceName>
-<description lang="English">TC-STAR is a European integrated project focusing on Speech-to-Speech Translation (SST). To encourage significant breakthrough in all SST technologies, annual open competitive evaluations are organized. Automatic Speech Recognition (ASR), Spoken Language Translation (SLT) and Text-To-Speech (TTS) are evaluated independently and within an end-to-end system.The third TC-STAR evaluation campaign took place in March 2007. Three core technologies were evaluated during the campaign:• Automatic Speech Recognition (ASR),• Spoken Language Translation (SLT),• Text to Speech (TTS).Each evaluation package includes resources, protocols, scoring tools, results of the official campaign, etc., that were used or produced during the second evaluation campaign. The aim of these evaluation packages is to enable external players to evaluate their own system and compare their results with those obtained during the campaign itself.The speech databases made within the TC-STAR project were validated by SPEX, in the Netherlands, to assess their compliance with the TC-STAR format and content specifications.This package includes the material used for the TC-STAR 2007 Spoken Language Translation (SLT) third evaluation campaign for Chinese-to-English translation. The same packages are available for English (ELRA-E0025), Spanish (ELRA-E0026-01 and E0026-02) and Mandarin Chinese (ELRA-E0027) for ASR and for SLT in 2 other directions, English-to-Spanish (ELRA-E0028) and Spanish-to-English (ELRA-E0029-01 and E0029-02).To be able to chain the components, ASR, SLT and TTS evaluation tasks were designed to use common sets of raw data and conditions. Three evaluation tasks, common to ASR, SLT and TTS, were selected: EPPS (European Parliament Plenary Sessions) task, CORTES (Spanish Parliament Sessions) task and VOA (Voice of America) task. The CORTES data were used in addition to the EPPS data to evaluate ASR in Spanish and SLT from Spanish into English.This package was used within the VOA task and consists of one test data set, composed of two subsets of about 20,000 words each (one subset from the manual and one subset from automatic transcriptions), from 26 and 27 December 1998. The source data were then translated into English by two independent agencies.</description>
-<description lang="French">TC-STAR est un projet intégré européen basé sur la traduction parole-parole (ou SST pour Speech-to-Speech Translation). Pour encourager de manière conséquente l’avancée dans toutes les technologies de la SST, des évaluations ouvertes à la concurrence sont organisées sur une base annuelle. Les technologies de la reconnaissance automatique de la parole (ou ASR pour « Automatic Speech Recognition »), de la traduction de la langue parlée (ou SLT pour « Spoken Language Translation ») et les technologies texte-parole (ou TTS pour « Text-to-Speech ») sont évaluées à la fois de façon indépendante et intégrées à un système « end-to-end » (de « bout en bout »).La troisième campagne d’évaluation TC-STAR s’est déroulée en mars 2007. Trois technologies de base ont été évaluées lors de cette campagne:• la reconnaissance automatique de la parole (ASR),• la traduction de la langue parlée (SLT),• la synthèse texte-parole (TTS).Chaque package d’évaluation regroupe des ressources, des protocoles, des outils de notation, les résultats de la campagne officielle, etc., qui ont été utilisés ou produits pendant la seconde campagne d’évaluation. Le but de ces packages d’évaluation est de permettre à des acteurs externes d’évaluer leur propre système et de comparer leurs résultats à ceux obtenus pendant la campagne.Les bases de données orales produites dans le projet TC-STAR ont été validées par SPEX, Pays-Bas, selon le format et les spécifications de contenu TC-STAR.Ce package comprend le matériel utilisé pour la troisième campagne d’évaluation TC-STAR 2007 Spoken Language Translation (SLT) pour la traduction du chinois vers l’anglais. Des packages similaires sont également disponibles pour l’anglais (ELRA-E0025), l’espagnol (ELRA-E0026-01 et E0026-02) et le mandarin (ELRA-E0027) pour l’ASR, ainsi que pour la SLT dans 2 autres sens, anglais vers espagnol (ELRA-E0028), espagnol vers anglais (ELRA-E0029-01 et E0029-02).Pour permettre de regrouper les composants, les tâches d’évaluation ASR, SLT et TTS ont été conçues en utilisant des données brutes et des conditions communes. Trois tâches d’évaluation, communes à l’ASR, la SLT, et la TTS ont été choisies : la tâche EPPS (« European Parliament Plenary Sessions » – Sessions plénières du Parlement européen), la tâche CORTES (« Spanish Parliament Sessions ») et la tâche VOA (« Voice of America » - La voix de l’Amérique). Les données CORTES ont été utilisées en complement des données EPPS pour l’évaluation ASR en espagnol et SLT de l’espagnol vers l’anglais.Le présent package a été utilisé dans le cadre de la tâche VOA et comprend un ensemble de données de test, composé de deux sous-ensembles d’environ 20 000 mots chacun (un sous-ensemble à partir des transcriptions manuelles et le deuxième à partir des transcriptions automatiques) des 26 et 27 décembre 1998. Les données sources ont été ensuite traduites vers l’anglais par deux sociétés indépendantes.</description>
+<resourceName lang="English">BAS PHATT 1.0.X (sub-set)</resourceName>
+<resourceName lang="French">BAS PHATT 1.0.X (sous-ensemble)</resourceName>
+<description lang="English">The Ph@ttSessionz speech database, funded by the German Ministry of Science and Education (BMBF), contains recordings of 864 adolescent speakers of German (age range 12-20). The recordings were performed via the WWW in public schools (Gymnasium) in 41 locations in Germany. The speech material recorded is a superset of the German SpeechDat-II and RVG-I corpora (see also ELRA-S0051, S0058, S0063, S0096 and S0155). Recordings were done with SpeechRecorder in selected schools in the years 2005-2007. Both channels, the headset and the desktop microphone, were recorded in high quality.The BAS PHATT corpus is available in two versions: BAS PHATT 1.0.X (sub-set, ELRA-S0282-01) and BAS PHATT 1.1.X (complete corpus, ELRA-S0282-02).BAS PHATT 1.0.X contains:- 41 items (42 to 83), including 11 telephone numbers and 30 phonetically balanced sentences- Total number of recordings: approx. 35,000- Duration: ca. 4,100 minutes- Formats: WAV 22,05kHz, 16 bit, SpeechDat Transliteration, BAS Partitur Format (BPF)- Segmentation: manual segmentation begin/end utterance, automatic phonemic segmentation with MAUS- Distribution: 5 DVD-R Iso 9660See also ELRA-S0082-02.</description>
+<description lang="French">La base de données Ph@ttSessionz, financée par le ministère allemand pour la science et l’éducation (BMBF), contient les enregistrements de 864 locuteurs de l’allemand adolescents (entre 12 et 20 ans). Les enregistrements ont été réalisés sur internet dans des écoles publiques (Gymnasium) dans 41 sites en Allemagne. Le matériel oral enregistré est un sur-ensemble des corpus SpeechDat-II allemand et RVG-I (voir aussi ELRA-S0051, S0058, S0063, S0096 et S0155). Les enregistrements ont été réalisés entre 2005 et 2007 avec l’outil “SpeechRecorder” dans une sélection d’écoles. Les deux canaux de microphone (micro-casque et microphone pour PC), ont été enregistrés en haute qualité.Le corpus BAS PHATT est disponible en deux versions : BAS PHATT 1.0.X (sous-ensemble, ELRA-S0282-01) et BAS PHATT 1.1.X (corpus intégral, ELRA-S0282-02).BAS PHATT 1.0.X comprend:- 41 éléments (42 à 83), comprenant 11 numéros de téléphone et 30 phrases phonétiquement équilibrées- Nombre total d’enregistrements: env. 35 000- Durée: env. 4 100 minutes- Formats: WAV 22,05kHz, 16 bit, transcription SpeechDat, BAS Partitur Format (BPF)- Segmentation: segmentation manuelle avec marques de début et fin, segmentation phonémique automatique avec MAUS- Distribution: 5 DVD-R Iso 9660Voir aussi ELRA-S0082-02.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1023</url>
-<identifier>ELRA-E0030</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1072</url>
+<identifier>ELRA-S0282_01</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,27 +29,31 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-10-09</lastDateUpdated>
+<lastDateUpdated>2008-09-16</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
-<licence>ELRA_EVALUATION</licence>
-<restrictionsOfUse>evaluationUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 750.00€</price>
-<price>Academic org. ELRA Non Member: 750.00€</price>
-<price>Commercial org. ELRA Member: 500.00€</price>
-<price>Academic org. ELRA Member: 500.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2007-10-09</availabilityStartDate>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 3512.00€</price>
+<price>Academic org. ELRA Non Member: 512.00€</price>
+<price>Commercial org. ELRA Member: 2512.00€</price>
+<price>Academic org. ELRA Member: 512.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2008-09-16</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 3512.00€</price>
+<price>Academic org. ELRA Non Member: 3512.00€</price>
+<price>Commercial org. ELRA Member: 2512.00€</price>
+<price>Academic org. ELRA Member: 2512.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2008-09-16</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>TC-STAR</projectName>
-<fundingType>euFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
@@ -60,12 +64,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>chi/zho</languageId>
-<languageName>Chinese</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
+<languageId>ger/deu</languageId>
+<languageName>German</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

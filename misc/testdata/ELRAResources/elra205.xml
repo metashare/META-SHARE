@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">THAMUS Bilingual dictionaries - Economics</resourceName>
-<resourceName lang="French">THAMUS Dictionnaires bilingues - Economie</resourceName>
-<description lang="English">Technical domainsLanguages: Italian=&gt;EnglishFormat: ASCII format with ISO 8859-1 character setMedium: QIC 150 MB Cartridge TapeDomain: Economics, 50,000 entries, canonical formsTechnical bilingual Italian dictionaries with a morphological coding which can generate all full forms using a software engine written in C. Multi-word terms contain morphological coding for the head word.</description>
-<description lang="French">Domaines techniquesLangues : Italien=&gt;AnglaisDomaine: Economie, 50 000 entrées, formes canoniquesLes dictionnaires techniques bilingues disposent d'une codification morphologique qui permet de générer toutes les formes fléchies grâce à un logiciel écrit en langage C. Les mots composés contiennent une codification morphologique sur la tête des mots.</description>
+<resourceName lang="English">Cebuano =&gt; English Bilingual Lexicon</resourceName>
+<resourceName lang="French">Lexique bilingue cebuano =&gt; anglais</resourceName>
+<description lang="English">This is a bilingual Cebuano=&gt;English lexicon, provided in structured XML of OLIF (Open Lexicon Interchange Format) format. The XML conversion is provided by Digital Sonata Pty Ltd.The lexicon comprises 1,988 entries in Cebuano and 1,990 in English. In terms of entry types, the lexicon comprises 1,052 nous, 462 adjectives, 405 verbs and 69 closed-class entries.The entries contain semantic information in terms of domain specification or style information (e.g., colloquial, regional use, etc.). Collocational information is also available for 500 entries.</description>
+<description lang="French">Ce lexique bilingue cebuano=&gt;anglais est fourni en format XML structuré selon le standard OLIF (Open Lexicon Interchange Format). La conversion XML a été fournie par Digital Sonata Pty Ltd.Le lexique contient 1 988 entrées en cebuano et 1 990 entrées en anglais. En termes de types d’entrées, le lexique comprend 1,052 noms, 462 adjectifs, 405 verbes et 69 entrées de classe fermée.Les entrées contiennent des informations sémantiques en termes de spécification de domaine et information de style (par exemple, usage conversationnel, régional, etc.). L’information collocationnelle est également disponible pour 500 entrées.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=164</url>
-<identifier>ELRA-M0010_14</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1059</url>
+<identifier>ELRA-M0045</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,31 +29,35 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-03-04</lastDateUpdated>
+<revision>Creation date:  November 15, 2007Last update:   November 15, 2007</revision>
+<lastDateUpdated>2008-04-22</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 55000.00€</price>
-<price>Academic org. ELRA Member: 11000.00€</price>
-<price>Academic org. ELRA Non Member: 12000.00€</price>
-<price>Commercial org. ELRA Non Member: 60000.00€</price>
+<price>Commercial org. ELRA Non Member: 45.00€</price>
+<price>Academic org. ELRA Non Member: 45.00€</price>
+<price>Commercial org. ELRA Member: 45.00€</price>
+<price>Academic org. ELRA Member: 45.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-05-13</availabilityStartDate>
+<availabilityStartDate>2008-04-22</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 55000.00€</price>
-<price>Academic org. ELRA Member: 55000.00€</price>
-<price>Academic org. ELRA Non Member: 60000.00€</price>
-<price>Commercial org. ELRA Non Member: 60000.00€</price>
+<price>Commercial org. ELRA Non Member: 45.00€</price>
+<price>Academic org. ELRA Non Member: 45.00€</price>
+<price>Commercial org. ELRA Member: 45.00€</price>
+<price>Academic org. ELRA Member: 45.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-05-13</availabilityStartDate>
+<availabilityStartDate>2008-04-22</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<resourceCreationInfo>
+<creationEndDate>2007-01-01</creationEndDate>
+</resourceCreationInfo>
 <resourceComponentType>
 <lexicalConceptualResourceInfo>
 <resourceType>lexicalConceptualResource</resourceType>
@@ -64,14 +68,9 @@
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
-<languageInfo>
-<languageId>ita</languageId>
-<languageName>Italian</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
-</languageInfo>
+<textFormatInfo>
+<mimeType>Plain text</mimeType>
+</textFormatInfo>
 </lexicalConceptualResourceTextInfo>
 </lexicalConceptualResourceMediaType>
 </lexicalConceptualResourceInfo>

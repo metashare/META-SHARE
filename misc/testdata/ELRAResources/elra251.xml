@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Siemens Shanghai Mandarin FDB-1000</resourceName>
-<resourceName lang="French">Base de données FDB-1000 du mandarin de Shanghai</resourceName>
-<description lang="English">The Shanghai Mandarin FDB-1000 database contains the recordings of 1,000 speakers (500 males, 500 females) recorded over the fixed telephone network. This acoustic database gathers Mandarin data, as spoken in Shanghai as a first or second Chinese dialect/language.The corpus consists of read speech, including digits and application words for teleservices, recorded through an ISDN card. Chinese characters and English translation are included, as well as canonical Pinyin transcription including tone markers, and several categories of non-speech events.Speech samples are stored as sequences of 8 bits 8 kHz A-law. Signal and annotation files are stored separately.Each speaker uttered about 70 items, which consist of isolated digits, yes/no questions, common application words and phrases.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
-<description lang="French">Cette base orale contient des données du mandarin, tel qu'il est parlé à Shanghai en première ou deuxième langue/dialecte chinois. Le corpus comprend de la parole lue, y compris des chiffres et des mots de commandes choisis pour la réalisation de services télématiques. La base a été enregistrée au moyen d'une carte ISDN. Un total de 70 énoncés a été enregistré par chacun des quelques 1000 locuteurs (500 hommes, 500 femmes).Chaque locuteur a prononcé les éléments suivants :    * chiffres isolés,    * oui/non,    * mots et phrases de commande courants.La bases de données est fournie avec les caractères chinois et leur traduction en anglais, une transcription canonique en Pinyin et les marqueurs de tons, ainsi que plusieurs catégories d'événements acoustiques clairement audibles.Les fichiers de parole sont stockés en séquences d'échantillons de 8 bits, 8 kHz, loi-A. Les fichiers d'annotation et de signaux sont stockés séparément.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
+<resourceName lang="English">Swedish SpeechDat(II) MDB-1000</resourceName>
+<resourceName lang="French">Base de données SpeechDat(II) MDB-1000 du suédois</resourceName>
+<description lang="English">The Swedish SpeechDat(II) MDB-1000 database contains the recordings of 1,000 Swedish speakers recorded over the Swedish mobile telephone network. This database is partitioned into 5 CDs, which comprise 200 speakers sessions each.This speech database was validated by SPEX (the Netherlands) to assess its compliance with the SpeechDat format and content specifications.Speech samples are stored as sequences of 8-bit 8 kHz A-law. Each prompted utterance is stored in a separate file. Each signal file is accompanied by an ASCII SAM label file which contains the relevant descriptive information.Each speaker uttered the following items:    * 2 isolated single digits    * 1 sequence of 10 isolated digits    * 4 connected digits (1 sheet number -5 digits, 1 telephone number –9/11 digits, 1 credit card number -16 digits, 1 PIN code -6 digits)    * 1 currency money amount    * 1 natural number    * 3 dates (1 spontaneous e.g. birthday, 1 prompted date, 1 relative or general date expression)    * 2 time phrases (time of recording, 1 time phrase)    * 3 spelled words (1 spontaneous e.g. own forename, 1 city name, 1 real word for coverage)    * 5 directory assistance names (1 spontaneous e.g. own forename, 1 city of school at 7 years, 1 frequent city name, 1 frequent company name, 1 common forename and surname)    * 2 yes/no questions (1 predominantly "yes" question, 1 predominantly "no" question)    * 6 application words    * 1 keyword phrase using an embedded application word    * 4 phonetically rich words    * 9 phonetically rich sentencesThe database also contains additional Swedish specific material for speaker verification purposes and dialectal studies:    * 2 sentences for speaker verification purposes, same for all speakers    * 4 connected digits strings (3-6 digits) for speaker verification purposes    * 2 sentences for dialectal studies, same for all speakersThe following age distribution has been obtained: 32 speakers are under 16, 348 speakers are between 16 and 30, 253 speakers are between 31 and 45, 292 speakers are between 46 and 60, and 75 speakers are over 60.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
+<description lang="French">La base de données SpeechDat(II) MDB-1000 du suédois contient 1000 locuteurs suédois enregistrés à travers le réseau téléphonique mobile suédois. Cette base est répartie sur 5 CD-ROM, chacun comprenant 200 sessions. Les bases de données SpeechDat(II) ont été réalisées selon les spécifications du projet SpeechDat(II) et validées par SPEX, Pays-Bas.Les fichiers de parole sont stockés en séquences d'échantillons de 8 bits, 8 kHz, loi-A. Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM.Chaque locuteur a prononcé les éléments suivants :    * 6 mots de commande ;    * 1 séquence de 10 chiffres isolés ;    * 4 nombres : 1 numéro permettant d'identifier la feuille de prompt (5 chiffres), 1 numéro de téléphone (9-11 chiffres), 1 numéro de carte de crédit (16 chiffres), 1 code confidentiel (6 chiffres) ;    * 3 dates : 1 date spontanée (date de naissance), 1 date lue, 1 date relative et générale ;    * 1 expression utilisant un mot de commande ;    * 2 chiffre isolé ;    * 3 mots épelés : 1 spontané (prénom), 1 nom de ville provenant d'un annuaire de renseignements téléphoniques, 1 mot réel pour couverture ;    * 1 montant en devises ;    * 1 nombre naturel ;    * 5 noms provenant d'un annuaire de renseignements téléphoniques : 1 spontané (prénom), 1 nom de ville de l'école du locuteur à 7 ans (spontané), 1 nom de ville parmi les plus courantes (sur 500 noms), 1 nom de compagnie/société (sur 500 noms), 1 "prénom nom" (sur 500 noms) ;    * 2 questions oui/non : 1 question à prédominance "oui", 1 question à prédominance "non" ;    * 9 phrases phonétiquement riches ;    * 2 phrases comportant une notion de temps : 1 jour (spontané), 1 phrase comportant une notion de temps) ;    * 4 mots phonétiquement riches.Cette base de données contient également des phrases enregistrées en vue de la vérification du locuteur et d'études dialectales. Tous les locuteurs ont prononcé 8 phrases identiques, ainsi que les mêmes séries de chiffres connectés (composés de 3 à 6 chiffres).Les classes d'âge sont réparties comme suit : 32 locuteurs de moins de 16 ans, 348 locuteurs entre 16 et 30 ans, 253 locuteurs entre 31 et 45 ans, 292 locuteurs entre 46 et 60 ans et 75 locuteurs de plus de 60 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=189</url>
-<identifier>ELRA-S0057</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=554</url>
+<identifier>ELRA-S0071</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,31 +29,37 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-08-28</lastDateUpdated>
+<lastDateUpdated>2007-02-22</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 15000.00€</price>
-<price>Academic org. ELRA Non Member: 15000.00€</price>
-<price>Commercial org. ELRA Member: 10000.00€</price>
-<price>Academic org. ELRA Member: 10000.00€</price>
+<price>Commercial org. ELRA Non Member: 35000.00€</price>
+<price>Academic org. ELRA Non Member: 25000.00€</price>
+<price>Commercial org. ELRA Member: 25000.00€</price>
+<price>Academic org. ELRA Member: 22000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1998-11-23</availabilityStartDate>
+<availabilityStartDate>1999-10-18</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 15000.00€</price>
-<price>Academic org. ELRA Non Member: 15000.00€</price>
-<price>Commercial org. ELRA Member: 10000.00€</price>
-<price>Academic org. ELRA Member: 10000.00€</price>
+<price>Commercial org. ELRA Non Member: 35000.00€</price>
+<price>Academic org. ELRA Non Member: 35000.00€</price>
+<price>Commercial org. ELRA Member: 25000.00€</price>
+<price>Academic org. ELRA Member: 25000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1998-11-23</availabilityStartDate>
+<availabilityStartDate>1999-10-18</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>SpeechDat(II)</projectName>
+<fundingType>euFunds</fundingType>
+</fundingProject>
+</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
@@ -64,8 +70,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>chi/zho</languageId>
-<languageName>Chinese</languageName>
+<languageId>swe</languageId>
+<languageName>Swedish</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

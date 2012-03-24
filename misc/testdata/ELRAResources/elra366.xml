@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">TAXI - Multilingual telephone dialog database</resourceName>
-<resourceName lang="French">TAXI - Base de données orales multilingue</resourceName>
-<description lang="English">TAXI was produced by BAS, in collaboration with the German research centre for artificial intelligence, DFKI. This speech database contains recordings which consist of dialogues, 94 on the whole (spontaneous speech), between a German speaking cab dispatcher and his clients, who always answered in English. To prevent overlap and to allow automatic segmentation by the recording server, each party pressed a button on his phone to signal the other one that his turn was over. They were recorded over the telephone network. Each dialogue part is translated into the other language. Noise markers are included in the transcripts (not in the translations).The database was annotated following the SpeechDat specifications, and validated to assess its compliance with the SpeechDat format. The files are stored as BAS Partitur Format files.</description>
-<description lang="French">La base de données TAXI, produite par BAS en collaboration avec le centre de recherche allemand sur l’intelligence artificielle (DFKI), contient 94 dialogues entre un chauffeur de taxi parlant allemand et ses clients parlant anglais, enregistrés sur le réseau téléphonique public. Pour empêcher toute interruption brutale dans le discours, et pour permettre la segmentation automatique des énoncés, chacun disposait d’une touche sur son téléphone pour signaler à l’autre locuteur que c’était son tour de parler. Chaque partie du dialogue est disponible dans les deux langues, et les marqueurs de bruit sont signalés dans les transcriptions (pas dans les traductions).Les données sont annotées suivant les spécifications SpeechDat, et la base de données a été validée pour contrôler son adéquation avec le format SpeechDat. Les fichiers sont au format BAS Partitur.</description>
+<resourceName lang="English">BABEL Polish database</resourceName>
+<resourceName lang="French">Base de données BABEL du polonais</resourceName>
+<description lang="English">The BABEL Polish Database is a speech database that was produced by a research consortium funded by the European Union under the COPERNICUS programme (COPERNICUS Project 1304). The project began in March 1995 and was completed in December 1998. The objective was to create a database of languages of Central and Eastern Europe in parallel to the EUROM1 databases produced by the SAM Project (funded by the ESPRIT programme). The BABEL consortium included six partners from Central and Eastern Europe (who had the major responsibility of planning and carrying out the recording and labelling) and six from Western Europe (whose role was mainly to advise and in some cases to act as host to BABEL researchers). The five databases collected within the project concern the Bulgarian, Estonian, Hungarian, Polish, and Romanian languages.The Polish database consists of the basic "common" set which is:•	The Many Talker Set: 30 males, 30 females; each to read 100 numbers, 3 connected passages and 5 “filler” sentences (or 4 passages if no fillers needed).•	The Few Talker Set: 5 males, 5 females, normally selected from the above group: each to read 5 blocks of 100 numbers, 15 passages and 25 filler sentences ( or 20 passages if fillers not needed), and 5 lists of syllables.•	The Very Few Talker Set: 1 male, 1 female, selected from many-talker set: 5 blocks of syllables, with and without carrier sentences.</description>
+<description lang="French">BABEL est une base de données qui a été produite par un consortium de recherche financé par la Commission européenne dans le cadre du programme COPERNICUS (Projet COPERNICUS 1304). Le projet a débuté en mars 1995 et s'est terminé en décembre 1998. Son objectif était de créer une base de données des langues d'Europe Centrale et de l'Est en parallèle à EUROM1 produit dans le cadre du projet SAM (financé par le programme ESPRIT) pour les langues de l'Union Européenne. Le consortium de BABEL comprenait six partenaires d'Europe Centrale et de l'Est (ayant pour charge de planifier et réaliser l'enregistrement et l'annotation) et six partenaires de l'Europe de l'Ouest (dont le rôle principal a été de conseiller, et dans certains cas, d'héberger des chercheurs de BABEL). Les cinq bases de données collectées au cours de ce projet concernent les langues suivantes : bulgare, estonien, hongrois, polonais et roumain.La base de données du polonais est composée d'un ensemble générique "commun":•	Le grand groupe de locuteurs : ensemble comportant 30 hommes et 30 femmes. Chaque locuteur a lu 100 nombres, 3 passages connectés et 5 phrases complémentaires (ou 4 passages lorsque les phrases complémentaires n’étaient pas nécessaires). •	Le petit groupe de locuteurs : ensemble comportant 5 hommes et 5 femmes issus du grand groupe de locuteurs. Chaque locuteur a lu 5 blocs de 100 nombre, 15 passages et 25 phrases complémentaires (ou 20 passages lorsques les phrases complémentaires n’étaient pas nécessaires), et 5 listes de syllabes. •	Le très petit groupe de locuteurs : ensemble comportant 1 homme et 1 femme issus du petit groupe de locuteurs. Chaque locuteur a lu 5 blocs de syllabes, avec et sans phrases porteuses.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=665</url>
-<identifier>ELRA-S0137</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1120</url>
+<identifier>ELRA-S0307</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,29 +29,37 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-05-11</lastDateUpdated>
+<lastDateUpdated>2010-04-29</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 383.03€</price>
-<price>Academic org. ELRA Member: 127.82€</price>
-<price>Academic org. ELRA Non Member: 255.65€</price>
-<price>Commercial org. ELRA Non Member: 511.29€</price>
-<availabilityStartDate>2002-10-31</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 6000.00€</price>
+<price>Academic org. ELRA Non Member: 600.00€</price>
+<price>Commercial org. ELRA Member: 4000.00€</price>
+<price>Academic org. ELRA Member: 300.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2010-04-29</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 383.03€</price>
-<price>Academic org. ELRA Member: 383.03€</price>
-<price>Academic org. ELRA Non Member: 511.29€</price>
-<price>Commercial org. ELRA Non Member: 511.29€</price>
-<availabilityStartDate>2002-10-31</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 6000.00€</price>
+<price>Academic org. ELRA Non Member: 6000.00€</price>
+<price>Commercial org. ELRA Member: 4000.00€</price>
+<price>Academic org. ELRA Member: 4000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2010-04-29</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>BABEL</projectName>
+<fundingType>euFunds</fundingType>
+</fundingProject>
+</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
@@ -62,12 +70,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>ger/deu</languageId>
-<languageName>German</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
+<languageId>pol</languageId>
+<languageName>Polish</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

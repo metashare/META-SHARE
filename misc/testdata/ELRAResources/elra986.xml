@@ -6,7 +6,7 @@
 <description lang="English">The ILPho database is a phonetic lexicon which contains 39,000 lemmas (319,318 entries). It is distributed in two formats. The first format is compact and corresponds to an easy extension of the text format in which the Multext lexicons (réf. ELRA-L0010) (Ide et Veronis, 1994) are distributed, by adding a column where phonetic transcriptions are stored. The second format is instantiated in XML (see www.xml.org), corresponding to a set of mark-ups specifically designed within this project for lexicons representation.</description>
 <description lang="French">La base de données ILPho est un lexique phonétique comprenant 39 000 lemmes, soit 319 318 entrées. Elle est distribuée sous deux formats. Le premier est le plus compact, et correspond à une simple extension du format texte sous lequel les lexiques Multext (réf. ELRA-L0010) (Ide et Veronis, 1994) sont distribués, par ajout d’une colonne stockant les transcriptions phonétiques. Le second format est une instanciation du format XML (voir www.xml.org), correspondant à un ensemble de balises définies spécifiquement dans le cadre de ce projet pour la représentation de lexiques.</description>
 <resourceShortName>ILPho</resourceShortName>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=760</url>
 <identifier>ELRA-S0163</identifier>
 </identificationInfo>

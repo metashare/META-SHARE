@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">BREF-POLYGLOT</resourceName>
-<resourceName lang="French">BREF-POLYGLOT</resourceName>
-<description lang="English">The BREF-Polyglot is a sub-corpus of the BREF corpus (1 ISO9660 CDROM); it contains speaker-dependent training data from 6 speakers. There are a total of 3193 sentences (2 signal files for each sentence), on average 530 per speaker. While this data represents only a small portion of the entire BREF corpus, the sentences have selected to cover a wide range of phonetic contexts with a minimum amount of speech data. The BREF-Polyglot sub-corpus has been selected to train speaker-dependent, vocabulary-independent speech recognizers.</description>
-<description lang="French">The BREF-Polyglot is a sub-corpus of the BREF corpus (1 ISO9660 CDROM); it contains speaker-dependent training data from 6 speakers. There are a total of 3193 sentences (2 signal files for each sentence), on average 530 per speaker. While this data represents only a small portion of the entire BREF corpus, the sentences have selected to cover a wide range of phonetic contexts with a minimum amount of speech data. The BREF-Polyglot sub-corpus has been selected to train speaker-dependent, vocabulary-independent speech recognizers.</description>
+<resourceName lang="English">TC-STAR Bilingual Voice-Conversion English Speech Database</resourceName>
+<resourceName lang="French">Base de données orale de conversion vocale bilingue TC-STAR pour l’anglais</resourceName>
+<description lang="English">4 hours and 80 minutes of speech as spoken by 2 female speakers and 2 male speakers, covering both mimics and parallel voice conversion data.</description>
+<description lang="French">4 heures et 80 minutes de parole parlée par 2 locuteurs femmes et 2 locuteurs homes, couvrant à la fois des données de conversion mimique et de voix en parallèle.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=37</url>
-<identifier>ELRA-S0007</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1134</url>
+<identifier>ELRA-S0312</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,31 +29,43 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-03-31</lastDateUpdated>
+<lastDateUpdated>2010-12-21</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 3000.00€</price>
-<price>Academic org. ELRA Member: 400.00€</price>
-<price>Academic org. ELRA Non Member: 800.00€</price>
-<price>Commercial org. ELRA Non Member: 6000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1996-09-01</availabilityStartDate>
+<price>Academic org. ELRA Member: 1650.00€</price>
+<price>Commercial org. ELRA Member: 3150.00€</price>
+<price>Academic org. ELRA Non Member: 2200.00€</price>
+<price>Commercial org. ELRA Non Member: 4200.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2010-12-21</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 3000.00€</price>
-<price>Academic org. ELRA Member: 3000.00€</price>
-<price>Academic org. ELRA Non Member: 6000.00€</price>
-<price>Commercial org. ELRA Non Member: 6000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1996-09-01</availabilityStartDate>
+<price>Academic org. ELRA Member: 3150.00€</price>
+<price>Commercial org. ELRA Member: 3150.00€</price>
+<price>Academic org. ELRA Non Member: 4200.00€</price>
+<price>Commercial org. ELRA Non Member: 4200.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2010-12-21</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<usageInfo>
+<actualUseInfo>
+<actualUse>nlpApplications</actualUse>
+<useNLPSpecific>speechSynthesis</useNLPSpecific>
+</actualUseInfo>
+</usageInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>TC-STAR</projectName>
+<fundingType>euFunds</fundingType>
+</fundingProject>
+</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
@@ -64,8 +76,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
+<languageId>eng</languageId>
+<languageName>English</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

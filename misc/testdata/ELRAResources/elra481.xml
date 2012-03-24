@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">French SpeechDat-Car</resourceName>
-<resourceName lang="French">Base de données SpeechDat-Car du français</resourceName>
-<description lang="English">The French SpeechDat-Car comprises the recordings of 313 French speakers from 6 different regions (158 males, 155 females), recorded over the GSM telephone network and in a car. This database is partitioned into 16 DVDs. The speech databases made within the SpeechDat-Car project were validated by SPEX, the Netherlands, to assess their compliance with the SpeechDat-Car format and content specifications.The speech data files are in two formats. Four of the microphones were recorded on the computer in the boot of the car. The speech data are stored as sequences of 16 kHz, 16 bit and uncompressed. The fifth microphone was connected to the GSM phone, and was recorded on a remote machine, with compressed data stored as sequences of 8 bit A-law 8.kHz. Each signal file is accompanied by an ASCII SAM label file which contains the relevant descriptive information.Each speaker uttered the following items:- 2 voice activation keywords- 1 sequence of 10 isolated digits- 7 connected digits : 1 sheet number (5+ digits), 1 spontaneous telephone number, 3 read telephone numbers, 1 credit card number (14-16 digits), 1 PIN code (6 digits)- 3 dates : 1 spontaneous date (e.g. birthday), 1 prompted date, 1 relative or general date expression- 2 word spotting phrases using an application word (embedded)- 1 question (extra item)- 4 isolated digits- 7 spelled words : 1 spontaneous (own forename or surname), 1 spelling of directory city name, 4 real word/name, 1 artificial name for coverage- 1 money amount- 1 email address (extra item)- 1 natural number- 7 directory assistance names : 1 spontaneous (own forename or surname), 1 city of birth / growing up (spontaneous), 2 most frequent cities, 2 most frequent company/agency, 1 "forename surname"- 9 phonetically rich sentences- 2 time phrases : 1 time of day (spontaneous), 1 time phrase (word style)- 4 phonetically rich words- 67 application words: 13 mobile phone application words, 22 IVR function keywords, 32 car products keywords- 2 additional language dependent keywords- 1 additional language dependent keywords (extra item)- Prompts for spontaneous speechThe following age distribution has been obtained: 208 speakers are between 16 and 30, 78 speakers are between 31 and 45, 25 speakers are between 46 and 60, and 2 speakers are over 60. A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
-<description lang="French">La base de données SpeechDat-Car du français est composée d’enregistrements réalisés à travers le réseau GSM français et dans une voiture. 313 locuteurs français (158 hommes, 155 femmes) de 6 régions différentes ont été enregistrés. Cette base de données est distribuée sur 16 DVD. Les bases orales réalisées lors du projet SpeechDat-Car ont été validées par SPEX, Pays-Bas, afin de contrôler leur adéquation avec le format SpeechDat-Car et les spécifications de contenu.Les données de parole se présentent sous deux formats. Quatre microphones ont été connectés sur un ordinateur placé dans le coffre de la voiture. Ces fichiers sont stockés en séquences d'échantillons de 16 kHz, 16 bit et ne sont pas compressés. Le cinquième microphone a été connecté au téléphone mobile et les enregistrements effectués sur une machine à distance. Les fichiers sont stockés en séquences d’échantillons de 8kHz, 8 bit loi-A. Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM.Chaque locuteur a prononcé les éléments suivants :- 2 mots-clés d'activation vocale - 1 séquence de 10 chiffres isolés - 7 chiffres connectés : 1 numéro permettant d'identifier la feuille de prompt (5+ chiffres), 1 numéro de téléphone spontané, 3 numéros de téléphone lus, 1 numéro de carte de crédit (14-16 chiffres), 1 code confidentiel (6 chiffres) - 3 dates : 1 date spontanée (ex. anniversaire), 1 date lue, 1 date générale - 2 expressions utilisant un mot de commande - 4 chiffres isolés - 7 mots épelés : 1 spontané (nom ou prénom du locuteur), 1 nom de ville provenant d'un annuaire de renseignements téléphoniques, 4 mots/noms réels, 1 nom artificiel pour couverture - 1 montant en devises - 1 adresse de courrier électronique (en supplément) - 1 nombre naturel - 7 noms provenant d'un annuaire de renseignements téléphoniques : 1 spontané (nom ou prénom du locuteur), 1 nom de ville de naissance/d'origine du locuteur (spontané), 2 noms de ville parmi les plus fréquentes, 2 noms de compagnie/société parmi les plus fréquentes, 1 répétition de "prénom nom" - 9 phrases phonétiquement riches - 2 phrases comportant une notion de temps : 1 jour (spontané), 1 phrase comportant une notion de temps - 4 mots phonétiquement riches - 67 mots de commande: 13 mots de commande dans le domaine de la téléphonie mobile, 22 mots de fonction dans le domaine des serveurs vocaux interactifs, 32 mots clés de produits du domaine de l'automobile - 2 mots clés dépendants de la langue - 1 mot clé dépendant de la langue (en supplément) - phrases spontanées Les classes d'âge sont réparties comme suit : 208 locuteurs ont entre 16 et 30 ans, 78 locuteurs entre 31 et 45 ans, 25 locuteurs entre 46 et 60 ans et 2 locuteurs ont plus de 60 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
-<resourceShortName>VEHIC1FR</resourceShortName>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=646</url>
-<identifier>ELRA-S0135</identifier>
+<resourceName lang="English">Spanish SpeechDat(M) - DB1</resourceName>
+<resourceName lang="French">Base de données SpeechDat(M) de l'espagnol - DB1</resourceName>
+<description lang="English">The SpeechDat(M) Spanish database contains the recordings of 1,002 Spanish speakers (508 males, 494 females), recorded over the Spanish fixed telephone network. A pronunciation dictionary for the correctly spoken items is also available.It was agreed that the ESPRIT Project SAM standards be followed for speech file storage. Speech samples are stored as sequences of 8-bit 8 kHz A-law speech files (before compression).Each prompted utterance is stored in a separate file. Each signal file is accompanied by an ASCII SAM label file which contains the relevant descriptive information.This speech database was validated by SPEX (the Netherlands) to assess its compliance with the SpeechDat format and content specifications.Each speaker uttered the following items:    * 1 isolated digit    * 4 connected digits (1 sheet number –4 digits, 1 telephone number –9 digits, 1 credit card number –16 digits, 1 spontaneous home telephone number)    * 2 natural numbers    * 1 natural number with decimal point    * 2 money amounts (1 large amount, 1 small amount)    * 3 spelled-out words (7 letter sequences)    * 2 time phrases (1 spontaneous time of day, 1 time phrase -prompted, word style)    * 3 dates (1 spontaneous date e.g. birthdayn 2 prompted dates)    * 3 yes/no questions (Are you calling from the same province? (as P1), Do you speak another language fluently?, Are you calling from a public phonebox?),    * 1 place (province of longest residence)    * 6 application keywords (out of a set of 54 words)    * 2 additional application keywords (out of a set of 18 words)    * 3 embedded application word phrases (from A1-6 vocabulary)    * 9 read sentences for phonetic coverageThe set of phonetically balanced sentences was automatically transcribed and manually checked by the Department de Filologia Espanyola of the Universitat Autonoma de Barcelona. Standard Castillian transcription was used. No dialectal variations were considered.The following age distribution has been obtained: 530 speakers are between 15 and 29 years old, 283 speakers are between 30 and 45, 156 speakers are between 46 and 60, and 23 speakers are over 60; the age of 10 speakers is unknown.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
+<description lang="French">La base de données SpeechDat(M) de l'espagnol comprend des enregistrements téléphoniques de 1002 locuteurs (508 hommes et 494 femmes) enregistrés directement à travers le réseau téléphonique fixe utilisant une interface numérique E-1. Un dictionnaire de prononciation est également fourni pour les éléments correctement prononcés. Le stockage des fichiers de parole suit les standards du projet ESPRIT SAM. Les fichiers de parole ont été échantillonnés à 8 kHz, enregistrés en séquences de 8 bits, loi-A, et ensuite compressés. Chaque énoncé a été stocké dans un fichier séparé. Chaque fichier signal est accompagné d'un fichier d'en-tête au format ASCII SAM qui contient la description du fichier parole correspondant.Toutes les occurrences sont par défaut lues, excepté certaines marquées comme spontanées. La liste des occurrences est la suivante :    * 1 chiffre isolé ;    * 4 chiffres et nombres connectés : 1 numéro d'identification à 4 chiffres, 1 numéro de téléphone à 9 chiffres, 1 numéro de carte de crédit à 16 chiffres, 1 numéro de téléphone du domicile du locuteur (spontané), 2 nombres entiers naturels ;    * 1 nombre avec un chiffre après la virgule ;    * 2 montants en devises : 1 gros montant et 1 petit montant ;    * 3 mots épelés (séquences de 7 lettres) ;    * 1 jour (spontané) ;    * 1 phrase comportant une notion de temps ;    * 1 date (spontanée, la date d'anniversaire du locuteur) ;    * 2 dates ;    * 3 questions oui/non : Appelez-vous de la même province ? (par rapport à une province donnée P1), Parlez-vous couramment d'autres langues?, Appelez-vous d'une cabine publique ? ;    * 1 lieu (province où le locuteur a résidé le plus longtemps) ;    * 6 mots de commande (extraits d'un vocabulaire de 54 mots) ;    * 2 mots de commande supplémentaires (extraits d'un vocabulaire de 18 mots) ;    * 3 phrases incluant des mots de commande ;    * 9 phrases lues pour la couverture phonétique.L'ensemble des phrases phonétiquement équilibrées a été transcrit automatiquement et vérifié manuellement par le département de philologie espagnole de l'Université Autonome de Barcelone. Une transcription du castillan standard a été utilisée. Aucune variation dialectale n'a été prise en compte.Les classes d'âge sont réparties comme suit : 530 locuteurs entre 15 et 29 ans, 283 locuteurs entre 30 et 45 ans, 156 locuteurs entre 46 et 60 ans, et 23 locuteurs de plus de 60 ans ; l'âge de 10 locuteurs est inconnu.CARACTERISTIQUES :Type de ressource : Enregistrements de parole (acoustique)Mode de parole : Lu (parfois spontané)Conditions d'enregistrement : Réseau téléphonique fixeType de microphone/téléphone : Interface E-1Langue : Espagnol (castillan)Sexe et nombre de locuteurs : 1002 locuteurs (508 hommes et 494 femmes)Annotation linguistique : OrthographiqueFormat de fichier : 8 bits, loi AStandard utilisé : SAMFréquence d'échantillonnage (kHz) : 8 kHzMode de distribution : 3 CD-ROMRessources connexes : Ressources SpeechDat(M) en d'autres langues : danois (ELRA-S0040), anglais (ELRA-S0011), français (ELRA-S0016), allemand (ELRA-S0018), italien (ELRA-S0052), portugais (ELRA-S0068).Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
+<resourceShortName/>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=721</url>
+<identifier>ELRA-S0065</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,44 +29,34 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2006-03-13</lastDateUpdated>
+<lastDateUpdated>2007-08-28</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 182000.00€</price>
-<price>Academic org. ELRA Non Member: 182000.00€</price>
-<price>Commercial org. ELRA Member: 130000.00€</price>
-<price>Academic org. ELRA Member: 104000.00€</price>
+<price>Commercial org. ELRA Non Member: 20000.00€</price>
+<price>Academic org. ELRA Non Member: 20000.00€</price>
+<price>Commercial org. ELRA Member: 14000.00€</price>
+<price>Academic org. ELRA Member: 11000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2002-10-31</availabilityStartDate>
+<availabilityStartDate>1999-03-05</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 182000.00€</price>
-<price>Academic org. ELRA Non Member: 182000.00€</price>
-<price>Commercial org. ELRA Member: 130000.00€</price>
-<price>Academic org. ELRA Member: 130000.00€</price>
+<price>Commercial org. ELRA Non Member: 20000.00€</price>
+<price>Academic org. ELRA Non Member: 20000.00€</price>
+<price>Commercial org. ELRA Member: 14000.00€</price>
+<price>Academic org. ELRA Member: 14000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2002-10-31</availabilityStartDate>
+<availabilityStartDate>1999-03-05</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<validationInfo>
-<validated>True</validated>
-<validationModeDetails>SpeechDat-Car This speech database was validated by SPEX (the Netherlands) to assess its compliance with the SpeechDat-Car format and content specifications.</validationModeDetails>
-</validationInfo>
-<usageInfo>
-<actualUseInfo>
-<actualUse>nlpApplications</actualUse>
-<useNLPSpecific/>
-</actualUseInfo>
-</usageInfo>
 <resourceCreationInfo>
 <fundingProject>
-<projectName>SpeechDat-Car</projectName>
+<projectName>SpeechDat(M)</projectName>
 <fundingType>euFunds</fundingType>
 </fundingProject>
 </resourceCreationInfo>
@@ -80,57 +70,19 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
+<languageId>spa</languageId>
+<languageName>Spanish</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Castilian</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
 </languageInfo>
-<languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
-</languageInfo>
-<creationInfo>
-<creationMode>manual</creationMode>
-</creationInfo>
 </corpusAudioInfo>
 </corpusMediaType>
 </corpusInfo>
-</resourceComponentType>
-<resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
-<creationInfo>
-<creationMode>manual</creationMode>
-</creationInfo>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
-<mediaType>text</mediaType>
-<lingualityInfo>
-<lingualityType>monolingual</lingualityType>
-</lingualityInfo>
-<languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
-</languageInfo>
-</lexicalConceptualResourceTextInfo>
-<lexicalConceptualResourceAudioInfo>
-<mediaType>audio</mediaType>
-<lingualityInfo>
-<lingualityType>monolingual</lingualityType>
-</lingualityInfo>
-<languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
-</languageInfo>
-</lexicalConceptualResourceAudioInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

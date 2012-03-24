@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Mandarin Chinese Speech Recognition Corpus (telephone channel) - Chinese single sentence (100 people)</resourceName>
-<resourceName lang="French">Corpus de reconnaissance de parole téléphonique du chinois mandarin – phrases (100 locuteurs)</resourceName>
-<description lang="English">This corpus comprises sentences uttered by 100 speakers of different dialects, ages and various educational levels. Speech samples are stored as a sequence of 16-bit 8kHz WAV for a total of 7.3 hours of speech. The total capacity of the data is 400 Mb.Each speaker read 40 items. Text files are stored in Unicode format. All data have been proofread manually.The corpus aims to be applied to the testing and telephone natural speech recognition system.</description>
-<description lang="French">Ce corpus comprend des phrases prononcées par 100 locuteurs de dialectes, d’âges et de niveaux d’éducation différents. Les échantillons de parole sont stockés sous la forme de séquences 16-bit 8kHz WAV pour un total de 7,3 heures de parole par canal. La taille totale des données est de 400 Mo.Chaque locuteur a lu 40 éléments. Les fichiers textes sont stockés au format Unicode. Toutes les données ont été vérifiées manuellement.Cette base de données a été conçue pour l’évaluation et le développement de systèmes de reconnaissance de la parole naturelle par téléphone.</description>
+<resourceName lang="English">Venice Italian Treebank (VIT)</resourceName>
+<resourceName lang="French">Treebank italien de Venise</resourceName>
+<description lang="English">The VIT, Venice Italian Treebank is the effort of the collaboration of people working at the Laboratory of Computational Linguistics of the University of Venice in the years 1995-2005. It is partly the result of annotation carried out internally with no specific project in mind and no financial support. This work was partly related to the development of a lexicon, a morphological analyzer, a tagger, a deep parser of Italian. All these resources were finally ready at the beginning of the ‘90s when the LCL got involved in the first national projects. The VIT contains about 272,000 words distributed over six different domains, and this is what makes it so relevant for the study of the structure of Italian language. The following domains were annotated: Domain                          Number of words         Time spanBureaucratic                    20,000                       1986 Politics                            40,000                       1984Economic &amp; financial         12,000                       1987Literary                           10,000                       1984Scientific                         20,000                       1985News                              170,000                     1994In addition, some 60,000 tokens of spoken dialogues in different Italian varieties were annotated.The annotation follows general X-bar criteria with 29 constituency labels and 102 PoS tags. VIT is also made available in a broad annotation version with 10 constituency labels and 22 PoS tags for machine learning purposes.The format is plain text with square bracketing. However, a UPenn style version which is readable by the open source query language CorpusSearch is also provided.</description>
+<description lang="French">Le Treebank italien de Venise (VIT) est le fruit d’un travail de 10 ans (1995-2005) effectué par des chercheurs du Laboratoire de linguistique computationnelle (LCL) de l’université de Venise. Réalisé en interne, en dehors de tout projet spécifique et sans aucun soutien financier, le Treebank est issu à la fois d’un travail d'annotation et du développement d’un lexique, d’un analyseur morphologique, d’un étiqueteur et d’un analyseur syntaxique approfondi de l’italien.Toutes ces ressources étaient prêtes dès le début des années 90 lorsque le LCL s’est impliqué dans les premiers projets nationaux. Le VIT comprend environ 272 000 mots répartis sur six domaines différents, ce qui en fait un outil très utile pour l’étude de la structure de la langue italienne. Les domaines suivants ont été annotés : Domaine                             Nombre de mots         PériodeBureaucratique                    20,000                     1986 Politique                              40,000                     1984Economique &amp; financier        12,000                     1987Littéraire                             10,000                     1984Scientifique                         20,000                      1985Actualités                            170,000                    1994En outre, quelque 60 000 tokens de dialogue oral avec plusieurs variantes de l’italien ont été annotés.L’annotation est conforme au critère général X-bar avec 29 constituants et 102 étiquettes de partie du discours. Le VIT est également proposé dans une version d’annotation de 10 constituants et de 22 étiquettes de partie du discours pour l’apprentissage automatique.Les données sont au format texte avec crochets. Cependant, une version de type UPenn visualisable avec CorpusSearch (langage d’interrogation open source) est également fournie.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=940</url>
-<identifier>ELRA-S0228_38</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=831</url>
+<identifier>ELRA-W0040</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,43 +29,66 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2009-09-24</lastDateUpdated>
+<revision>Update frequency: yearly</revision>
+<lastDateUpdated>2006-02-13</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 1566.00€</price>
-<price>Academic org. ELRA Non Member: 1566.00€</price>
-<price>Commercial org. ELRA Member: 1566.00€</price>
-<price>Academic org. ELRA Member: 1566.00€</price>
-<availabilityStartDate>2007-01-17</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 10000.00€</price>
+<price>Academic org. ELRA Non Member: 4000.00€</price>
+<price>Commercial org. ELRA Member: 7000.00€</price>
+<price>Academic org. ELRA Member: 3000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2006-02-13</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 1566.00€</price>
-<price>Academic org. ELRA Non Member: 1566.00€</price>
-<price>Commercial org. ELRA Member: 1566.00€</price>
-<price>Academic org. ELRA Member: 1566.00€</price>
-<availabilityStartDate>2007-01-17</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 10000.00€</price>
+<price>Academic org. ELRA Non Member: 10000.00€</price>
+<price>Commercial org. ELRA Member: 7000.00€</price>
+<price>Academic org. ELRA Member: 7000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2006-02-13</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<validationInfo>
+<validated>True</validated>
+<validationModeDetails> Internal validation</validationModeDetails>
+</validationInfo>
+<usageInfo>
+<actualUseInfo>
+<actualUse>nlpApplications</actualUse>
+<useNLPSpecific>speechSynthesis</useNLPSpecific>
+</actualUseInfo>
+</usageInfo>
+<resourceCreationInfo>
+<creationEndDate>2005-01-01</creationEndDate>
+</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
 <corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<corpusTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>chi/zho</languageId>
-<languageName>Chinese</languageName>
+<languageId>ita</languageId>
+<languageName>Italian</languageName>
 </languageInfo>
-</corpusAudioInfo>
+<sizeInfo>
+<size>120</size>
+<sizeUnit>mb</sizeUnit>
+</sizeInfo>
+<textFormatInfo>
+<mimeType>Plain text</mimeType>
+</textFormatInfo>
+</corpusTextInfo>
 </corpusMediaType>
 </corpusInfo>
 </resourceComponentType>

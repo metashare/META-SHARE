@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Concise Oxford Dictionary - Audio Files</resourceName>
-<resourceName lang="French">Fichiers audio du dictionnaire abrégé d'anglais Oxford</resourceName>
-<description lang="English">This "acoustic dictionary" contains 60,000 soundfiles from the 9th edition of the Concise Oxford Dictionary. The recordings were made by actors in a studio. It features recordings with British-English pronunciation, with an accurate coverage of different homographs, variant forms and inflections. Full information on parts of speech and subsenses is covered, and the soundfiles are clearly linked to the related phonetic information. The format in use is 22kHz 16-bit WAV.</description>
-<description lang="French">Ce dictionnaire acoustique se compose de 60 000 fichiers de parole créés à partir de la 9e édition du dictionnaire abrégé d'anglais, " Concise Oxford Dictionary ". Les enregistrements ont été effectués en studio, par des acteurs. Les données sont enregistrées avec une prononciation en anglais britannique, une couverture précise des différents homographes, des variantes et des flexions. Des informations sur les parties du discours et les sens secondaires sont fournies. Les fichiers de parole sont associés à la phonétique correspondante.Le format de fichier est WAV, avec une fréquence d'échantillonnage est de 22kHz, avec une résolution de 16-bit.</description>
+<resourceName lang="English">euLEX (Lexical Database for Basque)</resourceName>
+<resourceName lang="French">euLEX (Base de données lexicale basque)</resourceName>
+<description lang="English">euLEX is a general lexicon which contains 115,000 entries, divided into 94,000 dictionary entries or lemmas, 12,000 allomorphs, 7,500 verb forms and about 1,200 dependent morphemes. All entries include linguistic information such as morphology and usage.The lexicon includes general purpose entries and terms (each of them with its corresponding thematic classification). The non-standard entries, specifically marked by the Academy of the Basque Language, are included and linked to the correct entry.The lexicon is in XML format and is constantly updated following the latest normalization decisions from the Academy of the Basque Language.Potential applications for this resource are PoS tagging, lemmatizing, and term detection and correction.All this information is used as the basis for the automatic lemmatizer tLEMA and the morphological analyzer built up in UZEI, together with the term checker.</description>
+<description lang="French">euLEX est un lexique général contenant 115 000 entrées, réparties en 94 000 entrées du dictionnaire ou lemmes, 12 000 allomorphes, 7 500 formes verbales et environ 1 200 morphèmes dépendants. Toutes les entrées comprennent des informations linguistiques telles que la morphologie et l’usage.Le lexique comprend des entrées et des termes de vocabulaire général (chacun avec sa classification thématique correspondante). Les entrées non standards, spécifiquement marquées par l’Académie de la Langue Basque, sont incluses et reliées à l’entrée correcte.Le lexique est fourni au format XML et  régulièrement mis à jour en fonction des dernières décisions de normalisation de l’Académie de la Langue Basque.Les applications potentielles pour cette ressource sont l’étiquetage de la partie du discours, la lemmatisation et la détection et la correction de termes.Toutes ces informations sont utilisées comme base pour le lemmatiseur automatique tLEMA, ainsi que l’analyseur morphologique et que le correcteur de termes, réalisés par UZEI.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=678</url>
-<identifier>ELRA-S0134</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1065</url>
+<identifier>ELRA-L0085</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,34 +29,58 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-06-13</lastDateUpdated>
+<revision>Last update: 31 January 2008</revision>
+<lastDateUpdated>2008-06-30</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Non Member: 7000.00€</price>
-<price>Academic org. ELRA Member: 4900.00€</price>
+<price>Commercial org. ELRA Non Member: 10000.00€</price>
+<price>Academic org. ELRA Non Member: 6000.00€</price>
+<price>Commercial org. ELRA Member: 6000.00€</price>
+<price>Academic org. ELRA Member: 3000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2002-10-25</availabilityStartDate>
+<availabilityStartDate>2008-06-30</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 20000.00€</price>
+<price>Academic org. ELRA Non Member: 20000.00€</price>
+<price>Commercial org. ELRA Member: 15000.00€</price>
+<price>Academic org. ELRA Member: 15000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2008-06-30</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<resourceCreationInfo>
+<creationEndDate>2007-01-01</creationEndDate>
+</resourceCreationInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
+<languageId>baq/eus</languageId>
+<languageName>Basque</languageName>
 </languageInfo>
-</corpusAudioInfo>
-</corpusMediaType>
-</corpusInfo>
+<sizeInfo>
+<size>33</size>
+<sizeUnit>mb</sizeUnit>
+</sizeInfo>
+<textFormatInfo>
+<mimeType>Plain text</mimeType>
+</textFormatInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

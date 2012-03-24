@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">VERBMOBIL II - VM CD 51.1 - VM51.1 (BAS edition)</resourceName>
-<resourceName lang="French">VERBMOBIL II - VM CD 51.1 - VM51.1 (édition BAS)</resourceName>
-<description lang="English">Verbmobil is a long-term project of the German Federal Ministry of Education, Science, Research and Technology (BMBF, Projekträger DLR). Its aim is to give Germany an international top position in language technology and its economical application in the next millenium by cooperation and concentration of as many as possible specialists from industry and science. The long-sighted aim is the development of a mobile translation system for the translation of spontaneous speech in face-to-face situations.The following resources are spontaneous speech databases recorded in a dialogue task (appointment scheduling) .VERBMOBIL II - VM CD 51.1 - VM51.1 (BAS edition) consists of 1 CD-ROM with 15 spontaneous dialogues (15 close mic, 0 room mic, 0 phone line (fixed network, GSM) recordings) – 856 turns, transliteration (VM II Format) in English and German (Multilingual German/English with human interpreter (3 channels)).</description>
-<description lang="French">Verbmobil est un projet du Ministère fédéral allemand de l'Education, des Sciences, de la Recherche et des Technologies (BMBF, Projekträger DLR), qui vise à placer l'Allemagne en position de force dans le domaine de l'ingénierie de la langue. Son objectif , à long terme, est de développer un système de traduction vocale automatique, pour la traduction de conversations spontanées. Ces ressources sont des enregistrements de conversation pour la prise de rendez-vous. Le corpus allemand comprend 13 910 occurrences (échanges). L'édition de BAS de la partie allemande est entièrement étiquetée et segmentée en unités phonémiques/phonétiques (alphabet SAM-PA) par le système MAUS et partiellement segmentée de manière manuelle.VERBMOBIL II - VM CD 51.1 - VM51.1 (édition BAS) contient 1 CD-ROM composé de 15 dialogues spontanés (15 dialogues enregistrés avec un micro-casque très près de la bouche, 0 avec un microphone situé dans la pièce, 0 à travers le réseau téléphonique (GSM)) - 873 échanges, transcription (au format Verbmobil II) en anglais et allemand (Multilingue avec interprète humain (3 canaux)).</description>
-<resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=787</url>
-<identifier>ELRA-S0034_67</identifier>
+<resourceName lang="English">Belgian-French SpeechDat(II) FDB-1000</resourceName>
+<resourceName lang="French">Base de données SpeechDat(II) du wallon FDB-1000</resourceName>
+<description lang="English">The Belgian-French SpeechDat(II) FDB-1000 database contains the recordings of 1,011 Belgian-French speakers (493 Males, 518 Females) recorded over the Belgian fixed telephone network. This database is partitioned into 4 CDs, which comprise 250 speakers’ sessions each. Speech samples are stored as sequences of 8-bit 8 kHz A-law. Each prompted utterance is stored in a separate file. Each signal file is accompanied by an ASCII SAM label file, which contains the relevant descriptive information.This speech database was validated by SPEX (the Netherlands) to assess its compliance with the SpeechDat format and content specifications.Each speaker uttered the following items. Each phrase or word was repeated about 2 times.7 application words 4 isolated digits 1 sequence of 10 isolated digits 5 connected digits (1 area code, 1 spontaneous phone number, 1 credit card number –15/16 digits, etc. 3 dates (1 spontaneous date e.g. birthday, 1 prompted date, 1 general and relative date expression) 1 embedded application word 4 spelled words 1 currency money amount 1 natural number 6 directory assistance names (1 forename, 1 city of birth, 1 most frequent city, 1 city name, 1 company name, 1 "forename surname") 2 yes/no questions (1 predominantly "yes" question, 1 predominantly "no" question) 10 phonetically rich sentences 2 time phrases (1 spontaneous time of day, 1 time phrase) 6 phonetically rich words The following age distribution has been obtained: 13 speakers are under 16, 257 speakers are between 16 and 30, 425 speakers are between 31 and 45, 229 speakers are between 46 and 60 and 87 are over 60.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
+<description lang="French">La base de données SpeechDat(II) FDB-1000 du wallon contient les enregistrements de 1000 locuteurs (493 hommes, 518 femmes), enregistrés à travers le réseau téléphonique fixe belge. La base de données est répartie sur 4 CDs, chacun comprenant 250 sessions.. Les bases de données SpeechDat(II) ont été réalisées selon les spécifications du projet SpeechDat(II) et validées par SPEX, Pays-Bas.Les fichiers de parole sont stockés en séquences d'échantillons de 8 bit, 8 kHz, loi-A.Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM.Les éléments suivants ont été enregistrés : 7 mots de commande ; 4 chiffres isolés ; 1 séquence de 10 chiffres isolés ; 5 chiffres connectés : par exemple. 1 code postal, 1 numéro de téléphone, 1 numéro de carte bancaire, etc ; 3 dates: 1 date spontanée (date de naissance), 1 date lue, 1 date relative et générale ; 1 expression utilisant un mot de commande ; 3 mots épelés ; 1 montant en devises ; 1 nombre entier naturel ; 6 noms provenant d'un annuaire de renseignements téléphoniques : 1 nom de famille, 1 nom de ville parmi les plus courantes, 1 nom de société, etc. ; 4 questions oui/non ; 10 phrases phonétiquement riches ; 2 phrases comportant une notion de temps : 1 jour (spontané), 1 phrase comportant une notion de temps) ; 6 mots phonétiquement riches. Les classes d'âge sont réparties comme suit : 13 locuteurs de moins de 16 ans, 257 locuteurs entre 16 et 30 ans, 425 locuteurs entre 31 et 45 ans, 229 locuteurs entre 46 et 60 ans et 87 locuteurs de plus de 60 ans.Un lexique de prononciation comprenant une transcription phonétique en SAMPA est également fourni.</description>
+<resourceShortName>FIXED1BF</resourceShortName>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=729</url>
+<identifier>ELRA-S0108</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,35 +29,45 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-04-21</lastDateUpdated>
+<lastDateUpdated>2006-03-13</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 127.82€</price>
-<price>Commercial org. ELRA Member: 127.82€</price>
-<price>Academic org. ELRA Non Member: 255.65€</price>
-<price>Commercial org. ELRA Non Member: 255.65€</price>
+<price>Commercial org. ELRA Non Member: 25200.00€</price>
+<price>Academic org. ELRA Non Member: 25200.00€</price>
+<price>Commercial org. ELRA Member: 18000.00€</price>
+<price>Academic org. ELRA Member: 14400.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1996-09-01</availabilityStartDate>
+<availabilityStartDate>2001-05-23</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 127.82€</price>
-<price>Commercial org. ELRA Member: 127.82€</price>
-<price>Academic org. ELRA Non Member: 255.65€</price>
-<price>Commercial org. ELRA Non Member: 255.65€</price>
+<price>Commercial org. ELRA Non Member: 25200.00€</price>
+<price>Academic org. ELRA Non Member: 25200.00€</price>
+<price>Commercial org. ELRA Member: 18000.00€</price>
+<price>Academic org. ELRA Member: 18000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1996-09-01</availabilityStartDate>
+<availabilityStartDate>2001-05-23</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<validationInfo>
+<validated>True</validated>
+<validationModeDetails>SpeechDat(II) This speech database was validated by SPEX (the Netherlands) to assess its compliance with the SpeechDat format and content specifications.</validationModeDetails>
+</validationInfo>
+<usageInfo>
+<actualUseInfo>
+<actualUse>nlpApplications</actualUse>
+<useNLPSpecific>speechRecognition</useNLPSpecific>
+</actualUseInfo>
+</usageInfo>
 <resourceCreationInfo>
 <fundingProject>
-<projectName>Verbmobil II</projectName>
-<fundingType>other</fundingType>
+<projectName>SpeechDat(II) LE2-4001</projectName>
+<fundingType>euFunds</fundingType>
 </fundingProject>
 </resourceCreationInfo>
 <resourceComponentType>
@@ -70,15 +80,45 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
 </languageInfo>
-<languageInfo>
-<languageId>ger/deu</languageId>
-<languageName>German</languageName>
-</languageInfo>
+<creationInfo>
+<creationMode>manual</creationMode>
+</creationInfo>
 </corpusAudioInfo>
 </corpusMediaType>
 </corpusInfo>
+</resourceComponentType>
+<resourceComponentType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<creationInfo>
+<creationMode>manual</creationMode>
+</creationInfo>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
+</languageInfo>
+</lexicalConceptualResourceTextInfo>
+<lexicalConceptualResourceAudioInfo>
+<mediaType>audio</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
+</languageInfo>
+</lexicalConceptualResourceAudioInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

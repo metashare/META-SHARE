@@ -6,7 +6,7 @@
 <description lang="English">Large acoustic corpus in Korean produced by Kaist Korterm. 500 native speakers have been recorded (250 males, 250 females). They have uttered 32 single cardinal numbers, 1620 cardinal numbers compounded of 4 single numbers and 3813 phonetically rich words. The recordings took place in natural environment, by telephone(wire, wireless and mobile phone). The data are stored in a 8-bit A-law speech file, with a 16 kHz sampling rate. The standard in use is NIST.</description>
 <description lang="French">Important corpus de textes lus en coréen produit par Kaist Korterm. 500 locuteurs natifs ont été enregistrés (250 hommes et 250 femmes). Ils ont prononcé 32 nombres cardinaux, 1620 nombres cardinaux composés de 4 chifffres et 3813 mots phonétiquement riches. Les enregistrements ont été effectués dans un environnement naturel, avec des téléphones sans fil, avec fil, et portable. Les données sont stockées dans un fichier de parole de 8 bits, loi-A, avec une fréquence d'échantillonnage de 16 kHz. La norme suivie est NIST.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=653</url>
 <identifier>ELRA-S0130</identifier>
 </identificationInfo>

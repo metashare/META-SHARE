@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">FESTCAT Catalan TTS baseline male speech database</resourceName>
-<resourceName lang="French">Voix d'homme de référence TTS du projet FESTCAT catalan</resourceName>
-<description lang="English">This database contains the recordings of one male Catalan professional speaker recorded in a noise-reduced room simultaneously through a close talk microphone, a mid distance microphone and a laryngograph signal. This database consists in the recordings and annotations of read text material of approximately 10 hours of speech for baseline applications (Text-to-Speech systems). The FESTCAT Catalan TTS Baseline Male Speech Database was created within the scope of the FESTCAT project, funded by the Catalan Government.</description>
-<description lang="French">Cette base de données comprend les enregistrements d’un locuteur professionnel homme du catalan dans une salle à bruit réduit réalisés simultanément via un microphone “close talk”, un microphone à moyenne distance et un signal laryngographique. Elle consiste en des enregistrements et annotations de matériel textuel lu pour environ 10 heures de parole pour des applications de référence (systèmes texte-parole). La voix d'homme de référence TTS du projet FESTCAT catalan a été créée dans le cadre du projet FESTCAT, financé par le gouvernement catalan.</description>
+<resourceName lang="English">Tagged text in French (MEMODATA)</resourceName>
+<resourceName lang="French">Textes balisés en français (MEMODATA)</resourceName>
+<description lang="English">More than 170 books (classical novels, legal texts...) are tagged without rules of morphological disambiguation. A tagged corpus of 50 books is available for research. It consists of several authors of the 19th century (Balzac, Hugo, Stendhal).See also W0011.</description>
+<description lang="French">Plus de 170 livres balisés sont disponibles avec ou sans règles de désambiguisation morphologique. Un corpus balisé de 50 livres est disponible pour la recherche. Il s'agit essentiellement de romans du 19ème siècle (Balzac, Hugo, Stendhal, ...) et de textes juridiques.Voir aussi W0011.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1152</url>
-<identifier>ELRA-S0330</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=50</url>
+<identifier>ELRA-W0012</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,51 +29,45 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2012-01-05</lastDateUpdated>
+<lastDateUpdated>2008-01-10</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 0.00€</price>
-<price>Academic org. ELRA Non Member: 0.00€</price>
-<price>Commercial org. ELRA Member: 0.00€</price>
-<price>Academic org. ELRA Member: 0.00€</price>
-<availabilityStartDate>2011-12-23</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 3846.00€</price>
+<price>Academic org. ELRA Non Member: 3077.00€</price>
+<price>Commercial org. ELRA Member: 3077.00€</price>
+<price>Academic org. ELRA Member: 2461.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1997-01-23</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 0.00€</price>
-<price>Academic org. ELRA Non Member: 0.00€</price>
-<price>Commercial org. ELRA Member: 0.00€</price>
-<price>Academic org. ELRA Member: 0.00€</price>
-<availabilityStartDate>2011-12-23</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 3846.00€</price>
+<price>Academic org. ELRA Non Member: 3846.00€</price>
+<price>Commercial org. ELRA Member: 3077.00€</price>
+<price>Academic org. ELRA Member: 3077.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1997-01-23</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
 <corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<corpusTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>cat</languageId>
-<languageName>Catalan</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Valencian</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
 </languageInfo>
-</corpusAudioInfo>
+</corpusTextInfo>
 </corpusMediaType>
 </corpusInfo>
 </resourceComponentType>

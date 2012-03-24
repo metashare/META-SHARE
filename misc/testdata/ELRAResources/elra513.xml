@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Italian SpeechDat(II) FDB-3000</resourceName>
-<resourceName lang="French">Base de données SpeechDat(II) FDB-3000 de l'italien</resourceName>
-<description lang="English">The Italian SpeechDat(II) FDB-3000 comprises more than 3000 Italian speakers (1494 males, 1546 females) recorded over the Italian fixed telephone network. The FDB-3000 database is partitioned into 12 CDs in ISO 9660 format, each CD contains the recordings of 550 speakers. The speech databases made within the SpeechDat(II) project were validated by SPEX, the Netherlands, to assess their compliance with the SpeechDat format and content specifications.Speech samples are stored as sequences of 8-bit 8 kHz A-law. Each prompted utterance is stored in a separate file. Each signal file is accompanied by an ASCII SAM label file which contains the relevant descriptive information.Each speaker uttered the following items:? 1 isolated digits? 1 sequence of 10 isolated digits? 4 connected digits: 1 prompt sheet number (5+ digits), 1 telephone number (9-11 digits), 1 credit card number (14-16 digits), 1 PIN code (6 digits) ? 3 dates: 1 spontaneous date (e.g. birthday), 1 prompted date (word style), 1 relative and general date expression.? 1 word spotting phrase using an application word (embedded).? 3 application words? 3 spelled words: 1 spontaneous name (own forename), 1 city name, 1 real / artificial word for coverage.? 1 Lira currency money amount.? 1 natural number.? 5 directory assistance names: 1 spontaneous name (own forename), 1 city of birth / growing up (spontaneous), 1 most frequent cities, 1 most frequent company / agency, 1 ?forename surname?.? 2 questions including ?fuzzy? yes / no: 1 predominantly ?Yes? question, 1 predominantly ?No? question.? 9 phonetically rich sentences. ? 2 time phrases: 1 time of day (spontaneous), 1 time phrase (word style).? 4 phonetically rich words.4 more items were added to the Italian corpus.The following age distribution has been obtained: 133 speaker are below 16 years old, 757 speakers are between 16 and 30, 862 speakers are between 31 and 45, 626 speakers are between 46 and 60, 482 speakers are over 60.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
-<description lang="French">La base de données SpeechDat(II) FDB-3000 de l'italien contient les enregistrements de plus de 3000 locuteurs italiens (1546 femmes, 1494 hommes) , enregistrés à travers le réseau téléphonique fixe italien. Elle est répartie sur 12 CD-ROM, chacun contenant les enregistrements de 550 locuteurs, dans le format de la norme ISO 9660. Les bases de données SpeechDat(II) ont été réalisées selon les spécifications du projet SpeechDat(II) et validées par SPEX, Pays-Bas.Les fichiers de parole sont stockés en séquences d'échantillons de 8 bits, 8 kHz, loi-A. Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM.Chaque locuteur a prononcé les éléments suivants :    * 1 chiffres isolés ;    * 1 séquence de 10 chiffres isolés ;    * 4 séries de chiffres connectés : 1 numéro permettant d'identifier la feuille de prompt (+5 chiffres), 1 numéro de téléphone (9-11 chiffres), 1 numéro de carte de crédit (14-16 chiffres), 1 code confidentiel (6 chiffres) ;    * 3 dates : 1 date spontanée (date de naissance), 1 date lue, 1 date relative et générale ;    * 1 expression utilisant un mot de commande ;    * 3 mots d'application ;    * 3 mots épelés : 1 spontané (prénom), 1 nom de ville provenant d'un annuaire de renseignements téléphoniques, 1 mot réel / artificiel pour couverture ;    * 1 montant en devise italienne ;    * 1 nombre naturel ;    * 5 noms extraits d'un annuaire de renseignements téléphoniques : 1 spontané (prénom), 1 nom de ville spontané (ville de naissance / d'enfance du locuteur), 1 nom de ville parmi les plus courantes, 1 nom de société, 1 ‘prénom nom'    * 2 questions oui / non : 1 question à prédominance 'oui', 1 question à prédominance 'non' ;    * 9 phrases phonétiquement riches    * 2 phrases comportant une notion de temps : 1 jour (spontané), 1 phrase comportant une notion de temps ;    * 4 mots phonétiquement riches.4 éléments supplémentaires ont été ajoutés à ce corpus.Les classes d'âge sont réparties comme suit : 133 locuteurs de moins de 16 ans, 757 locuteurs entre 16 et 30 ans, 862 locuteurs entre 31 et 45 ans, 626 locuteurs entre 46 et 60 ans, 482 locuteurs de plus de 60 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
+<resourceName lang="English">SIEMENS 1000 - SI1000</resourceName>
+<resourceName lang="French">SIEMENS 1000 - SI1000</resourceName>
+<description lang="English">The corpus contains read speech of 10 different speakers. Each speaker has read approximately 1000 sentences from a German newspaper corpus (similar to the Siemens 100 - SI100 corpus described herein), (5 CDROMs).</description>
+<description lang="French">Ce corpus est l'enregistrement de 10 locuteurs qui ont lu environ 1000 phrases allemandes chacun. Les phrases sont extraites du SüdDeutsche Zeitung (articles généraux et articles relatifs au Cebit 95).</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=631</url>
-<identifier>ELRA-S0117</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=66</url>
+<identifier>ELRA-S0026</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,37 +29,31 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2009-11-19</lastDateUpdated>
+<lastDateUpdated>2005-04-01</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 39000.00€</price>
-<price>Academic org. ELRA Non Member: 31000.00€</price>
-<price>Commercial org. ELRA Member: 34000.00€</price>
-<price>Academic org. ELRA Member: 24500.00€</price>
+<price>Academic org. ELRA Member: 639.11€</price>
+<price>Commercial org. ELRA Member: 639.11€</price>
+<price>Academic org. ELRA Non Member: 1278.23€</price>
+<price>Commercial org. ELRA Non Member: 1278.23€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2001-11-05</availabilityStartDate>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 39000.00€</price>
-<price>Academic org. ELRA Non Member: 39000.00€</price>
-<price>Commercial org. ELRA Member: 34000.00€</price>
-<price>Academic org. ELRA Member: 34000.00€</price>
+<price>Academic org. ELRA Member: 639.11€</price>
+<price>Commercial org. ELRA Member: 639.11€</price>
+<price>Academic org. ELRA Non Member: 1278.23€</price>
+<price>Commercial org. ELRA Non Member: 1278.23€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2001-11-05</availabilityStartDate>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>SpeechDat(II)</projectName>
-<fundingType>euFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
@@ -70,8 +64,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>ita</languageId>
-<languageName>Italian</languageName>
+<languageId>ger/deu</languageId>
+<languageName>German</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

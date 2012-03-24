@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">French Lexicon</resourceName>
-<resourceName lang="French">Lexique Français</resourceName>
-<description lang="English">General vocabularyEntries: 50000 Format: ASCII format with ISO 8859-1 character set. A lexicon file contains entries with feature-value pairs on each line and separators between entries.Medium: Floppy Disk, QIC 150 MB Cartridge Tape The French LanTmark lexicon is divided into the following categories: nouns (36,000), verbs (6,000), adjectives (7,000), adverbs (1,000).Each entry contains morphological information (morphological flexes, comparative and superlative markers), syntactic information (such as positional features, gender, complement markers and verb arguments), semantic information (lexical semantics for nouns, adverbs and adjectives).</description>
-<description lang="French">Vocabulaire général Entrées : 50 000 Format : ASCIISupport : disquette, cartouche QIC 150 MBLe lexique français lanTmark se réparti selon les catégories suivantes : noms (36.000), verbes (6.000), adjectifs (7.000), adverbes (1.000).Chaque entrée comporte des informations morphologiques (flexions, marques de superlatif et comparatif), informations syntaxiques (traits de position, genre, marqueurs de complément et arguments de verbe), informations sémantiques (lexico-sémantiques pour les noms et les adjectifs).</description>
+<resourceName lang="English">Twin database - TWINDB1</resourceName>
+<resourceName lang="French">TWINDB1 - Base de données de jumeaux</resourceName>
+<description lang="English">The Twin database named TWINDB1 includes recordings of 45 French speakers, consisting of 9 pairs of identical twins (8 males and 10 females) with similar voices, and 27 other speakers (13 males and 14 females) including 4 none-twin siblings. Each twin or sibling spoke for a total of 24 to 30 minutes in three sessions conducted with at least one week interval between sessions.In each session subjects were asked to read three different texts of one page. These texts consists of one paragraph of about 10 lines extracted from the journal SVM Mac July 1994, some short phrases, digits, credit card numbers, etc. extracted from the Polyphone French database corpus. The speakers called from their office or from their home. Subjects were recorded over the telephone using an OROS AU32 PC-board at 16 bits linear form, 8KHz sampling frequency.</description>
+<description lang="French">La base de données TWINDB1 contient des enregistrements de 45 locuteurs français, dont 9 paires de vrais jumeaux (8 hommes et 10 femmes) avec des voix similaires, ainsi que 27 autres locuteurs (13 hommes et 14 femmes) dont 4 membres d'une famille. Chaque jumeau ou membre d'une famille a été enregistré pendant 24 à 30 minutes en trois sessions menées au moins à une semaine d'intervalle chacune.A chaque session, les locuteurs ont lu trois textes différents d'une page. Ces textes consistaient en un paragraphe d'environ 10 lignes extraites du journal "SVM Mac" de juillet 1994, quelques phrases courtes, des chiffres, des numéros de cartes de crédit, etc., extraites du corpus de la base de données Polyphone du suisse-romand (ELRA-S0030). Les locuteurs ont appelé depuis leur bureau ou depuis leur domicile. Ils ont été enregistrés par téléphone par l'intermédiaire d'une carte d'acquisition OROS AU32 à une fréquence d'échantillonnage de 8 kHz et 16 bit linéaire.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=56</url>
-<identifier>ELRA-L0005</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=579</url>
+<identifier>ELRA-S0088</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,38 +29,37 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-10-05</lastDateUpdated>
+<lastDateUpdated>2007-02-22</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 80000.00€</price>
-<price>Academic org. ELRA Non Member: 10000.00€</price>
-<price>Commercial org. ELRA Member: 48000.00€</price>
-<price>Academic org. ELRA Member: 6000.00€</price>
+<price>Commercial org. ELRA Non Member: 800.00€</price>
+<price>Academic org. ELRA Non Member: 400.00€</price>
+<price>Commercial org. ELRA Member: 400.00€</price>
+<price>Academic org. ELRA Member: 200.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-01-23</availabilityStartDate>
+<availabilityStartDate>2000-12-15</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 80000.00€</price>
-<price>Academic org. ELRA Non Member: 80000.00€</price>
-<price>Commercial org. ELRA Member: 48000.00€</price>
-<price>Academic org. ELRA Member: 48000.00€</price>
+<price>Commercial org. ELRA Non Member: 800.00€</price>
+<price>Academic org. ELRA Non Member: 800.00€</price>
+<price>Commercial org. ELRA Member: 400.00€</price>
+<price>Academic org. ELRA Member: 400.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-01-23</availabilityStartDate>
+<availabilityStartDate>2000-12-15</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
-<mediaType>text</mediaType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
@@ -68,12 +67,8 @@
 <languageId>fre/fra</languageId>
 <languageName>French</languageName>
 </languageInfo>
-<sizeInfo>
-<size>150</size>
-<sizeUnit>mb</sizeUnit>
-</sizeInfo>
-</lexicalConceptualResourceTextInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
 </resourceComponentType>
 </resourceInfo>

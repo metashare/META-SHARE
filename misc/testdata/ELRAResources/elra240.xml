@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">BITS Logatome Synthesis Corpus – BITS-LG</resourceName>
-<resourceName lang="French">Corpus de synthèse de logatomes BITS-LG</resourceName>
-<description lang="English">BITS stands for "BAS Infrastructures for Technical Speech Processing" and was funded by the German Ministry of Science and Education during 2003-2005. The BITS synthesis corpus consists of two parts: a set of logatome recordings for controlled diphone synthesis (ELRA-S0217) and a set of sentence recordings for unit selection techniques (ELRA-S0224).This corpus contains 11,036 recordings of logatomes spoken by 4 professional German speakers covering all German diphone combinations as well as the most prominent combination German - French – English (each speaker had at least foreign language competence in English).The data is stored on 4 DVDs. Each DVD contains the recordings, the annotation files and the meta data files of one of the four professional speakers, and the entire corpus' documentation. Each speaker was recorded in an insulated room with low reverberation.  Each logatome was recorded in three channels: close microphone, large membrane microphone and laryngographic signal. All diphones are segmented and labelled into phonemic units. Total number of recordings: 11036Total duration: 187 minutesFormat: WAV 48 kHz, 16 bit, Praat TextGrid, BAS Partitur Format (BPF)Segmentation: extended German SAM-PA</description>
-<description lang="French">BITS ("BAS Infrastructures for Technical Speech Processing" - Infrastructures BAS pour le traitement de la parole technique) a été financé par le ministère allemand des sciences et de l’éducation entre 2003 et 2005. Le corpus de synthèse BITS est constitué de deux parties : un ensemble d’enregistrements de logatomes pour la synthèse de diphones contrôlés (ELRA-S0217) et un ensemble d’enregistrements de phrases pour les techniques de sélection d’unités (ELRA-S0224).Ce corpus comprend 11 036 enregistrements de logatomes prononcés par 4 locuteurs professionnels allemands et couvre toutes les combinaisons de diphones allemands, ainsi que les combinaisons allemand - français - anglais les plus importantes (chaque locuteur a au moins des connaissances de l’anglais en tant que langue étrangère).Les données sont fournies sur 4 DVD. Chaque DVD contient les enregistrements, les fichiers d’annotation et les fichiers de méta-données pour un locuteur, ainsi que la documentation complète du corpus. Chaque locuteur a été enregistré dans une salle isolée avec une réverbération basse.  Chaque logatome a été enregistré sur 3 canaux : un micro-casque, un microphone à membrane large et un signal laryngographique. Tous les diphones sont segmentés et étiquetés en unités phonémiques. Nombre total d’enregistrements : 11 036Durée totale : 187 minutesFormat: WAV 48 kHz, 16 bit, Praat TextGrid, Format « Partitur » de BAS Segmentation: SAM-PA étendu à l’allemand</description>
-<resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=866</url>
-<identifier>ELRA-S0217</identifier>
+<resourceName lang="English">DixAF (Bilingual Dictionary French Arabic, Arabic French)</resourceName>
+<resourceName lang="French">DixAF (Dictionnaire bilingue français arabe, arabe français)</resourceName>
+<description lang="English">DixAF (Dictionnaire bilingue français arabe, arabe français - Bilingual Dictionary French Arabic, Arabic French) is a joint ownership of CNRS/ENS lettres et sciences humaines. It was developed by Mr Fathi Debili, a CNRS officer, and it consists of around 125,000 binary links between ca. 43,800 French entries and ca. 35,000 Arabic entries. This dictionary is available as in Access format. The majority of Arabic words are voweled. A number of grammatical categories are indicated (names, adjectives, verbs, adverbs, pronouns, prepositions, etc.). This dictionary may be used for applications such as bilingual French-Arabic, Arabic-French indexing, translation, information retrieval, etc.</description>
+<description lang="French">Le DixAF (Dictionnaire bilingue français arabe, arabe français), copropriété CNRS/ENS lettres et sciences humaines développé par Monsieur Fathi Debili, agent CNRS, est constitué de près de 125 000 liens binaires établis entre 43 800 entrées françaises environ et près de 35 000 entrées arabes. Il est disponible sous format Access. Les mots arabes sont majoritairement voyellés. Un certain nombre de catégories grammaticales sont également indiquées (noms, adjectifs, verbes, adverbes, pronoms, prépositions, etc.) Ce dictionnaire peut être utilisé pour des applications d'indexation bilingue français-arabe arabe-français, de traduction, d'interrogation bilingue, etc.</description>
+<resourceShortName>DixAF</resourceShortName>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=698</url>
+<identifier>ELRA-M0040</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,60 +29,51 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<revision>15.03.06 : Version 1.027.04.06 : Version 1.1 : Documentation re-worked, BAS Partitur Format files added</revision>
-<lastDateUpdated>2006-09-04</lastDateUpdated>
+<lastDateUpdated>2005-03-31</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 9000.00€</price>
-<price>Academic org. ELRA Non Member: 754.35€</price>
-<price>Commercial org. ELRA Member: 4627.17€</price>
-<price>Academic org. ELRA Member: 627.17€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2006-06-19</availabilityStartDate>
+<price>Commercial org. ELRA Member: 35000.00€</price>
+<price>Academic org. ELRA Member: 15000.00€</price>
+<price>Academic org. ELRA Non Member: 18000.00€</price>
+<price>Commercial org. ELRA Non Member: 41000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2004-01-20</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 9000.00€</price>
-<price>Academic org. ELRA Non Member: 9000.00€</price>
-<price>Commercial org. ELRA Member: 4627.17€</price>
-<price>Academic org. ELRA Member: 4627.17€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2006-06-19</availabilityStartDate>
+<price>Commercial org. ELRA Member: 35000.00€</price>
+<price>Academic org. ELRA Member: 35000.00€</price>
+<price>Academic org. ELRA Non Member: 41000.00€</price>
+<price>Commercial org. ELRA Non Member: 41000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2004-01-20</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>BITS (BAS Infrastructures for Technical Speech Processing)</projectName>
-<fundingType>nationalFunds</fundingType>
-</fundingProject>
-<creationEndDate>2006-01-01</creationEndDate>
-</resourceCreationInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>ger/deu</languageId>
-<languageName>German</languageName>
+<languageId>ara</languageId>
+<languageName>Arabic</languageName>
 </languageInfo>
-<audioSizeInfo>
-<sizeInfo>
-<size>187</size>
-<sizeUnit>minutes</sizeUnit>
-</sizeInfo>
-</audioSizeInfo>
-</corpusAudioInfo>
-</corpusMediaType>
-</corpusInfo>
+<languageInfo>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
+</languageInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

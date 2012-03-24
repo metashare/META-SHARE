@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Italian Syntactic-Semantic Treebank (ISST)</resourceName>
-<resourceName lang="French">Treebank italien syntaxique et sémantique (ISST)</resourceName>
-<description lang="English">ISST comprises 89,941 tokens for the financial-domain part and 215,606 tokens for the general part. It is formatted in XML.ISST has a five-level structure covering orthographic, morpho-syntactic, syntactic and semantic levels of linguistic description. Syntactic annotation is distributed over two different levels: the constituent structure level and the functional relations level. The fifth level deals with lexico-semantic annotation, which is carried out in terms of sense tagging of lexical heads (nouns, verbs and adjectives) augmented with other types of semantic information: ItalWordNet (see ELRA-M0018) is the reference lexical resource used for the sense tagging task. Both syntactic and lexico-semantic annotations refer to the morpho-syntactically annotated text, which in turn is linked to the orthographic file with the text and mark-up of macrotextual organisation (e.g. titles, subtitles, summary, body of article, paragraphs).The multi-level structure of ISST shows two main novelties with respect to other treebanks:1) while most treebanks are restricted to syntactic annotation only, ISST includes both syntactic and semantic annotation levels. In this way, the prerequisites are set up for corpus-based investigations on the syntax-semantics interface: the linking of the syntactic and semantic annotation layers permits, for instance, the identification of specific subcategorisation properties associated with a specific word sense, or of the semantic types associated with the functional positions of a given predicate; 2) the other innovative aspect of ISST concerns the distributed approach to syntactic annotation. In this respect, ISST differs from most treebanks which adopt a unique syntactic representation layer. ISST also differs from multi-level treebanks like the Prague Dependency Treebank (PTD): whereas PTD annotation levels refer respectively to a) the surface dependency relations and b) the underlying sentence structure, ISST syntactic annotation levels are intended to provide orthogonal views of the same surface syntax.The adopted morpho-syntactic annotation scheme conforms to the EAGLES international standard.ISST constituency annotation departs from other constituency-based syntactic annotation schemes (e.g. the one adopted in the Penn Treebank) in a number of respects, mainly due to the distributed organisation of syntactic annotation: annotation at this level consists in the identification of phrase boundaries with labelling of constituent types; due to the fact that functional relations are handled at a distinct level, ISST tree structures are shallow.The ISST functional annotation scheme is based on FAME (Lenci et al. 1999, 2000) whose main features can be summarised as follows: a) hierarchical organisation of functional relations which makes provision for underspecified representations of highly ambiguous functional analyses; b) modular coding architecture which is articulated over different information layers, each factoring out different but possibly interrelated linguistic facets of syntactic annotation. FAME originated as a revision of a de facto standard, i.e. the functional annotation scheme developed in the framework of the LE-2111 SPARKLE project, revision which was first done for better complying with the basic requirements of parsing evaluation (in the framework of the LE-8340 ELSE project), and then for making the scheme suitable for annotation of unrestricted Italian texts.References:Lenci A., Montemagni S., Pirrelli V., Soria C., FAME: a Functional Annotation Meta-scheme for Multimodal and Multi-lingual Parsing Evaluation, in Proceedings of the ACL99 Workshop on Computer-Mediated Language Assessment and Evaluation in NLP, University of Maryland, June 22nd 1999. Lenci A., Montemagni S., Pirrelli V., Soria C., Where opposites meet. A Syntactic Meta-scheme for Corpus Annotation and Parsing Evaluation, in Proceedings of LREC-2000, 31/5-2/6 2000, Athens, 625-632.Articles describing ISST:Simonetta Montemagni, Francesco Barsotti, Marco Battista, Nicoletta Calzolari, Ornella Corazzari, Alessandro Lenci, Antonio Zampolli, Francesca Fanciulli, Maria Massetani, Remo Raffaelli, Roberto Basili, Maria Teresa Pazienza, Dario Saracino, Fabio Zanzotto, Nadia Mana, Fabio Pianesi, Rodolfo Delmonte, “Building the Italian Syntactic-Semantic Treebank”, in Anne Abeillé (ed.), Building and using Parsed Corpora, Language and Speech series, Kluwer, Dordrecht, pp. 189-210.Simonetta Montemagni, Francesco Barsotti, Marco Battista, Nicoletta Calzolari, Ornella Corazzari, Alessandro Lenci, Vito Pirrelli, Antonio Zampolli, Francesca Fanciulli, Maria Massetani, Remo Raffaelli, Roberto Basili, Maria Teresa Pazienza, Dario Saracino, Fabio Zanzotto, Nadia Mana, Fabio Pianesi, Rodolfo Delmonte, 2003, “The syntactic-semantic treebank of Italian. An overview”, Linguistica Computazionale XVI-XVII, pp. 461-492</description>
-<description lang="French">L’ISST comprend 89 941 entrées pour la partie domaine financier et 215 606 entrées pour la partie généralet. Il est formaté en XML.L’ISST se présente sous la forme d’une structure de description linguistique à cinq niveaux: orthographique, morpho-syntaxique, syntaxique, sémantique et lexico-sémantique. L’annotation syntaxique est distribuée sur deux niveaux différents : le niveau de structure en constituants et le niveau de relations fonctionnelles. Le cinquième niveau concerner l’annotation lexico-sémantique, qui est élaborée en termes d’étiquetage du sens des têtes lexicales (noms, verbes et adjectifs) augmentées d’autres types d’information sémantique : l’ItalWordNet (see ELRA-M0018) constitue la ressource de lexicale de référence pour la tâche d’étiquetage du sens. Les annotations syntaxiques et lexico-sémantiques réfèrent au texte annoté au niveau morpho-syntaxique, qui lui-même est relié au fichier orthographique avec le texte et le balisage de l’organisation macro-textuelle (par exemple, les titres, sous-titres, résumés, corps de l’article, paragraphes).La structure multi-niveaux de l’ISST révèle deux nouveautés principales par rapport à d’autres treebanks :1) alors que la plupart des treebanks sont restreints uniquement à une annotation syntaxique, l’ISST inclut à la fois des niveaux d’annotation syntaxique et sémantique. De cette façon, les pré-requis sont instaurés pour des études sur l’interface syntactico-sémantique basées sur des corpus : la mise en relation des niveaux d’annotation syntaxique et sémantique permet, par exemple, l’identification de propriétés de sous-catégorisation spécifiques associées à un sens spécifique au mot, ou l’identification de types sémantiques associés à des positions fonctionnelles d’un prédicat donné ;2) l’autre aspect innovant de l’ISST concerne l’approche distribuée de l’annotation syntaxique. A cet égard, l’ISST diffère de la plupart des treebanks qui adoptent un niveau de représentation syntaxique unique. L’ISST diffère également des treebanks multi-niveaux tels que le Treebank de dépendance de Prague: alors que les niveaux d’annotation de ce treebank réfèrent respectivement a) aux relations de dépendance de surface et b) à la structure de phrase sous-jacente, les niveaux d’annotation syntaxiques de l’ISST ont pour but de fournir des vues orthogonales de la même syntaxe de surface.Le schéma d’annotation morpho-syntaxique adopté est conforme au standard international EAGLES. L’annotation en constituants de l’ISST est basé à plusieurs respects sur d’autres schémas d’annotation syntaxique basés sur les constituants (par exemple, celui adopté dans le Penn Treebank), ce qui est principalement dû à l’organisation distribuée de l’annotation syntaxique : l’annotation à ce niveau consiste en l’identification des limites de la phrase par l’étiquetage des types de constituants ; les structures arborées de l’ISST sont peu profondes du fait que les relations fonctionnelles sont gérées à un niveau distinct.Le schéma d’annotation fonctionnelle de l’ISST est basé sur celui de FAME (Lenci et al. 1999, 2000), dont les principales caractéristiques peuvent être résumées comme suit : a) une organisation hiérarchique des relations fonctionnelles qui répond au besoin des représentations sous-spécifiées d’analyses fonctionnelles fortement ambiguës ; b) une architecture de codage modulaire qui s’articule autour de différents niveaux d’information, prenant en compte des facettes linguistiques d’annotation syntaxique différentes mais étroitement liées. FAME est à l’origine d’une révision d’un standard de facto, c’est-à-dire le schéma d’annotation fonctionnelle développé dans le cadre du projet LE-2111 SPARKLE, révision qui a été la première réalisée pour un meilleur respect des besoins d’évaluation de l’analyse syntaxique (dans le cadre du projet LE-8340 ELSE), et ensuite pour réaliser le schma pour l’annotation de textes italiens non restreints.Références:Lenci A., Montemagni S., Pirrelli V., Soria C., FAME: a Functional Annotation Meta-scheme for Multimodal and Multi-lingual Parsing Evaluation, in Proceedings of the ACL99 Workshop on Computer-Mediated Language Assessment and Evaluation in NLP, Université de Maryland, 22 juin  1999. Lenci A., Montemagni S., Pirrelli V., Soria C., Where opposites meet. A Syntactic Meta-scheme for Corpus Annotation and Parsing Evaluation, in Proceedings of LREC-2000, 31/5-2/6 2000, Athènes, 625-632.Articles décrivant l’ISST:Simonetta Montemagni, Francesco Barsotti, Marco Battista, Nicoletta Calzolari, Ornella Corazzari, Alessandro Lenci, Antonio Zampolli, Francesca Fanciulli, Maria Massetani, Remo Raffaelli, Roberto Basili, Maria Teresa Pazienza, Dario Saracino, Fabio Zanzotto, Nadia Mana, Fabio Pianesi, Rodolfo Delmonte, “Building the Italian Syntactic-Semantic Treebank”, in Anne Abeillé (ed.), Building and using Parsed Corpora, Language and Speech series, Kluwer, Dordrecht, pp. 189-210.Simonetta Montemagni, Francesco Barsotti, Marco Battista, Nicoletta Calzolari, Ornella Corazzari, Alessandro Lenci, Vito Pirrelli, Antonio Zampolli, Francesca Fanciulli, Maria Massetani, Remo Raffaelli, Roberto Basili, Maria Teresa Pazienza, Dario Saracino, Fabio Zanzotto, Nadia Mana, Fabio Pianesi, Rodolfo Delmonte, 2003, “The syntactic-semantic treebank of Italian. An overview”, Linguistica Computazionale XVI-XVII, pp. 461-492</description>
+<resourceName lang="English">VERBA Polytechnic and Plurilingual Terminological Database - N-LA Trade, General Topics</resourceName>
+<resourceName lang="French">Base de données terminologique polytechnique et plurilingue VERBA - N-LA Commerce - général</resourceName>
+<description lang="English">* Entries for English-Spanish: Scientific research &amp; mathematical sciences (906 entries), Geosciences (10,215), Computer science, electronics &amp; telecommunications (70,580), Industry (47,578), Transport &amp; Maintenance (12,291), Economy (145,572), Biological sciences (38,989), Communication &amp; media (8,143), Chemical &amp; physical sciences (27,467). * Entries for English-French-German-Spanish: Environment (36,658), Health (66,727), Agriculture &amp; food (25,975), Construction &amp; public works (8,429), Law &amp; policy (56,578), Sports &amp; Leisure (17,312) * Two specialized lexicons: Spanish-English and English-French-German without domain codes: electronics, telematics, law, taxes, customs, etc. (550,000 entries). * Two general lexicons: Spanish-English-French-German and Spanish-English-French-German-Portuguese-Italian (83,000 entries).This terminological database contains, for each domain, a sub-domain indication is given (from 2 sub-domains for Scientific research to 39 for Sports &amp; leisure). Each entry consists of a definition, phraseological unit, abbreviation, usage information, grammatical labels. Format: ASCIIMedium: floppy disk</description>
+<description lang="French">* Entrées anglais-espagnol : Recherche scientifique &amp; sciences mathématiques (906 entrées), géosciences (10 215), informatique, électronique &amp; télécommunications (70 580), industrie (47 578), transports &amp; maintenance (12 291), économie (145 572), sciences biologiques (38 989), communication &amp; média (8 143), sciences chimiques &amp; physiques (27 467).* Entrées allemand-anglais-espagnol-français : Environnement (36 658), santé (66 727), agriculture &amp; alimentation (25 975), construction &amp; travaux publics (8 429), droit &amp; politique (56 578), sports &amp; loisirs (17 312).* Deux lexiques spécialisés: Espagnol-anglais et allemand-anglais-français sans codes de domaine : électronique, télématique, droit, taxes, douanes, etc. (550 000 entrées).* Deux lexiques généraux: Allemand-anglais-espagnol-français et allemand-anglais-espagnol-français-italien-portugais. (83 000 entrées).Cette base de données terminologique contient, pour chaque domaine, l'indication de sous-domaines (de 2 sous-domaines pour la recherche scientifique à 39 pour les sports et loisirs). Chaque entrée comporte une définition, une unité phraséologique, une abréviation, une information sur l'usage et des étiquettes grammaticales.Format: ASCIISupport : disquette</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=887</url>
-<identifier>ELRA-W0044</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=345</url>
+<identifier>ELRA-T0270</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,57 +29,46 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<revision>Last update: 12/2003</revision>
-<lastDateUpdated>2006-09-18</lastDateUpdated>
+<lastDateUpdated>2006-09-27</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
-<licence>ELRA_END_USER</licence>
-<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 2500.00€</price>
-<price>Academic org. ELRA Non Member: 150.00€</price>
-<price>Commercial org. ELRA Member: 1500.00€</price>
-<price>Academic org. ELRA Member: 100.00€</price>
-<availabilityStartDate>2006-09-18</availabilityStartDate>
-</licenceInfo>
-<licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 2500.00€</price>
-<price>Academic org. ELRA Non Member: 2500.00€</price>
-<price>Commercial org. ELRA Member: 1500.00€</price>
-<price>Academic org. ELRA Member: 1500.00€</price>
-<availabilityStartDate>2006-09-18</availabilityStartDate>
+<price>Commercial org. ELRA Member: 0.70€</price>
+<price>Commercial org. ELRA Non Member: 1.00€</price>
+<availabilityStartDate>1997-04-11</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<usageInfo>
-<actualUseInfo>
-<actualUse>nlpApplications</actualUse>
-<useNLPSpecific>textMining</useNLPSpecific>
-</actualUseInfo>
-</usageInfo>
-<resourceCreationInfo>
-<creationEndDate>2001-01-01</creationEndDate>
-</resourceCreationInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusTextInfo>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>terminologicalResource</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
 <mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>ita</languageId>
-<languageName>Italian</languageName>
+<languageId>eng</languageId>
+<languageName>English</languageName>
 </languageInfo>
-<textFormatInfo>
-<mimeType>Plain text</mimeType>
-</textFormatInfo>
-</corpusTextInfo>
-</corpusMediaType>
-</corpusInfo>
+<languageInfo>
+<languageId>spa</languageId>
+<languageName>Spanish</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Castilian</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
+</languageInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

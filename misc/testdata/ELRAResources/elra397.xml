@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Basque WordNet</resourceName>
-<resourceName lang="French">WordNet Basque</resourceName>
-<description lang="English">The Basque WordNet is a lexical database including information about Basque words. It is an extension of WordNet 1.6, a lexical database for English developed at the Princeton University. The Basque WordNet is tightly aligned to the English WordNet. The Basque WordNet models nouns, verbs and adjectives. Each sense is linked to a so-called synset. Every synset encodes the synonymy relation between (possibly) several words (synonyms), having a unique meaning, belonging to one and the same part of speech (specified in the POS tag value), and expressing the same lexical meaning. Each synset is related to the corresponding synset in the English WordNet 1.6. via its identification number ID, which includes the synset number and the POS tag. The only exceptions are newly created synsets to account for cultural concepts not present in WordNet 1.6.The Basque WordNet is provided following the Lexical Markup Framework (LMF, ISO/TC37) and it contains the following: •	set of variants or synonyms making up the synset; •	part-of-speech; •	language-internal relations to other synsets; •	a unique-id linking the Basque synsets to the English Wordnet 1.6;•	glosses and examples for a subset of the synsets•	mappings to WordNet domains, Sumo and Basic ConceptsLMF can be imported directly in the DebVisDic tool for browsing and editing wordnets (not included). Figures for the Basque WordNet are distributed as follows :- 30,281 Synsets: 26,708 nouns, 3,455 verbs, 118 adjectives- 49,688 Variants: 40,042 nouns, 9,491 verbs, 155 adjectives- 26,727 Lemma + pos: 23,176 nouns, 3,494 verbs, 57 adjectives- 1.66 Synonym per synset: 1.52 nouns, 2.74 verbs, 1.21 adjectives- 1.86 Senses per lemma+pos: 1.73 nouns, 2.72 verbs, 2.72 adjectives- 94,482 InternalRelations: 74,857 nouns, 19,492 verbs, 133 adjectives- 2,323 Definitions (nouns only)- 35,346 WordNet Domains mappings: 31,631 nouns, 3,590 verbs, 125 adjectives- 30,018 Sumo mappings: 26,446 nouns, 3,454 verbs, 118 adjectives- 1,138 Basic Concepts: 740 nouns, 398 verbs</description>
-<description lang="French">Le WordNet Basque est une base de données lexicale comprenant des informations sur les mots de la langue basque. C’est une extension du WordNet 1.6, une base de données lexicale pour l’anglais développée à l’université de Princeton. Le WordNet Basque est en grande partie aligné avec le WordNet anglais. Le WordNet Basque modélise les noms, verbes et adjectifs. Chaque sens est relié à un ensemble appelé synset. Chaque synset contient le codage de la relation synonymique entre plusieurs (autant que possible) mots (synonymes), ayant une signification unique, qui appartiennent à une ou à la même partie du discours (spécifié dans la valeur d’étiquette de la partie du discours), et exprimant la même signification lexicale. Chaque synset est relié au synset correspondent du WordNet anglais 1.6. via un numéro d’identifiant ID, qui inclut le numéro du synset et l’étiquette de la partie du discours. Les seules exceptions sont les synsets nouvellement créés pour prendre en compte les concepts culturels absents dans le WordNet 1.6.Le WordNet Basque est fourni dans le format Lexical Markup Framework (LMF, ISO/TC37) et contient les informations suivantes: •	un ensemble de variantes ou synonymes formant le synset; •	la partie du discours;•	des relations à d’autres synsets internes à la langue; •	un identifiant unique reliant le synset au WordNet anglais 1.6.•	des gloses et exemples pour un sous-ensemble des synsets•	des mises en correspondance avec les domaines WordNet, Sumo et les Concepts de baseLMF peut être importé directement dans l’outil DebVisDic pour naviguer et éditer des wordnets (non inclus). Les chiffres du WordNet Basque sont répartis comme suit:- 30,281 Synsets: 26,708 noms, 3,455 verbes, 118 adjectifs- 49,688 Variantes: 40,042 noms, 9,491 verbes, 155 adjectifs- 26,727 Lemmes + partie du discours: 23,176 noms, 3,494 verbes, 57 adjectifs- 1.66 Synonymes par synset: 1.52 noms, 2.74 verbes, 1.21 adjectifs- 1.86 Sens par lemme + partie du discours: 1.73 noms, 2.72 verbes, 2.72 adjectifs- 94,482 Relations internes: 74,857 noms, 19,492 verbes, 133 adjectifs- 2,323 Définitions (noms uniquement)- 35,346 Correspondances avec les domaines WordNet: 31,631 noms, 3,590 verbes, 125 adjectifs- 30,018 Correspondances Sumo: 26,446 noms, 3,454 verbes, 118 adjectifs- 1,138 Concepts de base: 740 noms, 398 verbes</description>
+<resourceName lang="English">FIXED0IT - DB1</resourceName>
+<resourceName lang="French">FIXED0IT - DB1</resourceName>
+<description lang="English">DB1 Phonetically rich sentences &amp; application oriented utterancesThe Italian Fixed Network Speech SpeechDat(M) Corpus version 1.0 was recorded within the scope of the SpeechDat(M) project (LRE-63314), funded by the European Commission. Recording was done by using a primary rate ISDN interface, yielding 8 kHz, 8 bits per sample, A-law coded signal. The data files are formatted according to the SAM European project. The speech data are compressed with the GNU gzip program. All software needed to use the corpus is provided on the CDs.The corpus contains the speech of about 1,000 speakers (about 500 males and 500 females) and was designed to support the creation of voice-driven teleservices. The callers spoke at least 39 items, comprising:    * isolated and connected digits    * natural numbers    * money amounts    * spelled words    * time and date phrases    * yes/no questions    * city names    * common application words    * application words in phrases    * phonetically rich sentencesMost items are read, some are spontaneously spoken.The recordings come with extensive and standardised documentation. All speech is carefully transcribed at the orthographic level; in addition, a number of clearly audible non-speech events are included in the transcription. Moreover, age and regional background of the speakers are provided. A pronunciation dictionary is added, containing all words that occur in the corpus, with a corresponding SAMPA broad-class phonemic transcription.Validation and premastering of the CD-ROMs were performed by the Speech Processing Expertise Centre (SPEX), Leidschendam, The Netherlands.DB2 Phonetically rich sentences sub-set (S0053)See ELRA-S0052 for description. DB2 is a sub-set of DB1; it contains only the phonetically rich sentences items</description>
+<description lang="French">La version 1.0 du corpus de parole italien sur réseau fixe a été enregistrée dans le cadre du projet SpeechDat(M) (LRE-63314), soutenu par la Commission Européenne. L'enregistrement a été réalisé en utilisant une interface numéris (ISDN), avec une fréquence d'échantillonnage de 8 kHz, de 8 bits par échantillon et un signal codé en loi-A. Les données ont été formatées d'après les standards du projet européen SAM. Les données sont compressées par le programme GNU gzip. Les logiciels nécessaires à la bonne utilisation du corpus sont fournis avec les données sur les CD.Le corpus contient des enregistrements d'environ 1000 locuteurs (500 hommes et 500 femmes). Il a pour but d'aider à la réalisation de services télématiques vocaux. Chaque locuteur a prononcé plus de 39 éléments, dont :    * chiffres isolés et connectés,    * nombres entiers naturels,    * montants,    * mots épelés,    * dates et phrases comportant une notion de temps,    * questions oui/non,    * noms de villes,    * mots de commande courants    * mots de commandes inclus dans des phrases,    * phrases phonétiquement riches.La plupart de ces éléments sont lus, certains sont spontanés.Les enregistrements sont fournis avec une documentation complète selon les standards SpeechDat(M). L'intégralité des enregistrements a été soigneusement transcrite au niveau orthographique ; de même, un certain nombre d'événements acoustiques clairement audibles sont inclus dans la transcription. L'âge et l'origine régionale des locuteurs sont également fournis. Un dictionnaire de prononciation est inclus dans les CD. Celui-ci contient tous les mots apparaissant dans le corpus, avec une transcription phonémique correspondante (utilisation de SAMPA).La validation et la préparation des CD-ROM ont été réalisées par SPEX, Leidschendam, Pays-Bas.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1099</url>
-<identifier>ELRA-M0049</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=185</url>
+<identifier>ELRA-S0052</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,47 +29,52 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2010-06-18</lastDateUpdated>
+<lastDateUpdated>2007-02-22</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 6000.00€</price>
-<price>Academic org. ELRA Non Member: 600.00€</price>
-<price>Commercial org. ELRA Member: 3000.00€</price>
-<price>Academic org. ELRA Member: 300.00€</price>
+<price>Commercial org. ELRA Non Member: 20000.00€</price>
+<price>Academic org. ELRA Non Member: 20000.00€</price>
+<price>Commercial org. ELRA Member: 14000.00€</price>
+<price>Academic org. ELRA Member: 11000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2009-05-20</availabilityStartDate>
+<availabilityStartDate>1998-07-08</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 9000.00€</price>
-<price>Academic org. ELRA Non Member: 9000.00€</price>
-<price>Commercial org. ELRA Member: 4500.00€</price>
-<price>Academic org. ELRA Member: 4500.00€</price>
+<price>Commercial org. ELRA Non Member: 20000.00€</price>
+<price>Academic org. ELRA Non Member: 20000.00€</price>
+<price>Commercial org. ELRA Member: 14000.00€</price>
+<price>Academic org. ELRA Member: 14000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2009-05-20</availabilityStartDate>
+<availabilityStartDate>1998-07-08</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>SpeechDat(M)</projectName>
+<fundingType>euFunds</fundingType>
+</fundingProject>
+</resourceCreationInfo>
 <resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
-<mediaType>text</mediaType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>baq/eus</languageId>
-<languageName>Basque</languageName>
+<languageId>ita</languageId>
+<languageName>Italian</languageName>
 </languageInfo>
-</lexicalConceptualResourceTextInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
 </resourceComponentType>
 </resourceInfo>

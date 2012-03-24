@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Czech Audio-Visual Speech Corpus for Recognition with Impaired Conditions</resourceName>
-<resourceName lang="French">Corpus tchèque audio-visuel pour la reconnaissance en conditions difficiles</resourceName>
-<description lang="English">This is an audio-visual speech database for training and testing of Czech audio-visual continuous speech recognition systems collected with impaired illumination conditions. The corpus consists of about 20 hours of audio-visual records of 50 speakers in laboratory conditions. Recorded subjects were instructed to remain static. The illumination varied and chunks of each speaker were recorded with several different conditions, such as full illumination, or illumination from one side (left or right) only. These conditions make the database usable for training lip-/head-tracking systems under various illumination conditions independently of the language. Speakers were asked to read 200 sentences each (50 common for all speakers and 150 specific to each speaker). The average total length of recording per speaker was 23 minutes.Acoustic data are stored in wave files using PCM format, sampling frequency 44kHz, resolution 16 bits. Each speaker’s acoustic data set represents about 180 MB of disk space (about 8.8 GB).Visual data are stored in video files (.avi format) using the digital video (DV) codec. Visual data per speaker take about 3.7 GB of disk (about 185 GB as a whole) and are stored on an IDE hard disk (NTFS format).</description>
-<description lang="French">Cette base de données audio-visuelle a été constituée pour entraîner et tester les systèmes de reconnaissance audio-visuelle en langue tchèque et a été collectée en conditions d’éclairage difficile. Le corpus comprend environ 20 heures d’enregistrements audio-visuels de 50 locuteurs en conditions de laboratoire. On a demandé aux sujets enregistrés de rester en position statique. L’éclairage est varié et les sessions de chaque locuteur ont été enregistrées dans plusieurs conditions différentes, telles qu’en éclairage total ou seulement en éclairage de côté (gauche ou droite). Ces conditions rendent cette base de données utilisable pour l’entraînement de systèmes de détection des mouvements de lèvres ou de tête dans différentes conditions d’éclairage et indépendamment de la langue.On a demandé aux locuteurs de lire 200 phrases chacun (50 en commun pour tous les locuteurs et 150 spécifiques à chaque locuteur). La durée moyenne totale d’enregistrement par locuteur est de 23 minutes.Les données acoustiques ont été stockées en fichiers wave en utilisant le format PCM, une fréquence d’échantillonnage de 44kHz et une résolution de 16 bits. Un ensemble de données acoustiques pour chaque locuteur représente environ 180 Mo d’espace-disque (environ 8,8 Go en totalité).Les données visuelles sont stockées en fichiers vidéo (format .avi) utilisant le codec vidéo numérique DV. Les données visuelles par locuteur prennent environ 3,7 Go de disque (environ 185 Go en totalité) et sont stockées sur un disque dur IDE au format NTFS.</description>
-<resourceShortName>UWB-07-ICAVR I</resourceShortName>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1082</url>
-<identifier>ELRA-S0284</identifier>
+<resourceName lang="English">Swedish SpeechDat(II) FDB-5000</resourceName>
+<resourceName lang="French">Base de données SpeechDat(II) FDB-5000 du suédois</resourceName>
+<description lang="English">The Swedish SpeechDat(II) FDB-5000 database contains the recordings of 5,000 Swedish speakers (2470 males, 2530 females), recorded over the Swedish fixed telephone network. This database is partitioned into 25 CDs, which comprise 200 speakers sessions each.This speech database was validated by SPEX (the Netherlands) to assess its compliance with the SpeechDat format and content specifications.Speech samples are stored as sequences of 8-bit 8 kHz A-law. Each prompted utterance is stored in a separate file. Each signal file is accompanied by an ASCII SAM label file which contains the relevant descriptive information.Each speaker uttered the following items:    * 3 application words    * 1 sequence of 10 isolated digits    * 4 connected digits (1 sheet number –5/10 digits, 1 telephone number –9/11 digits, 1 credit card number -16 digits), 1 PIN code -6 digits)    * 3 dates (1 spontaneous date e.g. birthday, 1 prompted date, 1 relative and general date expression)    * 1 word spotting phrase using an embedded application word    * 1 isolated digit    * 3 spelled words (1 spontaneous e.g. own forename, 1 spelling of directory city name, 1 real word for coverage)    * 1 currency money amount    * 1 natural number    * 5 directory assistance names (1 spontaneous e.g. own forename, 1 spontaneous city of school at 7 years, 1 most frequent cities out of a set of 500, 1 most frequent company/agency out of a set of 500 names, 1 "forename surname" out of a set of 500 names)    * 2 yes/no questions (1 predominantly "yes" question, 1 predominantly "no" question)    * 9 phonetically rich sentences    * 2 time phrases (1 spontaneous time of day, 1 word style time phrase)    * 4 phonetically rich wordsThe database also contains sentences uttered by all speakers for speaker verification purposes and dialectal studies:    * Sentences for speaker verification purposes, same for all speakers (Additional material for speaker verification and dialectal coverage: X1 - X8)    * Connected digits strings (3-6 digits) for speaker verification purposes    * Sentences for dialectal studies, same for all speakersThe following age distribution has been obtained: 315 speakers are under 16, 2095 speakers are between 16 and 30, 1080 speakers are between 31 and 45, 1078 speakers are between 46 and 60, and 432 speakers are over 60.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
+<description lang="French">La base de données SpeechDat(II) FDB-5000 du suédois contient 5000 locuteurs suédois (2470 hommes, 2530 femmes) enregistrés à travers le réseau téléphonique fixe suédois. Cette base est répartie sur 25 CD-ROM, chacun comprenant 200 sessions. Les bases de données SpeechDat(II) ont été réalisées selon les spécifications du projet SpeechDat(II) et validées par SPEX, Pays-Bas.Les fichiers de parole sont stockés en séquences d'échantillons de 8 bits, 8 kHz, loi-A. Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM.Chaque locuteur a prononcé les éléments suivants :    * 3 mots de commande ;    * 1 séquence de 10 chiffres isolés ;    * 4 nombres : 1 numéro permettant d'identifier la feuille de prompt (5-10 chiffres), 1 numéro de téléphone (9-11 chiffres), 1 numéro de carte de crédit (16 chiffres), 1 code confidentiel (6 chiffres) ;    * 3 dates : 1 date spontanée (date de naissance), 1 date lue, 1 date relative et générale ;    * 1 expression utilisant un mot de commande ;    * 1 chiffre isolé ;    * 3 mots épelés : 1 spontané (prénom), 1 nom de ville provenant d'un annuaire de renseignements téléphoniques, 1 mot réel pour couverture ;    * 1 montant en devises ;    * 1 nombre naturel ;    * 5 noms provenant d'un annuaire de renseignements téléphoniques : 1 spontané (prénom), 1 nom de ville de l'école du locuteur à 7 ans (spontané), 1 nom de ville parmi les plus courantes (sur 500 noms), 1 nom de compagnie/société (sur 500 noms), 1 "prénom nom" (sur 500 noms) ;    * questions oui/non : 1 question à prédominance "oui", 1 question à prédominance "non" ;    * 9 phrases phonétiquement riches ;    * 2 phrases comportant une notion de temps : 1 jour (spontané), 1 phrase comportant une notion de temps) ;    * 4 mots phonétiquement riches.Cette base de données contient également des phrases enregistrées en vue de la vérification du locuteur et d'études dialectales. Tous les locuteurs ont prononcé 8 phrases identiques, ainsi que les mêmes séries de chiffres connectés (composés de 3 à 6 chiffres).Les classes d'âge sont réparties comme suit : 315 locuteurs de moins de 16 ans, 2095 locuteurs entre 16 et 30 ans, 1080 locuteurs entre 31 et 45 ans, 1078 locuteurs entre 46 et 60 ans et 432 locuteurs de plus de 60 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
+<resourceShortName/>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=542</url>
+<identifier>ELRA-S0069</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,35 +29,37 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2008-11-05</lastDateUpdated>
+<lastDateUpdated>2007-02-22</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 1250.00€</price>
-<price>Academic org. ELRA Non Member: 1250.00€</price>
-<price>Commercial org. ELRA Member: 650.00€</price>
-<price>Academic org. ELRA Member: 650.00€</price>
-<availabilityStartDate>2008-11-05</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 70000.00€</price>
+<price>Academic org. ELRA Non Member: 60000.00€</price>
+<price>Commercial org. ELRA Member: 50000.00€</price>
+<price>Academic org. ELRA Member: 35000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1999-07-09</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 4550.00€</price>
-<price>Academic org. ELRA Non Member: 4550.00€</price>
-<price>Commercial org. ELRA Member: 3050.00€</price>
-<price>Academic org. ELRA Member: 3050.00€</price>
-<availabilityStartDate>2008-11-05</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 70000.00€</price>
+<price>Academic org. ELRA Non Member: 70000.00€</price>
+<price>Commercial org. ELRA Member: 50000.00€</price>
+<price>Academic org. ELRA Member: 50000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1999-07-09</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<usageInfo>
-<actualUseInfo>
-<actualUse>nlpApplications</actualUse>
-<useNLPSpecific>speechRecognition</useNLPSpecific>
-</actualUseInfo>
-</usageInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>SpeechDat(II)</projectName>
+<fundingType>euFunds</fundingType>
+</fundingProject>
+</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
@@ -68,20 +70,10 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>cze/ces</languageId>
-<languageName>Czech</languageName>
+<languageId>swe</languageId>
+<languageName>Swedish</languageName>
 </languageInfo>
 </corpusAudioInfo>
-<corpusVideoInfo>
-<mediaType>video</mediaType>
-<lingualityInfo>
-<lingualityType>monolingual</lingualityType>
-</lingualityInfo>
-<languageInfo>
-<languageId>cze/ces</languageId>
-<languageName>Czech</languageName>
-</languageInfo>
-</corpusVideoInfo>
 </corpusMediaType>
 </corpusInfo>
 </resourceComponentType>

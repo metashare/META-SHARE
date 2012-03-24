@@ -6,7 +6,7 @@
 <description lang="English">This corpus contains 3,909 recordings via public phone lines (fixed network only) of 3,909 German speakers with a total of 184,240 spoken words. The contents are free monologues answering the question: "Was haben Sie in der letzten Stunde gemacht?" (What did you do within the last hour?). 25.5 hours of speech were recorded with a maximum length of 1 minute (24 seconds average) per recording. The transcription is provided in the Speechdat format. The database is conformant with the SpeechDat Exchange Format.</description>
 <description lang="French">Ce corpus comprend 3 909 enregistrements réalisés depuis des lignes téléphoniques publiques (réseau fixe uniquement) par 3 909 locuteurs allemands pour un total de 184 240 mots. La base de données consiste en des monologues libres en réponse à la question: "Was haben Sie in der letzten Stunde gemacht?" (Qu’avez-vous fait au cours de cette dernière heure?). 25,5 heures de parole ont été enregistrées, dont une minute maximum par enregistrement (24 secondes en moyenne). La transcription est fournie au format SpeechDat. La base de données est conforme au format d’échange SpeechDat.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=739</url>
 <identifier>ELRA-S0162</identifier>
 </identificationInfo>

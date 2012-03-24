@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">LC-STAR US English  phonetic lexicon</resourceName>
-<resourceName lang="French">Lexique phonétique LC-STAR anglais américain</resourceName>
-<description lang="English">The LC-STAR US English phonetic lexicon was created within the scope of the LC-STAR project (IST 2001-32216) which was sponsored by the European Commission.The lexicon comprises 102,310 words, distributed over three categories:- a set of 51,119 common word entries. This set is extracted from a corpus of more than 37 million words distributed over 6 different domains (sports/games, news, finance, culture/entertainment, consumer information, personal communications). This was done with the aim of reaching a target for each domain of at least 95% self coverage. In addition to extracting word lists from the corpus, a list of closed set (function) word classes are included in the final word list.- a set of 51,111 proper names (including person names, family names, cities, streets, companies and brand names) divided into 3 domains. Multiple word names such as New_York are kept together in all three domains, and they count as one entry. The 3 domains consist of first and last names (27,244 different entries), place names (15,564 different entries), and organisations (10,751 different entries).- and a list of 6,807 special application words translated from English terms defined by the LC-STAR consortium. This list contains: numbers, letters, abbreviations and specific vocabulary for applications controlled by voice (information retrieval, controlling of consumer devices, etc.). The lexicon is provided in XML format and includes phonetic transcriptions in SAMPA. The database is stored on 1 CD.</description>
-<description lang="French">Le lexique phonétique LC-STAR anglais américain a été créé dans le cadre du projet LC-STAR (IST 2001-32216), financé par la Commission européenne.Le lexique comprend 102 310 mots répartis en trois catégories :- Un ensemble de 51 119 mots communs. Cet ensemble a été extrait d’un corpus de plus de 20 millions de mots répartis en 6 domaines différents (sports/jeux, actualités, finances, culture/amusement, information consommateur, communications personnelles), avec pour objectif d’atteindre pour chaque domaine au moins 95% de couverture. En plus des listes de mots extraites du corpus, une liste de classes de mots en ensemble fermé (fonctions) est incluse dans la liste de mots finale.- Un ensemble de 51 111 noms propres (noms de personnes, noms de familles, villes, rues, sociétés, noms de marque) divisée en 3 domaines. Les noms comportant des mots multiples, tels que New_York, ont été conservés dans chacun des 3 domaines et comptent ainsi pour une seule entrée. Les 3 domaines sont : prénoms et noms de familles (27 244 entrées différentes), noms de lieux (15 564 entrées différentes), et organisations (10 751 entrées différentes).- Une liste de 6 807 mots d’application traduits à partir de termes anglais tels que définis par le consortium LC-STAR. Cette liste comprend des nombres, des lettres, des abréviations et du vocabulaire spécifique aux applications contrôlées par la voix (recherche d’information, contrôle des appareils de consommation, etc.). Le lexique est fourni au format XML et inclut des transcriptions phonétiques en SAMPA. La base de données est stockée sur 1 CD.</description>
+<resourceName lang="English">BioLexicon</resourceName>
+<resourceName lang="French">BioLexicon</resourceName>
+<description lang="English">BioLexicon is a large-scale English terminological resource which has been developed to address the needs emerging in text mining efforts in the biomedical domain. It contains information on:-	terminological nouns, including nominalised verbs and proper names (e.g., gene names)-	terminological adjectives-	terminological adverbs-	terminological verbs-	general English words frequently used in the biology domainExisting information on terms was integrated, augmented, complemented and linked, through processing of massive amounts of biomedical text, to yield inter alia over 2.2M lexical entries (over 3.3M semantic relations), and information on over 1.8M variants and on over 2M synonymy relations. Moreover, extensive information is provided on how verbs and nominalised verbs in the domain behave at both syntactic and semantic levels, supporting thus applications aiming at discovery of relations and events involving biological entities in text. It contains domain specific verbs (658), includes both automatically-extracted syntactic subcategorization frames (1710), as well as semantic event frames (850) that are based on corpus annotation by domain experts.This comprehensive coverage of biological terms makes BioLexicon a unique linguistic resource within the domain. It is primarily intended to support text mining and information retrieval in the biomedical domain, however its standards-based structure and rich content make it a valuable resource for many other kinds of application.In the first stage of the construction of BioLexicon, potential terms were pooled together from several resources representing selected semantic types of entities, such as genes and proteins, chemical compounds, species, enzymes, as well as various entities found in biological ontologies. Terms were then organized into sets of synonymous variants and annotated with a number of static features which improve the resolution of term ambiguity. Once populated with terms from existing repositories, BioLexicon was augmented with term variants extracted from the scientific literature and complemented with manually selected lexical items, such as biologically relevant verbs and multiword token expressions. Linguistic information was added to entries, on the basis of corpus processing, including syntactic subcategorisation information for verbs and nominalised verbs, and semantic event frame information. Last but not least, a subset of terms in BioLexicon was linked to Gene Regulation Ontology concepts to support the identification of gene regulatory events.The schema of BioLexicon preserves term annotations and metadata derived from the original data resources. At the same time, it provides consistent lexical representation for terms of different semantic types. BioLexicon thus offers the clear advantage of a uniform lexical format for a wide coverage of biological terminology, with accompanying linguistic information. BioLexicon is available in a relational database format (MySQL dump format) and it adheres to the EAGLES/ISO standards for lexical resources.</description>
+<description lang="French">BioLexicon est une ressource terminologique en anglais de grande envergure développée dans l’objectif de répondre aux besoins grandissants des efforts de text mining dans le domaine biomédical. Elle comprend des informations concernant :-	les noms terminologiques, y compris les verbes nominalisés et les noms propres (par exemple, les noms des gènes)-	les adjectifs terminologiques-	les adverbes terminologiques-	les verbes terminologiques-	des mots de l’anglais général fréquemment utilisés dans le domaine de la biologieLes informations sur les termes déjà existantes ont été intégrées, augmentées, completées et mises en relation, grâce au traitement d’un large nombre de textes du domaine biomédical, pour finalement produire entre autres plus de 2,2 millions d’entrées lexicales (plus de 3,3 millions de relations sémantiques), ainsi que des informations sur plus de 1,8 millions de variantes et plus de 2 millions de relations synonymiques. De plus, des informations très complètes sont fournies sur la manière dont les verbes (notamment les verbes nominalisés dans le domaine) se comportent aux niveaux à la fois syntaxique et sémantique, permettant ainsi son utilisation dans des applications visant à mettre en évidence des relations et des événements impliquant des entités biologiques dans le texte. BioLexicon contient des verbes spécifiques au domaine (658), inclut des cadres de sous-catégorisation syntaxique extraits automatiquement (1710), ainsi que des cadres des situations sémantiques (850), qui sont basés sur l’annotation de corpus par des experts du domaine.Cette couverture très complète des termes de biologie fait de BioLexicon une ressource linguistique unique dans ce domaine. Elle a pour but premier d’aider les travaux de text mining et de recherche d’information dans le domaine biomédical, même si sa structure basée sur des standards et un contenu riche en font une ressource de qualité pour beaucoup d’autres types d’applications.Dans la première phase de construction de BioLexicon, les termes potentiels ont été rassemblés à partir de différentes ressources représentant des types sémantiques sélectionnés pour traiter différentes entités telles que les gènes et les protéines, les composants chimiques, les espèces, les enzymes, ainsi que diverses entités identifiées dans les ontologies relatives à la biologie. Les termes ont été alors organisés en ensembles de variantes synonymiques et annotés avec un certain nombre de traits statiques qui améliorent la résolution de l’ambiguïté du terme. Une fois alimenté de termes provenant d’inventaires existants, des variantes des termes extraits de littérature scientifique et complétés par des éléments lexicaux sélectionnés manuellement ont été ajoutés dans BioLexicon (tels que des verbes et des expressions de mot composés pertinents en biologie). Des informations linquistiques ont été ajoutées aux entrées, sur la base du traitement de corpus, y compris des informations sur la sous-catégorisation syntaxique des verbes  et les verbes nominalisés, ainsi que des informations sur les cadres d’événements sémantiques. Enfin, un sous-ensemble de termes de BioLexicon sont reliés aux concepts d’ontologie en régulation génétique afin d’assurer l’identification d’événements dans le domaine de la régulation génétique.Le schéma de BioLexicon conserve les annotations des termes et les métadonnées dérivées des données d’origine. Dans un même temps, il propose une représentation lexicale cohérente des termes de types sémantiques différents. Ainsi, BioLexicon présente l’avantage évident d’un format lexical uniforme pour une large couverture de la terminologie relative à la biologie, accompagné d’informations linguistiques. BioLexicon est disponible sous la forme d’une base de données relationnelle (format dump MySQL). Il adhère également aux standards EAGLES/ISO relatifs aux ressources lexicales.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=986</url>
-<identifier>ELRA-S0237</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1113</url>
+<identifier>ELRA-T0373</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,45 +29,33 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2008-02-12</lastDateUpdated>
+<lastDateUpdated>2009-09-03</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 43750.00€</price>
-<price>Academic org. ELRA Non Member: 32500.00€</price>
-<price>Commercial org. ELRA Member: 35000.00€</price>
-<price>Academic org. ELRA Member: 21550.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2007-03-16</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 6000.00€</price>
+<price>Academic org. ELRA Non Member: 320.00€</price>
+<price>Commercial org. ELRA Member: 4500.00€</price>
+<price>Academic org. ELRA Member: 200.00€</price>
+<availabilityStartDate>2009-09-03</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 43750.00€</price>
-<price>Academic org. ELRA Non Member: 43750.00€</price>
-<price>Commercial org. ELRA Member: 35000.00€</price>
-<price>Academic org. ELRA Member: 35000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2007-03-16</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 11000.00€</price>
+<price>Academic org. ELRA Non Member: 11000.00€</price>
+<price>Commercial org. ELRA Member: 9000.00€</price>
+<price>Academic org. ELRA Member: 9000.00€</price>
+<availabilityStartDate>2009-09-03</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>LC-STAR (IST 2001-32216)</projectName>
-<fundingType>euFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
 <lexicalConceptualResourceInfo>
 <resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
-<lexicalConceptualResourceEncodingInfo>
-<encodingLevel>phonetics</encodingLevel>
-<encodingLevel>morphology</encodingLevel>
-</lexicalConceptualResourceEncodingInfo>
+<lexicalConceptualResourceType>terminologicalResource</lexicalConceptualResourceType>
 <lexicalConceptualResourceMediaType>
 <lexicalConceptualResourceTextInfo>
 <mediaType>text</mediaType>
@@ -79,16 +67,6 @@
 <languageName>English</languageName>
 </languageInfo>
 </lexicalConceptualResourceTextInfo>
-<lexicalConceptualResourceAudioInfo>
-<mediaType>audio</mediaType>
-<lingualityInfo>
-<lingualityType>monolingual</lingualityType>
-</lingualityInfo>
-<languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
-</languageInfo>
-</lexicalConceptualResourceAudioInfo>
 </lexicalConceptualResourceMediaType>
 </lexicalConceptualResourceInfo>
 </resourceComponentType>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">A "scientific" corpus of modern French ("La Recherche" magazine) - Raw data</resourceName>
-<resourceName lang="French">Corpus Scientifique du français contemporain (magazine "La Recherche") - Version brute</resourceName>
-<description lang="English">This "scientific" corpus of modern French was produced by the University of Nantes (France) through a funding from ELRA in the framework of the European Commission project LRsP&amp;P (Language Resources Production &amp; Packaging - LE4-8335).The corpus contains all articles published in La Recherche magazine in 1998, including issues 305 (January) to 315 (December), which amounts to 447,244 tokens and 30,238 types. It is aimed to be used within text analysis and related applications.The texts, provided in XML (Extended Markup Language) format, have been marked-up into the SGML standard (Standard Generalized Markup Language). XML contained a structure where only the constituant parts of the text were coded (title, body, etc.), whereas SGML marking up , richer, goes up to the word level, including the grammatical category and the canonical form for each word. The annotation work is conformant with the TEI (Text Encoding Initiative) international project's guidelines.</description>
-<description lang="French">Le Corpus Scientifique du français contemporain a été réalisé par l'Université de Nantes (France) dans le cadre du projet européen LRsP&amp;P (Language Resources Production &amp; Packaging - Production et mise au format des ressources linguistiques - LE4-8335) soutenu par la Commission Européenne.Le corpus est constitué de tous les articles de la revue La Recherche parus en 1998, dans les numéros 305 (Janvier) à 315 (Décembre), pour un total de 447 244 "tokens" et 30 238 types. Il est destiné à être exploité dans des systèmes d'analyse de textes et des applications connexes.Les textes des articles, fournis au format XML (Extended Markup Language), ont été mis au standard SGML (Standard Generalized Markup Language). Le format XML consistait essentiellement en une structuration du texte selon ses parties constitutives (titre, corps etc.) alors que la structure SGML actuelle du corpus est beaucoup plus riche puis qu'elle descend jusqu'au niveau du mot en apportant, pour chacun d'eux, sa catégorie grammaticale et sa forme canonique. Le travail d'annotation suit les directives du projet international TEI (Text Encoding Initiative).</description>
+<resourceName lang="English">LABEL-LEX (MW)</resourceName>
+<resourceName lang="French">LABEL-LEX (MW)</resourceName>
+<description lang="English">LABEL-LEX (MW) is a Portuguese formalized lexicon, containing 88 619 inflected multiword lexical units (formally, sequences of simple words). The units are distributed as follows:-	85,881 nouns, with information about type, gender, number, inflected forms, irregular inflected forms and subcategorisation frames-	2,204 adverbs-	409 adjectives, with information about degree, gender, number, comparison, position, inflected forms, irregular inflected forms and subcategorisation frames -	125 pronouns, prepositions/postpositions and conjunctionsFrom a linguistic point of view, multiword lexical units exhibit distributional and selectional constraints; they lack compositionality, and have, most of the time, idiomatic interpretations.MWUs occur frequently in both everyday language and technical and scientific texts to express ideas and concepts that in general cannot be stated by "free" linguistic structures.So it is impossible to envisage automatic text analysis without adequate identification and treatment of multiword lexical units. The meaning of a text is mostly supplied by frequent occurrence of multiword units, especially by compound nouns.Other formats and other services may be supplied by the data owner upon request (e.g. conversion into buyer's formalism, selection of subsets of the words missing from your own dictionary).</description>
+<description lang="French">Ce lexique de portugais formalisé contient 88 619 unités lexicales fléchies constituées d'expressions composées (des séquences de mots simples). Les unités sont réparties comme suit :-	85 881 noms, avec des informations sur le type, genre, nombre, les formes fléchies, les formes irrégulières non fléchies et les cadres de sous-catégorisation-	2 204 adverbes-	409 adjectifs, avec des informations sur le degré, genre, nombre, comparaison, position, les formes fléchies, les formes irrégulières non fléchies et les cadres de sous-catégorisation-	125 pronoms, prépositions/postpositions et conjonctionsD'un point de vue linguistique, les unités lexicales constituées d'expressions composées (ou unités MWU) présentent des contraintes en termes de distribution et de sélection, elles manquent de compositionnalité et sont sujettes, la plupart du temps, à des interprétations idiomatiques.Les unités MWU sont fréquentes dans le langage courant comme dans la littérature scientifique et technique car elles permettent d'exprimer des idées et des concepts que les périphrases ne peuvent généralement traduire.Par conséquent, il est impossible d'envisager une analyse automatique de texte sans identification et traitement adaptés des unités lexicales MWU. En effet, les expressions composées, et les mots composés, notamment, sont fréquemment les éléments porteurs de sens d'un texte.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=594</url>
-<identifier>ELRA-W0025_01</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=700</url>
+<identifier>ELRA-L0054</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,52 +29,54 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-02-22</lastDateUpdated>
+<revision>Creation date: 1995Update frequency: annuallyLast update: 2004</revision>
+<lastDateUpdated>2010-10-21</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 1500.00€</price>
-<price>Academic org. ELRA Non Member: 310.00€</price>
-<price>Commercial org. ELRA Member: 1200.00€</price>
-<price>Academic org. ELRA Member: 240.00€</price>
+<price>Commercial org. ELRA Non Member: 15000.00€</price>
+<price>Academic org. ELRA Non Member: 5000.00€</price>
+<price>Commercial org. ELRA Member: 10000.00€</price>
+<price>Academic org. ELRA Member: 3000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2000-12-15</availabilityStartDate>
+<availabilityStartDate>2005-02-01</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 1500.00€</price>
-<price>Academic org. ELRA Non Member: 1500.00€</price>
-<price>Commercial org. ELRA Member: 1200.00€</price>
-<price>Academic org. ELRA Member: 1200.00€</price>
+<price>Commercial org. ELRA Non Member: 15000.00€</price>
+<price>Academic org. ELRA Non Member: 15000.00€</price>
+<price>Commercial org. ELRA Member: 10000.00€</price>
+<price>Academic org. ELRA Member: 10000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2000-12-15</availabilityStartDate>
+<availabilityStartDate>2005-02-01</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceCreationInfo>
-<fundingProject>
-<projectName>LRsP&amp;P (Language Resources Production &amp; Packaging - LE4-8335)</projectName>
-<fundingType>euFunds</fundingType>
-</fundingProject>
+<creationEndDate>1995-01-01</creationEndDate>
 </resourceCreationInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusTextInfo>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
 <mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
+<languageId>por</languageId>
+<languageName>Portuguese</languageName>
 </languageInfo>
-</corpusTextInfo>
-</corpusMediaType>
-</corpusInfo>
+<textFormatInfo>
+<mimeType>Plain text</mimeType>
+</textFormatInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">CESART Evaluation Package</resourceName>
-<resourceName lang="French">Package d’évaluation CESART</resourceName>
-<description lang="English">The CESART Evaluation Package was produced within the French national project CESART (Evaluation of terminology extraction tools), as part of the Technolangue programme funded by the French Ministry of Research and New Technologies (MRNT). The CESART project enabled to carry out a campaign for the evaluation of terminology extraction tools. This project is an extension of the evaluation campaign of terminology resource acquisition tools that was carried out for written corpora (ARC A3) within the AUPELF campaigns (Actions de recherche Concertées, 1996-1999). This package includes the material that was used for the CESART evaluation campaign. It includes resources, protocols, scoring tools, results of the campaign, etc., that were used or produced during the campaign. The aim of these evaluation packages is to enable external players to evaluate their own system. The campaign is distributed over two actions: 1)	Term extraction for the building of a terminology reference which applications are the enrichment of the reference and the free indexing of documents.2)	Extraction of semantic relations (synonymy) from a list of “focal” terms.The CESART evaluation package contains the following data and tools:Three domain-specific corpora in French were built: one medical corpus, one educational corpus, and one political corpus. The first two were used as test corpora, while the third one (political corpus) was used as a masking corpus. The corpora were encoded in UTF-8 and XML. They are available in two different versions, one for DOS and one for UNIX.1)	The medical corpus consists of web pages extracted from Santé Canada (http://www.hc-sc.gc.ca/index_f.html). 2)	The corpus in the educational field contains articles extracted from the SPIRAL magazine specialised in pedagogy and research in education. 3)	The political corpus is composed of texts extracted from the Official Journal of the European Union. The table below gives some statistics on the corpora used for the evaluation:&lt;table  border="0" width="100%" cellspacing="0" cellpadding="2" class="infoBoxContents"&gt;&lt;tr align=center&gt;&lt;td&gt;Corpus (specialised)&lt;/td&gt;&lt;td&gt;Medicine (test corpus)&lt;/td&gt;&lt;td&gt;Education (test corpus)&lt;/td&gt;&lt;td&gt;Politics (masking corpus)&lt;/td&gt;&lt;/tr&gt;	&lt;tr align=center&gt;&lt;td align=left&gt;&lt;strong&gt;Number of documents&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;7,514&lt;/td&gt;&lt;td&gt;149&lt;/td&gt;&lt;td&gt;1,477&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;&lt;strong&gt;Number of segments&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;255,161&lt;/td&gt;&lt;td&gt;12,109&lt;/td&gt;&lt;td&gt;9,024&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;&lt;strong&gt;Number of words&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;9,000,000&lt;/td&gt;&lt;td&gt;535,000&lt;/td&gt;&lt;td&gt;240,000&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;Two reference lists were built from two terminology databases in a specialised domain. The list of medical terms, based on the terminology provided by the CISMeF team (www.chu-rouen.fr/terminologiecismef), is available from the IST/Inserm (http://ist.inserm.fr/basismesh/mesh.html). This list contains 22,861 entries. As for the educational domain, the reference list is based on the Motbis thesaurus (http://www.thesaurus.motbis.cndp.fr/site/) and consists of 36,081 entries.A description of the project is available at the following address:http://www.technolangue.net/article.php3?id_article=200 (in French language)</description>
-<description lang="French">Le package d’évaluation CESART a été produit dans le cadre du projet national français CESART (« Campagne d'Evaluation de Systèmes d'Acquisition de Ressources Terminologiques »), issu du programme Technolangue, financé par le Ministère français délégué à la Recherche et aux Nouvelles Technologies (MRNT). Le projet CESART a permis de réaliser une campagne d'évaluation de systèmes d'acquisition de ressources terminologiques. Le projet s'inscrit dans la suite de la campagne d’évaluation d'outils d'acquisition de ressources terminologiques à partir de corpus écrits (ARC A3), entrepris dans le cadre des Actions de recherche Concertées de l'AUPELF (1996-1999). Ce package comprend l’ensemble des données utilisées lors de la campagne d’évaluation CESART. Il regroupe des ressources, des protocoles, des outils de notation, les résultats de la campagne officielle, etc., qui ont été utilisés ou produits pendant la campagne. Le but de ce « package » d’évaluation est de permettre à des acteurs externes d’évaluer leur propre système.La campagne se décompose en deux actions : 1)	Extraction des termes pour la construction d'un référentiel terminologique dont l'application est l'enrichissement du référentiel et l'indexation libre des documents.2)	Extraction des relations sémantiques (synonymie) à partir d'une liste de termes amorces.Le package d’évaluation CESART contient les données suivantes :Trois corpus en français des domaines spécialisés ont été construits : un corpus médical, un corpus du domaine de l’éducation, et un corpus politique. Les deux premiers ont été utilisés comme corpus de test, tandis que le troisième (corpus politique) a été utilisé comme corpus de masquage. Les corpus sont encodés en UTF-8 et en XML. Ils sont disponibles en deux versions, l’une pour DOS et l’autre pour UNIX.1)	Le corpus médical est composé des pages web provenant du site Santé Canada (http://www.hc-sc.gc.ca/index_f.html). 2)	Le corpus du domaine de l’éducation contient des articles provenant de la revue de pédagogie et de recherche en éducation SPIRAL. 3)	Le corpus politique est composé des textes tirés du Journal Officiel de l’Union Européenne. Le tableau ci-dessous présente quelques statistiques concernant les corpus pour l’évaluation :&lt;table  border="0" width="100%" cellspacing="0" cellpadding="2" class="infoBoxContents"&gt;&lt;tr align=center&gt;&lt;td&gt;Corpus (spécialité)&lt;/td&gt;&lt;td&gt;Médecine (corpus de test)&lt;/td&gt;&lt;td&gt;Education (corpus de test)&lt;/td&gt;&lt;td&gt;Politique (corpus de masquage)&lt;/td&gt;&lt;/tr&gt;	&lt;tr align=center&gt;&lt;td align=left&gt;&lt;strong&gt;Nombre de documents&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;7 514&lt;/td&gt;&lt;td&gt;149&lt;/td&gt;&lt;td&gt;1 477&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;&lt;strong&gt;Nombre de segments&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;255 161&lt;/td&gt;&lt;td&gt;12 109&lt;/td&gt;&lt;td&gt;9 024&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;&lt;strong&gt;Nombre de mots&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;9 000 000&lt;/td&gt;&lt;td&gt;535 000&lt;/td&gt;&lt;td&gt;240 000&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;4)	Deux listes référentielles ont été construites à partir des deux terminologies du domaine spécialisé. La liste des termes médicaux basée sur la terminologie provenant de l’équipe CISMeF (www.chu-rouen.fr/terminologiecismef) est disponible auprès de l’IST/Inserm (http://ist.inserm.fr/basismesh/mesh.html). Cette liste contient 22 861 entrées. Pour le domaine de l’éducation, la liste référentielle est basée sur le thésaurus Motbis (http://www.thesaurus.motbis.cndp.fr/site/) et composée de 36 081 entrées. Une description du projet est disponible à l'adresse suivante :http://www.technolangue.net/article.php3?id_article=200</description>
+<resourceName lang="English">SALA II US Spanish West</resourceName>
+<resourceName lang="French">Base de données SALA II espagnol américain ouest</resourceName>
+<description lang="English">The SALA II US Spanish West database comprises 1000 Spanish speakers  recorded over the American mobile telephone network.</description>
+<description lang="French">La base de données SALA II de l'espagnol américain ouest contient les enregistrements de 1000 locuteurs de l'espagnol enregistrés à travers le réseau téléphonique mobile américain.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=993</url>
-<identifier>ELRA-E0019</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1048</url>
+<identifier>ELRA-S0264</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,40 +29,59 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-06-28</lastDateUpdated>
+<lastDateUpdated>2007-12-18</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
-<licence>ELRA_EVALUATION</licence>
-<restrictionsOfUse>evaluationUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 150.00€</price>
-<price>Commercial org. ELRA Member: 500.00€</price>
-<price>Academic org. ELRA Non Member: 300.00€</price>
-<price>Commercial org. ELRA Non Member: 1000.00€</price>
-<availabilityStartDate>2007-06-28</availabilityStartDate>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Academic org. ELRA Member: 42750.00€</price>
+<price>Commercial org. ELRA Member: 45000.00€</price>
+<price>Academic org. ELRA Non Member: 48450.00€</price>
+<price>Commercial org. ELRA Non Member: 51000.00€</price>
+<availabilityStartDate>2007-12-18</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Academic org. ELRA Member: 45000.00€</price>
+<price>Commercial org. ELRA Member: 45000.00€</price>
+<price>Academic org. ELRA Non Member: 51000.00€</price>
+<price>Commercial org. ELRA Non Member: 51000.00€</price>
+<availabilityStartDate>2007-12-18</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>EVALDA</projectName>
-<fundingType>nationalFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
 <corpusMediaType>
-<corpusTextInfo>
-<mediaType>text</mediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
+<languageId>spa</languageId>
+<languageName>Spanish</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Castilian</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
+<languageVarietyInfo>
+<languageVarietyName>United States</languageVarietyName>
+<languageVarietyType>other</languageVarietyType>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
 </languageInfo>
-</corpusTextInfo>
+</corpusAudioInfo>
 </corpusMediaType>
 </corpusInfo>
 </resourceComponentType>

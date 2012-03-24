@@ -6,7 +6,7 @@
 <description lang="English">Monolingual corpus in a .txt format, produced by KAIST KORTERM, containing 1020000 eojeols (Korean terms) in Korean. This corpus is morphologically analyzed, POS tagged, and rectified 3 times by specialists.</description>
 <description lang="French">Corpus monolingue au format .txt produit par Kaist Korterm. Ce corpus contient 1 020 000 eojeols (termes coréens) en coréen. Il a été analysé au niveau morphologique, étiqueté au niveau des parties du discours, et revu 3 fois.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=654</url>
 <identifier>ELRA-W0034</identifier>
 </identificationInfo>

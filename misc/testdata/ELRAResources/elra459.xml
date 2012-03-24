@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Russian Speecon database</resourceName>
-<resourceName lang="French">Base de données Speecon du russe</resourceName>
-<description lang="English">The Russian Speecon database is divided into 2 sets:   1. The first set comprises the recordings of 550 adult Russian speakers (271 males, 279 females), recorded over 4 microphone channels in 4 recording environments (office, entertainment, car, public place).   2. The second set comprises the recordings of 50 child Russian speakers (31 boys, 19 girls), recorded over 4 microphone channels in 1 recording environment (children room). This database is partitioned into 21 DVDs (first set) and 3 DVDs (second set).The speech databases made within the Speecon project were validated by SPEX, the Netherlands, to assess their compliance with the Speecon format and content specifications. Each of the four speech channels is recorded at 16 kHz, 16 bit, uncompressed unsigned integers in Intel format (lo-hi byte order). To each signal file corresponds an ASCII SAM label file which contains the relevant descriptive information.Each speaker uttered the following items:    * Calibration data:          o 6 noise recordings          o The “silence word” recording     * Free spontaneous items (adults only):          o 5 minutes (session time) of free spontaneous, rich context items (story telling) (an open number of spontaneous topics out of a set of 30 topics)     * 17 Elicited spontaneous items (adults only):          o 3 dates          o 2 times          o 3 proper names          o 2 city names          o 1 letter sequence          o 2 answers to questions          o 3 telephone numbers          o 1 language     * Read speech:          o 30 phonetically rich sentences uttered by adults and 60 uttered by children          o 5 phonetically rich words (adults only)          o 4 isolated digits          o 1 isolated digit sequence          o 4 connected digit sequences          o 1 telephone number          o 3 natural numbers          o 1 money amount          o 2 time phrases (T1 : analogue, T2 : digital)          o 3 dates (D1 : analogue, D2 : relative and general date, D3 : digital)          o 3 letter sequences          o 1 proper name          o 2 city or street names          o 2 questions          o 2 special keyboard characters          o 1 Web address          o 1 email address          o 208 application specific words and phrases per session (adults)          o 74 toy commands and 48 general commands (children) The following age distribution has been obtained:    * Adults: 290 speakers are between 15 and 30, 187 speakers are between 31 and 45, 73 speakers are between 46 and 60.    * Children: 28 speakers are between 8 and 10, 22 speakers are between 11 and 14. A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
-<description lang="French">La base de données Speecon du russe est répartie en deux sous-ensembles :   1. Le premier sous-ensemble est composé de 550 locuteurs russes adultes (271 hommes, 279 femmes) enregistrés à partir de 4 canaux de microphone dans 4 environnements différents (bureau, divertissement, voiture, lieu publique).   2. Le deuxième sous-ensemble est composé de 50 locuteurs russes enfants (31 garçons, 19 filles) enregistrés à partir de 4 canaux de microphone dans un seul environnement (chambre d’enfant). Elle est distribuée sur 21 DVD (adultes) et 3 DVD (enfants). Les bases orales réalisées lors du projet Speecon ont été validées par SPEX, Pays-Bas, afin de contrôler leur adéquation avec le format Speecon et les spécifications de contenu.Les fichiers sont stockés en séquences d'échantillons de 16 kHz, 16 bit ; les canaux sont multiplexés dans un fichier unique, avec une séquence de 0-1-2-3. A chaque énoncé correspond un fichier d'étiquetage ASCII SAM.Chaque locuteur a prononcé les éléments suivants :    * Données de calibrage :          o 6 bruits          o 1 “silence”     * Eléments libres spontanés (adultes uniquement) :          o 5 minutes (par session) de discours libre spontané, en contexte riche (raconter une histoire) (nombre ouvert de thèmes spontanés à partir de 30 thèmes donnés)     * 17 éléments spontanés dirigés (adultes uniquement) :          o 3 dates          o 2 périodes de temps          o 3 noms propres          o 2 noms de ville          o 1 séquence de lettres          o 2 réponses à des questions          o 3 numéros de téléphone          o 1 langue     * Parole lue :          o 30 phrases phonétiquement riches prononcées par les adultes et 60 prononcées par les enfants          o 5 mots phonétiquement riches (adultes uniquement)          o 4 chiffres isolés          o 1 séquences de chiffres isolés          o 4 séquences de chiffres connectés          o 1 numéro de téléphone          o 3 nombres naturels          o 1 montant en devise          o 2 phrases comportant une notion de temps (T1 : analogique, T2 : numérique)          o 3 dates (D1 : analogique, D2 : date relative et générale, D3 : numérique)          o 3 séquences de lettres          o 1 nom propre          o 2 noms de ville ou de rue          o 2 questions          o 2 caractères clavier          o 1 adresse Web          o 1 adresse email          o 208 mots et phrases de commande par sessions (adultes)          o 74 commandes de jouets et 48 commandes générales (enfants) Les classes d'âge sont réparties comme suit :    * Adultes : 290 locuteurs ont entre 15 et 30 ans, 187 entre 31 et 45 ans, 73 entre 46 et 60.    * Enfants: 28 locuteurs ont entre 8 et 10 ans, 22 entre 11 et 14. Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
+<resourceName lang="English">MTP Annotated  German corpus - tagged version</resourceName>
+<resourceName lang="French">MTP - Corpus allemand annoté - version étiquetée</resourceName>
+<description lang="English">This morphosyntactically annotated 500,000 word German corpus was developed as part of the Münster Tagging Project (MTP). It comprises a collection of SGML-formatted texts from two German newspapers, "Die Frankfurter Allgemeine Zeitung" and "Die Zeit", for the years 1990 to 1992. The articles reflect the typical distribution of newspaper topics, including economics, regional, national and international politics, the arts, sport, literature, history, science and modern life.The text was segmented into sentence units and word tokens, and tagged for morphosyntactic POS markers. Two tagsets, which mainly differed in the granularity of the noun and verb tags, and which comprised 137 and 52 tags respectively, were used. Users may obtain annotated versions using either set, each of which comes with documentation and an instruction manual for tag application. A suite of tools, including the MTP taggers and the Xlex workbench for text handling, textual analysis and lexicography, is also available.</description>
+<description lang="French">Ce corpus allemand, d'environ 500 000 mots, avec annotation morpho-syntaxique, a été développé dans le cadre du projet MTP (Münster Tagging Project). Il contient un ensemble de textes au format SGML provenant de deux journaux allemands, le "Frankfurter Allgemeine" et le "Die Zeit" , et couvrant les années 1990 à 1992. Les thèmes des articles sont typiques des sujets traités habituellement dans un journal : économie, politique régionale, nationale et internationale, arts, sports, littérature, histoire, science et vie moderne.Le texte est segmenté en phrases et en mots, et étiqueté par des marqueurs de classes morpho-syntaxiques. Deux types de marqueurs ont été employés, avec respectivement 137 et 52 étiquettes, qui diffèrent principalement par la finesse des catégories pour les noms et les verbes. Le corpus est fourni avec les deux annotations et un manuel d'instructions pour l'étiquetage. Un ensemble d'outils comprenant les systèmes d'annotation du MTP et le logiciel Xlex de manipulation et d'analyse de données textuelles et lexicographiques est également disponible.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=751</url>
-<identifier>ELRA-S0161</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=480</url>
+<identifier>ELRA-W0008_02</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,51 +29,45 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-02-22</lastDateUpdated>
+<lastDateUpdated>2004-05-12</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 75000.00€</price>
-<price>Academic org. ELRA Non Member: 60000.00€</price>
-<price>Commercial org. ELRA Member: 67000.00€</price>
-<price>Academic org. ELRA Member: 50000.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2004-06-07</availabilityStartDate>
+<price>Commercial org. ELRA Member: 8000.00€</price>
+<price>Academic org. ELRA Member: 8000.00€</price>
+<price>Academic org. ELRA Non Member: 12000.00€</price>
+<price>Commercial org. ELRA Non Member: 12000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 75000.00€</price>
-<price>Academic org. ELRA Non Member: 75000.00€</price>
-<price>Commercial org. ELRA Member: 67000.00€</price>
-<price>Academic org. ELRA Member: 67000.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2004-06-07</availabilityStartDate>
+<price>Commercial org. ELRA Member: 8000.00€</price>
+<price>Academic org. ELRA Member: 8000.00€</price>
+<price>Academic org. ELRA Non Member: 12000.00€</price>
+<price>Commercial org. ELRA Non Member: 12000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>Speecon</projectName>
-<fundingType>euFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
 <corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<corpusTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>rus</languageId>
-<languageName>Russian</languageName>
+<languageId>ger/deu</languageId>
+<languageName>German</languageName>
 </languageInfo>
-</corpusAudioInfo>
+</corpusTextInfo>
 </corpusMediaType>
 </corpusInfo>
 </resourceComponentType>

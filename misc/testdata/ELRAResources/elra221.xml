@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">GlobalPhone Czech</resourceName>
-<resourceName lang="French">GlobalPhone tchèque</resourceName>
-<description lang="English">The GlobalPhone corpus developed in collaboration with the Karlsruhe Institute of Technology (KIT) was designed to provide read speech data for the development and evaluation of large continuous speech recognition systems in the most widespread languages of the world, and to provide a uniform, multilingual speech and text database for language independent and language adaptive speech recognition as well as for language identification tasks. The entire GlobalPhone corpus enables the acquisition of acoustic-phonetic knowledge of the following 19 spoken languages: Arabic, Bulgarian, Chinese-Mandarin, Chinese-Shanghai, Croatian, Czech, French, German, Japanese, Korean, Polish, Portuguese (Brazilian), Russian, Spanish (Latin America), Swedish, Tamil, Thai, Turkish, Vietnamese. In each language about 100 sentences were read from each of the 100 speakers. The read texts were selected from national newspapers available via Internet to provide a large vocabulary (up to 65,000 words). The read articles cover national and international political news as well as economic news. The speech is available in 16bit, 16kHz mono quality, recorded with a close-speaking microphone (Sennheiser 440-6) and same recording equipment for all languages. The transcriptions are internally validated and supplemented by special markers for spontaneous effects like stuttering, false starts, and non-verbal effects like laughing and hesitations. Speaker information like age, gender, occupation, etc. as well as information about the recording setup complement the database. The entire GlobalPhone corpus contains over 450 hours of speech spoken by more than 1900 native adult speakers.Data is shortened by means of the shorten program written by Tony Robinson, available from Softsound's web page:  http://www.softsound.com/  linux distributions, or simulated versions such as cygwin. Alternatively, the data could be delivered unshorten.The Czech corpus was produced using the Ceskomoravsky Profit Journal and Lidove Noviny newspaper. It contains recordings of 102 speakers (57 males, 45 females) recorded in Prague, Czech Republic. The following age distribution has been obtained: 16 speakers are below 19, 70 speakers are between 20 and 29, 2 speakers are between 30 and 39, 9 speakers are between 40 and 49, and 5 speakers are over 50.</description>
-<description lang="French">Le corpus GlobalPhone, développé avec la collaboration du Karlsruhe Institute of Technology (KIT),  a été conçu afin de fournir des données de parole lue pour le développement et l’évaluation de systèmes de reconnaissance de la parole continue à large vocabulaire dans les langues les plus répandues dans le monde, l’objectif étant de fournir une base de données audio et textuelles uniforme et multilingue pour la reconnaissance de la parole indépendante de la langue et adaptable à la langue, ainsi que pour des tâches d’identification de la langue. Le corpus GlobalPhone complet permet l’acquisition d’une connaissance acoustico-phonétique pour les 19 langues parlées suivantes: allemand, arabe (arabe standard moderne), bulgare, chinois-mandarin, chinois de Shanghai, coréen, croate, espagnol (d’Amérique latine), français, japonais, polonais, portugais (brésilien), russe, suédois, tamoul, thaï, tchèque, turc et vietnamien.Dans chaque langue, environ 100 phrases ont été lues par chacun des 100 locuteurs. Les textes lus sont extraits d’articles de journaux nationaux disponibles sur internet afin de fournir un large vocabulaire (jusqu’à 65000 mots). Les articles lus couvrent des actualités politiques nationales et internationales, ainsi que des nouvelles économiques. Les données de parole ont été enregistrées en 16 bit, 16 kHz (qualité mono) avec un micro-casque (Sennheiser 440-6) et le même équipement d’enregistrement pour l’ensemble des langues. Les transcriptions ont été validées en interne et annotées au moyen de balises spéciales pour marquer les effets spontanés, tels que le bégaiement, les faux démarrages, et les effets non verbaux comme le rire et les hésitations. La base contient également des informations sur les locuteurs, telles que l’âge, le genre, la profession, etc. ainsi que des informations sur la mise en place de l’enregistrement. Le corpus GlobalPhone dans son entier comprend plus de 450 heures de parole enregistrées par plus de 1900 locuteurs adultes natifs.Les données sont compressées au moyen du programme Shorten écrit par Tony Robinson, disponible depuis la page web de Softsound: http://www.softsound.com/ (distributions linux ou versions simulées telles que cygwin). Au besoin, les données peuvent être fournies non compressées.Le corpus tchèque a été produit à partir des journaux Ceskomoravsky Profit Journal et Lidove Noviny. Il comprend les enregistrements de 102 locuteurs (57 hommes, 45 femmes) enregistrés à Prague, République Tchèque. Les classes d'âge sont réparties comme suit :  16 locuteurs de moins de 19 ans, 70 locuteurs entre 20 et 29 ans, 2 locuteurs entre 30 et 39 ans, 9 locuteurs entre 40 et 49 ans, et 5 locuteurs de plus de 50 ans.</description>
+<resourceName lang="English">LC-STAR English-Italian Bilingual Aligned Phrasal lexicon</resourceName>
+<resourceName lang="French">Lexique aligné anglais-italien de locutions LC-STAR</resourceName>
+<description lang="English">The LC-STAR English-Italian Bilingual Aligned Phrasal lexicon was created within the scope of the LC-STAR project (IST 2001-32216) which was sponsored by the European Commission. It was designed for SST (Speech-to-Speech Translation).The lexicon comprises 10,466 phrases from the tourist domain. It is based on a list of short sentences obtained by translation from a US-English 10,524 phrase corpus. The total number of unique separate words is 45,110.The lexicon contains the following information: -	US-English phrase (orthography), -	its translation into Italian (orthography), and for each token in Italian a phrase provides the following: -	orthography of a word, -	part of speech, -	lemma,-	whether the phrase is idiomatic or not, -	if a word is a foreign word. In this lexicon, foreign words were only tagged if they were written with foreign orthography (e.g. English characters). The lexicon is provided in XML format. The database is stored on 1 CD.</description>
+<description lang="French">Le lexique aligné anglais-italien de locutions LC-STAR a été créé dans le cadre du projet LC-STAR (IST 2001-32216), financé par la Commission européenne. Il a été conçu pour des applications en traduction parole-parole (SST - Speech-to-Speech Translation).Le lexique comprend 10 466 locutions du domaine du tourisme. Il est basé sur une liste de phrases courtes obtenue par la traduction d’un corpus de 10 524 locutions en anglais américain. Le nombre total de mots uniques séparés est de 45 110.Le lexique contient les informations suivantes : -	la locution en anglais américain (orthographe), -	sa traduction en italien (orthographe),et pour chaque élément dans la locution en italien: -	l’orthographe du mot, -	la partie du discours, -	le lemme,-	si la locution est idiomatique ou non, -	si un mot est un mot étranger. Dans ce lexique, les mots étrangers ont été étiquetés uniquement lorsqu’ils sont écrits dans une orthographe étrangère (par exemple, des caractères en anglais).Le lexique est fourni au format XML. La base de données est stockée sur 1 CD.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=820</url>
-<identifier>ELRA-S0196</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1056</url>
+<identifier>ELRA-S0271</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,62 +29,77 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2011-09-21</lastDateUpdated>
+<lastDateUpdated>2008-04-22</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 3600.00€</price>
-<price>Academic org. ELRA Non Member: 700.00€</price>
-<price>Commercial org. ELRA Member: 3000.00€</price>
-<price>Academic org. ELRA Member: 600.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2006-01-30</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 7150.00€</price>
+<price>Academic org. ELRA Non Member: 4875.00€</price>
+<price>Commercial org. ELRA Member: 5500.00€</price>
+<price>Academic org. ELRA Member: 3750.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2008-02-06</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 3600.00€</price>
-<price>Academic org. ELRA Non Member: 3600.00€</price>
-<price>Commercial org. ELRA Member: 3000.00€</price>
-<price>Academic org. ELRA Member: 3000.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2006-01-30</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 7150.00€</price>
+<price>Academic org. ELRA Non Member: 7150.00€</price>
+<price>Commercial org. ELRA Member: 5500.00€</price>
+<price>Academic org. ELRA Member: 5500.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2008-02-06</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<validationInfo>
-<validated>True</validated>
-<validationModeDetails> Most of the GlobalPhone data have been validated in-house</validationModeDetails>
-</validationInfo>
 <usageInfo>
 <actualUseInfo>
 <actualUse>nlpApplications</actualUse>
 <useNLPSpecific>speechRecognition</useNLPSpecific>
 </actualUseInfo>
 </usageInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>LC-STAR (IST 2001-32216)</projectName>
+<fundingType>euFunds</fundingType>
+</fundingProject>
+</resourceCreationInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusAudioInfo>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>eng</languageId>
+<languageName>English</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>ita</languageId>
+<languageName>Italian</languageName>
+</languageInfo>
+</lexicalConceptualResourceTextInfo>
+<lexicalConceptualResourceAudioInfo>
 <mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>cze/ces</languageId>
-<languageName>Czech</languageName>
+<languageId>eng</languageId>
+<languageName>English</languageName>
 </languageInfo>
-<audioSizeInfo>
-<sizeInfo>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizeInfo>
-</audioSizeInfo>
-</corpusAudioInfo>
-</corpusMediaType>
-</corpusInfo>
+<languageInfo>
+<languageId>ita</languageId>
+<languageName>Italian</languageName>
+</languageInfo>
+</lexicalConceptualResourceAudioInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

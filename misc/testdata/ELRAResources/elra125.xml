@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">English SpeechDat Polyphone database DB1</resourceName>
-<resourceName lang="French">Base de données "Polyphone" en anglais SpeechDat(M) DB1</resourceName>
-<description lang="English">The (polyphone-like) English SpeechDat(M) database was recorded within the framework of the SPEECHDAT(M) Project. It consists of 1,000 speakers, chosen according to their individual demographics, who were recorded over digital telephone lines using fixed telephone sets. The material to be spoken was provided to the caller via a prompt sheet. The database is divided into two sub-sets: the phonetically rich sentences (one CD) known as DB2, and the application-oriented utterances (two CDs) known as DB1.The recorded material in DB1 comprises immediately usable and relevant speech, including number and letter sequences, common control keywords, dates, times, money amounts, etc. This provides a realistic basis for using these resources for the training and assessment of speaker-independent recognition of both isolated and continuous speech utterances, employing either whole-word modeling and/or phoneme based approaches.The sample rate for speech is 8 KHz, quantisation is 8 bit, and a-law encoding is used. This results in a data rate of 64 kB/s.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
-<description lang="French">Il s'agit de la base de données SpeechDat (M) anglaise enregistrée selon les règles des bases de données "polyphone". Elle contient des enregistrements de 1000 locuteurs, choisis selon les critères démographiques (âge, sexe, lieu, ...) et enregistrés à travers le réseau téléphonique. La base de données est répartie en deux ensembles: les phrases phonétiquement riches et les mots de commandes, orientés vers des applications (il s'agit de chiffres, nombres, séquences de lettres, mots de commande usuels, etc.). Ce qui fourni une base solide pour la réalisation de systèmes de reconnaissance de la parole, indépendant du locuteur aussi bien en mode mots isolés qu'en mode parole continue, utilisant des modèles phonétiques ou des modèles de "mots". La fréquence d'échantillonnage est de 8 KHz, un codage sur 8 bit, la loi a, donnant un débit de 64 kB/s.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
+<resourceName lang="English">THAMUS Bilingual dictionaries - Economics</resourceName>
+<resourceName lang="French">THAMUS Dictionnaires bilingues - Economie</resourceName>
+<description lang="English">Technical domainsLanguages: English =&gt; ItalianFormat: ASCII format with ISO 8859-1 character setMedium: QIC 150 MB Cartridge TapeDomain: Economics, 86,000 entries, inflected formsTechnical bilingual Italian dictionaries with a morphological coding which can generate all full forms using a software engine written in C. Multi-word terms contain morphological coding for the head word.</description>
+<description lang="French">Domaines techniquesLangues : Anglais =&gt; ItalienDomaine: Economie, 86 000 entrées, formes fléchiesLes dictionnaires techniques bilingues disposent d'une codification morphologique qui permet de générer toutes les formes fléchies grâce à un logiciel écrit en langage C. Les mots composés contiennent une codification morphologique sur la tête des mots.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=41</url>
-<identifier>ELRA-S0011</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=153</url>
+<identifier>ELRA-M0010_15</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,43 +29,38 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2009-01-14</lastDateUpdated>
+<lastDateUpdated>2005-03-04</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 20000.00€</price>
-<price>Academic org. ELRA Non Member: 20000.00€</price>
-<price>Commercial org. ELRA Member: 14000.00€</price>
-<price>Academic org. ELRA Member: 11000.00€</price>
+<price>Commercial org. ELRA Non Member: 103200.00€</price>
+<price>Academic org. ELRA Non Member: 20640.00€</price>
+<price>Commercial org. ELRA Member: 94600.00€</price>
+<price>Academic org. ELRA Member: 18920.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-01-23</availabilityStartDate>
+<availabilityStartDate>1997-05-13</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 20000.00€</price>
-<price>Academic org. ELRA Non Member: 20000.00€</price>
-<price>Commercial org. ELRA Member: 14000.00€</price>
-<price>Academic org. ELRA Member: 14000.00€</price>
+<price>Commercial org. ELRA Non Member: 103200.00€</price>
+<price>Academic org. ELRA Non Member: 103200.00€</price>
+<price>Commercial org. ELRA Member: 94600.00€</price>
+<price>Academic org. ELRA Member: 94600.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-01-23</availabilityStartDate>
+<availabilityStartDate>1997-05-13</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>SpeechDat(M)</projectName>
-<fundingType>euFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
@@ -73,8 +68,12 @@
 <languageId>eng</languageId>
 <languageName>English</languageName>
 </languageInfo>
-</corpusAudioInfo>
-</corpusMediaType>
-</corpusInfo>
+<languageInfo>
+<languageId>ita</languageId>
+<languageName>Italian</languageName>
+</languageInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

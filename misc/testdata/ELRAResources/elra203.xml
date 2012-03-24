@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Bilingual Spanish-English and English-Spanish lexicons (INCYTA) - Data Processing</resourceName>
-<resourceName lang="French">Lexiques bilingues espagnol-anglais et anglais-espagnol (INCYTA) - Traitement de données</resourceName>
-<description lang="English">3,565 entries for Data Processing. The entries contain morphological information for part-of-speech and inflectional class. The information on multi-word terms is provided by the headword.</description>
-<description lang="French">3565 entrées, domaine Traitement de données. Les entrées contiennent des informations morphologiques pour les différentes classes de mots. Les informations sur les termes composés sont fournies par la tête du terme (tête du syntagme).</description>
+<resourceName lang="English">Czech Speecon database</resourceName>
+<resourceName lang="French">Base de données Speecon tchèque</resourceName>
+<description lang="English">The Czech Speecon database is divided into 2 sets: 1) The first set comprises the recordings of 550 adult Czech speakers (275 males, 275 females), recorded over 4 microphone channels in 4 recording environments (office, entertainment, car, public place). 2) The second set comprises the recordings of 50 child Czech speakers (18 boys, 32 girls), recorded over 4 microphone channels in 1 recording environment (children room). This database is partitioned into 20 DVDs (first set) and 3 DVDs (second set).The speech databases made within the Speecon project were validated by SPEX, the Netherlands, to assess their compliance with the Speecon format and content specifications. Each of the four speech channels is recorded at 16 kHz, 16 bit, uncompressed unsigned integers in Intel format (lo-hi byte order). To each signal file corresponds an ASCII SAM label file which contains the relevant descriptive information.Each speaker uttered the following items (over 290 items for adults and over 210 items for children):Calibration data: 6 noise recordings The “silence word” recordingFree spontaneous items (adults only):5  minutes  (session time) of free spontaneous, rich context items (story telling) (an open number of  spontaneous topics out of a set of 30 topics)17 Elicited spontaneous items (adults only):3 dates, 2 times, 3 proper names, 2 city names, 1 letter sequence, 2 answers to questions, 3 telephone numbers, 1 language Read speech:30 phonetically  rich sentences uttered by adults and 60 uttered by children5 phonetically rich words (adults only)4 isolated digits2 isolated digit sequences4 connected digit sequences1 telephone number3 natural numbers1 money amount2 time phrases (T1 : analogue, T2 : digital)3 dates (D1 : analogue, D2 : relative and general date, D3 : digital)3 letter sequences1 proper name2 city or street names2 questions2 special keyboard characters 1 Web address1 email address208 application specific words and phrases per session (adults)74 toy commands, 14 phone commands and 34 general commands (children)The following age distribution has been obtained: Adults: 263 speakers are between 15 and 30, 189 speakers are between 31 and 45, 98 speakers are over 46.Children: 22 speakers are between 8 and 10, and 28 speakers are between 11 and 15.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
+<description lang="French">La base de données Speecon tchèque est répartie en deux sous-ensembles :1) Le premier sous-ensemble est composé de 550 locuteurs adultes du tchèque (275 hommes, 275 femmes) à partir de 4 canaux de microphone dans 4 environnements différents (bureau, divertissement, voiture, lieu public). 2) Le deuxième sous-ensemble est composé de 50 locuteurs enfants du tchèque (18 garçons, 32 filles) enregistrés à partir de 4 canaux de microphone dans un seul environnement (chambre d’enfant).La base de données est distribuée sur 20 DVD (adultes) et 3 DVD (enfants). Les bases orales réalisées lors du projet Speecon ont été validées par SPEX, Pays-Bas, afin de contrôler leur adéquation avec le format Speecon et les spécifications de contenu. Les fichiers sont stockés en séquences d'échantillons de 16 kHz, 16 bit ; les canaux sont multiplexés dans un fichier unique, avec une séquence de 0-1-2-3. A chaque énoncé correspond un fichier d'étiquetage ASCII SAM.Chaque locuteur a prononcé les éléments suivants (plus de 290 éléments pour les adultes et plus de 210 éléments pour les enfants) :Données de calibrage : 6 bruits1 “silence”Eléments libres spontanés (adultes uniquement) :5 minutes  (par session) de discours libre spontané, en contexte riche (raconter une histoire) (nombre ouvert de thèmes spontanés à partir de 30 thèmes donnés)17 éléments spontanés dirigés (adultes uniquement) :3 dates, 2 périodes de temps, 3 noms propres, 2 noms de ville, 1 séquence de lettres, 2 réponses à des questions, 3 numéros de téléphone, 1 langue Parole lue : 30 phrases phonétiquement riches prononcées par les adultes et 60 prononcées par les enfants5 mots phonétiquement riches (adultes uniquement)4 chiffres isolés2 séquences de chiffres isolés4 séquences de chiffres connectés1 numéro de téléphone3 nombres naturels 1 montant en devise2 phrases comportant une notion de temps (T1 : analogique, T2 : numérique)3 dates (D1 : analogique, D2 : date relative et générale, D3 : numérique)3 séquences de lettres1 nom propre2 noms de ville ou de rue2 questions2 caractères clavier 1 adresse Web1 adresse email208 mots et phrases de commande par sessions (adultes)74 commandes de jouets, 14 commandes de téléphone et 34 commandes générales (enfants)Les classes d'âge sont réparties comme suit : Adultes : 263  locuteurs ont entre 15 et 30 ans, 189 entre 31 et 45 ans, et 98 de plus de 46 ans.Enfants: 22 locuteurs ont entre 8 et 10 ans, et 28 locuteurs ont entre 11 et 15 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=136</url>
-<identifier>ELRA-M0002_10</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1095</url>
+<identifier>ELRA-S0298</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,59 +29,38 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-02-25</lastDateUpdated>
+<lastDateUpdated>2009-03-23</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
-<licenceInfo>
-<licence>ELRA_END_USER</licence>
-<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 5704.00€</price>
-<price>Academic org. ELRA Non Member: 713.00€</price>
-<price>Commercial org. ELRA Member: 3422.40€</price>
-<price>Academic org. ELRA Member: 427.80€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-01-23</availabilityStartDate>
-</licenceInfo>
-<licenceInfo>
-<licence>ELRA_VAR</licence>
-<restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 5704.00€</price>
-<price>Academic org. ELRA Non Member: 5704.00€</price>
-<price>Commercial org. ELRA Member: 3422.40€</price>
-<price>Academic org. ELRA Member: 3422.40€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-01-23</availabilityStartDate>
-</licenceInfo>
 </distributionInfo>
+<usageInfo>
+<actualUseInfo>
+<actualUse>nlpApplications</actualUse>
+<useNLPSpecific>speechRecognition</useNLPSpecific>
+</actualUseInfo>
+</usageInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>Speecon</projectName>
+<fundingType>euFunds</fundingType>
+</fundingProject>
+</resourceCreationInfo>
 <resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
-<mediaType>text</mediaType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
+<languageId>cze/ces</languageId>
+<languageName>Czech</languageName>
 </languageInfo>
-<languageInfo>
-<languageId>spa</languageId>
-<languageName>Spanish</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Castilian</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
-</languageInfo>
-</lexicalConceptualResourceTextInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
 </resourceComponentType>
 </resourceInfo>

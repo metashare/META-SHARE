@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Danish SpeechDat(M) database - DB1</resourceName>
-<resourceName lang="French">Base de données SpeechDat(M) du danois DB1</resourceName>
-<description lang="English">The Danish SpeechDat(M) database is the speech database collected within the SpeechDat(M) project. It consists ofpolyphone-like data recorded by 1,523 speakers.The speech files are stored as sequences of 8 bit 8 kHz A-law samples. Each prompted utterance is stored within a separatefile and the associated label files are stored in SAM file format.An ASCII file is attached and is listing information about each speaker: speaker code, sex, age, region, prompt number. The lexicon is presented in a TAB delimited ASCII file containing an alphabetically ordered list of distinct lexical itemsoccurring in the database. Each entry contains a frequency count and corresponding pronunciation information.Example:WORD                     FREQUENCY          PHONEMIC TRANSCRIPTIONSåbnede                         104                          O b n @ D | O b n @ D @adresseangivelse           97                          a d R a s @ a n g i: u l s @The complete Danish SpeechDat database consists of 5 CD-ROMs. The first three CD-ROMs contain the application oriented sub-set. The last two CD-ROMs contain the phonetically rich sentences.The included items are: · 5 application word phrases (semi spontaneous) · 12 connected digit strings with 8 digits · 24 natural numbers (3-4 digits) · 27 application words · 3 dates, D3 spontaneous (birthday)· 3 spelled words · 2 money amounts, M1 small, M2 large · City name (spontaneous) · 3 yes/no questions (spontaneous)· 22-25 sentences · T1 time phrase, T2 time of day (spontaneous) There are 1,523 speakers in the SpeechDat database from 11 linguistic regions of Denmark and five age groups (under 16, 16-30, 31-45, 46-60, over 60). 78% of them are between 16 and 60 years old.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
-<description lang="French">La base de données SpeechDat(M) du danois est une base de données orale collectée dans le cadre du projet SpeechDat(M) (similaire aux autres bases de données Polyphone) et enregistrée par 1 523 locuteurs.Les signaux de parole sont enregistrés en loi-A (8 bits, 8 kHz). Les fichiers sont au format SAM.Un fichier ASCII séparé présente une liste d'informations concernant chaque locuteur : code du locuteur, sexe, âge, région, etc.Le lexique est présenté dans un autre fichier ASCII délimité par des tabulations et contenant une liste alphabétique des éléments lexicaux distincts apparaissant dans la base. Chaque entrée contient la fréquence et les prononciations correspondantes.Exemple:MOT                        FREQUENCE        TRANSCRIPTIONS PHONEMIQUESåbnede                      104                     O b n @ D | O b n @ D @adresseangivelse         97                      a d R a s @ a n g i: u l s @La base complète est composée de 5 CD-ROM. Les trois premiers CD-ROM contiennent les mots de commandes, orientés vers des applications. Les deux derniers CD-ROM contiennent les phrases phonétiquement riches.Les éléments sont :· 5 mots de commande inclus dans des phrases (semi spontané),· 12 séquences de 8 chiffres connectés,· 24 nombres entiers naturels (3-4 chiffres),· 27 mots d'application,· 3 dates dont une spontanée (anniversaire),· 3 mots épelés,· 2 montants (argent) dont une petite somme et une grosse,· nom de ville (spontané),· 3 questions oui/non (spontané),· 22-25 phrases,· une phrase comportant une notion de temps et une l'heure de la journée (spontané).La base compte 1 523 locuteurs de 11 régions linguistiques du Danemark et de 5 groupes d'âge différents (moins de 16 ans, 16-30 ans, 31-45 ans, 46-60 ans, plus de 60 ans). 78% d'entre eux ont entre 16 et 60 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
+<resourceName lang="English">Italian SpeechDat(II) FDB-3000</resourceName>
+<resourceName lang="French">Base de données SpeechDat(II) FDB-3000 de l'italien</resourceName>
+<description lang="English">The Italian SpeechDat(II) FDB-3000 comprises more than 3000 Italian speakers (1494 males, 1546 females) recorded over the Italian fixed telephone network. The FDB-3000 database is partitioned into 12 CDs in ISO 9660 format, each CD contains the recordings of 550 speakers. The speech databases made within the SpeechDat(II) project were validated by SPEX, the Netherlands, to assess their compliance with the SpeechDat format and content specifications.Speech samples are stored as sequences of 8-bit 8 kHz A-law. Each prompted utterance is stored in a separate file. Each signal file is accompanied by an ASCII SAM label file which contains the relevant descriptive information.Each speaker uttered the following items:? 1 isolated digits? 1 sequence of 10 isolated digits? 4 connected digits: 1 prompt sheet number (5+ digits), 1 telephone number (9-11 digits), 1 credit card number (14-16 digits), 1 PIN code (6 digits) ? 3 dates: 1 spontaneous date (e.g. birthday), 1 prompted date (word style), 1 relative and general date expression.? 1 word spotting phrase using an application word (embedded).? 3 application words? 3 spelled words: 1 spontaneous name (own forename), 1 city name, 1 real / artificial word for coverage.? 1 Lira currency money amount.? 1 natural number.? 5 directory assistance names: 1 spontaneous name (own forename), 1 city of birth / growing up (spontaneous), 1 most frequent cities, 1 most frequent company / agency, 1 ?forename surname?.? 2 questions including ?fuzzy? yes / no: 1 predominantly ?Yes? question, 1 predominantly ?No? question.? 9 phonetically rich sentences. ? 2 time phrases: 1 time of day (spontaneous), 1 time phrase (word style).? 4 phonetically rich words.4 more items were added to the Italian corpus.The following age distribution has been obtained: 133 speaker are below 16 years old, 757 speakers are between 16 and 30, 862 speakers are between 31 and 45, 626 speakers are between 46 and 60, 482 speakers are over 60.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
+<description lang="French">La base de données SpeechDat(II) FDB-3000 de l'italien contient les enregistrements de plus de 3000 locuteurs italiens (1546 femmes, 1494 hommes) , enregistrés à travers le réseau téléphonique fixe italien. Elle est répartie sur 12 CD-ROM, chacun contenant les enregistrements de 550 locuteurs, dans le format de la norme ISO 9660. Les bases de données SpeechDat(II) ont été réalisées selon les spécifications du projet SpeechDat(II) et validées par SPEX, Pays-Bas.Les fichiers de parole sont stockés en séquences d'échantillons de 8 bits, 8 kHz, loi-A. Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM.Chaque locuteur a prononcé les éléments suivants :    * 1 chiffres isolés ;    * 1 séquence de 10 chiffres isolés ;    * 4 séries de chiffres connectés : 1 numéro permettant d'identifier la feuille de prompt (+5 chiffres), 1 numéro de téléphone (9-11 chiffres), 1 numéro de carte de crédit (14-16 chiffres), 1 code confidentiel (6 chiffres) ;    * 3 dates : 1 date spontanée (date de naissance), 1 date lue, 1 date relative et générale ;    * 1 expression utilisant un mot de commande ;    * 3 mots d'application ;    * 3 mots épelés : 1 spontané (prénom), 1 nom de ville provenant d'un annuaire de renseignements téléphoniques, 1 mot réel / artificiel pour couverture ;    * 1 montant en devise italienne ;    * 1 nombre naturel ;    * 5 noms extraits d'un annuaire de renseignements téléphoniques : 1 spontané (prénom), 1 nom de ville spontané (ville de naissance / d'enfance du locuteur), 1 nom de ville parmi les plus courantes, 1 nom de société, 1 ‘prénom nom'    * 2 questions oui / non : 1 question à prédominance 'oui', 1 question à prédominance 'non' ;    * 9 phrases phonétiquement riches    * 2 phrases comportant une notion de temps : 1 jour (spontané), 1 phrase comportant une notion de temps ;    * 4 mots phonétiquement riches.4 éléments supplémentaires ont été ajoutés à ce corpus.Les classes d'âge sont réparties comme suit : 133 locuteurs de moins de 16 ans, 757 locuteurs entre 16 et 30 ans, 862 locuteurs entre 31 et 45 ans, 626 locuteurs entre 46 et 60 ans, 482 locuteurs de plus de 60 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=169</url>
-<identifier>ELRA-S0040</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=631</url>
+<identifier>ELRA-S0117</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,34 +29,34 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-08-28</lastDateUpdated>
+<lastDateUpdated>2009-11-19</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 20000.00€</price>
-<price>Academic org. ELRA Non Member: 20000.00€</price>
-<price>Commercial org. ELRA Member: 14000.00€</price>
-<price>Academic org. ELRA Member: 11000.00€</price>
+<price>Commercial org. ELRA Non Member: 39000.00€</price>
+<price>Academic org. ELRA Non Member: 31000.00€</price>
+<price>Commercial org. ELRA Member: 34000.00€</price>
+<price>Academic org. ELRA Member: 24500.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-06-02</availabilityStartDate>
+<availabilityStartDate>2001-11-05</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 20000.00€</price>
-<price>Academic org. ELRA Non Member: 20000.00€</price>
-<price>Commercial org. ELRA Member: 14000.00€</price>
-<price>Academic org. ELRA Member: 14000.00€</price>
+<price>Commercial org. ELRA Non Member: 39000.00€</price>
+<price>Academic org. ELRA Non Member: 39000.00€</price>
+<price>Commercial org. ELRA Member: 34000.00€</price>
+<price>Academic org. ELRA Member: 34000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-06-02</availabilityStartDate>
+<availabilityStartDate>2001-11-05</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceCreationInfo>
 <fundingProject>
-<projectName>SpeechDat(M)</projectName>
+<projectName>SpeechDat(II)</projectName>
 <fundingType>euFunds</fundingType>
 </fundingProject>
 </resourceCreationInfo>
@@ -70,8 +70,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>dan</languageId>
-<languageName>Danish</languageName>
+<languageId>ita</languageId>
+<languageName>Italian</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

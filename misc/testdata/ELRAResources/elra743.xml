@@ -6,7 +6,7 @@
 <description lang="English">The corpus contains read speech of 16 different speakers. Each speaker has read a corpus of 200 different sentences from a train inquiry task. The speakers were recorded at three different sites in Germany (University of Kiel, University of Bonn, University of Munich). The language is German. The corpus contains a total of 3.200 recorded utterances. It is provided with a phonological segmentation by hand, an automatic alignment, a word segmentation, and a prosodic segmentation. (1 CDROM).</description>
 <description lang="French">The corpus contains read speech of 16 different speakers. Each speaker has read a corpus of 200 different sentences from a train inquiry task. The speakers were recorded at three different sites in Germany (University of Kiel, University of Bonn, University of Munich). The language is German. The corpus contains a total of 3.200 recorded utterances. It is provided with a phonological segmentation by hand, an automatic alignment, a word segmentation, and a prosodic segmentation. (1 CDROM).</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=64</url>
 <identifier>ELRA-S0024</identifier>
 </identificationInfo>

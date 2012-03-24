@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Mandarin Chinese Telephone Speech Recognition Corpus - Digit String</resourceName>
-<resourceName lang="French">Corpus de reconnaissance de parole téléphonique en chinois mandarin – séquences de chiffres (téléphone mobile 265)</resourceName>
-<description lang="English">This corpus comprises 6,140 entries uttered by 265 speakers of different dialects, ages and various educational levels (144 males and 141 females), recorded over the mobile telephone network. The database comprises 8,109 Chinese digit strings. Speech samples are stored as a sequence of 16-bit 8kHz WAV for a total of 11.8 hours of speech. The total capacity of the data is 669 Mb.Each speaker read 25-30 items. Text files are stored in Unicode format. All data have been proofread manually.The transcriptions include non-speech markers (background noise, background speech, speaker sounds) as well as markers for mispronunciation, channel distortions, words left-out and duplicates.The corpus aims to be applied to the testing and telephone natural speech recognition system.</description>
-<description lang="French">Ce corpus comprend 6 140 entrées prononcées par 265 locuteurs de dialectes, d’âges et de niveaux d’éducation différents (144 hommes et 141 femmes), enregistrées à travers le réseau téléphonique mobile. La base de données contient 8 109 séquences de chiffres en chinois. Les échantillons de parole sont stockés sous la forme de séquences 16-bit 8kHz WAV pour un total de 11,8 heures de parole. La taille totale des données est de 669 Mo.Chaque locuteur a lu de 25 à 30 éléments. Les fichiers textes sont stockés au format Unicode. Toutes les données ont été vérifiées manuellement.Les transcriptions comprennent des balises d’événements acoustiques (bruits de fond, sons émis par les locuteurs) ainsi que des balises de mauvaise prononciation, distorsions du canal, omissions de mots et répétitions.Cette base de données a été conçue pour l’évaluation et le développement de systèmes de reconnaissance de la parole naturelle par téléphone.</description>
+<resourceName lang="English">GlobalPhone Japanese</resourceName>
+<resourceName lang="French">GlobalPhone japonais</resourceName>
+<description lang="English">The GlobalPhone corpus developed in collaboration with the Karlsruhe Institute of Technology (KIT) was designed to provide read speech data for the development and evaluation of large continuous speech recognition systems in the most widespread languages of the world, and to provide a uniform, multilingual speech and text database for language independent and language adaptive speech recognition as well as for language identification tasks. The entire GlobalPhone corpus enables the acquisition of acoustic-phonetic knowledge of the following 19 spoken languages: Arabic, Bulgarian, Chinese-Mandarin, Chinese-Shanghai, Croatian, Czech, French, German, Japanese, Korean, Polish, Portuguese (Brazilian), Russian, Spanish (Latin America), Swedish, Tamil, Thai, Turkish, Vietnamese. In each language about 100 sentences were read from each of the 100 speakers. The read texts were selected from national newspapers available via Internet to provide a large vocabulary (up to 65,000 words). The read articles cover national and international political news as well as economic news. The speech is available in 16bit, 16kHz mono quality, recorded with a close-speaking microphone (Sennheiser 440-6) and same recording equipment for all languages. The transcriptions are internally validated and supplemented by special markers for spontaneous effects like stuttering, false starts, and non-verbal effects like laughing and hesitations. Speaker information like age, gender, occupation, etc. as well as information about the recording setup complement the database. The entire GlobalPhone corpus contains over 450 hours of speech spoken by more than 1900 native adult speakers.Data is shortened by means of the shorten program written by Tony Robinson, available from Softsound's web page:  http://www.softsound.com/  linux distributions, or simulated versions such as cygwin. Alternatively, the data could be delivered unshorten.The Japanese corpus was produced using the Nikkei Shinbun newspaper. It contains recordings of 149 speakers (104 males, 44 females, 1 unspecified) recorded in Tokyo, Japan. The following age distribution has been obtained: 22 speakers are below 19, 90 speakers are between 20 and 29, 5 speakers are between 30 and 39, 2 speakers are between 40 and 49, and 28 speakers are over 50 (2 speakers age is unknown).</description>
+<description lang="French">Le corpus GlobalPhone, développé avec la collaboration du Karlsruhe Institute of Technology (KIT),  a été conçu afin de fournir des données de parole lue pour le développement et l’évaluation de systèmes de reconnaissance de la parole continue à large vocabulaire dans les langues les plus répandues dans le monde, l’objectif étant de fournir une base de données audio et textuelles uniforme et multilingue pour la reconnaissance de la parole indépendante de la langue et adaptable à la langue, ainsi que pour des tâches d’identification de la langue. Le corpus GlobalPhone complet permet l’acquisition d’une connaissance acoustico-phonétique pour les 19 langues parlées suivantes: allemand, arabe (arabe standard moderne), bulgare, chinois-mandarin, chinois de Shanghai, coréen, croate, espagnol (d’Amérique latine), français, japonais, polonais, portugais (brésilien), russe, suédois, tamoul, thaï, tchèque, turc et vietnamien.Dans chaque langue, environ 100 phrases ont été lues par chacun des 100 locuteurs. Les textes lus sont extraits d’articles de journaux nationaux disponibles sur internet afin de fournir un large vocabulaire (jusqu’à 65000 mots). Les articles lus couvrent des actualités politiques nationales et internationales, ainsi que des nouvelles économiques. Les données de parole ont été enregistrées en 16 bit, 16 kHz (qualité mono) avec un micro-casque (Sennheiser 440-6) et le même équipement d’enregistrement pour l’ensemble des langues. Les transcriptions ont été validées en interne et annotées au moyen de balises spéciales pour marquer les effets spontanés, tels que le bégaiement, les faux démarrages, et les effets non verbaux comme le rire et les hésitations. La base contient également des informations sur les locuteurs, telles que l’âge, le genre, la profession, etc. ainsi que des informations sur la mise en place de l’enregistrement. Le corpus GlobalPhone dans son entier comprend plus de 450 heures de parole enregistrées par plus de 1900 locuteurs adultes natifs.Les données sont compressées au moyen du programme Shorten écrit par Tony Robinson, disponible depuis la page web de Softsound: http://www.softsound.com/ (distributions linux ou versions simulées telles que cygwin). Au besoin, les données peuvent être fournies non compressées.Le corpus japonais a été produit à partir du journal Nikkei Shinbun. Il comprend les enregistrements de 149 locuteurs (104 hommes, 44 femmes, 1 non précisé) enregistrés à Tokyo, Japon. Les classes d'âge sont réparties comme suit :  22 locuteurs de moins de 19 ans, 90 locuteurs entre 20 et 29 ans, 5 locuteurs entre 30 et 39 ans, 2 locuteurs entre 40 et 49 ans, et 28 locuteurs de plus de 50 ans (2 locuteurs d’âge inconnu).</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=916</url>
-<identifier>ELRA-S0228_07</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=823</url>
+<identifier>ELRA-S0199</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,29 +29,41 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2009-09-24</lastDateUpdated>
+<lastDateUpdated>2011-09-21</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 1592.00€</price>
-<price>Academic org. ELRA Non Member: 1592.00€</price>
-<price>Commercial org. ELRA Member: 1592.00€</price>
-<price>Academic org. ELRA Member: 1592.00€</price>
-<availabilityStartDate>2007-01-17</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 3600.00€</price>
+<price>Academic org. ELRA Non Member: 700.00€</price>
+<price>Commercial org. ELRA Member: 3000.00€</price>
+<price>Academic org. ELRA Member: 600.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2006-01-30</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 1592.00€</price>
-<price>Academic org. ELRA Non Member: 1592.00€</price>
-<price>Commercial org. ELRA Member: 1592.00€</price>
-<price>Academic org. ELRA Member: 1592.00€</price>
-<availabilityStartDate>2007-01-17</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 3600.00€</price>
+<price>Academic org. ELRA Non Member: 3600.00€</price>
+<price>Commercial org. ELRA Member: 3000.00€</price>
+<price>Academic org. ELRA Member: 3000.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2006-01-30</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<validationInfo>
+<validated>True</validated>
+<validationModeDetails> Most of the GlobalPhone data have been validated in-house</validationModeDetails>
+</validationInfo>
+<usageInfo>
+<actualUseInfo>
+<actualUse>nlpApplications</actualUse>
+<useNLPSpecific>speechRecognition</useNLPSpecific>
+</actualUseInfo>
+</usageInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
@@ -62,9 +74,15 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>chi/zho</languageId>
-<languageName>Chinese</languageName>
+<languageId>jpn</languageId>
+<languageName>Japanese</languageName>
 </languageInfo>
+<audioSizeInfo>
+<sizeInfo>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizeInfo>
+</audioSizeInfo>
 </corpusAudioInfo>
 </corpusMediaType>
 </corpusInfo>

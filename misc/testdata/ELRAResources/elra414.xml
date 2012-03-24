@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">EASy Evaluation Package</resourceName>
-<resourceName lang="French">Package d’évaluation EASy</resourceName>
-<description lang="English">The EASy Evaluation Package was produced within the French national project EASy (Evaluation of syntactic parsers of French), as part of the Technolangue programme funded by the French Ministry of Research and New Technologies (MRNT). The project enabled to carry out a campaign for the evaluation of syntactic parsers of French. This package includes the material that was used for the EASy evaluation campaign. It includes resources, protocols, scoring tools, results of the campaign, etc., that were used or produced during the campaign. The aim of these evaluation packages is to enable external players to evaluate their own system and compare their results with those obtained during the campaign itself. The campaign is distributed over two actions: 1)	Evaluation of constituent annotation: it consists in evaluating the ability of parsers with respect to the type of corpus (e.g. literature, conversation transcription, parliamentary speech, questions for information retrieval tools).2)	Evaluation of dependency relation annotation: it consists in evaluating the ability of parsers with respect to the relations between constituents or words.The EASy evaluation package contains the following data and tools:1)	A collection of syntactically tagged French texts gathered over 6 domains (about one million words) : -	medicine: 100,000 words, including 5,000 annotated words, -	literature: 150,000 words, including 15,000 annotated words, -	emails: 2,250 anonymised personal emails (121,000 words), -	general: 250,000 words, including 24,000 annotated words, extracted from Le Monde newspaper, reports from the French Senate and the European Assembly (MLCC, MultiLingual Corpora for Co-operation, catalogue ref: ELRA-W0023),-	speech: 10 passages of transcribed dialogues from the Spoken French corpus (8,000 annotated words),-	questions: corpus of 137,000 words, extracted from the TREC and AMARYLLIS campaigns, including 5,000 annotated words. 2)	PASTK++: gathers evaluation tools for constituents and relations. It includes a version of the EASy campaign tools that were modified during the PASSAGE campaign (which followed the EASy campaigns).3)	Visualization tools for constituents and relations A description of the project is available at the following address:http://www.technolangue.net/article.php3?id_article=198 (in French language)</description>
-<description lang="French">Le package d’évaluation EASy a été produit dans le cadre du projet national français EASy (« Evaluation des Analyseurs Syntaxiques du français »), issu du programme Technolangue, financé par le Ministère français délégué à la Recherche et aux Nouvelles Technologies (MRNT). Le projet EASy a permis de réaliser une campagne d'évaluation des analyseurs syntaxiques du français. Ce package comprend l’ensemble des données utilisées lors de la campagne d’évaluation EASy. Il regroupe des ressources, des protocoles, des outils de notation, les résultats de la campagne officielle, etc., qui ont été utilisés ou produits pendant la campagne. Le but de ce « package » d’évaluation est de permettre à tout acteur externe de pouvoir évaluer son propre système et ainsi de pouvoir comparer ses résultats à ceux obtenus pendant la campagne.La campagne se décompose en deux actions : 3)	Evaluation sur l’annotation en constituants : consiste à évaluer la capacité des analyseurs en fonction du type de corpus (par exemple littérature, transcription de conversation, discours parlementaires, questions pour des moteurs de recherche).4)	Evaluation sur l’annotation en relations de dépendances : consiste à évaluer la capacité des analyseurs en fonction des relations entre constituants ou entre mots.Le package d’évaluation EASy contient les données et outils suivants :4)	Collection de textes français étiquetés syntaxiquement couvrant 6 domaines (près d’un million de mots) : -	médical : 100 000 mots dont 5 000 annotés, -	littéraire : 150 000 mots dont 15 000 annotés, -	emails : 2 250 courriers électroniques personnels anonymisés, soit 121 000 mots, -	général : 250 000 mots dont 24 000 annotés extraits du journal Le Monde, de rapports du Sénat et de l’assemblée européenne (MLCC, MultiLingual Corpora for Co-operation, réf. Catalogue : ELRA-W0023),-	oral : 10 fragments de dialogues transcrits du Corpus du Français Parlé, soit 8 000 mots annotés,-	questions : corpus de 137 000 mots extraits des campagnes TREC et AMARYLLIS dont 5 000 annotés. 5)	PASTK++ : regroupe les outils d’évaluation en constituants et en relations. Il s’agit d’une version des outils des campagnes EASy qui ont été améliorés au cours de la campagne PASSAGE (suite des campagnes EASy).6)	Outil de visualisation des constituants et des relations Une description du projet est disponible à l'adresse suivante :http://www.technolangue.net/article.php3?id_article=198</description>
+<resourceName lang="English">Strange Corpus 10 - SC10 ('Accents II')</resourceName>
+<resourceName lang="French">Strange Corpus 10 - SC10 ('Accents II')</resourceName>
+<description lang="English">70 speakers (67 non-native, 3 native German speakers) - 1 dialogue, 1 re-telling of a German story - transliteration, orthography, canonical transcription.A collection of a variety of speech styles spoken by native and non-native German speakers, read texts, numbers, phonetically balanced sentences, story, free monolog, dialog</description>
+<description lang="French">70 locuteurs (3 locuteurs natifs et 67 locuteurs non-natifs), 1 échange, 1 histoire à raconter, transcriptions.Cette collection de plusieurs styles de parole est composée de textes lus, de nombres, de phrases phonétiquement équilibrées, d'histoires, de monologues libres, de dialogues, enregistrés par des locuteurs natifs et non natifs de l'allemand.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1112</url>
-<identifier>ELRA-E0034</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=629</url>
+<identifier>ELRA-S0114</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,40 +29,45 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2009-11-25</lastDateUpdated>
+<lastDateUpdated>2005-05-09</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
-<licence>ELRA_EVALUATION</licence>
-<restrictionsOfUse>evaluationUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 1000.00€</price>
-<price>Academic org. ELRA Non Member: 300.00€</price>
-<price>Commercial org. ELRA Member: 500.00€</price>
-<price>Academic org. ELRA Member: 150.00€</price>
-<availabilityStartDate>2009-07-08</availabilityStartDate>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Member: 1255.22€</price>
+<price>Academic org. ELRA Member: 255.65€</price>
+<price>Academic org. ELRA Non Member: 511.29€</price>
+<price>Commercial org. ELRA Non Member: 1510.87€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2001-11-05</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Member: 1255.22€</price>
+<price>Academic org. ELRA Member: 1255.22€</price>
+<price>Academic org. ELRA Non Member: 1510.87€</price>
+<price>Commercial org. ELRA Non Member: 1510.87€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2001-11-05</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>EVALDA</projectName>
-<fundingType>nationalFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
 <corpusMediaType>
-<corpusTextInfo>
-<mediaType>text</mediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
+<languageId>ger/deu</languageId>
+<languageName>German</languageName>
 </languageInfo>
-</corpusTextInfo>
+</corpusAudioInfo>
 </corpusMediaType>
 </corpusInfo>
 </resourceComponentType>

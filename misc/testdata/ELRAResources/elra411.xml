@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">LC-STAR Russian phonetic lexicon</resourceName>
-<resourceName lang="French">Lexique phonétique LC-STAR russe</resourceName>
-<description lang="English">The LC-STAR Russian lexicon was created within the scope of the LC-STAR project (IST 2001-32216) which was sponsored by the European Commission.The lexicon comprises about 128,000 words, distributed over three categories:- a set of 77,154 common word entries. This set is extracted from a corpus of more than 20 million words distributed over 6 different domains (sports/games, news, finance, culture/entertainment, consumer information, personal communications). This was done with the aim of reaching a target for each domain of at least 95% self coverage. In addition to extracting word lists from the corpus, a list of closed set (function) word classes are included in the final word list.- a set of 51,074 proper names (including person names, family names, cities, streets, companies and brand names) divided into 3 domains. Multiple word names such as New_York are kept together in all three domains, and they count as one entry. The 3 domains consist of first and last names (19,740 different entries), place names (19,306 different entries), and organisations (13,194 different entries).- and a list of 12,012 special application words translated from English terms defined by the LC-STAR consortium. This list contains: numbers, letters, abbreviations and specific vocabulary for applications controlled by voice (information retrieval, controlling of consumer devices, etc.). The lexicon is provided in XML format and includes phonetic transcriptions in SAMPA. The database is stored on 1 CD.</description>
-<description lang="French">Le lexique LC-STAR russe a été créé dans le cadre du projet LC-STAR (IST 2001-32216), financé par la Commission européenne.Le lexique comprend environ 128 000 mots répartis en trois catégories :- Un ensemble de 77 154 mots communs. Cet ensemble a été extrait d’un corpus de plus de 20 millions de mots répartis en 6 domaines différents (sports/jeux, actualités, finances, culture/amusement, information consommateur, communications personnelles), avec pour objectif d’atteindre pour chaque domaine au moins 95% de couverture. En plus des listes de mots extraites du corpus, une liste de classes de mots en ensemble fermé (fonctions) est incluse dans la liste de mots finale.- Un ensemble de 51 074 noms propres (noms de personnes, noms de familles, villes, rues, sociétés, noms de marque) divisée en 3 domaines. Les noms comportant des mots multiples, tels que New_York, ont été conservés dans chacun des 3 domaines et comptent ainsi pour une seule entrée. Les 3 domaines sont : prénoms et noms de familles (19 740 entrées différentes), noms de lieux (19 306 entrées différentes), et organisations (13 194 entrées différentes).- Une liste de 12 012 mots d’application traduits à partir de termes anglais tels que définis par le consortium LC-STAR. Cette liste comprend des nombres, des lettres, des abréviations et du vocabulaire spécifique aux applications contrôlées par la voix (recherche d’information, contrôle des appareils de consommation, etc.). Le lexique est fourni au format XML et inclut des transcriptions phonétiques en SAMPA. La base de données est stockée sur 1 CD.</description>
-<resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=978</url>
-<identifier>ELRA-S0230</identifier>
+<resourceName lang="English">SCIPER-AN-EURADIC English Monolingual Dictionary</resourceName>
+<resourceName lang="French">SCIPER-AN-EURADIC Dictionnaire monolingue anglais</resourceName>
+<description lang="English">This English monolingual dictionary was increased and improved within the French national project EurRADic (European and Arabic Dictionaries and Corpora), as part of the Technolangue programme funded by the French Ministry of Industry. It contains 171,713 lemmas (365,823 inflected forms), with their part of speech and some information related to their inflexion. The data are presented in a table format, where information related to each entry is separated by ";".Other formats and other services may be supplied by the data owner upon request (e.g. conversion into buyer's formalism, selection of subsets of the words missing from your own dictionary).A description of the project is available at the following address: http://www.technolangue.net/article.php3?id_article=203 (in French language).See also ELRA-L0049, ELRA-L0051, ELRA-L0052, ELRA-L0053, ELRA-M0033, ELRA-M0034, ELRA-M0035, ELRA-M0036, ELRA-M0037, ELRA-M0038.</description>
+<description lang="French">Ce dictionnaire monolingue anglais a été augmenté et amélioré dans le cadre du projet national français EuRADic (Dictionnaire et corpus européens et arabe), du programme Technolangue, financé par le ministère français de l'industrie. Il contient environ 171 713 lemmes (365 823 formes fléchies), avec leur partie du discours complétée par des informations flexionnelles. Les données sont présentées sous un format tabulaire et les informations relatives à chaque entrée séparées par des ";".D'autres formats et services peuvent être proposés par le fournisseur de ces données à la demande (par exemple, conversion vers le formalisme de l'acquéreur, sélection de sous-ensembles de mots en complément de votre propre dictionnaire).Une description du projet est disponible à l'adresse suivante : http://www.technolangue.net/article.php3?id_article=203.Voir aussi : ELRA-L0049, ELRA-L0051, ELRA-L0052, ELRA-L0053, ELRA-M0033, ELRA-M0034, ELRA-M0035, ELRA-M0036, ELRA-M0037, ELRA-M0038.</description>
+<resourceShortName>SCIPER-AN-EURADIC</resourceShortName>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=674</url>
+<identifier>ELRA-L0050</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,45 +29,41 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2008-02-12</lastDateUpdated>
+<lastDateUpdated>2007-06-19</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 39000.00€</price>
-<price>Academic org. ELRA Non Member: 30875.00€</price>
-<price>Commercial org. ELRA Member: 30000.00€</price>
-<price>Academic org. ELRA Member: 23750.00€</price>
+<price>Commercial org. ELRA Non Member: 9000.00€</price>
+<price>Academic org. ELRA Non Member: 1600.00€</price>
+<price>Commercial org. ELRA Member: 6500.00€</price>
+<price>Academic org. ELRA Member: 800.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2007-02-09</availabilityStartDate>
+<availabilityStartDate>2003-04-16</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 39000.00€</price>
-<price>Academic org. ELRA Non Member: 39000.00€</price>
-<price>Commercial org. ELRA Member: 30000.00€</price>
-<price>Academic org. ELRA Member: 30000.00€</price>
+<price>Commercial org. ELRA Non Member: 9000.00€</price>
+<price>Academic org. ELRA Non Member: 9000.00€</price>
+<price>Commercial org. ELRA Member: 6500.00€</price>
+<price>Academic org. ELRA Member: 6500.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2007-02-09</availabilityStartDate>
+<availabilityStartDate>2003-04-16</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceCreationInfo>
 <fundingProject>
-<projectName>LC-STAR (IST 2001-32216)</projectName>
-<fundingType>euFunds</fundingType>
+<projectName>EURADIC</projectName>
+<fundingType>nationalFunds</fundingType>
 </fundingProject>
 </resourceCreationInfo>
 <resourceComponentType>
 <lexicalConceptualResourceInfo>
 <resourceType>lexicalConceptualResource</resourceType>
 <lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
-<lexicalConceptualResourceEncodingInfo>
-<encodingLevel>phonetics</encodingLevel>
-<encodingLevel>morphology</encodingLevel>
-</lexicalConceptualResourceEncodingInfo>
 <lexicalConceptualResourceMediaType>
 <lexicalConceptualResourceTextInfo>
 <mediaType>text</mediaType>
@@ -75,20 +71,10 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>rus</languageId>
-<languageName>Russian</languageName>
+<languageId>eng</languageId>
+<languageName>English</languageName>
 </languageInfo>
 </lexicalConceptualResourceTextInfo>
-<lexicalConceptualResourceAudioInfo>
-<mediaType>audio</mediaType>
-<lingualityInfo>
-<lingualityType>monolingual</lingualityType>
-</lingualityInfo>
-<languageInfo>
-<languageId>rus</languageId>
-<languageName>Russian</languageName>
-</languageInfo>
-</lexicalConceptualResourceAudioInfo>
 </lexicalConceptualResourceMediaType>
 </lexicalConceptualResourceInfo>
 </resourceComponentType>
