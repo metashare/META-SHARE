@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Genomics IULA Corpus in Catalan</resourceName>
+      <description>The corpus consists of a number of specialized texts of Genome domain. This is LSP corpus has been created with articles from specialized publications, PhD theses, etc. It contains about 950 K words in 134 documents.</description>
+      <resourceShortName>Genomics Catalan</resourceShortName>
+      <url>http://www.uila.upf.edu</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+      <identifier>identifier</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability>
+      <licenceInfo>
+         <licence>AGPL</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <downloadLocation>http://www..com/</downloadLocation>
+         <distributionRightsHolder>
+              <organizationInfo>
+                <organizationName>Institut Universitari Lingüística Aplicada - UPF</organizationName>
+                <organizationShortName>IULA - UPF</organizationShortName>
+                <departmentName>Institut Universitari Lingüística Aplicada (UPF)</departmentName>
+                  <communicationInfo>
+                  <email>jorge.vivaldi@upf.edu</email>
+                  <url>http://www.iula.upf.edu/</url>
+                  <address>Roc Boronat, 138</address>
+                  <zipCode>08018</zipCode>
+                  <city>Barcelona</city>
+                  <country>Spain</country>
+                  <telephoneNumber>+34 93 5422332</telephoneNumber>
+                  <faxNumber>+34 93 5422321</faxNumber>
+               </communicationInfo>
+              </organizationInfo>
+          </distributionRightsHolder>
+      </licenceInfo>
+      <iprHolder>
+          <organizationInfo>
+            <organizationName>Institut Universitari Lingüística Aplicada - UPF</organizationName>
+            <organizationShortName>IULA - UPF</organizationShortName>
+            <departmentName>Institut Universitari Lingüística Aplicada (UPF)</departmentName>
+              <communicationInfo>
+               <email>jorge.vivaldi@upf.edu</email>
+               <url>http://www.iula.upf.edu/</url>
+               <address>Roc Boronat, 138</address>
+               <zipCode>08018</zipCode>
+               <city>Barcelona</city>
+               <country>Spain</country>
+               <telephoneNumber>+34 93 5421207</telephoneNumber>
+               <faxNumber>+34 93 5422321</faxNumber>
+            </communicationInfo>
+          </organizationInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Vivaldi</surname>
+      <givenName>Jorge</givenName>
+      <communicationInfo>
+         <email>jorge.vivaldi@upf.edu</email>
+         <address>Roc Boronat, 138</address>
+         <zipCode>08018</zipCode>
+         <city>Barcelona</city>
+         <country>Spain</country>
+      </communicationInfo>
+      <affiliation>
+            <organizationName>Institut Universitari Lingüística Aplicada (Universitat Pompeu Fabra)</organizationName>
+            <organizationShortName>IULA UPF</organizationShortName>
+            <departmentName>Institut Universitari Lingüística Aplicada</departmentName>
+              <communicationInfo>
+            <email>jorge.vivaldi@upf.edu</email>
+            <url>http://www.iula.upf.edu/</url>
+            <address>Roc Boronat, 138</address>
+            <zipCode>08018</zipCode>
+            <city>Barcelona</city>
+            <country>Spain</country>
+            <telephoneNumber>+34 93 5422332</telephoneNumber>
+            <faxNumber>+34 93 5422321</faxNumber>
+         </communicationInfo>
+          </affiliation>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-10-10</metadataCreationDate>
+      <metadataCreator>
+         <surname>Vivaldi</surname>
+         <givenName>Jorge</givenName>
+         <communicationInfo>
+            <email>jorge.vivaldi@upf.edu</email>
+            <url>http://www.iula.upf.edu/</url>
+            <address>Roc Boronat, 138</address>
+            <zipCode>08018</zipCode>
+            <city>Barcelona</city>
+            <country>Spain</country>
+            <telephoneNumber>+34 93 5422332</telephoneNumber>
+            <faxNumber>+34 93 5422321</faxNumber>
+         </communicationInfo>
+         <affiliation>
+                <organizationName>Institut Universitari Lingüística Aplicada (Universitat Pompeu Fabra)</organizationName>
+                <organizationShortName>IULA UPF</organizationShortName>
+                <departmentName>Institut Universitari Lingüística Aplicada</departmentName>
+                  <communicationInfo>
+               <email>jorge.vivaldi@upf.edu</email>
+               <url>http://www.iula.upf.edu/</url>
+               <address>Roc Boronat, 138</address>
+               <zipCode>08018</zipCode>
+               <city>Barcelona</city>
+               <country>Spain</country>
+               <telephoneNumber>+34 93 5421207</telephoneNumber>
+               <faxNumber>+34 93 5422321</faxNumber>
+            </communicationInfo>
+              </affiliation>
+      </metadataCreator>
+      <source>METASHARE</source>
+      <originalMetadataSchema>v1.1</originalMetadataSchema>
+      <metadataLanguageId>en-US</metadataLanguageId>
+      <metadataLastDateUpdated>2011-10-30</metadataLastDateUpdated>
+   </metadataInfo>
+   <versionInfo>
+      <version>version1</version>
+      <lastDateUpdated>2011-10-30</lastDateUpdated>
+    
+  </versionInfo>
+   <validationInfo>
+      <validated>True</validated>
+      <validationType>formal</validationType>
+      <validationMode>automatic</validationMode>
+      <validationModeDetails>The documents validates against the GrAF DTD v.1.0.4</validationModeDetails>
+   </validationInfo>
+   <resourceDocumentationInfo>
+      <documentation>
+         <documentUnstructured>Vivaldi Palatresi, Jorge (2009). "Corpus and exploitation tool: IULACT and bwanaNet" in Cantos Gómez, Pascual; Sánchez Pérez, Aquilino (ed.) A survey on corpus-based research = Panorama de investigaciones basadas en corpus [Proceedings of the I Congreso Internacional de Lingüística de Corpus (CICL-09), 7-9 May 2009]. Murcia: Asociación Española de Lingüística del Corpus. Pp. 224-239.</documentUnstructured>
+      </documentation>
+      <documentation>
+         <documentUnstructured>Cabré, M. T.; Bach, C.; Vivaldi, J. (2006). 10 anys del Corpus de l'IULA. Barcelona: Institut Universitari de Lingüística Aplicada. Universitat Pompeu Fabra</documentUnstructured>
+      </documentation>
+      <documentation>
+         <documentUnstructured>Cabré, M. Teresa; Bach, Carme (2004). "El corpus tècnic del IULA: corpus textual especializado plurilingüe" in Panace@ - Boletín de Medicina y Traducción 5(16). [s.l]: MedTrad. Pp. 173-176.</documentUnstructured>
+      </documentation>
+      <documentation>
+         <documentUnstructured>Morel, J.; Torner, S.; Vivaldi, J., de Yzaguirre, L.; Cabré, M.T. (1998). “El corpus de l’IULA: etiquetaris”. Papers de l’IULA, Sèrie Informes n. 18.  Barcelona: Institut Universitari de Lingüística Aplicada. Universitat Pompeu Fabra.</documentUnstructured>
+      </documentation>
+  </resourceDocumentationInfo>
+   <resourceCreationInfo>
+      <resourceCreator>
+          <organizationInfo>
+            <organizationName>Institut Universitari Lingüística Aplicada - UPF</organizationName>
+            <organizationShortName>IULA - UPF</organizationShortName>
+            <departmentName>Institut Universitari Lingüística Aplicada (UPF)</departmentName>
+              <communicationInfo>
+               <email>jorge.vivaldi@upf.edu</email>
+               <url>http://www.iula.upf.edu/</url>
+               <address>Roc Boronat, 138</address>
+               <zipCode>08018</zipCode>
+               <city>Barcelona</city>
+               <country>Spain</country>
+               <telephoneNumber>+34 93 5421207</telephoneNumber>
+               <faxNumber>+34 93 5422321</faxNumber>
+            </communicationInfo>
+          </organizationInfo>
+      </resourceCreator>
+      <fundingProject>
+         <projectName>METANET4U</projectName>
+         <projectShortName>METANET4U</projectShortName>
+         <url>http://metanet4u.eu/</url>
+         <fundingType>ownFunds</fundingType>
+         <fundingType>euFunds</fundingType>
+         <funder>UPF</funder>
+         <funder>EU</funder>
+         <fundingCountry>Spain</fundingCountry>
+      </fundingProject>
+      <creationStartDate>2011-10-10</creationStartDate>
+      <creationEndDate>2011-10-30</creationEndDate>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>N/A</languageId>
+        
+                  <languageName>Catalan</languageName>
+                  <sizePerLanguage>
+                     <size>950000</size>
+            
+                     <sizeUnit>tokens</sizeUnit>
+                  </sizePerLanguage>
+               </languageInfo>
+               <sizeInfo>
+                  <size>950000</size>
+        
+                  <sizeUnit>tokens</sizeUnit>
+               </sizeInfo>
+               <textFormatInfo>
+                  <mimeType>text/xml</mimeType>
+                  <sizePerTextFormat>
+                     <size>950000</size>
+            
+                     <sizeUnit>tokens</sizeUnit>
+                  </sizePerTextFormat>
+               </textFormatInfo>
+               <characterEncodingInfo>
+                  <characterEncoding>MacDingbat</characterEncoding>
+               </characterEncodingInfo>
+               <annotationInfo>
+                  <annotationType>morphosyntacticAnnotation-posTagging</annotationType>
+                  <annotationStandoff>True</annotationStandoff>
+                  <segmentationLevel>word</segmentationLevel>
+                  <annotationFormat>text/xml</annotationFormat>
+                  <tagset>MULTEX/PAROLE</tagset>
+                  <conformanceToStandardsBestPractices>other</conformanceToStandardsBestPractices>
+                  <annotationMode>automatic</annotationMode>
+                  <annotationTool>
+                     <targetResourceNameURI>TreeTagger</targetResourceNameURI>
+                  </annotationTool>
+                  <annotationStartDate>2011-11-30</annotationStartDate>
+                  <annotationEndDate>2011-11-30</annotationEndDate>
+               </annotationInfo>
+               <domainInfo>
+                  <domain>medicine</domain>
+               </domainInfo>
+               <textClassificationInfo>
+                  <register>formal</register>
+                  <subject_topic>Human genome</subject_topic>
+               </textClassificationInfo>
+               <creationInfo>
+                  <originalSource>
+                     <targetResourceNameURI>IULACT GENOME</targetResourceNameURI>
+                  </originalSource>
+                  <creationMode>automatic</creationMode>
+               </creationInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

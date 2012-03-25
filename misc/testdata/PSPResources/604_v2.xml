@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>French-Serbian Aligned Corpus</resourceName>
+      <description>The corpus includes French or Serbian source literary and newspaper texts and their translations.  The alignment was performed on the subsentencial level. Texts are segment and aligned automatically and then manually checked to obtain one-to-one alignment (in most of the cases). The corpus contains 25 literary texts: 22 French originals with Serbian translation (one with two translations), 2 Serbian originals with French translations, and one English novel translated to French and Serbian. The corpus also contains 15 articles from one issue of "Le monde diplomatique" from 2001. More about the content of this corpus can be found at: http://www.korpus.matf.bg.ac.rs/SrpFranKor/SrpFranKor_2011_11.pdf</description>
+      <resourceShortName>SrpFranKor</resourceShortName>
+      <url>http://www.korpus.matf.bg.ac.rs/SrpFranKor</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+      <identifier>604</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>CC_BY-NC</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
+         <executionLocation>http://www.korpus.matf.bg.ac.rs/SrpFranKor</executionLocation>
+         <price>no price</price>
+         <licensor>
+				        <personInfo>
+               <surname>Vitas</surname>
+               <givenName>Duško</givenName>
+               <communicationInfo>
+                  <email>vitas@matf.bg.ac.rs</email>
+                  <url>http://poincare.matf.bg.ac.rs/~vitas</url>
+               </communicationInfo>
+               <position>Professor</position>
+               <affiliation>
+							           <organizationName>University of Belgrade</organizationName>
+							           <organizationShortName>UBG-MATF</organizationShortName>
+							           <departmentName>Faculty of Mathematics</departmentName>
+							           <communicationInfo>
+                     <email>matf@matf.bg.ac.rs</email>
+                     <url>http://www.matf.bg.ac.rs</url>
+                  </communicationInfo>
+               </affiliation>
+            </personInfo>
+         </licensor>
+         <distributionRightsHolder>
+				        <personInfo>
+               <surname>Vitas</surname>
+               <givenName>Duško</givenName>
+               <communicationInfo>
+                  <email>vitas@matf.bg.ac.rs</email>
+                  <url>http://poincare.matf.bg.ac.rs/~vitas</url>
+               </communicationInfo>
+               <position>Professor</position>
+               <affiliation>
+							           <organizationName>University of Belgrade</organizationName>
+							           <organizationShortName>UBG-MATF</organizationShortName>
+							           <departmentName>Faculty of Mathematics</departmentName>
+							           <communicationInfo>
+                     <email>matf@matf.bg.ac.rs</email>
+                     <url>http://www.matf.bg.ac.rs</url>
+                  </communicationInfo>
+               </affiliation>
+            </personInfo>
+         </distributionRightsHolder>
+      </licenceInfo>
+      <iprHolder>
+			      <personInfo>
+            <surname>Vitas</surname>
+            <givenName>Duško</givenName>
+            <communicationInfo>
+               <email>vitas@matf.bg.ac.rs</email>
+               <url>http://poincare.matf.bg.ac.rs/~vitas</url>
+            </communicationInfo>
+            <position>Professor</position>
+            <affiliation>
+						         <organizationName>University of Belgrade</organizationName>
+						         <organizationShortName>UBG-MATF</organizationShortName>
+						         <departmentName>Faculty of Mathematics</departmentName>
+						         <communicationInfo>
+                  <email>matf@matf.bg.ac.rs</email>
+                  <url>http://www.matf.bg.ac.rs</url>
+                  <address>Studentski trg 16</address>
+                  <zipCode>11000</zipCode>
+                  <city>Belgrade</city>
+                  <country>Serbia</country>
+                  <telephoneNumber>+381 11 2027 801</telephoneNumber>
+                  <faxNumber>+381 11 2630 151</faxNumber>
+               </communicationInfo>
+            </affiliation>
+         </personInfo>
+      </iprHolder>
+      <availabilityStartDate>2011-12-01</availabilityStartDate>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Vitas</surname>
+      <givenName>Duško</givenName>
+      <communicationInfo>
+         <email>vitas@matf.bg.ac.rs</email>
+         <url>http://www.matf.bg.ac.rs/~vitas</url>
+      </communicationInfo>
+      <position>Professor</position>
+      <affiliation>
+				     <organizationName>University of Belgrade</organizationName>
+				     <organizationShortName>UBG-MATF</organizationShortName>
+				     <departmentName>Faculty of Mathematics</departmentName>
+				     <communicationInfo>
+            <email>matf@matf.bg.ac.rs</email>
+            <url>http://www.matf.bg.ac.rs</url>
+            <address>Studentski trg 16</address>
+            <zipCode>11000</zipCode>
+            <city>Belgrade</city>
+            <country>Serbia</country>
+            <telephoneNumber>+381 11 2027 801</telephoneNumber>
+            <faxNumber>+381 11 2630 151</faxNumber>
+         </communicationInfo>
+      </affiliation>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-18</metadataCreationDate>
+      <metadataCreator>
+         <surname>Krstev</surname>
+         <givenName>Cvetana</givenName>
+         <communicationInfo>
+            <email>cvetana@matf.bg.ac.rs</email>
+            <url>http://poincare.matf.bg.ac.rs/~cvetana</url>
+         </communicationInfo>
+         <position>Professor</position>
+      </metadataCreator>
+      <source>CESAR</source>
+      <metadataLanguageId>en-us</metadataLanguageId>
+      <metadataLastDateUpdated>2011-11-18</metadataLastDateUpdated>
+   </metadataInfo>
+   <versionInfo>
+		    <version>v2.0</version>
+      <lastDateUpdated>2011-12-01</lastDateUpdated>
+		
+      <!--		<revision>String</revision>
+		<updateFrequency>String</updateFrequency>-->
+</versionInfo>
+   <validationInfo>
+      <validated>True</validated>
+      <validationType>formal</validationType>
+      <validationMode>mixed</validationMode>
+      <validationExtent>full</validationExtent>
+      <sizePerValidation>
+			      <size>42</size>
+			
+			      <sizeUnit>files</sizeUnit>
+      </sizePerValidation>
+      <validator>
+			      <personInfo>
+            <surname>Vitas</surname>
+            <givenName>Duško</givenName>
+            <communicationInfo>
+               <email>vitas@matf.bg.ac.rs</email>
+               <url>http://poincare.matf.bg.ac.rs/~vitas</url>
+            </communicationInfo>
+            <position>Professor</position>
+            <affiliation>
+						         <organizationName>University of Belgrade</organizationName>
+						         <organizationShortName>UBG-MATF</organizationShortName>
+						         <departmentName>Faculty of Mathematics</departmentName>
+						         <communicationInfo>
+                  <email>matf@matf.bg.ac.rs</email>
+                  <url>http://www.matf.bg.ac.rs</url>
+               </communicationInfo>
+            </affiliation>
+         </personInfo>
+      </validator>
+   </validationInfo>
+   <usageInfo>
+		    <accessTool>
+         <targetResourceNameURI>Corpus query processor (CQP)</targetResourceNameURI>
+      </accessTool>
+		    <resourceAssociatedWith>
+         <targetResourceNameURI>IMS Open Corpus Workbench (CWB), http://cwb.sourceforge.net</targetResourceNameURI>
+      </resourceAssociatedWith>
+		    <foreseenUseInfo>
+         <foreseenUse>nlpApplications</foreseenUse>
+			
+			
+			      <useNLPSpecific>lexiconAcquisitionFromCorpora</useNLPSpecific>
+      </foreseenUseInfo>
+		    <actualUseInfo>
+         <actualUse>humanUse</actualUse>
+         <useNLPSpecific>lexiconAcquisitionFromCorpora</useNLPSpecific>
+         <useNLPSpecific>bilingualLexiconInduction</useNLPSpecific>
+         <useNLPSpecific>temporalExpressionRecognition</useNLPSpecific>
+         <useNLPSpecific>terminologyExtraction</useNLPSpecific>
+         <usageReport>
+            <documentUnstructured>Duško Vitas, Cvetana Krstev, “Literature and Aligned Texts”, in Readings in Multilinguality, eds. Milena Slavcheva, Galia Angelova and Kiril Simov, pp. 148-155, Institute for Parallel Processing, Bulgarian Academy of Sciences, Sofia, Bulgaria, 2006.</documentUnstructured>
+         </usageReport>
+         <usageReport>
+            <documentUnstructured>Duško Vitas, Cvetana Krstev, Eric Laporte, “Preparation and exploitation of Bilingual Texts”, in Lux Coreana, No. 1, pp. 110-132, Han-Seine, 2006.</documentUnstructured>
+         </usageReport>
+         <usageReport>
+            <documentUnstructured>Duško Vitas, Cvetana Krstev, “Structural derivation and meaning extraction: a comparative study on French-Serbo-Croatian parallel texts”, in Meaningful Texts: The Extraction of Semantic Information from Monolingual and Multilingual Corpora, eds. Geoff Barnbrook, Pernilla Danielsson, Michaela Mahlberg, pp. 166-178, The University of Birmingham Press, Birmingham, 2005.</documentUnstructured>
+         </usageReport>
+      </actualUseInfo>
+   </usageInfo>
+   <resourceCreationInfo>
+      <resourceCreator>
+			      <personInfo>
+            <surname>Vitas</surname>
+            <givenName>Duško</givenName>
+            <communicationInfo>
+               <email>vitas@matf.bg.ac.rs</email>
+               <url>http://poincare.matf.bg.ac.rs/~vitas</url>
+            </communicationInfo>
+            <position>Professor</position>
+         </personInfo>
+      </resourceCreator>
+      <fundingProject>
+         <projectName>Serbian Language and its Resources: Theory, Description and Applications</projectName>
+         <projectID>ON 178006</projectID>
+         <fundingType>nationalFunds</fundingType>
+         <funder>Serbian Ministry of Education and Science</funder>
+         <fundingCountry>Serbia</fundingCountry>
+         <projectStartDate>2011-01-01</projectStartDate>
+         <projectEndDate>2015-12-31</projectEndDate>
+      </fundingProject>
+      <creationStartDate>1999-07-01</creationStartDate>
+      <creationEndDate>2011-12-01</creationEndDate>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>bilingual</lingualityType>
+			               <multilingualityType>parallel</multilingualityType>
+                  <!--			<multilingualityTypeDetails>String</multilingualityTypeDetails>-->
+<!--			<modalityType>String</modalityType>-->
+</lingualityInfo>
+               <languageInfo>
+			
+			               <languageId>srp</languageId>
+			               <languageName>Serbian</languageName>
+			               <languageScript>Latin</languageScript>
+			               <sizePerLanguage>
+				                 <size>726790</size>
+				
+				                 <sizeUnit>words</sizeUnit>
+                  </sizePerLanguage>
+                  <!--			<LanguageVarietyInfo>
+				<languageVarietyType>dialect</languageVarietyType>
+				<languageVarietyName>Ekavian</languageVarietyName>
+				<sizePerLanguageVariety>
+					<size>113323613</size>
+					<sizeUnitMultiplier>unit</sizeUnitMultiplier>
+					<sizeUnit>words</sizeUnit>
+</sizePerLanguageVariety>
+</LanguageVarietyInfo>-->
+</languageInfo>
+               <languageInfo>
+			
+			               <languageId>fra</languageId>
+			               <languageName>French</languageName>
+			               <languageScript>Latin</languageScript>
+			               <sizePerLanguage>
+				                 <size>883147</size>
+				
+				                 <sizeUnit>words</sizeUnit>
+                  </sizePerLanguage>
+                  <!--			<LanguageVarietyInfo>
+				<languageVarietyType>dialect</languageVarietyType>
+				<languageVarietyName>Ekavian</languageVarietyName>
+				<sizePerLanguageVariety>
+					<size>113323613</size>
+					<sizeUnitMultiplier>unit</sizeUnitMultiplier>
+					<sizeUnit>words</sizeUnit>
+</sizePerLanguageVariety>
+</LanguageVarietyInfo>-->
+</languageInfo>
+               <sizeInfo>
+			               <size>1609937</size>
+			
+			               <sizeUnit>words</sizeUnit>
+               </sizeInfo>
+ 
+               <characterEncodingInfo>
+			               <characterEncoding>MacDingbat</characterEncoding>
+			
+                  <!--			<sizePerCharacterEncoding>
+				<size>String</size>
+				<sizeUnitMultiplier>hundred</sizeUnitMultiplier>
+				<sizeUnit>sentences</sizeUnit>
+</sizePerCharacterEncoding>-->
+</characterEncodingInfo>
+               <annotationInfo>
+                  <annotationType>alignment</annotationType>
+                  <annotationStandoff>True</annotationStandoff>
+                  <segmentationLevel>sentence</segmentationLevel>
+                  <annotationFormat>text/xml</annotationFormat>
+                  <conformanceToStandardsBestPractices>TEI</conformanceToStandardsBestPractices>
+                  <annotationMode>mixed</annotationMode>
+                  <annotationStartDate>1999-07-01</annotationStartDate>
+                  <annotationEndDate>2011-12-01</annotationEndDate>
+                  <annotator>
+                     <personInfo>
+                        <surname>Vitas</surname>
+                        <givenName>Duško</givenName>
+                        <communicationInfo>
+                           <email>vitas@matf.bg.ac.rs</email>
+                           <url>http://poincare.matf.bg.ac.rs/~vitas</url>
+                        </communicationInfo>
+                        <position>Professor</position>
+                     </personInfo>
+                  </annotator>
+               </annotationInfo>
+               <domainInfo>
+			               <domain>general</domain>
+			               <sizePerDomain>
+				                 <size>54436</size>
+				
+				                 <sizeUnit>words</sizeUnit>
+                  </sizePerDomain>
+               </domainInfo>
+               <domainInfo>
+			               <domain>literature</domain>
+			               <sizePerDomain>
+				                 <size>1555501</size>
+				
+				                 <sizeUnit>words</sizeUnit>
+                  </sizePerDomain>
+               </domainInfo>
+               <creationInfo>
+			               <originalSource>
+                     <targetResourceNameURI>downloading from Web; retyping; scanning and OCR; obtaining from authors and translators</targetResourceNameURI>
+                  </originalSource>
+			               <creationMode>mixed</creationMode>
+                  <!--			<creationModeDetails>String</creationModeDetails>
+			<creationTool>String</creationTool>-->
+</creationInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

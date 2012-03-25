@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>java Simple Relation Extraction</resourceName>
+      <description>a Java tool for Relation Extraction based on a supervised machine learning approach which is applicable even when (deep) linguistic processing is not available or reliable. In particular, jSRE uses a combination of kernel functions to integrate two different information sources: (i) the whole sentence where the relation appears, and (ii) the local contexts around the interacting entities.</description>
+      <url>http://hlt.fbk.eu/en/technology/jSRE</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability>
+      <licenceInfo>
+         <licence>ApacheLicence_V2.0</licence>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <downloadLocation>http://hlt.fbk.eu/en/technology/jSRE</downloadLocation>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Speranza</surname>
+      <givenName>Manuela</givenName>
+      <communicationInfo>
+         <email>manspera@fbk.eu</email>
+         <address>Fondazione Bruno Kessler Via Sommarive 18</address>
+         <zipCode>38123</zipCode>
+         <city>Trento</city>
+         <country>IT</country>
+         <telephoneNumber>+39 0461314521</telephoneNumber>
+         <faxNumber>+39 0461314591</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo><metadataCreationDate>2011-12-31</metadataCreationDate></metadataInfo>
+	   <resourceComponentType>
+	<toolServiceInfo>
+        <resourceType>toolService</resourceType>
+		<toolServiceType>other</toolServiceType>
+		<languageDependent>False</languageDependent>
+	</toolServiceInfo>
+					</resourceComponentType>
+</resourceInfo>

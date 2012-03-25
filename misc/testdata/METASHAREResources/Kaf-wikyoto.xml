@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>KAF Wikyoto</resourceName>
+      <description>Web based collaborative editor of Domain WordNets</description>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability>
+      <licenceInfo>
+         <licence>proprietary</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>webExecutable</distributionAccessMedium>
+         <downloadLocation>http://langtech1.ilc.cnr.it:8152/fedora/objects/cnr.langres:31/datastreams/URL/content</downloadLocation>
+         <executionLocation>http://langtech1.ilc.cnr.it:8152/fedora/objects/cnr.langres:31/datastreams/DC/content</executionLocation>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Marchetti</surname>
+      <givenName>Andrea</givenName>
+      <communicationInfo>
+         <email>andrea.marchetti@iit.cnr.it</email>
+         <address>Area della Ricerca del CNR - Via Giuseppe Moruzzi N° 1</address>
+         <zipCode>56124</zipCode>
+         <city>Pisa</city>
+         <country>IT</country>
+         <telephoneNumber>+39 0503152649</telephoneNumber>
+         <faxNumber>+39 0503152593</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo><metadataCreationDate>2011-12-31</metadataCreationDate></metadataInfo>
+   <resourceComponentType>
+<toolServiceInfo>
+        <resourceType>toolService</resourceType>
+	<toolServiceType>other</toolServiceType>
+	<languageDependent>False</languageDependent>
+	</toolServiceInfo>
+			</resourceComponentType>
+</resourceInfo>

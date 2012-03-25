@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Maltese Wordlist</resourceName>
+      <description>Wordlist for spell-checking</description>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+      <identifier>ecf6aeaff2724c669d5588f205726903</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability>
+      <licenceInfo>
+         <licence>LGPLv3</licence>
+         <restrictionsOfUse>attribution</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <licensor>
+              <personInfo>
+               <surname>Casha</surname>
+               <givenName>Ramon</givenName>
+               <communicationInfo>
+                  <email>rcasha@gmail.com</email>
+               </communicationInfo>
+               <affiliation>
+                        <organizationName>Malta Linux User Group</organizationName>
+                          <communicationInfo>
+                     <email>rcasha@gmail.com</email>
+                  </communicationInfo>
+                      </affiliation>
+            </personInfo>
+          </licensor>
+         <distributionRightsHolder>
+              <personInfo>
+               <surname>N/A</surname>
+               <communicationInfo>
+                  <email>rcasha@gmail.com</email>
+               </communicationInfo>
+               <affiliation>
+                        <organizationName>Malta Linux User Group</organizationName>
+                          <communicationInfo>
+                     <email>rcasha@gmail.com</email>
+                  </communicationInfo>
+                      </affiliation>
+            </personInfo>
+          </distributionRightsHolder>
+         <distributionRightsHolder>
+              <organizationInfo>
+                <organizationName>University of Malta</organizationName>
+                <organizationShortName>UOM</organizationShortName>
+                <departmentName>Intelligent Computer Systems</departmentName>
+                  <communicationInfo>
+                  <email>mike.rosner@um.edu.mt</email>
+               </communicationInfo>
+              </organizationInfo>
+          </distributionRightsHolder>
+      </licenceInfo>
+      <iprHolder>
+          <personInfo>
+            <surname>Casha</surname>
+            <givenName>Ramon</givenName>
+            <communicationInfo>
+               <email>rcasha@gmail.com</email>
+               <country>Malta</country>
+            </communicationInfo>
+            <affiliation>
+                    <organizationName>Malta Linux User Group</organizationName>
+                      <communicationInfo>
+                  <email>rcasha@gmail.com</email>
+               </communicationInfo>
+                  </affiliation>
+         </personInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Joachimsen</surname>
+      <givenName>Jan</givenName>
+      <communicationInfo>
+         <email>jan.joachimsen@um.edu.mt</email>
+      </communicationInfo>
+      <affiliation>
+            <organizationName>University of Malta</organizationName>
+              <communicationInfo>
+            <email>jan.joachimsen@um.edu.mt</email>
+         </communicationInfo>
+          </affiliation>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-16</metadataCreationDate>
+      <metadataCreator>
+         <surname>Joachimsen</surname>
+         <givenName>Jan</givenName>
+         <communicationInfo>
+            <email>jan.joachimsen@um.edu.mt</email>
+         </communicationInfo>
+         <position>Project Officer</position>
+         <affiliation>
+                <organizationName>University of Malta</organizationName>
+                  <communicationInfo>
+               <email>jan.joachimsen@um.edu.mt</email>
+            </communicationInfo>
+              </affiliation>
+      </metadataCreator>
+      <source>METANET4U</source>
+   </metadataInfo>
+   <versionInfo>
+      <version>v1.0</version>
+  </versionInfo>
+   <usageInfo>
+      <foreseenUseInfo>
+         <foreseenUse>nlpApplications</foreseenUse>
+        
+      </foreseenUseInfo>
+      <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+         <usageProject>
+            <projectName>METANET4U</projectName>
+            <fundingType>euFunds</fundingType>
+          </usageProject>
+      </actualUseInfo>
+  </usageInfo>
+   <resourceCreationInfo>
+      <resourceCreator>
+          <personInfo>
+            <surname>Casha</surname>
+            <givenName>Ramon</givenName>
+            <communicationInfo>
+               <email>rcasha@gmail.com</email>
+               <country>Malta</country>
+            </communicationInfo>
+            <affiliation>
+                    <organizationName>Malta Linux User Group</organizationName>
+                      <communicationInfo>
+                  <email>rcasha@gmail.com</email>
+                  <country>Malta</country>
+               </communicationInfo>
+                  </affiliation>
+         </personInfo>
+      </resourceCreator>
+      <resourceCreator>
+          <organizationInfo>
+            <organizationName>Malta Linux User Group</organizationName>
+              <communicationInfo>
+               <email>rcasha@gmail.com</email>
+            </communicationInfo>
+          </organizationInfo>
+      </resourceCreator>
+      <fundingProject>
+         <projectName>METANET4U</projectName>
+         <fundingType>euFunds</fundingType>
+      </fundingProject>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>wordList</lexicalConceptualResourceType>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>N/A</languageId>
+        
+                  <languageName>Maltese</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>824.839 </size>
+        
+                  <sizeUnit>words</sizeUnit>
+               </sizeInfo>
+               <textFormatInfo>
+                  <mimeType>text/plain</mimeType>
+               </textFormatInfo>
+               <characterEncodingInfo>
+                  <characterEncoding>MacDingbat</characterEncoding>
+               </characterEncodingInfo>
+               <domainInfo>
+                  <domain>general</domain>
+               </domainInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>

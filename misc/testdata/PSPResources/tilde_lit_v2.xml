@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: tilde_lit.xml 42662 2011-12-01 14:33:59Z martha $ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Corpus of Latvian literature</resourceName>
+      <description>The Corpus of Latvian literature contains literary works of Latvian authors which are not protected by copyright low. It contains works of 21 authors – poems, stories, novels and other literary works, 69 in total which correspond to 15 000 printed pages.</description>
+      <url>http://www.letonika.lv/literatura/</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability>
+      <licenceInfo>
+         <licence>MSCommons_BY-NC-ND</licence>
+         <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
+         <distributionRightsHolder>
+				        <organizationInfo>
+					          <organizationName>Tilde</organizationName>
+               <communicationInfo>
+                  <email>tilde@tilde.lv</email>
+               </communicationInfo>
+				        </organizationInfo>
+			      </distributionRightsHolder>
+      </licenceInfo>
+      <iprHolder>
+			      <organizationInfo>
+				        <organizationName>Tilde (for the collection and compilation)</organizationName>
+            <communicationInfo>
+               <email>tilde@tilde.lv</email>
+            </communicationInfo>
+         </organizationInfo>
+		    </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Rozis</surname>
+      <givenName>Roberts</givenName>
+      <communicationInfo>
+         <email>roberts.rozis@tilde.lv</email>
+      </communicationInfo>
+   </contactPerson>
+   <contactPerson>
+      <surname>Vasiļjeva</surname>
+      <givenName>Anita</givenName>
+      <communicationInfo>
+         <email>anita.vasiljeva@tilde.lv</email>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-12-31</metadataCreationDate>
+   </metadataInfo>
+   <usageInfo>
+		    <foreseenUseInfo>
+         <foreseenUse>humanUse</foreseenUse>
+			
+		    </foreseenUseInfo>
+		    <actualUseInfo>
+         <actualUse>humanUse</actualUse>
+      </actualUseInfo>
+	  </usageInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+      
+                  <languageId>lv</languageId>
+                  <languageName>Latvian</languageName>
+               </languageInfo>
+	                 <modalityInfo>
+                     <modalityType>writtenLanguage</modalityType>
+                  </modalityInfo>
+               <sizeInfo>
+                  <size>15000</size>
+      
+                  <sizeUnit>other</sizeUnit>
+               </sizeInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

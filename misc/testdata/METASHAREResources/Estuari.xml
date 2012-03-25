@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>KAF estuaries</resourceName>
+      <description>Corpus Estuari is a corpus of environmental texts gathered via web-crawling within the Kyoto project and annotated in .kaf up to the ontological layer</description>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability>
+      <licenceInfo>
+         <licence>GPL</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>DVD-R</distributionAccessMedium>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Calzolari</surname>
+      <givenName>Nicoletta</givenName>
+      <communicationInfo>
+         <email>nicoletta.calzolari@ilc.cnr.it</email>
+         <address>Area della Ricerca del CNR - Via Giuseppe Moruzzi N° 1</address>
+         <zipCode>56124</zipCode>
+         <city>Pisa</city>
+         <country>IT</country>
+         <telephoneNumber>+39 0503152870</telephoneNumber>
+         <faxNumber>+39 0503152839</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo><metadataCreationDate>2011-12-31</metadataCreationDate></metadataInfo>
+   <resourceDocumentationInfo>
+		    <samplesLocation>http://langtech1.ilc.cnr.it:8152/fedora/objects/cnr.langres:17/datastreams/DC/content</samplesLocation>
+		    <samplesLocation>http://langtech1.ilc.cnr.it:8152/fedora/objects/cnr.langres:17/datastreams/ZIP/content</samplesLocation>
+	  </resourceDocumentationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>ita</languageId>
+                  <languageName>Italian</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>66543</size>
+            
+                  <sizeUnit>tokens</sizeUnit>
+               </sizeInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

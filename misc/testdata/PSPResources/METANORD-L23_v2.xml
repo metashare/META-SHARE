@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: METANORD-L23.xml 42662 2011-12-01 14:33:59Z martha $ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>The Dictionary of Lithuanian</resourceName>
+      <description>The main and biggest dictionary of Lithuanian. The dictionary article consists of a word geography, history, origin, grammatical forms and categories, structural relations and variants, semantic structure, accentuation, usage and style. Apart from a catchword, a grammatical, accentuation and other variants and also structurally related words of other parts of speech, phraseological units (rigid phrases) can be given in a lexicographical article.</description>
+      <resourceShortName>DL</resourceShortName>
+      <url>http://www.lkz.lt/</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>CLARIN_ACA-NC</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>webExecutable</distributionAccessMedium>
+      </licenceInfo>
+      <iprHolder>
+         <organizationInfo>
+	           <organizationName>Institute of the Lithuanian Language</organizationName>
+	           <organizationShortName>LKI</organizationShortName>
+	           <communicationInfo>
+               <email>lki@lki.lt</email>
+            </communicationInfo>
+         </organizationInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Naktinienė</surname>
+      <givenName>Gertrūda</givenName>
+      <communicationInfo>
+         <email>zivi@lki.lt</email>
+      </communicationInfo>
+      <position>Senior Research Fellow</position>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-12-31</metadataCreationDate>
+   </metadataInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+      
+                  <languageId>lit</languageId>
+                  <languageName>Lithuanian</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>500000</size>
+      
+                  <sizeUnit>entries</sizeUnit>
+               </sizeInfo>
+               <sizeInfo>
+                  <size>11000000</size>
+      
+                  <sizeUnit>words</sizeUnit>
+               </sizeInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>

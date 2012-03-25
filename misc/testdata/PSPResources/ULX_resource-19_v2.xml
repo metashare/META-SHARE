@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Fundamental Portuguese</resourceName>
+      <description>This resource includes a spoken Portuguese corpus - with aligned sound and orthographic transcription -, collected among sociolinguistically diverse speakers. It consists of recordings from informal conversations.</description>
+      <resourceShortName>PF Corpus</resourceShortName>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+      <identifier>6b2a26c097d54ba7b501fe6c782cebd0</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>underNegotiation</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+      </licenceInfo>
+      <iprHolder>
+          <personInfo>
+            <surname>Mendes</surname>
+            <givenName>Amália</givenName>
+            <communicationInfo>
+               <email>amalia.mendes@clul.ul.pt</email>
+               <url>http://www.clul.ul.pt/en/researcher/146-amalia-mendes</url>
+               <address>Av. Prof. Gama Pinto, 2</address>
+               <zipCode>1649-003</zipCode>
+               <city>Lisbon</city>
+               <telephoneNumber>00351217904961</telephoneNumber>
+               <faxNumber>00351217965622</faxNumber>
+            </communicationInfo>
+            <position>Head of research group</position>
+            <affiliation>
+                    <organizationName>Centro de Linguística da Universidade de Lisboa</organizationName>
+                    <organizationShortName>CLUL</organizationShortName>
+                    <departmentName>ANAGRAMA</departmentName>
+                      <communicationInfo>
+                  <email>informacoes@clul.ul.pt</email>
+                  <url>http://www.clul.ul.pt</url>
+                  <address>Av. Prof. Gama Pinto, 2</address>
+                  <zipCode>1649-003</zipCode>
+                  <city>Lisbon</city>
+                  <telephoneNumber>00351217920000</telephoneNumber>
+                  <faxNumber>00351217965622</faxNumber>
+               </communicationInfo>
+                  </affiliation>
+         </personInfo>
+      </iprHolder>
+      <iprHolder>
+          <organizationInfo>
+            <organizationName>Centro de Linguística da Universidade de Lisboa</organizationName>
+            <organizationShortName>CLUL</organizationShortName>
+            <departmentName>ANAGRAMA</departmentName>
+              <communicationInfo>
+               <email>informacoes@clul.ul.pt</email>
+               <url>http://www.clul.ul.pt</url>
+               <address>Av. Prof. Gama Pinto, 2</address>
+               <zipCode>1649-003</zipCode>
+               <city>Lisbon</city>
+               <telephoneNumber>00351217920000</telephoneNumber>
+               <faxNumber>00351217965622</faxNumber>
+            </communicationInfo>
+          </organizationInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Mendes</surname>
+      <givenName>Amália</givenName>
+      <communicationInfo>
+         <email>amalia.mendes@clul.ul.pt</email>
+         <url>http://www.clul.ul.pt/en/researcher/146-amalia-mendes</url>
+         <address>Av. Prof. Gama Pinto, 2</address>
+         <zipCode>1649-003</zipCode>
+         <city>Lisbon</city>
+         <telephoneNumber>00351217904961</telephoneNumber>
+         <faxNumber>00351217965622</faxNumber>
+      </communicationInfo>
+      <position>Head of research group</position>
+      <affiliation>
+            <organizationName>Centro de Linguística da Universidade de Lisboa</organizationName>
+            <organizationShortName>CLUL</organizationShortName>
+            <departmentName>ANAGRAMA</departmentName>
+              <communicationInfo>
+            <email>informacoes@clul.ul.pt</email>
+            <url>http://www.clul.ul.pt/</url>
+            <address>Av. Prof. Gama Pinto, 2</address>
+            <zipCode>1649-003</zipCode>
+            <city>Lisbon</city>
+            <telephoneNumber>00351217920000</telephoneNumber>
+            <faxNumber>00351217965622</faxNumber>
+         </communicationInfo>
+          </affiliation>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-24</metadataCreationDate>
+      <metadataCreator>
+         <surname>Mendes</surname>
+         <givenName>Amália</givenName>
+         <communicationInfo>
+            <email>amalia.mendes@clul.ul.pt</email>
+            <url>http://www.clul.ul.pt/en/researcher/146-amalia-mendes</url>
+            <address>Av. Prof. Gama Pinto, 2</address>
+            <zipCode>1649-003</zipCode>
+            <city>Lisbon</city>
+            <telephoneNumber>00351217904961</telephoneNumber>
+            <faxNumber>00351217965622</faxNumber>
+         </communicationInfo>
+         <position>Head of research group</position>
+         <affiliation>
+                <organizationName>Centro de Linguística da Universidade de Lisboa</organizationName>
+                <organizationShortName>CLUL</organizationShortName>
+                <departmentName>ANAGRAMA</departmentName>
+                  <communicationInfo>
+               <email>informacoes@clul.ul.pt</email>
+               <url>http://www.clul.ul.pt/</url>
+               <address>Av. Prof. Gama Pinto, 2</address>
+               <zipCode>1649-003</zipCode>
+               <city>Lisbon</city>
+               <telephoneNumber>00351217920000</telephoneNumber>
+               <faxNumber>00351217965622</faxNumber>
+            </communicationInfo>
+              </affiliation>
+      </metadataCreator>
+      <source>METANET4U</source>
+      <metadataLanguageId>Portuguese</metadataLanguageId>
+      <metadataLastDateUpdated>2011-11-24</metadataLastDateUpdated>
+   </metadataInfo>
+   <versionInfo>
+      <version>v.1</version>
+      <lastDateUpdated>2011-11-24</lastDateUpdated>
+    
+  </versionInfo>
+   <validationInfo>
+      <validated>True</validated>
+      <validator>
+          <personInfo>
+            <surname>Tufis</surname>
+            <givenName>Dan</givenName>
+            <communicationInfo>
+               <email>tufis@racai.ro</email>
+            </communicationInfo>
+            <affiliation>
+                    <organizationName>RACAI</organizationName>
+                      <communicationInfo>
+                  <email>tufis@racai.ro</email>
+               </communicationInfo>
+                  </affiliation>
+         </personInfo>
+      </validator>
+      <validator>
+          <organizationInfo>
+            <organizationName>RACAI</organizationName>
+              <communicationInfo>
+               <email>tufis@racai.ro</email>
+            </communicationInfo>
+          </organizationInfo>
+      </validator>
+  </validationInfo>
+   <usageInfo>
+      <foreseenUseInfo>
+         <foreseenUse>humanUse</foreseenUse>
+        
+        <useNLPSpecific>discourseAnalysis</useNLPSpecific>
+      </foreseenUseInfo>
+      <actualUseInfo>
+         <actualUse>humanUse</actualUse>
+         <useNLPSpecific>discourseAnalysis</useNLPSpecific>
+      </actualUseInfo>
+      <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+         <useNLPSpecific>lemmatization</useNLPSpecific>
+         <useNLPSpecific>morphosyntacticTagging</useNLPSpecific>
+         <useNLPSpecific>posTagging</useNLPSpecific>
+      </actualUseInfo>
+  </usageInfo>
+   <resourceDocumentationInfo>
+      <samplesLocation>http://www.clul.ul.pt/en/research-teams/183-reference-corpus-of-contemporary-portuguese-crpc</samplesLocation>
+      <toolDocumentationType>online</toolDocumentationType>
+  </resourceDocumentationInfo>
+   <resourceCreationInfo>
+      <resourceCreator>
+          <personInfo>
+            <surname>Bacelar do Nascimento</surname>
+            <givenName>Maria Fernanda</givenName>
+            <communicationInfo>
+               <email>fbacelar.nascimento@clul.ul.pt</email>
+               <url>http://www.clul.ul.pt/en/researcher/103-maria-nascimento</url>
+               <address>Av. Prof. Gama Pinto, 2</address>
+               <zipCode>1649-003</zipCode>
+               <city>Lisbon</city>
+               <telephoneNumber>00351217904955</telephoneNumber>
+               <faxNumber>00351217965622</faxNumber>
+            </communicationInfo>
+            <position>Head of research group</position>
+            <affiliation>
+                    <organizationName>Centro de Linguística da Universidade de Lisboa</organizationName>
+                    <organizationShortName>CLUL</organizationShortName>
+                    <departmentName>ANAGRAMA</departmentName>
+                      <communicationInfo>
+                  <email>informacoes@clul.ul.pt</email>
+                  <url>http://www.clul.ul.pt/</url>
+                  <address>Av. Prof. Gama Pinto, 2</address>
+                  <zipCode>1649-003</zipCode>
+                  <city>Lisbon</city>
+                  <telephoneNumber>00351217920000</telephoneNumber>
+                  <faxNumber>00351217965622</faxNumber>
+               </communicationInfo>
+                  </affiliation>
+         </personInfo>
+      </resourceCreator>
+      <resourceCreator>
+          <organizationInfo>
+            <organizationName>Centro de Linguística da Universidade de Lisboa</organizationName>
+            <organizationShortName>CLUL</organizationShortName>
+            <departmentName>ANAGRAMA</departmentName>
+              <communicationInfo>
+               <email>informacoes@clul.ul.pt</email>
+               <url>http://www.clul.ul.pt/</url>
+               <address>Av. Prof. Gama Pinto, 2</address>
+               <zipCode>1649-003</zipCode>
+               <city>Lisbon</city>
+               <telephoneNumber>00351217920000</telephoneNumber>
+               <faxNumber>00351217965622</faxNumber>
+            </communicationInfo>
+          </organizationInfo>
+      </resourceCreator>
+      <fundingProject>
+         <projectName>Fundamental Portuguese</projectName>
+         <projectShortName>PF</projectShortName>
+         <url>http://www.clul.ul.pt/en/research-teams/183-reference-corpus-of-contemporary-portuguese-crpc</url>
+         <fundingType>nationalFunds</fundingType>
+         <funder>Instituto Nacional de Investigação Científica</funder>
+         <projectStartDate>1970-01-01</projectStartDate>
+         <projectEndDate>1987-01-01</projectEndDate>
+      </fundingProject>
+      <creationStartDate>1970-01-01</creationStartDate>
+      <creationEndDate>1987-01-01</creationEndDate>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>N/A</languageId>
+        
+                  <languageName>Portuguese</languageName>
+                  <sizePerLanguage>
+                     <size>80000</size>
+            
+                     <sizeUnit>tokens</sizeUnit>
+                  </sizePerLanguage>
+               </languageInfo>
+                  <modalityInfo>
+                     <modalityType>spokenLanguage</modalityType>
+                  </modalityInfo>
+               <sizeInfo>
+                  <size>80000</size>
+        
+                  <sizeUnit>tokens</sizeUnit>
+               </sizeInfo>
+               <textFormatInfo>
+                  <mimeType>text/xml</mimeType>
+                  <sizePerTextFormat>
+                     <size>80000</size>
+            
+                     <sizeUnit>tokens</sizeUnit>
+                  </sizePerTextFormat>
+               </textFormatInfo>
+               <characterEncodingInfo>
+                  <characterEncoding>MacDingbat</characterEncoding>
+                  <sizePerCharacterEncoding>
+                     <size>80000</size>
+            
+                     <sizeUnit>tokens</sizeUnit>
+                  </sizePerCharacterEncoding>
+               </characterEncodingInfo>
+               <annotationInfo>
+                  <annotationType>alignment</annotationType>
+                  <segmentationLevel>utterance</segmentationLevel>
+                  <annotationFormat>text/xml</annotationFormat>
+                  <tagsetLanguageId>Portuguese</tagsetLanguageId>
+                  <annotationMode>manual</annotationMode>
+                  <annotationTool>
+                     <targetResourceNameURI>EXMARaLDA</targetResourceNameURI>
+                  </annotationTool>
+                  <sizePerAnnotation>
+                     <size>80000</size>
+            
+                     <sizeUnit>tokens</sizeUnit>
+                  </sizePerAnnotation>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>morphosyntacticAnnotation-posTagging</annotationType>
+                  <segmentationLevel>word</segmentationLevel>
+                  <annotationFormat>text/plain</annotationFormat>
+                  <tagsetLanguageId>Portuguese</tagsetLanguageId>
+                  <annotationMode>automatic</annotationMode>
+                  <sizePerAnnotation>
+                     <size>80000</size>
+            
+                     <sizeUnit>tokens</sizeUnit>
+                  </sizePerAnnotation>
+               </annotationInfo>
+               <domainInfo>
+                  <domain>general</domain>
+                  <sizePerDomain>
+                     <size>80000</size>
+            
+                     <sizeUnit>tokens</sizeUnit>
+                  </sizePerDomain>
+               </domainInfo>
+               <timeCoverageInfo>
+                  <timeCoverage>1970-1975</timeCoverage>
+                  <sizePerTimeCoverage>
+                     <size>80000</size>
+            
+                     <sizeUnit>tokens</sizeUnit>
+                  </sizePerTimeCoverage>
+               </timeCoverageInfo>
+               <geographicCoverageInfo>
+                  <geographicCoverage>Portugal</geographicCoverage>
+                  <sizePerGeographicCoverage>
+                     <size>80000</size>
+            
+                     <sizeUnit>tokens</sizeUnit>
+                  </sizePerGeographicCoverage>
+               </geographicCoverageInfo>
+               <creationInfo>
+                  <creationMode>manual</creationMode>
+               </creationInfo>
+            </corpusTextInfo>
+            <corpusAudioInfo>
+               <mediaType>audio</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>N/A</languageId>
+        
+                  <languageName>Portuguese</languageName>
+                  <sizePerLanguage>
+                     <size>520</size>
+            
+                     <sizeUnit>minutes</sizeUnit>
+                  </sizePerLanguage>
+               </languageInfo>
+               <audioSizeInfo>
+                  <sizeInfo>
+                     <size>520</size>
+        
+                     <sizeUnit>minutes</sizeUnit>
+                  </sizeInfo>
+                     <durationOfEffectiveSpeechInfo>
+                        <size>520</size>
+                        <durationUnit>minutes</durationUnit>
+                     </durationOfEffectiveSpeechInfo>
+                     <durationOfAudioInfo>
+                        <size>520</size>
+                        <durationUnit>minutes</durationUnit>
+                     </durationOfAudioInfo>
+               </audioSizeInfo>
+               <audioContentInfo>
+                  <speechItems>other</speechItems>
+                  <nonSpeechItems>other</nonSpeechItems>
+               </audioContentInfo>
+               <settingInfo>
+                  <naturality>spontaneous</naturality>
+                  <conversationalType>monologue</conversationalType>
+                  <scenarioType>other</scenarioType>
+                  <audience>no</audience>
+        
+                  <interactivity>interactive</interactivity>
+               </settingInfo>
+               <audioFormatInfo>
+                  <mimeType>wav</mimeType>
+                  <quantization>16</quantization>
+                  <recordingQuality>medium</recordingQuality>
+               </audioFormatInfo>
+               <domainInfo>
+                  <domain>general</domain>
+                  <sizePerDomain>
+                     <size>520</size>
+            
+                     <sizeUnit>minutes</sizeUnit>
+                  </sizePerDomain>
+               </domainInfo>
+               <timeCoverageInfo>
+                  <timeCoverage>1970-1975</timeCoverage>
+               </timeCoverageInfo>
+               <geographicCoverageInfo>
+                  <geographicCoverage>Portugal</geographicCoverage>
+                  <sizePerGeographicCoverage>
+                     <size>520</size>
+            
+                     <sizeUnit>minutes</sizeUnit>
+                  </sizePerGeographicCoverage>
+               </geographicCoverageInfo>
+               <recordingInfo>
+        
+                  <recordingDeviceType>other</recordingDeviceType>
+                  <recordingEnvironment>office</recordingEnvironment>
+                  <recordingEnvironment>closedPublicPlace</recordingEnvironment>
+                  <recordingEnvironment>other</recordingEnvironment>
+               </recordingInfo>
+               <captureInfo>
+                  <personSourceSetInfo>
+                     <numberOfPersons>212</numberOfPersons>
+                     <ageOfPersons>adult</ageOfPersons>
+                     <ageRangeStart>17</ageRangeStart>
+                     <ageRangeEnd>62</ageRangeEnd>
+                     <sexOfPersons>mixed</sexOfPersons>
+                     <originOfPersons>native</originOfPersons>
+                     <geographicDistributionOfPersons>Portugal</geographicDistributionOfPersons>
+                     <hearingImpairmentOfPersons>no</hearingImpairmentOfPersons>
+                     <speakingImpairmentOfPersons>no</speakingImpairmentOfPersons>
+                  </personSourceSetInfo>
+               </captureInfo>
+            </corpusAudioInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>
