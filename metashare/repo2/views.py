@@ -183,8 +183,8 @@ def download(request, object_id):
         return render_to_response('repo2/licence_selection.html',
             { 'form': LicenseSelectionForm(licences), 'resource': resource })
     else:
-        return render_to_response('repo2/lr_not_downloadable.html', 
-            { 'resource': resource, 'object_id': object_id })
+        return render_to_response('repo2/lr_not_downloadable.html',
+                                  { 'resource': resource })
 
 
 def _provide_download(request, resource, download_urls):
@@ -232,7 +232,7 @@ def _provide_download(request, resource, download_urls):
 
     # no download could be provided
     return render_to_response('repo2/lr_not_downloadable.html',
-        { 'resource': resource, 'object_id': resource.id})
+                              { 'resource': resource })
 
 
 def _get_sessionid(request):
