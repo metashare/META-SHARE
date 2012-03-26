@@ -5,9 +5,6 @@
   <h3>No Download Available</h3>
   <p>We are afraid, the selected resource is not available for download.</p>
   <p>Please contact the resource maintainer for more information on how to obtain a copy of this resource.</p>
-
-  <a href="{% url metashare.repo2.views.view object_id %}"><button class="span-12 button middle_button">&laquo; Go to view </button></a>
+  <p><a href="{% url metashare.repo2.views.view resource.id %}"><button class="span-12 button middle_button">&laquo;&nbsp;Back to resource view</button></a></p>
 </div>
 {% endblock %}
-
-
