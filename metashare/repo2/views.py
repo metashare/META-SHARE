@@ -132,6 +132,22 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
 }
 
 
+def _get_download_licences(object_id):
+    """
+    Returns the licences under which a download of the resource with the given
+    ID is possible.
+    
+    The result is a dictionary mapping from licence names to corresponding
+    `licenceInfoType_model`s.
+    """
+    licence_infos = tuple(licenceInfoType_model.objects \
+        .filter(back_to_distributioninfotype_model__id=object_id))
+    result = dict([(l_name, l_info) for l_info in licence_infos
+        if u'downloadable' in l_info.get_distributionAccessMedium_display_list()
+        for l_name in l_info.get_licence_display_list()])
+    return result
+
+
 @login_required
 def download(request, object_id):
     """
@@ -143,11 +159,7 @@ def download(request, object_id):
     # here we are only interested in licenses (or their names) of the specified
     # resource that allow a download
     resource = get_object_or_404(resourceInfoType_model, pk=object_id)
-    licence_infos = tuple(licenceInfoType_model.objects \
-        .filter(back_to_distributioninfotype_model__id=object_id))
-    licences = dict([(l_name, l_info) for l_info in licence_infos
-        if u'downloadable' in l_info.get_distributionAccessMedium_display_list()
-        for l_name in l_info.get_licence_display_list()])
+    licences = _get_download_licences(object_id)
 
     licence_choice = None
     if request.method == "POST":
@@ -294,12 +306,8 @@ def view(request, object_id=None):
 
         context['LR_DOWNLOAD'] = ""
         try:
-            licences = licenceInfoType_model.objects \
-                .values("downloadLocation") \
-                .filter(back_to_distributioninfotype_model__id=object_id)
             if resource.storage_object.has_download() \
-                    or resource.storage_object.has_local_download_copy() \
-                    or len(licences) > 0:
+                    or _get_download_licences(object_id):
                 context['LR_DOWNLOAD'] = reverse(download, args=(object_id,))
                 if (not request.user.is_active):
                     context['LR_DOWNLOAD'] = "restricted"
