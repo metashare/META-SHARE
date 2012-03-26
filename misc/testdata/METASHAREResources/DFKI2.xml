@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Mary Text To Speech</resourceName>
+      <description>MARY is an open-source, multilingual Text-to-Speech Synthesis platform written in Java. It was originally developed as a collaborative project of DFKI's Language Technology lab and the Institute of Phonetics at Saarland University and is now being maintained by DFKI. As of version 4.1, MARY TTS supports German, British and American English, Telugu, and Turkish; more languages are in preparation. MARY TTS comes with toolkits for quickly adding support for new languages and for building unit selection and HMM-based synthesis voices.</description>
+      <resourceShortName>Mary</resourceShortName>
+      <url>http://mary.opendfki.de/</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability><licenceInfo>
+         <licence>LGPL</licence>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+				<surname>n/a</surname>
+				<communicationInfo>
+					<email>xxx@example.com</email>
+				</communicationInfo>
+			</contactPerson>
+   <metadataInfo><metadataCreationDate>2011-12-31</metadataCreationDate></metadataInfo>
+	<resourceComponentType>
+		<toolServiceInfo>
+			<resourceType>toolService</resourceType>
+			<toolServiceType>other</toolServiceType>
+			<languageDependent>False</languageDependent>
+			</toolServiceInfo>
+	</resourceComponentType>
+</resourceInfo>

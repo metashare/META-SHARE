@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>ROMANIAN FRAMENET</resourceName>
+      <description>The corpus contains multilingual (English and Romanian) semantic role annotations for 1508 sentences. Using semantic role analysis, we are able to answer questions such as: "What roles do entities play in different contexts?" or "When, why, where or how an event takes place?" A semantic role represents the relationship between a predicate (either verbal or nominal, annotated as the target) and an argument (annotated with the specific semantic role).</description>
+      <resourceShortName>RO-FN</resourceShortName>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+      <identifier>048a14bd6f404434861dc58d1121d721</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>GeneralLicenceGrant</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
+      </licenceInfo>
+      <iprHolder>
+          <organizationInfo>
+            <organizationName>Alexandru Ioan Cuza</organizationName><organizationShortName>UAIC</organizationShortName><communicationInfo><email>xxx@example.com</email></communicationInfo>
+          </organizationInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Trandabat</surname>
+      <givenName>Diana</givenName>
+      <communicationInfo>
+         <email>dtrandabat@infoiasi.ro</email>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-29</metadataCreationDate>
+      <source>METANET4U</source>
+   </metadataInfo>
+   <usageInfo>
+      <foreseenUseInfo>
+         <foreseenUse>humanUse</foreseenUse>
+        
+      </foreseenUseInfo>
+      <actualUseInfo>
+         <actualUse>humanUse</actualUse>
+      </actualUseInfo>
+      <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+         <useNLPSpecific>languageModelling</useNLPSpecific>
+      </actualUseInfo>
+  </usageInfo>
+   <resourceDocumentationInfo>
+      <documentation>
+         <documentUnstructured>Diana Trandabat. (2010) Natural Language Processing Using Semantic Frames, PhD Thesis, University Al. I. Cuza Iasi, Romania.</documentUnstructured>
+      </documentation>
+  </resourceDocumentationInfo>
+   <resourceCreationInfo>
+      <creationEndDate>2011-01-11</creationEndDate>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>multilingual</lingualityType>
+                  <multilingualityType>parallel</multilingualityType>
+               </lingualityInfo>
+               <languageInfo>
+        
+                  <languageId>rou</languageId>
+                  <languageName>Romanian</languageName>
+               </languageInfo>
+               <languageInfo>
+        
+                  <languageId>eng</languageId>
+                  <languageName>English</languageName>
+               </languageInfo>
+                                 <modalityInfo>
+                     <modalityType>writtenLanguage</modalityType>
+                  </modalityInfo>
+
+               <sizeInfo>
+                  <size>1.508</size>
+        
+                  <sizeUnit>sentences</sizeUnit>
+               </sizeInfo>
+               <annotationInfo>
+                  <annotationType>segmentation</annotationType>
+                  <annotationMode>mixed</annotationMode>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>alignment</annotationType>
+                  <annotationMode>mixed</annotationMode>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>semanticAnnotation-semanticRoles</annotationType>
+               </annotationInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

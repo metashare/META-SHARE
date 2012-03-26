@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Edits</resourceName>
+      <description>A software package aimed at recognizing entailment relations between two portions of text, termed as T and H. The system is based on edit distance algorithms, and computes the T-H distance as the cost of the edit operations (i.e. insertion, deletion and substitution) that are necessary to transform T into H.</description>
+      <url>http://edits.fbk.eu/</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability>
+      <licenceInfo>
+         <licence>LGPL</licence>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <downloadLocation>http://edits.fbk.eu/</downloadLocation>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Speranza</surname>
+      <givenName>Manuela</givenName>
+      <communicationInfo>
+         <email>manspera@fbk.eu</email>
+         <address>Fondazione Bruno Kessler Via Sommarive 18</address>
+         <zipCode>38123</zipCode>
+         <city>Trento</city>
+         <country>IT</country>
+         <telephoneNumber>+39 0461314521</telephoneNumber>
+         <faxNumber>+39 0461314591</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo><metadataCreationDate>2011-12-31</metadataCreationDate></metadataInfo>
+	   <resourceComponentType>
+	<toolServiceInfo>
+        <resourceType>toolService</resourceType>
+		<toolServiceType>other</toolServiceType>
+		<languageDependent>False</languageDependent>
+	</toolServiceInfo>
+					</resourceComponentType>
+</resourceInfo>
