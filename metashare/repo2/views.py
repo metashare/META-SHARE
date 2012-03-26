@@ -61,8 +61,8 @@ def _convert_to_template_tuples(element_tree):
         return ((element_tree.tag, element_tree.text),)
 
 
-# The following dictionary keeps info about licence document (as relative file system path)
-# and if a licence is required an explicit signature or not (second value of the array)
+# a dictionary holding a URL for each download licence and a boolean marking
+# whether the licence requires an hard-copy signature or not
 LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
   'AGPL': (MEDIA_URL + 'licences/GNU_agpl-3.0.htm', False),
   'LGPL': (MEDIA_URL + 'licences/GNU_lgpl-2.0.htm', False),
@@ -132,6 +132,22 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
 }
 
 
+def _get_download_licences(object_id):
+    """
+    Returns the licences under which a download of the resource with the given
+    ID is possible.
+    
+    The result is a dictionary mapping from licence names to corresponding
+    `licenceInfoType_model`s.
+    """
+    licence_infos = tuple(licenceInfoType_model.objects \
+        .filter(back_to_distributioninfotype_model__id=object_id))
+    result = dict([(l_name, l_info) for l_info in licence_infos
+        if u'downloadable' in l_info.get_distributionAccessMedium_display_list()
+        for l_name in l_info.get_licence_display_list()])
+    return result
+
+
 @login_required
 def download(request, object_id):
     """
@@ -143,11 +159,7 @@ def download(request, object_id):
     # here we are only interested in licenses (or their names) of the specified
     # resource that allow a download
     resource = get_object_or_404(resourceInfoType_model, pk=object_id)
-    licence_infos = tuple(licenceInfoType_model.objects \
-        .filter(back_to_distributioninfotype_model__id=object_id))
-    licences = dict([(l_name, l_info) for l_info in licence_infos
-        if u'downloadable' in l_info.get_distributionAccessMedium_display_list()
-        for l_name in l_info.get_licence_display_list()])
+    licences = _get_download_licences(object_id)
 
     licence_choice = None
     if request.method == "POST":
@@ -233,6 +245,11 @@ def _provide_download(request, resource, download_urls):
                 return redirect(url)
         LOGGER.warn("No download could be offered for resource #{0}. These " \
                     "URLs were tried: {1}".format(resource.id, download_urls))
+    else:
+        LOGGER.warn("No download could be offered for resource #{0} with " \
+                    "storage object identifier #{1} although it is marked as " \
+                    "downloadable!".format(resource.id,
+                                           resource.storage_object.identifier))
 
     # no download could be provided
     return render_to_response('repo2/lr_not_downloadable.html',
@@ -289,12 +306,8 @@ def view(request, object_id=None):
 
         context['LR_DOWNLOAD'] = ""
         try:
-            licences = licenceInfoType_model.objects \
-                .values("downloadLocation") \
-                .filter(back_to_distributioninfotype_model__id=object_id)
             if resource.storage_object.has_download() \
-                    or resource.storage_object.has_local_download_copy() \
-                    or len(licences) > 0:
+                    or _get_download_licences(object_id):
                 context['LR_DOWNLOAD'] = reverse(download, args=(object_id,))
                 if (not request.user.is_active):
                     context['LR_DOWNLOAD'] = "restricted"
