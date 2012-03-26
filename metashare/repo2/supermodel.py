@@ -128,27 +128,6 @@ class SchemaModel(models.Model):
         """
         abstract = True
 
-    # TODO: move to resourceInfoType_model class
-    def REMOVE_ME_LATER_publication_status(self):
-        """
-        Method used for changelist view for resources.
-        """
-        storage_object = getattr(self, 'storage_object', None)
-        if storage_object:
-            return storage_object.get_publication_status_display()
-
-        return ''
-
-    # TODO: move to resourceInfoType_model class
-    def REMOVE_ME_LATER_resource_type(self):
-        """
-        Method used for changelist view for resources.
-        """
-        resource_component = getattr(self, 'resourceComponentType', None)
-        if not resource_component:
-            return None
-        return resource_component.as_subclass()._meta.verbose_name
-
     @classmethod
     def get_many_to_many_fields(cls):
         """
