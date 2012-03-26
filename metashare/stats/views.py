@@ -3,22 +3,26 @@ Project: META-SHARE
 Author: Christian Girardi <cgirardi@fbk.eu>
 """
 
-from django.shortcuts import render_to_response     
+from metashare.settings import DJANGO_URL, STATS_SERVER_URL
 from metashare.stats.models import LRStats, QueryStats
 from metashare.stats.model_utils import getLRTop, getLastQuery, getLRLast, statDays, VIEW_STAT, UPDATE_STAT, DOWNLOAD_STAT
+# pylint: disable-msg=W0611, W0401
+from metashare.repo2.models import *
+
+from django.shortcuts import render_to_response     
 from django.db.models import Count, Max, Min, Avg
 from django.http import HttpResponse
 from json import JSONEncoder
 from datetime import datetime, date
-import urllib
+import urllib, urllib2
+from threading import Timer
 import base64
+import collections
 try:
     import cPickle as pickle
 except:
     import pickle
 
-# pylint: disable-msg=W0611, W0401
-from metashare.repo2.models import *
 
 #possible models and their default field
 SELECT_MODEL = {'Language': ['languageInfoType_model', 'languageName'],
@@ -28,7 +32,7 @@ SELECT_MODEL = {'Language': ['languageInfoType_model', 'languageName'],
                 'Distribution': ['distributionInfoType_model', 'availability'],
                 'Linguality': ['lingualityInfoType_model', 'lingualityType'],
                 'Annotation': ['annotationInfoType_model', 'annotationFormat']}
-#no accessable field
+#no accessable fields
 NOACCESS_FIELDS = ["downloadLocation", "executionLocation"]
 
 # Setup logging support.
@@ -36,21 +40,26 @@ logging.basicConfig(level=LOG_LEVEL)
 LOGGER = logging.getLogger('metashare.stats.views')
 LOGGER.addHandler(LOG_HANDLER)
 
+
+def callServerStats():
+    url = urllib.urlencode({'url': DJANGO_URL})
+    try:
+        req = urllib2.Request("{0}stats/addnode?{1}".format(STATS_SERVER_URL, url))
+        urllib2.urlopen(req)
+    except:
+        LOGGER.debug('WARNING! Failed contacting statistics server on %s' % STATS_SERVER_URL)
+                  
+thread = Timer(2.0, callServerStats)
+thread.start()
+
 def repostats (request):    
     selected_menu_value = []
     modelname = request.POST.get('model', 'Language')
     selected_menu_value.append(['model', modelname])
-    i = 0
-    while():
-        imodel = request.POST.get('model'+str(i))
-        if (imodel != None):
-            selected_menu_value.append(['model'+str(i), imodel])
-        else:
-            break
-        i += 1
+    
     # Get lists of languages, resource types and media types to show in filtering
     dbmodel = SELECT_MODEL[str(modelname)][0]
-    dbfield = request.POST.get('field')        
+    dbfield = request.POST.get('field')   
     if (dbfield == None or dbfield == ""):
         dbfield = SELECT_MODEL[str(modelname)][1]
     selected_menu_value.append(['field', dbfield])
@@ -73,31 +82,37 @@ def repostats (request):
             values = eval(u'{0}._meta.get_field("{1}").choices'.format(dbclasses[dbfield], dbfield))
         else:    
             values = eval(u'{0}._meta.get_field("{1}").choices'.format(dbmodel, dbfield))
-        
-        result = eval(u'{0}.objects.values("{1}").annotate(Count("{1}")).order_by("-{1}__count")'.format(dbmodel, dbfield))
-        for item in result:
-            value = item[dbfield]
-            if (value != None and value != ""):
-                if (isinstance(value, basestring)):
-                    if (hasattr(value, 'encode')):
-                        value = value.encode("utf-8")
-                        print "VAL: " +str(value)
-                    try:
-                        value = pickle.loads(base64.b64decode(str(value)))              
-                    except:
-                        LOGGER.debug("Warning! Value of field {0} is not encoded base64: {1}".format(dbfield,value))
-                                            
-                if (isinstance(value, list)):
-                    for val in value:      
-                        repodata.append([val.encode("utf-8"), item[dbfield + "__count"]])
-                else:
-                    if (values != None and len(values) > 0):
-                        repodata.append([str(values[int(value)][1]), item[dbfield + "__count"]])    
+        if (modelname == "Licence" and len(values) > 0):
+            licences = tuple(licenceInfoType_model.objects.all())
+            dictlic = collections.defaultdict(int)
+            for licence in eval(u'[name for licence_info in licences for name in licence_info.get_{0}_display_list()]'.format(dbfield)):
+                dictlic[str(licence)] += 1
+            for key in dictlic:
+                repodata.append([key, dictlic[key]])                   
+        else:
+            result = eval(u'{0}.objects.values("{1}").annotate(Count("{1}")).order_by("-{1}__count")'.format(dbmodel, dbfield))
+            for item in result:
+                value = item[dbfield]
+                if (value != None and value != ""):
+                    if (isinstance(value, basestring)):
+                        try:
+                            value = pickle.loads(base64.b64decode(str(value)))              
+                        except:
+                            if (hasattr(value, 'encode')):
+                                value = value.encode("utf-8")
+                            #LOGGER.debug("Warning! Value of field {0} is not encoded base64: {1}".format(dbfield, value))
+                                                
+                    if (isinstance(value, list)):
+                        for val in value:      
+                            repodata.append([val.encode("utf-8"), item[dbfield + "__count"]])
                     else:
-                        repodata.append([str(value), item[dbfield + "__count"]])
+                        if (values != None and len(values) > 0):
+                            repodata.append([str(values[int(value)][1]), item[dbfield + "__count"]])    
+                        else:
+                            repodata.append([str(value), item[dbfield + "__count"]])
                     
     return render_to_response('stats/repostats.html',
-        {'result': repodata, 'selected_menu_value': selected_menu_value, 'models': SELECT_MODEL.keys(), 'fields': dbfields, "subfields": relational_fields})
+        {'user': request.user, 'result': repodata, 'selected_menu_value': selected_menu_value, 'models': SELECT_MODEL.keys(), 'fields': dbfields, "subfields": relational_fields})
 
 
 def usagestats (request):
@@ -111,7 +126,7 @@ def usagestats (request):
         topdata.append([value, item["query__count"]])       
          
     return render_to_response('stats/usagestats.html',
-        {'result': topdata})
+        {'user': request.user, 'result': topdata})
 
     
 def topstats (request):
@@ -151,7 +166,7 @@ def topstats (request):
             topdata.append([query, pretty_timeago(item['lasttime']), item['found']])       
              
     return render_to_response('stats/topstats.html',
-      {'topdata': topdata[:10], 'view': view})
+      {'user': request.user, 'topdata': topdata[:10], 'view': view})
 
 def statdays (request):
     """ get dates where there are some statistics """
