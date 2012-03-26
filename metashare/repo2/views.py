@@ -354,6 +354,18 @@ class MetashareFacetedSearchView(FacetedSearchView):
                 sqs = sqs.order_by('resourceNameSort_exact')
             elif sort_list[0] == 'resourcename_desc':
                 sqs = sqs.order_by('-resourceNameSort_exact')
+            elif sort_list[0] == 'resourcetype_asc':
+                sqs = sqs.order_by('resourceTypeSort_exact')
+            elif sort_list[0] == 'resourcetype_desc':
+                sqs = sqs.order_by('-resourceTypeSort_exact')
+            elif sort_list[0] == 'mediatype_asc':
+                sqs = sqs.order_by('mediaTypeSort_exact')
+            elif sort_list[0] == 'mediatype_desc':
+                sqs = sqs.order_by('-mediaTypeSort_exact')
+            elif sort_list[0] == 'languagename_asc':
+                sqs = sqs.order_by('languageNameSort_exact')
+            elif sort_list[0] == 'languagename_desc':
+                sqs = sqs.order_by('-languageNameSort_exact')
             else:
                 sqs = sqs.order_by('resourceNameSort_exact')
         else:
