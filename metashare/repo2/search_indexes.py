@@ -246,20 +246,11 @@ class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
 
     def prepare_resourceTypeFilter(self, obj):
         result = []
-        corpus_media = obj.resourceComponentType.as_subclass()
 
         if obj.resourceComponentType.as_subclass().get_resourceType_display() \
                 != '':
             result.append(obj.resourceComponentType.as_subclass() \
                           .get_resourceType_display())
-        
-        if isinstance(corpus_media, toolServiceInfoType_model):
-            if corpus_media.inputInfo:
-                result.extend([rt for rt in corpus_media.inputInfo \
-                                 .get_resourceType_display_list() if rt != ''])
-            if corpus_media.outputInfo:
-                result.extend([rt for rt in corpus_media.outputInfo \
-                                 .get_resourceType_display_list() if rt != ''])
 
         return result
 
