@@ -233,6 +233,11 @@ def _provide_download(request, resource, download_urls):
                 return redirect(url)
         LOGGER.warn("No download could be offered for resource #{0}. These " \
                     "URLs were tried: {1}".format(resource.id, download_urls))
+    else:
+        LOGGER.warn("No download could be offered for resource #{0} with " \
+                    "storage object identifier #{1} although it is marked as " \
+                    "downloadable!".format(resource.id,
+                                           resource.storage_object.identifier))
 
     # no download could be provided
     return render_to_response('repo2/lr_not_downloadable.html',
