@@ -129,7 +129,7 @@ class SchemaModel(models.Model):
         abstract = True
 
     # TODO: move to resourceInfoType_model class
-    def publication_status(self):
+    def REMOVE_ME_LATER_publication_status(self):
         """
         Method used for changelist view for resources.
         """
@@ -140,7 +140,7 @@ class SchemaModel(models.Model):
         return ''
 
     # TODO: move to resourceInfoType_model class
-    def resource_type(self):
+    def REMOVE_ME_LATER_resource_type(self):
         """
         Method used for changelist view for resources.
         """
