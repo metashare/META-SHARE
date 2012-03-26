@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Oslo-Bergen tagger</resourceName>
+      <description>The Oslo-Bergen tagger is a robust morphological and syntactic tagger developed at the University of Oslo and at Uni Computing in Bergen over several years. The tagger consists of three main modules: a preprocessor with multitagger and compound analyser, a grammar module for morphological and syntactic disambiguation (Constraint Grammar) and a statistical module that removes the last of the remaining morphological ambiguity (only for Bokmål)</description>
+      <resourceShortName>OBT</resourceShortName>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability>
+      <licenceInfo>
+         <licence>GPL</licence>
+         <restrictionsOfUse>shareAlike</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <downloadLocation>http://tekstlab.uio.no/obt-ny/english/download.html</downloadLocation>
+      </licenceInfo>
+      <iprHolder>
+         <personInfo>
+            <surname>Johannessen</surname>
+            <givenName>Janne Bondi</givenName>
+            <communicationInfo>
+               <email>sprakbanken@nb.no</email>
+            </communicationInfo>
+            <affiliation>
+               <organizationName>Uni Oslo/Uni Research</organizationName>
+               <communicationInfo>
+                  <email>tekstlab-post@iln.uio.no</email>
+               </communicationInfo>
+								    </affiliation>
+         </personInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Johannessen</surname>
+      <givenName>Janne Bondi</givenName>
+      <communicationInfo>
+         <email>j.b.johannessen@iln.uio.no</email>
+      </communicationInfo>
+      <affiliation>
+         <organizationName>University of Oslo</organizationName>
+         <communicationInfo>
+            <email>tekstlab-post@iln.uio.no</email>
+         </communicationInfo>
+      </affiliation>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-30</metadataCreationDate>
+      <metadataCreator>
+         <surname>Lindstad</surname>
+         <givenName>Arne Martinus</givenName>
+         <communicationInfo>
+            <email>sprakbanken@nb.no</email>
+         </communicationInfo>
+         <affiliation>
+            <organizationName>Språkbanken</organizationName>
+            <communicationInfo>
+               <email>sprakbanken@nb.no</email>
+            </communicationInfo>
+				     </affiliation>
+      </metadataCreator>
+   </metadataInfo>
+   <usageInfo>
+      <foreseenUseInfo>
+         <foreseenUse>nlpApplications</foreseenUse>
+      
+      </foreseenUseInfo>
+      <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+      </actualUseInfo>
+  </usageInfo>
+   <resourceComponentType>
+      <toolServiceInfo>
+         <resourceType>toolService</resourceType>
+         <toolServiceType>tool</toolServiceType>
+         <languageDependent>True</languageDependent>
+         <!-- boolean: 1=yes, 0=no -->
+    <inputInfo>
+            <mediaType>text</mediaType>
+         </inputInfo>
+         <outputInfo>
+            <mediaType>text</mediaType>
+         </outputInfo>
+      </toolServiceInfo>
+   </resourceComponentType>
+</resourceInfo>

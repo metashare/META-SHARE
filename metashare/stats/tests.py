@@ -66,5 +66,12 @@ class StatsTest(django.test.TestCase):
         except urllib2.URLError:
             print 'WARNING! Failed contacting statistics server on %s' % STATS_SERVER_URL
         
+    def testGet(self):
+        """
+        checking if there are the statistics of the day
+        """
+        client = Client()
+        response = client.get('/{0}stats/get'.format(DJANGO_BASE))
+        self.assertEquals(200, response.code)
             
 

@@ -109,9 +109,9 @@ Show statistics at <select onchange="submit()" name="date">
 	    {% else %}
 	        <td> 
 	        {% if info.0 == 1 %}
-	            <img src="{{ media_prefix }}images/available_icon.png" title="This node is running" width=16>
+	            <img src="{{ media_prefix }}images/icon_success.gif" title="This node is running" width=16>
 	        {% else %}
-	            <img src="{{ media_prefix }}images/unavailable_icon.png" title="This node is down or some unexpected result to getting statistics occurred" width=18>	            
+	            <img src="{{ media_prefix }}images/icon_error.gif" title="This node is down or some unexpected result to getting statistics occurred" width=18>	            
 	        {% endif %}
 	        <a href='{{ host }}' target=_new><font color=blue><strong>{{ host }}</strong></font></a>
 	        </td>

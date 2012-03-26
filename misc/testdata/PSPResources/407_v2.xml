@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>LUNA.PL Corpus</resourceName>
+      <description>The corpus contains human-human spoken dialogues in Polish. The corpus is annotated on several levels, from transcription of dialogues and their morphosyntactic analysis, to semantic annotation on concepts, predicates and anaphora. Annotation on the morphosyntactic and semantic levels was done automatically and then manually corrected. At the concept level, the annotation scheme comprises about 200 concepts from an ontology designed specially for the project. The set of frames for predicate level annotation was defined as a FrameNet-like resource.</description>
+      <resourceShortName>LUNA.PL</resourceShortName>
+      <url>http://zil.ipipan.waw.pl/LUNA</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+</metaShareId>
+      <identifier>407</identifier>
+</identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability>
+      <licenceInfo>
+         <licence>BSD-style</licence>
+         <restrictionsOfUse>attribution</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <downloadLocation>http://zil.ipipan.waw.pl/LUNA?action=AttachFile&amp;do=get&amp;target=LUNA.PL.zip</downloadLocation>
+         <price>free of charge</price>
+         <distributionRightsHolder>
+				        <organizationInfo>
+					          <organizationName>Institute of Computer Science, Polish Academy of Sciences</organizationName>
+					          <organizationShortName>IPI PAN</organizationShortName>
+					          <departmentName>Linguistic Engineering Group</departmentName>
+					          <communicationInfo>
+                  <email>ipi@ipipan.waw.pl</email>
+                  <url>http://www.ipipan.eu</url>
+                  <address>Jana Kazimierza 5</address>
+                  <zipCode>01-237</zipCode>
+                  <city>Warsaw</city>
+                  <telephoneNumber>+48 22 38 00 500</telephoneNumber>
+                  <faxNumber>+48 22 38 00 510</faxNumber>
+</communicationInfo>
+</organizationInfo>
+</distributionRightsHolder>
+</licenceInfo>
+</distributionInfo>
+   <contactPerson>
+      <surname>Marciniak</surname>
+      <givenName>Małgorzata</givenName>
+      <communicationInfo>
+         <email>malgorzata.marciniak@ipipan.waw.pl</email>
+         <url>http://zil.ipipan.waw.pl/MalgorzataMarciniak</url>
+         <address>Jana Kazimierza 5</address>
+         <zipCode>01-237</zipCode>
+         <city>Warsaw</city>
+         <telephoneNumber>+48 22 38 00 547</telephoneNumber>
+         <faxNumber>+48 22 38 00 510</faxNumber>
+</communicationInfo>
+      <affiliation>
+				     <organizationName>Institute of Computer Science, Polish Academy of Sciences</organizationName>
+				     <organizationShortName>IPI PAN</organizationShortName>
+				     <departmentName>Linguistic Engineering Group</departmentName>
+				     <communicationInfo>
+            <email>ipi@ipipan.waw.pl</email>
+            <url>http://www.ipipan.eu</url>
+            <address>Jana Kazimierza 5</address>
+            <zipCode>01-237</zipCode>
+            <city>Warsaw</city>
+            <telephoneNumber>+48 22 38 00 500</telephoneNumber>
+            <faxNumber>+48 22 38 00 510</faxNumber>
+</communicationInfo>
+</affiliation>
+</contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-10-17</metadataCreationDate>
+      <metadataCreator>
+         <surname>Ogrodniczuk</surname>
+         <givenName>Maciej</givenName>
+         <communicationInfo>
+            <email>maciej.ogrodniczuk@ipipan.waw.pl</email>
+            <url>http://zil.ipipan.waw.pl/MaciejOgrodniczuk</url>
+            <address>Jana Kazimierza 5</address>
+            <zipCode>01-237</zipCode>
+            <city>Warsaw</city>
+            <telephoneNumber>+48 22 38 00 563</telephoneNumber>
+            <faxNumber>+48 22 38 00 510</faxNumber>
+</communicationInfo>
+         <position>Assistant Professor</position>
+         <affiliation>
+					       <organizationName>Institute of Computer Science, Polish Academy of Sciences</organizationName>
+					       <organizationShortName>IPI PAN</organizationShortName>
+					       <departmentName>Linguistic Engineering Group</departmentName>
+					       <communicationInfo>
+               <email>ipi@ipipan.waw.pl</email>
+               <url>http://www.ipipan.eu</url>
+               <address>Jana Kazimierza 5</address>
+               <zipCode>01-237</zipCode>
+               <city>Warsaw</city>
+               <telephoneNumber>+48 22 38 00 500</telephoneNumber>
+               <faxNumber>+48 22 38 00 510</faxNumber>
+</communicationInfo>
+</affiliation>
+</metadataCreator>
+      <metadataCreator>
+         <surname>Marciniak</surname>
+         <givenName>Małgorzata</givenName>
+         <communicationInfo>
+            <email>malgorzata.marciniak@ipipan.waw.pl</email>
+            <url>http://zil.ipipan.waw.pl/MalgorzataMarciniak</url>
+            <address>Jana Kazimierza 5</address>
+            <zipCode>01-237</zipCode>
+            <city>Warsaw</city>
+            <telephoneNumber>+48 22 38 00 547</telephoneNumber>
+            <faxNumber>+48 22 38 00 510</faxNumber>
+</communicationInfo>
+         <affiliation>
+					       <organizationName>Institute of Computer Science, Polish Academy of Sciences</organizationName>
+					       <organizationShortName>IPI PAN</organizationShortName>
+					       <departmentName>Linguistic Engineering Group</departmentName>
+					       <communicationInfo>
+               <email>ipi@ipipan.waw.pl</email>
+               <url>http://www.ipipan.eu</url>
+               <address>Jana Kazimierza 5</address>
+               <zipCode>01-237</zipCode>
+               <city>Warsaw</city>
+               <telephoneNumber>+48 22 38 00 500</telephoneNumber>
+               <faxNumber>+48 22 38 00 510</faxNumber>
+</communicationInfo>
+</affiliation>
+</metadataCreator>
+      <metadataCreator>
+         <surname>Lenart</surname>
+         <givenName>Michał</givenName>
+         <communicationInfo>
+            <email>michal.lenart@ipipan.waw.pl</email>
+            <url>http://zil.ipipan.waw.pl/MichalLenart</url>
+            <address>Jana Kazimierza 5</address>
+            <zipCode>01-237</zipCode>
+            <city>Warsaw</city>
+            <telephoneNumber>+48 22 38 00 560</telephoneNumber>
+            <faxNumber>+48 22 38 00 510</faxNumber>
+</communicationInfo>
+         <position>Assistant Engineer</position>
+         <affiliation>
+					       <organizationName>Institute of Computer Science, Polish Academy of Sciences</organizationName>
+					       <organizationShortName>IPI PAN</organizationShortName>
+					       <departmentName>Linguistic Engineering Group</departmentName>
+					       <communicationInfo>
+               <email>ipi@ipipan.waw.pl</email>
+               <url>http://www.ipipan.eu</url>
+               <address>Jana Kazimierza 5</address>
+               <zipCode>01-237</zipCode>
+               <city>Warsaw</city>
+               <telephoneNumber>+48 22 38 00 500</telephoneNumber>
+               <faxNumber>+48 22 38 00 510</faxNumber>
+</communicationInfo>
+</affiliation>
+</metadataCreator>
+      <source>CESAR</source>
+</metadataInfo>
+   <versionInfo>
+		    <version>1.0</version>
+      <lastDateUpdated>2011-11-12</lastDateUpdated>
+		
+</versionInfo>
+   <resourceCreationInfo>
+      <fundingProject>
+         <projectName>Spoken Language UNderstanding in multilinguAl communication systems</projectName>
+         <projectShortName>LUNA</projectShortName>
+         <url>http://www.ist-luna.eu</url>
+         <fundingType>euFunds</fundingType>
+         <fundingType>nationalFunds</fundingType>
+         <funder>European Commission</funder>
+         <funder>Polish Ministry of Science and Higher Education</funder>
+         <fundingCountry>Poland</fundingCountry>
+         <projectStartDate>2006-09-04</projectStartDate>
+         <projectEndDate>2009-09-03</projectEndDate>
+</fundingProject>
+</resourceCreationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+               <languageInfo>
+			
+			               <languageId>PL</languageId>
+			               <languageName>Polish</languageName>
+</languageInfo>
+               <sizeInfo>
+			               <size>500</size>
+			
+			               <sizeUnit>files</sizeUnit>
+</sizeInfo>
+               <sizeInfo>
+			               <size>12778</size>
+			
+			               <sizeUnit>utterances</sizeUnit>
+</sizeInfo>
+               <sizeInfo>
+			               <size>81049</size>
+			
+			               <sizeUnit>words</sizeUnit>
+</sizeInfo>
+               <annotationInfo>
+                  <annotationType>segmentation</annotationType>
+                  <segmentationLevel>utterance</segmentationLevel>
+                  <segmentationLevel>word</segmentationLevel>
+                  <segmentationLevel>wordGroup</segmentationLevel>
+</annotationInfo>
+               <annotationInfo>
+                  <annotationType>semanticAnnotation</annotationType>
+                  <segmentationLevel>wordGroup</segmentationLevel>
+                  <segmentationLevel>clause</segmentationLevel>
+</annotationInfo>
+               <creationInfo>
+			               <originalSource>
+                     <targetResourceNameURI>Warsaw Transport Authority information center recordings</targetResourceNameURI>
+</originalSource>
+			               <creationMode>mixed</creationMode>
+			               <creationModeDetails>Manual transcription of recorded data, automatic creation of files with information about speakers’ turns, automatic morphological analysis followed by manual disambiguation, ..........</creationModeDetails>
+</creationInfo>
+</corpusTextInfo>
+</corpusMediaType>
+</corpusInfo>
+</resourceComponentType>
+</resourceInfo>

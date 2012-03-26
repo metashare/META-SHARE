@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: UGOT-M10-9.2.xml 42855 2011-12-06 13:16:13Z martha $ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>SALDO's morphology</resourceName>
+      <description>SALDO's morphology.  Part of SBLEX.</description>
+      <resourceShortName>Saldom</resourceShortName>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>CC_BY-SA_3.0</licence>
+         <restrictionsOfUse>shareAlike</restrictionsOfUse>
+         <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <downloadLocation>http://spraakbanken.gu.se/eng/sblex/resources</downloadLocation>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>LGPLv3</licence>
+         <restrictionsOfUse>shareAlike</restrictionsOfUse>
+         <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <downloadLocation>http://spraakbanken.gu.se/eng/sblex/resources</downloadLocation>
+      </licenceInfo>
+      <iprHolder>
+         <organizationInfo>
+	           <organizationName>Språkbanken, University of Gothenburg</organizationName>
+	           <organizationShortName>Språkbanken</organizationShortName>
+	           <communicationInfo>
+               <email>sb-info@svenska.gu.se</email>
+            </communicationInfo>
+         </organizationInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Forsberg</surname>
+      <givenName>Markus</givenName>
+      <communicationInfo>
+         <email>sb-info@svenska.gu.se</email>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-12-31</metadataCreationDate>
+   </metadataInfo>
+   <usageInfo>
+      <foreseenUseInfo>
+         <foreseenUse>humanUse</foreseenUse>
+      
+      
+         <useNLPSpecific>languageIdentification</useNLPSpecific>
+         <useNLPSpecific>informationRetrieval</useNLPSpecific>
+         <useNLPSpecific>wordSenseDisambiguation</useNLPSpecific>
+         <useNLPSpecific>machineTranslation</useNLPSpecific>
+         <useNLPSpecific>namedEntityRecognition</useNLPSpecific>
+         <useNLPSpecific>questionAnswering</useNLPSpecific>
+         <useNLPSpecific>naturalLanguageGeneration</useNLPSpecific>
+         <useNLPSpecific>summarisation</useNLPSpecific>
+         <useNLPSpecific>documentClassification</useNLPSpecific>
+      </foreseenUseInfo>
+      <actualUseInfo>
+         <actualUse>humanUse</actualUse>
+      </actualUseInfo>
+      <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+         <useNLPSpecific>machineTranslation</useNLPSpecific>
+         <useNLPSpecific>naturalLanguageGeneration</useNLPSpecific>
+         <useNLPSpecific>summarisation</useNLPSpecific>
+         <useNLPSpecific>informationRetrieval</useNLPSpecific>
+      </actualUseInfo>
+  </usageInfo>
+   <resourceDocumentationInfo>
+      <documentation>
+         <documentUnstructured>http://spraakbanken.gu.se/eng/saldo</documentUnstructured>
+      </documentation>
+  </resourceDocumentationInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>computationalLexicon</lexicalConceptualResourceType>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+      
+                  <languageId>swe</languageId>
+                  <languageName>Swedish</languageName>
+               </languageInfo>
+                  <modalityInfo>
+                     <modalityType>writtenLanguage</modalityType>
+                  </modalityInfo>
+               <sizeInfo>
+                  <size>127400000</size>
+      
+                  <sizeUnit>bytes</sizeUnit>
+               </sizeInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: STO-LMF-morph-lex-min.xml 42662 2011-12-01 14:33:59Z martha $ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>STO-LMF, morphology</resourceName>
+      <description>The morphological part of the STO database converted into LMF. STO is an computational lexicon of Danish, building on experience obtained from the PAROLE and SIMPLE projects.</description>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>CLARIN_ACA-NC</licence>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <downloadLocation>http://cst.dk/sto/lmf/sto_lmf_morph_sample.xml</downloadLocation>
+      </licenceInfo>
+      <iprHolder>
+         <organizationInfo>
+            <organizationName>Centre for Language Technology, University of Copenhagen</organizationName>
+            <communicationInfo>
+               <email>saolsen@hum.ku.dk</email>
+            </communicationInfo>
+         </organizationInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>N/A</surname>
+      <communicationInfo>
+         <email>saolsen@hum.ku.dk</email>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-22</metadataCreationDate>
+      <metadataCreator>
+         <surname>N/A</surname>
+         <communicationInfo>
+            <email>saolsen@hum.ku.dk</email>
+         </communicationInfo>
+      </metadataCreator>
+   </metadataInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>computationalLexicon</lexicalConceptualResourceType>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType> 
+                  <!-- options to select from: 'monolingual', 'bilingual', 'multilingual' -->
+                  <!-- options to select from: 'bodyGesture', 'facialExpression', 'voice', 'combinationOfModalities', 'signLanguage', 'spokenLanguage', 'writtenLanguage', 'other' -->
+    </lingualityInfo>
+               <languageInfo>
+      
+                  <languageId>dan</languageId>
+                  <languageName>Danish</languageName>
+               </languageInfo>
+      <modalityInfo>
+                     <modalityType>writtenLanguage</modalityType>
+                  </modalityInfo> 
+               <sizeInfo>
+                  <size>87000</size>
+                  <!-- options to select from: 'unit', 'tera', 'mega', 'kilo', 'hundred' -->
+      <sizeUnit>entries</sizeUnit> 
+                  <!-- options to select from: 'terms', 'entries', 'turns', 'utterances', 'articles', 'files', 'items', 'seconds', 'elements', 'units', 'minutes', 'hours', 'texts', 'sentences', 'bytes', 'tokens', 'words', 'keywords', 'idiomaticExpressions', 'neologisms', 'multiWordUnits', 'expressions', 'synsets', 'classes', 'concepts', 'lexicalTypes', 'phoneticUnits', 'syntacticUnits', 'semanticUnits', 'predicates', 'phonemes', 'diphones', 'T-HPairs', 'syllables', 'rules', 'other' -->
+    </sizeInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>

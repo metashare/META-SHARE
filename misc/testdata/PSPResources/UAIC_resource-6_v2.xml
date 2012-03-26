@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Romanian Semantic Classes</resourceName>
+      <description>The lexicon contains a collection of lemmas and stems from various POS categories (explicitly marked only in the file classes_eminescu.xml): verb, noun, adjective and adverb, including 30 semantic classes, chosen to fit optimally with the necessities of interpreting the political discourse.</description>
+      <resourceShortName>RoSemClass</resourceShortName>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+      <identifier>9861f0c7986648e3a164bb4bcacc007e</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>GeneralLicenceGrant</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
+      </licenceInfo>
+      <iprHolder>
+          <organizationInfo>
+            <organizationName>Alexandru Ioan Cuza</organizationName><organizationShortName>UAIC</organizationShortName><communicationInfo><email>xxx@example.com</email></communicationInfo>
+          </organizationInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Gifu</surname>
+      <givenName>Daniela</givenName>
+      <communicationInfo>
+         <email>daniela.gifu@infoiasi.ro</email>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-29</metadataCreationDate>
+      <source>METANET4U</source>
+   </metadataInfo>
+   <usageInfo>
+      <foreseenUseInfo>
+         <foreseenUse>humanUse</foreseenUse>
+        
+      </foreseenUseInfo>
+      <actualUseInfo>
+         <actualUse>humanUse</actualUse>
+      </actualUseInfo>
+      <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+         <useNLPSpecific>languageModelling</useNLPSpecific>
+      </actualUseInfo>
+  </usageInfo>
+   <resourceDocumentationInfo>
+      <documentation>
+         <documentUnstructured>Daniela Gifu, Dan Cristea: "Computational Techniques in Political Language Processing: AnaDiP-2011" in J.J. Park, L.T. Yang, and C. Lee (Eds.): "FutureTech 2011", Part II, CCIS 185, pp. 188–195, Springer-Verlag Berlin Heidelberg 2011.</documentUnstructured>
+      </documentation>
+  </resourceDocumentationInfo>
+   <resourceCreationInfo>
+      <creationEndDate>2011-01-11</creationEndDate>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+                  <multilingualityType>comparable</multilingualityType>
+               </lingualityInfo>
+               <languageInfo>
+        
+                  <languageId>rou</languageId>
+                  <languageName>Romanian</languageName>
+               </languageInfo>
+                                 <modalityInfo>
+                     <modalityType>writtenLanguage</modalityType>
+                  </modalityInfo>
+               <sizeInfo>
+                  <size>35.559</size>
+        
+                  <sizeUnit>entries</sizeUnit>
+               </sizeInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>
