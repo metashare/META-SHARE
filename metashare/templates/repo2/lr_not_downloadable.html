@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}    
-<h2>{{ resource.identificationInfo.resourceName.0 }}</h2>
+<h2{% if not resource.storage_object.published %} style="font-style:italic;"{% endif %}>{{ resource.identificationInfo.resourceName.0 }}</h2>
 <div class="content_box">
   <h3>No Download Available</h3>
   <p>We are afraid, the selected resource is not available for download.</p>
