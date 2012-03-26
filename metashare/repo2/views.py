@@ -346,17 +346,16 @@ class MetashareFacetedSearchView(FacetedSearchView):
         if not self.request.user.is_staff:
             sqs = sqs.filter(published=True)
 
-        # Sort the results
+        # Sort the results (on only one sorting value)
         if 'sort' in self.request.GET:
             sort_list = self.request.GET.getlist('sort')
             
-            for sort_value in sort_list:
-                if sort_value == 'resourcename_asc':
-                    sqs = sqs.order_by('resourceNameSort_exact')
-                elif sort_value == 'resourcename_desc':
-                    sqs = sqs.order_by('-resourceNameSort_exact')
-                else:
-                    sqs = sqs.order_by('resourceNameSort_exact')
+            if sort_list[0] == 'resourcename_asc':
+                sqs = sqs.order_by('resourceNameSort_exact')
+            elif sort_list[0] == 'resourcename_desc':
+                sqs = sqs.order_by('-resourceNameSort_exact')
+            else:
+                sqs = sqs.order_by('resourceNameSort_exact')
         else:
             sqs = sqs.order_by('resourceNameSort_exact')
 
