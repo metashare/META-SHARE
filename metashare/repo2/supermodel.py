@@ -739,6 +739,11 @@ class SchemaModel(models.Model):
                     # different, e.g., for contactPerson vs. PersonInfo.
                     _value.tag = _sub_cls.__schema_name__
 
+                    # If the current field is NOT a OneToOne field, we have to
+                    # check for duplicates after creating of the sub object!
+                    if isinstance(_field, related.OneToOneField):
+                        LOGGER.debug(u'\nDO NOT CALL DUPLICATE CHECK!\n')
+
                     # Try to import the sub element from the current value.
                     LOGGER.debug(u'Trying to import sub object {0}'.format(
                       _value.tag))
@@ -839,9 +844,7 @@ class SchemaModel(models.Model):
             # ForeignKey fields, this can be handled using setattr().
             elif _field is not None:
                 try:
-                    # TODO: Reactivate length constraint once MultiCharField
-                    # becomes available...
-                    #assert(len(_values) == 1)
+                    assert(len(_values) == 1)
                     setattr(_object, _model_field, _values[0])
 
                 except AssertionError:
@@ -931,7 +934,8 @@ class SchemaModel(models.Model):
             if not value:
                 return u''
             model_field = self._meta.get_field_by_name(field_spec)
-            if isinstance(model_field[0], models.CharField):
+            if isinstance(model_field[0], models.CharField) or \
+              isinstance(model_field[0], MultiSelectField):
                 # see if it's an enum CharField with options and return the
                 # string instead of the option number
                 display = getattr(self,
@@ -940,8 +944,6 @@ class SchemaModel(models.Model):
                     value = display()
                 return value
             elif isinstance(model_field[0], MultiTextField):
-                # join the multiple values with the given separator
-                # TODO: what abount multiple enums?
                 return separator.join(value)
             if hasattr(value, 'all') and \
               hasattr(getattr(value, 'all'), '__call__'):
