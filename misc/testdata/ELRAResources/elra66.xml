@@ -6,7 +6,7 @@
 <description lang="English">The lexicon contains 2,180 Dutch abbreviations and acronyms. It complies with the official Dutch Spelling (2005/6). Each entry consists of an ID, word form, lemma and part of speech.The lexicon is delivered in human-readable UNIX ANSI-format, with just a linefeed at the end of every line instead of a carriage return. The character set used is ISO Latin-1 (ISO/IEC 8859-1). All fields are separated by horizontal tabs, with no empty fields.</description>
 <description lang="French">Ce lexique comprend 2 180 abréviations et acronymes hollandais. Il est conforme à l'orthographe officielle du hollandais (2005/6). Chaque entrée contient un identifiant, la forme du mot, le lemme et la partie du discours.Le lexique est fourni au format UNIX ANSI lisible par l’homme, avec un simple saut de ligne en fin de chaque ligne au lieu d’un retour chariot. La table de caractères utilisée est ISO Latin-1 (ISO/IEC 8859-1). Tous les champs sont séparés par des tabulations horizontales, sans champs vides.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=1000</url>
 <identifier>ELRA-L0076</identifier>
 </identificationInfo>

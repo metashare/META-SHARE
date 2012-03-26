@@ -12,7 +12,15 @@ from metashare.repo2.editor.widgets import SingleChoiceTypeWidget, \
   MultiChoiceTypeWidget
   
 # TODO: Here we are duplicating in two classes twice 99% the same code -- extract mixin?
-# TODO: The code for hidden fields really has nothing to do with related widgets.
+#
+# NOTE: schroed: The code for hidden fields really has nothing to do with
+#                related widgets.
+#
+#    cfedermann: While this is true, the two SchemaModel admins defined in
+#                superadmin.py sub-class the two RelatedWidgetWrapper* classes
+#                which meant this was a suitable entry point for adding the
+#                HiddenInput behaviour;  the whole editor class design should
+#                be cleaned up and refactored at some point, though...
 
 class RelatedWidgetWrapperAdmin(admin.ModelAdmin):
 
@@ -90,7 +98,24 @@ class RelatedWidgetWrapperInline(admin.StackedInline):
                     widget = SingleChoiceTypeWidget(db_field.rel, admin_site)
                 
                 kwargs['widget'] = widget
-                return db_field.formfield(**kwargs)
+                formfield = db_field.formfield(**kwargs)
+                # Ugly trick from http://ionelmc.wordpress.com/2012/01/19/tweaks-for-making-django-admin-faster/
+                # to reuse the same database query result for more than one inline of the same type.
+                # We benefit from this for the 'validator' field: 
+                if db_field.name == 'validator':
+                    formfield.choices = formfield.choices
+                return formfield
+
+        # OneToOne fields are rendered with a HiddenInput instead a select.
+        if isinstance(db_field, related.OneToOneField):
+            attrs = {'id': 'id_{}'.format(db_field.name)}
+            if db_field.rel:
+                _instance = db_field.rel.to()
+                if _instance.id:
+                    attrs['value'] = _instance.id
+
+            widget = HiddenInput(attrs=attrs)
+            kwargs['widget'] = widget
 
         formfield = super(RelatedWidgetWrapperInline, self).formfield_for_dbfield(db_field, **kwargs)
         if (formfield and

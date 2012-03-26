@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">SALA II Portuguese from Brazil database</resourceName>
-<resourceName lang="French">Base de données SALA II du portugais brésilien</resourceName>
-<description lang="English">This SALA II Portuguese from Brazil database was recorded within the scope of the SALA II project.The database contains the recordings of 1000 speakers (500 males and 500 females) recorded over the local mobile telephone network.The following acoustic conditions were selected as representative of a mobile user's environment:•	Passenger in moving car (176 speakers)•	Public place (264 speakers)•	Stationary pedestrian by road side (231 speakers)•	Home/Office environment (273 speakers)•	Passenger in moving car using a hands-free kit (56 speakers)The database is distributed as 4 DVDs. The speech files are stored as sequences of 8-bit, 8kHz a-law speech files, according to the specifications of SALA II. Each prompt utterance is stored within a separate file and has an accompanying ASCII SAM label file. This speech database was validated by SPEX (the Netherlands) to assess its compliance with the SALA II format and content specifications.Each speaker uttered the following items•	6 application words•	1 sequence of 10 isolated digits•	4 connected digits (1 sheet number -6 digits, 1 telephone number 9-11 digits, 1 credit card number 14/16 digits, 1 PIN code -6 digits)•	3 dates (1 spontaneous date e.g. birthday, 1 word style prompted date, 1 relative and general date expression)•	1 word spotting phrase using an embedded application word•	1 isolated digit•	3 spelled words (1 spontaneous name, 1 directory assistance city name, 1 realartificial name for coverage)•	1 currency money amount•	1 natural number•	5 directory assistance names (1 spontaneous name, 1 spontaneous city of birth/growing up, 1 most frequent city out of a set of 500, 1 most frequent company/agency out of a set of 500, 1 forename-surname out of a set of 150)•	2 yes/no questions (1 predominantly yes question, 1 predominantly no question)•	9 phonetically rich sentences•	2 time phrases (1 spontaneous time of day, 1 word style time phrase)•	4 phonetically rich words The following age distribution has been obtained: 6 speakers under 16, 353 speakers are between 16 and 30, 328 speakers are between 31 and 45, 303 speakers are between 46 and 60, and 10 speakers are over 60.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
-<description lang="French">La base de données SALA II du portugais brésilien a été a été enregistrée dans le cadre du projet SALA II. La base contient les enregistrements de 1000 locuteurs (500 hommes, 500 femmes) enregistrés à travers le réseau téléphonique mobile brésilien. Les conditions acoustiques suivantes ont été choisies comme l’environnement représentatif d’un utilisateur de portable:•	Passager dans une voiture en marche (176 locuteurs)•	Lieu public (264 locuteurs)•	Piéton à l’arrêt à côté d’une route (231 locuteurs)•	Environnement domicile/bureau (273 locuteurs)•	Passager dans une voiture en marche utilisant un kit mains-libres (56 locuteurs) Cette base est distribuée sur 4 DVD-ROM. Selon les spécifications de SALA II, les fichiers de parole sont stockés en séquences d'échantillons de 8 bit, 8 kHz, loi-A et ne sont pas compressées. Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM. Cette base de données a été validée par SPEX (Pays-Bas) afin de vérifier sa conformité avec le format SALA II et les spécifications du contenu.Contenu du corpus :•	6 mots de commande ;•	1 séquence de 10 chiffres isolés ;•	4 chiffres connectés : 1 numéro permettant d'identifier la feuille de prompt (6 chiffres), 1 numéro de téléphone (9-11 chiffres), 1 numéro de carte de crédit (14-16 chiffres), 1 code confidentiel (6 chiffres) ;•	3 dates : 1 date spontanée (ex. anniversaire), 1 date lue, 1 date générale ;•	1 expression utilisant un mot de commande ;•	1 chiffre isolé ;•	3 mots épelés : 1 prénom, 1 nom de ville provenant d'un annuaire de renseignements téléphoniques, 1 mot réel/artificiel pour couverture ;•	1 montant en devises ;•	1 nombre entier naturel ;•	5 noms provenant d'un annuaire de renseignements téléphoniques : 1 prénom spontané, 1 ville de naissance/d'origine du locuteur spontanée, 1 nom de ville parmi les plus fréquentes (sur 500), 1 nom de compagnie parmi les plus fréquentes (sur 500), 1 répétition de "prénom nom" (sur 150);•	2 questions oui/non : 1 question à prédominance "oui", 1 question à prédominance "non" ;•	9 phrases phonétiquement riches ;•	2 phrases comportant une notion de temps : 1 jour (spontané), 1 phrase comportant une notion de temps ;•	4 mots phonétiquement riches. Les classes d'âge sont réparties comme suit : 6 locuteurs ont moins de 16 ans, 353 locuteurs ont entre 16 et 30 ans, 328 locuteurs ont entre 31 et 45 ans, 303 locuteurs ont entre 46 et 60 ans et 10 locuteurs ont plus de 60 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
+<resourceName lang="English">Bizkaifon (Bizkaieraren Fonoteka)</resourceName>
+<resourceName lang="French">Bizkaifon (Bizkaieraren Fonoteka)</resourceName>
+<description lang="English">Bizkaifon contains sound archives and associated information of dialectal varieties of spoken Basque. The database was collected by the Department of Electronics and Telecommunications, University of the Basque Country, with the financial help of the Diputación Foral de Bizkaia. It consists of 21 hours of spontaneous and read speech, recorded over a microphone in a room, for Bizcayan Basque linguistic and phonetic research. The database is stored on 5 CDs. It includes four different types of material:- 267 archives of popular literature (popular knowledge, songs and folklore).- 797 texts.- 1788 grammatically complete sentences.- 11569 isolated words.The database is structured as follows: sound files (.WAV) placed in different directories, with, for each sound file, a text TEI SGML file which stores data according to the TEI Consortium P4 recommendations (Text Encoding Initiative, 1994), and a binary file containing the same data as the SGML, stored in a format that grants faster access to the data. Speech is transcribed orthographically into standard and dialectal Basque.For more information: http://bizkaifon.ehu.es/ahoweb/</description>
+<description lang="French">Bizkaifon comprend des archives sonores, ainsi que des informations connexes, de variétés dialectales du basque parlé. La base de donnée a été collectée par le département d'électronique et de télécommunications de l'université du Pays Basque, avec le soutien financier du Diputación Foral de Bizkaia. Elle contient 21 heures de parole spontanée et lue, enregistrée en salle via un microphone, pour des applications de recherche linguistique et phonétique du basque. La base de données est stockée sur 5 CD-ROM. Elle contient quatre types différents de matériel :    * 267 archives de littérature populaire (connaissance populaire, chants et folklore);    * 797 textes;    * 1788 phrases grammaticalement complètes;    * 11569 mots isolés. La structure de la base est la suivante: fichiers sons (.WAV) distribués sur différents répertoires, avec pour chaque fichier son, un fichier texte balisé en SGML sur la base des recommandations du consortium P4 TEI (Text Encoding Initiative, 1994), ainsi qu'un fichier binaire contenant les même données que la version SGML, stocké sous un format permettant un accès rapide aux données. La parole est transcrite orthographiquement en basque standard et dialectal.Pour plus d'informations : http://bizkaifon.ehu.es/ahoweb/</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1046</url>
-<identifier>ELRA-S0262</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=6</url>
+<identifier>ELRA-S0153</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,37 +29,31 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2008-01-14</lastDateUpdated>
+<lastDateUpdated>2005-06-15</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 51000.00€</price>
-<price>Academic org. ELRA Non Member: 48450.00€</price>
-<price>Commercial org. ELRA Member: 45000.00€</price>
-<price>Academic org. ELRA Member: 42750.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2007-12-18</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 1000.00€</price>
+<price>Academic org. ELRA Non Member: 1000.00€</price>
+<price>Commercial org. ELRA Member: 1000.00€</price>
+<price>Academic org. ELRA Member: 1000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2003-10-27</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 51000.00€</price>
-<price>Academic org. ELRA Non Member: 51000.00€</price>
-<price>Commercial org. ELRA Member: 45000.00€</price>
-<price>Academic org. ELRA Member: 45000.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2007-12-18</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 1000.00€</price>
+<price>Academic org. ELRA Non Member: 1000.00€</price>
+<price>Commercial org. ELRA Member: 1000.00€</price>
+<price>Academic org. ELRA Member: 1000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2003-10-27</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>SALA II</projectName>
-<fundingType>euFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
@@ -70,8 +64,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>por</languageId>
-<languageName>Portuguese</languageName>
+<languageId>baq/eus</languageId>
+<languageName>Basque</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

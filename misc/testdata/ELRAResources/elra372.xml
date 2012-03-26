@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Cantonese SpeechDat-like MDB-2000</resourceName>
-<resourceName lang="French">Base de données MDB-2000 du cantonais (conforme aux spécifications SpeechDat)</resourceName>
-<description lang="English">The Cantonese SpeechDat-like MDB-2000 database contains the recordings of 2,000 Cantonese speakers (996 males, 1,004 females) recorded over the mobile telephone network in China and Hong Kong. The MDB-2000 database is partitioned into 11 CDs in ISO 9660 format. It follows the specifications given in the framework of the SpeechDat(II) project.Speech samples are stored as sequences of 8-bit 8 kHz A-law. Each prompted utterance is stored in a separate file. Each signal file is accompanied by an ASCII SAM label file which contains the relevant descriptive information.This database was validated by SPEX (the Netherlands) to assess its compliance with the SpeechDat(II) format and content specifications.Each speaker uttered the following items:    * 2 isolated digits    * 1 sequence of 10 isolated digits    * 4 connected digits (1 prompt sheet number -4 digits, 1 telephone number –9/11 digits, 1 credit card number –14/16 digits, 1 PIN code -6 digits)    * 3 dates (1 spontaneous date e.g. birthday, 1 word style prompted date, 1 relative and general date expression)    * 1 word spotting phrase using an embedded application word    * 6 application words    * 3 spelled words (1 spontaneous name e.g. own forename, 1 city name, 1 real/artificial word for coverage)    * 1 currency money amount    * 1 natural number    * 5 directory assistance names (1 spontaneous name e.g. own forename, 1 city of birth/growing up, 1 most frequent cities out of a set of 500, 1 most frequent company/agency out of a set of 500, 1 isolated city name, 1 "forename surname" out of a set of 400 ‘full’ names)    * 2 yes/no questions (1 predominantly "Yes" question, 1 predominantly "No" question)    * 9 phonetically rich sentences    * 2 time phrases (1 spontaneous time of day, 1 word style time phrase)    * 4 phonetically rich wordsThe following age distribution has been obtained: 74 speakers are under 16, 953 speakers are between 16 and 30, 636 speakers are between 31 and 45, 328 speakers are between 46 and 60, 9 speakers are over 60.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
-<description lang="French">La base de données MDB-2000 du cantonais contient les enregistrements de 2000 locuteurs cantonais (996 hommes, 1004 femmes), enregistrés à travers le réseau téléphonique mobile en Chine et à Hong Kong. Elle est répartie sur 11 CD-ROM, dans le format de la norme ISO 9660. Cette base a été réalisée selon les spécifications du projet SpeechDat(II) et validées par SPEX, Pays-Bas.Les fichiers de parole sont stockés en séquences d’échantillons de 8 bits, 8 kHz, loi-A. Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM.Chaque locuteur a prononcé les éléments suivants :    * 2 chiffres isolés ;    * 1 séquence de 10 chiffres isolés ;    * 4 séries de chiffres connectés : 1 numéro permettant d'identifier la feuille de prompt (4 chiffres), 1 numéro de téléphone (9-11 chiffres), 1 numéro de carte de crédit (14-16 chiffres), 1 code confidentiel (6 chiffres) ;    * 3 dates : 1 date spontanée (date de naissance), 1 date lue, 1 date relative et générale ;    * 1 expression utilisant un mot de commande ;    * 6 mots d'application ;    * 3 mots épelés : 1 spontané (prénom), 1 nom de ville provenant d’un annuaire de renseignements téléphoniques, 1 mot réel / artificiel pour couverture ;    * 1 montant en devise ;    * 1 nombre naturel ;    * 5 noms extraits d’un annuaire de renseignements téléphoniques : 1 spontané (prénom), 1 nom de ville spontané (ville de naissance / d’enfance du locuteur), 1 nom de ville parmi les plus courantes (sur 500 noms), 1 nom de société (sur 500), 1 nom de ville isolé (sur 500), 1 ‘prénom nom’ (sur 400) :    * 2 questions oui / non : 1 question à prédominance ‘oui’, 1 question à prédominance ‘non’ ;    * 9 phrases phonétiquement riches    * 2 phrases comportant une notion de temps : 1 jour (spontané), 1 phrase comportant une notion de temps ;    * 4 mots phonétiquement riches.Les classes d’âge sont réparties comme suit : 74 locuteurs de moins de 16 ans, 953 locuteurs entre 16 et 30 ans, 636 locuteurs entre 31 et 45 ans, 328 locuteurs entre 46 et 60 ans, 9 locuteurs de plus de 60 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
+<resourceName lang="English">THAMUS Bilingual dictionaries - Computer science</resourceName>
+<resourceName lang="French">THAMUS Dictionnaires bilingues - Informatique</resourceName>
+<description lang="English">Technical domainsLanguages: English =&gt; ItalianFormat: ASCII format with ISO 8859-1 character setMedium: QIC 150 MB Cartridge TapeDomain: Computer science, 32,000 entries, inflected formsTechnical bilingual Italian dictionaries with a morphological coding which can generate all full forms using a software engine written in C. Multi-word terms contain morphological coding for the head word.</description>
+<description lang="French">Domaines techniquesLangues : Anglais =&gt; ItalienDomaine: Informatique, 32 000 entrées, formes fléchiesLes dictionnaires techniques bilingues disposent d'une codification morphologique qui permet de générer toutes les formes fléchies grâce à un logiciel écrit en langage C. Les mots composés contiennent une codification morphologique sur la tête des mots.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=735</url>
-<identifier>ELRA-S0138</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=150</url>
+<identifier>ELRA-M0010_09</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,46 +29,51 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-02-22</lastDateUpdated>
+<lastDateUpdated>2005-03-04</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 85000.00€</price>
-<price>Academic org. ELRA Non Member: 65000.00€</price>
-<price>Commercial org. ELRA Member: 65000.00€</price>
-<price>Academic org. ELRA Member: 52000.00€</price>
+<price>Commercial org. ELRA Non Member: 38400.00€</price>
+<price>Academic org. ELRA Non Member: 7680.00€</price>
+<price>Commercial org. ELRA Member: 35200.00€</price>
+<price>Academic org. ELRA Member: 7040.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2002-11-06</availabilityStartDate>
+<availabilityStartDate>1997-05-13</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 85000.00€</price>
-<price>Academic org. ELRA Non Member: 85000.00€</price>
-<price>Commercial org. ELRA Member: 65000.00€</price>
-<price>Academic org. ELRA Member: 65000.00€</price>
+<price>Commercial org. ELRA Non Member: 38400.00€</price>
+<price>Academic org. ELRA Non Member: 38400.00€</price>
+<price>Commercial org. ELRA Member: 35200.00€</price>
+<price>Academic org. ELRA Member: 35200.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2002-11-06</availabilityStartDate>
+<availabilityStartDate>1997-05-13</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>chi/zho</languageId>
-<languageName>Chinese</languageName>
+<languageId>eng</languageId>
+<languageName>English</languageName>
 </languageInfo>
-</corpusAudioInfo>
-</corpusMediaType>
-</corpusInfo>
+<languageInfo>
+<languageId>ita</languageId>
+<languageName>Italian</languageName>
+</languageInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

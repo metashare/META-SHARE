@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Finnish SpeechDat-Car</resourceName>
-<resourceName lang="French">Base de données SpeechDat-Car du finnois</resourceName>
-<description lang="English">The Finnish SpeechDat-Car contains the recordings of 302 Finnish speakers from 3 major dialectal areas (with 13 sub-areas) (151 males, 151 females), recorded over the GSM telephone network, and in a car. This database is partitioned into 142 CDs (DVDs are also available).The speech data files are in two formats. Four of the 5 microphones were recorded on the computer in the boot of the car. The speech data are stored as sequences of 16 kHz, 16 bit and uncompressed. The fifth microphone was connected to the cell phone, and was recorded on a remote machine, with compressed data stored as sequences of 8 bit A-law 8.kHz. Each signal file is accompanied by an ASCII SAM label file which contains the relevant descriptive information.This speech database was validated by SPEX (the Netherlands) to assess its compliance with the SpeechDat-Car format and content specifications.Each speaker uttered the following items:    * 2 voice activation keywords    * 1 sequence of 10 isolated digits    * 7 connected digits (1 sheet number -5 digits, 1 spontaneous telephone number, 3 read telephone numbers, 1 credit card number –14/16 digits, 1 PIN code -6 digits)    * 3 dates (1 spontaneous date e.g. birthday, 1 prompted date, 1 relative or general date expression)    * 2 word spotting phrases using an embedded application word    * 4 isolated digits    * 7 spelled words (1 spontaneous e.g. own forename or surname, 1 directory city name, 4 real word/name, 1 artificial name for coverage)    * 1 money amount    * 1 natural number    * 7 directory assistance names (1 spontaneous e.g. own forename or surname, 1 city of birth/growing up, 2 most frequent cities, 2 most frequent company/agency, 1 "forename surname")    * 9 phonetically rich sentences    * 2 time phrases (1 spontaneous time of day, 1word style time phrase)    * 4 phonetically rich words    * 67 application words (13 mobile phone application words, 22 IVR function keywords, 32 car products keywords)    * 2 additional language dependent keywords    * 10 spontaneous situations    * 6 names + extensionsThe following age distribution has been obtained: 138 speakers are between 16 and 30, 89 speakers are between 31 and 45, and 75 speakers are between 46 and 60. No speaker are over 60.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
-<description lang="French">La base de données SpeechDat-Car du finnois est composée d'enregistrements réalisés à travers le réseau GSM finnois, et dans une voiture. 302 locuteurs finnois (151 hommes, 151 femmes) de 3 régions dialectales différentes (comprenant elles-mêmes 13 sous-ensembles) ont été enregistrés. Cette base de données est distribuée sur 142 CD.Les bases orales réalisées lors du projet SpeechDat-Car ont été validées par SPEX, Pays-Bas, afin de contrôler leur adéquation avec le format SpeechDat-Car et les spécifications de contenu.Les données de parole se présentent sous deux formats. Quatre microphones ont été connectés sur un ordinateur placé dans le coffre de la voiture. Ces fichiers sont stockés en séquences d'échantillons de 16 kHz, 16 bit et ne sont pas compressés. Le cinquième microphone a été connecté au téléphone mobile et les enregistrements effectués sur une machine à distance. Les fichiers sont ici stockés en séquences d'échantillons de 8kHz, 8 bit loi-A. Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM.Chaque locuteur a prononcé les éléments suivants :    * 2 mots-clés d'activation vocale    * 1 séquence de 10 chiffres isolés    * 7 chiffres connectés : 1 numéro permettant d'identifier la feuille de prompt (5+ chiffres), 1 numéro de téléphone spontané, 3 numéros de téléphone lus, 1 numéro de carte de crédit (14-16 chiffres), 1 code confidentiel (6 chiffres)    * 3 dates : 1 date spontanée (ex. anniversaire), 1 date lue, 1 date générale    * 2 expressions utilisant un mot de commande    * 4 chiffres isolés    * 7 mots épelés : 1 spontané (nom ou prénom du locuteur), 1 nom de ville provenant d'un annuaire de renseignements téléphoniques, 4 mots/noms réels, 1 nom artificiel pour couverture    * 1 montant en devises    * 1 nombre naturel    * 7 noms provenant d'un annuaire de renseignements téléphoniques : 1 spontané (nom ou prénom du locuteur), 1 nom de ville de naissance/d'origine du locuteur (spontané), 2 noms de ville parmi les plus fréquentes, 2 noms de compagnie/société parmi les plus fréquentes, 1 répétition de "prénom nom"    * 9 phrases phonétiquement riches    * 2 phrases comportant une notion de temps : 1 jour (spontané), 1 phrase comportant une notion de temps    * 4 mots phonétiquement riches    * 67 mots de commande: 13 mots de commande dans le domaine de la téléphonie mobile, 22 mots de fonction dans le domaine des serveurs vocaux interactifs, 32 mots-clés de produits du domaine de l'automobile    * 2 mots clés dépendants de la langue supplémentaires    * 10 phrases spontanées    * 6 noms et leurs extensionsLes classes d'âge sont réparties comme suit : 138 locuteurs ont entre 16 et 30 ans, 89 locuteurs entre 31 et 45 ans, et 75 locuteurs entre 46 et 60 ans. Aucun locuteur de plus de 60 ans n'a été enregistré.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
-<resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=663</url>
-<identifier>ELRA-S0133</identifier>
+<resourceName lang="English">Danish EUROM1</resourceName>
+<resourceName lang="French">EUROM1 danois</resourceName>
+<description lang="English">EUROM1 is the first really multilingual speech database produced in Europe. Equivalent corpora for each of the European languages were collected with the same number of speakers selected in the same way, and recorded in the same conditions with common file formats. Initially eight European countries have made recordings: Italy, United Kingdom, Germany, Netherlands, Denmark, Sweden, Norway, France. Additional recordings have been then completed (thanks to CEE Esprit Project SAM-A), in Greece, Spain and Portugal. More than sixty speakers were recorded per language.The content consists of:1)	Continuous speech:-	40 passages made of five task related sentences.-	30 patching sentences, designed to compensate for uneven phoneme distribution in the passage material. 2)	Numbers:The numbers were divided into five blocks, each containing twenty numbers. Each block was recorded as one single take. 3)	CVC words:The CVC word lists contain sixteen list types and also carrier phrases of the suggested type. 114 isolated words were used.</description>
+<description lang="French">EUROM1 est la première base de données de parole produite en Europe. Des corpus équivalents pour chaque langue européenne ont été collectés avec le même nombre de locuteurs sélectionnés de la même manière et enregistrés dans les même conditions et mêmes formats de fichiers. Au départ, huit pays d'Europe ont participé aux enregistrements : l'Italie, le Royaume-Uni, l'Allemagne, les Pays-Bas, le Danemark, la Suède, la Norvège et la France. Cette base a ensuite été complétée par les enregistrements réalisés en Grèce, au Portugal, et en Espagne (grâce au projet SAM-A du programme européen Esprit). Plus de soixante locuteurs ont été enregistrés pour chaque langue.Le contenu consiste en:1)	De la parole continue:-	40 passages composés de phrases en relation avec cinq tâches.-	30 phrases d’ajustement (“patching”), constituées dans le but de compenser la répartition des phonèmes irréguliers dans les passages. 2)	Des nombres:Les nombres ont été divisés en cinq blocs, chacun contenant vingt nombres. Chaque bloc a été enregistré d’un seul trait. 3)	Des mots CVC:Les listes de mots CVC contiennent cinq types de listes ainsi que des phrases porteuses correspondant au type. 114 mots isolés ont été utilisés.</description>
+<resourceShortName>EUROM1_D</resourceShortName>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1087</url>
+<identifier>ELRA-S0292</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,35 +29,35 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-02-22</lastDateUpdated>
+<lastDateUpdated>2011-09-22</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 60000.00€</price>
-<price>Academic org. ELRA Non Member: 10000.00€</price>
-<price>Commercial org. ELRA Member: 40000.00€</price>
-<price>Academic org. ELRA Member: 10000.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2002-10-09</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 1600.00€</price>
+<price>Academic org. ELRA Non Member: 1600.00€</price>
+<price>Commercial org. ELRA Member: 800.00€</price>
+<price>Academic org. ELRA Member: 800.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2008-11-24</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 60000.00€</price>
-<price>Academic org. ELRA Non Member: 60000.00€</price>
-<price>Commercial org. ELRA Member: 40000.00€</price>
-<price>Academic org. ELRA Member: 40000.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2002-10-09</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 1600.00€</price>
+<price>Academic org. ELRA Non Member: 1600.00€</price>
+<price>Commercial org. ELRA Member: 800.00€</price>
+<price>Academic org. ELRA Member: 800.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2008-11-24</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceCreationInfo>
 <fundingProject>
-<projectName>SpeechDat-Car</projectName>
-<fundingType>euFunds</fundingType>
+<projectName>EUROM.1</projectName>
+<fundingType>other</fundingType>
 </fundingProject>
 </resourceCreationInfo>
 <resourceComponentType>
@@ -70,8 +70,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>fin</languageId>
-<languageName>Finnish</languageName>
+<languageId>dan</languageId>
+<languageName>Danish</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

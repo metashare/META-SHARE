@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Bilingual Spanish-English and English-Spanish lexicons (INCYTA) - Plastics and Chemistry</resourceName>
-<resourceName lang="French">Lexiques bilingues espagnol-anglais et anglais-espagnol (INCYTA) - Plastique et chimie</resourceName>
-<description lang="English">9,022 entries for Plastics and Chemistry. The entries contain morphological information for part-of-speech and inflectional class. The information on multi-word terms is provided by the headword.</description>
-<description lang="French">9022 entrées, domaine Plastique et chimie. Les entrées contiennent des informations morphologiques pour les différentes classes de mots. Les informations sur les termes composés sont fournies par la tête du terme (tête du syntagme).</description>
+<resourceName lang="English">PHONOLEX (BAS/DFKI)</resourceName>
+<resourceName lang="French">PHONOLEX (BAS/DFKI)</resourceName>
+<description lang="English">PHONOLEX consists of a simple list of word forms (approx. 1,6 Mio entries ) with a set of features e.g. orthography (German 'Umlauts' in LaTeX format, capital nouns, old German spelling rules), linguistic information (nouns, verbs, etc.), pronunciation and a list of empirical pronunciations.Format: ASCIIMark-up: extended SAM-PA (PhonDat-Verbmobil)</description>
+<description lang="French">PHONOLEX est composé d'une simple liste de mots fléchis (approx. 1,6 Millions d'entrées) avec un ensemble de traits comme l'orthographe (indication de l''Umlaut' allemand en format LaTeX, noms en majuscule, règles orthographiques de l'ancien allemand), information linguistique (noms, verbes, etc.), prononciation courante et une liste de prononciations empiriques.Format : ASCIIBalisage : SAM-PA étendu (dans le cadre des travaux PhonDat de Verbmobil)</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=139</url>
-<identifier>ELRA-M0002_13</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=82</url>
+<url>http://catalog.elra.info/product_info.php?products_id=772</url>
+<identifier>ELRA-S0035</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,29 +30,29 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-02-25</lastDateUpdated>
+<lastDateUpdated>2005-06-15</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 1082.64€</price>
-<price>Commercial org. ELRA Member: 8661.12€</price>
-<price>Academic org. ELRA Non Member: 1804.40€</price>
-<price>Commercial org. ELRA Non Member: 14435.20€</price>
+<price>Commercial org. ELRA Non Member: 6081.82€</price>
+<price>Academic org. ELRA Non Member: 1030.25€</price>
+<price>Commercial org. ELRA Member: 3423.10€</price>
+<price>Academic org. ELRA Member: 631.45€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-01-23</availabilityStartDate>
+<availabilityStartDate>1997-05-13</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 8661.12€</price>
-<price>Commercial org. ELRA Member: 8661.12€</price>
-<price>Academic org. ELRA Non Member: 14435.20€</price>
-<price>Commercial org. ELRA Non Member: 14435.20€</price>
+<price>Commercial org. ELRA Non Member: 6081.82€</price>
+<price>Academic org. ELRA Non Member: 6081.82€</price>
+<price>Commercial org. ELRA Member: 3423.10€</price>
+<price>Academic org. ELRA Member: 3423.10€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-01-23</availabilityStartDate>
+<availabilityStartDate>1997-05-13</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceComponentType>
@@ -65,22 +66,20 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>spa</languageId>
-<languageName>Spanish</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Castilian</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
+<languageId>ger/deu</languageId>
+<languageName>German</languageName>
 </languageInfo>
 </lexicalConceptualResourceTextInfo>
+<lexicalConceptualResourceAudioInfo>
+<mediaType>audio</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>ger/deu</languageId>
+<languageName>German</languageName>
+</languageInfo>
+</lexicalConceptualResourceAudioInfo>
 </lexicalConceptualResourceMediaType>
 </lexicalConceptualResourceInfo>
 </resourceComponentType>

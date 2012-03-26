@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">VERBMOBIL II - VM CD 38.1 - VM38.1 (BAS edition)</resourceName>
-<resourceName lang="French">VM CD 38.1 - VM38.1 (édition BAS)</resourceName>
-<description lang="English">Verbmobil is a long-term project of the German Federal Ministry of Education, Science, Research and Technology (BMBF, Projekträger DLR). Its aim is to give Germany an international top position in language technology and its economical application in the next millenium by cooperation and concentration of as many as possible specialists from industry and science. The long-sighted aim is the development of a mobile translation system for the translation of spontaneous speech in face-to-face situations.The following resources are spontaneous speech databases recorded in a dialogue task (appointment scheduling) .VERBMOBIL II - VM CD 38.1 - VM38.1 (BAS edition) consists of 1 CD-ROM with 33 spontaneous dialogues (33 close mic, 28 room mic, 28 phone line (fixed network, GSM) recordings), 5115 turns, transliteration (Verbmobil II Format) in German.</description>
-<description lang="French">Verbmobil est un projet du Ministère fédéral allemand de l'Education, des Sciences, de la Recherche et des Technologies (BMBF, Projekträger DLR), qui vise à placer l'Allemagne en position de force dans le domaine de l'ingénierie de la langue. Son objectif , à long terme, est de développer un système de traduction vocale automatique, pour la traduction de conversations spontanées. Ces ressources sont des enregistrements de conversation pour la prise de rendez-vous. Le corpus allemand comprend 13 910 occurrences (échanges). L'édition de BAS de la partie allemande est entièrement étiquetée et segmentée en unités phonémiques/phonétiques (alphabet SAM-PA) par le système MAUS et partiellement segmentée de manière manuelle.VM CD 38.1 - VM38.1 (édition BAS) contient 1 CD-ROM composé de 33 dialogues spontanés (33 dialogues enregistrés avec un micro-casque très près de la bouche, 0 avec un microphone situé dans la pièce, 28 à travers le réseau téléphonique (GSM)), 3483 tours, transcription (au format Verbmobil II) en allemand.</description>
+<resourceName lang="English">EuroWordNet German</resourceName>
+<resourceName lang="French">EuroWordNet allemand</resourceName>
+<description lang="English">A. Available Wordnets Following the announcement of the EuroWordNet databases in the last issue of the ELRA Newsletter (Vol.4 N.2), we are happy to announce that the list of EuroWordNet languages has grown. The following wordnets are now available via ELRA:ELRA ref. 	Language 	Synsets 	Word Meanings 	Language Internal Relations 	Equi-valence Relations ELRA-M0015 	English Addition to English WordNet 	16361 	40588 	42140 	0 ELRA-M0016 	Dutch 	44015 	70201 	111639 	53448 ELRA-M0017 	Spanish 	23370 	50526 	55163 	21236 ELRA-M0018 	Italian 	48529 	48499 	117068 	71789 ELRA-M0019 	German 	15132 	20453 	34818 	16347 ELRA-M0020 	French 	22745 	32809 	49494 	22730 ELRA-M0021 	Czech 	12824 	19949 	26259 	12824 ELRA-M0022 	Estonian 	9317 	13839 	16318 	9004 B. LR(1) Common Components (All Foreground - Data of layer 1)  A. The Inter-Lingual-Index, which is a list of records (ILI-records), in the form of synsets mainly taken from WordNet1.5 or manually created. An ILI-record contains:  A.1 synset: set of synonymous words or phrases (mostly from WordNet1.5)  A.2 part-of-speech,   A.3 one or more Top-Concept classifications (Optional)  A.4 one or more Domain labels (Optional)  A.5 a gloss in English (mostly from WordNet1.5)  A.6 a unique ID linking the synset to its source (mostly WordNet1.5)  B. Top-Ontology: an ontology of 63 basic semantic classes based on fundamental distinctions. By means of the Top-Ontology all the wordnets can be accessed using a single language-independent classification-scheme. Top-Concepts are only assigned to ILI-records.  C. Domain-ontology: an ontology of subject-domains optionally assigned to ILI-records.  D. A selection of ILI-records, the so-called Base-Concepts, which play a major role in the different wordnets. These Base-Concepts form the core of all the wordnets. All the Base-Concepts are classified in terms of the Top-Concepts that apply to them.  E. WordNet1.5 (91591 synsets; 168217 meanings; 126520 entry words) in EuroWordNet format. C. LR(2) Language-Specific Components (Data of layer 2- partly Foreground and partly Background) Wordnets produced in the first project (LE2-4003): F. Dutch wordnet  G. English wordnet (additional relations which are missing in WordNet1.5)  H. Italian wordnet  I. Spanish wordnet After extension of the project (LE4-8328): J. German wordnet  K. French wordnet  L. Czech wordnet  M. Estonian wordnet The specific wordnets are language-internal structures, minimally containing:o set of variants or synonyms making up the synset o part-of-speech o language-internal relations to other synsets o equivalence relations with ILI-records o a unique-id linking the synset to its source Each wordnet will be distributed with LR1 and will include documentation on LR1 and the distributed wordnet. All the data will be distributed as text-files in the EuroWordNet import format and as Polaris database files (see below LR3). The EuroWordNet viewer (Periscope, see below LR3) can be used to access the database version. Polaris has to be licensed to modify and extend the database version. The wordnets are distributed without:o glosses o usage labels o morpho-syntactic properties o examples o word-to-word translations  D. LR(3) Software The multilingual EUROWORDNET Database (partly Foreground, partly Background) consists of three components:o The actual wordnets in Flaim database format: an indexing and compression format of Novell. o Polaris (Louw 1997): a wordnet editing tool for creating, editing and exporting wordnets. o Periscope (Cuypers and Adriaens 1997): a graphical database viewer for viewing and exporting wordnets. The Polaris tool is a re-implementation of the Novell ConceptNet toolkit (Díez-Orzas et al 1995) adapted to the EuroWordNet architecture. Polaris can import new wordnets or wordnet fragments from ASCII files with the correct import format and it creates an indexed EUROWORDNET Database. Furthermore, it allows a user to edit and add relations in the wordnets and to formulate queries. The Polaris toolkit makes it possible to visualise the semantic relations as a tree-structure that can directly be edited. These trees can be expanded and shrunk by clicking on word-meanings and by specifying so-called TABs indicating the kind and depth of relations that need to be shown. Expanded trees or sub-trees can be stored as a set of synsets, which can be manipulated, saved or loaded. Additionally, it is possible to access the ILI or the ontologies, and to switch between the wordnets and ontologies via the ILI. Finally, it contains an interface to project sets of synsets across wordnets. The Periscope program is a public viewer that can be used to look at wordnets created by the Polaris tool and to compare them in a graphical interface. Word meanings can be looked up and trees can be expanded. Individual meanings or complete branches can be projected on another wordnet or wordnet structures can be compared via the equivalence relations with the Inter-Lingual-Index. Selected trees can be exported to text files. The Periscope program cannot be used for importing or changing wordnets. N. The Polaris program is partly Background and partly Foreground. It is property of Vantage Research and can be licensed as a EuroWordNet result from Vantage Research (http://www.vantage.com).  O. The Periscope viewer is property of Vantage Research and is Foreground.  E. Prices The prices indicated in the tables below are based on the number of synsets in each language wordnet. Members are offered a 50% discount on the public price. Each language wordnet has a fixed number of non divisible synsets.There are 4 different types of use:VAR-C = Commercial useVAR-I = Internal use by a commercial organisationVAR-E = Evaluation licence (3 month licence)End-User = Research use by an academic institutionLanguage wordnet 	Number of synsets ELRA-M0015 English Addition 	16,361 ELRA-M0016 Dutch 	44,015 ELRA-M0017 Spanish 	23,370 ELRA-M0018 Italian 	48,529 ELRA-M0019 German 	15,132 ELRA-M0020 French 	22,745 ELRA-M0021 Czech 	12,824 ELRA-M0022 Estonian 	9,317 Discount*** Number of synsets 	Discount Above 60,000 cumulated synsets 	5% Above 100,000 cumulated synsets 	10% Above 160,000 cumulated synsets 	20% ***A discount is offered to both members and non-members according to the total (cumulated) number of synsets that are ordered at one time. The total number of synsets is calculated by adding up the number of synsets for each language wordnet purchased. For example, if you order the English and Dutch wordnets, the total amount of synsets is 16,361 synsets (English) + 44,015 synsets (Dutch) = 60,376 synsets. In this case, the 5% corresponding discount is applied. F. Technical support Technical support may be provided by members of the consortium. It will be implemented through bilateral agreements between the User and the member of the consortium responsible for the data acquired by User. As an indication the support contract will be on a yearly basis and will cost 10-20 KEURO/Year.For more information about the EuroWordNet project: http://www.hum.uva.nl/~ewn</description>
+<description lang="French">A. Wordnets disponibles : ELRA ref.	Langue	Synsets	Sens des mots	Relations internes à la langue	Relations d'équivalenceELRA-M0015	Anglais: Addition au WordNet anglais	16361	40588	42140	0ELRA-M0016	Hollandais	44015	70201	111639	53448ELRA-M0017	Espagnol	23370	50526	55163	21236ELRA-M0018	Italien	48529	48499	117068	71789ELRA-M0019	Allemand	15132	20453	34818	16347ELRA-M0020	Français	22745	32809	49494	22730ELRA-M0021	Tchèque	12824	19949	26259	12824ELRA-M0022	Estonien	9317	13839	16318	9004B. LR(1) Composants communs Une sélection d'enregistrements de l'index inter-lingue, concepts de base, qui jouent un rôle majeur dans les différents wordnets. Ces concepts de base forment le noyau de tous les wordnets. Tous les concepts de base sont classés en termes de concepts supérieurs qui s'y appliquent.  A.L'index inter-lingue, qui consiste en une liste d'enregistrements sous la forme de "synsets" (ensembles/réseaux sémantiques, principalement issus de WordNet5.1 ou créés manuellement), comprend :  A.1. un ensemble de synsets de mots ou phrases synonymiques  (provenant pour la plupart de WordNet1.5) ;  A.2. une "partie-du-discours" ;  A.3. un ou plusieurs concepts supérieurs (optionnel) ;  A.4. un ou plusieurs étiquettes de domaine (optionnel) ;  A.5. un glossaire en anglais (provenant pour la plupart de WordNet1.5) ;  A.6. un code unique reliant le synset à sa source (provenant pour la plupart de WordNet1.5).  B.Ontologie supérieure : une ontologie de 63 classes sémantiques de base reposant sur des distinctions fondamentales. Grâce à l'ontologie supérieure, on accède à tous les wordnets en utilisant un schéma de classifiaction unique indépendant de la langue. Les concepts supérieurs sont également assignés aux enregistrements de l'index inter-lingue. C.Ontologie de domaine : une ontologie de domaines sujets assignés aux enregistrements de l'index inter-lingue               D.Une sélection d'enregistrements de l'index inter-lingue, concepts de base, qui jouent une rôle majeur dans les différents wordnets. Ces concepts de base forment le noyau de tous les wordnets. Tous les concepts de base sont classés en termes de concepts supérieurs qui s'y appliquent.  E.WordNet1.5 (91591 synsets; 168217 sens; 126520 mots d'entrée) au format EuroWordNet.C. LR(2) Composants spécifiques à la langueWordnets produits dans le premier projet (LE2-4003) :  F.Wordnet hollandais  G.Wordnet anglais (relations supplémentaires au WordNet1.5)  H.Wordnet italien  I.Wordnet espagnolExtension du projet (LE4-8328) :  J.Wordnet allemand   K.Wordnet français  L.Wordnet tchèque  M.Wordnet estonienLes wordnets sont des structures internes spécifiques à la langue et contiennent au minimum :- ensemble de variantes ou synonymes formant le synset - "partie-du-discours" - relations à d'autres synsets internes à la langue - relations d'équivalence avec les enregistrements de l'index inter-lingue - un code unique reliant le synset à sa source Chaque wordnet est distribué avec LR1 et comprend une documentation sur LR1 et le wordnet distribué. Toutes les données sont distribuées en fichiers textes dans le format EuroWordNet et sous la forme de fichiers de base de données Polaris (voir LR3 ci-dessous). Le visualiseur EuroWordNet (Periscope, voir LR3) peut être utilisé pour accéder à la version base de données. Pour modifier et étendre la version de la base de données, il faut acquérir une licence Polaris.Les wordnets ne contiennent pas de :- glossaires - étiquettes d'usage - propriétés morpho-syntaxiques - exemples - traductions mot-à-mot          D. LR(3) Logiciels La base de données multilingue EUROWORDNET est composée de trois parties :Les wordnets au format base de données Flaim : un format Novell d'indexation et de compression. - Polaris (Louw 1997): un éditeur pour la création, l'édition et l'exportation de wordnets. - Periscope (Cuypers and Adriaens 1997) : un outil graphique pour la visualisation et l'exportation de wordnets. Polaris peut importer de nouveaux wordnets ou des fragments de wordnets depuis des fichiers ASCII avec le format d'importation correct et crée une base de données indexée EUROWORDNET. De plus, il permet à un utilisateur d'éditer et d'ajouter des relations dans les wordnets et de formuler des requêtes. Polaris rend possible la visualisation de relations sémantiques sous la forme d'une structure arborescente qui peut être directement éditée. Ces arborescences peuvent être étendues et raccourcies en cliquant sur les sens du mot et en spécifiant des "TABs" qui indiquent le type et la profondeur des relations qui doivent être montrées. Les arbres étendus ou les sous-arbres peuvent être stockés sous un ensemble de synsets, qui peuvent être maniés, sauvegardés ou chargés. Il est également possible d'accéder à l'index inter-lingue ou aux ontologies, et de passer des wordnets aux ontologies via l'index inter-lingue. Enfin, il contient une interface permettant de projeter les ensembles de synsets à travers les wordnets.Le logiciel Periscope est un visualiseur public qui peut être utilisé pour regarder les wordnets créés par Polaris et pour les comparer dans une interface graphique. Les sens des mots peuvent être visualisés et les arborescences étendues. Les sens individuels ou des branches entières peuvent être projetées sur un autre wordnet ou des structure de wordnets peuvent être comparées via les relations d'équivalence avec l'index inter-lingue. Les arbres sélectionnés peuvent être exportés vers des fichiers textes. Periscope ne peut pas importer ou changer les wordnets.  N.Le programme Polaris est la propriété de Vantage Research et est mis à disposition en tant que résultat d'EuroWordNet à Vantage Research (www.vantage.com).  O.Le logiciel Periscope est la propriété de Vantage Research.         E. Prix Les prix sont basés sur le nombre de synsets pour chaque langue. Les membres bénéficient d'une remise de 50% sur le prix public. Chaque langue comprend un nombre fixe et indivisible de synsets.Il y a 4 types différents d'usage :VAR-C = Usage commercialVAR-I = Usage interne pour une organisation commercialeVAR-E = Licence d'évalutation (licence limitée à une durée de 3 mois)End-User = Usage de recherche par une institution académiqueLangue	Nombre de synsetsELRA-M0015 Anglais (complément)	16 361ELRA-M0016 Hollandais	44 015ELRA-M0017 Espagnol	23 370ELRA-M0018 Italien	48 529ELRA-M0019 Allemand	15 132ELRA-M0020 Français	22 745ELRA-M0021 Tchèque	12 824ELRA-M0022 Estonien	93172Remise***Nombre de synsets	RemiseAu-delà de 60 000 synsets cumulés	5 %Au-delà de 100 000 synsets cumulés	10 %Au-delà de 160 000 synsets cumulés	20 %***Une remise est offerte à la fois aux membres et aux non membres selon le nombre total (cumulé) de synsets faisant l'objet d'une même commande. Le nombre total de synsets est calculé en additionnant le nombre de synsets de chaque langue achetée. Par exemple, si vous commandez les wordnets anglais et hollandais, le montant total de synsets sera 16 361 synsets (anglais) + 44 015 synsets (hollandais) = 60 376 synsets. Dans ce cas, la remise correspondante de 5 % sera appliquée.         D. Support techniqueUn support technique peut être apporté par les membres du consortium, selon les termes de contrats bilatéraux à conclure entre l'utilisateur et le membre du consortium responsable des données acquises. A titre indicatif le contrat se fera sur une base annuelle et coûtera entre 10 et 20 KEURO/AN.Pour plus d'informations sur le projet EuroWordNet: http://www.hum.uva.nl/~ewnaux enregistrements de l'index inter-lingue</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=592</url>
-<identifier>ELRA-S0034_44</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=549</url>
+<identifier>ELRA-M0019</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,43 +29,52 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-04-21</lastDateUpdated>
+<lastDateUpdated>2005-05-30</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 255.65€</price>
-<price>Academic org. ELRA Non Member: 255.65€</price>
-<price>Commercial org. ELRA Member: 127.82€</price>
-<price>Academic org. ELRA Member: 127.82€</price>
+<price>Commercial org. ELRA Non Member: 4539.60€</price>
+<price>Academic org. ELRA Non Member: 302.64€</price>
+<price>Commercial org. ELRA Member: 2269.80€</price>
+<price>Academic org. ELRA Member: 151.32€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1996-09-01</availabilityStartDate>
+<availabilityStartDate>1999-10-15</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_EVALUATION</licence>
+<restrictionsOfUse>evaluationUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 605.28€</price>
+<price>Commercial org. ELRA Member: 302.64€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1999-10-15</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 255.65€</price>
-<price>Academic org. ELRA Non Member: 255.65€</price>
-<price>Commercial org. ELRA Member: 127.82€</price>
-<price>Academic org. ELRA Member: 127.82€</price>
+<price>Commercial org. ELRA Non Member: 7566.00€</price>
+<price>Academic org. ELRA Non Member: 7566.00€</price>
+<price>Commercial org. ELRA Member: 3783.00€</price>
+<price>Academic org. ELRA Member: 3783.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1996-09-01</availabilityStartDate>
+<availabilityStartDate>1999-10-15</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceCreationInfo>
 <fundingProject>
-<projectName>Verbmobil II</projectName>
-<fundingType>other</fundingType>
+<projectName>EuroWordNet</projectName>
+<fundingType>euFunds</fundingType>
 </fundingProject>
 </resourceCreationInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
@@ -73,8 +82,8 @@
 <languageId>ger/deu</languageId>
 <languageName>German</languageName>
 </languageInfo>
-</corpusAudioInfo>
-</corpusMediaType>
-</corpusInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

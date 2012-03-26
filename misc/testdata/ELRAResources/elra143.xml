@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Danish SpeechDat(M) database - DB2</resourceName>
-<resourceName lang="French">Base de données SpeechDat(M) du danois DB2</resourceName>
-<description lang="English">The (polyphone-like) Danish SpeechDat(M) database contains the recordings of 1,523 Danish speakers from 11 regions.Speech samples are stored as sequences of 8 bit 8 kHz A-law. Each prompted utterance is stored in a separate file, and the associated label files are stored in SAM file format.Each signal file is accompanied by an ASCII SAM label file which contains the relevant descriptive information. It was validated by SPEX (the Netherlands) to assess its compliance with the SpeechDat format and content specifications.The lexicon is presented in a TAB delimited ASCII file containing an alphabetically ordered list of distinct lexical items occurring in the database. Each entry contains a frequency count and corresponding pronunciation information.Example:WORD 	FREQUENCY 	PHONEMIC TRANSCRIPTIONSåbnede 	104 	O b n @ D | O b n @ D @adresseangivelse 	97 	a d R a s @ a n g i: u l s @The complete Danish SpeechDat database is partitioned into 5 CD-ROMs. The first three CD-ROMs contain the application oriented sub-set. The last two CD-ROMs contain the phonetically rich sentences.Each speaker uttered the following items:    * 5 semi-spontaneous application word phrases    * 12 connected digit strings with 8 digits    * 24 natural numbers (3-4 digits)    * 27 application words    * 3 dates, including a spontaneous one e.g. birthday    * 3 spelled words    * 2 money amounts, including a small one, and a large one    * 1 spontaneous city name    * 3 spontaneous yes/no questions    * 22-25 sentences    * 2 time phrases, including a time phrase and a spontaneous time of dayThe 5 age groups are the following: under 16, 16-30, 31-45, 46-60, over 60. 78% of the speakers are between 16 and 60 years old.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
-<description lang="French">La base de données SpeechDat(M) du danois est une base de données orale collectée dans le cadre du projet SpeechDat(M) (similaire aux autres bases de données Polyphone) et enregistrée par 1 523 locuteurs.Les signaux de parole sont enregistrés en loi-A (8 bits, 8 kHz). Les fichiers sont au format SAM.Un fichier ASCII séparé présente une liste d'informations concernant chaque locuteur : code du locuteur, sexe, âge, région, etc.Le lexique est présenté dans un autre fichier ASCII délimité par des tabulations et contenant une liste alphabétique des éléments lexicaux distincts apparaissant dans la base. Chaque entrée contient la fréquence et les prononciations correspondantes.Exemple:MOT                       FREQUENCE          TRANSCRIPTIONS PHONEMIQUESåbnede                      104                    O b n @ D | O b n @ D @adresseangivelse        97                      a d R a s @ a n g i: u l s @La base complète est composée de 5 CD-ROM. Les trois premiers CD-ROM contiennent les mots de commandes, orientés vers des applications. Les deux derniers CD-ROM contiennent les phrases phonétiquement riches.Les éléments sont :    * 5 mots de commande inclus dans des phrases (semi spontané),    * 12 séquences de 8 chiffres connectés,    * 24 nombres entiers naturels (3-4 chiffres),    * 27 mots d'application,    * 3 dates dont une spontanée (anniversaire),    * 3 mots épelés,    * 2 montants (argent) dont une petite somme et une grosse,    * nom de ville (spontané),    * 3 questions oui/non (spontané),    * 22-25 phrases,    * une phrase comportant une notion de temps et une l'heure de la journée (spontané).La base compte 1 523 locuteurs de 11 régions linguistiques du Danemark et de 5 groupes d'âge différents (moins de 16 ans, 16-30 ans, 31-45 ans, 46-60 ans, plus de 60 ans). 78% d'entre eux ont entre 16 et 60 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
+<resourceName lang="English">French Source Lexicon</resourceName>
+<resourceName lang="French">Lexique source du français</resourceName>
+<description lang="English">Oxford University Press currently holds extensive databases of morphological and phonetic data for Spanish, French, and Italian. Each headword lemma is provided with a full listing of its possible syntactic forms and spelling variants, along with information on their relationship to the headword form. In addition, a representation of the IPA pronunciation is given for every form. There is also information on domains in which the headwords are used, e.g. Computing, Engineering, Zoology. The lexicon is provided in SGML.Coverage:	- over 90,000 headwords/lemmas- over 400,000 wordforms- over 1,000 abbreviations- over 35,000 proper nounsFeatures:- clear indication of preferred orthographic forms, with cross-references from variants- exceptional coverage of place names, both French and worldwide- high-profile French sourcesFormat: Available in SGML</description>
+<description lang="French">Oxford University Press dispose de bases étendues de données morphologiques et phonétiques pour l’espagnol, le français et l’italien. Chaque entrée de lemme est fournie avec une liste complète des ses formes syntaxiques possibles et variantes d’épellation, ainsi que l’information en relation avec la forme en entrée. De plus, une représentation phonétique en IPA est donnée pour chaque forme. Une information sur les domaines d’usage est également donnée (par exemple, Informatique, Ingénierie, Zoologie, etc). Ce lexique est fourni en SGML.Couverture :	- plus de 90 000 entrées/lemmes- plus de 400 000 formes- plus de 1 000 abréviations- plus de 35 000 noms propresType d’information :- indication claire des formes orthographiques de prédilection, avec références croisées entre les variantes- couverture exceptionnelle des noms de lieux, à la fois en France et dans le monde- sources françaises hautement reconnuesFormat : disponible en SGML</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=170</url>
-<identifier>ELRA-S0041</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=838</url>
+<identifier>ELRA-L0062</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,52 +29,34 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-08-28</lastDateUpdated>
+<lastDateUpdated>2006-04-03</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 20000.00€</price>
 <price>Academic org. ELRA Non Member: 10000.00€</price>
-<price>Commercial org. ELRA Member: 12000.00€</price>
-<price>Academic org. ELRA Member: 6000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-06-02</availabilityStartDate>
-</licenceInfo>
-<licenceInfo>
-<licence>ELRA_VAR</licence>
-<restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 20000.00€</price>
-<price>Academic org. ELRA Non Member: 20000.00€</price>
-<price>Commercial org. ELRA Member: 12000.00€</price>
-<price>Academic org. ELRA Member: 12000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-06-02</availabilityStartDate>
+<price>Academic org. ELRA Member: 7000.00€</price>
+<availabilityStartDate>2006-03-13</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>SpeechDat(M)</projectName>
-<fundingType>euFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>dan</languageId>
-<languageName>Danish</languageName>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
 </languageInfo>
-</corpusAudioInfo>
-</corpusMediaType>
-</corpusInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

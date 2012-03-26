@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Kyoto Demo</resourceName>
+      <description>A web application for the online processing of texts with the tools of linguistic annotation of the Kyoto Pipeline. It produces .kaf annotated files</description>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability>
+      <licenceInfo>
+         <licence>proprietary</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>webExecutable</distributionAccessMedium>
+         <downloadLocation>http://langtech1.ilc.cnr.it:8152/fedora/objects/cnr.langres:32/datastreams/URL/content</downloadLocation>
+         <executionLocation>http://langtech1.ilc.cnr.it:8152/fedora/objects/cnr.langres:32/datastreams/DC/content</executionLocation>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Monachini</surname>
+      <givenName>Monica</givenName>
+      <communicationInfo>
+         <email>monica.monachini@ilc.cnr.it</email>
+         <address>Area della Ricerca del CNR - Via Giuseppe Moruzzi N° 1</address>
+         <zipCode>56124</zipCode>
+         <city>Pisa</city>
+         <country>IT</country>
+         <telephoneNumber>+39 0503152852</telephoneNumber>
+         <faxNumber>+39 0503152839</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo><metadataCreationDate>2011-12-31</metadataCreationDate></metadataInfo>
+   <resourceComponentType>
+<toolServiceInfo>
+        <resourceType>toolService</resourceType>
+	<toolServiceType>other</toolServiceType>
+	<languageDependent>False</languageDependent>
+	</toolServiceInfo>
+			</resourceComponentType>
+</resourceInfo>

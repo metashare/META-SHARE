@@ -85,6 +85,7 @@ class EditorTest(TestCase):
     def import_test_resource(self):
         test_utils.setup_test_storage()
         test_utils.import_xml(TESTFIXTURE_XML)
+        
 
     def test_can_log_in_staff(self):
         client = Client()
@@ -180,7 +181,7 @@ class EditorTest(TestCase):
         self.import_test_resource()
         client = self.client_with_user_logged_in(self.editor_login)
         response = client.get(ADMINROOT+"repo2/resourceinfotype_model/", follow=True)
-        self.assertContains(response, 'Publish selected resources', msg_prefix='response: {0}'.format(response))
+        self.assertContains(response, 'Publish selected ingested resources', msg_prefix='response: {0}'.format(response))
         
 
     def test_upload_single_xml(self):

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Slovenian BNSI Broadcast News Speech Corpus</resourceName>
-<resourceName lang="French">Corpus d'actualités télé-diffusées slovènes BNSI</resourceName>
-<description lang="English">This speech database consists of TV news shows (both evening news, “TV Dnevnik” and late night news, “Odmevi”), from the archive of a Slovenian national broadcaster RTV Slovenia. The recordings took place between June 1999 and May 2003. The database comprises a total of 36 hours of recordings (training set: 30 hours, development set: 3 hours and test set: 3 hours), transcribed and manually checked using the Transcriber tool. Transcription conventions are based on documents defined by LDC, LIMSI and COST 278 BN SIG. There are 268,000 words in transcriptions, out of which 37,000 are distinct words. The transcription files contain: orthographic transcriptions, information on acoustic conditions and background, segmentation on turn and section level. The topic is described and marked (25 topic categories) for each section of news show. Speaker information consists of gender, speaking style, accent and origin. 1,565 speakers were recorded (1,069 males, 477 females, 19 unspecified). The speech signal is as follows: 16kHz, 16 bit, WAV, 1 channel.</description>
-<description lang="French">Cette base de données de parole contient des emissions d’actualités télévisées (actualités de la soirée “TV Dnevnik” et de la nuit “Odmevi”), des archives de la télévision nationale slovène RTV Slovenia. Les enregistrements ont été réalisés entre juin 1999 et mai 2003. La base de données comprend un total de 36 heures d’enregistrements (données d’entraînement : 30 heures, données de développement : 3 heures et données de test : 3 heures), transcrites et vérifiées manuellement en utilisant l’outil Transcriber. Les conventions de transcription sont basées sur les documents définis par le LDC, le LIMSI et dans COST 278 BN SIG. Les transcriptions contiennent 268 000 mots, dont 37 000 mots distincts. Les fichiers de transcriptions comprennent : les transcriptions orthographiques, l’information sur les conditions acoustiques et environnementales, la segmentation au niveau des tours de paroles et des sections. Le thème est décrit et marqué (25 catégories de thèmes) pour chaque section d’émission d’actualités. L’information sur le locuteur consiste en: le genre, le style de parole, l’accent et l’origine. 1 565 locuteurs ont été enregistrés (1 069 hommes, 477 femmes, 19 non spécifiés). Le signal de parole est le suivant : 16kHz, 16 bit, WAV, 1 canal.</description>
+<resourceName lang="English">MTP Annotated  German corpus - untagged version</resourceName>
+<resourceName lang="French">MTP - Corpus allemand - version non étiquetée</resourceName>
+<description lang="English">This morphosyntactically annotated 500,000 word German corpus was developed as part of the Münster Tagging Project (MTP). It comprises a collection of SGML-formatted texts from two German newspapers, "Die Frankfurter Allgemeine Zeitung" and "Die Zeit", for the years 1990 to 1992. The articles reflect the typical distribution of newspaper topics, including economics, regional, national and international politics, the arts, sport, literature, history, science and modern life.The text was segmented into sentence units and word tokens, and tagged for morphosyntactic POS markers. Two tagsets, which mainly differed in the granularity of the noun and verb tags, and which comprised 137 and 52 tags respectively, were used. Users may obtain annotated versions using either set, each of which comes with documentation and an instruction manual for tag application. A suite of tools, including the MTP taggers and the Xlex workbench for text handling, textual analysis and lexicography, is also available.</description>
+<description lang="French">Ce corpus allemand, d'environ 500 000 mots, avec annotation morpho-syntaxique, a été développé dans le cadre du projet MTP (Münster Tagging Project). Il contient un ensemble de textes au format SGML provenant de deux journaux allemands, le "Frankfurter Allgemeine" et le "Die Zeit" , et couvrant les années 1990 à 1992. Les thèmes des articles sont typiques des sujets traités habituellement dans un journal : économie, politique régionale, nationale et internationale, arts, sports, littérature, histoire, science et vie moderne.Le texte est segmenté en phrases et en mots, et étiqueté par des marqueurs de classes morpho-syntaxiques. Deux types de marqueurs ont été employés, avec respectivement 137 et 52 étiquettes, qui diffèrent principalement par la finesse des catégories pour les noms et les verbes. Le corpus est fourni avec les deux annotations et un manuel d'instructions pour l'étiquetage. Un ensemble d'outils comprenant les systèmes d'annotation du MTP et le logiciel Xlex de manipulation et d'analyse de données textuelles et lexicographiques est également disponible.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1064</url>
-<identifier>ELRA-S0275</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=47</url>
+<identifier>ELRA-W0008_01</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,45 +29,45 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2008-04-22</lastDateUpdated>
+<lastDateUpdated>2004-05-12</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 6000.00€</price>
-<price>Commercial org. ELRA Member: 19000.00€</price>
-<price>Academic org. ELRA Non Member: 10000.00€</price>
-<price>Commercial org. ELRA Non Member: 33000.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2008-04-22</availabilityStartDate>
+<price>Commercial org. ELRA Member: 2000.00€</price>
+<price>Academic org. ELRA Member: 2000.00€</price>
+<price>Academic org. ELRA Non Member: 3500.00€</price>
+<price>Commercial org. ELRA Non Member: 3500.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 19000.00€</price>
-<price>Commercial org. ELRA Member: 19000.00€</price>
-<price>Academic org. ELRA Non Member: 33000.00€</price>
-<price>Commercial org. ELRA Non Member: 33000.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2008-04-22</availabilityStartDate>
+<price>Commercial org. ELRA Member: 2000.00€</price>
+<price>Academic org. ELRA Member: 2000.00€</price>
+<price>Academic org. ELRA Non Member: 3500.00€</price>
+<price>Commercial org. ELRA Non Member: 3500.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
 <corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<corpusTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>slv</languageId>
-<languageName>Slovenian</languageName>
+<languageId>ger/deu</languageId>
+<languageName>German</languageName>
 </languageInfo>
-</corpusAudioInfo>
+</corpusTextInfo>
 </corpusMediaType>
 </corpusInfo>
 </resourceComponentType>

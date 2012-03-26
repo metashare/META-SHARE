@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Multilingual Dictionary of Sports – English-French-German trilingual database</resourceName>
-<resourceName lang="French">Dictionnaire multilingue des sports - Base trilingue anglais-français-allemand</resourceName>
-<description lang="English">This dictionary was produced within the French national project EuRADic  (European and Arabic Dictionaries and Corpora), as part of the Technolangue programme funded by the French Ministry of Industry. A needs study in the field of sport terminology, which covered an overall category of users, led to a partial restructuring of an already existing database (English-French) and a re-evaluation of options. All choices were based on the results of this needs study, which clearly highlighted the impact of open corpora (Internet) and exploration tools for the production of dictionaries as well as for the carrying out of terminography activity. The existing database (English-French) was subject to a systematic revision and updating with the following purposes:•	Spell checking•	Term production verificationThe principles of terminology unit production were modified according to current technical progress. All nomenclature entries were subject to a systematic revision.•	Equivalence compliance verificationEquivalences were systematically checked and corrected (7,044 corrections or adjustments).•	Source verification  For reasons of scientific rigour (and right protection), sources and references that were exploited for each dictionary entry were systematically checked (40,000 verifications for a total of 11,256 modifications).The results are presented in the form of MS ACCESS databases.The current set consists of an English-French-German trilingual database which includes the following information for each language:•	Mandatory information: term, reference/source, grammar•	Mandatory and common information: field (sport), domain, additional circumscription  •	Optional information: definition and source OR linguistic and source reference, combinatorics, other form, synonym, variantThe query enables to search for:•	French term •	English term •	German term •	sport (field, domain and special features ++)The EuRADic   sport dictionary is provided under the following different subsets:ELRA-T0372-01 Multilingual Dictionary of Sports – English-French-Greek-Arabic-German-Spanish-Portuguese multilingual databaseELRA-T0372-02 Multilingual Dictionary of Sports - English-French bilingual databaseELRA-T0372-03 Multilingual Dictionary of Sports - English-French-Greek trilingual databaseELRA-T0372-04 Multilingual Dictionary of Sports - English-French-Arabic trilingual databaseELRA-T0372-05 Multilingual Dictionary of Sports - English-French-German trilingual databaseELRA-T0372-06 Multilingual Dictionary of Sports - English-French-Spanish trilingual databaseELRA-T0372-07 Multilingual Dictionary of Sports - English-French-Portuguese trilingual database</description>
-<description lang="French">Ce dictionnaire a été produit dans le cadre du projet national français EuRADic  (Dictionnaire et corpus européens et arabe), du programme Technolangue, financé par le ministère français de l'industrie.Une étude du besoin terminologique dans le domaine des sports, couvrant l’ensemble des catégories d’utilisateurs, a conduit à une refonte partielle de l’existant (base anglais-français) et à une réévaluation des options. Tous les choix effectués se fondent sur les résultats de cette étude du besoin, qui a notamment fait ressortir clairement l’impact des corpus ouverts (Internet) et des outils d’exploration sur la conception des dictionnaires et la conduite de l’activité terminographique.La base existante (anglais-français) a fait l’objet d’une révision et mise à niveau systématique avec les objectifs suivants :•	Vérifications orthographiques •	Contrôle de la formation des termes Les principes de formation des unités terminologiques étant modifiés pour tenir compte des progrès techniques, l’ensemble des entrées de la nomenclature a fait l’objet d’une révision systématique.•	Contrôle d’adéquation des équivalences Les équivalences ont été systématiquement vérifiées et corrigées (7 044 corrections ou ajustements).•	Vérification des sources Dans un souci de rigueur scientifique (et de protection des droits) les sources et références exploitées pour chaque entrée du dictionnaire ont été systématiquement vérifiées (40 000 vérifications pour un total de 11 256 modifications).Les résultats obtenus se présentent sous la forme de bases de données MS ACCESS.Le présent ensemble est constitué d’une base trilingue anglais-français-allemand et comporte pour chaque langue :•	Informations obligatoires : terme, référence/source, grammaire •	Informations obligatoires et communes : champ (sport), domaine, circonscription additionnelle •	Informations facultatives : définition et source OU note linguistique et source, combinatoire, autre forme, synonyme, variante Les requêtes permettent la consultation sur :•	terme français •	terme anglais •	terme autre langue •	sport (champ, domaine et spécificité ++)Le dictionnaire des sports EuRADic   est fourni sous la forme des différents sous-ensembles suivants:ELRA-T0372-01 Dictionnaire multilingue des sports - Base multilingue anglais-français-grec-arabe-allemand-espagnol-portugaisELRA-T0372-02 Dictionnaire multilingue des sports - Base bilingue anglais-françaisELRA-T0372-03 Dictionnaire multilingue des sports - Base trilingue anglais-français-grecELRA-T0372-04 Dictionnaire multilingue des sports - Base trilingue anglais-français-arabeELRA-T0372-05 Dictionnaire multilingue des sports - Base trilingue anglais-français-allemandELRA-T0372-06 Dictionnaire multilingue des sports - Base trilingue anglais-français-espagnolELRA-T0372-07 Dictionnaire multilingue des sports - Base trilingue anglais-français-portugais</description>
+<resourceName lang="English">VERBA Polytechnic and Plurilingual Terminological Database - B-ME Solid State Physics</resourceName>
+<resourceName lang="French">Base de données terminologique polytechnique et plurilingue VERBA - B-ME Physique Etat Solide</resourceName>
+<description lang="English">* Entries for English-Spanish: Scientific research &amp; mathematical sciences (906 entries), Geosciences (10,215), Computer science, electronics &amp; telecommunications (70,580), Industry (47,578), Transport &amp; Maintenance (12,291), Economy (145,572), Biological sciences (38,989), Communication &amp; media (8,143), Chemical &amp; physical sciences (27,467). * Entries for English-French-German-Spanish: Environment (36,658), Health (66,727), Agriculture &amp; food (25,975), Construction &amp; public works (8,429), Law &amp; policy (56,578), Sports &amp; Leisure (17,312) * Two specialized lexicons: Spanish-English and English-French-German without domain codes: electronics, telematics, law, taxes, customs, etc. (550,000 entries). * Two general lexicons: Spanish-English-French-German and Spanish-English-French-German-Portuguese-Italian (83,000 entries).This terminological database contains, for each domain, a sub-domain indication is given (from 2 sub-domains for Scientific research to 39 for Sports &amp; leisure). Each entry consists of a definition, phraseological unit, abbreviation, usage information, grammatical labels. Format: ASCIIMedium: floppy disk</description>
+<description lang="French">* Entrées anglais-espagnol : Recherche scientifique &amp; sciences mathématiques (906 entrées), géosciences (10 215), informatique, électronique &amp; télécommunications (70 580), industrie (47 578), transports &amp; maintenance (12 291), économie (145 572), sciences biologiques (38 989), communication &amp; média (8 143), sciences chimiques &amp; physiques (27 467).* Entrées allemand-anglais-espagnol-français : Environnement (36 658), santé (66 727), agriculture &amp; alimentation (25 975), construction &amp; travaux publics (8 429), droit &amp; politique (56 578), sports &amp; loisirs (17 312).* Deux lexiques spécialisés: Espagnol-anglais et allemand-anglais-français sans codes de domaine : électronique, télématique, droit, taxes, douanes, etc. (550 000 entrées).* Deux lexiques généraux: Allemand-anglais-espagnol-français et allemand-anglais-espagnol-français-italien-portugais. (83 000 entrées).Cette base de données terminologique contient, pour chaque domaine, l'indication de sous-domaines (de 2 sous-domaines pour la recherche scientifique à 39 pour les sports et loisirs). Chaque entrée comporte une définition, une unité phraséologique, une abréviation, une information sur l'usage et des étiquettes grammaticales.Format: ASCIISupport : disquette</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1107</url>
-<identifier>ELRA-T0372_05</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=181</url>
+<identifier>ELRA-T0115</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,37 +29,18 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2009-07-07</lastDateUpdated>
+<lastDateUpdated>2006-09-27</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
-<licence>ELRA_END_USER</licence>
-<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 150.00€</price>
-<price>Commercial org. ELRA Member: 1500.00€</price>
-<price>Academic org. ELRA Non Member: 200.00€</price>
-<price>Commercial org. ELRA Non Member: 2000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2009-07-07</availabilityStartDate>
-</licenceInfo>
-<licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 1500.00€</price>
-<price>Commercial org. ELRA Member: 1500.00€</price>
-<price>Academic org. ELRA Non Member: 2000.00€</price>
-<price>Commercial org. ELRA Non Member: 2000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2009-07-07</availabilityStartDate>
+<price>Commercial org. ELRA Member: 0.70€</price>
+<price>Commercial org. ELRA Non Member: 1.00€</price>
+<availabilityStartDate>1997-04-11</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>EURADIC</projectName>
-<fundingType>nationalFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
 <lexicalConceptualResourceInfo>
 <resourceType>lexicalConceptualResource</resourceType>
@@ -75,12 +56,16 @@
 <languageName>English</languageName>
 </languageInfo>
 <languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>ger/deu</languageId>
-<languageName>German</languageName>
+<languageId>spa</languageId>
+<languageName>Spanish</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Castilian</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
 </languageInfo>
 </lexicalConceptualResourceTextInfo>
 </lexicalConceptualResourceMediaType>

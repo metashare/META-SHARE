@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">TC-STAR Spanish Test Corpora for ASR</resourceName>
-<resourceName lang="French">Corpus de test TC-STAR espagnol pour l’ASR</resourceName>
-<description lang="English">TC-STAR is a European integrated project focusing on all core technologies for Speech-to-Speech Translation (SST): Automatic Speech Recognition (ASR), Spoken Language Translation (SLT), and Text to Speech Synthesis (TTS).This corpus consists of 174 hours of recordings of EPPS (European Parliament Plenary Sessions) speeches held or interpreted in European Spanish and other European languages. From this corpus, 16 hours of Spanish speeches were annotated (transcribed). Transcriptions are included in the present package. The data comprises the test (development and evaluation) data for the TC-STAR project in the years 2005, 2006, and 2007. The recordings were obtained from Europe by Satellite (http://europa.eu.it/comm/ebs) from Oct. until Nov. 2004, June to Nov. 2005, and June until Sept. 2006. The transcription files are stored in Transcriber XML file format.The speech signals were submitted by EbS via internet in Real Media format and via satellite in MPEG1-layer2 format. The signals were decoded, resampled and are stored in WAVE RIFF (Resource Interchange File Format). Each file contains a single channel with 16-bit resolution at a sample rate of 16kHz. The speech databases made within the TC-STAR project were validated by SPEX, in the Netherlands, to assess their compliance with the TC-STAR format and content specifications.</description>
-<description lang="French">TC-STAR est un projet intégré européen dédié à toutes les technologies de base pour la traduction parole-parole (ou SST pour Speech-to-Speech Translation) : reconnaissance automatique de la parole (ou ASR pour « Automatic Speech Recognition »), traduction de la langue parlée (ou SLT pour « Spoken Language Translation ») et technologies texte-parole (ou TTS pour « Text-to-Speech »).TC-STAR est un projet intégré européen dédié à toutes les technologies de base pour la traduction parole-parole (ou SST pour Speech-to-Speech Translation): reconnaissance automatique de la parole (ou ASR pour « Automatic Speech Recognition »), traduction de la langue parlée (ou SLT pour « Spoken Language Translation ») et technologies texte-parole (ou TTS pour « Text-to-Speech »).Ce corpus comprend 174 heures de discours réalisés ou interprétés en espagnol et dans d’autres langues européennes durant les sessions plénières du Parlement européen (EPPS). Dans ce corpus, 16 heures de discours en espagnol ont été annotées (transcrites). Les transcriptions sont incluses dans le présent package. Les enregistrements ont été obtenus via Europe by Satellite (http://europa.eu.it/comm/ebs) d’octobre à novembre 2004, de juin à novembre 2005, et de juin à septembre 2006. Les fichiers de transcription sont stockés au format de fichier XML Transcriber.Les signaux de parole ont été soumis par EbS via internet au format Real Media et via satellite au format MPEG1-layer2. Les signaux ont été décodés, ré-échantillonnés et stockés en WAVE RIFF (Resource Interchange File Format). Chaque fichier contient un seul canal d’une résolution de 16-bit à un taux d’échantillonnage de 16kHz. Les bases de données orales produites dans le projet TC-STAR ont été validées par SPEX, Pays-Bas, selon le format et les spécifications de contenu TC-STAR.</description>
+<resourceName lang="English">Energy Technology</resourceName>
+<resourceName lang="French">Technologie de l'énergie (Universität Hildesheim)</resourceName>
+<description lang="English">Solar and wind energyCards available: 860Languages: German, English, French, Spanish, ItalianCard Description: Each card in this terminological database contains a definition, relation between concepts, graphics, abbreviations, notes, sub-domains, sources, grammatical labels.</description>
+<description lang="French">Energie solaire et éolienne.Fiches disponibles : 860Langues : Allemand, Anglais, Français, Espagnol, ItalienFormat:Support :Description de la fiche : Chaque fiche de cette base terminologique contient une définition, des relations entre les concepts, des graphiques, des abréviations, des notes, des sous-domaines, des sources et des étiques grammaticales.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1038</url>
-<identifier>ELRA-S0254</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=22</url>
+<identifier>ELRA-T0095</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,52 +29,66 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-11-15</lastDateUpdated>
+<lastDateUpdated>2005-06-13</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 1500.00€</price>
-<price>Commercial org. ELRA Member: 4500.00€</price>
-<price>Academic org. ELRA Non Member: 2250.00€</price>
-<price>Commercial org. ELRA Non Member: 6750.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2007-11-15</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 2.05€</price>
+<price>Academic org. ELRA Non Member: 2.05€</price>
+<price>Commercial org. ELRA Member: 1.23€</price>
+<price>Academic org. ELRA Member: 1.23€</price>
+<distributionAccessMedium>other</distributionAccessMedium>
+<availabilityStartDate>1997-01-23</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 4500.00€</price>
-<price>Commercial org. ELRA Member: 4500.00€</price>
-<price>Academic org. ELRA Non Member: 6750.00€</price>
-<price>Commercial org. ELRA Non Member: 6750.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2007-11-15</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 2.05€</price>
+<price>Academic org. ELRA Non Member: 2.05€</price>
+<price>Commercial org. ELRA Member: 1.23€</price>
+<price>Academic org. ELRA Member: 1.23€</price>
+<distributionAccessMedium>other</distributionAccessMedium>
+<availabilityStartDate>1997-01-23</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<usageInfo>
-<actualUseInfo>
-<actualUse>nlpApplications</actualUse>
-<useNLPSpecific>speechRecognition</useNLPSpecific>
-</actualUseInfo>
-</usageInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>TC-STAR</projectName>
-<fundingType>euFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
+<resourceDocumentationInfo>
+<documentation>
+<documentInfo>
+<documentType>unpublished</documentType>
+<title>SMP_T0095.pdf</title>
+</documentInfo>
+</documentation>
+<samplesLocation>http://catalog.elra.info/product_info.php?action=download&amp;filename=SMP_T0095.pdf</samplesLocation>
+</resourceDocumentationInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>terminologicalResource</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
+<languageInfo>
+<languageId>eng</languageId>
+<languageName>English</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>ger/deu</languageId>
+<languageName>German</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>ita</languageId>
+<languageName>Italian</languageName>
+</languageInfo>
 <languageInfo>
 <languageId>spa</languageId>
 <languageName>Spanish</languageName>
@@ -87,8 +101,8 @@
 </sizePerLanguageVariety>
 </languageVarietyInfo>
 </languageInfo>
-</corpusAudioInfo>
-</corpusMediaType>
-</corpusInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

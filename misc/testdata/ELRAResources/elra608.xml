@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">STO SprogTeknologisk Ordbase (Danish Lexicon for NLP/HLT Applications)</resourceName>
-<resourceName lang="French">STO SprogTeknologisk Ordbase (Lexique danois pour des applications dédiées aux technologies de la langue)</resourceName>
-<description lang="English">The STO Lexicon is the most comprehensive computational lexicon of Danish comprising approx. 81,530 entry words, and it is well integrated with the European activities in the field of lexicon development building on experience obtained from the PAROLE and SIMPLE projects. The model and descriptive method of the STO lexicon are kept compatible with the architecture and descriptive language of PAROLE/SIMPLE. A number of refinements, adaptations and language-specific extensions to the basic model are implemented in STO.Lexical coverage and encoded information by category is distributed as follows:Lexical Category	Lemmas 	Morphology only	Morphology + Syntax	Morphology + Syntax + SemanticsNoun	64,735 	47% 	41%	12% Adjective 	9,773 	32% 	55%	13% Verb	5,775 	2% 	81%	17% Adverb	771 	81% 	0%	0%  Interjection 	158 	100% 	0%	0%  Preposition 	80 	100% 	0%	0%  Conjunction 	60 	100% 	0%	0%  Pronoun	445 	100% 	0%	0%  Misc.: Determiner, adposition, conjunction, etc.	128 	100% 	0%	0%  Total 	81,524 	  	  	  A part of this vocabulary (i.e. 12,060 lemmas) is selected from 6 domains, as follows:  Domain	Nouns	Verbs	Adjectives	TotalIT 	1,957 	52 	66	2,075 Environment	2,055 	48 	285 	2,388 Commerce	1,537	16 	57 	1,610 Administration	2,435 	25 	193 	2,653 Health 	1,603 	42 	350 	1,995 Finance	1,258 	24 	57 	1,339 Total 	10,845	207	1,008	12,060Linguistic coverage / Main information types:Morphology: PoS, inflectional patterns, agreement features, noun compounding, spelling variants, etc.Syntax: subcategorisation frames (categorical and functional valency), alternation, diathesis, reflexivity, etc.Semantics: encoded at three different levels of specificity. The most specific is Level 3, which contains sense distinction, ontological type, argument structure, selectional restrictions, qualia structure, event structure, domain information, etc. Level 2 is a proper subset of Level 3 representing a more lean semantics (without qualia and event structure, etc.) whereas Level 1 concerns information on source domain only.The resource was validated internally. This lexicon is well suited for NLP/HLT monolingual applications, as lexicon component in taggers, parsers, grammar &amp; spell checkers, summarisation tools, web crawlers, computer-aided language learning, as well as multilingual applications; also possibility for linking to other PAROLE/SIMPLE-compatible resources.The lexicon is provided with a thorough documentation in English and distributed on CD-ROM.</description>
-<description lang="French">Le lexique STO est le lexique computationnel du danois le plus complet avec ses 81 530 mots. Parfaitement adapté aux activités européennes consacrées au développement de lexiques, il est construit sur la base de l’expérience acquise dans les projets PAROLE et SIMPLE. Le modèle et la méthode de description du lexique STO sont compatibles avec l’architecture et le langage de description utilisés dans PAROLE/SIMPLE. Par rapport au modèle de base, un certain nombre d’améliorations, d’adaptations et d’extensions spécifiques du danois ont été ajoutées au lexique STO.Le tableau ci-dessous présente la couverture lexicale et l’information codée par catégorie :Catégorie lexicale	Lemmes	Morphologie uniquement	Morphologie + Syntaxe	Morphologie + Syntaxe + SémantiqueNom	64,735 	47% 	41%	12% Adjectif 	9,773 	32% 	55%	13% Verbe	5,775 	2% 	81%	17% Adverbe	771 	81% 	0%	0%  Interjection 	158 	100% 	0%	0%  Préposition 	80 	100% 	0%	0%  Conjonction 	60 	100% 	0%	0%  Pronom	445 	100% 	0%	0%  Divers : Déterminant, adposition, conjonction, etc.	128 	100% 	0%	0%  Total 	81,524 	  	  	  Une partie de ce vocabulaire (12,060 lemmes) s’applique à 6 domaines distincts, distribués comme suit :  Domaine	Noms	Verbes	Adjectifs	TotalTechnologies de l’information 	1,957 	52 	66	2,075 Environnement	2,055 	48 	285 	2,388 Commerce	1,537	16 	57 	1,610 Administration	2,435 	25 	193 	2,653 Santé	1,603 	42 	350 	1,995 Finance	1,258 	24 	57 	1,339 Total 	10,845	207	1,008	12,060Couverture linguistique / Types d’information principaux :Morphologie : Partie du discours, modèles de flexion, traits d’accord, formation des noms composés, variantes d’épellation, etc.Syntaxe : cadres de sous-catégorisation (valence catégorielle et fonctionnelle), alternation, diathèse, réflexivité, etc.Sémantique: codée sous trois niveaux différents de spécificité. Le niveau le plus spécifique est le Niveau 3, qui contient la distinction des sens, le type d’ontologie, la structure de l’argument, les restrictions de sélection, la structure des qualia, la structure de l’événement, l’information sur le domaine, etc. Le niveau 2 est le sous-ensemble du Niveau 3 qui présente une sémantique plus dépouillée (sans qualia ni structure de l’événement, etc.), tandis que le Niveau 1 concerne l’information sur le domaine source uniquement.La ressource a été validée en interne. Ce lexique, particulièrement adapté aux applications monolingues des technologies de la langue, peut devenir un composant d’étiqueteurs, parseurs, de correcteurs de grammaire et d’orthographe, d’outils de résumé, de navigateurs web, de systèmes d’apprentissage de la langue. Il est également adapté aux applications multilingues, rendant possible la relation avec d’autres ressources compatibles avec le format PAROLE/SIMPLE.Le lexique est fourni avec une documentation complète en anglais et est distribué sur CD-ROM.</description>
-<resourceShortName>STO</resourceShortName>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=796</url>
-<identifier>ELRA-L0056</identifier>
+<resourceName lang="English">CHIL 2006 Evaluation Package</resourceName>
+<resourceName lang="French">Package d’évaluation CHIL 2006</resourceName>
+<description lang="English">The CHIL 2006 Evaluation Package was produced within the CHIL Project (Computers in the Human Interaction Loop), in the framework of an Integrated Project (IP 506909) under the European Commission's Sixth Framework Programme. The objective of this project is to create environments in which computers serve humans who focus on interacting with other humans as opposed to having to attend to and being preoccupied with the machines themselves. Instead of computers operating in an isolated manner, and Humans [thrust] in the loop [of computers] we will put Computers in the Human Interaction Loop (CHIL).In this context, the CHIL project produced CHIL Seminars. The CHIL Seminars are scientific presentations given by students, faculty members or invited speakers in the field of multimodal interfaces and speech processing. During the talks, videos of the speaker and the audience from 4 fixed cameras, frontal close ups of the speaker, close talking and far-field microphone data of the speaker’s voice and ambient sounds were recorded. The CHIL Seminars have been compiled in three different packages, according to the evaluations for which they have been created and used: -	CHIL 2004 Evaluation Package (catalogue reference ELRA-E0009)-	CHIL 2005 Evaluation Package (catalogue reference ELRA-E0010)-	CHIL 2006 Evaluation Package (catalogue reference ELRA-E0017)The CHIL 2006 Evaluation Package consists of the following contents:1) A set of audiovisual recordings of seminars, called non-interactive seminars and of highly-interactive small working groups’ seminars, called interactive seminars. The recordings were done between 2004 and 2005 according to the “CHIL Room Setup” specification.2) Video annotations.3) Orthographic transcriptions.</description>
+<description lang="French">Le package d’évaluation CHIL 2006 a été produit dans le cadre du projet CHIL (Computers in the Human Interaction Loop), issus d’un projet intégré (IP 506909) du sixième programme-cadre de la Commission européenne. Le projet CHIL a pour objectif d’améliorer les échanges et l’interactivité entre utilisateurs humains et ordinateurs, par exemple grâce à des modes de communications plus efficaces et adaptés. CHIL prévoit ainsi que les ordinateurs et systèmes s’adaptent à la demande, grâce à l’observation et à la compréhension des besoins des utilisateurs.Dans ce contexte, le projet CHIL a produit des séminaires CHIL. Les séminaires CHIL sont des présentations scientifiques faites par des étudiants, des membres universitaires ou des locuteurs invités dans le domaine des interfaces multimodales et du traitement de la parole. Pendant ces présentations, ont été enregistrées des vidéos du locuteur et des autres participants à partir de 4 caméras fixes, des prises de vues rapprochées du locuteur, des données contenant des enregistrements de la voix du locuteurs sur micro-cravate et via des microphones placés à distance (« far-field »), ainsi que l’enregistrement des sons ambiants. Les séminaires CHIL ont été compilés sous la forme de trois packages différents, en fonction des évaluations pour lesquelles ils sont été créés et utilisés: -	Package d’évaluation CHIL 2004 (référence catalogue ELRA-E0009)-	Package d’évaluation CHIL 2005 (référence catalogue ELRA-E0010)-	Package d’évaluation CHIL 2006 (référence catalogue ELRA-E0017)Le package d’évaluation CHIL 2006 comprend les contenus suivants :1) Un ensemble d’enregistrements audio-visuels de séminaires, appelés « séminaires non interactifs », et un ensemble de séminaires de petits groupes de travail hautement interactifs, appelés « séminaires interactifs ».  Les enregistrements ont été réalisés entre 2004 et 2005 en suivant les spécifications du « CHIL Room Setup » (mise en place d’une salle CHIL).2) Des annotations vidéo. 3) Des transcriptions orthographiques.</description>
+<resourceShortName/>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1085</url>
+<url>http://catalog.elra.info/product_info.php?products_id=1086</url>
+<identifier>ELRA-E0017</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,47 +30,60 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-08-03</lastDateUpdated>
+<lastDateUpdated>2008-11-14</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 6250.00€</price>
-<price>Academic org. ELRA Non Member: 2500.00€</price>
-<price>Commercial org. ELRA Member: 5000.00€</price>
-<price>Academic org. ELRA Member: 2000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2005-08-01</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 6000.00€</price>
+<price>Academic org. ELRA Non Member: 1450.00€</price>
+<price>Commercial org. ELRA Member: 4500.00€</price>
+<price>Academic org. ELRA Member: 1200.00€</price>
+<availabilityStartDate>2008-11-14</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 26250.00€</price>
-<price>Academic org. ELRA Non Member: 26250.00€</price>
-<price>Commercial org. ELRA Member: 21000.00€</price>
-<price>Academic org. ELRA Member: 21000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2005-08-01</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 6000.00€</price>
+<price>Academic org. ELRA Non Member: 6000.00€</price>
+<price>Commercial org. ELRA Member: 4500.00€</price>
+<price>Academic org. ELRA Member: 4500.00€</price>
+<availabilityStartDate>2008-11-14</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>CHIL</projectName>
+<fundingType>euFunds</fundingType>
+</fundingProject>
+</resourceCreationInfo>
 <resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
-<mediaType>text</mediaType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>dan</languageId>
-<languageName>Danish</languageName>
+<languageId>eng</languageId>
+<languageName>English</languageName>
 </languageInfo>
-</lexicalConceptualResourceTextInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
+</corpusAudioInfo>
+<corpusVideoInfo>
+<mediaType>video</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>eng</languageId>
+<languageName>English</languageName>
+</languageInfo>
+</corpusVideoInfo>
+</corpusMediaType>
+</corpusInfo>
 </resourceComponentType>
 </resourceInfo>

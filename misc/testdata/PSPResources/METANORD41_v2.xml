@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: METANORD41.xml 42662 2011-12-01 14:33:59Z martha $ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Semantically disambiguated corpus</resourceName>
+      <description>Raw text corpus. Resource for building Estonian Framenet</description>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>other</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+      </licenceInfo>
+      <iprHolder>
+			      <organizationInfo>
+				        <organizationName>University of Tartu</organizationName>
+				        <organizationShortName>UT</organizationShortName>
+		          <communicationInfo>
+               <email>neeme.kahusk@ut.ee</email>
+            </communicationInfo>
+			      </organizationInfo>
+		    </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Kahusk</surname>
+      <givenName>Neeme</givenName>
+      <communicationInfo>
+         <email>neeme.kahusk@ut.ee</email>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-12-31</metadataCreationDate>
+   </metadataInfo>
+   <usageInfo>
+		    <foreseenUseInfo>
+         <foreseenUse>humanUse</foreseenUse>
+			
+		    </foreseenUseInfo>
+		    <actualUseInfo>
+         <actualUse>humanUse</actualUse>
+      </actualUseInfo>
+	  </usageInfo>
+   <resourceDocumentationInfo>
+		    <documentation>
+         <documentUnstructured>http://www.cl.ut.ee/korpused/semkorpus/</documentUnstructured>
+      </documentation>
+	  </resourceDocumentationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>monolingual</lingualityType>
+		             </lingualityInfo>
+               <languageInfo>
+			
+			               <languageId>est</languageId>
+			               <languageName>Estonian</languageName>
+		             </languageInfo>
+			               <modalityInfo>
+                     <modalityType>writtenLanguage</modalityType>
+                  </modalityInfo>
+               <sizeInfo>
+			               <size>500000</size>
+			
+			               <sizeUnit>words</sizeUnit>
+		             </sizeInfo>
+               <annotationInfo>
+                  <annotationType>lemmatization</annotationType>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>morphosyntacticAnnotation-posTagging</annotationType>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>semanticAnnotation</annotationType>
+               </annotationInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

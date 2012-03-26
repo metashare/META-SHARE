@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">CELEX Dutch lexical database - Derivational Morphology Subset</resourceName>
-<resourceName lang="French">CELEX - Base de données lexicale du hollandais - sous-ensemble "morphologie dérivationnelle"</resourceName>
-<description lang="English">The Dutch CELEX data is derived from R.H. Baayen, R. Piepenbrock &amp; L. Gulikers, The CELEX Lexical Database (CD-ROM), Release 2, Dutch Version 3.1, Linguistic Data Consortium, University of Pennsylvania, Philadelphia, PA, 1995.Apart from orthographic features, the CELEX database comprises representations of the phonological, morphological, syntactic and frequency properties of lemmata. For the Dutch data, frequencies have been disambiguated on the basis of the 42.4m Dutch Instituut voor Nederlandse Lexicologie text corpora.To make for greater compatibility with other operating systems, the databases have not been tailored to fit any particular database management program. Instead, the information is presented in a series of plain ASCII files, which can be queried with tools such as AWK and ICON. Unique identity numbers allow the linking of information from different files.This database can be divided into different subsets:· orthography: with or without diacritics, with or without word division positions, alternative spellings, number of letters/syllables;· phonology: phonetic transcriptions with syllable boundaries or primary and secondary stress markers, consonant-vowel patterns, number of  phonemes/syllables, alternative pronunciations, frequency per phonetic syllable within words;· morphology: division into stems and affixes, flat or hierarchical representations, stems and their inflections;· syntax: word class, subcategorisations per word class;· frequency of the entries: disambiguated for homographic lemmata.</description>
-<description lang="French">Les données en hollandais de CELEX sont extraites de la base de données lexicale CELEX (CD-ROM) de R.H. Baayen, R. Piepenbrock &amp; L. Gulikers, seconde édition, version hollandaise 3.1, Linguistic Data Consortium, Université de Pennsylvanie, Philadelphie, PA, 1995.En-dehors des traits orthographiques, la base de données CELEX comprend des représentations des propriétés phonologiques, morphologiques, syntaxiques et fréquentielles des lemmes. En ce qui concerne les données du hollandais, les fréquences ont été désambigüisées sur la base du corpus de textes de l\'Instituut voor Nederlandse Lexicologie.Afin de permettre une meilleure compatibilité avec d\'autres systèmes, les bases ne sont adaptées à aucun système de gestion de base de données spécifique. Au contraire, l\'information est présentée dans une série de fichiers textes ASCII, pouvant être interrogés par des outils tels que AWK et ICON. Des numéros d\'identification uniques permettent d\'accéder et d\'établir les relations entre les informations provenant de différents fichiers.Cette base de données peut être divisée en cinq sous-ensembles selon les niveaux d\'informations suivants :    * orthographe: avec ou sans diacritiques, avec ou sans la position de la coupure de mot (césure), option d\'orthographe, nombre de lettres/syllabes ;    * phonologie : transcriptions phonétiques avec segmentation des syllabes ou balisage des accents primaires ou secondaires, schémas consonne-voyelle, nombre de phonèmes/syllabes, options de prononciation, fréquence par syllabe phonétique dans les mots ;· morphologie : division en radical et affixes, représentations à plat ou hiérarchisées, radicaux et leurs flexions ;· syntaxe : classe de mot, sous-catégorisation par classe de mot ;· fréquence des entrées : désambigüisation des lemmes homographes.</description>
-<resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=443</url>
-<identifier>ELRA-L0029_05</identifier>
+<resourceName lang="English">Czech Audio-Visual Speech Corpus for Recognition with Impaired Conditions</resourceName>
+<resourceName lang="French">Corpus tchèque audio-visuel pour la reconnaissance en conditions difficiles</resourceName>
+<description lang="English">This is an audio-visual speech database for training and testing of Czech audio-visual continuous speech recognition systems collected with impaired illumination conditions. The corpus consists of about 20 hours of audio-visual records of 50 speakers in laboratory conditions. Recorded subjects were instructed to remain static. The illumination varied and chunks of each speaker were recorded with several different conditions, such as full illumination, or illumination from one side (left or right) only. These conditions make the database usable for training lip-/head-tracking systems under various illumination conditions independently of the language. Speakers were asked to read 200 sentences each (50 common for all speakers and 150 specific to each speaker). The average total length of recording per speaker was 23 minutes.Acoustic data are stored in wave files using PCM format, sampling frequency 44kHz, resolution 16 bits. Each speaker’s acoustic data set represents about 180 MB of disk space (about 8.8 GB).Visual data are stored in video files (.avi format) using the digital video (DV) codec. Visual data per speaker take about 3.7 GB of disk (about 185 GB as a whole) and are stored on an IDE hard disk (NTFS format).</description>
+<description lang="French">Cette base de données audio-visuelle a été constituée pour entraîner et tester les systèmes de reconnaissance audio-visuelle en langue tchèque et a été collectée en conditions d’éclairage difficile. Le corpus comprend environ 20 heures d’enregistrements audio-visuels de 50 locuteurs en conditions de laboratoire. On a demandé aux sujets enregistrés de rester en position statique. L’éclairage est varié et les sessions de chaque locuteur ont été enregistrées dans plusieurs conditions différentes, telles qu’en éclairage total ou seulement en éclairage de côté (gauche ou droite). Ces conditions rendent cette base de données utilisable pour l’entraînement de systèmes de détection des mouvements de lèvres ou de tête dans différentes conditions d’éclairage et indépendamment de la langue.On a demandé aux locuteurs de lire 200 phrases chacun (50 en commun pour tous les locuteurs et 150 spécifiques à chaque locuteur). La durée moyenne totale d’enregistrement par locuteur est de 23 minutes.Les données acoustiques ont été stockées en fichiers wave en utilisant le format PCM, une fréquence d’échantillonnage de 44kHz et une résolution de 16 bits. Un ensemble de données acoustiques pour chaque locuteur représente environ 180 Mo d’espace-disque (environ 8,8 Go en totalité).Les données visuelles sont stockées en fichiers vidéo (format .avi) utilisant le codec vidéo numérique DV. Les données visuelles par locuteur prennent environ 3,7 Go de disque (environ 185 Go en totalité) et sont stockées sur un disque dur IDE au format NTFS.</description>
+<resourceShortName>UWB-07-ICAVR I</resourceShortName>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1082</url>
+<identifier>ELRA-S0284</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,61 +29,60 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-10-05</lastDateUpdated>
+<lastDateUpdated>2008-11-05</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 22689.01€</price>
-<price>Academic org. ELRA Non Member: 22689.01€</price>
-<price>Commercial org. ELRA Member: 13613.41€</price>
-<price>Academic org. ELRA Member: 13613.41€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-09-15</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 1250.00€</price>
+<price>Academic org. ELRA Non Member: 1250.00€</price>
+<price>Commercial org. ELRA Member: 650.00€</price>
+<price>Academic org. ELRA Member: 650.00€</price>
+<availabilityStartDate>2008-11-05</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 22689.01€</price>
-<price>Academic org. ELRA Non Member: 22689.01€</price>
-<price>Commercial org. ELRA Member: 13613.41€</price>
-<price>Academic org. ELRA Member: 13613.41€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-09-15</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 4550.00€</price>
+<price>Academic org. ELRA Non Member: 4550.00€</price>
+<price>Commercial org. ELRA Member: 3050.00€</price>
+<price>Academic org. ELRA Member: 3050.00€</price>
+<availabilityStartDate>2008-11-05</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>CELEX</projectName>
-<fundingType>nationalFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
+<usageInfo>
+<actualUseInfo>
+<actualUse>nlpApplications</actualUse>
+<useNLPSpecific>speechRecognition</useNLPSpecific>
+</actualUseInfo>
+</usageInfo>
 <resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
-<mediaType>text</mediaType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>dut/nld</languageId>
-<languageName>Dutch</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Flemish</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
+<languageId>cze/ces</languageId>
+<languageName>Czech</languageName>
 </languageInfo>
-</lexicalConceptualResourceTextInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
+</corpusAudioInfo>
+<corpusVideoInfo>
+<mediaType>video</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>cze/ces</languageId>
+<languageName>Czech</languageName>
+</languageInfo>
+</corpusVideoInfo>
+</corpusMediaType>
+</corpusInfo>
 </resourceComponentType>
 </resourceInfo>

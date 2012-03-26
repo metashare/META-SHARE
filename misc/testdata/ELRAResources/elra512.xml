@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">SIEMENS 1000 - SI1000</resourceName>
-<resourceName lang="French">SIEMENS 1000 - SI1000</resourceName>
-<description lang="English">The corpus contains read speech of 10 different speakers. Each speaker has read approximately 1000 sentences from a German newspaper corpus (similar to the Siemens 100 - SI100 corpus described herein), (5 CDROMs).</description>
-<description lang="French">Ce corpus est l'enregistrement de 10 locuteurs qui ont lu environ 1000 phrases allemandes chacun. Les phrases sont extraites du SüdDeutsche Zeitung (articles généraux et articles relatifs au Cebit 95).</description>
-<resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=66</url>
-<identifier>ELRA-S0026</identifier>
+<resourceName lang="English">MultiWordNet database (included semantic fields) (MultiWordNet)</resourceName>
+<resourceName lang="French">Base de données MultiWordNet (champs sémantiques inclus) (MultiWordNet)</resourceName>
+<description lang="English">MultiWordNet is a multilingual lexical database including information about English and Italian words. It is an extension of WordNet 1.6, a lexical database for English developed at the Princeton University. MultiWordNet contains information about the following aspects of the English and Italian lexical:- lexical relations between words- semantic relations between lexical concepts- correspondences between Italian and English lexical concepts- semantic fieldsThe basic lexical relationship in MultiWordNet is synonymy. Groups of synonyms are used to identify lexical concepts, which are also called synsets. Synsets are the most important unit in MultiWordNet. A lot of interesting information is attached to them, such as semantic fields and semantic relationships.MultiWordNet can be used for a variety of NLP tasks including:- Information Retrieval: synonymy relations are used for query expansion to improve the recall of IR; cross language correspondences between Italian and English synsets are used for Cross Language Information Retrieval. - Semantic tagging: MultiWordNet constitutes a large coverage sense inventory which is the basis for semantic tagging, i.e. texts are tagged with synset identifiers.- Disambiguation: Semantic relationships are used to measure the semantic distance between words, which can be used to disambiguate the meaning of words in texts. Also semantic fields have proved to be very useful for the disambiguation task.- Ontologies: MultiWordNet can be seen as an ontology to be used for a variety of knowledge-based NLP tasks.- Terminologies: MultiWordNet constitutes a robust framework supporting the development of specific structured terminologies.The release 1.1 of MultiWordNet is currently available. It includes information about 51,000 Italian word meanings and 28,000 synsets (incorrespondence with the English equivalents). It also includes a labelling of most WordNet 1.6 synsets with semantic field labels.Work on MultiWordNet is going on. The next release will contain at least 10,000 new word meanings.Data are contained in a specialized database server, which can be accessed by clients through a socket connection. The database server has been implemented in Lisp under the Unix and Windows environments. An application program interface and graphical browsing interface are provided with the database. A Java implementation of the database is planned for the next release.For more information, visit: http://multiwordnet.itc.it</description>
+<description lang="French">MultiWordNet est une base de données lexicale multilingue, dans laquelle on peut trouver des informations sur les mots anglais et italiens. MultiWordNet est une extension de WordNet 1.6, base de données lexicale pour l'anglais développée à l'université de Princeton. MultiWordNet comprend les informations lexicales suivantes :- relations lexicales entre les mots - relations sémantiques entre les concepts lexicaux - équivalences entre les concepts lexicaux italiens et anglais - champs sémantiques La relation lexicale de base dans MultiWordNet est la synonymie. Les groupes de synonymes sont utilisés pour identifier des concepts lexicaux, qu'on appelle aussi synsets. Les synsets sont l'unité principale dans MultiWordNet. D'autres renseignements, tels que les champs sémantiques ou les relations sémantiques, attachés à ces synsets sont également contenus dans cette base de données.MultiWordNet peut être utilisé pour nombre d'applications TAL. Par exemple :- La recherche d'information: les relations de synonymie sont utilisées pour la recherche avancée afin d'améliorer les résultats ; les équivalences entre les synsets italiens et anglais sont exploitées pour la recherche d'information interlangue (CLIR, Cross Language Information Retrieval). - L'étiquetage sémantique : MultiWordNet couvre de nombreux sens et constitue un inventaire de premier choix pour l'étiquetage sémantique. Les textes sont ainsi étiquetés avec des identifiants synsets.- La désambiguïsation: les relations sémantiques sont utilisées pour mesurer la distance sémantique entre les mots. Celle-ci peut être utilisée pour désambiguïser le sens des mots dans les textes. Les champs sémantiques sont également très utiles pour la désambiguïsation.- Ontologies: MultiWordNet peut s'avérer être une ontologie exploitable pour un certain nombre de tâches et applications TAL basées sur la connaissance.- Terminologies: MultiWordNet peut permettre le développement de terminologies structurées.La version 1.1 de MultiWordNet est actuellement disponible. On y trouve des informations pour environ 51000 sens de mots italiens, et 28000 synsets (en correspondance avec les équivalents anglais). MultiWordNet 1.1 inclut également un étiquetage de la plupart des synsets de WordNet 1.6, avec les champs sémantiques renseignés.MultiWordNet est toujours actualisé. Environ 10000 nouveaux sens seront ajoutés dans la prochaine version.Les données sont accessibles par les utilisateurs sur un serveur de base de données. Le serveur de base de données a été implémenté en Lisp, dans les environnements Unix et Windows. Une interface de programme d'application ainsi qu'une interface pour l'affichage graphique sont fournies avec la base de données. Une implémentation en Java est prévue pour la prochaine version.Pour plus d'informations: http://multiwordnet.itc.it</description>
+<resourceShortName>MultiWordNet</resourceShortName>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=644</url>
+<identifier>ELRA-M0026_01</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,46 +29,66 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-04-01</lastDateUpdated>
+<revision>The release 1.1 of MultiWordNet is currently available. It includes information about 51,000 Italian word meanings and 28,000 synsets (in correspondence with the English equivalents). It also includes a labelling of most WordNet 1.6 synsets with semantic field labels.Work on MultiWordNet is going on. The next release will contain at least 10,000 new word meanings.</revision>
+<lastDateUpdated>2010-03-10</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 639.11€</price>
-<price>Commercial org. ELRA Member: 639.11€</price>
-<price>Academic org. ELRA Non Member: 1278.23€</price>
-<price>Commercial org. ELRA Non Member: 1278.23€</price>
+<price>Commercial org. ELRA Non Member: 12000.00€</price>
+<price>Academic org. ELRA Non Member: 0.00€</price>
+<price>Commercial org. ELRA Member: 6000.00€</price>
+<price>Academic org. ELRA Member: 0.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1996-09-01</availabilityStartDate>
+<availabilityStartDate>2002-07-08</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_EVALUATION</licence>
+<restrictionsOfUse>evaluationUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 1000.00€</price>
+<price>Commercial org. ELRA Member: 500.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2002-07-08</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 639.11€</price>
-<price>Commercial org. ELRA Member: 639.11€</price>
-<price>Academic org. ELRA Non Member: 1278.23€</price>
-<price>Commercial org. ELRA Non Member: 1278.23€</price>
+<price>Commercial org. ELRA Non Member: 20000.00€</price>
+<price>Academic org. ELRA Non Member: 20000.00€</price>
+<price>Commercial org. ELRA Member: 10000.00€</price>
+<price>Academic org. ELRA Member: 10000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1996-09-01</availabilityStartDate>
+<availabilityStartDate>2002-07-08</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<usageInfo>
+<actualUseInfo>
+<actualUse>nlpApplications</actualUse>
+<useNLPSpecific>textMining</useNLPSpecific>
+</actualUseInfo>
+</usageInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>ger/deu</languageId>
-<languageName>German</languageName>
+<languageId>eng</languageId>
+<languageName>English</languageName>
 </languageInfo>
-</corpusAudioInfo>
-</corpusMediaType>
-</corpusInfo>
+<languageInfo>
+<languageId>ita</languageId>
+<languageName>Italian</languageName>
+</languageInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

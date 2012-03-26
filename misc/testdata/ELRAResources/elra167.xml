@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">VERBMOBIL - VM CD 14.1 (new edition)</resourceName>
-<resourceName lang="French">VERBMOBIL - VM CD 14.1 - VM14.1 (nouvelle édition)</resourceName>
-<description lang="English">Verbmobil is a long-term project of the German Federal Ministry of Education, Science, Research and Technology (BMBF, Projekträger DLR). Its aim is to give Germany an international top position in language technology and its economical application in the next millenium by cooperation and concentration of as many as possible specialists from industry and science. The long-sighted aim is the development of a mobile translation system for the translation of spontaneous speech in face-to-face situations.The following resources are spontaneous speech databases recorded in a dialogue task (appointment scheduling) .VM CD 14.1 (new edition) consists of 1 CD-ROM with 97 speakers, 1891 turns, 156 spontaneous dialogues, transliteration, PhonDat 2 headers, partitur files (files describing the different parts which constitute the corpus - word order, phrase order, etc. ) in German.</description>
-<description lang="French">Verbmobil est un projet du Ministère fédéral allemand de l'Education, des Sciences, de la Recherche et des Technologies (BMBF, Projekträger DLR), qui vise à placer l'Allemagne en position de force dans le domaine de l'ingénierie de la langue. Son objectif , à long terme, est de développer un système de traduction vocale automatique, pour la traduction de conversations spontanées. Ces ressources sont des enregistrements de conversation pour la prise de rendez-vous. Le corpus allemand comprend 13 910 occurrences (échanges). L'édition de BAS de la partie allemande est entièrement étiquetée et segmentée en unités phonémiques/phonétiques (alphabet SAM-PA) par le système MAUS et partiellement segmentée de manière manuelle.VM CD 14.1 - VM14.1 (nouvelle édition) contient 1 CD-ROM composé de 97 locuteurs, 1891 échanges, 156 dialogues spontanés, transcription, en-têtes PhonDat 2, fichiers 'partitur' (fichiers décrivant les différentes parties constituant le corpus (ordre des mots, ordre des phrases, etc.)) en allemand.</description>
+<resourceName lang="English">PolyVar</resourceName>
+<resourceName lang="French">PolyVar</resourceName>
+<description lang="English">PolyVar is a speaker verification database comprising native and non-native speakers of French, mainly from Switzerland but also from other European countries. It consists of read and spontaneous speech recorded by 143 speakers (85 male and 58 female) amounting to 160 hours of speech. Each speaker recorded from 1 to 229 sessions, giving a total of 3,600 recorded sessions. The data are provided with orthographic annotation.The number of calls per speaker is as follows:    13 speakers called 100 times    9 speakers called from 51 to 100 times    16 speakers called from 21 to 50 times    3 speakers called from 11 to 20 times    31 speakers called from 2 to 10 times    71 speakers called only once Each speaker uttered up to 53 different items per session, including:    * 3 sequences of digits (1 ID number, 1 credit card number and 1 sequence of 6 digits)    * 24 application words (17 words about touris in Martigny)    * 10 read sentences    * 4 numbers (2 natural numbers, 2 amounts)    * 2 items with dates (1 read/1 spontaneous)    * 2 items with hours (1 read/1 spontaneous)    * 2 spelled words    * 3 spontaneous answers (questions about their gender, native language and the weather)    * 1 comment    * 1 telephone enquiryFile format: 8-bit a-lawStandard in use: NISTSampling rate: 8 kHzMedium: 8 CD-ROMsSee also ELRA-S0047.</description>
+<description lang="French">PolyVar est une base de données de vérification d'identité. Elle a été enregistrée par des locuteurs ayant le français comme langue maternelle ou seconde langue, provenant principalement de Suisse mais aussi d'autres pays européens. Elle consiste en de la parole lue et spontanée enregistrée par 143 locuteurs (85 hommes et 58 femmes) pour 160 heures de parole. Chaque locuteur a enregistré entre 1 et 229 sessions pour un total de 3 600 sessions d'enregistrement. Les données sont fournies avec une annotation orthographique.La répartition des appels par locuteur est la suivante:    13 locuteurs ou locutrices ont appelé plus de 100 fois    9 locuteurs ou locutrices ont appelé entre 51 et 100 fois    16 locuteurs ou locutrices ont appelé entre 21 et 50 fois    3 locuteurs ou locutrices ont appelé entre 11 et 20 fois    31 locuteurs ou locutrices ont appelé entre 2 et 10 fois    71 locuteurs ou locutrices ont appelé une seule fois Lors de chaque session, le locuteur prononce jusqu'à 53 items différents. On distingue entre autre les ressources suivantes:    * 3 séquences de chiffres (1 numéro d'identification, 1 numéro de carte de crédit et 1 séquence de 6 chiffres)    * 24 mots d'applications (dont 17 mots sur le tourisme à Martigny)    * 10 phrases lues    * 4 nombres (2 nombres naturels, 2 montants)    * 2 items avec des dates (1 lue/ 1 spontanée)    * 2 items avec des heures (1 lue/ 1 spontanée)    * 3 mots épelés    * 3 réponses spontanées (questions sur leur genre - homme/femme - , leur langue maternelle et le temps - météo)    * 1 commentaire    * 1 demande de renseignement téléphoniqueFormat de fichier : Loi-a 8-bitStandard utilisé : NISTFréquence d'échantillonnage : 8 kHzSupport électronique : 8 CD-ROMsVoir aussi ELRA-S0047.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=474</url>
-<identifier>ELRA-S0034_22</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=744</url>
+<identifier>ELRA-S0046</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,27 +29,29 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-04-13</lastDateUpdated>
+<lastDateUpdated>2005-06-03</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 127.82€</price>
-<price>Commercial org. ELRA Member: 127.82€</price>
-<price>Academic org. ELRA Non Member: 255.65€</price>
-<price>Commercial org. ELRA Non Member: 255.65€</price>
-<availabilityStartDate>1996-09-01</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 4000.00€</price>
+<price>Academic org. ELRA Non Member: 2000.00€</price>
+<price>Commercial org. ELRA Member: 2000.00€</price>
+<price>Academic org. ELRA Member: 1000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1997-11-28</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 127.82€</price>
-<price>Commercial org. ELRA Member: 127.82€</price>
-<price>Academic org. ELRA Non Member: 255.65€</price>
-<price>Commercial org. ELRA Non Member: 255.65€</price>
-<availabilityStartDate>1996-09-01</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 4000.00€</price>
+<price>Academic org. ELRA Non Member: 4000.00€</price>
+<price>Commercial org. ELRA Member: 2000.00€</price>
+<price>Academic org. ELRA Member: 2000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1997-11-28</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceComponentType>
@@ -62,8 +64,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>ger/deu</languageId>
-<languageName>German</languageName>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">LILA Marathi database</resourceName>
-<resourceName lang="French">Base de données LILA marathi</resourceName>
-<description lang="English">The LILA Marathi database collected in India was recorded within the scope of the LILA II project. It contains the recordings of 2,002 Marathi speakers (992 males and 1010 females) recorded over the Indian mobile telephone network.The following acoustic conditions were selected as representative of a mobile user's environment (some speakers were recorded in several environments):-	Passenger in moving car, railway, bus, etc. (153 speakers)-	Public place (285 speakers)-	Stationary pedestrian by road side (237 speakers)-	Home/office environment (945 speakers)-	Passenger in moving car using a hands-free kit (382 speakers)This database is distributed as 2 DVD-ROMs. The speech files are stored as sequences of 8-bit, 8kHz A-law speech files and are not compressed, according to the specifications of LILA. Each prompt utterance is stored within a separate file and has an accompanying ASCII SAM label file.This speech database was validated by Appen (Australia) to assess its compliance with the LILA format and content specifications.Each speaker uttered the following items: -	2 isolated digits-	6 connected digits (1 sheet number -5+ digits, 2 read telephone numbers –9/11 digits, 1 credit card number –14/16 digits, 1 PIN code -6 digits, 1 spontaneous telephone number) -	1 natural number -	1 currency money amount -	3 dates (1 spontaneous date e.g. birthday, 1 word style prompted date, 1 relative and general date expression) -	2 time phrases (1 spontaneous time of day, 1 word style time phrase) -	3 application words -	1 spotting phrase using an embedded application word -	5 directory assistance names (1 spontaneous, e.g. own surname, 1 city of birth/growing up, 1 most frequent city out of a set of 500, 1 most frequent company/agency out of a set of 500, 1 “forename surname” out of a set of 150 ) -	3 spelled words (1 surname, 1 directory assistance city name, 1 real/artificial name for coverage) -	1 “silence word”-	13 phonetically rich sentences -	Min. 6 spontaneous tasks of 10 to 15 seconds of speechThe following age distribution has been obtained: 878 speakers are between 16 and 30, 815 speakers are between 31 and 45, and 309 speakers are between 46 and 60.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
-<description lang="French">La base de données LILA Marathi collectée en Inde a été enregistrée dans le cadre du projet LILA II. Elle contient les enregistrements de 2002 locuteurs du marathi (992 hommes et 1010 femmes) enregistrés à travers le réseau téléphonique mobile en Inde. Les conditions acoustiques suivantes ont été choisies comme l’environnement représentatif d’un utilisateur de portable (certains locuteurs ont été enregistrés dans plusieurs environnement):-	Passager dans une voiture en marche, en train, en bus, etc. (153 locuteurs)-	Lieu public (285 locuteurs)-	Piéton à l’arrêt à côté d’une route (237 locuteurs)-	Environnement domicile/bureau (945 locuteurs)-	Passager dans une voiture en marche utilisant un kit mains-libres (382 locuteurs)Cette base est distribuée sur 2 DVD-ROM. Selon les spécifications de LILA, les fichiers de parole sont stockés en séquences d'échantillons de 8 bit, 8 kHz, loi-A et ne sont pas compressés. Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM. Cette base de données a été validée par Appen (Australie) afin de vérifier sa conformité avec le format LILA et les spécifications du contenu.Contenu du corpus : -	2 chiffres isolés ;-	6 chiffres connectés : 1 numéro permettant d'identifier la feuille de prompt (5+ chiffres), 2 numéros de téléphone lu (9-11 chiffres), 1 numéro de carte de crédit (14-16 chiffres), 1 code confidentiel (6 chiffres) ; 1 numéro de téléphone spontané ;-	1 nombre entier naturel ; -	1 montant en devises ; -	3 dates : 1 date spontanée (ex. anniversaire), 1 date lue, 1 date générale ; -	2 phrases comportant une notion de temps : 1 jour (spontané), 1 phrase comportant une notion de temps ; -	3 mots de commande ; -	1 expression utilisant un mot de commande ; -	5 noms provenant d'un annuaire de renseignements téléphoniques : 1 spontané (par ex. nom de famille), 1 ville de naissance/d'origine du locuteur (spontané), 1 nom de ville parmi les plus fréquentes (sur 500), 1 nom de compagnie parmi les plus fréquentes (sur 500), 1 répétition de "prénom nom" ; -	3 mots épelés : 1 prénom, 1 nom de ville provenant d'un annuaire de renseignements téléphoniques, 1 mot réel/artificiel pour couverture ; -	1 « silence »-	4 mots phonétiquement riches.-	13 phrases phonétiquement riches ; -	Un min. de 6 tâches spontanées de 10-15 secondes de paroleLes classes d'âge sont réparties comme suit : 878 locuteurs ont entre 16 et 30 ans, 815 locuteurs ont entre 31 et 45 ans et 309 locuteurs ont entre 46 et 60 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
+<resourceName lang="English">AURORA Project Database - Aurora 4b - Evaluation Package</resourceName>
+<resourceName lang="French">Base de données du projet AURORA - Aurora 4b - Package d'évaluation</resourceName>
+<description lang="English">The Aurora project was originally set up to establish a worldwide standard for the feature extraction software which forms the core of the front-end of a DSR (Distributed Speech Recognition) system. ETSI formally adopted this activity as work items 007 and 008. The two work items within ETSI are :  ETSI DES/STQ WI007 : DSR - Front-end feature extraction algorithm &amp; compression algorithm  ETSI DES/STQ WI008 : DSR - Advanced feature extraction algorithm The Aurora project has released a number of list files for performing the training and testing on the Wall Street Journal (WSJ0) data at two sampling rates -8 kHz and 16 kHz. The Aurora 4b, has been released. It contains noisy versions of the Nov'92 WSJ0 development set. Two original copies of the contract (pdf | doc | rtf) must be sent to ELDA.</description>
+<description lang="French">DESCRIPTION DISPONIBLE EN FRANCAIS PROCHAINEMENT.The Aurora project was originally set up to establish a worldwide standard for the feature extraction software which forms the core of the front-end of a DSR (Distributed Speech Recognition) system. ETSI formally adopted this activity as work items 007 and 008. The two work items within ETSI are :  ETSI DES/STQ WI007 : DSR - Front-end feature extraction algorithm &amp; compression algorithm  ETSI DES/STQ WI008 : DSR - Advanced feature extraction algorithm The Aurora project has released a number of list files for performing the training and testing on the Wall Street Journal (WSJ0) data at two sampling rates -8 kHz and 16 kHz. The Aurora 4b, has been released. It contains noisy versions of the Nov'92 WSJ0 development set. Two original copies of the contract (pdf | doc | rtf) must be sent to ELDA.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1136</url>
-<identifier>ELRA-S0314</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=695</url>
+<identifier>ELRA-AURORA-CD0004_02</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,41 +29,31 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2011-05-03</lastDateUpdated>
+<lastDateUpdated>2008-01-09</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 45000.00€</price>
-<price>Academic org. ELRA Non Member: 40000.00€</price>
-<price>Commercial org. ELRA Member: 40000.00€</price>
-<price>Academic org. ELRA Member: 33000.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2011-04-27</availabilityStartDate>
-</licenceInfo>
-<licenceInfo>
-<licence>ELRA_VAR</licence>
-<restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 45000.00€</price>
-<price>Academic org. ELRA Non Member: 45000.00€</price>
-<price>Commercial org. ELRA Member: 40000.00€</price>
-<price>Academic org. ELRA Member: 40000.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2011-04-27</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 250.00€</price>
+<price>Academic org. ELRA Non Member: 250.00€</price>
+<price>Commercial org. ELRA Member: 250.00€</price>
+<price>Academic org. ELRA Member: 250.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2003-04-16</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <usageInfo>
 <actualUseInfo>
 <actualUse>nlpApplications</actualUse>
-<useNLPSpecific/>
+<useNLPSpecific>speechRecognition</useNLPSpecific>
 </actualUseInfo>
 </usageInfo>
 <resourceCreationInfo>
 <fundingProject>
-<projectName>LILA II</projectName>
-<fundingType>euFunds</fundingType>
+<projectName>AURORA</projectName>
+<fundingType>ownFunds</fundingType>
 </fundingProject>
 </resourceCreationInfo>
 <resourceComponentType>
@@ -76,8 +66,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>mar</languageId>
-<languageName>Marathi</languageName>
+<languageId>eng</languageId>
+<languageName>English</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

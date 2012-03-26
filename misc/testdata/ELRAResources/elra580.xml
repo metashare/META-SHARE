@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Mandarin Chinese Speech Synthesis Corpus (Basic Corpus)</resourceName>
-<resourceName lang="French">Corpus de synthèse de la parole du chinois mandarin (corpus de base)</resourceName>
-<description lang="English">This corpus contains the recordings of 1 native Chinese speaker (female).The corpus is composed of 20 texts with 109,227 words and has been proofread manually. The corpus contents include: phrases, digit strings, letter strings, uncommon words, neutral tone, final retroflexion, Latin alphabet, interrogative sentences, 282 English words.The speaker has been recorded in a professional recording studio over 2 channels: microphone and glottis wave (fundamental frequency) signals for a total of 18.2 hours.Speech samples are stored as sequences of 16-bit 44,1 kHz PCM on two channels. The total data size is 5.67 Gb for a total of 12,679 files. The data is encoded in GB-2312 format.The transcriptions include labels for four-class pause boundaries.This database is aimed to be used within text-to-speech and speech synthesis applications.</description>
-<description lang="French">Ce corpus contient les enregistrements d’une locutrice de langue maternelle chinoise.Le corpus est composé de 20 textes de 109 227 mots et a été vérifié manuellement. Le corpus contient des locutions, des séquences de chiffres, de lettres, des mots peu fréquents, le ton neutre, la rétroflexion, l’alphabet latin, des phrases interrogatives, et 282 mots anglais.La locutrice a été enregistrée dans un studio d’enregistrement professionnel sur deux canaux : microphone et signaux de la glotte (fréquence fondamentale), pour un total de 18,2 heures.Les échantillons de parole sont stockés sous la forme de séquences 16-bit 44,1 kHz PCM sur deux canaux. La taille totale des données est de 5,67 Go pour un total de 12 679 fichiers. Les données sont codées au format GB-2312.Les transcriptions comprennent la segmentation utilisant quatre types de balises.Cette base de données a été conçue pour des applications relatives aux technologies texte-parole (« text-to-speech ») et à la synthèse de la parole.</description>
+<resourceName lang="English">Biology Database</resourceName>
+<resourceName lang="French">Base de données de biologie</resourceName>
+<description lang="English">This bilingual terminology database produced by Kaist Korterm consists of 31 884 entries in Korean and English in the field of biology.</description>
+<description lang="French">Cette base de données terminologique bilingue produite par Kaist Korterm comprend 31 884 entrées en coréen et en anglais appartenant au domaine de la biologie.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=922</url>
-<identifier>ELRA-S0228_01</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=657</url>
+<identifier>ELRA-T0365</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,44 +29,51 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-01-17</lastDateUpdated>
+<lastDateUpdated>2005-06-03</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 13932.00€</price>
-<price>Academic org. ELRA Non Member: 13932.00€</price>
-<price>Commercial org. ELRA Member: 13932.00€</price>
-<price>Academic org. ELRA Member: 13932.00€</price>
-<availabilityStartDate>2007-01-17</availabilityStartDate>
+<price>Commercial org. ELRA Member: 6377.00€</price>
+<price>Academic org. ELRA Member: 1063.00€</price>
+<price>Academic org. ELRA Non Member: 2126.00€</price>
+<price>Commercial org. ELRA Non Member: 12754.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2002-09-12</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 13932.00€</price>
-<price>Academic org. ELRA Non Member: 13932.00€</price>
-<price>Commercial org. ELRA Member: 13932.00€</price>
-<price>Academic org. ELRA Member: 13932.00€</price>
-<availabilityStartDate>2007-01-17</availabilityStartDate>
+<price>Commercial org. ELRA Member: 6377.00€</price>
+<price>Academic org. ELRA Member: 6377.00€</price>
+<price>Academic org. ELRA Non Member: 12754.00€</price>
+<price>Commercial org. ELRA Non Member: 12754.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2002-09-12</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>terminologicalResource</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>chi/zho</languageId>
-<languageName>Chinese</languageName>
+<languageId>eng</languageId>
+<languageName>English</languageName>
 </languageInfo>
-</corpusAudioInfo>
-</corpusMediaType>
-</corpusInfo>
+<languageInfo>
+<languageId>kor</languageId>
+<languageName>Korean</languageName>
+</languageInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

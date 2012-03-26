@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>ROMANIAN CORPUS 1984 ANNOTATED WITH NOUN PHRASES</resourceName>
+      <description>This corpus is based on Multext-East cesAna: Nineteen Eighty-Four (Romanian) from MULTEXT-East, Version 4 edition. The original corpus contains 6520 sentences and 118328 tokens annotated with part of speech tags (manually corrected). The delivered corpus contains noun phrase chunks annotations. A part of these are deep noun phrases annotated with an automatic tool (grammar based) and another part is shallow noun and prepositional phrases annotated by human experts.</description>
+      <resourceShortName>1984_NP</resourceShortName>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+      <identifier>a6fb7b89793a47cd82cb38c43f9b0642</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>GeneralLicenceGrant</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
+      </licenceInfo>
+      <iprHolder>
+          <organizationInfo>
+            <organizationName>Alexandru Ioan Cuza</organizationName><organizationShortName>UAIC</organizationShortName><communicationInfo>
+													<email>xxx@example.com</email>
+												</communicationInfo>
+          </organizationInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Simionescu</surname>
+      <givenName>Radu</givenName>
+      <communicationInfo>
+         <email>radu.simionescu@info.uaic.ro</email>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-29</metadataCreationDate>
+      <source>METANET4U</source>
+   </metadataInfo>
+   <usageInfo>
+      <foreseenUseInfo>
+         <foreseenUse>humanUse</foreseenUse>
+        
+      </foreseenUseInfo>
+      <actualUseInfo>
+         <actualUse>humanUse</actualUse>
+      </actualUseInfo>
+      <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+         <useNLPSpecific>languageModelling</useNLPSpecific>
+      </actualUseInfo>
+  </usageInfo>
+   <resourceDocumentationInfo>
+      <documentation>
+         <documentUnstructured>Erjavec Tomaz MULTEXT-East Version 3: Multilingual Morphosyntactic Specifications, Lexicons and Corpora. - Paris : In Proc. of the Fourth Intl. Conf. on Language Resources and Evaluation, LREC'2004, ELRA, 2004.</documentUnstructured>
+      </documentation>
+  </resourceDocumentationInfo>
+   <resourceCreationInfo>
+      <creationEndDate>2011-01-11</creationEndDate>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+                  <multilingualityType>comparable</multilingualityType>
+               </lingualityInfo>
+               <languageInfo>
+        
+                  <languageId>rou</languageId>
+                  <languageName>Romanian</languageName>
+               </languageInfo>
+                  <modalityInfo>
+                     <modalityType>writtenLanguage</modalityType>
+                  </modalityInfo>
+               <sizeInfo>
+                  <size>6.520</size>
+        
+                  <sizeUnit>sentences</sizeUnit>
+               </sizeInfo>
+               <annotationInfo>
+                  <annotationType>segmentation</annotationType>
+                  <annotationMode>mixed</annotationMode>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>morphosyntacticAnnotation-posTagging</annotationType>
+                  <annotationMode>mixed</annotationMode>
+               </annotationInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

@@ -33,8 +33,7 @@ def saveLRStats(userid, lrid, sessid, action):
         record.lasttime = datetime.now()
         record.save(force_update=True)
         LOGGER.debug('UPDATESTATS: Saved LR {0}, {1} action={2} ({3}).'.format(lrid, sessid, action, record.lasttime))
-    else:
-        
+    else:       
         record = LRStats()
         record.userid = userid
         record.lrid = lrid
@@ -54,8 +53,7 @@ def getLRStats(lrid):
                 if (len(data) > 0):
                     data += ", "
                 data += "{\"action\":\""+ STAT_LABELS[str(key['action'])] +"\",\"count\":\""+str(key['count__sum']) +"\",\"last\":\""+str(key2['lasttime'])[:10]+"\"}"
-                break
-                
+                break    
     return json.loads("["+data+"]")
  	      
 ## get the top data (limited by a number) 
@@ -79,8 +77,7 @@ def saveQueryStats(userid, field, query, found, exectime=0):
     stat.field = field
     stat.query = query
     stat.found = found
-    stat.exectime = exectime
-    
+    stat.exectime = exectime    
     stat.save()
     LOGGER.debug('STATS: Query {0}.'.format(query))
 

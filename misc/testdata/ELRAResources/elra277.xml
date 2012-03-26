@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Polish SpeechDat(E) Database</resourceName>
-<resourceName lang="French">Base de données SpeechDat(E) du polonais</resourceName>
-<description lang="English">The Polish SpeechDat(E) Database (Eastern European Speech Databases for Creation of Voice Driven Teleservices) comprises 1000 Polish speakers (488 males, 512 females) recorded over the Polish fixed telephone network. This database is partitioned into 5 CDs, each of which comprises 200 speakers sessions. The speech databases made within the SpeechDat(E) project were validated by SPEX, the Netherlands, to assess their compliance with the SpeechDat(E) format and content specifications.The speech files are stored as sequences of 8-bit, 8kHz A-law speech files and are not compressed, according to the specifications of SpeechDat(E). Each prompt utterance is stored within a separate file and has an accompanying ASCII SAM label file.Corpus contents: - 6 application words; - 1 sequence of 10 isolated digits; - 4 connected digits: 1 sheet number (5 digits), 1 telephone number (8-11 digits), 1 credit card number (15-16 digits), 1 PIN code (6 digits); - 3 dates: 1 spontaneous date (birthday), 1 prompted date (word style), 1 relative and general date expression; - 1 spotting phrase using an application word (embedded); - 1 isolated digit; - 3 spelled-out words (letter sequences): 1 spelling of surname; 1 spelling of directory assistance city name; 1 real/artificial name for coverage; - 2 currency money amounts: 1 Polish money amount, 1 International money amount (USD, EURO) - 1 natural number; - 6 directory assistance names: 1 surname (out of 500); 1 city of birth / growing up (spontaneous); 1 most frequent city (out of 500); 1 most frequent company/agency (out of 500); 1 "forename surname" (set of 150 ), 1 "surname" (set of 150 )- 2 questions, including "fuzzy" yes/no: 1 predominantly "yes" question, 1 predominantly "no" question; - 12 phonetically rich sentences; - 2 time phrases: 1 time of day (spontaneous), 1 time phrase (word style); - 4 phonetically rich words.The following age distribution has been obtained: 9 speakers are below 16 years old, 428 speakers are between 16 and 30, 291 speakers are between  31 and 45, 254 speakers are between 46 and 60, and 18 speakers are over 60.A pronunciation lexicon with a phonemic transcription in SAMPA is also included</description>
-<description lang="French">La base de données SpeechDat(E) (Bases de données d'Europe de l'Est pour la création de téléservices commandés par la voix) du polonais contient des enregistrements de 1000 locuteurs polonais (488 hommes, 512 femmes) réalisés à travers le réseau téléphonique fixe polonais. Cette base est répartie sur 5 CD-ROM, chacun comprenant 200 sessions. Les bases de données ont été réalisées selon les spécifications du projet SpeechDat(E) et validées par SPEX, Pays-Bas.Les fichiers de parole sont stockés en séquences d'échantillons de 8 bit, 8 kHz, loi-A. Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM.Contenu du corpus :    * 6 mots de commande ;    * 1 séquence de 10 chiffres isolés ;    * 4 chiffres connectés : 1 numéro permettant d'identifier la feuille de prompt (5 chiffres), 1 numéro de téléphone (8-11 chiffres), 1 numéro de carte de crédit (15-16 chiffres), 1 code confidentiel (6 chiffres) ;    * 3 dates : 1 date spontanée (ex. anniversaire), 1 date lue, 1 date générale ;    * 1 expression utilisant un mot de commande ;    * 1 chiffre isolé ;·    * 3 mots épelés (séquences de lettres) : 1 prénom, 1 nom de ville provenant d'un annuaire de renseignements téléphoniques, 1 mot réel/artificiel pour couverture ;    * 2 montants en devises : 1 montant en devise polonaise, 1 montant en devise internationale (Dollar, EURO)    * 1 nombre entier naturel ;    * 6 noms provenant d'un annuaire de renseignements téléphoniques : 1 prénom (sur 500), 1 ville de naissance/d'origine du locuteur (spontané), 1 nom de ville parmi les plus fréquentes (sur 500), 1 nom de compagnie parmi les plus fréquentes (sur 500), 1 répétition de "prénom nom" ; 1 répétition de "nom" ;    * 2 questions incluant des oui/non "vagues" : 1 question à prédominance "oui", 1 question à prédominance "non" ;    * 12 phrases phonétiquement riches ;    * 2 phrases comportant une notion de temps : 1 jour (spontané), 1 phrase comportant une notion de temps ;    * 4 mots phonétiquement riches.Les classes d'âge sont réparties comme suit : 9 locuteurs de moins de 16 ans, 428 locuteurs entre 16 et 30 ans, 291 locuteurs entre 31 et 45 ans, 254 locuteurs entre 46 et 60 ans et 18 locuteurs de plus de 60 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
+<resourceName lang="English">VERBMOBIL II - VM CD 42.1 - VM42.1 (BAS edition)</resourceName>
+<resourceName lang="French">VERBMOBIL II - VM CD 42.1 - VM42.1 (édition BAS)</resourceName>
+<description lang="English">Verbmobil is a long-term project of the German Federal Ministry of Education, Science, Research and Technology (BMBF, Projekträger DLR). Its aim is to give Germany an international top position in language technology and its economical application in the next millenium by cooperation and concentration of as many as possible specialists from industry and science. The long-sighted aim is the development of a mobile translation system for the translation of spontaneous speech in face-to-face situations.The following resources are spontaneous speech databases recorded in a dialogue task (appointment scheduling) .VERBMOBIL II - VM CD 42.1 - VM42.1 (BAS edition) consists of 1 CD-ROM with 20 spontaneous dialogues (20 close mic, 0 room mic, 0 phone line (fixed network, GSM) recordings), 1874 turns, transliteration (Verbmobil II Format) in American English.</description>
+<description lang="French">Verbmobil est un projet du Ministère fédéral allemand de l'Education, des Sciences, de la Recherche et des Technologies (BMBF, Projekträger DLR), qui vise à placer l'Allemagne en position de force dans le domaine de l'ingénierie de la langue. Son objectif , à long terme, est de développer un système de traduction vocale automatique, pour la traduction de conversations spontanées. Ces ressources sont des enregistrements de conversation pour la prise de rendez-vous. Le corpus allemand comprend 13 910 occurrences (échanges). L'édition de BAS de la partie allemande est entièrement étiquetée et segmentée en unités phonémiques/phonétiques (alphabet SAM-PA) par le système MAUS et partiellement segmentée de manière manuelle.VERBMOBIL II - VM CD 42.1 - VM42.1 (édition BAS) contient 1 CD-ROM composé de 20 dialogues spontanés (20 dialogues enregistrés avec un micro-casque très près de la bouche, 0 avec un microphone situé dans la pièce, 0 à travers le réseau téléphonique (GSM)), 1874 tours, transcription (au format Verbmobil II) en anglais-américain.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=580</url>
-<identifier>ELRA-S0090</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=782</url>
+<identifier>ELRA-S0034_47</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,35 +29,35 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-02-22</lastDateUpdated>
+<lastDateUpdated>2005-04-21</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 16000.00€</price>
-<price>Academic org. ELRA Non Member: 12500.00€</price>
-<price>Commercial org. ELRA Member: 16000.00€</price>
-<price>Academic org. ELRA Member: 12500.00€</price>
+<price>Commercial org. ELRA Non Member: 255.65€</price>
+<price>Academic org. ELRA Non Member: 255.65€</price>
+<price>Commercial org. ELRA Member: 127.82€</price>
+<price>Academic org. ELRA Member: 127.82€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2000-12-15</availabilityStartDate>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 16000.00€</price>
-<price>Academic org. ELRA Non Member: 16000.00€</price>
-<price>Commercial org. ELRA Member: 16000.00€</price>
-<price>Academic org. ELRA Member: 16000.00€</price>
+<price>Commercial org. ELRA Non Member: 255.65€</price>
+<price>Academic org. ELRA Non Member: 255.65€</price>
+<price>Commercial org. ELRA Member: 127.82€</price>
+<price>Academic org. ELRA Member: 127.82€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2000-12-15</availabilityStartDate>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceCreationInfo>
 <fundingProject>
-<projectName>SpeechDat(E)</projectName>
-<fundingType>euFunds</fundingType>
+<projectName>Verbmobil II</projectName>
+<fundingType>other</fundingType>
 </fundingProject>
 </resourceCreationInfo>
 <resourceComponentType>
@@ -70,8 +70,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>pol</languageId>
-<languageName>Polish</languageName>
+<languageId>eng</languageId>
+<languageName>English</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

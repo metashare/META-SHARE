@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">TC-STAR Spanish Baseline Male Speech Database</resourceName>
-<resourceName lang="French">Voix d’homme de référence TC-STAR espagnol</resourceName>
-<description lang="English">The TC-STAR Spanish Baseline Male Speech Database was created within the scope of the TC-STAR project (IST- FP6-506738) funded by the European Commission.It contains the recordings of one male Spanish speaker recorded simultaneously through a close talk microphone, a mid distance microphone and a laryngograph signal in a noise-reduced room. It consists of the recordings and annotations of read text material of approximately 10 hours of speech for baseline applications (Text-to-Speech systems). This database is distributed on 9 DVDs. The database complies with the common specifications created in the TC-STAR project.The annotation of the database includes manual orthographic transcriptions, the automatic segmentation into phonemes and automatic generation of pitch marks. A certain percentage of phonetic segments and pitch marks has been manually checked. A pronunciation lexicon in SAMPA with POS, lemma and phonetic transcription of all the words prompted and spoken is also provided.Speech samples are stored as sequences of 24-bit 96 kHz with the least significant byte first (“lohi” or Intel format) as (signed) integers. Each prompted utterance is stored in a separate file. Each signal file is accompanied by an ASCII SAM label file which contains the relevant descriptive information.The TC-STAR Spanish Baseline Female Speech Database is also available via ELRA under reference ELRA-S0309.</description>
-<description lang="French">Cette voix d’homme de référence TC-STAR espagnol a été créée dans le cadre du projet TC-STAR (IST- FP6-506738) financé par la Commission européenne.Elle comprend les enregistrements d’un locuteur espagnol homme enregistré de façon simultanée par micro-casque, microphone à distance moyenne et signal larygographique dans une salle à bruit réduit. Elle consiste en des enregistrements et annotations de matériel textuel lu pour environ 10 heures de parole pour des applications de référence (systèmes texte-parole). Cette base de données est distribuée sur 9 DVD. Elle respecte les spécifications communes créées dans le projet TC-STAR.L’annotation de la base de données inclut les transcriptions orthographiques réalisées manuellement, la segmentation automatique en phonèmes et la génération automatiques des marques de pitch. Un certain pourcentage de segments phonétiques et de marques de pitch a été vérifié manuellement. Un lexique de prononciation en SAMPA avec partie du discours, lemmes et transcription phonétique de tous les mots lus et prononcés est également fourni.Les fichiers de parole sont stockés en séquences d’échantillons de 24-bit 96 kHz avec l’octet le moins significatif en premier (“lohi” ou format Intel) en entiers (signés). Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM.La voix de femme de référence TC-STAR espagnol est également disponible via ELRA sous la référence ELRA-S0309.</description>
+<resourceName lang="English">TC-STAR 2007 Evaluation Package - ASR English</resourceName>
+<resourceName lang="French">Package d’évaluation TC-STAR 2007 - ASR anglais</resourceName>
+<description lang="English">TC-STAR is a European integrated project focusing on Speech-to-Speech Translation (SST). To encourage significant breakthrough in all SST technologies, annual open competitive evaluations are organized. Automatic Speech Recognition (ASR), Spoken Language Translation (SLT) and Text-To-Speech (TTS) are evaluated independently and within an end-to-end system.The third TC-STAR evaluation campaign took place in March 2007. Three core technologies were evaluated during the campaign:• Automatic Speech Recognition (ASR),• Spoken Language Translation (SLT),• Text to Speech (TTS).Each evaluation package includes resources, protocols, scoring tools, results of the official campaign, etc., that were used or produced during the second evaluation campaign. The aim of these evaluation packages is to enable external players to evaluate their own system and compare their results with those obtained during the campaign itself.The speech databases made within the TC-STAR project were validated by SPEX, in the Netherlands, to assess their compliance with the TC-STAR format and content specifications.This package includes the material used for the TC-STAR 2007 Automatic Speech Recognition (ASR) third evaluation campaign for English. The same packages are available for both Spanish (ELRA-E0026-01 and E0026-02) and Mandarin (ELRA-E0027) for ASR and for SLT in 3 directions, English-to-Spanish (ELRA-E0028), Spanish-to-English (ELRA-E0029-01 and E0029-02), Chinese-to-English (ELRA-E0030).To be able to chain the components, ASR, SLT and TTS evaluation tasks were designed to use common sets of raw data and conditions. Three evaluation tasks, common to ASR, SLT and TTS, were selected: EPPS (European Parliament Plenary Sessions) task, CORTES (Spanish Parliament Sessions) task and VOA (Voice of America) task. The CORTES data were used in addition to the EPPS data to evaluate ASR in Spanish and SLT from Spanish into English.This package was used within the EPPS task and consists of one test data set, composed of audio recordings of Parliament’s sessions from June to September 2006. The test data set is made of 3 hours (29,748 running words).</description>
+<description lang="French">TC-STAR est un projet intégré européen basé sur la traduction parole-parole (ou SST pour Speech-to-Speech Translation). Pour encourager de manière conséquente l’avancée dans toutes les technologies de la SST, des évaluations ouvertes à la concurrence sont organisées sur une base annuelle. Les technologies de la reconnaissance automatique de la parole (ou ASR pour « Automatic Speech Recognition »), de la traduction de la langue parlée (ou SLT pour « Spoken Language Translation ») et les technologies texte-parole (ou TTS pour « Text-to-Speech ») sont évaluées à la fois de façon indépendante et intégrées à un système « end-to-end » (de « bout en bout »).La troisième campagne d’évaluation TC-STAR s’est déroulée en mars 2007. Trois technologies de base ont été évaluées lors de cette campagne:• la reconnaissance automatique de la parole (ASR),• la traduction de la langue parlée (SLT),• la synthèse texte-parole (TTS).Chaque package d’évaluation regroupe des ressources, des protocoles, des outils de notation, les résultats de la campagne officielle, etc., qui ont été utilisés ou produits pendant la seconde campagne d’évaluation. Le but de ces packages d’évaluation est de permettre à des acteurs externes d’évaluer leur propre système et de comparer leurs résultats à ceux obtenus pendant la campagne.Les bases de données orales produites dans le projet TC-STAR ont été validées par SPEX, Pays-Bas, selon le format et les spécifications de contenu TC-STAR.Ce package comprend le matériel utilisé pour la troisième campagne d’évaluation TC-STAR 2007 Automatic Speech Recognition (ASR) de l’anglais. Des packages similaires sont également disponibles pour l’espagnol (ELRA-E0026-01 et E0026-02) et le chinois mandarin (ELRA-E0027) pour l’ASR, ainsi que pour la SLT dans 3 sens, anglais vers espagnol (ELRA-E0028), espagnol vers anglais (ELRA-E0029-01 et E0029-02), chinois vers anglais (ELRA-E0030).Pour permettre de regrouper les composants, les tâches d’évaluation ASR, SLT et TTS ont été conçues en utilisant des données brutes et des conditions communes. Trois tâches d’évaluation, communes à l’ASR, la SLT, et la TTS ont été choisies : la tâche EPPS (« European Parliament Plenary Sessions » – Sessions plénières du Parlement européen), la tâche CORTES (« Spanish Parliament Sessions ») et la tâche VOA (« Voice of America » - La voix de l’Amérique). Les données CORTES ont été utilisées en complement des données EPPS pour l’évaluation ASR en espagnol et SLT de l’espagnol vers l’anglais.Le présent package a été utilisé dans le cadre de la tâche EPPS et comprend un ensemble de données de test, composé des enregistrements audio des sessions du Parlement de juin à septembre 2006. Les données de test comprennent 3 heures d’enregistrements (29 748 mots courants).</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1132</url>
-<url>http://catalog.elra.info/product_info.php?products_id=1161</url>
-<identifier>ELRA-S0310</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1016</url>
+<identifier>ELRA-E0025</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -30,37 +29,21 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2010-12-21</lastDateUpdated>
+<lastDateUpdated>2007-10-09</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
-<licence>ELRA_END_USER</licence>
-<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 15600.00€</price>
-<price>Academic org. ELRA Non Member: 10000.00€</price>
-<price>Commercial org. ELRA Member: 12000.00€</price>
-<price>Academic org. ELRA Member: 7700.00€</price>
+<licence>ELRA_EVALUATION</licence>
+<restrictionsOfUse>evaluationUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 750.00€</price>
+<price>Academic org. ELRA Non Member: 750.00€</price>
+<price>Commercial org. ELRA Member: 500.00€</price>
+<price>Academic org. ELRA Member: 500.00€</price>
 <distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2010-12-21</availabilityStartDate>
-</licenceInfo>
-<licenceInfo>
-<licence>ELRA_VAR</licence>
-<restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 15600.00€</price>
-<price>Academic org. ELRA Non Member: 15600.00€</price>
-<price>Commercial org. ELRA Member: 12000.00€</price>
-<price>Academic org. ELRA Member: 12000.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2010-12-21</availabilityStartDate>
+<availabilityStartDate>2007-10-09</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<usageInfo>
-<actualUseInfo>
-<actualUse>nlpApplications</actualUse>
-<useNLPSpecific>speechSynthesis</useNLPSpecific>
-</actualUseInfo>
-</usageInfo>
 <resourceCreationInfo>
 <fundingProject>
 <projectName>TC-STAR</projectName>
@@ -77,16 +60,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>spa</languageId>
-<languageName>Spanish</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Castilian</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
+<languageId>eng</languageId>
+<languageName>English</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

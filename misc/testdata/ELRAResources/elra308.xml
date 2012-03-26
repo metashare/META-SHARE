@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">SmartKom Home</resourceName>
-<resourceName lang="French">SmartKom Home</resourceName>
-<description lang="English">The SmartKom corpora were produced at BAS in the years 1999 to 2003 within the SmartKom project which was funded by the German Ministry of Education and Science. The corpus consists of 448 multi-modal recordings (“sessions”) of 224 persons in a Wizard-of-Oz setting.Release SKH 1.0 contains 130 recordings in the technical setup (“scenario”) SmartKom Home which should be an intelligent communication assistant for the private environment. Naive users were asked to test a “prototype” for a market study not knowing that the system was in fact controlled by two human operators. They were asked to solve two tasks in a period of 4.5 minutes while they were left alone with the system. The instruction was kept to a minimum; in fact the user only knew that the system is able to understand speech, gestures and even mimical expressions and should more or less communicate like a human.Main technical features of release SKH 1.0•	Technical setup: Home (scenario)•	Primary domain “Television”; secondary domain “Scheduling”, “Music Selection”•	Primary domain “VCR”; secondary domain “Scheduling”, “Music Selection”•	65 users•	130 recording sessions; size: 490 GB•	Recorded modalities:o	Audio in max 10 channelso	Video of faceo	Video of upper body from the lefto	Infrared video of the display area (to capture the 2D gestures) as input to the SIVIT device (Siemens gesture recognizer)o	Video of the GUI outputo	Coordinates of graphic tableau (when pen was used)o	Coordinates of SIVIT device (when finger/hands were used)•	Annotations:o	Transliterationo	2D Gestureo	user states in three modalitieso	Turn segmentation•	Documentation, TechDoks and publications•	All annotations compatible to the “BAS Partitur Format” (BPF)The full database is provided on USB. Single volumes on DVD can be obtained upon demand.</description>
-<description lang="French">Les corpus SmartKom ont été produits à BAS entre 1999 et 2003 dans le cadre du projet SmartKom, financé par le Ministère de l’éducation et la science allemand. Le corpus consiste en des enregistrements multimodaux (“sessions”) de 224 personnes dans un environnement “Magicien d’Oz”.La version 1.0 de SKH 1.0 contient 130 enregistrements réalisés dans l’environnement technique (“scénario”) SmartKom Home qui se veut être un assistant de communication intelligent pour l’environnement privé. On a demandé aux utilisateurs “naïfs” de tester un “prototype” pour une étude de marché, sans savoir que le système était en fait contrôlé par deux opérateurs humains. Ils devaient résoudre deux tâches dans une période de temps de 4,5 minutes alors qu’on les laissait seuls avec le système. L’instruction a été minimale; en réalité, l’utilisateur savait seulement que le système était capable de comprendre la parole, les gestes et même des mimiques et devrait plus ou moins communiquer comme un humain.Caractéristiques techniques de la version 1.0 de SKH :•	Environnement technique: Maison (scénario)•	Domaine primaire: “Télévision”; domaine secondaire: “Programmation”, “Sélection musicale ”•	Domaine primaire: “VCR”; domaine secondaire: “Programmation”, “Sélection musicale ”•	65 utilisateurs•	130 sessions d’enregistrements; taille: 490 Go•	Modalités enregistrées:o	Audio 10 canaux maxio	Vidéo du visageo	Vidéo de la partie haute du corps depuis le côté gaucheo	Vidéo infra-rouge de la zone exposée (pour capter les gestes 2D) en entrée de l’outil SIVIT (système de reconnaissance gestuelle Siemens)o	Vidéo de la sortie GUIo	Coordonnées du tableau graphique (quand un stylet est utilisé)o	Coordonnées de l’outil SIVIT (quand les doigts/mains sont utilisés)•	Annotations (see READMEs below for details):o	Translittération o	Gestes 2Do	Etats de l’utilisateur en trois modalitéso	Segmentation des tours de parole•	Documentation, TechDoks et publications•	Toutes les annotations compatibles avec le format “BAS Partitur Format” (BPF)La base de données complète est fournie sur USB. Des volumes à l’unité sur DVD peuvent être également fournis à la demande.</description>
-<resourceShortName>SKH</resourceShortName>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1137</url>
-<identifier>ELRA-S0316</identifier>
+<resourceName lang="English">English lexicon with morphological information</resourceName>
+<resourceName lang="French">Lexique anglais avec information morphologique</resourceName>
+<description lang="English">This English lexicon is made up of 174,000 inflected forms corresponding to 68,000 simple word lemmas. It contains:- 31,900 nouns, with number and inflected forms (including irregular forms), - 11,800 verbs, with mood, tense, person, number and inflected forms (including irregular forms),- 19,900 adjectives, - 4,100 adverbs, - 300 pronouns, articles, prepositions/postpositions and conjunctions. Each line in the resource file shows an inflected form, its part of speech, its related lemma and its morphological information. The inflected forms were generated using two databases: one containing the lemmas with the related root(s) and paradigm number(s), the other one containing the paradigm numbers with the related terminations and morphological information. Each row in the resource file consists of four fields following the structure below:            Lemma|part of speech|inflected form|morphological informationThe part of speech and the morphological information are encoded using an internal standard (an abbreviation key file is also provided).</description>
+<description lang="French">Ce lexique anglais est constitué de 174 000 formes fléchies correspondant à 68 000 mots-lemmes simples. Il comprend :- 31 900 noms, incluant le nombre et les formes fléchies (dont les formes irrégulières), - 11 800 verbes, incluant le mode, le temps, la personne, le nombre et les formes fléchies (dont les formes irrégulières),- 19 900 adjectifs, - 4 100 adverbes, - 300 pronoms, articles, prépositions/postpositions et conjonctions. Chaque ligne de fichier présente une forme fléchie, la partie du discours, le lemme correspondant et l’information morphologique. Les formes fléchies sont générées en utilisant deux bases de données, l’une contenant les lemmes avec la ou les racines correspondantes et le ou les nombres de paradigmes, tandis que la deuxième comprend les nombres de paradigmes avec les terminaisons correspondantes et l’information morphologique. Chaque ligne de fichier est constituée de quatre champs présentés selon la structure suivante :            Lemme|partie du discours|forme fléchie|information morphologiqueLa partie du discours et l’information morphologique sont codées selon un standard interne (un fichier des abréviations utilisées est également fourni).</description>
+<resourceShortName/>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=867</url>
+<identifier>ELRA-L0067</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,61 +29,53 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2011-04-28</lastDateUpdated>
+<revision>Last update:2005</revision>
+<lastDateUpdated>2006-06-19</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 4500.00€</price>
+<price>Commercial org. ELRA Non Member: 7000.00€</price>
 <price>Academic org. ELRA Non Member: 4500.00€</price>
-<price>Commercial org. ELRA Member: 3000.00€</price>
-<price>Academic org. ELRA Member: 3000.00€</price>
-<availabilityStartDate>2011-04-27</availabilityStartDate>
+<price>Commercial org. ELRA Member: 5000.00€</price>
+<price>Academic org. ELRA Member: 3500.00€</price>
+<availabilityStartDate>2006-06-19</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 4500.00€</price>
-<price>Academic org. ELRA Non Member: 4500.00€</price>
-<price>Commercial org. ELRA Member: 3000.00€</price>
-<price>Academic org. ELRA Member: 3000.00€</price>
-<availabilityStartDate>2011-04-27</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 8500.00€</price>
+<price>Academic org. ELRA Non Member: 8500.00€</price>
+<price>Commercial org. ELRA Member: 6000.00€</price>
+<price>Academic org. ELRA Member: 6000.00€</price>
+<availabilityStartDate>2006-06-19</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceCreationInfo>
-<fundingProject>
-<projectName>SmartKom</projectName>
-<fundingType>other</fundingType>
-</fundingProject>
-<creationEndDate>2003-01-01</creationEndDate>
+<creationEndDate>2001-01-01</creationEndDate>
 </resourceCreationInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>ger/deu</languageId>
-<languageName>German</languageName>
+<languageId>eng</languageId>
+<languageName>English</languageName>
 </languageInfo>
-</corpusAudioInfo>
-<corpusVideoInfo>
-<mediaType>video</mediaType>
-<lingualityInfo>
-<lingualityType>monolingual</lingualityType>
-</lingualityInfo>
-<languageInfo>
-<languageId>ger/deu</languageId>
-<languageName>German</languageName>
-</languageInfo>
-</corpusVideoInfo>
-</corpusMediaType>
-</corpusInfo>
+<sizeInfo>
+<size>6</size>
+<sizeUnit>mb</sizeUnit>
+</sizeInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

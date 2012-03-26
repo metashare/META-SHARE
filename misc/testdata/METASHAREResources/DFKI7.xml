@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Domain Adaptive Relation Extraction</resourceName>
+      <description>The DARE (Domain Adaptive Relation Extraction) System implements a minimally supervised machine learning framework for extracting relations of various complexity. It a) starts a bootstrapping from a small set of n-ary relation instances as \"seeds\" and then b) learns automatically pattern rules from parsed data, which can then extract new instances of the n-ary relation and its projections</description>
+      <resourceShortName>DARE</resourceShortName>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+				<availability>underNegotiation</availability>
+			</distributionInfo>
+			<contactPerson>
+				<surname>n/a</surname>
+				<communicationInfo>
+					<email>xxx@example.com</email>
+				</communicationInfo>
+			</contactPerson>
+   <metadataInfo><metadataCreationDate>2011-12-31</metadataCreationDate></metadataInfo>
+   <usageInfo>
+		    <foreseenUseInfo>
+			      <foreseenUse>nlpApplications</foreseenUse>
+		    </foreseenUseInfo>
+	  </usageInfo>
+	<resourceComponentType>
+		<toolServiceInfo>
+			<resourceType>toolService</resourceType>
+			<toolServiceType>other</toolServiceType>
+			<languageDependent>False</languageDependent>
+			</toolServiceInfo>
+	</resourceComponentType>
+</resourceInfo>

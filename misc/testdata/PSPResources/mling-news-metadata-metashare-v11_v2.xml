@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Multilingual News Corpus</resourceName>
+      <description>A parallel legislative news corpus collected from http://ec.europa.eu/ in English, Romanian and French.</description>
+      <resourceShortName>MLINGNEWS</resourceShortName>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>underNegotiation</licence>
+         <restrictionsOfUse>informLicensor</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Tufiș</surname>
+      <givenName>Dan</givenName>
+      <communicationInfo>
+         <email>tufis@racai.ro</email>
+         <url>http://www.racai.ro/~tufis/</url>
+         <address>Casa Academiei, Calea 13 Septembrie nr. 13, etaj 3, București, România, 050711</address>
+         <zipCode>050711</zipCode>
+         <city>Bucharest</city>
+         <country>Romania</country>
+         <telephoneNumber>0040 21 3188103</telephoneNumber>
+         <faxNumber>0040 21 3188142</faxNumber>
+      </communicationInfo>
+      <position>Director of the Research Institute for Artificial Intelligence, Romanian Academy</position>
+      <affiliation>
+				     <organizationName>Research Institute for Artificial Intelligence, Romanian Academy</organizationName>
+				     <organizationShortName>RACAI</organizationShortName>
+				     <communicationInfo>
+            <email>office@racai.ro</email>
+            <url>http://www.racai.ro/</url>
+            <address>Casa Academiei, Calea 13 Septembrie nr. 13, etaj 3, București, România, 050711</address>
+            <zipCode>050711</zipCode>
+            <city>Bucharest</city>
+            <country>Romania</country>
+            <telephoneNumber>0040 21 3188103</telephoneNumber>
+            <faxNumber>0040 21 3188142</faxNumber>
+         </communicationInfo>
+			   </affiliation>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-28</metadataCreationDate>
+      <source>METANET4U</source>
+   </metadataInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>multilingual</lingualityType>
+			               <multilingualityType>parallel</multilingualityType>
+		             </lingualityInfo>
+               <languageInfo>
+			
+			               <languageId>eng</languageId>
+			               <languageName>English</languageName>
+			               <sizePerLanguage>
+				                 <size>1334942</size>
+				
+				                 <sizeUnit>tokens</sizeUnit>
+			               </sizePerLanguage>
+		             </languageInfo>
+               <languageInfo>
+			
+			               <languageId>ron</languageId>
+			               <languageName>Romanian</languageName>
+			               <sizePerLanguage>
+				                 <size>659031</size>
+				
+				                 <sizeUnit>tokens</sizeUnit>
+			               </sizePerLanguage>
+		             </languageInfo>
+               <languageInfo>
+			
+			               <languageId>fra</languageId>
+			               <languageName>French</languageName>
+			               <sizePerLanguage>
+				                 <size>1480103</size>
+				
+				                 <sizeUnit>tokens</sizeUnit>
+			               </sizePerLanguage>
+		             </languageInfo>
+  			               <modalityInfo>
+                     <modalityType>writtenLanguage</modalityType>
+                  </modalityInfo>
+             <sizeInfo>
+			               <size>3474076</size>
+			
+			               <sizeUnit>tokens</sizeUnit>
+		             </sizeInfo>
+               <characterEncodingInfo>
+			               <characterEncoding>MacDingbat</characterEncoding>
+			
+		             </characterEncodingInfo>
+               <annotationInfo>
+                  <annotationType>segmentation</annotationType>
+                  <annotationStandoff>False</annotationStandoff>
+                  <segmentationLevel>word</segmentationLevel>
+                  <annotationFormat>text/xml</annotationFormat>
+                  <conformanceToStandardsBestPractices>XCES</conformanceToStandardsBestPractices>
+                  <annotationMode>automatic</annotationMode>
+                  <annotationTool>
+                     <targetResourceNameURI>TTL Web Service: http://ws.racai.ro/ttlws.wsdl</targetResourceNameURI>
+                  </annotationTool>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>morphosyntacticAnnotation-posTagging</annotationType>
+                  <annotationStandoff>False</annotationStandoff>
+                  <segmentationLevel>word</segmentationLevel>
+                  <annotationFormat>text/xml</annotationFormat>
+                  <tagset>Morpho-Syntactic Descriptors: http://nl.ijs.si/ME/V4/msd/html/index.html</tagset>
+                  <conformanceToStandardsBestPractices>XCES</conformanceToStandardsBestPractices>
+                  <theoreticModel>Hidden Markov Models</theoreticModel>
+                  <annotationMode>automatic</annotationMode>
+                  <annotationTool>
+                     <targetResourceNameURI>TTL Web Service: http://ws.racai.ro/ttlws.wsdl</targetResourceNameURI>
+                  </annotationTool>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>lemmatization</annotationType>
+                  <annotationStandoff>False</annotationStandoff>
+                  <segmentationLevel>word</segmentationLevel>
+                  <annotationFormat>text/xml</annotationFormat>
+                  <conformanceToStandardsBestPractices>XCES</conformanceToStandardsBestPractices>
+                  <annotationMode>automatic</annotationMode>
+                  <annotationTool>
+                     <targetResourceNameURI>TTL Web Service: http://ws.racai.ro/ttlws.wsdl</targetResourceNameURI>
+                  </annotationTool>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>syntacticAnnotation-shallowParsing</annotationType>
+                  <annotationStandoff>False</annotationStandoff>
+                  <segmentationLevel>word</segmentationLevel>
+                  <annotationFormat>text/xml</annotationFormat>
+                  <conformanceToStandardsBestPractices>XCES</conformanceToStandardsBestPractices>
+                  <annotationMode>automatic</annotationMode>
+                  <annotationTool>
+                     <targetResourceNameURI>TTL Web Service: http://ws.racai.ro/ttlws.wsdl</targetResourceNameURI>
+                  </annotationTool>
+               </annotationInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

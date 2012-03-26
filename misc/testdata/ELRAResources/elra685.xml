@@ -6,7 +6,7 @@
 <description lang="English">It is the SieTill database, consisting of 730 speakers (338 female, 392 male), and 36000 utterances. Recording were made via an Automatic Speech Server attached to an ISDN-line. The speakers called from different locations from Germany using their personal telephone sets. The main German dialects are covered. Recorded Items per speaker include: · 3 digit-sequences (continuous): 34 combinations · 5 digit-sequences (continuous): 2 combinations · date of call, time of call · birthday of caller, first name of caller · spelling of first name · "ja", "nein", "richtig", "falsch" · arbitrary amount of money · arbitrary date · arbitrary telephone number (arbitrary speaking style and isolated digits)</description>
 <description lang="French">Il s'agit de la base de données SieTill de Siemens. 730 locuteurs (338 femmes et 392 hommes) ont enregistré un ensemble de 36 000 phrases. Ces enregistrements ont été réalisés au travers d'une ligne téléphonique numérique et comportent des séquences de chiffres, des dates, des heures, etc. Cette base de données tient compte des variantes régionales de l'allemand.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=67</url>
 <identifier>ELRA-S0027</identifier>
 </identificationInfo>

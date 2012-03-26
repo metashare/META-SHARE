@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">TUNA Corpus</resourceName>
-<resourceName lang="French">Corpus TUNA</resourceName>
-<description lang="English">TUNA (Towards a UNified Algorithm for the generation of referring expressions) is a research project funded by the UK's Engineering and Physical Sciences Research Council (EPSRC).The TUNA Corpus of Referring Expressions is built with the contributions from 50 native or fluent speakers of English and it contains about 2000 descriptions (referring expressions).Participants described objects (targets) in visual domains by typing and submitting referring expressions that distingued them from other objects that were shown simultaneously (distractors): Each experimental trial consisted of one (singular) or two (plural) targets, plus six distractors. Each description is richly annotated with semantic information, including information about all the other objects that the human authors saw.The TUNA Corpus was annotated with the main objective to evaluate the output of algorithms for the Generation of Referring Expressions (GRE) with Natural Language Generation, with particular regard for the semantic content of the expressions.</description>
-<description lang="French">TUNA (“Towards a UNified Algorithm” pour la génération d’expressions référentes) est un projet de recherche financé par le Conseil de la recherche pour les sciences de l’ingénierie et de la physique au Royaume-Uni (UK's EPSRC -Engineering and Physical Sciences Research Council).Le corpus d’expressions référentes TUNA est construit à partir de contributions de 50 locuteurs de l’anglais natif ou courant et comprend environ 2000 descriptions (expressions référentes).Les participants ont décrit des objets (cibles) dans des domaines visuels en tapant au clavier des expressions référentes qui se distinguaient d’autres objets montrés simultanément (distracteurs) : chaque expérience se composait d’une (singulier) ou deux (pluriel) cibles, plus six distracteurs. Chaque description est annotée avec des informations sémantiques riches, incluant des informations sur tous les objets que voyaient les auteurs humains.Le corpus TUNA a été annoté avec comme objectif principal d’évaluer les sorties d’algorithmes pour la génération d’expressions référentes (GRE -Generation of Referring Expressions) dans le domaine de la génération du langage naturel, avec un intérêt particulier pour le contenu sémantique des expressions.</description>
+<resourceName lang="English">VERBMOBIL - VM CD 14.1 (new edition)</resourceName>
+<resourceName lang="French">VERBMOBIL - VM CD 14.1 - VM14.1 (nouvelle édition)</resourceName>
+<description lang="English">Verbmobil is a long-term project of the German Federal Ministry of Education, Science, Research and Technology (BMBF, Projekträger DLR). Its aim is to give Germany an international top position in language technology and its economical application in the next millenium by cooperation and concentration of as many as possible specialists from industry and science. The long-sighted aim is the development of a mobile translation system for the translation of spontaneous speech in face-to-face situations.The following resources are spontaneous speech databases recorded in a dialogue task (appointment scheduling) .VM CD 14.1 (new edition) consists of 1 CD-ROM with 97 speakers, 1891 turns, 156 spontaneous dialogues, transliteration, PhonDat 2 headers, partitur files (files describing the different parts which constitute the corpus - word order, phrase order, etc. ) in German.</description>
+<description lang="French">Verbmobil est un projet du Ministère fédéral allemand de l'Education, des Sciences, de la Recherche et des Technologies (BMBF, Projekträger DLR), qui vise à placer l'Allemagne en position de force dans le domaine de l'ingénierie de la langue. Son objectif , à long terme, est de développer un système de traduction vocale automatique, pour la traduction de conversations spontanées. Ces ressources sont des enregistrements de conversation pour la prise de rendez-vous. Le corpus allemand comprend 13 910 occurrences (échanges). L'édition de BAS de la partie allemande est entièrement étiquetée et segmentée en unités phonémiques/phonétiques (alphabet SAM-PA) par le système MAUS et partiellement segmentée de manière manuelle.VM CD 14.1 - VM14.1 (nouvelle édition) contient 1 CD-ROM composé de 97 locuteurs, 1891 échanges, 156 dialogues spontanés, transcription, en-têtes PhonDat 2, fichiers 'partitur' (fichiers décrivant les différentes parties constituant le corpus (ordre des mots, ordre des phrases, etc.)) en allemand.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1074</url>
-<identifier>ELRA-W0048</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=474</url>
+<identifier>ELRA-S0034_22</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,59 +29,43 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2008-09-30</lastDateUpdated>
+<lastDateUpdated>2005-04-13</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 45.00€</price>
-<price>Academic org. ELRA Non Member: 45.00€</price>
-<price>Commercial org. ELRA Member: 45.00€</price>
-<price>Academic org. ELRA Member: 45.00€</price>
-<availabilityStartDate>2008-09-30</availabilityStartDate>
+<price>Academic org. ELRA Member: 127.82€</price>
+<price>Commercial org. ELRA Member: 127.82€</price>
+<price>Academic org. ELRA Non Member: 255.65€</price>
+<price>Commercial org. ELRA Non Member: 255.65€</price>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 45.00€</price>
-<price>Academic org. ELRA Non Member: 45.00€</price>
-<price>Commercial org. ELRA Member: 45.00€</price>
-<price>Academic org. ELRA Member: 45.00€</price>
-<availabilityStartDate>2008-09-30</availabilityStartDate>
+<price>Academic org. ELRA Member: 127.82€</price>
+<price>Commercial org. ELRA Member: 127.82€</price>
+<price>Academic org. ELRA Non Member: 255.65€</price>
+<price>Commercial org. ELRA Non Member: 255.65€</price>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>TUNA (Towards a UNified Algorithm)</projectName>
-<fundingType>nationalFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
 <corpusMediaType>
-<corpusTextInfo>
-<mediaType>text</mediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
+<languageId>ger/deu</languageId>
+<languageName>German</languageName>
 </languageInfo>
-</corpusTextInfo>
-<corpusVideoInfo>
-<mediaType>video</mediaType>
-<lingualityInfo>
-<lingualityType>monolingual</lingualityType>
-</lingualityInfo>
-<languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
-</languageInfo>
-</corpusVideoInfo>
+</corpusAudioInfo>
 </corpusMediaType>
 </corpusInfo>
 </resourceComponentType>

@@ -6,7 +6,7 @@
 <description lang="English">The Second Edition of the Oxford Paperback Thesaurus, derived from NOTE, contains approximately 330,000 alternative words. It has corpus-based examples for each sense of polysemous words (29,000 total). The tagging matches that of the New Oxford Dictionary of English: an additional feature of the tagging is that each synonym has its own field. It is available in SGML.</description>
 <description lang="French">La seconde édition de ce thésaurus de poche dérivé de NOTE (cf. ELRA-L0047) contient environ 330 000 mots alternatifs, avec des exemples en contexte pour chacun des sens des termes polysémiques (29 000 au total). Le balisage est similaire à celui utilisé dans NODE (cf ELRA-L0045) : une spécificité cependant est que chaque synonyme est entré dans son champ propre. Le thésaurus est disponible au format SGML.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=682</url>
 <identifier>ELRA-L0048</identifier>
 </identificationInfo>

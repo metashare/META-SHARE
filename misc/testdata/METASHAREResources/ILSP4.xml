@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>PAROLE corpus</resourceName>
+      <description>General language corpus of 20 million words of modern Greek based on common specifications for the 14 languages of the european project. The selection of texts was based on common parameters of time production (after 1970) and of proportionate distribution of the textual material along the publication medium (Book, Newspaper, Magazine and Various) - all the texts are structurally annotated and a subset of 250K words is linguistically annotated at belowPoS level.</description>
+      <resourceShortName>PAROLE corpus</resourceShortName>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>CD-ROM</distributionAccessMedium>
+         <downloadLocation>http://lrt.ilsp.gr:8081/data/PAROLE.zip</downloadLocation>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Gavrilidou</surname>
+      <givenName>Maria</givenName>
+      <communicationInfo>
+         <email>maria@ilsp.gr</email>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2012-02-02</metadataCreationDate>
+    <source>META</source>
+   </metadataInfo>
+   <usageInfo>
+		    <foreseenUseInfo>
+				<foreseenUse>humanUse</foreseenUse>
+				<useNLPSpecific>other</useNLPSpecific>
+
+		       
+		    </foreseenUseInfo>
+		    
+	  </usageInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>monolingual</lingualityType>
+		             </lingualityInfo>
+               <languageInfo>
+			
+			               <languageId>ell</languageId>
+			               <languageName>Modern Greek (1453-)</languageName>
+		             </languageInfo>
+               <sizeInfo>
+			               <size>20000000</size>
+			
+			               <sizeUnit>words</sizeUnit>
+		             </sizeInfo>
+               <annotationInfo>
+                  <annotationType>segmentation</annotationType>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>structuralAnnotation</annotationType>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>lemmatization</annotationType>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>morphosyntacticAnnotation-bPosTagging</annotationType>
+               </annotationInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">LC-STAR English-Hebrew (Israel) Bilingual Aligned Phrasal lexicon</resourceName>
-<resourceName lang="French">Lexique aligné anglais-hébreu (Israël) de locutions LC-STAR</resourceName>
-<description lang="English">The LC-STAR English-Hebrew (Israel) Bilingual Aligned Phrasal lexicon was created within the scope of the LC-STAR project (IST 2001-32216) which was sponsored by the European Commission. It was designed for SST (Speech-to-Speech Translation) and ASR (Automatic Speech Recognition) applications.The lexicon comprises 10,520 phrases from the tourist domain. It is based on a list of short sentences obtained by translation from a 10,449 US-English phrase corpus. The total number of unique separate words is 13,320.The lexicon contains the following information: -	US-English phrase (orthography), -	its translation into Hebrew (orthography), and for each token in Hebrew a phrase provides the following: -	orthography of a word, -	part of speech, -	lemma,-	whether the phrase is idiomatic or not, -	if a word is a foreign word. In this lexicon, foreign words were only tagged if they were written with foreign orthography (e.g. English characters). The lexicon is provided in XML format. The database is stored on 1 CD.</description>
-<description lang="French">Le lexique aligné anglais-hébreu (Israël) de locutions LC-STAR a été créé dans le cadre du projet LC-STAR (IST 2001-32216), financé par la Commission européenne.Le lexique comprend 10 520 locutions du domaine du tourisme. Il est basé sur une liste de phrases courtes obtenue par la traduction d’un corpus de 10 449 locutions en anglais américain. Le nombre total de mots uniques séparés est de 13 320.Le lexique contient les informations suivantes : -	la locution en anglais américain (orthographe), -	sa traduction en russe (orthographe),et pour chaque élément dans la locution en russe: -	l’orthographe du mot, -	la partie du discours, -	le lemme,-	si la locution est idiomatique ou non, -	si un mot est un mot étranger. Dans ce lexique, les mots étrangers ont été étiquetés uniquement lorsqu’ils sont écrits dans une orthographe étrangère (par exemple, des caractères en anglais).Le lexique est fourni au format XML. La base de données est stockée sur 1 CD.</description>
-<resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=985</url>
-<identifier>ELRA-S0236</identifier>
+<resourceName lang="English">FASiL English unimodal “fasil-uk” corpus</resourceName>
+<resourceName lang="French">Corpus unimodal anglais FASiL “fasil-uk”</resourceName>
+<description lang="English">The corpus was collected in the context of the FASiL project, EU FP5 IST-2001-38685 (http://www.fasil.co.uk), as a wizard-of-oz experiment. Therefore, there are sound recordings of subject and wizard. A total of 70 subjects were recorded. The corpus is formatted as .wav files (u-law) for audio, plain ASCII text (.txt) for transcriptions, and a masterfile which binds .txt and .wav together. The masterfile is a “lattice” of the interaction in time, and contains the exact order of the interaction plus timings. The masterfile is loosely related to the HTK-SLF lattice format.The woz experiment is about the voice interaction with a Virtual Personal Assistent (VPA) for an email, calender and contacts task. Hesitations are marked as “UH”, noise as “NOISE” and other irrelevant stuff as “IRRELEVANT”. All annotations are in lower case, except for the former mentioned cases.Exact documentation of experiment in FASiL deliverable D.2.2The interactions contain mostly sentences but also spelled names, email addresses, telephone numbers, yes/no questions.See also S0174-02, S0174-03, S0174-04, and S0174-05.</description>
+<description lang="French">Ce corpus a été collecté dans le cadre du projet FASiL, EU FP5 IST-2001-38685 (http://www.fasil.co.uk), pour une expérience en magicien d’oz. Ainsi, il comprend les enregistrements des sujets et du magicien pour un total de 70 sujets. Le corpus est formaté en fichiers .wav (u-law) pour la partie audio, ASCII pour la partie transcriptions (.txt), et un fichier maître relie les .txt et les .wav. Le fichier maître est une sorte de réseau d’interaction temporelle qui contient l’ordre exact des interactions et des mesures de temps. Le fichier maître correspond approximativement au format de réseau HTK-SLF.L’expérience magicien d’oz tient dans l’interaction orale avec un « assistant personnel virtuel » (Virtual Personal Assistent (VPA)) dans une tâche d’email, de gestion de calendrier et de contacts. Les hésitations sont marquées par la balise “UH”, le bruit par la balise “NOISE” et les autres éléments non pertinents par la balise “IRRELEVANT”. Toutes les annotations sont en minuscules, excepté les balises précédemment citées.Une documentation précise de l’expérience est présentée dans le livrable FASiL D.2.2.Les interactions comprennent principalement des phrases mais également des noms épelés, des adresses email, des numéros de téléphone, des questions fermées.</description>
+<resourceShortName>fasil-uk</resourceShortName>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=699</url>
+<identifier>ELRA-S0174_01</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,60 +29,36 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2008-04-22</lastDateUpdated>
+<lastDateUpdated>2005-06-02</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 7150.00€</price>
-<price>Academic org. ELRA Non Member: 4875.00€</price>
-<price>Commercial org. ELRA Member: 5500.00€</price>
-<price>Academic org. ELRA Member: 3750.00€</price>
+<price>Commercial org. ELRA Non Member: 10000.00€</price>
+<price>Academic org. ELRA Non Member: 8000.00€</price>
+<price>Commercial org. ELRA Member: 8000.00€</price>
+<price>Academic org. ELRA Member: 4000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2007-03-16</availabilityStartDate>
+<availabilityStartDate>2005-04-07</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 7150.00€</price>
-<price>Academic org. ELRA Non Member: 7150.00€</price>
-<price>Commercial org. ELRA Member: 5500.00€</price>
-<price>Academic org. ELRA Member: 5500.00€</price>
+<price>Commercial org. ELRA Non Member: 10000.00€</price>
+<price>Academic org. ELRA Non Member: 10000.00€</price>
+<price>Commercial org. ELRA Member: 8000.00€</price>
+<price>Academic org. ELRA Member: 8000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2007-03-16</availabilityStartDate>
+<availabilityStartDate>2005-04-07</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>LC-STAR (IST 2001-32216)</projectName>
-<fundingType>euFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
-<lexicalConceptualResourceEncodingInfo>
-<encodingLevel>morphology</encodingLevel>
-</lexicalConceptualResourceEncodingInfo>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
-<mediaType>text</mediaType>
-<lingualityInfo>
-<lingualityType>monolingual</lingualityType>
-</lingualityInfo>
-<languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>heb</languageId>
-<languageName>Hebrew</languageName>
-</languageInfo>
-</lexicalConceptualResourceTextInfo>
-<lexicalConceptualResourceAudioInfo>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
 <mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
@@ -91,12 +67,8 @@
 <languageId>eng</languageId>
 <languageName>English</languageName>
 </languageInfo>
-<languageInfo>
-<languageId>heb</languageId>
-<languageName>Hebrew</languageName>
-</languageInfo>
-</lexicalConceptualResourceAudioInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
 </resourceComponentType>
 </resourceInfo>

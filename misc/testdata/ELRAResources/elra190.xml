@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">SALA II Spanish from Mexico database</resourceName>
-<resourceName lang="French">Base de données SALA II de l'espagnol mexicain</resourceName>
-<description lang="English">The SALA II Spanish from Mexico database collected in Mexico was recorded within the scope of the SALA II project.The SALA II Spanish from Mexico database contains the recordings of 1,075 Mexican speakers (539 males and 536 females) recorded over the Mexican mobile telephone network.The following acoustic conditions were selected as representative of a mobile user's environment:    * Passenger in moving car, railway, bus, etc. (155 speakers)    * Public place (279 speakers)    * Stationary pedestrian by road side (223 speakers)    * Home/office environment (364 speakers)    * Passenger in moving car using a hands-free kit (54 speakers) This database is distributed as 1 DVD-ROM The speech files are stored as sequences of 8-bit, 8kHz a-law speech files and are not compressed, according to the specifications of SALA II. Each prompt utterance is stored within a separate file and has an accompanying ASCII SAM label file.This speech database was validated by SPEX (the Netherlands) to assess its compliance with the SALA II format and content specifications.Each speaker uttered the following items:    * 6 application words    * 1 sequence of 10 isolated digits    * 4 connected digits (1 sheet number -6 digits, 1 telephone number -9/11 digits, 1 credit card number -14/16 digits, 1 PIN code -6 digits)    * 3 dates (1 spontaneous date e.g. birthday, 1 word style prompted date, 1 relative and general date expression)    * 2 spotting phrase using an embedded application word    * 2 isolated digits    * 3 spelled words (1surname, 1 directory assistance city name, 1 real/artificial name for coverage)    * 1 currency money amount    * 1 natural number    * 5 directory assistance names (1 surname out of a set of 500, 1 city of birth/growing up, 1 most frequent city out of a set of 500, 1 most frequent company/agency out of a set of 500, 1 "forename surname" out of a set of 150 )    * 2 yes/no questions (1 predominantly "yes" question, 1 predominantly "no" question)    * 9 phonetically rich sentences    * 2 time phrases (1 spontaneous time of day, 1word style time phrase)    * 4 phonetically rich words The following age distribution has been obtained: 7 speakers are under 16, 643 speakers are between 16 and 30, 248 speakers are between 31 and 45, 169 speakers are between 46 and 60, and 8 speakers are over 60.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
-<description lang="French">La base de données SALA II de l'espagnol collectée au Mexique en réseau mobile a été enregistrée dans le cadre du projet SALA II.La base de données SALA de l'espagnol mexicain contient les enregistrements de 1075 locuteurs mexicains (539 hommes, 536 femmes) enregistrés à travers le réseau téléphonique mobile mexicain.Les conditions acoustiques suivantes ont été choisies comme l'environnement représentatif d'un utilisateur de portable:    * Passager dans une voiture en marche, en train, en bus, etc. (155 locuteurs)    * Lieu public (279 locuteurs)    * Piéton à l'arrêt à côté d'une route (223 locuteurs)    * Environnement domicile/bureau (364 locuteurs)    * Passager dans une voiture en marche utilisant un kit mains-libres (54 locuteurs) Cette base est distribuée sur 1 DVD-ROM. Selon les spécifications de SALA II, les fichiers de parole sont stockés en séquences d'échantillons de 8 bit, 8 kHz, loi-A et ne sont pas compressés. Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM.Cette base de données a été validée par SPEX (Pays-Bas) afin de vérifier sa conformité avec le format SALA II et les spécifications du contenu.Contenu du corpus :    * 6 mots de commande ;    * 1 séquence de 10 chiffres isolés ;    * 4 chiffres connectés : 1 numéro permettant d'identifier la feuille de prompt (6 chiffres), 1 numéro de téléphone (9-11 chiffres), 1 numéro de carte de crédit (14-16 chiffres), 1 code confidentiel (6 chiffres) ;    * 3 dates : 1 date spontanée (ex. anniversaire), 1 date lue, 1 date générale ;    * 2 expressions utilisant un mot de commande ;    * 2 chiffres isolés ;·    * 3 mots épelés : 1 prénom, 1 nom de ville provenant d'un annuaire de renseignements téléphoniques, 1 mot réel/artificiel pour couverture ;    * 1 montant en devises ;    * 1 nombre entier naturel ;    * 5 noms provenant d'un annuaire de renseignements téléphoniques : 1 prénom (sur 500), 1 ville de naissance/d'origine du locuteur (spontané), 1 nom de ville parmi les plus fréquentes (sur 500), 1 nom de compagnie parmi les plus fréquentes (sur 500), 1 répétition de "prénom nom" ;    * 2 questions oui/non : 1 question à prédominance "oui", 1 question à prédominance "non" ;    * 9 phrases phonétiquement riches ;    * 2 phrases comportant une notion de temps : 1 jour (spontané), 1 phrase comportant une notion de temps ;    * 4 mots phonétiquement riches. Les classes d'âge sont réparties comme suit : 7 locuteurs ont moins de 16 ans, 643 locuteurs ont entre 16 et 30 ans, 248 locuteurs ont entre 31 et 45 ans, 169 locuteurs ont entre 46 et 60 ans et 8 locuteurs ont plus de 60 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
+<resourceName lang="English">Multilingual Dictionary of Sports – English-French-German trilingual database</resourceName>
+<resourceName lang="French">Dictionnaire multilingue des sports - Base trilingue anglais-français-allemand</resourceName>
+<description lang="English">This dictionary was produced within the French national project EuRADic  (European and Arabic Dictionaries and Corpora), as part of the Technolangue programme funded by the French Ministry of Industry. A needs study in the field of sport terminology, which covered an overall category of users, led to a partial restructuring of an already existing database (English-French) and a re-evaluation of options. All choices were based on the results of this needs study, which clearly highlighted the impact of open corpora (Internet) and exploration tools for the production of dictionaries as well as for the carrying out of terminography activity. The existing database (English-French) was subject to a systematic revision and updating with the following purposes:•	Spell checking•	Term production verificationThe principles of terminology unit production were modified according to current technical progress. All nomenclature entries were subject to a systematic revision.•	Equivalence compliance verificationEquivalences were systematically checked and corrected (7,044 corrections or adjustments).•	Source verification  For reasons of scientific rigour (and right protection), sources and references that were exploited for each dictionary entry were systematically checked (40,000 verifications for a total of 11,256 modifications).The results are presented in the form of MS ACCESS databases.The current set consists of an English-French-German trilingual database which includes the following information for each language:•	Mandatory information: term, reference/source, grammar•	Mandatory and common information: field (sport), domain, additional circumscription  •	Optional information: definition and source OR linguistic and source reference, combinatorics, other form, synonym, variantThe query enables to search for:•	French term •	English term •	German term •	sport (field, domain and special features ++)The EuRADic   sport dictionary is provided under the following different subsets:ELRA-T0372-01 Multilingual Dictionary of Sports – English-French-Greek-Arabic-German-Spanish-Portuguese multilingual databaseELRA-T0372-02 Multilingual Dictionary of Sports - English-French bilingual databaseELRA-T0372-03 Multilingual Dictionary of Sports - English-French-Greek trilingual databaseELRA-T0372-04 Multilingual Dictionary of Sports - English-French-Arabic trilingual databaseELRA-T0372-05 Multilingual Dictionary of Sports - English-French-German trilingual databaseELRA-T0372-06 Multilingual Dictionary of Sports - English-French-Spanish trilingual databaseELRA-T0372-07 Multilingual Dictionary of Sports - English-French-Portuguese trilingual database</description>
+<description lang="French">Ce dictionnaire a été produit dans le cadre du projet national français EuRADic  (Dictionnaire et corpus européens et arabe), du programme Technolangue, financé par le ministère français de l'industrie.Une étude du besoin terminologique dans le domaine des sports, couvrant l’ensemble des catégories d’utilisateurs, a conduit à une refonte partielle de l’existant (base anglais-français) et à une réévaluation des options. Tous les choix effectués se fondent sur les résultats de cette étude du besoin, qui a notamment fait ressortir clairement l’impact des corpus ouverts (Internet) et des outils d’exploration sur la conception des dictionnaires et la conduite de l’activité terminographique.La base existante (anglais-français) a fait l’objet d’une révision et mise à niveau systématique avec les objectifs suivants :•	Vérifications orthographiques •	Contrôle de la formation des termes Les principes de formation des unités terminologiques étant modifiés pour tenir compte des progrès techniques, l’ensemble des entrées de la nomenclature a fait l’objet d’une révision systématique.•	Contrôle d’adéquation des équivalences Les équivalences ont été systématiquement vérifiées et corrigées (7 044 corrections ou ajustements).•	Vérification des sources Dans un souci de rigueur scientifique (et de protection des droits) les sources et références exploitées pour chaque entrée du dictionnaire ont été systématiquement vérifiées (40 000 vérifications pour un total de 11 256 modifications).Les résultats obtenus se présentent sous la forme de bases de données MS ACCESS.Le présent ensemble est constitué d’une base trilingue anglais-français-allemand et comporte pour chaque langue :•	Informations obligatoires : terme, référence/source, grammaire •	Informations obligatoires et communes : champ (sport), domaine, circonscription additionnelle •	Informations facultatives : définition et source OU note linguistique et source, combinatoire, autre forme, synonyme, variante Les requêtes permettent la consultation sur :•	terme français •	terme anglais •	terme autre langue •	sport (champ, domaine et spécificité ++)Le dictionnaire des sports EuRADic   est fourni sous la forme des différents sous-ensembles suivants:ELRA-T0372-01 Dictionnaire multilingue des sports - Base multilingue anglais-français-grec-arabe-allemand-espagnol-portugaisELRA-T0372-02 Dictionnaire multilingue des sports - Base bilingue anglais-françaisELRA-T0372-03 Dictionnaire multilingue des sports - Base trilingue anglais-français-grecELRA-T0372-04 Dictionnaire multilingue des sports - Base trilingue anglais-français-arabeELRA-T0372-05 Dictionnaire multilingue des sports - Base trilingue anglais-français-allemandELRA-T0372-06 Dictionnaire multilingue des sports - Base trilingue anglais-français-espagnolELRA-T0372-07 Dictionnaire multilingue des sports - Base trilingue anglais-français-portugais</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=741</url>
-<identifier>ELRA-S0171</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1107</url>
+<identifier>ELRA-T0372_05</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,68 +29,61 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-08-28</lastDateUpdated>
+<lastDateUpdated>2009-07-07</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 51000.00€</price>
-<price>Academic org. ELRA Non Member: 40000.00€</price>
-<price>Commercial org. ELRA Member: 45000.00€</price>
-<price>Academic org. ELRA Member: 34000.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2004-12-23</availabilityStartDate>
+<price>Academic org. ELRA Member: 150.00€</price>
+<price>Commercial org. ELRA Member: 1500.00€</price>
+<price>Academic org. ELRA Non Member: 200.00€</price>
+<price>Commercial org. ELRA Non Member: 2000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2009-07-07</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 51000.00€</price>
-<price>Academic org. ELRA Non Member: 51000.00€</price>
-<price>Commercial org. ELRA Member: 45000.00€</price>
-<price>Academic org. ELRA Member: 45000.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2004-12-23</availabilityStartDate>
+<price>Academic org. ELRA Member: 1500.00€</price>
+<price>Commercial org. ELRA Member: 1500.00€</price>
+<price>Academic org. ELRA Non Member: 2000.00€</price>
+<price>Commercial org. ELRA Non Member: 2000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2009-07-07</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceCreationInfo>
 <fundingProject>
-<projectName>SALA II</projectName>
-<fundingType>euFunds</fundingType>
+<projectName>EURADIC</projectName>
+<fundingType>nationalFunds</fundingType>
 </fundingProject>
 </resourceCreationInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>terminologicalResource</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>spa</languageId>
-<languageName>Spanish</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Castilian</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
-<languageVarietyInfo>
-<languageVarietyName>Mexico</languageVarietyName>
-<languageVarietyType>other</languageVarietyType>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
+<languageId>eng</languageId>
+<languageName>English</languageName>
 </languageInfo>
-</corpusAudioInfo>
-</corpusMediaType>
-</corpusInfo>
+<languageInfo>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>ger/deu</languageId>
+<languageName>German</languageName>
+</languageInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

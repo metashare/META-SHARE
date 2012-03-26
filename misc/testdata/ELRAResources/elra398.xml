@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">TC-STAR 2005 Evaluation Package - SLT English-to-Spanish</resourceName>
-<resourceName lang="French">Package d’évaluation TC-STAR 2005 – SLT anglais-espagnol</resourceName>
-<description lang="English">TC-STAR is a European integrated project focusing on Speech-to-Speech Translation (SST). To encourage significant breakthrough in all SST technologies, annual open competitive evaluations are organized. Automatic Speech Recognition (ASR), Spoken Language Translation (SLT) and Text-To-Speech (TTS) are evaluated independently and within an end-to-end system.The first TC-STAR evaluation campaign took place in March 2005. Two core technologies were evaluated during the campaign:• Automatic Speech Recognition (ASR),• Spoken Language Translation (SLT).Each evaluation package includes resources, protocols, scoring tools, results of the official campaign, etc., that were used or produced during the first evaluation campaign. The aim of these evaluation packages is to enable external players to evaluate their own system and compare their results with those obtained during the campaign itself.The speech databases made within the TC-STAR project were validated by SPEX, in the Netherlands, to assess their compliance with the TC-STAR format and content specifications.This package includes the material used for the TC-STAR 2005 Spoken Language Translation (SLT) first evaluation campaign for English-to-Spanish translation. The same packages are available for English (ELRA-E0002), Spanish (ELRA-E0003) and Mandarin Chinese (ELRA-E0004) for ASR and for SLT in 2 other directions, Spanish-to-English (ELRA-E0006) and Chinese-to-English (ELRA-E0007).To be able to chain the components, ASR and SLT evaluation tasks were designed to use common sets of raw data and conditions. Two evaluation tasks, common to ASR and SLT, were selected: EPPS (European Parliament Plenary Sessions) task and VOA (Voice of America) task. This package was used within the EPPS task and consists of 2 data sets:- Development data set: built upon the ASR development data set, in order to enable end-to-end evaluation. Subsets of 25,000 words were selected from the EPPS verbatim transcriptions, and from the Final Text Edition documents. The source texts were then  the translated into Spanish by two independent translation agencies. All source text sets and reference translations were formatted using the same SGML DTD that has been used for the NIST Machine Translation evaluations.- Test data set: as for the development set, the same procedure was followed to produce the test data, i.e.: subsets of 25.000 words were selected from the test data set (Parliament’s sessions from 15 to 18 November 2004) both from the manual transcriptions and from the Final Text Edition  documents. The source data were then translated into Spanish by two independent agencies.</description>
-<description lang="French">TC-STAR est un projet intégré européen basé sur la traduction parole-parole (ou SST pour Speech-to-Speech Translation). Pour encourager de manière conséquente l’avancée dans toutes les technologies de la SST, des évaluations ouvertes à la concurrence sont organisées sur une base annuelle. Les technologies de la reconnaissance automatique de la parole (ou ASR pour « Automatic Speech Recognition »), de la traduction de la langue parlée (ou SLT pour « Spoken Language Translation ») et les technologies texte-parole (ou TTS pour « Text-to-Speech ») sont évaluées à la fois de façon indépendante et intégrée à un système « end-to-end » (de « bout en bout »).La première campagne d’évaluation TC-STAR s’est déroulée en mars 2005. Deux technologies de base ont été évaluées lors de cette campagne:• la reconnaissance automatique de la parole (ASR),• la traduction de la langue parlée (SLT).Chaque package d’évaluation regroupe des ressources, des protocoles, des outils de notation, les résultats de la campagne officielle, etc., qui ont été utilisés ou produits pendant la première campagne d’évaluation. Le but de ces packages d’évaluation est de permettre à des acteurs externes d’évaluer leur propre système et de comparer leurs résultats à ceux obtenus pendant la campagne.Les bases de données orales produites dans le projet TC-STAR ont été validées par SPEX, Pays-Bas, selon le format et les spécifications de contenu TC-STAR.Ce package comprend le matériel utilisé pour la première campagne d’évaluation TC-STAR 2005 Spoken Language Translation (SLT) pour la traduction de l’anglais vers l’espagnol. Des packages similaires sont également disponibles pour l’anglais (ELRA-E0002), l’espagnol (ELRA-E0003) et le mandarin (ELRA-E0004) pour l’ASR, ainsi que pour la SLT dans 2 autres sens, espagnol vers anglais (ELRA-E0006), chinois vers anglais (ELRA-E0007).Pour permettre de regrouper les composants, les tâches d’évaluation ASR et SLT ont été conçues en utilisant des données brutes et des conditions communes. Deux tâches d’évaluation, communes à l’ASR et à la SLT, ont été choisies : la tâche EPPS (« European Parliament Plenary Sessions » – Sessions plénières du Parlement européen) et la tâche VOA (« Voice of America » - La voix de l’Amérique). Le présent package a été utilisé dans le cadre de la tâche EPPS et comprend 2 ensembles de données :- L’ensemble de données de développement : il a été construit à partir des données de développement de l’ASR, afin de permettre l’évaluation « end-to-end ». Un sous-ensemble de  25 000 mots a été choisi à partir des transcriptions mot-à-mot EPPS, et à partir des documents de l’Edition du texte final. Les textes sources ont été ensuite traduits en espagnol par deux agences de traductions indépendantes. Tous les ensembles de textes sources, ainsi que les traductions de référence ont été formatées en utilisant la même DTD SGML déjà utilisée par les évaluations NIST en traduction automatique.- L’ensemble de données de test : comme pour l’ensemble de développement, la même procédure a été suivie pour produire les données de test, soit : un sous-ensemble de 25 000 mots a été choisi à partir de l’ensemble de données de test (sessions du Parlement du 15 au 18 novembre 2004) à la fois à partir des transcriptions manuelles et des documents de l’Edition du texte final. Les données sources ont été ensuite traduites vers l’espagnol par deux sociétés indépendantes.</description>
+<resourceName lang="English">Basque WordNet</resourceName>
+<resourceName lang="French">WordNet Basque</resourceName>
+<description lang="English">The Basque WordNet is a lexical database including information about Basque words. It is an extension of WordNet 1.6, a lexical database for English developed at the Princeton University. The Basque WordNet is tightly aligned to the English WordNet. The Basque WordNet models nouns, verbs and adjectives. Each sense is linked to a so-called synset. Every synset encodes the synonymy relation between (possibly) several words (synonyms), having a unique meaning, belonging to one and the same part of speech (specified in the POS tag value), and expressing the same lexical meaning. Each synset is related to the corresponding synset in the English WordNet 1.6. via its identification number ID, which includes the synset number and the POS tag. The only exceptions are newly created synsets to account for cultural concepts not present in WordNet 1.6.The Basque WordNet is provided following the Lexical Markup Framework (LMF, ISO/TC37) and it contains the following: •	set of variants or synonyms making up the synset; •	part-of-speech; •	language-internal relations to other synsets; •	a unique-id linking the Basque synsets to the English Wordnet 1.6;•	glosses and examples for a subset of the synsets•	mappings to WordNet domains, Sumo and Basic ConceptsLMF can be imported directly in the DebVisDic tool for browsing and editing wordnets (not included). Figures for the Basque WordNet are distributed as follows :- 30,281 Synsets: 26,708 nouns, 3,455 verbs, 118 adjectives- 49,688 Variants: 40,042 nouns, 9,491 verbs, 155 adjectives- 26,727 Lemma + pos: 23,176 nouns, 3,494 verbs, 57 adjectives- 1.66 Synonym per synset: 1.52 nouns, 2.74 verbs, 1.21 adjectives- 1.86 Senses per lemma+pos: 1.73 nouns, 2.72 verbs, 2.72 adjectives- 94,482 InternalRelations: 74,857 nouns, 19,492 verbs, 133 adjectives- 2,323 Definitions (nouns only)- 35,346 WordNet Domains mappings: 31,631 nouns, 3,590 verbs, 125 adjectives- 30,018 Sumo mappings: 26,446 nouns, 3,454 verbs, 118 adjectives- 1,138 Basic Concepts: 740 nouns, 398 verbs</description>
+<description lang="French">Le WordNet Basque est une base de données lexicale comprenant des informations sur les mots de la langue basque. C’est une extension du WordNet 1.6, une base de données lexicale pour l’anglais développée à l’université de Princeton. Le WordNet Basque est en grande partie aligné avec le WordNet anglais. Le WordNet Basque modélise les noms, verbes et adjectifs. Chaque sens est relié à un ensemble appelé synset. Chaque synset contient le codage de la relation synonymique entre plusieurs (autant que possible) mots (synonymes), ayant une signification unique, qui appartiennent à une ou à la même partie du discours (spécifié dans la valeur d’étiquette de la partie du discours), et exprimant la même signification lexicale. Chaque synset est relié au synset correspondent du WordNet anglais 1.6. via un numéro d’identifiant ID, qui inclut le numéro du synset et l’étiquette de la partie du discours. Les seules exceptions sont les synsets nouvellement créés pour prendre en compte les concepts culturels absents dans le WordNet 1.6.Le WordNet Basque est fourni dans le format Lexical Markup Framework (LMF, ISO/TC37) et contient les informations suivantes: •	un ensemble de variantes ou synonymes formant le synset; •	la partie du discours;•	des relations à d’autres synsets internes à la langue; •	un identifiant unique reliant le synset au WordNet anglais 1.6.•	des gloses et exemples pour un sous-ensemble des synsets•	des mises en correspondance avec les domaines WordNet, Sumo et les Concepts de baseLMF peut être importé directement dans l’outil DebVisDic pour naviguer et éditer des wordnets (non inclus). Les chiffres du WordNet Basque sont répartis comme suit:- 30,281 Synsets: 26,708 noms, 3,455 verbes, 118 adjectifs- 49,688 Variantes: 40,042 noms, 9,491 verbes, 155 adjectifs- 26,727 Lemmes + partie du discours: 23,176 noms, 3,494 verbes, 57 adjectifs- 1.66 Synonymes par synset: 1.52 noms, 2.74 verbes, 1.21 adjectifs- 1.86 Sens par lemme + partie du discours: 1.73 noms, 2.72 verbes, 2.72 adjectifs- 94,482 Relations internes: 74,857 noms, 19,492 verbes, 133 adjectifs- 2,323 Définitions (noms uniquement)- 35,346 Correspondances avec les domaines WordNet: 31,631 noms, 3,590 verbes, 125 adjectifs- 30,018 Correspondances Sumo: 26,446 noms, 3,454 verbes, 118 adjectifs- 1,138 Concepts de base: 740 noms, 398 verbes</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=851</url>
-<identifier>ELRA-E0005</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1099</url>
+<identifier>ELRA-M0049</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,54 +29,47 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-02-22</lastDateUpdated>
+<lastDateUpdated>2010-06-18</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
-<licence>ELRA_EVALUATION</licence>
-<restrictionsOfUse>evaluationUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 750.00€</price>
-<price>Academic org. ELRA Non Member: 750.00€</price>
-<price>Commercial org. ELRA Member: 500.00€</price>
-<price>Academic org. ELRA Member: 500.00€</price>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 6000.00€</price>
+<price>Academic org. ELRA Non Member: 600.00€</price>
+<price>Commercial org. ELRA Member: 3000.00€</price>
+<price>Academic org. ELRA Member: 300.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2006-03-22</availabilityStartDate>
+<availabilityStartDate>2009-05-20</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 9000.00€</price>
+<price>Academic org. ELRA Non Member: 9000.00€</price>
+<price>Commercial org. ELRA Member: 4500.00€</price>
+<price>Academic org. ELRA Member: 4500.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2009-05-20</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>TC-STAR</projectName>
-<fundingType>euFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
+<languageId>baq/eus</languageId>
+<languageName>Basque</languageName>
 </languageInfo>
-<languageInfo>
-<languageId>spa</languageId>
-<languageName>Spanish</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Castilian</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
-</languageInfo>
-</corpusAudioInfo>
-</corpusMediaType>
-</corpusInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

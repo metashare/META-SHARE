@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>ROMANIAN BALANCED CORPUS</resourceName>
+      <description>The corpus contains noun phrase and coreference annotation for the Romanian version of the 1984 novel of George Orwell.</description>
+      <resourceShortName>1984AnaphoraRo</resourceShortName>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+      <identifier>d2a99993d09d44fcbc9e77c08a7fed54</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>GeneralLicenceGrant</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
+      </licenceInfo>
+      <iprHolder>
+          <organizationInfo>
+            <organizationName>Alexandru Ioan Cuza</organizationName><organizationShortName>UAIC</organizationShortName><communicationInfo><email>xxx@example.com</email></communicationInfo>
+          </organizationInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Ignat</surname>
+      <givenName>Eugen</givenName>
+      <communicationInfo>
+         <email>eugen.ignat@info.uaic.ro</email>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-29</metadataCreationDate>
+      <source>METANET4U</source>
+   </metadataInfo>
+   <usageInfo>
+      <foreseenUseInfo>
+         <foreseenUse>humanUse</foreseenUse>
+        
+      </foreseenUseInfo>
+      <actualUseInfo>
+         <actualUse>humanUse</actualUse>
+      </actualUseInfo>
+      <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+         <useNLPSpecific>languageModelling</useNLPSpecific>
+      </actualUseInfo>
+  </usageInfo>
+   <resourceDocumentationInfo>
+      <documentation>
+         <documentUnstructured>Cristea, D., Postolache, O. Anaphora Resolution: Framework, Creation of Resources, and Evaluation. In Proceedings of the Fifth International Conference Formal Approaches to South Slavic and Balkan Languages, FASSBL, 18-20 October, 2006, Sofia, Bulgaria, 2006.</documentUnstructured>
+      </documentation>
+  </resourceDocumentationInfo>
+   <resourceCreationInfo>
+      <creationEndDate>2011-01-11</creationEndDate>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+                  <multilingualityType>comparable</multilingualityType>
+               </lingualityInfo>
+               <languageInfo>
+        
+                  <languageId>rou</languageId>
+                  <languageName>Romanian</languageName>
+               </languageInfo>
+                  <modalityInfo>
+                     <modalityType>writtenLanguage</modalityType>
+                  </modalityInfo>
+               <sizeInfo>
+                  <size>6.520</size>
+        
+                  <sizeUnit>sentences</sizeUnit>
+               </sizeInfo>
+               <annotationInfo>
+                  <annotationType>segmentation</annotationType>
+                  <annotationMode>mixed</annotationMode>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>morphosyntacticAnnotation-posTagging</annotationType>
+                  <annotationMode>mixed</annotationMode>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>syntacticAnnotation-shallowParsing</annotationType>
+                  <annotationMode>mixed</annotationMode>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>discourseAnnotation-coreference</annotationType>
+                  <annotationMode>mixed</annotationMode>
+               </annotationInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

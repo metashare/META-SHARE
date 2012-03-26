@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: METANORD45.xml 42662 2011-12-01 14:33:59Z martha $ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Hungarian BABEL</resourceName>
+      <description>BABEL database is an EUROM1 compatible database containing records from 60 speakers distributed in 3 speakers set (many, few, very few). Paragraphs, numbers and CVC are recorded and transcribed ortographically. 10% phoneme segmentation of paragraphs (SFS format).</description>
+      <resourceShortName>hu-BABEL</resourceShortName>
+      <url>http://catalog.elra.info/product_info.php?products_id=577</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+      <identifier>203</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>other</restrictionsOfUse>
+         <distributionAccessMedium>CD-ROM</distributionAccessMedium>
+      </licenceInfo>
+      <iprHolder>
+			      <personInfo>
+            <surname>Vicsi</surname>
+            <givenName>Klára</givenName>
+            <communicationInfo>
+               <email>vicsi@tmit.bme.hu</email>
+               <url>http://alpha.tmit.bme.hu/speech/</url>
+               <address>Magyar tudósok körútja 2.</address>
+               <zipCode>H-1117</zipCode>
+               <city>Budapest</city>
+               <country>Hungary</country>
+               <telephoneNumber>+36-1-463-1940</telephoneNumber>
+               <faxNumber>+36-1-372-0403</faxNumber>
+            </communicationInfo>
+            <position>professor</position>
+            <affiliation>
+						         <organizationName>Budapest University of Technology and Economics</organizationName>
+						         <organizationShortName>BME</organizationShortName>
+						         <departmentName>Department of Telecommunications and Media Informatics</departmentName>
+						         <communicationInfo>
+                  <email>vicsi@tmit.bme.hu</email>
+                  <url>http://tmit.bme.hu</url>
+                  <address>Magyar tudósok körútja 2.</address>
+                  <zipCode>H-1117</zipCode>
+                  <city>Budapest</city>
+                  <country>Hungary</country>
+                  <telephoneNumber>+36-1-463-1940</telephoneNumber>
+                  <faxNumber>+36-1-372-0403</faxNumber>
+               </communicationInfo>
+            </affiliation>
+         </personInfo>
+      </iprHolder>
+      <availabilityStartDate>1999-01-01</availabilityStartDate>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Vicsi</surname>
+      <givenName>Klára</givenName>
+      <communicationInfo>
+         <email>vicsi@tmit.bme.hu</email>
+         <url>http://alpha.tmit.bme.hu/speech/</url>
+         <address>Magyar tudósok körútja 2.</address>
+         <zipCode>H-1117</zipCode>
+         <city>Budapest</city>
+         <country>Hungary</country>
+         <telephoneNumber>+36-1-463-1940</telephoneNumber>
+         <faxNumber>+36-1-372-0403</faxNumber>
+      </communicationInfo>
+      <position>professor</position>
+      <affiliation>
+				     <organizationName>Budapest University of Technology and Economics</organizationName>
+				     <organizationShortName>BME</organizationShortName>
+				     <departmentName>Department of Telecommunications and Media Informatics</departmentName>
+				     <communicationInfo>
+            <email>vicsi@tmit.bme.hu</email>
+            <url>http://tmit.bme.hu</url>
+            <address>Magyar tudósok körútja 2.</address>
+            <zipCode>H-1117</zipCode>
+            <city>Budapest</city>
+            <country>Hungary</country>
+            <telephoneNumber>+36-1-463-1940</telephoneNumber>
+            <faxNumber>+36-1-372-0403</faxNumber>
+         </communicationInfo>
+      </affiliation>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-17</metadataCreationDate>
+      <metadataCreator>
+         <surname>Szaszák</surname>
+         <givenName>György</givenName>
+         <communicationInfo>
+            <email>szaszak@tmit.bme.hu</email>
+            <url>http://alpha.tmit.bme.hu/speech/</url>
+            <address>Magyar tudósok körútja 2.</address>
+            <zipCode>H-1117</zipCode>
+            <city>Budapest</city>
+            <country>Hungary</country>
+            <telephoneNumber>+36-1-463-1936</telephoneNumber>
+            <faxNumber>+36-1-372-0403</faxNumber>
+         </communicationInfo>
+         <position>research fellow</position>
+         <affiliation>
+					       <organizationName>Budapest University of Technology and Economics</organizationName>
+					       <organizationShortName>BME</organizationShortName>
+					       <departmentName>Department of Telecommunications and Media Informatics</departmentName>
+					       <communicationInfo>
+               <email>szaszak@tmit.bme.hu</email>
+               <url>http://alpha.tmit.bme.hu/speech/</url>
+               <address>Magyar tudósok körútja 2.</address>
+               <zipCode>H-1117</zipCode>
+               <city>Budapest</city>
+               <country>Hungary</country>
+               <telephoneNumber>+36-1-463-1936</telephoneNumber>
+               <faxNumber>+36-1-372-0403</faxNumber>
+            </communicationInfo>
+         </affiliation>
+      </metadataCreator>
+      <source>METANET4U</source>
+      <metadataLanguageId>en-us</metadataLanguageId>
+      <metadataLastDateUpdated>2011-11-24</metadataLastDateUpdated>
+      <revision>2011-11-24</revision>
+   </metadataInfo>
+   <versionInfo>
+		    <version>1.0</version>
+      <lastDateUpdated>1998-12-31</lastDateUpdated>
+		
+   </versionInfo>
+   <usageInfo>
+		    <foreseenUseInfo>
+         <foreseenUse>humanUse</foreseenUse>
+			
+			
+			      <useNLPSpecific>speechAnalysis</useNLPSpecific>
+			      <useNLPSpecific>speechRecognition</useNLPSpecific>
+      </foreseenUseInfo>
+		    <actualUseInfo>
+         <actualUse>humanUse</actualUse>
+         <useNLPSpecific>speechAnalysis</useNLPSpecific>
+      </actualUseInfo>
+   </usageInfo>
+   <resourceDocumentationInfo>
+		    <documentation>
+         <documentUnstructured>Roach, P. - S. Arnfield, W. - Barry, J. - Baltova, M. - Boldea, A. - Fourcin, W. - Gonet, R. - Gubrynowicz, E. - Hallum, L. - Lamel, K. - Marasek, A. - Marchal, E. - Meister, E. - Vicsi, K.: BABEL: An Eastern European Multi-language database. International Conference on Speech and Language Processing, Philadelphia, 1996.</documentUnstructured>
+      </documentation>
+   </resourceDocumentationInfo>
+   <resourceCreationInfo>
+      <resourceCreator>
+			      <personInfo>
+            <surname>Vicsi</surname>
+            <givenName>Klára</givenName>
+            <communicationInfo>
+               <email>vicsi@tmit.bme.hu</email>
+               <url>http://alpha.tmit.bme.hu/speech/</url>
+               <address>Magyar tudósok körútja 2.</address>
+               <zipCode>H-1117</zipCode>
+               <city>Budapest</city>
+               <country>Hungary</country>
+               <telephoneNumber>+36-1-463-1940</telephoneNumber>
+               <faxNumber>+36-1-372-0403</faxNumber>
+            </communicationInfo>
+            <position>professor</position>
+            <affiliation>
+						         <organizationName>Budapest University of Technology and Economics</organizationName>
+						         <organizationShortName>BME</organizationShortName>
+						         <departmentName>Department of Telecommunications and Media Informatics</departmentName>
+						         <communicationInfo>
+                  <email>vicsi@tmit.bme.hu</email>
+                  <url>http://alpha.tmit.bme.hu/speech/</url>
+                  <address>Magyar tudósok körútja 2.</address>
+                  <zipCode>H-1117</zipCode>
+                  <city>Budapest</city>
+                  <country>Hungary</country>
+                  <telephoneNumber>+36-1-463-1940</telephoneNumber>
+                  <faxNumber>+36-1-372-0403</faxNumber>
+               </communicationInfo>
+            </affiliation>
+         </personInfo>
+      </resourceCreator>
+      <creationStartDate>1995-01-01</creationStartDate>
+      <creationEndDate>1998-12-31</creationEndDate>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+			
+			               <languageId>HU</languageId>
+			               <languageName>Hungarian</languageName>
+			               <sizePerLanguage>
+				                 <size>1075</size>
+				
+				                 <sizeUnit>utterances</sizeUnit>
+                  </sizePerLanguage>
+               </languageInfo>
+               <sizeInfo>
+			               <size>1075</size>
+			
+			               <sizeUnit>utterances</sizeUnit>
+               </sizeInfo>
+               <characterEncodingInfo>
+			               <characterEncoding>MacDingbat</characterEncoding>
+			
+               </characterEncodingInfo>
+               <creationInfo>
+			               <originalSource>
+                     <targetResourceNameURI>research</targetResourceNameURI>
+                  </originalSource>
+			               <creationMode>manual</creationMode>
+               </creationInfo>
+            </corpusTextInfo>
+            <corpusAudioInfo>
+               <mediaType>audio</mediaType>
+               <lingualityInfo>
+			               <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+			
+			               <languageId>HU</languageId>
+			               <languageName>Hungarian</languageName>
+			               <sizePerLanguage>
+				                 <size>1.3</size>
+				
+				                 <sizeUnit>hours</sizeUnit>
+                  </sizePerLanguage>
+               </languageInfo>
+               <audioSizeInfo>
+                  <sizeInfo>
+			                  <size>1.3</size>
+			
+			                  <sizeUnit>hours</sizeUnit>
+                  </sizeInfo>
+               </audioSizeInfo>
+               <audioContentInfo>
+                  <speechItems>naturalNumbers</speechItems>
+                  <speechItems>isolatedWords</speechItems>
+                  <speechItems>other</speechItems>
+               </audioContentInfo>
+               <settingInfo>
+			               <naturality>readSpeech</naturality>
+			               <conversationalType>monologue</conversationalType>
+			               <scenarioType>other</scenarioType>
+			               <audience>no</audience>
+			
+			               <interactivity>nonInteractive</interactivity>
+               </settingInfo>
+               <audioFormatInfo>
+			               <mimeType>wave/audio</mimeType>
+			               <signalEncoding>linearPCM</signalEncoding>
+			               <samplingRate>44100</samplingRate>
+			               <quantization>16</quantization>
+			               <compressionInfo>
+                     <compression>False</compression>
+                  </compressionInfo>
+			               <numberOfTracks>
+							1
+						</numberOfTracks>
+			               <recordingQuality>high</recordingQuality>
+			               <sizePerAudioFormat>
+				                 <size>1.3</size>
+				
+				                 <sizeUnit>hours</sizeUnit>
+                  </sizePerAudioFormat>
+               </audioFormatInfo>
+               <recordingInfo>
+			
+			
+			
+			               <recordingDeviceType>other</recordingDeviceType>
+			               <recordingDeviceTypeDetails>OROS AU21 board</recordingDeviceTypeDetails>
+			               <recordingPlatformSoftware>soundforge_sony</recordingPlatformSoftware>
+			               <recordingEnvironment>studio</recordingEnvironment>
+               </recordingInfo>
+               <captureInfo>
+				              <capturingDeviceType>studioEquipment</capturingDeviceType>
+				              <capturingDeviceTypeDetails>BK microphone 4165 + BK amplifier 2636</capturingDeviceTypeDetails>
+				              <personSourceSetInfo>
+					                <numberOfPersons>60</numberOfPersons>
+					                <ageOfPersons>adult</ageOfPersons>
+					                <ageRangeStart>25</ageRangeStart>
+					                <ageRangeEnd>75</ageRangeEnd>
+					                <sexOfPersons>mixed</sexOfPersons>
+					                <originOfPersons>native</originOfPersons>
+					                <dialectAccentOfPersons>no dialect</dialectAccentOfPersons>
+					                <hearingImpairmentOfPersons>no</hearingImpairmentOfPersons>
+					                <speakingImpairmentOfPersons>no</speakingImpairmentOfPersons>
+					                <numberOfTrainedSpeakers>0</numberOfTrainedSpeakers>
+                  </personSourceSetInfo>
+               </captureInfo>
+                              <creationInfo>
+                  <originalSource>
+                     <targetResourceNameURI>corpora (phonetically rich + numbers + CVC)</targetResourceNameURI>
+                  </originalSource>
+               </creationInfo>
+
+            </corpusAudioInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

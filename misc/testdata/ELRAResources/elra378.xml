@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">CELEX Dutch lexical database - Frequency Subset</resourceName>
-<resourceName lang="French">CELEX - Base de données lexicale du hollandais - sous-ensemble "fréquence"</resourceName>
-<description lang="English">The Dutch CELEX data is derived from R.H. Baayen, R. Piepenbrock &amp; L. Gulikers, The CELEX Lexical Database (CD-ROM), Release 2, Dutch Version 3.1, Linguistic Data Consortium, University of Pennsylvania, Philadelphia, PA, 1995.Apart from orthographic features, the CELEX database comprises representations of the phonological, morphological, syntactic and frequency properties of lemmata. For the Dutch data, frequencies have been disambiguated on the basis of the 42.4m Dutch Instituut voor Nederlandse Lexicologie text corpora.To make for greater compatibility with other operating systems, the databases have not been tailored to fit any particular database management program. Instead, the information is presented in a series of plain ASCII files, which can be queried with tools such as AWK and ICON. Unique identity numbers allow the linking of information from different files.This database can be divided into different subsets:· orthography: with or without diacritics, with or without word division positions, alternative spellings, number of letters/syllables;· phonology: phonetic transcriptions with syllable boundaries or primary and secondary stress markers, consonant-vowel patterns, number of  phonemes/syllables, alternative pronunciations, frequency per phonetic syllable within words;· morphology: division into stems and affixes, flat or hierarchical representations, stems and their inflections;· syntax: word class, subcategorisations per word class;· frequency of the entries: disambiguated for homographic lemmata.</description>
-<description lang="French">Les données en hollandais de CELEX sont extraites de la base de données lexicale CELEX (CD-ROM) de R.H. Baayen, R. Piepenbrock &amp; L. Gulikers, seconde édition, version hollandaise 3.1, Linguistic Data Consortium, Université de Pennsylvanie, Philadelphie, PA, 1995.En-dehors des traits orthographiques, la base de données CELEX comprend des représentations des propriétés phonologiques, morphologiques, syntaxiques et fréquentielles des lemmes. En ce qui concerne les données du hollandais, les fréquences ont été désambigüisées sur la base du corpus de textes de l'Instituut voor Nederlandse Lexicologie.Afin de permettre une meilleure compatibilité avec d'autres systèmes, les bases ne sont adaptées à aucun système de gestion de base de données spécifique. Au contraire, l'information est présentée dans une série de fichiers textes ASCII, pouvant être interrogés par des outils tels que AWK et ICON. Des numéros d'identification uniques permettent d'accéder et d'établir les relations entre les informations provenant de différents fichiers.Cette base de données peut être divisée en cinq sous-ensembles selon les niveaux d'informations suivants :· orthographe: avec ou sans diacritiques, avec ou sans la position de la coupure de mot (césure), option d'orthographe, nombre de lettres/syllabes ;· phonologie : transcriptions phonétiques avec segmentation des syllabes ou balisage des accents primaires ou secondaires, schémas consonne-voyelle, nombre de phonèmes/syllabes, options de prononciation, fréquence par syllabe phonétique dans les mots ;· morphologie : division en radical et affixes, représentations à plat ou hiérarchisées, radicaux et leurs flexions ;· syntaxe : classe de mot, sous-catégorisation par classe de mot ;· fréquence des entrées : désambigüisation des lemmes homographes.</description>
+<resourceName lang="English">Mandarin Chinese Telephone Speech Recognition Corpus -Person Name, Place Name</resourceName>
+<resourceName lang="French">Corpus de  reconnaissance de parole téléphonique en chinois mandarin – noms de personnes et de lieux (téléphone fixe 285)</resourceName>
+<description lang="English">This corpus comprises 7,298 entries uttered by 285 speakers of different dialects, ages and various educational levels (144 males and 141 females), recorded over the fixed telephone network. The database comprises 14,492 Chinese personal names and place names. Speech samples are stored as a sequence of 16-bit 8kHz WAV for a total of 17.6 hours of speech. The total capacity of the data is 968 Mb.Each speaker read 15-30 items. Text files are stored in Unicode format. All data have been proofread manually.The transcriptions include non-speech markers (background noise, background speech, speaker sounds) as well as markers for mispronunciation, channel distortions, words left-out and duplicates.The corpus aims to be applied to the testing and telephone natural speech recognition system.</description>
+<description lang="French">Ce corpus comprend 7 298 entrées prononcées par 285 locuteurs de dialectes, d’âges et de niveaux d’éducation différents (144 hommes et 141 femmes), enregistrées à travers le réseau téléphonique fixe. La base de données contient 14 492 noms de personnes et lieux chinois. Les échantillons de parole sont stockés sous la forme de séquences 16-bit 8kHz WAV pour un total de 17,6 heures de parole. La taille totale des données est de 968 Mo.Chaque locuteur a lu de 15 à 30 éléments. Les fichiers textes sont stockés au format Unicode. Toutes les données ont été vérifiées manuellement.Les transcriptions comprennent des balises d’événements acoustiques (bruits de fond, sons émis par les locuteurs) ainsi que des balises de mauvaise prononciation, distorsions du canal, omissions de mots et répétitions.Cette base de données a été conçue pour l’évaluation et le développement de systèmes de reconnaissance de la parole naturelle par téléphone.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=445</url>
-<identifier>ELRA-L0029_07</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=918</url>
+<identifier>ELRA-S0228_05</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,61 +29,44 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-10-05</lastDateUpdated>
+<lastDateUpdated>2009-09-24</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 20420.11€</price>
-<price>Academic org. ELRA Non Member: 20420.11€</price>
-<price>Commercial org. ELRA Member: 12252.07€</price>
-<price>Academic org. ELRA Member: 12252.07€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-09-15</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 2786.00€</price>
+<price>Academic org. ELRA Non Member: 2786.00€</price>
+<price>Commercial org. ELRA Member: 2786.00€</price>
+<price>Academic org. ELRA Member: 2786.00€</price>
+<availabilityStartDate>2007-01-17</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 20420.11€</price>
-<price>Academic org. ELRA Non Member: 20420.11€</price>
-<price>Commercial org. ELRA Member: 12252.07€</price>
-<price>Academic org. ELRA Member: 12252.07€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-09-15</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 2786.00€</price>
+<price>Academic org. ELRA Non Member: 2786.00€</price>
+<price>Commercial org. ELRA Member: 2786.00€</price>
+<price>Academic org. ELRA Member: 2786.00€</price>
+<availabilityStartDate>2007-01-17</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>CELEX</projectName>
-<fundingType>nationalFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
-<mediaType>text</mediaType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>dut/nld</languageId>
-<languageName>Dutch</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Flemish</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
+<languageId>chi/zho</languageId>
+<languageName>Chinese</languageName>
 </languageInfo>
-</lexicalConceptualResourceTextInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
 </resourceComponentType>
 </resourceInfo>
