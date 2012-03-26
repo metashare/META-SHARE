@@ -1,12 +1,9 @@
 from metashare import test_utils
-from metashare.settings import ROOT_PATH
-from haystack.query import SearchQuerySet
-
-from django.test import TestCase
-from django.contrib.auth.models import User
-from django.test.client import Client
 from metashare.settings import DJANGO_BASE, ROOT_PATH
 from metashare.repo2.models import resourceInfoType_model
+from haystack.query import SearchQuerySet
+from django.contrib.auth.models import User
+from django.test.client import Client
 
 
 class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
@@ -89,9 +86,9 @@ class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
         Asserts that the search index is empty.
         """
         self.assertEqual(SearchQuerySet().all().count(), 0,
-            "The search index is expected to be empty at the start of the " \
-            "test. There appears to be a bug in {0}." \
-            .format(test_utils.IndexAwareTestCase.__class__.__name__))
+          "The search index is expected to be empty at the start of the " \
+          "test. There appears to be a bug in {0}." \
+          .format(test_utils.IndexAwareTestCase.__class__.__name__))
     
     def init_index_with_a_resource(self):
         """
@@ -106,8 +103,8 @@ class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
         resource.storage_object.save()
         # make sure the import has automatically changed the search index
         self.assertEqual(SearchQuerySet().count(), 1,
-            "After the import of a resource the index must automatically " \
-            "have changed and contain that resource.")
+          "After the import of a resource the index must automatically " \
+          "have changed and contain that resource.")
         return resource
     
 class SearchTest(test_utils.IndexAwareTestCase):
@@ -187,7 +184,8 @@ class SearchTest(test_utils.IndexAwareTestCase):
         
     def testAvailabilityFacet(self):   
         client = Client()
-        response = client.get('/{0}repo2/search2/'.format(DJANGO_BASE), follow=True, data={'selected_facets':'availabilityFilter_exact:available-restrictedUse'})
+        response = client.get('/{0}repo2/search2/'.format(DJANGO_BASE), follow=True, 
+          data={'selected_facets':'availabilityFilter_exact:available-restrictedUse'})
         self.assertEqual('repo2/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
         '''      
@@ -199,14 +197,15 @@ class SearchTest(test_utils.IndexAwareTestCase):
         
     def testLicenceFacetForTwoLicences(self):   
         client = Client()
-        response = client.get('/{0}repo2/search2/'.format(DJANGO_BASE), follow=True, data={'selected_facets':'licenceFilter_exact:ELRA_END_USER', 'selected_facets':'licenceFilter_exact:ELRA_EVALUATION'})
+        response = client.get('/{0}repo2/search2/'.format(DJANGO_BASE), follow=True, 
+          data={'selected_facets':'licenceFilter_exact:ELRA_END_USER', 'selected_facets':'licenceFilter_exact:ELRA_EVALUATION'})
         self.assertEqual('repo2/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
 
     def testRestrictionsOfUseFacet(self):   
         client = Client()
-        response = client.get('/{0}repo2/search2/'.format(DJANGO_BASE), follow=True, data={'selected_facets':'restrictionsOfUseFilter_exact:academic-nonCommercialUse'})
+        response = client.get('/{0}repo2/search2/'.format(DJANGO_BASE), follow=True, 
+          data={'selected_facets':'restrictionsOfUseFilter_exact:academic-nonCommercialUse'})
         self.assertEqual('repo2/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
-
-'''
+        '''
