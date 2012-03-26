@@ -177,8 +177,8 @@ def change_resource_status(resource, status, precondition_status=None):
     
 def publish_resources(modeladmin, request, queryset):
     for obj in queryset:
-        change_resource_status(obj, status=PUBLISHED)
-publish_resources.short_description = "Publish selected resources"
+        change_resource_status(obj, status=PUBLISHED, precondition_status=INGESTED)
+publish_resources.short_description = "Publish selected ingested resources"
 
 def unpublish_resources(modeladmin, request, queryset):
     for obj in queryset:
