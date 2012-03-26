@@ -163,7 +163,8 @@ def download(request, object_id):
                       'licence_path': \
                       LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
                       'requires_sig': \
-                      LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][1] })
+                      LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][1] },
+                    context_instance=RequestContext(request))
         elif licence_choice and not licence_choice in licences:
             licence_choice = None
 
@@ -178,13 +179,16 @@ def download(request, object_id):
               'licence_path': \
                 LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
               'requires_sig': \
-                LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][1] })
+                LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][1] },
+            context_instance=RequestContext(request))
     elif len(licences) > 1:
         return render_to_response('repo2/licence_selection.html',
-            { 'form': LicenseSelectionForm(licences), 'resource': resource })
+            { 'form': LicenseSelectionForm(licences), 'resource': resource },
+            context_instance=RequestContext(request))
     else:
         return render_to_response('repo2/lr_not_downloadable.html',
-                                  { 'resource': resource })
+                                  { 'resource': resource },
+                                  context_instance=RequestContext(request))
 
 
 def _provide_download(request, resource, download_urls):
@@ -232,7 +236,8 @@ def _provide_download(request, resource, download_urls):
 
     # no download could be provided
     return render_to_response('repo2/lr_not_downloadable.html',
-                              { 'resource': resource })
+                              { 'resource': resource },
+                              context_instance=RequestContext(request))
 
 
 def _get_sessionid(request):
