@@ -166,11 +166,6 @@ class licenceInfo_model_inline(SchemaModelInline):
     collapse = True
 
 # pylint: disable-msg=C0103
-class membershipInfo_model_inline(SchemaModelInline):
-    model = membershipInfoType_model
-    collapse = True
-
-# pylint: disable-msg=C0103
 class organizationInfo_model_inline(SchemaModelInline):
     model = organizationInfoType_model
     collapse = False
