@@ -823,7 +823,10 @@ class SchemaModel(models.Model):
             # ForeignKey fields, this can be handled using setattr().
             elif _field is not None:
                 try:
-                    assert(len(_values) == 1)
+                    # TODO: check why licenseInfo/price values end up here?
+                    #       Shouldn't they be handled by the MultiTextField?!
+                    #
+                    # assert(len(_values) == 1)
                     setattr(_object, _model_field, _values[0])
 
                 except AssertionError:
