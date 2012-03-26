@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Terminology collections in the Greek Sign Language</resourceName>
+      <description>The resourse comprises more than 1000 terms for the Greek Sign Language for the domain of public administration, Transportation, Seismology and Computer use.</description>
+      <resourceShortName>Terms GSL</resourceShortName>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability><licenceInfo>
+         <licence>proprietary</licence>
+         <downloadLocation>http://lrt.ilsp.gr:8081/data/TerminologyCollectionsInTheGreekSignLanguage.rar</downloadLocation>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Fotinea</surname>
+      <givenName>Evita-Stavroula</givenName>
+      <communicationInfo>
+         <email>evita@ilsp.gr</email>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2012-02-02</metadataCreationDate>
+    <source>META</source>
+   </metadataInfo>
+   <usageInfo>
+		    <foreseenUseInfo>
+			      <foreseenUse>nlpApplications</foreseenUse>
+			      
+		    </foreseenUseInfo>
+		    <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+         
+      </actualUseInfo>
+	  </usageInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>multilingual</lingualityType>
+		             </lingualityInfo>
+               <languageInfo>
+			
+			               <languageId>gss</languageId>
+			               <languageName>Greek Sign Language</languageName>
+		             </languageInfo>
+               <languageInfo>
+			
+			               <languageId>eng</languageId>
+			               <languageName>English</languageName>
+		             </languageInfo>
+               <languageInfo>
+			
+			               <languageId>ell</languageId>
+			               <languageName>Modern Greek (1453-)</languageName>
+		             </languageInfo>
+               <sizeInfo>
+			               <size>1000</size>
+			
+			               <sizeUnit>terms</sizeUnit>
+		             </sizeInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

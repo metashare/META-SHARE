@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: METANORD50.xml 42662 2011-12-01 14:33:59Z martha $ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Estonian Treebank</resourceName>
+      <description>Annotated text corpus. A pilot project. TIGER-style syntactic annotations.</description>
+      <resourceShortName>ESTTRE</resourceShortName>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>underNegotiation</licence>
+         <restrictionsOfUse>other</restrictionsOfUse>
+         <distributionAccessMedium>other</distributionAccessMedium>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Müürisep</surname>
+      <givenName>Kaili</givenName>
+      <communicationInfo>
+         <email>Kaili.Muurisep@ut.ee</email>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-12-31</metadataCreationDate>
+   </metadataInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>monolingual</lingualityType>
+		             </lingualityInfo>
+               <languageInfo>
+			
+			               <languageId>est</languageId>
+			               <languageName>Estonian</languageName>
+		             </languageInfo>
+               <sizeInfo>
+			               <size>1000</size>
+			
+			               <sizeUnit>sentences</sizeUnit>
+		             </sizeInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Basic vocabulary of the Greek Sign Language</resourceName>
+      <description>Collection of basic vocabulary of the Greek Sign Language</description>
+      <resourceShortName>NOEMA</resourceShortName>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability><licenceInfo>
+         <licence>proprietary</licence>
+         <downloadLocation>http://lrt.ilsp.gr:8081/data/BasicVocabularyOfTheGreekSignLanguage.rar</downloadLocation>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Efthymiou</surname>
+      <givenName>Eleni</givenName>
+      <communicationInfo>
+         <email>eleni_e@ilsp.gr</email>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2012-02-02</metadataCreationDate>
+    <source>META</source>
+   </metadataInfo>
+   <usageInfo>
+		    <foreseenUseInfo>
+			      <foreseenUse>nlpApplications</foreseenUse>
+			      
+		    </foreseenUseInfo>
+		    <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+      </actualUseInfo>
+	  </usageInfo>
+   <resourceComponentType>
+         <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>monolingual</lingualityType>
+		             </lingualityInfo>
+               <languageInfo>
+			
+			               <languageId>gss</languageId>
+			               <languageName>Greek Sign Language</languageName>
+		             </languageInfo>
+               <sizeInfo>
+			               <size>25</size>
+			
+			               <sizeUnit>hours</sizeUnit>
+		             </sizeInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

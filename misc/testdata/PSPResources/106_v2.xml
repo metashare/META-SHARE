@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Hunglish Corpus</resourceName>
+      <description>Hungarian-English parallel corpus automatically aligned at the sentence level.</description>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+</metaShareId>
+      <identifier>106</identifier>
+</identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability>
+      <licenceInfo>
+         <licence>CC_BY</licence>
+         <restrictionsOfUse>other</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <downloadLocation>http://mokk.bme.hu/resources/hunglishcorpus</downloadLocation>
+         <licensor>
+				        <personInfo>
+               <surname>N/A</surname>
+               <communicationInfo>
+                  <email>daniel@mokk.bme.hu</email>
+</communicationInfo>
+               <affiliation>
+							           <organizationName>Budapest University of Technology and Economics</organizationName>
+							           <organizationShortName>BUTE</organizationShortName>
+							           <departmentName>MOKK Centre for Media Research and Education</departmentName>
+							           <communicationInfo>
+                     <email>daniel@mokk.bme.hu</email>
+</communicationInfo>
+</affiliation>
+</personInfo>
+</licensor>
+</licenceInfo>
+</distributionInfo>
+   <contactPerson>
+      <surname>N/A</surname>
+      <communicationInfo>
+         <email>daniel@mokk.bme.hu</email>
+</communicationInfo>
+      <affiliation>
+				     <organizationName>Budapest University of Technology and Economics</organizationName>
+				     <organizationShortName>BUTE</organizationShortName>
+				     <departmentName>MOKK Centre for Media Research and Education</departmentName>
+				     <communicationInfo>
+            <email>daniel@mokk.bme.hu</email>
+</communicationInfo>
+</affiliation>
+</contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-12</metadataCreationDate>
+      <metadataCreator>
+         <surname>N/A</surname>
+         <communicationInfo>
+            <email>daniel@mokk.bme.hu</email>
+</communicationInfo>
+         <affiliation>
+					       <organizationName>Budapest University of Technology and Economics</organizationName>
+					       <organizationShortName>BUTE</organizationShortName>
+					       <departmentName>MOKK Centre for Media Research and Education</departmentName>
+					       <communicationInfo>
+               <email>daniel@mokk.bme.hu</email>
+</communicationInfo>
+</affiliation>
+</metadataCreator>
+</metadataInfo>
+   <versionInfo>
+		    <version>2.0</version>
+</versionInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>bilingual</lingualityType>
+			               <multilingualityType>comparable</multilingualityType>
+			               <multilingualityTypeDetails>Automatically sentence-segmented and aligned.</multilingualityTypeDetails>
+</lingualityInfo>
+               <languageInfo>
+			
+			               <languageId>HU</languageId>
+			               <languageName>Hungarian</languageName>
+</languageInfo>
+               <languageInfo>
+			
+			               <languageId>EN</languageId>
+			               <languageName>English</languageName>
+</languageInfo>
+               <sizeInfo>
+			               <size>2000000</size>
+			
+			               <sizeUnit>sentences</sizeUnit>
+</sizeInfo>
+               <annotationInfo>
+                  <annotationType>segmentation</annotationType>
+                  <segmentationLevel>sentence</segmentationLevel>
+</annotationInfo>
+</corpusTextInfo>
+</corpusMediaType>
+</corpusInfo>
+</resourceComponentType>
+</resourceInfo>

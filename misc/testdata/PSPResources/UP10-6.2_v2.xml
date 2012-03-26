@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: UP10-6.2.xml 42662 2011-12-01 14:33:59Z martha $ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Finnish TreeBank Grammar Definition Corpus</resourceName>
+      <description>The example sentences from Iso suomen kielioppi [Large Grammar of Finnish], manually annotated with dependency-syntactic descriptions. The Grammar Definition Corpus is a model for further automatic analysis of Finnish.</description>
+      <resourceShortName>FTB1</resourceShortName>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability>
+      <licenceInfo>
+         <licence>CC_BY</licence>
+         <restrictionsOfUse>attribution</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+      </licenceInfo>
+      <iprHolder>
+         <organizationInfo>
+	           <organizationName>University of Helsinki</organizationName>
+	           <!-- organizationShortName></organizationShortName -->
+	<communicationInfo>
+               <email>atro.voutilainen@helsinki.fi</email>
+            </communicationInfo>
+         </organizationInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Voutilainen</surname>
+      <givenName>Atro</givenName>
+      <communicationInfo>
+         <email>atro.voutilainen@helsinki.fi</email>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-17</metadataCreationDate>
+      <metadataCreator>
+         <surname>Piitulainen</surname>
+         <givenName>Jussi</givenName>
+         <communicationInfo>
+            <email>jpiitula@ling.helsinki.fi</email>
+         </communicationInfo>
+         <affiliation>
+	           <organizationName>University of Helsinki</organizationName>
+	           <communicationInfo>
+               <email>jpiitula@ling.helsinki.fi</email>
+            </communicationInfo>
+         </affiliation>
+      </metadataCreator>
+   </metadataInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+      
+                  <languageId>fin</languageId>
+                  <languageName>Finnish</languageName>
+               </languageInfo>
+                  <modalityInfo>
+                     <modalityType>writtenLanguage</modalityType>
+                  </modalityInfo>
+               <sizeInfo>
+                  <size>160000</size>
+      
+                  <sizeUnit>tokens</sizeUnit>
+               </sizeInfo>
+               <sizeInfo>
+                  <size>19000</size>
+      
+                  <sizeUnit>sentences</sizeUnit>
+               </sizeInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

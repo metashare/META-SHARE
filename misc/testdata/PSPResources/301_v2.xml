@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Croatian National Corpus</resourceName>
+      <description>
+The Croatian National Corpus (HNK) is a representative corpus of contemporary Croatian standard language written texts published since 1990. The corpus is automatically lemmatised and MSD tagged. The documents are annotated with their genre, type and other information. The whole corpus is composed of faction, fiction and mixed texts. This is a pseudocorpus, only the query interface using Bonito client is available, while the original texts cannot be distributed for copyright reasons. Bonito client gives opportunities for issue complex queries due to elaborated query language resulting not only in concordances, but also in word-lists, collocations and other types of distributional data etc. of tokens, lemmas and/or MSDs
+</description>
+      <resourceShortName>HNK</resourceShortName>
+      <url>http://hnk.ffzg.hr/</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+</metaShareId>
+      <identifier>301</identifier>
+</identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>proprietary</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
+         <executionLocation>http://hnk2.ffzg.hr</executionLocation>
+         <distributionRightsHolder>
+				        <organizationInfo>
+					          <organizationName>University of Zagreb, Faculty of Humanities and Social Sciences, Department/Institute of Linguistics</organizationName>
+					          <communicationInfo>
+                  <email>zzl@ffzg.hr</email>
+                  <url>http://hnk.ffzg.hr</url>
+                  <address>Ivana Lučića 3</address>
+                  <zipCode>10000</zipCode>
+                  <city>Zagreb</city>
+                  <country>Croatia</country>
+                  <telephoneNumber>+385 1 6120 066</telephoneNumber>
+                  <faxNumber>+385 1 6156 879</faxNumber>
+</communicationInfo>
+</organizationInfo>
+</distributionRightsHolder>
+</licenceInfo>
+      <iprHolder>
+			      <organizationInfo>
+				        <organizationName>University of Zagreb, Faculty of Humanities and Social Sciences</organizationName>
+				        <organizationShortName>FFZG</organizationShortName>
+				        <departmentName>Department/Institute of Linguistics</departmentName>
+				        <communicationInfo>
+               <email>zzl@ffzg.hr</email>
+               <url>http://hnk.ffzg.hr/</url>
+               <address>Ivana Lučića 3</address>
+               <zipCode>10000</zipCode>
+               <city>Zagreb</city>
+               <country>Croatia</country>
+               <telephoneNumber>+385 1 6120 066</telephoneNumber>
+               <faxNumber>+385 1 6156 879</faxNumber>
+</communicationInfo>
+</organizationInfo>
+</iprHolder>
+</distributionInfo>
+   <contactPerson>
+      <surname>Tadić</surname>
+      <givenName>Marko</givenName>
+      <communicationInfo>
+         <email>marko.tadic@ffzg.hr</email>
+         <url>http://hnk.ffzg.hr/mt</url>
+         <address>Ivana Lučića 3</address>
+         <zipCode>10000</zipCode>
+         <city>Zagreb</city>
+         <country>Croatia</country>
+         <telephoneNumber>+385 1 6120 066</telephoneNumber>
+         <faxNumber>+385 1 6156 879</faxNumber>
+</communicationInfo>
+      <position>Head of the Chair for Algebraic and Computational Linguistics</position>
+      <affiliation>
+				     <organizationName>University of Zagreb, Faculty of Humanities and Social Sciences, Department/Institute of Linguistics</organizationName>
+				     <communicationInfo>
+            <email>zzl@ffzg.hr</email>
+            <url>http://hnk.ffzg.hr</url>
+            <address>Ivana Lučića 3</address>
+            <zipCode>10000</zipCode>
+            <city>Zagreb</city>
+            <country>Croatia</country>
+            <telephoneNumber>+385 1 6120 066</telephoneNumber>
+            <faxNumber>+385 1 6156 879</faxNumber>
+</communicationInfo>
+</affiliation>
+</contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-26</metadataCreationDate>
+      <metadataCreator>
+         <surname>Tadić</surname>
+         <givenName>Marko</givenName>
+         <communicationInfo>
+            <email>marko.tadic@ffzg.hr</email>
+            <address>Ivana Lučića 3</address>
+            <zipCode>10000</zipCode>
+            <city>Zagreb</city>
+            <country>Croatia</country>
+            <telephoneNumber>+385 1 6120 066</telephoneNumber>
+            <faxNumber>+385 1 6156 879</faxNumber>
+</communicationInfo>
+         <position>Head of the Chair for Algebraic and Computational Linguistics</position>
+         <affiliation>
+					       <organizationName>University of Zagreb, Faculty of Humanities and Social Sciences, Department/Institute of Linguistics</organizationName>
+					       <communicationInfo>
+               <email>zzl@ffzg.hr</email>
+               <url>http://hnk.ffzg.hr</url>
+               <address>Ivana Lučića 3</address>
+               <zipCode>10000</zipCode>
+               <city>Zagreb</city>
+               <country>Croatia</country>
+               <telephoneNumber>+385 1 6120 066</telephoneNumber>
+               <faxNumber>+385 1 6156 879</faxNumber>
+</communicationInfo>
+</affiliation>
+</metadataCreator>
+      <metadataLanguageId>en</metadataLanguageId>
+      <metadataLastDateUpdated>2011-11-27</metadataLastDateUpdated>
+</metadataInfo>
+   <versionInfo>
+		    <version>2.5.1</version>
+      <lastDateUpdated>2011-09-01</lastDateUpdated>
+		
+</versionInfo>
+   <resourceDocumentationInfo>
+		    <documentation>
+         <documentUnstructured>Marko Tadić. Building the Croatian National Corpus. LREC2002 Proceedings, Las Palmas-Pariz, 2002, Vol. II, 2002, pp 441-446</documentUnstructured>
+</documentation>
+		    <documentation>
+         <documentUnstructured>Marko Tadić. Developing the Croatian National Corpus and Beyond. Grzybek, Peter (ed.) Contributions to the Science of Text and Language. Word Length Studies and Related Issues, Kluwer, Dordrecht 2006, pp 295-300</documentUnstructured>
+</documentation>
+		    <documentation>
+         <documentUnstructured>Marko Tadić. New version of the Croatian National Corpus. Hlaváčková, Dana; Horák, Aleš; Osolsobě, Klara; Rychlý, Pavel (eds.) After Half a Century of Slavonic Natural Language Processing, Masaryk University, Brno, 2009, pp 199-205</documentUnstructured>
+</documentation>
+</resourceDocumentationInfo>
+   <resourceCreationInfo>
+      <resourceCreator>
+			      <organizationInfo>
+				        <organizationName>University of Zagreb, Faculty of Humanities and Social Sciences, Department/Institute of Linguistics</organizationName>
+				        <communicationInfo>
+               <email>zzl@ffzg.hr</email>
+               <url>http://hnk.ffzg.hr</url>
+               <address>Ivana Lučića 3</address>
+               <zipCode>10000</zipCode>
+               <city>Zagreb</city>
+               <country>Croatia</country>
+               <telephoneNumber>+385 1 6120 066</telephoneNumber>
+               <faxNumber>+385 1 6156 879</faxNumber>
+</communicationInfo>
+</organizationInfo>
+</resourceCreator>
+      <fundingProject>
+         <projectName>Central and South-East European Resources</projectName>
+         <projectShortName>CESAR</projectShortName>
+         <url>http://www.cesar-project.net</url>
+         <fundingType>euFunds</fundingType>
+         <fundingType>nationalFunds</fundingType>
+         <funder>European Commission (50%)</funder>
+         <funder>University of Zagreb, Faculty of Humanities and Social Sciences (50%)</funder>
+         <projectStartDate>2011-02-01</projectStartDate>
+         <projectEndDate>2013-01-31</projectEndDate>
+</fundingProject>
+      <creationStartDate>1998-12-01</creationStartDate>
+</resourceCreationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+               <languageInfo>
+			
+			               <languageId>hr</languageId>
+			               <languageName>Croatian</languageName>
+			               <languageScript>latin</languageScript>
+</languageInfo>
+               <sizeInfo>
+			               <size>101000000</size>
+			
+			               <sizeUnit>tokens</sizeUnit>
+</sizeInfo>
+               <characterEncodingInfo>
+			               <characterEncoding>MacDingbat</characterEncoding>
+</characterEncodingInfo>
+               <annotationInfo>
+                  <annotationType>segmentation</annotationType>
+                  <segmentationLevel>paragraph</segmentationLevel>
+</annotationInfo>
+               <annotationInfo>
+                  <annotationType>segmentation</annotationType>
+                  <segmentationLevel>sentence</segmentationLevel>
+</annotationInfo>
+               <annotationInfo>
+                  <annotationType>segmentation</annotationType>
+                  <segmentationLevel>word</segmentationLevel>
+</annotationInfo>
+               <annotationInfo>
+                  <annotationType>lemmatization</annotationType>
+                  <segmentationLevel>word</segmentationLevel>
+</annotationInfo>
+               <annotationInfo>
+                  <annotationType>morphosyntacticAnnotation-bPosTagging</annotationType>
+                  <segmentationLevel>word</segmentationLevel>
+</annotationInfo>
+</corpusTextInfo>
+</corpusMediaType>
+</corpusInfo>
+</resourceComponentType>
+</resourceInfo>

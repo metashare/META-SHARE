@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: METANORD-L16.xml 42662 2011-12-01 14:33:59Z martha $ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Modern Lithuanian Dictionary</resourceName>
+      <description>Modern Lithuanian Dictionary is a universal one-volume explanatory normative work of standart language intended for the wide circle of readers. It contains a huge amount of modern lithuanian words, some regional dialectal and more widely used spoken language words. Moreover, it also contains words from past and contemporary fiction, especially classical papers, which are necessary for the studying youth to cultivate their language, to reflect various language styles, often suitable for specific new concept expression.</description>
+      <resourceShortName>MLD</resourceShortName>
+      <url>http://www.lki.lt/dlkz/</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>CLARIN_ACA-NC</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>webExecutable</distributionAccessMedium>
+      </licenceInfo>
+      <iprHolder>
+         <organizationInfo>
+	           <organizationName>Institute of the Lithuanian Language</organizationName>
+	           <organizationShortName>LKI</organizationShortName>
+	           <communicationInfo>
+               <email>lki@lki.lt</email>
+            </communicationInfo>
+         </organizationInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Gaidienė</surname>
+      <givenName>Anželika</givenName>
+      <communicationInfo>
+         <email>anzelika.gaidiene@gmail.com</email>
+      </communicationInfo>
+      <position>Junior Research Fellow</position>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-12-31</metadataCreationDate>
+   </metadataInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+      
+                  <languageId>lit</languageId>
+                  <languageName>Lithuanian</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>50000</size>
+      
+                  <sizeUnit>entries</sizeUnit>
+               </sizeInfo>
+               <sizeInfo>
+                  <size>80000</size>
+      
+                  <sizeUnit>words</sizeUnit>
+               </sizeInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>
