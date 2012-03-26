@@ -513,6 +513,22 @@ a.removableFacet:before {
     vertical-align: top;
 }
 
+#licence_sel_form > ul {
+    list-style:none outside;
+}
+
+#licence_sel_form > ul > li {
+    margin: .5em 0;
+}
+
+#licence_sel_form > ul > li > div + div {
+    margin-left: 2em;
+}
+
+#licence_sel_form > ul > li > div + div p, #licence_sel_form > ul > li > div + div ul {
+    margin: 0;
+}
+
 
 a.sexybutton{
 	text-align: center;
