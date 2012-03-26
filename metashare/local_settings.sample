@@ -49,6 +49,10 @@ DATABASES = {
         'NAME': '',                      # user name of the database user, or
                                          # path to file if using sqlite3, e.g.
                                          # '{0}/testing.db'.format(ROOT_PATH)
+        'TEST_NAME': '',                 # user name of the test database user, or
+                                         # path to file if using sqlite3, e.g.
+                                         # '{0}/testing2.db'.format(ROOT_PATH)
+                                         # mandatory when using Selenium tests
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to 'localhost' for localhost.
@@ -94,3 +98,7 @@ STATS_SERVER_URL = "http://metastats.fbk.eu/"
 
 # The location of the xdiff tool to compare XML files.
 XDIFF_LOCATION = "{0}/../misc/tools/xdiff-src/xdiff".format(ROOT_PATH)
+
+# The web browser to use for the Selenium tests; possible values are:
+# Firefox, Ie, Opera, Chrome
+SELENIUM_DRIVER = 'Firefox'
