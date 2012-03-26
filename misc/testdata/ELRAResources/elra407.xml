@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">French-English Lexicon (LanTmark)</resourceName>
-<resourceName lang="French">Lexique français-anglais (LanTmark)</resourceName>
-<description lang="English">General vocabulary for transferEntries: 39,453Format: ASCII format with ISO 8859-1 character set. A lexicon file contains entries with feature-value pairs on each line and separators between entries.Medium: Floppy Disk, QIC 150 MB Cartridge Tape The French-English LanTmark lexicon is divided into the following lexical categories: nouns (about 21,000), verbs (about 9,000), adjectives (about 3,000), adverbs (about 1,000).Each entry contains adomain information, source language disambiguation, features, and target language actions.</description>
-<description lang="French">Vocabulaire général pour le transfert.Entrées : 39 453 Format: ASCIISupport : disquette, cartouche QIC 150 MBCe lexique anglais-français est réparti selon les catégories lexicales suivantes : noms (env. 21 000), verbes (env. 9 000), adjectifs (env. 3 000), adverbes (env. 1 000).Chaque entrée contient une information sur le domaine, désambiguisation sur la langue source, des traits, des actions sur la langue cible.</description>
+<resourceName lang="English">TC-STAR female baseline voice: Laura</resourceName>
+<resourceName lang="French">Voix de femme de référence TC-STAR: Laura</resourceName>
+<description lang="English">Laura was created within the scope of the TC-STAR project (IST- FP6-506738) funded by the European Commission.Laura contains the recordings of one female English (British) speaker recorded in a noise-reduced room through a headset microphone. It consists of the recordings and annotations of read text material of approximately 10 hours of speech for baseline applications (Text-to-Speech systems). This database is distributed on 9 DVDs. The database complies with the common specifications created in the TC-STAR project.The annotation of the database includes manual orthographic transcriptions, the automatic segmentation into phonemes and automatic generation of pitch marks. A certain percentage of phonetic segments and pitch marks has been manually checked. A pronunciation lexicon in SAMPA with POS, lemma and phonetic transcription of all the words prompted and spoken is also provided.Speech samples are stored as sequences of 24-bit 96 kHz with the least significant byte first (“lohi” or Intel format) as (signed) integers. Each prompted utterance is stored in a separate file. Each signal file is accompanied by an ASCII SAM label file which contains the relevant descriptive information.The TC-STAR male baseline voice: Ian is also available via ELRA under reference ELRA-S0303.</description>
+<description lang="French">Laura a été créée dans le cadre du projet TC-STAR (IST- FP6-506738) financé par la Commission européenne.Laura comprend les enregistrements d’un locuteur anglais (britannique) femme enregistré par micro-casque dans une salle à bruit réduit. Elle consiste en des enregistrements et annotations de matériel textuel lu pour environ 10 heures de parole pour des applications de référence (systèmes texte-parole). Cette base de données est distribuée sur 9 DVD. Elle respecte les spécifications communes créées dans le projet TC-STAR.L’annotation de la base de données inclut les transcriptions orthographiques réalisées manuellement, la segmentation automatique en phonèmes et la génération automatiques des marques de pitch. Un certain pourcentage de segments phonétiques et de marques de pitch a été vérifié manuellement. Un lexique de prononciation en SAMPA avec partie du discours, lemmes et transcription phonétique de tous les mots lus et prononcés est également fourni.Les fichiers de parole sont stockés en séquences d’échantillons de 24-bit 96 kHz avec l’octet le moins significatif en premier (“lohi” ou format Intel) en entiers (signés).  Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM.La voix d’homme de référence TC-STAR: Ian est également disponible via ELRA sous la référence ELRA-S0303.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=106</url>
-<identifier>ELRA-M0007</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1115</url>
+<identifier>ELRA-S0302</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,51 +29,63 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-05-30</lastDateUpdated>
+<lastDateUpdated>2009-09-21</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 63124.80€</price>
-<price>Academic org. ELRA Non Member: 7890.60€</price>
-<price>Commercial org. ELRA Member: 37874.90€</price>
-<price>Academic org. ELRA Member: 4734.40€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-01-23</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 7000.00€</price>
+<price>Academic org. ELRA Non Member: 5500.00€</price>
+<price>Commercial org. ELRA Member: 5500.00€</price>
+<price>Academic org. ELRA Member: 4500.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2009-09-21</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 63124.80€</price>
-<price>Academic org. ELRA Non Member: 63124.80€</price>
-<price>Commercial org. ELRA Member: 37874.90€</price>
-<price>Academic org. ELRA Member: 37874.90€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-01-23</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 7000.00€</price>
+<price>Academic org. ELRA Non Member: 7000.00€</price>
+<price>Commercial org. ELRA Member: 5500.00€</price>
+<price>Academic org. ELRA Member: 5500.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2009-09-21</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<validationInfo>
+<validated>True</validated>
+<validationModeDetails>TC-STAR </validationModeDetails>
+</validationInfo>
+<usageInfo>
+<actualUseInfo>
+<actualUse>nlpApplications</actualUse>
+<useNLPSpecific>speechSynthesis</useNLPSpecific>
+</actualUseInfo>
+</usageInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>TC-STAR</projectName>
+<fundingType>euFunds</fundingType>
+</fundingProject>
+<creationEndDate>2007-01-01</creationEndDate>
+</resourceCreationInfo>
 <resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
-<mediaType>text</mediaType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
-</languageInfo>
-<languageInfo>
 <languageId>eng</languageId>
 <languageName>English</languageName>
 </languageInfo>
-</lexicalConceptualResourceTextInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
 </resourceComponentType>
 </resourceInfo>

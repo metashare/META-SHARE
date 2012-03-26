@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">BREF-120 - A large corpus of French read speech</resourceName>
-<resourceName lang="French">BREF-120 - Un large corpus oral de textes lus</resourceName>
-<description lang="English">BREF-120 resulted from the efforts of LIMSI-CNRS researchers under sponsorship from the GDR-PRC CHM, the ACCT (OFIL), the EEC (ESPRIT Polyglot project), and the Aupelf-Uref.A sub-set of BREF-120 is BREF-80 (ELRA-S0006), which consists of about 50-60 sentences per speaker and recordings conducted only with a Shure microphone. In BREF-80, the sentences were chosen to cover as many prompts as possible.The BREF-120 corpus was designed to provide read speech data for the development and evaluation of continuous speech recognition systems (both speaker-dependent and speaker-independent), and to provide a large corpus of continuous speech for the acquisition of acoustic-phonetic knowledge of spoken French.BREF-120 is a large read-speech corpus containing over 100 hours of speech material, from 120 speakers (55 males and 65 females). The text materials were selected verbatim from extracts of the French newspaper "Le Monde". Each of 80 speakers read approximately 10,000 words (about 650 sentences) of text, and another 40 speakers each read about half that amount. Simultaneous recordings were made in a sound-proof room using a Shure SM10 microphone and a Crown PCC160 microphone and were monitored to assure their contents. The speech signal was sampled at 16 kHz and digitised with 16 bits. The BREF-120 corpus contains 28 CDs; numbers 1-13 contain the Shure recorded data and numbers 14-28 contain the Crown recorded data</description>
-<description lang="French">BREF-120 est le résultat d'efforts de chercheurs du LIMSI, laboratoire propre du CNRS, et a bénéficié d'un soutien financier du GDR-PRC CHM, de l'ACCT (OFIL), de la CEE (projet ESPRIT Polyglot) et de l'Aupelf-Uref.On trouve comme sous-corpus de BREF-120 la base de données BREF-80 (ELRA-S0006), qui comprend environ 50 à 60 phrases par locuteur et des enregistrements réalisés uniquement avec un microphone Shure. Pour BREF-80, les phrases ont été choisies afin de couvrir le plus d'énoncés possibles.Le corpus BREF-120 a été conçu pour disposer de suffisamment de parole pour développer et évaluer des systèmes de reconnaissance de parole continue (dépendants et indépendants du locuteur), mais aussi pour fournir un large corpus de parole continue pour l'acquisition de connaissances acoustico-phonétiques sur le français.BREF-120 est un large corpus oral de textes lus, contenant plus de 100 heures de parole produites par 120 locuteurs (65 femmes et 55 hommes). Tous les textes enregistrés ont été extraits du journal "Le Monde". 80 locuteurs ont lu chacun environ 10 000 mots (soit environ 650 phrases), et 40 autres locuteurs ont lu environ la moitié. Les enregistrements, effectués simultanément avec un microphone Shure SM10 et un microphone Crown PCC160, ont été réalisés dans une pièce insonorisée et vérifiés en temps réel et sur place pour s'assurer du contenu et éviter des erreurs de prononciations. Les deux canaux ont été échantillonnés à 16 kHz et numérisés sur 16 bits. Le corpus BREF-120 est composé de 28 CD ; les numéros 1 à 13 contiennent les données Shure et les numéros 14 à 28 contiennent les données Crown.CARACTERISTIQUES :Type de ressource : Enregistrements de parole (acoustique)Mode de parole : LuConditions d'enregistrement : Salle insonoriséeType de microphone/téléphone : 2 microphones : Shure SM10 et Crown PCC160Langue : FrançaisDomaine/Source : Phrases extraites du quotidien français " Le Monde "Taille (en heure, vocabulaire) : 100 heures (environ 650 000 phrases)Sexe et nombre de locuteurs : 120 locuteurs (65 femmes et 55 hommes)Annotation linguistique : OrthographiqueFormat de fichier : 16 bitsStandard utilisé : NISTFréquence d'échantillonnage (kHz) : 16 kHzMode de distribution : 28 CD-ROM ; les numéros 1 à 13 contiennent les données Shure et les numéros 14 à 28 contiennent les données CrownRessources connexes : BDLEX (ELRA-S0003 et S0004), BREF-80 (ELRA-S0006), BREF-Polyglot (ELRA-S0007).</description>
+<resourceName lang="English">TUNA Corpus</resourceName>
+<resourceName lang="French">Corpus TUNA</resourceName>
+<description lang="English">TUNA (Towards a UNified Algorithm for the generation of referring expressions) is a research project funded by the UK's Engineering and Physical Sciences Research Council (EPSRC).The TUNA Corpus of Referring Expressions is built with the contributions from 50 native or fluent speakers of English and it contains about 2000 descriptions (referring expressions).Participants described objects (targets) in visual domains by typing and submitting referring expressions that distingued them from other objects that were shown simultaneously (distractors): Each experimental trial consisted of one (singular) or two (plural) targets, plus six distractors. Each description is richly annotated with semantic information, including information about all the other objects that the human authors saw.The TUNA Corpus was annotated with the main objective to evaluate the output of algorithms for the Generation of Referring Expressions (GRE) with Natural Language Generation, with particular regard for the semantic content of the expressions.</description>
+<description lang="French">TUNA (“Towards a UNified Algorithm” pour la génération d’expressions référentes) est un projet de recherche financé par le Conseil de la recherche pour les sciences de l’ingénierie et de la physique au Royaume-Uni (UK's EPSRC -Engineering and Physical Sciences Research Council).Le corpus d’expressions référentes TUNA est construit à partir de contributions de 50 locuteurs de l’anglais natif ou courant et comprend environ 2000 descriptions (expressions référentes).Les participants ont décrit des objets (cibles) dans des domaines visuels en tapant au clavier des expressions référentes qui se distinguaient d’autres objets montrés simultanément (distracteurs) : chaque expérience se composait d’une (singulier) ou deux (pluriel) cibles, plus six distracteurs. Chaque description est annotée avec des informations sémantiques riches, incluant des informations sur tous les objets que voyaient les auteurs humains.Le corpus TUNA a été annoté avec comme objectif principal d’évaluer les sorties d’algorithmes pour la génération d’expressions référentes (GRE -Generation of Referring Expressions) dans le domaine de la génération du langage naturel, avec un intérêt particulier pour le contenu sémantique des expressions.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=537</url>
-<identifier>ELRA-S0067</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1074</url>
+<identifier>ELRA-W0048</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,57 +29,59 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-02-22</lastDateUpdated>
+<lastDateUpdated>2008-09-30</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 15000.00€</price>
-<price>Academic org. ELRA Non Member: 4000.00€</price>
-<price>Commercial org. ELRA Member: 10000.00€</price>
-<price>Academic org. ELRA Member: 2500.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1999-03-05</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 45.00€</price>
+<price>Academic org. ELRA Non Member: 45.00€</price>
+<price>Commercial org. ELRA Member: 45.00€</price>
+<price>Academic org. ELRA Member: 45.00€</price>
+<availabilityStartDate>2008-09-30</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 15000.00€</price>
-<price>Academic org. ELRA Non Member: 15000.00€</price>
-<price>Commercial org. ELRA Member: 10000.00€</price>
-<price>Academic org. ELRA Member: 10000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1999-03-05</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 45.00€</price>
+<price>Academic org. ELRA Non Member: 45.00€</price>
+<price>Commercial org. ELRA Member: 45.00€</price>
+<price>Academic org. ELRA Member: 45.00€</price>
+<availabilityStartDate>2008-09-30</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<usageInfo>
-<actualUseInfo>
-<actualUse>nlpApplications</actualUse>
-<useNLPSpecific>speechRecognition</useNLPSpecific>
-</actualUseInfo>
-</usageInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>TUNA (Towards a UNified Algorithm)</projectName>
+<fundingType>nationalFunds</fundingType>
+</fundingProject>
+</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
 <corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<corpusTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
+<languageId>eng</languageId>
+<languageName>English</languageName>
 </languageInfo>
-<audioSizeInfo>
-<sizeInfo>
-<size>100</size>
-<sizeUnit>hours</sizeUnit>
-</sizeInfo>
-</audioSizeInfo>
-</corpusAudioInfo>
+</corpusTextInfo>
+<corpusVideoInfo>
+<mediaType>video</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>eng</languageId>
+<languageName>English</languageName>
+</languageInfo>
+</corpusVideoInfo>
 </corpusMediaType>
 </corpusInfo>
 </resourceComponentType>

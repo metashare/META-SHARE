@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: UP10_7.5.xml 42662 2011-12-01 14:33:59Z martha $ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Pronunciation dictionary for Icelandic</resourceName>
+      <description>List of common word-forms in Icelandic with IPA and SAMPA transcription</description>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability>
+      <licenceInfo>
+         <licence>CLARIN_PUB</licence>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+      </licenceInfo>
+      <iprHolder>
+         <organizationInfo>
+	           <organizationName>University of Iceland</organizationName>
+	           <organizationShortName>HI</organizationShortName>
+	           <departmentName>School of Humanities</departmentName>
+	           <communicationInfo>
+               <email>hug@hi.is</email>
+            </communicationInfo>
+         </organizationInfo>                                                                                                  
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Rögnvaldsson</surname>
+      <givenName>Eiríkur</givenName>
+      <communicationInfo>
+         <email>eirikur@hi.is</email>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-29</metadataCreationDate>
+      <metadataCreator>
+         <surname>Helgadóttir</surname>
+         <givenName>Sigrún</givenName>
+         <communicationInfo>
+            <email>sigruhel@hi.is</email>
+         </communicationInfo>
+         <affiliation>
+	           <organizationName>The Arni Magnusson Institute for Icelandic Studies</organizationName>
+	           <communicationInfo>
+               <email>ordabok@hi.is</email>
+            </communicationInfo>
+						   </affiliation>
+      </metadataCreator>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+  </versionInfo>
+   <usageInfo>
+      <foreseenUseInfo>
+         <foreseenUse>nlpApplications</foreseenUse>
+      
+         <useNLPSpecific>speechRecognition</useNLPSpecific>
+      </foreseenUseInfo>
+      <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+         <useNLPSpecific>speechRecognition</useNLPSpecific>
+      </actualUseInfo>
+  </usageInfo>
+   <resourceDocumentationInfo>
+      <documentation>
+         <documentUnstructured>Rögnvaldsson, Eiríkur (2004). The Icelandic Speech Recognition Project Hjal. In Holmboe, Henrik (Ed.), Nordisk Sprogteknologi. Årbog 2003. Museum Tusculanums Forlag, University of Copenhagen, pp. 239-242.</documentUnstructured>
+      </documentation>
+  </resourceDocumentationInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>wordList</lexicalConceptualResourceType>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+      
+                  <languageId>isl</languageId>
+                  <languageName>Icelandic</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>56000</size>
+      
+                  <sizeUnit>words</sizeUnit>
+               </sizeInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>

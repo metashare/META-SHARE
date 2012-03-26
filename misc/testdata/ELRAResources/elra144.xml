@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">VERBMOBIL II - VM CD 44.1 - VM44.1 (BAS edition)</resourceName>
-<resourceName lang="French">VERBMOBIL II - VM CD 44.1 - VM44.1 (édition BAS)</resourceName>
-<description lang="English">Verbmobil is a long-term project of the German Federal Ministry of Education, Science, Research and Technology (BMBF, Projekträger DLR). Its aim is to give Germany an international top position in language technology and its economical application in the next millenium by cooperation and concentration of as many as possible specialists from industry and science. The long-sighted aim is the development of a mobile translation system for the translation of spontaneous speech in face-to-face situations.The following resources are spontaneous speech databases recorded in a dialogue task (appointment scheduling) .VERBMOBIL II - VM CD 44.1 - VM44.1 (BAS edition) consists of 1 CD-ROM with 19 spontaneous dialogues (19 close mic, 0 room mic, 0 phone line (fixed network, GSM) recordings), 920 turns, transliteration (Verbmobil II Format) in Japanese.</description>
-<description lang="French">Verbmobil est un projet du Ministère fédéral allemand de l'Education, des Sciences, de la Recherche et des Technologies (BMBF, Projekträger DLR), qui vise à placer l'Allemagne en position de force dans le domaine de l'ingénierie de la langue. Son objectif , à long terme, est de développer un système de traduction vocale automatique, pour la traduction de conversations spontanées. Ces ressources sont des enregistrements de conversation pour la prise de rendez-vous. Le corpus allemand comprend 13 910 occurrences (échanges). L'édition de BAS de la partie allemande est entièrement étiquetée et segmentée en unités phonémiques/phonétiques (alphabet SAM-PA) par le système MAUS et partiellement segmentée de manière manuelle.VERBMOBIL II - VM CD 44.1 - VM44.1 (édition BAS) contient 1 CD-ROM composé de 19 dialogues spontanés (19 dialogues enregistrés avec un micro-casque très près de la bouche, 0 avec un microphone situé dans la pièce, 0 à travers le réseau téléphonique (GSM)), 920 échanges, transcription (au format Verbmobil II) en japonais.</description>
+<resourceName lang="English">Danish SpeechDat(M) database - DB2</resourceName>
+<resourceName lang="French">Base de données SpeechDat(M) du danois DB2</resourceName>
+<description lang="English">The (polyphone-like) Danish SpeechDat(M) database contains the recordings of 1,523 Danish speakers from 11 regions.Speech samples are stored as sequences of 8 bit 8 kHz A-law. Each prompted utterance is stored in a separate file, and the associated label files are stored in SAM file format.Each signal file is accompanied by an ASCII SAM label file which contains the relevant descriptive information. It was validated by SPEX (the Netherlands) to assess its compliance with the SpeechDat format and content specifications.The lexicon is presented in a TAB delimited ASCII file containing an alphabetically ordered list of distinct lexical items occurring in the database. Each entry contains a frequency count and corresponding pronunciation information.Example:WORD 	FREQUENCY 	PHONEMIC TRANSCRIPTIONSåbnede 	104 	O b n @ D | O b n @ D @adresseangivelse 	97 	a d R a s @ a n g i: u l s @The complete Danish SpeechDat database is partitioned into 5 CD-ROMs. The first three CD-ROMs contain the application oriented sub-set. The last two CD-ROMs contain the phonetically rich sentences.Each speaker uttered the following items:    * 5 semi-spontaneous application word phrases    * 12 connected digit strings with 8 digits    * 24 natural numbers (3-4 digits)    * 27 application words    * 3 dates, including a spontaneous one e.g. birthday    * 3 spelled words    * 2 money amounts, including a small one, and a large one    * 1 spontaneous city name    * 3 spontaneous yes/no questions    * 22-25 sentences    * 2 time phrases, including a time phrase and a spontaneous time of dayThe 5 age groups are the following: under 16, 16-30, 31-45, 46-60, over 60. 78% of the speakers are between 16 and 60 years old.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
+<description lang="French">La base de données SpeechDat(M) du danois est une base de données orale collectée dans le cadre du projet SpeechDat(M) (similaire aux autres bases de données Polyphone) et enregistrée par 1 523 locuteurs.Les signaux de parole sont enregistrés en loi-A (8 bits, 8 kHz). Les fichiers sont au format SAM.Un fichier ASCII séparé présente une liste d'informations concernant chaque locuteur : code du locuteur, sexe, âge, région, etc.Le lexique est présenté dans un autre fichier ASCII délimité par des tabulations et contenant une liste alphabétique des éléments lexicaux distincts apparaissant dans la base. Chaque entrée contient la fréquence et les prononciations correspondantes.Exemple:MOT                       FREQUENCE          TRANSCRIPTIONS PHONEMIQUESåbnede                      104                    O b n @ D | O b n @ D @adresseangivelse        97                      a d R a s @ a n g i: u l s @La base complète est composée de 5 CD-ROM. Les trois premiers CD-ROM contiennent les mots de commandes, orientés vers des applications. Les deux derniers CD-ROM contiennent les phrases phonétiquement riches.Les éléments sont :    * 5 mots de commande inclus dans des phrases (semi spontané),    * 12 séquences de 8 chiffres connectés,    * 24 nombres entiers naturels (3-4 chiffres),    * 27 mots d'application,    * 3 dates dont une spontanée (anniversaire),    * 3 mots épelés,    * 2 montants (argent) dont une petite somme et une grosse,    * nom de ville (spontané),    * 3 questions oui/non (spontané),    * 22-25 phrases,    * une phrase comportant une notion de temps et une l'heure de la journée (spontané).La base compte 1 523 locuteurs de 11 régions linguistiques du Danemark et de 5 groupes d'âge différents (moins de 16 ans, 16-30 ans, 31-45 ans, 46-60 ans, plus de 60 ans). 78% d'entre eux ont entre 16 et 60 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=612</url>
-<identifier>ELRA-S0034_52</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=170</url>
+<identifier>ELRA-S0041</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,35 +29,35 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-04-21</lastDateUpdated>
+<lastDateUpdated>2007-08-28</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 255.65€</price>
-<price>Academic org. ELRA Non Member: 255.65€</price>
-<price>Commercial org. ELRA Member: 127.82€</price>
-<price>Academic org. ELRA Member: 127.82€</price>
+<price>Commercial org. ELRA Non Member: 20000.00€</price>
+<price>Academic org. ELRA Non Member: 10000.00€</price>
+<price>Commercial org. ELRA Member: 12000.00€</price>
+<price>Academic org. ELRA Member: 6000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1996-09-01</availabilityStartDate>
+<availabilityStartDate>1997-06-02</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 255.65€</price>
-<price>Academic org. ELRA Non Member: 255.65€</price>
-<price>Commercial org. ELRA Member: 127.82€</price>
-<price>Academic org. ELRA Member: 127.82€</price>
+<price>Commercial org. ELRA Non Member: 20000.00€</price>
+<price>Academic org. ELRA Non Member: 20000.00€</price>
+<price>Commercial org. ELRA Member: 12000.00€</price>
+<price>Academic org. ELRA Member: 12000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1996-09-01</availabilityStartDate>
+<availabilityStartDate>1997-06-02</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceCreationInfo>
 <fundingProject>
-<projectName>Verbmobil II</projectName>
-<fundingType>other</fundingType>
+<projectName>SpeechDat(M)</projectName>
+<fundingType>euFunds</fundingType>
 </fundingProject>
 </resourceCreationInfo>
 <resourceComponentType>
@@ -70,8 +70,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>jpn</languageId>
-<languageName>Japanese</languageName>
+<languageId>dan</languageId>
+<languageName>Danish</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

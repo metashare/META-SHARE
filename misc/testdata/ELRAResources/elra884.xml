@@ -6,7 +6,7 @@
 <description lang="English">The Corpus Resources and Terminology Extraction project (MLAP-93 20) has extended the bilingual annotated English-French International Telecommunications Union corpus to include Spanish, and has also debugged the existing corpus. The offer consists of a multi-lingual aligned corpus of 1,000,000 tokens per language for English, French and Spanish, with morphosyntactic annotations (human-edited).An extended version of CRATER (ref. ELRA-W0003) is available in   CRATER 2 (ref. ELRA-W0033)</description>
 <description lang="French">Le projet MLAP-93 20 (CRATER: Corpus Resources and Terminology Extraction) a étendu à l'espagnol le corpus bilingue français-anglais (annoté), de l'Union Internationale des Télécommunications (UIT). Divers outils ont été développés pour naviguer dans ce corpus trilingue aligné. L'offre consiste en 3 fois 1 million de mots en anglais, français et espagnol avec des annotations morphosyntaxiques (vérifiées par un opérateur humain).CRATER (W0003) est inclus dans CRATER2 (W0033).</description>
 <resourceShortName>CRATER</resourceShortName>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=84</url>
 <identifier>ELRA-W0003</identifier>
 </identificationInfo>

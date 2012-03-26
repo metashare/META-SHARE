@@ -6,7 +6,7 @@
 <description lang="English">The second edition of LEXin 2:e, a Swedish database used as the basis for a lexicon for immigrants, is now available via ELRA. Produced by Språkdata in Göteborg, Sweden, it consists of approximately 28,000 headwords and 21,000 senses, and contains explicit morphological information for every headword and syntactical information for all verbs and many adjectives. Each sense is illustrated by a paraphrase, as opposed to a formal definition. Derivational forms, phrases and idioms are also included. The format is flexible and can be customised to individual wishes within reasonable limits.</description>
 <description lang="French">La deuxième édition de LEXin 2:e est une base de données suédoise utilisée pour générer un lexique pour les étrangers résidents en Suède. Elle consiste en 28000 entrées principales (mots clés), 21000 signifiants et comporte de façon explicite des informations morphologiques pour chaque entrée. Elle comporte aussi des informations syntaxiques pour tous les verbes et de nombreux adjectifs. Chaque sens est illustré par des paraphrases et non pas par une simple définition formelle. Des formes dérivées, des phrases idiomatiques sont aussi incluses. Enfin, le format est suffisamment flexible pour permettre des adaptations à différents besoins.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=702</url>
 <identifier>ELRA-L0007</identifier>
 </identificationInfo>

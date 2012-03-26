@@ -20,7 +20,6 @@ try:
     import settings # Assumed to be in the same directory.
 
 except ImportError:
-    import sys
     sys.stderr.write("Error: Can't find the file 'settings.py' in the " \
       "directory containing %r. It appears you've customized things.\n" \
       "You'll have to run django-admin.py, passing it your settings " \
@@ -30,4 +29,14 @@ except ImportError:
     sys.exit(1)
 
 if __name__ == "__main__":
+    # MS, 21.03.2012: Add a fail-early verification "hook"
+    fail_early_commands = ('runserver', 'runfcgi')
+    if len(sys.argv) > 1:
+        command = sys.argv[1]
+        if command in fail_early_commands:
+            from django.core.management import setup_environ
+            setup_environ(settings)
+            from metashare.repo2 import verify_at_startup
+            verify_at_startup() # may raise Exception, which we don't want to catch.
+    
     execute_manager(settings)

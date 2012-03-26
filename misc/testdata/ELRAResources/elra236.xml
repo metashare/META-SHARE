@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Danish Speecon Database</resourceName>
-<resourceName lang="French">Base de données Speecon danois</resourceName>
-<description lang="English">The Danish Speecon database comprises the recordings of 550 adult speakers and 50 child speakers who uttered respectively over 290 items and 210 items (read and spontaneous).Prices available upon request. Please contact us.</description>
-<description lang="French">La base de données Speecon danois se compose d’enregistrements de 550 locuteurs adultes et 50 locuteurs enfants qui ont prononcé respectivement plus de 290 et 210 éléments (lus et spontanés).Prix disponibles à la demande. Merci de nous contacter.</description>
+<resourceName lang="English">A "scientific" corpus of modern French  ("La Recherche" magazine) - Complete version</resourceName>
+<resourceName lang="French">Corpus Scientifique du français contemporain (magazine "La Recherche") - Version complète</resourceName>
+<description lang="English">This "scientific" corpus of modern French was produced by the University of Nantes (France) within the European Commission funded project LRsP&amp;P (Language Resources Production &amp; Packaging - LE4-8335).The corpus contains all articles published in La Recherche magazine in 1998, including issues 305 (January) to 315 (December), which amounts to 447,244 tokens and 30,238 types. It is aimed to be used within text analysis and related applications.The texts, provided in XML (Extended Markup Language) format, have been marked-up into the SGML standard (Standard Generalized Markup Language). XML contained a structure where only the constituant parts of the text were coded (title, body, etc.), whereas SGML marking up , richer, goes up to the word level, including the grammatical category and the canonical form for each word. The annotation work is conformant with the TEI (Text Encoding Initiative) international project's guidelines.</description>
+<description lang="French">Le Corpus Scientifique du français contemporain a été réalisé par l'Université de Nantes (France) dans le cadre du projet européen LRsP&amp;P (Language Resources Production &amp; Packaging - Production et mise au format des ressources linguistiques - LE4-8335) soutenu par la Commission Européenne.Le corpus est constitué de tous les articles de la revue La Recherche parus en 1998, dans les numéros 305 (Janvier) à 315 (Décembre), pour un total de 447 244 "tokens" et 30 238 types. Il est destiné à être exploité dans des systèmes d'analyse de textes et des applications connexes.Les textes des articles, fournis au format XML (Extended Markup Language), ont été mis au standard SGML (Standard Generalized Markup Language). Le format XML consistait essentiellement en une structuration du texte selon ses parties constitutives (titre, corps etc.) alors que la structure SGML actuelle du corpus est beaucoup plus riche puis qu'elle descend jusqu'au niveau du mot en apportant, pour chacun d'eux, sa catégorie grammaticale et sa forme canonique. Le travail d'annotation suit les directives du projet international TEI (Text Encoding Initiative).</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1051</url>
-<identifier>ELRA-S0267</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=595</url>
+<identifier>ELRA-W0025_02</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,14 +29,34 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2008-09-30</lastDateUpdated>
+<lastDateUpdated>2007-02-22</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 5000.00€</price>
+<price>Academic org. ELRA Non Member: 500.00€</price>
+<price>Commercial org. ELRA Member: 3000.00€</price>
+<price>Academic org. ELRA Member: 400.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2000-12-15</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 5000.00€</price>
+<price>Academic org. ELRA Non Member: 5000.00€</price>
+<price>Commercial org. ELRA Member: 3000.00€</price>
+<price>Academic org. ELRA Member: 3000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2000-12-15</availabilityStartDate>
+</licenceInfo>
 </distributionInfo>
 <resourceCreationInfo>
 <fundingProject>
-<projectName>Speecon</projectName>
+<projectName>LRsP&amp;P (Language Resources Production &amp; Packaging - LE4-8335)</projectName>
 <fundingType>euFunds</fundingType>
 </fundingProject>
 </resourceCreationInfo>
@@ -44,16 +64,16 @@
 <corpusInfo>
 <resourceType>corpus</resourceType>
 <corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<corpusTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>dan</languageId>
-<languageName>Danish</languageName>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
 </languageInfo>
-</corpusAudioInfo>
+</corpusTextInfo>
 </corpusMediaType>
 </corpusInfo>
 </resourceComponentType>

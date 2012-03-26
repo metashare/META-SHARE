@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Siemens VoiceMail</resourceName>
-<resourceName lang="French">Siemens VoiceMail</resourceName>
-<description lang="English">VoiceMail consists of 17,5 hours of read acoustic speech divided into 9,5 hours of transliterated speech and 8 hours of non-transliterated speech recorded over the digital telephone network (ISDN) with 921 speakers originated from the USA. It contains orthographic transliteration for about 25,000 utterances (of 34,912 utterances in total).Standard in use: headerless, one separate transliteration file comprising all utterances of all speakersSampling rate: 8 kHzSpeakers: 377 males and 544 femalesSize: 17,5 hoursMedium: 2 CD-ROM</description>
-<description lang="French">VoiceMail est une base de données orale qui comprend 17,5 heures d'enregistrement de parole lue dont 9,5 heures de parole transcrite et 8 heures de parole non-transcrite enregistrées à travers le réseau numérique (ISDN) avec 921 locuteurs originaires des Etats-Unis. Elle contient une transcription orthographique pour environ 25000 occurrences (sur 34912 occurrences au total).Standard utilisé : sans en-tête, avec un fichier à part de transcriptions comprenant la totalité des occurrences prononcées par la totalité des locuteursFréquence d'échantillonnage : 8 kHzLocuteurs : 377 hommes et 544 femmesTaille : 17,5 heuresSupport : 2 CD-ROM</description>
+<resourceName lang="English">PAROLE Spanish Lexicon</resourceName>
+<resourceName lang="French">Lexique PAROLE de l'espagnol</resourceName>
+<description lang="English">The PAROLE Spanish lexicon follows standard PAROLE architecture which includes morphological and syntactic layers. It includes the most frequent words found in a 1 million word corpus, coded according to the PAROLE specifications.The lexicon contains about 22,000 morphological units, of which 12,209 are common nouns, 3,367 verbs, 4,996 adjectives. Closed classed categories are fully covered.The information associated with each morphological unit concerns part-of-speech and subtype, inflection paradigm (with morphosyntactic information for the endings organised in about 132 models), possible stems in relation with the relevant endings, linking with syntactic layer. In the syntactic layer, information regarding subcategorisation for verbs and insertion context for nouns is encoded following the PAROLE model.</description>
+<description lang="French">Le lexique PAROLE espagnol suit le standard d'architecture PAROLE qui comprend des indications syntaxiques et morphologiques. Il est composé des mots les plus fréquents extraits d'un corpus d'un million de mots, codés selon les spécifications PAROLE.Le lexique contient environ 22 000 unités morphologiques, dont 12 209 noms communs, 3 367 verbes, 4 996 adjectifs. Il couvre l'intégralité des catégories classées fermées.L'information accompagnant chaque unité morphologique comprend : partie-du-discours et sous-type, paradigme de flexion (ainsi que l'information morphosyntaxique organisée en 132 modèles environ pour les flexions), radicaux possibles relatifs aux flexions, lien avec l'information syntaxique. Pour la partie syntaxique, l'information concernant la sous-catégorisation des verbes et le contexte d'insertion des noms est codée d'après le modèle PAROLE.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=718</url>
-<identifier>ELRA-S0038</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=587</url>
+<identifier>ELRA-L0042</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,46 +29,61 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-05-02</lastDateUpdated>
+<lastDateUpdated>2005-02-24</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 11000.00€</price>
-<price>Commercial org. ELRA Member: 11000.00€</price>
-<price>Academic org. ELRA Non Member: 15000.00€</price>
-<price>Commercial org. ELRA Non Member: 15000.00€</price>
+<price>Commercial org. ELRA Member: 9000.00€</price>
+<price>Academic org. ELRA Member: 3400.00€</price>
+<price>Academic org. ELRA Non Member: 5100.00€</price>
+<price>Commercial org. ELRA Non Member: 13500.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-05-21</availabilityStartDate>
+<availabilityStartDate>2000-07-24</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 11000.00€</price>
-<price>Commercial org. ELRA Member: 11000.00€</price>
-<price>Academic org. ELRA Non Member: 15000.00€</price>
-<price>Commercial org. ELRA Non Member: 15000.00€</price>
+<price>Commercial org. ELRA Member: 9000.00€</price>
+<price>Academic org. ELRA Member: 9000.00€</price>
+<price>Academic org. ELRA Non Member: 13500.00€</price>
+<price>Commercial org. ELRA Non Member: 13500.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-05-21</availabilityStartDate>
+<availabilityStartDate>2000-07-24</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>LE-PAROLE project (MLAP/LE2-4017)</projectName>
+<fundingType>euFunds</fundingType>
+</fundingProject>
+</resourceCreationInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
+<languageId>spa</languageId>
+<languageName>Spanish</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Castilian</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
 </languageInfo>
-</corpusAudioInfo>
-</corpusMediaType>
-</corpusInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

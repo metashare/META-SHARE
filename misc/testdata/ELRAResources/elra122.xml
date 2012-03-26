@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Telephone Speech Data Collection for Czech</resourceName>
-<resourceName lang="French">Base de données téléphoniques tchèque</resourceName>
-<description lang="English">This database contains speech collected in Czech Republic during summer 1999. This database comprises telephone recordings from 1227 speakers (590 males and 637 females) recorded directly over the fixed telephone network using an ISDN interface. Speech files are stored as sequences of 8bit 8 kHz A-law uncompressed speech samples. Each prompted utterance is stored within a separate file. Each speech file has an accompanying ASCII SAM label file according to the specifications of the SpeechDat project (URL: http://www.speechdat.com).Corpus contents: ? connected digits (prompt sheet number, telephone number, credit card number),? sequences of isolated digits (5 digits),? answers to yes/no questions,? common application words and phrases.The following age distribution has been obtained: 36 speakers are below 16 years old, 537 speakers are between 16 and 30, 306 speakers are between 31 and 45, 259 speakers are between 46 and 60, 88 speakers are over 60, and 1 speaker whose age is unknown.The transcription included in this database is an orthographic, lexical transcription with a few details that represent audible acoustic events (speech and non speech) present in the corresponding waveform files. SpeechDat conventions were used in this database.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
-<description lang="French">Cette base de donnée contient des enregistrements collectés en République Tchèque en été 1999. Cette base de données comprend des enregistrements de 1227 locuteurs (590 hommes et 637 femmes) enregistrés directement à travers le réseau téléphonique fixe, en utilisant une interface ISDN.Les fichiers de parole sont stockés en séquences d'échantillons de 8 bits, 8 kHz, loi-A. Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM, conformément aux spécifications du projet SpeechDat (URL: http://www.speechdat.com).Le corpus contient :    * chiffres connectés (numéro permettant d'identifier la feuille de prompt, numéro de téléphone, numéro de carte de crédit),    * séquences de chiffres isolés (5 chiffres),    * réponses aux questions oui/non,    * mots et expressions de commandes courants.Les classes d'âge sont réparties comme suit : 36 locuteurs de moins de 16 ans, 537 locuteurs entre 16 et 30 ans, 306 locuteurs entre 31 et 45 ans, 259 locuteurs entre 46 et 60 ans, 88 locuteurs de plus de 60, et 1 locuteur dont l'âge est inconnu.Les CD-ROMs fournissent également une transcription orthographique et lexicale avec des informations sur les événements acoustiques audibles (parole et non parole). La base de données utilise les conventions du projet SpeechDat.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
+<resourceName lang="English">American English SpeechDat-Car</resourceName>
+<resourceName lang="French">Base de données SpeechDat-Car de l'anglais américain</resourceName>
+<description lang="English">The American English SpeechDat-Car database contains the recordings of 314 American English speakers (150 males, 164 females) recorded over the mobile telephone network. This database is partitioned into 94 CDs (or 13 DVDs).The speech data files are in two formats. Four of the microphones were recorded on the computer in the trunk of the car. These are stored as 16 kHz, 16 bit and uncompressed. The fifth microphone was connected to the cell phone, and was recorded on a remote machine. The U.S. telephone network uses a digital encoding of 8bit, 8kHz, with Mu-law compression. Each signal file is accompanied by an ASCII SAM label file which contains the relevant descriptive information.This speech database was validated by SPEX (the Netherlands) to assess its compliance with the SpeechDat-Car format and content specifications.Each speaker uttered the following items:    * 2 voice activation keywords    * 1 sequence of 10 isolated digits    * 7 connected digits (1 sheet number -5 digits, 1 spontaneous telephone number, 3 read telephone numbers, 1 credit card number –14/16 digits, 1 PIN code -6 digits)    * 3 dates (1 spontaneous date e.g. birthday, 1 prompted date, 1 relative or general date expression)    * 2 word spotting phrases using an embedded application word    * 4 isolated digits    * 7 spelled words (1 spontaneous e.g. own forename or surname, 1 directory city name, 4 real word/name, 1 artificial name for coverage)    * 1 money amount    * 1 natural number    * 7 directory assistance names (1 spontaneous e.g. own forename or surname, 1 city of birth/growing up, 2 most frequent cities, 2 most frequent company/agency, 1 "forename surname")    * 9 phonetically rich sentences    * 2 time phrases (1 spontaneous time of day, 1 word style time phrase)    * 4 phonetically rich words    * 67 application words (13 mobile phone application words, 22 IVR function keywords, 32 car products keywords)    * 2 additional language dependent keywords    * spontaneous sentences for the last 100 speakersThe following age distribution has been obtained: 130 speakers are between 16 and 30, 101 speakers are between 31 and 45, 79 speakers are between 46 and 60, and 4 speakers are over 60.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
+<description lang="French">La base de données SpeechDat-Car de l'anglais américain est composée de 314 enregistrements (150 hommes et 164 femmes) réalisés à travers le réseau téléphonique mobile américain et présentés sur 94 CD-ROM (ou 13 DVD-R). Les bases orales réalisées lors du projet SpeechDat-Car ont été validées par SPEX, Pays-Bas, afin de contrôler leur adéquation avec le format SpeechDat-Car et les spécifications de contenu.Les données de parole se présentent sous deux formats. Quatre microphones ont été connectés sur un ordinateur placé dans le coffre de la voiture. Ces fichiers sont stockés en séquences d'échantillons de 16 kHz, 16 bit et ne sont pas compressés. Le cinquième microphone a été connecté au téléphone mobile et les enregistrements effectués sur une machine à distance. Le réseau téléphonique américain utilise un codage numérique de 8bit, 8kHz, loi-mu. Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM.Les éléments suivants ont été enregistrés :    * 2 mots-clés d'activation vocale    * 1 séquence de 10 chiffres isolés    * 7 chiffres connectés : 1 numéro permettant d'identifier la feuille de prompt (5+ chiffres), 1 numéro de téléphone spontané, 3 numéros de téléphone lus, 1 numéro de carte de crédit (14-16 chiffres), 1 code confidentiel (6 chiffres)    * 3 dates : 1 date spontanée (ex. anniversaire), 1 date lue, 1 date générale    * 2 expressions utilisant un mot de commande    * 4 chiffres isolés    * 7 mots épelés : 1 spontané (nom ou prénom du locuteur), 1 nom de ville provenant d'un annuaire de renseignements téléphoniques, 4 mots/noms réels, 1 nom artificiel pour couverture    * 1 montant en devises    * 1 nombre naturel    * 7 noms provenant d'un annuaire de renseignements téléphoniques : 1 spontané (nom ou prénom du locuteur), 1 nom de ville de naissance/d'origine du locuteur (spontané), 2 noms de ville parmi les plus fréquentes, 2 noms de compagnie/société parmi les plus fréquentes, 1 répétition de "prénom nom"    * 9 phrases phonétiquement riches    * 2 phrases comportant une notion de temps : 1 jour (spontané), 1 phrase comportant une notion de temps    * 4 mots phonétiquement riches    * 67 mots de commande: 13 mots de commande dans le domaine de la téléphonie mobile, 22 mots de fonction dans le domaine des serveurs vocaux interactifs, 32 mots-clés de produits du domaine de l'automobile    * 2 mots-clés dépendants de la langue supplémentaires    * phrases spontanées (pour les 100 derniers locuteurs)Les classes d'âge sont réparties comme suit : 130 locuteurs entre 16 et 30 ans, 101 locuteurs entre 31 et 45 ans, 79 locuteurs entre 46 et 60 ans et 4 locuteurs de plus de 60 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=562</url>
-<identifier>ELRA-S0077</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=732</url>
+<identifier>ELRA-S0115</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,31 +29,37 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-08-28</lastDateUpdated>
+<lastDateUpdated>2007-02-22</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 15000.00€</price>
-<price>Academic org. ELRA Non Member: 15000.00€</price>
-<price>Commercial org. ELRA Member: 10000.00€</price>
-<price>Academic org. ELRA Member: 10000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2000-03-06</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 90000.00€</price>
+<price>Academic org. ELRA Non Member: 90000.00€</price>
+<price>Commercial org. ELRA Member: 70000.00€</price>
+<price>Academic org. ELRA Member: 60000.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2001-11-05</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 15000.00€</price>
-<price>Academic org. ELRA Non Member: 15000.00€</price>
-<price>Commercial org. ELRA Member: 10000.00€</price>
-<price>Academic org. ELRA Member: 10000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2000-03-06</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 90000.00€</price>
+<price>Academic org. ELRA Non Member: 90000.00€</price>
+<price>Commercial org. ELRA Member: 70000.00€</price>
+<price>Academic org. ELRA Member: 70000.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2001-11-05</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>SpeechDat-Car</projectName>
+<fundingType>euFunds</fundingType>
+</fundingProject>
+</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
@@ -64,8 +70,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>cze/ces</languageId>
-<languageName>Czech</languageName>
+<languageId>eng</languageId>
+<languageName>English</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

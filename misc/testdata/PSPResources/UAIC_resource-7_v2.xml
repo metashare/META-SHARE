@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>ROMANIAN TEXTUAL ENTAILMENT CORPUS</resourceName>
+      <description>The corpus consists of 200 pairs of text-hypothesis in Romanian for which we know the human decision about entailment relation. The text-hypothesis pairs are uniform distributed into three classes of decisions: 72 Entailment, 60 Contradiction and 78 Unknown.</description>
+      <resourceShortName>RTEC</resourceShortName>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+      <identifier>217b6ae5058d4b1ca26609219cc66220</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>GeneralLicenceGrant</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
+      </licenceInfo>
+      <iprHolder>
+          <organizationInfo>
+            <organizationName>Alexandru Ioan Cuza</organizationName><organizationShortName>UAIC</organizationShortName><communicationInfo><email>xxx@example.com</email></communicationInfo>
+          </organizationInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Iftene</surname>
+      <givenName>Adrian</givenName>
+      <communicationInfo>
+         <email>adiftene@infoiasi.ro</email>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-29</metadataCreationDate>
+      <source>METANET4U</source>
+   </metadataInfo>
+   <usageInfo>
+      <foreseenUseInfo>
+         <foreseenUse>humanUse</foreseenUse>
+        
+      </foreseenUseInfo>
+      <actualUseInfo>
+         <actualUse>humanUse</actualUse>
+      </actualUseInfo>
+      <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+         <useNLPSpecific>languageModelling</useNLPSpecific>
+      </actualUseInfo>
+  </usageInfo>
+   <resourceDocumentationInfo>
+      <documentation>
+         <documentUnstructured>Iftene, A. 2009. Textual Entailment (Ph.D. Thesis) Technical Report. "Al. I. Cuza" University. ISSN 1224-9327. 169 pages. October, 2009. Iasi, Romania.</documentUnstructured>
+      </documentation>
+  </resourceDocumentationInfo>
+   <resourceCreationInfo>
+      <creationEndDate>2011-01-11</creationEndDate>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+                  <multilingualityType>comparable</multilingualityType>
+               </lingualityInfo>
+               <languageInfo>
+        
+                  <languageId>rou</languageId>
+                  <languageName>Romanian</languageName>
+               </languageInfo>
+                  <modalityInfo>
+                     <modalityType>writtenLanguage</modalityType>
+                  </modalityInfo>
+               <sizeInfo>
+                  <size>200</size>
+        
+                  <sizeUnit>T-HPairs</sizeUnit>
+               </sizeInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

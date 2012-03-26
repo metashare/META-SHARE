@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Biology Database</resourceName>
-<resourceName lang="French">Base de données de biologie</resourceName>
-<description lang="English">This bilingual terminology database produced by Kaist Korterm consists of 31 884 entries in Korean and English in the field of biology.</description>
-<description lang="French">Cette base de données terminologique bilingue produite par Kaist Korterm comprend 31 884 entrées en coréen et en anglais appartenant au domaine de la biologie.</description>
+<resourceName lang="English">English SpeechDat(M) Polyphone database DB2</resourceName>
+<resourceName lang="French">Base de données "Polyphone" en anglais (SpeechDat(M)) DB2</resourceName>
+<description lang="English">The (polyphone-like) English SpeechDat(M) database contains the recordings of 1,000 speakers who were recorded over the fixed telephone network. It is divided into two sub-sets: the phonetically rich sentences (one CD) known as DB2, and the application-oriented utterances (two CDs) known as DB1.It was validated by SPEX (the Netherlands) to assess its compliance with the SpeechDat format and content specifications.Each speaker uttered the following items: number and letter sequences, common control keywords, dates, times, money amounts, etc.This provides a realistic basis for using these resources for the training and assessment of speaker-independent recognition of both isolated and continuous speech utterances, employing either whole-word modeling and/or phoneme based approaches.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
+<description lang="French">Il s'agit de la base de données SpeechDat (M) anglaise enregistrée selon les règles des bases de données "polyphone". Elle contient des enregistrements de 1000 locuteurs, choisis selon les critères démographiques (âge, sexe, lieu, ...) et enregistrés à travers le réseau téléphonique.La base de données est répartie en deux ensembles: les phrases phonétiquement riches et les mots de commandes, orientés vers des applications (il s'agit de chiffres, nombres, séquences de lettres, mots de commande usuels, etc.). Ce qui fourni une base solide pour la réalisation de systèmes de reconnaissance de la parole, indépendant du locuteur aussi bien en mode mots isolés qu'en mode parole continue, utilisant des modèles phonétiques ou des modèles de "mots".La fréquence d'échantillonnage est de 8 KHz, un codage sur 8 bit, la loi a, donnant un débit de 64 kB/s.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=657</url>
-<identifier>ELRA-T0365</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=42</url>
+<identifier>ELRA-S0012</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,38 +29,43 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-06-03</lastDateUpdated>
+<lastDateUpdated>2009-01-14</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 6377.00€</price>
-<price>Academic org. ELRA Member: 1063.00€</price>
-<price>Academic org. ELRA Non Member: 2126.00€</price>
-<price>Commercial org. ELRA Non Member: 12754.00€</price>
+<price>Commercial org. ELRA Non Member: 20000.00€</price>
+<price>Academic org. ELRA Non Member: 10000.00€</price>
+<price>Commercial org. ELRA Member: 12000.00€</price>
+<price>Academic org. ELRA Member: 6000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2002-09-12</availabilityStartDate>
+<availabilityStartDate>1997-01-23</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 6377.00€</price>
-<price>Academic org. ELRA Member: 6377.00€</price>
-<price>Academic org. ELRA Non Member: 12754.00€</price>
-<price>Commercial org. ELRA Non Member: 12754.00€</price>
+<price>Commercial org. ELRA Non Member: 20000.00€</price>
+<price>Academic org. ELRA Non Member: 20000.00€</price>
+<price>Commercial org. ELRA Member: 12000.00€</price>
+<price>Academic org. ELRA Member: 12000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2002-09-12</availabilityStartDate>
+<availabilityStartDate>1997-01-23</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>SpeechDat(M)</projectName>
+<fundingType>euFunds</fundingType>
+</fundingProject>
+</resourceCreationInfo>
 <resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>terminologicalResource</lexicalConceptualResourceType>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
-<mediaType>text</mediaType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
@@ -68,12 +73,8 @@
 <languageId>eng</languageId>
 <languageName>English</languageName>
 </languageInfo>
-<languageInfo>
-<languageId>kor</languageId>
-<languageName>Korean</languageName>
-</languageInfo>
-</lexicalConceptualResourceTextInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
 </resourceComponentType>
 </resourceInfo>

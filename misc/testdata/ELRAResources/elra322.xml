@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">VERBA Polytechnic and Plurilingual Terminological Database - N-TC Quality Control</resourceName>
-<resourceName lang="French">Base de données terminologique polytechnique et plurilingue VERBA - N-TC Contrôle de la qualité</resourceName>
-<description lang="English">* Entries for English-Spanish: Scientific research &amp; mathematical sciences (906 entries), Geosciences (10,215), Computer science, electronics &amp; telecommunications (70,580), Industry (47,578), Transport &amp; Maintenance (12,291), Economy (145,572), Biological sciences (38,989), Communication &amp; media (8,143), Chemical &amp; physical sciences (27,467). * Entries for English-French-German-Spanish: Environment (36,658), Health (66,727), Agriculture &amp; food (25,975), Construction &amp; public works (8,429), Law &amp; policy (56,578), Sports &amp; Leisure (17,312) * Two specialized lexicons: Spanish-English and English-French-German without domain codes: electronics, telematics, law, taxes, customs, etc. (550,000 entries). * Two general lexicons: Spanish-English-French-German and Spanish-English-French-German-Portuguese-Italian (83,000 entries).This terminological database contains, for each domain, a sub-domain indication is given (from 2 sub-domains for Scientific research to 39 for Sports &amp; leisure). Each entry consists of a definition, phraseological unit, abbreviation, usage information, grammatical labels. Format: ASCIIMedium: floppy disk</description>
-<description lang="French">* Entrées anglais-espagnol : Recherche scientifique &amp; sciences mathématiques (906 entrées), géosciences (10 215), informatique, électronique &amp; télécommunications (70 580), industrie (47 578), transports &amp; maintenance (12 291), économie (145 572), sciences biologiques (38 989), communication &amp; média (8 143), sciences chimiques &amp; physiques (27 467).* Entrées allemand-anglais-espagnol-français : Environnement (36 658), santé (66 727), agriculture &amp; alimentation (25 975), construction &amp; travaux publics (8 429), droit &amp; politique (56 578), sports &amp; loisirs (17 312).* Deux lexiques spécialisés: Espagnol-anglais et allemand-anglais-français sans codes de domaine : électronique, télématique, droit, taxes, douanes, etc. (550 000 entrées).* Deux lexiques généraux: Allemand-anglais-espagnol-français et allemand-anglais-espagnol-français-italien-portugais. (83 000 entrées).Cette base de données terminologique contient, pour chaque domaine, l'indication de sous-domaines (de 2 sous-domaines pour la recherche scientifique à 39 pour les sports et loisirs). Chaque entrée comporte une définition, une unité phraséologique, une abréviation, une information sur l'usage et des étiquettes grammaticales.Format: ASCIISupport : disquette</description>
+<resourceName lang="English">LC-STAR German Phonetic lexicon in the Touristic Domain</resourceName>
+<resourceName lang="French">Lexique phonétique LC-STAR allemand du domaine touristique</resourceName>
+<description lang="English">The LC-STAR German Phonetic lexicon was created within the scope of the LC-STAR project (IST 2001-32216) which was sponsored by the European Commission.The lexicon comprises 8,782 entries from the following categories: nouns, adjectives and verbs.For each entry the following information is provided:•	orthographic form (spelling)•	part-of-speech (POS) with grammatical attributes and lemma•	phonemic transcription The lexicon is provided in XML format and includes phonetic transcriptions in SAMPA. The database is stored on 1 CD.</description>
+<description lang="French">Le lexique phonétique LC-STAR allemand du domaine touristique a été créé dans le cadre du projet LC-STAR (IST 2001-32216), financé par la Commission européenne.Le lexique comprend 8 782 entrées des catégories suivantes : noms, adjectifs et verbes.Pour chaque entrée, les informations suivantes sont fournies:•	forme orthographique (épellation)•	partie du discours avec attributs grammaticaux et lemmes correspondants•	transcription phonémiqueLe lexique est fourni au format XML et inclut des transcriptions phonétiques en SAMPA. La base de données est stockée sur 1 CD.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=360</url>
-<identifier>ELRA-T0285</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1029</url>
+<identifier>ELRA-S0246</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,22 +29,52 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2006-09-27</lastDateUpdated>
+<lastDateUpdated>2007-11-15</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 3900.00€</price>
+<price>Academic org. ELRA Non Member: 2600.00€</price>
+<price>Commercial org. ELRA Member: 3000.00€</price>
+<price>Academic org. ELRA Member: 2000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2007-11-15</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 0.70€</price>
-<price>Commercial org. ELRA Non Member: 1.00€</price>
-<availabilityStartDate>1997-04-11</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 3900.00€</price>
+<price>Academic org. ELRA Non Member: 3900.00€</price>
+<price>Commercial org. ELRA Member: 3000.00€</price>
+<price>Academic org. ELRA Member: 3000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2007-11-15</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<usageInfo>
+<actualUseInfo>
+<actualUse>nlpApplications</actualUse>
+<useNLPSpecific>speechRecognition</useNLPSpecific>
+<actualUseDetails>Tourism</actualUseDetails>
+</actualUseInfo>
+</usageInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>LC-STAR (IST 2001-32216)</projectName>
+<fundingType>euFunds</fundingType>
+</fundingProject>
+</resourceCreationInfo>
 <resourceComponentType>
 <lexicalConceptualResourceInfo>
 <resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>terminologicalResource</lexicalConceptualResourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceEncodingInfo>
+<encodingLevel>phonetics</encodingLevel>
+<encodingLevel>morphology</encodingLevel>
+</lexicalConceptualResourceEncodingInfo>
 <lexicalConceptualResourceMediaType>
 <lexicalConceptualResourceTextInfo>
 <mediaType>text</mediaType>
@@ -52,30 +82,26 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
+<languageId>ger/deu</languageId>
+<languageName>German</languageName>
 </languageInfo>
-<languageInfo>
-<languageId>spa</languageId>
-<languageName>Spanish</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Castilian</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
-</languageInfo>
+<domainInfo>
+<domain>tourism</domain>
+</domainInfo>
+</lexicalConceptualResourceTextInfo>
+<lexicalConceptualResourceAudioInfo>
+<mediaType>audio</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
 <languageInfo>
 <languageId>ger/deu</languageId>
 <languageName>German</languageName>
 </languageInfo>
-<languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
-</languageInfo>
-</lexicalConceptualResourceTextInfo>
+<domainInfo>
+<domain>tourism</domain>
+</domainInfo>
+</lexicalConceptualResourceAudioInfo>
 </lexicalConceptualResourceMediaType>
 </lexicalConceptualResourceInfo>
 </resourceComponentType>

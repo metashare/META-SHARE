@@ -6,7 +6,7 @@
 <description lang="English">The BDSONS Database is a French - speech database with two subsets: evaluation and acoustic modelling. The Corpora consist of 32 speakers: 16 male and 16 female (7 CD-ROMs of approximately 3,5 Gigabytes), Phonetic labelling (partly) available on additional floppies, of the following data: "Evaluation" (32 speakers): adjustment: 5 sentences and 54 bi-syllabic "logatomes", numbers, digits, letters, and names (spelled in isolation and in connected speech). "Acoustic" (12 speakers): Words: 600 CVCV including 20 consonant and semi-consonant and vowels /a/, /i/, /u/ ; 200 consonant clusters; rhyme tests for consonant and vowels (pairs and triplets), sentences: 52 phonetically balanced sentences, 44 nasal sentences, 192 sentences including real words in French with 16 consonants and 12 vowels. Phonetic labelling for a subset of the data is available on floppy disk.</description>
 <description lang="French">BDSONS est une base de données de parole constituée de 32 voix (16 hommes, 16 femmes) sur 7 CD. Cette base est divisée en :"Evaluation" (32 locuteurs) : 5 phrases et 54 dissyllabes, nombres, chiffres, lettres et noms."Acoustique" (12 locuteurs) : mots : 600 CVCV; 200 groupes consonantiques ; tests de rime. Phrases : 52 phrases phonétiquement équilibrées, 44 phrases nasales, 192 phrases incluant des mots réels en français avec 16 consonnes et 12 voyelles.L'étiquetage phonétique sur un sous-ensemble de la base est disponible sur disquette.</description>
 <resourceShortName>BDSONS</resourceShortName>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=35</url>
 <identifier>ELRA-S0005</identifier>
 </identificationInfo>

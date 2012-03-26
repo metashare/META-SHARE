@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Mandarin Chinese Telephone Speech Recognition Corpus - Digit String (649 people)</resourceName>
-<resourceName lang="French">Corpus de reconnaissance de parole téléphonique en chinois mandarin – séquences de chiffres (650 locuteurs)</resourceName>
-<description lang="English">This corpus comprises 750 entries uttered by 649 speakers of different dialects, ages and various educational levels (340 males and 309 females), recorded over the fixed telephone network. The database comprises 9,750 digit strings. Speech samples are stored as a sequence of 16-bit 8kHz WAV for a total of 16.28 hours of speech.Each speaker read 15 items. Text files are stored in Unicode format. All data have been proofread manually.The transcriptions include non-speech markers (background noise, background speech, speaker sounds) as well as markers for mispronunciation, channel distortions, words left-out and duplicates.The corpus aims to be applied to the testing and telephone natural speech recognition system.</description>
-<description lang="French">Ce corpus comprend 750 entrées prononcées par 649 locuteurs de dialectes, d’âges et de niveaux d’éducation différents (340 hommes et 309 femmes), enregistrées à travers le réseau téléphonique fixe. La base de données contient 9 750 séquences de chiffres. Les échantillons de parole sont stockés sous la forme de séquences 16-bit 8kHz WAV pour un total de 16,28 heures de parole.Chaque locuteur a lu 15 éléments. Les fichiers textes sont stockés au format Unicode. Toutes les données ont été vérifiées manuellement.Les transcriptions comprennent des balises d’événements acoustiques (bruits de fond, sons émis par les locuteurs) ainsi que des balises de mauvaise prononciation, distorsions du canal, omissions de mots et répétitions.Cette base de données a été conçue pour l’évaluation et le développement de systèmes de reconnaissance de la parole naturelle par téléphone.</description>
+<resourceName lang="English">VERBMOBIL II - VM CD 28.1 - VM28.1 (BAS edition)</resourceName>
+<resourceName lang="French">VERBMOBIL II - VM CD 28.1 - VM28.1 (édition BAS )</resourceName>
+<description lang="English">Verbmobil is a long-term project of the German Federal Ministry of Education, Science, Research and Technology (BMBF, Projekträger DLR). Its aim is to give Germany an international top position in language technology and its economical application in the next millenium by cooperation and concentration of as many as possible specialists from industry and science. The long-sighted aim is the development of a mobile translation system for the translation of spontaneous speech in face-to-face situations.The following resources are spontaneous speech databases recorded in a dialogue task (appointment scheduling) .VERBMOBIL II - VM CD 28.1 - VM28.1 (BAS edition) consists of 1 CD-ROM with 28 spontaneous dialogues (28 close mic, 0 room mic, 0 phone line (fixed network, GSM) recordings), 2408 turns, transliteration (Verbmobil II Format) in American English.</description>
+<description lang="French">Verbmobil est un projet du Ministère fédéral allemand de l'Education, des Sciences, de la Recherche et des Technologies (BMBF, Projekträger DLR), qui vise à placer l'Allemagne en position de force dans le domaine de l'ingénierie de la langue. Son objectif , à long terme, est de développer un système de traduction vocale automatique, pour la traduction de conversations spontanées. Ces ressources sont des enregistrements de conversation pour la prise de rendez-vous. Le corpus allemand comprend 13 910 occurrences (échanges). L'édition de BAS de la partie allemande est entièrement étiquetée et segmentée en unités phonémiques/phonétiques (alphabet SAM-PA) par le système MAUS et partiellement segmentée de manière manuelle.VERBMOBIL II - VM CD 28.1 - VM28.1 (édition BAS ) contient 1 CD-ROM composé de 28 dialogues spontanés (28 dialogues enregistrés avec un micro-casque très près de la bouche, 0 avec un microphone situé dans la pièce, 0 à travers le réseau téléphonique (GSM) 2409 échanges, transcription (au format Verbmobil II) en anglais-américain.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=929</url>
-<identifier>ELRA-S0228_27</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=778</url>
+<identifier>ELRA-S0034_37</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,29 +29,37 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2009-09-24</lastDateUpdated>
+<lastDateUpdated>2005-04-21</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 3044.00€</price>
-<price>Academic org. ELRA Non Member: 3044.00€</price>
-<price>Commercial org. ELRA Member: 3044.00€</price>
-<price>Academic org. ELRA Member: 3044.00€</price>
-<availabilityStartDate>2007-01-17</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 255.65€</price>
+<price>Academic org. ELRA Non Member: 255.65€</price>
+<price>Commercial org. ELRA Member: 127.82€</price>
+<price>Academic org. ELRA Member: 127.82€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 3044.00€</price>
-<price>Academic org. ELRA Non Member: 3044.00€</price>
-<price>Commercial org. ELRA Member: 3044.00€</price>
-<price>Academic org. ELRA Member: 3044.00€</price>
-<availabilityStartDate>2007-01-17</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 255.65€</price>
+<price>Academic org. ELRA Non Member: 255.65€</price>
+<price>Commercial org. ELRA Member: 127.82€</price>
+<price>Academic org. ELRA Member: 127.82€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>Verbmobil II</projectName>
+<fundingType>other</fundingType>
+</fundingProject>
+</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
@@ -62,8 +70,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>chi/zho</languageId>
-<languageName>Chinese</languageName>
+<languageId>eng</languageId>
+<languageName>English</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

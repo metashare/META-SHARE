@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Bulgarian WordNet</resourceName>
+      <description>The Bulgarian WordNet is a network of lexical-semantic relations, an electronic thesaurus with a structure modelled on that of the Princeton WordNet and those constructed in the EuroWordNet and BalkaNet project. Bulgarian WordNet describes meaning of a lexical unit by placing it within a network of semantic relations, such as hypernyny, meronymy, antonymy etc.
+
+The Bulgarian wordnet is one of the most complete and consistent lexical resources (in comparison the literals in the Bulgarian wordnet are much greater in number than the word list in a standard spelling dictionary). The synonym sets from different languages are connected by means of inter-language equivalence relations, which are used as a basis for the development of the wordnet multilingual lexical-semantic network, the so called global wordnet.
+
+The Bulgarian wordnet is approximately one quarter the size of the English wordnet and is one of the biggest in Europe.</description>
+      <resourceShortName>BulNet</resourceShortName>
+      <url>http://www.elda.org/catalogue/en/text/M0041.html</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+</metaShareId>
+      <identifier>806</identifier>
+</identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>other</licence>
+         <restrictionsOfUse>other</restrictionsOfUse>
+         <distributionAccessMedium>CD-ROM</distributionAccessMedium>
+</licenceInfo>
+      <iprHolder>
+		       <organizationInfo>
+            <organizationName>Institute for Bulgarian Language</organizationName>
+            <organizationShortName>IBL</organizationShortName>
+            <departmentName>Department of Computational Linguistics</departmentName>
+            <communicationInfo>
+               <email>bulnet@dcl.bas.bg</email>
+               <url>http://dcl.bas.bg</url>
+               <address>52 Shipchenski prohod Blvd., Bl. 17</address>
+               <zipCode>1113</zipCode>
+               <city>Sofia</city>
+               <country>Bulgaria</country>
+               <telephoneNumber>+35 92 97 92 969</telephoneNumber>
+</communicationInfo>
+</organizationInfo>
+</iprHolder>
+      <availabilityStartDate>2004-12-01</availabilityStartDate>
+</distributionInfo>
+   <contactPerson>
+      <surname>Koeva</surname>
+      <givenName>Svetla</givenName>
+      <communicationInfo>
+         <email>svetla@dcl.bas.bg</email>
+         <url>http://dcl.bas.bg/PersonalPages/svetla/svetla.html</url>
+         <address>52 Shipchenski prohod Blvd., Bl. 17</address>
+         <zipCode>1113</zipCode>
+         <city>Sofia</city>
+         <country>Bulgaria</country>
+         <telephoneNumber>+35 92 97 92 969</telephoneNumber>
+         <faxNumber>+35 92 87 22 302</faxNumber>
+</communicationInfo>
+      <position>professor</position>
+</contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-27</metadataCreationDate>
+</metadataInfo>
+   <versionInfo>
+		    <version>3.0</version>
+      <lastDateUpdated>2011-11-20</lastDateUpdated>
+		
+</versionInfo>
+   <validationInfo>
+      <validated>True</validated>
+</validationInfo>
+   <usageInfo>
+		    <foreseenUseInfo>
+         <foreseenUse>humanUse</foreseenUse>
+			
+			
+</foreseenUseInfo>
+	     <actualUseInfo>
+         <actualUse>humanUse</actualUse>
+</actualUseInfo>
+      <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+</actualUseInfo>
+</usageInfo>
+   <resourceDocumentationInfo>
+		    <documentation>
+         <documentUnstructured>Koeva Sv. Bulgarian Wordnet - current state, applications and prospects, In: Bulgarian-American Dialogues, Prof. M. Drinov Academic Publishing House Sofia, 120-132, 2010. ISBN 978-954-322-383-1</documentUnstructured>
+</documentation>
+		    <documentation>
+         <documentUnstructured>Koeva, Sv. Derivational and Morphosemantic Relations in Bulgarian Wordnet. In: Intelligent Information Systems, XVI, Warsaw, Academic Publishing House, pp. 359—389, 2008. ISBN 978-93-60434-44-4</documentUnstructured>
+</documentation>
+</resourceDocumentationInfo>
+   <resourceCreationInfo>
+      <fundingProject>
+         <projectName>BalkaNet</projectName>
+         <fundingType>euFunds</fundingType>
+</fundingProject>
+      <fundingProject>
+         <projectName>BulNet - А Lexical-Semantic Network of Bulgarian</projectName>
+         <fundingType>nationalFunds</fundingType>
+</fundingProject>
+      <fundingProject>
+         <projectName>Central and South-East European Resources</projectName>
+         <fundingType>euFunds</fundingType>
+</fundingProject>
+      <creationStartDate>2001-09-01</creationStartDate>
+</resourceCreationInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>wordnet</lexicalConceptualResourceType>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+               <languageInfo>
+			
+			               <languageId>bg</languageId>
+			               <languageName>Bulgarian</languageName>
+			               <languageScript>Cyrilic</languageScript>
+</languageInfo>
+			               <modalityInfo>
+                     <modalityType>writtenLanguage</modalityType>
+</modalityInfo>
+               <sizeInfo>
+			               <size>39000</size>
+			
+			               <sizeUnit>synsets</sizeUnit>
+</sizeInfo>
+               <characterEncodingInfo>
+			               <characterEncoding>MacDingbat</characterEncoding>
+</characterEncodingInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
+</resourceComponentType>
+</resourceInfo>

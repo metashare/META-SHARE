@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>SILO</resourceName>
+      <description>Similarity-Based Finite-State Lookup. Error-tolerant lookup of words in large vocabularies has many potential uses, both within and beyond natural language processing (NLP). SILO is a generic library for finite-state-based lexical lookup, originally designed for NLP-related applications, that can be adapted to application-specific error metrics. Among other things, this tool can be used for searching existing trademarks in a database, using orthographic and phonetic similarity.</description>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+				<availability>underNegotiation</availability>
+			</distributionInfo>
+			<contactPerson>
+				<surname>n/a</surname>
+				<communicationInfo>
+					<email>xxx@example.com</email>
+				</communicationInfo>
+			</contactPerson>
+   <metadataInfo><metadataCreationDate>2011-12-31</metadataCreationDate></metadataInfo>
+   <usageInfo>
+		    <foreseenUseInfo>
+			      <foreseenUse>nlpApplications</foreseenUse>
+		    </foreseenUseInfo>
+	  </usageInfo>
+	<resourceComponentType>
+		<toolServiceInfo>
+			<resourceType>toolService</resourceType>
+			<toolServiceType>other</toolServiceType>
+			<languageDependent>False</languageDependent>
+			</toolServiceInfo>
+	</resourceComponentType>
+</resourceInfo>

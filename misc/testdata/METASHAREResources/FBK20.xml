@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>java Web 1T 5-gram Searcher</resourceName>
+      <description>jWeb1T is an open source Java tool for efficiently searching the Web 1T 5-gram corpus. It is based on a binary search algorithm that finds the n-grams and returns their frequency counts in logarithmic time.</description>
+      <url>http://hlt.fbk.eu/en/technology/jWeb1t</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability>
+      <licenceInfo>
+         <licence>ApacheLicence_V2.0</licence>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <downloadLocation>http://hlt.fbk.eu/en/technology/jWeb1t</downloadLocation>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Speranza</surname>
+      <givenName>Manuela</givenName>
+      <communicationInfo>
+         <email>manspera@fbk.eu</email>
+         <address>Fondazione Bruno Kessler Via Sommarive 18</address>
+         <zipCode>38123</zipCode>
+         <city>Trento</city>
+         <country>IT</country>
+         <telephoneNumber>+39 0461314521</telephoneNumber>
+         <faxNumber>+39 0461314591</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo><metadataCreationDate>2011-12-31</metadataCreationDate></metadataInfo>
+	   <resourceComponentType>
+	<toolServiceInfo>
+        <resourceType>toolService</resourceType>
+		<toolServiceType>other</toolServiceType>
+		<languageDependent>False</languageDependent>
+	</toolServiceInfo>
+					</resourceComponentType>
+</resourceInfo>

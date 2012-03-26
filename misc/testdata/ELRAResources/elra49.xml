@@ -6,7 +6,7 @@
 <description lang="English">General and Specialised vocabularies for transferEntries: General Vocabulary (34 000), Administrative (18 000), Data processing (10 000).Format: ASCII format with ISO 8859-1 character set. A lexicon file contains entries with feature-value pairs on each line and separators between entries. Medium: Floppy disk, QIC 150 MB cartridge tape General French-Dutch LanTmark lexicon is divided into the following categories: nouns (25,000), verbs (3,000), adjectives (5,000), Adverbs (1,000).Administrative vocabulary is divided into the following categories: nouns (16,000), verbs (2,000).Data processing vocabulary has 10,000 transfer nouns.Each entry contains domain information, source language disambiguation, features, and target language actions.</description>
 <description lang="French">Vocabulaires génériques et spécialisés pour le transfertVocabulaire général : 34 000, Administratif, 18 000, Traitement de données : 10 000Format: ASCII : jeu de caractères ISO 8859-1.Support : disquette, cartouche QIC 150 MBCe lexique général français-hollandais est réparti selon les catégories suivantes : noms (25.000), verbes (3.000), adjectifs (5.000), adverbes (1.000).Le vocabulaire Administratif est réparti selon les catégories suivantes : noms (16.000), verbes (2.000).Le vocabulaire traitement de données contient 10 000 noms de transfert.Chaque entrée contient information sur le domaine, désambiguisation sur la langue source, des traits, des actions sur la langue cible.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=144</url>
 <identifier>ELRA-M0006_03</identifier>
 </identificationInfo>

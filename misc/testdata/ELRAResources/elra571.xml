@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">BREF-80</resourceName>
-<resourceName lang="French">BREF-80</resourceName>
-<description lang="English">The BREF corpus was designed to provide enough read speech data for the development and evaluation of continuous speech recognition systems (both speaker-dependent and speaker-independent), and to provide a large corpus of continuous speech for the acquisition of acoustic-phonetic knowledge of spoken French. All the recorded texts were selected from extracts of the French newspaper Le Monde so as to provide a large vocabulary (over 20,000 words) and a wide range of phonetic environments. The entire BREF corpus contains over 100 hours of speech material from 120 speakers.The BREF-80 sub-corpus consists of 2 ISO9660 CDROMs, BREF80-1 and BREF80-2, containing speaker-independent training data from 80 speakers. Together these 2 CDs contain 5330 sentences, an average of 67 sentences per speaker. While this data represents only a small portion of the entire BREF corpus, the sentences have been selected to cover most of the BREF training prompts, in order to conserve a wide range of phonetic contexts with a minimum amount of speech data. Thus, the BREF80 sub-corpus produced on these CDs was especially selected to train speaker-independent, vocabulary-independent speech recognizers.</description>
-<description lang="French">Réalisés au LIMSI-CNRS, ces deux CD contiennent des articles lus, tirés du quotidien "Le Monde". Ces textes ont été sélectionnés pour maximiser le nombre de contextes phonétiques, la taille du vocabulaire est de plus de 20.000 mots. Le corpus représente 5330 phrases produites par 80 locuteurs (soit 67 phrases par locuteur en moyenne). Il s'agit d'une partie du corpus de BREF qui totalise 100 heures d'enregistrement.</description>
+<resourceName lang="English">VERBMOBIL - VM CD 3.1 (new edition)</resourceName>
+<resourceName lang="French">VERBMOBIL - VM CD 3.1 - VM31 ( nouvelle édition)</resourceName>
+<description lang="English">Verbmobil is a long-term project of the German Federal Ministry of Education, Science, Research and Technology (BMBF, Projekträger DLR). Its aim is to give Germany an international top position in language technology and its economical application in the next millenium by cooperation and concentration of as many as possible specialists from industry and science. The long-sighted aim is the development of a mobile translation system for the translation of spontaneous speech in face-to-face situations.The following resources are spontaneous speech databases recorded in a dialogue task (appointment scheduling) .VM CD 3.1 (new edition) consists of 1 CD-ROM with 45 Dialogues 184 Appointments, 1214 Turns in German. This new edition contains the transliterations of all dialogues, signal files with PhonDat 2 Header structure, software and speaker documentations. All files were validated according to BAS guidelines.</description>
+<description lang="French">Verbmobil est un projet du Ministère fédéral allemand de l'Education, des Sciences, de la Recherche et des Technologies (BMBF, Projekträger DLR), qui vise à placer l'Allemagne en position de force dans le domaine de l'ingénierie de la langue. Son objectif , à long terme, est de développer un système de traduction vocale automatique, pour la traduction de conversations spontanées. Ces ressources sont des enregistrements de conversation pour la prise de rendez-vous. Le corpus allemand comprend 13 910 occurrences (échanges). L'édition de BAS de la partie allemande est entièrement étiquetée et segmentée en unités phonémiques/phonétiques (alphabet SAM-PA) par le système MAUS et partiellement segmentée de manière manuelle.VM CD 3.1 - VM31 ( nouvelle édition) contient 1 CD-ROM composé de 45 dialogues, 184 rendez-vous, 1214 échanges en allemand. Cette nouvelle édition contient les transcriptions de tous les dialogues, les fichiers de signaux dans la structure d'en-tête PhonDat 2, le logiciel et la documentation sur les locuteurs. Tous les fichiers ont été validés selon les directives BAS.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=36</url>
-<identifier>ELRA-S0006</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=462</url>
+<identifier>ELRA-S0034_06</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,31 +29,37 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-06-16</lastDateUpdated>
+<lastDateUpdated>2009-01-14</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 6000.00€</price>
-<price>Academic org. ELRA Non Member: 800.00€</price>
-<price>Commercial org. ELRA Member: 3000.00€</price>
-<price>Academic org. ELRA Member: 400.00€</price>
+<price>Commercial org. ELRA Non Member: 255.65€</price>
+<price>Academic org. ELRA Non Member: 255.65€</price>
+<price>Commercial org. ELRA Member: 127.82€</price>
+<price>Academic org. ELRA Member: 127.82€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
 <availabilityStartDate>1996-09-01</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 6000.00€</price>
-<price>Academic org. ELRA Non Member: 6000.00€</price>
-<price>Commercial org. ELRA Member: 3000.00€</price>
-<price>Academic org. ELRA Member: 3000.00€</price>
+<price>Commercial org. ELRA Non Member: 255.65€</price>
+<price>Academic org. ELRA Non Member: 255.65€</price>
+<price>Commercial org. ELRA Member: 127.82€</price>
+<price>Academic org. ELRA Member: 127.82€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
 <availabilityStartDate>1996-09-01</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>Verbmobil</projectName>
+<fundingType>other</fundingType>
+</fundingProject>
+</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
@@ -64,8 +70,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
+<languageId>ger/deu</languageId>
+<languageName>German</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

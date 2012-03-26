@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Korean Speecon database</resourceName>
-<resourceName lang="French">Base de données Speecon du coréen</resourceName>
-<description lang="English">The Korean Speecon database is divided into 2 sets: 1) The first set comprises the recordings of 568 adult Korean speakers (259 males, 309 females), recorded over 4 microphone channels in 4 recording environments (office, entertainment, car, public place). 2) The second set comprises the recordings of 58 child Korean speakers (25 boys, 33 girls), recorded over 4 microphone channels in 1 recording environment (children room). This database is partitioned into 30 DVDs (first set) and 4 DVDs (second set).	The speech databases made within the Speecon project were validated by SPEX, the Netherlands, to assess their compliance with the Speecon format and content specifications.Each of the four speech channels is recorded at 16 kHz, 16 bit, uncompressed unsigned integers in Intel format (lo-hi byte order). To each signal file corresponds an ASCII SAM label file which contains the relevant descriptive information.Each speaker uttered the following items:Calibration data: 6 noise recordingsThe “silence word” recordingFree spontaneous items (adults only):3 minutes  (session time) of free spontaneous, rich context items (story telling) (an open number of  spontaneous topics out of a set of 30 topics)17 Elicited spontaneous items (adults only):3 dates, 2 times, 3 proper names, 2 city name, 1 letter sequence, 2 answers to questions, 3 telephone numbers, 1 language Read speech:30 phonetically  rich sentences uttered by adults and 60 uttered by children5 phonetically rich words (adults only)4 isolated digits1 isolated digit sequence4 connected digit sequences1 telephone number3 natural numbers1 money amount2 time phrases (T1 : analogue, T2 : digital)3 dates (D1 : analogue, D2 : relative and general date, D3 : digital)3 letter sequences1 proper name2 city or street names2 questions2 special keyboard characters 1 Web address1 email address220-221 application specific words and phrases per session (adults)74 toy commands, 34 general commands, 14 phone commands and 5 application word synonyms (children)The following age distribution has been obtained: Adults: 250 speakers are between 15 and 30, 223 speakers are between 31 and 45, and 95 speakers are over 46.Children: 25 speakers are between 8 and 10, 33 speakers are between 11 and 15.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
-<description lang="French">La base de données Speecon du coréen est répartie en deux sous-ensembles :1) Le premier sous-ensemble est composé de 568 locuteurs coréens adultes (259 hommes, 309 femmes) enregistrés à partir de 4 canaux de microphone dans 4 environnements différents (bureau, divertissement, voiture, lieu publique). 2) Le deuxième sous-ensemble est composé de 58 locuteurs coréens enfants (25 garçons, 33 filles) enregistrés à partir de 4 canaux de microphone dans un seul environnement (chambre d’enfant).Elle est distribuée sur 30 DVD (adultes) et 4 DVD (enfants). Les bases orales réalisées lors du projet Speecon ont été validées par SPEX, Pays-Bas, afin de contrôler leur adéquation avec le format Speecon et les spécifications de contenu. Les fichiers sont stockés en séquences d'échantillons de 16 kHz, 16 bit ; les canaux sont multiplexés dans un fichier unique, avec une séquence de 0-1-2-3. A chaque énoncé correspond un fichier d'étiquetage ASCII SAM.Chaque locuteur a prononcé les éléments suivants :Données de calibrage : 6 bruits1 “silence”Eléments libres spontanés (adultes uniquement) :3  minutes  (par session) de discours libre spontané, en contexte riche (raconter une histoire) (nombre ouvert de thèmes spontanés à partir de 30 thèmes donnés)17 éléments spontanés dirigés (adultes uniquement) :3 dates, 2 périodes de temps, 3 noms propres, 2 noms de ville, 1 séquence de lettres, 2 réponses à des questions, 3 numéros de téléphone, 1 langue Parole lue : 30 phrases phonétiquement riches prononcées par les adultes et 60 prononcées par les enfants5 mots phonétiquement riches (adultes uniquement)4 chiffres isolés1 séquences de chiffres isolés4 séquences de chiffres connectés1 numéro de téléphone3 nombres naturels 1 montant en devise2 phrases comportant une notion de temps (T1 : analogique, T2 : numérique)3 dates (D1 : analogique, D2 : date relative et générale, D3 : numérique)3 séquences de lettres1 nom propre2 noms de ville ou de rue2 questions2 caractères clavier 1 adresse Web1 adresse email220-221 mots et phrases de commande par sessions (adultes)74 commandes de jouets, 34 commandes générales, 14 commandes de téléphone et 5 synonymes de mots d’applications (enfants)Les classes d'âge sont réparties comme suit : Adultes : 250 locuteurs ont entre 15 et  30 ans, 223 entre 31 et 45 ans, et 95 ont plus de 46 ans.Enfants: 25 locuteurs ont entre 8 et 10 ans, 33 entre 11 et 15 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
-<resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=799</url>
-<identifier>ELRA-S0177</identifier>
+<resourceName lang="English">FASiL combined unimodal “fasil-all” corpus</resourceName>
+<resourceName lang="French">Ensemble des corpus unimodaux FASiL “fasil-all”</resourceName>
+<description lang="English">The corpus was collected in the context of the FASiL project, EU FP5 IST-2001-38685 (http://www.fasil.co.uk), as a wizard-of-oz experiment. Therefore, there are sound recordings of subject and wizard. A total of 210 subjects were recorded in the three project languages Swedish, Portuguese and English, all data for the same application.The corpus is formatted as .wav files (u-law) for audio, plain ASCII text (.txt) for transcriptions, and a masterfile which binds .txt and .wav together. The masterfile is a “lattice” of the ineraction in time, and contains the exact order of the interaction plus timings. The masterfile is loosely related to the HTK-SLF lattice format.The woz experiment is about the voice interaction with a Virtual Personal Assistent (VPA) for an email, calender and contacts task. Hesitations are marked as “UH”, noise as “NOISE” and other irrelevant stuff as “IRRELEVANT”. All annotations are in lower case, except for the former mentioned cases.Exact documentation of experiment in FASiL deliverable D.2.2The interactions contain mostly sentences but also spelled names, email addresses, telephone numbers, yes/no questions.See also S0174-01, S0174-02, S0174-03, and S0174-05.</description>
+<description lang="French">Ce corpus a été collecté dans le cadre du projet FASiL, EU FP5 IST-2001-38685 (http://www.fasil.co.uk), pour une expérience en magicien d’oz. Ainsi, il comprend les enregistrements des sujets et du magicien pour un total de 210 sujets enregistrés dans les trois langues du projet, anglais, portugais et suédois, pour la même application.Le corpus est formaté en fichiers .wav (u-law) pour la partie audio, ASCII pour la partie transcriptions (.txt), et un fichier maître relie les .txt et les .wav. Le fichier maître est une sorte de réseau d’interaction temporelle qui contient l’ordre exact des interactions et des mesures de temps. Le fichier maître correspond approximativement au format de réseau HTK-SLF.L’expérience magicien d’oz tient dans l’interaction orale avec un « assistant personnel virtuel » (Virtual Personal Assistent (VPA)) dans une tâche d’email, de gestion de calendrier et de contacts. Les hésitations sont marquées par la balise “UH”, le bruit par la balise “NOISE” et les autres éléments non pertinents par la balise “IRRELEVANT”. Toutes les annotations sont en minuscules, excepté les balises précédemment citées.Une documentation précise de l’expérience est présentée dans le livrable FASiL D.2.2.Les interactions comprennent principalement des phrases mais également des noms épelés, des adresses email, des numéros de téléphone, des questions fermées.</description>
+<resourceShortName>fasil-all</resourceShortName>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=705</url>
+<identifier>ELRA-S0174_04</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,37 +29,31 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-02-22</lastDateUpdated>
+<lastDateUpdated>2005-04-08</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 75000.00€</price>
-<price>Academic org. ELRA Non Member: 60000.00€</price>
-<price>Commercial org. ELRA Member: 67000.00€</price>
-<price>Academic org. ELRA Member: 50000.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2005-08-02</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 30000.00€</price>
+<price>Academic org. ELRA Non Member: 20000.00€</price>
+<price>Commercial org. ELRA Member: 25000.00€</price>
+<price>Academic org. ELRA Member: 10000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2005-04-07</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 75000.00€</price>
-<price>Academic org. ELRA Non Member: 75000.00€</price>
-<price>Commercial org. ELRA Member: 67000.00€</price>
-<price>Academic org. ELRA Member: 67000.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2005-08-02</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 30000.00€</price>
+<price>Academic org. ELRA Non Member: 30000.00€</price>
+<price>Commercial org. ELRA Member: 25000.00€</price>
+<price>Academic org. ELRA Member: 25000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2005-04-07</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>Speecon</projectName>
-<fundingType>euFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
@@ -70,8 +64,16 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>kor</languageId>
-<languageName>Korean</languageName>
+<languageId>eng</languageId>
+<languageName>English</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>por</languageId>
+<languageName>Portuguese</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>swe</languageId>
+<languageName>Swedish</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

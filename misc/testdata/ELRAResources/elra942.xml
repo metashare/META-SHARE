@@ -6,7 +6,7 @@
 <description lang="English">The lexicon contains 400,463 Dutch words, comprising 236,369 nouns, 90,882 adjectives, 69,744 verbs, 2,120 adverbs, and 1,348 items from other categories (pronouns, determiners, articles, adpositions, conjunctions, numerals, etc.). It complies with the official Dutch Spelling (2005/6). The lexicon contains an ID, word form, lemma and part of speech.The lexicon is delivered in human-readable UNIX ANSI-format, with just a linefeed at the end of every line instead of a carriage return. The character set used is ISO Latin-1 (ISO/IEC 8859-1). All fields are separated by horizontal tabs, with no empty fields.</description>
 <description lang="French">Ce lexique comprend 400 463 mots hollandais, incluant 236 369 noms, 90 882 adjectifs, 69 744 verbes, 2 120 adverbes et 1 348 éléments d'autres catégories (pronoms, déterminants, articles, adpositions, conjonctions, numéraux, etc.). Il est conforme à l'orthographe officielle du hollandais (2005/6). Chaque entrée contient un identifiant, la forme du mot, le lemme et la partie du discours.Le lexique est fourni au format UNIX ANSI lisible par l’homme, avec un simple saut de ligne en fin de chaque ligne au lieu d’un retour chariot. La table de caractères utilisée est ISO Latin-1 (ISO/IEC 8859-1). Tous les champs sont séparés par des tabulations horizontales, sans champs vides.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=1007</url>
 <identifier>ELRA-L0077</identifier>
 </identificationInfo>

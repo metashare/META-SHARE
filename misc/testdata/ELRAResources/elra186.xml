@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">FASiL Portuguese unimodal “fasil-pt” corpus</resourceName>
-<resourceName lang="French">Corpus unimodal portugais FASiL “fasil-pt”</resourceName>
-<description lang="English">The corpus was collected in the context of the FASiL project, EU FP5 IST-2001-38685 (http://www.fasil.co.uk), as a wizard-of-oz experiment. Therefore, there are sound recordings of subject and wizard. A total of 70 subjects were recorded. The corpus is formatted as .wav files (u-law) for audio, plain ASCII text (.txt) for transcriptions, and a masterfile which binds .txt and .wav together. The masterfile is a “lattice” of the ineraction in time, and contains the exact order of the interaction plus timings. The masterfile is loosely related to the HTK-SLF lattice format.The woz experiment is about the voice interaction with a Virtual Personal Assistent (VPA) for an email, calender and contacts task. Hesitations are marked as “UH”, noise as “NOISE” and other irrelevant stuff as “IRRELEVANT”. All annotations are in lower case, except for the former mentioned cases.Exact documentation of experiment in FASiL deliverable D.2.2The interactions contain mostly sentences but also spelled names, email addresses, telephone numbers, yes/no questions.S0174-01, S0174-03, S0174-04, and S0174-05.</description>
-<description lang="French">Ce corpus a été collecté dans le cadre du projet FASiL, EU FP5 IST-2001-38685 (http://www.fasil.co.uk), pour une expérience en magicien d’oz. Ainsi, il comprend les enregistrements des sujets et du magicien pour un total de 70 sujets. Le corpus est formaté en fichiers .wav (u-law) pour la partie audio, ASCII pour la partie transcriptions (.txt), et un fichier maître relie les .txt et les .wav. Le fichier maître est une sorte de réseau d’interaction temporelle qui contient l’ordre exact des interactions et des mesures de temps. Le fichier maître correspond approximativement au format de réseau HTK-SLF.L’expérience magicien d’oz tient dans l’interaction orale avec un « assistant personnel virtuel » (Virtual Personal Assistent (VPA)) dans une tâche d’email, de gestion de calendrier et de contacts. Les hésitations sont marquées par la balise “UH”, le bruit par la balise “NOISE” et les autres éléments non pertinents par la balise “IRRELEVANT”. Toutes les annotations sont en minuscules, excepté les balises précédemment citées.Une documentation précise de l’expérience est présentée dans le livrable FASiL D.2.2.Les interactions comprennent principalement des phrases mais également des noms épelés, des adresses email, des numéros de téléphone, des questions fermées.</description>
-<resourceShortName>fasil-pt</resourceShortName>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=703</url>
-<identifier>ELRA-S0174_02</identifier>
+<resourceName lang="English">VERBA Polytechnic and Plurilingual Terminological Database - V-AG Volleyball</resourceName>
+<resourceName lang="French">Base de données terminologique polytechnique et plurilingue VERBA - V-AG Volleyball</resourceName>
+<description lang="English">* Entries for English-Spanish: Scientific research &amp; mathematical sciences (906 entries), Geosciences (10,215), Computer science, electronics &amp; telecommunications (70,580), Industry (47,578), Transport &amp; Maintenance (12,291), Economy (145,572), Biological sciences (38,989), Communication &amp; media (8,143), Chemical &amp; physical sciences (27,467). * Entries for English-French-German-Spanish: Environment (36,658), Health (66,727), Agriculture &amp; food (25,975), Construction &amp; public works (8,429), Law &amp; policy (56,578), Sports &amp; Leisure (17,312) * Two specialized lexicons: Spanish-English and English-French-German without domain codes: electronics, telematics, law, taxes, customs, etc. (550,000 entries). * Two general lexicons: Spanish-English-French-German and Spanish-English-French-German-Portuguese-Italian (83,000 entries).This terminological database contains, for each domain, a sub-domain indication is given (from 2 sub-domains for Scientific research to 39 for Sports &amp; leisure). Each entry consists of a definition, phraseological unit, abbreviation, usage information, grammatical labels. Format: ASCIIMedium: floppy disk</description>
+<description lang="French">* Entrées anglais-espagnol : Recherche scientifique &amp; sciences mathématiques (906 entrées), géosciences (10 215), informatique, électronique &amp; télécommunications (70 580), industrie (47 578), transports &amp; maintenance (12 291), économie (145 572), sciences biologiques (38 989), communication &amp; média (8 143), sciences chimiques &amp; physiques (27 467).* Entrées allemand-anglais-espagnol-français : Environnement (36 658), santé (66 727), agriculture &amp; alimentation (25 975), construction &amp; travaux publics (8 429), droit &amp; politique (56 578), sports &amp; loisirs (17 312).* Deux lexiques spécialisés: Espagnol-anglais et allemand-anglais-français sans codes de domaine : électronique, télématique, droit, taxes, douanes, etc. (550 000 entrées).* Deux lexiques généraux: Allemand-anglais-espagnol-français et allemand-anglais-espagnol-français-italien-portugais. (83 000 entrées).Cette base de données terminologique contient, pour chaque domaine, l'indication de sous-domaines (de 2 sous-domaines pour la recherche scientifique à 39 pour les sports et loisirs). Chaque entrée comporte une définition, une unité phraséologique, une abréviation, une information sur l'usage et des étiquettes grammaticales.Format: ASCIISupport : disquette</description>
+<resourceShortName/>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=399</url>
+<identifier>ELRA-T0324</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,46 +29,54 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-04-08</lastDateUpdated>
+<lastDateUpdated>2006-09-27</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
-<licence>ELRA_END_USER</licence>
-<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 10000.00€</price>
-<price>Academic org. ELRA Non Member: 8000.00€</price>
-<price>Commercial org. ELRA Member: 8000.00€</price>
-<price>Academic org. ELRA Member: 4000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2005-04-07</availabilityStartDate>
-</licenceInfo>
-<licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 10000.00€</price>
-<price>Academic org. ELRA Non Member: 10000.00€</price>
-<price>Commercial org. ELRA Member: 8000.00€</price>
-<price>Academic org. ELRA Member: 8000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2005-04-07</availabilityStartDate>
+<price>Commercial org. ELRA Member: 0.70€</price>
+<price>Commercial org. ELRA Non Member: 1.00€</price>
+<availabilityStartDate>1997-04-11</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>terminologicalResource</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>por</languageId>
-<languageName>Portuguese</languageName>
+<languageId>eng</languageId>
+<languageName>English</languageName>
 </languageInfo>
-</corpusAudioInfo>
-</corpusMediaType>
-</corpusInfo>
+<languageInfo>
+<languageId>spa</languageId>
+<languageName>Spanish</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Castilian</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
+</languageInfo>
+<languageInfo>
+<languageId>ger/deu</languageId>
+<languageName>German</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
+</languageInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Swedish EUROM1</resourceName>
-<resourceName lang="French">EUROM1 suédois</resourceName>
-<description lang="English">EUROM1 is the first really multilingual speech database produced in Europe. Equivalent corpora for each of the European languages were collected with the same number of speakers selected in the same way, and recorded in the same conditions with common file formats. Initially eight European countries have made recordings: Italy, United Kingdom, Germany, Netherlands, Denmark, Sweden, Norway, France. Additional recordings have been then completed (thanks to CEE Esprit Project SAM-A), in Greece, Spain and Portugal. More than sixty speakers were recorded per language.The content consists of:1)	Continuous speech:-	40 passages made of five task related sentences.-	50 patching sentences, designed to compensate for uneven phoneme distribution in the passage material. 2)	Numbers:The numbers were divided into five blocks, each containing twenty numbers. Each block was recorded as one single take. 3)	CVC words:The CVC word lists contain five list types and also carrier phrases of the suggested type. Eighty-two isolated words were used.</description>
-<description lang="French">EUROM1 est la première base de données de parole produite en Europe. Des corpus équivalents pour chaque langue européenne ont été collectés avec le même nombre de locuteurs sélectionnés de la même manière et enregistrés dans les même conditions et mêmes formats de fichiers. Au départ, huit pays d'Europe ont participé aux enregistrements : l'Italie, le Royaume-Uni, l'Allemagne, les Pays-Bas, le Danemark, la Suède, la Norvège et la France. Cette base a ensuite été complétée par les enregistrements réalisés en Grèce, au Portugal, et en Espagne (grâce au projet SAM-A du programme européen Esprit). Plus de soixante locuteurs ont été enregistrés pour chaque langue.Le contenu consiste en:1)	De la parole continue:-	40 passages composés de phrases en relation avec cinq tâches.-	50 phrases d’ajustement (“patching”), constituées dans le but de compenser la répartition des phonèmes irréguliers dans les passages. 2)	Des nombres:Les nombres ont été divisés en cinq blocs, chacun contenant vingt nombres. Chaque bloc a été enregistré d’un seul trait. 3)	Des mots CVC:Les listes de mots CVC contiennent cinq types de listes ainsi que des phrases porteuses correspondant au type. Quatre-vingt deux mots isolés ont été utilisés.</description>
-<resourceShortName>EUROM1_S</resourceShortName>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1066</url>
-<identifier>ELRA-S0276</identifier>
+<resourceName lang="English">Turkish Speecon database</resourceName>
+<resourceName lang="French">Base de données Speecon du turc</resourceName>
+<description lang="English">The Turkish Speecon database is divided into 2 sets: 1) The first set comprises the recordings of 550 adult Turkish speakers (280 males, 270 females), recorded over 4 microphone channels in 4 recording environments (office, entertainment, car, public place). 2) The second set comprises the recordings of 50 child Turkish speakers (25 boys, 25 girls), recorded over 4 microphone channels in 1 recording environment (children room). This database is partitioned into 28 DVDs (first set) and 4 DVDs (second set).	The speech databases made within the Speecon project were validated by SPEX, the Netherlands, to assess their compliance with the Speecon format and content specifications.Each of the four speech channels is recorded at 16 kHz, 16 bit, uncompressed unsigned integers in Intel format (lo-hi byte order). To each signal file corresponds an ASCII SAM label file which contains the relevant descriptive information.Each speaker uttered the following items:Calibration data: 6 noise recordingsThe “silence word” recordingFree spontaneous items (adults only):3 minutes  (session time) of free spontaneous, rich context items (story telling) (an open number of  spontaneous topics out of a set of 30 topics)17 Elicited spontaneous items (adults only):3 dates, 2 times, 3 proper names, 2 city name, 1 letter sequence, 2 answers to questions, 3 telephone numbers, 1 language Read speech:30 phonetically  rich sentences uttered by adults and 60 uttered by children5 phonetically rich words (adults only)4 isolated digits1 isolated digit sequence4 connected digit sequences1 telephone number3 natural numbers1 money amount2 time phrases (T1 : analogue, T2 : digital)3 dates (D1 : analogue, D2 : relative and general date, D3 : digital)3 letter sequences1 proper name2 city or street names2 questions2 special keyboard characters 1 Web address1 email address222 application specific words and phrases per session (adults)74 toy commands, 14 general commands, 31 phone commands and 4 application word synonyms (children)The following age distribution has been obtained: Adults: 244 speakers are between 15 and 30, 235 speakers are between 31 and 45, and 71 speakers are over 46.Children: 25 speakers are between 8 and 10, 25 speakers are between 11 and 15.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
+<description lang="French">La base de données Speecon du turc est répartie en deux sous-ensembles :1) Le premier sous-ensemble est composé de 550 locuteurs turcs adultes (280 hommes, 270 femmes) enregistrés à partir de 4 canaux de microphone dans 4 environnements différents (bureau, divertissement, voiture, lieu publique). 2) Le deuxième sous-ensemble est composé de 50 locuteurs turcs enfants (25 garçons, 25 filles) enregistrés à partir de 4 canaux de microphone dans un seul environnement (chambre d’enfant).Elle est distribuée sur 28 DVD (adultes) et 4 DVD (enfants). Les bases orales réalisées lors du projet Speecon ont été validées par SPEX, Pays-Bas, afin de contrôler leur adéquation avec le format Speecon et les spécifications de contenu. Les fichiers sont stockés en séquences d'échantillons de 16 kHz, 16 bit ; les canaux sont multiplexés dans un fichier unique, avec une séquence de 0-1-2-3. A chaque énoncé correspond un fichier d'étiquetage ASCII SAM.Chaque locuteur a prononcé les éléments suivants :Données de calibrage : 6 bruits1 “silence”Eléments libres spontanés (adultes uniquement) :3  minutes  (par session) de discours libre spontané, en contexte riche (raconter une histoire) (nombre ouvert de thèmes spontanés à partir de 30 thèmes donnés)17 éléments spontanés dirigés (adultes uniquement) :3 dates, 2 périodes de temps, 3 noms propres, 2 noms de ville, 1 séquence de lettres, 2 réponses à des questions, 3 numéros de téléphone, 1 langue Parole lue : 30 phrases phonétiquement riches prononcées par les adultes et 60 prononcées par les enfants5 mots phonétiquement riches (adultes uniquement)4 chiffres isolés1 séquences de chiffres isolés4 séquences de chiffres connectés1 numéro de téléphone3 nombres naturels 1 montant en devise2 phrases comportant une notion de temps (T1 : analogique, T2 : numérique)3 dates (D1 : analogique, D2 : date relative et générale, D3 : numérique)3 séquences de lettres1 nom propre2 noms de ville ou de rue2 questions2 caractères clavier 1 adresse Web1 adresse email222 mots et phrases de commande par sessions (adultes)74 commandes de jouets, 14 commandes générales, 31 commandes de téléphone et 4 synonymes de mots d’applications (enfants)Les classes d'âge sont réparties comme suit : Adultes : 244 locuteurs ont entre 15 et  30 ans, 235 entre 31 et 45 ans, et 71 ont plus de 46 ans.Enfants: 25 locuteurs ont entre 8 et 10 ans, 25 entre 11 et 15 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
+<resourceShortName/>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=800</url>
+<identifier>ELRA-S0178</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,35 +29,35 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2011-09-22</lastDateUpdated>
+<lastDateUpdated>2007-02-22</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 1600.00€</price>
-<price>Academic org. ELRA Non Member: 1600.00€</price>
-<price>Commercial org. ELRA Member: 800.00€</price>
-<price>Academic org. ELRA Member: 800.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2008-07-11</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 75000.00€</price>
+<price>Academic org. ELRA Non Member: 60000.00€</price>
+<price>Commercial org. ELRA Member: 67000.00€</price>
+<price>Academic org. ELRA Member: 50000.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2005-08-02</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 1600.00€</price>
-<price>Academic org. ELRA Non Member: 1600.00€</price>
-<price>Commercial org. ELRA Member: 800.00€</price>
-<price>Academic org. ELRA Member: 800.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2008-07-11</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 75000.00€</price>
+<price>Academic org. ELRA Non Member: 75000.00€</price>
+<price>Commercial org. ELRA Member: 67000.00€</price>
+<price>Academic org. ELRA Member: 67000.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2005-08-02</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceCreationInfo>
 <fundingProject>
-<projectName>EUROM.1</projectName>
-<fundingType>other</fundingType>
+<projectName>Speecon</projectName>
+<fundingType>euFunds</fundingType>
 </fundingProject>
 </resourceCreationInfo>
 <resourceComponentType>
@@ -70,8 +70,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>swe</languageId>
-<languageName>Swedish</languageName>
+<languageId>tur</languageId>
+<languageName>Turkish</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

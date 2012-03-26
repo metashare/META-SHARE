@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">LC-STAR English-Italian Bilingual Aligned Phrasal lexicon</resourceName>
-<resourceName lang="French">Lexique aligné anglais-italien de locutions LC-STAR</resourceName>
-<description lang="English">The LC-STAR English-Italian Bilingual Aligned Phrasal lexicon was created within the scope of the LC-STAR project (IST 2001-32216) which was sponsored by the European Commission. It was designed for SST (Speech-to-Speech Translation).The lexicon comprises 10,466 phrases from the tourist domain. It is based on a list of short sentences obtained by translation from a US-English 10,524 phrase corpus. The total number of unique separate words is 45,110.The lexicon contains the following information: -	US-English phrase (orthography), -	its translation into Italian (orthography), and for each token in Italian a phrase provides the following: -	orthography of a word, -	part of speech, -	lemma,-	whether the phrase is idiomatic or not, -	if a word is a foreign word. In this lexicon, foreign words were only tagged if they were written with foreign orthography (e.g. English characters). The lexicon is provided in XML format. The database is stored on 1 CD.</description>
-<description lang="French">Le lexique aligné anglais-italien de locutions LC-STAR a été créé dans le cadre du projet LC-STAR (IST 2001-32216), financé par la Commission européenne. Il a été conçu pour des applications en traduction parole-parole (SST - Speech-to-Speech Translation).Le lexique comprend 10 466 locutions du domaine du tourisme. Il est basé sur une liste de phrases courtes obtenue par la traduction d’un corpus de 10 524 locutions en anglais américain. Le nombre total de mots uniques séparés est de 45 110.Le lexique contient les informations suivantes : -	la locution en anglais américain (orthographe), -	sa traduction en italien (orthographe),et pour chaque élément dans la locution en italien: -	l’orthographe du mot, -	la partie du discours, -	le lemme,-	si la locution est idiomatique ou non, -	si un mot est un mot étranger. Dans ce lexique, les mots étrangers ont été étiquetés uniquement lorsqu’ils sont écrits dans une orthographe étrangère (par exemple, des caractères en anglais).Le lexique est fourni au format XML. La base de données est stockée sur 1 CD.</description>
+<resourceName lang="English">Mandarin Chinese Desktop Speech Recognition Corpus - Monosyllabic (98 people)</resourceName>
+<resourceName lang="French">Corpus de reconnaissance de parole microphone en chinois mandarin – monosyllabes (98 locuteurs)</resourceName>
+<description lang="English">This corpus comprises 1,267 entries uttered by 98 speakers of different dialects, ages and various educational levels (46 males and 52 females), recorded over 3 channels (Mic 1: SHURE SM58; Mic 2: Labtec Axis-002; Mic 3: ATR 60C). The database comprises monosyllables. Speech samples are stored as a sequence of 16-bit 44.1kHz WAV for 88 hours of speech per channel. The total capacity of the data is 78 Gb.Text files are stored in Unicode format. All data have been proofread manually.The corpus aims to be applied to the testing and telephone natural speech recognition system.</description>
+<description lang="French">Ce corpus comprend 1 267 entrées prononcées par 98 locuteurs de dialectes, d’âges et de niveaux d’éducation différents (46 hommes et 52 femmes), enregistrées via 3 canaux (Mic1: SHURE SM58; Mic2: Labtec Axis-002; Mic3: ATR 60C). La base de données contient des monosyllabes. Les échantillons de parole sont stockés sous la forme de séquences 16-bit 44,1kHz WAV pour un total de 88 heures de parole. La taille totale des données est de 78 Go.Chaque locuteur a lu 120 éléments. Les fichiers textes sont stockés au format Unicode. Toutes les données ont été vérifiées manuellement.Cette base de données a été conçue pour l’évaluation et le développement de systèmes de reconnaissance de la parole naturelle par téléphone.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1056</url>
-<identifier>ELRA-S0271</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=933</url>
+<identifier>ELRA-S0228_31</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,77 +29,44 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2008-04-22</lastDateUpdated>
+<lastDateUpdated>2009-09-24</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 7150.00€</price>
-<price>Academic org. ELRA Non Member: 4875.00€</price>
-<price>Commercial org. ELRA Member: 5500.00€</price>
-<price>Academic org. ELRA Member: 3750.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2008-02-06</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 4657.00€</price>
+<price>Academic org. ELRA Non Member: 4657.00€</price>
+<price>Commercial org. ELRA Member: 4657.00€</price>
+<price>Academic org. ELRA Member: 4657.00€</price>
+<availabilityStartDate>2007-01-17</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 7150.00€</price>
-<price>Academic org. ELRA Non Member: 7150.00€</price>
-<price>Commercial org. ELRA Member: 5500.00€</price>
-<price>Academic org. ELRA Member: 5500.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2008-02-06</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 4657.00€</price>
+<price>Academic org. ELRA Non Member: 4657.00€</price>
+<price>Commercial org. ELRA Member: 4657.00€</price>
+<price>Academic org. ELRA Member: 4657.00€</price>
+<availabilityStartDate>2007-01-17</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<usageInfo>
-<actualUseInfo>
-<actualUse>nlpApplications</actualUse>
-<useNLPSpecific>speechRecognition</useNLPSpecific>
-</actualUseInfo>
-</usageInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>LC-STAR (IST 2001-32216)</projectName>
-<fundingType>euFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
-<mediaType>text</mediaType>
-<lingualityInfo>
-<lingualityType>monolingual</lingualityType>
-</lingualityInfo>
-<languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>ita</languageId>
-<languageName>Italian</languageName>
-</languageInfo>
-</lexicalConceptualResourceTextInfo>
-<lexicalConceptualResourceAudioInfo>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
 <mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
+<languageId>chi/zho</languageId>
+<languageName>Chinese</languageName>
 </languageInfo>
-<languageInfo>
-<languageId>ita</languageId>
-<languageName>Italian</languageName>
-</languageInfo>
-</lexicalConceptualResourceAudioInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
 </resourceComponentType>
 </resourceInfo>

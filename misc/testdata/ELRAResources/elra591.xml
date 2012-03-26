@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Japanese Speecon database</resourceName>
-<resourceName lang="French">Base de données Speecon japonais</resourceName>
-<description lang="English">The Japanese Speecon database is divided into 2 sets: 1) The first set comprises the recordings of 556 adult Japanese speakers (268 males, 288 females), recorded over 4 microphone channels in 4 recording environments (office, entertainment, car, public place). 2) The second set comprises the recordings of 51 child Japanese speakers (25 boys, 26 girls), recorded over 4 microphone channels in 1 recording environment (children room). This database is partitioned into 29 DVDs (first set) and 4 DVDs (second set).The speech databases made within the Speecon project were validated by SPEX, the Netherlands, to assess their compliance with the Speecon format and content specifications. Each of the four speech channels is recorded at 16 kHz, 16 bit, uncompressed unsigned integers in Intel format (lo-hi byte order). To each signal file corresponds an ASCII SAM label file which contains the relevant descriptive information.Each speaker uttered the following items (over 290 items for adults and over 210 items for children):Calibration data: 6 noise recordings The “silence word” recordingFree spontaneous items (adults only):5  minutes  (session time) of free spontaneous, rich context items (story telling) (an open number of  spontaneous topics out of a set of 30 topics)17 Elicited spontaneous items (adults only):3 dates, 2 times, 3 proper names, 2 city names, 1 letter sequence, 2 answers to questions, 3 telephone numbers, 1 language Read speech:30 phonetically  rich sentences uttered by adults and 60 uttered by children5 phonetically rich words (adults only)4 isolated digits1 isolated digit sequence4 connected digit sequences1 telephone number3 natural numbers1 money amount2 time phrases (T1 : analogue, T2 : digital)3 dates (D1 : analogue, D2 : relative and general date, D3 : digital)3 letter sequences1 proper name2 city or street names2 questions2 special keyboard characters 1 Web address1 email address218 application specific words and phrases per session (adults)74 toy commands, 14 phone commands and 34 general commands (children)The following age distribution has been obtained: Adults: 236 speakers are between 15 and 30, 235 speakers are between 31 and 45, 85 speakers are over 46.Children: 18 speakers are between 8 and 10, and 33 speakers are between above 11 (up to voice break).A pronunciation lexicon with a phonemic transcription in SAMPA is also included.Prices available upon request. Please contact us.</description>
-<description lang="French">La base de données Speecon japonais est répartie en deux sous-ensembles :1) Le premier sous-ensemble est composé de 556 locuteurs adultes japonais (268 hommes, 288 femmes) à partir de 4 canaux de microphone dans 4 environnements différents (bureau, divertissement, voiture, lieu public). 2) Le deuxième sous-ensemble est composé de 51 locuteurs enfants japonais (25 garçons, 26 filles) enregistrés à partir de 4 canaux de microphone dans un seul environnement (chambre d’enfant).La base de données est distribuée sur 29 DVD (adultes) et 4 DVD (enfants). Les bases orales réalisées lors du projet Speecon ont été validées par SPEX, Pays-Bas, afin de contrôler leur adéquation avec le format Speecon et les spécifications de contenu. Les fichiers sont stockés en séquences d'échantillons de 16 kHz, 16 bit ; les canaux sont multiplexés dans un fichier unique, avec une séquence de 0-1-2-3. A chaque énoncé correspond un fichier d'étiquetage ASCII SAM.Chaque locuteur a prononcé les éléments suivants (plus de 290 éléments pour les adultes et plus de 210 éléments pour les enfants) :Données de calibrage : 6 bruits1 “silence”Eléments libres spontanés (adultes uniquement) :5 minutes  (par session) de discours libre spontané, en contexte riche (raconter une histoire) (nombre ouvert de thèmes spontanés à partir de 30 thèmes donnés)17 éléments spontanés dirigés (adultes uniquement) :3 dates, 2 périodes de temps, 3 noms propres, 2 noms de ville, 1 séquence de lettres, 2 réponses à des questions, 3 numéros de téléphone, 1 langue Parole lue : 30 phrases phonétiquement riches prononcées par les adultes et 60 prononcées par les enfants5 mots phonétiquement riches (adultes uniquement)4 chiffres isolés1 séquences de chiffres isolés4 séquences de chiffres connectés1 numéro de téléphone3 nombres naturels 1 montant en devise2 phrases comportant une notion de temps (T1 : analogique, T2 : numérique)3 dates (D1 : analogique, D2 : date relative et générale, D3 : numérique)3 séquences de lettres1 nom propre2 noms de ville ou de rue2 questions2 caractères clavier 1 adresse Web1 adresse email218 mots et phrases de commande par sessions (adultes)74 commandes de jouets, 14 commandes de téléphone et 34 commandes générales (enfants)Les classes d'âge sont réparties comme suit : Adultes : 236  locuteurs ont entre 15 et  30 ans, 235 entre 31 et 45 ans, et 85 de plus de 46 ans.Enfants: 18 locuteurs ont entre 8 et 10 ans, et 33 locuteurs ont plus de 11 ans (jusqu’à la mue).Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.Prix disponibles à la demande. Merci de nous contacter.</description>
+<resourceName lang="English">Mandarin Chinese Desktop Speech Recognition Corpus - Stock (849 people)</resourceName>
+<resourceName lang="French">Corpus de reconnaissance de parole microphone en chinois mandarin – noms de stock (849 locuteurs)</resourceName>
+<description lang="English">This corpus comprises 1,584 entries uttered by 849 speakers of different dialects, ages and various educational levels (420 males and 429 females), recorded over 2 channels (Mic1: SHURE SM58; Mic2: Labtec Axis-002). The database comprises 13,600 stocks per channel. Speech samples are stored as a sequence of 16-bit 44.1kHz WAV for 20 hours of speech per channel. The total capacity of the data is 12 Gb.Each speaker read 16 items. Text files are stored in Unicode format. All data have been proofread manually.The transcriptions include non-speech markers (background noise, background speech, speaker sounds) as well as markers for mispronunciation, channel distortions, words left-out and duplicates.The corpus aims to be applied to the testing and telephone natural speech recognition system.</description>
+<description lang="French">Ce corpus comprend 1 584 entrées prononcées par 849 locuteurs de dialectes, d’âges et de niveaux d’éducation différents (420 hommes et 429 femmes), enregistrées via 2 canaux (Mic1: SHURE SM58; Mic2: Labtec Axis-002). La base de données contient 13 600 entrées par canal. Les échantillons de parole sont stockés sous la forme de séquences 16-bit 44,1kHz WAV pour un total de 20 heures de parole par canal. La taille totale des données est de 12 Go.Chaque locuteur a lu 16 éléments. Les fichiers textes sont stockés au format Unicode. Toutes les données ont été vérifiées manuellement.Les transcriptions comprennent des balises d’événements acoustiques (bruits de fond, sons émis par les locuteurs) ainsi que des balises de mauvaise prononciation, distorsions du canal, omissions de mots et répétitions.Cette base de données a été conçue pour l’évaluation et le développement de systèmes de reconnaissance de la parole naturelle par téléphone.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1027</url>
-<identifier>ELRA-S0244</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=926</url>
+<identifier>ELRA-S0228_24</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,17 +29,29 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-12-18</lastDateUpdated>
+<lastDateUpdated>2009-09-24</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 3232.00€</price>
+<price>Academic org. ELRA Non Member: 3232.00€</price>
+<price>Commercial org. ELRA Member: 3232.00€</price>
+<price>Academic org. ELRA Member: 3232.00€</price>
+<availabilityStartDate>2007-01-17</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 3232.00€</price>
+<price>Academic org. ELRA Non Member: 3232.00€</price>
+<price>Commercial org. ELRA Member: 3232.00€</price>
+<price>Academic org. ELRA Member: 3232.00€</price>
+<availabilityStartDate>2007-01-17</availabilityStartDate>
+</licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>Speecon</projectName>
-<fundingType>euFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
@@ -50,8 +62,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>jpn</languageId>
-<languageName>Japanese</languageName>
+<languageId>chi/zho</languageId>
+<languageName>Chinese</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

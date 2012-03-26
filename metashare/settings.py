@@ -12,7 +12,7 @@ import logging
 from logging.handlers import RotatingFileHandler
 
 # Logging settings for this Django project.
-LOG_LEVEL = logging.DEBUG
+LOG_LEVEL = logging.INFO
 LOG_FILENAME = join(tempfile.gettempdir(), "metashare.log")
 LOG_FORMAT = "[%(asctime)s] %(name)s::%(levelname)s %(message)s"
 LOG_DATE = "%m/%d/%Y @ %H:%M:%S"
@@ -178,11 +178,13 @@ TEST_MODE_NAME = 'testing'
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-        'URL': SOLR_URL
+        'URL': SOLR_URL,
+        'SILENTLY_FAIL': False
     },
     TEST_MODE_NAME: {
         'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-        'URL': TESTING_SOLR_URL
+        'URL': TESTING_SOLR_URL,
+        'SILENTLY_FAIL': False
     },
 }
 

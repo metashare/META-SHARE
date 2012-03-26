@@ -6,7 +6,7 @@
 <description lang="English">The first really multilingual speech database produced in Europe. Equivalent corpora for each of the European languages: same number of speakers selected in the same way, and recorded in the same conditions with common file formats. Initially eight European countries have made recordings: Italy, United Kingdom, Germany, Netherlands, Denmark, Sweden, Norway, France. Additional recordings have been then completed (thanks to CEE Esprit Project SAM-A), in Greece, Spain and Portugal. The content consists of Numbers, Passages, Sentences and CVC. More than sixty speakers per language.</description>
 <description lang="French">La première base de données européenne de parole. Au départ, huit pays d'Europe ont participé aux enregistrements : l'Italie, le Royaume-Uni, l'Allemagne, les Pays-Bas, le Danemark, la Suède, la Norvège et la France. Cette base a ensuite été complétée par les enregistrements réalisés en Grèce, au Portugal, et en Espagne. Les données proviennent de plus de soixante locuteurs pour chaque langue.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=528</url>
 <identifier>ELRA-S0014_02</identifier>
 </identificationInfo>

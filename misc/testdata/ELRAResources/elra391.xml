@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Electrical Engineering</resourceName>
-<resourceName lang="French">Ingénierie électrique (Universität Hildesheim)</resourceName>
-<description lang="English">Cards available: 1750Card Description: Each card in this terminological database contains a definition, relation between concepts, graphics, abbreviations, notes, sub-domains, sources, grammatical labels.</description>
-<description lang="French">Fiches disponibles : 1750Description de la fiche : Chaque fiche de cette base terminologique contient une définition, des relations entre les concepts, des graphiques, des abréviations, des notes, des sous-domaines, des sources et des étiques grammaticales.</description>
+<resourceName lang="English">NODE+DIMAP</resourceName>
+<resourceName lang="French">NODE+DIMAP</resourceName>
+<description lang="English">The DIMAP version of NODE (first edition) is a machine-tractable version of the machine-readable dictionary files in the DIMAP dictionary maintenance programs, adding syntactic and semantic information in the conversion. In addition, DIMAP provides several mechanisms that will allow research into representational formalisms and explorations of the use of these representations in extending the lexical database and in processing text for information extraction, text summarization, discourse analysis and other LE applications. Using functionality to parse the dictionary definitions, DIMAP has further enhanced NODE through the addition of many semantic links, including hypernyms, synonyms, and other semantic relations, thus making NODE+DIMAP a semantic network of the English language. For more details on the contents of NODE+DIMAP, please see: http://www.clres.com/node-dimap-contents.html.</description>
+<description lang="French">La première édition DIMAP de NODE (cf L0045) est une version exploitable et modifiable des fichiers de dictionnaire provenant des programmes de maintenance de dictionnaire DIMAP, comprenant après conversion des informations syntaxiques et morphologiques. En outre, DIMAP fournit plusieurs mécanismes qui permettront d'une part la recherche de formalismes de représentation, d'autre part des études pour l'usage de ces représentations pour les bases de données lexicales et pour le traitement du texte dans les systèmes d'extraction de l'information, dans les systèmes de résumé automatique, pour l'analyse de discours, etc. En plus des fonctionnalités pour l'analyse des définitions, DIMAP permet de compléter NODE de nombreuses indications de liens sémantiques, tels que hyperonymes, synonymes, etc. NODE + DIMAP constitue ainsi une représentation du réseau sémantique de la langue anglaise.Pour plus d'informations sur NODE + DIMAP, vous pouvez consulter le site Internet suivant : http://www.clres.com/node-dimap-contents.html.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=23</url>
-<identifier>ELRA-T0096</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=680</url>
+<identifier>ELRA-L0046</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -36,37 +36,16 @@
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 2.05€</price>
-<price>Academic org. ELRA Non Member: 2.05€</price>
-<price>Commercial org. ELRA Member: 1.23€</price>
-<price>Academic org. ELRA Member: 1.23€</price>
-<distributionAccessMedium>other</distributionAccessMedium>
-<availabilityStartDate>1997-01-23</availabilityStartDate>
-</licenceInfo>
-<licenceInfo>
-<licence>ELRA_VAR</licence>
-<restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 2.05€</price>
-<price>Academic org. ELRA Non Member: 2.05€</price>
-<price>Commercial org. ELRA Member: 1.23€</price>
-<price>Academic org. ELRA Member: 1.23€</price>
-<distributionAccessMedium>other</distributionAccessMedium>
-<availabilityStartDate>1997-01-23</availabilityStartDate>
+<price>Academic org. ELRA Non Member: 10000.00€</price>
+<price>Academic org. ELRA Member: 7000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2002-10-25</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceDocumentationInfo>
-<documentation>
-<documentInfo>
-<documentType>unpublished</documentType>
-<title>samphuee.html</title>
-</documentInfo>
-</documentation>
-<samplesLocation>http://catalog.elra.info/product_info.php?action=download&amp;filename=samphuee.html</samplesLocation>
-</resourceDocumentationInfo>
 <resourceComponentType>
 <lexicalConceptualResourceInfo>
 <resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>terminologicalResource</lexicalConceptualResourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
 <lexicalConceptualResourceMediaType>
 <lexicalConceptualResourceTextInfo>
 <mediaType>text</mediaType>
@@ -76,26 +55,6 @@
 <languageInfo>
 <languageId>eng</languageId>
 <languageName>English</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>ger/deu</languageId>
-<languageName>German</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>spa</languageId>
-<languageName>Spanish</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Castilian</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
 </languageInfo>
 </lexicalConceptualResourceTextInfo>
 </lexicalConceptualResourceMediaType>

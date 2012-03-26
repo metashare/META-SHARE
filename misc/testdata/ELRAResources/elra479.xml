@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">FIXED0IT - DB2</resourceName>
-<resourceName lang="French">FIXED0IT - DB2</resourceName>
-<description lang="English">DB1 Phonetically rich sentences &amp; application oriented utterancesThe Italian Fixed Network Speech SpeechDat(M) Corpus version 1.0 was recorded within the scope of the SpeechDat(M) project (LRE-63314), funded by the European Commission. Recording was done by using a primary rate ISDN interface, yielding 8 kHz, 8 bits per sample, A-law coded signal. The data files are formatted according to the SAM European project. The speech data are compressed with the GNU gzip program. All software needed to use the corpus is provided on the CDs.The corpus contains the speech of about 1,000 speakers (about 500 males and 500 females) and was designed to support the creation of voice-driven teleservices. The callers spoke at least 39 items, comprising:    * isolated and connected digits    * natural numbers    * money amounts    * spelled words    * time and date phrases    * yes/no questions    * city names    * common application words    * application words in phrases    * phonetically rich sentencesMost items are read, some are spontaneously spoken.The recordings come with extensive and standardised documentation. All speech is carefully transcribed at the orthographic level; in addition, a number of clearly audible non-speech events are included in the transcription. Moreover, age and regional background of the speakers are provided. A pronunciation dictionary is added, containing all words that occur in the corpus, with a corresponding SAMPA broad-class phonemic transcription.Validation and premastering of the CD-ROMs were performed by the Speech Processing Expertise Centre (SPEX), Leidschendam, The Netherlands.DB2 Phonetically rich sentences sub-set (S0053)See ELRA-S0052 for description. DB2 is a sub-set of DB1; it contains only the phonetically rich sentences items</description>
-<description lang="French">La version 1.0 du corpus de parole italien sur réseau fixe a été enregistrée dans le cadre du projet SpeechDat(M) (LRE-63314), soutenu par la Commission Européenne. L'enregistrement a été réalisé en utilisant une interface numéris (ISDN), avec une fréquence d'échantillonnage de 8 kHz, de 8 bits par échantillon et un signal codé en loi-A. Les données ont été formatées d'après les standards du projet européen SAM. Les données sont compressées par le programme GNU gzip. Les logiciels nécessaires à la bonne utilisation du corpus sont fournis avec les données sur les CD.Le corpus contient des enregistrements d'environ 1000 locuteurs (500 hommes et 500 femmes). Il a pour but d'aider à la réalisation de services télématiques vocaux. Chaque locuteur a prononcé plus de 39 éléments, dont :    * chiffres isolés et connectés,    * nombres entiers naturels,    * montants,    * mots épelés,    * dates et phrases comportant une notion de temps,    * questions oui/non,    * noms de villes,    * mots de commande courants    * mots de commandes inclus dans des phrases,    * phrases phonétiquement riches.La plupart de ces éléments sont lus, certains sont spontanés.Les enregistrements sont fournis avec une documentation complète selon les standards SpeechDat(M). L'intégralité des enregistrements a été soigneusement transcrite au niveau orthographique ; de même, un certain nombre d'événements acoustiques clairement audibles sont inclus dans la transcription. L'âge et l'origine régionale des locuteurs sont également fournis. Un dictionnaire de prononciation est inclus dans les CD. Celui-ci contient tous les mots apparaissant dans le corpus, avec une transcription phonémique correspondante (utilisation de SAMPA).La validation et la préparation des CD-ROM ont été réalisées par SPEX, Leidschendam, Pays-Bas.</description>
+<resourceName lang="English">SpeechDat Speaker Verification database</resourceName>
+<resourceName lang="French">Base de données SpeechDat de vérification du locuteur</resourceName>
+<description lang="English">This subset of PolyVar (cf. ELRA-S0046) consists of 20 speakers which recorded 50 sessions. The format in use is SAM (a-law).</description>
+<description lang="French">Ce sous-ensemble de PolyVar (cf. ELRA-S0046) comprend 20 locuteurs ayant enregistré 50 sessions. Le format des appels est SAM (alaw)</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=186</url>
-<identifier>ELRA-S0053</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=745</url>
+<identifier>ELRA-S0047</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,37 +29,31 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-02-22</lastDateUpdated>
+<lastDateUpdated>2005-06-03</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 20000.00€</price>
-<price>Academic org. ELRA Non Member: 14000.00€</price>
-<price>Commercial org. ELRA Member: 14000.00€</price>
-<price>Academic org. ELRA Member: 8800.00€</price>
+<price>Commercial org. ELRA Non Member: 3000.00€</price>
+<price>Academic org. ELRA Non Member: 1500.00€</price>
+<price>Commercial org. ELRA Member: 1500.00€</price>
+<price>Academic org. ELRA Member: 750.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1998-07-08</availabilityStartDate>
+<availabilityStartDate>1997-11-28</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 20000.00€</price>
-<price>Academic org. ELRA Non Member: 20000.00€</price>
-<price>Commercial org. ELRA Member: 14000.00€</price>
-<price>Academic org. ELRA Member: 14000.00€</price>
+<price>Commercial org. ELRA Non Member: 3000.00€</price>
+<price>Academic org. ELRA Non Member: 3000.00€</price>
+<price>Commercial org. ELRA Member: 1500.00€</price>
+<price>Academic org. ELRA Member: 1500.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1998-07-08</availabilityStartDate>
+<availabilityStartDate>1997-11-28</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>SpeechDat(M)</projectName>
-<fundingType>euFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
@@ -70,8 +64,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>ita</languageId>
-<languageName>Italian</languageName>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

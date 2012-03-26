@@ -6,7 +6,7 @@
 <description lang="English">This database contains the recordings of one female Catalan professional speaker recorded in a noise-reduced room simultaneously through a close talk microphone, a mid distance microphone and a laryngograph signal. It consists in the recordings and annotations of read text material of approximately 10 hours of speech for baseline applications (Text-to-Speech systems). The FESTCAT Catalan TTS Baseline Female Speech Database was created within the scope of the FESTCAT project funded by the Catalan Government.</description>
 <description lang="French">Cette base de données comprend les enregistrements d’un locuteur professionnel femme du catalan dans une salle à bruit réduit réalisés simultanément via un microphone “close talk”, un microphone à moyenne distance et un signal laryngographique. Elle consiste en des enregistrements et annotations de matériel textuel lu pour environ 10 heures de parole pour des applications de référence (systèmes texte-parole). La voix de femme de référence TTS du projet FESTCAT catalan a été créée dans le cadre du projet FESTCAT, financé par le gouvernement catalan.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=1153</url>
 <identifier>ELRA-S0331</identifier>
 </identificationInfo>

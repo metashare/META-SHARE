@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">PAROLE-SIMPLE-CLIPS PISA Italian Lexicon – Full lexicon</resourceName>
-<resourceName lang="French">Lexique italien PAROLE-SIMPLE-CLIPS de Pise – Lexique complet</resourceName>
-<description lang="English">This lexicon is subdivided into five different subsets:L0072-01 Full lexiconL0072-02 Phonetic layerL0072-03 Morphological layerL0072-04 Syntactic layerL0072-05 Semantic layerPAROLE-SIMPLE-CLIPS is a four-level, general purpose lexicon that has been elaborated over three different projects. The kernel of the morphological and syntactic lexicons was built in the framework of the LE-PAROLE project. The linguistic model and the core of the semantic lexicon were elaborated in the LE-SIMPLE project, while the phonological level of description and the extension of the lexical coverage were performed in the context of the Italian project Corpora e Lessici dell'Italiano Parlato e Scritto (CLIPS). The PAROLE-SIMPLE-CLIPS Pisa Italian Lexicon comprises a total of 387,267 phonetic units, 53,044 morphological units (53,044 lemmas), 37,406 syntactic units (28,111 lemmas) and 28,346 semantic units (19,216 lemmas). It was encoded at the semantic level, in full accordance with the international standards set out in the PAROLE-SIMPLE model and based on EAGLES. Syntactic and semantic encoding were performed jointly with Thamus (Consortium for Multilingual Documentary Engineering), which is responsible for 25,000 extra entries (to be released soon).PAROLE-SIMPLE-CLIPS offers therefore the advantage of being compatible with the other eleven PAROLE-SIMPLE lexicons that were built for European languages and that share a common theoretical model, representation language and building methodology.A PAROLE-SIMPLE-CLIPS entry gathers together all the phonological, morphological and inherent syntactic and semantic properties of a headword. Its subcategorization pattern is (or are) described in terms of optionality, syntactic function, syntagmatic realization as well as morpho-syntactic, syntactic and lexical properties of each slot filler. At the semantic level, the theoretical approach adopted by the SIMPLE model is essentially grounded on a revisited version of some fundamental aspects of the Generative Lexicon. A SIMPLE-CLIPS semantic unit is richly endowed with a wide range of fine-grained, structured information, most relevant for NLP applications. First among them, the ontological typing: the lexicon is in fact structured in terms of a multidimensional type system based on both hierarchical and non-hierarchical conceptual relations, taking into account the principle of orthogonal inheritance. Other relevant information types in a word entry are its domain of use; type of denoted event; synonymy and morphological derivation relations; membership in a class of regular polysemy as well as any relevant distinctive semantic features. Particularly outstanding is the information encoded in the Extended Qualia Structure (a set of 60 semantic relations that allow modelling both the different meaning dimensions of a word sense and its relationships to other lexical units) and the Predicative Representation which describes the semantic scenario the word sense considered is involved in and characterizes its participants in terms of thematic roles and semantic constraints.In a word’s description, lexical information is interrelated across the four description levels. Syntactic and semantic information, in particular, is related to each other through the projection of the predicate-argument structure onto its syntactic realization(s).References :Ruimy N., Corazzari O., Gola E., Spanu A., Calzolari N., Zampolli A. 2003. The PAROLE model and the Italian Syntactic lexicon. In A. Zampolli, N. Calzolari, L. Cignoni, (eds.), Computational Linguistics in Pisa - Linguistica Computazionale a Pisa. Linguistica Computazionale, Special Issue, XVIII-XIX, (2003). Pisa-Roma, IEPI. Tomo II, 793-820.Lenci A., Busa F., Ruimy N., Gola E., Monachini M., Calzolari N., Zampolli A. et al., 2000. SIMPLE Linguistic Specifications, SIMPLE LE4-8346 EC Project, Deliverable D2.1 &amp; D2.2, WP02, Final version, March 2000, ILC and University of Pisa, 404 pp. (http://www.ub.es/gilcub/SIMPLE/simple.html#Specifications).Ruimy N., Monachini M., Gola E., Calzolari N., Del Fiorentino M.C., Ulivieri M., Rossi S. 2003. A computational semantic lexicon of Italian: SIMPLE. In A. Zampolli, N. Calzolari, L. Cignoni, (eds.), Computational Linguistics in Pisa - Linguistica Computazionale a Pisa. Linguistica Computazionale, Special Issue, XVIII-XIX, (2003). Pisa-Roma, IEPI. Tomo II, 821-864.Ruimy N., Monachini M., Distante R., Guazzini E., Molino S., Ulivieri M., Calzolari N., Zampolli A. 2002. CLIPS, A Multi-level Italian Computational Lexicon: a Glimpse to Data. LREC 2002: Third LREC. Las Palmas de Gran Canaria, Spain 29th, 30th &amp; 31 May 2002. Proceedings, Volume III, Paris, The European Languages Resources Association (ELRA). 792-799.</description>
-<description lang="French">Ce lexique est divisé en cinq sous-ensembles :L0072-01 Lexique completL0072-02 Niveau phonétiqueL0072-03 Niveau morphologiqueL0072-04 Niveau syntaxiqueL0072-05 Niveau sémantiquePAROLE-SIMPLE-CLIPS est un lexique générique à quatre niveaux qui a été élaboré au cours de trois projets différents. Le noyau des lexiques morphologique et syntaxique a été realisé dans le cadre du projet LE-PAROLE. Le modèle linguistique et le noyau du lexique sémantique ont été élaborés dans le projet LE-SIMPLE, tandis que le niveau phonologique de description et l’extension de la couverture lexicale ont été réalisés dans le contexte du projet italien Corpora e Lessici dell'Italiano Parlato e Scritto (CLIPS). Le lexique italien PAROLE-SIMPLE-CLIPS de Pise comprend un total de 387 267 unités phonétiques, 53 044 unités morphologiques (53 044 lemmes), 37 406 unités syntaxiques (28 111 lemmes) et 28 346 unités sémantiques (19 216 lemmes). Il a été codé au niveau sémantique, en respectant entièrement les standards internationaux fixés dans le modèle PAROLE-SIMPLE et basés sur EAGLES. Le codage syntaxique et sémantique ont été réalisés conjointement avec Thamus (Consortium pour l’ingénierie documentaire multilingue), qui est l’auteur de 25 000 entrées (à paraître).Ainsi, PAROLE-SIMPLE-CLIPS offre l’avantage d’être compatible avec les onze autres lexiques PAROLE-SIMPLE qui ont été construits pour les langues européennes et qui partagent un modèle théorique commun, un langage de représentation et une méthodologie de construction.Une entrée de type PAROLE-SIMPLE-CLIPS regroupe toutes les propriétés phonologiques, morphologiques et inhérentes à la syntaxe et à la sémantique d’un mot-tête (« headword »). Son modèle de sous-catégorisation est décrit en termes d’optionalité, de fonction syntaxique, de réalisation syntagmatique, ainsi qu’en termes de propriétés morpho-syntaxiques, syntaxiques et lexicales de chaque catégorie fonctionnelle (« slot-filler »). Au niveau sémantique, l’approche théorique adoptée par le modèle SIMPLE est essentiellement basée sur une version revisitée de quelques aspects fondamentaux du Lexique Génératif. Une unité sémantique SIMPLE-CLIPS est richement doté d’une grande variété d’informations fines et structurées, des plus importantes pour les applications en TAL. En tête de ces informations, la typologie ontologique : le lexique est en fait structuré en termes de systèmes de types multidimensionnels basé sur des relations conceptuelles hiérarchiques et non hiérarchiques, prenant en compte le principe d’héritage orthogonal. D’autres types d’information intéressants dans une entrée de mot sont son domaine d’usage, le type d’événement indiqué, la synonymie et les relations de dérivation morphologique, affectation à une classe de polysémie régulière, ainsi qu’à des traits sémantiques distinctifs. Une information particulièrement intéressante est l’information codée dans la Structure de Qualia étendue (un ensemble de 60 relations sémantiques qui permettente de modéliser à la fois les différentes dimensions de signification du sens d’un mot et ses relations avec les autres unités lexicales) et la Représentation prédicative qui décrit le scénario sémantique dans lequel est impliqué le sens du mot considéré et qui caractérise les participants en termes de rôles thématiques et de contraintes sémantiques.Dans une description de mot, l’information lexicale est étroitement liée entre les quatre nivaux de description. Les informations syntaxique et sémantique, en particulier, sont reliées entre elles grâce à la projection de la structure de l’argument-prédicat sur la ou ses réalisations syntaxiques.Références :Ruimy N., Corazzari O., Gola E., Spanu A., Calzolari N., Zampolli A. 2003. The PAROLE model and the Italian Syntactic lexicon. In A. Zampolli, N. Calzolari, L. Cignoni, (eds.), Computational Linguistics in Pisa - Linguistica Computazionale a Pisa. Linguistica Computazionale, Special Issue, XVIII-XIX, (2003). Pisa-Roma, IEPI. Tomo II, 793-820.Lenci A., Busa F., Ruimy N., Gola E., Monachini M., Calzolari N., Zampolli A. et al., 2000. SIMPLE Linguistic Specifications, SIMPLE LE4-8346 EC Project, Deliverable D2.1 &amp; D2.2, WP02, Final version, March 2000, ILC et Université de Pisa, 404 pp. (http://www.ub.es/gilcub/SIMPLE/simple.html#Specifications).Ruimy N., Monachini M., Gola E., Calzolari N., Del Fiorentino M.C., Ulivieri M., Rossi S. 2003. A computational semantic lexicon of Italian: SIMPLE. In A. Zampolli, N. Calzolari, L. Cignoni, (eds.), Computational Linguistics in Pisa - Linguistica Computazionale a Pisa. Linguistica Computazionale, Special Issue, XVIII-XIX, (2003). Pisa-Roma, IEPI. Tomo II, 821-864.Ruimy N., Monachini M., Distante R., Guazzini E., Molino S., Ulivieri M., Calzolari N., Zampolli A. 2002. CLIPS, A Multi-level Italian Computational Lexicon: a Glimpse to Data. LREC 2002: Troisième LREC, Las Palmas de Gran Canaria, Espagne 29, 30 &amp; 31 mai 2002. Proceedings, Volume III, Paris, The European Languages Resources Association (ELRA). 792-799.</description>
+<resourceName lang="English">LC-STAR Spanish phonetic lexicon</resourceName>
+<resourceName lang="French">Lexique phonétique LC-STAR espagnol</resourceName>
+<description lang="English">The LC-STAR Spanish phonetic lexicon was created within the scope of the LC-STAR project (IST 2001-32216) which was sponsored by the European Commission and the Spanish Government.Production was performed at the Technologies and Applications of Language and Speech Center (TALP) of the Universitat Politècnica de Catalunya (UPC) (Spain). The owner of the database is UPC.The lexicon comprises more than 100,000 words, distributed over three categories:- a set of 55,854 common word entries. This set is extracted from a corpus of more than 37 million words distributed over 6 different domains (sports/games, news, finance, culture/entertainment, consumer information, personal communications). This was done with the aim of reaching a target for each domain of at least 95% self coverage. In addition to extracting word lists from the corpus, a list of closed set (function) word classes are included in the final word list.- a set of 45,403 proper names (including person names, family names, cities, streets, companies and brand names) divided into 3 domains. Multiple word names such as New_York are kept together in all three domains, and they count as one entry. The 3 domains consist of first and last names (23,114 different entries), place names (15,427 different entries), and organisations (7,777 different entries).- and a list of 7,498 special application words translated from English terms defined by the LC-STAR consortium. This list contains: numbers, letters, abbreviations and specific vocabulary for applications controlled by voice (information retrieval, controlling of consumer devices, etc.). The lexicon is provided in XML format and includes phonetic transcriptions in SAMPA. The database is stored on 1 CD.</description>
+<description lang="French">Le lexique phonétique LC-STAR espagnol a été créé dans le cadre du projet LC-STAR (IST 2001-32216), financé par la Commission européenne et le gouvernement espagnol.Le lexique a été produit au Centre de technologies et d’applications de la langue et de la parole (TALP) de l’Universitat Politècnica de Catalunya (UPC) (Espagnol), qui en est également le propriétaire.Le lexique comprend plus de 100 000 mots répartis en trois catégories :- Un ensemble de 55 854 mots communs. Cet ensemble a été extrait d’un corpus de plus de 20 millions de mots répartis en 6 domaines différents (sports/jeux, actualités, finances, culture/amusement, information consommateur, communications personnelles), avec pour objectif d’atteindre pour chaque domaine au moins 95% de couverture. En plus des listes de mots extraites du corpus, une liste de classes de mots en ensemble fermé (fonctions) est incluse dans la liste de mots finale.- Un ensemble de 45 403 noms propres (noms de personnes, noms de familles, villes, rues, sociétés, noms de marque) divisée en 3 domaines. Les noms comportant des mots multiples, tels que New_York, ont été conservés dans chacun des 3 domaines et comptent ainsi pour une seule entrée. Les 3 domaines sont : prénoms et noms de familles (23 114 entrées différentes), noms de lieux (15 427 entrées différentes), et organisations (7 777 entrées différentes).- Une liste de 7 498 mots d’application traduits à partir de termes anglais tels que définis par le consortium LC-STAR. Cette liste comprend des nombres, des lettres, des abréviations et du vocabulaire spécifique aux applications contrôlées par la voix (recherche d’information, contrôle des appareils de consommation, etc.). Le lexique est fourni au format XML et inclut des transcriptions phonétiques en SAMPA. La base de données est stockée sur 1 CD.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=881</url>
-<identifier>ELRA-L0072_01</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=833</url>
+<url>http://catalog.elra.info/product_info.php?products_id=980</url>
+<identifier>ELRA-S0208</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,41 +30,45 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<revision>Update frequencly: monthlyLast update: May 2005</revision>
-<lastDateUpdated>2009-01-14</lastDateUpdated>
+<lastDateUpdated>2008-02-12</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 15600.00€</price>
-<price>Academic org. ELRA Non Member: 2000.00€</price>
-<price>Commercial org. ELRA Member: 12000.00€</price>
-<price>Academic org. ELRA Member: 1500.00€</price>
-<availabilityStartDate>2006-09-18</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 29250.00€</price>
+<price>Academic org. ELRA Non Member: 21500.00€</price>
+<price>Commercial org. ELRA Member: 22000.00€</price>
+<price>Academic org. ELRA Member: 14250.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2007-02-20</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 15600.00€</price>
-<price>Academic org. ELRA Non Member: 15600.00€</price>
-<price>Commercial org. ELRA Member: 12000.00€</price>
-<price>Academic org. ELRA Member: 12000.00€</price>
-<availabilityStartDate>2006-09-18</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 29250.00€</price>
+<price>Academic org. ELRA Non Member: 29250.00€</price>
+<price>Commercial org. ELRA Member: 22000.00€</price>
+<price>Academic org. ELRA Member: 22000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2007-02-20</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceCreationInfo>
 <fundingProject>
-<projectName>PAROLE-SIMPLE-CLIPS</projectName>
+<projectName>LC-STAR (IST 2001-32216)</projectName>
 <fundingType>euFunds</fundingType>
 </fundingProject>
-<creationEndDate>2003-01-01</creationEndDate>
 </resourceCreationInfo>
 <resourceComponentType>
 <lexicalConceptualResourceInfo>
 <resourceType>lexicalConceptualResource</resourceType>
 <lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceEncodingInfo>
+<encodingLevel>phonetics</encodingLevel>
+<encodingLevel>morphology</encodingLevel>
+</lexicalConceptualResourceEncodingInfo>
 <lexicalConceptualResourceMediaType>
 <lexicalConceptualResourceTextInfo>
 <mediaType>text</mediaType>
@@ -71,13 +76,36 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>ita</languageId>
-<languageName>Italian</languageName>
+<languageId>spa</languageId>
+<languageName>Spanish</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Castilian</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
 </languageInfo>
-<textFormatInfo>
-<mimeType>Plain text</mimeType>
-</textFormatInfo>
 </lexicalConceptualResourceTextInfo>
+<lexicalConceptualResourceAudioInfo>
+<mediaType>audio</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>spa</languageId>
+<languageName>Spanish</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Castilian</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
+</languageInfo>
+</lexicalConceptualResourceAudioInfo>
 </lexicalConceptualResourceMediaType>
 </lexicalConceptualResourceInfo>
 </resourceComponentType>

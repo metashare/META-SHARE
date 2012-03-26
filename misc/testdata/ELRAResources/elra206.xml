@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">The "SIVA" Speech Database for Speaker Verification and Identification</resourceName>
-<resourceName lang="French">SIVA, base de données orale pour la vérification et l'identification du locuteur</resourceName>
-<description lang="English">The Italian speech database SIVA (?Speaker Identification and Verification Archives: SIVA?), is a database comprising more than two thousands calls, collected over the public switched telephone network, and available very soon via ELRA. The SIVA database consists of four speaker categories: male users, female users, male impostors, female impostors. Speakers were contacted via mail before the test, and they were asked to read the information and the instructions provided carefully before making the call. About 500 speakers were recruited using a company specialized in selection of population samples. The others were volunteers contacted by the institute concerned. Speakers access the recording system by calling a toll free number. An automatic answering system guides them through the three sessions that make up a recording. In the first session, a list of 28 words (including digits and some commands) is recorded using a standard enumerated prompt. The second session is a simple unidirectional dialogue (the caller answers prompted questions) where personal information is asked (name, age, etc.). In the third session, the speaker is asked to read a continuous passage of phonetically balanced text that resembles a short curriculum vitae. The signal is a standard 8kHz sampled signal, coded using 8 bits mu-law format. The data collected so far consists of:· MU: male users 18 speakers, 20 repetitions· FU: female users 16 speakers, 26 repetitions· MI: male impostors: 189 speakers, 2 repetitions, and 128 speakers, 1 repetition· FI: female impostors: 213 speakers, 2 repetitions, and 107 speakers, 1 repetition.</description>
-<description lang="French">La base de données orales de l'italien SIVA (Identification du locuteur et archives de vérifications - Speaker Identification and Verification Archives), contient plus de 2 000 enregistrements téléphoniques.SIVA est composée de quatre catégories de locuteurs : "utilisateurs" hommes, "utilisateurs" femmes, "imposteurs" hommes, "imposteurs" femmes. Les locuteurs ont d'abord été contactés par courrier avant le test, puis on leur a demandé de lire les informations et les instructions soigneusement fournies avant d'effectuer l'appel. Environ 500 locuteurs ont été recrutés par une société spécialisée dans la sélection d'échantillons de population. Les autres sont des volontaires contactés par l'institut concerné.Les locuteurs ont accédé au système d'enregistrement en appelant un numéro vert. Un système de réponse automatique les guide à travers les trois sessions qui constituent un enregistrement. La première session qui contient une liste de 28 mots (y compris des chiffres et quelques mots de commande) a été enregistrée en utilisant un énoncé numéroté standard. La deuxième session consiste en un simple dialogue unidirectionnel (le locuteur répond à des questions énoncées) où l'on demande des informations personnelles (nom, âge, etc.). Dans la troisième session, le locuteur doit lire un passage continu d'un texte phonétiquement équilibré similaire à un bref curriculum vitae.La fréquence d'échantillonnage est de 8kHz, le codage utilise 8 bits selon la loi µ.Les données collectées sont constituées comme suit :    * 18 répétitions par 20 locuteurs hommes,    * 18 répétitions par 20 locuteurs femmes,    * 1 répétition par 400 "imposteurs" hommes,    * 1 répétition par 400 "imposteurs" femmes</description>
+<resourceName lang="English">THAMUS Bilingual dictionaries - Economics</resourceName>
+<resourceName lang="French">THAMUS Dictionnaires bilingues - Economie</resourceName>
+<description lang="English">Technical domainsLanguages: Italian=&gt;EnglishFormat: ASCII format with ISO 8859-1 character setMedium: QIC 150 MB Cartridge TapeDomain: Economics, 50,000 entries, canonical formsTechnical bilingual Italian dictionaries with a morphological coding which can generate all full forms using a software engine written in C. Multi-word terms contain morphological coding for the head word.</description>
+<description lang="French">Domaines techniquesLangues : Italien=&gt;AnglaisDomaine: Economie, 50 000 entrées, formes canoniquesLes dictionnaires techniques bilingues disposent d'une codification morphologique qui permet de générer toutes les formes fléchies grâce à un logiciel écrit en langage C. Les mots composés contiennent une codification morphologique sur la tête des mots.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=77</url>
-<identifier>ELRA-S0028</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=164</url>
+<identifier>ELRA-M0010_14</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,37 +29,38 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-06-14</lastDateUpdated>
+<lastDateUpdated>2005-03-04</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 4500.00€</price>
-<price>Academic org. ELRA Non Member: 3000.00€</price>
-<price>Commercial org. ELRA Member: 3000.00€</price>
-<price>Academic org. ELRA Member: 1000.00€</price>
+<price>Commercial org. ELRA Member: 55000.00€</price>
+<price>Academic org. ELRA Member: 11000.00€</price>
+<price>Academic org. ELRA Non Member: 12000.00€</price>
+<price>Commercial org. ELRA Non Member: 60000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1998-11-23</availabilityStartDate>
+<availabilityStartDate>1997-05-13</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 4500.00€</price>
-<price>Academic org. ELRA Non Member: 4500.00€</price>
-<price>Commercial org. ELRA Member: 3000.00€</price>
-<price>Academic org. ELRA Member: 3000.00€</price>
+<price>Commercial org. ELRA Member: 55000.00€</price>
+<price>Academic org. ELRA Member: 55000.00€</price>
+<price>Academic org. ELRA Non Member: 60000.00€</price>
+<price>Commercial org. ELRA Non Member: 60000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1998-11-23</availabilityStartDate>
+<availabilityStartDate>1997-05-13</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
@@ -67,8 +68,12 @@
 <languageId>ita</languageId>
 <languageName>Italian</languageName>
 </languageInfo>
-</corpusAudioInfo>
-</corpusMediaType>
-</corpusInfo>
+<languageInfo>
+<languageId>eng</languageId>
+<languageName>English</languageName>
+</languageInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

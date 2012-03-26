@@ -4,10 +4,12 @@ from django.shortcuts import render_to_response
 from statserver.stats.models import Node, NodeStats
 from statserver.settings import CHECKINGTIME, MEDIA_URL
 from urllib2 import URLError, Request, urlopen 
+import urllib
 import threading
 from datetime import datetime, date
 from threading import Timer
 import json
+import time
 
 action_labels = {"updated": "u", "downloaded": "d", "viewed":"v"}
 
@@ -16,8 +18,8 @@ def addnode(request):
     hostname = ""
     if (request.GET.has_key('url')):
         hostname = str(request.GET['url'])
-        code = urlopen(hostname + "/stats/days").code
-        if (code / 100 < 4):
+        nodestat = getNodeStats(hostname + "/stats/get")
+        if (nodestat is not ""):
             nodes = Node.objects.filter(hostname=hostname)
             if (nodes.count() == 0):
                 node = Node()
@@ -31,7 +33,7 @@ def addnode(request):
             node.save()
             collectnodestats(node)
             return HttpResponse({'success': True})
-        
+            
     return HttpResponse({'fail': True})
                    
 
@@ -46,7 +48,7 @@ def getNodeStats (url):
     except URLError, (err):
         print 'WARNING! Failed contacting statistics on {0} ({1})'.format(url, err)	
     except:
-        print 'WARNING! No JSON object could be decoded'
+        print 'WARNING! No JSON object could be decoded from {0}'.format(url)
 		
     return ""
 		
@@ -76,8 +78,8 @@ class FetchUrls(threading.Thread):
             req = Request(url)
             handle = urlopen(req)
             self.output = handle.read()
-        except URLError:
-            print 'WARNING! Failed contacting ' + url          
+        except URLError, (err):
+            print 'WARNING! Failed contacting ' + url + " " + str(err)        
 
 def updateNodeStats(node, daytime):
     url = node.hostname + "/stats/get?date=" + str(daytime)

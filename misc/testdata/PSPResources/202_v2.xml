@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Word level speech database for Hungarian</resourceName>
+      <description>Word level speech database to study the acoustic structure of the Hungarian CV, VC, VV, VVV, CC, CCC and CCCC sound clusters. For the password to the database's zip file please contact us.</description>
+      <resourceShortName>Words-hu</resourceShortName>
+      <url>http://magyarbeszed.tmit.bme.hu/cvvc/index.php?hl=en</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+      <identifier>202</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>CLARIN_RES</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <downloadLocation>http://speechlab.tmit.bme.hu/CESAR/words_hu_v31.zip</downloadLocation>
+         <price>1000 EURO</price>
+         <licensor>
+				        <personInfo>
+               <surname>Tamás</surname>
+               <givenName>Henk</givenName>
+               <communicationInfo>
+                  <email>henk@tmit.bme.hu</email>
+                  <url>http://www.tmit.bme.hu</url>
+                  <address>Magyar tudósok körútja 2.</address>
+                  <zipCode>H-1117</zipCode>
+                  <city>Budapest</city>
+                  <country>Hungary</country>
+                  <telephoneNumber>+36-1-463-4188</telephoneNumber>
+                  <faxNumber>+36-1-463-3107</faxNumber>
+               </communicationInfo>
+               <position>Head of Department</position>
+               <affiliation>
+						            <organizationName>Budapest University of Technology and Economics</organizationName>
+						            <organizationShortName>BME</organizationShortName>
+						            <departmentName>Department of Telecommunications and Media Informatics</departmentName>
+						            <communicationInfo>
+                     <email>henk@tmit.bme.hu</email>
+                     <url>http://www.tmit.bme.hu</url>
+                     <address>Magyar tudósok körútja 2.</address>
+                     <zipCode>H-1117</zipCode>
+                     <city>Budapest</city>
+                     <country>Hungary</country>
+                     <telephoneNumber>+36-1-463-4188</telephoneNumber>
+                     <faxNumber>+36-1-463-3107</faxNumber>
+                  </communicationInfo>
+               </affiliation>
+            </personInfo>
+         </licensor>
+         <distributionRightsHolder>
+				        <personInfo>
+               <surname>Olaszy</surname>
+               <givenName>Gábor</givenName>
+               <communicationInfo>
+                  <email>olaszy@tmit.bme.hu</email>
+                  <url>http://speechlab.tmit.bme.hu</url>
+                  <address>Magyar tudósok körútja 2.</address>
+                  <zipCode>H-1117</zipCode>
+                  <city>Budapest</city>
+                  <country>Hungary</country>
+                  <telephoneNumber>+36-1-463-3883</telephoneNumber>
+                  <faxNumber>+36-1-463-3107</faxNumber>
+               </communicationInfo>
+               <position>professor</position>
+               <affiliation>
+						            <organizationName>Budapest University of Technology and Economics</organizationName>
+						            <organizationShortName>BME</organizationShortName>
+						            <departmentName>Department of Telecommunications and Media Informatics</departmentName>
+						            <communicationInfo>
+                     <email>olaszy@tmit.bme.hu</email>
+                     <url>http://speechlab.tmit.bme.hu</url>
+                     <address>Magyar tudósok körútja 2.</address>
+                     <zipCode>H-1117</zipCode>
+                     <city>Budapest</city>
+                     <country>Hungary</country>
+                     <telephoneNumber>+36-1-463-3883</telephoneNumber>
+                     <faxNumber>+36-1-463-3107</faxNumber>
+                  </communicationInfo>
+               </affiliation>
+            </personInfo>
+         </distributionRightsHolder>
+      </licenceInfo>
+      <iprHolder>
+			      <personInfo>
+            <surname>Olaszy</surname>
+            <givenName>Gábor</givenName>
+            <communicationInfo>
+               <email>olaszy@tmit.bme.hu</email>
+               <url>http://speechlab.tmit.bme.hu</url>
+               <address>Magyar tudósok körútja 2.</address>
+               <zipCode>H-1117</zipCode>
+               <city>Budapest</city>
+               <country>Hungary</country>
+               <telephoneNumber>+36-1-463-3883</telephoneNumber>
+               <faxNumber>+36-1-463-3107</faxNumber>
+            </communicationInfo>
+            <position>professor</position>
+            <affiliation>
+						         <organizationName>Budapest University of Technology and Economics</organizationName>
+						         <organizationShortName>BME</organizationShortName>
+						         <departmentName>Department of Telecommunications and Media Informatics</departmentName>
+						         <communicationInfo>
+                  <email>olaszy@tmit.bme.hu</email>
+                  <url>http://speechlab.tmit.bme.hu</url>
+                  <address>Magyar tudósok körútja 2.</address>
+                  <zipCode>H-1117</zipCode>
+                  <city>Budapest</city>
+                  <country>Hungary</country>
+                  <telephoneNumber>+36-1-463-3883</telephoneNumber>
+                  <faxNumber>+36-1-463-3107</faxNumber>
+               </communicationInfo>
+            </affiliation>
+         </personInfo>
+      </iprHolder>
+      <availabilityStartDate>2011-11-30</availabilityStartDate>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Olaszy</surname>
+      <givenName>Gábor</givenName>
+      <communicationInfo>
+         <email>olaszy@tmit.bme.hu</email>
+         <url>http://speechlab.tmit.bme.hu</url>
+         <address>Magyar tudósok körútja 2.</address>
+         <zipCode>H-1117</zipCode>
+         <city>Budapest</city>
+         <country>Hungary</country>
+         <telephoneNumber>+36-1-463-3883</telephoneNumber>
+         <faxNumber>+36-1-463-3107</faxNumber>
+      </communicationInfo>
+      <position>professor</position>
+      <affiliation>
+				     <organizationName>Budapest University of Technology and Economics</organizationName>
+				     <organizationShortName>BME</organizationShortName>
+				     <departmentName>Department of Telecommunications and Media Informatics</departmentName>
+				     <communicationInfo>
+            <email>olaszy@tmit.bme.hu</email>
+            <url>http://speechlab.tmit.bme.hu</url>
+            <address>Magyar tudósok körútja 2.</address>
+            <zipCode>H-1117</zipCode>
+            <city>Budapest</city>
+            <country>Hungary</country>
+            <telephoneNumber>+36-1-463-3883</telephoneNumber>
+            <faxNumber>+36-1-463-3107</faxNumber>
+         </communicationInfo>
+      </affiliation>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-17</metadataCreationDate>
+      <metadataCreator>
+         <surname>Bartalis</surname>
+         <givenName>Mátyás</givenName>
+         <communicationInfo>
+            <email>bartalis@tmit.bme.hu</email>
+            <url>http://speechlab.tmit.bme.hu</url>
+            <address>Magyar tudósok körútja 2.</address>
+            <zipCode>H-1117</zipCode>
+            <city>Budapest</city>
+            <country>Hungary</country>
+            <telephoneNumber>+36-1-463-3437</telephoneNumber>
+            <faxNumber>+36-1-463-3107</faxNumber>
+         </communicationInfo>
+         <position>research fellow</position>
+         <affiliation>
+						      <organizationName>Budapest University of Technology and Economics</organizationName>
+						      <organizationShortName>BME</organizationShortName>
+						      <departmentName>Department of Telecommunications and Media Informatics</departmentName>
+						      <communicationInfo>
+               <email>bartalis@tmit.bme.hu</email>
+               <url>http://speechlab.tmit.bme.hu</url>
+               <address>Magyar tudósok körútja 2.</address>
+               <zipCode>H-1117</zipCode>
+               <city>Budapest</city>
+               <country>Hungary</country>
+               <telephoneNumber>+36-1-463-3437</telephoneNumber>
+               <faxNumber>+36-1-463-3107</faxNumber>
+            </communicationInfo>
+         </affiliation>
+      </metadataCreator>
+      <source>METANET4U</source>
+      <metadataLanguageId>en-us</metadataLanguageId>
+      <metadataLastDateUpdated>2011-11-18</metadataLastDateUpdated>
+      <revision>2011-11-18</revision>
+   </metadataInfo>
+   <versionInfo>
+		    <version>1.0</version>
+		
+		    <revision>Waves, texts, sound boundaries and waveform images</revision>
+      <lastDateUpdated>2011-11-17</lastDateUpdated>
+		    <updateFrequency/>
+   </versionInfo>
+   <validationInfo>
+      <validated>True</validated>
+      <validationType>content</validationType>
+      <validationMode>manual</validationMode>
+      <validationModeDetails>Manually checked the sound boundaries in the corpora</validationModeDetails>
+      <validator>
+			      <personInfo>
+            <surname>Olaszy</surname>
+            <givenName>Gábor</givenName>
+            <communicationInfo>
+               <email>olaszy@tmit.bme.hu</email>
+               <url>http://www.tmit.bme.hu</url>
+               <address>Magyar tudósok körútja 2.</address>
+               <zipCode>H-1117</zipCode>
+               <city>Budapest</city>
+               <country>Hungary</country>
+               <telephoneNumber>+36-1-463-3883</telephoneNumber>
+               <faxNumber>+36-1-463-3107</faxNumber>
+            </communicationInfo>
+            <position>Professor</position>
+            <affiliation>
+						         <organizationName>Budapest University of Technology and Economics</organizationName>
+						         <organizationShortName>BME</organizationShortName>
+						         <departmentName>Department of Telecommunications and Media Informatics</departmentName>
+						         <communicationInfo>
+                  <email>olaszy@tmit.bme.hu</email>
+                  <url>http://speechlab.tmit.bme.hu</url>
+                  <address>Magyar tudósok körútja 2.</address>
+                  <zipCode>H-1117</zipCode>
+                  <city>Budapest</city>
+                  <country>Hungary</country>
+                  <telephoneNumber>+36-1-463-3883</telephoneNumber>
+                  <faxNumber>+36-1-463-3107</faxNumber>
+               </communicationInfo>
+            </affiliation>
+         </personInfo>
+      </validator>
+   </validationInfo>
+   <usageInfo>
+		    <accessTool>
+         <targetResourceNameURI>Internet browser</targetResourceNameURI>
+      </accessTool>
+		    <foreseenUseInfo>
+         <foreseenUse>humanUse</foreseenUse>
+			
+			
+			      <useNLPSpecific>knowledgeDiscovery</useNLPSpecific>
+			      <useNLPSpecific>linguisticResearch</useNLPSpecific>
+			      <useNLPSpecific>speechAnalysis</useNLPSpecific>
+      </foreseenUseInfo>
+		    <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+         <useNLPSpecific>speechAnalysis</useNLPSpecific>
+         <usageReport>
+            <documentUnstructured>The Phonetician 97-98. 2008/2011  http://www.isphs.org/</documentUnstructured>
+         </usageReport>
+         <derivedResource>
+            <targetResourceNameURI>First hungarian word level speech database</targetResourceNameURI>
+         </derivedResource>
+         <actualUseDetails>This speech database contains words. The segmental level of speech (sound combinations) can be studied on acoustic level (sound spectrogram, formant structures, timing data, sound intensity)</actualUseDetails>
+      </actualUseInfo>
+   </usageInfo>
+   <resourceDocumentationInfo>
+		    <documentation>
+         <documentUnstructured>The Phonetician 97-98. 2008/2011  http://www.isphs.org/</documentUnstructured>
+      </documentation>
+		    <documentation>
+         <documentUnstructured>http://speechlab.tmit.bme.hu/CESAR/words_hu_description_en.pdf</documentUnstructured>
+      </documentation>
+		    <documentation>
+         <documentUnstructured>http://speechlab.tmit.bme.hu/CESAR/words_hu_description_hu.pdf</documentUnstructured>
+      </documentation>
+		    <samplesLocation>http://magyarbeszed.tmit.bme.hu/cvvc/index.php?hl=en</samplesLocation>
+   </resourceDocumentationInfo>
+   <resourceCreationInfo>
+      <resourceCreator>
+			      <personInfo>
+            <surname>Olaszy</surname>
+            <givenName>Gábor</givenName>
+            <communicationInfo>
+               <email>olaszy@tmit.bme.hu</email>
+               <url>http://speechlab.tmit.bme.hu</url>
+               <address>Magyar tudósok körútja 2.</address>
+               <zipCode>H-1117</zipCode>
+               <city>Budapest</city>
+               <country>Hungary</country>
+               <telephoneNumber>+36-1-463-3883</telephoneNumber>
+               <faxNumber>+36-1-463-3107</faxNumber>
+            </communicationInfo>
+            <position>professor</position>
+            <affiliation>
+						         <organizationName>Budapest University of Technology and Economics</organizationName>
+						         <organizationShortName>BME</organizationShortName>
+						         <departmentName>Department of Telecommunications and Media Informatics</departmentName>
+						         <communicationInfo>
+                  <email>olaszy@tmit.bme.hu</email>
+                  <url>http://speechlab.tmit.bme.hu</url>
+                  <address>Magyar tudósok körútja 2.</address>
+                  <zipCode>H-1117</zipCode>
+                  <city>Budapest</city>
+                  <country>Hungary</country>
+                  <telephoneNumber>+36-1-463-3883</telephoneNumber>
+                  <faxNumber>+36-1-463-3107</faxNumber>
+               </communicationInfo>
+            </affiliation>
+         </personInfo>
+      </resourceCreator>
+      <creationStartDate>2007-01-01</creationStartDate>
+      <creationEndDate>2011-08-20</creationEndDate>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+			
+			               <languageId>HU</languageId>
+			               <languageName>Hungarian</languageName>
+			               <sizePerLanguage>
+				                 <size>3936</size>
+				
+				                 <sizeUnit>words</sizeUnit>
+                  </sizePerLanguage>
+               </languageInfo>
+               <sizeInfo>
+			               <size>3936</size>
+			
+			               <sizeUnit>words</sizeUnit>
+               </sizeInfo>
+               <characterEncodingInfo>
+			               <characterEncoding>MacDingbat</characterEncoding>
+			
+			               <sizePerCharacterEncoding>
+				                 <size>73358</size>
+				
+				                 <sizeUnit>bytes</sizeUnit>
+                  </sizePerCharacterEncoding>
+               </characterEncodingInfo>
+               <creationInfo>
+			               <originalSource>
+                     <targetResourceNameURI>research</targetResourceNameURI>
+                  </originalSource>
+			               <creationMode>manual</creationMode>
+               </creationInfo>
+            </corpusTextInfo>
+            <corpusAudioInfo>
+               <mediaType>audio</mediaType>
+               <lingualityInfo>
+			               <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+			
+			               <languageId>HU</languageId>
+			               <languageName>Hungarian</languageName>
+			               <sizePerLanguage>
+				                 <size>3681</size>
+				
+				                 <sizeUnit>seconds</sizeUnit>
+                  </sizePerLanguage>
+               </languageInfo>
+               <audioSizeInfo>
+                  <sizeInfo>
+			                  <size>3681</size>
+			
+			                  <sizeUnit>seconds</sizeUnit>
+                  </sizeInfo>
+			                  <durationOfEffectiveSpeechInfo>
+				                    <size>3681</size>
+				                    <durationUnit>seconds</durationUnit>
+                     </durationOfEffectiveSpeechInfo>
+			                  <durationOfAudioInfo>
+				                    <size>3681</size>
+				                    <durationUnit>seconds</durationUnit>
+                     </durationOfAudioInfo>
+               </audioSizeInfo>
+               <audioContentInfo>
+                  <speechItems>isolatedWords</speechItems>
+               </audioContentInfo>
+               <settingInfo>
+			               <naturality>readSpeech</naturality>
+			               <conversationalType>monologue</conversationalType>
+			               <scenarioType>other</scenarioType>
+			               <audience>no</audience>
+			
+			               <interactivity>nonInteractive</interactivity>
+               </settingInfo>
+               <audioFormatInfo>
+			               <mimeType>wave/audio</mimeType>
+			               <signalEncoding>linearPCM</signalEncoding>
+			               <samplingRate>44100</samplingRate>
+			               <quantization>16</quantization>
+			               <compressionInfo>
+                     <compression>False</compression>
+                  </compressionInfo>
+			               <numberOfTracks>
+							1
+						</numberOfTracks>
+			               <recordingQuality>high</recordingQuality>
+			               <sizePerAudioFormat>
+				                 <size>3681</size>
+				
+				                 <sizeUnit>seconds</sizeUnit>
+                  </sizePerAudioFormat>
+               </audioFormatInfo>
+               <recordingInfo>
+			
+			
+			
+			               <recordingDeviceType>other</recordingDeviceType>
+			               <recordingDeviceTypeDetails>RME Fireface800</recordingDeviceTypeDetails>
+			               <recordingPlatformSoftware>soundforge_sony</recordingPlatformSoftware>
+			               <recordingEnvironment>studio</recordingEnvironment>
+			               <recorder>
+                     <personInfo>
+                        <surname>Olaszy</surname>
+                        <givenName>Gábor</givenName>
+                        <communicationInfo>
+                           <email>olaszy@tmit.bme.hu</email>
+                           <url>http://speechlab.tmit.bme.hu</url>
+                           <address>Magyar tudósok körútja 2.</address>
+                           <zipCode>H-1117</zipCode>
+                           <city>Budapest</city>
+                           <country>Hungary</country>
+                           <telephoneNumber>+36-1-463-3883</telephoneNumber>
+                           <faxNumber>+36-1-463-3107</faxNumber>
+                        </communicationInfo>
+                        <position>professor</position>
+                        <affiliation>
+						                     <organizationName>Budapest University of Technology and Economics</organizationName>
+						                     <organizationShortName>BME</organizationShortName>
+						                     <departmentName>Department of Telecommunications and Media Informatics</departmentName>
+						                     <communicationInfo>
+                              <email>olaszy@tmit.bme.hu</email>
+                              <url>http://speechlab.tmit.bme.hu</url>
+                              <address>Magyar tudósok körútja 2.</address>
+                              <zipCode>H-1117</zipCode>
+                              <city>Budapest</city>
+                              <country>Hungary</country>
+                              <telephoneNumber>+36-1-463-3883</telephoneNumber>
+                              <faxNumber>+36-1-463-3107</faxNumber>
+                           </communicationInfo>
+                        </affiliation>
+                     </personInfo>
+                  </recorder>
+               </recordingInfo>
+               <captureInfo>
+				              <capturingDeviceType>studioEquipment</capturingDeviceType>
+				              <capturingDeviceTypeDetails>AKG C-414 B-ULS</capturingDeviceTypeDetails>
+				              <personSourceSetInfo>
+					                <numberOfPersons>2</numberOfPersons>
+					                <ageOfPersons>adult</ageOfPersons>
+					                <ageRangeStart>30</ageRangeStart>
+					                <ageRangeEnd>60</ageRangeEnd>
+					                <sexOfPersons>mixed</sexOfPersons>
+					                <originOfPersons>native</originOfPersons>
+					                <dialectAccentOfPersons>no dialect</dialectAccentOfPersons>
+					                <hearingImpairmentOfPersons>no</hearingImpairmentOfPersons>
+					                <speakingImpairmentOfPersons>no</speakingImpairmentOfPersons>
+					                <numberOfTrainedSpeakers>2</numberOfTrainedSpeakers>
+					                <participantInfo>
+						                  <alias>ff</alias>
+						                  <ageGroup>adult</ageGroup>
+						                  <age>60</age>
+						                  <sex>male</sex>
+						                  <origin>native</origin>
+						                  <placeOfLiving>Budapest</placeOfLiving>
+						                  <placeOfBirth>Budapest</placeOfBirth>
+						                  <placeOfChildhood>Budapest</placeOfChildhood>
+						                  <dialectAccent>none</dialectAccent>
+						                  <speakingImpairment>none</speakingImpairment>
+						                  <hearingImpairment>none</hearingImpairment>
+						                  <smokingHabits>none</smokingHabits>
+						                  <profession>Electrical engineer</profession>
+						                  <height>175</height>
+						                  <weight>80</weight>
+						                  <trainedSpeaker>True</trainedSpeaker>
+						                  <placeOfSecondEducation>Budapest</placeOfSecondEducation>
+						                  <educationLevel>university diplom</educationLevel>
+                     </participantInfo>
+					                <participantInfo>
+						                  <alias>no</alias>
+						                  <ageGroup>adult</ageGroup>
+						                  <age>25</age>
+						                  <sex>female</sex>
+						                  <origin>native</origin>
+						                  <placeOfLiving>Veszprém</placeOfLiving>
+						                  <placeOfBirth>Budapest</placeOfBirth>
+						                  <placeOfChildhood>Budapest</placeOfChildhood>
+						                  <dialectAccent>none</dialectAccent>
+						                  <speakingImpairment>none</speakingImpairment>
+						                  <hearingImpairment>none</hearingImpairment>
+						                  <smokingHabits>none</smokingHabits>
+						                  <profession>actress</profession>
+						                  <height>170</height>
+						                  <weight>63</weight>
+						                  <trainedSpeaker>True</trainedSpeaker>
+						                  <placeOfSecondEducation>Budapest</placeOfSecondEducation>
+						                  <educationLevel>university dilpom</educationLevel>
+                     </participantInfo>
+                  </personSourceSetInfo>
+               </captureInfo>
+                              <creationInfo>
+                  <originalSource>
+                     <targetResourceNameURI>corpora</targetResourceNameURI>
+                  </originalSource>
+               </creationInfo>
+
+            </corpusAudioInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

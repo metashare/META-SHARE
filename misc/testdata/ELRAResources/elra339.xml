@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">ARCADE/ROMANSEVAL corpus</resourceName>
-<resourceName lang="French">Corpus ARCADE/ROMANSEVAL</resourceName>
-<description lang="English">The ARCADE/ROMANSEVAL corpus was used as a reference corpus in two international competitions:· ARCADE, an exercise on multilingual text alignment financed by AUPELF-UREF· ROMANSEVAL, part of the SENSEVAL exercise sponsored by ACL-SIGLEX and EURALEX, on word sense disambiguation.The corpus contains raw data from the JOC corpus developed in the MULTEXT project financed by the European Commission (LRE 62-050), composed of 1 million words in English and four romance languages: French, Italian, Spanish and Portuguese (Written Question and Answers from the Official Journal of the European Commission).The annotation concerns all the contexts of 60 different test words (20 nouns, 20 adjectives, 20 verbs), i.e. ca. 3700 contexts all together, and comprises:· semantic tagging of all the occurrences of the test words in the JOC corpus for French and Italian;· word-level alignment of all the occurrences of the test words between French and English.Additional information:http://www.lpl.univ-aix.fr/projects/arcadehttp://www.lpl.univ-aix.fr/projects/romanseval</description>
-<description lang="French">Le corpus ARCADE/ROMANSEVAL a été utilisé comme corpus de référence au cours de deux projets internationaux :    * ARCADE, un exercice d'alignement de texte multilingue financé par l'AUPELF-UREF    * ROMANSEVAL, partie du projet SENSEVAL financé par ACL-SIGLEX et EURALEX, concernant la désambiguïsation sémantique des mots.Ce corpus contient des données brutes du corpus JOC développé dans le cadre du projet MULTEXT financé par la Commission européenne (LRE 62-050), composé de 1 million de mots en anglais, espagnol, français, italien, et portugais (Questions écrites et réponses du Journal Officiel de la Communauté Européenne).L'annotation a été réalisée sur tous les contextes de 60 mots-tests différents (20 noms, 20 adjectifs, 20 verbes), c'est-à-dire environ 3 700 contextes.La base distribuée comprend :    * un étiquetage sémantique de toutes les occurrences des mots-tests du corpus JOC pour le français et l'italien,    * un alignement français-anglais au niveau du mot pour toutes les occurrences des mots-tests.Pour plus d'informations, visiter les sites Web suivants :http://www.lpl.univ-aix.fr/projects/arcadehttp://www.lpl.univ-aix.fr/projects/romanseval</description>
+<resourceName lang="English">LC-STAR Hebrew (Israel) phonetic lexicon</resourceName>
+<resourceName lang="French">Lexique phonétique LC-STAR hébreu (Israël)</resourceName>
+<description lang="English">The LC-STAR Hebrew (Israel) phonetic lexicon was created within the scope of the LC-STAR project (IST 2001-32216) which was sponsored by the European Commission.The lexicon comprises 109,580 words, distributed over three categories:- a set of 62,431 common word entries. This set is extracted from a corpus of more than 37 million words distributed over 6 different domains (sports/games, news, finance, culture/entertainment, consumer information, personal communications). This was done with the aim of reaching a target for each domain of at least 95% self coverage. In addition to extracting word lists from the corpus, a list of closed set (function) word classes are included in the final word list.- a set of 47,149 proper names (including person names, family names, cities, streets, companies and brand names) divided into 3 domains. Multiple word names such as New_York are kept together in all three domains, and they count as one entry. The 3 domains consist of first and last names (22,982 different entries), place names (16,073 different entries), and organisations (7,635 different entries).- and a list of 8,677 special application words translated from English terms defined by the LC-STAR consortium. This list contains: numbers, letters, abbreviations and specific vocabulary for applications controlled by voice (information retrieval, controlling of consumer devices, etc.). The lexicon is provided in XML format and includes phonetic transcriptions in SAMPA. The database is stored on 1 CD.</description>
+<description lang="French">Le lexique phonétique LC-STAR hébreu (Israël) a été créé dans le cadre du projet LC-STAR (IST 2001-32216), financé par la Commission européenne.Le lexique comprend 109 580 mots répartis en trois catégories :- Un ensemble de 62 431 mots communs. Cet ensemble a été extrait d’un corpus de plus de 20 millions de mots répartis en 6 domaines différents (sports/jeux, actualités, finances, culture/amusement, information consommateur, communications personnelles), avec pour objectif d’atteindre pour chaque domaine au moins 95% de couverture. En plus des listes de mots extraites du corpus, une liste de classes de mots en ensemble fermé (fonctions) est incluse dans la liste de mots finale.- Un ensemble de 47 149 noms propres (noms de personnes, noms de familles, villes, rues, sociétés, noms de marque) divisée en 3 domaines. Les noms comportant des mots multiples, tels que New_York, ont été conservés dans chacun des 3 domaines et comptent ainsi pour une seule entrée. Les 3 domaines sont : prénoms et noms de familles (22 982 entrées différentes), noms de lieux (16 073 entrées différentes), et organisations (7 635 entrées différentes).- Une liste de 8 677 mots d’application traduits à partir de termes anglais tels que définis par le consortium LC-STAR. Cette liste comprend des nombres, des lettres, des abréviations et du vocabulaire spécifique aux applications contrôlées par la voix (recherche d’information, contrôle des appareils de consommation, etc.). Le lexique est fourni au format XML et inclut des transcriptions phonétiques en SAMPA. La base de données est stockée sur 1 CD.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=535</url>
-<identifier>ELRA-W0018</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=984</url>
+<identifier>ELRA-S0235</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,54 +29,67 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2004-05-12</lastDateUpdated>
+<lastDateUpdated>2008-02-12</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 2000.00€</price>
-<price>Academic org. ELRA Member: 45.00€</price>
-<price>Academic org. ELRA Non Member: 100.00€</price>
-<price>Commercial org. ELRA Non Member: 5000.00€</price>
+<price>Commercial org. ELRA Non Member: 62500.00€</price>
+<price>Academic org. ELRA Non Member: 46000.00€</price>
+<price>Commercial org. ELRA Member: 50000.00€</price>
+<price>Academic org. ELRA Member: 30500.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1998-11-23</availabilityStartDate>
+<availabilityStartDate>2007-03-16</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 2000.00€</price>
-<price>Academic org. ELRA Member: 2000.00€</price>
-<price>Academic org. ELRA Non Member: 5000.00€</price>
-<price>Commercial org. ELRA Non Member: 5000.00€</price>
+<price>Commercial org. ELRA Non Member: 62500.00€</price>
+<price>Academic org. ELRA Non Member: 62500.00€</price>
+<price>Commercial org. ELRA Member: 50000.00€</price>
+<price>Academic org. ELRA Member: 50000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1998-11-23</availabilityStartDate>
+<availabilityStartDate>2007-03-16</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>LC-STAR (IST 2001-32216)</projectName>
+<fundingType>euFunds</fundingType>
+</fundingProject>
+</resourceCreationInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusTextInfo>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceEncodingInfo>
+<encodingLevel>phonetics</encodingLevel>
+<encodingLevel>morphology</encodingLevel>
+</lexicalConceptualResourceEncodingInfo>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
 <mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
+<languageId>heb</languageId>
+<languageName>Hebrew</languageName>
 </languageInfo>
+</lexicalConceptualResourceTextInfo>
+<lexicalConceptualResourceAudioInfo>
+<mediaType>audio</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
 <languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
+<languageId>heb</languageId>
+<languageName>Hebrew</languageName>
 </languageInfo>
-<languageInfo>
-<languageId>ita</languageId>
-<languageName>Italian</languageName>
-</languageInfo>
-</corpusTextInfo>
-</corpusMediaType>
-</corpusInfo>
+</lexicalConceptualResourceAudioInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

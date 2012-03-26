@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Multilingual Dictionary of Sports – English-French bilingual database</resourceName>
-<resourceName lang="French">Dictionnaire multilingue des sports - Base bilingue anglais-français</resourceName>
-<description lang="English">This dictionary was produced within the French national project EuRADic  (European and Arabic Dictionaries and Corpora), as part of the Technolangue programme funded by the French Ministry of Industry. A needs study in the field of sport terminology, which covered an overall category of users, led to a partial restructuring of an already existing database (English-French) and a re-evaluation of options. All choices were based on the results of this needs study, which clearly highlighted the impact of open corpora (Internet) and exploration tools for the production of dictionaries as well as for the carrying out of terminography activity. The existing database (English-French) was subject to a systematic revision and updating with the following purposes:•	Spell checking•	Term production verificationThe principles of terminology unit production were modified according to current technical progress. All nomenclature entries were subject to a systematic revision.•	Equivalence compliance verificationEquivalences were systematically checked and corrected (7,044 corrections or adjustments).•	Source verification  For reasons of scientific rigour (and right protection), sources and references that were exploited for each dictionary entry were systematically checked (40,000 verifications for a total of 11,256 modifications).The results are presented in the form of MS ACCESS databases.The current set consists of an English-French bilingual database: The English-French bilingual database consists of 63,161 entries with, for each language •	Mandatory information: term, reference/source, grammar •	Mandatory and common information: field (sport), domain, additional circumscription •	Optional information: definition and source OR linguistic and source reference, combinatorics, other form, synonym, variantThe query enables to search for:•	French term •	English term •	sport (field, domain and special features ++)The EuRADic   sport dictionary is provided under the following different subsets:ELRA-T0372-01 Multilingual Dictionary of Sports – English-French-Greek-Arabic-German-Spanish-Portuguese multilingual databaseELRA-T0372-02 Multilingual Dictionary of Sports - English-French bilingual databaseELRA-T0372-03 Multilingual Dictionary of Sports - English-French-Greek trilingual databaseELRA-T0372-04 Multilingual Dictionary of Sports - English-French-Arabic trilingual databaseELRA-T0372-05 Multilingual Dictionary of Sports - English-French-German trilingual databaseELRA-T0372-06 Multilingual Dictionary of Sports - English-French-Spanish trilingual databaseELRA-T0372-07 Multilingual Dictionary of Sports - English-French-Portuguese trilingual database</description>
-<description lang="French">Ce dictionnaire a été produit dans le cadre du projet national français EuRADic  (Dictionnaire et corpus européens et arabe), du programme Technolangue, financé par le ministère français de l'industrie.Une étude du besoin terminologique dans le domaine des sports, couvrant l’ensemble des catégories d’utilisateurs, a conduit à une refonte partielle de l’existant (base anglais-français) et à une réévaluation des options. Tous les choix effectués se fondent sur les résultats de cette étude du besoin, qui a notamment fait ressortir clairement l’impact des corpus ouverts (Internet) et des outils d’exploration sur la conception des dictionnaires et la conduite de l’activité terminographique.La base existante (anglais-français) a fait l’objet d’une révision et mise à niveau systématique avec les objectifs suivants :•	Vérifications orthographiques •	Contrôle de la formation des termes Les principes de formation des unités terminologiques étant modifiés pour tenir compte des progrès techniques, l’ensemble des entrées de la nomenclature a fait l’objet d’une révision systématique.•	Contrôle d’adéquation des équivalences Les équivalences ont été systématiquement vérifiées et corrigées (7 044 corrections ou ajustements).•	Vérification des sources Dans un souci de rigueur scientifique (et de protection des droits) les sources et références exploitées pour chaque entrée du dictionnaire ont été systématiquement vérifiées (40 000 vérifications pour un total de 11 256 modifications).Les résultats obtenus se présentent sous la forme de bases de données MS ACCESS.Le présent ensemble est constitué d’une base bilingue anglais-français : La base bilingue anglais français comporte 63 161 entrées avec, pour chaque langue:•	Informations obligatoires : terme, référence/source, grammaire •	Informations obligatoires et communes : champ (sport), domaine, circonscription additionnelle •	Informations facultatives : définition et source OU note linguistique et source, combinatoire, autre forme, synonyme, variante Les requêtes permettent la consultation sur :•	terme français •	terme anglais •	sport (champ, domaine et spécificité ++)Le dictionnaire des sports EuRADic   est fourni sous la forme des différents sous-ensembles suivants:ELRA-T0372-01 Dictionnaire multilingue des sports - Base multilingue anglais-français-grec-arabe-allemand-espagnol-portugaisELRA-T0372-02 Dictionnaire multilingue des sports - Base bilingue anglais-françaisELRA-T0372-03 Dictionnaire multilingue des sports - Base trilingue anglais-français-grecELRA-T0372-04 Dictionnaire multilingue des sports - Base trilingue anglais-français-arabeELRA-T0372-05 Dictionnaire multilingue des sports - Base trilingue anglais-français-allemandELRA-T0372-06 Dictionnaire multilingue des sports - Base trilingue anglais-français-espagnolELRA-T0372-07 Dictionnaire multilingue des sports - Base trilingue anglais-français-portugais</description>
+<resourceName lang="English">UPC-TALP database of isolated meeting-room acoustic events</resourceName>
+<resourceName lang="French">Base de données d’événements acoustiques isolés enregistrés en salle de réunion (UPC-TALP)</resourceName>
+<description lang="English">This database was produced within the CHIL Project (Computers in the Human Interaction Loop), in the framework of an Integrated Project (IP 506909) under the European Commission's Sixth Framework Programme. It contains a set of isolated acoustic events that occur in a meeting room environment and that were recorded for the CHIL Acoustic Event Detection (AED) task. The recorded sounds do not have temporal overlapping. The database can be used as training material for AED technologies as well as for testing AED algorithms in quiet environments without temporal sound overlapping.The database contains signals corresponding to 23 audio channels with corresponding labels (out of 84 channels used in the whole CHIL task). The 23 audio channels correspond to: 12 microphones of the 3 T-shaped clusters, 4 tabletop omni directional microphones, and 7 channels of the Mark III array.Data was recorded at 44.1kHz, 24-bit precision, and then converted to 16-bit Raw Little Endian format. All the channels were synchronized. During all recordings two-three additional people were inside the room for a more realistic scenario.Approximately 60 sounds per sound class were recorded. Each session was produced by the same ten people (5 men and 5 women). There are 3 sessions per participant. At each session, the participant took a different place in the room out of 7 fixed different positions. During each session a person had to produce a complete set of sounds twice. A script indicating the order of events to be produced was given to each participant. Almost each event was followed and preceded by a pause of several seconds. All sounds were produced individually, except “applause” and several “laugh” that were produced by the people that were inside the room altogether. The annotation was done manually.The database is stored on 3 DVDs (one session per DVD). The following table summarizes the content of the DVDs and shows the number of annotated acoustic events in each session:&lt;table  border="0" width="100%" cellspacing="0" cellpadding="2" class="infoBoxContents"&gt;&lt;tr align=center&gt;&lt;td align=left&gt;&lt;strong&gt;Event type&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;&lt;strong&gt;Session 1&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;&lt;strong&gt;Session 2&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;&lt;strong&gt;Session 3&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Knock (door, table)&lt;/td&gt;&lt;td&gt;15&lt;/td&gt;&lt;td&gt;18&lt;/td&gt;&lt;td&gt;17&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Door open&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Door close&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Steps&lt;/td&gt;&lt;td&gt;28&lt;/td&gt;&lt;td&gt;24&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Chair moving&lt;/td&gt;&lt;td&gt;23&lt;/td&gt;&lt;td&gt;28&lt;/td&gt;&lt;td&gt;25&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Spoon (cup jingle)&lt;/td&gt;&lt;td&gt;23&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;td&gt;24&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Paper work (listing, wrapping)&lt;/td&gt;&lt;td&gt;31&lt;/td&gt;&lt;td&gt;29&lt;/td&gt;&lt;td&gt;24&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Key jingle&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;td&gt;23&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Keyboard typing&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;td&gt;25&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Phone ringing/Music&lt;/td&gt;&lt;td&gt;37&lt;/td&gt;&lt;td&gt;36&lt;/td&gt;&lt;td&gt;43&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Applause&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Cough&lt;/td&gt;&lt;td&gt;22&lt;/td&gt;&lt;td&gt;22&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Laugh&lt;/td&gt;&lt;td&gt;22&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Unknown&lt;/td&gt;&lt;td&gt;38&lt;/td&gt;&lt;td&gt;46&lt;/td&gt;&lt;td&gt;42&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+<description lang="French">Cette base de données a été produite dans le cadre du projet CHIL (Computers in the Human Interaction Loop), issu d’un projet intégré (IP 506909) du sixième programme-cadre de la Commission européenne. Il contient un ensemble d’événements acoustiques isolés qui ont été enregistrés dans une salle de réunion pour la tâche de détection d’événement acoustique CHIL (AED). Les sons ont été enregistrés sans chevauchement temporel. La base de données peut être utilisée pour l’entraînement des technologies AED ainsi que pour l’évaluation d’algorithmes AED en milieu calme sans chevauchement temporel des sons.Cette base de données contient les signaux de 23 canaux audio accompagnés des étiquettes correspondantes (sur un total de 84 canaux utilisés pour la tâche intégrale dans CHIL). Les 23 canaux audio correspondent à: 12 microphones provenant de 3 groupes en forme de T, 4 microphones omnidirectionnels posés sur la table et 7 canaux enregistrés sur un tableau de microphones (Mark III array).Les données ont été enregistrées à 44,1 kHz, à une précision de 24-bit, et ont été ensuite converties au format 16-bit Raw Little Endian. Tous les canaux ont été synchronisés. Pendant toute la durée des enregistrements, deux à trois personnes complémentaires étaient présentes dans la salle pour obtenir un scénario plus réaliste.Environ 60 sons par classe de sons ont été enregistrés. Chaque session a été produite par les dix mêmes personnes (5 hommes et 5 femmes). La base comprend 3 sessions par participant. A chaque session, le participant prenait une place différente dans la salle parmi les 7 positions fixées. Pendant chaque session, une personne devait produire deux fois un même ensemble complet de sons. Un script indiquant l’ordre des événements à produire a été donné à chaque participant. La quasi-totalité des événements a été précédée et suivie d’une pause de plusieurs secondes. Tous les sons ont été produits individuellement, excepté “applause” et plusieurs “laugh”, qui ont été produits par l’ensemble des personnes présentes dans la salle en même temps. L’annotation a été faite manuellement.La base de données est stockée sur 3 DVDs (une session par DVD). Le tableau suivant résume le contenu des DVDs en donnant le nombre d’événements acoustiques qui ont été annotés pour chaque session:&lt;table  border="0" width="100%" cellspacing="0" cellpadding="2" class="infoBoxContents"&gt;&lt;tr align=center&gt;&lt;td align=left&gt;&lt;strong&gt;Type d’événement&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;&lt;strong&gt;Session 1&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;&lt;strong&gt;Session 2&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;&lt;strong&gt;Session 3&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Coup (porte, table)&lt;/td&gt;&lt;td&gt;15&lt;/td&gt;&lt;td&gt;18&lt;/td&gt;&lt;td&gt;17&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Ouverture de porte&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Fermeture de porte&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Bruit de pas&lt;/td&gt;&lt;td&gt;28&lt;/td&gt;&lt;td&gt;24&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Mouvement de chaise&lt;/td&gt;&lt;td&gt;23&lt;/td&gt;&lt;td&gt;28&lt;/td&gt;&lt;td&gt;25&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Bruit de cuillère (bruit de tasse)&lt;/td&gt;&lt;td&gt;23&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;td&gt;24&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Bruit de papier (Feuilletage, bruissement)&lt;/td&gt;&lt;td&gt;31&lt;/td&gt;&lt;td&gt;29&lt;/td&gt;&lt;td&gt;24&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Bruit de clé&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;td&gt;23&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Frappe au clavier&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;td&gt;25&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Sonnerie/Musique de téléphone&lt;/td&gt;&lt;td&gt;37&lt;/td&gt;&lt;td&gt;36&lt;/td&gt;&lt;td&gt;43&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Applaudissement&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Toux&lt;/td&gt;&lt;td&gt;22&lt;/td&gt;&lt;td&gt;22&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Rire&lt;/td&gt;&lt;td&gt;22&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Inconnu&lt;/td&gt;&lt;td&gt;38&lt;/td&gt;&lt;td&gt;46&lt;/td&gt;&lt;td&gt;42&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1104</url>
-<identifier>ELRA-T0372_02</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1053</url>
+<identifier>ELRA-S0268</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,57 +29,48 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2009-07-07</lastDateUpdated>
+<lastDateUpdated>2008-01-14</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 150.00€</price>
-<price>Commercial org. ELRA Member: 1500.00€</price>
-<price>Academic org. ELRA Non Member: 200.00€</price>
-<price>Commercial org. ELRA Non Member: 2000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2009-07-07</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 1200.00€</price>
+<price>Academic org. ELRA Non Member: 600.00€</price>
+<price>Commercial org. ELRA Member: 1000.00€</price>
+<price>Academic org. ELRA Member: 500.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2008-01-11</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 1500.00€</price>
-<price>Commercial org. ELRA Member: 1500.00€</price>
-<price>Academic org. ELRA Non Member: 2000.00€</price>
-<price>Commercial org. ELRA Non Member: 2000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2009-07-07</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 1200.00€</price>
+<price>Academic org. ELRA Non Member: 1200.00€</price>
+<price>Commercial org. ELRA Member: 1000.00€</price>
+<price>Academic org. ELRA Member: 1000.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2008-01-11</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceCreationInfo>
 <fundingProject>
-<projectName>EURADIC</projectName>
-<fundingType>nationalFunds</fundingType>
+<projectName>CHIL (Computers in the Human Interaction Loop)</projectName>
+<fundingType>euFunds</fundingType>
 </fundingProject>
 </resourceCreationInfo>
 <resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>terminologicalResource</lexicalConceptualResourceType>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
-<mediaType>text</mediaType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
-<languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
-</languageInfo>
-<languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
-</languageInfo>
-</lexicalConceptualResourceTextInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
 </resourceComponentType>
 </resourceInfo>

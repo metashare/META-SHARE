@@ -4,14 +4,18 @@
 {{ inline_admin_formset.formset.management_form }}
 {{ inline_admin_formset.formset.non_form_errors }}
 
-{% for inline_admin_form in inline_admin_formset %}<div class="inline-related{% if forloop.last %} empty-form last-related{% endif %}" id="{{ inline_admin_formset.formset.prefix }}-{% if not forloop.last %}{{ forloop.counter0 }}{% else %}empty{% endif %}">
+{% for inline_admin_form in inline_admin_formset %}
+{% if not forloop.last %}
+<div class="inline-related" id="{{ inline_admin_formset.formset.prefix }}-{{ forloop.counter0 }}">
   {% if inline_admin_form.form.non_field_errors %}{{ inline_admin_form.form.non_field_errors }}{% endif %}
   {% for fieldset in inline_admin_form %}
     {% include "admin/includes/fieldset.html" %}
   {% endfor %}
   {% if inline_admin_form.has_auto_field %}{{ inline_admin_form.pk_field.field }}{% endif %}
   {{ inline_admin_form.fk_field.field }}
-</div>{% endfor %}
+</div>
+{% endif %}
+{% endfor %}
 </div>
 
 <script type="text/javascript">

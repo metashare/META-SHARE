@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: METANORD-L18.xml 42662 2011-12-01 14:33:59Z martha $ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Database of Lithuanian Historical Ethnic Place Names</resourceName>
+      <description>The core of the database consists of the names of the places near and outside the Lithuanian border gathered from XVI-XIX century historical manuscripts such as administrative-legal documents, church books and the like. Currently, the database consists of 20000 place names, the current Lithuanian genders are set, notations in the historical documents are given in chronological order. Collecting the historical place names and their e-digest construction relates to scientific research. From the scientific point of view, this compendium is mostly associated with the Dictionary of Lithuanian Place Names, written in the Onomastics department of the Institute of the Lithuanian Language, because it will help to identify the authentic forms and the origin of the place names that will be incorporated to the Dictionary of Lithuanian Place Names.</description>
+      <resourceShortName>DLHEPC</resourceShortName>
+      <url>http://www.lki.lt/tevi/</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>CLARIN_ACA-NC</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>webExecutable</distributionAccessMedium>
+      </licenceInfo>
+      <iprHolder>
+         <organizationInfo>
+	           <organizationName>Institute of the Lithuanian Language</organizationName>
+	           <organizationShortName>LKI</organizationShortName>
+	           <communicationInfo>
+               <email>lki@lki.lt</email>
+            </communicationInfo>
+         </organizationInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Ragauskaitė</surname>
+      <givenName>Alma</givenName>
+      <communicationInfo>
+         <email>alma@lki.lt</email>
+      </communicationInfo>
+      <position>Senior Research Fellow</position>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-12-31</metadataCreationDate>
+   </metadataInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+      
+                  <languageId>lit</languageId>
+                  <languageName>Lithuanian</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>20000</size>
+      
+                  <sizeUnit>entries</sizeUnit>
+               </sizeInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>

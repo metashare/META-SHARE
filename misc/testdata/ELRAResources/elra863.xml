@@ -6,7 +6,7 @@
 <description lang="English">This corpus comprises 4,800 Korean Mandarin sentences uttered by 40 speakers of different dialects, ages and various educational levels, recorded over 4 channels. Speech samples are stored as a sequence of 16-bit 48kHz WAV for 7.63 hours of speech per channel. The total capacity of the data is 9.82 Gb.Each speaker read 120 items. Text files are stored in Unicode format. All data have been proofread manually.The corpus aims to be applied to the testing and telephone natural speech recognition system.</description>
 <description lang="French">Ce corpus comprend 4 800 phrases en coréen mandarin prononcées par 40 locuteurs de dialectes, d’âges et de niveaux d’éducation différents, enregistrés via 4 canaux. Les échantillons de parole sont stockés sous la forme de séquences 16-bit 48kHz WAV pour un total de 7,63 heures de parole par canal. La taille totale des données est de 9,82 Go.Chaque locuteur a lu 120 éléments. Les fichiers textes sont stockés au format Unicode. Toutes les données ont été vérifiées manuellement.Cette base de données a été conçue pour l’évaluation et le développement de systèmes de reconnaissance de la parole naturelle par téléphone.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=955</url>
 <identifier>ELRA-S0228_53</identifier>
 </identificationInfo>

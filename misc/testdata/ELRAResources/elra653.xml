@@ -6,7 +6,7 @@
 <description lang="English">Derived from a range of Oxford Dictionaries, these files list word forms together with a representation of their IPA pronunciation. It contains 250,000 words. Pronunciation is based on standard British English. Word forms include dictionary lemmas and inflections or other morphological variations, plus a wide range of proper name and encyclopedic material. The data also includes a large number of common multi-word phrases and compound nouns. The files are provided in XML.</description>
 <description lang="French">Provenant d’une gamme de dictionnaires Oxford, ces fichiers listent des formes de mots avec leur représentation en prononciation IPA. Les fichiers comprennent 250 000 mots. La prononciation est basée sur l’anglais britannique standard. Les formes de mots comprennent les lemmes du dictionnaire et les flexions ou autres variations morphologiques, ainsi qu’une large gamme de noms propres et matériel encyclopédique. Les données contiennent également un grand nombre d’expressions de mots composés communs et des noms composés. Les fichiers sont fournis en XML.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=845</url>
 <identifier>ELRA-S0209</identifier>
 </identificationInfo>

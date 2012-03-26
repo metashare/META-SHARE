@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: METANORD-L19.xml 42662 2011-12-01 14:33:59Z martha $ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Database of Lithuanian Neologisms</resourceName>
+      <description>In a database of the Lithuanian neologisms the new words (borrowings and recently-coined words), phrases and abbreviations with the usage examples from the media, advertising, fiction, scientific literature and administrative documents, the daily spoken language and electronic discourse are stored.</description>
+      <resourceShortName>Neologisms</resourceShortName>
+      <url> http://naujazodziai.lki.lt/</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>CLARIN_ACA-NC</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>webExecutable</distributionAccessMedium>
+      </licenceInfo>
+      <iprHolder>
+         <personInfo>
+            <surname>Miliūnaitė</surname>
+            <givenName>Rita</givenName>
+            <communicationInfo>
+               <email>ritam@lki.lt</email>
+            </communicationInfo>
+            <position>Chief Research Fellow</position>
+         </personInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Miliūnaitė</surname>
+      <givenName>Rita</givenName>
+      <communicationInfo>
+         <email>ritam@lki.lt</email>
+      </communicationInfo>
+      <position>Chief Research Fellow</position>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-12-31</metadataCreationDate>
+   </metadataInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+      
+                  <languageId>lit</languageId>
+                  <languageName>Lithuanian</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>4000</size>
+      
+                  <sizeUnit>entries</sizeUnit>
+               </sizeInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>
