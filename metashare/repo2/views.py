@@ -324,12 +324,12 @@ class MetashareFacetedSearchView(FacetedSearchView):
     be returned that are accessible by the current user.
     """
     def get_results(self):
-        # collect statistics about the query
-        starttime = datetime.now()
         sqs = super(MetashareFacetedSearchView, self).get_results()
         if not self.request.user.is_staff:
             sqs = sqs.filter(published=True)
 
+        # collect statistics about the query
+        starttime = datetime.now()
         results_count = sqs.count()
         if results_count and self.query:
             saveQueryStats(self.request.user.username, '', self.query,
