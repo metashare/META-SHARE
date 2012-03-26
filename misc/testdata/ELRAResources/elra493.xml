@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">LusoLEX European Portuguese Lexicon</resourceName>
-<resourceName lang="French">LusoLEX Lexique du portugais européen</resourceName>
-<description lang="English">LusoLEX is a multifunctional monolingual lexicon of the European variety of Portuguese, developed by the Natural Language Group of INESC. It has about 61,000 entries (lemmas) and 1,600 correspondent inflexion paradigms. The set of entries includes compound words and the inflexion paradigms include information regarding enclitics, augmentatives and diminutives. Morphological information is encoded with maximum granularity and is conformant with the EAGLES recommendations. Most entries were selected from the Palavroso lexicon. The morphological information was converted from the Palavroso rule based morphological analyser and completely revised.Note: LusoLEX (ELRA-L0033) and BrasilLEX (ELRA-L0034) were designed with the same architecture and format. Each of these lexicons is complete and independent. Therefore, there is a set of entries that are identical in both of them, because they correspond to lexical items used in both national varieties, some of which have different morphological classification. Others, even when used in both National Varieties, are not included in one of them because its frequency of use does not justify it.</description>
-<description lang="French">LusoLEX est un lexique monolingue multifonctionnel de la variante européenne du portugais, développé par le groupe de langage naturel de l'INESC. Il comprend environ 61 000 entrées (lemmes) et 1 600 paradigmes de flexion correspondants. L'ensemble d'entrées comprend des mots composés et les paradigmes de flexion comprennent des informations concernant les clitiques, augmentatifs et diminutifs. L'information morphologique est codée avec une granularité maximum et est conforme aux recommandations d'EAGLES. La plupart des entrées ont été sélectionnées à partir du lexique Palavroso. L'information morphologique a été convertie à partir de l'analyseur morphologique basé sur les règles du Palavroso et révisée entièrement.Note : ELRA-L0033 et ELRA-L0034 ont été conçus selon la même architecture et le même format. Chacun de ces lexiques est complet et indépendant. Ils ont donc un ensemble d'entrées identiques correspondant aux éléments lexicaux utilisés dans les deux variantes nationales, certaines ayant une classification morphologique différente. D'autres entrées, même si utilisées dans les deux variantes, n'apparaissent pas dans l'un ou l'autre des deux lexiques, leur fréquence d'utilisation ne le justifiant pas.</description>
-<resourceShortName>LusoLEX</resourceShortName>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=711</url>
-<url>http://catalog.elra.info/product_info.php?products_id=773</url>
-<identifier>ELRA-L0033</identifier>
+<resourceName lang="English">Swiss-French Polyphone Database 1000 speakers</resourceName>
+<resourceName lang="French">Base de données "Polyphone" en suisse romand 1000 locuteurs</resourceName>
+<description lang="English">Like the Dutch and German polyphone corpora, this is a Polyphone-like database recorded in Switzerland to cover the French language as spoken in the Roman area.The database consists of 5,000 speakers who answered several questions (around 10), leading to spontaneous speech, and reading about 28 items .This form contains several speech sequences, including sentences from different sources (local newspapers, existing corpora, law articles, etc.) to ensure a good phonetic coverage, application words from a defined list of command words, currency amounts, quantities, credit card numbers, spelled words (mainly names), etc.The database is divided into two subsets: the first one comprises 1,000 speakers and the second one 4,000 speakers (1,000 speakers are not available). Each subset is divided into two subsets: the phonetically rich sentences and the application-oriented data.</description>
+<description lang="French">L'enregistrement a été réalisé pour constituer une base "polyphone" en suisse romand. 5000 locuteurs ont participé à la réalisation de cette base constituée de parole spontanée (réponses à des questions types) et de parole lue (articles de journaux locaux, articles de lois etc.)</description>
+<resourceShortName/>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=708</url>
+<identifier>ELRA-S0030_01</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -30,47 +29,46 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-02-24</lastDateUpdated>
+<lastDateUpdated>2006-03-13</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 3000.00€</price>
-<price>Commercial org. ELRA Member: 25000.00€</price>
-<price>Academic org. ELRA Non Member: 5000.00€</price>
-<price>Commercial org. ELRA Non Member: 30000.00€</price>
+<price>Commercial org. ELRA Non Member: 20000.00€</price>
+<price>Academic org. ELRA Non Member: 16000.00€</price>
+<price>Commercial org. ELRA Member: 12000.00€</price>
+<price>Academic org. ELRA Member: 9600.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2000-04-06</availabilityStartDate>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 25000.00€</price>
-<price>Commercial org. ELRA Member: 25000.00€</price>
-<price>Academic org. ELRA Non Member: 30000.00€</price>
-<price>Commercial org. ELRA Non Member: 30000.00€</price>
+<price>Commercial org. ELRA Non Member: 20000.00€</price>
+<price>Academic org. ELRA Non Member: 20000.00€</price>
+<price>Commercial org. ELRA Member: 12000.00€</price>
+<price>Academic org. ELRA Member: 12000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2000-04-06</availabilityStartDate>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
-<mediaType>text</mediaType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>por</languageId>
-<languageName>Portuguese</languageName>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
 </languageInfo>
-</lexicalConceptualResourceTextInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
 </resourceComponentType>
 </resourceInfo>

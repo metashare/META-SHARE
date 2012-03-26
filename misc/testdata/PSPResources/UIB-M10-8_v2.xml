@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: UIB-M10-8.xml 42662 2011-12-01 14:33:59Z martha $ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Acoustic database for Danish</resourceName>
+      <description>Speech data for Danish</description>
+      <resourceShortName/>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability>
+      <licenceInfo>
+         <licence>CLARIN_PUB</licence>
+         <restrictionsOfUse>other</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <downloadLocation>http://www.nb.no/spraakbanken/tilgjengelege-ressursar/taledatabasar</downloadLocation>
+      </licenceInfo>
+      <iprHolder>
+         <personInfo>
+            <surname>Lindstad</surname>
+            <givenName>Arne Martinus</givenName>
+            <communicationInfo>
+               <email>sprakbanken@nb.no</email>
+            </communicationInfo>
+            <affiliation>
+               <organizationName>The National Library of Norway</organizationName>
+               <communicationInfo>
+                  <email>sprakbanken@nb.no</email>
+               </communicationInfo>
+            </affiliation>
+         </personInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Lindstad</surname>
+      <givenName>Arne Martinus</givenName>
+      <communicationInfo>
+         <email>sprakbanken@nb.no</email>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-30</metadataCreationDate>
+      <metadataCreator>
+         <surname>Lindstad</surname>
+         <givenName>Arne Martinus</givenName>
+         <communicationInfo>
+            <email>sprakbanken@nb.no</email>
+         </communicationInfo>
+         <affiliation>
+	           <organizationName>Språkbanken</organizationName>
+	           <communicationInfo>
+               <email>sprakbanken@nb.no</email>
+            </communicationInfo>
+         </affiliation>
+      </metadataCreator>
+   </metadataInfo>
+   <usageInfo>
+		    <foreseenUseInfo>
+         <foreseenUse>nlpApplications</foreseenUse>
+			
+			      <useNLPSpecific>speechRecognition</useNLPSpecific> 
+		    </foreseenUseInfo>
+		    <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+      </actualUseInfo>
+	  </usageInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>monolingual</lingualityType>
+		             </lingualityInfo>
+               <languageInfo>
+			
+			               <languageId>dan</languageId>
+			               <languageName>Danish</languageName>
+		             </languageInfo>
+			               <modalityInfo>
+                     <modalityType>spokenLanguage</modalityType>
+                  </modalityInfo>
+               <sizeInfo>
+			               <size>320947</size>
+			
+			               <sizeUnit>units</sizeUnit>
+		             </sizeInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

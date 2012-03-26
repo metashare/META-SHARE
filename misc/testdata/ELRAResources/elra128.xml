@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Finnish-Swedish Speechdat(II) FDB-1000</resourceName>
-<resourceName lang="French">Base de données Speechdat(II) FDB-1000 du suédois parlé en finlande</resourceName>
-<description lang="English">The Finnish-Swedish SpeechDat(II) FDB-1000 contains the recordings of 1,000 Finnish speakers (455 males, 545 females) recorded over the Finnish fixed telephone network. The FDB-1000 database is partitioned into 4 CDs, the first 3 CDs comprise 300 speakers sessions, the 4th comprises 100 speakers.Speech samples are stored as sequences of 8-bit 8 kHz A-law. Each prompted utterance is stored in a separate file. Each signal file is accompanied by an ASCII SAM label file which contains the relevant descriptive information.This speech database was validated by SPEX (the Netherlands) to assess its compliance with the SpeechDat format and content specifications.Each speaker uttered the following items, in the variant of Swedish spoken in Finland:    * 1 isolated digit    * 1 sequence of 10 isolated digits    * 4 connected digits (1 sheet number -5 digits, 1 telephone number –9/10 digits, 1 credit card number -16 digits, 1 PIN code -6 digits)    * 1 currency money amount    * 1 natural number    * 3 dates (1 spontaneous date e.g. birthday, 1 prompted date, 1 relative or general date expression)    * 2 time phrases (1 spontaneous time of day, 1 time phrase)    * 3 spelled words (1 spontaneous e.g. own forename, 1 city name, 1 phonetically rich word)    * 5 directory assistance names (1 spontaneous e.g. own forename, 1 spontaneous city of growing up, 1 frequent city name, 1 frequent company name, 1 common forename surname)    * 2 yes/no questions (1 predominantly "yes" question, 1 predominantly "no" question)    * 6 application words    * 1 word spotting phrase using an embedded application word    * 4 phonetically rich words    * 9 phonetically rich sentencesThe following age distribution has been obtained: 178 speakers are under 16, 412 speakers are between 16 and 30, 216 speakers are between 31 and 45, 160 speakers are between 46 and 60, and 34 speakers are over 60.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
-<description lang="French">La base de données SpeechDat(II) FDB-1000 du suédois parlé en finlande contient 1000 locuteurs finlandais (455 hommes, 545 femmes) enregistrés à travers le réseau téléphonique fixe finlandais. Cette base est répartie sur 4 CD-ROM, 3 comprenant 300 sessions, et le 4e comprenant 100 sessions. Les bases de données SpeechDat(II) ont été réalisées selon les spécifications du projet SpeechDat(II) et validées par SPEX, Pays-Bas.Les fichiers de parole sont stockés en séquences d'échantillons de 8 bits, 8 kHz, loi-A. Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM.Chaque locuteur a prononcé les éléments suivants :    * 1 chiffre isolé ;    * 1 séquence de 10 chiffres isolés ;    * 4 nombres : 1 numéro permettant d'identifier la feuille de prompt (5 chiffres), 1 numéro de téléphone (9-10 chiffres), 1 numéro de carte de crédit (16 chiffres), 1 code confidentiel (6 chiffres) ;    * 1 montant en devises ;    * 1 nombre naturel ;    * 3 dates : 1 date spontanée (date de naissance), 1 date lue, 1 date relative et générale ;    * 2 phrases comportant une notion de temps : 1 jour (spontané), 1 phrase comportant une notion de temps ;    * 3 mots épelés : 1 spontané (prénom), 1 nom de ville, 1 mot phonétiquement riche ;    * 5 noms provenant d'un annuaire de renseignements téléphoniques: 1 spontané (prénom), 1 nom de ville où le locuteur a grandi (spontané), 1 nom de ville parmi les plus courantes, 1 nom de compagnie/société , 1 "prénom nom" ;    * 2 questions oui/non : 1 question à prédominance "oui", 1 question à prédominance "non" ;    * 6 mots de commande ;    * 1 expression utilisant un mot de commande ;    * 4 mots phonétiquement riches.    * 9 phrases phonétiquement riches ;Les classes d'âge sont réparties comme suit : 178 locuteurs de moins de 16 ans, 412 locuteurs entre 16 et 30 ans, 216 locuteurs entre 31 et 45 ans, 160 locuteurs entre 46 et 60 ans et 34 locuteurs de plus de 60 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
+<resourceName lang="English">German SpeechDat(II) FDB-1000</resourceName>
+<resourceName lang="French">Base de données SpeechDat(II) FDB 1000 de l'allemand</resourceName>
+<description lang="English">The German SpeechDat(II) FDB 1000 consists of 988 calls over the German fixed network, stored on 4 CD-ROMs in the final SpeechDat(II) database exchange format. The speech databases made within the SpeechDat(II) project were validated by SPEX, the Netherlands, to assess their compliance with the SpeechDat format and content specifications.The following items were recorded:- 1 isolated digit (read or prompted)- 1 sequence of 10 isolated digit- 4 connected digits - 4-6 digit number to identify the prompt sheet - ca. 10 digit telephone number (read)- 14-16 digit credit card number (read, 150 different credit card numbers were found)- 6 digit PIN code (read)- 1 natural number (read)- 1 money amount (read)- 3 spelled words (1 spontaneous name spelling, 2 read)- 1 time of day (spontaneous)- 1 time phrase (read)- 1 date (spontaneous)- 1 date (read)- 1 relative date (read)- 2 yes/no questions (spontaneous, not prompted)- 3/6 common application words (read)All application words are recorded more than 80 times. These are:- 1 application word phrase- 9 phonetically rich sentences (read)- 4 phonetically rich words (read)- 5 directory assistance names (1 spontaneous name (e.g. forename), 1 spontaneous city name, 1 read city name (from a list of 500 most frequent), 1 read company/agency name (from a list of 500 most frequent), 1 read proper name, fore- and surname (from list of 150 SDB names).A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
+<description lang="French">La base de données SpeechDat(II) FDB 1000 de l'allemand est composée de 988 appels à travers le réseau téléphonique fixe allemand présentés sur 4 CD-ROM. Les bases orales réalisées lors du projet SpeechDat(II) ont été validées par SPEX, Pays-Bas, afin de contrôler leur adéquation avec le format SpeechDat et les spécifications de contenu.Les éléments suivants ont été enregistrés :    - 1 chiffre isolé (lu ou soufflé)    - 1 séquence de 10 chiffres isolés    - 4 chiffres connectés    - 1 nombre de 4-6 chiffres permettant d'identifier la feuille de prompt    - 1 numéro de téléphone d'environ 10 chiffres (lu)    - 1 numéro de carte de crédit de 14-16 chiffres (lu, 150 numéros différents ont été trouvés)    - 1 code confidentiel de 6 chiffres (lu)    - 1 nombre entier naturel (lu)    - 1 montant (argent) (lu)    - 3 mots épelés (1 épellation spontanée de nom, 2 lues)    - 1 jour (spontané)    - 1 phrase comportant une notion de temps (lue)    - 1 date (spontanée)    - 1 date (lue)    - 1 date relative (lue)    - 2 questions oui/non (spontanées)    - 3/6 mots de commande courants (lus) Tous les mots de commande sont enregistrés plus de 80 fois. Ceux-ci sont :    - 1 mot de commande    - 9 phrases phonétiquement riches (lues)    - 4 mots phonétiquement riches (lus)    - 5 noms provenant d'un annuaire de renseignements téléphoniques (1 nom spontané (ex : prénom), 1 nom de ville spontané, 1 nom de ville lu (provenant d'une liste de 500 noms les plus fréquents), 1 nom de compagnie lu (à partir d'une liste de 500 noms les plus fréquents), 1 nom propre, prénom et nom de famille, lu (à partir d'une liste de 150 noms).Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=724</url>
-<identifier>ELRA-S0080</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=453</url>
+<identifier>ELRA-S0051</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,7 +29,7 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-02-22</lastDateUpdated>
+<lastDateUpdated>2007-08-28</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
@@ -37,11 +37,11 @@
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
 <price>Commercial org. ELRA Non Member: 25000.00€</price>
-<price>Academic org. ELRA Non Member: 22000.00€</price>
+<price>Academic org. ELRA Non Member: 25000.00€</price>
 <price>Commercial org. ELRA Member: 18000.00€</price>
-<price>Academic org. ELRA Member: 9000.00€</price>
+<price>Academic org. ELRA Member: 15000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2000-03-06</availabilityStartDate>
+<availabilityStartDate>1998-04-16</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
@@ -51,7 +51,7 @@
 <price>Commercial org. ELRA Member: 18000.00€</price>
 <price>Academic org. ELRA Member: 18000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2000-03-06</availabilityStartDate>
+<availabilityStartDate>1998-04-16</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceCreationInfo>
@@ -70,8 +70,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>swe</languageId>
-<languageName>Swedish</languageName>
+<languageId>ger/deu</languageId>
+<languageName>German</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

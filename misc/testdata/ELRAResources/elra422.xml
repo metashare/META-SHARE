@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">AURORA Project Database - Aurora 4b - Evaluation Package</resourceName>
-<resourceName lang="French">Base de données du projet AURORA - Aurora 4b - Package d'évaluation</resourceName>
-<description lang="English">The Aurora project was originally set up to establish a worldwide standard for the feature extraction software which forms the core of the front-end of a DSR (Distributed Speech Recognition) system. ETSI formally adopted this activity as work items 007 and 008. The two work items within ETSI are :  ETSI DES/STQ WI007 : DSR - Front-end feature extraction algorithm &amp; compression algorithm  ETSI DES/STQ WI008 : DSR - Advanced feature extraction algorithm The Aurora project has released a number of list files for performing the training and testing on the Wall Street Journal (WSJ0) data at two sampling rates -8 kHz and 16 kHz. The Aurora 4b, has been released. It contains noisy versions of the Nov'92 WSJ0 development set. Two original copies of the contract (pdf | doc | rtf) must be sent to ELDA.</description>
-<description lang="French">DESCRIPTION DISPONIBLE EN FRANCAIS PROCHAINEMENT.The Aurora project was originally set up to establish a worldwide standard for the feature extraction software which forms the core of the front-end of a DSR (Distributed Speech Recognition) system. ETSI formally adopted this activity as work items 007 and 008. The two work items within ETSI are :  ETSI DES/STQ WI007 : DSR - Front-end feature extraction algorithm &amp; compression algorithm  ETSI DES/STQ WI008 : DSR - Advanced feature extraction algorithm The Aurora project has released a number of list files for performing the training and testing on the Wall Street Journal (WSJ0) data at two sampling rates -8 kHz and 16 kHz. The Aurora 4b, has been released. It contains noisy versions of the Nov'92 WSJ0 development set. Two original copies of the contract (pdf | doc | rtf) must be sent to ELDA.</description>
+<resourceName lang="English">Mandarin Chinese Speech Recognition Corpus (telephone channel) - place name (100 people)</resourceName>
+<resourceName lang="French">Corpus de  reconnaissance de parole téléphonique du chinois mandarin – noms de lieux (100 locuteurs)</resourceName>
+<description lang="English">This corpus comprises place names uttered by 100 speakers of different dialects, ages and various educational levels. Speech samples are stored as a sequence of 16-bit 8kHz WAV for a total of 6.2 hours of speech. The total capacity of the data is 338 Mb.Each speaker read 40 items. Text files are stored in Unicode format. All data have been proofread manually.The corpus aims to be applied to the testing and telephone natural speech recognition system.</description>
+<description lang="French">Ce corpus comprend des noms de lieux prononcés par 100 locuteurs de dialectes, d’âges et de niveaux d’éducation différents. Les échantillons de parole sont stockés sous la forme de séquences 16-bit 8kHz WAV pour un total de 6,2 heures de parole par canal. La taille totale des données est de 338 Mo.Chaque locuteur a lu 40 éléments. Les fichiers textes sont stockés au format Unicode. Toutes les données ont été vérifiées manuellement.Cette base de données a été conçue pour l’évaluation et le développement de systèmes de reconnaissance de la parole naturelle par téléphone.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=695</url>
-<identifier>ELRA-AURORA-CD0004_02</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=942</url>
+<identifier>ELRA-S0228_40</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,33 +29,29 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2008-01-09</lastDateUpdated>
+<lastDateUpdated>2009-09-24</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 250.00€</price>
-<price>Academic org. ELRA Non Member: 250.00€</price>
-<price>Commercial org. ELRA Member: 250.00€</price>
-<price>Academic org. ELRA Member: 250.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2003-04-16</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 963.00€</price>
+<price>Academic org. ELRA Non Member: 963.00€</price>
+<price>Commercial org. ELRA Member: 963.00€</price>
+<price>Academic org. ELRA Member: 963.00€</price>
+<availabilityStartDate>2007-01-17</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 963.00€</price>
+<price>Academic org. ELRA Non Member: 963.00€</price>
+<price>Commercial org. ELRA Member: 963.00€</price>
+<price>Academic org. ELRA Member: 963.00€</price>
+<availabilityStartDate>2007-01-17</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<usageInfo>
-<actualUseInfo>
-<actualUse>nlpApplications</actualUse>
-<useNLPSpecific>speechRecognition</useNLPSpecific>
-</actualUseInfo>
-</usageInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>AURORA</projectName>
-<fundingType>ownFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
@@ -66,8 +62,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
+<languageId>chi/zho</languageId>
+<languageName>Chinese</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

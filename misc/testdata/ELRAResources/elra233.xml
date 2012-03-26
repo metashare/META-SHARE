@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">BABEL Romanian database</resourceName>
-<resourceName lang="French">Base de données BABEL du roumain</resourceName>
-<description lang="English">The BABEL Romanian Database is a speech database that was produced by a research consortium funded by the European Union under the COPERNICUS programme (COPERNICUS Project 1304). The project began in March 1995 and was completed in December 1998. The objective was to create a database of languages of Central and Eastern Europe in parallel to the EUROM1 databases produced by the SAM Project (funded by the ESPRIT programme).The BABEL consortium included six partners from Central and Eastern Europe (who had the major responsibility of planning and carrying out the recording and labelling) and six from Western Europe (whose role was mainly to advise and in some cases to act as host to BABEL researchers). The five databases collected within the project concern the Bulgarian, Estonian, Hungarian, Polish, and Romanian languages.The Romanian database consists of the basic "common" set which is:    * The Many Talker Set: 50 males, 50 females; each to read 4 connected passages, 1 block of 2-3 "filler" sentences, 4 phonemically compact sentences, 3-7 individual sentences, and 26 numbers.    * The Few Talker Set: 5 males, 5 females from the Many Talker Set; each to read additionally 3 blocks of syllables and, in 4 supplemental sessions, 16 connected passages, 4 blocks of 2-3 "filler" sentences, 4 repetitions of the 26 numbers.    * The Very Few Talker Set: 1 male, 1 female from the Few Talker Set; each to read additionally 5 pairs of context words and the syllables in these 5 contexts.</description>
-<description lang="French">BABEL est une base de données qui a été produite par un consortium de recherche financé par la Commission européenne dans le cadre du programme COPERNICUS (Projet COPERNICUS 1304). Le projet a débuté en mars 1995 et s'est terminé en décembre 1998. Son objectif était de créer une base de données des langues d'Europe Centrale et de l'Est en parallèle à EUROM1 produit dans le cadre du projet SAM (financé par le programme ESPRIT) pour les langues de l'Union Européenne.Le consortium de BABEL comprenait six partenaires d'Europe Centrale et de l'Est (ayant pour charge de planifier et réaliser l'enregistrement et l'annotation) et six partenaires de l'Europe de l'Ouest (dont le rôle principal a été de conseiller, et dans certains cas, d'héberger des chercheurs de BABEL). Les cinq bases de données collectées au cours de ce projet concernent les langues suivantes : bulgare, estonien, hongrois, polonais et roumain.La base de données du roumain est composée d'un ensemble générique "commun":    * Le grand groupe de locuteurs : ensemble comportant 50 hommes et 50 femmes. Chaque locuteur a lu 4 passages connectés, 1 bloc de 2-3 phrases complémentaires, 4 phrases compactes au niveau phonémique, 3-7 phrases individuelles et 26 nombres.    * Le petit groupe de locuteurs : ensemble comportant 5 hommes et 5 femmes issus du grand groupe de locuteurs. Chaque locuteur a lu 3 blocs de syllabes, ainsi que au cours de 4 sessions supplémentaires, 16 passages connectés, 4 blocs de 2-3 phrases complémentaires, 4 répétitions et 26 nombres.    * Le très petit groupe de locuteurs : ensemble comportant 1 homme et 1 femme issus du petit groupe de locuteurs. Chaque locuteur a lu 5 paires de mots contextuels et les syllabes dans ces 5 contextes.</description>
+<resourceName lang="English">Korean Mandarin Speech Recognition Corpus (desktop) – digit string (110 people)</resourceName>
+<resourceName lang="French">Corpus de  reconnaissance de parole microphone du coréen mandarin – séquences de chiffres (110 locuteurs)</resourceName>
+<description lang="English">This corpus comprises 13,200 Korean Mandarin digit strings uttered by 110 speakers of different dialects, ages and various educational levels, recorded over 4 channels. Speech samples are stored as a sequence of 16-bit 48kHz WAV for 18.87 hours of speech per channel. The total capacity of the data is 24.2 Gb.Each speaker read 120 items. Text files are stored in Unicode format. All data have been proofread manually.The corpus aims to be applied to the testing and telephone natural speech recognition system.</description>
+<description lang="French">Ce corpus comprend 13 200 séquences de chiffres en coréen mandarin prononcées par 110 locuteurs de dialectes, d’âges et de niveaux d’éducation différents, enregistrés via 4 canaux. Les échantillons de parole sont stockés sous la forme de séquences 16-bit 48kHz WAV pour un total de 18,87 heures de parole par canal. La taille totale des données est de 24,2 Go.Chaque locuteur a lu 120 éléments. Les fichiers textes sont stockés au format Unicode. Toutes les données ont été vérifiées manuellement.Cette base de données a été conçue pour l’évaluation et le développement de systèmes de reconnaissance de la parole naturelle par téléphone.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=756</url>
-<identifier>ELRA-S0170</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=954</url>
+<identifier>ELRA-S0228_52</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,37 +29,29 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-02-22</lastDateUpdated>
+<lastDateUpdated>2007-01-17</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 6000.00€</price>
-<price>Academic org. ELRA Non Member: 600.00€</price>
-<price>Commercial org. ELRA Member: 4000.00€</price>
-<price>Academic org. ELRA Member: 300.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2004-11-23</availabilityStartDate>
+<price>Academic org. ELRA Member: 6703.00€</price>
+<price>Commercial org. ELRA Member: 6703.00€</price>
+<price>Academic org. ELRA Non Member: 6703.00€</price>
+<price>Commercial org. ELRA Non Member: 6703.00€</price>
+<availabilityStartDate>2007-01-17</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 6000.00€</price>
-<price>Academic org. ELRA Non Member: 6000.00€</price>
-<price>Commercial org. ELRA Member: 4000.00€</price>
-<price>Academic org. ELRA Member: 4000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2004-11-23</availabilityStartDate>
+<price>Academic org. ELRA Member: 6703.00€</price>
+<price>Commercial org. ELRA Member: 6703.00€</price>
+<price>Academic org. ELRA Non Member: 6703.00€</price>
+<price>Commercial org. ELRA Non Member: 6703.00€</price>
+<availabilityStartDate>2007-01-17</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>BABEL</projectName>
-<fundingType>euFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
@@ -70,8 +62,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>rum/ron</languageId>
-<languageName>Romanian</languageName>
+<languageId>kor</languageId>
+<languageName>Korean</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

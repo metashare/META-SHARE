@@ -290,7 +290,10 @@ class ReverseModelAdmin(SchemaModelAdmin):
         inline_admin_formsets = []
         for inline, formset in zip(self.inline_instances, formsets):
             fieldsets = list(inline.get_fieldsets(request))
-            # TODO: readponly code missing, cf. options.py line 920
+            # NOTE: handling of read-only fields is not implemented yet.
+            #
+            #       See options.py:920
+            #         readonly = list(inline.get_readonly_fields(request))
             inline_admin_formset = helpers.InlineAdminFormSet(inline, formset, fieldsets)
             inline_admin_formsets.append(inline_admin_formset)
             media = media + inline_admin_formset.media

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Twin database - TWINDB1</resourceName>
-<resourceName lang="French">TWINDB1 - Base de données de jumeaux</resourceName>
-<description lang="English">The Twin database named TWINDB1 includes recordings of 45 French speakers, consisting of 9 pairs of identical twins (8 males and 10 females) with similar voices, and 27 other speakers (13 males and 14 females) including 4 none-twin siblings. Each twin or sibling spoke for a total of 24 to 30 minutes in three sessions conducted with at least one week interval between sessions.In each session subjects were asked to read three different texts of one page. These texts consists of one paragraph of about 10 lines extracted from the journal SVM Mac July 1994, some short phrases, digits, credit card numbers, etc. extracted from the Polyphone French database corpus. The speakers called from their office or from their home. Subjects were recorded over the telephone using an OROS AU32 PC-board at 16 bits linear form, 8KHz sampling frequency.</description>
-<description lang="French">La base de données TWINDB1 contient des enregistrements de 45 locuteurs français, dont 9 paires de vrais jumeaux (8 hommes et 10 femmes) avec des voix similaires, ainsi que 27 autres locuteurs (13 hommes et 14 femmes) dont 4 membres d'une famille. Chaque jumeau ou membre d'une famille a été enregistré pendant 24 à 30 minutes en trois sessions menées au moins à une semaine d'intervalle chacune.A chaque session, les locuteurs ont lu trois textes différents d'une page. Ces textes consistaient en un paragraphe d'environ 10 lignes extraites du journal "SVM Mac" de juillet 1994, quelques phrases courtes, des chiffres, des numéros de cartes de crédit, etc., extraites du corpus de la base de données Polyphone du suisse-romand (ELRA-S0030). Les locuteurs ont appelé depuis leur bureau ou depuis leur domicile. Ils ont été enregistrés par téléphone par l'intermédiaire d'une carte d'acquisition OROS AU32 à une fréquence d'échantillonnage de 8 kHz et 16 bit linéaire.</description>
+<resourceName lang="English">Concise Oxford Dictionary - Audio Files</resourceName>
+<resourceName lang="French">Fichiers audio du dictionnaire abrégé d'anglais Oxford</resourceName>
+<description lang="English">This "acoustic dictionary" contains 60,000 soundfiles from the 9th edition of the Concise Oxford Dictionary. The recordings were made by actors in a studio. It features recordings with British-English pronunciation, with an accurate coverage of different homographs, variant forms and inflections. Full information on parts of speech and subsenses is covered, and the soundfiles are clearly linked to the related phonetic information. The format in use is 22kHz 16-bit WAV.</description>
+<description lang="French">Ce dictionnaire acoustique se compose de 60 000 fichiers de parole créés à partir de la 9e édition du dictionnaire abrégé d'anglais, " Concise Oxford Dictionary ". Les enregistrements ont été effectués en studio, par des acteurs. Les données sont enregistrées avec une prononciation en anglais britannique, une couverture précise des différents homographes, des variantes et des flexions. Des informations sur les parties du discours et les sens secondaires sont fournies. Les fichiers de parole sont associés à la phonétique correspondante.Le format de fichier est WAV, avec une fréquence d'échantillonnage est de 22kHz, avec une résolution de 16-bit.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=579</url>
-<identifier>ELRA-S0088</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=678</url>
+<identifier>ELRA-S0134</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,29 +29,17 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-02-22</lastDateUpdated>
+<lastDateUpdated>2005-06-13</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 800.00€</price>
-<price>Academic org. ELRA Non Member: 400.00€</price>
-<price>Commercial org. ELRA Member: 400.00€</price>
-<price>Academic org. ELRA Member: 200.00€</price>
+<price>Academic org. ELRA Non Member: 7000.00€</price>
+<price>Academic org. ELRA Member: 4900.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2000-12-15</availabilityStartDate>
-</licenceInfo>
-<licenceInfo>
-<licence>ELRA_VAR</licence>
-<restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 800.00€</price>
-<price>Academic org. ELRA Non Member: 800.00€</price>
-<price>Commercial org. ELRA Member: 400.00€</price>
-<price>Academic org. ELRA Member: 400.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2000-12-15</availabilityStartDate>
+<availabilityStartDate>2002-10-25</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceComponentType>
@@ -64,8 +52,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
+<languageId>eng</languageId>
+<languageName>English</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

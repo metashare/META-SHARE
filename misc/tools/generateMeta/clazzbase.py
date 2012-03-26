@@ -276,6 +276,27 @@ TOP_LEVEL_TYPE_EXTRA_CODE_TEMPLATE = '''
 
     def get_absolute_url(self):
         return '/{0}repo2/browse/{1}/'.format(DJANGO_BASE, self.id)
+
+    def publication_status(self):
+        """
+        Method used for changelist view for resources.
+        """
+        storage_object = getattr(self, 'storage_object', None)
+        if storage_object:
+            return storage_object.get_publication_status_display()
+
+        return ''
+
+    def resource_type(self):
+        """
+        Method used for changelist view for resources.
+        """
+        resource_component = getattr(self, 'resourceComponentType', None)
+        if not resource_component:
+            return None
+
+        return resource_component.as_subclass()._meta.verbose_name
+
 '''
 
 #

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">VERBMOBIL - VM CD 3.1 (new edition)</resourceName>
-<resourceName lang="French">VERBMOBIL - VM CD 3.1 - VM31 ( nouvelle édition)</resourceName>
-<description lang="English">Verbmobil is a long-term project of the German Federal Ministry of Education, Science, Research and Technology (BMBF, Projekträger DLR). Its aim is to give Germany an international top position in language technology and its economical application in the next millenium by cooperation and concentration of as many as possible specialists from industry and science. The long-sighted aim is the development of a mobile translation system for the translation of spontaneous speech in face-to-face situations.The following resources are spontaneous speech databases recorded in a dialogue task (appointment scheduling) .VM CD 3.1 (new edition) consists of 1 CD-ROM with 45 Dialogues 184 Appointments, 1214 Turns in German. This new edition contains the transliterations of all dialogues, signal files with PhonDat 2 Header structure, software and speaker documentations. All files were validated according to BAS guidelines.</description>
-<description lang="French">Verbmobil est un projet du Ministère fédéral allemand de l'Education, des Sciences, de la Recherche et des Technologies (BMBF, Projekträger DLR), qui vise à placer l'Allemagne en position de force dans le domaine de l'ingénierie de la langue. Son objectif , à long terme, est de développer un système de traduction vocale automatique, pour la traduction de conversations spontanées. Ces ressources sont des enregistrements de conversation pour la prise de rendez-vous. Le corpus allemand comprend 13 910 occurrences (échanges). L'édition de BAS de la partie allemande est entièrement étiquetée et segmentée en unités phonémiques/phonétiques (alphabet SAM-PA) par le système MAUS et partiellement segmentée de manière manuelle.VM CD 3.1 - VM31 ( nouvelle édition) contient 1 CD-ROM composé de 45 dialogues, 184 rendez-vous, 1214 échanges en allemand. Cette nouvelle édition contient les transcriptions de tous les dialogues, les fichiers de signaux dans la structure d'en-tête PhonDat 2, le logiciel et la documentation sur les locuteurs. Tous les fichiers ont été validés selon les directives BAS.</description>
+<resourceName lang="English">English-Persian parallel Corpus</resourceName>
+<resourceName lang="French">Corpus parallèle anglais-persan</resourceName>
+<description lang="English">The corpus consists of about 3,500,000 English and Persian (Farsi) words aligned at sentence level (about 100,000 sentences, distributed over 50,021 entries). The format of the files is Unicode. It has been originally created with SQL Server, but it is presented in access file type. The texts in the corpus include a variety of text types, wich are distributed as follows:- Art: 1804 entries (3.61%)- Culture: 5097 entries (10.19%)- Idiom: 435 entries (0.87%)- Law: 2266 entries (4.53%)- Literature: 11470 entries (22.93%)- Medicine: 1089 entries (2.18%)- Others: 16989 entries (33.96%)- Poetry: 692 entries (1.38%)- Politics: 5493 entries (10.98%)- Proverb: 292 entries (0.58%)- Religion: 686 entries (1.37%)- Science: 3708 entries (7.41%)</description>
+<description lang="French">Ce corpus comprend environ 3 500 000 mots anglais et persans (farsi) alignés au niveau de la phrase (environ 100 000 phrases, réparties sur 50,021 entrées). Le format de fichier est Unicode. A l’origine, le corpus a été créé sur serveur SQL, mais est présenté sous la forme de fichiers access. Les textes du corpus consistent en une variété de types de textes, répartis comme suit:- Art: 1804 entrées (3,61%)- Culture: 5097 entrées (10,19%)- Idiom: 435 entrées (0,87%)- Law: 2266 entrées (4,53%)- Literature: 11470 entrées (22,93%)- Medicine: 1089 entrées (2,18%)- Others: 16989 entrées (33,96%)- Poetry: 692 entrées (1,38%)- Politics: 5493 entrées (10,98%)- Proverb: 292 entrées (0,58%)- Religion: 686 entrées (1,37%)- Science: 3708 entrées (7,41%)</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=462</url>
-<identifier>ELRA-S0034_06</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1111</url>
+<identifier>ELRA-W0051</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,51 +29,50 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2009-01-14</lastDateUpdated>
+<lastDateUpdated>2010-03-12</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 255.65€</price>
-<price>Academic org. ELRA Non Member: 255.65€</price>
-<price>Commercial org. ELRA Member: 127.82€</price>
-<price>Academic org. ELRA Member: 127.82€</price>
+<price>Commercial org. ELRA Non Member: 3000.00€</price>
+<price>Academic org. ELRA Non Member: 600.00€</price>
+<price>Commercial org. ELRA Member: 2500.00€</price>
+<price>Academic org. ELRA Member: 500.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1996-09-01</availabilityStartDate>
+<availabilityStartDate>2009-07-07</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 255.65€</price>
-<price>Academic org. ELRA Non Member: 255.65€</price>
-<price>Commercial org. ELRA Member: 127.82€</price>
-<price>Academic org. ELRA Member: 127.82€</price>
+<price>Commercial org. ELRA Non Member: 3000.00€</price>
+<price>Academic org. ELRA Non Member: 3000.00€</price>
+<price>Commercial org. ELRA Member: 2500.00€</price>
+<price>Academic org. ELRA Member: 2500.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1996-09-01</availabilityStartDate>
+<availabilityStartDate>2009-07-07</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>Verbmobil</projectName>
-<fundingType>other</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
 <corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<corpusTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
+<multilingualityType>parallel</multilingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>ger/deu</languageId>
-<languageName>German</languageName>
+<languageId>eng</languageId>
+<languageName>English</languageName>
 </languageInfo>
-</corpusAudioInfo>
+<languageInfo>
+<languageId>per/fas</languageId>
+<languageName>Persian</languageName>
+</languageInfo>
+</corpusTextInfo>
 </corpusMediaType>
 </corpusInfo>
 </resourceComponentType>

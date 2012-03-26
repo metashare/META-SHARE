@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">VERBA Polytechnic and Plurilingual Terminological Database - F-AQ Agriculture-General Topics</resourceName>
-<resourceName lang="French">Base de données terminologique polytechnique et plurilingue VERBA - F-AQ Agriculture - général</resourceName>
-<description lang="English">* Entries for English-Spanish: Scientific research &amp; mathematical sciences (906 entries), Geosciences (10,215), Computer science, electronics &amp; telecommunications (70,580), Industry (47,578), Transport &amp; Maintenance (12,291), Economy (145,572), Biological sciences (38,989), Communication &amp; media (8,143), Chemical &amp; physical sciences (27,467). * Entries for English-French-German-Spanish: Environment (36,658), Health (66,727), Agriculture &amp; food (25,975), Construction &amp; public works (8,429), Law &amp; policy (56,578), Sports &amp; Leisure (17,312) * Two specialized lexicons: Spanish-English and English-French-German without domain codes: electronics, telematics, law, taxes, customs, etc. (550,000 entries). * Two general lexicons: Spanish-English-French-German and Spanish-English-French-German-Portuguese-Italian (83,000 entries).This terminological database contains, for each domain, a sub-domain indication is given (from 2 sub-domains for Scientific research to 39 for Sports &amp; leisure). Each entry consists of a definition, phraseological unit, abbreviation, usage information, grammatical labels. Format: ASCIIMedium: floppy disk</description>
-<description lang="French">* Entrées anglais-espagnol : Recherche scientifique &amp; sciences mathématiques (906 entrées), géosciences (10 215), informatique, électronique &amp; télécommunications (70 580), industrie (47 578), transports &amp; maintenance (12 291), économie (145 572), sciences biologiques (38 989), communication &amp; média (8 143), sciences chimiques &amp; physiques (27 467).* Entrées allemand-anglais-espagnol-français : Environnement (36 658), santé (66 727), agriculture &amp; alimentation (25 975), construction &amp; travaux publics (8 429), droit &amp; politique (56 578), sports &amp; loisirs (17 312).* Deux lexiques spécialisés: Espagnol-anglais et allemand-anglais-français sans codes de domaine : électronique, télématique, droit, taxes, douanes, etc. (550 000 entrées).* Deux lexiques généraux: Allemand-anglais-espagnol-français et allemand-anglais-espagnol-français-italien-portugais. (83 000 entrées).Cette base de données terminologique contient, pour chaque domaine, l'indication de sous-domaines (de 2 sous-domaines pour la recherche scientifique à 39 pour les sports et loisirs). Chaque entrée comporte une définition, une unité phraséologique, une abréviation, une information sur l'usage et des étiquettes grammaticales.Format: ASCIISupport : disquette</description>
+<resourceName lang="English">SpeechDat(M) Italian Mobile Network Speech Database</resourceName>
+<resourceName lang="French">Base de données orale SpeechDat(M) italien en réseau mobile</resourceName>
+<description lang="English">The SpeechDat(M) Italian Mobile Network Speech Database contains the recordings of 342 speakers (156 males, 186 females) of Italian recorded over the mobile telephone network. This database is distributed on 1 CD-ROM. The database complies with the common specifications created in the SpeechDat project.Speech samples are stored as sequences of 8-bit 8 kHz A-law. Each prompted utterance is stored in a separate file. Each signal file is accompanied by an ASCII SAM label file which contains the relevant descriptive information.Each speaker uttered the following items:•	6 application words•	3 digit strings : prompt sheet number, telephone number, credit card number, •	3 dates : 1 spontaneous calling date, 2 prompted dates (word style)•	3 application word phrases•	1 isolated digit•	3 spelled word : city name, forename, surname•	2 money amounts•	3 natural numbers•	1 place: city of birth•	3 spontaneous yes/no questions•	9 phonetically rich sentences•	3 time phrases : 1 time of day (spontaneous), 2 time phrases (prompted)The following age distribution has been obtained: 8 speakers are under 16, 191 are between 16 and 30, 85 are between 31 and 45, 49 are between 46 and 60, and 9 speakers are over 60. A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
+<description lang="French">La base de données orale SpeechDat(M) italien en réseau mobile comprend les enregistrements de 342 locuteurs italiens (156 hommes, 186 femmes) enregistrés à travers le réseau téléphonique mobile italien. La base de données est répartie sur 3 CD-ROM. Cette base est conforme aux spécifications du projet SpeechDat.Les fichiers de parole sont stockés en séquences d’échantillons au format 8bit, 8 kHz, A-law, et décompressés. Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM.Chaque locuteur a prononcé les éléments suivants :•	6 mots de commande•	3 séries de chiffres connectés : 1 numéro permettant d'identifier la feuille de prompt, 1 numéro de téléphone, 1 numéro de carte de crédit•	3 dates : une date d’appel spontanée, 2 dates lues•	3 expressions utilisant un mot de commande•	1 chiffre isolé•	3 mots épelés : nom de ville, prénom, nom•	2 montants en devises•	3 nombres naturels•	1 lieu : villes de naissance•	3 questions oui / non spontanées•	9 phrases phonétiquement riches•	3 expressions comportant une notion de temps : 1 moment de la journée (spontané), 2 expressions (lues)Les classes d’âge sont réparties comme suit : 8 locuteurs ont moins de 16 ans, 191 locuteurs ont entre 16 et 30 ans, 85 locuteurs entre 31 et 45 ans, 49 locuteurs entre 46 et 60 ans, 9 locuteurs de plus de 60 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=240</url>
-<identifier>ELRA-T0165</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1117</url>
+<identifier>ELRA-S0304</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,46 +29,59 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2006-09-27</lastDateUpdated>
+<lastDateUpdated>2009-09-21</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Non Member: 23300.00€</price>
+<price>Academic org. ELRA Non Member: 16700.00€</price>
+<price>Commercial org. ELRA Member: 18800.00€</price>
+<price>Academic org. ELRA Member: 12500.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2009-09-21</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 0.70€</price>
-<price>Commercial org. ELRA Non Member: 1.00€</price>
-<availabilityStartDate>1997-04-11</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 23300.00€</price>
+<price>Academic org. ELRA Non Member: 23300.00€</price>
+<price>Commercial org. ELRA Member: 18800.00€</price>
+<price>Academic org. ELRA Member: 18800.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2009-09-21</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<usageInfo>
+<actualUseInfo>
+<actualUse>nlpApplications</actualUse>
+<useNLPSpecific>speechRecognition</useNLPSpecific>
+</actualUseInfo>
+</usageInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>SpeechDat(M) (LRE-63314 )</projectName>
+<fundingType>euFunds</fundingType>
+</fundingProject>
+<creationEndDate>1995-01-01</creationEndDate>
+</resourceCreationInfo>
 <resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>terminologicalResource</lexicalConceptualResourceType>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
-<mediaType>text</mediaType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>eng</languageId>
-<languageName>English</languageName>
+<languageId>ita</languageId>
+<languageName>Italian</languageName>
 </languageInfo>
-<languageInfo>
-<languageId>spa</languageId>
-<languageName>Spanish</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Castilian</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
-</languageInfo>
-</lexicalConceptualResourceTextInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
 </resourceComponentType>
 </resourceInfo>

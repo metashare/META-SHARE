@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Danish SpeechDat(II) FDB-4000</resourceName>
-<resourceName lang="French">Base de données SpeechDat(II) FDB-4000 du danois</resourceName>
-<description lang="English">The Danish SpeechDat(II) FDB-4000 comprises 4,000 Danish speakers (1,940 males, 2,060 females) recorded over the Danish fixed telephone network. This database is partitioned into 14 CDs. The first 13 CDs comprise 300 speakers sessions each, the 14th comprises 100 speakers.This speech database was validated by SPEX (the Netherlands) to assess its compliance with the SpeechDat format and content specifications.Speech samples are stored as sequences of 8-bit 8 kHz A-law. Each prompted utterance is stored in a separate file. Each signal file is accompanied by an ASCII SAM label file which contains the relevant descriptive information.Each speaker uttered the following items:    * 3 application words    * 1 sequence of 10 isolated digits    * 4 numbers (1 sheet number –5/10 digits, 1 telephone number –9/11 digits, 1 credit card number -16 digits), 1 PIN code -6 digits)    * 3 dates (1 spontaneous e.g. birthday, 1 word style prompted date, 1 relative and general date expression)    * 1 word spotting phrase using an embedded application word    * 1 isolated digit    * 3 spelled words (1 spontaneous e.g. own forename, 1 spelling of directory city name, 1 real word for coverage)    * 1 currency money amount    * 1 natural number    * 5 directory assistance names (1 spontaneous e.g. own forename, 1 city of school at 7 years, 1 most frequent cities out of a set of 500, 1 most frequent company/agency out of a set of 500 names, 1 "forename surname" out of a set of 500 names)    * 2 yes/no questions (1 predominantly "yes" question, 1 predominantly "no" question)    * 9 phonetically rich sentences    * 2 time phrases (1 spontaneous time of day, 1 word style time phrase)    * 4 phonetically rich wordsThe following age distribution has been obtained: 372 speakers are under 16, 1004 speakers are between 16 and 30, 1109 speakers are between 31 and 45, 901 speakers are between 46 and 60, and 614 speakers are over 60.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
-<description lang="French">La base de données SpeechDat(II) FDB-4000 du danois contient 4000 locuteurs danois (1940 hommes, 2060 femmes) enregistrés à travers le réseau téléphonique fixe danois. Cette base est répartie sur 14 CD-ROM, 13 comprenant 300 sessions, et le 14e comprenant 100 sessions.Les bases de données SpeechDat(II) ont été réalisées selon les spécifications du projet SpeechDat(II) et validées par SPEX, Pays-Bas.Les fichiers de parole sont stockés en séquences d'échantillons de 8 bits, 8 kHz, loi-A. Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM.Chaque locuteur a prononcé les éléments suivants :    * 3 mots de commande ;    * 1 séquence de 10 chiffres isolés ;    * 4 nombres : 1 numéro permettant d'identifier la feuille de prompt (5-10 chiffres), 1 numéro de téléphone (9-11 chiffres), 1 numéro de carte de crédit (16 chiffres), 1 code confidentiel (6 chiffres) ;    * 3 dates : 1 date spontanée (date de naissance), 1 date lue, 1 date relative et générale ;    * 1 expression utilisant un mot de commande ;    * 1 chiffre isolé ;    * 3 mots épelés : 1 spontané (prénom), 1 nom de ville provenant d'un annuaire de renseignements téléphoniques, 1 mot réel pour couverture ;    * 1 montant en devises ;    * 1 nombre naturel ;    * 5 noms provenant d'un annuaire de renseignements téléphoniques : 1 spontané (prénom), 1 nom de ville de l'école du locuteur à 7 ans (spontané), 1 nom de ville parmi les plus courantes (sur 500 noms), 1 nom de compagnie/société (sur 500 noms), 1 "prénom nom" (sur 500 noms) ;    * questions oui/non : 1 question à prédominance "oui", 1 question à prédominance "non" ;    * 9 phrases phonétiquement riches ;    * 2 phrases comportant une notion de temps : 1 jour (spontané), 1 phrase comportant une notion de temps) ;    * 4 mots phonétiquement riches.Les classes d'âge sont réparties comme suit : 372 locuteurs de moins de 16 ans, 1004 locuteurs entre 16 et 30 ans, 1109 locuteurs entre 31 et 45 ans, 901 locuteurs entre 46 et 60 ans et 614 locuteurs de plus de 60 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
+<resourceName lang="English">GlobalPhone Turkish</resourceName>
+<resourceName lang="French">GlobalPhone turc</resourceName>
+<description lang="English">The GlobalPhone corpus developed in collaboration with the Karlsruhe Institute of Technology (KIT) was designed to provide read speech data for the development and evaluation of large continuous speech recognition systems in the most widespread languages of the world, and to provide a uniform, multilingual speech and text database for language independent and language adaptive speech recognition as well as for language identification tasks. The entire GlobalPhone corpus enables the acquisition of acoustic-phonetic knowledge of the following 19 spoken languages: Arabic, Bulgarian, Chinese-Mandarin, Chinese-Shanghai, Croatian, Czech, French, German, Japanese, Korean, Polish, Portuguese (Brazilian), Russian, Spanish (Latin America), Swedish, Tamil, Thai, Turkish, Vietnamese. In each language about 100 sentences were read from each of the 100 speakers. The read texts were selected from national newspapers available via Internet to provide a large vocabulary (up to 65,000 words). The read articles cover national and international political news as well as economic news. The speech is available in 16bit, 16kHz mono quality, recorded with a close-speaking microphone (Sennheiser 440-6) and same recording equipment for all languages. The transcriptions are internally validated and supplemented by special markers for spontaneous effects like stuttering, false starts, and non-verbal effects like laughing and hesitations. Speaker information like age, gender, occupation, etc. as well as information about the recording setup complement the database. The entire GlobalPhone corpus contains over 450 hours of speech spoken by more than 1900 native adult speakers.Data is shortened by means of the shorten program written by Tony Robinson, available from Softsound's web page:  http://www.softsound.com/  linux distributions, or simulated versions such as cygwin. Alternatively, the data could be delivered unshorten.The Turkish corpus was produced using the Zaman newspaper. It contains recordings of 100 speakers (28 males, 72 females) recorded in Istanbul, Turkey. The following age distribution has been obtained: 30 speakers are below 19, 30 speakers are between 20 and 29, 23 speakers are between 30 and 39, 14 speakers are between 40 and 49, and 3 speakers are over 50.</description>
+<description lang="French">Le corpus GlobalPhone, développé avec la collaboration du Karlsruhe Institute of Technology (KIT),  a été conçu afin de fournir des données de parole lue pour le développement et l’évaluation de systèmes de reconnaissance de la parole continue à large vocabulaire dans les langues les plus répandues dans le monde, l’objectif étant de fournir une base de données audio et textuelles uniforme et multilingue pour la reconnaissance de la parole indépendante de la langue et adaptable à la langue, ainsi que pour des tâches d’identification de la langue. Le corpus GlobalPhone complet permet l’acquisition d’une connaissance acoustico-phonétique pour les 19 langues parlées suivantes: allemand, arabe (arabe standard moderne), bulgare, chinois-mandarin, chinois de Shanghai, coréen, croate, espagnol (d’Amérique latine), français, japonais, polonais, portugais (brésilien), russe, suédois, tamoul, thaï, tchèque, turc et vietnamien.Dans chaque langue, environ 100 phrases ont été lues par chacun des 100 locuteurs. Les textes lus sont extraits d’articles de journaux nationaux disponibles sur internet afin de fournir un large vocabulaire (jusqu’à 65000 mots). Les articles lus couvrent des actualités politiques nationales et internationales, ainsi que des nouvelles économiques. Les données de parole ont été enregistrées en 16 bit, 16 kHz (qualité mono) avec un micro-casque (Sennheiser 440-6) et le même équipement d’enregistrement pour l’ensemble des langues. Les transcriptions ont été validées en interne et annotées au moyen de balises spéciales pour marquer les effets spontanés, tels que le bégaiement, les faux démarrages, et les effets non verbaux comme le rire et les hésitations. La base contient également des informations sur les locuteurs, telles que l’âge, le genre, la profession, etc. ainsi que des informations sur la mise en place de l’enregistrement. Le corpus GlobalPhone dans son entier comprend plus de 450 heures de parole enregistrées par plus de 1900 locuteurs adultes natifs.Les données sont compressées au moyen du programme Shorten écrit par Tony Robinson, disponible depuis la page web de Softsound: http://www.softsound.com/ (distributions linux ou versions simulées telles que cygwin). Au besoin, les données peuvent être fournies non compressées.Le corpus turc a été produit à partir du journal Zaman. Il comprend les enregistrements de 100 locuteurs (28 hommes, 72 femmes) enregistrés à Istanbul, Turquie. Les classes d'âge sont réparties comme suit : 30 locuteurs de moins de 19 ans, 30 locuteurs entre 20 et 29 ans, 23 locuteurs entre 30 et 39 ans, 14 locuteurs entre 40 et 49 ans, et 3 locuteurs de plus de 50.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=555</url>
-<identifier>ELRA-S0073</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=830</url>
+<identifier>ELRA-S0206</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,37 +29,41 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-02-22</lastDateUpdated>
+<lastDateUpdated>2011-09-21</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 56000.00€</price>
-<price>Academic org. ELRA Non Member: 48000.00€</price>
-<price>Commercial org. ELRA Member: 40000.00€</price>
-<price>Academic org. ELRA Member: 28000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1999-10-13</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 3600.00€</price>
+<price>Academic org. ELRA Non Member: 700.00€</price>
+<price>Commercial org. ELRA Member: 3000.00€</price>
+<price>Academic org. ELRA Member: 600.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2006-01-30</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 56000.00€</price>
-<price>Academic org. ELRA Non Member: 56000.00€</price>
-<price>Commercial org. ELRA Member: 40000.00€</price>
-<price>Academic org. ELRA Member: 40000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1999-10-13</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 3600.00€</price>
+<price>Academic org. ELRA Non Member: 3600.00€</price>
+<price>Commercial org. ELRA Member: 3000.00€</price>
+<price>Academic org. ELRA Member: 3000.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2006-01-30</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>SpeechDat(II)</projectName>
-<fundingType>euFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
+<validationInfo>
+<validated>True</validated>
+<validationModeDetails> Most of the GlobalPhone data have been validated in-house</validationModeDetails>
+</validationInfo>
+<usageInfo>
+<actualUseInfo>
+<actualUse>nlpApplications</actualUse>
+<useNLPSpecific>speechRecognition</useNLPSpecific>
+</actualUseInfo>
+</usageInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
@@ -70,9 +74,15 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>dan</languageId>
-<languageName>Danish</languageName>
+<languageId>tur</languageId>
+<languageName>Turkish</languageName>
 </languageInfo>
+<audioSizeInfo>
+<sizeInfo>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizeInfo>
+</audioSizeInfo>
 </corpusAudioInfo>
 </corpusMediaType>
 </corpusInfo>

@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Serbian Lemmatized and PoS Annotated Corpus</resourceName>
+      <description>The Serbian Lematized and PoS Annotated Corpus consists of a sample of various texts from SrpKor. It is lemmatized and PoS tagged using TreeTagger. It consists of: daily news published in newspaper "Politika" in december 2009 (1,002,739 words), newspaper feuilletons (1,010,676) published in newspapers "Politika" (2001-2003) and "Danas" (2002-2006), fiction written by Serbian authors in 20th century (869,445), various scientific texts from various domains (both humanities and sciences) (773,119), and legislative texts (107,373). Total size of corpus is 3,763,352 words. More about the content of this corpus can be found at: http://www.korpus.matf.bg.ac.rs/SrpLemKor/SrpLemKor_2011_11.pdf</description>
+      <resourceShortName>SrpLemKor</resourceShortName>
+      <url>http://www.korpus.matf.bg.ac.rs/SrpLemKor</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+      <identifier>603</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability>
+      <licenceInfo>
+         <licence>CC_BY-NC</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <downloadLocation>http://www.korpus.matf.bg.ac.rs/SrpLemKor</downloadLocation>
+         <executionLocation>http://www.korpus.matf.bg.ac.rs/SrpLemKor</executionLocation>
+         <price>no price</price>
+         <licensor>
+				        <personInfo>
+               <surname>Vitas</surname>
+               <givenName>Duško</givenName>
+               <communicationInfo>
+                  <email>vitas@matf.bg.ac.rs</email>
+                  <url>http://poincare.matf.bg.ac.rs/~vitas</url>
+               </communicationInfo>
+               <position>Professor</position>
+               <affiliation>
+							           <organizationName>University of Belgrade</organizationName>
+							           <organizationShortName>UBG-MATF</organizationShortName>
+							           <departmentName>Faculty of Mathematics</departmentName>
+							           <communicationInfo>
+                     <email>matf@matf.bg.ac.rs</email>
+                     <url>http://www.matf.bg.ac.rs</url>
+                  </communicationInfo>
+               </affiliation>
+            </personInfo>
+         </licensor>
+         <distributionRightsHolder>
+				        <personInfo>
+               <surname>Vitas</surname>
+               <givenName>Duško</givenName>
+               <communicationInfo>
+                  <email>vitas@matf.bg.ac.rs</email>
+                  <url>http://poincare.matf.bg.ac.rs/~vitas</url>
+               </communicationInfo>
+               <position>Professor</position>
+               <affiliation>
+							           <organizationName>University of Belgrade</organizationName>
+							           <organizationShortName>UBG-MATF</organizationShortName>
+							           <departmentName>Faculty of Mathematics</departmentName>
+							           <communicationInfo>
+                     <email>matf@matf.bg.ac.rs</email>
+                     <url>http://www.matf.bg.ac.rs</url>
+                  </communicationInfo>
+               </affiliation>
+            </personInfo>
+         </distributionRightsHolder>
+      </licenceInfo>
+      <iprHolder>
+			      <personInfo>
+            <surname>Vitas</surname>
+            <givenName>Duško</givenName>
+            <communicationInfo>
+               <email>vitas@matf.bg.ac.rs</email>
+               <url>http://poincare.matf.bg.ac.rs/~vitas</url>
+            </communicationInfo>
+            <position>Professor</position>
+            <affiliation>
+						         <organizationName>University of Belgrade</organizationName>
+						         <organizationShortName>UBG-MATF</organizationShortName>
+						         <departmentName>Faculty of Mathematics</departmentName>
+						         <communicationInfo>
+                  <email>matf@matf.bg.ac.rs</email>
+                  <url>http://www.matf.bg.ac.rs</url>
+                  <address>Studentski trg 16</address>
+                  <zipCode>11000</zipCode>
+                  <city>Belgrade</city>
+                  <country>Serbia</country>
+                  <telephoneNumber>+381 11 2027 801</telephoneNumber>
+                  <faxNumber>+381 11 2630 151</faxNumber>
+               </communicationInfo>
+            </affiliation>
+         </personInfo>
+      </iprHolder>
+      <availabilityStartDate>2011-12-01</availabilityStartDate>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Utvić</surname>
+      <givenName>Miloš</givenName>
+      <communicationInfo>
+         <email>misko@matf.bg.ac.rs</email>
+         <url>http://www.fil.bg.ac.rs</url>
+      </communicationInfo>
+      <position>Teaching Assistent</position>
+      <affiliation>
+				     <organizationName>University of Belgrade</organizationName>
+				     <organizationShortName>UBG-FILF</organizationShortName>
+				     <departmentName>Faculty of Philology</departmentName>
+				     <communicationInfo>
+            <email>info@fil.bg.ac.rs</email>
+            <url>http://www.fil.bg.ac.rs</url>
+            <address>Studentski trg 3</address>
+            <zipCode>11000</zipCode>
+            <city>Belgrade</city>
+            <country>Serbia</country>
+            <telephoneNumber>+381 11 2638622</telephoneNumber>
+            <faxNumber>+381 11 2630039</faxNumber>
+         </communicationInfo>
+      </affiliation>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-17</metadataCreationDate>
+      <metadataCreator>
+         <surname>Krstev</surname>
+         <givenName>Cvetana</givenName>
+         <communicationInfo>
+            <email>cvetana@matf.bg.ac.rs</email>
+            <url>http://poincare.matf.bg.ac.rs/~cvetana</url>
+         </communicationInfo>
+         <position>Professor</position>
+      </metadataCreator>
+      <source>CESAR</source>
+      <metadataLanguageId>en-us</metadataLanguageId>
+      <metadataLastDateUpdated>2011-11-17</metadataLastDateUpdated>
+   </metadataInfo>
+   <versionInfo>
+		    <version>v1.0</version>
+      <lastDateUpdated>2011-12-01</lastDateUpdated>
+		
+		    <!--<revision>String</revision>
+		<updateFrequency>String</updateFrequency>-->
+</versionInfo>
+   <validationInfo>
+      <validated>True</validated>
+      <validationType>formal</validationType>
+      <validationMode>manual</validationMode>
+      <validationExtent>full</validationExtent>
+      <validator>
+			      <personInfo>
+            <surname>Utvić</surname>
+            <givenName>Miloš</givenName>
+            <communicationInfo>
+               <email>misko@matf.bg.ac.rs</email>
+               <url>http://www.fil.bg.ac.rs</url>
+            </communicationInfo>
+            <position>Teaching Assistent</position>
+         </personInfo>
+      </validator>
+   </validationInfo>
+   <usageInfo>
+		    <accessTool>
+         <targetResourceNameURI>Corpus query processor (CQP)</targetResourceNameURI>
+      </accessTool>
+		    <resourceAssociatedWith>
+         <targetResourceNameURI>IMS Open Corpus Workbench (CWB), http://cwb.sourceforge.net</targetResourceNameURI>
+      </resourceAssociatedWith>
+		    <foreseenUseInfo>
+         <foreseenUse>nlpApplications</foreseenUse>
+			
+			      <useNLPSpecific>annotation</useNLPSpecific>
+			      <useNLPSpecific>morphologicalAnalysis</useNLPSpecific>
+			      <useNLPSpecific>morphosyntacticTagging</useNLPSpecific>
+			      <useNLPSpecific>lexiconAcquisitionFromCorpora</useNLPSpecific>
+      </foreseenUseInfo>
+		    <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+         <useNLPSpecific>annotation</useNLPSpecific>
+         <usageReport>
+            <documentUnstructured>Zoran Popović, Taggers applied on texts in Serbian, Infotheca, Vol. XI (2), Belgrade, 2010</documentUnstructured>
+         </usageReport>
+      </actualUseInfo>
+   </usageInfo>
+   <resourceCreationInfo>
+      <resourceCreator>
+			      <personInfo>
+            <surname>Utvić</surname>
+            <givenName>Miloš</givenName>
+            <communicationInfo>
+               <email>misko@matf.bg.ac.rs</email>
+               <url>http://www.fil.bg.ac.rs</url>
+            </communicationInfo>
+            <position>Teaching Assistent</position>
+         </personInfo>
+      </resourceCreator>
+      <resourceCreator>
+			      <personInfo>
+            <surname>Vitas</surname>
+            <givenName>Duško</givenName>
+            <communicationInfo>
+               <email>vitas@matf.bg.ac.rs</email>
+               <url>http://poincare.matf.bg.ac.rs/~vitas</url>
+            </communicationInfo>
+            <position>Professor</position>
+         </personInfo>
+      </resourceCreator>
+      <fundingProject>
+         <projectName>Serbian Language and its Resources: Theory, Description and Applications</projectName>
+         <projectID>ON 178006</projectID>
+         <fundingType>nationalFunds</fundingType>
+         <funder>Serbian Ministry of Education and Science</funder>
+         <fundingCountry>Serbia</fundingCountry>
+         <projectStartDate>2011-01-01</projectStartDate>
+         <projectEndDate>2015-12-31</projectEndDate>
+      </fundingProject>
+      <creationStartDate>2011-12-01</creationStartDate>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+			
+			               <languageId>srp</languageId>
+			               <languageName>Serbian</languageName>
+			               <languageScript>Latin</languageScript>
+			               <sizePerLanguage>
+				                 <size>3763352</size>
+				
+				                 <sizeUnit>words</sizeUnit>
+                  </sizePerLanguage>
+			               <languageVarietyInfo>
+				                 <languageVarietyType>dialect</languageVarietyType>
+				                 <languageVarietyName>Ekavian</languageVarietyName>
+				                 <sizePerLanguageVariety>
+					                   <size>3763352</size>
+					
+					                   <sizeUnit>words</sizeUnit>
+                     </sizePerLanguageVariety>
+                  </languageVarietyInfo>
+               </languageInfo>
+ 			               <modalityInfo>
+                     <modalityType>writtenLanguage</modalityType>
+                  </modalityInfo>
+              <sizeInfo>
+			               <size>3763352</size>
+			
+			               <sizeUnit>words</sizeUnit>
+               </sizeInfo>
+
+               <characterEncodingInfo>
+			               <characterEncoding>MacDingbat</characterEncoding>
+			
+			               <sizePerCharacterEncoding>
+				                 <size>3763352</size>
+				
+				                 <sizeUnit>words</sizeUnit>
+                  </sizePerCharacterEncoding>
+               </characterEncodingInfo>
+               <annotationInfo>
+                  <annotationType>lemmatization</annotationType>
+                  <annotationStandoff>True</annotationStandoff>
+                  <segmentationLevel>word</segmentationLevel>
+                  <annotationFormat>text/plain</annotationFormat>
+                  <tagset>http://www.korpus.matf.bg.ac.rs/SrpLemKor/tagset.html</tagset>
+                  <conformanceToStandardsBestPractices>other</conformanceToStandardsBestPractices>
+                  <annotationMode>automatic</annotationMode>
+                  <annotationTool>
+                     <targetResourceNameURI>TreeTagger</targetResourceNameURI>
+                  </annotationTool>
+                  <annotationStartDate>2011-10-01</annotationStartDate>
+                  <sizePerAnnotation>
+				                 <size>3763352</size>
+				
+				                 <sizeUnit>words</sizeUnit>
+                  </sizePerAnnotation>
+                  <annotator>
+                     <personInfo>
+                        <surname>Utvić</surname>
+                        <givenName>Miloš</givenName>
+                        <communicationInfo>
+                           <email>misko@matf.bg.ac.rs</email>
+                           <url>http://www.fil.bg.ac.rs</url>
+                        </communicationInfo>
+                        <position>Teaching Assistent</position>
+                     </personInfo>
+                  </annotator>
+               </annotationInfo>
+               <domainInfo>
+			               <domain>literature</domain>
+			               <sizePerDomain>
+				                 <size>869445</size>
+				
+				                 <sizeUnit>words</sizeUnit>
+                  </sizePerDomain>
+               </domainInfo>
+               <domainInfo>
+			               <domain>science</domain>
+			               <sizePerDomain>
+				                 <size>773119</size>
+				
+				                 <sizeUnit>words</sizeUnit>
+                  </sizePerDomain>
+               </domainInfo>
+               <domainInfo>
+			               <domain>law_politics</domain>
+			               <sizePerDomain>
+				                 <size>107373</size>
+				
+				                 <sizeUnit>words</sizeUnit>
+                  </sizePerDomain>
+               </domainInfo>
+               <domainInfo>
+			               <domain>general</domain>
+			               <sizePerDomain>
+				                 <size>2013415</size>
+				
+				                 <sizeUnit>words</sizeUnit>
+                  </sizePerDomain>
+               </domainInfo>
+               <creationInfo>
+			               <originalSource>
+                     <targetResourceNameURI>downloading from Web; retyping</targetResourceNameURI>
+                  </originalSource>
+			               <creationMode>automatic</creationMode>
+			               <!--			<creationModeDetails>String</creationModeDetails>
+			<creationTool>String</creationTool>-->
+</creationInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

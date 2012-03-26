@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Corpus of Contemporaneous Spanish Novels</resourceName>
-<resourceName lang="French">Corpus de fictions contemporaines en espagnol</resourceName>
-<description lang="English">This corpus consists of 11 novels written in Castilian Spanish by Inmaculada Ferrer-Vidal Turull, a contemporaneous author. The list of novels consists of:-	La búsqueda: 113,639 words-	Tristeza: 41,125 words-	Cuarto menguante: 42,419 words-	Recuerdos: 55,694 words-	Sucedió en Abril: 46,040 words-	Viejos amigos: 84,082 words-	Soledad &amp; Cia: 69,848 words-	El chispazo, la hoguera y las brasas: 108,877 words-	Un giro en la vida : 70,736 words-	Adiós: 2,016 words-	Vacaciones: 3,623 wordsThe novels are available in Word format.</description>
-<description lang="French">Ce corpus comprend 11 fictions écrites en espagnol castillan par l’auteur contemporain Inmaculada Ferrer-Vidal Turull. La liste des fictions consiste en :-	La búsqueda: 113,639 words-	Tristeza: 41,125 words-	Cuarto menguante: 42,419 words-	Recuerdos: 55,694 words-	Sucedió en Abril: 46,040 words-	Viejos amigos: 84,082 words-	Soledad &amp; Cia: 69,848 words-	El chispazo, la hoguera y las brasas: 108,877 words-	Un giro en la vida : 70,736 words-	Adiós: 2,016 words-	Vacaciones: 3,623 wordsCes fictions sont fournies au format Word.</description>
+<resourceName lang="English">Danish SpeechDat(M) database - DB1</resourceName>
+<resourceName lang="French">Base de données SpeechDat(M) du danois DB1</resourceName>
+<description lang="English">The Danish SpeechDat(M) database is the speech database collected within the SpeechDat(M) project. It consists ofpolyphone-like data recorded by 1,523 speakers.The speech files are stored as sequences of 8 bit 8 kHz A-law samples. Each prompted utterance is stored within a separatefile and the associated label files are stored in SAM file format.An ASCII file is attached and is listing information about each speaker: speaker code, sex, age, region, prompt number. The lexicon is presented in a TAB delimited ASCII file containing an alphabetically ordered list of distinct lexical itemsoccurring in the database. Each entry contains a frequency count and corresponding pronunciation information.Example:WORD                     FREQUENCY          PHONEMIC TRANSCRIPTIONSåbnede                         104                          O b n @ D | O b n @ D @adresseangivelse           97                          a d R a s @ a n g i: u l s @The complete Danish SpeechDat database consists of 5 CD-ROMs. The first three CD-ROMs contain the application oriented sub-set. The last two CD-ROMs contain the phonetically rich sentences.The included items are: · 5 application word phrases (semi spontaneous) · 12 connected digit strings with 8 digits · 24 natural numbers (3-4 digits) · 27 application words · 3 dates, D3 spontaneous (birthday)· 3 spelled words · 2 money amounts, M1 small, M2 large · City name (spontaneous) · 3 yes/no questions (spontaneous)· 22-25 sentences · T1 time phrase, T2 time of day (spontaneous) There are 1,523 speakers in the SpeechDat database from 11 linguistic regions of Denmark and five age groups (under 16, 16-30, 31-45, 46-60, over 60). 78% of them are between 16 and 60 years old.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
+<description lang="French">La base de données SpeechDat(M) du danois est une base de données orale collectée dans le cadre du projet SpeechDat(M) (similaire aux autres bases de données Polyphone) et enregistrée par 1 523 locuteurs.Les signaux de parole sont enregistrés en loi-A (8 bits, 8 kHz). Les fichiers sont au format SAM.Un fichier ASCII séparé présente une liste d'informations concernant chaque locuteur : code du locuteur, sexe, âge, région, etc.Le lexique est présenté dans un autre fichier ASCII délimité par des tabulations et contenant une liste alphabétique des éléments lexicaux distincts apparaissant dans la base. Chaque entrée contient la fréquence et les prononciations correspondantes.Exemple:MOT                        FREQUENCE        TRANSCRIPTIONS PHONEMIQUESåbnede                      104                     O b n @ D | O b n @ D @adresseangivelse         97                      a d R a s @ a n g i: u l s @La base complète est composée de 5 CD-ROM. Les trois premiers CD-ROM contiennent les mots de commandes, orientés vers des applications. Les deux derniers CD-ROM contiennent les phrases phonétiquement riches.Les éléments sont :· 5 mots de commande inclus dans des phrases (semi spontané),· 12 séquences de 8 chiffres connectés,· 24 nombres entiers naturels (3-4 chiffres),· 27 mots d'application,· 3 dates dont une spontanée (anniversaire),· 3 mots épelés,· 2 montants (argent) dont une petite somme et une grosse,· nom de ville (spontané),· 3 questions oui/non (spontané),· 22-25 phrases,· une phrase comportant une notion de temps et une l'heure de la journée (spontané).La base compte 1 523 locuteurs de 11 régions linguistiques du Danemark et de 5 groupes d'âge différents (moins de 16 ans, 16-30 ans, 31-45 ans, 46-60 ans, plus de 60 ans). 78% d'entre eux ont entre 16 et 60 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=847</url>
-<identifier>ELRA-W0041</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=169</url>
+<identifier>ELRA-S0040</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,54 +29,51 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2006-03-16</lastDateUpdated>
+<lastDateUpdated>2007-08-28</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 1000.00€</price>
-<price>Academic org. ELRA Non Member: 500.00€</price>
-<price>Commercial org. ELRA Member: 800.00€</price>
-<price>Academic org. ELRA Member: 400.00€</price>
-<availabilityStartDate>2006-03-16</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 20000.00€</price>
+<price>Academic org. ELRA Non Member: 20000.00€</price>
+<price>Commercial org. ELRA Member: 14000.00€</price>
+<price>Academic org. ELRA Member: 11000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1997-06-02</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 1000.00€</price>
-<price>Academic org. ELRA Non Member: 1000.00€</price>
-<price>Commercial org. ELRA Member: 800.00€</price>
-<price>Academic org. ELRA Member: 800.00€</price>
-<availabilityStartDate>2006-03-16</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 20000.00€</price>
+<price>Academic org. ELRA Non Member: 20000.00€</price>
+<price>Commercial org. ELRA Member: 14000.00€</price>
+<price>Academic org. ELRA Member: 14000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1997-06-02</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>SpeechDat(M)</projectName>
+<fundingType>euFunds</fundingType>
+</fundingProject>
+</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
 <corpusMediaType>
-<corpusTextInfo>
-<mediaType>text</mediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>spa</languageId>
-<languageName>Spanish</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Castilian</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
+<languageId>dan</languageId>
+<languageName>Danish</languageName>
 </languageInfo>
-<textFormatInfo>
-<mimeType>MS Word</mimeType>
-</textFormatInfo>
-</corpusTextInfo>
+</corpusAudioInfo>
 </corpusMediaType>
 </corpusInfo>
 </resourceComponentType>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">UPC-TALP database of isolated meeting-room acoustic events</resourceName>
-<resourceName lang="French">Base de données d’événements acoustiques isolés enregistrés en salle de réunion (UPC-TALP)</resourceName>
-<description lang="English">This database was produced within the CHIL Project (Computers in the Human Interaction Loop), in the framework of an Integrated Project (IP 506909) under the European Commission's Sixth Framework Programme. It contains a set of isolated acoustic events that occur in a meeting room environment and that were recorded for the CHIL Acoustic Event Detection (AED) task. The recorded sounds do not have temporal overlapping. The database can be used as training material for AED technologies as well as for testing AED algorithms in quiet environments without temporal sound overlapping.The database contains signals corresponding to 23 audio channels with corresponding labels (out of 84 channels used in the whole CHIL task). The 23 audio channels correspond to: 12 microphones of the 3 T-shaped clusters, 4 tabletop omni directional microphones, and 7 channels of the Mark III array.Data was recorded at 44.1kHz, 24-bit precision, and then converted to 16-bit Raw Little Endian format. All the channels were synchronized. During all recordings two-three additional people were inside the room for a more realistic scenario.Approximately 60 sounds per sound class were recorded. Each session was produced by the same ten people (5 men and 5 women). There are 3 sessions per participant. At each session, the participant took a different place in the room out of 7 fixed different positions. During each session a person had to produce a complete set of sounds twice. A script indicating the order of events to be produced was given to each participant. Almost each event was followed and preceded by a pause of several seconds. All sounds were produced individually, except “applause” and several “laugh” that were produced by the people that were inside the room altogether. The annotation was done manually.The database is stored on 3 DVDs (one session per DVD). The following table summarizes the content of the DVDs and shows the number of annotated acoustic events in each session:&lt;table  border="0" width="100%" cellspacing="0" cellpadding="2" class="infoBoxContents"&gt;&lt;tr align=center&gt;&lt;td align=left&gt;&lt;strong&gt;Event type&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;&lt;strong&gt;Session 1&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;&lt;strong&gt;Session 2&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;&lt;strong&gt;Session 3&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Knock (door, table)&lt;/td&gt;&lt;td&gt;15&lt;/td&gt;&lt;td&gt;18&lt;/td&gt;&lt;td&gt;17&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Door open&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Door close&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Steps&lt;/td&gt;&lt;td&gt;28&lt;/td&gt;&lt;td&gt;24&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Chair moving&lt;/td&gt;&lt;td&gt;23&lt;/td&gt;&lt;td&gt;28&lt;/td&gt;&lt;td&gt;25&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Spoon (cup jingle)&lt;/td&gt;&lt;td&gt;23&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;td&gt;24&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Paper work (listing, wrapping)&lt;/td&gt;&lt;td&gt;31&lt;/td&gt;&lt;td&gt;29&lt;/td&gt;&lt;td&gt;24&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Key jingle&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;td&gt;23&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Keyboard typing&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;td&gt;25&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Phone ringing/Music&lt;/td&gt;&lt;td&gt;37&lt;/td&gt;&lt;td&gt;36&lt;/td&gt;&lt;td&gt;43&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Applause&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Cough&lt;/td&gt;&lt;td&gt;22&lt;/td&gt;&lt;td&gt;22&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Laugh&lt;/td&gt;&lt;td&gt;22&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Unknown&lt;/td&gt;&lt;td&gt;38&lt;/td&gt;&lt;td&gt;46&lt;/td&gt;&lt;td&gt;42&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
-<description lang="French">Cette base de données a été produite dans le cadre du projet CHIL (Computers in the Human Interaction Loop), issu d’un projet intégré (IP 506909) du sixième programme-cadre de la Commission européenne. Il contient un ensemble d’événements acoustiques isolés qui ont été enregistrés dans une salle de réunion pour la tâche de détection d’événement acoustique CHIL (AED). Les sons ont été enregistrés sans chevauchement temporel. La base de données peut être utilisée pour l’entraînement des technologies AED ainsi que pour l’évaluation d’algorithmes AED en milieu calme sans chevauchement temporel des sons.Cette base de données contient les signaux de 23 canaux audio accompagnés des étiquettes correspondantes (sur un total de 84 canaux utilisés pour la tâche intégrale dans CHIL). Les 23 canaux audio correspondent à: 12 microphones provenant de 3 groupes en forme de T, 4 microphones omnidirectionnels posés sur la table et 7 canaux enregistrés sur un tableau de microphones (Mark III array).Les données ont été enregistrées à 44,1 kHz, à une précision de 24-bit, et ont été ensuite converties au format 16-bit Raw Little Endian. Tous les canaux ont été synchronisés. Pendant toute la durée des enregistrements, deux à trois personnes complémentaires étaient présentes dans la salle pour obtenir un scénario plus réaliste.Environ 60 sons par classe de sons ont été enregistrés. Chaque session a été produite par les dix mêmes personnes (5 hommes et 5 femmes). La base comprend 3 sessions par participant. A chaque session, le participant prenait une place différente dans la salle parmi les 7 positions fixées. Pendant chaque session, une personne devait produire deux fois un même ensemble complet de sons. Un script indiquant l’ordre des événements à produire a été donné à chaque participant. La quasi-totalité des événements a été précédée et suivie d’une pause de plusieurs secondes. Tous les sons ont été produits individuellement, excepté “applause” et plusieurs “laugh”, qui ont été produits par l’ensemble des personnes présentes dans la salle en même temps. L’annotation a été faite manuellement.La base de données est stockée sur 3 DVDs (une session par DVD). Le tableau suivant résume le contenu des DVDs en donnant le nombre d’événements acoustiques qui ont été annotés pour chaque session:&lt;table  border="0" width="100%" cellspacing="0" cellpadding="2" class="infoBoxContents"&gt;&lt;tr align=center&gt;&lt;td align=left&gt;&lt;strong&gt;Type d’événement&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;&lt;strong&gt;Session 1&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;&lt;strong&gt;Session 2&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;&lt;strong&gt;Session 3&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Coup (porte, table)&lt;/td&gt;&lt;td&gt;15&lt;/td&gt;&lt;td&gt;18&lt;/td&gt;&lt;td&gt;17&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Ouverture de porte&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Fermeture de porte&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Bruit de pas&lt;/td&gt;&lt;td&gt;28&lt;/td&gt;&lt;td&gt;24&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Mouvement de chaise&lt;/td&gt;&lt;td&gt;23&lt;/td&gt;&lt;td&gt;28&lt;/td&gt;&lt;td&gt;25&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Bruit de cuillère (bruit de tasse)&lt;/td&gt;&lt;td&gt;23&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;td&gt;24&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Bruit de papier (Feuilletage, bruissement)&lt;/td&gt;&lt;td&gt;31&lt;/td&gt;&lt;td&gt;29&lt;/td&gt;&lt;td&gt;24&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Bruit de clé&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;td&gt;23&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Frappe au clavier&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;td&gt;25&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Sonnerie/Musique de téléphone&lt;/td&gt;&lt;td&gt;37&lt;/td&gt;&lt;td&gt;36&lt;/td&gt;&lt;td&gt;43&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Applaudissement&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Toux&lt;/td&gt;&lt;td&gt;22&lt;/td&gt;&lt;td&gt;22&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Rire&lt;/td&gt;&lt;td&gt;22&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;Inconnu&lt;/td&gt;&lt;td&gt;38&lt;/td&gt;&lt;td&gt;46&lt;/td&gt;&lt;td&gt;42&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+<resourceName lang="English">TC-STAR Transcriptions of Spanish Parliamentary Speech</resourceName>
+<resourceName lang="French">Transcriptions des discours du parlement espagnol TC-STAR</resourceName>
+<description lang="English">TC-STAR is a European integrated project focusing on all core technologies for Speech-to-Speech Translation (SST): Automatic Speech Recognition (ASR), Spoken Language Translation (SLT), and Text to Speech Synthesis (TTS).This corpus consists of the transcriptions of 100 hours of Spanish Parliamentary speech. These comprise the following: a) 38:24 hours of speech recorded from the Spanish Parliament during plenary sessions and commissions between September 2004 and December 2004, and b) 61:53 hours of speech recorded from the European Parliament speaking in the parliamentary plenary sessions as well as recordings of interpreters, between May 2004 and January 2005. The corresponding recordings are made available separately in this catalogue as TC-STAR Spanish Training Corpora for ASR: Recordings of EPPS Speech (ref. ELRA-S0252).</description>
+<description lang="French">TC-STAR est un projet intégré européen dédié à toutes les technologies de base pour la traduction parole-parole (ou SST pour Speech-to-Speech Translation) : reconnaissance automatique de la parole (ou ASR pour « Automatic Speech Recognition »), traduction de la langue parlée (ou SLT pour « Spoken Language Translation ») et technologies texte-parole (ou TTS pour « Text-to-Speech »).Ce corpus comprend les transcriptions de 100 heures de parole du Parlement espagnol. Celles-ci sont composées comme suit: a) 38:24 heures de parole enregistrées par le Parlement espagnol pendant les sessions plénières et les commissions entre septembre 2004 et décembre 2004, et b) 61:53 heures de parole enregistrées par le Parlement espagnol pendant les sessions plénières parlementaires ainsi que les enregistrements des interprètes, entre mai 2004 et janvier 2005. Les enregistrements correspondants sont disponibles de façon distincte dans ce catalogue dans le Corpus d’entraînement TC-STAR espagnol pour l’ASR: Enregistrements EPPS (réf. ELRA-S0252).</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1053</url>
-<identifier>ELRA-S0268</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1130</url>
+<identifier>ELRA-S0306</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,34 +29,38 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2008-01-14</lastDateUpdated>
+<lastDateUpdated>2010-12-21</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 1200.00€</price>
-<price>Academic org. ELRA Non Member: 600.00€</price>
-<price>Commercial org. ELRA Member: 1000.00€</price>
-<price>Academic org. ELRA Member: 500.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2008-01-11</availabilityStartDate>
+<price>Academic org. ELRA Member: 4400.00€</price>
+<price>Commercial org. ELRA Member: 6250.00€</price>
+<price>Academic org. ELRA Non Member: 5750.00€</price>
+<price>Commercial org. ELRA Non Member: 8200.00€</price>
+<availabilityStartDate>2010-12-21</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 1200.00€</price>
-<price>Academic org. ELRA Non Member: 1200.00€</price>
-<price>Commercial org. ELRA Member: 1000.00€</price>
-<price>Academic org. ELRA Member: 1000.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2008-01-11</availabilityStartDate>
+<price>Academic org. ELRA Member: 6250.00€</price>
+<price>Commercial org. ELRA Member: 6250.00€</price>
+<price>Academic org. ELRA Non Member: 8200.00€</price>
+<price>Commercial org. ELRA Non Member: 8200.00€</price>
+<availabilityStartDate>2010-12-21</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<usageInfo>
+<actualUseInfo>
+<actualUse>nlpApplications</actualUse>
+<useNLPSpecific>speechRecognition</useNLPSpecific>
+</actualUseInfo>
+</usageInfo>
 <resourceCreationInfo>
 <fundingProject>
-<projectName>CHIL (Computers in the Human Interaction Loop)</projectName>
+<projectName>TC-STAR</projectName>
 <fundingType>euFunds</fundingType>
 </fundingProject>
 </resourceCreationInfo>
@@ -69,6 +73,18 @@
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
+<languageInfo>
+<languageId>spa</languageId>
+<languageName>Spanish</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Castilian</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
+</languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>
 </corpusInfo>

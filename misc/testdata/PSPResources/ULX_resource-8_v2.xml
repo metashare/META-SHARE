@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Spoken Portuguese - Geographical and Social Varieties</resourceName>
+      <description>This resource includes a spoken Portuguese corpus exemplifying the Portuguese spoken in Portugal, Brazil, Angola, Cape Verde, Guinea-Bissau, Mozambique, Sao Tome and Principe, Macao, Goa and East-Timor - with aligned sound and orthographic transcription - collected among sociolinguistically diverse speakers. It consists of recordings from informal conversations, conferences and media.</description>
+      <resourceShortName>Spoken Corpus</resourceShortName>
+      <url>http://www.clul.ul.pt/en/research-teams/195-spoken-portuguese-geographical-and-social-varieties</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+      <identifier>e034a560c20441838d1a3149eace041a</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>underNegotiation</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <downloadLocation>http://www.clul.ul.pt/en/research-teams/195-spoken-portuguese-geographical-and-social-varieties</downloadLocation>
+         <executionLocation>http://www.clul.ul.pt/</executionLocation>
+         <licensor>
+              <personInfo>
+               <surname>Mendes</surname>
+               <givenName>Amália</givenName>
+               <communicationInfo>
+                  <email>amalia.mendes@clul.ul.pt</email>
+               </communicationInfo>
+               <affiliation>
+                        <organizationName>Centro de Linguística da Universidade de Lisboa</organizationName>
+                        <organizationShortName>CLUL</organizationShortName>
+                        <departmentName>ANAGRAMA</departmentName>
+                          <communicationInfo>
+                     <email>informacoes@clul.ul.pt/</email>
+                     <url>http://www.clul.ul.pt/en/res</url>
+                     <address>Av. Prof. Gama Pinto, 2</address>
+                     <city>Lisbon</city>
+                     <telephoneNumber>351217920000</telephoneNumber>
+                     <faxNumber>00351217965622</faxNumber>
+                  </communicationInfo>
+                      </affiliation>
+            </personInfo>
+          </licensor>
+         <distributionRightsHolder>
+              <personInfo>
+               <surname>Mendes</surname>
+               <givenName>Amália</givenName>
+               <communicationInfo>
+                  <email>amalia.mendes@clul.ul.pt</email>
+               </communicationInfo>
+               <affiliation>
+                        <organizationName>Centro de Linguística da Universidade de Lisboa</organizationName>
+                        <organizationShortName>CLUL</organizationShortName>
+                          <communicationInfo>
+                     <email>informacoes@clul.ul.pt/</email>
+                  </communicationInfo>
+                      </affiliation>
+            </personInfo>
+          </distributionRightsHolder>
+         <distributionRightsHolder>
+              <organizationInfo>
+                <organizationName>Centro de Linguística da Universidade de Lisboa</organizationName>
+                  <communicationInfo>
+                  <email>informacoes@clul.ul.pt/</email>
+               </communicationInfo>
+              </organizationInfo>
+          </distributionRightsHolder>
+      </licenceInfo>
+      <iprHolder>
+          <personInfo>
+            <surname>Mendes</surname>
+            <givenName>Amália</givenName>
+            <communicationInfo>
+               <email>amalia.mendes@clul.ul.pt</email>
+               <url>http://www.clul.ul.pt/en/researcher/146-amalia-mendes</url>
+               <address>Av. Prof. Gama Pinto, 2</address>
+               <zipCode>1649-003</zipCode>
+               <city>Lisbon</city>
+               <telephoneNumber>00351217904961</telephoneNumber>
+               <faxNumber>00351217965622</faxNumber>
+            </communicationInfo>
+            <position>Head of research group</position>
+            <affiliation>
+                    <organizationName>Centro de Linguística da Universidade de Lisboa</organizationName>
+                    <organizationShortName>CLUL</organizationShortName>
+                    <departmentName>ANAGRAMA</departmentName>
+                      <communicationInfo>
+                  <email>informacoes@clul.ul.pt</email>
+                  <url>http://www.clul.ul.pt/</url>
+                  <address>Av. Prof. Gama Pinto, 2</address>
+                  <zipCode>1649-003</zipCode>
+                  <city>Lisbon</city>
+                  <telephoneNumber>351217920000</telephoneNumber>
+                  <faxNumber>00351217965622</faxNumber>
+               </communicationInfo>
+                  </affiliation>
+         </personInfo>
+      </iprHolder>
+      <iprHolder>
+          <organizationInfo>
+            <organizationName>Centro de Linguística da Universidade de Lisboa</organizationName>
+            <organizationShortName>CLUL</organizationShortName>
+            <departmentName>ANAGRAMA</departmentName>
+              <communicationInfo>
+               <email>informacoes@clul.ul.pt</email>
+               <url>http://www.clul.ul.pt/</url>
+               <address>Av. Prof. Gama Pinto, 2</address>
+               <zipCode>1649-003</zipCode>
+               <city>Lisbon</city>
+               <telephoneNumber>351217920000</telephoneNumber>
+               <faxNumber>00351217965622</faxNumber>
+            </communicationInfo>
+          </organizationInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Mendes</surname>
+      <givenName>Amália</givenName>
+      <communicationInfo>
+         <email>amalia.mendes@clul.ul.pt</email>
+         <url>http://www.clul.ul.pt/en/researcher/146-amalia-mendes</url>
+         <address>Av. Prof. Gama Pinto, 2</address>
+         <zipCode>1649-003</zipCode>
+         <city>Lisbon</city>
+         <telephoneNumber>00351217904961</telephoneNumber>
+         <faxNumber>00351217965622</faxNumber>
+      </communicationInfo>
+      <position>Head of research group</position>
+      <affiliation>
+            <organizationName>Centro de Linguística da Universidade de Lisboa</organizationName>
+            <organizationShortName>CLUL</organizationShortName>
+            <departmentName>ANAGRAMA</departmentName>
+              <communicationInfo>
+            <email>informacoes@clul.ul.pt</email>
+            <url>http://www.clul.ul.pt/</url>
+            <address>Av. Prof. Gama Pinto, 2</address>
+            <zipCode>1649-003</zipCode>
+            <city>Lisbon</city>
+            <telephoneNumber>00351217920000</telephoneNumber>
+            <faxNumber>00351217965622</faxNumber>
+         </communicationInfo>
+          </affiliation>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-23</metadataCreationDate>
+      <metadataCreator>
+         <surname>Mendes</surname>
+         <givenName>Amália</givenName>
+         <communicationInfo>
+            <email>amalia.mendes@clul.ul.pt</email>
+            <url>http://www.clul.ul.pt/en/researcher/146-amalia-mendes</url>
+            <address>Av. Prof. Gama Pinto, 2</address>
+            <zipCode>1649-003</zipCode>
+            <city>Lisbon</city>
+            <telephoneNumber>00351217904961</telephoneNumber>
+            <faxNumber>00351217965622</faxNumber>
+         </communicationInfo>
+         <position>Head of research group</position>
+         <affiliation>
+                <organizationName>Centro de Linguística da Universidade de Lisboa</organizationName>
+                <organizationShortName>CLUL</organizationShortName>
+                <departmentName>ANAGRAMA</departmentName>
+                  <communicationInfo>
+               <email>informacoes@clul.ul.pt</email>
+               <url>http://www.clul.ul.pt/</url>
+               <address>Av. Prof. Gama Pinto, 2</address>
+               <zipCode>1649-003</zipCode>
+               <city>Lisbon</city>
+               <faxNumber>00351217965622</faxNumber>
+            </communicationInfo>
+              </affiliation>
+      </metadataCreator>
+      <source>METANET4U</source>
+      <metadataLanguageId>English</metadataLanguageId>
+      <metadataLastDateUpdated>2011-11-23</metadataLastDateUpdated>
+   </metadataInfo>
+   <versionInfo>
+      <version>v.1</version>
+  </versionInfo>
+   <validationInfo>
+      <validated>True</validated>
+      <validator>
+          <personInfo>
+            <surname>Tufis</surname>
+            <givenName>Dan</givenName>
+            <communicationInfo>
+               <email>tufis@racai.ro</email>
+            </communicationInfo>
+            <affiliation>
+                    <organizationName>RACAI</organizationName>
+                      <communicationInfo>
+                  <email>tufis@racai.ro</email>
+               </communicationInfo>
+                  </affiliation>
+         </personInfo>
+      </validator>
+      <validator>
+          <organizationInfo>
+            <organizationName>RACAI</organizationName>
+              <communicationInfo>
+               <email>tufis@racai.ro</email>
+            </communicationInfo>
+          </organizationInfo>
+      </validator>
+  </validationInfo>
+   <usageInfo>
+      <foreseenUseInfo>
+         <foreseenUse>humanUse</foreseenUse>
+        
+        <useNLPSpecific>discourseAnalysis</useNLPSpecific>
+      </foreseenUseInfo>
+      <actualUseInfo>
+         <actualUse>humanUse</actualUse>
+         <useNLPSpecific>discourseAnalysis</useNLPSpecific>
+      </actualUseInfo>
+      <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+         <useNLPSpecific>lemmatization</useNLPSpecific>
+         <useNLPSpecific>morphosyntacticTagging</useNLPSpecific>
+         <useNLPSpecific>posTagging</useNLPSpecific>
+      </actualUseInfo>
+  </usageInfo>
+   <resourceDocumentationInfo>
+      <documentation>
+         <documentUnstructured>http://www.clul.ul.pt/en/research-teams/195-spoken-portuguese-geographical-and-social-varieties</documentUnstructured>
+      </documentation>
+      <samplesLocation>http://www.clul.ul.pt/en/research-teams/195-spoken-portuguese-geographical-and-social-varieties</samplesLocation>
+      <toolDocumentationType>online</toolDocumentationType>
+  </resourceDocumentationInfo>
+   <resourceCreationInfo>
+      <resourceCreator>
+          <personInfo>
+            <surname>Bacelar do Nascimento</surname>
+            <givenName>Maria Fernanda</givenName>
+            <communicationInfo>
+               <email>fbacelar.nascimento@clul.ul.pt</email>
+               <url>http://www.clul.ul.pt/en/researcher/103-maria-nascimento</url>
+               <address>Av. Prof. Gama Pinto, 2</address>
+               <zipCode>1649-003</zipCode>
+               <city>Lisbon</city>
+               <telephoneNumber>00351217904955</telephoneNumber>
+               <faxNumber>00351217965622</faxNumber>
+            </communicationInfo>
+            <position>Head of research group</position>
+            <affiliation>
+                    <organizationName>Centro de Linguística da Universidade de Lisboa</organizationName>
+                    <organizationShortName>CLUL</organizationShortName>
+                    <departmentName>ANAGRAMA</departmentName>
+                      <communicationInfo>
+                  <email>informacoes@clul.ul.pt</email>
+                  <url>http://www.clul.ul.pt/</url>
+                  <address>Av. Prof. Gama Pinto, 2</address>
+                  <zipCode>1649-003</zipCode>
+                  <city>Lisbon</city>
+                  <telephoneNumber>00351217920000</telephoneNumber>
+                  <faxNumber>00351217965622</faxNumber>
+               </communicationInfo>
+                  </affiliation>
+         </personInfo>
+      </resourceCreator>
+      <resourceCreator>
+          <organizationInfo>
+            <organizationName>Centro de Linguística da Universidade de Lisboa</organizationName>
+            <organizationShortName>CLUL</organizationShortName>
+            <departmentName>ANAGRAMA</departmentName>
+              <communicationInfo>
+               <email>informacoes@clul.ul.pt</email>
+               <url>http://www.clul.ul.pt/</url>
+               <address>Av. Prof. Gama Pinto, 2</address>
+               <zipCode>1649-003</zipCode>
+               <city>Lisbon</city>
+               <telephoneNumber>00351217920000</telephoneNumber>
+               <faxNumber>00351217965622</faxNumber>
+            </communicationInfo>
+          </organizationInfo>
+      </resourceCreator>
+      <fundingProject>
+         <projectName>Spoken Portuguese - Geographical and Social Varieties</projectName>
+         <projectShortName>Spoken Corpus</projectShortName>
+         <url>http://www.clul.ul.pt/en/research-teams/195-spoken-portuguese-geographical-and-social-varieties</url>
+         <fundingType>euFunds</fundingType>
+         <projectStartDate>1995-01-01</projectStartDate>
+         <projectEndDate>2001-01-01</projectEndDate>
+      </fundingProject>
+      <creationStartDate>1995-01-01</creationStartDate>
+      <creationEndDate>2001-01-01</creationEndDate>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>N/A</languageId>
+        
+                  <languageName>Portuguese</languageName>
+                  <sizePerLanguage>
+                     <size>92000</size>
+            
+                     <sizeUnit>tokens</sizeUnit>
+                  </sizePerLanguage>
+               </languageInfo>
+               <sizeInfo>
+                  <size>92000</size>
+        
+                  <sizeUnit>tokens</sizeUnit>
+               </sizeInfo>
+               <textFormatInfo>
+                  <mimeType>text/xml</mimeType>
+                  <sizePerTextFormat>
+                     <size>92000</size>
+            
+                     <sizeUnit>tokens</sizeUnit>
+                  </sizePerTextFormat>
+               </textFormatInfo>
+               <characterEncodingInfo>
+                  <characterEncoding>MacDingbat</characterEncoding>
+                  <sizePerCharacterEncoding>
+                     <size>92000</size>
+            
+                     <sizeUnit>tokens</sizeUnit>
+                  </sizePerCharacterEncoding>
+               </characterEncodingInfo>
+               <annotationInfo>
+                  <annotationType>alignment</annotationType>
+                  <segmentationLevel>utterance</segmentationLevel>
+                  <tagsetLanguageId>Portuguese</tagsetLanguageId>
+                  <annotationMode>manual</annotationMode>
+                  <annotationTool>
+                     <targetResourceNameURI>EXMARaLDA</targetResourceNameURI>
+                  </annotationTool>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>morphosyntacticAnnotation-posTagging</annotationType>
+                  <segmentationLevel>word</segmentationLevel>
+                  <annotationFormat>text/plain</annotationFormat>
+                  <tagsetLanguageId>Portuguese</tagsetLanguageId>
+                  <annotationMode>automatic</annotationMode>
+               </annotationInfo>
+               <domainInfo>
+                  <domain>general</domain>
+                  <sizePerDomain>
+                     <size>92000</size>
+            
+                     <sizeUnit>tokens</sizeUnit>
+                  </sizePerDomain>
+               </domainInfo>
+               <timeCoverageInfo>
+                  <timeCoverage>1970-2001</timeCoverage>
+                  <sizePerTimeCoverage>
+                     <size>92000</size>
+            
+                     <sizeUnit>tokens</sizeUnit>
+                  </sizePerTimeCoverage>
+               </timeCoverageInfo>
+               <geographicCoverageInfo>
+                  <geographicCoverage>Portugal,Brazil,Angola,Cape Verde,Sao Tome Principe,Mozambique,Guinea-Bissau,Macau,Goa,East-Timor</geographicCoverage>
+                  <sizePerGeographicCoverage>
+                     <size>92000</size>
+            
+                     <sizeUnit>tokens</sizeUnit>
+                  </sizePerGeographicCoverage>
+               </geographicCoverageInfo>
+               <creationInfo>
+                  <creationMode>manual</creationMode>
+               </creationInfo>
+            </corpusTextInfo>
+            <corpusAudioInfo>
+               <mediaType>audio</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>N/A</languageId>
+        
+                  <languageName>Portuguese</languageName>
+                                    <sizePerLanguage>
+                     <size>524</size>
+            
+                     <sizeUnit>minutes</sizeUnit>
+                  </sizePerLanguage>
+
+                  <languageVarietyInfo>
+                     <languageVarietyType>other</languageVarietyType>
+                     <languageVarietyName>Brazilian Portuguese</languageVarietyName>
+                     <sizePerLanguageVariety>
+                        <size>117</size>
+                
+                        <sizeUnit>minutes</sizeUnit>
+                     </sizePerLanguageVariety>
+                  </languageVarietyInfo>
+                  <languageVarietyInfo>
+                     <languageVarietyType>other</languageVarietyType>
+                     <languageVarietyName> Portuguese from Angola</languageVarietyName>
+                     <sizePerLanguageVariety>
+                        <size>41</size>
+                
+                        <sizeUnit>minutes</sizeUnit>
+                     </sizePerLanguageVariety>
+                  </languageVarietyInfo>
+                  <languageVarietyInfo>
+                     <languageVarietyType>other</languageVarietyType>
+                     <languageVarietyName>Portuguese from Cape Verde</languageVarietyName>
+                     <sizePerLanguageVariety>
+                        <size>33</size>
+                
+                        <sizeUnit>minutes</sizeUnit>
+                     </sizePerLanguageVariety>
+                  </languageVarietyInfo>
+                  <languageVarietyInfo>
+                     <languageVarietyType>other</languageVarietyType>
+                     <languageVarietyName>Portuguese from Goa</languageVarietyName>
+                     <sizePerLanguageVariety>
+                        <size>13</size>
+                
+                        <sizeUnit>minutes</sizeUnit>
+                     </sizePerLanguageVariety>
+                  </languageVarietyInfo>
+                  <languageVarietyInfo>
+                     <languageVarietyType>other</languageVarietyType>
+                     <languageVarietyName>Portuguese from Guinea-Bissau</languageVarietyName>
+                     <sizePerLanguageVariety>
+                        <size>20</size>
+                
+                        <sizeUnit>minutes</sizeUnit>
+                     </sizePerLanguageVariety>
+                  </languageVarietyInfo>
+                  <languageVarietyInfo>
+                     <languageVarietyType>other</languageVarietyType>
+                     <languageVarietyName>Portuguese from Macau</languageVarietyName>
+                     <sizePerLanguageVariety>
+                        <size>36</size>
+                
+                        <sizeUnit>minutes</sizeUnit>
+                     </sizePerLanguageVariety>
+                  </languageVarietyInfo>
+                  <languageVarietyInfo>
+                     <languageVarietyType>other</languageVarietyType>
+                     <languageVarietyName>Portuguese from Mozambique</languageVarietyName>
+                     <sizePerLanguageVariety>
+                        <size>29</size>
+                
+                        <sizeUnit>minutes</sizeUnit>
+                     </sizePerLanguageVariety>
+                  </languageVarietyInfo>
+                  <languageVarietyInfo>
+                     <languageVarietyType>other</languageVarietyType>
+                     <languageVarietyName>European Portuguese</languageVarietyName>
+                     <sizePerLanguageVariety>
+                        <size>160</size>
+                
+                        <sizeUnit>minutes</sizeUnit>
+                     </sizePerLanguageVariety>
+                  </languageVarietyInfo>
+                  <languageVarietyInfo>
+                     <languageVarietyType>other</languageVarietyType>
+                     <languageVarietyName>Portuguese from São Tome and Principe</languageVarietyName>
+                     <sizePerLanguageVariety>
+                        <size>35</size>
+                
+                        <sizeUnit>minutes</sizeUnit>
+                     </sizePerLanguageVariety>
+                  </languageVarietyInfo>
+                                    <languageVarietyInfo>
+                     <languageVarietyType>other</languageVarietyType>
+                     <languageVarietyName>Portuguese from Timor</languageVarietyName>
+                     <sizePerLanguageVariety>
+                        <size>16</size>
+                
+                        <sizeUnit>minutes</sizeUnit>
+                     </sizePerLanguageVariety>
+                  </languageVarietyInfo>
+
+               </languageInfo>
+               <audioSizeInfo>
+                  <sizeInfo>
+                     <size>524</size>
+        
+                     <sizeUnit>minutes</sizeUnit>
+                  </sizeInfo>
+                     <durationOfEffectiveSpeechInfo>
+                        <size>524</size>
+                        <durationUnit>minutes</durationUnit>
+                     </durationOfEffectiveSpeechInfo>
+               </audioSizeInfo>
+               <audioContentInfo>
+                  <speechItems>other</speechItems>
+                  <nonSpeechItems>other</nonSpeechItems>
+               </audioContentInfo>
+               <settingInfo>
+                  <naturality>spontaneous</naturality>
+                  <conversationalType>monologue</conversationalType>
+                  <scenarioType>other</scenarioType>
+                  <audience>no</audience>
+        
+                  <interactivity>interactive</interactivity>
+               </settingInfo>
+               <audioFormatInfo>
+                  <mimeType>wav</mimeType>
+                  <quantization>16</quantization>
+                  <recordingQuality>high</recordingQuality>
+               </audioFormatInfo>
+               <domainInfo>
+                  <domain>general</domain>
+               </domainInfo>
+               <timeCoverageInfo>
+                  <timeCoverage>1970-2001</timeCoverage>
+               </timeCoverageInfo>
+               <geographicCoverageInfo>
+                  <geographicCoverage>Portugal,Brazil,Angola,Cape Verde,Guinea-Bissau,Mozambique,Sao Tome Principe,Macao,Goa East-Timor</geographicCoverage>
+               </geographicCoverageInfo>
+               <recordingInfo>
+        
+                  <recordingDeviceType>other</recordingDeviceType>
+                  <recordingEnvironment>closedPublicPlace</recordingEnvironment>
+                  <recordingEnvironment>other</recordingEnvironment>
+               </recordingInfo>
+               <captureInfo>
+                  <capturingDeviceType>microphone</capturingDeviceType>
+                  <personSourceSetInfo>
+                     <numberOfPersons>86</numberOfPersons>
+                     <ageOfPersons>adult</ageOfPersons>
+                     <ageRangeStart>17</ageRangeStart>
+                     <ageRangeEnd>82</ageRangeEnd>
+                     <sexOfPersons>mixed</sexOfPersons>
+                     <originOfPersons>native</originOfPersons>
+                     <geographicDistributionOfPersons>Portugal, Brazil, Angola, Cape Verde, Guinea-Bissau, Mozambique, Sao Tome and Principe, Macao, Goa, East-Timor </geographicDistributionOfPersons>
+                     <hearingImpairmentOfPersons>no</hearingImpairmentOfPersons>
+                     <speakingImpairmentOfPersons>no</speakingImpairmentOfPersons>
+                  </personSourceSetInfo>
+               </captureInfo>
+            </corpusAudioInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

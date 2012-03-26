@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Mandarin Chinese Desktop Speech Recognition Corpus - Person name, Place Name (10 people)</resourceName>
-<resourceName lang="French">Corpus de reconnaissance de parole microphone en chinois mandarin – Noms de personnes et de lieux (10 locuteurs)</resourceName>
-<description lang="English">This corpus comprises 782 entries uttered by 10 speakers of different dialects, ages and various educational levels (3 males and 7 females), recorded over 4 channels (Mic1: SHURE SM58; Mic2: ANC-700 Head-mounted; Mic3: TELEX M-60; Mic4: ACOUSTIC MAGIC). The database comprises 800 Chinese items per channel: 30 stocks, 10 nation names, 10 Chinese city names, 30 person names. Speech samples are stored as a sequence of 16-bit 22.05kHz WAV for 0.97 hours of speech per channel. The total capacity of the data is 587 Mb.Each speaker read 120 items. Text files are stored in Unicode format. All data have been proofread manually.The transcriptions include non-speech markers (background noise, background speech, speaker sounds) as well as markers for mispronunciation, channel distortions, words left-out and duplicates.The corpus aims to be applied to the testing and telephone natural speech recognition system.</description>
-<description lang="French">Ce corpus comprend 782 entrées prononcées par 10 locuteurs de dialectes, d’âges et de niveaux d’éducation différents (3 hommes et 7 femmes), enregistrées via 4 canaux (Mic1: SHURE SM58; Mic2: ANC-700 Micro-casque; Mic3: TELEX M-60; Mic4: ACOUSTIC MAGIC). La base de données contient 800 éléments en chinois : 30 ‘stocks’, 10 noms de pays, 10 noms de villes chinoises, 30 noms de personnes. Les échantillons de parole sont stockés sous la forme de séquences 16-bit 22,05kHz WAV pour un total de 3,9 heures de parole. La taille totale des données est de 587 Mo.Chaque locuteur a lu 120 éléments. Les fichiers textes sont stockés au format Unicode. Toutes les données ont été vérifiées manuellement.Les transcriptions comprennent des balises d’événements acoustiques (bruits de fond, sons émis par les locuteurs) ainsi que des balises de mauvaise prononciation, distorsions du canal, omissions de mots et répétitions.Cette base de données a été conçue pour l’évaluation et le développement de systèmes de reconnaissance de la parole naturelle par téléphone.</description>
+<resourceName lang="English">VERBMOBIL - VM CD 2.1 (new edition)</resourceName>
+<resourceName lang="French">VERBMOBIL - VM CD 2.1 - VM21 (nouvelle édition)</resourceName>
+<description lang="English">Verbmobil is a long-term project of the German Federal Ministry of Education, Science, Research and Technology (BMBF, Projekträger DLR). Its aim is to give Germany an international top position in language technology and its economical application in the next millenium by cooperation and concentration of as many as possible specialists from industry and science. The long-sighted aim is the development of a mobile translation system for the translation of spontaneous speech in face-to-face situations.The following resources are spontaneous speech databases recorded in a dialogue task (appointment scheduling) .VM CD 2.1 (new edition) consists of 1 CD-ROM with 81 Dialogues 227 Appointments, 1538 Turns in German. This new edition contains the transliterations of all dialogues, signal files with PhonDat 2 Header structure, software and speaker documentations. All files were validaed according to BAS guidelines.</description>
+<description lang="French">Verbmobil est un projet du Ministère fédéral allemand de l'Education, des Sciences, de la Recherche et des Technologies (BMBF, Projekträger DLR), qui vise à placer l'Allemagne en position de force dans le domaine de l'ingénierie de la langue. Son objectif , à long terme, est de développer un système de traduction vocale automatique, pour la traduction de conversations spontanées. Ces ressources sont des enregistrements de conversation pour la prise de rendez-vous. Le corpus allemand comprend 13 910 occurrences (échanges). L'édition de BAS de la partie allemande est entièrement étiquetée et segmentée en unités phonémiques/phonétiques (alphabet SAM-PA) par le système MAUS et partiellement segmentée de manière manuelle.VM CD 2.1 - VM21 (nouvelle édition) contient 1 CD-ROM composé de 81 dialogues, 227 rendez-vous, 1538 échanges en allemand. Cette nouvelle édition contient les transcriptions de tous les dialogues, les fichiers de signaux dans la structure d'en-tête PhonDat 2, le logiciel et la documentation sur les locuteurs. Tous les fichiers ont été validés selon les directives BAS.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=909</url>
-<identifier>ELRA-S0228_14</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=460</url>
+<identifier>ELRA-S0034_04</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,29 +29,37 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2009-09-24</lastDateUpdated>
+<lastDateUpdated>2009-01-14</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 100.00€</price>
-<price>Academic org. ELRA Non Member: 100.00€</price>
-<price>Commercial org. ELRA Member: 100.00€</price>
-<price>Academic org. ELRA Member: 100.00€</price>
-<availabilityStartDate>2007-01-17</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 255.65€</price>
+<price>Academic org. ELRA Non Member: 255.65€</price>
+<price>Commercial org. ELRA Member: 127.82€</price>
+<price>Academic org. ELRA Member: 127.82€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 100.00€</price>
-<price>Academic org. ELRA Non Member: 100.00€</price>
-<price>Commercial org. ELRA Member: 100.00€</price>
-<price>Academic org. ELRA Member: 100.00€</price>
-<availabilityStartDate>2007-01-17</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 255.65€</price>
+<price>Academic org. ELRA Non Member: 255.65€</price>
+<price>Commercial org. ELRA Member: 127.82€</price>
+<price>Academic org. ELRA Member: 127.82€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>Verbmobil</projectName>
+<fundingType>other</fundingType>
+</fundingProject>
+</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
@@ -62,8 +70,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>chi/zho</languageId>
-<languageName>Chinese</languageName>
+<languageId>ger/deu</languageId>
+<languageName>German</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

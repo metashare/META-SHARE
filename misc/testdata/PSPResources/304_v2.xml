@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Croatian Lemmatisation Server</resourceName>
+      <description>
+		 The Croatian Lemmatisation Server (CLS) is a web-based service for lemmatisation, POS- and MSD-tagging of Croatian texts. It accepts input in two modes.
+		 Through web form mode it accepts direct query allowing lemmas or word-forms as input, giving all word-forms of lemma or all lemmas that a word-form could belong to, respectively. In both cases, the results are accompanied by MSD-tags as well.
+		 In the upload mode the CLS expects a verticalised, utf-8 encoded text in contemporary standard Croatian language and returns a zip file with results of processing the uploaded file. At the moment the limitation of file size is 50,000 tokens. The processing gives all analysis for each token, i.e. line in verticalised corpus, regarding the lemma, POS and MSD. The web interface allows user to select the level of processing needed: just lemmatisation, lemmatisation with POS-tagging or lemmatisation with MSD-tagging. POS and MSD tags follow the MulTextEast v4.0 specifications for Croatian.
+		 Upon registration either as academic or commercial user, a php script call tailored according to user's requests can be provided. Also, the existing Croatian Lemmatisation Server will be turned into a web service that will feature lemmatisation and MSD-tagging of verticalised utf-8 encoded Croatian texts including disambiguation.
+</description>
+      <resourceShortName>CLS</resourceShortName>
+      <url>http://hml.ffzg.hr/</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+      <identifier>304</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>proprietary</licence>
+         <restrictionsOfUse>commercialUse</restrictionsOfUse>
+         <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
+         <executionLocation>http://hml.ffzg.hr</executionLocation>
+         <price>negotiable</price>
+         <distributionRightsHolder>
+				        <organizationInfo>
+					          <organizationName>University of Zagreb, Faculty of Humanities and Social Sciences, Department/Institute of Linguistics</organizationName>
+					          <communicationInfo>
+                  <email>zzl@ffzg.hr</email>
+                  <url>http://hnk.ffzg.hr</url>
+                  <address>Ivana Lučića 3</address>
+                  <zipCode>10000</zipCode>
+                  <city>Zagreb</city>
+                  <country>Croatia</country>
+                  <telephoneNumber>+385 1 6120 066</telephoneNumber>
+                  <faxNumber>+385 1 6156 879</faxNumber>
+               </communicationInfo>
+            </organizationInfo>
+         </distributionRightsHolder>
+      </licenceInfo>
+      <iprHolder>
+			      <personInfo>
+            <surname>Tadić</surname>
+            <givenName>Marko</givenName>
+            <communicationInfo>
+               <email>marko.tadic@ffzg.hr</email>
+               <url>http://hnk.ffzg.hr</url>
+               <address>Ivana Lučića 3</address>
+               <zipCode>10000</zipCode>
+               <city>Zagreb</city>
+               <country>Croatia</country>
+               <telephoneNumber>+385 1 6120 066</telephoneNumber>
+               <faxNumber>+385 1 6156 879</faxNumber>
+            </communicationInfo>
+         </personInfo>
+      </iprHolder>
+      <iprHolder>
+			      <organizationInfo>
+				        <organizationName>University of Zagreb, Faculty of Humanities and Social Sciences, Department/Institute of Linguistics</organizationName>
+				        <communicationInfo>
+               <email>zzl@ffzg.hr</email>
+               <url>http://hnk.ffzg.hr</url>
+               <address>Ivana Lučića 3</address>
+               <zipCode>10000</zipCode>
+               <city>Zagreb</city>
+               <country>Croatia</country>
+               <telephoneNumber>+385 1 6120 066</telephoneNumber>
+               <faxNumber>+385 1 6156 879</faxNumber>
+            </communicationInfo>
+         </organizationInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Tadić</surname>
+      <givenName>Marko</givenName>
+      <communicationInfo>
+         <email>marko.tadic@ffzg.hr</email>
+         <url>http://hnk.ffzg.hr/mt</url>
+         <address>Ivana Lučića 3</address>
+         <zipCode>10000</zipCode>
+         <city>Zagreb</city>
+         <country>Croatia</country>
+         <telephoneNumber>+385 1 6120 066</telephoneNumber>
+         <faxNumber>+385 1 6156 879</faxNumber>
+      </communicationInfo>
+      <position>Head of the Chair for Algebraic and Computational Linguistics</position>
+      <affiliation>
+				     <organizationName>University of Zagreb, Faculty of Humanities and Social Sciences, Department/Institute of Linguistics</organizationName>
+				     <communicationInfo>
+            <email>zzl@ffzg.hr</email>
+            <url>http://hnk.ffzg.hr</url>
+            <address>Ivana Lučića 3</address>
+            <zipCode>10000</zipCode>
+            <city>Zagreb</city>
+            <country>Croatia</country>
+            <telephoneNumber>+385 1 6120 066</telephoneNumber>
+            <faxNumber>+385 1 6156 879</faxNumber>
+         </communicationInfo>
+      </affiliation>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-20</metadataCreationDate>
+      <metadataCreator>
+         <surname>Tadić</surname>
+         <givenName>Marko</givenName>
+         <communicationInfo>
+            <email>marko.tadic@ffzg.hr</email>
+            <url>http://hnk.ffzg.hr/mt</url>
+            <address>Ivana Lučića 3</address>
+            <zipCode>10000</zipCode>
+            <city>Zagreb</city>
+            <country>Croatia</country>
+            <telephoneNumber>+385 1 6120 066</telephoneNumber>
+            <faxNumber>+385 1 6156 879</faxNumber>
+         </communicationInfo>
+         <position>Head of the Chair for Algebraic and Computational Linguistics</position>
+         <affiliation>
+					       <organizationName>University of Zagreb, Faculty of Humanities and Social Sciences, Department/Institute of Linguistics</organizationName>
+					       <communicationInfo>
+               <email>zzl@ffzg.hr</email>
+               <url>http://hnk.ffzg.hr</url>
+               <address>Ivana Lučića 3</address>
+               <zipCode>10000</zipCode>
+               <city>Zagreb</city>
+               <country>Croatia</country>
+               <telephoneNumber>+385 1 6120 066</telephoneNumber>
+               <faxNumber>+385 1 6156 879</faxNumber>
+            </communicationInfo>
+         </affiliation>
+      </metadataCreator>
+      <metadataLanguageId>en</metadataLanguageId>
+   </metadataInfo>
+   <versionInfo>
+		    <version>2.0</version>
+      <lastDateUpdated>2011-11-20</lastDateUpdated>
+		
+   </versionInfo>
+   <resourceDocumentationInfo>
+		    <documentation>
+         <documentUnstructured>Marko Tadić. The Croatian Lemmatization Server. Southern Journal of Linguistics 29 (2005), 1/2, pp 206-217</documentUnstructured>
+      </documentation>
+		    <documentation>
+         <documentUnstructured>Marko Tadić. Croatian Lemmatization Server. Mila Dimitrova Vulchanova, Svetla Koeva, Iliyana Krapova, Valentin Vulchanov (eds.). Formal Approaches to south Slavic and Balkan Languages, Bulgarian Academy of Sciences, Sofia, 2006, pp 140-146</documentUnstructured>
+      </documentation>
+   </resourceDocumentationInfo>
+   <resourceCreationInfo>
+      <resourceCreator>
+			      <organizationInfo>
+				        <organizationName>University of Zagreb, Faculty of Humanities and Social Sciences, Department/Institute of Linguistics</organizationName>
+				        <communicationInfo>
+               <email>zzl@ffzg.hr</email>
+               <url>http://hnk.ffzg.hr</url>
+               <address>Ivana Lučića 3</address>
+               <zipCode>10000</zipCode>
+               <city>Zagreb</city>
+               <country>Croatia</country>
+               <telephoneNumber>+385 1 6120 066</telephoneNumber>
+               <faxNumber>+385 1 6156 879</faxNumber>
+            </communicationInfo>
+         </organizationInfo>
+      </resourceCreator>
+      <fundingProject>
+         <projectName>Central and South-East European Resources</projectName>
+         <projectShortName>CESAR</projectShortName>
+         <url>http://www.cesar-project.net</url>
+         <fundingType>euFunds</fundingType>
+         <fundingType>ownFunds</fundingType>
+         <fundingType>nationalFunds</fundingType>
+         <funder>European Commission (50%)</funder>
+         <funder>University of Zagreb, Faculty of Humanities and Social Sciences (50%)</funder>
+         <projectStartDate>2011-02-01</projectStartDate>
+         <projectEndDate>2013-01-31</projectEndDate>
+      </fundingProject>
+      <creationStartDate>2003-04-01</creationStartDate>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>computationalLexicon</lexicalConceptualResourceType>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+			
+			               <languageId>hr</languageId>
+			               <languageName>Croatian</languageName>
+			               <languageScript>latin</languageScript>
+               </languageInfo>
+			               <modalityInfo>
+                     <modalityType>writtenLanguage</modalityType>
+                  </modalityInfo>
+               <sizeInfo>
+			               <size>4000000</size>
+			
+			               <sizeUnit>words</sizeUnit>
+               </sizeInfo>
+               <characterEncodingInfo>
+			               <characterEncoding>MacDingbat</characterEncoding>
+               </characterEncodingInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>

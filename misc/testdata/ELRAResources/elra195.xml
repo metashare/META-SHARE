@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">German spoken by Turkish OrienTel database</resourceName>
-<resourceName lang="French">Base de données OrienTel de l'allemand parlé par les turcs</resourceName>
-<description lang="English">The German spoken by Turkish OrienTel database comprises 332 Turkish speakers who spoke German (167 males, 165 females) recorded over the German fixed and mobile telephone network. This database is partitioned into 1 DVD. The speech databases made within the OrienTel project were validated by SPEX, the Netherlands, to assess their compliance with the OrienTel format and content specifications.Speech samples are stored as sequences of 8-bit 8 kHz A-law. Each prompted utterance is stored in a separate file. Each signal file is accompanied by an ASCII SAM label file which contains the relevant descriptive information.Each speaker uttered the following items:    * 1 isolated single digit    * 1 sequence of 10 isolated digits    * 5connected digits : 1 prompt sheet number (6 digits), 1 telephone number (6-15 digits), 1 credit card number (14-16 digits), 1 PIN code (6 digits), 1 spontaneous phone number    * 1 currency money amount    * 2 natural numbers    * 3 dates : 1 spontaneous (date or year of birth), 1 prompted date, 1 relative or general date expression    * 2 time phrases : 1 time of day (spontaneous), 1 time phrase (word style)    * 4 spelled words : 1 spontaneous (own forename), 1 personal first name, 1 city name, 1 real word for coverage    * 8 directory assistance utterances : 1 spontaneous, own forename, 1 city of birth/growing up (spontaneous), 1 frequent city name, 1 frequent company name, 1 common forename and surname, 1 Turkish forename and surname, 1 Turkish city name, 1 Turkish company name    * 3 yes/no questions : 1 predominantly ”yes” question, 1 predominantly ”no” question, 1 predominantly fuzzy answer, e.g. "don't know"    * 6 application keywords/keyphrases    * 1 word spotting phrase using embedded application words    * 6 phonetically rich words    * 9 phonetically rich sentences The following age distribution has been obtained: 4 speakers are less than 16 years old, 179 speakers are between 16 and 30, 115 speakers are between 31 and 45, 29 speakers are between 46 and 60, and 5 are over 60 years old.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
-<description lang="French">La base de données OrienTel de l’allemand parlé par les turcs contient 332 locuteurs turcs parlant allemand (167 hommes, 165 femmes) enregistrés à travers le réseau téléphonique fixe et mobile allemand. Cette base est répartie sur 1 DVD. Les bases de données OrienTel ont été réalisées selon les spécifications du projet SpeechDat(II) et validées par SPEX, Pays-Bas.Les fichiers de parole sont stockés en séquences d’échantillons de 8 bits, 8 kHz, loi-A. Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM.Chaque locuteur a prononcé les éléments suivants :    * 1 chiffre isolé ;    * 1 séquence de 10 chiffres isolés ;    * 5 chiffres connectés : 1 numéro permettant d'identifier la feuille de prompt (6 chiffres), 1 numéro de téléphone (6-15 chiffres), 1 numéro de carte de crédit (14-16 chiffres), 1 code confidentiel (6 chiffres), 1 numéro de téléphone spontané ;    * 1 montant en devises ;    * 2 nombres naturels ;    * 3 dates : 1 date spontanée (date de naissance), 1 date lue, 1 date relative et générale ;    * 2 phrases comportant une notion de temps : 1 jour (spontané), 1 phrase comportant une notion de temps ;    * 4 mots épelés : 1 spontané (prénom), 1 prénom, 1 nom de ville provenant d'un annuaire de renseignements téléphoniques, 1 mot réel pour couverture ;    * 8 noms provenant d'un annuaire de renseignements téléphoniques : 1 spontané (prénom), 1 nom de ville de naissance/d'origine du locuteur (spontané), 1 nom de ville parmi les plus courantes (sur 500 noms), 1 nom de compagnie/société (sur 500 noms), 1 ”prénom nom” (sur 500 noms), 1 ”prénom nom” turc, 1 nom de ville turque, 1 nom de société turque ;    * 3 questions oui/non : 1 question à prédominance "oui", 1 question à prédominance "non", 1 réponse à prédominance floue, par exemple « ne sait pas » ;    * 6 mots/expressions de commande ;    * 1 expression utilisant un mot de commande ;    * 6 mots phonétiquement riches.    * 9 phrases phonétiquement riches ; Les classes d’âge sont réparties comme suit : 4 locuteurs ayant moins de 16 ans, 179 locuteurs entre 16 et 30 ans, 115 locuteurs entre 31 et 45 ans, 29 locuteurs entre 46 et 60 ans et 5 de plus de 60 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
+<resourceName lang="English">NEMLAR Speech Synthesis Corpus</resourceName>
+<resourceName lang="French">Corpus de synthèse de parole NEMLAR</resourceName>
+<description lang="English">This corpus was produced within the NEMLAR project (http://www.nemlar.org). Two other resources, produced within the same project, are also available: NEMLAR Written Corpus (ELRA-W0042) and the NEMLAR Broadcast News Speech Corpus (ELRA-S0219).The NEMLAR Speech Synthesis Corpus contains the recordings of 2 native Egyptian Arabic speakers (male and female, 35 and 27 years old respectively) recorded in a studio over 2 channels (voice + laryngograph). The recordings comprise more than 10 hours of data with transcriptions.Speech samples are stored in 96 kHz, 24 bit with the least significant byte first (“lohi” or Intel format) as (signed) integers.The speaker read 2,032 prompted sentences covering approx. 42,000 words in three categories: transcribed speech (6,600 words - 20%), written text (16,500 words - 50%), and constructed phrases (10,300 - 30%).The transcribed speech consists of text from different domains, being produced in the Broadcast news task. The written text consists of news excerpts, novels and short stories with short sentences. Each paragraph is presented on a separate prompt sheet.Constructed phrases consist of frequent phrases and diphone coverage sentences. The frequent used phrases are designed as derived from written text (article, news paper, etc.) and have been divided into six sub-domains: •	Frequently used colloquial expressions•	Sports/Games•	News•	Finance•	Culture/Entertainment•	Consumer InformationThe diphone coverage sentences cover the missing and rare diphones in all the data. To cover these diphones a large corpus about 150,000 words was used and from which the sentences were extracted.The database is provided with orthographic, prosodic and phonetic transcriptions in SAMPA. All transcriptions are segmented at the utterance (sentence/command word) level, annotated at the word level and checked manually. A pronunciation lexicon including 3,589 headwords with phonetics in SAMPA is also available.The database is distributed on 3 ISO 9660 DVD-ROM volumes. It has been validated by an external partner and a validation report is provided.</description>
+<description lang="French">Ce corpus a été produit dans le cadre du projet NEMLAR (http://www.nemlar.org). Deux autres ressources, produites dans le cadre du même projet, sont également disponibles : le corpus écrit NEMLAR (ELRA-W0042) et le corpus oral d’actualités radiophoniques NEMLAR (ELRA-S0219).Le corpus de synthèse de parole NEMLAR comprend les enregistrements de 2 locuteurs de langue maternelle arabe égyptien (homme et femme, respectivement de 35 et 27 ans), réalisés dans un studio depuis 2 canaux (voix et laryngographe). Les enregistrements sont constitués de plus de 10 heures de données avec leurs transcriptions.Les échantillons de parole sont stockés en 96 kHz, 24 bit avec l’octet le moins significatif en premier (“lohi” ou format Intel) en entiers (signés).Le locuteur a lu 2 032 phrases énoncées couvrant environ 42 000 mots en trois catégories : parole transcrite (6,600 words - 20%), texte écrit (16,500 words - 50%), et phrases construites (10,300 - 30%).La parole transcrite consiste en du texte de différents domaines, produit dans la tâche d’actualités radiophoniques. Le texte écrit est composé d’extraits de phrases courtes d’actualités, de romans et d’histoires courtes. Chaque paragraphe est présenté sur une feuille d’énoncé (prompt).Les phrases construites sont constituées de phrases fréquentes et de phrases pour la couverture de diphones. Les phrases fréquentes sont formées telles qu’obtenues à partir de textes écrits (articles, actualités, etc.) et sont subdivisées en six sous-domaines : •	Expressions familières fréquemment usitées•	Sports/Jeux•	Actualités•	Finances•	Culture/Divertissement•	Information au consommateurLes phrases pour la couverture des diphones couvrent les diphones manquants ou rares dans toutes les données. Pour couvrir ces diphones, un grand corpus d’environ 150 000 mots a été utilisé, à partir duquel les phrases ont été extraites.La base de données est fournie avec la transcription orthographique, prosodique et phonétique en SAMPA. Toutes les transcriptions sont segmentées au niveau de l’occurrence (phrase/mot de commande), annotées au niveau du mot et vérifiées manuellement. Un lexique de prononciation comprenant 3 589 mots avec leur représentation phonétique en SAMPA est également disponible.La base de données est distribuée sur 3 DVD-ROM ISO 9660. Elle a été validée par un partenaire externe et un rapport de validation est fourni.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=707</url>
-<identifier>ELRA-S0159</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=875</url>
+<identifier>ELRA-S0220</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -36,27 +36,27 @@
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 12500.00€</price>
-<price>Academic org. ELRA Non Member: 10000.00€</price>
-<price>Commercial org. ELRA Member: 8500.00€</price>
-<price>Academic org. ELRA Member: 7500.00€</price>
+<price>Commercial org. ELRA Non Member: 2500.00€</price>
+<price>Academic org. ELRA Non Member: 1000.00€</price>
+<price>Commercial org. ELRA Member: 1250.00€</price>
+<price>Academic org. ELRA Member: 500.00€</price>
 <distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2004-06-07</availabilityStartDate>
+<availabilityStartDate>2006-08-11</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 12500.00€</price>
-<price>Academic org. ELRA Non Member: 12500.00€</price>
-<price>Commercial org. ELRA Member: 8500.00€</price>
-<price>Academic org. ELRA Member: 8500.00€</price>
+<price>Commercial org. ELRA Non Member: 10000.00€</price>
+<price>Academic org. ELRA Non Member: 10000.00€</price>
+<price>Commercial org. ELRA Member: 5000.00€</price>
+<price>Academic org. ELRA Member: 5000.00€</price>
 <distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2004-06-07</availabilityStartDate>
+<availabilityStartDate>2006-08-11</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceCreationInfo>
 <fundingProject>
-<projectName>Orientel</projectName>
+<projectName>NEMLAR (Network for Euro-Mediterranean LAnguage Resources)</projectName>
 <fundingType>euFunds</fundingType>
 </fundingProject>
 </resourceCreationInfo>
@@ -70,8 +70,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>ger/deu</languageId>
-<languageName>German</languageName>
+<languageId>ara</languageId>
+<languageName>Arabic</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

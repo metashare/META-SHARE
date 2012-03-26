@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Hebrew Speecon database</resourceName>
-<resourceName lang="French">Base de données Speecon de l'hébreu</resourceName>
-<description lang="English">The Hebrew Speecon database is divided into 2 sets:   1. The first set comprises the recordings of 550 adult Hebrew speakers (273 males, 277 females), recorded over 4 microphone channels in 4 recording environments (office, entertainment, car, public place).   2. The second set comprises the recordings of 50 child Hebrew speakers (24 boys, 26 girls), recorded over 4 microphone channels in 1 recording environment (children room). This database is partitioned into 20 DVDs (first set) and 3 DVDs (second set).The speech databases made within the Speecon project were validated by SPEX, the Netherlands, to assess their compliance with the Speecon format and content specifications. Each of the four speech channels is recorded at 16 kHz, 16 bit, uncompressed unsigned integers in Intel format (lo-hi byte order). To each signal file corresponds an ASCII SAM label file which contains the relevant descriptive information.Each speaker uttered the following items:    * Calibration data:          o 6 noise recordings          o The “silence word” recording     * Free spontaneous items (adults only):          o 5 minutes (session time) of free spontaneous, rich context items (story telling) (an open number of spontaneous topics out of a set of 30 topics)     * 17 Elicited spontaneous items (adults only):          o 3 dates, 2 times, 3 proper names, 2 city name, 1 letter sequence, 2 answers to questions, 3 telephone numbers, 1 language     * Read speech:          o 30 phonetically rich sentences uttered by adults and 60 uttered by children          o 5 phonetically rich words (adults only)          o 4 isolated digits          o 1 isolated digit sequence          o 4 connected digit sequences          o 1 telephone number          o 3 natural numbers          o 1 money amount          o 2 time phrases (T1 : analogue, T2 : digital)          o 3 dates (D1 : analogue, D2 : relative and general date, D3 : digital)          o 3 letter sequences          o 1 proper name          o 2 city or street names          o 2 questions          o 2 special keyboard characters          o 1 Web address          o 1 email address          o 208 application specific words and phrases per session (adults)          o 74 toy commands and 48 general commands (children) The following age distribution has been obtained:    * Adults: 313 speakers are between 15 and 30, 174 speakers are between 31 and 45, 63 speakers are over 46.    * Children: 16 speakers are between 8 and 10, 34 speakers are between 11 and 14. A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
-<description lang="French">La base de données Speecon du français est répartie en deux sous-ensembles :   1. Le premier sous-ensemble est composé de 550 locuteurs hébreu adultes (273 hommes, 277 femmes) enregistrés à partir de 4 canaux de microphone dans 4 environnements différents (bureau, divertissement, voiture, lieu publique).   2. Le deuxième sous-ensemble est composé de 50 locuteurs hébreu enfants (24 garçons, 26 filles) enregistrés à partir de 4 canaux de microphone dans un seul environnement (chambre d’enfant). Elle est distribuée sur 20 DVD (adultes) et 3 DVD (enfants). Les bases orales réalisées lors du projet Speecon ont été validées par SPEX, Pays-Bas, afin de contrôler leur adéquation avec le format Speecon et les spécifications de contenu.Les fichiers sont stockés en séquences d'échantillons de 16 kHz, 16 bit ; les canaux sont multiplexés dans un fichier unique, avec une séquence de 0-1-2-3. A chaque énoncé correspond un fichier d'étiquetage ASCII SAM.Chaque locuteur a prononcé les éléments suivants :    * Données de calibrage :          o 6 bruits          o 1 “silence”     * Eléments libres spontanés (adultes uniquement) :          o 5 minutes (par session) de discours libre spontané, en contexte riche (raconter une histoire) (nombre ouvert de thèmes spontanés à partir de 30 thèmes donnés)     * 17 éléments spontanés dirigés (adultes uniquement) :          o 3 dates, 2 périodes de temps, 3 noms propres, 2 noms de ville, 1 séquence de lettres, 2 réponses à des questions, 3 numéros de téléphone, 1 langue     * Parole lue :          o 30 phrases phonétiquement riches prononcées par les adultes et 60 prononcées par les enfants          o 5 mots phonétiquement riches (adultes uniquement)          o 4 chiffres isolés          o 1 séquences de chiffres isolés          o 4 séquences de chiffres connectés          o 1 numéro de téléphone          o 3 nombres naturels          o 1 montant en devise          o 2 phrases comportant une notion de temps (T1 : analogique, T2 : numérique)          o 3 dates (D1 : analogique, D2 : date relative et générale, D3 : numérique)          o 3 séquences de lettres          o 1 nom propre          o 2 noms de ville ou de rue          o 2 questions          o 2 caractères clavier          o 1 adresse Web          o 1 adresse email          o 208 mots et phrases de commande par sessions (adultes)          o 74 commandes de jouets et 48 commandes générales (enfants) Les classes d'âge sont réparties comme suit :    * Adultes : 313 locuteurs ont entre 15 et 30 ans, 174 entre 31 et 45 ans, et 63 ont plus de 46 ans.    * Enfants: 16 locuteurs ont entre 8 et 10 ans, 34 entre 11 et 14. Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
+<resourceName lang="English">Corpus of Contemporaneous Spanish Novels</resourceName>
+<resourceName lang="French">Corpus de fictions contemporaines en espagnol</resourceName>
+<description lang="English">This corpus consists of 11 novels written in Castilian Spanish by Inmaculada Ferrer-Vidal Turull, a contemporaneous author. The list of novels consists of:-	La búsqueda: 113,639 words-	Tristeza: 41,125 words-	Cuarto menguante: 42,419 words-	Recuerdos: 55,694 words-	Sucedió en Abril: 46,040 words-	Viejos amigos: 84,082 words-	Soledad &amp; Cia: 69,848 words-	El chispazo, la hoguera y las brasas: 108,877 words-	Un giro en la vida : 70,736 words-	Adiós: 2,016 words-	Vacaciones: 3,623 wordsThe novels are available in Word format.</description>
+<description lang="French">Ce corpus comprend 11 fictions écrites en espagnol castillan par l’auteur contemporain Inmaculada Ferrer-Vidal Turull. La liste des fictions consiste en :-	La búsqueda: 113,639 words-	Tristeza: 41,125 words-	Cuarto menguante: 42,419 words-	Recuerdos: 55,694 words-	Sucedió en Abril: 46,040 words-	Viejos amigos: 84,082 words-	Soledad &amp; Cia: 69,848 words-	El chispazo, la hoguera y las brasas: 108,877 words-	Un giro en la vida : 70,736 words-	Adiós: 2,016 words-	Vacaciones: 3,623 wordsCes fictions sont fournies au format Word.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=755</url>
-<identifier>ELRA-S0169</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=847</url>
+<identifier>ELRA-W0041</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,51 +29,54 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-02-22</lastDateUpdated>
+<lastDateUpdated>2006-03-16</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 75000.00€</price>
-<price>Academic org. ELRA Non Member: 60000.00€</price>
-<price>Commercial org. ELRA Member: 67000.00€</price>
-<price>Academic org. ELRA Member: 50000.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2004-11-23</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 1000.00€</price>
+<price>Academic org. ELRA Non Member: 500.00€</price>
+<price>Commercial org. ELRA Member: 800.00€</price>
+<price>Academic org. ELRA Member: 400.00€</price>
+<availabilityStartDate>2006-03-16</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 75000.00€</price>
-<price>Academic org. ELRA Non Member: 75000.00€</price>
-<price>Commercial org. ELRA Member: 67000.00€</price>
-<price>Academic org. ELRA Member: 67000.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2004-11-23</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 1000.00€</price>
+<price>Academic org. ELRA Non Member: 1000.00€</price>
+<price>Commercial org. ELRA Member: 800.00€</price>
+<price>Academic org. ELRA Member: 800.00€</price>
+<availabilityStartDate>2006-03-16</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>Speecon</projectName>
-<fundingType>euFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
 <corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<corpusTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>heb</languageId>
-<languageName>Hebrew</languageName>
+<languageId>spa</languageId>
+<languageName>Spanish</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Castilian</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
 </languageInfo>
-</corpusAudioInfo>
+<textFormatInfo>
+<mimeType>MS Word</mimeType>
+</textFormatInfo>
+</corpusTextInfo>
 </corpusMediaType>
 </corpusInfo>
 </resourceComponentType>

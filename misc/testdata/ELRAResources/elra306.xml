@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">DICO-MORPH_Collocation</resourceName>
-<resourceName lang="French">DICO-MORPH_Collocation</resourceName>
-<description lang="English">Entries: up to 35000Language: FrenchFormat: ASCIIMedium: Floppy diskThis is an adding for the French lexicon for morphological works (referenced herein as ELRA-L0001 DICO-MORPH_Lemme MEMODATA).For more information: http://www.elda.org/catalogue/fr/text/doc/dicomor1.html</description>
-<description lang="French">Entrées : jusqu'à 35 000Langue : françaisIl s'agit d'un complément au lexique français (DICO-MORPH_lemme (MEMODATA) pour des travaux morphologiques.Pour plus d'informations : http://www.elda.org/catalogue/fr/text/doc/dicomor1.html</description>
+<resourceName lang="English">Mandarin Chinese Desktop Speech Recognition Corpus - Simple Chinese sentences (850 people)</resourceName>
+<resourceName lang="French">Corpus de reconnaissance de parole microphone en chinois mandarin – phrases en chinois (50 locuteurs)</resourceName>
+<description lang="English">This corpus comprises 14,011 entries uttered by 850 speakers of different dialects, ages and various educational levels (420 males and 430 females), recorded over 2 channels (Mic1: SHURE SM58; Mic2: Labtec Axis-002). The database comprises 104,750 sentences per channel. Speech samples are stored as a sequence of 16-bit 44.1kHz WAV for 150 hours of speech per channel. The total capacity of the data is 88 Gb.600 speakers read 120 sentences and 250 speakers read 131 sentences. Text files are stored in Unicode format. All data have been proofread manually.The transcriptions include non-speech markers (background noise, background speech, speaker sounds) as well as markers for mispronunciation, channel distortions, words left-out and duplicates.The corpus aims to be applied to the testing and telephone natural speech recognition system.</description>
+<description lang="French">Ce corpus comprend 14 011 entrées prononcées par 850 locuteurs de dialectes, d’âges et de niveaux d’éducation différents (420 hommes et 430 femmes), enregistrées via 2 canaux (Mic1: SHURE SM58; Mic2: Labtec Axis-002). La base de données contient 104 750 phrases par canal. Les échantillons de parole sont stockés sous la forme de séquences 16-bit 44,1kHz WAV pour un total de 150 heures de parole par canal. La taille totale des données est de 88 Go.600 locuteurs ont lu 120 phrases et 250 locuteurs ont lu 131 phrases. Les fichiers textes sont stockés au format Unicode. Toutes les données ont été vérifiées manuellement.Les transcriptions comprennent des balises d’événements acoustiques (bruits de fond, sons émis par les locuteurs) ainsi que des balises de mauvaise prononciation, distorsions du canal, omissions de mots et répétitions.Cette base de données a été conçue pour l’évaluation et le développement de systèmes de reconnaissance de la parole naturelle par téléphone.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=53</url>
-<identifier>ELRA-L0002</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=923</url>
+<identifier>ELRA-S0228_21</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,47 +29,44 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-05-24</lastDateUpdated>
+<lastDateUpdated>2009-09-24</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 10925.00€</price>
-<price>Academic org. ELRA Non Member: 8740.00€</price>
-<price>Commercial org. ELRA Member: 8740.00€</price>
-<price>Academic org. ELRA Member: 6992.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-01-23</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 23699.00€</price>
+<price>Academic org. ELRA Non Member: 23699.00€</price>
+<price>Commercial org. ELRA Member: 23699.00€</price>
+<price>Academic org. ELRA Member: 23699.00€</price>
+<availabilityStartDate>2007-01-17</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 10925.00€</price>
-<price>Academic org. ELRA Non Member: 10925.00€</price>
-<price>Commercial org. ELRA Member: 8740.00€</price>
-<price>Academic org. ELRA Member: 8740.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-01-23</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 23699.00€</price>
+<price>Academic org. ELRA Non Member: 23699.00€</price>
+<price>Commercial org. ELRA Member: 23699.00€</price>
+<price>Academic org. ELRA Member: 23699.00€</price>
+<availabilityStartDate>2007-01-17</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
-<mediaType>text</mediaType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
+<languageId>chi/zho</languageId>
+<languageName>Chinese</languageName>
 </languageInfo>
-</lexicalConceptualResourceTextInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
 </resourceComponentType>
 </resourceInfo>

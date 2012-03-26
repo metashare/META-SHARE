@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Spanish SpeechDat-Car database</resourceName>
-<resourceName lang="French">Base de données SpeechDat-Car de l 'espagnol</resourceName>
-<description lang="English">The Spanish SpeechDat-Car database contains the recordings of 306 Spanish speakers from 4 different regions (156 males, 150 females), recorded over the Spanish GSM telephone network, and in a car. This database is partitioned into 89 CDs (DVDs are also available).The speech data files are in two formats. Four of the 5 microphones were recorded on the computer in the boot of the car. The speech data are stored as sequences of 16 kHz, 16 bit and uncompressed. The fifth microphone was connected to the cell phone, and was recorded on a remote machine. The data are stored as sequences of 8 kHz 8 bit A-law. Each signal file is accompanied by an ASCII SAM label file which contains the relevant descriptive information.This speech database was validated by SPEX (the Netherlands) to assess its compliance with the SpeechDat-Car format and content specifications.Each speaker uttered the following items:-	2 voice activation keywords-	1 sequence of 10 isolated digits-	7 connected digits (1 sheet number -5 digits, 1 spontaneous telephone number, 3 read telephone numbers, 1 credit card number ?14/16 digits, 1 PIN code -6 digits)-	3 dates (1 spontaneous date e.g. birthday, 1 prompted date, 1 relative or general date expression)-	2 word spotting phrases using an embedded application word-	4 isolated digits-	7 spelled words (1 spontaneous e.g. own forename or surname, 1 directory city name, 4 real word/name, 1 artificial name for coverage)-	1 money amount-	1 natural number-	7 directory assistance names (1 spontaneous e.g. own forename or surname, 1 city of birth/growing up, 2 most frequent cities, 2 most frequent company/agency, 1 ?forename surname?)-	9 phonetically rich sentences-	2 time phrases (1 spontaneous  time of day, 1word style time phrase)-	4 phonetically rich words-	67 application words (13 mobile phone application words, 22 IVR function keywords, 32 car products keywords)-	2 additional language dependent keywords-	Prompts for spontaneous speechThe following age distribution has been obtained: 160 speakers are between 18 and 30, 80 speakers are between 31 and 45, 65 speakers are between 46 and 60, and 1speaker is over 60.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
-<description lang="French">La base de données SpeechDat-Car de l’espagnol est composée d’enregistrements réalisés à travers le réseau GSM espagnol. 306 locuteurs espagnols (156 hommes, 150 femmes) de 4 régions différentes ont été enregistrés dans une voiture. Cette base de données est distribuée sur 89 CD-ROM ou sur DVD. Les bases orales réalisées lors du projet SpeechDat-Car ont été validées par SPEX, Pays-Bas, afin de contrôler leur adéquation avec le format SpeechDat-Car et les spécifications de contenu.Les données de parole se présentent sous deux formats. Quatre microphones ont été connectés sur un ordinateur placé dans le coffre de la voiture. Ces fichiers sont stockés en séquences d'échantillons de 16 kHz, 16 bit et ne sont pas compressés. Le cinquième microphone a été connecté au téléphone mobile et les enregistrements effectués sur une machine à distance. Les fichiers sont ici stockés en séquences d’échantillons de 8kHz, 8 bit loi-A. Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM.Chaque locuteur a prononcé les éléments suivants :    * 2 mots-clés d'activation vocale    * 1 séquence de 10 chiffres isolés    * 7 chiffres connectés : 1 numéro permettant d'identifier la feuille de prompt (5+ chiffres), 1 numéro de téléphone spontané, 3 numéros de téléphone lus, 1 numéro de carte de crédit (14-16 chiffres), 1 code confidentiel (6 chiffres)    * 3 dates : 1 date spontanée (ex. anniversaire), 1 date lue, 1 date générale    * 2 expressions utilisant un mot de commande    * 4 chiffres isolés    * 7 mots épelés : 1 spontané (nom ou prénom du locuteur), 1 nom de ville provenant d'un annuaire de renseignements téléphoniques, 4 mots/noms réels, 1 nom artificiel pour couverture    * 1 montant en devises    * 1 nombre naturel    * 7 noms provenant d'un annuaire de renseignements téléphoniques : 1 spontané (nom ou prénom du locuteur), 1 nom de ville de naissance/d'origine du locuteur (spontané), 2 noms de ville parmi les plus fréquentes, 2 noms de compagnie/société parmi les plus fréquentes, 1 répétition de "prénom nom"    * 9 phrases phonétiquement riches    * 2 phrases comportant une notion de temps : 1 jour (spontané), 1 phrase comportant une notion de temps    * 4 mots phonétiquement riches    * 67 mots de commande: 13 mots de commande dans le domaine de la téléphonie mobile, 22 mots de fonction dans le domaine des serveurs vocaux interactifs, 32 mots-clés de produits du domaine de l'automobile    * 2 mots-clés dépendants de la langue supplémentaires    * phrases spontanéesLes classes d'âge sont réparties comme suit : 160 locuteurs ont entre 18 et 30 ans, 80 locuteurs entre 31 et 45 ans, 65 locuteurs entre 46 et 60 ans et 1locuteur a plus de 60 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
+<resourceName lang="English">French Lexicon</resourceName>
+<resourceName lang="French">Lexique Français</resourceName>
+<description lang="English">General vocabularyEntries: 50000 Format: ASCII format with ISO 8859-1 character set. A lexicon file contains entries with feature-value pairs on each line and separators between entries.Medium: Floppy Disk, QIC 150 MB Cartridge Tape The French LanTmark lexicon is divided into the following categories: nouns (36,000), verbs (6,000), adjectives (7,000), adverbs (1,000).Each entry contains morphological information (morphological flexes, comparative and superlative markers), syntactic information (such as positional features, gender, complement markers and verb arguments), semantic information (lexical semantics for nouns, adverbs and adjectives).</description>
+<description lang="French">Vocabulaire général Entrées : 50 000 Format : ASCIISupport : disquette, cartouche QIC 150 MBLe lexique français lanTmark se réparti selon les catégories suivantes : noms (36.000), verbes (6.000), adjectifs (7.000), adverbes (1.000).Chaque entrée comporte des informations morphologiques (flexions, marques de superlatif et comparatif), informations syntaxiques (traits de position, genre, marqueurs de complément et arguments de verbe), informations sémantiques (lexico-sémantiques pour les noms et les adjectifs).</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=690</url>
-<identifier>ELRA-S0140</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=56</url>
+<identifier>ELRA-L0005</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,60 +29,51 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2009-12-14</lastDateUpdated>
+<lastDateUpdated>2005-10-05</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 39000.00€</price>
-<price>Academic org. ELRA Non Member: 32500.00€</price>
-<price>Commercial org. ELRA Member: 30000.00€</price>
-<price>Academic org. ELRA Member: 25000.00€</price>
+<price>Commercial org. ELRA Non Member: 80000.00€</price>
+<price>Academic org. ELRA Non Member: 10000.00€</price>
+<price>Commercial org. ELRA Member: 48000.00€</price>
+<price>Academic org. ELRA Member: 6000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2002-11-27</availabilityStartDate>
+<availabilityStartDate>1997-01-23</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 39000.00€</price>
-<price>Academic org. ELRA Non Member: 39000.00€</price>
-<price>Commercial org. ELRA Member: 30000.00€</price>
-<price>Academic org. ELRA Member: 30000.00€</price>
+<price>Commercial org. ELRA Non Member: 80000.00€</price>
+<price>Academic org. ELRA Non Member: 80000.00€</price>
+<price>Commercial org. ELRA Member: 48000.00€</price>
+<price>Academic org. ELRA Member: 48000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2002-11-27</availabilityStartDate>
+<availabilityStartDate>1997-01-23</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>SpeechDat-Car</projectName>
-<fundingType>euFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>spa</languageId>
-<languageName>Spanish</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Castilian</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
 </languageInfo>
-</corpusAudioInfo>
-</corpusMediaType>
-</corpusInfo>
+<sizeInfo>
+<size>150</size>
+<sizeUnit>mb</sizeUnit>
+</sizeInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

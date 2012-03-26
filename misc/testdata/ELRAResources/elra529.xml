@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Dutch Polyphone Database</resourceName>
-<resourceName lang="French">Base de données "Polyphone" en hollandais</resourceName>
-<description lang="English">The Dutch Polyphone corpus contains telephone speech from 5050 speakers. The corpus comprises 222,075 speech files (based on 44 or, in a few cases 43 items per speaker), which all have been orthographically transcribed. The data were collected in 8-bit A-law digital form, directly off an ISDN telephone line interface. The corpus contains both read and extemporaneous items. Items to be read consist of isolated digits, numbers (one telephone number, two bank accounts or credit card numbers, and the participation number), a postal code, guilder amounts, time, date, amounts, application words, sentences with application word, phonetically rich sentences, spelled words, city names. Several questions were asked to get the spontaneous part of the speech (questions like Is Dutch your native language?, Did you ever live in another country than the Netherlands, In which cities did you grow up?, Are you a man or a woman?, Are you calling from your home phone?, etc.).</description>
-<description lang="French">Il s'agit d'une base de données enregistrée par 5050 locuteurs. Elle est similaire à la base de données "Polyphone" suisse romand et à celle en allemand.</description>
+<resourceName lang="English">TC-STAR male baseline voice: Ian</resourceName>
+<resourceName lang="French">Voix d’homme de référence TC-STAR: Ian</resourceName>
+<description lang="English">Ian was created within the scope of the TC-STAR project (IST- FP6-506738) funded by the European Commission.Ian contains the recordings of one male English (British) speaker recorded in a noise-reduced room through a headset microphone. It consists of the recordings and annotations of read text material of approximately 10 hours of speech for baseline applications (Text-to-Speech systems). This database is distributed on 9 DVDs. The database complies with the common specifications created in the TC-STAR project.The annotation of the database includes manual orthographic transcriptions, the automatic segmentation into phonemes and automatic generation of pitch marks. A certain percentage of phonetic segments and pitch marks has been manually checked. A pronunciation lexicon in SAMPA with POS, lemma and phonetic transcription of all the words prompted and spoken is also provided.Speech samples are stored as sequences of 24-bit 96 kHz with the least significant byte first (“lohi” or Intel format) as (signed) integers. Each prompted utterance is stored in a separate file. Each signal file is accompanied by an ASCII SAM label file which contains the relevant descriptive information.The TC-STAR female baseline voice: Laura is also available via ELRA under reference ELRA-S0302.</description>
+<description lang="French">Ian a été créé dans le cadre du projet TC-STAR (IST- FP6-506738) financé par la Commission européenne.Ian comprend les enregistrements d’un locuteur anglais (britannique) homme enregistré par micro-casque dans une salle à bruit réduit. Il consiste en des enregistrements et annotations de matériel textuel lu pour environ 10 heures de parole pour des applications de référence (systèmes texte-parole). Cette base de données est distribuée sur 9 DVD. Elle respecte les spécifications communes créées dans le projet TC-STAR.L’annotation de la base de données inclut les transcriptions orthographiques réalisées manuellement, la segmentation automatique en phonèmes et la génération automatiques des marques de pitch. Un certain pourcentage de segments phonétiques et de marques de pitch a été vérifié manuellement. Un lexique de prononciation en SAMPA avec partie du discours, lemmes et transcription phonétique de tous les mots lus et prononcés est également fourni.Les fichiers de parole sont stockés en séquences d’échantillons de 24-bit 96 kHz avec l’octet le moins significatif en premier (“lohi” ou format Intel) en entiers (signés).  Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM.La voix de femme de référence TC-STAR: Laura est également disponible via ELRA sous la référence ELRA-S0302.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=40</url>
-<identifier>ELRA-S0010</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1116</url>
+<identifier>ELRA-S0303</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,31 +29,48 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-03-31</lastDateUpdated>
+<lastDateUpdated>2009-09-21</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 25000.00€</price>
-<price>Academic org. ELRA Member: 12000.00€</price>
-<price>Academic org. ELRA Non Member: 20000.00€</price>
-<price>Commercial org. ELRA Non Member: 35000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1996-09-01</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 7000.00€</price>
+<price>Academic org. ELRA Non Member: 5500.00€</price>
+<price>Commercial org. ELRA Member: 5500.00€</price>
+<price>Academic org. ELRA Member: 4500.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2009-09-21</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 25000.00€</price>
-<price>Academic org. ELRA Member: 25000.00€</price>
-<price>Academic org. ELRA Non Member: 35000.00€</price>
-<price>Commercial org. ELRA Non Member: 35000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1996-09-01</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 7000.00€</price>
+<price>Academic org. ELRA Non Member: 7000.00€</price>
+<price>Commercial org. ELRA Member: 5500.00€</price>
+<price>Academic org. ELRA Member: 5500.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2009-09-21</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<validationInfo>
+<validated>True</validated>
+<validationModeDetails>TC-STAR </validationModeDetails>
+</validationInfo>
+<usageInfo>
+<actualUseInfo>
+<actualUse>nlpApplications</actualUse>
+<useNLPSpecific>speechSynthesis</useNLPSpecific>
+</actualUseInfo>
+</usageInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>TC-STAR</projectName>
+<fundingType>euFunds</fundingType>
+</fundingProject>
+<creationEndDate>2007-01-01</creationEndDate>
+</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
@@ -64,16 +81,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>dut/nld</languageId>
-<languageName>Dutch</languageName>
-<languageVarietyInfo>
-<languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Flemish</languageVarietyName>
-<sizePerLanguageVariety>
-<size>2</size>
-<sizeUnit>gb</sizeUnit>
-</sizePerLanguageVariety>
-</languageVarietyInfo>
+<languageId>eng</languageId>
+<languageName>English</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Bulgarian National Corpus Collocation service</resourceName>
+      <description>The Corpus Collocation service gives access to the Bulgarian National Corpus. The Bulgarian National Corpus (BulNC) is a large representative corpus of Bulgarian, publicly available for online queries for concordances and collocations. 
+		
+As of November 2011 the core of BulNC includes 144,669 text samples which comprise of 470.1 million tokens. A uniform framework was developed for structuring BulNC, data storage format and description of the texts. Each text is supplied with editorial metadata (author's name, text title, source, etc.) and classificatory metadata (general category, domain, genre). The metadata are as detailed as possible in order to ensure easy text classification, corpus evaluation, derivation of subcorpora based on a set of criteria (e.g. publishing year, domain), etc. 
+
+The Corpus Collocation service employs the free of charge NoSketchEngine, a system for corpora processing that combines Manatee and Bonito.
+
+The Collocation service is a RESTful webservice, supporting complicated queries through http. Example: http://dcl.bas.bg/collocations/?cmd=collocations&amp;word=нет
+user: bulnc
+pass: bulnc
+The query returns the collocations of a given word in the NoSketchEngine format.
+The system also supports additional arguments, namely all that are accepted by NoSketchEngine, provided with default values.
+
+Collocations have numerous applications: corpus linguistics and computational linguistics (tasks for machine translation, text generation, summary generation and others). The users may observe the frequency of words and language constructions, and generate frequency lists and language models.</description>
+      <resourceShortName>BulNColl</resourceShortName>
+      <url>http://ibl.bas.bg/en/BGNC_en.htm</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+</metaShareId>
+      <identifier>802</identifier>
+</identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>other</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>webExecutable</distributionAccessMedium>
+         <executionLocation>http://dcl.bas.bg/collocations/?cmd=collocations&amp;word=нет</executionLocation>
+</licenceInfo>
+      <iprHolder>
+			      <organizationInfo>
+				        <organizationName>Institute for Bulgarian Language</organizationName>
+				        <organizationShortName>IBL</organizationShortName>
+				        <departmentName>Department of Computational Linguistics</departmentName>
+				        <communicationInfo>
+               <email>bulnc@dcl.bas.bg</email>
+               <url>http://ibl.bas.bg/en/BGNC_en.htm</url>
+               <address>52 Shipchenski prohod Blvd., Bl. 17</address>
+               <zipCode>1113</zipCode>
+               <city>Sofia</city>
+               <country>Bulgaria</country>
+               <telephoneNumber>+35 92 97 92 969</telephoneNumber>
+</communicationInfo>
+</organizationInfo>
+</iprHolder>
+      <availabilityStartDate>2011-11-20</availabilityStartDate>
+</distributionInfo>
+   <contactPerson>
+      <surname>Koeva</surname>
+      <givenName>Svetla</givenName>
+      <communicationInfo>
+         <email>svetla@dcl.bas.bg</email>
+         <url>http://dcl.bas.bg/PersonalPages/svetla/svetla.html</url>
+         <address>52 Shipchenski prohod Blvd., Bl. 17</address>
+         <zipCode>1113</zipCode>
+         <city>Sofia</city>
+         <telephoneNumber>+35 92 97 92 969</telephoneNumber>
+         <faxNumber>+35 92 87 22 302</faxNumber>
+</communicationInfo>
+      <position>professor</position>
+</contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-20</metadataCreationDate>
+</metadataInfo>
+   <versionInfo>
+		    <version>1.0</version>
+      <lastDateUpdated>2011-11-20</lastDateUpdated>
+		
+</versionInfo>
+   <validationInfo>
+      <validated>True</validated>
+</validationInfo>
+   <usageInfo>
+		    <foreseenUseInfo>
+         <foreseenUse>humanUse</foreseenUse>
+			
+			
+</foreseenUseInfo>
+		    <actualUseInfo>
+         <actualUse>humanUse</actualUse>
+</actualUseInfo>
+		    <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+</actualUseInfo>
+</usageInfo>
+   <resourceCreationInfo>
+      <fundingProject>
+         <projectName>Bulgarian National Corpus project</projectName>
+         <fundingType>nationalFunds</fundingType>
+</fundingProject>
+      <fundingProject>
+         <projectName>Central and South-East European Resources</projectName>
+         <fundingType>euFunds</fundingType>
+</fundingProject>
+</resourceCreationInfo>
+   <resourceComponentType>
+      <toolServiceInfo>
+         <resourceType>toolService</resourceType>
+		       <toolServiceType>service</toolServiceType>
+		       <languageDependent>False</languageDependent>
+		       <inputInfo>
+            <mediaType>text</mediaType>
+</inputInfo>
+		       <outputInfo>
+            <mediaType>text</mediaType>
+</outputInfo>
+		       <toolServiceOperationInfo>
+			         <operatingSystem>os-independent</operatingSystem>
+</toolServiceOperationInfo>
+		       <toolServiceEvaluationInfo>
+			         <evaluated>True</evaluated>
+			         <evaluationLevel>diagnostic</evaluationLevel>
+			         <evaluator>
+				           <personInfo>
+                  <surname>Rizov</surname>
+                  <givenName>Borislav</givenName>
+                  <communicationInfo>
+                     <email>boby@dcl.bas.bg</email>
+                     <url>http://dcl.bas.bg/en/people_en/boby.html</url>
+</communicationInfo>
+                  <position>Assistant</position>
+</personInfo>
+</evaluator>
+</toolServiceEvaluationInfo>
+</toolServiceInfo>
+</resourceComponentType>
+</resourceInfo>

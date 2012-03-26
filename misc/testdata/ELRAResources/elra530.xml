@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">PAROLE Greek Lexicon</resourceName>
-<resourceName lang="French">Lexique grec PAROLE</resourceName>
-<description lang="English">The PAROLE Greek lexicon has two layers, morphological and syntactic. It includes the most frequent words found in a 9 million word corpus, coded according to the PAROLE specifications.The Morphological layer contains a total of 20149 Morphological units, of which 12042 are nouns (common and proper), 3014 verbs, 3405 adjectives, 106 numerals, 45 pronouns, 2 articles, 1396 adverbs, 48 adpositions, 51 conjunctions, 21 interjections, 19 "unique" categories.The Syntactic layer contains 25092 Syntactic units, of which 14548 are nouns, 5397 verbs, 3558 adjectives, 1410 adverbs, 73 adpositions and 106 numerals.This lexicon was constructed based on the following resources:a. the ILSP Morphological Lexiconb. the ILSP CorpusMore info on the Parole project: http://www.elda.org/catalogue/en/text/doc/parole.html</description>
-<description lang="French">Le lexique grec PAROLE comprend deux niveaux, un niveau morphologique et un niveau syntaxique. Il est composé des mots les plus fréquents provenant d'un corpus de 9 millions de mots, codés selon les spécifications PAROLE.La partie morphologique comprend un total de 20 149 unités morphologiques, dont 12 042 noms, (noms communs et noms propres), 3 014 verbes, 3 405 adjectifs, 106 nombre numéraux, 45 pronoms, 2 articles, 1 396 adverbes, 48 pré-/post- positions, 51 conjonctions, 21 interjections, 19 catégories dites "unique".La partie syntaxique comprend 25 092 unités syntaxiques, dont 14 548 noms, 5 397 verbes, 3 558 adjectifs, 1 410 adverbes, 73 pré-/post- positions et 106 nombre numéraux.Le lexique a été construit à partir des ressources suivantes :a. le lexique morphologique de l'ILSPb. le corpus de l'ILSPPlus d'informations sur le projet Parole : http://www.elda.org/catalogue/en/text/doc/parole.html</description>
+<resourceName lang="English">Dutch Polyphone Database</resourceName>
+<resourceName lang="French">Base de données "Polyphone" en hollandais</resourceName>
+<description lang="English">The Dutch Polyphone corpus contains telephone speech from 5050 speakers. The corpus comprises 222,075 speech files (based on 44 or, in a few cases 43 items per speaker), which all have been orthographically transcribed. The data were collected in 8-bit A-law digital form, directly off an ISDN telephone line interface. The corpus contains both read and extemporaneous items. Items to be read consist of isolated digits, numbers (one telephone number, two bank accounts or credit card numbers, and the participation number), a postal code, guilder amounts, time, date, amounts, application words, sentences with application word, phonetically rich sentences, spelled words, city names. Several questions were asked to get the spontaneous part of the speech (questions like Is Dutch your native language?, Did you ever live in another country than the Netherlands, In which cities did you grow up?, Are you a man or a woman?, Are you calling from your home phone?, etc.).</description>
+<description lang="French">Il s'agit d'une base de données enregistrée par 5050 locuteurs. Elle est similaire à la base de données "Polyphone" suisse romand et à celle en allemand.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=710</url>
-<identifier>ELRA-L0032</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=40</url>
+<identifier>ELRA-S0010</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,51 +29,54 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-05-30</lastDateUpdated>
+<lastDateUpdated>2005-03-31</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 5100.00€</price>
-<price>Academic org. ELRA Non Member: 5100.00€</price>
-<price>Commercial org. ELRA Member: 3400.00€</price>
-<price>Academic org. ELRA Member: 3400.00€</price>
+<price>Commercial org. ELRA Member: 25000.00€</price>
+<price>Academic org. ELRA Member: 12000.00€</price>
+<price>Academic org. ELRA Non Member: 20000.00€</price>
+<price>Commercial org. ELRA Non Member: 35000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2000-03-09</availabilityStartDate>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>Commercial org. ELRA Member: 25000.00€</price>
+<price>Academic org. ELRA Member: 25000.00€</price>
+<price>Academic org. ELRA Non Member: 35000.00€</price>
+<price>Commercial org. ELRA Non Member: 35000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>LE-PAROLE project (MLAP/LE2-4017)</projectName>
-<fundingType>euFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
-<mediaType>text</mediaType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>gre/ell</languageId>
-<languageName>Greek</languageName>
+<languageId>dut/nld</languageId>
+<languageName>Dutch</languageName>
 <languageVarietyInfo>
 <languageVarietyType>dialect</languageVarietyType>
-<languageVarietyName>Modern (1453-)</languageVarietyName>
+<languageVarietyName>Flemish</languageVarietyName>
 <sizePerLanguageVariety>
 <size>2</size>
 <sizeUnit>gb</sizeUnit>
 </sizePerLanguageVariety>
 </languageVarietyInfo>
 </languageInfo>
-</lexicalConceptualResourceTextInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
 </resourceComponentType>
 </resourceInfo>

@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">OrienTel French as spoken in Morocco database</resourceName>
-<resourceName lang="French">Base de données OrienTel du français parlé au Maroc</resourceName>
-<description lang="English">The OrienTel French as spoken in Morocco database comprises 530 Moroccan speakers of French (264 males, 266 females) recorded over the Moroccan fixed and mobile telephone network. This database is partitioned into 1 CD and 1 DVD. The speech databases made within the OrienTel project were validated by SPEX, the Netherlands, to assess their compliance with the OrienTel format and content specifications.Speech samples are stored as sequences of 8-bit 8 kHz A-law. Each prompted utterance is stored in a separate file. Each signal file is accompanied by an ASCII SAM label file which contains the relevant descriptive information.Each speaker uttered the following items:•	1 isolated single digit•	1 sequencesof 10 isolated digits•	5 connected digits : 1 prompt sheet number (6 digits), 1 telephone number (6-15 digits), 1 credit card number (14-16 digits), 1 PIN code (6 digits), 1 spontaneous phone number•	1 currency money amount•	2 natural numbers•	3+1 dates : 1 prompted date, 1 relative or general date expression, 1 prompted date phrase + 1 additional (Western calendar)•	2 time phrases : 1 time of day (spontaneous), 1 time phrase (word style)•	3 spelled words : 1 spontaneous (own forename), 1 city name, 1 real word for coverage•	5 directory assistance utterances : 1 spontaneous, own forename, 1 city of childhood (spontaneous), 1 frequent city name, 1 frequent company name, 1 common forename and surname•	2 yes/no questions : 1 predominantly ”yes” question, 1 predominantly ”no” question•	6 application keywords/keyphrases•	1 word spotting phrase using embedded application words•	4 phonetically rich words•	9 phonetically rich sentences•	2 spontaneous items (for control)The following age distribution has been obtained: 256 speakers are between 16 and 30, 210 speakers are between 31 and 45, 63 speakers are between 46 and 60, 1 speaker is over 60.A pronunciation lexicon with a phonemic transcription in SAMPA is also included.</description>
-<description lang="French">La base de données OrienTel du français parlé au Maroc contient 530 locuteurs marocains du français (264 hommes, 266 femmes) enregistrés à travers le réseau téléphonique fixe et mobile marocain. Cette base est répartie sur 1 CD et 1 DVD. Les bases de données OrienTel ont été réalisées selon les spécifications du projet SpeechDat(II) et validées par SPEX, Pays-Bas.Les fichiers de parole sont stockés en séquences d’échantillons de 8 bits, 8 kHz, loi-A. Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM.Chaque locuteur a prononcé les éléments suivants :•	1 chiffre isolé ;•	1 séquence de 10 chiffres isolés ;•	5 chiffres connectés : 1 numéro permettant d'identifier la feuille de prompt (6 chiffres), 1 numéro de téléphone (6-15 chiffres), 1 numéro de carte de crédit (14-16 chiffres), 1 code confidentiel (6 chiffres), 1 numéro de téléphone spontané ;•	1 montant en devises ;•	2 nombres naturels ;•	3+1 dates : 1 date lue, 1 date relative et générale, 1 expression de date lue + 1 supplémentaire (calendrier occidental) ;•	2 phrases comportant une notion de temps : 1 jour (spontané), 1 phrase comportant une notion de temps ;•	3 mots épelés : 1 spontané (prénom), 1 nom de ville provenant d'un annuaire de renseignements téléphoniques, 1 mot réel pour couverture ;•	5 noms provenant d'un annuaire de renseignements téléphoniques : 1 spontané (prénom), 1 nom de ville de naissance/d'origine du locuteur (spontané), 1 nom de ville parmi les plus courantes (sur 500 noms), 1 nom de compagnie/société (sur 500 noms), 1 ”prénom nom” (sur 500 noms) ;•	2 questions oui/non : 1 question à prédominance "oui", 1 question à prédominance "non" ;•	6 mots/expressions de commande ;•	1 expression utilisant un mot de commande ;•	4 mots phonétiquement riches ;•	9 phrases phonétiquement riches•	2 éléments spontanés (pour contrôle).Les classes d’âge sont réparties comme suit : 256 locuteurs entre 16 et 30 ans, 210 locuteurs entre 31 et 45 ans, 63 locuteurs entre 46 et 60 ans, 1 locuteur de plus de 60 ans.Un lexique de prononciation avec sa transcription phonétique en SAMPA est également fourni.</description>
+<resourceName lang="English">PAROLE Greek Lexicon</resourceName>
+<resourceName lang="French">Lexique grec PAROLE</resourceName>
+<description lang="English">The PAROLE Greek lexicon has two layers, morphological and syntactic. It includes the most frequent words found in a 9 million word corpus, coded according to the PAROLE specifications.The Morphological layer contains a total of 20149 Morphological units, of which 12042 are nouns (common and proper), 3014 verbs, 3405 adjectives, 106 numerals, 45 pronouns, 2 articles, 1396 adverbs, 48 adpositions, 51 conjunctions, 21 interjections, 19 "unique" categories.The Syntactic layer contains 25092 Syntactic units, of which 14548 are nouns, 5397 verbs, 3558 adjectives, 1410 adverbs, 73 adpositions and 106 numerals.This lexicon was constructed based on the following resources:a. the ILSP Morphological Lexiconb. the ILSP CorpusMore info on the Parole project: http://www.elda.org/catalogue/en/text/doc/parole.html</description>
+<description lang="French">Le lexique grec PAROLE comprend deux niveaux, un niveau morphologique et un niveau syntaxique. Il est composé des mots les plus fréquents provenant d'un corpus de 9 millions de mots, codés selon les spécifications PAROLE.La partie morphologique comprend un total de 20 149 unités morphologiques, dont 12 042 noms, (noms communs et noms propres), 3 014 verbes, 3 405 adjectifs, 106 nombre numéraux, 45 pronoms, 2 articles, 1 396 adverbes, 48 pré-/post- positions, 51 conjonctions, 21 interjections, 19 catégories dites "unique".La partie syntaxique comprend 25 092 unités syntaxiques, dont 14 548 noms, 5 397 verbes, 3 558 adjectifs, 1 410 adverbes, 73 pré-/post- positions et 106 nombre numéraux.Le lexique a été construit à partir des ressources suivantes :a. le lexique morphologique de l'ILSPb. le corpus de l'ILSPPlus d'informations sur le projet Parole : http://www.elda.org/catalogue/en/text/doc/parole.html</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=807</url>
-<url>http://catalog.elra.info/product_info.php?products_id=811</url>
-<identifier>ELRA-S0185</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=710</url>
+<identifier>ELRA-L0032</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -30,52 +29,51 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-02-22</lastDateUpdated>
+<lastDateUpdated>2005-05-30</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 16000.00€</price>
-<price>Academic org. ELRA Non Member: 12000.00€</price>
-<price>Commercial org. ELRA Member: 12800.00€</price>
-<price>Academic org. ELRA Member: 9600.00€</price>
+<price>Commercial org. ELRA Non Member: 5100.00€</price>
+<price>Academic org. ELRA Non Member: 5100.00€</price>
+<price>Commercial org. ELRA Member: 3400.00€</price>
+<price>Academic org. ELRA Member: 3400.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2005-11-24</availabilityStartDate>
-</licenceInfo>
-<licenceInfo>
-<licence>ELRA_VAR</licence>
-<restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 16000.00€</price>
-<price>Academic org. ELRA Non Member: 16000.00€</price>
-<price>Commercial org. ELRA Member: 12800.00€</price>
-<price>Academic org. ELRA Member: 12800.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2005-11-24</availabilityStartDate>
+<availabilityStartDate>2000-03-09</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceCreationInfo>
 <fundingProject>
-<projectName>Orientel</projectName>
+<projectName>LE-PAROLE project (MLAP/LE2-4017)</projectName>
 <fundingType>euFunds</fundingType>
 </fundingProject>
 </resourceCreationInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>fre/fra</languageId>
-<languageName>French</languageName>
+<languageId>gre/ell</languageId>
+<languageName>Greek</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Modern (1453-)</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
 </languageInfo>
-</corpusAudioInfo>
-</corpusMediaType>
-</corpusInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

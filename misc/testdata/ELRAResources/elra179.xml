@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Mandarin Chinese Desktop Speech Recognition Corpus - Digit String (200 people)</resourceName>
-<resourceName lang="French">Corpus de reconnaissance de parole microphone en chinois mandarin – séquences de chiffres (200 locuteurs)</resourceName>
-<description lang="English">This corpus comprises 1,500 entries uttered by 200 speakers of different dialects, ages and various educational levels (87 males and 113 females), recorded over 4 channels (Mic1: SHURE SM58; Mic2: ANC-700 Head-mounted; Mic3: TELEX M-60; Mic4: ACOUSTIC MAGIC). The database comprises 6,000 digit strings per channel. Speech samples are stored as a sequence of 16-bit 22.05kHz WAV for 11.5 hours of speech per channel. The total capacity of the data is 6.82 Gb.Each speaker read 30 items. Text files are stored in Unicode format. All data have been proofread manually.The transcriptions include non-speech markers (background noise, background speech, speaker sounds) as well as markers for mispronunciation, channel distortions, words left-out and duplicates.The corpus aims to be applied to the testing and telephone natural speech recognition system.</description>
-<description lang="French">Ce corpus comprend 1 500 entrées prononcées par 200 locuteurs de dialectes, d’âges et de niveaux d’éducation différents (87 hommes et 113 femmes), enregistrées via 4 canaux (Mic1: SHURE SM58; Mic2: ANC-700 Micro-casque; Mic3: TELEX M-60; Mic4: ACOUSTIC MAGIC). La base de données contient 24 000 séquences de chiffres. Les échantillons de parole sont stockés sous la forme de séquences 16-bit 22,05kHz WAV pour un total de 6,2 heures de parole. La taille totale des données est de 6,82 Go.Chaque locuteur a lu 30 éléments. Les fichiers textes sont stockés au format Unicode. Toutes les données ont été vérifiées manuellement.Les transcriptions comprennent des balises d’événements acoustiques (bruits de fond, sons émis par les locuteurs) ainsi que des balises de mauvaise prononciation, distorsions du canal, omissions de mots et répétitions.Cette base de données a été conçue pour l’évaluation et le développement de systèmes de reconnaissance de la parole naturelle par téléphone.</description>
+<resourceName lang="English">Bilingual English-Russian Russian-English Dictionaries</resourceName>
+<resourceName lang="French">Dictionnaires bilingues anglais-russe russe-anglais</resourceName>
+<description lang="English">The Bilingual English-Russian Russian-English Dictionaries were produced by the SCIPER company through a funding from ELRA in the framework of the European Commission project LRsP&amp;P (Language Resources Production &amp; Packaging - LE4-8335).In this work were used linguistic resources produced originally in Russia. It is well-known that during the Soviet period, a number of linguistic resources of very high quality have been developed in Russia. Among those are dictionaries and especially bilingual dictionaries which generally have many more entries than those found in Western countries. Bilingual language resources produced within the above-mentioned LRsP&amp;P project contain, in total, more than 350,000 pairs of words (in tabular form). In XML format which corresponds to the DTD, the dictionaries have the following volumes:1) Russian-English dictionary - more than 130 000 entries2) English-Russian dictionary - more than 95 000 entriesIn this format, a dictionary entry corresponds to more than one pair of words because it may contain several semantically equal translations in target language.Each dictionary entry contains the following information: - source word (lemma);- part of speech of source word;- target word(s) (lemma(s)), grouped by same meaning; - part of speech of target word(s); - domain(s); Both dictionaries contain as 'source words' only significant parts of speech: nouns, adjectives, verbs, adverbs and nominals.  Stop-words (prepositions, articles, pronouns, etc.) have not been included into the dictionaries because of the intended use in multilingual search and cross-lingual interrogation.Both dictionaries are presented as XML files, with he same DTD. These files are coded in UNICODE - UTF-8. The dictionaries are consistent, i.e. each of them presents the inverted version of the second one. This feature proves to be very useful for aligners, multilingual search engines, etc.The list of domains may be found in DTD. It contains more than 100 domain names.</description>
+<description lang="French">Ces dictionnaires bilingues anglais-russe et russe-anglais ont été réalisés par la société SCIPER dans le cadre du projet européen LRsP&amp;P (Language Resources Production &amp; Packaging - Production et mise au format des ressources linguistiques - LE4-8335) soutenu par la Commission Européenne.Ce travail a utilisé des ressources linguistiques réalisées à l'origine en Russie. Il est connu que pendant la période soviétique, un grand nombre de ressources linguistiques de très bonne qualité ont été développées en Russie. Parmi ces ressources, les dictionnaires et particulièrement les dictionnaires bilingues avaient en général beaucoup plus d'entrées que ceux conçus dans les pays de l'Ouest. Les ressources linguistiques bilingues réalisées pour le projet LRsP&amp;P contiennent, au total plus de 350 000 paires de mots. Dans le format XML qui correspond à la DTD, les dictionnaires représentent le volume suivant :Dictionnaire russe-anglais - plus de 130 000 entrées Dictionnaire anglais-russe - plus de 95 000 entréesDans ce format, une entrée de dictionnaire correspond à plus d'une paire de mots, celle-ci pouvant comprendre plusieurs traductions sémantiquement identiques dans la langue cible.Chaque entrée de dictionnaire fournit les informations suivantes : mot source (lemme) ; partie du discours du mot source ; mot(s) cible(s) (lemme(s)), regroupé(s) par un même sens ; partie du discours du/des mot(s) cible(s) ; domaine(s). Les deux dictionnaires contiennent comme "mots sources" uniquement les parties du discours significatrices : noms, adjectifs, verbes, adverbes et nombres. Les mots vides (prépositions, articles, pronoms, etc.) ne sont pas compris dans ces dictionnaires, puisque les applications visées concernent la recherche multilingue et l'interrogation interlingue.Les deux dictionnaires sont présentés sous la forme de fichiers XML, suivant la même DTD. Ces fichiers sont codés en UNICODE - UTF-8. Ces dictionnaires sont "consistants" : chacun représente une version inversée de l'autre, ce qui s'avère très utile pour des systèmes d'alignement, des moteurs de recherche multilingues, etc.La liste des domaines se trouvent dans la DTD, où plus de 100 noms de domaines sont représentés.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=910</url>
-<identifier>ELRA-S0228_13</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=596</url>
+<identifier>ELRA-M0025</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,44 +29,57 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2009-09-24</lastDateUpdated>
+<lastDateUpdated>2008-01-28</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 1194.00€</price>
-<price>Academic org. ELRA Non Member: 1194.00€</price>
-<price>Commercial org. ELRA Member: 1194.00€</price>
-<price>Academic org. ELRA Member: 1194.00€</price>
-<availabilityStartDate>2007-01-17</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 16000.00€</price>
+<price>Academic org. ELRA Non Member: 4000.00€</price>
+<price>Commercial org. ELRA Member: 12000.00€</price>
+<price>Academic org. ELRA Member: 2000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2000-12-15</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 1194.00€</price>
-<price>Academic org. ELRA Non Member: 1194.00€</price>
-<price>Commercial org. ELRA Member: 1194.00€</price>
-<price>Academic org. ELRA Member: 1194.00€</price>
-<availabilityStartDate>2007-01-17</availabilityStartDate>
+<price>Commercial org. ELRA Non Member: 16000.00€</price>
+<price>Academic org. ELRA Non Member: 16000.00€</price>
+<price>Commercial org. ELRA Member: 12000.00€</price>
+<price>Academic org. ELRA Member: 12000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2000-12-15</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>LRsP&amp;P (Language Resources Production &amp; Packaging - LE4-8335)</projectName>
+<fundingType>euFunds</fundingType>
+</fundingProject>
+</resourceCreationInfo>
 <resourceComponentType>
-<corpusInfo>
-<resourceType>corpus</resourceType>
-<corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>chi/zho</languageId>
-<languageName>Chinese</languageName>
+<languageId>eng</languageId>
+<languageName>English</languageName>
 </languageInfo>
-</corpusAudioInfo>
-</corpusMediaType>
-</corpusInfo>
+<languageInfo>
+<languageId>rus</languageId>
+<languageName>Russian</languageName>
+</languageInfo>
+</lexicalConceptualResourceTextInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
 </resourceComponentType>
 </resourceInfo>

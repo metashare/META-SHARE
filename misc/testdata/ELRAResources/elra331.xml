@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">SmartWeb Video Corpus (SVC)</resourceName>
-<resourceName lang="French">Corpus SVC (SmartWeb Video Corpus)</resourceName>
-<description lang="English">The SMARTWEB UMTS data collection was created within the publicly funded German SmartWeb project in the years 2004-2006.  It comprises a collection of user queries to a naturally spoken Web interface with the main focus on the soccer world series in 2006. The recordings include field recordings using a hand-held UMTS device (one person, SmartWeb Handheld Corpus SHC, ref. ELRA-S0278), field recordings with video capture of the primary speaker and a secondary speaker (SmartWeb Video Corpus SVC, ref. ELRA-S0279), as well as mobile recordings performed on a BMW motorbike (one speaker, SmartWeb Motorbike Corpus SMC, ref. ELRA-S0280). This multimodal corpus corresponds to the video capture of the primary speaker and a secondary speaker (SmartWeb Video Corpus) and contains 99 recordings each containing a human-human-machine dialogue: one speaker (which is being recorded) interacts with a human partner as well with a dialogue system via a smart phone (SmartWeb system).The speaker uses a client-server based dialogue system (SmartWeb) for spoken access to Internet contents in a natural environment (office, hallway, street, park, cafe, etc.). Speech was captured over a Bluetooth headset and transferred via an UMTS cellular line to the server; a second collar attached microphone was captured on a portable iRiver recorder to yield an undisturbed, high quality reference signal. The face of the speaker was captured by the build-in face camera of the smart phone. The speech signal was segmented into queries (automatically by the prompting system) and a second time manually into turns and transcribed according to Verbmobil transliteration standard. The video signal was labelled manually into OnView / OffView and - partly - spatially segmented for face detection.The motivation for this corpus was to capture realistic multimodal (speech + face) data in a realistic human machine interaction as well as to capture as many OffTalk situations as possible (OffTalk being all speech uttered by the speaker that is not intended as input to the system).The corpus contains:-	number of dialogues / recorded speakers: 99-	number of segmented turns: 2,218-	total duration: 971 minutes-	formats:    o collar mic: WAV 44,1kHz, 16 bit    o Bluetooth/UMTS-channel: ALAW 8kHz 8bit    o video: 176x144, 24bpp, 15fps, 3GPP + MPEG1    o Verbmobil Transliteration (TRS), BAS Partitur Format (BPF), ATLAS Annotation Graph (XML)    o meta data: speaker and recording protocol (XML) -	segmentation: automatic segmentation into input queries by the prompting system; manual segmentation into turns; OffTalk labelling; OffView labelling, spatially segmentation of face (partly manually)-	distribution: 5 DVD-R See also ELRA-S0278 and ELRA-S0279.</description>
-<description lang="French">La collection de données SMARTWEB UMTS a été produite dans le cadre du projet SmartWeb financé par le gouvernement allemand de 2004 à 2006. Il comprend une collection de questions utilisateurs posées à une interface web de parole naturelle et avec comme thème principal la coupe du monde de football 2006. La collection comprend des enregistrements de champs via un appareil portable UMTS (une personne, corpus SHC-SmartWeb Handheld, réf. ELRA-S0278), des enregistrements de champs avec une capture vidéo d’un locuteur premier et d’un locuteur secondaire (corpus SVC-SmartWeb Video, réf. ELRA-S0279), ainsi que des enregistrements via des téléphones portables réalisés sur une moto BMW (un locuteur, corpus SMC-SmartWeb Motorbike, réf. ELRA-S0280).Ce corpus multimodal correspond aux captures vidéo d’un locuteur premier et d’un locuteur secondaire (SmartWeb Video) et contient 99 enregistrements de dialogues personne-personne-machine : un locuteur (qui est enregistré) interagit avec un partenaire humain ainsi qu’avec un système de dialogue via un smartphone (système SmartWeb).Le locuteur utilise un système de dialogue client-serveur (SmartWeb) pour accéder vocalement au contenu d’internet dans un environnement naturel (bureau, hall d’entrée, rue, parc, bar, etc.). La parole a été enregistrée via un micro-casque Bluetooth et transférée vers le  serveur via une ligne cellulaire UMTS ; un deuxième micro collier a été utilisé sur un lecteur enregistreur portable iRiver afin de produire un signal de référence sans distortion de haute qualité. Le visage du locuteur a été filmé par la caméra du smartphone. Le signal de parole a été une première fois segmenté en requêtes (automatiquement réalisé par le système de prompt) et une deuxième fois en tours de parole, puis transcrit selon le standard de transcription Verbmobil. Le signal vidéo a été étiqueté manuellement en situations OnView / OffView (selon si le locuteur regarde ou non la caméra)  et – partiellement – segmenté au niveau spatial pour la détection du visage.L’objectif moteur pour la constitution de ce corpus était de collecter des données multimodales réalistes (parole + visage) dans une interaction humaine réaliste, mais également de les collecter dans autant de situations OffTalk que possible (l’OffTalk étant composé de toutes les données de parole prononcées par le locuteur mais n’ayant pas pour but d’être utilisées comme entrées du système).Le corpus comprend :-	nombre de dialogues / locuteurs enregistrés : 99-	nombre de tours segmentés : 2218-	durée totale : 971 minutes-	formats :    o micro collier : WAV 44,1kHz, 16 bit    o canal Bluetooth/UMTS : ALAW 8kHz 8bit    o video : 176x144, 24bpp, 15fps, 3GPP + MPEG1    o transcription Verbmobil (TRS), format de partition BAS (BPF), graphe d’annotation ATLAS (XML)    o méta-données : locuteur et protocole d’enregistrement (XML) -	segmentation : segmentation automatique en requêtes d’entrée de système par le système de prompt ; segmentation manuelle en tours de parole ; étiquetage OffTalk ; étiquetage OffView, segmentation spatiale du visage (en partie manuelle)-	distribution : 5 DVD-R Voir aussi ELRA-S0278 et ELRA-S0279.</description>
+<resourceName lang="English">EQueR Evaluation Package</resourceName>
+<resourceName lang="French">Package d’évaluation EQueR</resourceName>
+<description lang="English">The EQueR Evaluation Package was produced within the French national project EQueR (Evaluation campaign for Question-Answering systems), as part of the Technolangue programme funded by the French Ministry of Research and New Technologies (MRNT). The EQueR project enabled to carry out a campaign for the evaluation of Question-Answering systems in French.This package includes the material that was used for the EQueR evaluation campaign. It includes resources, protocols, scoring tools, results of the campaign, etc., that were used or produced during the campaign. The aim of these evaluation packages is to enable external players to evaluate their own system and compare their results with those obtained during the campaign itself. The campaign is distributed over two actions: 1)	Generic task: it consists in evaluating the performances of question-answering systems on a collection of heterogeneous texts.2)	Specialised task: it consists in evaluating the performances of question-answering systems on a collection of texts from the medical domain.The EQueR evaluation package contains the following data and tools: 1)	Two text collections:-	General corpus: about 1.5 Gb of data consisting of news articles of several years from Le Monde and Le Monde Diplomatique, press releases and information reports from the French Senate dealing with various subjects.-	Medical corpus: about 140 Mb of data mainly consisting of scientific articles and guidelines for good medical practice, selected by the CISMeF (Catalogue et Index des Sites Médicaux Francophones) from the University Hospital Centre of Rouen.1)	Two corpora of questions :-	500 questions for the generic task and 200 questions for the specialised task.-	For each question in the two corpora, the first 100 identifiers are provided (from Pertimm’s search engine).2)	Two Pertimm’ sub-corpora, created from the document identifiers and returned by the search engine.3)	The whole results provided by the participants.4)	A help software for the evaluation of results within the evaluation of question-answering systems (with detailed documentation).A description of the project is available at the following address:http://www.technolangue.net/article.php3?id_article=195 (in French language)</description>
+<description lang="French">Le package d’évaluation EQueR a été produit dans le cadre du projet national français EQueR (« Evaluation en Question-Réponse »), issu du programme Technolangue, financé par le Ministère français délégué à la Recherche et aux Nouvelles Technologies (MRNT). Le projet EQueR a permis de réaliser une campagne d'évaluation des systèmes de question-réponse pour le français. Ce package comprend l’ensemble des données utilisées lors de la campagne d’évaluation EQueR. Il regroupe des ressources, des protocoles, des outils de notation, les résultats de la campagne officielle, etc., qui ont été utilisés ou produits pendant la campagne. Le but de ce « package » d’évaluation est de permettre à tout acteur externe de pouvoir évaluer son propre système et ainsi, de pouvoir comparer ses résultats à ceux obtenus pendant la campagne.La campagne se décompose en deux actions : 1)	Une tâche générique : consiste à évaluer les performances des systèmes de question-réponse sur une collection hétérogène de textes.2)	Une tâche spécialisée : consiste à évaluer les performances des systèmes de question-réponse sur une collection de textes du domaine médical.Le package d’évaluation EQueR contient les données et outils suivants :1)	Deux collections textuelles:-	corpus général : environ 1,5 Go de données composées d’articles de presse de plusieurs années des journaux Le Monde et Le Monde Diplomatique, de dépêches de presse et de rapports d’information du Sénat français portant sur des sujets très variés.-	corpus médical : environ 140 Mo de données composées principalement d’articles scientifiques et de recommandations de bonne pratique médicale, sélectionnés par le CISMeF (Catalogue et Index des Sites Médicaux Francophones) du Centre Hospitalier Universitaire de Rouen.2)	Deux corpus de questions :-	500 questions pour la tâche générique et 200 questions pour la tâche spécialisée.-	pour chaque question des deux corpus, les 100 premiers identifiants sont fournis (par le moteur de recherche Pertimm).3)	Deux sous-corpus Pertimm créés à partir des identifiants de documents renvoyés par le moteur de recherche.4)	L’ensemble des résultats fournis aux participants.5)	Logiciel d’aide à l’évaluation des résultats dans le cadre d’une évaluation de systèmes de question-réponse (avec documentation détaillée).Une description du projet est disponible à l'adresse suivante :http://www.technolangue.net/article.php3?id_article=195</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=1070</url>
-<identifier>ELRA-S0280</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=996</url>
+<identifier>ELRA-E0022</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,68 +29,76 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2008-07-11</lastDateUpdated>
+<lastDateUpdated>2007-06-28</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
-<licence>ELRA_END_USER</licence>
-<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 635.00€</price>
-<price>Commercial org. ELRA Member: 1635.00€</price>
-<price>Academic org. ELRA Non Member: 1275.00€</price>
-<price>Commercial org. ELRA Non Member: 2275.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2008-07-11</availabilityStartDate>
-</licenceInfo>
-<licenceInfo>
-<licence>ELRA_VAR</licence>
-<restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 1635.00€</price>
-<price>Commercial org. ELRA Member: 1635.00€</price>
-<price>Academic org. ELRA Non Member: 2275.00€</price>
-<price>Commercial org. ELRA Non Member: 2275.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2008-07-11</availabilityStartDate>
+<licence>ELRA_EVALUATION</licence>
+<restrictionsOfUse>evaluationUse</restrictionsOfUse>
+<price>Academic org. ELRA Member: 150.00€</price>
+<price>Commercial org. ELRA Member: 500.00€</price>
+<price>Academic org. ELRA Non Member: 300.00€</price>
+<price>Commercial org. ELRA Non Member: 1000.00€</price>
+<availabilityStartDate>2007-06-28</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<usageInfo>
-<actualUseInfo>
-<actualUse>nlpApplications</actualUse>
-<useNLPSpecific>speechRecognition</useNLPSpecific>
-</actualUseInfo>
-</usageInfo>
+<resourceDocumentationInfo>
+<documentation>
+<documentInfo>
+<documentType>unpublished</documentType>
+<title>SMP_E0022_diplo9200_f.pdf</title>
+</documentInfo>
+</documentation>
+<samplesLocation>http://catalog.elra.info/product_info.php?action=download&amp;filename=SMP_E0022_diplo9200_f.pdf</samplesLocation>
+</resourceDocumentationInfo>
+<resourceDocumentationInfo>
+<documentation>
+<documentInfo>
+<documentType>unpublished</documentType>
+<title>SMP_E0022_LM00_f.pdf</title>
+</documentInfo>
+</documentation>
+<samplesLocation>http://catalog.elra.info/product_info.php?action=download&amp;filename=SMP_E0022_LM00_f.pdf</samplesLocation>
+</resourceDocumentationInfo>
+<resourceDocumentationInfo>
+<documentation>
+<documentInfo>
+<documentType>unpublished</documentType>
+<title>SMP_E0022_lois_f.pdf</title>
+</documentInfo>
+</documentation>
+<samplesLocation>http://catalog.elra.info/product_info.php?action=download&amp;filename=SMP_E0022_lois_f.pdf</samplesLocation>
+</resourceDocumentationInfo>
+<resourceDocumentationInfo>
+<documentation>
+<documentInfo>
+<documentType>unpublished</documentType>
+<title>SMP_E0022_sda9495_f.pdf</title>
+</documentInfo>
+</documentation>
+<samplesLocation>http://catalog.elra.info/product_info.php?action=download&amp;filename=SMP_E0022_sda9495_f.pdf</samplesLocation>
+</resourceDocumentationInfo>
 <resourceCreationInfo>
 <fundingProject>
-<projectName>SmartWeb</projectName>
+<projectName>EVALDA</projectName>
 <fundingType>nationalFunds</fundingType>
 </fundingProject>
-<creationEndDate>2006-01-01</creationEndDate>
 </resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
 <corpusMediaType>
-<corpusAudioInfo>
-<mediaType>audio</mediaType>
+<corpusTextInfo>
+<mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>ger/deu</languageId>
-<languageName>German</languageName>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
 </languageInfo>
-</corpusAudioInfo>
-<corpusVideoInfo>
-<mediaType>video</mediaType>
-<lingualityInfo>
-<lingualityType>monolingual</lingualityType>
-</lingualityInfo>
-<languageInfo>
-<languageId>ger/deu</languageId>
-<languageName>German</languageName>
-</languageInfo>
-</corpusVideoInfo>
+</corpusTextInfo>
 </corpusMediaType>
 </corpusInfo>
 </resourceComponentType>

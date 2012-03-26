@@ -6,7 +6,7 @@
 <description lang="English">This is a bilingual English=&gt;Swahili lexicon, provided in structured XML of OLIF (Open Lexicon Interchange Format) format. The XML conversion is provided by Digital Sonata Pty Ltd.The lexicon comprises 58,247 entries in English and 58,300 in Swahili. In terms of entry types, the lexicon comprises 36,046 nouns, 3,013 adjectives, 18,308 verbs and 880 closed-class entries.The entries contain semantic information in terms of domain specification or style information (e.g., colloquial, regional use, etc.). Collocational information is also available for 17,570 entries.</description>
 <description lang="French">Ce lexique bilingue anglais=&gt;swahili est fourni en format XML structuré selon le standard OLIF (Open Lexicon Interchange Format). La conversion XML a été fournie par Digital Sonata Pty Ltd.Le lexique contient 58 247 entrées en anglais et 58 300 entrées en swahili. En termes de types d’entrées, le lexique comprend 36 046 noms, 3 013 adjectifs, 18 308 verbes et 880 entrées de classe fermée.Les entrées contiennent des informations sémantiques en termes de spécification de domaine et information de style (par exemple, usage conversationnel, régional, etc.). L’information collocationnelle est également disponible pour 17 570 entrées.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=1060</url>
 <identifier>ELRA-M0044</identifier>
 </identificationInfo>

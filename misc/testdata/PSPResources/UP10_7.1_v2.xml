@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: UP10_7.1.xml 42662 2011-12-01 14:33:59Z martha $ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Icelandic Parsed Historical Corpus</resourceName>
+      <description>About 1000000 words of Icelandic text, from every century between the 12th and the 19th centuries inclusive annotated for phrase structure, part-of-speech-tagged and lemmatized.</description>
+      <resourceShortName>IcePaHC</resourceShortName>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability>
+      <licenceInfo>
+         <licence>LGPL</licence>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+      </licenceInfo>
+      <iprHolder>
+         <organizationInfo>
+	           <organizationName>University of Iceland</organizationName>
+	           <organizationShortName>HI</organizationShortName>
+	           <departmentName>School of Humanities</departmentName>
+	           <communicationInfo>
+               <email>hug@hi.is</email>
+            </communicationInfo>
+         </organizationInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Rögnvaldsson</surname>
+      <givenName>Eiríkur</givenName>
+      <communicationInfo>
+         <email>eirikur@hi.is</email>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-29</metadataCreationDate>
+      <metadataCreator>
+         <surname>Helgadóttir</surname>
+         <givenName>Sigrún</givenName>
+         <communicationInfo>
+            <email>sigruhel@hi.is</email>
+         </communicationInfo>
+         <affiliation>
+            <organizationName>The Arni Magnusson Institute for Icelandic Studies</organizationName>
+            <communicationInfo>
+	              <email>ordabok@hi.is</email>
+	           </communicationInfo>
+         </affiliation>
+      </metadataCreator>
+   </metadataInfo>
+   <versionInfo>
+      <version>0.9</version>
+  </versionInfo>
+   <usageInfo>
+      <foreseenUseInfo>
+         <foreseenUse>nlpApplications</foreseenUse>
+      
+         <useNLPSpecific>other</useNLPSpecific>
+      </foreseenUseInfo>
+      <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+         <useNLPSpecific>other</useNLPSpecific>
+      </actualUseInfo>
+  </usageInfo>
+   <resourceDocumentationInfo>
+      <documentation>
+         <documentUnstructured>Wallenberg, Joel C., Anton Karl Ingason, Einar Freyr Sigurðsson and Eiríkur Rögnvaldsson. 2011. 
+    Icelandic Parsed Historical Corpus (IcePaHC). 
+    Version 0.9. http://www.linguist.is/icelandic_treebank</documentUnstructured>
+      </documentation>
+      <documentation>
+         <documentUnstructured>Eiríkur Rögnvaldsson, Anton Karl Ingason og Einar Freyr Sigurðsson. 2011. Coping with Variation in the Icelandic Parsed Historical Corpus (IcePaHC). Johannessen, Janne Bondi (ritstj.): Language Variation Infrastructure. Papers on selected projects, s. 97-111. Oslo Studies in Language 3.2. University of Oslo, Osló.</documentUnstructured>
+      </documentation>
+  </resourceDocumentationInfo>
+   <resourceCreationInfo>
+      <creationStartDate>2009-03-01</creationStartDate>
+      <creationEndDate>2011-09-30</creationEndDate>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+      
+                  <languageId>isl</languageId>
+                  <languageName>Icelandic</languageName>
+               </languageInfo>
+                  <modalityInfo>
+                     <modalityType>writtenLanguage</modalityType>
+                  </modalityInfo>
+               <sizeInfo>
+                  <size>1000000</size>
+      
+                  <sizeUnit>tokens</sizeUnit>
+               </sizeInfo>
+               <annotationInfo>
+                  <annotationType>segmentation</annotationType>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>structuralAnnotation</annotationType>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>lemmatization</annotationType>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>morphosyntacticAnnotation-posTagging</annotationType>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>syntacticAnnotation-treebanks</annotationType>
+               </annotationInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">THAMUS Bilingual dictionaries - Computer Science</resourceName>
-<resourceName lang="French">THAMUS Dictionnaires bilingues -  Informatique</resourceName>
-<description lang="English">Technical bilingual Italian dictionaries with a morphological coding which can generate all full forms using a software engine written in C. Multi-word terms contain morphological coding for the head word.Computer Science, inflected forms: 35,000 entries, German=&gt;Italian.</description>
-<description lang="French">Les dictionnaires techniques bilingues disposent d'une codification morphologique qui permet de générer toutes les formes fléchies grâce à un logiciel écrit en langage C. Les mots composés contiennent une codification morphologique sur la tête des mots.Domaine informatique, formes fléchies, 35 000 entrées, allemand=&gt; italien.</description>
+<resourceName lang="English">The Lancaster Corpus of Mandarin Chinese (LCMC)</resourceName>
+<resourceName lang="French">Corpus Lancaster du chinois mandarin (LCMC)</resourceName>
+<description lang="English">The Lancaster Corpus of Mandarin Chinese (LCMC) is designed as a Chinese match for the FLOB and FROWN corpora for modern British and American English. The corpus is suitable for use in both monolingual research into modern Mandarin Chinese and cross-linguistic contrast of Chinese and British/American English. The corpus sampled 15 written text categories including news, literary texts, academic prose and official documents etc published in P. R. China in the earlier 1990s for a total of approximately 1 million words. The same sampling frame and period as FLOB/FROWN were used in LCMC. The corpus is marked up for text categories, sample file numbers, paragraphs, sentences and tokens. Linguistic annotations undertaken on the corpus include tokenization and part-of-speech tagging. The whole corpus is annotated at the word level and includes orthographic and morphological annotations. The tagging system used was produced by the Institute of Computing Science Chinese Lexical Analysis System (ICTCLAS), the Chinese Academy of Sciences. The corpus is encoded in Unicode (UTF-8) and marked up in XML. The corpus comes with a User Manual detailing corpus design specifications and part-of-speech tags. The XML structure of the corpus was validated using the parser built in Xaira. Part-of-speech tagging of all aspect markers was manually checked. References: McEnery, A., Xiao, Z. and Mo, L. 2003. ‘Aspect marking in English and Chinese: using the Lancaster Corpus of Mandarin Chinese for contrastive language study’. Literary and Linguistic Computing 18/4: 361-378. Xiao, Z, McEnery, A., Baker, P. and Hardie, A. 2004. ‘Developing Asian language corpora: standards and practice’ in Sornlertlamvanich, V., Tokunaga, T. and Huang, C. (eds.) Proceedings of the Fourth Workshop on Asian Language Resources, pp. 1-8. March 25, Sanya. McEnery, A and Xiao, Z. 2004. ‘The Lancaster Corpus of Mandarin Chinese: A Corpus for Monolingual and Contrastive Language Study’. Paper presented at LREC 2004. May 2004, Lisbon. For more information on the LCMC: http://www.ling.lancs.ac.uk/corplang/lcmc</description>
+<description lang="French">Le corpus Lancaster du chinois mandarin (LCMC) est l’équivalent chinois des corpus FLOB et FROWN conçus pour l’anglais britannique et l’anglais américain. Ce corpus peut être utilisé aussi bien pour la recherche monolingue en chinois mandarin moderne, que pour des études linguistiques comparatives en chinois et anglais britannique/américain.Il présente une quinzaine de types de textes écrits, par exemple des actualités, des textes littéraires, de la prose académique, des documents officiels, etc., publiés en République Populaire de Chine au début des années 1990. Le corpus contient un total d’environ 1 million de mots. Le corpus LCMC couvre la même période et les mêmes éléments informatifs que les corpus FLOB/FROWN. Il est segmenté en types de textes, numéros d’échantillons, paragraphes, phrases et tokens. Les annotations linguistiques contenues au sein du corpus sont la tokenisation et le balisage des parties du discours. Le corpus est annoté au niveau du mot, et inclut des informations orthographiques et morphologiques. Le système de balisage utilisé a été conçu à l’ICTCLAS (Institute of Computing Science Chinese Lexical Analysis System), l’Académie des sciences chinoise. Ce corpus est codé en Unicode (UTF-8), au format XML. Il est accompagné d’un manuel utilisateur qui présente les spécifications et les étiquettes des parties du discours. La structure XML du corpus a été validée grâce au parser Xaira. L’étiquetage des parties du discours a été vérifié manuellement. Références: McEnery, A., Xiao, Z. et Mo, L. 2003. ‘Aspect marking in English and Chinese: using the Lancaster Corpus of Mandarin Chinese for contrastive language study’. Literary and Linguistic Computing 18/4: 361-378. Xiao, Z, McEnery, A., Baker, P. and Hardie, A. 2004. ‘Developing Asian language corpora: standards and practice’ in Sornlertlamvanich, V., Tokunaga, T. et Huang, C. (eds.) Proceedings of the Fourth Workshop on Asian Language Resources, pp. 1-8. 25 Mars, Sanya. McEnery, A et Xiao, Z. 2004. ‘The Lancaster Corpus of Mandarin Chinese: A Corpus for Monolingual and Contrastive Language Study’. Papier presenté à LREC 2004. Mai 2004, Lisbonne. Plus d’informations sur le corpus LCMC sont disponibles ici : http://www.ling.lancs.ac.uk/corplang/lcmc.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=146</url>
-<identifier>ELRA-M0009_03</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=715</url>
+<identifier>ELRA-W0039</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,51 +29,49 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2005-03-04</lastDateUpdated>
+<lastDateUpdated>2004-05-12</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 38500.00€</price>
-<price>Academic org. ELRA Member: 7700.00€</price>
-<price>Academic org. ELRA Non Member: 8400.00€</price>
-<price>Commercial org. ELRA Non Member: 42000.00€</price>
+<price>Commercial org. ELRA Member: 7500.00€</price>
+<price>Academic org. ELRA Member: 0.00€</price>
+<price>Academic org. ELRA Non Member: 0.00€</price>
+<price>Commercial org. ELRA Non Member: 12000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-05-13</availabilityStartDate>
+<availabilityStartDate>2004-09-15</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Member: 38500.00€</price>
-<price>Academic org. ELRA Member: 38500.00€</price>
-<price>Academic org. ELRA Non Member: 42000.00€</price>
-<price>Commercial org. ELRA Non Member: 42000.00€</price>
+<price>Commercial org. ELRA Member: 7500.00€</price>
+<price>Academic org. ELRA Member: 7500.00€</price>
+<price>Academic org. ELRA Non Member: 12000.00€</price>
+<price>Commercial org. ELRA Non Member: 12000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1997-05-13</availabilityStartDate>
+<availabilityStartDate>2004-09-15</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
 <resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusTextInfo>
 <mediaType>text</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>ger/deu</languageId>
-<languageName>German</languageName>
+<languageId>chi/zho</languageId>
+<languageName>Chinese</languageName>
 </languageInfo>
-<languageInfo>
-<languageId>ita</languageId>
-<languageName>Italian</languageName>
-</languageInfo>
-</lexicalConceptualResourceTextInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
+<timeCoverageInfo>
+<timeCoverage>Early 1990s</timeCoverage>
+</timeCoverageInfo>
+</corpusTextInfo>
+</corpusMediaType>
+</corpusInfo>
 </resourceComponentType>
 </resourceInfo>

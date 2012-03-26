@@ -6,7 +6,7 @@
 <description lang="English">This database contains the recordings of one female Spanish speaker recorded in a noise-reduced room simultaneously through a close talk microphone, a mid distance microphone and a laryngograph signal, of read text material of approximately 10 hours of speech for baseline applications (Text-to-Speech systems). The database includes Festival-compatible annotations. The recordings can be also found under TC-STAR Spanish Baseline Female Speech Database (ELRA-S0309).</description>
 <description lang="French">Cette base de données comprend les enregistrements d’un locuteur femme espagnol enregistré dans une salle à bruit réduit simultanément via un microphone “close talk”, un microphone à moyenne distance et un signal laryngographique. Elle comprend du matériel textuel lu pour environ 10 heures de parole pour des applications de référence (systèmes texte-parole). Cette base de données comprend des annotations compatibles au format Festival. Les enregistrements peuvent également être trouvés dans la voix de femme de référence TC-STAR espagnol (ELRA-S0309).</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=1159</url>
 <url>http://catalog.elra.info/product_info.php?products_id=1160</url>
 <identifier>ELRA-S0337</identifier>

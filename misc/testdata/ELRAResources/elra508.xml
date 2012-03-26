@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">LABEL-LEX (MW)</resourceName>
-<resourceName lang="French">LABEL-LEX (MW)</resourceName>
-<description lang="English">LABEL-LEX (MW) is a Portuguese formalized lexicon, containing 88 619 inflected multiword lexical units (formally, sequences of simple words). The units are distributed as follows:-	85,881 nouns, with information about type, gender, number, inflected forms, irregular inflected forms and subcategorisation frames-	2,204 adverbs-	409 adjectives, with information about degree, gender, number, comparison, position, inflected forms, irregular inflected forms and subcategorisation frames -	125 pronouns, prepositions/postpositions and conjunctionsFrom a linguistic point of view, multiword lexical units exhibit distributional and selectional constraints; they lack compositionality, and have, most of the time, idiomatic interpretations.MWUs occur frequently in both everyday language and technical and scientific texts to express ideas and concepts that in general cannot be stated by "free" linguistic structures.So it is impossible to envisage automatic text analysis without adequate identification and treatment of multiword lexical units. The meaning of a text is mostly supplied by frequent occurrence of multiword units, especially by compound nouns.Other formats and other services may be supplied by the data owner upon request (e.g. conversion into buyer's formalism, selection of subsets of the words missing from your own dictionary).</description>
-<description lang="French">Ce lexique de portugais formalisé contient 88 619 unités lexicales fléchies constituées d'expressions composées (des séquences de mots simples). Les unités sont réparties comme suit :-	85 881 noms, avec des informations sur le type, genre, nombre, les formes fléchies, les formes irrégulières non fléchies et les cadres de sous-catégorisation-	2 204 adverbes-	409 adjectifs, avec des informations sur le degré, genre, nombre, comparaison, position, les formes fléchies, les formes irrégulières non fléchies et les cadres de sous-catégorisation-	125 pronoms, prépositions/postpositions et conjonctionsD'un point de vue linguistique, les unités lexicales constituées d'expressions composées (ou unités MWU) présentent des contraintes en termes de distribution et de sélection, elles manquent de compositionnalité et sont sujettes, la plupart du temps, à des interprétations idiomatiques.Les unités MWU sont fréquentes dans le langage courant comme dans la littérature scientifique et technique car elles permettent d'exprimer des idées et des concepts que les périphrases ne peuvent généralement traduire.Par conséquent, il est impossible d'envisager une analyse automatique de texte sans identification et traitement adaptés des unités lexicales MWU. En effet, les expressions composées, et les mots composés, notamment, sont fréquemment les éléments porteurs de sens d'un texte.</description>
+<resourceName lang="English">TC-STAR Spanish Baseline Female Speech Database</resourceName>
+<resourceName lang="French">Voix de femme de référence TC-STAR espagnol</resourceName>
+<description lang="English">The TC-STAR Spanish Baseline Female Speech Database was created within the scope of the TC-STAR project (IST- FP6-506738) funded by the European Commission.It contains the recordings of one female Spanish speaker recorded in a noise-reduced room simultaneously through a close talk microphone, a mid distance microphone and a laryngograph signal. It consists of the recordings and annotations of read text material of approximately 10 hours of speech for baseline applications (Text-to-Speech systems). This database is distributed on 10 DVDs. The database complies with the common specifications created in the TC-STAR project.The annotation of the database includes manual orthographic transcriptions, the automatic segmentation into phonemes and automatic generation of pitch marks. A certain percentage of phonetic segments and pitch marks has been manually checked. A pronunciation lexicon in SAMPA with POS, lemma and phonetic transcription of all the words prompted and spoken is also provided.Speech samples are stored as sequences of 24-bit 96 kHz with the least significant byte first (“lohi” or Intel format) as (signed) integers. Each prompted utterance is stored in a separate file. Each signal file is accompanied by an ASCII SAM label file which contains the relevant descriptive information.The TC-STAR Spanish Baseline Male Speech Database is also available via ELRA under reference ELRA-S0310.</description>
+<description lang="French">Cette voix de femme de référence TC-STAR espagnol a été créée dans le cadre du projet TC-STAR (IST- FP6-506738) financé par la Commission européenne.Elle comprend les enregistrements d’un locuteur espagnol femme enregistré de façon simultanée par micro-casque, microphone à distance moyenne et signal larygographique dans une salle à bruit réduit. Elle consiste en des enregistrements et annotations de matériel textuel lu pour environ 10 heures de parole pour des applications de référence (systèmes texte-parole). Cette base de données est distribuée sur 10 DVD. Elle respecte les spécifications communes créées dans le projet TC-STAR.L’annotation de la base de données inclut les transcriptions orthographiques réalisées manuellement, la segmentation automatique en phonèmes et la génération automatiques des marques de pitch. Un certain pourcentage de segments phonétiques et de marques de pitch a été vérifié manuellement. Un lexique de prononciation en SAMPA avec partie du discours, lemmes et transcription phonétique de tous les mots lus et prononcés est également fourni.Les fichiers de parole sont stockés en séquences d’échantillons de 24-bit 96 kHz avec l’octet le moins significatif en premier (“lohi” ou format Intel) en entiers (signés).  Chaque énoncé est stocké dans un fichier séparé et est accompagné d'un fichier d'étiquetage ASCII SAM.La voix d’homme de référence TC-STAR espagnol est également disponible via ELRA sous la référence ELRA-S0310.</description>
 <resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=700</url>
-<identifier>ELRA-L0054</identifier>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=1131</url>
+<url>http://catalog.elra.info/product_info.php?products_id=1160</url>
+<identifier>ELRA-S0309</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,54 +30,66 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<revision>Creation date: 1995Update frequency: annuallyLast update: 2004</revision>
-<lastDateUpdated>2010-10-21</lastDateUpdated>
+<lastDateUpdated>2010-12-21</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 15000.00€</price>
-<price>Academic org. ELRA Non Member: 5000.00€</price>
-<price>Commercial org. ELRA Member: 10000.00€</price>
-<price>Academic org. ELRA Member: 3000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2005-02-01</availabilityStartDate>
+<price>Academic org. ELRA Member: 7700.00€</price>
+<price>Commercial org. ELRA Member: 12000.00€</price>
+<price>Academic org. ELRA Non Member: 10000.00€</price>
+<price>Commercial org. ELRA Non Member: 15600.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2010-12-21</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 15000.00€</price>
-<price>Academic org. ELRA Non Member: 15000.00€</price>
-<price>Commercial org. ELRA Member: 10000.00€</price>
-<price>Academic org. ELRA Member: 10000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2005-02-01</availabilityStartDate>
+<price>Academic org. ELRA Member: 12000.00€</price>
+<price>Commercial org. ELRA Member: 12000.00€</price>
+<price>Academic org. ELRA Non Member: 15600.00€</price>
+<price>Commercial org. ELRA Non Member: 15600.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>2010-12-21</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
+<usageInfo>
+<actualUseInfo>
+<actualUse>nlpApplications</actualUse>
+<useNLPSpecific>speechSynthesis</useNLPSpecific>
+</actualUseInfo>
+</usageInfo>
 <resourceCreationInfo>
-<creationEndDate>1995-01-01</creationEndDate>
+<fundingProject>
+<projectName>TC-STAR</projectName>
+<fundingType>euFunds</fundingType>
+</fundingProject>
 </resourceCreationInfo>
 <resourceComponentType>
-<lexicalConceptualResourceInfo>
-<resourceType>lexicalConceptualResource</resourceType>
-<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
-<lexicalConceptualResourceMediaType>
-<lexicalConceptualResourceTextInfo>
-<mediaType>text</mediaType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>por</languageId>
-<languageName>Portuguese</languageName>
+<languageId>spa</languageId>
+<languageName>Spanish</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Castilian</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
 </languageInfo>
-<textFormatInfo>
-<mimeType>Plain text</mimeType>
-</textFormatInfo>
-</lexicalConceptualResourceTextInfo>
-</lexicalConceptualResourceMediaType>
-</lexicalConceptualResourceInfo>
+</corpusAudioInfo>
+</corpusMediaType>
+</corpusInfo>
 </resourceComponentType>
 </resourceInfo>

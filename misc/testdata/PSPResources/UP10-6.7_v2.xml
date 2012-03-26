@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: UP10-6.7.xml 42662 2011-12-01 14:33:59Z martha $ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Modern Finnish Word List</resourceName>
+      <description>The entries of the word list are simple XML elements that indicate the lemma and inflection type for basic words. Rare inflection types and other restrictions are marked with attributes. Compounds are usually listed as just the lemma. Examples of the 78 inflection types and 17 consonant gradation types are available on the web site.</description>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>LGPL</licence>
+         <restrictionsOfUse>shareAlike</restrictionsOfUse>
+         <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
+      </licenceInfo>
+      <iprHolder>
+         <organizationInfo>
+	           <organizationName>Research Institute for the Languages of Finland</organizationName>
+	           <organizationShortName>Kotus</organizationShortName>
+	           <communicationInfo>
+               <email>toni.suutari@kotus.fi</email>
+            </communicationInfo>
+         </organizationInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Suutari</surname>
+      <givenName>Toni</givenName>
+      <communicationInfo>
+         <email>toni.suutari@kotus.fi</email>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-18</metadataCreationDate>
+      <metadataCreator>
+         <surname>Piitulainen</surname>
+         <givenName>Jussi</givenName>
+         <communicationInfo>
+            <email>jpiitula@ling.helsinki.fi</email>
+         </communicationInfo>
+         <affiliation>
+	           <organizationName>University of Helsinki</organizationName>
+	           <communicationInfo>
+               <email>jpiitula@ling.helsinki.fi</email>
+            </communicationInfo>
+         </affiliation>
+      </metadataCreator>
+   </metadataInfo>
+   <usageInfo>
+      <foreseenUseInfo>
+         <foreseenUse>humanUse</foreseenUse>
+      
+      
+         <!-- useNLPSpecific>languageIdentification</useNLPSpecific>
+      <useNLPSpecific>multimediaDevelopment</useNLPSpecific>
+      <useNLPSpecific>informationRetrieval</useNLPSpecific>
+      <useNLPSpecific>wordSenseDisambiguation</useNLPSpecific>
+      <useNLPSpecific>machineTranslation</useNLPSpecific>
+      <useNLPSpecific>namedEntityRecognition</useNLPSpecific>
+      <useNLPSpecific>questionAnswering</useNLPSpecific>
+      <useNLPSpecific>textGeneration</useNLPSpecific>
+      <useNLPSpecific>summarisation</useNLPSpecific>
+      <useNLPSpecific>documentClassification</useNLPSpecific -->
+    </foreseenUseInfo>
+      <!-- ActualUseInfo>
+      <actualUse>humanUse</actualUse>
+    </ActualUseInfo>
+    <ActualUseInfo>
+      <actualUse>nlpApplications</actualUse>
+      <useNLPSpecific>machineTranslation</useNLPSpecific>
+      <useNLPSpecific>textGeneration</useNLPSpecific>
+      <useNLPSpecific>summarisation</useNLPSpecific>
+      <useNLPSpecific>informationRetrieval</useNLPSpecific>
+    </ActualUseInfo -->
+  </usageInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>wordList</lexicalConceptualResourceType>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+      
+                  <languageId>fin</languageId>
+                  <languageName>Finnish</languageName>
+               </languageInfo>
+                  <modalityInfo>
+                     <modalityType>writtenLanguage</modalityType>
+                  </modalityInfo>
+               <sizeInfo>
+                  <size>94000</size>
+      
+                  <sizeUnit>entries</sizeUnit>
+               </sizeInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>

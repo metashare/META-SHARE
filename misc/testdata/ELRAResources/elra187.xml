@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Slovenian SpeechDat(II) FDB-1000</resourceName>
-<resourceName lang="French">Base de données SpeechDat(II) FDB-1000 du slovène</resourceName>
-<description lang="English">The Slovenian SpeechDat(II) FDB-1000 database contains the recordings of 1,000 Slovenian speakers (500 males and 500 females) from different dialect regions of Slovenia, recorded over the Slovenian fixed telephone network.The database is partitioned into CD-ROMs. Speech samples are stored as sequences of 8 bits 8 kHz A-law, and the data are stored in a SAM file format.It was validated and accepted according to the SpeechDat(II) database exchange format.Each speaker uttered the following items:    * Isolated and connected digits    * Natural numbers    * Money amounts    * Spelled words    * Time and date phrases    * Yes/no questions    * City names    * Common application words    * Application words in phrases    * Phonetically rich sentencesA phonetic lexicon with canonical transcriptions in SAMPA is also provided.</description>
-<description lang="French">La base de données SpeechDat(II) FDB-1000 du slovène comprend de la parole lue et spontanée, enregistrée au moyen d'une carte ISDN. La base a été réalisée selon les spécifications du projet SpeechDat(II). Le corpus comprend environ 1000 locuteurs (environ 500 hommes et 500 femmes) enregistrés à travers le réseau fixe slovène. Tous les locuteurs ont pour langue maternelle le slovène (tous les accents régionaux de Slovénie sont représentés).Chaque locuteur a prononcé les éléments suivants :    * chiffres isolés et connectés,    * nombres entiers naturels,    * montants,    * mots épelés,    * dates et phrases comportant une notion de temps,    * oui/non,    * noms de villes,    * mots de commande courants    * mots de commandes inclus dans des phrases,    * phrases phonétiquement riches.Les fichiers de parole sont stockés en séquences d'échantillons de 8 bits, 8 kHz, loi-A. Les données sont stockées au format de fichier SAM (CD-ROM). Un lexique phonétique comprenant les transcriptions canoniques en SAMPA est également fourni.</description>
-<resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=188</url>
-<identifier>ELRA-S0056</identifier>
+<resourceName lang="English">FASiL Portuguese unimodal “fasil-pt” corpus</resourceName>
+<resourceName lang="French">Corpus unimodal portugais FASiL “fasil-pt”</resourceName>
+<description lang="English">The corpus was collected in the context of the FASiL project, EU FP5 IST-2001-38685 (http://www.fasil.co.uk), as a wizard-of-oz experiment. Therefore, there are sound recordings of subject and wizard. A total of 70 subjects were recorded. The corpus is formatted as .wav files (u-law) for audio, plain ASCII text (.txt) for transcriptions, and a masterfile which binds .txt and .wav together. The masterfile is a “lattice” of the ineraction in time, and contains the exact order of the interaction plus timings. The masterfile is loosely related to the HTK-SLF lattice format.The woz experiment is about the voice interaction with a Virtual Personal Assistent (VPA) for an email, calender and contacts task. Hesitations are marked as “UH”, noise as “NOISE” and other irrelevant stuff as “IRRELEVANT”. All annotations are in lower case, except for the former mentioned cases.Exact documentation of experiment in FASiL deliverable D.2.2The interactions contain mostly sentences but also spelled names, email addresses, telephone numbers, yes/no questions.S0174-01, S0174-03, S0174-04, and S0174-05.</description>
+<description lang="French">Ce corpus a été collecté dans le cadre du projet FASiL, EU FP5 IST-2001-38685 (http://www.fasil.co.uk), pour une expérience en magicien d’oz. Ainsi, il comprend les enregistrements des sujets et du magicien pour un total de 70 sujets. Le corpus est formaté en fichiers .wav (u-law) pour la partie audio, ASCII pour la partie transcriptions (.txt), et un fichier maître relie les .txt et les .wav. Le fichier maître est une sorte de réseau d’interaction temporelle qui contient l’ordre exact des interactions et des mesures de temps. Le fichier maître correspond approximativement au format de réseau HTK-SLF.L’expérience magicien d’oz tient dans l’interaction orale avec un « assistant personnel virtuel » (Virtual Personal Assistent (VPA)) dans une tâche d’email, de gestion de calendrier et de contacts. Les hésitations sont marquées par la balise “UH”, le bruit par la balise “NOISE” et les autres éléments non pertinents par la balise “IRRELEVANT”. Toutes les annotations sont en minuscules, excepté les balises précédemment citées.Une documentation précise de l’expérience est présentée dans le livrable FASiL D.2.2.Les interactions comprennent principalement des phrases mais également des noms épelés, des adresses email, des numéros de téléphone, des questions fermées.</description>
+<resourceShortName>fasil-pt</resourceShortName>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=703</url>
+<identifier>ELRA-S0174_02</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,37 +29,31 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<lastDateUpdated>2007-02-22</lastDateUpdated>
+<lastDateUpdated>2005-04-08</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 20000.00€</price>
-<price>Academic org. ELRA Non Member: 20000.00€</price>
-<price>Commercial org. ELRA Member: 14000.00€</price>
-<price>Academic org. ELRA Member: 14000.00€</price>
+<price>Commercial org. ELRA Non Member: 10000.00€</price>
+<price>Academic org. ELRA Non Member: 8000.00€</price>
+<price>Commercial org. ELRA Member: 8000.00€</price>
+<price>Academic org. ELRA Member: 4000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1998-07-08</availabilityStartDate>
+<availabilityStartDate>2005-04-07</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 20000.00€</price>
-<price>Academic org. ELRA Non Member: 20000.00€</price>
-<price>Commercial org. ELRA Member: 14000.00€</price>
-<price>Academic org. ELRA Member: 14000.00€</price>
+<price>Commercial org. ELRA Non Member: 10000.00€</price>
+<price>Academic org. ELRA Non Member: 10000.00€</price>
+<price>Commercial org. ELRA Member: 8000.00€</price>
+<price>Academic org. ELRA Member: 8000.00€</price>
 <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>1998-07-08</availabilityStartDate>
+<availabilityStartDate>2005-04-07</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>
-<resourceCreationInfo>
-<fundingProject>
-<projectName>SpeechDat(II)</projectName>
-<fundingType>euFunds</fundingType>
-</fundingProject>
-</resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
@@ -70,8 +64,8 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
-<languageId>slv</languageId>
-<languageName>Slovenian</languageName>
+<languageId>por</languageId>
+<languageName>Portuguese</languageName>
 </languageInfo>
 </corpusAudioInfo>
 </corpusMediaType>
