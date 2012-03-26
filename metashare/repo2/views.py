@@ -61,8 +61,8 @@ def _convert_to_template_tuples(element_tree):
         return ((element_tree.tag, element_tree.text),)
 
 
-# The following dictionary keeps info about licence document (as relative file system path)
-# and if a licence is required an explicit signature or not (second value of the array)
+# a dictionary holding a URL for each download licence and a boolean marking
+# whether the licence requires an hard-copy signature or not
 LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
   'AGPL': (MEDIA_URL + 'licences/GNU_agpl-3.0.htm', False),
   'LGPL': (MEDIA_URL + 'licences/GNU_lgpl-2.0.htm', False),
