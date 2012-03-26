@@ -2,8 +2,8 @@ from django.test.testcases import TestCase
 from metashare import test_utils
 from metashare.settings import ROOT_PATH
 from metashare.repo2.models import resourceInfoType_model
-from metashare.repo2.editor.resource_editor import change_resource_status,\
-    publish_resources, ingest_resources, unpublish_resources
+from metashare.repo2.editor.resource_editor import publish_resources, \
+    ingest_resources, unpublish_resources
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL
 
 class StatusWorkflowTest(TestCase):
