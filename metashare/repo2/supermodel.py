@@ -12,7 +12,8 @@ from django.db import models, IntegrityError
 from traceback import format_exc
 from xml.etree.ElementTree import Element, fromstring, tostring
 
-from metashare.repo2.fields import MultiSelectField, MultiTextField
+from metashare.repo2.fields import MultiSelectField, MultiTextField, \
+  MetaBooleanField
 
 from metashare.settings import LOG_LEVEL, LOG_HANDLER
 from django.db.models.fields.related import ForeignRelatedObjectsDescriptor
@@ -27,6 +28,9 @@ OPTIONAL = 2
 RECOMMENDED = 3
 
 XML_DECL = re.compile(r'\s*<\?xml version=".+" encoding=".+"\?>\s*\n?',
+  re.I|re.S|re.U)
+
+METASHARE_ID_REGEXP = re.compile('<metashareId>.+</metashareId>',
   re.I|re.S|re.U)
 
 # pylint: disable-msg=W0611
@@ -252,31 +256,48 @@ class SchemaModel(models.Model):
         if field is None:
             return value
 
-        if len(field.choices) > 0:
-            for _db_value, _readable_value in field.choices:
-                if _readable_value == value:
-                    return _db_value
+        result = value
 
-            LOGGER.warning(u'Value {0} not found in choices for {1}'.format(
-              repr(value), field.name))
+        # Handle fields with choices as we need to convert the current value
+        # to the database representation value of the respective choice.
+        if len(field.choices) > 0:
+            # MetaBooleanField instances are a special case: here, we need to
+            # return either 'Yes' or 'No', depending on the given value.
+            if isinstance(field, MetaBooleanField):
+                if value.strip().lower() in ('true', 'yes', '1'):
+                    result = 'Yes'
+
+                elif value.strip().lower() in ('false', 'no', '0'):
+                    result = 'No'
+                
+                LOGGER.error(u'Value {} not a valid MetaBooleanField ' \
+                  'choice for {}'.format(repr(value), field.name))
+
+            else:
+                for _db_value, _readable_value in field.choices:
+                    if _readable_value == value:
+                        result = _db_value
+
+                LOGGER.error(u'Value {} not found in choices for {}'.format(
+                  repr(value), field.name))
 
         elif isinstance(field, models.BooleanField) \
           or isinstance(field, models.NullBooleanField):
             if value.strip().lower() == 'true':
-                return True
+                result = True
 
             elif value.strip().lower() == 'false':
-                return False
+                result = False
 
-            LOGGER.warning(u'Value {0} not a valid Boolean for {1}'.format(
+            LOGGER.error(u'Value {} not a valid Boolean for {}'.format(
               repr(value), field.name))
 
         elif isinstance(field, models.TextField) \
           or isinstance(field, MultiTextField):
             if value is None:
-                return ''
+                result = ''
 
-        return value
+        return result
 
     def export_to_elementtree(self):
         """
@@ -334,6 +355,10 @@ class SchemaModel(models.Model):
                 # For ManyToManyFields, compute all related objects.
                 if isinstance(_value, models.Manager):
                     _value = _value.all()
+
+                # For MetaBooleanFields, we actually need the database value.
+                elif isinstance(_value, MetaBooleanField):
+                    _value = getattr(self, _model_field, None)
 
                 # If the value is not yet of list type, we wrap it in a list.
                 elif not isinstance(_value, list):
@@ -417,21 +442,13 @@ class SchemaModel(models.Model):
         """
         Checks if the given _object is a redundant copy of another object.
 
-        If so, _object is deleted; returns a tuple containing a reference to
-        the "master" version of _object and a Boolean which is True if the
-        object was a duplicate, False otherwise.
+        Returns a list containing all existing objects that are equal to the
+        given _object instance, sorted by primary key 'id'.
 
-        The "master" version of an object is defined as the object instance
-        with the smallest primary key 'id'.
         """
         _was_duplicate = False
+        _related_objects = []
 
-        # cfedermann: temporarily disabled duplicate check to allow importing
-        # of XML for the new v2.0 schema.  As OneToOne fields need special
-        # treatment, we simply ignore duplicate at this point in time...
-        return (_object, _was_duplicate)
-        # pylint: disable-msg=W0101
-        
         # We collect all value constraints in a dictionary.
         kwargs = {}
 
@@ -442,17 +459,20 @@ class SchemaModel(models.Model):
         _fields = [x[1] for x in cls.__schema_fields__]
         _fields.extend([x[1] for x in cls.__schema_attrs__])
 
-        # Sort field names so that _set fields come first.
-        _fields.sort(cmp=lambda x, y: -x.endswith('_set'))
-        if _fields[0].endswith('_set'):
-            LOGGER.debug(u'Object {0} contains OneToMany fields!'.format(
-              _object))
-            return (_object, False)
+        # Ensure that "back_to_" pointers are available for checking.
+        for _field in cls._meta.fields:
+            if isinstance(_field, related.ForeignKey):
+                if _field.name.startswith('back_to_') and \
+                  not _field.name in _fields:
+                    _fields.append(_field.name)
 
         # We iterate over all model fields of the current _object.
         for field_name in _fields:
+            # OneToMany fields need to be handled later, hence we add these to
+            # our _related_objects list and continue with the loop.
             if field_name.endswith('_set'):
-                LOGGER.debug(u'Skipping field set "{0}"'.format(field_name))
+                _related_objects.append(field_name)
+                LOGGER.debug(u'Skipping OneToMany "{}"'.format(field_name))
                 continue
 
             # Retrieve the model field value using getattr().  This is enough
@@ -472,6 +492,22 @@ class SchemaModel(models.Model):
                 if not len(_value):
                     _value = None
 
+            # Finally, OneToOneField instances have to be checked as related
+            # objects and hence need to be put into _related_objects.
+            elif isinstance(_field, related.OneToOneField):
+                LOGGER.debug(u'Skipping OneToOne "{}"'.format(field_name))
+                _related_objects.append(field_name)
+                continue
+
+            # For ForeignKey instances, we have to check their name first.
+            # "back_to_" fields need to be put into _related_objects, while
+            # "normal" ForeignKey fields can be checked with our QuerySet.
+            elif isinstance(_field, related.ForeignKey):
+                if field_name.startswith('back_to_'):
+                    LOGGER.debug(u'Skipping back_to "{}"'.format(field_name))
+                    _related_objects.append(field_name)
+                    continue
+
             # If the field value is not None or the field allows None as value
             # we set the current value as constraint in our kwargs dictionary.
             if _value is not None:
@@ -485,57 +521,85 @@ class SchemaModel(models.Model):
                 LOGGER.debug(u'Skipping {0}={1} ({2})'.format(field_name,
                   _value, type(_field)))
 
-            LOGGER.debug(u'Setting {0}={1} ({2})'.format(field_name,
-              repr(kwargs[field_name]), type(_field)))
-
         # Use **magic to create a constrained QuerySet from kwargs.
         query_set = cls.objects.filter(**kwargs)
 
-        # If more than one instance belongs to the QuerySet, we have actually
-        # found a duplicate instance in our database.
-        if len(query_set) > 1:
-            _duplicate_id = _object.id
+        LOGGER.debug('cls: {}'.format(cls))
+        LOGGER.debug('kwargs: {}'.format(kwargs))
 
-            # Delete the object we have just created as it is a duplicate.
-            # We can only delete the actual instance if it has already been
-            # saved to the database, so we check if _object.id is not None.
-            if _object.id:
-                _object.delete()
+        _duplicates = []
+        if query_set.count() > 1:
+            # We now know that there may exist at least one duplicate for the
+            # given _object;  we have to check the related objects to be sure.
 
-            # Instead, we will use the "oldest" instance with equal values.
-            query_set.order_by('+id')
-            _object = query_set[0]
+            # As the META-SHARE id is not yet defined for 
+            _msg = u'Ignoring META-SHARE id in _check_for_duplicates() as ' \
+              'it is not yet defined.'
+            LOGGER.warning(_msg)
+            
+            # Convert the current object into its serialised XML String and
+            # remove any META-SHARE related id from this String.
+            _obj_value = tostring(_object.export_to_elementtree())
+            _obj_value = METASHARE_ID_REGEXP.sub('', _obj_value)
 
-            LOGGER.error(u'Duplicate object: {0}->{1}'.format(_duplicate_id,
-              _object.id))
+            # Iterate over all potential duplicates, ordered by increasing id.
+            for _candidate in query_set.order_by('id'):
+                # Skip the current candidate if it is our _object itself.
+                if _candidate == _object:
+                    continue
 
-            # This code would delete ALL other duplicates; this can invalidate
-            # ForeignKey instances, so we do not use it at the moment.
-            #query_set.exclude(pk=_object.id)
-            #query_set.delete()
+                # Convert candidate into XML String and remove META-SHARE id.
+                _check = tostring(_candidate.export_to_elementtree())
+                _check = METASHARE_ID_REGEXP.sub('', _check)
 
-            # Finally, we indicate that this was actually a duplicate object.
-            _was_duplicate = True
+                # If both XML Strings are equal, we have found a duplicate!
+                if _obj_value == _check:
+                    _duplicates.append(_candidate)
 
-        return (_object, _was_duplicate)
+            LOGGER.debug('FINAL _duplicates: {}'.format(_duplicates))
+
+        return _duplicates
 
     @staticmethod
-    def _cleanup(objects):
+    def _cleanup(objects, only_remove_duplicates=False):
         """
         Deletes all objects within the given objects list.
+
+        The objects list contains tuples (obj, status) where obj is a Django
+        object instance and status is in {'C', 'D', 'O'}.
+
+        * 'C' == 'Created':   The corresponding object has just been created.
+
+        * 'D' == 'Duplicate': The corresponding object is a duplicate.
+
+        * 'O' == 'Original':  The corresponding object pre-existed in the DB.
+
+        If only_remove_duplicates=True, only object instances with status='D'
+        will be deleted while other instances are kept.
+        
+        Returns a list containing all instances which have not been deleted.
+
         """
-        for obj in objects:
-            LOGGER.debug(u'Deleting object {0}'.format(obj))
+        _objects = []
+        for (obj, status) in objects:
+            if only_remove_duplicates and status != 'D':
+                LOGGER.critical(u'Keeping object {} ({})'.format(obj, status))
+                _objects.append((obj, status))
+                continue
+
             if obj.id:
                 try:
+                    LOGGER.critical(u'Deleting object {0}'.format(obj))
                     obj.delete()
 
                 except ObjectDoesNotExist:
                     continue
+        
+        return _objects
 
     # pylint: disable-msg=R0911
     @classmethod
-    def import_from_elementtree(cls, element_tree, parent=None):
+    def import_from_elementtree(cls, element_tree, cleanup=True, parent=None):
         """
         Imports the given XML ElementTree into an instance of type cls.
 
@@ -571,7 +635,7 @@ class SchemaModel(models.Model):
             _foreign_key_name = 'back_to_{0}'.format(_class_name)
 
             try:
-                LOGGER.info(u'Setting schema parent {0}={1}'.format(
+                LOGGER.debug(u'Setting schema parent {0}={1}'.format(
                   _foreign_key_name, parent))
 
                 _ = _object._meta.get_field_by_name(_foreign_key_name)[0]
@@ -720,14 +784,20 @@ class SchemaModel(models.Model):
 
                     # If the current field is NOT a OneToOne field, we have to
                     # check for duplicates after creating of the sub object!
-                    if isinstance(_field, related.OneToOneField):
-                        LOGGER.debug(u'\nDO NOT CALL DUPLICATE CHECK!\n')
+                    
+                    # The initial assumption is that duplicate objects should
+                    # be deleted immediately;  this does not hold for OneToOne
+                    # and OneToMany fields (where _parent is not None), only.
+                    _delete_duplicate_objects = True
+                    
+                    if isinstance(_field, related.OneToOneField) or _parent:
+                        _delete_duplicate_objects = False
 
                     # Try to import the sub element from the current value.
                     LOGGER.debug(u'Trying to import sub object {0}'.format(
                       _value.tag))
                     _sub_result = _sub_cls.import_from_elementtree(_value,
-                      _parent)
+                      cleanup=_delete_duplicate_objects, parent=_parent)
 
                     _sub_object = _sub_result[0]
                     _sub_created = _sub_result[1]
@@ -749,16 +819,6 @@ class SchemaModel(models.Model):
                     # the list of _created objects for this import operation.
                     else:
                         _created.extend(_sub_created)
-
-                    # This block seems to be redundant as this should already
-                    # have been done by _sub_cls.import_from_xml(_value).
-                    #try:
-                    #    _sub_object.save()
-                    #    _created.append(_sub_object)
-                    #
-                    #except IntegrityError:
-                    #    SchemaModel._cleanup(_created)
-                    #    return (None, [])
 
                     _values.append(_sub_object)
 
@@ -823,9 +883,6 @@ class SchemaModel(models.Model):
             # ForeignKey fields, this can be handled using setattr().
             elif _field is not None:
                 try:
-                    # TODO: check why licenseInfo/price values end up here?
-                    #       Shouldn't they be handled by the MultiTextField?!
-                    #
                     # assert(len(_values) == 1)
                     setattr(_object, _model_field, _values[0])
 
@@ -843,16 +900,30 @@ class SchemaModel(models.Model):
             _object.full_clean()
             _object.save()
 
-            # Only check for duplicates if the current class has no parent!
-            _was_duplicate = False
-            if not cls.__schema_parent__:
-                _object, _was_duplicate = cls._check_for_duplicates(_object)
+            # Check if the current _object instance is a duplicate.
+            _duplicates = cls._check_for_duplicates(_object)
+            _was_duplicate = len(_duplicates) > 0
 
-                LOGGER.debug(u'_object: {0}, _was_duplicate: {1}'.format(
-                  _object, _was_duplicate))
+            LOGGER.critical(u'_object: {0}, _was_duplicate: {1}, ' \
+              'cleanup: {2}'.format(_object, _was_duplicate, cleanup))
 
-            if not _was_duplicate:
-                _created.append(_object)
+            # Add current _object instance to the _created list with correct
+            # status: 'D' if it was a duplicate, 'C' otherwise.
+            if _was_duplicate:
+                _created.append((_object, 'D'))
+
+                # If we are allowed to perform cleanup, we do so and also
+                # replace our _object instance with the "original" object.
+                if cleanup:
+                    _created = SchemaModel._cleanup(_created,
+                      only_remove_duplicates=True)
+
+                    # Replace _object instance with "original" object.
+                    _object = _duplicates[0]
+                    _created.append((_object, 'O'))
+
+            else:
+                _created.append((_object, 'C'))
 
         except (IntegrityError, ValidationError) as _exc:
             detail = u''
@@ -903,7 +974,8 @@ class SchemaModel(models.Model):
 
         Returns (None, []) in case of errors.
         """
-        return cls.import_from_elementtree(fromstring(element_string), parent)
+        return cls.import_from_elementtree(fromstring(element_string),
+          parent=parent)
 
     def get_unicode(self, field_spec, separator):
         field_path = re.split(r'/', field_spec)
