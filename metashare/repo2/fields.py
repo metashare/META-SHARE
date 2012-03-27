@@ -56,10 +56,10 @@ class MetaBooleanField(models.NullBooleanField):
             # to return a true bool for semantic reasons.
             return bool(value)
 
-        if value in ('t', 'True', '1'):
+        if value in ('t', 'True', '1', 'Yes'):
             return True
 
-        if value in ('f', 'False', '0'):
+        if value in ('f', 'False', '0', 'No'):
             return False
 
         raise exceptions.ValidationError(self.error_messages['invalid'])
