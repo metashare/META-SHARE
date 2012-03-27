@@ -270,16 +270,18 @@ class SchemaModel(models.Model):
                 elif value.strip().lower() in ('false', 'no', '0'):
                     result = 'No'
                 
-                LOGGER.error(u'Value {} not a valid MetaBooleanField ' \
-                  'choice for {}'.format(repr(value), field.name))
+                else:
+                    LOGGER.error(u'Value {} not a valid MetaBooleanField ' \
+                      'choice for {}'.format(repr(value), field.name))
 
             else:
                 for _db_value, _readable_value in field.choices:
                     if _readable_value == value:
                         result = _db_value
 
-                LOGGER.error(u'Value {} not found in choices for {}'.format(
-                  repr(value), field.name))
+                if result == value:
+                    LOGGER.error(u'Value {} not found in choices for ' \
+                      '{}'.format(repr(value), field.name))
 
         elif isinstance(field, models.BooleanField) \
           or isinstance(field, models.NullBooleanField):
@@ -289,8 +291,9 @@ class SchemaModel(models.Model):
             elif value.strip().lower() == 'false':
                 result = False
 
-            LOGGER.error(u'Value {} not a valid Boolean for {}'.format(
-              repr(value), field.name))
+            else:
+                LOGGER.error(u'Value {} not a valid Boolean for {}'.format(
+                  repr(value), field.name))
 
         elif isinstance(field, models.TextField) \
           or isinstance(field, MultiTextField):
