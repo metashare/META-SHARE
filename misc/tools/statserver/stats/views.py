@@ -175,6 +175,7 @@ def browse(request):
     
     for node in traffic:
         hostname = str(node['hostname'])
+        host_labels.append(hostname)
         if (currdate):
             datestats = NodeStats.objects.values('hostname').filter(hostname=hostname, \
                 date=currdate).annotate(Sum('user'), Sum('lrview'), Sum('lrupdate'), \
@@ -187,7 +188,6 @@ def browse(request):
         if (not datestats):
             hosts[hostname] = [int(node['checked']), pretty_timeago(node['timestamp']), 0, 0, 0, 0, 0, 0, 0]
         else:
-            host_labels.append(hostname)
             hosts[hostname] = [int(node['checked']), pretty_timeago(node['timestamp']), \
                 int(datestats[0]["user__sum"]), int(datestats[0]["lrview__sum"]), int(datestats[0]["lrupdate__sum"]), \
                 int(datestats[0]["lrdown__sum"]), int(datestats[0]["queries__sum"]), \
