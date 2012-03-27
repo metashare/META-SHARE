@@ -519,9 +519,6 @@ class SchemaModel(models.Model):
                 LOGGER.debug(u'Skipping {0}={1} ({2})'.format(field_name,
                   _value, type(_field)))
 
-            LOGGER.debug(u'Setting {0}={1} ({2})'.format(field_name,
-              repr(kwargs[field_name]), type(_field)))
-
         # Use **magic to create a constrained QuerySet from kwargs.
         query_set = cls.objects.filter(**kwargs)
 
@@ -541,7 +538,7 @@ class SchemaModel(models.Model):
             # Convert the current object into its serialised XML String and
             # remove any META-SHARE related id from this String.
             _obj_value = tostring(_object.export_to_elementtree())
-            _obj_value = _metashare_id_regexp.sub('', _obj_value)
+            _obj_value = METASHARE_ID_REGEXP.sub('', _obj_value)
 
             # Iterate over all potential duplicates, ordered by increasing id.
             for _candidate in query_set.order_by('id'):
@@ -551,7 +548,7 @@ class SchemaModel(models.Model):
 
                 # Convert candidate into XML String and remove META-SHARE id.
                 _check = tostring(_candidate.export_to_elementtree())
-                _check = _metashare_id_regexp.sub('', _check)
+                _check = METASHARE_ID_REGEXP.sub('', _check)
 
                 # If both XML Strings are equal, we have found a duplicate!
                 if _obj_value == _check:
