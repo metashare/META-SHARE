@@ -270,16 +270,18 @@ class SchemaModel(models.Model):
                 elif value.strip().lower() in ('false', 'no', '0'):
                     result = 'No'
                 
-                LOGGER.error(u'Value {} not a valid MetaBooleanField ' \
-                  'choice for {}'.format(repr(value), field.name))
+                else:
+                    LOGGER.error(u'Value {} not a valid MetaBooleanField ' \
+                      'choice for {}'.format(repr(value), field.name))
 
             else:
                 for _db_value, _readable_value in field.choices:
                     if _readable_value == value:
                         result = _db_value
 
-                LOGGER.error(u'Value {} not found in choices for {}'.format(
-                  repr(value), field.name))
+                if result == value:
+                    LOGGER.error(u'Value {} not found in choices for ' \
+                      '{}'.format(repr(value), field.name))
 
         elif isinstance(field, models.BooleanField) \
           or isinstance(field, models.NullBooleanField):
@@ -289,8 +291,9 @@ class SchemaModel(models.Model):
             elif value.strip().lower() == 'false':
                 result = False
 
-            LOGGER.error(u'Value {} not a valid Boolean for {}'.format(
-              repr(value), field.name))
+            else:
+                LOGGER.error(u'Value {} not a valid Boolean for {}'.format(
+                  repr(value), field.name))
 
         elif isinstance(field, models.TextField) \
           or isinstance(field, MultiTextField):
@@ -583,13 +586,13 @@ class SchemaModel(models.Model):
         _objects = []
         for (obj, status) in objects:
             if only_remove_duplicates and status != 'D':
-                LOGGER.critical(u'Keeping object {} ({})'.format(obj, status))
+                LOGGER.debug(u'Keeping object {} ({})'.format(obj, status))
                 _objects.append((obj, status))
                 continue
 
             if obj.id:
                 try:
-                    LOGGER.critical(u'Deleting object {0}'.format(obj))
+                    LOGGER.debug(u'Deleting object {0}'.format(obj))
                     obj.delete()
 
                 except ObjectDoesNotExist:
@@ -904,7 +907,7 @@ class SchemaModel(models.Model):
             _duplicates = cls._check_for_duplicates(_object)
             _was_duplicate = len(_duplicates) > 0
 
-            LOGGER.critical(u'_object: {0}, _was_duplicate: {1}, ' \
+            LOGGER.debug(u'_object: {0}, _was_duplicate: {1}, ' \
               'cleanup: {2}'.format(_object, _was_duplicate, cleanup))
 
             # Add current _object instance to the _created list with correct
