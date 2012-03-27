@@ -256,6 +256,8 @@ class SchemaModel(models.Model):
         if field is None:
             return value
 
+        result = value
+
         # Handle fields with choices as we need to convert the current value
         # to the database representation value of the respective choice.
         if len(field.choices) > 0:
@@ -263,10 +265,10 @@ class SchemaModel(models.Model):
             # return either 'Yes' or 'No', depending on the given value.
             if isinstance(field, MetaBooleanField):
                 if value.strip().lower() in ('true', 'yes', '1'):
-                    return 'Yes'
+                    result = 'Yes'
 
                 elif value.strip().lower() in ('false', 'no', '0'):
-                    return 'No'
+                    result = 'No'
                 
                 LOGGER.error(u'Value {} not a valid MetaBooleanField ' \
                   'choice for {}'.format(repr(value), field.name))
@@ -274,7 +276,7 @@ class SchemaModel(models.Model):
             else:
                 for _db_value, _readable_value in field.choices:
                     if _readable_value == value:
-                        return _db_value
+                        result = _db_value
 
                 LOGGER.error(u'Value {} not found in choices for {}'.format(
                   repr(value), field.name))
@@ -282,10 +284,10 @@ class SchemaModel(models.Model):
         elif isinstance(field, models.BooleanField) \
           or isinstance(field, models.NullBooleanField):
             if value.strip().lower() == 'true':
-                return True
+                result = True
 
             elif value.strip().lower() == 'false':
-                return False
+                result = False
 
             LOGGER.error(u'Value {} not a valid Boolean for {}'.format(
               repr(value), field.name))
@@ -293,9 +295,9 @@ class SchemaModel(models.Model):
         elif isinstance(field, models.TextField) \
           or isinstance(field, MultiTextField):
             if value is None:
-                return ''
+                result = ''
 
-        return value
+        return result
 
     def export_to_elementtree(self):
         """
@@ -881,9 +883,6 @@ class SchemaModel(models.Model):
             # ForeignKey fields, this can be handled using setattr().
             elif _field is not None:
                 try:
-                    # TODO: check why licenseInfo/price values end up here?
-                    #       Shouldn't they be handled by the MultiTextField?!
-                    #
                     # assert(len(_values) == 1)
                     setattr(_object, _model_field, _values[0])
 
