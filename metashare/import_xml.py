@@ -59,5 +59,8 @@ if __name__ == "__main__":
     if len(erroneous_imports) > 0:
         print "The following files could not be imported:"
         for descriptor, exception in erroneous_imports:
-            print "\t{}: {}".format(descriptor, ' '.join(exception.args))
+            if isinstance(exception.args, basestring):
+                print "\t{}: {}".format(descriptor, ' '.join(exception.args))
+            else:
+                print "\t{}: {}".format(descriptor, exception.args)
       
