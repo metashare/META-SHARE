@@ -72,6 +72,7 @@ class StatsTest(django.test.TestCase):
         """
         client = Client()
         response = client.get('/{0}stats/get'.format(DJANGO_BASE))
-        self.assertEquals(200, response.code)
+        # cfedermann: Django's test Client does not use .code but .status_code!
+        self.assertEquals(200, response.status_code)
             
 
