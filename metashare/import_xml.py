@@ -39,6 +39,10 @@ if __name__ == "__main__":
           "zip> ...]\n".format(sys.argv[0])
         sys.exit(-1)
     
+    # Check that SOLR is running, or else all resources will stay at status INTERNAL:
+    from metashare.repo2 import verify_at_startup
+    verify_at_startup() # may raise Exception, which we don't want to catch.
+
     # Disable verbose debug output for the import process...
     settings.DEBUG = False
     

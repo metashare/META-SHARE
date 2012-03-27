@@ -31,6 +31,9 @@ class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
     text = CharField(document=True, use_template=True, stored=False)
     
     resourceNameSort = CharField(indexed=True, faceted=True)
+    resourceTypeSort = CharField(indexed=True, faceted=True)
+    mediaTypeSort = CharField(indexed=True, faceted=True)
+    languageNameSort = CharField(indexed=True, faceted=True)
 
     # whether the resource has been published or not; used only to filter what
     # a searching user may see
@@ -179,10 +182,68 @@ class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
     def prepare_resourceNameSort(self, obj):
         import re
 
-        resourceNameSort = re.sub('[\W_]', '', obj.identificationInfo.resourceName[0])
+        # get the Resource Name
+        resourceNameSort = obj.identificationInfo.resourceName[0]
+        # keep alphanumeric characters only
+        resourceNameSort = re.sub('[\W_]', '', resourceNameSort)
+        # set Resource Name to lower case
         resourceNameSort = resourceNameSort.lower()
         
         return resourceNameSort
+
+    def prepare_resourceTypeSort(self, obj):
+        import re
+
+        # get the list of Resource Types
+        resourceTypeSort = self.prepare_resourceTypeFilter(obj)
+        # render unique list of Resource Types
+        resourceTypeSort = list(set(resourceTypeSort))
+        # sort Resource Types
+        resourceTypeSort.sort()
+        # join Resource Types into a string
+        resourceTypeSort = ",".join(resourceTypeSort)
+        # keep alphanumeric characters only
+        resourceTypeSort = re.sub('[\W_]', '', resourceTypeSort)
+        # set list of Resource Types to lower case
+        resourceTypeSort = resourceTypeSort.lower()
+        
+        return resourceTypeSort
+
+    def prepare_mediaTypeSort(self, obj):
+        import re
+
+        # get the list of Media Types
+        mediaTypeSort = self.prepare_mediaTypeFilter(obj)
+        # render unique list of Media Types
+        mediaTypeSort = list(set(mediaTypeSort))
+        # sort Media Types
+        mediaTypeSort.sort()
+        # join Media Types into a string
+        mediaTypeSort = ",".join(mediaTypeSort)
+        # keep alphanumeric characters only
+        mediaTypeSort = re.sub('[\W_]', '', mediaTypeSort)
+        # set list of Media Types to lower case
+        mediaTypeSort = mediaTypeSort.lower()
+        
+        return mediaTypeSort
+
+    def prepare_languageNameSort(self, obj):
+        import re
+
+        # get the list of languages
+        languageNameSort = self.prepare_languageNameFilter(obj)
+        # render unique list of languages
+        languageNameSort = list(set(languageNameSort))
+        # sort languages
+        languageNameSort.sort()
+        # join languages into a string
+        languageNameSort = ",".join(languageNameSort)
+        # keep alphanumeric characters only
+        languageNameSort = re.sub('[\W_]', '', languageNameSort)
+        # set list of languages to lower case
+        languageNameSort = languageNameSort.lower()
+        
+        return languageNameSort
 
     def prepare_published(self, obj):
         return obj.storage_object and obj.storage_object.published
