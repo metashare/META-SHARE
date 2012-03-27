@@ -586,13 +586,13 @@ class SchemaModel(models.Model):
         _objects = []
         for (obj, status) in objects:
             if only_remove_duplicates and status != 'D':
-                LOGGER.critical(u'Keeping object {} ({})'.format(obj, status))
+                LOGGER.debug(u'Keeping object {} ({})'.format(obj, status))
                 _objects.append((obj, status))
                 continue
 
             if obj.id:
                 try:
-                    LOGGER.critical(u'Deleting object {0}'.format(obj))
+                    LOGGER.debug(u'Deleting object {0}'.format(obj))
                     obj.delete()
 
                 except ObjectDoesNotExist:
@@ -907,7 +907,7 @@ class SchemaModel(models.Model):
             _duplicates = cls._check_for_duplicates(_object)
             _was_duplicate = len(_duplicates) > 0
 
-            LOGGER.critical(u'_object: {0}, _was_duplicate: {1}, ' \
+            LOGGER.debug(u'_object: {0}, _was_duplicate: {1}, ' \
               'cleanup: {2}'.format(_object, _was_duplicate, cleanup))
 
             # Add current _object instance to the _created list with correct
