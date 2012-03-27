@@ -1,6 +1,6 @@
 # Create your views here.
 from django.http import HttpResponse
-from django.db.models import Count, Sum
+from django.db.models import Sum
 from django.shortcuts import render_to_response      
 from statserver.stats.models import Node, NodeStats
 from statserver.settings import CHECKINGTIME, MEDIA_URL
@@ -142,7 +142,7 @@ def checknodes():
     for node in nodes:
         updateNodeStats(node, date.today())  
     thread = Timer(CHECKINGTIME, checknodes)
-    thread.start()
+    thread.start() 
      
 thread = Timer(CHECKINGTIME, checknodes)
 thread.start()
@@ -172,32 +172,35 @@ def browse(request):
     
     days = NodeStats.objects.values('date').order_by('-date').distinct('date')
     traffic = Node.objects.values('hostname', 'checked', 'timestamp').distinct('hostname')
-    upnodes = 0
     
     for node in traffic:
-        host_labels.append(str(node['hostname']))
-        if (currdate):
-            datestats = NodeStats.objects.filter(hostname=node['hostname'], date=currdate)
-        else:
-            datestats = NodeStats.objects.filter(hostname=node['hostname']).annotate(Count('hostname'))
         hostname = str(node['hostname'])
+        if (currdate):
+            datestats = NodeStats.objects.values('hostname').filter(hostname=hostname, \
+                date=currdate).annotate(Sum('user'), Sum('lrview'), Sum('lrupdate'), \
+                Sum('lrdown'), Sum('queries'), Sum('qexec_time_avg'), Sum('qlt_avg'))
+        else:
+            datestats = NodeStats.objects.values('hostname').filter(hostname=hostname).annotate(Sum('user'), \
+                Sum('lrview'), Sum('lrupdate'), Sum('lrdown'), Sum('queries'), \
+                Sum('qexec_time_avg'), Sum('qlt_avg'))
+                
         if (not datestats):
             hosts[hostname] = [int(node['checked']), pretty_timeago(node['timestamp']), 0, 0, 0, 0, 0, 0, 0]
         else:
-            upnodes += 1
+            host_labels.append(hostname)
             hosts[hostname] = [int(node['checked']), pretty_timeago(node['timestamp']), \
-                int(datestats[0].user), int(datestats[0].lrview), int(datestats[0].lrupdate), \
-                int(datestats[0].lrdown), int(datestats[0].queries), \
-                "%0.0f" % int(datestats[0].qexec_time_avg/1000), int(datestats[0].qlt_avg)]
-            total_counter[0] += int(datestats[0].user)
-            total_counter[1] += int(datestats[0].lrview)
-            total_counter[2] += int(datestats[0].lrupdate)
-            total_counter[3] += int(datestats[0].lrdown)
-            total_counter[4] += int(datestats[0].queries)
-            total_counter[5] += int(datestats[0].qexec_time_avg/1000)
-            total_counter[6] += int(datestats[0].qlt_avg)
+                int(datestats[0]["user__sum"]), int(datestats[0]["lrview__sum"]), int(datestats[0]["lrupdate__sum"]), \
+                int(datestats[0]["lrdown__sum"]), int(datestats[0]["queries__sum"]), \
+                "%0.0f" % int(datestats[0]["qexec_time_avg__sum"]/1000), int(datestats[0]["qlt_avg__sum"])]
+            total_counter[0] += int(datestats[0]["user__sum"])
+            total_counter[1] += int(datestats[0]["lrview__sum"])
+            total_counter[2] += int(datestats[0]["lrupdate__sum"])
+            total_counter[3] += int(datestats[0]["lrdown__sum"])
+            total_counter[4] += int(datestats[0]["queries__sum"])
+            total_counter[5] += int(datestats[0]["qexec_time_avg__sum"]/1000)
+            total_counter[6] += int(datestats[0]["qlt_avg__sum"])
     if (total_counter[5] > 0):
-        total_counter[5] = "%0.0f" % (total_counter[5] / upnodes)
+        total_counter[5] = "%0.0f" % (total_counter[5] / len(host_labels))
                    
             
 
@@ -237,7 +240,6 @@ def pretty_timeago(time=False):
     pretty string like 'an hour ago', 'Yesterday', '3 months ago',
     'just now', etc
     """
-    from datetime import datetime
     now = datetime.now()
     if type(time) is int:
         diff = now - datetime.fromtimestamp(time)
