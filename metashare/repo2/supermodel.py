@@ -6,7 +6,8 @@ import logging
 import re
 
 from django.core.cache import cache
-from django.core.exceptions import ValidationError, ObjectDoesNotExist
+from django.core.exceptions import ValidationError, ObjectDoesNotExist, \
+  ImproperlyConfigured
 from django.db.models.fields import related
 from django.db import models, IntegrityError
 from traceback import format_exc
@@ -23,6 +24,14 @@ from django.db.models.fields.related import ForeignRelatedObjectsDescriptor
 logging.basicConfig(level=LOG_LEVEL)
 LOGGER = logging.getLogger('metashare.repo2.supermodel')
 LOGGER.addHandler(LOG_HANDLER)
+
+# cfedermann: this prevents a bug with PostgreSQL databases and Django 1.3
+try:
+    from django.db.backends.postgresql_psycopg2.base import DatabaseFeatures
+    DatabaseFeatures.can_return_id_from_insert = True
+
+except ImproperlyConfigured:
+    pass
 
 REQUIRED = 1
 OPTIONAL = 2
@@ -531,7 +540,7 @@ class SchemaModel(models.Model):
                   _value, type(_field)))
 
         # Use **magic to create a constrained QuerySet from kwargs.
-        query_set = cls.objects.filter(**kwargs)
+        query_set = cls.objects.filter(**kwargs).order_by('id')
 
         _duplicates = []
         if query_set.count() > 1:
@@ -551,7 +560,7 @@ class SchemaModel(models.Model):
                 OBJECT_XML_CACHE[cache_key] = _obj_value
 
             # Iterate over all potential duplicates, ordered by increasing id.
-            for _candidate in query_set.order_by('id'):
+            for _candidate in query_set.iterator():
                 # Skip the current candidate if it is our _object itself.
                 if _candidate == _object:
                     continue
