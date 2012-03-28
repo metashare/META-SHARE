@@ -1,7 +1,6 @@
 from metashare import test_utils
 from metashare.settings import DJANGO_BASE, ROOT_PATH
 from metashare.repo2.models import resourceInfoType_model
-from metashare.xml_utils import import_from_file
 from haystack.query import SearchQuerySet
 from django.contrib.auth.models import User
 from django.test.client import Client
@@ -124,6 +123,7 @@ class SearchTest(test_utils.IndexAwareTestCase):
         staffuser.is_staff = True
         staffuser.save()
         normaluser =  User.objects.create_user('normaluser', 'normal@example.com', 'secret')
+        normaluser.save()
 
     def tearDown(self):
         """
@@ -133,14 +133,14 @@ class SearchTest(test_utils.IndexAwareTestCase):
                 
     def importOneFixture(self):
         _currfile = '{}/repo2/fixtures/testfixture.xml'.format(ROOT_PATH)
-        successes, failures = test_utils.import_xml_or_zip(_currfile)
+        test_utils.import_xml_or_zip(_currfile)
         
     def importPublishedFixtures(self):
         _path = '{}/repo2/test_fixtures/pub/'.format(ROOT_PATH)
         files = os.listdir(_path)   
         for filename in files:
             fullpath = os.path.join(_path, filename)  
-            successes, failures = test_utils.import_xml_or_zip(fullpath)
+            test_utils.import_xml_or_zip(fullpath)
          
     def importIngestedFixtures(self):
         _path = '{}/repo2/test_fixtures/ingested/'.format(ROOT_PATH)
@@ -151,17 +151,17 @@ class SearchTest(test_utils.IndexAwareTestCase):
             if successes:                
                 successes[0].storage_object.publication_status = 'g'
                 successes[0].storage_object.save()    
-    '''            
-    def importInternalFixtures(self):
-        _path = '{}/repo2/test_fixtures/internal/'.format(ROOT_PATH)
-        files = os.listdir(_path)   
-        for filename in files:
-            fullpath = os.path.join(_path, filename)  
-            successes, failures = test_utils.import_xml_or_zip(fullpath)
-            if successes:                
-                successes[0].storage_object.publication_status = 'i'
-                successes[0].storage_object.save()   
-    '''
+                
+    #def importInternalFixtures(self):
+     #   _path = '{}/repo2/test_fixtures/internal/'.format(ROOT_PATH)
+     #   files = os.listdir(_path)   
+     #   for filename in files:
+     #       fullpath = os.path.join(_path, filename)  
+     #       test_utils.import_xml_or_zip(fullpath)
+     #       if successes:                
+     #           successes[0].storage_object.publication_status = 'i'
+     #           successes[0].storage_object.save()   
+    
                 
     
     def testBrowse(self):  
@@ -232,16 +232,16 @@ class SearchTest(test_utils.IndexAwareTestCase):
         self.assertEqual('repo2/search.html', response.templates[0].name)
         self.assertContains(response, "2 Language Resources", status_code=200)
     
-    '''
-    def testLicenceFacetForTwoLicences(self):   
-        client = Client()
-        self.importPublishedFixtures()
-        response = client.get('/{0}repo2/search2/'.format(DJANGO_BASE), follow=True, 
-          data={'selected_facets':'licenceFilter_exact:ELRA_END_USER', 'selected_facets':'licenceFilter_exact:ELRA_VAR'})
-        self.assertEqual('repo2/search.html', response.templates[0].name)
-        print response
-        self.assertContains(response, "1 Language Resource", status_code=200)
-    '''
+    
+    #def testLicenceFacetForTwoLicences(self):   
+     #   client = Client()
+     #   self.importPublishedFixtures()
+     #   response = client.get('/{0}repo2/search2/'.format(DJANGO_BASE), follow=True, 
+     #     data={'selected_facets':'licenceFilter_exact:ELRA_END_USER', 'selected_facets':'licenceFilter_exact:ELRA_VAR'})
+     #   self.assertEqual('repo2/search.html', response.templates[0].name)
+     #   print response
+     #   self.assertContains(response, "1 Language Resource", status_code=200)
+    
     
     def testRestrictionsOfUseFacet(self):   
         client = Client()
@@ -350,7 +350,7 @@ class SearchTest(test_utils.IndexAwareTestCase):
           data={'q':'INGESTED'})
         self.assertEqual('repo2/search.html', response.templates[0].name)
         self.assertContains(response, "No results were found for search query", status_code=200)
-        
+           
     def test_anonymous_doesnt_sees_ingested_LR(self):
         client = Client()
         self.importIngestedFixtures()
