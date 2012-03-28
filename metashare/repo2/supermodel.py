@@ -540,7 +540,8 @@ class SchemaModel(models.Model):
             
             # Convert the current object into its serialised XML String and
             # remove any META-SHARE related id from this String.
-            cache_key = '{}_{}'.format(str(type(_object)).lower(), _object.id)
+            cache_key = '{}_{}'.format(type(_object).__name__.lower(),
+              _object.id)
             if OBJECT_XML_CACHE.has_key(cache_key):
                 _obj_value = OBJECT_XML_CACHE[cache_key]
             
@@ -556,7 +557,7 @@ class SchemaModel(models.Model):
                     continue
 
                 # Convert candidate into XML String and remove META-SHARE id.
-                cache_key = '{}_{}'.format(str(type(_candidate)).lower(),
+                cache_key = '{}_{}'.format(type(_candidate).__name__.lower(),
                   _candidate.id)
                 if OBJECT_XML_CACHE.has_key(cache_key):
                     _check = OBJECT_XML_CACHE[cache_key]
@@ -604,7 +605,8 @@ class SchemaModel(models.Model):
                     LOGGER.debug(u'Deleting object {0}'.format(obj))
                     obj.delete()
                     
-                    cache_key = '{}_{}'.format(str(type(obj)).lower(), obj.id)
+                    cache_key = '{}_{}'.format(type(obj).__name__.lower(),
+                      obj.id)
                     if OBJECT_XML_CACHE.has_key(cache_key):
                         OBJECT_XML_CACHE.pop(cache_key)
 

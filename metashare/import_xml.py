@@ -67,5 +67,6 @@ if __name__ == "__main__":
                 print "\t{}: {}".format(descriptor, exception.args)
     
     # Be nice and cleanup cache...
+    _cache_size = sum([len(x) for x in OBJECT_XML_CACHE.values()])
     OBJECT_XML_CACHE.clear()
-
+    print "Cleared OBJECT_XML_CACHE ({} bytes)".format(_cache_size)
