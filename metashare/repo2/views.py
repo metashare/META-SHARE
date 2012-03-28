@@ -306,8 +306,12 @@ def view(request, object_id=None):
 
         context['LR_DOWNLOAD'] = ""
         try:
-            if resource.storage_object.has_download() \
-                    or _get_download_licences(object_id):
+            # only show the download button if the resource has a local download
+            # copy or if there is a download license with an external download
+            # location 
+            if resource.storage_object.has_local_download_copy() \
+                    or any(l_info.downloadLocation for l_info
+                           in _get_download_licences(object_id).viewvalues()):
                 context['LR_DOWNLOAD'] = reverse(download, args=(object_id,))
                 if (not request.user.is_active):
                     context['LR_DOWNLOAD'] = "restricted"
@@ -345,6 +349,31 @@ class MetashareFacetedSearchView(FacetedSearchView):
         sqs = super(MetashareFacetedSearchView, self).get_results()
         if not self.request.user.is_staff:
             sqs = sqs.filter(published=True)
+
+        # Sort the results (on only one sorting value)
+        if 'sort' in self.request.GET:
+            sort_list = self.request.GET.getlist('sort')
+            
+            if sort_list[0] == 'resourcename_asc':
+                sqs = sqs.order_by('resourceNameSort_exact')
+            elif sort_list[0] == 'resourcename_desc':
+                sqs = sqs.order_by('-resourceNameSort_exact')
+            elif sort_list[0] == 'resourcetype_asc':
+                sqs = sqs.order_by('resourceTypeSort_exact')
+            elif sort_list[0] == 'resourcetype_desc':
+                sqs = sqs.order_by('-resourceTypeSort_exact')
+            elif sort_list[0] == 'mediatype_asc':
+                sqs = sqs.order_by('mediaTypeSort_exact')
+            elif sort_list[0] == 'mediatype_desc':
+                sqs = sqs.order_by('-mediaTypeSort_exact')
+            elif sort_list[0] == 'languagename_asc':
+                sqs = sqs.order_by('languageNameSort_exact')
+            elif sort_list[0] == 'languagename_desc':
+                sqs = sqs.order_by('-languageNameSort_exact')
+            else:
+                sqs = sqs.order_by('resourceNameSort_exact')
+        else:
+            sqs = sqs.order_by('resourceNameSort_exact')
 
         # collect statistics about the query
         starttime = datetime.now()

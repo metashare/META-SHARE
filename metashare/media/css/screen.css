@@ -592,6 +592,19 @@ table.result_table tr.result_table_head{
 	background-image: url(../images/table_bg.png);
 	background-repeat: repeat-x;
 }
+
+table.result_table tr.result_table_head a.sortAsc:after {
+    content: " " url(sexybuttons/images/icons/silk/bullet_arrow_up.png);
+    vertical-align: top;
+}
+
+table.result_table tr.result_table_head a.sortDesc:after {
+    content: " " url(sexybuttons/images/icons/silk/bullet_arrow_down.png);
+    vertical-align: top;
+}
+
+
+
 table.result_table td, th{
 	padding-left: 30px;
 	vertical-align:top;
