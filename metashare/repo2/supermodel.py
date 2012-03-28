@@ -6,7 +6,8 @@ import logging
 import re
 
 from django.core.cache import cache
-from django.core.exceptions import ValidationError, ObjectDoesNotExist
+from django.core.exceptions import ValidationError, ObjectDoesNotExist, \
+  ImproperlyConfigured
 from django.db.models.fields import related
 from django.db import models, IntegrityError
 from traceback import format_exc
@@ -25,8 +26,12 @@ LOGGER = logging.getLogger('metashare.repo2.supermodel')
 LOGGER.addHandler(LOG_HANDLER)
 
 # cfedermann: this prevents a bug with PostgreSQL databases and Django 1.3
-from django.db.backends.postgresql_psycopg2.base import DatabaseFeatures
-DatabaseFeatures.can_return_id_from_insert = True
+try:
+    from django.db.backends.postgresql_psycopg2.base import DatabaseFeatures
+    DatabaseFeatures.can_return_id_from_insert = True
+
+except ImproperlyConfigured:
+    pass
 
 REQUIRED = 1
 OPTIONAL = 2
