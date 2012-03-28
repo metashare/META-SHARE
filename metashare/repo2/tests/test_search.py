@@ -4,7 +4,6 @@ from metashare.repo2.models import resourceInfoType_model
 from haystack.query import SearchQuerySet
 from django.contrib.auth.models import User
 from django.test.client import Client
-import os
 
 
 class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
