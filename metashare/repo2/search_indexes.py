@@ -3,6 +3,7 @@ Project: META-SHARE prototype implementation
  Author: Christian Spurk <cspurk@dfki.de>
 """
 import logging
+import os
 
 from haystack.indexes import CharField, RealTimeSearchIndex, MultiValueField, \
     BooleanField
@@ -92,6 +93,9 @@ class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
         returned by get_model(), but we also support the models that are
         registered in our own _setup_save() method.
         """
+        if os.environ.get('DISABLE_INDEXING_DURING_IMPORT', False) == 'True':
+            return
+
         # have we been called from a post_save signal dispatcher?
         if "sender" in kwargs:
             # explicitly set `using` to None in order to let our Haystack router
@@ -150,6 +154,9 @@ class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
         In this implementation we additionally connect to frequently changed
         parts of the model which is returned by get_model().
         """
+        if os.environ.get('DISABLE_INDEXING_DURING_IMPORT', False) == 'True':
+            return
+
         super(resourceInfoType_modelIndex, self)._setup_save()
         # in addition to the default setup of our super class, we connect to
         # frequently changed parts of resourceInfoType_model so that they
@@ -165,6 +172,9 @@ class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
         """
         Removes a single object instance from the index.
         """
+        if os.environ.get('DISABLE_INDEXING_DURING_IMPORT', False) == 'True':
+            return
+
         # have we been called from a post_delete signal dispatcher?
         if "sender" in kwargs:
             # explicitly set `using` to None in order to let our Haystack router

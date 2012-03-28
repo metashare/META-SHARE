@@ -41,6 +41,7 @@ if __name__ == "__main__":
     
     # Disable verbose debug output for the import process...
     settings.DEBUG = False
+    os.environ['DISABLE_INDEXING_DURING_IMPORT'] = 'True'
     
     successful_imports = []
     erroneous_imports = []
