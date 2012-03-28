@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns:ms="http://www.ilsp.gr/META-XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <identificationInfo>
+    <resourceName lang="en-us">Test Resource 2</resourceName>
+    <description lang="en-us">another resource for testing</description>
+    <metaShareId>String</metaShareId>
+    <identifier>S0148000</identifier>
+  </identificationInfo>
+  <distributionInfo>
+    <availability>available-unrestrictedUse</availability>
+    <licenceInfo>
+      <licence>CC_BY-NC-SA</licence>
+      <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+      <restrictionsOfUse>shareAlike</restrictionsOfUse>
+      <restrictionsOfUse>attribution</restrictionsOfUse>
+      <distributionAccessMedium>DVD-R</distributionAccessMedium>
+      <distributionAccessMedium>CD-ROM</distributionAccessMedium>
+      <distributionAccessMedium>downloadable</distributionAccessMedium>
+      <downloadLocation>http://www.example.org/dl1</downloadLocation>
+    </licenceInfo>
+    <licenceInfo>
+      <licence>GPL</licence>
+      <restrictionsOfUse>attribution</restrictionsOfUse>
+      <restrictionsOfUse>shareAlike</restrictionsOfUse>
+      <distributionAccessMedium>downloadable</distributionAccessMedium>
+      <downloadLocation>http://www.example.org/dl2</downloadLocation>
+    </licenceInfo>
+    <licenceInfo>
+      <licence>CC_BY-SA_3.0</licence>
+      <restrictionsOfUse>attribution</restrictionsOfUse>
+      <restrictionsOfUse>shareAlike</restrictionsOfUse>
+      <distributionAccessMedium>downloadable</distributionAccessMedium>
+      <downloadLocation>http://www.example.org/dl3</downloadLocation>
+    </licenceInfo>
+    <licenceInfo>
+      <licence>ELRA_VAR</licence>
+      <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+      <distributionAccessMedium>CD-ROM</distributionAccessMedium>
+      <price>Commercial org. Non ELRA Members: 11000.00€</price>
+      <availabilityStartDate>2003-07-15</availabilityStartDate>
+    </licenceInfo>
+  </distributionInfo>
+  <contactPerson>
+    <surname>Doe</surname>
+    <communicationInfo>
+      <email>ctc@example.org</email>
+      <address>Planet Mars, Cosmos</address>
+      <zipCode>12345</zipCode>
+      <city>Marstown</city>
+      <region>Space</region>
+      <country>Terran Federation</country>
+    </communicationInfo>
+    <position>Chief Testing Clown</position>
+  </contactPerson>
+  <metadataInfo>
+    <metadataCreationDate>2005-05-12</metadataCreationDate>
+  </metadataInfo>
+  <versionInfo>
+    <version>1.0</version>
+    <lastDateUpdated>2005-05-12</lastDateUpdated>
+  </versionInfo>
+  <resourceComponentType>
+    <toolServiceInfo>
+      <resourceType>toolService</resourceType>
+      <toolServiceType>other</toolServiceType>
+      <languageDependent>0</languageDependent>
+    </toolServiceInfo>
+  </resourceComponentType>
+</resourceInfo>

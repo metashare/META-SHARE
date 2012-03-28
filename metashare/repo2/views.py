@@ -306,8 +306,12 @@ def view(request, object_id=None):
 
         context['LR_DOWNLOAD'] = ""
         try:
-            if resource.storage_object.has_download() \
-                    or _get_download_licences(object_id):
+            # only show the download button if the resource has a local download
+            # copy or if there is a download license with an external download
+            # location 
+            if resource.storage_object.has_local_download_copy() \
+                    or any(l_info.downloadLocation for l_info
+                           in _get_download_licences(object_id).viewvalues()):
                 context['LR_DOWNLOAD'] = reverse(download, args=(object_id,))
                 if (not request.user.is_active):
                     context['LR_DOWNLOAD'] = "restricted"
