@@ -47,6 +47,7 @@ if __name__ == "__main__":
     erroneous_imports = []
     from metashare.xml_utils import import_from_file
     from metashare.storage.models import PUBLISHED
+    from metashare.repo2.supermodel import OBJECT_XML_CACHE
     
     for filename in sys.argv[1:]:
         temp_file = open(filename, 'rb')
@@ -64,4 +65,7 @@ if __name__ == "__main__":
                 print "\t{}: {}".format(descriptor, ' '.join(exception.args))
             else:
                 print "\t{}: {}".format(descriptor, exception.args)
-      
+    
+    # Be nice and cleanup cache...
+    OBJECT_XML_CACHE.clear()
+
