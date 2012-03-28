@@ -36,7 +36,10 @@ function showRelatedObjectLookupPopup(triggeringLink) {
     } else {
         href = triggeringLink.href + '?pop=1';
     }
-    var win = window.open(href, name, 'height=500,width=800,resizable=yes,scrollbars=yes');
+    var win = window.open(href, name, 'height=600,width=1200,resizable=yes,scrollbars=yes');
+    // var features = "status=1,toolbar=1,location=1,menubar=1,scrollbars=1,resizable=1,top=0,left=0,height=" + screen.availHeight + ",width=" + screen.availWidth;
+
+    //var win = window.open(href, name, features); 
     win.focus();
     return false;
 }
@@ -61,7 +64,10 @@ function showAddAnotherPopup(triggeringLink) {
     } else {
         href  += '&_popup=1';
     }
-    var win = window.open(href, name, 'height=500,width=800,resizable=yes,scrollbars=yes');
+     var win = window.open(href, name, 'height=600,width=1200,resizable=yes,scrollbars=yes');
+     //var features = "status=1,toolbar=1,location=1,menubar=1,scrollbars=1,resizable=1,top=0,left=0,height=" + screen.availHeight + ",width=" + screen.availWidth;
+
+    //var win = window.open(href, name, features); 
     win.focus();
     return false;
 }
