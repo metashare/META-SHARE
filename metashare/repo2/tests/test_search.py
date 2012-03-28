@@ -147,11 +147,12 @@ class SearchTest(test_utils.IndexAwareTestCase):
         files = os.listdir(_path)   
         for filename in files:
             fullpath = os.path.join(_path, filename)  
-            successes = test_utils.import_xml_or_zip(fullpath)
+            successes, failures = test_utils.import_xml_or_zip(fullpath)
             if successes:                
                 successes[0].storage_object.publication_status = 'g'
                 successes[0].storage_object.save()    
-                
+            if failures:
+                print failures    
     #def importInternalFixtures(self):
      #   _path = '{}/repo2/test_fixtures/internal/'.format(ROOT_PATH)
      #   files = os.listdir(_path)   
