@@ -15,7 +15,8 @@ from xml.etree.ElementTree import Element, fromstring, tostring
 from metashare.repo2.fields import MultiSelectField, MultiTextField, \
   MetaBooleanField
 
-from metashare.settings import LOG_LEVEL, LOG_HANDLER
+from metashare.settings import LOG_LEVEL, LOG_HANDLER, \
+  CHECK_FOR_DUPLICATE_INSTANCES
 from django.db.models.fields.related import ForeignRelatedObjectsDescriptor
 
 # Setup logging support.
@@ -32,6 +33,8 @@ XML_DECL = re.compile(r'\s*<\?xml version=".+" encoding=".+"\?>\s*\n?',
 
 METASHARE_ID_REGEXP = re.compile('<metashareId>.+</metashareId>',
   re.I|re.S|re.U)
+
+OBJECT_XML_CACHE = {}
 
 # pylint: disable-msg=W0611
 from metashare import repo2
@@ -449,6 +452,9 @@ class SchemaModel(models.Model):
         given _object instance, sorted by primary key 'id'.
 
         """
+        if not CHECK_FOR_DUPLICATE_INSTANCES:
+            return []
+
         _was_duplicate = False
         _related_objects = []
 
@@ -527,23 +533,22 @@ class SchemaModel(models.Model):
         # Use **magic to create a constrained QuerySet from kwargs.
         query_set = cls.objects.filter(**kwargs)
 
-        LOGGER.debug('cls: {}'.format(cls))
-        LOGGER.debug('kwargs: {}'.format(kwargs))
-
         _duplicates = []
         if query_set.count() > 1:
             # We now know that there may exist at least one duplicate for the
             # given _object;  we have to check the related objects to be sure.
-
-            # As the META-SHARE id is not yet defined for 
-            _msg = u'Ignoring META-SHARE id in _check_for_duplicates() as ' \
-              'it is not yet defined.'
-            LOGGER.warning(_msg)
             
             # Convert the current object into its serialised XML String and
             # remove any META-SHARE related id from this String.
-            _obj_value = tostring(_object.export_to_elementtree())
-            _obj_value = METASHARE_ID_REGEXP.sub('', _obj_value)
+            cache_key = '{}_{}'.format(type(_object).__name__.lower(),
+              _object.id)
+            if OBJECT_XML_CACHE.has_key(cache_key):
+                _obj_value = OBJECT_XML_CACHE[cache_key]
+            
+            else:
+                _obj_value = tostring(_object.export_to_elementtree())
+                _obj_value = METASHARE_ID_REGEXP.sub('', _obj_value)
+                OBJECT_XML_CACHE[cache_key] = _obj_value
 
             # Iterate over all potential duplicates, ordered by increasing id.
             for _candidate in query_set.order_by('id'):
@@ -552,14 +557,19 @@ class SchemaModel(models.Model):
                     continue
 
                 # Convert candidate into XML String and remove META-SHARE id.
-                _check = tostring(_candidate.export_to_elementtree())
-                _check = METASHARE_ID_REGEXP.sub('', _check)
+                cache_key = '{}_{}'.format(type(_candidate).__name__.lower(),
+                  _candidate.id)
+                if OBJECT_XML_CACHE.has_key(cache_key):
+                    _check = OBJECT_XML_CACHE[cache_key]
+
+                else:
+                    _check = tostring(_object.export_to_elementtree())
+                    _check = METASHARE_ID_REGEXP.sub('', _check)
+                    OBJECT_XML_CACHE[cache_key] = _check
 
                 # If both XML Strings are equal, we have found a duplicate!
                 if _obj_value == _check:
                     _duplicates.append(_candidate)
-
-            LOGGER.debug('FINAL _duplicates: {}'.format(_duplicates))
 
         return _duplicates
 
@@ -594,6 +604,11 @@ class SchemaModel(models.Model):
                 try:
                     LOGGER.debug(u'Deleting object {0}'.format(obj))
                     obj.delete()
+                    
+                    cache_key = '{}_{}'.format(type(obj).__name__.lower(),
+                      obj.id)
+                    if OBJECT_XML_CACHE.has_key(cache_key):
+                        OBJECT_XML_CACHE.pop(cache_key)
 
                 except ObjectDoesNotExist:
                     continue
@@ -751,7 +766,8 @@ class SchemaModel(models.Model):
                             _instance = _sub_cls()
                             _instance.value = _text
                             _instance.save()
-                            _created.append(_instance)
+                            # TODO: add _check_for_duplicates for STRINGMODEL.
+                            _created.append((_instance, 'C'))
                             _text = _instance
 
                     _values.append(_text)

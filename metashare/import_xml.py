@@ -45,11 +45,13 @@ if __name__ == "__main__":
 
     # Disable verbose debug output for the import process...
     settings.DEBUG = False
+    os.environ['DISABLE_INDEXING_DURING_IMPORT'] = 'True'
     
     successful_imports = []
     erroneous_imports = []
     from metashare.xml_utils import import_from_file
     from metashare.storage.models import PUBLISHED
+    from metashare.repo2.supermodel import OBJECT_XML_CACHE
     
     for filename in sys.argv[1:]:
         temp_file = open(filename, 'rb')
@@ -67,4 +69,8 @@ if __name__ == "__main__":
                 print "\t{}: {}".format(descriptor, ' '.join(exception.args))
             else:
                 print "\t{}: {}".format(descriptor, exception.args)
-      
+    
+    # Be nice and cleanup cache...
+    _cache_size = sum([len(x) for x in OBJECT_XML_CACHE.values()])
+    OBJECT_XML_CACHE.clear()
+    print "Cleared OBJECT_XML_CACHE ({} bytes)".format(_cache_size)
