@@ -147,7 +147,7 @@ class SearchTest(test_utils.IndexAwareTestCase):
         files = os.listdir(_path)   
         for filename in files:
             fullpath = os.path.join(_path, filename)  
-            successes, failures = test_utils.import_xml_or_zip(fullpath)
+            successes = test_utils.import_xml_or_zip(fullpath)
             if successes:                
                 successes[0].storage_object.publication_status = 'g'
                 successes[0].storage_object.save()    
