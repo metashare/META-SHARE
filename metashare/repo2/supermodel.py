@@ -24,6 +24,10 @@ logging.basicConfig(level=LOG_LEVEL)
 LOGGER = logging.getLogger('metashare.repo2.supermodel')
 LOGGER.addHandler(LOG_HANDLER)
 
+# cfedermann: this prevents a bug with PostgreSQL databases and Django 1.3
+from django.db.backends.postgresql_psycopg2.base import DatabaseFeatures
+DatabaseFeatures.can_return_id_from_insert = True
+
 REQUIRED = 1
 OPTIONAL = 2
 RECOMMENDED = 3
