@@ -30,7 +30,8 @@ class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
     """
     # in the text field we list all resource model field that shall be searched
     text = CharField(document=True, use_template=True, stored=False)
-    
+
+    # List of sorting results
     resourceNameSort = CharField(indexed=True, faceted=True)
     resourceTypeSort = CharField(indexed=True, faceted=True)
     mediaTypeSort = CharField(indexed=True, faceted=True)
@@ -91,7 +92,7 @@ class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
     def update_object(self, instance, using=None, **kwargs):
         """
         Updates the index for a single object instance.
-        
+
         In this implementation we do not only handle instances of the model as
         returned by get_model(), but we also support the models that are
         registered in our own _setup_save() method.
@@ -153,7 +154,7 @@ class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
     def _setup_save(self):
         """
         A hook for controlling what happens when the registered model is saved.
-        
+
         In this implementation we additionally connect to frequently changed
         parts of the model which is returned by get_model().
         """
@@ -190,6 +191,9 @@ class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
                                                                **kwargs)
 
     def prepare_resourceNameSort(self, obj):
+        """
+        Collect the data to sort the Resource Names
+        """
         import re
 
         # get the Resource Name
@@ -198,10 +202,13 @@ class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
         resourceNameSort = re.sub('[\W_]', '', resourceNameSort)
         # set Resource Name to lower case
         resourceNameSort = resourceNameSort.lower()
-        
+
         return resourceNameSort
 
     def prepare_resourceTypeSort(self, obj):
+        """
+        Collect the data to sort the Resource Types
+        """
         import re
 
         # get the list of Resource Types
@@ -216,10 +223,13 @@ class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
         resourceTypeSort = re.sub('[\W_]', '', resourceTypeSort)
         # set list of Resource Types to lower case
         resourceTypeSort = resourceTypeSort.lower()
-        
+
         return resourceTypeSort
 
     def prepare_mediaTypeSort(self, obj):
+        """
+        Collect the data to sort the Media Types
+        """
         import re
 
         # get the list of Media Types
@@ -234,10 +244,13 @@ class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
         mediaTypeSort = re.sub('[\W_]', '', mediaTypeSort)
         # set list of Media Types to lower case
         mediaTypeSort = mediaTypeSort.lower()
-        
+
         return mediaTypeSort
 
     def prepare_languageNameSort(self, obj):
+        """
+        Collect the data to sort the Language Names
+        """
         import re
 
         # get the list of languages
@@ -252,13 +265,19 @@ class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
         languageNameSort = re.sub('[\W_]', '', languageNameSort)
         # set list of languages to lower case
         languageNameSort = languageNameSort.lower()
-        
+
         return languageNameSort
 
     def prepare_published(self, obj):
+        """
+        Collect the data to filter the Published resources
+        """
         return obj.storage_object and obj.storage_object.published
 
     def prepare_languageNameFilter(self, obj):
+        """
+        Collect the data to filter the resources on Language Name
+        """
         result = []
         corpus_media = obj.resourceComponentType.as_subclass()
 
@@ -316,6 +335,9 @@ class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
         return result
 
     def prepare_resourceTypeFilter(self, obj):
+        """
+        Collect the data to filter the resources on Resource Type
+        """
         result = []
 
         if obj.resourceComponentType.as_subclass().get_resourceType_display() \
@@ -326,6 +348,9 @@ class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
         return result
 
     def prepare_mediaTypeFilter(self, obj):
+        """
+        Collect the data to filter the resources on Media Type
+        """
         result = []
         corpus_media = obj.resourceComponentType.as_subclass()
 
@@ -386,29 +411,47 @@ class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
         return result
 
     def prepare_availabilityFilter(self, obj):
+        """
+        Collect the data to filter the resources on Availability
+        """
         return obj.distributionInfo.get_availability_display()
 
     def prepare_licenceFilter(self, obj):
+        """
+        Collect the data to filter the resources on Licence
+        """
         return [licence for licence_info in
                 obj.distributionInfo.licenceinfotype_model_set.all()
                 for licence in licence_info.get_licence_display_list()]
 
     def prepare_restrictionsOfUseFilter(self, obj):
+        """
+        Collect the data to filter the resources on Restrictions Of USe
+        """
         return [restr for licence_info in
                 obj.distributionInfo.licenceinfotype_model_set.all()
                 for restr in licence_info.get_restrictionsOfUse_display_list()]
 
     def prepare_validatedFilter(self, obj):
+        """
+        Collect the data to filter the resources on Validated
+        """
         return [validation_info.validated for validation_info in
                 obj.validationinfotype_model_set.all()]
 
     def prepare_foreseenUseFilter(self, obj):
+        """
+        Collect the data to filter the resources on Foreseen Use
+        """
         if obj.usageInfo:
             return [use_info.get_foreseenUse_display() for use_info in
                     obj.usageInfo.foreseenuseinfotype_model_set.all()]
         return []
 
     def prepare_useNlpSpecificFilter(self, obj):
+        """
+        Collect the data to filter the resources on NLP Specific
+        """
         if obj.usageInfo:
             return [use for use_info in
                     obj.usageInfo.foreseenuseinfotype_model_set.all()
@@ -416,6 +459,9 @@ class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
         return []
 
     def prepare_lingualityTypeFilter(self, obj):
+        """
+        Collect the data to filter the resources on Linguality Type
+        """
         result = []
         corpus_media = obj.resourceComponentType.as_subclass()
 
@@ -480,6 +526,9 @@ class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
         return result
 
     def prepare_multilingualityTypeFilter(self, obj):
+        """
+        Collect the data to filter the resources on Multilinguality Type
+        """
         result = []
         corpus_media = obj.resourceComponentType.as_subclass()
 
@@ -487,7 +536,7 @@ class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
             media_type = corpus_media.corpusMediaType
             for corpus_info in media_type.corpustextinfotype_model_set.all():
                 mtf = corpus_info.lingualityInfo \
-                  .get_multilingualityType_display() 
+                  .get_multilingualityType_display()
                 if mtf != '':
                     result.append(mtf)
             if media_type.corpusAudioInfo:
@@ -565,6 +614,9 @@ class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
         return result
 
     def prepare_modalityTypeFilter(self, obj):
+        """
+        Collect the data to filter the resources on Modality Type
+        """
         result = []
         corpus_media = obj.resourceComponentType.as_subclass()
 
@@ -641,6 +693,9 @@ class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
         return result
 
     def prepare_mimeTypeFilter(self, obj):
+        """
+        Collect the data to filter the resources on Mime Type
+        """
         mimeType_list = []
         corpus_media = obj.resourceComponentType.as_subclass()
 
@@ -705,6 +760,9 @@ class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
         return mimeType_list
 
     def prepare_bestPracticesFilter(self, obj):
+        """
+        Collect the data to filter the resources on Best Practices
+        """
         tool_service = obj.resourceComponentType.as_subclass()
         if isinstance(tool_service, toolServiceInfoType_model) \
                 and tool_service.inputInfo:
@@ -712,6 +770,9 @@ class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
                     .get_conformanceToStandardsBestPractices_display_list()
 
     def prepare_domainFilter(self, obj):
+        """
+        Collect the data to filter the resources on Domain
+        """
         result = []
         corpus_media = obj.resourceComponentType.as_subclass()
 
@@ -773,6 +834,9 @@ class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
         return result
 
     def prepare_geographicCoverageFilter(self, obj):
+        """
+        Collect the data to filter the resources on Geographic Coverage
+        """
         result = []
         corpus_media = obj.resourceComponentType.as_subclass()
 
@@ -834,6 +898,9 @@ class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
         return result
 
     def prepare_timeCoverageFilter(self, obj):
+        """
+        Collect the data to filter the resources on Time Coverage
+        """
         result = []
         corpus_media = obj.resourceComponentType.as_subclass()
 
@@ -892,6 +959,9 @@ class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
         return result
 
     def prepare_subjectFilter(self, obj):
+        """
+        Collect the data to filter the resources on Subject
+        """
         result = []
         corpus_media = obj.resourceComponentType.as_subclass()
 
