@@ -364,10 +364,13 @@ class SchemaModel(models.Model):
                 # Only falling back to getattr() if it doesn't exist.
                 _value = getattr(self, _model_field, None)
 
-            if _value is not None:
+            if _value is not None and _value != "":
                 _model_set_value = _model_field.endswith('_model_set')
 
-                _field = self._meta.get_field_by_name(_model_field)[0]
+                if not _model_set_value:
+                    _field = self._meta.get_field_by_name(_model_field)[0]
+                else:
+                    _field = None
 
                 # For MetaBooleanFields, we actually need the database value.
                 if isinstance(_field, MetaBooleanField):
