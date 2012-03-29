@@ -53,6 +53,9 @@ if __name__ == "__main__":
     from metashare.storage.models import PUBLISHED
     from metashare.repo2.supermodel import OBJECT_XML_CACHE
     
+    # Clean cache before starting the import process.
+    OBJECT_XML_CACHE.clear()
+    
     for filename in sys.argv[1:]:
         temp_file = open(filename, 'rb')
         success, failure = import_from_file(temp_file, filename, PUBLISHED)
