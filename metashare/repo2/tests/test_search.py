@@ -140,7 +140,7 @@ class SearchTest(test_utils.IndexAwareTestCase):
         files = os.listdir(_path)   
         for filename in files:
             fullpath = os.path.join(_path, filename)  
-            successes, failures =test_utils.import_xml_or_zip(fullpath)
+            test_utils.import_xml_or_zip(fullpath)
          
     def importIngestedFixtures(self):
         _path = '{}/repo2/test_fixtures/ingested/'.format(ROOT_PATH)
@@ -332,8 +332,7 @@ class SearchTest(test_utils.IndexAwareTestCase):
        # print response
         self.assertEqual('repo2/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)  
-    ''' 
-    ''' 
+
     def test_staff_user_sees_ingested_LR(self):
         client = Client()
         client.login(username='staffuser', password='secret')
