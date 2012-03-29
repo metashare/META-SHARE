@@ -367,13 +367,21 @@ class SchemaModel(models.Model):
             if _value is not None:
                 _model_set_value = _model_field.endswith('_model_set')
 
+                _field = self._meta.get_field_by_name(_model_field)[0]
+
+                # For MetaBooleanFields, we actually need the database value.
+                if isinstance(_field, MetaBooleanField):
+                    _value = getattr(self, _model_field, [])
+
+                # For MultiSelectFields, we call get_FOO_display_list().
+                elif isinstance(_field, MultiSelectField):
+                    _func = getattr(self, 'get_{0}_display_list'.format(
+                      _model_field))
+                    _value = _func()
+
                 # For ManyToManyFields, compute all related objects.
                 if isinstance(_value, models.Manager):
                     _value = _value.all()
-
-                # For MetaBooleanFields, we actually need the database value.
-                elif isinstance(_value, MetaBooleanField):
-                    _value = getattr(self, _model_field, None)
 
                 # If the value is not yet of list type, we wrap it in a list.
                 elif not isinstance(_value, list):
