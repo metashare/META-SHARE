@@ -590,7 +590,7 @@ class SchemaModel(models.Model):
                     _check = OBJECT_XML_CACHE[cache_key]
 
                 else:
-                    _check = tostring(_object.export_to_elementtree())
+                    _check = tostring(_candidate.export_to_elementtree())
                     _check = METASHARE_ID_REGEXP.sub('', _check)
                     OBJECT_XML_CACHE[cache_key] = _check
 
