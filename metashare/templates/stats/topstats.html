@@ -12,15 +12,15 @@
 <table>
 <tr><td>
 <select name='view' onchange="topform.submit();">
-<option value='topviewed' style="background-image: url({% url metashare.views.frontpage %}site_media/stats/img/v_icon.gif); background-repeat: no-repeat;"
+<option value='topviewed' style="background-image: url({% url metashare.views.frontpage %}site_media/stats/img/view_icon.gif); background-repeat: no-repeat;"
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Most Viewed Resources
-<option value='topdownloaded' style="background-image: url({% url metashare.views.frontpage %}site_media/stats/img/d_icon.gif); background-repeat: no-repeat;"
+<option value='topdownloaded' style="background-image: url({% url metashare.views.frontpage %}site_media/stats/img/download_icon.gif); background-repeat: no-repeat;"
 {% ifequal view "topdownloaded" %}
         selected
 {% endifequal %}
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Top Downloaded Resources
 
-<option value='latestupdated' style="background-image: url({% url metashare.views.frontpage %}site_media/stats/img/u_icon.gif); background-repeat: no-repeat;"
+<option value='latestupdated' style="background-image: url({% url metashare.views.frontpage %}site_media/stats/img/update_icon.gif); background-repeat: no-repeat;"
 {% ifequal view "latestupdated" %}
         selected
 {% endifequal %}
