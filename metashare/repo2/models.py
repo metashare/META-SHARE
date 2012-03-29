@@ -295,7 +295,7 @@ class identificationInfoType_model(SchemaModel):
       verbose_name='Meta share id', 
       help_text='An unambiguous referent to the resource within META-SHA' \
       'RE',
-      max_length=100, )
+      max_length=100, default="NOT_DEFINED_FOR_V2", )
 
     identifier = MultiTextField(max_length=100, widget = MultiFieldWidget(widget_id=4), 
       verbose_name='Identifier', 
