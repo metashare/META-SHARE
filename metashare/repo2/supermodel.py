@@ -630,12 +630,13 @@ class SchemaModel(models.Model):
             if obj.id:
                 try:
                     LOGGER.debug(u'Deleting object {0}'.format(obj))
-                    obj.delete()
-                    
                     cache_key = '{}_{}'.format(type(obj).__name__.lower(),
                       obj.id)
+
                     if OBJECT_XML_CACHE.has_key(cache_key):
                         OBJECT_XML_CACHE.pop(cache_key)
+
+                    obj.delete()
 
                 except ObjectDoesNotExist:
                     continue
