@@ -612,6 +612,9 @@ class Clazz(object):
     def generate_simple_field(self, name, field_name, options, required):
         options += required
         
+        if name == 'metaShareId':
+            options += 'default="NOT_DEFINED_FOR_V2", '
+        
         # cfedermann: MetaBooleanField and MultiSelectField don't need the
         # models. prefix as they are custom fields imported from repo2.fields.
         if field_name in ('MetaBooleanField', 'MultiSelectField'):
