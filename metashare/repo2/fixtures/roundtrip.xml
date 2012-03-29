@@ -15,12 +15,10 @@
 			<distributionAccessMedium>downloadable</distributionAccessMedium>
 			<downloadLocation>http://mokk.bme.hu/resources/morphdb-hu</downloadLocation>
 			<price>123.45 EUR</price>
-			<userNature />
 		</licenceInfo>
 	</distributionInfo>
 	<contactPerson>
 		<surname>Doe</surname>
-		<sex />
 		<communicationInfo>
 			<email>daniel@mokk.bme.hu</email>
 			<address>Planet Mars, Cosmos</address>
@@ -35,14 +33,8 @@
 		<metadataCreationDate>2011-11-13</metadataCreationDate>
 		<metadataCreator>
 			<surname>Doe</surname>
-			<sex />
 			<communicationInfo>
 				<email>daniel@mokk.bme.hu</email>
-				<address />
-				<zipCode />
-				<city />
-				<region />
-				<country />
 			</communicationInfo>
 			<position>BUTE Employee</position>
 			<affiliation>
@@ -57,11 +49,7 @@
 				</communicationInfo>
 			</affiliation>
 		</metadataCreator>
-		<source />
-		<originalMetadataSchema />
-		<originalMetadataLink />
 		<metadataLastDateUpdated>2012-01-01</metadataLastDateUpdated>
-		<revision />
 	</metadataInfo>
 	<resourceComponentType>
 		<lexicalConceptualResourceInfo>
@@ -72,8 +60,6 @@
 					<mediaType>text</mediaType>
 					<lingualityInfo>
 						<lingualityType>monolingual</lingualityType>
-						<multilingualityType />
-						<multilingualityTypeDetails />
 					</lingualityInfo>
 					<languageInfo>
 						<languageId>HU</languageId>
