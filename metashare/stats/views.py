@@ -87,8 +87,8 @@ def repostats (request):
             dictlic = collections.defaultdict(int)
             for licence in eval(u'[name for licence_info in licences for name in licence_info.get_{0}_display_list()]'.format(dbfield)):
                 dictlic[str(licence)] += 1
-            for key in dictlic:
-                repodata.append([key, dictlic[key]])                   
+            for key,val in sorted(dictlic.iteritems(), key=lambda (k,v): (v,k), reverse=True):            
+                repodata.append([key, val])                   
         else:
             result = eval(u'{0}.objects.values("{1}").annotate(Count("{1}")).order_by("-{1}__count")'.format(dbmodel, dbfield))
             for item in result:
@@ -183,15 +183,15 @@ def getstats (request):
         
     user = LRStats.objects.filter(lasttime__startswith=currdate).values('sessid').annotate(Count('sessid')).count()
     ##optimize these calls just using one (model_utils.statByDate)
-    lrupdate = LRStats.objects.filter(lasttime__contains=currdate, action="u").count()
-    lrview = LRStats.objects.filter(lasttime__contains=currdate, action="v").count()
-    lrdown = LRStats.objects.filter(lasttime__contains=currdate, action="d").count()
-    queries = QueryStats.objects.filter(lasttime__contains=currdate).count()
-    extimes = QueryStats.objects.filter(lasttime__contains=currdate).aggregate(Avg('exectime'), Max('exectime'), Min('exectime'))
+    lrupdate = LRStats.objects.filter(lasttime__startswith=currdate, action="u").count()
+    lrview = LRStats.objects.filter(lasttime__startswith=currdate, action="v").count()
+    lrdown = LRStats.objects.filter(lasttime__startswith=currdate, action="d").count()
+    queries = QueryStats.objects.filter(lasttime__startswith=currdate).count()
+    extimes = QueryStats.objects.filter(lasttime__startswith=currdate).aggregate(Avg('exectime'), Max('exectime'), Min('exectime'))
     
     qltavg = 0
     if (extimes["exectime__avg"]):
-        qltavg = QueryStats.objects.filter(lasttime__contains=currdate, exectime__lt = int(extimes["exectime__avg"])).count()
+        qltavg = QueryStats.objects.filter(lasttime__startswith=currdate, exectime__lt = int(extimes["exectime__avg"])).count()
     else:
         extimes["exectime__avg"] = 0
         

@@ -4,12 +4,13 @@
     html * { padding:0; margin:0; }
     body * { padding:10px 10px; }
     body * * { padding:0; }
-    body { font-family:"Trebuchet MS", Helvetica, sans-serif; font-size:0.8em; }
-      #header { background:#ffffff; padding-left:370px; padding-bottom:20px; }
+    body { font-family:"Trebuchet MS", Helvetica, sans-serif; font-size:1em; }
+    #header { background:#ffffff; padding-left:370px; padding-bottom:20px; }
     #header img { position:absolute; top:10px; left:10px; height:40px; border:0px; }
 h1, h2, h3, h4, h5, h6 { font-weight:normal; }
-  .grey_dark { color:#696969; }
-     </style>
+    .grey_dark { color:#696969; }
+    .font12 { font-family:"Trebuchet MS", Helvetica, sans-serif; font-size:13px; }
+</style>
 
 <script type="text/javascript" src="{{ media_prefix }}js/jquery.js"></script>
 
@@ -75,8 +76,8 @@ window.onload=beginrefresh
 {% else %}
 <div align=right>
 <form method="get" action=".">
-{% csrf_token %}
-Show statistics at <select onchange="submit()" name="date">
+Show statistics for <select onchange="submit()" name="date">
+<option value=""> ALL
 {% for day in date %}
     <option value="{{ day.date|date:"Y-m-d" }}"
     {% if day.date|date:"Y-m-d" == currdate %}
@@ -88,37 +89,31 @@ Show statistics at <select onchange="submit()" name="date">
 </form>
 </div>
 <table id="nodes" cellspacing=1 class="tablesorter">
-	<thead><tr>
-	    <th class="header">Node</th>
+	<thead><tr valign=top>
+	    <th class="header">META-SHARE Node</th>
 	    <th class="header">Last check</th>
 	    <th class="header">Users</th>
 	    <th class="header" width=60>Viewed LRs</th>
 	    <th class="header" width=60>Updated LRs</th>
 	    <th class="header" width=60>Downloaded LRs</th>
 	    <th class="header">Queries</th>
-	    <th class="header">Average time per query (ms)</th>
+	    <th class="header">Average time<br> per query (ms)</th>
 	    <th class="header">Queries < average time</th>
 	    
 	</tr></thead> 
 	<tbody>
 	{% for host,info in traffic.items %}
-	<tr>
-	    {% if host == "#TOTAL" %}
-	        <td align=right>TOTAL:</td>
-	        <td></td>
+	<tr class="font12"><td>
+	    {% if info.0 == 1 %}
+	        <img src="{{ media_prefix }}images/icon_success.gif" title="This node is running" width=16>
 	    {% else %}
-	        <td> 
-	        {% if info.0 == 1 %}
-	            <img src="{{ media_prefix }}images/icon_success.gif" title="This node is running" width=16>
-	        {% else %}
-	            <img src="{{ media_prefix }}images/icon_error.gif" title="This node is down or some unexpected result to getting statistics occurred" width=18>	            
-	        {% endif %}
-	        <a href='{{ host }}' target=_new><font color=blue><strong>{{ host }}</strong></font></a>
-	        </td>
-	        <td>
-	          {{ info.1 }}
-	        </td>
+	        <img src="{{ media_prefix }}images/icon_error.gif" title="This node is down or some unexpected result to getting statistics occurred" width=18>	            
 	    {% endif %}
+	    <a href='{{ host }}' target=_new><font color=blue><strong>{{ host }}</strong></font></a>
+	    </td>
+	    <td>
+	        {{ info.1 }}
+	    </td>
 	<td align=right>{{ info.2 }} </td>
 	<td align=right>{{ info.3 }} </td>
 	<td align=right>{{ info.4 }} </td>
@@ -128,6 +123,12 @@ Show statistics at <select onchange="submit()" name="date">
 	<td align=right>{{ info.8 }} </td>
 	</tr>
 	{% endfor %}
+	
+	<tr class="font12"><td align=right><b>TOTAL</b>:</td><td></td>
+	{% for info in host_total_counter %} 
+	    <td align=right><b>{{ info }}</b></td>
+	{% endfor %}
+	</tr>        
 	</tbody> 
 </table>
 
@@ -139,7 +140,8 @@ jQuery(document).ready(function() {
             renderTo: 'timeline',
             type: 'spline',
             zoomType: 'x',
-
+            spacingTop: 2,
+            spacingBottom: 2
         },
         credits: {
             enabled: false
@@ -161,7 +163,11 @@ jQuery(document).ready(function() {
         xAxis: {
             type: 'datetime',
             maxZoom: 8 * 24 * 3600000, // fourteen days
-
+            minZoom: 24 * 3600000, // fourteen days
+            minRange:24 * 3600000,
+            maxPadding: 0.5,
+            minPadding: 1,
+            allowDecimals: false,
             dateTimeLabelFormats: { // don't display the dummy year
                 day: '%Y %b %e ',
                 month: '%Y %b ',
@@ -173,9 +179,12 @@ jQuery(document).ready(function() {
             title: {
                 text: 'Linguistic Resources'
             },
+            allowDecimals: false,
+            gridLineWidth: 1,
             min: 0
         },
         tooltip: {
+            crosshairs: true,
             formatter: function() {
                 return  Highcharts.dateFormat('%Y %b %e', this.x) +': '+ this.y +' '+this.series.name;
             }
@@ -210,7 +219,7 @@ jQuery(document).ready(function() {
             }
         },
         legend: {
-            enabled: false
+            enabled: true
         },
 
         series: [
@@ -230,30 +239,44 @@ jQuery(document).ready(function() {
 
 });
 </script>
-<br><div id="timeline" class="highcharts-container" style="margin: 0pt 2em; height: 250px; width: 800px;"></div>
+<br><div id="timeline" class="highcharts-container" style="margin: 0pt 2em; height: 250px; width: 800px"></div>
 
 <br>
+
 <script type="text/javascript">
     var chart;
     jQuery(document).ready(function() {
         chart = new Highcharts.Chart({
             chart: {
-                renderTo: 'nodetraffic'
-                
+                renderTo: 'nodetraffic',
+                type: 'bar',
+                spacingTop: 2,
+                spacingBottom: 2
             },
             title: {
                 text: 'User actions on the META-SHARE nodes'
             },
             xAxis: {
-                categories: ['{{ traffic.keys|join:"','"  }}'] 
+                title: {
+                    text: 'META-SHARE nodes'
+                },
+                categories: ['{{ host_labels|join:"','"  }}'] 
             },
             yAxis: {
                 title: {
                     text: 'Linguistic Resources'
                 },
+                allowDecimals: false,
                 min: 0
             },
-            credits: {
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            },
+		    credits: {
                enabled: false
             },
             exporting: {
@@ -277,57 +300,21 @@ jQuery(document).ready(function() {
                     return s;
                 }
             },
-            labels: {
-                items: [{
-                    html: 'Total',
-                    style: {
-                        left: '18px',
-                        top: '250px',
-                        color: 'black'				
-                    }
-                }]
-            },
             series: [
             {% for action,val in actions_byhost.items %}
-            { type: 'column',
+            { /* type: 'column', */
                 name: '{{ action }}',
                 data: {{ val }}
             },
             {% endfor %}
-            /*{
-                type: 'spline',
-                name: 'Average',
-                data: [
-                {% for host,info in traffic.items %}
-                ({{ info.0 }}/{{ traffic|length }}),
-                {% endfor %}
-                ]
-            },*/
-            {
-                type: 'pie',
-                name: 'Total data monitoring',
-                data: [
-                {% for action,val in actions.items %}
-                    { type: 'column',
-                        name: '{{ action }}',
-                        y: {{ val }},
-                        color: highchartsOptions.colors[{{ forloop.counter }} -1] 
-                },
-                {% endfor %}
-            ],
-                center: [-10, 280],
-                size: 70,
-                showInLegend: false,
-                dataLabels: {
-                    enabled: false
-                }
-            }]
+            
+            ]
         });
         
         
     });
 </script>	
-<div id="nodetraffic" class="highcharts-container" style="margin: 0pt 2em; height: 350px; width: 800px;"></div>
+<div id="nodetraffic" class="highcharts-container" style="min-height: 400px auto; margin: 0pt 2em; width: 800px;"></div>
 	
 	
 {% endif %}
