@@ -510,6 +510,13 @@ class SchemaModel(models.Model):
                 if not len(_value):
                     _value = None
 
+                # We have to use '__in' QuerySet lookup to avoid the "more
+                # than one row returned by a subquery used as an expression"
+                # bug which raises a DatabaseError otherwise.
+
+                else:
+                    field_name += '__in'
+
             # Finally, OneToOneField instances have to be checked as related
             # objects and hence need to be put into _related_objects.
             elif isinstance(_field, related.OneToOneField):
