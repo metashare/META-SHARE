@@ -53,5 +53,10 @@ def setup_group_global_editors(app, created_models, verbosity, **kwargs):
 
 
 # Register the setup_group_global_editors method such that it is called after syncdb is done.
+# We must make sure that the post_syncdb hooks from auth.management are executed first,
+# or else our code cannot find the permissions we want to use:\
+
+from django.contrib.auth import management
+
 signals.post_syncdb.connect(setup_group_global_editors,
     sender=repo2_models, dispatch_uid = "metashare.repo2.management.setup_group_global_editors")
