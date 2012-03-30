@@ -305,7 +305,6 @@ class SchemaModelAdmin(RelatedWidgetWrapperAdmin, SchemaModelLookup):
                         has_widget = True
             if not has_widget:
                 self.filter_horizontal.append(fld)
-            pass
         super(SchemaModelAdmin, self).__init__(model, admin_site)    
 
     def _inlines(self, model):
