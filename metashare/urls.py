@@ -41,6 +41,10 @@ urlpatterns += patterns('metashare.repo2.views',
   (r'^{0}repo2/'.format(DJANGO_BASE), include('metashare.repo2.urls')),
 )
 
+urlpatterns += patterns('',
+  (r'^selectable/', include('selectable.urls')),
+)
+
 if DEBUG:
     urlpatterns += patterns('',
       (r'^{0}site_media/(?P<path>.*)$'.format(DJANGO_BASE),

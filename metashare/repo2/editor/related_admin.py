@@ -60,7 +60,8 @@ class RelatedWidgetWrapperAdmin(admin.ModelAdmin):
         formfield = super(RelatedWidgetWrapperAdmin, self).formfield_for_dbfield(db_field, **kwargs)
         if (formfield and
             isinstance(formfield.widget, admin.widgets.RelatedFieldWidgetWrapper) and
-            not isinstance(formfield.widget.widget, SelectMultiple)):
+            not isinstance(formfield.widget.widget, SelectMultiple) and
+            not ('widget' in kwargs)):
             request = kwargs.pop('request', None)
             related_modeladmin = self.admin_site._registry.get(db_field.rel.to)
             can_change_related = bool(related_modeladmin and
