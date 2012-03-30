@@ -209,3 +209,8 @@ JENKINS_TASKS = (
 
 PYLINT_RCFILE = '{0}/test-config/pylint.rc'.format(ROOT_PATH)
 
+# set display for Selenium tests
+if 'DISPLAY' in os.environ:
+    import re
+    SELENIUM_DISPLAY = re.sub(r'[^\:]*(\:\d{1,2})(?:\.\d+)?', r'\1', 
+      os.environ['DISPLAY'])
