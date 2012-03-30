@@ -387,7 +387,7 @@ class SchemaModel(models.Model):
 
                 # For ManyToManyFields, compute all related objects.
                 if isinstance(_value, models.Manager):
-                    _value = _value.all()
+                    _value = _value.all().order_by('id')
 
                 # If the value is not yet of list type, we wrap it in a list.
                 elif not isinstance(_value, list):
