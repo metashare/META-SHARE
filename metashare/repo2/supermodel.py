@@ -779,7 +779,7 @@ class SchemaModel(models.Model):
                     LOGGER.debug(u'_value.tag: {}, _value.text: {}'.format(
                       _value.tag, _text))
 
-                    # We skipt empty, simple-typed elements.
+                    # We skip empty, simple-typed elements.
                     if not _text:
                         continue
 
