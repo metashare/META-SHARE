@@ -381,6 +381,9 @@ class SchemaModel(models.Model):
                     _func = getattr(self, 'get_{0}_display_list'.format(
                       _model_field))
                     _value = _func()
+                    
+                    # Sort MultiSelectField values to allow comparison!
+                    _value.sort()
 
                 # For ManyToManyFields, compute all related objects.
                 if isinstance(_value, models.Manager):
@@ -773,13 +776,21 @@ class SchemaModel(models.Model):
                 else:
                     _field = _object._meta.get_field_by_name(_model_field)[0]
 
+                # The initial assumption is that duplicate objects should
+                # be deleted immediately;  this does not hold for OneToOne
+                # and OneToMany fields (where _parent is not None), only.
+                _delete_duplicate_objects = True
+                
+                if isinstance(_field, related.OneToOneField) or _parent:
+                    _delete_duplicate_objects = False
+
                 # If the current value is simple-typed, append its text value.
                 if not len(_value.getchildren()):
                     _text = SchemaModel._xml_to_python(_value.text, _field)
                     LOGGER.debug(u'_value.tag: {}, _value.text: {}'.format(
                       _value.tag, _text))
 
-                    # We skipt empty, simple-typed elements.
+                    # We skip empty, simple-typed elements.
                     if not _text:
                         continue
 
@@ -794,8 +805,31 @@ class SchemaModel(models.Model):
                             _instance = _sub_cls()
                             _instance.value = _text
                             _instance.save()
-                            # TODO: add _check_for_duplicates for STRINGMODEL.
-                            _created.append((_instance, 'C'))
+
+                            _duplicates = _sub_cls._check_for_duplicates(
+                              _instance)
+                            _was_duplicate = len(_duplicates) > 0
+
+                            # Add current _instance instance to the _created
+                            # list with correct status: 'D' if it was a
+                            # duplicate, 'C' otherwise.
+                            if _was_duplicate:
+                                _created.append((_instance, 'D'))
+
+                                # If we are allowed to perform cleanup, we do
+                                # so and also replace our _instance instance
+                                # with the "original" object.
+                                if _delete_duplicate_objects:
+                                    _created = SchemaModel._cleanup(_created,
+                                      only_remove_duplicates=True)
+
+                                    # Replace _instance with "original".
+                                    _instance = _duplicates[0]
+                                    _created.append((_instance, 'O'))
+
+                            else:
+                                _created.append((_instance, 'C'))
+
                             _text = _instance
 
                     _values.append(_text)
@@ -831,14 +865,6 @@ class SchemaModel(models.Model):
 
                     # If the current field is NOT a OneToOne field, we have to
                     # check for duplicates after creating of the sub object!
-                    
-                    # The initial assumption is that duplicate objects should
-                    # be deleted immediately;  this does not hold for OneToOne
-                    # and OneToMany fields (where _parent is not None), only.
-                    _delete_duplicate_objects = True
-                    
-                    if isinstance(_field, related.OneToOneField) or _parent:
-                        _delete_duplicate_objects = False
 
                     # Try to import the sub element from the current value.
                     LOGGER.debug(u'Trying to import sub object {0}'.format(
