@@ -77,3 +77,6 @@ if __name__ == "__main__":
     _cache_size = sum([len(x) for x in OBJECT_XML_CACHE.values()])
     OBJECT_XML_CACHE.clear()
     print "Cleared OBJECT_XML_CACHE ({} bytes)".format(_cache_size)
+    
+    from django.core.management import call_command
+    call_command('rebuild_index', interactive=False)
