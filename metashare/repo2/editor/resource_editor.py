@@ -5,7 +5,8 @@ from metashare.repo2.models import resourceComponentTypeType_model, \
     corpusInfoType_model, languageDescriptionInfoType_model, \
     lexicalConceptualResourceInfoType_model, toolServiceInfoType_model, \
     corpusMediaTypeType_model, languageDescriptionMediaTypeType_model, \
-    lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model
+    lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model, \
+    metadataInfoType_model
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL
 from metashare.utils import verify_subclass
 from metashare.stats.model_utils import saveLRStats, UPDATE_STAT
@@ -237,6 +238,14 @@ registry.register(ValidationReportLookup)
 
 from django import forms
 
+class MetadataForm(forms.ModelForm):
+    class Meta:
+        model = metadataInfoType_model
+        widgets = {'metadataCreator' : AutoCompleteSelectMultipleWidget(lookup_class=PersonLookup)}
+
+class MetadataInline(ReverseInlineModelAdmin):
+    form = MetadataForm
+            
 class ResourceForm(forms.ModelForm):
     class Meta:
         model = resourceInfoType_model
@@ -247,7 +256,8 @@ class ResourceModelAdmin(ReverseModelAdmin):
     inline_type = 'stacked'
     no_inlines = ['versionInfo', 'usageInfo', 'resourceDocumentationInfo', 'resourceCreationInfo']
     custom_one2one_inlines = {'identificationInfo':IdentificationInline,
-                              'resourceComponentType':ResourceComponentInline}
+                              'resourceComponentType':ResourceComponentInline,
+                              'metadataInfo':MetadataInline}
     content_fields = ('resourceComponentType',)
     list_display = ('__unicode__', 'resource_type', 'publication_status')
     actions = (publish_resources, unpublish_resources, ingest_resources, )

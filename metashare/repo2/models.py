@@ -390,8 +390,8 @@ class validationInfoType_model(SchemaModel):
       ( 'validationReport/documentUnstructured', 'validationReport', OPTIONAL ),
       ( 'validationReport/documentInfo', 'validationReport', OPTIONAL ),
       ( u'validationTool', u'validationTool', OPTIONAL ),
-      ( 'validator/personInfo', 'validator', OPTIONAL ),
-      ( 'validator/organizationInfo', 'validator', OPTIONAL ),
+      #( 'validator/personInfo', 'validator', OPTIONAL ),
+      #( 'validator/organizationInfo', 'validator', OPTIONAL ),
     )
     __schema_classes__ = {
       u'documentInfo': "documentInfoType_model",
@@ -462,11 +462,11 @@ class validationInfoType_model(SchemaModel):
       'r the validation of the resource',
       blank=True, null=True, )
 
-    validator = models.ManyToManyField("actorInfoType_model", 
-      verbose_name='Validator', 
-      help_text='Groups information on the person(s) or the organization' \
-      '(s) that validated the resource',
-      blank=True, null=True, related_name="validator_%(class)s_related", )
+    #validator = models.ManyToManyField("actorInfoType_model", 
+      #verbose_name='Validator', 
+      #help_text='Groups information on the person(s) or the organization' \
+      #'(s) that validated the resource',
+      #blank=True, null=True, related_name="validator_%(class)s_related", )
 
     back_to_resourceinfotype_model = models.ForeignKey("resourceInfoType_model", )
 
