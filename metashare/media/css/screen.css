@@ -594,13 +594,13 @@ table.result_table tr.result_table_head{
 }
 
 table.result_table tr.result_table_head a.sortAsc:after {
-    content: " " url(sexybuttons/images/icons/silk/bullet_arrow_up.png);
-    vertical-align: top;
+    content: "\a0" url(sexybuttons/images/icons/silk/bullet_arrow_down.png);
+    vertical-align: middle;
 }
 
 table.result_table tr.result_table_head a.sortDesc:after {
-    content: " " url(sexybuttons/images/icons/silk/bullet_arrow_down.png);
-    vertical-align: top;
+    content: "\a0" url(sexybuttons/images/icons/silk/bullet_arrow_up.png);
+    vertical-align: middle;
 }
 
 
