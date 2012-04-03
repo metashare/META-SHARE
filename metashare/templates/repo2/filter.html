@@ -1,88 +1,13 @@
-{% if filter %}
-  {% if faceted %}
-    <div style="display:none">
-    {% for key, values in request.GET.iterlists %}
-      {% if key = 'selected_facets' %}
-        {% for facet in values %}
-          {% if filter_exact in facet %}
-          </div>
-          <div style="display:block">
-          {% endif %}
-        {% endfor %}
+{% spaceless %}
+  {% if filter %}
+    {% if selected_only %}
+      {% if filter_exact in sel_facets %}
+        {% include "repo2/unconditional_filter.html" %}
       {% endif %}
-    {% endfor %}
-  {% else%}
-    <div style="display:block">
-    {% for key, values in request.GET.iterlists %}
-      {% if key = 'selected_facets' %}
-        {% for facet in values %}
-          {% if filter_exact in facet %}
-            </div>
-            <div style="display:none">
-          {% endif %}
-        {% endfor %}
+    {% else %}
+      {% if not filter_exact in sel_facets %}
+        {% include "repo2/unconditional_filter.html" %}
       {% endif %}
-    {% endfor %}
+    {% endif %}
   {% endif %}
-  
-      <dt>{{ title }}:</dt>
-      {% for item in filter %}
-        {% for key, values in request.GET.iterlists %}
-          {% if key = 'selected_facets' %}
-            {# Building of the url: #}
-            {# if one item is a facet #}
-            {#   add the removableFacet class and the query #}
-            {#   add the remaining facets #}
-            {#   display the item #} 
-            {% if filter_exact|add:":"|add:item.0 in values %}
-              <a href="?q={{ query|urlencode }}{% for facet in values %}{% if facet != filter_exact|add:":"|add:item.0 %}&amp;selected_facets={{ facet|urlencode }}{% endif %}{% endfor %}" class="removableFacet">{{ item.0 }}</a> ({{ item.1 }})
-    	      <br>
-            {% endif %}
-          {% endif %}
-        {% endfor %}
-      {% endfor %}
-
-      {% for item in filter|slice:":4" %}
-        {# Building of the url: #}
-        {# if 'selected_facets' is not in the request then display new facet #}
-        {# for each element of the request #}
-        {#   if one of them is 'selected_facets' #}
-        {#   if item not in values then display new facet #}
-        {#     for each value #}
-        {#       if value != item then display selected facet #}
-        {#   else allow to disable the facet #}
-        {% if 'selected_facets' not in request.GET %}
-        <a href="?q={{ query|urlencode }}&amp;selected_facets={{ filter_exact|add:":"|add:item.0|urlencode }}" class="addableFacet">{{ item.0 }}</a> ({{ item.1 }})
-        <br>
-        {% endif %}
-        {% for key, values in request.GET.iterlists %}
-         {% if key = 'selected_facets' %}
-          {% if filter_exact|add:":"|add:item.0 not in values %}
-           <a href="?q={{ query|urlencode }}&amp;selected_facets={{ filter_exact|add:":"|add:item.0|urlencode }}{% for facet in values %}{% if facet != filter_exact|add:":"|add:item.0 %}&amp;selected_facets={{ facet|urlencode }}{% endif %}{% endfor %}" class="addableFacet">{{ item.0 }}</a> ({{ item.1 }})
-            <br>
-          {% endif %}
-         {% endif %}
-        {% endfor %}
-      {% endfor %}
-	  {% if filter|length > 4 %}
-		<a id="displayText_{{ filter_exact }}" href="javascript:toggle('{{ filter_exact }}');">more</a><br>
-	  {% endif %}
-	  <div id="addElements_{{ filter_exact }}" style="display:none">
-		{% for item in filter|slice:"4:" %}
-         {% if 'selected_facets' not in request.GET %}
-         <a href="?q={{ query|urlencode }}&amp;selected_facets={{ filter_exact|add:":"|add:item.0|urlencode }}" class="addableFacet">{{ item.0 }}</a> ({{ item.1 }})
-         <br>
-         {% endif %}
-         {% for key, values in request.GET.iterlists %}
-          {% if key = 'selected_facets' %}
-           {% if filter_exact|add:":"|add:item.0 not in values %}
-            <a href="?q={{ query|urlencode }}&amp;selected_facets={{ filter_exact|add:":"|add:item.0|urlencode }}{% for facet in values %}{% if facet != filter_exact|add:":"|add:item.0 %}&amp;selected_facets={{ facet|urlencode }}{% endif %}{% endfor %}" class="addableFacet">{{ item.0 }}</a> ({{ item.1 }})
-            <br>
-           {% endif %}
-          {% endif %}
-         {% endfor %}
-		{% endfor %}
-	  </div>
-	</div>
-  {% endif %}
-  
+{% endspaceless %}

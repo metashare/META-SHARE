@@ -383,3 +383,18 @@ class MetashareFacetedSearchView(FacetedSearchView):
                 results_count, (datetime.now() - starttime).microseconds)
 
         return sqs
+
+    def extra_context(self):
+        extra = super(MetashareFacetedSearchView, self).extra_context()
+        # add a dictionary of the selected items of active facets
+        sel_facets = {}
+        for facet in self.request.GET.getlist("selected_facets"):
+            if ":" in facet:
+                field, value = facet.split(":", 1)
+                if value:
+                    if field in sel_facets:
+                        sel_facets[field].append(value)
+                    else:
+                        sel_facets[field] = [value]
+        extra['sel_facets'] = sel_facets
+        return extra

@@ -38,46 +38,26 @@
       <td width="20%">
         <div class="filter_box"; style="valign=top">
           <h4>Filter by:</h4>
-
-          {# Display the selected facets first (position=faceted) #}
-          {% include "repo2/filter.html" with title="Language" filter=facets.fields.languageNameFilter filter_exact="languageNameFilter_exact" faceted="True" %}
-          {% include "repo2/filter.html" with title="Resource Type" filter=facets.fields.resourceTypeFilter filter_exact="resourceTypeFilter_exact" faceted="True" %}
-          {% include "repo2/filter.html" with title="Media Type" filter=facets.fields.mediaTypeFilter filter_exact="mediaTypeFilter_exact" faceted="True" %}
-          {% include "repo2/filter.html" with title="Availability" filter=facets.fields.availabilityFilter filter_exact="availabilityFilter_exact" faceted="True" %}
-          {% include "repo2/filter.html" with title="Licence" filter=facets.fields.licenceFilter filter_exact="licenceFilter_exact" faceted="True" %}
-          {% include "repo2/filter.html" with title="Restriction of Use" filter=facets.fields.restrictionsOfUseFilter filter_exact="restrictionsOfUseFilter_exact" faceted="True" %}
-          {% include "repo2/filter.html" with title="Validated" filter=facets.fields.validatedFilter filter_exact="validatedFilter_exact" faceted="True" %}
-          {% include "repo2/filter.html" with title="Foreseen Use" filter=facets.fields.foreseenUseFilter filter_exact="foreseenUseFilter_exact" faceted="True" %}
-          {% include "repo2/filter.html" with title="Use NLP Specific" filter=facets.fields.useNlpSpecificFilter filter_exact="useNlpSpecificFilter_exact" faceted="True" %}
-          {% include "repo2/filter.html" with title="Linguality Type" filter=facets.fields.lingualityTypeFilter filter_exact="lingualityTypeFilter_exact" faceted="True" %}
-          {% include "repo2/filter.html" with title="Multilinguality Type" filter=facets.fields.multilingualityTypeFilter filter_exact="multilingualityTypeFilter_exact" faceted="True" %}
-          {% include "repo2/filter.html" with title="Modality Type" filter=facets.fields.modalityTypeFilter filter_exact="modalityTypeFilter_exact" faceted="True" %}
-          {% include "repo2/filter.html" with title="Mime Type" filter=facets.fields.mimeTypeFilter filter_exact="mimeTypeFilter_exact" faceted="True" %}
-          {% include "repo2/filter.html" with title="Best Practices" filter=facets.fields.bestPracticesFilter filter_exact="bestPracticesFilter_exact" faceted="True" %}
-          {% include "repo2/filter.html" with title="Domain" filter=facets.fields.domainFilter filter_exact="domainFilter_exact" faceted="True" %}
-          {% include "repo2/filter.html" with title="Geographic Coverage" filter=facets.fields.geographicCoverageFilter filter_exact="geographicCoverageFilter_exact" faceted="True" %}
-          {% include "repo2/filter.html" with title="Time Coverage" filter=facets.fields.timeCoverageFilter filter_exact="timeCoverageFilter_exact" faceted="True" %}
-          {% include "repo2/filter.html" with title="Subject" filter=facets.fields.subjectFilter filter_exact="subjectFilter_exact" faceted="True" %}
-
-          {# Then hide the non selected facets (no position) #}
-          {% include "repo2/filter.html" with title="Language" filter=facets.fields.languageNameFilter filter_exact="languageNameFilter_exact" %}
-          {% include "repo2/filter.html" with title="Resource Type" filter=facets.fields.resourceTypeFilter filter_exact="resourceTypeFilter_exact" %}
-          {% include "repo2/filter.html" with title="Media Type" filter=facets.fields.mediaTypeFilter filter_exact="mediaTypeFilter_exact" %}
-          {% include "repo2/filter.html" with title="Availability" filter=facets.fields.availabilityFilter filter_exact="availabilityFilter_exact" %}
-          {% include "repo2/filter.html" with title="Licence" filter=facets.fields.licenceFilter filter_exact="licenceFilter_exact" %}
-          {% include "repo2/filter.html" with title="Restriction of Use" filter=facets.fields.restrictionsOfUseFilter filter_exact="restrictionsOfUseFilter_exact" %}
-          {% include "repo2/filter.html" with title="Validated" filter=facets.fields.validatedFilter filter_exact="validatedFilter_exact" %}
-          {% include "repo2/filter.html" with title="Foreseen Use" filter=facets.fields.foreseenUseFilter filter_exact="foreseenUseFilter_exact" %}
-          {% include "repo2/filter.html" with title="Use NLP Specific" filter=facets.fields.useNlpSpecificFilter filter_exact="useNlpSpecificFilter_exact" %}
-          {% include "repo2/filter.html" with title="Linguality Type" filter=facets.fields.lingualityTypeFilter filter_exact="lingualityTypeFilter_exact" %}
-          {% include "repo2/filter.html" with title="Multilinguality Type" filter=facets.fields.multilingualityTypeFilter filter_exact="multilingualityTypeFilter_exact" %}
-          {% include "repo2/filter.html" with title="Modality Type" filter=facets.fields.modalityTypeFilter filter_exact="modalityTypeFilter_exact" %}
-          {% include "repo2/filter.html" with title="Mime Type" filter=facets.fields.mimeTypeFilter filter_exact="mimeTypeFilter_exact" %}
-          {% include "repo2/filter.html" with title="Best Practices" filter=facets.fields.bestPracticesFilter filter_exact="bestPracticesFilter_exact" %}
-          {% include "repo2/filter.html" with title="Domain" filter=facets.fields.domainFilter filter_exact="domainFilter_exact" %}
-          {% include "repo2/filter.html" with title="Geographic Coverage" filter=facets.fields.geographicCoverageFilter filter_exact="geographicCoverageFilter_exact" %}
-          {% include "repo2/filter.html" with title="Time Coverage" filter=facets.fields.timeCoverageFilter filter_exact="timeCoverageFilter_exact" %}
-          {% include "repo2/filter.html" with title="Subject" filter=facets.fields.subjectFilter filter_exact="subjectFilter_exact" %}
+          {% for dummy in ".."|make_list %}
+            {% include "repo2/filter.html" with title="Language" filter=facets.fields.languageNameFilter filter_exact="languageNameFilter_exact" selected_only=forloop.first %}
+            {% include "repo2/filter.html" with title="Resource Type" filter=facets.fields.resourceTypeFilter filter_exact="resourceTypeFilter_exact" selected_only=forloop.first %}
+            {% include "repo2/filter.html" with title="Media Type" filter=facets.fields.mediaTypeFilter filter_exact="mediaTypeFilter_exact" selected_only=forloop.first %}
+            {% include "repo2/filter.html" with title="Availability" filter=facets.fields.availabilityFilter filter_exact="availabilityFilter_exact" selected_only=forloop.first %}
+            {% include "repo2/filter.html" with title="Licence" filter=facets.fields.licenceFilter filter_exact="licenceFilter_exact" selected_only=forloop.first %}
+            {% include "repo2/filter.html" with title="Restriction of Use" filter=facets.fields.restrictionsOfUseFilter filter_exact="restrictionsOfUseFilter_exact" selected_only=forloop.first %}
+            {% include "repo2/filter.html" with title="Validated" filter=facets.fields.validatedFilter filter_exact="validatedFilter_exact" selected_only=forloop.first %}
+            {% include "repo2/filter.html" with title="Foreseen Use" filter=facets.fields.foreseenUseFilter filter_exact="foreseenUseFilter_exact" selected_only=forloop.first %}
+            {% include "repo2/filter.html" with title="Use NLP Specific" filter=facets.fields.useNlpSpecificFilter filter_exact="useNlpSpecificFilter_exact" selected_only=forloop.first %}
+            {% include "repo2/filter.html" with title="Linguality Type" filter=facets.fields.lingualityTypeFilter filter_exact="lingualityTypeFilter_exact" selected_only=forloop.first %}
+            {% include "repo2/filter.html" with title="Multilinguality Type" filter=facets.fields.multilingualityTypeFilter filter_exact="multilingualityTypeFilter_exact" selected_only=forloop.first %}
+            {% include "repo2/filter.html" with title="Modality Type" filter=facets.fields.modalityTypeFilter filter_exact="modalityTypeFilter_exact" selected_only=forloop.first %}
+            {% include "repo2/filter.html" with title="Mime Type" filter=facets.fields.mimeTypeFilter filter_exact="mimeTypeFilter_exact" selected_only=forloop.first %}
+            {% include "repo2/filter.html" with title="Best Practices" filter=facets.fields.bestPracticesFilter filter_exact="bestPracticesFilter_exact" selected_only=forloop.first %}
+            {% include "repo2/filter.html" with title="Domain" filter=facets.fields.domainFilter filter_exact="domainFilter_exact" selected_only=forloop.first %}
+            {% include "repo2/filter.html" with title="Geographic Coverage" filter=facets.fields.geographicCoverageFilter filter_exact="geographicCoverageFilter_exact" selected_only=forloop.first %}
+            {% include "repo2/filter.html" with title="Time Coverage" filter=facets.fields.timeCoverageFilter filter_exact="timeCoverageFilter_exact" selected_only=forloop.first %}
+            {% include "repo2/filter.html" with title="Subject" filter=facets.fields.subjectFilter filter_exact="subjectFilter_exact" selected_only=forloop.first %}
+          {% endfor %}
         </div>
           </td>
           <td width="70%">
