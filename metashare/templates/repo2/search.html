@@ -36,7 +36,7 @@
   <table>
     <tr style="valign:top">
       <td width="20%">
-        <div class="filter_box"; style="valign=top">
+        <div class="filter_box">
           <h4>Filter by:</h4>
           {% for dummy in ".."|make_list %}
             {% include "repo2/filter.html" with title="Language" filter=facets.fields.languageNameFilter filter_exact="languageNameFilter_exact" selected_only=forloop.first %}
