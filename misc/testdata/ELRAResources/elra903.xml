@@ -36,10 +36,24 @@
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Non Member: 8750.00€</price>
-<price>Academic org. ELRA Member: 6125.00€</price>
-<availabilityStartDate>2006-03-13</availabilityStartDate>
+<price>8750.00</price>
+<userNature>academic</userNature>
+<membershipInfo>
+<member>False</member>
+<membershipInstitution>ELRA</membershipInstitution>
+</membershipInfo>
 </licenceInfo>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>6125.00</price>
+<userNature>academic</userNature>
+<membershipInfo>
+<member>True</member>
+<membershipInstitution>ELRA</membershipInstitution>
+</membershipInfo>
+</licenceInfo>
+<availabilityStartDate>2006-03-13</availabilityStartDate>
 </distributionInfo>
 <resourceComponentType>
 <lexicalConceptualResourceInfo>

@@ -34,23 +34,86 @@
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>4755.00</price>
+<userNature>academic</userNature>
+<membershipInfo>
+<member>True</member>
+<membershipInstitution>ELRA</membershipInstitution>
+</membershipInfo>
+</licenceInfo>
+<licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 755.00€</price>
-<price>Commercial org. ELRA Member: 4755.00€</price>
-<price>Academic org. ELRA Non Member: 1010.00€</price>
-<price>Commercial org. ELRA Non Member: 5010.00€</price>
-<availabilityStartDate>2004-06-04</availabilityStartDate>
+<price>755.00</price>
+<userNature>academic</userNature>
+<membershipInfo>
+<member>True</member>
+<membershipInstitution>ELRA</membershipInstitution>
+</membershipInfo>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 4755.00€</price>
-<price>Commercial org. ELRA Member: 4755.00€</price>
-<price>Academic org. ELRA Non Member: 5010.00€</price>
-<price>Commercial org. ELRA Non Member: 5010.00€</price>
-<availabilityStartDate>2004-06-04</availabilityStartDate>
+<price>4755.00</price>
+<userNature>commercial</userNature>
+<membershipInfo>
+<member>True</member>
+<membershipInstitution>ELRA</membershipInstitution>
+</membershipInfo>
 </licenceInfo>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>4755.00</price>
+<userNature>commercial</userNature>
+<membershipInfo>
+<member>True</member>
+<membershipInstitution>ELRA</membershipInstitution>
+</membershipInfo>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>5010.00</price>
+<userNature>academic</userNature>
+<membershipInfo>
+<member>False</member>
+<membershipInstitution>ELRA</membershipInstitution>
+</membershipInfo>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>1010.00</price>
+<userNature>academic</userNature>
+<membershipInfo>
+<member>False</member>
+<membershipInstitution>ELRA</membershipInstitution>
+</membershipInfo>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>5010.00</price>
+<userNature>commercial</userNature>
+<membershipInfo>
+<member>False</member>
+<membershipInstitution>ELRA</membershipInstitution>
+</membershipInfo>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>5010.00</price>
+<userNature>commercial</userNature>
+<membershipInfo>
+<member>False</member>
+<membershipInstitution>ELRA</membershipInstitution>
+</membershipInfo>
+</licenceInfo>
+<availabilityStartDate>2004-06-04</availabilityStartDate>
 </distributionInfo>
 <resourceComponentType>
 <corpusInfo>

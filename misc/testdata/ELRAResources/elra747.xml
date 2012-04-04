@@ -36,13 +36,44 @@
 <licenceInfo>
 <licence>ELRA_EVALUATION</licence>
 <restrictionsOfUse>evaluationUse</restrictionsOfUse>
-<price>Academic org. ELRA Member: 500.00€</price>
-<price>Commercial org. ELRA Member: 500.00€</price>
-<price>Academic org. ELRA Non Member: 750.00€</price>
-<price>Commercial org. ELRA Non Member: 750.00€</price>
-<distributionAccessMedium>DVD-R</distributionAccessMedium>
-<availabilityStartDate>2006-12-18</availabilityStartDate>
+<price>500.00</price>
+<userNature>academic</userNature>
+<membershipInfo>
+<member>True</member>
+<membershipInstitution>ELRA</membershipInstitution>
+</membershipInfo>
 </licenceInfo>
+<licenceInfo>
+<licence>ELRA_EVALUATION</licence>
+<restrictionsOfUse>evaluationUse</restrictionsOfUse>
+<price>500.00</price>
+<userNature>commercial</userNature>
+<membershipInfo>
+<member>True</member>
+<membershipInstitution>ELRA</membershipInstitution>
+</membershipInfo>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_EVALUATION</licence>
+<restrictionsOfUse>evaluationUse</restrictionsOfUse>
+<price>750.00</price>
+<userNature>academic</userNature>
+<membershipInfo>
+<member>False</member>
+<membershipInstitution>ELRA</membershipInstitution>
+</membershipInfo>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_EVALUATION</licence>
+<restrictionsOfUse>evaluationUse</restrictionsOfUse>
+<price>750.00</price>
+<userNature>commercial</userNature>
+<membershipInfo>
+<member>False</member>
+<membershipInstitution>ELRA</membershipInstitution>
+</membershipInfo>
+</licenceInfo>
+<availabilityStartDate>2006-12-18</availabilityStartDate>
 </distributionInfo>
 <usageInfo>
 <actualUseInfo>

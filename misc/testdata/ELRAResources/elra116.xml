@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
-<resourceName lang="English">Venice Italian Treebank (VIT)</resourceName>
-<resourceName lang="French">Treebank italien de Venise</resourceName>
-<description lang="English">The VIT, Venice Italian Treebank is the effort of the collaboration of people working at the Laboratory of Computational Linguistics of the University of Venice in the years 1995-2005. It is partly the result of annotation carried out internally with no specific project in mind and no financial support. This work was partly related to the development of a lexicon, a morphological analyzer, a tagger, a deep parser of Italian. All these resources were finally ready at the beginning of the ‘90s when the LCL got involved in the first national projects. The VIT contains about 272,000 words distributed over six different domains, and this is what makes it so relevant for the study of the structure of Italian language. The following domains were annotated: Domain                          Number of words         Time spanBureaucratic                    20,000                       1986 Politics                            40,000                       1984Economic &amp; financial         12,000                       1987Literary                           10,000                       1984Scientific                         20,000                       1985News                              170,000                     1994In addition, some 60,000 tokens of spoken dialogues in different Italian varieties were annotated.The annotation follows general X-bar criteria with 29 constituency labels and 102 PoS tags. VIT is also made available in a broad annotation version with 10 constituency labels and 22 PoS tags for machine learning purposes.The format is plain text with square bracketing. However, a UPenn style version which is readable by the open source query language CorpusSearch is also provided.</description>
-<description lang="French">Le Treebank italien de Venise (VIT) est le fruit d’un travail de 10 ans (1995-2005) effectué par des chercheurs du Laboratoire de linguistique computationnelle (LCL) de l’université de Venise. Réalisé en interne, en dehors de tout projet spécifique et sans aucun soutien financier, le Treebank est issu à la fois d’un travail d'annotation et du développement d’un lexique, d’un analyseur morphologique, d’un étiqueteur et d’un analyseur syntaxique approfondi de l’italien.Toutes ces ressources étaient prêtes dès le début des années 90 lorsque le LCL s’est impliqué dans les premiers projets nationaux. Le VIT comprend environ 272 000 mots répartis sur six domaines différents, ce qui en fait un outil très utile pour l’étude de la structure de la langue italienne. Les domaines suivants ont été annotés : Domaine                             Nombre de mots         PériodeBureaucratique                    20,000                     1986 Politique                              40,000                     1984Economique &amp; financier        12,000                     1987Littéraire                             10,000                     1984Scientifique                         20,000                      1985Actualités                            170,000                    1994En outre, quelque 60 000 tokens de dialogue oral avec plusieurs variantes de l’italien ont été annotés.L’annotation est conforme au critère général X-bar avec 29 constituants et 102 étiquettes de partie du discours. Le VIT est également proposé dans une version d’annotation de 10 constituants et de 22 étiquettes de partie du discours pour l’apprentissage automatique.Les données sont au format texte avec crochets. Cependant, une version de type UPenn visualisable avec CorpusSearch (langage d’interrogation open source) est également fournie.</description>
-<resourceShortName/>
-<metaShareId>n/a</metaShareId>
-<url>http://catalog.elra.info/product_info.php?products_id=831</url>
-<identifier>ELRA-W0040</identifier>
+<resourceName lang="English">ECI/MCI (European Corpus Initiative/Multilingual Corpus I)</resourceName>
+<resourceName lang="French">ECI/MCI (European Corpus Initiative/Multilingual Corpus I)</resourceName>
+<description lang="English">The European Corpus Initiative (ECI) was founded to oversee the acquisition and preparation of a large multilingual corpus, and supports existing and projected national and international efforts to carefully design, collect and publish large-scale multilingual written and spoken corpora. ECI has produced the Multilingual Corpus I (ECI/MCI) of over 98 million words, covering most of the major European languages, as well as Turkish, Japanese, Russian, Chinese, Malay and more. The primary focus in this effort is on textual material of all kinds, including transcriptions of spoken material. Just a sampling of the contents of the CD-ROM: German newspaper texts from the Frankfurter Rundschau from July 1992 -March 1993. provided by Universität Gesamthochschule, Paderborn, Germany. Approximately 34 million words. French newspaper texts from Le Monde, consisting of material from September 1989, October 1989, and January 1990. Provided by LIMSI CNRS, France. Approximately 4.1 million words. Extracts from the Leiden Corpus of Dutch, consisting of newspapers, transcribed speech, etc. Provided by Institut voor Nederlandse Lexicologie, Leiden, Holland. Approximately 5.5 million words. International Labor Organisation (ILO) "Official Bulletin, B Series". Vols LXVII(1984) - LXXII(1989). Parallel texts in English, French and Spanish provided by the International Labor Organisation. Approximately 5 million words. The ECI/MCI is available from ELSNET.</description>
+<description lang="French">Le "European Corpus Initiative" (ECI) a réalisé le Corpus Multilingue I (ECI/MCI), qui, avec plus de 98 millions de mots couvre la plupart des langues européennes plus le turc, le japonais, le russe, le chinois, le malais et d'autres encore.</description>
+<resourceShortName>ECI/MCI</resourceShortName>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=85</url>
+<identifier>W0004</identifier>
 </identificationInfo>
 <metadataInfo>
 <metadataCreationDate>2005-05-12</metadataCreationDate>
@@ -29,44 +29,57 @@
 </metadataInfo>
 <versionInfo>
 <version>1.0</version>
-<revision>Update frequency: yearly</revision>
-<lastDateUpdated>2006-02-13</lastDateUpdated>
+<lastDateUpdated>2004-05-12</lastDateUpdated>
 </versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 10000.00€</price>
-<price>Academic org. ELRA Non Member: 4000.00€</price>
-<price>Commercial org. ELRA Member: 7000.00€</price>
-<price>Academic org. ELRA Member: 3000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2006-02-13</availabilityStartDate>
+<price>50.00</price>
+<userNature>commercial</userNature>
+<membershipInfo>
+<member>False</member>
+<membershipInstitution>ELRA</membershipInstitution>
+</membershipInfo>
 </licenceInfo>
 <licenceInfo>
-<licence>ELRA_VAR</licence>
-<restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 10000.00€</price>
-<price>Academic org. ELRA Non Member: 10000.00€</price>
-<price>Commercial org. ELRA Member: 7000.00€</price>
-<price>Academic org. ELRA Member: 7000.00€</price>
-<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-<availabilityStartDate>2006-02-13</availabilityStartDate>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>50.00</price>
+<userNature>academic</userNature>
+<membershipInfo>
+<member>False</member>
+<membershipInstitution>ELRA</membershipInstitution>
+</membershipInfo>
 </licenceInfo>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>50.00</price>
+<userNature>commercial</userNature>
+<membershipInfo>
+<member>True</member>
+<membershipInstitution>ELRA</membershipInstitution>
+</membershipInfo>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>50.00</price>
+<userNature>academic</userNature>
+<membershipInfo>
+<member>True</member>
+<membershipInstitution>ELRA</membershipInstitution>
+</membershipInfo>
+</licenceInfo>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
 </distributionInfo>
-<validationInfo>
-<validated>True</validated>
-<validationModeDetails> Internal validation</validationModeDetails>
-</validationInfo>
-<usageInfo>
-<actualUseInfo>
-<actualUse>nlpApplications</actualUse>
-<useNLPSpecific>speechSynthesis</useNLPSpecific>
-</actualUseInfo>
-</usageInfo>
 <resourceCreationInfo>
-<creationEndDate>2005-01-01</creationEndDate>
+<fundingProject>
+<projectName>European Corpus Initiative (ECI)</projectName>
+<fundingType>other</fundingType>
+</fundingProject>
 </resourceCreationInfo>
 <resourceComponentType>
 <corpusInfo>
@@ -78,16 +91,141 @@
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
 <languageInfo>
+<languageId>tur</languageId>
+<languageName>Turkish</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>alb/sqi</languageId>
+<languageName>Albanian</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>bul</languageId>
+<languageName>Bulgarian</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>chi/zho</languageId>
+<languageName>Chinese</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>cze/ces</languageId>
+<languageName>Czech</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>dut/nld</languageId>
+<languageName>Dutch</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Scottish Gaelic</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
+</languageInfo>
+<languageInfo>
+<languageId>eng</languageId>
+<languageName>English</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>est</languageId>
+<languageName>Estonian</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>gla</languageId>
+<languageName>Gaelic</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Scottish Gaelic</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
+</languageInfo>
+<languageInfo>
+<languageId>ger/deu</languageId>
+<languageName>German</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>gre/ell</languageId>
+<languageName>Greek</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Scottish Gaelic</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
+</languageInfo>
+<languageInfo>
 <languageId>ita</languageId>
 <languageName>Italian</languageName>
 </languageInfo>
+<languageInfo>
+<languageId>jpn</languageId>
+<languageName>Japanese</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>lat</languageId>
+<languageName>Latin</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>lit</languageId>
+<languageName>Lithuanian</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>may/msa</languageId>
+<languageName>Malay</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>spa</languageId>
+<languageName>Spanish</languageName>
+<languageVarietyInfo>
+<languageVarietyType>dialect</languageVarietyType>
+<languageVarietyName>Scottish Gaelic</languageVarietyName>
+<sizePerLanguageVariety>
+<size>2</size>
+<sizeUnit>gb</sizeUnit>
+</sizePerLanguageVariety>
+</languageVarietyInfo>
+</languageInfo>
+<languageInfo>
+<languageId>scc/srp</languageId>
+<languageName>Serbian</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>dan</languageId>
+<languageName>Danish</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>rus</languageId>
+<languageName>Russian</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>nor</languageId>
+<languageName>Norwegian</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>uzb</languageId>
+<languageName>Uzbek</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>por</languageId>
+<languageName>Portuguese</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>swe</languageId>
+<languageName>Swedish</languageName>
+</languageInfo>
 <sizeInfo>
-<size>120</size>
-<sizeUnit>mb</sizeUnit>
+<size>98000000</size>
+<sizeUnit>words</sizeUnit>
 </sizeInfo>
-<textFormatInfo>
-<mimeType>Plain text</mimeType>
-</textFormatInfo>
 </corpusTextInfo>
 </corpusMediaType>
 </corpusInfo>
