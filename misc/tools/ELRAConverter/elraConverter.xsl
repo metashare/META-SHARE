@@ -87,7 +87,160 @@
                     <availability>
                         <xsl:text>available-restrictedUse</xsl:text> 
                     </availability>
+		            <xsl:choose>
+					<xsl:when test="*[local-name()='pricing_value' and namespace-uri()='']">
+				    <!--for each pricing value, take all the direct neighbor info-->
+				    <xsl:for-each select="*[local-name()='pricing_value' and namespace-uri()='']">
+					    <licenceInfo>
+					    <xsl:variable name='abr' select="following-sibling::pricing_abreviation[1]"/>
+				
+						<xsl:choose>
+						<xsl:when test="$abr='A-R' or $abr='C-R' or $abr='Acad.-Reseach'">
+							<licence>
+							<xsl:text>ELRA_END_USER</xsl:text>
+							</licence>
+							<restrictionsOfUse>
+							<xsl:text>academic-nonCommercialUse</xsl:text>
+						   	</restrictionsOfUse>
+						</xsl:when>
+						<xsl:when test="$abr='A-E' or $abr='C-E' or $abr='Acad.-Reseach'">
+							<licence>
+						        <xsl:text>ELRA_EVALUATION</xsl:text>
+						    	</licence>
+						    	<restrictionsOfUse>
+						        <xsl:text>evaluationUse</xsl:text>
+						    	</restrictionsOfUse>
+						</xsl:when>
+						<xsl:when test="$abr='A-C' or $abr='C-C' or $abr='Acad.-Reseach'">
+							<licence>
+				                	<xsl:text>ELRA_VAR</xsl:text>
+						   	</licence>
+						    	<restrictionsOfUse>
+						        <xsl:text>commercialUse</xsl:text>
+						    	</restrictionsOfUse>
+						</xsl:when>
+						</xsl:choose>
+				
+				
+						<xsl:variable name="medium" select="string(*[local-name()='tech_distribution_medium' and namespace-uri()=''])"/>
+						    <xsl:choose>
+						        <xsl:when test="contains($medium, 'CD-ROM')"> 
+						            <distributionAccessMedium>
+						                <xsl:text>CD-ROM</xsl:text>
+						            </distributionAccessMedium>
+						        </xsl:when>
+						        <xsl:when test="contains($medium, 'DVD')"> 
+						            <distributionAccessMedium>
+						                <xsl:text>DVD-R</xsl:text>
+						            </distributionAccessMedium>
+						        </xsl:when>
+						        <xsl:when test="contains($medium, 'floppy')"> 
+						            <distributionAccessMedium>
+						                <xsl:text>other</xsl:text>
+						            </distributionAccessMedium>
+						        </xsl:when>
+						    </xsl:choose>
 
+						<price><xsl:value-of select="string(.)"/></price>
+						<xsl:variable name='customerType' select="following-sibling::pricing_category_customer_type[1]"/>
+						<userNature><xsl:if test='$customerType="Commercial"'>commercial</xsl:if>
+						<xsl:if test='$customerType="Academic"'>academic</xsl:if></userNature>
+
+						<xsl:variable name='customerGroup' select="following-sibling::pricing_category_customer_group[1]"/>
+
+						<membershipInfo>
+						<member><xsl:if test='$customerGroup="Member"'>True</xsl:if>
+						<xsl:if test='$customerGroup="Non Member"'>False</xsl:if></member>
+						<membershipInstitution>ELRA</membershipInstitution>
+						</membershipInfo>
+					</licenceInfo>
+				    </xsl:for-each>
+		            </xsl:when>
+				    <xsl:otherwise>
+					<licenceInfo>
+						<licence>ELRA_END_USER</licence>
+						<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+						<price>Please contact us for further information</price>
+						<userNature>commercial</userNature>
+						<membershipInfo>
+							<member>False</member>
+							<membershipInstitution>ELRA</membershipInstitution>
+						</membershipInfo>
+					</licenceInfo>
+					<licenceInfo>
+						<licence>ELRA_END_USER</licence>
+						<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+						<price>Please contact us for further information</price>
+						<userNature>academic</userNature>
+						<membershipInfo>
+							<member>False</member>
+							<membershipInstitution>ELRA</membershipInstitution>
+						</membershipInfo>
+					</licenceInfo>
+					<licenceInfo>
+						<licence>ELRA_END_USER</licence>
+						<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+						<price>Please contact us for further information</price>
+						<userNature>commercial</userNature>
+						<membershipInfo>
+							<member>True</member>
+							<membershipInstitution>ELRA</membershipInstitution>
+						</membershipInfo>
+					</licenceInfo>
+					<licenceInfo>
+						<licence>ELRA_END_USER</licence>
+						<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+						<price>Please contact us for further information</price>
+						<userNature>academic</userNature>
+						<membershipInfo>
+							<member>True</member>
+							<membershipInstitution>ELRA</membershipInstitution>
+						</membershipInfo>
+					</licenceInfo>
+					<licenceInfo>
+						<licence>ELRA_VAR</licence>
+						<restrictionsOfUse>commercialUse</restrictionsOfUse>
+						<price>Please contact us for further information</price>
+						<userNature>commercial</userNature>
+						<membershipInfo>
+							<member>False</member>
+							<membershipInstitution>ELRA</membershipInstitution>
+						</membershipInfo>
+					</licenceInfo>					
+					<licenceInfo>
+						<licence>ELRA_VAR</licence>
+						<restrictionsOfUse>commercialUse</restrictionsOfUse>
+						<price>Please contact us for further information</price>
+						<userNature>academic</userNature>
+						<membershipInfo>
+							<member>False</member>
+							<membershipInstitution>ELRA</membershipInstitution>
+						</membershipInfo>
+					</licenceInfo>
+					<licenceInfo>
+						<licence>ELRA_VAR</licence>
+						<restrictionsOfUse>commercialUse</restrictionsOfUse>
+						<price>Please contact us for further information</price>
+						<userNature>commercial</userNature>
+						<membershipInfo>
+							<member>True</member>
+							<membershipInstitution>ELRA</membershipInstitution>
+						</membershipInfo>
+					</licenceInfo>
+					<licenceInfo>
+						<licence>ELRA_VAR</licence>
+						<restrictionsOfUse>commercialUse</restrictionsOfUse>
+						<price>Please contact us for further information</price>
+						<userNature>academic</userNature>
+						<membershipInfo>
+							<member>True</member>
+							<membershipInstitution>ELRA</membershipInstitution>
+						</membershipInfo>
+					</licenceInfo>
+				    </xsl:otherwise>
+		            </xsl:choose>
+		            
+<!--
                     <xsl:if test="'A-R' = *[local-name()='pricing_abreviation' and namespace-uri()=''] or 'C-R' = *[local-name()='pricing_abreviation' and namespace-uri()=''] or 'Acad.-Reseach' = *[local-name()='pricing_abreviation' and namespace-uri()='']">
                         <licenceInfo>
                             <licence>
@@ -204,6 +357,10 @@
                             </availabilityStartDate>
                         </licenceInfo>
                     </xsl:if>
+                    -->
+                    <availabilityStartDate>
+                                <xsl:value-of select="substring(string(*[local-name()='date_of_availability' and namespace-uri()='']), '0', '11')"/>
+                    </availabilityStartDate>
                 </distributionInfo>
                 
                 
@@ -243,7 +400,7 @@
                                 <useNLPSpecific>                           
                                     <xsl:choose>
                                         <xsl:when test="$apppos='Speech verification#Automatic speech recognition#Voice control'">voiceControl</xsl:when>
-                                        <xsl:when test="$apppos='Speech verification#Automatic speech recognition#Voice control' or $apppos='Discourse analysis#Speaker verification#Speech recognition' or $apppos='Automatic speech recognition'">speechRecognition</xsl:when>
+                                        <xsl:when test="$apppos='Speech verification#Automatic speech recognition#Voice control' or $apppos='Discourse analysis#Speaker verification#Speech recognition' or $apppos='Automatic speech recognition' or $apppos='Speech recognition#Voice control#Speech verification#Automatic speech recognition#Voice control'">speechRecognition</xsl:when>
                                         <xsl:when test="$apppos='Speech synthesis'">speechSynthesis</xsl:when>
                                     </xsl:choose>
                                 </useNLPSpecific>
@@ -258,7 +415,7 @@
                                         <xsl:choose>
                                             <xsl:when test="$appex='Spoken dialogue systems' or $appex='Speech synthesis#Automatic speech recognition' or $appex='Speech recognition#Voice control#Speech verification#Automatic speech recognition#Voice control' or $appex='Speech recognition#Lip tracking analysis' or $appex='Speech recognition#Speech synthesis' or $appex='Speech recognition' or $appex='Speaker verification#Speech recognition' or $appex='Speaker identification' or $appex='Language identification#Speaker identification#Speech recognition' or $appex='Automatic speech recognition' or $appex='Lip tracking analysis' or $appex='Speech recognition#Automatic speech recognition#Automatic person recognition'">speechRecognition</xsl:when>
                                             <xsl:when test="$appex='Speech synthesis#Information retrieval' or $appex='Speech synthesis#Automatic speech recognition' or $appex='Speech synthesis' or $appex='Speech recognition#Speech synthesis'">speechSynthesis</xsl:when>
-                                            <xsl:when test="$appex='Speech recognition#Voice control' or $appex='Speech recognition#Voice control#Speech verification#Automatic speech recognition#Voice control'">voiceControl</xsl:when>
+                                            <xsl:when test="$appex='Speech recognition#Voice control'or $appex='Speech recognition#Voice control#Voice control' or $appex='Speech recognition#Voice control#Speech verification#Automatic speech recognition#Voice control'">voiceControl</xsl:when>
                                             <xsl:when test="$appex='Information retrieval'">textMining</xsl:when>
                                         </xsl:choose>
                                     </useNLPSpecific>
@@ -1023,9 +1180,7 @@
 					
 		                    	
 		                    <lexicalConceptualResourceMediaType>
-		                        <xsl:for-each select="descendant::content_type">
-
-		                            				
+		                        <xsl:for-each select="descendant::content_type">		                            				
 		                                <lexicalConceptualResourceTextInfo>					
 		                                    <mediaType>text</mediaType>	
 						
