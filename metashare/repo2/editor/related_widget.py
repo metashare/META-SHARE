@@ -16,6 +16,7 @@ class RelatedFieldWidgetWrapper(widgets.RelatedFieldWidgetWrapper):
     def __init__(self, *args, **kwargs):
         self.can_change_related = kwargs.pop('can_change_related', None)
         self.can_delete_related = kwargs.pop('can_delete_related', None)
+        self.can_delete_related = False
         super(RelatedFieldWidgetWrapper, self).__init__(*args, **kwargs)
     
     @classmethod
@@ -51,13 +52,13 @@ class RelatedFieldWidgetWrapper(widgets.RelatedFieldWidgetWrapper):
             # pylint: disable-msg=E1102
             context.update({
                             'change_url_template': template,
-                            'change_help_text': _('Change related model')
+                            'change_help_text': _('Edit related model')
                             })
         if self.can_add_related:
             # pylint: disable-msg=E1102
             context.update({
                             'add_url': self.get_related_url(rel_to, info, 'add'),
-                            'add_help_text': _('Add Another')
+                            'add_help_text': _('Add information')
                             })
         if self.can_delete_related:
             if value:
