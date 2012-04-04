@@ -1,5 +1,5 @@
 '''
-From http://djangosnippets.org/snippets/2565/
+Derived from http://djangosnippets.org/snippets/2565/
 '''
 from django.contrib import admin
 from django.db.models.fields import related
@@ -11,7 +11,7 @@ from metashare.repo2.editor.related_widget import RelatedFieldWidgetWrapper
 from metashare.repo2.editor.widgets import SingleChoiceTypeWidget, \
   MultiChoiceTypeWidget
 
-class RelatedWidgetMixin(object):
+class RelatedAdminMixin(object):
     '''
     Group the joint logic for the related widget to be used in both
     the ModelAdmin and the Inline subclasses.
@@ -25,7 +25,6 @@ class RelatedWidgetMixin(object):
         if db_field.name in _hidden_fields:
             kwargs['widget'] = HiddenInput()
             kwargs['label'] = ''
-
 
     def is_subclassable(self, db_field):
         '''
@@ -90,36 +89,4 @@ class RelatedWidgetMixin(object):
             (escape(pk_value), escapejs(obj)))
 
 
-class RelatedWidgetWrapperAdmin(admin.ModelAdmin, RelatedWidgetMixin):
-
-    def formfield_for_dbfield(self, db_field, **kwargs):
-        self.hide_hidden_fields(db_field, kwargs)
-        if self.is_subclassable(db_field):
-            return self.formfield_for_subclassable(db_field, **kwargs)
-        self.use_hidden_widget_for_one2one(db_field, kwargs)
-        formfield = super(RelatedWidgetWrapperAdmin, self).formfield_for_dbfield(db_field, **kwargs)
-        self.use_related_widget_where_appropriate(db_field, kwargs, formfield)
-        return formfield
-
-    def response_change(self, request, obj):
-        if '_popup' in request.REQUEST:
-            return self.edit_response_close_popup_magic(obj)
-        else:
-            return super(RelatedWidgetWrapperAdmin, self).response_change(request, obj)
-
-class RelatedWidgetWrapperInline(admin.StackedInline, RelatedWidgetMixin):
-
-    def formfield_for_dbfield(self, db_field, **kwargs):
-        if self.is_subclassable(db_field):
-            return self.formfield_for_subclassable(db_field, **kwargs)
-        self.use_hidden_widget_for_one2one(db_field, kwargs)
-        formfield = super(RelatedWidgetWrapperInline, self).formfield_for_dbfield(db_field, **kwargs)
-        self.use_related_widget_where_appropriate(db_field, kwargs, formfield)
-        return formfield
-
-    def response_change(self, request, obj):
-        if '_popup' in request.REQUEST:
-            return self.edit_response_close_popup_magic(obj)
-        else:
-            return super(RelatedWidgetWrapperInline, self).response_change(request, obj)
 
