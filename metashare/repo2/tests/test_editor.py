@@ -87,7 +87,6 @@ class EditorTest(TestCase):
         result = test_utils.import_xml(TESTFIXTURE_XML)
         resource = result[0]
         return resource
-        
 
     def test_can_log_in_staff(self):
         client = Client()
@@ -232,32 +231,39 @@ class EditorTest(TestCase):
         client = self.client_with_user_logged_in(self.editor_login)
         resource = self.import_test_resource()
         response = client.get('{}repo2/resourceinfotype_model/{}/'.format(ADMINROOT, resource.id))
-        self.assertContains(response, 'type="hidden" id="id_distributionInfo"', msg_prefix='One-to-one field "distributionInfo" should have been hidden')
+        self.assertContains(response, 'type="hidden" id="id_distributionInfo"',
+                            msg_prefix='One-to-one field "distributionInfo" should have been hidden')
 
     def test_one2one_distribution_uses_related_widget(self):
         client = self.client_with_user_logged_in(self.editor_login)
         resource = self.import_test_resource()
         response = client.get('{}repo2/resourceinfotype_model/{}/'.format(ADMINROOT, resource.id))
-        self.assertContains(response, 'related-widget-wrapper-change-link" id="edit_id_distributionInfo"', msg_prefix='One-to-one field "distributionInfo" not rendered using related widget')
+        self.assertContains(response, 'related-widget-wrapper-change-link" id="edit_id_distributionInfo"',
+                             msg_prefix='One-to-one field "distributionInfo" not rendered using related widget')
 
     def test_one2one_sizepervalidation_is_hidden(self):
         client = self.client_with_user_logged_in(self.editor_login)
         resource = self.import_test_resource()
         response = client.get('{}repo2/resourceinfotype_model/{}/'.format(ADMINROOT, resource.id))
-        self.assertContains(response, 'type="hidden" id="id_sizePerValidation"', msg_prefix='One-to-one field "sizePerValidation" should have been hidden')
+        self.assertContains(response, 'type="hidden" id="id_validationinfotype_model_set-0-sizePerValidation"',
+                             msg_prefix='One-to-one field "sizePerValidation" should have been hidden')
 
     def test_one2one_sizepervalidation_uses_related_widget(self):
         client = self.client_with_user_logged_in(self.editor_login)
         resource = self.import_test_resource()
         response = client.get('{}repo2/resourceinfotype_model/{}/'.format(ADMINROOT, resource.id))
-        self.assertContains(response, 'related-widget-wrapper-change-link" id="edit_id_validationinfotype_model_set-0-sizePerValidation"', msg_prefix='One-to-one field "sizePerValidation" not rendered using related widget')
+        self.assertContains(response, 'related-widget-wrapper-change-link" id="edit_id_validationinfotype_model_set-0-sizePerValidation"',
+                            msg_prefix='One-to-one field "sizePerValidation" not rendered using related widget')
+        self.assertContains(response, 'id="id_validationinfotype_model_set-0-sizePerValidation"',
+                            msg_prefix='One2one field in inline has unexpected "id" field -- popup save action probably cannot update field as expected')
 
     def test_backref_is_hidden(self):
         client = self.client_with_user_logged_in(self.editor_login)
         resource = self.import_test_resource()
         corpustextinfo = resource.resourceComponentType.corpusMediaType.corpustextinfotype_model_set.all()[0]
         response = client.get('{}repo2/corpustextinfotype_model/{}/'.format(ADMINROOT, corpustextinfo.id))
-        self.assertContains(response, 'type="hidden" name="back_to_corpusmediatypetype_model"', msg_prefix='Back reference should have been hidden')
+        self.assertContains(response, 'type="hidden" name="back_to_corpusmediatypetype_model"',
+                            msg_prefix='Back reference should have been hidden')
 
     def test_validator_is_multiwidget(self):
         client = self.client_with_user_logged_in(self.editor_login)
