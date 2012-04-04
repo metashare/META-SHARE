@@ -1,13 +1,9 @@
 {% spaceless %}
-  {% if filter %}
-    {% if selected_only %}
-      {% if filter_exact in sel_facets %}
-        {% include "repo2/unconditional_filter.html" %}
-      {% endif %}
-    {% else %}
-      {% if not filter_exact in sel_facets %}
-        {% include "repo2/unconditional_filter.html" %}
-      {% endif %}
-    {% endif %}
-  {% endif %}
+<dt>{{ filter.label }}:</dt>
+{% for item in filter.removable %}
+  <dd><a href="?q={{ query|urlencode }}{% for target in item.targets %}&amp;selected_facets={{ target|urlencode }}{% endfor %}" class="removableFacet">{{ item.label }}</a>&nbsp;({{ item.count }})</dd>
+{% endfor %}
+{% for item in filter.addable %}
+  <dd><a href="?q={{ query|urlencode }}{% for target in item.targets %}&amp;selected_facets={{ target|urlencode }}{% endfor %}" class="addableFacet">{{ item.label }}</a>&nbsp;({{ item.count }})</dd>
+{% endfor %}
 {% endspaceless %}
