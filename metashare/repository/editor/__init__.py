@@ -1,3 +1,28 @@
+'''
+The META-SHARE editor.
+
+The rough structure is as follows.
+
+1. The MetashareBackendSite in this file defines the frame and the entry points for
+   generic menu points, such as upload_xml;
+   
+2. manual_admin_registration.py post-processes the automatically generated ../admin.py
+
+3. There is a single SchemaModelAdmin class in superadmin.py which serves as the base class
+   for all models' admin; specific subclasses are in resource_editor.py and
+   manual_admin_registration.py
+
+4. There are two kinds of inline forms, one for the usual inlines (SchemaModelInline), and one
+   for the specific case of "reverse" inlines i.e. inlines for one-to-one fields defined on the
+   current model.
+
+5. The specific workflow for the editor is, roughly:
+   add_view (GET) -> browser -> add_view (POST) -> full_clean -> save -> reponse_add
+   change_view (GET) -> browser -> change_view (POST) -> full_clean -> save -> response_change
+
+'''
+
+
 import sys
 
 from xml.etree.ElementTree import fromstring

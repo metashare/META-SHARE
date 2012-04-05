@@ -5,7 +5,7 @@ This file contains the manually chosen admin forms, as needed for an easy-to-use
 from django.contrib import admin
 # pylint: disable-msg=W0611
 from metashare.repository.models import resourceInfoType_model, \
-    identificationInfoType_model, distributionInfoType_model, \
+    identificationInfoType_model, \
     metadataInfoType_model, communicationInfoType_model, \
     validationInfoType_model, relationInfoType_model, licenceInfoType_model, \
     foreseenUseInfoType_model, corpusMediaTypeType_model, \
@@ -24,7 +24,7 @@ from metashare.repository.models import resourceInfoType_model, \
     lexicalConceptualResourceAudioInfoType_model,\
     lexicalConceptualResourceVideoInfoType_model,\
     lexicalConceptualResourceImageInfoType_model, toolServiceInfoType_model
-from metashare.repository.editor.reverse_inline import ReverseModelAdmin
+from metashare.repository.editor.superadmin import SchemaModelAdmin
 from metashare.repository.editor import admin_site as editor_site
 from metashare.repository.editor.corpus_editor import CorpusAudioForm
 from metashare.repository.editor.resource_editor import ResourceModelAdmin
@@ -32,32 +32,31 @@ from metashare.repository.editor.resource_editor import ResourceModelAdmin
 
 
 
-
 # Custom admin classes
 
-class CorpusTextInfoAdmin(ReverseModelAdmin):
+class CorpusTextInfoAdmin(SchemaModelAdmin):
     hidden_fields = ('back_to_corpusmediatypetype_model', )
     show_tabbed_fieldsets = True
 
-class CorpusVideoInfoAdmin(ReverseModelAdmin):
+class CorpusVideoInfoAdmin(SchemaModelAdmin):
     hidden_fields = ('back_to_corpusmediatypetype_model', )
     show_tabbed_fieldsets = True
 
-class GenericTabbedAdmin(ReverseModelAdmin):
+class GenericTabbedAdmin(SchemaModelAdmin):
     show_tabbed_fieldsets = True
 
-class LexicalConceptualResourceInfoAdmin(ReverseModelAdmin):
+class LexicalConceptualResourceInfoAdmin(SchemaModelAdmin):
     hidden_fields = ('lexicalConceptualResourceMediaType', )
     readonly_fields = ('lexicalConceptualResourceMediaType', )
     show_tabbed_fieldsets = True
 
-class LanguageDescriptionInfoAdmin(ReverseModelAdmin):
+class LanguageDescriptionInfoAdmin(SchemaModelAdmin):
     hidden_fields = ('languageDescriptionMediaType', )
     readonly_fields = ('languageDescriptionMediaType', )
     show_tabbed_fieldsets = True
 
 
-class CorpusAudioModelAdmin(ReverseModelAdmin):
+class CorpusAudioModelAdmin(SchemaModelAdmin):
     form = CorpusAudioForm
     show_tabbed_fieldsets = True
     
@@ -74,8 +73,6 @@ class CorpusAudioModelAdmin(ReverseModelAdmin):
     def build_fieldsets_from_schema(self, include_inlines=False):
         fieldsets = super(CorpusAudioModelAdmin, self).build_fieldsets_from_schema(include_inlines)
         for fieldset in fieldsets:
-            # cfedermann: commenting out unused name, may be removed later.
-            #
             # name = fieldset[0]
             values = fieldset[1]
             try:

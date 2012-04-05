@@ -3,28 +3,27 @@ Custom base classes for admin interface, for both the top-level admin page
 and for inline forms.
 '''
 import logging
-from django import template
 from django.contrib import admin
 from django.contrib.admin.util import unquote
-from django.contrib.admin.views.main import ChangeList
 from django.core.exceptions import PermissionDenied
-from django.http import HttpResponseRedirect, Http404
-from django.utils.decorators import method_decorator
+from django.http import Http404
 from django.utils.encoding import force_unicode
-from django.utils.functional import update_wrapper
 from django.utils.html import escape
 from django.utils.translation import ugettext as _
-from django.shortcuts import render_to_response
-from django.views.decorators.csrf import csrf_protect
-from metashare.utils import get_class_by_name, verify_subclass
-from metashare.repository.supermodel import SchemaModel, REQUIRED, RECOMMENDED, \
+from django.db.models.fields.related import ManyToManyField
+from django.contrib.admin import helpers
+from django.forms.formsets import all_valid
+from django.utils.safestring import mark_safe
+from django.db import transaction, models
+from metashare.repository.supermodel import REQUIRED, RECOMMENDED, \
   OPTIONAL
 from metashare import settings
-from metashare.repository.editor.forms import StorageObjectUploadForm
-from metashare.repository.editor.related_admin import RelatedAdminMixin
-from metashare.storage.models import ALLOWED_ARCHIVE_EXTENSIONS
-from django.db.models.fields.related import ManyToManyField
-from django.core.urlresolvers import reverse
+from metashare.repository.editor.related_mixin import RelatedAdminMixin
+from metashare.repository.editor.schemamodel_mixin import SchemaModelLookup
+from metashare.repository.editor.inlines import ReverseInlineModelAdmin
+from metashare.repository.editor.editorutils import is_inline, decode_inline
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_protect
 
 # Setup logging support.
 logging.basicConfig(level=settings.LOG_LEVEL)
@@ -33,273 +32,19 @@ LOGGER.addHandler(settings.LOG_HANDLER)
 
 csrf_protect_m = method_decorator(csrf_protect)
 
-# inline names included in fieldsets are prepended with an '_'
-def encode_as_inline(name):
-    return '_' + name
 
-def decode_inline(fieldname):
-    if fieldname.startswith('_'):
-        name = fieldname[1:]
-        return name
-    else:
-        return fieldname
-
-def is_inline(fieldname):
-    if fieldname.startswith('_'):
-        return True
-    else:
-        return False
-
-class SchemaModelLookup(object):
-    show_tabbed_fieldsets = False
-    
-    def is_field(self, name):
-        return not name.endswith('_set')
-    
-    def is_inline(self, name):
-        return not self.is_field(name)
-
-
-    def is_required_field(self, name):
-        """
-        Checks whether the field with the given name is a required field.
-        """
-        # pylint: disable-msg=E1101
-        _fields = self.model.get_fields()
-        return name in _fields['required']
-
-
-    def build_fieldsets_from_schema_plain(self, include_inlines=False):
-        """
-        Builds fieldsets using SchemaModel.get_fields().
-        """
-        # pylint: disable-msg=E1101
-        verify_subclass(self.model, SchemaModel)
-
-        exclusion_list = ()
-        if hasattr(self, 'exclude') and self.exclude is not None:
-            exclusion_list += tuple(self.exclude)
-
-        _hidden_fields = getattr(self, 'hidden_fields', None)
-        _hidden_fields = _hidden_fields or []
-        # hidden fields are also excluded
-        for _hidden_field in _hidden_fields:
-            if _hidden_field not in exclusion_list:
-                exclusion_list += _hidden_field
-
-        _readonly_fields = getattr(self, 'readonly_fields', None)
-        # readonly fields are also excluded
-        if _readonly_fields:
-            for _readonly_field in _readonly_fields:
-                if _readonly_field not in exclusion_list:
-                    exclusion_list += (_readonly_field, )
-
-        # pylint: disable-msg=E1101
-        _fields = self.model.get_fields_flat()
-        _visible_fields = []
-        
-        for _field_name in _fields:
-            # Two possible reasons why a field might be encoded as an inline:
-            # - either it's a OneToOneField and we have put 
-            #   it into tht eexclusion list;
-            # - or it's a reverse foreigh key, so it is not a field.
-            # In both cases, we only include it in visible fields if
-            # include_inlines is requested.
-            _is_visible = False
-            if self.is_field(_field_name) and _field_name not in exclusion_list:
-                _is_visible = True
-                _fieldname_to_append = _field_name
-            elif include_inlines:
-                _is_visible = True
-                _fieldname_to_append = encode_as_inline(_field_name)
-            if _is_visible:
-                _visible_fields.append(_fieldname_to_append)
-
-        _fieldsets = ((None,
-            {'fields': _visible_fields + list(_hidden_fields)}
-        ),)
-        return _fieldsets
-
-    def build_fieldsets_from_schema_tabbed(self, include_inlines):
-        """
-        Builds fieldsets using SchemaModel.get_fields(),
-        for tabbed viewing (required/recommended/optional).
-        """
-        # pylint: disable-msg=E1101
-        verify_subclass(self.model, SchemaModel)
-
-        exclusion_list = ()
-        if hasattr(self, 'exclude') and self.exclude is not None:
-            exclusion_list += tuple(self.exclude)
-
-        _hidden_fields = getattr(self, 'hidden_fields', None)
-        # hidden fields are also excluded
-        if _hidden_fields:
-            for _hidden_field in _hidden_fields:
-                if _hidden_field not in exclusion_list:
-                    exclusion_list += (_hidden_field, )
-
-        _readonly_fields = getattr(self, 'readonly_fields', None)
-        # readonly fields are also excluded
-        if _readonly_fields:
-            for _readonly_field in _readonly_fields:
-                if _readonly_field not in exclusion_list:
-                    exclusion_list += (_readonly_field, )
-
-
-        
-        _fieldsets = []
-        # pylint: disable-msg=E1101
-        _fields = self.model.get_fields()
-
-        for _field_status in ('required', 'recommended', 'optional'):
-            _visible_fields = []
-            _visible_fields_verbose_names = []
-
-            for _field_name in _fields[_field_status]:
-                # Two possible reasons why a field might be encoded as an inline:
-                # - either it's a OneToOneField and we have put 
-                #   it into tht eexclusion list;
-                # - or it's a reverse foreigh key, so it is not a field.
-                # In both cases, we only include it in visible fields if
-                # include_inlines is requested.
-                _is_visible = False
-                if self.is_field(_field_name) and _field_name not in exclusion_list:
-                    _is_visible = True
-                    _fieldname_to_append = _field_name
-                elif include_inlines:
-                    _is_visible = True
-                    _fieldname_to_append = encode_as_inline(_field_name)
-
-                _relevant_fields = _visible_fields
-                _verbose_names = _visible_fields_verbose_names
-
-                # And now put the field where it belongs:
-                if _is_visible:
-                    _relevant_fields.append(_fieldname_to_append)
-                    _verbose_names.append(self.model.get_verbose_name(_field_name))
-            
-            
-            if len(_visible_fields) > 0:
-                _detail = ', '.join(_visible_fields_verbose_names)
-                _caption = '{0} information: {1}'.format(_field_status.capitalize(), _detail)
-                _fieldset = {'fields': _visible_fields}
-                _fieldsets.append((_caption, _fieldset))
-
-        if _hidden_fields:
-            _fieldsets.append((None, {'fields': _hidden_fields, 'classes':('display_none', )}))
-
-        return _fieldsets
-
-    def build_fieldsets_from_schema(self, include_inlines=False):
-        if self.show_tabbed_fieldsets:
-            return self.build_fieldsets_from_schema_tabbed(include_inlines)
-        return self.build_fieldsets_from_schema_plain(include_inlines)
-
-    def get_fieldsets(self, request, obj=None):
-        return self.build_fieldsets_from_schema(include_inlines=False)
-
-
-    def get_fieldsets_with_inlines(self, request, obj=None):
-        return self.build_fieldsets_from_schema(include_inlines=True)
-
-
-    def get_inline_classes(self, model, status):
-        '''
-        For the inlines listed in the given SchemaModel's __schema_fields__,
-        provide the list of matching inline classes.
-        '''
-        result = []
-        for rec_path, rec_accessor, rec_status in model.__schema_fields__:
-            if status == rec_status and self.is_inline(rec_accessor):
-                if '/' in rec_path:
-                    slashpos = rec_path.rfind('/')
-                    rec_name = rec_path[(slashpos+1):]
-                else:
-                    rec_name = rec_path
-                one_model_class_name = model.__schema_classes__[rec_name]
-                result.append(self.get_inline_class_from_model_class_name(one_model_class_name))
-        return result
-
-
-    def get_inline_class_from_model_class_name(self, model_class_name):
-        '''
-        For a model class object such as identificationInfoType_model,
-        return the class object extending SchemaModelInline which
-        can be used to render this model inline in the admin interface.
-        Raises an AttributeError if no suitable class can be found.
-        
-        This expects the following naming convention:
-        - Take the model class name and remove the suffix 'Type_model';
-        - append '_model_inline'.
-        '''
-        suffix_length = len("Type_model")
-        modelname_without_suffix = model_class_name[:-suffix_length]
-        inline_class_name = modelname_without_suffix + "_model_inline"
-        return get_class_by_name('metashare.repository.admin', inline_class_name)
-
-
-class SchemaModelInline(admin.StackedInline, RelatedAdminMixin, SchemaModelLookup):
-    extra = 1
-    collapse = False
-
-    def __init__(self, parent_model, admin_site):
-        super(SchemaModelInline, self).__init__(parent_model, admin_site)
-        if self.collapse:
-            self.verbose_name_plural = '_{}'.format(force_unicode(self.verbose_name_plural))
-        self.filter_horizontal = self.model.get_many_to_many_fields()
-
-    def get_fieldsets(self, request, obj=None):
-        return SchemaModelLookup.get_fieldsets(self, request, obj)
-
-    def formfield_for_dbfield(self, db_field, **kwargs):
-        if self.is_subclassable(db_field):
-            return self.formfield_for_subclassable(db_field, **kwargs)
-        self.use_hidden_widget_for_one2one(db_field, kwargs)
-        formfield = super(SchemaModelInline, self).formfield_for_dbfield(db_field, **kwargs)
-        self.use_related_widget_where_appropriate(db_field, kwargs, formfield)
-        return formfield
-
-    def response_change(self, request, obj):
-        if '_popup' in request.REQUEST:
-            return self.edit_response_close_popup_magic(obj)
-        else:
-            return super(SchemaModelInline, self).response_change(request, obj)
-
-
-class FilteredChangeList(ChangeList):
-    """
-    A FilteredChangeList filters the result_list for request.user objects.
-    This implementation always filters; use the superclass ChangeList for
-    unfiltered views.
-    """
-    def __init__(self, request, model, list_display, list_display_links,
-      list_filter, date_hierarchy, search_fields, list_select_related,
-      list_per_page, list_editable, model_admin):
-        # Call super constructor to initialise object instance.
-        super(FilteredChangeList, self).__init__(request, model, list_display,
-          list_display_links, list_filter, date_hierarchy, search_fields,
-          list_select_related, list_per_page, list_editable, model_admin)
-        # Check if the current model has an "owners" ManyToManyField.
-        _has_owners_field = False
-        if 'owners' in self.opts.get_all_field_names():
-            _field = self.opts.get_field_by_name('owners')[0]
-            _has_owners_field = isinstance(_field, ManyToManyField)
-
-        # If "owners" are available, we
-        # have to constrain the QuerySet using an additional filter...
-        if _has_owners_field:
-            _user = request.user
-            self.root_query_set = self.root_query_set.filter(owners=_user)
-
-        self.query_set = self.get_query_set()
-        self.get_results(request)
-
-    def url_for_result(self, result):
-        return reverse("editor:{}_{}_change".format(self.opts.app_label, self.opts.module_name), args=(getattr(result, self.pk_attname),))
 
 class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
+    '''
+    Patched ModelAdmin class. The add_view method is overridden to
+    allow the reverse inline formsets to be saved before the parent
+    model.
+    '''
+    no_inlines = []
+    custom_one2one_inlines = {}
+    inline_type = 'stacked'
     inlines = ()
+
     class Media:
         js = (settings.MEDIA_URL + 'js/jquery-1.7.1.min.js',
               settings.MEDIA_URL + 'js/addCollapseToAllStackedInlines.js',
@@ -307,73 +52,53 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
               settings.ADMIN_MEDIA_PREFIX + 'js/metashare-editor.js',)
     
     def __init__(self, model, admin_site):
-        self.inlines += tuple(self._inlines(model))
-        self.filter_horizontal = self._m2m(model)
-        super(SchemaModelAdmin, self).__init__(model, admin_site)    
-
-    def _inlines(self, model):
-        return self.get_inline_classes(model, status=REQUIRED) + \
+        # Get from the model all inlines grouped by Required/Recommended/Optional status:
+        self.inlines += tuple(self.get_inline_classes(model, status=REQUIRED) + \
           self.get_inline_classes(model, status=RECOMMENDED) + \
-          self.get_inline_classes(model, status=OPTIONAL)
+          self.get_inline_classes(model, status=OPTIONAL))
+        # Request all many-to-many fields as extended "horizontal filter" widgets:
+        self.filter_horizontal = model.get_many_to_many_fields()
+        super(SchemaModelAdmin, self).__init__(model, admin_site)    
+        # Revers inline code:
+        self.no_inlines = self.no_inlines or []
+        self.exclude = self.exclude or []
+        # Prepare inlines for the required one2one fields:
+        for field in model._meta.fields:
+            if isinstance(field, models.OneToOneField):
+                name = field.name
+                if not self.is_required_field(name):
+                    self.no_inlines.append(name)
+                if not name in self.no_inlines and not name in self.exclude and not name in self.readonly_fields:
+                    parent = field.related.parent_model
+                    _inline_class = ReverseInlineModelAdmin
+                    if  name in self.custom_one2one_inlines:
+                        _inline_class = self.custom_one2one_inlines[name]
+                    inline = _inline_class(model,
+                                           name,
+                                           parent,
+                                           admin_site,
+                                           self.inline_type)
+                    self.inline_instances.append(inline)
+                    self.exclude.append(name)
 
-    def _m2m(self, model):
-        return model.get_many_to_many_fields()
 
-    def get_urls(self):
-        from django.conf.urls.defaults import patterns, url
-        urlpatterns = super(SchemaModelAdmin, self).get_urls()
-
-        def wrap(view):
-            def wrapper(*args, **kwargs):
-                return self.admin_site.admin_view(view)(*args, **kwargs)
-            return update_wrapper(wrapper, view)
-
-        info = self.model._meta.app_label, self.model._meta.module_name
-        
-        # cfedermann: add "/upload-data/" and "/my/" URLs for resourceInfoType_model only.
-        _schema_name = getattr(self.model, '__schema_name__', None)
-        if _schema_name == 'resourceInfo':
-            urlpatterns = patterns('',
-                url(r'^(.+)/upload-data/$',
-                    wrap(self.uploaddata_view),
-                    name='%s_%s_uploaddata' % info),
-                url(r'^my/$',
-                    wrap(self.changelist_view_filtered),
-                    name='%s_%s_myresources' % info),
-            ) + urlpatterns
-        return urlpatterns
 
     
     def get_fieldsets(self, request, obj=None):
         return SchemaModelLookup.get_fieldsets(self, request, obj)
 
-    @csrf_protect_m
-    def changelist_view_filtered(self, request, extra_context=None):
-        '''
-        The filtered changelist view for My Resources.
-        We reuse the generic django changelist_view and squeeze in our wish to
-        show the filtered view in two places:
-        1. we patch request.POST to insert a parameter 'myresources'='true',
-           which will be interpreted in get_changelist to show the filtered
-           version;
-        2. we pass a extra_context variable 'myresources' which will be
-           interpreted in the template change_list.html. 
-        '''
-        _post = request.POST.copy()
-        _post['myresources'] = 'true'
-        request.POST = _post
-        _extra_context = extra_context or {}
-        _extra_context.update({'myresources':True})
-        return self.changelist_view(request, _extra_context)
 
-    def get_changelist(self, request, **kwargs):
-        """
-        Returns the ChangeList class for use on the changelist page.
-        """
-        if 'myresources' in request.POST:
-            return FilteredChangeList
-        else:
-            return ChangeList
+    def add_to_my_resources(self, obj, user):
+        '''
+        Add the current user to the list of owners for the current resource,
+        thereby adding the resource to the 'my resources' list for the user.
+        '''
+        if hasattr(obj, 'owners'):
+            _field = obj._meta.get_field_by_name('owners')[0]
+            if isinstance(_field, ManyToManyField):
+                obj.owners.add(user.pk)
+                obj.save()
+        
 
     def log_addition(self, request, obj):
         """
@@ -382,121 +107,29 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         We currently update owners information here as save_model() for some
         reason does not properly store the request.user's id in the M2M field.
         """
-        if hasattr(obj, 'owners'):
-            _field = obj._meta.get_field_by_name('owners')[0]
-            if isinstance(_field, ManyToManyField):
-                obj.owners.add(request.user.pk)
-                obj.save()
-
+        self.add_to_my_resources(obj, request.user)
         super(SchemaModelAdmin, self).log_addition(request, obj)
 
     def log_change(self, request, obj, message):
         """
         Log that an object has been successfully changed and update owners.
         """
-        if hasattr(obj, 'owners'):
-            _field = obj._meta.get_field_by_name('owners')[0]
-            if isinstance(_field, ManyToManyField):
-                obj.owners.add(request.user.pk)
-                obj.save()
-
+        self.add_to_my_resources(obj, request.user)
         super(SchemaModelAdmin, self).log_change(request, obj, message)
 
-
-    @csrf_protect_m
-    def uploaddata_view(self, request, object_id, extra_context=None):
-        """
-        The 'upload data' admin view for resourceInfoType_model instances.
-        """
-        model = self.model
-        opts = model._meta
-
-        obj = self.get_object(request, unquote(object_id))
-
-        _schema_name = getattr(model, '__schema_name__', None)
-        if not _schema_name == "resourceInfo":
-            return HttpResponseRedirect(request.get_full_path())
-
-        if not self.has_change_permission(request, obj):
-            raise PermissionDenied
-
-        if obj is None:
-            raise Http404(_('%(name)s object with primary key %(key)r does not exist.') \
-             % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
-
-        storage_object = obj.storage_object
-        if storage_object is None:
-            raise Http404(_('%(name)s object with primary key %(key)r does not have a StorageObject attached.') \
-              % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
-
-        if not storage_object.master_copy:
-            raise Http404(_('%(name)s object with primary key %(key)r is not a master-copy.') \
-              % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
-
-        existing_download = storage_object.get_download()
-        storage_folder = storage_object._storage_folder()
-
-        if request.method == 'POST':
-            form = StorageObjectUploadForm(request.POST, request.FILES)
-            form_validated = form.is_valid()
-
-            if form_validated:
-                # Check if a new file has been uploaded to resource.
-                resource = request.FILES['resource']                
-                _extension = None
-                for _allowed_extension in ALLOWED_ARCHIVE_EXTENSIONS:
-                    if resource.name.endswith(_allowed_extension):
-                        _extension = _allowed_extension
-                        break
-                
-                # We can assert that an extension has been found as the form
-                # validation would have raise a ValidationError otherwise;
-                # still, we raise an AssertionError if anything goes wrong!
-                assert(_extension in ALLOWED_ARCHIVE_EXTENSIONS)
-
-                if _extension:
-                    _storage_folder = storage_object._storage_folder()
-                    _out_filename = '{}/archive.{}'.format(_storage_folder,
-                      _extension)
-
-                    # Copy uploaded file to storage folder for this object.                    
-                    with open(_out_filename, 'wb') as _out_file:
-                        # pylint: disable-msg=E1101
-                        for _chunk in resource.chunks():
-                            _out_file.write(_chunk)
-
-                    # Save corresponding StorageObject to update its checksum.
-                    obj.storage_object.save()
-
-                    change_message = 'Uploaded "{}" to "{}" in {}.'.format(
-                      resource.name, storage_object._storage_folder(),
-                      storage_object)
-
-                    self.log_change(request, obj, change_message)
-
-                return self.response_change(request, obj)
-
-        else:
-            form = StorageObjectUploadForm()
-
-        context = {
-            'title': _('Upload resource: "%s"') % force_unicode(obj),
-            'form': form,
-            'storage_folder': storage_folder,
-            'existing_download': existing_download,
-            'object_id': object_id,
-            'original': obj,
-            'root_path': self.admin_site.root_path,
-            'app_label': opts.app_label,
-        }
-        context.update(extra_context or {})
-        context_instance = template.RequestContext(request,
-          current_app=self.admin_site.name)
-        return render_to_response(
-          ['admin/repository/resourceinfotype_model/upload_resource.html'], context,
-          context_instance)
         
     def formfield_for_dbfield(self, db_field, **kwargs):
+        """
+        This is a crucial step in the workflow: for a given db field,
+        it is decided how this field will be rendered in the form.
+        We have heavily customized this; implementations are in
+        RelatedAdminMixin.
+        
+        Customizations include:
+        - hiding certain fields (they are present but invisible);
+        - custom widgets for subclassable items such as actorInfo;
+        - custom minimalistic "related" widget for non-inlined one2one fields;
+        """
         self.hide_hidden_fields(db_field, kwargs)
         if self.is_subclassable(db_field):
             return self.formfield_for_subclassable(db_field, **kwargs)
@@ -506,8 +139,300 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         return formfield
 
     def response_change(self, request, obj):
+        '''
+        Response sent after a successful submission of a change form.
+        We customize this to allow closing edit popups in the same way
+        as response_add deals with add popups.
+        '''
         if '_popup' in request.REQUEST:
             return self.edit_response_close_popup_magic(obj)
         else:
             return super(SchemaModelAdmin, self).response_change(request, obj)
 
+    @csrf_protect_m
+    @transaction.commit_on_success
+    def add_view(self, request, form_url='', extra_context=None):
+        """
+        The 'add' admin view for this model.
+        This follows closely the base implementation from Django 1.3's 
+        django.contrib.admin.options.ModelAdmin,
+        with the explicitly marked modifications.
+        """
+        # pylint: disable-msg=C0103
+        model = self.model
+        opts = model._meta
+
+        if not self.has_add_permission(request):
+            raise PermissionDenied
+
+        ModelForm = self.get_form(request)
+        formsets = []
+        if request.method == 'POST':
+            form = ModelForm(request.POST, request.FILES)
+            if form.is_valid():
+                new_object = self.save_form(request, form, change=False)
+                form_validated = True
+            else:
+                form_validated = False
+                new_object = self.model()
+            prefixes = {}
+            for FormSet, inline in zip(self.get_formsets(request), self.inline_instances):
+                #### begin modification ####
+                if getattr(FormSet, 'parent_fk_name', None) in self.no_inlines:
+                    continue
+                #### end modification ####
+                prefix = FormSet.get_default_prefix()
+                prefixes[prefix] = prefixes.get(prefix, 0) + 1
+                if prefixes[prefix] != 1:
+                    prefix = "%s-%s" % (prefix, prefixes[prefix])
+                formset = FormSet(data=request.POST, files=request.FILES,
+                                  instance=new_object,
+                                  save_as_new="_saveasnew" in request.POST,
+                                  prefix=prefix, queryset=inline.queryset(request))
+                formsets.append(formset)
+            if all_valid(formsets) and form_validated:
+                #### begin modification ####
+                for formset, inline in zip(formsets, self.inline_instances):
+                    if not isinstance(inline, ReverseInlineModelAdmin):
+                        continue
+                    saved = formset.save()
+                    if saved:
+                        obj = saved[0]
+                        setattr(new_object, inline.parent_fk_name, obj)
+                #### end modification ####
+                self.save_model(request, new_object, form, change=False)
+                form.save_m2m()
+                for formset in formsets:
+                    self.save_formset(request, form, formset, change=False)
+
+                self.log_addition(request, new_object)
+                return self.response_add(request, new_object)
+        else:
+            # Prepare the dict of initial data from the request.
+            # We have to special-case M2Ms as a list of comma-separated PKs.
+            initial = dict(request.GET.items())
+            for k in initial:
+                try:
+                    f = opts.get_field(k)
+                except models.FieldDoesNotExist:
+                    continue
+                if isinstance(f, models.ManyToManyField):
+                    initial[k] = initial[k].split(",")
+            form = ModelForm(initial=initial)
+            prefixes = {}
+            for FormSet, inline in zip(self.get_formsets(request),
+                                       self.inline_instances):
+                #### begin modification ####
+                if getattr(FormSet, 'parent_fk_name', None) in self.no_inlines:
+                    continue
+                #### end modification ####
+                prefix = FormSet.get_default_prefix()
+                prefixes[prefix] = prefixes.get(prefix, 0) + 1
+                if prefixes[prefix] != 1:
+                    prefix = "%s-%s" % (prefix, prefixes[prefix])
+                formset = FormSet(instance=self.model(), prefix=prefix,
+                                  queryset=inline.queryset(request))
+                formsets.append(formset)
+
+        #### begin modification ####
+        media = self.media or []
+        #### end modification ####
+        inline_admin_formsets = []
+        for inline, formset in zip(self.inline_instances, formsets):
+            fieldsets = list(inline.get_fieldsets(request))
+            readonly = list(inline.get_readonly_fields(request))
+            inline_admin_formset = helpers.InlineAdminFormSet(inline, formset,
+                fieldsets, readonly, model_admin=self)
+            inline_admin_formsets.append(inline_admin_formset)
+            media = media + inline_admin_formset.media
+
+        #### begin modification ####
+        adminForm = OrderedAdminForm(form, list(self.get_fieldsets_with_inlines(request)),
+            self.prepopulated_fields, self.get_readonly_fields(request),
+            model_admin=self, inlines=inline_admin_formsets)
+        media = media + adminForm.media
+        #### end modification ####
+
+        context = {
+            'title': _('Add %s') % force_unicode(opts.verbose_name),
+            'adminform': adminForm,
+            'is_popup': "_popup" in request.REQUEST,
+            'show_delete': False,
+            'media': mark_safe(media),
+            'inline_admin_formsets': inline_admin_formsets,
+            'errors': helpers.AdminErrorList(form, formsets),
+            'root_path': self.admin_site.root_path,
+            'app_label': opts.app_label,
+        }
+        context.update(extra_context or {})
+        return self.render_change_form(request, context, form_url=form_url, add=True)
+
+    @csrf_protect_m
+    @transaction.commit_on_success
+    def change_view(self, request, object_id, extra_context=None):
+        """
+        The 'change' admin view for this model.
+        This follows closely the base implementation from Django 1.3's 
+        django.contrib.admin.options.ModelAdmin,
+        with the explicitly marked modifications.
+        """
+        # pylint: disable-msg=C0103
+        model = self.model
+        opts = model._meta
+
+        obj = self.get_object(request, unquote(object_id))
+
+        if not self.has_change_permission(request, obj):
+            raise PermissionDenied
+
+        if obj is None:
+            raise Http404(_('%(name)s object with primary key %(key)r does not exist.') % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
+
+        if request.method == 'POST' and "_saveasnew" in request.POST:
+            return self.add_view(request, form_url='../add/')
+
+        ModelForm = self.get_form(request, obj)
+        formsets = []
+        if request.method == 'POST':
+            form = ModelForm(request.POST, request.FILES, instance=obj)
+            if form.is_valid():
+                form_validated = True
+                new_object = self.save_form(request, form, change=True)
+            else:
+                form_validated = False
+                new_object = obj
+            prefixes = {}
+            for FormSet, inline in zip(self.get_formsets(request, new_object),
+                                       self.inline_instances):
+                #### begin modification ####
+                if getattr(FormSet, 'parent_fk_name', None) in self.no_inlines:
+                    continue
+                #### end modification ####
+                prefix = FormSet.get_default_prefix()
+                prefixes[prefix] = prefixes.get(prefix, 0) + 1
+                if prefixes[prefix] != 1:
+                    prefix = "%s-%s" % (prefix, prefixes[prefix])
+                formset = FormSet(request.POST, request.FILES,
+                                  instance=new_object, prefix=prefix,
+                                  queryset=inline.queryset(request))
+
+                formsets.append(formset)
+
+            if all_valid(formsets) and form_validated:
+                self.save_model(request, new_object, form, change=True)
+                form.save_m2m()
+                for formset in formsets:
+                    self.save_formset(request, form, formset, change=True)
+
+                change_message = self.construct_change_message(request, form, formsets)
+                self.log_change(request, new_object, change_message)
+                return self.response_change(request, new_object)
+
+        else:
+            form = ModelForm(instance=obj)
+            prefixes = {}
+            for FormSet, inline in zip(self.get_formsets(request, obj), self.inline_instances):
+                #### begin modification ####
+                if getattr(FormSet, 'parent_fk_name', None) in self.no_inlines:
+                    continue
+                #### end modification ####
+                prefix = FormSet.get_default_prefix()
+                prefixes[prefix] = prefixes.get(prefix, 0) + 1
+                if prefixes[prefix] != 1:
+                    prefix = "%s-%s" % (prefix, prefixes[prefix])
+                formset = FormSet(instance=obj, prefix=prefix,
+                                  queryset=inline.queryset(request))
+                formsets.append(formset)
+
+        #### begin modification ####
+        media = self.media or []
+        #### end modification ####
+        inline_admin_formsets = []
+        for inline, formset in zip(self.inline_instances, formsets):
+            fieldsets = list(inline.get_fieldsets(request, obj))
+            readonly = list(inline.get_readonly_fields(request, obj))
+            inline_admin_formset = helpers.InlineAdminFormSet(inline, formset,
+                fieldsets, readonly, model_admin=self)
+            inline_admin_formsets.append(inline_admin_formset)
+            media = media + inline_admin_formset.media
+
+        #### begin modification ####
+        adminForm = OrderedAdminForm(form, self.get_fieldsets_with_inlines(request, obj),
+            self.prepopulated_fields, self.get_readonly_fields(request, obj),
+            model_admin=self, inlines=inline_admin_formsets)
+        media = media + adminForm.media
+        #### end modification ####
+
+        context = {
+            'title': _('Change %s') % force_unicode(opts.verbose_name),
+            'adminform': adminForm,
+            'object_id': object_id,
+            'original': obj,
+            'is_popup': "_popup" in request.REQUEST,
+            'media': mark_safe(media),
+            'inline_admin_formsets': inline_admin_formsets,
+            'errors': helpers.AdminErrorList(form, formsets),
+            'root_path': self.admin_site.root_path,
+            'app_label': opts.app_label,
+        }
+        context.update(extra_context or {})
+        return self.render_change_form(request, context, change=True, obj=obj)
+
+class OrderedAdminForm(helpers.AdminForm):
+    def __init__(self, form, fieldsets, prepopulated_fields, readonly_fields=None, model_admin=None, inlines=None):
+        self.inlines = inlines
+        super(OrderedAdminForm, self).__init__(form, fieldsets, prepopulated_fields, readonly_fields, model_admin)
+        
+    def __iter__(self):
+        for name, options in self.fieldsets:
+            yield OrderedFieldset(self.form, name,
+                readonly_fields=self.readonly_fields,
+                model_admin=self.model_admin, inlines=self.inlines,
+                **options
+            )
+
+class OrderedFieldset(helpers.Fieldset):
+    def __init__(self, form, name=None, readonly_fields=(), fields=(), classes=(),
+      description=None, model_admin=None, inlines=None):
+        self.inlines = inlines
+        if not inlines:
+            for field in fields:
+                if is_inline(field):
+                    # an inline is in the field list, but the list of inlines is empty
+                    pass
+        super(OrderedFieldset, self).__init__(form, name, readonly_fields, fields, classes, description, model_admin)
+        
+    def __iter__(self):
+        for field in self.fields:
+            if not is_inline(field):
+                fieldline = helpers.Fieldline(self.form, field, self.readonly_fields, model_admin=self.model_admin)
+                elem = OrderedElement(fieldline=fieldline)
+                yield elem
+            else:
+                field = decode_inline(field)
+                for inline in self.inlines:
+                    if hasattr(inline.opts, 'parent_fk_name'):
+                        if inline.opts.parent_fk_name == field:
+                            elem = OrderedElement(inline=inline)
+                            yield elem
+                    elif hasattr(inline.formset, 'prefix'):
+                        if inline.formset.prefix == field:
+                            elem = OrderedElement(inline=inline)
+                            yield elem
+                    else:
+                        raise InlineError('Incorrect inline: no opts.parent_fk_name or formset.prefix found')
+
+class OrderedElement():
+    def __init__(self, fieldline=None, inline=None):
+        if fieldline:
+            self.is_field = True
+            self.fieldline = fieldline
+        else:
+            self.is_field = False
+            self.inline = inline
+    
+            
+class InlineError(Exception):
+    def __init__(self, msg=None):
+        super(InlineError, self).__init__()
+        self.msg = msg
