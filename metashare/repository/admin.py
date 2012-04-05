@@ -1,10 +1,6 @@
 from django.contrib import admin
-
-from metashare.repository.editor.superadmin import SchemaModelInline
-from metashare.repository.editor.reverse_inline import ReverseModelAdmin
 from metashare.repository.editor.superadmin import SchemaModelAdmin
 from metashare.repository.editor.inlines import SchemaModelInline
-
 
 from metashare.repository.models import documentUnstructuredString_model
 admin.site.register(documentUnstructuredString_model)

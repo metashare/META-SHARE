@@ -11,7 +11,6 @@ from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
 from metashare.utils import verify_subclass
 from metashare.stats.model_utils import saveLRStats, UPDATE_STAT
 from metashare.repository.supermodel import SchemaModel
-from metashare.repository.editor.superadmin import encode_as_inline
 from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
 from django.template.context import RequestContext
