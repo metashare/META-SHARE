@@ -1,5 +1,5 @@
-from metashare.repo2.editor.reverse_inline import ReverseInlineFormSet, \
-    ReverseInlineModelAdmin, ReverseModelAdmin
+from metashare.repo2.editor.inlines import ReverseInlineFormSet, \
+    ReverseInlineModelAdmin
 from django.core.exceptions import ValidationError
 from metashare.repo2.models import resourceComponentTypeType_model, \
     corpusInfoType_model, languageDescriptionInfoType_model, \
@@ -10,7 +10,6 @@ from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL
 from metashare.utils import verify_subclass
 from metashare.stats.model_utils import saveLRStats, UPDATE_STAT
 from metashare.repo2.supermodel import SchemaModel
-from metashare.repo2.editor.superadmin import encode_as_inline
 from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
 from django.template.context import RequestContext
@@ -18,6 +17,8 @@ from django.shortcuts import render_to_response
 from metashare import settings
 from django.contrib.auth.decorators import permission_required
 from django.utils.decorators import method_decorator
+from metashare.repo2.editor.superadmin import SchemaModelAdmin
+from metashare.repo2.editor.schemamodel_mixin import encode_as_inline
 
     
 class ResourceComponentInlineFormSet(ReverseInlineFormSet):
@@ -193,7 +194,7 @@ ingest_resources.short_description = "Ingest selected internal resources"
 
 
 
-class ResourceModelAdmin(ReverseModelAdmin):
+class ResourceModelAdmin(SchemaModelAdmin):
     inline_type = 'stacked'
     no_inlines = ['versionInfo', 'usageInfo', 'resourceDocumentationInfo', 'resourceCreationInfo']
     custom_one2one_inlines = {'identificationInfo':IdentificationInline,
