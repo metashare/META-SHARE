@@ -1002,9 +1002,9 @@ class Clazz(object):
         exportableClassList = list()
 
         cls.wrtadmin('from django.contrib import admin\n')
-        cls.wrtadmin('from {0}editor.superadmin import SchemaModelInline\n'.format(
+        cls.wrtadmin('from {0}editor.superadmin import SchemaModelAdmin\n'.format(
           package_prefix))
-        cls.wrtadmin('from {0}editor.reverse_inline import ReverseModelAdmin\n'.format(
+        cls.wrtadmin('from {0}editor.inlines import SchemaModelInline\n'.format(
           package_prefix))
 
         for clazz in cls.ClazzDict.values():
@@ -1078,7 +1078,7 @@ class Clazz(object):
               _inline[2]))
 
         for clazz in clazz_list:
-            cls.wrtadmin('admin.site.register({}_model, ReverseModelAdmin)\n'.format(
+            cls.wrtadmin('admin.site.register({}_model, SchemaModelAdmin)\n'.format(
               clazz.name))
         cls.wrtadmin(MANUAL_ADMIN_REGISTRATION_TEMPLATE)
         cls.wrtadmin('\n')

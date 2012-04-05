@@ -1,16 +1,16 @@
-from metashare.repo2.editor.reverse_inline import ReverseInlineFormSet, \
-    ReverseInlineModelAdmin, ReverseModelAdmin
-from django.core.exceptions import ValidationError
+from metashare.repo2.editor.inlines import ReverseInlineFormSet, \
+    ReverseInlineModelAdmin
+from django.core.exceptions import ValidationError, PermissionDenied
 from metashare.repo2.models import resourceComponentTypeType_model, \
     corpusInfoType_model, languageDescriptionInfoType_model, \
     lexicalConceptualResourceInfoType_model, toolServiceInfoType_model, \
     corpusMediaTypeType_model, languageDescriptionMediaTypeType_model, \
     lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model
-from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL
+from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
+    ALLOWED_ARCHIVE_EXTENSIONS
 from metashare.utils import verify_subclass
 from metashare.stats.model_utils import saveLRStats, UPDATE_STAT
 from metashare.repo2.supermodel import SchemaModel
-from metashare.repo2.editor.superadmin import encode_as_inline
 from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
 from django.template.context import RequestContext
@@ -18,6 +18,19 @@ from django.shortcuts import render_to_response
 from metashare import settings
 from django.contrib.auth.decorators import permission_required
 from django.utils.decorators import method_decorator
+from metashare.repo2.editor.superadmin import SchemaModelAdmin
+from metashare.repo2.editor.schemamodel_mixin import encode_as_inline
+from django.utils.functional import update_wrapper
+from django.views.decorators.csrf import csrf_protect
+from metashare.repo2.editor.editorutils import FilteredChangeList
+from django.contrib.admin.views.main import ChangeList
+from django.contrib.admin.util import unquote
+from django.http import Http404
+from metashare.repo2.editor.forms import StorageObjectUploadForm
+from django.utils.html import escape
+from django.utils.translation import ugettext as _
+
+csrf_protect_m = method_decorator(csrf_protect)
 
     
 class ResourceComponentInlineFormSet(ReverseInlineFormSet):
@@ -193,16 +206,155 @@ ingest_resources.short_description = "Ingest selected internal resources"
 
 
 
-class ResourceModelAdmin(ReverseModelAdmin):
+class ResourceModelAdmin(SchemaModelAdmin):
     inline_type = 'stacked'
-    no_inlines = ['versionInfo', 'usageInfo', 'resourceDocumentationInfo', 'resourceCreationInfo']
     custom_one2one_inlines = {'identificationInfo':IdentificationInline,
                               'resourceComponentType':ResourceComponentInline}
     content_fields = ('resourceComponentType',)
     list_display = ('__unicode__', 'resource_type', 'publication_status')
     actions = (publish_resources, unpublish_resources, ingest_resources, )
     no_inlines = ['distributionInfo', ]
-    # TODO: we redefine no_inlines here -- why does this work?
+
+
+    def get_urls(self):
+        from django.conf.urls.defaults import patterns, url
+        urlpatterns = super(ResourceModelAdmin, self).get_urls()
+
+        def wrap(view):
+            def wrapper(*args, **kwargs):
+                return self.admin_site.admin_view(view)(*args, **kwargs)
+            return update_wrapper(wrapper, view)
+
+        info = self.model._meta.app_label, self.model._meta.module_name
+        
+        urlpatterns = patterns('',
+            url(r'^(.+)/upload-data/$',
+                wrap(self.uploaddata_view),
+                name='%s_%s_uploaddata' % info),
+            url(r'^my/$',
+                wrap(self.changelist_view_filtered),
+                name='%s_%s_myresources' % info),
+        ) + urlpatterns
+        return urlpatterns
+
+    @csrf_protect_m
+    def changelist_view_filtered(self, request, extra_context=None):
+        '''
+        The filtered changelist view for My Resources.
+        We reuse the generic django changelist_view and squeeze in our wish to
+        show the filtered view in two places:
+        1. we patch request.POST to insert a parameter 'myresources'='true',
+           which will be interpreted in get_changelist to show the filtered
+           version;
+        2. we pass a extra_context variable 'myresources' which will be
+           interpreted in the template change_list.html. 
+        '''
+        _post = request.POST.copy()
+        _post['myresources'] = 'true'
+        request.POST = _post
+        _extra_context = extra_context or {}
+        _extra_context.update({'myresources':True})
+        return self.changelist_view(request, _extra_context)
+
+    def get_changelist(self, request, **kwargs):
+        """
+        Returns the ChangeList class for use on the changelist page.
+        """
+        if 'myresources' in request.POST:
+            return FilteredChangeList
+        else:
+            return ChangeList
+
+
+    @csrf_protect_m
+    def uploaddata_view(self, request, object_id, extra_context=None):
+        """
+        The 'upload data' admin view for resourceInfoType_model instances.
+        """
+        model = self.model
+        opts = model._meta
+
+        obj = self.get_object(request, unquote(object_id))
+
+        if not self.has_change_permission(request, obj):
+            raise PermissionDenied
+
+        if obj is None:
+            raise Http404(_('%(name)s object with primary key %(key)r does not exist.') \
+             % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
+
+        storage_object = obj.storage_object
+        if storage_object is None:
+            raise Http404(_('%(name)s object with primary key %(key)r does not have a StorageObject attached.') \
+              % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
+
+        if not storage_object.master_copy:
+            raise Http404(_('%(name)s object with primary key %(key)r is not a master-copy.') \
+              % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
+
+        existing_download = storage_object.get_download()
+        storage_folder = storage_object._storage_folder()
+
+        if request.method == 'POST':
+            form = StorageObjectUploadForm(request.POST, request.FILES)
+            form_validated = form.is_valid()
+
+            if form_validated:
+                # Check if a new file has been uploaded to resource.
+                resource = request.FILES['resource']                
+                _extension = None
+                for _allowed_extension in ALLOWED_ARCHIVE_EXTENSIONS:
+                    if resource.name.endswith(_allowed_extension):
+                        _extension = _allowed_extension
+                        break
+                
+                # We can assert that an extension has been found as the form
+                # validation would have raise a ValidationError otherwise;
+                # still, we raise an AssertionError if anything goes wrong!
+                assert(_extension in ALLOWED_ARCHIVE_EXTENSIONS)
+
+                if _extension:
+                    _storage_folder = storage_object._storage_folder()
+                    _out_filename = '{}/archive.{}'.format(_storage_folder,
+                      _extension)
+
+                    # Copy uploaded file to storage folder for this object.                    
+                    with open(_out_filename, 'wb') as _out_file:
+                        # pylint: disable-msg=E1101
+                        for _chunk in resource.chunks():
+                            _out_file.write(_chunk)
+
+                    # Save corresponding StorageObject to update its checksum.
+                    obj.storage_object.save()
+
+                    change_message = 'Uploaded "{}" to "{}" in {}.'.format(
+                      resource.name, storage_object._storage_folder(),
+                      storage_object)
+
+                    self.log_change(request, obj, change_message)
+
+                return self.response_change(request, obj)
+
+        else:
+            form = StorageObjectUploadForm()
+
+        context = {
+            'title': _('Upload resource: "%s"') % force_unicode(obj),
+            'form': form,
+            'storage_folder': storage_folder,
+            'existing_download': existing_download,
+            'object_id': object_id,
+            'original': obj,
+            'root_path': self.admin_site.root_path,
+            'app_label': opts.app_label,
+        }
+        context.update(extra_context or {})
+        context_instance = RequestContext(request,
+          current_app=self.admin_site.name)
+        return render_to_response(
+          ['admin/repo2/resourceinfotype_model/upload_resource.html'], context,
+          context_instance)
+
 
     def build_fieldsets_from_schema(self, include_inlines=False):
         """
