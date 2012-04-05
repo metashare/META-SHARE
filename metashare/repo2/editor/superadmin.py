@@ -74,10 +74,10 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                     if  name in self.custom_one2one_inlines:
                         _inline_class = self.custom_one2one_inlines[name]
                     inline = _inline_class(model,
-                                                     name,
-                                                     parent,
-                                                     admin_site,
-                                                     self.inline_type)
+                                           name,
+                                           parent,
+                                           admin_site,
+                                           self.inline_type)
                     self.inline_instances.append(inline)
                     self.exclude.append(name)
 

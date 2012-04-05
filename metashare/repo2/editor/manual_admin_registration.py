@@ -74,8 +74,6 @@ class CorpusAudioModelAdmin(SchemaModelAdmin):
     def build_fieldsets_from_schema(self, include_inlines=False):
         fieldsets = super(CorpusAudioModelAdmin, self).build_fieldsets_from_schema(include_inlines)
         for fieldset in fieldsets:
-            # cfedermann: commenting out unused name, may be removed later.
-            #
             # name = fieldset[0]
             values = fieldset[1]
             try:
