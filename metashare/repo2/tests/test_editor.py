@@ -107,12 +107,12 @@ class EditorTest(TestCase):
         # successful login redirects (status 302), failed login gives a status of 200:
         self.assertContains(login, 'Please enter a correct username and password', status_code=200)
             
-    def test_editor_can_see_resource_list(self):
+    def test_editor_can_see_model_list(self):
         client = self.client_with_user_logged_in(self.editor_login)
         response = client.get(ADMINROOT+'repo2/')
         self.assertContains(response, 'Repo2 administration')
         
-    def test_staff_cannot_see_resource_list(self):
+    def test_staff_cannot_see_model_list(self):
         client = self.client_with_user_logged_in(self.staff_login)
         response = client.get(ADMINROOT+'repo2/')
         self.assertContains(response, 'Page not found', status_code=404)
@@ -271,3 +271,13 @@ class EditorTest(TestCase):
         response = client.get('{}repo2/resourceinfotype_model/{}/'.format(ADMINROOT, resource.id))
         self.assertContains(response, '<select onchange="javascript:createNewSubInstance($(this), &quot;add_id_validationinfotype_model_set',
                             msg_prefix='Validator is not rendered as a ChoiceTypeWidget')
+
+    def test_resources_list(self):
+        client = self.client_with_user_logged_in(self.editor_login)
+        response = client.get(ADMINROOT+'repo2/resourceinfotype_model/')
+        self.assertContains(response, 'Resources')
+
+    def test_myresources_list(self):
+        client = self.client_with_user_logged_in(self.editor_login)
+        response = client.get(ADMINROOT+'repo2/resourceinfotype_model/my/')
+        self.assertContains(response, 'Resources')

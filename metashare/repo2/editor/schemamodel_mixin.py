@@ -3,24 +3,9 @@ The mixin code for ModelAdmin to link to the SchemaModel objects in models.py.
 '''
 from metashare.utils import verify_subclass, get_class_by_name
 from metashare.repo2.supermodel import SchemaModel
+from metashare.repo2.editor.editorutils import encode_as_inline
 
 
-# inline names included in fieldsets are prepended with an '_'
-def encode_as_inline(name):
-    return '_' + name
-
-def decode_inline(fieldname):
-    if fieldname.startswith('_'):
-        name = fieldname[1:]
-        return name
-    else:
-        return fieldname
-
-def is_inline(fieldname):
-    if fieldname.startswith('_'):
-        return True
-    else:
-        return False
 
 class SchemaModelLookup(object):
     show_tabbed_fieldsets = False
