@@ -25,9 +25,10 @@ from django.views.decorators.csrf import csrf_protect
 from metashare.repo2.editor.editorutils import FilteredChangeList
 from django.contrib.admin.views.main import ChangeList
 from django.contrib.admin.util import unquote
-from django.http import HttpResponseRedirect, Http404
+from django.http import Http404
 from metashare.repo2.editor.forms import StorageObjectUploadForm
 from django.utils.html import escape
+from django.utils.translation import ugettext as _
 
 csrf_protect_m = method_decorator(csrf_protect)
 
@@ -219,7 +220,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
 
     def get_urls(self):
         from django.conf.urls.defaults import patterns, url
-        urlpatterns = super(SchemaModelAdmin, self).get_urls()
+        urlpatterns = super(ResourceModelAdmin, self).get_urls()
 
         def wrap(view):
             def wrapper(*args, **kwargs):
@@ -350,7 +351,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
             'app_label': opts.app_label,
         }
         context.update(extra_context or {})
-        context_instance = template.RequestContext(request,
+        context_instance = RequestContext(request,
           current_app=self.admin_site.name)
         return render_to_response(
           ['admin/repo2/resourceinfotype_model/upload_resource.html'], context,
