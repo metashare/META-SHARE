@@ -25,8 +25,48 @@ logging.basicConfig(level=LOG_LEVEL)
 LOGGER = logging.getLogger('metashare.repo2.search_indexes')
 LOGGER.addHandler(LOG_HANDLER)
 
+
+class PatchedRealTimeSearchIndex(RealTimeSearchIndex):
+    """
+    A patched version of the `RealTimeSearchIndex` which works around Haystack
+    issue #548.
+    """
+    # whether the setup in _setup_save(), _setup_delete(), _teardown_save(),
+    # _teardown_delete() has been done already or not
+    _signal_setup_done = [False, False, False, False]
+
+    def _setup_save(self):
+        if PatchedRealTimeSearchIndex._signal_setup_done[0]:
+            return True
+        PatchedRealTimeSearchIndex._signal_setup_done[0] = True
+        super(PatchedRealTimeSearchIndex, self)._setup_save()
+        return False
+
+    def _setup_delete(self):
+        if PatchedRealTimeSearchIndex._signal_setup_done[1]:
+            return True
+        PatchedRealTimeSearchIndex._signal_setup_done[1] = True
+        super(PatchedRealTimeSearchIndex, self)._setup_delete()
+        return False
+
+    def _teardown_save(self):
+        if PatchedRealTimeSearchIndex._signal_setup_done[2]:
+            return True
+        PatchedRealTimeSearchIndex._signal_setup_done[2] = True
+        super(PatchedRealTimeSearchIndex, self)._teardown_save()
+        return False
+
+    def _teardown_delete(self):
+        if PatchedRealTimeSearchIndex._signal_setup_done[3]:
+            return True
+        PatchedRealTimeSearchIndex._signal_setup_done[3] = True
+        super(PatchedRealTimeSearchIndex, self)._teardown_delete()
+        return False
+
+
 # pylint: disable-msg=C0103
-class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
+class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
+                                  indexes.Indexable):
     """
     The `SearchIndex` which indexes `resourceInfoType_model`s.
     """
@@ -178,7 +218,8 @@ class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
         In this implementation we additionally connect to frequently changed
         parts of the model which is returned by get_model().
         """
-        super(resourceInfoType_modelIndex, self)._setup_save()
+        if super(resourceInfoType_modelIndex, self)._setup_save():
+            return
         # in addition to the default setup of our super class, we connect to
         # frequently changed parts of resourceInfoType_model so that they
         # trigger an automatic reindexing, too:
