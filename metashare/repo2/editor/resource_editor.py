@@ -6,7 +6,7 @@ from metashare.repo2.models import resourceComponentTypeType_model, \
     lexicalConceptualResourceInfoType_model, toolServiceInfoType_model, \
     corpusMediaTypeType_model, languageDescriptionMediaTypeType_model, \
     lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model
-from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL,\
+from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
     ALLOWED_ARCHIVE_EXTENSIONS
 from metashare.utils import verify_subclass
 from metashare.stats.model_utils import saveLRStats, UPDATE_STAT
@@ -208,14 +208,12 @@ ingest_resources.short_description = "Ingest selected internal resources"
 
 class ResourceModelAdmin(SchemaModelAdmin):
     inline_type = 'stacked'
-    no_inlines = ['versionInfo', 'usageInfo', 'resourceDocumentationInfo', 'resourceCreationInfo']
     custom_one2one_inlines = {'identificationInfo':IdentificationInline,
                               'resourceComponentType':ResourceComponentInline}
     content_fields = ('resourceComponentType',)
     list_display = ('__unicode__', 'resource_type', 'publication_status')
     actions = (publish_resources, unpublish_resources, ingest_resources, )
     no_inlines = ['distributionInfo', ]
-    # TODO: we redefine no_inlines here -- why does this work?
 
 
     def get_urls(self):
