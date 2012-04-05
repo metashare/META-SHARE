@@ -503,6 +503,10 @@ div.filter_box{
     float: left;
 }
 
+div.filter_box > h4 {
+    margin-bottom: 0.5em;
+}
+
 a.addableFacet:before {
     content: " " url(sexybuttons/images/icons/silk/bullet_plus.png);
     vertical-align: top;
@@ -511,6 +515,14 @@ a.addableFacet:before {
 a.removableFacet:before {
     content: " " url(sexybuttons/images/icons/silk/bullet_minus.png);
     vertical-align: top;
+}
+
+#searchFilters dd {
+    margin-left: 0.5em;
+}
+
+#searchFilters dt {
+    margin-top: 0.25em;
 }
 
 #licence_sel_form > ul {
@@ -594,13 +606,13 @@ table.result_table tr.result_table_head{
 }
 
 table.result_table tr.result_table_head a.sortAsc:after {
-    content: " " url(sexybuttons/images/icons/silk/bullet_arrow_up.png);
-    vertical-align: top;
+    content: "\a0" url(sexybuttons/images/icons/silk/bullet_arrow_down.png);
+    vertical-align: middle;
 }
 
 table.result_table tr.result_table_head a.sortDesc:after {
-    content: " " url(sexybuttons/images/icons/silk/bullet_arrow_down.png);
-    vertical-align: top;
+    content: "\a0" url(sexybuttons/images/icons/silk/bullet_arrow_up.png);
+    vertical-align: middle;
 }
 
 
