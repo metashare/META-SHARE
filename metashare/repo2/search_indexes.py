@@ -178,9 +178,6 @@ class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
         In this implementation we additionally connect to frequently changed
         parts of the model which is returned by get_model().
         """
-        if os.environ.get('DISABLE_INDEXING_DURING_IMPORT', False) == 'True':
-            return
-
         super(resourceInfoType_modelIndex, self)._setup_save()
         # in addition to the default setup of our super class, we connect to
         # frequently changed parts of resourceInfoType_model so that they
