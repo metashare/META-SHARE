@@ -158,6 +158,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         django.contrib.admin.options.ModelAdmin,
         with the explicitly marked modifications.
         """
+        # pylint: disable-msg=C0103
         model = self.model
         opts = model._meta
 
@@ -212,7 +213,6 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             initial = dict(request.GET.items())
             for k in initial:
                 try:
-                    # pylint: disable-msg=C0103
                     f = opts.get_field(k)
                 except models.FieldDoesNotExist:
                     continue
