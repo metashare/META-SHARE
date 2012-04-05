@@ -162,8 +162,67 @@ class SearchTest(test_utils.IndexAwareTestCase):
      #       if successes:                
      #           successes[0].storage_object.publication_status = 'i'
      #           successes[0].storage_object.save()   
-    
-                
+
+    def test_case_insensitive_search(self):
+        """
+        Asserts that case-insensitive searching is done.
+        """
+        imported_res = test_utils.import_xml('{}/repo2/test_fixtures/'
+                        'internal-corpus-Text-EngPers.xml'.format(ROOT_PATH))[0]
+        imported_res.storage_object.published = True
+        imported_res.storage_object.save()
+        client = Client()
+        # assert that a lower case search for an upper case term succeeds:
+        response = client.get('/{0}repo2/search2/'.format(DJANGO_BASE),
+                              follow=True, data={'q': 'fixture'})
+        self.assertEqual('repo2/search.html', response.templates[0].name)
+        self.assertContains(response, "1 Language Resource", status_code=200)
+        # assert that an upper case search for a lower case term succeeds:
+        response = client.get('/{0}repo2/search2/'.format(DJANGO_BASE),
+                              follow=True, data={'q': 'ORIGINALLY'})
+        self.assertEqual('repo2/search.html', response.templates[0].name)
+        self.assertContains(response, "1 Language Resource", status_code=200)
+        # assert that a lower case search for a mixed case term succeeds:
+        response = client.get('/{0}repo2/search2/'.format(DJANGO_BASE),
+                              follow=True, data={'q': 'unicode'})
+        self.assertEqual('repo2/search.html', response.templates[0].name)
+        self.assertContains(response, "1 Language Resource", status_code=200)
+        # assert that a mixed case search for an upper case term succeeds:
+        response = client.get('/{0}repo2/search2/'.format(DJANGO_BASE),
+                              follow=True, data={'q': 'FiXTuRe'})
+        self.assertEqual('repo2/search.html', response.templates[0].name)
+        self.assertContains(response, "1 Language Resource", status_code=200)
+        # assert that a camelCase search for an upper case term succeeds:
+        response = client.get('/{0}repo2/search2/'.format(DJANGO_BASE),
+                              follow=True, data={'q': 'fixTure'})
+        self.assertEqual('repo2/search.html', response.templates[0].name)
+        self.assertContains(response, "1 Language Resource", status_code=200)
+        # assert that an all lower case search finds a camelCase term:
+        response = client.get('/{0}repo2/search2/'.format(DJANGO_BASE),
+                              follow=True, data={'q': 'speechsynthesis'})
+        self.assertEqual('repo2/search.html', response.templates[0].name)
+        self.assertContains(response, "1 Language Resource", status_code=200)
+
+    def test_camel_case_aware_search(self):
+        """
+        Asserts that the search engine is camelCase-aware.
+        """
+        imported_res = test_utils.import_xml('{}/repo2/test_fixtures/'
+                        'internal-corpus-Text-EngPers.xml'.format(ROOT_PATH))[0]
+        imported_res.storage_object.published = True
+        imported_res.storage_object.save()
+        client = Client()
+        # assert that a two-token search finds a camelCase term:
+        response = client.get('/{0}repo2/search2/'.format(DJANGO_BASE),
+                              follow=True, data={'q': 'speech synthesis'})
+        self.assertEqual('repo2/search.html', response.templates[0].name)
+        self.assertContains(response, "1 Language Resource", status_code=200)
+        # assert that a camelCase search term also finds the camelCase term:
+        response = client.get('/{0}repo2/search2/'.format(DJANGO_BASE),
+                              follow=True, data={'q': 'speechSynthesis'})
+        self.assertEqual('repo2/search.html', response.templates[0].name)
+        self.assertContains(response, "1 Language Resource", status_code=200)
+
     def testBrowse(self):  
         """
        # Tries to load the Browse page
