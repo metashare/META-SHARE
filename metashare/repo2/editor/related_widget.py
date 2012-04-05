@@ -35,6 +35,11 @@ class RelatedFieldWidgetWrapper(widgets.RelatedFieldWidgetWrapper):
         if not attrs:
             attrs = {}
         
+        # We may have inherited a faulty 'id' attribute in self.attrs from the RelatedWidgetMixin code,
+        # which does not take any inline prefixes into account. If so, update it to the proper value:
+        if 'id' in self.widget.attrs:
+            self.widget.attrs['id'] = u'id_{}'.format(name)
+        
         rel_to = self.rel.to
         info = (rel_to._meta.app_label, rel_to._meta.object_name.lower())
         self.widget.choices = self.choices

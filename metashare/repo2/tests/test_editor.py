@@ -68,7 +68,7 @@ class EditorTest(TestCase):
             'username': 'editoruser',
             'password': 'secret',
         }
-        
+                
     def tearDown(self):
         resourceInfoType_model.objects.all().delete()
     
@@ -84,8 +84,9 @@ class EditorTest(TestCase):
 
     def import_test_resource(self):
         test_utils.setup_test_storage()
-        test_utils.import_xml(TESTFIXTURE_XML)
-        
+        result = test_utils.import_xml(TESTFIXTURE_XML)
+        resource = result[0]
+        return resource
 
     def test_can_log_in_staff(self):
         client = Client()
@@ -219,3 +220,54 @@ class EditorTest(TestCase):
         self.assertContains(response, 'Successfully uploaded 1 resource descriptions')
         self.assertContains(response, 'Import failed for 1 files')
         
+    def test_identification_is_inline(self):
+        client = self.client_with_user_logged_in(self.editor_login)
+        resource = self.import_test_resource()
+        response = client.get('{}repo2/resourceinfotype_model/{}/'.format(ADMINROOT, resource.id))
+        # Resource name is a field of identification, so if this is present, identification is shown inline:
+        self.assertContains(response, "Resource name:", msg_prefix='Identification is not shown inline')
+        
+    def test_one2one_distribution_is_hidden(self):
+        client = self.client_with_user_logged_in(self.editor_login)
+        resource = self.import_test_resource()
+        response = client.get('{}repo2/resourceinfotype_model/{}/'.format(ADMINROOT, resource.id))
+        self.assertContains(response, 'type="hidden" id="id_distributionInfo"',
+                            msg_prefix='One-to-one field "distributionInfo" should have been hidden')
+
+    def test_one2one_distribution_uses_related_widget(self):
+        client = self.client_with_user_logged_in(self.editor_login)
+        resource = self.import_test_resource()
+        response = client.get('{}repo2/resourceinfotype_model/{}/'.format(ADMINROOT, resource.id))
+        self.assertContains(response, 'related-widget-wrapper-change-link" id="edit_id_distributionInfo"',
+                             msg_prefix='One-to-one field "distributionInfo" not rendered using related widget')
+
+    def test_one2one_sizepervalidation_is_hidden(self):
+        client = self.client_with_user_logged_in(self.editor_login)
+        resource = self.import_test_resource()
+        response = client.get('{}repo2/resourceinfotype_model/{}/'.format(ADMINROOT, resource.id))
+        self.assertContains(response, 'type="hidden" id="id_validationinfotype_model_set-0-sizePerValidation"',
+                             msg_prefix='One-to-one field "sizePerValidation" should have been hidden')
+
+    def test_one2one_sizepervalidation_uses_related_widget(self):
+        client = self.client_with_user_logged_in(self.editor_login)
+        resource = self.import_test_resource()
+        response = client.get('{}repo2/resourceinfotype_model/{}/'.format(ADMINROOT, resource.id))
+        self.assertContains(response, 'related-widget-wrapper-change-link" id="edit_id_validationinfotype_model_set-0-sizePerValidation"',
+                            msg_prefix='One-to-one field "sizePerValidation" not rendered using related widget')
+        self.assertContains(response, 'id="id_validationinfotype_model_set-0-sizePerValidation"',
+                            msg_prefix='One2one field in inline has unexpected "id" field -- popup save action probably cannot update field as expected')
+
+    def test_backref_is_hidden(self):
+        client = self.client_with_user_logged_in(self.editor_login)
+        resource = self.import_test_resource()
+        corpustextinfo = resource.resourceComponentType.corpusMediaType.corpustextinfotype_model_set.all()[0]
+        response = client.get('{}repo2/corpustextinfotype_model/{}/'.format(ADMINROOT, corpustextinfo.id))
+        self.assertContains(response, 'type="hidden" name="back_to_corpusmediatypetype_model"',
+                            msg_prefix='Back reference should have been hidden')
+
+    def test_validator_is_multiwidget(self):
+        client = self.client_with_user_logged_in(self.editor_login)
+        resource = self.import_test_resource()
+        response = client.get('{}repo2/resourceinfotype_model/{}/'.format(ADMINROOT, resource.id))
+        self.assertContains(response, '<select onchange="javascript:createNewSubInstance($(this), &quot;add_id_validationinfotype_model_set',
+                            msg_prefix='Validator is not rendered as a ChoiceTypeWidget')
