@@ -5,16 +5,18 @@ Project: META-SHARE prototype implementation
 import logging
 import os
 
-from haystack.indexes import CharField, RealTimeSearchIndex, MultiValueField, \
-    BooleanField
+from haystack.indexes import CharField, RealTimeSearchIndex, BooleanField
 from haystack import indexes
 
 from django.db.models import signals
+from django.utils.translation import ugettext as _
+
 from metashare.repo2.models import resourceInfoType_model, \
     identificationInfoType_model, corpusInfoType_model, \
     toolServiceInfoType_model, lexicalConceptualResourceInfoType_model, \
     languageDescriptionInfoType_model
-
+from metashare.repo2.search_fields import LabeledCharField, \
+    LabeledMultiValueField
 from metashare.storage.models import StorageObject
 from metashare.settings import LOG_LEVEL, LOG_HANDLER
 
@@ -42,24 +44,42 @@ class resourceInfoType_modelIndex(RealTimeSearchIndex, indexes.Indexable):
     published = BooleanField(stored=False)
 
     # List of filters
-    languageNameFilter = MultiValueField(faceted=True)
-    resourceTypeFilter = MultiValueField(faceted=True)
-    mediaTypeFilter = MultiValueField(faceted=True)
-    availabilityFilter = CharField(faceted=True)
-    licenceFilter = MultiValueField(faceted=True)
-    restrictionsOfUseFilter = MultiValueField(faceted=True)
-    validatedFilter = MultiValueField(faceted=True)
-    foreseenUseFilter = MultiValueField(faceted=True)
-    useNlpSpecificFilter = MultiValueField(faceted=True)
-    lingualityTypeFilter = MultiValueField(faceted=True)
-    multilingualityTypeFilter = MultiValueField(faceted=True)
-    modalityTypeFilter = MultiValueField(faceted=True)
-    mimeTypeFilter = MultiValueField(faceted=True)
-    bestPracticesFilter = MultiValueField(faceted=True)
-    domainFilter = MultiValueField(faceted=True)
-    geographicCoverageFilter = MultiValueField(faceted=True)
-    timeCoverageFilter = MultiValueField(faceted=True)
-    subjectFilter = MultiValueField(faceted=True)
+    languageNameFilter = LabeledMultiValueField(
+                                label=_('Language'), faceted=True)
+    resourceTypeFilter = LabeledMultiValueField(
+                                label=_('Resource Type'), faceted=True)
+    mediaTypeFilter = LabeledMultiValueField(
+                                label=_('Media Type'), faceted=True)
+    availabilityFilter = LabeledCharField(
+                                label=_('Availability'), faceted=True)
+    licenceFilter = LabeledMultiValueField(
+                                label=_('Licence'), faceted=True)
+    restrictionsOfUseFilter = LabeledMultiValueField(
+                                label=_('Restrictions of Use'), faceted=True)
+    validatedFilter = LabeledMultiValueField(
+                                label=_('Validated'), faceted=True)
+    foreseenUseFilter = LabeledMultiValueField(
+                                label=_('Foreseen Use'), faceted=True)
+    useNlpSpecificFilter = LabeledMultiValueField(
+                                label=_('Use Is NLP Specific'), faceted=True)
+    lingualityTypeFilter = LabeledMultiValueField(
+                                label=_('Linguality Type'), faceted=True)
+    multilingualityTypeFilter = LabeledMultiValueField(
+                                label=_('Multilinguality Type'), faceted=True)
+    modalityTypeFilter = LabeledMultiValueField(
+                                label=_('Modality Type'), faceted=True)
+    mimeTypeFilter = LabeledMultiValueField(
+                                label=_('MIME Type'), faceted=True)
+    bestPracticesFilter = LabeledMultiValueField(
+                                label=_('Best Practices'), faceted=True)
+    domainFilter = LabeledMultiValueField(
+                                label=_('Domain'), faceted=True)
+    geographicCoverageFilter = LabeledMultiValueField(
+                                label=_('Geographic Coverage'), faceted=True)
+    timeCoverageFilter = LabeledMultiValueField(
+                                label=_('Time Coverage'), faceted=True)
+    subjectFilter = LabeledMultiValueField(
+                                label=_('Subject'), faceted=True)
 
     # we create all items that may appear in the search results list already at
     # index time

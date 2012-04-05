@@ -20,6 +20,7 @@ from haystack.views import FacetedSearchView
 
 from metashare.repo2.forms import LicenseSelectionForm, LicenseAgreementForm
 from metashare.repo2.models import licenceInfoType_model, resourceInfoType_model
+from metashare.repo2.search_indexes import resourceInfoType_modelIndex
 from metashare.settings import LOG_LEVEL, LOG_HANDLER, MEDIA_URL
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
@@ -383,3 +384,98 @@ class MetashareFacetedSearchView(FacetedSearchView):
                 results_count, (datetime.now() - starttime).microseconds)
 
         return sqs
+    
+    def _get_selected_facets(self):
+        """
+        Returns the selected facets from the current GET request as a more
+        structured Python dictionary.
+        """
+        result = {}
+        for facet in self.request.GET.getlist("selected_facets"):
+            if ":" in facet:
+                field, value = facet.split(":", 1)
+                if value:
+                    if field in result:
+                        result[field].append(value)
+                    else:
+                        result[field] = [value]
+        return result
+    
+    def _create_filters_structure(self, facet_fields):
+        """
+        Creates a data structure encapsulating most of the logic which is
+        required for rendering the filters/facets of the META-SHARE search.
+        
+        Takes the raw facet 'fields' dictionary which is (indirectly) returned
+        by the `facet_counts()` method of a `SearchQuerySet`.
+        """
+        result = []
+        filter_labels = [(name, field.label) for name, field
+                         in resourceInfoType_modelIndex.fields.iteritems()
+                         if name.endswith("Filter")]
+        filter_labels.sort(key=lambda f: f[1].lower())
+        sel_facets = self._get_selected_facets()
+
+        # Step (1): if there are any selected facets, then add these first:
+        if sel_facets:
+            # add all facets alphabetically:
+            for name, label in filter_labels:
+                name_exact = '{0}_exact'.format(name)
+                # only add selected facets in step (1)
+                if name_exact in sel_facets:
+                    items = facet_fields.get(name)
+                    if items:
+                        removable = []
+                        addable = []
+                        # only items with a count > 0 are shown
+                        for item in [i for i in items if i[1] > 0]:
+                            if item[0] in sel_facets[name_exact]:
+                                removable.append({'label': item[0],
+                                    'count': item[1], 'targets':
+                                        ['{0}:{1}'.format(name, value)
+                                         for name, values in
+                                         sel_facets.iteritems() for value in
+                                         values if name != name_exact
+                                         or value != item[0]]})
+                            else:
+                                targets = ['{0}:{1}'.format(name, value)
+                                           for name, values in
+                                           sel_facets.iteritems()
+                                           for value in values]
+                                targets.append('{0}:{1}'.format(name_exact,
+                                                                item[0]))
+                                addable.append({'label': item[0],
+                                                'count': item[1],
+                                                'targets': targets})
+                        result.append({'label': label, 'removable': removable,
+                                       'addable': addable})
+
+        # Step (2): add all facets without selected facet items alphabetically
+        # at the end:
+        for name, label in filter_labels:
+            name_exact = '{0}_exact'.format(name)
+            # only add facets without selected items in step (2)
+            if not name_exact in sel_facets:
+                items = facet_fields.get(name)
+                if items:
+                    addable = []
+                    # only items with a count > 0 are shown
+                    for item in [i for i in items if i[1] > 0]:
+                        targets = ['{0}:{1}'.format(name, value)
+                                   for name, values in sel_facets.iteritems()
+                                   for value in values]
+                        targets.append('{0}:{1}'.format(name_exact, item[0]))
+                        addable.append({'label': item[0], 'count': item[1],
+                                        'targets': targets})
+                    result.append({'label': label, 'removable': [],
+                                   'addable': addable})
+
+        return result
+
+    def extra_context(self):
+        extra = super(MetashareFacetedSearchView, self).extra_context()
+        # add a data structure encapsulating most of the logic which is required
+        # for rendering the filters/facets
+        extra['filters'] = self._create_filters_structure(
+                                        extra['facets']['fields'])
+        return extra
