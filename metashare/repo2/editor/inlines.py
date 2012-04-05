@@ -56,7 +56,8 @@ class ReverseInlineFormSet(BaseModelFormSet):
                  files = None,
                  instance = None,
                  prefix = None,
-                 save_as_new = False):
+                 save_as_new = False,
+                 queryset=None):
         if instance.pk:
             obj = getattr(instance, self.parent_fk_name)
             _qs = self.model.objects.filter(pk = obj.id)

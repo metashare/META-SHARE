@@ -22,13 +22,15 @@ from metashare.repo2.editor.related_mixin import RelatedAdminMixin
 from metashare.repo2.editor.schemamodel_mixin import SchemaModelLookup
 from metashare.repo2.editor.inlines import ReverseInlineModelAdmin
 from metashare.repo2.editor.editorutils import is_inline, decode_inline
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_protect
 
 # Setup logging support.
 logging.basicConfig(level=settings.LOG_LEVEL)
 LOGGER = logging.getLogger('metashare.repo2.superadmin')
 LOGGER.addHandler(settings.LOG_HANDLER)
 
-
+csrf_protect_m = method_decorator(csrf_protect)
 
 
 
@@ -147,39 +149,48 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         else:
             return super(SchemaModelAdmin, self).response_change(request, obj)
 
+    @csrf_protect_m
+    @transaction.commit_on_success
     def add_view(self, request, form_url='', extra_context=None):
-        "The 'add' admin view for this model."
+        """
+        The 'add' admin view for this model.
+        This follows closely the base implementation from Django 1.3's 
+        django.contrib.admin.options.ModelAdmin,
+        with the explicitly marked modifications.
+        """
         model = self.model
         opts = model._meta
 
         if not self.has_add_permission(request):
             raise PermissionDenied
 
-        model_form = self.get_form(request)
+        ModelForm = self.get_form(request)
         formsets = []
         if request.method == 'POST':
-            form = model_form(request.POST, request.FILES)
+            form = ModelForm(request.POST, request.FILES)
             if form.is_valid():
-                form_validated = True
                 new_object = self.save_form(request, form, change=False)
+                form_validated = True
             else:
                 form_validated = False
                 new_object = self.model()
             prefixes = {}
-            for form_set in self.get_formsets(request):
-                if getattr(form_set, 'parent_fk_name', None) in self.no_inlines:
+            for FormSet, inline in zip(self.get_formsets(request), self.inline_instances):
+                #### begin modification ####
+                if getattr(FormSet, 'parent_fk_name', None) in self.no_inlines:
                     continue
-                prefix = form_set.get_default_prefix()
+                #### end modification ####
+                prefix = FormSet.get_default_prefix()
                 prefixes[prefix] = prefixes.get(prefix, 0) + 1
                 if prefixes[prefix] != 1:
                     prefix = "%s-%s" % (prefix, prefixes[prefix])
-                formset = form_set(data=request.POST, files=request.FILES,
+                formset = FormSet(data=request.POST, files=request.FILES,
                                   instance=new_object,
-                                  save_as_new=request.POST.has_key("_saveasnew"),
-                                  prefix=prefix)
+                                  save_as_new="_saveasnew" in request.POST,
+                                  prefix=prefix, queryset=inline.queryset(request))
                 formsets.append(formset)
             if all_valid(formsets) and form_validated:
-                # Here is the modified code.
+                #### begin modification ####
                 for formset, inline in zip(formsets, self.inline_instances):
                     if not isinstance(inline, ReverseInlineModelAdmin):
                         continue
@@ -187,6 +198,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                     if saved:
                         obj = saved[0]
                         setattr(new_object, inline.parent_fk_name, obj)
+                #### end modification ####
                 self.save_model(request, new_object, form, change=False)
                 form.save_m2m()
                 for formset in formsets:
@@ -206,39 +218,45 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                     continue
                 if isinstance(f, models.ManyToManyField):
                     initial[k] = initial[k].split(",")
-
-            form = model_form(initial=initial)
+            form = ModelForm(initial=initial)
             prefixes = {}
-            for form_set in self.get_formsets(request):
-                if getattr(form_set, 'parent_fk_name', None) in self.no_inlines:
+            for FormSet, inline in zip(self.get_formsets(request),
+                                       self.inline_instances):
+                #### begin modification ####
+                if getattr(FormSet, 'parent_fk_name', None) in self.no_inlines:
                     continue
-                prefix = form_set.get_default_prefix()
+                #### end modification ####
+                prefix = FormSet.get_default_prefix()
                 prefixes[prefix] = prefixes.get(prefix, 0) + 1
                 if prefixes[prefix] != 1:
                     prefix = "%s-%s" % (prefix, prefixes[prefix])
-                formset = form_set(instance=self.model(), prefix=prefix)
+                formset = FormSet(instance=self.model(), prefix=prefix,
+                                  queryset=inline.queryset(request))
                 formsets.append(formset)
 
+        #### begin modification ####
         media = self.media or []
+        #### end modification ####
         inline_admin_formsets = []
         for inline, formset in zip(self.inline_instances, formsets):
             fieldsets = list(inline.get_fieldsets(request))
-            # NOTE: handling of read-only fields is not implemented yet.
-            #
-            #       See options.py:920
-            #         readonly = list(inline.get_readonly_fields(request))
-            inline_admin_formset = helpers.InlineAdminFormSet(inline, formset, fieldsets)
+            readonly = list(inline.get_readonly_fields(request))
+            inline_admin_formset = helpers.InlineAdminFormSet(inline, formset,
+                fieldsets, readonly, model_admin=self)
             inline_admin_formsets.append(inline_admin_formset)
             media = media + inline_admin_formset.media
 
-        admin_form = OrderedAdminForm(form, list(self.get_fieldsets_with_inlines(request)),
-                self.prepopulated_fields, inlines=inline_admin_formsets)
-        media = media + admin_form.media
+        #### begin modification ####
+        adminForm = OrderedAdminForm(form, list(self.get_fieldsets_with_inlines(request)),
+            self.prepopulated_fields, self.get_readonly_fields(request),
+            model_admin=self, inlines=inline_admin_formsets)
+        media = media + adminForm.media
+        #### end modification ####
 
         context = {
             'title': _('Add %s') % force_unicode(opts.verbose_name),
-            'adminform': admin_form,
-            'is_popup': request.REQUEST.has_key('_popup'),
+            'adminform': adminForm,
+            'is_popup': "_popup" in request.REQUEST,
             'show_delete': False,
             'media': mark_safe(media),
             'inline_admin_formsets': inline_admin_formsets,
@@ -248,10 +266,16 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         }
         context.update(extra_context or {})
         return self.render_change_form(request, context, form_url=form_url, add=True)
-    add_view = transaction.commit_on_success(add_view)
 
+    @csrf_protect_m
+    @transaction.commit_on_success
     def change_view(self, request, object_id, extra_context=None):
-        "The 'change' admin view for this model."
+        """
+        The 'change' admin view for this model.
+        This follows closely the base implementation from Django 1.3's 
+        django.contrib.admin.options.ModelAdmin,
+        with the explicitly marked modifications.
+        """
         model = self.model
         opts = model._meta
 
@@ -266,10 +290,10 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         if request.method == 'POST' and "_saveasnew" in request.POST:
             return self.add_view(request, form_url='../add/')
 
-        model_form = self.get_form(request, obj)
+        ModelForm = self.get_form(request, obj)
         formsets = []
         if request.method == 'POST':
-            form = model_form(request.POST, request.FILES, instance=obj)
+            form = ModelForm(request.POST, request.FILES, instance=obj)
             if form.is_valid():
                 form_validated = True
                 new_object = self.save_form(request, form, change=True)
@@ -277,15 +301,19 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                 form_validated = False
                 new_object = obj
             prefixes = {}
-            for form_set in self.get_formsets(request, new_object):
-                if getattr(form_set, 'parent_fk_name', None) in self.no_inlines:
+            for FormSet, inline in zip(self.get_formsets(request, new_object),
+                                       self.inline_instances):
+                #### begin modification ####
+                if getattr(FormSet, 'parent_fk_name', None) in self.no_inlines:
                     continue
-                prefix = form_set.get_default_prefix()
+                #### end modification ####
+                prefix = FormSet.get_default_prefix()
                 prefixes[prefix] = prefixes.get(prefix, 0) + 1
                 if prefixes[prefix] != 1:
                     prefix = "%s-%s" % (prefix, prefixes[prefix])
-                formset = form_set(request.POST, request.FILES,
-                                  instance=new_object, prefix=prefix)
+                formset = FormSet(request.POST, request.FILES,
+                                  instance=new_object, prefix=prefix,
+                                  queryset=inline.queryset(request))
 
                 formsets.append(formset)
 
@@ -300,19 +328,24 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                 return self.response_change(request, new_object)
 
         else:
-            form = model_form(instance=obj)
+            form = ModelForm(instance=obj)
             prefixes = {}
-            for form_set in self.get_formsets(request, obj):
-                if getattr(form_set, 'parent_fk_name', None) in self.no_inlines:
+            for FormSet, inline in zip(self.get_formsets(request, obj), self.inline_instances):
+                #### begin modification ####
+                if getattr(FormSet, 'parent_fk_name', None) in self.no_inlines:
                     continue
-                prefix = form_set.get_default_prefix()
+                #### end modification ####
+                prefix = FormSet.get_default_prefix()
                 prefixes[prefix] = prefixes.get(prefix, 0) + 1
                 if prefixes[prefix] != 1:
                     prefix = "%s-%s" % (prefix, prefixes[prefix])
-                formset = form_set(instance=obj, prefix=prefix)
+                formset = FormSet(instance=obj, prefix=prefix,
+                                  queryset=inline.queryset(request))
                 formsets.append(formset)
 
+        #### begin modification ####
         media = self.media or []
+        #### end modification ####
         inline_admin_formsets = []
         for inline, formset in zip(self.inline_instances, formsets):
             fieldsets = list(inline.get_fieldsets(request, obj))
@@ -322,14 +355,16 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             inline_admin_formsets.append(inline_admin_formset)
             media = media + inline_admin_formset.media
 
-        admin_form = OrderedAdminForm(form, self.get_fieldsets_with_inlines(request, obj),
+        #### begin modification ####
+        adminForm = OrderedAdminForm(form, self.get_fieldsets_with_inlines(request, obj),
             self.prepopulated_fields, self.get_readonly_fields(request, obj),
             model_admin=self, inlines=inline_admin_formsets)
-        media = media + admin_form.media
+        media = media + adminForm.media
+        #### end modification ####
 
         context = {
             'title': _('Change %s') % force_unicode(opts.verbose_name),
-            'adminform': admin_form,
+            'adminform': adminForm,
             'object_id': object_id,
             'original': obj,
             'is_popup': "_popup" in request.REQUEST,
