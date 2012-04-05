@@ -276,6 +276,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         django.contrib.admin.options.ModelAdmin,
         with the explicitly marked modifications.
         """
+        # pylint: disable-msg=C0103
         model = self.model
         opts = model._meta
 
