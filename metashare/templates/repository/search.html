@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<script language="javascript">
+$(document).ready(function(){
+  $("#searchFilters dt").each(function() {
+    var allDds = $(this).nextUntil("dt");
+    if (allDds.length > 4) {{# for 5 or less items we don't want to collapse, however, including the "more" link we would like to have at most 5 <dd>s #}
+      var hideableDds = allDds.has("a.addableFacet");{# never hide selected facet items #}
+      if (hideableDds.length > 1) {{# don't replace a single item with a "more" link #}
+        hiddenDds = hideableDds.slice(
+          Math.max(0, 4 - (allDds.length - hideableDds.length))).hide();
+        var moreTxt = 'more', lessTxt = 'less';
+        hiddenDds.last().after($("<dd><a href='#'>" + moreTxt + "</a></dd>")
+            .children().first().click({hiddenDds: hiddenDds}, function(e) {
+                e.preventDefault();
+                $(this).text($(this).text() == moreTxt ? lessTxt : moreTxt);
+                e.data.hiddenDds.toggle();
+        	  }).parent());
+      }
+    }
+  });
+});
+</script>
+
+<h2>Search Catalogue</h2>
+<div class="content_box">
+  <form class="form_helper" id="searchbox" action="." method="get">
+    <table>
+      <tr valign="middle">
+        <td valign="middle"><label for="id_keywords">Keywords:</label></td>
+        <td valign="middle">{{ form.q }}  <a href="{% url metashare.views.frontpage %}repository/search/">Return to Browse page</a></td>
+      </tr>
+      <tr valign="baseline">
+        <td></td>
+        <td><input class="span-4 button middle_button" style="margin-left:5px;" type="submit" value="Search" /></td>
+      </tr>
+      <tr>
+        <td></td>
+      </tr>
+    </table>
+  </form>
+  <table>
+    <tr style="valign:top">
+      <td width="20%">
+        <div class="filter_box">
+          <h4>Filter by:</h4>
+          <dl id="searchFilters">
+          {% for filter in filters %}
+            {% include "repository/filter.html" with filter=filter %}
+          {% endfor %}
+          </dl>
+        </div>
+          </td>
+          <td width="70%">
+            <div class="results">    
+              <h3> {{ page.paginator.count }} Language Resource{{page.paginator.count|pluralize}} {% if page.paginator.num_pages > 1 %}(Page {{ page.number }}  of {{ page.paginator.num_pages }}) {% endif %} </h3>
+              
+              {% if page.object_list %}
+                {% if page.has_previous or page.has_next %}
+                  <span style="float:right;">
+                    {% if page.has_previous %}<a href="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key = 'selected_facets' %}{% for facet in values %}&amp;selected_facets={{ facet|urlencode }}{% endfor %}{% endif %}{% if key = 'sort' %}&amp;sort={{values.0}}{% endif %}{% endfor %}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo;&nbsp;Previous{% if page.has_previous %}</a>{% endif %} |
+                    {% if page.has_next %}<a href="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key = 'selected_facets' %}{% for facet in values %}&amp;selected_facets={{ facet|urlencode }}{% endfor %}{% endif %}{% if key = 'sort' %}&amp;sort={{values.0}}{% endif %}{% endfor %}&amp;page={{ page.next_page_number }}">{% endif %}Next&nbsp;&raquo;{% if page.has_next %}</a>{% endif %}
+                  </span>
+                {% endif %}
+                <table class="result_table">
+                <tr class="result_table_head">
+                  <td style="width:200px;"><a href="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key = 'selected_facets' %}{% for facet in values %}&amp;selected_facets={{ facet|urlencode }}{% endfor %}{% endif %}{% if key = 'sort' %}&amp;sort={% if values.0 == "resourcename_asc" %}resourcename_desc" class="sortDesc{% else %}resourcename_asc{% if values.0 == "resourcename_desc" %}" class="sortAsc{% endif %}{% endif %}{% endif %}{% endfor %}{% if 'sort' not in request.GET %}&amp;sort=resourcename_desc" class="sortDesc{% endif %}">Resource Name</a></td>
+                  <td style="width:140px;"><a href="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key = 'selected_facets' %}{% for facet in values %}&amp;selected_facets={{ facet|urlencode }}{% endfor %}{% endif %}{% if key = 'sort' %}&amp;sort={% if values.0 == "resourcetype_asc" %}resourcetype_desc" class="sortDesc{% else %}resourcetype_asc{% if values.0 == "resourcetype_desc" %}" class="sortAsc{% endif %}{% endif %}{% endif %}{% endfor %}{% if 'sort' not in request.GET %}&amp;sort=resourcetype_asc{% endif %}">Resource Type</a></td>
+                  <td style="width:140px;"><a href="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key = 'selected_facets' %}{% for facet in values %}&amp;selected_facets={{ facet|urlencode }}{% endfor %}{% endif %}{% if key = 'sort' %}&amp;sort={% if values.0 == "mediatype_asc" %}mediatype_desc" class="sortDesc{% else %}mediatype_asc{% if values.0 == "mediatype_desc" %}" class="sortAsc{% endif %}{% endif %}{% endif %}{% endfor %}{% if 'sort' not in request.GET %}&amp;sort=mediatype_asc{% endif %}">Media Type(s)</a></td>
+                  <td style="width:200px;"><a href="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key = 'selected_facets' %}{% for facet in values %}&amp;selected_facets={{ facet|urlencode }}{% endfor %}{% endif %}{% if key = 'sort' %}&amp;sort={% if values.0 == "languagename_asc" %}languagename_desc" class="sortDesc{% else %}languagename_asc{% if values.0 == "languagename_desc" %}" class="sortAsc{% endif %}{% endif %}{% endif %}{% endfor %}{% if 'sort' not in request.GET %}&amp;sort=languagename_asc{% endif %}">Language(s)</a></td>
+                </tr>
+                {% for result in page.object_list %}
+                  {% cycle 'even' 'odd' as style silent %}
+                  <tr class="{{ style }}">{{ result.rendered_result|safe }}</tr>
+                {% endfor %}
+                </table>
+                {% if page.has_previous or page.has_next %}
+                  <span style="float:right;">
+                    {% if page.has_previous %}<a href="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key = 'selected_facets' %}{% for facet in values %}&amp;selected_facets={{ facet|urlencode }}{% endfor %}{% endif %}{% if key = 'sort' %}&amp;sort={{values.0}}{% endif %}{% endfor %}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo;&nbsp;Previous{% if page.has_previous %}</a>{% endif %} |
+                    {% if page.has_next %}<a href="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key = 'selected_facets' %}{% for facet in values %}&amp;selected_facets={{ facet|urlencode }}{% endfor %}{% endif %}{% if key = 'sort' %}&amp;sort={{values.0}}{% endif %}{% endfor %}&amp;page={{ page.next_page_number }}">{% endif %}Next&nbsp;&raquo;{% if page.has_next %}</a>{% endif %}
+                  </span>
+                {% endif %}
+              {% else %}
+                <p>No results were found for search query &ldquo;{{ query }}&rdquo;{% for key, values in request.GET.iterlists %}{% if key = 'selected_facets' %} and filters {% for facet in values %}{{ facet }}{%endfor %}{% endif %}{% endfor %}.</p>
+              {% endif %}
+            </div>
+          </td>
+      </tr>
+  </table>
+</div>
+{% endblock %}

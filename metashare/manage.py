@@ -36,7 +36,7 @@ if __name__ == "__main__":
         if command in fail_early_commands:
             from django.core.management import setup_environ
             setup_environ(settings)
-            from metashare.repo2 import verify_at_startup
+            from metashare.repository import verify_at_startup
             verify_at_startup() # may raise Exception, which we don't want to catch.
     
     execute_manager(settings)

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<identificationInfo>
+<resourceName lang="English">FIXTURE-5</resourceName>
+<resourceName lang="French">Lexique de prononciation des noms de lieux, noms de famille et prénoms britanniques</resourceName>
+<description lang="English">The Pronunciation lexicon of British place names, surnames and first names was produced by the University of Poitiers (France) through a funding from ELRA in the framework of the European Commission project LRsP&amp;P (Language Resources Production &amp; Packaging - LE4-8335). This lexicon is an SGML-encoded database of British proper names. All entries belong to one or several of the following categories: place-names (a quasi-exhaustive list of toponyms from England, Scotland and Wales), and surnames or first names (a selection of names based on an extensive survey of bibliographic sources in the field of British onomastics combined with lists compiled by the author of this lexicon). The database is composed of 160,000 entries, breaking down as follows:Place-names   Number of entries   Number of transcriptions England 31,635 44,969 Wales 5,085 9,941 Scotland 15,363 20,397 Total 1 52,083 75,307   Surnames 92,456 115,934 First names 15,461 20,803 Total 2 107,917 136,737   Total 1+2 160,000 212,044 All phonemic transcriptions in the database are based on the SAMPA phonetic alphabet</description>
+<description lang="French">Le Lexique de prononciation des noms de lieux, noms de familles et prénoms britanniques a été réalisé par l'Université de Poitiers (France) dans le cadre du projet européen LRsP&amp;P (Language Resources Production &amp; Packaging - Production et mise au format des ressources linguistiques - LE4-8335) soutenu par la Commission Européenne. Ce lexique se présente sous la forme d'une base de données codée en SGML des noms propres britanniques. Toutes les entrées appartiennent à une ou plusieurs des catégories suivantes : noms de lieux (liste quasi-exhaustive de toponymes anglais, écossais et gallois), et noms de famille ou prénoms (sélection de noms basés sur une enquête approfondie de sources bibliographiques dans le domaine de l'onomastique britannique, combinée avec des listes compilées par l'auteur du présent lexique). La base de données est constituée de 160 000 entrées, réparties comme suit :Noms de lieux Nombre d'entrées   Nombre de transcriptions Angleterre 31 635 44 969 Pays-de-Galles 5 085 9 941 Ecosse 15 363 20 397 Total 1 52 083 75 307   Noms de famille 92 456 115 934 Prénoms 15 461 20 803 Total 2 107 917 136 737   Total 1+2 160 000 212 044 Toutes les transcriptions phonémiques de la base de données sont basées sur le codage phonétique SAMPA.</description>
+<resourceShortName/>
+<metaShareId>n/a</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=759</url>
+<identifier>ELRA-S0091</identifier>
+</identificationInfo>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+<metadataCreator>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipcode>75013</zipcode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</metadataCreator>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<lastDateUpdated>2007-02-22</lastDateUpdated>
+</versionInfo>
+<distributionInfo>
+<availability>available-restrictedUse</availability>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>40000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2000-12-15</availabilityStartDate>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_VAR</licence>
+<restrictionsOfUse>commercialUse</restrictionsOfUse>
+<price>25000.00€</price>
+<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+<availabilityStartDate>2000-12-15</availabilityStartDate>
+</licenceInfo>
+</distributionInfo>
+<validationInfo>
+<validated>True</validated>
+<validationModeDetails> Validation report available</validationModeDetails>
+</validationInfo>
+<usageInfo>
+<foreseenUseInfo>
+<foreseenUse>nlpApplications</foreseenUse>
+<useNLPSpecific>speechRecognition</useNLPSpecific>
+</foreseenUseInfo>
+<actualUseInfo>
+<actualUse>humanUse</actualUse>
+<useNLPSpecific>speechRecognition</useNLPSpecific>
+</actualUseInfo>
+</usageInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>LRsP&amp;P (Language Resources Production &amp; Packaging - LE4-8335)</projectName>
+<fundingType>euFunds</fundingType>
+</fundingProject>
+</resourceCreationInfo>
+<resourceComponentType>
+<lexicalConceptualResourceInfo>
+<resourceType>lexicalConceptualResource</resourceType>
+<lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+<lexicalConceptualResourceMediaType>
+<lexicalConceptualResourceTextInfo>
+<mediaType>text</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>ger/deu</languageId>
+<languageName>German</languageName>
+</languageInfo>
+<domainInfo>
+<domain>tourism</domain>
+</domainInfo>
+<timeCoverageInfo>
+<timeCoverage>1988</timeCoverage>
+</timeCoverageInfo>
+</lexicalConceptualResourceTextInfo>
+<lexicalConceptualResourceAudioInfo>
+<mediaType>audio</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>ger/deu</languageId>
+<languageName>German</languageName>
+</languageInfo>
+<domainInfo>
+<domain>tourism</domain>
+</domainInfo>
+<timeCoverageInfo>
+<timeCoverage>1988</timeCoverage>
+</timeCoverageInfo>
+</lexicalConceptualResourceAudioInfo>
+</lexicalConceptualResourceMediaType>
+</lexicalConceptualResourceInfo>
+</resourceComponentType>
+</resourceInfo>

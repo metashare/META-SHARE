@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h2{% if not resource.storage_object.published %} style="font-style:italic;"{% endif %}>{{ resource.identificationInfo.resourceName.0 }}</h2>
+<div class="content_box">
+  <h3>Licence Agreement</h3>
+  <iframe src="{{ licence_path }}" width="700" height="400"><a href="{{ licence_path }}">View licence</a></iframe>
+{% if requires_sig %}
+  <p>This licence requires a hardcopy signature. Please contact the resource maintainer for more information on how to proceed.</p>
+{% else %}
+  <form action="." method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input class="span-8 button middle_button" type="submit" value="Download Resource" />
+  </form>
+{% endif %}
+</div>
+{% endblock %}

@@ -40,7 +40,7 @@ if __name__ == "__main__":
         sys.exit(-1)
     
     # Check that SOLR is running, or else all resources will stay at status INTERNAL:
-    from metashare.repo2 import verify_at_startup
+    from metashare.repository import verify_at_startup
     verify_at_startup() # may raise Exception, which we don't want to catch.
 
     # Disable verbose debug output for the import process...
@@ -51,7 +51,7 @@ if __name__ == "__main__":
     erroneous_imports = []
     from metashare.xml_utils import import_from_file
     from metashare.storage.models import PUBLISHED
-    from metashare.repo2.supermodel import OBJECT_XML_CACHE
+    from metashare.repository.supermodel import OBJECT_XML_CACHE
     
     # Clean cache before starting the import process.
     OBJECT_XML_CACHE.clear()

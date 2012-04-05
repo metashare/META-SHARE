@@ -156,7 +156,7 @@ INSTALLED_APPS = (
     
     'metashare.stats',
 
-    'metashare.repo2',
+    'metashare.repository',
     'metashare.AdminTest',
 )
 
@@ -171,7 +171,7 @@ except ImportError:
 
 # Apps for which to run tests in continuous integration django_jenkins:
 PROJECT_APPS = (
-    'metashare.repo2',
+    'metashare.repository',
     'metashare.accounts',
     'metashare.storage',
 )

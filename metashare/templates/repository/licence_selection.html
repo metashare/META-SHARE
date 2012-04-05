@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}    
+<h2{% if not resource.storage_object.published %} style="font-style:italic;"{% endif %}>{{ resource.identificationInfo.resourceName.0 }}</h2>
+<div class="content_box">
+  <h3>Choose a Licence for the Resource Download</h3>
+  <form action="." method="post" id="licence_sel_form">
+    {{ form }}
+    <input class="span-8 button middle_button" type="submit" value="Select Licence" />
+  </form>
+</div>
+{% endblock %}

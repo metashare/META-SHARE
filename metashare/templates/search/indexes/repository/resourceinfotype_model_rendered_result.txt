@@ -1,0 +1,20 @@
+{% load resource_languages %}
+{% load resource_media_types %}
+
+<th style="text-align:left;{% if not object.storage_object.published %} font-style:italic;{% endif %}">
+  <a href="{{ object.get_absolute_url }}">{{ object.identificationInfo.resourceName.0 }}</a><br/>
+  {% if object.identificationInfo.resourceShortName.0 %}{{ object.identificationInfo.resourceShortName.0 }}{% endif %}
+</th>
+
+<td style="text-align:left;{% if not object.storage_object.published %} font-style:italic;{% endif %}">
+  {{ object.resourceComponentType.as_subclass.get_resourceType_display }}
+</td>
+
+<td style="text-align:left;{% if not object.storage_object.published %} font-style:italic;{% endif %}">
+  {% resource_media_types object.resourceComponentType.as_subclass %}
+</td>
+
+<td style="text-align:left;{% if not object.storage_object.published %} font-style:italic;{% endif %}">
+  {% resource_languages object.resourceComponentType.as_subclass %}
+</td>
+
