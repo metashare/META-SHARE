@@ -201,7 +201,8 @@ class ResourceModelAdmin(ReverseModelAdmin):
     content_fields = ('resourceComponentType',)
     list_display = ('__unicode__', 'resource_type', 'publication_status')
     actions = (publish_resources, unpublish_resources, ingest_resources, )
-    no_inlines = ['distributionInfo',]
+    no_inlines = ['distributionInfo', ]
+    # TODO: we redefine no_inlines here -- why does this work?
 
     def build_fieldsets_from_schema(self, include_inlines=False):
         """

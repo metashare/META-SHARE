@@ -124,10 +124,6 @@ def reverse_inlineformset_factory(parent_model,
     return form_set
 
 class ReverseInlineModelAdmin(SchemaModelInline):
-    '''
-    Use the name and the help_text of the owning models field to
-    render the verbose_name and verbose_name_plural texts.
-    '''
     
     formset = ReverseInlineFormSet
     
@@ -142,7 +138,9 @@ class ReverseInlineModelAdmin(SchemaModelInline):
         self.model = model
         field_descriptor = getattr(parent_model, self.parent_fk_name)
         field = field_descriptor.field
-        
+
+        # Use the name and the help_text of the owning models field to
+        # render the verbose_name and verbose_name_plural texts.
         self.verbose_name_plural = field.verbose_name.title()
         self.verbose_name = field.help_text
         if not self.verbose_name:

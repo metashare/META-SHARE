@@ -4,6 +4,7 @@ and for inline forms.
 '''
 import logging
 from django import template
+from django.contrib import admin
 from django.contrib.admin.util import unquote
 from django.contrib.admin.views.main import ChangeList
 from django.core.exceptions import PermissionDenied
@@ -20,8 +21,7 @@ from metashare.repo2.supermodel import SchemaModel, REQUIRED, RECOMMENDED, \
   OPTIONAL
 from metashare import settings
 from metashare.repo2.editor.forms import StorageObjectUploadForm
-from metashare.repo2.editor.related_admin import RelatedWidgetWrapperAdmin, \
-  RelatedWidgetWrapperInline
+from metashare.repo2.editor.related_admin import RelatedAdminMixin
 from metashare.storage.models import ALLOWED_ARCHIVE_EXTENSIONS
 from django.db.models.fields.related import ManyToManyField
 from django.core.urlresolvers import reverse
@@ -239,7 +239,7 @@ class SchemaModelLookup(object):
         return get_class_by_name('metashare.repo2.admin', inline_class_name)
 
 
-class SchemaModelInline(RelatedWidgetWrapperInline, SchemaModelLookup):
+class SchemaModelInline(admin.StackedInline, RelatedAdminMixin, SchemaModelLookup):
     extra = 1
     collapse = False
 
@@ -251,6 +251,20 @@ class SchemaModelInline(RelatedWidgetWrapperInline, SchemaModelLookup):
 
     def get_fieldsets(self, request, obj=None):
         return SchemaModelLookup.get_fieldsets(self, request, obj)
+
+    def formfield_for_dbfield(self, db_field, **kwargs):
+        if self.is_subclassable(db_field):
+            return self.formfield_for_subclassable(db_field, **kwargs)
+        self.use_hidden_widget_for_one2one(db_field, kwargs)
+        formfield = super(SchemaModelInline, self).formfield_for_dbfield(db_field, **kwargs)
+        self.use_related_widget_where_appropriate(db_field, kwargs, formfield)
+        return formfield
+
+    def response_change(self, request, obj):
+        if '_popup' in request.REQUEST:
+            return self.edit_response_close_popup_magic(obj)
+        else:
+            return super(SchemaModelInline, self).response_change(request, obj)
 
 
 class FilteredChangeList(ChangeList):
@@ -284,7 +298,7 @@ class FilteredChangeList(ChangeList):
     def url_for_result(self, result):
         return reverse("editor:{}_{}_change".format(self.opts.app_label, self.opts.module_name), args=(getattr(result, self.pk_attname),))
 
-class SchemaModelAdmin(RelatedWidgetWrapperAdmin, SchemaModelLookup):
+class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
     inlines = ()
     class Media:
         js = (settings.MEDIA_URL + 'js/jquery-1.7.1.min.js',
@@ -481,3 +495,19 @@ class SchemaModelAdmin(RelatedWidgetWrapperAdmin, SchemaModelLookup):
         return render_to_response(
           ['admin/repo2/resourceinfotype_model/upload_resource.html'], context,
           context_instance)
+        
+    def formfield_for_dbfield(self, db_field, **kwargs):
+        self.hide_hidden_fields(db_field, kwargs)
+        if self.is_subclassable(db_field):
+            return self.formfield_for_subclassable(db_field, **kwargs)
+        self.use_hidden_widget_for_one2one(db_field, kwargs)
+        formfield = super(SchemaModelAdmin, self).formfield_for_dbfield(db_field, **kwargs)
+        self.use_related_widget_where_appropriate(db_field, kwargs, formfield)
+        return formfield
+
+    def response_change(self, request, obj):
+        if '_popup' in request.REQUEST:
+            return self.edit_response_close_popup_magic(obj)
+        else:
+            return super(SchemaModelAdmin, self).response_change(request, obj)
+
