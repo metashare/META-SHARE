@@ -154,14 +154,14 @@ class SearchTest(test_utils.IndexAwareTestCase):
             if failures:
                 print failures    
     #def importInternalFixtures(self):
-     #   _path = '{}/repo2/test_fixtures/internal/'.format(ROOT_PATH)
-     #   files = os.listdir(_path)   
-     #   for filename in files:
-     #       fullpath = os.path.join(_path, filename)  
-     #       test_utils.import_xml_or_zip(fullpath)
-     #       if successes:                
-     #           successes[0].storage_object.publication_status = 'i'
-     #           successes[0].storage_object.save()   
+    #   _path = '{}/repo2/test_fixtures/internal/'.format(ROOT_PATH)
+    #   files = os.listdir(_path)   
+    #   for filename in files:
+    #       fullpath = os.path.join(_path, filename)  
+    #       test_utils.import_xml_or_zip(fullpath)
+    #       if successes:                
+    #           successes[0].storage_object.publication_status = 'i'
+    #           successes[0].storage_object.save()   
     
                 
     def testBrowse(self):  
@@ -235,13 +235,13 @@ class SearchTest(test_utils.IndexAwareTestCase):
     
     
     #def testLicenceFacetForTwoLicences(self):   
-     #   client = Client()
-     #   self.importPublishedFixtures()
-     #   response = client.get('/{0}repo2/search2/'.format(DJANGO_BASE), follow=True, 
-     #     data={'selected_facets':'licenceFilter_exact:ELRA_END_USER', 'selected_facets':'licenceFilter_exact:ELRA_VAR'})
-     #   self.assertEqual('repo2/search.html', response.templates[0].name)
-     #   print response
-     #   self.assertContains(response, "1 Language Resource", status_code=200)
+    #   client = Client()
+    #   self.importPublishedFixtures()
+    #   response = client.get('/{0}repo2/search2/'.format(DJANGO_BASE), follow=True, 
+    #     data={'selected_facets':'licenceFilter_exact:ELRA_END_USER', 'selected_facets':'licenceFilter_exact:ELRA_VAR'})
+    #   self.assertEqual('repo2/search.html', response.templates[0].name)
+    #   print response
+    #   self.assertContains(response, "1 Language Resource", status_code=200)
     
     
     def testRestrictionsOfUseFacet(self):   
@@ -329,7 +329,7 @@ class SearchTest(test_utils.IndexAwareTestCase):
         self.importPublishedFixtures()
         response = client.get('/{0}repo2/search2/'.format(DJANGO_BASE), follow=True, 
           data={'q':'recordingFree', 'selected_facets':'languageNameFilter_exact:Chinese'})
-       # print response
+        # print response
         self.assertEqual('repo2/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)  
 
