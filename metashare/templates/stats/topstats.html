@@ -61,7 +61,7 @@
 {% for stat in topdata %}
 <tr class="{% cycle odd,even %}">
 {% ifequal view "latestqueries" %}  
-   <td nowrap><a href="{% url metashare.views.frontpage %}repo2/search2/?q={{ stat.0 }}">{{ stat.0 }}</a></th>
+   <td nowrap><a href="{% url metashare.views.frontpage %}repository/search/?q={{ stat.0 }}">{{ stat.0 }}</a></th>
    <td width=100%><i>{{ stat.2 }}</i></td>
    <td nowrap>{{ stat.1 }}</td>
 {% else %} 

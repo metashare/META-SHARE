@@ -8,7 +8,7 @@ from django.conf.urls.defaults import patterns, include, handler404, \
 from django.contrib import admin
 
 from metashare.settings import MEDIA_ROOT, DEBUG, DJANGO_BASE
-from metashare.repo2.editor import admin_site as editor_site
+from metashare.repository.editor import admin_site as editor_site
 
 admin.autodiscover()
 
@@ -37,8 +37,8 @@ urlpatterns += patterns('metashare.stats.views',
   (r'^{0}stats/'.format(DJANGO_BASE), include('metashare.stats.urls')),
 )
 
-urlpatterns += patterns('metashare.repo2.views',
-  (r'^{0}repo2/'.format(DJANGO_BASE), include('metashare.repo2.urls')),
+urlpatterns += patterns('metashare.repository.views',
+  (r'^{0}repository/'.format(DJANGO_BASE), include('metashare.repository.urls')),
 )
 
 if DEBUG:

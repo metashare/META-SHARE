@@ -7,11 +7,11 @@
     <p><img src="{% url metashare.views.frontpage %}site_media/meta-share-logo.png" style="border: 1px solid #cccccc;height: 140px;padding:10px;background-color:white;" /></p>
     <p>{{resources|intcomma}} language resources at your disposal...</p>
   </div>
-    <form method="get" action="{% url metashare.views.frontpage %}repo2/search2/" class="form_helper">
+    <form method="get" action="{% url metashare.views.frontpage %}repository/search/" class="form_helper">
       <div class="push-3 span-18 append-3 last" style="height:80px; margin-bottom:10px;"><input class="big_input span-18" type="text" name="q" defaultText="Type in your keywords, please..." /></div>
       <div class="span-4"><button type="submit" class="big_button button">Search</button></div>
     </form>
-    <div class="span-4" style="margin-left:150px;"><a href="{% url metashare.views.frontpage %}repo2/search2/"><button id="browse" class="button big_button">Browse</button></a></div>
+    <div class="span-4" style="margin-left:150px;"><a href="{% url metashare.views.frontpage %}repository/search/"><button id="browse" class="button big_button">Browse</button></a></div>
     <div class="push-4"><a href="{% url metashare.views.frontpage %}stats/top/"><button id="top" class="button big_button">Statistics</button></a></div>
 </div>
 

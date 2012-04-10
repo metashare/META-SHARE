@@ -1,7 +1,0 @@
-<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema C:/develop/metashare/transform/schemaTransform/v2.0/META-SHARE-Resource.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema"><identificationInfo><resourceName>Morphosyntactically annotated Greek Language Corpus</resourceName><description>It amounts 454kwords annotated with part-of-speech and other morphosyntactic information.</description><metaShareId>n/a</metaShareId></identificationInfo><distributionInfo><availability>available-restrictedUse</availability></distributionInfo>
-<contactPerson>
-	<surname>n/a</surname>
-	<communicationInfo>
-		<email>test@example.com</email>
-	</communicationInfo></contactPerson>
-<metadataInfo><metadataCreationDate>2012-01-30</metadataCreationDate><source>META</source></metadataInfo><usageInfo></usageInfo><resourceComponentType><corpusInfo><resourceType>corpus</resourceType><corpusMediaType><corpusTextInfo><mediaType>text</mediaType><lingualityInfo><lingualityType>monolingual</lingualityType></lingualityInfo><languageInfo><languageId>ell</languageId><languageName>Modern Greek (1453-)</languageName></languageInfo><modalityInfo><modalityType>other</modalityType></modalityInfo><sizeInfo><size>454911</size><sizeUnit>tokens</sizeUnit></sizeInfo><annotationInfo><annotationType>other</annotationType></annotationInfo><annotationInfo><annotationType>morphosyntacticAnnotation-bPosTagging</annotationType></annotationInfo></corpusTextInfo></corpusMediaType></corpusInfo></resourceComponentType></resourceInfo>

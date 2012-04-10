@@ -33,10 +33,10 @@ if __name__ == "__main__":
     ERRONEOUS_IMPORTS = 0
     from zipfile import ZipFile, is_zipfile
     from xml.etree.ElementTree import fromstring
-    from metashare.repo2.models import resourceInfoType_model
+    from metashare.repository.models import resourceInfoType_model
     from metashare.stats.model_utils import saveLRStats, UPDATE_STAT
     
-    PATH = os.path.normpath(os.getcwd() + "/repo2/test_fixtures")
+    PATH = os.path.normpath(os.getcwd() + "/repository/test_fixtures")
     
     for path, dirs, files in os.walk(PATH):
         for filename in files:

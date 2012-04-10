@@ -8,7 +8,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from metashare.settings import LOG_LEVEL, LOG_HANDLER, DJANGO_BASE
 
-from metashare.repo2.models import resourceInfoType_model
+from metashare.repository.models import resourceInfoType_model
 from metashare.storage.models import INGESTED, PUBLISHED, INTERNAL
 
 # Setup logging support.

@@ -1,8 +1,0 @@
-<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema C:/develop/metashare/transform/schemaTransform/v2.0/META-SHARE-Resource.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema"><identificationInfo><resourceName>It-EmoContext Corpus</resourceName><description>It-EmoContext is a corpus composed by 6,000 text snippets (three sentences long) for a total of 738,558 tokens, annotated according to the annotation scheme It-EmoCause.</description><metaShareId>CNR.langres:35</metaShareId></identificationInfo><distributionInfo><availability>available-restrictedUse</availability></distributionInfo>
-<contactPerson>
-	<surname>n/a</surname>
-	<communicationInfo>
-		<email>test@example.com</email>
-	</communicationInfo>
-</contactPerson>
-<metadataInfo><metadataCreationDate>2012-01-30</metadataCreationDate></metadataInfo><resourceDocumentationInfo></resourceDocumentationInfo><resourceComponentType><corpusInfo><resourceType>corpus</resourceType><corpusMediaType><corpusTextInfo><mediaType>text</mediaType><lingualityInfo><lingualityType>monolingual</lingualityType><multilingualityType>other</multilingualityType></lingualityInfo><languageInfo><languageId>ita</languageId><languageName>Italian</languageName></languageInfo><modalityInfo><modalityType>other</modalityType></modalityInfo><sizeInfo><size>6</size><sizeUnit>texts</sizeUnit></sizeInfo></corpusTextInfo></corpusMediaType></corpusInfo></resourceComponentType></resourceInfo>
