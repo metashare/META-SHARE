@@ -85,10 +85,8 @@ class ResourceMediaTypes(template.Node):
 
         result = list(set(result))
         result.sort()
-        
-        #media_list = ", ".join(result)
         image_tag = ""
-        
+
         if "text" in result:
             image_tag = '<img src="/site_media/css/sexybuttons/images/icons/silk/page_white_text_media_type.png" title="text" />'
         if "audio" in result:
@@ -99,7 +97,7 @@ class ResourceMediaTypes(template.Node):
             image_tag = image_tag + ' <img src="/site_media/css/sexybuttons/images/icons/silk/film.png" title="video" />'
         
         
-        return image_tag # media_list
+        return image_tag
 
 def resource_media_types(parser, token):
     """
