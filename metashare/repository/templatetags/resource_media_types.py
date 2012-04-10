@@ -90,16 +90,16 @@ class ResourceMediaTypes(template.Node):
         # Use images instead of plain text when displaying media type
         if "text" in result:
             image_tag = '<img src="/site_media/css/sexybuttons/images' + \
-            '/icons/silk/page_white_text_media_type.png" title="text" />'
+              '/icons/silk/page_white_text_media_type.png" title="text" />'
         if "audio" in result:
             image_tag = image_tag + ' <img src="/site_media/css/sexybuttons' + \
-            '/images/icons/silk/music.png" title="audio" />'
+              '/images/icons/silk/music.png" title="audio" />'
         if "image" in result:
             image_tag = image_tag + ' <img src="/site_media/css/sexybuttons' + \
-            '/images/icons/silk/picture.png" title="image" />'
+              '/images/icons/silk/picture.png" title="image" />'
         if "video" in result:
             image_tag = image_tag + ' <img src="/site_media/css/sexybuttons' + \
-            '/images/icons/silk/film.png" title="video" />'
+              '/images/icons/silk/film.png" title="video" />'
         
         
         return image_tag
