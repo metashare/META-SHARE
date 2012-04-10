@@ -86,9 +86,20 @@ class ResourceMediaTypes(template.Node):
         result = list(set(result))
         result.sort()
         
-        media_list = ", ".join(result)
+        #media_list = ", ".join(result)
+        image_tag = ""
         
-        return media_list
+        if "text" in result:
+            image_tag = '<img src="/site_media/css/sexybuttons/images/icons/silk/page_white_text_media_type.png" title="text" />'
+        if "audio" in result:
+            image_tag = image_tag + ' <img src="/site_media/css/sexybuttons/images/icons/silk/music.png" title="audio" />'
+        if "image" in result:
+            image_tag = image_tag + ' <img src="/site_media/css/sexybuttons/images/icons/silk/picture.png" title="image" />'
+        if "video" in result:
+            image_tag = image_tag + ' <img src="/site_media/css/sexybuttons/images/icons/silk/film.png" title="video" />'
+        
+        
+        return image_tag # media_list
 
 def resource_media_types(parser, token):
     """
