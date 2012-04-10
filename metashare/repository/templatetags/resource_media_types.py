@@ -87,14 +87,19 @@ class ResourceMediaTypes(template.Node):
         result.sort()
         image_tag = ""
 
+        # Use images instead of plain text when displaying media type
         if "text" in result:
-            image_tag = '<img src="/site_media/css/sexybuttons/images/icons/silk/page_white_text_media_type.png" title="text" />'
+            image_tag = '<img src="/site_media/css/sexybuttons/images' + \
+            '/icons/silk/page_white_text_media_type.png" title="text" />'
         if "audio" in result:
-            image_tag = image_tag + ' <img src="/site_media/css/sexybuttons/images/icons/silk/music.png" title="audio" />'
+            image_tag = image_tag + ' <img src="/site_media/css/sexybuttons' + \
+            '/images/icons/silk/music.png" title="audio" />'
         if "image" in result:
-            image_tag = image_tag + ' <img src="/site_media/css/sexybuttons/images/icons/silk/picture.png" title="image" />'
+            image_tag = image_tag + ' <img src="/site_media/css/sexybuttons' + \
+            '/images/icons/silk/picture.png" title="image" />'
         if "video" in result:
-            image_tag = image_tag + ' <img src="/site_media/css/sexybuttons/images/icons/silk/film.png" title="video" />'
+            image_tag = image_tag + ' <img src="/site_media/css/sexybuttons' + \
+            '/images/icons/silk/film.png" title="video" />'
         
         
         return image_tag
