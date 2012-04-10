@@ -214,6 +214,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
     list_display = ('__unicode__', 'resource_type', 'publication_status')
     actions = (publish_resources, unpublish_resources, ingest_resources, )
     no_inlines = ['distributionInfo', ]
+    hidden_fields = ('storage_object',)
 
 
     def get_urls(self):
@@ -363,8 +364,25 @@ class ResourceModelAdmin(SchemaModelAdmin):
         # pylint: disable-msg=E1101
         verify_subclass(self.model, SchemaModel)
 
-        exclusion_list = getattr(self, 'exclude', None)
-        exclusion_list = exclusion_list or ()
+        exclusion_list = ()
+        if hasattr(self, 'exclude') and self.exclude is not None:
+            exclusion_list += tuple(self.exclude)
+
+        _hidden_fields = getattr(self, 'hidden_fields', None)
+        # hidden fields are also excluded
+        if _hidden_fields:
+            for _hidden_field in _hidden_fields:
+                if _hidden_field not in exclusion_list:
+                    exclusion_list += (_hidden_field, )
+
+        _readonly_fields = getattr(self, 'readonly_fields', None)
+        # readonly fields are also excluded
+        if _readonly_fields:
+            for _readonly_field in _readonly_fields:
+                if _readonly_field not in exclusion_list:
+                    exclusion_list += (_readonly_field, )
+
+
 
         _fieldsets = []
         _content_fieldsets = []
@@ -419,6 +437,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 _content_fieldsets.append((_caption, _fieldset))
         
         _fieldsets += _content_fieldsets
+
+        if _hidden_fields:
+            _fieldsets.append((None, {'fields': _hidden_fields, 'classes':('display_none', )}))
 
         return _fieldsets
 
