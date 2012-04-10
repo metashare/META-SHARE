@@ -20,7 +20,7 @@ class EditorTest(SeleniumTestCase):
         host = getattr(settings, 'SELENIUM_TESTSERVER_HOST', 'localhost')
         port = getattr(settings, 'SELENIUM_TESTSERVER_PORT', 8000)
         self.base_url = 'http://{0}:{1}/{2}'.format(host, port, DJANGO_BASE)
-        self.verificationErrors = []
+        self.verification_errors = []
         
         # load test fixure and set its status to 'published'
         test_utils.setup_test_storage()
@@ -55,16 +55,18 @@ class EditorTest(SeleniumTestCase):
         # make sure we are on the right site
         self.assertEqual("Select Resource to change | META-SHARE backend", driver.title)
         # check if LR entry is available and that its status is published
-        try: self.assertEqual(
-          "Italian TTS Speech Corpus (Appen)", 
-          driver.find_element_by_link_text("Italian TTS Speech Corpus (Appen)").text)
+        try: 
+            self.assertEqual(
+              "Italian TTS Speech Corpus (Appen)", 
+              driver.find_element_by_link_text("Italian TTS Speech Corpus (Appen)").text)
         except AssertionError as e: 
-            self.verificationErrors.append(str(e))
-        try: self.assertEqual(
-          "published", 
-          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr/td[3]").text)
+            self.verification_errors.append(str(e))
+        try: 
+            self.assertEqual(
+              "published", 
+              driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr/td[3]").text)
         except AssertionError as e: 
-            self.verificationErrors.append(str(e))
+            self.verification_errors.append(str(e))
         # click LR to edit it
         driver.find_element_by_link_text("Italian TTS Speech Corpus (Appen)").click()
         # add a short name and save the LR
@@ -72,11 +74,12 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_id("id_form-0-resourceShortName").send_keys("a random short name")
         driver.find_element_by_name("_save").click()
         # make sure that the LR status is still published after saving
-        try: self.assertEqual(
-          "published", 
-          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr/td[3]").text)
+        try: 
+            self.assertEqual(
+              "published", 
+              driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr/td[3]").text)
         except AssertionError as e: 
-            self.verificationErrors.append(str(e))
+            self.verification_errors.append(str(e))
         
     def is_element_present(self, how, what):
         try: 
@@ -90,4 +93,4 @@ class EditorTest(SeleniumTestCase):
         
         # clean up Selenium
         self.driver.quit()
-        self.assertEqual([], self.verificationErrors)
+        self.assertEqual([], self.verification_errors)
