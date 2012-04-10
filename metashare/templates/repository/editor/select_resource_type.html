@@ -1,0 +1,110 @@
+{% extends "admin/repository/change_form.html" %}
+
+
+{% block content %}<div id="content-main">
+
+<form {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post" id="{{ opts.module_name }}_form">{% csrf_token %}{% block form_top %}{% endblock %}
+<div>
+
+<div>
+<label for="id_resourceType" class="required">Resource type:</label>
+                        
+<select name="resourceType" id="id_resourceType">
+  <option value="" selected="selected">---------</option>
+  <option value="corpus">Corpus</option>
+  <option value="langdesc">Language description</option>
+  <option value="lexicon">Lexical conceptual resource</option>
+  <option value="toolservice">Tool / Service</option>
+</select>
+</div>
+<div id="id_corpusInfo" style="display: none;">
+  Please choose the media types relevant for the corpus:<br />
+  <input type="checkbox" name="showCorpusTextInfo" value="True" id="id_corpusTextInfo"/> <label for="id_corpusTextInfo">text</label><br />
+  <input type="checkbox" name="showCorpusAudioInfo" value="True" id="id_corpusAudioInfo"/> <label for="id_corpusAudioInfo">audio</label><br />
+  <input type="checkbox" name="showCorpusVideoInfo" value="True" id="id_corpusVideoInfo"/> <label for="id_corpusVideoInfo">video</label><br />
+  <input type="checkbox" name="showCorpusImageInfo" value="True" id="id_corpusImageInfo"/> <label for="id_corpusImageInfo">image</label><br />
+  <input type="checkbox" name="showCorpusTextNumericalInfo" value="True" id="id_corpusTextNumericalInfo"/> <label for="id_corpusTextNumericalInfo">text numerical</label><br />
+  <input type="checkbox" name="showCorpusTextNgramInfo" value="True" id="id_corpusTextNgramInfo"/> <label for="id_corpusTextNgramInfo">text n-gram</label><br />
+</div>
+
+<div id="id_langdescInfo" style="display: none;">
+  Please choose the media types relevant for the language description:<br />
+  <input type="checkbox" name="showLangdescTextInfo" value="True" id="id_langdescTextInfo" checked="checked"/> <label for="id_langdescTextInfo">text</label><br />
+  <input type="checkbox" name="showLangdescVideoInfo" value="True" id="id_langdescVideoInfo"/> <label for="id_langdescVideoInfo">video</label><br />
+  <input type="checkbox" name="showLangdescImageInfo" value="True" id="id_langdescImageInfo"/> <label for="id_langdescImageInfo">image</label><br />
+</div>
+
+<div id="id_lexiconInfo" style="display: none;">
+  Please choose the media types relevant for the lexical conceptual resource:<br />
+  <input type="checkbox" name="showLexiconTextInfo" value="True" id="id_lexiconTextInfo" checked="checked"/> <label for="id_lexiconTextInfo">text</label><br />
+  <input type="checkbox" name="showLexiconAudioInfo" value="True" id="id_lexiconAudioInfo"/> <label for="id_lexiconAudioInfo">audio</label><br />
+  <input type="checkbox" name="showLexiconVideoInfo" value="True" id="id_lexiconVideoInfo"/> <label for="id_lexiconVideoInfo">video</label><br />
+  <input type="checkbox" name="showLexiconImageInfo" value="True" id="id_lexiconImageInfo"/> <label for="id_lexiconImageInfo">image</label><br />
+</div>
+
+
+<input id="id_submit" type="submit" value="Proceed" style="display: none;" />
+
+<script type="text/javascript">
+(function($) {
+
+	resourceTypeClasses = ['corpusInfoType_model',
+	    'languageDescriptionInfoType_model',
+	    'lexicalConceptualResourceInfoType_model',
+	    'toolServiceInfoType_model'
+	]
+	
+    $(document).ready(function() {
+		$('#id_resourceType').change(function() {
+			var value = $('#id_resourceType option:selected').attr('value');
+			switch (value) {
+			case 'corpus':
+				$('#id_corpusInfo').css('display', 'block');
+				$('#id_langdescInfo').css('display', 'none');
+				$('#id_lexiconInfo').css('display', 'none');
+				$('#id_submit').css('display', 'block');
+				break;
+			case 'langdesc':
+				$('#id_corpusInfo').css('display', 'none');
+				$('#id_langdescInfo').css('display', 'block');
+				$('#id_lexiconInfo').css('display', 'none');
+				$('#id_submit').css('display', 'block');
+				break;
+			case 'lexicon':
+				$('#id_corpusInfo').css('display', 'none');
+				$('#id_langdescInfo').css('display', 'none');
+				$('#id_lexiconInfo').css('display', 'block');
+				$('#id_submit').css('display', 'block');
+				break;
+			case 'toolservice':
+				$('#id_corpusInfo').css('display', 'none');
+				$('#id_lexiconInfo').css('display', 'none');
+				$('#id_langdescInfo').css('display', 'none');
+				$('#id_submit').css('display', 'block');
+				break;
+			default:
+				$('#id_corpusInfo').css('display', 'none');
+			};
+		});
+
+
+		$('#id_langdescTextInfo').change(function() {
+			if (!$(this).attr('checked')) {
+				alert("Language descriptions must have text media.");
+				$(this).attr('checked', 'checked');
+			}
+		});
+		$('#id_lexiconTextInfo').change(function() {
+			if (!$(this).attr('checked')) {
+				alert("Lexical conceptual resources must have text media.");
+				$(this).attr('checked', 'checked');
+			}
+		});
+    });
+})(django.jQuery);
+</script>
+
+
+</div>
+</form></div>
+{% endblock %}

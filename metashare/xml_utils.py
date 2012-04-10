@@ -64,7 +64,7 @@ def import_from_string(xml_string, targetstatus, owner_id=None):
     
     Returns the imported resource object on success, raises and Exception on failure.
     """
-    from metashare.repo2.models import resourceInfoType_model
+    from metashare.repository.models import resourceInfoType_model
     result = resourceInfoType_model.import_from_string(xml_string)
     
     if not result[0]:

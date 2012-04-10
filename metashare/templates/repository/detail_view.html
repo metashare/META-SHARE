@@ -1,0 +1,45 @@
+{% load email_protection %}
+
+{% if lr_content.0 != "resourceInfo" %}
+    {{lr_content.0}}
+{% endif %}
+{% for item in lr_content.1 %}
+  {% with "repository/detail_view.html" as filename %}
+    {% with item as lr_content %}
+        {% ifequal lr_content|length 2 %}
+		  <tr>
+			  <td><div style="display:none;" class="component_left">Component</div></td>
+			  <td><div class="component_right">{% include filename %}</div></td>
+		  </tr>
+        {% else %}
+            {% if lr_content.0.1 != "" %}
+            <tr>
+                {% if lr_content.0.0 == "url" %}
+                    <th><label>{{ lr_content.0.0|capfirst }}</label></th>
+                    <td>{{ lr_content.0.1|urlizetrunc:60 }}</td>
+                {% else %}
+                    {% if lr_content.0.0 == "person" %}
+                        <th><label>{{ lr_content.0.0|capfirst }}</label></th>
+                        <td>{{ lr_content.1.1 }} {{ lr_content.1.2 }} {% if '.jpg' in value.1.0 %}<img src="{% url metashare.views.frontpage %}site_media/images/emails/{{ value.1.0 }}" />{% else %} {{lr_content.1.0}} {% endif %}</td>
+                    {% else %}
+                        {% if lr_content.0.0 == "email" %}
+                            <th><label>{{ lr_content.0.0|capfirst }}</label></th>
+                            <td>{% if '.jpg' in lr_content.0.1 %}<img src="{% url metashare.views.frontpage %}site_media/images/emails/{{ value.1 }}" />{% else %} {% encrypt_email lr_content.0.1 %} {% endif %}</td>
+                        {% else %}
+                            <th>
+                                <label>{{lr_content.0.0|capfirst}}</label>
+                            </th>
+                            {% ifnotequal lr_content.0.1 lr_content.0.1|truncatewords_html:20 %}
+                            <td class="readmore">{{lr_content.0.1}}</td>
+                            {% else %}
+                            <td>{{lr_content.0.1}}</td>
+                            {% endifnotequal %}
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            </tr>
+            {% endif %}
+        {% endifequal %}
+    {% endwith %}
+  {% endwith %}
+{% endfor %}

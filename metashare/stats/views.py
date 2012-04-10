@@ -7,7 +7,7 @@ from metashare.settings import DJANGO_URL, STATS_SERVER_URL
 from metashare.stats.models import LRStats, QueryStats
 from metashare.stats.model_utils import getLRTop, getLastQuery, getLRLast, statDays, VIEW_STAT, UPDATE_STAT, DOWNLOAD_STAT
 # pylint: disable-msg=W0611, W0401
-from metashare.repo2.models import *
+from metashare.repository.models import *
 
 from django.shortcuts import render_to_response     
 from django.db.models import Count, Max, Min, Avg

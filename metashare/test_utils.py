@@ -4,7 +4,7 @@ Utility functions for unit tests useful across apps.
 """
 import os
 from metashare import settings
-from metashare.repo2.models import resourceInfoType_model
+from metashare.repository.models import resourceInfoType_model
 from django.test.testcases import TestCase
 from django.core.management import call_command
 from metashare.xml_utils import import_from_file

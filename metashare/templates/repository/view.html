@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+        <script type="text/javascript" src="http://plugins.learningjquery.com/expander/jquery.expander.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $('td.readmore').expander({
+                    slicePoint: 300,
+                    expandText: 'Read More',
+                    userCollapseText: 'Collapse'
+                });
+            });
+        </script>
+
+        <style type="text/css">
+            div#content dummy, span.details {
+                font: inherit;
+                color: inherit;
+                vertical-align: inherit;
+             }
+        </style>
+
+<h2>{% if not RESOURCE_PUBLISHED %}<i>{% endif %}{{ LR_RESOURCE_NAME }}{% if RESOURCE_PUBLISHED %}</i>{% endif %}</h2>
+    <div class="content_box">
+    
+        <div id="stats" align="right" style="float: right">
+            {% for stat in LR_STATS %}
+                {%if "updated" in stat.action %}
+                    &nbsp;<div align=right style="float: right"><i>(Last modified: {{ stat.last }})</i>&nbsp;</div>
+                {% else %}
+                    <img src="{% url metashare.views.frontpage %}site_media/stats/img/{{ stat.action }}_icon.gif"
+                    alt="Last {{ stat.action }}: {{ stat.last }}" title="Last {{ stat.action }}: {{ stat.last }}" />
+                    <b>{{  stat.count }}</b>&nbsp;
+                {% endif %}
+            {% endfor %}
+        <hr></div>
+
+        <a href="javascript:history.back();"><button class="span-12 button middle_button">&laquo; Back</button></a>
+        {% if LR_DOWNLOAD %}
+            <a href="{{LR_DOWNLOAD}}"><button class="span-4 button middle_button">Download</button></a>
+        {% endif %}
+        {% if user.is_staff %}
+            <a href="{% url metashare.repository.views_editor.view OBJECT_ID %}"><button class="span-4 button middle_button">Edit</button></a>
+            {% if RESOURCE_PUBLISHED %}
+                <a href="{% url metashare.repository.views.unpublish OBJECT_ID %}" onclick="javascript:return confirm('Are you sure you want to unpublish?')"><button class="span-4 button middle_button">Unpublish</button></a>
+            {% else %}
+                <a href="{% url metashare.repository.views.publish OBJECT_ID %}" onclick="javascript:return confirm('Are you sure you want to publish?')"><button class="span-4 button middle_button">Publish</button></a>
+            {% endif %}
+        {% endif %}
+        
+        <div style="clear: both;"></div>
+
+<form class="form_helper" action="submit" method="get"> 
+
+    <table>
+
+        {% for component, values in LR_VALUES %}
+
+        <tr>
+            <td><div style="display:none;" class="component_left">Component</div></td>
+            <td><div class="component_right">{{ component|capfirst|cut:"_ResourceInfo" }}</div></td>
+        </tr>
+
+            {% for value in values %}
+                {% if value.0 == "url" %}
+        <tr>
+            <th><label>{{ value.0|capfirst }}</label></th>
+            <td>{{ value.1|urlizetrunc:60 }}</td>
+        </tr>
+                {% else %}
+                    {% if value.0 == "person" %}
+        <tr>
+            <th><label>{{ value.0|capfirst }}</label></th>
+            <td>{{ value.1.1 }} {{ value.1.2 }} {% if '.jpg' in value.1.0 %}<img src="{% url metashare.views.frontpage %}site_media/images/emails/{{ value.1.0 }}" />{% else %} {{value.1.0}} {% endif %}</td>
+        </tr>
+                    {% else %}
+                        {% if value.0 == "email" %}
+        <tr>
+            <th><label>{{ value.0|capfirst }}</label></th>
+            <td>{% if '.jpg' in value.1 %}<img src="{% url metashare.views.frontpage %}site_media/images/emails/{{ value.1 }}" />{% else %} {{value.1}} {% endif %}</td>
+        </tr>
+                        {% else %}
+        <tr>
+            <th><label>{{ value.0|capfirst }}</label></th>
+            {% ifnotequal value.1 value.1|truncatewords_html:20 %}
+            <td class="readmore">{{value.1}}</td>
+            {% else %}
+            <td>{{value.1}}</td>
+            {% endifnotequal %}
+        </tr>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+
+<!--
+    {% for field in form %}
+        {% if "-" in field.label %}
+            <tr>
+                <td><div style="display:none;" class="component_left">Component</div></td>
+                <td><div class="component_right">{{ field.label|cut:"-"|capfirst }}</div></td>
+            </tr>
+        {% else %}
+            {% if ".sizeUnit" in field.name %}
+                {{ field.value }}
+            {% else %}
+                <tr>
+                    <th><label>{{ field.label|capfirst }}</label></th>
+                    <td>
+                    {% if field.name == "IdentificationInfo.url" and LR_URL %}
+                        <a href="{{ LR_URL }}">{{ LR_URL }}</a>
+                    {% else %}
+                        {% if field.label == "downloadLocation" %}
+                            <a href="{{field.value}}">{{field.value|urlizetrunc:80}}</a>
+                        {% else %}
+                            {% if field.name == "SizeInfo.size" %}
+                                {{ field.value }}
+                            {% else %}
+                                {% ifnotequal field.value field.value|truncatewords_html:20 %}
+                                    <div class="readmore"> 
+                                {% endifnotequal %}
+                                {{ field.value|capfirst }} 
+                                {% ifnotequal field.value field.value|truncatewords_html:20 %}
+                                    </div>
+                                {% endifnotequal %}
+                            {% endif %}
+                        {%endif%}
+                    {%  endif %}
+                    {% if not "SizeInfo" in field.name %}
+                        </td>
+                        </tr>
+                    {% endif %}   
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+
+-->
+
+    </table>
+{% endblock %}
+
+<div class="split span-24" style="">
+    &nbsp;
+</div>
+
+<div id="footer" class="prepend-2 span-20 append-2 last" style="text-align:center;  margin-bottom:100px;">Co-funded by the 7th Framework Programme and the ICT Policy Support Programme of the European Commission through the contracts T4ME (grant agreement no.: 249119), CESAR (grant agreement no.: 271022), METANET4U (grant agreement no.: 270893) and META-NORD (grant agreement no.: 270899). <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>
+</div>
+
+
+<!--
+<script type="text/javascript">
+     addFormHelper();
+</script>
+-->
+
+</html>
+

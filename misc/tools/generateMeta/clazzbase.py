@@ -153,7 +153,7 @@ from metashare.settings import DJANGO_BASE, LOG_LEVEL, LOG_HANDLER
 
 # Setup logging support.
 logging.basicConfig(level=LOG_LEVEL)
-LOGGER = logging.getLogger('metashare.repo2.models')
+LOGGER = logging.getLogger('metashare.repository.models')
 LOGGER.addHandler(LOG_HANDLER)
 
 EMAILADDRESS_VALIDATOR = RegexValidator(r'[^@]+@[^\.]+\..+',
@@ -199,7 +199,7 @@ class {}_model_inline(SchemaModelInline):
 
 MANUAL_ADMIN_REGISTRATION_TEMPLATE = '''
 
-from metashare.repo2.editor import manual_admin_registration
+from metashare.repository.editor import manual_admin_registration
 manual_admin_registration.register()
 '''
 
@@ -221,7 +221,7 @@ class {}_model({}):
 '''
 
 CHOICE_STRING_SUB_CLASS_ADMIN_TEMPLATE = '''
-from metashare.repo2.models import {0}_model
+from metashare.repository.models import {0}_model
 admin.site.register({0}_model)
 
 '''
@@ -275,7 +275,7 @@ TOP_LEVEL_TYPE_EXTRA_CODE_TEMPLATE = '''
         super(resourceInfoType_model, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return '/{0}repo2/browse/{1}/'.format(DJANGO_BASE, self.id)
+        return '/{0}repository/browse/{1}/'.format(DJANGO_BASE, self.id)
 
     def publication_status(self):
         """
@@ -616,7 +616,7 @@ class Clazz(object):
             options += 'default="NOT_DEFINED_FOR_V2", '
         
         # cfedermann: MetaBooleanField and MultiSelectField don't need the
-        # models. prefix as they are custom fields imported from repo2.fields.
+        # models. prefix as they are custom fields imported from repository.fields.
         if field_name in ('MetaBooleanField', 'MultiSelectField'):
             self.wrtmodels('    %s = %s(%s)\n' % ( name, field_name, options, ))
         else:

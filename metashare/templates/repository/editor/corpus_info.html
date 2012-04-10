@@ -1,0 +1,44 @@
+
+{% if parent.corpustextinfotype_model_set.count > 0 or showCorpusTextInfo %}
+  <input type="hidden" name="showCorpusTextInfo" value="True" />
+  {% with baseurl='editor/repository/corpustextinfotype_model/' nodeset=parent.corpustextinfotype_model_set name='corpusTextInfo' prettyname='Corpus Text Info' %}
+    {% include "repository/editor/multi_corpus_info.html" %}
+  {% endwith %}
+{% endif %}
+
+{% if corpusAudioInfoId or showCorpusAudioInfo %}
+  <input type="hidden" name="showCorpusAudioInfo" value="True" />
+  {% with baseurl='editor/repository/corpusaudioinfotype_model/' node_pk=corpusAudioInfoId name='corpusAudioInfo' prettyname='Corpus Audio Info' %}
+    {% include "repository/editor/one_media_info.html" %}
+  {% endwith %}
+{% endif %}
+
+{% if parent.corpusvideoinfotype_model_set.count > 0 or showCorpusVideoInfo %}
+  <input type="hidden" name="showCorpusVideoInfo" value="True" />
+  {% with baseurl='editor/repository/corpusvideoinfotype_model/' nodeset=parent.corpusvideoinfotype_model_set name='corpusVideoInfo' prettyname='Corpus Video Info' %}
+    {% include "repository/editor/multi_corpus_info.html" %}
+  {% endwith %}
+{% endif %}
+
+{% if corpusImageInfoId or showCorpusImageInfo %}
+  <input type="hidden" name="showCorpusImageInfo" value="True" />
+  {% with baseurl='editor/repository/corpusimageinfotype_model/' node_pk=corpusImageInfoId name='corpusImageInfo' prettyname='Corpus Image Info' %}
+    {% include "repository/editor/one_media_info.html" %}
+  {% endwith %}
+{% endif %}
+
+{% if corpusTextNumericalInfoId or showCorpusTextNumericalInfo %}
+  <input type="hidden" name="showCorpusTextNumericalInfo" value="True" />
+  {% with baseurl='editor/repository/corpustextnumericalinfotype_model/' node_pk=corpusTextNumericalInfoId name='corpusTextNumericalInfo' prettyname='Corpus Text Numerical Info' %}
+    {% include "repository/editor/one_media_info.html" %}
+  {% endwith %}
+{% endif %}
+
+{% if corpusTextNgramInfoId or showCorpusTextNgramInfo %}
+  <input type="hidden" name="showCorpusTextNgramInfo" value="True" />
+  {% with baseurl='editor/repository/corpustextngraminfotype_model/' node_pk=corpusTextNgramInfoId name='corpusTextNgramInfo' prettyname='Corpus Text N-gram Info' %}
+    {% include "repository/editor/one_media_info.html" %}
+  {% endwith %}
+{% endif %}
+
+
