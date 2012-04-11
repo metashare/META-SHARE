@@ -108,6 +108,83 @@
 	    		 }
 			 });		
 		</script>
+		
+			<script>	
+		//for text fields and calendar
+		$('div.form-row.errors div input').change(textfield);
+		$('div.form-row div.field-box.errors input').change(textfield2);		
+		//for related-widget-wrapper
+		$("div.field-box.errors input.related-widget-wrapper").change(oneToOne);		
+		
+		 function textfield() {		 	
+			 var input_value = $(this).attr('value');			 
+				if( input_value ) {				
+						$(this).parents('div').siblings(".errorlist").remove();				
+						$(this).parents('fieldset .form-row').removeClass("errors");
+				}
+		 }
+		 function textfield2() {		 	
+			 var input_value = $(this).attr('value');			 
+				if( input_value ) {				
+						$(this).siblings(".errorlist").remove();				
+						$(this).parents('.field-box').removeClass("errors");
+				}
+		 }		
+		 		
+ 		 function oneToOne() {
+			 var input_value = $(this).attr('value');			 
+				if( input_value ) {					
+						$(this).siblings(".errorlist").remove();				
+						$(this).parents('div.field-box').removeClass("errors");
+				}
+		 }				
+		 $("div div ul li input").each(function() { 
+			$(this).trigger('change');
+		});	
+		 $("div.form-row div.field-box.errors input").each(function() { 
+			$(this).trigger('change');
+		});	
+		
+		//for calendar when user inserts input in textfield	
+		$("div.form-row div input").each(function() { 
+			$(this).trigger('change');
+		});
+		
+		//for calendar when user clicks on calendar options 
+		$('div.form-row.errors div span.datetimeshortcuts a').live("click",function(){
+		
+			$(this).parents('div').siblings(".errorlist").remove();				
+			$(this).parents('div').removeClass("errors");
+		});
+		
+		//related-widget-wrapper
+		$("div.field-box.errors input.related-widget-wrapper").each(function() { 			
+			$(this).trigger('change');
+		});	
+		
+				
+		//for many-to-many widgets (errors disappear only when you click directly on selector-chosen field)
+		$(document).on("change", "div.form-row div.errors div.selector-chosen select.filtered", function() {		  
+  			if( $(this).children().length > 0 ) {			
+				$(this).parents('div.selector').siblings(".errorlist").remove();				
+				$(this).parents('div').removeClass("errors");
+			}
+		});
+		
+		
+		//for drop-down menus		
+		$(document).on("change", "div.form-row.errors select:not(.filtered)", function() {		  
+  			$(this).parents('div').siblings(".errorlist").remove();				
+			$(this).parents('div').removeClass("errors");
+		});
+		$(document).on("change", "div.form-row div.errors select:not(.filtered)", function() {		  
+  			$(this).siblings(".errorlist").remove();				
+			$(this).parents('div').removeClass("errors");
+		});
+		
+
+		
+	</script>
 
 
 {% block after_field_sets %}{% endblock %}
