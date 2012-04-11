@@ -169,8 +169,7 @@
 		});
 			
 		//for calendar when user clicks on calendar options 
-		$('div.form-row.errors div span.datetimeshortcuts a').live("click",function(){
-		
+		$('div.form-row.errors div span.datetimeshortcuts a').live("click",function(){		
 			$(this).parents('div').siblings(".errorlist").remove();				
 			$(this).parents('div').removeClass("errors");
 		});
@@ -188,18 +187,11 @@
 			}
 		});	
 		
-		//for drop-down menus
-		//	$("div.field-box.errors select").change(function() {
-		//		alert('alert');
-		//	});			
-				
-		//$("div.field-box.errors select").children().each(function() { 
-		//	$(this).trigger('change');
-		//});		
-		
-		//	$(document).on("change", "div.errors select", function() {		  
-	  	//		alert("alert");
-		//	});
+		//for drop-down menus		
+		$(document).on("change", "div.form-row.errors select", function() {		  
+  			$(this).parents('div').siblings(".errorlist").remove();				
+			$(this).parents('div').removeClass("errors");
+		});
 		
 	</script>
 	
