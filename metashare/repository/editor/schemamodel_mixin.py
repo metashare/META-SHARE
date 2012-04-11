@@ -56,6 +56,8 @@ class SchemaModelLookup(object):
         _visible_fields = []
         
         for _field_name in _fields:
+            if _field_name in exclusion_list:
+                continue
             # Two possible reasons why a field might be encoded as an inline:
             # - either it's a OneToOneField and we have put 
             #   it into tht eexclusion list;
@@ -63,7 +65,7 @@ class SchemaModelLookup(object):
             # In both cases, we only include it in visible fields if
             # include_inlines is requested.
             _is_visible = False
-            if self.is_field(_field_name) and _field_name not in exclusion_list:
+            if self.is_field(_field_name):
                 _is_visible = True
                 _fieldname_to_append = _field_name
             elif include_inlines:
@@ -114,6 +116,9 @@ class SchemaModelLookup(object):
             _visible_fields_verbose_names = []
 
             for _field_name in _fields[_field_status]:
+                if _field_name in exclusion_list:
+                    continue
+
                 # Two possible reasons why a field might be encoded as an inline:
                 # - either it's a OneToOneField and we have put 
                 #   it into tht eexclusion list;
@@ -121,20 +126,18 @@ class SchemaModelLookup(object):
                 # In both cases, we only include it in visible fields if
                 # include_inlines is requested.
                 _is_visible = False
-                if self.is_field(_field_name) and _field_name not in exclusion_list:
+                if self.is_field(_field_name):
                     _is_visible = True
                     _fieldname_to_append = _field_name
                 elif include_inlines:
                     _is_visible = True
                     _fieldname_to_append = encode_as_inline(_field_name)
 
-                _relevant_fields = _visible_fields
-                _verbose_names = _visible_fields_verbose_names
-
                 # And now put the field where it belongs:
                 if _is_visible:
-                    _relevant_fields.append(_fieldname_to_append)
-                    _verbose_names.append(self.model.get_verbose_name(_field_name))
+                    _visible_fields.append(_fieldname_to_append)
+                    _visible_fields_verbose_names.append(
+                                    self.model.get_verbose_name(_field_name))
             
             
             if len(_visible_fields) > 0:
