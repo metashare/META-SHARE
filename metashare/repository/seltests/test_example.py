@@ -35,7 +35,7 @@ class ExampleSeleniumTest(SeleniumTestCase):
         host = getattr(settings, 'SELENIUM_TESTSERVER_HOST', 'localhost')
         port = getattr(settings, 'SELENIUM_TESTSERVER_PORT', 8011)
         self.base_url = 'http://{0}:{1}/{2}'.format(host, port, DJANGO_BASE)
-        self.verificationErrors = []
+        self.verification_errors = []
     
     def test_login_logout(self):
         driver = self.driver
@@ -81,5 +81,5 @@ class ExampleSeleniumTest(SeleniumTestCase):
         resourceInfoType_model.objects.all().delete()
         
         self.driver.quit()
-        self.assertEqual([], self.verificationErrors)
+        self.assertEqual([], self.verification_errors)
 
