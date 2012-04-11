@@ -65,7 +65,8 @@ class RelatedAdminMixin(object):
 
     def use_related_widget_where_appropriate(self, db_field, kwargs, formfield):
         if (formfield and isinstance(formfield.widget, admin.widgets.RelatedFieldWidgetWrapper) and 
-            not isinstance(formfield.widget.widget, SelectMultiple)):
+            not isinstance(formfield.widget.widget, SelectMultiple) and
+            not ('widget' in kwargs)):
             request = kwargs.pop('request', None)
             related_modeladmin = self.admin_site._registry.get(db_field.rel.to)
             can_change_related = bool(related_modeladmin and 

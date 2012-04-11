@@ -5,7 +5,8 @@ from metashare.repository.models import resourceComponentTypeType_model, \
     corpusInfoType_model, languageDescriptionInfoType_model, \
     lexicalConceptualResourceInfoType_model, toolServiceInfoType_model, \
     corpusMediaTypeType_model, languageDescriptionMediaTypeType_model, \
-    lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model
+    lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model, \
+    metadataInfoType_model
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
     ALLOWED_ARCHIVE_EXTENSIONS
 from metashare.utils import verify_subclass
@@ -204,12 +205,71 @@ def ingest_resources(modeladmin, request, queryset):
 ingest_resources.short_description = "Ingest selected internal resources"
 
 
+from selectable.base import LookupBase, ModelLookup
+from selectable.registry import registry
+from selectable.forms.widgets import AutoCompleteSelectMultipleWidget
+from metashare.repository.models import personInfoType_model
 
+class PersonLookup(ModelLookup):
+    model = personInfoType_model
+    search_fields = ('surname__contains', )
+    filters = {}
+    
+    def get_query(self, request, term):
+        print u'get_query'
+        #results = super(PersonLookup, self).get_query(request, term)
+        persons = self.model.objects.all()
+        if term == '*':
+            results = persons
+        else:
+            results = []
+            for pers in persons:
+                surname = pers.surname
+                surname_flat = ' '.join(surname).lower()
+                index = surname_flat.find(term.lower())
+                if index >= 0:
+                    results.append(pers)
+        if results is not None:
+            print u'{} results'.format(results.__len__())
+        else:
+            print u'No results'
+        return results
+    
+    def get_item_label(self, item):
+        name_flat = ' '.join(item.givenName)
+        surname_flat = ' '.join(item.surname)
+        return u'%s %s' % (name_flat, surname_flat)
+    
+    def get_item_id(self, item):
+        return item.id
+
+class ValidationReportLookup(LookupBase):
+    pass
+
+registry.register(PersonLookup)
+registry.register(ValidationReportLookup)
+
+from django import forms
+
+class MetadataForm(forms.ModelForm):
+    class Meta:
+        model = metadataInfoType_model
+        widgets = {'metadataCreator' : AutoCompleteSelectMultipleWidget(lookup_class=PersonLookup)}
+
+class MetadataInline(ReverseInlineModelAdmin):
+    form = MetadataForm
+            
+class ResourceForm(forms.ModelForm):
+    class Meta:
+        model = resourceInfoType_model
+        widgets = {'contactPerson' : AutoCompleteSelectMultipleWidget(lookup_class=PersonLookup)}
 
 class ResourceModelAdmin(SchemaModelAdmin):
+    form = ResourceForm
     inline_type = 'stacked'
     custom_one2one_inlines = {'identificationInfo':IdentificationInline,
-                              'resourceComponentType':ResourceComponentInline}
+                              'resourceComponentType':ResourceComponentInline,
+                              'metadataInfo':MetadataInline}
     content_fields = ('resourceComponentType',)
     list_display = ('__unicode__', 'resource_type', 'publication_status')
     actions = (publish_resources, unpublish_resources, ingest_resources, )

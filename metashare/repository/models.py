@@ -390,8 +390,8 @@ class validationInfoType_model(SchemaModel):
       ( 'validationReport/documentUnstructured', 'validationReport', OPTIONAL ),
       ( 'validationReport/documentInfo', 'validationReport', OPTIONAL ),
       ( u'validationTool', u'validationTool', OPTIONAL ),
-      ( 'validator/personInfo', 'validator', OPTIONAL ),
-      ( 'validator/organizationInfo', 'validator', OPTIONAL ),
+      #( 'validator/personInfo', 'validator', OPTIONAL ),
+      #( 'validator/organizationInfo', 'validator', OPTIONAL ),
     )
     __schema_classes__ = {
       u'documentInfo': "documentInfoType_model",
@@ -462,11 +462,11 @@ class validationInfoType_model(SchemaModel):
       'r the validation of the resource',
       blank=True, null=True, )
 
-    validator = models.ManyToManyField("actorInfoType_model", 
-      verbose_name='Validator', 
-      help_text='Groups information on the person(s) or the organization' \
-      '(s) that validated the resource',
-      blank=True, null=True, related_name="validator_%(class)s_related", )
+    #validator = models.ManyToManyField("actorInfoType_model", 
+      #verbose_name='Validator', 
+      #help_text='Groups information on the person(s) or the organization' \
+      #'(s) that validated the resource',
+      #blank=True, null=True, related_name="validator_%(class)s_related", )
 
     back_to_resourceinfotype_model = models.ForeignKey("resourceInfoType_model", )
 
@@ -3354,7 +3354,7 @@ class projectListType_model(SchemaModel):
         return _unicode
 
 CORPUSAUDIOINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
+  u'audio', 
 ])
 
 # pylint: disable-msg=C0103
@@ -3931,7 +3931,7 @@ class audioClassificationInfoType_model(SchemaModel):
         return _unicode
 
 CORPUSTEXTINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
+  u'text', 
 ])
 
 # pylint: disable-msg=C0103
@@ -4190,7 +4190,7 @@ class textClassificationInfoType_model(SchemaModel):
         return _unicode
 
 CORPUSVIDEOINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
+  u'video', 
 ])
 
 # pylint: disable-msg=C0103
@@ -4566,7 +4566,7 @@ class videoClassificationInfoType_model(SchemaModel):
         return _unicode
 
 CORPUSIMAGEINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
+  u'image', 
 ])
 
 # pylint: disable-msg=C0103
@@ -4939,7 +4939,7 @@ class imageClassificationInfoType_model(SchemaModel):
         return _unicode
 
 CORPUSTEXTNUMERICALINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
+  u'textNumerical', 
 ])
 
 # pylint: disable-msg=C0103
@@ -5116,7 +5116,7 @@ class textNumericalFormatInfoType_model(SchemaModel):
         return _unicode
 
 CORPUSTEXTNGRAMINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
+  u'textNgram', 
 ])
 
 # pylint: disable-msg=C0103
@@ -5560,7 +5560,7 @@ class languageDescriptionPerformanceInfoType_model(SchemaModel):
         return _unicode
 
 LANGUAGEDESCRIPTIONTEXTINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
+  u'text', 
 ])
 
 # pylint: disable-msg=C0103
@@ -5690,7 +5690,7 @@ class languageDescriptionTextInfoType_model(SchemaModel):
         return _unicode
 
 LANGUAGEDESCRIPTIONVIDEOINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
+  u'video', 
 ])
 
 # pylint: disable-msg=C0103
@@ -5821,7 +5821,7 @@ class languageDescriptionVideoInfoType_model(SchemaModel):
         return _unicode
 
 LANGUAGEDESCRIPTIONIMAGEINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
+  u'image', 
 ])
 
 # pylint: disable-msg=C0103
@@ -6069,7 +6069,7 @@ class lexicalConceptualResourceEncodingInfoType_model(SchemaModel):
         return _unicode
 
 LEXICALCONCEPTUALRESOURCEAUDIOINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
+  u'audio', 
 ])
 
 # pylint: disable-msg=C0103
@@ -6180,7 +6180,7 @@ class lexicalConceptualResourceAudioInfoType_model(SchemaModel):
         return _unicode
 
 LEXICALCONCEPTUALRESOURCETEXTINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
+  u'text', 
 ])
 
 # pylint: disable-msg=C0103
@@ -6290,7 +6290,7 @@ class lexicalConceptualResourceTextInfoType_model(SchemaModel):
         return _unicode
 
 LEXICALCONCEPTUALRESOURCEVIDEOINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
+  u'video', 
 ])
 
 # pylint: disable-msg=C0103
@@ -6401,7 +6401,7 @@ class lexicalConceptualResourceVideoInfoType_model(SchemaModel):
         return _unicode
 
 LEXICALCONCEPTUALRESOURCEIMAGEINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
+  u'image', 
 ])
 
 # pylint: disable-msg=C0103
@@ -6510,10 +6510,6 @@ class lexicalConceptualResourceImageInfoType_model(SchemaModel):
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
-
-INPUTINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
-])
 
 INPUTINFOTYPE_RESOURCETYPE_CHOICES = _make_choices_from_list([
   u'corpus', u'lexicalConceptualResource', u'languageDescription', 
@@ -6633,7 +6629,7 @@ class inputInfoType_model(SchemaModel):
       ( u'conformanceToStandardsBestPractices', u'conformanceToStandardsBestPractices', OPTIONAL ),
     )
 
-    mediaType = MultiSelectField(
+    mediaType = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=45), 
       verbose_name='Media', 
       help_text='Specifies the media type of the resource and basically ' \
       'corresponds to the physical medium of the content representation.' \
@@ -6641,9 +6637,6 @@ class inputInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      
-      max_length=1 + len(INPUTINFOTYPE_MEDIATYPE_CHOICES['choices']) / 4,
-      choices=INPUTINFOTYPE_MEDIATYPE_CHOICES['choices'],
       )
 
     resourceType = MultiSelectField(
@@ -6664,27 +6657,27 @@ class inputInfoType_model(SchemaModel):
       choices=INPUTINFOTYPE_MODALITYTYPE_CHOICES['choices'],
       )
 
-    languageName = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=45), 
+    languageName = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=46), 
       verbose_name='Language name', 
       help_text='A human understandable name of the language that is use' \
       'd in the resource or supported by the tool/service according to t' \
       'he IETF BCP47 standard',
       blank=True, )
 
-    languageId = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=46), 
+    languageId = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=47), 
       verbose_name='Language id', 
       help_text='The identifier of the language that is included in the ' \
       'resource or supported by the tool/service according to the IETF B' \
       'CP47 standard',
       blank=True, )
 
-    languageVarietyName = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=47), 
+    languageVarietyName = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=48), 
       verbose_name='Language variety name', 
       help_text='Specifies the type of the language variety that occurs ' \
       'in the resource or is supported by a tool/service',
       blank=True, )
 
-    mimeType = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=48), 
+    mimeType = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=49), 
       verbose_name='Mime', 
       help_text='The mime-type of the resource which is a formalized spe' \
       'cifier for the format included or a mime-type that the tool/servi' \
@@ -6711,14 +6704,14 @@ class inputInfoType_model(SchemaModel):
       choices=INPUTINFOTYPE_ANNOTATIONTYPE_CHOICES['choices'],
       )
 
-    annotationFormat = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=49), 
+    annotationFormat = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=50), 
       verbose_name='Annotation format', 
       help_text='Specifies the format that is used in the annotation pro' \
       'cess since often the mime type will not be sufficient for machine' \
       ' processing',
       blank=True, )
 
-    tagset = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=50), 
+    tagset = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=51), 
       verbose_name='Tagset', 
       help_text='A name or a url reference to the tagset used in the ann' \
       'otation of the resource or used by the tool/service',
@@ -6746,10 +6739,6 @@ class inputInfoType_model(SchemaModel):
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
-
-OUTPUTINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
-])
 
 OUTPUTINFOTYPE_RESOURCETYPE_CHOICES = _make_choices_from_list([
   u'corpus', u'lexicalConceptualResource', u'languageDescription', 
@@ -6869,7 +6858,7 @@ class outputInfoType_model(SchemaModel):
       ( u'conformanceToStandardsBestPractices', u'conformanceToStandardsBestPractices', OPTIONAL ),
     )
 
-    mediaType = MultiSelectField(
+    mediaType = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=52), 
       verbose_name='Media', 
       help_text='Specifies the media type of the resource and basically ' \
       'corresponds to the physical medium of the content representation.' \
@@ -6877,9 +6866,6 @@ class outputInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      
-      max_length=1 + len(OUTPUTINFOTYPE_MEDIATYPE_CHOICES['choices']) / 4,
-      choices=OUTPUTINFOTYPE_MEDIATYPE_CHOICES['choices'],
       )
 
     resourceType = MultiSelectField(
@@ -6900,27 +6886,27 @@ class outputInfoType_model(SchemaModel):
       choices=OUTPUTINFOTYPE_MODALITYTYPE_CHOICES['choices'],
       )
 
-    languageName = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=51), 
+    languageName = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=53), 
       verbose_name='Language name', 
       help_text='A human understandable name of the language that is use' \
       'd in the resource or supported by the tool/service according to t' \
       'he IETF BCP47 standard',
       blank=True, )
 
-    languageId = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=52), 
+    languageId = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=54), 
       verbose_name='Language id', 
       help_text='The identifier of the language that is included in the ' \
       'resource or supported by the tool/service according to the IETF B' \
       'CP47 standard',
       blank=True, )
 
-    languageVarietyName = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=53), 
+    languageVarietyName = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=55), 
       verbose_name='Language variety name', 
       help_text='Specifies the type of the language variety that occurs ' \
       'in the resource or is supported by a tool/service',
       blank=True, )
 
-    mimeType = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=54), 
+    mimeType = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=56), 
       verbose_name='Mime', 
       help_text='The mime-type of the resource which is a formalized spe' \
       'cifier for the format included or a mime-type that the tool/servi' \
@@ -6947,14 +6933,14 @@ class outputInfoType_model(SchemaModel):
       choices=OUTPUTINFOTYPE_ANNOTATIONTYPE_CHOICES['choices'],
       )
 
-    annotationFormat = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=55), 
+    annotationFormat = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=57), 
       verbose_name='Annotation format', 
       help_text='Specifies the format that is used in the annotation pro' \
       'cess since often the mime type will not be sufficient for machine' \
       ' processing',
       blank=True, )
 
-    tagset = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=56), 
+    tagset = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=58), 
       verbose_name='Tagset', 
       help_text='A name or a url reference to the tagset used in the ann' \
       'otation of the resource or used by the tool/service',
@@ -7166,14 +7152,14 @@ class toolServiceCreationInfoType_model(SchemaModel):
       u'originalSource': "targetResourceInfoType_model",
     }
 
-    implementationLanguage = MultiTextField(max_length=100, widget = MultiFieldWidget(widget_id=57), 
+    implementationLanguage = MultiTextField(max_length=100, widget = MultiFieldWidget(widget_id=59), 
       verbose_name='Implementation language', 
       help_text='The programming languages needed for allowing user cont' \
       'ributions, or for running the tools, in case no executables are a' \
       'vailable',
       blank=True, )
 
-    formalism = MultiTextField(max_length=100, widget = MultiFieldWidget(widget_id=58), 
+    formalism = MultiTextField(max_length=100, widget = MultiFieldWidget(widget_id=60), 
       verbose_name='Formalism', 
       help_text='Reference (name, bibliographic reference or link to url' \
       ') for the formalism used for the creation/enrichment of the resou' \
@@ -7422,7 +7408,7 @@ class toolServiceInfoType_model(resourceComponentTypeType_model):
       choices=TOOLSERVICEINFOTYPE_TOOLSERVICETYPE_CHOICES['choices'],
       )
 
-    toolServiceSubtype = MultiTextField(max_length=100, widget = MultiFieldWidget(widget_id=59), 
+    toolServiceSubtype = MultiTextField(max_length=100, widget = MultiFieldWidget(widget_id=61), 
       verbose_name='Tool service subtype', 
       help_text='Specifies the subtype of tool or service',
       blank=True, )
@@ -7600,7 +7586,7 @@ class dynamicElementInfoType_model(SchemaModel):
       ( u'posesPerSubject', u'posesPerSubject', OPTIONAL ),
     )
 
-    typeOfElement = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=60), 
+    typeOfElement = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=62), 
       verbose_name='Type of element', 
       help_text='The type of objects or people that represented in the v' \
       'ideo or image part of the resource',
@@ -7615,58 +7601,58 @@ class dynamicElementInfoType_model(SchemaModel):
       choices=DYNAMICELEMENTINFOTYPE_BODYPARTS_CHOICES['choices'],
       )
 
-    distractors = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=61), 
+    distractors = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=63), 
       verbose_name='Distractors', 
       help_text='Any distractors visible in the resource',
       blank=True, )
 
-    interactiveMedia = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=62), 
+    interactiveMedia = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=64), 
       verbose_name='Interactive media', 
       help_text='Any interactive media visible in the resource',
       blank=True, )
 
-    faceViews = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=63), 
+    faceViews = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=65), 
       verbose_name='Face views', 
       help_text='Indicates the view of the face(s) that appear in the vi' \
       'deo or on the image part of the resource',
       blank=True, )
 
-    faceExpressions = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=64), 
+    faceExpressions = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=66), 
       verbose_name='Face expressions', 
       help_text='Indicates the facial expressions visible in the resourc' \
       'e',
       blank=True, )
 
-    bodyMovement = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=65), 
+    bodyMovement = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=67), 
       verbose_name='Body movement', 
       help_text='Indicates the body parts that move in the video part of' \
       ' the resource',
       blank=True, )
 
-    gestures = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=66), 
+    gestures = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=68), 
       verbose_name='Gestures', 
       help_text='Indicates the type of gestures visible in the resource',
       blank=True, )
 
-    handArmMovement = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=67), 
+    handArmMovement = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=69), 
       verbose_name='Hand arm movement', 
       help_text='Indicates the movement of hands and/or arms visible in ' \
       'the resource',
       blank=True, )
 
-    handManipulation = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=68), 
+    handManipulation = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=70), 
       verbose_name='Hand manipulation', 
       help_text='Gives information on the manipulation of objects by han' \
       'd',
       blank=True, )
 
-    headMovement = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=69), 
+    headMovement = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=71), 
       verbose_name='Head movement', 
       help_text='Indicates the movements of the head visible in the reso' \
       'urce',
       blank=True, )
 
-    eyeMovement = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=70), 
+    eyeMovement = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=72), 
       verbose_name='Eye movement', 
       help_text='Indicates the movement of the eyes visible in the resou' \
       'rce',
@@ -7707,7 +7693,7 @@ class staticElementInfoType_model(SchemaModel):
       ( u'eventDescription', u'eventDescription', OPTIONAL ),
     )
 
-    typeOfElement = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=71), 
+    typeOfElement = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=73), 
       verbose_name='Type of element', 
       help_text='The type of objects or people that represented in the v' \
       'ideo or image part of the resource',
@@ -7722,48 +7708,48 @@ class staticElementInfoType_model(SchemaModel):
       choices=STATICELEMENTINFOTYPE_BODYPARTS_CHOICES['choices'],
       )
 
-    faceViews = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=72), 
+    faceViews = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=74), 
       verbose_name='Face views', 
       help_text='Indicates the view of the face(s) that appear in the vi' \
       'deo or on the image part of the resource',
       blank=True, )
 
-    faceExpressions = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=73), 
+    faceExpressions = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=75), 
       verbose_name='Face expressions', 
       help_text='Indicates the facial expressions visible in the resourc' \
       'e',
       blank=True, )
 
-    artifactParts = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=74), 
+    artifactParts = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=76), 
       verbose_name='Artifact parts', 
       help_text='Indicates the parts of the artifacts represented in the' \
       ' image corpus',
       blank=True, )
 
-    landscapeParts = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=75), 
+    landscapeParts = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=77), 
       verbose_name='Landscape parts', 
       help_text='landscape parts represented in the image corpus',
       blank=True, )
 
-    personDescription = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=76), 
+    personDescription = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=78), 
       verbose_name='Person description', 
       help_text='Provides descriptive features for the persons represent' \
       'ed in the image corpus',
       blank=True, )
 
-    thingDescription = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=77), 
+    thingDescription = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=79), 
       verbose_name='Thing description', 
       help_text='Provides description of the things represented in the i' \
       'mage corpus',
       blank=True, )
 
-    organizationDescription = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=78), 
+    organizationDescription = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=80), 
       verbose_name='Organization description', 
       help_text='Provides description of the organizations that may appe' \
       'ar in the image corpus',
       blank=True, )
 
-    eventDescription = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=79), 
+    eventDescription = MultiTextField(max_length=1000, widget = MultiFieldWidget(widget_id=81), 
       verbose_name='Event description', 
       help_text='Provides description of any events represented in the i' \
       'mage corpus',
