@@ -135,9 +135,96 @@
 	     	}
 	     	
 	     	$("h1").not("h1:contains('General')").not("h1:contains('Tool')").not("div[id$=protodiv] h1").children("a:contains('Edit')").attr('class', '');
-	     	  	
 					
 	</script>
+	
+	<script>	
+	//for text fields
+		//$('fieldset .module div div ul li input').change(textfield);
+		//for calendar
+		$('div.form-row.errors div input').change(textfield);
+		//for related-widget-wrapper
+		$("div.field-box.errors input.related-widget-wrapper").change(oneToOne);
+		
+		
+		 function textfield() {
+			 var input_value = $(this).attr('value');			 
+				if( input_value ) {				
+						$(this).parents('div').siblings(".errorlist").remove();				
+						$(this).parents('fieldset .form-row').removeClass("errors");
+				}
+		 }		
+ 		 function oneToOne() {
+			 var input_value = $(this).attr('value');			 
+				if( input_value ) {					
+						$(this).siblings(".errorlist").remove();				
+						$(this).parents('div.field-box').removeClass("errors");
+				}
+		 }				
+		
+		$("fieldset .module div div ul li input").each(function() { 
+			$(this).trigger('change');
+		});	
+		
+		//for calendar when user inserts input in textfield	
+		$("div.form-row div input").each(function() { 
+			$(this).trigger('change');
+		});
+		
+		//$("div.field-box.errors select").children().each(function() { 
+		//	$(this).trigger('change');
+		//});		
+			
+		//for calendar when user clicks on calendar options 
+		$('div.form-row.errors div span.datetimeshortcuts a').live("click",function(){
+		
+			$(this).parents('div').siblings(".errorlist").remove();				
+			$(this).parents('div').removeClass("errors");
+		});
+		
+		//for drop-down menus
+	//	$("div.field-box.errors select").children().change(function() {
+	//		alert('aa');
+	//	});		
+
+		//related-widget-wrapper
+		$("div.field-box.errors input.related-widget-wrapper").each(function() { 
+			
+			$(this).trigger('change');
+		});		
+		
+		
+		
+		$(document).on("change", "div.errors select", function() {		  
+  			alert("aaa");
+		});
+		
+		
+		
+		//for many-to-many widgets (errors disappear only when you click directly on selector-chosen field)
+		$(document).on("change", "div.form-row div.errors div.selector-chosen select.filtered", function() {		  
+  			if( $(this).children().length > 0 ) {										
+					$(this).parents('div').siblings(".errorlist").remove();				
+					$(this).parents('div').removeClass("errors");
+			}
+		});
+		//for one-to-one widgets
+		//$(document).on("each", "div.field-box.errors", function() {
+		//$("div.field-box.errors").each(function() { 
+		//	alert($(this).children);
+		//	if( $(this).children('a[title="Edit related model"]') ){
+		//		alert("qqq");
+		//		$(this).parents('div').siblings(".errorlist").remove();				
+		//		$(this).parents('div').removeClass("errors");
+		//	}
+		//});
+			
+		$("div.form-row distributionInfo div.field-box.errors").each( function() {			
+		  	if( $(this).children('a[title="Edit related model"]') )
+  				alert("edit");
+		});
+	</script>
+	
 	<script>		
 		var link;	     
 	     $("ul.errorlist").each(function() { 
@@ -151,7 +238,6 @@
     		 }
 		 });		
 	</script>
-
 
 {% block after_field_sets %}{% endblock %}
 
