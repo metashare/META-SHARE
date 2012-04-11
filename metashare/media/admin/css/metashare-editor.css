@@ -45,14 +45,57 @@ a:link, a:visited {
 /* Editor-specific CSS */
 /* ******************* */
 
+
+/* menu styles */
+#jsddm
+{	margin: 0;
+	padding: 0}
+
+	#jsddm li
+	{	float: left;
+		list-style: none;
+		font: 12px Tahoma, Arial}
+
+	#jsddm li a
+	{	display: block;
+		background-image: url(../../images/button_top_bg.png);
+		background-repeat: repeat-x;
+		border: 		none;
+		padding: 5px 12px;
+		margin-left:5px;
+		text-decoration: none;
+	    -webkit-border-radius: 		5px;
+    	-khtml-border-radius: 		5px;
+    	-moz-border-radius: 		5px;
+    	border-radius: 				5px;
+		width: 70px;
+		white-space: nowrap}
+
+	#jsddm li a:link, #jsddm li a:visited, #jsddm li a:hover 
+	{ color: #224; }
 	
-div#editornavi li {
- 	float:left;
-	margin-right:20px;
-	padding-bottom:10px;
-	list-style-type: none;
-	font-weight: bold;
-}
+	#jsddm li a:hover
+	{	background-image: url(../../images/button_top_bg2.png);
+		text-decoration: none; }
+		
+		#jsddm li ul
+		{	margin-top: 0;
+			padding: 0;
+			z-index: 10;
+			position: absolute;
+			visibility: hidden; }
+		
+			#jsddm li ul li
+			{	float: none;
+				display: inline}
+			
+			#jsddm li ul li a
+			{	width: auto;
+				background-image: url(../../images/button_top_gray_bg.png); }
+			
+			#jsddm li ul li a:hover
+			{	background-image: url(../../images/button_top_gray_bg2.png); }
+
 
 .display_none {
 	display: none;	

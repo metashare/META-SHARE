@@ -48,8 +48,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
     class Media:
         js = (settings.MEDIA_URL + 'js/jquery-1.7.1.min.js',
               settings.MEDIA_URL + 'js/addCollapseToAllStackedInlines.js',
-              settings.ADMIN_MEDIA_PREFIX + 'js/collapse.min.js',
-              settings.ADMIN_MEDIA_PREFIX + 'js/metashare-editor.js',)
+              settings.ADMIN_MEDIA_PREFIX + 'js/collapse.min.js',)
 
     def __init__(self, model, admin_site):
         # Get from the model all inlines grouped by Required/Recommended/Optional status:
