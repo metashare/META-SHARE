@@ -289,3 +289,10 @@ class EditorTest(TestCase):
         client = self.client_with_user_logged_in(self.editor_login)
         response = client.get(ADMINROOT+'repository/resourceinfotype_model/my/')
         self.assertContains(response, 'Resources')
+
+    def test_storage_object_is_hidden(self):
+        client = self.client_with_user_logged_in(self.editor_login)
+        resource = self.import_test_resource()
+        response = client.get('{}repository/resourceinfotype_model/{}/'.format(ADMINROOT, resource.id))
+        self.assertContains(response, 'type="hidden" name="storage_object"',
+                            msg_prefix='Expected a hidden storage object')
