@@ -7,6 +7,7 @@ from django import template
 from metashare.repository.models import corpusInfoType_model, \
     toolServiceInfoType_model, lexicalConceptualResourceInfoType_model, \
     languageDescriptionInfoType_model
+from metashare.settings import MEDIA_URL
 
 register = template.Library()
 
@@ -85,23 +86,22 @@ class ResourceMediaTypes(template.Node):
 
         result = list(set(result))
         result.sort()
-        image_tag = ""
 
-        # Use images instead of plain text when displaying media type
+        # use images instead of plain text when displaying media types
+        image_tag = ""
         if "text" in result:
-            image_tag = '<img src="/site_media/css/sexybuttons/images' + \
-              '/icons/silk/page_white_text_media_type.png" title="text" />'
+            image_tag = '<img src="{}css/sexybuttons/images/icons/silk/page' \
+              '_white_text_media_type.png" title="text" />'.format(MEDIA_URL)
         if "audio" in result:
-            image_tag = image_tag + ' <img src="/site_media/css/sexybuttons' + \
-              '/images/icons/silk/music.png" title="audio" />'
+            image_tag = image_tag + ' <img src="{}css/sexybuttons/images/' \
+              'icons/silk/music.png" title="audio" />'.format(MEDIA_URL)
         if "image" in result:
-            image_tag = image_tag + ' <img src="/site_media/css/sexybuttons' + \
-              '/images/icons/silk/picture.png" title="image" />'
+            image_tag = image_tag + ' <img src="{}css/sexybuttons/images/' \
+              'icons/silk/picture.png" title="image" />'.format(MEDIA_URL)
         if "video" in result:
-            image_tag = image_tag + ' <img src="/site_media/css/sexybuttons' + \
-              '/images/icons/silk/film.png" title="video" />'
-        
-        
+            image_tag = image_tag + ' <img src="{}css/sexybuttons/images/' \
+              'icons/silk/film.png" title="video" />'.format(MEDIA_URL)
+
         return image_tag
 
 def resource_media_types(parser, token):
