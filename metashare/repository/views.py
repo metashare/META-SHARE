@@ -432,18 +432,18 @@ class MetashareFacetedSearchView(FacetedSearchView):
                             if item[0] in sel_facets[name_exact]:
                                 removable.append({'label': item[0],
                                     'count': item[1], 'targets':
-                                        ['{0}:{1}'.format(name, value)
+                                        [u'{0}:{1}'.format(name, value)
                                          for name, values in
                                          sel_facets.iteritems() for value in
                                          values if name != name_exact
                                          or value != item[0]]})
                             else:
-                                targets = ['{0}:{1}'.format(name, value)
+                                targets = [u'{0}:{1}'.format(name, value)
                                            for name, values in
                                            sel_facets.iteritems()
                                            for value in values]
-                                targets.append('{0}:{1}'.format(name_exact,
-                                                                item[0]))
+                                targets.append(u'{0}:{1}'.format(name_exact,
+                                                                 item[0]))
                                 addable.append({'label': item[0],
                                                 'count': item[1],
                                                 'targets': targets})
@@ -461,10 +461,10 @@ class MetashareFacetedSearchView(FacetedSearchView):
                     addable = []
                     # only items with a count > 0 are shown
                     for item in [i for i in items if i[1] > 0]:
-                        targets = ['{0}:{1}'.format(name, value)
+                        targets = [u'{0}:{1}'.format(name, value)
                                    for name, values in sel_facets.iteritems()
                                    for value in values]
-                        targets.append('{0}:{1}'.format(name_exact, item[0]))
+                        targets.append(u'{0}:{1}'.format(name_exact, item[0]))
                         addable.append({'label': item[0], 'count': item[1],
                                         'targets': targets})
                     result.append({'label': label, 'removable': [],

@@ -16,6 +16,7 @@ TESTFIXTURE_XML = '{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
 BROKENFIXTURE_XML = '{}/repository/fixtures/broken.xml'.format(ROOT_PATH)
 TESTFIXTURES_ZIP = '{}/repository/fixtures/tworesources.zip'.format(ROOT_PATH)
 BROKENFIXTURES_ZIP = '{}/repository/fixtures/onegood_onebroken.zip'.format(ROOT_PATH)
+LEX_CONC_RES_XML = '{}/repository/test_fixtures/published-lexConcept-Text-FreEngGer.xml'.format(ROOT_PATH)
 
 class EditorTest(TestCase):
     """
@@ -82,9 +83,9 @@ class EditorTest(TestCase):
                 .format(user_credentials, response)
         return client
 
-    def import_test_resource(self):
+    def import_test_resource(self, path=TESTFIXTURE_XML):
         test_utils.setup_test_storage()
-        result = test_utils.import_xml(TESTFIXTURE_XML)
+        result = test_utils.import_xml(path)
         resource = result[0]
         return resource
 
@@ -264,6 +265,13 @@ class EditorTest(TestCase):
         response = client.get('{}repository/corpustextinfotype_model/{}/'.format(ADMINROOT, corpustextinfo.id))
         self.assertContains(response, 'type="hidden" name="back_to_corpusmediatypetype_model"',
                             msg_prefix='Back reference should have been hidden')
+
+    def test_hidden_field_is_not_referenced_in_fieldset_label(self):
+        client = self.client_with_user_logged_in(self.editor_login)
+        resource = self.import_test_resource(LEX_CONC_RES_XML)
+        response = client.get('{}repository/lexicalconceptualresourceinfotype_model/{}/'.format(ADMINROOT, resource.resourceComponentType.id))
+        self.assertNotContains(response, ' Lexical conceptual resource media</',
+                               msg_prefix='Hidden fields must not be visible in fieldset labels.')
 
     def test_validator_is_multiwidget(self):
         client = self.client_with_user_logged_in(self.editor_login)
