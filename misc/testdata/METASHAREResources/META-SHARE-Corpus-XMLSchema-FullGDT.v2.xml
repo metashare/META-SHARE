@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+  <identificationInfo>
+    <resourceName>Greek Dependency Treebank</resourceName>
+    <description>A resource for Modern Greek annotated at the syntactic and semantic levels. GDT is developed by researchers at the Insitute for Language and Speech Processing, with the help of students from the Texnoglwssia postgraduate program and the University of Athens. GDT includes texts from open-content sources and from corpora collected at ILSP in the framework of research projects aiming at multilingual, multimedia information extraction. The dependency-based annotation scheme used for the syntactic layer of the GDT allows for intuitive representations of structures common in languages with flexible word order. The annotation scheme is based on an adaptation of the guidelines for the Prague Dependency Treebank. Automatic preprocessing of GDT documents included sentence splitting, POS tagging and lemmatization with a suite of natural language processing tools developed at ILSP. The manual annotation of dependency relations is accompanied, for GDT subsets, by annotation of semantic roles (70K tokens) and event annotation based on a shallow domain specific ontology (31K tokens).</description>
+    <resourceShortName>GDT</resourceShortName>
+    <url>http://gdt.ilsp.gr/</url>
+    <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+    <identifier />
+  </identificationInfo>
+  <distributionInfo>
+    <availability>available-restrictedUse</availability>
+    <licenceInfo>
+      <licence>proprietary</licence>
+      <restrictionsOfUse>evaluationUse</restrictionsOfUse>
+      <distributionAccessMedium>other</distributionAccessMedium>
+      <downloadLocation>http://gdt.ilsp.gr/greek_gdt_test.conll.zip</downloadLocation>
+      <price />
+      <licensor>
+        <personInfo>
+          <surname>Ioannidis</surname>
+          <givenName>Yannis</givenName>
+          <communicationInfo>
+            <email>yannis@athena-innovation.gr</email>
+            <url>http://www.madgik.di.uoa.gr/content/yannis</url>
+            <address>Mpakou 17</address>
+            <zipCode>115 24</zipCode>
+            <city>Athens</city>
+            <country>GR</country>
+            <telephoneNumber />
+            <faxNumber />
+          </communicationInfo>
+          <position>Director</position>
+          <affiliation>
+            <organizationName>ATHENA - RESEARCH AND INNOVATION CENTER IN INFORMATION, COMMUNICATION AND KNOWLEDGE TECHNOLOGIES</organizationName>
+            <organizationShortName>Athena R.C.</organizationShortName>
+            <departmentName />
+            <communicationInfo>
+            <email>ilsp@ilsp.gr</email>
+              <url>http://www.athena-innovation.gr/</url>
+              <address>Mpakou 17</address>
+              <zipCode>115 24</zipCode>
+              <city>Athens</city>
+              <country>GR</country>
+              <telephoneNumber>+30 210 6998 677</telephoneNumber>
+              <faxNumber>+30 210 6998 663</faxNumber>
+            </communicationInfo>
+          </affiliation>
+        </personInfo>
+      </licensor>
+      <distributionRightsHolder>
+        <organizationInfo>
+          <organizationName>Institute for Language and Speech Processing</organizationName>
+          <organizationShortName>ILSP / Athena R.C.</organizationShortName>
+          <departmentName>Natural Language and Knowledge Extraction Department</departmentName>
+          <communicationInfo>
+          <email>ilsp@ilsp.gr</email>
+            <url>http://www.ilsp.gr/</url>
+            <address>Artemidos 6</address>
+            <zipCode>GR-151 25</zipCode>
+            <city>Maroussi</city>
+            <country>GR</country>
+            <telephoneNumber>+30 2106875300</telephoneNumber>
+            <faxNumber>+30 2106854270</faxNumber>
+            <faxNumber>+30 2106856794</faxNumber>
+          </communicationInfo>
+        </organizationInfo>
+      </distributionRightsHolder>
+    </licenceInfo>
+  </distributionInfo>
+  <contactPerson>
+ <surname>Prokopidis</surname>
+    <givenName>Prokopis</givenName>
+    <communicationInfo>
+      <email>prokopis@ilsp.gr</email>
+      <url>http://www.ilsp.gr/en/contact/contactnumbers</url>
+      <address>Artemidos 6</address>
+      <zipCode>GR-151 25</zipCode>
+      <city>Maroussi</city>
+      <country>GR</country>
+      <telephoneNumber>+30 2106875432</telephoneNumber>
+      <faxNumber>+30 2106854270</faxNumber>
+      <faxNumber>+30 2106856794</faxNumber>
+    </communicationInfo>
+    <position>scientificAssociate</position>
+    <affiliation>
+      <organizationName>Institute for Language and Speech Processing</organizationName>
+      <organizationShortName>ILSP / Athena R.C.</organizationShortName>
+      <departmentName>Natural Language and Knowledge Extraction Department</departmentName>
+      <communicationInfo>
+		  <email>ilsp@ilsp.gr</email>
+        <url>http://www.ilsp.gr/</url>
+        <address>Artemidos 6</address>
+        <zipCode>GR-151 25</zipCode>
+        <city>Maroussi</city>
+        <country>GR</country>
+        <telephoneNumber>+30 2106875300</telephoneNumber>
+        <faxNumber>+30 2106854270</faxNumber>
+        <faxNumber>+30 2106856794</faxNumber>
+      </communicationInfo>
+    </affiliation>
+  </contactPerson>
+  <metadataInfo>
+  <metadataCreationDate>2011-12-31</metadataCreationDate>
+    <metadataCreator>
+      <surname>Desipri</surname>
+      <givenName>Elina</givenName>
+      <communicationInfo>
+        <email>elina@ilsp.gr</email>
+        <url>http://www.ilsp.gr/en/contact/contactnumbers</url>
+        <address>Artemidos 6</address>
+        <zipCode>GR-151 25</zipCode>
+        <city>Maroussi</city>
+        <country>GR</country>
+        <telephoneNumber>+30 2106875442</telephoneNumber>
+        <faxNumber>+30 2106854270</faxNumber>
+        <faxNumber>+30 2106856794</faxNumber>
+      </communicationInfo>
+      <position>scientificAssociate</position>
+      <affiliation>
+        <organizationName>Institute for Language and Speech Processing</organizationName>
+        <organizationShortName>ILSP / Athena R.C.</organizationShortName>
+        <departmentName>Natural Language and Knowledge Extraction Department</departmentName>
+        <communicationInfo>
+        <email>xxx@example.com</email>
+          <address>Artemidos 6</address>
+          <zipCode>GR-151 25</zipCode>
+          <city>Maroussi</city>
+          <country>GR</country>
+          <telephoneNumber>+30 2106875300</telephoneNumber>
+          <faxNumber>+30 2106854270</faxNumber>
+          <faxNumber>+30 2106856794</faxNumber>
+        </communicationInfo>
+      </affiliation>
+    </metadataCreator>
+             <source>META</source>
+    <metadataLanguageId>English</metadataLanguageId>
+    <revision />
+  </metadataInfo>
+  <versionInfo>
+    <version>1</version>
+    <revision>addition of new annotated material</revision>
+    <lastDateUpdated>2010-01-01</lastDateUpdated>
+  </versionInfo>
+  <validationInfo>
+    <validated>true</validated>
+    <validationType>content</validationType>
+    <validationMode>manual</validationMode>
+    <validationModeDetails>manual validation of dependency relations</validationModeDetails>
+    <validationExtent>full</validationExtent>
+    <validator>
+      <personInfo>
+        <surname>Prokopidis</surname>
+        <givenName>Prokopis</givenName>
+        <communicationInfo>
+          <email>prokopis@ilsp.gr</email>
+          <url>http://www.ilsp.gr/en/contact/contactnumbers</url>
+          <address>Artemidos 6</address>
+          <zipCode>GR-151 25</zipCode>
+          <city>Maroussi</city>
+          <country>GR</country>
+          <telephoneNumber>+30 2106875432</telephoneNumber>
+          <faxNumber>+30 2106854270</faxNumber>
+          <faxNumber>+30 2106856794</faxNumber>
+        </communicationInfo>
+        <position>scientificAssociate</position>
+        <affiliation>
+          <organizationName>Institute for Language and Speech Processing</organizationName>
+          <organizationShortName>ILSP / Athena R.C.</organizationShortName>
+          <departmentName>Natural Language and Knowledge Extraction Department</departmentName>
+          <communicationInfo>
+			  <email>www@ilsp.athena-innovation.gr</email>
+             <url>http://www.ilsp.gr/</url>
+            <address>Artemidos 6</address>
+            <zipCode>GR-151 25</zipCode>
+            <city>Maroussi</city>
+            <country>GR</country>
+            <telephoneNumber>+30 2106875300</telephoneNumber>
+            <faxNumber>+30 2106854270</faxNumber>
+            <faxNumber>+30 2106856794</faxNumber>
+          </communicationInfo>
+        </affiliation>
+      </personInfo>
+    </validator>
+  </validationInfo>
+  <validationInfo>
+    <validated>true</validated>
+    <validationType>content</validationType>
+    <validationMode>manual</validationMode>
+    <validationModeDetails>manual validation of the semantic roles annotation</validationModeDetails>
+    <validationExtent>full</validationExtent>
+    <validationExtentDetails />
+    <validator>
+      <personInfo>
+        <surname>Prokopidis</surname>
+        <givenName>Prokopis</givenName>
+        <communicationInfo>
+          <email>prokopis@ilsp.gr</email>
+          <url>http://www.ilsp.gr/en/contact/contactnumbers</url>
+          <address>Artemidos 6</address>
+          <zipCode>GR-151 25</zipCode>
+          <city>Maroussi</city>
+          <country>GR</country>
+          <telephoneNumber>+30 2106875432</telephoneNumber>
+          <faxNumber>+30 2106854270</faxNumber>
+          <faxNumber>+30 2106856794</faxNumber>
+        </communicationInfo>
+        <position>scientificAssociate</position>
+        <affiliation>
+          <organizationName>Institute for Language and Speech Processing</organizationName>
+          <organizationShortName>ILSP / Athena R.C.</organizationShortName>
+          <departmentName>Natural Language and Knowledge Extraction Department</departmentName>
+          <communicationInfo>
+			 <email>www@ilsp.athena-innovation.gr</email>
+            <url>http://www.ilsp.gr/</url>
+            <address>Artemidos 6</address>
+            <zipCode>GR-151 25</zipCode>
+            <city>Maroussi</city>
+            <country>GR</country>
+            <telephoneNumber>+30 2106875300</telephoneNumber>
+            <faxNumber>+30 2106854270</faxNumber>
+            <faxNumber>+30 2106856794</faxNumber>
+          </communicationInfo>
+        </affiliation>
+      </personInfo>
+    </validator>
+    <validator>
+      <personInfo>
+        <surname>Desipri</surname>
+        <givenName>Elina</givenName>
+        <communicationInfo>
+          <email>elina@ilsp.gr</email>
+          <url>http://www.ilsp.gr/en/contact/contactnumbers</url>
+          <address>Artemidos 6</address>
+          <zipCode>GR-151 25</zipCode>
+          <city>Maroussi</city>
+          <country>GR</country>
+          <telephoneNumber>+30 2106875442</telephoneNumber>
+          <faxNumber>+30 2106854270</faxNumber>
+          <faxNumber>+30 2106856794</faxNumber>
+        </communicationInfo>
+        <position>scientificAssociate</position>
+        <affiliation>
+          <organizationName>Institute for Language and Speech Processing</organizationName>
+          <organizationShortName>ILSP / Athena R.C.</organizationShortName>
+          <departmentName>Natural Language and Knowledge Extraction Department</departmentName>
+          <communicationInfo>
+			 <email>www@ilsp.athena-innovation.gr</email>
+            <url>http://www.ilsp.gr/</url>
+            <address>Artemidos 6</address>
+            <zipCode>GR-151 25</zipCode>
+            <city>Maroussi</city>
+            <country>GR</country>
+            <telephoneNumber>+30 2106875300</telephoneNumber>
+            <faxNumber>+30 2106854270</faxNumber>
+            <faxNumber>+30 2106856794</faxNumber>
+          </communicationInfo>
+        </affiliation>
+      </personInfo>
+    </validator>
+  </validationInfo>
+  <validationInfo>
+    <validated>true</validated>
+    <validationType>content</validationType>
+    <validationMode>manual</validationMode>
+    <validationModeDetails>manual validation of event annotation</validationModeDetails>
+    <validationExtent>full</validationExtent>
+    <validationExtentDetails />
+    <validator>
+      <personInfo>
+        <surname>Prokopidis</surname>
+        <givenName>Prokopis</givenName>
+        <communicationInfo>
+          <email>prokopis@ilsp.gr</email>
+          <url>http://www.ilsp.gr/en/contact/contactnumbers</url>
+          <address>Artemidos 6</address>
+          <zipCode>GR-151 25</zipCode>
+          <city>Maroussi</city>
+          <country>GR</country>
+          <telephoneNumber>+30 2106875432</telephoneNumber>
+          <faxNumber>+30 2106854270</faxNumber>
+          <faxNumber>+30 2106856794</faxNumber>
+        </communicationInfo>
+        <position>scientificAssociate</position>
+        <affiliation>
+          <organizationName>Institute for Language and Speech Processing</organizationName>
+          <organizationShortName>ILSP / Athena R.C.</organizationShortName>
+          <departmentName>Natural Language and Knowledge Extraction Department</departmentName>
+          <communicationInfo>
+			 <email>www@ilsp.athena-innovation.gr</email>
+            <url>http://www.ilsp.gr/</url>
+            <address>Artemidos 6</address>
+            <zipCode>GR-151 25</zipCode>
+            <city>Maroussi</city>
+            <country>GR</country>
+            <telephoneNumber>+30 2106875300</telephoneNumber>
+            <faxNumber>+30 2106854270</faxNumber>
+            <faxNumber>+30 2106856794</faxNumber>
+          </communicationInfo>
+        </affiliation>
+      </personInfo>
+    </validator>
+    <validator>
+      <personInfo>
+        <surname>Desipri</surname>
+        <givenName>Elina</givenName>
+        <communicationInfo>
+          <email>elina@ilsp.gr</email>
+          <url>http://www.ilsp.gr/en/contact/contactnumbers</url>
+          <address>Artemidos 6</address>
+          <zipCode>GR-151 25</zipCode>
+          <city>Maroussi</city>
+          <country>GR</country>
+          <telephoneNumber>+30 2106875442</telephoneNumber>
+          <faxNumber>+30 2106854270</faxNumber>
+          <faxNumber>+30 2106856794</faxNumber>
+        </communicationInfo>
+        <position>scientificAssociate</position>
+        <affiliation>
+          <organizationName>Institute for Language and Speech Processing</organizationName>
+          <organizationShortName>ILSP / Athena R.C.</organizationShortName>
+          <departmentName>Natural Language and Knowledge Extraction Department</departmentName>
+          <communicationInfo>
+ 			 <email>www@ilsp.athena-innovation.gr</email>
+
+            <url>http://www.ilsp.gr/</url>
+            <address>Artemidos 6</address>
+            <zipCode>GR-151 25</zipCode>
+            <city>Maroussi</city>
+            <country>GR</country>
+            <telephoneNumber>+30 2106875300</telephoneNumber>
+            <faxNumber>+30 2106854270</faxNumber>
+            <faxNumber>+30 2106856794</faxNumber>
+          </communicationInfo>
+        </affiliation>
+      </personInfo>
+    </validator>
+  </validationInfo>
+  <usageInfo>
+    <foreseenUseInfo>
+      <foreseenUse>nlpApplications</foreseenUse>
+      <useNLPSpecific>parsing</useNLPSpecific>
+      <useNLPSpecific>semanticRoleLabelling</useNLPSpecific>
+    </foreseenUseInfo>
+    <actualUseInfo>
+      <actualUse>nlpApplications</actualUse>
+      <useNLPSpecific>parsing</useNLPSpecific>
+      <usageReport>
+        <documentUnstructured />
+      </usageReport>
+    </actualUseInfo>
+  </usageInfo>
+  <resourceDocumentationInfo>
+    <documentation>
+      <documentUnstructured>http://www.ilsp.gr/homepages/prokopidis/documents/gdt_tlt2005.pdf</documentUnstructured>
+    </documentation>
+    <documentation>
+      <documentUnstructured>Harris Papageorgiou, Elina Desipri, Maria Koutsombogera, Kanella Pouli, and Prokopis Prokopidis. Adding multi-layer Semantics to the Greek Dependency Treebank. In Proceedings of The Fifth International Conference on Language and Evaluation (LREC-2006), Genoa, Italy, May 2006. ELRA.</documentUnstructured>
+    </documentation>
+    <documentation>
+      <documentUnstructured>Voula Ghotsoulia, Elina Desypri, Maria Koutsombogera, Prokopis Prokopidis, and Haris Papageorgiou. Towards a frame semantics resource for Greek. In Proceedings of The Sixth Workshop on Treebanks and Linguistic Theories (TLT 2007), Bergen, Norway, December 2007. University of Bergen.</documentUnstructured>
+    </documentation>
+  </resourceDocumentationInfo>
+  <resourceCreationInfo>
+    <resourceCreator>
+      <personInfo>
+        <surname>Prokopidis</surname>
+        <givenName>Prokopis</givenName>
+        <communicationInfo>
+          <email>prokopis@ilsp.gr</email>
+          <url>http://www.ilsp.gr/en/contact/contactnumbers</url>
+          <address>Artemidos 6</address>
+          <zipCode>GR-151 25</zipCode>
+          <city>Maroussi</city>
+          <country>GR</country>
+          <telephoneNumber>+30 2106875432</telephoneNumber>
+          <faxNumber>+30 2106854270</faxNumber>
+          <faxNumber>+30 2106856794</faxNumber>
+        </communicationInfo>
+        <position>scientificAssociate</position>
+        <affiliation>
+          <organizationName>Institute for Language and Speech Processing</organizationName>
+          <organizationShortName>ILSP / Athena R.C.</organizationShortName>
+          <departmentName>Natural Language and Knowledge Extraction Department</departmentName>
+          <communicationInfo>
+ 			 <email>www@ilsp.athena-innovation.gr</email>
+
+            <url>http://www.ilsp.gr/</url>
+            <address>Artemidos 6</address>
+            <zipCode>GR-151 25</zipCode>
+            <city>Maroussi</city>
+            <country>GR</country>
+            <telephoneNumber>+30 2106875300</telephoneNumber>
+            <faxNumber>+30 2106854270</faxNumber>
+            <faxNumber>+30 2106856794</faxNumber>
+          </communicationInfo>
+        </affiliation>
+      </personInfo>
+    </resourceCreator>
+    <fundingProject>
+      <projectName>Multimedia Content Management System</projectName>
+      <projectShortName>MUSE</projectShortName>
+      <fundingType>nationalFunds</fundingType>
+      <funder>e-business/GSRT</funder>
+      <fundingCountry>GR</fundingCountry>
+      <projectStartDate>2004-02-01</projectStartDate>
+      <projectEndDate>2005-07-31</projectEndDate>
+    </fundingProject>
+    <fundingProject>
+      <projectName>Retrieval of Video And Language for The Home user in an Information Society</projectName>
+      <projectShortName>REVEAL THIS</projectShortName>
+      <projectID>FP6-IST-511689</projectID>
+      <url>http://sifnos.ilsp.gr/RevealThis/</url>
+      <fundingType>euFunds</fundingType>
+      <funder>IST</funder>
+      <projectStartDate>2004-11-01</projectStartDate>
+      <projectEndDate>2007-04-20</projectEndDate>
+    </fundingProject>
+    <creationStartDate>2005-01-01</creationStartDate>
+  </resourceCreationInfo>
+  <resourceComponentType>
+    <corpusInfo>
+      <resourceType>corpus</resourceType>
+      <corpusMediaType>
+        <corpusTextInfo>
+          <mediaType>text</mediaType>
+          <lingualityInfo>
+            <lingualityType>monolingual</lingualityType>
+          </lingualityInfo>
+          <languageInfo>
+            <languageId>ell</languageId>
+            <languageName>Modern Greek (1453-)</languageName>
+          </languageInfo>
+            <modalityInfo>
+              <modalityType>writtenLanguage</modalityType>
+            </modalityInfo>
+          <sizeInfo>
+            <size>100</size>
+            <sizeUnit>tokens</sizeUnit>
+          </sizeInfo>
+          <characterEncodingInfo>
+	<characterEncoding>UTF-8</characterEncoding>
+          </characterEncodingInfo>
+          <annotationInfo>
+            <annotationType>segmentation</annotationType>
+            <segmentationLevel>other</segmentationLevel>
+            <segmentationLevel>sentence</segmentationLevel>
+            <annotationMode>automatic</annotationMode>
+            <annotationTool>
+              <targetResourceNameURI>ILSP-SST</targetResourceNameURI>
+            </annotationTool>
+          </annotationInfo>
+          <annotationInfo>
+            <annotationType>lemmatization</annotationType>
+            <annotationMode>automatic</annotationMode>
+          </annotationInfo>
+          <annotationInfo>
+            <annotationType>morphosyntacticAnnotation-posTagging</annotationType>
+              <tagset>PAROLE compatible tagset</tagset>
+            <annotationMode>automatic</annotationMode>
+            <annotationTool>
+              <targetResourceNameURI>ILSP FBT POS tagger</targetResourceNameURI>
+            </annotationTool>
+          </annotationInfo>
+          <annotationInfo>
+            <annotationType>morphosyntacticAnnotation-bPosTagging</annotationType>
+             <tagset>PAROLE compatible tagset</tagset>
+            <annotationMode>automatic</annotationMode>
+            <annotationTool>
+              <targetResourceNameURI>ILSP FBT POS tagger</targetResourceNameURI>
+            </annotationTool>
+          </annotationInfo>
+          <annotationInfo>
+            <annotationType>syntacticAnnotation-treebanks</annotationType>
+            <tagset>PDT compatible tagset</tagset>
+            <conformanceToStandardsBestPractices>pragueTreebank</conformanceToStandardsBestPractices>
+            <annotationManual>
+              <documentUnstructured>http://gdt.ilsp.gr/guidelines/fsguidelines/gdt/index.html</documentUnstructured>
+            </annotationManual>
+            <annotationMode>manual</annotationMode>
+            <annotationTool>
+              <targetResourceNameURI>http://ufal.mff.cuni.cz/~pajas/tred/</targetResourceNameURI>
+            </annotationTool>
+            <annotator>
+              <personInfo>
+                <surname>Prokopidis</surname>
+                <givenName>Prokopis</givenName>
+                <communicationInfo>
+                  <email>prokopis@ilsp.gr</email>
+                  <url>http://www.ilsp.gr/en/contact/contactnumbers</url>
+                  <address>Artemidos 6</address>
+                  <zipCode>GR-151 25</zipCode>
+                  <city>Maroussi</city>
+                  <country>GR</country>
+                  <telephoneNumber>+30 2106875432</telephoneNumber>
+                  <faxNumber>+30 2106854270</faxNumber>
+                  <faxNumber>+30 2106856794</faxNumber>
+                </communicationInfo>
+                <position>scientificAssociate</position>
+                <affiliation>
+                  <organizationName>Institute for Language and Speech Processing</organizationName>
+                  <organizationShortName>ILSP / Athena R.C.</organizationShortName>
+                  <departmentName>Natural Language and Knowledge Extraction Department</departmentName>
+                  <communicationInfo>
+                    <email>info@ilsp.gr</email>        
+                    <url>http://www.ilsp.gr/</url>
+                    <address>Artemidos 6</address>
+                    <zipCode>GR-151 25</zipCode>
+                    <city>Maroussi</city>
+                    <country>GR</country>
+                    <telephoneNumber>+30 2106875300</telephoneNumber>
+                    <faxNumber>+30 2106854270</faxNumber>
+                    <faxNumber>+30 2106856794</faxNumber>
+                  </communicationInfo>
+                </affiliation>
+              </personInfo>
+            </annotator>
+            <annotator>
+              <personInfo>
+                <surname>Koutsombogera</surname>
+                <givenName>Maria</givenName>
+                <communicationInfo>
+                  <email>mkouts@ilsp.gr</email>
+                  <url>http://www.ilsp.gr/en/contact/contactnumbers</url>
+                  <address>Artemidos 6</address>
+                  <zipCode>GR-151 25</zipCode>
+                  <city>Maroussi</city>
+                  <country>GR</country>
+                  <telephoneNumber>+30 2106875444</telephoneNumber>
+                  <faxNumber>+30 2106854270</faxNumber>
+                  <faxNumber>+30 2106856794</faxNumber>
+                </communicationInfo>
+                <position>scientificAssociate</position>
+                <affiliation>
+                  <organizationName>Institute for Language and Speech Processing</organizationName>
+                  <organizationShortName>ILSP / Athena R.C.</organizationShortName>
+                  <departmentName>Natural Language and Knowledge Extraction Department</departmentName>
+                  <communicationInfo>
+                    <email>info@ilsp.gr</email>          
+                    <url>http://www.ilsp.gr/</url>
+                    <address>Artemidos 6</address>
+                    <zipCode>GR-151 25</zipCode>
+                    <city>Maroussi</city>
+                    <country>GR</country>
+                    <telephoneNumber>+30 2106875300</telephoneNumber>
+                    <faxNumber>+30 2106854270</faxNumber>
+                    <faxNumber>+30 2106856794</faxNumber>
+                  </communicationInfo>
+                </affiliation>
+              </personInfo>
+            </annotator>
+          </annotationInfo>
+          <annotationInfo>
+            <annotationType>semanticAnnotation-semanticRoles</annotationType>
+            <annotationManual>
+              <documentUnstructured />
+            </annotationManual>
+            <annotationMode>manual</annotationMode>
+            <annotationModeDetails />
+            <annotationTool>
+              <targetResourceNameURI>http://ufal.mff.cuni.cz/~pajas/tred/</targetResourceNameURI>
+            </annotationTool>
+            <sizePerAnnotation>
+              <size>70</size>
+              <sizeUnit>tokens</sizeUnit>
+            </sizePerAnnotation>
+            <annotator>
+              <personInfo>
+                <surname>Desipri</surname>
+                <givenName>Elina</givenName>
+                <communicationInfo>
+                  <email>elina@ilsp.gr</email>
+                  <url>http://www.ilsp.gr/en/contact/contactnumbers</url>
+                  <address>Artemidos 6</address>
+                  <zipCode>GR-151 25</zipCode>
+                  <city>Maroussi</city>
+                  <country>GR</country>
+                  <telephoneNumber>+30 2106875442</telephoneNumber>
+                  <faxNumber>+30 2106854270</faxNumber>
+                  <faxNumber>+30 2106856794</faxNumber>
+                </communicationInfo>
+                <position>scientificAssociate</position>
+                <affiliation>
+                  <organizationName>Institute for Language and Speech Processing</organizationName>
+                  <organizationShortName>ILSP / Athena R.C.</organizationShortName>
+                  <departmentName>Natural Language and Knowledge Extraction Department</departmentName>
+                  <communicationInfo>
+                    <email>info@ilsp.gr</email>         
+                    <url>http://www.ilsp.gr/</url>
+                    <address>Artemidos 6</address>
+                    <zipCode>GR-151 25</zipCode>
+                    <city>Maroussi</city>
+                    <country>GR</country>
+                    <telephoneNumber>+30 2106875300</telephoneNumber>
+                    <faxNumber>+30 2106854270</faxNumber>
+                    <faxNumber>+30 2106856794</faxNumber>
+                  </communicationInfo>
+                </affiliation>
+              </personInfo>
+            </annotator>
+          </annotationInfo>
+          <annotationInfo>
+            <annotationType>semanticAnnotation-events</annotationType>
+            <annotationMode>manual</annotationMode>
+            <annotationModeDetails />
+            <annotationTool>
+              <targetResourceNameURI>http://ufal.mff.cuni.cz/~pajas/tred/</targetResourceNameURI>
+            </annotationTool>
+            <sizePerAnnotation>
+              <size>31000</size>
+              <sizeUnit>tokens</sizeUnit>
+            </sizePerAnnotation>
+            <annotator>
+              <personInfo>
+                <surname>Desipri</surname>
+                <givenName>Elina</givenName>
+                <communicationInfo>
+                  <email>elina@ilsp.gr</email>
+                  <url>http://www.ilsp.gr/en/contact/contactnumbers</url>
+                  <address>Artemidos 6</address>
+                  <zipCode>GR-151 25</zipCode>
+                  <city>Maroussi</city>
+                  <country>GR</country>
+                  <telephoneNumber>+30 2106875442</telephoneNumber>
+                  <faxNumber>+30 2106854270</faxNumber>
+                  <faxNumber>+30 2106856794</faxNumber>
+                </communicationInfo>
+                <position>scientificAssociate</position>
+                <affiliation>
+                  <organizationName>Institute for Language and Speech Processing</organizationName>
+                  <organizationShortName>ILSP / Athena R.C.</organizationShortName>
+                  <departmentName>Natural Language and Knowledge Extraction Department</departmentName>
+                  <communicationInfo>
+                    <email>info@ilsp.gr</email>
+                    <url>http://www.ilsp.gr/</url>
+                    <address>Artemidos 6</address>
+                    <zipCode>GR-151 25</zipCode>
+                    <city>Maroussi</city>
+                    <country>GR</country>
+                    <telephoneNumber>+30 2106875300</telephoneNumber>
+                    <faxNumber>+30 2106854270</faxNumber>
+                    <faxNumber>+30 2106856794</faxNumber>
+                  </communicationInfo>
+                </affiliation>
+              </personInfo>
+            </annotator>
+          </annotationInfo>
+          <domainInfo>
+            <domain>law_politics</domain>
+          </domainInfo>
+          <domainInfo>
+            <domain>health</domain>
+          </domainInfo>
+          <domainInfo>
+            <domain>travel</domain>
+          </domainInfo>
+               <creationInfo>
+            <originalSource>
+              <targetResourceNameURI>manually normalized transcripts of European parliamentary sessions</targetResourceNameURI>
+            </originalSource>
+            <originalSource>
+              <targetResourceNameURI>articles from the Greek Wikipedia</targetResourceNameURI>
+            </originalSource>
+            <originalSource>
+              <targetResourceNameURI>web documents pertaining the politics, health, and travel domains</targetResourceNameURI>
+            </originalSource>
+            <creationMode>mixed</creationMode>
+            <creationModeDetails />
+          </creationInfo>
+        </corpusTextInfo>
+      </corpusMediaType>
+    </corpusInfo>
+  </resourceComponentType>
+</resourceInfo>
