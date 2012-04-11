@@ -4,6 +4,9 @@
 {% block title %}{{ title }} | {% trans 'META-SHARE backend' %}{% endblock %}
 {% block extrastyle %}
 <link rel="stylesheet" type="text/css" href="{% load adminmedia %}{% admin_media_prefix %}css/metashare-editor.css" />
+<script type="text/javascript" src="{% admin_media_prefix %}js/jquery.min.js"></script>
+<script type="text/javascript" src="{% admin_media_prefix %}js/jquery.init.js"></script>
+<script type="text/javascript" src="{% admin_media_prefix %}js/metashare-editor.js"></script>
 {% endblock %}
 {% block branding %}
 <h1 id="site-name">META-SHARE backend for resource providers</h1>
@@ -11,9 +14,17 @@
 
 {% block nav-global %}
 <div id="editornavi">
-<ul>
+<!-- drop-down menu created with http://javascript-array.com/scripts/jquery_simple_drop_down_menu/ -->
+<ul id="jsddm">
         <li title="Upload one or more metasources"><a href="{% url editor:upload_xml %}">Upload</a></li>
-        <li title="Share/create Corpora, Licenses, Tools and more"><a href="{% url editor:repository_resourceinfotype_model_add %}">Share/Create</a></li>
+        <li title="Share/create Corpora, Licenses, Tools and more"><a href="#">Share/Create</a>
+          <ul>
+            <li><a href="{% url editor:repository_resourceinfotype_model_add %}">Resource</a></li>
+            <li><a href="{% url editor:repository_personinfotype_model_add %}">Person</a></li>
+            <li><a href="{% url editor:repository_organizationinfotype_model_add %}">Organization</a></li>
+            <li><a href="{% url editor:repository_projectinfotype_model_add %}">Project</a></li>
+          </ul>
+        </li>
         <li title="Remove, save or publish on the archive"><a href="{% url editor:repository_resourceinfotype_model_myresources %}">My Resources</a></li>
         <li title="Enrich existing metasources"><a href="{% url editor:repository_resourceinfotype_model_changelist %}">Update</a></li>
         <li title="Mailing lists, wiki, and more"><a href="http://metashare.ilsp.gr/forum">Community</a></li>
