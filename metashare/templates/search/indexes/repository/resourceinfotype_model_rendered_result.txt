@@ -4,6 +4,7 @@
 <th style="text-align:left;{% if not object.storage_object.published %} font-style:italic;{% endif %}">
   <a href="{{ object.get_absolute_url }}">{{ object.identificationInfo.resourceName.0 }}</a><br/>
   {% if object.identificationInfo.resourceShortName.0 %}{{ object.identificationInfo.resourceShortName.0 }}{% endif %}
+{% ifnotequal object.identificationInfo.description.0 "METASHARE_NULL" %}<div id='desc' style='display:none;'>{{ object.identificationInfo.description.0 }}</div>{% endifnotequal %}
 </th>
 
 <td style="text-align:left;{% if not object.storage_object.published %} font-style:italic;{% endif %}">
@@ -15,6 +16,11 @@
 </td>
 
 <td style="text-align:left;{% if not object.storage_object.published %} font-style:italic;{% endif %}">
-  {% resource_languages object.resourceComponentType.as_subclass %}
+  {% resource_languages object.resourceComponentType.as_subclass %}  
 </td>
 
+<script>
+	$("th").each(function(){	 
+			$(this).children("a").attr('title', $(this).children('div#desc').html());			
+	});	
+</script>
