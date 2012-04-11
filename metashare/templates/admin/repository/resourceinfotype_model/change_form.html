@@ -139,13 +139,10 @@
 	</script>
 	
 	<script>	
-	//for text fields
-		//$('fieldset .module div div ul li input').change(textfield);
-		//for calendar
+		//for text fields and calendar
 		$('div.form-row.errors div input').change(textfield);
 		//for related-widget-wrapper
-		$("div.field-box.errors input.related-widget-wrapper").change(oneToOne);
-		
+		$("div.field-box.errors input.related-widget-wrapper").change(oneToOne);		
 		
 		 function textfield() {
 			 var input_value = $(this).attr('value');			 
@@ -170,10 +167,6 @@
 		$("div.form-row div input").each(function() { 
 			$(this).trigger('change');
 		});
-		
-		//$("div.field-box.errors select").children().each(function() { 
-		//	$(this).trigger('change');
-		//});		
 			
 		//for calendar when user clicks on calendar options 
 		$('div.form-row.errors div span.datetimeshortcuts a').live("click",function(){
@@ -182,24 +175,10 @@
 			$(this).parents('div').removeClass("errors");
 		});
 		
-		//for drop-down menus
-	//	$("div.field-box.errors select").children().change(function() {
-	//		alert('aa');
-	//	});		
-
 		//related-widget-wrapper
-		$("div.field-box.errors input.related-widget-wrapper").each(function() { 
-			
+		$("div.field-box.errors input.related-widget-wrapper").each(function() { 			
 			$(this).trigger('change');
-		});		
-		
-		
-		
-		$(document).on("change", "div.errors select", function() {		  
-  			alert("aaa");
-		});
-		
-		
+		});	
 		
 		//for many-to-many widgets (errors disappear only when you click directly on selector-chosen field)
 		$(document).on("change", "div.form-row div.errors div.selector-chosen select.filtered", function() {		  
@@ -207,22 +186,21 @@
 					$(this).parents('div').siblings(".errorlist").remove();				
 					$(this).parents('div').removeClass("errors");
 			}
-		});
-		//for one-to-one widgets
-		//$(document).on("each", "div.field-box.errors", function() {
-		//$("div.field-box.errors").each(function() { 
-		//	alert($(this).children);
-		//	if( $(this).children('a[title="Edit related model"]') ){
-		//		alert("qqq");
-		//		$(this).parents('div').siblings(".errorlist").remove();				
-		//		$(this).parents('div').removeClass("errors");
-		//	}
-		//});
-			
-		$("div.form-row distributionInfo div.field-box.errors").each( function() {			
-		  	if( $(this).children('a[title="Edit related model"]') )
-  				alert("edit");
-		});
+		});	
+		
+		//for drop-down menus
+		//	$("div.field-box.errors select").change(function() {
+		//		alert('alert');
+		//	});			
+				
+		//$("div.field-box.errors select").children().each(function() { 
+		//	$(this).trigger('change');
+		//});		
+		
+		//	$(document).on("change", "div.errors select", function() {		  
+	  	//		alert("alert");
+		//	});
+		
 	</script>
 	
 	<script>		
