@@ -821,11 +821,44 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         """
         Collect the data to filter the resources on Best Practices
         """
-        tool_service = obj.resourceComponentType.as_subclass()
-        if isinstance(tool_service, toolServiceInfoType_model) \
-                and tool_service.inputInfo:
-            return tool_service.inputInfo \
-                    .get_conformanceToStandardsBestPractices_display_list()
+        result = []
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        if isinstance(corpus_media, corpusInfoType_model):
+            media_type = corpus_media.corpusMediaType
+            for corpus_info in media_type.corpustextinfotype_model_set.all():
+                for annotation_info in corpus_info.annotationInfo.all():
+                    result.extend(annotation_info.get_conformanceToStandardsBestPractices_display_list())
+            if media_type.corpusAudioInfo:
+                for annotation_info in media_type.corpusAudioInfo.annotationInfo.all():
+                    result.extend(annotation_info.get_conformanceToStandardsBestPractices_display_list())
+            for corpus_info in media_type.corpusvideoinfotype_model_set.all():
+                for annotation_info in corpus_info.annotationInfo.all():
+                    result.extend(annotation_info.get_conformanceToStandardsBestPractices_display_list())
+            if media_type.corpusTextNgramInfo:
+                for annotation_info in media_type.corpusTextNgramInfo.annotationInfo.all():
+                    result.extend(annotation_info.get_conformanceToStandardsBestPractices_display_list())
+            if media_type.corpusImageInfo:
+                for annotation_info in media_type.corpusImageInfo.annotationInfo.all():
+                    result.extend(annotation_info.get_conformanceToStandardsBestPractices_display_list())
+            if media_type.corpusTextNumericalInfo:
+                for annotation_info in media_type.corpusTextNumericalInfo.annotationInfo.all():
+                    result.extend(annotation_info.get_conformanceToStandardsBestPractices_display_list())
+
+        elif isinstance(corpus_media, languageDescriptionInfoType_model):
+            if corpus_media.languageDescriptionEncodingInfo:
+                result.extend(corpus_media.languageDescriptionEncodingInfo \
+                  .get_conformanceToStandardsBestPractices_display_list())
+
+        elif isinstance(corpus_media, toolServiceInfoType_model):
+            if corpus_media.inputInfo:
+                result.extend(corpus_media.inputInfo \
+                  .get_conformanceToStandardsBestPractices_display_list())
+            if corpus_media.outputInfo:
+                result.extend(corpus_media.outputInfo \
+                  .get_conformanceToStandardsBestPractices_display_list())
+
+        return result
 
     def prepare_domainFilter(self, obj):
         """
