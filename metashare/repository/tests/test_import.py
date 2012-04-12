@@ -20,19 +20,48 @@ class ImportTest(TestCase):
         """
         resourceInfoType_model.objects.all().delete()
     
-    if False:
-        def testImportELRA(self):      
-            """
-            run tests on ELRA resources
-            """
-            _path = '{0}/../misc/testdata/ELRAResources/'.format(ROOT_PATH)
+
+    def test_iport_ELRA(self):      
+        """
+        run tests on ELRA resources
+        """
+        _path = '{0}/repository/fixtures/ELRA/'.format(ROOT_PATH)
+        
+        _files = os.listdir(_path)
+        for _file in _files:
+            _currfile =  "%s%s" % (_path, _file)
+            successes, failures = test_utils.import_xml_or_zip(_currfile)
+            self.assertEqual(1, len(successes), 'Could not import file {}'.format(_currfile))
+            self.assertEqual(0, len(failures), 'Could not import file {}'.format(_currfile))
             
-            _files = os.listdir(_path)
-            for _file in _files:
-                _currfile =  "%s%s" % (_path, _file)
-                successes, failures = test_utils.import_xml_or_zip(_currfile)
-                self.assertEqual(1, len(successes), 'Could not import file {}'.format(_currfile))
-                self.assertEqual(0, len(failures), 'Could not import file {}'.format(_currfile))
+    def test_import_PSP(self):
+        """
+        Run tests on PSP resources
+        Representative xml files from all PSP providers have been taken
+        """
+        _path = '{0}/repository/fixtures/PSP/'.format(ROOT_PATH)
+        
+        _files = os.listdir(_path)
+        for _file in _files:
+            _currfile =  "%s%s" % (_path, _file)
+            successes, failures = test_utils.import_xml_or_zip(_currfile)
+            self.assertEqual(1, len(successes), 'Could not import file {}'.format(_currfile))
+            self.assertEqual(0, len(failures), 'Could not import file {}'.format(_currfile))
+
+    def test_import_PSP(self):
+        """
+        Run tests on META-SHARE resources
+        Representative xml files from all META-SHARE partners have been taken
+        """
+        _path = '{0}/repository/fixtures/META-SHARE/'.format(ROOT_PATH)
+        
+        _files = os.listdir(_path)
+        for _file in _files:
+            _currfile =  "%s%s" % (_path, _file)
+            successes, failures = test_utils.import_xml_or_zip(_currfile)
+            self.assertEqual(1, len(successes), 'Could not import file {}'.format(_currfile))
+            self.assertEqual(0, len(failures), 'Could not import file {}'.format(_currfile))        
+            
             
     def test_import_xml(self):
         _currfile = '{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)

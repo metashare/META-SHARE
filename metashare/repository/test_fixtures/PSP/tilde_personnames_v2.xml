@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: tilde_personnames.xml 42662 2011-12-01 14:33:59Z martha $ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Multilingual dictionary of person names</resourceName>
+      <description>The multilingual online dictionary of person names contains person names in Czech, French, Italian and German with their translations into Latvian. For each language most popular first names, surnames as well as names of historically important persons are included.</description>
+      <url> http://www.letonika.lv/personvardi</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability>
+      <licenceInfo>
+         <licence>proprietary</licence>
+         <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
+         <distributionRightsHolder>
+            <organizationInfo>
+               <organizationName>Tilde</organizationName>
+               <communicationInfo>
+                  <email>roberts.rozis@tilde.lv</email>
+               </communicationInfo>
+            </organizationInfo>
+         </distributionRightsHolder>
+      </licenceInfo>
+      <iprHolder>
+         <personInfo>
+            <surname>Rozis</surname>
+            <givenName>Roberts</givenName>
+            <communicationInfo>
+               <email>roberts.rozis@tilde.lv</email>
+            </communicationInfo>
+            <affiliation>
+               <organizationName>Tilde and authors</organizationName>
+               <communicationInfo>
+                  <email>roberts.rozis@tilde.lv</email>
+               </communicationInfo>
+     								</affiliation>
+         </personInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Rozis</surname>
+      <givenName>Roberts</givenName>
+      <communicationInfo>
+         <email>roberts.rozis@tilde.lv</email>
+      </communicationInfo>
+   </contactPerson>
+   <contactPerson>
+      <surname>Vasiļjeva</surname>
+      <givenName>Anita</givenName>
+      <communicationInfo>
+         <email>anita.vasiljeva@tilde.lv</email>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-12-31</metadataCreationDate>
+   </metadataInfo>
+   <usageInfo>
+      <foreseenUseInfo>
+         <foreseenUse>nlpApplications</foreseenUse>
+      
+      
+         <useNLPSpecific>machineTranslation</useNLPSpecific>
+      </foreseenUseInfo>
+      <actualUseInfo>
+         <actualUse>humanUse</actualUse>
+      </actualUseInfo>
+  </usageInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>computationalLexicon</lexicalConceptualResourceType>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>multilingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+      
+                  <languageId>lv</languageId>
+                  <languageName>Latvian</languageName>
+               </languageInfo>
+               <languageInfo>
+      
+                  <languageId>cz</languageId>
+                  <languageName>Czech</languageName>
+               </languageInfo>
+               <languageInfo>
+      
+                  <languageId>fr</languageId>
+                  <languageName>French</languageName>
+               </languageInfo>
+               <languageInfo>
+      
+                  <languageId>it</languageId>
+                  <languageName>Italian</languageName>
+               </languageInfo>
+               <languageInfo>
+      
+                  <languageId>de</languageId>
+                  <languageName>German</languageName>
+               </languageInfo>
+                  <modalityInfo>
+                     <modalityType>writtenLanguage</modalityType>
+                  </modalityInfo>
+               <sizeInfo>
+                  <size>4000</size>
+      
+                  <sizeUnit>entries</sizeUnit>
+               </sizeInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>
