@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Spanish-Portuguese LMF Apertium Bilingual dictionary</resourceName>
+      <description>This is the LMF version of the Apertium bilingual dictionary for Spanish and Portuguese languages.       Bilingual LMF dictionaries were generated from Apertium bilingual dix files. For each Apertium bilingual correspondence,       the corresponding source and target monolingual entries (LexicalEntry) were generated in addition to the bilingual        correspondence (SenseAxis) element. Apertium is a free/open-source machine translation platform, initially aimed at       related-language pairs but recently expanded to deal with more divergent language pairs (such as English-Catalan).       The platform provides: a language-independent machine translation engine; tools to manage the linguistic data necessary       to build a machine translation system for a given language pair and linguistic data for a growing number of language pairs.</description>
+      <resourceShortName>LMF Apertium Es-Pt</resourceShortName>
+      <url>http://www.uila.upf.edu</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+      <identifier>fbb2df8e1c834161bed904e8a6e21c2f</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability>
+      <licenceInfo>
+         <licence>GPL</licence>
+         <restrictionsOfUse>other</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <downloadLocation>http://www..com/</downloadLocation>
+         <distributionRightsHolder>
+              <organizationInfo>
+                <organizationName>Institut Universitari Lingüística Aplicada - UPF</organizationName>
+                <organizationShortName>IULA - UPF</organizationShortName>
+                <departmentName>Institut Universitari Lingüística Aplicada (UPF)</departmentName>
+                  <communicationInfo>
+                  <email>jorge.vivaldi@upf.edu</email>
+                  <url>http://www.iula.upf.edu/</url>
+                  <address>Roc Boronat, 138</address>
+                  <zipCode>08018</zipCode>
+                  <city>Barcelona</city>
+                  <country>Spain</country>
+                  <telephoneNumber>+34 93 5421207</telephoneNumber>
+                  <faxNumber>+34 93 5422321</faxNumber>
+               </communicationInfo>
+              </organizationInfo>
+          </distributionRightsHolder>
+      </licenceInfo>
+      <iprHolder>
+          <organizationInfo>
+            <organizationName>Institut Universitari Lingüística Aplicada - UPF</organizationName>
+            <organizationShortName>IULA - UPF</organizationShortName>
+            <departmentName>Institut Universitari Lingüística Aplicada (UPF)</departmentName>
+              <communicationInfo>
+               <email>jorge.vivaldi@upf.edu</email>
+               <url>http://www.iula.upf.edu/</url>
+               <address>Roc Boronat, 138</address>
+               <zipCode>08018</zipCode>
+               <city>Barcelona</city>
+               <country>Spain</country>
+               <telephoneNumber>+34 93 5421207</telephoneNumber>
+               <faxNumber>+34 93 5422321</faxNumber>
+            </communicationInfo>
+          </organizationInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Vivaldi</surname>
+      <givenName>Jorge</givenName>
+      <communicationInfo>
+         <email>jorge.vivaldi@upf.edu</email>
+         <address>Roc Boronat, 138</address>
+         <zipCode>08018</zipCode>
+         <city>Barcelona</city>
+         <country>Spain</country>
+      </communicationInfo>
+      <affiliation>
+         <organizationName>Institut Universitari Lingüística Aplicada (Universitat Pompeu Fabra)</organizationName>
+         <organizationShortName>IULA UPF</organizationShortName>
+         <departmentName>Institut Universitari Lingüística Aplicada</departmentName>
+         <communicationInfo>
+            <email>jorge.vivaldi@upf.edu</email>
+            <url>http://www.iula.upf.edu/</url>
+            <address>Roc Boronat, 138</address>
+            <zipCode>08018</zipCode>
+            <city>Barcelona</city>
+            <country>Spain</country>
+            <telephoneNumber>+34 93 5421207</telephoneNumber>
+            <faxNumber>+34 93 5422321</faxNumber>
+         </communicationInfo>
+          
+      </affiliation>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-10-10</metadataCreationDate>
+      <metadataCreator>
+         <surname>Villegas</surname>
+         <givenName>Marta</givenName>
+         <communicationInfo>
+            <email>jorge.vivaldi@upf.edu</email>
+            <url>http://www.iula.upf.edu/</url>
+            <address>Roc Boronat, 138</address>
+            <zipCode>08018</zipCode>
+            <city>Barcelona</city>
+            <country>Spain</country>
+            <telephoneNumber>+34 93 5421207</telephoneNumber>
+            <faxNumber>+34 93 5422321</faxNumber>
+         </communicationInfo>
+         <affiliation>
+            <organizationName>Institut Universitari Lingüística Aplicada (Universitat Pompeu Fabra)</organizationName>
+            <organizationShortName>IULA UPF</organizationShortName>
+            <departmentName>Institut Universitari Lingüística Aplicada</departmentName>
+            <communicationInfo>
+               <email>jorge.vivaldi@upf.edu</email>
+               <url>http://www.iula.upf.edu/</url>
+               <address>Roc Boronat, 138</address>
+               <zipCode>08018</zipCode>
+               <city>Barcelona</city>
+               <country>Spain</country>
+               <telephoneNumber>+34 93 5421207</telephoneNumber>
+               <faxNumber>+34 93 5422321</faxNumber>
+            </communicationInfo>
+              
+          </affiliation>
+      </metadataCreator>
+      <source>METASHARE</source>
+      <originalMetadataSchema>v1.1</originalMetadataSchema>
+      <metadataLanguageId>en-US</metadataLanguageId>
+      <metadataLastDateUpdated>2011-10-30</metadataLastDateUpdated>
+   </metadataInfo>
+   <versionInfo>
+      <version>1</version>
+      <lastDateUpdated>2011-10-30</lastDateUpdated>
+    
+  </versionInfo>
+   <validationInfo>
+      <validated>true</validated>
+      <validationType>formal</validationType>
+      <validationMode>automatic</validationMode>
+      <validationModeDetails>The lexicon validates against the LMF DTD v.16</validationModeDetails>
+   </validationInfo>
+   <resourceDocumentationInfo>
+      <documentation>
+         <documentUnstructured>http://xixona.dlsi.ua.es/~fran/apertium2-documentation.pdf</documentUnstructured>
+      </documentation>
+      <documentation>
+         <documentUnstructured>Forcada,M.L., Ivanov, B., Ortiz, S., Pérez, J.A., Ramírez, G., Sánchez, F., Armentano, C., Montava, M.A., Tyers, F.M., (2010). 'Documentation of the Open Source Shallow-Transfer Machine Translation Platform Apertium'. Departament de Llenguatges i Sistemes Informàtics Universitat d'Alacant, March 2010.</documentUnstructured>
+      </documentation>
+   </resourceDocumentationInfo>
+   <resourceCreationInfo>
+      <resourceCreator>
+          <organizationInfo>
+            <organizationName>Institut Universitari Lingüística Aplicada - UPF</organizationName>
+            <organizationShortName>IULA - UPF</organizationShortName>
+            <departmentName>Institut Universitari Lingüística Aplicada (UPF)</departmentName>
+              <communicationInfo>
+               <email>jorge.vivaldi@upf.edu</email>
+               <url>http://www.iula.upf.edu/</url>
+               <address>Roc Boronat, 138</address>
+               <zipCode>08018</zipCode>
+               <city>Barcelona</city>
+               <country>Spain</country>
+               <telephoneNumber>+34 93 5421207</telephoneNumber>
+               <faxNumber>+34 93 5422321</faxNumber>
+            </communicationInfo>
+          </organizationInfo>
+      </resourceCreator>
+      <fundingProject>
+         <projectName>METANET4U</projectName>
+         <projectShortName>METANET4U</projectShortName>
+         <url>http://metanet4u.eu/</url>
+         <fundingType>ownFunds</fundingType>
+         <fundingType>euFunds</fundingType>
+         <funder>UPF</funder>
+         <funder>EU</funder>
+         <fundingCountry>Spain</fundingCountry>
+      </fundingProject>
+      <creationStartDate>2011-10-10</creationStartDate>
+      <creationEndDate>2011-10-30</creationEndDate>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+         <lexicalConceptualResourceEncodingInfo>
+            <encodingLevel>morphology</encodingLevel>
+            <linguisticInformation>lemma</linguisticInformation>
+            <linguisticInformation>semantics-CrossReferences</linguisticInformation>
+            <linguisticInformation>partOfSpeech</linguisticInformation>
+            <conformanceToStandardsBestPractices>LMF</conformanceToStandardsBestPractices>
+         </lexicalConceptualResourceEncodingInfo>
+         <creationInfo>
+            <originalSource>
+               <targetResourceNameURI>Apertium Bilingual dictionary as described in http://xixona.dlsi.ua.es/~fran/apertium2-documentation.pdf</targetResourceNameURI>
+            </originalSource>
+            <creationMode>automatic</creationMode>
+            <creationModeDetails>This lexicon was created with the Apertium2LMP.xsl</creationModeDetails>
+            <creationTool>
+               <targetResourceNameURI>Apertium2LMP.xsl</targetResourceNameURI>
+            </creationTool>
+         </creationInfo>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>bilingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>N/A</languageId>
+                  <languageName>Spanish</languageName>
+               </languageInfo>
+               <languageInfo>
+                  <languageId>N/A</languageId>
+                  <languageName>Portuguese</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>13332</size>
+        
+                  <sizeUnit>entries</sizeUnit>
+               </sizeInfo>
+               <textFormatInfo>
+                  <mimeType>text/xml</mimeType>
+               </textFormatInfo>
+               <characterEncodingInfo>
+                  <characterEncoding>UTF-8</characterEncoding>
+               </characterEncodingInfo>
+               <domainInfo>
+                  <domain>general</domain>
+               </domainInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>

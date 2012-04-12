@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Heart of Gold</resourceName>
+      <description>XML-based middleware for the integration of shallow and deep natural language processing components.</description>
+      <resourceShortName>HoG</resourceShortName>
+      <url>http://heartofgold.opendfki.de/</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability><licenceInfo>
+         <licence>LGPL</licence>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Schδfer</surname>
+      <givenName>Ulrich</givenName><communicationInfo><email>xxx@example.com</email></communicationInfo>
+   </contactPerson>
+   <metadataInfo><metadataCreationDate>2011-12-31</metadataCreationDate></metadataInfo>
+	<resourceComponentType>
+		<toolServiceInfo>
+			<resourceType>toolService</resourceType>
+			<toolServiceType>other</toolServiceType>
+			<languageDependent>False</languageDependent>
+			</toolServiceInfo>
+	</resourceComponentType>
+</resourceInfo>

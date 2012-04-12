@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: UIB-M10-12.xml 42662 2011-12-01 14:33:59Z martha $ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName> Parallel Corpus of documents from the Technical Regulations Information System for German-Spanish</resourceName>
+      <description>Specialized parallel corpus Spanish-German (Spanish-Austrian and Spanish-German), texts from the European Commission between 1990-2010. The texts are technical regulations in a variety of domains. To be sentence aligned. The current version 0.1 contains the files for 1999-2000 in the domain B00: Construction (51 files; 16731 sentences)</description>
+      <resourceShortName>TRIS Spanish-German parallel corpus</resourceShortName>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>CLARIN_RES</licence>
+         <restrictionsOfUse>other</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+      </licenceInfo>
+      <iprHolder>
+         <personInfo>
+            <surname>Parra Escartín</surname>
+            <givenName>Carla</givenName>
+            <communicationInfo>
+               <email>carla.parra@uib.no</email>
+            </communicationInfo>
+            <affiliation>
+               <organizationName>University of Bergen</organizationName>
+               <organizationShortName>UiB</organizationShortName>
+               <communicationInfo>
+                  <email>clarin@uib.no</email>
+               </communicationInfo>
+            </affiliation>
+         </personInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Parra Escartín</surname>
+      <givenName>Carla</givenName>
+      <communicationInfo>
+         <email>carla.parra@uib.no</email>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-30</metadataCreationDate>
+      <metadataCreator>
+         <surname>Parra Escartín</surname>
+         <givenName>Carla</givenName>
+         <communicationInfo>
+            <email>carla.parra@uib.no</email>
+         </communicationInfo>
+         <affiliation>
+            <organizationName>The University of Bergen</organizationName>
+            <communicationInfo>
+               <email>clarin@uib.no</email>
+            </communicationInfo>
+         </affiliation>
+      </metadataCreator>
+   </metadataInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>multilingual</lingualityType> 
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>spa;ger;</languageId>
+                  <languageName>Spanish (Spain); German (Germany); German (Austria)</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>16731</size>
+      
+                  <sizeUnit>sentences</sizeUnit>
+               </sizeInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Shallow Processing with Unification and Typed Feature Structures</resourceName>
+      <description>A platform for development of multilingual shallow text processing and information extraction systems.</description>
+      <resourceShortName>SProUT</resourceShortName>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+				<availability>underNegotiation</availability>
+			</distributionInfo>
+			<contactPerson>
+				<surname>n/a</surname>
+				<communicationInfo>
+					<email>xxx@example.com</email>
+				</communicationInfo>
+			</contactPerson>
+   <metadataInfo><metadataCreationDate>2011-12-31</metadataCreationDate></metadataInfo>
+   <usageInfo>
+		    <foreseenUseInfo>
+			      <foreseenUse>nlpApplications</foreseenUse>
+		    </foreseenUseInfo>
+	  </usageInfo>
+	<resourceComponentType>
+		<toolServiceInfo>
+			<resourceType>toolService</resourceType>
+			<toolServiceType>other</toolServiceType>
+			<languageDependent>False</languageDependent>
+			</toolServiceInfo>
+	</resourceComponentType>
+</resourceInfo>

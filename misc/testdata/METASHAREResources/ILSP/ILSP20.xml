@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Bilingual Greek-English Comparable Corpus of News Texts</resourceName>
+      <description>This is a bilingual (Greek - English) Comparable corpus of News texts that pertain to the following domains: Technology, Politics, Entertainment (Culture, Sports), News (Terrorism, Economy), and Science (Physics, Health). The corpus amounts to approximately 3,5M words collected over various web sites. The texts have been classified according to selected elements of the IPTC subject reference system and, consequently, vertical clustering and horizontal mapping have been performed.</description>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>proprietary</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Giouli</surname>
+      <givenName>Voula</givenName>
+      <communicationInfo>
+         <email>voula@ilsp.gr</email>
+      </communicationInfo>
+   </contactPerson>
+   <contactPerson>
+      <surname>Glaros</surname>
+      <givenName>Nikos</givenName>
+      <communicationInfo>
+         <email>nglaros@ilsp.gr</email>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2012-02-02</metadataCreationDate>
+    <source>META</source>
+   </metadataInfo>
+   <usageInfo>
+		    <foreseenUseInfo>
+			      <foreseenUse>nlpApplications</foreseenUse>
+		    </foreseenUseInfo>
+		    <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+      </actualUseInfo>
+	  </usageInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>bilingual</lingualityType>
+			               <multilingualityType>comparable</multilingualityType>
+		             </lingualityInfo>
+               <languageInfo>
+			
+			               <languageId>ell</languageId>
+			               <languageName>Modern Greek (1453-)</languageName>
+		             </languageInfo>
+               <languageInfo>
+			
+			               <languageId>eng</languageId>
+			               <languageName>English</languageName>
+		             </languageInfo>
+               <sizeInfo>
+			               <size>3500000</size>
+			
+			               <sizeUnit>words</sizeUnit>
+		             </sizeInfo>
+               <annotationInfo>
+                  <annotationType>alignment</annotationType>
+               </annotationInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>
