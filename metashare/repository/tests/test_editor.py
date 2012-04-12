@@ -242,6 +242,14 @@ class EditorTest(TestCase):
         self.assertContains(response, 'related-widget-wrapper-change-link" id="edit_id_distributionInfo"',
                              msg_prefix='One-to-one field "distributionInfo" not rendered using related widget')
 
+    def test_licenceinfo_inline_is_present(self):
+        client = self.client_with_user_logged_in(self.editor_login)
+        resource = self.import_test_resource()
+        response = client.get('{}repository/distributioninfotype_model/{}/'.format(ADMINROOT, resource.distributionInfo.id))
+        self.assertContains(response, '<div class="inline-group" id="licenceinfotype_model_set-group">',
+                            msg_prefix='expected licence info inline')
+        
+
     def test_one2one_sizepervalidation_is_hidden(self):
         client = self.client_with_user_logged_in(self.editor_login)
         resource = self.import_test_resource()
@@ -265,6 +273,14 @@ class EditorTest(TestCase):
         response = client.get('{}repository/corpustextinfotype_model/{}/'.format(ADMINROOT, corpustextinfo.id))
         self.assertContains(response, 'type="hidden" name="back_to_corpusmediatypetype_model"',
                             msg_prefix='Back reference should have been hidden')
+
+    def test_linguality_inline_is_present(self):
+        client = self.client_with_user_logged_in(self.editor_login)
+        resource = self.import_test_resource()
+        corpustextinfo = resource.resourceComponentType.corpusMediaType.corpustextinfotype_model_set.all()[0]
+        response = client.get('{}repository/corpustextinfotype_model/{}/'.format(ADMINROOT, corpustextinfo.id))
+        self.assertContains(response, '<div class="form-row lingualityType">',
+                            msg_prefix='expected linguality inline')
 
     def test_hidden_field_is_not_referenced_in_fieldset_label(self):
         client = self.client_with_user_logged_in(self.editor_login)

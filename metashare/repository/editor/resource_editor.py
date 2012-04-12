@@ -357,7 +357,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
           context_instance)
 
 
-    def build_fieldsets_from_schema(self, include_inlines=False):
+    def build_fieldsets_from_schema(self, include_inlines=False, inlines=()):
         """
         Builds fieldsets using SchemaModel.get_fields().
         """
@@ -398,17 +398,11 @@ class ResourceModelAdmin(SchemaModelAdmin):
             _visible_content_fields_verbose_names = []
 
             for _field_name in _fields[_field_status]:
-                # Two possible reasons why a field might be encoded as an inline:
-                # - either it's a OneToOneField and we have put 
-                #   it into tht eexclusion list;
-                # - or it's a reverse foreigh key, so it is not a field.
-                # In both cases, we only include it in visible fields if
-                # include_inlines is requested.
                 _is_visible = False
-                if self.is_field(_field_name) and _field_name not in exclusion_list:
+                if self.is_visible_as_normal_field(_field_name, exclusion_list):
                     _is_visible = True
                     _fieldname_to_append = _field_name
-                elif include_inlines:
+                elif self.is_visible_as_inline(_field_name, include_inlines, inlines):
                     _is_visible = True
                     _fieldname_to_append = encode_as_inline(_field_name)
 
