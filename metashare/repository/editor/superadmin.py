@@ -56,16 +56,8 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         self.inlines += tuple(self.get_inline_classes(model, status=REQUIRED) + \
           self.get_inline_classes(model, status=RECOMMENDED) + \
           self.get_inline_classes(model, status=OPTIONAL))
-        # Request all many-to-many fields as extended "horizontal filter" widgets:
-        self.filter_horizontal = []
-        for fld in model.get_many_to_many_fields():
-            has_widget = False
-            if hasattr(self.form, 'Meta'):
-                if hasattr(self.form.Meta, 'widgets'):
-                    if fld in self.form.Meta.widgets:
-                        has_widget = True
-            if not has_widget:
-                self.filter_horizontal.append(fld)
+        # Show m2m fields as horizontal filter widget unless they have a custom widget:
+        self.filter_horizontal = self.list_m2m_fields_without_custom_widget(model)
         super(SchemaModelAdmin, self).__init__(model, admin_site)    
         # Reverse inline code:
         self.no_inlines = self.no_inlines or []

@@ -63,10 +63,17 @@ class RelatedAdminMixin(object):
             widget = HiddenInput(attrs=attrs)
             kwargs['widget'] = widget
 
+    def is_related_widget_appropriate(self, kwargs, formfield):
+        'Determine whether it is appropriate to use a related-widget'
+        if formfield and \
+                isinstance(formfield.widget, admin.widgets.RelatedFieldWidgetWrapper) and \
+                not isinstance(formfield.widget.widget, SelectMultiple) and \
+                not ('widget' in kwargs):
+            return True
+        return False
+
     def use_related_widget_where_appropriate(self, db_field, kwargs, formfield):
-        if (formfield and isinstance(formfield.widget, admin.widgets.RelatedFieldWidgetWrapper) and 
-            not isinstance(formfield.widget.widget, SelectMultiple) and
-            not ('widget' in kwargs)):
+        if self.is_related_widget_appropriate(kwargs, formfield):
             request = kwargs.pop('request', None)
             related_modeladmin = self.admin_site._registry.get(db_field.rel.to)
             can_change_related = bool(related_modeladmin and 
@@ -90,4 +97,14 @@ class RelatedAdminMixin(object):
             (escape(pk_value), escapejs(obj)))
 
 
+
+    def list_m2m_fields_without_custom_widget(self, model):
+        'List those many-to-many fields which do not have a custom widget'
+        h_fields = []
+        for fld in model.get_many_to_many_fields():
+            if hasattr(self.form, 'Meta') and hasattr(self.form.Meta, 'widgets') and fld in self.form.Meta.widgets:
+                pass # field has custom widget, do not include
+            else:
+                h_fields.append(fld)
+        return h_fields
 
