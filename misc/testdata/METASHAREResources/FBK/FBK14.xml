@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>CRIPCO</resourceName>
+      <description>The Cross-document Italian People Coreference (CRIPCO) corpus is a subset of the news stories published by the local newspaper \"L'Adige\" from 1999 to 2006 annotated with information about person cross-document coreference. CRIPCO is used in the NEPS task at EVALITA.</description>
+      <url>http://hlt.fbk.eu/en/CRIPCO/</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>proprietary</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Speranza</surname>
+      <givenName>Manuela</givenName>
+      <communicationInfo>
+         <email>manspera@fbk.eu</email>
+         <address>Fondazione Bruno Kessler Via Sommarive 18</address>
+         <zipCode>38123</zipCode>
+         <city>Trento</city>
+         <country>IT</country>
+         <telephoneNumber>+39 0461314521</telephoneNumber>
+         <faxNumber>+39 0461314591</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo><metadataCreationDate>2011-12-31</metadataCreationDate></metadataInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+            
+                  <languageId>ita</languageId>
+                  <languageName>Italian</languageName>
+               </languageInfo>
+               <sizeInfo>
+																<size>0</size>
+																<sizeUnit>units</sizeUnit>
+															</sizeInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

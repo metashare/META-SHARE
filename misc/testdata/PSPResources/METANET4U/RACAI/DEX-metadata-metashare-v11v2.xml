@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Web Romanian Explanatory Dictionary</resourceName>
+      <description>WEB-DEX is an explanatory dictionary based on the 1996 edition of the standard explanatory dictionary of Romanian published by the Romanian Academy</description>
+      <resourceShortName>WEB-DEX</resourceShortName>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>underNegotiation</licence>
+         <restrictionsOfUse>informLicensor</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Tufiș</surname>
+      <givenName>Dan</givenName>
+      <communicationInfo>
+         <email>tufis@racai.ro</email>
+         <url>http://www.racai.ro/~tufis/</url>
+         <address>Casa Academiei, Calea 13 Septembrie nr. 13, etaj 3, București, România, 050711</address>
+         <zipCode>050711</zipCode>
+         <city>Bucharest</city>
+         <country>Romania</country>
+         <telephoneNumber>0040 21 3188103</telephoneNumber>
+         <faxNumber>0040 21 3188142</faxNumber>
+      </communicationInfo>
+      <position>Director of the Research Institute for Artificial Intelligence, Romanian Academy</position>
+      <affiliation>
+         <organizationName>Research Institute for Artificial Intelligence, Romanian Academy</organizationName>
+         <organizationShortName>RACAI</organizationShortName>
+         <communicationInfo>
+            <email>office@racai.ro</email>
+            <url>http://www.racai.ro/</url>
+            <address>Casa Academiei, Calea 13 Septembrie nr. 13, etaj 3, București, România, 050711</address>
+            <zipCode>050711</zipCode>
+            <city>Bucharest</city>
+            <country>Romania</country>
+            <telephoneNumber>0040 21 3188103</telephoneNumber>
+            <faxNumber>0040 21 3188142</faxNumber>
+         </communicationInfo>
+			
+		    </affiliation>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-29</metadataCreationDate>
+      <source>METANET4U</source>
+   </metadataInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>machineReadableDictionary</lexicalConceptualResourceType>
+         <lexicalConceptualResourceEncodingInfo>
+            <encodingLevel>morphology</encodingLevel>
+            <encodingLevel>semantics</encodingLevel>
+            <linguisticInformation>lemma</linguisticInformation>
+            <linguisticInformation>partOfSpeech</linguisticInformation>
+            <linguisticInformation>definition/gloss</linguisticInformation>
+            <linguisticInformation>usage-Notes</linguisticInformation>
+         </lexicalConceptualResourceEncodingInfo>
+         <creationInfo>
+            <creationMode>manual</creationMode>
+         </creationInfo>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>monolingual</lingualityType>
+			
+		             </lingualityInfo>
+               <languageInfo>
+                  <languageId>ron</languageId>
+                  <languageName>Romanian</languageName>
+               </languageInfo>
+               <modalityInfo>
+                  <modalityType>writtenLanguage</modalityType>
+               </modalityInfo>
+               <sizeInfo>
+			               <size>54222 </size>
+			
+			               <sizeUnit>entries</sizeUnit>
+		             </sizeInfo>
+               <characterEncodingInfo>
+                  <characterEncoding>UTF-8</characterEncoding>
+               </characterEncodingInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>

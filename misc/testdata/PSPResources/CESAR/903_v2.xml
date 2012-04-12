@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Slovak Morphology Database</resourceName>
+      <description>Slovak Morphological Database is a database of lemmas and their inflected wordforms with MSD tags</description>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+      <identifier>903</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability>
+      <licenceInfo>
+         <licence>AGPL</licence>
+         <restrictionsOfUse>other</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>CC_BY-SA</licence>
+         <restrictionsOfUse>other</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>GFDL</licence>
+         <restrictionsOfUse>other</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+      </licenceInfo>
+      <iprHolder>
+			      <organizationInfo>
+				        <organizationName>Ľudovít Štúr Institute of Linguistics</organizationName>
+				        <organizationShortName>JÚĽŠ</organizationShortName>
+				        <departmentName>Slovak National Corpus</departmentName>
+				        <communicationInfo>
+               <email>korpus@korpus.juls.savba.sk</email>
+               <url>http://korpus.juls.savba.sk/</url>
+               <address>Panská 26</address>
+               <zipCode>81364</zipCode>
+               <city>Bratislava</city>
+               <country>Slovakia</country>
+               <telephoneNumber>+421254410307</telephoneNumber>
+            </communicationInfo>
+			      </organizationInfo>
+		    </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Garabík</surname>
+      <givenName>Radovan</givenName>
+      <communicationInfo>
+         <email>radovan.garabik@kassiopeia.juls.savba.sk</email>
+         <address>Panská 26</address>
+         <zipCode>81364</zipCode>
+         <city>Bratislava</city>
+         <country>Slovakia</country>
+         <telephoneNumber>+421254410307</telephoneNumber>
+      </communicationInfo>
+      <position>researcher</position>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-21</metadataCreationDate>
+      <metadataCreator>
+         <surname>Garabík</surname>
+         <givenName>Radovan</givenName>
+         <communicationInfo>
+            <email>radovan.garabik@kassiopeia.juls.savba.sk</email>
+            <address>Panská 26</address>
+            <zipCode>81364</zipCode>
+            <city>Bratislava</city>
+            <country>Slovakia</country>
+            <telephoneNumber>+421254410307</telephoneNumber>
+         </communicationInfo>
+         <position>researcher</position>
+      </metadataCreator>
+      <metadataLanguageId>en</metadataLanguageId>
+      <metadataLastDateUpdated>2011-11-22</metadataLastDateUpdated>
+   </metadataInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>other</lexicalConceptualResourceType>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>monolingual</lingualityType>
+			
+		             </lingualityInfo>
+               <languageInfo>
+                  <languageId>sk</languageId>
+                  <languageName>Slovak</languageName>
+               </languageInfo>
+               <modalityInfo>
+                  <modalityType>writtenLanguage</modalityType>
+               </modalityInfo>
+               <sizeInfo>
+			               <size>2470000</size>
+			
+			               <sizeUnit>entries</sizeUnit>
+		             </sizeInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>

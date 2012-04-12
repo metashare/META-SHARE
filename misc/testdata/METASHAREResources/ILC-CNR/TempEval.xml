@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>TempEval</resourceName>
+      <description>The corpus is composed by 27,152 tokens for training and 4,995 tokens for test. The data are annotated according to the specifications of the semEval 2010 TempEval-2 excercise. The Tempeval2 source data are copyrighted by the various content providers. The annotations are distributed under a Creative Commons Attribution-ShareAlike3.0 Unported License. The data are distributed in two formats: tabbed fields and xml. Detail documentation on the level of annotations is available in the readme file. Official documentation: It-TimeML, TimeML Annotation Guidelines for Italian v. 1.3 </description>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>CC_BY</licence>
+         <restrictionsOfUse>shareAlike</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <downloadLocation>http://langtech1.ilc.cnr.it:8152/fedora/objects/cnr.langres:23/datastreams/ZIP/content</downloadLocation>
+         <executionLocation>http://langtech1.ilc.cnr.it:8152/fedora/objects/cnr.langres:23/datastreams/DC/content</executionLocation>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Caselli</surname>
+      <givenName>Tommaso</givenName>
+      <communicationInfo>
+         <email>tommaso.caselli@ilc.cnr.it</email>
+         <address>Area della Ricerca del CNR - Via Giuseppe Moruzzi N° 1</address>
+         <zipCode>56124</zipCode>
+         <city>Pisa</city>
+         <country>IT</country>
+         <telephoneNumber>+39 0503152849</telephoneNumber>
+         <faxNumber>+39 0503152849</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo><metadataCreationDate>2011-12-31</metadataCreationDate></metadataInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>ita</languageId>
+                  <languageName>Italian</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>30000</size>
+            
+                  <sizeUnit>tokens</sizeUnit>
+               </sizeInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>
