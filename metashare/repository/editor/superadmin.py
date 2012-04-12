@@ -67,7 +67,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             if not has_widget:
                 self.filter_horizontal.append(fld)
         super(SchemaModelAdmin, self).__init__(model, admin_site)    
-        # Revers inline code:
+        # Reverse inline code:
         self.no_inlines = self.no_inlines or []
         self.exclude = self.exclude or []
         # Prepare inlines for the required one2one fields:
