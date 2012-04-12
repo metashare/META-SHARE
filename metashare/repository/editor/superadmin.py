@@ -48,6 +48,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
     class Media:
         js = (settings.MEDIA_URL + 'js/jquery-1.7.1.min.js',
               settings.MEDIA_URL + 'js/addCollapseToAllStackedInlines.js',
+              settings.MEDIA_URL + 'js/jquery-ui.min.js',
               settings.ADMIN_MEDIA_PREFIX + 'js/collapse.min.js',)
 
     def __init__(self, model, admin_site):
@@ -56,7 +57,15 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
           self.get_inline_classes(model, status=RECOMMENDED) + \
           self.get_inline_classes(model, status=OPTIONAL))
         # Request all many-to-many fields as extended "horizontal filter" widgets:
-        self.filter_horizontal = model.get_many_to_many_fields()
+        self.filter_horizontal = []
+        for fld in model.get_many_to_many_fields():
+            has_widget = False
+            if hasattr(self.form, 'Meta'):
+                if hasattr(self.form.Meta, 'widgets'):
+                    if fld in self.form.Meta.widgets:
+                        has_widget = True
+            if not has_widget:
+                self.filter_horizontal.append(fld)
         super(SchemaModelAdmin, self).__init__(model, admin_site)    
         # Revers inline code:
         self.no_inlines = self.no_inlines or []
