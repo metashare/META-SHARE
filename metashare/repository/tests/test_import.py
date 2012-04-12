@@ -23,7 +23,7 @@ class ImportTest(TestCase):
 
     def test_iport_ELRA(self):      
         """
-        run tests on ELRA resources
+        Run tests on ELRA resources
         """
         _path = '{0}/repository/fixtures/ELRA/'.format(ROOT_PATH)
         
