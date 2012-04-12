@@ -27,7 +27,7 @@ class ImportTest(TestCase):
 			Run tests on ELRA resources
 			Representative xml files have been taken
 			"""
-			_path = '{0}/repository/fixtures/ELRA/'.format(ROOT_PATH)
+			_path = '{0}/repository/test_fixtures/ELRA/'.format(ROOT_PATH)
 			
 			_files = os.listdir(_path)
 			for _file in _files:
@@ -41,7 +41,7 @@ class ImportTest(TestCase):
         Run tests on PSP resources
         Representative xml files from all PSP providers have been taken
         """
-        _path = '{0}/repository/fixtures/PSP/'.format(ROOT_PATH)
+        _path = '{0}/repository/test_fixtures/PSP/'.format(ROOT_PATH)
         
         _files = os.listdir(_path)
         for _file in _files:
@@ -55,7 +55,7 @@ class ImportTest(TestCase):
         Run tests on META-SHARE resources
         Representative xml files from all META-SHARE partners have been taken
         """
-        _path = '{0}/repository/fixtures/META-SHARE/'.format(ROOT_PATH)
+        _path = '{0}/repository/test_fixtures/META-SHARE/'.format(ROOT_PATH)
         
         _files = os.listdir(_path)
         for _file in _files:
