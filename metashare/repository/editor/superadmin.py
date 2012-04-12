@@ -58,7 +58,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         # Request all many-to-many fields as extended "horizontal filter" widgets:
         self.filter_horizontal = model.get_many_to_many_fields()
         super(SchemaModelAdmin, self).__init__(model, admin_site)    
-        # Revers inline code:
+        # Reverse inline code:
         self.no_inlines = self.no_inlines or []
         self.exclude = self.exclude or []
         # Prepare inlines for the required one2one fields:

@@ -46,12 +46,10 @@ class GenericTabbedAdmin(SchemaModelAdmin):
     show_tabbed_fieldsets = True
 
 class LexicalConceptualResourceInfoAdmin(SchemaModelAdmin):
-    hidden_fields = ('lexicalConceptualResourceMediaType', )
     readonly_fields = ('lexicalConceptualResourceMediaType', )
     show_tabbed_fieldsets = True
 
 class LanguageDescriptionInfoAdmin(SchemaModelAdmin):
-    hidden_fields = ('languageDescriptionMediaType', )
     readonly_fields = ('languageDescriptionMediaType', )
     show_tabbed_fieldsets = True
 
@@ -70,8 +68,8 @@ class CorpusAudioModelAdmin(SchemaModelAdmin):
         except:
             pass
         
-    def build_fieldsets_from_schema(self, include_inlines=False):
-        fieldsets = super(CorpusAudioModelAdmin, self).build_fieldsets_from_schema(include_inlines)
+    def build_fieldsets_from_schema(self, include_inlines=False, inlines=()):
+        fieldsets = super(CorpusAudioModelAdmin, self).build_fieldsets_from_schema(include_inlines, inlines)
         for fieldset in fieldsets:
             # name = fieldset[0]
             values = fieldset[1]

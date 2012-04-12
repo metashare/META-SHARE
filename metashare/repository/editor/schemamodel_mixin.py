@@ -6,15 +6,14 @@ from metashare.repository.supermodel import SchemaModel
 from metashare.repository.editor.editorutils import encode_as_inline
 
 
-
 class SchemaModelLookup(object):
     show_tabbed_fieldsets = False
     
     def is_field(self, name):
-        return not name.endswith('_set')
+        return not self.is_inline(name)
     
     def is_inline(self, name):
-        return not self.is_field(name)
+        return name.endswith('_set')
 
 
     def is_required_field(self, name):
@@ -26,7 +25,13 @@ class SchemaModelLookup(object):
         return name in _fields['required']
 
 
-    def build_fieldsets_from_schema_plain(self, include_inlines=False):
+    def is_visible_as_normal_field(self, field_name, exclusion_list):
+        return self.is_field(field_name) and field_name not in exclusion_list
+    
+    def is_visible_as_inline(self, field_name, include_inlines, inlines):
+        return include_inlines and (field_name in inlines or self.is_inline(field_name))
+
+    def build_fieldsets_from_schema_plain(self, include_inlines=False, inlines=()):
         """
         Builds fieldsets using SchemaModel.get_fields().
         """
@@ -56,30 +61,17 @@ class SchemaModelLookup(object):
         _visible_fields = []
         
         for _field_name in _fields:
-            if _field_name in exclusion_list:
-                continue
-            # Two possible reasons why a field might be encoded as an inline:
-            # - either it's a OneToOneField and we have put 
-            #   it into tht eexclusion list;
-            # - or it's a reverse foreigh key, so it is not a field.
-            # In both cases, we only include it in visible fields if
-            # include_inlines is requested.
-            _is_visible = False
-            if self.is_field(_field_name):
-                _is_visible = True
-                _fieldname_to_append = _field_name
-            elif include_inlines:
-                _is_visible = True
-                _fieldname_to_append = encode_as_inline(_field_name)
-            if _is_visible:
-                _visible_fields.append(_fieldname_to_append)
+            if self.is_visible_as_normal_field(_field_name, exclusion_list):
+                _visible_fields.append(_field_name)
+            elif self.is_visible_as_inline(_field_name, include_inlines, inlines):
+                _visible_fields.append(encode_as_inline(_field_name))
 
         _fieldsets = ((None,
             {'fields': _visible_fields + list(_hidden_fields)}
         ),)
         return _fieldsets
 
-    def build_fieldsets_from_schema_tabbed(self, include_inlines):
+    def build_fieldsets_from_schema_tabbed(self, include_inlines=False, inlines=()):
         """
         Builds fieldsets using SchemaModel.get_fields(),
         for tabbed viewing (required/recommended/optional).
@@ -116,29 +108,17 @@ class SchemaModelLookup(object):
             _visible_fields_verbose_names = []
 
             for _field_name in _fields[_field_status]:
-                if _field_name in exclusion_list:
-                    continue
-
-                # Two possible reasons why a field might be encoded as an inline:
-                # - either it's a OneToOneField and we have put 
-                #   it into tht eexclusion list;
-                # - or it's a reverse foreigh key, so it is not a field.
-                # In both cases, we only include it in visible fields if
-                # include_inlines is requested.
-                _is_visible = False
-                if self.is_field(_field_name):
-                    _is_visible = True
-                    _fieldname_to_append = _field_name
-                elif include_inlines:
-                    _is_visible = True
-                    _fieldname_to_append = encode_as_inline(_field_name)
-
-                # And now put the field where it belongs:
-                if _is_visible:
-                    _visible_fields.append(_fieldname_to_append)
-                    _visible_fields_verbose_names.append(
-                                    self.model.get_verbose_name(_field_name))
-            
+                if self.is_visible_as_normal_field(_field_name, exclusion_list):
+                    _visible_fields.append(_field_name)
+                    is_visible = True
+                elif self.is_visible_as_inline(_field_name, include_inlines, inlines):
+                    _visible_fields.append(encode_as_inline(_field_name))
+                    is_visible = True
+                else:
+                    is_visible = False
+                
+                if is_visible:
+                    _visible_fields_verbose_names.append(self.model.get_verbose_name(_field_name))
             
             if len(_visible_fields) > 0:
                 _detail = ', '.join(_visible_fields_verbose_names)
@@ -151,17 +131,18 @@ class SchemaModelLookup(object):
 
         return _fieldsets
 
-    def build_fieldsets_from_schema(self, include_inlines=False):
+    def build_fieldsets_from_schema(self, include_inlines=False, inlines=()):
         if self.show_tabbed_fieldsets:
-            return self.build_fieldsets_from_schema_tabbed(include_inlines)
-        return self.build_fieldsets_from_schema_plain(include_inlines)
+            return self.build_fieldsets_from_schema_tabbed(include_inlines, inlines)
+        return self.build_fieldsets_from_schema_plain(include_inlines, inlines)
 
     def get_fieldsets(self, request, obj=None):
-        return self.build_fieldsets_from_schema(include_inlines=False)
+        return self.build_fieldsets_from_schema()
 
 
     def get_fieldsets_with_inlines(self, request, obj=None):
-        return self.build_fieldsets_from_schema(include_inlines=True)
+        inline_names = [inline.parent_fk_name for inline in self.inline_instances if hasattr(inline, 'parent_fk_name') ]
+        return self.build_fieldsets_from_schema(include_inlines=True, inlines=inline_names)
 
 
     def get_inline_classes(self, model, status):
