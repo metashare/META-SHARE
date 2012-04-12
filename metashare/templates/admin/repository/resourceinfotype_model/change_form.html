@@ -149,6 +149,7 @@
 				if( input_value ) {				
 						$(this).parents('div').siblings(".errorlist").remove();				
 						$(this).parents('fieldset .form-row').removeClass("errors");
+						checkForErrors($(this));
 				}
 		 }		
  		 function oneToOne() {
@@ -156,6 +157,7 @@
 				if( input_value ) {					
 						$(this).siblings(".errorlist").remove();				
 						$(this).parents('div.field-box').removeClass("errors");
+						checkForErrors($(this));
 				}
 		 }				
 		
@@ -172,6 +174,7 @@
 		$('div.form-row.errors div span.datetimeshortcuts a').live("click",function(){		
 			$(this).parents('div').siblings(".errorlist").remove();				
 			$(this).parents('div').removeClass("errors");
+			checkForErrors($(this));
 		});
 		
 		//related-widget-wrapper
@@ -184,6 +187,7 @@
   			if( $(this).children().length > 0 ) {										
 					$(this).parents('div').siblings(".errorlist").remove();				
 					$(this).parents('div').removeClass("errors");
+					checkForErrors($(this));
 			}
 		});	
 		
@@ -191,12 +195,23 @@
 		$(document).on("change", "div.form-row.errors select", function() {		  
   			$(this).parents('div').siblings(".errorlist").remove();				
 			$(this).parents('div').removeClass("errors");
+			checkForErrors($(this));
 		});
+		
+		function checkForErrors(elem){
+			if(elem.parents('.tab_content>fieldset.module.aligned').find('.errorlist').length == 0) {
+				var field = elem.parents('.tab_content').attr('id');
+				$("a[href='#"+field+"']").removeClass("error");
+				if($('.errors').length == 0 && $('.error').length == 0) {
+					$('p.errornote').remove();				
+				}
+			}			
+		}
 		
 	</script>
 	
 	<script>		
-		var link;	     
+		 var link;	     
 	     $("ul.errorlist").each(function() { 
 	     	if(link != $(this).parents("div .tab_content").attr("id") ){
 	     		link = $(this).parents("div .tab_content").attr("id");	     				     	
@@ -208,7 +223,7 @@
     		 }
 		 });		
 	</script>
-
+	
 {% block after_field_sets %}{% endblock %}
 
 {% block after_related_objects %}{% endblock %}
