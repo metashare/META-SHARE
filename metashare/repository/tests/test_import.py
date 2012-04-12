@@ -21,18 +21,20 @@ class ImportTest(TestCase):
         resourceInfoType_model.objects.all().delete()
     
 
-    def test_iport_ELRA(self):      
-        """
-        Run tests on ELRA resources
-        """
-        _path = '{0}/repository/fixtures/ELRA/'.format(ROOT_PATH)
-        
-        _files = os.listdir(_path)
-        for _file in _files:
-            _currfile =  "%s%s" % (_path, _file)
-            successes, failures = test_utils.import_xml_or_zip(_currfile)
-            self.assertEqual(1, len(successes), 'Could not import file {}'.format(_currfile))
-            self.assertEqual(0, len(failures), 'Could not import file {}'.format(_currfile))
+	if False:
+		def test_import_ELRA(self):      
+			"""
+			Run tests on ELRA resources
+			Representative xml files have been taken
+			"""
+			_path = '{0}/repository/fixtures/ELRA/'.format(ROOT_PATH)
+			
+			_files = os.listdir(_path)
+			for _file in _files:
+				_currfile =  "%s%s" % (_path, _file)
+				successes, failures = test_utils.import_xml_or_zip(_currfile)
+				self.assertEqual(1, len(successes), 'Could not import file {}'.format(_currfile))
+				self.assertEqual(0, len(failures), 'Could not import file {}'.format(_currfile))
             
     def test_import_PSP(self):
         """
