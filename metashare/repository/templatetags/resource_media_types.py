@@ -91,16 +91,20 @@ class ResourceMediaTypes(template.Node):
         image_tag = ""
         if "text" in result:
             image_tag = '<img src="{}css/sexybuttons/images/icons/silk/page' \
-              '_white_text_media_type.png" title="text" />'.format(MEDIA_URL)
+              '_white_text_media_type.png" title="text" /> &nbsp;' \
+              .format(MEDIA_URL)
         if "audio" in result:
             image_tag = image_tag + ' <img src="{}css/sexybuttons/images/' \
-              'icons/silk/music.png" title="audio" />'.format(MEDIA_URL)
+              'icons/silk/sound_none.png" title="audio" /> &nbsp; ' \
+              .format(MEDIA_URL)
         if "image" in result:
             image_tag = image_tag + ' <img src="{}css/sexybuttons/images/' \
-              'icons/silk/picture.png" title="image" />'.format(MEDIA_URL)
+              'icons/silk/picture.png" title="image" /> &nbsp; ' \
+              .format(MEDIA_URL)
         if "video" in result:
             image_tag = image_tag + ' <img src="{}css/sexybuttons/images/' \
-              'icons/silk/film.png" title="video" />'.format(MEDIA_URL)
+              'icons/silk/film.png" title="video" />' \
+              .format(MEDIA_URL)
 
         return image_tag
 

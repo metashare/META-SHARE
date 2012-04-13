@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Polish WordNet</resourceName>
+      <description>The Polish WordNet is a network of lexical-semantic relations, an electronic thesaurus with a structure modelled on that of the Princeton WordNet and those constructed in the EuroWordNet project. Polish WordNet describes meaning of a lexical unit by placing it within a network of semantic relations, such as hypernyny, meronymy, antonymy etc. To reduce the cost of the project, Polish WordNet has been built semi-automatically. Lexical relations were automatically recognized in large corpora of Polish and suggested to linguists/lexicographers via a graphical interface. Nowadays Polish WordNet is one of the biggest wordnets in the world; it comprises 103000 lexical units in 74000 synsets.</description>
+      <resourceShortName>plWordNet</resourceShortName>
+      <url>http://plwordnet.pwr.wroc.pl/wordnet</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+      <identifier>403</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>other</licence>
+         <restrictionsOfUse>attribution</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <downloadLocation>http://nlp.pwr.wroc.pl/plwordnet/download/?lang=eng</downloadLocation>
+         <price>free of charge</price>
+         <licensor>
+				        <personInfo>
+               <surname>Piasecki</surname>
+               <givenName>Maciej</givenName>
+               <communicationInfo>
+                  <email>maciej.piasecki@pwr.wroc.pl</email>
+                  <url>http://www.iis.pwr.wroc.pl/~piasecki/</url>
+                  <address>Wybrzeże Wyspiańskiego 27</address>
+                  <zipCode>50-370</zipCode>
+                  <city>Wrocław</city>
+                  <telephoneNumber>+48 71 320 42 24</telephoneNumber>
+                  <faxNumber>+48 71 321 10 18</faxNumber>
+               </communicationInfo>
+            </personInfo>
+			      </licensor>
+         <distributionRightsHolder>
+				        <organizationInfo>
+					          <organizationName>Wrocław University of Technology</organizationName>
+					          <communicationInfo>
+                  <email>maciej.piasecki@pwr.wroc.pl</email>
+                  <url>http://www.iis.pwr.wroc.pl/~piasecki/</url>
+                  <address>Wybrzeże Wyspiańskiego 27</address>
+                  <zipCode>50-370</zipCode>
+                  <city>Wrocław</city>
+                  <telephoneNumber>+48 71 320 42 24</telephoneNumber>
+                  <faxNumber>+48 71 321 10 18</faxNumber>
+               </communicationInfo>
+				        </organizationInfo>
+			      </distributionRightsHolder>
+      </licenceInfo>
+      <iprHolder>
+			      <organizationInfo>
+				        <organizationName>Wrocław University of Technology</organizationName>
+				        <communicationInfo>
+               <email>maciej.piasecki@pwr.wroc.pl</email>
+               <url>http://nlp.pwr.wroc.pl</url>
+               <address>Wybrzeże Wyspiańskiego 27</address>
+               <zipCode>50-370</zipCode>
+               <city>Wrocław</city>
+               <telephoneNumber>+48 71 320 42 24</telephoneNumber>
+               <faxNumber>+48 71 321 10 18</faxNumber>
+            </communicationInfo>
+			      </organizationInfo>
+		    </iprHolder>
+      <availabilityStartDate>2011-11-22</availabilityStartDate>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Piasecki</surname>
+      <givenName>Maciej</givenName>
+      <communicationInfo>
+         <email>maciej.piasecki@pwr.wroc.pl</email>
+         <url>http://www.iis.pwr.wroc.pl/~piasecki/</url>
+         <address>Wybrzeże Wyspiańskiego 27</address>
+         <zipCode>50-370</zipCode>
+         <city>Wrocław</city>
+         <telephoneNumber>+48 71 320 42 24</telephoneNumber>
+         <faxNumber>+48 71 321 10 18</faxNumber>
+      </communicationInfo>
+      <affiliation>
+         <organizationName>Wrocław University of Technology</organizationName>
+         <organizationShortName>WUT</organizationShortName>
+         <departmentName>Institute of Informatics, Division of Artifical Intelligence</departmentName>
+         <communicationInfo>
+            <email>maciej.piasecki@pwr.wroc.pl</email>
+            <url>http://nlp.pwr.wroc.pl/en</url>
+            <address>Wybrzeże Wyspiańskiego 27</address>
+            <zipCode>50-370</zipCode>
+            <city>Wrocław</city>
+            <country>Poland</country>
+            <telephoneNumber>+48 71 320 42 24</telephoneNumber>
+            <faxNumber>+48 71 321 10 18</faxNumber>
+         </communicationInfo>
+			
+		    </affiliation>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-22</metadataCreationDate>
+      <metadataCreator>
+         <surname>Ogrodniczuk</surname>
+         <givenName>Maciej</givenName>
+         <communicationInfo>
+            <email>maciej.ogrodniczuk@ipipan.waw.pl</email>
+            <url>http://zil.ipipan.waw.pl/MaciejOgrodniczuk</url>
+            <address>Jana Kazimierza 5</address>
+            <zipCode>01-237</zipCode>
+            <city>Warsaw</city>
+            <telephoneNumber>+48 22 38 00 500</telephoneNumber>
+            <faxNumber>+48 22 38 00 510</faxNumber>
+         </communicationInfo>
+         <position>Assistant Professor</position>
+      </metadataCreator>
+      <source>CESAR</source>
+      <metadataLanguageId>en</metadataLanguageId>
+      <metadataLastDateUpdated>2011-11-26</metadataLastDateUpdated>
+   </metadataInfo>
+   <versionInfo>
+		    <version>1.5</version>
+      <lastDateUpdated>2011-11-22</lastDateUpdated>
+		
+	  </versionInfo>
+   <usageInfo>
+		    <foreseenUseInfo>
+         <foreseenUse>humanUse</foreseenUse>
+      </foreseenUseInfo>
+      <foreseenUseInfo>
+         <foreseenUse>nlpApplications</foreseenUse>
+			
+			
+			      <useNLPSpecific>semanticRoleLabelling</useNLPSpecific>
+			      <useNLPSpecific>documentClassification</useNLPSpecific>
+		    </foreseenUseInfo>
+	  </usageInfo>
+   <resourceDocumentationInfo>
+      <documentation>
+         <documentUnstructured>Maziarz M., Piasecki M., Szpakowicz S. Approaching plWordNet 2.0. Proceedings of the 6th Global Wordnet Conference, Matsue, 9-13th January, 2012, Japan (Accepted for publication).</documentUnstructured>
+      </documentation>
+      <documentation>
+         <documentUnstructured>Piasecki, Maciej, Szpakowicz, Stanisław, Bartosz Broda. A Wordnet from the Ground Up. Wrocław : Oficyna Wydawnicza Politechniki Wrocławskiej, 2009.</documentUnstructured>
+      </documentation>
+   </resourceDocumentationInfo>
+   <resourceCreationInfo>
+      <resourceCreator>
+			      <personInfo>
+            <surname>Piasecki</surname>
+            <givenName>Maciej</givenName>
+            <communicationInfo>
+               <email>maciej.piasecki@pwr.wroc.pl</email>
+               <url>http://www.iis.pwr.wroc.pl/~piasecki/</url>
+               <address>Wybrzeże Wyspiańskiego 27</address>
+               <zipCode>50-370</zipCode>
+               <city>Wrocław</city>
+               <telephoneNumber>+48 71 320 42 24</telephoneNumber>
+               <faxNumber>+48 71 321 10 18</faxNumber>
+            </communicationInfo>
+         </personInfo>
+		    </resourceCreator>
+      <fundingProject>
+         <projectName>Automatic methods of constructing a semantic network of Polish lexemes for natural language processing</projectName>
+         <projectID>3 T11C 018 29</projectID>
+         <fundingType>nationalFunds</fundingType>
+         <fundingCountry>Poland</fundingCountry>
+         <projectStartDate>2005-10-31</projectStartDate>
+         <projectEndDate>2008-10-30</projectEndDate>
+      </fundingProject>
+      <fundingProject>
+         <projectName>Construction of lexical resources with the help of recognition of semantic relations in text corpora on the basis of morpho-syntactic and semantic data</projectName>
+         <projectID>N N516 068637</projectID>
+         <fundingType>nationalFunds</fundingType>
+         <fundingCountry>Poland</fundingCountry>
+         <projectStartDate>2009-10-31</projectStartDate>
+         <projectEndDate>2012-10-30</projectEndDate>
+      </fundingProject>
+      <fundingProject>
+         <projectName>NEKST — Adaptive system supporting solving problems on the basis of content analysis of electronic documents</projectName>
+         <projectID>POIG.01.01.02-14-013/09</projectID>
+         <fundingType>euFunds</fundingType>
+         <fundingType>nationalFunds</fundingType>
+         <fundingCountry>Poland</fundingCountry>
+         <projectStartDate>2009-04-01</projectStartDate>
+         <projectEndDate>2014-02-10</projectEndDate>
+      </fundingProject>
+      <fundingProject>
+         <projectName>SyNaT — Research Task: “Construction of an open, repository hosting and communication platform for the network knowledge resources fro science, education and open knowledge society”</projectName>
+         <projectID>SP/I/1/77065/10</projectID>
+         <fundingType>nationalFunds</fundingType>
+         <fundingCountry>Poland</fundingCountry>
+         <projectStartDate>2010-08-16</projectStartDate>
+         <projectEndDate>2013-08-16</projectEndDate>
+      </fundingProject>
+      <creationStartDate>2005-10-31</creationStartDate>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>wordnet</lexicalConceptualResourceType>
+         <lexicalConceptualResourceEncodingInfo>
+            <encodingLevel>semantics</encodingLevel>
+            <linguisticInformation>partOfSpeech</linguisticInformation>
+            <linguisticInformation>semantics-Relations</linguisticInformation>
+            <linguisticInformation>semantics-CrossReferences</linguisticInformation>
+            <linguisticInformation>semantics-Relations-Antonyms</linguisticInformation>
+            <linguisticInformation>semantics-Relations-Hyperonyms</linguisticInformation>
+            <linguisticInformation>semantics-Relations-Hyponyms</linguisticInformation>
+            <linguisticInformation>semantics-Relations-Meronyms</linguisticInformation>
+            <linguisticInformation>semantics-Relations-Synonyms</linguisticInformation>
+            <conformanceToStandardsBestPractices>WordNet</conformanceToStandardsBestPractices>
+         </lexicalConceptualResourceEncodingInfo>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>monolingual</lingualityType>
+			
+		             </lingualityInfo>
+               <languageInfo>
+                  <languageId>PL</languageId>
+                  <languageName>Polish</languageName>
+                  <languageScript>Latin</languageScript>
+               </languageInfo>
+               <modalityInfo>
+                  <modalityType>writtenLanguage</modalityType>
+               </modalityInfo>
+               <sizeInfo>
+			               <size>73000</size>
+			
+			               <sizeUnit>synsets</sizeUnit>
+		             </sizeInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>

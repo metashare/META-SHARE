@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Slovak National Corpus</resourceName>
+      <description>
+The Slovak National Corpus is a representative corpus of contemporary Slovak language written texts published since 1955 (1953 being the time of most recent substantial Slovak language orthography reform). The corpus is automatically lemmatised and MSD tagged. The documents are annotated with their genre, style and other bibliographic information. There are specialised subcorpora containing fiction, informational texts, professional texts, original Slovak fiction, texts written from 1955 to 1989, and a balanced subcorpus. This is a pseudocorpus, only the query interface is available, the texts proper cannot be distributed.
+        </description>
+      <url>http://korpus.juls.savba.sk/</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+      <identifier>901</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>proprietary</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
+         <executionLocation>http://bonito.korpus.sk</executionLocation>
+      </licenceInfo>
+      <iprHolder>
+			      <organizationInfo>
+				        <organizationName>Ľudovít Štúr Institute of Linguistics</organizationName>
+				        <organizationShortName>JÚĽŠ</organizationShortName>
+				        <departmentName>Slovak National Corpus</departmentName>
+				        <communicationInfo>
+               <email>korpus@korpus.juls.savba.sk</email>
+               <url>http://korpus.juls.savba.sk/</url>
+               <address>Panská 26</address>
+               <zipCode>81364</zipCode>
+               <city>Bratislava</city>
+               <country>Slovakia</country>
+               <telephoneNumber>+421254410307</telephoneNumber>
+            </communicationInfo>
+			      </organizationInfo>
+		    </iprHolder>
+      <availabilityStartDate>2011-02-01</availabilityStartDate>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Garabík</surname>
+      <givenName>Radovan</givenName>
+      <communicationInfo>
+         <email>radovan.garabik@kassiopeia.juls.savba.sk</email>
+         <address>Panská 26</address>
+         <zipCode>81364</zipCode>
+         <city>Bratislava</city>
+         <country>Slovakia</country>
+         <telephoneNumber>+421254410307</telephoneNumber>
+      </communicationInfo>
+      <position>researcher</position>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-21</metadataCreationDate>
+      <metadataCreator>
+         <surname>Garabík</surname>
+         <givenName>Radovan</givenName>
+         <communicationInfo>
+            <email>radovan.garabik@kassiopeia.juls.savba.sk</email>
+            <address>Panská 26</address>
+            <zipCode>81364</zipCode>
+            <city>Bratislava</city>
+            <country>Slovakia</country>
+            <telephoneNumber>+421254410307</telephoneNumber>
+         </communicationInfo>
+         <position>researcher</position>
+      </metadataCreator>
+      <metadataLanguageId>en</metadataLanguageId>
+      <metadataLastDateUpdated>2011-11-22</metadataLastDateUpdated>
+   </metadataInfo>
+   <versionInfo>
+		    <version>5.0</version>
+      <lastDateUpdated>2011-02-01</lastDateUpdated>
+		
+	  </versionInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>monolingual</lingualityType>
+		             </lingualityInfo>
+               <languageInfo>
+                  <languageId>sk</languageId>
+                  <languageName>Slovak</languageName>
+               </languageInfo>
+               <sizeInfo>
+			               <size>770000000</size>
+			
+			               <sizeUnit>tokens</sizeUnit>
+		             </sizeInfo>
+               <characterEncodingInfo>
+                  <characterEncoding>UTF-8</characterEncoding>
+               </characterEncodingInfo>
+               <annotationInfo>
+                  <annotationType>segmentation</annotationType>
+                  <segmentationLevel>paragraph</segmentationLevel>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>segmentation</annotationType>
+                  <segmentationLevel>sentence</segmentationLevel>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>segmentation</annotationType>
+                  <segmentationLevel>word</segmentationLevel>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>lemmatization</annotationType>
+                  <segmentationLevel>word</segmentationLevel>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>morphosyntacticAnnotation-bPosTagging</annotationType>
+                  <segmentationLevel>word</segmentationLevel>
+               </annotationInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>
