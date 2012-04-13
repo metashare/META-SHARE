@@ -38,7 +38,7 @@
 	{% if LR_DOWNLOAD and not "notallowed" in LR_DOWNLOAD %}
         {% if "restricted" in LR_DOWNLOAD %}
             <div class="popup_box">
-                <div onmouseover="$('#altdownload').show();" onmouseout="$('#altdownload').hide();"><button class="span-4 button middle_gray_button">Download</button></div><div id="altdownload" class="popup" style="left:190px; width: 540px; height=100%"><img style="left:10px;" src="{% url metashare.views.frontpage %}site_media/images/adv_search_pfeil.png" />&nbsp; You don't have enough permission to download this resource. Please log in!</div>
+                <div onmouseover="$(this).siblings('div.popup').show();" onmouseout="$(this).siblings('div.popup').hide();"><button class="span-4 button middle_gray_button">Download</button></div><div class="popup" style="height:50px; left:190px; width:270px; top:50px;"><img style="left:10px;" src="{% url metashare.views.frontpage %}site_media/images/adv_search_pfeil.png" />&nbsp;You don&rsquo;t have the permission to download this resource. Please log in.</div>
             </div>
         {% else %}
             <a href="{{LR_DOWNLOAD}}"><button class="span-4 button middle_button">Download</button></a>
@@ -60,7 +60,7 @@
 	{% if LR_DOWNLOAD and not "notallowed" in LR_DOWNLOAD %}
         {% if "restricted" in LR_DOWNLOAD %}
             <div class="popup_box">
-                <div onmouseover="$('#altdownload').show();" onmouseout="$('#altdownload').hide();"><button class="span-4 button middle_gray_button">Download</button></div><div id="altdownload" class="popup" style="left:190px; width: 540px; height=100%"><img style="left:10px;" src="{% url metashare.views.frontpage %}site_media/images/adv_search_pfeil.png" />&nbsp; You don't have enough permission to download this resource. Please log in!</div>
+                <div onmouseover="$(this).siblings('div.popup').show();" onmouseout="$(this).siblings('div.popup').hide();"><button class="span-4 button middle_gray_button">Download</button></div><div class="popup" style="height:50px; left:190px; width:270px; top:50px;"><img style="left:10px;" src="{% url metashare.views.frontpage %}site_media/images/adv_search_pfeil.png" />&nbsp;You don&rsquo;t have the permission to download this resource. Please log in.</div>
             </div>
         {% else %}
             <a href="{{LR_DOWNLOAD}}"><button class="span-4 button middle_button">Download</button></a>
