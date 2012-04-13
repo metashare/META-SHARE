@@ -216,19 +216,23 @@ class PersonLookup(ModelLookup):
     filters = {}
     
     def get_query(self, request, term):
-        print u'get_query'
         #results = super(PersonLookup, self).get_query(request, term)
-        persons = self.model.objects.all()
+        # Since MultiTextFields cannot be searched using query sets (they are base64-encoded and pickled),
+        # we must do the searching by hand.
+        # TODO: this is excessively slow, replace with more appropriate search mechanism, e.g. a SOLR index
+        lcterm = term.lower()
+        def matches(person):
+            'Helper function to group the search code for a person'
+            for multifield in (person.surname, person.givenName):
+                for field in multifield:
+                    if lcterm in field.lower():
+                        return True
+            return False
+        persons = self.get_queryset()
         if term == '*':
             results = persons
         else:
-            results = []
-            for pers in persons:
-                surname = pers.surname
-                surname_flat = ' '.join(surname).lower()
-                index = surname_flat.find(term.lower())
-                if index >= 0:
-                    results.append(pers)
+            results = [p for p in persons if matches(p)]
         if results is not None:
             print u'{} results'.format(results.__len__())
         else:
@@ -236,9 +240,10 @@ class PersonLookup(ModelLookup):
         return results
     
     def get_item_label(self, item):
-        name_flat = ' '.join(item.givenName)
-        surname_flat = ' '.join(item.surname)
-        return u'%s %s' % (name_flat, surname_flat)
+        return unicode(item)
+#        name_flat = ' '.join(item.givenName)
+#        surname_flat = ' '.join(item.surname)
+#        return u'%s %s' % (name_flat, surname_flat)
     
     def get_item_id(self, item):
         return item.id
