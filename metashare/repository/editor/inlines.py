@@ -21,7 +21,8 @@ class SchemaModelInline(admin.StackedInline, RelatedAdminMixin, SchemaModelLooku
         super(SchemaModelInline, self).__init__(parent_model, admin_site)
         if self.collapse:
             self.verbose_name_plural = '_{}'.format(force_unicode(self.verbose_name_plural))
-        self.filter_horizontal = self.model.get_many_to_many_fields()
+        # Show m2m fields as horizontal filter widget unless they have a custom widget:
+        self.filter_horizontal = self.list_m2m_fields_without_custom_widget(self.model)
 
     def get_fieldsets(self, request, obj=None):
         return SchemaModelLookup.get_fieldsets(self, request, obj)
