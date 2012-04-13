@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Hellenic National Corpus</resourceName>
+      <description>HNC currently contains about 47.000.000 words, and is constantly being updated. It contains samples of written language exclusively. Oral samples have not  been incorporated in this version of Corpus. Texts in the ILSP Corpus represent modern Greek language use - most of them having been written after 1990. Texts written in highly idiomatic language have been excluded. Most texts have been selected based on their high readability (high circulation newspapers, best-selling books etc.). Texts from several media, belonging to different genres and dealing with various topics have been selected. These texts have been given to ILSP for this purpose by copyright owners and are available for research purposes only.</description>
+      <resourceShortName>HNC</resourceShortName>
+      <url>http://hnc.ilsp.gr/</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+      <identifier/>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>proprietary</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
+         <executionLocation>http://hnc.ilsp.gr/</executionLocation>
+         <price/>
+         <licensor>
+				        <personInfo>
+               <surname>Ioannidis</surname>
+               <givenName>Yannis</givenName>
+               <communicationInfo>
+                  <email>yannis@athena-innovation.gr</email>
+                  <url>http://www.madgik.di.uoa.gr/content/yannis</url>
+                  <address/>
+                  <zipCode/>
+                  <city/>
+                  <country/>
+                  <telephoneNumber/>
+                  <faxNumber/>
+               </communicationInfo>
+               <position>Director</position>
+               <affiliation>
+							           <organizationName>ATHENA - RESEARCH AND INNOVATION CENTER IN INFORMATION, COMMUNICATION AND KNOWLEDGE TECHNOLOGIES</organizationName>
+							           <organizationShortName>Athena R.C.</organizationShortName>
+							           <departmentName/>
+							           <communicationInfo>
+							           <email>www@ilsp.athena-innovation.gr</email>
+                     <url>http://www.athena-innovation.gr/</url>
+                     <telephoneNumber>+30 210 6998 677</telephoneNumber>
+                     <faxNumber>+30 210 6998 663</faxNumber>
+                  </communicationInfo>
+						         </affiliation>
+            </personInfo>
+			      </licensor>
+         <distributionRightsHolder>
+				        <organizationInfo>
+				           <organizationName>Institute for Language and Speech Processing</organizationName>
+				           <organizationShortName>ILSP / Athena R.C.</organizationShortName>
+				           <departmentName>Electronic Lexicography and Language Resources Department</departmentName>
+				           <communicationInfo>
+       <email>www@ilsp.athena-innovation.gr</email>
+                  <url>http://www.ilsp.gr/</url>
+                  <address>Artemidos 6</address>
+                  <zipCode>GR-151 25</zipCode>
+                  <city>Maroussi</city>
+                  <country>GR</country>
+                  <telephoneNumber>+30 2106875300</telephoneNumber>
+                  <faxNumber>+30 2106854270</faxNumber>
+                  <faxNumber>+30 2106856794</faxNumber>
+               </communicationInfo>
+			         </organizationInfo>
+			      </distributionRightsHolder>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Gavrilidou</surname>
+      <givenName>Maria</givenName>
+      <communicationInfo>
+         <email>maria@ilsp.gr</email>
+         <url>http://www.ilsp.gr/index.php</url>
+         <address>Artemidos 6</address>
+         <zipCode>GR-151 25</zipCode>
+         <city>Maroussi</city>
+         <country>GR</country>
+         <telephoneNumber>+30 2106875441</telephoneNumber>
+         <faxNumber>+30 2106854270</faxNumber>
+         <faxNumber>+30 2106856794</faxNumber>
+      </communicationInfo>
+      <position>Researcher</position>
+      <affiliation>
+                <organizationName>Institute for Language and Speech Processing</organizationName>
+                <organizationShortName>ILSP / Athena R.C.</organizationShortName>
+                <departmentName>Electronic Lexicography and Language Resources Department</departmentName>
+                <communicationInfo>
+        <email>www@ilsp.athena-innovation.gr</email>
+
+            <url>http://www.ilsp.gr/</url>
+            <address>Artemidos 6</address>
+            <zipCode>GR-151 25</zipCode>
+            <city>Maroussi</city>
+            <country>GR</country>
+            <telephoneNumber>+30 2106875300</telephoneNumber>
+            <faxNumber>+30 2106854270</faxNumber>
+            <faxNumber>+30 2106856794</faxNumber>
+         </communicationInfo>
+            </affiliation>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-06-08</metadataCreationDate>
+      <source>META</source>
+      <metadataLanguageId>English</metadataLanguageId>
+   </metadataInfo>
+   <versionInfo>
+		    <version>3.0</version>
+		
+		    <revision/>
+	  </versionInfo>
+   <validationInfo>
+      <validated>true</validated>
+      <validationType>content</validationType>
+      <validationMode>manual</validationMode>
+      <validationModeDetails>The classification of the documents has been manually validated</validationModeDetails>
+      <validationExtent>full</validationExtent>
+      <validationExtentDetails/>
+   </validationInfo>
+   <usageInfo>
+		    <foreseenUseInfo>
+			      
+			      <foreseenUse>nlpApplications</foreseenUse>
+		    </foreseenUseInfo>
+         
+		    <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+</actualUseInfo>
+	  </usageInfo>
+   <resourceDocumentationInfo>
+		    <documentation>
+         <documentUnstructured>Χατζηγεωργίου, Ν., Σπηλιωτοπούλου, Α., Βακαλοπούλου, Ά., Παπακωστοπούλου, Α., Πιπερίδης, Σ., Γαβριηλίδου, Μ. et al. (2000b). Εθνικός Θησαυρός Ελληνικών κειμένων: Σώμα Κειμένων της Νέας Ελληνικής στο Διαδίκτυο. In Μελέτες για την Ελληνική Γλώσσα: Πρακτικά της 21ης Ετήσιας Συνάντησης του Τομέα Γλωσσολογίας της Φιλοσοφικής Σχολής του Αριστοτέλειου Πανεπιστήμιου, pages 812-821. Θεσσαλονίκη.</documentUnstructured>
+      </documentation>
+		    <documentation>
+         <documentUnstructured>Gavrilidou M. (2002), The Hellenic National Corpus οn-line, Revue Belge de Philologie et d' Histoire 80/2002, Bruxelles, Société pour le progrès des études philologiques et historiques, pp. 1003-1015</documentUnstructured>
+      </documentation>
+		    <documentation>
+         <documentUnstructured>Hatzigeorgiu, N. et al. (2000) "Design and implementation of the online ILSP Greek Corpus", LREC 2000</documentUnstructured>
+      </documentation>
+	  </resourceDocumentationInfo>
+   <resourceCreationInfo>
+      <resourceCreator>
+		       <organizationInfo>
+				        <organizationName>Institute for Language and Speech Processing</organizationName>
+				        <organizationShortName>ILSP / Athena R.C.</organizationShortName>
+				        <departmentName>Electronic Lexicography and Language Resources Department</departmentName>
+				        <communicationInfo>
+           <email>www@ilsp.athena-innovation.gr</email>
+
+               <url>http://www.ilsp.gr/</url>
+               <address>Artemidos 6</address>
+               <zipCode>GR-151 25</zipCode>
+               <city>Maroussi</city>
+               <country>GR</country>
+               <telephoneNumber>+30 2106875300</telephoneNumber>
+               <faxNumber>+30 2106854270</faxNumber>
+               <faxNumber>+30 2106856794</faxNumber>
+            </communicationInfo>
+			      </organizationInfo>
+		    </resourceCreator>
+      <fundingProject>
+				     <projectName>DIALOGOS</projectName>
+				     <projectShortName/>
+				     <fundingType>nationalFunds</fundingType>
+				     <fundingCountry>GR</fundingCountry>
+			   </fundingProject>
+      <creationStartDate>1999-01-01</creationStartDate>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>monolingual</lingualityType>
+		             </lingualityInfo>
+               <languageInfo>
+			
+			               <languageId>ell</languageId>
+			               <languageName>Modern Greek (1453-)</languageName>
+			               <languageScript/>
+		             </languageInfo>
+			               <modalityInfo>
+                     <modalityType>writtenLanguage</modalityType>
+                  </modalityInfo>
+               <sizeInfo>
+			               <size>47000000</size>
+			
+			               <sizeUnit>words</sizeUnit>
+		             </sizeInfo>
+               <textFormatInfo>
+			               <mimeType>text/plain</mimeType>
+		             </textFormatInfo>
+               <annotationInfo>
+                  <annotationType>segmentation</annotationType>
+                  <segmentationLevel>sentence</segmentationLevel>
+                  <annotationFormat/>
+                  <tagset/>
+                  <theoreticModel/>
+                  <annotationManual>
+                     <documentUnstructured/>
+                  </annotationManual>
+                  <annotationMode>automatic</annotationMode>
+                  <annotationModeDetails/>
+               </annotationInfo>
+               <annotationInfo>
+              
+                  <annotationType>structuralAnnotation</annotationType>
+				  <conformanceToStandardsBestPractices>XCES</conformanceToStandardsBestPractices>
+                  <annotationMode>automatic</annotationMode>
+                 </annotationInfo>
+               <annotationInfo>
+                  <annotationType>morphosyntacticAnnotation-posTagging</annotationType>
+                  <tagset>ILSP-PAROLE</tagset>
+                  <annotationMode>automatic</annotationMode>
+               </annotationInfo>
+               <domainInfo>
+			               <domain>entertainment</domain>
+		             </domainInfo>
+               <domainInfo>
+			               <domain>geography</domain>
+		             </domainInfo>
+               <domainInfo>
+			               <domain>science</domain>
+		             </domainInfo>
+               <domainInfo>
+			               <domain>business</domain>
+		             </domainInfo>
+               <domainInfo>
+			               <domain>history</domain>
+		             </domainInfo>
+               <domainInfo>
+			               <domain>society</domain>
+		             </domainInfo>
+               <domainInfo>
+			               <domain>humanities</domain>
+		             </domainInfo>
+               <domainInfo>
+			               <domain>health</domain>
+		             </domainInfo>
+               <textClassificationInfo>
+			               <textGenre>non-fiction</textGenre>
+		             </textClassificationInfo>
+               <textClassificationInfo>
+			               <textGenre>feature</textGenre>
+		             </textClassificationInfo>
+               <textClassificationInfo>
+			               <textGenre>advertising</textGenre>
+		             </textClassificationInfo>
+               <textClassificationInfo>
+			               <textGenre>official</textGenre>
+		             </textClassificationInfo>
+               <textClassificationInfo>
+			               <textGenre>private</textGenre>
+		             </textClassificationInfo>
+               <textClassificationInfo>
+			               <textGenre>fiction</textGenre>
+		             </textClassificationInfo>
+               <textClassificationInfo>
+			               <textGenre>information</textGenre>
+		             </textClassificationInfo>
+               <textClassificationInfo>
+			               <textGenre>discussion</textGenre>
+		             </textClassificationInfo>
+               <timeCoverageInfo>
+			               <timeCoverage>after 1990</timeCoverage>
+		             </timeCoverageInfo>
+                 <creationInfo>
+			               <creationMode>mixed</creationMode>
+			               <creationModeDetails/>
+		             </creationInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<identificationInfo>
+<resourceName lang="English">CESTA Evaluation Package</resourceName>
+<resourceName lang="French">Package d’évaluation CESTA</resourceName>
+<description lang="English">The CESTA Evaluation Package was produced within the French national project CESTA (Evaluation of MT systems), as part of the Technolangue programme funded by the French Ministry of Research and New Technologies (MRNT). The CESTA project enabled to carry out a campaign for the evaluation of machine translation systems with English and Arabic texts translated into French. This package includes the material that was used for the CESTA evaluation campaign. It includes resources, protocols, scoring tools, results of the campaign, etc., that were used or produced during the campaign. The aim of these evaluation packages is to enable external players to evaluate their own system. The campaign is distributed over two actions: 1)	Evaluation on a restrictive vocabulary: an evaluation protocol was introduced and was dedicated to two translation directions: English into French and Arabic into French.2)	Evaluation on a specialised domain (evaluation after terminology enrichment): it consists in observing the impact of the systems adaptation to the specialised domain.The CESTA evaluation package contains the following data and tools:1)	Test run data:-	English-French parallel corpus: 21,590 English words and 23,554 French words extracted from the Official Journal of the European Communities, 1993, Written Questions section of the European Parliament, from the MLCC corpus (catalogue ref. ELRA-W0023). -	Arabic-French parallel corpus: 15,603 Arabic words and 18,257 French words extracted from Le Monde Diplomatique 2002 (catalogue ref. ELRA-W0036).2)	First campaign data:-	English-French parallel corpus: test corpus of 20,658 English words and 22,774 French words extracted from the Official Journal of the European Communities, 1993, Written Questions section of the European Parliament, from the MLCC corpus (catalogue ref. ELRA-W0023). Four translations in French are available.-	Arabic-French parallel corpus: test corpus of 23,763 Arabic words and 28,664 French words extracted from Le Monde Diplomatique 2002 and 2003 (catalogue réf. ELRA-W0036). Four translations in French are available.3)	Second campaign data:-	English-French parallel corpus: adaptation corpus of 19,383 English words and 22,741 French words, extracted from the Santé Canada website. Translation in French is available.-	Arabic-French parallel corpus: adaptation corpus of 19,560 Arabic words and 22,533 French words extracted from the UNICEF, WHO and FHI websites. Translation in French is available.-	English-French parallel corpus: test corpus of 18,880 English words and 23,411 French words, extracted from the Santé Canada website. Four translations in French are available.-	Arabic-French parallel corpus: test corpus of 17,305 Arabic words and 20,885 French words extracted from the UNICEF, WHO and FHI websites. Four translations in French are available.4)	Anonymised submissions of systems and human judgments with adequacy and fluency annotations.5)	French corpus of 13,000 words with adequacy and fluency tags.6)	Evaluation infrastructure for human judgments and for automatic evaluation.7)	Project documentation and publications.A description of the project is available at the following address:http://www.technolangue.net/article.php3?id_article=199 (in French language)</description>
+<description lang="French">Le package d’évaluation CESTA a été produit dans le cadre du projet national français CESTA (« Campagne d'Evaluation de Systèmes de Traduction Automatique »), issu du programme Technolangue, financé par le Ministère français délégué à la Recherche et aux Nouvelles Technologies (MRNT). Le projet CESTA a permis de réaliser une campagne d'évaluation des systèmes de traduction automatique à partir de texte anglais et arabe traduits en français.Ce package comprend l’ensemble des données utilisées lors de la campagne d’évaluation CESTA. Il regroupe des ressources, des protocoles, des outils de notation, les résultats de la campagne officielle, etc., qui ont été utilisés ou produits pendant la campagne. Le but de ce « package » d’évaluation est de permettre à des acteurs externes d’évaluer leur propre système.La campagne se décompose en deux actions : 1)	Evaluation sur un vocabulaire non restreint : un protocole d’évaluation a été introduit s’appliquant aux deux directions de traduction : anglais vers français et arabe vers français.2)	Evaluation sur un domaine spécialisé (évaluation après enrichissement terminologique) : consiste à observer l’impact de l’adaptation des systèmes au domaine d’application.Le package d’évaluation CESTA contient les données et outils suivants :1)	Données de la campagne à blanc :-	Corpus parallèle anglais-français : 21 590 mots anglais et 23 554 mots français extraits du Journal Officiel des Communautés Européennes, 1993, section des Questions écrites au Parlement européen, extraites du corpus MLCC (réf. catalogue ELRA-W0023). -	Corpus parallèle arabe-français : 15 603 mots arabes et 18 257 mots français extraits du Monde Diplomatique 2002 (réf. catalogue ELRA-W0036).2)	Données de la première campagne :-	Corpus parallèle anglais-français : corpus de test de 20 658 mots anglais et 22 774 mots français extraits du Journal Officiel des Communautés Européennes, 1993, section des Questions écrites au Parlement européen, extraites du corpus MLCC (réf. catalogue ELRA-W0023). Quatre traductions en français sont disponibles.-	Corpus parallèle arabe-français : corpus de test de 23 763 mots arabes et 28 664 mots français extraits du Monde Diplomatique 2002 et 2003 (réf. catalogue ELRA-W0036). Quatre traductions en français sont disponibles.3)	Données de la deuxième campagne :-	Corpus parallèle anglais-français : corpus d’adaptation de 19 383 mots anglais et 22 741 mots français, extraits du site Santé Canada. Une traduction en français est disponible.-	Corpus parallèle arabe-français : corpus d’adapation de 19 560 mots arabes et 22 533 mots français extraits des sites de l’UNICEF, de l’OMS et de FHI. Une traduction en français est disponible.-	Corpus parallèle anglais-français : corpus de test de 18 880 mots anglais et 23 411 mots français, extraits du site Santé Canada. Quatre traductions en français sont disponibles.-	Corpus parallèle arabe-français : corpus de test de 17 305 mots arabes et 20 885 mots français extraits des sites de l’UNICEF, de l’OMS et de FHI. Quatre traductions en français sont disponibles.4)	Les soumissions anonymisées des systèmes et les jugements humains d’adéquation et de fluidité.5)	Corpus de français de 13 000 mots étiqueté en fluidité et en adéquation.6)	Infrastructure d’évaluation pour des jugements humains et pour l’évaluation automatique.7)	Les documents et publications du projet.Une description du projet est disponible à l'adresse suivante :http://www.technolangue.net/article.php3?id_article=199</description>
+<resourceShortName/>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=994</url>
+<identifier>ELRA-E0020</identifier>
+</identificationInfo>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+<metadataCreator>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipcode>75013</zipcode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</metadataCreator>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<lastDateUpdated>2007-06-28</lastDateUpdated>
+</versionInfo>
+<distributionInfo>
+<availability>available-restrictedUse</availability>
+<licenceInfo>
+<licence>ELRA_EVALUATION</licence>
+<restrictionsOfUse>evaluationUse</restrictionsOfUse>
+<price>150.00</price>
+<userNature>academic</userNature>
+<membershipInfo>
+<member>True</member>
+<membershipInstitution>ELRA</membershipInstitution>
+</membershipInfo>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_EVALUATION</licence>
+<restrictionsOfUse>evaluationUse</restrictionsOfUse>
+<price>500.00</price>
+<userNature>commercial</userNature>
+<membershipInfo>
+<member>True</member>
+<membershipInstitution>ELRA</membershipInstitution>
+</membershipInfo>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_EVALUATION</licence>
+<restrictionsOfUse>evaluationUse</restrictionsOfUse>
+<price>300.00</price>
+<userNature>academic</userNature>
+<membershipInfo>
+<member>False</member>
+<membershipInstitution>ELRA</membershipInstitution>
+</membershipInfo>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_EVALUATION</licence>
+<restrictionsOfUse>evaluationUse</restrictionsOfUse>
+<price>1000.00</price>
+<userNature>commercial</userNature>
+<membershipInfo>
+<member>False</member>
+<membershipInstitution>ELRA</membershipInstitution>
+</membershipInfo>
+</licenceInfo>
+<availabilityStartDate>2007-06-28</availabilityStartDate>
+</distributionInfo>
+<resourceCreationInfo>
+<fundingProject>
+<projectName>EVALDA</projectName>
+<fundingType>nationalFunds</fundingType>
+</fundingProject>
+</resourceCreationInfo>
+<resourceComponentType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusTextInfo>
+<mediaType>text</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>eng</languageId>
+<languageName>English</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>ara</languageId>
+<languageName>Arabic</languageName>
+</languageInfo>
+<languageInfo>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
+</languageInfo>
+</corpusTextInfo>
+</corpusMediaType>
+</corpusInfo>
+</resourceComponentType>
+</resourceInfo>

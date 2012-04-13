@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Szeged Treebank</resourceName>
+      <description>A manually checked treebank of 1.2 million words.</description>
+      <url>http://www.inf.u-szeged.hu/rgai/nlp/SzegedTreebank</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+      <identifier>102</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>CLARIN_ACA-NC</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>CD-ROM</distributionAccessMedium>
+         <licensor>
+				        <personInfo>
+               <surname>N/A</surname>
+               <communicationInfo>
+                  <email>alexin@inf.u-szeged.hu</email>
+               </communicationInfo>
+               <affiliation>
+                  <organizationName>University of Szeged</organizationName>
+                  <organizationShortName>SZTE</organizationShortName>
+                  <departmentName>Department of Informatics</departmentName>
+                  <communicationInfo>
+                     <email>alexin@inf.u-szeged.hu</email>
+                  </communicationInfo>
+						
+					          </affiliation>
+            </personInfo>
+			      </licensor>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+      <surname>N/A</surname>
+      <communicationInfo>
+         <email>vinczev@inf.u-szeged.hu</email>
+      </communicationInfo>
+      <affiliation>
+         <organizationName>University of Szeged</organizationName>
+         <organizationShortName>SZTE</organizationShortName>
+         <departmentName>Department of Informatics</departmentName>
+         <communicationInfo>
+            <email>vinczev@inf.u-szeged.hu</email>
+         </communicationInfo>
+			
+		    </affiliation>
+   </contactPerson>
+   <contactPerson>
+      <surname>N/A</surname>
+      <communicationInfo>
+         <email>alexin@inf.u-szeged.hu</email>
+      </communicationInfo>
+      <affiliation>
+         <organizationName>University of Szeged</organizationName>
+         <organizationShortName>SZTE</organizationShortName>
+         <departmentName>Department of Informatics</departmentName>
+         <communicationInfo>
+            <email>alexin@inf.u-szeged.hu</email>
+         </communicationInfo>
+			
+		    </affiliation>
+   </contactPerson>
+   <contactPerson>
+      <surname>N/A</surname>
+      <communicationInfo>
+         <email>csirik@inf.u-szeged.hu</email>
+      </communicationInfo>
+      <affiliation>
+         <organizationName>University of Szeged</organizationName>
+         <organizationShortName>SZTE</organizationShortName>
+         <departmentName>Department of Informatics</departmentName>
+         <communicationInfo>
+            <email>csirik@inf.u-szeged.hu</email>
+         </communicationInfo>
+			
+		    </affiliation>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-10-17</metadataCreationDate>
+      <metadataCreator>
+         <surname>N/A</surname>
+         <communicationInfo>
+            <email>alexin@inf.u-szeged.hu</email>
+         </communicationInfo>
+         <affiliation>
+            <organizationName>University of Szeged</organizationName>
+            <organizationShortName>SZTE</organizationShortName>
+            <departmentName>Department of Informatics</departmentName>
+            <communicationInfo>
+               <email>alexin@inf.u-szeged.hu</email>
+            </communicationInfo>
+				
+			      </affiliation>
+      </metadataCreator>
+   </metadataInfo>
+   <versionInfo>
+		    <version>2.0</version>
+	  </versionInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>monolingual</lingualityType>
+		             </lingualityInfo>
+               <languageInfo>
+                  <languageId>HU</languageId>
+                  <languageName>Hungarian</languageName>
+               </languageInfo>
+               <sizeInfo>
+			               <size>82000</size>
+			
+			               <sizeUnit>sentences</sizeUnit>
+		             </sizeInfo>
+               <annotationInfo>
+                  <annotationType>morphosyntacticAnnotation-posTagging</annotationType>
+                  <segmentationLevel>word</segmentationLevel>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>syntacticAnnotation-treebanks</annotationType>
+                  <segmentationLevel>wordGroup</segmentationLevel>
+               </annotationInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Spanish LMF Freeling Sense</resourceName>
+      <description>This is the LMF version of the Spanish Freeling Sense.       FreeLing is a developer-oriented library providing language analysis services. If you want to develop, say, a machine translation system, and you need some kind of linguistic processing of the source text, your MT application can call FreeLing modules to do the required analysis.</description>
+      <resourceShortName>Spanish LMF Freeling Sense</resourceShortName>
+      <url>http://www.uila.upf.edu</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+      <identifier>bba898d6fbef45329d1c1a604b3a7f54</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability>
+      <licenceInfo>
+         <licence>GPL</licence>
+         <restrictionsOfUse>other</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <downloadLocation>http://www..com/</downloadLocation>
+         <distributionRightsHolder>
+              <organizationInfo>
+                <organizationName>Institut Universitari Lingüística Aplicada - UPF</organizationName>
+                <organizationShortName>IULA - UPF</organizationShortName>
+                <departmentName>Institut Universitari Lingüística Aplicada (UPF)</departmentName>
+                  <communicationInfo>
+                  <email>jorge.vivaldi@upf.edu</email>
+                  <url>http://www.iula.upf.edu/</url>
+                  <address>Roc Boronat, 138</address>
+                  <zipCode>08018</zipCode>
+                  <city>Barcelona</city>
+                  <country>Spain</country>
+                  <telephoneNumber>+34 93 5421207</telephoneNumber>
+                  <faxNumber>+34 93 5422321</faxNumber>
+               </communicationInfo>
+              </organizationInfo>
+          </distributionRightsHolder>
+      </licenceInfo>
+      <iprHolder>
+          <organizationInfo>
+            <organizationName>Institut Universitari Lingüística Aplicada - UPF</organizationName>
+            <organizationShortName>IULA - UPF</organizationShortName>
+            <departmentName>Institut Universitari Lingüística Aplicada (UPF)</departmentName>
+              <communicationInfo>
+               <email>jorge.vivaldi@upf.edu</email>
+               <url>http://www.iula.upf.edu/</url>
+               <address>Roc Boronat, 138</address>
+               <zipCode>08018</zipCode>
+               <city>Barcelona</city>
+               <country>Spain</country>
+               <telephoneNumber>+34 93 5421207</telephoneNumber>
+               <faxNumber>+34 93 5422321</faxNumber>
+            </communicationInfo>
+          </organizationInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Vivaldi</surname>
+      <givenName>Jorge</givenName>
+      <communicationInfo>
+         <email>jorge.vivaldi@upf.edu</email>
+         <address>Roc Boronat, 138</address>
+         <zipCode>08018</zipCode>
+         <city>Barcelona</city>
+         <country>Spain</country>
+      </communicationInfo>
+      <affiliation>
+         <organizationName>Institut Universitari Lingüística Aplicada (Universitat Pompeu Fabra)</organizationName>
+         <organizationShortName>IULA UPF</organizationShortName>
+         <departmentName>Institut Universitari Lingüística Aplicada</departmentName>
+         <communicationInfo>
+            <email>jorge.vivaldi@upf.edu</email>
+            <url>http://www.iula.upf.edu/</url>
+            <address>Roc Boronat, 138</address>
+            <zipCode>08018</zipCode>
+            <city>Barcelona</city>
+            <country>Spain</country>
+            <telephoneNumber>+34 93 5421207</telephoneNumber>
+            <faxNumber>+34 93 5422321</faxNumber>
+         </communicationInfo>
+          
+      </affiliation>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-10-10</metadataCreationDate>
+      <metadataCreator>
+         <surname>Villegas</surname>
+         <givenName>Marta</givenName>
+         <communicationInfo>
+            <email>jorge.vivaldi@upf.edu</email>
+            <url>http://www.iula.upf.edu/</url>
+            <address>Roc Boronat, 138</address>
+            <zipCode>08018</zipCode>
+            <city>Barcelona</city>
+            <country>Spain</country>
+            <telephoneNumber>+34 93 5421207</telephoneNumber>
+            <faxNumber>+34 93 5422321</faxNumber>
+         </communicationInfo>
+         <affiliation>
+            <organizationName>Institut Universitari Lingüística Aplicada (Universitat Pompeu Fabra)</organizationName>
+            <organizationShortName>IULA UPF</organizationShortName>
+            <departmentName>Institut Universitari Lingüística Aplicada</departmentName>
+            <communicationInfo>
+               <email>jorge.vivaldi@upf.edu</email>
+               <url>http://www.iula.upf.edu/</url>
+               <address>Roc Boronat, 138</address>
+               <zipCode>08018</zipCode>
+               <city>Barcelona</city>
+               <country>Spain</country>
+               <telephoneNumber>+34 93 5421207</telephoneNumber>
+               <faxNumber>+34 93 5422321</faxNumber>
+            </communicationInfo>
+              
+          </affiliation>
+      </metadataCreator>
+      <source>METASHARE</source>
+      <originalMetadataSchema>v1.1</originalMetadataSchema>
+      <metadataLanguageId>en-US</metadataLanguageId>
+      <metadataLastDateUpdated>2011-10-30</metadataLastDateUpdated>
+   </metadataInfo>
+   <versionInfo>
+      <version>1</version>
+      <lastDateUpdated>2011-10-30</lastDateUpdated>
+    
+  </versionInfo>
+   <validationInfo>
+      <validated>true</validated>
+      <validationType>formal</validationType>
+      <validationMode>automatic</validationMode>
+      <validationModeDetails>The lexicon validates against the LMF DTD v.16</validationModeDetails>
+   </validationInfo>
+   <resourceDocumentationInfo>
+      <documentation>
+         <documentUnstructured>http://nlp.lsi.upc.edu/freeling/doc/userman/userman.pdf</documentUnstructured>
+      </documentation>
+   </resourceDocumentationInfo>
+   <resourceCreationInfo>
+      <resourceCreator>
+          <organizationInfo>
+            <organizationName>Institut Universitari Lingüística Aplicada - UPF</organizationName>
+            <organizationShortName>IULA - UPF</organizationShortName>
+            <departmentName>Institut Universitari Lingüística Aplicada (UPF)</departmentName>
+              <communicationInfo>
+               <email>jorge.vivaldi@upf.edu</email>
+               <url>http://www.iula.upf.edu/</url>
+               <address>Roc Boronat, 138</address>
+               <zipCode>08018</zipCode>
+               <city>Barcelona</city>
+               <country>Spain</country>
+               <telephoneNumber>+34 93 5421207</telephoneNumber>
+               <faxNumber>+34 93 5422321</faxNumber>
+            </communicationInfo>
+          </organizationInfo>
+      </resourceCreator>
+      <fundingProject>
+         <projectName>METANET4U</projectName>
+         <projectShortName>METANET4U</projectShortName>
+         <url>http://metanet4u.eu/</url>
+         <fundingType>ownFunds</fundingType>
+         <fundingType>euFunds</fundingType>
+         <funder>UPF</funder>
+         <funder>EU</funder>
+         <fundingCountry>Spain</fundingCountry>
+      </fundingProject>
+      <creationStartDate>2011-10-10</creationStartDate>
+      <creationEndDate>2011-10-30</creationEndDate>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>wordnet</lexicalConceptualResourceType>
+         <lexicalConceptualResourceEncodingInfo>
+            <encodingLevel>morphology</encodingLevel>
+            <linguisticInformation>lemma</linguisticInformation>
+            <linguisticInformation>semantics-CrossReferences</linguisticInformation>
+            <linguisticInformation>semantics-Relations</linguisticInformation>
+            <conformanceToStandardsBestPractices>LMF</conformanceToStandardsBestPractices>
+         </lexicalConceptualResourceEncodingInfo>
+         <creationInfo>
+            <originalSource>
+               <targetResourceNameURI>Spanish Freeling Sense as described in http://nlp.lsi.upc.edu/freeling/</targetResourceNameURI>
+            </originalSource>
+            <creationMode>automatic</creationMode>
+            <creationModeDetails>This lexicon was created with the Freeling2LMF.pl</creationModeDetails>
+            <creationTool>
+               <targetResourceNameURI>Freeling2LMF.pl</targetResourceNameURI>
+            </creationTool>
+         </creationInfo>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>N/A</languageId>
+                  <languageName>Spanish</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>6213</size>
+        
+                  <sizeUnit>entries</sizeUnit>
+               </sizeInfo>
+               <sizeInfo>
+                  <size>17359</size>
+        
+                  <sizeUnit>semanticUnits</sizeUnit>
+               </sizeInfo>
+               <textFormatInfo>
+                  <mimeType>text/xml</mimeType>
+               </textFormatInfo>
+               <characterEncodingInfo>
+                  <characterEncoding>UTF-8</characterEncoding>
+               </characterEncodingInfo>
+               <domainInfo>
+                  <domain>general</domain>
+               </domainInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>

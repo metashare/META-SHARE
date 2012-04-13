@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Multilingual Vocabulary of Economics</resourceName>
+      <description>This is the LMF version of the Multilingual Vocabulary of Economics             Resource developed within the frame of the research project RICOTERM2. Financed by the       Ministry of Science and Technology, within the Programa Nacional de Promoción General del Conocimiento (2004-2007).</description>
+      <resourceShortName>Multilingual Vocabulary of Economics</resourceShortName>
+      <url>http://.es</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+      <identifier>7c85de9fcc104c689c0d4dfd0694202a</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability>
+      <licenceInfo>
+         <licence>AGPL</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <downloadLocation>http://www..com/</downloadLocation>
+         <distributionRightsHolder>
+              <organizationInfo>
+                <organizationName>Institut Universitari Lingüística Aplicada - UPF</organizationName>
+                <organizationShortName>IULA - UPF</organizationShortName>
+                <departmentName>Institut Universitari Lingüística Aplicada (UPF)</departmentName>
+                  <communicationInfo>
+                  <email>jorge.vivaldi@upf.edu</email>
+                  <url>http://www.iula.upf.edu/</url>
+                  <address>Roc Boronat, 138</address>
+                  <zipCode>08018</zipCode>
+                  <city>Barcelona</city>
+                  <country>Spain</country>
+                  <telephoneNumber>+34 93 5421207</telephoneNumber>
+                  <faxNumber>+34 93 5422321</faxNumber>
+               </communicationInfo>
+              </organizationInfo>
+          </distributionRightsHolder>
+      </licenceInfo>
+      <iprHolder>
+          <organizationInfo>
+            <organizationName>Institut Universitari Lingüística Aplicada - UPF</organizationName>
+            <organizationShortName>IULA - UPF</organizationShortName>
+            <departmentName>Institut Universitari Lingüística Aplicada (UPF)</departmentName>
+              <communicationInfo>
+               <email>jorge.vivaldi@upf.edu</email>
+               <url>http://www.iula.upf.edu/</url>
+               <address>Roc Boronat, 138</address>
+               <zipCode>08018</zipCode>
+               <city>Barcelona</city>
+               <country>Spain</country>
+               <telephoneNumber>+34 93 5421207</telephoneNumber>
+               <faxNumber>+34 93 5422321</faxNumber>
+            </communicationInfo>
+          </organizationInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Vivaldi</surname>
+      <givenName>Jorge</givenName>
+      <communicationInfo>
+         <email>jorge.vivaldi@upf.edu</email>
+         <address>Roc Boronat, 138</address>
+         <zipCode>08018</zipCode>
+         <city>Barcelona</city>
+         <country>Spain</country>
+      </communicationInfo>
+      <affiliation>
+         <organizationName>Institut Universitari Lingüística Aplicada (Universitat Pompeu Fabra)</organizationName>
+         <organizationShortName>IULA UPF</organizationShortName>
+         <departmentName>Institut Universitari Lingüística Aplicada</departmentName>
+         <communicationInfo>
+            <email>jorge.vivaldi@upf.edu</email>
+            <url>http://www.iula.upf.edu/</url>
+            <address>Roc Boronat, 138</address>
+            <zipCode>08018</zipCode>
+            <city>Barcelona</city>
+            <country>Spain</country>
+            <telephoneNumber>+34 93 5421207</telephoneNumber>
+            <faxNumber>+34 93 5422321</faxNumber>
+         </communicationInfo>
+          
+      </affiliation>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-10-10</metadataCreationDate>
+      <metadataCreator>
+         <surname>Villegas</surname>
+         <givenName>Marta</givenName>
+         <communicationInfo>
+            <email>jorge.vivaldi@upf.edu</email>
+            <url>http://www.iula.upf.edu/</url>
+            <address>Roc Boronat, 138</address>
+            <zipCode>08018</zipCode>
+            <city>Barcelona</city>
+            <country>Spain</country>
+            <telephoneNumber>+34 93 5421207</telephoneNumber>
+            <faxNumber>+34 93 5422321</faxNumber>
+         </communicationInfo>
+         <affiliation>
+            <organizationName>Institut Universitari Lingüística Aplicada (Universitat Pompeu Fabra)</organizationName>
+            <organizationShortName>IULA UPF</organizationShortName>
+            <departmentName>Institut Universitari Lingüística Aplicada</departmentName>
+            <communicationInfo>
+               <email>jorge.vivaldi@upf.edu</email>
+               <url>http://www.iula.upf.edu/</url>
+               <address>Roc Boronat, 138</address>
+               <zipCode>08018</zipCode>
+               <city>Barcelona</city>
+               <country>Spain</country>
+               <telephoneNumber>+34 93 5421207</telephoneNumber>
+               <faxNumber>+34 93 5422321</faxNumber>
+            </communicationInfo>
+              
+          </affiliation>
+      </metadataCreator>
+      <source>METASHARE</source>
+      <originalMetadataSchema>v1.1</originalMetadataSchema>
+      <metadataLanguageId>en-US</metadataLanguageId>
+      <metadataLastDateUpdated>2011-10-30</metadataLastDateUpdated>
+   </metadataInfo>
+   <versionInfo>
+      <version>1</version>
+      <lastDateUpdated>2011-10-30</lastDateUpdated>
+    
+  </versionInfo>
+   <validationInfo>
+      <validated>true</validated>
+      <validationType>formal</validationType>
+      <validationMode>automatic</validationMode>
+      <validationModeDetails>The lexicon validates against the LMF DTD v.16</validationModeDetails>
+   </validationInfo>
+   <resourceDocumentationInfo>
+      <documentation>
+         <documentUnstructured>http://www.iula.upf.edu/rec/ricoterm/3/index_eng.htm</documentUnstructured>
+      </documentation>
+   </resourceDocumentationInfo>
+   <resourceCreationInfo>
+      <resourceCreator>
+          <organizationInfo>
+            <organizationName>Institut Universitari Lingüística Aplicada - UPF</organizationName>
+            <organizationShortName>IULA - UPF</organizationShortName>
+            <departmentName>Institut Universitari Lingüística Aplicada (UPF)</departmentName>
+              <communicationInfo>
+               <email>jorge.vivaldi@upf.edu</email>
+               <url>http://www.iula.upf.edu/</url>
+               <address>Roc Boronat, 138</address>
+               <zipCode>08018</zipCode>
+               <city>Barcelona</city>
+               <country>Spain</country>
+               <telephoneNumber>+34 93 5421207</telephoneNumber>
+               <faxNumber>+34 93 5422321</faxNumber>
+            </communicationInfo>
+          </organizationInfo>
+      </resourceCreator>
+      <fundingProject>
+         <projectName>METANET4U</projectName>
+         <projectShortName>METANET4U</projectShortName>
+         <url>http://metanet4u.eu/</url>
+         <fundingType>ownFunds</fundingType>
+         <fundingType>euFunds</fundingType>
+         <funder>UPF</funder>
+         <funder>EU</funder>
+         <fundingCountry>Spain</fundingCountry>
+      </fundingProject>
+      <creationStartDate>2011-10-10</creationStartDate>
+      <creationEndDate>2011-10-30</creationEndDate>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+         <lexicalConceptualResourceEncodingInfo>
+            <encodingLevel>morphology</encodingLevel>
+            <linguisticInformation>lemma</linguisticInformation>
+            <linguisticInformation>semantics-CrossReferences</linguisticInformation>
+            <conformanceToStandardsBestPractices>LMF</conformanceToStandardsBestPractices>
+         </lexicalConceptualResourceEncodingInfo>
+         <creationInfo>
+            <originalSource>
+               <targetResourceNameURI>Multilingual Vocabulary of Economics from IULA UPF located at http://www.iula.upf.edu/rec/ricoterm/docums/vocecon/eng/index.html</targetResourceNameURI>
+            </originalSource>
+            <creationMode>automatic</creationMode>
+         </creationInfo>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>multilingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>N/A</languageId>
+                  <languageName>Spanish</languageName>
+                  <sizePerLanguage>
+                     <size>1180</size>
+            
+                     <sizeUnit>entries</sizeUnit>
+                  </sizePerLanguage>
+               </languageInfo>
+               <languageInfo>
+                  <languageId>N/A</languageId>
+                  <languageName>Basque</languageName>
+                  <sizePerLanguage>
+                     <size>1180</size>
+            
+                     <sizeUnit>entries</sizeUnit>
+                  </sizePerLanguage>
+               </languageInfo>
+               <languageInfo>
+                  <languageId>N/A</languageId>
+                  <languageName>Galician</languageName>
+                  <sizePerLanguage>
+                     <size>1180</size>
+            
+                     <sizeUnit>entries</sizeUnit>
+                  </sizePerLanguage>
+               </languageInfo>
+               <languageInfo>
+                  <languageId>N/A</languageId>
+                  <languageName>Catalan</languageName>
+                  <sizePerLanguage>
+                     <size>1180</size>
+            
+                     <sizeUnit>entries</sizeUnit>
+                  </sizePerLanguage>
+               </languageInfo>
+               <sizeInfo>
+                  <size>5900</size>
+        
+                  <sizeUnit>entries</sizeUnit>
+               </sizeInfo>
+               <textFormatInfo>
+                  <mimeType>text/xml</mimeType>
+               </textFormatInfo>
+               <characterEncodingInfo>
+                  <characterEncoding>UTF-8</characterEncoding>
+               </characterEncodingInfo>
+               <domainInfo>
+                  <domain>economy</domain>
+               </domainInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>
