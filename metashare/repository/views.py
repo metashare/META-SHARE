@@ -10,7 +10,6 @@ from os.path import split
 from urllib import urlopen
 
 from django.contrib.auth.decorators import login_required
-from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import render_to_response, get_object_or_404, redirect
@@ -305,19 +304,8 @@ def view(request, object_id=None):
             context['LR_EDIT'] = reverse(
                 'admin:repository_resourceinfotype_model_change', args=(object_id,))
 
-        context['LR_DOWNLOAD'] = ""
-        try:
-            # only show the download button if the resource has a local download
-            # copy or if there is a download license with an external download
-            # location 
-            if resource.storage_object.has_local_download_copy() \
-                    or any(l_info.downloadLocation for l_info
-                           in _get_download_licences(object_id).viewvalues()):
-                context['LR_DOWNLOAD'] = reverse(download, args=(object_id,))
-                if (not request.user.is_active):
-                    context['LR_DOWNLOAD'] = "restricted"
-        except ObjectDoesNotExist:
-            print "ERROR! Info about licence doesn't exist."
+        # in general, only logged in users may download/purchase any resources
+        context['LR_DOWNLOAD'] = request.user.is_active
 
         # Update statistics and create a report about the user actions on LR
         if hasattr(resource.storage_object, 'identifier'):
