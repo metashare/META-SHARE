@@ -121,6 +121,7 @@
 				if( input_value ) {				
 						$(this).parents('div').siblings(".errorlist").remove();				
 						$(this).parents('fieldset .form-row').removeClass("errors");
+						checkForErrors($(this));
 				}
 		 }
 		 function textfield2() {		 	
@@ -128,6 +129,7 @@
 				if( input_value ) {				
 						$(this).siblings(".errorlist").remove();				
 						$(this).parents('.field-box').removeClass("errors");
+						checkForErrors($(this));
 				}
 		 }		
 		 		
@@ -136,6 +138,7 @@
 				if( input_value ) {					
 						$(this).siblings(".errorlist").remove();				
 						$(this).parents('div.field-box').removeClass("errors");
+						checkForErrors($(this));
 				}
 		 }				
 		 $("div div ul li input").each(function() { 
@@ -155,6 +158,7 @@
 		
 			$(this).parents('div').siblings(".errorlist").remove();				
 			$(this).parents('div').removeClass("errors");
+			checkForErrors($(this));
 		});
 		
 		//related-widget-wrapper
@@ -168,6 +172,7 @@
   			if( $(this).children().length > 0 ) {			
 				$(this).parents('div.selector').siblings(".errorlist").remove();				
 				$(this).parents('div').removeClass("errors");
+				checkForErrors($(this));
 			}
 		});
 		
@@ -176,12 +181,25 @@
 		$(document).on("change", "div.form-row.errors select:not(.filtered)", function() {		  
   			$(this).parents('div').siblings(".errorlist").remove();				
 			$(this).parents('div').removeClass("errors");
+			checkForErrors($(this));
 		});
 		$(document).on("change", "div.form-row div.errors select:not(.filtered)", function() {		  
   			$(this).siblings(".errorlist").remove();				
 			$(this).parents('div').removeClass("errors");
+			checkForErrors($(this));
 		});
 		
+
+		function checkForErrors(elem){
+			if(elem.parents('.tab_content>fieldset.module.aligned').find('.errorlist').length == 0) {
+				var field = elem.parents('.tab_content').attr('id');
+				$("a[href='#"+field+"']").removeClass("error");
+				if($('.errors').length == 0 && $('.error').length == 0) {
+					$('p.errornote').remove();				
+				}
+			}			
+		}
+
 
 		
 	</script>
