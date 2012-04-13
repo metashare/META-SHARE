@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: CDT2-corpus-min.xml 42662 2011-12-01 14:33:59Z martha $ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>The Copenhagen Danish-English Dependency Treebank</resourceName>
+      <description>Treebank for the Danish Parole corpus</description>
+      <resourceShortName>CDT2</resourceShortName>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>GPL</licence>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <downloadLocation>http://code.google.com/p/copenhagen-dependency-treebank/wiki/CDT</downloadLocation>
+      </licenceInfo>
+      <iprHolder>
+         <organizationInfo>
+            <organizationName>Copenhagen Business School</organizationName>
+            <communicationInfo>
+               <email>matthias@buch-kromann.dk</email>
+            </communicationInfo>
+         </organizationInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Buch-Kromann</surname>
+      <givenName>Matthias</givenName>
+      <communicationInfo>
+         <email>matthias@buch-kromann.dk</email>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-12-31</metadataCreationDate>
+   </metadataInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>bilingual</lingualityType> 
+                  <!-- options to select from: 'monolingual', 'bilingual', 'multilingual' -->
+       <!-- options to select from: 'bodyGesture', 'facialExpression', 'voice', 'combinationOfModalities', 'signLanguage', 'spokenLanguage', 'writtenLanguage', 'other' -->
+    </lingualityInfo>
+               <languageInfo>
+                  <languageId>dan</languageId>
+                  <languageName>Danish</languageName>
+               </languageInfo>
+               <languageInfo>
+                  <languageId>eng</languageId>
+                  <languageName>English</languageName>
+               </languageInfo>
+               <modalityInfo>
+                  <modalityType>writtenLanguage</modalityType>
+               </modalityInfo>
+               <sizeInfo>
+                  <size>95000</size>
+                  <!-- options to select from: 'unit', 'tera', 'mega', 'kilo', 'hundred' -->
+      <sizeUnit>words</sizeUnit> 
+                  <!-- options to select from: 'terms', 'entries', 'turns', 'utterances', 'articles', 'files', 'items', 'seconds', 'elements', 'units', 'minutes', 'hours', 'texts', 'sentences', 'bytes', 'tokens', 'words', 'keywords', 'idiomaticExpressions', 'neologisms', 'multiWordUnits', 'expressions', 'synsets', 'classes', 'concepts', 'lexicalTypes', 'phoneticUnits', 'syntacticUnits', 'semanticUnits', 'predicates', 'phonemes', 'diphones', 'T-HPairs', 'syllables', 'rules', 'other' -->
+    </sizeInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

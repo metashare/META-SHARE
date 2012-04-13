@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>hunalign</resourceName>
+      <description>hunalign is a sentence aligner. It can use bilingual lexicons as a resource, but in the lack of such lexicon, its automatic lexicon-builder ensures that its precision degrades only marginally.</description>
+      <resourceShortName>hunalign</resourceShortName>
+      <url>http://mokk.bme.hu/resources/hunalign</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+      <identifier>109</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>LGPL</licence>
+         <restrictionsOfUse>shareAlike</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <downloadLocation>http://mokk.bme.hu/resources/hunalign</downloadLocation>
+         <price>free of charge</price>
+         <distributionRightsHolder>
+				        <organizationInfo>
+					          <organizationName>Budapest University of Technology and Economics</organizationName>
+					          <organizationShortName>BUTE MOKK</organizationShortName>
+					          <departmentName>Media Research Centre</departmentName>
+					          <communicationInfo>
+                  <email>daniel@mokk.bme.hu</email>
+               </communicationInfo>
+				        </organizationInfo>
+			      </distributionRightsHolder>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Daniel</surname>
+      <givenName>Varga</givenName>
+      <communicationInfo>
+         <email>daniel@mokk.bme.hu</email>
+      </communicationInfo>
+      <affiliation>
+         <organizationName>Budapest University of Techology and Economics</organizationName>
+         <organizationShortName>BUTE</organizationShortName>
+         <departmentName>Media Research Centre</departmentName>
+         <communicationInfo>
+            <email>daniel@mokk.bme.hu</email>
+         </communicationInfo>
+			
+		    </affiliation>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-30</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+		    <version>1.0</version>
+      <lastDateUpdated>2011-10-11</lastDateUpdated>
+		
+	  </versionInfo>
+   <usageInfo>
+		    <foreseenUseInfo>
+			      <foreseenUse>nlpApplications</foreseenUse>
+			      <useNLPSpecific>bilingualLexiconInduction</useNLPSpecific>
+		    </foreseenUseInfo>
+	  </usageInfo>
+   <resourceCreationInfo>
+      <creationStartDate>2004-08-01</creationStartDate>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <toolServiceInfo>
+         <resourceType>toolService</resourceType>
+		       <toolServiceType>tool</toolServiceType>
+		       <languageDependent>false</languageDependent>
+		       <inputInfo>
+            <mediaType>text</mediaType>
+            <resourceType>languageDescription</resourceType>
+            <modalityType>writtenLanguage</modalityType>
+         </inputInfo>
+		       <outputInfo>
+            <mediaType>text</mediaType>
+            <resourceType>lexicalConceptualResource</resourceType>
+            <modalityType>writtenLanguage</modalityType>
+         </outputInfo>
+		       <toolServiceOperationInfo>
+			         <operatingSystem>linux</operatingSystem>
+			         <operatingSystem>windows</operatingSystem>
+		       </toolServiceOperationInfo>
+		       <toolServiceCreationInfo>
+			         <implementationLanguage>C++</implementationLanguage>
+		       </toolServiceCreationInfo>
+	     </toolServiceInfo>
+   </resourceComponentType>
+</resourceInfo>
