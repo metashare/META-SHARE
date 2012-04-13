@@ -10,6 +10,7 @@ from django.utils.html import escape, escapejs
 from metashare.repository.editor.related_widget import RelatedFieldWidgetWrapper
 from metashare.repository.editor.widgets import SingleChoiceTypeWidget, \
   MultiChoiceTypeWidget
+from selectable.forms.widgets import AutoCompleteSelectMultipleWidget
 
 class RelatedAdminMixin(object):
     '''
@@ -65,10 +66,12 @@ class RelatedAdminMixin(object):
 
     def is_related_widget_appropriate(self, kwargs, formfield):
         'Determine whether it is appropriate to use a related-widget'
+        if 'widget' in kwargs:
+            print 'kwarg widget is: ', kwargs['widget']
         if formfield and \
                 isinstance(formfield.widget, admin.widgets.RelatedFieldWidgetWrapper) and \
                 not isinstance(formfield.widget.widget, SelectMultiple) and \
-                not ('widget' in kwargs):
+                not ('widget' in kwargs and isinstance(kwargs['widget'], AutoCompleteSelectMultipleWidget)):
             return True
         return False
 
