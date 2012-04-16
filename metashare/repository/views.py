@@ -200,8 +200,7 @@ def download(request, object_id):
                     { 'form': la_form, 'resource': resource,
                       'licence_path': \
                       LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
-                      'requires_sig': \
-                      LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][1] },
+                      'download_available': licences[licence_choice][1] },
                     context_instance=RequestContext(request))
         elif licence_choice and not licence_choice in licences:
             licence_choice = None
@@ -216,8 +215,7 @@ def download(request, object_id):
               'resource': resource,
               'licence_path': \
                 LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
-              'requires_sig': \
-                LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][1] },
+              'download_available': licences[licence_choice][1] },
             context_instance=RequestContext(request))
     elif len(licences) > 1:
         return render_to_response('repository/licence_selection.html',
