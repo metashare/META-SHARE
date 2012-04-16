@@ -23,10 +23,9 @@ div#banner_top div#inner{
 }
 div.popup{
 	font-weight: bold;
-	padding-top: 1px;
+	padding: 3px;
 	display: 	none;
 	position: absolute;
-	top:	70px;
 	background-color: 	#999999;
 	color: 				white;
 	
@@ -35,6 +34,7 @@ div.popup{
 	
 	font-size: 	16px;
 	text-shadow: 0px -1px 1px #333333;	
+	text-align: center;
 	
     -webkit-border-radius: 	5px;
     -khtml-border-radius: 	5px;
@@ -52,7 +52,7 @@ div.inner_box a, img.inner{
 	float: left;
 	padding-left: 20px;
 }
-div.inner_box div.popup_box{
+div.popup_box{
 	position: relative;
 }
 

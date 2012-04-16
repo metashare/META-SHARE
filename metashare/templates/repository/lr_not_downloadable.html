@@ -2,9 +2,15 @@
 {% block content %}    
 <h2{% if not resource.storage_object.published %} style="font-style:italic;"{% endif %}>{{ resource.identificationInfo.resourceName.0 }}</h2>
 <div class="content_box">
+{% if reason == "no_suitable_license" %}
+  <h3>Resource Access Restricted</h3>
+  <p>Access to the selected resource is restricted.</p>
+  <p>Please contact the resource maintainer for information on how to obtain a copy of this resource.</p>
+{% else %}
   <h3>No Download Available</h3>
-  <p>We are afraid, the selected resource is not available for download.</p>
-  <p>Please contact the resource maintainer for more information on how to obtain a copy of this resource.</p>
+  <p>We&rsquo;re afraid, the selected resource is currently not available for download. This problem may be temporary due to network connection problems or internal errors. Trying again later might solve the problem.</p>
+  <p>Please contact the resource maintainer if this problem should persist.</p>
+{% endif %}
   <p><a href="{% url metashare.repository.views.view resource.id %}"><button class="span-12 button middle_button">&laquo;&nbsp;Resource View</button></a></p>
 </div>
 {% endblock %}

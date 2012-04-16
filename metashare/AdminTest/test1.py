@@ -9,6 +9,8 @@ from django.shortcuts import render_to_response
 from django.forms import ModelForm
 from django.forms.models import ModelFormMetaclass
 from django.forms.formsets import formset_factory
+from django.template import RequestContext
+
 from models import PersonInfo
 
 def test():
@@ -36,5 +38,5 @@ def view(request):
     print "Request"
     test()
     context = {}
-    return render_to_response('main.html', context)
-    
+    return render_to_response('main.html', context,
+                              context_instance=RequestContext(request))
