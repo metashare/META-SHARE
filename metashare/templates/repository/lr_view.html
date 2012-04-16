@@ -26,7 +26,7 @@
                 {%if "updated" in stat.action %}
                     &nbsp;<div align=right style="float: right"><i>(Last modified: {{ stat.last }})</i>&nbsp;</div>
                 {% else %}
-                    <img src="{% url metashare.views.frontpage %}site_media/stats/img/{{ stat.action }}_icon.gif"
+                    <img src="{{ MEDIA_URL }}stats/img/{{ stat.action }}_icon.gif"
                     alt="Last {{ stat.action }}: {{ stat.last }}" title="Last {{ stat.action }}: {{ stat.last }}" />
                     <b>{{  stat.count }}</b>&nbsp;
                 {% endif %}
@@ -38,7 +38,7 @@
     <a href="{% url metashare.repository.views.download resource.id %}"><button class="span-4 button middle_button">Download/Buy</button></a>
   {% else %}
     <div class="popup_box">
-      <div onmouseover="$(this).siblings('div.popup').show();" onmouseout="$(this).siblings('div.popup').hide();"><button class="span-4 button middle_gray_button">Download/Buy</button></div><div class="popup" style="height:50px; left:190px; width:270px; top:50px;"><img style="left:10px;" src="{% url metashare.views.frontpage %}site_media/images/adv_search_pfeil.png" />&nbsp;You don&rsquo;t have the permission to download this resource. Please log in.</div>
+      <div onmouseover="$(this).siblings('div.popup').show();" onmouseout="$(this).siblings('div.popup').hide();"><button class="span-4 button middle_gray_button">Download/Buy</button></div><div class="popup" style="height:50px; left:190px; width:270px; top:50px;"><img style="left:10px;" src="{{ MEDIA_URL }}images/adv_search_pfeil.png" />&nbsp;You don&rsquo;t have the permission to download this resource. Please log in.</div>
     </div>
   {% endif %}
   <div style="clear: both;"></div>
@@ -54,7 +54,7 @@
     <a href="{% url metashare.repository.views.download resource.id %}"><button class="span-4 button middle_button">Download/Buy</button></a>
   {% else %}
     <div class="popup_box">
-      <div onmouseover="$(this).siblings('div.popup').show();" onmouseout="$(this).siblings('div.popup').hide();"><button class="span-4 button middle_gray_button">Download/Buy</button></div><div class="popup" style="height:50px; left:190px; width:270px; top:50px;"><img style="left:10px;" src="{% url metashare.views.frontpage %}site_media/images/adv_search_pfeil.png" />&nbsp;You don&rsquo;t have the permission to download this resource. Please log in.</div>
+      <div onmouseover="$(this).siblings('div.popup').show();" onmouseout="$(this).siblings('div.popup').hide();"><button class="span-4 button middle_gray_button">Download/Buy</button></div><div class="popup" style="height:50px; left:190px; width:270px; top:50px;"><img style="left:10px;" src="{{ MEDIA_URL }}images/adv_search_pfeil.png" />&nbsp;You don&rsquo;t have the permission to download this resource. Please log in.</div>
     </div>
   {% endif %}
 
