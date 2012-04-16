@@ -61,105 +61,131 @@ def _convert_to_template_tuples(element_tree):
         return ((element_tree.tag, element_tree.text),)
 
 
-# a dictionary holding a URL for each download licence and a boolean marking
-# whether the licence requires an hard-copy signature or not
+# a type providing an enumeration of META-SHARE member types
+MEMBER_TYPES = type('MemberEnum', (), dict(GOD=100, FULL=3, ASSOCIATE=2, NON=1))
+
+
+# a dictionary holding a URL for each download licence and a member type which
+# is required at a minimum to be able to download the associated resource
+# straight away; otherwise the licence requires a hard-copy signature
 LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
-  'AGPL': (MEDIA_URL + 'licences/GNU_agpl-3.0.htm', False),
-  'LGPL': (MEDIA_URL + 'licences/GNU_lgpl-2.0.htm', False),
-  'LGPLv3': (MEDIA_URL + 'licences/GNU_lgpl-3.0.htm', False),
-  'CC': (MEDIA_URL + 'licences/CC0v1.0.htm', False),
-  'CC_BY-SA_3.0': (MEDIA_URL + 'licences/CC-BYSAv3.0.htm', False),
-  'CC_BY-NC-ND': (MEDIA_URL + 'licences/CC-BYNCNDv3.0.htm', False),
-  'CC_BY-NC-SA': (MEDIA_URL + 'licences/CC-BYNCSAv2.5.htm', False),
-  'CC_BY-NC': (MEDIA_URL + 'licences/CC-BYNCv3.0.htm', False),
-  'CC_BY-ND': (MEDIA_URL + 'licences/CC-BYNDv3.0.htm', False),
-  'CC_BY-SA': (MEDIA_URL + 'licences/CC-BYSAv2.5.htm', False),
-  'CC_BY': (MEDIA_URL + 'licences/CC-BYv3.0.htm', False),
-  'CC_BY-NC-SA_3.0': (MEDIA_URL + 'licences/CC-BYNCSAv3.0.htm', False),
-  'MSCommons_BY': \
-    (MEDIA_URL + 'licences/META-SHARE_COMMONS_BY_v1.0.htm', False),
-  'MSCommons_BY-NC': \
-    (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNC_v1.0.htm', False),
-  'MSCommons_BY-NC-ND': \
-    (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNCND_v1.0.htm', False),
-  'MSCommons_BY-NC-SA': \
-    (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNCSA_v1.0.htm', False),
-  'MSCommons_BY-ND': \
-    (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYND_v1.0.htm', False),
-  'MSCommons_BY-SA': \
-    (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYSA_v1.0.htm', False),
-  'MSCommons_COM-NR-FF': \
-    (MEDIA_URL + 'licences/META-SHARE_Commercial_NoRedistribution_For-a-Fee' \
-     '_v0.7.htm', True),
-  'MSCommons_COM-NR': \
-    (MEDIA_URL + 'licences/META-SHARE_Commercial_NoRedistribution_v0.7.htm',
-     False),
-  'MSCommons_COM-NR-ND-FF': \
-    (MEDIA_URL + 'licences/META-SHARE_Commercial_NoRedistribution_' \
-     'NoDerivatives_For-a-fee-v1.0.htm', True),
-  'MSCommons_COM-NR-ND': \
-    (MEDIA_URL + 'licences/META-SHARE_Commercial_NoRedistribution_' \
-     'NoDerivatives-v1.0.htm', False),
-  'MSCommons_NoCOM-NC-NR-ND-FF': \
-    (MEDIA_URL + 'licences/META-SHARE_NonCommercial_NoRedistribution_' \
-     'NoDerivatives_For-a-fee-v1.0.htm', True),
-  'MSCommons_NoCOM-NC-NR-ND': \
-    (MEDIA_URL + 'licences/META-SHARE_Commercial_NoRedistribution_' \
-     'NoDerivatives-v1.0.htm', False),
-  'MSCommons_NoCOM-NC-NR-FF': \
-    (MEDIA_URL + 'licences/META-SHARE_NonCommercial_NoRedistribution_' \
-     'For-a-Fee-v1.0.htm', True),
-  'MSCommons_NoCOM-NC-NR': \
-    (MEDIA_URL + 'licences/META-SHARE_NonCommercial_NoRedistribution-v1.0.htm',
-     False),
-  'ELRA_EVALUATION': (MEDIA_URL + 'licences/EVALUATION.htm', True),
-  'ELRA_VAR': (MEDIA_URL + 'licences/VAR-v3_2007.htm', True),
-  'ELRA_END_USER': (MEDIA_URL + 'licences/ENDUSER-v3_2007.htm', True),
-  'ELRA_LIMITED': (MEDIA_URL + 'licences/Var-E-v2.htm', True),
-  'proprietary': ('', True),
-  'CLARIN_PUB': ('', True),
-  'CLARIN_ACA-NC': ('', True),
-  'CLARIN_ACA': ('', True),
-  'CLARIN_RES': ('', True),
-  'Princeton_Wordnet': (MEDIA_URL + 'licences/WordNet-3.0.txt', False),
-  'GPL': (MEDIA_URL + 'licences/GNU_gpl-3.0.htm', False),
-  'GeneralLicenceGrant': ('', True),
-  'GFDL': (MEDIA_URL + 'licences/GNU_fdl-1.3.htm', False),
-  'ApacheLicence_V2.0': (MEDIA_URL + 'licences/Apache-2.0.htm', False),
-  'BSD-style': (MEDIA_URL + 'licences/BSD_licence.htm', False),
-  'underNegotiation': ('', True),
-  'other': ('', True)
+  'AGPL': (MEDIA_URL + 'licences/GNU_agpl-3.0.htm', MEMBER_TYPES.NON),
+  'LGPL': (MEDIA_URL + 'licences/GNU_lgpl-2.0.htm', MEMBER_TYPES.NON),
+  'LGPLv3': (MEDIA_URL + 'licences/GNU_lgpl-3.0.htm', MEMBER_TYPES.NON),
+  'CC': (MEDIA_URL + 'licences/CC0v1.0.htm', MEMBER_TYPES.NON),
+  'CC_BY-SA_3.0': (MEDIA_URL + 'licences/CC-BYSAv3.0.htm', MEMBER_TYPES.NON),
+  'CC_BY-NC-ND': (MEDIA_URL + 'licences/CC-BYNCNDv3.0.htm', MEMBER_TYPES.NON),
+  'CC_BY-NC-SA': (MEDIA_URL + 'licences/CC-BYNCSAv2.5.htm', MEMBER_TYPES.NON),
+  'CC_BY-NC': (MEDIA_URL + 'licences/CC-BYNCv3.0.htm', MEMBER_TYPES.NON),
+  'CC_BY-ND': (MEDIA_URL + 'licences/CC-BYNDv3.0.htm', MEMBER_TYPES.NON),
+  'CC_BY-SA': (MEDIA_URL + 'licences/CC-BYSAv2.5.htm', MEMBER_TYPES.NON),
+  'CC_BY': (MEDIA_URL + 'licences/CC-BYv3.0.htm', MEMBER_TYPES.NON),
+  'CC_BY-NC-SA_3.0': (MEDIA_URL + 'licences/CC-BYNCSAv3.0.htm',
+                      MEMBER_TYPES.NON),
+  'MSCommons_BY': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BY_v1.0.htm',
+                   MEMBER_TYPES.FULL),
+  'MSCommons_BY-NC': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNC_v1.0.htm',
+                      MEMBER_TYPES.FULL),
+  'MSCommons_BY-NC-ND': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNCND_' \
+                         'v1.0.htm', MEMBER_TYPES.FULL),
+  'MSCommons_BY-NC-SA': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNCSA' \
+                         '_v1.0.htm', MEMBER_TYPES.FULL),
+  'MSCommons_BY-ND': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYND_v1.0.htm',
+                      MEMBER_TYPES.FULL),
+  'MSCommons_BY-SA': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYSA_v1.0.htm',
+                      MEMBER_TYPES.FULL),
+  'MSCommons_COM-NR-FF': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
+        'NoRedistribution_For-a-Fee_v0.7.htm', MEMBER_TYPES.FULL),
+  'MSCommons_COM-NR': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
+        'NoRedistribution_v0.7.htm', MEMBER_TYPES.FULL),
+  'MSCommons_COM-NR-ND-FF': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
+        'NoRedistribution_NoDerivatives_For-a-fee-v1.0.htm', MEMBER_TYPES.FULL),
+  'MSCommons_COM-NR-ND': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
+        'NoRedistribution_NoDerivatives-v1.0.htm', MEMBER_TYPES.FULL),
+  'MSCommons_NoCOM-NC-NR-ND-FF': (MEDIA_URL + 'licences/META-SHARE_' \
+        '_NoRedistribution_NoDerivatives_For-a-fee-v1.0.htm',
+        MEMBER_TYPES.FULL),
+  'MSCommons_NoCOM-NC-NR-ND': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
+        'NoRedistribution_NoDerivatives-v1.0.htm', MEMBER_TYPES.FULL),
+  'MSCommons_NoCOM-NC-NR-FF': (MEDIA_URL + 'licences/META-SHARE_NonCommercial' \
+        '_NoRedistribution_For-a-Fee-v1.0.htm', MEMBER_TYPES.FULL),
+  'MSCommons_NoCOM-NC-NR': (MEDIA_URL + 'licences/META-SHARE_NonCommercial_' \
+        'NoRedistribution-v1.0.htm', MEMBER_TYPES.FULL),
+  'ELRA_EVALUATION': (MEDIA_URL + 'licences/EVALUATION.htm', MEMBER_TYPES.GOD),
+  'ELRA_VAR': (MEDIA_URL + 'licences/VAR-v3_2007.htm', MEMBER_TYPES.GOD),
+  'ELRA_END_USER': (MEDIA_URL + 'licences/ENDUSER-v3_2007.htm',
+                    MEMBER_TYPES.GOD),
+  'ELRA_LIMITED': (MEDIA_URL + 'licences/Var-E-v2.htm', MEMBER_TYPES.GOD),
+  'proprietary': ('', MEMBER_TYPES.GOD),
+  'CLARIN_PUB': ('', MEMBER_TYPES.GOD),
+  'CLARIN_ACA-NC': ('', MEMBER_TYPES.GOD),
+  'CLARIN_ACA': ('', MEMBER_TYPES.GOD),
+  'CLARIN_RES': ('', MEMBER_TYPES.GOD),
+  'Princeton_Wordnet': (MEDIA_URL + 'licences/WordNet-3.0.txt',
+                        MEMBER_TYPES.NON),
+  'GPL': (MEDIA_URL + 'licences/GNU_gpl-3.0.htm', MEMBER_TYPES.NON),
+  'GeneralLicenceGrant': ('', MEMBER_TYPES.GOD),
+  'GFDL': (MEDIA_URL + 'licences/GNU_fdl-1.3.htm', MEMBER_TYPES.NON),
+  'ApacheLicence_V2.0': (MEDIA_URL + 'licences/Apache-2.0.htm',
+                         MEMBER_TYPES.NON),
+  'BSD-style': (MEDIA_URL + 'licences/BSD_licence.htm', MEMBER_TYPES.NON),
+  'underNegotiation': ('', MEMBER_TYPES.GOD),
+  'other': ('', MEMBER_TYPES.GOD)
 }
 
 
-def _get_download_licences(object_id):
+def _get_licences(resource, user):
     """
-    Returns the licences under which a download of the resource with the given
-    ID is possible.
+    Returns the licences under which a download/purchase of the given resource
+    is possible for the given user.
     
-    The result is a dictionary mapping from licence names to corresponding
-    `licenceInfoType_model`s.
+    The result is a dictionary mapping from licence names to pairs. Each pair
+    contains the corresponding `licenceInfoType_model` and a boolean denoting
+    whether the resource may (and can) be directly downloaded or if there need
+    to be further negotiations of some sort.
     """
     licence_infos = tuple(licenceInfoType_model.objects \
-        .filter(back_to_distributioninfotype_model__id=object_id))
-    result = dict([(l_name, l_info) for l_info in licence_infos
-        if u'downloadable' in l_info.get_distributionAccessMedium_display_list()
-        for l_name in l_info.get_licence_display_list()])
+        .filter(back_to_distributioninfotype_model__id=\
+                resource.distributionInfo.id))
+    # TODO: derive MS membership from user object instead of simply assuming
+    #       full membership!
+    user_membership = MEMBER_TYPES.FULL
+    
+    all_licenses = dict([(l_name, l_info) for l_info in licence_infos
+                         for l_name in l_info.get_licence_display_list()])
+    result = {}
+    for name, info in all_licenses.items():
+        access = LICENCEINFOTYPE_URLS_LICENCE_CHOICES.get(name, None)
+        if access == None:
+            LOGGER.warn("Unknown license name discovered in the database for " \
+                        "object #{}: {}".format(resource.id, name))
+            del all_licenses[name]
+        elif user_membership >= access[1] \
+                and (info.downloadLocation \
+                     or resource.storage_object.has_local_download_copy()):
+            # the resource can be downloaded somewhere under the current license
+            # terms and the user's membership allows her to immediately download
+            # the resource
+            result[name] = (info, True)
+        else:
+            # further negotiations are required with the current license
+            result[name] = (info, False)
     return result
 
 
 @login_required
 def download(request, object_id):
     """
-    Renders the resource download view including license selection, etc.
+    Renders the resource download/purchase view including license selection,
+    etc.
     """
     if not request.user.is_active:
         return HttpResponseForbidden()
 
     # here we are only interested in licenses (or their names) of the specified
-    # resource that allow a download
+    # resource that allow the current user a download/purchase
     resource = get_object_or_404(resourceInfoType_model, pk=object_id)
-    licences = _get_download_licences(object_id)
+    licences = _get_licences(resource, request.user)
 
     licence_choice = None
     if request.method == "POST":
@@ -168,7 +194,7 @@ def download(request, object_id):
             la_form = LicenseAgreementForm(licence_choice, data=request.POST)
             if la_form.is_valid():
                 return _provide_download(request, resource,
-                                    licences[licence_choice].downloadLocation)
+                                licences[licence_choice][0].downloadLocation)
             else:
                 return render_to_response('repository/licence_agreement.html',
                     { 'form': la_form, 'resource': resource,

@@ -58,7 +58,7 @@ class LicenseSelectionForm(forms.Form):
             """
             def __iter__(self):
                 for i, choice in enumerate(self.choices):
-                    yield (licences[choice[0]],
+                    yield (licences[choice[0]][0],
                            forms.widgets.RadioInput(self.name, self.value,
                                                 self.attrs.copy(), choice, i))
 
