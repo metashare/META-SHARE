@@ -423,6 +423,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
         by the `facet_counts()` method of a `SearchQuerySet`.
         """
         result = []
+        # pylint: disable-msg=E1101
         filter_labels = [(name, field.label) for name, field
                          in resourceInfoType_modelIndex.fields.iteritems()
                          if name.endswith("Filter")]

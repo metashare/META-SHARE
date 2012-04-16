@@ -79,8 +79,8 @@ class LicenseSelectionForm(forms.Form):
                     .format(_('Restrictions of use:'))
                 r_list = licence_info.get_restrictionsOfUse_display_list()
                 if r_list:
-                    for r in r_list:
-                        result += u'<li>{0}</li>'.format(r)
+                    for restr in r_list:
+                        result += u'<li>{0}</li>'.format(restr)
                 if licences[licence_name][1]:
                     direct_download_msg = _('direct download available')
                 else:
