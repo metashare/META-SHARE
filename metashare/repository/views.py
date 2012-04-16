@@ -223,7 +223,8 @@ def download(request, object_id):
             context_instance=RequestContext(request))
     else:
         return render_to_response('repository/lr_not_downloadable.html',
-                                  { 'resource': resource },
+                                  { 'resource': resource,
+                                    'reason': 'no_suitable_license' },
                                   context_instance=RequestContext(request))
 
 
@@ -270,14 +271,14 @@ def _provide_download(request, resource, download_urls):
         LOGGER.warn("No download could be offered for resource #{0}. These " \
                     "URLs were tried: {1}".format(resource.id, download_urls))
     else:
-        LOGGER.warn("No download could be offered for resource #{0} with " \
-                    "storage object identifier #{1} although it is marked as " \
-                    "downloadable!".format(resource.id,
+        LOGGER.error("No download could be offered for resource #{0} with " \
+                     "storage object identifier #{1} although our code " \
+                     "considered it to be downloadable!".format(resource.id,
                                            resource.storage_object.identifier))
 
     # no download could be provided
     return render_to_response('repository/lr_not_downloadable.html',
-                              { 'resource': resource },
+                              { 'resource': resource, 'reason': 'internal' },
                               context_instance=RequestContext(request))
 
 
