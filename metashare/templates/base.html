@@ -6,15 +6,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>MetaShare</title>
 
-    <link rel="stylesheet" href="{% url metashare.views.frontpage %}site_media/css/blueprint/screen.css" type="text/css" media="screen, projection">
-    <link rel="stylesheet" href="{% url metashare.views.frontpage %}site_media/css/blueprint/print.css" type="text/css" media="print">
-    <!--[if lt IE 8]><link rel="stylesheet" href="{% url metashare.views.frontpage %}site_media/css/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
-    <link rel="stylesheet" href="{% url metashare.views.frontpage %}site_media/css/sexybuttons/sexybuttons.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/blueprint/screen.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/blueprint/print.css" type="text/css" media="print">
+    <!--[if lt IE 8]><link rel="stylesheet" href="{{ MEDIA_URL }}css/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/sexybuttons/sexybuttons.css" type="text/css" media="screen">
     
-    <link rel="stylesheet" href="{% url metashare.views.frontpage %}site_media/css/screen.css" type="text/css" media="screen">
-    <link rel="stylesheet" href="{% url metashare.views.frontpage %}site_media/css/typo.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/screen.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/typo.css" type="text/css" media="screen">
     
-    <script type="text/javascript" src="{% url metashare.views.frontpage %}site_media/js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-1.7.1.min.js"></script>
 
 	<link href='http://fonts.googleapis.com/css?family=Rokkitt' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Cantarell:regular,italic,bold,bolditalic&v1' rel='stylesheet' type='text/css'>
@@ -27,20 +27,20 @@
  	  <div id="inner">
   		<div class="inner_box" style="width:280px;float:left;">
   			<div class="short popup_box">
-	  			<a href="{% url metashare.views.frontpage %}"><div class="icon" onmouseover="$('#popup1').show();" onmouseout="$('#popup1').hide();"><img src="{% url metashare.views.frontpage %}site_media/images/home.png" /></div></a>
-  				<img class="inner" src="{% url metashare.views.frontpage %}site_media/images/trenner.png" />
-  				<div id="popup1" class="popup" style="left:5px;"><img style="left:20px;" src="{% url metashare.views.frontpage %}site_media/images/adv_search_pfeil.png" />Home</div>
+	  			<a href="{% url metashare.views.frontpage %}"><div class="icon" onmouseover="$('#popup1').show();" onmouseout="$('#popup1').hide();"><img src="{{ MEDIA_URL }}images/home.png" /></div></a>
+  				<img class="inner" src="{{ MEDIA_URL }}images/trenner.png" />
+  				<div id="popup1" class="popup" style="left:5px; top:60px;"><img style="left:20px;" src="{{ MEDIA_URL }}images/adv_search_pfeil.png" />Home</div>
   			</div>
 
    			<div class="short popup_box">
-		  		<a href="{% url metashare.views.frontpage %}site_media/documentation.pdf"><div class="icon" onmouseover="$('#popup5').show();" onmouseout="$('#popup5').hide();"><img src="{% url metashare.views.frontpage %}site_media/images/help.png" /></div></a>
-	  			<div id="popup5" class="popup" style="left:98px;"><img  style="padding-left:40px;" src="{% url metashare.views.frontpage %}site_media/images/adv_search_pfeil.png" />Documentation</div>
+		  		<a href="{{ MEDIA_URL }}documentation.pdf"><div class="icon" onmouseover="$('#popup5').show();" onmouseout="$('#popup5').hide();"><img src="{{ MEDIA_URL }}images/help.png" /></div></a>
+	  			<div id="popup5" class="popup" style="left:80px; top:60px;"><img style="left:20px;" src="{{ MEDIA_URL }}images/adv_search_pfeil.png" />Documentation</div>
   			</div>
  
   		</div>
   		
 		<span>
-			<img class="icon" src="{% url metashare.views.frontpage %}site_media/images/metashare.png" /> <sup><sup><i>beta</i></sup></sup>
+			<img class="icon" src="{{ MEDIA_URL }}images/metashare.png" /> <sup><sup><i>beta</i></sup></sup>
 		</span>
 
   		<div class="inner_box" style="float:right;padding-right:20px;">
@@ -63,7 +63,7 @@
    	
    <div class="container">
 <!--    	<div class="span-22" style="height: 410px; margin-top: 20px; text-align:center; margin-left:20px;">
-    		<img src="{% url metashare.views.frontpage %}site_media/images/teaser01.png" />
+    		<img src="{{ MEDIA_URL }}images/teaser01.png" />
     	</div>-->
 
 	<div id="content">

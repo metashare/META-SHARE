@@ -19,13 +19,6 @@
       <distributionAccessMedium>downloadable</distributionAccessMedium>
       <downloadLocation>http://www.example.org/dl1</downloadLocation>
     </licenceInfo>
-    <licenceInfo>
-      <licence>ELRA_VAR</licence>
-      <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-      <distributionAccessMedium>CD-ROM</distributionAccessMedium>
-      <price>Commercial org. Non ELRA Members: 11000.00€</price>
-      <availabilityStartDate>2003-07-15</availabilityStartDate>
-    </licenceInfo>
   </distributionInfo>
   <contactPerson>
     <surname>Doe</surname>

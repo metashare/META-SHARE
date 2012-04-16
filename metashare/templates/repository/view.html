@@ -29,7 +29,7 @@
                 {%if "updated" in stat.action %}
                     &nbsp;<div align=right style="float: right"><i>(Last modified: {{ stat.last }})</i>&nbsp;</div>
                 {% else %}
-                    <img src="{% url metashare.views.frontpage %}site_media/stats/img/{{ stat.action }}_icon.gif"
+                    <img src="{{ MEDIA_URL }}stats/img/{{ stat.action }}_icon.gif"
                     alt="Last {{ stat.action }}: {{ stat.last }}" title="Last {{ stat.action }}: {{ stat.last }}" />
                     <b>{{  stat.count }}</b>&nbsp;
                 {% endif %}
@@ -72,13 +72,13 @@
                     {% if value.0 == "person" %}
         <tr>
             <th><label>{{ value.0|capfirst }}</label></th>
-            <td>{{ value.1.1 }} {{ value.1.2 }} {% if '.jpg' in value.1.0 %}<img src="{% url metashare.views.frontpage %}site_media/images/emails/{{ value.1.0 }}" />{% else %} {{value.1.0}} {% endif %}</td>
+            <td>{{ value.1.1 }} {{ value.1.2 }} {% if '.jpg' in value.1.0 %}<img src="{{ MEDIA_URL }}images/emails/{{ value.1.0 }}" />{% else %} {{value.1.0}} {% endif %}</td>
         </tr>
                     {% else %}
                         {% if value.0 == "email" %}
         <tr>
             <th><label>{{ value.0|capfirst }}</label></th>
-            <td>{% if '.jpg' in value.1 %}<img src="{% url metashare.views.frontpage %}site_media/images/emails/{{ value.1 }}" />{% else %} {{value.1}} {% endif %}</td>
+            <td>{% if '.jpg' in value.1 %}<img src="{{ MEDIA_URL }}images/emails/{{ value.1 }}" />{% else %} {{value.1}} {% endif %}</td>
         </tr>
                         {% else %}
         <tr>

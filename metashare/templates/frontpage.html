@@ -4,7 +4,7 @@
 
 <div class="span-24">
   <div style="text-align:center;margin-top: 20px;margin-bottom: 20px;">
-    <p><img src="{% url metashare.views.frontpage %}site_media/meta-share-logo.png" style="border: 1px solid #cccccc;height: 140px;padding:10px;background-color:white;" /></p>
+    <p><img src="{{ MEDIA_URL }}meta-share-logo.png" style="border: 1px solid #cccccc;height: 140px;padding:10px;background-color:white;" /></p>
     <p>{{resources|intcomma}} language resources at your disposal...</p>
   </div>
     <form method="get" action="{% url metashare.views.frontpage %}repository/search/" class="form_helper">
@@ -21,7 +21,7 @@
 	<tr>
 		<td>
 			<span class="span-7 append-1" style="vertical-align: middle;">
-				<img src="{% url metashare.views.frontpage %}site_media/images/teaser02.png" />
+				<img src="{{ MEDIA_URL }}images/teaser02.png" />
 			</span>
 		</td>
 		
@@ -43,7 +43,7 @@
 <div class="split span-24">
 	<div class="navigation_box push-18 last">
 		<a href="#content" class="scroll">
-			<img src="{% url metashare.views.frontpage %}site_media/images/gototop.png" />
+			<img src="{{ MEDIA_URL }}images/gototop.png" />
 		</a>
 	</div>
 </div>
@@ -66,7 +66,7 @@
 		
 		<td>
 			<span class="span-7 last" style="vertical-align: middle;">
-				<img src="{% url metashare.views.frontpage %}site_media/images/teaser03.png" />
+				<img src="{{ MEDIA_URL }}images/teaser03.png" />
 			</span>
 		</td>
 	</tr>
@@ -79,7 +79,7 @@
 <div class="split span-24">
 	<div class="navigation_box push-18 last">
 		<a href="#content" class="scroll">
-			<img src="{% url metashare.views.frontpage %}site_media/images/gototop.png" />
+			<img src="{{ MEDIA_URL }}images/gototop.png" />
 		</a>
 	</div>
 </div>
@@ -89,7 +89,7 @@
 	<tr>
 		<td>
 			<span class="span-7 append-1" style="vertical-align: middle;">
-				<img src="{% url metashare.views.frontpage %}site_media/images/teaser04.png" />
+				<img src="{{ MEDIA_URL }}images/teaser04.png" />
 			</span>
 		</td>
 		
