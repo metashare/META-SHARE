@@ -218,8 +218,16 @@ class DownloadViewTest(TestCase):
         Verifies that a resource which is externally downloadable can actually
         be downloaded appropriately.
         """
-        # TODO add assertions
-        pass
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        response = client.post(
+            reverse(views.download, args=(self.downloadable_resource_id_1,)),
+            { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
+              'licence': 'CC_BY-NC-SA' },
+            follow = True)
+        self.assertIn(("http://www.example.org/dl1", 302),
+                      response.redirect_chain,
+                      msg="There should be a redirect to example.org.")
 
     def test_resource_download_as_anonymous_user(self):
         """

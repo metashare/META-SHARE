@@ -133,12 +133,12 @@ form
 
 .formsetButton.open
 {
-	background-image: url(/site_media/css/sexybuttons/images/icons/silk/section_expanded.png);
+	background-image: url(sexybuttons/images/icons/silk/section_expanded.png);
 }
 
 .formsetButton.close
 {
-	background-image: url(/site_media/css/sexybuttons/images/icons/silk/section_collapsed.png);
+	background-image: url(sexybuttons/images/icons/silk/section_collapsed.png);
 }
 
 div.multiChoice

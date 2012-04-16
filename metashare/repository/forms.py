@@ -58,7 +58,7 @@ class LicenseSelectionForm(forms.Form):
             """
             def __iter__(self):
                 for i, choice in enumerate(self.choices):
-                    yield (licences[choice[0]],
+                    yield (licences[choice[0]][0],
                            forms.widgets.RadioInput(self.name, self.value,
                                                 self.attrs.copy(), choice, i))
 
@@ -66,21 +66,27 @@ class LicenseSelectionForm(forms.Form):
                 return mark_safe(u'<ul>{0}\n</ul>'.format(
                     u'\n'.join([u'<li><div>{0}</div>\n{1}</li>' \
                                     .format(force_unicode(w),
-                                            self._create_restrictions_block(l))
+                                            self._create_restrictions_block(l,
+                                                                w.choice_value))
                                 for (l, w) in self])))
 
-            def _create_restrictions_block(self, licence_info):
+            def _create_restrictions_block(self, licence_info, licence_name):
                 """
                 Creates an HTML block element string containing the restrictions
                 of the given license information.
                 """
+                result = u'<div><p>{0}</p>\n<ul>' \
+                    .format(_('Restrictions of use:'))
                 r_list = licence_info.get_restrictionsOfUse_display_list()
                 if r_list:
-                    return u'<div><p>{0}</p>\n<ul>{1}</ul></div>'.format(
-                        _('Restrictions of use:'),
-                        u''.join([u'<li>{0}</li>'.format(r) for r in r_list]))
+                    for restr in r_list:
+                        result += u'<li>{0}</li>'.format(restr)
+                if licences[licence_name][1]:
+                    direct_download_msg = _('direct download available')
                 else:
-                    return ''
+                    direct_download_msg = _('no direct download available')
+                result += u'<li>{0}</li></ul></div>'.format(direct_download_msg)
+                return result
 
         self.fields['licence'] = \
             forms.ChoiceField(choices=[(name, name) for name in licences],
