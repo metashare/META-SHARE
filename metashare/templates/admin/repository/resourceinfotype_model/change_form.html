@@ -145,8 +145,8 @@
 		//for text fields and calendar
 		$('div.form-row.errors div input').change(textfield);
 		//for related-widget-wrapper
-		$("div.field-box.errors input.related-widget-wrapper").change(oneToOne);		
-		
+		$("div.field-box.errors input.related-widget-wrapper").change(oneToOne);	
+				
 		 function textfield() {
 			 var input_value = $(this).attr('value');			 
 				if( input_value ) {				
@@ -172,6 +172,15 @@
 		$("div.form-row div input").each(function() { 
 			$(this).trigger('change');
 		});
+		
+		//for many-to-many ajax widget
+		$(document).on("click", "div.field-box.errors", function() {	 
+		    if( $(this).children('.ui-widget.selectable-deck.selectable-deck-bottom').children().length > 0 ){
+		    	$(this).children(".errorlist").remove();				
+				$(this).removeClass("errors");
+				checkForErrors($(this));
+		    }
+		});	
 			
 		//for calendar when user clicks on calendar options 
 		$('div.form-row.errors div span.datetimeshortcuts a').live("click",function(){		
@@ -183,16 +192,16 @@
 		//related-widget-wrapper
 		$("div.field-box.errors input.related-widget-wrapper").each(function() { 			
 			$(this).trigger('change');
-		});	
+		});
 		
 		//for many-to-many widgets (errors disappear only when you click directly on selector-chosen field)
-		$(document).on("change", "div.form-row div.errors div.selector-chosen select.filtered", function() {		  
-  			if( $(this).children().length > 0 ) {										
-					$(this).parents('div').siblings(".errorlist").remove();				
-					$(this).parents('div').removeClass("errors");
-					checkForErrors($(this));
-			}
-		});	
+		//$(document).on("change", "div.form-row div.errors div.selector-chosen select.filtered", function() {		  
+  		//	if( $(this).children().length > 0 ) {										
+		//			$(this).parents('div').siblings(".errorlist").remove();				
+		//			$(this).parents('div').removeClass("errors");
+		//			checkForErrors($(this));
+		//	}
+		//});	
 		
 		//for drop-down menus		
 		$(document).on("change", "div.form-row.errors select", function() {		  
