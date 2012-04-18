@@ -70,7 +70,6 @@ class ResourceComponentInlineFormSet(ReverseInlineFormSet):
         
         error = ''
         for modelfieldname in fieldnames:
-            print modelfieldname
             if modelfieldname not in self.data:
                 continue
             value = self.data[modelfieldname]
@@ -80,9 +79,28 @@ class ResourceComponentInlineFormSet(ReverseInlineFormSet):
                 error = error + format(modelfieldname)+' error. '
                 
         return error
-            
+
+    def clean_corpus_one2many(self, corpusmediatype):
+        error = ''
+        media = 'corpusTextInfo'
+        flag = 'showCorpusTextInfo'
+        if flag in self.data and self.data[flag]:
+            numInfos = corpusmediatype.corpustextinfotype_model_set.all().count()
+            if numInfos == 0:
+                error += media + ' error. '
+        media = 'corpusVideoInfo'
+        flag = 'showCorpusVideoInfo'
+        if flag in self.data and self.data[flag]:
+            numInfos = corpusmediatype.corpusvideoinfotype_model_set.all().count()
+            if numInfos == 0:
+                error += media + ' error. '
+        return error    
+
+        
+         
     def clean_corpus(self, corpus):
-        return self.clean_media(corpus.corpusMediaType, \
+        return self.clean_corpus_one2many(corpus.corpusMediaType) \
+            + self.clean_media(corpus.corpusMediaType, \
              ('corpusAudioInfo', 'corpusImageInfo', 'corpusTextNumericalInfo', 'corpusTextNgramInfo'))
 
     def clean_langdesc(self, langdesc):
