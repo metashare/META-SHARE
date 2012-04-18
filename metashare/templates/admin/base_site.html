@@ -4,7 +4,7 @@
 {% block title %}{{ title }} | {% trans 'META-SHARE backend' %}{% endblock %}
 {% block extrastyle %}
 <link rel="stylesheet" type="text/css" href="{% load adminmedia %}{% admin_media_prefix %}css/metashare-editor.css" />
-<script type="text/javascript" src="{% admin_media_prefix %}js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="{% admin_media_prefix %}js/metashare-editor.js"></script>
 {% endblock %}
 {% block branding %}
