@@ -229,18 +229,60 @@ class EditorTest(TestCase):
         self.assertContains(response, "Resource name:", msg_prefix='Identification is not shown inline')
         
     def test_one2one_distribution_is_hidden(self):
+        """
+        Asserts that a required OneToOneField referring to models that "contain"
+        one2many fields is hidden, i.e., the model is edited in a popup/overlay.
+        """
         client = self.client_with_user_logged_in(self.editor_login)
         resource = self.import_test_resource()
-        response = client.get('{}repository/resourceinfotype_model/{}/'.format(ADMINROOT, resource.id))
+        response = client.get('{}repository/resourceinfotype_model/{}/'
+                              .format(ADMINROOT, resource.id))
         self.assertContains(response, 'type="hidden" id="id_distributionInfo"',
-                            msg_prefix='One-to-one field "distributionInfo" should have been hidden')
+                            msg_prefix='Required One-to-one field ' \
+                                'distributionInfo" should have been hidden.')
 
     def test_one2one_distribution_uses_related_widget(self):
+        """
+        Asserts that a required OneToOneField referring to models that "contain"
+        one2many fields is edited in a popup/overlay.
+        """
         client = self.client_with_user_logged_in(self.editor_login)
         resource = self.import_test_resource()
-        response = client.get('{}repository/resourceinfotype_model/{}/'.format(ADMINROOT, resource.id))
-        self.assertContains(response, 'related-widget-wrapper-change-link" id="edit_id_distributionInfo"',
-                             msg_prefix='One-to-one field "distributionInfo" not rendered using related widget')
+        response = client.get('{}repository/resourceinfotype_model/{}/' \
+                              .format(ADMINROOT, resource.id))
+        self.assertContains(response, 'related-widget-wrapper-change-link" ' \
+                                'id="edit_id_distributionInfo"',
+                msg_prefix='Required One-to-one field ' \
+                    '"distributionInfo" not rendered using related widget.')
+        
+    def test_one2one_usage_is_hidden(self):
+        """
+        Asserts that a recommended OneToOneField referring to models that
+        "contain" one2many fields is hidden, i.e., the model is edited in a
+        popup/overlay.
+        """
+        client = self.client_with_user_logged_in(self.editor_login)
+        resource = self.import_test_resource()
+        response = client.get('{}repository/resourceinfotype_model/{}/' \
+                              .format(ADMINROOT, resource.id))
+        self.assertContains(response, 'type="hidden" id="id_usageInfo"',
+                            msg_prefix='Recommended One-to-one field ' \
+                                '"usageInfo" should have been hidden.')
+
+    def test_one2one_usage_uses_related_widget(self):
+        """
+        Asserts that a recommended OneToOneField referring to models that
+        "contain" one2many fields is edited in a popup/overlay.
+        """
+        client = self.client_with_user_logged_in(self.editor_login)
+        resource = self.import_test_resource()
+        response = client.get('{}repository/resourceinfotype_model/{}/' \
+                              .format(ADMINROOT, resource.id))
+        self.assertContains(response, 'related-widget-wrapper-change-link" ' \
+                                'id="edit_id_usageInfo"',
+                msg_prefix='Recommended One-to-one field "usageInfo" not ' \
+                    'rendered using related widget, although it contains ' \
+                    'a One-to-Many field.')
 
     def test_licenceinfo_inline_is_present(self):
         client = self.client_with_user_logged_in(self.editor_login)
