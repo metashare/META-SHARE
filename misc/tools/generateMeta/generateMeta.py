@@ -3,7 +3,7 @@
 Synopsis:
     Generate Python classes from XML Schema definition.
     Input is read from in_xsd_file or, if "-" (dash) arg, from stdin.
-    Output is written to files named in "-o" and "-s" options.
+    Output is written to the file named in the "-o" option.
 Usage:
     python generateDS.py [ options ] <xsd_file>
     python generateDS.py [ options ] -
@@ -83,13 +83,11 @@ Options:
 #from __future__ import generators   # only needed for Python 2.2
 
 import sys
-import os.path
-import time
 import getopt
 import logging
 
 from parse_xsd import mapName, cleanupName, ElementDict, SimpleTypeDict, \
-  set_type_constants, load_config, XsdNameSpace, parse_schema
+  set_type_constants, load_config, parse_schema
 
 from clazzbase import Clazz, ClazzAttributeMember, ClazzMember
 
@@ -140,7 +138,6 @@ VERSION = '2.7a'
 
 GenerateProperties = 0
 MemberSpecs = None
-DelayedElements = []
 AlreadyGenerated = []
 PostponedExtensions = []
 
@@ -237,8 +234,7 @@ def createClazz(prefix, element, processed):
     
     createClazzMembers(new_clazz, element)
     
-    parentName, parent = getParentName(element)
-    superclass_name = 'None'
+    parentName, dummy = getParentName(element)
     if parentName and parentName in AlreadyGenerated:
         new_clazz.parentName = mapName(cleanupName(parentName))
 # end createClazz
@@ -256,28 +252,18 @@ def createFromTree(prefix, elements, processed):
 
 
 def createClazzes(prefix, root):
-    global DelayedElements
     processed = []
-    
-    DelayedElements = []
+
     elements = root.getChildren()
     createFromTree(prefix, elements, processed)
-    while 1:
-        if len(DelayedElements) <= 0:
-            break
-        element = DelayedElements.pop()
-        name = get_clazz_name_from_element(element)
-        if name not in processed:
-            processed.append(name)
-            createClazz(prefix, element)
-    #
+
     # Create the elements that were postponed because we had not
     #   yet created their base class.
     while 1:
         if len(PostponedExtensions) <= 0:
             break
         element = PostponedExtensions.pop()
-        parentName, parent = getParentName(element)
+        parentName, dummy = getParentName(element)
         if parentName:
             if (parentName in AlreadyGenerated or
                 parentName in SimpleTypeDict.keys()):
@@ -338,7 +324,7 @@ def main():
             'version',
             'make-choices-optional',
             ])
-    except getopt.GetoptError, exp:
+    except getopt.GetoptError:
         usage()
     prefix = ''
     outFilename = None
