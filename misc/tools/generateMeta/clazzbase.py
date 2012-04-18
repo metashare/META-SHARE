@@ -1,5 +1,6 @@
 from collections import OrderedDict
 
+import os
 import sys
 import logging
 from parse_xsd import ElementDict, XschemaElementBase, XschemaElement
@@ -986,12 +987,12 @@ class Clazz(object):
         return result
 
     @classmethod
-    def generate(cls, prefix, root, package_prefix):
+    def generate(cls, outDirName, prefix, root, package_prefix):
         cls.establish_one_to_many()
 
-        models_file_name = 'models.py'
-        forms_file_name = 'forms.py'
-        admin_file_name = 'admin.py'
+        models_file_name = os.path.join(outDirName, 'models.py')
+        forms_file_name = os.path.join(outDirName, 'forms.py')
+        admin_file_name = os.path.join(outDirName, 'admin.py')
 
         models_writer = Writer(models_file_name)
         forms_writer = Writer(forms_file_name)

@@ -3,13 +3,14 @@
 Synopsis:
     Generate Python classes from XML Schema definition.
     Input is read from in_xsd_file or, if "-" (dash) arg, from stdin.
-    Output is written to the file named in the "-o" option.
+    Output is written to files named in the "-o" option.
 Usage:
     python generateDS.py [ options ] <xsd_file>
     python generateDS.py [ options ] -
 Options:
     -h, --help               Display this help information.
-    -o <outfilename>         Output file name for data representation classes
+    -o <outdirname>          Output directory name for generated modules; the
+                             current working directory is used by default
     -p <prefix>              Prefix string to be pre-pended to the class names
     -a <namespaceabbrev>     Namespace abbreviation, e.g. "xsd:".
                              Default = 'xs:'.
@@ -276,7 +277,7 @@ def createClazzes(prefix, root):
 # Functions
 #
 
-def parseAndGenerate(outfileName, prefix, xschemaFileName, processIncludes,
+def parseAndGenerate(outDirName, prefix, xschemaFileName, processIncludes,
   package_prefix, force_optional_choices):
     root = parse_schema(xschemaFileName, processIncludes, force_optional_choices)
             
@@ -291,7 +292,7 @@ def parseAndGenerate(outfileName, prefix, xschemaFileName, processIncludes,
         for key, value in Clazz.ClazzDict.items():
             print 'clazzName: {}  elt: {}'.format(key, value.schema_element)
     
-    Clazz.generate(prefix, root, package_prefix)
+    Clazz.generate(outDirName, prefix, root, package_prefix)
 
 
 def err_msg(msg):
@@ -327,7 +328,7 @@ def main():
     except getopt.GetoptError:
         usage()
     prefix = ''
-    outFilename = None
+    outDirName = None
     nameSpace = 'xs:'
     processIncludes = 1
     namespacedef = ''
@@ -349,7 +350,7 @@ def main():
         elif option[0] == '-p':
             prefix = option[1]
         elif option[0] == '-o':
-            outFilename = option[1]
+            outDirName = option[1]
         elif option[0] == '-a':
             nameSpace = option[1]
         elif option[0] == '-m':
@@ -390,7 +391,7 @@ def main():
         else:
             xschemaFileName = args[0]
     load_config()
-    parseAndGenerate(outFilename, prefix, xschemaFileName, processIncludes,
+    parseAndGenerate(outDirName, prefix, xschemaFileName, processIncludes,
       package_prefix, ForceOptionalChoices)
 
 
