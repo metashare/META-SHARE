@@ -59,17 +59,21 @@ class ReverseInlineFormSet(BaseModelFormSet):
                  prefix = None,
                  save_as_new = False,
                  queryset=None):
+        _qs = None
         if instance.pk:
             obj = getattr(instance, self.parent_fk_name)
-            _qs = self.model.objects.filter(pk = obj.id)
-        else:
+            if obj:
+                _qs = self.model.objects.filter(pk = obj.id)
+        if not _qs:
             _qs = self.model.objects.filter(pk = -1)
             self.extra = 1
         super(ReverseInlineFormSet, self).__init__(data, files,
                                                        prefix = prefix,
                                                        queryset = _qs)
         for form in self.forms:
-            form.empty_permitted = False
+            # if the form set can be deleted, then it is not required and then
+            # its forms may be empty
+            form.empty_permitted = getattr(self, 'can_delete', False)
 
 
 def reverse_inlineformset_factory(parent_model,
@@ -85,7 +89,8 @@ def reverse_inlineformset_factory(parent_model,
         'formfield_callback': formfield_callback,
         'formset': formset,
         'extra': 0,
-        'can_delete': False,
+        'can_delete': parent_fk_name not in \
+            parent_model.get_fields()['required'],
         'can_order': False,
         'fields': fields,
         'exclude': exclude,
