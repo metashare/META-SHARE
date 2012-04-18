@@ -278,7 +278,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
     content_fields = ('resourceComponentType',)
     list_display = ('__unicode__', 'resource_type', 'publication_status')
     actions = (publish_resources, unpublish_resources, ingest_resources, )
-    no_inlines = ['distributionInfo', ]
     hidden_fields = ('storage_object',)
 
 
