@@ -33,48 +33,40 @@ class ResourceMediaTypes(template.Node):
         if isinstance(corpus_media, corpusInfoType_model):
             media_type = corpus_media.corpusMediaType
             for corpus_info in media_type.corpustextinfotype_model_set.all():
-                result.append(corpus_info.get_mediaType_display())
+                result.append(corpus_info.mediaType)
             if media_type.corpusAudioInfo:
-                result.append(media_type.corpusAudioInfo \
-                              .get_mediaType_display())
+                result.append(media_type.corpusAudioInfo.mediaType)
             for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-                result.append(corpus_info.get_mediaType_display())
+                result.append(corpus_info.mediaType)
             if media_type.corpusTextNgramInfo:
-                result.append(media_type.corpusTextNgramInfo \
-                              .get_mediaType_display())
+                result.append(media_type.corpusTextNgramInfo.mediaType)
             if media_type.corpusImageInfo:
-                result.append(media_type.corpusImageInfo \
-                              .get_mediaType_display())
+                result.append(media_type.corpusImageInfo.mediaType)
             if media_type.corpusTextNumericalInfo:
-                result.append(media_type.corpusTextNumericalInfo \
-                              .get_mediaType_display())
+                result.append(media_type.corpusTextNumericalInfo.mediaType)
 
         elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
             lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
             if lcr_media_type.lexicalConceptualResourceTextInfo:
-                result.append(lcr_media_type.lexicalConceptualResourceTextInfo \
-                              .get_mediaType_display())
+                result.append(lcr_media_type.lexicalConceptualResourceTextInfo.mediaType)
             if lcr_media_type.lexicalConceptualResourceAudioInfo:
                 result.append(lcr_media_type \
-                    .lexicalConceptualResourceAudioInfo.get_mediaType_display())
+                    .lexicalConceptualResourceAudioInfo.mediaType)
             if lcr_media_type.lexicalConceptualResourceVideoInfo:
                 result.append(lcr_media_type \
-                    .lexicalConceptualResourceVideoInfo.get_mediaType_display())
+                    .lexicalConceptualResourceVideoInfo.mediaType)
             if lcr_media_type.lexicalConceptualResourceImageInfo:
                 result.append(lcr_media_type \
-                    .lexicalConceptualResourceImageInfo.get_mediaType_display())
+                    .lexicalConceptualResourceImageInfo.mediaType)
 
         elif isinstance(corpus_media, languageDescriptionInfoType_model):
             ld_media_type = corpus_media.languageDescriptionMediaType
             if ld_media_type.languageDescriptionTextInfo:
-                result.append(ld_media_type.languageDescriptionTextInfo \
-                              .get_mediaType_display())
+                result.append(ld_media_type.languageDescriptionTextInfo.mediaType)
             if ld_media_type.languageDescriptionVideoInfo:
-                result.append(ld_media_type.languageDescriptionVideoInfo \
-                              .get_mediaType_display())
+                result.append(ld_media_type.languageDescriptionVideoInfo.mediaType)
             if ld_media_type.languageDescriptionImageInfo:
-                result.append(ld_media_type.languageDescriptionImageInfo \
-                              .get_mediaType_display())
+                result.append(ld_media_type.languageDescriptionImageInfo.mediaType)
 
         elif isinstance(corpus_media, toolServiceInfoType_model):
             if corpus_media.inputInfo:

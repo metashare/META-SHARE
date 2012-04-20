@@ -9,6 +9,7 @@ from django.test.testcases import TestCase
 from django.core.management import call_command
 from metashare.xml_utils import import_from_file
 from metashare.storage.models import PUBLISHED
+from django.contrib.auth.models import User
 
 def setup_test_storage():
     settings.STORAGE_PATH = '{0}/test-tmp'.format(settings.ROOT_PATH)
@@ -16,6 +17,11 @@ def setup_test_storage():
         os.mkdir(settings.STORAGE_PATH)
     except:
         pass
+    
+    
+def create_user(username, email, password):
+    User.objects.all().filter(username=username).delete()
+    return User.objects.create_user(username, email, password)
 
 def import_xml(filename):
     _xml = open(filename)
