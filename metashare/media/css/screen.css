@@ -296,7 +296,6 @@ form.form_helper td ul {
 }
 */
 
-
 form.form_helper div.component_left {
 	margin-top: 5px;
 	height: 	18px;
@@ -483,16 +482,69 @@ div.less_details{
 	background-repeat: no-repeat;
 }
 
-div.content_box{
-    position: relative;
+/*override container size*/
+div.container{
+	width: 1200px;
+	position: relative;
+}
+div.container > div#content > h2{
+	margin-left: 45px;
+}
+
+/*end override container size*/
+
+/*filters separate box*/
+div.filters_box{
+	margin-left: 45px;
+    	position: relative;
 	background-color: white;
-	padding: 20px 20px 20px 20px;
-	
+	padding: 20px 20px 20px 20px;	
+	-webkit-box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
+	-moz-box-shadow: 	0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
+	box-shadow: 		0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
+    	float: left;
+}
+/*end filters separate box*/
+
+div.content_box{
+	margin-left: 20px;
+    	position: relative;
+	background-color: white;
+	padding: 20px 20px 20px 20px;	
 	-webkit-box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
 	-moz-box-shadow: 	0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
 	box-shadow: 		0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
     float: left
 }
+
+/*expandable filters*/
+dt.accordion a{
+
+    min-height: 18px;
+    color: #999999;
+    font-size: 9pt;
+    max-width: 1000px;
+}
+dt.accordion.collapsed a:before{
+    content: " " url(sexybuttons/images/icons/silk/bullet_arrow_right.png);
+    vertical-align: top;
+}
+
+dt.accordion.expanded a:before{
+    content: " " url(sexybuttons/images/icons/silk/bullet_arrow_down.png);
+    vertical-align: top;
+}
+
+dt.accordion{
+background-color: #eee;
+	padding: 4px 4px 4px 4px;
+	width: 180px;
+	margin: .9em 0 .3em 0;
+	color: #777;
+	border-radius: 0 10px 10px 0;
+}
+
+/*end expandable filters*/
 
 div.filter_box{
     vertical-align: top;
@@ -561,10 +613,6 @@ div#content{
 	min-height: 500px;
 }
 
-
-
-
-
 .gradient_orange{
 	background: #FF6633;
 	background: -moz-linear-gradient(top, #FFCC00, #FF6633);
@@ -593,7 +641,11 @@ div.split{
 	padding-right: 0px;
 	overflow: hidden;
 }
-
+/*table width*/
+table.result_table {
+	width:800px;
+}
+/*end table width*/
 
 table.result_table tr.result_table_head{
 	text-shadow: 0px 1px 1px white;

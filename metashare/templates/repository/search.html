@@ -23,7 +23,54 @@ $(document).ready(function(){
 });
 </script>
 
+<script>
+	$(document).ready(function(){		
+		$("dt.accordion").nextUntil("dt").hide();		
+		$("dt.accordion").each(function(){			
+			$(this).nextUntil("dt").find("a.removableFacet").parents("dd").toggle();		
+			addStatus($(this));
+		});
+		
+	    $("dt.accordion").click(function() {
+			$(this).nextUntil("dt").slideToggle("slow", callbackFn);		
+		});			          		
+	});	
+
+
+	function callbackFn(){
+		if( $(this).is(":visible") ){
+			$(this).prev("dt.accordion").removeClass('collapsed'); 
+			$(this).prev("dt.accordion").addClass('expanded');
+		}else{			
+			$(this).prev("dt.accordion").removeClass('expanded'); 
+			$(this).prev("dt.accordion").addClass('collapsed'); 
+		}
+}
+	function addStatus(filter){			
+		if(filter.nextUntil("dt").attr("style") == "display: none;" ){		
+			filter.removeClass('expanded');
+			filter.addClass('collapsed');
+		}
+		else{
+			filter.removeClass('collapsed');
+			filter.addClass('expanded');					
+		}		
+	}
+</script>
+
 <h2>Search Catalogue</h2>
+
+<div class="filters_box">
+        <div class="filter_box">
+          <h4>Filter by:</h4>
+          <dl id="searchFilters">
+          {% for filter in filters %}
+            {% include "repository/filter.html" with filter=filter %}
+          {% endfor %}
+          </dl>
+        </div>
+</div>
+
 <div class="content_box">
   <form class="form_helper" id="searchbox" action="." method="get">
     <table>
@@ -42,17 +89,8 @@ $(document).ready(function(){
   </form>
   <table>
     <tr style="valign:top">
-      <td width="20%">
-        <div class="filter_box">
-          <h4>Filter by:</h4>
-          <dl id="searchFilters">
-          {% for filter in filters %}
-            {% include "repository/filter.html" with filter=filter %}
-          {% endfor %}
-          </dl>
-        </div>
-          </td>
-          <td width="70%">
+      
+          <td>
             <div class="results">    
               <h3> {{ page.paginator.count }} Language Resource{{page.paginator.count|pluralize}} {% if page.paginator.num_pages > 1 %}(Page {{ page.number }}  of {{ page.paginator.num_pages }}) {% endif %} </h3>
               
