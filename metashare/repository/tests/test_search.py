@@ -5,6 +5,7 @@ from haystack.query import SearchQuerySet
 from django.contrib.auth.models import User
 from django.test.client import Client
 import os
+from metashare.test_utils import create_user
 
 
 class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
@@ -118,19 +119,19 @@ class SearchTest(test_utils.IndexAwareTestCase):
         """
         test_utils.setup_test_storage()                        
      
-        staffuser = User.objects.create_user('staffuser', 'staff@example.com',
-          'secret')
+        staffuser = create_user('staffuser', 'staff@example.com', 'secret')
         staffuser.is_staff = True
         staffuser.save()
-        normaluser =  User.objects.create_user('normaluser', 'normal@example.com', 'secret')
+        normaluser =  create_user('normaluser', 'normal@example.com', 'secret')
         normaluser.save()
 
     def tearDown(self):
         """
         Clean up the test
         """
-        resourceInfoType_model.objects.all().delete()                 
-                
+        resourceInfoType_model.objects.all().delete()
+        User.objects.all().delete()
+
     def importOneFixture(self):
         _currfile = '{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
         test_utils.import_xml_or_zip(_currfile)

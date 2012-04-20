@@ -80,14 +80,16 @@ if __name__ == "__main__":
     ERRONEOUS_EXPORTS = 0
     RESOURCE_NO = 0
     from metashare.repository.models import resourceInfoType_model
+    from metashare.repository.supermodel import pretty_xml
     with ZipFile(sys.argv[1], 'w') as out:
         for resource in resourceInfoType_model.objects.all():
             try:
                 RESOURCE_NO += 1
                 root_node = resource.export_to_elementtree()
                 xml_string = ElementTree.tostring(root_node, encoding="utf-8")
+                pretty = pretty_xml(xml_string).encode('utf-8');
                 resource_filename = 'resource-{0}.xml'.format(RESOURCE_NO)
-                out.writestr(resource_filename, xml_string)
+                out.writestr(resource_filename, pretty)
                 SUCCESSFUL_EXPORTS += 1
             
             except Exception:

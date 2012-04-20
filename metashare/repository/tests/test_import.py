@@ -83,4 +83,4 @@ class ImportTest(TestCase):
         self.assertEqual(1, len(successes), 'Could not import file {} -- successes is {}, failures is {}'.format(_currfile, successes, failures))
         self.assertEqual(1, len(failures), 'Could not import file {} -- successes is {}, failures is {}'.format(_currfile, successes, failures))
         self.assertEquals('broken.xml', failures[0][0])
-    
+

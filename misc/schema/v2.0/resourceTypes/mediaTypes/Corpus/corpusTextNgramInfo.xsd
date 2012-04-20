@@ -14,22 +14,13 @@
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="mediaType">
+			<xs:element name="mediaType" type="xs:string" fixed="textNgram">
 				<xs:annotation>
 					<xs:documentation>Specifies the media type of the resource and basically corresponds to the physical medium of the content representation. Each media type is described through a distinctive set of features. A resource may consist of parts attributed to different types of media. A tool/service may take as input/output more than one different media types.</xs:documentation>
 					<xs:appinfo>
-						<maxlen>30</maxlen>
+						<maxlen>10</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:enumeration value="textNgram">
-							<xs:annotation>
-								<xs:documentation>for n-gram resources</xs:documentation>
-							</xs:annotation>
-						</xs:enumeration>
-					</xs:restriction>
-				</xs:simpleType>
 			</xs:element>
 			<xs:element ref="ms:ngramInfo">
 				<xs:annotation/>

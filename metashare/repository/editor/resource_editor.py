@@ -85,14 +85,14 @@ class ResourceComponentInlineFormSet(ReverseInlineFormSet):
         media = 'corpusTextInfo'
         flag = 'showCorpusTextInfo'
         if flag in self.data and self.data[flag]:
-            numInfos = corpusmediatype.corpustextinfotype_model_set.all().count()
-            if numInfos == 0:
+            num_infos = corpusmediatype.corpustextinfotype_model_set.all().count()
+            if num_infos == 0:
                 error += media + ' error. '
         media = 'corpusVideoInfo'
         flag = 'showCorpusVideoInfo'
         if flag in self.data and self.data[flag]:
-            numInfos = corpusmediatype.corpusvideoinfotype_model_set.all().count()
-            if numInfos == 0:
+            num_infos = corpusmediatype.corpusvideoinfotype_model_set.all().count()
+            if num_infos == 0:
                 error += media + ' error. '
         return error    
 
@@ -446,25 +446,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         # pylint: disable-msg=E1101
         verify_subclass(self.model, SchemaModel)
 
-        exclusion_list = ()
-        if hasattr(self, 'exclude') and self.exclude is not None:
-            exclusion_list += tuple(self.exclude)
-
-        _hidden_fields = getattr(self, 'hidden_fields', None)
-        # hidden fields are also excluded
-        if _hidden_fields:
-            for _hidden_field in _hidden_fields:
-                if _hidden_field not in exclusion_list:
-                    exclusion_list += (_hidden_field, )
-
-        _readonly_fields = getattr(self, 'readonly_fields', None)
-        # readonly fields are also excluded
-        if _readonly_fields:
-            for _readonly_field in _readonly_fields:
-                if _readonly_field not in exclusion_list:
-                    exclusion_list += (_readonly_field, )
-
-
+        exclusion_list = set(self.get_excluded_fields() + self.get_hidden_fields() + self.get_non_editable_fields())
 
         _fieldsets = []
         _content_fieldsets = []
@@ -514,6 +496,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         
         _fieldsets += _content_fieldsets
 
+        _hidden_fields = self.get_hidden_fields()
         if _hidden_fields:
             _fieldsets.append((None, {'fields': _hidden_fields, 'classes':('display_none', )}))
 

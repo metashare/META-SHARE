@@ -4,6 +4,7 @@ The mixin code for ModelAdmin to link to the SchemaModel objects in models.py.
 from metashare.utils import verify_subclass, get_class_by_name
 from metashare.repository.supermodel import SchemaModel
 from metashare.repository.editor.editorutils import encode_as_inline
+from django.db.models.fields import FieldDoesNotExist
 
 
 class SchemaModelLookup(object):
@@ -31,6 +32,32 @@ class SchemaModelLookup(object):
     def is_visible_as_inline(self, field_name, include_inlines, inlines):
         return include_inlines and (field_name in inlines or self.is_inline(field_name))
 
+    def get_excluded_fields(self):
+        # pylint: disable-msg=E1101
+        if hasattr(self, 'exclude') and self.exclude is not None:
+            return tuple(self.exclude)
+        return ()
+    
+    def get_hidden_fields(self):
+        # pylint: disable-msg=E1101
+        if hasattr(self, 'hidden_fields') and self.hidden_fields is not None:
+            return tuple(self.hidden_fields)
+        return ()
+    
+    def get_non_editable_fields(self):
+        # pylint: disable-msg=E1101
+        _readonly = ()
+        if hasattr(self, 'readonly_fields') and self.readonly_fields is not None:
+            _readonly += tuple(self.readonly_fields)
+        _fields = self.model.get_fields_flat()
+        for _field_name in _fields:
+            try:
+                if not self.model._meta.get_field(_field_name).editable:
+                    _readonly += (_field_name, )
+            except FieldDoesNotExist:
+                pass
+        return _readonly
+
     def build_fieldsets_from_schema_plain(self, include_inlines=False, inlines=()):
         """
         Builds fieldsets using SchemaModel.get_fields().
@@ -38,23 +65,7 @@ class SchemaModelLookup(object):
         # pylint: disable-msg=E1101
         verify_subclass(self.model, SchemaModel)
 
-        exclusion_list = ()
-        if hasattr(self, 'exclude') and self.exclude is not None:
-            exclusion_list += tuple(self.exclude)
-
-        _hidden_fields = getattr(self, 'hidden_fields', None)
-        _hidden_fields = _hidden_fields or []
-        # hidden fields are also excluded
-        for _hidden_field in _hidden_fields:
-            if _hidden_field not in exclusion_list:
-                exclusion_list += _hidden_field
-
-        _readonly_fields = getattr(self, 'readonly_fields', None)
-        # readonly fields are also excluded
-        if _readonly_fields:
-            for _readonly_field in _readonly_fields:
-                if _readonly_field not in exclusion_list:
-                    exclusion_list += (_readonly_field, )
+        exclusion_list = set(self.get_excluded_fields() + self.get_hidden_fields() + self.get_non_editable_fields())
 
         # pylint: disable-msg=E1101
         _fields = self.model.get_fields_flat()
@@ -67,9 +78,11 @@ class SchemaModelLookup(object):
                 _visible_fields.append(encode_as_inline(_field_name))
 
         _fieldsets = ((None,
-            {'fields': _visible_fields + list(_hidden_fields)}
+            {'fields': _visible_fields + list(self.get_hidden_fields())}
         ),)
         return _fieldsets
+
+
 
     def build_fieldsets_from_schema_tabbed(self, include_inlines=False, inlines=()):
         """
@@ -79,25 +92,7 @@ class SchemaModelLookup(object):
         # pylint: disable-msg=E1101
         verify_subclass(self.model, SchemaModel)
 
-        exclusion_list = ()
-        if hasattr(self, 'exclude') and self.exclude is not None:
-            exclusion_list += tuple(self.exclude)
-
-        _hidden_fields = getattr(self, 'hidden_fields', None)
-        # hidden fields are also excluded
-        if _hidden_fields:
-            for _hidden_field in _hidden_fields:
-                if _hidden_field not in exclusion_list:
-                    exclusion_list += (_hidden_field, )
-
-        _readonly_fields = getattr(self, 'readonly_fields', None)
-        # readonly fields are also excluded
-        if _readonly_fields:
-            for _readonly_field in _readonly_fields:
-                if _readonly_field not in exclusion_list:
-                    exclusion_list += (_readonly_field, )
-
-
+        exclusion_list = set(self.get_excluded_fields() + self.get_hidden_fields() + self.get_non_editable_fields())
         
         _fieldsets = []
         # pylint: disable-msg=E1101
@@ -126,6 +121,7 @@ class SchemaModelLookup(object):
                 _fieldset = {'fields': _visible_fields}
                 _fieldsets.append((_caption, _fieldset))
 
+        _hidden_fields = self.get_hidden_fields()
         if _hidden_fields:
             _fieldsets.append((None, {'fields': _hidden_fields, 'classes':('display_none', )}))
 
