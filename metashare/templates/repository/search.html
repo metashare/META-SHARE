@@ -89,10 +89,8 @@ $(document).ready(function(){
   </form>
   <table>
     <tr style="valign:top">
-      <td width="20%">
-
-          </td>
-          <td width="70%">
+      
+          <td>
             <div class="results">    
               <h3> {{ page.paginator.count }} Language Resource{{page.paginator.count|pluralize}} {% if page.paginator.num_pages > 1 %}(Page {{ page.number }}  of {{ page.paginator.num_pages }}) {% endif %} </h3>
               
