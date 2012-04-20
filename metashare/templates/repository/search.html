@@ -25,14 +25,14 @@ $(document).ready(function(){
 
 <script>
 	$(document).ready(function(){		
-		$("dt.accordion").next("div.filters").hide();		
+		$("dt.accordion").nextUntil("dt").hide();		
 		$("dt.accordion").each(function(){			
-			$(this).next("div.filters").find("a.removableFacet").parents("div.filters").toggle();		
+			$(this).nextUntil("dt").find("a.removableFacet").parents("dd").toggle();		
 			addStatus($(this));
 		});
 		
 	    $("dt.accordion").click(function() {
-			$(this).next(".filters").slideToggle("slow", callbackFn);		
+			$(this).nextUntil("dt").slideToggle("slow", callbackFn);		
 		});			          		
 	});	
 
@@ -47,7 +47,7 @@ $(document).ready(function(){
 		}
 }
 	function addStatus(filter){			
-		if(filter.next('.filters').attr("style") == "display: none;" ){		
+		if(filter.nextUntil("dt").attr("style") == "display: none;" ){		
 			filter.removeClass('expanded');
 			filter.addClass('collapsed');
 		}
