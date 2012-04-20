@@ -38,8 +38,7 @@ def saveLRStats(userid, lrid, sessid, action):
         record.userid = userid
         record.lrid = lrid
         record.action = action
-        record.sessid = sessid
-    
+        record.sessid = sessid 
         record.save(force_insert=True)
         LOGGER.debug('SAVESTATS: Saved LR {0}, {1} action={2}.'.format(lrid, sessid, action))
 
@@ -52,7 +51,8 @@ def getLRStats(lrid):
             for key2 in sets:
                 if (len(data) > 0):
                     data += ", "
-                data += "{\"action\":\""+ STAT_LABELS[str(key['action'])] +"\",\"count\":\""+str(key['count__sum']) +"\",\"last\":\""+str(key2['lasttime'])[:10]+"\"}"
+                data += "{\"action\":\""+ STAT_LABELS[str(key['action'])] +"\",\"count\":\""+ \
+                    str(key['count__sum']) +"\",\"last\":\""+str(key2['lasttime'])[:10]+"\"}"
                 break    
     return json.loads("["+data+"]")
  	      

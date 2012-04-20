@@ -6,7 +6,9 @@ Author: Christian Girardi <cgirardi@fbk.eu>
 from metashare.settings import DJANGO_URL, STATS_SERVER_URL
 from metashare.stats.models import LRStats, QueryStats
 from metashare.stats.model_utils import getLRTop, getLastQuery, getLRLast, statDays, VIEW_STAT, UPDATE_STAT, DOWNLOAD_STAT
+
 # pylint: disable-msg=W0611, W0401
+import metashare
 from metashare.repo2.models import *
 
 from django.shortcuts import render_to_response     
@@ -23,9 +25,13 @@ try:
 except:
     import pickle
 
+resourceInfoType_model
 
 #possible models and their default field
-SELECT_MODEL = {'Language': ['languageInfoType_model', 'languageName'],
+SELECT_MODEL = {'Corpus resource': ['corpusInfoType_model', 'resourceType'],
+                'Tools': ['toolServiceInfoType_model', 'resourceType'],
+                'Lexical resource': ['lexicalConceptualResourceInfoType_model', 'resourceType'],
+                'Language': ['languageInfoType_model', 'languageName'],
                 'Licence': ['licenceInfoType_model', 'licence'],
                 'Creator': ['communicationInfoType_model','country'],
                 'Organization': ['organizationInfoType_model','organizationName'],
@@ -52,7 +58,7 @@ def callServerStats():
 thread = Timer(2.0, callServerStats)
 thread.start()
 
-def repostats (request):    
+def repostats (request):
     selected_menu_value = []
     modelname = request.POST.get('model', 'Language')
     selected_menu_value.append(['model', modelname])
@@ -64,17 +70,18 @@ def repostats (request):
         dbfield = SELECT_MODEL[str(modelname)][1]
     selected_menu_value.append(['field', dbfield])
     
-    dbfields = []
-    dbclasses = eval(u'{0}.__schema_classes__'.format(dbmodel))
+    fields = []
+    dbclasses = getattr(metashare.repo2.models, dbmodel).__schema_classes__
+    dbfields = getattr(metashare.repo2.models, dbmodel).__schema_fields__
     relational_fields = []
-    for field in eval(u'{0}.__schema_fields__'.format(dbmodel)):
+    for field in dbfields:
         if field[0] in NOACCESS_FIELDS:
             continue  
         if (field[0] in dbclasses):
             relational_fields.append(field)
         else:
             if (isinstance(field[0], unicode)):
-                dbfields.append(field)
+                fields.append(field)
         
     repodata = []
     if (dbfield != ""):
@@ -83,11 +90,11 @@ def repostats (request):
         else:    
             values = eval(u'{0}._meta.get_field("{1}").choices'.format(dbmodel, dbfield))
         if (modelname == "Licence" and len(values) > 0):
-            licences = tuple(licenceInfoType_model.objects.all())
             dictlic = collections.defaultdict(int)
+            licences = eval(u'{0}.objects.all()'.format(dbmodel))
             for licence in eval(u'[name for licence_info in licences for name in licence_info.get_{0}_display_list()]'.format(dbfield)):
                 dictlic[str(licence)] += 1
-            for key,val in sorted(dictlic.iteritems(), key=lambda (k,v): (v,k), reverse=True):            
+            for key, val in sorted(dictlic.iteritems(), key=lambda (k, v): (v, k), reverse=True):            
                 repodata.append([key, val])                   
         else:
             result = eval(u'{0}.objects.values("{1}").annotate(Count("{1}")).order_by("-{1}__count")'.format(dbmodel, dbfield))
@@ -112,7 +119,8 @@ def repostats (request):
                             repodata.append([str(value), item[dbfield + "__count"]])
                     
     return render_to_response('stats/repostats.html',
-        {'user': request.user, 'result': repodata, 'selected_menu_value': selected_menu_value, 'models': SELECT_MODEL.keys(), 'fields': dbfields, "subfields": relational_fields})
+        {'user': request.user, 'result': repodata, 'selected_menu_value': selected_menu_value, \
+            'models': SELECT_MODEL.keys(), 'fields': fields, "subfields": relational_fields})
 
 
 def usagestats (request):
@@ -195,47 +203,53 @@ def getstats (request):
     else:
         extimes["exectime__avg"] = 0
         
-    return HttpResponse("["+JSONEncoder().encode({"date": str(currdate), "user": user, "lrupdate": lrupdate, "lrview": lrview, "lrdown": lrdown, "queries": queries, "qexec_time_avg": extimes["exectime__avg"], "qlt_avg": qltavg})+"]")
+    return HttpResponse("["+JSONEncoder().encode({"date": str(currdate), "user": \
+        user, "lrupdate": lrupdate, "lrview": lrview, "lrdown": lrdown, "queries": queries, \
+        "qexec_time_avg": extimes["exectime__avg"], "qlt_avg": qltavg})+"]")
 
 
-def pretty_timeago(time=False):
+def pretty_timeago(timein=False):
     """
     Get a datetime object or a int() Epoch timestamp and return a
     pretty string like 'an hour ago', 'Yesterday', '3 months ago',
     'just now', etc
-    """   
+    """
     now = datetime.now()
-    if type(time) is int:
-        diff = now - datetime.fromtimestamp(time)
-    elif isinstance(time, datetime):
-        diff = now - time 
-    elif not time:
+    timeout = ''
+    if type(timein) is int:
+        diff = now - datetime.fromtimestamp(timein)
+    elif isinstance(timein, datetime):
+        diff = now - timein 
+    elif not timein:
         diff = now - now
     second_diff = diff.seconds
     day_diff = diff.days
 
     if day_diff < 0:
-        return ''
+        return timeout
 
     if day_diff == 0:
         if second_diff < 10:
-            return "just now"
+            timeout = "just now"
         if second_diff < 60:
-            return str(second_diff) + " seconds ago"
+            timeout = str(second_diff) + " seconds ago"
         if second_diff < 120:
-            return  "a minute ago"
+            timeout =  "a minute ago"
         if second_diff < 3600:
-            return str( second_diff / 60 ) + " minutes ago"
+            timeout = str( second_diff / 60 ) + " minutes ago"
         if second_diff < 7200:
-            return "an hour ago"
+            timeout = "an hour ago"
         if second_diff < 86400:
             return str( second_diff / 3600 ) + " hours ago"
     if day_diff == 1:
-        return "Yesterday"
+        timeout = "Yesterday"
     if day_diff < 7:
-        return str(day_diff) + " days ago"
+        timeout = str(day_diff) + " days ago"
     if day_diff < 31:
-        return str(day_diff/7) + " weeks ago"
+        timeout = str(day_diff/7) + " weeks ago"
     if day_diff < 365:
-        return str(day_diff/30) + " months ago"
-    return str(day_diff/365) + " years ago"
+        timeout = str(day_diff/30) + " months ago"
+    timeout = str(day_diff/365) + " years ago"
+    
+    return timeout
+    

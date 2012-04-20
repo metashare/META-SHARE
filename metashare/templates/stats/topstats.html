@@ -26,7 +26,7 @@
 {% endifequal %}
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Latest Updated Resources
 
-<option value='latestqueries' style="background-image: url({% url metashare.views.frontpage %}site_media/stats/img/r_icon.gif); background-repeat: no-repeat;"
+<option value='latestqueries' style="background-image: url({% url metashare.views.frontpage %}site_media/stats/img/retrieve_icon.gif); background-repeat: no-repeat;"
 {% ifequal view "latestqueries" %} 
 	selected
 {% endifequal %}
@@ -68,7 +68,7 @@
    <th style="text-align:right;" nowrap>{{ stat.0 }}</th>
    <td width=100%><a href="{{ stat.1 }}">{{ stat.3 }}</a></td>
    <td nowrap>
-   {% ifequal view "latestupdated" %}
+   {% ifequal view "latestupdated" %}   
         {{ stat.2 }}
    {% else %}
         <b>{{ stat.2 }}</b>

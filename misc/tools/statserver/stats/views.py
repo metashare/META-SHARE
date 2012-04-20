@@ -7,10 +7,24 @@ from statserver.settings import CHECKINGTIME, MEDIA_URL
 from urllib2 import URLError, Request, urlopen 
 import threading
 from datetime import datetime, date
-from threading import Timer
+from threading import Timer, Thread
+import time
 import json
 
 action_labels = {"updated": "u", "downloaded": "d", "viewed":"v"}
+
+class BackgroundTimer(Thread):
+    def run(self):
+        while 1:
+            time.sleep(CHECKINGTIME)
+            Timer(0, checknodes).start()
+
+def checknodes():
+    nodes = Node.objects.all()
+    print "# {0} Checking META-Share nodes: {1} found".format(datetime.now(), len(nodes))
+    for node in nodes:
+        updateNodeStats(node, date.today())  
+    
 
 def addnode(request):
     """
@@ -123,33 +137,7 @@ def updateNodeStats(node, daytime):
     node.save(force_update=True)
     return 
  
-def collectnodestats(node=None):
-    if (node == None):
-        nodes = Node.objects.all()
-    else:
-        nodes = []
-        nodes.append(node)
-    for node in nodes:
-        #get days with some statistic 
-        days = getNodeStats(node.hostname+ "/stats/days")
-        for day in days:  
-            updateNodeStats(node, str(day))
-    
 
-def checknodes():
-    nodes = Node.objects.all()
-    #print "# {0} Checking META-Share nodes: {1} found".format(datetime.now(), len(nodes))
-    for node in nodes:
-        updateNodeStats(node, date.today())  
-    thread = Timer(CHECKINGTIME, checknodes)
-    thread.start() 
-     
-thread = Timer(CHECKINGTIME, checknodes)
-thread.start()
-thread2 = Timer(5.0, collectnodestats)
-thread2.start()
-
-  
 # create a view about actions made on all METASHARE nodes	
 def browse(request):
     hosts = {}
@@ -233,45 +221,65 @@ def browse(request):
     'actions_bydate': actions_bydate, 'media_prefix': MEDIA_URL, 'date': days, 'currdate': currdate})
 
 
+def collectnodestats(node=None):
+    if (node == None):
+        nodes = Node.objects.all()
+    else:
+        nodes = []
+        nodes.append(node)
+    for node in nodes:
+        #get days with some statistic 
+        days = getNodeStats(node.hostname+ "/stats/days")
+        for day in days:  
+            updateNodeStats(node, str(day))
+ 
+collectnodes = Timer(5.0, collectnodestats)
+collectnodes.start()
+checktimer = BackgroundTimer()
+checktimer.start()
 
-def pretty_timeago(time=False):
+
+def pretty_timeago(timein=False):
     """
     Get a datetime object or a int() Epoch timestamp and return a
     pretty string like 'an hour ago', 'Yesterday', '3 months ago',
     'just now', etc
     """
     now = datetime.now()
-    if type(time) is int:
-        diff = now - datetime.fromtimestamp(time)
-    elif isinstance(time, datetime):
-        diff = now - time 
-    elif not time:
+    timeout = ''
+    if type(timein) is int:
+        diff = now - datetime.fromtimestamp(timein)
+    elif isinstance(timein, datetime):
+        diff = now - timein 
+    elif not timein:
         diff = now - now
     second_diff = diff.seconds
     day_diff = diff.days
 
     if day_diff < 0:
-        return ''
+        return timeout
 
     if day_diff == 0:
         if second_diff < 10:
-            return "just now"
+            timeout = "just now"
         if second_diff < 60:
-            return str(second_diff) + " seconds ago"
+            timeout = str(second_diff) + " seconds ago"
         if second_diff < 120:
-            return  "a minute ago"
+            timeout =  "a minute ago"
         if second_diff < 3600:
-            return str( second_diff / 60 ) + " minutes ago"
+            timeout = str( second_diff / 60 ) + " minutes ago"
         if second_diff < 7200:
-            return "an hour ago"
+            timeout = "an hour ago"
         if second_diff < 86400:
             return str( second_diff / 3600 ) + " hours ago"
     if day_diff == 1:
-        return "Yesterday"
+        timeout = "Yesterday"
     if day_diff < 7:
-        return str(day_diff) + " days ago"
+        timeout = str(day_diff) + " days ago"
     if day_diff < 31:
-        return str(day_diff/7) + " weeks ago"
+        timeout = str(day_diff/7) + " weeks ago"
     if day_diff < 365:
-        return str(day_diff/30) + " months ago"
-    return str(day_diff/365) + " years ago"
+        timeout = str(day_diff/30) + " months ago"
+    timeout = str(day_diff/365) + " years ago"
+    
+    return timeout
