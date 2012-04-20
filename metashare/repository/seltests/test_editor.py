@@ -144,7 +144,6 @@ class EditorTest(SeleniumTestCase):
         # corpus info text popup
         driver.find_element_by_id("add_id_corpusTextInfo-0").click()
         driver.switch_to_window("id_corpusTextInfo__dash__0")
-        Select(driver.find_element_by_id("id_mediaType")).select_by_visible_text("text")
         Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
           "monolingual")
         # corpus info text / language popup
