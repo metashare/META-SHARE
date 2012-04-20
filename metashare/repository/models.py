@@ -3930,10 +3930,6 @@ class audioClassificationInfoType_model(SchemaModel):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
 
-CORPUSTEXTINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
-])
-
 # pylint: disable-msg=C0103
 class corpusTextInfoType_model(SchemaModel):
     """
@@ -3984,10 +3980,7 @@ class corpusTextInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      
-      max_length=30,
-      choices=CORPUSTEXTINFOTYPE_MEDIATYPE_CHOICES['choices'],
-      )
+      default="text", editable=False, max_length=30, )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 

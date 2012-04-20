@@ -33,7 +33,7 @@ class ResourceMediaTypes(template.Node):
         if isinstance(corpus_media, corpusInfoType_model):
             media_type = corpus_media.corpusMediaType
             for corpus_info in media_type.corpustextinfotype_model_set.all():
-                result.append(corpus_info.get_mediaType_display())
+                result.append('text')
             if media_type.corpusAudioInfo:
                 result.append(media_type.corpusAudioInfo \
                               .get_mediaType_display())
