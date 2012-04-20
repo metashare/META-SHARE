@@ -3353,10 +3353,6 @@ class projectListType_model(SchemaModel):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
 
-CORPUSAUDIOINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
-])
-
 # pylint: disable-msg=C0103
 class corpusAudioInfoType_model(SchemaModel):
     """
@@ -3413,10 +3409,7 @@ class corpusAudioInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      
-      max_length=30,
-      choices=CORPUSAUDIOINFOTYPE_MEDIATYPE_CHOICES['choices'],
-      )
+      default="audio", editable=False, max_length=10, )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -3980,7 +3973,7 @@ class corpusTextInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      default="text", editable=False, max_length=30, )
+      default="text", editable=False, max_length=10, )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -4558,10 +4551,6 @@ class videoClassificationInfoType_model(SchemaModel):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
 
-CORPUSIMAGEINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
-])
-
 # pylint: disable-msg=C0103
 class corpusImageInfoType_model(SchemaModel):
     """
@@ -4614,10 +4603,7 @@ class corpusImageInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      
-      max_length=30,
-      choices=CORPUSIMAGEINFOTYPE_MEDIATYPE_CHOICES['choices'],
-      )
+      default="image", editable=False, max_length=10, )
 
     modalityInfo = models.ManyToManyField("modalityInfoType_model", 
       verbose_name='Modality', 
@@ -4931,10 +4917,6 @@ class imageClassificationInfoType_model(SchemaModel):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
 
-CORPUSTEXTNUMERICALINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
-])
-
 # pylint: disable-msg=C0103
 class corpusTextNumericalInfoType_model(SchemaModel):
     """
@@ -4979,10 +4961,7 @@ class corpusTextNumericalInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      
-      max_length=30,
-      choices=CORPUSTEXTNUMERICALINFOTYPE_MEDIATYPE_CHOICES['choices'],
-      )
+      default="textNumerical", editable=False, max_length=10, )
 
     modalityInfo = models.ManyToManyField("modalityInfoType_model", 
       verbose_name='Modality', 
@@ -5108,10 +5087,6 @@ class textNumericalFormatInfoType_model(SchemaModel):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
 
-CORPUSTEXTNGRAMINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
-])
-
 # pylint: disable-msg=C0103
 class corpusTextNgramInfoType_model(SchemaModel):
     """
@@ -5166,10 +5141,7 @@ class corpusTextNgramInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      
-      max_length=30,
-      choices=CORPUSTEXTNGRAMINFOTYPE_MEDIATYPE_CHOICES['choices'],
-      )
+      default="textNgram", editable=False, max_length=10, )
 
     ngramInfo = models.OneToOneField("ngramInfoType_model", 
       verbose_name='Ngram', )
@@ -5552,10 +5524,6 @@ class languageDescriptionPerformanceInfoType_model(SchemaModel):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
 
-LANGUAGEDESCRIPTIONTEXTINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
-])
-
 # pylint: disable-msg=C0103
 class languageDescriptionTextInfoType_model(SchemaModel):
     """
@@ -5604,10 +5572,7 @@ class languageDescriptionTextInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      
-      max_length=LANGUAGEDESCRIPTIONTEXTINFOTYPE_MEDIATYPE_CHOICES['max_length'],
-      choices=LANGUAGEDESCRIPTIONTEXTINFOTYPE_MEDIATYPE_CHOICES['choices'],
-      )
+      default="text", editable=False, max_length=10, )
 
     creationInfo = models.OneToOneField("creationInfoType_model", 
       verbose_name='Creation', 
@@ -5682,10 +5647,6 @@ class languageDescriptionTextInfoType_model(SchemaModel):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
 
-LANGUAGEDESCRIPTIONVIDEOINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
-])
-
 # pylint: disable-msg=C0103
 class languageDescriptionVideoInfoType_model(SchemaModel):
     """
@@ -5734,10 +5695,7 @@ class languageDescriptionVideoInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      
-      max_length=LANGUAGEDESCRIPTIONVIDEOINFOTYPE_MEDIATYPE_CHOICES['max_length'],
-      choices=LANGUAGEDESCRIPTIONVIDEOINFOTYPE_MEDIATYPE_CHOICES['choices'],
-      )
+      default="video", editable=False, max_length=10, )
 
     creationInfo = models.OneToOneField("creationInfoType_model", 
       verbose_name='Creation', 
@@ -5813,10 +5771,6 @@ class languageDescriptionVideoInfoType_model(SchemaModel):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
 
-LANGUAGEDESCRIPTIONIMAGEINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
-])
-
 # pylint: disable-msg=C0103
 class languageDescriptionImageInfoType_model(SchemaModel):
     """
@@ -5865,10 +5819,7 @@ class languageDescriptionImageInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      
-      max_length=LANGUAGEDESCRIPTIONIMAGEINFOTYPE_MEDIATYPE_CHOICES['max_length'],
-      choices=LANGUAGEDESCRIPTIONIMAGEINFOTYPE_MEDIATYPE_CHOICES['choices'],
-      )
+      default="image", editable=False, max_length=10, )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -6061,10 +6012,6 @@ class lexicalConceptualResourceEncodingInfoType_model(SchemaModel):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
 
-LEXICALCONCEPTUALRESOURCEAUDIOINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
-])
-
 # pylint: disable-msg=C0103
 class lexicalConceptualResourceAudioInfoType_model(SchemaModel):
     """
@@ -6108,10 +6055,7 @@ class lexicalConceptualResourceAudioInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      
-      max_length=LEXICALCONCEPTUALRESOURCEAUDIOINFOTYPE_MEDIATYPE_CHOICES['max_length'],
-      choices=LEXICALCONCEPTUALRESOURCEAUDIOINFOTYPE_MEDIATYPE_CHOICES['choices'],
-      )
+      default="audio", editable=False, max_length=10, )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -6172,10 +6116,6 @@ class lexicalConceptualResourceAudioInfoType_model(SchemaModel):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
 
-LEXICALCONCEPTUALRESOURCETEXTINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
-])
-
 # pylint: disable-msg=C0103
 class lexicalConceptualResourceTextInfoType_model(SchemaModel):
     """
@@ -6219,10 +6159,7 @@ class lexicalConceptualResourceTextInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      
-      max_length=LEXICALCONCEPTUALRESOURCETEXTINFOTYPE_MEDIATYPE_CHOICES['max_length'],
-      choices=LEXICALCONCEPTUALRESOURCETEXTINFOTYPE_MEDIATYPE_CHOICES['choices'],
-      )
+      default="text", editable=False, max_length=10, )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -6282,10 +6219,6 @@ class lexicalConceptualResourceTextInfoType_model(SchemaModel):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
 
-LEXICALCONCEPTUALRESOURCEVIDEOINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
-])
-
 # pylint: disable-msg=C0103
 class lexicalConceptualResourceVideoInfoType_model(SchemaModel):
     """
@@ -6329,10 +6262,7 @@ class lexicalConceptualResourceVideoInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      
-      max_length=LEXICALCONCEPTUALRESOURCEVIDEOINFOTYPE_MEDIATYPE_CHOICES['max_length'],
-      choices=LEXICALCONCEPTUALRESOURCEVIDEOINFOTYPE_MEDIATYPE_CHOICES['choices'],
-      )
+      default="video", editable=False, max_length=10, )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -6393,10 +6323,6 @@ class lexicalConceptualResourceVideoInfoType_model(SchemaModel):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
 
-LEXICALCONCEPTUALRESOURCEIMAGEINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
-])
-
 # pylint: disable-msg=C0103
 class lexicalConceptualResourceImageInfoType_model(SchemaModel):
     """
@@ -6440,10 +6366,7 @@ class lexicalConceptualResourceImageInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      
-      max_length=LEXICALCONCEPTUALRESOURCEIMAGEINFOTYPE_MEDIATYPE_CHOICES['max_length'],
-      choices=LEXICALCONCEPTUALRESOURCEIMAGEINFOTYPE_MEDIATYPE_CHOICES['choices'],
-      )
+      default="image", editable=False, max_length=10, )
 
     modalityInfo = models.ManyToManyField("modalityInfoType_model", 
       verbose_name='Modality', 
