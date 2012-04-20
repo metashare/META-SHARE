@@ -648,6 +648,9 @@ class Clazz(object):
                 required = 'blank=True, '
             self.generate_simple_field(name, 'MetaBooleanField', options, required)
         elif data_type in String_type_table:
+            fixed_value = member.get_fixed()
+            if fixed_value:
+                options += 'default="{0}", editable=False, '.format(fixed_value)
             if not member.is_required():
                 options += 'blank=True, '
             if isinstance(member.get_data_type_chain(), list) and \
@@ -1192,6 +1195,14 @@ class ClazzMember(ClazzBaseMember):
         if isinstance(self.child, str):
             return []
         return self.child.getValues()
+    
+    def get_fixed(self):
+        if isinstance(self.child, str):
+            return None
+        attrs = self.child.getAttrs()
+        if 'fixed' in attrs:
+            return attrs['fixed']
+        return None
 
     def is_one_to_many(self):
         if not self.is_unbounded():
