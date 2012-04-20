@@ -351,7 +351,7 @@ def main():
     NoQuestions = False
     showVersion = False
     xschemaFileName = None
-    package_prefix = "metashare.repo2."
+    package_prefix = "metashare.repository."
     DEBUG = False
     ForceOptionalChoices = False
     
