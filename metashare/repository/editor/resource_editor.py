@@ -85,14 +85,14 @@ class ResourceComponentInlineFormSet(ReverseInlineFormSet):
         media = 'corpusTextInfo'
         flag = 'showCorpusTextInfo'
         if flag in self.data and self.data[flag]:
-            numInfos = corpusmediatype.corpustextinfotype_model_set.all().count()
-            if numInfos == 0:
+            num_infos = corpusmediatype.corpustextinfotype_model_set.all().count()
+            if num_infos == 0:
                 error += media + ' error. '
         media = 'corpusVideoInfo'
         flag = 'showCorpusVideoInfo'
         if flag in self.data and self.data[flag]:
-            numInfos = corpusmediatype.corpusvideoinfotype_model_set.all().count()
-            if numInfos == 0:
+            num_infos = corpusmediatype.corpusvideoinfotype_model_set.all().count()
+            if num_infos == 0:
                 error += media + ' error. '
         return error    
 

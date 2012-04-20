@@ -66,8 +66,6 @@ class RelatedAdminMixin(object):
 
     def is_related_widget_appropriate(self, kwargs, formfield):
         'Determine whether it is appropriate to use a related-widget'
-        if 'widget' in kwargs:
-            print 'kwarg widget is: ', kwargs['widget']
         if formfield and \
                 isinstance(formfield.widget, admin.widgets.RelatedFieldWidgetWrapper) and \
                 not isinstance(formfield.widget.widget, SelectMultiple) and \
