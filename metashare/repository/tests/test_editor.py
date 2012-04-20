@@ -18,6 +18,12 @@ TESTFIXTURES_ZIP = '{}/repository/fixtures/tworesources.zip'.format(ROOT_PATH)
 BROKENFIXTURES_ZIP = '{}/repository/fixtures/onegood_onebroken.zip'.format(ROOT_PATH)
 LEX_CONC_RES_XML = '{}/repository/test_fixtures/published-lexConcept-Text-FreEngGer.xml'.format(ROOT_PATH)
 
+# Global variables to be initialized in setUpClass():
+staff_login = None
+normal_login = None
+editor_login = None
+testfixture = None
+
 class EditorTest(TestCase):
     """
     Test the python/server side of the editor
@@ -25,8 +31,15 @@ class EditorTest(TestCase):
 
     #fixtures = ['testfixture.json']
     
+    @classmethod
+    def import_test_resource(cls, path=TESTFIXTURE_XML):
+        test_utils.setup_test_storage()
+        result = test_utils.import_xml(path)
+        resource = result[0]
+        return resource
 
-    def setUp(self):
+    @classmethod
+    def setUpClass(cls):
         """
         set up test users with and without staff permissions.
         These will live in the test database only, so will not
@@ -49,29 +62,34 @@ class EditorTest(TestCase):
 
 
         # login POST dicts
-        self.staff_login = {
+        global staff_login, normal_login, editor_login, testfixture
+        staff_login = {
             REDIRECT_FIELD_NAME: ADMINROOT,
             LOGIN_FORM_KEY: 1,
             'username': 'staffuser',
             'password': 'secret',
         }
 
-        self.normal_login = {
+        normal_login = {
             REDIRECT_FIELD_NAME: ADMINROOT,
             LOGIN_FORM_KEY: 1,
             'username': 'normaluser',
             'password': 'secret',
         }
         
-        self.editor_login = {
+        editor_login = {
             REDIRECT_FIELD_NAME: ADMINROOT,
             LOGIN_FORM_KEY: 1,
             'username': 'editoruser',
             'password': 'secret',
         }
-                
-    def tearDown(self):
+        
+        testfixture = cls.import_test_resource()
+
+    @classmethod
+    def tearDownClass(cls):
         resourceInfoType_model.objects.all().delete()
+        User.objects.all().delete()
     
     
     def client_with_user_logged_in(self, user_credentials):
@@ -83,17 +101,12 @@ class EditorTest(TestCase):
                 .format(user_credentials, response)
         return client
 
-    def import_test_resource(self, path=TESTFIXTURE_XML):
-        test_utils.setup_test_storage()
-        result = test_utils.import_xml(path)
-        resource = result[0]
-        return resource
 
     def test_can_log_in_staff(self):
         client = Client()
         request = client.get(ADMINROOT)
         self.assertEqual(request.status_code, 200)
-        login = client.post(ADMINROOT, self.staff_login)
+        login = client.post(ADMINROOT, staff_login)
         # successful login redirects (status 302), failed login gives a status of 200:
         self.assertNotContains(login, 'Please enter a correct username and password', status_code=302)
         self.assertRedirects(login, ADMINROOT)
@@ -104,37 +117,37 @@ class EditorTest(TestCase):
         client = Client()
         request = client.get(ADMINROOT)
         self.assertEqual(request.status_code, 200)
-        login = client.post(ADMINROOT, self.normal_login)
+        login = client.post(ADMINROOT, normal_login)
         # successful login redirects (status 302), failed login gives a status of 200:
         self.assertContains(login, 'Please enter a correct username and password', status_code=200)
             
     def test_editor_can_see_model_list(self):
-        client = self.client_with_user_logged_in(self.editor_login)
+        client = self.client_with_user_logged_in(editor_login)
         response = client.get(ADMINROOT+'repository/')
         self.assertContains(response, 'Repository administration')
         
     def test_staff_cannot_see_model_list(self):
-        client = self.client_with_user_logged_in(self.staff_login)
+        client = self.client_with_user_logged_in(staff_login)
         response = client.get(ADMINROOT+'repository/')
         self.assertContains(response, 'Page not found', status_code=404)
 
     def test_editor_can_see_resource_add(self):
-        client = self.client_with_user_logged_in(self.editor_login)
+        client = self.client_with_user_logged_in(editor_login)
         response = client.get(ADMINROOT+"repository/resourceinfotype_model/add/", follow=True)
         self.assertContains(response, 'Add Resource')
 
     def test_staff_cannot_see_resource_add(self):
-        client = self.client_with_user_logged_in(self.staff_login)
+        client = self.client_with_user_logged_in(staff_login)
         response = client.get(ADMINROOT+'repository/resourceinfotype_model/add/', follow=True)
         self.assertContains(response, 'User Authentication', status_code=200)
 
     def test_editor_can_see_corpus_add(self):
-        client = self.client_with_user_logged_in(self.editor_login)
+        client = self.client_with_user_logged_in(editor_login)
         response = client.get(ADMINROOT+"repository/corpusinfotype_model/add/", follow=True)
         self.assertEquals(200, response.status_code)
 
     def test_staff_cannot_see_corpus_add(self):
-        client = self.client_with_user_logged_in(self.staff_login)
+        client = self.client_with_user_logged_in(staff_login)
         response = client.get(ADMINROOT+'repository/corpusinfotype_model/add/')
         self.assertContains(response, 'Permission denied', status_code=403)
 
@@ -151,7 +164,7 @@ class EditorTest(TestCase):
         # Make sure admin.site.register() is actually executed:
         # pylint: disable-msg=W0612
         import metashare.repository.admin
-        client = self.client_with_user_logged_in(self.editor_login)
+        client = self.client_with_user_logged_in(editor_login)
         items = models.__dict__.items()
         num = 0
         for key, value in items:
@@ -180,32 +193,31 @@ class EditorTest(TestCase):
 
 
     def test_resource_list_contains_publish_action(self):
-        self.import_test_resource()
-        client = self.client_with_user_logged_in(self.editor_login)
+        client = self.client_with_user_logged_in(editor_login)
         response = client.get(ADMINROOT+"repository/resourceinfotype_model/", follow=True)
         self.assertContains(response, 'Publish selected ingested resources', msg_prefix='response: {0}'.format(response))
         
 
     def test_upload_single_xml(self):
-        client = self.client_with_user_logged_in(self.editor_login)
+        client = self.client_with_user_logged_in(editor_login)
         xmlfile = open(TESTFIXTURE_XML)
         response = client.post(ADMINROOT+'upload_xml/', {'description': xmlfile, 'uploadTerms':'on' }, follow=True)
         self.assertContains(response, 'Successfully uploaded file')
         
     def test_upload_broken_xml(self):
-        client = self.client_with_user_logged_in(self.editor_login)
+        client = self.client_with_user_logged_in(editor_login)
         xmlfile = open(BROKENFIXTURE_XML)
         response = client.post(ADMINROOT+'upload_xml/', {'description': xmlfile, 'uploadTerms':'on' }, follow=True)
         self.assertContains(response, 'Import failed', msg_prefix='response: {0}'.format(response))
         
     def test_upload_single_xml_unchecked(self):
-        client = self.client_with_user_logged_in(self.editor_login)
+        client = self.client_with_user_logged_in(editor_login)
         xmlfile = open(TESTFIXTURE_XML)
         response = client.post(ADMINROOT+'upload_xml/', {'description': xmlfile }, follow=True)
         self.assertFormError(response, 'form', 'uploadTerms', 'This field is required.')
     
     def test_upload_zip(self):
-        client = self.client_with_user_logged_in(self.editor_login)
+        client = self.client_with_user_logged_in(editor_login)
         xmlfile = open(TESTFIXTURES_ZIP, 'rb')
         response = client.post(ADMINROOT+'upload_xml/', {'description': xmlfile, 'uploadTerms':'on' }, follow=True)
         self.assertContains(response, 'Successfully uploaded 2 resource descriptions')
@@ -215,16 +227,15 @@ class EditorTest(TestCase):
         self.assertNotContains(response, '0 Resources')
 
     def test_upload_broken_zip(self):
-        client = self.client_with_user_logged_in(self.editor_login)
+        client = self.client_with_user_logged_in(editor_login)
         xmlfile = open(BROKENFIXTURES_ZIP, 'rb')
         response = client.post(ADMINROOT+'upload_xml/', {'description': xmlfile, 'uploadTerms':'on' }, follow=True)
         self.assertContains(response, 'Successfully uploaded 1 resource descriptions')
         self.assertContains(response, 'Import failed for 1 files')
         
     def test_identification_is_inline(self):
-        client = self.client_with_user_logged_in(self.editor_login)
-        resource = self.import_test_resource()
-        response = client.get('{}repository/resourceinfotype_model/{}/'.format(ADMINROOT, resource.id))
+        client = self.client_with_user_logged_in(editor_login)
+        response = client.get('{}repository/resourceinfotype_model/{}/'.format(ADMINROOT, testfixture.id))
         # Resource name is a field of identification, so if this is present, identification is shown inline:
         self.assertContains(response, "Resource name:", msg_prefix='Identification is not shown inline')
         
@@ -233,10 +244,9 @@ class EditorTest(TestCase):
         Asserts that a required OneToOneField referring to models that "contain"
         one2many fields is hidden, i.e., the model is edited in a popup/overlay.
         """
-        client = self.client_with_user_logged_in(self.editor_login)
-        resource = self.import_test_resource()
+        client = self.client_with_user_logged_in(editor_login)
         response = client.get('{}repository/resourceinfotype_model/{}/'
-                              .format(ADMINROOT, resource.id))
+                              .format(ADMINROOT, testfixture.id))
         self.assertContains(response, 'type="hidden" id="id_distributionInfo"',
                             msg_prefix='Required One-to-one field ' \
                                 'distributionInfo" should have been hidden.')
@@ -246,10 +256,9 @@ class EditorTest(TestCase):
         Asserts that a required OneToOneField referring to models that "contain"
         one2many fields is edited in a popup/overlay.
         """
-        client = self.client_with_user_logged_in(self.editor_login)
-        resource = self.import_test_resource()
+        client = self.client_with_user_logged_in(editor_login)
         response = client.get('{}repository/resourceinfotype_model/{}/' \
-                              .format(ADMINROOT, resource.id))
+                              .format(ADMINROOT, testfixture.id))
         self.assertContains(response, 'related-widget-wrapper-change-link" ' \
                                 'id="edit_id_distributionInfo"',
                 msg_prefix='Required One-to-one field ' \
@@ -261,10 +270,9 @@ class EditorTest(TestCase):
         "contain" one2many fields is hidden, i.e., the model is edited in a
         popup/overlay.
         """
-        client = self.client_with_user_logged_in(self.editor_login)
-        resource = self.import_test_resource()
+        client = self.client_with_user_logged_in(editor_login)
         response = client.get('{}repository/resourceinfotype_model/{}/' \
-                              .format(ADMINROOT, resource.id))
+                              .format(ADMINROOT, testfixture.id))
         self.assertContains(response, 'type="hidden" id="id_usageInfo"',
                             msg_prefix='Recommended One-to-one field ' \
                                 '"usageInfo" should have been hidden.')
@@ -274,10 +282,9 @@ class EditorTest(TestCase):
         Asserts that a recommended OneToOneField referring to models that
         "contain" one2many fields is edited in a popup/overlay.
         """
-        client = self.client_with_user_logged_in(self.editor_login)
-        resource = self.import_test_resource()
+        client = self.client_with_user_logged_in(editor_login)
         response = client.get('{}repository/resourceinfotype_model/{}/' \
-                              .format(ADMINROOT, resource.id))
+                              .format(ADMINROOT, testfixture.id))
         self.assertContains(response, 'related-widget-wrapper-change-link" ' \
                                 'id="edit_id_usageInfo"',
                 msg_prefix='Recommended One-to-one field "usageInfo" not ' \
@@ -285,72 +292,65 @@ class EditorTest(TestCase):
                     'a One-to-Many field.')
 
     def test_licenceinfo_inline_is_present(self):
-        client = self.client_with_user_logged_in(self.editor_login)
-        resource = self.import_test_resource()
-        response = client.get('{}repository/distributioninfotype_model/{}/'.format(ADMINROOT, resource.distributionInfo.id))
+        client = self.client_with_user_logged_in(editor_login)
+        response = client.get('{}repository/distributioninfotype_model/{}/'.format(ADMINROOT, testfixture.distributionInfo.id))
         self.assertContains(response, '<div class="inline-group" id="licenceinfotype_model_set-group">',
                             msg_prefix='expected licence info inline')
         
 
     def test_one2one_sizepervalidation_is_hidden(self):
-        client = self.client_with_user_logged_in(self.editor_login)
-        resource = self.import_test_resource()
-        response = client.get('{}repository/resourceinfotype_model/{}/'.format(ADMINROOT, resource.id))
+        client = self.client_with_user_logged_in(editor_login)
+        response = client.get('{}repository/resourceinfotype_model/{}/'.format(ADMINROOT, testfixture.id))
         self.assertContains(response, 'type="hidden" id="id_validationinfotype_model_set-0-sizePerValidation"',
                              msg_prefix='One-to-one field "sizePerValidation" should have been hidden')
 
     def test_one2one_sizepervalidation_uses_related_widget(self):
-        client = self.client_with_user_logged_in(self.editor_login)
-        resource = self.import_test_resource()
-        response = client.get('{}repository/resourceinfotype_model/{}/'.format(ADMINROOT, resource.id))
+        client = self.client_with_user_logged_in(editor_login)
+        response = client.get('{}repository/resourceinfotype_model/{}/'.format(ADMINROOT, testfixture.id))
         self.assertContains(response, 'related-widget-wrapper-change-link" id="edit_id_validationinfotype_model_set-0-sizePerValidation"',
                             msg_prefix='One-to-one field "sizePerValidation" not rendered using related widget')
         self.assertContains(response, 'id="id_validationinfotype_model_set-0-sizePerValidation"',
                             msg_prefix='One2one field in inline has unexpected "id" field -- popup save action probably cannot update field as expected')
 
     def test_backref_is_hidden(self):
-        client = self.client_with_user_logged_in(self.editor_login)
-        resource = self.import_test_resource()
-        corpustextinfo = resource.resourceComponentType.corpusMediaType.corpustextinfotype_model_set.all()[0]
+        client = self.client_with_user_logged_in(editor_login)
+        corpustextinfo = testfixture.resourceComponentType.corpusMediaType.corpustextinfotype_model_set.all()[0]
         response = client.get('{}repository/corpustextinfotype_model/{}/'.format(ADMINROOT, corpustextinfo.id))
         self.assertContains(response, 'type="hidden" name="back_to_corpusmediatypetype_model"',
                             msg_prefix='Back reference should have been hidden')
 
     def test_linguality_inline_is_present(self):
-        client = self.client_with_user_logged_in(self.editor_login)
-        resource = self.import_test_resource()
-        corpustextinfo = resource.resourceComponentType.corpusMediaType.corpustextinfotype_model_set.all()[0]
+        client = self.client_with_user_logged_in(editor_login)
+        corpustextinfo = testfixture.resourceComponentType.corpusMediaType.corpustextinfotype_model_set.all()[0]
         response = client.get('{}repository/corpustextinfotype_model/{}/'.format(ADMINROOT, corpustextinfo.id))
         self.assertContains(response, '<div class="form-row lingualityType">',
                             msg_prefix='expected linguality inline')
 
     def test_hidden_field_is_not_referenced_in_fieldset_label(self):
-        client = self.client_with_user_logged_in(self.editor_login)
+        client = self.client_with_user_logged_in(editor_login)
         resource = self.import_test_resource(LEX_CONC_RES_XML)
         response = client.get('{}repository/lexicalconceptualresourceinfotype_model/{}/'.format(ADMINROOT, resource.resourceComponentType.id))
         self.assertNotContains(response, ' Lexical conceptual resource media</',
                                msg_prefix='Hidden fields must not be visible in fieldset labels.')
 
     def test_validator_is_multiwidget(self):
-        client = self.client_with_user_logged_in(self.editor_login)
-        resource = self.import_test_resource()
-        response = client.get('{}repository/resourceinfotype_model/{}/'.format(ADMINROOT, resource.id))
+        client = self.client_with_user_logged_in(editor_login)
+        response = client.get('{}repository/resourceinfotype_model/{}/'.format(ADMINROOT, testfixture.id))
         self.assertContains(response, '<select onchange="javascript:createNewSubInstance($(this), &quot;add_id_validationinfotype_model_set',
                             msg_prefix='Validator is not rendered as a ChoiceTypeWidget')
 
     def test_resources_list(self):
-        client = self.client_with_user_logged_in(self.editor_login)
+        client = self.client_with_user_logged_in(editor_login)
         response = client.get(ADMINROOT+'repository/resourceinfotype_model/')
         self.assertContains(response, 'Resources')
 
     def test_myresources_list(self):
-        client = self.client_with_user_logged_in(self.editor_login)
+        client = self.client_with_user_logged_in(editor_login)
         response = client.get(ADMINROOT+'repository/resourceinfotype_model/my/')
         self.assertContains(response, 'Resources')
 
     def test_storage_object_is_hidden(self):
-        client = self.client_with_user_logged_in(self.editor_login)
-        resource = self.import_test_resource()
-        response = client.get('{}repository/resourceinfotype_model/{}/'.format(ADMINROOT, resource.id))
+        client = self.client_with_user_logged_in(editor_login)
+        response = client.get('{}repository/resourceinfotype_model/{}/'.format(ADMINROOT, testfixture.id))
         self.assertContains(response, 'type="hidden" name="storage_object"',
                             msg_prefix='Expected a hidden storage object')

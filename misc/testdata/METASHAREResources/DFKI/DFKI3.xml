@@ -25,7 +25,7 @@
 		<toolServiceInfo>
 			<resourceType>toolService</resourceType>
 			<toolServiceType>other</toolServiceType>
-			<languageDependent>False</languageDependent>
+			<languageDependent>false</languageDependent>
 			</toolServiceInfo>
 	</resourceComponentType>
 </resourceInfo>

@@ -192,7 +192,7 @@ class MultiFieldWidget(widgets.Widget):
         """
         Renders the MultiFieldWidget with the given name and value.
         """
-        LOGGER.info('render({0}, {1} [{2}])'.format(name, value, type(value)))
+        LOGGER.debug('render({0}, {1} [{2}])'.format(name, value, type(value)))
         LOGGER.debug('attrs: {0} errors: {1}'.format(self.attrs, self.errors))
         
         # If no value is given, we set it to an empty list.
