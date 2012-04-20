@@ -137,13 +137,6 @@ class SearchTest(test_utils.IndexAwareTestCase):
     def importOneFixture(self):
         _currfile = '{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
         test_utils.import_xml_or_zip(_currfile)
-        
-    def importPublishedFixtures(self):
-        _path = '{}/repository/test_fixtures/pub/'.format(ROOT_PATH)
-        files = os.listdir(_path)   
-        for filename in files:
-            fullpath = os.path.join(_path, filename)  
-            test_utils.import_xml_or_zip(fullpath)
          
     def importIngestedFixtures(self):
         _path = '{}/repository/test_fixtures/ingested/'.format(ROOT_PATH)
@@ -276,7 +269,8 @@ class SearchTest(test_utils.IndexAwareTestCase):
           data={'q':'INGESTED'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "No results were found for search query", status_code=200)
-        
+
+
 class SearchTestPublishedResources(TestCase):
     """
     Test the search functionality, importing a set of published resources to be used in all tests.
