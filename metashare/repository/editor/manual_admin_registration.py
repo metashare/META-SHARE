@@ -36,7 +36,6 @@ from metashare.repository.editor.resource_editor import ResourceModelAdmin
 
 class CorpusTextInfoAdmin(SchemaModelAdmin):
     hidden_fields = ('back_to_corpusmediatypetype_model', )
-    readonly_fields = ('mediaType', )
     show_tabbed_fieldsets = True
 
 class CorpusVideoInfoAdmin(SchemaModelAdmin):
