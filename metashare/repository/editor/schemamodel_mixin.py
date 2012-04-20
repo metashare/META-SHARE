@@ -33,16 +33,19 @@ class SchemaModelLookup(object):
         return include_inlines and (field_name in inlines or self.is_inline(field_name))
 
     def get_excluded_fields(self):
+        # pylint: disable-msg=E1101
         if hasattr(self, 'exclude') and self.exclude is not None:
             return tuple(self.exclude)
         return ()
     
     def get_hidden_fields(self):
+        # pylint: disable-msg=E1101
         if hasattr(self, 'hidden_fields') and self.hidden_fields is not None:
             return tuple(self.hidden_fields)
         return ()
     
     def get_non_editable_fields(self):
+        # pylint: disable-msg=E1101
         _readonly = ()
         if hasattr(self, 'readonly_fields') and self.readonly_fields is not None:
             _readonly += tuple(self.readonly_fields)
