@@ -81,6 +81,13 @@ class ModelTest(TestCase):
         _roundtrip = '{0}/repository/fixtures/roundtrip.xml'.format(ROOT_PATH)
         self.assert_import_equals_export(_roundtrip)
 
+    def testImportExportRoundtrip0(self):
+        """
+        Checks that there is no data lost when exporting an imported XML.
+        """
+        _roundtrip = '{0}/repository/fixtures/ILSP10.xml'.format(ROOT_PATH)
+        self.assert_import_equals_export(_roundtrip)
+
     if False:
         def testImportExportRoundtrip1(self):
             """
