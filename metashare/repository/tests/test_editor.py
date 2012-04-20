@@ -83,6 +83,7 @@ class EditorTest(TestCase):
     @classmethod
     def tearDownClass(cls):
         resourceInfoType_model.objects.all().delete()
+        User.objects.all().delete()
     
     
     def client_with_user_logged_in(self, user_credentials):

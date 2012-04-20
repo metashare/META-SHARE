@@ -7,6 +7,7 @@ from metashare import test_utils
 from metashare.repository.models import resourceInfoType_model
 from metashare.repository import views
 from metashare.settings import DJANGO_BASE, ROOT_PATH
+from metashare.test_utils import create_user
 
 
 def _import_resource(fixture_name):
@@ -38,17 +39,17 @@ class ViewTest(TestCase):
         # These will live in the test database only, so will not
         # pollute the "normal" development db or the production db.
         # As a consequence, they need no valuable password.
-        staffuser = User.objects.create_user('staffuser', 'staff@example.com',
-          'secret')
+        staffuser = create_user('staffuser', 'staff@example.com', 'secret')
         staffuser.is_staff = True
         staffuser.save()
-        User.objects.create_user('normaluser', 'normal@example.com', 'secret')
+        create_user('normaluser', 'normal@example.com', 'secret')
 
     def tearDown(self):
         """
         Clean up the test
         """
         resourceInfoType_model.objects.all().delete()
+        User.objects.all().delete()
 
     def testView(self):
         """
@@ -109,17 +110,17 @@ class DownloadViewTest(TestCase):
         self.downloadable_resource_id_2 = \
             _import_resource('downloadable_3_licenses.xml')
         # set up test users with and without staff permissions
-        staffuser = User.objects.create_user('staffuser', 'staff@example.com',
-                                             'secret')
+        staffuser = create_user('staffuser', 'staff@example.com', 'secret')
         staffuser.is_staff = True
         staffuser.save()
-        User.objects.create_user('normaluser', 'normal@example.com', 'secret')
+        create_user('normaluser', 'normal@example.com', 'secret')
 
     def tearDown(self):
         """
         Cleans up the test environment.
         """
         resourceInfoType_model.objects.all().delete()
+        User.objects.all().delete()
 
     def test_non_downloadable_resource(self):
         """
