@@ -326,7 +326,7 @@ class SchemaModel(models.Model):
 
         # Fix namespace attributes for the resourceInfo root element.
         if _root.tag == 'resourceInfo':
-            _root.attrib['xmlns:ms'] = "http://www.ilsp.gr/META-XMLSchema"
+            _root.attrib['xmlns'] = "http://www.ilsp.gr/META-XMLSchema"
             _root.attrib['xmlns:xsi'] = "http://www.w3.org/2001/" \
               "XMLSchema-instance"
             _root.attrib['xsi:schemaLocation'] = "http://www.ilsp.gr/META-" \
