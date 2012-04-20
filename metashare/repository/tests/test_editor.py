@@ -18,6 +18,12 @@ TESTFIXTURES_ZIP = '{}/repository/fixtures/tworesources.zip'.format(ROOT_PATH)
 BROKENFIXTURES_ZIP = '{}/repository/fixtures/onegood_onebroken.zip'.format(ROOT_PATH)
 LEX_CONC_RES_XML = '{}/repository/test_fixtures/published-lexConcept-Text-FreEngGer.xml'.format(ROOT_PATH)
 
+# Global variables to be initialized in setUpClass():
+staff_login = None
+normal_login = None
+editor_login = None
+testfixture = None
+
 class EditorTest(TestCase):
     """
     Test the python/server side of the editor
