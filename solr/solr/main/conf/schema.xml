@@ -110,10 +110,6 @@
         -->
         <filter class="solr.StopFilterFactory" ignoreCase="true"
           enablePositionIncrements="true" />
-        <filter class="solr.WordDelimiterFilterFactory"
-          generateWordParts="1" generateNumberParts="1" catenateWords="1"
-          catenateNumbers="1" catenateAll="1" splitOnCaseChange="1"
-          splitOnNumerics="1" stemEnglishPossessive="0" />
         <filter class="solr.LowerCaseFilterFactory" />
         <filter class="solr.EnglishPossessiveFilterFactory" />
         <!--
@@ -209,6 +205,9 @@
     <field name="licenceFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
     
+    <field name="mediaTypeSort_exact" type="string" indexed="true"
+      stored="true" multiValued="false" />
+    
     <field name="timeCoverageFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
     
@@ -242,6 +241,9 @@
     <field name="validatedFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
+    <field name="mediaTypeSort" type="text_en" indexed="true"
+      stored="true" multiValued="false" />
+    
     <field name="text" type="text_en" indexed="true"
       stored="false" multiValued="false" />
     
@@ -250,6 +252,9 @@
     
     <field name="domainFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
+    
+    <field name="languageNameSort" type="text_en" indexed="true"
+      stored="true" multiValued="false" />
     
     <field name="restrictionsOfUseFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
@@ -268,6 +273,9 @@
     
     <field name="licenceFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
+    
+    <field name="resourceTypeSort_exact" type="string" indexed="true"
+      stored="true" multiValued="false" />
     
     <field name="bestPracticesFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
@@ -296,8 +304,14 @@
     <field name="mediaTypeFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
     
+    <field name="resourceTypeSort" type="text_en" indexed="true"
+      stored="true" multiValued="false" />
+    
     <field name="lingualityTypeFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
+    
+    <field name="languageNameSort_exact" type="string" indexed="true"
+      stored="true" multiValued="false" />
     
     <field name="rendered_result" type="string" indexed="false"
       stored="true" multiValued="false" />

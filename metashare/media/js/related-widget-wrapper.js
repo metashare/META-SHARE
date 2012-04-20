@@ -40,30 +40,52 @@ if (!dismissAddAnotherPopup.original) {
 
 django.jQuery(document).ready(function() {
   
-  var $ = $ || jQuery || django.jQuery,
-  		relatedWidgetCSSSelector = '.related-widget-wrapper-change-link, .related-widget-wrapper-delete-link',
-  		hrefTemplateAttr = 'data-href-template';
+  var $ = $ || jQuery || django.jQuery;
+  var changeSelector = '.related-widget-wrapper-change-link';
+  var addSelector = '.related-widget-wrapper-add-link';
+  var deleteSelector = '.related-widget-wrapper-delete-link';
+  var hrefTemplateAttr = 'data-href-template';
   
   $('.related-widget-wrapper').live('change', function(){
-  	var siblings = $(this).nextAll(relatedWidgetCSSSelector);
-  	if (!siblings.length) return;
+  	var changeLink = $(this).nextAll(changeSelector);
+  	var addLink = $(this).nextAll(addSelector);
+  	var deleteLink = $(this).nextAll(deleteSelector);
   	if (this.value) {
   		var val = this.value;
-  		siblings.each(function(){
+  		changeLink.each(function(){
   			var elm = $(this);
   			elm.attr('href', interpolate(elm.attr(hrefTemplateAttr), [val]));
-  			
   			// Show the change-link for the new/edited related object.
   			elm.show();
   		});
-  	} else siblings.removeAttr('href');
+  		deleteLink.each(function(){
+  			var elm = $(this);
+  			elm.attr('href', interpolate(elm.attr(hrefTemplateAttr), [val]));
+  			// Show the change-link for the new/edited related object.
+  			elm.show();
+  		});
+  		addLink.hide();
+  	} else { // no value
+  		changeLink.removeAttr('href').hide();
+  		deleteLink.removeAttr('href').hide();
+  		addLink.show();
+  	}
   });
 
   // Hide change-link for related widgets not containing an object id.
   $('.related-widget-wrapper').each(function(index) {
-    if (!$(this).val()) {
-      $(this).next('.related-widget-wrapper-change-link').hide();
-    }
+	  var changeLink = $(this).nextAll(changeSelector);
+	  var addLink = $(this).nextAll(addSelector);
+	  var deleteLink = $(this).nextAll(deleteSelector);
+	  if ($(this).val()) {
+		  changeLink.show();
+		  addLink.hide();
+		  deleteLink.show();
+	  } else {
+		  changeLink.hide();
+		  addLink.show();
+		  deleteLink.hide();
+	  }
   });
 	
 	$('.related-widget-wrapper-link').live('click', function(){

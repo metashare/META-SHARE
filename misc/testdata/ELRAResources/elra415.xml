@@ -36,12 +36,44 @@
 <licenceInfo>
 <licence>ELRA_EVALUATION</licence>
 <restrictionsOfUse>evaluationUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 1000.00€</price>
-<price>Academic org. ELRA Non Member: 300.00€</price>
-<price>Commercial org. ELRA Member: 500.00€</price>
-<price>Academic org. ELRA Member: 150.00€</price>
-<availabilityStartDate>2009-07-08</availabilityStartDate>
+<price>1000.00</price>
+<userNature>commercial</userNature>
+<membershipInfo>
+<member>False</member>
+<membershipInstitution>ELRA</membershipInstitution>
+</membershipInfo>
 </licenceInfo>
+<licenceInfo>
+<licence>ELRA_EVALUATION</licence>
+<restrictionsOfUse>evaluationUse</restrictionsOfUse>
+<price>300.00</price>
+<userNature>academic</userNature>
+<membershipInfo>
+<member>False</member>
+<membershipInstitution>ELRA</membershipInstitution>
+</membershipInfo>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_EVALUATION</licence>
+<restrictionsOfUse>evaluationUse</restrictionsOfUse>
+<price>500.00</price>
+<userNature>commercial</userNature>
+<membershipInfo>
+<member>True</member>
+<membershipInstitution>ELRA</membershipInstitution>
+</membershipInfo>
+</licenceInfo>
+<licenceInfo>
+<licence>ELRA_EVALUATION</licence>
+<restrictionsOfUse>evaluationUse</restrictionsOfUse>
+<price>150.00</price>
+<userNature>academic</userNature>
+<membershipInfo>
+<member>True</member>
+<membershipInstitution>ELRA</membershipInstitution>
+</membershipInfo>
+</licenceInfo>
+<availabilityStartDate>2009-07-08</availabilityStartDate>
 </distributionInfo>
 <resourceCreationInfo>
 <fundingProject>

@@ -54,7 +54,7 @@ Get statistics about: &nbsp;
 <br>
 </div>
 {% if subfields|length > 0 %}
-    <!-- <img src="{% url metashare.views.frontpage %}site_media/css/sexybuttons/images/icons/silk/add.png" href="javascript:;" title="add an other searching field" onclick="addElement();"></a></p> -->
+    <!-- <img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/add.png" href="javascript:;" title="add an other searching field" onclick="addElement();"></a></p> -->
 {% endif %}
 </form>
 
@@ -102,7 +102,7 @@ function addElement() {
   
   newdiv.setAttribute('id', divIdName);
 
-  selectObj = '<img src="{% url metashare.views.frontpage %}site_media/css/sexybuttons/images/icons/silk/delete.png" onclick=\'removeElement("'+divIdName+'")\'> <select name='+divIdName+'>';
+  selectObj = '<img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/delete.png" onclick=\'removeElement("'+divIdName+'")\'> <select name='+divIdName+'>';
 {% for model in models %}
     selectObj += '<option value="{{ model }}"> {{ model }}'; 
 {% endfor %}

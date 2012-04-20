@@ -18,6 +18,9 @@ LOG_FORMAT = "[%(asctime)s] %(name)s::%(levelname)s %(message)s"
 LOG_DATE = "%m/%d/%Y @ %H:%M:%S"
 LOG_FORMATTER = logging.Formatter(LOG_FORMAT, LOG_DATE)
 
+# Allows to disable check for duplicate instances.
+CHECK_FOR_DUPLICATE_INSTANCES = True
+
 # work around a problem on non-posix-compliant platforms by not using any
 # RotatingFileHandler there
 if os.name == "posix":
@@ -125,6 +128,7 @@ TEMPLATE_DIRS = (
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.media',
     'django.contrib.messages.context_processors.messages',
 )
 
@@ -153,7 +157,7 @@ INSTALLED_APPS = (
     
     'metashare.stats',
 
-    'metashare.repo2',
+    'metashare.repository',
     'metashare.AdminTest',
 )
 
@@ -168,7 +172,7 @@ except ImportError:
 
 # Apps for which to run tests in continuous integration django_jenkins:
 PROJECT_APPS = (
-    'metashare.repo2',
+    'metashare.repository',
     'metashare.accounts',
     'metashare.storage',
 )
@@ -206,3 +210,8 @@ JENKINS_TASKS = (
 
 PYLINT_RCFILE = '{0}/test-config/pylint.rc'.format(ROOT_PATH)
 
+# set display for Selenium tests
+if 'DISPLAY' in os.environ:
+    import re
+    SELENIUM_DISPLAY = re.sub(r'[^\:]*(\:\d{1,2})(?:\.\d+)?', r'\1', 
+      os.environ['DISPLAY'])

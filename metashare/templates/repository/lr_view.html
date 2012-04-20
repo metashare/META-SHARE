@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+		<script type="text/javascript" src="http://plugins.learningjquery.com/expander/jquery.expander.js"></script>
+		<script type="text/javascript">
+			$(function () {
+				$('td.readmore').expander({
+					slicePoint: 300,
+					expandText: 'Read More',
+					userCollapseText: 'Collapse'
+				});
+			});
+		</script>
+
+		<style type="text/css">
+			div#content dummy, span.details {
+				font: inherit;
+				color: inherit;
+				vertical-align: inherit;
+			 }
+		</style>
+ 
+<h2>{% if not RESOURCE_PUBLISHED %}<i>{% endif %}{{ resource.identificationInfo.resourceName.0 }}{% if not RESOURCE_PUBLISHED %}</i>{% endif %}</h2>
+	<div class="content_box">
+        <div id="stats" align="right" style="float: right">
+            {% for stat in LR_STATS %}
+                {%if "updated" in stat.action %}
+                    &nbsp;<div align=right style="float: right"><i>(Last modified: {{ stat.last }})</i>&nbsp;</div>
+                {% else %}
+                    <img src="{{ MEDIA_URL }}stats/img/{{ stat.action }}_icon.gif"
+                    alt="Last {{ stat.action }}: {{ stat.last }}" title="Last {{ stat.action }}: {{ stat.last }}" />
+                    <b>{{  stat.count }}</b>&nbsp;
+                {% endif %}
+            {% endfor %}
+        <hr></div>
+
+  <a href="javascript:history.back();"><button class="span-12 button middle_button">&laquo; Back</button></a>
+  {% if LR_DOWNLOAD %}
+    <a href="{% url metashare.repository.views.download resource.id %}"><button class="span-4 button middle_button">Download/Buy</button></a>
+  {% else %}
+    <div class="popup_box">
+      <div onmouseover="$(this).siblings('div.popup').show();" onmouseout="$(this).siblings('div.popup').hide();"><button class="span-4 button middle_gray_button">Download/Buy</button></div><div class="popup" style="height:50px; left:190px; width:270px; top:50px;"><img style="left:10px;" src="{{ MEDIA_URL }}images/adv_search_pfeil.png" />&nbsp;You don&rsquo;t have the permission to download this resource. Please log in.</div>
+    </div>
+  {% endif %}
+  <div style="clear: both;"></div>
+
+  <form class="form_helper" action="submit" method="get">
+  <table>
+    {% include "repository/detail_view.html" %}
+  </table>
+  </form>
+
+  <a href="javascript:history.back();"><button class="span-12 button middle_button">&laquo; Back</button></a>
+  {% if LR_DOWNLOAD %}
+    <a href="{% url metashare.repository.views.download resource.id %}"><button class="span-4 button middle_button">Download/Buy</button></a>
+  {% else %}
+    <div class="popup_box">
+      <div onmouseover="$(this).siblings('div.popup').show();" onmouseout="$(this).siblings('div.popup').hide();"><button class="span-4 button middle_gray_button">Download/Buy</button></div><div class="popup" style="height:50px; left:190px; width:270px; top:50px;"><img style="left:10px;" src="{{ MEDIA_URL }}images/adv_search_pfeil.png" />&nbsp;You don&rsquo;t have the permission to download this resource. Please log in.</div>
+    </div>
+  {% endif %}
+
+</div>
+{% endblock %}

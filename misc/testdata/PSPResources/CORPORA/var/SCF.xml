@@ -1,8 +1,0 @@
-<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema C:/develop/metashare/transform/schemaTransform/v2.0/META-SHARE-Resource.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema"><identificationInfo><resourceName>Corpus of Italian Subcategorization Frames</resourceName><description>This corpus is a Gold Standard of annotated Subcategorization Frames for the Italian language (legal and environment domains) - it is still under development and more data will be added in future</description><metaShareId>CNR.langres:30</metaShareId></identificationInfo><distributionInfo><availability>available-restrictedUse</availability></distributionInfo>
-<contactPerson>
-	<surname>n/a</surname>
-	<communicationInfo>
-		<email>test@example.com</email>
-	</communicationInfo>
-</contactPerson>
-<metadataInfo><metadataCreationDate>2012-01-30</metadataCreationDate></metadataInfo><resourceComponentType><corpusInfo><resourceType>corpus</resourceType><corpusMediaType><corpusTextInfo><mediaType>text</mediaType><lingualityInfo><lingualityType>monolingual</lingualityType><multilingualityType>other</multilingualityType></lingualityInfo><languageInfo><languageId>ita</languageId><languageName>Italian</languageName></languageInfo><modalityInfo><modalityType>other</modalityType></modalityInfo><sizeInfo><size>6643</size><sizeUnit>sentences</sizeUnit></sizeInfo></corpusTextInfo></corpusMediaType></corpusInfo></resourceComponentType></resourceInfo>

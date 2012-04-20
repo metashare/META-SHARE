@@ -1,9 +1,0 @@
-<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema C:/develop/metashare/transform/schemaTransform/v2.0/META-SHARE-Resource.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema"><identificationInfo><resourceName>INTERREG Corpus</resourceName><description>Written corpus (web documents), general domain, multilingual, parallel</description><resourceShortName>INTERREG Corpus</resourceShortName><metaShareId>n/a</metaShareId></identificationInfo><distributionInfo><availability>available-restrictedUse</availability></distributionInfo>
-<contactPerson>
-	<surname>n/a</surname>
-	<communicationInfo>
-		<email>test@example.com</email>
-	</communicationInfo>
-</contactPerson>
-
-<metadataInfo><metadataCreationDate>2012-01-30</metadataCreationDate><source>META</source></metadataInfo><usageInfo></usageInfo><resourceComponentType><corpusInfo><resourceType>corpus</resourceType><corpusMediaType><corpusTextInfo><mediaType>text</mediaType><lingualityInfo><lingualityType>multilingual</lingualityType><multilingualityType>parallel</multilingualityType></lingualityInfo><languageInfo><languageId>ell</languageId><languageName>Modern Greek (1453-)</languageName></languageInfo><languageInfo><languageId>eng</languageId><languageName>English</languageName></languageInfo><languageInfo><languageId>bul</languageId><languageName>Bulgarian</languageName></languageInfo><modalityInfo><modalityType>other</modalityType></modalityInfo><sizeInfo><size>11000000</size><sizeUnit>tokens</sizeUnit></sizeInfo><annotationInfo><annotationType>alignment</annotationType></annotationInfo></corpusTextInfo></corpusMediaType></corpusInfo></resourceComponentType></resourceInfo>

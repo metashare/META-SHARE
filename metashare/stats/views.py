@@ -8,12 +8,14 @@ from metashare.stats.models import LRStats, QueryStats
 from metashare.stats.model_utils import getLRTop, getLastQuery, getLRLast, statDays, VIEW_STAT, UPDATE_STAT, DOWNLOAD_STAT
 
 # pylint: disable-msg=W0611, W0401
-import metashare
-from metashare.repo2.models import *
+from metashare.repository.models import *
+
 
 from django.shortcuts import render_to_response     
 from django.db.models import Count, Max, Min, Avg
 from django.http import HttpResponse
+from django.template import RequestContext
+
 from json import JSONEncoder
 from datetime import datetime, date
 import urllib, urllib2
@@ -71,8 +73,8 @@ def repostats (request):
     selected_menu_value.append(['field', dbfield])
     
     fields = []
-    dbclasses = getattr(metashare.repo2.models, dbmodel).__schema_classes__
-    dbfields = getattr(metashare.repo2.models, dbmodel).__schema_fields__
+    dbclasses = getattr(metashare.repository.models, dbmodel).__schema_classes__
+    dbfields = getattr(metashare.repository.models, dbmodel).__schema_fields__
     relational_fields = []
     for field in dbfields:
         if field[0] in NOACCESS_FIELDS:
@@ -119,9 +121,12 @@ def repostats (request):
                             repodata.append([str(value), item[dbfield + "__count"]])
                     
     return render_to_response('stats/repostats.html',
-        {'user': request.user, 'result': repodata, 'selected_menu_value': selected_menu_value, \
-            'models': SELECT_MODEL.keys(), 'fields': fields, "subfields": relational_fields})
-
+        {'user': request.user, 'result': repodata, 
+         'selected_menu_value': selected_menu_value,
+         'models': SELECT_MODEL.keys(), 'fields': fields,
+         'subfields': relational_fields},
+         context_instance=RequestContext(request))
+    
 
 def usagestats (request):
     # Get lists of fields used in the advanced search
@@ -134,7 +139,8 @@ def usagestats (request):
         topdata.append([value, item["query__count"]])       
          
     return render_to_response('stats/usagestats.html',
-        {'user': request.user, 'result': topdata})
+        {'user': request.user, 'result': topdata},
+        context_instance=RequestContext(request))
 
     
 def topstats (request):
@@ -174,7 +180,8 @@ def topstats (request):
             topdata.append([query, pretty_timeago(item['lasttime']), item['found']])       
              
     return render_to_response('stats/topstats.html',
-      {'user': request.user, 'topdata': topdata[:10], 'view': view})
+        {'user': request.user, 'topdata': topdata[:10], 'view': view},
+        context_instance=RequestContext(request))
 
 def statdays (request):
     """ get dates where there are some statistics """

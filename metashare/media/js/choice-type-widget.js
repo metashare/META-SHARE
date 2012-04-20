@@ -20,7 +20,7 @@ function createNewSubInstance(select, proto_name, proto_href) {
         }
         // Salvatore: reset the empty value so that the 'onchange' event
         // is correctly triggered (see comment in SingleChoiceTypeWidget.render in
-        // file 'metashare/repo2/editor/widgets.py').
+        // file 'metashare/repository/editor/widgets.py').
         select.val("");
         
         // cfedermann: why not directly trigger the onchange event?

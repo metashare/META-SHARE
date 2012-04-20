@@ -4,7 +4,7 @@ Project: META-SHARE prototype implementation
 """
 import logging
 
-from django.test.simple import DjangoTestSuiteRunner
+from django_selenium.selenium_runner import SeleniumTestRunner
 from django.core.management import call_command
 from metashare import settings
 
@@ -27,13 +27,14 @@ def _run_custom_test_db_setup():
                  using=settings.TEST_MODE_NAME)
 
 
-class MetashareTestRunner(DjangoTestSuiteRunner):
+class MetashareTestRunner(SeleniumTestRunner):
     """
-    A custom Django test runner which inherits from `DjangoTestSuiteRunner`.
+    A custom Django test runner which inherits from `SeleniumTestRunner`
+    which in turn inherits from `DjangoTestSuiteRunner`.
     
     The added value of this test runner on top of the default functionality
-    provided by Django is that the runner automatically sets up Haystack so that
-    it uses a dedicated search backend for testing.
+    provided by Django/Selenium is that the runner automatically sets up
+    Haystack so that it uses a dedicated search backend for testing.
     """
     def setup_databases(self, **kwargs):
         _run_custom_test_db_setup()
@@ -44,15 +45,15 @@ class MetashareTestRunner(DjangoTestSuiteRunner):
 # if we're in a Jenkins test environment, then we also create a test runner for
 # Jenkins
 try:
-    from django_jenkins.runner import CITestSuiteRunner
-    class MetashareJenkinsTestRunner(CITestSuiteRunner):
+    from django_selenium.jenkins_runner import JenkinsTestRunner
+    class MetashareJenkinsTestRunner(JenkinsTestRunner):
         """
-        A custom Django Jenkins test runner which inherits from
-        `CITestSuiteRunner`.
+        A custom Django Jenkins test runner which inherits from Selenium's
+        `JenkinsTestRunner` which in turn inherits from `CITestSuiteRunner`.
         
         The added value of this test runner on top of the default functionality
-        provided by Django Jenkins is that the runner automatically sets up
-        Haystack so that it uses a dedicated search backend for testing.
+        provided by Django/Selenium Jenkins is that the runner automatically
+        sets up Haystack so that it uses a dedicated search backend for testing.
         """
         def setup_databases(self, **kwargs):
             _run_custom_test_db_setup()

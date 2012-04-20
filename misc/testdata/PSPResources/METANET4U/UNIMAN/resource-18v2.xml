@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>SemLink</resourceName>
+      <description>SemLink is a project whose aim is to link together different lexical resources via a set of mappings. These mappings will make it possible to combine the different information provided by these different lexical resources for tasks such as inferencing. In the current release, two mappings are available: 1) a mapping between VerbNet and PropBank. 2) a mapping between VerbNet and FrameNet. The version of FrameNet used is v1.2 </description>
+      <url>http://verbs.colorado.edu/semlink/</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+      <identifier>63a269da36af4df29aace591c13c99c6</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>proprietary</licence>
+         <restrictionsOfUse>attribution</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <licensor>
+              <personInfo>
+               <surname>Palmer</surname>
+               <givenName>Martha</givenName>
+               <communicationInfo>
+                  <email>martha.palmer@colorado.edu</email>
+               </communicationInfo>
+               <position>Professor</position>
+               <affiliation>
+                  <organizationName>University of Colorado</organizationName>
+                  <communicationInfo>
+                     <email>martha.palmer@colorado.edu</email>
+                  </communicationInfo>
+                      
+                  </affiliation>
+            </personInfo>
+          </licensor>
+         <distributionRightsHolder>
+              <personInfo>
+               <surname>Palmer</surname>
+               <givenName>Martha</givenName>
+               <communicationInfo>
+                  <email>martha.palmer@colorado.edu</email>
+               </communicationInfo>
+               <position>Professor</position>
+               <affiliation>
+                  <organizationName>University of Colorado</organizationName>
+                  <communicationInfo>
+                     <email>martha.palmer@colorado.edu</email>
+                  </communicationInfo>
+                      
+                  </affiliation>
+            </personInfo>
+          </distributionRightsHolder>
+         <distributionRightsHolder>
+              <organizationInfo>
+                <organizationName>University of Colorado</organizationName>
+                  <communicationInfo>
+                  <email>martha.palmer@colorado.edu</email>
+               </communicationInfo>
+              </organizationInfo>
+          </distributionRightsHolder>
+      </licenceInfo>
+      <iprHolder>
+          <personInfo>
+            <surname>Palmer</surname>
+            <givenName>Martha</givenName>
+            <communicationInfo>
+               <email>martha.palmer@colorado.edu</email>
+            </communicationInfo>
+            <position>Professor</position>
+            <affiliation>
+               <organizationName>University of Colorado</organizationName>
+               <communicationInfo>
+                  <email>martha.palmer@colorado.edu</email>
+               </communicationInfo>
+                  
+              </affiliation>
+         </personInfo>
+      </iprHolder>
+      <iprHolder>
+          <organizationInfo>
+            <organizationName>University of Colorado</organizationName>
+              <communicationInfo>
+               <email>marth.palmer@colorado.edu</email>
+            </communicationInfo>
+          </organizationInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Palmer</surname>
+      <givenName>Martha</givenName>
+      <communicationInfo>
+         <email>martha.palmer@colorado.edu</email>
+      </communicationInfo>
+      <position>Professor</position>
+      <affiliation>
+         <organizationName>University of Colorado</organizationName>
+         <communicationInfo>
+            <email>martha.palmer@colorado.edu</email>
+         </communicationInfo>
+          
+      </affiliation>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-21</metadataCreationDate>
+      <metadataCreator>
+         <surname>Thompson</surname>
+         <givenName>Paul</givenName>
+         <communicationInfo>
+            <email>paul.thompson@manchester.ac.uk</email>
+         </communicationInfo>
+         <position>Research Associate</position>
+         <affiliation>
+            <organizationName>University of Manchester</organizationName>
+            <communicationInfo>
+               <email>paul.thompson@manchester.ac.uk</email>
+            </communicationInfo>
+              
+          </affiliation>
+      </metadataCreator>
+      <source>METANET4U</source>
+   </metadataInfo>
+   <usageInfo>
+      <foreseenUseInfo>
+        <foreseenUse>nlpApplications</foreseenUse>
+        <useNLPSpecific>informationExtraction</useNLPSpecific>
+        <useNLPSpecific>lexiconEnhancement</useNLPSpecific>
+        <useNLPSpecific>questionAnswering</useNLPSpecific>
+        <useNLPSpecific>semanticRoleLabelling</useNLPSpecific>
+      </foreseenUseInfo>
+  </usageInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>framenet</lexicalConceptualResourceType>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>N/A</languageId>
+                  <languageName>English</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>4500</size>
+        
+                  <sizeUnit>predicates</sizeUnit>
+               </sizeInfo>
+               <domainInfo>
+                  <domain>general</domain>
+               </domainInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>

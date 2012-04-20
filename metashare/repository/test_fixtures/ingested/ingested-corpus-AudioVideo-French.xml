@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<identificationInfo>
+<resourceName lang="English">INGESTED FIXTURE-12</resourceName>
+<resourceName lang="French">Base de données M2VTS</resourceName>
+<description lang="English">The Multi Modal Verification for Teleservices and Security applications project (M2VTS), running under the European ACTS programme, has produced a database designed to facilitate access control using multimodal identification of human faces. This technique improves recognition efficiency by combining individual modalities (i.e. face and voice). Its relative novelty means that new test material had to be created, since no existing database could offer all modalities needed.The M2VTS database comprises 37 different faces, with 5 shots of each being taken at one-week intervals, or when drastic face changes occurred in the mean time. During each shot, subjects were asked to count from 0 to 9 in their native language (generally French), and to move their heads from left to right, both with and without glasses. The data were then used to create three sequences, for voice, motion and "glasses off". The first sequence can be used for speech verification, 2-D dynamic face verification and speech/lips movement correlation, while the second and third provide information on 3-D face recognition, and may also be used to compare other recognition techniques.For more information: http://www.tele.ucl.ac.be/PROJECTS/M2VTS</description>
+<description lang="French">Le projet M2VTS (Multi Modal Verification for Teleservices and Security applications), issu du programme européen ACTS, a produit une base de données pour le contrôle d'accès utilisant l'identification multimodale de l'utilisateur. La base de données M2VTS comprend 37 visages différents, dont 5 prises de vues sont effectuées à raison d'une par semaine, ou plus si des changements significatifs du visage ont eu lieu entre temps. A l'occasion de chaque session de prise de vue, les sujets ont également prononcé la séquence des chiffres de 0 à 9 dans leur langue maternelle (en général, le français), et déplacé leur tête de la gauche vers la droite, avec et sans lunettes.Les enregistrements ont été utilisées pour créer trois familles de données. La première peut être utilisée pour la vérification du locuteur, la vérification dynamique bidimensionnelle de visage, et l'utilisation des corrélations entre la parole et le mouvement des lèvres. La seconde et la troisième fournissent des informations pour la reconnaissance de visage tridimensionnelle et peuvent être utilisées pour des comparaisons avec d'autres techniques de vérification.Pour plus d'informations : http://www.tele.ucl.ac.be/PROJECTS/M2VTS</description>
+<resourceShortName/>
+<metaShareId>n/a</metaShareId>
+<url>http://catalog.elra.info/product_info.php?products_id=758</url>
+<identifier>ELRA-S0021</identifier>
+</identificationInfo>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+<metadataCreator>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipcode>75013</zipcode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</metadataCreator>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<lastDateUpdated>2005-06-02</lastDateUpdated>
+</versionInfo>
+<distributionInfo>
+<availability>available-restrictedUse</availability>
+<licenceInfo>
+<licence>ELRA_END_USER</licence>
+<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+<price>500.00€</price>
+<distributionAccessMedium>DVD-R</distributionAccessMedium>
+<availabilityStartDate>1996-09-01</availabilityStartDate>
+</licenceInfo>
+</distributionInfo>
+<validationInfo>
+<validated>True</validated>
+<validationModeDetails>Speecon The speech databases made within the Speecon project were validated by SPEX, the Netherlands, to assess their compliance with the Speecon format and content specifications.</validationModeDetails>
+</validationInfo>
+<usageInfo>
+<actualUseInfo>
+<actualUse>nlpApplications</actualUse>
+<useNLPSpecific>speechRecognition</useNLPSpecific>
+</actualUseInfo>
+</usageInfo>
+<resourceComponentType>
+<corpusInfo>
+<resourceType>corpus</resourceType>
+<corpusMediaType>
+<corpusAudioInfo>
+<mediaType>audio</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
+</languageInfo>
+</corpusAudioInfo>
+<corpusVideoInfo>
+<mediaType>video</mediaType>
+<lingualityInfo>
+<lingualityType>monolingual</lingualityType>
+</lingualityInfo>
+<languageInfo>
+<languageId>fre/fra</languageId>
+<languageName>French</languageName>
+</languageInfo>
+</corpusVideoInfo>
+</corpusMediaType>
+</corpusInfo>
+</resourceComponentType>
+</resourceInfo>

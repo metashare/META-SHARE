@@ -1,0 +1,9 @@
+{% spaceless %}
+<dt>{{ filter.label }}:</dt>
+{% for item in filter.removable %}
+  <dd><a href="?q={{ query|urlencode }}{% for target in item.targets %}&amp;selected_facets={{ target|urlencode }}{% endfor %}{% for key, values in request.GET.iterlists %}{% if key = 'sort' %}&amp;sort={{values.0}}{% endif %}{% endfor %}" class="removableFacet">{{ item.label }}</a>&nbsp;({{ item.count }})</dd>
+{% endfor %}
+{% for item in filter.addable %}
+  <dd><a href="?q={{ query|urlencode }}{% for target in item.targets %}&amp;selected_facets={{ target|urlencode }}{% endfor %}{% for key, values in request.GET.iterlists %}{% if key = 'sort' %}&amp;sort={{values.0}}{% endif %}{% endfor %}" class="addableFacet">{{ item.label }}</a>&nbsp;({{ item.count }})</dd>
+{% endfor %}
+{% endspaceless %}

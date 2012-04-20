@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: UP10-6.5.xml 42662 2011-12-01 14:33:59Z martha $ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Corpus of Early Modern Finnish</resourceName>
+      <description>Written Finnish from the 19th century (mostly from the years between 1810 and 1880), browsable and searchable on the web. The collection contains published literature, periodicals, newspapers, and dictionaries, among others, with a focus on the earliest and most important publications and a wide thematic coverage. Originally Finnish texts are preferred over translations.</description>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>underNegotiation</licence>
+         <restrictionsOfUse>other</restrictionsOfUse>
+         <distributionAccessMedium>other</distributionAccessMedium>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Suutari</surname>
+      <givenName>Toni</givenName>
+      <communicationInfo>
+         <email>toni.suutari@kotus.fi</email>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-18</metadataCreationDate>
+      <metadataCreator>
+         <surname>Piitulainen</surname>
+         <givenName>Jussi</givenName>
+         <communicationInfo>
+            <email>jpiitula@ling.helsinki.fi</email>
+         </communicationInfo>
+         <affiliation>
+            <organizationName>University of Helsinki</organizationName>
+            <communicationInfo>
+               <email>jpiitula@ling.helsinki.fi</email>
+            </communicationInfo>
+         </affiliation>
+      </metadataCreator>
+   </metadataInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>fin</languageId>
+                  <languageName>Finnish</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>8600000</size>
+      
+                  <sizeUnit>words</sizeUnit>
+               </sizeInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>
