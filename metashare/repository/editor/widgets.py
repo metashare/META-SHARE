@@ -84,7 +84,6 @@ class SingleChoiceTypeWidget(RelatedFieldWidgetWrapper):
     """
     class Media:
         js = (
-          settings.MEDIA_URL + "js/jquery-1.7.1.min.js",
           settings.MEDIA_URL + "js/choice-type-widget.js",
         )
 
