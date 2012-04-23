@@ -1,0 +1,11 @@
+/*override container size*/
+div.container{
+	width: 90%;
+	position: relative;
+}
+div.container > div#content > h2{
+	margin-left: 5%;
+
+}
+
+/*end override container size*/
