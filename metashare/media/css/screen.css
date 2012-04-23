@@ -482,16 +482,7 @@ div.less_details{
 	background-repeat: no-repeat;
 }
 
-/*override container size*/
-div.container{
-	width: 1200px;
-	position: relative;
-}
-div.container > div#content > h2{
-	margin-left: 45px;
-}
 
-/*end override container size*/
 
 /*filters separate box*/
 div.filters_box{
