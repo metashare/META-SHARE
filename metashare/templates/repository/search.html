@@ -1,18 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<STYLE type="text/css">
-/*override container size*/
-div.container{
-	width: 1200px;
-	position: relative;
-}
-div.container > div#content > h2{
-	margin-left: 45px;
-}
-
-/*end override container size*/
-</STYLE>
+{% block links %}
+<link rel="stylesheet" href="{{ MEDIA_URL }}css/results.css" type="text/css" media="screen" />
+{% endblock %} 
 
 <script language="javascript">
 $(document).ready(function(){
