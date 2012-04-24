@@ -108,102 +108,128 @@ from metashare.repository.models import \
 # pylint: disable-msg=C0103
 class audioSizeInfo_model_inline(SchemaModelInline):
     model = audioSizeInfoType_model
-    collapse = False
+
 
 # pylint: disable-msg=C0103
 class corpusInfo_model_inline(SchemaModelInline):
     model = corpusInfoType_model
-    collapse = False
+
 
 # pylint: disable-msg=C0103
 class corpusTextInfo_model_inline(SchemaModelInline):
     model = corpusTextInfoType_model
     collapse = True
 
+
 # pylint: disable-msg=C0103
 class corpusVideoInfo_model_inline(SchemaModelInline):
     model = corpusVideoInfoType_model
     collapse = True
 
+
 # pylint: disable-msg=C0103
 class documentInfo_model_inline(SchemaModelInline):
     model = documentInfoType_model
-    collapse = False
+
 
 # pylint: disable-msg=C0103
 class durationOfAudioInfo_model_inline(SchemaModelInline):
     model = durationOfAudioInfoType_model
     collapse = True
 
+
 # pylint: disable-msg=C0103
 class durationOfEffectiveSpeechInfo_model_inline(SchemaModelInline):
     model = durationOfEffectiveSpeechInfoType_model
     collapse = True
+
 
 # pylint: disable-msg=C0103
 class foreseenUseInfo_model_inline(SchemaModelInline):
     model = foreseenUseInfoType_model
     collapse = True
 
+
 # pylint: disable-msg=C0103
 class imageClassificationInfo_model_inline(SchemaModelInline):
     model = imageClassificationInfoType_model
     collapse = True
 
+
 # pylint: disable-msg=C0103
 class languageDescriptionInfo_model_inline(SchemaModelInline):
     model = languageDescriptionInfoType_model
-    collapse = False
+
 
 # pylint: disable-msg=C0103
 class lexicalConceptualResourceInfo_model_inline(SchemaModelInline):
     model = lexicalConceptualResourceInfoType_model
-    collapse = False
+
 
 # pylint: disable-msg=C0103
 class licenceInfo_model_inline(SchemaModelInline):
     model = licenceInfoType_model
     collapse = True
 
+
 # pylint: disable-msg=C0103
 class organizationInfo_model_inline(SchemaModelInline):
     model = organizationInfoType_model
-    collapse = False
+
 
 # pylint: disable-msg=C0103
 class participantInfo_model_inline(SchemaModelInline):
     model = participantInfoType_model
     collapse = True
 
+
 # pylint: disable-msg=C0103
 class personInfo_model_inline(SchemaModelInline):
     model = personInfoType_model
-    collapse = False
+
 
 # pylint: disable-msg=C0103
 class relationInfo_model_inline(SchemaModelInline):
     model = relationInfoType_model
     collapse = True
 
+
+# pylint: disable-msg=C0103
+class resolutionInfo_model_inline_imageFormatInfoType_model(SchemaModelInline):
+    model = resolutionInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_imageformatinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class resolutionInfo_model_inline_videoFormatInfoType_model(SchemaModelInline):
+    model = resolutionInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_videoformatinfotype_model'
+
+
 # pylint: disable-msg=C0103
 class textNumericalFormatInfo_model_inline(SchemaModelInline):
     model = textNumericalFormatInfoType_model
     collapse = True
 
+
 # pylint: disable-msg=C0103
 class toolServiceInfo_model_inline(SchemaModelInline):
     model = toolServiceInfoType_model
-    collapse = False
+
 
 # pylint: disable-msg=C0103
 class validationInfo_model_inline(SchemaModelInline):
     model = validationInfoType_model
     collapse = True
 
+
 # pylint: disable-msg=C0103
 class videoClassificationInfo_model_inline(SchemaModelInline):
     model = videoClassificationInfoType_model
     collapse = True
+
 
 admin.site.register(actorInfoType_model, SchemaModelAdmin)
 admin.site.register(actualUseInfoType_model, SchemaModelAdmin)
