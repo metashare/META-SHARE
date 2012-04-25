@@ -1,37 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<resourceInfo xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
 <resourceName lang="English">PHONOLEX (BAS/DFKI)</resourceName>
 <resourceName lang="French">PHONOLEX (BAS/DFKI)</resourceName>
 <description lang="English">PHONOLEX consists of a simple list of word forms (approx. 1,6 Mio entries ) with a set of features e.g. orthography (German 'Umlauts' in LaTeX format, capital nouns, old German spelling rules), linguistic information (nouns, verbs, etc.), pronunciation and a list of empirical pronunciations.Format: ASCIIMark-up: extended SAM-PA (PhonDat-Verbmobil)</description>
 <description lang="French">PHONOLEX est composé d'une simple liste de mots fléchis (approx. 1,6 Millions d'entrées) avec un ensemble de traits comme l'orthographe (indication de l''Umlaut' allemand en format LaTeX, noms en majuscule, règles orthographiques de l'ancien allemand), information linguistique (noms, verbes, etc.), prononciation courante et une liste de prononciations empiriques.Format : ASCIIBalisage : SAM-PA étendu (dans le cadre des travaux PhonDat de Verbmobil)</description>
 <resourceShortName/>
-<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=82</url>
 <url>http://catalog.elra.info/product_info.php?products_id=772</url>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <identifier>ELRA-S0035</identifier>
 </identificationInfo>
-<metadataInfo>
-<metadataCreationDate>2005-05-12</metadataCreationDate>
-<metadataCreator>
-<surname lang="en-us">Valérie</surname>
-<givenName lang="en-us">Mapelli</givenName>
-<communicationInfo>
-<email>mapelli@elda.org</email>
-<url>http://www.elda.org</url>
-<address>55-57 rue Brillat-Savarin</address>
-<zipcode>75013</zipcode>
-<city>Paris</city>
-<country>France</country>
-<telephoneNumber>+1 43 13 33 33</telephoneNumber>
-<faxNumber>+1 43 14 33 30</faxNumber>
-</communicationInfo>
-</metadataCreator>
-</metadataInfo>
-<versionInfo>
-<version>1.0</version>
-<lastDateUpdated>2005-06-15</lastDateUpdated>
-</versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
@@ -40,7 +19,7 @@
 <price>6081.82</price>
 <userNature>commercial</userNature>
 <membershipInfo>
-<member>False</member>
+<member>false</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -50,7 +29,7 @@
 <price>6081.82</price>
 <userNature>commercial</userNature>
 <membershipInfo>
-<member>False</member>
+<member>false</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -60,7 +39,7 @@
 <price>1030.25</price>
 <userNature>academic</userNature>
 <membershipInfo>
-<member>False</member>
+<member>false</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -70,7 +49,7 @@
 <price>6081.82</price>
 <userNature>academic</userNature>
 <membershipInfo>
-<member>False</member>
+<member>false</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -80,7 +59,7 @@
 <price>3423.10</price>
 <userNature>commercial</userNature>
 <membershipInfo>
-<member>True</member>
+<member>true</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -90,7 +69,7 @@
 <price>3423.10</price>
 <userNature>commercial</userNature>
 <membershipInfo>
-<member>True</member>
+<member>true</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -100,7 +79,7 @@
 <price>631.45</price>
 <userNature>academic</userNature>
 <membershipInfo>
-<member>True</member>
+<member>true</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -110,12 +89,33 @@
 <price>3423.10</price>
 <userNature>academic</userNature>
 <membershipInfo>
-<member>True</member>
+<member>true</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
 <availabilityStartDate>1997-05-13</availabilityStartDate>
 </distributionInfo>
+<contactPerson>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipCode>75013</zipCode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</contactPerson>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<lastDateUpdated>2005-06-15</lastDateUpdated>
+</versionInfo>
 <resourceComponentType>
 <lexicalConceptualResourceInfo>
 <resourceType>lexicalConceptualResource</resourceType>
@@ -130,6 +130,10 @@
 <languageId>ger/deu</languageId>
 <languageName>German</languageName>
 </languageInfo>
+<sizeInfo>
+<size>no size available</size>
+<sizeUnit>other</sizeUnit>
+</sizeInfo>
 </lexicalConceptualResourceTextInfo>
 <lexicalConceptualResourceAudioInfo>
 <mediaType>audio</mediaType>
@@ -140,6 +144,10 @@
 <languageId>ger/deu</languageId>
 <languageName>German</languageName>
 </languageInfo>
+<sizeInfo>
+<size>no size available</size>
+<sizeUnit>other</sizeUnit>
+</sizeInfo>
 </lexicalConceptualResourceAudioInfo>
 </lexicalConceptualResourceMediaType>
 </lexicalConceptualResourceInfo>
