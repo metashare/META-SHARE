@@ -495,6 +495,18 @@ div.filters_box{
 }
 /*end filters separate box*/
 
+div.explanation_box{
+	margin-left:5%;
+    	position: relative;
+	background-color: white;
+	padding: 20px 20px 20px 20px;	
+	-webkit-box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
+	-moz-box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
+	box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
+    	float: left;
+}
+
+
 div.content_box{	
 	margin-left: 2%;
     	position: relative;
@@ -675,7 +687,7 @@ table.result_table tr{
 	background-color: white;
 }
 table.result_table tr.odd{
-	background-color: #DBEEEE;
+	background-color: #E6FFFF;
 	background-repeat: repeat-x;
 }
 /*end results table properties*/
