@@ -658,7 +658,7 @@ table.result_table tr.result_table_head a.sortDesc:after {
 
 
 table.result_table td, th{
-	padding-left: 30px;
+	padding-left:  20px;
 	vertical-align:top;
 	padding-bottom:10px;	
 }
@@ -675,7 +675,7 @@ table.result_table tr{
 	background-color: white;
 }
 table.result_table tr.odd{
-	background-color: #EFF;
+	background-color: #D4DDDD;
 	background-repeat: repeat-x;
 }
 /*end results table properties*/
