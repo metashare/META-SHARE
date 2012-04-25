@@ -35,10 +35,10 @@
 
   <a href="javascript:history.back();"><button class="span-12 button middle_button">&laquo; Back</button></a>
   {% if LR_DOWNLOAD %}
-    <a href="{% url metashare.repository.views.download resource.id %}"><button class="span-4 button middle_button">Download/Buy</button></a>
+    <a href="{% url metashare.repository.views.download resource.id %}"><button class="span-4 button middle_button">Download</button></a>
   {% else %}
     <div class="popup_box">
-      <div onmouseover="$(this).siblings('div.popup').show();" onmouseout="$(this).siblings('div.popup').hide();"><button class="span-4 button middle_gray_button">Download/Buy</button></div><div class="popup" style="height:50px; left:190px; width:270px; top:50px;"><img style="left:10px;" src="{{ MEDIA_URL }}images/adv_search_pfeil.png" />&nbsp;You don&rsquo;t have the permission to download this resource. Please log in.</div>
+      <div onmouseover="$(this).siblings('div.popup').show();" onmouseout="$(this).siblings('div.popup').hide();"><button class="span-4 button middle_gray_button">Download</button></div><div class="popup" style="height:50px; left:190px; width:270px; top:50px;"><img style="left:10px;" src="{{ MEDIA_URL }}images/adv_search_pfeil.png" />&nbsp;You don&rsquo;t have the permission to download this resource. Please log in.</div>
     </div>
   {% endif %}
   <div style="clear: both;"></div>
@@ -51,10 +51,10 @@
 
   <a href="javascript:history.back();"><button class="span-12 button middle_button">&laquo; Back</button></a>
   {% if LR_DOWNLOAD %}
-    <a href="{% url metashare.repository.views.download resource.id %}"><button class="span-4 button middle_button">Download/Buy</button></a>
+    <a href="{% url metashare.repository.views.download resource.id %}"><button class="span-4 button middle_button">Download</button></a>
   {% else %}
     <div class="popup_box">
-      <div onmouseover="$(this).siblings('div.popup').show();" onmouseout="$(this).siblings('div.popup').hide();"><button class="span-4 button middle_gray_button">Download/Buy</button></div><div class="popup" style="height:50px; left:190px; width:270px; top:50px;"><img style="left:10px;" src="{{ MEDIA_URL }}images/adv_search_pfeil.png" />&nbsp;You don&rsquo;t have the permission to download this resource. Please log in.</div>
+      <div onmouseover="$(this).siblings('div.popup').show();" onmouseout="$(this).siblings('div.popup').hide();"><button class="span-4 button middle_gray_button">Download</button></div><div class="popup" style="height:50px; left:190px; width:270px; top:50px;"><img style="left:10px;" src="{{ MEDIA_URL }}images/adv_search_pfeil.png" />&nbsp;You don&rsquo;t have the permission to download this resource. Please log in.</div>
     </div>
   {% endif %}
 
