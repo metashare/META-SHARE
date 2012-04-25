@@ -5,6 +5,7 @@ Utility functions for Selenium unit tests.
 """
 from metashare.settings import ROOT_PATH
 import os
+from metashare import test_utils
 
 def login_user(driver, user_name, user_passwd):
     """
@@ -40,3 +41,13 @@ def setup_screenshots_folder(test_class, test_method):
         file_path = os.path.join(ss_path, one_file)
         os.unlink(file_path)
     return ss_path
+
+
+def import_dir(path):
+    """
+    imports all XML files in the given directory
+    """
+    _files = os.listdir(path)
+    for _file in _files:
+        test_utils.import_xml_or_zip("%s%s" % (path, _file))
+        
