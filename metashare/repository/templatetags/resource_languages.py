@@ -33,7 +33,7 @@ class ResourceLanguages(template.Node):
             media_type = corpus_media.corpusMediaType
             for corpus_info in media_type.corpustextinfotype_model_set.all():
                 result.extend([lang.languageName for lang in
-                               corpus_info.languageInfo.all()])
+                               corpus_info.languageinfotype_model_set.all()])
             if media_type.corpusAudioInfo:
                 result.extend([lang.languageName for lang in
                                media_type.corpusAudioInfo.languageInfo.all()])
