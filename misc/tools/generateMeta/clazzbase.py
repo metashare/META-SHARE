@@ -1,5 +1,6 @@
 from collections import OrderedDict
 
+import os
 import sys
 import logging
 from parse_xsd import ElementDict, XschemaElementBase, XschemaElement
@@ -431,7 +432,7 @@ class Clazz(object):
 
     @classmethod
     def is_one_to_many(cls, member):
-        prefix, data_type = get_prefix_name(member.get_data_type())
+        dummy, data_type = get_prefix_name(member.get_data_type())
         return data_type not in Simple_type_table \
             and data_type not in cls.simple_type_table \
             and data_type != 'myString' \
@@ -986,12 +987,12 @@ class Clazz(object):
         return result
 
     @classmethod
-    def generate(cls, prefix, root, package_prefix):
+    def generate(cls, outDirName, prefix, root, package_prefix):
         cls.establish_one_to_many()
 
-        models_file_name = 'models.py'
-        forms_file_name = 'forms.py'
-        admin_file_name = 'admin.py'
+        models_file_name = os.path.join(outDirName, 'models.py')
+        forms_file_name = os.path.join(outDirName, 'forms.py')
+        admin_file_name = os.path.join(outDirName, 'admin.py')
 
         models_writer = Writer(models_file_name)
         forms_writer = Writer(forms_file_name)
@@ -1102,7 +1103,7 @@ class ClazzBaseMember(object):
 
     def get_generated_name(self):
         name = self.get_name()
-        prefix, name = get_prefix_name(name)
+        dummy, name = get_prefix_name(name)
         name = cleanupName(name)
         if name == 'id':
             name += 'x'
@@ -1112,10 +1113,10 @@ class ClazzBaseMember(object):
         return name
 
     def get_generated_type(self, data_type):
-        prefix, data_type = get_prefix_name(data_type)
+        dummy, data_type = get_prefix_name(data_type)
         if data_type in Clazz.simple_type_table:
             data_type = Clazz.simple_type_table[data_type]
-            prefix, data_type = get_prefix_name(data_type.type_name)
+            dummy, data_type = get_prefix_name(data_type.type_name)
         data_type = cleanupName(data_type)
         #data_type = data_type[0].upper() + data_type[1:]
         return data_type
