@@ -162,8 +162,82 @@ class languageDescriptionInfo_model_inline(SchemaModelInline):
 
 
 # pylint: disable-msg=C0103
-class languageInfo_model_inline(SchemaModelInline):
+class languageInfo_model_inline_corpusAudioInfoType_model(SchemaModelInline):
     model = languageInfoType_model
+    fk_name = 'back_to_corpusaudioinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class languageInfo_model_inline_corpusImageInfoType_model(SchemaModelInline):
+    model = languageInfoType_model
+    collapse = True
+    fk_name = 'back_to_corpusimageinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class languageInfo_model_inline_corpusTextInfoType_model(SchemaModelInline):
+    model = languageInfoType_model
+    fk_name = 'back_to_corpustextinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class languageInfo_model_inline_corpusTextNgramInfoType_model(SchemaModelInline):
+    model = languageInfoType_model
+    fk_name = 'back_to_corpustextngraminfotype_model'
+
+
+# pylint: disable-msg=C0103
+class languageInfo_model_inline_corpusVideoInfoType_model(SchemaModelInline):
+    model = languageInfoType_model
+    collapse = True
+    fk_name = 'back_to_corpusvideoinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class languageInfo_model_inline_languageDescriptionImageInfoType_model(SchemaModelInline):
+    model = languageInfoType_model
+    collapse = True
+    fk_name = 'back_to_languagedescriptionimageinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class languageInfo_model_inline_languageDescriptionTextInfoType_model(SchemaModelInline):
+    model = languageInfoType_model
+    fk_name = 'back_to_languagedescriptiontextinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class languageInfo_model_inline_languageDescriptionVideoInfoType_model(SchemaModelInline):
+    model = languageInfoType_model
+    collapse = True
+    fk_name = 'back_to_languagedescriptionvideoinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class languageInfo_model_inline_lexicalConceptualResourceAudioInfoType_model(SchemaModelInline):
+    model = languageInfoType_model
+    collapse = True
+    fk_name = 'back_to_lexicalconceptualresourceaudioinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class languageInfo_model_inline_lexicalConceptualResourceImageInfoType_model(SchemaModelInline):
+    model = languageInfoType_model
+    collapse = True
+    fk_name = 'back_to_lexicalconceptualresourceimageinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class languageInfo_model_inline_lexicalConceptualResourceTextInfoType_model(SchemaModelInline):
+    model = languageInfoType_model
+    fk_name = 'back_to_lexicalconceptualresourcetextinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class languageInfo_model_inline_lexicalConceptualResourceVideoInfoType_model(SchemaModelInline):
+    model = languageInfoType_model
+    collapse = True
+    fk_name = 'back_to_lexicalconceptualresourcevideoinfotype_model'
 
 
 # pylint: disable-msg=C0103

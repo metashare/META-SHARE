@@ -220,14 +220,10 @@ class EditorTest(SeleniumTestCase):
           "monolingual")
         # language description info text / language popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        driver.switch_to_window("id_languageInfo")
-        driver.find_element_by_id("id_languageId").clear()
-        driver.find_element_by_id("id_languageId").send_keys("De")
-        driver.find_element_by_id("id_languageName").clear()
-        driver.find_element_by_id("id_languageName").send_keys("German")
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        driver.find_element_by_name("_save").click()
-        driver.switch_to_window("id_languageDescriptionTextInfo")
+        driver.find_element_by_id("id_languageinfotype_model_set-0-languageId").clear()
+        driver.find_element_by_id("id_languageinfotype_model_set-0-languageId").send_keys("De")
+        driver.find_element_by_id("id_languageinfotype_model_set-0-languageName").clear()
+        driver.find_element_by_id("id_languageinfotype_model_set-0-languageName").send_keys("German")
         # save and close language description info text popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         driver.find_element_by_name("_save").click()

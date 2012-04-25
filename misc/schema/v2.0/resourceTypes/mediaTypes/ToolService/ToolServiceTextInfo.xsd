@@ -21,7 +21,7 @@
 					<xs:element ref="ms:languageInfo" maxOccurs="unbounded">
                             <xs:annotation>
                             <xs:appinfo>
-                                <relation>many-to-many</relation>
+                                <relation>one-to-many</relation>
                             </xs:appinfo>
                         </xs:annotation>
                     </xs:element>

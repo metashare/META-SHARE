@@ -3136,7 +3136,29 @@ class languageInfoType_model(SchemaModel):
       'e resource (e.g. dialects)',
       blank=True, null=True, related_name="languageVarietyInfo_%(class)s_related", )
 
+    back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
+
     back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
+
+    back_to_corpusvideoinfotype_model = models.ForeignKey("corpusVideoInfoType_model",  blank=True, null=True)
+
+    back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
+
+    back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
+
+    back_to_languagedescriptiontextinfotype_model = models.ForeignKey("languageDescriptionTextInfoType_model",  blank=True, null=True)
+
+    back_to_languagedescriptionvideoinfotype_model = models.ForeignKey("languageDescriptionVideoInfoType_model",  blank=True, null=True)
+
+    back_to_languagedescriptionimageinfotype_model = models.ForeignKey("languageDescriptionImageInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourceaudioinfotype_model = models.ForeignKey("lexicalConceptualResourceAudioInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourcetextinfotype_model = models.ForeignKey("lexicalConceptualResourceTextInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
@@ -3512,7 +3534,7 @@ class corpusAudioInfoType_model(SchemaModel):
     __schema_fields__ = (
       ( u'mediaType', u'mediaType', REQUIRED ),
       ( u'lingualityInfo', u'lingualityInfo', REQUIRED ),
-      ( u'languageInfo', u'languageInfo', REQUIRED ),
+      ( u'languageInfo', u'languageinfotype_model_set', REQUIRED ),
       ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
       ( u'audioSizeInfo', u'audiosizeinfotype_model_set', REQUIRED ),
       ( u'audioContentInfo', u'audioContentInfo', RECOMMENDED ),
@@ -3563,11 +3585,7 @@ class corpusAudioInfoType_model(SchemaModel):
       'source part and of the way they are combined to each other',
       )
 
-    languageInfo = models.ManyToManyField("languageInfoType_model", 
-      verbose_name='Language', 
-      help_text='Groups information on the languages represented in the ' \
-      'resource',
-      related_name="languageInfo_%(class)s_related", )
+    # OneToMany field: languageInfo
 
     # OneToMany field: modalityInfo
 
@@ -4338,7 +4356,7 @@ class corpusVideoInfoType_model(SchemaModel):
     __schema_fields__ = (
       ( u'mediaType', u'mediaType', REQUIRED ),
       ( u'lingualityInfo', u'lingualityInfo', OPTIONAL ),
-      ( u'languageInfo', u'languageInfo', OPTIONAL ),
+      ( u'languageInfo', u'languageinfotype_model_set', OPTIONAL ),
       ( u'modalityInfo', u'modalityInfo', RECOMMENDED ),
       ( u'sizeInfo', u'sizeinfotype_model_set', REQUIRED ),
       ( u'videoContentInfo', u'videoContentInfo', RECOMMENDED ),
@@ -4389,11 +4407,7 @@ class corpusVideoInfoType_model(SchemaModel):
       'source part and of the way they are combined to each other',
       blank=True, null=True, )
 
-    languageInfo = models.ManyToManyField("languageInfoType_model", 
-      verbose_name='Language', 
-      help_text='Groups information on the languages represented in the ' \
-      'resource',
-      blank=True, null=True, related_name="languageInfo_%(class)s_related", )
+    # OneToMany field: languageInfo
 
     modalityInfo = models.OneToOneField("modalityInfoType_model", 
       verbose_name='Modality', 
@@ -4709,7 +4723,7 @@ class corpusImageInfoType_model(SchemaModel):
       ( u'mediaType', u'mediaType', REQUIRED ),
       ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
       ( u'lingualityInfo', u'lingualityInfo', OPTIONAL ),
-      ( u'languageInfo', u'languageInfo', OPTIONAL ),
+      ( u'languageInfo', u'languageinfotype_model_set', OPTIONAL ),
       ( u'sizeInfo', u'sizeInfo', REQUIRED ),
       ( u'imageContentInfo', u'imageContentInfo', RECOMMENDED ),
       ( u'imageFormatInfo', u'imageFormatInfo', RECOMMENDED ),
@@ -4757,11 +4771,7 @@ class corpusImageInfoType_model(SchemaModel):
       'source part and of the way they are combined to each other',
       blank=True, null=True, )
 
-    languageInfo = models.ManyToManyField("languageInfoType_model", 
-      verbose_name='Language', 
-      help_text='Groups information on the languages represented in the ' \
-      'resource',
-      blank=True, null=True, related_name="languageInfo_%(class)s_related", )
+    # OneToMany field: languageInfo
 
     sizeInfo = models.ManyToManyField("sizeInfoType_model", 
       verbose_name='Size', 
@@ -5248,7 +5258,7 @@ class corpusTextNgramInfoType_model(SchemaModel):
       ( u'mediaType', u'mediaType', REQUIRED ),
       ( u'ngramInfo', u'ngramInfo', REQUIRED ),
       ( u'lingualityInfo', u'lingualityInfo', REQUIRED ),
-      ( u'languageInfo', u'languageInfo', REQUIRED ),
+      ( u'languageInfo', u'languageinfotype_model_set', REQUIRED ),
       ( u'modalityInfo', u'modalityInfo', RECOMMENDED ),
       ( u'sizeInfo', u'sizeinfotype_model_set', REQUIRED ),
       ( u'textFormatInfo', u'textFormatInfo', RECOMMENDED ),
@@ -5295,11 +5305,7 @@ class corpusTextNgramInfoType_model(SchemaModel):
       'source part and of the way they are combined to each other',
       )
 
-    languageInfo = models.ManyToManyField("languageInfoType_model", 
-      verbose_name='Language', 
-      help_text='Groups information on the languages represented in the ' \
-      'resource',
-      related_name="languageInfo_%(class)s_related", )
+    # OneToMany field: languageInfo
 
     modalityInfo = models.OneToOneField("modalityInfoType_model", 
       verbose_name='Modality', 
@@ -5692,7 +5698,7 @@ class languageDescriptionTextInfoType_model(SchemaModel):
       ( u'creationInfo', u'creationInfo', RECOMMENDED ),
       ( u'linkToOtherMediaInfo', u'linktoothermediainfotype_model_set', OPTIONAL ),
       ( u'lingualityInfo', u'lingualityInfo', REQUIRED ),
-      ( u'languageInfo', u'languageInfo', REQUIRED ),
+      ( u'languageInfo', u'languageinfotype_model_set', REQUIRED ),
       ( u'modalityInfo', u'modalityInfo', RECOMMENDED ),
       ( u'sizeInfo', u'sizeinfotype_model_set', RECOMMENDED ),
       ( u'textFormatInfo', u'textFormatInfo', RECOMMENDED ),
@@ -5741,11 +5747,7 @@ class languageDescriptionTextInfoType_model(SchemaModel):
       'source part and of the way they are combined to each other',
       )
 
-    languageInfo = models.ManyToManyField("languageInfoType_model", 
-      verbose_name='Language', 
-      help_text='Groups information on the languages represented in the ' \
-      'resource',
-      related_name="languageInfo_%(class)s_related", )
+    # OneToMany field: languageInfo
 
     modalityInfo = models.OneToOneField("modalityInfoType_model", 
       verbose_name='Modality', 
@@ -5808,7 +5810,7 @@ class languageDescriptionVideoInfoType_model(SchemaModel):
       ( u'creationInfo', u'creationInfo', RECOMMENDED ),
       ( u'linkToOtherMediaInfo', u'linktoothermediainfotype_model_set', REQUIRED ),
       ( u'lingualityInfo', u'lingualityInfo', OPTIONAL ),
-      ( u'languageInfo', u'languageInfo', OPTIONAL ),
+      ( u'languageInfo', u'languageinfotype_model_set', OPTIONAL ),
       ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
       ( u'sizeInfo', u'sizeinfotype_model_set', RECOMMENDED ),
       ( u'videoContentInfo', u'videoContentInfo', RECOMMENDED ),
@@ -5857,11 +5859,7 @@ class languageDescriptionVideoInfoType_model(SchemaModel):
       'source part and of the way they are combined to each other',
       blank=True, null=True, )
 
-    languageInfo = models.ManyToManyField("languageInfoType_model", 
-      verbose_name='Language', 
-      help_text='Groups information on the languages represented in the ' \
-      'resource',
-      blank=True, null=True, related_name="languageInfo_%(class)s_related", )
+    # OneToMany field: languageInfo
 
     # OneToMany field: modalityInfo
 
@@ -5919,7 +5917,7 @@ class languageDescriptionImageInfoType_model(SchemaModel):
     __schema_fields__ = (
       ( u'mediaType', u'mediaType', REQUIRED ),
       ( u'lingualityInfo', u'lingualityInfo', OPTIONAL ),
-      ( u'languageInfo', u'languageInfo', OPTIONAL ),
+      ( u'languageInfo', u'languageinfotype_model_set', OPTIONAL ),
       ( u'creationInfo', u'creationInfo', RECOMMENDED ),
       ( u'linkToOtherMediaInfo', u'linktoothermediainfotype_model_set', REQUIRED ),
       ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
@@ -5960,11 +5958,7 @@ class languageDescriptionImageInfoType_model(SchemaModel):
       'source part and of the way they are combined to each other',
       blank=True, null=True, )
 
-    languageInfo = models.ManyToManyField("languageInfoType_model", 
-      verbose_name='Language', 
-      help_text='Groups information on the languages represented in the ' \
-      'resource',
-      blank=True, null=True, related_name="languageInfo_%(class)s_related", )
+    # OneToMany field: languageInfo
 
     creationInfo = models.OneToOneField("creationInfoType_model", 
       verbose_name='Creation', 
@@ -6150,7 +6144,7 @@ class lexicalConceptualResourceAudioInfoType_model(SchemaModel):
     __schema_fields__ = (
       ( u'mediaType', u'mediaType', REQUIRED ),
       ( u'lingualityInfo', u'lingualityInfo', OPTIONAL ),
-      ( u'languageInfo', u'languageInfo', OPTIONAL ),
+      ( u'languageInfo', u'languageinfotype_model_set', OPTIONAL ),
       ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
       ( u'sizeInfo', u'sizeinfotype_model_set', RECOMMENDED ),
       ( u'audioContentInfo', u'audioContentInfo', RECOMMENDED ),
@@ -6187,11 +6181,7 @@ class lexicalConceptualResourceAudioInfoType_model(SchemaModel):
       'source part and of the way they are combined to each other',
       blank=True, null=True, )
 
-    languageInfo = models.ManyToManyField("languageInfoType_model", 
-      verbose_name='Language', 
-      help_text='Groups information on the languages represented in the ' \
-      'resource',
-      blank=True, null=True, related_name="languageInfo_%(class)s_related", )
+    # OneToMany field: languageInfo
 
     # OneToMany field: modalityInfo
 
@@ -6248,7 +6238,7 @@ class lexicalConceptualResourceTextInfoType_model(SchemaModel):
     __schema_fields__ = (
       ( u'mediaType', u'mediaType', REQUIRED ),
       ( u'lingualityInfo', u'lingualityInfo', REQUIRED ),
-      ( u'languageInfo', u'languageInfo', REQUIRED ),
+      ( u'languageInfo', u'languageinfotype_model_set', REQUIRED ),
       ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
       ( u'sizeInfo', u'sizeinfotype_model_set', REQUIRED ),
       ( u'textFormatInfo', u'textFormatInfo', RECOMMENDED ),
@@ -6285,11 +6275,7 @@ class lexicalConceptualResourceTextInfoType_model(SchemaModel):
       'source part and of the way they are combined to each other',
       )
 
-    languageInfo = models.ManyToManyField("languageInfoType_model", 
-      verbose_name='Language', 
-      help_text='Groups information on the languages represented in the ' \
-      'resource',
-      related_name="languageInfo_%(class)s_related", )
+    # OneToMany field: languageInfo
 
     # OneToMany field: modalityInfo
 
@@ -6345,7 +6331,7 @@ class lexicalConceptualResourceVideoInfoType_model(SchemaModel):
     __schema_fields__ = (
       ( u'mediaType', u'mediaType', REQUIRED ),
       ( u'lingualityInfo', u'lingualityInfo', OPTIONAL ),
-      ( u'languageInfo', u'languageInfo', OPTIONAL ),
+      ( u'languageInfo', u'languageinfotype_model_set', OPTIONAL ),
       ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
       ( u'sizeInfo', u'sizeinfotype_model_set', RECOMMENDED ),
       ( u'videoContentInfo', u'videoContentInfo', REQUIRED ),
@@ -6382,11 +6368,7 @@ class lexicalConceptualResourceVideoInfoType_model(SchemaModel):
       'source part and of the way they are combined to each other',
       blank=True, null=True, )
 
-    languageInfo = models.ManyToManyField("languageInfoType_model", 
-      verbose_name='Language', 
-      help_text='Groups information on the languages represented in the ' \
-      'resource',
-      blank=True, null=True, related_name="languageInfo_%(class)s_related", )
+    # OneToMany field: languageInfo
 
     # OneToMany field: modalityInfo
 
@@ -6444,7 +6426,7 @@ class lexicalConceptualResourceImageInfoType_model(SchemaModel):
       ( u'mediaType', u'mediaType', REQUIRED ),
       ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
       ( u'lingualityInfo', u'lingualityInfo', OPTIONAL ),
-      ( u'languageInfo', u'languageInfo', OPTIONAL ),
+      ( u'languageInfo', u'languageinfotype_model_set', OPTIONAL ),
       ( u'sizeInfo', u'sizeinfotype_model_set', RECOMMENDED ),
       ( u'imageContentInfo', u'imageContentInfo', RECOMMENDED ),
       ( u'imageFormatInfo', u'imageFormatInfo', RECOMMENDED ),
@@ -6482,11 +6464,7 @@ class lexicalConceptualResourceImageInfoType_model(SchemaModel):
       'source part and of the way they are combined to each other',
       blank=True, null=True, )
 
-    languageInfo = models.ManyToManyField("languageInfoType_model", 
-      verbose_name='Language', 
-      help_text='Groups information on the languages represented in the ' \
-      'resource',
-      blank=True, null=True, related_name="languageInfo_%(class)s_related", )
+    # OneToMany field: languageInfo
 
     # OneToMany field: sizeInfo
 

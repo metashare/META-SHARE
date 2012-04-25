@@ -37,7 +37,7 @@
 				<xs:annotation>
 					<xs:documentation>Groups information on the languages represented in the resource</xs:documentation>
 					<xs:appinfo>
-						<relation>many-to-many</relation>
+						<relation>one-to-many</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
