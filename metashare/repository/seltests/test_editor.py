@@ -9,14 +9,25 @@ from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support.ui import Select
 import time
+from django.core.management import call_command
 
 
-ADMINROOT = '/{0}editor/'.format(DJANGO_BASE)
 TESTFIXTURE_XML = '{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
 
 class EditorTest(SeleniumTestCase):
     
+    
     def setUp(self):
+        # create editor user
+        editoruser = User.objects.create_user(
+          'editoruser', 'editor@example.com', 'secret')
+        editoruser.is_staff = True
+        globaleditors = Group.objects.get(name='globaleditors')
+        editoruser.groups.add(globaleditors)
+        editoruser.save()
+        # make sure the index does not contain any stale entries
+        call_command('rebuild_index', interactive=False, using=settings.TEST_MODE_NAME)
+        
         # init Selenium
         driver = getattr(webdriver, settings.SELENIUM_DRIVER, None)
         assert driver, "settings.SELENIUM_DRIVER contains non-existing driver"
@@ -26,15 +37,16 @@ class EditorTest(SeleniumTestCase):
         port = getattr(settings, 'SELENIUM_TESTSERVER_PORT', 8000)
         self.base_url = 'http://{0}:{1}/{2}'.format(host, port, DJANGO_BASE)
         self.verification_errors = []
-        
-        # create editor user
-        editoruser = User.objects.create_user(
-          'editoruser', 'editor@example.com', 'secret')
-        editoruser.is_staff = True
-        globaleditors = Group.objects.get(name='globaleditors')
-        editoruser.groups.add(globaleditors)
-        editoruser.save()
+
     
+    def tearDown(self):
+        resourceInfoType_model.objects.all().delete()
+        User.objects.all().delete()
+        
+        # clean up Selenium
+        self.driver.quit()
+        self.assertEqual([], self.verification_errors)
+
 
     def test_status_after_saving(self):
         
@@ -309,7 +321,7 @@ class EditorTest(SeleniumTestCase):
         driver.get(self.base_url)
         ss_path = setup_screenshots_folder(
           "PNG-metashare.repository.seltests.test_editor.EditorTest",
-          "LR_creation_lex_resource_text")
+          "LR_creation_tool")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))  
         # login user
         login_user(driver, "editoruser", "secret")
@@ -429,11 +441,4 @@ class EditorTest(SeleniumTestCase):
         except NoSuchElementException:
             return False
         return True
-    
-    
-    def tearDown(self):
-        resourceInfoType_model.objects.all().delete()
-        
-        # clean up Selenium
-        self.driver.quit()
-        self.assertEqual([], self.verification_errors)
+

@@ -5,4 +5,5 @@
 # Yes, pylint, we want wildcard imports here.
 # pylint: disable-msg=W0401
 from metashare.repository.seltests.test_editor import *
+from metashare.repository.seltests.test_filter import *
 from metashare.repository.seltests.test_example import *
