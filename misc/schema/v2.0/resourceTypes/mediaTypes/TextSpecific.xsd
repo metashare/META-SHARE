@@ -32,16 +32,12 @@
 	<xs:complexType name="textClassificationInfoType">
 		<xs:annotation>
 			<xs:documentation>Groups together information on text type/genre of the resource</xs:documentation>
-			<xs:appinfo>
-				<relation>one-to-one</relation>
-			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="textGenre" type="xs:string" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Genre: The conventionalized discourse or text types of the content of the resource, based on extra-linguistic and internal linguistic criteria</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>50</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -50,7 +46,6 @@
 				<xs:annotation>
 					<xs:documentation>Specifies the type of the text according to a text type classification</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>50</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -59,7 +54,6 @@
 				<xs:annotation>
 					<xs:documentation>For corpora that have already been using register classification</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>500</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -68,7 +62,6 @@
 				<xs:annotation>
 					<xs:documentation>For corpora that have already been using subject classification</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>500</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -76,9 +69,6 @@
 			<xs:element ref="ms:conformanceToClassificationScheme" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Specifies the external classification schemes</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="sizePerTextClassification" type="ms:sizeInfoType" minOccurs="0">

@@ -106,8 +106,56 @@ from metashare.repository.models import \
 
 
 # pylint: disable-msg=C0103
+class audioClassificationInfo_model_inline(SchemaModelInline):
+    model = audioClassificationInfoType_model
+    collapse = True
+
+
+# pylint: disable-msg=C0103
+class audioFormatInfo_model_inline_corpusAudioInfoType_model(SchemaModelInline):
+    model = audioFormatInfoType_model
+    collapse = True
+    fk_name = 'back_to_corpusaudioinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class audioFormatInfo_model_inline_lexicalConceptualResourceAudioInfoType_model(SchemaModelInline):
+    model = audioFormatInfoType_model
+    collapse = True
+    fk_name = 'back_to_lexicalconceptualresourceaudioinfotype_model'
+
+
+# pylint: disable-msg=C0103
 class audioSizeInfo_model_inline(SchemaModelInline):
     model = audioSizeInfoType_model
+
+
+# pylint: disable-msg=C0103
+class characterEncodingInfo_model_inline_corpusTextInfoType_model(SchemaModelInline):
+    model = characterEncodingInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_corpustextinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class characterEncodingInfo_model_inline_corpusTextNgramInfoType_model(SchemaModelInline):
+    model = characterEncodingInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_corpustextngraminfotype_model'
+
+
+# pylint: disable-msg=C0103
+class characterEncodingInfo_model_inline_languageDescriptionTextInfoType_model(SchemaModelInline):
+    model = characterEncodingInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_languagedescriptiontextinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class characterEncodingInfo_model_inline_lexicalConceptualResourceTextInfoType_model(SchemaModelInline):
+    model = characterEncodingInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_lexicalconceptualresourcetextinfotype_model'
 
 
 # pylint: disable-msg=C0103
@@ -133,6 +181,90 @@ class documentInfo_model_inline(SchemaModelInline):
 
 
 # pylint: disable-msg=C0103
+class domainInfo_model_inline_corpusAudioInfoType_model(SchemaModelInline):
+    model = domainInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_corpusaudioinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class domainInfo_model_inline_corpusImageInfoType_model(SchemaModelInline):
+    model = domainInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_corpusimageinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class domainInfo_model_inline_corpusTextInfoType_model(SchemaModelInline):
+    model = domainInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_corpustextinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class domainInfo_model_inline_corpusTextNgramInfoType_model(SchemaModelInline):
+    model = domainInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_corpustextngraminfotype_model'
+
+
+# pylint: disable-msg=C0103
+class domainInfo_model_inline_corpusVideoInfoType_model(SchemaModelInline):
+    model = domainInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_corpusvideoinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class domainInfo_model_inline_languageDescriptionImageInfoType_model(SchemaModelInline):
+    model = domainInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_languagedescriptionimageinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class domainInfo_model_inline_languageDescriptionTextInfoType_model(SchemaModelInline):
+    model = domainInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_languagedescriptiontextinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class domainInfo_model_inline_languageDescriptionVideoInfoType_model(SchemaModelInline):
+    model = domainInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_languagedescriptionvideoinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class domainInfo_model_inline_lexicalConceptualResourceAudioInfoType_model(SchemaModelInline):
+    model = domainInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_lexicalconceptualresourceaudioinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class domainInfo_model_inline_lexicalConceptualResourceImageInfoType_model(SchemaModelInline):
+    model = domainInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_lexicalconceptualresourceimageinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class domainInfo_model_inline_lexicalConceptualResourceTextInfoType_model(SchemaModelInline):
+    model = domainInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_lexicalconceptualresourcetextinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class domainInfo_model_inline_lexicalConceptualResourceVideoInfoType_model(SchemaModelInline):
+    model = domainInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_lexicalconceptualresourcevideoinfotype_model'
+
+
+# pylint: disable-msg=C0103
 class durationOfAudioInfo_model_inline(SchemaModelInline):
     model = durationOfAudioInfoType_model
     collapse = True
@@ -148,6 +280,90 @@ class durationOfEffectiveSpeechInfo_model_inline(SchemaModelInline):
 class foreseenUseInfo_model_inline(SchemaModelInline):
     model = foreseenUseInfoType_model
     collapse = True
+
+
+# pylint: disable-msg=C0103
+class geographicCoverageInfo_model_inline_corpusAudioInfoType_model(SchemaModelInline):
+    model = geographicCoverageInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_corpusaudioinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class geographicCoverageInfo_model_inline_corpusImageInfoType_model(SchemaModelInline):
+    model = geographicCoverageInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_corpusimageinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class geographicCoverageInfo_model_inline_corpusTextInfoType_model(SchemaModelInline):
+    model = geographicCoverageInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_corpustextinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class geographicCoverageInfo_model_inline_corpusTextNgramInfoType_model(SchemaModelInline):
+    model = geographicCoverageInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_corpustextngraminfotype_model'
+
+
+# pylint: disable-msg=C0103
+class geographicCoverageInfo_model_inline_corpusVideoInfoType_model(SchemaModelInline):
+    model = geographicCoverageInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_corpusvideoinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class geographicCoverageInfo_model_inline_languageDescriptionImageInfoType_model(SchemaModelInline):
+    model = geographicCoverageInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_languagedescriptionimageinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class geographicCoverageInfo_model_inline_languageDescriptionTextInfoType_model(SchemaModelInline):
+    model = geographicCoverageInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_languagedescriptiontextinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class geographicCoverageInfo_model_inline_languageDescriptionVideoInfoType_model(SchemaModelInline):
+    model = geographicCoverageInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_languagedescriptionvideoinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class geographicCoverageInfo_model_inline_lexicalConceptualResourceAudioInfoType_model(SchemaModelInline):
+    model = geographicCoverageInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_lexicalconceptualresourceaudioinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class geographicCoverageInfo_model_inline_lexicalConceptualResourceImageInfoType_model(SchemaModelInline):
+    model = geographicCoverageInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_lexicalconceptualresourceimageinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class geographicCoverageInfo_model_inline_lexicalConceptualResourceTextInfoType_model(SchemaModelInline):
+    model = geographicCoverageInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_lexicalconceptualresourcetextinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class geographicCoverageInfo_model_inline_lexicalConceptualResourceVideoInfoType_model(SchemaModelInline):
+    model = geographicCoverageInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_lexicalconceptualresourcevideoinfotype_model'
 
 
 # pylint: disable-msg=C0103
@@ -249,6 +465,41 @@ class lexicalConceptualResourceInfo_model_inline(SchemaModelInline):
 class licenceInfo_model_inline(SchemaModelInline):
     model = licenceInfoType_model
     collapse = True
+
+
+# pylint: disable-msg=C0103
+class linkToOtherMediaInfo_model_inline_corpusAudioInfoType_model(SchemaModelInline):
+    model = linkToOtherMediaInfoType_model
+    collapse = True
+    fk_name = 'back_to_corpusaudioinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class linkToOtherMediaInfo_model_inline_corpusImageInfoType_model(SchemaModelInline):
+    model = linkToOtherMediaInfoType_model
+    collapse = True
+    fk_name = 'back_to_corpusimageinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class linkToOtherMediaInfo_model_inline_corpusTextInfoType_model(SchemaModelInline):
+    model = linkToOtherMediaInfoType_model
+    collapse = True
+    fk_name = 'back_to_corpustextinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class linkToOtherMediaInfo_model_inline_corpusTextNumericalInfoType_model(SchemaModelInline):
+    model = linkToOtherMediaInfoType_model
+    collapse = True
+    fk_name = 'back_to_corpustextnumericalinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class linkToOtherMediaInfo_model_inline_corpusVideoInfoType_model(SchemaModelInline):
+    model = linkToOtherMediaInfoType_model
+    collapse = True
+    fk_name = 'back_to_corpusvideoinfotype_model'
 
 
 # pylint: disable-msg=C0103
@@ -377,6 +628,13 @@ class resolutionInfo_model_inline_videoFormatInfoType_model(SchemaModelInline):
 
 
 # pylint: disable-msg=C0103
+class sizeInfo_model_inline_corpusImageInfoType_model(SchemaModelInline):
+    model = sizeInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_corpusimageinfotype_model'
+
+
+# pylint: disable-msg=C0103
 class sizeInfo_model_inline_corpusTextInfoType_model(SchemaModelInline):
     model = sizeInfoType_model
     template = 'admin/edit_inline/tabular.html'
@@ -454,9 +712,135 @@ class sizeInfo_model_inline_lexicalConceptualResourceVideoInfoType_model(SchemaM
 
 
 # pylint: disable-msg=C0103
+class textClassificationInfo_model_inline_corpusTextInfoType_model(SchemaModelInline):
+    model = textClassificationInfoType_model
+    collapse = True
+    fk_name = 'back_to_corpustextinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class textClassificationInfo_model_inline_corpusTextNgramInfoType_model(SchemaModelInline):
+    model = textClassificationInfoType_model
+    collapse = True
+    fk_name = 'back_to_corpustextngraminfotype_model'
+
+
+# pylint: disable-msg=C0103
+class textFormatInfo_model_inline_corpusTextInfoType_model(SchemaModelInline):
+    model = textFormatInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_corpustextinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class textFormatInfo_model_inline_corpusTextNgramInfoType_model(SchemaModelInline):
+    model = textFormatInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_corpustextngraminfotype_model'
+
+
+# pylint: disable-msg=C0103
+class textFormatInfo_model_inline_languageDescriptionTextInfoType_model(SchemaModelInline):
+    model = textFormatInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_languagedescriptiontextinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class textFormatInfo_model_inline_lexicalConceptualResourceTextInfoType_model(SchemaModelInline):
+    model = textFormatInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_lexicalconceptualresourcetextinfotype_model'
+
+
+# pylint: disable-msg=C0103
 class textNumericalFormatInfo_model_inline(SchemaModelInline):
     model = textNumericalFormatInfoType_model
     collapse = True
+
+
+# pylint: disable-msg=C0103
+class timeCoverageInfo_model_inline_corpusAudioInfoType_model(SchemaModelInline):
+    model = timeCoverageInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_corpusaudioinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class timeCoverageInfo_model_inline_corpusImageInfoType_model(SchemaModelInline):
+    model = timeCoverageInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_corpusimageinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class timeCoverageInfo_model_inline_corpusTextInfoType_model(SchemaModelInline):
+    model = timeCoverageInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_corpustextinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class timeCoverageInfo_model_inline_corpusTextNgramInfoType_model(SchemaModelInline):
+    model = timeCoverageInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_corpustextngraminfotype_model'
+
+
+# pylint: disable-msg=C0103
+class timeCoverageInfo_model_inline_corpusVideoInfoType_model(SchemaModelInline):
+    model = timeCoverageInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_corpusvideoinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class timeCoverageInfo_model_inline_languageDescriptionImageInfoType_model(SchemaModelInline):
+    model = timeCoverageInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_languagedescriptionimageinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class timeCoverageInfo_model_inline_languageDescriptionTextInfoType_model(SchemaModelInline):
+    model = timeCoverageInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_languagedescriptiontextinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class timeCoverageInfo_model_inline_languageDescriptionVideoInfoType_model(SchemaModelInline):
+    model = timeCoverageInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_languagedescriptionvideoinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class timeCoverageInfo_model_inline_lexicalConceptualResourceAudioInfoType_model(SchemaModelInline):
+    model = timeCoverageInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_lexicalconceptualresourceaudioinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class timeCoverageInfo_model_inline_lexicalConceptualResourceImageInfoType_model(SchemaModelInline):
+    model = timeCoverageInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_lexicalconceptualresourceimageinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class timeCoverageInfo_model_inline_lexicalConceptualResourceTextInfoType_model(SchemaModelInline):
+    model = timeCoverageInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_lexicalconceptualresourcetextinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class timeCoverageInfo_model_inline_lexicalConceptualResourceVideoInfoType_model(SchemaModelInline):
+    model = timeCoverageInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_lexicalconceptualresourcevideoinfotype_model'
 
 
 # pylint: disable-msg=C0103
