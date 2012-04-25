@@ -630,11 +630,11 @@ div.split{
 	padding-right: 0px;
 	overflow: hidden;
 }
-/*table width*/
+/*results table properties*/
 table.result_table {
 	width:800px;
 }
-/*end table width*/
+
 
 table.result_table tr.result_table_head{
 	text-shadow: 0px 1px 1px white;
@@ -657,10 +657,10 @@ table.result_table tr.result_table_head a.sortDesc:after {
 }
 
 
-
 table.result_table td, th{
 	padding-left: 30px;
 	vertical-align:top;
+	padding-bottom:10px;	
 }
 table.result_table tbody tr{
 	color: 			#666666;
@@ -678,3 +678,4 @@ table.result_table tr.odd{
 	background-color: #EFF;
 	background-repeat: repeat-x;
 }
+/*end results table properties*/
