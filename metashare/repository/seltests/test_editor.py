@@ -136,23 +136,19 @@ class EditorTest(SeleniumTestCase):
           "monolingual")
         # corpus info text / language popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        driver.switch_to_window("id_languageInfo")
-        driver.find_element_by_id("id_languageId").clear()
-        driver.find_element_by_id("id_languageId").send_keys("De")
-        driver.find_element_by_id("id_languageName").clear()
-        driver.find_element_by_id("id_languageName").send_keys("German")
+        
+
+        driver.find_element_by_id("id_languageinfotype_model_set-0-languageId").clear()
+        driver.find_element_by_id("id_languageinfotype_model_set-0-languageId").send_keys("De")
+        driver.find_element_by_id("id_languageinfotype_model_set-0-languageName").clear()
+        driver.find_element_by_id("id_languageinfotype_model_set-0-languageName").send_keys("German")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        driver.find_element_by_name("_save").click()
-        driver.switch_to_window("id_corpusTextInfo__dash__0")
+
         # corpus info text / size popup
-        driver.find_element_by_css_selector("#add_id_sizeInfo > img[alt=\"Add Another\"]").click()
-        driver.switch_to_window("id_sizeInfo")
-        driver.find_element_by_id("id_size").clear()
-        driver.find_element_by_id("id_size").send_keys("10000")
-        Select(driver.find_element_by_id("id_sizeUnit")).select_by_visible_text("tokens")
+        driver.find_element_by_id("id_sizeinfotype_model_set-0-size").clear()
+        driver.find_element_by_id("id_sizeinfotype_model_set-0-size").send_keys("10000")
+        Select(driver.find_element_by_id("id_sizeinfotype_model_set-0-sizeUnit")).select_by_visible_text("tokens")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        driver.find_element_by_name("_save").click()
-        driver.switch_to_window("id_corpusTextInfo__dash__0")
         # save and close corpus info text popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         driver.find_element_by_name("_save").click()
