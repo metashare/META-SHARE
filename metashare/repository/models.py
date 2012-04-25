@@ -40,7 +40,6 @@ class resourceInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Resource"
-        verbose_name_plural = "Resources"
 
 
     __schema_name__ = 'resourceInfo'
@@ -223,7 +222,6 @@ class sizeInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Size"
-        verbose_name_plural = "Sizes"
 
 
     __schema_name__ = 'sizeInfoType'
@@ -283,7 +281,6 @@ class identificationInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Identification"
-        verbose_name_plural = "Identifications"
 
 
     __schema_name__ = 'identificationInfoType'
@@ -344,7 +341,6 @@ class versionInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Version"
-        verbose_name_plural = "Versions"
 
 
     __schema_name__ = 'versionInfoType'
@@ -407,7 +403,6 @@ class validationInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Validation"
-        verbose_name_plural = "Validations"
 
 
     __schema_name__ = 'validationInfoType'
@@ -514,7 +509,6 @@ class resourceCreationInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Resource creation"
-        verbose_name_plural = "Resource creations"
 
 
     __schema_name__ = 'resourceCreationInfoType'
@@ -574,7 +568,6 @@ class creationInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Creation"
-        verbose_name_plural = "Creations"
 
 
     __schema_name__ = 'creationInfoType'
@@ -629,7 +622,6 @@ class metadataInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Metadata"
-        verbose_name_plural = "Metadatas"
 
 
     __schema_name__ = 'metadataInfoType'
@@ -715,7 +707,6 @@ class documentationInfoType_model(SubclassableModel):
 
     class Meta:
         verbose_name = "Documentation"
-        verbose_name_plural = "Documentations"
 
 
 DOCUMENTINFOTYPE_DOCUMENTTYPE_CHOICES = _make_choices_from_list([
@@ -736,7 +727,6 @@ class documentInfoType_model(documentationInfoType_model):
 
     class Meta:
         verbose_name = "Document"
-        verbose_name_plural = "Documents"
 
 
     __schema_name__ = 'documentInfoType'
@@ -897,7 +887,6 @@ class resourceDocumentationInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Resource documentation"
-        verbose_name_plural = "Resource documentations"
 
 
     __schema_name__ = 'resourceDocumentationInfoType'
@@ -957,7 +946,6 @@ class domainInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Domain"
-        verbose_name_plural = "Domains"
 
 
     __schema_name__ = 'domainInfoType'
@@ -1063,7 +1051,6 @@ class annotationInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Annotation"
-        verbose_name_plural = "Annotations"
 
 
     __schema_name__ = 'annotationInfoType'
@@ -1249,7 +1236,6 @@ class targetResourceInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Target resource"
-        verbose_name_plural = "Target resources"
 
 
     __schema_name__ = 'targetResourceInfoType'
@@ -1279,7 +1265,6 @@ class relationInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Relation"
-        verbose_name_plural = "Relations"
 
 
     __schema_name__ = 'relationInfoType'
@@ -1406,7 +1391,6 @@ class participantInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Participant"
-        verbose_name_plural = "Participants"
 
 
     __schema_name__ = 'participantInfoType'
@@ -1580,7 +1564,6 @@ class captureInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Capture"
-        verbose_name_plural = "Captures"
 
 
     __schema_name__ = 'captureInfoType'
@@ -1681,7 +1664,6 @@ class personSourceSetInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Person source set"
-        verbose_name_plural = "Person source sets"
 
 
     __schema_name__ = 'personSourceSetInfoType'
@@ -1827,7 +1809,6 @@ class settingInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Setting"
-        verbose_name_plural = "Settings"
 
 
     __schema_name__ = 'settingInfoType'
@@ -1910,7 +1891,6 @@ class runningEnvironmentInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Running environment"
-        verbose_name_plural = "Running environments"
 
 
     __schema_name__ = 'runningEnvironmentInfoType'
@@ -1986,7 +1966,6 @@ class recordingInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Recording"
-        verbose_name_plural = "Recordings"
 
 
     __schema_name__ = 'recordingInfoType'
@@ -2083,7 +2062,6 @@ class resolutionInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Resolution"
-        verbose_name_plural = "Resolutions"
 
 
     __schema_name__ = 'resolutionInfoType'
@@ -2133,7 +2111,6 @@ class compressionInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Compression"
-        verbose_name_plural = "Compressions"
 
 
     __schema_name__ = 'compressionInfoType'
@@ -2179,7 +2156,6 @@ class linkToOtherMediaInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Link to other media"
-        verbose_name_plural = "Link to other medias"
 
 
     __schema_name__ = 'linkToOtherMediaInfoType'
@@ -2255,7 +2231,6 @@ class documentListType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Document list"
-        verbose_name_plural = "Document lists"
 
 
     __schema_name__ = 'documentListType'
@@ -2282,7 +2257,6 @@ class communicationInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Communication"
-        verbose_name_plural = "Communications"
 
 
     __schema_name__ = 'communicationInfoType'
@@ -2364,7 +2338,6 @@ class personListType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Person list"
-        verbose_name_plural = "Person lists"
 
 
     __schema_name__ = 'personListType'
@@ -2387,7 +2360,6 @@ class organizationListType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Organization list"
-        verbose_name_plural = "Organization lists"
 
 
     __schema_name__ = 'organizationListType'
@@ -2417,7 +2389,6 @@ class actorInfoType_model(SubclassableModel):
 
     class Meta:
         verbose_name = "Actor"
-        verbose_name_plural = "Actors"
 
 
 # pylint: disable-msg=C0103
@@ -2428,7 +2399,6 @@ class organizationInfoType_model(actorInfoType_model):
 
     class Meta:
         verbose_name = "Organization"
-        verbose_name_plural = "Organizations"
 
 
     __schema_name__ = 'organizationInfoType'
@@ -2486,7 +2456,6 @@ class personInfoType_model(actorInfoType_model):
 
     class Meta:
         verbose_name = "Person"
-        verbose_name_plural = "Persons"
 
 
     __schema_name__ = 'personInfoType'
@@ -2561,7 +2530,6 @@ class distributionInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Distribution"
-        verbose_name_plural = "Distributions"
 
 
     __schema_name__ = 'distributionInfoType'
@@ -2632,7 +2600,6 @@ class membershipInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Membership"
-        verbose_name_plural = "Memberships"
 
 
     __schema_name__ = 'membershipInfoType'
@@ -2703,7 +2670,6 @@ class licenceInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Licence"
-        verbose_name_plural = "Licences"
 
 
     __schema_name__ = 'licenceInfoType'
@@ -2867,7 +2833,6 @@ class characterEncodingInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Character encoding"
-        verbose_name_plural = "Character encodings"
 
 
     __schema_name__ = 'characterEncodingInfoType'
@@ -2906,7 +2871,6 @@ class timeCoverageInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Time coverage"
-        verbose_name_plural = "Time coverages"
 
 
     __schema_name__ = 'timeCoverageInfoType'
@@ -2942,7 +2906,6 @@ class geographicCoverageInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Geographic coverage"
-        verbose_name_plural = "Geographic coverages"
 
 
     __schema_name__ = 'geographicCoverageInfoType'
@@ -2987,7 +2950,6 @@ class lingualityInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Linguality"
-        verbose_name_plural = "Lingualitys"
 
 
     __schema_name__ = 'lingualityInfoType'
@@ -3040,7 +3002,6 @@ class languageVarietyInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Language variety"
-        verbose_name_plural = "Language varietys"
 
 
     __schema_name__ = 'languageVarietyInfoType'
@@ -3088,7 +3049,6 @@ class languageInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Language"
-        verbose_name_plural = "Languages"
 
 
     __schema_name__ = 'languageInfoType'
@@ -3180,7 +3140,6 @@ class projectInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Project"
-        verbose_name_plural = "Projects"
 
 
     __schema_name__ = 'projectInfoType'
@@ -3262,7 +3221,6 @@ class usageInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Usage"
-        verbose_name_plural = "Usages"
 
 
     __schema_name__ = 'usageInfoType'
@@ -3350,7 +3308,6 @@ class foreseenUseInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Foreseen use"
-        verbose_name_plural = "Foreseen uses"
 
 
     __schema_name__ = 'foreseenUseInfoType'
@@ -3430,7 +3387,6 @@ class actualUseInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Actual use"
-        verbose_name_plural = "Actual uses"
 
 
     __schema_name__ = 'actualUseInfoType'
@@ -3501,7 +3457,6 @@ class projectListType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Project list"
-        verbose_name_plural = "Project lists"
 
 
     __schema_name__ = 'projectListType'
@@ -3527,7 +3482,6 @@ class corpusAudioInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Corpus audio"
-        verbose_name_plural = "Corpus audios"
 
 
     __schema_name__ = 'corpusAudioInfoType'
@@ -3699,7 +3653,6 @@ class audioContentInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Audio content"
-        verbose_name_plural = "Audio contents"
 
 
     __schema_name__ = 'audioContentInfoType'
@@ -3753,7 +3706,6 @@ class audioSizeInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Audio size"
-        verbose_name_plural = "Audio sizes"
 
 
     __schema_name__ = 'audioSizeInfoType'
@@ -3796,7 +3748,6 @@ class durationOfEffectiveSpeechInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Duration of effective speech"
-        verbose_name_plural = "Duration of effective speechs"
 
 
     __schema_name__ = 'durationOfEffectiveSpeechInfoType'
@@ -3839,7 +3790,6 @@ class durationOfAudioInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Duration of audio"
-        verbose_name_plural = "Duration of audios"
 
 
     __schema_name__ = 'durationOfAudioInfoType'
@@ -3898,7 +3848,6 @@ class audioFormatInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Audio format"
-        verbose_name_plural = "Audio formats"
 
 
     __schema_name__ = 'audioFormatInfoType'
@@ -4031,7 +3980,6 @@ class audioClassificationInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Audio classification"
-        verbose_name_plural = "Audio classifications"
 
 
     __schema_name__ = 'audioClassificationInfoType'
@@ -4103,7 +4051,6 @@ class corpusTextInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Corpus text"
-        verbose_name_plural = "Corpus texts"
 
 
     __schema_name__ = 'corpusTextInfoType'
@@ -4234,7 +4181,6 @@ class textFormatInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Text format"
-        verbose_name_plural = "Text formats"
 
 
     __schema_name__ = 'textFormatInfoType'
@@ -4282,7 +4228,6 @@ class textClassificationInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Text classification"
-        verbose_name_plural = "Text classifications"
 
 
     __schema_name__ = 'textClassificationInfoType'
@@ -4349,7 +4294,6 @@ class corpusVideoInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Corpus video"
-        verbose_name_plural = "Corpus videos"
 
 
     __schema_name__ = 'corpusVideoInfoType'
@@ -4510,7 +4454,6 @@ class videoContentInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Video content"
-        verbose_name_plural = "Video contents"
 
 
     __schema_name__ = 'videoContentInfoType'
@@ -4564,7 +4507,6 @@ class videoFormatInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Video format"
-        verbose_name_plural = "Video formats"
 
 
     __schema_name__ = 'videoFormatInfoType'
@@ -4662,7 +4604,6 @@ class videoClassificationInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Video classification"
-        verbose_name_plural = "Video classifications"
 
 
     __schema_name__ = 'videoClassificationInfoType'
@@ -4715,7 +4656,6 @@ class corpusImageInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Corpus image"
-        verbose_name_plural = "Corpus images"
 
 
     __schema_name__ = 'corpusImageInfoType'
@@ -4858,7 +4798,6 @@ class imageContentInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Image content"
-        verbose_name_plural = "Image contents"
 
 
     __schema_name__ = 'imageContentInfoType'
@@ -4921,7 +4860,6 @@ class imageFormatInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Image format"
-        verbose_name_plural = "Image formats"
 
 
     __schema_name__ = 'imageFormatInfoType'
@@ -5025,7 +4963,6 @@ class imageClassificationInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Image classification"
-        verbose_name_plural = "Image classifications"
 
 
     __schema_name__ = 'imageClassificationInfoType'
@@ -5080,7 +5017,6 @@ class corpusTextNumericalInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Corpus text numerical"
-        verbose_name_plural = "Corpus text numericals"
 
 
     __schema_name__ = 'corpusTextNumericalInfoType'
@@ -5178,7 +5114,6 @@ class textNumericalContentInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Text numerical content"
-        verbose_name_plural = "Text numerical contents"
 
 
     __schema_name__ = 'textNumericalContentInfoType'
@@ -5205,7 +5140,6 @@ class textNumericalFormatInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Text numerical format"
-        verbose_name_plural = "Text numerical formats"
 
 
     __schema_name__ = 'textNumericalFormatInfoType'
@@ -5250,7 +5184,6 @@ class corpusTextNgramInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Corpus text ngram"
-        verbose_name_plural = "Corpus text ngrams"
 
 
     __schema_name__ = 'corpusTextNgramInfoType'
@@ -5384,7 +5317,6 @@ class ngramInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Ngram"
-        verbose_name_plural = "Ngrams"
 
 
     __schema_name__ = 'ngramInfoType'
@@ -5463,7 +5395,6 @@ class relatedLexiconInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Related lexicon"
-        verbose_name_plural = "Related lexicons"
 
 
     __schema_name__ = 'relatedLexiconInfoType'
@@ -5526,7 +5457,6 @@ class languageDescriptionEncodingInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Language description encoding"
-        verbose_name_plural = "Language description encodings"
 
 
     __schema_name__ = 'languageDescriptionEncodingInfoType'
@@ -5606,7 +5536,6 @@ class languageDescriptionOperationInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Language description operation"
-        verbose_name_plural = "Language description operations"
 
 
     __schema_name__ = 'languageDescriptionOperationInfoType'
@@ -5644,7 +5573,6 @@ class languageDescriptionPerformanceInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Language description performance"
-        verbose_name_plural = "Language description performances"
 
 
     __schema_name__ = 'languageDescriptionPerformanceInfoType'
@@ -5689,7 +5617,6 @@ class languageDescriptionTextInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Language description text"
-        verbose_name_plural = "Language description texts"
 
 
     __schema_name__ = 'languageDescriptionTextInfoType'
@@ -5801,7 +5728,6 @@ class languageDescriptionVideoInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Language description video"
-        verbose_name_plural = "Language description videos"
 
 
     __schema_name__ = 'languageDescriptionVideoInfoType'
@@ -5910,7 +5836,6 @@ class languageDescriptionImageInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Language description image"
-        verbose_name_plural = "Language description images"
 
 
     __schema_name__ = 'languageDescriptionImageInfoType'
@@ -6052,7 +5977,6 @@ class lexicalConceptualResourceEncodingInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Lexical conceptual resource encoding"
-        verbose_name_plural = "Lexical conceptual resource encodings"
 
 
     __schema_name__ = 'lexicalConceptualResourceEncodingInfoType'
@@ -6137,7 +6061,6 @@ class lexicalConceptualResourceAudioInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Lexical conceptual resource audio"
-        verbose_name_plural = "Lexical conceptual resource audios"
 
 
     __schema_name__ = 'lexicalConceptualResourceAudioInfoType'
@@ -6231,7 +6154,6 @@ class lexicalConceptualResourceTextInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Lexical conceptual resource text"
-        verbose_name_plural = "Lexical conceptual resource texts"
 
 
     __schema_name__ = 'lexicalConceptualResourceTextInfoType'
@@ -6324,7 +6246,6 @@ class lexicalConceptualResourceVideoInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Lexical conceptual resource video"
-        verbose_name_plural = "Lexical conceptual resource videos"
 
 
     __schema_name__ = 'lexicalConceptualResourceVideoInfoType'
@@ -6418,7 +6339,6 @@ class lexicalConceptualResourceImageInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Lexical conceptual resource image"
-        verbose_name_plural = "Lexical conceptual resource images"
 
 
     __schema_name__ = 'lexicalConceptualResourceImageInfoType'
@@ -6607,7 +6527,6 @@ class inputInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Input"
-        verbose_name_plural = "Inputs"
 
 
     __schema_name__ = 'inputInfoType'
@@ -6845,7 +6764,6 @@ class outputInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Output"
-        verbose_name_plural = "Outputs"
 
 
     __schema_name__ = 'outputInfoType'
@@ -7004,7 +6922,6 @@ class toolServiceEvaluationInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Tool service evaluation"
-        verbose_name_plural = "Tool service evaluations"
 
 
     __schema_name__ = 'toolServiceEvaluationInfoType'
@@ -7109,7 +7026,6 @@ class toolServiceOperationInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Tool service operation"
-        verbose_name_plural = "Tool service operations"
 
 
     __schema_name__ = 'toolServiceOperationInfoType'
@@ -7154,7 +7070,6 @@ class toolServiceCreationInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Tool service creation"
-        verbose_name_plural = "Tool service creations"
 
 
     __schema_name__ = 'toolServiceCreationInfoType'
@@ -7206,7 +7121,6 @@ class resourceComponentTypeType_model(SubclassableModel):
 
     class Meta:
         verbose_name = "Resource component"
-        verbose_name_plural = "Resource components"
 
 
 LEXICALCONCEPTUALRESOURCEINFOTYPE_RESOURCETYPE_CHOICES = _make_choices_from_list([
@@ -7227,7 +7141,6 @@ class lexicalConceptualResourceInfoType_model(resourceComponentTypeType_model):
 
     class Meta:
         verbose_name = "Lexical conceptual resource"
-        verbose_name_plural = "Lexical conceptual resources"
 
 
     __schema_name__ = 'lexicalConceptualResourceInfoType'
@@ -7302,7 +7215,6 @@ class languageDescriptionInfoType_model(resourceComponentTypeType_model):
 
     class Meta:
         verbose_name = "Language description"
-        verbose_name_plural = "Language descriptions"
 
 
     __schema_name__ = 'languageDescriptionInfoType'
@@ -7391,7 +7303,6 @@ class toolServiceInfoType_model(resourceComponentTypeType_model):
 
     class Meta:
         verbose_name = "Tool service"
-        verbose_name_plural = "Tool services"
 
 
     __schema_name__ = 'toolServiceInfoType'
@@ -7490,7 +7401,6 @@ class corpusInfoType_model(resourceComponentTypeType_model):
 
     class Meta:
         verbose_name = "Corpus"
-        verbose_name_plural = "Corpuss"
 
 
     __schema_name__ = 'corpusInfoType'
@@ -7527,7 +7437,6 @@ class corpusMediaTypeType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Corpus media"
-        verbose_name_plural = "Corpus medias"
 
 
     __schema_name__ = 'corpusMediaTypeType'
@@ -7595,7 +7504,6 @@ class dynamicElementInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Dynamic element"
-        verbose_name_plural = "Dynamic elements"
 
 
     __schema_name__ = 'dynamicElementInfoType'
@@ -7707,7 +7615,6 @@ class staticElementInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Static element"
-        verbose_name_plural = "Static elements"
 
 
     __schema_name__ = 'staticElementInfoType'
@@ -7795,7 +7702,6 @@ class languageDescriptionMediaTypeType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Language description media"
-        verbose_name_plural = "Language description medias"
 
 
     __schema_name__ = 'languageDescriptionMediaTypeType'
@@ -7840,7 +7746,6 @@ class lexicalConceptualResourceMediaTypeType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Lexical conceptual resource media"
-        verbose_name_plural = "Lexical conceptual resource medias"
 
 
     __schema_name__ = 'lexicalConceptualResourceMediaTypeType'

@@ -222,8 +222,7 @@ class {}_model({}):
 {}
     class Meta:
         verbose_name = "{}"
-        verbose_name_plural = "{}"
-
+{}
 '''
 
 CHOICE_SUPERCLASS_TEMPLATE = '''
@@ -234,8 +233,11 @@ class {}_model({}):
 
     class Meta:
         verbose_name = "{}"
-        verbose_name_plural = "{}"
+{}
+'''
 
+VERBOSE_NAME_PLURAL_SNIPPET = '''\
+        verbose_name_plural = "{}"
 '''
 
 CHOICE_STRING_SUB_CLASS_ADMIN_TEMPLATE = '''
@@ -868,11 +870,12 @@ class Clazz(object):
         if not verbose_name:
             verbose_name = getVerboseName(self.name)
         verbose_name_plural = self.schema_element.getAppInfo("label-plural")
-        if not verbose_name_plural:
-            verbose_name_plural = u'{}s'.format(verbose_name)
+        plural_snippet  = ''
+        if verbose_name_plural:
+            plural_snippet = VERBOSE_NAME_PLURAL_SNIPPET.format(verbose_name_plural)
         self.wrtmodels(CHOICE_SUPERCLASS_TEMPLATE.format(
           self.name, CHOICE_TYPE_SUPERCLASS,
-          self.schema_element.getDocumentation(), verbose_name, verbose_name_plural))
+          self.schema_element.getDocumentation(), verbose_name, plural_snippet))
         
         self.wrtforms('\nclass %s_form(forms.Form):\n' % (self.name, ))
 
@@ -896,10 +899,11 @@ class Clazz(object):
         if not verbose_name:
             verbose_name = getVerboseName(self.name)
         verbose_name_plural = self.schema_element.getAppInfo("label-plural")
-        if not verbose_name_plural:
-            verbose_name_plural = u'{}s'.format(verbose_name)
+        plural_snippet  = ''
+        if verbose_name_plural:
+            plural_snippet = VERBOSE_NAME_PLURAL_SNIPPET.format(verbose_name_plural)
         self.wrtmodels(COMPLEX_MODEL_TEMPLATE.format(self.name,
-          model_superclass, documentation, verbose_name, verbose_name_plural))
+          model_superclass, documentation, verbose_name, plural_snippet))
 
         self.wrtforms('\nclass %s_form(forms.Form):\n' % (self.name, ))
         if self.is_empty():
