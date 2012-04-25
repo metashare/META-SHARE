@@ -73,7 +73,30 @@ $(document).ready(function(){
           {% endfor %}
           </dl>
         </div>
+        
+        <h4>Explanation for icons:</h4>
+        <dl id="explanation_box">
+			<table>
+				<tr>
+					<td>Corpus:</td> <td><img src="/site_media/css/sexybuttons/images/icons/silk/database_yellow.png" /></td>
+				</tr>
+				<tr>
+					<td>Lexical/Conceptual:</td> <td><img src="/site_media/css/sexybuttons/images/icons/silk/text_ab.png" /> </td>
+				</tr>
+				<tr>
+					<td>Tool/Service:</td> <td><img src="/site_media/css/sexybuttons/images/icons/silk/page_white_gear.png" /></td>
+				</tr>
+				<tr>
+					<td>Corpus:</td> <td><img src="/site_media/css/sexybuttons/images/icons/silk/database_yellow.png" title="Corpus" /></td>
+				</tr>
+				</tr>
+			</table>
+			
+        </dl>
+        	
 </div>
+
+
 
 <div class="content_box">
   <form class="form_helper" id="searchbox" action="." method="get">
@@ -105,12 +128,12 @@ $(document).ready(function(){
                     {% if page.has_next %}<a href="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key = 'selected_facets' %}{% for facet in values %}&amp;selected_facets={{ facet|urlencode }}{% endfor %}{% endif %}{% if key = 'sort' %}&amp;sort={{values.0}}{% endif %}{% endfor %}&amp;page={{ page.next_page_number }}">{% endif %}Next&nbsp;&raquo;{% if page.has_next %}</a>{% endif %}
                   </span>
                 {% endif %}
-                <table style="width:800px;" class="result_table">
+                <table class="result_table">
                 <tr class="result_table_head">
                   <td style="width:40%;"><a href="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key = 'selected_facets' %}{% for facet in values %}&amp;selected_facets={{ facet|urlencode }}{% endfor %}{% endif %}{% if key = 'sort' %}&amp;sort={% if values.0 == "resourcename_asc" %}resourcename_desc" class="sortDesc{% else %}resourcename_asc{% if values.0 == "resourcename_desc" %}" class="sortAsc{% endif %}{% endif %}{% endif %}{% endfor %}{% if 'sort' not in request.GET %}&amp;sort=resourcename_desc" class="sortDesc{% endif %}">Resource Name</a></td>
-                  <td style="width:16%;"><a href="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key = 'selected_facets' %}{% for facet in values %}&amp;selected_facets={{ facet|urlencode }}{% endfor %}{% endif %}{% if key = 'sort' %}&amp;sort={% if values.0 == "resourcetype_asc" %}resourcetype_desc" class="sortDesc{% else %}resourcetype_asc{% if values.0 == "resourcetype_desc" %}" class="sortAsc{% endif %}{% endif %}{% endif %}{% endfor %}{% if 'sort' not in request.GET %}&amp;sort=resourcetype_asc{% endif %}">Resource Type</a></td>
-                  <td style="width:16%;"><a href="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key = 'selected_facets' %}{% for facet in values %}&amp;selected_facets={{ facet|urlencode }}{% endfor %}{% endif %}{% if key = 'sort' %}&amp;sort={% if values.0 == "mediatype_asc" %}mediatype_desc" class="sortDesc{% else %}mediatype_asc{% if values.0 == "mediatype_desc" %}" class="sortAsc{% endif %}{% endif %}{% endif %}{% endfor %}{% if 'sort' not in request.GET %}&amp;sort=mediatype_asc{% endif %}">Media Type(s)</a></td>
-                  <td style="width:40%;"><a href="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key = 'selected_facets' %}{% for facet in values %}&amp;selected_facets={{ facet|urlencode }}{% endfor %}{% endif %}{% if key = 'sort' %}&amp;sort={% if values.0 == "languagename_asc" %}languagename_desc" class="sortDesc{% else %}languagename_asc{% if values.0 == "languagename_desc" %}" class="sortAsc{% endif %}{% endif %}{% endif %}{% endfor %}{% if 'sort' not in request.GET %}&amp;sort=languagename_asc{% endif %}">Language(s)</a></td>
+                  <td style="width:15%;"><a href="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key = 'selected_facets' %}{% for facet in values %}&amp;selected_facets={{ facet|urlencode }}{% endfor %}{% endif %}{% if key = 'sort' %}&amp;sort={% if values.0 == "resourcetype_asc" %}resourcetype_desc" class="sortDesc{% else %}resourcetype_asc{% if values.0 == "resourcetype_desc" %}" class="sortAsc{% endif %}{% endif %}{% endif %}{% endfor %}{% if 'sort' not in request.GET %}&amp;sort=resourcetype_asc{% endif %}">Resource Type</a></td>
+                  <td style="width:15%;"><a href="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key = 'selected_facets' %}{% for facet in values %}&amp;selected_facets={{ facet|urlencode }}{% endfor %}{% endif %}{% if key = 'sort' %}&amp;sort={% if values.0 == "mediatype_asc" %}mediatype_desc" class="sortDesc{% else %}mediatype_asc{% if values.0 == "mediatype_desc" %}" class="sortAsc{% endif %}{% endif %}{% endif %}{% endfor %}{% if 'sort' not in request.GET %}&amp;sort=mediatype_asc{% endif %}">Media Type(s)</a></td>
+                  <td style="width:30%;"><a href="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key = 'selected_facets' %}{% for facet in values %}&amp;selected_facets={{ facet|urlencode }}{% endfor %}{% endif %}{% if key = 'sort' %}&amp;sort={% if values.0 == "languagename_asc" %}languagename_desc" class="sortDesc{% else %}languagename_asc{% if values.0 == "languagename_desc" %}" class="sortAsc{% endif %}{% endif %}{% endif %}{% endfor %}{% if 'sort' not in request.GET %}&amp;sort=languagename_asc{% endif %}">Language(s)</a></td>
                 </tr>
                 {% for result in page.object_list %}
                   {% cycle 'even' 'odd' as style silent %}
