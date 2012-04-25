@@ -8,7 +8,18 @@
 </th>
 
 <td style="text-align:left;{% if not object.storage_object.published %} font-style:italic;{% endif %}">
-  {{ object.resourceComponentType.as_subclass.get_resourceType_display }}
+  
+  {% if object.resourceComponentType.as_subclass.get_resourceType_display = "corpus" %}
+	<img src="/site_media/css/sexybuttons/images/icons/silk/database_yellow.png" title="Corpus" /> &nbsp;
+  {% endif %}
+  {% if object.resourceComponentType.as_subclass.get_resourceType_display = "toolService" %}
+	<img src="/site_media/css/sexybuttons/images/icons/silk/page_white_gear.png" title="Tool/Service" /> &nbsp;
+  {% endif %}
+  {% if object.resourceComponentType.as_subclass.get_resourceType_display = "lexicalConceptualResource" %}
+	<img src="/site_media/css/sexybuttons/images/icons/silk/text_ab.png" title="Lexical Conceptual" /> &nbsp;
+  {% endif %}
+   
+  {# { object.resourceComponentType.as_subclass.get_resourceType_display } #}
 </td>
 
 <td style="text-align:left;{% if not object.storage_object.published %} font-style:italic;{% endif %}">
