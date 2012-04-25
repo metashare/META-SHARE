@@ -1024,6 +1024,7 @@
 			<xs:documentation>Groups information on the modalities represented in the resource</xs:documentation>
 			<xs:appinfo>
 				<render-short>{modalityType} {modalityTypeDetails}</render-short>
+				<label-plural>Modalities</label-plural>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
@@ -1031,7 +1032,6 @@
 				<xs:annotation>
 					<xs:documentation>Specifies the type of the modality represented in the resource or processed by a tool/service</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-many</relation>
 						<maxlen>35</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1041,7 +1041,6 @@
 					<xs:documentation>Provides further information on modalities</xs:documentation>
 					<xs:appinfo>
 						<maxlen>500</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>

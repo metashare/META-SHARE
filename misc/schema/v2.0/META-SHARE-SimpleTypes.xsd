@@ -131,7 +131,6 @@
 		<xs:annotation>
 			<xs:documentation>Specifies the type of the modality represented in the resource or processed by a tool/service</xs:documentation>
 			<xs:appinfo>
-				<relation>one-to-many</relation>
 				<maxlen>30</maxlen>
 			</xs:appinfo>
 		</xs:annotation>

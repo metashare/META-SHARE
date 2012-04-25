@@ -220,7 +220,10 @@ COMPLEX_MODEL_TEMPLATE='''
 # pylint: disable-msg=C0103
 class {}_model({}):
 {}
-    class Meta:\n        verbose_name = "{}"
+    class Meta:
+        verbose_name = "{}"
+        verbose_name_plural = "{}"
+
 '''
 
 CHOICE_SUPERCLASS_TEMPLATE = '''
@@ -229,7 +232,9 @@ class {}_model({}):
 {}
     __schema_name__ = \'SUBCLASSABLE\'
 
-    class Meta:\n        verbose_name = "{}"
+    class Meta:
+        verbose_name = "{}"
+        verbose_name_plural = "{}"
 
 '''
 
@@ -862,9 +867,12 @@ class Clazz(object):
         verbose_name = self.schema_element.getAppInfo("label")
         if not verbose_name:
             verbose_name = getVerboseName(self.name)
+        verbose_name_plural = self.schema_element.getAppInfo("label-plural")
+        if not verbose_name_plural:
+            verbose_name_plural = u'{}s'.format(verbose_name)
         self.wrtmodels(CHOICE_SUPERCLASS_TEMPLATE.format(
           self.name, CHOICE_TYPE_SUPERCLASS,
-          self.schema_element.getDocumentation(), verbose_name))
+          self.schema_element.getDocumentation(), verbose_name, verbose_name_plural))
         
         self.wrtforms('\nclass %s_form(forms.Form):\n' % (self.name, ))
 
@@ -887,8 +895,11 @@ class Clazz(object):
         verbose_name = self.schema_element.getAppInfo("label")
         if not verbose_name:
             verbose_name = getVerboseName(self.name)
+        verbose_name_plural = self.schema_element.getAppInfo("label-plural")
+        if not verbose_name_plural:
+            verbose_name_plural = u'{}s'.format(verbose_name)
         self.wrtmodels(COMPLEX_MODEL_TEMPLATE.format(self.name,
-          model_superclass, documentation, verbose_name))
+          model_superclass, documentation, verbose_name, verbose_name_plural))
 
         self.wrtforms('\nclass %s_form(forms.Form):\n' % (self.name, ))
         if self.is_empty():

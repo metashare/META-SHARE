@@ -162,6 +162,11 @@ class languageDescriptionInfo_model_inline(SchemaModelInline):
 
 
 # pylint: disable-msg=C0103
+class languageInfo_model_inline(SchemaModelInline):
+    model = languageInfoType_model
+
+
+# pylint: disable-msg=C0103
 class lexicalConceptualResourceInfo_model_inline(SchemaModelInline):
     model = lexicalConceptualResourceInfoType_model
 
@@ -194,70 +199,70 @@ class linkToOtherMediaInfo_model_inline_languageDescriptionVideoInfoType_model(S
 # pylint: disable-msg=C0103
 class modalityInfo_model_inline_corpusAudioInfoType_model(SchemaModelInline):
     model = modalityInfoType_model
-    collapse = True
+    template = 'admin/edit_inline/tabular.html'
     fk_name = 'back_to_corpusaudioinfotype_model'
 
 
 # pylint: disable-msg=C0103
 class modalityInfo_model_inline_corpusImageInfoType_model(SchemaModelInline):
     model = modalityInfoType_model
-    collapse = True
+    template = 'admin/edit_inline/tabular.html'
     fk_name = 'back_to_corpusimageinfotype_model'
 
 
 # pylint: disable-msg=C0103
 class modalityInfo_model_inline_corpusTextInfoType_model(SchemaModelInline):
     model = modalityInfoType_model
-    collapse = True
+    template = 'admin/edit_inline/tabular.html'
     fk_name = 'back_to_corpustextinfotype_model'
 
 
 # pylint: disable-msg=C0103
 class modalityInfo_model_inline_corpusTextNumericalInfoType_model(SchemaModelInline):
     model = modalityInfoType_model
-    collapse = True
+    template = 'admin/edit_inline/tabular.html'
     fk_name = 'back_to_corpustextnumericalinfotype_model'
 
 
 # pylint: disable-msg=C0103
 class modalityInfo_model_inline_languageDescriptionImageInfoType_model(SchemaModelInline):
     model = modalityInfoType_model
-    collapse = True
+    template = 'admin/edit_inline/tabular.html'
     fk_name = 'back_to_languagedescriptionimageinfotype_model'
 
 
 # pylint: disable-msg=C0103
 class modalityInfo_model_inline_languageDescriptionVideoInfoType_model(SchemaModelInline):
     model = modalityInfoType_model
-    collapse = True
+    template = 'admin/edit_inline/tabular.html'
     fk_name = 'back_to_languagedescriptionvideoinfotype_model'
 
 
 # pylint: disable-msg=C0103
 class modalityInfo_model_inline_lexicalConceptualResourceAudioInfoType_model(SchemaModelInline):
     model = modalityInfoType_model
-    collapse = True
+    template = 'admin/edit_inline/tabular.html'
     fk_name = 'back_to_lexicalconceptualresourceaudioinfotype_model'
 
 
 # pylint: disable-msg=C0103
 class modalityInfo_model_inline_lexicalConceptualResourceImageInfoType_model(SchemaModelInline):
     model = modalityInfoType_model
-    collapse = True
+    template = 'admin/edit_inline/tabular.html'
     fk_name = 'back_to_lexicalconceptualresourceimageinfotype_model'
 
 
 # pylint: disable-msg=C0103
 class modalityInfo_model_inline_lexicalConceptualResourceTextInfoType_model(SchemaModelInline):
     model = modalityInfoType_model
-    collapse = True
+    template = 'admin/edit_inline/tabular.html'
     fk_name = 'back_to_lexicalconceptualresourcetextinfotype_model'
 
 
 # pylint: disable-msg=C0103
 class modalityInfo_model_inline_lexicalConceptualResourceVideoInfoType_model(SchemaModelInline):
     model = modalityInfoType_model
-    collapse = True
+    template = 'admin/edit_inline/tabular.html'
     fk_name = 'back_to_lexicalconceptualresourcevideoinfotype_model'
 
 
