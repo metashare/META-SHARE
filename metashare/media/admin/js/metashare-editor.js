@@ -17,7 +17,7 @@ $(document).ready(function() {
   function maybe_show_one_more_field(prefix) {
 	var new_id = compute_new_id(prefix);
 	var new_name = new_id.substr(3); // skip initial 'id_'
-	var inputItem = $('#'+new_id)
+	var inputItem = $('#'+new_id);
 	if (inputItem.length === 0) {
 		// need to create it by cloning
 		var protodiv = $('#'+prefix+'-protodiv');
@@ -28,7 +28,7 @@ $(document).ready(function() {
 		var newAdd = newH1.find('a.protoadd').attr('id', 'add_'+new_id).css('display', 'inline');
 		var newEdit = newH1.find('a.protoedit').attr('id', 'edit_'+new_id).css('display', 'none');
 		protodiv.before(newH1);
-	}
+	}	
   }
 
   function handle_input_update() {
@@ -46,8 +46,14 @@ $(document).ready(function() {
 			editA.attr('href', protoHref+input_value+'/').css('display', 'inline');
 			addA.css('display', 'none');
 			var prefix = input_id.substr(0, input_id.lastIndexOf('-'));
+			//for every input with this name, remove error class from all menu items
+			if(prefix){				
+				$("input[name^='" + prefix.substr(3) + "-']").each(function(){
+					$(this).next("h1").children("a").removeClass("error");
+				});					
+			}			
 			if ($('#'+prefix+'-protodiv').length > 0) {
-				maybe_show_one_more_field(prefix);
+				maybe_show_one_more_field(prefix);				
 			}
 		} else { // add
 			editA.css('display', 'none');
