@@ -4215,10 +4215,6 @@ class textClassificationInfoType_model(SchemaModel):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
 
-CORPUSVIDEOINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
-])
-
 # pylint: disable-msg=C0103
 class corpusVideoInfoType_model(SchemaModel):
     """
@@ -4275,10 +4271,7 @@ class corpusVideoInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      
-      max_length=30,
-      choices=CORPUSVIDEOINFOTYPE_MEDIATYPE_CHOICES['choices'],
-      )
+      default="video", editable=False, max_length=10, )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -5247,7 +5240,7 @@ NGRAMINFOTYPE_BASEITEM_CHOICES = _make_choices_from_list([
 # pylint: disable-msg=C0103
 class ngramInfoType_model(SchemaModel):
     """
-    Groups information specific ton-gram resources (e.g. range of
+    Groups information specific to n-gram resources (e.g. range of
     n-grams, base item etc.)
     """
 
