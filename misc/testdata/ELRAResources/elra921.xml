@@ -1,36 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<resourceInfo xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
 <resourceName lang="English">Bulgarian Morphological Dictionary</resourceName>
 <resourceName lang="French">Dictionnaire morphologique bulgare</resourceName>
 <description lang="English">This dictionary contains 67500 entries divided into 242 inflectional types (including proper nouns), morphosyntactic information for each entry, and a morphological engine (MS DOS and WINDOWS 95/NT) for morphological analysis and generation. The data may be used for morphological analysis and synthesis.Structure of entries: Local linguistic variantFile format: ASCII; lowercase lettersStandard in use: ISOCharacter set: 8-bit ASCII. ASCII codes alphabetically: 160-191Medium: CD-ROM or email</description>
 <description lang="French">Ce dictionnaire comprend 67 500 entrées réparties en 242 types de flexions (y compris les noms propres), avec une information morphosyntaxique pour chaque entrée, et un outil morphologique (MS DOS et WINDOWS 95/NT) pour l'analyse morphologique et la génération. Les données peuvent être utilisées pour l'analyse morphologique et la synthèse.Structure des entrées : Variante linguistique localeFormat de fichier : ASCII ; lettres en minusculeStandard utilisé : ISOJeu de caractères : ASCII 8-bit de code alphabétique 160-191Support : CD-ROM ou email</description>
 <resourceShortName/>
-<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=454</url>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <identifier>ELRA-L0030</identifier>
 </identificationInfo>
-<metadataInfo>
-<metadataCreationDate>2005-05-12</metadataCreationDate>
-<metadataCreator>
-<surname lang="en-us">Valérie</surname>
-<givenName lang="en-us">Mapelli</givenName>
-<communicationInfo>
-<email>mapelli@elda.org</email>
-<url>http://www.elda.org</url>
-<address>55-57 rue Brillat-Savarin</address>
-<zipcode>75013</zipcode>
-<city>Paris</city>
-<country>France</country>
-<telephoneNumber>+1 43 13 33 33</telephoneNumber>
-<faxNumber>+1 43 14 33 30</faxNumber>
-</communicationInfo>
-</metadataCreator>
-</metadataInfo>
-<versionInfo>
-<version>1.0</version>
-<lastDateUpdated>2007-05-29</lastDateUpdated>
-</versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
@@ -39,7 +18,7 @@
 <price>12000.00</price>
 <userNature>commercial</userNature>
 <membershipInfo>
-<member>False</member>
+<member>false</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -49,7 +28,7 @@
 <price>12000.00</price>
 <userNature>commercial</userNature>
 <membershipInfo>
-<member>False</member>
+<member>false</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -59,7 +38,7 @@
 <price>100.00</price>
 <userNature>academic</userNature>
 <membershipInfo>
-<member>False</member>
+<member>false</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -69,7 +48,7 @@
 <price>12000.00</price>
 <userNature>academic</userNature>
 <membershipInfo>
-<member>False</member>
+<member>false</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -79,7 +58,7 @@
 <price>6000.00</price>
 <userNature>commercial</userNature>
 <membershipInfo>
-<member>True</member>
+<member>true</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -89,7 +68,7 @@
 <price>6000.00</price>
 <userNature>commercial</userNature>
 <membershipInfo>
-<member>True</member>
+<member>true</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -99,7 +78,7 @@
 <price>45.00</price>
 <userNature>academic</userNature>
 <membershipInfo>
-<member>True</member>
+<member>true</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -109,12 +88,33 @@
 <price>6000.00</price>
 <userNature>academic</userNature>
 <membershipInfo>
-<member>True</member>
+<member>true</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
 <availabilityStartDate>1998-04-16</availabilityStartDate>
 </distributionInfo>
+<contactPerson>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipCode>75013</zipCode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</contactPerson>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<lastDateUpdated>2007-05-29</lastDateUpdated>
+</versionInfo>
 <resourceComponentType>
 <lexicalConceptualResourceInfo>
 <resourceType>lexicalConceptualResource</resourceType>
@@ -129,6 +129,10 @@
 <languageId>bul</languageId>
 <languageName>Bulgarian</languageName>
 </languageInfo>
+<sizeInfo>
+<size>no size available</size>
+<sizeUnit>other</sizeUnit>
+</sizeInfo>
 <textFormatInfo>
 <mimeType>Plain text</mimeType>
 </textFormatInfo>
