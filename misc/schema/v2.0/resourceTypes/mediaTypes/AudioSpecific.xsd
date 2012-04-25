@@ -126,10 +126,6 @@
 			<xs:element name="size" type="xs:integer">
 				<xs:annotation>
 					<xs:documentation>Specifies the size of the resource with regard to the SizeUnit measurement in form of a number</xs:documentation>
-					<xs:appinfo>
-						<maxlen>30</maxlen>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="durationUnit">
@@ -157,9 +153,6 @@
 			<xs:element name="size" type="xs:integer">
 				<xs:annotation>
 					<xs:documentation>Specifies the size of the resource with regard to the SizeUnit measurement in form of a number</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="durationUnit">
@@ -346,6 +339,7 @@
 					<xs:documentation>Used to give info on size of parts of a resource that differ as to the format</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -433,6 +427,7 @@
 				<xs:annotation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 					<xs:documentation>The size of the audio subparts of the resource in terms of classification criteria</xs:documentation>
 				</xs:annotation>

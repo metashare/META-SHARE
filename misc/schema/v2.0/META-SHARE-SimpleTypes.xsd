@@ -49,7 +49,6 @@
 				<xs:annotation>
 					<xs:documentation>Specifies the size of the resource with regard to the SizeUnit measurement in form of a number</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>100</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -58,7 +57,6 @@
 				<xs:annotation>
 					<xs:documentation>Specifies the unit that is used when providing information on the size of the resource or of resource parts</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>

@@ -210,6 +210,7 @@
 					<xs:documentation>Specifies the size of the validated part of a resource</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -752,6 +753,7 @@
 					<xs:documentation>Specifies the size of resource parts per domain</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -931,6 +933,7 @@
 					<xs:documentation>Provides information on size for the annotated parts of the resource</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -1047,6 +1050,7 @@
 					<xs:documentation>Provides information on the size per modality component</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>

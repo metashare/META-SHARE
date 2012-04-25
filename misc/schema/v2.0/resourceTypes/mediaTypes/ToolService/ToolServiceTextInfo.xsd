@@ -36,6 +36,7 @@
                          <xs:annotation>
                             <xs:appinfo>
                                 <relation>one-to-many</relation>
+								<inline-type>tabular</inline-type>
                             </xs:appinfo>
                         </xs:annotation>
                     </xs:element>

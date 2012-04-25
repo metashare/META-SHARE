@@ -456,7 +456,7 @@ class Clazz(object):
             data_type = member.get_data_type()
             child_clazz = cls.ClazzDict[data_type]
             return isinstance(child_clazz.backreference, ClazzBaseMember) or \
-                (child_clazz.name == 'resolutionInfoType' and isinstance(child_clazz.backreference, tuple))
+                isinstance(child_clazz.backreference, tuple)
 
     @classmethod
     def has_multiple_one_to_many_references(cls, member):
@@ -514,20 +514,9 @@ class Clazz(object):
         self.members.append(clazz_member)
 
     def set_one_to_many(self, clazz_member):
-        if self.name == 'resolutionInfoType':
-            if self.backreference is None:
-                self.backreference = ()
-            self.backreference += (clazz_member, )
-            return
         if self.backreference is None:
-            self.backreference = clazz_member
-        else:
-            if isinstance(self.backreference, ClazzBaseMember):
-                logging.warn('type used twice for one-to-many: from %s to %s' %
-                     (self.backreference.source.name, self.name))
-            self.backreference = ''
-            logging.warn('type used twice for one-to-many: from %s to %s' %
-                (clazz_member.source.name, self.name))
+            self.backreference = ()
+        self.backreference += (clazz_member, )
 
     def is_empty(self):
         return not self.members
@@ -646,6 +635,8 @@ class Clazz(object):
                             _inline_template_snippets += INLINE_SNIPPET_COLLAPSE
                         if self.has_multiple_one_to_many_references(member):
                             member_data_type = member.get_generated_type(member.source.name)
+                            # TODO: remove warning
+                            logging.warn('Multiple one-to-many: {}->{}'.format(member_data_type, data_type ))
                             _inline_classname_suffix = '_{}_model'.format(member_data_type)
                             _inline_template_snippets += INLINE_SNIPPET_FK_NAME.format(member_data_type.lower())
                         self.inlines.append((name, _inline_classname_suffix, data_type, _inline_template_snippets))

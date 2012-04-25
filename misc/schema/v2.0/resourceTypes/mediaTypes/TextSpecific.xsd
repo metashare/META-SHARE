@@ -23,6 +23,7 @@
 					<xs:documentation>Provides information on the size of the resource parts with different format</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -85,6 +86,7 @@
 					<xs:documentation>Provides information on size of resource parts with different text classification</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
