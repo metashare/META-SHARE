@@ -2024,6 +2024,10 @@ class resolutionInfoType_model(SchemaModel):
       choices=RESOLUTIONINFOTYPE_RESOLUTIONSTANDARD_CHOICES['choices'],
       )
 
+    back_to_videoformatinfotype_model = models.ForeignKey("videoFormatInfoType_model",  blank=True, null=True)
+
+    back_to_imageformatinfotype_model = models.ForeignKey("imageFormatInfoType_model",  blank=True, null=True)
+
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
@@ -4056,7 +4060,7 @@ class corpusTextInfoType_model(SchemaModel):
       'odal resources or for resources representing sensorimotor data',
       blank=True, null=True, related_name="linkToOtherMediaInfo_%(class)s_related", )
 
-    back_to_corpusmediatypetype_model = models.ForeignKey("corpusMediaTypeType_model",  null=True)
+    back_to_corpusmediatypetype_model = models.ForeignKey("corpusMediaTypeType_model",  blank=True, null=True)
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
@@ -4336,7 +4340,7 @@ class corpusVideoInfoType_model(SchemaModel):
       'odal resources or for resources representing sensorimotor data',
       blank=True, null=True, related_name="linkToOtherMediaInfo_%(class)s_related", )
 
-    back_to_corpusmediatypetype_model = models.ForeignKey("corpusMediaTypeType_model",  null=True)
+    back_to_corpusmediatypetype_model = models.ForeignKey("corpusMediaTypeType_model",  blank=True, null=True)
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
@@ -4416,7 +4420,7 @@ class videoFormatInfoType_model(SchemaModel):
       ( u'colourSpace', u'colourSpace', RECOMMENDED ),
       ( u'colourDepth', u'colourDepth', OPTIONAL ),
       ( u'frameRate', u'frameRate', OPTIONAL ),
-      ( u'resolutionInfo', u'resolutionInfo', RECOMMENDED ),
+      ( u'resolutionInfo', u'resolutioninfotype_model_set', RECOMMENDED ),
       ( u'visualModelling', u'visualModelling', OPTIONAL ),
       ( u'fidelity', u'fidelity', OPTIONAL ),
       ( u'compressionInfo', u'compressionInfo', OPTIONAL ),
@@ -4456,10 +4460,7 @@ class videoFormatInfoType_model(SchemaModel):
       help_text='The number of frames per second',
       blank=True, null=True, )
 
-    resolutionInfo = models.ManyToManyField("resolutionInfoType_model", 
-      verbose_name='Resolution', 
-      help_text='Groups together information on the image resolution',
-      blank=True, null=True, related_name="resolutionInfo_%(class)s_related", )
+    # OneToMany field: resolutionInfo
 
     visualModelling = models.CharField(
       verbose_name='Visual modelling', 
@@ -4776,7 +4777,7 @@ class imageFormatInfoType_model(SchemaModel):
       ( u'colourSpace', u'colourSpace', RECOMMENDED ),
       ( u'colourDepth', u'colourDepth', OPTIONAL ),
       ( u'compressionInfo', u'compressionInfo', OPTIONAL ),
-      ( u'resolutionInfo', u'resolutionInfo', OPTIONAL ),
+      ( u'resolutionInfo', u'resolutioninfotype_model_set', OPTIONAL ),
       ( u'visualModelling', u'visualModelling', OPTIONAL ),
       ( u'rasterOrVectorGraphics', u'rasterOrVectorGraphics', OPTIONAL ),
       ( u'quality', u'quality', OPTIONAL ),
@@ -4817,10 +4818,7 @@ class imageFormatInfoType_model(SchemaModel):
       'nd method of a resource',
       blank=True, null=True, )
 
-    resolutionInfo = models.ManyToManyField("resolutionInfoType_model", 
-      verbose_name='Resolution', 
-      help_text='Groups together information on the image resolution',
-      blank=True, null=True, related_name="resolutionInfo_%(class)s_related", )
+    # OneToMany field: resolutionInfo
 
     visualModelling = models.CharField(
       verbose_name='Visual modelling', 

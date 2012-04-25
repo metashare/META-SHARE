@@ -148,6 +148,7 @@ class SchemaModelLookup(object):
         provide the list of matching inline classes.
         '''
         result = []
+        parent_model_class_name = model._meta.object_name
         for rec_path, rec_accessor, rec_status in model.__schema_fields__:
             if status == rec_status and self.is_inline(rec_accessor):
                 if '/' in rec_path:
@@ -156,11 +157,11 @@ class SchemaModelLookup(object):
                 else:
                     rec_name = rec_path
                 one_model_class_name = model.__schema_classes__[rec_name]
-                result.append(self.get_inline_class_from_model_class_name(one_model_class_name))
+                result.append(self.get_inline_class_from_model_class_name(one_model_class_name, parent_model_class_name))
         return result
 
 
-    def get_inline_class_from_model_class_name(self, model_class_name):
+    def get_inline_class_from_model_class_name(self, model_class_name, parent_model_class_name=None):
         '''
         For a model class object such as identificationInfoType_model,
         return the class object extending SchemaModelInline which
@@ -174,5 +175,11 @@ class SchemaModelLookup(object):
         suffix_length = len("Type_model")
         modelname_without_suffix = model_class_name[:-suffix_length]
         inline_class_name = modelname_without_suffix + "_model_inline"
+        if parent_model_class_name:
+            context_specific_name = inline_class_name + "_" + parent_model_class_name
+            try:
+                return get_class_by_name('metashare.repository.admin', context_specific_name)
+            except AttributeError:
+                pass
         return get_class_by_name('metashare.repository.admin', inline_class_name)
 
