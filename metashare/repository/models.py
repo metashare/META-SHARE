@@ -7000,10 +7000,6 @@ class resourceComponentTypeType_model(SubclassableModel):
         verbose_name = "Resource component"
 
 
-LEXICALCONCEPTUALRESOURCEINFOTYPE_RESOURCETYPE_CHOICES = _make_choices_from_list([
-  u'lexicalConceptualResource', 
-])
-
 LEXICALCONCEPTUALRESOURCEINFOTYPE_LEXICALCONCEPTUALRESOURCETYPE_CHOICES = _make_choices_from_list([
   u'wordList', u'computationalLexicon', u'ontology', u'wordnet',
   u'thesaurus',u'framenet', u'terminologicalResource',
@@ -7037,10 +7033,7 @@ class lexicalConceptualResourceInfoType_model(resourceComponentTypeType_model):
     resourceType = models.CharField(
       verbose_name='Resource', 
       help_text='Specifies the type of the resource being described',
-      
-      max_length=30,
-      choices=LEXICALCONCEPTUALRESOURCEINFOTYPE_RESOURCETYPE_CHOICES['choices'],
-      )
+      default="lexicalConceptualResource", editable=False, max_length=30, )
 
     lexicalConceptualResourceType = models.CharField(
       verbose_name='Lexical conceptual resource', 
@@ -7075,10 +7068,6 @@ class lexicalConceptualResourceInfoType_model(resourceComponentTypeType_model):
         formatargs = ['lexicalConceptualResourceType', ]
         formatstring = u'lexicalConceptualResource ({})'
         return self.unicode_(formatstring, formatargs)
-
-LANGUAGEDESCRIPTIONINFOTYPE_RESOURCETYPE_CHOICES = _make_choices_from_list([
-  u'languageDescription', 
-])
 
 LANGUAGEDESCRIPTIONINFOTYPE_LANGUAGEDESCRIPTIONTYPE_CHOICES = _make_choices_from_list([
   u'grammar', u'other', 
@@ -7115,10 +7104,7 @@ class languageDescriptionInfoType_model(resourceComponentTypeType_model):
     resourceType = models.CharField(
       verbose_name='Resource', 
       help_text='Specifies the type of the resource being described',
-      
-      max_length=30,
-      choices=LANGUAGEDESCRIPTIONINFOTYPE_RESOURCETYPE_CHOICES['choices'],
-      )
+      default="languageDescription", editable=False, max_length=30, )
 
     languageDescriptionType = models.CharField(
       verbose_name='Language description', 
@@ -7166,10 +7152,6 @@ class languageDescriptionInfoType_model(resourceComponentTypeType_model):
         formatstring = u'languageDescription ({})'
         return self.unicode_(formatstring, formatargs)
 
-TOOLSERVICEINFOTYPE_RESOURCETYPE_CHOICES = _make_choices_from_list([
-  u'toolService', 
-])
-
 TOOLSERVICEINFOTYPE_TOOLSERVICETYPE_CHOICES = _make_choices_from_list([
   u'tool', u'service', u'platform', u'suiteOfTools', u'infrastructure',
   u'architecture',u'nlpDevelopmentEnvironment', u'other', 
@@ -7206,10 +7188,7 @@ class toolServiceInfoType_model(resourceComponentTypeType_model):
       verbose_name='Resource', 
       help_text='The type of the resource that a tool or service takes a' \
       's input or produces as output',
-      
-      max_length=30,
-      choices=TOOLSERVICEINFOTYPE_RESOURCETYPE_CHOICES['choices'],
-      )
+      default="toolService", editable=False, max_length=30, )
 
     toolServiceType = models.CharField(
       verbose_name='Tool service', 

@@ -11,19 +11,13 @@
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="resourceType">
+			<xs:element name="resourceType" type="xs:string" fixed="toolService">
 				<xs:annotation>
 					<xs:documentation>The type of the resource that a tool or service takes as input or produces as output</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:enumeration value="toolService"/>
-					</xs:restriction>
-				</xs:simpleType>
 			</xs:element>
 			<xs:element name="toolServiceType">
 				<xs:annotation>
