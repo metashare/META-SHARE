@@ -1,36 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<resourceInfo xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
 <resourceName lang="English">Czech Sign Language Corpus for Recognition – Amateur Signer</resourceName>
 <resourceName lang="French">Corpus de langue des signes tchèque pour la reconnaissance - langue des signes amateur</resourceName>
 <description lang="English">This is an amateur sign-language database comprising 25 signs from Czech sign language. 15 signers (4 women and 11 men) carried out 5 repetitions of each sign and were recorded from 3 different views. The first is a frontal view of the upper part of the body. The second one is similar, but with the camera placed about one meter higher than the first one so as to produce a frontal top-view, and thus allowing to detect 3D information. The last view is a frontal-detail view of the speaker's face, thus allowing lip-reading.The data contain 5685 avi files (one per sign performance), using up 7 GB of disk space, and are stored on DVDs.</description>
 <description lang="French">Cette base de données de langue des signes réalisée par des amateurs comprend 25 signes de la langue des signes tchèque. 15 personnes (4 femmes et 11 hommes) ont procédé à 5 répétitions de chaque signe et ont été enregistrées sous 3 prises de vue différentes. La première est une prise de vue frontale de la partie supérieure du corps. La seconde est similaire, mais avec la caméra placée à environ un mètre plus haut que la première afin de produire une vue plongeante frontale, et ainsi permettant de détecter des informations 3D. La dernière est une prise de vue frontale détaillée du visage du locuteur, permettant ainsi la lecture sur les lèvres.Les données contiennent 5685 fichiers avi (un par session de signe), utilisant 7 Go d’espace disque, et sont stockées sur DVDs.</description>
 <resourceShortName>UWB-06-SLR-A</resourceShortName>
-<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=1083</url>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <identifier>ELRA-S0285</identifier>
 </identificationInfo>
-<metadataInfo>
-<metadataCreationDate>2005-05-12</metadataCreationDate>
-<metadataCreator>
-<surname lang="en-us">Valérie</surname>
-<givenName lang="en-us">Mapelli</givenName>
-<communicationInfo>
-<email>mapelli@elda.org</email>
-<url>http://www.elda.org</url>
-<address>55-57 rue Brillat-Savarin</address>
-<zipcode>75013</zipcode>
-<city>Paris</city>
-<country>France</country>
-<telephoneNumber>+1 43 13 33 33</telephoneNumber>
-<faxNumber>+1 43 14 33 30</faxNumber>
-</communicationInfo>
-</metadataCreator>
-</metadataInfo>
-<versionInfo>
-<version>1.0</version>
-<lastDateUpdated>2008-11-05</lastDateUpdated>
-</versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
@@ -39,7 +18,7 @@
 <price>175.00</price>
 <userNature>commercial</userNature>
 <membershipInfo>
-<member>False</member>
+<member>false</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -49,7 +28,7 @@
 <price>425.00</price>
 <userNature>commercial</userNature>
 <membershipInfo>
-<member>False</member>
+<member>false</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -59,7 +38,7 @@
 <price>175.00</price>
 <userNature>academic</userNature>
 <membershipInfo>
-<member>False</member>
+<member>false</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -69,7 +48,7 @@
 <price>425.00</price>
 <userNature>academic</userNature>
 <membershipInfo>
-<member>False</member>
+<member>false</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -79,7 +58,7 @@
 <price>125.00</price>
 <userNature>commercial</userNature>
 <membershipInfo>
-<member>True</member>
+<member>true</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -89,7 +68,7 @@
 <price>275.00</price>
 <userNature>commercial</userNature>
 <membershipInfo>
-<member>True</member>
+<member>true</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -99,7 +78,7 @@
 <price>125.00</price>
 <userNature>academic</userNature>
 <membershipInfo>
-<member>True</member>
+<member>true</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -109,12 +88,33 @@
 <price>275.00</price>
 <userNature>academic</userNature>
 <membershipInfo>
-<member>True</member>
+<member>true</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
 <availabilityStartDate>2008-11-05</availabilityStartDate>
 </distributionInfo>
+<contactPerson>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipCode>75013</zipCode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</contactPerson>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<lastDateUpdated>2008-11-05</lastDateUpdated>
+</versionInfo>
 <usageInfo>
 <actualUseInfo>
 <actualUse>nlpApplications</actualUse>
@@ -130,6 +130,10 @@
 <lingualityInfo>
 <lingualityType>monolingual</lingualityType>
 </lingualityInfo>
+<sizeInfo>
+<size>no size available</size>
+<sizeUnit>other</sizeUnit>
+</sizeInfo>
 </corpusVideoInfo>
 </corpusMediaType>
 </corpusInfo>
