@@ -675,7 +675,7 @@ table.result_table tr{
 	background-color: white;
 }
 table.result_table tr.odd{
-	background-color: #D4DDDD;
+	background-color: #DBEEEE;
 	background-repeat: repeat-x;
 }
 /*end results table properties*/
