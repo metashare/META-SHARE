@@ -6,15 +6,16 @@ from django.forms import ModelForm
 from django.forms.models import BaseModelFormSet, modelformset_factory
 from django.utils.functional import curry
 from django.contrib.admin.util import flatten_fieldsets
-from django.contrib import admin
 from django.utils.encoding import force_unicode
 from metashare.repository.editor.related_mixin import RelatedAdminMixin
 from metashare.repository.editor.schemamodel_mixin import SchemaModelLookup
+from django.contrib.admin.options import InlineModelAdmin
 
 
 
-class SchemaModelInline(admin.StackedInline, RelatedAdminMixin, SchemaModelLookup):
+class SchemaModelInline(InlineModelAdmin, RelatedAdminMixin, SchemaModelLookup):
     extra = 1
+    template = 'admin/edit_inline/stacked.html'
     collapse = False
 
     def __init__(self, parent_model, admin_site):

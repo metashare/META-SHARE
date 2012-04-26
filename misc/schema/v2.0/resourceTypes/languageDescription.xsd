@@ -94,23 +94,13 @@
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="resourceType">
+			<xs:element name="resourceType" type="xs:string" fixed="languageDescription">
 				<xs:annotation>
 					<xs:documentation>Specifies the type of the resource being described</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:enumeration value="languageDescription">
-							<xs:annotation>
-								<xs:documentation>covers grammars etc.</xs:documentation>
-							</xs:annotation>
-						</xs:enumeration>
-					</xs:restriction>
-				</xs:simpleType>
 			</xs:element>
 			<xs:element name="languageDescriptionType">
 				<xs:annotation>

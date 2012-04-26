@@ -54,7 +54,7 @@ class RelatedAdminMixin(object):
         return formfield
 
     def use_hidden_widget_for_one2one(self, db_field, kwargs):
-        ''' OneToOne fields are rendered with a HiddenInput instead a select. '''
+        ''' OneToOne fields are rendered with a HiddenInput instead of a select. '''
         if isinstance(db_field, related.OneToOneField):
             attrs = {'id':'id_{}'.format(db_field.name)}
             if db_field.rel:
@@ -62,6 +62,8 @@ class RelatedAdminMixin(object):
                 if _instance.id:
                     attrs['value'] = _instance.id
             widget = HiddenInput(attrs=attrs)
+            # But don't treat it as a hidden widget, e.g. in tabular inlines:
+            widget.is_hidden = False
             kwargs['widget'] = widget
 
     def is_related_widget_appropriate(self, kwargs, formfield):
