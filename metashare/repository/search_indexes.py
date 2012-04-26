@@ -398,10 +398,10 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         """
         result = []
 
-        if obj.resourceComponentType.as_subclass().get_resourceType_display() \
+        if obj.resourceComponentType.as_subclass().resourceType \
                 != '':
             result.append(obj.resourceComponentType.as_subclass() \
-                          .get_resourceType_display())
+                          .resourceType)
 
         return result
 

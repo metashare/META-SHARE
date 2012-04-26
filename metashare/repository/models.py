@@ -7245,10 +7245,6 @@ class toolServiceInfoType_model(resourceComponentTypeType_model):
         formatstring = u'toolService ({})'
         return self.unicode_(formatstring, formatargs)
 
-CORPUSINFOTYPE_RESOURCETYPE_CHOICES = _make_choices_from_list([
-  u'corpus', 
-])
-
 # pylint: disable-msg=C0103
 class corpusInfoType_model(resourceComponentTypeType_model):
     """
@@ -7271,10 +7267,7 @@ class corpusInfoType_model(resourceComponentTypeType_model):
     resourceType = models.CharField(
       verbose_name='Resource', 
       help_text='Specifies the type of the resource being described',
-      
-      max_length=30,
-      choices=CORPUSINFOTYPE_RESOURCETYPE_CHOICES['choices'],
-      )
+      default="corpus", editable=False, max_length=30, )
 
     corpusMediaType = models.OneToOneField("corpusMediaTypeType_model", 
       verbose_name='Corpus media', 
