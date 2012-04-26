@@ -201,23 +201,26 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                 formsets.append(formset)
             if all_valid(formsets) and form_validated:
                 #### begin modification ####
-                # First save the one-to-one inlines, then the model itself, then the other inlines:
+                unsaved_formsets = []
                 for formset in formsets:
                     parent_fk_name = getattr(formset, 'parent_fk_name', '')
-                    if parent_fk_name:
-                        changes = formset.save()
-                        if changes:
-                            assert len(changes) == 1
-                            # if the current inline is used (i.e., filled with data) and
-                            # if this inline is a reverse inline, then we need to
-                            # manually make sure that the inline data is connected to
-                            # the parent object:
-                            setattr(new_object, parent_fk_name, changes[0])
+                    # for the moment ignore all formsets that are no reverse
+                    # inlines
+                    if not parent_fk_name:
+                        unsaved_formsets.append(formset)
+                        continue
+                    # this replaces the call to self.save_formsets()
+                    changes = formset.save()
+                    # if the current reverse inline is used (i.e., filled with
+                    # data), then we need to manually make sure that the inline
+                    # data is connected to the parent object:
+                    if changes:
+                        assert len(changes) == 1
+                        setattr(new_object, parent_fk_name, changes[0])
                 self.save_model(request, new_object, form, change=False)
                 form.save_m2m()
-                for formset in formsets:
-                    if not hasattr(formset, 'parent_fk_name'):
-                        self.save_formset(request, form, formset, change=False)
+                for formset in unsaved_formsets:
+                    self.save_formset(request, form, formset, change=False)
                 #### end modification ####
 
                 self.log_addition(request, new_object)

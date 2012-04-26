@@ -1,36 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<resourceInfo xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
 <resourceName lang="English">Albayzin corpus</resourceName>
 <resourceName lang="French">Corpus Albayzin</resourceName>
 <description lang="English">This corpus consists of 3 sub-corpora of 16 kHz 16 bits signals, recorded by 304 Castillian speakers.The 3 sub-corpora are:- Phonetic corpus: 6,800 utterances of phonetically balanced sentences, including 1000 with phonetic segmentation.- Geographic corpus: 6,800 utterances of sentences extracted from a Spanish geographic database.- "Lombard" corpus: 2,000 utterances from various corpora.</description>
 <description lang="French">Ce corpus comprend 3 sous-corpus de signaux échantillonnés à 16 kHz 16 bits, enregistrés par 304 locuteurs espagnols (castillans).Les 3 sous-corpus sont:- Corpus phonétique : 6 800 occurrences de phrases phonétiquement équilibrées, dont 1000 occurrences comprenant une segmentation phonétique.- Corpus géographique : 6 800 occurrences de phrases extraites d'une base de données géographiques espagnoles.- Corpus "Lombard" : 2 000 occurrences de divers corpus enregistrés dans un environnement acoustique prenant en considération l'effet "Lombard".</description>
 <resourceShortName/>
-<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=746</url>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <identifier>ELRA-S0089</identifier>
 </identificationInfo>
-<metadataInfo>
-<metadataCreationDate>2005-05-12</metadataCreationDate>
-<metadataCreator>
-<surname lang="en-us">Valérie</surname>
-<givenName lang="en-us">Mapelli</givenName>
-<communicationInfo>
-<email>mapelli@elda.org</email>
-<url>http://www.elda.org</url>
-<address>55-57 rue Brillat-Savarin</address>
-<zipcode>75013</zipcode>
-<city>Paris</city>
-<country>France</country>
-<telephoneNumber>+1 43 13 33 33</telephoneNumber>
-<faxNumber>+1 43 14 33 30</faxNumber>
-</communicationInfo>
-</metadataCreator>
-</metadataInfo>
-<versionInfo>
-<version>1.0</version>
-<lastDateUpdated>2005-06-03</lastDateUpdated>
-</versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
@@ -39,7 +18,7 @@
 <price>12000.00</price>
 <userNature>commercial</userNature>
 <membershipInfo>
-<member>False</member>
+<member>false</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -49,7 +28,7 @@
 <price>12000.00</price>
 <userNature>commercial</userNature>
 <membershipInfo>
-<member>False</member>
+<member>false</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -59,7 +38,7 @@
 <price>2000.00</price>
 <userNature>academic</userNature>
 <membershipInfo>
-<member>False</member>
+<member>false</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -69,7 +48,7 @@
 <price>12000.00</price>
 <userNature>academic</userNature>
 <membershipInfo>
-<member>False</member>
+<member>false</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -79,7 +58,7 @@
 <price>10000.00</price>
 <userNature>commercial</userNature>
 <membershipInfo>
-<member>True</member>
+<member>true</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -89,7 +68,7 @@
 <price>10000.00</price>
 <userNature>commercial</userNature>
 <membershipInfo>
-<member>True</member>
+<member>true</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -99,7 +78,7 @@
 <price>1000.00</price>
 <userNature>academic</userNature>
 <membershipInfo>
-<member>True</member>
+<member>true</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -109,12 +88,33 @@
 <price>10000.00</price>
 <userNature>academic</userNature>
 <membershipInfo>
-<member>True</member>
+<member>true</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
 <availabilityStartDate>2000-12-15</availabilityStartDate>
 </distributionInfo>
+<contactPerson>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipCode>75013</zipCode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</contactPerson>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<lastDateUpdated>2005-06-03</lastDateUpdated>
+</versionInfo>
 <resourceComponentType>
 <corpusInfo>
 <resourceType>corpus</resourceType>
@@ -136,6 +136,12 @@
 </sizePerLanguageVariety>
 </languageVarietyInfo>
 </languageInfo>
+<audioSizeInfo>
+<sizeInfo>
+<size>no size available</size>
+<sizeUnit>other</sizeUnit>
+</sizeInfo>
+</audioSizeInfo>
 </corpusAudioInfo>
 </corpusMediaType>
 </corpusInfo>
