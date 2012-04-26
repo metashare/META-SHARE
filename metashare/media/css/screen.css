@@ -485,8 +485,9 @@ div.less_details{
 /*filters separate box*/
 div.filters_box{
 	margin-left:5%;
-    	position: relative;
-	background-color: white;
+    position: relative;
+    width: 200px;
+    background-color: white;
 	padding: 20px 20px 20px 20px;	
 	-webkit-box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
 	-moz-box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
@@ -495,21 +496,9 @@ div.filters_box{
 }
 /*end filters separate box*/
 
-div.explanation_box{
-	margin-left:5%;
-    	position: relative;
-	background-color: white;
-	padding: 20px 20px 20px 20px;	
-	-webkit-box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
-	-moz-box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
-	box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
-    	float: left;
-}
-
-
 div.content_box{	
 	margin-left: 2%;
-    	position: relative;
+    position: relative;
 	background-color: white;
 	padding: 20px 20px 20px 20px;	
 	-webkit-box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
@@ -517,10 +506,24 @@ div.content_box{
 	box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
     	float: left;
 }
+
+/* explanation box */
+div.explanation_box{
+	margin-left:5%;
+    position: relative;
+    width:100px;
+    display:table-cell; vertical-align:top;
+	background-color: white;
+	padding: 20px 20px 20px 20px;	
+	-webkit-box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
+	-moz-box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
+	box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
+    	float: left;
+}
+/* end explanation box */
 
 /*expandable filters*/
 dt.accordion a{
-
     min-height: 18px;
     color: #999999;
     font-size: 9pt;
@@ -652,7 +655,7 @@ table.result_table tr.result_table_head{
 	text-shadow: 0px 1px 1px white;
 	font-size: 12px;
 	color: #999999;
-	font-weight: 200;
+	font-weight: 400;
 
 	background-image: url(../images/table_bg.png);
 	background-repeat: repeat-x;
