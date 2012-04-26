@@ -8,101 +8,101 @@
   {{ description }}
 {% endfor %}
 {% for corpus_info in object.resourceComponentType.as_subclass.corpusMediaType.corpustextinfotype_model_set.all %}
-  {% for lang in corpus_info.languageInfo.all %}
+  {% for lang in corpus_info.languageinfotype_model_set.all %}
     {{ lang.languageName }}
     {% for variety in lang.languageVarietyInfo.all %}
       {{ variety.languageVarietyName }}
     {% endfor %}
   {% endfor %}
 {% endfor %}
-{% for lang in object.resourceComponentType.as_subclass.corpusMediaType.corpusAudioInfo.languageInfo.all %}
+{% for lang in object.resourceComponentType.as_subclass.corpusMediaType.corpusAudioInfo.languageinfotype_model_set.all %}
   {{ lang.languageName }}
   {% for variety in lang.languageVarietyInfo.all %}
     {{ variety.languageVarietyName }}
   {% endfor %}
 {% endfor %}
 {% for corpus_info in object.resourceComponentType.as_subclass.corpusMediaType.corpusvideoinfotype_model_set.all %}
-  {% for lang in corpus_info.languageInfo.all %}
+  {% for lang in corpus_info.languageinfotype_model_set.all %}
     {{ lang.languageName }}
     {% for variety in lang.languageVarietyInfo.all %}
       {{ variety.languageVarietyName }}
     {% endfor %}
   {% endfor %}
 {% endfor %}
-{% for lang in object.resourceComponentType.as_subclass.corpusMediaType.corpusTextNgramInfo.languageInfo.all %}
+{% for lang in object.resourceComponentType.as_subclass.corpusMediaType.corpusTextNgramInfo.languageinfotype_model_set.all %}
   {{ lang.languageName }}
   {% for variety in lang.languageVarietyInfo.all %}
     {{ variety.languageVarietyName }}
   {% endfor %}
 {% endfor %}
-{% for lang in object.resourceComponentType.as_subclass.corpusMediaType.corpusImageInfo.languageInfo.all %}
+{% for lang in object.resourceComponentType.as_subclass.corpusMediaType.corpusImageInfo.languageinfotype_model_set.all %}
   {{ lang.languageName }}
   {% for variety in lang.languageVarietyInfo.all %}
     {{ variety.languageVarietyName }}
   {% endfor %}
 {% endfor %}
-{% for lang in object.resourceComponentType.as_subclass.lexicalConceptualResourceMediaType.lexicalConceptualResourceAudioInfo.languageInfo.all %}
+{% for lang in object.resourceComponentType.as_subclass.lexicalConceptualResourceMediaType.lexicalConceptualResourceAudioInfo.languageinfotype_model_set.all %}
   {{ lang.languageName }}
   {% for variety in lang.languageVarietyInfo.all %}
     {{ variety.languageVarietyName }}
   {% endfor %}
 {% endfor %}
-{% for lang in object.resourceComponentType.as_subclass.lexicalConceptualResourceMediaType.lexicalConceptualResourceTextInfo.languageInfo.all %}
+{% for lang in object.resourceComponentType.as_subclass.lexicalConceptualResourceMediaType.lexicalConceptualResourceTextInfo.languageinfotype_model_set.all %}
   {{ lang.languageName }}
   {% for variety in lang.languageVarietyInfo.all %}
     {{ variety.languageVarietyName }}
   {% endfor %}
 {% endfor %}
-{% for lang in object.resourceComponentType.as_subclass.lexicalConceptualResourceMediaType.lexicalConceptualResourceVideoInfo.languageInfo.all %}
+{% for lang in object.resourceComponentType.as_subclass.lexicalConceptualResourceMediaType.lexicalConceptualResourceVideoInfo.languageinfotype_model_set.all %}
   {{ lang.languageName }}
   {% for variety in lang.languageVarietyInfo.all %}
     {{ variety.languageVarietyName }}
   {% endfor %}
 {% endfor %}
-{% for lang in object.resourceComponentType.as_subclass.lexicalConceptualResourceMediaType.lexicalConceptualResourceImageInfo.languageInfo.all %}
+{% for lang in object.resourceComponentType.as_subclass.lexicalConceptualResourceMediaType.lexicalConceptualResourceImageInfo.languageinfotype_model_set.all %}
   {{ lang.languageName }}
   {% for variety in lang.languageVarietyInfo.all %}
     {{ variety.languageVarietyName }}
   {% endfor %}
 {% endfor %}
-{% for lang in object.resourceComponentType.as_subclass.languageDescriptionMediaType.languageDescriptionTextInfo.languageInfo.all %}
+{% for lang in object.resourceComponentType.as_subclass.languageDescriptionMediaType.languageDescriptionTextInfo.languageinfotype_model_set.all %}
   {{ lang.languageName }}
   {% for variety in lang.languageVarietyInfo.all %}
     {{ variety.languageVarietyName }}
   {% endfor %}
 {% endfor %}
-{% for lang in object.resourceComponentType.as_subclass.languageDescriptionMediaType.languageDescriptionVideoInfo.languageInfo.all %}
+{% for lang in object.resourceComponentType.as_subclass.languageDescriptionMediaType.languageDescriptionVideoInfo.languageinfotype_model_set.all %}
   {{ lang.languageName }}
   {% for variety in lang.languageVarietyInfo.all %}
     {{ variety.languageVarietyName }}
   {% endfor %}
 {% endfor %}
-{% for lang in object.resourceComponentType.as_subclass.languageDescriptionMediaType.languageDescriptionImageInfo.languageInfo.all %}
+{% for lang in object.resourceComponentType.as_subclass.languageDescriptionMediaType.languageDescriptionImageInfo.languageinfotype_model_set.all %}
   {{ lang.languageName }}
   {% for variety in lang.languageVarietyInfo.all %}
     {{ variety.languageVarietyName }}
   {% endfor %}
 {% endfor %}
-{{ object.resourceComponentType.as_subclass.get_resourceType_display }}
+{{ object.resourceComponentType.as_subclass.resourceType }}
 {{ object.resourceComponentType.as_subclass.inputInfo.get_resourceType_display }}
 {{ object.resourceComponentType.as_subclass.outputInfo.get_resourceType_display }}
-{{ object.resourceComponentType.as_subclass.corpusMediaType.corpusAudioInfo.get_mediaType_display }}
+{{ object.resourceComponentType.as_subclass.corpusMediaType.corpusAudioInfo.mediaType }}
 {% for corpus_info in object.resourceComponentType.as_subclass.corpusMediaType.corpustextinfotype_model_set.all %}
-  {{ corpus_info.get_mediaType_display }}
+  {{ corpus_info.mediaType }}
 {% endfor %}
 {% for corpus_info in object.resourceComponentType.as_subclass.corpusMediaType.corpusvideoinfotype_model_set.all %}
-  {{ corpus_info.get_mediaType_display }}
+  {{ corpus_info.mediaType }}
 {% endfor %}
-{{ object.resourceComponentType.as_subclass.corpusMediaType.corpusTextNgramInfo.get_mediaType_display }}
-{{ object.resourceComponentType.as_subclass.corpusMediaType.corpusImageInfo.get_mediaType_display }}
-{{ object.resourceComponentType.as_subclass.corpusMediaType.corpusTextNumericalInfo.get_mediaType_display }}
-{{ object.resourceComponentType.as_subclass.lexicalConceptualResourceMediaType.lexicalConceptualResourceAudioInfo.get_mediaType_display }}
-{{ object.resourceComponentType.as_subclass.lexicalConceptualResourceMediaType.lexicalConceptualResourceTextInfo.get_mediaType_display }}
-{{ object.resourceComponentType.as_subclass.lexicalConceptualResourceMediaType.lexicalConceptualResourceVideoInfo.get_mediaType_display }}
-{{ object.resourceComponentType.as_subclass.lexicalConceptualResourceMediaType.lexicalConceptualResourceImageInfo.get_mediaType_display }}
-{{ object.resourceComponentType.as_subclass.languageDescriptionMediaType.languageDescriptionTextInfo.get_mediaType_display }}
-{{ object.resourceComponentType.as_subclass.languageDescriptionMediaType.languageDescriptionVideoInfo.get_mediaType_display }}
-{{ object.resourceComponentType.as_subclass.languageDescriptionMediaType.languageDescriptionImageInfo.get_mediaType_display }}
+{{ object.resourceComponentType.as_subclass.corpusMediaType.corpusTextNgramInfo.mediaType }}
+{{ object.resourceComponentType.as_subclass.corpusMediaType.corpusImageInfo.mediaType }}
+{{ object.resourceComponentType.as_subclass.corpusMediaType.corpusTextNumericalInfo.mediaType }}
+{{ object.resourceComponentType.as_subclass.lexicalConceptualResourceMediaType.lexicalConceptualResourceAudioInfo.mediaType }}
+{{ object.resourceComponentType.as_subclass.lexicalConceptualResourceMediaType.lexicalConceptualResourceTextInfo.mediaType }}
+{{ object.resourceComponentType.as_subclass.lexicalConceptualResourceMediaType.lexicalConceptualResourceVideoInfo.mediaType }}
+{{ object.resourceComponentType.as_subclass.lexicalConceptualResourceMediaType.lexicalConceptualResourceImageInfo.mediaType }}
+{{ object.resourceComponentType.as_subclass.languageDescriptionMediaType.languageDescriptionTextInfo.mediaType }}
+{{ object.resourceComponentType.as_subclass.languageDescriptionMediaType.languageDescriptionVideoInfo.mediaType }}
+{{ object.resourceComponentType.as_subclass.languageDescriptionMediaType.languageDescriptionImageInfo.mediaType }}
 {{ object.resourceComponentType.as_subclass.inputInfo.get_mediaType_display }}
 {{ object.resourceComponentType.as_subclass.outputInfo.get_mediaType_display }}
 {% for annot_info in object.resourceComponentType.as_subclass.corpusMediaType.corpusAudioInfo.annotationInfo.all %}

@@ -31,9 +31,10 @@
 			-->
 			<xs:element name="sizePerCharacterEncoding" type="ms:sizeInfoType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Provides information on thesize of the resource parts with different character encoding</xs:documentation>
+					<xs:documentation>Provides information on the size of the resource parts with different character encoding</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -48,7 +49,6 @@
 				<xs:annotation>
 					<xs:documentation>The time period that the content of a resource is about</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>100</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -58,6 +58,7 @@
 					<xs:documentation>Provides information on size per time period represented in the resource</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -82,6 +83,7 @@
 					<xs:documentation>Provides information on size per geographically distinct section of the resource</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -190,6 +192,7 @@
 					<xs:documentation>Provides information on the size per language variety component</xs:documentation>
 					<xs:appinfo>
 						<relation>many-to-one</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -247,6 +250,10 @@
 			<xs:element name="sizePerLanguage" type="ms:sizeInfoType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Provides information on the size per language component</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element ref="ms:languageVarietyInfo" minOccurs="0" maxOccurs="unbounded">
@@ -268,9 +275,6 @@
 	<xs:element name="timeCoverageInfo" type="ms:timeCoverageInfoType">
 		<xs:annotation>
 			<xs:documentation>Groups together information on time classification of the resource</xs:documentation>
-			<xs:appinfo>
-				<relation>one-to-one</relation>
-			</xs:appinfo>
 		</xs:annotation>
 	</xs:element>
 	<xs:element name="geographicCoverageInfo" type="ms:geographicCoverageInfoType">

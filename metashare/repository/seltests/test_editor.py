@@ -9,14 +9,25 @@ from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support.ui import Select
 import time
+from django.core.management import call_command
 
 
-ADMINROOT = '/{0}editor/'.format(DJANGO_BASE)
 TESTFIXTURE_XML = '{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
 
 class EditorTest(SeleniumTestCase):
     
+    
     def setUp(self):
+        # create editor user
+        editoruser = User.objects.create_user(
+          'editoruser', 'editor@example.com', 'secret')
+        editoruser.is_staff = True
+        globaleditors = Group.objects.get(name='globaleditors')
+        editoruser.groups.add(globaleditors)
+        editoruser.save()
+        # make sure the index does not contain any stale entries
+        call_command('rebuild_index', interactive=False, using=settings.TEST_MODE_NAME)
+        
         # init Selenium
         driver = getattr(webdriver, settings.SELENIUM_DRIVER, None)
         assert driver, "settings.SELENIUM_DRIVER contains non-existing driver"
@@ -26,15 +37,16 @@ class EditorTest(SeleniumTestCase):
         port = getattr(settings, 'SELENIUM_TESTSERVER_PORT', 8000)
         self.base_url = 'http://{0}:{1}/{2}'.format(host, port, DJANGO_BASE)
         self.verification_errors = []
-        
-        # create editor user
-        editoruser = User.objects.create_user(
-          'editoruser', 'editor@example.com', 'secret')
-        editoruser.is_staff = True
-        globaleditors = Group.objects.get(name='globaleditors')
-        editoruser.groups.add(globaleditors)
-        editoruser.save()
+
     
+    def tearDown(self):
+        resourceInfoType_model.objects.all().delete()
+        User.objects.all().delete()
+        
+        # clean up Selenium
+        self.driver.quit()
+        self.assertEqual([], self.verification_errors)
+
 
     def test_status_after_saving(self):
         
@@ -53,9 +65,9 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("Logout", driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
         # go to Editor
         driver.find_element_by_css_selector("div.button.middle_button").click()
-        # go to Update
-        driver.find_element_by_link_text("Update").click()
-        # make sure we are on the right site
+        # go to Update->Resource
+        mouse_over(driver, driver.find_element_by_link_text("Update"))
+        driver.find_element_by_link_text("Resource").click()        # make sure we are on the right site
         self.assertEqual("Select Resource to change | META-SHARE backend", driver.title)
         # check if LR entry is available and that its status is published
         try: 
@@ -135,11 +147,9 @@ class EditorTest(SeleniumTestCase):
         Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
           "monolingual")
         # corpus info text / language popup
-        driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()        
-        self.fill_language(driver, ss_path, "id_corpusTextInfo__dash__0")
+        self.fill_language(driver, ss_path, "languageinfotype_model_set-0-")
         # corpus info text / size popup
-        driver.find_element_by_css_selector("#add_id_sizeInfo > img[alt=\"Add Another\"]").click()
-        self.fill_size(driver, ss_path, "id_corpusTextInfo__dash__0")
+        self.fill_size(driver, ss_path, "sizeinfotype_model_set-0-")
         # save and close corpus info text popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         driver.find_element_by_name("_save").click()
@@ -213,7 +223,7 @@ class EditorTest(SeleniumTestCase):
           "monolingual")
         # language description info text / language popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        self.fill_language(driver, ss_path, "id_languageDescriptionTextInfo")
+        self.fill_language(driver, ss_path, "languageinfotype_model_set-0-")
         # save and close language description info text popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         driver.find_element_by_name("_save").click()
@@ -286,11 +296,9 @@ class EditorTest(SeleniumTestCase):
         Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
           "monolingual")
         # lexical resource text info / language popup
-        driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        self.fill_language(driver, ss_path, "id_lexicalConceptualResourceTextInfo")
+        self.fill_language(driver, ss_path, "languageinfotype_model_set-0-")
         # lexical resource text info / size popup
-        driver.find_element_by_css_selector("#add_id_sizeInfo > img[alt=\"Add Another\"]").click()
-        self.fill_size(driver, ss_path, "id_lexicalConceptualResourceTextInfo")
+        self.fill_size(driver, ss_path, "sizeinfotype_model_set-0-")
         # save and close lexical resource text info popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         driver.find_element_by_name("_save").click()
@@ -309,7 +317,7 @@ class EditorTest(SeleniumTestCase):
         driver.get(self.base_url)
         ss_path = setup_screenshots_folder(
           "PNG-metashare.repository.seltests.test_editor.EditorTest",
-          "LR_creation_lex_resource_text")
+          "LR_creation_tool")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))  
         # login user
         login_user(driver, "editoruser", "secret")
@@ -394,33 +402,25 @@ class EditorTest(SeleniumTestCase):
         driver.switch_to_window(parent_id)
         
         
-    def fill_language(self, driver, ss_path, parent_id):
+    def fill_language(self, driver, ss_path, id_infix):
         """
         fills the language popup with required information and returns to the
         parent window
         """
-        driver.switch_to_window("id_languageInfo")
-        driver.find_element_by_id("id_languageId").clear()
-        driver.find_element_by_id("id_languageId").send_keys("De")
-        driver.find_element_by_id("id_languageName").clear()
-        driver.find_element_by_id("id_languageName").send_keys("German")
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        driver.find_element_by_name("_save").click()
-        driver.switch_to_window(parent_id)
+        driver.find_element_by_id("id_{}languageId".format(id_infix)).clear()
+        driver.find_element_by_id("id_{}languageId".format(id_infix)).send_keys("De")
+        driver.find_element_by_id("id_{}languageName".format(id_infix)).clear()
+        driver.find_element_by_id("id_{}languageName".format(id_infix)).send_keys("German")
         
         
-    def fill_size(self, driver, ss_path, parent_id):
+    def fill_size(self, driver, ss_path, id_infix):
         """
         fills the size popup with required information and returns to the
         parent window
         """
-        driver.switch_to_window("id_sizeInfo")
-        driver.find_element_by_id("id_size").clear()
-        driver.find_element_by_id("id_size").send_keys("10000")
-        Select(driver.find_element_by_id("id_sizeUnit")).select_by_visible_text("tokens")
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        driver.find_element_by_name("_save").click()
-        driver.switch_to_window(parent_id)
+        driver.find_element_by_id("id_{}size".format(id_infix)).clear()
+        driver.find_element_by_id("id_{}size".format(id_infix)).send_keys("10000")
+        Select(driver.find_element_by_id("id_{}sizeUnit".format(id_infix))).select_by_visible_text("tokens")
 
         
     def is_element_present(self, how, what):
@@ -429,11 +429,4 @@ class EditorTest(SeleniumTestCase):
         except NoSuchElementException:
             return False
         return True
-    
-    
-    def tearDown(self):
-        resourceInfoType_model.objects.all().delete()
-        
-        # clean up Selenium
-        self.driver.quit()
-        self.assertEqual([], self.verification_errors)
+

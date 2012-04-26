@@ -1,5 +1,6 @@
 from collections import OrderedDict
 
+import os
 import sys
 import logging
 from parse_xsd import ElementDict, XschemaElementBase, XschemaElement
@@ -220,7 +221,9 @@ COMPLEX_MODEL_TEMPLATE='''
 # pylint: disable-msg=C0103
 class {}_model({}):
 {}
-    class Meta:\n        verbose_name = "{}"
+    class Meta:
+        verbose_name = "{}"
+{}
 '''
 
 CHOICE_SUPERCLASS_TEMPLATE = '''
@@ -229,8 +232,13 @@ class {}_model({}):
 {}
     __schema_name__ = \'SUBCLASSABLE\'
 
-    class Meta:\n        verbose_name = "{}"
+    class Meta:
+        verbose_name = "{}"
+{}
+'''
 
+VERBOSE_NAME_PLURAL_SNIPPET = '''\
+        verbose_name_plural = "{}"
 '''
 
 CHOICE_STRING_SUB_CLASS_ADMIN_TEMPLATE = '''
@@ -444,7 +452,7 @@ class Clazz(object):
 
     @classmethod
     def is_one_to_many(cls, member):
-        prefix, data_type = get_prefix_name(member.get_data_type())
+        dummy, data_type = get_prefix_name(member.get_data_type())
         return data_type not in Simple_type_table \
             and data_type not in cls.simple_type_table \
             and data_type != 'myString' \
@@ -456,7 +464,7 @@ class Clazz(object):
             data_type = member.get_data_type()
             child_clazz = cls.ClazzDict[data_type]
             return isinstance(child_clazz.backreference, ClazzBaseMember) or \
-                (child_clazz.name == 'resolutionInfoType' and isinstance(child_clazz.backreference, tuple))
+                isinstance(child_clazz.backreference, tuple)
 
     @classmethod
     def has_multiple_one_to_many_references(cls, member):
@@ -514,20 +522,9 @@ class Clazz(object):
         self.members.append(clazz_member)
 
     def set_one_to_many(self, clazz_member):
-        if self.name == 'resolutionInfoType':
-            if self.backreference is None:
-                self.backreference = ()
-            self.backreference += (clazz_member, )
-            return
         if self.backreference is None:
-            self.backreference = clazz_member
-        else:
-            if isinstance(self.backreference, ClazzBaseMember):
-                logging.warn('type used twice for one-to-many: from %s to %s' %
-                     (self.backreference.source.name, self.name))
-            self.backreference = ''
-            logging.warn('type used twice for one-to-many: from %s to %s' %
-                (clazz_member.source.name, self.name))
+            self.backreference = ()
+        self.backreference += (clazz_member, )
 
     def is_empty(self):
         return not self.members
@@ -646,6 +643,8 @@ class Clazz(object):
                             _inline_template_snippets += INLINE_SNIPPET_COLLAPSE
                         if self.has_multiple_one_to_many_references(member):
                             member_data_type = member.get_generated_type(member.source.name)
+                            # TODO: remove warning
+                            logging.warn('Multiple one-to-many: {}->{}'.format(member_data_type, data_type ))
                             _inline_classname_suffix = '_{}_model'.format(member_data_type)
                             _inline_template_snippets += INLINE_SNIPPET_FK_NAME.format(member_data_type.lower())
                         self.inlines.append((name, _inline_classname_suffix, data_type, _inline_template_snippets))
@@ -871,9 +870,13 @@ class Clazz(object):
         verbose_name = self.schema_element.getAppInfo("label")
         if not verbose_name:
             verbose_name = getVerboseName(self.name)
+        verbose_name_plural = self.schema_element.getAppInfo("label-plural")
+        plural_snippet  = ''
+        if verbose_name_plural:
+            plural_snippet = VERBOSE_NAME_PLURAL_SNIPPET.format(verbose_name_plural)
         self.wrtmodels(CHOICE_SUPERCLASS_TEMPLATE.format(
           self.name, CHOICE_TYPE_SUPERCLASS,
-          self.schema_element.getDocumentation(), verbose_name))
+          self.schema_element.getDocumentation(), verbose_name, plural_snippet))
         
         self.wrtforms('\nclass %s_form(forms.Form):\n' % (self.name, ))
 
@@ -896,8 +899,12 @@ class Clazz(object):
         verbose_name = self.schema_element.getAppInfo("label")
         if not verbose_name:
             verbose_name = getVerboseName(self.name)
+        verbose_name_plural = self.schema_element.getAppInfo("label-plural")
+        plural_snippet  = ''
+        if verbose_name_plural:
+            plural_snippet = VERBOSE_NAME_PLURAL_SNIPPET.format(verbose_name_plural)
         self.wrtmodels(COMPLEX_MODEL_TEMPLATE.format(self.name,
-          model_superclass, documentation, verbose_name))
+          model_superclass, documentation, verbose_name, plural_snippet))
 
         self.wrtforms('\nclass %s_form(forms.Form):\n' % (self.name, ))
         if self.is_empty():
@@ -1039,12 +1046,12 @@ class Clazz(object):
         return result
 
     @classmethod
-    def generate(cls, prefix, root, package_prefix):
+    def generate(cls, outDirName, prefix, root, package_prefix):
         cls.establish_one_to_many()
 
-        models_file_name = 'models.py'
-        forms_file_name = 'forms.py'
-        admin_file_name = 'admin.py'
+        models_file_name = os.path.join(outDirName, 'models.py')
+        forms_file_name = os.path.join(outDirName, 'forms.py')
+        admin_file_name = os.path.join(outDirName, 'admin.py')
 
         models_writer = Writer(models_file_name)
         forms_writer = Writer(forms_file_name)
@@ -1155,7 +1162,7 @@ class ClazzBaseMember(object):
 
     def get_generated_name(self):
         name = self.get_name()
-        prefix, name = get_prefix_name(name)
+        dummy, name = get_prefix_name(name)
         name = cleanupName(name)
         if name == 'id':
             name += 'x'
@@ -1165,10 +1172,10 @@ class ClazzBaseMember(object):
         return name
 
     def get_generated_type(self, data_type):
-        prefix, data_type = get_prefix_name(data_type)
+        dummy, data_type = get_prefix_name(data_type)
         if data_type in Clazz.simple_type_table:
             data_type = Clazz.simple_type_table[data_type]
-            prefix, data_type = get_prefix_name(data_type.type_name)
+            dummy, data_type = get_prefix_name(data_type.type_name)
         data_type = cleanupName(data_type)
         #data_type = data_type[0].upper() + data_type[1:]
         return data_type
