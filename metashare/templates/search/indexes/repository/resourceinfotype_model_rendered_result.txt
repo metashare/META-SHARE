@@ -8,7 +8,7 @@
 </th>
 
 <td style="text-align:left;{% if not object.storage_object.published %} font-style:italic;{% endif %}">
-  {{ object.resourceComponentType.as_subclass.get_resourceType_display }}
+  {{ object.resourceComponentType.as_subclass.resourceType }}
 </td>
 
 <td style="text-align:left;{% if not object.storage_object.published %} font-style:italic;{% endif %}">

@@ -251,7 +251,7 @@ class SearchTest(test_utils.IndexAwareTestCase):
         response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
           data={'q':'INGESTED'})
         self.assertEqual('repository/search.html', response.templates[0].name)
-        self.assertContains(response, "1 Language Resource", status_code=200)
+        self.assertContains(response, "1 Language Resource", status_code=200, msg_prefix='Response: "{0}"'.format(response))
         
     def test_normal_user_doesnt_see_ingested_LR(self):
         client = Client()

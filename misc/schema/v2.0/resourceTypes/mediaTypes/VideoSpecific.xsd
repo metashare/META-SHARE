@@ -172,7 +172,8 @@
 					<xs:documentation>Groups together information on the image resolution</xs:documentation>
 					<xs:appinfo>
 						<recommended>true</recommended>
-						<relation>many-to-many</relation>
+						<relation>one-to-many</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -208,6 +209,7 @@
 					<xs:documentation>Used to give info on size of parts of a resource that differ as to the format</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -248,6 +250,7 @@
 					<xs:documentation>Used to give info on size of parts with different video classification</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>

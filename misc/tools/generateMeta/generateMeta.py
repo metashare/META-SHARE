@@ -328,7 +328,7 @@ def main():
     except getopt.GetoptError:
         usage()
     prefix = ''
-    outDirName = None
+    outDirName = '.'
     nameSpace = 'xs:'
     processIncludes = 1
     namespacedef = ''
