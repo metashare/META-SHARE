@@ -508,7 +508,7 @@ div.content_box{
 
 /* explanation box */
 div.explanation_box{
-	margin-left:5%;
+	margin-left:2%;
     position: relative;
     display:table-cell; vertical-align:top;
 	background-color: white;
