@@ -65,9 +65,9 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("Logout", driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
         # go to Editor
         driver.find_element_by_css_selector("div.button.middle_button").click()
-        # go to Update
-        driver.find_element_by_link_text("Update").click()
-        # make sure we are on the right site
+        # go to Update->Resource
+        mouse_over(driver, driver.find_element_by_link_text("Update"))
+        driver.find_element_by_link_text("Resource").click()        # make sure we are on the right site
         self.assertEqual("Select Resource to change | META-SHARE backend", driver.title)
         # check if LR entry is available and that its status is published
         try: 
@@ -296,11 +296,9 @@ class EditorTest(SeleniumTestCase):
         Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
           "monolingual")
         # lexical resource text info / language popup
-        driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        self.fill_language(driver, ss_path, "id_lexicalConceptualResourceTextInfo")
+        self.fill_language(driver, ss_path, "languageinfotype_model_set-0-")
         # lexical resource text info / size popup
-        driver.find_element_by_css_selector("#add_id_sizeInfo > img[alt=\"Add Another\"]").click()
-        self.fill_size(driver, ss_path, "id_lexicalConceptualResourceTextInfo")
+        self.fill_size(driver, ss_path, "sizeinfotype_model_set-0-")
         # save and close lexical resource text info popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         driver.find_element_by_name("_save").click()
