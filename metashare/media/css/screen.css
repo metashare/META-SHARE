@@ -486,7 +486,6 @@ div.less_details{
 div.filters_box{
 	margin-left:5%;
     position: relative;
-    width: 200px;
     background-color: white;
 	padding: 20px 20px 20px 20px;	
 	-webkit-box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
@@ -511,7 +510,6 @@ div.content_box{
 div.explanation_box{
 	margin-left:5%;
     position: relative;
-    width:100px;
     display:table-cell; vertical-align:top;
 	background-color: white;
 	padding: 20px 20px 20px 20px;	
