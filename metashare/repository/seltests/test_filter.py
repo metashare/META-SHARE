@@ -155,7 +155,7 @@ class FilterTest(SeleniumTestCase):
         self.assertEqual("sortDesc", driver.find_element_by_xpath(
           "(//a[contains(text(),'Resource Type')])[2]").get_attribute("class"))
         self.assertEqual("Corpus", driver.find_element_by_xpath(
-          "//table[@class='result_table']/tbody/tr[2]/td/img/title"))
+          "//table[@class='result_table']/tbody/tr[2]/td/img").title)
         # now sort by resource type descending
         driver.find_element_by_xpath("(//a[contains(text(),'Resource Type')])[2]").click() 
         self.assertEqual("sortAsc", driver.find_element_by_xpath(
