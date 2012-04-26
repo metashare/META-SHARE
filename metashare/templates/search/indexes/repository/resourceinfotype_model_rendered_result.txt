@@ -7,7 +7,7 @@
   {% if object.identificationInfo.resourceShortName.0 %}{{ object.identificationInfo.resourceShortName.0 }}{% endif %}
 </th>
 
-<td style="text-align:left;{% if not object.storage_object.published %} font-style:italic;{% endif %}">
+<td style="text-align:center;{% if not object.storage_object.published %} font-style:italic;{% endif %}">
   
   {% if object.resourceComponentType.as_subclass.get_resourceType_display = "corpus" %}
 	<img src="/site_media/css/sexybuttons/images/icons/silk/database_yellow.png" title="Corpus" /> &nbsp;
@@ -18,11 +18,15 @@
   {% if object.resourceComponentType.as_subclass.get_resourceType_display = "lexicalConceptualResource" %}
 	<img src="/site_media/css/sexybuttons/images/icons/silk/text_ab.png" title="Lexical Conceptual" /> &nbsp;
   {% endif %}
+  {% if object.resourceComponentType.as_subclass.get_resourceType_display = "languageDescription" %}
+	<img src="/site_media/css/sexybuttons/images/icons/silk/script.png" title="Language Description" /> &nbsp;
+  {% endif %}
+
    
   {# { object.resourceComponentType.as_subclass.get_resourceType_display } #}
 </td>
 
-<td style="text-align:left;{% if not object.storage_object.published %} font-style:italic;{% endif %}">
+<td style="text-align:center;{% if not object.storage_object.published %} font-style:italic;{% endif %}">
   {% resource_media_types object.resourceComponentType.as_subclass %}
 </td>
 
