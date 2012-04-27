@@ -423,19 +423,24 @@ class MetashareFacetedSearchView(FacetedSearchView):
         """
         result = []
         # pylint: disable-msg=E1101
-        filter_labels = [(name, field.label) for name, field
+        filter_labels = [(name, field.label, field.facet_id, field.parent_id) for name, field
                          in resourceInfoType_modelIndex.fields.iteritems()
                          if name.endswith("Filter")]
-        filter_labels.sort(key=lambda f: f[1].lower())
+        filter_labels.sort(key=lambda f: f[2])
         sel_facets = self._get_selected_facets()
-
         # Step (1): if there are any selected facets, then add these first:
         if sel_facets:
             # add all facets alphabetically:
-            for name, label in filter_labels:
+            for name, label, facet_id, parent_id in filter(lambda f: f[3] == 0, filter_labels):
                 name_exact = '{0}_exact'.format(name)
                 # only add selected facets in step (1)
                 if name_exact in sel_facets:
+                    subfacets = filter(lambda f: f[3] == facet_id, filter_labels)
+                    subfacets_exactname_list = []
+                    subfacets_exactname_list.extend([u'{0}_exact'.format(subfacet[0]) for subfacet in subfacets])
+                    subresults = []
+                    for facet in subfacets:
+                        subresults = self.show_subfilter(facet, sel_facets, facet_fields, subresults)
                     items = facet_fields.get(name)
                     if items:
                         removable = []
@@ -448,8 +453,8 @@ class MetashareFacetedSearchView(FacetedSearchView):
                                         [u'{0}:{1}'.format(name, value)
                                          for name, values in
                                          sel_facets.iteritems() for value in
-                                         values if name != name_exact
-                                         or value != item[0]]})
+                                         values if (name != name_exact
+                                         or value != item[0]) and name not in subfacets_exactname_list]})
                             else:
                                 targets = [u'{0}:{1}'.format(name, value)
                                            for name, values in
@@ -460,12 +465,13 @@ class MetashareFacetedSearchView(FacetedSearchView):
                                 addable.append({'label': item[0],
                                                 'count': item[1],
                                                 'targets': targets})
+
                         result.append({'label': label, 'removable': removable,
-                                       'addable': addable})
+                                       'addable': addable, 'subresults': subresults})                    
 
         # Step (2): add all facets without selected facet items alphabetically
         # at the end:
-        for name, label in filter_labels:
+        for name, label, facet_id, parent_id in filter(lambda f: f[3] == 0, filter_labels):
             name_exact = '{0}_exact'.format(name)
             # only add facets without selected items in step (2)
             if not name_exact in sel_facets:
@@ -480,8 +486,9 @@ class MetashareFacetedSearchView(FacetedSearchView):
                         targets.append(u'{0}:{1}'.format(name_exact, item[0]))
                         addable.append({'label': item[0], 'count': item[1],
                                         'targets': targets})
+                    subresults = filter(lambda f: f[3] == facet_id, filter_labels)
                     result.append({'label': label, 'removable': [],
-                                   'addable': addable})
+                                   'addable': addable, 'subresults': subresults})
 
         return result
 
@@ -492,3 +499,53 @@ class MetashareFacetedSearchView(FacetedSearchView):
         extra['filters'] = self._create_filters_structure(
                                         extra['facets']['fields'])
         return extra
+    
+    def show_subfilter(self, facet, sel_facets, facet_fields, results):
+        name = facet[0]
+        label = facet[1]
+
+        name_exact = '{0}_exact'.format(name)
+
+        if name_exact in sel_facets:
+            items = facet_fields.get(name)
+            if items:
+                removable = []
+                addable = []
+                # only items with a count > 0 are shown
+                for item in [i for i in items if i[1] > 0]:
+                    if item[0] in sel_facets[name_exact]:
+                        removable.append({'label': item[0],
+                            'count': item[1], 'targets':
+                                [u'{0}:{1}'.format(name, value)
+                                 for name, values in
+                                 sel_facets.iteritems() for value in
+                                 values if name != name_exact
+                                 or value != item[0]]})
+                    else:
+                        targets = [u'{0}:{1}'.format(name, value)
+                                   for name, values in
+                                   sel_facets.iteritems()
+                                   for value in values]
+                        targets.append(u'{0}:{1}'.format(name_exact,
+                                                         item[0]))
+                        addable.append({'label': item[0],
+                                        'count': item[1],
+                                        'targets': targets})
+                results.append({'label': label, 'removable': removable,
+                               'addable': addable})
+        else:
+            items = facet_fields.get(name)
+            if items:
+                addable = []
+                # only items with a count > 0 are shown
+                for item in [i for i in items if i[1] > 0]:
+                    targets = [u'{0}:{1}'.format(name, value)
+                               for name, values in sel_facets.iteritems()
+                               for value in values]
+                    targets.append(u'{0}:{1}'.format(name_exact, item[0]))
+                    addable.append({'label': item[0], 'count': item[1],
+                                    'targets': targets})
+                results.append({'label': label, 'removable': [],
+                               'addable': addable})
+
+        return results
