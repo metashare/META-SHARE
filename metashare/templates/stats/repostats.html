@@ -12,9 +12,13 @@ function select(form) {
 }
 </script>
 
-<table><tr><td nowrap><a href="{% url metashare.views.frontpage %}stats/top/"><font size=+1>Top 10</font></a>&nbsp;&nbsp;</td><td bgcolor=#dddddd nowrap>&nbsp;&nbsp;<font size=+1>Repository statistics</font>&nbsp;&nbsp; </td>
+<table><tr><td nowrap><a href="{% url metashare.views.frontpage %}stats/top/"><font size=+1>Top 10</font></a>&nbsp;&nbsp;</td>
+<td bgcolor=#dddddd nowrap>&nbsp;&nbsp;<font size=+1>Repository statistics</font>&nbsp;&nbsp; </td>
+{% if user.username and myres %}
+<td nowrap>&nbsp;&nbsp;<font size=+1><a href="{% url metashare.views.frontpage %}stats/mystats/">My resources</a></font>&nbsp;&nbsp; </td>
+{% endif %}
 <td width=80%></td></tr>
-<tr><td bgcolor=#dddddd colspan=3>
+<tr><td bgcolor=#dddddd colspan=4>
 
 <div class="content_box">
 <form class="form_helper" name="repoform" id="repoform" action="{% url metashare.views.frontpage %}stats/repo/" method="POST">

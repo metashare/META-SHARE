@@ -1,11 +1,17 @@
 import django.test
 from django.test.client import Client
-from metashare.settings import DJANGO_BASE, DJANGO_URL, STATS_SERVER_URL
+from metashare.settings import DJANGO_BASE, DJANGO_URL
 from metashare.stats.model_utils import saveLRStats, getLRLast, saveQueryStats, getLastQuery, UPDATE_STAT, VIEW_STAT, RETRIEVE_STAT, DOWNLOAD_STAT
 import urllib2
 from urllib import urlencode
 
 class StatsTest(django.test.TestCase):
+    def setUp(self):
+        """
+        Sets up some resources with which to test.
+        """
+        self.stats_server_url = "http://metastats.fbk.eu/"
+    
     def testStatActions(self):
         """
         Testing statistics functions about LR
@@ -47,24 +53,24 @@ class StatsTest(django.test.TestCase):
         checking if there is at least one resource report available
         from the META-SHARE statistics server.
         """
-        print "Connecting... {0}".format(STATS_SERVER_URL)
+        print "Connecting... {0}".format(self.stats_server_url)
         try:
-            response = urllib2.urlopen(STATS_SERVER_URL)
+            response = urllib2.urlopen(self.stats_server_url)
             self.assertEquals(200, response.code)
         except urllib2.URLError:
-            print 'WARNING! Failed contacting statistics server on %s' % STATS_SERVER_URL
+            print 'WARNING! Failed contacting statistics server on %s' % self.stats_server_url
         
     def testAddNode(self):
         """
         checking if there is at least one resource report available
         from the META-SHARE statistics server.
         """
-        print "Connecting... {0}".format(STATS_SERVER_URL)
+        print "Connecting... {0}".format(self.stats_server_url)
         try:
-            response = urllib2.urlopen(STATS_SERVER_URL+"addnode?" + urlencode({'url': DJANGO_URL}))
+            response = urllib2.urlopen("{0}addnode?{1}".format(self.stats_server_url, urlencode({'url': DJANGO_URL})))
             self.assertEquals(200, response.code)
         except urllib2.URLError:
-            print 'WARNING! Failed contacting statistics server on %s' % STATS_SERVER_URL
+            print 'WARNING! Failed contacting statistics server on %s' % self.stats_server_url
         
     def testGet(self):
         """
@@ -72,7 +78,6 @@ class StatsTest(django.test.TestCase):
         """
         client = Client()
         response = client.get('/{0}stats/get'.format(DJANGO_BASE))
-        # cfedermann: Django's test Client does not use .code but .status_code!
         self.assertEquals(200, response.status_code)
             
 

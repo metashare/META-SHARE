@@ -5,10 +5,13 @@ Author: Christian Girardi <cgirardi@fbk.eu>
 
 from metashare.settings import DJANGO_URL, STATS_SERVER_URL
 from metashare.stats.models import LRStats, QueryStats
-from metashare.stats.model_utils import getLRTop, getLastQuery, getLRLast, statDays, VIEW_STAT, UPDATE_STAT, DOWNLOAD_STAT
+# pylint: disable-msg=W0611, W0401
+from metashare.stats.model_utils import *
+
 # pylint: disable-msg=W0611, W0401
 from metashare.repository.models import *
 
+from django.utils.importlib import import_module
 from django.shortcuts import render_to_response     
 from django.db.models import Count, Max, Min, Avg
 from django.http import HttpResponse
@@ -20,14 +23,19 @@ import urllib, urllib2
 from threading import Timer
 import base64
 import collections
+import logging 
+from metashare.settings import LOG_LEVEL, LOG_HANDLER, MEDIA_URL
+
 try:
     import cPickle as pickle
 except:
     import pickle
 
-
 #possible models and their default field
-SELECT_MODEL = {'Language': ['languageInfoType_model', 'languageName'],
+SELECT_MODEL = {'Resource': ['corpusInfoType_model', 'resourceType'],
+                #'Tools': ['toolServiceInfoType_model', 'resourceType'],
+                #'Lexical resource': ['lexicalConceptualResourceInfoType_model', 'resourceType'],
+                'Language': ['languageInfoType_model', 'languageName'],
                 'Licence': ['licenceInfoType_model', 'licence'],
                 'Creator': ['communicationInfoType_model','country'],
                 'Organization': ['organizationInfoType_model','organizationName'],
@@ -54,7 +62,7 @@ def callServerStats():
 thread = Timer(2.0, callServerStats)
 thread.start()
 
-def repostats (request):    
+def repostats (request):
     selected_menu_value = []
     modelname = request.POST.get('model', 'Language')
     selected_menu_value.append(['model', modelname])
@@ -66,17 +74,19 @@ def repostats (request):
         dbfield = SELECT_MODEL[str(modelname)][1]
     selected_menu_value.append(['field', dbfield])
     
-    dbfields = []
-    dbclasses = eval(u'{0}.__schema_classes__'.format(dbmodel))
+    fields = []
+    mod = import_module("metashare.repository.models")
+    dbclasses = getattr(mod, dbmodel).__schema_classes__
+    dbfields = getattr(mod, dbmodel).__schema_fields__
     relational_fields = []
-    for field in eval(u'{0}.__schema_fields__'.format(dbmodel)):
+    for field in dbfields:
         if field[0] in NOACCESS_FIELDS:
             continue  
         if (field[0] in dbclasses):
             relational_fields.append(field)
         else:
             if (isinstance(field[0], unicode)):
-                dbfields.append(field)
+                fields.append(field)
         
     repodata = []
     if (dbfield != ""):
@@ -85,11 +95,12 @@ def repostats (request):
         else:    
             values = eval(u'{0}._meta.get_field("{1}").choices'.format(dbmodel, dbfield))
         if (modelname == "Licence" and len(values) > 0):
-            licences = tuple(licenceInfoType_model.objects.all())
             dictlic = collections.defaultdict(int)
+            # pylint: disable-msg=W0612
+            licences = eval(u'{0}.objects.all()'.format(dbmodel))
             for licence in eval(u'[name for licence_info in licences for name in licence_info.get_{0}_display_list()]'.format(dbfield)):
                 dictlic[str(licence)] += 1
-            for key,val in sorted(dictlic.iteritems(), key=lambda (k,v): (v,k), reverse=True):            
+            for key, val in sorted(dictlic.iteritems(), key=lambda (k, v): (v, k), reverse=True):            
                 repodata.append([key, val])                   
         else:
             result = eval(u'{0}.objects.values("{1}").annotate(Count("{1}")).order_by("-{1}__count")'.format(dbmodel, dbfield))
@@ -114,13 +125,34 @@ def repostats (request):
                             repodata.append([str(value), item[dbfield + "__count"]])
                     
     return render_to_response('stats/repostats.html',
-        {'user': request.user, 'result': repodata,
+        {'user': request.user, 
+         'result': repodata, 
          'selected_menu_value': selected_menu_value,
-         'models': SELECT_MODEL.keys(), 'fields': dbfields,
-         'subfields': relational_fields},
-        context_instance=RequestContext(request))
+         'models': SELECT_MODEL.keys(),
+         'fields': fields,
+         'subfields': relational_fields,
+         'myres': isOwner(request.user.username)},
+         context_instance=RequestContext(request))
+    
+def mystats (request):
+    data = []
+    entry_list = getMyResources(request.user.username)
+    for resource in entry_list:
+        data.append([resource.id, resource.get_absolute_url, resource, \
+            getLRStats(resource.storage_object.identifier), getUserStats(resource.storage_object.identifier)]) 
+    return render_to_response('stats/mystats.html', {"data": data},
+         context_instance=RequestContext(request))
+ 
+def getMyResources(username):
+    return resourceInfoType_model.objects.filter(owners__username=username)
+    
 
-
+def isOwner(username):
+    entry_list = getMyResources(username)
+    if (len(entry_list) > 0):
+        return True
+    return False
+    
 def usagestats (request):
     # Get lists of fields used in the advanced search
     topdata = []
@@ -173,7 +205,10 @@ def topstats (request):
             topdata.append([query, pretty_timeago(item['lasttime']), item['found']])       
              
     return render_to_response('stats/topstats.html',
-        {'user': request.user, 'topdata': topdata[:10], 'view': view},
+        {'user': request.user, 
+        'topdata': topdata[:10], 
+        'view': view,
+        'myres': isOwner(request.user.username)},
         context_instance=RequestContext(request))
 
 def statdays (request):
@@ -203,27 +238,30 @@ def getstats (request):
     else:
         extimes["exectime__avg"] = 0
         
-    return HttpResponse("["+JSONEncoder().encode({"date": str(currdate), "user": user, "lrupdate": lrupdate, "lrview": lrview, "lrdown": lrdown, "queries": queries, "qexec_time_avg": extimes["exectime__avg"], "qlt_avg": qltavg})+"]")
+    return HttpResponse("["+JSONEncoder().encode({"date": str(currdate), "user": \
+        user, "lrupdate": lrupdate, "lrview": lrview, "lrdown": lrdown, "queries": queries, \
+        "qexec_time_avg": extimes["exectime__avg"], "qlt_avg": qltavg})+"]")
 
 
-def pretty_timeago(time=False):
+# pylint: disable-msg=R0911
+def pretty_timeago(timein=False):
     """
     Get a datetime object or a int() Epoch timestamp and return a
     pretty string like 'an hour ago', 'Yesterday', '3 months ago',
     'just now', etc
-    """   
+    """
     now = datetime.now()
-    if type(time) is int:
-        diff = now - datetime.fromtimestamp(time)
-    elif isinstance(time, datetime):
-        diff = now - time 
-    elif not time:
+    if type(timein) is int:
+        diff = now - datetime.fromtimestamp(timein)    
+    elif isinstance(timein, datetime):
+        diff = now - timein 
+    elif not timein:
         diff = now - now
     second_diff = diff.seconds
     day_diff = diff.days
-
+    
     if day_diff < 0:
-        return ''
+        return ""
 
     if day_diff == 0:
         if second_diff < 10:
@@ -231,7 +269,7 @@ def pretty_timeago(time=False):
         if second_diff < 60:
             return str(second_diff) + " seconds ago"
         if second_diff < 120:
-            return  "a minute ago"
+            return "a minute ago"
         if second_diff < 3600:
             return str( second_diff / 60 ) + " minutes ago"
         if second_diff < 7200:
@@ -247,3 +285,4 @@ def pretty_timeago(time=False):
     if day_diff < 365:
         return str(day_diff/30) + " months ago"
     return str(day_diff/365) + " years ago"
+    
