@@ -59,7 +59,8 @@ class FilterTest(SeleniumTestCase):
         self.assertEqual("Restrictions of Use", driver.find_element_by_link_text("Restrictions of Use").text)
         # check Availability filter
         driver.find_element_by_link_text("Availability").click()
-        self.assertEqual("available-restrictedUse (17)", driver.find_element_by_css_selector("div").text)
+        self.assertEqual("available-restrictedUse (17)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[@class='filter']/div").text)
         driver.find_element_by_link_text("Availability").click()
         # check Language filter
         driver.find_element_by_link_text("Language").click()
