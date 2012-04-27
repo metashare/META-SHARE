@@ -133,47 +133,43 @@ $(document).ready(function(){
 	
 	<div class="explanation_box">
 		<h4>Resource Type:</h4>			
-		<dl id="resource_type">
-			<table>
-				<tr>
-					<td width="120">Corpus:</td>
-					<td><img src="/site_media/css/sexybuttons/images/icons/silk/database_yellow.png" /></td>
-				</tr>
-				<tr>
-					<td width="120">Lexical/Conceptual:</td>
-					<td><img src="/site_media/css/sexybuttons/images/icons/silk/text_ab.png" /></td>
-				</tr>
-				<tr>
-					<td width="120">Tool/Service:</td>
-					<td><img src="/site_media/css/sexybuttons/images/icons/silk/page_white_gear.png" /></td>
-				</tr>
-				<tr>
-					<td width="120">Language Description:</td>
-					<td><img src="/site_media/css/sexybuttons/images/icons/silk/script.png" /></td>
-				</tr>
+		<table id="resource_type">
+			<tr>
+				<td width="120">Corpus:</td>
+				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/database_yellow.png" /></td>
+			</tr>
+			<tr>
+				<td width="120">Lexical/Conceptual:</td>
+				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/text_ab.png" /></td>
+			</tr>
+			<tr>
+				<td width="120">Tool/Service:</td>
+				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/page_white_gear.png" /></td>
+			</tr>
+			<tr>
+				<td width="120">Language Description:</td>
+				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/script.png" /></td>
+			</tr>
 			</table>			
-		</dl>			
 		<h4>Media Type:</h4>
-		<dl id="media_type">
-			<table>
-				<tr>
-					<td width="120">Text:</td>
-					<td><img src="/site_media/css/sexybuttons/images/icons/silk/page_white_text_media_type.png" /></td>
-				</tr>
-				<tr>
-					<td width="120">Audio:</td>
-					<td><img src="/site_media/css/sexybuttons/images/icons/silk/sound_none.png" /></td>
-				</tr>
-				<tr>
-					<td width="120">Image:</td>
-					<td><img src="/site_media/css/sexybuttons/images/icons/silk/picture.png" /></td>
-				</tr>
-				<tr>
-					<td width="120">Video:</td>
-					<td><img src="/site_media/css/sexybuttons/images/icons/silk/film.png" /></td>
-				</tr>					
-			</table>				
-		</dl>        
+		<table id="media_type">
+			<tr>
+				<td width="120">Text:</td>
+				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/page_white_text_media_type.png" /></td>
+			</tr>
+			<tr>
+				<td width="120">Audio:</td>
+				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/sound_none.png" /></td>
+			</tr>
+			<tr>
+				<td width="120">Image:</td>
+				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/picture.png" /></td>
+			</tr>
+			<tr>
+				<td width="120">Video:</td>
+				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/film.png" /></td>
+			</tr>					
+		</table>				
 	</div>
 </div>
 {% endblock %}
