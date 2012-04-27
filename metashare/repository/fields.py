@@ -258,7 +258,8 @@ class MultiSelectField(models.Field):
         
         """
         defaults = {
-          'choices': self.get_choices(include_blank=False),
+          'choices': sorted(self.get_choices(include_blank=False),
+                            key=lambda choice: choice[1].lower()),
           'help_text': self.help_text,
           'label': capfirst(self.verbose_name),
           'required': not self.blank,
