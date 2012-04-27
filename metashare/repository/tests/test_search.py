@@ -54,6 +54,7 @@ class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
         # change the names list of the imported resource
         resource.identificationInfo.resourceName.append(added_name)
         resource.identificationInfo.save()
+        resource.save()
         # make sure the change has automatically updated the search index
         self.assertEqual(
             SearchQuerySet().auto_query('"{0}"'.format(added_name)).count(), 1,
