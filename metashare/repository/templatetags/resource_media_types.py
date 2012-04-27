@@ -82,20 +82,20 @@ class ResourceMediaTypes(template.Node):
         # use images instead of plain text when displaying media types
         image_tag = ""
         if "text" in result:
-            image_tag = '<img src="{}css/sexybuttons/images/icons/silk/page' \
-              '_white_text_media_type.png" title="text" /> &nbsp;' \
+            image_tag = ' <img title="text" src="{}css/sexybuttons/images/icons/silk/page' \
+              '_white_text_media_type.png" /> &nbsp;' \
               .format(MEDIA_URL)
         if "audio" in result:
-            image_tag = image_tag + ' <img src="{}css/sexybuttons/images/' \
-              'icons/silk/sound_none.png" title="audio" /> &nbsp; ' \
+            image_tag = image_tag + ' <img title="audio" src="{}css/sexybuttons/images/' \
+              'icons/silk/sound_none.png" /> &nbsp; ' \
               .format(MEDIA_URL)
         if "image" in result:
-            image_tag = image_tag + ' <img src="{}css/sexybuttons/images/' \
-              'icons/silk/picture.png" title="image" /> &nbsp; ' \
+            image_tag = image_tag + ' <img title="image" src="{}css/sexybuttons/images/' \
+              'icons/silk/picture.png" /> &nbsp; ' \
               .format(MEDIA_URL)
         if "video" in result:
-            image_tag = image_tag + ' <img src="{}css/sexybuttons/images/' \
-              'icons/silk/film.png" title="video" />' \
+            image_tag = image_tag + ' <img title="video" src="{}css/sexybuttons/images/' \
+              'icons/silk/film.png" />' \
               .format(MEDIA_URL)
 
         return image_tag
