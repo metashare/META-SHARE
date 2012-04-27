@@ -5,7 +5,7 @@ from xml.etree.ElementTree import fromstring
 from django import forms
 from django.core.exceptions import ValidationError
 from metashare.storage.models import ALLOWED_ARCHIVE_EXTENSIONS
-from metashare.settings import LOG_LEVEL, LOG_HANDLER
+from metashare.settings import LOG_LEVEL, LOG_HANDLER, MAXIMUM_UPLOAD_SIZE
 from zipfile import is_zipfile
 
 # Setup logging support.
@@ -13,7 +13,6 @@ logging.basicConfig(level=LOG_LEVEL)
 LOGGER = logging.getLogger('metashare.repository.editor.forms')
 LOGGER.addHandler(LOG_HANDLER)
 
-MAXIMUM_UPLOAD_SIZE = 1 * 1024 * 1024
 
 
 def _validate_resource_data(value):
