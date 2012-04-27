@@ -10,16 +10,16 @@
 <td style="text-align:center;{% if not object.storage_object.published %} font-style:italic;{% endif %}">
   
   {% if object.resourceComponentType.as_subclass.resourceType = "corpus" %}
-	<img title="Corpus" src="/site_media/css/sexybuttons/images/icons/silk/database_yellow.png" /> &nbsp;
+	<img title="Corpus" src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/database_yellow.png" /> &nbsp;
   {% endif %}
   {% if object.resourceComponentType.as_subclass.resourceType = "toolService" %}
-	<img title="Tool/Service" src="/site_media/css/sexybuttons/images/icons/silk/page_white_gear.png" /> &nbsp;
+	<img title="Tool/Service" src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/page_white_gear.png" /> &nbsp;
   {% endif %}
   {% if object.resourceComponentType.as_subclass.resourceType = "lexicalConceptualResource" %}
-	<img title="Lexical/Conceptual" src="/site_media/css/sexybuttons/images/icons/silk/text_ab.png" /> &nbsp;
+	<img title="Lexical/Conceptual" src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/text_ab.png" /> &nbsp;
   {% endif %}
   {% if object.resourceComponentType.as_subclass.resourceType = "languageDescription" %}
-	<img title="Language Description" src="/site_media/css/sexybuttons/images/icons/silk/script.png" /> &nbsp;
+	<img title="Language Description" src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/script.png" /> &nbsp;
   {% endif %}
 
 <td style="text-align:center;{% if not object.storage_object.published %} font-style:italic;{% endif %}">
