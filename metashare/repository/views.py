@@ -391,7 +391,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
         # collect statistics about the query
         starttime = datetime.now()
         results_count = sqs.count()
-        if results_count and self.query:
+        if self.query:
             saveQueryStats(self.request.user.username, '', self.query,
                 results_count, (datetime.now() - starttime).microseconds)
 
