@@ -2,9 +2,13 @@
 
 {% block content %}
 
-<table><tr><td bgcolor=#dddddd nowrap><font size=+1>Top 10</font>&nbsp;&nbsp;</td><td nowrap>&nbsp;&nbsp;<font size=+1><a href="{% url metashare.views.frontpage %}stats/repo/">Repository statistics</a></font>&nbsp;&nbsp; </td>
+<table><tr><td bgcolor=#dddddd nowrap><font size=+1>Top 10</font>&nbsp;&nbsp;</td>
+<td nowrap>&nbsp;&nbsp;<font size=+1><a href="{% url metashare.views.frontpage %}stats/repo/">Repository statistics</a></font>&nbsp;&nbsp; </td>
+{% if user.username and myres %}
+<td nowrap>&nbsp;&nbsp;<font size=+1><a href="{% url metashare.views.frontpage %}stats/mystats/">My resources</a></font>&nbsp;&nbsp; </td>
+{% endif %}
 <td width=80%></td></tr>
-<tr><td bgcolor=#dddddd colspan=3>
+<tr><td bgcolor=#dddddd colspan=4>
 
 <div class="content_box">
 
@@ -26,7 +30,7 @@
 {% endifequal %}
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Latest Updated Resources
 
-<option value='latestqueries' style="background-image: url({{ MEDIA_URL }}stats/img/r_icon.gif); background-repeat: no-repeat;"
+<option value='latestqueries' style="background-image: url({{ MEDIA_URL }}stats/img/retrieve_icon.gif); background-repeat: no-repeat;"
 {% ifequal view "latestqueries" %} 
 	selected
 {% endifequal %}

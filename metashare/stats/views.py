@@ -5,12 +5,13 @@ Author: Christian Girardi <cgirardi@fbk.eu>
 
 from metashare.settings import DJANGO_URL, STATS_SERVER_URL
 from metashare.stats.models import LRStats, QueryStats
-from metashare.stats.model_utils import getLRTop, getLastQuery, getLRLast, statDays, VIEW_STAT, UPDATE_STAT, DOWNLOAD_STAT
+# pylint: disable-msg=W0611, W0401
+from metashare.stats.model_utils import *
 
 # pylint: disable-msg=W0611, W0401
 from metashare.repository.models import *
 
-
+from django.utils.importlib import import_module
 from django.shortcuts import render_to_response     
 from django.db.models import Count, Max, Min, Avg
 from django.http import HttpResponse
@@ -22,17 +23,18 @@ import urllib, urllib2
 from threading import Timer
 import base64
 import collections
+import logging 
+from metashare.settings import LOG_LEVEL, LOG_HANDLER, MEDIA_URL
+
 try:
     import cPickle as pickle
 except:
     import pickle
 
-resourceInfoType_model
-
 #possible models and their default field
-SELECT_MODEL = {'Corpus resource': ['corpusInfoType_model', 'resourceType'],
-                'Tools': ['toolServiceInfoType_model', 'resourceType'],
-                'Lexical resource': ['lexicalConceptualResourceInfoType_model', 'resourceType'],
+SELECT_MODEL = {'Resource': ['corpusInfoType_model', 'resourceType'],
+                #'Tools': ['toolServiceInfoType_model', 'resourceType'],
+                #'Lexical resource': ['lexicalConceptualResourceInfoType_model', 'resourceType'],
                 'Language': ['languageInfoType_model', 'languageName'],
                 'Licence': ['licenceInfoType_model', 'licence'],
                 'Creator': ['communicationInfoType_model','country'],
@@ -73,8 +75,9 @@ def repostats (request):
     selected_menu_value.append(['field', dbfield])
     
     fields = []
-    dbclasses = getattr(metashare.repository.models, dbmodel).__schema_classes__
-    dbfields = getattr(metashare.repository.models, dbmodel).__schema_fields__
+    mod = import_module("metashare.repository.models")
+    dbclasses = getattr(mod, dbmodel).__schema_classes__
+    dbfields = getattr(mod, dbmodel).__schema_fields__
     relational_fields = []
     for field in dbfields:
         if field[0] in NOACCESS_FIELDS:
@@ -93,6 +96,7 @@ def repostats (request):
             values = eval(u'{0}._meta.get_field("{1}").choices'.format(dbmodel, dbfield))
         if (modelname == "Licence" and len(values) > 0):
             dictlic = collections.defaultdict(int)
+            # pylint: disable-msg=W0612
             licences = eval(u'{0}.objects.all()'.format(dbmodel))
             for licence in eval(u'[name for licence_info in licences for name in licence_info.get_{0}_display_list()]'.format(dbfield)):
                 dictlic[str(licence)] += 1
@@ -121,13 +125,34 @@ def repostats (request):
                             repodata.append([str(value), item[dbfield + "__count"]])
                     
     return render_to_response('stats/repostats.html',
-        {'user': request.user, 'result': repodata, 
+        {'user': request.user, 
+         'result': repodata, 
          'selected_menu_value': selected_menu_value,
-         'models': SELECT_MODEL.keys(), 'fields': fields,
-         'subfields': relational_fields},
+         'models': SELECT_MODEL.keys(),
+         'fields': fields,
+         'subfields': relational_fields,
+         'myres': isOwner(request.user.username)},
          context_instance=RequestContext(request))
     
+def mystats (request):
+    data = []
+    entry_list = getMyResources(request.user.username)
+    for resource in entry_list:
+        data.append([resource.id, resource.get_absolute_url, resource, \
+            getLRStats(resource.storage_object.identifier), getUserStats(resource.storage_object.identifier)]) 
+    return render_to_response('stats/mystats.html', {"data": data},
+         context_instance=RequestContext(request))
+ 
+def getMyResources(username):
+    return resourceInfoType_model.objects.filter(owners__username=username)
+    
 
+def isOwner(username):
+    entry_list = getMyResources(username)
+    if (len(entry_list) > 0):
+        return True
+    return False
+    
 def usagestats (request):
     # Get lists of fields used in the advanced search
     topdata = []
@@ -180,7 +205,10 @@ def topstats (request):
             topdata.append([query, pretty_timeago(item['lasttime']), item['found']])       
              
     return render_to_response('stats/topstats.html',
-        {'user': request.user, 'topdata': topdata[:10], 'view': view},
+        {'user': request.user, 
+        'topdata': topdata[:10], 
+        'view': view,
+        'myres': isOwner(request.user.username)},
         context_instance=RequestContext(request))
 
 def statdays (request):
@@ -215,6 +243,7 @@ def getstats (request):
         "qexec_time_avg": extimes["exectime__avg"], "qlt_avg": qltavg})+"]")
 
 
+# pylint: disable-msg=R0911
 def pretty_timeago(timein=False):
     """
     Get a datetime object or a int() Epoch timestamp and return a
@@ -222,41 +251,38 @@ def pretty_timeago(timein=False):
     'just now', etc
     """
     now = datetime.now()
-    timeout = ''
     if type(timein) is int:
-        diff = now - datetime.fromtimestamp(timein)
+        diff = now - datetime.fromtimestamp(timein)    
     elif isinstance(timein, datetime):
         diff = now - timein 
     elif not timein:
         diff = now - now
     second_diff = diff.seconds
     day_diff = diff.days
-
+    
     if day_diff < 0:
-        return timeout
+        return ""
 
     if day_diff == 0:
         if second_diff < 10:
-            timeout = "just now"
+            return "just now"
         if second_diff < 60:
-            timeout = str(second_diff) + " seconds ago"
+            return str(second_diff) + " seconds ago"
         if second_diff < 120:
-            timeout =  "a minute ago"
+            return "a minute ago"
         if second_diff < 3600:
-            timeout = str( second_diff / 60 ) + " minutes ago"
+            return str( second_diff / 60 ) + " minutes ago"
         if second_diff < 7200:
-            timeout = "an hour ago"
+            return "an hour ago"
         if second_diff < 86400:
             return str( second_diff / 3600 ) + " hours ago"
     if day_diff == 1:
-        timeout = "Yesterday"
+        return "Yesterday"
     if day_diff < 7:
-        timeout = str(day_diff) + " days ago"
+        return str(day_diff) + " days ago"
     if day_diff < 31:
-        timeout = str(day_diff/7) + " weeks ago"
+        return str(day_diff/7) + " weeks ago"
     if day_diff < 365:
-        timeout = str(day_diff/30) + " months ago"
-    timeout = str(day_diff/365) + " years ago"
-    
-    return timeout
+        return str(day_diff/30) + " months ago"
+    return str(day_diff/365) + " years ago"
     

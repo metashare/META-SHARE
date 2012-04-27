@@ -2,6 +2,7 @@ import logging
 import json
 from metashare.stats.models import LRStats, QueryStats
 from django.db.models import Count, Sum
+from django.contrib.auth.models import User
 from datetime import datetime
 from metashare.settings import LOG_LEVEL, LOG_HANDLER
 
@@ -55,7 +56,34 @@ def getLRStats(lrid):
                     str(key['count__sum']) +"\",\"last\":\""+str(key2['lasttime'])[:10]+"\"}"
                 break    
     return json.loads("["+data+"]")
- 	      
+
+    
+def getUserStats(lrid):
+    data = ""
+    action_list = LRStats.objects.values('userid', 'action').filter(lrid=lrid).annotate(Count('action'), Sum('count')).order_by('-action')
+    if (action_list.count() > 0):
+        for key in action_list:
+            sets = LRStats.objects.values('lasttime').filter(lrid=lrid, userid=str(key['userid']), action=str(key['action'])).order_by('-lasttime')[:1]
+            for key2 in sets:
+                if (len(data) > 0):
+                    data += ", "
+                user = ""
+                last_login = ""
+                if key['userid']:
+                    userobj = User.objects.get(username=str(key['userid']))
+                    if userobj:
+                        if userobj.first_name and userobj.last_name:
+                            user = str(userobj.first_name) + " " +str(userobj.last_name)
+                        else:
+                            user = str(userobj.username)
+                        user =  user + " (" +str(userobj.email)+")" #userobj.last_activity_ip
+                        last_login = str(userobj.last_login.strftime("%Y/%m/%d - %I:%M:%S"))
+                data += "{\"action\":\""+ STAT_LABELS[str(key['action'])] +"\",\"count\":\""+ \
+                    str(key['count__sum']) +"\",\"last\":\""+str(key2['lasttime'])[:10]+"\",\"user\":\""+ user + "\",\"lastaccess\":\""+ last_login +"\"}"
+                break    
+    return json.loads("["+data+"]")
+
+    
 ## get the top data (limited by a number) 
 def getLRTop(action, limit):
     action_list = []
@@ -70,7 +98,7 @@ def getLRLast(action, limit):
     else:
         action_list =  LRStats.objects.values('lrid', 'action', 'lasttime').order_by('-lasttime')[:limit]
     return action_list
-    
+
 def saveQueryStats(userid, field, query, found, exectime=0): 
     stat = QueryStats()
     stat.userid = userid
@@ -82,7 +110,7 @@ def saveQueryStats(userid, field, query, found, exectime=0):
     LOGGER.debug('STATS: Query {0}.'.format(query))
 
 def getLastQuery (limit):
-    return QueryStats.objects.values('query', 'lasttime','found').order_by('-lasttime')[:limit]
+    return QueryStats.objects.values('query', 'lasttime','found').filter(found__gt=0).order_by('-lasttime')[:limit]
  
 def statByDate(date):
     return LRStats.objects.values("action").filter(lasttime__year=date[0:4], lasttime__month=date[4:6], lasttime__day=date[6:8]).annotate(Count('action'))
