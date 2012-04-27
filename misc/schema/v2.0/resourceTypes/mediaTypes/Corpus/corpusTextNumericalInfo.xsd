@@ -13,22 +13,13 @@
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="mediaType">
+			<xs:element name="mediaType" type="xs:string" fixed="textNumerical">
 				<xs:annotation>
 					<xs:documentation>Specifies the media type of the resource and basically corresponds to the physical medium of the content representation. Each media type is described through a distinctive set of features. A resource may consist of parts attributed to different types of media. A tool/service may take as input/output more than one different media types.</xs:documentation>
 					<xs:appinfo>
-						<maxlen>30</maxlen>
+						<maxlen>10</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:enumeration value="textNumerical">
-							<xs:annotation>
-								<xs:documentation>for the description of sensorimotor data (e.g. biological measurements, geospatial data etc.)</xs:documentation>
-							</xs:annotation>
-						</xs:enumeration>
-					</xs:restriction>
-				</xs:simpleType>
 			</xs:element>
 			<xs:element ref="ms:modalityInfo" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
@@ -36,6 +27,7 @@
 					<xs:appinfo>
 						<recommended>true</recommended>
 						<relation>one-to-many</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -45,6 +37,7 @@
 					<xs:appinfo>
 						<recommended>true</recommended>
 						<relation>one-to-many</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -107,7 +100,7 @@
 					<xs:documentation>Groups information on the way different media of the resource interact with or link to each other. To be used for multimodal resources or for resources representing sensorimotor data</xs:documentation>
 					<xs:appinfo>
 						<recommended>true</recommended>
-						<relation>many-to-many</relation>
+						<relation>one-to-many</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>

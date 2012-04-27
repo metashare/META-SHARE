@@ -10,19 +10,13 @@
 			<xs:documentation>Groups information on the textual part of the lexical/conceptual resource</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="mediaType">
+			<xs:element name="mediaType" type="xs:string" fixed="text">
 				<xs:annotation>
 					<xs:documentation>Specifies the media type of the resource and basically corresponds to the physical medium of the content representation. Each media type is described through a distinctive set of features. A resource may consist of parts attributed to different types of media. A tool/service may take as input/output more than one different media types.</xs:documentation>
+					<xs:appinfo>
+						<maxlen>10</maxlen>
+					</xs:appinfo>
 				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:enumeration value="text">
-							<xs:annotation>
-								<xs:documentation>only written medium</xs:documentation>
-							</xs:annotation>
-						</xs:enumeration>
-					</xs:restriction>
-				</xs:simpleType>
 			</xs:element>
 			<xs:element ref="ms:lingualityInfo">
 				<xs:annotation>
@@ -36,7 +30,7 @@
 				<xs:annotation>
 					<xs:documentation>Groups information on the languages represented in the resource</xs:documentation>
 					<xs:appinfo>
-						<relation>many-to-many</relation>
+						<relation>one-to-many</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -46,6 +40,7 @@
 					<xs:appinfo>
 						<recommended>true</recommended>
 						<relation>one-to-many</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -53,7 +48,8 @@
 				<xs:annotation>
 					<xs:documentation>Groups information on the size of the resource or of resource parts</xs:documentation>
 					<xs:appinfo>
-						<relation>many-to-many</relation>
+						<relation>one-to-many</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -62,7 +58,8 @@
 					<xs:documentation>Groups information on the text format(s) of a resource</xs:documentation>
 					<xs:appinfo>
 						<recommended>true</recommended>
-						<relation>many-to-many</relation>
+						<relation>one-to-many</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -70,7 +67,8 @@
 				<xs:annotation>
 					<xs:documentation>Groups together information on character encoding of the resource</xs:documentation>
 					<xs:appinfo>
-						<relation>many-to-many</relation>
+						<relation>one-to-many</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -78,7 +76,8 @@
 				<xs:annotation>
 					<xs:documentation>Groups together information on domains represented in the resource; can be repeated for parts of the resource with distinct domain</xs:documentation>
 					<xs:appinfo>
-						<relation>many-to-many</relation>
+						<relation>one-to-many</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -86,7 +85,8 @@
 				<xs:annotation>
 					<xs:documentation>Groups together information on time classification of the resource</xs:documentation>
 					<xs:appinfo>
-						<relation>many-to-many</relation>
+						<relation>one-to-many</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -94,7 +94,8 @@
 				<xs:annotation>
 					<xs:documentation>Groups information on geographic classification of the resource</xs:documentation>
 					<xs:appinfo>
-						<relation>many-to-many</relation>
+						<relation>one-to-many</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>

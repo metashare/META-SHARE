@@ -343,46 +343,46 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             media_type = corpus_media.corpusMediaType
             for corpus_info in media_type.corpustextinfotype_model_set.all():
                 result.extend([lang.languageName for lang in
-                               corpus_info.languageInfo.all()])
+                               corpus_info.languageinfotype_model_set.all()])
             if media_type.corpusAudioInfo:
                 result.extend([lang.languageName for lang in
-                               media_type.corpusAudioInfo.languageInfo.all()])
+                               media_type.corpusAudioInfo.languageinfotype_model_set.all()])
             for corpus_info in media_type.corpusvideoinfotype_model_set.all():
                 result.extend([lang.languageName for lang in
-                               corpus_info.languageInfo.all()])
+                               corpus_info.languageinfotype_model_set.all()])
             if media_type.corpusTextNgramInfo:
                 result.extend([lang.languageName for lang in
-                            media_type.corpusTextNgramInfo.languageInfo.all()])
+                            media_type.corpusTextNgramInfo.languageinfotype_model_set.all()])
             if media_type.corpusImageInfo:
                 result.extend([lang.languageName for lang in
-                               media_type.corpusImageInfo.languageInfo.all()])
+                               media_type.corpusImageInfo.languageinfotype_model_set.all()])
 
         elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
             lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
             if lcr_media_type.lexicalConceptualResourceAudioInfo:
                 result.extend([lang.languageName for lang in lcr_media_type \
-                        .lexicalConceptualResourceAudioInfo.languageInfo.all()])
+                        .lexicalConceptualResourceAudioInfo.languageinfotype_model_set.all()])
             if lcr_media_type.lexicalConceptualResourceTextInfo:
                 result.extend([lang.languageName for lang in lcr_media_type \
-                        .lexicalConceptualResourceTextInfo.languageInfo.all()])
+                        .lexicalConceptualResourceTextInfo.languageinfotype_model_set.all()])
             if lcr_media_type.lexicalConceptualResourceVideoInfo:
                 result.extend([lang.languageName for lang in lcr_media_type \
-                        .lexicalConceptualResourceVideoInfo.languageInfo.all()])
+                        .lexicalConceptualResourceVideoInfo.languageinfotype_model_set.all()])
             if lcr_media_type.lexicalConceptualResourceImageInfo:
                 result.extend([lang.languageName for lang in lcr_media_type \
-                        .lexicalConceptualResourceImageInfo.languageInfo.all()])
+                        .lexicalConceptualResourceImageInfo.languageinfotype_model_set.all()])
 
         elif isinstance(corpus_media, languageDescriptionInfoType_model):
             ld_media_type = corpus_media.languageDescriptionMediaType
             if ld_media_type.languageDescriptionTextInfo:
                 result.extend([lang.languageName for lang in ld_media_type \
-                            .languageDescriptionTextInfo.languageInfo.all()])
+                            .languageDescriptionTextInfo.languageinfotype_model_set.all()])
             if ld_media_type.languageDescriptionVideoInfo:
                 result.extend([lang.languageName for lang in ld_media_type \
-                            .languageDescriptionVideoInfo.languageInfo.all()])
+                            .languageDescriptionVideoInfo.languageinfotype_model_set.all()])
             if ld_media_type.languageDescriptionImageInfo:
                 result.extend([lang.languageName for lang in ld_media_type \
-                            .languageDescriptionImageInfo.languageInfo.all()])
+                            .languageDescriptionImageInfo.languageinfotype_model_set.all()])
 
         elif isinstance(corpus_media, toolServiceInfoType_model):
             if corpus_media.inputInfo:
@@ -398,10 +398,10 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         """
         result = []
 
-        if obj.resourceComponentType.as_subclass().get_resourceType_display() \
+        if obj.resourceComponentType.as_subclass().resourceType \
                 != '':
             result.append(obj.resourceComponentType.as_subclass() \
-                          .get_resourceType_display())
+                          .resourceType)
 
         return result
 
@@ -415,48 +415,37 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         if isinstance(corpus_media, corpusInfoType_model):
             media_type = corpus_media.corpusMediaType
             for corpus_info in media_type.corpustextinfotype_model_set.all():
-                result.append(corpus_info.get_mediaType_display())
+                result.append(corpus_info.mediaType)
             if media_type.corpusAudioInfo:
-                result.append(media_type.corpusAudioInfo \
-                              .get_mediaType_display())
+                result.append(media_type.corpusAudioInfo.mediaType)
             for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-                result.append(corpus_info.get_mediaType_display())
+                result.append(corpus_info.mediaType)
             if media_type.corpusTextNgramInfo:
-                result.append(media_type.corpusTextNgramInfo \
-                              .get_mediaType_display())
+                result.append(media_type.corpusTextNgramInfo.mediaType)
             if media_type.corpusImageInfo:
-                result.append(media_type.corpusImageInfo \
-                              .get_mediaType_display())
+                result.append(media_type.corpusImageInfo.mediaType)
             if media_type.corpusTextNumericalInfo:
-                result.append(media_type.corpusTextNumericalInfo \
-                              .get_mediaType_display())
+                result.append(media_type.corpusTextNumericalInfo.mediaType)
 
         elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
             lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
             if lcr_media_type.lexicalConceptualResourceTextInfo:
-                result.append(lcr_media_type.lexicalConceptualResourceTextInfo \
-                              .get_mediaType_display())
+                result.append(lcr_media_type.lexicalConceptualResourceTextInfo.mediaType)
             if lcr_media_type.lexicalConceptualResourceAudioInfo:
-                result.append(lcr_media_type \
-                    .lexicalConceptualResourceAudioInfo.get_mediaType_display())
+                result.append(lcr_media_type.lexicalConceptualResourceAudioInfo.mediaType)
             if lcr_media_type.lexicalConceptualResourceVideoInfo:
-                result.append(lcr_media_type \
-                    .lexicalConceptualResourceVideoInfo.get_mediaType_display())
+                result.append(lcr_media_type.lexicalConceptualResourceVideoInfo.mediaType)
             if lcr_media_type.lexicalConceptualResourceImageInfo:
-                result.append(lcr_media_type \
-                    .lexicalConceptualResourceImageInfo.get_mediaType_display())
+                result.append(lcr_media_type.lexicalConceptualResourceImageInfo.mediaType)
 
         elif isinstance(corpus_media, languageDescriptionInfoType_model):
             ld_media_type = corpus_media.languageDescriptionMediaType
             if ld_media_type.languageDescriptionTextInfo:
-                result.append(ld_media_type.languageDescriptionTextInfo \
-                              .get_mediaType_display())
+                result.append(ld_media_type.languageDescriptionTextInfo.mediaType)
             if ld_media_type.languageDescriptionVideoInfo:
-                result.append(ld_media_type.languageDescriptionVideoInfo \
-                              .get_mediaType_display())
+                result.append(ld_media_type.languageDescriptionVideoInfo.mediaType)
             if ld_media_type.languageDescriptionImageInfo:
-                result.append(ld_media_type.languageDescriptionImageInfo \
-                              .get_mediaType_display())
+                result.append(ld_media_type.languageDescriptionImageInfo.mediaType)
 
         elif isinstance(corpus_media, toolServiceInfoType_model):
             if corpus_media.inputInfo:
@@ -682,11 +671,11 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             media_type = corpus_media.corpusMediaType
             for corpus_info in media_type.corpustextinfotype_model_set.all():
                 result.extend([mt for modalityInfo in
-                        corpus_info.modalityInfo.all() for mt in
+                        corpus_info.modalityinfotype_model_set.all() for mt in
                         modalityInfo.get_modalityType_display_list()])
             if media_type.corpusAudioInfo:
                 result.extend([mt for modalityInfo in
-                        media_type.corpusAudioInfo.modalityInfo.all()
+                        media_type.corpusAudioInfo.modalityinfotype_model_set.all()
                         for mt in modalityInfo.get_modalityType_display_list()])
             for corpus_info in media_type.corpusvideoinfotype_model_set.all():
                 if corpus_info.modalityInfo:
@@ -698,31 +687,31 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
                               .get_modalityType_display_list())
             if media_type.corpusImageInfo:
                 result.extend([mt for modalityInfo in
-                               media_type.corpusImageInfo.modalityInfo.all()
+                               media_type.corpusImageInfo.modalityinfotype_model_set.all()
                                for mt in
                                modalityInfo.get_modalityType_display_list()])
             if media_type.corpusTextNumericalInfo:
                 result.extend([mt for modalityInfo in
-                        media_type.corpusTextNumericalInfo.modalityInfo.all()
+                        media_type.corpusTextNumericalInfo.modalityinfotype_model_set.all()
                         for mt in modalityInfo.get_modalityType_display_list()])
 
         elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
             lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
             if lcr_media_type.lexicalConceptualResourceTextInfo:
                 result.extend([mt for modalityInfo in lcr_media_type \
-                        .lexicalConceptualResourceTextInfo.modalityInfo.all()
+                        .lexicalConceptualResourceTextInfo.modalityinfotype_model_set.all()
                         for mt in modalityInfo.get_modalityType_display_list()])
             if lcr_media_type.lexicalConceptualResourceAudioInfo:
                 result.extend([mt for modalityInfo in lcr_media_type \
-                        .lexicalConceptualResourceAudioInfo.modalityInfo.all()
+                        .lexicalConceptualResourceAudioInfo.modalityinfotype_model_set.all()
                         for mt in modalityInfo.get_modalityType_display_list()])
             if lcr_media_type.lexicalConceptualResourceVideoInfo:
                 result.extend([mt for modalityInfo in lcr_media_type \
-                        .lexicalConceptualResourceVideoInfo.modalityInfo.all()
+                        .lexicalConceptualResourceVideoInfo.modalityinfotype_model_set.all()
                         for mt in modalityInfo.get_modalityType_display_list()])
             if lcr_media_type.lexicalConceptualResourceImageInfo:
                 result.extend([mt for modalityInfo in lcr_media_type \
-                        .lexicalConceptualResourceImageInfo.modalityInfo.all()
+                        .lexicalConceptualResourceImageInfo.modalityinfotype_model_set.all()
                         for mt in modalityInfo.get_modalityType_display_list()])
 
         elif isinstance(corpus_media, languageDescriptionInfoType_model):
@@ -733,11 +722,11 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
                               .modalityInfo.get_modalityType_display_list())
             if ld_media_type.languageDescriptionVideoInfo:
                 result.extend([mt for modalityInfo in ld_media_type \
-                        .languageDescriptionVideoInfo.modalityInfo.all()
+                        .languageDescriptionVideoInfo.modalityinfotype_model_set.all()
                         for mt in modalityInfo.get_modalityType_display_list()])
             if ld_media_type.languageDescriptionImageInfo:
                 result.extend([mt for modalityInfo in ld_media_type \
-                        .languageDescriptionImageInfo.modalityInfo.all()
+                        .languageDescriptionImageInfo.modalityinfotype_model_set.all()
                         for mt in modalityInfo.get_modalityType_display_list()])
 
         elif isinstance(corpus_media, toolServiceInfoType_model):
@@ -761,10 +750,10 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             media_type = corpus_media.corpusMediaType
             for corpus_info in media_type.corpustextinfotype_model_set.all():
                 mimeType_list.extend([mimeType.mimeType for mimeType in
-                                      corpus_info.textFormatInfo.all()])
+                                      corpus_info.textformatinfotype_model_set.all()])
             if media_type.corpusAudioInfo:
                 mimeType_list.extend([mimeType.mimeType for mimeType in
-                        media_type.corpusAudioInfo.audioFormatInfo.all()])
+                        media_type.corpusAudioInfo.audioformatinfotype_model_set.all()])
             for corpus_info in media_type.corpusvideoinfotype_model_set.all():
                 mimeType_list.extend([mimeType.mimeType for mimeType in
                                       corpus_info.videoFormatInfo.all()])
@@ -780,11 +769,11 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             if lcr_media_type.lexicalConceptualResourceTextInfo:
                 mimeType_list.extend([mimeType.mimeType for mimeType in
                         lcr_media_type.lexicalConceptualResourceTextInfo \
-                            .textFormatInfo.all()])
+                            .textformatinfotype_model_set.all()])
             if lcr_media_type.lexicalConceptualResourceAudioInfo:
                 mimeType_list.extend([mimeType.mimeType for mimeType in
                         lcr_media_type.lexicalConceptualResourceAudioInfo \
-                            .audioFormatInfo.all()])
+                            .audioformatinfotype_model_set.all()])
             if lcr_media_type.lexicalConceptualResourceVideoInfo:
                 mimeType_list.extend([mimeType.mimeType for mimeType in
                         lcr_media_type.lexicalConceptualResourceVideoInfo \
@@ -799,7 +788,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             if ld_media_type.languageDescriptionTextInfo:
                 mimeType_list.extend([mimeType.mimeType for mimeType in
                         ld_media_type.languageDescriptionTextInfo \
-                            .textFormatInfo.all()])
+                            .textformatinfotype_model_set.all()])
             if ld_media_type.languageDescriptionVideoInfo:
                 mimeType_list.extend([mimeType.mimeType for mimeType in
                         ld_media_type.languageDescriptionVideoInfo \
@@ -871,56 +860,56 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             media_type = corpus_media.corpusMediaType
             for corpus_info in media_type.corpustextinfotype_model_set.all():
                 result.extend([domain_info.domain for domain_info in
-                               corpus_info.domainInfo.all()])
+                               corpus_info.domaininfotype_model_set.all()])
             if media_type.corpusAudioInfo:
                 result.extend([domain_info.domain for domain_info in
-                               media_type.corpusAudioInfo.domainInfo.all()])
+                               media_type.corpusAudioInfo.domaininfotype_model_set.all()])
             for corpus_info in media_type.corpusvideoinfotype_model_set.all():
                 result.extend([domain_info.domain for domain_info in
-                               corpus_info.domainInfo.all()])
+                               corpus_info.domaininfotype_model_set.all()])
             if media_type.corpusTextNgramInfo:
                 result.extend([domain_info.domain for domain_info in
-                               media_type.corpusTextNgramInfo.domainInfo.all()])
+                               media_type.corpusTextNgramInfo.domaininfotype_model_set.all()])
             if media_type.corpusImageInfo:
                 result.extend([domain_info.domain for domain_info in
-                               media_type.corpusImageInfo.domainInfo.all()])
+                               media_type.corpusImageInfo.domaininfotype_model_set.all()])
             if media_type.corpusTextNumericalInfo:
                 result.extend([domain_info.domain for domain_info in
-                        media_type.corpusTextNumericalInfo.domainInfo.all()])
+                        media_type.corpusTextNumericalInfo.domaininfotype_model_set.all()])
 
         elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
             lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
             if lcr_media_type.lexicalConceptualResourceTextInfo:
                 result.extend([domain_info.domain for domain_info in
                         lcr_media_type.lexicalConceptualResourceTextInfo \
-                                .domainInfo.all()])
+                                .domaininfotype_model_set.all()])
             if lcr_media_type.lexicalConceptualResourceAudioInfo:
                 result.extend([domain_info.domain for domain_info in
                         lcr_media_type.lexicalConceptualResourceAudioInfo \
-                                .domainInfo.all()])
+                                .domaininfotype_model_set.all()])
             if lcr_media_type.lexicalConceptualResourceVideoInfo:
                 result.extend([domain_info.domain for domain_info in
                         lcr_media_type.lexicalConceptualResourceVideoInfo \
-                                .domainInfo.all()])
+                                .domaininfotype_model_set.all()])
             if lcr_media_type.lexicalConceptualResourceImageInfo:
                 result.extend([domain_info.domain for domain_info in
                         lcr_media_type.lexicalConceptualResourceImageInfo \
-                                .domainInfo.all()])
+                                .domaininfotype_model_set.all()])
 
         elif isinstance(corpus_media, languageDescriptionInfoType_model):
             ld_media_type = corpus_media.languageDescriptionMediaType
             if ld_media_type.languageDescriptionTextInfo:
                 result.extend([domain_info.domain for domain_info in
                                ld_media_type.languageDescriptionTextInfo \
-                                    .domainInfo.all()])
+                                    .domaininfotype_model_set.all()])
             if ld_media_type.languageDescriptionVideoInfo:
                 result.extend([domain_info.domain for domain_info in
                                ld_media_type.languageDescriptionVideoInfo \
-                                    .domainInfo.all()])
+                                    .domaininfotype_model_set.all()])
             if ld_media_type.languageDescriptionImageInfo:
                 result.extend([domain_info.domain for domain_info in
                                ld_media_type.languageDescriptionImageInfo \
-                                    .domainInfo.all()])
+                                    .domaininfotype_model_set.all()])
 
         return result
 
@@ -935,56 +924,56 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             media_type = corpus_media.corpusMediaType
             for corpus_info in media_type.corpustextinfotype_model_set.all():
                 result.extend([gc_info.geographicCoverage for gc_info in
-                               corpus_info.geographicCoverageInfo.all()])
+                               corpus_info.geographiccoverageinfotype_model_set.all()])
             if media_type.corpusAudioInfo:
                 result.extend([gc_info.geographicCoverage for gc_info in
                                media_type.corpusAudioInfo \
-                                    .geographicCoverageInfo.all()])
+                                    .geographiccoverageinfotype_model_set.all()])
             for corpus_info in media_type.corpusvideoinfotype_model_set.all():
                 result.extend([gc_info.geographicCoverage for gc_info in
-                               corpus_info.geographicCoverageInfo.all()])
+                               corpus_info.geographiccoverageinfotype_model_set.all()])
             if media_type.corpusTextNgramInfo:
                 result.extend([gc_info.geographicCoverage for gc_info in
                                media_type.corpusTextNgramInfo \
-                                    .geographicCoverageInfo.all()])
+                                    .geographiccoverageinfotype_model_set.all()])
             if media_type.corpusImageInfo:
                 result.extend([gc_info.geographicCoverage for gc_info in
                                media_type.corpusImageInfo \
-                                    .geographicCoverageInfo.all()])
+                                    .geographiccoverageinfotype_model_set.all()])
 
         elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
             lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
             if lcr_media_type.lexicalConceptualResourceTextInfo:
                 result.extend([gc_info.geographicCoverage for gc_info in
                         lcr_media_type.lexicalConceptualResourceTextInfo \
-                            .geographicCoverageInfo.all()])
+                            .geographiccoverageinfotype_model_set.all()])
             if lcr_media_type.lexicalConceptualResourceAudioInfo:
                 result.extend([gc_info.geographicCoverage for gc_info in
                         lcr_media_type.lexicalConceptualResourceAudioInfo \
-                            .geographicCoverageInfo.all()])
+                            .geographiccoverageinfotype_model_set.all()])
             if lcr_media_type.lexicalConceptualResourceVideoInfo:
                 result.extend([gc_info.geographicCoverage for gc_info in
                         lcr_media_type.lexicalConceptualResourceVideoInfo \
-                            .geographicCoverageInfo.all()])
+                            .geographiccoverageinfotype_model_set.all()])
             if lcr_media_type.lexicalConceptualResourceImageInfo:
                 result.extend([gc_info.geographicCoverage for gc_info in
                         lcr_media_type.lexicalConceptualResourceImageInfo \
-                            .geographicCoverageInfo.all()])
+                            .geographiccoverageinfotype_model_set.all()])
 
         elif isinstance(corpus_media, languageDescriptionInfoType_model):
             ld_media_type = corpus_media.languageDescriptionMediaType
             if ld_media_type.languageDescriptionTextInfo:
                 result.extend([gc_info.geographicCoverage for gc_info in
                                ld_media_type.languageDescriptionTextInfo \
-                                    .geographicCoverageInfo.all()])
+                                    .geographiccoverageinfotype_model_set.all()])
             if ld_media_type.languageDescriptionVideoInfo:
                 result.extend([gc_info.geographicCoverage for gc_info in
                                ld_media_type.languageDescriptionVideoInfo \
-                                    .geographicCoverageInfo.all()])
+                                    .geographiccoverageinfotype_model_set.all()])
             if ld_media_type.languageDescriptionImageInfo:
                 result.extend([gc_info.geographicCoverage for gc_info in
                                ld_media_type.languageDescriptionImageInfo \
-                                    .geographicCoverageInfo.all()])
+                                    .geographiccoverageinfotype_model_set.all()])
 
         return result
 
@@ -999,53 +988,53 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             media_type = corpus_media.corpusMediaType
             for corpus_info in media_type.corpustextinfotype_model_set.all():
                 result.extend([timeCoverage.timeCoverage for timeCoverage in
-                               corpus_info.timeCoverageInfo.all()])
+                               corpus_info.timecoverageinfotype_model_set.all()])
             if media_type.corpusAudioInfo:
                 result.extend([timeCoverage.timeCoverage for timeCoverage in
-                        media_type.corpusAudioInfo.timeCoverageInfo.all()])
+                        media_type.corpusAudioInfo.timecoverageinfotype_model_set.all()])
             for corpus_info in media_type.corpusvideoinfotype_model_set.all():
                 result.extend([timeCoverage.timeCoverage for timeCoverage in
-                               corpus_info.timeCoverageInfo.all()])
+                               corpus_info.timecoverageinfotype_model_set.all()])
             if media_type.corpusTextNgramInfo:
                 result.extend([timeCoverage.timeCoverage for timeCoverage in
-                        media_type.corpusTextNgramInfo.timeCoverageInfo.all()])
+                        media_type.corpusTextNgramInfo.timecoverageinfotype_model_set.all()])
             if media_type.corpusImageInfo:
                 result.extend([timeCoverage.timeCoverage for timeCoverage in
-                        media_type.corpusImageInfo.timeCoverageInfo.all()])
+                        media_type.corpusImageInfo.timecoverageinfotype_model_set.all()])
 
         elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
             lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
             if lcr_media_type.lexicalConceptualResourceTextInfo:
                 result.extend([timeCoverage.timeCoverage for timeCoverage in
                             lcr_media_type.lexicalConceptualResourceTextInfo \
-                                .timeCoverageInfo.all()])
+                                .timecoverageinfotype_model_set.all()])
             if lcr_media_type.lexicalConceptualResourceAudioInfo:
                 result.extend([timeCoverage.timeCoverage for timeCoverage in
                             lcr_media_type.lexicalConceptualResourceAudioInfo \
-                                .timeCoverageInfo.all()])
+                                .timecoverageinfotype_model_set.all()])
             if lcr_media_type.lexicalConceptualResourceVideoInfo:
                 result.extend([timeCoverage.timeCoverage for timeCoverage in
                             lcr_media_type.lexicalConceptualResourceVideoInfo \
-                                .timeCoverageInfo.all()])
+                                .timecoverageinfotype_model_set.all()])
             if lcr_media_type.lexicalConceptualResourceImageInfo:
                 result.extend([timeCoverage.timeCoverage for timeCoverage in
                             lcr_media_type.lexicalConceptualResourceImageInfo \
-                                .timeCoverageInfo.all()])
+                                .timecoverageinfotype_model_set.all()])
 
         elif isinstance(corpus_media, languageDescriptionInfoType_model):
             ld_media_type = corpus_media.languageDescriptionMediaType
             if ld_media_type.languageDescriptionTextInfo:
                 result.extend([timeCoverage.timeCoverage for timeCoverage in
                         ld_media_type.languageDescriptionTextInfo \
-                            .timeCoverageInfo.all()])
+                            .timecoverageinfotype_model_set.all()])
             if ld_media_type.languageDescriptionVideoInfo:
                 result.extend([timeCoverage.timeCoverage for timeCoverage in
                         ld_media_type.languageDescriptionVideoInfo \
-                            .timeCoverageInfo.all()])
+                            .timecoverageinfotype_model_set.all()])
             if ld_media_type.languageDescriptionImageInfo:
                 result.extend([timeCoverage.timeCoverage for timeCoverage in
                         ld_media_type.languageDescriptionImageInfo \
-                            .timeCoverageInfo.all()])
+                            .timecoverageinfotype_model_set.all()])
 
         return result
 
@@ -1060,12 +1049,12 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             media_type = corpus_media.corpusMediaType
             for corpus_info in media_type.corpustextinfotype_model_set.all():
                 sf = [class_info.subject_topic for class_info in
-                    corpus_info.textClassificationInfo.all()]
+                    corpus_info.textclassificationinfotype_model_set.all()]
                 if sf != ['']:
                     result.extend(sf)
             if media_type.corpusAudioInfo:
                 sf = [class_info.subject_topic for class_info in
-                    media_type.corpusAudioInfo.audioClassificationInfo.all()]
+                    media_type.corpusAudioInfo.audioclassificationinfotype_model_set.all()]
                 if sf != ['']:
                     result.extend(sf)
             for corpus_info in media_type.corpusvideoinfotype_model_set.all():
@@ -1076,7 +1065,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             if media_type.corpusTextNgramInfo:
                 sf = [class_info.subject_topic for class_info in
                         media_type.corpusTextNgramInfo \
-                            .textClassificationInfo.all()]
+                            .textclassificationinfotype_model_set.all()]
                 if sf != ['']:
                     result.extend(sf)
             if media_type.corpusImageInfo:

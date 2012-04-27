@@ -1,36 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourceInfo xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema">
+<resourceInfo xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema">
 <identificationInfo>
 <resourceName lang="English">French-Dutch Lexicon (LanTmark)</resourceName>
 <resourceName lang="French">Lexique français-hollandais (LanTmark)</resourceName>
 <description lang="English">General and Specialised vocabularies for transferEntries: General Vocabulary (34 000), Administrative (18 000), Data processing (10 000).Format: ASCII format with ISO 8859-1 character set. A lexicon file contains entries with feature-value pairs on each line and separators between entries. Medium: Floppy disk, QIC 150 MB cartridge tape General French-Dutch LanTmark lexicon is divided into the following categories: nouns (25,000), verbs (3,000), adjectives (5,000), Adverbs (1,000).Administrative vocabulary is divided into the following categories: nouns (16,000), verbs (2,000).Data processing vocabulary has 10,000 transfer nouns.Each entry contains domain information, source language disambiguation, features, and target language actions.</description>
 <description lang="French">Vocabulaires génériques et spécialisés pour le transfertVocabulaire général : 34 000, Administratif, 18 000, Traitement de données : 10 000Format: ASCII : jeu de caractères ISO 8859-1.Support : disquette, cartouche QIC 150 MBCe lexique général français-hollandais est réparti selon les catégories suivantes : noms (25.000), verbes (3.000), adjectifs (5.000), adverbes (1.000).Le vocabulaire Administratif est réparti selon les catégories suivantes : noms (16.000), verbes (2.000).Le vocabulaire traitement de données contient 10 000 noms de transfert.Chaque entrée contient information sur le domaine, désambiguisation sur la langue source, des traits, des actions sur la langue cible.</description>
 <resourceShortName/>
-<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <url>http://catalog.elra.info/product_info.php?products_id=143</url>
+<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 <identifier>ELRA-M0006_02</identifier>
 </identificationInfo>
-<metadataInfo>
-<metadataCreationDate>2005-05-12</metadataCreationDate>
-<metadataCreator>
-<surname lang="en-us">Valérie</surname>
-<givenName lang="en-us">Mapelli</givenName>
-<communicationInfo>
-<email>mapelli@elda.org</email>
-<url>http://www.elda.org</url>
-<address>55-57 rue Brillat-Savarin</address>
-<zipcode>75013</zipcode>
-<city>Paris</city>
-<country>France</country>
-<telephoneNumber>+1 43 13 33 33</telephoneNumber>
-<faxNumber>+1 43 14 33 30</faxNumber>
-</communicationInfo>
-</metadataCreator>
-</metadataInfo>
-<versionInfo>
-<version>1.0</version>
-<lastDateUpdated>2005-02-25</lastDateUpdated>
-</versionInfo>
 <distributionInfo>
 <availability>available-restrictedUse</availability>
 <licenceInfo>
@@ -39,7 +18,7 @@
 <price>17280.00</price>
 <userNature>commercial</userNature>
 <membershipInfo>
-<member>True</member>
+<member>true</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -49,7 +28,7 @@
 <price>17280.00</price>
 <userNature>commercial</userNature>
 <membershipInfo>
-<member>True</member>
+<member>true</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -59,7 +38,7 @@
 <price>2160.00</price>
 <userNature>academic</userNature>
 <membershipInfo>
-<member>True</member>
+<member>true</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -69,7 +48,7 @@
 <price>17280.00</price>
 <userNature>academic</userNature>
 <membershipInfo>
-<member>True</member>
+<member>true</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -79,7 +58,7 @@
 <price>28800.00</price>
 <userNature>academic</userNature>
 <membershipInfo>
-<member>False</member>
+<member>false</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -89,7 +68,7 @@
 <price>3600.00</price>
 <userNature>academic</userNature>
 <membershipInfo>
-<member>False</member>
+<member>false</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -99,7 +78,7 @@
 <price>28800.00</price>
 <userNature>commercial</userNature>
 <membershipInfo>
-<member>False</member>
+<member>false</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
@@ -109,12 +88,33 @@
 <price>28800.00</price>
 <userNature>commercial</userNature>
 <membershipInfo>
-<member>False</member>
+<member>false</member>
 <membershipInstitution>ELRA</membershipInstitution>
 </membershipInfo>
 </licenceInfo>
 <availabilityStartDate>1997-01-23</availabilityStartDate>
 </distributionInfo>
+<contactPerson>
+<surname lang="en-us">Valérie</surname>
+<givenName lang="en-us">Mapelli</givenName>
+<communicationInfo>
+<email>mapelli@elda.org</email>
+<url>http://www.elda.org</url>
+<address>55-57 rue Brillat-Savarin</address>
+<zipCode>75013</zipCode>
+<city>Paris</city>
+<country>France</country>
+<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+<faxNumber>+1 43 14 33 30</faxNumber>
+</communicationInfo>
+</contactPerson>
+<metadataInfo>
+<metadataCreationDate>2005-05-12</metadataCreationDate>
+</metadataInfo>
+<versionInfo>
+<version>1.0</version>
+<lastDateUpdated>2005-02-25</lastDateUpdated>
+</versionInfo>
 <resourceComponentType>
 <lexicalConceptualResourceInfo>
 <resourceType>lexicalConceptualResource</resourceType>
@@ -141,6 +141,10 @@
 </sizePerLanguageVariety>
 </languageVarietyInfo>
 </languageInfo>
+<sizeInfo>
+<size>no size available</size>
+<sizeUnit>other</sizeUnit>
+</sizeInfo>
 </lexicalConceptualResourceTextInfo>
 </lexicalConceptualResourceMediaType>
 </lexicalConceptualResourceInfo>

@@ -14,6 +14,7 @@ from zipfile import is_zipfile, ZipFile
 from django.contrib.admin.models import LogEntry, ADDITION
 from django.contrib.contenttypes.models import ContentType
 from django.utils.encoding import force_unicode
+from xml.etree.ElementTree import ElementTree
 
 # Setup logging support.
 logging.basicConfig(level=LOG_LEVEL)
@@ -144,4 +145,3 @@ def import_from_file(filehandle, descriptor, targetstatus, owner_id=None):
             except Exception as problem:
                 erroneous_descriptors.append((xml_name, problem))
     return imported_resources, erroneous_descriptors
-

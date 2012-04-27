@@ -1,5 +1,6 @@
 from collections import OrderedDict
 
+import os
 import sys
 import logging
 from parse_xsd import ElementDict, XschemaElementBase, XschemaElement
@@ -191,11 +192,24 @@ UNICODE_CHOICE_TYPE_TEMPLATE='''\
 
 INLINE_TEMPLATE='''\
 # pylint: disable-msg=C0103
-class {}_model_inline(SchemaModelInline):
+class {}_model_inline{}(SchemaModelInline):
     model = {}_model
-    collapse = {}
+{}
 
 '''
+
+INLINE_SNIPPET_COLLAPSE='''\
+    collapse = True
+'''
+
+INLINE_SNIPPET_TABULAR='''\
+    template = 'admin/edit_inline/tabular.html'
+'''
+
+INLINE_SNIPPET_FK_NAME='''\
+    fk_name = 'back_to_{}_model'
+'''
+
 
 MANUAL_ADMIN_REGISTRATION_TEMPLATE = '''
 
@@ -207,7 +221,9 @@ COMPLEX_MODEL_TEMPLATE='''
 # pylint: disable-msg=C0103
 class {}_model({}):
 {}
-    class Meta:\n        verbose_name = "{}"
+    class Meta:
+        verbose_name = "{}"
+{}
 '''
 
 CHOICE_SUPERCLASS_TEMPLATE = '''
@@ -216,8 +232,13 @@ class {}_model({}):
 {}
     __schema_name__ = \'SUBCLASSABLE\'
 
-    class Meta:\n        verbose_name = "{}"
+    class Meta:
+        verbose_name = "{}"
+{}
+'''
 
+VERBOSE_NAME_PLURAL_SNIPPET = '''\
+        verbose_name_plural = "{}"
 '''
 
 CHOICE_STRING_SUB_CLASS_ADMIN_TEMPLATE = '''
@@ -431,7 +452,7 @@ class Clazz(object):
 
     @classmethod
     def is_one_to_many(cls, member):
-        prefix, data_type = get_prefix_name(member.get_data_type())
+        dummy, data_type = get_prefix_name(member.get_data_type())
         return data_type not in Simple_type_table \
             and data_type not in cls.simple_type_table \
             and data_type != 'myString' \
@@ -442,7 +463,21 @@ class Clazz(object):
         if cls.is_one_to_many(member):
             data_type = member.get_data_type()
             child_clazz = cls.ClazzDict[data_type]
-            return isinstance(child_clazz.backreference, ClazzBaseMember)
+            return isinstance(child_clazz.backreference, ClazzBaseMember) or \
+                isinstance(child_clazz.backreference, tuple)
+
+    @classmethod
+    def has_multiple_one_to_many_references(cls, member):
+        '''
+        Returns True if member is the many side of more than one one-to-many reference, False otherwise.
+        '''
+        if cls.is_one_to_many(member):
+            data_type = member.get_data_type()
+            child_clazz = cls.ClazzDict[data_type]
+            if isinstance(child_clazz.backreference, tuple) and len(child_clazz.backreference) > 1:
+                return True
+        return False
+        
 
     @classmethod
     def establish_one_to_many(cls):
@@ -488,15 +523,8 @@ class Clazz(object):
 
     def set_one_to_many(self, clazz_member):
         if self.backreference is None:
-            self.backreference = clazz_member
-        else:
-            #raise Exception
-            if isinstance(self.backreference, ClazzBaseMember):
-                logging.warn('type used twice for one-to-many: from %s to %s' %
-                     (self.backreference.source.name, self.name))
-            self.backreference = ''
-            logging.warn('type used twice for one-to-many: from %s to %s' %
-                (clazz_member.source.name, self.name))
+            self.backreference = ()
+        self.backreference += (clazz_member, )
 
     def is_empty(self):
         return not self.members
@@ -540,8 +568,11 @@ class Clazz(object):
                         else:
                             choice_type.choice_parent = self
 
-                        # Choice admin model inlines may not be collapsed.
-                        self.inlines.append((member.name, data_type, False))
+                        _inline_classname_suffix = ''
+                        # Choice admin model inlines may not be collapsed,
+                        # so do not use the INLINE_COLLAPSE_SNIPPET
+                        _inline_template_snippets = ''
+                        self.inlines.append((member.name, _inline_classname_suffix, data_type, _inline_template_snippets))
 
                     else:
                         self.choice_of.append((member.name, data_type))
@@ -601,8 +632,22 @@ class Clazz(object):
                     # ManyToManyField, backward pointer in case of one-to-many
                     if self.is_valid_one_to_many(member):
                         # replace by backward pointing shadow field
+                        _inline_classname_suffix = ''
+                        _inline_template_snippets = ''
                         _optional = member.get_required() != 'REQUIRED'
-                        self.inlines.append((name, data_type, _optional))
+                        _inline_type = member.child.getAppInfo('inline-type')
+                        _tabular = (_inline_type == 'tabular')
+                        if _tabular:
+                            _inline_template_snippets += INLINE_SNIPPET_TABULAR
+                        if _optional and not _tabular:
+                            _inline_template_snippets += INLINE_SNIPPET_COLLAPSE
+                        if self.has_multiple_one_to_many_references(member):
+                            member_data_type = member.get_generated_type(member.source.name)
+                            # TODO: remove warning
+                            logging.warn('Multiple one-to-many: {}->{}'.format(member_data_type, data_type ))
+                            _inline_classname_suffix = '_{}_model'.format(member_data_type)
+                            _inline_template_snippets += INLINE_SNIPPET_FK_NAME.format(member_data_type.lower())
+                        self.inlines.append((name, _inline_classname_suffix, data_type, _inline_template_snippets))
 
                     else:
                         #schema_classes[name] = data_type
@@ -648,6 +693,9 @@ class Clazz(object):
                 required = 'blank=True, '
             self.generate_simple_field(name, 'MetaBooleanField', options, required)
         elif data_type in String_type_table:
+            fixed_value = member.get_fixed()
+            if fixed_value:
+                options += 'default="{0}", editable=False, '.format(fixed_value)
             if not member.is_required():
                 options += 'blank=True, '
             if isinstance(member.get_data_type_chain(), list) and \
@@ -756,7 +804,7 @@ class Clazz(object):
                 self.wrtmodels('    # OneToMany field: {0}\n'.format(name))
                 self.wrtforms('    # OneToMany field: {0}\n'.format(name))
 
-    def generate_backref_member(self):
+    def generate_backref_members(self):
         """
         Generate a backreference (inverse one-to-many pointer)
 
@@ -765,28 +813,35 @@ class Clazz(object):
         """
         # treat a one-to-many relation as reverse foreign key
         if isinstance(self.backreference, ClazzBaseMember):
-            member = self.backreference
-            #name = member.get_generated_name()
-            data_type = member.get_generated_type(member.source.name)
+            self.generate_one_backref_member(self.backreference, required=True)
+        elif isinstance(self.backreference, tuple):
+            for member in self.backreference:
+                self.generate_one_backref_member(member, required=False)
 
-            # cfedermann: disabled related_name generation as it breaks export
-            # of _model_set fields at the moment. This needs to be checked!
-            options = ''#'related_name=\'back_to_{0}_model_from_{1}_model\', '\
-            #  .format(data_type.lower(), self.name.lower())
-            # Marc, 27 Feb 12: for the editor we need back references to corpusMediaType
-            # to be optional at least in the database:
-            if data_type == 'corpusMediaTypeType':
-                options += ' null=True'
+    def generate_one_backref_member(self, member, required):
+        #name = member.get_generated_name()
+        data_type = member.get_generated_type(member.source.name)
 
-            # back reference fields are ALWAYS required
-            #if not member.is_required():
-            #    options = options + ', blank=True'
-            #else:
-            #    options = options + ', blank=False'
-            self.wrtmodels(#'    %s_BACK = models.ForeignKey("%s_model"%s)\n\n' % (
-              '    back_to_{0}_model = models.ForeignKey("{1}_model", {2})\n\n'
-              .format(data_type.lower(), data_type, options, ))
-            # TODO what about forms
+        # cfedermann: disabled related_name generation as it breaks export
+        # of _model_set fields at the moment. This needs to be checked!
+        options = ''#'related_name=\'back_to_{0}_model_from_{1}_model\', '\
+        #  .format(data_type.lower(), self.name.lower())
+        # Marc, 27 Feb 12: for the editor we need back references to corpusMediaType
+        # to be optional at least in the database:
+        if data_type == 'corpusMediaTypeType':
+            required = False
+        if not required:
+            options += ' blank=True, null=True'
+
+        # back reference fields are ALWAYS required
+        #if not member.is_required():
+        #    options = options + ', blank=True'
+        #else:
+        #    options = options + ', blank=False'
+        self.wrtmodels(#'    %s_BACK = models.ForeignKey("%s_model"%s)\n\n' % (
+          '    back_to_{0}_model = models.ForeignKey("{1}_model", {2})\n\n'
+          .format(data_type.lower(), data_type, options, ))
+        # TODO what about forms
 
     def generate_unicode_method(self):
         rendering_hint = self.schema_element.getAppInfo('render-short')
@@ -815,13 +870,17 @@ class Clazz(object):
         verbose_name = self.schema_element.getAppInfo("label")
         if not verbose_name:
             verbose_name = getVerboseName(self.name)
+        verbose_name_plural = self.schema_element.getAppInfo("label-plural")
+        plural_snippet  = ''
+        if verbose_name_plural:
+            plural_snippet = VERBOSE_NAME_PLURAL_SNIPPET.format(verbose_name_plural)
         self.wrtmodels(CHOICE_SUPERCLASS_TEMPLATE.format(
           self.name, CHOICE_TYPE_SUPERCLASS,
-          self.schema_element.getDocumentation(), verbose_name))
+          self.schema_element.getDocumentation(), verbose_name, plural_snippet))
         
         self.wrtforms('\nclass %s_form(forms.Form):\n' % (self.name, ))
 
-        self.generate_backref_member()
+        self.generate_backref_members()
 
     def generate_model_(self):
         """
@@ -840,8 +899,12 @@ class Clazz(object):
         verbose_name = self.schema_element.getAppInfo("label")
         if not verbose_name:
             verbose_name = getVerboseName(self.name)
+        verbose_name_plural = self.schema_element.getAppInfo("label-plural")
+        plural_snippet  = ''
+        if verbose_name_plural:
+            plural_snippet = VERBOSE_NAME_PLURAL_SNIPPET.format(verbose_name_plural)
         self.wrtmodels(COMPLEX_MODEL_TEMPLATE.format(self.name,
-          model_superclass, documentation, verbose_name))
+          model_superclass, documentation, verbose_name, plural_snippet))
 
         self.wrtforms('\nclass %s_form(forms.Form):\n' % (self.name, ))
         if self.is_empty():
@@ -953,7 +1016,7 @@ class Clazz(object):
             self.wrtmodels('\n')
 
         if not self.choice_parent:
-            self.generate_backref_member()
+            self.generate_backref_members()
         self.generate_unicode_method()
 
         if self.name == 'resourceInfoType':
@@ -983,12 +1046,12 @@ class Clazz(object):
         return result
 
     @classmethod
-    def generate(cls, prefix, root, package_prefix):
+    def generate(cls, outDirName, prefix, root, package_prefix):
         cls.establish_one_to_many()
 
-        models_file_name = 'models.py'
-        forms_file_name = 'forms.py'
-        admin_file_name = 'admin.py'
+        models_file_name = os.path.join(outDirName, 'models.py')
+        forms_file_name = os.path.join(outDirName, 'forms.py')
+        admin_file_name = os.path.join(outDirName, 'admin.py')
 
         models_writer = Writer(models_file_name)
         forms_writer = Writer(forms_file_name)
@@ -1075,7 +1138,7 @@ class Clazz(object):
         _inlines.sort(key=lambda x:x[0])
         for _inline in _inlines:
             cls.wrtadmin(INLINE_TEMPLATE.format(_inline[0], _inline[1],
-              _inline[2]))
+              _inline[2], _inline[3]))
 
         for clazz in clazz_list:
             cls.wrtadmin('admin.site.register({}_model, SchemaModelAdmin)\n'.format(
@@ -1099,7 +1162,7 @@ class ClazzBaseMember(object):
 
     def get_generated_name(self):
         name = self.get_name()
-        prefix, name = get_prefix_name(name)
+        dummy, name = get_prefix_name(name)
         name = cleanupName(name)
         if name == 'id':
             name += 'x'
@@ -1109,10 +1172,10 @@ class ClazzBaseMember(object):
         return name
 
     def get_generated_type(self, data_type):
-        prefix, data_type = get_prefix_name(data_type)
+        dummy, data_type = get_prefix_name(data_type)
         if data_type in Clazz.simple_type_table:
             data_type = Clazz.simple_type_table[data_type]
-            prefix, data_type = get_prefix_name(data_type.type_name)
+            dummy, data_type = get_prefix_name(data_type.type_name)
         data_type = cleanupName(data_type)
         #data_type = data_type[0].upper() + data_type[1:]
         return data_type
@@ -1192,6 +1255,14 @@ class ClazzMember(ClazzBaseMember):
         if isinstance(self.child, str):
             return []
         return self.child.getValues()
+    
+    def get_fixed(self):
+        if isinstance(self.child, str):
+            return None
+        attrs = self.child.getAttrs()
+        if 'fixed' in attrs:
+            return attrs['fixed']
+        return None
 
     def is_one_to_many(self):
         if not self.is_unbounded():

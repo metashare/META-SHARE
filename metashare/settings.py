@@ -32,6 +32,14 @@ else:
 LOG_HANDLER.setLevel(level=LOG_LEVEL)
 LOG_HANDLER.setFormatter(LOG_FORMATTER)
 
+# Maximum size of files uploaded as resrouce data.
+# The default is a cautious value in order to protect the server
+# against resource starvation; if you think your server can handle
+# bigger files, feel free to try and increase this value.
+MAXIMUM_UPLOAD_SIZE = 10 * 1024 * 1024
+
+
+
 # Import local settings, i.e., DEBUG, TEMPLATE_DEBUG, TIME_ZONE,
 # SECRET_KEY, DATABASE_* settings and ADMINS.
 from local_settings import *

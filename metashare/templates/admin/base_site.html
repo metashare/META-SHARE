@@ -22,10 +22,19 @@
             <li><a href="{% url editor:repository_personinfotype_model_add %}">Person</a></li>
             <li><a href="{% url editor:repository_organizationinfotype_model_add %}">Organization</a></li>
             <li><a href="{% url editor:repository_projectinfotype_model_add %}">Project</a></li>
+            <li><a href="{% url editor:repository_documentinfotype_model_add %}">Document</a></li>
+          </ul>
+        </li>
+        <li title="Enrich existing metasources"><a href="#">Update</a>
+          <ul>
+            <li><a href="{% url editor:repository_resourceinfotype_model_changelist %}">Resource</a></li>
+            <li><a href="{% url editor:repository_personinfotype_model_changelist %}">Person</a></li>
+            <li><a href="{% url editor:repository_organizationinfotype_model_changelist %}">Organization</a></li>
+            <li><a href="{% url editor:repository_projectinfotype_model_changelist %}">Project</a></li>
+            <li><a href="{% url editor:repository_documentinfotype_model_changelist %}">Document</a></li>
           </ul>
         </li>
         <li title="Remove, save or publish on the archive"><a href="{% url editor:repository_resourceinfotype_model_myresources %}">My Resources</a></li>
-        <li title="Enrich existing metasources"><a href="{% url editor:repository_resourceinfotype_model_changelist %}">Update</a></li>
         <li title="Mailing lists, wiki, and more"><a href="http://metashare.ilsp.gr/forum">Community</a></li>
         <!-- li title="Workflow, Schema specifications"><a href="{% url editor:documentation %}">Documentation</a></li -->
         <!-- li><a href="{% url editor:about %}">About</a></li-->

@@ -95,22 +95,21 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
   'MSCommons_BY-SA': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYSA_v1.0.htm',
                       MEMBER_TYPES.FULL),
   'MSCommons_COM-NR-FF': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
-        'NoRedistribution_For-a-Fee_v0.7.htm', MEMBER_TYPES.FULL),
+        'NoRedistribution_For-a-Fee_v0.7.htm', MEMBER_TYPES.GOD),
   'MSCommons_COM-NR': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
-        'NoRedistribution_v0.7.htm', MEMBER_TYPES.FULL),
+        'NoRedistribution_v0.7.htm', MEMBER_TYPES.GOD),
   'MSCommons_COM-NR-ND-FF': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
-        'NoRedistribution_NoDerivatives_For-a-fee-v1.0.htm', MEMBER_TYPES.FULL),
+        'NoRedistribution_NoDerivatives_For-a-fee-v1.0.htm', MEMBER_TYPES.GOD),
   'MSCommons_COM-NR-ND': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
-        'NoRedistribution_NoDerivatives-v1.0.htm', MEMBER_TYPES.FULL),
+        'NoRedistribution_NoDerivatives-v1.0.htm', MEMBER_TYPES.GOD),
   'MSCommons_NoCOM-NC-NR-ND-FF': (MEDIA_URL + 'licences/META-SHARE_' \
-        '_NoRedistribution_NoDerivatives_For-a-fee-v1.0.htm',
-        MEMBER_TYPES.FULL),
+        '_NoRedistribution_NoDerivatives_For-a-fee-v1.0.htm', MEMBER_TYPES.GOD),
   'MSCommons_NoCOM-NC-NR-ND': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
-        'NoRedistribution_NoDerivatives-v1.0.htm', MEMBER_TYPES.FULL),
+        'NoRedistribution_NoDerivatives-v1.0.htm', MEMBER_TYPES.GOD),
   'MSCommons_NoCOM-NC-NR-FF': (MEDIA_URL + 'licences/META-SHARE_NonCommercial' \
-        '_NoRedistribution_For-a-Fee-v1.0.htm', MEMBER_TYPES.FULL),
+        '_NoRedistribution_For-a-Fee-v1.0.htm', MEMBER_TYPES.GOD),
   'MSCommons_NoCOM-NC-NR': (MEDIA_URL + 'licences/META-SHARE_NonCommercial_' \
-        'NoRedistribution-v1.0.htm', MEMBER_TYPES.FULL),
+        'NoRedistribution-v1.0.htm', MEMBER_TYPES.GOD),
   'ELRA_EVALUATION': (MEDIA_URL + 'licences/EVALUATION.htm', MEMBER_TYPES.GOD),
   'ELRA_VAR': (MEDIA_URL + 'licences/VAR-v3_2007.htm', MEMBER_TYPES.GOD),
   'ELRA_END_USER': (MEDIA_URL + 'licences/ENDUSER-v3_2007.htm',

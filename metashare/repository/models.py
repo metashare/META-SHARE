@@ -41,6 +41,7 @@ class resourceInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Resource"
 
+
     __schema_name__ = 'resourceInfo'
     __schema_fields__ = (
       ( u'identificationInfo', u'identificationInfo', REQUIRED ),
@@ -222,6 +223,7 @@ class sizeInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Size"
 
+
     __schema_name__ = 'sizeInfoType'
     __schema_fields__ = (
       ( u'size', u'size', REQUIRED ),
@@ -243,6 +245,30 @@ class sizeInfoType_model(SchemaModel):
       choices=SIZEINFOTYPE_SIZEUNIT_CHOICES['choices'],
       )
 
+    back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
+
+    back_to_corpusvideoinfotype_model = models.ForeignKey("corpusVideoInfoType_model",  blank=True, null=True)
+
+    back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
+
+    back_to_corpustextnumericalinfotype_model = models.ForeignKey("corpusTextNumericalInfoType_model",  blank=True, null=True)
+
+    back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
+
+    back_to_languagedescriptiontextinfotype_model = models.ForeignKey("languageDescriptionTextInfoType_model",  blank=True, null=True)
+
+    back_to_languagedescriptionvideoinfotype_model = models.ForeignKey("languageDescriptionVideoInfoType_model",  blank=True, null=True)
+
+    back_to_languagedescriptionimageinfotype_model = models.ForeignKey("languageDescriptionImageInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourceaudioinfotype_model = models.ForeignKey("lexicalConceptualResourceAudioInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourcetextinfotype_model = models.ForeignKey("lexicalConceptualResourceTextInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
+
     def real_unicode_(self):
         # pylint: disable-msg=C0301
         formatargs = ['size', 'sizeUnit', ]
@@ -257,6 +283,7 @@ class identificationInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Identification"
+
 
     __schema_name__ = 'identificationInfoType'
     __schema_fields__ = (
@@ -316,6 +343,7 @@ class versionInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Version"
+
 
     __schema_name__ = 'versionInfoType'
     __schema_fields__ = (
@@ -377,6 +405,7 @@ class validationInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Validation"
+
 
     __schema_name__ = 'validationInfoType'
     __schema_fields__ = (
@@ -468,7 +497,7 @@ class validationInfoType_model(SchemaModel):
       '(s) that validated the resource',
       blank=True, null=True, related_name="validator_%(class)s_related", )
 
-    back_to_resourceinfotype_model = models.ForeignKey("resourceInfoType_model", )
+    back_to_resourceinfotype_model = models.ForeignKey("resourceInfoType_model",  blank=True, null=True)
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -482,6 +511,7 @@ class resourceCreationInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Resource creation"
+
 
     __schema_name__ = 'resourceCreationInfoType'
     __schema_fields__ = (
@@ -541,6 +571,7 @@ class creationInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Creation"
 
+
     __schema_name__ = 'creationInfoType'
     __schema_fields__ = (
       ( u'originalSource', u'originalSource', RECOMMENDED ),
@@ -593,6 +624,7 @@ class metadataInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Metadata"
+
 
     __schema_name__ = 'metadataInfoType'
     __schema_fields__ = (
@@ -697,6 +729,7 @@ class documentInfoType_model(documentationInfoType_model):
 
     class Meta:
         verbose_name = "Document"
+
 
     __schema_name__ = 'documentInfoType'
     __schema_fields__ = (
@@ -857,6 +890,7 @@ class resourceDocumentationInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Resource documentation"
 
+
     __schema_name__ = 'resourceDocumentationInfoType'
     __schema_fields__ = (
       ( 'documentation/documentUnstructured', 'documentation', RECOMMENDED ),
@@ -915,6 +949,7 @@ class domainInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Domain"
 
+
     __schema_name__ = 'domainInfoType'
     __schema_fields__ = (
       ( u'domain', u'domain', REQUIRED ),
@@ -943,6 +978,30 @@ class domainInfoType_model(SchemaModel):
       max_length=DOMAININFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES['max_length'],
       choices=DOMAININFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES['choices'],
       )
+
+    back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
+
+    back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
+
+    back_to_corpusvideoinfotype_model = models.ForeignKey("corpusVideoInfoType_model",  blank=True, null=True)
+
+    back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
+
+    back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
+
+    back_to_languagedescriptiontextinfotype_model = models.ForeignKey("languageDescriptionTextInfoType_model",  blank=True, null=True)
+
+    back_to_languagedescriptionvideoinfotype_model = models.ForeignKey("languageDescriptionVideoInfoType_model",  blank=True, null=True)
+
+    back_to_languagedescriptionimageinfotype_model = models.ForeignKey("languageDescriptionImageInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourceaudioinfotype_model = models.ForeignKey("lexicalConceptualResourceAudioInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourcetextinfotype_model = models.ForeignKey("lexicalConceptualResourceTextInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -1018,6 +1077,7 @@ class annotationInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Annotation"
+
 
     __schema_name__ = 'annotationInfoType'
     __schema_fields__ = (
@@ -1203,6 +1263,7 @@ class targetResourceInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Target resource"
 
+
     __schema_name__ = 'targetResourceInfoType'
     __schema_fields__ = (
       ( u'targetResourceNameURI', u'targetResourceNameURI', REQUIRED ),
@@ -1231,6 +1292,7 @@ class relationInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Relation"
 
+
     __schema_name__ = 'relationInfoType'
     __schema_fields__ = (
       ( u'relationType', u'relationType', REQUIRED ),
@@ -1252,7 +1314,7 @@ class relationInfoType_model(SchemaModel):
       ' resource',
       )
 
-    back_to_resourceinfotype_model = models.ForeignKey("resourceInfoType_model", )
+    back_to_resourceinfotype_model = models.ForeignKey("resourceInfoType_model",  blank=True, null=True)
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -1271,6 +1333,8 @@ class modalityInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Modality"
+        verbose_name_plural = "Modalities"
+
 
     __schema_name__ = 'modalityInfoType'
     __schema_fields__ = (
@@ -1301,6 +1365,26 @@ class modalityInfoType_model(SchemaModel):
       help_text='Provides information on the size per modality component' \
       '',
       blank=True, null=True, )
+
+    back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
+
+    back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
+
+    back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
+
+    back_to_corpustextnumericalinfotype_model = models.ForeignKey("corpusTextNumericalInfoType_model",  blank=True, null=True)
+
+    back_to_languagedescriptionvideoinfotype_model = models.ForeignKey("languageDescriptionVideoInfoType_model",  blank=True, null=True)
+
+    back_to_languagedescriptionimageinfotype_model = models.ForeignKey("languageDescriptionImageInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourceaudioinfotype_model = models.ForeignKey("lexicalConceptualResourceAudioInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourcetextinfotype_model = models.ForeignKey("lexicalConceptualResourceTextInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
@@ -1333,6 +1417,7 @@ class participantInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Participant"
+
 
     __schema_name__ = 'participantInfoType'
     __schema_fields__ = (
@@ -1473,7 +1558,7 @@ class participantInfoType_model(SchemaModel):
       'icipant',
       blank=True, max_length=100, )
 
-    back_to_personsourcesetinfotype_model = models.ForeignKey("personSourceSetInfoType_model", )
+    back_to_personsourcesetinfotype_model = models.ForeignKey("personSourceSetInfoType_model",  blank=True, null=True)
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -1505,6 +1590,7 @@ class captureInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Capture"
+
 
     __schema_name__ = 'captureInfoType'
     __schema_fields__ = (
@@ -1604,6 +1690,7 @@ class personSourceSetInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Person source set"
+
 
     __schema_name__ = 'personSourceSetInfoType'
     __schema_fields__ = (
@@ -1749,6 +1836,7 @@ class settingInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Setting"
 
+
     __schema_name__ = 'settingInfoType'
     __schema_fields__ = (
       ( u'naturality', u'naturality', OPTIONAL ),
@@ -1830,6 +1918,7 @@ class runningEnvironmentInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Running environment"
 
+
     __schema_name__ = 'runningEnvironmentInfoType'
     __schema_fields__ = (
       ( u'requiredSoftware', u'requiredSoftware', OPTIONAL ),
@@ -1903,6 +1992,7 @@ class recordingInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Recording"
+
 
     __schema_name__ = 'recordingInfoType'
     __schema_fields__ = (
@@ -1999,6 +2089,7 @@ class resolutionInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Resolution"
 
+
     __schema_name__ = 'resolutionInfoType'
     __schema_fields__ = (
       ( u'sizeWidth', u'sizeWidth', OPTIONAL ),
@@ -2024,6 +2115,10 @@ class resolutionInfoType_model(SchemaModel):
       choices=RESOLUTIONINFOTYPE_RESOLUTIONSTANDARD_CHOICES['choices'],
       )
 
+    back_to_videoformatinfotype_model = models.ForeignKey("videoFormatInfoType_model",  blank=True, null=True)
+
+    back_to_imageformatinfotype_model = models.ForeignKey("imageFormatInfoType_model",  blank=True, null=True)
+
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
@@ -2042,6 +2137,7 @@ class compressionInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Compression"
+
 
     __schema_name__ = 'compressionInfoType'
     __schema_fields__ = (
@@ -2086,6 +2182,7 @@ class linkToOtherMediaInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Link to other media"
+
 
     __schema_name__ = 'linkToOtherMediaInfoType'
     __schema_fields__ = (
@@ -2145,6 +2242,22 @@ class linkToOtherMediaInfoType_model(SchemaModel):
       'ithin the same resource',
       blank=True, )
 
+    back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
+
+    back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
+
+    back_to_corpusvideoinfotype_model = models.ForeignKey("corpusVideoInfoType_model",  blank=True, null=True)
+
+    back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
+
+    back_to_corpustextnumericalinfotype_model = models.ForeignKey("corpusTextNumericalInfoType_model",  blank=True, null=True)
+
+    back_to_languagedescriptiontextinfotype_model = models.ForeignKey("languageDescriptionTextInfoType_model",  blank=True, null=True)
+
+    back_to_languagedescriptionvideoinfotype_model = models.ForeignKey("languageDescriptionVideoInfoType_model",  blank=True, null=True)
+
+    back_to_languagedescriptionimageinfotype_model = models.ForeignKey("languageDescriptionImageInfoType_model",  blank=True, null=True)
+
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
@@ -2154,6 +2267,7 @@ class documentListType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Document list"
+
 
     __schema_name__ = 'documentListType'
     __schema_fields__ = (
@@ -2179,6 +2293,7 @@ class communicationInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Communication"
+
 
     __schema_name__ = 'communicationInfoType'
     __schema_fields__ = (
@@ -2260,6 +2375,7 @@ class personListType_model(SchemaModel):
     class Meta:
         verbose_name = "Person list"
 
+
     __schema_name__ = 'personListType'
     __schema_fields__ = (
       ( u'personInfo', u'personInfo', REQUIRED ),
@@ -2280,6 +2396,7 @@ class organizationListType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Organization list"
+
 
     __schema_name__ = 'organizationListType'
     __schema_fields__ = (
@@ -2318,6 +2435,7 @@ class organizationInfoType_model(actorInfoType_model):
 
     class Meta:
         verbose_name = "Organization"
+
 
     __schema_name__ = 'organizationInfoType'
     __schema_fields__ = (
@@ -2374,6 +2492,7 @@ class personInfoType_model(actorInfoType_model):
 
     class Meta:
         verbose_name = "Person"
+
 
     __schema_name__ = 'personInfoType'
     __schema_fields__ = (
@@ -2448,6 +2567,7 @@ class distributionInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Distribution"
 
+
     __schema_name__ = 'distributionInfoType'
     __schema_fields__ = (
       ( u'availability', u'availability', REQUIRED ),
@@ -2517,6 +2637,7 @@ class membershipInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Membership"
 
+
     __schema_name__ = 'membershipInfoType'
     __schema_fields__ = (
       ( u'member', u'member', REQUIRED ),
@@ -2585,6 +2706,7 @@ class licenceInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Licence"
+
 
     __schema_name__ = 'licenceInfoType'
     __schema_fields__ = (
@@ -2704,7 +2826,7 @@ class licenceInfoType_model(SchemaModel):
       'users who are members or not',
       blank=True, null=True, related_name="membershipInfo_%(class)s_related", )
 
-    back_to_distributioninfotype_model = models.ForeignKey("distributionInfoType_model", )
+    back_to_distributioninfotype_model = models.ForeignKey("distributionInfoType_model",  blank=True, null=True)
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -2748,6 +2870,7 @@ class characterEncodingInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Character encoding"
 
+
     __schema_name__ = 'characterEncodingInfoType'
     __schema_fields__ = (
       ( u'characterEncoding', u'characterEncoding', REQUIRED ),
@@ -2768,9 +2891,17 @@ class characterEncodingInfoType_model(SchemaModel):
 
     sizePerCharacterEncoding = models.OneToOneField("sizeInfoType_model", 
       verbose_name='Size per character encoding', 
-      help_text='Provides information on thesize of the resource parts w' \
-      'ith different character encoding',
+      help_text='Provides information on the size of the resource parts ' \
+      'with different character encoding',
       blank=True, null=True, )
+
+    back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
+
+    back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
+
+    back_to_languagedescriptiontextinfotype_model = models.ForeignKey("languageDescriptionTextInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourcetextinfotype_model = models.ForeignKey("lexicalConceptualResourceTextInfoType_model",  blank=True, null=True)
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -2784,6 +2915,7 @@ class timeCoverageInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Time coverage"
+
 
     __schema_name__ = 'timeCoverageInfoType'
     __schema_fields__ = (
@@ -2806,6 +2938,30 @@ class timeCoverageInfoType_model(SchemaModel):
       'd in the resource',
       blank=True, null=True, )
 
+    back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
+
+    back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
+
+    back_to_corpusvideoinfotype_model = models.ForeignKey("corpusVideoInfoType_model",  blank=True, null=True)
+
+    back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
+
+    back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
+
+    back_to_languagedescriptiontextinfotype_model = models.ForeignKey("languageDescriptionTextInfoType_model",  blank=True, null=True)
+
+    back_to_languagedescriptionvideoinfotype_model = models.ForeignKey("languageDescriptionVideoInfoType_model",  blank=True, null=True)
+
+    back_to_languagedescriptionimageinfotype_model = models.ForeignKey("languageDescriptionImageInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourceaudioinfotype_model = models.ForeignKey("lexicalConceptualResourceAudioInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourcetextinfotype_model = models.ForeignKey("lexicalConceptualResourceTextInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
+
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
@@ -2818,6 +2974,7 @@ class geographicCoverageInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Geographic coverage"
+
 
     __schema_name__ = 'geographicCoverageInfoType'
     __schema_fields__ = (
@@ -2840,6 +2997,30 @@ class geographicCoverageInfoType_model(SchemaModel):
       't section of the resource',
       blank=True, null=True, )
 
+    back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
+
+    back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
+
+    back_to_corpusvideoinfotype_model = models.ForeignKey("corpusVideoInfoType_model",  blank=True, null=True)
+
+    back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
+
+    back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
+
+    back_to_languagedescriptiontextinfotype_model = models.ForeignKey("languageDescriptionTextInfoType_model",  blank=True, null=True)
+
+    back_to_languagedescriptionvideoinfotype_model = models.ForeignKey("languageDescriptionVideoInfoType_model",  blank=True, null=True)
+
+    back_to_languagedescriptionimageinfotype_model = models.ForeignKey("languageDescriptionImageInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourceaudioinfotype_model = models.ForeignKey("lexicalConceptualResourceAudioInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourcetextinfotype_model = models.ForeignKey("lexicalConceptualResourceTextInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
+
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
@@ -2861,6 +3042,7 @@ class lingualityInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Linguality"
+
 
     __schema_name__ = 'lingualityInfoType'
     __schema_fields__ = (
@@ -2913,6 +3095,7 @@ class languageVarietyInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Language variety"
 
+
     __schema_name__ = 'languageVarietyInfoType'
     __schema_fields__ = (
       ( u'languageVarietyType', u'languageVarietyType', REQUIRED ),
@@ -2959,6 +3142,7 @@ class languageInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Language"
 
+
     __schema_name__ = 'languageInfoType'
     __schema_fields__ = (
       ( u'languageId', u'languageId', REQUIRED ),
@@ -3004,6 +3188,30 @@ class languageInfoType_model(SchemaModel):
       'e resource (e.g. dialects)',
       blank=True, null=True, related_name="languageVarietyInfo_%(class)s_related", )
 
+    back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
+
+    back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
+
+    back_to_corpusvideoinfotype_model = models.ForeignKey("corpusVideoInfoType_model",  blank=True, null=True)
+
+    back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
+
+    back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
+
+    back_to_languagedescriptiontextinfotype_model = models.ForeignKey("languageDescriptionTextInfoType_model",  blank=True, null=True)
+
+    back_to_languagedescriptionvideoinfotype_model = models.ForeignKey("languageDescriptionVideoInfoType_model",  blank=True, null=True)
+
+    back_to_languagedescriptionimageinfotype_model = models.ForeignKey("languageDescriptionImageInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourceaudioinfotype_model = models.ForeignKey("lexicalConceptualResourceAudioInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourcetextinfotype_model = models.ForeignKey("lexicalConceptualResourceTextInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
+
     def real_unicode_(self):
         # pylint: disable-msg=C0301
         formatargs = ['languageName', 'languageVarietyInfo', ]
@@ -3024,6 +3232,7 @@ class projectInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Project"
+
 
     __schema_name__ = 'projectInfoType'
     __schema_fields__ = (
@@ -3104,6 +3313,7 @@ class usageInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Usage"
+
 
     __schema_name__ = 'usageInfoType'
     __schema_fields__ = (
@@ -3191,6 +3401,7 @@ class foreseenUseInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Foreseen use"
 
+
     __schema_name__ = 'foreseenUseInfoType'
     __schema_fields__ = (
       ( u'foreseenUse', u'foreseenUse', REQUIRED ),
@@ -3214,7 +3425,7 @@ class foreseenUseInfoType_model(SchemaModel):
       choices=FORESEENUSEINFOTYPE_USENLPSPECIFIC_CHOICES['choices'],
       )
 
-    back_to_usageinfotype_model = models.ForeignKey("usageInfoType_model", )
+    back_to_usageinfotype_model = models.ForeignKey("usageInfoType_model",  blank=True, null=True)
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -3268,6 +3479,7 @@ class actualUseInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Actual use"
+
 
     __schema_name__ = 'actualUseInfoType'
     __schema_fields__ = (
@@ -3338,6 +3550,7 @@ class projectListType_model(SchemaModel):
     class Meta:
         verbose_name = "Project list"
 
+
     __schema_name__ = 'projectListType'
     __schema_fields__ = (
       ( u'projectInfo', u'projectInfo', REQUIRED ),
@@ -3353,10 +3566,6 @@ class projectListType_model(SchemaModel):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
 
-CORPUSAUDIOINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
-])
-
 # pylint: disable-msg=C0103
 class corpusAudioInfoType_model(SchemaModel):
     """
@@ -3366,25 +3575,26 @@ class corpusAudioInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Corpus audio"
 
+
     __schema_name__ = 'corpusAudioInfoType'
     __schema_fields__ = (
       ( u'mediaType', u'mediaType', REQUIRED ),
       ( u'lingualityInfo', u'lingualityInfo', REQUIRED ),
-      ( u'languageInfo', u'languageInfo', REQUIRED ),
-      ( u'modalityInfo', u'modalityInfo', RECOMMENDED ),
+      ( u'languageInfo', u'languageinfotype_model_set', REQUIRED ),
+      ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
       ( u'audioSizeInfo', u'audiosizeinfotype_model_set', REQUIRED ),
       ( u'audioContentInfo', u'audioContentInfo', RECOMMENDED ),
       ( u'settingInfo', u'settingInfo', RECOMMENDED ),
-      ( u'audioFormatInfo', u'audioFormatInfo', RECOMMENDED ),
+      ( u'audioFormatInfo', u'audioformatinfotype_model_set', RECOMMENDED ),
       ( u'annotationInfo', u'annotationInfo', RECOMMENDED ),
-      ( u'domainInfo', u'domainInfo', RECOMMENDED ),
-      ( u'timeCoverageInfo', u'timeCoverageInfo', RECOMMENDED ),
-      ( u'geographicCoverageInfo', u'geographicCoverageInfo', RECOMMENDED ),
-      ( u'audioClassificationInfo', u'audioClassificationInfo', RECOMMENDED ),
+      ( u'domainInfo', u'domaininfotype_model_set', RECOMMENDED ),
+      ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', RECOMMENDED ),
+      ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', RECOMMENDED ),
+      ( u'audioClassificationInfo', u'audioclassificationinfotype_model_set', RECOMMENDED ),
       ( u'recordingInfo', u'recordingInfo', RECOMMENDED ),
       ( u'captureInfo', u'captureInfo', RECOMMENDED ),
       ( u'creationInfo', u'creationInfo', OPTIONAL ),
-      ( u'linkToOtherMediaInfo', u'linkToOtherMediaInfo', OPTIONAL ),
+      ( u'linkToOtherMediaInfo', u'linktoothermediainfotype_model_set', OPTIONAL ),
     )
     __schema_classes__ = {
       u'annotationInfo': "annotationInfoType_model",
@@ -3413,10 +3623,7 @@ class corpusAudioInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      
-      max_length=30,
-      choices=CORPUSAUDIOINFOTYPE_MEDIATYPE_CHOICES['choices'],
-      )
+      default="audio", editable=False, max_length=10, )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -3424,17 +3631,9 @@ class corpusAudioInfoType_model(SchemaModel):
       'source part and of the way they are combined to each other',
       )
 
-    languageInfo = models.ManyToManyField("languageInfoType_model", 
-      verbose_name='Language', 
-      help_text='Groups information on the languages represented in the ' \
-      'resource',
-      related_name="languageInfo_%(class)s_related", )
+    # OneToMany field: languageInfo
 
-    modalityInfo = models.ManyToManyField("modalityInfoType_model", 
-      verbose_name='Modality', 
-      help_text='Groups information on the modalities represented in the' \
-      ' resource',
-      blank=True, null=True, related_name="modalityInfo_%(class)s_related", )
+    # OneToMany field: modalityInfo
 
     # OneToMany field: audioSizeInfo
 
@@ -3450,11 +3649,7 @@ class corpusAudioInfoType_model(SchemaModel):
       ' and/or video part of a resource',
       blank=True, null=True, )
 
-    audioFormatInfo = models.ManyToManyField("audioFormatInfoType_model", 
-      verbose_name='Audio format', 
-      help_text='Groups together information on the format of the audio ' \
-      'part of a resource',
-      blank=True, null=True, related_name="audioFormatInfo_%(class)s_related", )
+    # OneToMany field: audioFormatInfo
 
     annotationInfo = models.ManyToManyField("annotationInfoType_model", 
       verbose_name='Annotation', 
@@ -3462,30 +3657,13 @@ class corpusAudioInfoType_model(SchemaModel):
       'ce',
       blank=True, null=True, related_name="annotationInfo_%(class)s_related", )
 
-    domainInfo = models.ManyToManyField("domainInfoType_model", 
-      verbose_name='Domain', 
-      help_text='Groups together information on domains represented in t' \
-      'he resource; can be repeated for parts of the resource with disti' \
-      'nct domain',
-      blank=True, null=True, related_name="domainInfo_%(class)s_related", )
+    # OneToMany field: domainInfo
 
-    timeCoverageInfo = models.ManyToManyField("timeCoverageInfoType_model", 
-      verbose_name='Time coverage', 
-      help_text='Groups together information on time classification of t' \
-      'he resource',
-      blank=True, null=True, related_name="timeCoverageInfo_%(class)s_related", )
+    # OneToMany field: timeCoverageInfo
 
-    geographicCoverageInfo = models.ManyToManyField("geographicCoverageInfoType_model", 
-      verbose_name='Geographic coverage', 
-      help_text='Groups information on geographic classification of the ' \
-      'resource',
-      blank=True, null=True, related_name="geographicCoverageInfo_%(class)s_related", )
+    # OneToMany field: geographicCoverageInfo
 
-    audioClassificationInfo = models.ManyToManyField("audioClassificationInfoType_model", 
-      verbose_name='Audio classification', 
-      help_text='Groups together information on audio type/genre of the ' \
-      'resource',
-      blank=True, null=True, related_name="audioClassificationInfo_%(class)s_related", )
+    # OneToMany field: audioClassificationInfo
 
     recordingInfo = models.OneToOneField("recordingInfoType_model", 
       verbose_name='Recording', 
@@ -3507,12 +3685,7 @@ class corpusAudioInfoType_model(SchemaModel):
       'ma list etc.)',
       blank=True, null=True, )
 
-    linkToOtherMediaInfo = models.ManyToManyField("linkToOtherMediaInfoType_model", 
-      verbose_name='Link to other media', 
-      help_text='Groups information on the way different media of the re' \
-      'source interact with or link to each other. To be used for multim' \
-      'odal resources or for resources representing sensorimotor data',
-      blank=True, null=True, related_name="linkToOtherMediaInfo_%(class)s_related", )
+    # OneToMany field: linkToOtherMediaInfo
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
@@ -3546,6 +3719,7 @@ class audioContentInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Audio content"
+
 
     __schema_name__ = 'audioContentInfoType'
     __schema_fields__ = (
@@ -3599,6 +3773,7 @@ class audioSizeInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Audio size"
 
+
     __schema_name__ = 'audioSizeInfoType'
     __schema_fields__ = (
       ( u'sizeInfo', u'sizeInfo', REQUIRED ),
@@ -3621,7 +3796,7 @@ class audioSizeInfoType_model(SchemaModel):
 
     # OneToMany field: durationOfAudioInfo
 
-    back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model", )
+    back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -3639,6 +3814,7 @@ class durationOfEffectiveSpeechInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Duration of effective speech"
+
 
     __schema_name__ = 'durationOfEffectiveSpeechInfoType'
     __schema_fields__ = (
@@ -3661,7 +3837,7 @@ class durationOfEffectiveSpeechInfoType_model(SchemaModel):
       choices=DURATIONOFEFFECTIVESPEECHINFOTYPE_DURATIONUNIT_CHOICES['choices'],
       )
 
-    back_to_audiosizeinfotype_model = models.ForeignKey("audioSizeInfoType_model", )
+    back_to_audiosizeinfotype_model = models.ForeignKey("audioSizeInfoType_model",  blank=True, null=True)
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -3680,6 +3856,7 @@ class durationOfAudioInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Duration of audio"
+
 
     __schema_name__ = 'durationOfAudioInfoType'
     __schema_fields__ = (
@@ -3702,7 +3879,7 @@ class durationOfAudioInfoType_model(SchemaModel):
       choices=DURATIONOFAUDIOINFOTYPE_DURATIONUNIT_CHOICES['choices'],
       )
 
-    back_to_audiosizeinfotype_model = models.ForeignKey("audioSizeInfoType_model", )
+    back_to_audiosizeinfotype_model = models.ForeignKey("audioSizeInfoType_model",  blank=True, null=True)
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -3737,6 +3914,7 @@ class audioFormatInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Audio format"
+
 
     __schema_name__ = 'audioFormatInfoType'
     __schema_fields__ = (
@@ -3834,6 +4012,10 @@ class audioFormatInfoType_model(SchemaModel):
       'iffer as to the format',
       blank=True, null=True, )
 
+    back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourceaudioinfotype_model = models.ForeignKey("lexicalConceptualResourceAudioInfoType_model",  blank=True, null=True)
+
     def real_unicode_(self):
         # pylint: disable-msg=C0301
         formatargs = ['mimeType', 'signalEncoding', ]
@@ -3868,6 +4050,7 @@ class audioClassificationInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Audio classification"
+
 
     __schema_name__ = 'audioClassificationInfoType'
     __schema_fields__ = (
@@ -3926,13 +4109,11 @@ class audioClassificationInfoType_model(SchemaModel):
       ' of classification criteria',
       blank=True, null=True, )
 
+    back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
+
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
-
-CORPUSTEXTINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
-])
 
 # pylint: disable-msg=C0103
 class corpusTextInfoType_model(SchemaModel):
@@ -3943,22 +4124,23 @@ class corpusTextInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Corpus text"
 
+
     __schema_name__ = 'corpusTextInfoType'
     __schema_fields__ = (
       ( u'mediaType', u'mediaType', REQUIRED ),
       ( u'lingualityInfo', u'lingualityInfo', REQUIRED ),
-      ( u'languageInfo', u'languageInfo', REQUIRED ),
-      ( u'modalityInfo', u'modalityInfo', RECOMMENDED ),
-      ( u'sizeInfo', u'sizeInfo', REQUIRED ),
-      ( u'textFormatInfo', u'textFormatInfo', RECOMMENDED ),
-      ( u'characterEncodingInfo', u'characterEncodingInfo', RECOMMENDED ),
+      ( u'languageInfo', u'languageinfotype_model_set', REQUIRED ),
+      ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
+      ( u'sizeInfo', u'sizeinfotype_model_set', REQUIRED ),
+      ( u'textFormatInfo', u'textformatinfotype_model_set', RECOMMENDED ),
+      ( u'characterEncodingInfo', u'characterencodinginfotype_model_set', RECOMMENDED ),
       ( u'annotationInfo', u'annotationInfo', RECOMMENDED ),
-      ( u'domainInfo', u'domainInfo', RECOMMENDED ),
-      ( u'textClassificationInfo', u'textClassificationInfo', RECOMMENDED ),
-      ( u'timeCoverageInfo', u'timeCoverageInfo', RECOMMENDED ),
-      ( u'geographicCoverageInfo', u'geographicCoverageInfo', RECOMMENDED ),
+      ( u'domainInfo', u'domaininfotype_model_set', RECOMMENDED ),
+      ( u'textClassificationInfo', u'textclassificationinfotype_model_set', RECOMMENDED ),
+      ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', RECOMMENDED ),
+      ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', RECOMMENDED ),
       ( u'creationInfo', u'creationInfo', RECOMMENDED ),
-      ( u'linkToOtherMediaInfo', u'linkToOtherMediaInfo', OPTIONAL ),
+      ( u'linkToOtherMediaInfo', u'linktoothermediainfotype_model_set', OPTIONAL ),
     )
     __schema_classes__ = {
       u'annotationInfo': "annotationInfoType_model",
@@ -3984,10 +4166,7 @@ class corpusTextInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      
-      max_length=30,
-      choices=CORPUSTEXTINFOTYPE_MEDIATYPE_CHOICES['choices'],
-      )
+      default="text", editable=False, max_length=10, )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -3995,34 +4174,15 @@ class corpusTextInfoType_model(SchemaModel):
       'source part and of the way they are combined to each other',
       )
 
-    languageInfo = models.ManyToManyField("languageInfoType_model", 
-      verbose_name='Language', 
-      help_text='Groups information on the languages represented in the ' \
-      'resource',
-      related_name="languageInfo_%(class)s_related", )
+    # OneToMany field: languageInfo
 
-    modalityInfo = models.ManyToManyField("modalityInfoType_model", 
-      verbose_name='Modality', 
-      help_text='Groups information on the modalities represented in the' \
-      ' resource',
-      blank=True, null=True, related_name="modalityInfo_%(class)s_related", )
+    # OneToMany field: modalityInfo
 
-    sizeInfo = models.ManyToManyField("sizeInfoType_model", 
-      verbose_name='Size', 
-      help_text='Groups information on the size of the resource or of re' \
-      'source parts',
-      related_name="sizeInfo_%(class)s_related", )
+    # OneToMany field: sizeInfo
 
-    textFormatInfo = models.ManyToManyField("textFormatInfoType_model", 
-      verbose_name='Text format', 
-      help_text='Groups information on the text format(s) of a resource',
-      blank=True, null=True, related_name="textFormatInfo_%(class)s_related", )
+    # OneToMany field: textFormatInfo
 
-    characterEncodingInfo = models.ManyToManyField("characterEncodingInfoType_model", 
-      verbose_name='Character encoding', 
-      help_text='Groups together information on character encoding of th' \
-      'e resource',
-      blank=True, null=True, related_name="characterEncodingInfo_%(class)s_related", )
+    # OneToMany field: characterEncodingInfo
 
     annotationInfo = models.ManyToManyField("annotationInfoType_model", 
       verbose_name='Annotation', 
@@ -4030,30 +4190,13 @@ class corpusTextInfoType_model(SchemaModel):
       'ce',
       blank=True, null=True, related_name="annotationInfo_%(class)s_related", )
 
-    domainInfo = models.ManyToManyField("domainInfoType_model", 
-      verbose_name='Domain', 
-      help_text='Groups together information on domains represented in t' \
-      'he resource; can be repeated for parts of the resource with disti' \
-      'nct domain',
-      blank=True, null=True, related_name="domainInfo_%(class)s_related", )
+    # OneToMany field: domainInfo
 
-    textClassificationInfo = models.ManyToManyField("textClassificationInfoType_model", 
-      verbose_name='Text classification', 
-      help_text='Groups together information on text type/genre of the r' \
-      'esource',
-      blank=True, null=True, related_name="textClassificationInfo_%(class)s_related", )
+    # OneToMany field: textClassificationInfo
 
-    timeCoverageInfo = models.ManyToManyField("timeCoverageInfoType_model", 
-      verbose_name='Time coverage', 
-      help_text='Groups together information on time classification of t' \
-      'he resource',
-      blank=True, null=True, related_name="timeCoverageInfo_%(class)s_related", )
+    # OneToMany field: timeCoverageInfo
 
-    geographicCoverageInfo = models.ManyToManyField("geographicCoverageInfoType_model", 
-      verbose_name='Geographic coverage', 
-      help_text='Groups information on geographic classification of the ' \
-      'resource',
-      blank=True, null=True, related_name="geographicCoverageInfo_%(class)s_related", )
+    # OneToMany field: geographicCoverageInfo
 
     creationInfo = models.OneToOneField("creationInfoType_model", 
       verbose_name='Creation', 
@@ -4063,14 +4206,9 @@ class corpusTextInfoType_model(SchemaModel):
       'ma list etc.)',
       blank=True, null=True, )
 
-    linkToOtherMediaInfo = models.ManyToManyField("linkToOtherMediaInfoType_model", 
-      verbose_name='Link to other media', 
-      help_text='Groups information on the way different media of the re' \
-      'source interact with or link to each other. To be used for multim' \
-      'odal resources or for resources representing sensorimotor data',
-      blank=True, null=True, related_name="linkToOtherMediaInfo_%(class)s_related", )
+    # OneToMany field: linkToOtherMediaInfo
 
-    back_to_corpusmediatypetype_model = models.ForeignKey("corpusMediaTypeType_model",  null=True)
+    back_to_corpusmediatypetype_model = models.ForeignKey("corpusMediaTypeType_model",  blank=True, null=True)
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
@@ -4086,6 +4224,7 @@ class textFormatInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Text format"
+
 
     __schema_name__ = 'textFormatInfoType'
     __schema_fields__ = (
@@ -4111,6 +4250,14 @@ class textFormatInfoType_model(SchemaModel):
       'with different format',
       blank=True, null=True, )
 
+    back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
+
+    back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
+
+    back_to_languagedescriptiontextinfotype_model = models.ForeignKey("languageDescriptionTextInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourcetextinfotype_model = models.ForeignKey("lexicalConceptualResourceTextInfoType_model",  blank=True, null=True)
+
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
@@ -4132,6 +4279,7 @@ class textClassificationInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Text classification"
+
 
     __schema_name__ = 'textClassificationInfoType'
     __schema_fields__ = (
@@ -4185,13 +4333,13 @@ class textClassificationInfoType_model(SchemaModel):
       'ferent text classification',
       blank=True, null=True, )
 
+    back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
+
+    back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
+
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
-
-CORPUSVIDEOINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
-])
 
 # pylint: disable-msg=C0103
 class corpusVideoInfoType_model(SchemaModel):
@@ -4202,25 +4350,26 @@ class corpusVideoInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Corpus video"
 
+
     __schema_name__ = 'corpusVideoInfoType'
     __schema_fields__ = (
       ( u'mediaType', u'mediaType', REQUIRED ),
       ( u'lingualityInfo', u'lingualityInfo', OPTIONAL ),
-      ( u'languageInfo', u'languageInfo', OPTIONAL ),
+      ( u'languageInfo', u'languageinfotype_model_set', OPTIONAL ),
       ( u'modalityInfo', u'modalityInfo', RECOMMENDED ),
-      ( u'sizeInfo', u'sizeInfo', REQUIRED ),
+      ( u'sizeInfo', u'sizeinfotype_model_set', REQUIRED ),
       ( u'videoContentInfo', u'videoContentInfo', RECOMMENDED ),
       ( u'settingInfo', u'settingInfo', RECOMMENDED ),
       ( u'videoFormatInfo', u'videoFormatInfo', RECOMMENDED ),
       ( u'annotationInfo', u'annotationInfo', RECOMMENDED ),
-      ( u'domainInfo', u'domainInfo', RECOMMENDED ),
-      ( u'timeCoverageInfo', u'timeCoverageInfo', RECOMMENDED ),
-      ( u'geographicCoverageInfo', u'geographicCoverageInfo', RECOMMENDED ),
+      ( u'domainInfo', u'domaininfotype_model_set', RECOMMENDED ),
+      ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', RECOMMENDED ),
+      ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', RECOMMENDED ),
       ( u'videoClassificationInfo', u'videoclassificationinfotype_model_set', RECOMMENDED ),
       ( u'recordingInfo', u'recordingInfo', RECOMMENDED ),
       ( u'captureInfo', u'captureInfo', RECOMMENDED ),
       ( u'creationInfo', u'creationInfo', RECOMMENDED ),
-      ( u'linkToOtherMediaInfo', u'linkToOtherMediaInfo', RECOMMENDED ),
+      ( u'linkToOtherMediaInfo', u'linktoothermediainfotype_model_set', RECOMMENDED ),
     )
     __schema_classes__ = {
       u'annotationInfo': "annotationInfoType_model",
@@ -4249,10 +4398,7 @@ class corpusVideoInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      
-      max_length=30,
-      choices=CORPUSVIDEOINFOTYPE_MEDIATYPE_CHOICES['choices'],
-      )
+      default="video", editable=False, max_length=10, )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -4260,11 +4406,7 @@ class corpusVideoInfoType_model(SchemaModel):
       'source part and of the way they are combined to each other',
       blank=True, null=True, )
 
-    languageInfo = models.ManyToManyField("languageInfoType_model", 
-      verbose_name='Language', 
-      help_text='Groups information on the languages represented in the ' \
-      'resource',
-      blank=True, null=True, related_name="languageInfo_%(class)s_related", )
+    # OneToMany field: languageInfo
 
     modalityInfo = models.OneToOneField("modalityInfoType_model", 
       verbose_name='Modality', 
@@ -4272,11 +4414,7 @@ class corpusVideoInfoType_model(SchemaModel):
       ' resource',
       blank=True, null=True, )
 
-    sizeInfo = models.ManyToManyField("sizeInfoType_model", 
-      verbose_name='Size', 
-      help_text='Groups information on the size of the resource or of re' \
-      'source parts',
-      related_name="sizeInfo_%(class)s_related", )
+    # OneToMany field: sizeInfo
 
     videoContentInfo = models.OneToOneField("videoContentInfoType_model", 
       verbose_name='Video content', 
@@ -4302,24 +4440,11 @@ class corpusVideoInfoType_model(SchemaModel):
       'ce',
       blank=True, null=True, related_name="annotationInfo_%(class)s_related", )
 
-    domainInfo = models.ManyToManyField("domainInfoType_model", 
-      verbose_name='Domain', 
-      help_text='Groups together information on domains represented in t' \
-      'he resource; can be repeated for parts of the resource with disti' \
-      'nct domain',
-      blank=True, null=True, related_name="domainInfo_%(class)s_related", )
+    # OneToMany field: domainInfo
 
-    timeCoverageInfo = models.ManyToManyField("timeCoverageInfoType_model", 
-      verbose_name='Time coverage', 
-      help_text='Groups together information on time classification of t' \
-      'he resource',
-      blank=True, null=True, related_name="timeCoverageInfo_%(class)s_related", )
+    # OneToMany field: timeCoverageInfo
 
-    geographicCoverageInfo = models.ManyToManyField("geographicCoverageInfoType_model", 
-      verbose_name='Geographic coverage', 
-      help_text='Groups information on geographic classification of the ' \
-      'resource',
-      blank=True, null=True, related_name="geographicCoverageInfo_%(class)s_related", )
+    # OneToMany field: geographicCoverageInfo
 
     # OneToMany field: videoClassificationInfo
 
@@ -4343,14 +4468,9 @@ class corpusVideoInfoType_model(SchemaModel):
       'ma list etc.)',
       blank=True, null=True, )
 
-    linkToOtherMediaInfo = models.ManyToManyField("linkToOtherMediaInfoType_model", 
-      verbose_name='Link to other media', 
-      help_text='Groups information on the way different media of the re' \
-      'source interact with or link to each other. To be used for multim' \
-      'odal resources or for resources representing sensorimotor data',
-      blank=True, null=True, related_name="linkToOtherMediaInfo_%(class)s_related", )
+    # OneToMany field: linkToOtherMediaInfo
 
-    back_to_corpusmediatypetype_model = models.ForeignKey("corpusMediaTypeType_model",  null=True)
+    back_to_corpusmediatypetype_model = models.ForeignKey("corpusMediaTypeType_model",  blank=True, null=True)
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
@@ -4371,6 +4491,7 @@ class videoContentInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Video content"
+
 
     __schema_name__ = 'videoContentInfoType'
     __schema_fields__ = (
@@ -4424,13 +4545,14 @@ class videoFormatInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Video format"
 
+
     __schema_name__ = 'videoFormatInfoType'
     __schema_fields__ = (
       ( u'mimeType', u'mimeType', REQUIRED ),
       ( u'colourSpace', u'colourSpace', RECOMMENDED ),
       ( u'colourDepth', u'colourDepth', OPTIONAL ),
       ( u'frameRate', u'frameRate', OPTIONAL ),
-      ( u'resolutionInfo', u'resolutionInfo', RECOMMENDED ),
+      ( u'resolutionInfo', u'resolutioninfotype_model_set', RECOMMENDED ),
       ( u'visualModelling', u'visualModelling', OPTIONAL ),
       ( u'fidelity', u'fidelity', OPTIONAL ),
       ( u'compressionInfo', u'compressionInfo', OPTIONAL ),
@@ -4470,10 +4592,7 @@ class videoFormatInfoType_model(SchemaModel):
       help_text='The number of frames per second',
       blank=True, null=True, )
 
-    resolutionInfo = models.ManyToManyField("resolutionInfoType_model", 
-      verbose_name='Resolution', 
-      help_text='Groups together information on the image resolution',
-      blank=True, null=True, related_name="resolutionInfo_%(class)s_related", )
+    # OneToMany field: resolutionInfo
 
     visualModelling = models.CharField(
       verbose_name='Visual modelling', 
@@ -4523,6 +4642,7 @@ class videoClassificationInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Video classification"
 
+
     __schema_name__ = 'videoClassificationInfoType'
     __schema_fields__ = (
       ( u'videoGenre', u'videoGenre', RECOMMENDED ),
@@ -4559,15 +4679,11 @@ class videoClassificationInfoType_model(SchemaModel):
       ' classification',
       blank=True, null=True, )
 
-    back_to_corpusvideoinfotype_model = models.ForeignKey("corpusVideoInfoType_model", )
+    back_to_corpusvideoinfotype_model = models.ForeignKey("corpusVideoInfoType_model",  blank=True, null=True)
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
-
-CORPUSIMAGEINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
-])
 
 # pylint: disable-msg=C0103
 class corpusImageInfoType_model(SchemaModel):
@@ -4578,23 +4694,24 @@ class corpusImageInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Corpus image"
 
+
     __schema_name__ = 'corpusImageInfoType'
     __schema_fields__ = (
       ( u'mediaType', u'mediaType', REQUIRED ),
-      ( u'modalityInfo', u'modalityInfo', RECOMMENDED ),
+      ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
       ( u'lingualityInfo', u'lingualityInfo', OPTIONAL ),
-      ( u'languageInfo', u'languageInfo', OPTIONAL ),
-      ( u'sizeInfo', u'sizeInfo', REQUIRED ),
+      ( u'languageInfo', u'languageinfotype_model_set', OPTIONAL ),
+      ( u'sizeInfo', u'sizeinfotype_model_set', REQUIRED ),
       ( u'imageContentInfo', u'imageContentInfo', RECOMMENDED ),
       ( u'imageFormatInfo', u'imageFormatInfo', RECOMMENDED ),
       ( u'annotationInfo', u'annotationInfo', RECOMMENDED ),
-      ( u'domainInfo', u'domainInfo', OPTIONAL ),
-      ( u'timeCoverageInfo', u'timeCoverageInfo', OPTIONAL ),
-      ( u'geographicCoverageInfo', u'geographicCoverageInfo', OPTIONAL ),
+      ( u'domainInfo', u'domaininfotype_model_set', OPTIONAL ),
+      ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', OPTIONAL ),
+      ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', OPTIONAL ),
       ( u'imageClassificationInfo', u'imageclassificationinfotype_model_set', OPTIONAL ),
       ( u'captureInfo', u'captureInfo', RECOMMENDED ),
       ( u'creationInfo', u'creationInfo', OPTIONAL ),
-      ( u'linkToOtherMediaInfo', u'linkToOtherMediaInfo', OPTIONAL ),
+      ( u'linkToOtherMediaInfo', u'linktoothermediainfotype_model_set', OPTIONAL ),
     )
     __schema_classes__ = {
       u'annotationInfo': "annotationInfoType_model",
@@ -4621,16 +4738,9 @@ class corpusImageInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      
-      max_length=30,
-      choices=CORPUSIMAGEINFOTYPE_MEDIATYPE_CHOICES['choices'],
-      )
+      default="image", editable=False, max_length=10, )
 
-    modalityInfo = models.ManyToManyField("modalityInfoType_model", 
-      verbose_name='Modality', 
-      help_text='Groups information on the modalities represented in the' \
-      ' resource',
-      blank=True, null=True, related_name="modalityInfo_%(class)s_related", )
+    # OneToMany field: modalityInfo
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -4638,17 +4748,9 @@ class corpusImageInfoType_model(SchemaModel):
       'source part and of the way they are combined to each other',
       blank=True, null=True, )
 
-    languageInfo = models.ManyToManyField("languageInfoType_model", 
-      verbose_name='Language', 
-      help_text='Groups information on the languages represented in the ' \
-      'resource',
-      blank=True, null=True, related_name="languageInfo_%(class)s_related", )
+    # OneToMany field: languageInfo
 
-    sizeInfo = models.ManyToManyField("sizeInfoType_model", 
-      verbose_name='Size', 
-      help_text='Groups information on the size of the resource or of re' \
-      'source parts',
-      related_name="sizeInfo_%(class)s_related", )
+    # OneToMany field: sizeInfo
 
     imageContentInfo = models.OneToOneField("imageContentInfoType_model", 
       verbose_name='Image content', 
@@ -4668,24 +4770,11 @@ class corpusImageInfoType_model(SchemaModel):
       'ce',
       blank=True, null=True, related_name="annotationInfo_%(class)s_related", )
 
-    domainInfo = models.ManyToManyField("domainInfoType_model", 
-      verbose_name='Domain', 
-      help_text='Groups together information on domains represented in t' \
-      'he resource; can be repeated for parts of the resource with disti' \
-      'nct domain',
-      blank=True, null=True, related_name="domainInfo_%(class)s_related", )
+    # OneToMany field: domainInfo
 
-    timeCoverageInfo = models.ManyToManyField("timeCoverageInfoType_model", 
-      verbose_name='Time coverage', 
-      help_text='Groups together information on time classification of t' \
-      'he resource',
-      blank=True, null=True, related_name="timeCoverageInfo_%(class)s_related", )
+    # OneToMany field: timeCoverageInfo
 
-    geographicCoverageInfo = models.ManyToManyField("geographicCoverageInfoType_model", 
-      verbose_name='Geographic coverage', 
-      help_text='Groups information on geographic classification of the ' \
-      'resource',
-      blank=True, null=True, related_name="geographicCoverageInfo_%(class)s_related", )
+    # OneToMany field: geographicCoverageInfo
 
     # OneToMany field: imageClassificationInfo
 
@@ -4703,12 +4792,7 @@ class corpusImageInfoType_model(SchemaModel):
       'ma list etc.)',
       blank=True, null=True, )
 
-    linkToOtherMediaInfo = models.ManyToManyField("linkToOtherMediaInfoType_model", 
-      verbose_name='Link to other media', 
-      help_text='Groups information on the way different media of the re' \
-      'source interact with or link to each other. To be used for multim' \
-      'odal resources or for resources representing sensorimotor data',
-      blank=True, null=True, related_name="linkToOtherMediaInfo_%(class)s_related", )
+    # OneToMany field: linkToOtherMediaInfo
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
@@ -4729,6 +4813,7 @@ class imageContentInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Image content"
+
 
     __schema_name__ = 'imageContentInfoType'
     __schema_fields__ = (
@@ -4791,13 +4876,14 @@ class imageFormatInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Image format"
 
+
     __schema_name__ = 'imageFormatInfoType'
     __schema_fields__ = (
       ( u'mimeType', u'mimeType', REQUIRED ),
       ( u'colourSpace', u'colourSpace', RECOMMENDED ),
       ( u'colourDepth', u'colourDepth', OPTIONAL ),
       ( u'compressionInfo', u'compressionInfo', OPTIONAL ),
-      ( u'resolutionInfo', u'resolutionInfo', OPTIONAL ),
+      ( u'resolutionInfo', u'resolutioninfotype_model_set', OPTIONAL ),
       ( u'visualModelling', u'visualModelling', OPTIONAL ),
       ( u'rasterOrVectorGraphics', u'rasterOrVectorGraphics', OPTIONAL ),
       ( u'quality', u'quality', OPTIONAL ),
@@ -4838,10 +4924,7 @@ class imageFormatInfoType_model(SchemaModel):
       'nd method of a resource',
       blank=True, null=True, )
 
-    resolutionInfo = models.ManyToManyField("resolutionInfoType_model", 
-      verbose_name='Resolution', 
-      help_text='Groups together information on the image resolution',
-      blank=True, null=True, related_name="resolutionInfo_%(class)s_related", )
+    # OneToMany field: resolutionInfo
 
     visualModelling = models.CharField(
       verbose_name='Visual modelling', 
@@ -4896,6 +4979,7 @@ class imageClassificationInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Image classification"
 
+
     __schema_name__ = 'imageClassificationInfoType'
     __schema_fields__ = (
       ( u'imageGenre', u'imageGenre', OPTIONAL ),
@@ -4932,15 +5016,11 @@ class imageClassificationInfoType_model(SchemaModel):
       'age classification',
       blank=True, null=True, )
 
-    back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model", )
+    back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
-
-CORPUSTEXTNUMERICALINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
-])
 
 # pylint: disable-msg=C0103
 class corpusTextNumericalInfoType_model(SchemaModel):
@@ -4953,18 +5033,19 @@ class corpusTextNumericalInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Corpus text numerical"
 
+
     __schema_name__ = 'corpusTextNumericalInfoType'
     __schema_fields__ = (
       ( u'mediaType', u'mediaType', REQUIRED ),
-      ( u'modalityInfo', u'modalityInfo', RECOMMENDED ),
-      ( u'sizeInfo', u'sizeInfo', RECOMMENDED ),
+      ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
+      ( u'sizeInfo', u'sizeinfotype_model_set', RECOMMENDED ),
       ( u'textNumericalContentInfo', u'textNumericalContentInfo', RECOMMENDED ),
       ( u'textNumericalFormatInfo', u'textnumericalformatinfotype_model_set', RECOMMENDED ),
       ( u'recordingInfo', u'recordingInfo', RECOMMENDED ),
       ( u'captureInfo', u'captureInfo', RECOMMENDED ),
       ( u'creationInfo', u'creationInfo', RECOMMENDED ),
       ( u'annotationInfo', u'annotationInfo', RECOMMENDED ),
-      ( u'linkToOtherMediaInfo', u'linkToOtherMediaInfo', RECOMMENDED ),
+      ( u'linkToOtherMediaInfo', u'linktoothermediainfotype_model_set', RECOMMENDED ),
     )
     __schema_classes__ = {
       u'annotationInfo': "annotationInfoType_model",
@@ -4986,22 +5067,11 @@ class corpusTextNumericalInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      
-      max_length=30,
-      choices=CORPUSTEXTNUMERICALINFOTYPE_MEDIATYPE_CHOICES['choices'],
-      )
+      default="textNumerical", editable=False, max_length=10, )
 
-    modalityInfo = models.ManyToManyField("modalityInfoType_model", 
-      verbose_name='Modality', 
-      help_text='Groups information on the modalities represented in the' \
-      ' resource',
-      blank=True, null=True, related_name="modalityInfo_%(class)s_related", )
+    # OneToMany field: modalityInfo
 
-    sizeInfo = models.ManyToManyField("sizeInfoType_model", 
-      verbose_name='Size', 
-      help_text='Groups information on the size of the resource or of re' \
-      'source parts',
-      blank=True, null=True, related_name="sizeInfo_%(class)s_related", )
+    # OneToMany field: sizeInfo
 
     textNumericalContentInfo = models.OneToOneField("textNumericalContentInfoType_model", 
       verbose_name='Text numerical content', 
@@ -5037,12 +5107,7 @@ class corpusTextNumericalInfoType_model(SchemaModel):
       'ce',
       blank=True, null=True, )
 
-    linkToOtherMediaInfo = models.ManyToManyField("linkToOtherMediaInfoType_model", 
-      verbose_name='Link to other media', 
-      help_text='Groups information on the way different media of the re' \
-      'source interact with or link to each other. To be used for multim' \
-      'odal resources or for resources representing sensorimotor data',
-      blank=True, null=True, related_name="linkToOtherMediaInfo_%(class)s_related", )
+    # OneToMany field: linkToOtherMediaInfo
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
@@ -5059,6 +5124,7 @@ class textNumericalContentInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Text numerical content"
+
 
     __schema_name__ = 'textNumericalContentInfoType'
     __schema_fields__ = (
@@ -5085,6 +5151,7 @@ class textNumericalFormatInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Text numerical format"
 
+
     __schema_name__ = 'textNumericalFormatInfoType'
     __schema_fields__ = (
       ( u'mimeType', u'mimeType', REQUIRED ),
@@ -5109,15 +5176,11 @@ class textNumericalFormatInfoType_model(SchemaModel):
       ' parts with different format',
       blank=True, null=True, )
 
-    back_to_corpustextnumericalinfotype_model = models.ForeignKey("corpusTextNumericalInfoType_model", )
+    back_to_corpustextnumericalinfotype_model = models.ForeignKey("corpusTextNumericalInfoType_model",  blank=True, null=True)
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
-
-CORPUSTEXTNGRAMINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
-])
 
 # pylint: disable-msg=C0103
 class corpusTextNgramInfoType_model(SchemaModel):
@@ -5132,21 +5195,22 @@ class corpusTextNgramInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Corpus text ngram"
 
+
     __schema_name__ = 'corpusTextNgramInfoType'
     __schema_fields__ = (
       ( u'mediaType', u'mediaType', REQUIRED ),
       ( u'ngramInfo', u'ngramInfo', REQUIRED ),
       ( u'lingualityInfo', u'lingualityInfo', REQUIRED ),
-      ( u'languageInfo', u'languageInfo', REQUIRED ),
+      ( u'languageInfo', u'languageinfotype_model_set', REQUIRED ),
       ( u'modalityInfo', u'modalityInfo', RECOMMENDED ),
-      ( u'sizeInfo', u'sizeInfo', REQUIRED ),
-      ( u'textFormatInfo', u'textFormatInfo', RECOMMENDED ),
-      ( u'characterEncodingInfo', u'characterEncodingInfo', RECOMMENDED ),
+      ( u'sizeInfo', u'sizeinfotype_model_set', REQUIRED ),
+      ( u'textFormatInfo', u'textformatinfotype_model_set', RECOMMENDED ),
+      ( u'characterEncodingInfo', u'characterencodinginfotype_model_set', RECOMMENDED ),
       ( u'annotationInfo', u'annotationInfo', RECOMMENDED ),
-      ( u'domainInfo', u'domainInfo', RECOMMENDED ),
-      ( u'textClassificationInfo', u'textClassificationInfo', RECOMMENDED ),
-      ( u'timeCoverageInfo', u'timeCoverageInfo', RECOMMENDED ),
-      ( u'geographicCoverageInfo', u'geographicCoverageInfo', RECOMMENDED ),
+      ( u'domainInfo', u'domaininfotype_model_set', RECOMMENDED ),
+      ( u'textClassificationInfo', u'textclassificationinfotype_model_set', RECOMMENDED ),
+      ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', RECOMMENDED ),
+      ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', RECOMMENDED ),
       ( u'creationInfo', u'creationInfo', RECOMMENDED ),
     )
     __schema_classes__ = {
@@ -5173,10 +5237,7 @@ class corpusTextNgramInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      
-      max_length=30,
-      choices=CORPUSTEXTNGRAMINFOTYPE_MEDIATYPE_CHOICES['choices'],
-      )
+      default="textNgram", editable=False, max_length=10, )
 
     ngramInfo = models.OneToOneField("ngramInfoType_model", 
       verbose_name='Ngram', )
@@ -5187,11 +5248,7 @@ class corpusTextNgramInfoType_model(SchemaModel):
       'source part and of the way they are combined to each other',
       )
 
-    languageInfo = models.ManyToManyField("languageInfoType_model", 
-      verbose_name='Language', 
-      help_text='Groups information on the languages represented in the ' \
-      'resource',
-      related_name="languageInfo_%(class)s_related", )
+    # OneToMany field: languageInfo
 
     modalityInfo = models.OneToOneField("modalityInfoType_model", 
       verbose_name='Modality', 
@@ -5199,22 +5256,11 @@ class corpusTextNgramInfoType_model(SchemaModel):
       ' resource',
       blank=True, null=True, )
 
-    sizeInfo = models.ManyToManyField("sizeInfoType_model", 
-      verbose_name='Size', 
-      help_text='Groups information on the size of the resource or of re' \
-      'source parts',
-      related_name="sizeInfo_%(class)s_related", )
+    # OneToMany field: sizeInfo
 
-    textFormatInfo = models.ManyToManyField("textFormatInfoType_model", 
-      verbose_name='Text format', 
-      help_text='Groups information on the text format(s) of a resource',
-      blank=True, null=True, related_name="textFormatInfo_%(class)s_related", )
+    # OneToMany field: textFormatInfo
 
-    characterEncodingInfo = models.ManyToManyField("characterEncodingInfoType_model", 
-      verbose_name='Character encoding', 
-      help_text='Groups together information on character encoding of th' \
-      'e resource',
-      blank=True, null=True, related_name="characterEncodingInfo_%(class)s_related", )
+    # OneToMany field: characterEncodingInfo
 
     annotationInfo = models.ManyToManyField("annotationInfoType_model", 
       verbose_name='Annotation', 
@@ -5222,30 +5268,13 @@ class corpusTextNgramInfoType_model(SchemaModel):
       'ce',
       blank=True, null=True, related_name="annotationInfo_%(class)s_related", )
 
-    domainInfo = models.ManyToManyField("domainInfoType_model", 
-      verbose_name='Domain', 
-      help_text='Groups together information on domains represented in t' \
-      'he resource; can be repeated for parts of the resource with disti' \
-      'nct domain',
-      blank=True, null=True, related_name="domainInfo_%(class)s_related", )
+    # OneToMany field: domainInfo
 
-    textClassificationInfo = models.ManyToManyField("textClassificationInfoType_model", 
-      verbose_name='Text classification', 
-      help_text='Groups together information on text type/genre of the r' \
-      'esource',
-      blank=True, null=True, related_name="textClassificationInfo_%(class)s_related", )
+    # OneToMany field: textClassificationInfo
 
-    timeCoverageInfo = models.ManyToManyField("timeCoverageInfoType_model", 
-      verbose_name='Time coverage', 
-      help_text='Groups together information on time classification of t' \
-      'he resource',
-      blank=True, null=True, related_name="timeCoverageInfo_%(class)s_related", )
+    # OneToMany field: timeCoverageInfo
 
-    geographicCoverageInfo = models.ManyToManyField("geographicCoverageInfoType_model", 
-      verbose_name='Geographic coverage', 
-      help_text='Groups information on geographic classification of the ' \
-      'resource',
-      blank=True, null=True, related_name="geographicCoverageInfo_%(class)s_related", )
+    # OneToMany field: geographicCoverageInfo
 
     creationInfo = models.OneToOneField("creationInfoType_model", 
       verbose_name='Creation', 
@@ -5274,6 +5303,7 @@ class ngramInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Ngram"
+
 
     __schema_name__ = 'ngramInfoType'
     __schema_fields__ = (
@@ -5352,6 +5382,7 @@ class relatedLexiconInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Related lexicon"
 
+
     __schema_name__ = 'relatedLexiconInfoType'
     __schema_fields__ = (
       ( u'relatedLexiconType', u'relatedLexiconType', REQUIRED ),
@@ -5412,6 +5443,7 @@ class languageDescriptionEncodingInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Language description encoding"
+
 
     __schema_name__ = 'languageDescriptionEncodingInfoType'
     __schema_fields__ = (
@@ -5491,6 +5523,7 @@ class languageDescriptionOperationInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Language description operation"
 
+
     __schema_name__ = 'languageDescriptionOperationInfoType'
     __schema_fields__ = (
       ( u'runningEnvironmentInfo', u'runningEnvironmentInfo', RECOMMENDED ),
@@ -5527,6 +5560,7 @@ class languageDescriptionPerformanceInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Language description performance"
 
+
     __schema_name__ = 'languageDescriptionPerformanceInfoType'
     __schema_fields__ = (
       ( u'robustness', u'robustness', RECOMMENDED ),
@@ -5559,10 +5593,6 @@ class languageDescriptionPerformanceInfoType_model(SchemaModel):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
 
-LANGUAGEDESCRIPTIONTEXTINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
-])
-
 # pylint: disable-msg=C0103
 class languageDescriptionTextInfoType_model(SchemaModel):
     """
@@ -5574,20 +5604,21 @@ class languageDescriptionTextInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Language description text"
 
+
     __schema_name__ = 'languageDescriptionTextInfoType'
     __schema_fields__ = (
       ( u'mediaType', u'mediaType', REQUIRED ),
       ( u'creationInfo', u'creationInfo', RECOMMENDED ),
-      ( u'linkToOtherMediaInfo', u'linkToOtherMediaInfo', OPTIONAL ),
+      ( u'linkToOtherMediaInfo', u'linktoothermediainfotype_model_set', OPTIONAL ),
       ( u'lingualityInfo', u'lingualityInfo', REQUIRED ),
-      ( u'languageInfo', u'languageInfo', REQUIRED ),
+      ( u'languageInfo', u'languageinfotype_model_set', REQUIRED ),
       ( u'modalityInfo', u'modalityInfo', RECOMMENDED ),
-      ( u'sizeInfo', u'sizeInfo', RECOMMENDED ),
-      ( u'textFormatInfo', u'textFormatInfo', RECOMMENDED ),
-      ( u'characterEncodingInfo', u'characterEncodingInfo', RECOMMENDED ),
-      ( u'domainInfo', u'domainInfo', RECOMMENDED ),
-      ( u'timeCoverageInfo', u'timeCoverageInfo', RECOMMENDED ),
-      ( u'geographicCoverageInfo', u'geographicCoverageInfo', RECOMMENDED ),
+      ( u'sizeInfo', u'sizeinfotype_model_set', RECOMMENDED ),
+      ( u'textFormatInfo', u'textformatinfotype_model_set', RECOMMENDED ),
+      ( u'characterEncodingInfo', u'characterencodinginfotype_model_set', RECOMMENDED ),
+      ( u'domainInfo', u'domaininfotype_model_set', RECOMMENDED ),
+      ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', RECOMMENDED ),
+      ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', RECOMMENDED ),
     )
     __schema_classes__ = {
       u'characterEncodingInfo': "characterEncodingInfoType_model",
@@ -5611,10 +5642,7 @@ class languageDescriptionTextInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      
-      max_length=LANGUAGEDESCRIPTIONTEXTINFOTYPE_MEDIATYPE_CHOICES['max_length'],
-      choices=LANGUAGEDESCRIPTIONTEXTINFOTYPE_MEDIATYPE_CHOICES['choices'],
-      )
+      default="text", editable=False, max_length=10, )
 
     creationInfo = models.OneToOneField("creationInfoType_model", 
       verbose_name='Creation', 
@@ -5624,12 +5652,7 @@ class languageDescriptionTextInfoType_model(SchemaModel):
       'ma list etc.)',
       blank=True, null=True, )
 
-    linkToOtherMediaInfo = models.ManyToManyField("linkToOtherMediaInfoType_model", 
-      verbose_name='Link to other media', 
-      help_text='Groups information on the way different media of the re' \
-      'source interact with or link to each other. To be used for multim' \
-      'odal resources or for resources representing sensorimotor data',
-      blank=True, null=True, related_name="linkToOtherMediaInfo_%(class)s_related", )
+    # OneToMany field: linkToOtherMediaInfo
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -5637,11 +5660,7 @@ class languageDescriptionTextInfoType_model(SchemaModel):
       'source part and of the way they are combined to each other',
       )
 
-    languageInfo = models.ManyToManyField("languageInfoType_model", 
-      verbose_name='Language', 
-      help_text='Groups information on the languages represented in the ' \
-      'resource',
-      related_name="languageInfo_%(class)s_related", )
+    # OneToMany field: languageInfo
 
     modalityInfo = models.OneToOneField("modalityInfoType_model", 
       verbose_name='Modality', 
@@ -5649,49 +5668,21 @@ class languageDescriptionTextInfoType_model(SchemaModel):
       ' resource',
       blank=True, null=True, )
 
-    sizeInfo = models.ManyToManyField("sizeInfoType_model", 
-      verbose_name='Size', 
-      help_text='Groups information on the size of the resource or of re' \
-      'source parts',
-      blank=True, null=True, related_name="sizeInfo_%(class)s_related", )
+    # OneToMany field: sizeInfo
 
-    textFormatInfo = models.ManyToManyField("textFormatInfoType_model", 
-      verbose_name='Text format', 
-      help_text='Groups information on the text format(s) of a resource',
-      blank=True, null=True, related_name="textFormatInfo_%(class)s_related", )
+    # OneToMany field: textFormatInfo
 
-    characterEncodingInfo = models.ManyToManyField("characterEncodingInfoType_model", 
-      verbose_name='Character encoding', 
-      help_text='Groups together information on character encoding of th' \
-      'e resource',
-      blank=True, null=True, related_name="characterEncodingInfo_%(class)s_related", )
+    # OneToMany field: characterEncodingInfo
 
-    domainInfo = models.ManyToManyField("domainInfoType_model", 
-      verbose_name='Domain', 
-      help_text='Groups together information on domains represented in t' \
-      'he resource; can be repeated for parts of the resource with disti' \
-      'nct domain',
-      blank=True, null=True, related_name="domainInfo_%(class)s_related", )
+    # OneToMany field: domainInfo
 
-    timeCoverageInfo = models.ManyToManyField("timeCoverageInfoType_model", 
-      verbose_name='Time coverage', 
-      help_text='Groups together information on time classification of t' \
-      'he resource',
-      blank=True, null=True, related_name="timeCoverageInfo_%(class)s_related", )
+    # OneToMany field: timeCoverageInfo
 
-    geographicCoverageInfo = models.ManyToManyField("geographicCoverageInfoType_model", 
-      verbose_name='Geographic coverage', 
-      help_text='Groups information on geographic classification of the ' \
-      'resource',
-      blank=True, null=True, related_name="geographicCoverageInfo_%(class)s_related", )
+    # OneToMany field: geographicCoverageInfo
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
-
-LANGUAGEDESCRIPTIONVIDEOINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
-])
 
 # pylint: disable-msg=C0103
 class languageDescriptionVideoInfoType_model(SchemaModel):
@@ -5704,20 +5695,21 @@ class languageDescriptionVideoInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Language description video"
 
+
     __schema_name__ = 'languageDescriptionVideoInfoType'
     __schema_fields__ = (
       ( u'mediaType', u'mediaType', REQUIRED ),
       ( u'creationInfo', u'creationInfo', RECOMMENDED ),
-      ( u'linkToOtherMediaInfo', u'linkToOtherMediaInfo', REQUIRED ),
+      ( u'linkToOtherMediaInfo', u'linktoothermediainfotype_model_set', REQUIRED ),
       ( u'lingualityInfo', u'lingualityInfo', OPTIONAL ),
-      ( u'languageInfo', u'languageInfo', OPTIONAL ),
-      ( u'modalityInfo', u'modalityInfo', RECOMMENDED ),
-      ( u'sizeInfo', u'sizeInfo', RECOMMENDED ),
+      ( u'languageInfo', u'languageinfotype_model_set', OPTIONAL ),
+      ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
+      ( u'sizeInfo', u'sizeinfotype_model_set', RECOMMENDED ),
       ( u'videoContentInfo', u'videoContentInfo', RECOMMENDED ),
       ( u'videoFormatInfo', u'videoFormatInfo', RECOMMENDED ),
-      ( u'domainInfo', u'domainInfo', RECOMMENDED ),
-      ( u'geographicCoverageInfo', u'geographicCoverageInfo', RECOMMENDED ),
-      ( u'timeCoverageInfo', u'timeCoverageInfo', RECOMMENDED ),
+      ( u'domainInfo', u'domaininfotype_model_set', RECOMMENDED ),
+      ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', RECOMMENDED ),
+      ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', RECOMMENDED ),
     )
     __schema_classes__ = {
       u'creationInfo': "creationInfoType_model",
@@ -5741,10 +5733,7 @@ class languageDescriptionVideoInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      
-      max_length=LANGUAGEDESCRIPTIONVIDEOINFOTYPE_MEDIATYPE_CHOICES['max_length'],
-      choices=LANGUAGEDESCRIPTIONVIDEOINFOTYPE_MEDIATYPE_CHOICES['choices'],
-      )
+      default="video", editable=False, max_length=10, )
 
     creationInfo = models.OneToOneField("creationInfoType_model", 
       verbose_name='Creation', 
@@ -5754,12 +5743,7 @@ class languageDescriptionVideoInfoType_model(SchemaModel):
       'ma list etc.)',
       blank=True, null=True, )
 
-    linkToOtherMediaInfo = models.ManyToManyField("linkToOtherMediaInfoType_model", 
-      verbose_name='Link to other media', 
-      help_text='Groups information on the way different media of the re' \
-      'source interact with or link to each other. To be used for multim' \
-      'odal resources or for resources representing sensorimotor data',
-      related_name="linkToOtherMediaInfo_%(class)s_related", )
+    # OneToMany field: linkToOtherMediaInfo
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -5767,23 +5751,11 @@ class languageDescriptionVideoInfoType_model(SchemaModel):
       'source part and of the way they are combined to each other',
       blank=True, null=True, )
 
-    languageInfo = models.ManyToManyField("languageInfoType_model", 
-      verbose_name='Language', 
-      help_text='Groups information on the languages represented in the ' \
-      'resource',
-      blank=True, null=True, related_name="languageInfo_%(class)s_related", )
+    # OneToMany field: languageInfo
 
-    modalityInfo = models.ManyToManyField("modalityInfoType_model", 
-      verbose_name='Modality', 
-      help_text='Groups information on the modalities represented in the' \
-      ' resource',
-      blank=True, null=True, related_name="modalityInfo_%(class)s_related", )
+    # OneToMany field: modalityInfo
 
-    sizeInfo = models.ManyToManyField("sizeInfoType_model", 
-      verbose_name='Size', 
-      help_text='Groups information on the size of the resource or of re' \
-      'source parts',
-      blank=True, null=True, related_name="sizeInfo_%(class)s_related", )
+    # OneToMany field: sizeInfo
 
     videoContentInfo = models.OneToOneField("videoContentInfoType_model", 
       verbose_name='Video content', 
@@ -5797,32 +5769,15 @@ class languageDescriptionVideoInfoType_model(SchemaModel):
       'ated if parts of the resource are in different formats',
       blank=True, null=True, related_name="videoFormatInfo_%(class)s_related", )
 
-    domainInfo = models.ManyToManyField("domainInfoType_model", 
-      verbose_name='Domain', 
-      help_text='Groups together information on domains represented in t' \
-      'he resource; can be repeated for parts of the resource with disti' \
-      'nct domain',
-      blank=True, null=True, related_name="domainInfo_%(class)s_related", )
+    # OneToMany field: domainInfo
 
-    geographicCoverageInfo = models.ManyToManyField("geographicCoverageInfoType_model", 
-      verbose_name='Geographic coverage', 
-      help_text='Groups information on geographic classification of the ' \
-      'resource',
-      blank=True, null=True, related_name="geographicCoverageInfo_%(class)s_related", )
+    # OneToMany field: geographicCoverageInfo
 
-    timeCoverageInfo = models.ManyToManyField("timeCoverageInfoType_model", 
-      verbose_name='Time coverage', 
-      help_text='Groups together information on time classification of t' \
-      'he resource',
-      blank=True, null=True, related_name="timeCoverageInfo_%(class)s_related", )
+    # OneToMany field: timeCoverageInfo
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
-
-LANGUAGEDESCRIPTIONIMAGEINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
-])
 
 # pylint: disable-msg=C0103
 class languageDescriptionImageInfoType_model(SchemaModel):
@@ -5835,20 +5790,21 @@ class languageDescriptionImageInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Language description image"
 
+
     __schema_name__ = 'languageDescriptionImageInfoType'
     __schema_fields__ = (
       ( u'mediaType', u'mediaType', REQUIRED ),
       ( u'lingualityInfo', u'lingualityInfo', OPTIONAL ),
-      ( u'languageInfo', u'languageInfo', OPTIONAL ),
+      ( u'languageInfo', u'languageinfotype_model_set', OPTIONAL ),
       ( u'creationInfo', u'creationInfo', RECOMMENDED ),
-      ( u'linkToOtherMediaInfo', u'linkToOtherMediaInfo', REQUIRED ),
-      ( u'modalityInfo', u'modalityInfo', RECOMMENDED ),
-      ( u'sizeInfo', u'sizeInfo', RECOMMENDED ),
+      ( u'linkToOtherMediaInfo', u'linktoothermediainfotype_model_set', REQUIRED ),
+      ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
+      ( u'sizeInfo', u'sizeinfotype_model_set', RECOMMENDED ),
       ( u'imageContentInfo', u'imageContentInfo', RECOMMENDED ),
       ( u'imageFormatInfo', u'imageFormatInfo', RECOMMENDED ),
-      ( u'domainInfo', u'domainInfo', OPTIONAL ),
-      ( u'geographicCoverageInfo', u'geographicCoverageInfo', OPTIONAL ),
-      ( u'timeCoverageInfo', u'timeCoverageInfo', OPTIONAL ),
+      ( u'domainInfo', u'domaininfotype_model_set', OPTIONAL ),
+      ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', OPTIONAL ),
+      ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', OPTIONAL ),
     )
     __schema_classes__ = {
       u'creationInfo': "creationInfoType_model",
@@ -5872,10 +5828,7 @@ class languageDescriptionImageInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      
-      max_length=LANGUAGEDESCRIPTIONIMAGEINFOTYPE_MEDIATYPE_CHOICES['max_length'],
-      choices=LANGUAGEDESCRIPTIONIMAGEINFOTYPE_MEDIATYPE_CHOICES['choices'],
-      )
+      default="image", editable=False, max_length=10, )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -5883,11 +5836,7 @@ class languageDescriptionImageInfoType_model(SchemaModel):
       'source part and of the way they are combined to each other',
       blank=True, null=True, )
 
-    languageInfo = models.ManyToManyField("languageInfoType_model", 
-      verbose_name='Language', 
-      help_text='Groups information on the languages represented in the ' \
-      'resource',
-      blank=True, null=True, related_name="languageInfo_%(class)s_related", )
+    # OneToMany field: languageInfo
 
     creationInfo = models.OneToOneField("creationInfoType_model", 
       verbose_name='Creation', 
@@ -5897,24 +5846,11 @@ class languageDescriptionImageInfoType_model(SchemaModel):
       'ma list etc.)',
       blank=True, null=True, )
 
-    linkToOtherMediaInfo = models.ManyToManyField("linkToOtherMediaInfoType_model", 
-      verbose_name='Link to other media', 
-      help_text='Groups information on the way different media of the re' \
-      'source interact with or link to each other. To be used for multim' \
-      'odal resources or for resources representing sensorimotor data',
-      related_name="linkToOtherMediaInfo_%(class)s_related", )
+    # OneToMany field: linkToOtherMediaInfo
 
-    modalityInfo = models.ManyToManyField("modalityInfoType_model", 
-      verbose_name='Modality', 
-      help_text='Groups information on the modalities represented in the' \
-      ' resource',
-      blank=True, null=True, related_name="modalityInfo_%(class)s_related", )
+    # OneToMany field: modalityInfo
 
-    sizeInfo = models.ManyToManyField("sizeInfoType_model", 
-      verbose_name='Size', 
-      help_text='Groups information on the size of the resource or of re' \
-      'source parts',
-      blank=True, null=True, related_name="sizeInfo_%(class)s_related", )
+    # OneToMany field: sizeInfo
 
     imageContentInfo = models.OneToOneField("imageContentInfoType_model", 
       verbose_name='Image content', 
@@ -5928,24 +5864,11 @@ class languageDescriptionImageInfoType_model(SchemaModel):
       ' of the resource',
       blank=True, null=True, related_name="imageFormatInfo_%(class)s_related", )
 
-    domainInfo = models.ManyToManyField("domainInfoType_model", 
-      verbose_name='Domain', 
-      help_text='Groups together information on domains represented in t' \
-      'he resource; can be repeated for parts of the resource with disti' \
-      'nct domain',
-      blank=True, null=True, related_name="domainInfo_%(class)s_related", )
+    # OneToMany field: domainInfo
 
-    geographicCoverageInfo = models.ManyToManyField("geographicCoverageInfoType_model", 
-      verbose_name='Geographic coverage', 
-      help_text='Groups information on geographic classification of the ' \
-      'resource',
-      blank=True, null=True, related_name="geographicCoverageInfo_%(class)s_related", )
+    # OneToMany field: geographicCoverageInfo
 
-    timeCoverageInfo = models.ManyToManyField("timeCoverageInfoType_model", 
-      verbose_name='Time coverage', 
-      help_text='Groups together information on time classification of t' \
-      'he resource',
-      blank=True, null=True, related_name="timeCoverageInfo_%(class)s_related", )
+    # OneToMany field: timeCoverageInfo
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -5994,6 +5917,7 @@ class lexicalConceptualResourceEncodingInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Lexical conceptual resource encoding"
+
 
     __schema_name__ = 'lexicalConceptualResourceEncodingInfoType'
     __schema_fields__ = (
@@ -6068,10 +5992,6 @@ class lexicalConceptualResourceEncodingInfoType_model(SchemaModel):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
 
-LEXICALCONCEPTUALRESOURCEAUDIOINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
-])
-
 # pylint: disable-msg=C0103
 class lexicalConceptualResourceAudioInfoType_model(SchemaModel):
     """
@@ -6082,18 +6002,19 @@ class lexicalConceptualResourceAudioInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Lexical conceptual resource audio"
 
+
     __schema_name__ = 'lexicalConceptualResourceAudioInfoType'
     __schema_fields__ = (
       ( u'mediaType', u'mediaType', REQUIRED ),
       ( u'lingualityInfo', u'lingualityInfo', OPTIONAL ),
-      ( u'languageInfo', u'languageInfo', OPTIONAL ),
-      ( u'modalityInfo', u'modalityInfo', RECOMMENDED ),
-      ( u'sizeInfo', u'sizeInfo', RECOMMENDED ),
+      ( u'languageInfo', u'languageinfotype_model_set', OPTIONAL ),
+      ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
+      ( u'sizeInfo', u'sizeinfotype_model_set', RECOMMENDED ),
       ( u'audioContentInfo', u'audioContentInfo', RECOMMENDED ),
-      ( u'audioFormatInfo', u'audioFormatInfo', RECOMMENDED ),
-      ( u'domainInfo', u'domainInfo', OPTIONAL ),
-      ( u'geographicCoverageInfo', u'geographicCoverageInfo', OPTIONAL ),
-      ( u'timeCoverageInfo', u'timeCoverageInfo', OPTIONAL ),
+      ( u'audioFormatInfo', u'audioformatinfotype_model_set', RECOMMENDED ),
+      ( u'domainInfo', u'domaininfotype_model_set', OPTIONAL ),
+      ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', OPTIONAL ),
+      ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', OPTIONAL ),
     )
     __schema_classes__ = {
       u'audioContentInfo': "audioContentInfoType_model",
@@ -6115,10 +6036,7 @@ class lexicalConceptualResourceAudioInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      
-      max_length=LEXICALCONCEPTUALRESOURCEAUDIOINFOTYPE_MEDIATYPE_CHOICES['max_length'],
-      choices=LEXICALCONCEPTUALRESOURCEAUDIOINFOTYPE_MEDIATYPE_CHOICES['choices'],
-      )
+      default="audio", editable=False, max_length=10, )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -6126,23 +6044,11 @@ class lexicalConceptualResourceAudioInfoType_model(SchemaModel):
       'source part and of the way they are combined to each other',
       blank=True, null=True, )
 
-    languageInfo = models.ManyToManyField("languageInfoType_model", 
-      verbose_name='Language', 
-      help_text='Groups information on the languages represented in the ' \
-      'resource',
-      blank=True, null=True, related_name="languageInfo_%(class)s_related", )
+    # OneToMany field: languageInfo
 
-    modalityInfo = models.ManyToManyField("modalityInfoType_model", 
-      verbose_name='Modality', 
-      help_text='Groups information on the modalities represented in the' \
-      ' resource',
-      blank=True, null=True, related_name="modalityInfo_%(class)s_related", )
+    # OneToMany field: modalityInfo
 
-    sizeInfo = models.ManyToManyField("sizeInfoType_model", 
-      verbose_name='Size', 
-      help_text='Groups information on the size of the resource or of re' \
-      'source parts',
-      blank=True, null=True, related_name="sizeInfo_%(class)s_related", )
+    # OneToMany field: sizeInfo
 
     audioContentInfo = models.OneToOneField("audioContentInfoType_model", 
       verbose_name='Audio content', 
@@ -6150,38 +6056,17 @@ class lexicalConceptualResourceAudioInfoType_model(SchemaModel):
       'o part of a resource',
       blank=True, null=True, )
 
-    audioFormatInfo = models.ManyToManyField("audioFormatInfoType_model", 
-      verbose_name='Audio format', 
-      help_text='Groups together information on the format of the audio ' \
-      'part of a resource',
-      blank=True, null=True, related_name="audioFormatInfo_%(class)s_related", )
+    # OneToMany field: audioFormatInfo
 
-    domainInfo = models.ManyToManyField("domainInfoType_model", 
-      verbose_name='Domain', 
-      help_text='Groups together information on domains represented in t' \
-      'he resource; can be repeated for parts of the resource with disti' \
-      'nct domain',
-      blank=True, null=True, related_name="domainInfo_%(class)s_related", )
+    # OneToMany field: domainInfo
 
-    geographicCoverageInfo = models.ManyToManyField("geographicCoverageInfoType_model", 
-      verbose_name='Geographic coverage', 
-      help_text='Groups information on geographic classification of the ' \
-      'resource',
-      blank=True, null=True, related_name="geographicCoverageInfo_%(class)s_related", )
+    # OneToMany field: geographicCoverageInfo
 
-    timeCoverageInfo = models.ManyToManyField("timeCoverageInfoType_model", 
-      verbose_name='Time coverage', 
-      help_text='Groups together information on time classification of t' \
-      'he resource',
-      blank=True, null=True, related_name="timeCoverageInfo_%(class)s_related", )
+    # OneToMany field: timeCoverageInfo
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
-
-LEXICALCONCEPTUALRESOURCETEXTINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
-])
 
 # pylint: disable-msg=C0103
 class lexicalConceptualResourceTextInfoType_model(SchemaModel):
@@ -6193,18 +6078,19 @@ class lexicalConceptualResourceTextInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Lexical conceptual resource text"
 
+
     __schema_name__ = 'lexicalConceptualResourceTextInfoType'
     __schema_fields__ = (
       ( u'mediaType', u'mediaType', REQUIRED ),
       ( u'lingualityInfo', u'lingualityInfo', REQUIRED ),
-      ( u'languageInfo', u'languageInfo', REQUIRED ),
-      ( u'modalityInfo', u'modalityInfo', RECOMMENDED ),
-      ( u'sizeInfo', u'sizeInfo', REQUIRED ),
-      ( u'textFormatInfo', u'textFormatInfo', RECOMMENDED ),
-      ( u'characterEncodingInfo', u'characterEncodingInfo', OPTIONAL ),
-      ( u'domainInfo', u'domainInfo', OPTIONAL ),
-      ( u'timeCoverageInfo', u'timeCoverageInfo', OPTIONAL ),
-      ( u'geographicCoverageInfo', u'geographicCoverageInfo', OPTIONAL ),
+      ( u'languageInfo', u'languageinfotype_model_set', REQUIRED ),
+      ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
+      ( u'sizeInfo', u'sizeinfotype_model_set', REQUIRED ),
+      ( u'textFormatInfo', u'textformatinfotype_model_set', RECOMMENDED ),
+      ( u'characterEncodingInfo', u'characterencodinginfotype_model_set', OPTIONAL ),
+      ( u'domainInfo', u'domaininfotype_model_set', OPTIONAL ),
+      ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', OPTIONAL ),
+      ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', OPTIONAL ),
     )
     __schema_classes__ = {
       u'characterEncodingInfo': "characterEncodingInfoType_model",
@@ -6226,10 +6112,7 @@ class lexicalConceptualResourceTextInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      
-      max_length=LEXICALCONCEPTUALRESOURCETEXTINFOTYPE_MEDIATYPE_CHOICES['max_length'],
-      choices=LEXICALCONCEPTUALRESOURCETEXTINFOTYPE_MEDIATYPE_CHOICES['choices'],
-      )
+      default="text", editable=False, max_length=10, )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -6237,61 +6120,25 @@ class lexicalConceptualResourceTextInfoType_model(SchemaModel):
       'source part and of the way they are combined to each other',
       )
 
-    languageInfo = models.ManyToManyField("languageInfoType_model", 
-      verbose_name='Language', 
-      help_text='Groups information on the languages represented in the ' \
-      'resource',
-      related_name="languageInfo_%(class)s_related", )
+    # OneToMany field: languageInfo
 
-    modalityInfo = models.ManyToManyField("modalityInfoType_model", 
-      verbose_name='Modality', 
-      help_text='Groups information on the modalities represented in the' \
-      ' resource',
-      blank=True, null=True, related_name="modalityInfo_%(class)s_related", )
+    # OneToMany field: modalityInfo
 
-    sizeInfo = models.ManyToManyField("sizeInfoType_model", 
-      verbose_name='Size', 
-      help_text='Groups information on the size of the resource or of re' \
-      'source parts',
-      related_name="sizeInfo_%(class)s_related", )
+    # OneToMany field: sizeInfo
 
-    textFormatInfo = models.ManyToManyField("textFormatInfoType_model", 
-      verbose_name='Text format', 
-      help_text='Groups information on the text format(s) of a resource',
-      blank=True, null=True, related_name="textFormatInfo_%(class)s_related", )
+    # OneToMany field: textFormatInfo
 
-    characterEncodingInfo = models.ManyToManyField("characterEncodingInfoType_model", 
-      verbose_name='Character encoding', 
-      help_text='Groups together information on character encoding of th' \
-      'e resource',
-      blank=True, null=True, related_name="characterEncodingInfo_%(class)s_related", )
+    # OneToMany field: characterEncodingInfo
 
-    domainInfo = models.ManyToManyField("domainInfoType_model", 
-      verbose_name='Domain', 
-      help_text='Groups together information on domains represented in t' \
-      'he resource; can be repeated for parts of the resource with disti' \
-      'nct domain',
-      blank=True, null=True, related_name="domainInfo_%(class)s_related", )
+    # OneToMany field: domainInfo
 
-    timeCoverageInfo = models.ManyToManyField("timeCoverageInfoType_model", 
-      verbose_name='Time coverage', 
-      help_text='Groups together information on time classification of t' \
-      'he resource',
-      blank=True, null=True, related_name="timeCoverageInfo_%(class)s_related", )
+    # OneToMany field: timeCoverageInfo
 
-    geographicCoverageInfo = models.ManyToManyField("geographicCoverageInfoType_model", 
-      verbose_name='Geographic coverage', 
-      help_text='Groups information on geographic classification of the ' \
-      'resource',
-      blank=True, null=True, related_name="geographicCoverageInfo_%(class)s_related", )
+    # OneToMany field: geographicCoverageInfo
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
-
-LEXICALCONCEPTUALRESOURCEVIDEOINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
-])
 
 # pylint: disable-msg=C0103
 class lexicalConceptualResourceVideoInfoType_model(SchemaModel):
@@ -6303,18 +6150,19 @@ class lexicalConceptualResourceVideoInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Lexical conceptual resource video"
 
+
     __schema_name__ = 'lexicalConceptualResourceVideoInfoType'
     __schema_fields__ = (
       ( u'mediaType', u'mediaType', REQUIRED ),
       ( u'lingualityInfo', u'lingualityInfo', OPTIONAL ),
-      ( u'languageInfo', u'languageInfo', OPTIONAL ),
-      ( u'modalityInfo', u'modalityInfo', RECOMMENDED ),
-      ( u'sizeInfo', u'sizeInfo', RECOMMENDED ),
+      ( u'languageInfo', u'languageinfotype_model_set', OPTIONAL ),
+      ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
+      ( u'sizeInfo', u'sizeinfotype_model_set', RECOMMENDED ),
       ( u'videoContentInfo', u'videoContentInfo', REQUIRED ),
       ( u'videoFormatInfo', u'videoFormatInfo', RECOMMENDED ),
-      ( u'domainInfo', u'domainInfo', OPTIONAL ),
-      ( u'geographicCoverageInfo', u'geographicCoverageInfo', OPTIONAL ),
-      ( u'timeCoverageInfo', u'timeCoverageInfo', OPTIONAL ),
+      ( u'domainInfo', u'domaininfotype_model_set', OPTIONAL ),
+      ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', OPTIONAL ),
+      ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', OPTIONAL ),
     )
     __schema_classes__ = {
       u'domainInfo': "domainInfoType_model",
@@ -6336,10 +6184,7 @@ class lexicalConceptualResourceVideoInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      
-      max_length=LEXICALCONCEPTUALRESOURCEVIDEOINFOTYPE_MEDIATYPE_CHOICES['max_length'],
-      choices=LEXICALCONCEPTUALRESOURCEVIDEOINFOTYPE_MEDIATYPE_CHOICES['choices'],
-      )
+      default="video", editable=False, max_length=10, )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -6347,23 +6192,11 @@ class lexicalConceptualResourceVideoInfoType_model(SchemaModel):
       'source part and of the way they are combined to each other',
       blank=True, null=True, )
 
-    languageInfo = models.ManyToManyField("languageInfoType_model", 
-      verbose_name='Language', 
-      help_text='Groups information on the languages represented in the ' \
-      'resource',
-      blank=True, null=True, related_name="languageInfo_%(class)s_related", )
+    # OneToMany field: languageInfo
 
-    modalityInfo = models.ManyToManyField("modalityInfoType_model", 
-      verbose_name='Modality', 
-      help_text='Groups information on the modalities represented in the' \
-      ' resource',
-      blank=True, null=True, related_name="modalityInfo_%(class)s_related", )
+    # OneToMany field: modalityInfo
 
-    sizeInfo = models.ManyToManyField("sizeInfoType_model", 
-      verbose_name='Size', 
-      help_text='Groups information on the size of the resource or of re' \
-      'source parts',
-      blank=True, null=True, related_name="sizeInfo_%(class)s_related", )
+    # OneToMany field: sizeInfo
 
     videoContentInfo = models.OneToOneField("videoContentInfoType_model", 
       verbose_name='Video content', 
@@ -6377,32 +6210,15 @@ class lexicalConceptualResourceVideoInfoType_model(SchemaModel):
       'ated if parts of the resource are in different formats',
       blank=True, null=True, related_name="videoFormatInfo_%(class)s_related", )
 
-    domainInfo = models.ManyToManyField("domainInfoType_model", 
-      verbose_name='Domain', 
-      help_text='Groups together information on domains represented in t' \
-      'he resource; can be repeated for parts of the resource with disti' \
-      'nct domain',
-      blank=True, null=True, related_name="domainInfo_%(class)s_related", )
+    # OneToMany field: domainInfo
 
-    geographicCoverageInfo = models.ManyToManyField("geographicCoverageInfoType_model", 
-      verbose_name='Geographic coverage', 
-      help_text='Groups information on geographic classification of the ' \
-      'resource',
-      blank=True, null=True, related_name="geographicCoverageInfo_%(class)s_related", )
+    # OneToMany field: geographicCoverageInfo
 
-    timeCoverageInfo = models.ManyToManyField("timeCoverageInfoType_model", 
-      verbose_name='Time coverage', 
-      help_text='Groups together information on time classification of t' \
-      'he resource',
-      blank=True, null=True, related_name="timeCoverageInfo_%(class)s_related", )
+    # OneToMany field: timeCoverageInfo
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
-
-LEXICALCONCEPTUALRESOURCEIMAGEINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
-])
 
 # pylint: disable-msg=C0103
 class lexicalConceptualResourceImageInfoType_model(SchemaModel):
@@ -6414,18 +6230,19 @@ class lexicalConceptualResourceImageInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Lexical conceptual resource image"
 
+
     __schema_name__ = 'lexicalConceptualResourceImageInfoType'
     __schema_fields__ = (
       ( u'mediaType', u'mediaType', REQUIRED ),
-      ( u'modalityInfo', u'modalityInfo', RECOMMENDED ),
+      ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
       ( u'lingualityInfo', u'lingualityInfo', OPTIONAL ),
-      ( u'languageInfo', u'languageInfo', OPTIONAL ),
-      ( u'sizeInfo', u'sizeInfo', RECOMMENDED ),
+      ( u'languageInfo', u'languageinfotype_model_set', OPTIONAL ),
+      ( u'sizeInfo', u'sizeinfotype_model_set', RECOMMENDED ),
       ( u'imageContentInfo', u'imageContentInfo', RECOMMENDED ),
       ( u'imageFormatInfo', u'imageFormatInfo', RECOMMENDED ),
-      ( u'domainInfo', u'domainInfo', OPTIONAL ),
-      ( u'geographicCoverageInfo', u'geographicCoverageInfo', OPTIONAL ),
-      ( u'timeCoverageInfo', u'timeCoverageInfo', OPTIONAL ),
+      ( u'domainInfo', u'domaininfotype_model_set', OPTIONAL ),
+      ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', OPTIONAL ),
+      ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', OPTIONAL ),
     )
     __schema_classes__ = {
       u'domainInfo': "domainInfoType_model",
@@ -6447,16 +6264,9 @@ class lexicalConceptualResourceImageInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      
-      max_length=LEXICALCONCEPTUALRESOURCEIMAGEINFOTYPE_MEDIATYPE_CHOICES['max_length'],
-      choices=LEXICALCONCEPTUALRESOURCEIMAGEINFOTYPE_MEDIATYPE_CHOICES['choices'],
-      )
+      default="image", editable=False, max_length=10, )
 
-    modalityInfo = models.ManyToManyField("modalityInfoType_model", 
-      verbose_name='Modality', 
-      help_text='Groups information on the modalities represented in the' \
-      ' resource',
-      blank=True, null=True, related_name="modalityInfo_%(class)s_related", )
+    # OneToMany field: modalityInfo
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -6464,17 +6274,9 @@ class lexicalConceptualResourceImageInfoType_model(SchemaModel):
       'source part and of the way they are combined to each other',
       blank=True, null=True, )
 
-    languageInfo = models.ManyToManyField("languageInfoType_model", 
-      verbose_name='Language', 
-      help_text='Groups information on the languages represented in the ' \
-      'resource',
-      blank=True, null=True, related_name="languageInfo_%(class)s_related", )
+    # OneToMany field: languageInfo
 
-    sizeInfo = models.ManyToManyField("sizeInfoType_model", 
-      verbose_name='Size', 
-      help_text='Groups information on the size of the resource or of re' \
-      'source parts',
-      blank=True, null=True, related_name="sizeInfo_%(class)s_related", )
+    # OneToMany field: sizeInfo
 
     imageContentInfo = models.OneToOneField("imageContentInfoType_model", 
       verbose_name='Image content', 
@@ -6488,24 +6290,11 @@ class lexicalConceptualResourceImageInfoType_model(SchemaModel):
       ' of the resource',
       blank=True, null=True, related_name="imageFormatInfo_%(class)s_related", )
 
-    domainInfo = models.ManyToManyField("domainInfoType_model", 
-      verbose_name='Domain', 
-      help_text='Groups together information on domains represented in t' \
-      'he resource; can be repeated for parts of the resource with disti' \
-      'nct domain',
-      blank=True, null=True, related_name="domainInfo_%(class)s_related", )
+    # OneToMany field: domainInfo
 
-    geographicCoverageInfo = models.ManyToManyField("geographicCoverageInfoType_model", 
-      verbose_name='Geographic coverage', 
-      help_text='Groups information on geographic classification of the ' \
-      'resource',
-      blank=True, null=True, related_name="geographicCoverageInfo_%(class)s_related", )
+    # OneToMany field: geographicCoverageInfo
 
-    timeCoverageInfo = models.ManyToManyField("timeCoverageInfoType_model", 
-      verbose_name='Time coverage', 
-      help_text='Groups together information on time classification of t' \
-      'he resource',
-      blank=True, null=True, related_name="timeCoverageInfo_%(class)s_related", )
+    # OneToMany field: timeCoverageInfo
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -6615,6 +6404,7 @@ class inputInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Input"
+
 
     __schema_name__ = 'inputInfoType'
     __schema_fields__ = (
@@ -6852,6 +6642,7 @@ class outputInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Output"
 
+
     __schema_name__ = 'outputInfoType'
     __schema_fields__ = (
       ( u'mediaType', u'mediaType', REQUIRED ),
@@ -7009,6 +6800,7 @@ class toolServiceEvaluationInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Tool service evaluation"
 
+
     __schema_name__ = 'toolServiceEvaluationInfoType'
     __schema_fields__ = (
       ( u'evaluated', u'evaluated', REQUIRED ),
@@ -7112,6 +6904,7 @@ class toolServiceOperationInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Tool service operation"
 
+
     __schema_name__ = 'toolServiceOperationInfoType'
     __schema_fields__ = (
       ( u'operatingSystem', u'operatingSystem', REQUIRED ),
@@ -7154,6 +6947,7 @@ class toolServiceCreationInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Tool service creation"
+
 
     __schema_name__ = 'toolServiceCreationInfoType'
     __schema_fields__ = (
@@ -7206,10 +7000,6 @@ class resourceComponentTypeType_model(SubclassableModel):
         verbose_name = "Resource component"
 
 
-LEXICALCONCEPTUALRESOURCEINFOTYPE_RESOURCETYPE_CHOICES = _make_choices_from_list([
-  u'lexicalConceptualResource', 
-])
-
 LEXICALCONCEPTUALRESOURCEINFOTYPE_LEXICALCONCEPTUALRESOURCETYPE_CHOICES = _make_choices_from_list([
   u'wordList', u'computationalLexicon', u'ontology', u'wordnet',
   u'thesaurus',u'framenet', u'terminologicalResource',
@@ -7224,6 +7014,7 @@ class lexicalConceptualResourceInfoType_model(resourceComponentTypeType_model):
 
     class Meta:
         verbose_name = "Lexical conceptual resource"
+
 
     __schema_name__ = 'lexicalConceptualResourceInfoType'
     __schema_fields__ = (
@@ -7242,10 +7033,7 @@ class lexicalConceptualResourceInfoType_model(resourceComponentTypeType_model):
     resourceType = models.CharField(
       verbose_name='Resource', 
       help_text='Specifies the type of the resource being described',
-      
-      max_length=30,
-      choices=LEXICALCONCEPTUALRESOURCEINFOTYPE_RESOURCETYPE_CHOICES['choices'],
-      )
+      default="lexicalConceptualResource", editable=False, max_length=30, )
 
     lexicalConceptualResourceType = models.CharField(
       verbose_name='Lexical conceptual resource', 
@@ -7281,10 +7069,6 @@ class lexicalConceptualResourceInfoType_model(resourceComponentTypeType_model):
         formatstring = u'lexicalConceptualResource ({})'
         return self.unicode_(formatstring, formatargs)
 
-LANGUAGEDESCRIPTIONINFOTYPE_RESOURCETYPE_CHOICES = _make_choices_from_list([
-  u'languageDescription', 
-])
-
 LANGUAGEDESCRIPTIONINFOTYPE_LANGUAGEDESCRIPTIONTYPE_CHOICES = _make_choices_from_list([
   u'grammar', u'other', 
 ])
@@ -7297,6 +7081,7 @@ class languageDescriptionInfoType_model(resourceComponentTypeType_model):
 
     class Meta:
         verbose_name = "Language description"
+
 
     __schema_name__ = 'languageDescriptionInfoType'
     __schema_fields__ = (
@@ -7319,10 +7104,7 @@ class languageDescriptionInfoType_model(resourceComponentTypeType_model):
     resourceType = models.CharField(
       verbose_name='Resource', 
       help_text='Specifies the type of the resource being described',
-      
-      max_length=30,
-      choices=LANGUAGEDESCRIPTIONINFOTYPE_RESOURCETYPE_CHOICES['choices'],
-      )
+      default="languageDescription", editable=False, max_length=30, )
 
     languageDescriptionType = models.CharField(
       verbose_name='Language description', 
@@ -7370,10 +7152,6 @@ class languageDescriptionInfoType_model(resourceComponentTypeType_model):
         formatstring = u'languageDescription ({})'
         return self.unicode_(formatstring, formatargs)
 
-TOOLSERVICEINFOTYPE_RESOURCETYPE_CHOICES = _make_choices_from_list([
-  u'toolService', 
-])
-
 TOOLSERVICEINFOTYPE_TOOLSERVICETYPE_CHOICES = _make_choices_from_list([
   u'tool', u'service', u'platform', u'suiteOfTools', u'infrastructure',
   u'architecture',u'nlpDevelopmentEnvironment', u'other', 
@@ -7384,6 +7162,7 @@ class toolServiceInfoType_model(resourceComponentTypeType_model):
 
     class Meta:
         verbose_name = "Tool service"
+
 
     __schema_name__ = 'toolServiceInfoType'
     __schema_fields__ = (
@@ -7409,10 +7188,7 @@ class toolServiceInfoType_model(resourceComponentTypeType_model):
       verbose_name='Resource', 
       help_text='The type of the resource that a tool or service takes a' \
       's input or produces as output',
-      
-      max_length=30,
-      choices=TOOLSERVICEINFOTYPE_RESOURCETYPE_CHOICES['choices'],
-      )
+      default="toolService", editable=False, max_length=30, )
 
     toolServiceType = models.CharField(
       verbose_name='Tool service', 
@@ -7469,10 +7245,6 @@ class toolServiceInfoType_model(resourceComponentTypeType_model):
         formatstring = u'toolService ({})'
         return self.unicode_(formatstring, formatargs)
 
-CORPUSINFOTYPE_RESOURCETYPE_CHOICES = _make_choices_from_list([
-  u'corpus', 
-])
-
 # pylint: disable-msg=C0103
 class corpusInfoType_model(resourceComponentTypeType_model):
     """
@@ -7481,6 +7253,7 @@ class corpusInfoType_model(resourceComponentTypeType_model):
 
     class Meta:
         verbose_name = "Corpus"
+
 
     __schema_name__ = 'corpusInfoType'
     __schema_fields__ = (
@@ -7494,10 +7267,7 @@ class corpusInfoType_model(resourceComponentTypeType_model):
     resourceType = models.CharField(
       verbose_name='Resource', 
       help_text='Specifies the type of the resource being described',
-      
-      max_length=30,
-      choices=CORPUSINFOTYPE_RESOURCETYPE_CHOICES['choices'],
-      )
+      default="corpus", editable=False, max_length=30, )
 
     corpusMediaType = models.OneToOneField("corpusMediaTypeType_model", 
       verbose_name='Corpus media', 
@@ -7516,6 +7286,7 @@ class corpusMediaTypeType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Corpus media"
+
 
     __schema_name__ = 'corpusMediaTypeType'
     __schema_fields__ = (
@@ -7582,6 +7353,7 @@ class dynamicElementInfoType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Dynamic element"
+
 
     __schema_name__ = 'dynamicElementInfoType'
     __schema_fields__ = (
@@ -7693,6 +7465,7 @@ class staticElementInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Static element"
 
+
     __schema_name__ = 'staticElementInfoType'
     __schema_fields__ = (
       ( u'typeOfElement', u'typeOfElement', OPTIONAL ),
@@ -7779,6 +7552,7 @@ class languageDescriptionMediaTypeType_model(SchemaModel):
     class Meta:
         verbose_name = "Language description media"
 
+
     __schema_name__ = 'languageDescriptionMediaTypeType'
     __schema_fields__ = (
       ( u'languageDescriptionTextInfo', u'languageDescriptionTextInfo', RECOMMENDED ),
@@ -7821,6 +7595,7 @@ class lexicalConceptualResourceMediaTypeType_model(SchemaModel):
 
     class Meta:
         verbose_name = "Lexical conceptual resource media"
+
 
     __schema_name__ = 'lexicalConceptualResourceMediaTypeType'
     __schema_fields__ = (

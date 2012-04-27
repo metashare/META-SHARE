@@ -33,46 +33,46 @@ class ResourceLanguages(template.Node):
             media_type = corpus_media.corpusMediaType
             for corpus_info in media_type.corpustextinfotype_model_set.all():
                 result.extend([lang.languageName for lang in
-                               corpus_info.languageInfo.all()])
+                               corpus_info.languageinfotype_model_set.all()])
             if media_type.corpusAudioInfo:
                 result.extend([lang.languageName for lang in
-                               media_type.corpusAudioInfo.languageInfo.all()])
+                               media_type.corpusAudioInfo.languageinfotype_model_set.all()])
             for corpus_info in media_type.corpusvideoinfotype_model_set.all():
                 result.extend([lang.languageName for lang in
-                               corpus_info.languageInfo.all()])
+                               corpus_info.languageinfotype_model_set.all()])
             if media_type.corpusTextNgramInfo:
                 result.extend([lang.languageName for lang in
-                            media_type.corpusTextNgramInfo.languageInfo.all()])
+                            media_type.corpusTextNgramInfo.languageinfotype_model_set.all()])
             if media_type.corpusImageInfo:
                 result.extend([lang.languageName for lang in
-                               media_type.corpusImageInfo.languageInfo.all()])
+                               media_type.corpusImageInfo.languageinfotype_model_set.all()])
 
         elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
             lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
             if lcr_media_type.lexicalConceptualResourceAudioInfo:
                 result.extend([lang.languageName for lang in lcr_media_type \
-                        .lexicalConceptualResourceAudioInfo.languageInfo.all()])
+                        .lexicalConceptualResourceAudioInfo.languageinfotype_model_set.all()])
             if lcr_media_type.lexicalConceptualResourceTextInfo:
                 result.extend([lang.languageName for lang in lcr_media_type \
-                        .lexicalConceptualResourceTextInfo.languageInfo.all()])
+                        .lexicalConceptualResourceTextInfo.languageinfotype_model_set.all()])
             if lcr_media_type.lexicalConceptualResourceVideoInfo:
                 result.extend([lang.languageName for lang in lcr_media_type \
-                        .lexicalConceptualResourceVideoInfo.languageInfo.all()])
+                        .lexicalConceptualResourceVideoInfo.languageinfotype_model_set.all()])
             if lcr_media_type.lexicalConceptualResourceImageInfo:
                 result.extend([lang.languageName for lang in lcr_media_type \
-                        .lexicalConceptualResourceImageInfo.languageInfo.all()])
+                        .lexicalConceptualResourceImageInfo.languageinfotype_model_set.all()])
 
         elif isinstance(corpus_media, languageDescriptionInfoType_model):
             ld_media_type = corpus_media.languageDescriptionMediaType
             if ld_media_type.languageDescriptionTextInfo:
                 result.extend([lang.languageName for lang in ld_media_type \
-                            .languageDescriptionTextInfo.languageInfo.all()])
+                            .languageDescriptionTextInfo.languageinfotype_model_set.all()])
             if ld_media_type.languageDescriptionVideoInfo:
                 result.extend([lang.languageName for lang in ld_media_type \
-                            .languageDescriptionVideoInfo.languageInfo.all()])
+                            .languageDescriptionVideoInfo.languageinfotype_model_set.all()])
             if ld_media_type.languageDescriptionImageInfo:
                 result.extend([lang.languageName for lang in ld_media_type \
-                            .languageDescriptionImageInfo.languageInfo.all()])
+                            .languageDescriptionImageInfo.languageinfotype_model_set.all()])
 
         elif isinstance(corpus_media, toolServiceInfoType_model):
             if corpus_media.inputInfo:

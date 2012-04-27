@@ -1,10 +1,13 @@
-from metashare import test_utils
+from metashare import test_utils, settings
 from metashare.settings import DJANGO_BASE, ROOT_PATH
 from metashare.repository.models import resourceInfoType_model
 from haystack.query import SearchQuerySet
 from django.contrib.auth.models import User
 from django.test.client import Client
 import os
+from metashare.test_utils import create_user
+from django.core.management import call_command
+from django.test.testcases import TestCase
 
 
 class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
@@ -118,29 +121,22 @@ class SearchTest(test_utils.IndexAwareTestCase):
         """
         test_utils.setup_test_storage()                        
      
-        staffuser = User.objects.create_user('staffuser', 'staff@example.com',
-          'secret')
+        staffuser = create_user('staffuser', 'staff@example.com', 'secret')
         staffuser.is_staff = True
         staffuser.save()
-        normaluser =  User.objects.create_user('normaluser', 'normal@example.com', 'secret')
+        normaluser =  create_user('normaluser', 'normal@example.com', 'secret')
         normaluser.save()
 
     def tearDown(self):
         """
         Clean up the test
         """
-        resourceInfoType_model.objects.all().delete()                 
-                
+        resourceInfoType_model.objects.all().delete()
+        User.objects.all().delete()
+
     def importOneFixture(self):
         _currfile = '{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
         test_utils.import_xml_or_zip(_currfile)
-        
-    def importPublishedFixtures(self):
-        _path = '{}/repository/test_fixtures/pub/'.format(ROOT_PATH)
-        files = os.listdir(_path)   
-        for filename in files:
-            fullpath = os.path.join(_path, filename)  
-            test_utils.import_xml_or_zip(fullpath)
          
     def importIngestedFixtures(self):
         _path = '{}/repository/test_fixtures/ingested/'.format(ROOT_PATH)
@@ -247,150 +243,6 @@ class SearchTest(test_utils.IndexAwareTestCase):
           data={'q':'querywhichwillgivenoresults'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "No results were found for search query", status_code=200)
-          
-    def testLanguageFacet(self):   
-        client = Client()
-        self.importPublishedFixtures()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, data={'selected_facets':'languageNameFilter_exact:Chinese'})
-        self.assertEqual('repository/search.html', response.templates[0].name)
-        print response
-        self.assertContains(response, "2 Language Resources", status_code=200)
-             
-    def testLanguageFacetForNoResults(self):   
-        client = Client()
-        self.importPublishedFixtures()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, data={'selected_facets':'languageNameFilter_exact:Italian'})
-        self.assertEqual('repository/search.html', response.templates[0].name)
-        self.assertContains(response, "No results were found for search query", status_code=200)
-        
-    def testResourceTypeFacet(self):   
-        client = Client()
-        self.importPublishedFixtures()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, data={'selected_facets':'resourceTypeFilter_exact:corpus'})
-        self.assertEqual('repository/search.html', response.templates[0].name)
-        self.assertContains(response, "1 Language Resource", status_code=200)
-        
-    def testMediaTypeFacet(self):   
-        client = Client()
-        self.importPublishedFixtures()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, data={'selected_facets':'mediaTypeFilter_exact:audio'})
-        self.assertEqual('repository/search.html', response.templates[0].name)
-        self.assertContains(response, "2 Language Resources", status_code=200)
-     
-    def testAvailabilityFacet(self):   
-        client = Client()
-        self.importPublishedFixtures()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
-          data={'selected_facets':'availabilityFilter_exact:available-unrestrictedUse'})
-        self.assertEqual('repository/search.html', response.templates[0].name)
-        self.assertContains(response, "1 Language Resource", status_code=200)
-              
-    def testLicenceFacet(self):   
-        client = Client()
-        self.importPublishedFixtures()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, data={'selected_facets':'licenceFilter_exact:ELRA_END_USER'})
-        self.assertEqual('repository/search.html', response.templates[0].name)
-        self.assertContains(response, "2 Language Resources", status_code=200)
-    
-    
-    #def testLicenceFacetForTwoLicences(self):   
-    #   client = Client()
-    #   self.importPublishedFixtures()
-    #   response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
-    #     data={'selected_facets':'licenceFilter_exact:ELRA_END_USER', 'selected_facets':'licenceFilter_exact:ELRA_VAR'})
-    #   self.assertEqual('repository/search.html', response.templates[0].name)
-    #   print response
-    #   self.assertContains(response, "1 Language Resource", status_code=200)
-    
-    
-    def testRestrictionsOfUseFacet(self):   
-        client = Client()
-        self.importPublishedFixtures()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
-          data={'selected_facets':'restrictionsOfUseFilter_exact:academic-nonCommercialUse'})
-        self.assertEqual('repository/search.html', response.templates[0].name)
-        self.assertContains(response, "2 Language Resources", status_code=200)
-      
-    def testValidatedFacet(self):   
-        client = Client()
-        self.importPublishedFixtures()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
-          data={'selected_facets':'validatedFilter_exact:true'})
-        self.assertEqual('repository/search.html', response.templates[0].name)
-        self.assertContains(response, "2 Language Resources", status_code=200)
-        
-    def testForeseenUseFacet(self):   
-        client = Client()
-        self.importPublishedFixtures()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
-          data={'selected_facets':'foreseenUseFilter_exact:nlpApplications'})
-        self.assertEqual('repository/search.html', response.templates[0].name)
-        self.assertContains(response, "2 Language Resources", status_code=200)
-     
-    def testUseNlpSpecificFacet(self):   
-        client = Client()
-        self.importPublishedFixtures()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
-          data={'selected_facets':'useNlpSpecificFilter_exact:speechRecognition'})
-        self.assertEqual('repository/search.html', response.templates[0].name)
-        self.assertContains(response, "1 Language Resource", status_code=200)
-      
-    def testLingualityTypeFacet(self):   
-        client = Client()
-        self.importPublishedFixtures()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
-          data={'selected_facets':'lingualityTypeFilter_exact:monolingual'})
-        self.assertEqual('repository/search.html', response.templates[0].name)
-        self.assertContains(response, "2 Language Resources", status_code=200)
-        
-    def testMultilingualityTypeFacet(self):   
-        client = Client()
-        self.importPublishedFixtures()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
-          data={'selected_facets':'multilingualityTypeFilter_exact:comparable'})
-        self.assertEqual('repository/search.html', response.templates[0].name)
-        self.assertContains(response, "1 Language Resource", status_code=200)
-        
-    def testModalityTypeFacet(self):   
-        client = Client()
-        self.importPublishedFixtures()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
-          data={'selected_facets':'modalityTypeFilter_exact:other'})
-        self.assertEqual('repository/search.html', response.templates[0].name)
-        self.assertContains(response, "1 Language Resource", status_code=200)
-        
-    def testMimeTypeFacet(self):   
-        client = Client()
-        self.importPublishedFixtures()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
-          data={'selected_facets':'mimeTypeFilter_exact:audio mime type'})
-        self.assertEqual('repository/search.html', response.templates[0].name)
-        self.assertContains(response, "1 Language Resource", status_code=200)
-    
-    def testDomainFacet(self):   
-        client = Client()
-        self.importPublishedFixtures()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
-          data={'selected_facets':'domainFilter_exact:science'})
-        self.assertEqual('repository/search.html', response.templates[0].name)
-        self.assertContains(response, "2 Language Resources", status_code=200)
-      
-    def testGeographicCoverageFacet(self):   
-        client = Client()
-        self.importPublishedFixtures()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
-          data={'selected_facets':'geographicCoverageFilter_exact:European Union'})
-        self.assertEqual('repository/search.html', response.templates[0].name)
-        self.assertContains(response, "1 Language Resource", status_code=200)          
-         
-    def testCombinedSearchAndFacet(self):   
-        client = Client()
-        self.importPublishedFixtures()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
-          data={'q':'recordingFree', 'selected_facets':'languageNameFilter_exact:Chinese'})
-        # print response
-        self.assertEqual('repository/search.html', response.templates[0].name)
-        self.assertContains(response, "1 Language Resource", status_code=200)  
 
     def test_staff_user_sees_ingested_LR(self):
         client = Client()
@@ -399,7 +251,7 @@ class SearchTest(test_utils.IndexAwareTestCase):
         response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
           data={'q':'INGESTED'})
         self.assertEqual('repository/search.html', response.templates[0].name)
-        self.assertContains(response, "1 Language Resource", status_code=200)
+        self.assertContains(response, "1 Language Resource", status_code=200, msg_prefix='Response: "{0}"'.format(response))
         
     def test_normal_user_doesnt_see_ingested_LR(self):
         client = Client()
@@ -417,4 +269,165 @@ class SearchTest(test_utils.IndexAwareTestCase):
           data={'q':'INGESTED'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "No results were found for search query", status_code=200)
+
+
+class SearchTestPublishedResources(TestCase):
+    """
+    Test the search functionality, importing a set of published resources to be used in all tests.
+    """
+    @classmethod
+    def importPublishedFixtures(cls):
+        _path = '{}/repository/test_fixtures/pub/'.format(ROOT_PATH)
+        files = os.listdir(_path)   
+        for filename in files:
+            fullpath = os.path.join(_path, filename)  
+            test_utils.import_xml_or_zip(fullpath)
+
+    @classmethod
+    def setUpClass(cls):
+        """
+        Set up the view
+        """
+        test_utils.setup_test_storage()                        
+     
+        staffuser = create_user('staffuser', 'staff@example.com', 'secret')
+        staffuser.is_staff = True
+        staffuser.save()
+        create_user('normaluser', 'normal@example.com', 'secret')
+        # Make sure the index does not contain any stale entries:
+        call_command('rebuild_index', interactive=False, using=settings.TEST_MODE_NAME)
+        cls.importPublishedFixtures()
+
+    @classmethod
+    def tearDownClass(cls):
+        """
+        Clean up the test
+        """
+        resourceInfoType_model.objects.all().delete()
+        User.objects.all().delete()
+
+    def testLanguageFacet(self):   
+        client = Client()
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, data={'selected_facets':'languageNameFilter_exact:Chinese'})
+        self.assertEqual('repository/search.html', response.templates[0].name)
+        print response
+        self.assertContains(response, "2 Language Resources", status_code=200)
+             
+    def testLanguageFacetForNoResults(self):   
+        client = Client()
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, data={'selected_facets':'languageNameFilter_exact:Italian'})
+        self.assertEqual('repository/search.html', response.templates[0].name)
+        self.assertContains(response, "No results were found for search query", status_code=200)
         
+    def testResourceTypeFacet(self):   
+        client = Client()
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, data={'selected_facets':'resourceTypeFilter_exact:corpus'})
+        self.assertEqual('repository/search.html', response.templates[0].name)
+        self.assertContains(response, "1 Language Resource", status_code=200)
+        
+    def testMediaTypeFacet(self):   
+        client = Client()
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, data={'selected_facets':'mediaTypeFilter_exact:audio'})
+        self.assertEqual('repository/search.html', response.templates[0].name)
+        self.assertContains(response, "2 Language Resources", status_code=200)
+     
+    def testAvailabilityFacet(self):   
+        client = Client()
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
+          data={'selected_facets':'availabilityFilter_exact:available-unrestrictedUse'})
+        self.assertEqual('repository/search.html', response.templates[0].name)
+        self.assertContains(response, "1 Language Resource", status_code=200)
+              
+    def testLicenceFacet(self):   
+        client = Client()
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, data={'selected_facets':'licenceFilter_exact:ELRA_END_USER'})
+        self.assertEqual('repository/search.html', response.templates[0].name)
+        self.assertContains(response, "2 Language Resources", status_code=200)
+    
+    
+    #def testLicenceFacetForTwoLicences(self):   
+    #   client = Client()
+    #   response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
+    #     data={'selected_facets':'licenceFilter_exact:ELRA_END_USER', 'selected_facets':'licenceFilter_exact:ELRA_VAR'})
+    #   self.assertEqual('repository/search.html', response.templates[0].name)
+    #   print response
+    #   self.assertContains(response, "1 Language Resource", status_code=200)
+    
+    
+    def testRestrictionsOfUseFacet(self):   
+        client = Client()
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
+          data={'selected_facets':'restrictionsOfUseFilter_exact:academic-nonCommercialUse'})
+        self.assertEqual('repository/search.html', response.templates[0].name)
+        self.assertContains(response, "2 Language Resources", status_code=200)
+      
+    def testValidatedFacet(self):   
+        client = Client()
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
+          data={'selected_facets':'validatedFilter_exact:true'})
+        self.assertEqual('repository/search.html', response.templates[0].name)
+        self.assertContains(response, "2 Language Resources", status_code=200)
+        
+    def testForeseenUseFacet(self):   
+        client = Client()
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
+          data={'selected_facets':'foreseenUseFilter_exact:nlpApplications'})
+        self.assertEqual('repository/search.html', response.templates[0].name)
+        self.assertContains(response, "2 Language Resources", status_code=200)
+     
+    def testUseNlpSpecificFacet(self):   
+        client = Client()
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
+          data={'selected_facets':'useNlpSpecificFilter_exact:speechRecognition'})
+        self.assertEqual('repository/search.html', response.templates[0].name)
+        self.assertContains(response, "1 Language Resource", status_code=200)
+      
+    def testLingualityTypeFacet(self):   
+        client = Client()
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
+          data={'selected_facets':'lingualityTypeFilter_exact:monolingual'})
+        self.assertEqual('repository/search.html', response.templates[0].name)
+        self.assertContains(response, "2 Language Resources", status_code=200)
+        
+    def testMultilingualityTypeFacet(self):   
+        client = Client()
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
+          data={'selected_facets':'multilingualityTypeFilter_exact:comparable'})
+        self.assertEqual('repository/search.html', response.templates[0].name)
+        self.assertContains(response, "1 Language Resource", status_code=200)
+        
+    def testModalityTypeFacet(self):   
+        client = Client()
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
+          data={'selected_facets':'modalityTypeFilter_exact:other'})
+        self.assertEqual('repository/search.html', response.templates[0].name)
+        self.assertContains(response, "1 Language Resource", status_code=200)
+        
+    def testMimeTypeFacet(self):   
+        client = Client()
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
+          data={'selected_facets':'mimeTypeFilter_exact:audio mime type'})
+        self.assertEqual('repository/search.html', response.templates[0].name)
+        self.assertContains(response, "1 Language Resource", status_code=200)
+    
+    def testDomainFacet(self):   
+        client = Client()
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
+          data={'selected_facets':'domainFilter_exact:science'})
+        self.assertEqual('repository/search.html', response.templates[0].name)
+        self.assertContains(response, "2 Language Resources", status_code=200)
+      
+    def testGeographicCoverageFacet(self):   
+        client = Client()
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
+          data={'selected_facets':'geographicCoverageFilter_exact:European Union'})
+        self.assertEqual('repository/search.html', response.templates[0].name)
+        self.assertContains(response, "1 Language Resource", status_code=200)          
+         
+    def testCombinedSearchAndFacet(self):   
+        client = Client()
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
+          data={'q':'recordingFree', 'selected_facets':'languageNameFilter_exact:Chinese'})
+        # print response
+        self.assertEqual('repository/search.html', response.templates[0].name)
+        self.assertContains(response, "1 Language Resource", status_code=200)  
