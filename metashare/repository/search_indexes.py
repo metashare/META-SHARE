@@ -17,7 +17,7 @@ from metashare.repository.models import resourceInfoType_model, \
     languageDescriptionInfoType_model
 from metashare.repository.search_fields import LabeledCharField, \
     LabeledMultiValueField
-from metashare.storage.models import StorageObject
+from metashare.storage.models import StorageObject, INGESTED, PUBLISHED
 from metashare.settings import LOG_LEVEL, LOG_HANDLER
 
 # Setup logging support.
@@ -149,6 +149,13 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         """
         return self.get_model().objects.filter(storage_object__deleted=False)
 
+    def should_update(self, instance, **kwargs):
+        '''
+        Only index resources that are at least ingested.
+        In other words, do not index internal resources.
+        '''
+        return instance.storage_object.publication_status in (INGESTED, PUBLISHED)
+
     def update_object(self, instance, using=None, **kwargs):
         """
         Updates the index for a single object instance.
@@ -189,14 +196,15 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
                 assert False, "Unexpected sender: {0}".format(kwargs["sender"])
                 LOGGER.error("Unexpected sender: {0}".format(kwargs["sender"]))
                 return
-        LOGGER.info("Resource #{0} scheduled for reindexing." \
-                    .format(instance.id))
         # we better recreate our resource instance from the DB as otherwise it
         # has happened for some reason that the instance was not up-to-date
         instance = self.get_model().objects.get(pk=instance.id)
-        super(resourceInfoType_modelIndex, self).update_object(instance,
-                                                               using=using,
-                                                               **kwargs)
+        if self.should_update(instance):
+            LOGGER.info("Resource #{0} scheduled for reindexing." \
+                        .format(instance.id))
+            super(resourceInfoType_modelIndex, self).update_object(instance,
+                                                                   using=using,
+                                                                   **kwargs)
 
     def _setup_save(self):
         """
