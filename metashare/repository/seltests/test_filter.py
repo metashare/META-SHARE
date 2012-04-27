@@ -59,83 +59,83 @@ class FilterTest(SeleniumTestCase):
         self.assertEqual("Restrictions of Use", driver.find_element_by_link_text("Restrictions of Use").text)
         # check Availability filter
         driver.find_element_by_link_text("Availability").click()
-        self.assertEqual("available-restrictedUse (17)", driver.find_element_by_css_selector("dd").text)
+        self.assertEqual("available-restrictedUse (17)", driver.find_element_by_css_selector("div[@class='filter']").text)
         driver.find_element_by_link_text("Availability").click()
         # check Language filter
         driver.find_element_by_link_text("Language").click()
         self.assertEqual("English (8)", driver.find_element_by_xpath(
-          "//dl[@id='searchFilters']/dd[2]").text)
+          "//div[@id='searchFilters']/div/div[@class='filter'][2]").text)
         self.assertEqual("Spanish (6)", driver.find_element_by_xpath(
-          "//dl[@id='searchFilters']/dd[3]").text)
+          "//div[@id='searchFilters']/div/div[@class='filter'][3]").text)
         self.assertEqual("French (3)", driver.find_element_by_xpath(
-          "//dl[@id='searchFilters']/dd[4]").text)
+          "//div[@id='searchFilters']/div/div[@class='filter'][4]").text)
         self.assertEqual("Italian (3)", driver.find_element_by_xpath(
-          "//dl[@id='searchFilters']/dd[5]").text)
+          "//div[@id='searchFilters']/div/div[@class='filter'][5]").text)
         self.assertEqual("German (2)", driver.find_element_by_xpath(
-          "//dl[@id='searchFilters']/dd[6]").text)
+          "//div[@id='searchFilters']/div/div[@class='filter'][6]").text)
         self.assertEqual("Portuguese (2)", driver.find_element_by_xpath(
-          "//dl[@id='searchFilters']/dd[7]").text)
+          "//div[@id='searchFilters']/div/div[@class='filter'][7]").text)
         self.assertEqual("Arabic (1)", driver.find_element_by_xpath(
-          "//dl[@id='searchFilters']/dd[8]").text)
+          "//div[@id='searchFilters']/div/div[@class='filter'][8]").text)
         self.assertEqual("Chinese (1)", driver.find_element_by_xpath(
-          "//dl[@id='searchFilters']/dd[9]").text)
+          "//div[@id='searchFilters']/div/div[@class='filter'][9]").text)
         self.assertEqual("Estonian (1)", driver.find_element_by_xpath(
-          "//dl[@id='searchFilters']/dd[10]").text)
+          "//div[@id='searchFilters']/div/div[@class='filter'][10]").text)
         self.assertEqual("Thai (1)", driver.find_element_by_xpath(
-          "//dl[@id='searchFilters']/dd[11]").text)
+          "//div[@id='searchFilters']/div/div[@class='filter'][11]").text)
         self.assertEqual("Turkish (1)", driver.find_element_by_xpath(
-          "//dl[@id='searchFilters']/dd[12]").text)
+          "//div[@id='searchFilters']/div/div[@class='filter'][12]").text)
         self.assertEqual("more", driver.find_element_by_xpath(
-          "//dl[@id='searchFilters']/dd[13]").text)
+          "//div[@id='searchFilters']/div/div[@class='filter'][13]").text)
         # check language filter more/less 
         driver.find_element_by_link_text("more").click()
         self.assertEqual("less", driver.find_element_by_xpath(
-          "//dl[@id='searchFilters']/dd[13]").text)
+          "//div[@id='searchFilters']/div/div[@class='filter'][13]").text)
         driver.find_element_by_link_text("less").click()
         self.assertEqual("more", driver.find_element_by_xpath(
-          "//dl[@id='searchFilters']/dd[13]").text)
+          "//div[@id='searchFilters']/div/div[@class='filter'][13]").text)
         driver.find_element_by_link_text("Language").click()
         # check Licence filter
         driver.find_element_by_link_text("Licence").click()
         self.assertEqual("ELRA_VAR (14)", driver.find_element_by_xpath(
-          "//dl[@id='searchFilters']/dd[14]").text)
+          "//div[@id='searchFilters']/div/div[@class='filter'][14]").text)
         self.assertEqual("ELRA_END_USER (13)", driver.find_element_by_xpath(
-          "//dl[@id='searchFilters']/dd[15]").text)
+          "//div[@id='searchFilters']/div/div[@class='filter'][15]").text)
         self.assertEqual("ELRA_EVALUATION (3)", driver.find_element_by_xpath(
-          "//dl[@id='searchFilters']/dd[16]").text)
+          "//div[@id='searchFilters']/div/div[@class='filter'][16]").text)
         driver.find_element_by_link_text("Licence").click()
         # check Linguality Type filter        
         driver.find_element_by_link_text("Linguality Type").click()
         self.assertEqual("monolingual (17)", driver.find_element_by_xpath(
-          "//dl[@id='searchFilters']/dd[17]").text)
+          "//div[@id='searchFilters']/div/div[@class='filter'][17]").text)
         driver.find_element_by_link_text("Linguality Type").click()
         # check Media Type filter        
         driver.find_element_by_link_text("Media Type").click()
         self.assertEqual("text (11)", driver.find_element_by_xpath(
-          "//dl[@id='searchFilters']/dd[18]").text)
+          "//div[@id='searchFilters']/div/div[@class='filter'][18]").text)
         self.assertEqual("audio (6)", driver.find_element_by_xpath(
-          "//dl[@id='searchFilters']/dd[19]").text)
+          "//div[@id='searchFilters']/div/div[@class='filter'][19]").text)
         driver.find_element_by_link_text("Media Type").click()
         # check MIME Type filter        
         driver.find_element_by_link_text("MIME Type").click()
         self.assertEqual("Plain text (2)", driver.find_element_by_xpath(
-          "//dl[@id='searchFilters']/dd[20]").text)
+          "//div[@id='searchFilters']/div/div[@class='filter'][20]").text)
         driver.find_element_by_link_text("MIME Type").click()
         # check Resource Type filter        
         driver.find_element_by_link_text("Resource Type").click()
         self.assertEqual("lexicalConceptualResource (9)", driver.find_element_by_xpath(
-          "//dl[@id='searchFilters']/dd[21]").text)
+          "//div[@id='searchFilters']/div/div[@class='filter'][21]").text)
         self.assertEqual("corpus (8)", driver.find_element_by_xpath(
-          "//dl[@id='searchFilters']/dd[22]").text)
+          "//div[@id='searchFilters']/div/div[@class='filter'][22]").text)
         driver.find_element_by_link_text("Resource Type").click()
         # check Restrictions of Use filter        
         driver.find_element_by_link_text("Restrictions of Use").click()
         self.assertEqual("commercialUse (14)", driver.find_element_by_xpath(
-          "//dl[@id='searchFilters']/dd[23]").text)
+          "//div[@id='searchFilters']/div/div[@class='filter'][23]").text)
         self.assertEqual("academic-nonCommercialUse (13)", driver.find_element_by_xpath(
-          "//dl[@id='searchFilters']/dd[24]").text)
+          "//div[@id='searchFilters']/div/div[@class='filter'][24]").text)
         self.assertEqual("evaluationUse (3)", driver.find_element_by_xpath(
-          "//dl[@id='searchFilters']/dd[25]").text)
+          "//div[@id='searchFilters']/div/div[@class='filter'][25]").text)
         driver.find_element_by_link_text("Restrictions of Use").click()
         
         # test sorting:
