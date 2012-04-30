@@ -12,7 +12,7 @@ from django.db.models import signals
 from django.utils.translation import ugettext as _
 
 from metashare.repository.models import resourceInfoType_model, \
-    identificationInfoType_model, corpusInfoType_model, \
+    corpusInfoType_model, \
     toolServiceInfoType_model, lexicalConceptualResourceInfoType_model, \
     languageDescriptionInfoType_model
 from metashare.repository.search_fields import LabeledCharField, \

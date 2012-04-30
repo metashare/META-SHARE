@@ -30,7 +30,6 @@ from django.http import Http404
 from metashare.repository.editor.forms import StorageObjectUploadForm
 from django.utils.html import escape
 from django.utils.translation import ugettext as _
-from django.db.models.fields.related import ManyToManyField
 from django.forms.util import ErrorList
 
 csrf_protect_m = method_decorator(csrf_protect)
@@ -239,7 +238,7 @@ class PersonLookup(ModelLookup):
         #results = super(PersonLookup, self).get_query(request, term)
         # Since MultiTextFields cannot be searched using query sets (they are base64-encoded and pickled),
         # we must do the searching by hand.
-        # TODO: this is excessively slow, replace with more appropriate search mechanism, e.g. a SOLR index
+        # Note: this is inefficient, but in practice fast enough it seems (tested with >1000 resources)
         lcterm = term.lower()
         def matches(person):
             'Helper function to group the search code for a person'
