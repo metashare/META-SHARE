@@ -8,6 +8,7 @@ import os
 from metashare.test_utils import create_user
 from django.core.management import call_command
 from django.test.testcases import TestCase
+from metashare.storage.models import INGESTED
 
 
 class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
@@ -26,6 +27,7 @@ class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
         self.assert_index_is_empty()
         # import a single resource and save it in the DB
         resource = test_utils.import_xml(SearchIndexUpdateTests.RES_PATH_1)[0]
+        resource.storage_object.publication_status = INGESTED
         resource.storage_object.save()
         # make sure the import has automatically changed the search index
         self.assertEqual(SearchQuerySet().count(), 1,
@@ -33,6 +35,7 @@ class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
             "have changed and contain that resource.")
         # import another resource and save it in the DB
         resource = test_utils.import_xml(SearchIndexUpdateTests.RES_PATH_2)[0]
+        resource.storage_object.publication_status = INGESTED
         resource.storage_object.save()
         # make sure the import has automatically changed the search index
         self.assertEqual(SearchQuerySet().count(), 2,
@@ -54,6 +57,7 @@ class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
         # change the names list of the imported resource
         resource.identificationInfo.resourceName.append(added_name)
         resource.identificationInfo.save()
+        resource.save()
         # make sure the change has automatically updated the search index
         self.assertEqual(
             SearchQuerySet().auto_query('"{0}"'.format(added_name)).count(), 1,
@@ -104,6 +108,7 @@ class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
         self.assert_index_is_empty()
         # import a single resource and save it in the DB
         resource = test_utils.import_xml(SearchIndexUpdateTests.RES_PATH_1)[0]
+        resource.storage_object.publication_status = INGESTED
         resource.storage_object.save()
         # make sure the import has automatically changed the search index
         self.assertEqual(SearchQuerySet().count(), 1,
