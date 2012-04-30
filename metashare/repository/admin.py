@@ -106,6 +106,12 @@ from metashare.repository.models import \
 
 
 # pylint: disable-msg=C0103
+class actualUseInfo_model_inline(SchemaModelInline):
+    model = actualUseInfoType_model
+    collapse = True
+
+
+# pylint: disable-msg=C0103
 class audioClassificationInfo_model_inline(SchemaModelInline):
     model = audioClassificationInfoType_model
     collapse = True

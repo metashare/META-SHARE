@@ -3324,7 +3324,7 @@ class usageInfoType_model(SchemaModel):
       ( u'accessTool', u'accessTool', OPTIONAL ),
       ( u'resourceAssociatedWith', u'resourceAssociatedWith', OPTIONAL ),
       ( u'foreseenUseInfo', u'foreseenuseinfotype_model_set', RECOMMENDED ),
-      ( u'actualUseInfo', u'actualUseInfo', RECOMMENDED ),
+      ( u'actualUseInfo', u'actualuseinfotype_model_set', RECOMMENDED ),
     )
     __schema_classes__ = {
       u'accessTool': "targetResourceInfoType_model",
@@ -3347,8 +3347,7 @@ class usageInfoType_model(SchemaModel):
 
     # OneToMany field: foreseenUseInfo
 
-    actualUseInfo = models.ManyToManyField("actualUseInfoType_model", 
-      verbose_name='Actual use', blank=True, null=True, related_name="actualUseInfo_%(class)s_related", )
+    # OneToMany field: actualUseInfo
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
@@ -3541,6 +3540,8 @@ class actualUseInfoType_model(SchemaModel):
       verbose_name='Actual use details', 
       help_text='Reports on the usage of the resource in free text',
       blank=True, max_length=250, )
+
+    back_to_usageinfotype_model = models.ForeignKey("usageInfoType_model",  blank=True, null=True)
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
