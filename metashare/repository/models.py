@@ -2017,7 +2017,7 @@ class recordingInfoType_model(SchemaModel):
     }
 
     recordingDeviceType = MultiSelectField(
-      verbose_name='Recording device', 
+      verbose_name='Recording device type', 
       help_text='The nature of the recording platform hardware and the s' \
       'torage medium',
       blank=True, 
@@ -2026,7 +2026,7 @@ class recordingInfoType_model(SchemaModel):
       )
 
     recordingDeviceTypeDetails = models.CharField(
-      verbose_name='Recording device details', 
+      verbose_name='Recording device type details', 
       help_text='Free text description of the recoding device',
       blank=True, max_length=500, )
 
@@ -2052,7 +2052,7 @@ class recordingInfoType_model(SchemaModel):
       )
 
     sourceChannelType = MultiSelectField(
-      verbose_name='Source channel', 
+      verbose_name='Source channel type', 
       help_text='Type of the source channel',
       blank=True, 
       max_length=1 + len(RECORDINGINFOTYPE_SOURCECHANNELTYPE_CHOICES['choices']) / 4,

@@ -1703,8 +1703,8 @@
 				<xs:annotation>
 					<xs:documentation>The nature of the recording platform hardware and the storage medium</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-many</relation>
 						<maxlen>30</maxlen>
+						<label>Recording device type</label>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:simpleType>
@@ -1723,8 +1723,8 @@
 				<xs:annotation>
 					<xs:documentation>Free text description of the recoding device</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>500</maxlen>
+						<label>Recording device type details</label>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -1732,7 +1732,6 @@
 				<xs:annotation>
 					<xs:documentation>The software used for the recording platform</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-many</relation>
 						<maxlen>100</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1741,7 +1740,6 @@
 				<xs:annotation>
 					<xs:documentation>Where the recording took place</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-many</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1765,7 +1763,6 @@
 				<xs:annotation>
 					<xs:documentation>Information on the source channel</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-many</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1788,8 +1785,8 @@
 				<xs:annotation>
 					<xs:documentation>Type of the source channel</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-many</relation>
 						<maxlen>30</maxlen>
+						<label>Source channel type</label>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:simpleType>
