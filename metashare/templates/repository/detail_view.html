@@ -3,6 +3,7 @@
 {% if lr_content.0 != "resourceInfo" %}
     {{lr_content.0}}
 {% endif %}
+
 {% for item in lr_content.1 %}
   {% with "repository/detail_view.html" as filename %}
     {% with item as lr_content %}
