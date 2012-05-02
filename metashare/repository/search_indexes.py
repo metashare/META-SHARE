@@ -85,41 +85,170 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
 
     # List of filters
     languageNameFilter = LabeledMultiValueField(
-                                label=_('Language'), faceted=True)
+                                label=_('Language'), facet_id=1, parent_id=0,
+                                faceted=True)
     resourceTypeFilter = LabeledMultiValueField(
-                                label=_('Resource Type'), faceted=True)
+                                label=_('Resource Type'), facet_id=2, parent_id=0,
+                                faceted=True)
     mediaTypeFilter = LabeledMultiValueField(
-                                label=_('Media Type'), faceted=True)
+                                label=_('Media Type'), facet_id=3, parent_id=0,
+                                faceted=True)
     availabilityFilter = LabeledCharField(
-                                label=_('Availability'), faceted=True)
+                                label=_('Availability'), facet_id=4, parent_id=0,
+                                faceted=True)
     licenceFilter = LabeledMultiValueField(
-                                label=_('Licence'), faceted=True)
+                                label=_('Licence'), facet_id=5, parent_id=0,
+                                faceted=True)
     restrictionsOfUseFilter = LabeledMultiValueField(
-                                label=_('Restrictions of Use'), faceted=True)
+                                label=_('Restrictions of Use'), facet_id=6, parent_id=0,
+                                faceted=True)
     validatedFilter = LabeledMultiValueField(
-                                label=_('Validated'), faceted=True)
+                                label=_('Validated'), facet_id=7, parent_id=0,
+                                faceted=True)
     foreseenUseFilter = LabeledMultiValueField(
-                                label=_('Foreseen Use'), faceted=True)
+                                label=_('Foreseen Use'), facet_id=8, parent_id=0,
+                                faceted=True)
     useNlpSpecificFilter = LabeledMultiValueField(
-                                label=_('Use Is NLP Specific'), faceted=True)
+                                label=_('Use Is NLP Specific'), facet_id=9, parent_id=0,
+                                faceted=True)
     lingualityTypeFilter = LabeledMultiValueField(
-                                label=_('Linguality Type'), faceted=True)
+                                label=_('Linguality Type'), facet_id=10, parent_id=0,
+                                faceted=True)
     multilingualityTypeFilter = LabeledMultiValueField(
-                                label=_('Multilinguality Type'), faceted=True)
+                                label=_('Multilinguality Type'), facet_id=11, parent_id=0,
+                                faceted=True)
     modalityTypeFilter = LabeledMultiValueField(
-                                label=_('Modality Type'), faceted=True)
+                                label=_('Modality Type'), facet_id=12, parent_id=0,
+                                faceted=True)
     mimeTypeFilter = LabeledMultiValueField(
-                                label=_('MIME Type'), faceted=True)
+                                label=_('MIME Type'), facet_id=13, parent_id=0,
+                                faceted=True)
     bestPracticesFilter = LabeledMultiValueField(
-                                label=_('Best Practices'), faceted=True)
+                                label=_('Best Practices'), facet_id=14, parent_id=0,
+                                faceted=True)
     domainFilter = LabeledMultiValueField(
-                                label=_('Domain'), faceted=True)
+                                label=_('Domain'), facet_id=15, parent_id=0,
+                                faceted=True)
     geographicCoverageFilter = LabeledMultiValueField(
-                                label=_('Geographic Coverage'), faceted=True)
+                                label=_('Geographic Coverage'), facet_id=16, parent_id=0,
+                                faceted=True)
     timeCoverageFilter = LabeledMultiValueField(
-                                label=_('Time Coverage'), faceted=True)
+                                label=_('Time Coverage'), facet_id=17, parent_id=0,
+                                faceted=True)
     subjectFilter = LabeledMultiValueField(
-                                label=_('Subject'), faceted=True)
+                                label=_('Subject'), facet_id=18, parent_id=0,
+                                faceted=True)
+
+    corporaAnnotationTypeFilter = LabeledMultiValueField(
+                                label=_('Annotation Type'), facet_id=19, parent_id=2,
+                                faceted=True)
+    corporaAnnotationFormatFilter = LabeledMultiValueField(
+                                label=_('Annotation Format'), facet_id=20, parent_id=2,
+                                faceted=True)
+    ldLanguageDescriptionTypeFilter = LabeledMultiValueField(
+                                label=_('Language Description Type'), facet_id=21, parent_id=2,
+                                faceted=True)
+    ldEncodingLevelFilter = LabeledMultiValueField(
+                                label=_('Encoding Level'), facet_id=22, parent_id=2,
+                                faceted=True)
+    ldGrammaticalPhenomenaCoverageFilter = LabeledMultiValueField(
+                                label=_('Grammatical Phenomena Coverage'), facet_id=23, parent_id=2,
+                                faceted=True)
+    lcrLexicalResourceTypeFilter = LabeledMultiValueField(
+                                label=_('Lexical/Conceptual Resource Type'), facet_id=24, parent_id=2,
+                                faceted=True)
+    lcrEncodingLevelFilter = LabeledMultiValueField(
+                                label=_('Encoding Level'), facet_id=25, parent_id=2,
+                                faceted=True)
+    lcrLinguisticInformationFilter = LabeledMultiValueField(
+                                label=_('Linguistic Information'), facet_id=26, parent_id=2,
+                                faceted=True)
+
+    tsToolServiceTypeFilter = LabeledMultiValueField(
+                                label=_('Tool/Service Type'), facet_id=27, parent_id=2,
+                                faceted=True)
+    tsToolServiceSubTypeFilter = LabeledMultiValueField(
+                                label=_('Tool/Service Subtype'), facet_id=28, parent_id=2,
+                                faceted=True)
+    tsLanguageDependentTypeFilter = LabeledMultiValueField(
+                                label=_('Language Dependent'), facet_id=29, parent_id=2,
+                                faceted=True)
+    tsInputOutputResourceTypeFilter = LabeledMultiValueField(
+                                label=_('InputInfo/OutputInfo Resource Type'), facet_id=30, parent_id=2,
+                                faceted=True)
+    tsInputOutputMediaTypeFilter = LabeledMultiValueField(
+                                label=_('InputInfo/OutputInfo Media Type'), facet_id=31, parent_id=2,
+                                faceted=True)
+    tsAnnotationTypeFilter = LabeledMultiValueField(
+                                label=_('Annotation Type'), facet_id=32, parent_id=2,
+                                faceted=True)
+    tsAnnotationFormatFilter = LabeledMultiValueField(
+                                label=_('Annotation Format'), facet_id=33, parent_id=2,
+                                faceted=True)
+    tsEvaluatedFilter = LabeledMultiValueField(
+                                label=_('Evaluated'), facet_id=34, parent_id=2,
+                                faceted=True)
+
+    textTextGenreFilter = LabeledMultiValueField(
+                                label=_('Text Genre'), facet_id=35, parent_id=3,
+                                faceted=True)
+    textTextTypeFilter = LabeledMultiValueField(
+                                label=_('Text Type'), facet_id=36, parent_id=3,
+                                faceted=True)
+    textRegisterFilter = LabeledMultiValueField(
+                                label=_('Register'), facet_id=37, parent_id=3,
+                                faceted=True)
+    audioAudioGenreFilter = LabeledMultiValueField(
+                                label=_('Audio Genre'), facet_id=38, parent_id=3,
+                                faceted=True)
+    audioSpeechGenreFilter = LabeledMultiValueField(
+                                label=_('Speech Genre'), facet_id=39, parent_id=3,
+                                faceted=True)
+    audioRegisterFilter = LabeledMultiValueField(
+                                label=_('Register'), facet_id=40, parent_id=3,
+                                faceted=True)
+    audioSpeechItemsFilter = LabeledMultiValueField(
+                                label=_('Speech Items'), facet_id=41, parent_id=3,
+                                faceted=True)
+    audioNaturalityFilter = LabeledMultiValueField(
+                                label=_('Naturality'), facet_id=42, parent_id=3,
+                                faceted=True)
+    audioConversationalTypeFilter = LabeledMultiValueField(
+                                label=_('Conversational Type'), facet_id=43, parent_id=3,
+                                faceted=True)
+    audioScenarioTypeFilter = LabeledMultiValueField(
+                                label=_('Scenario Type'), facet_id=44, parent_id=3,
+                                faceted=True)
+    videoVideoGenreFilter = LabeledMultiValueField(
+                                label=_('Video Genre'), facet_id=45, parent_id=3,
+                                faceted=True)
+    videoTypeOfVideoContentFilter = LabeledMultiValueField(
+                                label=_('Type of Video Content'), facet_id=46, parent_id=3,
+                                faceted=True)
+    videoNaturalityFilter = LabeledMultiValueField(
+                                label=_('Naturality'), facet_id=47, parent_id=3,
+                                faceted=True)
+    videoConversationalTypeFilter = LabeledMultiValueField(
+                                label=_('Conversational Type'), facet_id=48, parent_id=3,
+                                faceted=True)
+    videoScenarioTypeFilter = LabeledMultiValueField(
+                                label=_('Scenario Type'), facet_id=49, parent_id=3,
+                                faceted=True)
+    imageImageGenreFilter = LabeledMultiValueField(
+                                label=_('Image Genre'), facet_id=50, parent_id=3,
+                                faceted=True)
+    imageTypeOfImageContentFilter = LabeledMultiValueField(
+                                label=_('Type of Image Content'), facet_id=51, parent_id=3,
+                                faceted=True)
+    tnTypeOfTnContentFilter = LabeledMultiValueField(
+                                label=_('Type of Text Numerical Content'), facet_id=52, parent_id=3,
+                                faceted=True)
+    tnGramBaseItemFilter = LabeledMultiValueField(
+                                label=_('Base Item'), facet_id=53, parent_id=3,
+                                faceted=True)
+    tnGramOrderFilter = LabeledMultiValueField(
+                                label=_('Order'), facet_id=54, parent_id=3,
+                                faceted=True)
 
     # we create all items that may appear in the search results list already at
     # index time
@@ -1071,5 +1200,676 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
                             .imageclassificationinfotype_model_set.all()]
                 if sf != ['']:
                     result.extend(sf)
+
+        return result
+
+    def prepare_corporaAnnotationTypeFilter(self, obj):
+        """
+        Collect the data to filter the resources on Resource Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        # Filter for corpus
+        if isinstance(corpus_media, corpusInfoType_model):
+            media_type = corpus_media.corpusMediaType
+            for corpus_info in media_type.corpustextinfotype_model_set.all():
+                for annotation_info in corpus_info.annotationInfo.all():
+                    result.extend(["{0}".format(annotation_info.get_annotationType_display())])
+            if media_type.corpusAudioInfo:
+                for annotation_info in media_type.corpusAudioInfo.annotationInfo.all():
+                    result.extend(["{0}".format(annotation_info.get_annotationType_display())])
+            for corpus_info in media_type.corpusvideoinfotype_model_set.all():
+                for annotation_info in corpus_info.annotationInfo.all():
+                    result.extend(["{0}".format(annotation_info.get_annotationType_display())])
+            if media_type.corpusTextNgramInfo:
+                for annotation_info in media_type.corpusTextNgramInfo.annotationInfo.all():
+                    result.extend(["{0}".format(annotation_info.get_annotationType_display())])
+            if media_type.corpusImageInfo:
+                for annotation_info in media_type.corpusImageInfo.annotationInfo.all():
+                    result.extend(["{0}".format(annotation_info.get_annotationType_display())])
+            if media_type.corpusTextNumericalInfo:
+                for annotation_info in media_type.corpusTextNumericalInfo.annotationInfo.all():
+                    result.extend(["{0}".format(annotation_info.get_annotationType_display())])
+
+        return result
+    
+    def prepare_corporaAnnotationFormatFilter(self, obj):
+        """
+        Collect the data to filter the resources on Resource Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        # Filter for corpus
+        if isinstance(corpus_media, corpusInfoType_model):
+            media_type = corpus_media.corpusMediaType
+            for corpus_info in media_type.corpustextinfotype_model_set.all():
+                for annotation_info in corpus_info.annotationInfo.all():
+                    result.extend(["{0}".format(annotation_info.annotationFormat)])
+            if media_type.corpusAudioInfo:
+                for annotation_info in media_type.corpusAudioInfo.annotationInfo.all():
+                    result.extend(["{0}".format(annotation_info.annotationFormat)])
+            for corpus_info in media_type.corpusvideoinfotype_model_set.all():
+                for annotation_info in corpus_info.annotationInfo.all():
+                    result.extend(["{0}".format(annotation_info.annotationFormat)])
+            if media_type.corpusTextNgramInfo:
+                for annotation_info in media_type.corpusTextNgramInfo.annotationInfo.all():
+                    result.extend(["{0}".format(annotation_info.annotationFormat)])
+            if media_type.corpusImageInfo:
+                for annotation_info in media_type.corpusImageInfo.annotationInfo.all():
+                    result.extend(["{0}".format(annotation_info.annotationFormat)])
+            if media_type.corpusTextNumericalInfo:
+                for annotation_info in media_type.corpusTextNumericalInfo.annotationInfo.all():
+                    result.extend(["{0}".format(annotation_info.annotationFormat)])
+
+        return result
+    
+    def prepare_ldLanguageDescriptionTypeFilter(self, obj):
+        """
+        Collect the data to filter the resources on Resource Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        if isinstance(corpus_media, languageDescriptionInfoType_model):
+            ld_media_type = corpus_media.languageDescriptionMediaType
+            result.extend(["{0}".format(ld_media_type.languageDescriptionType)])
+
+        return result
+    
+    def prepare_ldEncodingLevelFilter(self, obj):
+        """
+        Collect the data to filter the resources on Resource Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        if isinstance(corpus_media, languageDescriptionInfoType_model):
+            ld_media_type = corpus_media.languageDescriptionMediaType
+            if corpus_media.get_languageDescriptionEncodingInfo_display():
+                result.extend(["{0}".format(ld_media_type.languageDescriptionEncodingInfo. \
+                  get_encodingLevel_display())])
+
+        return result
+    
+    def prepare_ldGrammaticalPhenomenaCoverageFilter(self, obj):
+        """
+        Collect the data to filter the resources on Resource Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        if isinstance(corpus_media, languageDescriptionInfoType_model):
+            ld_media_type = corpus_media.languageDescriptionMediaType
+            if corpus_media.get_languageDescriptionEncodingInfo_display():
+                result.extend(["{0}".format(ld_media_type.languageDescriptionEncodingInfo. \
+                  get_grammaticalPhenomenaCoverage_display())])
+
+        return result
+    
+    def prepare_lcrLexicalResourceTypeFilter(self, obj):
+        """
+        Collect the data to filter the resources on Resource Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        # Filter for lexicalConceptual
+        if isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
+            result.extend(["{0}".format(corpus_media.get_lexicalConceptualResourceType_display())])
+
+        return result
+    
+    def prepare_lcrEncodingLevelFilter(self, obj):
+        """
+        Collect the data to filter the resources on Resource Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        # Filter for lexicalConceptual
+        if isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
+            if corpus_media.lexicalConceptualResourceEncodingInfo:
+                result.extend(["{0}".format(corpus_media.lexicalConceptualResourceEncodingInfo. \
+                  get_encodingLevel_display())])
+
+        return result
+    
+    def prepare_lcrLinguisticInformationFilter(self, obj):
+        """
+        Collect the data to filter the resources on Resource Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        # Filter for lexicalConceptual
+        if isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
+            if corpus_media.lexicalConceptualResourceEncodingInfo:
+                result.extend(["{0}".format(corpus_media.lexicalConceptualResourceEncodingInfo. \
+                  get_linguisticInformation_display())])
+
+        return result
+    
+
+    def prepare_tsToolServiceTypeFilter(self, obj):
+        """
+        Collect the data to filter the resources on Resource Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        # Filter for toolService
+        if isinstance(corpus_media, toolServiceInfoType_model):
+            result.extend(["{0}".format(corpus_media.get_toolServiceType_display())])
+
+        return result
+    
+    def prepare_tsToolServiceSubTypeFilter(self, obj):
+        """
+        Collect the data to filter the resources on Resource Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        # Filter for toolService
+        if isinstance(corpus_media, toolServiceInfoType_model):
+            result.extend(["{0}".format(corpus_media.toolServiceSubtype)])
+
+        return result
+    
+    def prepare_tsLanguageDependentTypeFilter(self, obj):
+        """
+        Collect the data to filter the resources on Resource Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        # Filter for toolService
+        if isinstance(corpus_media, toolServiceInfoType_model):
+            result.extend(["{0}".format(corpus_media.languageDependent)])
+
+        return result
+    
+    def prepare_tsInputOutputResourceTypeFilter(self, obj):
+        """
+        Collect the data to filter the resources on Resource Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        # Filter for toolService
+        if isinstance(corpus_media, toolServiceInfoType_model):
+            if corpus_media.inputInfo:
+                result.extend(["{0}".format(corpus_media.inputInfo.get_resourceType_display())])
+            if corpus_media.outputInfo:
+                result.extend(["{0}".format(corpus_media.outputInfo.get_resourceType_display())])
+
+        return result
+    
+    def prepare_tsInputOutputMediaTypeFilter(self, obj):
+        """
+        Collect the data to filter the resources on Resource Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        # Filter for toolService
+        if isinstance(corpus_media, toolServiceInfoType_model):
+            if corpus_media.inputInfo:
+                result.extend(["{0}".format(corpus_media.inputInfo.get_mediaType_display())])
+            if corpus_media.outputInfo:
+                result.extend(["{0}".format(corpus_media.outputInfo.get_mediaType_display())])
+
+        return result
+    
+    def prepare_tsAnnotationTypeFilter(self, obj):
+        """
+        Collect the data to filter the resources on Resource Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        if isinstance(corpus_media, toolServiceInfoType_model):
+            if corpus_media.inputInfo:
+                result.extend(["{0}".format(corpus_media.inputInfo.get_annotationType_display())])
+            if corpus_media.outputInfo:
+                result.extend(["{0}".format(corpus_media.outputInfo.get_annotationType_display())])
+
+        return result
+    
+    def prepare_tsAnnotationFormatFilter(self, obj):
+        """
+        Collect the data to filter the resources on Resource Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        # Filter for toolService
+        if isinstance(corpus_media, toolServiceInfoType_model):
+            if corpus_media.inputInfo:
+                result.extend(["{0}".format(corpus_media.inputInfo.annotationFormat)])
+            if corpus_media.outputInfo:
+                result.extend(["{0}".format(corpus_media.outputInfo.annotationFormat)])
+
+        return result
+    
+    def prepare_tsEvaluatedFilter(self, obj):
+        """
+        Collect the data to filter the resources on Resource Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        # Filter for toolService
+        if isinstance(corpus_media, toolServiceInfoType_model):
+            if corpus_media.toolServiceEvaluationInfo:
+                result.extend(["{0}".format(corpus_media.toolServiceEvaluationInfo.evaluated)])
+
+        return result
+
+    def prepare_textTextGenreFilter(self, obj):
+        """
+        Collect the data to filter the resources on Media Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        # Filter for corpus
+        if isinstance(corpus_media, corpusInfoType_model):
+            media_type = corpus_media.corpusMediaType
+            for corpus_info in media_type.corpustextinfotype_model_set.all():
+                if corpus_info.textclassificationinfotype_model_set:
+                    result.extend(["{0}".format(text_classification_info.textGenre) \
+                      for text_classification_info in corpus_info.textclassificationinfotype_model_set.all()])
+
+        return result
+
+    def prepare_textTextTypeFilter(self, obj):
+        """
+        Collect the data to filter the resources on Media Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        # Filter for corpus
+        if isinstance(corpus_media, corpusInfoType_model):
+            media_type = corpus_media.corpusMediaType
+            for corpus_info in media_type.corpustextinfotype_model_set.all():
+                if corpus_info.textclassificationinfotype_model_set:
+                    result.extend(["{0}".format(text_classification_info.textType) \
+                      for text_classification_info in corpus_info.textclassificationinfotype_model_set.all()])
+
+        return result
+    
+    def prepare_textRegisterFilter(self, obj):
+        """
+        Collect the data to filter the resources on Media Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        # Filter for corpus
+        if isinstance(corpus_media, corpusInfoType_model):
+            media_type = corpus_media.corpusMediaType
+            for corpus_info in media_type.corpustextinfotype_model_set.all():
+                if corpus_info.textclassificationinfotype_model_set:
+                    result.extend(["{0}".format(text_classification_info.register) \
+                      for text_classification_info in
+                      corpus_info.textclassificationinfotype_model_set.all()])
+
+        return result
+    
+    def prepare_audioAudioGenreFilter(self, obj):
+        """
+        Collect the data to filter the resources on Media Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        # Filter for corpus
+        if isinstance(corpus_media, corpusInfoType_model):
+            media_type = corpus_media.corpusMediaType
+            if media_type.corpusAudioInfo:
+                if media_type.corpusAudioInfo.audioclassificationinfotype_model_set:
+                    result.extend(["{0}".format(audio_classification_info.get_audioGenre_display()) \
+                      for audio_classification_info in media_type.corpusAudioInfo.audioclassificationinfotype_model_set.all()])
+
+        return result
+    
+    def prepare_audioSpeechGenreFilter(self, obj):
+        """
+        Collect the data to filter the resources on Media Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        # Filter for corpus
+        if isinstance(corpus_media, corpusInfoType_model):
+            media_type = corpus_media.corpusMediaType
+            if media_type.corpusAudioInfo:
+                if media_type.corpusAudioInfo.audioclassificationinfotype_model_set:
+                    result.extend(["{0}".format(audio_classification_info.get_speechGenre_display()) 
+                      for audio_classification_info in media_type.corpusAudioInfo.audioclassificationinfotype_model_set.all()])
+
+        return result
+    
+    def prepare_audioRegisterFilter(self, obj):
+        """
+        Collect the data to filter the resources on Media Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        # Filter for corpus
+        if isinstance(corpus_media, corpusInfoType_model):
+            media_type = corpus_media.corpusMediaType
+            if media_type.corpusAudioInfo:
+                if media_type.corpusAudioInfo.audioclassificationinfotype_model_set:
+                    result.extend(["{0}".format(audio_classification_info.register) \
+                      for audio_classification_info in media_type.corpusAudioInfo.audioclassificationinfotype_model_set.all()])
+
+        return result
+    
+    def prepare_audioSpeechItemsFilter(self, obj):
+        """
+        Collect the data to filter the resources on Media Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        # Filter for corpus
+        if isinstance(corpus_media, corpusInfoType_model):
+            media_type = corpus_media.corpusMediaType
+            if media_type.corpusAudioInfo:
+                if media_type.corpusAudioInfo.audioContentInfo:
+                    result.extend(["{0}".format(media_type.corpusAudioInfo.audioContentInfo.get_speechItems_display())])
+
+        # Filter for lexical conceptual
+        elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
+            lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
+            if lcr_media_type.lexicalConceptualResourceAudioInfo:
+                if lcr_media_type.lexicalConceptualResourceAudioInfo.audioContentInfo:
+                    result.extend(["{0}".format(lcr_media_type.lexicalConceptualResourceAudioInfo.audioContentInfo.get_speechItems_display())])
+
+        return result
+    
+    def prepare_audioNaturalityFilter(self, obj):
+        """
+        Collect the data to filter the resources on Media Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        # Filter for corpus
+        if isinstance(corpus_media, corpusInfoType_model):
+            media_type = corpus_media.corpusMediaType
+            if media_type.corpusAudioInfo:
+                if media_type.corpusAudioInfo.settingInfo:
+                    result.extend(["{0}".format(media_type.corpusAudioInfo.settingInfo.get_naturality_display())])
+
+        return result
+    
+    def prepare_audioConversationalTypeFilter(self, obj):
+        """
+        Collect the data to filter the resources on Media Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        # Filter for corpus
+        if isinstance(corpus_media, corpusInfoType_model):
+            media_type = corpus_media.corpusMediaType
+            if media_type.corpusAudioInfo:
+                if media_type.corpusAudioInfo.settingInfo:
+                    result.extend(["{0}".format(media_type.corpusAudioInfo.settingInfo.get_conversationalType_display())])
+
+        return result
+    
+    def prepare_audioScenarioTypeFilter(self, obj):
+        """
+        Collect the data to filter the resources on Media Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        # Filter for corpus
+        if isinstance(corpus_media, corpusInfoType_model):
+            media_type = corpus_media.corpusMediaType
+            if media_type.corpusAudioInfo:
+                if media_type.corpusAudioInfo.settingInfo:
+                    result.extend(["{0}".format(media_type.corpusAudioInfo.settingInfo.get_scenarioType_display())])
+
+        return result
+    
+    def prepare_videoVideoGenreFilter(self, obj):
+        """
+        Collect the data to filter the resources on Media Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        # Filter for corpus
+        if isinstance(corpus_media, corpusInfoType_model):
+            media_type = corpus_media.corpusMediaType
+            for corpus_info in media_type.corpusvideoinfotype_model_set.all():
+                if corpus_info.videoclassificationinfotype_model_set:
+                    result.extend(["{0}".format(video_classification_info.get_videoGenre_display()) for video_classification_info in
+                      corpus_info.videoclassificationinfotype_model_set.all()])
+
+        return result
+    
+    def prepare_videoTypeOfVideoContentFilter(self, obj):
+        """
+        Collect the data to filter the resources on Media Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        # Filter for corpus
+        if isinstance(corpus_media, corpusInfoType_model):
+            media_type = corpus_media.corpusMediaType
+            for corpus_info in media_type.corpusvideoinfotype_model_set.all():
+                if corpus_info.videoContentInfo:
+                    result.extend(["{0}".format(corpus_info.videoContentInfo.get_typeOfVideoContent_display())])
+
+        # Filter for lexical conceptual
+        elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
+            lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
+            if lcr_media_type.lexicalConceptualResourceVideoInfo:
+                if lcr_media_type.lexicalConceptualResourceVideoInfo.videoContentInfo:
+                    result.extend(["{0}".format(lcr_media_type.lexicalConceptualResourceVideoInfo.videoContentInfo. \
+                      get_typeOfVideoContent_display())])
+
+        # Filter for language description
+        elif isinstance(corpus_media, languageDescriptionInfoType_model):
+            ld_media_type = corpus_media.languageDescriptionMediaType
+            if ld_media_type.languageDescriptionVideoInfo:
+                if ld_media_type.languageDescriptionVideoInfo.videoContentInfo:
+                    result.extend(["{0}".format(ld_media_type.languageDescriptionVideoInfo.videoContentInfo. \
+                      get_typeOfVideoContent_display())])
+
+        return result
+    
+    def prepare_videoNaturalityFilter(self, obj):
+        """
+        Collect the data to filter the resources on Media Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        # Filter for corpus
+        if isinstance(corpus_media, corpusInfoType_model):
+            media_type = corpus_media.corpusMediaType
+            for corpus_info in media_type.corpusvideoinfotype_model_set.all():
+                if corpus_info.settingInfo:
+                    result.extend(["{0}".format(corpus_info.settingInfo.get_naturality_display())])
+
+        return result
+    
+    def prepare_videoConversationalTypeFilter(self, obj):
+        """
+        Collect the data to filter the resources on Media Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        # Filter for corpus
+        if isinstance(corpus_media, corpusInfoType_model):
+            media_type = corpus_media.corpusMediaType
+            for corpus_info in media_type.corpusvideoinfotype_model_set.all():
+                if corpus_info.settingInfo:
+                    result.extend(["{0}".format(corpus_info.settingInfo.get_conversationalType_display())])
+
+        return result
+    
+    def prepare_videoScenarioTypeFilter(self, obj):
+        """
+        Collect the data to filter the resources on Media Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        # Filter for corpus
+        if isinstance(corpus_media, corpusInfoType_model):
+            media_type = corpus_media.corpusMediaType
+            for corpus_info in media_type.corpusvideoinfotype_model_set.all():
+                if corpus_info.settingInfo:
+                    result.extend(["{0}".format(corpus_info.settingInfo.get_scenarioType_display())])
+
+        return result
+    
+    def prepare_imageImageGenreFilter(self, obj):
+        """
+        Collect the data to filter the resources on Media Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        # Filter for corpus
+        if isinstance(corpus_media, corpusInfoType_model):
+            media_type = corpus_media.corpusMediaType
+            if media_type.corpusImageInfo:
+                for image_classification_info in media_type.imageClassificationInfo.all():
+                    result.extend(["{0}".format(image_classification_info.get_imageGenre_display())])
+
+        return result
+    
+    def prepare_imageTypeOfImageContentFilter(self, obj):
+        """
+        Collect the data to filter the resources on Media Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        # Filter for corpus
+        if isinstance(corpus_media, corpusInfoType_model):
+            media_type = corpus_media.corpusMediaType
+            if media_type.corpusImageInfo:
+                if media_type.imageContentInfo:
+                    result.extend(["{0}".format(media_type.imageContentInfo.get_typeOfImageContent_display())])
+
+        # Filter for lexical conceptual
+        elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
+            lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
+            if lcr_media_type.lexicalConceptualResourceImageInfo:
+                if lcr_media_type.lexicalConceptualResourceImageInfo.imageContentInfo:
+                    result.extend(["{0}".format(lcr_media_type.lexicalConceptualResourceImageInfo. \
+                      imageContentInfo.get_typeOfImageContent_display())])
+
+        # Filter for language description
+        elif isinstance(corpus_media, languageDescriptionInfoType_model):
+            ld_media_type = corpus_media.languageDescriptionMediaType
+            if ld_media_type.languageDescriptionImageInfo:
+                if ld_media_type.languageDescriptionImageInfo.imageContentInfo:
+                    result.extend(["{0}".format(ld_media_type.languageDescriptionImageInfo.imageContentInfo. \
+                      get_typeOfImageContent_display())])
+
+        return result
+    
+    def prepare_tnTypeOfTnContentFilter(self, obj):
+        """
+        Collect the data to filter the resources on Media Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        # Filter for corpus
+        if isinstance(corpus_media, corpusInfoType_model):
+            media_type = corpus_media.corpusMediaType
+            if media_type.corpusTextNumericalInfo:
+                if media_type.corpusTextNumericalInfo.textNumericalContentInfo:
+                    result.extend(["{0}".format(media_type.corpusTextNumericalInfo.textNumericalContentInfo. \
+                     get_typeOfTextNumericalContent_display())])
+
+        return result
+    
+    def prepare_tnGramBaseItemFilter(self, obj):
+        """
+        Collect the data to filter the resources on Media Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        # Filter for corpus
+        if isinstance(corpus_media, corpusInfoType_model):
+            media_type = corpus_media.corpusMediaType
+            if media_type.corpusTextNgramInfo:
+                if media_type.corpusTextNgramInfo.ngramInfo:
+                    result.extend(["{0}".format(ngram_info.get_baseItem_display()) for ngram_info in
+                      media_type.corpusTextNgramInfo.ngramInfo.all()])
+
+        return result
+    
+    def prepare_tnGramOrderFilter(self, obj):
+        """
+        Collect the data to filter the resources on Media Type children
+        """
+        result = []
+
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        # Filter for corpus
+        if isinstance(corpus_media, corpusInfoType_model):
+            media_type = corpus_media.corpusMediaType
+            if media_type.corpusTextNgramInfo:
+                if media_type.corpusTextNgramInfo.ngramInfo:
+                    result.extend(["{0}".format(ngram_info.get_order_display()) for ngram_info in
+                      media_type.corpusTextNgramInfo.ngramInfo.all()])
 
         return result
