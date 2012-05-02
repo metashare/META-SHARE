@@ -10,7 +10,6 @@ from django.http import Http404
 from django.utils.encoding import force_unicode
 from django.utils.html import escape
 from django.utils.translation import ugettext as _
-from django.db.models.fields.related import ManyToManyField
 from django.contrib.admin import helpers
 from django.forms.formsets import all_valid
 from django.utils.safestring import mark_safe
@@ -96,37 +95,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
     def get_fieldsets(self, request, obj=None):
         return SchemaModelLookup.get_fieldsets(self, request, obj)
 
-
-    def add_to_my_resources(self, obj, user):
-        '''
-        Add the current user to the list of owners for the current resource,
-        thereby adding the resource to the 'my resources' list for the user.
-        '''
-        if hasattr(obj, 'owners'):
-            _field = obj._meta.get_field_by_name('owners')[0]
-            if isinstance(_field, ManyToManyField):
-                obj.owners.add(user.pk)
-                obj.save()
-        
-
-    def log_addition(self, request, obj):
-        """
-        Log that an object has been successfully added and update owners.
-        
-        We currently update owners information here as save_model() for some
-        reason does not properly store the request.user's id in the M2M field.
-        """
-        self.add_to_my_resources(obj, request.user)
-        super(SchemaModelAdmin, self).log_addition(request, obj)
-
-    def log_change(self, request, obj, message):
-        """
-        Log that an object has been successfully changed and update owners.
-        """
-        self.add_to_my_resources(obj, request.user)
-        super(SchemaModelAdmin, self).log_change(request, obj, message)
-
-        
+            
     def formfield_for_dbfield(self, db_field, **kwargs):
         """
         This is a crucial step in the workflow: for a given db field,

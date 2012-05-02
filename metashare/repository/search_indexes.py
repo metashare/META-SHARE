@@ -12,12 +12,12 @@ from django.db.models import signals
 from django.utils.translation import ugettext as _
 
 from metashare.repository.models import resourceInfoType_model, \
-    identificationInfoType_model, corpusInfoType_model, \
+    corpusInfoType_model, \
     toolServiceInfoType_model, lexicalConceptualResourceInfoType_model, \
     languageDescriptionInfoType_model
 from metashare.repository.search_fields import LabeledCharField, \
     LabeledMultiValueField
-from metashare.storage.models import StorageObject
+from metashare.storage.models import StorageObject, INGESTED, PUBLISHED
 from metashare.settings import LOG_LEVEL, LOG_HANDLER
 
 # Setup logging support.
@@ -278,6 +278,13 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         """
         return self.get_model().objects.filter(storage_object__deleted=False)
 
+    def should_update(self, instance, **kwargs):
+        '''
+        Only index resources that are at least ingested.
+        In other words, do not index internal resources.
+        '''
+        return instance.storage_object.publication_status in (INGESTED, PUBLISHED)
+
     def update_object(self, instance, using=None, **kwargs):
         """
         Updates the index for a single object instance.
@@ -296,20 +303,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             # set by Django's post_save signal dispatcher has a different
             # meaning that we need to overwrite
             using = None
-            if kwargs["sender"] == identificationInfoType_model:
-                try:
-                    instance = instance.resourceinfotype_model
-                except resourceInfoType_model.DoesNotExist:
-                    # may happen when an identificationInfoType_model is created
-                    # in isolation; for example, in case of resource imports
-                    # from XML where the identificationInfoType_model is created
-                    # before the corresponding resourceInfoType_model is created
-                    return
-                assert instance, "At this stage there must be a related " \
-                    "resource for the saved identification info."
-                LOGGER.debug("identificationInfo changed for resource #{0}." \
-                             .format(instance.id))
-            elif kwargs["sender"] == StorageObject:
+            if kwargs["sender"] == StorageObject:
                 LOGGER.debug("StorageObject changed for resource #{0}." \
                              .format(instance.id))
                 related_resource_qs = instance.resourceinfotype_model_set
@@ -331,14 +325,15 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
                 assert False, "Unexpected sender: {0}".format(kwargs["sender"])
                 LOGGER.error("Unexpected sender: {0}".format(kwargs["sender"]))
                 return
-        LOGGER.info("Resource #{0} scheduled for reindexing." \
-                    .format(instance.id))
         # we better recreate our resource instance from the DB as otherwise it
         # has happened for some reason that the instance was not up-to-date
         instance = self.get_model().objects.get(pk=instance.id)
-        super(resourceInfoType_modelIndex, self).update_object(instance,
-                                                               using=using,
-                                                               **kwargs)
+        if self.should_update(instance):
+            LOGGER.info("Resource #{0} scheduled for reindexing." \
+                        .format(instance.id))
+            super(resourceInfoType_modelIndex, self).update_object(instance,
+                                                                   using=using,
+                                                                   **kwargs)
 
     def _setup_save(self):
         """
@@ -347,14 +342,16 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         In this implementation we additionally connect to frequently changed
         parts of the model which is returned by get_model().
         """
-        if super(resourceInfoType_modelIndex, self)._setup_save():
+        if PatchedRealTimeSearchIndex._signal_setup_done[0]:
             return
-        # in addition to the default setup of our super class, we connect to
-        # frequently changed parts of resourceInfoType_model so that they
-        # trigger an automatic reindexing, too:
-        signals.post_save.connect(self.update_object,
-                                  sender=identificationInfoType_model)
+        PatchedRealTimeSearchIndex._signal_setup_done[0] = True
+
+        # For efficiency, we watch the storage object for save events only.
+        # This relies on resourceInfoType_model.save() to call storage_object.save()
+        # every time!
         signals.post_save.connect(self.update_object, sender=StorageObject)
+        # This also relies on the fact that all changes relevant to the index
+        # are concluded with the resource being saved.
         # all other changes somewhere in a resource (such as language info
         # changes) must be handled elsewhere, e.g., in a periodic reindexing
         # cron job
