@@ -2,7 +2,7 @@
 from django.http import HttpResponse
 from django.db.models import Sum
 from django.shortcuts import render_to_response      
-from statserver.stats.models import Node, NodeStats
+from statserver.stats.models import Node, NodeStats, DATA_STATS_CHOICES
 from statserver.settings import CHECKINGTIME, MEDIA_URL
 from urllib2 import URLError, Request, urlopen 
 import threading
@@ -106,34 +106,23 @@ def updateNodeStats(node, daytime):
         node.checked = True
         node.timestamp = datetime.now()
         
-        datestats = NodeStats.objects.filter(hostname=node.hostname, date=daytime)
-        updatestats = False
-        if (datestats.count() == 0):
-            nodestats = NodeStats(hostname = node.hostname, date=daytime)
-        else:
-            nodestats = datestats[0]
-            updatestats = True
         
-        for item in data:
-            if (item.has_key("date")):
-                nodestats.date = item["date"]
-            if (item.has_key("user")):
-                nodestats.user = int(item["user"])
-            if (item.has_key("lrupdate")):
-                nodestats.lrupdate = int(item["lrupdate"])
-            if (item.has_key("lrdown")):
-                nodestats.lrdown = int(item["lrdown"])
-            if (item.has_key("lrview")):
-                nodestats.lrview = int(item["lrview"])
-            if (item.has_key("queries")):
-                nodestats.queries = int(item["queries"])
-            if (item.has_key("qexec_time_avg")):
-                nodestats.qexec_time_avg = int(item["qexec_time_avg"])         
-            if (item.has_key("qlt_avg")):
-                nodestats.qlt_avg = int(item["qlt_avg"])         
- 
-        nodestats.save(force_update=updatestats)
         
+        
+        for items in data:
+            if (items.has_key("date")):
+                for key,val in items.items():
+                    if (key != "date"):
+                        datestats = NodeStats.objects.filter(node=node, date=daytime, datakey=key)
+                        updatestats = False
+                        if (datestats.count() == 0):
+                            nodestats = NodeStats(node = node, date=daytime, datakey=key)
+                        else:
+                            nodestats = datestats[0]
+                            updatestats = True
+                    
+                        nodestats.dataval = int(val)
+                        nodestats.save(force_update=updatestats)        
     node.save(force_update=True)
     return 
  
@@ -141,11 +130,16 @@ def updateNodeStats(node, daytime):
 # create a view about actions made on all METASHARE nodes	
 def browse(request):
     hosts = {}
-    total_counter = [0, 0, 0, 0, 0, 0, 0]
+    total_counter = [0] * (len(DATA_STATS_CHOICES) + 2)
+    total_counter[0] = "TOTAL"
+    total_counter[1] = ""
+    
     actions_byhost = {}
     actions_bydate = {}
     host_labels = []
     currdate = None
+    hosts_with_qexec = 0
+    idx_qexec_time_avg = -1
     try:
         if (request.GET.has_key('date')):
             currdate = str(request.GET['date'])
@@ -164,32 +158,31 @@ def browse(request):
     for node in traffic:
         hostname = str(node['hostname'])
         host_labels.append(hostname)
-        if (currdate):
-            datestats = NodeStats.objects.values('hostname').filter(hostname=hostname, \
-                date=currdate).annotate(Sum('user'), Sum('lrview'), Sum('lrupdate'), \
-                Sum('lrdown'), Sum('queries'), Sum('qexec_time_avg'), Sum('qlt_avg'))
-        else:
-            datestats = NodeStats.objects.values('hostname').filter(hostname=hostname).annotate(Sum('user'), \
-                Sum('lrview'), Sum('lrupdate'), Sum('lrdown'), Sum('queries'), \
-                Sum('qexec_time_avg'), Sum('qlt_avg'))
-                
-        if (not datestats):
-            hosts[hostname] = [int(node['checked']), pretty_timeago(node['timestamp']), 0, 0, 0, 0, 0, 0, 0]
-        else:
-            hosts[hostname] = [int(node['checked']), pretty_timeago(node['timestamp']), \
-                int(datestats[0]["user__sum"]), int(datestats[0]["lrview__sum"]), int(datestats[0]["lrupdate__sum"]), \
-                int(datestats[0]["lrdown__sum"]), int(datestats[0]["queries__sum"]), \
-                "%0.0f" % int(datestats[0]["qexec_time_avg__sum"]/1000), int(datestats[0]["qlt_avg__sum"])]
-            total_counter[0] += int(datestats[0]["user__sum"])
-            total_counter[1] += int(datestats[0]["lrview__sum"])
-            total_counter[2] += int(datestats[0]["lrupdate__sum"])
-            total_counter[3] += int(datestats[0]["lrdown__sum"])
-            total_counter[4] += int(datestats[0]["queries__sum"])
-            total_counter[5] += int(datestats[0]["qexec_time_avg__sum"]/1000)
-            total_counter[6] += int(datestats[0]["qlt_avg__sum"])
-    if (total_counter[5] > 0):
-        total_counter[5] = "%0.0f" % (total_counter[5] / len(host_labels))
-                   
+        hosts[hostname] = [0] * (len(DATA_STATS_CHOICES) + 2)
+        hosts[hostname][0] = int(node['checked'])
+        hosts[hostname][1] = pretty_timeago(node['timestamp'])
+        c=1
+        for datakey, datalabel in DATA_STATS_CHOICES:
+            c+=1
+            if (currdate):
+                datastats = NodeStats.objects.values('node__hostname').filter(node__hostname=hostname, date=currdate, datakey=datakey).annotate(Sum("dataval"))
+            else:
+                datastats = NodeStats.objects.values('node__hostname').filter(node__hostname=hostname, datakey=datakey).annotate(Sum("dataval"))
+            
+            if (datastats):
+                if (datakey == "qexec_time_avg"):
+                    hosts[hostname][c] = "%0.0f" % int(datastats[0]["dataval__sum"]/1000)
+                    total_counter[c] += int(datastats[0]["dataval__sum"]/1000)
+                    hosts_with_qexec += 1
+                    idx_qexec_time_avg = c
+                else:
+                    hosts[hostname][c] = int(datastats[0]["dataval__sum"])
+                    total_counter[c] += int(datastats[0]["dataval__sum"])
+            else:
+                hosts[hostname][c] = 0
+        
+    if (idx_qexec_time_avg>=0 and total_counter[idx_qexec_time_avg] > 0):
+        total_counter[idx_qexec_time_avg] = "%0.0f" % (total_counter[idx_qexec_time_avg] / hosts_with_qexec)               
             
 
     for alabel, aid in action_labels.items():
@@ -205,19 +198,21 @@ def browse(request):
             continue
           
         for node in traffic:
-            host_action = NodeStats.objects.values('hostname').filter(hostname=node['hostname']).annotate(Sum(afield))
+            host_action = NodeStats.objects.values('node__hostname').filter(node__hostname=node['hostname'], datakey=afield).annotate(Sum("dataval"))
             for action in host_action:
-                actions_byhost[alabel].append(int(action[afield+"__sum"]))
+                actions_byhost[alabel].append(int(action["dataval__sum"]))
         
-        actions_list = NodeStats.objects.values('date').annotate(Sum(afield))
         dates = {}       
+       
+        actions_list = NodeStats.objects.values('date').filter(datakey=afield).annotate(Sum("dataval"))
         for key in actions_list:
             day = str(key['date'])  
             labeldate = day[0:4] +","+str(int(day[5:7])-1)+","+day[8:10]
-            dates[labeldate] = int(key[afield+"__sum"])
+            dates[labeldate] = int(key["dataval__sum"])
+        
         actions_bydate[alabel] = dates
     return render_to_response('templates/metastats.html', {'host_labels': host_labels, \
-    'traffic': hosts, 'host_total_counter': total_counter, 'actions_byhost': actions_byhost, \
+            'stats_fields': DATA_STATS_CHOICES, 'traffic': hosts, 'host_total_counter': total_counter, 'actions_byhost': actions_byhost, \
     'actions_bydate': actions_bydate, 'media_prefix': MEDIA_URL, 'date': days, 'currdate': currdate})
 
 
@@ -239,6 +234,7 @@ checktimer = BackgroundTimer()
 checktimer.start()
 
 
+# pylint: disable-msg=R0911
 def pretty_timeago(timein=False):
     """
     Get a datetime object or a int() Epoch timestamp and return a
@@ -246,40 +242,38 @@ def pretty_timeago(timein=False):
     'just now', etc
     """
     now = datetime.now()
-    timeout = ''
     if type(timein) is int:
-        diff = now - datetime.fromtimestamp(timein)
+        diff = now - datetime.fromtimestamp(timein)    
     elif isinstance(timein, datetime):
         diff = now - timein 
     elif not timein:
         diff = now - now
     second_diff = diff.seconds
     day_diff = diff.days
-
+    
     if day_diff < 0:
-        return timeout
+        return ""
 
     if day_diff == 0:
         if second_diff < 10:
-            timeout = "just now"
+            return "just now"
         if second_diff < 60:
-            timeout = str(second_diff) + " seconds ago"
+            return str(second_diff) + " seconds ago"
         if second_diff < 120:
-            timeout =  "a minute ago"
+            return "a minute ago"
         if second_diff < 3600:
-            timeout = str( second_diff / 60 ) + " minutes ago"
+            return str( second_diff / 60 ) + " minutes ago"
         if second_diff < 7200:
-            timeout = "an hour ago"
+            return "an hour ago"
         if second_diff < 86400:
             return str( second_diff / 3600 ) + " hours ago"
     if day_diff == 1:
-        timeout = "Yesterday"
+        return "Yesterday"
     if day_diff < 7:
-        timeout = str(day_diff) + " days ago"
+        return str(day_diff) + " days ago"
     if day_diff < 31:
-        timeout = str(day_diff/7) + " weeks ago"
+        return str(day_diff/7) + " weeks ago"
     if day_diff < 365:
-        timeout = str(day_diff/30) + " months ago"
-    timeout = str(day_diff/365) + " years ago"
+        return str(day_diff/30) + " months ago"
+    return str(day_diff/365) + " years ago"
     
-    return timeout

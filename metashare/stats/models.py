@@ -16,8 +16,8 @@ class LRStats(models.Model):
 
 class QueryStats(models.Model):
     userid = models.CharField(blank=False, max_length=64)
-    field = models.CharField(blank=False, max_length=32)
     query = models.TextField(blank=False)
+    facets = models.TextField(blank=False)
     lasttime = models.DateTimeField(blank=False, auto_now_add=True, default=datetime.now())
     found = models.IntegerField(blank=False, default=0)
     exectime = models.IntegerField(blank=False, default=0)

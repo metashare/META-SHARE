@@ -201,8 +201,15 @@ def topstats (request):
     if view == "latestqueries":
         data = getLastQuery(10)
         for item in data:
+            url = "q=" + item['query']
             query = urllib.unquote(item['query'])
-            topdata.append([query, pretty_timeago(item['lasttime']), item['found']])       
+            facets = ""
+            if (item['facets'] != ""):
+                facetlist = eval(item['facets'])
+                for face in facetlist:
+                    url += "&selected_facets=" + face
+                    facets += ", " + face.replace("Filter_exact:",": ")
+            topdata.append([query, facets, pretty_timeago(item['lasttime']), item['found'], url])       
              
     return render_to_response('stats/topstats.html',
         {'user': request.user, 
@@ -226,9 +233,15 @@ def getstats (request):
         
     user = LRStats.objects.filter(lasttime__startswith=currdate).values('sessid').annotate(Count('sessid')).count()
     ##optimize these calls just using one (model_utils.statByDate)
-    lrupdate = LRStats.objects.filter(lasttime__startswith=currdate, action="u").count()
-    lrview = LRStats.objects.filter(lasttime__startswith=currdate, action="v").count()
-    lrdown = LRStats.objects.filter(lasttime__startswith=currdate, action="d").count()
+    lrpublish_stat = LRStats.objects.values('lrid' , 'lasttime').filter(action=PUBLISH_STAT).order_by('lasttime')
+    lrpublish = 0
+    for stat in lrpublish_stat:
+        lringest = LRStats.objects.filter(lrid=stat["lrid"], action=INGEST_STAT, lasttime__gt=stat["lasttime"]).count()
+        if (lringest == 0):
+            lrpublish += 1
+    lrupdate = LRStats.objects.filter(lasttime__startswith=currdate, action=UPDATE_STAT).count()
+    lrview = LRStats.objects.filter(lasttime__startswith=currdate, action=VIEW_STAT).count()
+    lrdown = LRStats.objects.filter(lasttime__startswith=currdate, action=DOWNLOAD_STAT).count()
     queries = QueryStats.objects.filter(lasttime__startswith=currdate).count()
     extimes = QueryStats.objects.filter(lasttime__startswith=currdate).aggregate(Avg('exectime'), Max('exectime'), Min('exectime'))
     
@@ -238,7 +251,7 @@ def getstats (request):
     else:
         extimes["exectime__avg"] = 0
         
-    return HttpResponse("["+JSONEncoder().encode({"date": str(currdate), "user": \
+    return HttpResponse("["+JSONEncoder().encode({"date": str(currdate), "lrpublish": lrpublish, "user": \
         user, "lrupdate": lrupdate, "lrview": lrview, "lrdown": lrdown, "queries": queries, \
         "qexec_time_avg": extimes["exectime__avg"], "qlt_avg": qltavg})+"]")
 
