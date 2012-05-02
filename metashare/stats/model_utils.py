@@ -11,8 +11,10 @@ UPDATE_STAT = "u"
 VIEW_STAT = "v"
 RETRIEVE_STAT = "r"
 DOWNLOAD_STAT = "d"
+PUBLISH_STAT = "p"
+INGEST_STAT = "i"
 
-STAT_LABELS = {UPDATE_STAT: "update", VIEW_STAT: "view", RETRIEVE_STAT: "retrieve", DOWNLOAD_STAT: "download"}
+STAT_LABELS = {UPDATE_STAT: "update", VIEW_STAT: "view", RETRIEVE_STAT: "retrieve", DOWNLOAD_STAT: "download", PUBLISH_STAT: "publish", INGEST_STAT: "ingest"}
 
 # Setup logging support.
 logging.basicConfig(level=LOG_LEVEL)
@@ -99,18 +101,18 @@ def getLRLast(action, limit):
         action_list =  LRStats.objects.values('lrid', 'action', 'lasttime').order_by('-lasttime')[:limit]
     return action_list
 
-def saveQueryStats(userid, field, query, found, exectime=0): 
+def saveQueryStats(userid, facets, query, found, exectime=0): 
     stat = QueryStats()
     stat.userid = userid
-    stat.field = field
     stat.query = query
+    stat.facets = facets
     stat.found = found
     stat.exectime = exectime    
     stat.save()
     LOGGER.debug('STATS: Query {0}.'.format(query))
 
 def getLastQuery (limit):
-    return QueryStats.objects.values('query', 'lasttime','found').filter(found__gt=0).order_by('-lasttime')[:limit]
+    return QueryStats.objects.values('query', 'facets', 'lasttime', 'found').filter(found__gt=0).order_by('-lasttime')[:limit]
  
 def statByDate(date):
     return LRStats.objects.values("action").filter(lasttime__year=date[0:4], lasttime__month=date[4:6], lasttime__day=date[6:8]).annotate(Count('action'))
