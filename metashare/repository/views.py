@@ -431,12 +431,11 @@ class MetashareFacetedSearchView(FacetedSearchView):
         # Step (1): if there are any selected facets, then add these first:
         if sel_facets:
             # add all facets alphabetically:
-            filter_with_parents = filter(lambda f: f[3] == 0, filter_labels)
-            for name, label, facet_id, _ in filter_with_parents:
+            for name, label, facet_id, _ in [f for f in filter_labels if f[3] == 0]:
                 name_exact = '{0}_exact'.format(name)
                 # only add selected facets in step (1)
                 if name_exact in sel_facets:
-                    subfacets = filter(lambda f: f[3] == facet_id, filter_labels)
+                    subfacets = [f for f in filter_labels if f[3] == facet_id]
                     subfacets_exactname_list = []
                     subfacets_exactname_list.extend([u'{0}_exact'.format(subfacet[0]) for subfacet in subfacets])
                     subresults = []
@@ -472,8 +471,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
 
         # Step (2): add all facets without selected facet items alphabetically
         # at the end:
-        filter_with_parents = filter(lambda f: f[3] == 0, filter_labels)
-        for name, label, facet_id, _ in filter_with_parents:
+        for name, label, facet_id, _ in [f for f in filter_labels if f[3] == 0]:
             name_exact = '{0}_exact'.format(name)
             # only add facets without selected items in step (2)
             if not name_exact in sel_facets:
@@ -488,7 +486,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
                         targets.append(u'{0}:{1}'.format(name_exact, item[0]))
                         addable.append({'label': item[0], 'count': item[1],
                                         'targets': targets})
-                    subresults = filter(lambda f: f[3] == facet_id, filter_labels)
+                    subresults = [f for f in filter_labels if f[3] == facet_id] 
                     result.append({'label': label, 'removable': [],
                                    'addable': addable, 'subresults': subresults})
 
