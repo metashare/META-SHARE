@@ -10,7 +10,7 @@ from metashare.repository.models import resourceComponentTypeType_model, \
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
     ALLOWED_ARCHIVE_EXTENSIONS
 from metashare.utils import verify_subclass
-from metashare.stats.model_utils import saveLRStats, UPDATE_STAT
+from metashare.stats.model_utils import saveLRStats, UPDATE_STAT, INGEST_STAT, PUBLISH_STAT
 from metashare.repository.supermodel import SchemaModel
 from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
@@ -211,11 +211,15 @@ def change_resource_status(resource, status, precondition_status=None):
 def publish_resources(modeladmin, request, queryset):
     for obj in queryset:
         change_resource_status(obj, status=PUBLISHED, precondition_status=INGESTED)
+        if hasattr(obj, 'storage_object') and obj.storage_object is not None:
+            saveLRStats("", obj.storage_object.identifier, "", PUBLISH_STAT)
 publish_resources.short_description = "Publish selected ingested resources"
 
 def unpublish_resources(modeladmin, request, queryset):
     for obj in queryset:
         change_resource_status(obj, status=INGESTED, precondition_status=PUBLISHED)
+        if hasattr(obj, 'storage_object') and obj.storage_object is not None:
+            saveLRStats("", obj.storage_object.identifier, "", INGEST_STAT)
 unpublish_resources.short_description = "Unpublish selected published resources"
 
 def ingest_resources(modeladmin, request, queryset):
@@ -682,7 +686,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         super(ResourceModelAdmin, self).save_model(request, obj, form, change)
         #update statistics
         if hasattr(obj, 'storage_object') and obj.storage_object is not None:
-            saveLRStats("", obj.storage_object.identifier, "", UPDATE_STAT)
+            saveLRStats("", obj.storage_object.identifier, "", UPDATE_STAT)            
         
     def change_view(self, request, object_id, extra_context=None):
         _extra_context = extra_context or {}

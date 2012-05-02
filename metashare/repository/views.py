@@ -392,7 +392,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
         starttime = datetime.now()
         results_count = sqs.count()
         if self.query:
-            saveQueryStats(self.request.user.username, '', self.query,
+            saveQueryStats(self.request.user.username, str(sorted(self.request.GET.getlist("selected_facets"))), self.query,
                 results_count, (datetime.now() - starttime).microseconds)
 
         return sqs
