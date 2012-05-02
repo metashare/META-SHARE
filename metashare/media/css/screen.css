@@ -56,6 +56,11 @@ div.popup_box{
 	position: relative;
 }
 
+div.filter.sub{
+    margin-left: 10px;
+    padding-left: 6px;
+}
+
 .icon{
 	padding-top: 4px;
 }
