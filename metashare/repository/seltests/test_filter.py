@@ -154,14 +154,14 @@ class FilterTest(SeleniumTestCase):
         driver.find_element_by_xpath("(//a[contains(text(),'Resource Type')])[2]").click()
         self.assertEqual("sortDesc", driver.find_element_by_xpath(
           "(//a[contains(text(),'Resource Type')])[2]").get_attribute("class"))
-        self.assertEqual("corpus", driver.find_element_by_xpath(
-          "//table[@class='result_table']/tbody/tr[2]/td").text)
+        self.assertEqual("Corpus", driver.find_element_by_xpath(
+          "//table[@class='result_table']/tbody/tr[2]/td/img").get_attribute("title"))
         # now sort by resource type descending
         driver.find_element_by_xpath("(//a[contains(text(),'Resource Type')])[2]").click() 
         self.assertEqual("sortAsc", driver.find_element_by_xpath(
           "(//a[contains(text(),'Resource Type')])[2]").get_attribute("class"))
-        self.assertEqual("lexicalConceptualResource", driver.find_element_by_xpath(
-          "//table[@class='result_table']/tbody/tr[2]/td").text)
+        self.assertEqual("Lexical/Conceptual", driver.find_element_by_xpath(
+          "//table[@class='result_table']/tbody/tr[2]/td/img").get_attribute("title"))
         # now sort by media type ascending
         driver.find_element_by_link_text("Media Type(s)").click()
         self.assertEqual("sortDesc", driver.find_element_by_link_text(

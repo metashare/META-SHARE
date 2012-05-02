@@ -30,6 +30,7 @@ from django.http import Http404
 from metashare.repository.editor.forms import StorageObjectUploadForm
 from django.utils.html import escape
 from django.utils.translation import ugettext as _
+from django.forms.util import ErrorList
 
 csrf_protect_m = method_decorator(csrf_protect)
 
@@ -241,7 +242,7 @@ class PersonLookup(ModelLookup):
         #results = super(PersonLookup, self).get_query(request, term)
         # Since MultiTextFields cannot be searched using query sets (they are base64-encoded and pickled),
         # we must do the searching by hand.
-        # TODO: this is excessively slow, replace with more appropriate search mechanism, e.g. a SOLR index
+        # Note: this is inefficient, but in practice fast enough it seems (tested with >1000 resources)
         lcterm = term.lower()
         def matches(person):
             'Helper function to group the search code for a person'
@@ -291,6 +292,11 @@ class ResourceForm(forms.ModelForm):
         model = resourceInfoType_model
         widgets = {'contactPerson' : AutoCompleteSelectMultipleWidget(lookup_class=PersonLookup)}
 
+    def __init__(self, data=None, files=None, auto_id='id_%s', prefix=None,
+                 initial=None, error_class=ErrorList, label_suffix=':',
+                 empty_permitted=False, instance=None):
+        super(ResourceForm, self).__init__(data, files, auto_id, prefix, initial, error_class, label_suffix, empty_permitted, instance)
+
 class ResourceModelAdmin(SchemaModelAdmin):
     form = ResourceForm
     inline_type = 'stacked'
@@ -300,7 +306,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
     content_fields = ('resourceComponentType',)
     list_display = ('__unicode__', 'resource_type', 'publication_status')
     actions = (publish_resources, unpublish_resources, ingest_resources, )
-    hidden_fields = ('storage_object',)
+    hidden_fields = ('storage_object', 'owners', )
 
 
     def get_urls(self):
@@ -630,6 +636,29 @@ class ResourceModelAdmin(SchemaModelAdmin):
             return request.POST['resourceComponentId']
         return None
 
+    def add_to_my_resources(self, request):
+        '''
+        Add the current user to the list of owners for the current resource,
+        thereby adding the resource to the 'my resources' list for the user.
+        
+        Due to the validation logic of django admin, we add the user to the
+        form's clean_data object rather than the resource object's m2m field;
+        the actual field will be filled in save_m2m().
+        '''
+        # Preconditions:
+        if not request.user or not request.POST:
+            return
+        user_id = str(request.user.pk)
+        owners = request.POST.getlist('owners')
+        # Target state already met:
+        if user_id in owners:
+            return
+        # Need to add user to owners
+        owners.append(user_id)
+        _post = request.POST.copy()
+        _post.setlist('owners', owners)
+        request.POST = _post
+
     @method_decorator(permission_required('repository.add_resourceinfotype_model'))
     def add_view(self, request, form_url='', extra_context=None):
         _extra_context = extra_context or {}
@@ -647,9 +676,11 @@ class ResourceModelAdmin(SchemaModelAdmin):
         else:
             _structures = self.get_hidden_structures(request)
             _extra_context.update(_structures)
+        # We add the current user to the resource owners:
+        self.add_to_my_resources(request)
         # And in any case, we serve the usual change form if we have a post request
         return super(ResourceModelAdmin, self).add_view(request, form_url, _extra_context)
-
+        
 
     def save_model(self, request, obj, form, change):
         super(ResourceModelAdmin, self).save_model(request, obj, form, change)
@@ -662,4 +693,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
         _extra_context.update({'DJANGO_BASE':settings.DJANGO_BASE})
         _structures = self.get_hidden_structures(request, object_id)
         _extra_context.update(_structures)
+        # We add the current user to the resource owners:
+        self.add_to_my_resources(request)
         return super(ResourceModelAdmin, self).change_view(request, object_id, _extra_context)

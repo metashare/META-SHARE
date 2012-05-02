@@ -7,11 +7,22 @@
   {% if object.identificationInfo.resourceShortName.0 %}{{ object.identificationInfo.resourceShortName.0 }}{% endif %}
 </th>
 
-<td style="text-align:left;{% if not object.storage_object.published %} font-style:italic;{% endif %}">
-  {{ object.resourceComponentType.as_subclass.resourceType }}
-</td>
+<td style="text-align:center;{% if not object.storage_object.published %} font-style:italic;{% endif %}">
+  
+  {% if object.resourceComponentType.as_subclass.resourceType = "corpus" %}
+	<img title="Corpus" src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/database_yellow.png" /> &nbsp;
+  {% endif %}
+  {% if object.resourceComponentType.as_subclass.resourceType = "toolService" %}
+	<img title="Tool/Service" src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/page_white_gear.png" /> &nbsp;
+  {% endif %}
+  {% if object.resourceComponentType.as_subclass.resourceType = "lexicalConceptualResource" %}
+	<img title="Lexical/Conceptual" src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/text_ab.png" /> &nbsp;
+  {% endif %}
+  {% if object.resourceComponentType.as_subclass.resourceType = "languageDescription" %}
+	<img title="Language Description" src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/script.png" /> &nbsp;
+  {% endif %}
 
-<td style="text-align:left;{% if not object.storage_object.published %} font-style:italic;{% endif %}">
+<td style="text-align:center;{% if not object.storage_object.published %} font-style:italic;{% endif %}">
   {% resource_media_types object.resourceComponentType.as_subclass %}
 </td>
 
