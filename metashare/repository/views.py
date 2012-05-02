@@ -431,7 +431,8 @@ class MetashareFacetedSearchView(FacetedSearchView):
         # Step (1): if there are any selected facets, then add these first:
         if sel_facets:
             # add all facets alphabetically:
-            for name, label, facet_id, parent_id in filter(lambda f: f[3] == 0, filter_labels):
+            filter_with_parents = filter(lambda f: f[3] == 0, filter_labels)
+            for name, label, facet_id, _ in filter_with_parents:
                 name_exact = '{0}_exact'.format(name)
                 # only add selected facets in step (1)
                 if name_exact in sel_facets:
@@ -471,7 +472,8 @@ class MetashareFacetedSearchView(FacetedSearchView):
 
         # Step (2): add all facets without selected facet items alphabetically
         # at the end:
-        for name, label, facet_id, parent_id in filter(lambda f: f[3] == 0, filter_labels):
+        filter_with_parents = filter(lambda f: f[3] == 0, filter_labels)
+        for name, label, facet_id, _ in filter_with_parents:
             name_exact = '{0}_exact'.format(name)
             # only add facets without selected items in step (2)
             if not name_exact in sel_facets:
