@@ -6,7 +6,8 @@ from metashare.repository.models import resourceComponentTypeType_model, \
     lexicalConceptualResourceInfoType_model, toolServiceInfoType_model, \
     corpusMediaTypeType_model, languageDescriptionMediaTypeType_model, \
     lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model, \
-    metadataInfoType_model
+    metadataInfoType_model, projectInfoType_model, resourceCreationInfoType_model, \
+    actualUseInfoType_model
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
     ALLOWED_ARCHIVE_EXTENSIONS
 from metashare.utils import verify_subclass
@@ -271,11 +272,48 @@ class PersonLookup(ModelLookup):
     def get_item_id(self, item):
         return item.id
 
+class ProjectLookup(ModelLookup):
+    model = projectInfoType_model
+    search_fields = ('projectName__contains', )
+    filters = {}
+    
+    def get_query(self, request, term):
+        lcterm = term.lower()
+        
+        def matches(project):
+            'Helper function to group the search code for a project'
+            for multifield in (project.projectName, project.projectShortName):
+                for field in multifield:
+                    if lcterm in field.lower():
+                        return True
+            return False
+        
+        projects = self.get_queryset()
+        if term == '*':
+            results = projects
+        else:
+            results = [p for p in projects if matches(p)]
+        if results is not None:
+            print u'{} results'.format(results.__len__())
+        else:
+            print u'No results'
+        return results
+    
+    def get_item_label(self, item):
+        shortNames = ''.join(item.projectShortName)
+        names = ''.join(item.projectName)
+        res = u'%s: %s' % (shortNames, names)
+        return res
+    
+    def get_item_id(self, item):
+        return item.id
+    
 class ValidationReportLookup(LookupBase):
     pass
 
 registry.register(PersonLookup)
 registry.register(ValidationReportLookup)
+registry.register(ProjectLookup)
 
 from django import forms
 
@@ -286,7 +324,15 @@ class MetadataForm(forms.ModelForm):
 
 class MetadataInline(ReverseInlineModelAdmin):
     form = MetadataForm
-            
+
+class ResourceCreationForm(forms.ModelForm):
+    class Meta:
+        model = resourceCreationInfoType_model
+        widgets = {'fundingProject' : AutoCompleteSelectMultipleWidget(lookup_class=ProjectLookup)}
+
+class ResourceCreationInline(ReverseInlineModelAdmin):
+    form = ResourceCreationForm
+                
 class ResourceForm(forms.ModelForm):
     class Meta:
         model = resourceInfoType_model
@@ -302,7 +348,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
     inline_type = 'stacked'
     custom_one2one_inlines = {'identificationInfo':IdentificationInline,
                               'resourceComponentType':ResourceComponentInline,
-                              'metadataInfo':MetadataInline}
+                              'metadataInfo':MetadataInline,
+                              'resourceCreationInfo':ResourceCreationInline}
     content_fields = ('resourceComponentType',)
     list_display = ('__unicode__', 'resource_type', 'publication_status')
     actions = (publish_resources, unpublish_resources, ingest_resources, )
@@ -696,3 +743,18 @@ class ResourceModelAdmin(SchemaModelAdmin):
         # We add the current user to the resource owners:
         self.add_to_my_resources(request)
         return super(ResourceModelAdmin, self).change_view(request, object_id, _extra_context)
+
+class ActualUseForm(forms.ModelForm):
+    class Meta:
+        model = actualUseInfoType_model
+        widgets = {'usageProject' : AutoCompleteSelectMultipleWidget(lookup_class=ProjectLookup)}
+            
+class ActualUseModelAdmin(SchemaModelAdmin):
+    form = ActualUseForm
+    
+class ActualUseInline(ReverseInlineModelAdmin):
+    form = ActualUseForm
+    model = actualUseInfoType_model
+
+class UsageModelAdmin(SchemaModelAdmin):
+    inlines = [ActualUseInline, ]
