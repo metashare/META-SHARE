@@ -193,7 +193,7 @@ class FilterTest(SeleniumTestCase):
         driver.find_element_by_link_text("ELRA_VAR").click()
         self.assertEqual("9 Language Resources", driver.find_element_by_css_selector("h3").text)
         # remove media type filter
-        driver.find_element_by_link_text("text").click()
+        driver.find_element_by_link_text("Text").click()
         self.assertEqual("14 Language Resources", driver.find_element_by_css_selector("h3").text)
         # remove restiriction of use filter
         driver.find_element_by_link_text("commercialUse").click()
