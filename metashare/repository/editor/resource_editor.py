@@ -1,5 +1,5 @@
 from metashare.repository.editor.inlines import ReverseInlineFormSet, \
-    ReverseInlineModelAdmin
+    ReverseInlineModelAdmin, SchemaModelInline
 from django.core.exceptions import ValidationError, PermissionDenied
 from metashare.repository.models import resourceComponentTypeType_model, \
     corpusInfoType_model, languageDescriptionInfoType_model, \
@@ -7,7 +7,7 @@ from metashare.repository.models import resourceComponentTypeType_model, \
     corpusMediaTypeType_model, languageDescriptionMediaTypeType_model, \
     lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model, \
     metadataInfoType_model, resourceDocumentationInfoType_model,\
-    resourceCreationInfoType_model
+    resourceCreationInfoType_model, validationInfoType_model
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
     ALLOWED_ARCHIVE_EXTENSIONS
 from metashare.utils import verify_subclass
@@ -250,6 +250,11 @@ class ResourceCreationForm(forms.ModelForm):
         model = resourceCreationInfoType_model
         widgets = {'resourceCreator': AutoCompleteSelectMultipleWidget(lookup_class=ActorLookup)}
 
+class ValidationForm(forms.ModelForm):
+    class Meta:
+        model = validationInfoType_model
+        widgets = {'validator': AutoCompleteSelectMultipleWidget(lookup_class=ActorLookup)}
+
 class MetadataInline(ReverseInlineModelAdmin):
     form = MetadataForm
 
@@ -258,6 +263,11 @@ class ResourceDocumentationInline(ReverseInlineModelAdmin):
     
 class ResourceCreationInline(ReverseInlineModelAdmin):
     form = ResourceCreationForm
+
+class ValidationInline(SchemaModelInline):
+    model = validationInfoType_model
+    form = ValidationForm
+    collapse = True
 
 class ResourceForm(forms.ModelForm):
     class Meta:
@@ -277,6 +287,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                               'metadataInfo':MetadataInline,
                               'resourceDocumentationInfo':ResourceDocumentationInline,
                               'resourceCreationInfo': ResourceCreationInline, }
+    custom_one2many_inlines = {'validationInfo': ValidationInline, }
     content_fields = ('resourceComponentType',)
     list_display = ('__unicode__', 'resource_type', 'publication_status')
     actions = (publish_resources, unpublish_resources, ingest_resources, )
