@@ -6,7 +6,8 @@ from metashare.repository.models import resourceComponentTypeType_model, \
     lexicalConceptualResourceInfoType_model, toolServiceInfoType_model, \
     corpusMediaTypeType_model, languageDescriptionMediaTypeType_model, \
     lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model, \
-    metadataInfoType_model
+    metadataInfoType_model, resourceDocumentationInfoType_model,\
+    resourceCreationInfoType_model
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
     ALLOWED_ARCHIVE_EXTENSIONS
 from metashare.utils import verify_subclass
@@ -31,6 +32,8 @@ from metashare.repository.editor.forms import StorageObjectUploadForm
 from django.utils.html import escape
 from django.utils.translation import ugettext as _
 from django.forms.util import ErrorList
+from selectable.forms.widgets import AutoCompleteSelectMultipleWidget
+from metashare.repository.editor.lookups import PersonLookup, ActorLookup
 
 csrf_protect_m = method_decorator(csrf_protect)
 
@@ -261,54 +264,6 @@ def export_xml_resources(modeladmin, request, queryset):
         return response
 export_xml_resources.short_description = "Export to XML selected published resources"
 
-from selectable.base import LookupBase, ModelLookup
-from selectable.registry import registry
-from selectable.forms.widgets import AutoCompleteSelectMultipleWidget
-from metashare.repository.models import personInfoType_model
-
-class PersonLookup(ModelLookup):
-    model = personInfoType_model
-    search_fields = ('surname__contains', )
-    filters = {}
-    
-    def get_query(self, request, term):
-        #results = super(PersonLookup, self).get_query(request, term)
-        # Since MultiTextFields cannot be searched using query sets (they are base64-encoded and pickled),
-        # we must do the searching by hand.
-        # Note: this is inefficient, but in practice fast enough it seems (tested with >1000 resources)
-        lcterm = term.lower()
-        def matches(person):
-            'Helper function to group the search code for a person'
-            for multifield in (person.surname, person.givenName):
-                for field in multifield:
-                    if lcterm in field.lower():
-                        return True
-            return False
-        persons = self.get_queryset()
-        if term == '*':
-            results = persons
-        else:
-            results = [p for p in persons if matches(p)]
-        if results is not None:
-            print u'{} results'.format(results.__len__())
-        else:
-            print u'No results'
-        return results
-    
-    def get_item_label(self, item):
-        return unicode(item)
-#        name_flat = ' '.join(item.givenName)
-#        surname_flat = ' '.join(item.surname)
-#        return u'%s %s' % (name_flat, surname_flat)
-    
-    def get_item_id(self, item):
-        return item.id
-
-class ValidationReportLookup(LookupBase):
-    pass
-
-registry.register(PersonLookup)
-registry.register(ValidationReportLookup)
 
 from django import forms
 
@@ -317,9 +272,25 @@ class MetadataForm(forms.ModelForm):
         model = metadataInfoType_model
         widgets = {'metadataCreator' : AutoCompleteSelectMultipleWidget(lookup_class=PersonLookup)}
 
+class ResourceDocumentationForm(forms.ModelForm):
+    class Meta:
+        model = resourceDocumentationInfoType_model
+        #widgets = {'documentation' : SelectMultiple}
+
+class ResourceCreationForm(forms.ModelForm):
+    class Meta:
+        model = resourceCreationInfoType_model
+        widgets = {'resourceCreator': AutoCompleteSelectMultipleWidget(lookup_class=ActorLookup)}
+
 class MetadataInline(ReverseInlineModelAdmin):
     form = MetadataForm
-            
+
+class ResourceDocumentationInline(ReverseInlineModelAdmin):
+    form = ResourceDocumentationForm
+    
+class ResourceCreationInline(ReverseInlineModelAdmin):
+    form = ResourceCreationForm
+
 class ResourceForm(forms.ModelForm):
     class Meta:
         model = resourceInfoType_model
@@ -335,7 +306,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
     inline_type = 'stacked'
     custom_one2one_inlines = {'identificationInfo':IdentificationInline,
                               'resourceComponentType':ResourceComponentInline,
-                              'metadataInfo':MetadataInline}
+                              'metadataInfo':MetadataInline,
+                              'resourceDocumentationInfo':ResourceDocumentationInline,
+                              'resourceCreationInfo': ResourceCreationInline, }
     content_fields = ('resourceComponentType',)
     list_display = ('__unicode__', 'resource_type', 'publication_status')
     actions = (publish_resources, unpublish_resources, ingest_resources, export_xml_resources, )
