@@ -227,6 +227,39 @@ def ingest_resources(modeladmin, request, queryset):
         change_resource_status(obj, status=INGESTED, precondition_status=INTERNAL)
 ingest_resources.short_description = "Ingest selected internal resources"
 
+def export_xml_resources(modeladmin, request, queryset):
+    from StringIO import StringIO
+    from zipfile import ZipFile
+    from xml.etree import ElementTree
+    from metashare.repository.supermodel import pretty_xml
+    from django import http
+
+    zipfilename = "resources_export.zip"
+    in_memory = StringIO()
+    
+    with ZipFile(in_memory, 'w') as zipfile:
+        for obj in queryset:
+            try:
+                root_node = obj.export_to_elementtree()
+                xml_string = ElementTree.tostring(root_node, encoding="utf-8")
+                pretty = pretty_xml(xml_string).encode('utf-8');
+                resource_filename = 'resource-{0}.xml'.format(obj.storage_object.id)
+                zipfile.writestr(resource_filename, pretty)
+    
+            except Exception:
+                raise Http404(_('Could not export resource "%(name)s" with primary key %(key)r.') \
+                  % {'name': force_unicode(obj), 'key': escape(obj.storage_object.id)})
+
+        zipfile.close()  
+
+        response = http.HttpResponse(mimetype='application/zip')
+        response['Content-Disposition'] = 'attachment; filename=%s' % (zipfilename)
+        
+        in_memory.seek(0)      
+        response.write(in_memory.read())  
+
+        return response
+export_xml_resources.short_description = "Export to XML selected published resources"
 
 from selectable.base import LookupBase, ModelLookup
 from selectable.registry import registry
@@ -305,7 +338,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                               'metadataInfo':MetadataInline}
     content_fields = ('resourceComponentType',)
     list_display = ('__unicode__', 'resource_type', 'publication_status')
-    actions = (publish_resources, unpublish_resources, ingest_resources, )
+    actions = (publish_resources, unpublish_resources, ingest_resources, export_xml_resources, )
     hidden_fields = ('storage_object', 'owners', )
 
 
@@ -327,6 +360,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
             url(r'^my/$',
                 wrap(self.changelist_view_filtered),
                 name='%s_%s_myresources' % info),
+            url(r'^(.+)/export-xml/$',
+                wrap(self.exportxml),
+                name='%s_%s_exportxml' % info),
         ) + urlpatterns
         return urlpatterns
 
@@ -447,6 +483,50 @@ class ResourceModelAdmin(SchemaModelAdmin):
         return render_to_response(
           ['admin/repository/resourceinfotype_model/upload_resource.html'], context,
           context_instance)
+
+    @csrf_protect_m
+    def exportxml(self, request, object_id, extra_context=None):
+        """
+        The 'upload data' admin view for resourceInfoType_model instances.
+        """
+        model = self.model
+        opts = model._meta
+
+        obj = self.get_object(request, unquote(object_id))
+
+        if not self.has_change_permission(request, obj):
+            raise PermissionDenied
+
+        if obj is None:
+            raise Http404(_('%(name)s object with primary key %(key)r does not exist.') \
+             % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
+
+        storage_object = obj.storage_object
+        if storage_object is None:
+            raise Http404(_('%(name)s object with primary key %(key)r does not have a StorageObject attached.') \
+              % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
+
+        if not storage_object.master_copy:
+            raise Http404(_('%(name)s object with primary key %(key)r is not a master-copy.') \
+              % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
+
+        from xml.etree import ElementTree
+        from metashare.repository.supermodel import pretty_xml
+        from django import http
+
+        try:
+            root_node = obj.export_to_elementtree()
+            xml_string = ElementTree.tostring(root_node, encoding="utf-8")
+            pretty = pretty_xml(xml_string).encode('utf-8');
+            resource_filename = 'resource-{0}.xml'.format(object_id)
+        
+            response = http.HttpResponse(pretty, mimetype='text/xml')
+            response['Content-Disposition'] = 'attachment; filename=%s' % (resource_filename)
+            return response
+
+        except Exception:
+            raise Http404(_('Could not export resource "%(name)s" with primary key %(key)r.') \
+              % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
 
     def build_fieldsets_from_schema(self, include_inlines=False, inlines=()):
