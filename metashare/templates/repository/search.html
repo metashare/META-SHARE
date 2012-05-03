@@ -28,38 +28,38 @@ $(document).ready(function(){
 </script>
 
 <script>
-	$(document).ready(function(){		
-		$("dt.accordion").nextUntil("dt").hide();		
-		$("dt.accordion").each(function(){			
-			$(this).nextUntil("dt").find("a.removableFacet").parents("dd").toggle();		
-			addStatus($(this));
-		});
-		
-	    $("dt.accordion").click(function() {
-			$(this).nextUntil("dt").slideToggle("slow", callbackFn);		
-		});			          		
-	});	
+    $(document).ready(function(){
+        $("div.filter").hide();
+        $("div.accordion").each(function(){
+            $(this).next("div.filter").find("a.removableFacet").parents("div.filter").show();
+            addStatus($(this));
+        });
 
+        $("div.accordion").click(function() {
+            if($(this).next("div.filter").attr("style") == "display: none;" ){
+                $(this).addClass('expanded');
+                $(this).removeClass('collapsed');}
+            else{
 
-	function callbackFn(){
-		if( $(this).is(":visible") ){
-			$(this).prev("dt.accordion").removeClass('collapsed'); 
-			$(this).prev("dt.accordion").addClass('expanded');
-		}else{			
-			$(this).prev("dt.accordion").removeClass('expanded'); 
-			$(this).prev("dt.accordion").addClass('collapsed'); 
-		}
-}
-	function addStatus(filter){			
-		if(filter.nextUntil("dt").attr("style") == "display: none;" ){		
-			filter.removeClass('expanded');
-			filter.addClass('collapsed');
-		}
-		else{
-			filter.removeClass('collapsed');
-			filter.addClass('expanded');					
-		}		
-	}
+                $(this).addClass('collapsed');
+                $(this).removeClass('expanded');
+            }
+            $(this).next("div.filter").slideToggle();
+        });
+    });
+
+    function addStatus(filter){
+        if(filter.next("div.filter").attr("style") == "display: none;" ){
+            filter.addClass('collapsed');
+            filter.removeClass('expanded');
+        }
+        else{
+            filter.addClass('expanded');
+            filter.removeClass('collapsed');
+
+        }
+    }
+
 </script>
 
 <h2>Search Catalogue</h2>
@@ -67,12 +67,53 @@ $(document).ready(function(){
 	<div class="filters_box">
 		<div class="filter_box">
 		  <h4>Filter by:</h4>
-		  <dl id="searchFilters">
+		  <div id="searchFilters">
 		  {% for filter in filters %}
 			{% include "repository/filter.html" with filter=filter %}
 		  {% endfor %}
-		  </dl>
+		  </div>
 		</div>
+			<div class="explanation_box">
+		<h4>Resource Type:</h4>			
+		<table id="resource_type">
+			<tr>
+				<td width="120">Corpus:</td>
+				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/database_yellow.png" /></td>
+			</tr>
+			<tr>
+				<td width="120">Lexical/Conceptual:</td>
+				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/text_ab.png" /></td>
+			</tr>
+			<tr>
+				<td width="120">Tool/Service:</td>
+				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/page_white_gear.png" /></td>
+			</tr>
+			<tr>
+				<td width="120">Language Description:</td>
+				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/script.png" /></td>
+			</tr>
+			</table>			
+		<h4>Media Type:</h4>
+		<table id="media_type">
+			<tr>
+				<td width="120">Text:</td>
+				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/page_white_text_media_type.png" /></td>
+			</tr>
+			<tr>
+				<td width="120">Audio:</td>
+				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/sound_none.png" /></td>
+			</tr>
+			<tr>
+				<td width="120">Image:</td>
+				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/picture.png" /></td>
+			</tr>
+			<tr>
+				<td width="120">Video:</td>
+				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/film.png" /></td>
+			</tr>					
+		</table>				
+	</div>
+		
 	</div>
 	
 	<div class="content_box">
@@ -131,45 +172,5 @@ $(document).ready(function(){
 	  </table>
 	</div>
 	
-	<div class="explanation_box">
-		<h4>Resource Type:</h4>			
-		<table id="resource_type">
-			<tr>
-				<td width="120">Corpus:</td>
-				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/database_yellow.png" /></td>
-			</tr>
-			<tr>
-				<td width="120">Lexical/Conceptual:</td>
-				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/text_ab.png" /></td>
-			</tr>
-			<tr>
-				<td width="120">Tool/Service:</td>
-				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/page_white_gear.png" /></td>
-			</tr>
-			<tr>
-				<td width="120">Language Description:</td>
-				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/script.png" /></td>
-			</tr>
-			</table>			
-		<h4>Media Type:</h4>
-		<table id="media_type">
-			<tr>
-				<td width="120">Text:</td>
-				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/page_white_text_media_type.png" /></td>
-			</tr>
-			<tr>
-				<td width="120">Audio:</td>
-				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/sound_none.png" /></td>
-			</tr>
-			<tr>
-				<td width="120">Image:</td>
-				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/picture.png" /></td>
-			</tr>
-			<tr>
-				<td width="120">Video:</td>
-				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/film.png" /></td>
-			</tr>					
-		</table>				
-	</div>
 </div>
 {% endblock %}
