@@ -98,7 +98,7 @@ class FilterTest(SeleniumTestCase):
         driver.find_element_by_link_text("Media Type").click()
         # check MIME Type filter        
         driver.find_element_by_link_text("MIME Type").click()
-        self.assertEqual("Plain Text (2)", driver.find_element_by_xpath(
+        self.assertEqual("Plain text (2)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[16]/div[1]").text)
         driver.find_element_by_link_text("MIME Type").click()
         # check Resource Type filter        
