@@ -117,7 +117,7 @@ class FilterTest(SeleniumTestCase):
         self.assertEqual("Evaluation Use (3)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[12]/div[3]").text)
         driver.find_element_by_link_text("Restrictions of Use").click()
-        
+        '''
         # test sorting:
         # default sorting is by resource name, ascending
         self.assertEqual("sortDesc", driver.find_element_by_xpath(
@@ -167,7 +167,7 @@ class FilterTest(SeleniumTestCase):
         self.assertEqual("Turkish", driver.find_element_by_xpath(
           "//table[@class='result_table']/tbody/tr[2]/td[3]").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-
+        '''
         # test filter application:
         # filter by language English
         driver.find_element_by_link_text("Language").click()
