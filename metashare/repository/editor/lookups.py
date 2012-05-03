@@ -4,7 +4,7 @@ This file contains the lookup logic for ajax-based editor search widgets.
 
 from selectable.base import ModelLookup
 from selectable.registry import registry
-from metashare.repository.models import personInfoType_model,\
+from metashare.repository.models import personInfoType_model, \
     actorInfoType_model
 
 class PersonLookup(ModelLookup):
