@@ -183,7 +183,7 @@ class FilterTest(SeleniumTestCase):
         self.assertEqual("4 Language Resources", driver.find_element_by_css_selector("h3").text)
         # additionally filter by restriction of use
         driver.find_element_by_link_text("Restrictions of Use").click()
-        driver.find_element_by_link_text("commercialUse").click()
+        driver.find_element_by_link_text("Commercial Use").click()
         self.assertEqual("4 Language Resources", driver.find_element_by_css_selector("h3").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # remove language filter
