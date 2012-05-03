@@ -8,9 +8,9 @@ from django.http import HttpResponse
 from django.utils.html import escape, escapejs
 
 from metashare.repository.editor.related_widget import RelatedFieldWidgetWrapper
-from metashare.repository.editor.widgets import SingleChoiceTypeWidget, \
-  MultiChoiceTypeWidget
+from metashare.repository.editor.widgets import SubclassableRelatedFieldWidgetWrapper
 from selectable.forms.widgets import AutoCompleteSelectMultipleWidget
+from django.db import models
 
 class RelatedAdminMixin(object):
     '''
@@ -38,19 +38,35 @@ class RelatedAdminMixin(object):
               and _instance.__schema_name__ == "SUBCLASSABLE"
 
     def formfield_for_subclassable(self, db_field, **kwargs):
-        kwargs.pop('request', None)
-        admin_site = self.admin_site
-        if isinstance(db_field, related.ManyToManyField):
-            widget = MultiChoiceTypeWidget(db_field.rel, admin_site)
-        else:
-            widget = SingleChoiceTypeWidget(db_field.rel, admin_site)
-        kwargs['widget'] = widget
-        formfield = db_field.formfield(**kwargs)
-        # Ugly trick from http://ionelmc.wordpress.com/2012/01/19/tweaks-for-making-django-admin-faster/
-        # to reuse the same database query result for more than one inline of the same type.
-        # We benefit from this for the 'validator' field:
-        if db_field.name == 'validator':
-            formfield.choices = formfield.choices
+        # The following code (except for the wrapper) is taken from options.py:formfield_for_dbfield():
+
+        request = kwargs.pop("request", None)
+        # Combine the field kwargs with any options for formfield_overrides.
+        # Make sure the passed in **kwargs override anything in
+        # formfield_overrides because **kwargs is more specific, and should
+        # always win.
+        if db_field.__class__ in self.formfield_overrides:
+            kwargs = dict(self.formfield_overrides[db_field.__class__], **kwargs)
+
+        # Get the correct formfield.
+        if isinstance(db_field, models.ForeignKey):
+            formfield = self.formfield_for_foreignkey(db_field, request, **kwargs)
+        elif isinstance(db_field, models.ManyToManyField):
+            formfield = self.formfield_for_manytomany(db_field, request, **kwargs)
+
+        # For non-raw_id fields, wrap the widget with a wrapper that adds
+        # extra HTML -- the "add other" interface -- to the end of the
+        # rendered output. formfield can be None if it came from a
+        # OneToOneField with parent_link=True or a M2M intermediary.
+        if formfield and db_field.name not in self.raw_id_fields:
+            related_modeladmin = self.admin_site._registry.get(
+                                                        db_field.rel.to)
+            can_add_related = bool(related_modeladmin and
+                        related_modeladmin.has_add_permission(request))
+            formfield.widget = SubclassableRelatedFieldWidgetWrapper(
+                        formfield.widget, db_field.rel, self.admin_site,
+                        can_add_related=can_add_related)
+
         return formfield
 
     def use_hidden_widget_for_one2one(self, db_field, kwargs):
