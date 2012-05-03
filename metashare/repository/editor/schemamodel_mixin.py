@@ -156,8 +156,13 @@ class SchemaModelLookup(object):
                     rec_name = rec_path[(slashpos+1):]
                 else:
                     rec_name = rec_path
-                one_model_class_name = model.__schema_classes__[rec_name]
-                result.append(self.get_inline_class_from_model_class_name(one_model_class_name, parent_model_class_name))
+                # pylint: disable-msg=E1101
+                if hasattr(self, 'custom_one2many_inlines') and rec_name in self.custom_one2many_inlines:
+                    inline_class = self.custom_one2many_inlines[rec_name]
+                else:
+                    one_model_class_name = model.__schema_classes__[rec_name]
+                    inline_class = self.get_inline_class_from_model_class_name(one_model_class_name, parent_model_class_name)
+                result.append(inline_class)
         return result
 
 

@@ -5,7 +5,7 @@ This file contains the lookup logic for ajax-based editor search widgets.
 from selectable.base import ModelLookup
 from selectable.registry import registry
 from metashare.repository.models import personInfoType_model, \
-    actorInfoType_model
+    actorInfoType_model, documentInfoType_model, documentationInfoType_model
 
 class PersonLookup(ModelLookup):
     model = personInfoType_model
@@ -35,15 +35,7 @@ class PersonLookup(ModelLookup):
         else:
             print u'No results'
         return results
-    
-    def get_item_label(self, item):
-        return unicode(item)
-#        name_flat = ' '.join(item.givenName)
-#        surname_flat = ' '.join(item.surname)
-#        return u'%s %s' % (name_flat, surname_flat)
-    
-    def get_item_id(self, item):
-        return item.id
+
 
 class GenericUnicodeLookup(ModelLookup):
     '''
@@ -69,16 +61,40 @@ class GenericUnicodeLookup(ModelLookup):
         else:
             print u'No results'
         return results
-    
-    def get_item_label(self, item):
-        return unicode(item)
-    
-    def get_item_id(self, item):
-        return item.id
 
 class ActorLookup(GenericUnicodeLookup):
     model = actorInfoType_model
 
+class DocumentLookup(ModelLookup):
+    '''
+    A special lookup which can represent values of both
+    the (structured) documentInfo type and the documentUnstructured text-only type,
+    but which performes lookup only on the structured entries.
+    '''
+    model = documentationInfoType_model
+
+    def get_query(self, request, term):
+        # Since Subclassables and some other classes cannot be searched using query sets,
+        # we must do the searching by hand.
+        # Note: this is inefficient, but in practice fast enough it seems (tested with >1000 resources)
+        lcterm = term.lower()
+        def matches(item):
+            'Helper function to group the search code for a database item'
+            return lcterm in unicode(item).lower()
+        items = documentInfoType_model.objects.get_query_set()
+        if term == '*':
+            results = items
+        else:
+            results = [p for p in items if matches(p)]
+        if results is not None:
+            print u'{} results'.format(results.__len__())
+        else:
+            print u'No results'
+        return results
+
+
+
 registry.register(PersonLookup)
 registry.register(ActorLookup)
+registry.register(DocumentLookup)
 
