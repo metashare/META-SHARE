@@ -33,7 +33,7 @@ from django.utils.html import escape
 from django.utils.translation import ugettext as _
 from django.forms.util import ErrorList
 from selectable.forms.widgets import AutoCompleteSelectMultipleWidget
-from metashare.repository.editor.lookups import PersonLookup, ActorLookup,\
+from metashare.repository.editor.lookups import PersonLookup, ActorLookup, \
     DocumentLookup
 
 csrf_protect_m = method_decorator(csrf_protect)
