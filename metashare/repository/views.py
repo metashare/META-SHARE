@@ -421,6 +421,8 @@ class MetashareFacetedSearchView(FacetedSearchView):
         Takes the raw facet 'fields' dictionary which is (indirectly) returned
         by the `facet_counts()` method of a `SearchQuerySet`.
         """
+        import re
+
         result = []
         # pylint: disable-msg=E1101
         filter_labels = [(name, field.label, field.facet_id, field.parent_id) for name, field
@@ -448,13 +450,15 @@ class MetashareFacetedSearchView(FacetedSearchView):
                         # only items with a count > 0 are shown
                         for item in [i for i in items if i[1] > 0]:
                             if item[0] in sel_facets[name_exact]:
-                                removable.append({'label': item[0],
-                                    'count': item[1], 'targets':
-                                        [u'{0}:{1}'.format(name, value)
-                                         for name, values in
-                                         sel_facets.iteritems() for value in
-                                         values if (name != name_exact
-                                         or value != item[0]) and name not in subfacets_exactname_list]})
+                                if item[0] != "":
+                                    lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', item[0][0].capitalize()+item[0][1:]))[:-1]
+                                    removable.append({'label': lab_item,
+                                        'count': item[1], 'targets':
+                                            [u'{0}:{1}'.format(name, value)
+                                             for name, values in
+                                             sel_facets.iteritems() for value in
+                                             values if (name != name_exact
+                                             or value != item[0]) and name not in subfacets_exactname_list]})
                             else:
                                 targets = [u'{0}:{1}'.format(name, value)
                                            for name, values in
@@ -462,7 +466,9 @@ class MetashareFacetedSearchView(FacetedSearchView):
                                            for value in values]
                                 targets.append(u'{0}:{1}'.format(name_exact,
                                                                  item[0]))
-                                addable.append({'label': item[0],
+                                if item[0] != "":
+                                    lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', item[0][0].capitalize()+item[0][1:]))[:-1]
+                                    addable.append({'label': lab_item,
                                                 'count': item[1],
                                                 'targets': targets})
 
@@ -484,7 +490,10 @@ class MetashareFacetedSearchView(FacetedSearchView):
                                    for name, values in sel_facets.iteritems()
                                    for value in values]
                         targets.append(u'{0}:{1}'.format(name_exact, item[0]))
-                        addable.append({'label': item[0], 'count': item[1],
+
+                        if item[0] != "":
+                            lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', item[0][0].capitalize()+item[0][1:]))[:-1]
+                            addable.append({'label': lab_item, 'count': item[1],
                                         'targets': targets})
                     subresults = [f for f in filter_labels if f[3] == facet_id] 
                     result.append({'label': label, 'removable': [],
@@ -501,6 +510,8 @@ class MetashareFacetedSearchView(FacetedSearchView):
         return extra
     
     def show_subfilter(self, facet, sel_facets, facet_fields, results):
+        import re
+
         name = facet[0]
         label = facet[1]
 
@@ -514,13 +525,15 @@ class MetashareFacetedSearchView(FacetedSearchView):
                 # only items with a count > 0 are shown
                 for item in [i for i in items if i[1] > 0]:
                     if item[0] in sel_facets[name_exact]:
-                        removable.append({'label': item[0],
-                            'count': item[1], 'targets':
-                                [u'{0}:{1}'.format(name, value)
-                                 for name, values in
-                                 sel_facets.iteritems() for value in
-                                 values if name != name_exact
-                                 or value != item[0]]})
+                        if item[0] != "":
+                            lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', item[0][0].capitalize()+item[0][1:]))[:-1]
+                            removable.append({'label': lab_item,
+                                'count': item[1], 'targets':
+                                    [u'{0}:{1}'.format(name, value)
+                                     for name, values in
+                                     sel_facets.iteritems() for value in
+                                     values if name != name_exact
+                                     or value != item[0]]})
                     else:
                         targets = [u'{0}:{1}'.format(name, value)
                                    for name, values in
@@ -528,10 +541,13 @@ class MetashareFacetedSearchView(FacetedSearchView):
                                    for value in values]
                         targets.append(u'{0}:{1}'.format(name_exact,
                                                          item[0]))
-                        addable.append({'label': item[0],
+                        if item[0] != "":
+                            lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', item[0][0].capitalize()+item[0][1:]))[:-1]
+                            addable.append({'label': lab_item,
                                         'count': item[1],
                                         'targets': targets})
-                results.append({'label': label, 'removable': removable,
+                if (addable+removable):
+                    results.append({'label': label, 'removable': removable,
                                'addable': addable})
         else:
             items = facet_fields.get(name)
@@ -543,9 +559,12 @@ class MetashareFacetedSearchView(FacetedSearchView):
                                for name, values in sel_facets.iteritems()
                                for value in values]
                     targets.append(u'{0}:{1}'.format(name_exact, item[0]))
-                    addable.append({'label': item[0], 'count': item[1],
+                    if item[0] != "":
+                        lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', item[0][0].capitalize()+item[0][1:]))[:-1]
+                        addable.append({'label': lab_item, 'count': item[1],
                                     'targets': targets})
-                results.append({'label': label, 'removable': [],
+                if addable:
+                    results.append({'label': label, 'removable': [],
                                'addable': addable})
 
         return results
