@@ -196,7 +196,7 @@ class FilterTest(SeleniumTestCase):
         driver.find_element_by_link_text("Text").click()
         self.assertEqual("14 Language Resources", driver.find_element_by_css_selector("h3").text)
         # remove restiriction of use filter
-        driver.find_element_by_link_text("commercialUse").click()
+        driver.find_element_by_link_text("Commercial Use").click()
         self.assertEqual("17 Language Resources", driver.find_element_by_css_selector("h3").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         
