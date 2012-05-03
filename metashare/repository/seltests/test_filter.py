@@ -74,18 +74,6 @@ class FilterTest(SeleniumTestCase):
           "//div[@id='searchFilters']/div[2]/div[4]").text)
         self.assertEqual("German (2)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[2]/div[5]").text)
-        self.assertEqual("Portuguese (2)", driver.find_element_by_xpath(
-          "//div[@id='searchFilters']/div[2]/div[6]").text)
-        self.assertEqual("Arabic (1)", driver.find_element_by_xpath(
-          "//div[@id='searchFilters']/div[2]/div[7]").text)
-        self.assertEqual("Chinese (1)", driver.find_element_by_xpath(
-          "//div[@id='searchFilters']/div[2]/div[8]").text)
-        self.assertEqual("Estonian (1)", driver.find_element_by_xpath(
-          "//div[@id='searchFilters']/div[2]/div[9]").text)
-        self.assertEqual("Thai (1)", driver.find_element_by_xpath(
-          "//div[@id='searchFilters']/div[2]/div[10]").text)
-        self.assertEqual("Turkish (1)", driver.find_element_by_xpath(
-          "//div[@id='searchFilters']/div[2]/div[11]").text)
         driver.find_element_by_link_text("Language").click()
         # check Licence filter
         driver.find_element_by_link_text("Licence").click()
