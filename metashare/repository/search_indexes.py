@@ -1384,7 +1384,8 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
 
         # Filter for toolService
         if isinstance(corpus_media, toolServiceInfoType_model):
-            result.extend(["{0}".format(corpus_media.toolServiceSubtype)])
+            if corpus_media.toolServiceSubtype:
+                result.extend("{0}".format(corpus_media.toolServiceSubtype))
 
         return result
     
@@ -1463,9 +1464,11 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         # Filter for toolService
         if isinstance(corpus_media, toolServiceInfoType_model):
             if corpus_media.inputInfo:
-                result.extend(["{0}".format(corpus_media.inputInfo.annotationFormat)])
+                if corpus_media.inputInfo.annotationFormat:
+                    result.extend("{0}".format(corpus_media.inputInfo.annotationFormat))
             if corpus_media.outputInfo:
-                result.extend(["{0}".format(corpus_media.outputInfo.annotationFormat)])
+                if corpus_media.outputInfo.annotationFormat:
+                    result.extend("{0}".format(corpus_media.outputInfo.annotationFormat))
 
         return result
     
