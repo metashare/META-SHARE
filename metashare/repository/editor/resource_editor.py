@@ -246,7 +246,7 @@ def export_xml_resources(modeladmin, request, queryset):
             try:
                 root_node = obj.export_to_elementtree()
                 xml_string = ElementTree.tostring(root_node, encoding="utf-8")
-                pretty = pretty_xml(xml_string).encode('utf-8');
+                pretty = pretty_xml(xml_string).encode('utf-8')
                 resource_filename = 'resource-{0}.xml'.format(obj.storage_object.id)
                 zipfile.writestr(resource_filename, pretty)
     
@@ -502,7 +502,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         try:
             root_node = obj.export_to_elementtree()
             xml_string = ElementTree.tostring(root_node, encoding="utf-8")
-            pretty = pretty_xml(xml_string).encode('utf-8');
+            pretty = pretty_xml(xml_string).encode('utf-8')
             resource_filename = 'resource-{0}.xml'.format(object_id)
         
             response = http.HttpResponse(pretty, mimetype='text/xml')
