@@ -451,7 +451,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
                         for item in [i for i in items if i[1] > 0]:
                             if item[0] in sel_facets[name_exact]:
                                 if item[0] != "":
-                                    lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', item[0][0].capitalize()+item[0][1:]))
+                                    lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', item[0][0].capitalize()+item[0][1:]))[:-1]
                                     removable.append({'label': lab_item,
                                         'count': item[1], 'targets':
                                             [u'{0}:{1}'.format(name, value)
@@ -467,7 +467,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
                                 targets.append(u'{0}:{1}'.format(name_exact,
                                                                  item[0]))
                                 if item[0] != "":
-                                    lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', item[0][0].capitalize()+item[0][1:]))
+                                    lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', item[0][0].capitalize()+item[0][1:]))[:-1]
                                     addable.append({'label': lab_item,
                                                 'count': item[1],
                                                 'targets': targets})
@@ -492,7 +492,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
                         targets.append(u'{0}:{1}'.format(name_exact, item[0]))
 
                         if item[0] != "":
-                            lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', item[0][0].capitalize()+item[0][1:]))
+                            lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', item[0][0].capitalize()+item[0][1:]))[:-1]
                             addable.append({'label': lab_item, 'count': item[1],
                                         'targets': targets})
                     subresults = [f for f in filter_labels if f[3] == facet_id] 
@@ -526,7 +526,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
                 for item in [i for i in items if i[1] > 0]:
                     if item[0] in sel_facets[name_exact]:
                         if item[0] != "":
-                            lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', item[0][0].capitalize()+item[0][1:]))
+                            lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', item[0][0].capitalize()+item[0][1:]))[:-1]
                             removable.append({'label': lab_item,
                                 'count': item[1], 'targets':
                                     [u'{0}:{1}'.format(name, value)
@@ -542,7 +542,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
                         targets.append(u'{0}:{1}'.format(name_exact,
                                                          item[0]))
                         if item[0] != "":
-                            lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', item[0][0].capitalize()+item[0][1:]))
+                            lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', item[0][0].capitalize()+item[0][1:]))[:-1]
                             addable.append({'label': lab_item,
                                         'count': item[1],
                                         'targets': targets})
@@ -560,7 +560,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
                                for value in values]
                     targets.append(u'{0}:{1}'.format(name_exact, item[0]))
                     if item[0] != "":
-                        lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', item[0][0].capitalize()+item[0][1:]))
+                        lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', item[0][0].capitalize()+item[0][1:]))[:-1]
                         addable.append({'label': lab_item, 'count': item[1],
                                     'targets': targets})
                 if addable:
