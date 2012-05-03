@@ -97,7 +97,7 @@ class SubclassableRelatedFieldWidgetWrapper(RelatedFieldWidgetWrapper):
         super(SubclassableRelatedFieldWidgetWrapper, self).__init__(widget, rel,
           admin_site, *args, **kwargs)
 
-        self.subclasses = self._compute_sub_classes()
+        self.subclass_select, self.subclasses = self._compute_sub_classes()
 
     def _compute_sub_classes(self):
         """
@@ -123,8 +123,8 @@ class SubclassableRelatedFieldWidgetWrapper(RelatedFieldWidgetWrapper):
             raise AssertionError('No sub classes found for {}?'.format(
               _instance.__class__.__name__))
 
-        self.subclass_select = widgets.Select(choices=_choices)
-        return _subclasses
+        _subclass_select = widgets.Select(choices=_choices)
+        return _subclass_select, _subclasses
 
     def render(self, name, value, *args, **kwargs):
         # We are not using self.admin_site.root_path as this seems broken...
