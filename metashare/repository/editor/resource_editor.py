@@ -263,7 +263,7 @@ def export_xml_resources(modeladmin, request, queryset):
         response.write(in_memory.read())  
 
         return response
-export_xml_resources.short_description = "Export to XML selected published resources"
+export_xml_resources.short_description = "Export description to XML selected published resources"
 
 
 from django import forms
@@ -472,7 +472,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
     @csrf_protect_m
     def exportxml(self, request, object_id, extra_context=None):
         """
-        The 'upload data' admin view for resourceInfoType_model instances.
+        Export the XML description for one single resource
         """
         model = self.model
         opts = model._meta
@@ -489,10 +489,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
         storage_object = obj.storage_object
         if storage_object is None:
             raise Http404(_('%(name)s object with primary key %(key)r does not have a StorageObject attached.') \
-              % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
-
-        if not storage_object.master_copy:
-            raise Http404(_('%(name)s object with primary key %(key)r is not a master-copy.') \
               % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
         from xml.etree import ElementTree
