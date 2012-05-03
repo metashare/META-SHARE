@@ -24,12 +24,12 @@ from metashare.repository.models import resourceInfoType_model, \
     lexicalConceptualResourceAudioInfoType_model,\
     lexicalConceptualResourceVideoInfoType_model,\
     lexicalConceptualResourceImageInfoType_model, toolServiceInfoType_model,\
-    actualUseInfoType_model, usageInfoType_model
+    actualUseInfoType_model, usageInfoType_model, personInfoType_model
 from metashare.repository.editor.superadmin import SchemaModelAdmin
 from metashare.repository.editor import admin_site as editor_site
 from metashare.repository.editor.corpus_editor import CorpusAudioForm
 from metashare.repository.editor.resource_editor import ResourceModelAdmin, \
-    ActualUseModelAdmin, UsageModelAdmin
+    ActualUseModelAdmin, UsageModelAdmin, PersonModelAdmin
 
 
 
@@ -136,7 +136,8 @@ custom_admin_classes = {
     lexicalConceptualResourceImageInfoType_model: GenericTabbedAdmin,
     toolServiceInfoType_model: GenericTabbedAdmin,
     actualUseInfoType_model: ActualUseModelAdmin,
-    usageInfoType_model: UsageModelAdmin
+    usageInfoType_model: UsageModelAdmin,
+    personInfoType_model: PersonModelAdmin
 }
 
 def register():

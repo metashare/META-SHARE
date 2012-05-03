@@ -1,13 +1,15 @@
 from metashare.repository.editor.inlines import ReverseInlineFormSet, \
-    ReverseInlineModelAdmin
+    ReverseInlineModelAdmin, SchemaModelInline
 from django.core.exceptions import ValidationError, PermissionDenied
 from metashare.repository.models import resourceComponentTypeType_model, \
     corpusInfoType_model, languageDescriptionInfoType_model, \
     lexicalConceptualResourceInfoType_model, toolServiceInfoType_model, \
     corpusMediaTypeType_model, languageDescriptionMediaTypeType_model, \
     lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model, \
-    metadataInfoType_model, projectInfoType_model, resourceCreationInfoType_model, \
-    actualUseInfoType_model
+    metadataInfoType_model, resourceCreationInfoType_model, \
+    resourceDocumentationInfoType_model, \
+    actualUseInfoType_model, validationInfoType_model,\
+    usageInfoType_model, personInfoType_model
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
     ALLOWED_ARCHIVE_EXTENSIONS
 from metashare.utils import verify_subclass
@@ -32,6 +34,9 @@ from metashare.repository.editor.forms import StorageObjectUploadForm
 from django.utils.html import escape
 from django.utils.translation import ugettext as _
 from django.forms.util import ErrorList
+from selectable.forms.widgets import AutoCompleteSelectMultipleWidget
+from metashare.repository.editor.lookups import PersonLookup, ActorLookup, \
+    DocumentLookup, ProjectLookup, OrganizationLookup
 
 csrf_protect_m = method_decorator(csrf_protect)
 
@@ -229,91 +234,6 @@ def ingest_resources(modeladmin, request, queryset):
 ingest_resources.short_description = "Ingest selected internal resources"
 
 
-from selectable.base import LookupBase, ModelLookup
-from selectable.registry import registry
-from selectable.forms.widgets import AutoCompleteSelectMultipleWidget
-from metashare.repository.models import personInfoType_model
-
-class PersonLookup(ModelLookup):
-    model = personInfoType_model
-    search_fields = ('surname__contains', )
-    filters = {}
-    
-    def get_query(self, request, term):
-        #results = super(PersonLookup, self).get_query(request, term)
-        # Since MultiTextFields cannot be searched using query sets (they are base64-encoded and pickled),
-        # we must do the searching by hand.
-        # Note: this is inefficient, but in practice fast enough it seems (tested with >1000 resources)
-        lcterm = term.lower()
-        def matches(person):
-            'Helper function to group the search code for a person'
-            for multifield in (person.surname, person.givenName):
-                for field in multifield:
-                    if lcterm in field.lower():
-                        return True
-            return False
-        persons = self.get_queryset()
-        if term == '*':
-            results = persons
-        else:
-            results = [p for p in persons if matches(p)]
-        if results is not None:
-            print u'{} results'.format(results.__len__())
-        else:
-            print u'No results'
-        return results
-    
-    def get_item_label(self, item):
-        return unicode(item)
-#        name_flat = ' '.join(item.givenName)
-#        surname_flat = ' '.join(item.surname)
-#        return u'%s %s' % (name_flat, surname_flat)
-    
-    def get_item_id(self, item):
-        return item.id
-
-class ProjectLookup(ModelLookup):
-    model = projectInfoType_model
-    search_fields = ('projectName__contains', )
-    filters = {}
-    
-    def get_query(self, request, term):
-        lcterm = term.lower()
-        
-        def matches(project):
-            'Helper function to group the search code for a project'
-            for multifield in (project.projectName, project.projectShortName):
-                for field in multifield:
-                    if lcterm in field.lower():
-                        return True
-            return False
-        
-        projects = self.get_queryset()
-        if term == '*':
-            results = projects
-        else:
-            results = [p for p in projects if matches(p)]
-        if results is not None:
-            print u'{} results'.format(results.__len__())
-        else:
-            print u'No results'
-        return results
-    
-    def get_item_label(self, item):
-        shortNames = ''.join(item.projectShortName)
-        names = ''.join(item.projectName)
-        res = u'%s: %s' % (shortNames, names)
-        return res
-    
-    def get_item_id(self, item):
-        return item.id
-    
-class ValidationReportLookup(LookupBase):
-    pass
-
-registry.register(PersonLookup)
-registry.register(ValidationReportLookup)
-registry.register(ProjectLookup)
 
 from django import forms
 
@@ -322,17 +242,36 @@ class MetadataForm(forms.ModelForm):
         model = metadataInfoType_model
         widgets = {'metadataCreator' : AutoCompleteSelectMultipleWidget(lookup_class=PersonLookup)}
 
-class MetadataInline(ReverseInlineModelAdmin):
-    form = MetadataForm
+class ResourceDocumentationForm(forms.ModelForm):
+    class Meta:
+        model = resourceDocumentationInfoType_model
+        widgets = {'documentation' : AutoCompleteSelectMultipleWidget(lookup_class=DocumentLookup)}
 
 class ResourceCreationForm(forms.ModelForm):
     class Meta:
         model = resourceCreationInfoType_model
-        widgets = {'fundingProject' : AutoCompleteSelectMultipleWidget(lookup_class=ProjectLookup)}
+        widgets = {'resourceCreator': AutoCompleteSelectMultipleWidget(lookup_class=ActorLookup),
+                   'fundingProject' : AutoCompleteSelectMultipleWidget(lookup_class=ProjectLookup)}
+
+class ValidationForm(forms.ModelForm):
+    class Meta:
+        model = validationInfoType_model
+        widgets = {'validator': AutoCompleteSelectMultipleWidget(lookup_class=ActorLookup)}
+
+class MetadataInline(ReverseInlineModelAdmin):
+    form = MetadataForm
 
 class ResourceCreationInline(ReverseInlineModelAdmin):
     form = ResourceCreationForm
                 
+class ResourceDocumentationInline(ReverseInlineModelAdmin):
+    form = ResourceDocumentationForm
+    
+class ValidationInline(SchemaModelInline):
+    model = validationInfoType_model
+    form = ValidationForm
+    collapse = True
+
 class ResourceForm(forms.ModelForm):
     class Meta:
         model = resourceInfoType_model
@@ -349,7 +288,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
     custom_one2one_inlines = {'identificationInfo':IdentificationInline,
                               'resourceComponentType':ResourceComponentInline,
                               'metadataInfo':MetadataInline,
-                              'resourceCreationInfo':ResourceCreationInline}
+                              'resourceDocumentationInfo':ResourceDocumentationInline,
+                              'resourceCreationInfo': ResourceCreationInline, }
+    custom_one2many_inlines = {'validationInfo': ValidationInline, }
     content_fields = ('resourceComponentType',)
     list_display = ('__unicode__', 'resource_type', 'publication_status')
     actions = (publish_resources, unpublish_resources, ingest_resources, )
@@ -752,9 +693,22 @@ class ActualUseForm(forms.ModelForm):
 class ActualUseModelAdmin(SchemaModelAdmin):
     form = ActualUseForm
     
-class ActualUseInline(ReverseInlineModelAdmin):
+class ActualUseInline(SchemaModelInline):
     form = ActualUseForm
     model = actualUseInfoType_model
 
+class UsageForm(forms.ModelForm):
+    class Meta:
+        model = usageInfoType_model
+
 class UsageModelAdmin(SchemaModelAdmin):
+    form = UsageForm
     custom_one2many_inlines = {'actualUseInfo': ActualUseInline}
+
+class PersonForm(forms.ModelForm):
+    class Meta:
+        model = personInfoType_model
+        widgets = {'affiliation': AutoCompleteSelectMultipleWidget(lookup_class=OrganizationLookup)}
+
+class PersonModelAdmin(SchemaModelAdmin):
+    form = PersonForm

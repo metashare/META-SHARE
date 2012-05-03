@@ -40,6 +40,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
     model.
     '''
     custom_one2one_inlines = {}
+    custom_one2many_inlines = {}
     inline_type = 'stacked'
     inlines = ()
 
