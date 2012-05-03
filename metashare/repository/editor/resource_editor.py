@@ -33,7 +33,8 @@ from django.utils.html import escape
 from django.utils.translation import ugettext as _
 from django.forms.util import ErrorList
 from selectable.forms.widgets import AutoCompleteSelectMultipleWidget
-from metashare.repository.editor.lookups import PersonLookup, ActorLookup
+from metashare.repository.editor.lookups import PersonLookup, ActorLookup,\
+    DocumentLookup
 
 csrf_protect_m = method_decorator(csrf_protect)
 
@@ -242,7 +243,7 @@ class MetadataForm(forms.ModelForm):
 class ResourceDocumentationForm(forms.ModelForm):
     class Meta:
         model = resourceDocumentationInfoType_model
-        #widgets = {'documentation' : SelectMultiple}
+        widgets = {'documentation' : AutoCompleteSelectMultipleWidget(lookup_class=DocumentLookup)}
 
 class ResourceCreationForm(forms.ModelForm):
     class Meta:
