@@ -6,7 +6,8 @@ from metashare.repository.models import resourceComponentTypeType_model, \
     lexicalConceptualResourceInfoType_model, toolServiceInfoType_model, \
     corpusMediaTypeType_model, languageDescriptionMediaTypeType_model, \
     lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model, \
-    metadataInfoType_model
+    metadataInfoType_model, resourceDocumentationInfoType_model,\
+    resourceCreationInfoType_model, actorInfoType_model
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
     ALLOWED_ARCHIVE_EXTENSIONS
 from metashare.utils import verify_subclass
@@ -31,6 +32,7 @@ from metashare.repository.editor.forms import StorageObjectUploadForm
 from django.utils.html import escape
 from django.utils.translation import ugettext as _
 from django.forms.util import ErrorList
+from django.forms.widgets import SelectMultiple
 
 csrf_protect_m = method_decorator(csrf_protect)
 
@@ -235,8 +237,8 @@ from metashare.repository.models import personInfoType_model
 
 class PersonLookup(ModelLookup):
     model = personInfoType_model
-    search_fields = ('surname__contains', )
-    filters = {}
+    #search_fields = ('surname__contains', )
+    #filters = {}
     
     def get_query(self, request, term):
         #results = super(PersonLookup, self).get_query(request, term)
@@ -271,11 +273,42 @@ class PersonLookup(ModelLookup):
     def get_item_id(self, item):
         return item.id
 
-class ValidationReportLookup(LookupBase):
-    pass
+class GenericUnicodeLookup(ModelLookup):
+    '''
+    A reusable base class for lookups that have to be carried out by hand
+    (rather than using querysets to do an efficient database search),
+    doing string matching on the unicode string representing a database item.
+    '''
+    def get_query(self, request, term):
+        # Since Subclassables and some other classes cannot be searched using query sets,
+        # we must do the searching by hand.
+        # Note: this is inefficient, but in practice fast enough it seems (tested with >1000 resources)
+        lcterm = term.lower()
+        def matches(item):
+            'Helper function to group the search code for a database item'
+            return lcterm in unicode(item).lower()
+        items = self.get_queryset()
+        if term == '*':
+            results = items
+        else:
+            results = [p for p in items if matches(p)]
+        if results is not None:
+            print u'{} results'.format(results.__len__())
+        else:
+            print u'No results'
+        return results
+    
+    def get_item_label(self, item):
+        return unicode(item)
+    
+    def get_item_id(self, item):
+        return item.id
+
+class ActorLookup(GenericUnicodeLookup):
+    model = actorInfoType_model
 
 registry.register(PersonLookup)
-registry.register(ValidationReportLookup)
+registry.register(ActorLookup)
 
 from django import forms
 
@@ -284,9 +317,25 @@ class MetadataForm(forms.ModelForm):
         model = metadataInfoType_model
         widgets = {'metadataCreator' : AutoCompleteSelectMultipleWidget(lookup_class=PersonLookup)}
 
+class ResourceDocumentationForm(forms.ModelForm):
+    class Meta:
+        model = resourceDocumentationInfoType_model
+        #widgets = {'documentation' : SelectMultiple}
+
+class ResourceCreationForm(forms.ModelForm):
+    class Meta:
+        model = resourceCreationInfoType_model
+        widgets = {'resourceCreator': AutoCompleteSelectMultipleWidget(lookup_class=ActorLookup)}
+
 class MetadataInline(ReverseInlineModelAdmin):
     form = MetadataForm
-            
+
+class ResourceDocumentationInline(ReverseInlineModelAdmin):
+    form = ResourceDocumentationForm
+    
+class ResourceCreationInline(ReverseInlineModelAdmin):
+    form = ResourceCreationForm
+
 class ResourceForm(forms.ModelForm):
     class Meta:
         model = resourceInfoType_model
@@ -302,7 +351,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
     inline_type = 'stacked'
     custom_one2one_inlines = {'identificationInfo':IdentificationInline,
                               'resourceComponentType':ResourceComponentInline,
-                              'metadataInfo':MetadataInline}
+                              'metadataInfo':MetadataInline,
+                              'resourceDocumentationInfo':ResourceDocumentationInline,
+                              'resourceCreationInfo': ResourceCreationInline, }
     content_fields = ('resourceComponentType',)
     list_display = ('__unicode__', 'resource_type', 'publication_status')
     actions = (publish_resources, unpublish_resources, ingest_resources, )
