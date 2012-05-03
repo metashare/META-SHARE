@@ -156,7 +156,7 @@ class SchemaModelLookup(object):
                     rec_name = rec_path[(slashpos+1):]
                 else:
                     rec_name = rec_path
-                if rec_name in self.custom_one2many_inlines:
+                if hasattr(self, 'custom_one2many_inlines') and rec_name in self.custom_one2many_inlines:
                     inline_class = self.custom_one2many_inlines[rec_name]
                 else:
                     one_model_class_name = model.__schema_classes__[rec_name]

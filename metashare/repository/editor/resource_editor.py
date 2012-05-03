@@ -6,7 +6,7 @@ from metashare.repository.models import resourceComponentTypeType_model, \
     lexicalConceptualResourceInfoType_model, toolServiceInfoType_model, \
     corpusMediaTypeType_model, languageDescriptionMediaTypeType_model, \
     lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model, \
-    metadataInfoType_model, resourceDocumentationInfoType_model,\
+    metadataInfoType_model, resourceDocumentationInfoType_model, \
     resourceCreationInfoType_model, validationInfoType_model
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
     ALLOWED_ARCHIVE_EXTENSIONS
