@@ -3,7 +3,6 @@ Project: META-SHARE prototype implementation
  Author: Christian Federmann <cfedermann@dfki.de>
 """
 import base64
-
 try:
     import cPickle as pickle
 except:
@@ -17,6 +16,7 @@ from django.utils.functional import curry
 from django.utils.text import capfirst
 from django.utils.translation import ugettext_lazy as _
 
+from metashare.repository.editor import form_fields
 from metashare.repository.editor.widgets import TextInputWithLanguageAttribute
 
 # NOTE: Custom fields for Django are described in the Django docs:
@@ -394,3 +394,77 @@ class MultiSelectField(models.Field):
         Used by the serialisers to convert the field into a string for output.
         """
         return self.get_prep_value(self._get_val_from_obj(obj))
+
+
+class DictField(models.Field):
+    """
+    A model field which represents a Python dictionary.
+    
+    A `DictField` with `blank=True` must not be empty.
+    """
+    __metaclass__ = models.SubfieldBase
+
+    def __init__(self, *args, **kwargs):
+        """
+        Initializes a new `DictField`.
+        
+        You might want to specify a `label` argument which is used in the
+        rendering of form fields of this custom field. Any `max_length` argument
+        will be used to restrict the size (in characters) of a dictionary entry
+        value (enforced only in form field validations!).
+        """
+        self.label = None
+        if 'label' in kwargs:
+            self.label = kwargs.pop('label')
+        super(DictField, self).__init__(*args, **kwargs)
+
+    def get_internal_type(self):
+        """
+        Specifies which *preexisting* Django Field class this class is most
+        similar to.
+        
+        This helps Django to decide which kind of DB column type to use for
+        storing this field.
+        """
+        return "TextField"
+
+    def formfield(self, **kwargs):
+        """
+        Returns the default form field to use when this custom field is used in
+        a form.
+        """
+        defaults = { 'form_class': form_fields.DictField,
+                     'max_val_length': self.max_length }
+        if self.label:
+            defaults['label'] = self.label
+        defaults.update(kwargs)
+        return super(DictField, self).formfield(**defaults)
+
+    def get_prep_value(self, value):
+        """
+        Converts the given Python dictionary to its DB representation.
+        """
+        # before converting the value to Base64-encoded, pickle'd format, we
+        # assert that we are treating a dictionary
+        assert(isinstance(value, dict))
+        # we convert the value list into a Base64-encoded String that contains
+        # a pickle'd representation of value
+        return base64.b64encode(pickle.dumps(value))
+
+    def to_python(self, value):
+        """
+        Converts the given value to a Python dictionary.
+        
+        The value can be in the internal DB representation, an empty value or a
+        Python dicttionary.  
+        """
+        # if for some reason value is already of type dict, then just return it
+        if isinstance(value, dict):
+            return value
+        # create an empty dictionary for empty values
+        if not value:
+            return {}
+        # otherwise, we expect value to be a Base64-encoded String which in turn
+        # contains a pickle'd Python list. We try to decode and load this into a
+        # Python dict which is returned as this field's value.
+        return pickle.loads(base64.b64decode(value))

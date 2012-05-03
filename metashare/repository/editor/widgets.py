@@ -4,16 +4,14 @@ Project: META-SHARE prototype implementation
 """
 import base64
 import logging
-
 try:
     import cPickle as pickle
 except:
     import pickle
 
-from django.forms.util import flatatt
-
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
-from django.forms import widgets, TextInput
+from django.forms import widgets, TextInput, Textarea
+from django.forms.util import flatatt
 from django.template.loader import render_to_string
 from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
@@ -24,6 +22,113 @@ from metashare import settings
 logging.basicConfig(level=settings.LOG_LEVEL)
 LOGGER = logging.getLogger('metashare.repository.widgets')
 LOGGER.addHandler(settings.LOG_HANDLER)
+
+# the maximum length (in characters) where `TextInput` widgets will still be
+# used; for larger sizes we use `Textarea` widgets
+_MAX_TEXT_INPUT_SIZE = 80
+
+
+class DictWidget(widgets.Widget):
+    """
+    A widget for rendering dictionaries as represented by `DictField` form
+    fields.
+    
+    By default key/value input widgets will be `TextInput` widgets. If a
+    sufficiently large maximum size is specified for either of them, the input
+    wisgets may also become `Textarea` widgets.
+    """
+    class Media:
+        css = { 'all': ('admin/css/dict_widget.css',) }
+        js = ('admin/js/dict_widget.js',)
+
+    # templates for the names of key/value "<input/>" fields
+    _key_field_name_tpl = 'key_{}_{}'
+    _val_field_name_tpl = 'val_{}_{}'
+
+    def __init__(self, blank=False, max_key_length=None, max_val_length=None):
+        """
+        Initializes a new `DictWidget` with the given maximum dictionary
+        key/value sizes (in characters).
+        
+        The `blank` argument denotes whether empty dictionarys should be allowed
+        or not. This is only enforced via JavaScript, though!
+        """
+        self.blank = blank
+        self.max_key_length = max_key_length
+        self.max_val_length = max_val_length
+        super(DictWidget, self).__init__()
+
+    def render(self, name, value, attrs=None):
+        """
+        Returns this Widget rendered as HTML, as a Unicode string.
+
+        The 'value' given is not guaranteed to be valid input, so subclass
+        implementations should program defensively.
+        """
+        _entries = []
+        _context = { 'blank': self.blank, 'entries': _entries,
+            'new_entry_tpl': self._get_dict_entry(name, '', None, None) }
+        if isinstance(value, dict):
+            # (we have gotten an existing Python dict)
+            idx = 0
+            for key, val in value.iteritems():
+                _entries.append(self._get_dict_entry(name, idx, key, val))
+                idx += 1
+        elif isinstance(value, list):
+            # (we have gotten a non-valid key/value pair list that was created
+            # in value_from_datadict())
+            idx = 0
+            for entry in value:
+                _entries.append(self._get_dict_entry(name, idx, entry[0],
+                                                     entry[1]))
+                idx += 1
+        else:
+            _entries.append(self._get_dict_entry(name, 0, None, None))
+        # render final HTML for this widget instance
+        return mark_safe(render_to_string('repository/editor/dict_widget.html',
+                                          _context))
+
+    def _get_dict_entry(self, field_name, idx, key, value):
+        """
+        Returns a tuple (pair) with a rendered key and value input field.
+        
+        `field_name` and `id` will be used in the names of the input fields.
+        """
+        _key_field_name = DictWidget._key_field_name_tpl.format(field_name, idx)
+        if self.max_key_length and self.max_key_length > _MAX_TEXT_INPUT_SIZE:
+            rendered_key = Textarea().render(_key_field_name, key)
+        else:
+            rendered_key = \
+                TextInput(attrs={ 'maxlength': self.max_key_length }) \
+                    .render(_key_field_name, key)
+
+        _val_field_name = DictWidget._val_field_name_tpl.format(field_name, idx)
+        if self.max_val_length and self.max_val_length > _MAX_TEXT_INPUT_SIZE:
+            rendered_val = Textarea().render(_val_field_name, value)
+        else:
+            rendered_val = \
+                TextInput(attrs={ 'maxlength': self.max_val_length }) \
+                    .render(_val_field_name, value)
+
+        return (rendered_key, rendered_val)
+
+    def value_from_datadict(self, data, files, name):
+        """
+        Given a dictionary of data from the input form and this widget's name,
+        returns the value of this widget as a list of key/value pairs.
+        """
+        # collect the key/value data that was provided by the user (not as a
+        # dictionary, so that we can later cleanly validate the data):
+        provided = []
+        idx = 0
+        while True:
+            key_name = DictWidget._key_field_name_tpl.format(name, idx)
+            val_name = DictWidget._val_field_name_tpl.format(name, idx)
+            if not key_name in data or not val_name in data:
+                break
+            provided.append((data[key_name], data[val_name]))
+            idx += 1
+        return provided
 
 
 class TextInputWithLanguageAttribute(widgets.Input):
