@@ -47,6 +47,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         js = (settings.MEDIA_URL + 'js/addCollapseToAllStackedInlines.js',
               settings.MEDIA_URL + 'js/jquery-ui.min.js',
               settings.ADMIN_MEDIA_PREFIX + 'js/collapse.min.js',)
+        css = {'all': (settings.ADMIN_MEDIA_PREFIX + 'css/themes/smoothness/jquery-ui.css',)}
 
     def __init__(self, model, admin_site):
         # Get from the model all inlines grouped by Required/Recommended/Optional status:
