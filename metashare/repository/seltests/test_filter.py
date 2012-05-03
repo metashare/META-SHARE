@@ -179,7 +179,7 @@ class FilterTest(SeleniumTestCase):
         self.assertEqual("5 Language Resources", driver.find_element_by_css_selector("h3").text)
         # addtionally filter by media type
         driver.find_element_by_link_text("Media Type").click()
-        driver.find_element_by_link_text("text").click()
+        driver.find_element_by_link_text("Text").click()
         self.assertEqual("4 Language Resources", driver.find_element_by_css_selector("h3").text)
         # additionally filter by restriction of use
         driver.find_element_by_link_text("Restrictions of Use").click()
