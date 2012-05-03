@@ -136,7 +136,7 @@ custom_admin_classes = {
     lexicalConceptualResourceImageInfoType_model: GenericTabbedAdmin,
     toolServiceInfoType_model: GenericTabbedAdmin,
     actualUseInfoType_model: ActualUseModelAdmin,
-    #usageInfoType_model: UsageModelAdmin
+    usageInfoType_model: UsageModelAdmin
 }
 
 def register():

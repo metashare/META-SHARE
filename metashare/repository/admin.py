@@ -104,13 +104,11 @@ from metashare.repository.models import \
     videoContentInfoType_model, \
     videoFormatInfoType_model
 
-from metashare.repository.editor.resource_editor import ActualUseForm
 
 # pylint: disable-msg=C0103
 class actualUseInfo_model_inline(SchemaModelInline):
     model = actualUseInfoType_model
     collapse = True
-    form = ActualUseForm
 
 
 # pylint: disable-msg=C0103

@@ -757,4 +757,4 @@ class ActualUseInline(ReverseInlineModelAdmin):
     model = actualUseInfoType_model
 
 class UsageModelAdmin(SchemaModelAdmin):
-    inlines = [ActualUseInline, ]
+    custom_one2many_inlines = {'actualUseInfo': ActualUseInline}
