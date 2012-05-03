@@ -78,24 +78,26 @@ class TextInputWithLanguageAttribute(widgets.Input):
           flatatt(final_attrs), flatatt(attribute_attrs)))
 
 
-class SingleChoiceTypeWidget(RelatedFieldWidgetWrapper):
+class SubclassableRelatedFieldWidgetWrapper(RelatedFieldWidgetWrapper):
     """
-    A widget for a single element of a xs:choice type.
+    A replacement for RelatedWidgetWrapper suitable for related fields which are subclassable.
+    
+    Instead of the default 'plus' button to add a new related item in a popup window,
+    this implementation shows a dropdown menu letting the user choose which subtype to create.
     """
     class Media:
         js = (
           settings.MEDIA_URL + "js/choice-type-widget.js",
         )
 
-    def __init__(self, rel, admin_site, *args, **kwargs):
+    def __init__(self, widget, rel, admin_site, *args, **kwargs):
         """
         Initialises this widget instance.
         """
-        super(SingleChoiceTypeWidget, self).__init__(widgets.Select(), rel,
+        super(SubclassableRelatedFieldWidgetWrapper, self).__init__(widget, rel,
           admin_site, *args, **kwargs)
 
-        self.subclass_select = None        
-        self.subclasses = self._compute_sub_classes()
+        self.subclass_select, self.subclasses = self._compute_sub_classes()
 
     def _compute_sub_classes(self):
         """
@@ -121,8 +123,8 @@ class SingleChoiceTypeWidget(RelatedFieldWidgetWrapper):
             raise AssertionError('No sub classes found for {}?'.format(
               _instance.__class__.__name__))
 
-        self.subclass_select = widgets.Select(choices=_choices)
-        return _subclasses
+        _subclass_select = widgets.Select(choices=_choices)
+        return _subclass_select, _subclasses
 
     def render(self, name, value, *args, **kwargs):
         # We are not using self.admin_site.root_path as this seems broken...
@@ -142,21 +144,6 @@ class SingleChoiceTypeWidget(RelatedFieldWidgetWrapper):
                 '"add_id_{}", "{}");'.format(name, proto_url)}))
 
         return mark_safe(u''.join(output))
-
-
-class MultiChoiceTypeWidget(SingleChoiceTypeWidget):
-    """
-    A widget for several elements of a xs:choice type.
-    """
-    def __init__(self, rel, admin_site, *args, **kwargs):
-        """
-        Initialises this widget instance.
-        """
-        # pylint: disable-msg=E1003
-        super(SingleChoiceTypeWidget, self).__init__(widgets.SelectMultiple(),
-          rel, admin_site, *args, **kwargs)
-        
-        self._compute_sub_classes()
 
 
 
