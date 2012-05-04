@@ -9,15 +9,19 @@ from django.utils.html import escape, escapejs
 
 from metashare.repository.editor.related_widget import RelatedFieldWidgetWrapper
 from metashare.repository.editor.widgets import SubclassableRelatedFieldWidgetWrapper
-from selectable.forms.widgets import AutoCompleteSelectMultipleWidget,\
+from selectable.forms.widgets import AutoCompleteSelectMultipleWidget, \
     AutoCompleteSelectWidget
 from django.db import models
-from metashare.repository.models import actorInfoType_model,\
+from metashare.repository.models import actorInfoType_model, \
     documentationInfoType_model, personInfoType_model
-from metashare.repository.editor.lookups import ActorLookup, DocumentLookup,\
+from metashare.repository.editor.lookups import ActorLookup, DocumentLookup, \
     PersonLookup
 
 class RelatedAdminMixin(object):
+    '''
+    Group the joint logic for the related widget to be used in both
+    the ModelAdmin and the Inline subclasses.
+    '''
     
     custom_m2m_widget_overrides = {
         actorInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=ActorLookup), 
@@ -29,10 +33,6 @@ class RelatedAdminMixin(object):
         documentationInfoType_model: AutoCompleteSelectWidget(lookup_class=DocumentLookup),
     }
     
-    '''
-    Group the joint logic for the related widget to be used in both
-    the ModelAdmin and the Inline subclasses.
-    '''
     def hide_hidden_fields(self, db_field, kwargs):
         '''
         Return True if db_field is marked as a hidden field, False otherwise.
