@@ -48,6 +48,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         js = (settings.MEDIA_URL + 'js/addCollapseToAllStackedInlines.js',
               settings.MEDIA_URL + 'js/jquery-ui.min.js',
               settings.ADMIN_MEDIA_PREFIX + 'js/collapse.min.js',)
+        css = {'all': (settings.ADMIN_MEDIA_PREFIX + 'css/themes/smoothness/jquery-ui.css',)}
 
     def __init__(self, model, admin_site):
         # Get from the model all inlines grouped by Required/Recommended/Optional status:
@@ -110,8 +111,9 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         - custom minimalistic "related" widget for non-inlined one2one fields;
         """
         self.hide_hidden_fields(db_field, kwargs)
-        if self.is_subclassable(db_field):
-            return self.formfield_for_subclassable(db_field, **kwargs)
+        # ForeignKey or ManyToManyFields
+        if self.is_x_to_many_relation(db_field):
+            return self.formfield_for_relation(db_field, **kwargs)
         self.use_hidden_widget_for_one2one(db_field, kwargs)
         formfield = super(SchemaModelAdmin, self).formfield_for_dbfield(db_field, **kwargs)
         self.use_related_widget_where_appropriate(db_field, kwargs, formfield)
