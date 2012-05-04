@@ -117,56 +117,56 @@ class FilterTest(SeleniumTestCase):
         self.assertEqual("Evaluation Use (3)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[12]/div[3]").text)
         driver.find_element_by_link_text("Restrictions of Use").click()
-        
-        # test sorting:
-        # default sorting is by resource name, ascending
-        #self.assertEqual("sortDesc", driver.find_element_by_xpath(
-        #"//a[contains(text(),'Resource Name')]").get_attribute("class"))
-        #self.assertEqual("AURORA-5", driver.find_element_by_xpath(
-        #  "//table[@class='result_table']/tbody/tr[2]/th/a").text)
-        # now sort by Resource name descending
-        #driver.find_element_by_link_text("Resource Name").click()
-        #self.assertEqual("sortAsc", driver.find_element_by_xpath(
-        #  "//a[contains(text(),'Resource Name')]").get_attribute("class"))
-        #self.assertEqual("VERBA Polytechnic and Plurilingual Terminological Database - S-AA Anatomy", driver.find_element_by_xpath(
-        #  "//table[@class='result_table']/tbody/tr[2]/th/a").text)
-        # now sort by resource type ascending
-        #driver.find_element_by_xpath("(//a[contains(text(),'Resource Type')])[2]").click()
-        #self.assertEqual("sortDesc", driver.find_element_by_xpath(
-        #  "(//a[contains(text(),'Resource Type')])[2]").get_attribute("class"))
-        #self.assertEqual("Corpus", driver.find_element_by_xpath(
-        #  "//table[@class='result_table']/tbody/tr[2]/td/img").get_attribute("title"))
-        # now sort by resource type descending
-        #driver.find_element_by_xpath("(//a[contains(text(),'Resource Type')])[2]").click() 
-        #self.assertEqual("sortAsc", driver.find_element_by_xpath(
-        #  "(//a[contains(text(),'Resource Type')])[2]").get_attribute("class"))
-        #self.assertEqual("Lexical/Conceptual", driver.find_element_by_xpath(
-        #  "//table[@class='result_table']/tbody/tr[2]/td/img").get_attribute("title"))
-        # now sort by media type ascending
-        #driver.find_element_by_link_text("Media Type(s)").click()
-        #self.assertEqual("sortDesc", driver.find_element_by_link_text(
-        #  "Media Type(s)").get_attribute("class"))
-        #self.assertEqual("audio", driver.find_element_by_xpath(
-        #  "//table[@class='result_table']/tbody/tr[2]/td[2]/img").get_attribute("title"))
-        # now sort by media type descending
-        #driver.find_element_by_link_text("Media Type(s)").click()
-        #self.assertEqual("sortAsc", driver.find_element_by_link_text(
-        #  "Media Type(s)").get_attribute("class"))
-        #self.assertEqual("text", driver.find_element_by_xpath(
-        #  "//table[@class='result_table']/tbody/tr[2]/td[2]/img").get_attribute("title"))
-        # now sort by language ascending
-        #driver.find_element_by_link_text("Language(s)").click()
-        #self.assertEqual("sortDesc", driver.find_element_by_link_text(
-        #  "Language(s)").get_attribute("class"))
-        #self.assertEqual("Arabic, English, French", driver.find_element_by_xpath(
-        #  "//table[@class='result_table']/tbody/tr[2]/td[3]").text)
-        # now sort by language descending
-        #driver.find_element_by_link_text("Language(s)").click()
-        #self.assertEqual("sortAsc", driver.find_element_by_link_text(
-        #  "Language(s)").get_attribute("class"))
-        #self.assertEqual("Turkish", driver.find_element_by_xpath(
-        #  "//table[@class='result_table']/tbody/tr[2]/td[3]").text)
-        #driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        if 0:
+            # test sorting:
+            # default sorting is by resource name, ascending
+            self.assertEqual("sortDesc", driver.find_element_by_xpath(
+              "//a[contains(text(),'Resource Name')]").get_attribute("class"))
+            self.assertEqual("AURORA-5", driver.find_element_by_xpath(
+              "//table[@class='result_table']/tbody/tr[2]/th/a").text)
+            # now sort by Resource name descending
+            driver.find_element_by_link_text("Resource Name").click()
+            self.assertEqual("sortAsc", driver.find_element_by_xpath(
+              "//a[contains(text(),'Resource Name')]").get_attribute("class"))
+            self.assertEqual("VERBA Polytechnic and Plurilingual Terminological Database - S-AA Anatomy", driver.find_element_by_xpath(
+              "//table[@class='result_table']/tbody/tr[2]/th/a").text)
+            # now sort by resource type ascending
+            driver.find_element_by_xpath("(//a[contains(text(),'Resource Type')])[2]").click()
+            self.assertEqual("sortDesc", driver.find_element_by_xpath(
+              "(//a[contains(text(),'Resource Type')])[2]").get_attribute("class"))
+            self.assertEqual("Corpus", driver.find_element_by_xpath(
+              "//table[@class='result_table']/tbody/tr[2]/td/img").get_attribute("title"))
+            # now sort by resource type descending
+            driver.find_element_by_xpath("(//a[contains(text(),'Resource Type')])[2]").click() 
+            self.assertEqual("sortAsc", driver.find_element_by_xpath(
+              "(//a[contains(text(),'Resource Type')])[2]").get_attribute("class"))
+            self.assertEqual("Lexical/Conceptual", driver.find_element_by_xpath(
+              "//table[@class='result_table']/tbody/tr[2]/td/img").get_attribute("title"))
+            # now sort by media type ascending
+            driver.find_element_by_link_text("Media Type(s)").click()
+            self.assertEqual("sortDesc", driver.find_element_by_link_text(
+              "Media Type(s)").get_attribute("class"))
+            self.assertEqual("audio", driver.find_element_by_xpath(
+              "//table[@class='result_table']/tbody/tr[2]/td[2]/img").get_attribute("title"))
+            # now sort by media type descending
+            driver.find_element_by_link_text("Media Type(s)").click()
+            self.assertEqual("sortAsc", driver.find_element_by_link_text(
+              "Media Type(s)").get_attribute("class"))
+            self.assertEqual("text", driver.find_element_by_xpath(
+              "//table[@class='result_table']/tbody/tr[2]/td[2]/img").get_attribute("title"))
+            # now sort by language ascending
+            driver.find_element_by_link_text("Language(s)").click()
+            self.assertEqual("sortDesc", driver.find_element_by_link_text(
+              "Language(s)").get_attribute("class"))
+            self.assertEqual("Arabic, English, French", driver.find_element_by_xpath(
+              "//table[@class='result_table']/tbody/tr[2]/td[3]").text)
+            # now sort by language descending
+            driver.find_element_by_link_text("Language(s)").click()
+            self.assertEqual("sortAsc", driver.find_element_by_link_text(
+              "Language(s)").get_attribute("class"))
+            self.assertEqual("Turkish", driver.find_element_by_xpath(
+              "//table[@class='result_table']/tbody/tr[2]/td[3]").text)
+            driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         
         # test filter application:
         # filter by language English
