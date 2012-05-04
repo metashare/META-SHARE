@@ -93,7 +93,8 @@ class RelatedAdminMixin(object):
                                                         db_field.rel.to)
             can_add_related = bool(related_modeladmin and
                         related_modeladmin.has_add_permission(request))
-            wrapper_class = self.is_subclassable(db_field) and SubclassableRelatedFieldWidgetWrapper or RelatedFieldWidgetWrapper
+            wrapper_class = self.is_subclassable(db_field) and SubclassableRelatedFieldWidgetWrapper \
+                or admin.widgets.RelatedFieldWidgetWrapper
             
             formfield.widget = wrapper_class(
                         formfield.widget, db_field.rel, self.admin_site,
