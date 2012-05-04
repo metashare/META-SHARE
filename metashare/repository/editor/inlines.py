@@ -10,7 +10,6 @@ from django.utils.encoding import force_unicode
 from metashare.repository.editor.related_mixin import RelatedAdminMixin
 from metashare.repository.editor.schemamodel_mixin import SchemaModelLookup
 from django.contrib.admin.options import InlineModelAdmin
-from django.db import models
 
 
 
