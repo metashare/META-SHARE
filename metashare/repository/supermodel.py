@@ -14,7 +14,7 @@ from traceback import format_exc
 from xml.etree.ElementTree import Element, fromstring, tostring
 
 from metashare.repository.fields import MultiSelectField, MultiTextField, \
-  MetaBooleanField
+  MetaBooleanField, DictField
 
 from metashare.settings import LOG_LEVEL, LOG_HANDLER, \
   CHECK_FOR_DUPLICATE_INSTANCES
@@ -735,7 +735,11 @@ class SchemaModel(models.Model):
         for xsd_field, _model_field, _required in _fields_before_sets:
             # We want to collect all values for the current model field.  This
             # may be several, e.g., for multiple contactPerson elements.
+            # Language tags currently only exist for DictFields. If the language
+            # tags list is not empty, then its indexes will always correspond to
+            # the indexes of the values list. 
             _values = []
+            _lang_tags = []
             _parent = None
 
             # If we are handling a field set, we have to make sure that our
@@ -794,7 +798,14 @@ class SchemaModel(models.Model):
                     if not _text:
                         continue
 
-                    if _value.tag in cls.__schema_classes__.keys():
+                    # If the current field is a DictField, then we do not only
+                    # have to fill the _values list
+                    if isinstance(_field, DictField):
+                        # 'und' is the ISO 639-2 special language code for an
+                        # undetermined language
+                        _lang_tags.append(_value.get('lang', 'und'))
+
+                    elif _value.tag in cls.__schema_classes__.keys():
                         LOGGER.debug(u'_schema_classes__[{}] = {}'.format(
                           _value.tag, cls.__schema_classes__[_value.tag]))
                         _sub_cls = _classify(
@@ -940,6 +951,19 @@ class SchemaModel(models.Model):
                 # Loop over all values and add each value to field set.
                 for _value in _values:
                     _model_setter.add(_value)
+
+            # For DictField instances, we have to assign a new dictionary with
+            # the collected language codes as keys.
+            elif isinstance(_field, DictField):
+                _dict = {}
+                for _key, _val in zip(_lang_tags, _values):
+                    if _key in _dict:
+                        # should only happen for 'und' _keys as otherwise the
+                        # schema was not valid
+                        LOGGER.warn(u'Throwing away duplicate "{0}" for '
+                                    u'language "{1}"!'.format(xsd_field, _key))
+                    _dict[_key] = _val
+                setattr(_object, _model_field, _dict)
 
             # For MultiSelectField instances, we have to assign the list.
             elif isinstance(_field, MultiSelectField):
