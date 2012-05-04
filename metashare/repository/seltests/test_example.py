@@ -60,7 +60,7 @@ class ExampleSeleniumTest(SeleniumTestCase):
         # click 'browse'
         driver.find_element_by_id("browse").click()
         self.assertEqual(
-          "Search", driver.find_element_by_css_selector("input#search_button").get_attribute("title"))
+          "Search", driver.find_element_by_css_selector("input#search_button").get_attribute("value"))
         # logout normaluser
         driver.find_element_by_xpath(
           "//div[@id='inner']/div[2]/a[2]/div").click()
