@@ -1,17 +1,18 @@
 {% spaceless %}
 {% load resource_languages %}
 {% load resource_media_types %}
+{% load get_media_url %}
 
 <div class="resourceName"{% if not object.storage_object.published %} style="font-style:italic;"{% endif %}>
 
     {% if object.resourceComponentType.as_subclass.resourceType = "corpus" %}
-<img src="/site_media/css/sexybuttons/images/icons/silk/database_yellow.png" title="Corpus" /> 
+<img src="{% get_media_url %}css/sexybuttons/images/icons/silk/database_yellow.png" title="Corpus" /> 
   {% endif %}
   {% if object.resourceComponentType.as_subclass.resourceType = "toolService" %}
-<img src="/site_media/css/sexybuttons/images/icons/silk/page_white_gear.png" title="Tool/Service" />
+<img src="{% get_media_url %}css/sexybuttons/images/icons/silk/page_white_gear.png" title="Tool/Service" />
   {% endif %}
   {% if object.resourceComponentType.as_subclass.resourceType = "lexicalConceptualResource" %}
-<img src="/site_media/css/sexybuttons/images/icons/silk/text_ab.png" title="Lexical Conceptual" /> 
+<img src="{% get_media_url %}css/sexybuttons/images/icons/silk/text_ab.png" title="Lexical Conceptual" /> 
   {% endif %}
    
   {# { object.resourceComponentType.as_subclass.get_resourceType_display } #}
