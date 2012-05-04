@@ -3,17 +3,92 @@ div.container{
 	width: 90%;
 	position: relative;
 }
-div.container > div#content > h2{
-	margin-left: 5%;
 
+div.topdiv, div.central{
+	display:inline-block;
+	position:relative;
+	margin: 0 auto;	
+	margin-bottom:1%;
+	padding: 10px 10px 10px 10px;	
 }
 
-div.content_box{
-    width: 65%;
+div.topdiv{
+	width: 80%;
 }
 
-table.result_table{
-    width: 100%;
+div.searchbox{
+	float:left;
+	display:inline-block;
+	position:relative;
+	margin: 0 auto;	
+	margin-bottom:1%;
+	background-color: white;
+	padding: 30px 10px 10px 20px;	
+	-webkit-box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
+	-moz-box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
+	box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
+}
+
+
+div.searchbox input#search_button{
+	margin-top: 10px;
+}
+
+div.explanation_box{
+	float: left;
+	display: inline-block;
+	margin-left: 1%;	
+	margin-bottom: 2%;	
+	background-color: white;
+	padding: 5px 5px 5px 5px;	
+	-webkit-box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
+	-moz-box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
+	box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
+}
+
+div.explanation{
+	float:left;
+}
+
+div.explanation.first{
+	border-style:solid;
+	border-right:thick double #ddd;
+	margin-right:4px;
+}
+
+div.content_box{	
+	width: 60%;
+	margin-right:1%;
+}
+
+div.resourceName{
+	width: 95%;
+	background-color: #EFF;
+	padding: 4px 4px 4px 4px;
+	margin: .9em 0 .3em 0;
+	color: #777;
+	border-radius: 10px 10px 10px 10px;
+	border: 2px solid #dde;  
+	font-size: 10pt;
+	font-weight: bold;
+	display: inline-block;
+}
+
+div.resourceName ul li{
+	list-style-type: none;	
+}
+
+div.resourceName ul li:not(:empty) {
+	list-style-type: none;
+	margin: 2px 2px 2px 2px;
+	padding: 1px 1px 1px 1px;
+	font-size: 7pt;
+	font-weight: bold;
+	color: #889;
+	background-color: #F5ECCE;
+	float: left;
+	border-radius: 5px 5px 5px 5px;
+	border:1px solid #bbc; 
 }
 
 /*end override container size*/

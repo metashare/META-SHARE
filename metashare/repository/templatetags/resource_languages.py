@@ -83,7 +83,7 @@ class ResourceLanguages(template.Node):
         result = list(set(result))
         result.sort()
         
-        language_list = ", ".join(result)
+        language_list = "</li><li>".join(result)
         
         return language_list
 
