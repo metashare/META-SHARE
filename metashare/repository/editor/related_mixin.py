@@ -11,8 +11,15 @@ from metashare.repository.editor.related_widget import RelatedFieldWidgetWrapper
 from metashare.repository.editor.widgets import SubclassableRelatedFieldWidgetWrapper
 from selectable.forms.widgets import AutoCompleteSelectMultipleWidget
 from django.db import models
+from metashare.repository.models import actorInfoType_model
+from metashare.repository.editor.lookups import ActorLookup
 
 class RelatedAdminMixin(object):
+    
+    custom_relation_widget_overrides = {
+        actorInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=ActorLookup), 
+    }
+    
     '''
     Group the joint logic for the related widget to be used in both
     the ModelAdmin and the Inline subclasses.
@@ -47,6 +54,10 @@ class RelatedAdminMixin(object):
         # always win.
         if db_field.__class__ in self.formfield_overrides:
             kwargs = dict(self.formfield_overrides[db_field.__class__], **kwargs)
+
+        # Custom default widgets for certain relation fields:
+        if db_field.rel.to in self.custom_relation_widget_overrides:
+            kwargs = dict({'widget':self.custom_relation_widget_overrides[db_field.rel.to]}, **kwargs)
 
         # Get the correct formfield.
         if isinstance(db_field, models.ForeignKey):
@@ -123,6 +134,8 @@ class RelatedAdminMixin(object):
         for fld in model.get_many_to_many_fields():
             if hasattr(self.form, 'Meta') and hasattr(self.form.Meta, 'widgets') and fld in self.form.Meta.widgets:
                 pass # field has custom widget, do not include
+            elif model._meta.get_field(fld).rel.to in self.custom_relation_widget_overrides:
+                pass # field has custom default, do not include
             else:
                 h_fields.append(fld)
         return h_fields
