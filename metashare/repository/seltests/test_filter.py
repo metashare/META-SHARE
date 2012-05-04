@@ -117,7 +117,7 @@ class FilterTest(SeleniumTestCase):
         self.assertEqual("Evaluation Use (3)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[12]/div[3]").text)
         driver.find_element_by_link_text("Restrictions of Use").click()
-        if 0:
+        if False:
             # test sorting:
             # default sorting is by resource name, ascending
             self.assertEqual("sortDesc", driver.find_element_by_xpath(
