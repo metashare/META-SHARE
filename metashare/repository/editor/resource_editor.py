@@ -1,13 +1,12 @@
 from metashare.repository.editor.inlines import ReverseInlineFormSet, \
-    ReverseInlineModelAdmin, SchemaModelInline
+    ReverseInlineModelAdmin
 from django.core.exceptions import ValidationError, PermissionDenied
 from metashare.repository.models import resourceComponentTypeType_model, \
     corpusInfoType_model, languageDescriptionInfoType_model, \
     lexicalConceptualResourceInfoType_model, toolServiceInfoType_model, \
     corpusMediaTypeType_model, languageDescriptionMediaTypeType_model, \
-    lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model, \
-    metadataInfoType_model, resourceDocumentationInfoType_model, \
-    resourceCreationInfoType_model, validationInfoType_model
+    lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model
+
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
     ALLOWED_ARCHIVE_EXTENSIONS
 from metashare.utils import verify_subclass
@@ -31,10 +30,6 @@ from django.http import Http404
 from metashare.repository.editor.forms import StorageObjectUploadForm
 from django.utils.html import escape
 from django.utils.translation import ugettext as _
-from django.forms.util import ErrorList
-from selectable.forms.widgets import AutoCompleteSelectMultipleWidget
-from metashare.repository.editor.lookups import PersonLookup, ActorLookup, \
-    DocumentLookup
 
 csrf_protect_m = method_decorator(csrf_protect)
 
@@ -266,61 +261,13 @@ def export_xml_resources(modeladmin, request, queryset):
 export_xml_resources.short_description = "Export description to XML selected published resources"
 
 
-from django import forms
-
-class MetadataForm(forms.ModelForm):
-    class Meta:
-        model = metadataInfoType_model
-        widgets = {'metadataCreator' : AutoCompleteSelectMultipleWidget(lookup_class=PersonLookup)}
-
-class ResourceDocumentationForm(forms.ModelForm):
-    class Meta:
-        model = resourceDocumentationInfoType_model
-        widgets = {'documentation' : AutoCompleteSelectMultipleWidget(lookup_class=DocumentLookup)}
-
-class ResourceCreationForm(forms.ModelForm):
-    class Meta:
-        model = resourceCreationInfoType_model
-        widgets = {'resourceCreator': AutoCompleteSelectMultipleWidget(lookup_class=ActorLookup)}
-
-class ValidationForm(forms.ModelForm):
-    class Meta:
-        model = validationInfoType_model
-        widgets = {'validator': AutoCompleteSelectMultipleWidget(lookup_class=ActorLookup)}
-
-class MetadataInline(ReverseInlineModelAdmin):
-    form = MetadataForm
-
-class ResourceDocumentationInline(ReverseInlineModelAdmin):
-    form = ResourceDocumentationForm
-    
-class ResourceCreationInline(ReverseInlineModelAdmin):
-    form = ResourceCreationForm
-
-class ValidationInline(SchemaModelInline):
-    model = validationInfoType_model
-    form = ValidationForm
-    collapse = True
-
-class ResourceForm(forms.ModelForm):
-    class Meta:
-        model = resourceInfoType_model
-        widgets = {'contactPerson' : AutoCompleteSelectMultipleWidget(lookup_class=PersonLookup)}
-
-    def __init__(self, data=None, files=None, auto_id='id_%s', prefix=None,
-                 initial=None, error_class=ErrorList, label_suffix=':',
-                 empty_permitted=False, instance=None):
-        super(ResourceForm, self).__init__(data, files, auto_id, prefix, initial, error_class, label_suffix, empty_permitted, instance)
 
 class ResourceModelAdmin(SchemaModelAdmin):
-    form = ResourceForm
     inline_type = 'stacked'
     custom_one2one_inlines = {'identificationInfo':IdentificationInline,
                               'resourceComponentType':ResourceComponentInline,
-                              'metadataInfo':MetadataInline,
-                              'resourceDocumentationInfo':ResourceDocumentationInline,
-                              'resourceCreationInfo': ResourceCreationInline, }
-    custom_one2many_inlines = {'validationInfo': ValidationInline, }
+                              }
+
     content_fields = ('resourceComponentType',)
     list_display = ('__unicode__', 'resource_type', 'publication_status')
     actions = (publish_resources, unpublish_resources, ingest_resources, export_xml_resources, )
