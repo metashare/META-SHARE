@@ -48,7 +48,7 @@
 <table width=100% class="result_table">
 <tr class="result_table_head" style="">
 {% ifequal view "latestqueries" %}
-  <td width="60%" nowrap>Query</td>
+  <td width="60%" nowrap>Query, Filters</td>
   <td width="15%" nowrap>Found results</td>
   <td width="25%">Time</td>
 {% else %}
@@ -65,9 +65,13 @@
 {% for stat in topdata %}
 <tr class="{% cycle odd,even %}">
 {% ifequal view "latestqueries" %}  
-   <td nowrap><a href="{% url metashare.views.frontpage %}repository/search/?q={{ stat.0 }}">{{ stat.0 }}</a></th>
-   <td width=100%><i>{{ stat.2 }}</i></td>
-   <td nowrap>{{ stat.1 }}</td>
+   <td nowrap><a href="{% url metashare.views.frontpage %}repository/search/?{{ stat.4 }}">{{ stat.0 }}</a>
+   {% ifnotequal stat.1 "" %}  
+   {{ stat.1 }}
+   {% endifnotequal %}
+   </td>
+   <td width=100%><i>{{ stat.3 }}</i></td>
+   <td nowrap>{{ stat.2 }}</td>
 {% else %} 
    <th style="text-align:right;" nowrap>{{ stat.0 }}</th>
    <td width=100%><a href="{{ stat.1 }}">{{ stat.3 }}</a></td>

@@ -8,4 +8,12 @@ div.container > div#content > h2{
 
 }
 
+div.content_box{
+    width: 65%;
+}
+
+table.result_table{
+    width: 100%;
+}
+
 /*end override container size*/
