@@ -10,6 +10,7 @@ from django.utils.encoding import force_unicode
 from metashare.repository.editor.related_mixin import RelatedAdminMixin
 from metashare.repository.editor.schemamodel_mixin import SchemaModelLookup
 from django.contrib.admin.options import InlineModelAdmin
+from django.db import models
 
 
 
@@ -28,9 +29,11 @@ class SchemaModelInline(InlineModelAdmin, RelatedAdminMixin, SchemaModelLookup):
     def get_fieldsets(self, request, obj=None):
         return SchemaModelLookup.get_fieldsets(self, request, obj)
 
+
     def formfield_for_dbfield(self, db_field, **kwargs):
-        if self.is_subclassable(db_field):
-            return self.formfield_for_subclassable(db_field, **kwargs)
+        # ForeignKey or ManyToManyFields
+        if self.is_x_to_many_relation(db_field):
+            return self.formfield_for_relation(db_field, **kwargs)
         self.use_hidden_widget_for_one2one(db_field, kwargs)
         formfield = super(SchemaModelInline, self).formfield_for_dbfield(db_field, **kwargs)
         self.use_related_widget_where_appropriate(db_field, kwargs, formfield)
