@@ -17,7 +17,7 @@
    
   {# { object.resourceComponentType.as_subclass.get_resourceType_display } #}
    &nbsp;
-  <a href="{{ object.get_absolute_url }}"{% ifnotequal object.identificationInfo.description.0 "METASHARE_NULL" %} title="{{ object.identificationInfo.description.0|escape }}"{% endifnotequal %}>{{ object.identificationInfo.resourceName.0 }}</a>
+  <a href="{{ object.get_absolute_url }}"{% ifnotequal object.identificationInfo.get_default_description "METASHARE_NULL" %} title="{{ object.identificationInfo.get_default_description|escape }}"{% endifnotequal %}>{{ object }}</a>
    &nbsp;{% resource_media_types object.resourceComponentType.as_subclass %} 
 
 

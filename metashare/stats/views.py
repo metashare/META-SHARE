@@ -118,6 +118,9 @@ def repostats (request):
                     if (isinstance(value, list)):
                         for val in value:      
                             repodata.append([val.encode("utf-8"), item[dbfield + "__count"]])
+                    elif (isinstance(value, dict)):
+                        for val in value.itervalues():
+                            repodata.append([val.encode("utf-8"), item[dbfield + "__count"]])
                     else:
                         if (values != None and len(values) > 0):
                             repodata.append([str(values[int(value)][1]), item[dbfield + "__count"]])    

@@ -381,7 +381,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         import re
 
         # get the Resource Name
-        resourceNameSort = obj.identificationInfo.resourceName[0]
+        resourceNameSort = obj.identificationInfo.get_default_resourceName()
         # keep alphanumeric characters only
         resourceNameSort = re.sub('[\W_]', '', resourceNameSort)
         # set Resource Name to lower case

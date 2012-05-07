@@ -10,9 +10,7 @@ from metashare.repository.models import personInfoType_model, \
 
 class PersonLookup(ModelLookup):
     model = personInfoType_model
-    #search_fields = ('surname__contains', )
-    #filters = {}
-    
+
     def get_query(self, request, term):
         #results = super(PersonLookup, self).get_query(request, term)
         # Since MultiTextFields cannot be searched using query sets (they are base64-encoded and pickled),
@@ -22,7 +20,7 @@ class PersonLookup(ModelLookup):
         def matches(person):
             'Helper function to group the search code for a person'
             for multifield in (person.surname, person.givenName):
-                for field in multifield:
+                for field in multifield.itervalues():
                     if lcterm in field.lower():
                         return True
             return False
