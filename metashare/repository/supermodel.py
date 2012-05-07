@@ -372,7 +372,8 @@ class SchemaModel(models.Model):
                 else:
                     _field = None
 
-                # For MetaBooleanFields, we actually need the database value.
+                # For MetaBooleanFields, we actually need the database value
+                # (i.e., not the displayed value).
                 if isinstance(_field, MetaBooleanField):
                     _value = getattr(self, _model_field, [])
 
@@ -384,6 +385,10 @@ class SchemaModel(models.Model):
                     
                     # Sort MultiSelectField values to allow comparison!
                     _value.sort()
+
+                # For DictFields, we convert the dict to a list of tuples.
+                elif isinstance(_field, DictField):
+                    _value = _value.items()
 
                 # For ManyToManyFields, compute all related objects.
                 if isinstance(_value, models.Manager):
@@ -459,7 +464,15 @@ class SchemaModel(models.Model):
                     # Simple values are added to a new element and appended.
                     else:
                         _element = Element(_xsd_name)
-                        _element.text = SchemaModel._python_to_xml(_sub_value)
+                        if isinstance(_sub_value, tuple):
+                            # tuple values come from DictFields with an RFC 3066
+                            # language code key
+                            _element.set('lang', _sub_value[0])
+                            _element.text = SchemaModel._python_to_xml(
+                                                                _sub_value[1])
+                        else:
+                            _element.text = SchemaModel._python_to_xml(
+                                                                _sub_value)
                         _current_node.append(_element)
 
         # Return root node of the ElementTree; can be converted to String
@@ -1096,6 +1109,8 @@ class SchemaModel(models.Model):
                 return value
             elif isinstance(model_field[0], MultiTextField):
                 return separator.join(value)
+            elif isinstance(model_field[0], DictField):
+                return getattr(self, 'get_default_{}'.format(field_spec))()
             if hasattr(value, 'all') and \
               hasattr(getattr(value, 'all'), '__call__'):
                 return separator.join([u'{}'.format(child) for child in value.all()])
