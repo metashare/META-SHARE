@@ -401,6 +401,14 @@ class DictField(models.Field):
     A model field which represents a Python dictionary.
     
     A `DictField` with `blank=True` must not be empty.
+    
+    Every model with a `DictField` can be instructed to return the default value
+    of the dictionary using the `get_default_FOO()` method (where `FOO` is the
+    name of the field on the model). By default, the default value will be the
+    unicode representation of a random value from the dictionary or the empty
+    string if the dictionary is empty. You may override the mechanism which
+    determines the default value; see the constructor documentation for more
+    information.
     """
     __metaclass__ = models.SubfieldBase
 
@@ -411,11 +419,23 @@ class DictField(models.Field):
         You might want to specify a `label` argument which is used in the
         rendering of form fields of this custom field. Any `max_length` argument
         will be used to restrict the size (in characters) of a dictionary entry
-        value (enforced only in form field validations!).
+        value (enforced only in form field validations!). Any
+        `default_retriever` argument may be a function taking a single Python
+        dictionary argument which overrides the default value retrieval.
         """
         self.label = None
         if 'label' in kwargs:
             self.label = kwargs.pop('label')
+        if 'default_retriever' in kwargs:
+            self.default_retriever = kwargs.pop('default_retriever')
+        else:
+            def _default_retriever(_dict):
+                if _dict:
+                    _result = _dict.itervalues().next()
+                else:
+                    _result = ''
+                return force_unicode(_result, strings_only=True)
+            self.default_retriever = _default_retriever
         super(DictField, self).__init__(*args, **kwargs)
 
     def get_internal_type(self):
@@ -468,3 +488,20 @@ class DictField(models.Field):
         # contains a pickle'd Python list. We try to decode and load this into a
         # Python dict which is returned as this field's value.
         return pickle.loads(base64.b64decode(value))
+
+    @classmethod
+    def _get_default_FIELD(cls, self, field):
+        """
+        Returns the default value of the given field instance.
+        """
+        return field.default_retriever(getattr(self, field.attname))
+
+    def contribute_to_class(self, cls, name):
+        """
+        Adds the get_default_FOO() method to this class.
+        """
+        self.set_attributes_from_name(name)
+        self.model = cls
+        cls._meta.add_field(self)
+        setattr(cls, 'get_default_%s' % self.name,
+                curry(self._get_default_FIELD, field=self))
