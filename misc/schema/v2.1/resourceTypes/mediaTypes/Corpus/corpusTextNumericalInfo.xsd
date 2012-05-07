@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2011 sp1 (http://www.altova.com) by End User (free.org) -->
-<!-- edited by Kostas Perifanos, HARRIS PAPAGEORGIOU & Penny Labropoulou (Institute for Language and Speech Processing (ILSP)) -->
-<xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" xml:lang="en">
+<!-- edited by ILSP/Athena R.C. -->
+<xs:schema xmlns:ms="http://metashare.ilsp.gr/META-XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://metashare.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.1" xml:lang="en">
 	<xs:include schemaLocation="../../../META-SHARE-SimpleTypes.xsd"/>
 	<xs:include schemaLocation="../../../META-SHARE-BaseTypes.xsd"/>
 	<xs:include schemaLocation="../TextNumericalSpecific.xsd"/>
@@ -100,7 +99,7 @@
 					<xs:documentation>Groups information on the way different media of the resource interact with or link to each other. To be used for multimodal resources or for resources representing sensorimotor data</xs:documentation>
 					<xs:appinfo>
 						<recommended>true</recommended>
-						<relation>one-to-many</relation>
+						<relation>many-to-many</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>

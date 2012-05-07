@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by Dimitris Artemiou (CH. K. Tegopoulos Editions S.A.) -->
-<!-- edited by Kostas Perifanos, HARRIS PAPAGEORGIOU & Penny Labropoulou (Institute for Language and Speech Processing (ILSP)) -->
-<xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" xml:lang="en">
+<!-- edited by ILSP/Athena R.C. -->
+<xs:schema xmlns:ms="http://metashare.ilsp.gr/META-XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://metashare.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.1" xml:lang="en">
 	<xs:include schemaLocation="../../../META-SHARE-SimpleTypes.xsd"/>
 	<xs:include schemaLocation="../../../META-SHARE-BaseTypes.xsd"/>
 	<xs:include schemaLocation="../TextSpecific.xsd"/>
@@ -49,7 +48,7 @@
 				<xs:annotation>
 					<xs:documentation>Groups information on the languages represented in the resource</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-many</relation>
+						<relation>many-to-many</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -68,7 +67,7 @@
 					<xs:documentation>Groups information on the size of the resource or of resource parts</xs:documentation>
 					<xs:appinfo>
 						<recommended>true</recommended>
-						<relation>one-to-many</relation>
+						<relation>many-to-many</relation>
 						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
@@ -78,7 +77,7 @@
 					<xs:documentation>Groups information on the text format(s) of a resource</xs:documentation>
 					<xs:appinfo>
 						<recommended>true</recommended>
-						<relation>one-to-many</relation>
+						<relation>many-to-many</relation>
 						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
@@ -88,7 +87,7 @@
 					<xs:documentation>Groups together information on character encoding of the resource</xs:documentation>
 					<xs:appinfo>
 						<recommended>true</recommended>
-						<relation>one-to-many</relation>
+						<relation>many-to-many</relation>
 						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
@@ -98,7 +97,7 @@
 					<xs:documentation>Groups together information on domains represented in the resource; can be repeated for parts of the resource with distinct domain</xs:documentation>
 					<xs:appinfo>
 						<recommended>true</recommended>
-						<relation>one-to-many</relation>
+						<relation>many-to-many</relation>
 						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
@@ -108,7 +107,7 @@
 					<xs:documentation>Groups together information on time classification of the resource</xs:documentation>
 					<xs:appinfo>
 						<recommended>true</recommended>
-						<relation>one-to-many</relation>
+						<relation>many-to-many</relation>
 						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
@@ -118,7 +117,7 @@
 					<xs:documentation>Groups information on geographic classification of the resource</xs:documentation>
 					<xs:appinfo>
 						<recommended>true</recommended>
-						<relation>one-to-many</relation>
+						<relation>many-to-many</relation>
 						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
