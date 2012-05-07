@@ -135,10 +135,10 @@
 				<xs:annotation>
 					<xs:documentation>Specification of the unit of size that is used when providing information on the size of a resource</xs:documentation>
 					<xs:appinfo>
-				<label>Duration unit</label>
-			</xs:appinfo>
+						<label>Duration unit</label>
+					</xs:appinfo>
 				</xs:annotation>
-					<xs:simpleType>
+				<xs:simpleType>
 					<xs:restriction base="xs:string">
 						<xs:enumeration value="hours"/>
 						<xs:enumeration value="minutes"/>
@@ -341,6 +341,7 @@
 					<xs:documentation>Used to give info on size of parts of a resource that differ as to the format</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -428,6 +429,7 @@
 				<xs:annotation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 					<xs:documentation>The size of the audio subparts of the resource in terms of classification criteria</xs:documentation>
 				</xs:annotation>

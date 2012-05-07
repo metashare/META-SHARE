@@ -214,6 +214,7 @@ label added for specific elements -->
 					<xs:documentation>Specifies the size of the validated part of a resource</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -748,6 +749,7 @@ label added for specific elements -->
 					<xs:appinfo>
 						<maxlen>100</maxlen>
 						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -756,6 +758,7 @@ label added for specific elements -->
 					<xs:documentation>Specifies the size of resource parts per domain</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -936,6 +939,7 @@ label added for specific elements -->
 					<xs:documentation>Provides information on size for the annotated parts of the resource</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -1007,8 +1011,8 @@ label added for specific elements -->
 					<xs:documentation>Specifies the type of relation not covered by the ones proposed by META-SHARE</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
-						<maxlen>100</maxlen>
-						<label>Relation type</label>						
+						<maxlen>100</maxlen>						
+						<label>Relation type</label>	
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -1027,6 +1031,7 @@ label added for specific elements -->
 			<xs:documentation>Groups information on the modalities represented in the resource</xs:documentation>
 			<xs:appinfo>
 				<render-short>{modalityType} {modalityTypeDetails}</render-short>
+				<label-plural>Modalities</label-plural>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
@@ -1055,6 +1060,7 @@ label added for specific elements -->
 					<xs:documentation>Provides information on the size per modality component</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>

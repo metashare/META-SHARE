@@ -16,7 +16,7 @@ lable added for specific elements-->
 				<xs:annotation>
 					<xs:documentation>The type of the resource that a tool or service takes as input or produces as output</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
+						<relation>one-to-one</relation>						
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>

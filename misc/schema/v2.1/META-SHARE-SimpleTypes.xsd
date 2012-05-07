@@ -67,7 +67,7 @@ lable added for specific elements-->
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
-						<xs:enumeration value="terms"/>
+<xs:enumeration value="terms"/>
 						<xs:enumeration value="entries"/>
 						<xs:enumeration value="turns"/>
 						<xs:enumeration value="utterances"/>
@@ -157,7 +157,7 @@ lable added for specific elements-->
 	</xs:element>
 	<xs:element name="mediaType">
 		<xs:annotation>
-			<xs:documentation>Specifies the media type of the resource and basically corresponds to the physical medium of the content representation. Each media type is described through a distinctive set of features. A resource may consist of parts attributed to different types of media.</xs:documentation>
+			<xs:documentation>Specifies the media type of the resource and basically corresponds to the physical medium of the content representation. Each media type is described through a 				distinctive set of features. A resource may consist of parts attributed to different types of media.</xs:documentation>
 			<xs:appinfo>
 				<relation>one-to-many</relation>
 				<maxlen>30</maxlen>

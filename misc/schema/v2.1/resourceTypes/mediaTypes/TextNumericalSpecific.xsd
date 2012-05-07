@@ -34,6 +34,7 @@
 					<xs:documentation>Gives information on the size of textNumerical resource parts with different format</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>

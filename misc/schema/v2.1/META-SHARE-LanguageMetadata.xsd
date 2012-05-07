@@ -33,9 +33,10 @@ label added for specific elements-->
 			-->
 			<xs:element name="sizePerCharacterEncoding" type="ms:sizeInfoType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Provides information on thesize of the resource parts with different character encoding</xs:documentation>
+					<xs:documentation>Provides information on the size of the resource parts with different character encoding</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -60,6 +61,7 @@ label added for specific elements-->
 					<xs:documentation>Provides information on size per time period represented in the resource</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -84,6 +86,7 @@ label added for specific elements-->
 					<xs:documentation>Provides information on size per geographically distinct section of the resource</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -191,11 +194,12 @@ label added for specific elements-->
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="sizePerLanguageVariety" type="ms:sizeInfoType" minOccurs="0" maxOccurs="1">
+			<xs:element name="sizePerLanguageVariety" type="ms:sizeInfoType" minOccurs="0" maxOccurs="1">				
 				<xs:annotation>
 					<xs:documentation>Provides information on the size per language variety component</xs:documentation>
 					<xs:appinfo>
 						<relation>many-to-one</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -253,6 +257,10 @@ label added for specific elements-->
 			<xs:element name="sizePerLanguage" type="ms:sizeInfoType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Provides information on the size per language component</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element ref="ms:languageVarietyInfo" minOccurs="0" maxOccurs="unbounded">

@@ -8,7 +8,7 @@
 		<xs:annotation>
 			<xs:documentation>Groups together all information required for the description of language resources</xs:documentation>
 			<xs:appinfo>
-				<render-short>{identificationInfo/resourceName}</render-short>
+			    <render-short>{identificationInfo/resourceName}</render-short>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>

@@ -182,7 +182,7 @@ changed order of display elements for persons in render-short -->
 	</xs:element>
 	<xs:complexType name="personInfoType">
 		<xs:annotation>
-			<xs:documentation>Groups information relevant to personsrelated to the resource; to be used mainly for contact persons, resource creators, validators, annotators etc. for whom personal data can be provided</xs:documentation>
+			<xs:documentation>Groups information relevant to persons related to the resource; to be used mainly for contact persons, resource creators, validators, annotators etc. for whom personal data can be provided</xs:documentation>
 			<xs:appinfo>
 				<render-short>{surname} {givenName} {communicationInfo/email} {affiliation}</render-short>
 			</xs:appinfo>

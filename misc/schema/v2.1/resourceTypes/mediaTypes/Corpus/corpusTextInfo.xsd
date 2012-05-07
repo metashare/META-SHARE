@@ -42,6 +42,7 @@
 					<xs:appinfo>
 						<recommended>true</recommended>
 						<relation>one-to-many</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -50,6 +51,7 @@
 					<xs:documentation>Groups information on the size of the resource or of resource parts</xs:documentation>
 					<xs:appinfo>
 						<relation>many-to-many</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -59,6 +61,7 @@
 					<xs:appinfo>
 						<recommended>true</recommended>
 						<relation>many-to-many</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -68,6 +71,7 @@
 					<xs:appinfo>
 						<recommended>true</recommended>
 						<relation>many-to-many</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -86,6 +90,7 @@
 					<xs:appinfo>
 						<recommended>true</recommended>
 						<relation>many-to-many</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -104,6 +109,7 @@
 					<xs:appinfo>
 						<recommended>true</recommended>
 						<relation>many-to-many</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -113,6 +119,7 @@
 					<xs:appinfo>
 						<recommended>true</recommended>
 						<relation>many-to-many</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
