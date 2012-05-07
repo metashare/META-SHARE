@@ -38,8 +38,9 @@ class DictWidget(widgets.Widget):
     wisgets may also become `Textarea` widgets.
     """
     class Media:
-        css = { 'all': ('admin/css/dict_widget.css',) }
-        js = ('admin/js/dict_widget.js',)
+        css = { 'all': ('{}css/dict_widget.css'.format(
+                            settings.ADMIN_MEDIA_PREFIX),) }
+        js = ('{}js/dict_widget.js'.format(settings.ADMIN_MEDIA_PREFIX),)
 
     # templates for the names of key/value "<input/>" fields
     _key_field_name_tpl = 'key_{}_{}'
