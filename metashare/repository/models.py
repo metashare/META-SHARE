@@ -13,7 +13,7 @@ from metashare.repository.supermodel import SchemaModel, SubclassableModel, \
   REQUIRED, OPTIONAL, RECOMMENDED
 from metashare.repository.editor.widgets import MultiFieldWidget
 from metashare.repository.fields import MultiTextField, MetaBooleanField, \
-  MultiSelectField, DictField
+  MultiSelectField, DictField, best_lang_value_retriever
 from metashare.repository.validators import validate_lang_code_keys
 
 from metashare.storage.models import StorageObject
@@ -301,17 +301,20 @@ class identificationInfoType_model(SchemaModel):
       ( u'identifier', u'identifier', OPTIONAL ),
     )
 
-    resourceName = DictField(validators=[validate_lang_code_keys], 
+    resourceName = DictField(validators=[validate_lang_code_keys],
+      default_retriever=best_lang_value_retriever, 
       verbose_name='Resource name', 
       help_text='The full name by which the resource is known',
       )
 
-    description = DictField(validators=[validate_lang_code_keys], 
+    description = DictField(validators=[validate_lang_code_keys],
+      default_retriever=best_lang_value_retriever, 
       verbose_name='Description', 
       help_text='Provides the description of the resource in prose',
       )
 
-    resourceShortName = DictField(validators=[validate_lang_code_keys], 
+    resourceShortName = DictField(validators=[validate_lang_code_keys],
+      default_retriever=best_lang_value_retriever, 
       verbose_name='Resource short name', 
       help_text='The short form (abbreviation, acronym etc.) used to ide' \
       'ntify the resource',
@@ -775,7 +778,8 @@ class documentInfoType_model(documentationInfoType_model):
                      key=lambda choice: choice[1].lower()),
       )
 
-    title = DictField(validators=[validate_lang_code_keys], 
+    title = DictField(validators=[validate_lang_code_keys],
+      default_retriever=best_lang_value_retriever, 
       verbose_name='Title', 
       help_text='The title of the document reporting on the resource',
       )
@@ -1454,7 +1458,8 @@ class participantInfoType_model(SchemaModel):
       ( u'educationLevel', u'educationLevel', OPTIONAL ),
     )
 
-    alias = DictField(validators=[validate_lang_code_keys], 
+    alias = DictField(validators=[validate_lang_code_keys],
+      default_retriever=best_lang_value_retriever, 
       verbose_name='Alias', 
       help_text='The name of the person used instead of the real one',
       blank=True)
@@ -1507,7 +1512,8 @@ class participantInfoType_model(SchemaModel):
       help_text='The place in which the participant lived as a child',
       blank=True, max_length=100, )
 
-    dialectAccent = DictField(validators=[validate_lang_code_keys], 
+    dialectAccent = DictField(validators=[validate_lang_code_keys],
+      default_retriever=best_lang_value_retriever, 
       verbose_name='Dialect accent', 
       help_text='Provides information on the dialect of the participant',
       blank=True)
@@ -2477,18 +2483,21 @@ class organizationInfoType_model(actorInfoType_model):
       u'communicationInfo': "communicationInfoType_model",
     }
 
-    organizationName = DictField(validators=[validate_lang_code_keys], 
+    organizationName = DictField(validators=[validate_lang_code_keys],
+      default_retriever=best_lang_value_retriever, 
       verbose_name='Organization name', 
       help_text='The full name of an organization',
       )
 
-    organizationShortName = DictField(validators=[validate_lang_code_keys], 
+    organizationShortName = DictField(validators=[validate_lang_code_keys],
+      default_retriever=best_lang_value_retriever, 
       verbose_name='Organization short name', 
       help_text='The short name (abbreviation, acronym etc.) used for an' \
       ' organization',
       blank=True)
 
-    departmentName = DictField(validators=[validate_lang_code_keys], 
+    departmentName = DictField(validators=[validate_lang_code_keys],
+      default_retriever=best_lang_value_retriever, 
       verbose_name='Department name', 
       help_text='The name of the department or unit (e.g. specific unive' \
       'rsity faculty/department, department/unit of a research organizat' \
@@ -2537,13 +2546,15 @@ class personInfoType_model(actorInfoType_model):
       u'communicationInfo': "communicationInfoType_model",
     }
 
-    surname = DictField(validators=[validate_lang_code_keys], 
+    surname = DictField(validators=[validate_lang_code_keys],
+      default_retriever=best_lang_value_retriever, 
       verbose_name='Surname', 
       help_text='The surname (family name) of a person related to the re' \
       'source',
       )
 
-    givenName = DictField(validators=[validate_lang_code_keys], 
+    givenName = DictField(validators=[validate_lang_code_keys],
+      default_retriever=best_lang_value_retriever, 
       verbose_name='Given name', 
       help_text='The given name (first name) of a person related to the ' \
       'resource; initials can also be used',
@@ -2804,7 +2815,8 @@ class licenceInfoType_model(SchemaModel):
       'ource, a fragment of the resource or to use atool or service',
       blank=True, max_length=100, )
 
-    attributionText = DictField(validators=[validate_lang_code_keys], 
+    attributionText = DictField(validators=[validate_lang_code_keys],
+      default_retriever=best_lang_value_retriever, 
       verbose_name='Attribution text', 
       help_text='The text that must be quoted for attribution purposes w' \
       'hen using a resource',
@@ -3281,12 +3293,14 @@ class projectInfoType_model(SchemaModel):
       ( u'projectEndDate', u'projectEndDate', OPTIONAL ),
     )
 
-    projectName = DictField(validators=[validate_lang_code_keys], 
+    projectName = DictField(validators=[validate_lang_code_keys],
+      default_retriever=best_lang_value_retriever, 
       verbose_name='Project name', 
       help_text='The full name of a project related to the resource',
       )
 
-    projectShortName = DictField(validators=[validate_lang_code_keys], 
+    projectShortName = DictField(validators=[validate_lang_code_keys],
+      default_retriever=best_lang_value_retriever, 
       verbose_name='Project short name', 
       help_text='A short name or abbreviation of a project related to th' \
       'e resource',

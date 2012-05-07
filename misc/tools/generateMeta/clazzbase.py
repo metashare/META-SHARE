@@ -152,7 +152,7 @@ from {0}supermodel import SchemaModel, SubclassableModel, \\
   REQUIRED, OPTIONAL, RECOMMENDED
 from {0}editor.widgets import MultiFieldWidget
 from {0}fields import MultiTextField, MetaBooleanField, \\
-  MultiSelectField, DictField
+  MultiSelectField, DictField, best_lang_value_retriever
 from {0}validators import validate_lang_code_keys
 
 from metashare.storage.models import StorageObject
@@ -768,7 +768,8 @@ class Clazz(object):
             options += 'blank=True'
 
         self.wrtmodels(
-          '    %s = DictField(validators=[validate_lang_code_keys], %s)\n' % (
+          '    %s = DictField(validators=[validate_lang_code_keys],\n'
+          '      default_retriever=best_lang_value_retriever, %s)\n' % (
             name, options, ))
 
     def generate_complex_member(self, member, name, data_type, options):

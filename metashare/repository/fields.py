@@ -505,3 +505,30 @@ class DictField(models.Field):
         cls._meta.add_field(self)
         setattr(cls, 'get_default_%s' % self.name,
                 curry(self._get_default_FIELD, field=self))
+
+
+def best_lang_value_retriever(_dict):
+    """
+    A `default_retriever` function which can be passed into a `DicField`.
+    
+    This default value retriever prefers values of entries which have some
+    common English language code as the key. If there is no such key, an 'und'
+    language code key is tried. Otherwise a random value is returned. If the
+    dictionary is empty, then the empty string is returned.
+    """
+    if _dict:
+        if 'en' in _dict:
+            _result = _dict['en']
+        elif 'eng' in _dict:
+            _result = _dict['eng']
+        elif 'en-GB' in _dict:
+            _result = _dict['en-GB']
+        elif 'en-US' in _dict:
+            _result = _dict['en-US']
+        elif 'und' in _dict:
+            _result = _dict['und']
+        else:
+            _result = _dict.itervalues().next()
+    else:
+        _result = ''
+    return force_unicode(_result, strings_only=True)
