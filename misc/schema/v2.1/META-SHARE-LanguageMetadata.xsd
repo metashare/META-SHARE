@@ -3,14 +3,14 @@
 <!-- changes from v2.0:
 made sizePerLanguageVariety optional 
 label added for specific elements-->
-<xs:schema xmlns:ms="http://metashare.ilsp.gr/META-XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://metashare.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.1" xml:lang="en">
+<xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.1" xml:lang="en">
 	<xs:include schemaLocation="./META-SHARE-SimpleTypes.xsd"/>
 	<xs:include schemaLocation="./META-SHARE-RoleTypes.xsd"/>
 	<xs:include schemaLocation="./META-SHARE-LicenseMetadata.xsd"/>
 	<!-- definition of complex types -->
 	<!-- media type info TextInfo/imageInfo/AudioInfo/VideInfo etc-->
 	<xs:complexType name="characterEncodingInfoType">
-		<xs:annotation>
+		<xs:annotation>	
 			<xs:documentation>Groups together information on character encoding of the resource</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>

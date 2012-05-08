@@ -4,7 +4,7 @@
 change of the pattern for httpURI
 add value to sizeUnit
 lable added for specific elements-->
-<xs:schema xmlns:ms="http://metashare.ilsp.gr/META-XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://metashare.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.1" xml:lang="en">
+<xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.1" xml:lang="en">
 	<!-- definition of global attributes -->
 	<!--
 	<xs:attribute name="lang">
