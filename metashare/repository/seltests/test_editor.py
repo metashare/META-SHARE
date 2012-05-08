@@ -85,8 +85,11 @@ class EditorTest(SeleniumTestCase):
         # click LR to edit it
         driver.find_element_by_link_text("Italian TTS Speech Corpus (Appen)").click()
         # add a short name and save the LR
-        driver.find_element_by_id("id_form-0-resourceShortName").clear()
-        driver.find_element_by_id("id_form-0-resourceShortName").send_keys("a random short name")
+        driver.find_element_by_xpath("//div[@id='form-0']/fieldset/div[3]/div/ul/li/a").click()
+        driver.find_element_by_name("key_form-0-resourceShortName_0").clear()
+        driver.find_element_by_name("key_form-0-resourceShortName_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-resourceShortName_0").clear()
+        driver.find_element_by_name("val_form-0-resourceShortName_0").send_keys("a random short name")
         driver.find_element_by_name("_save").click()
         # make sure that the LR status is still published after saving
         try: 
@@ -128,10 +131,14 @@ class EditorTest(SeleniumTestCase):
         # remember root window id
         root_id = driver.current_window_handle
         # add required fields
-        driver.find_element_by_id("id_form-0-resourceName").clear()
-        driver.find_element_by_id("id_form-0-resourceName").send_keys("Test Text Corpus")
-        driver.find_element_by_id("id_form-0-description").clear()
-        driver.find_element_by_id("id_form-0-description").send_keys("Test Description")
+        driver.find_element_by_name("key_form-0-resourceName_0").clear()
+        driver.find_element_by_name("key_form-0-resourceName_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-resourceName_0").clear()
+        driver.find_element_by_name("val_form-0-resourceName_0").send_keys("Test Text Corpus")
+        driver.find_element_by_name("key_form-0-description_0").clear()
+        driver.find_element_by_name("key_form-0-description_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-description_0").clear()
+        driver.find_element_by_name("val_form-0-description_0").send_keys("Test Description")
         driver.find_element_by_link_text("Today").click()
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
@@ -194,10 +201,14 @@ class EditorTest(SeleniumTestCase):
         # remember root window id
         root_id = driver.current_window_handle
         # add required fields
-        driver.find_element_by_id("id_form-0-resourceName").clear()
-        driver.find_element_by_id("id_form-0-resourceName").send_keys("Test Text Language Description")
-        driver.find_element_by_id("id_form-0-description").clear()
-        driver.find_element_by_id("id_form-0-description").send_keys("Test Description")
+        driver.find_element_by_name("key_form-0-resourceName_0").clear()
+        driver.find_element_by_name("key_form-0-resourceName_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-resourceName_0").clear()
+        driver.find_element_by_name("val_form-0-resourceName_0").send_keys("Test Text Language Description")
+        driver.find_element_by_name("key_form-0-description_0").clear()
+        driver.find_element_by_name("key_form-0-description_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-description_0").clear()
+        driver.find_element_by_name("val_form-0-description_0").send_keys("Test Description")
         driver.find_element_by_link_text("Today").click()
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
@@ -268,10 +279,14 @@ class EditorTest(SeleniumTestCase):
         # remember root window id
         root_id = driver.current_window_handle
         # add required fields
-        driver.find_element_by_id("id_form-0-resourceName").clear()
-        driver.find_element_by_id("id_form-0-resourceName").send_keys("Test Lexical Resource Text")
-        driver.find_element_by_id("id_form-0-description").clear()
-        driver.find_element_by_id("id_form-0-description").send_keys("Test Description")
+        driver.find_element_by_name("key_form-0-resourceName_0").clear()
+        driver.find_element_by_name("key_form-0-resourceName_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-resourceName_0").clear()
+        driver.find_element_by_name("val_form-0-resourceName_0").send_keys("Test Lexical Resource Text")
+        driver.find_element_by_name("key_form-0-description_0").clear()
+        driver.find_element_by_name("key_form-0-description_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-description_0").clear()
+        driver.find_element_by_name("val_form-0-description_0").send_keys("Test Description")
         driver.find_element_by_link_text("Today").click()
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
@@ -343,10 +358,14 @@ class EditorTest(SeleniumTestCase):
         # remember root window id
         root_id = driver.current_window_handle
         # add required fields
-        driver.find_element_by_id("id_form-0-resourceName").clear()
-        driver.find_element_by_id("id_form-0-resourceName").send_keys("Test Tool")
-        driver.find_element_by_id("id_form-0-description").clear()
-        driver.find_element_by_id("id_form-0-description").send_keys("Test Description")
+        driver.find_element_by_name("key_form-0-resourceName_0").clear()
+        driver.find_element_by_name("key_form-0-resourceName_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-resourceName_0").clear()
+        driver.find_element_by_name("val_form-0-resourceName_0").send_keys("Test Tool")
+        driver.find_element_by_name("key_form-0-description_0").clear()
+        driver.find_element_by_name("key_form-0-description_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-description_0").clear()
+        driver.find_element_by_name("val_form-0-description_0").send_keys("Test Description")
         driver.find_element_by_link_text("Today").click()
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
@@ -475,8 +494,10 @@ class EditorTest(SeleniumTestCase):
         to the parent window
         """
         driver.switch_to_window("id_contactPerson")
-        driver.find_element_by_id("id_surname").clear()
-        driver.find_element_by_id("id_surname").send_keys("Mustermann")
+        driver.find_element_by_name("key_surname_0").clear()
+        driver.find_element_by_name("key_surname_0").send_keys("en")
+        driver.find_element_by_name("val_surname_0").clear()
+        driver.find_element_by_name("val_surname_0").send_keys("Mustermann")
         driver.find_element_by_id("id_form-0-email").clear()
         driver.find_element_by_id("id_form-0-email").send_keys("mustermann@org.com")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
