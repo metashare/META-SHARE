@@ -17,7 +17,6 @@ from django.utils.text import capfirst
 from django.utils.translation import ugettext_lazy as _
 
 from metashare.repository.editor import form_fields
-from metashare.repository.editor.widgets import TextInputWithLanguageAttribute
 
 # NOTE: Custom fields for Django are described in the Django docs:
 # - https://docs.djangoproject.com/en/dev/howto/custom-model-fields/
@@ -26,7 +25,6 @@ from metashare.repository.editor.widgets import TextInputWithLanguageAttribute
 # the custom field code in this file.  Make sure to consult the docs or the
 # related Django code inside django.db.models.fields in case of problems.
 
-# TODO: create MultiTextFieldWithLanguageAttribute...
 
 # pylint: disable-msg=E1102
 class MetaBooleanField(models.NullBooleanField):
@@ -63,22 +61,6 @@ class MetaBooleanField(models.NullBooleanField):
             return False
 
         raise exceptions.ValidationError(self.error_messages['invalid'])
-
-
-class TextFieldWithLanguageAttribute(models.TextField):
-    """
-    Customised TextField which also renders a language attribute selection.
-    """
-    def formfield(self, **kwargs):
-        defaults = {'widget': TextInputWithLanguageAttribute}
-        
-        # If the given kwargs contain widget as key, remove it!
-        if 'widget' in kwargs:
-            kwargs.pop('widget')
-
-        # Update our defaults dictionary with the given kwargs.
-        defaults.update(kwargs)
-        return super(TextFieldWithLanguageAttribute, self).formfield(**defaults)
 
 
 class MultiTextField(models.Field):

@@ -11,9 +11,7 @@ except:
 
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
 from django.forms import widgets, TextInput, Textarea
-from django.forms.util import flatatt
 from django.template.loader import render_to_string
-from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
 
 from metashare import settings
@@ -136,58 +134,6 @@ class DictWidget(widgets.Widget):
         if len(provided) != 0:
             return provided
         return None
-
-
-class TextInputWithLanguageAttribute(widgets.Input):
-    input_type = 'text'
-    attribute_length = 5
-    
-    def __init__(self, *args, **kwargs):
-        """
-        Initialises a new TextInputWithLanguageAttribute instance.
-        
-        This calls the super class constructor with any remaining args.
-        """
-        super(TextInputWithLanguageAttribute, self).__init__(*args, **kwargs)
-    
-    def value_from_datadict(self, data, files, name):
-        """
-        Given a dictionary of data and this widget's name, returns the value
-        of this widget. Returns None if it's not provided.
-        """
-        lang = '{0}_lang'.format(name)
-        _value = '{0:5}{1}'.format(data.get(lang, '')[:self.attribute_length],
-          data.get(name, '')).strip()
-        
-        if _value == '':
-            return None
-        
-        return _value
-    
-    def render(self, name, value, attrs=None):
-        if value is None or value == '':
-            attribute = ''
-            value = ''
-        
-        else:
-            attribute = value[:self.attribute_length].strip()
-            value = value[self.attribute_length:]
-        
-        lang = '{0}_lang'.format(name)
-        attribute_attrs = self.build_attrs({'maxlength': self.attribute_length},
-          type='text', name=lang)
-        if attribute != '':
-            # Only add the 'value' attribute if a value is non-empty.
-            attribute_attrs['value'] = force_unicode(self._format_value(attribute))
-        
-        final_attrs = self.build_attrs({'style': 'width:400px;'},
-          type=self.input_type, name=name)
-        if value != '':
-            # Only add the 'value' attribute if a value is non-empty.
-            final_attrs['value'] = force_unicode(self._format_value(value))
-        
-        return mark_safe(u'<input{0} /> <strong>Language:</strong> <input{1} />'.format(
-          flatatt(final_attrs), flatatt(attribute_attrs)))
 
 
 class SubclassableRelatedFieldWidgetWrapper(RelatedFieldWidgetWrapper):
@@ -371,22 +317,9 @@ class MultiFieldWidget(widgets.Widget):
         """
         Encodes the data for this MultiFieldWidget instance as base64 String.
         """
-        widget = self.attrs.get('widget', TextInput)()
-        if isinstance(widget, TextInputWithLanguageAttribute):
-            _attributes = [v[:widget.attribute_length]
-              for v in data.getlist('{0}_lang'.format(name))]
-            _values = [v for v in data.getlist(name)]
-            
-            _value = ['{0:5}{1}'.format(_a, _v).strip()
-              for _a, _v in zip(_attributes, _values)]
-            _value = [v for v in _value if v]
-        
-        else:
-            _value = [v for v in data.getlist(name) if v]
-        
+        _value = [v for v in data.getlist(name) if v]
         if not len(_value):
             return None
-        
         return base64.b64encode(pickle.dumps(_value))
 
     def _has_changed(self, initial, data):
