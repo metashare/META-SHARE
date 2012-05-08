@@ -15,7 +15,7 @@
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>0.70</price>
+<fee>0.70</fee>
 <userNature>commercial</userNature>
 <membershipInfo>
 <member>true</member>
@@ -25,7 +25,7 @@
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>1.00</price>
+<fee>1.00</fee>
 <userNature>commercial</userNature>
 <membershipInfo>
 <member>false</member>
