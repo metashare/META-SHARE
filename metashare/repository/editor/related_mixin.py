@@ -15,9 +15,10 @@ from selectable.forms.widgets import AutoCompleteSelectMultipleWidget, \
 from django.db import models
 from metashare.repository.models import actorInfoType_model, \
     documentationInfoType_model, personInfoType_model,\
-    organizationInfoType_model, projectInfoType_model
+    organizationInfoType_model, projectInfoType_model,\
+    membershipInfoType_model
 from metashare.repository.editor.lookups import ActorLookup, DocumentLookup, \
-    PersonLookup, OrganizationLookup, ProjectLookup
+    PersonLookup, OrganizationLookup, ProjectLookup, MembershipLookup
 
 class RelatedAdminMixin(object):
     '''
@@ -31,6 +32,7 @@ class RelatedAdminMixin(object):
         personInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=PersonLookup),
         organizationInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=OrganizationLookup),
         projectInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=ProjectLookup),
+        membershipInfoType_model: OneToManyWidget(lookup_class=MembershipLookup),
     }
     
     custom_o2m_widget_overrides = {
