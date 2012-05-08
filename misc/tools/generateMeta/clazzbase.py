@@ -784,7 +784,7 @@ class Clazz(object):
                 # this is a one-to-one relation, maybe optional
                 #options = options + ', unique=True'
                 if not member.is_required():
-                    options += 'blank=True, null=True, '
+                    options += 'blank=True, null=True, on_delete=models.SET_NULL, '
 
                 self.wrtmodels(
                     '    %s = models.OneToOneField("%s_model", %s)\n' % (
