@@ -10,7 +10,7 @@ from metashare.repository.models import resourceComponentTypeType_model, \
     resourceDocumentationInfoType_model, \
     actualUseInfoType_model, validationInfoType_model,\
     usageInfoType_model, personInfoType_model, \
-    distributionInfoType_model
+    distributionInfoType_model, licenceInfoType_model
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
     ALLOWED_ARCHIVE_EXTENSIONS
 from metashare.utils import verify_subclass
@@ -37,8 +37,8 @@ from django.utils.translation import ugettext as _
 from django.forms.util import ErrorList
 from selectable.forms.widgets import AutoCompleteSelectMultipleWidget
 from metashare.repository.editor.lookups import PersonLookup, ActorLookup, \
-    DocumentLookup, ProjectLookup, OrganizationLookup
-from metashare.repository.editor.widgets import TestWidget
+    DocumentLookup, ProjectLookup, MembershipLookup
+from metashare.repository.editor.widgets import OneToManyWidget
 
 csrf_protect_m = method_decorator(csrf_protect)
 
@@ -235,7 +235,39 @@ def ingest_resources(modeladmin, request, queryset):
         change_resource_status(obj, status=INGESTED, precondition_status=INTERNAL)
 ingest_resources.short_description = "Ingest selected internal resources"
 
+def export_xml_resources(modeladmin, request, queryset):
+    from StringIO import StringIO
+    from zipfile import ZipFile
+    from xml.etree import ElementTree
+    from metashare.repository.supermodel import pretty_xml
+    from django import http
 
+    zipfilename = "resources_export.zip"
+    in_memory = StringIO()
+    
+    with ZipFile(in_memory, 'w') as zipfile:
+        for obj in queryset:
+            try:
+                root_node = obj.export_to_elementtree()
+                xml_string = ElementTree.tostring(root_node, encoding="utf-8")
+                pretty = pretty_xml(xml_string).encode('utf-8')
+                resource_filename = 'resource-{0}.xml'.format(obj.storage_object.id)
+                zipfile.writestr(resource_filename, pretty)
+    
+            except Exception:
+                raise Http404(_('Could not export resource "%(name)s" with primary key %(key)r.') \
+                  % {'name': force_unicode(obj), 'key': escape(obj.storage_object.id)})
+
+        zipfile.close()  
+
+        response = http.HttpResponse(mimetype='application/zip')
+        response['Content-Disposition'] = 'attachment; filename=%s' % (zipfilename)
+        
+        in_memory.seek(0)      
+        response.write(in_memory.read())  
+
+        return response
+export_xml_resources.short_description = "Export description to XML selected published resources"
 
 from django import forms
 
@@ -274,28 +306,17 @@ class ValidationInline(SchemaModelInline):
     form = ValidationForm
     collapse = True
 
-class ResourceForm(forms.ModelForm):
-    class Meta:
-        model = resourceInfoType_model
-        widgets = {'contactPerson' : AutoCompleteSelectMultipleWidget(lookup_class=PersonLookup)}
 
-    def __init__(self, data=None, files=None, auto_id='id_%s', prefix=None,
-                 initial=None, error_class=ErrorList, label_suffix=':',
-                 empty_permitted=False, instance=None):
-        super(ResourceForm, self).__init__(data, files, auto_id, prefix, initial, error_class, label_suffix, empty_permitted, instance)
 
 class ResourceModelAdmin(SchemaModelAdmin):
-    form = ResourceForm
     inline_type = 'stacked'
     custom_one2one_inlines = {'identificationInfo':IdentificationInline,
                               'resourceComponentType':ResourceComponentInline,
-                              'metadataInfo':MetadataInline,
-                              'resourceDocumentationInfo':ResourceDocumentationInline,
-                              'resourceCreationInfo': ResourceCreationInline, }
-    custom_one2many_inlines = {'validationInfo': ValidationInline, }
+                              }
+
     content_fields = ('resourceComponentType',)
     list_display = ('__unicode__', 'resource_type', 'publication_status')
-    actions = (publish_resources, unpublish_resources, ingest_resources, )
+    actions = (publish_resources, unpublish_resources, ingest_resources, export_xml_resources, )
     hidden_fields = ('storage_object', 'owners', )
 
 
@@ -317,6 +338,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
             url(r'^my/$',
                 wrap(self.changelist_view_filtered),
                 name='%s_%s_myresources' % info),
+            url(r'^(.+)/export-xml/$',
+                wrap(self.exportxml),
+                name='%s_%s_exportxml' % info),
         ) + urlpatterns
         return urlpatterns
 
@@ -437,6 +461,46 @@ class ResourceModelAdmin(SchemaModelAdmin):
         return render_to_response(
           ['admin/repository/resourceinfotype_model/upload_resource.html'], context,
           context_instance)
+
+    @csrf_protect_m
+    def exportxml(self, request, object_id, extra_context=None):
+        """
+        Export the XML description for one single resource
+        """
+        model = self.model
+        opts = model._meta
+
+        obj = self.get_object(request, unquote(object_id))
+
+        if not self.has_change_permission(request, obj):
+            raise PermissionDenied
+
+        if obj is None:
+            raise Http404(_('%(name)s object with primary key %(key)r does not exist.') \
+             % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
+
+        storage_object = obj.storage_object
+        if storage_object is None:
+            raise Http404(_('%(name)s object with primary key %(key)r does not have a StorageObject attached.') \
+              % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
+
+        from xml.etree import ElementTree
+        from metashare.repository.supermodel import pretty_xml
+        from django import http
+
+        try:
+            root_node = obj.export_to_elementtree()
+            xml_string = ElementTree.tostring(root_node, encoding="utf-8")
+            pretty = pretty_xml(xml_string).encode('utf-8')
+            resource_filename = 'resource-{0}.xml'.format(object_id)
+        
+            response = http.HttpResponse(pretty, mimetype='text/xml')
+            response['Content-Disposition'] = 'attachment; filename=%s' % (resource_filename)
+            return response
+
+        except Exception:
+            raise Http404(_('Could not export resource "%(name)s" with primary key %(key)r.') \
+              % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
 
     def build_fieldsets_from_schema(self, include_inlines=False, inlines=()):
@@ -687,40 +751,13 @@ class ResourceModelAdmin(SchemaModelAdmin):
         self.add_to_my_resources(request)
         return super(ResourceModelAdmin, self).change_view(request, object_id, _extra_context)
 
-class ActualUseForm(forms.ModelForm):
-    class Meta:
-        model = actualUseInfoType_model
-        widgets = {'usageProject' : AutoCompleteSelectMultipleWidget(lookup_class=ProjectLookup)}
-            
-class ActualUseModelAdmin(SchemaModelAdmin):
-    form = ActualUseForm
-    
-class ActualUseInline(SchemaModelInline):
-    form = ActualUseForm
-    model = actualUseInfoType_model
-
-class UsageForm(forms.ModelForm):
-    class Meta:
-        model = usageInfoType_model
-
-class UsageModelAdmin(SchemaModelAdmin):
-    form = UsageForm
-    custom_one2many_inlines = {'actualUseInfo': ActualUseInline}
-
-class PersonForm(forms.ModelForm):
-    class Meta:
-        model = personInfoType_model
-        #widgets = {'affiliation': AutoCompleteSelectMultipleWidget(lookup_class=OrganizationLookup)}
-        widgets = {'affiliation': TestWidget(lookup_class=OrganizationLookup)}
-
-class PersonModelAdmin(SchemaModelAdmin):
-    form = PersonForm
-
 class LicenceForm(forms.ModelForm):
     class Meta:
-        model = distributionInfoType_model
-        #widgets = {'membershipInfo': TestWidget()}
-        
+        model = licenceInfoType_model
+        #widgets = {'affiliation': AutoCompleteSelectMultipleWidget(lookup_class=OrganizationLookup)}
+        widgets = {'membershipInfo': OneToManyWidget(lookup_class=MembershipLookup)}
+
 class LicenceModelAdmin(SchemaModelAdmin):
     form = LicenceForm
+
     

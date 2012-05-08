@@ -9,15 +9,34 @@ from django.utils.html import escape, escapejs
 
 from metashare.repository.editor.related_widget import RelatedFieldWidgetWrapper
 from metashare.repository.editor.widgets import SubclassableRelatedFieldWidgetWrapper, \
-    TestWidget
-from selectable.forms.widgets import AutoCompleteSelectMultipleWidget
+    OneToManyWidget
+from selectable.forms.widgets import AutoCompleteSelectMultipleWidget, \
+    AutoCompleteSelectWidget
 from django.db import models
+from metashare.repository.models import actorInfoType_model, \
+    documentationInfoType_model, personInfoType_model,\
+    organizationInfoType_model, projectInfoType_model
+from metashare.repository.editor.lookups import ActorLookup, DocumentLookup, \
+    PersonLookup, OrganizationLookup, ProjectLookup
 
 class RelatedAdminMixin(object):
     '''
     Group the joint logic for the related widget to be used in both
     the ModelAdmin and the Inline subclasses.
     '''
+    
+    custom_m2m_widget_overrides = {
+        actorInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=ActorLookup), 
+        documentationInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=DocumentLookup),
+        personInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=PersonLookup),
+        organizationInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=OrganizationLookup),
+        projectInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=ProjectLookup),
+    }
+    
+    custom_o2m_widget_overrides = {
+        documentationInfoType_model: AutoCompleteSelectWidget(lookup_class=DocumentLookup),
+    }
+    
     def hide_hidden_fields(self, db_field, kwargs):
         '''
         Return True if db_field is marked as a hidden field, False otherwise.
@@ -27,6 +46,13 @@ class RelatedAdminMixin(object):
         if db_field.name in _hidden_fields:
             kwargs['widget'] = HiddenInput()
             kwargs['label'] = ''
+
+    def is_x_to_many_relation(self, db_field):
+        '''
+        True for ForeignKey and ManyToManyField, but false for OneToOneField
+        '''
+        return isinstance(db_field, (models.ForeignKey, models.ManyToManyField)) \
+            and not isinstance(db_field, models.OneToOneField)
 
     def is_subclassable(self, db_field):
         '''
@@ -38,7 +64,7 @@ class RelatedAdminMixin(object):
         return hasattr(_instance, '__schema_name__') \
               and _instance.__schema_name__ == "SUBCLASSABLE"
 
-    def formfield_for_subclassable(self, db_field, **kwargs):
+    def formfield_for_relation(self, db_field, **kwargs):
         # The following code (except for the wrapper) is taken from options.py:formfield_for_dbfield():
 
         request = kwargs.pop("request", None)
@@ -49,10 +75,17 @@ class RelatedAdminMixin(object):
         if db_field.__class__ in self.formfield_overrides:
             kwargs = dict(self.formfield_overrides[db_field.__class__], **kwargs)
 
+
         # Get the correct formfield.
         if isinstance(db_field, models.ForeignKey):
+            # Custom default widgets for certain relation fields:
+            if db_field.rel.to in self.custom_o2m_widget_overrides:
+                kwargs = dict({'widget':self.custom_o2m_widget_overrides[db_field.rel.to]}, **kwargs)
             formfield = self.formfield_for_foreignkey(db_field, request, **kwargs)
         elif isinstance(db_field, models.ManyToManyField):
+            # Custom default widgets for certain relation fields:
+            if db_field.rel.to in self.custom_m2m_widget_overrides:
+                kwargs = dict({'widget':self.custom_m2m_widget_overrides[db_field.rel.to]}, **kwargs)
             formfield = self.formfield_for_manytomany(db_field, request, **kwargs)
 
         # For non-raw_id fields, wrap the widget with a wrapper that adds
@@ -64,7 +97,10 @@ class RelatedAdminMixin(object):
                                                         db_field.rel.to)
             can_add_related = bool(related_modeladmin and
                         related_modeladmin.has_add_permission(request))
-            formfield.widget = SubclassableRelatedFieldWidgetWrapper(
+            wrapper_class = self.is_subclassable(db_field) and SubclassableRelatedFieldWidgetWrapper \
+                or admin.widgets.RelatedFieldWidgetWrapper
+            
+            formfield.widget = wrapper_class(
                         formfield.widget, db_field.rel, self.admin_site,
                         can_add_related=can_add_related)
 
@@ -89,7 +125,7 @@ class RelatedAdminMixin(object):
                 isinstance(formfield.widget, admin.widgets.RelatedFieldWidgetWrapper) and \
                 not isinstance(formfield.widget.widget, SelectMultiple) and \
                 not ('widget' in kwargs and isinstance(kwargs['widget'], AutoCompleteSelectMultipleWidget)) and \
-                not ('widget' in kwargs and isinstance(kwargs['widget'], TestWidget)):
+                not ('widget' in kwargs and isinstance(kwargs['widget'], OneToManyWidget)):
             return True
         return False
 
@@ -136,6 +172,8 @@ class RelatedAdminMixin(object):
         for fld in model.get_many_to_many_fields():
             if hasattr(self.form, 'Meta') and hasattr(self.form.Meta, 'widgets') and fld in self.form.Meta.widgets:
                 pass # field has custom widget, do not include
+            elif model._meta.get_field(fld).rel.to in self.custom_m2m_widget_overrides:
+                pass # field has custom default, do not include
             else:
                 h_fields.append(fld)
         return h_fields

@@ -7,7 +7,7 @@ from django.contrib import admin
 from metashare.repository.models import resourceInfoType_model, \
     identificationInfoType_model, \
     metadataInfoType_model, communicationInfoType_model, \
-    validationInfoType_model, relationInfoType_model, licenceInfoType_model, \
+    validationInfoType_model, relationInfoType_model, \
     foreseenUseInfoType_model, corpusMediaTypeType_model, \
     corpusTextInfoType_model, corpusVideoInfoType_model, audioSizeInfoType_model, \
     durationOfAudioInfoType_model, durationOfEffectiveSpeechInfoType_model, \
@@ -24,12 +24,11 @@ from metashare.repository.models import resourceInfoType_model, \
     lexicalConceptualResourceAudioInfoType_model,\
     lexicalConceptualResourceVideoInfoType_model,\
     lexicalConceptualResourceImageInfoType_model, toolServiceInfoType_model,\
-    actualUseInfoType_model, usageInfoType_model, personInfoType_model
+    personInfoType_model, licenceInfoType_model
 from metashare.repository.editor.superadmin import SchemaModelAdmin
 from metashare.repository.editor import admin_site as editor_site
 from metashare.repository.editor.corpus_editor import CorpusAudioForm
 from metashare.repository.editor.resource_editor import ResourceModelAdmin, \
-    ActualUseModelAdmin, UsageModelAdmin, PersonModelAdmin,\
     LicenceModelAdmin
 
 
@@ -136,10 +135,7 @@ custom_admin_classes = {
     lexicalConceptualResourceVideoInfoType_model: GenericTabbedAdmin,
     lexicalConceptualResourceImageInfoType_model: GenericTabbedAdmin,
     toolServiceInfoType_model: GenericTabbedAdmin,
-    actualUseInfoType_model: ActualUseModelAdmin,
-    usageInfoType_model: UsageModelAdmin,
-    personInfoType_model: PersonModelAdmin,
-    licenceInfoType_model: LicenceModelAdmin
+    licenceInfoType_model: LicenceModelAdmin,
 }
 
 def register():

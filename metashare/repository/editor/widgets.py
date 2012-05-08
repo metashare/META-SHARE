@@ -339,7 +339,7 @@ class TestHiddenWidget(TextInput, SelectableMediaMixin):
         icon = u''
         return mark_safe(icon + super(TestHiddenWidget, self).render(name, value, attrs))
 
-class TestWidget(SelectableMultiWidget, SelectableMediaMixin):
+class OneToManyWidget(SelectableMultiWidget, SelectableMediaMixin):
 
     def __init__(self, lookup_class, *args, **kwargs):
         self.lookup_class = lookup_class
@@ -358,7 +358,7 @@ class TestWidget(SelectableMultiWidget, SelectableMediaMixin):
             ),
             LookupMultipleHiddenInput(lookup_class)
         ]
-        super(TestWidget, self).__init__(widgets, *args, **kwargs)
+        super(OneToManyWidget, self).__init__(widgets, *args, **kwargs)
 
     def value_from_datadict(self, data, files, name):
         return self.widgets[1].value_from_datadict(data, files, name + '_1')
@@ -367,4 +367,4 @@ class TestWidget(SelectableMultiWidget, SelectableMediaMixin):
         if value and not hasattr(value, '__iter__'):
             value = [value]
         value = [u'', value]
-        return super(TestWidget, self).render(name, value, attrs)
+        return super(OneToManyWidget, self).render(name, value, attrs)
