@@ -71,12 +71,12 @@ class DictField(Field):
                 raise ValidationError(self.error_messages['duplicate_key']
                                       .format(key))
             # ensure that the provided entry's key is not too long
-            if self.max_key_length and key.length() > self.max_key_length:
+            if self.max_key_length and len(key) > self.max_key_length:
                 raise ValidationError(self.error_messages['key_too_long']
-                                .format(key, self.max_key_length, key.length()))
+                                .format(key, self.max_key_length, len(key)))
             # ensure that the provided entry's value is not too long
-            if self.max_val_length and val.length() > self.max_val_length:
+            if self.max_val_length and len(val) > self.max_val_length:
                 raise ValidationError(self.error_messages['val_too_long']
-                                .format(key, self.max_val_length, val.length()))
+                                .format(key, self.max_val_length, len(val)))
             result[key] = val
         return result
