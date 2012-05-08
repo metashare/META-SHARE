@@ -759,6 +759,10 @@ class Clazz(object):
         return multi_id
 
     def generate_myString_member(self, member, name, options):
+        maxlen = member.get_maxlength()
+        if maxlen:
+            options += "\n      max_length={}, ".format(maxlen)
+
         help_string = member.child.getHelpText()
         if help_string:
             _help_text = _truncate_long_string(help_string, 72, 6)
