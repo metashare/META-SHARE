@@ -431,7 +431,8 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
 
             #### Change starts here ####
             if not '_popup' in request.REQUEST:
-                self.message_user(request, _('The %(name)s "%(obj)s" was deleted successfully.') % {'name': force_unicode(opts.verbose_name), 'obj': force_unicode(obj_display)})
+                self.message_user(request, _('The %(name)s "%(obj)s" was deleted successfully.') %
+                                   {'name': force_unicode(opts.verbose_name), 'obj': force_unicode(obj_display)})
             return self.response_delete(request)
             #### Change ends here ####
 
