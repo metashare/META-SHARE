@@ -1,13 +1,12 @@
 from metashare.repository.editor.inlines import ReverseInlineFormSet, \
-    ReverseInlineModelAdmin, SchemaModelInline
+    ReverseInlineModelAdmin
 from django.core.exceptions import ValidationError, PermissionDenied
 from metashare.repository.models import resourceComponentTypeType_model, \
     corpusInfoType_model, languageDescriptionInfoType_model, \
     lexicalConceptualResourceInfoType_model, toolServiceInfoType_model, \
     corpusMediaTypeType_model, languageDescriptionMediaTypeType_model, \
-    lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model, \
-    metadataInfoType_model, resourceDocumentationInfoType_model, \
-    resourceCreationInfoType_model, validationInfoType_model
+    lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model
+
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
     ALLOWED_ARCHIVE_EXTENSIONS
 from metashare.utils import verify_subclass
@@ -31,10 +30,6 @@ from django.http import Http404
 from metashare.repository.editor.forms import StorageObjectUploadForm
 from django.utils.html import escape
 from django.utils.translation import ugettext as _
-from django.forms.util import ErrorList
-from selectable.forms.widgets import AutoCompleteSelectMultipleWidget
-from metashare.repository.editor.lookups import PersonLookup, ActorLookup, \
-    DocumentLookup
 
 csrf_protect_m = method_decorator(csrf_protect)
 
@@ -231,66 +226,51 @@ def ingest_resources(modeladmin, request, queryset):
         change_resource_status(obj, status=INGESTED, precondition_status=INTERNAL)
 ingest_resources.short_description = "Ingest selected internal resources"
 
+def export_xml_resources(modeladmin, request, queryset):
+    from StringIO import StringIO
+    from zipfile import ZipFile
+    from xml.etree import ElementTree
+    from metashare.repository.supermodel import pretty_xml
+    from django import http
 
-
-from django import forms
-
-class MetadataForm(forms.ModelForm):
-    class Meta:
-        model = metadataInfoType_model
-        widgets = {'metadataCreator' : AutoCompleteSelectMultipleWidget(lookup_class=PersonLookup)}
-
-class ResourceDocumentationForm(forms.ModelForm):
-    class Meta:
-        model = resourceDocumentationInfoType_model
-        widgets = {'documentation' : AutoCompleteSelectMultipleWidget(lookup_class=DocumentLookup)}
-
-class ResourceCreationForm(forms.ModelForm):
-    class Meta:
-        model = resourceCreationInfoType_model
-        widgets = {'resourceCreator': AutoCompleteSelectMultipleWidget(lookup_class=ActorLookup)}
-
-class ValidationForm(forms.ModelForm):
-    class Meta:
-        model = validationInfoType_model
-        widgets = {'validator': AutoCompleteSelectMultipleWidget(lookup_class=ActorLookup)}
-
-class MetadataInline(ReverseInlineModelAdmin):
-    form = MetadataForm
-
-class ResourceDocumentationInline(ReverseInlineModelAdmin):
-    form = ResourceDocumentationForm
+    zipfilename = "resources_export.zip"
+    in_memory = StringIO()
     
-class ResourceCreationInline(ReverseInlineModelAdmin):
-    form = ResourceCreationForm
+    with ZipFile(in_memory, 'w') as zipfile:
+        for obj in queryset:
+            try:
+                root_node = obj.export_to_elementtree()
+                xml_string = ElementTree.tostring(root_node, encoding="utf-8")
+                pretty = pretty_xml(xml_string).encode('utf-8')
+                resource_filename = 'resource-{0}.xml'.format(obj.storage_object.id)
+                zipfile.writestr(resource_filename, pretty)
+    
+            except Exception:
+                raise Http404(_('Could not export resource "%(name)s" with primary key %(key)r.') \
+                  % {'name': force_unicode(obj), 'key': escape(obj.storage_object.id)})
 
-class ValidationInline(SchemaModelInline):
-    model = validationInfoType_model
-    form = ValidationForm
-    collapse = True
+        zipfile.close()  
 
-class ResourceForm(forms.ModelForm):
-    class Meta:
-        model = resourceInfoType_model
-        widgets = {'contactPerson' : AutoCompleteSelectMultipleWidget(lookup_class=PersonLookup)}
+        response = http.HttpResponse(mimetype='application/zip')
+        response['Content-Disposition'] = 'attachment; filename=%s' % (zipfilename)
+        
+        in_memory.seek(0)      
+        response.write(in_memory.read())  
 
-    def __init__(self, data=None, files=None, auto_id='id_%s', prefix=None,
-                 initial=None, error_class=ErrorList, label_suffix=':',
-                 empty_permitted=False, instance=None):
-        super(ResourceForm, self).__init__(data, files, auto_id, prefix, initial, error_class, label_suffix, empty_permitted, instance)
+        return response
+export_xml_resources.short_description = "Export description to XML selected published resources"
+
+
 
 class ResourceModelAdmin(SchemaModelAdmin):
-    form = ResourceForm
     inline_type = 'stacked'
     custom_one2one_inlines = {'identificationInfo':IdentificationInline,
                               'resourceComponentType':ResourceComponentInline,
-                              'metadataInfo':MetadataInline,
-                              'resourceDocumentationInfo':ResourceDocumentationInline,
-                              'resourceCreationInfo': ResourceCreationInline, }
-    custom_one2many_inlines = {'validationInfo': ValidationInline, }
+                              }
+
     content_fields = ('resourceComponentType',)
     list_display = ('__unicode__', 'resource_type', 'publication_status')
-    actions = (publish_resources, unpublish_resources, ingest_resources, )
+    actions = (publish_resources, unpublish_resources, ingest_resources, export_xml_resources, )
     hidden_fields = ('storage_object', 'owners', )
 
 
@@ -312,6 +292,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
             url(r'^my/$',
                 wrap(self.changelist_view_filtered),
                 name='%s_%s_myresources' % info),
+            url(r'^(.+)/export-xml/$',
+                wrap(self.exportxml),
+                name='%s_%s_exportxml' % info),
         ) + urlpatterns
         return urlpatterns
 
@@ -432,6 +415,46 @@ class ResourceModelAdmin(SchemaModelAdmin):
         return render_to_response(
           ['admin/repository/resourceinfotype_model/upload_resource.html'], context,
           context_instance)
+
+    @csrf_protect_m
+    def exportxml(self, request, object_id, extra_context=None):
+        """
+        Export the XML description for one single resource
+        """
+        model = self.model
+        opts = model._meta
+
+        obj = self.get_object(request, unquote(object_id))
+
+        if not self.has_change_permission(request, obj):
+            raise PermissionDenied
+
+        if obj is None:
+            raise Http404(_('%(name)s object with primary key %(key)r does not exist.') \
+             % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
+
+        storage_object = obj.storage_object
+        if storage_object is None:
+            raise Http404(_('%(name)s object with primary key %(key)r does not have a StorageObject attached.') \
+              % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
+
+        from xml.etree import ElementTree
+        from metashare.repository.supermodel import pretty_xml
+        from django import http
+
+        try:
+            root_node = obj.export_to_elementtree()
+            xml_string = ElementTree.tostring(root_node, encoding="utf-8")
+            pretty = pretty_xml(xml_string).encode('utf-8')
+            resource_filename = 'resource-{0}.xml'.format(object_id)
+        
+            response = http.HttpResponse(pretty, mimetype='text/xml')
+            response['Content-Disposition'] = 'attachment; filename=%s' % (resource_filename)
+            return response
+
+        except Exception:
+            raise Http404(_('Could not export resource "%(name)s" with primary key %(key)r.') \
+              % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
 
     def build_fieldsets_from_schema(self, include_inlines=False, inlines=()):

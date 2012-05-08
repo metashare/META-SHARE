@@ -14,7 +14,7 @@
 			<restrictionsOfUse>other</restrictionsOfUse>
 			<distributionAccessMedium>downloadable</distributionAccessMedium>
 			<downloadLocation>http://mokk.bme.hu/resources/morphdb-hu</downloadLocation>
-			<price>123.45 EUR</price>
+			<fee>123.45 EUR</fee>
 		</licenceInfo>
 	</distributionInfo>
 	<contactPerson>

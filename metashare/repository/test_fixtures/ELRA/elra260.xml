@@ -36,7 +36,7 @@
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>7011.00</price>
+<fee>7011.00</fee>
 <userNature>commercial</userNature>
 <membershipInfo>
 <member>False</member>
@@ -46,7 +46,7 @@
 <licenceInfo>
 <licence>ELRA_EVALUATION</licence>
 <restrictionsOfUse>evaluationUse</restrictionsOfUse>
-<price>934.80</price>
+<fee>934.80</fee>
 <userNature>commercial</userNature>
 <membershipInfo>
 <member>False</member>
@@ -56,7 +56,7 @@
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>11685.00</price>
+<fee>11685.00</fee>
 <userNature>commercial</userNature>
 <membershipInfo>
 <member>False</member>
@@ -66,7 +66,7 @@
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>467.40</price>
+<fee>467.40</fee>
 <userNature>academic</userNature>
 <membershipInfo>
 <member>False</member>
@@ -76,7 +76,7 @@
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>11685.00</price>
+<fee>11685.00</fee>
 <userNature>academic</userNature>
 <membershipInfo>
 <member>False</member>
@@ -86,7 +86,7 @@
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>3505.50</price>
+<fee>3505.50</fee>
 <userNature>commercial</userNature>
 <membershipInfo>
 <member>True</member>
@@ -96,7 +96,7 @@
 <licenceInfo>
 <licence>ELRA_EVALUATION</licence>
 <restrictionsOfUse>evaluationUse</restrictionsOfUse>
-<price>467.40</price>
+<fee>467.40</fee>
 <userNature>commercial</userNature>
 <membershipInfo>
 <member>True</member>
@@ -106,7 +106,7 @@
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>5842.50</price>
+<fee>5842.50</fee>
 <userNature>commercial</userNature>
 <membershipInfo>
 <member>True</member>
@@ -116,7 +116,7 @@
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>233.70</price>
+<fee>233.70</fee>
 <userNature>academic</userNature>
 <membershipInfo>
 <member>True</member>
@@ -126,7 +126,7 @@
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>5842.50</price>
+<fee>5842.50</fee>
 <userNature>academic</userNature>
 <membershipInfo>
 <member>True</member>
