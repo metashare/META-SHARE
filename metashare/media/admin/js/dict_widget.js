@@ -1,7 +1,7 @@
 (function($) {
   $(document).ready(function() {
     // add a delete button to all key value pairs:
-    $('<a href="javascript:void(0)" class="kvPairDeleteButton">Delete pair</a>')
+    $('<a href="javascript:void(0)" class="kvPairDeleteButton">Delete entry</a>')
       .appendTo($('ul.keyValuePairs>li,ul.keyValuePairs+div')).click(function() {
           var liToRemove = $(this).parent();
           liToRemove.nextAll().find('input,textarea').each(function(){
@@ -24,7 +24,7 @@
         }
       });
     // add buttons for adding further key value pairs:
-    $('<li><a href="javascript:void(0)" class="kvPairAddButton">Add another pair</a></li>')
+    $('<li><a href="javascript:void(0)" class="kvPairAddButton">Add a new entry</a></li>')
       .appendTo($('ul.keyValuePairs')).find('a').click(function() {
           var successor = $(this).parent();
           var list = successor.parent();
