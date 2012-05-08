@@ -400,7 +400,8 @@ class DictField(models.Field):
     """
     A model field which represents a Python dictionary.
     
-    A `DictField` with `blank=True` must not be empty.
+    A `DictField` with `blank=False` must not be empty/None. The `null` argument
+    does not have any effect for `DictField`s, it is always set to `True`.
     
     Every model with a `DictField` can be instructed to return the default value
     of the dictionary using the `get_default_FOO()` method (where `FOO` is the
@@ -423,6 +424,7 @@ class DictField(models.Field):
         `default_retriever` argument may be a function taking a single Python
         dictionary argument which overrides the default value retrieval.
         """
+        kwargs['null'] = True
         self.label = None
         if 'label' in kwargs:
             self.label = kwargs.pop('label')
@@ -476,7 +478,7 @@ class DictField(models.Field):
         Converts the given value to a Python dictionary.
         
         The value can be in the internal DB representation, an empty value or a
-        Python dicttionary.  
+        Python dictionary.  
         """
         # if for some reason value is already of type dict, then just return it
         if isinstance(value, dict):

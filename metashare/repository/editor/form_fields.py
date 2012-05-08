@@ -58,6 +58,8 @@ class DictField(Field):
         Converts the list of key/value pairs from `DictWidget` to a Python
         dictionary, making sure that there is no duplicate key.
         """
+        if value is None:
+            return None
         result = {}
         for key, val in value:
             # ensure that there are no blank keys

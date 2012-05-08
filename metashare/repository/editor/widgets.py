@@ -119,7 +119,8 @@ class DictWidget(widgets.Widget):
     def value_from_datadict(self, data, files, name):
         """
         Given a dictionary of data from the input form and this widget's name,
-        returns the value of this widget as a list of key/value pairs.
+        returns the value of this widget as a list of key/value pairs (or None
+        if the list would be empty).
         """
         # collect the key/value data that was provided by the user (not as a
         # dictionary, so that we can later cleanly validate the data):
@@ -132,7 +133,9 @@ class DictWidget(widgets.Widget):
                 break
             provided.append((data[key_name], data[val_name]))
             idx += 1
-        return provided
+        if len(provided) != 0:
+            return provided
+        return None
 
 
 class TextInputWithLanguageAttribute(widgets.Input):
