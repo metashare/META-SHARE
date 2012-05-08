@@ -20,7 +20,7 @@ ul.selectable-deck li.selectable-deck-item .selectable-deck-remove {
 }
 ul.selectable-deck li.selectable-deck-item .selectable-deck-edit {
     float: right;
-    display: none;
+    /*display: none;*/
 }
 ul.selectable-deck-bottom-inline,
 ul.selectable-deck-top-inline {

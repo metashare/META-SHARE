@@ -9,7 +9,8 @@ from metashare.repository.models import resourceComponentTypeType_model, \
     metadataInfoType_model, resourceCreationInfoType_model, \
     resourceDocumentationInfoType_model, \
     actualUseInfoType_model, validationInfoType_model,\
-    usageInfoType_model, personInfoType_model
+    usageInfoType_model, personInfoType_model, \
+    distributionInfoType_model
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
     ALLOWED_ARCHIVE_EXTENSIONS
 from metashare.utils import verify_subclass
@@ -37,6 +38,7 @@ from django.forms.util import ErrorList
 from selectable.forms.widgets import AutoCompleteSelectMultipleWidget
 from metashare.repository.editor.lookups import PersonLookup, ActorLookup, \
     DocumentLookup, ProjectLookup, OrganizationLookup
+from metashare.repository.editor.widgets import TestWidget
 
 csrf_protect_m = method_decorator(csrf_protect)
 
@@ -708,7 +710,17 @@ class UsageModelAdmin(SchemaModelAdmin):
 class PersonForm(forms.ModelForm):
     class Meta:
         model = personInfoType_model
-        widgets = {'affiliation': AutoCompleteSelectMultipleWidget(lookup_class=OrganizationLookup)}
+        #widgets = {'affiliation': AutoCompleteSelectMultipleWidget(lookup_class=OrganizationLookup)}
+        widgets = {'affiliation': TestWidget(lookup_class=OrganizationLookup)}
 
 class PersonModelAdmin(SchemaModelAdmin):
     form = PersonForm
+
+class LicenceForm(forms.ModelForm):
+    class Meta:
+        model = distributionInfoType_model
+        #widgets = {'membershipInfo': TestWidget()}
+        
+class LicenceModelAdmin(SchemaModelAdmin):
+    form = LicenceForm
+    

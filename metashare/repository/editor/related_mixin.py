@@ -8,7 +8,8 @@ from django.http import HttpResponse
 from django.utils.html import escape, escapejs
 
 from metashare.repository.editor.related_widget import RelatedFieldWidgetWrapper
-from metashare.repository.editor.widgets import SubclassableRelatedFieldWidgetWrapper
+from metashare.repository.editor.widgets import SubclassableRelatedFieldWidgetWrapper, \
+    TestWidget
 from selectable.forms.widgets import AutoCompleteSelectMultipleWidget
 from django.db import models
 
@@ -87,7 +88,8 @@ class RelatedAdminMixin(object):
         if formfield and \
                 isinstance(formfield.widget, admin.widgets.RelatedFieldWidgetWrapper) and \
                 not isinstance(formfield.widget.widget, SelectMultiple) and \
-                not ('widget' in kwargs and isinstance(kwargs['widget'], AutoCompleteSelectMultipleWidget)):
+                not ('widget' in kwargs and isinstance(kwargs['widget'], AutoCompleteSelectMultipleWidget)) and \
+                not ('widget' in kwargs and isinstance(kwargs['widget'], TestWidget)):
             return True
         return False
 
@@ -112,6 +114,17 @@ class RelatedAdminMixin(object):
         '''
         pk_value = obj._get_pk_val()
         return HttpResponse('<script type="text/javascript">opener.dismissEditRelatedPopup(window, "%s", "%s");</script>' % \
+            # escape() calls force_unicode.
+            (escape(pk_value), escapejs(obj)))
+
+    def edit_response_close_popup_magic_o2m(self, obj):
+        '''
+        For related popups, send the javascript that triggers
+        (a) closing the popup, and
+        (b) updating the parent field with the ID of the object we just edited.
+        '''
+        pk_value = obj._get_pk_val()
+        return HttpResponse('<script type="text/javascript">opener.dismissEditPopup(window, "%s", "%s");</script>' % \
             # escape() calls force_unicode.
             (escape(pk_value), escapejs(obj)))
 

@@ -13,11 +13,14 @@ except:
 from django.forms.util import flatatt
 
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
-from django.forms import widgets, TextInput
+from django.forms import widgets, TextInput, MultiWidget
 from django.template.loader import render_to_string
 from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
-
+from selectable.forms.widgets import SelectableMediaMixin, SelectableMultiWidget,\
+    AutoCompleteWidget, LookupMultipleHiddenInput, AutoCompleteSelectMultipleWidget
+from django.forms.widgets import HiddenInput
+from django.utils.http import urlencode
 from metashare import settings
 
 # Setup logging support.
@@ -306,3 +309,62 @@ class MultiFieldWidget(widgets.Widget):
             pass
         
         return initial != _data
+
+class TestHiddenWidget(TextInput, SelectableMediaMixin):
+    def __init__(self, lookup_class, *args, **kwargs):
+        self.lookup_class = lookup_class
+        self.allow_new = kwargs.pop('allow_new', False)
+        self.qs = kwargs.pop('query_params', {})
+        self.limit = kwargs.pop('limit', None)
+        super(TestHiddenWidget, self).__init__(*args, **kwargs)
+
+    def update_query_parameters(self, qs_dict):
+        self.qs.update(qs_dict)
+
+    def build_attrs(self, extra_attrs=None, **kwargs):
+        attrs = super(TestHiddenWidget, self).build_attrs(extra_attrs, **kwargs)
+        url = self.lookup_class.url()
+        if self.limit and 'limit' not in self.qs:
+            self.qs['limit'] = self.limit
+        if self.qs:
+            url = '%s?%s' % (url, urlencode(self.qs))
+        attrs[u'data-selectable-url'] = url
+        attrs[u'data-selectable-type'] = 'text'
+        attrs[u'data-selectable-allow-new'] = str(self.allow_new).lower()
+        attrs[u'type'] = 'hidden'
+        return attrs
+
+    def render(self, name, value, attrs=None):
+        #icon = u'<img src="{0}img/admin/selector-search.gif" width="16" height="16" title="Type to search" />'.format(settings.ADMIN_MEDIA_PREFIX)
+        icon = u''
+        return mark_safe(icon + super(TestHiddenWidget, self).render(name, value, attrs))
+
+class TestWidget(SelectableMultiWidget, SelectableMediaMixin):
+
+    def __init__(self, lookup_class, *args, **kwargs):
+        self.lookup_class = lookup_class
+        self.limit = kwargs.pop('limit', None)
+        position = kwargs.pop('position', 'bottom')
+        attrs = {
+            u'data-selectable-multiple': 'true',
+            u'data-selectable-position': position,
+            u'data-selectable-allow-editing': 'true'
+        }
+        query_params = kwargs.pop('query_params', {})
+        widgets = [
+            TestHiddenWidget(
+                lookup_class, allow_new=False,
+                limit=self.limit, query_params=query_params, attrs=attrs
+            ),
+            LookupMultipleHiddenInput(lookup_class)
+        ]
+        super(TestWidget, self).__init__(widgets, *args, **kwargs)
+
+    def value_from_datadict(self, data, files, name):
+        return self.widgets[1].value_from_datadict(data, files, name + '_1')
+
+    def render(self, name, value, attrs=None):
+        if value and not hasattr(value, '__iter__'):
+            value = [value]
+        value = [u'', value]
+        return super(TestWidget, self).render(name, value, attrs)

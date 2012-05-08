@@ -29,7 +29,8 @@ from metashare.repository.editor.superadmin import SchemaModelAdmin
 from metashare.repository.editor import admin_site as editor_site
 from metashare.repository.editor.corpus_editor import CorpusAudioForm
 from metashare.repository.editor.resource_editor import ResourceModelAdmin, \
-    ActualUseModelAdmin, UsageModelAdmin, PersonModelAdmin
+    ActualUseModelAdmin, UsageModelAdmin, PersonModelAdmin,\
+    LicenceModelAdmin
 
 
 
@@ -102,7 +103,7 @@ purely_inline_models = (
     communicationInfoType_model,
     validationInfoType_model,
     relationInfoType_model,
-    licenceInfoType_model,
+#    licenceInfoType_model,
     foreseenUseInfoType_model,
     corpusMediaTypeType_model,
  #   corpusTextInfoType_model,
@@ -137,7 +138,8 @@ custom_admin_classes = {
     toolServiceInfoType_model: GenericTabbedAdmin,
     actualUseInfoType_model: ActualUseModelAdmin,
     usageInfoType_model: UsageModelAdmin,
-    personInfoType_model: PersonModelAdmin
+    personInfoType_model: PersonModelAdmin,
+    licenceInfoType_model: LicenceModelAdmin
 }
 
 def register():
