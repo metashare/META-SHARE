@@ -83,7 +83,10 @@ class DictWidget(widgets.Widget):
                 _entries.append(self._get_dict_entry(name, idx, entry[0],
                                                      entry[1]))
                 idx += 1
-        else:
+        elif not self.blank:
+            # (we probably have gotten the value None, i.e., the dictionary is
+            # only being created; an empty first entry is only shown if the
+            # dictionary must not be blank)
             _entries.append(self._get_dict_entry(name, 0, None, None))
         # render final HTML for this widget instance
         return mark_safe(render_to_string('repository/editor/dict_widget.html',
