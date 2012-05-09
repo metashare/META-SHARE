@@ -16,7 +16,6 @@ class RelatedFieldWidgetWrapper(widgets.RelatedFieldWidgetWrapper):
     def __init__(self, *args, **kwargs):
         self.can_change_related = kwargs.pop('can_change_related', None)
         self.can_delete_related = kwargs.pop('can_delete_related', None)
-        self.can_delete_related = False
         super(RelatedFieldWidgetWrapper, self).__init__(*args, **kwargs)
     
     @classmethod

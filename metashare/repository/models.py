@@ -102,7 +102,7 @@ class resourceInfoType_model(SchemaModel):
       verbose_name='Version', 
       help_text='Groups information on a specific version or release of ' \
       'the resource',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: validationInfo
 
@@ -110,19 +110,19 @@ class resourceInfoType_model(SchemaModel):
       verbose_name='Usage', 
       help_text='Groups information on usage of the resource (both inten' \
       'ded and actual use)',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     resourceDocumentationInfo = models.OneToOneField("resourceDocumentationInfoType_model", 
       verbose_name='Resource documentation', 
       help_text='Groups together information on any document describing ' \
       'the resource',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     resourceCreationInfo = models.OneToOneField("resourceCreationInfoType_model", 
       verbose_name='Resource creation', 
       help_text='Groups information on the creation procedure of a resou' \
       'rce',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: relationInfo
 
@@ -246,7 +246,8 @@ class sizeInfoType_model(SchemaModel):
       'ion on the size of the resource or of resource parts',
       
       max_length=30,
-      choices=SIZEINFOTYPE_SIZEUNIT_CHOICES['choices'],
+      choices=sorted(SIZEINFOTYPE_SIZEUNIT_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
@@ -446,7 +447,8 @@ class validationInfoType_model(SchemaModel):
       'formed',
       blank=True, 
       max_length=20,
-      choices=VALIDATIONINFOTYPE_VALIDATIONTYPE_CHOICES['choices'],
+      choices=sorted(VALIDATIONINFOTYPE_VALIDATIONTYPE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     validationMode = models.CharField(
@@ -454,7 +456,8 @@ class validationInfoType_model(SchemaModel):
       help_text='Specifies the validation methodology applied',
       blank=True, 
       max_length=20,
-      choices=VALIDATIONINFOTYPE_VALIDATIONMODE_CHOICES['choices'],
+      choices=sorted(VALIDATIONINFOTYPE_VALIDATIONMODE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     validationModeDetails = models.CharField(
@@ -467,7 +470,8 @@ class validationInfoType_model(SchemaModel):
       help_text='The resource coverage in terms of validated data',
       blank=True, 
       max_length=20,
-      choices=VALIDATIONINFOTYPE_VALIDATIONEXTENT_CHOICES['choices'],
+      choices=sorted(VALIDATIONINFOTYPE_VALIDATIONEXTENT_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     validationExtentDetails = models.CharField(
@@ -481,19 +485,19 @@ class validationInfoType_model(SchemaModel):
     sizePerValidation = models.OneToOneField("sizeInfoType_model", 
       verbose_name='Size per validation', 
       help_text='Specifies the size of the validated part of a resource',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     validationReport = models.OneToOneField("documentationInfoType_model", 
       verbose_name='Validation report', 
       help_text='A short account of the validation details or a link to ' \
       'the validation report',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     validationTool = models.OneToOneField("targetResourceInfoType_model", 
       verbose_name='Validation tool', 
       help_text='The name, the identifier or the url of the tool used fo' \
       'r the validation of the resource',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     validator = models.ManyToManyField("actorInfoType_model", 
       verbose_name='Validator', 
@@ -601,7 +605,8 @@ class creationInfoType_model(SchemaModel):
       ' or in a manual or interactive mode',
       blank=True, 
       max_length=30,
-      choices=CREATIONINFOTYPE_CREATIONMODE_CHOICES['choices'],
+      choices=sorted(CREATIONINFOTYPE_CREATIONMODE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     creationModeDetails = models.CharField(
@@ -765,7 +770,8 @@ class documentInfoType_model(documentationInfoType_model):
       'ated to the resource',
       
       max_length=30,
-      choices=DOCUMENTINFOTYPE_DOCUMENTTYPE_CHOICES['choices'],
+      choices=sorted(DOCUMENTINFOTYPE_DOCUMENTTYPE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     title = MultiTextField(widget = MultiFieldWidget(widget_id=7), 
@@ -973,7 +979,7 @@ class domainInfoType_model(SchemaModel):
     sizePerDomain = models.OneToOneField("sizeInfoType_model", 
       verbose_name='Size per domain', 
       help_text='Specifies the size of resource parts per domain',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     conformanceToClassificationScheme = models.CharField(
       verbose_name='Conformance to classification scheme', 
@@ -1205,7 +1211,8 @@ class annotationInfoType_model(SchemaModel):
       ' by automatic processes',
       blank=True, 
       max_length=100,
-      choices=ANNOTATIONINFOTYPE_ANNOTATIONMODE_CHOICES['choices'],
+      choices=sorted(ANNOTATIONINFOTYPE_ANNOTATIONMODE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     annotationModeDetails = models.CharField(
@@ -1233,7 +1240,7 @@ class annotationInfoType_model(SchemaModel):
       verbose_name='Size per annotation', 
       help_text='Provides information on size for the annotated parts of' \
       ' the resource',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     interannotatorAgreement = models.CharField(
       verbose_name='Interannotator agreement', 
@@ -1368,7 +1375,7 @@ class modalityInfoType_model(SchemaModel):
       verbose_name='Size per modality', 
       help_text='Provides information on the size per modality component' \
       '',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
 
@@ -1456,7 +1463,8 @@ class participantInfoType_model(SchemaModel):
       help_text='The age group to which the participant belongs',
       blank=True, 
       max_length=30,
-      choices=PARTICIPANTINFOTYPE_AGEGROUP_CHOICES['choices'],
+      choices=sorted(PARTICIPANTINFOTYPE_AGEGROUP_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     age = models.CharField(
@@ -1470,7 +1478,8 @@ class participantInfoType_model(SchemaModel):
       'he resource',
       blank=True, 
       max_length=30,
-      choices=PARTICIPANTINFOTYPE_SEX_CHOICES['choices'],
+      choices=sorted(PARTICIPANTINFOTYPE_SEX_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     origin = models.CharField(
@@ -1478,7 +1487,8 @@ class participantInfoType_model(SchemaModel):
       help_text='The language origin of the participant',
       blank=True, 
       max_length=30,
-      choices=PARTICIPANTINFOTYPE_ORIGIN_CHOICES['choices'],
+      choices=sorted(PARTICIPANTINFOTYPE_ORIGIN_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     placeOfLiving = models.CharField(
@@ -1525,7 +1535,8 @@ class participantInfoType_model(SchemaModel):
       ' may influence the speech of the participant',
       blank=True, 
       max_length=30,
-      choices=PARTICIPANTINFOTYPE_VOCALTRACTCONDITIONS_CHOICES['choices'],
+      choices=sorted(PARTICIPANTINFOTYPE_VOCALTRACTCONDITIONS_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     profession = models.CharField(
@@ -1634,7 +1645,8 @@ class captureInfoType_model(SchemaModel):
       help_text='Type of capturing environment',
       blank=True, 
       max_length=30,
-      choices=CAPTUREINFOTYPE_CAPTURINGENVIRONMENT_CHOICES['choices'],
+      choices=sorted(CAPTUREINFOTYPE_CAPTURINGENVIRONMENT_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     sensorTechnology = MultiTextField(max_length=200, widget = MultiFieldWidget(widget_id=15), 
@@ -1648,14 +1660,15 @@ class captureInfoType_model(SchemaModel):
       help_text='Information on the illumination of the scene',
       blank=True, 
       max_length=30,
-      choices=CAPTUREINFOTYPE_SCENEILLUMINATION_CHOICES['choices'],
+      choices=sorted(CAPTUREINFOTYPE_SCENEILLUMINATION_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     personSourceSetInfo = models.OneToOneField("personSourceSetInfoType_model", 
       verbose_name='Person source set', 
       help_text='Groups information on the persons (speakers, video part' \
       'icipants, etc.) in the audio andvideoparts of the resource',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -1746,7 +1759,8 @@ class personSourceSetInfoType_model(SchemaModel):
       help_text='The gender of the group of participants',
       blank=True, 
       max_length=30,
-      choices=PERSONSOURCESETINFOTYPE_SEXOFPERSONS_CHOICES['choices'],
+      choices=sorted(PERSONSOURCESETINFOTYPE_SEXOFPERSONS_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     originOfPersons = models.CharField(
@@ -1754,7 +1768,8 @@ class personSourceSetInfoType_model(SchemaModel):
       help_text='The language origin of the group of participants',
       blank=True, 
       max_length=30,
-      choices=PERSONSOURCESETINFOTYPE_ORIGINOFPERSONS_CHOICES['choices'],
+      choices=sorted(PERSONSOURCESETINFOTYPE_ORIGINOFPERSONS_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     dialectAccentOfPersons = MultiTextField(max_length=500, widget = MultiFieldWidget(widget_id=16), 
@@ -1775,7 +1790,8 @@ class personSourceSetInfoType_model(SchemaModel):
       ' hearing impairments',
       blank=True, 
       max_length=30,
-      choices=PERSONSOURCESETINFOTYPE_HEARINGIMPAIRMENTOFPERSONS_CHOICES['choices'],
+      choices=sorted(PERSONSOURCESETINFOTYPE_HEARINGIMPAIRMENTOFPERSONS_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     speakingImpairmentOfPersons = models.CharField(
@@ -1784,7 +1800,8 @@ class personSourceSetInfoType_model(SchemaModel):
       'with speakingimpairments',
       blank=True, 
       max_length=30,
-      choices=PERSONSOURCESETINFOTYPE_SPEAKINGIMPAIRMENTOFPERSONS_CHOICES['choices'],
+      choices=sorted(PERSONSOURCESETINFOTYPE_SPEAKINGIMPAIRMENTOFPERSONS_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     numberOfTrainedSpeakers = models.IntegerField(
@@ -1857,7 +1874,8 @@ class settingInfoType_model(SchemaModel):
       'edia resources',
       blank=True, 
       max_length=30,
-      choices=SETTINGINFOTYPE_NATURALITY_CHOICES['choices'],
+      choices=sorted(SETTINGINFOTYPE_NATURALITY_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     conversationalType = models.CharField(
@@ -1865,7 +1883,8 @@ class settingInfoType_model(SchemaModel):
       help_text='Specifies the conversational type of the resource',
       blank=True, 
       max_length=30,
-      choices=SETTINGINFOTYPE_CONVERSATIONALTYPE_CHOICES['choices'],
+      choices=sorted(SETTINGINFOTYPE_CONVERSATIONALTYPE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     scenarioType = models.CharField(
@@ -1874,7 +1893,8 @@ class settingInfoType_model(SchemaModel):
       'interaction of participants',
       blank=True, 
       max_length=30,
-      choices=SETTINGINFOTYPE_SCENARIOTYPE_CHOICES['choices'],
+      choices=sorted(SETTINGINFOTYPE_SCENARIOTYPE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     audience = models.CharField(
@@ -1882,7 +1902,8 @@ class settingInfoType_model(SchemaModel):
       help_text='Indication of the intended audience size',
       blank=True, 
       max_length=30,
-      choices=SETTINGINFOTYPE_AUDIENCE_CHOICES['choices'],
+      choices=sorted(SETTINGINFOTYPE_AUDIENCE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     interactivity = models.CharField(
@@ -1892,7 +1913,8 @@ class settingInfoType_model(SchemaModel):
       'onent)',
       blank=True, 
       max_length=30,
-      choices=SETTINGINFOTYPE_INTERACTIVITY_CHOICES['choices'],
+      choices=sorted(SETTINGINFOTYPE_INTERACTIVITY_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     interaction = models.CharField(
@@ -2116,7 +2138,8 @@ class resolutionInfoType_model(SchemaModel):
       help_text='The standard to which the resolution conforms',
       blank=True, 
       max_length=50,
-      choices=RESOLUTIONINFOTYPE_RESOLUTIONSTANDARD_CHOICES['choices'],
+      choices=sorted(RESOLUTIONINFOTYPE_RESOLUTIONSTANDARD_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     back_to_videoformatinfotype_model = models.ForeignKey("videoFormatInfoType_model",  blank=True, null=True)
@@ -2205,7 +2228,8 @@ class linkToOtherMediaInfoType_model(SchemaModel):
       'type described within the same resource',
       
       max_length=30,
-      choices=LINKTOOTHERMEDIAINFOTYPE_OTHERMEDIA_CHOICES['choices'],
+      choices=sorted(LINKTOOTHERMEDIAINFOTYPE_OTHERMEDIA_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     mediaTypeDetails = models.CharField(
@@ -2530,7 +2554,8 @@ class personInfoType_model(actorInfoType_model):
       'he resource',
       blank=True, 
       max_length=30,
-      choices=PERSONINFOTYPE_SEX_CHOICES['choices'],
+      choices=sorted(PERSONINFOTYPE_SEX_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     communicationInfo = models.OneToOneField("communicationInfoType_model", 
@@ -2594,7 +2619,8 @@ class distributionInfoType_model(SchemaModel):
       'of availability',
       
       max_length=40,
-      choices=DISTRIBUTIONINFOTYPE_AVAILABILITY_CHOICES['choices'],
+      choices=sorted(DISTRIBUTIONINFOTYPE_AVAILABILITY_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     # OneToMany field: licenceInfo
@@ -2897,7 +2923,7 @@ class characterEncodingInfoType_model(SchemaModel):
       verbose_name='Size per character encoding', 
       help_text='Provides information on the size of the resource parts ' \
       'with different character encoding',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
 
@@ -2940,7 +2966,7 @@ class timeCoverageInfoType_model(SchemaModel):
       verbose_name='Size per time coverage', 
       help_text='Provides information on size per time period represente' \
       'd in the resource',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
 
@@ -2999,7 +3025,7 @@ class geographicCoverageInfoType_model(SchemaModel):
       verbose_name='Size per geographic coverage', 
       help_text='Provides information on size per geographically distinc' \
       't section of the resource',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
 
@@ -3061,7 +3087,8 @@ class lingualityInfoType_model(SchemaModel):
       'e languages',
       
       max_length=20,
-      choices=LINGUALITYINFOTYPE_LINGUALITYTYPE_CHOICES['choices'],
+      choices=sorted(LINGUALITYINFOTYPE_LINGUALITYTYPE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     multilingualityType = models.CharField(
@@ -3070,7 +3097,8 @@ class lingualityInfoType_model(SchemaModel):
       ' mixed',
       blank=True, 
       max_length=30,
-      choices=LINGUALITYINFOTYPE_MULTILINGUALITYTYPE_CHOICES['choices'],
+      choices=sorted(LINGUALITYINFOTYPE_MULTILINGUALITYTYPE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     multilingualityTypeDetails = models.CharField(
@@ -3116,7 +3144,8 @@ class languageVarietyInfoType_model(SchemaModel):
       'in the resource or is supported by a tool/service',
       
       max_length=20,
-      choices=LANGUAGEVARIETYINFOTYPE_LANGUAGEVARIETYTYPE_CHOICES['choices'],
+      choices=sorted(LANGUAGEVARIETYINFOTYPE_LANGUAGEVARIETYTYPE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     languageVarietyName = models.CharField(
@@ -3184,7 +3213,7 @@ class languageInfoType_model(SchemaModel):
       verbose_name='Size per language', 
       help_text='Provides information on the size per language component' \
       '',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     languageVarietyInfo = models.ManyToManyField("languageVarietyInfoType_model", 
       verbose_name='Language variety', 
@@ -3416,7 +3445,8 @@ class foreseenUseInfoType_model(SchemaModel):
       help_text='Classification of the intended use of the resource',
       
       max_length=30,
-      choices=FORESEENUSEINFOTYPE_FORESEENUSE_CHOICES['choices'],
+      choices=sorted(FORESEENUSEINFOTYPE_FORESEENUSE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     useNLPSpecific = MultiSelectField(
@@ -3506,7 +3536,8 @@ class actualUseInfoType_model(SchemaModel):
       help_text='Classification of the actual use of the resource',
       
       max_length=30,
-      choices=ACTUALUSEINFOTYPE_ACTUALUSE_CHOICES['choices'],
+      choices=sorted(ACTUALUSEINFOTYPE_ACTUALUSE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     useNLPSpecific = MultiSelectField(
@@ -3646,13 +3677,13 @@ class corpusAudioInfoType_model(SchemaModel):
       verbose_name='Audio content', 
       help_text='Groups together information on the contents of the audi' \
       'o part of a resource',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     settingInfo = models.OneToOneField("settingInfoType_model", 
       verbose_name='Setting', 
       help_text='Groups together information on the setting of the audio' \
       ' and/or video part of a resource',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: audioFormatInfo
 
@@ -3674,13 +3705,13 @@ class corpusAudioInfoType_model(SchemaModel):
       verbose_name='Recording', 
       help_text='Groups together information on the recording of the aud' \
       'io or video part of a resource',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     captureInfo = models.OneToOneField("captureInfoType_model", 
       verbose_name='Capture', 
       help_text='Groups together information on the capture of the audio' \
       ' or video part of a corpus',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     creationInfo = models.OneToOneField("creationInfoType_model", 
       verbose_name='Creation', 
@@ -3688,7 +3719,7 @@ class corpusAudioInfoType_model(SchemaModel):
       '.g. for corpora, selection of texts/audio files/ video files etc.' \
       ' and structural encoding thereof; for lexica, construction of lem' \
       'ma list etc.)',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: linkToOtherMediaInfo
 
@@ -3762,7 +3793,8 @@ class audioContentInfoType_model(SchemaModel):
       help_text='Specifies the level of background noise',
       blank=True, 
       max_length=30,
-      choices=AUDIOCONTENTINFOTYPE_NOISELEVEL_CHOICES['choices'],
+      choices=sorted(AUDIOCONTENTINFOTYPE_NOISELEVEL_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     def __unicode__(self):
@@ -3881,7 +3913,8 @@ class durationOfAudioInfoType_model(SchemaModel):
       'viding information on the size of a resource',
       
       max_length=30,
-      choices=DURATIONOFAUDIOINFOTYPE_DURATIONUNIT_CHOICES['choices'],
+      choices=sorted(DURATIONOFAUDIOINFOTYPE_DURATIONUNIT_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     back_to_audiosizeinfotype_model = models.ForeignKey("audioSizeInfoType_model",  blank=True, null=True)
@@ -3973,7 +4006,8 @@ class audioFormatInfoType_model(SchemaModel):
       help_text='The byte order of 2 or more bytes sample',
       blank=True, 
       max_length=30,
-      choices=AUDIOFORMATINFOTYPE_BYTEORDER_CHOICES['choices'],
+      choices=sorted(AUDIOFORMATINFOTYPE_BYTEORDER_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     signConvention = models.CharField(
@@ -3981,21 +4015,23 @@ class audioFormatInfoType_model(SchemaModel):
       help_text='Binary representation of numbers',
       blank=True, 
       max_length=30,
-      choices=AUDIOFORMATINFOTYPE_SIGNCONVENTION_CHOICES['choices'],
+      choices=sorted(AUDIOFORMATINFOTYPE_SIGNCONVENTION_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     compressionInfo = models.OneToOneField("compressionInfoType_model", 
       verbose_name='Compression', 
       help_text='Groups together information on the compression status a' \
       'nd method of a resource',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     audioQualityMeasuresIncluded = models.CharField(
       verbose_name='Audio quality measures included', 
       help_text='Specifies the audio quality measures',
       blank=True, 
       max_length=30,
-      choices=AUDIOFORMATINFOTYPE_AUDIOQUALITYMEASURESINCLUDED_CHOICES['choices'],
+      choices=sorted(AUDIOFORMATINFOTYPE_AUDIOQUALITYMEASURESINCLUDED_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     numberOfTracks = models.IntegerField(
@@ -4008,14 +4044,15 @@ class audioFormatInfoType_model(SchemaModel):
       help_text='Indication of the audio or video recording quality',
       blank=True, 
       max_length=30,
-      choices=AUDIOFORMATINFOTYPE_RECORDINGQUALITY_CHOICES['choices'],
+      choices=sorted(AUDIOFORMATINFOTYPE_RECORDINGQUALITY_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     sizePerAudioFormat = models.OneToOneField("sizeInfoType_model", 
       verbose_name='Size per audio format', 
       help_text='Used to give info on size of parts of a resource that d' \
       'iffer as to the format',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
 
@@ -4075,7 +4112,8 @@ class audioClassificationInfoType_model(SchemaModel):
       help_text='A first indication of type of sounds recorded',
       
       max_length=30,
-      choices=AUDIOCLASSIFICATIONINFOTYPE_AUDIOGENRE_CHOICES['choices'],
+      choices=sorted(AUDIOCLASSIFICATIONINFOTYPE_AUDIOGENRE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     speechGenre = models.CharField(
@@ -4085,7 +4123,8 @@ class audioClassificationInfoType_model(SchemaModel):
       'a; the values here are intended only for speech',
       blank=True, 
       max_length=30,
-      choices=AUDIOCLASSIFICATIONINFOTYPE_SPEECHGENRE_CHOICES['choices'],
+      choices=sorted(AUDIOCLASSIFICATIONINFOTYPE_SPEECHGENRE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     subject_topic = models.CharField(
@@ -4112,7 +4151,7 @@ class audioClassificationInfoType_model(SchemaModel):
       verbose_name='Size per audio classification', 
       help_text='The size of the audio subparts of the resource in terms' \
       ' of classification criteria',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
 
@@ -4209,7 +4248,7 @@ class corpusTextInfoType_model(SchemaModel):
       '.g. for corpora, selection of texts/audio files/ video files etc.' \
       ' and structural encoding thereof; for lexica, construction of lem' \
       'ma list etc.)',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: linkToOtherMediaInfo
 
@@ -4253,7 +4292,7 @@ class textFormatInfoType_model(SchemaModel):
       verbose_name='Size per text format', 
       help_text='Provides information on the size of the resource parts ' \
       'with different format',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
 
@@ -4336,7 +4375,7 @@ class textClassificationInfoType_model(SchemaModel):
       verbose_name='Size per text classification', 
       help_text='Provides information on size of resource parts with dif' \
       'ferent text classification',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
 
@@ -4409,7 +4448,7 @@ class corpusVideoInfoType_model(SchemaModel):
       verbose_name='Linguality', 
       help_text='Groups information on the number of languages of the re' \
       'source part and of the way they are combined to each other',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: languageInfo
 
@@ -4417,7 +4456,7 @@ class corpusVideoInfoType_model(SchemaModel):
       verbose_name='Modality', 
       help_text='Groups information on the modalities represented in the' \
       ' resource',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: sizeInfo
 
@@ -4425,13 +4464,13 @@ class corpusVideoInfoType_model(SchemaModel):
       verbose_name='Video content', 
       help_text='Groups together information on the contents of the vide' \
       'o part of a resource',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     settingInfo = models.OneToOneField("settingInfoType_model", 
       verbose_name='Setting', 
       help_text='Groups together information on the setting of the audio' \
       ' and/or video part of a resource',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     videoFormatInfo = models.ManyToManyField("videoFormatInfoType_model", 
       verbose_name='Video format', 
@@ -4457,13 +4496,13 @@ class corpusVideoInfoType_model(SchemaModel):
       verbose_name='Recording', 
       help_text='Groups together information on the recording of the aud' \
       'io or video part of a resource',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     captureInfo = models.OneToOneField("captureInfoType_model", 
       verbose_name='Capture', 
       help_text='Groups together information on the capture of the audio' \
       ' or video part of a corpus',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     creationInfo = models.OneToOneField("creationInfoType_model", 
       verbose_name='Creation', 
@@ -4471,7 +4510,7 @@ class corpusVideoInfoType_model(SchemaModel):
       '.g. for corpora, selection of texts/audio files/ video files etc.' \
       ' and structural encoding thereof; for lexica, construction of lem' \
       'ma list etc.)',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: linkToOtherMediaInfo
 
@@ -4526,7 +4565,7 @@ class videoContentInfoType_model(SchemaModel):
       verbose_name='Dynamic element', 
       help_text='Groups information on the dynamic elements that are rep' \
       'resented in the video part of the resource',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -4617,13 +4656,13 @@ class videoFormatInfoType_model(SchemaModel):
       verbose_name='Compression', 
       help_text='Groups together information on the compression status a' \
       'nd method of a resource',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     sizePerVideoFormat = models.OneToOneField("sizeInfoType_model", 
       verbose_name='Size per video format', 
       help_text='Used to give info on size of parts of a resource that d' \
       'iffer as to the format',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -4682,7 +4721,7 @@ class videoClassificationInfoType_model(SchemaModel):
       verbose_name='Size per video classification', 
       help_text='Used to give info on size of parts with different video' \
       ' classification',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     back_to_corpusvideoinfotype_model = models.ForeignKey("corpusVideoInfoType_model",  blank=True, null=True)
 
@@ -4751,7 +4790,7 @@ class corpusImageInfoType_model(SchemaModel):
       verbose_name='Linguality', 
       help_text='Groups information on the number of languages of the re' \
       'source part and of the way they are combined to each other',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: languageInfo
 
@@ -4761,7 +4800,7 @@ class corpusImageInfoType_model(SchemaModel):
       verbose_name='Image content', 
       help_text='Groups together information on the contents of the imag' \
       'e part of a resource',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     imageFormatInfo = models.ManyToManyField("imageFormatInfoType_model", 
       verbose_name='Image format', 
@@ -4787,7 +4826,7 @@ class corpusImageInfoType_model(SchemaModel):
       verbose_name='Capture', 
       help_text='Groups together information on the capture of the audio' \
       ' or video part of a corpus',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     creationInfo = models.OneToOneField("creationInfoType_model", 
       verbose_name='Creation', 
@@ -4795,7 +4834,7 @@ class corpusImageInfoType_model(SchemaModel):
       '.g. for corpora, selection of texts/audio files/ video files etc.' \
       ' and structural encoding thereof; for lexica, construction of lem' \
       'ma list etc.)',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: linkToOtherMediaInfo
 
@@ -4849,7 +4888,7 @@ class imageContentInfoType_model(SchemaModel):
       verbose_name='Static element', 
       help_text='Groups information on the static element visible on the' \
       ' images',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -4927,7 +4966,7 @@ class imageFormatInfoType_model(SchemaModel):
       verbose_name='Compression', 
       help_text='Groups together information on the compression status a' \
       'nd method of a resource',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: resolutionInfo
 
@@ -4936,7 +4975,8 @@ class imageFormatInfoType_model(SchemaModel):
       help_text='The dimensional form applied on video or image corpus',
       blank=True, 
       max_length=30,
-      choices=IMAGEFORMATINFOTYPE_VISUALMODELLING_CHOICES['choices'],
+      choices=sorted(IMAGEFORMATINFOTYPE_VISUALMODELLING_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     rasterOrVectorGraphics = models.CharField(
@@ -4945,7 +4985,8 @@ class imageFormatInfoType_model(SchemaModel):
       'aphics',
       blank=True, 
       max_length=30,
-      choices=IMAGEFORMATINFOTYPE_RASTERORVECTORGRAPHICS_CHOICES['choices'],
+      choices=sorted(IMAGEFORMATINFOTYPE_RASTERORVECTORGRAPHICS_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     quality = models.CharField(
@@ -4953,14 +4994,15 @@ class imageFormatInfoType_model(SchemaModel):
       help_text='Specifies the quality level of image resource',
       blank=True, 
       max_length=30,
-      choices=IMAGEFORMATINFOTYPE_QUALITY_CHOICES['choices'],
+      choices=sorted(IMAGEFORMATINFOTYPE_QUALITY_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     sizePerImageFormat = models.OneToOneField("sizeInfoType_model", 
       verbose_name='Size per image format', 
       help_text='Used to give info on size of parts of a resource that d' \
       'iffer as to the format',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -5019,7 +5061,7 @@ class imageClassificationInfoType_model(SchemaModel):
       verbose_name='Size per image classification', 
       help_text='Provides information on size of parts with different im' \
       'age classification',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
 
@@ -5082,7 +5124,7 @@ class corpusTextNumericalInfoType_model(SchemaModel):
       verbose_name='Text numerical content', 
       help_text='Groups information on the content of the textNumerical ' \
       'part of the resource',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: textNumericalFormatInfo
 
@@ -5090,13 +5132,13 @@ class corpusTextNumericalInfoType_model(SchemaModel):
       verbose_name='Recording', 
       help_text='Groups together information on the recording of the aud' \
       'io or video part of a resource',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     captureInfo = models.OneToOneField("captureInfoType_model", 
       verbose_name='Capture', 
       help_text='Groups together information on the capture of the audio' \
       ' or video part of a corpus',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     creationInfo = models.OneToOneField("creationInfoType_model", 
       verbose_name='Creation', 
@@ -5104,13 +5146,13 @@ class corpusTextNumericalInfoType_model(SchemaModel):
       '.g. for corpora, selection of texts/audio files/ video files etc.' \
       ' and structural encoding thereof; for lexica, construction of lem' \
       'ma list etc.)',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     annotationInfo = models.OneToOneField("annotationInfoType_model", 
       verbose_name='Annotation', 
       help_text='Groups information on the annotated part(s) of a resour' \
       'ce',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: linkToOtherMediaInfo
 
@@ -5179,7 +5221,7 @@ class textNumericalFormatInfoType_model(SchemaModel):
       verbose_name='Size per text numerical format', 
       help_text='Gives information on the size of textNumerical resource' \
       ' parts with different format',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     back_to_corpustextnumericalinfotype_model = models.ForeignKey("corpusTextNumericalInfoType_model",  blank=True, null=True)
 
@@ -5259,7 +5301,7 @@ class corpusTextNgramInfoType_model(SchemaModel):
       verbose_name='Modality', 
       help_text='Groups information on the modalities represented in the' \
       ' resource',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: sizeInfo
 
@@ -5287,7 +5329,7 @@ class corpusTextNgramInfoType_model(SchemaModel):
       '.g. for corpora, selection of texts/audio files/ video files etc.' \
       ' and structural encoding thereof; for lexica, construction of lem' \
       'ma list etc.)',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
@@ -5401,7 +5443,8 @@ class relatedLexiconInfoType_model(SchemaModel):
       'e used with the grammar',
       
       max_length=30,
-      choices=RELATEDLEXICONINFOTYPE_RELATEDLEXICONTYPE_CHOICES['choices'],
+      choices=sorted(RELATEDLEXICONINFOTYPE_RELATEDLEXICONTYPE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     attachedLexiconPosition = models.CharField(
@@ -5543,13 +5586,13 @@ class languageDescriptionOperationInfoType_model(SchemaModel):
       verbose_name='Running environment', 
       help_text='Groups together information on the running environment ' \
       'of a tool or a language description',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     relatedLexiconInfo = models.OneToOneField("relatedLexiconInfoType_model", 
       verbose_name='Related lexicon', 
       help_text='Groups together information on requirements for lexica ' \
       'set by the LanguageDescriptions',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -5655,7 +5698,7 @@ class languageDescriptionTextInfoType_model(SchemaModel):
       '.g. for corpora, selection of texts/audio files/ video files etc.' \
       ' and structural encoding thereof; for lexica, construction of lem' \
       'ma list etc.)',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: linkToOtherMediaInfo
 
@@ -5671,7 +5714,7 @@ class languageDescriptionTextInfoType_model(SchemaModel):
       verbose_name='Modality', 
       help_text='Groups information on the modalities represented in the' \
       ' resource',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: sizeInfo
 
@@ -5746,7 +5789,7 @@ class languageDescriptionVideoInfoType_model(SchemaModel):
       '.g. for corpora, selection of texts/audio files/ video files etc.' \
       ' and structural encoding thereof; for lexica, construction of lem' \
       'ma list etc.)',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: linkToOtherMediaInfo
 
@@ -5754,7 +5797,7 @@ class languageDescriptionVideoInfoType_model(SchemaModel):
       verbose_name='Linguality', 
       help_text='Groups information on the number of languages of the re' \
       'source part and of the way they are combined to each other',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: languageInfo
 
@@ -5766,7 +5809,7 @@ class languageDescriptionVideoInfoType_model(SchemaModel):
       verbose_name='Video content', 
       help_text='Groups together information on the contents of the vide' \
       'o part of a resource',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     videoFormatInfo = models.ManyToManyField("videoFormatInfoType_model", 
       verbose_name='Video format', 
@@ -5839,7 +5882,7 @@ class languageDescriptionImageInfoType_model(SchemaModel):
       verbose_name='Linguality', 
       help_text='Groups information on the number of languages of the re' \
       'source part and of the way they are combined to each other',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: languageInfo
 
@@ -5849,7 +5892,7 @@ class languageDescriptionImageInfoType_model(SchemaModel):
       '.g. for corpora, selection of texts/audio files/ video files etc.' \
       ' and structural encoding thereof; for lexica, construction of lem' \
       'ma list etc.)',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: linkToOtherMediaInfo
 
@@ -5861,7 +5904,7 @@ class languageDescriptionImageInfoType_model(SchemaModel):
       verbose_name='Image content', 
       help_text='Groups together information on the contents of the imag' \
       'e part of a resource',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     imageFormatInfo = models.ManyToManyField("imageFormatInfoType_model", 
       verbose_name='Image format', 
@@ -6047,7 +6090,7 @@ class lexicalConceptualResourceAudioInfoType_model(SchemaModel):
       verbose_name='Linguality', 
       help_text='Groups information on the number of languages of the re' \
       'source part and of the way they are combined to each other',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: languageInfo
 
@@ -6059,7 +6102,7 @@ class lexicalConceptualResourceAudioInfoType_model(SchemaModel):
       verbose_name='Audio content', 
       help_text='Groups together information on the contents of the audi' \
       'o part of a resource',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: audioFormatInfo
 
@@ -6195,7 +6238,7 @@ class lexicalConceptualResourceVideoInfoType_model(SchemaModel):
       verbose_name='Linguality', 
       help_text='Groups information on the number of languages of the re' \
       'source part and of the way they are combined to each other',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: languageInfo
 
@@ -6277,7 +6320,7 @@ class lexicalConceptualResourceImageInfoType_model(SchemaModel):
       verbose_name='Linguality', 
       help_text='Groups information on the number of languages of the re' \
       'source part and of the way they are combined to each other',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: languageInfo
 
@@ -6287,7 +6330,7 @@ class lexicalConceptualResourceImageInfoType_model(SchemaModel):
       verbose_name='Image content', 
       help_text='Groups together information on the contents of the imag' \
       'e part of a resource',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     imageFormatInfo = models.ManyToManyField("imageFormatInfoType_model", 
       verbose_name='Image format', 
@@ -6932,7 +6975,7 @@ class toolServiceOperationInfoType_model(SchemaModel):
       verbose_name='Running environment', 
       help_text='Groups together information on the running environment ' \
       'of a tool or a language description',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     runningTime = models.CharField(
       verbose_name='Running time', 
@@ -7052,7 +7095,7 @@ class lexicalConceptualResourceInfoType_model(resourceComponentTypeType_model):
       verbose_name='Lexical conceptual resource encoding', 
       help_text='Groups all information regarding the contents of lexica' \
       'l/conceptual resources',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     creationInfo = models.OneToOneField("creationInfoType_model", 
       verbose_name='Creation', 
@@ -7060,7 +7103,7 @@ class lexicalConceptualResourceInfoType_model(resourceComponentTypeType_model):
       '.g. for corpora, selection of texts/audio files/ video files etc.' \
       ' and structural encoding thereof; for lexica, construction of lem' \
       'ma list etc.)',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     lexicalConceptualResourceMediaType = models.OneToOneField("lexicalConceptualResourceMediaTypeType_model", 
       verbose_name='Lexical conceptual resource media', 
@@ -7116,26 +7159,27 @@ class languageDescriptionInfoType_model(resourceComponentTypeType_model):
       help_text='The type of the language description',
       
       max_length=30,
-      choices=LANGUAGEDESCRIPTIONINFOTYPE_LANGUAGEDESCRIPTIONTYPE_CHOICES['choices'],
+      choices=sorted(LANGUAGEDESCRIPTIONINFOTYPE_LANGUAGEDESCRIPTIONTYPE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     languageDescriptionEncodingInfo = models.OneToOneField("languageDescriptionEncodingInfoType_model", 
       verbose_name='Language description encoding', 
       help_text='Groups together information on the contents of the Lang' \
       'uageDescriptions',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     languageDescriptionOperationInfo = models.OneToOneField("languageDescriptionOperationInfoType_model", 
       verbose_name='Language description operation', 
       help_text='Groups together information on the operation requiremen' \
       'ts of the Language Descriptions',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     languageDescriptionPerformanceInfo = models.OneToOneField("languageDescriptionPerformanceInfoType_model", 
       verbose_name='Language description performance', 
       help_text='Groups together information on the performance of the L' \
       'anguage Descriptions',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     creationInfo = models.OneToOneField("creationInfoType_model", 
       verbose_name='Creation', 
@@ -7143,7 +7187,7 @@ class languageDescriptionInfoType_model(resourceComponentTypeType_model):
       '.g. for corpora, selection of texts/audio files/ video files etc.' \
       ' and structural encoding thereof; for lexica, construction of lem' \
       'ma list etc.)',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     languageDescriptionMediaType = models.OneToOneField("languageDescriptionMediaTypeType_model", 
       verbose_name='Language description media', 
@@ -7200,7 +7244,8 @@ class toolServiceInfoType_model(resourceComponentTypeType_model):
       help_text='Specifies the type of the tool or service',
       
       max_length=100,
-      choices=TOOLSERVICEINFOTYPE_TOOLSERVICETYPE_CHOICES['choices'],
+      choices=sorted(TOOLSERVICEINFOTYPE_TOOLSERVICETYPE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     toolServiceSubtype = MultiTextField(max_length=100, widget = MultiFieldWidget(widget_id=59), 
@@ -7218,31 +7263,31 @@ class toolServiceInfoType_model(resourceComponentTypeType_model):
       verbose_name='Input', 
       help_text='Groups together information on the requirements set on ' \
       'the input resource of a tool or service',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     outputInfo = models.OneToOneField("outputInfoType_model", 
       verbose_name='Output', 
       help_text='Groups together information on the requirements set on ' \
       'the output of a tool or service',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     toolServiceOperationInfo = models.OneToOneField("toolServiceOperationInfoType_model", 
       verbose_name='Tool service operation', 
       help_text='Groups together information on the operation of a tool ' \
       'or service',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     toolServiceEvaluationInfo = models.OneToOneField("toolServiceEvaluationInfoType_model", 
       verbose_name='Tool service evaluation', 
       help_text='Groups together information on the evaluation status of' \
       ' a tool or service',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     toolServiceCreationInfo = models.OneToOneField("toolServiceCreationInfoType_model", 
       verbose_name='Tool service creation', 
       help_text='Groups together information on the creation of a tool o' \
       'r service',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
@@ -7317,7 +7362,7 @@ class corpusMediaTypeType_model(SchemaModel):
       verbose_name='Corpus audio', 
       help_text='Groups together information on the audio module of a co' \
       'rpus',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: corpusVideoInfo
 
@@ -7325,7 +7370,7 @@ class corpusMediaTypeType_model(SchemaModel):
       verbose_name='Corpus image', 
       help_text='Groups together information on the image component of a' \
       ' resource',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     corpusTextNumericalInfo = models.OneToOneField("corpusTextNumericalInfoType_model", 
       verbose_name='Corpus text numerical', 
@@ -7333,7 +7378,7 @@ class corpusMediaTypeType_model(SchemaModel):
       'ent of a corpus. It is used basically for the textual representat' \
       'ion of measurements and observations linked to sensorimotor recor' \
       'dings',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     corpusTextNgramInfo = models.OneToOneField("corpusTextNgramInfoType_model", 
       verbose_name='Corpus text ngram', 
@@ -7342,7 +7387,7 @@ class corpusMediaTypeType_model(SchemaModel):
       'om the source corpus (e.g. language coverage, size, format, domai' \
       'ns etc.) and features pertaining to the n-gram output itself (e.g' \
       '. range of n-grams, type of item included, etc.)',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -7575,21 +7620,21 @@ class languageDescriptionMediaTypeType_model(SchemaModel):
       help_text='Groups together all information relevant to the text mo' \
       'dule of a language description (e.g. format, languages, size etc.' \
       '); it is obligatory for all language descriptions',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     languageDescriptionVideoInfo = models.OneToOneField("languageDescriptionVideoInfoType_model", 
       verbose_name='Language description video', 
       help_text='Groups together all information relevant to the video p' \
       'arts of a language description (e.g. format, languages, size etc.' \
       '), if there are any (e.g. for sign language grammars)',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     languageDescriptionImageInfo = models.OneToOneField("languageDescriptionImageInfoType_model", 
       verbose_name='Language description image', 
       help_text='Groups together all information relevant to the image m' \
       'odule of a language description (e.g. format, languages, size etc' \
       '.), if there are any (e.g. for sign language grammars)',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -7620,25 +7665,25 @@ class lexicalConceptualResourceMediaTypeType_model(SchemaModel):
       verbose_name='Lexical conceptual resource text', 
       help_text='Groups information on the textual part of the lexical/c' \
       'onceptual resource',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     lexicalConceptualResourceAudioInfo = models.OneToOneField("lexicalConceptualResourceAudioInfoType_model", 
       verbose_name='Lexical conceptual resource audio', 
       help_text='Groups information on the audio part of the lexical/con' \
       'ceptual resource',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     lexicalConceptualResourceVideoInfo = models.OneToOneField("lexicalConceptualResourceVideoInfoType_model", 
       verbose_name='Lexical conceptual resource video', 
       help_text='Groups information on the video part of the lexical con' \
       'ceptual resource',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     lexicalConceptualResourceImageInfo = models.OneToOneField("lexicalConceptualResourceImageInfoType_model", 
       verbose_name='Lexical conceptual resource image', 
       help_text='Groups information on the image part of the lexical/con' \
       'ceptual resource',
-      blank=True, null=True, )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
