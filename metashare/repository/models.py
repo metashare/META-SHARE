@@ -4001,7 +4001,7 @@ class audioFormatInfoType_model(SchemaModel):
 
     byteOrder = models.CharField(
       verbose_name='Byte order', 
-      help_text='The byte order of 2 or more bytes sample',
+      help_text='The byte order of 2 or more bytessample',
       blank=True, 
       max_length=30,
       choices=sorted(AUDIOFORMATINFOTYPE_BYTEORDER_CHOICES['choices'],
@@ -4446,7 +4446,8 @@ class corpusVideoInfoType_model(SchemaModel):
       'different media types.',
       
       max_length=30,
-      choices=CORPUSVIDEOINFOTYPE_MEDIATYPE_CHOICES['choices'],
+      choices=sorted(CORPUSVIDEOINFOTYPE_MEDIATYPE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
@@ -7122,7 +7123,8 @@ class lexicalConceptualResourceInfoType_model(resourceComponentTypeType_model):
       help_text='Specifies the type of the resource being described',
       
       max_length=30,
-      choices=LEXICALCONCEPTUALRESOURCEINFOTYPE_RESOURCETYPE_CHOICES['choices'],
+      choices=sorted(LEXICALCONCEPTUALRESOURCEINFOTYPE_RESOURCETYPE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     lexicalConceptualResourceType = models.CharField(
@@ -7200,7 +7202,8 @@ class languageDescriptionInfoType_model(resourceComponentTypeType_model):
       help_text='Specifies the type of the resource being described',
       
       max_length=30,
-      choices=LANGUAGEDESCRIPTIONINFOTYPE_RESOURCETYPE_CHOICES['choices'],
+      choices=sorted(LANGUAGEDESCRIPTIONINFOTYPE_RESOURCETYPE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     languageDescriptionType = models.CharField(
@@ -7292,7 +7295,8 @@ class toolServiceInfoType_model(resourceComponentTypeType_model):
       's input or produces as output',
       
       max_length=30,
-      choices=TOOLSERVICEINFOTYPE_RESOURCETYPE_CHOICES['choices'],
+      choices=sorted(TOOLSERVICEINFOTYPE_RESOURCETYPE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     toolServiceType = models.CharField(
@@ -7379,7 +7383,8 @@ class corpusInfoType_model(resourceComponentTypeType_model):
       help_text='Specifies the type of the resource being described',
       
       max_length=30,
-      choices=CORPUSINFOTYPE_RESOURCETYPE_CHOICES['choices'],
+      choices=sorted(CORPUSINFOTYPE_RESOURCETYPE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     corpusMediaType = models.OneToOneField("corpusMediaTypeType_model", 
