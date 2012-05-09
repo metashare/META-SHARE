@@ -304,21 +304,21 @@ class identificationInfoType_model(SchemaModel):
     resourceName = DictField(validators=[validate_lang_code_keys],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Resource name', 
-      max_length=500, 
+      max_val_length=500, 
       help_text='The full name by which the resource is known',
       )
 
     description = DictField(validators=[validate_lang_code_keys],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Description', 
-      max_length=1000, 
+      max_val_length=1000, 
       help_text='Provides the description of the resource in prose',
       )
 
     resourceShortName = DictField(validators=[validate_lang_code_keys],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Resource short name', 
-      max_length=500, 
+      max_val_length=500, 
       help_text='The short form (abbreviation, acronym etc.) used to ide' \
       'ntify the resource',
       blank=True)
@@ -784,7 +784,7 @@ class documentInfoType_model(documentationInfoType_model):
     title = DictField(validators=[validate_lang_code_keys],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Title', 
-      max_length=500, 
+      max_val_length=500, 
       help_text='The title of the document reporting on the resource',
       )
 
@@ -1465,7 +1465,7 @@ class participantInfoType_model(SchemaModel):
     alias = DictField(validators=[validate_lang_code_keys],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Alias', 
-      max_length=500, 
+      max_val_length=500, 
       help_text='The name of the person used instead of the real one',
       blank=True)
 
@@ -1520,7 +1520,7 @@ class participantInfoType_model(SchemaModel):
     dialectAccent = DictField(validators=[validate_lang_code_keys],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Dialect accent', 
-      max_length=500, 
+      max_val_length=500, 
       help_text='Provides information on the dialect of the participant',
       blank=True)
 
@@ -2492,14 +2492,14 @@ class organizationInfoType_model(actorInfoType_model):
     organizationName = DictField(validators=[validate_lang_code_keys],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Organization name', 
-      max_length=100, 
+      max_val_length=100, 
       help_text='The full name of an organization',
       )
 
     organizationShortName = DictField(validators=[validate_lang_code_keys],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Organization short name', 
-      max_length=100, 
+      max_val_length=100, 
       help_text='The short name (abbreviation, acronym etc.) used for an' \
       ' organization',
       blank=True)
@@ -2557,7 +2557,7 @@ class personInfoType_model(actorInfoType_model):
     surname = DictField(validators=[validate_lang_code_keys],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Surname', 
-      max_length=100, 
+      max_val_length=100, 
       help_text='The surname (family name) of a person related to the re' \
       'source',
       )
@@ -2565,7 +2565,7 @@ class personInfoType_model(actorInfoType_model):
     givenName = DictField(validators=[validate_lang_code_keys],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Given name', 
-      max_length=100, 
+      max_val_length=100, 
       help_text='The given name (first name) of a person related to the ' \
       'resource; initials can also be used',
       blank=True)
@@ -2828,7 +2828,7 @@ class licenceInfoType_model(SchemaModel):
     attributionText = DictField(validators=[validate_lang_code_keys],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Attribution text', 
-      max_length=1000, 
+      max_val_length=1000, 
       help_text='The text that must be quoted for attribution purposes w' \
       'hen using a resource',
       blank=True)
@@ -3307,14 +3307,14 @@ class projectInfoType_model(SchemaModel):
     projectName = DictField(validators=[validate_lang_code_keys],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Project name', 
-      max_length=500, 
+      max_val_length=500, 
       help_text='The full name of a project related to the resource',
       )
 
     projectShortName = DictField(validators=[validate_lang_code_keys],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Project short name', 
-      max_length=500, 
+      max_val_length=500, 
       help_text='A short name or abbreviation of a project related to th' \
       'e resource',
       blank=True)

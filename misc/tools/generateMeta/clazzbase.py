@@ -761,7 +761,7 @@ class Clazz(object):
     def generate_myString_member(self, member, name, options):
         maxlen = member.get_maxlength()
         if maxlen:
-            options += "\n      max_length={}, ".format(maxlen)
+            options += "\n      max_val_length={}, ".format(maxlen)
 
         help_string = member.child.getHelpText()
         if help_string:

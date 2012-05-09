@@ -10,6 +10,7 @@ except:
 
 from django import forms
 from django.core import exceptions, validators
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.encoding import force_unicode
 from django.utils.functional import curry
@@ -394,22 +395,36 @@ class DictField(models.Field):
     information.
     """
     __metaclass__ = models.SubfieldBase
+    default_error_messages = {
+        # pylint: disable-msg=E1102
+        'key_too_long': _(u'A key must be at most {1} characters long, "{0}" '
+                          u'has {2} characters.'),
+        'val_too_long': _(u'The corresponding value for "{0}" must be at most '
+                          u'{1} characters long (was {2}).'),
+        'blank_key': _(u'Keys must not be empty.'),
+        'blank_value': _(u'Values must not be empty.'),
+    }
 
     def __init__(self, *args, **kwargs):
         """
         Initializes a new `DictField`.
         
         You might want to specify a `label` argument which is used in the
-        rendering of form fields of this custom field. Any `max_length` argument
-        will be used to restrict the size (in characters) of a dictionary entry
-        value (enforced only in form field validations!). Any
-        `default_retriever` argument may be a function taking a single Python
-        dictionary argument which overrides the default value retrieval.
+        rendering of form fields of this custom field. Any `default_retriever`
+        argument may be a function taking a single Python dictionary argument
+        which overrides the default value retrieval.
+        
+        Any `max_key_length`/`max_val_length` arguments specify the maximum
+        length of a dictionary entry key/value (there isno maximum length by
+        default). Any `blank_keys`/`blank_values` arguments denote whether
+        keys/values may be empty/None (both must not be empty by default).
         """
         kwargs['null'] = True
-        self.label = None
-        if 'label' in kwargs:
-            self.label = kwargs.pop('label')
+        self.label = kwargs.pop('label', None)
+        self.max_key_length = kwargs.pop('max_key_length', None)
+        self.max_val_length = kwargs.pop('max_val_length', None)
+        self.blank_keys = kwargs.pop('blank_keys', False)
+        self.blank_values = kwargs.pop('blank_values', False)
         if 'default_retriever' in kwargs:
             self.default_retriever = kwargs.pop('default_retriever')
         else:
@@ -438,11 +453,33 @@ class DictField(models.Field):
         a form.
         """
         defaults = { 'form_class': form_fields.DictField,
-                     'max_val_length': self.max_length }
+                     'max_key_length': self.max_key_length,
+                     'max_val_length': self.max_val_length }
         if self.label:
             defaults['label'] = self.label
         defaults.update(kwargs)
         return super(DictField, self).formfield(**defaults)
+
+    def validate(self, value, model_instance):
+        """
+        Validates the given dictionary value and throws `ValidationError`s.
+        """
+        super(DictField, self).validate(value, model_instance)
+        for key, val in value.iteritems():
+            # ensure that there are no blank keys
+            if not self.blank_keys and not key:
+                raise ValidationError(self.error_messages['blank_key'])
+            # ensure that there are no blank values
+            if not self.blank_values and not value:
+                raise ValidationError(self.error_messages['blank_value'])
+            # ensure that the provided entry's key is not too long
+            if self.max_key_length and len(key) > self.max_key_length:
+                raise ValidationError(self.error_messages['key_too_long']
+                                .format(key, self.max_key_length, len(key)))
+            # ensure that the provided entry's value is not too long
+            if self.max_val_length and len(val) > self.max_val_length:
+                raise ValidationError(self.error_messages['val_too_long']
+                                .format(key, self.max_val_length, len(val)))
 
     def get_prep_value(self, value):
         """
