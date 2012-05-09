@@ -13,9 +13,10 @@ from selectable.forms.widgets import AutoCompleteSelectMultipleWidget, \
     AutoCompleteSelectWidget
 from django.db import models
 from metashare.repository.models import actorInfoType_model, \
-    documentationInfoType_model, personInfoType_model
-from metashare.repository.editor.lookups import ActorLookup, DocumentLookup, \
-    PersonLookup
+    documentationInfoType_model, personInfoType_model, \
+    targetResourceInfoType_model, documentInfoType_model
+from metashare.repository.editor.lookups import ActorLookup, DocumentationLookup, \
+    PersonLookup, TargetResourceLookup, DocumentLookup
 
 class RelatedAdminMixin(object):
     '''
@@ -25,12 +26,14 @@ class RelatedAdminMixin(object):
     
     custom_m2m_widget_overrides = {
         actorInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=ActorLookup), 
-        documentationInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=DocumentLookup),
+        documentationInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=DocumentationLookup),
+        documentInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=DocumentLookup),
         personInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=PersonLookup),
+        targetResourceInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=TargetResourceLookup),
     }
     
     custom_o2m_widget_overrides = {
-        documentationInfoType_model: AutoCompleteSelectWidget(lookup_class=DocumentLookup),
+        documentationInfoType_model: AutoCompleteSelectWidget(lookup_class=DocumentationLookup),
     }
     
     def hide_hidden_fields(self, db_field, kwargs):
