@@ -311,7 +311,7 @@ class identificationInfoType_model(SchemaModel):
     description = DictField(validators=[validate_lang_code_keys],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Description', 
-      max_val_length=1000, 
+      max_val_length=10000, 
       help_text='Provides the description of the resource in prose',
       )
 
