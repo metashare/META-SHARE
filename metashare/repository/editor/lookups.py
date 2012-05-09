@@ -130,9 +130,9 @@ class ProjectLookup(ModelLookup):
         return results
     
     def get_item_label(self, item):
-        shortNames = ''.join(item.projectShortName)
+        short_names = ''.join(item.projectShortName)
         names = ''.join(item.projectName)
-        res = u'%s: %s' % (shortNames, names)
+        res = u'%s: %s' % (short_names, names)
         return res
     
     def get_item_id(self, item):
@@ -142,7 +142,6 @@ class OrganizationLookup(ModelLookup):
     model = organizationInfoType_model
     
     def get_query(self, request, term):
-        #results = super(PersonLookup, self).get_query(request, term)
         # Since MultiTextFields cannot be searched using query sets (they are base64-encoded and pickled),
         # we must do the searching by hand.
         # Note: this is inefficient, but in practice fast enough it seems (tested with >1000 resources)
@@ -166,9 +165,9 @@ class OrganizationLookup(ModelLookup):
         return results
 
     def get_item_label(self, item):
-        shortNames = ''.join(item.organizationShortName)
+        short_names = ''.join(item.organizationShortName)
         names = ''.join(item.organizationName)
-        res = u'%s: %s' % (shortNames, names)
+        res = u'%s: %s' % (short_names, names)
         return res
     
 

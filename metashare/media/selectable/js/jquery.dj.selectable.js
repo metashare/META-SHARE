@@ -45,7 +45,6 @@
             var title = $(input).attr('title');
             var jqItem = $('<li>')
             .attr('val_id', recId)
-            //.text($(input).attr('title'))
             .append($('<span>').addClass('title').text(title))
             .addClass('selectable-deck-item')
             .appendTo(this.deck)

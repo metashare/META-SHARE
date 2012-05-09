@@ -13,13 +13,12 @@ except:
 from django.forms.util import flatatt
 
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
-from django.forms import widgets, TextInput, MultiWidget
+from django.forms import widgets, TextInput
 from django.template.loader import render_to_string
 from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
-from selectable.forms.widgets import SelectableMediaMixin, SelectableMultiWidget,\
-    AutoCompleteWidget, LookupMultipleHiddenInput, AutoCompleteSelectMultipleWidget
-from django.forms.widgets import HiddenInput
+from selectable.forms.widgets import SelectableMediaMixin, SelectableMultiWidget, \
+    LookupMultipleHiddenInput
 from django.utils.http import urlencode
 from metashare import settings
 
@@ -335,9 +334,7 @@ class TestHiddenWidget(TextInput, SelectableMediaMixin):
         return attrs
 
     def render(self, name, value, attrs=None):
-        #icon = u'<img src="{0}img/admin/selector-search.gif" width="16" height="16" title="Type to search" />'.format(settings.ADMIN_MEDIA_PREFIX)
-        icon = u''
-        return mark_safe(icon + super(TestHiddenWidget, self).render(name, value, attrs))
+        return mark_safe(super(TestHiddenWidget, self).render(name, value, attrs))
 
 class OneToManyWidget(SelectableMultiWidget, SelectableMediaMixin):
 
@@ -351,14 +348,14 @@ class OneToManyWidget(SelectableMultiWidget, SelectableMediaMixin):
             u'data-selectable-allow-editing': 'true'
         }
         query_params = kwargs.pop('query_params', {})
-        widgets = [
+        widget_list = [
             TestHiddenWidget(
                 lookup_class, allow_new=False,
                 limit=self.limit, query_params=query_params, attrs=attrs
             ),
             LookupMultipleHiddenInput(lookup_class)
         ]
-        super(OneToManyWidget, self).__init__(widgets, *args, **kwargs)
+        super(OneToManyWidget, self).__init__(widget_list, *args, **kwargs)
 
     def value_from_datadict(self, data, files, name):
         return self.widgets[1].value_from_datadict(data, files, name + '_1')
@@ -368,3 +365,6 @@ class OneToManyWidget(SelectableMultiWidget, SelectableMediaMixin):
             value = [value]
         value = [u'', value]
         return super(OneToManyWidget, self).render(name, value, attrs)
+    
+    def decompress(self, value):
+        pass
