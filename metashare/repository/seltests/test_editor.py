@@ -373,6 +373,88 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("The Resource \"Test Tool\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
         
+
+    def test_sorting(self):
+        """
+        tests the sorting of controlled vocabulary in some examplary CharFields
+        used in the Editor
+        """
+        driver = self.driver
+        driver.get(self.base_url)
+        ss_path = setup_screenshots_folder(
+          "PNG-metashare.repository.seltests.test_editor.EditorTest",
+          "LR_creation_corpus_text")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))  
+        # login user
+        login_user(driver, "editoruser", "secret")
+        # make sure login was successful
+        self.assertEqual("Logout", 
+          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Editor
+        driver.find_element_by_css_selector("div.button.middle_button").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Share/Create Resource
+        mouse_over(driver, driver.find_element_by_link_text("Share/Create"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_link_text("Resource").click()
+        # create text corpus
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
+        driver.find_element_by_id("id_corpusTextInfo").click()
+        driver.find_element_by_id("id_submit").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("Add Resource", 
+          driver.find_element_by_css_selector("#content > h1").text)
+        # remember root window id
+        root_id = driver.current_window_handle
+        # distribution popup
+        driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
+        driver.switch_to_window("id_distributionInfo")
+        # check sorting of Availability
+        self.assertEqual("available-restrictedUse", driver.find_element_by_xpath(
+          "//select[@id='id_availability']/option[2]").text)
+        self.assertEqual("available-unrestrictedUse", driver.find_element_by_xpath(
+          "//select[@id='id_availability']/option[3]").text)
+        self.assertEqual("notAvailableThroughMetaShare", driver.find_element_by_xpath(
+          "//select[@id='id_availability']/option[4]").text)        
+        self.assertEqual("underNegotiation", driver.find_element_by_xpath(
+          "//select[@id='id_availability']/option[5]").text)
+        driver.find_element_by_name("_save").click()
+        driver.switch_to_window(root_id)
+        # corpus info text popup
+        driver.find_element_by_id("add_id_corpusTextInfo-0").click()
+        driver.switch_to_window("id_corpusTextInfo__dash__0")
+        # check sorting of Linguality
+        self.assertEqual("bilingual", driver.find_element_by_xpath(
+          "//select[@id='id_form-0-lingualityType']/option[2]").text)
+        self.assertEqual("monolingual", driver.find_element_by_xpath(
+          "//select[@id='id_form-0-lingualityType']/option[3]").text)
+        self.assertEqual("multilingual", driver.find_element_by_xpath(
+          "//select[@id='id_form-0-lingualityType']/option[4]").text)
+        # check sorting of Size unit
+        self.assertEqual("4-grams", driver.find_element_by_xpath(
+          "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[2]").text)
+        self.assertEqual("5-grams", driver.find_element_by_xpath(
+          "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[3]").text)
+        self.assertEqual("articles", driver.find_element_by_xpath(
+          "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[4]").text)
+        self.assertEqual("bigrams", driver.find_element_by_xpath(
+          "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[5]").text)
+        self.assertEqual("bytes", driver.find_element_by_xpath(
+          "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[6]").text)
+        self.assertEqual("classes", driver.find_element_by_xpath(
+          "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[7]").text)
+        self.assertEqual("concepts", driver.find_element_by_xpath(
+          "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[8]").text)                                        
+        self.assertEqual("diphones", driver.find_element_by_xpath(
+          "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[9]").text)
+        self.assertEqual("elements", driver.find_element_by_xpath(
+          "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[10]").text)    
+        # skip to end of list 
+        self.assertEqual("words", driver.find_element_by_xpath(
+          "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[49]").text)        
+
         
     def fill_distribution(self, driver, ss_path, parent_id):
         """
