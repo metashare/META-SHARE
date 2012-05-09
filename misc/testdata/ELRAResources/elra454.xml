@@ -15,7 +15,7 @@
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>2500.00</price>
+<fee>2500.00</fee>
 <userNature>academic</userNature>
 <membershipInfo>
 <member>false</member>
@@ -25,7 +25,7 @@
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>2000.00</price>
+<fee>2000.00</fee>
 <userNature>academic</userNature>
 <membershipInfo>
 <member>true</member>

@@ -21,7 +21,7 @@ The following hierarchy of names is used: forenames and surnames, city, country,
          <restrictionsOfUse>attribution</restrictionsOfUse>
          <distributionAccessMedium>downloadable</distributionAccessMedium>
          <downloadLocation>http://clip.ipipan.waw.pl/Gazetteer?action=AttachFile&amp;do=view&amp;target=gazetteer-nkjp-no-pwn.zip</downloadLocation>
-         <price>free of charge</price>
+         <fee>free of charge</fee>
          <distributionRightsHolder>
 				        <organizationInfo>
 					          <organizationName>Institute of Computer Science, Polish Academy of Sciences</organizationName>

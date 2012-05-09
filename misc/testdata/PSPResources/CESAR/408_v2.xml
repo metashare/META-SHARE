@@ -19,7 +19,7 @@
          <restrictionsOfUse>attribution</restrictionsOfUse>
          <distributionAccessMedium>downloadable</distributionAccessMedium>
          <downloadLocation>http://zil.ipipan.waw.pl/LUNA?action=AttachFile&amp;do=get&amp;target=LUNA-WOZ.PL.zip</downloadLocation>
-         <price>free of charge</price>
+         <fee>free of charge</fee>
          <distributionRightsHolder>
 				        <organizationInfo>
 					          <organizationName>Institute of Computer Science, Polish Academy of Sciences</organizationName>

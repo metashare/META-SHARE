@@ -15,7 +15,7 @@
 <licenceInfo>
 <licence>ELRA_EVALUATION</licence>
 <restrictionsOfUse>evaluationUse</restrictionsOfUse>
-<price>1000.00</price>
+<fee>1000.00</fee>
 <userNature>commercial</userNature>
 <membershipInfo>
 <member>false</member>
@@ -25,7 +25,7 @@
 <licenceInfo>
 <licence>ELRA_EVALUATION</licence>
 <restrictionsOfUse>evaluationUse</restrictionsOfUse>
-<price>300.00</price>
+<fee>300.00</fee>
 <userNature>academic</userNature>
 <membershipInfo>
 <member>false</member>
@@ -35,7 +35,7 @@
 <licenceInfo>
 <licence>ELRA_EVALUATION</licence>
 <restrictionsOfUse>evaluationUse</restrictionsOfUse>
-<price>500.00</price>
+<fee>500.00</fee>
 <userNature>commercial</userNature>
 <membershipInfo>
 <member>true</member>
@@ -45,7 +45,7 @@
 <licenceInfo>
 <licence>ELRA_EVALUATION</licence>
 <restrictionsOfUse>evaluationUse</restrictionsOfUse>
-<price>150.00</price>
+<fee>150.00</fee>
 <userNature>academic</userNature>
 <membershipInfo>
 <member>true</member>
