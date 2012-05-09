@@ -155,16 +155,17 @@ class RelatedAdminMixin(object):
             # escape() calls force_unicode.
             (escape(pk_value), escapejs(obj)))
 
-    def edit_response_close_popup_magic_o2m(self, obj):
+    def edit_response_close_popup_magic_o2m(self, obj, caller=None):
         '''
         For related popups, send the javascript that triggers
         (a) closing the popup, and
         (b) updating the parent field with the ID of the object we just edited.
         '''
         pk_value = obj._get_pk_val()
-        return HttpResponse('<script type="text/javascript">opener.dismissEditPopup(window, "%s", "%s");</script>' % \
+        caller = caller or 'opener'
+        return HttpResponse('<script type="text/javascript">%s.dismissEditPopup(window, "%s", "%s");</script>' % \
             # escape() calls force_unicode.
-            (escape(pk_value), escapejs(obj)))
+            (caller, escape(pk_value), escapejs(obj)))
 
 
 

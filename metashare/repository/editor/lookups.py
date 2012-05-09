@@ -96,30 +96,11 @@ class DocumentLookup(ModelLookup):
 
 class MembershipLookup(ModelLookup):
     '''
-    A special lookup which can represent values of both
-    the (structured) documentInfo type and the documentUnstructured text-only type,
-    but which performes lookup only on the structured entries.
+        Dummy class for use with OneToOneWidget.
+        Should be removed when unnecessary dependencies are
+        removed from OneToOneWidget
     '''
     model = membershipInfoType_model
-
-    def get_query(self, request, term):
-        # Since Subclassables and some other classes cannot be searched using query sets,
-        # we must do the searching by hand.
-        # Note: this is inefficient, but in practice fast enough it seems (tested with >1000 resources)
-        lcterm = term.lower()
-        def matches(item):
-            'Helper function to group the search code for a database item'
-            return lcterm in unicode(item).lower()
-        items = membershipInfoType_model.objects.get_query_set()
-        if term == '*':
-            results = items
-        else:
-            results = [p for p in items if matches(p)]
-        if results is not None:
-            print u'{} results'.format(results.__len__())
-        else:
-            print u'No results'
-        return results
 
 class ProjectLookup(ModelLookup):
     model = projectInfoType_model

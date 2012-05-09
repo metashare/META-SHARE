@@ -41,8 +41,12 @@
         _addDeckItem: function(input) {
             /* Add new deck list item from a given hidden input */
             var self = this;
+            var recId = $(input).attr('value');
+            var title = $(input).attr('title');
             var jqItem = $('<li>')
-            .text($(input).attr('title'))
+            .attr('val_id', recId)
+            //.text($(input).attr('title'))
+            .append($('<span>').addClass('title').text(title))
             .addClass('selectable-deck-item')
             .appendTo(this.deck)
             .append(
@@ -58,7 +62,15 @@
                         text: false
                     })
                     .click(function() {
-                        $(input).remove();
+                        if(self.allowEditing)
+                        {
+                        	var isSure = confirm("Are you sure you want to delete this item?");
+                        	if(!isSure)
+                        	{
+                        		return false;
+                        	}
+                        }
+                    	$(input).remove();
                         $(this).closest('li').remove();
                         return false;
                     })
@@ -81,7 +93,8 @@
                             .click(function() {
                                 var recId = $(input).attr('value');
                                 var link = self.baseEditingUrl + "/" + recId + "/";
-                                showEditPopup(link);
+                                var name = 'id_' + self.textName;
+                                showEditPopup(link, name, self);
                                 return false;
                             })
                         )
@@ -356,23 +369,72 @@ $(document).ready(function() {
     }
 });
 
-function showEditPopup(href)
+var lastWidget = null;
+var testIframe = false;
+
+function showEditPopup(href, name, widget)
 {
-    var name = triggeringLink.id.replace(/^add_/, '');
-    name = id_to_windowname(name);
-    href = triggeringLink.href
-    if (href.indexOf('?') == -1) {
+    lastWidget = widget;
+	if (href.indexOf('?') == -1) {
         href += '?_popup_o2m=1';
     } else {
-        href  += '&_popupo2m=1';
+        href  += '&_popup_o2m=1';
     }
-    var win = window.open(href, name, 'height=500,width=800,resizable=yes,scrollbars=yes');
-    win.focus();
+    if(!testIframe)
+    {
+    	href += '&_caller=opener'
+    	var win = window.open(href, name, 'height=500,width=800,resizable=yes,scrollbars=yes');
+        win.focus();
+    }
+    else
+    {
+    	href += '&_caller=top'
+    	openDialog(href);
+    }
     return false;
 }
 
 function dismissEditPopup(win, objId, newRepr)
 {
-	win.close();
+	var jqLi = lastWidget.deck.find('li[val_id=' + objId + ']');
+	var jqSpan = jqLi.find('span.title');
+	jqSpan.text(newRepr);
+	if(!testIframe)
+	{
+		win.close();
+	}
+	else
+	{
+		closeDialog();
+	}
+}
+
+
+//Test
+
+var jqDialog = null;
+
+function openDialog(href)
+{
+	jqDialog = $("<div>");
+	jqDialog.addClass("dialog");
+	var dialogOpts = {"modal": true, "width": "800", "height": "500"};
+	jqIframe = $("<iframe>");
+	jqIframe.css('width', '100%').css('height', '100%')
+	jqIframe.attr("src", href);
+	jqDialog.append(jqIframe);
+	$("body").append(jqDialog);
+	jqDialog.dialog(dialogOpts);
+}
+
+function closeDialog()
+{
+	jqIframe.remove();
+	jqIframe = null;
+	if(jqDialog != null)
+	{
+		jqDialog.remove();
+		jqDialog = null;
+	}
 }
 
