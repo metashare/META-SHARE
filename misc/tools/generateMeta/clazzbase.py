@@ -130,6 +130,12 @@ CHOICES_TEMPLATE_MAXLEN = """
       choices={0}['choices'],
       """
 
+SORTED_CHOICES_TEMPLATE_MAXLEN = """
+      max_length={1},
+      choices=sorted({0}['choices'],
+                     key=lambda choice: choice[1].lower()),
+      """
+
 MODEL_HEADER="""\
 # pylint: disable-msg=C0302
 import logging
@@ -711,8 +717,12 @@ class Clazz(object):
                 if maxlen:
                     logging.warn("max_length overwritten for choice of " \
                       "strings: {}".format(member))
-                    choice_options = \
-                      CHOICES_TEMPLATE_MAXLEN.format(choice_name, maxlen)
+                    if member.is_unbounded():
+                        choice_options = \
+                          CHOICES_TEMPLATE_MAXLEN.format(choice_name, maxlen)
+                    else:
+                        choice_options = \
+                          SORTED_CHOICES_TEMPLATE_MAXLEN.format(choice_name, maxlen)
                 else:
                     choice_options = CHOICES_TEMPLATE.format(choice_name)
                 
