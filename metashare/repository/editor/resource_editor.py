@@ -8,7 +8,7 @@ from metashare.repository.models import resourceComponentTypeType_model, \
     lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model, \
     metadataInfoType_model, resourceCreationInfoType_model, \
     resourceDocumentationInfoType_model, \
-    validationInfoType_model
+    validationInfoType_model, licenceInfoType_model
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
     ALLOWED_ARCHIVE_EXTENSIONS
 from metashare.utils import verify_subclass
