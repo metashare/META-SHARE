@@ -120,7 +120,6 @@
 				<xs:annotation>
 					<xs:documentation>The mime-type of the resource which is a formalized specifier for the format included or a mime-type that the tool/service accepts; value to be taken from a subset of the official mime types of the Internet Assigned Numbers Authority (http://www.iana.org/)</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<label>Mime type</label>
 					</xs:appinfo>
 				</xs:annotation>
@@ -130,7 +129,7 @@
 					<xs:documentation>Defines the colour space for the video</xs:documentation>
 					<xs:appinfo>
 						<recommended>true</recommended>
-						<relation>one-to-many</relation>
+						<!-- <relation>one-to-many</relation> -->
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:simpleType>
@@ -153,9 +152,9 @@
 			<xs:element ref="ms:compressionInfo" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Groups together information on the compression status and method of a resource</xs:documentation>
-					<xs:appinfo>
+					<!-- <xs:appinfo>
 						<relation>one-to-one</relation>
-					</xs:appinfo>
+					</xs:appinfo> -->
 				</xs:annotation>
 			</xs:element>
 			<xs:element ref="ms:resolutionInfo" minOccurs="0" maxOccurs="unbounded">
@@ -172,7 +171,6 @@
 					<xs:documentation>The dimensional form applied on video or image corpus</xs:documentation>
 					<xs:appinfo>
 						<maxlen>30</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:simpleType>
@@ -187,7 +185,6 @@
 					<xs:documentation>Indicates if the image is stored as raster or vector graphics</xs:documentation>
 					<xs:appinfo>
 						<maxlen>30</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:simpleType>
@@ -202,7 +199,6 @@
 					<xs:documentation>Specifies the quality level of image resource</xs:documentation>
 					<xs:appinfo>
 						<maxlen>30</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:simpleType>

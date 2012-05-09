@@ -127,7 +127,6 @@
 					<xs:documentation>Specifies the size of the resource with regard to the SizeUnit measurement in form of a number</xs:documentation>
 					<xs:appinfo>
 						<maxlen>30</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -159,9 +158,6 @@
 			<xs:element name="size" type="xs:integer">
 				<xs:annotation>
 					<xs:documentation>Specifies the size of the resource with regard to the SizeUnit measurement in form of a number</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="durationUnit">
@@ -195,7 +191,6 @@
 				<xs:annotation>
 					<xs:documentation>The mime-type of the resource which is a formalized specifier for the format included or a mime-type that the tool/service accepts; value to be taken from a subset of the official mime types of the Internet Assigned Numbers Authority (http://www.iana.org/)</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<label>Mime type</label>
 					</xs:appinfo>
 				</xs:annotation>
@@ -205,7 +200,6 @@
 					<xs:documentation>Specifies the  encoding the audio type uses</xs:documentation>
 					<xs:appinfo>
 						<recommended>true</recommended>
-						<relation>one-to-many</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -224,16 +218,13 @@
 					<xs:documentation>Specifies the format of files contained in the resource in Hertz</xs:documentation>
 					<xs:appinfo>
 						<recommended>true</recommended>
-						<relation>one-to-one</relation>
+						<!-- <relation>one-to-one</relation> -->
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="quantization" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>The number of bits for each audio sample</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="xs:integer">
@@ -248,7 +239,6 @@
 				<xs:annotation>
 					<xs:documentation>The byte order of 2 or more bytes sample</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -263,7 +253,6 @@
 				<xs:annotation>
 					<xs:documentation>Binary representation of numbers</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -287,7 +276,6 @@
 				<xs:annotation>
 					<xs:documentation>Specifies the audio quality measures</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -305,7 +293,6 @@
 				<xs:annotation>
 					<xs:documentation>Specifies the number of audio channels</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -322,7 +309,6 @@
 				<xs:annotation>
 					<xs:documentation>Indication of the audio or video recording quality</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -355,7 +341,6 @@
 			<xs:element name="audioGenre">
 				<xs:annotation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 					<xs:documentation>A first indication of type of sounds recorded</xs:documentation>
@@ -376,7 +361,6 @@
 				<xs:annotation>
 					<xs:appinfo>
 						<recommended>true</recommended>
-						<relation>one-to-one</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 					<xs:documentation>The conventionalized discourse of the content of the resource, based on extra-linguistic and internal linguistic criteria; the values here are intended only for speech</xs:documentation>
@@ -404,7 +388,6 @@
 					<xs:documentation>For corpora that have already been using subject classification</xs:documentation>
 					<xs:appinfo>
 						<maxlen>500</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -413,16 +396,12 @@
 					<xs:documentation>For corpora that have already been using register classification</xs:documentation>
 					<xs:appinfo>
 						<maxlen>500</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element ref="ms:conformanceToClassificationScheme" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Specifies the external classification schemes</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="sizePerAudioClassification" type="ms:sizeInfoType" minOccurs="0">

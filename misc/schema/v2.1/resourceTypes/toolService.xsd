@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited by ILSP/Athena R.C. -->
 <!--changes from v2.0:
-lable added for specific elements-->
+labels added for specific elements-->
 <xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.1" xml:lang="en">
 	<xs:include schemaLocation="../META-SHARE-SimpleTypes.xsd"/>
 	<xs:include schemaLocation="../META-SHARE-BaseTypes.xsd"/>
@@ -16,7 +16,6 @@ lable added for specific elements-->
 				<xs:annotation>
 					<xs:documentation>The type of the resource that a tool or service takes as input or produces as output</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>						
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>

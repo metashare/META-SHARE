@@ -52,7 +52,6 @@ lable added for specific elements-->
 				<xs:annotation>
 					<xs:documentation>Specifies the size of the resource with regard to the SizeUnit measurement in form of a number</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>100</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -61,13 +60,12 @@ lable added for specific elements-->
 				<xs:annotation>
 					<xs:documentation>Specifies the unit that is used when providing information on the size of the resource or of resource parts</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
-<xs:enumeration value="terms"/>
+						<xs:enumeration value="terms"/>
 						<xs:enumeration value="entries"/>
 						<xs:enumeration value="turns"/>
 						<xs:enumeration value="utterances"/>
@@ -137,7 +135,6 @@ lable added for specific elements-->
 		<xs:annotation>
 			<xs:documentation>Specifies the type of the modality represented in the resource or processed by a tool/service</xs:documentation>
 			<xs:appinfo>
-				<relation>one-to-many</relation>
 				<maxlen>30</maxlen>
 				<label>Modality type</label>
 			</xs:appinfo>

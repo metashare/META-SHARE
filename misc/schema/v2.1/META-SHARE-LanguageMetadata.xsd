@@ -51,7 +51,6 @@ label added for specific elements-->
 				<xs:annotation>
 					<xs:documentation>The time period that the content of a resource is about</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>100</maxlen>
 					</xs:appinfo>
 				</xs:annotation>

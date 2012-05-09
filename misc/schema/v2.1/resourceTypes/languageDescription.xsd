@@ -101,7 +101,6 @@ changed conformanceToStandardsBestPractices as ref -->
 				<xs:annotation>
 					<xs:documentation>Specifies the type of the resource being described</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -205,7 +204,6 @@ changed conformanceToStandardsBestPractices as ref -->
 							</xs:annotation>
 						</xs:element>
 						<!--<xs:element ref="ms:languageDescriptionAudioInfo"/>
-
                             <xs:element ref="ms:languageDescriptionTextNumericalInfo"/>
     -						-->
 					</xs:sequence>
