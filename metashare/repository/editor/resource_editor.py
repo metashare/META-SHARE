@@ -268,43 +268,6 @@ export_xml_resources.short_description = "Export description to XML selected pub
 
 from django import forms
 
-class MetadataForm(forms.ModelForm):
-    class Meta:
-        model = metadataInfoType_model
-        widgets = {'metadataCreator' : AutoCompleteSelectMultipleWidget(lookup_class=PersonLookup)}
-
-class ResourceDocumentationForm(forms.ModelForm):
-    class Meta:
-        model = resourceDocumentationInfoType_model
-        widgets = {'documentation' : AutoCompleteSelectMultipleWidget(lookup_class=DocumentLookup)}
-
-class ResourceCreationForm(forms.ModelForm):
-    class Meta:
-        model = resourceCreationInfoType_model
-        widgets = {'resourceCreator': AutoCompleteSelectMultipleWidget(lookup_class=ActorLookup),
-                   'fundingProject' : AutoCompleteSelectMultipleWidget(lookup_class=ProjectLookup)}
-
-class ValidationForm(forms.ModelForm):
-    class Meta:
-        model = validationInfoType_model
-        widgets = {'validator': AutoCompleteSelectMultipleWidget(lookup_class=ActorLookup)}
-
-class MetadataInline(ReverseInlineModelAdmin):
-    form = MetadataForm
-
-class ResourceCreationInline(ReverseInlineModelAdmin):
-    form = ResourceCreationForm
-                
-class ResourceDocumentationInline(ReverseInlineModelAdmin):
-    form = ResourceDocumentationForm
-    
-class ValidationInline(SchemaModelInline):
-    model = validationInfoType_model
-    form = ValidationForm
-    collapse = True
-
-
-
 class ResourceModelAdmin(SchemaModelAdmin):
     inline_type = 'stacked'
     custom_one2one_inlines = {'identificationInfo':IdentificationInline,
