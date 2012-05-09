@@ -313,20 +313,20 @@ class TestHiddenWidget(TextInput, SelectableMediaMixin):
     def __init__(self, lookup_class, *args, **kwargs):
         self.lookup_class = lookup_class
         self.allow_new = kwargs.pop('allow_new', False)
-        self.qs = kwargs.pop('query_params', {})
+        self.qset = kwargs.pop('query_params', {})
         self.limit = kwargs.pop('limit', None)
         super(TestHiddenWidget, self).__init__(*args, **kwargs)
 
     def update_query_parameters(self, qs_dict):
-        self.qs.update(qs_dict)
+        self.qset.update(qs_dict)
 
     def build_attrs(self, extra_attrs=None, **kwargs):
         attrs = super(TestHiddenWidget, self).build_attrs(extra_attrs, **kwargs)
         url = self.lookup_class.url()
-        if self.limit and 'limit' not in self.qs:
-            self.qs['limit'] = self.limit
-        if self.qs:
-            url = '%s?%s' % (url, urlencode(self.qs))
+        if self.limit and 'limit' not in self.qset:
+            self.qset['limit'] = self.limit
+        if self.qset:
+            url = '%s?%s' % (url, urlencode(self.qset))
         attrs[u'data-selectable-url'] = url
         attrs[u'data-selectable-type'] = 'text'
         attrs[u'data-selectable-allow-new'] = str(self.allow_new).lower()
