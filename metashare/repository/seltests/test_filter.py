@@ -74,6 +74,27 @@ class FilterTest(SeleniumTestCase):
           "//div[@id='searchFilters']/div[2]/div[4]").text)
         self.assertEqual("German (2)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[2]/div[5]").text)
+        self.assertEqual("more", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[2]/div[12]").text)
+        # check language filter more/less
+        driver.find_element_by_link_text("more").click()
+        self.assertEqual("Portuguese (2)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[2]/div[6]").text)
+        self.assertEqual("Arabic (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[2]/div[7]").text)
+        self.assertEqual("Chinese (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[2]/div[8]").text)
+        self.assertEqual("Estonian (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[2]/div[9]").text)
+        self.assertEqual("Thai (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[2]/div[10]").text)
+        self.assertEqual("Turkish (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[2]/div[11]").text)
+        self.assertEqual("less", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[2]/div[12]").text)
+        driver.find_element_by_link_text("less").click()
+        self.assertEqual("more", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[2]/div[12]").text)
         driver.find_element_by_link_text("Language").click()
         # check Licence filter
         driver.find_element_by_link_text("Licence").click()
@@ -117,6 +138,7 @@ class FilterTest(SeleniumTestCase):
         self.assertEqual("Evaluation Use (3)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[12]/div[3]").text)
         driver.find_element_by_link_text("Restrictions of Use").click()
+        # TODO: reactivate sorting tests when sorting is available again
         if False:
             # test sorting:
             # default sorting is by resource name, ascending
