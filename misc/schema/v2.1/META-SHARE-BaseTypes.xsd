@@ -781,7 +781,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>Specifies the annotation level of the resource or the annotation type a tool/ service requires or produces as an output</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<label>Annotation type</label>
 					</xs:appinfo>
 				</xs:annotation>
@@ -790,7 +789,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>Specifies the elements annotated in each annotation level</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1038,8 +1036,7 @@ label added for specific elements -->
 			<xs:element ref="ms:modalityType" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Specifies the type of the modality represented in the resource or processed by a tool/service</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-many</relation>
+					<xs:appinfo>						
 						<maxlen>35</maxlen>
 						<label>Modality type</label>
 					</xs:appinfo>
@@ -1049,7 +1046,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>Provides further information on modalities</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>500</maxlen>
 						<label>Modality type details</label>
 					</xs:appinfo>
@@ -1722,7 +1718,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>The nature of the recording platform hardware and the storage medium</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-many</relation>
 						<maxlen>30</maxlen>
 						<label>Recording device type</label>
 					</xs:appinfo>
@@ -1743,7 +1738,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>Free text description of the recoding device</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>500</maxlen>
 						<label>Recording device type details</label>
 					</xs:appinfo>
@@ -1753,7 +1747,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>The software used for the recording platform</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-many</relation>
 						<maxlen>100</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1762,7 +1755,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>Where the recording took place</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-many</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1786,7 +1778,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>Information on the source channel</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-many</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1809,7 +1800,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>Type of the source channel</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-many</relation>
 						<maxlen>30</maxlen>
 						<label>Source channel type</label>
 					</xs:appinfo>
@@ -1897,16 +1887,12 @@ label added for specific elements -->
 			<xs:element name="compression" type="xs:boolean">
 				<xs:annotation>
 					<xs:documentation>Whether the audio, video or image is compressed or not</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="compressionName" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>The name of the compression applied</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>100</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1931,7 +1917,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>Whether there is loss due to compression</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>100</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1941,16 +1926,12 @@ label added for specific elements -->
 	<xs:complexType name="linkToOtherMediaInfoType">
 		<xs:annotation>
 			<xs:documentation>Groups information on the way different media of the resource interact with or link to each other. To be used for multimodal resources or for resources representing sensorimotor data</xs:documentation>
-			<xs:appinfo>
-				<relation>one-to-one</relation>
-			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="otherMedia">
 				<xs:annotation>
 					<xs:documentation>Specifies the media types that are linked to the media type described within the same resource</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1968,7 +1949,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>Provides further information on the way the media types are linked and/or synchronized with each other within the same resource</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>500</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1976,41 +1956,26 @@ label added for specific elements -->
 			<xs:element name="synchronizedWithText" type="xs:boolean" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Whether video, text and textNumerical media type is synchronized with text within the same resource</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="synchronizedWithAudio" type="xs:boolean" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Whether text, video or textNumerical media type is synchronized with audio within the same resource</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="synchronizedWithVideo" type="xs:boolean" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Whether text or textNumerical media type is synchronized with video within the same resource</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="sycnhronizedWithImage" type="xs:boolean" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Whether text or textNumerical media type is synchronized with image within the same resource</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="synchronizedWithTextNumerical" type="xs:boolean" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Whether video or audio media type is synchronized with the textNumerical (representation of sensorimotor measurements) within the same resource </xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
