@@ -12,7 +12,7 @@ import time
 from django.core.management import call_command
 
 
-TESTFIXTURE_XML = '{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
+TESTFIXTURE_XML = '{}/repository/fixtures/ILSP10.xml'.format(ROOT_PATH)
 
 class EditorTest(SeleniumTestCase):
     
@@ -71,9 +71,8 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("Select Resource to change | META-SHARE backend", driver.title)
         # check if LR entry is available and that its status is published
         try: 
-            self.assertEqual(
-              "Italian TTS Speech Corpus (Appen)", 
-              driver.find_element_by_link_text("Italian TTS Speech Corpus (Appen)").text)
+            self.assertEqual("REVEAL-THIS Corpus",
+                driver.find_element_by_link_text("REVEAL-THIS Corpus").text)
         except AssertionError as e: 
             self.verification_errors.append(str(e))
         try: 
@@ -83,9 +82,8 @@ class EditorTest(SeleniumTestCase):
         except AssertionError as e: 
             self.verification_errors.append(str(e))
         # click LR to edit it
-        driver.find_element_by_link_text("Italian TTS Speech Corpus (Appen)").click()
-        # add a short name and save the LR
-        driver.find_element_by_xpath("//div[@id='form-0']/fieldset/div[3]/div/ul/li/a").click()
+        driver.find_element_by_link_text("REVEAL-THIS Corpus").click()
+        # change the short name and save the LR
         driver.find_element_by_name("key_form-0-resourceShortName_0").clear()
         driver.find_element_by_name("key_form-0-resourceShortName_0").send_keys("en")
         driver.find_element_by_name("val_form-0-resourceShortName_0").clear()
