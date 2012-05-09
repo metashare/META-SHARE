@@ -336,6 +336,12 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                         if parent_fk_name:
                             assert len(changes) == 1
                             setattr(new_object, parent_fk_name, changes[0])
+                    # If we have deleted a one-to-one inline, we must manually unset the field value.
+                    if formset.deleted_objects:
+                        parent_fk_name = getattr(formset, 'parent_fk_name', '')
+                        if parent_fk_name:
+                            setattr(new_object, parent_fk_name, None)
+                        
                 self.save_model(request, new_object, form, change=True)
                 form.save_m2m()
                 #### end modification ####
