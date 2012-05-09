@@ -197,7 +197,7 @@
                <annotationInfo>
                   <annotationType>segmentation</annotationType>
                   <segmentationLevel>sentence</segmentationLevel>
-                  <annotationFormat/>
+                  <annotationFormat>text/xml</annotationFormat>
                   <tagset/>
                   <theoreticModel/>
                   <annotationManual>
