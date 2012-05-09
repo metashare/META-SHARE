@@ -246,7 +246,8 @@ class sizeInfoType_model(SchemaModel):
       'ion on the size of the resource or of resource parts',
       
       max_length=30,
-      choices=SIZEINFOTYPE_SIZEUNIT_CHOICES['choices'],
+      choices=sorted(SIZEINFOTYPE_SIZEUNIT_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
@@ -446,7 +447,8 @@ class validationInfoType_model(SchemaModel):
       'formed',
       blank=True, 
       max_length=20,
-      choices=VALIDATIONINFOTYPE_VALIDATIONTYPE_CHOICES['choices'],
+      choices=sorted(VALIDATIONINFOTYPE_VALIDATIONTYPE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     validationMode = models.CharField(
@@ -454,7 +456,8 @@ class validationInfoType_model(SchemaModel):
       help_text='Specifies the validation methodology applied',
       blank=True, 
       max_length=20,
-      choices=VALIDATIONINFOTYPE_VALIDATIONMODE_CHOICES['choices'],
+      choices=sorted(VALIDATIONINFOTYPE_VALIDATIONMODE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     validationModeDetails = models.CharField(
@@ -467,7 +470,8 @@ class validationInfoType_model(SchemaModel):
       help_text='The resource coverage in terms of validated data',
       blank=True, 
       max_length=20,
-      choices=VALIDATIONINFOTYPE_VALIDATIONEXTENT_CHOICES['choices'],
+      choices=sorted(VALIDATIONINFOTYPE_VALIDATIONEXTENT_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     validationExtentDetails = models.CharField(
@@ -601,7 +605,8 @@ class creationInfoType_model(SchemaModel):
       ' or in a manual or interactive mode',
       blank=True, 
       max_length=30,
-      choices=CREATIONINFOTYPE_CREATIONMODE_CHOICES['choices'],
+      choices=sorted(CREATIONINFOTYPE_CREATIONMODE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     creationModeDetails = models.CharField(
@@ -765,7 +770,8 @@ class documentInfoType_model(documentationInfoType_model):
       'ated to the resource',
       
       max_length=30,
-      choices=DOCUMENTINFOTYPE_DOCUMENTTYPE_CHOICES['choices'],
+      choices=sorted(DOCUMENTINFOTYPE_DOCUMENTTYPE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     title = MultiTextField(widget = MultiFieldWidget(widget_id=7), 
@@ -1205,7 +1211,8 @@ class annotationInfoType_model(SchemaModel):
       ' by automatic processes',
       blank=True, 
       max_length=100,
-      choices=ANNOTATIONINFOTYPE_ANNOTATIONMODE_CHOICES['choices'],
+      choices=sorted(ANNOTATIONINFOTYPE_ANNOTATIONMODE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     annotationModeDetails = models.CharField(
@@ -1456,7 +1463,8 @@ class participantInfoType_model(SchemaModel):
       help_text='The age group to which the participant belongs',
       blank=True, 
       max_length=30,
-      choices=PARTICIPANTINFOTYPE_AGEGROUP_CHOICES['choices'],
+      choices=sorted(PARTICIPANTINFOTYPE_AGEGROUP_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     age = models.CharField(
@@ -1470,7 +1478,8 @@ class participantInfoType_model(SchemaModel):
       'he resource',
       blank=True, 
       max_length=30,
-      choices=PARTICIPANTINFOTYPE_SEX_CHOICES['choices'],
+      choices=sorted(PARTICIPANTINFOTYPE_SEX_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     origin = models.CharField(
@@ -1478,7 +1487,8 @@ class participantInfoType_model(SchemaModel):
       help_text='The language origin of the participant',
       blank=True, 
       max_length=30,
-      choices=PARTICIPANTINFOTYPE_ORIGIN_CHOICES['choices'],
+      choices=sorted(PARTICIPANTINFOTYPE_ORIGIN_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     placeOfLiving = models.CharField(
@@ -1525,7 +1535,8 @@ class participantInfoType_model(SchemaModel):
       ' may influence the speech of the participant',
       blank=True, 
       max_length=30,
-      choices=PARTICIPANTINFOTYPE_VOCALTRACTCONDITIONS_CHOICES['choices'],
+      choices=sorted(PARTICIPANTINFOTYPE_VOCALTRACTCONDITIONS_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     profession = models.CharField(
@@ -1634,7 +1645,8 @@ class captureInfoType_model(SchemaModel):
       help_text='Type of capturing environment',
       blank=True, 
       max_length=30,
-      choices=CAPTUREINFOTYPE_CAPTURINGENVIRONMENT_CHOICES['choices'],
+      choices=sorted(CAPTUREINFOTYPE_CAPTURINGENVIRONMENT_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     sensorTechnology = MultiTextField(max_length=200, widget = MultiFieldWidget(widget_id=15), 
@@ -1648,7 +1660,8 @@ class captureInfoType_model(SchemaModel):
       help_text='Information on the illumination of the scene',
       blank=True, 
       max_length=30,
-      choices=CAPTUREINFOTYPE_SCENEILLUMINATION_CHOICES['choices'],
+      choices=sorted(CAPTUREINFOTYPE_SCENEILLUMINATION_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     personSourceSetInfo = models.OneToOneField("personSourceSetInfoType_model", 
@@ -1746,7 +1759,8 @@ class personSourceSetInfoType_model(SchemaModel):
       help_text='The gender of the group of participants',
       blank=True, 
       max_length=30,
-      choices=PERSONSOURCESETINFOTYPE_SEXOFPERSONS_CHOICES['choices'],
+      choices=sorted(PERSONSOURCESETINFOTYPE_SEXOFPERSONS_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     originOfPersons = models.CharField(
@@ -1754,7 +1768,8 @@ class personSourceSetInfoType_model(SchemaModel):
       help_text='The language origin of the group of participants',
       blank=True, 
       max_length=30,
-      choices=PERSONSOURCESETINFOTYPE_ORIGINOFPERSONS_CHOICES['choices'],
+      choices=sorted(PERSONSOURCESETINFOTYPE_ORIGINOFPERSONS_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     dialectAccentOfPersons = MultiTextField(max_length=500, widget = MultiFieldWidget(widget_id=16), 
@@ -1775,7 +1790,8 @@ class personSourceSetInfoType_model(SchemaModel):
       ' hearing impairments',
       blank=True, 
       max_length=30,
-      choices=PERSONSOURCESETINFOTYPE_HEARINGIMPAIRMENTOFPERSONS_CHOICES['choices'],
+      choices=sorted(PERSONSOURCESETINFOTYPE_HEARINGIMPAIRMENTOFPERSONS_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     speakingImpairmentOfPersons = models.CharField(
@@ -1784,7 +1800,8 @@ class personSourceSetInfoType_model(SchemaModel):
       'with speakingimpairments',
       blank=True, 
       max_length=30,
-      choices=PERSONSOURCESETINFOTYPE_SPEAKINGIMPAIRMENTOFPERSONS_CHOICES['choices'],
+      choices=sorted(PERSONSOURCESETINFOTYPE_SPEAKINGIMPAIRMENTOFPERSONS_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     numberOfTrainedSpeakers = models.IntegerField(
@@ -1857,7 +1874,8 @@ class settingInfoType_model(SchemaModel):
       'edia resources',
       blank=True, 
       max_length=30,
-      choices=SETTINGINFOTYPE_NATURALITY_CHOICES['choices'],
+      choices=sorted(SETTINGINFOTYPE_NATURALITY_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     conversationalType = models.CharField(
@@ -1865,7 +1883,8 @@ class settingInfoType_model(SchemaModel):
       help_text='Specifies the conversational type of the resource',
       blank=True, 
       max_length=30,
-      choices=SETTINGINFOTYPE_CONVERSATIONALTYPE_CHOICES['choices'],
+      choices=sorted(SETTINGINFOTYPE_CONVERSATIONALTYPE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     scenarioType = models.CharField(
@@ -1874,7 +1893,8 @@ class settingInfoType_model(SchemaModel):
       'interaction of participants',
       blank=True, 
       max_length=30,
-      choices=SETTINGINFOTYPE_SCENARIOTYPE_CHOICES['choices'],
+      choices=sorted(SETTINGINFOTYPE_SCENARIOTYPE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     audience = models.CharField(
@@ -1882,7 +1902,8 @@ class settingInfoType_model(SchemaModel):
       help_text='Indication of the intended audience size',
       blank=True, 
       max_length=30,
-      choices=SETTINGINFOTYPE_AUDIENCE_CHOICES['choices'],
+      choices=sorted(SETTINGINFOTYPE_AUDIENCE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     interactivity = models.CharField(
@@ -1892,7 +1913,8 @@ class settingInfoType_model(SchemaModel):
       'onent)',
       blank=True, 
       max_length=30,
-      choices=SETTINGINFOTYPE_INTERACTIVITY_CHOICES['choices'],
+      choices=sorted(SETTINGINFOTYPE_INTERACTIVITY_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     interaction = models.CharField(
@@ -2116,7 +2138,8 @@ class resolutionInfoType_model(SchemaModel):
       help_text='The standard to which the resolution conforms',
       blank=True, 
       max_length=50,
-      choices=RESOLUTIONINFOTYPE_RESOLUTIONSTANDARD_CHOICES['choices'],
+      choices=sorted(RESOLUTIONINFOTYPE_RESOLUTIONSTANDARD_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     back_to_videoformatinfotype_model = models.ForeignKey("videoFormatInfoType_model",  blank=True, null=True)
@@ -2205,7 +2228,8 @@ class linkToOtherMediaInfoType_model(SchemaModel):
       'type described within the same resource',
       
       max_length=30,
-      choices=LINKTOOTHERMEDIAINFOTYPE_OTHERMEDIA_CHOICES['choices'],
+      choices=sorted(LINKTOOTHERMEDIAINFOTYPE_OTHERMEDIA_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     mediaTypeDetails = models.CharField(
@@ -2530,7 +2554,8 @@ class personInfoType_model(actorInfoType_model):
       'he resource',
       blank=True, 
       max_length=30,
-      choices=PERSONINFOTYPE_SEX_CHOICES['choices'],
+      choices=sorted(PERSONINFOTYPE_SEX_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     communicationInfo = models.OneToOneField("communicationInfoType_model", 
@@ -2594,7 +2619,8 @@ class distributionInfoType_model(SchemaModel):
       'of availability',
       
       max_length=40,
-      choices=DISTRIBUTIONINFOTYPE_AVAILABILITY_CHOICES['choices'],
+      choices=sorted(DISTRIBUTIONINFOTYPE_AVAILABILITY_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     # OneToMany field: licenceInfo
@@ -3061,7 +3087,8 @@ class lingualityInfoType_model(SchemaModel):
       'e languages',
       
       max_length=20,
-      choices=LINGUALITYINFOTYPE_LINGUALITYTYPE_CHOICES['choices'],
+      choices=sorted(LINGUALITYINFOTYPE_LINGUALITYTYPE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     multilingualityType = models.CharField(
@@ -3070,7 +3097,8 @@ class lingualityInfoType_model(SchemaModel):
       ' mixed',
       blank=True, 
       max_length=30,
-      choices=LINGUALITYINFOTYPE_MULTILINGUALITYTYPE_CHOICES['choices'],
+      choices=sorted(LINGUALITYINFOTYPE_MULTILINGUALITYTYPE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     multilingualityTypeDetails = models.CharField(
@@ -3116,7 +3144,8 @@ class languageVarietyInfoType_model(SchemaModel):
       'in the resource or is supported by a tool/service',
       
       max_length=20,
-      choices=LANGUAGEVARIETYINFOTYPE_LANGUAGEVARIETYTYPE_CHOICES['choices'],
+      choices=sorted(LANGUAGEVARIETYINFOTYPE_LANGUAGEVARIETYTYPE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     languageVarietyName = models.CharField(
@@ -3416,7 +3445,8 @@ class foreseenUseInfoType_model(SchemaModel):
       help_text='Classification of the intended use of the resource',
       
       max_length=30,
-      choices=FORESEENUSEINFOTYPE_FORESEENUSE_CHOICES['choices'],
+      choices=sorted(FORESEENUSEINFOTYPE_FORESEENUSE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     useNLPSpecific = MultiSelectField(
@@ -3506,7 +3536,8 @@ class actualUseInfoType_model(SchemaModel):
       help_text='Classification of the actual use of the resource',
       
       max_length=30,
-      choices=ACTUALUSEINFOTYPE_ACTUALUSE_CHOICES['choices'],
+      choices=sorted(ACTUALUSEINFOTYPE_ACTUALUSE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     useNLPSpecific = MultiSelectField(
@@ -3762,7 +3793,8 @@ class audioContentInfoType_model(SchemaModel):
       help_text='Specifies the level of background noise',
       blank=True, 
       max_length=30,
-      choices=AUDIOCONTENTINFOTYPE_NOISELEVEL_CHOICES['choices'],
+      choices=sorted(AUDIOCONTENTINFOTYPE_NOISELEVEL_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     def __unicode__(self):
@@ -3881,7 +3913,8 @@ class durationOfAudioInfoType_model(SchemaModel):
       'viding information on the size of a resource',
       
       max_length=30,
-      choices=DURATIONOFAUDIOINFOTYPE_DURATIONUNIT_CHOICES['choices'],
+      choices=sorted(DURATIONOFAUDIOINFOTYPE_DURATIONUNIT_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     back_to_audiosizeinfotype_model = models.ForeignKey("audioSizeInfoType_model",  blank=True, null=True)
@@ -3973,7 +4006,8 @@ class audioFormatInfoType_model(SchemaModel):
       help_text='The byte order of 2 or more bytes sample',
       blank=True, 
       max_length=30,
-      choices=AUDIOFORMATINFOTYPE_BYTEORDER_CHOICES['choices'],
+      choices=sorted(AUDIOFORMATINFOTYPE_BYTEORDER_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     signConvention = models.CharField(
@@ -3981,7 +4015,8 @@ class audioFormatInfoType_model(SchemaModel):
       help_text='Binary representation of numbers',
       blank=True, 
       max_length=30,
-      choices=AUDIOFORMATINFOTYPE_SIGNCONVENTION_CHOICES['choices'],
+      choices=sorted(AUDIOFORMATINFOTYPE_SIGNCONVENTION_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     compressionInfo = models.OneToOneField("compressionInfoType_model", 
@@ -3995,7 +4030,8 @@ class audioFormatInfoType_model(SchemaModel):
       help_text='Specifies the audio quality measures',
       blank=True, 
       max_length=30,
-      choices=AUDIOFORMATINFOTYPE_AUDIOQUALITYMEASURESINCLUDED_CHOICES['choices'],
+      choices=sorted(AUDIOFORMATINFOTYPE_AUDIOQUALITYMEASURESINCLUDED_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     numberOfTracks = models.IntegerField(
@@ -4008,7 +4044,8 @@ class audioFormatInfoType_model(SchemaModel):
       help_text='Indication of the audio or video recording quality',
       blank=True, 
       max_length=30,
-      choices=AUDIOFORMATINFOTYPE_RECORDINGQUALITY_CHOICES['choices'],
+      choices=sorted(AUDIOFORMATINFOTYPE_RECORDINGQUALITY_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     sizePerAudioFormat = models.OneToOneField("sizeInfoType_model", 
@@ -4075,7 +4112,8 @@ class audioClassificationInfoType_model(SchemaModel):
       help_text='A first indication of type of sounds recorded',
       
       max_length=30,
-      choices=AUDIOCLASSIFICATIONINFOTYPE_AUDIOGENRE_CHOICES['choices'],
+      choices=sorted(AUDIOCLASSIFICATIONINFOTYPE_AUDIOGENRE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     speechGenre = models.CharField(
@@ -4085,7 +4123,8 @@ class audioClassificationInfoType_model(SchemaModel):
       'a; the values here are intended only for speech',
       blank=True, 
       max_length=30,
-      choices=AUDIOCLASSIFICATIONINFOTYPE_SPEECHGENRE_CHOICES['choices'],
+      choices=sorted(AUDIOCLASSIFICATIONINFOTYPE_SPEECHGENRE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     subject_topic = models.CharField(
@@ -4936,7 +4975,8 @@ class imageFormatInfoType_model(SchemaModel):
       help_text='The dimensional form applied on video or image corpus',
       blank=True, 
       max_length=30,
-      choices=IMAGEFORMATINFOTYPE_VISUALMODELLING_CHOICES['choices'],
+      choices=sorted(IMAGEFORMATINFOTYPE_VISUALMODELLING_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     rasterOrVectorGraphics = models.CharField(
@@ -4945,7 +4985,8 @@ class imageFormatInfoType_model(SchemaModel):
       'aphics',
       blank=True, 
       max_length=30,
-      choices=IMAGEFORMATINFOTYPE_RASTERORVECTORGRAPHICS_CHOICES['choices'],
+      choices=sorted(IMAGEFORMATINFOTYPE_RASTERORVECTORGRAPHICS_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     quality = models.CharField(
@@ -4953,7 +4994,8 @@ class imageFormatInfoType_model(SchemaModel):
       help_text='Specifies the quality level of image resource',
       blank=True, 
       max_length=30,
-      choices=IMAGEFORMATINFOTYPE_QUALITY_CHOICES['choices'],
+      choices=sorted(IMAGEFORMATINFOTYPE_QUALITY_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     sizePerImageFormat = models.OneToOneField("sizeInfoType_model", 
@@ -5401,7 +5443,8 @@ class relatedLexiconInfoType_model(SchemaModel):
       'e used with the grammar',
       
       max_length=30,
-      choices=RELATEDLEXICONINFOTYPE_RELATEDLEXICONTYPE_CHOICES['choices'],
+      choices=sorted(RELATEDLEXICONINFOTYPE_RELATEDLEXICONTYPE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     attachedLexiconPosition = models.CharField(
@@ -7116,7 +7159,8 @@ class languageDescriptionInfoType_model(resourceComponentTypeType_model):
       help_text='The type of the language description',
       
       max_length=30,
-      choices=LANGUAGEDESCRIPTIONINFOTYPE_LANGUAGEDESCRIPTIONTYPE_CHOICES['choices'],
+      choices=sorted(LANGUAGEDESCRIPTIONINFOTYPE_LANGUAGEDESCRIPTIONTYPE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     languageDescriptionEncodingInfo = models.OneToOneField("languageDescriptionEncodingInfoType_model", 
@@ -7200,7 +7244,8 @@ class toolServiceInfoType_model(resourceComponentTypeType_model):
       help_text='Specifies the type of the tool or service',
       
       max_length=100,
-      choices=TOOLSERVICEINFOTYPE_TOOLSERVICETYPE_CHOICES['choices'],
+      choices=sorted(TOOLSERVICEINFOTYPE_TOOLSERVICETYPE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     toolServiceSubtype = MultiTextField(max_length=100, widget = MultiFieldWidget(widget_id=59), 
