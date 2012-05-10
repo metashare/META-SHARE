@@ -8,15 +8,21 @@ from django.http import HttpResponse
 from django.utils.html import escape, escapejs
 
 from metashare.repository.editor.related_widget import RelatedFieldWidgetWrapper
-from metashare.repository.editor.widgets import SubclassableRelatedFieldWidgetWrapper
+from metashare.repository.editor.widgets import SubclassableRelatedFieldWidgetWrapper, \
+    OneToManyWidget
 from selectable.forms.widgets import AutoCompleteSelectMultipleWidget, \
     AutoCompleteSelectWidget
 from django.db import models
 from metashare.repository.models import actorInfoType_model, \
-    documentationInfoType_model, personInfoType_model, \
+    documentationInfoType_model, \
+    organizationInfoType_model, projectInfoType_model,\
+    membershipInfoType_model, \
+    personInfoType_model, \
     targetResourceInfoType_model, documentInfoType_model
-from metashare.repository.editor.lookups import ActorLookup, DocumentationLookup, \
-    PersonLookup, TargetResourceLookup, DocumentLookup
+from metashare.repository.editor.lookups import ActorLookup, \
+    OrganizationLookup, ProjectLookup, MembershipLookup, \
+    PersonLookup, TargetResourceLookup, DocumentLookup, \
+    DocumentationLookup
 
 class RelatedAdminMixin(object):
     '''
@@ -29,6 +35,9 @@ class RelatedAdminMixin(object):
         documentationInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=DocumentationLookup),
         documentInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=DocumentLookup),
         personInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=PersonLookup),
+        organizationInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=OrganizationLookup),
+        projectInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=ProjectLookup),
+        membershipInfoType_model: OneToManyWidget(lookup_class=MembershipLookup),
         targetResourceInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=TargetResourceLookup),
     }
     
@@ -123,7 +132,8 @@ class RelatedAdminMixin(object):
         if formfield and \
                 isinstance(formfield.widget, admin.widgets.RelatedFieldWidgetWrapper) and \
                 not isinstance(formfield.widget.widget, SelectMultiple) and \
-                not ('widget' in kwargs and isinstance(kwargs['widget'], AutoCompleteSelectMultipleWidget)):
+                not ('widget' in kwargs and isinstance(kwargs['widget'], AutoCompleteSelectMultipleWidget)) and \
+                not ('widget' in kwargs and isinstance(kwargs['widget'], OneToManyWidget)):
             return True
         return False
 
@@ -150,6 +160,18 @@ class RelatedAdminMixin(object):
         return HttpResponse('<script type="text/javascript">opener.dismissEditRelatedPopup(window, "%s", "%s");</script>' % \
             # escape() calls force_unicode.
             (escape(pk_value), escapejs(obj)))
+
+    def edit_response_close_popup_magic_o2m(self, obj, caller=None):
+        '''
+        For related popups, send the javascript that triggers
+        (a) closing the popup, and
+        (b) updating the parent field with the ID of the object we just edited.
+        '''
+        pk_value = obj._get_pk_val()
+        caller = caller or 'opener'
+        return HttpResponse('<script type="text/javascript">%s.dismissEditPopup(window, "%s", "%s");</script>' % \
+            # escape() calls force_unicode.
+            (caller, escape(pk_value), escapejs(obj)))
 
 
 

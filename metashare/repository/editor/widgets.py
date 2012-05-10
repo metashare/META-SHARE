@@ -13,7 +13,9 @@ from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
 from django.forms import widgets, TextInput, Textarea
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
-
+from selectable.forms.widgets import SelectableMediaMixin, SelectableMultiWidget, \
+    LookupMultipleHiddenInput
+from django.utils.http import urlencode
 from metashare import settings
 
 # Setup logging support.
@@ -351,3 +353,63 @@ class MultiFieldWidget(widgets.Widget):
             pass
         
         return initial != _data
+
+class TestHiddenWidget(TextInput, SelectableMediaMixin):
+    def __init__(self, lookup_class, *args, **kwargs):
+        self.lookup_class = lookup_class
+        self.allow_new = kwargs.pop('allow_new', False)
+        self.qset = kwargs.pop('query_params', {})
+        self.limit = kwargs.pop('limit', None)
+        super(TestHiddenWidget, self).__init__(*args, **kwargs)
+
+    def update_query_parameters(self, qs_dict):
+        self.qset.update(qs_dict)
+
+    def build_attrs(self, extra_attrs=None, **kwargs):
+        attrs = super(TestHiddenWidget, self).build_attrs(extra_attrs, **kwargs)
+        url = self.lookup_class.url()
+        if self.limit and 'limit' not in self.qset:
+            self.qset['limit'] = self.limit
+        if self.qset:
+            url = '%s?%s' % (url, urlencode(self.qset))
+        attrs[u'data-selectable-url'] = url
+        attrs[u'data-selectable-type'] = 'text'
+        attrs[u'data-selectable-allow-new'] = str(self.allow_new).lower()
+        attrs[u'type'] = 'hidden'
+        return attrs
+
+    def render(self, name, value, attrs=None):
+        return mark_safe(super(TestHiddenWidget, self).render(name, value, attrs))
+
+class OneToManyWidget(SelectableMultiWidget, SelectableMediaMixin):
+
+    def __init__(self, lookup_class, *args, **kwargs):
+        self.lookup_class = lookup_class
+        self.limit = kwargs.pop('limit', None)
+        position = kwargs.pop('position', 'bottom')
+        attrs = {
+            u'data-selectable-multiple': 'true',
+            u'data-selectable-position': position,
+            u'data-selectable-allow-editing': 'true'
+        }
+        query_params = kwargs.pop('query_params', {})
+        widget_list = [
+            TestHiddenWidget(
+                lookup_class, allow_new=False,
+                limit=self.limit, query_params=query_params, attrs=attrs
+            ),
+            LookupMultipleHiddenInput(lookup_class)
+        ]
+        super(OneToManyWidget, self).__init__(widget_list, *args, **kwargs)
+
+    def value_from_datadict(self, data, files, name):
+        return self.widgets[1].value_from_datadict(data, files, name + '_1')
+
+    def render(self, name, value, attrs=None):
+        if value and not hasattr(value, '__iter__'):
+            value = [value]
+        value = [u'', value]
+        return super(OneToManyWidget, self).render(name, value, attrs)
+    
+    def decompress(self, value):
+        pass
