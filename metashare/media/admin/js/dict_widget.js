@@ -2,7 +2,7 @@
   $(document).ready(function() {
     // add handlers to the delete buttons:
     $('a.kvPairDeleteButton').click(function() {
-        var liToRemove = $(this).parent().parent();
+        var liToRemove = $(this).parent();
         liToRemove.nextAll().find('input,textarea').each(function(){
             $(this).attr('name', $(this).attr('name').replace(
                 /(\d+)$/, function(s, n) {return parseInt(n) - 1;}));
@@ -10,7 +10,8 @@
         var remainingLis = liToRemove.siblings();
         if (remainingLis.length == 2
             && remainingLis.parent('.pairsRequired').length) {
-          remainingLis.first().find('a.kvPairDeleteButton').hide();
+          remainingLis.first().find('a.kvPairDeleteButton')
+            .addClass('kvPairDeleteButtonHidden');
         }
         liToRemove.remove();
       });
@@ -19,7 +20,8 @@
     $('ul.keyValuePairs.pairsRequired').each(function(){
         var pairs = $(this).children();
         if (pairs.length == 2) {
-          pairs.first().find('a.kvPairDeleteButton').hide();
+          pairs.first().find('a.kvPairDeleteButton')
+            .addClass('kvPairDeleteButtonHidden');
         }
       });
     // add a handler to the button for adding further key value pairs:
@@ -32,7 +34,7 @@
               $(this).attr('name') + (list.children().length - 1));
           });
         successor.before(newEntry);
-        list.find('a.kvPairDeleteButton').show();
+        list.find('a.kvPairDeleteButton').removeClass('kvPairDeleteButtonHidden');
       });
   });
 })(django.jQuery);
