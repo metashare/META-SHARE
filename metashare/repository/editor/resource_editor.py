@@ -258,7 +258,7 @@ def export_xml_resources(modeladmin, request, queryset):
         response.write(in_memory.read())  
 
         return response
-export_xml_resources.short_description = "Export description to XML selected published resources"
+export_xml_resources.short_description = "Export selected resource descriptions to XML"
 
 
 
