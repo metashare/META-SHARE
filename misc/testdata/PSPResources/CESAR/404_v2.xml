@@ -19,7 +19,7 @@
          <restrictionsOfUse>shareAlike</restrictionsOfUse>
          <distributionAccessMedium>downloadable</distributionAccessMedium>
          <downloadLocation>http://clip.ipipan.waw.pl/Nerf?action=AttachFile&amp;do=get&amp;target=nerf.dist.0.2.tgz</downloadLocation>
-         <price>free of charge</price>
+         <fee>free of charge</fee>
          <distributionRightsHolder>
 				        <organizationInfo>
 					          <organizationName>Institute of Computer Science, Polish Academy of Sciences</organizationName>

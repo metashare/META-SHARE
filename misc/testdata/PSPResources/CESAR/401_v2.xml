@@ -21,7 +21,7 @@ The data is a valuable source of linguistic information, being a large (100 M se
          <restrictionsOfUse>attribution</restrictionsOfUse>
          <distributionAccessMedium>downloadable</distributionAccessMedium>
          <downloadLocation>http://clip.ipipan.waw.pl/PSC</downloadLocation>
-         <price>free of charge</price>
+         <fee>free of charge</fee>
          <distributionRightsHolder>
 				        <organizationInfo>
 					          <organizationName>Institute of Computer Science, Polish Academy of Sciences</organizationName>

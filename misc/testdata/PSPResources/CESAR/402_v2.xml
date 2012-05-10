@@ -23,7 +23,7 @@ Morfologik is an open-source morphological dictionary of Polish. It contains 216
          <restrictionsOfUse>attribution</restrictionsOfUse>
          <distributionAccessMedium>downloadable</distributionAccessMedium>
          <downloadLocation>http://zil.ipipan.waw.pl/PoliMorf?action=AttachFile&amp;do=get&amp;target=PoliMorf-0.5.tab.gz</downloadLocation>
-         <price>free of charge</price>
+         <fee>free of charge</fee>
          <distributionRightsHolder>
 				        <organizationInfo>
 					          <organizationName>Institute of Computer Science, Polish Academy of Sciences</organizationName>
