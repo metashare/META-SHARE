@@ -1,0 +1,6 @@
+<ul class="keyValuePairs{% if not blank %} pairsRequired{% endif %}">
+  {% for entry in entries %}
+  <li>{{ entry.0 }}, {{ entry.1 }}</li>
+  {% endfor %}
+</ul>
+<div style="display: none;">{{ new_entry_tpl.0 }}, {{ new_entry_tpl.1 }}</div>

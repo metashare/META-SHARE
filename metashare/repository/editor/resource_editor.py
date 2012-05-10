@@ -248,7 +248,7 @@ def export_xml_resources(modeladmin, request, queryset):
                 zipfile.writestr(resource_filename, pretty)
     
             except Exception:
-                raise Http404(_('Could not export resource "%(name)s" with primary key %(key)r.') \
+                raise Http404(_('Could not export resource "%(name)s" with primary key %(key)s.') \
                   % {'name': force_unicode(obj), 'key': escape(obj.storage_object.id)})
 
         zipfile.close()  
@@ -260,7 +260,7 @@ def export_xml_resources(modeladmin, request, queryset):
         response.write(in_memory.read())  
 
         return response
-export_xml_resources.short_description = "Export description to XML selected published resources"
+export_xml_resources.short_description = "Export selected resource descriptions to XML"
 
 from django import forms
 
@@ -343,16 +343,16 @@ class ResourceModelAdmin(SchemaModelAdmin):
             raise PermissionDenied
 
         if obj is None:
-            raise Http404(_('%(name)s object with primary key %(key)r does not exist.') \
+            raise Http404(_('%(name)s object with primary key %(key)s does not exist.') \
              % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
         storage_object = obj.storage_object
         if storage_object is None:
-            raise Http404(_('%(name)s object with primary key %(key)r does not have a StorageObject attached.') \
+            raise Http404(_('%(name)s object with primary key %(key)s does not have a StorageObject attached.') \
               % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
         if not storage_object.master_copy:
-            raise Http404(_('%(name)s object with primary key %(key)r is not a master-copy.') \
+            raise Http404(_('%(name)s object with primary key %(key)s is not a master-copy.') \
               % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
         existing_download = storage_object.get_download()
@@ -432,12 +432,14 @@ class ResourceModelAdmin(SchemaModelAdmin):
             raise PermissionDenied
 
         if obj is None:
-            raise Http404(_('%(name)s object with primary key %(key)r does not exist.') \
+            raise Http404(_('%(name)s object with primary key %(key)s does not exist.') \
              % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
-        storage_object = obj.storage_object
-        if storage_object is None:
-            raise Http404(_('%(name)s object with primary key %(key)r does not have a StorageObject attached.') \
+        if obj.storage_object is None:
+            raise Http404(_('%(name)s object with primary key %(key)s does not have a StorageObject attached.') \
+              % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
+        elif obj.storage_object.deleted:
+            raise Http404(_('%(name)s object with primary key %(key)s does not exist anymore.') \
               % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
         from xml.etree import ElementTree
@@ -455,7 +457,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
             return response
 
         except Exception:
-            raise Http404(_('Could not export resource "%(name)s" with primary key %(key)r.') \
+            raise Http404(_('Could not export resource "%(name)s" with primary key %(key)s.') \
               % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
 
@@ -565,21 +567,21 @@ class ResourceModelAdmin(SchemaModelAdmin):
         structures = {}
         if resource_type == 'corpus':
             corpus_media_type = corpusMediaTypeType_model.objects.create()
-            corpus_info = corpusInfoType_model.objects.create(corpusMediaType=corpus_media_type, resourceType='0')
+            corpus_info = corpusInfoType_model.objects.create(corpusMediaType=corpus_media_type)
             structures['resourceComponentType'] = corpus_info
             structures['corpusMediaType'] = corpus_media_type
         elif resource_type == 'langdesc':
             language_description_media_type = languageDescriptionMediaTypeType_model.objects.create()
-            langdesc_info = languageDescriptionInfoType_model.objects.create(languageDescriptionMediaType=language_description_media_type, resourceType='0')
+            langdesc_info = languageDescriptionInfoType_model.objects.create(languageDescriptionMediaType=language_description_media_type)
             structures['resourceComponentType'] = langdesc_info
             structures['languageDescriptionMediaType'] = language_description_media_type
         elif resource_type == 'lexicon':
             lexicon_media_type = lexicalConceptualResourceMediaTypeType_model.objects.create()
-            lexicon_info = lexicalConceptualResourceInfoType_model.objects.create(lexicalConceptualResourceMediaType=lexicon_media_type, resourceType='0')
+            lexicon_info = lexicalConceptualResourceInfoType_model.objects.create(lexicalConceptualResourceMediaType=lexicon_media_type)
             structures['resourceComponentType'] = lexicon_info
             structures['lexicalConceptualResourceMediaType'] = lexicon_media_type
         elif resource_type == 'toolservice':
-            tool_info = toolServiceInfoType_model.objects.create(resourceType='0')
+            tool_info = toolServiceInfoType_model.objects.create()
             structures['resourceComponentType'] = tool_info
             structures['toolServiceInfoId'] = tool_info.pk
         else:
@@ -710,7 +712,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
 class LicenceForm(forms.ModelForm):
     class Meta:
         model = licenceInfoType_model
-        #widgets = {'affiliation': AutoCompleteSelectMultipleWidget(lookup_class=OrganizationLookup)}
         widgets = {'membershipInfo': OneToManyWidget(lookup_class=MembershipLookup)}
 
 class LicenceModelAdmin(SchemaModelAdmin):

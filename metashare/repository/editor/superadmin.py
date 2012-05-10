@@ -4,16 +4,16 @@ and for inline forms.
 '''
 import logging
 from django.contrib import admin
-from django.contrib.admin.util import unquote
+from django.contrib.admin.util import unquote, get_deleted_objects
 from django.core.exceptions import PermissionDenied
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.utils.encoding import force_unicode
 from django.utils.html import escape
 from django.utils.translation import ugettext as _
 from django.contrib.admin import helpers
 from django.forms.formsets import all_valid
 from django.utils.safestring import mark_safe
-from django.db import transaction, models
+from django.db import transaction, models, router
 from metashare.repository.supermodel import REQUIRED, RECOMMENDED, \
   OPTIONAL
 from metashare import settings
@@ -23,6 +23,8 @@ from metashare.repository.editor.inlines import ReverseInlineModelAdmin
 from metashare.repository.editor.editorutils import is_inline, decode_inline
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_protect
+from django import template
+from django.shortcuts import render_to_response
 
 # Setup logging support.
 logging.basicConfig(level=settings.LOG_LEVEL)
@@ -134,6 +136,18 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             return self.edit_response_close_popup_magic_o2m(obj, caller)
         else:
             return super(SchemaModelAdmin, self).response_change(request, obj)
+
+
+    def response_delete(self, request):
+        '''
+        Response sent after a successful deletion.
+        '''
+        if '_popup' in request.REQUEST:
+            return HttpResponse('<script type="text/javascript">opener.dismissDeleteRelatedPopup(window);</script>')
+        if not self.has_change_permission(request, None):
+            return HttpResponseRedirect("../../../../")
+        return HttpResponseRedirect("../../")
+
 
     @csrf_protect_m
     @transaction.commit_on_success
@@ -327,6 +341,12 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                         if parent_fk_name:
                             assert len(changes) == 1
                             setattr(new_object, parent_fk_name, changes[0])
+                    # If we have deleted a one-to-one inline, we must manually unset the field value.
+                    if formset.deleted_objects:
+                        parent_fk_name = getattr(formset, 'parent_fk_name', '')
+                        if parent_fk_name:
+                            setattr(new_object, parent_fk_name, None)
+                        
                 self.save_model(request, new_object, form, change=True)
                 form.save_m2m()
                 #### end modification ####
@@ -384,6 +404,78 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         }
         context.update(extra_context or {})
         return self.render_change_form(request, context, change=True, obj=obj)
+
+    @csrf_protect_m
+    @transaction.commit_on_success
+    def delete_view(self, request, object_id, extra_context=None):
+        """
+        The 'delete' admin view for this model.
+        This follows closely the base implementation from Django 1.3's 
+        django.contrib.admin.options.ModelAdmin,
+        with the explicitly marked modifications.
+        """
+        opts = self.model._meta
+        app_label = opts.app_label
+
+        obj = self.get_object(request, unquote(object_id))
+
+        if not self.has_delete_permission(request, obj):
+            raise PermissionDenied
+
+        if obj is None:
+            raise Http404(_('%(name)s object with primary key %(key)r does not exist.') % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
+
+        using = router.db_for_write(self.model)
+
+        # Populate deleted_objects, a data structure of all related objects that
+        # will also be deleted.
+        (deleted_objects, perms_needed, protected) = get_deleted_objects(
+            [obj], opts, request.user, self.admin_site, using)
+
+        if request.POST: # The user has already confirmed the deletion.
+            if perms_needed:
+                raise PermissionDenied
+            obj_display = force_unicode(obj)
+            self.log_deletion(request, obj, obj_display)
+            self.delete_model(request, obj)
+
+
+            #### Change starts here ####
+            if not '_popup' in request.REQUEST:
+                self.message_user(request, _('The %(name)s "%(obj)s" was deleted successfully.') %
+                                   {'name': force_unicode(opts.verbose_name), 'obj': force_unicode(obj_display)})
+            return self.response_delete(request)
+            #### Change ends here ####
+
+        object_name = force_unicode(opts.verbose_name)
+
+        if perms_needed or protected:
+            title = _("Cannot delete %(name)s") % {"name": object_name}
+        else:
+            title = _("Are you sure?")
+
+        context = {
+            "title": title,
+            "object_name": object_name,
+            "object": obj,
+            "deleted_objects": deleted_objects,
+            "perms_lacking": perms_needed,
+            "protected": protected,
+            "opts": opts,
+            "root_path": self.admin_site.root_path,
+            "app_label": app_label,
+        }
+        context.update(extra_context or {})
+        context_instance = template.RequestContext(request, current_app=self.admin_site.name)
+        return render_to_response(self.delete_confirmation_template or [
+            "admin/%s/%s/delete_confirmation.html" % (app_label, opts.object_name.lower()),
+            "admin/%s/delete_confirmation.html" % app_label,
+            "admin/delete_confirmation.html"
+        ], context, context_instance=context_instance)
+
+
+
+
 
 class OrderedAdminForm(helpers.AdminForm):
     def __init__(self, form, fieldsets, prepopulated_fields, readonly_fields=None, model_admin=None, inlines=None):

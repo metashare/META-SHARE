@@ -1,10 +1,10 @@
-{% for name in object.identificationInfo.resourceName %}
+{% for name in object.identificationInfo.resourceName.itervalues %}
   {{ name }}
 {% endfor %}
-{% for name in object.identificationInfo.resourceShortName %}
+{% for name in object.identificationInfo.resourceShortName.itervalues %}
   {{ name }}
 {% endfor %}
-{% for description in object.identificationInfo.description %}
+{% for description in object.identificationInfo.description.itervalues %}
   {{ description }}
 {% endfor %}
 {% for corpus_info in object.resourceComponentType.as_subclass.corpusMediaType.corpustextinfotype_model_set.all %}

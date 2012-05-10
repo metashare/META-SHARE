@@ -14,11 +14,15 @@ from selectable.forms.widgets import AutoCompleteSelectMultipleWidget, \
     AutoCompleteSelectWidget
 from django.db import models
 from metashare.repository.models import actorInfoType_model, \
-    documentationInfoType_model, personInfoType_model,\
+    documentationInfoType_model, \
     organizationInfoType_model, projectInfoType_model,\
-    membershipInfoType_model
-from metashare.repository.editor.lookups import ActorLookup, DocumentLookup, \
-    PersonLookup, OrganizationLookup, ProjectLookup, MembershipLookup
+    membershipInfoType_model, \
+    personInfoType_model, \
+    targetResourceInfoType_model, documentInfoType_model
+from metashare.repository.editor.lookups import ActorLookup, \
+    OrganizationLookup, ProjectLookup, MembershipLookup, \
+    PersonLookup, TargetResourceLookup, DocumentLookup, \
+    DocumentationLookup
 
 class RelatedAdminMixin(object):
     '''
@@ -28,15 +32,17 @@ class RelatedAdminMixin(object):
     
     custom_m2m_widget_overrides = {
         actorInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=ActorLookup), 
-        documentationInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=DocumentLookup),
+        documentationInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=DocumentationLookup),
+        documentInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=DocumentLookup),
         personInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=PersonLookup),
         organizationInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=OrganizationLookup),
         projectInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=ProjectLookup),
         membershipInfoType_model: OneToManyWidget(lookup_class=MembershipLookup),
+        targetResourceInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=TargetResourceLookup),
     }
     
     custom_o2m_widget_overrides = {
-        documentationInfoType_model: AutoCompleteSelectWidget(lookup_class=DocumentLookup),
+        documentationInfoType_model: AutoCompleteSelectWidget(lookup_class=DocumentationLookup),
     }
     
     def hide_hidden_fields(self, db_field, kwargs):
