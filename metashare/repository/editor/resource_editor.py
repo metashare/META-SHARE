@@ -433,9 +433,11 @@ class ResourceModelAdmin(SchemaModelAdmin):
             raise Http404(_('%(name)s object with primary key %(key)r does not exist.') \
              % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
-        storage_object = obj.storage_object
-        if storage_object is None:
+        if obj.storage_object is None:
             raise Http404(_('%(name)s object with primary key %(key)r does not have a StorageObject attached.') \
+              % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
+        elif obj.storage_object.deleted:
+            raise Http404(_('%(name)s object with primary key %(key)r does not exist anymore.') \
               % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
         from xml.etree import ElementTree
