@@ -565,21 +565,21 @@ class ResourceModelAdmin(SchemaModelAdmin):
         structures = {}
         if resource_type == 'corpus':
             corpus_media_type = corpusMediaTypeType_model.objects.create()
-            corpus_info = corpusInfoType_model.objects.create(corpusMediaType=corpus_media_type, resourceType='0')
+            corpus_info = corpusInfoType_model.objects.create(corpusMediaType=corpus_media_type)
             structures['resourceComponentType'] = corpus_info
             structures['corpusMediaType'] = corpus_media_type
         elif resource_type == 'langdesc':
             language_description_media_type = languageDescriptionMediaTypeType_model.objects.create()
-            langdesc_info = languageDescriptionInfoType_model.objects.create(languageDescriptionMediaType=language_description_media_type, resourceType='0')
+            langdesc_info = languageDescriptionInfoType_model.objects.create(languageDescriptionMediaType=language_description_media_type)
             structures['resourceComponentType'] = langdesc_info
             structures['languageDescriptionMediaType'] = language_description_media_type
         elif resource_type == 'lexicon':
             lexicon_media_type = lexicalConceptualResourceMediaTypeType_model.objects.create()
-            lexicon_info = lexicalConceptualResourceInfoType_model.objects.create(lexicalConceptualResourceMediaType=lexicon_media_type, resourceType='0')
+            lexicon_info = lexicalConceptualResourceInfoType_model.objects.create(lexicalConceptualResourceMediaType=lexicon_media_type)
             structures['resourceComponentType'] = lexicon_info
             structures['lexicalConceptualResourceMediaType'] = lexicon_media_type
         elif resource_type == 'toolservice':
-            tool_info = toolServiceInfoType_model.objects.create(resourceType='0')
+            tool_info = toolServiceInfoType_model.objects.create()
             structures['resourceComponentType'] = tool_info
             structures['toolServiceInfoId'] = tool_info.pk
         else:
