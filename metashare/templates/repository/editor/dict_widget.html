@@ -1,6 +1,7 @@
 <ul class="keyValuePairs{% if not blank %} pairsRequired{% endif %}">
   {% for entry in entries %}
-  <li>{{ entry.0 }}, {{ entry.1 }}</li>
+  <li><span><a href="javascript:void(0)" class="kvPairDeleteButton">Delete Field</a></span><span>{{ entry.0 }}</span><span>{{ entry.1 }}</span></li>
   {% endfor %}
+  <li><a href="javascript:void(0)" class="kvPairAddButton">Add Another Field</a></li>
 </ul>
-<div style="display: none;">{{ new_entry_tpl.0 }}, {{ new_entry_tpl.1 }}</div>
+<div style="display: none;"><span><a href="javascript:void(0)" class="kvPairDeleteButton">Delete Field</a></span><span>{{ new_entry_tpl.0 }}</span><span>{{ new_entry_tpl.1 }}</span></div>
