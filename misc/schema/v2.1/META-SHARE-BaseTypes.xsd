@@ -34,7 +34,7 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>Provides the description of the resource in prose</xs:documentation>
 					<xs:appinfo>
-						<maxlen>1000</maxlen>
+						<maxlen>10000</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:unique name="uniqueLang3">
@@ -1853,7 +1853,7 @@ label added for specific elements -->
 		<xs:sequence>
 			<xs:element name="sizeWidth" type="xs:int" minOccurs="0">
 				<xs:annotation>
--					<xs:documentation>The frame width in pixels</xs:documentation>
+					<xs:documentation>The frame width in pixels</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="sizeHeight" type="xs:int" minOccurs="0">
