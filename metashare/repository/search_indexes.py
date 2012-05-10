@@ -1464,10 +1464,10 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         if isinstance(corpus_media, toolServiceInfoType_model):
             if corpus_media.inputInfo:
                 if corpus_media.inputInfo.annotationFormat:
-                    result.append(corpus_media.inputInfo.annotationFormat)
+                    result.extend(corpus_media.inputInfo.annotationFormat)
             if corpus_media.outputInfo:
                 if corpus_media.outputInfo.annotationFormat:
-                    result.append(corpus_media.outputInfo.annotationFormat)
+                    result.extend(corpus_media.outputInfo.annotationFormat)
 
         return result
     
