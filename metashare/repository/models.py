@@ -4034,7 +4034,7 @@ class audioFormatInfoType_model(SchemaModel):
 
     byteOrder = models.CharField(
       verbose_name='Byte order', 
-      help_text='The byte order of 2 or more bytessample',
+      help_text='The byte order of 2 or more bytes sample',
       blank=True, 
       max_length=30,
       choices=sorted(AUDIOFORMATINFOTYPE_BYTEORDER_CHOICES['choices'],
@@ -7117,10 +7117,6 @@ class resourceComponentTypeType_model(SubclassableModel):
         verbose_name = "Resource component"
 
 
-LEXICALCONCEPTUALRESOURCEINFOTYPE_RESOURCETYPE_CHOICES = _make_choices_from_list([
-  u'lexicalConceptualResource', 
-])
-
 LEXICALCONCEPTUALRESOURCEINFOTYPE_LEXICALCONCEPTUALRESOURCETYPE_CHOICES = _make_choices_from_list([
   u'wordList', u'computationalLexicon', u'ontology', u'wordnet',
   u'thesaurus',u'framenet', u'terminologicalResource',
@@ -7154,11 +7150,7 @@ class lexicalConceptualResourceInfoType_model(resourceComponentTypeType_model):
     resourceType = models.CharField(
       verbose_name='Resource', 
       help_text='Specifies the type of the resource being described',
-      
-      max_length=30,
-      choices=sorted(LEXICALCONCEPTUALRESOURCEINFOTYPE_RESOURCETYPE_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
+      default="lexicalConceptualResource", editable=False, max_length=30, )
 
     lexicalConceptualResourceType = models.CharField(
       verbose_name='Lexical conceptual resource type', 
@@ -7193,10 +7185,6 @@ class lexicalConceptualResourceInfoType_model(resourceComponentTypeType_model):
         formatargs = ['lexicalConceptualResourceType', ]
         formatstring = u'lexicalConceptualResource ({})'
         return self.unicode_(formatstring, formatargs)
-
-LANGUAGEDESCRIPTIONINFOTYPE_RESOURCETYPE_CHOICES = _make_choices_from_list([
-  u'languageDescription', 
-])
 
 LANGUAGEDESCRIPTIONINFOTYPE_LANGUAGEDESCRIPTIONTYPE_CHOICES = _make_choices_from_list([
   u'grammar', u'other', 
@@ -7233,11 +7221,7 @@ class languageDescriptionInfoType_model(resourceComponentTypeType_model):
     resourceType = models.CharField(
       verbose_name='Resource', 
       help_text='Specifies the type of the resource being described',
-      
-      max_length=30,
-      choices=sorted(LANGUAGEDESCRIPTIONINFOTYPE_RESOURCETYPE_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
+      default="languageDescription", editable=False, max_length=30, )
 
     languageDescriptionType = models.CharField(
       verbose_name='Language description type', 
@@ -7286,10 +7270,6 @@ class languageDescriptionInfoType_model(resourceComponentTypeType_model):
         formatstring = u'languageDescription ({})'
         return self.unicode_(formatstring, formatargs)
 
-TOOLSERVICEINFOTYPE_RESOURCETYPE_CHOICES = _make_choices_from_list([
-  u'toolService', 
-])
-
 TOOLSERVICEINFOTYPE_TOOLSERVICETYPE_CHOICES = _make_choices_from_list([
   u'tool', u'service', u'platform', u'suiteOfTools', u'infrastructure',
   u'architecture',u'nlpDevelopmentEnvironment', u'other', 
@@ -7326,11 +7306,7 @@ class toolServiceInfoType_model(resourceComponentTypeType_model):
       verbose_name='Resource', 
       help_text='The type of the resource that a tool or service takes a' \
       's input or produces as output',
-      
-      max_length=30,
-      choices=sorted(TOOLSERVICEINFOTYPE_RESOURCETYPE_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
+      default="toolService", editable=False, max_length=30, )
 
     toolServiceType = models.CharField(
       verbose_name='Tool service type', 
@@ -7388,10 +7364,6 @@ class toolServiceInfoType_model(resourceComponentTypeType_model):
         formatstring = u'toolService ({})'
         return self.unicode_(formatstring, formatargs)
 
-CORPUSINFOTYPE_RESOURCETYPE_CHOICES = _make_choices_from_list([
-  u'corpus', 
-])
-
 # pylint: disable-msg=C0103
 class corpusInfoType_model(resourceComponentTypeType_model):
     """
@@ -7414,11 +7386,7 @@ class corpusInfoType_model(resourceComponentTypeType_model):
     resourceType = models.CharField(
       verbose_name='Resource', 
       help_text='Specifies the type of the resource being described',
-      
-      max_length=30,
-      choices=sorted(CORPUSINFOTYPE_RESOURCETYPE_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
+      default="corpus", editable=False, max_length=30, )
 
     corpusMediaType = models.OneToOneField("corpusMediaTypeType_model", 
       verbose_name='Corpus media', 

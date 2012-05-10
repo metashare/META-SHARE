@@ -18,23 +18,13 @@ changed conformanceToStandardsBestPractices as ref -->
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="resourceType">
+			<xs:element name="resourceType" type="xs:string" fixed="lexicalConceptualResource">
 				<xs:annotation>
 					<xs:documentation>Specifies the type of the resource being described</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:enumeration value="lexicalConceptualResource">
-							<xs:annotation>
-								<xs:documentation>includes lexica, ontologies, dictionaries, word lists etc.</xs:documentation>
-							</xs:annotation>
-						</xs:enumeration>
-					</xs:restriction>
-				</xs:simpleType>
 			</xs:element>
 			<xs:element name="lexicalConceptualResourceType">
 				<xs:annotation>

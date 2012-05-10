@@ -18,7 +18,7 @@
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="resourceType">
+			<xs:element name="resourceType" type="xs:string" fixed="corpus">
 				<xs:annotation>
 					<xs:documentation>Specifies the type of the resource being described</xs:documentation>
 					<xs:appinfo>
@@ -26,15 +26,6 @@
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:enumeration value="corpus">
-							<xs:annotation>
-								<xs:documentation>For text, speech, video, multimodal/multimedia corpora, corpora with sensorimotor information, n-gram resources</xs:documentation>
-							</xs:annotation>
-						</xs:enumeration>
-					</xs:restriction>
-				</xs:simpleType>
 			</xs:element>
 			<xs:element name="corpusMediaType">
 				<xs:annotation>
