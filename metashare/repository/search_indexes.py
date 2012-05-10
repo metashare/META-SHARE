@@ -522,14 +522,10 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         """
         Collect the data to filter the resources on Resource Type
         """
-        result = []
-
-        if obj.resourceComponentType.as_subclass().resourceType \
-                != '':
-            result.append(obj.resourceComponentType.as_subclass() \
-                          .resourceType)
-
-        return result
+        resType = obj.resourceComponentType.as_subclass().resourceType
+        if resType:
+            return [resType]
+        return []
 
     def prepare_mediaTypeFilter(self, obj):
         """
@@ -1413,9 +1409,9 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         # Filter for toolService
         if isinstance(corpus_media, toolServiceInfoType_model):
             if corpus_media.inputInfo:
-                result.append(corpus_media.inputInfo.get_resourceType_display())
+                result.extend(corpus_media.inputInfo.resourceType)
             if corpus_media.outputInfo:
-                result.append(corpus_media.outputInfo.get_resourceType_display())
+                result.extend(corpus_media.outputInfo.resourceType)
 
         return result
     
