@@ -55,7 +55,7 @@ class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
             "There appears to be a bug in {1}."
             .format(added_name, SearchIndexUpdateTests.__class__.__name__))
         # change the names list of the imported resource
-        resource.identificationInfo.resourceName.append(added_name)
+        resource.identificationInfo.resourceName['en-US'] = added_name
         resource.identificationInfo.save()
         resource.save()
         # make sure the change has automatically updated the search index

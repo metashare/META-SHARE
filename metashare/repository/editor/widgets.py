@@ -4,18 +4,14 @@ Project: META-SHARE prototype implementation
 """
 import base64
 import logging
-
 try:
     import cPickle as pickle
 except:
     import pickle
 
-from django.forms.util import flatatt
-
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
-from django.forms import widgets, TextInput
+from django.forms import widgets, TextInput, Textarea
 from django.template.loader import render_to_string
-from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
 
 from metashare import settings
@@ -25,57 +21,119 @@ logging.basicConfig(level=settings.LOG_LEVEL)
 LOGGER = logging.getLogger('metashare.repository.widgets')
 LOGGER.addHandler(settings.LOG_HANDLER)
 
+# the maximum length (in characters) where `TextInput` widgets will still be
+# used; for larger sizes we use `Textarea` widgets
+_MAX_TEXT_INPUT_SIZE = 80
 
-class TextInputWithLanguageAttribute(widgets.Input):
-    input_type = 'text'
-    attribute_length = 5
+
+class DictWidget(widgets.Widget):
+    """
+    A widget for rendering dictionaries as represented by `DictField` form
+    fields.
     
-    def __init__(self, *args, **kwargs):
+    By default key/value input widgets will be `TextInput` widgets. If a
+    sufficiently large maximum size is specified for either of them, the input
+    wisgets may also become `Textarea` widgets.
+    """
+    class Media:
+        css = { 'all': ('{}css/dict_widget.css'.format(
+                            settings.ADMIN_MEDIA_PREFIX),) }
+        js = ('{}js/dict_widget.js'.format(settings.ADMIN_MEDIA_PREFIX),)
+
+    # templates for the names of key/value "<input/>" fields
+    _key_field_name_tpl = 'key_{}_{}'
+    _val_field_name_tpl = 'val_{}_{}'
+
+    def __init__(self, blank=False, max_key_length=None, max_val_length=None):
         """
-        Initialises a new TextInputWithLanguageAttribute instance.
+        Initializes a new `DictWidget` with the given maximum dictionary
+        key/value sizes (in characters).
         
-        This calls the super class constructor with any remaining args.
+        The `blank` argument denotes whether empty dictionarys should be allowed
+        or not. This is only enforced via JavaScript, though!
         """
-        super(TextInputWithLanguageAttribute, self).__init__(*args, **kwargs)
-    
+        self.blank = blank
+        self.max_key_length = max_key_length
+        self.max_val_length = max_val_length
+        super(DictWidget, self).__init__()
+
+    def render(self, name, value, attrs=None):
+        """
+        Returns this Widget rendered as HTML, as a Unicode string.
+
+        The 'value' given is not guaranteed to be valid input, so subclass
+        implementations should program defensively.
+        """
+        _entries = []
+        _context = { 'blank': self.blank, 'entries': _entries,
+            'new_entry_tpl': self._get_dict_entry(name, '', None, None) }
+        if isinstance(value, dict):
+            # (we have gotten an existing Python dict)
+            idx = 0
+            for key, val in value.iteritems():
+                _entries.append(self._get_dict_entry(name, idx, key, val))
+                idx += 1
+        elif isinstance(value, list):
+            # (we have gotten a non-valid key/value pair list that was created
+            # in value_from_datadict())
+            idx = 0
+            for entry in value:
+                _entries.append(self._get_dict_entry(name, idx, entry[0],
+                                                     entry[1]))
+                idx += 1
+        elif not self.blank:
+            # (we probably have gotten the value None, i.e., the dictionary is
+            # only being created; an empty first entry is only shown if the
+            # dictionary must not be blank)
+            _entries.append(self._get_dict_entry(name, 0, None, None))
+        # render final HTML for this widget instance
+        return mark_safe(render_to_string('repository/editor/dict_widget.html',
+                                          _context))
+
+    def _get_dict_entry(self, field_name, idx, key, value):
+        """
+        Returns a tuple (pair) with a rendered key and value input field.
+        
+        `field_name` and `id` will be used in the names of the input fields.
+        """
+        _key_field_name = DictWidget._key_field_name_tpl.format(field_name, idx)
+        if self.max_key_length and self.max_key_length > _MAX_TEXT_INPUT_SIZE:
+            rendered_key = Textarea().render(_key_field_name, key)
+        else:
+            rendered_key = \
+                TextInput(attrs={ 'maxlength': self.max_key_length }) \
+                    .render(_key_field_name, key)
+
+        _val_field_name = DictWidget._val_field_name_tpl.format(field_name, idx)
+        if self.max_val_length and self.max_val_length > _MAX_TEXT_INPUT_SIZE:
+            rendered_val = Textarea().render(_val_field_name, value)
+        else:
+            rendered_val = \
+                TextInput(attrs={ 'maxlength': self.max_val_length }) \
+                    .render(_val_field_name, value)
+
+        return (rendered_key, rendered_val)
+
     def value_from_datadict(self, data, files, name):
         """
-        Given a dictionary of data and this widget's name, returns the value
-        of this widget. Returns None if it's not provided.
+        Given a dictionary of data from the input form and this widget's name,
+        returns the value of this widget as a list of key/value pairs (or None
+        if the list would be empty).
         """
-        lang = '{0}_lang'.format(name)
-        _value = '{0:5}{1}'.format(data.get(lang, '')[:self.attribute_length],
-          data.get(name, '')).strip()
-        
-        if _value == '':
-            return None
-        
-        return _value
-    
-    def render(self, name, value, attrs=None):
-        if value is None or value == '':
-            attribute = ''
-            value = ''
-        
-        else:
-            attribute = value[:self.attribute_length].strip()
-            value = value[self.attribute_length:]
-        
-        lang = '{0}_lang'.format(name)
-        attribute_attrs = self.build_attrs({'maxlength': self.attribute_length},
-          type='text', name=lang)
-        if attribute != '':
-            # Only add the 'value' attribute if a value is non-empty.
-            attribute_attrs['value'] = force_unicode(self._format_value(attribute))
-        
-        final_attrs = self.build_attrs({'style': 'width:400px;'},
-          type=self.input_type, name=name)
-        if value != '':
-            # Only add the 'value' attribute if a value is non-empty.
-            final_attrs['value'] = force_unicode(self._format_value(value))
-        
-        return mark_safe(u'<input{0} /> <strong>Language:</strong> <input{1} />'.format(
-          flatatt(final_attrs), flatatt(attribute_attrs)))
+        # collect the key/value data that was provided by the user (not as a
+        # dictionary, so that we can later cleanly validate the data):
+        provided = []
+        idx = 0
+        while True:
+            key_name = DictWidget._key_field_name_tpl.format(name, idx)
+            val_name = DictWidget._val_field_name_tpl.format(name, idx)
+            if not key_name in data or not val_name in data:
+                break
+            provided.append((data[key_name], data[val_name]))
+            idx += 1
+        if len(provided) != 0:
+            return provided
+        return None
 
 
 class SubclassableRelatedFieldWidgetWrapper(RelatedFieldWidgetWrapper):
@@ -259,22 +317,9 @@ class MultiFieldWidget(widgets.Widget):
         """
         Encodes the data for this MultiFieldWidget instance as base64 String.
         """
-        widget = self.attrs.get('widget', TextInput)()
-        if isinstance(widget, TextInputWithLanguageAttribute):
-            _attributes = [v[:widget.attribute_length]
-              for v in data.getlist('{0}_lang'.format(name))]
-            _values = [v for v in data.getlist(name)]
-            
-            _value = ['{0:5}{1}'.format(_a, _v).strip()
-              for _a, _v in zip(_attributes, _values)]
-            _value = [v for v in _value if v]
-        
-        else:
-            _value = [v for v in data.getlist(name) if v]
-        
+        _value = [v for v in data.getlist(name) if v]
         if not len(_value):
             return None
-        
         return base64.b64encode(pickle.dumps(_value))
 
     def _has_changed(self, initial, data):
