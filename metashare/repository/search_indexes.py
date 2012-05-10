@@ -1409,9 +1409,11 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         # Filter for toolService
         if isinstance(corpus_media, toolServiceInfoType_model):
             if corpus_media.inputInfo:
-                result.extend(corpus_media.inputInfo.resourceType)
+                result.extend(
+                    corpus_media.inputInfo.get_resourceType_display_list())
             if corpus_media.outputInfo:
-                result.extend(corpus_media.outputInfo.resourceType)
+                result.extend(
+                    corpus_media.outputInfo.get_resourceType_display_list())
 
         return result
     
