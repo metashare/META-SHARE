@@ -425,14 +425,15 @@ class MetashareFacetedSearchView(FacetedSearchView):
 
         result = []
         # pylint: disable-msg=E1101
-        filter_labels = [(name, field.label, field.facet_id, field.parent_id) for name, field
+        filter_labels = [(name, field.label, field.facet_id, field.parent_id)
+                         for name, field
                          in resourceInfoType_modelIndex.fields.iteritems()
                          if name.endswith("Filter")]
         filter_labels.sort(key=lambda f: f[2])
         sel_facets = self._get_selected_facets()
         # Step (1): if there are any selected facets, then add these first:
         if sel_facets:
-            # add all facets alphabetically:
+            # add all top level facets (sorted by their facet IDs):
             for name, label, facet_id, _ in [f for f in filter_labels if f[3] == 0]:
                 name_exact = '{0}_exact'.format(name)
                 # only add selected facets in step (1)
@@ -475,8 +476,8 @@ class MetashareFacetedSearchView(FacetedSearchView):
                         result.append({'label': label, 'removable': removable,
                                        'addable': addable, 'subresults': subresults})                    
 
-        # Step (2): add all facets without selected facet items alphabetically
-        # at the end:
+        # Step (2): add all top level facets without selected facet items at the
+        # end (sorted by their facet IDs):
         for name, label, facet_id, _ in [f for f in filter_labels if f[3] == 0]:
             name_exact = '{0}_exact'.format(name)
             # only add facets without selected items in step (2)
