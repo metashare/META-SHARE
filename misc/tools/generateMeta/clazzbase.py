@@ -130,6 +130,12 @@ CHOICES_TEMPLATE_MAXLEN = """
       choices={0}['choices'],
       """
 
+SORTED_CHOICES_TEMPLATE_MAXLEN = """
+      max_length={1},
+      choices=sorted({0}['choices'],
+                     key=lambda choice: choice[1].lower()),
+      """
+
 MODEL_HEADER="""\
 # pylint: disable-msg=C0302
 import logging
@@ -146,7 +152,8 @@ from {0}supermodel import SchemaModel, SubclassableModel, \\
   REQUIRED, OPTIONAL, RECOMMENDED
 from {0}editor.widgets import MultiFieldWidget
 from {0}fields import MultiTextField, MetaBooleanField, \\
-  MultiSelectField
+  MultiSelectField, DictField, best_lang_value_retriever
+from {0}validators import validate_lang_code_keys
 
 from metashare.storage.models import StorageObject
 
@@ -711,8 +718,12 @@ class Clazz(object):
                 if maxlen:
                     logging.warn("max_length overwritten for choice of " \
                       "strings: {}".format(member))
-                    choice_options = \
-                      CHOICES_TEMPLATE_MAXLEN.format(choice_name, maxlen)
+                    if member.is_unbounded():
+                        choice_options = \
+                          CHOICES_TEMPLATE_MAXLEN.format(choice_name, maxlen)
+                    else:
+                        choice_options = \
+                          SORTED_CHOICES_TEMPLATE_MAXLEN.format(choice_name, maxlen)
                 else:
                     choice_options = CHOICES_TEMPLATE.format(choice_name)
                 
@@ -747,7 +758,11 @@ class Clazz(object):
             logging.warn('Unhandled simple type: {} {}\n'.format(name, data_type))
         return multi_id
 
-    def generate_myString_member(self, member, name, multi_id, options):
+    def generate_myString_member(self, member, name, options):
+        maxlen = member.get_maxlength()
+        if maxlen:
+            options += "\n      max_val_length={}, ".format(maxlen)
+
         help_string = member.child.getHelpText()
         if help_string:
             _help_text = _truncate_long_string(help_string, 72, 6)
@@ -757,10 +772,9 @@ class Clazz(object):
             options += 'blank=True'
 
         self.wrtmodels(
-          '    %s = MultiTextField(widget = MultiFieldWidget(widget_id=%d), %s)\n' % (
-            name, multi_id, options, ))
-        multi_id += 1
-        return multi_id
+          '    %s = DictField(validators=[validate_lang_code_keys],\n'
+          '      default_retriever=best_lang_value_retriever, %s)\n' % (
+            name, options, ))
 
     def generate_complex_member(self, member, name, data_type, options):
         help_string = member.child.getHelpText()
@@ -784,7 +798,7 @@ class Clazz(object):
                 # this is a one-to-one relation, maybe optional
                 #options = options + ', unique=True'
                 if not member.is_required():
-                    options += 'blank=True, null=True, '
+                    options += 'blank=True, null=True, on_delete=models.SET_NULL, '
 
                 self.wrtmodels(
                     '    %s = models.OneToOneField("%s_model", %s)\n' % (
@@ -1006,9 +1020,7 @@ class Clazz(object):
                 options += 'validators=[EMAILADDRESS_VALIDATOR], '
             
             if data_type == 'myString':
-                multi_id = self.generate_myString_member(member, name, multi_id,
-                                                         options)
-                MULTI_ID = multi_id
+                self.generate_myString_member(member, name, options)
             elif data_type in Simple_type_table:
                 # simple type member
                 multi_id = self.generate_simple_member(member, name, data_type,

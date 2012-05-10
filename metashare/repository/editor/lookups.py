@@ -5,13 +5,12 @@ This file contains the lookup logic for ajax-based editor search widgets.
 from selectable.base import ModelLookup
 from selectable.registry import registry
 from metashare.repository.models import personInfoType_model, \
-    actorInfoType_model, documentInfoType_model, documentationInfoType_model
+    actorInfoType_model, documentInfoType_model, documentationInfoType_model,\
+    targetResourceInfoType_model
 
 class PersonLookup(ModelLookup):
     model = personInfoType_model
-    #search_fields = ('surname__contains', )
-    #filters = {}
-    
+
     def get_query(self, request, term):
         #results = super(PersonLookup, self).get_query(request, term)
         # Since MultiTextFields cannot be searched using query sets (they are base64-encoded and pickled),
@@ -21,7 +20,7 @@ class PersonLookup(ModelLookup):
         def matches(person):
             'Helper function to group the search code for a person'
             for multifield in (person.surname, person.givenName):
-                for field in multifield:
+                for field in multifield.itervalues():
                     if lcterm in field.lower():
                         return True
             return False
@@ -65,7 +64,7 @@ class GenericUnicodeLookup(ModelLookup):
 class ActorLookup(GenericUnicodeLookup):
     model = actorInfoType_model
 
-class DocumentLookup(ModelLookup):
+class DocumentationLookup(ModelLookup):
     '''
     A special lookup which can represent values of both
     the (structured) documentInfo type and the documentUnstructured text-only type,
@@ -92,9 +91,15 @@ class DocumentLookup(ModelLookup):
             print u'No results'
         return results
 
-
+class DocumentLookup(GenericUnicodeLookup):
+    model = documentInfoType_model
+    
+class TargetResourceLookup(GenericUnicodeLookup):
+    model = targetResourceInfoType_model
 
 registry.register(PersonLookup)
 registry.register(ActorLookup)
+registry.register(DocumentationLookup)
 registry.register(DocumentLookup)
+registry.register(TargetResourceLookup)
 

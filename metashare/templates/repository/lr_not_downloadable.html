@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}    
-<h2{% if not resource.storage_object.published %} style="font-style:italic;"{% endif %}>{{ resource.identificationInfo.resourceName.0 }}</h2>
+<h2{% if not resource.storage_object.published %} style="font-style:italic;"{% endif %}>{{ resource }}</h2>
 <div class="content_box">
 {% if reason == "no_suitable_license" %}
   <h3>Resource Access Restricted</h3>
