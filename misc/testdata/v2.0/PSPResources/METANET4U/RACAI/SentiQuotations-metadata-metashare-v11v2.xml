@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Quotations annotated for sentiment - Multilingual Subjectivity Analysis: Gold Standard Data Set</resourceName>
+      <description>Gold Standard Data Set for Multilingual Subjectivity Analysis</description>
+      <resourceShortName>MSAGS</resourceShortName>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>underNegotiation</licence>
+         <restrictionsOfUse>informLicensor</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Steinberger</surname>
+      <givenName>Ralf</givenName>
+      <communicationInfo>
+         <email>Ralf.Steinberger@jrc.ec.europa.eu</email>
+         <url>http://langtech.jrc.it/RS.html</url>
+         <address>European Commission - Joint Research Centre, IPSC - SeS, T.P. 267, Via Fermi 2749</address>
+         <zipCode>21027</zipCode>
+         <city>Ispra</city>
+         <country>Italy</country>
+         <telephoneNumber>+39-0332786271/+5648</telephoneNumber>
+         <faxNumber>+39-0332785154</faxNumber>
+      </communicationInfo>
+      <position>Head of Language Technology Group, Institute for the Protection and Security of the Citizen</position>
+      <affiliation>
+         <organizationName>Institute for the Protection and Security of the Citizen</organizationName>
+         <organizationShortName>IPSC</organizationShortName>
+         <communicationInfo>
+            <email>Ralf.Steinberger@jrc.ec.europa.eu</email>
+            <url>http://langtech.jrc.ec.europa.eu/</url>
+            <address>European Commission - Joint Research Centre, IPSC - SeS, T.P. 267, Via Fermi 2749</address>
+            <zipCode>21027</zipCode>
+            <city>Ispra</city>
+            <country>Italy</country>
+            <telephoneNumber>+39 0332 78-5648</telephoneNumber>
+            <faxNumber>+39 0332 78-5154</faxNumber>
+         </communicationInfo>
+			
+		    </affiliation>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-29</metadataCreationDate>
+      <source>METANET4U</source>
+   </metadataInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>monolingual</lingualityType>
+			
+		             </lingualityInfo>
+               <languageInfo>
+                  <languageId>eng</languageId>
+                  <languageName>English</languageName>
+               </languageInfo>
+               <modalityInfo>
+                  <modalityType>writtenLanguage</modalityType>
+               </modalityInfo>
+               <sizeInfo>
+			               <size>1589</size>
+			
+			               <sizeUnit>items</sizeUnit>
+		             </sizeInfo>
+               <characterEncodingInfo>
+                  <characterEncoding>UTF-8</characterEncoding>
+               </characterEncodingInfo>
+               <annotationInfo>
+                  <annotationType>semanticAnnotation-polarity</annotationType>
+                  <annotationStandoff>false</annotationStandoff>
+                  <segmentationLevel>paragraph</segmentationLevel>
+                  <annotationFormat>text/plain</annotationFormat>
+                  <conformanceToStandardsBestPractices>other</conformanceToStandardsBestPractices>
+                  <annotationMode>manual</annotationMode>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>semanticAnnotation-certaintyLevel</annotationType>
+                  <annotationStandoff>false</annotationStandoff>
+                  <segmentationLevel>paragraph</segmentationLevel>
+                  <annotationFormat>text/plain</annotationFormat>
+                  <conformanceToStandardsBestPractices>other</conformanceToStandardsBestPractices>
+                  <annotationMode>manual</annotationMode>
+               </annotationInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

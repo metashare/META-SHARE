@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>INTERA Corpus</resourceName>
+      <description>Greek-English, Serbian-English, Bulgarian-English, Slovene-English; multilingual, written, domain specific (law, education, environment, tourism, health), parallel corpora; Total 12 MWs: Greek-English 4MWs (2 MWs per language), Serbian-English 2MWs (1 MWs per language), Bulgarian-English 2MWs (1 MWs per language), Slovene-English 4MWs (2 MWs per language); TMX format, XCES-compatible annotation in XML format; POS-tagged and lemmatised in XML format; IMDI metadata elements in XML format </description>
+      <resourceShortName>INTERA Corpus</resourceShortName>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>proprietary</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <downloadLocation>http://lrt.ilsp.gr:8081/data/Intera.zip</downloadLocation>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Gavrilidou</surname>
+      <givenName>Maria</givenName>
+      <communicationInfo>
+         <email>maria@ilsp.gr</email>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2012-02-02</metadataCreationDate>
+    <source>META</source>
+   </metadataInfo>
+   <usageInfo>
+		    <foreseenUseInfo>
+			      <foreseenUse>nlpApplications</foreseenUse>
+			      
+			      <useNLPSpecific>machineTranslation</useNLPSpecific>
+		    </foreseenUseInfo>
+		    <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+         <useNLPSpecific>terminologyExtraction</useNLPSpecific>
+      </actualUseInfo>
+	  </usageInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>multilingual</lingualityType>
+			               <multilingualityType>parallel</multilingualityType>
+		             </lingualityInfo>
+               <languageInfo>
+			
+			               <languageId>ell</languageId>
+			               <languageName>Modern Greek (1453-)</languageName>
+		             </languageInfo>
+               <languageInfo>
+			
+			               <languageId>eng</languageId>
+			               <languageName>English</languageName>
+		             </languageInfo>
+               <languageInfo>
+			
+			               <languageId>slv</languageId>
+			               <languageName>Slovenian</languageName>
+		             </languageInfo>
+               <languageInfo>
+			
+			               <languageId>bul</languageId>
+			               <languageName>Bulgarian</languageName>
+		             </languageInfo>
+               <languageInfo>
+			
+			               <languageId>srp</languageId>
+			               <languageName>Serbian</languageName>
+		             </languageInfo>
+               <sizeInfo>
+			               <size>12000000</size>
+			
+			               <sizeUnit>words</sizeUnit>
+		             </sizeInfo>
+               <annotationInfo>
+                  <annotationType>structuralAnnotation</annotationType>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>lemmatization</annotationType>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>morphosyntacticAnnotation-bPosTagging</annotationType>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>alignment</annotationType>
+               </annotationInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

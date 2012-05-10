@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>SWiiT</resourceName>
+      <description>SWiiT, Semantic Wikipedia for Italian, is the Italian Wikipedia annotated with basic NLP processing (tokenization, sentence splitting and PoS-tagging) and entity mentions (person, organization, location and geo-political entities)</description>
+      <url>http://textpro.fbk.eu/resources/SWiiT.html</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability>
+      <licenceInfo>
+		  <licence>underNegotiation</licence>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <downloadLocation>http://textpro.fbk.eu/resources/SWiiT.html</downloadLocation>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Speranza</surname>
+      <givenName>Manuela</givenName>
+      <communicationInfo>
+         <email>manspera@fbk.eu</email>
+         <address>Fondazione Bruno Kessler Via Sommarive 18</address>
+         <zipCode>38123</zipCode>
+         <city>Trento</city>
+         <country>IT</country>
+         <telephoneNumber>+39 0461314521</telephoneNumber>
+         <faxNumber>+39 0461314591</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo><metadataCreationDate>2011-12-31</metadataCreationDate></metadataInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+            
+                  <languageId>ita</languageId>
+                  <languageName>Italian</languageName>
+               </languageInfo>
+               <sizeInfo>
+																<size>0</size>
+																<sizeUnit>units</sizeUnit>
+															</sizeInfo>
+               <annotationInfo>
+                  <annotationType>other</annotationType>
+                  <annotationModeDetails>tokenization</annotationModeDetails>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>segmentation</annotationType>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>morphosyntacticAnnotation-posTagging</annotationType>
+               </annotationInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

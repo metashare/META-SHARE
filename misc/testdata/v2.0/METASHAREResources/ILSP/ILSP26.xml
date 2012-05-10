@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>MUSA Multilingual Multimodal Corpus</resourceName>
+      <description>Multilingual (English, Greek, French) and multimodal corpus (video, text). It amounts 120 hours. Paralle in terms of subtitles and their translations. Comparable regarding the transcriptions and the subtitles.</description>
+      <url>http://sifnos.ilsp.gr/musa</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>proprietary</licence>
+         <downloadLocation>http://sifnos.ilsp.gr/musa/demos/TheWorldsMostWanted.zip</downloadLocation>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Piperidis</surname>
+      <givenName>Stelios</givenName>
+      <communicationInfo>
+         <email>spip@ilsp.gr</email>
+      </communicationInfo>
+   </contactPerson>
+   <contactPerson>
+      <surname>Prokopidis</surname>
+      <givenName>Prokopis</givenName>
+      <communicationInfo>
+         <email>prokopis@ilsp.gr</email>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2012-02-02</metadataCreationDate>
+    <source>META</source>
+   </metadataInfo>
+   <usageInfo>
+		    <foreseenUseInfo>
+			      <foreseenUse>nlpApplications</foreseenUse>
+		    </foreseenUseInfo>
+		    
+	  </usageInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>multilingual</lingualityType>
+			               <multilingualityType>parallel</multilingualityType>
+		             </lingualityInfo>
+               <languageInfo>
+			
+			               <languageId>ell</languageId>
+			               <languageName>Modern Greek (1453-)</languageName>
+		             </languageInfo>
+               <languageInfo>
+			
+			               <languageId>eng</languageId>
+			               <languageName>English</languageName>
+		             </languageInfo>
+               <languageInfo>
+			
+			               <languageId>fra</languageId>
+			               <languageName>French</languageName>
+		             </languageInfo>
+               <sizeInfo>
+			               <size>2236</size>
+			
+			               <sizeUnit>words</sizeUnit>
+		             </sizeInfo>
+               <annotationInfo>
+                  <annotationType>alignment</annotationType>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>translation</annotationType>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>speechAnnotation</annotationType>
+               </annotationInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>
