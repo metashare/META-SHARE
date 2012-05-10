@@ -1,14 +1,12 @@
 from metashare.repository.editor.inlines import ReverseInlineFormSet, \
-    ReverseInlineModelAdmin, SchemaModelInline
+    ReverseInlineModelAdmin
 from django.core.exceptions import ValidationError, PermissionDenied
 from metashare.repository.models import resourceComponentTypeType_model, \
     corpusInfoType_model, languageDescriptionInfoType_model, \
     lexicalConceptualResourceInfoType_model, toolServiceInfoType_model, \
     corpusMediaTypeType_model, languageDescriptionMediaTypeType_model, \
     lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model, \
-    metadataInfoType_model, resourceCreationInfoType_model, \
-    resourceDocumentationInfoType_model, \
-    validationInfoType_model, licenceInfoType_model
+    licenceInfoType_model
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
     ALLOWED_ARCHIVE_EXTENSIONS
 from metashare.utils import verify_subclass
@@ -32,9 +30,7 @@ from django.http import Http404
 from metashare.repository.editor.forms import StorageObjectUploadForm
 from django.utils.html import escape
 from django.utils.translation import ugettext as _
-from selectable.forms.widgets import AutoCompleteSelectMultipleWidget
-from metashare.repository.editor.lookups import PersonLookup, ActorLookup, \
-    DocumentLookup, ProjectLookup, MembershipLookup
+from metashare.repository.editor.lookups import MembershipLookup
 from metashare.repository.editor.widgets import OneToManyWidget
 
 csrf_protect_m = method_decorator(csrf_protect)
