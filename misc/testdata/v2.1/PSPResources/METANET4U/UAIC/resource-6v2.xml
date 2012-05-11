@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
-              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>Romanian Semantic Classes</resourceName>
       <description>The lexicon contains a collection of lemmas and stems from various POS categories (explicitly marked only in the file classes_eminescu.xml): verb, noun, adjective and adverb, including 30 semantic classes, chosen to fit optimally with the necessities of interpreting the political discourse.</description>
@@ -14,7 +12,7 @@
    <distributionInfo>
       <availability>available-restrictedUse</availability>
       <licenceInfo>
-         <licence>GeneralLicenceGrant</licence>
+         <licence>other</licence>
          <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
          <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
       </licenceInfo>

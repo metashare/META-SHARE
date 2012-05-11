@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
-              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>ROMANIAN CORPUS 1984 ANNOTATED WITH NOUN PHRASES</resourceName>
       <description>This corpus is based on Multext-East cesAna: Nineteen Eighty-Four (Romanian) from MULTEXT-East, Version 4 edition. The original corpus contains 6520 sentences and 118328 tokens annotated with part of speech tags (manually corrected). The delivered corpus contains noun phrase chunks annotations. A part of these are deep noun phrases annotated with an automatic tool (grammar based) and another part is shallow noun and prepositional phrases annotated by human experts.</description>
@@ -14,7 +12,7 @@
    <distributionInfo>
       <availability>available-restrictedUse</availability>
       <licenceInfo>
-         <licence>GeneralLicenceGrant</licence>
+         <licence>other</licence>
          <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
          <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
       </licenceInfo>
