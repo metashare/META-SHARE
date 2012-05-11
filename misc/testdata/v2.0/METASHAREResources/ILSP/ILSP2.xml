@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>POETICON cognitive experiments: Audiovisual resource of linguistic descriptions of ancient tools</resourceName>
+      <description>This resource is the outcome of cognitive experiments carried out within the POETICON project. The resource contains audiovisual recordings of spontaneous linguistic descriptions of Stone Age tools. The goal was to collect data describing the perception of a subject when naming a tool and listing its possible use and notable features, as well as the correlation of this info with up to date objects.  It is rich in verbal and non-verbal (e.g. gestures) expressions.</description>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>proprietary</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Pastra</surname>
+      <givenName>Katerina</givenName>
+      <communicationInfo>
+         <email>kpastra@ilsp.gr</email>
+      </communicationInfo>
+   </contactPerson>
+   <contactPerson>
+      <surname>Piperidis</surname>
+      <givenName>Stelios</givenName>
+      <communicationInfo>
+         <email>spip@ilsp.gr</email>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+	   <metadataCreationDate>2011-02-02</metadataCreationDate>
+      <source>META</source>
+   </metadataInfo>
+   <usageInfo>
+		    <foreseenUseInfo>
+			      <foreseenUse>nlpApplications</foreseenUse>
+			      <useNLPSpecific>lexiconAcquisitionFromCorpora</useNLPSpecific>
+		    </foreseenUseInfo>
+		    <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+         <useNLPSpecific>lexiconAcquisitionFromCorpora</useNLPSpecific>
+      </actualUseInfo>
+	  </usageInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>bilingual</lingualityType>
+			               <multilingualityType>comparable</multilingualityType>
+		             </lingualityInfo>
+               <languageInfo>
+			
+			               <languageId>ell</languageId>
+			               <languageName>Modern Greek (1453-)</languageName>
+		             </languageInfo>
+               <languageInfo>
+			
+			               <languageId>eng</languageId>
+			               <languageName>English</languageName>
+		             </languageInfo>
+               <sizeInfo>
+			               <size>110</size>
+			
+			               <sizeUnit>hours</sizeUnit>
+		             </sizeInfo>
+               <annotationInfo>
+                  <annotationType>speechAnnotation-orthographicTranscription</annotationType>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>semanticAnnotation</annotationType>
+               </annotationInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

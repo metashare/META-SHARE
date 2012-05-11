@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: UP10_7.3.xml 42662 2011-12-01 14:33:59Z martha $ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Parliament Speech Corpus</resourceName>
+      <description>Icelandic speech corpus, 20 hours, about 190,000 running words, of unprepared speeches from the Icelandic Parliament, synchronized text and sound files</description>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability>
+      <licenceInfo>
+         <licence>CLARIN_PUB</licence>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
+      </licenceInfo>
+      <iprHolder>
+         <organizationInfo>
+	           <organizationName>The Arni Magnusson Institute for Icelandic Studies</organizationName>
+	           <organizationShortName>AMI</organizationShortName>
+	           <departmentName>Department of Lexicography</departmentName>
+	           <communicationInfo>
+               <email>ordabok@hi.is</email>
+            </communicationInfo>
+         </organizationInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Svavarsdóttir</surname>
+      <givenName>Ásta</givenName>
+      <communicationInfo>
+         <email>asta@hi.is</email>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-29</metadataCreationDate>
+      <metadataCreator>
+         <surname>Helgadóttir</surname>
+         <givenName>Sigrún</givenName>
+         <communicationInfo>
+            <email>sigruhel@hi.is</email>
+         </communicationInfo>
+         <affiliation>
+	           <organizationName>The Arni Magnusson Institute for Icelandic Studies</organizationName>
+	           <communicationInfo>
+               <email>ordabok@hi.is</email>
+            </communicationInfo>
+         </affiliation>
+      </metadataCreator>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+  </versionInfo>
+   <usageInfo>
+      <foreseenUseInfo>
+         <foreseenUse>nlpApplications</foreseenUse>
+         <useNLPSpecific>speechAnalysis</useNLPSpecific>
+         <useNLPSpecific>speechRecognition</useNLPSpecific>
+         <useNLPSpecific>speechSynthesis</useNLPSpecific>
+      </foreseenUseInfo>
+      <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+      </actualUseInfo>
+  </usageInfo>
+   <resourceDocumentationInfo>
+      <documentation>
+         <documentUnstructured>Ásta Svavarsdóttir. 2007. Talmál og málheildir — talmál og orðabækur. Orð og tunga 9:25-50.</documentUnstructured>
+      </documentation>
+      <documentation>
+         <documentUnstructured>Höskuldur Thráinsson, Ásgrímur Angantýsson, Ásta Svavarsdóttir, Thórhallur Eythórsson and Jóhannes Gísli Jónsson. 2007.  The Icelandic (Pilot) Project in ScanDiaSyn. Nordlyd. Tromsø University Working Papers on Language and Linguistics, Vol. 34, Nr. 1: 87-124. (Sérhefti um Scandinavian Dialect Syntax 2005). Vefrit á slóðinni http://www.ub.uit.no/baser/nordlyd/viewissue.php?id=11.</documentUnstructured>
+      </documentation>
+   </resourceDocumentationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+      
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>isl</languageId>
+                  <languageName>Icelandic</languageName>
+               </languageInfo>
+               <modalityInfo>
+                  <modalityType>spokenLanguage</modalityType>
+               </modalityInfo>
+               <sizeInfo>
+                  <size>190000</size>
+      
+                  <sizeUnit>tokens</sizeUnit>
+               </sizeInfo>
+               <annotationInfo>
+                  <annotationType>segmentation</annotationType>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>lemmatization</annotationType>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>morphosyntacticAnnotation-posTagging</annotationType>
+               </annotationInfo>
+            </corpusTextInfo>
+            <corpusAudioInfo>
+               <mediaType>audio</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+      
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>isl</languageId>
+                  <languageName>Icelandic</languageName>
+               </languageInfo>
+               <modalityInfo>
+                  <modalityType>spokenLanguage</modalityType>
+               </modalityInfo>
+               <audioSizeInfo>
+                  <sizeInfo>
+                     <size>20</size>
+                     <sizeUnit>hours</sizeUnit>
+                  </sizeInfo>
+               </audioSizeInfo>
+            </corpusAudioInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: UP10-6.6.xml 42662 2011-12-01 14:33:59Z martha $ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Classics of Finnish Literature</resourceName>
+      <description>Published works by established Finnish authors from 1880's to 1930's. Includes prose fiction, plays, poetry and aphorisms, some originally in Swedish.</description>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>underNegotiation</licence>
+         <restrictionsOfUse>other</restrictionsOfUse>
+         <distributionAccessMedium>other</distributionAccessMedium>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Suutari</surname>
+      <givenName>Toni</givenName>
+      <communicationInfo>
+         <email>toni.suutari@kotus.fi</email>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-12-31</metadataCreationDate>
+   </metadataInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>fin</languageId>
+                  <languageName>Finnish</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>1500000</size>
+      
+                  <sizeUnit>words</sizeUnit>
+               </sizeInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>
