@@ -9,7 +9,8 @@ from metashare.repository.models import personInfoType_model, \
     projectInfoType_model, organizationInfoType_model,\
     membershipInfoType_model, \
     targetResourceInfoType_model, languageVarietyInfoType_model, \
-    sizeInfoType_model
+    sizeInfoType_model, annotationInfoType_model, videoFormatInfoType_model, \
+    imageFormatInfoType_model
 
 class PersonLookup(ModelLookup):
     model = personInfoType_model
@@ -101,6 +102,30 @@ class MembershipLookup(ModelLookup):
         removed from OneToOneWidget
     '''
     model = membershipInfoType_model
+
+class AnnotationLookup(ModelLookup):
+    '''
+        Dummy class for use with OneToOneWidget.
+        Should be removed when unnecessary dependencies are
+        removed from OneToOneWidget
+    '''
+    model = annotationInfoType_model
+
+class VideoFormatLookup(ModelLookup):
+    '''
+        Dummy class for use with OneToOneWidget.
+        Should be removed when unnecessary dependencies are
+        removed from OneToOneWidget
+    '''
+    model = videoFormatInfoType_model
+
+class ImageFormatLookup(ModelLookup):
+    '''
+        Dummy class for use with OneToOneWidget.
+        Should be removed when unnecessary dependencies are
+        removed from OneToOneWidget
+    '''
+    model = imageFormatInfoType_model
 
 class LanguageVarietyLookup(ModelLookup):
     '''
