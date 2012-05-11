@@ -129,6 +129,11 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         '''
         if '_popup' in request.REQUEST:
             return self.edit_response_close_popup_magic(obj)
+        elif '_popup_o2m' in request.REQUEST:
+            caller = None
+            if '_caller' in request.REQUEST:
+                caller = request.REQUEST['_caller']
+            return self.edit_response_close_popup_magic_o2m(obj, caller)
         else:
             return super(SchemaModelAdmin, self).response_change(request, obj)
 

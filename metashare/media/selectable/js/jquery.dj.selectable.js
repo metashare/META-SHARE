@@ -41,8 +41,11 @@
         _addDeckItem: function(input) {
             /* Add new deck list item from a given hidden input */
             var self = this;
-            $('<li>')
-            .text($(input).attr('title'))
+            var recId = $(input).attr('value');
+            var title = $(input).attr('title');
+            var jqItem = $('<li>')
+            .attr('val_id', recId)
+            .append($('<span>').addClass('title').text(title))
             .addClass('selectable-deck-item')
             .appendTo(this.deck)
             .append(
@@ -58,30 +61,44 @@
                         text: false
                     })
                     .click(function() {
-                        $(input).remove();
+                        if(self.allowEditing)
+                        {
+                        	var isSure = confirm("Are you sure you want to delete this item?");
+                        	if(!isSure)
+                        	{
+                        		return false;
+                        	}
+                        }
+                    	$(input).remove();
                         $(this).closest('li').remove();
                         return false;
                     })
                 )
-            )
-            .append(
-                    $('<div>')
-                    .addClass('selectable-deck-edit')
-                    .append(
-                        $('<a>')
-                        .attr('href', '#')
-                        .button({
-                            icons: {
-                                primary: self.options.editIcon
-                            },
-                            text: false
-                        })
-                        .click(function() {
-                            var recId = $(input).attr('value');
-                            return false;
-                        })
-                    )
-                );
+            );
+            if(self.allowEditing && (self.baseEditingUrl != null))
+            {
+                jqItem.append(
+                        $('<div>')
+                        .addClass('selectable-deck-edit')
+                        .append(
+                            $('<a>')
+                            .attr('href', '#')
+                            .button({
+                                icons: {
+                                    primary: self.options.editIcon
+                                },
+                                text: false
+                            })
+                            .click(function() {
+                                var recId = $(input).attr('value');
+                                var link = self.baseEditingUrl + "/" + recId + "/";
+                                var name = 'id_' + self.textName;
+                                showEditPopup(link, name, self);
+                                return false;
+                            })
+                        )
+                    );
+            }
         },
 
         select: function(item) {
@@ -120,6 +137,15 @@
             input = this.element,
             data = $(input).data();
             self.allowNew = data.selectableAllowNew || data['selectable-allow-new'];
+            self.allowEditing = data.selectableAllowEditing || data['selectable-allow-editing'];
+            self.baseEditingUrl = null;
+            var jqParent = $(input).parent();
+            var jqA = jqParent.find('a');
+            var href = jqA.attr('href');
+            if(href)
+            {
+            	self.baseEditingUrl = href.replace(/\/add\//, '');
+            }
             self.allowMultiple = data.selectableMultiple || data['selectable-multiple'];
             self.textName = $(input).attr('name');
             self.hiddenName = self.textName.replace('_0', '_1');
@@ -341,3 +367,73 @@ $(document).ready(function() {
         bindSelectables('body');
     }
 });
+
+var lastWidget = null;
+var testIframe = false;
+
+function showEditPopup(href, name, widget)
+{
+    lastWidget = widget;
+	if (href.indexOf('?') == -1) {
+        href += '?_popup_o2m=1';
+    } else {
+        href  += '&_popup_o2m=1';
+    }
+    if(!testIframe)
+    {
+    	href += '&_caller=opener'
+    	var win = window.open(href, name, 'height=500,width=800,resizable=yes,scrollbars=yes');
+        win.focus();
+    }
+    else
+    {
+    	href += '&_caller=top'
+    	openDialog(href);
+    }
+    return false;
+}
+
+function dismissEditPopup(win, objId, newRepr)
+{
+	var jqLi = lastWidget.deck.find('li[val_id=' + objId + ']');
+	var jqSpan = jqLi.find('span.title');
+	jqSpan.text(newRepr);
+	if(!testIframe)
+	{
+		win.close();
+	}
+	else
+	{
+		closeDialog();
+	}
+}
+
+
+//Test
+
+var jqDialog = null;
+
+function openDialog(href)
+{
+	jqDialog = $("<div>");
+	jqDialog.addClass("dialog");
+	var dialogOpts = {"modal": true, "width": "800", "height": "500"};
+	jqIframe = $("<iframe>");
+	jqIframe.css('width', '100%').css('height', '100%')
+	jqIframe.attr("src", href);
+	jqDialog.append(jqIframe);
+	$("body").append(jqDialog);
+	jqDialog.dialog(dialogOpts);
+}
+
+function closeDialog()
+{
+	jqIframe.remove();
+	jqIframe = null;
+	if(jqDialog != null)
+	{
+		jqDialog.remove();
+		jqDialog = null;
+	}
+}
+
