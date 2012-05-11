@@ -10,7 +10,7 @@ except:
     import pickle
 
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
-from django.forms import widgets, TextInput, Textarea
+from django.forms import widgets, TextInput, Textarea, Media
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
 from selectable.forms.widgets import SelectableMediaMixin, SelectableMultiWidget, \
@@ -57,6 +57,8 @@ class DictWidget(widgets.Widget):
         self.blank = blank
         self.max_key_length = max_key_length
         self.max_val_length = max_val_length
+        # path to the Django template which is used to render this widget
+        self._template = 'repository/editor/dict_widget.html'
         super(DictWidget, self).__init__()
 
     def render(self, name, value, attrs=None):
@@ -89,8 +91,7 @@ class DictWidget(widgets.Widget):
             # dictionary must not be blank)
             _entries.append(self._get_dict_entry(name, 0, None, None))
         # render final HTML for this widget instance
-        return mark_safe(render_to_string('repository/editor/dict_widget.html',
-                                          _context))
+        return mark_safe(render_to_string(self._template, _context))
 
     def _get_dict_entry(self, field_name, idx, key, value):
         """
@@ -136,6 +137,35 @@ class DictWidget(widgets.Widget):
         if len(provided) != 0:
             return provided
         return None
+
+
+class LangDictWidget(DictWidget):
+    """
+    A `DictWidget` which has RFC 3066 language codes as keys.
+    """
+    def __init__(self, *args, **kwargs):
+        super(LangDictWidget, self).__init__(*args, **kwargs)
+        # path to the Django template which is used to render this widget
+        self._template = 'repository/editor/lang_dict_widget.html'
+
+    def _get_dict_entry(self, field_name, idx, key, value):
+        if not key:
+            # by default we (blindly) propose the ISO 639-2 language code for an
+            # undetermined language
+            key = 'und'
+        return super(LangDictWidget, self)._get_dict_entry(field_name, idx, key,
+                                                           value)
+
+    def _media(self):
+        """
+        Returns a `Media` object for this widget which is dynamically created
+        from the JavaScript of `DictWidget` and CSS specific to this widget.
+        """
+        # pylint: disable-msg=E1101
+        return DictWidget().media['js'] \
+            + Media(css={'all': ('{}css/lang_dict_widget.css'.format(
+                                        settings.ADMIN_MEDIA_PREFIX),)})
+    media = property(_media)
 
 
 class SubclassableRelatedFieldWidgetWrapper(RelatedFieldWidgetWrapper):
