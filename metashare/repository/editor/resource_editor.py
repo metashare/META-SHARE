@@ -5,8 +5,8 @@ from metashare.repository.models import resourceComponentTypeType_model, \
     corpusInfoType_model, languageDescriptionInfoType_model, \
     lexicalConceptualResourceInfoType_model, toolServiceInfoType_model, \
     corpusMediaTypeType_model, languageDescriptionMediaTypeType_model, \
-    lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model
-
+    lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model, \
+    licenceInfoType_model
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
     ALLOWED_ARCHIVE_EXTENSIONS
 from metashare.utils import verify_subclass
@@ -30,6 +30,8 @@ from django.http import Http404
 from metashare.repository.editor.forms import StorageObjectUploadForm
 from django.utils.html import escape
 from django.utils.translation import ugettext as _
+from metashare.repository.editor.lookups import MembershipLookup
+from metashare.repository.editor.widgets import OneToManyWidget
 
 csrf_protect_m = method_decorator(csrf_protect)
 
@@ -246,7 +248,7 @@ def export_xml_resources(modeladmin, request, queryset):
                 zipfile.writestr(resource_filename, pretty)
     
             except Exception:
-                raise Http404(_('Could not export resource "%(name)s" with primary key %(key)r.') \
+                raise Http404(_('Could not export resource "%(name)s" with primary key %(key)s.') \
                   % {'name': force_unicode(obj), 'key': escape(obj.storage_object.id)})
 
         zipfile.close()  
@@ -258,9 +260,9 @@ def export_xml_resources(modeladmin, request, queryset):
         response.write(in_memory.read())  
 
         return response
-export_xml_resources.short_description = "Export description to XML selected published resources"
+export_xml_resources.short_description = "Export selected resource descriptions to XML"
 
-
+from django import forms
 
 class ResourceModelAdmin(SchemaModelAdmin):
     inline_type = 'stacked'
@@ -341,16 +343,16 @@ class ResourceModelAdmin(SchemaModelAdmin):
             raise PermissionDenied
 
         if obj is None:
-            raise Http404(_('%(name)s object with primary key %(key)r does not exist.') \
+            raise Http404(_('%(name)s object with primary key %(key)s does not exist.') \
              % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
         storage_object = obj.storage_object
         if storage_object is None:
-            raise Http404(_('%(name)s object with primary key %(key)r does not have a StorageObject attached.') \
+            raise Http404(_('%(name)s object with primary key %(key)s does not have a StorageObject attached.') \
               % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
         if not storage_object.master_copy:
-            raise Http404(_('%(name)s object with primary key %(key)r is not a master-copy.') \
+            raise Http404(_('%(name)s object with primary key %(key)s is not a master-copy.') \
               % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
         existing_download = storage_object.get_download()
@@ -430,12 +432,14 @@ class ResourceModelAdmin(SchemaModelAdmin):
             raise PermissionDenied
 
         if obj is None:
-            raise Http404(_('%(name)s object with primary key %(key)r does not exist.') \
+            raise Http404(_('%(name)s object with primary key %(key)s does not exist.') \
              % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
-        storage_object = obj.storage_object
-        if storage_object is None:
-            raise Http404(_('%(name)s object with primary key %(key)r does not have a StorageObject attached.') \
+        if obj.storage_object is None:
+            raise Http404(_('%(name)s object with primary key %(key)s does not have a StorageObject attached.') \
+              % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
+        elif obj.storage_object.deleted:
+            raise Http404(_('%(name)s object with primary key %(key)s does not exist anymore.') \
               % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
         from xml.etree import ElementTree
@@ -453,7 +457,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
             return response
 
         except Exception:
-            raise Http404(_('Could not export resource "%(name)s" with primary key %(key)r.') \
+            raise Http404(_('Could not export resource "%(name)s" with primary key %(key)s.') \
               % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
 
@@ -704,3 +708,13 @@ class ResourceModelAdmin(SchemaModelAdmin):
         # We add the current user to the resource owners:
         self.add_to_my_resources(request)
         return super(ResourceModelAdmin, self).change_view(request, object_id, _extra_context)
+
+class LicenceForm(forms.ModelForm):
+    class Meta:
+        model = licenceInfoType_model
+        widgets = {'membershipInfo': OneToManyWidget(lookup_class=MembershipLookup)}
+
+class LicenceModelAdmin(SchemaModelAdmin):
+    form = LicenceForm
+
+    
