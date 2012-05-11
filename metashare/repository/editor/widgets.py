@@ -25,7 +25,7 @@ LOGGER.addHandler(settings.LOG_HANDLER)
 
 # the maximum length (in characters) where `TextInput` widgets will still be
 # used; for larger sizes we use `Textarea` widgets
-_MAX_TEXT_INPUT_SIZE = 80
+_MAX_TEXT_INPUT_SIZE = 150
 
 
 class DictWidget(widgets.Widget):
@@ -260,17 +260,35 @@ class MultiFieldWidget(widgets.Widget):
         }
         js = ('js/multi-field-widget.js',)
     
-    def __init__(self, widget_id, *args, **kwargs):
+    def __init__(self, widget_id, max_length=None, **kwargs):
         """
         Initialises a new MultiFieldWidget instance.
         
         This saves the given, required widget_id, clears the errors dictionary
         and then calls the super class constructor with any remaining args.
+        Any max_length argument is used to determine the appropriate size for
+        the input fields.
         """
         self.widget_id = widget_id
+        self.max_length = max_length
         self.errors = {}
-        super(MultiFieldWidget, self).__init__(*args, **kwargs)
-    
+        super(MultiFieldWidget, self).__init__(**kwargs)
+
+    def _render_input_widget(self, name, value, attrs):
+        """
+        Renders and returns the most suitable widget for inputting a single
+        field in this `MultiFieldWidget`.
+        """
+        if self.max_length:
+            if self.max_length > _MAX_TEXT_INPUT_SIZE:
+                result = Textarea().render(name, value, attrs)
+            else:
+                result = TextInput(attrs={ 'maxlength': self.max_length }) \
+                            .render(name, value, attrs)
+        else:
+            result = TextInput().render(name, value, attrs)
+        return result
+
     def render(self, name, value, attrs=None):
         """
         Renders the MultiFieldWidget with the given name and value.
@@ -294,10 +312,7 @@ class MultiFieldWidget(widgets.Widget):
             except:
                 LOGGER.error('Error converting value to list!')
                 value = []
-        
-        # The widget used for this MultiFieldWidget is defined in self.attrs.
-        input_widget = self.attrs.get('widget', TextInput)
-        
+
         # We collect all rendered widgets inside _field_widgets.
         _field_widgets = []
         _field_attrs = {'id': 'id_{0}'.format(name), 'class': 'input',
@@ -307,7 +322,8 @@ class MultiFieldWidget(widgets.Widget):
         # adding an index number 0..n-1 to support container id generation.
         for _id, _value in enumerate(value):
             # Render input_widget instance as HTML.
-            _field_widget = input_widget().render(name, _value, _field_attrs)
+            _field_widget = self._render_input_widget(name, _value,
+                                                      _field_attrs)
             
             # Define context for container template rendering.
             _context = {'id': _id, 'field_widget': _field_widget,
@@ -326,7 +342,7 @@ class MultiFieldWidget(widgets.Widget):
         _id = len(value)
         if not _id:
             # Note that value='' as values is empty.
-            _field_widget = input_widget().render(name, '', _field_attrs)
+            _field_widget = self._render_input_widget(name, '', _field_attrs)
             _context = {'id': _id, 'field_widget': _field_widget,
               'widget_id': self.widget_id,
               'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX}
@@ -334,14 +350,14 @@ class MultiFieldWidget(widgets.Widget):
             _container = render_to_string('repository/container.html', _context)
             _field_widgets.append(_container)
         
-            _field_widget = input_widget().render(name, '', _field_attrs)
+            _field_widget = self._render_input_widget(name, '', _field_attrs)
             _context = {'id': _id, 'field_widget': _field_widget,
               'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX}
         
         # The JavaScript code needs an empty "template" to create new input
         # widgets dynamically; this is pre-rendered and added to the template
         # for the MultiFieldWidget instance here.
-        _empty_widget = input_widget().render(name, '', _field_attrs)
+        _empty_widget = self._render_input_widget(name, '', _field_attrs)
         _context = {'empty_widget': _empty_widget,
           'field_widgets': mark_safe(u'\n'.join(_field_widgets)),
           'widget_id': self.widget_id,
