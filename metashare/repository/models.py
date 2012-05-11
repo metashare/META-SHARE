@@ -1075,9 +1075,9 @@ ANNOTATIONINFOTYPE_SEGMENTATIONLEVEL_CHOICES = _make_choices_from_list([
 ])
 
 ANNOTATIONINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES = _make_choices_from_list([
-  u'BLM', u'CES', u'EML', u'EMMA', u'GMX', u'GrAF', u'HamNoSys', u'InkML',
-  u'ISO12620',u'ISO16642', u'ISO1987', u'ISO26162', u'ISO30042', u'ISO704',
-  u'LMF',u'MAF', u'MLIF', u'MULTEXT', u'MUMIN',
+  u'BLM', u'CES', u'EAGLES', u'EML', u'EMMA', u'GMX', u'GrAF', u'HamNoSys',
+  u'InkML',u'ISO12620', u'ISO16642', u'ISO1987', u'ISO26162', u'ISO30042',
+  u'ISO704',u'LMF', u'MAF', u'MLIF', u'MULTEXT', u'MUMIN',
   u'multimodalInteractionFramework',u'OAXAL', u'OWL', u'pennTreeBank',
   u'pragueTreebank',u'RDF', u'SemAF', u'SemAF_DA', u'SemAF_NE',
   u'SemAF_SRL',u'SemAF_DS', u'SKOS', u'SRX', u'SynAF', u'TBX', u'TMX',
@@ -2568,8 +2568,8 @@ class personInfoType_model(actorInfoType_model):
       default_retriever=best_lang_value_retriever, 
       verbose_name='Given name', 
       max_val_length=100, 
-      help_text='The given name (first name) of a person related to the ' \
-      'resource; initials can also be used',
+      help_text='The given name (first name) of aperson related to the r' \
+      'esource; initials can also be used',
       blank=True)
 
     sex = models.CharField(
@@ -5511,9 +5511,9 @@ LANGUAGEDESCRIPTIONENCODINGINFOTYPE_ENCODINGLEVEL_CHOICES = _make_choices_from_l
 ])
 
 LANGUAGEDESCRIPTIONENCODINGINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES = _make_choices_from_list([
-  u'BLM', u'CES', u'EML', u'EMMA', u'GMX', u'GrAF', u'HamNoSys', u'InkML',
-  u'ISO12620',u'ISO16642', u'ISO1987', u'ISO26162', u'ISO30042', u'ISO704',
-  u'LMF',u'MAF', u'MLIF', u'MULTEXT', u'MUMIN',
+  u'BLM', u'CES', u'EAGLES', u'EML', u'EMMA', u'GMX', u'GrAF', u'HamNoSys',
+  u'InkML',u'ISO12620', u'ISO16642', u'ISO1987', u'ISO26162', u'ISO30042',
+  u'ISO704',u'LMF', u'MAF', u'MLIF', u'MULTEXT', u'MUMIN',
   u'multimodalInteractionFramework',u'OAXAL', u'OWL', u'pennTreeBank',
   u'pragueTreebank',u'RDF', u'SemAF', u'SemAF_DA', u'SemAF_NE',
   u'SemAF_SRL',u'SemAF_DS', u'SKOS', u'SRX', u'SynAF', u'TBX', u'TMX',
@@ -6001,9 +6001,9 @@ LEXICALCONCEPTUALRESOURCEENCODINGINFOTYPE_LINGUISTICINFORMATION_CHOICES = _make_
 ])
 
 LEXICALCONCEPTUALRESOURCEENCODINGINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES = _make_choices_from_list([
-  u'BLM', u'CES', u'EML', u'EMMA', u'GMX', u'GrAF', u'HamNoSys', u'InkML',
-  u'ISO12620',u'ISO16642', u'ISO1987', u'ISO26162', u'ISO30042', u'ISO704',
-  u'LMF',u'MAF', u'MLIF', u'MULTEXT', u'MUMIN',
+  u'BLM', u'CES', u'EAGLES', u'EML', u'EMMA', u'GMX', u'GrAF', u'HamNoSys',
+  u'InkML',u'ISO12620', u'ISO16642', u'ISO1987', u'ISO26162', u'ISO30042',
+  u'ISO704',u'LMF', u'MAF', u'MLIF', u'MULTEXT', u'MUMIN',
   u'multimodalInteractionFramework',u'OAXAL', u'OWL', u'pennTreeBank',
   u'pragueTreebank',u'RDF', u'SemAF', u'SemAF_DA', u'SemAF_NE',
   u'SemAF_SRL',u'SemAF_DS', u'SKOS', u'SRX', u'SynAF', u'TBX', u'TMX',
@@ -6375,10 +6375,10 @@ class lexicalConceptualResourceImageInfoType_model(SchemaModel):
       verbose_name='Media', 
       help_text='Specifies the media type of the resource and basically ' \
       'corresponds to the physical medium of the content representation.' \
-      ' Each media type is described through a distinctive set of featur' \
-      'es. A resource may consist of parts attributed to different types' \
-      ' of media. A tool/service may take as input/output more than one ' \
-      'different media types.',
+      ' Each mediatype is described through a distinctive set of feature' \
+      's. A resource may consist of parts attributed to different types ' \
+      'of media. A tool/service may take as input/output more than one d' \
+      'ifferent media types.',
       default="image", editable=False, max_length=10, )
 
     # OneToMany field: modalityInfo
@@ -6501,9 +6501,9 @@ INPUTINFOTYPE_SEGMENTATIONLEVEL_CHOICES = _make_choices_from_list([
 ])
 
 INPUTINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES = _make_choices_from_list([
-  u'BLM', u'CES', u'EML', u'EMMA', u'GMX', u'GrAF', u'HamNoSys', u'InkML',
-  u'ISO12620',u'ISO16642', u'ISO1987', u'ISO26162', u'ISO30042', u'ISO704',
-  u'LMF',u'MAF', u'MLIF', u'MULTEXT', u'MUMIN',
+  u'BLM', u'CES', u'EAGLES', u'EML', u'EMMA', u'GMX', u'GrAF', u'HamNoSys',
+  u'InkML',u'ISO12620', u'ISO16642', u'ISO1987', u'ISO26162', u'ISO30042',
+  u'ISO704',u'LMF', u'MAF', u'MLIF', u'MULTEXT', u'MUMIN',
   u'multimodalInteractionFramework',u'OAXAL', u'OWL', u'pennTreeBank',
   u'pragueTreebank',u'RDF', u'SemAF', u'SemAF_DA', u'SemAF_NE',
   u'SemAF_SRL',u'SemAF_DS', u'SKOS', u'SRX', u'SynAF', u'TBX', u'TMX',
@@ -6739,9 +6739,9 @@ OUTPUTINFOTYPE_SEGMENTATIONLEVEL_CHOICES = _make_choices_from_list([
 ])
 
 OUTPUTINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES = _make_choices_from_list([
-  u'BLM', u'CES', u'EML', u'EMMA', u'GMX', u'GrAF', u'HamNoSys', u'InkML',
-  u'ISO12620',u'ISO16642', u'ISO1987', u'ISO26162', u'ISO30042', u'ISO704',
-  u'LMF',u'MAF', u'MLIF', u'MULTEXT', u'MUMIN',
+  u'BLM', u'CES', u'EAGLES', u'EML', u'EMMA', u'GMX', u'GrAF', u'HamNoSys',
+  u'InkML',u'ISO12620', u'ISO16642', u'ISO1987', u'ISO26162', u'ISO30042',
+  u'ISO704',u'LMF', u'MAF', u'MLIF', u'MULTEXT', u'MUMIN',
   u'multimodalInteractionFramework',u'OAXAL', u'OWL', u'pennTreeBank',
   u'pragueTreebank',u'RDF', u'SemAF', u'SemAF_DA', u'SemAF_NE',
   u'SemAF_SRL',u'SemAF_DS', u'SKOS', u'SRX', u'SynAF', u'TBX', u'TMX',
