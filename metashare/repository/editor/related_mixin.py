@@ -18,11 +18,13 @@ from metashare.repository.models import actorInfoType_model, \
     organizationInfoType_model, projectInfoType_model,\
     membershipInfoType_model, \
     personInfoType_model, \
-    targetResourceInfoType_model, documentInfoType_model
+    targetResourceInfoType_model, documentInfoType_model, \
+    annotationInfoType_model, languageVarietyInfoType_model, \
+    sizeInfoType_model
 from metashare.repository.editor.lookups import ActorLookup, \
     OrganizationLookup, ProjectLookup, MembershipLookup, \
     PersonLookup, TargetResourceLookup, DocumentLookup, \
-    DocumentationLookup
+    DocumentationLookup, LanguageVarietyLookup, SizeLookup
 
 class RelatedAdminMixin(object):
     '''
@@ -39,6 +41,9 @@ class RelatedAdminMixin(object):
         projectInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=ProjectLookup),
         membershipInfoType_model: OneToManyWidget(lookup_class=MembershipLookup),
         targetResourceInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=TargetResourceLookup),
+        annotationInfoType_model: OneToManyWidget(lookup_class=MembershipLookup),
+        languageVarietyInfoType_model: OneToManyWidget(lookup_class=LanguageVarietyLookup),
+        sizeInfoType_model: OneToManyWidget(lookup_class=SizeLookup),
     }
     
     custom_o2m_widget_overrides = {
