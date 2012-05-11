@@ -100,20 +100,26 @@ class DictWidget(widgets.Widget):
         `field_name` and `id` will be used in the names of the input fields.
         """
         _key_field_name = DictWidget._key_field_name_tpl.format(field_name, idx)
-        if self.max_key_length and self.max_key_length > _MAX_TEXT_INPUT_SIZE:
-            rendered_key = Textarea().render(_key_field_name, key)
+        if self.max_key_length:
+            if self.max_key_length > _MAX_TEXT_INPUT_SIZE:
+                rendered_key = Textarea().render(_key_field_name, key)
+            else:
+                rendered_key = \
+                    TextInput(attrs={ 'maxlength': self.max_key_length }) \
+                        .render(_key_field_name, key)
         else:
-            rendered_key = \
-                TextInput(attrs={ 'maxlength': self.max_key_length }) \
-                    .render(_key_field_name, key)
+            rendered_key = TextInput().render(_key_field_name, key)
 
         _val_field_name = DictWidget._val_field_name_tpl.format(field_name, idx)
-        if self.max_val_length and self.max_val_length > _MAX_TEXT_INPUT_SIZE:
-            rendered_val = Textarea().render(_val_field_name, value)
+        if self.max_val_length:
+            if self.max_val_length > _MAX_TEXT_INPUT_SIZE:
+                rendered_val = Textarea().render(_val_field_name, value)
+            else:
+                rendered_val = \
+                    TextInput(attrs={ 'maxlength': self.max_val_length }) \
+                        .render(_val_field_name, value)
         else:
-            rendered_val = \
-                TextInput(attrs={ 'maxlength': self.max_val_length }) \
-                    .render(_val_field_name, value)
+            rendered_val = TextInput().render(_val_field_name, value)
 
         return (rendered_key, rendered_val)
 
