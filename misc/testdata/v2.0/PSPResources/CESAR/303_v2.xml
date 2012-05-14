@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Croatian-English Parallel Corpus</resourceName>
+      <description>
+The Croatian-English Parallel Corpus (Hr-En p-corp) is a parallel unidirectional (hr to en) corpus of contemporary Croatian standard language collected from articles appearing in Croatia Weekly newspapers, published from 1998 to 2000. The corpus samples were obtained in digital form entirely, converted to XML, aligned using Vanilla Aligner, manually checked and stored in TMX format.
+        </description>
+      <resourceShortName>Hr-En p-corp</resourceShortName>
+      <url>http://hnk.ffzg.hr/hr-en_p-corp</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+      <identifier>303</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability>
+      <licenceInfo>
+         <licence>CC_BY-NC-SA_3.0</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <downloadLocation>http://hnk.ffzg.hr/hr-en_p-corp/download/CW_v02_tmx.zip</downloadLocation>
+         <distributionRightsHolder>
+				        <organizationInfo>
+					          <organizationName>University of Zagreb, Faculty of Humanities and Social Sciences, Department/Institute of Linguistics</organizationName>
+					          <communicationInfo>
+                  <email>zzl@ffzg.hr</email>
+                  <url>http://hnk.ffzg.hr</url>
+                  <address>Ivana Lučića 3</address>
+                  <zipCode>10000</zipCode>
+                  <city>Zagreb</city>
+                  <country>Croatia</country>
+                  <telephoneNumber>+385 1 6120 066</telephoneNumber>
+                  <faxNumber>+385 1 6156 879</faxNumber>
+               </communicationInfo>
+				        </organizationInfo>
+			      </distributionRightsHolder>
+      </licenceInfo>
+      <iprHolder>
+        <organizationInfo>
+            <organizationName>University of Zagreb, Faculty of Humanities and Social Sciences</organizationName>
+            <organizationShortName>FFZG</organizationShortName>
+            <departmentName>Department/Institute of Linguistics</departmentName>
+            <communicationInfo>
+               <email>zzl@ffzg.hr</email>
+               <url>http://hnk.ffzg.hr/</url>
+               <address>Ivana Lučića 3</address>
+               <zipCode>10000</zipCode>
+               <city>Zagreb</city>
+               <country>Croatia</country>
+               <telephoneNumber>+385 1 6120 066</telephoneNumber>
+               <faxNumber>+385 1 6156 879</faxNumber>
+            </communicationInfo>
+        </organizationInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Tadić</surname>
+      <givenName>Marko</givenName>
+      <communicationInfo>
+         <email>marko.tadic@ffzg.hr</email>
+         <url>http://hnk.ffzg.hr/mt</url>
+         <address>Ivana Lučića 3</address>
+         <zipCode>10000</zipCode>
+         <city>Zagreb</city>
+         <country>Croatia</country>
+         <telephoneNumber>+385 1 6120 066</telephoneNumber>
+         <faxNumber>+385 1 6156 879</faxNumber>
+      </communicationInfo>
+      <position>Head of the Chair for Algebraic and Computational Linguistics</position>
+      <affiliation>
+         <organizationName>University of Zagreb, Faculty of Humanities and Social Sciences, Department/Institute of Linguistics</organizationName>
+         <communicationInfo>
+            <email>zzl@ffzg.hr</email>
+            <url>http://hnk.ffzg.hr</url>
+            <address>Ivana Lučića 3</address>
+            <zipCode>10000</zipCode>
+            <city>Zagreb</city>
+            <country>Croatia</country>
+            <telephoneNumber>+385 1 6120 066</telephoneNumber>
+            <faxNumber>+385 1 6156 879</faxNumber>
+         </communicationInfo>
+			
+		    </affiliation>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-26</metadataCreationDate>
+      <metadataCreator>
+         <surname>Tadić</surname>
+         <givenName>Marko</givenName>
+         <communicationInfo>
+            <email>marko.tadic@ffzg.hr</email>
+            <address>Ivana Lučića 3</address>
+            <zipCode>10000</zipCode>
+            <city>Zagreb</city>
+            <country>Croatia</country>
+            <telephoneNumber>+385 1 6120 066</telephoneNumber>
+            <faxNumber>+385 1 6156 879</faxNumber>
+         </communicationInfo>
+         <position>Head of the Chair for Algebraic and Computational Linguistics</position>
+         <affiliation>
+            <organizationName>University of Zagreb, Faculty of Humanities and Social Sciences, Department/Institute of Linguistics</organizationName>
+            <communicationInfo>
+               <email>zzl@ffzg.hr</email>
+               <url>http://hnk.ffzg.hr</url>
+               <address>Ivana Lučića 3</address>
+               <zipCode>10000</zipCode>
+               <city>Zagreb</city>
+               <country>Croatia</country>
+               <telephoneNumber>+385 1 6120 066</telephoneNumber>
+               <faxNumber>+385 1 6156 879</faxNumber>
+            </communicationInfo>
+				
+			      </affiliation>
+      </metadataCreator>
+      <metadataLanguageId>en</metadataLanguageId>
+      <metadataLastDateUpdated>2011-11-27</metadataLastDateUpdated>
+   </metadataInfo>
+   <versionInfo>
+      <version>2</version>
+      <lastDateUpdated>2011-09-01</lastDateUpdated>
+      
+    </versionInfo>
+   <resourceDocumentationInfo>
+      <documentation>
+         <documentUnstructured>Marko Tadić. Building the Croatian-English Parallel Corpus. LREC2000 Proceedings, Athens-Pariz, 2000, Vol. I, pp 523-530</documentUnstructured>
+      </documentation>
+      <documentation>
+         <documentUnstructured>Marko Tadić. Procedures in Building the Croatian-English Parallel Corpus. International Journal of Corpus Linguistics, special issue, (2001), pp 107-123</documentUnstructured>
+      </documentation>
+   </resourceDocumentationInfo>
+   <resourceCreationInfo>
+      <resourceCreator>
+			      <organizationInfo>
+				        <organizationName>University of Zagreb, Faculty of Humanities and Social Sciences, Department/Institute of Linguistics</organizationName>
+				        <communicationInfo>
+               <email>zzl@ffzg.hr</email>
+               <url>http://hnk.ffzg.hr</url>
+               <address>Ivana Lučića 3</address>
+               <zipCode>10000</zipCode>
+               <city>Zagreb</city>
+               <country>Croatia</country>
+               <telephoneNumber>+385 1 6120 066</telephoneNumber>
+               <faxNumber>+385 1 6156 879</faxNumber>
+            </communicationInfo>
+			      </organizationInfo>
+		    </resourceCreator>
+      <fundingProject>
+         <projectName>Central and South-East European Resources</projectName>
+         <projectShortName>CESAR</projectShortName>
+         <url>http://www.cesar-project.net</url>
+         <fundingType>euFunds</fundingType>
+         <fundingType>nationalFunds</fundingType>
+         <funder>European Commission (50%)</funder>
+         <funder>University of Zagreb, Faculty of Humanities and Social Sciences (50%)</funder>
+         <projectStartDate>2011-02-01</projectStartDate>
+         <projectEndDate>2013-01-31</projectEndDate>
+      </fundingProject>
+      <creationStartDate>2000-03-01</creationStartDate>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>bilingual</lingualityType>
+		             </lingualityInfo>
+               <languageInfo>
+                  <languageId>hr</languageId>
+                  <languageName>Croatian</languageName>
+                  <languageScript>latin</languageScript>
+               </languageInfo>
+               <languageInfo>
+                  <languageId>en</languageId>
+                  <languageName>English</languageName>
+                  <languageScript>latin</languageScript>
+               </languageInfo>
+               <sizeInfo>
+			               <size>62500</size>
+			
+			               <sizeUnit>units</sizeUnit>
+		             </sizeInfo>
+               <characterEncodingInfo>
+                  <characterEncoding>UTF-8</characterEncoding>
+               </characterEncodingInfo>
+               <annotationInfo>
+                  <annotationType>alignment</annotationType>
+                  <segmentationLevel>sentence</segmentationLevel>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>segmentation</annotationType>
+                  <segmentationLevel>sentence</segmentationLevel>
+               </annotationInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

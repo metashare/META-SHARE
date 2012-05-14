@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: UP10_7.6.xml 42662 2011-12-01 14:33:59Z martha $ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Corpus of Old Icelandic</resourceName>
+      <description>Old Icelandic narrative texts in Modern Icelandic spelling</description>
+      <resourceShortName>The Saga Corpus</resourceShortName>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability>
+      <licenceInfo>
+         <licence>CLARIN_PUB</licence>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
+      </licenceInfo>
+      <iprHolder>
+         <organizationInfo>
+	           <organizationName>University of Iceland</organizationName>
+	           <organizationShortName>HI</organizationShortName>
+	           <departmentName>School of Humanities</departmentName>
+	           <communicationInfo>
+               <email>hug@hi.is</email>
+            </communicationInfo>
+         </organizationInfo>                                                                                                  
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Rögnvaldsson</surname>
+      <givenName>Eiríkur</givenName>
+      <communicationInfo>
+         <email>eirikur@hi.is</email>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-29</metadataCreationDate>
+      <metadataCreator>
+         <surname>Helgadóttir</surname>
+         <givenName>Sigrún</givenName>
+         <communicationInfo>
+            <email>sigruhel@hi.is</email>
+         </communicationInfo>
+         <affiliation>
+	           <organizationName>The Arni Magnusson Institute for Icelandic Studies</organizationName>
+	           <communicationInfo>
+               <email>ordabok@hi.is</email>
+            </communicationInfo>
+         </affiliation>
+      </metadataCreator>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+  </versionInfo>
+   <usageInfo>
+      <foreseenUseInfo>
+         <foreseenUse>nlpApplications</foreseenUse>
+         <useNLPSpecific>other</useNLPSpecific>
+      </foreseenUseInfo>
+      <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+         <useNLPSpecific>other</useNLPSpecific>
+      </actualUseInfo>
+      <actualUseInfo>
+         <actualUse>humanUse</actualUse>
+      </actualUseInfo>
+  </usageInfo>
+   <resourceDocumentationInfo>
+      <documentation>
+         <documentUnstructured>Eiríkur Rögnvaldsson and Sigrún Helgadóttir. 2011. Morphosyntactic Tagging of Old Icelandic Texts and Its Use in Studying Syntactic Variation and Change. Sporleder, Caroline, Antal P.J. van den Bosch og Kalliopi A. Zervanou (ritstj:): Language Technology for Cultural Heritage: Selected Papers from the LaTeCH Workshop Series, s. 63-76. Springer, Berlín.</documentUnstructured>
+      </documentation>
+   </resourceDocumentationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+      
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>isl</languageId>
+                  <languageName>Icelandic</languageName>
+               </languageInfo>
+               <modalityInfo>
+                  <modalityType>writtenLanguage</modalityType>
+               </modalityInfo>
+               <sizeInfo>
+                  <size>1600000</size>
+      
+                  <sizeUnit>words</sizeUnit>
+               </sizeInfo>
+               <annotationInfo>
+                  <annotationType>segmentation</annotationType>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>morphosyntacticAnnotation-posTagging</annotationType>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>lemmatization</annotationType>
+               </annotationInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

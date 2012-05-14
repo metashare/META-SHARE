@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Laws of Malta - Maltese</resourceName>
+      <description>The corpus contains the Laws of Malta in Maltese from the official government website. The unannotated raw text files were extracted from the pdf files that can be found on the website.</description>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+      <identifier>e9858d4f973a4db1b0b8cde67920dd81</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability>
+      <licenceInfo>
+         <licence>CC_BY-NC</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <licensor>
+              <personInfo>
+               <surname>Bruno</surname>
+               <givenName>Vanni</givenName>
+               <communicationInfo>
+                  <email>vanni.bruno@gov.mt </email>
+               </communicationInfo>
+               <position>Hear Justice Unit</position>
+               <affiliation>
+                  <organizationName>Ministry for Justice and Home Affairs</organizationName>
+                  <departmentName>Justice Unit</departmentName>
+                  <communicationInfo>
+                     <email>vanni.bruno@gov.mt </email>
+                  </communicationInfo>
+                      
+                  </affiliation>
+            </personInfo>
+          </licensor>
+         <distributionRightsHolder>
+              <personInfo>
+               <surname>Rosner</surname>
+               <givenName>Michael</givenName>
+               <communicationInfo>
+                  <email>mike.rosner@um.edu.mt</email>
+               </communicationInfo>
+               <affiliation>
+                  <organizationName>University of Malta</organizationName>
+                  <organizationShortName>UOM</organizationShortName>
+                  <communicationInfo>
+                     <email>mike.rosner@um.edu.mt</email>
+                  </communicationInfo>
+                      
+                  </affiliation>
+            </personInfo>
+          </distributionRightsHolder>
+         <distributionRightsHolder>
+              <organizationInfo>
+                <organizationName>University of Malta</organizationName>
+                <organizationShortName>UOM</organizationShortName>
+                <departmentName>Intelligent Computer Systems</departmentName>
+                  <communicationInfo>
+                  <email>mike.rosner@um.edu.mt</email>
+               </communicationInfo>
+              </organizationInfo>
+          </distributionRightsHolder>
+      </licenceInfo>
+      <iprHolder>
+          <personInfo>
+            <surname>Bruno</surname>
+            <givenName>Vanni</givenName>
+            <communicationInfo>
+               <email>vanni.bruno@gov.mt </email>
+            </communicationInfo>
+            <position>Head Justice Unit</position>
+            <affiliation>
+               <organizationName>Ministry for Justice and Home Affairs</organizationName>
+               <departmentName>Justice Unit</departmentName>
+               <communicationInfo>
+                  <email>vanni.bruno@gov.mt </email>
+               </communicationInfo>
+                  
+              </affiliation>
+         </personInfo>
+      </iprHolder>
+      <iprHolder>
+          <organizationInfo>
+            <organizationName>Ministry for Justice and Home Affairs</organizationName>
+            <departmentName>Justice Unit</departmentName>
+              <communicationInfo>
+               <email>vanni.bruno@gov.mt </email>
+            </communicationInfo>
+          </organizationInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Rosner</surname>
+      <givenName>Michael</givenName>
+      <communicationInfo>
+         <email>mike.rosner@um.edu.mt</email>
+      </communicationInfo>
+      <affiliation>
+         <organizationName>University of Malta</organizationName>
+         <organizationShortName>UOM</organizationShortName>
+         <departmentName>Intelligent Computer Systems</departmentName>
+         <communicationInfo>
+            <email>mike.rosner@um.edu.mt</email>
+         </communicationInfo>
+          
+      </affiliation>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-14</metadataCreationDate>
+      <metadataCreator>
+         <surname>Joachimsen</surname>
+         <givenName>Jan</givenName>
+         <communicationInfo>
+            <email>jan.joachimsen@um.edu.mt</email>
+         </communicationInfo>
+         <position>Project Officer</position>
+         <affiliation>
+            <organizationName>University of Malta</organizationName>
+            <organizationShortName>UOM</organizationShortName>
+            <departmentName>Intelligent Computer Systems</departmentName>
+            <communicationInfo>
+               <email>jan.joachimsen@um.edu.mt</email>
+            </communicationInfo>
+              
+          </affiliation>
+      </metadataCreator>
+      <source>METANET4U</source>
+   </metadataInfo>
+   <versionInfo>
+      <version>v1.0</version>
+  </versionInfo>
+   <usageInfo>
+      <foreseenUseInfo>
+        <foreseenUse>nlpApplications</foreseenUse>
+      </foreseenUseInfo>
+      <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+      </actualUseInfo>
+  </usageInfo>
+   <resourceCreationInfo>
+      <resourceCreator>
+          <personInfo>
+            <surname>Attard</surname>
+            <givenName>Andrew</givenName>
+            <communicationInfo>
+               <email>andrew.attard@um.edu.mt</email>
+            </communicationInfo>
+            <affiliation>
+               <organizationName>University of Malta</organizationName>
+               <organizationShortName>UOM</organizationShortName>
+               <departmentName>Intelligent Computer Systems</departmentName>
+               <communicationInfo>
+                  <email>andrew.attard@um.edu.mt</email>
+               </communicationInfo>
+                  
+              </affiliation>
+         </personInfo>
+      </resourceCreator>
+      <resourceCreator>
+          <organizationInfo>
+            <organizationName>University of Malta</organizationName>
+            <organizationShortName>UOM</organizationShortName>
+            <departmentName>Intelligent Computer Systems</departmentName>
+              <communicationInfo>
+               <email>andrew.attard@um.edu.mt</email>
+            </communicationInfo>
+          </organizationInfo>
+      </resourceCreator>
+      <fundingProject>
+         <projectName>METANET4U</projectName>
+         <fundingType>euFunds</fundingType>
+      </fundingProject>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>N/A</languageId>
+                  <languageName>Maltese</languageName>
+                  <languageVarietyInfo>
+                     <languageVarietyType>jargon</languageVarietyType>
+                     <languageVarietyName>Legalese</languageVarietyName>
+                     <sizePerLanguageVariety>
+                        <size>0</size>
+                        <sizeUnit>units</sizeUnit>
+                     </sizePerLanguageVariety>
+                  </languageVarietyInfo>
+               </languageInfo>
+               <sizeInfo>
+                  <size>69,9 </size>
+        
+                  <sizeUnit>bytes</sizeUnit>
+               </sizeInfo>
+               <textFormatInfo>
+                  <mimeType>text/plain</mimeType>
+               </textFormatInfo>
+               <characterEncodingInfo>
+                  <characterEncoding>UTF-8</characterEncoding>
+               </characterEncodingInfo>
+               <domainInfo>
+                  <domain>law_politics</domain>
+               </domainInfo>
+               <creationInfo>
+                  <originalSource>
+                     <targetResourceNameURI>http://www.justiceservices.gov.mt/lom.aspx?pageid=24 </targetResourceNameURI>
+                  </originalSource>
+                  <creationMode>automatic</creationMode>
+               </creationInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

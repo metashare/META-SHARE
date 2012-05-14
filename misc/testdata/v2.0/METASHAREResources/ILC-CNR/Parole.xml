@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Corpus Parole</resourceName>
+      <description>The PAROLE Italian Corpus comprises 3,135,651 words collected from four different domains:newspapers: 2,179,800 words from La Stampa, La Repubblica, Il Corriere della Sera, L’Unione Sarda, Il Sole 24ore, between 1992 and 1996, periodicals: 143,810 words from Casaviva, 100cose, Epoca, Espansione, Grazia, Panorama, Starbene, Storia Illustrata, Zerouno, between 1985 and 1988, books: 564,964 words, between 1970 and 1989, miscellaneous: 247,077 words from CNR documents, Patents, Maritime documents, Theater, between 1987 and 1997.</description>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>proprietary</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>DVD-R</distributionAccessMedium>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Calzolari</surname>
+      <givenName>Nicoletta</givenName>
+      <communicationInfo>
+         <email>nicoletta.calzolari@ilc.cnr.it</email>
+         <address>Area della Ricerca del CNR - Via Giuseppe Moruzzi N° 1</address>
+         <zipCode>56124</zipCode>
+         <city>Pisa</city>
+         <country>IT</country>
+         <telephoneNumber>+39 0503152870</telephoneNumber>
+         <faxNumber>+39 0503152839</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo><metadataCreationDate>2011-12-31</metadataCreationDate></metadataInfo>
+   <resourceDocumentationInfo>
+		    <samplesLocation>http://langtech1.ilc.cnr.it:8152/fedora/objects/cnr.langres:21/datastreams/DC/content</samplesLocation>
+		    <samplesLocation>http://langtech1.ilc.cnr.it:8152/fedora/objects/cnr.langres:21/datastreams/ZIP/content</samplesLocation>
+	  </resourceDocumentationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>ita</languageId>
+                  <languageName>Italian</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>3000000</size>
+            
+                  <sizeUnit>words</sizeUnit>
+               </sizeInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

@@ -71,6 +71,7 @@ Integer_type_table = {
     'unsignedInt': None,
     'short': None,
     'unsignedShort': None,
+    'gYear': None,
 }
 Float_type_table = {
     'decimal': None,

@@ -470,7 +470,7 @@ class EditorTest(SeleniumTestCase):
           "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[10]").text)    
         # skip to end of list 
         self.assertEqual("words", driver.find_element_by_xpath(
-          "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[49]").text)        
+          "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[50]").text)        
 
     
     def test_multi_select_widget(self):

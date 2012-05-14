@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: UIB-M10-11.xml 42662 2011-12-01 14:33:59Z martha $ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>SCARRIE Lexical Resource</resourceName>
+      <description>Lexical resource derived from original lexical resource used in the SCARRIE project</description>
+      <resourceShortName>SCARRIE</resourceShortName>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>CC_BY</licence>
+         <restrictionsOfUse>attribution</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+      </licenceInfo>
+      <iprHolder>
+         <personInfo>
+            <surname>Lindstad</surname>
+            <givenName>Arne Martinus</givenName>
+            <communicationInfo>
+               <email>sprakbanken@nb.no</email>
+            </communicationInfo>
+            <affiliation>
+               <organizationName>The National Library of Norway</organizationName>
+               <communicationInfo>
+                  <email>sprakbanken@nb.no</email>
+               </communicationInfo>
+            </affiliation>
+         </personInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Lindstad</surname>
+      <givenName>Arne Martinus</givenName>
+      <communicationInfo>
+         <email>sprakbanken@nb.no</email>
+      </communicationInfo>
+      <affiliation>
+         <organizationName>The National Library of Norway</organizationName>
+         <communicationInfo>
+            <email>sprakbanken@nb.no</email>
+         </communicationInfo>
+      </affiliation>
+   </contactPerson>
+   <contactPerson>
+      <surname>Ostad</surname>
+      <givenName>Johanne</givenName>
+      <communicationInfo>
+         <email>sprakbanken@nb.no</email>
+      </communicationInfo>
+      <affiliation>
+         <organizationName>The National Library of Norway</organizationName>
+         <communicationInfo>
+            <email>sprakbanken@nb.no</email>
+         </communicationInfo>
+      </affiliation>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-30</metadataCreationDate>
+      <metadataCreator>
+         <surname>Gjesdal</surname>
+         <givenName>Anje</givenName>
+         <communicationInfo>
+            <email>anje.gjesdal@uib.no</email>
+         </communicationInfo>
+         <affiliation>
+            <organizationName>Språkbanken</organizationName>
+            <communicationInfo>
+               <email>sprakbanken@nb.no</email>
+            </communicationInfo>
+         </affiliation>
+      </metadataCreator>
+   </metadataInfo>
+   <usageInfo>
+      <foreseenUseInfo>
+         <foreseenUse>nlpApplications</foreseenUse>
+         <useNLPSpecific>machineTranslation</useNLPSpecific> 
+         <useNLPSpecific>other</useNLPSpecific>  
+      </foreseenUseInfo>
+      <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+         <useNLPSpecific>machineTranslation</useNLPSpecific>
+         <useNLPSpecific>other</useNLPSpecific>
+      </actualUseInfo>
+  </usageInfo>
+   <resourceDocumentationInfo>
+      <documentation>
+         <documentUnstructured/>
+      </documentation>
+   </resourceDocumentationInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>computationalLexicon</lexicalConceptualResourceType>
+         <lexicalConceptualResourceEncodingInfo>
+            <encodingLevel>other</encodingLevel>
+            <conformanceToStandardsBestPractices>LMF</conformanceToStandardsBestPractices>
+         </lexicalConceptualResourceEncodingInfo>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+      
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>nob</languageId>
+                  <languageName>Norwegian Bokmål</languageName>
+               </languageInfo>
+               <modalityInfo>
+                  <modalityType>writtenLanguage</modalityType>
+               </modalityInfo>
+               <sizeInfo>
+	                 <size>362162</size>
+	
+	                 <sizeUnit>words</sizeUnit>
+               </sizeInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>

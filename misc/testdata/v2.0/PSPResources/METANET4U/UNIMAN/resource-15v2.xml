@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>GENIA POS &amp; Term Corpus</resourceName>
+      <description>A corpus of 2,000 MEDLINE abstracts, collected using the three MeSH terms human, blood cells and transcription factors. The corpus is available in three formats: 1) A text file containing part-of-speech (POS) annotation, based on the Penn Treebank format, 2) An XML file containing inline POS annotation, 3) A “merged” XML format, containing inline annotations, corresponding to both POS and term annotations </description>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+      <identifier>f36f8ab51fe04d34a7a78d5c0ceab6e9</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>CC_BY-SA_3.0</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <licensor>
+              <personInfo>
+               <surname>Ananiadou</surname>
+               <givenName>Sophia</givenName>
+               <communicationInfo>
+                  <email>sophia.ananiadou@manchester.ac.uk</email>
+               </communicationInfo>
+               <position>Professor</position>
+               <affiliation>
+                  <organizationName>University of Manchester</organizationName>
+                  <communicationInfo>
+                     <email>sophia.ananiadou@manchester.ac.uk</email>
+                  </communicationInfo>
+                      
+                  </affiliation>
+            </personInfo>
+          </licensor>
+         <distributionRightsHolder>
+              <personInfo>
+               <surname>Ananiadou</surname>
+               <givenName>Sophia</givenName>
+               <communicationInfo>
+                  <email>sophia.ananiadou@manchester.ac.uk</email>
+               </communicationInfo>
+               <affiliation>
+                  <organizationName>University of Manchester</organizationName>
+                  <communicationInfo>
+                     <email>sophia.ananiadou@manchester.ac.uk</email>
+                  </communicationInfo>
+                      
+                  </affiliation>
+            </personInfo>
+          </distributionRightsHolder>
+         <distributionRightsHolder>
+              <organizationInfo>
+                <organizationName>University of Manchester</organizationName>
+                  <communicationInfo>
+                  <email>sophia.ananiadou@manchester.ac.uk</email>
+               </communicationInfo>
+              </organizationInfo>
+          </distributionRightsHolder>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Ananiadou</surname>
+      <givenName>Sophia</givenName>
+      <communicationInfo>
+         <email>sophia.ananiadou@manchester.ac.uk</email>
+      </communicationInfo>
+      <affiliation>
+         <organizationName>University of Manchester</organizationName>
+         <departmentName>Department of Computer Science</departmentName>
+         <communicationInfo>
+            <email>sophia.ananiadou@manchester.ac.uk</email>
+         </communicationInfo>
+          
+      </affiliation>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-21</metadataCreationDate>
+      <metadataCreator>
+         <surname>Thompson</surname>
+         <givenName>Paul</givenName>
+         <communicationInfo>
+            <email>paul.thompson@manchester.ac.uk</email>
+         </communicationInfo>
+         <position>Research Associate</position>
+         <affiliation>
+            <organizationName>University of Manchester</organizationName>
+            <communicationInfo>
+               <email>paul.thompson@manchester.ac.uk</email>
+            </communicationInfo>
+              
+          </affiliation>
+      </metadataCreator>
+      <source>METANET4U</source>
+   </metadataInfo>
+   <usageInfo>
+      <foreseenUseInfo>
+        <foreseenUse>nlpApplications</foreseenUse>
+        <useNLPSpecific>namedEntityRecognition</useNLPSpecific>
+        <useNLPSpecific>posTagging</useNLPSpecific>
+      </foreseenUseInfo>
+      <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+      </actualUseInfo>
+  </usageInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>N/A</languageId>
+                  <languageName>English</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>2000</size>
+        
+                  <sizeUnit>articles</sizeUnit>
+               </sizeInfo>
+               <annotationInfo>
+                  <annotationType>morphosyntacticAnnotation-posTagging</annotationType>
+                  <segmentationLevel>word</segmentationLevel>
+                  <annotationFormat>text/plain</annotationFormat>
+                  <tagsetLanguageId>English</tagsetLanguageId>
+                  <annotationMode>mixed</annotationMode>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>morphosyntacticAnnotation-posTagging</annotationType>
+                  <segmentationLevel>word</segmentationLevel>
+                  <annotationFormat>text/xml</annotationFormat>
+                  <tagsetLanguageId>English</tagsetLanguageId>
+                  <annotationMode>mixed</annotationMode>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>semanticAnnotation-namedEntities</annotationType>
+                  <segmentationLevel>word</segmentationLevel>
+                  <annotationFormat>text/xml</annotationFormat>
+                  <tagsetLanguageId>English</tagsetLanguageId>
+                  <annotationMode>manual</annotationMode>
+               </annotationInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>
