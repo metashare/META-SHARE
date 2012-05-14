@@ -137,7 +137,6 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_name("key_form-0-description_0").send_keys("en")
         driver.find_element_by_name("val_form-0-description_0").clear()
         driver.find_element_by_name("val_form-0-description_0").send_keys("Test Description")
-        driver.find_element_by_link_text("Today").click()
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
@@ -207,7 +206,6 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_name("key_form-0-description_0").send_keys("en")
         driver.find_element_by_name("val_form-0-description_0").clear()
         driver.find_element_by_name("val_form-0-description_0").send_keys("Test Description")
-        driver.find_element_by_link_text("Today").click()
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()
@@ -285,7 +283,6 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_name("key_form-0-description_0").send_keys("en")
         driver.find_element_by_name("val_form-0-description_0").clear()
         driver.find_element_by_name("val_form-0-description_0").send_keys("Test Description")
-        driver.find_element_by_link_text("Today").click()
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()
@@ -364,7 +361,6 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_name("key_form-0-description_0").send_keys("en")
         driver.find_element_by_name("val_form-0-description_0").clear()
         driver.find_element_by_name("val_form-0-description_0").send_keys("Test Description")
-        driver.find_element_by_link_text("Today").click()
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()
@@ -511,7 +507,7 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_id("fieldsetcollapser0").click()
         # check that the left window contains all entries
         self.assertEqual("underNegotiation", driver.find_element_by_xpath(
-          "//select[@id='id_licenceinfotype_model_set-0-licence_from']/option[43]").text)
+          "//select[@id='id_licenceinfotype_model_set-0-licence_from']/option[41]").text)
         # add an entry
         driver.find_element_by_xpath(
           "//select[@id='id_licenceinfotype_model_set-0-licence_from']/option[1]").click()
@@ -527,7 +523,7 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_link_text("Remove").click()
         # entry is now at last position on left site
         self.assertEqual("AGPL", driver.find_element_by_xpath(
-          "//select[@id='id_licenceinfotype_model_set-0-licence_from']/option[43]").text)
+          "//select[@id='id_licenceinfotype_model_set-0-licence_from']/option[41]").text)
         
         
     def fill_distribution(self, driver, ss_path, parent_id):
