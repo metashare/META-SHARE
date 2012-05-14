@@ -1849,6 +1849,9 @@ label added for specific elements -->
 	<xs:complexType name="resolutionInfoType">
 		<xs:annotation>
 			<xs:documentation>Groups together information on the image resolution</xs:documentation>
+			<xs:appinfo>
+			    <render-short>{sizeWidth} {sizeHeight} {resolutionStandard}</render-short>
+			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="sizeWidth" type="xs:int" minOccurs="0">

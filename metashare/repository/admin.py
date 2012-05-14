@@ -414,6 +414,27 @@ class imageClassificationInfo_model_inline(SchemaModelInline):
 
 
 # pylint: disable-msg=C0103
+class imageFormatInfo_model_inline_corpusImageInfoType_model(SchemaModelInline):
+    model = imageFormatInfoType_model
+    collapse = True
+    fk_name = 'back_to_corpusimageinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class imageFormatInfo_model_inline_languageDescriptionImageInfoType_model(SchemaModelInline):
+    model = imageFormatInfoType_model
+    collapse = True
+    fk_name = 'back_to_languagedescriptionimageinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class imageFormatInfo_model_inline_lexicalConceptualResourceImageInfoType_model(SchemaModelInline):
+    model = imageFormatInfoType_model
+    collapse = True
+    fk_name = 'back_to_lexicalconceptualresourceimageinfotype_model'
+
+
+# pylint: disable-msg=C0103
 class languageDescriptionInfo_model_inline(SchemaModelInline):
     model = languageDescriptionInfoType_model
 
@@ -652,12 +673,6 @@ class personInfo_model_inline(SchemaModelInline):
 class relationInfo_model_inline(SchemaModelInline):
     model = relationInfoType_model
     collapse = True
-
-
-# pylint: disable-msg=C0103
-class resolutionInfo_model_inline(SchemaModelInline):
-    model = resolutionInfoType_model
-    template = 'admin/edit_inline/tabular.html'
 
 
 # pylint: disable-msg=C0103

@@ -2166,11 +2166,11 @@ class resolutionInfoType_model(SchemaModel):
                      key=lambda choice: choice[1].lower()),
       )
 
-    back_to_imageformatinfotype_model = models.ForeignKey("imageFormatInfoType_model",  blank=True, null=True)
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+    def real_unicode_(self):
+        # pylint: disable-msg=C0301
+        formatargs = ['sizeWidth', 'sizeHeight', 'resolutionStandard', ]
+        formatstring = u'{} {} {}'
+        return self.unicode_(formatstring, formatargs)
 
 COMPRESSIONINFOTYPE_COMPRESSIONNAME_CHOICES = _make_choices_from_list([
   u'mpg', u'avi', u'mov', u'flac', u'shorten', u'mp3', u'oggVorbis',
@@ -2576,8 +2576,8 @@ class personInfoType_model(actorInfoType_model):
       default_retriever=best_lang_value_retriever, 
       verbose_name='Given name', 
       max_val_length=100, 
-      help_text='The given name (first name) ofa person related to the r' \
-      'esource; initials can also be used',
+      help_text='The given name (first name) of a person related to the ' \
+      'resource; initials can also be used',
       blank=True)
 
     sex = models.CharField(
@@ -4787,7 +4787,7 @@ class corpusImageInfoType_model(SchemaModel):
       ( u'languageInfo', u'languageinfotype_model_set', OPTIONAL ),
       ( u'sizeInfo', u'sizeinfotype_model_set', REQUIRED ),
       ( u'imageContentInfo', u'imageContentInfo', RECOMMENDED ),
-      ( u'imageFormatInfo', u'imageFormatInfo', RECOMMENDED ),
+      ( u'imageFormatInfo', u'imageformatinfotype_model_set', RECOMMENDED ),
       ( u'annotationInfo', u'annotationinfotype_model_set', RECOMMENDED ),
       ( u'domainInfo', u'domaininfotype_model_set', OPTIONAL ),
       ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', OPTIONAL ),
@@ -4842,11 +4842,7 @@ class corpusImageInfoType_model(SchemaModel):
       'e part of a resource',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    imageFormatInfo = models.ManyToManyField("imageFormatInfoType_model", 
-      verbose_name='Image format', 
-      help_text='Groups information on the format of the image component' \
-      ' of the resource',
-      blank=True, null=True, related_name="imageFormatInfo_%(class)s_related", )
+    # OneToMany field: imageFormatInfo
 
     # OneToMany field: annotationInfo
 
@@ -4963,7 +4959,7 @@ class imageFormatInfoType_model(SchemaModel):
       ( u'colourSpace', u'colourSpace', RECOMMENDED ),
       ( u'colourDepth', u'colourDepth', OPTIONAL ),
       ( u'compressionInfo', u'compressionInfo', OPTIONAL ),
-      ( u'resolutionInfo', u'resolutioninfotype_model_set', OPTIONAL ),
+      ( u'resolutionInfo', u'resolutionInfo', OPTIONAL ),
       ( u'visualModelling', u'visualModelling', OPTIONAL ),
       ( u'rasterOrVectorGraphics', u'rasterOrVectorGraphics', OPTIONAL ),
       ( u'quality', u'quality', OPTIONAL ),
@@ -5004,7 +5000,10 @@ class imageFormatInfoType_model(SchemaModel):
       'nd method of a resource',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    # OneToMany field: resolutionInfo
+    resolutionInfo = models.ManyToManyField("resolutionInfoType_model", 
+      verbose_name='Resolution', 
+      help_text='Groups together information on the image resolution',
+      blank=True, null=True, related_name="resolutionInfo_%(class)s_related", )
 
     visualModelling = models.CharField(
       verbose_name='Visual modelling', 
@@ -5039,6 +5038,12 @@ class imageFormatInfoType_model(SchemaModel):
       help_text='Used to give info on size of parts of a resource that d' \
       'iffer as to the format',
       blank=True, null=True, on_delete=models.SET_NULL, )
+
+    back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
+
+    back_to_languagedescriptionimageinfotype_model = models.ForeignKey("languageDescriptionImageInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -5891,7 +5896,7 @@ class languageDescriptionImageInfoType_model(SchemaModel):
       ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
       ( u'sizeInfo', u'sizeinfotype_model_set', RECOMMENDED ),
       ( u'imageContentInfo', u'imageContentInfo', RECOMMENDED ),
-      ( u'imageFormatInfo', u'imageFormatInfo', RECOMMENDED ),
+      ( u'imageFormatInfo', u'imageformatinfotype_model_set', RECOMMENDED ),
       ( u'domainInfo', u'domaininfotype_model_set', OPTIONAL ),
       ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', OPTIONAL ),
       ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', OPTIONAL ),
@@ -5948,11 +5953,7 @@ class languageDescriptionImageInfoType_model(SchemaModel):
       'e part of a resource',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    imageFormatInfo = models.ManyToManyField("imageFormatInfoType_model", 
-      verbose_name='Image format', 
-      help_text='Groups information on the format of the image component' \
-      ' of the resource',
-      blank=True, null=True, related_name="imageFormatInfo_%(class)s_related", )
+    # OneToMany field: imageFormatInfo
 
     # OneToMany field: domainInfo
 
@@ -6339,7 +6340,7 @@ class lexicalConceptualResourceImageInfoType_model(SchemaModel):
       ( u'languageInfo', u'languageinfotype_model_set', OPTIONAL ),
       ( u'sizeInfo', u'sizeinfotype_model_set', RECOMMENDED ),
       ( u'imageContentInfo', u'imageContentInfo', RECOMMENDED ),
-      ( u'imageFormatInfo', u'imageFormatInfo', RECOMMENDED ),
+      ( u'imageFormatInfo', u'imageformatinfotype_model_set', RECOMMENDED ),
       ( u'domainInfo', u'domaininfotype_model_set', OPTIONAL ),
       ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', OPTIONAL ),
       ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', OPTIONAL ),
@@ -6360,10 +6361,10 @@ class lexicalConceptualResourceImageInfoType_model(SchemaModel):
       verbose_name='Media', 
       help_text='Specifies the media type of the resource and basically ' \
       'corresponds to the physical medium of the content representation.' \
-      ' Each media typeis described through a distinctive set of feature' \
-      's. A resource may consist of parts attributed to different types ' \
-      'of media. A tool/service may take as input/output more than one d' \
-      'ifferent media types.',
+      ' Each media type is described through a distinctive set of featur' \
+      'es. A resource may consist of parts attributed to different types' \
+      ' of media. A tool/service may take as input/output more than one ' \
+      'different media types.',
       default="image", editable=False, max_length=10, )
 
     # OneToMany field: modalityInfo
@@ -6384,11 +6385,7 @@ class lexicalConceptualResourceImageInfoType_model(SchemaModel):
       'e part of a resource',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    imageFormatInfo = models.ManyToManyField("imageFormatInfoType_model", 
-      verbose_name='Image format', 
-      help_text='Groups information on the format of the image component' \
-      ' of the resource',
-      blank=True, null=True, related_name="imageFormatInfo_%(class)s_related", )
+    # OneToMany field: imageFormatInfo
 
     # OneToMany field: domainInfo
 
