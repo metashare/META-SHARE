@@ -1278,6 +1278,8 @@ class annotationInfoType_model(SchemaModel):
 
     back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
 
+    back_to_corpustextnumericalinfotype_model = models.ForeignKey("corpusTextNumericalInfoType_model",  blank=True, null=True)
+
     back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
 
     def __unicode__(self):
@@ -5132,7 +5134,7 @@ class corpusTextNumericalInfoType_model(SchemaModel):
       ( u'recordingInfo', u'recordingInfo', RECOMMENDED ),
       ( u'captureInfo', u'captureInfo', RECOMMENDED ),
       ( u'creationInfo', u'creationInfo', RECOMMENDED ),
-      ( u'annotationInfo', u'annotationInfo', RECOMMENDED ),
+      ( u'annotationInfo', u'annotationinfotype_model_set', RECOMMENDED ),
       ( u'linkToOtherMediaInfo', u'linktoothermediainfotype_model_set', RECOMMENDED ),
     )
     __schema_classes__ = {
@@ -5189,11 +5191,7 @@ class corpusTextNumericalInfoType_model(SchemaModel):
       'ma list etc.)',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    annotationInfo = models.OneToOneField("annotationInfoType_model", 
-      verbose_name='Annotation', 
-      help_text='Groups information on the annotated part(s) of a resour' \
-      'ce',
-      blank=True, null=True, on_delete=models.SET_NULL, )
+    # OneToMany field: annotationInfo
 
     # OneToMany field: linkToOtherMediaInfo
 
