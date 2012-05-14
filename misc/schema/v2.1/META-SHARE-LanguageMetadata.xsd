@@ -197,7 +197,7 @@ label added for specific elements-->
 				<xs:annotation>
 					<xs:documentation>Provides information on the size per language variety component</xs:documentation>
 					<xs:appinfo>
-						<relation>many-to-one</relation>
+						<relation>one-to-one</relation>
 						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>

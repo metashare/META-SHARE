@@ -494,13 +494,13 @@ class validationInfoType_model(SchemaModel):
       help_text='Specifies the size of the validated part of a resource',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    validationReport = models.OneToOneField("documentationInfoType_model", 
+    validationReport = models.ForeignKey("documentationInfoType_model", 
       verbose_name='Validation report', 
       help_text='A short account of the validation details or a link to ' \
       'the validation report',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    validationTool = models.OneToOneField("targetResourceInfoType_model", 
+    validationTool = models.ForeignKey("targetResourceInfoType_model", 
       verbose_name='Validation tool', 
       help_text='The name, the identifier or the url of the tool used fo' \
       'r the validation of the resource',
@@ -1182,8 +1182,8 @@ class annotationInfoType_model(SchemaModel):
 
     tagsetLanguageId = models.CharField(
       verbose_name='Tagset language id', 
-      help_text='The identifier of the tagset language as expressed in t' \
-      'he values of IETF BP47',
+      help_text='The identifier ofthe tagset language as expressed in th' \
+      'e values of IETF BP47',
       blank=True, max_length=20, )
 
     tagsetLanguageName = models.CharField(
@@ -1329,7 +1329,7 @@ class relationInfoType_model(SchemaModel):
       'proposed by META-SHARE',
       max_length=100, )
 
-    relatedResource = models.OneToOneField("targetResourceInfoType_model", 
+    relatedResource = models.ForeignKey("targetResourceInfoType_model", 
       verbose_name='Related resource', 
       help_text='The full name, the identifier or the url of the related' \
       ' resource',
@@ -2568,7 +2568,7 @@ class personInfoType_model(actorInfoType_model):
       default_retriever=best_lang_value_retriever, 
       verbose_name='Given name', 
       max_val_length=100, 
-      help_text='The given name (first name) of aperson related to the r' \
+      help_text='The given name (first name) ofa person related to the r' \
       'esource; initials can also be used',
       blank=True)
 
@@ -6375,10 +6375,10 @@ class lexicalConceptualResourceImageInfoType_model(SchemaModel):
       verbose_name='Media', 
       help_text='Specifies the media type of the resource and basically ' \
       'corresponds to the physical medium of the content representation.' \
-      ' Each mediatype is described through a distinctive set of feature' \
-      's. A resource may consist of parts attributed to different types ' \
-      'of media. A tool/service may take as input/output more than one d' \
-      'ifferent media types.',
+      ' Each media type is described through a distinctive set of featur' \
+      'es. A resource may consist of parts attributed to different types' \
+      ' of media. A tool/service may take as input/output more than one ' \
+      'different media types.',
       default="image", editable=False, max_length=10, )
 
     # OneToMany field: modalityInfo

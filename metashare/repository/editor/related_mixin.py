@@ -43,6 +43,7 @@ class RelatedAdminMixin(object):
     
     custom_o2m_widget_overrides = {
         documentationInfoType_model: AutoCompleteSelectWidget(lookup_class=DocumentationLookup),
+        targetResourceInfoType_model: AutoCompleteSelectWidget(lookup_class=TargetResourceLookup),
     }
     
     def hide_hidden_fields(self, db_field, kwargs):
