@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Illum Corpus</resourceName>
+      <description>The full editions of ILLUM from 12/11/2006 to 30/05/2010 (185 issues).</description>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+      <identifier>303b544197dc4a1fb990e8e93666b938</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability>
+      <licenceInfo>
+         <licence>MSCommons_BY</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <licensor>
+              <personInfo>
+               <surname>Balzan</surname>
+               <givenName>Saviour</givenName>
+               <communicationInfo>
+                  <email>illum@mediatoday.com.mt</email>
+                  <country>Malta</country>
+               </communicationInfo>
+               <affiliation>
+                  <organizationName>MediaToday Co. Ltd</organizationName>
+                  <communicationInfo>
+                     <email>illum@mediatoday.com.mt</email>
+                     <country>Malta</country>
+                  </communicationInfo>
+                      
+                  </affiliation>
+            </personInfo>
+          </licensor>
+         <distributionRightsHolder>
+              <personInfo>
+               <surname>Rosner</surname>
+               <givenName>Michael</givenName>
+               <communicationInfo>
+                  <email>mike.rosner@um.edu.mt</email>
+               </communicationInfo>
+               <affiliation>
+                  <organizationName>University of Malta</organizationName>
+                  <organizationShortName>UOM</organizationShortName>
+                  <departmentName>Intelligent Computer Systems</departmentName>
+                  <communicationInfo>
+                     <email>mike.rosner@um.edu.mt</email>
+                     <country>Malta</country>
+                  </communicationInfo>
+                      
+                  </affiliation>
+            </personInfo>
+          </distributionRightsHolder>
+         <distributionRightsHolder>
+              <organizationInfo>
+                <organizationName>University of Malta</organizationName>
+                <organizationShortName>UOM</organizationShortName>
+                <departmentName>Intelligent Computer Systems</departmentName>
+                  <communicationInfo>
+                  <email>mike.rosner@um.edu.mt</email>
+                  <country>Malta</country>
+               </communicationInfo>
+              </organizationInfo>
+          </distributionRightsHolder>
+      </licenceInfo>
+      <iprHolder>
+          <personInfo>
+            <surname>Balzan</surname>
+            <givenName>Saviour</givenName>
+            <communicationInfo>
+               <email>illum@mediatoday.com.mt </email>
+               <country>Malta</country>
+            </communicationInfo>
+            <affiliation>
+               <organizationName>MediaToday Co. Ltd</organizationName>
+               <communicationInfo>
+                  <email>illum@mediatoday.com.mt </email>
+               </communicationInfo>
+                  
+              </affiliation>
+         </personInfo>
+      </iprHolder>
+      <iprHolder>
+          <organizationInfo>
+            <organizationName>MediaToday Co. Ltd</organizationName>
+              <communicationInfo>
+               <email>illum@mediatoday.com.mt</email>
+               <country>Malta</country>
+            </communicationInfo>
+          </organizationInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Joachimsen</surname>
+      <givenName>Jan</givenName>
+      <communicationInfo>
+         <email>jan.joachimsen@um.edu.mt</email>
+      </communicationInfo>
+      <affiliation>
+         <organizationName>University of Malta</organizationName>
+         <communicationInfo>
+            <email>jan.joachimsen@um.edu.mt</email>
+         </communicationInfo>
+          
+      </affiliation>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-16</metadataCreationDate>
+      <metadataCreator>
+         <surname>Joachimsen</surname>
+         <givenName>Jan</givenName>
+         <communicationInfo>
+            <email>jan.joachimsen@um.edu.mt</email>
+         </communicationInfo>
+         <affiliation>
+            <organizationName>University of Malta</organizationName>
+            <communicationInfo>
+               <email>jan.joachimsen@um.edu.mt</email>
+            </communicationInfo>
+              
+          </affiliation>
+      </metadataCreator>
+      <source>METANET4U</source>
+   </metadataInfo>
+   <versionInfo>
+      <version>v1.0</version>
+  </versionInfo>
+   <usageInfo>
+      <foreseenUseInfo>
+        <foreseenUse>nlpApplications</foreseenUse>
+      </foreseenUseInfo>
+      <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+         <usageProject>
+            <projectName>METANET4U</projectName>
+            <fundingType>euFunds</fundingType>
+         </usageProject>
+      </actualUseInfo>
+  </usageInfo>
+   <resourceCreationInfo>
+      <resourceCreator>
+          <personInfo>
+            <surname>Attard</surname>
+            <givenName>Andrew</givenName>
+            <communicationInfo>
+               <email>andrew.attard@um.edu.mt</email>
+            </communicationInfo>
+            <position>Project Officer</position>
+            <affiliation>
+               <organizationName>University of Malta</organizationName>
+               <organizationShortName>UOM</organizationShortName>
+               <departmentName>Intelligent Computer Systems</departmentName>
+               <communicationInfo>
+                  <email>andrew.attard@um.edu.mt</email>
+                  <country>Malta</country>
+               </communicationInfo>
+                  
+              </affiliation>
+         </personInfo>
+      </resourceCreator>
+      <resourceCreator>
+          <organizationInfo>
+            <organizationName>University of Malta</organizationName>
+            <organizationShortName>UOM</organizationShortName>
+            <departmentName>Intelligent Computer Systems</departmentName>
+              <communicationInfo>
+               <email>andrew.attard@um.edu.mt</email>
+               <country>Malta</country>
+            </communicationInfo>
+          </organizationInfo>
+      </resourceCreator>
+      <fundingProject>
+         <projectName>METANET4U</projectName>
+         <fundingType>euFunds</fundingType>
+      </fundingProject>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>N/A</languageId>
+                  <languageName>Maltese</languageName>
+                  <languageVarietyInfo>
+                     <languageVarietyType>other</languageVarietyType>
+                     <languageVarietyName>newspaper</languageVarietyName>
+                     <sizePerLanguageVariety>
+                        <size>0</size>
+                        <sizeUnit>units</sizeUnit>
+                     </sizePerLanguageVariety>
+                  </languageVarietyInfo>
+               </languageInfo>
+               <sizeInfo>
+                  <size>5.269 </size>
+        
+                  <sizeUnit>files</sizeUnit>
+               </sizeInfo>
+               <textFormatInfo>
+                  <mimeType>text/xml</mimeType>
+               </textFormatInfo>
+               <characterEncodingInfo>
+                  <characterEncoding>UTF-8</characterEncoding>
+               </characterEncodingInfo>
+               <annotationInfo>
+                  <annotationType>segmentation</annotationType>
+                  <segmentationLevel>word</segmentationLevel>
+                  <annotationFormat>text/plain</annotationFormat>
+                  <annotationMode>automatic</annotationMode>
+               </annotationInfo>
+               <domainInfo>
+                  <domain>general</domain>
+               </domainInfo>
+               <textClassificationInfo>
+                  <textType>newspaper</textType>
+                  <register>newspaper</register>
+               </textClassificationInfo>
+               <creationInfo>
+                  <originalSource>
+                     <targetResourceNameURI>http://www.illum.com.mt/</targetResourceNameURI>
+                  </originalSource>
+                  <creationMode>automatic</creationMode>
+               </creationInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

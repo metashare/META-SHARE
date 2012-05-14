@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Bulgarian Spell Checker for Windows</resourceName>
+      <description>The system for automatic spelling checking WinEst for Microsoft Office detects and marks the incorrectly written words in a text and suggests the most probable candidates to correct the errors. WinEst offers the entire potential of the contemporary spelling correction: proficiently compiled dictionary, which contains over a million and a half words, and replacement suggestions, which are ordered according to their probability. 
+WinEst is based on the Electronic Grammar Dictionary of Bulgarian, developed at the Department of Computational Linguistics, which contains over 85 000 words.
+It contains logic for detection of careless mistakes (wrong key pressed, letter swapping, skipped letters or extra letters), identifies errors of ignorance and integrates perfectly into the dictionaries used in Microsoft Office. WinEst uses an extremely fast and effective method for searching and detecting the correct words regardless of the text size. The functionality of the product is realized through the use of minimal acyclic deterministic automata and Levenshtein automata, which allow maximum speed, precision and coverage.
+A distinctive feature of WinEst is it is easy to install and uninstall, and no System restart is required.
+
+Advantages:
+WinEst offers the entire potential of the contemporary spelling checking and correction. Together with the proficiently compiled dictionary the product is capable of finding replacement suggestions, which are ranked by probability.
+Representativeness: covers the basic wordstock of Bulgarian 
+Precision: all words are checked by experts
+Convenience: the replacement candidates are ranked by probability
+A module for Cyrillic layout: WinEst works perfectly both with the standard BDS layout and with the various phonetic layouts.
+
+WinEst is a 32-bit module and thus requires a 32-bit Microsoft Office. The table below shows the operational compatibility of WinEst with the various versions of Microsoft Windows and Microsoft Office.</description>
+      <resourceShortName>WinEst</resourceShortName>
+      <url>http://dcl.bas.bg/est/index_en.php</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+      <identifier>808</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>other</licence>
+         <restrictionsOfUse>other</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <downloadLocation>http://dcl.bas.bg/sites/default/files/webfm/WinEst/winestSetup.exe</downloadLocation>
+      </licenceInfo>
+      <iprHolder>
+			      <organizationInfo>
+				        <organizationName>Institute for Bulgarian Language</organizationName>
+				        <organizationShortName>IBL</organizationShortName>
+				        <departmentName>Department of Computational Linguistics</departmentName>
+				        <communicationInfo>
+               <email>est@dcl.bas.bg</email>
+               <url>http://dcl.bas.bg</url>
+               <address>52 Shipchenski prohod Blvd., Bl. 17</address>
+               <zipCode>1113</zipCode>
+               <city>Sofia</city>
+               <country>Bulgaria</country>
+               <telephoneNumber>+35 92 97 92 969</telephoneNumber>
+            </communicationInfo>
+			      </organizationInfo>
+		    </iprHolder>
+      <availabilityStartDate>2011-06-01</availabilityStartDate>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Koeva</surname>
+      <givenName>Svetla</givenName>
+      <communicationInfo>
+         <email>svetla@dcl.bas.bg</email>
+         <url>http://dcl.bas.bg/PersonalPages/svetla/svetla.html</url>
+         <address>52 Shipchenski prohod Blvd., Bl. 17</address>
+         <zipCode>1113</zipCode>
+         <city>Sofia</city>
+         <country>Bulgaria</country>
+         <telephoneNumber>+35 92 97 92 969</telephoneNumber>
+         <faxNumber>+35 92 87 22 302</faxNumber>
+      </communicationInfo>
+      <position>professor</position>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-20</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+		    <version>2.0</version>
+      <lastDateUpdated>2011-11-20</lastDateUpdated>
+		
+	  </versionInfo>
+   <validationInfo>
+      <validated>true</validated>
+   </validationInfo>
+   <usageInfo>
+		    <foreseenUseInfo>
+			      <foreseenUse>humanUse</foreseenUse>
+		    </foreseenUseInfo>
+		    <actualUseInfo>
+         <actualUse>humanUse</actualUse>
+      </actualUseInfo>
+	  </usageInfo>
+   <resourceDocumentationInfo>
+      <documentation>
+         <documentUnstructured>Oliva K. i Sv. Koeva – Sintaksis na nevazmozhnoto, Balgarski ezik, 3, 7-17, 2009. ISSN 0005-4283. ERIH</documentUnstructured>
+      </documentation>
+   </resourceDocumentationInfo>
+   <resourceCreationInfo>
+      <fundingProject>
+         <projectName>Web applications for editing Bulgarian texts</projectName>
+         <fundingType>nationalFunds</fundingType>
+      </fundingProject>
+      <fundingProject>
+         <projectName>Central and South-East European Resources</projectName>
+         <fundingType>euFunds</fundingType>
+      </fundingProject>
+      <creationStartDate>2010-01-01</creationStartDate>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <toolServiceInfo>
+         <resourceType>toolService</resourceType>
+		       <toolServiceType>tool</toolServiceType>
+		       <languageDependent>true</languageDependent>
+		       <inputInfo>
+            <mediaType>text</mediaType>
+         </inputInfo>
+		       <outputInfo>
+            <mediaType>text</mediaType>
+         </outputInfo>
+		       <toolServiceOperationInfo>
+			         <operatingSystem>windows</operatingSystem>
+		       </toolServiceOperationInfo>
+		       <toolServiceEvaluationInfo>
+			         <evaluated>true</evaluated>
+			         <evaluationLevel>diagnostic</evaluationLevel>
+			         <evaluator>
+				           <personInfo>
+                  <surname>Genov</surname>
+                  <givenName>Angel</givenName>
+                  <communicationInfo>
+                     <email>angel@dcl.bas.bg</email>
+                     <url>http://dcl.bas.bg/PersonalPages/angel/</url>
+                  </communicationInfo>
+                  <position>Assistant</position>
+               </personInfo>
+			         </evaluator>
+		       </toolServiceEvaluationInfo>
+	     </toolServiceInfo>
+   </resourceComponentType>
+</resourceInfo>

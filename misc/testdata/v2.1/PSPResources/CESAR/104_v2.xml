@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Hungarian WordNet</resourceName>
+      <description>The Hungarian WordNet is a multilingual ontology, meaning that most of its synsets were mapped to equivalent concepts in English (Princeton) WordNet v. 2.0. The ontology is also linked to entries of a Hungarian Monolingual explanatory dictionary and to the entries of the Hungarian verb valency frame lexicon.</description>
+      <resourceShortName>HuWN</resourceShortName>
+      <url>http://www.inf.u-szeged.hu/rgai/nlp?lang=en&amp;page=nlpproj_hunont</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+      <identifier>104</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>underNegotiation</availability>
+      <licenceInfo>
+         <licence>underNegotiation</licence>
+         <restrictionsOfUse>other</restrictionsOfUse>
+         <distributionAccessMedium>CD-ROM</distributionAccessMedium>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+      <surname>N/A</surname>
+      <communicationInfo>
+         <email>vinczev@inf.u-szeged.hu</email>
+      </communicationInfo>
+      <affiliation>
+         <organizationName>University of Szeged</organizationName>
+         <organizationShortName>SZTE</organizationShortName>
+         <departmentName>Department of Informatics</departmentName>
+         <communicationInfo>
+            <email>vinczev@inf.u-szeged.hu</email>
+         </communicationInfo>
+			
+		    </affiliation>
+   </contactPerson>
+   <contactPerson>
+      <surname>N/A</surname>
+      <communicationInfo>
+         <email>alexin@inf.u-szeged.hu</email>
+      </communicationInfo>
+      <affiliation>
+         <organizationName>University of Szeged</organizationName>
+         <organizationShortName>SZTE</organizationShortName>
+         <departmentName>Department of Informatics</departmentName>
+         <communicationInfo>
+            <email>alexin@inf.u-szeged.hu</email>
+         </communicationInfo>
+			
+		    </affiliation>
+   </contactPerson>
+   <contactPerson>
+      <surname>N/A</surname>
+      <communicationInfo>
+         <email>csirik@inf.u-szeged.hu</email>
+      </communicationInfo>
+      <affiliation>
+         <organizationName>University of Szeged</organizationName>
+         <organizationShortName>SZTE</organizationShortName>
+         <departmentName>Department of Informatics</departmentName>
+         <communicationInfo>
+            <email>csirik@inf.u-szeged.hu</email>
+         </communicationInfo>
+			
+		    </affiliation>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-10-17</metadataCreationDate>
+      <metadataCreator>
+         <surname>N/A</surname>
+         <communicationInfo>
+            <email>alexin@inf.u-szeged.hu</email>
+         </communicationInfo>
+         <affiliation>
+            <organizationName>University of Szeged</organizationName>
+            <organizationShortName>SZTE</organizationShortName>
+            <departmentName>Department of Informatics</departmentName>
+            <communicationInfo>
+               <email>alexin@inf.u-szeged.hu</email>
+            </communicationInfo>
+				
+			      </affiliation>
+      </metadataCreator>
+   </metadataInfo>
+   <versionInfo>
+		    <version>1.0</version>
+	  </versionInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>wordnet</lexicalConceptualResourceType>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>monolingual</lingualityType>
+		             </lingualityInfo>
+               <languageInfo>
+                  <languageId>HU</languageId>
+                  <languageName>Hungarian</languageName>
+               </languageInfo>
+               <sizeInfo>
+			               <size>42000</size>
+			
+			               <sizeUnit>synsets</sizeUnit>
+		             </sizeInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>

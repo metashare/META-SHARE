@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Slovak-Czech Parallel Corpus</resourceName>
+      <description>Parallel Slovak-Czech corpus is a corpus of sentence aligned texts, mostly fiction. The Slovak texts are morphologically annotated and disambiguated using the system applied in the Slovak National Corpus, Czech texts are annotated with the morče tagger. This is a pseudocorpus, only the query interface is available, the texts proper cannot be distributed.</description>
+      <url>http://korpus.sk/skcs.html</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+      <identifier>904</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>proprietary</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
+         <executionLocation>http://korpus.juls.savba.sk:8088/</executionLocation>
+      </licenceInfo>
+      <iprHolder>
+			      <organizationInfo>
+				        <organizationName>Ľudovít Štúr Institute of Linguistics</organizationName>
+				        <organizationShortName>JÚĽŠ</organizationShortName>
+				        <departmentName>Slovak National Corpus</departmentName>
+				        <communicationInfo>
+               <email>korpus@korpus.juls.savba.sk</email>
+               <url>http://korpus.juls.savba.sk/</url>
+               <address>Panská 26</address>
+               <zipCode>81364</zipCode>
+               <city>Bratislava</city>
+               <country>Slovakia</country>
+               <telephoneNumber>+421254410307</telephoneNumber>
+            </communicationInfo>
+			      </organizationInfo>
+		    </iprHolder>
+      <availabilityStartDate>2010-05-09</availabilityStartDate>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Garabík</surname>
+      <givenName>Radovan</givenName>
+      <communicationInfo>
+         <email>radovan.garabik@kassiopeia.juls.savba.sk</email>
+         <address>Panská 26</address>
+         <zipCode>81364</zipCode>
+         <city>Bratislava</city>
+         <country>Slovakia</country>
+         <telephoneNumber>+421254410307</telephoneNumber>
+      </communicationInfo>
+      <position>researcher</position>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-21</metadataCreationDate>
+      <metadataCreator>
+         <surname>Garabík</surname>
+         <givenName>Radovan</givenName>
+         <communicationInfo>
+            <email>radovan.garabik@kassiopeia.juls.savba.sk</email>
+            <address>Panská 26</address>
+            <zipCode>81364</zipCode>
+            <city>Bratislava</city>
+            <country>Slovakia</country>
+            <telephoneNumber>+421254410307</telephoneNumber>
+         </communicationInfo>
+         <position>researcher</position>
+      </metadataCreator>
+      <metadataLanguageId>en</metadataLanguageId>
+      <metadataLastDateUpdated>2011-11-22</metadataLastDateUpdated>
+   </metadataInfo>
+   <versionInfo>
+		    <version>2011-05-17</version>
+      <lastDateUpdated>2011-05-17</lastDateUpdated>
+		
+	  </versionInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>bilingual</lingualityType>
+			               <multilingualityType>parallel</multilingualityType>
+		             </lingualityInfo>
+               <languageInfo>
+                  <languageId>sk</languageId>
+                  <languageName>Slovak</languageName>
+               </languageInfo>
+               <languageInfo>
+                  <languageId>cs</languageId>
+                  <languageName>Czech</languageName>
+               </languageInfo>
+               <sizeInfo>
+			               <size>730000</size>
+			
+			               <sizeUnit>sentences</sizeUnit>
+		             </sizeInfo>
+               <characterEncodingInfo>
+                  <characterEncoding>UTF-8</characterEncoding>
+               </characterEncodingInfo>
+               <annotationInfo>
+                  <annotationType>alignment</annotationType>
+                  <segmentationLevel>sentence</segmentationLevel>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>segmentation</annotationType>
+                  <segmentationLevel>sentence</segmentationLevel>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>segmentation</annotationType>
+                  <segmentationLevel>word</segmentationLevel>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>lemmatization</annotationType>
+                  <segmentationLevel>word</segmentationLevel>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>morphosyntacticAnnotation-bPosTagging</annotationType>
+                  <segmentationLevel>word</segmentationLevel>
+               </annotationInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>
