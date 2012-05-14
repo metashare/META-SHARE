@@ -32,6 +32,7 @@ from django.utils.html import escape
 from django.utils.translation import ugettext as _
 from metashare.repository.editor.lookups import MembershipLookup
 from metashare.repository.editor.widgets import OneToManyWidget
+import datetime
 
 csrf_protect_m = method_decorator(csrf_protect)
 
@@ -264,11 +265,25 @@ export_xml_resources.short_description = "Export selected resource descriptions 
 
 from django import forms
 
+class MetadataForm(forms.ModelForm):
+    def save(self, commit=True):
+        today = datetime.date.today()
+        if not self.instance.metadataCreationDate:
+            self.instance.metadataCreationDate = today
+        self.instance.metadataLastDateUpdated = today
+        return super(MetadataForm, self).save(commit)
+
+
+class MetadataInline(ReverseInlineModelAdmin):
+    form = MetadataForm
+    readonly_fields = ('metadataCreationDate', 'metadataLastDateUpdated', )
+    
+
 class ResourceModelAdmin(SchemaModelAdmin):
     inline_type = 'stacked'
     custom_one2one_inlines = {'identificationInfo':IdentificationInline,
                               'resourceComponentType':ResourceComponentInline,
-                              }
+                              'metadataInfo':MetadataInline,}
 
     content_fields = ('resourceComponentType',)
     list_display = ('__unicode__', 'resource_type', 'publication_status')
