@@ -655,17 +655,9 @@ class relationInfo_model_inline(SchemaModelInline):
 
 
 # pylint: disable-msg=C0103
-class resolutionInfo_model_inline_imageFormatInfoType_model(SchemaModelInline):
+class resolutionInfo_model_inline(SchemaModelInline):
     model = resolutionInfoType_model
     template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_imageformatinfotype_model'
-
-
-# pylint: disable-msg=C0103
-class resolutionInfo_model_inline_videoFormatInfoType_model(SchemaModelInline):
-    model = resolutionInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_videoformatinfotype_model'
 
 
 # pylint: disable-msg=C0103
@@ -899,6 +891,27 @@ class validationInfo_model_inline(SchemaModelInline):
 class videoClassificationInfo_model_inline(SchemaModelInline):
     model = videoClassificationInfoType_model
     collapse = True
+
+
+# pylint: disable-msg=C0103
+class videoFormatInfo_model_inline_corpusVideoInfoType_model(SchemaModelInline):
+    model = videoFormatInfoType_model
+    collapse = True
+    fk_name = 'back_to_corpusvideoinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class videoFormatInfo_model_inline_languageDescriptionVideoInfoType_model(SchemaModelInline):
+    model = videoFormatInfoType_model
+    collapse = True
+    fk_name = 'back_to_languagedescriptionvideoinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class videoFormatInfo_model_inline_lexicalConceptualResourceVideoInfoType_model(SchemaModelInline):
+    model = videoFormatInfoType_model
+    collapse = True
+    fk_name = 'back_to_lexicalconceptualresourcevideoinfotype_model'
 
 
 admin.site.register(actorInfoType_model, SchemaModelAdmin)

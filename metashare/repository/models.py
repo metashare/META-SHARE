@@ -2166,8 +2166,6 @@ class resolutionInfoType_model(SchemaModel):
                      key=lambda choice: choice[1].lower()),
       )
 
-    back_to_videoformatinfotype_model = models.ForeignKey("videoFormatInfoType_model",  blank=True, null=True)
-
     back_to_imageformatinfotype_model = models.ForeignKey("imageFormatInfoType_model",  blank=True, null=True)
 
     def __unicode__(self):
@@ -4441,7 +4439,7 @@ class corpusVideoInfoType_model(SchemaModel):
       ( u'sizeInfo', u'sizeinfotype_model_set', REQUIRED ),
       ( u'videoContentInfo', u'videoContentInfo', RECOMMENDED ),
       ( u'settingInfo', u'settingInfo', RECOMMENDED ),
-      ( u'videoFormatInfo', u'videoFormatInfo', RECOMMENDED ),
+      ( u'videoFormatInfo', u'videoformatinfotype_model_set', RECOMMENDED ),
       ( u'annotationInfo', u'annotationinfotype_model_set', RECOMMENDED ),
       ( u'domainInfo', u'domaininfotype_model_set', RECOMMENDED ),
       ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', RECOMMENDED ),
@@ -4513,11 +4511,7 @@ class corpusVideoInfoType_model(SchemaModel):
       ' and/or video part of a resource',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    videoFormatInfo = models.ManyToManyField("videoFormatInfoType_model", 
-      verbose_name='Video format', 
-      help_text='Groups information on the format(s) of a resource; repe' \
-      'ated if parts of the resource are in different formats',
-      blank=True, null=True, related_name="videoFormatInfo_%(class)s_related", )
+    # OneToMany field: videoFormatInfo
 
     # OneToMany field: annotationInfo
 
@@ -4633,7 +4627,7 @@ class videoFormatInfoType_model(SchemaModel):
       ( u'colourSpace', u'colourSpace', RECOMMENDED ),
       ( u'colourDepth', u'colourDepth', OPTIONAL ),
       ( u'frameRate', u'frameRate', OPTIONAL ),
-      ( u'resolutionInfo', u'resolutioninfotype_model_set', RECOMMENDED ),
+      ( u'resolutionInfo', u'resolutionInfo', RECOMMENDED ),
       ( u'visualModelling', u'visualModelling', OPTIONAL ),
       ( u'fidelity', u'fidelity', OPTIONAL ),
       ( u'compressionInfo', u'compressionInfo', OPTIONAL ),
@@ -4673,7 +4667,10 @@ class videoFormatInfoType_model(SchemaModel):
       help_text='The number of frames per second',
       blank=True, null=True, )
 
-    # OneToMany field: resolutionInfo
+    resolutionInfo = models.ManyToManyField("resolutionInfoType_model", 
+      verbose_name='Resolution', 
+      help_text='Groups together information on the image resolution',
+      blank=True, null=True, related_name="resolutionInfo_%(class)s_related", )
 
     visualModelling = models.CharField(
       verbose_name='Visual modelling', 
@@ -4700,6 +4697,12 @@ class videoFormatInfoType_model(SchemaModel):
       help_text='Used to give info on size of parts of a resource that d' \
       'iffer as to the format',
       blank=True, null=True, on_delete=models.SET_NULL, )
+
+    back_to_corpusvideoinfotype_model = models.ForeignKey("corpusVideoInfoType_model",  blank=True, null=True)
+
+    back_to_languagedescriptionvideoinfotype_model = models.ForeignKey("languageDescriptionVideoInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -5797,7 +5800,7 @@ class languageDescriptionVideoInfoType_model(SchemaModel):
       ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
       ( u'sizeInfo', u'sizeinfotype_model_set', RECOMMENDED ),
       ( u'videoContentInfo', u'videoContentInfo', RECOMMENDED ),
-      ( u'videoFormatInfo', u'videoFormatInfo', RECOMMENDED ),
+      ( u'videoFormatInfo', u'videoformatinfotype_model_set', RECOMMENDED ),
       ( u'domainInfo', u'domaininfotype_model_set', RECOMMENDED ),
       ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', RECOMMENDED ),
       ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', RECOMMENDED ),
@@ -5854,11 +5857,7 @@ class languageDescriptionVideoInfoType_model(SchemaModel):
       'o part of a resource',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    videoFormatInfo = models.ManyToManyField("videoFormatInfoType_model", 
-      verbose_name='Video format', 
-      help_text='Groups information on the format(s) of a resource; repe' \
-      'ated if parts of the resource are in different formats',
-      blank=True, null=True, related_name="videoFormatInfo_%(class)s_related", )
+    # OneToMany field: videoFormatInfo
 
     # OneToMany field: domainInfo
 
@@ -6264,7 +6263,7 @@ class lexicalConceptualResourceVideoInfoType_model(SchemaModel):
       ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
       ( u'sizeInfo', u'sizeinfotype_model_set', RECOMMENDED ),
       ( u'videoContentInfo', u'videoContentInfo', REQUIRED ),
-      ( u'videoFormatInfo', u'videoFormatInfo', RECOMMENDED ),
+      ( u'videoFormatInfo', u'videoformatinfotype_model_set', RECOMMENDED ),
       ( u'domainInfo', u'domaininfotype_model_set', OPTIONAL ),
       ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', OPTIONAL ),
       ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', OPTIONAL ),
@@ -6309,11 +6308,7 @@ class lexicalConceptualResourceVideoInfoType_model(SchemaModel):
       'o part of a resource',
       )
 
-    videoFormatInfo = models.ManyToManyField("videoFormatInfoType_model", 
-      verbose_name='Video format', 
-      help_text='Groups information on the format(s) of a resource; repe' \
-      'ated if parts of the resource are in different formats',
-      blank=True, null=True, related_name="videoFormatInfo_%(class)s_related", )
+    # OneToMany field: videoFormatInfo
 
     # OneToMany field: domainInfo
 
@@ -6365,10 +6360,10 @@ class lexicalConceptualResourceImageInfoType_model(SchemaModel):
       verbose_name='Media', 
       help_text='Specifies the media type of the resource and basically ' \
       'corresponds to the physical medium of the content representation.' \
-      ' Each media type is described through a distinctive set of featur' \
-      'es. A resource may consist of parts attributed to different types' \
-      ' of media. A tool/service may take as input/output more than one ' \
-      'different media types.',
+      ' Each media typeis described through a distinctive set of feature' \
+      's. A resource may consist of parts attributed to different types ' \
+      'of media. A tool/service may take as input/output more than one d' \
+      'ifferent media types.',
       default="image", editable=False, max_length=10, )
 
     # OneToMany field: modalityInfo

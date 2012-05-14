@@ -21,12 +21,12 @@ from metashare.repository.models import actorInfoType_model, \
     targetResourceInfoType_model, documentInfoType_model, \
     annotationInfoType_model, languageVarietyInfoType_model, \
     sizeInfoType_model, imageFormatInfoType_model, \
-    videoFormatInfoType_model
+    videoFormatInfoType_model, resolutionInfoType_model
 from metashare.repository.editor.lookups import ActorLookup, \
     OrganizationLookup, ProjectLookup, MembershipLookup, \
     PersonLookup, TargetResourceLookup, DocumentLookup, \
     DocumentationLookup, LanguageVarietyLookup, SizeLookup, \
-    AnnotationLookup, ImageFormatLookup, VideoFormatLookup
+    AnnotationLookup, ImageFormatLookup, VideoFormatLookup, ResolutionLookup
 
 class RelatedAdminMixin(object):
     '''
@@ -48,6 +48,7 @@ class RelatedAdminMixin(object):
         sizeInfoType_model: OneToManyWidget(lookup_class=SizeLookup),
         imageFormatInfoType_model: OneToManyWidget(lookup_class=ImageFormatLookup),
         videoFormatInfoType_model: OneToManyWidget(lookup_class=VideoFormatLookup),
+        resolutionInfoType_model: OneToManyWidget(lookup_class=ResolutionLookup),
     }
     
     custom_m2o_widget_overrides = {
