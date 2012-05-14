@@ -482,16 +482,13 @@ label added for specific elements -->
 			<xs:element name="author" type="xs:string" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>The name(s) of the author(s), in the format described in the document</xs:documentation>
-					<xs:appinfo>
-						<maxlen>100</maxlen>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="editor" type="xs:string" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>The name of the editor as mentioned in the document</xs:documentation>
 					<xs:appinfo>
-						<maxlen>100</maxlen>
+						<maxlen>200</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -504,7 +501,7 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>The name of the publisher</xs:documentation>
 					<xs:appinfo>
-						<maxlen>100</maxlen>
+						<maxlen>200</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>

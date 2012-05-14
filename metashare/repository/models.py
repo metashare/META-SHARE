@@ -790,13 +790,13 @@ class documentInfoType_model(documentationInfoType_model):
       help_text='The title of the document reporting on the resource',
       )
 
-    author = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=4, max_length=100), 
+    author = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=4, max_length=1000), 
       verbose_name='Author', 
       help_text='The name(s) of the author(s), in the format described i' \
       'n the document',
       blank=True, )
 
-    editor = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=5, max_length=100), 
+    editor = MultiTextField(max_length=200, widget=MultiFieldWidget(widget_id=5, max_length=200), 
       verbose_name='Editor', 
       help_text='The name of the editor as mentioned in the document',
       blank=True, )
@@ -807,7 +807,7 @@ class documentInfoType_model(documentationInfoType_model):
       'e year it was written',
       blank=True, null=True, )
 
-    publisher = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=6, max_length=100), 
+    publisher = MultiTextField(max_length=200, widget=MultiFieldWidget(widget_id=6, max_length=200), 
       verbose_name='Publisher', 
       help_text='The name of the publisher',
       blank=True, )
