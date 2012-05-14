@@ -54,7 +54,11 @@ def setup_group_global_editors(app, created_models, verbosity, **kwargs):
     def get_optional_modelnames():
         optionals = set()
         for _unused_name, classobj in inspect.getmembers(repository_models, is_schema_model):
-            for _not_used, _fieldname, _required in classobj.__schema_fields__:
+            for _schemapath, _not_used, _required in classobj.__schema_fields__:
+                if '/' in _schemapath:
+                    _fieldname = _schemapath[:_schemapath.rindex('/')+1]
+                else:
+                    _fieldname = _schemapath
                 if _fieldname in classobj.__schema_classes__ and _required in (RECOMMENDED, OPTIONAL):
                     # it's a component and it is optional in this context
                     optional_classobj = classobj.__schema_classes__[_fieldname]
