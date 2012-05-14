@@ -112,6 +112,12 @@ class actualUseInfo_model_inline(SchemaModelInline):
 
 
 # pylint: disable-msg=C0103
+class annotationInfo_model_inline(SchemaModelInline):
+    model = annotationInfoType_model
+    collapse = True
+
+
+# pylint: disable-msg=C0103
 class audioClassificationInfo_model_inline(SchemaModelInline):
     model = audioClassificationInfoType_model
     collapse = True

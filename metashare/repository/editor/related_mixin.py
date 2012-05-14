@@ -50,7 +50,7 @@ class RelatedAdminMixin(object):
         videoFormatInfoType_model: OneToManyWidget(lookup_class=VideoFormatLookup),
     }
     
-    custom_o2m_widget_overrides = {
+    custom_m2o_widget_overrides = {
         documentationInfoType_model: AutoCompleteSelectWidget(lookup_class=DocumentationLookup),
         targetResourceInfoType_model: AutoCompleteSelectWidget(lookup_class=TargetResourceLookup),
     }
@@ -97,8 +97,8 @@ class RelatedAdminMixin(object):
         # Get the correct formfield.
         if isinstance(db_field, models.ForeignKey):
             # Custom default widgets for certain relation fields:
-            if db_field.rel.to in self.custom_o2m_widget_overrides:
-                kwargs = dict({'widget':self.custom_o2m_widget_overrides[db_field.rel.to]}, **kwargs)
+            if db_field.rel.to in self.custom_m2o_widget_overrides:
+                kwargs = dict({'widget':self.custom_m2o_widget_overrides[db_field.rel.to]}, **kwargs)
             formfield = self.formfield_for_foreignkey(db_field, request, **kwargs)
         elif isinstance(db_field, models.ManyToManyField):
             # Custom default widgets for certain relation fields:

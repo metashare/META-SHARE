@@ -1270,6 +1270,8 @@ class annotationInfoType_model(SchemaModel):
       'notation type',
       blank=True, null=True, related_name="annotator_%(class)s_related", )
 
+    back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
+
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
@@ -4209,7 +4211,7 @@ class corpusTextInfoType_model(SchemaModel):
       ( u'sizeInfo', u'sizeinfotype_model_set', REQUIRED ),
       ( u'textFormatInfo', u'textformatinfotype_model_set', RECOMMENDED ),
       ( u'characterEncodingInfo', u'characterencodinginfotype_model_set', RECOMMENDED ),
-      ( u'annotationInfo', u'annotationInfo', RECOMMENDED ),
+      ( u'annotationInfo', u'annotationinfotype_model_set', RECOMMENDED ),
       ( u'domainInfo', u'domaininfotype_model_set', RECOMMENDED ),
       ( u'textClassificationInfo', u'textclassificationinfotype_model_set', RECOMMENDED ),
       ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', RECOMMENDED ),
@@ -4259,11 +4261,7 @@ class corpusTextInfoType_model(SchemaModel):
 
     # OneToMany field: characterEncodingInfo
 
-    annotationInfo = models.ManyToManyField("annotationInfoType_model", 
-      verbose_name='Annotation', 
-      help_text='Groups information on the annotated part(s) of a resour' \
-      'ce',
-      blank=True, null=True, related_name="annotationInfo_%(class)s_related", )
+    # OneToMany field: annotationInfo
 
     # OneToMany field: domainInfo
 
@@ -6375,10 +6373,10 @@ class lexicalConceptualResourceImageInfoType_model(SchemaModel):
       verbose_name='Media', 
       help_text='Specifies the media type of the resource and basically ' \
       'corresponds to the physical medium of the content representation.' \
-      ' Each media type is described through a distinctive set of featur' \
-      'es. A resource may consist of parts attributed to different types' \
-      ' of media. A tool/service may take as input/output more than one ' \
-      'different media types.',
+      ' Each mediatype is described through a distinctive set of feature' \
+      's. A resource may consist of parts attributed to different types ' \
+      'of media. A tool/service may take as input/output more than one d' \
+      'ifferent media types.',
       default="image", editable=False, max_length=10, )
 
     # OneToMany field: modalityInfo
