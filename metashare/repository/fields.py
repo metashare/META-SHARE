@@ -3,6 +3,8 @@ Project: META-SHARE prototype implementation
  Author: Christian Federmann <cfedermann@dfki.de>
 """
 import base64
+from django.contrib.admin import widgets
+
 try:
     import cPickle as pickle
 except:
@@ -269,7 +271,8 @@ class MultiSelectField(models.Field):
 
             else:
                 defaults['initial'] = self.get_default()
-
+        # replace default widget
+        kwargs['widget'] = widgets.FilteredSelectMultiple(self.verbose_name, False)
         defaults.update(kwargs)
         return form_class(**defaults)
 
