@@ -21,7 +21,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>The full name by which the resource is known</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-many</relation>
 						<maxlen>500</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -46,7 +45,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>The short form (abbreviation, acronym etc.) used to identify the resource</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-many</relation>
 						<maxlen>500</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -61,7 +59,6 @@ label added for specific elements -->
 					<xs:documentation>A URL used as homepage of an entity (e.g. of a person, organization, resource etc.) and/or where an entity (e.g.LR, document etc.) is located</xs:documentation>
 					<xs:appinfo>
 						<recommended>true</recommended>
-						<relation>one-to-many</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -70,7 +67,6 @@ label added for specific elements -->
 					<xs:documentation>An unambiguous referent to the resource within META-SHARE </xs:documentation>
 					<xs:appinfo>
 						<maxlen>100</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -79,7 +75,6 @@ label added for specific elements -->
 					<xs:documentation>A reference to the resource like a pid or an internal identifier used by the resource provider; the attribute "type" is obligatorily used for further specification</xs:documentation>
 					<xs:appinfo>
 						<maxlen>100</maxlen>
-						<relation>one-to-many</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -98,7 +93,6 @@ label added for specific elements -->
 					<xs:documentation>Any string, usually a number, that identifies the version of a resource </xs:documentation>
 					<xs:appinfo>
 						<maxlen>100</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -106,7 +100,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>Provides an account of the revisions in free text or a link to a document with revisions</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>500</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -114,9 +107,6 @@ label added for specific elements -->
 			<xs:element name="lastDateUpdated" type="xs:date" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Date of the last update of the version of the resource</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="updateFrequency" type="xs:string" minOccurs="0">
@@ -124,7 +114,6 @@ label added for specific elements -->
 					<xs:documentation>Specifies the frequency with which the resource is updated</xs:documentation>
 					<xs:appinfo>
 						<maxlen>100</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -138,9 +127,6 @@ label added for specific elements -->
 			<xs:element name="validated" type="xs:boolean">
 				<xs:annotation>
 					<xs:documentation>Specifies the validation status of the resource</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="validationType" minOccurs="0">
@@ -163,7 +149,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>Specifies the validation methodology applied</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>20</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -181,7 +166,6 @@ label added for specific elements -->
 					<xs:documentation>Textual field for additional information on validation</xs:documentation>
 					<xs:appinfo>
 						<maxlen>500</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -189,7 +173,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>The resource coverage in terms of validated data</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>20</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -205,7 +188,6 @@ label added for specific elements -->
 					<xs:documentation>Provides information on size or other details of partially validated data; to be used if only part of the resource has been validated and as an alternative to SizeInfo if the validated part cannot be counted otherwise</xs:documentation>
 					<xs:appinfo>
 						<maxlen>500</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -274,7 +256,6 @@ label added for specific elements -->
 					<xs:documentation>The date in which the creation process was started</xs:documentation>
 					<xs:appinfo>
 						<recommended>true</recommended>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -283,7 +264,6 @@ label added for specific elements -->
 					<xs:documentation>The date in which the creation process was completed</xs:documentation>
 					<xs:appinfo>
 						<recommended>true</recommended>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -308,7 +288,6 @@ label added for specific elements -->
 					<xs:documentation>Specifies whether the resource is created automatically or in a manual or interactive mode </xs:documentation>
 					<xs:appinfo>
 						<recommended>true</recommended>
-						<relation>one-to-one</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -325,7 +304,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>Provides further information on the creation methods and processes</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>200</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -348,9 +326,6 @@ label added for specific elements -->
 			<xs:element name="metadataCreationDate" type="xs:date">
 				<xs:annotation>
 					<xs:documentation>The date of creation of this metadata description</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="metadataCreator" type="ms:personInfoType" minOccurs="0" maxOccurs="unbounded">
@@ -365,7 +340,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>Refers to the catalogue or repository from which the metadata has been originated</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>500</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -375,47 +349,33 @@ label added for specific elements -->
 					<xs:documentation>Refers to the metadata schema originally used for the description of the resource</xs:documentation>
 					<xs:appinfo>
 						<maxlen>500</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="originalMetadataLink" type="ms:httpURI" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>A link to the metadata of the original source</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="metadataLanguageName" type="xs:string" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>The name of the language in which the metadata description is written according to IETF BCP47</xs:documentation>
-					<xs:appinfo>
-						<relation>many-to-many</relation>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="metadataLanguageId" type="xs:string" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>The identifier of the language in which the metadata description is written according to IETF BCP47</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-many</relation>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="metadataLastDateUpdated" type="xs:date" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>The date of the last updating of the metadata record</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="revision" type="ms:myStringURI" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Provides an account of the revisions in free text or a link to a document with revisions</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>500</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -434,7 +394,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>Specifies the type of the document provided with or related to the resource</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -513,7 +472,6 @@ label added for specific elements -->
 					<xs:documentation>The title of the document reporting on the resource</xs:documentation>
 					<xs:appinfo>
 						<maxlen>500</maxlen>
-						<relation>one-to-many</relation>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:unique name="uniqueLang10">
@@ -526,7 +484,6 @@ label added for specific elements -->
 					<xs:documentation>The name(s) of the author(s), in the format described in the document</xs:documentation>
 					<xs:appinfo>
 						<maxlen>100</maxlen>
-						<relation>many-to-many</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -535,16 +492,12 @@ label added for specific elements -->
 					<xs:documentation>The name of the editor as mentioned in the document</xs:documentation>
 					<xs:appinfo>
 						<maxlen>100</maxlen>
-						<relation>one-to-many</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="year" type="xs:gYear" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>The year of publication or, for an unpublished work, the year it was written</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="publisher" type="xs:string" minOccurs="0" maxOccurs="unbounded">
@@ -552,7 +505,6 @@ label added for specific elements -->
 					<xs:documentation>The name of the publisher</xs:documentation>
 					<xs:appinfo>
 						<maxlen>100</maxlen>
-						<relation>one-to-many</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -562,7 +514,6 @@ label added for specific elements -->
 					<xs:documentation>The title of a book, part of which is being cited</xs:documentation>
 					<xs:appinfo>
 						<maxlen>200</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -570,7 +521,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>A journal name. Abbreviations could also be provided</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>200</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -578,9 +528,6 @@ label added for specific elements -->
 			<xs:element name="volume" type="xs:string" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Specifies the volume of a journal or multivolume book</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="series" type="xs:string" minOccurs="0">
@@ -588,7 +535,6 @@ label added for specific elements -->
 					<xs:documentation>The name of a series or set of books. When citing an entire book, the title field gives its title and an optional series field gives the name of a series or multi-volume set in which the book is published</xs:documentation>
 					<xs:appinfo>
 						<maxlen>200</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -597,7 +543,6 @@ label added for specific elements -->
 					<xs:documentation>One or more page numbers or range of page numbers</xs:documentation>
 					<xs:appinfo>
 						<maxlen>100</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -606,7 +551,6 @@ label added for specific elements -->
 					<xs:documentation>The edition of a book</xs:documentation>
 					<xs:appinfo>
 						<maxlen>100</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -615,7 +559,6 @@ label added for specific elements -->
 					<xs:documentation>The name of the conference in which the document has been presented</xs:documentation>
 					<xs:appinfo>
 						<maxlen>300</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -624,16 +567,12 @@ label added for specific elements -->
 					<xs:documentation>A digital object identifier assigned to the document</xs:documentation>
 					<xs:appinfo>
 						<maxlen>100</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="url" type="ms:httpURI" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>A URL used as homepage of an entity (e.g. of a person, organization, resource etc.) and/or where an entity (e.g.LR, document etc.) is located</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="ISSN" type="xs:string" minOccurs="0">
@@ -641,7 +580,6 @@ label added for specific elements -->
 					<xs:documentation>The International Standard Serial Number used to identify a journal</xs:documentation>
 					<xs:appinfo>
 						<maxlen>100</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -650,7 +588,6 @@ label added for specific elements -->
 					<xs:documentation>The International Standard Book Number</xs:documentation>
 					<xs:appinfo>
 						<maxlen>100</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -659,7 +596,6 @@ label added for specific elements -->
 					<xs:documentation>The keyword(s) for indexing and classification of the document</xs:documentation>
 					<xs:appinfo>
 						<maxlen>250</maxlen>
-						<relation>one-to-many</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -668,7 +604,6 @@ label added for specific elements -->
 					<xs:documentation>The name of the language the document is written in, as mentioned in IETF BCP47</xs:documentation>
 					<xs:appinfo>
 						<maxlen>150</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -677,7 +612,6 @@ label added for specific elements -->
 					<xs:documentation>The id of the language the document is written in, as mentioned in IETF BCP47</xs:documentation>
 					<xs:appinfo>
 						<maxlen>20</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -714,7 +648,6 @@ label added for specific elements -->
 					<xs:documentation>A url with samples of the resource or, in the case of tools, of samples of the output</xs:documentation>
 					<xs:appinfo>
 						<recommended>true</recommended>
-						<relation>one-to-many</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -722,7 +655,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>Specifies the type of documentation for tool or service</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-many</relation>
 						<maxlen>200</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -748,7 +680,6 @@ label added for specific elements -->
 					<xs:documentation>Specifies the application domain of the resource or the tool/service</xs:documentation>
 					<xs:appinfo>
 						<maxlen>100</maxlen>
-						<relation>one-to-one</relation>
 						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
@@ -806,9 +737,6 @@ label added for specific elements -->
 			<xs:element name="annotationStandoff" type="xs:boolean" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Indicates whether the annotation is created inline or in a stand-off fashion</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<!-- segmentationLevel is mandatory if annotationType=segmentation -->
@@ -869,7 +797,6 @@ label added for specific elements -->
 					<xs:documentation>Name of the theoretic model applied for the creation or enrichment of the resource, and/or a reference (URL or bibliographic reference) to informative material about the theoretic model used</xs:documentation>
 					<xs:appinfo>
 						<maxlen>500</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -886,7 +813,6 @@ label added for specific elements -->
 					<xs:documentation>Indicates whether the resource is annotated manually or by automatic processes</xs:documentation>
 					<xs:appinfo>
 						<recommended>true</recommended>
-						<relation>one-to-one</relation>
 						<maxlen>100</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -902,9 +828,6 @@ label added for specific elements -->
 			<xs:element name="annotationModeDetails" type="xs:string" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Provides further information on annotation process </xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="annotationTool" type="ms:targetResourceInfoType" minOccurs="0" maxOccurs="unbounded">
@@ -919,17 +842,11 @@ label added for specific elements -->
 			<xs:element name="annotationStartDate" type="xs:date" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>The date in which the annotation process has started</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="annotationEndDate" type="xs:date" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>The date in which the annotation process has ended</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="sizePerAnnotation" type="ms:sizeInfoType" minOccurs="0">
@@ -946,7 +863,6 @@ label added for specific elements -->
 					<xs:documentation>Provides information on the interannotator agreement and the methods/metrics applied </xs:documentation>
 					<xs:appinfo>
 						<maxlen>1000</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -955,7 +871,6 @@ label added for specific elements -->
 					<xs:documentation>Provides information on the intra-annotator agreement and the methods/metrics applied  </xs:documentation>
 					<xs:appinfo>
 						<maxlen>1000</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -1008,7 +923,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>Specifies the type of relation not covered by the ones proposed by META-SHARE</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>100</maxlen>						
 						<label>Relation type</label>	
 					</xs:appinfo>
@@ -1071,7 +985,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>The name of the person used instead of the real one</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-many</relation>
 						<maxlen>500</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1084,7 +997,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>The age group to which the participant belongs</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1101,7 +1013,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>The age of the participant</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>50</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1110,7 +1021,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>The gender of a person related to or participating in the resource</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1126,7 +1036,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>The language origin of the participant</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1142,7 +1051,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>The participant's place of living</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>100</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1152,7 +1060,6 @@ label added for specific elements -->
 					<xs:documentation>The place in which the participant has been born</xs:documentation>
 					<xs:appinfo>
 						<maxlen>100</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -1161,7 +1068,6 @@ label added for specific elements -->
 					<xs:documentation>The place in which the participant lived as a child</xs:documentation>
 					<xs:appinfo>
 						<maxlen>100</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -1169,7 +1075,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>Provides information on the dialect of the participant</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-many</relation>
 						<maxlen>500</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1179,7 +1084,6 @@ label added for specific elements -->
 					<xs:documentation>Provides information on any speaking impairment the participant may have</xs:documentation>
 					<xs:appinfo>
 						<maxlen>200</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -1188,7 +1092,6 @@ label added for specific elements -->
 					<xs:documentation>Provides information on any hearing impairment the participant may have</xs:documentation>
 					<xs:appinfo>
 						<maxlen>200</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -1197,7 +1100,6 @@ label added for specific elements -->
 					<xs:documentation>Provides information on whether the participants smokes and on his/her smoking habits in general</xs:documentation>
 					<xs:appinfo>
 						<maxlen>100</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -1205,7 +1107,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>Provides information on the vocal tract conditions that may influence the speech of the participant</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1221,32 +1122,22 @@ label added for specific elements -->
 					<xs:documentation>Provides information on the participant's profession</xs:documentation>
 					<xs:appinfo>
 						<maxlen>100</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="height" type="xs:integer" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Provides information on the height of the participant in cm</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="weight" type="xs:integer" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Provides information on the weight of the participant</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="trainedSpeaker" type="xs:boolean" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Provides information on whether the participant is trained in a specific task</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="placeOfSecondEducation" type="xs:string" minOccurs="0">
@@ -1254,7 +1145,6 @@ label added for specific elements -->
 					<xs:documentation>Specifies the place of the secondary education of the participant</xs:documentation>
 					<xs:appinfo>
 						<maxlen>100</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -1263,7 +1153,6 @@ label added for specific elements -->
 					<xs:documentation>Provides information on the education level of the participant</xs:documentation>
 					<xs:appinfo>
 						<maxlen>100</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -1278,7 +1167,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>The transducers through which the data is captured</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-many</relation>
 						<maxlen>30</maxlen>
 						<label>Capturing device type</label>
 					</xs:appinfo>
@@ -1307,7 +1195,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>Provides further information on the capturing device</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>400</maxlen>
 						<label>Capturing device type details</label>
 					</xs:appinfo>
@@ -1318,7 +1205,6 @@ label added for specific elements -->
 					<xs:documentation>Provides further information on the capturing method and procedure</xs:documentation>
 					<xs:appinfo>
 						<maxlen>400</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -1326,7 +1212,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>Type of capturing environment</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1341,7 +1226,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>Specifies either the type of image sensor or the sensing method used in the camera or the image-capture device</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-many</relation>
 						<maxlen>200</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1350,7 +1234,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>Information on the illumination of the scene</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1384,16 +1267,12 @@ label added for specific elements -->
 			<xs:element name="numberOfPersons" type="xs:integer" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>The number of the persons participating in the audio or video part of the resource</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="ageOfPersons" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>The age range of the group of participants; repeat the element if needed</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-many</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1409,24 +1288,17 @@ label added for specific elements -->
 			<xs:element name="ageRangeStart" type="xs:integer" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Start of age range of the group of participants</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="ageRangeEnd" type="xs:integer" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>End of age range of the group of participants</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="sexOfPersons" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>The gender of the group of participants</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1443,7 +1315,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>The language origin of the group of participants</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1460,7 +1331,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>Provides information on the dialect of the group of participants</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-many</relation>
 						<maxlen>500</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1470,7 +1340,6 @@ label added for specific elements -->
 					<xs:documentation>Gives information on the geographic distribution of the participants</xs:documentation>
 					<xs:appinfo>
 						<maxlen>200</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -1478,7 +1347,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>Whether the group of participants contains persons with hearing impairments</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1494,7 +1362,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>Whether the group of participants contains persons withwith speakingimpairments</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1509,16 +1376,12 @@ label added for specific elements -->
 			<xs:element name="numberOfTrainedSpeakers" type="xs:integer" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>The number of participants that have been trained for the specific task</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="speechInfluences" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Specifies the factors influencing speech</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-many</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1554,7 +1417,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>Specifies the level of naturality for multimodal/multimedia resources</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1576,7 +1438,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>Specifies the conversational type of the resource</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-many</relation>
 						<maxlen>30</maxlen>
 						<label>Conversational type</label>
 					</xs:appinfo>
@@ -1593,7 +1454,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>Indicates the task defined for the conversation or the interaction of participants</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-many</relation>
 						<maxlen>30</maxlen>
 						<label>Scenario type</label>
 					</xs:appinfo>
@@ -1616,7 +1476,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>Indication of the intended audience size</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1633,7 +1492,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>Indicates the level of conversational interaction between speakers (for audio component) or participants (for video component)</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1650,9 +1508,6 @@ label added for specific elements -->
 			<xs:element name="interaction" type="xs:string" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Specifies the parts that interact in an audio or video component</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -1675,7 +1530,6 @@ label added for specific elements -->
 					<xs:documentation>Hardware required for running a tool and/or computational grammar</xs:documentation>
 					<xs:appinfo>
 						<recommended>true</recommended>
-						<relation>one-to-many</relation>
 						<maxlen>100</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1703,7 +1557,6 @@ label added for specific elements -->
 					<xs:documentation>Provides further information on the running environment</xs:documentation>
 					<xs:appinfo>
 						<maxlen>200</maxlen>
-						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -1822,7 +1675,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>The name of the specific source recorded</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-many</relation>
 						<maxlen>30</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1831,7 +1683,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>The details of the channel equipment used (brand, type etc.)</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>200</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
@@ -1868,7 +1719,6 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>The standard to which  the resolution conforms</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
 						<maxlen>50</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
