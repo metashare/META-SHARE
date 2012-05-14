@@ -3,14 +3,20 @@ ul.keyValuePairs,ul.keyValuePairs>li {
 }
 
 ul.keyValuePairs>li>textarea {
-  width: 45%;
+  width: 70%;
   height: 75px;
   margin-left: 5px;
   margin-right: 5px;
 }
 
 ul.keyValuePairs>li>input {
-  width: 45%;
+  width: 70%;
+}
+
+ul.keyValuePairs>li>div {
+  display: block;
+  float: right;
+  max-width: 20%;
 }
 
 a.kvPairDeleteButton {

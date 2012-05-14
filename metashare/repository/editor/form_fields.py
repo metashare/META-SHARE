@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 from django.forms.fields import Field
 from django.utils.translation import ugettext_lazy as _
 
-from metashare.repository.editor.widgets import DictWidget
+from metashare.repository.editor.widgets import LangDictWidget
 
 
 class DictField(Field):
@@ -31,9 +31,10 @@ class DictField(Field):
         self.max_key_length = max_key_length
         self.max_val_length = max_val_length
         # we only work with `DictWidget`s
-        kwargs['widget'] = DictWidget(blank=not kwargs.get('required', True),
-                                      max_key_length=self.max_key_length,
-                                      max_val_length=self.max_val_length)
+        kwargs['widget'] = LangDictWidget(
+            blank=not kwargs.get('required', True),
+            max_key_length=self.max_key_length,
+            max_val_length=self.max_val_length)
         # add our custom error messages
         updated_error_messages = {}
         updated_error_messages.update(DictField.custom_error_messages)

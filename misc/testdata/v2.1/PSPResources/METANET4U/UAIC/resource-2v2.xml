@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
-              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>ROMANIAN BALANCED CORPUS</resourceName>
       <description>The corpus contains noun phrase and coreference annotation for the Romanian version of the 1984 novel of George Orwell.</description>
@@ -14,7 +12,7 @@
    <distributionInfo>
       <availability>available-restrictedUse</availability>
       <licenceInfo>
-         <licence>GeneralLicenceGrant</licence>
+         <licence>other</licence>
          <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
          <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
       </licenceInfo>

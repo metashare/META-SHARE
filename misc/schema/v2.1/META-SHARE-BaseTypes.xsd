@@ -2044,6 +2044,7 @@ label added for specific elements -->
 			<xs:restriction base="xs:string">
 				<xs:enumeration value="BLM"/>
 				<xs:enumeration value="CES"/>
+				<xs:enumeration value="EAGLES"/>
 				<xs:enumeration value="EML"/>
 				<xs:enumeration value="EMMA"/>
 				<xs:enumeration value="GMX"/>

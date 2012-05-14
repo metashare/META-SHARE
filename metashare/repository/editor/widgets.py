@@ -10,7 +10,7 @@ except:
     import pickle
 
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
-from django.forms import widgets, TextInput, Textarea
+from django.forms import widgets, TextInput, Textarea, Media
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
 from selectable.forms.widgets import SelectableMediaMixin, SelectableMultiWidget, \
@@ -25,7 +25,7 @@ LOGGER.addHandler(settings.LOG_HANDLER)
 
 # the maximum length (in characters) where `TextInput` widgets will still be
 # used; for larger sizes we use `Textarea` widgets
-_MAX_TEXT_INPUT_SIZE = 80
+_MAX_TEXT_INPUT_SIZE = 150
 
 
 class DictWidget(widgets.Widget):
@@ -57,6 +57,8 @@ class DictWidget(widgets.Widget):
         self.blank = blank
         self.max_key_length = max_key_length
         self.max_val_length = max_val_length
+        # path to the Django template which is used to render this widget
+        self._template = 'repository/editor/dict_widget.html'
         super(DictWidget, self).__init__()
 
     def render(self, name, value, attrs=None):
@@ -89,8 +91,7 @@ class DictWidget(widgets.Widget):
             # dictionary must not be blank)
             _entries.append(self._get_dict_entry(name, 0, None, None))
         # render final HTML for this widget instance
-        return mark_safe(render_to_string('repository/editor/dict_widget.html',
-                                          _context))
+        return mark_safe(render_to_string(self._template, _context))
 
     def _get_dict_entry(self, field_name, idx, key, value):
         """
@@ -99,20 +100,26 @@ class DictWidget(widgets.Widget):
         `field_name` and `id` will be used in the names of the input fields.
         """
         _key_field_name = DictWidget._key_field_name_tpl.format(field_name, idx)
-        if self.max_key_length and self.max_key_length > _MAX_TEXT_INPUT_SIZE:
-            rendered_key = Textarea().render(_key_field_name, key)
+        if self.max_key_length:
+            if self.max_key_length > _MAX_TEXT_INPUT_SIZE:
+                rendered_key = Textarea().render(_key_field_name, key)
+            else:
+                rendered_key = \
+                    TextInput(attrs={ 'maxlength': self.max_key_length }) \
+                        .render(_key_field_name, key)
         else:
-            rendered_key = \
-                TextInput(attrs={ 'maxlength': self.max_key_length }) \
-                    .render(_key_field_name, key)
+            rendered_key = TextInput().render(_key_field_name, key)
 
         _val_field_name = DictWidget._val_field_name_tpl.format(field_name, idx)
-        if self.max_val_length and self.max_val_length > _MAX_TEXT_INPUT_SIZE:
-            rendered_val = Textarea().render(_val_field_name, value)
+        if self.max_val_length:
+            if self.max_val_length > _MAX_TEXT_INPUT_SIZE:
+                rendered_val = Textarea().render(_val_field_name, value)
+            else:
+                rendered_val = \
+                    TextInput(attrs={ 'maxlength': self.max_val_length }) \
+                        .render(_val_field_name, value)
         else:
-            rendered_val = \
-                TextInput(attrs={ 'maxlength': self.max_val_length }) \
-                    .render(_val_field_name, value)
+            rendered_val = TextInput().render(_val_field_name, value)
 
         return (rendered_key, rendered_val)
 
@@ -136,6 +143,35 @@ class DictWidget(widgets.Widget):
         if len(provided) != 0:
             return provided
         return None
+
+
+class LangDictWidget(DictWidget):
+    """
+    A `DictWidget` which has RFC 3066 language codes as keys.
+    """
+    def __init__(self, *args, **kwargs):
+        super(LangDictWidget, self).__init__(*args, **kwargs)
+        # path to the Django template which is used to render this widget
+        self._template = 'repository/editor/lang_dict_widget.html'
+
+    def _get_dict_entry(self, field_name, idx, key, value):
+        if not key:
+            # by default we (blindly) propose the ISO 639-2 language code for an
+            # undetermined language
+            key = 'und'
+        return super(LangDictWidget, self)._get_dict_entry(field_name, idx, key,
+                                                           value)
+
+    def _media(self):
+        """
+        Returns a `Media` object for this widget which is dynamically created
+        from the JavaScript of `DictWidget` and CSS specific to this widget.
+        """
+        # pylint: disable-msg=E1101
+        return DictWidget().media['js'] \
+            + Media(css={'all': ('{}css/lang_dict_widget.css'.format(
+                                        settings.ADMIN_MEDIA_PREFIX),)})
+    media = property(_media)
 
 
 class SubclassableRelatedFieldWidgetWrapper(RelatedFieldWidgetWrapper):
@@ -224,17 +260,35 @@ class MultiFieldWidget(widgets.Widget):
         }
         js = ('js/multi-field-widget.js',)
     
-    def __init__(self, widget_id, *args, **kwargs):
+    def __init__(self, widget_id, max_length=None, **kwargs):
         """
         Initialises a new MultiFieldWidget instance.
         
         This saves the given, required widget_id, clears the errors dictionary
         and then calls the super class constructor with any remaining args.
+        Any max_length argument is used to determine the appropriate size for
+        the input fields.
         """
         self.widget_id = widget_id
+        self.max_length = max_length
         self.errors = {}
-        super(MultiFieldWidget, self).__init__(*args, **kwargs)
-    
+        super(MultiFieldWidget, self).__init__(**kwargs)
+
+    def _render_input_widget(self, name, value, attrs):
+        """
+        Renders and returns the most suitable widget for inputting a single
+        field in this `MultiFieldWidget`.
+        """
+        if self.max_length:
+            if self.max_length > _MAX_TEXT_INPUT_SIZE:
+                result = Textarea().render(name, value, attrs)
+            else:
+                result = TextInput(attrs={ 'maxlength': self.max_length }) \
+                            .render(name, value, attrs)
+        else:
+            result = TextInput().render(name, value, attrs)
+        return result
+
     def render(self, name, value, attrs=None):
         """
         Renders the MultiFieldWidget with the given name and value.
@@ -258,10 +312,7 @@ class MultiFieldWidget(widgets.Widget):
             except:
                 LOGGER.error('Error converting value to list!')
                 value = []
-        
-        # The widget used for this MultiFieldWidget is defined in self.attrs.
-        input_widget = self.attrs.get('widget', TextInput)
-        
+
         # We collect all rendered widgets inside _field_widgets.
         _field_widgets = []
         _field_attrs = {'id': 'id_{0}'.format(name), 'class': 'input',
@@ -271,7 +322,8 @@ class MultiFieldWidget(widgets.Widget):
         # adding an index number 0..n-1 to support container id generation.
         for _id, _value in enumerate(value):
             # Render input_widget instance as HTML.
-            _field_widget = input_widget().render(name, _value, _field_attrs)
+            _field_widget = self._render_input_widget(name, _value,
+                                                      _field_attrs)
             
             # Define context for container template rendering.
             _context = {'id': _id, 'field_widget': _field_widget,
@@ -290,7 +342,7 @@ class MultiFieldWidget(widgets.Widget):
         _id = len(value)
         if not _id:
             # Note that value='' as values is empty.
-            _field_widget = input_widget().render(name, '', _field_attrs)
+            _field_widget = self._render_input_widget(name, '', _field_attrs)
             _context = {'id': _id, 'field_widget': _field_widget,
               'widget_id': self.widget_id,
               'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX}
@@ -298,14 +350,14 @@ class MultiFieldWidget(widgets.Widget):
             _container = render_to_string('repository/container.html', _context)
             _field_widgets.append(_container)
         
-            _field_widget = input_widget().render(name, '', _field_attrs)
+            _field_widget = self._render_input_widget(name, '', _field_attrs)
             _context = {'id': _id, 'field_widget': _field_widget,
               'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX}
         
         # The JavaScript code needs an empty "template" to create new input
         # widgets dynamically; this is pre-rendered and added to the template
         # for the MultiFieldWidget instance here.
-        _empty_widget = input_widget().render(name, '', _field_attrs)
+        _empty_widget = self._render_input_widget(name, '', _field_attrs)
         _context = {'empty_widget': _empty_widget,
           'field_widgets': mark_safe(u'\n'.join(_field_widgets)),
           'widget_id': self.widget_id,
