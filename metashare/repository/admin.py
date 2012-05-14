@@ -112,9 +112,38 @@ class actualUseInfo_model_inline(SchemaModelInline):
 
 
 # pylint: disable-msg=C0103
-class annotationInfo_model_inline(SchemaModelInline):
+class annotationInfo_model_inline_corpusAudioInfoType_model(SchemaModelInline):
     model = annotationInfoType_model
     collapse = True
+    fk_name = 'back_to_corpusaudioinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class annotationInfo_model_inline_corpusImageInfoType_model(SchemaModelInline):
+    model = annotationInfoType_model
+    collapse = True
+    fk_name = 'back_to_corpusimageinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class annotationInfo_model_inline_corpusTextInfoType_model(SchemaModelInline):
+    model = annotationInfoType_model
+    collapse = True
+    fk_name = 'back_to_corpustextinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class annotationInfo_model_inline_corpusTextNgramInfoType_model(SchemaModelInline):
+    model = annotationInfoType_model
+    collapse = True
+    fk_name = 'back_to_corpustextngraminfotype_model'
+
+
+# pylint: disable-msg=C0103
+class annotationInfo_model_inline_corpusVideoInfoType_model(SchemaModelInline):
+    model = annotationInfoType_model
+    collapse = True
+    fk_name = 'back_to_corpusvideoinfotype_model'
 
 
 # pylint: disable-msg=C0103

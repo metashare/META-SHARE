@@ -1270,7 +1270,15 @@ class annotationInfoType_model(SchemaModel):
       'notation type',
       blank=True, null=True, related_name="annotator_%(class)s_related", )
 
+    back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
+
     back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
+
+    back_to_corpusvideoinfotype_model = models.ForeignKey("corpusVideoInfoType_model",  blank=True, null=True)
+
+    back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
+
+    back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -3655,7 +3663,7 @@ class corpusAudioInfoType_model(SchemaModel):
       ( u'audioContentInfo', u'audioContentInfo', RECOMMENDED ),
       ( u'settingInfo', u'settingInfo', RECOMMENDED ),
       ( u'audioFormatInfo', u'audioformatinfotype_model_set', RECOMMENDED ),
-      ( u'annotationInfo', u'annotationInfo', RECOMMENDED ),
+      ( u'annotationInfo', u'annotationinfotype_model_set', RECOMMENDED ),
       ( u'domainInfo', u'domaininfotype_model_set', RECOMMENDED ),
       ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', RECOMMENDED ),
       ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', RECOMMENDED ),
@@ -3720,11 +3728,7 @@ class corpusAudioInfoType_model(SchemaModel):
 
     # OneToMany field: audioFormatInfo
 
-    annotationInfo = models.ManyToManyField("annotationInfoType_model", 
-      verbose_name='Annotation', 
-      help_text='Groups information on the annotated part(s) of a resour' \
-      'ce',
-      blank=True, null=True, related_name="annotationInfo_%(class)s_related", )
+    # OneToMany field: annotationInfo
 
     # OneToMany field: domainInfo
 
@@ -4438,7 +4442,7 @@ class corpusVideoInfoType_model(SchemaModel):
       ( u'videoContentInfo', u'videoContentInfo', RECOMMENDED ),
       ( u'settingInfo', u'settingInfo', RECOMMENDED ),
       ( u'videoFormatInfo', u'videoFormatInfo', RECOMMENDED ),
-      ( u'annotationInfo', u'annotationInfo', RECOMMENDED ),
+      ( u'annotationInfo', u'annotationinfotype_model_set', RECOMMENDED ),
       ( u'domainInfo', u'domaininfotype_model_set', RECOMMENDED ),
       ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', RECOMMENDED ),
       ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', RECOMMENDED ),
@@ -4515,11 +4519,7 @@ class corpusVideoInfoType_model(SchemaModel):
       'ated if parts of the resource are in different formats',
       blank=True, null=True, related_name="videoFormatInfo_%(class)s_related", )
 
-    annotationInfo = models.ManyToManyField("annotationInfoType_model", 
-      verbose_name='Annotation', 
-      help_text='Groups information on the annotated part(s) of a resour' \
-      'ce',
-      blank=True, null=True, related_name="annotationInfo_%(class)s_related", )
+    # OneToMany field: annotationInfo
 
     # OneToMany field: domainInfo
 
@@ -4785,7 +4785,7 @@ class corpusImageInfoType_model(SchemaModel):
       ( u'sizeInfo', u'sizeinfotype_model_set', REQUIRED ),
       ( u'imageContentInfo', u'imageContentInfo', RECOMMENDED ),
       ( u'imageFormatInfo', u'imageFormatInfo', RECOMMENDED ),
-      ( u'annotationInfo', u'annotationInfo', RECOMMENDED ),
+      ( u'annotationInfo', u'annotationinfotype_model_set', RECOMMENDED ),
       ( u'domainInfo', u'domaininfotype_model_set', OPTIONAL ),
       ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', OPTIONAL ),
       ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', OPTIONAL ),
@@ -4845,11 +4845,7 @@ class corpusImageInfoType_model(SchemaModel):
       ' of the resource',
       blank=True, null=True, related_name="imageFormatInfo_%(class)s_related", )
 
-    annotationInfo = models.ManyToManyField("annotationInfoType_model", 
-      verbose_name='Annotation', 
-      help_text='Groups information on the annotated part(s) of a resour' \
-      'ce',
-      blank=True, null=True, related_name="annotationInfo_%(class)s_related", )
+    # OneToMany field: annotationInfo
 
     # OneToMany field: domainInfo
 
@@ -5290,7 +5286,7 @@ class corpusTextNgramInfoType_model(SchemaModel):
       ( u'sizeInfo', u'sizeinfotype_model_set', REQUIRED ),
       ( u'textFormatInfo', u'textformatinfotype_model_set', RECOMMENDED ),
       ( u'characterEncodingInfo', u'characterencodinginfotype_model_set', RECOMMENDED ),
-      ( u'annotationInfo', u'annotationInfo', RECOMMENDED ),
+      ( u'annotationInfo', u'annotationinfotype_model_set', RECOMMENDED ),
       ( u'domainInfo', u'domaininfotype_model_set', RECOMMENDED ),
       ( u'textClassificationInfo', u'textclassificationinfotype_model_set', RECOMMENDED ),
       ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', RECOMMENDED ),
@@ -5346,11 +5342,7 @@ class corpusTextNgramInfoType_model(SchemaModel):
 
     # OneToMany field: characterEncodingInfo
 
-    annotationInfo = models.ManyToManyField("annotationInfoType_model", 
-      verbose_name='Annotation', 
-      help_text='Groups information on the annotated part(s) of a resour' \
-      'ce',
-      blank=True, null=True, related_name="annotationInfo_%(class)s_related", )
+    # OneToMany field: annotationInfo
 
     # OneToMany field: domainInfo
 
@@ -6373,10 +6365,10 @@ class lexicalConceptualResourceImageInfoType_model(SchemaModel):
       verbose_name='Media', 
       help_text='Specifies the media type of the resource and basically ' \
       'corresponds to the physical medium of the content representation.' \
-      ' Each mediatype is described through a distinctive set of feature' \
-      's. A resource may consist of parts attributed to different types ' \
-      'of media. A tool/service may take as input/output more than one d' \
-      'ifferent media types.',
+      ' Each media type is described through a distinctive set of featur' \
+      'es. A resource may consist of parts attributed to different types' \
+      ' of media. A tool/service may take as input/output more than one ' \
+      'different media types.',
       default="image", editable=False, max_length=10, )
 
     # OneToMany field: modalityInfo
