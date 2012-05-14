@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>TextPro</resourceName>
+      <description>TextPro is a suite of modular Natural Language Processing tools for analysis of Italian and English texts. The suite has been designed so as to integrate and reuse state of the art NLP components developed by researchers at FBK. The current version of the tool suite provides functions ranging from tokenization to chunking and Named Entity Recognition (NER).</description>
+      <url>http://textpro.fbk.eu/</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>proprietary</licence>
+         <restrictionsOfUse>commercialUse</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <downloadLocation>http://textpro.fbk.eu/</downloadLocation>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Speranza</surname>
+      <givenName>Manuela</givenName>
+      <communicationInfo>
+         <email>manspera@fbk.eu</email>
+         <address>Fondazione Bruno Kessler Via Sommarive 18</address>
+         <zipCode>38123</zipCode>
+         <city>Trento</city>
+         <country>IT</country>
+         <telephoneNumber>+39 0461314521</telephoneNumber>
+         <faxNumber>+39 0461314591</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+	   <metadataCreationDate>2012-02-02</metadataCreationDate>
+   </metadataInfo>
+  
+   <resourceComponentType>
+	   <toolServiceInfo>
+			<resourceType>toolService</resourceType>
+			<toolServiceType>tool</toolServiceType>
+			<languageDependent>1</languageDependent>
+	   </toolServiceInfo>
+   </resourceComponentType>
+   
+</resourceInfo>

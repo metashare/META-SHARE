@@ -179,7 +179,7 @@
       <version>v.1</version>
   </versionInfo>
    <validationInfo>
-      <validated>True</validated>
+      <validated>true</validated>
       <validator>
           <personInfo>
             <surname>Tufis</surname>

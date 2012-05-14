@@ -71,6 +71,7 @@ Integer_type_table = {
     'unsignedInt': None,
     'short': None,
     'unsignedShort': None,
+    'gYear': None,
 }
 Float_type_table = {
     'decimal': None,
@@ -748,8 +749,9 @@ class Clazz(object):
                       options + choice_options, '')
                 else:
                     self.wrtmodels(
-                      '    %s = MultiTextField(%swidget = MultiFieldWidget(widget_id=%d), %s)\n' % (
-                        name, choice_options, multi_id, options, ))
+                      '    %s = MultiTextField(%swidget=MultiFieldWidget('
+                      'widget_id=%d, max_length=%s), %s)\n' % (
+                        name, choice_options, multi_id, maxlen, options, ))
                     self.wrtforms(
                       '    %s = forms.CharField(%s%s)### FIX_ME: MULTITEXT %d\n' % (
                         name, choice_options, options, multi_id, ))

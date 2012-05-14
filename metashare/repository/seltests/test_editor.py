@@ -137,7 +137,6 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_name("key_form-0-description_0").send_keys("en")
         driver.find_element_by_name("val_form-0-description_0").clear()
         driver.find_element_by_name("val_form-0-description_0").send_keys("Test Description")
-        driver.find_element_by_link_text("Today").click()
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
@@ -207,7 +206,6 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_name("key_form-0-description_0").send_keys("en")
         driver.find_element_by_name("val_form-0-description_0").clear()
         driver.find_element_by_name("val_form-0-description_0").send_keys("Test Description")
-        driver.find_element_by_link_text("Today").click()
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()
@@ -285,7 +283,6 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_name("key_form-0-description_0").send_keys("en")
         driver.find_element_by_name("val_form-0-description_0").clear()
         driver.find_element_by_name("val_form-0-description_0").send_keys("Test Description")
-        driver.find_element_by_link_text("Today").click()
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()
@@ -364,7 +361,6 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_name("key_form-0-description_0").send_keys("en")
         driver.find_element_by_name("val_form-0-description_0").clear()
         driver.find_element_by_name("val_form-0-description_0").send_keys("Test Description")
-        driver.find_element_by_link_text("Today").click()
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()
@@ -400,7 +396,7 @@ class EditorTest(SeleniumTestCase):
         driver.get(self.base_url)
         ss_path = setup_screenshots_folder(
           "PNG-metashare.repository.seltests.test_editor.EditorTest",
-          "LR_creation_corpus_text")
+          "sorting")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))  
         # login user
         login_user(driver, "editoruser", "secret")
@@ -470,8 +466,65 @@ class EditorTest(SeleniumTestCase):
           "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[10]").text)    
         # skip to end of list 
         self.assertEqual("words", driver.find_element_by_xpath(
-          "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[49]").text)        
+          "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[50]").text)        
 
+    
+    def test_multi_select_widget(self):
+        """
+        tests the usage of the FilteredSelectMultiple widget for multi select fields
+        """
+        driver = self.driver
+        driver.get(self.base_url)
+        ss_path = setup_screenshots_folder(
+          "PNG-metashare.repository.seltests.test_editor.EditorTest",
+          "multi_select_widget")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))  
+        # login user
+        login_user(driver, "editoruser", "secret")
+        # make sure login was successful
+        self.assertEqual("Logout", 
+          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Editor
+        driver.find_element_by_css_selector("div.button.middle_button").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Share/Create Resource
+        mouse_over(driver, driver.find_element_by_link_text("Share/Create"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_link_text("Resource").click()
+        # create text corpus
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
+        driver.find_element_by_id("id_corpusTextInfo").click()
+        driver.find_element_by_id("id_submit").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("Add Resource", 
+          driver.find_element_by_css_selector("#content > h1").text)
+        # distribution popup
+        driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
+        driver.switch_to_window("id_distributionInfo")
+        # show licenses
+        driver.find_element_by_id("fieldsetcollapser0").click()
+        # check that the left window contains all entries
+        self.assertEqual("underNegotiation", driver.find_element_by_xpath(
+          "//select[@id='id_licenceinfotype_model_set-0-licence_from']/option[41]").text)
+        # add an entry
+        driver.find_element_by_xpath(
+          "//select[@id='id_licenceinfotype_model_set-0-licence_from']/option[1]").click()
+        driver.find_element_by_link_text("Add").click()
+        # check that entry has moved to right site
+        self.assertEqual("AGPL", driver.find_element_by_xpath(
+          "//select[@id='id_licenceinfotype_model_set-0-licence_to']/option[1]").text)
+        self.assertEqual("ApacheLicence_V2.0", driver.find_element_by_xpath(
+          "//select[@id='id_licenceinfotype_model_set-0-licence_from']/option[1]").text)
+        # remove entry
+        driver.find_element_by_xpath(
+          "//select[@id='id_licenceinfotype_model_set-0-licence_to']/option[1]").click()
+        driver.find_element_by_link_text("Remove").click()
+        # entry is now at last position on left site
+        self.assertEqual("AGPL", driver.find_element_by_xpath(
+          "//select[@id='id_licenceinfotype_model_set-0-licence_from']/option[41]").text)
+        
         
     def fill_distribution(self, driver, ss_path, parent_id):
         """

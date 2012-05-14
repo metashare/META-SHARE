@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>It-EmoContext Corpus</resourceName>
+      <description>It-EmoContext is a corpus composed by 6,000 text snippets (three sentences long) for a total of 738,558 tokens, annotated according to the annotation scheme It-EmoCause.</description>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>proprietary</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <downloadLocation>http://langtech1.ilc.cnr.it:8152/fedora/objects/cnr.langres:35/datastreams/ZIP/content</downloadLocation>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Russo</surname>
+      <givenName>Irene</givenName>
+      <communicationInfo>
+         <email>irene.russo@ilc.cnr.it</email>
+         <address>Area della Ricerca del CNR - Via Giuseppe Moruzzi N° 1</address>
+         <zipCode>56124</zipCode>
+         <city>Pisa</city>
+         <country>IT</country>
+         <telephoneNumber>+39 0503153165</telephoneNumber>
+         <faxNumber>+39 0503152839</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo><metadataCreationDate>2011-12-31</metadataCreationDate></metadataInfo>
+   <resourceDocumentationInfo>
+		    <documentation><documentUnstructured>Russo, I, Caselli, T., Rubino, F. (2011), EMOCause: An Easy-adaptable Approach to Emotion Cause Contexts. Proceedings of the 2nd Workshop on Computational Approaches to Subjectivity and Sentiment Analysis, ACL-HLT 2011, pages 153–160.</documentUnstructured></documentation>
+	  </resourceDocumentationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>monolingual</lingualityType>
+		             </lingualityInfo>
+               <languageInfo>
+			               <languageId>ita</languageId>
+			               <languageName>Italian</languageName>
+		             </languageInfo>
+               <sizeInfo>
+			               <size>6000</size>
+			
+			               <sizeUnit>texts</sizeUnit>
+		             </sizeInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

@@ -79,7 +79,7 @@
 		             </characterEncodingInfo>
                <annotationInfo>
                   <annotationType>segmentation</annotationType>
-                  <annotationStandoff>False</annotationStandoff>
+                  <annotationStandoff>false</annotationStandoff>
                   <segmentationLevel>word</segmentationLevel>
                   <annotationFormat>text/xml</annotationFormat>
                   <conformanceToStandardsBestPractices>XCES</conformanceToStandardsBestPractices>
@@ -90,7 +90,7 @@
                </annotationInfo>
                <annotationInfo>
                   <annotationType>morphosyntacticAnnotation-posTagging</annotationType>
-                  <annotationStandoff>False</annotationStandoff>
+                  <annotationStandoff>false</annotationStandoff>
                   <segmentationLevel>word</segmentationLevel>
                   <annotationFormat>text/xml</annotationFormat>
                   <tagset>Morpho-Syntactic Descriptors: http://nl.ijs.si/ME/V4/msd/html/index.html</tagset>
@@ -103,7 +103,7 @@
                </annotationInfo>
                <annotationInfo>
                   <annotationType>lemmatization</annotationType>
-                  <annotationStandoff>False</annotationStandoff>
+                  <annotationStandoff>false</annotationStandoff>
                   <segmentationLevel>word</segmentationLevel>
                   <annotationFormat>text/xml</annotationFormat>
                   <conformanceToStandardsBestPractices>XCES</conformanceToStandardsBestPractices>
@@ -114,7 +114,7 @@
                </annotationInfo>
                <annotationInfo>
                   <annotationType>syntacticAnnotation-shallowParsing</annotationType>
-                  <annotationStandoff>False</annotationStandoff>
+                  <annotationStandoff>false</annotationStandoff>
                   <segmentationLevel>word</segmentationLevel>
                   <annotationFormat>text/xml</annotationFormat>
                   <conformanceToStandardsBestPractices>XCES</conformanceToStandardsBestPractices>

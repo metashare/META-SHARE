@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Szeged Named Entity Recognition Corpus</resourceName>
+      <description>The Szeged NER corpus is a manually annotated part of the Szeged Treebank, consisting of short business news. The used NER categories are (based on the CoNLL system (http://www.cnts.ua.ac.be/conll2003/ner/)) the following: PERSON, ORGANISATION, LOCATION and OTHER.</description>
+      <resourceShortName>Szeged NER Corpus</resourceShortName>
+      <url>http://www.inf.u-szeged.hu/rgai/corpus_ne</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+      <identifier>103</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>CLARIN_ACA-NC</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <downloadLocation>http://www.inf.u-szeged.hu/rgai/corpus_ne</downloadLocation>
+         <licensor>
+				        <personInfo>
+               <surname>N/A</surname>
+               <communicationInfo>
+                  <email>vinczev@inf.u-szeged.hu</email>
+               </communicationInfo>
+               <affiliation>
+                  <organizationName>University of Szeged</organizationName>
+                  <organizationShortName>SZTE</organizationShortName>
+                  <departmentName>Department of Informatics</departmentName>
+                  <communicationInfo>
+                     <email>vinczev@inf.u-szeged.hu</email>
+                  </communicationInfo>
+						
+					          </affiliation>
+            </personInfo>
+			      </licensor>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+      <surname>N/A</surname>
+      <communicationInfo>
+         <email>vinczev@inf.u-szeged.hu</email>
+      </communicationInfo>
+      <affiliation>
+         <organizationName>University of Szeged</organizationName>
+         <organizationShortName>SZTE</organizationShortName>
+         <departmentName>Department of Informatics</departmentName>
+         <communicationInfo>
+            <email>vinczev@inf.u-szeged.hu</email>
+         </communicationInfo>
+			
+		    </affiliation>
+   </contactPerson>
+   <contactPerson>
+      <surname>N/A</surname>
+      <communicationInfo>
+         <email>rfarkas@inf.u-szeged.hu</email>
+      </communicationInfo>
+      <affiliation>
+         <organizationName>University of Szeged</organizationName>
+         <organizationShortName>SZTE</organizationShortName>
+         <departmentName>Department of Informatics</departmentName>
+         <communicationInfo>
+            <email>rfarkas@inf.u-szeged.hu</email>
+         </communicationInfo>
+			
+		    </affiliation>
+   </contactPerson>
+   <contactPerson>
+      <surname>N/A</surname>
+      <communicationInfo>
+         <email>csirik@inf.u-szeged.hu</email>
+      </communicationInfo>
+      <affiliation>
+         <organizationName>University of Szeged</organizationName>
+         <organizationShortName>SZTE</organizationShortName>
+         <departmentName>Department of Informatics</departmentName>
+         <communicationInfo>
+            <email>csirik@inf.u-szeged.hu</email>
+         </communicationInfo>
+			
+		    </affiliation>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-10-17</metadataCreationDate>
+      <metadataCreator>
+         <surname>N/A</surname>
+         <communicationInfo>
+            <email>vinczev@inf.u-szeged.hu</email>
+         </communicationInfo>
+         <affiliation>
+            <organizationName>University of Szeged</organizationName>
+            <organizationShortName>SZTE</organizationShortName>
+            <departmentName>Department of Informatics</departmentName>
+            <communicationInfo>
+               <email>vinczev@inf.u-szeged.hu</email>
+            </communicationInfo>
+				
+			      </affiliation>
+      </metadataCreator>
+   </metadataInfo>
+   <versionInfo>
+		    <version>1.0</version>
+	  </versionInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>monolingual</lingualityType>
+		             </lingualityInfo>
+               <languageInfo>
+                  <languageId>HU</languageId>
+                  <languageName>Hungarian</languageName>
+               </languageInfo>
+               <sizeInfo>
+			               <size>200000</size>
+			
+			               <sizeUnit>tokens</sizeUnit>
+		             </sizeInfo>
+               <annotationInfo>
+                  <annotationType>semanticAnnotation-namedEntities</annotationType>
+                  <segmentationLevel>wordGroup</segmentationLevel>
+               </annotationInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Hungarian Broadcast News Database</resourceName>
+      <description>The Hungarian Broadcast News (HBN) database was collected as a member of the
+Broadcast News Interest Group of COST278, the COST action on Speech and
+Language Interaction in Telecommunications in cooperation of 10 different
+institutions throughout Europe. The Hungarian material consists of 3h and 30
+minutes of recordings, transcribed and annotated (on audio level), using the conventions of NIST
+(National Institute of Standards and Technology, USA). The HBN is freely available for non-commercial research purposes, however it is not redistributable and the original video may never be broadcasted or played to public. License is likely to be changed META-SHARE NoRedistribution, Non-Commercial license.</description>
+      <resourceShortName>hu-broadcast</resourceShortName>
+      <url>http://alpha.tmit.bme.hu/speech/</url>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+      <identifier>204</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>other</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <downloadLocation>http://alpha.tmit.bme.hu/speech/HBNC.php</downloadLocation>
+         <licensor>
+				        <personInfo>
+               <surname>Tamás</surname>
+               <givenName>Henk</givenName>
+               <communicationInfo>
+                  <email>henk@tmit.bme.hu</email>
+                  <url>http://www.tmit.bme.hu</url>
+                  <address>Magyar tudósok körútja 2.</address>
+                  <zipCode>H-1117</zipCode>
+                  <city>Budapest</city>
+                  <country>Hungary</country>
+                  <telephoneNumber>+36-1-463-4188</telephoneNumber>
+                  <faxNumber>+36-1-463-3107</faxNumber>
+               </communicationInfo>
+               <position>Head of Department</position>
+               <affiliation>
+                  <organizationName>Budapest University of Technology and Economics</organizationName>
+                  <organizationShortName>BME</organizationShortName>
+                  <departmentName>Department of Telecommunications and Media Informatics</departmentName>
+                  <communicationInfo>
+                     <email>henk@tmit.bme.hu</email>
+                     <url>http://www.tmit.bme.hu</url>
+                     <address>Magyar tudósok körútja 2.</address>
+                     <zipCode>H-1117</zipCode>
+                     <city>Budapest</city>
+                     <country>Hungary</country>
+                     <telephoneNumber>+36-1-463-4188</telephoneNumber>
+                     <faxNumber>+36-1-463-3107</faxNumber>
+                  </communicationInfo>
+						
+					          </affiliation>
+            </personInfo>
+			      </licensor>
+         <distributionRightsHolder>
+				        <personInfo>
+               <surname>Vicsi</surname>
+               <givenName>Klára</givenName>
+               <communicationInfo>
+                  <email>vicsi@tmit.bme.hu</email>
+                  <url>http://alpha.tmit.bme.hu/speech/</url>
+                  <address>Magyar tudósok körútja 2.</address>
+                  <zipCode>H-1117</zipCode>
+                  <city>Budapest</city>
+                  <country>Hungary</country>
+                  <telephoneNumber>+36-1-463-1940</telephoneNumber>
+                  <faxNumber>+36-1-372-0403</faxNumber>
+               </communicationInfo>
+               <position>professor</position>
+               <affiliation>
+                  <organizationName>Budapest University of Technology and Economics</organizationName>
+                  <organizationShortName>BME</organizationShortName>
+                  <departmentName>Department of Telecommunications and Media Informatics</departmentName>
+                  <communicationInfo>
+                     <email>vicsi@tmit.bme.hu</email>
+                     <url>http://tmit.bme.hu</url>
+                     <address>Magyar tudósok körútja 2.</address>
+                     <zipCode>H-1117</zipCode>
+                     <city>Budapest</city>
+                     <country>Hungary</country>
+                     <telephoneNumber>+36-1-463-1940</telephoneNumber>
+                     <faxNumber>+36-1-372-0403</faxNumber>
+                  </communicationInfo>
+						
+					          </affiliation>
+            </personInfo>
+			      </distributionRightsHolder>
+      </licenceInfo>
+      <iprHolder>
+			      <personInfo>
+            <surname>Vicsi</surname>
+            <givenName>Klára</givenName>
+            <communicationInfo>
+               <email>vicsi@tmit.bme.hu</email>
+               <url>http://alpha.tmit.bme.hu/speech/</url>
+               <address>Magyar tudósok körútja 2.</address>
+               <zipCode>H-1117</zipCode>
+               <city>Budapest</city>
+               <country>Hungary</country>
+               <telephoneNumber>+36-1-463-1940</telephoneNumber>
+               <faxNumber>+36-1-372-0403</faxNumber>
+            </communicationInfo>
+            <position>professor</position>
+            <affiliation>
+               <organizationName>Budapest University of Technology and Economics</organizationName>
+               <organizationShortName>BME</organizationShortName>
+               <departmentName>Department of Telecommunications and Media Informatics</departmentName>
+               <communicationInfo>
+                  <email>vicsi@tmit.bme.hu</email>
+                  <url>http://tmit.bme.hu</url>
+                  <address>Magyar tudósok körútja 2.</address>
+                  <zipCode>H-1117</zipCode>
+                  <city>Budapest</city>
+                  <country>Hungary</country>
+                  <telephoneNumber>+36-1-463-1940</telephoneNumber>
+                  <faxNumber>+36-1-372-0403</faxNumber>
+               </communicationInfo>
+					
+				        </affiliation>
+         </personInfo>
+		    </iprHolder>
+      <availabilityStartDate>2011-11-30</availabilityStartDate>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Vicsi</surname>
+      <givenName>Klára</givenName>
+      <communicationInfo>
+         <email>vicsi@tmit.bme.hu</email>
+         <url>http://alpha.tmit.bme.hu/speech/</url>
+         <address>Magyar tudósok körútja 2.</address>
+         <zipCode>H-1117</zipCode>
+         <city>Budapest</city>
+         <country>Hungary</country>
+         <telephoneNumber>+36-1-463-1940</telephoneNumber>
+         <faxNumber>+36-1-372-0403</faxNumber>
+      </communicationInfo>
+      <position>professor</position>
+      <affiliation>
+         <organizationName>Budapest University of Technology and Economics</organizationName>
+         <organizationShortName>BME</organizationShortName>
+         <departmentName>Department of Telecommunications and Media Informatics</departmentName>
+         <communicationInfo>
+            <email>vicsi@tmit.bme.hu</email>
+            <url>http://tmit.bme.hu</url>
+            <address>Magyar tudósok körútja 2.</address>
+            <zipCode>H-1117</zipCode>
+            <city>Budapest</city>
+            <country>Hungary</country>
+            <telephoneNumber>+36-1-463-1940</telephoneNumber>
+            <faxNumber>+36-1-372-0403</faxNumber>
+         </communicationInfo>
+			
+		    </affiliation>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-24</metadataCreationDate>
+      <metadataCreator>
+         <surname>Szaszák</surname>
+         <givenName>György</givenName>
+         <communicationInfo>
+            <email>szaszak@tmit.bme.hu</email>
+            <url>http://alpha.tmit.bme.hu/speech/</url>
+            <address>Magyar tudósok körútja 2.</address>
+            <zipCode>H-1117</zipCode>
+            <city>Budapest</city>
+            <country>Hungary</country>
+            <telephoneNumber>+36-1-463-1936</telephoneNumber>
+            <faxNumber>+36-1-372-0403</faxNumber>
+         </communicationInfo>
+         <position>research fellow</position>
+         <affiliation>
+            <organizationName>Budapest University of Technology and Economics</organizationName>
+            <organizationShortName>BME</organizationShortName>
+            <departmentName>Department of Telecommunications and Media Informatics</departmentName>
+            <communicationInfo>
+               <email>szaszak@tmit.bme.hu</email>
+               <url>http://alpha.tmit.bme.hu/speech/</url>
+               <address>Magyar tudósok körútja 2.</address>
+               <zipCode>H-1117</zipCode>
+               <city>Budapest</city>
+               <country>Hungary</country>
+               <telephoneNumber>+36-1-463-1936</telephoneNumber>
+               <faxNumber>+36-1-372-0403</faxNumber>
+            </communicationInfo>
+				
+			      </affiliation>
+      </metadataCreator>
+      <source>METANET4U</source>
+      <metadataLanguageId>en-us</metadataLanguageId>
+      <metadataLastDateUpdated>2011-11-24</metadataLastDateUpdated>
+      <revision>2011-11-24</revision>
+   </metadataInfo>
+   <versionInfo>
+		    <version>1.1</version>
+      <lastDateUpdated>2005-12-31</lastDateUpdated>
+		
+	  </versionInfo>
+   <usageInfo>
+		    <foreseenUseInfo>
+         <foreseenUse>humanUse</foreseenUse>
+      </foreseenUseInfo>
+      <foreseenUseInfo>
+         <foreseenUse>nlpApplications</foreseenUse>
+			
+			
+			      <useNLPSpecific>speechAnalysis</useNLPSpecific>
+			      <useNLPSpecific>speechUnderstanding</useNLPSpecific>
+			      <useNLPSpecific>discourseAnalysis</useNLPSpecific>
+			      <useNLPSpecific>speakerIdentification</useNLPSpecific>
+			      <useNLPSpecific>speechToSpeechTranslation</useNLPSpecific>
+		    </foreseenUseInfo>
+		    <actualUseInfo>
+         <actualUse>humanUse</actualUse>
+         <useNLPSpecific>speakerIdentification</useNLPSpecific>
+         <useNLPSpecific>speechAnalysis</useNLPSpecific>
+         <useNLPSpecific>speechRecognition</useNLPSpecific>
+      </actualUseInfo>
+	  </usageInfo>
+   <resourceDocumentationInfo>
+      <documentation>
+         <documentUnstructured>Janez Zibert, France Mihelic, Jean-Pierre Martens, Hugo Meinedo, Joao Neto, Laura Docio, Carmen Garcia-Mateo, Petr David, Jan Nouza, Matus Pleva, Anton Cizmar, Andrej Zgank, Zdravko Kacic, Csaba Teleki, Klara Vicsi:
+The COST278 Broadcast News Segmentation and Speaker Clustering Evaluation - Overview, Methodology, Systems, Results. In: Interspeech 2005 - Eurospeech: 9th European Conference on Speech Communication and Technology. Lisboa, Portugal, 2005, ISCA, pp. 629-632. </documentUnstructured>
+      </documentation>
+   </resourceDocumentationInfo>
+   <resourceCreationInfo>
+      <resourceCreator>
+			      <personInfo>
+            <surname>Vicsi</surname>
+            <givenName>Klára</givenName>
+            <communicationInfo>
+               <email>vicsi@tmit.bme.hu</email>
+               <url>http://alpha.tmit.bme.hu/speech/</url>
+               <address>Magyar tudósok körútja 2.</address>
+               <zipCode>H-1117</zipCode>
+               <city>Budapest</city>
+               <country>Hungary</country>
+               <telephoneNumber>+36-1-463-1940</telephoneNumber>
+               <faxNumber>+36-1-372-0403</faxNumber>
+            </communicationInfo>
+            <position>professor</position>
+            <affiliation>
+               <organizationName>Budapest University of Technology and Economics</organizationName>
+               <organizationShortName>BME</organizationShortName>
+               <departmentName>Department of Telecommunications and Media Informatics</departmentName>
+               <communicationInfo>
+                  <email>vicsi@tmit.bme.hu</email>
+                  <url>http://alpha.tmit.bme.hu/speech/</url>
+                  <address>Magyar tudósok körútja 2.</address>
+                  <zipCode>H-1117</zipCode>
+                  <city>Budapest</city>
+                  <country>Hungary</country>
+                  <telephoneNumber>+36-1-463-1940</telephoneNumber>
+                  <faxNumber>+36-1-372-0403</faxNumber>
+               </communicationInfo>
+					
+				        </affiliation>
+         </personInfo>
+		    </resourceCreator>
+      <creationStartDate>2004-12-01</creationStartDate>
+      <creationEndDate>2005-12-31</creationEndDate>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>monolingual</lingualityType>
+		             </lingualityInfo>
+               <languageInfo>
+                  <languageId>HU</languageId>
+                  <languageName>Hungarian</languageName>
+                  <sizePerLanguage>
+				                 <size>25257</size>
+				
+				                 <sizeUnit>words</sizeUnit>
+			               </sizePerLanguage>
+               </languageInfo>
+               <sizeInfo>
+			               <size>25257</size>
+			
+			               <sizeUnit>words</sizeUnit>
+		             </sizeInfo>
+               <sizeInfo>
+			               <size>952</size>
+			
+			               <sizeUnit>turns</sizeUnit>
+		             </sizeInfo>
+               <characterEncodingInfo>
+                  <characterEncoding>MacDingbat</characterEncoding>
+               </characterEncodingInfo>
+               <creationInfo>
+			               <originalSource>
+                     <targetResourceNameURI>TV broadcast transcription</targetResourceNameURI>
+                  </originalSource>
+			               <creationMode>manual</creationMode>
+		             </creationInfo>
+            </corpusTextInfo>
+            <corpusAudioInfo>
+               <mediaType>audio</mediaType>
+               <lingualityInfo>
+			               <lingualityType>monolingual</lingualityType>
+		             </lingualityInfo>
+               <languageInfo>
+                  <languageId>HU</languageId>
+                  <languageName>Hungarian</languageName>
+                  <sizePerLanguage>
+				                 <size>3.25</size>
+				
+				                 <sizeUnit>hours</sizeUnit>
+			               </sizePerLanguage>
+               </languageInfo>
+               <audioSizeInfo>
+                  <sizeInfo>
+                     <size>3.25</size>
+                     <sizeUnit>hours</sizeUnit>
+                  </sizeInfo>
+                  <durationOfAudioInfo>
+				                 <size>194</size>
+				                 <durationUnit>minutes</durationUnit>
+			               </durationOfAudioInfo>
+               </audioSizeInfo>
+               <audioContentInfo>
+                  <speechItems>other</speechItems>
+                  <noiseLevel>low</noiseLevel>
+               </audioContentInfo>
+               <settingInfo>
+                  <naturality>spontaneous</naturality>
+                  <conversationalType>multilogue</conversationalType>
+                  <scenarioType>other</scenarioType>
+                  <audience>largePublic</audience>
+                  <interactivity>nonInteractive</interactivity>
+               </settingInfo>
+               <audioFormatInfo>
+                  <mimeType>wave/audio</mimeType>
+                  <signalEncoding>linearPCM</signalEncoding>
+                  <samplingRate>16000</samplingRate>
+                  <quantization>16</quantization>
+                  <compressionInfo>
+                     <compression>false</compression>
+                  </compressionInfo>
+                  <numberOfTracks>1</numberOfTracks>
+                  <recordingQuality>veryHigh</recordingQuality>
+                  <sizePerAudioFormat>
+				                 <size>194</size>
+				
+				                 <sizeUnit>minutes</sizeUnit>
+			               </sizePerAudioFormat>
+               </audioFormatInfo>
+               <annotationInfo>
+                  <annotationType>speechAnnotation-orthographicTranscription</annotationType>
+                  <annotatedElements>backgroundNoise</annotatedElements>
+                  <segmentationLevel>utterance</segmentationLevel>
+                  <annotationFormat>Transcriber 1.4.2</annotationFormat>
+                  <annotationMode>manual</annotationMode>
+                  <annotationModeDetails>Segmentated into speaker turns, speaker noises, overlapping music are also merked.</annotationModeDetails>
+                  <annotationTool>
+                     <targetResourceNameURI>Transcriber 1.4.2</targetResourceNameURI>
+                  </annotationTool>
+                  <annotationStartDate>2005-05-01</annotationStartDate>
+                  <annotationEndDate>2005-11-30</annotationEndDate>
+                  <sizePerAnnotation>
+				                 <size>952</size>
+				
+				                 <sizeUnit>turns</sizeUnit>
+			               </sizePerAnnotation>
+               </annotationInfo>
+               <recordingInfo>
+			
+			
+			               <recordingDeviceType>other</recordingDeviceType>
+			               <recordingDeviceTypeDetails>Pinnacle DV500</recordingDeviceTypeDetails>
+			               <recordingPlatformSoftware>other</recordingPlatformSoftware>
+			               <recordingEnvironment>studio</recordingEnvironment>
+		             </recordingInfo>
+               <creationInfo>
+                  <originalSource>
+                     <targetResourceNameURI>TV broadcast (public service news)</targetResourceNameURI>
+                  </originalSource>
+               </creationInfo>
+            </corpusAudioInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

@@ -3,6 +3,8 @@ Project: META-SHARE prototype implementation
  Author: Christian Federmann <cfedermann@dfki.de>
 """
 import base64
+from django.contrib.admin import widgets
+
 try:
     import cPickle as pickle
 except:
@@ -81,6 +83,11 @@ class MultiTextField(models.Field):
     
     """
     __metaclass__ = models.SubfieldBase
+    default_error_messages = {
+        # pylint: disable-msg=E1102
+        'too_long': _(u'A single field must be at most {0} characters long '
+                      u'(was {1}).'),
+    }
 
     def __init__(self, *args, **kwargs):
         """
@@ -97,6 +104,15 @@ class MultiTextField(models.Field):
 
         super(MultiTextField, self).__init__(*args, **kwargs)
 
+    def validate(self, value, model_instance):
+        """
+        Validates value and throws `ValidationError`.
+        """
+        super(MultiTextField, self).validate(value, model_instance)
+        if self.max_length and len(value) > self.max_length:
+            raise exceptions.ValidationError(self.error_messages['too_long']
+                                    .format(self.max_length, len(value)))
+
     def clean(self, value, model_instance):
         """
         Convert to the value's type and run validation. Validation errors
@@ -107,7 +123,7 @@ class MultiTextField(models.Field):
         validation_errors = {}
 
         if not len(values) and not self.blank:
-            raise exceptions.ValidationError(u'This field cannot be blank.')
+            raise exceptions.ValidationError(self.error_messages['blank'])
 
         for value in values:
             try:
@@ -255,7 +271,8 @@ class MultiSelectField(models.Field):
 
             else:
                 defaults['initial'] = self.get_default()
-
+        # replace default widget
+        kwargs['widget'] = widgets.FilteredSelectMultiple(self.verbose_name, False)
         defaults.update(kwargs)
         return form_class(**defaults)
 
