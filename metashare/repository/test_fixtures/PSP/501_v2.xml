@@ -213,7 +213,7 @@
 		    <updateFrequency/>
 </versionInfo>
    <validationInfo>
-      <validated>True</validated>
+      <validated>true</validated>
       <validationType>formal</validationType>
       <validationMode>automatic</validationMode>
       <validationModeDetails>Validation of the XML structure in accordance with the TEI P5 and XLIFF schemas with custom PELCRA extensions.</validationModeDetails>

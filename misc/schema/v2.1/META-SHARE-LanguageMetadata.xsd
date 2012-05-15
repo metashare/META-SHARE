@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited by ILSP/Athena R.C. -->
+<!-- changes from v2.0:
+made sizePerLanguageVariety optional 
+label added for specific elements-->
+<xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.1" xml:lang="en">
+	<xs:include schemaLocation="./META-SHARE-SimpleTypes.xsd"/>
+	<xs:include schemaLocation="./META-SHARE-RoleTypes.xsd"/>
+	<xs:include schemaLocation="./META-SHARE-LicenseMetadata.xsd"/>
+	<!-- definition of complex types -->
+	<!-- media type info TextInfo/imageInfo/AudioInfo/VideInfo etc-->
+	<xs:complexType name="characterEncodingInfoType">
+		<xs:annotation>	
+			<xs:documentation>Groups together information on character encoding of the resource</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="ms:characterEncoding">
+				<xs:annotation>
+					<xs:documentation>The name of the character encoding used in the resource or accepted by the tool/service</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<!--
+			<xs:element name="characterSet" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			-->
+			<xs:element name="sizePerCharacterEncoding" type="ms:sizeInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides information on the size of the resource parts with different character encoding</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="timeCoverageInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on time classification of the resource</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="timeCoverage" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The time period that the content of a resource is about</xs:documentation>
+					<xs:appinfo>
+						<maxlen>100</maxlen>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sizePerTimeCoverage" type="ms:sizeInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides information on size per time period represented in the resource</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="geographicCoverageInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on geographic classification of the resource</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="geographicCoverage" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The geographic region that the content of a resource is about; for countries, recommended use of ISO-3166</xs:documentation>
+					<xs:appinfo>
+						<maxlen>100</maxlen>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sizePerGeographicCoverage" type="ms:sizeInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides information on size per geographically distinct section of the resource</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="lingualityInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on the number of languages of the resource part and of the way they are combined to each other</xs:documentation>
+			<xs:appinfo>
+				<render-short>{lingualityType}</render-short>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="lingualityType">
+				<xs:annotation>
+					<xs:documentation>Indicates whether the resource includes one, two or more languages</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<maxlen>20</maxlen>
+						<label>Linguality type</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="monolingual"/>
+						<xs:enumeration value="bilingual"/>
+						<xs:enumeration value="multilingual"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="multilingualityType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates whether the corpus is parallel, comparable or mixed</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<maxlen>30</maxlen>
+						<label>Multilinguality type</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="parallel"/>
+						<xs:enumeration value="comparable"/>
+						<xs:enumeration value="multilingualSingleText">
+							<xs:annotation>
+								<xs:documentation>for single texts that contain multiple language excerpts; e.g. european parliament discussions</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="multilingualityTypeDetails" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides further information on multilinguality of a resource in free text</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<maxlen>512</maxlen>
+						<label>Multilinguality type details</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<!--
+			<xs:element ref="ms:modalityType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>information on modality</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+            -->
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="languageVarietyInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on language varieties occurred in the resource (e.g. dialects)</xs:documentation>
+			<xs:appinfo>
+				<render-short>{languageVarietyName} ({languageVarietyType})</render-short>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="languageVarietyType">
+				<xs:annotation>
+					<xs:documentation>Specifies the type of the language variety that occurs in the resource or is supported by a tool/service</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<maxlen>20</maxlen>
+						<label>Language variety type</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="dialect"/>
+						<xs:enumeration value="jargon"/>
+						<xs:enumeration value="other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element ref="ms:languageVarietyName">
+				<xs:annotation>
+					<xs:documentation>The name of the language variety that occurs in the resource or is supported by a tool/service</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sizePerLanguageVariety" type="ms:sizeInfoType" minOccurs="0" maxOccurs="1">				
+				<xs:annotation>
+					<xs:documentation>Provides information on the size per language variety component</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="languageName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>A human understandable name of the language that is used in the resource or supported by the tool/service according to the IETF BCP47 standard</xs:documentation>
+			<xs:appinfo>
+				<maxlen>100</maxlen>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="languageId" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The identifier of the language that is included in the resource or supported by the tool/service according to the IETF BCP47 standard</xs:documentation>
+			<xs:appinfo>
+				<maxlen>100</maxlen>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="languageInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on the languages represented in the resource </xs:documentation>
+			<xs:appinfo>
+				<render-short>{languageName} {languageVarietyInfo}</render-short>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="ms:languageId">
+				<xs:annotation>
+					<xs:documentation>The identifier of the language that is included in the resource or supported by the tool/service according to the IETF BCP47 standard</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:languageName">
+				<xs:annotation>
+					<xs:documentation>A human understandable name of the language that is used in the resource or supported by the tool/service according to the IETF BCP47 standard</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="languageScript" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies the writing system used to represent the language in form of a four letter code as it is defined in ISO-15924</xs:documentation>
+					<xs:appinfo>
+						<maxlen>100</maxlen>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sizePerLanguage" type="ms:sizeInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides information on the size per language component</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:languageVarietyInfo" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups information on language varieties occurred in the resource (e.g. dialects)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- defintion of elements -->
+	<xs:element name="characterEncodingInfo" type="ms:characterEncodingInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on character encoding of the resource</xs:documentation>
+			<xs:appinfo>
+				<relation>one-to-one</relation>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="timeCoverageInfo" type="ms:timeCoverageInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on time classification of the resource</xs:documentation>
+			<xs:appinfo>
+				<relation>one-to-one</relation>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="geographicCoverageInfo" type="ms:geographicCoverageInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on geographic classification of the resource</xs:documentation>
+			<xs:appinfo>
+				<relation>one-to-one</relation>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="lingualityInfo" type="ms:lingualityInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on the number of languages of the resource part and of the way they are combined to each other</xs:documentation>
+			<xs:appinfo>
+				<relation>one-to-one</relation>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="languageInfo" type="ms:languageInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on the languages represented in the resource</xs:documentation>
+			<xs:appinfo>
+				<relation>one-to-one</relation>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="languageVarietyInfo" type="ms:languageVarietyInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on language varieties occurred in the resource (e.g. dialects)</xs:documentation>
+			<xs:appinfo>
+				<relation>one-to-one</relation>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="languageVarietyName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The name of the language variety that occurs in the resource or is supported by a tool/service</xs:documentation>
+			<xs:appinfo>
+				<maxlen>100</maxlen>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

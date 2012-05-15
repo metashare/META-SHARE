@@ -4,20 +4,18 @@ Project: META-SHARE prototype implementation
 """
 import base64
 import logging
-
 try:
     import cPickle as pickle
 except:
     import pickle
 
-from django.forms.util import flatatt
-
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
-from django.forms import widgets, TextInput
+from django.forms import widgets, TextInput, Textarea, Media
 from django.template.loader import render_to_string
-from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
-
+from selectable.forms.widgets import SelectableMediaMixin, SelectableMultiWidget, \
+    LookupMultipleHiddenInput
+from django.utils.http import urlencode
 from metashare import settings
 
 # Setup logging support.
@@ -25,77 +23,177 @@ logging.basicConfig(level=settings.LOG_LEVEL)
 LOGGER = logging.getLogger('metashare.repository.widgets')
 LOGGER.addHandler(settings.LOG_HANDLER)
 
+# the maximum length (in characters) where `TextInput` widgets will still be
+# used; for larger sizes we use `Textarea` widgets
+_MAX_TEXT_INPUT_SIZE = 150
 
-class TextInputWithLanguageAttribute(widgets.Input):
-    input_type = 'text'
-    attribute_length = 5
+
+class DictWidget(widgets.Widget):
+    """
+    A widget for rendering dictionaries as represented by `DictField` form
+    fields.
     
-    def __init__(self, *args, **kwargs):
+    By default key/value input widgets will be `TextInput` widgets. If a
+    sufficiently large maximum size is specified for either of them, the input
+    wisgets may also become `Textarea` widgets.
+    """
+    class Media:
+        css = { 'all': ('{}css/dict_widget.css'.format(
+                            settings.ADMIN_MEDIA_PREFIX),) }
+        js = ('{}js/dict_widget.js'.format(settings.ADMIN_MEDIA_PREFIX),)
+
+    # templates for the names of key/value "<input/>" fields
+    _key_field_name_tpl = 'key_{}_{}'
+    _val_field_name_tpl = 'val_{}_{}'
+
+    def __init__(self, blank=False, max_key_length=None, max_val_length=None):
         """
-        Initialises a new TextInputWithLanguageAttribute instance.
+        Initializes a new `DictWidget` with the given maximum dictionary
+        key/value sizes (in characters).
         
-        This calls the super class constructor with any remaining args.
+        The `blank` argument denotes whether empty dictionarys should be allowed
+        or not. This is only enforced via JavaScript, though!
         """
-        super(TextInputWithLanguageAttribute, self).__init__(*args, **kwargs)
-    
+        self.blank = blank
+        self.max_key_length = max_key_length
+        self.max_val_length = max_val_length
+        # path to the Django template which is used to render this widget
+        self._template = 'repository/editor/dict_widget.html'
+        super(DictWidget, self).__init__()
+
+    def render(self, name, value, attrs=None):
+        """
+        Returns this Widget rendered as HTML, as a Unicode string.
+
+        The 'value' given is not guaranteed to be valid input, so subclass
+        implementations should program defensively.
+        """
+        _entries = []
+        _context = { 'blank': self.blank, 'entries': _entries,
+            'new_entry_tpl': self._get_dict_entry(name, '', None, None) }
+        if isinstance(value, dict):
+            # (we have gotten an existing Python dict)
+            idx = 0
+            for key, val in value.iteritems():
+                _entries.append(self._get_dict_entry(name, idx, key, val))
+                idx += 1
+        elif isinstance(value, list):
+            # (we have gotten a non-valid key/value pair list that was created
+            # in value_from_datadict())
+            idx = 0
+            for entry in value:
+                _entries.append(self._get_dict_entry(name, idx, entry[0],
+                                                     entry[1]))
+                idx += 1
+        elif not self.blank:
+            # (we probably have gotten the value None, i.e., the dictionary is
+            # only being created; an empty first entry is only shown if the
+            # dictionary must not be blank)
+            _entries.append(self._get_dict_entry(name, 0, None, None))
+        # render final HTML for this widget instance
+        return mark_safe(render_to_string(self._template, _context))
+
+    def _get_dict_entry(self, field_name, idx, key, value):
+        """
+        Returns a tuple (pair) with a rendered key and value input field.
+        
+        `field_name` and `id` will be used in the names of the input fields.
+        """
+        _key_field_name = DictWidget._key_field_name_tpl.format(field_name, idx)
+        if self.max_key_length:
+            if self.max_key_length > _MAX_TEXT_INPUT_SIZE:
+                rendered_key = Textarea().render(_key_field_name, key)
+            else:
+                rendered_key = \
+                    TextInput(attrs={ 'maxlength': self.max_key_length }) \
+                        .render(_key_field_name, key)
+        else:
+            rendered_key = TextInput().render(_key_field_name, key)
+
+        _val_field_name = DictWidget._val_field_name_tpl.format(field_name, idx)
+        if self.max_val_length:
+            if self.max_val_length > _MAX_TEXT_INPUT_SIZE:
+                rendered_val = Textarea().render(_val_field_name, value)
+            else:
+                rendered_val = \
+                    TextInput(attrs={ 'maxlength': self.max_val_length }) \
+                        .render(_val_field_name, value)
+        else:
+            rendered_val = TextInput().render(_val_field_name, value)
+
+        return (rendered_key, rendered_val)
+
     def value_from_datadict(self, data, files, name):
         """
-        Given a dictionary of data and this widget's name, returns the value
-        of this widget. Returns None if it's not provided.
+        Given a dictionary of data from the input form and this widget's name,
+        returns the value of this widget as a list of key/value pairs (or None
+        if the list would be empty).
         """
-        lang = '{0}_lang'.format(name)
-        _value = '{0:5}{1}'.format(data.get(lang, '')[:self.attribute_length],
-          data.get(name, '')).strip()
-        
-        if _value == '':
-            return None
-        
-        return _value
-    
-    def render(self, name, value, attrs=None):
-        if value is None or value == '':
-            attribute = ''
-            value = ''
-        
-        else:
-            attribute = value[:self.attribute_length].strip()
-            value = value[self.attribute_length:]
-        
-        lang = '{0}_lang'.format(name)
-        attribute_attrs = self.build_attrs({'maxlength': self.attribute_length},
-          type='text', name=lang)
-        if attribute != '':
-            # Only add the 'value' attribute if a value is non-empty.
-            attribute_attrs['value'] = force_unicode(self._format_value(attribute))
-        
-        final_attrs = self.build_attrs({'style': 'width:400px;'},
-          type=self.input_type, name=name)
-        if value != '':
-            # Only add the 'value' attribute if a value is non-empty.
-            final_attrs['value'] = force_unicode(self._format_value(value))
-        
-        return mark_safe(u'<input{0} /> <strong>Language:</strong> <input{1} />'.format(
-          flatatt(final_attrs), flatatt(attribute_attrs)))
+        # collect the key/value data that was provided by the user (not as a
+        # dictionary, so that we can later cleanly validate the data):
+        provided = []
+        idx = 0
+        while True:
+            key_name = DictWidget._key_field_name_tpl.format(name, idx)
+            val_name = DictWidget._val_field_name_tpl.format(name, idx)
+            if not key_name in data or not val_name in data:
+                break
+            provided.append((data[key_name], data[val_name]))
+            idx += 1
+        if len(provided) != 0:
+            return provided
+        return None
 
 
-class SingleChoiceTypeWidget(RelatedFieldWidgetWrapper):
+class LangDictWidget(DictWidget):
     """
-    A widget for a single element of a xs:choice type.
+    A `DictWidget` which has RFC 3066 language codes as keys.
+    """
+    def __init__(self, *args, **kwargs):
+        super(LangDictWidget, self).__init__(*args, **kwargs)
+        # path to the Django template which is used to render this widget
+        self._template = 'repository/editor/lang_dict_widget.html'
+
+    def _get_dict_entry(self, field_name, idx, key, value):
+        if not key:
+            # by default we (blindly) propose the ISO 639-2 language code for an
+            # undetermined language
+            key = 'und'
+        return super(LangDictWidget, self)._get_dict_entry(field_name, idx, key,
+                                                           value)
+
+    def _media(self):
+        """
+        Returns a `Media` object for this widget which is dynamically created
+        from the JavaScript of `DictWidget` and CSS specific to this widget.
+        """
+        # pylint: disable-msg=E1101
+        return DictWidget().media['js'] \
+            + Media(css={'all': ('{}css/lang_dict_widget.css'.format(
+                                        settings.ADMIN_MEDIA_PREFIX),)})
+    media = property(_media)
+
+
+class SubclassableRelatedFieldWidgetWrapper(RelatedFieldWidgetWrapper):
+    """
+    A replacement for RelatedWidgetWrapper suitable for related fields which are subclassable.
+    
+    Instead of the default 'plus' button to add a new related item in a popup window,
+    this implementation shows a dropdown menu letting the user choose which subtype to create.
     """
     class Media:
         js = (
           settings.MEDIA_URL + "js/choice-type-widget.js",
         )
 
-    def __init__(self, rel, admin_site, *args, **kwargs):
+    def __init__(self, widget, rel, admin_site, *args, **kwargs):
         """
         Initialises this widget instance.
         """
-        super(SingleChoiceTypeWidget, self).__init__(widgets.Select(), rel,
+        super(SubclassableRelatedFieldWidgetWrapper, self).__init__(widget, rel,
           admin_site, *args, **kwargs)
 
-        self.subclass_select = None        
-        self.subclasses = self._compute_sub_classes()
+        self.subclass_select, self.subclasses = self._compute_sub_classes()
 
     def _compute_sub_classes(self):
         """
@@ -121,8 +219,8 @@ class SingleChoiceTypeWidget(RelatedFieldWidgetWrapper):
             raise AssertionError('No sub classes found for {}?'.format(
               _instance.__class__.__name__))
 
-        self.subclass_select = widgets.Select(choices=_choices)
-        return _subclasses
+        _subclass_select = widgets.Select(choices=_choices)
+        return _subclass_select, _subclasses
 
     def render(self, name, value, *args, **kwargs):
         # We are not using self.admin_site.root_path as this seems broken...
@@ -144,21 +242,6 @@ class SingleChoiceTypeWidget(RelatedFieldWidgetWrapper):
         return mark_safe(u''.join(output))
 
 
-class MultiChoiceTypeWidget(SingleChoiceTypeWidget):
-    """
-    A widget for several elements of a xs:choice type.
-    """
-    def __init__(self, rel, admin_site, *args, **kwargs):
-        """
-        Initialises this widget instance.
-        """
-        # pylint: disable-msg=E1003
-        super(SingleChoiceTypeWidget, self).__init__(widgets.SelectMultiple(),
-          rel, admin_site, *args, **kwargs)
-        
-        self._compute_sub_classes()
-
-
 
 class MultiFieldWidget(widgets.Widget):
     """
@@ -177,17 +260,35 @@ class MultiFieldWidget(widgets.Widget):
         }
         js = ('js/multi-field-widget.js',)
     
-    def __init__(self, widget_id, *args, **kwargs):
+    def __init__(self, widget_id, max_length=None, **kwargs):
         """
         Initialises a new MultiFieldWidget instance.
         
         This saves the given, required widget_id, clears the errors dictionary
         and then calls the super class constructor with any remaining args.
+        Any max_length argument is used to determine the appropriate size for
+        the input fields.
         """
         self.widget_id = widget_id
+        self.max_length = max_length
         self.errors = {}
-        super(MultiFieldWidget, self).__init__(*args, **kwargs)
-    
+        super(MultiFieldWidget, self).__init__(**kwargs)
+
+    def _render_input_widget(self, name, value, attrs):
+        """
+        Renders and returns the most suitable widget for inputting a single
+        field in this `MultiFieldWidget`.
+        """
+        if self.max_length:
+            if self.max_length > _MAX_TEXT_INPUT_SIZE:
+                result = Textarea().render(name, value, attrs)
+            else:
+                result = TextInput(attrs={ 'maxlength': self.max_length }) \
+                            .render(name, value, attrs)
+        else:
+            result = TextInput().render(name, value, attrs)
+        return result
+
     def render(self, name, value, attrs=None):
         """
         Renders the MultiFieldWidget with the given name and value.
@@ -211,10 +312,7 @@ class MultiFieldWidget(widgets.Widget):
             except:
                 LOGGER.error('Error converting value to list!')
                 value = []
-        
-        # The widget used for this MultiFieldWidget is defined in self.attrs.
-        input_widget = self.attrs.get('widget', TextInput)
-        
+
         # We collect all rendered widgets inside _field_widgets.
         _field_widgets = []
         _field_attrs = {'id': 'id_{0}'.format(name), 'class': 'input',
@@ -224,7 +322,8 @@ class MultiFieldWidget(widgets.Widget):
         # adding an index number 0..n-1 to support container id generation.
         for _id, _value in enumerate(value):
             # Render input_widget instance as HTML.
-            _field_widget = input_widget().render(name, _value, _field_attrs)
+            _field_widget = self._render_input_widget(name, _value,
+                                                      _field_attrs)
             
             # Define context for container template rendering.
             _context = {'id': _id, 'field_widget': _field_widget,
@@ -243,7 +342,7 @@ class MultiFieldWidget(widgets.Widget):
         _id = len(value)
         if not _id:
             # Note that value='' as values is empty.
-            _field_widget = input_widget().render(name, '', _field_attrs)
+            _field_widget = self._render_input_widget(name, '', _field_attrs)
             _context = {'id': _id, 'field_widget': _field_widget,
               'widget_id': self.widget_id,
               'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX}
@@ -251,14 +350,14 @@ class MultiFieldWidget(widgets.Widget):
             _container = render_to_string('repository/container.html', _context)
             _field_widgets.append(_container)
         
-            _field_widget = input_widget().render(name, '', _field_attrs)
+            _field_widget = self._render_input_widget(name, '', _field_attrs)
             _context = {'id': _id, 'field_widget': _field_widget,
               'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX}
         
         # The JavaScript code needs an empty "template" to create new input
         # widgets dynamically; this is pre-rendered and added to the template
         # for the MultiFieldWidget instance here.
-        _empty_widget = input_widget().render(name, '', _field_attrs)
+        _empty_widget = self._render_input_widget(name, '', _field_attrs)
         _context = {'empty_widget': _empty_widget,
           'field_widgets': mark_safe(u'\n'.join(_field_widgets)),
           'widget_id': self.widget_id,
@@ -272,22 +371,9 @@ class MultiFieldWidget(widgets.Widget):
         """
         Encodes the data for this MultiFieldWidget instance as base64 String.
         """
-        widget = self.attrs.get('widget', TextInput)()
-        if isinstance(widget, TextInputWithLanguageAttribute):
-            _attributes = [v[:widget.attribute_length]
-              for v in data.getlist('{0}_lang'.format(name))]
-            _values = [v for v in data.getlist(name)]
-            
-            _value = ['{0:5}{1}'.format(_a, _v).strip()
-              for _a, _v in zip(_attributes, _values)]
-            _value = [v for v in _value if v]
-        
-        else:
-            _value = [v for v in data.getlist(name) if v]
-        
+        _value = [v for v in data.getlist(name) if v]
         if not len(_value):
             return None
-        
         return base64.b64encode(pickle.dumps(_value))
 
     def _has_changed(self, initial, data):
@@ -319,3 +405,63 @@ class MultiFieldWidget(widgets.Widget):
             pass
         
         return initial != _data
+
+class TestHiddenWidget(TextInput, SelectableMediaMixin):
+    def __init__(self, lookup_class, *args, **kwargs):
+        self.lookup_class = lookup_class
+        self.allow_new = kwargs.pop('allow_new', False)
+        self.qset = kwargs.pop('query_params', {})
+        self.limit = kwargs.pop('limit', None)
+        super(TestHiddenWidget, self).__init__(*args, **kwargs)
+
+    def update_query_parameters(self, qs_dict):
+        self.qset.update(qs_dict)
+
+    def build_attrs(self, extra_attrs=None, **kwargs):
+        attrs = super(TestHiddenWidget, self).build_attrs(extra_attrs, **kwargs)
+        url = self.lookup_class.url()
+        if self.limit and 'limit' not in self.qset:
+            self.qset['limit'] = self.limit
+        if self.qset:
+            url = '%s?%s' % (url, urlencode(self.qset))
+        attrs[u'data-selectable-url'] = url
+        attrs[u'data-selectable-type'] = 'text'
+        attrs[u'data-selectable-allow-new'] = str(self.allow_new).lower()
+        attrs[u'type'] = 'hidden'
+        return attrs
+
+    def render(self, name, value, attrs=None):
+        return mark_safe(super(TestHiddenWidget, self).render(name, value, attrs))
+
+class OneToManyWidget(SelectableMultiWidget, SelectableMediaMixin):
+
+    def __init__(self, lookup_class, *args, **kwargs):
+        self.lookup_class = lookup_class
+        self.limit = kwargs.pop('limit', None)
+        position = kwargs.pop('position', 'bottom')
+        attrs = {
+            u'data-selectable-multiple': 'true',
+            u'data-selectable-position': position,
+            u'data-selectable-allow-editing': 'true'
+        }
+        query_params = kwargs.pop('query_params', {})
+        widget_list = [
+            TestHiddenWidget(
+                lookup_class, allow_new=False,
+                limit=self.limit, query_params=query_params, attrs=attrs
+            ),
+            LookupMultipleHiddenInput(lookup_class)
+        ]
+        super(OneToManyWidget, self).__init__(widget_list, *args, **kwargs)
+
+    def value_from_datadict(self, data, files, name):
+        return self.widgets[1].value_from_datadict(data, files, name + '_1')
+
+    def render(self, name, value, attrs=None):
+        if value and not hasattr(value, '__iter__'):
+            value = [value]
+        value = [u'', value]
+        return super(OneToManyWidget, self).render(name, value, attrs)
+    
+    def decompress(self, value):
+        pass

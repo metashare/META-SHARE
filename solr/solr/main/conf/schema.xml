@@ -187,10 +187,109 @@
       stored="false" />
 
     
+    <field name="tsLanguageDependentTypeFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="textTextTypeFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
     <field name="availabilityFilter_exact" type="string" indexed="true"
       stored="true" multiValued="false" />
     
-    <field name="geographicCoverageFilter" type="text_en" indexed="true"
+    <field name="lcrLinguisticInformationFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="timeCoverageFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="audioSpeechItemsFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="textTextTypeFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="mediaTypeSort_exact" type="string" indexed="true"
+      stored="true" multiValued="false" />
+    
+    <field name="tnTypeOfTnContentFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="validatedFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="availabilityFilter" type="text_en" indexed="true"
+      stored="true" multiValued="false" />
+    
+    <field name="tnGramBaseItemFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="useNlpSpecificFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="ldGrammaticalPhenomenaCoverageFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="audioRegisterFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="foreseenUseFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="videoConversationalTypeFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="audioNaturalityFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="text" type="text_en" indexed="true"
+      stored="false" multiValued="false" />
+    
+    <field name="languageNameSort" type="text_en" indexed="true"
+      stored="true" multiValued="false" />
+    
+    <field name="lcrLexicalResourceTypeFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="audioSpeechGenreFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="audioScenarioTypeFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="videoNaturalityFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="videoConversationalTypeFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="resourceTypeSort" type="text_en" indexed="true"
+      stored="true" multiValued="false" />
+    
+    <field name="tsLanguageDependentTypeFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="textRegisterFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="textTextGenreFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="corporaAnnotationTypeFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="tnGramBaseItemFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="tnGramOrderFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="geographicCoverageFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="audioNaturalityFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="tsEvaluatedFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
     
     <field name="domainFilter" type="text_en" indexed="true"
@@ -199,73 +298,46 @@
     <field name="modalityTypeFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
-    <field name="modalityTypeFilter" type="text_en" indexed="true"
+    <field name="tsToolServiceSubTypeFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
-    <field name="licenceFilter" type="text_en" indexed="true"
-      stored="true" multiValued="true" />
-    
-    <field name="mediaTypeSort_exact" type="string" indexed="true"
-      stored="true" multiValued="false" />
-    
-    <field name="timeCoverageFilter" type="text_en" indexed="true"
-      stored="true" multiValued="true" />
-    
-    <field name="resourceTypeFilter_exact" type="string" indexed="true"
+    <field name="tnTypeOfTnContentFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
     <field name="subjectFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
-    <field name="availabilityFilter" type="text_en" indexed="true"
+    <field name="mediaTypeSort" type="text_en" indexed="true"
       stored="true" multiValued="false" />
     
-    <field name="subjectFilter" type="text_en" indexed="true"
+    <field name="lcrLexicalResourceTypeFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
     
-    <field name="restrictionsOfUseFilter_exact" type="string" indexed="true"
+    <field name="audioRegisterFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
-    <field name="useNlpSpecificFilter_exact" type="string" indexed="true"
-      stored="true" multiValued="true" />
-    
-    <field name="foreseenUseFilter_exact" type="string" indexed="true"
-      stored="true" multiValued="true" />
-    
-    <field name="timeCoverageFilter_exact" type="string" indexed="true"
-      stored="true" multiValued="true" />
-    
-    <field name="validatedFilter" type="text_en" indexed="true"
+    <field name="tsInputOutputResourceTypeFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
     
     <field name="validatedFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
-    <field name="mediaTypeSort" type="text_en" indexed="true"
-      stored="true" multiValued="false" />
+    <field name="corporaAnnotationFormatFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
     
-    <field name="text" type="text_en" indexed="true"
-      stored="false" multiValued="false" />
+    <field name="tsAnnotationTypeFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
     
     <field name="resourceTypeFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
     
-    <field name="domainFilter_exact" type="string" indexed="true"
+    <field name="videoTypeOfVideoContentFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
-    <field name="languageNameSort" type="text_en" indexed="true"
-      stored="true" multiValued="false" />
-    
-    <field name="restrictionsOfUseFilter" type="text_en" indexed="true"
-      stored="true" multiValued="true" />
-    
-    <field name="bestPracticesFilter_exact" type="string" indexed="true"
+    <field name="videoScenarioTypeFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
     <field name="multilingualityTypeFilter_exact" type="string" indexed="true"
-      stored="true" multiValued="true" />
-    
-    <field name="lingualityTypeFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
     <field name="resourceNameSort_exact" type="string" indexed="true"
@@ -277,25 +349,19 @@
     <field name="resourceTypeSort_exact" type="string" indexed="true"
       stored="true" multiValued="false" />
     
-    <field name="bestPracticesFilter" type="text_en" indexed="true"
+    <field name="mimeTypeFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
-    <field name="mimeTypeFilter_exact" type="string" indexed="true"
+    <field name="tsToolServiceTypeFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
     <field name="mimeTypeFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
     
-    <field name="foreseenUseFilter" type="text_en" indexed="true"
+    <field name="ldLanguageDescriptionTypeFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
-    <field name="languageNameFilter_exact" type="string" indexed="true"
-      stored="true" multiValued="true" />
-    
-    <field name="multilingualityTypeFilter" type="text_en" indexed="true"
-      stored="true" multiValued="true" />
-    
-    <field name="mediaTypeFilter_exact" type="string" indexed="true"
+    <field name="audioConversationalTypeFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
     
     <field name="languageNameFilter" type="text_en" indexed="true"
@@ -304,10 +370,7 @@
     <field name="mediaTypeFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
     
-    <field name="resourceTypeSort" type="text_en" indexed="true"
-      stored="true" multiValued="false" />
-    
-    <field name="lingualityTypeFilter" type="text_en" indexed="true"
+    <field name="imageTypeOfImageContentFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
     
     <field name="languageNameSort_exact" type="string" indexed="true"
@@ -316,7 +379,13 @@
     <field name="rendered_result" type="string" indexed="false"
       stored="true" multiValued="false" />
     
-    <field name="useNlpSpecificFilter" type="text_en" indexed="true"
+    <field name="audioScenarioTypeFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="textRegisterFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="audioSpeechGenreFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
     <field name="published" type="boolean" indexed="true"
@@ -325,7 +394,154 @@
     <field name="resourceNameSort" type="text_en" indexed="true"
       stored="true" multiValued="false" />
     
-    <field name="geographicCoverageFilter_exact" type="string" indexed="true"
+    <field name="lcrEncodingLevelFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="modalityTypeFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="corporaAnnotationFormatFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="videoVideoGenreFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="geographicCoverageFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="textTextGenreFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="ldGrammaticalPhenomenaCoverageFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="domainFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="restrictionsOfUseFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="videoTypeOfVideoContentFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="foreseenUseFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="languageNameFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="tsInputOutputMediaTypeFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="lcrLinguisticInformationFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="lingualityTypeFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="useNlpSpecificFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="videoScenarioTypeFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="imageTypeOfImageContentFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="audioConversationalTypeFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="timeCoverageFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="ldLanguageDescriptionTypeFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="lcrEncodingLevelFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="tsToolServiceSubTypeFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="resourceTypeFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="tsEvaluatedFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="tsAnnotationTypeFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="audioAudioGenreFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="subjectFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="corporaAnnotationTypeFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="tsAnnotationFormatFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="videoNaturalityFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="videoVideoGenreFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="tsInputOutputResourceTypeFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="imageImageGenreFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="tnGramOrderFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="licenceFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="bestPracticesFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="audioSpeechItemsFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="lingualityTypeFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="ldEncodingLevelFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="bestPracticesFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="multilingualityTypeFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="restrictionsOfUseFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="mediaTypeFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="imageImageGenreFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="tsToolServiceTypeFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="tsAnnotationFormatFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="ldEncodingLevelFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="audioAudioGenreFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="tsInputOutputMediaTypeFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
   </fields>

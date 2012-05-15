@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: UP10-6.1.xml 42662 2011-12-01 14:33:59Z martha $ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Finnish WordNet</resourceName>
+      <description>Princeton WordNet 3.0 translated into Finnish by professional translators.</description>
+      <resourceShortName>FinnWordNet</resourceShortName>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability>
+      <licenceInfo>
+         <licence>CC_BY</licence>
+         <restrictionsOfUse>attribution</restrictionsOfUse>
+         <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>Princeton_Wordnet</licence>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+      </licenceInfo>
+      <iprHolder>
+         <organizationInfo>
+	           <organizationName>University of Helsinki</organizationName>
+	           <!-- organizationShortName></organizationShortName -->
+	<communicationInfo>
+               <email>krister.linden@helsinki.fi</email>
+            </communicationInfo>
+         </organizationInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Lindén</surname>
+      <givenName>Krister</givenName>
+      <communicationInfo>
+         <email>krister.linden@helsinki.fi</email>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-17</metadataCreationDate>
+      <metadataCreator>
+         <surname>Piitulainen</surname>
+         <givenName>Jussi</givenName>
+         <communicationInfo>
+            <email>jpiitula@ling.helsinki.fi</email>
+         </communicationInfo>
+         <affiliation>
+            <organizationName>University of Helsinki</organizationName>
+            <communicationInfo>
+               <email>jpiitula@ling.helsinki.fi</email>
+            </communicationInfo>
+         </affiliation>
+      </metadataCreator>
+   </metadataInfo>
+   <usageInfo>
+      <foreseenUseInfo>
+         <foreseenUse>humanUse</foreseenUse>
+      </foreseenUseInfo>
+      <foreseenUseInfo>
+         <foreseenUse>nlpApplications</foreseenUse>
+      
+      
+         <useNLPSpecific>languageIdentification</useNLPSpecific>
+         <!-- useNLPSpecific>multimediaDevelopment</useNLPSpecific -->
+      <useNLPSpecific>informationRetrieval</useNLPSpecific>
+         <useNLPSpecific>wordSenseDisambiguation</useNLPSpecific>
+         <useNLPSpecific>machineTranslation</useNLPSpecific>
+         <useNLPSpecific>namedEntityRecognition</useNLPSpecific>
+         <useNLPSpecific>questionAnswering</useNLPSpecific>
+         <useNLPSpecific>textGeneration</useNLPSpecific>
+         <useNLPSpecific>summarisation</useNLPSpecific>
+         <useNLPSpecific>documentClassification</useNLPSpecific>
+      </foreseenUseInfo>
+      <actualUseInfo>
+         <actualUse>humanUse</actualUse>
+      </actualUseInfo>
+      <!-- ActualUseInfo>
+      <actualUse>nlpApplications</actualUse>
+      <useNLPSpecific>machineTranslation</useNLPSpecific>
+      <useNLPSpecific>textGeneration</useNLPSpecific>
+      <useNLPSpecific>summarisation</useNLPSpecific>
+      <useNLPSpecific>informationRetrieval</useNLPSpecific>
+    </ActualUseInfo -->
+  </usageInfo>
+   <resourceDocumentationInfo>
+      <documentation>
+         <documentUnstructured>http://www.ling.helsinki.fi/en/lt/research/finnwordnet</documentUnstructured>
+      </documentation>
+      <documentation>
+         <documentUnstructured>Krister Lindén and Lauri Carlson. 2010. FinnWordNet - WordNet på finska via översättning. LexicoNordica - Nordic Journal of Lexicography, 17:119-140.</documentUnstructured>
+      </documentation>
+   </resourceDocumentationInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>wordnet</lexicalConceptualResourceType>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+      
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>fin</languageId>
+                  <languageName>Finnish</languageName>
+               </languageInfo>
+               <modalityInfo>
+                  <modalityType>writtenLanguage</modalityType>
+               </modalityInfo>
+               <sizeInfo>
+                  <size>117000</size>
+      
+                  <sizeUnit>synsets</sizeUnit>
+               </sizeInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>

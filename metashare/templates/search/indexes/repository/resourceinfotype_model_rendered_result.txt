@@ -1,32 +1,28 @@
 {% spaceless %}
 {% load resource_languages %}
 {% load resource_media_types %}
+{% load get_media_url %}
 
-<th style="text-align:left;{% if not object.storage_object.published %} font-style:italic;{% endif %}">
-  <a href="{{ object.get_absolute_url }}"{% ifnotequal object.identificationInfo.description.0 "METASHARE_NULL" %} title="{{ object.identificationInfo.description.0|escape }}"{% endifnotequal %}>{{ object.identificationInfo.resourceName.0 }}</a><br/>
-  {% if object.identificationInfo.resourceShortName.0 %}{{ object.identificationInfo.resourceShortName.0 }}{% endif %}
-</th>
+<div class="resourceName"{% if not object.storage_object.published %} style="font-style:italic;"{% endif %}>
 
-<td style="text-align:center;{% if not object.storage_object.published %} font-style:italic;{% endif %}">
-  
-  {% if object.resourceComponentType.as_subclass.resourceType = "corpus" %}
-	<img title="Corpus" src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/database_yellow.png" /> &nbsp;
+    {% if object.resourceComponentType.as_subclass.resourceType = "corpus" %}
+<img src="{% get_media_url %}css/sexybuttons/images/icons/silk/database_yellow.png" title="Corpus" /> 
   {% endif %}
   {% if object.resourceComponentType.as_subclass.resourceType = "toolService" %}
-	<img title="Tool/Service" src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/page_white_gear.png" /> &nbsp;
+<img src="{% get_media_url %}css/sexybuttons/images/icons/silk/page_white_gear.png" title="Tool/Service" />
   {% endif %}
   {% if object.resourceComponentType.as_subclass.resourceType = "lexicalConceptualResource" %}
-	<img title="Lexical/Conceptual" src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/text_ab.png" /> &nbsp;
+<img src="{% get_media_url %}css/sexybuttons/images/icons/silk/text_ab.png" title="Lexical Conceptual" /> 
   {% endif %}
-  {% if object.resourceComponentType.as_subclass.resourceType = "languageDescription" %}
-	<img title="Language Description" src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/script.png" /> &nbsp;
-  {% endif %}
+   
+  {# { object.resourceComponentType.as_subclass.get_resourceType_display } #}
+   &nbsp;
+  <a href="{{ object.get_absolute_url }}"{% ifnotequal object.identificationInfo.get_default_description "METASHARE_NULL" %} title="{{ object.identificationInfo.get_default_description|escape }}"{% endifnotequal %}>{{ object }}</a>
+   &nbsp;{% resource_media_types object.resourceComponentType.as_subclass %} 
 
-<td style="text-align:center;{% if not object.storage_object.published %} font-style:italic;{% endif %}">
-  {% resource_media_types object.resourceComponentType.as_subclass %}
-</td>
 
-<td style="text-align:left;{% if not object.storage_object.published %} font-style:italic;{% endif %}">
+<ul{% if not object.storage_object.published %}style="font-style:italic;"{% endif %}><li>
   {% resource_languages object.resourceComponentType.as_subclass %}  
-</td>
+</ul>  
+</div>
 {% endspaceless %}

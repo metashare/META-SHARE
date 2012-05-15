@@ -6,7 +6,7 @@ from metashare.repository.models import resourceComponentTypeType_model, \
     lexicalConceptualResourceInfoType_model, toolServiceInfoType_model, \
     corpusMediaTypeType_model, languageDescriptionMediaTypeType_model, \
     lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model, \
-    metadataInfoType_model
+    licenceInfoType_model
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
     ALLOWED_ARCHIVE_EXTENSIONS
 from metashare.utils import verify_subclass
@@ -30,7 +30,9 @@ from django.http import Http404
 from metashare.repository.editor.forms import StorageObjectUploadForm
 from django.utils.html import escape
 from django.utils.translation import ugettext as _
-from django.forms.util import ErrorList
+from metashare.repository.editor.lookups import MembershipDummyLookup
+from metashare.repository.editor.widgets import OneToManyWidget
+import datetime
 
 csrf_protect_m = method_decorator(csrf_protect)
 
@@ -227,85 +229,65 @@ def ingest_resources(modeladmin, request, queryset):
         change_resource_status(obj, status=INGESTED, precondition_status=INTERNAL)
 ingest_resources.short_description = "Ingest selected internal resources"
 
+def export_xml_resources(modeladmin, request, queryset):
+    from StringIO import StringIO
+    from zipfile import ZipFile
+    from xml.etree import ElementTree
+    from metashare.repository.supermodel import pretty_xml
+    from django import http
 
-from selectable.base import LookupBase, ModelLookup
-from selectable.registry import registry
-from selectable.forms.widgets import AutoCompleteSelectMultipleWidget
-from metashare.repository.models import personInfoType_model
-
-class PersonLookup(ModelLookup):
-    model = personInfoType_model
-    search_fields = ('surname__contains', )
-    filters = {}
+    zipfilename = "resources_export.zip"
+    in_memory = StringIO()
     
-    def get_query(self, request, term):
-        #results = super(PersonLookup, self).get_query(request, term)
-        # Since MultiTextFields cannot be searched using query sets (they are base64-encoded and pickled),
-        # we must do the searching by hand.
-        # Note: this is inefficient, but in practice fast enough it seems (tested with >1000 resources)
-        lcterm = term.lower()
-        def matches(person):
-            'Helper function to group the search code for a person'
-            for multifield in (person.surname, person.givenName):
-                for field in multifield:
-                    if lcterm in field.lower():
-                        return True
-            return False
-        persons = self.get_queryset()
-        if term == '*':
-            results = persons
-        else:
-            results = [p for p in persons if matches(p)]
-        if results is not None:
-            print u'{} results'.format(results.__len__())
-        else:
-            print u'No results'
-        return results
+    with ZipFile(in_memory, 'w') as zipfile:
+        for obj in queryset:
+            try:
+                root_node = obj.export_to_elementtree()
+                xml_string = ElementTree.tostring(root_node, encoding="utf-8")
+                pretty = pretty_xml(xml_string).encode('utf-8')
+                resource_filename = 'resource-{0}.xml'.format(obj.storage_object.id)
+                zipfile.writestr(resource_filename, pretty)
     
-    def get_item_label(self, item):
-        return unicode(item)
-#        name_flat = ' '.join(item.givenName)
-#        surname_flat = ' '.join(item.surname)
-#        return u'%s %s' % (name_flat, surname_flat)
-    
-    def get_item_id(self, item):
-        return item.id
+            except Exception:
+                raise Http404(_('Could not export resource "%(name)s" with primary key %(key)s.') \
+                  % {'name': force_unicode(obj), 'key': escape(obj.storage_object.id)})
 
-class ValidationReportLookup(LookupBase):
-    pass
+        zipfile.close()  
 
-registry.register(PersonLookup)
-registry.register(ValidationReportLookup)
+        response = http.HttpResponse(mimetype='application/zip')
+        response['Content-Disposition'] = 'attachment; filename=%s' % (zipfilename)
+        
+        in_memory.seek(0)      
+        response.write(in_memory.read())  
+
+        return response
+export_xml_resources.short_description = "Export selected resource descriptions to XML"
 
 from django import forms
 
 class MetadataForm(forms.ModelForm):
-    class Meta:
-        model = metadataInfoType_model
-        widgets = {'metadataCreator' : AutoCompleteSelectMultipleWidget(lookup_class=PersonLookup)}
+    def save(self, commit=True):
+        today = datetime.date.today()
+        if not self.instance.metadataCreationDate:
+            self.instance.metadataCreationDate = today
+        self.instance.metadataLastDateUpdated = today
+        return super(MetadataForm, self).save(commit)
+
 
 class MetadataInline(ReverseInlineModelAdmin):
     form = MetadataForm
-            
-class ResourceForm(forms.ModelForm):
-    class Meta:
-        model = resourceInfoType_model
-        widgets = {'contactPerson' : AutoCompleteSelectMultipleWidget(lookup_class=PersonLookup)}
-
-    def __init__(self, data=None, files=None, auto_id='id_%s', prefix=None,
-                 initial=None, error_class=ErrorList, label_suffix=':',
-                 empty_permitted=False, instance=None):
-        super(ResourceForm, self).__init__(data, files, auto_id, prefix, initial, error_class, label_suffix, empty_permitted, instance)
+    readonly_fields = ('metadataCreationDate', 'metadataLastDateUpdated', )
+    
 
 class ResourceModelAdmin(SchemaModelAdmin):
-    form = ResourceForm
     inline_type = 'stacked'
     custom_one2one_inlines = {'identificationInfo':IdentificationInline,
                               'resourceComponentType':ResourceComponentInline,
-                              'metadataInfo':MetadataInline}
+                              'metadataInfo':MetadataInline,}
+
     content_fields = ('resourceComponentType',)
     list_display = ('__unicode__', 'resource_type', 'publication_status')
-    actions = (publish_resources, unpublish_resources, ingest_resources, )
+    actions = (publish_resources, unpublish_resources, ingest_resources, export_xml_resources, )
     hidden_fields = ('storage_object', 'owners', )
 
 
@@ -327,6 +309,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
             url(r'^my/$',
                 wrap(self.changelist_view_filtered),
                 name='%s_%s_myresources' % info),
+            url(r'^(.+)/export-xml/$',
+                wrap(self.exportxml),
+                name='%s_%s_exportxml' % info),
         ) + urlpatterns
         return urlpatterns
 
@@ -373,16 +358,16 @@ class ResourceModelAdmin(SchemaModelAdmin):
             raise PermissionDenied
 
         if obj is None:
-            raise Http404(_('%(name)s object with primary key %(key)r does not exist.') \
+            raise Http404(_('%(name)s object with primary key %(key)s does not exist.') \
              % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
         storage_object = obj.storage_object
         if storage_object is None:
-            raise Http404(_('%(name)s object with primary key %(key)r does not have a StorageObject attached.') \
+            raise Http404(_('%(name)s object with primary key %(key)s does not have a StorageObject attached.') \
               % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
         if not storage_object.master_copy:
-            raise Http404(_('%(name)s object with primary key %(key)r is not a master-copy.') \
+            raise Http404(_('%(name)s object with primary key %(key)s is not a master-copy.') \
               % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
         existing_download = storage_object.get_download()
@@ -447,6 +432,48 @@ class ResourceModelAdmin(SchemaModelAdmin):
         return render_to_response(
           ['admin/repository/resourceinfotype_model/upload_resource.html'], context,
           context_instance)
+
+    @csrf_protect_m
+    def exportxml(self, request, object_id, extra_context=None):
+        """
+        Export the XML description for one single resource
+        """
+        model = self.model
+        opts = model._meta
+
+        obj = self.get_object(request, unquote(object_id))
+
+        if not self.has_change_permission(request, obj):
+            raise PermissionDenied
+
+        if obj is None:
+            raise Http404(_('%(name)s object with primary key %(key)s does not exist.') \
+             % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
+
+        if obj.storage_object is None:
+            raise Http404(_('%(name)s object with primary key %(key)s does not have a StorageObject attached.') \
+              % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
+        elif obj.storage_object.deleted:
+            raise Http404(_('%(name)s object with primary key %(key)s does not exist anymore.') \
+              % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
+
+        from xml.etree import ElementTree
+        from metashare.repository.supermodel import pretty_xml
+        from django import http
+
+        try:
+            root_node = obj.export_to_elementtree()
+            xml_string = ElementTree.tostring(root_node, encoding="utf-8")
+            pretty = pretty_xml(xml_string).encode('utf-8')
+            resource_filename = 'resource-{0}.xml'.format(object_id)
+        
+            response = http.HttpResponse(pretty, mimetype='text/xml')
+            response['Content-Disposition'] = 'attachment; filename=%s' % (resource_filename)
+            return response
+
+        except Exception:
+            raise Http404(_('Could not export resource "%(name)s" with primary key %(key)s.') \
+              % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
 
     def build_fieldsets_from_schema(self, include_inlines=False, inlines=()):
@@ -555,21 +582,21 @@ class ResourceModelAdmin(SchemaModelAdmin):
         structures = {}
         if resource_type == 'corpus':
             corpus_media_type = corpusMediaTypeType_model.objects.create()
-            corpus_info = corpusInfoType_model.objects.create(corpusMediaType=corpus_media_type, resourceType='0')
+            corpus_info = corpusInfoType_model.objects.create(corpusMediaType=corpus_media_type)
             structures['resourceComponentType'] = corpus_info
             structures['corpusMediaType'] = corpus_media_type
         elif resource_type == 'langdesc':
             language_description_media_type = languageDescriptionMediaTypeType_model.objects.create()
-            langdesc_info = languageDescriptionInfoType_model.objects.create(languageDescriptionMediaType=language_description_media_type, resourceType='0')
+            langdesc_info = languageDescriptionInfoType_model.objects.create(languageDescriptionMediaType=language_description_media_type)
             structures['resourceComponentType'] = langdesc_info
             structures['languageDescriptionMediaType'] = language_description_media_type
         elif resource_type == 'lexicon':
             lexicon_media_type = lexicalConceptualResourceMediaTypeType_model.objects.create()
-            lexicon_info = lexicalConceptualResourceInfoType_model.objects.create(lexicalConceptualResourceMediaType=lexicon_media_type, resourceType='0')
+            lexicon_info = lexicalConceptualResourceInfoType_model.objects.create(lexicalConceptualResourceMediaType=lexicon_media_type)
             structures['resourceComponentType'] = lexicon_info
             structures['lexicalConceptualResourceMediaType'] = lexicon_media_type
         elif resource_type == 'toolservice':
-            tool_info = toolServiceInfoType_model.objects.create(resourceType='0')
+            tool_info = toolServiceInfoType_model.objects.create()
             structures['resourceComponentType'] = tool_info
             structures['toolServiceInfoId'] = tool_info.pk
         else:
@@ -696,3 +723,13 @@ class ResourceModelAdmin(SchemaModelAdmin):
         # We add the current user to the resource owners:
         self.add_to_my_resources(request)
         return super(ResourceModelAdmin, self).change_view(request, object_id, _extra_context)
+
+class LicenceForm(forms.ModelForm):
+    class Meta:
+        model = licenceInfoType_model
+        widgets = {'membershipInfo': OneToManyWidget(lookup_class=MembershipDummyLookup)}
+
+class LicenceModelAdmin(SchemaModelAdmin):
+    form = LicenceForm
+
+    

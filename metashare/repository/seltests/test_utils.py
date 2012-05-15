@@ -3,7 +3,7 @@ Project: META-SHARE
 Utility functions for Selenium unit tests.
 @author: steffen
 """
-from metashare.settings import ROOT_PATH
+from metashare.settings import ROOT_PATH, TEST_MODE_NAME
 import os
 from metashare import test_utils
 
@@ -47,7 +47,12 @@ def import_dir(path):
     """
     imports all XML files in the given directory
     """
+    # to speed up the import, we disable indexing during the import and only
+    # rebuild the index at afterwards
+    os.environ['DISABLE_INDEXING_DURING_IMPORT'] = 'True'
     _files = os.listdir(path)
     for _file in _files:
         test_utils.import_xml_or_zip("%s%s" % (path, _file))
-        
+    os.environ['DISABLE_INDEXING_DURING_IMPORT'] = 'False'
+    from django.core.management import call_command
+    call_command('rebuild_index', interactive=False, using=TEST_MODE_NAME)

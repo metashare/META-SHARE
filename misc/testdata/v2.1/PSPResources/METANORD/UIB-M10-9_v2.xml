@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Norsk Ordbank, bokmål </resourceName>
+      <description>Fullform lexical database for Norwegian bokmål</description>
+      <resourceShortName/>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability>
+      <licenceInfo>
+         <licence>CLARIN_RES</licence>
+         <restrictionsOfUse>attribution</restrictionsOfUse>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+         <downloadLocation>http://www.nb.no/spraakbanken/tilgjengelege-ressursar/leksikalske-databasar</downloadLocation>
+      </licenceInfo>
+      <iprHolder>
+         <personInfo>
+            <surname>Lindstad</surname>
+            <givenName>Arne Martinus</givenName>
+            <communicationInfo>
+               <email>sprakbanken@nb.no</email>
+            </communicationInfo>
+            <affiliation>
+               <organizationName>The National Library of Norway</organizationName>
+               <communicationInfo>
+                  <email>sprakbanken@nb.no</email>
+               </communicationInfo>
+            </affiliation>
+         </personInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Lindstad</surname>
+      <givenName>Arne Martinus</givenName>
+      <communicationInfo>
+         <email>sprakbanken@nb.no</email>
+      </communicationInfo>
+      <affiliation>
+         <organizationName>The National Library of Norway</organizationName>
+         <communicationInfo>
+            <email>sprakbanken@nb.no</email>
+         </communicationInfo>
+      </affiliation>
+   </contactPerson>
+   <contactPerson>
+      <surname>Ostad</surname>
+      <givenName>Johanne</givenName>
+      <communicationInfo>
+         <email>sprakbanken@nb.no</email>
+      </communicationInfo>
+      <affiliation>
+         <organizationName>The National Library of Norway</organizationName>
+         <communicationInfo>
+            <email>sprakbanken@nb.no</email>
+         </communicationInfo>
+      </affiliation>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-30</metadataCreationDate>
+      <metadataCreator>
+         <surname>Lindstad</surname>
+         <givenName>Arne Martinus</givenName>
+         <communicationInfo>
+            <email>sprakbanken@nb.no</email>
+         </communicationInfo>
+         <affiliation>
+            <organizationName>Språkbanken</organizationName>
+            <communicationInfo>
+               <email>sprakbanken@nb.no</email>
+            </communicationInfo>
+         </affiliation>
+      </metadataCreator>
+   </metadataInfo>
+   <usageInfo>
+      <foreseenUseInfo>
+         <foreseenUse>nlpApplications</foreseenUse>
+      </foreseenUseInfo>
+      <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+      </actualUseInfo>
+  </usageInfo>
+   <resourceDocumentationInfo>
+      <documentation>
+         <documentUnstructured/>
+      </documentation>
+   </resourceDocumentationInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>computationalLexicon</lexicalConceptualResourceType>
+         <lexicalConceptualResourceEncodingInfo>
+            <encodingLevel>morphology</encodingLevel>
+            <encodingLevel>other</encodingLevel>
+            <conformanceToStandardsBestPractices>LMF</conformanceToStandardsBestPractices>
+         </lexicalConceptualResourceEncodingInfo>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+      
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>nob</languageId>
+                  <languageName>Norwegian Bokmål</languageName>
+                  <sizePerLanguage>
+	                    <size>80000</size>
+	
+	                    <sizeUnit>words</sizeUnit>
+                  </sizePerLanguage>
+                  <languageVarietyInfo>
+                     <languageVarietyType>other</languageVarietyType>
+                     <languageVarietyName>other</languageVarietyName>
+                     <sizePerLanguageVariety>
+	                       <size>80000</size>
+	
+	                       <sizeUnit>words</sizeUnit>
+                     </sizePerLanguageVariety>
+                  </languageVarietyInfo>
+               </languageInfo>
+               <modalityInfo>
+                  <modalityType>writtenLanguage</modalityType>
+               </modalityInfo>
+               <sizeInfo>
+	                 <size>80000</size>
+	
+	                 <sizeUnit>words</sizeUnit>
+               </sizeInfo>
+               <textFormatInfo>
+                  <mimeType>other</mimeType>
+                  <sizePerTextFormat>
+	                    <size>80000</size>
+	
+	                    <sizeUnit>words</sizeUnit>
+                  </sizePerTextFormat>
+               </textFormatInfo>
+               <characterEncodingInfo>
+                  <characterEncoding>MacDingbat</characterEncoding>
+                  <sizePerCharacterEncoding>
+	                    <size>80000</size>
+	
+	                    <sizeUnit>words</sizeUnit>
+                  </sizePerCharacterEncoding>
+               </characterEncodingInfo>
+               <domainInfo>
+                  <domain>general</domain>
+                  <sizePerDomain>
+	                    <size>80000</size>
+	
+	                    <sizeUnit>words</sizeUnit>
+                  </sizePerDomain>
+               </domainInfo>
+               <timeCoverageInfo>
+                  <timeCoverage>other</timeCoverage>
+                  <sizePerTimeCoverage>
+	                    <size>80000</size>
+	
+	                    <sizeUnit>words</sizeUnit>
+                  </sizePerTimeCoverage>
+               </timeCoverageInfo>
+               <geographicCoverageInfo>
+                  <geographicCoverage>other</geographicCoverage>
+                  <sizePerGeographicCoverage>
+	                    <size>80000</size>
+	
+	                    <sizeUnit>words</sizeUnit>
+                  </sizePerGeographicCoverage>
+               </geographicCoverageInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>

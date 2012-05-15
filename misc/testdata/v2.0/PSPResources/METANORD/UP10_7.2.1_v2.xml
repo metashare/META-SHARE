@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: UP10_7.2.1.xml 42662 2011-12-01 14:33:59Z martha $ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Icelandic Frequency Dictionary Corpus</resourceName>
+      <description>tagged Icelandic corpus, tagging hand corrected</description>
+      <resourceShortName>IFD Corpus</resourceShortName>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>proprietary</licence>
+         <distributionAccessMedium>downloadable</distributionAccessMedium>
+      </licenceInfo>
+      <iprHolder>
+         <organizationInfo>
+	           <organizationName>The Arni Magnusson Institute for Icelandic Studies</organizationName>
+	           <organizationShortName>AMI</organizationShortName>
+	           <departmentName>Department of Lexicography</departmentName>
+	           <communicationInfo>
+               <email>ordabok@hi.is</email>
+            </communicationInfo>
+         </organizationInfo>
+      </iprHolder>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Helgadóttir</surname>
+      <givenName>Sigrún</givenName>
+      <communicationInfo>
+         <email>sigruhel@hi.is</email>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-11-29</metadataCreationDate>
+      <metadataCreator>
+         <surname>Helgadóttir</surname>
+         <givenName>Sigrún</givenName>
+         <communicationInfo>
+            <email>sigruhel@hi.is</email>
+         </communicationInfo>
+         <affiliation>
+	           <organizationName>The Arni Magnusson Institute for Icelandic Studies</organizationName>
+	           <communicationInfo>
+               <email>ordabok@hi.is</email>
+            </communicationInfo>
+         </affiliation>
+      </metadataCreator>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+  </versionInfo>
+   <usageInfo>
+      <foreseenUseInfo>
+         <foreseenUse>nlpApplications</foreseenUse>
+         <useNLPSpecific>other</useNLPSpecific>
+      </foreseenUseInfo>
+      <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+         <useNLPSpecific>other</useNLPSpecific>
+      </actualUseInfo>
+  </usageInfo>
+   <resourceDocumentationInfo>
+      <documentation>
+         <documentUnstructured>Jörgen Pind (ed.), Friðrik Magnússon and Stefán Briem. 1991. Íslensk orðtíðnibók. Orðabók Háskólans, Reykjavík. [Referred to as the Icelandic Frequency Dictionary, IFD.] </documentUnstructured>
+      </documentation>
+      <documentation>
+         <documentUnstructured>Sigrún Helgadóttir. Testing Data-Driven Learning Algorithms for PoS Tagging of Icelandic. In H. Holmboe (ed.), Nordisk Sprogteknologi 2004. Museum Tusculanums Forlag.</documentUnstructured>
+      </documentation>
+      <documentation>
+         <documentUnstructured>Sigrún Helgadóttir. Mörkun íslensks texta Orð og tunga 9:75-107. Reykjavík. 2007.</documentUnstructured>
+      </documentation>
+      <documentation>
+         <documentUnstructured>HRAFN LOFTSSON. 2006. Tagging a morphologically complex language using heuristics. In T. Salakoski, F. Ginter, S. Pyysalo and T. Pahikkala (eds.), Advances in Natural Language Processing, 5th International Conference on NLP, FinTAL 2006, Proceedings. Turku, Finland.</documentUnstructured>
+      </documentation>
+      <documentation>
+         <documentUnstructured>HRAFN LOFTSSON. 2007. Tagging Icelandic Text using a Linguistic and a Statistical Tagger. In Proceedings of Human Language Technologies 2007: The Conference of the North American Chapter of the ACL. Rochester, NY, USA.</documentUnstructured>
+      </documentation>
+      <documentation>
+         <documentUnstructured>HRAFN LOFTSSON. 2009. Correcting a POS-Tagged Corpus Using Three Complementary Methods. In Proceedings of the 12th Conference of the European Chapter of the ACL (EACL 2009). Athens, Greece.</documentUnstructured>
+      </documentation>
+   </resourceDocumentationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+      
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>isl</languageId>
+                  <languageName>Icelandic</languageName>
+               </languageInfo>
+               <modalityInfo>
+                  <modalityType>writtenLanguage</modalityType>
+               </modalityInfo>
+               <sizeInfo>
+                  <size>300000</size>
+      
+                  <sizeUnit>tokens</sizeUnit>
+               </sizeInfo>
+               <annotationInfo>
+                  <annotationType>segmentation</annotationType>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>lemmatization</annotationType>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>morphosyntacticAnnotation-posTagging</annotationType>
+               </annotationInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

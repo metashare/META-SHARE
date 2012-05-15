@@ -2,8 +2,12 @@ from metashare.repository import models as repository_models
 from django.db.models import get_models, signals
 from django.contrib.auth.models import Group, Permission
 import inspect
-from metashare.repository.supermodel import SchemaModel
+from metashare.repository.supermodel import SchemaModel, RECOMMENDED, OPTIONAL
 from django.core.exceptions import ObjectDoesNotExist
+from metashare.utils import get_class_by_name
+from metashare.repository.models import organizationInfoType_model, \
+    projectInfoType_model, targetResourceInfoType_model, personInfoType_model, \
+    documentInfoType_model, documentationInfoType_model, actorInfoType_model
 
 GROUP_GLOBAL_EDITORS = 'globaleditors'
 
@@ -38,6 +42,30 @@ def setup_group_global_editors(app, created_models, verbosity, **kwargs):
         codename = '{}_{}'.format(permission_name, modelname.lower())
         return Permission.objects.get(codename=codename, content_type__app_label=applabel)
 
+    def is_reusable(classobj):
+        return classobj in (actorInfoType_model, 
+                            documentationInfoType_model,
+                            documentInfoType_model,
+                            personInfoType_model,
+                            targetResourceInfoType_model,
+                            organizationInfoType_model,
+                            projectInfoType_model)
+
+    def get_optional_modelnames():
+        optionals = set()
+        for _unused_name, classobj in inspect.getmembers(repository_models, is_schema_model):
+            for _schemapath, _not_used, _required in classobj.__schema_fields__:
+                if '/' in _schemapath:
+                    _fieldname = _schemapath[:_schemapath.rindex('/')+1]
+                else:
+                    _fieldname = _schemapath
+                if _fieldname in classobj.__schema_classes__ and _required in (RECOMMENDED, OPTIONAL):
+                    # it's a component and it is optional in this context
+                    optional_classobj = classobj.__schema_classes__[_fieldname]
+                    if not is_reusable(optional_classobj):
+                        optionals.add(optional_classobj)
+        return optionals
+
     # Begin setup_group_global_editors():
 
     if has_group_globaleditors():
@@ -45,11 +73,14 @@ def setup_group_global_editors(app, created_models, verbosity, **kwargs):
     
     staffusers = create_group_globaleditors()
     
+    optionals = get_optional_modelnames()
     for applabel, modelname in list_applabels_and_modelnames():
         add_permission = get_permission_object(applabel, modelname, 'add')
         change_permission = get_permission_object(applabel, modelname, 'change')
         staffusers.permissions.add(add_permission, change_permission)
-
+        if modelname in optionals:
+            delete_permission = get_permission_object(applabel, modelname, 'delete')
+            staffusers.permissions.add(delete_permission)
 
 def set_site_from_django_url(app, created_models, verbosity, **kwargs):
     '''

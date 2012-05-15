@@ -28,9 +28,11 @@ class SchemaModelInline(InlineModelAdmin, RelatedAdminMixin, SchemaModelLookup):
     def get_fieldsets(self, request, obj=None):
         return SchemaModelLookup.get_fieldsets(self, request, obj)
 
+
     def formfield_for_dbfield(self, db_field, **kwargs):
-        if self.is_subclassable(db_field):
-            return self.formfield_for_subclassable(db_field, **kwargs)
+        # ForeignKey or ManyToManyFields
+        if self.is_x_to_many_relation(db_field):
+            return self.formfield_for_relation(db_field, **kwargs)
         self.use_hidden_widget_for_one2one(db_field, kwargs)
         formfield = super(SchemaModelInline, self).formfield_for_dbfield(db_field, **kwargs)
         self.use_related_widget_where_appropriate(db_field, kwargs, formfield)
@@ -75,6 +77,27 @@ class ReverseInlineFormSet(BaseModelFormSet):
             # if the form set can be deleted, then it is not required and then
             # its forms may be empty
             form.empty_permitted = getattr(self, 'can_delete', False)
+
+    # pylint: disable-msg=E1101
+    def save_new_objects(self, commit=True):
+        '''
+        This is identical with the super implementation
+        except for the "and form.empty_permitted" condition
+        '''
+        self.new_objects = []
+        for form in self.extra_forms:
+            if not form.has_changed() and form.empty_permitted:
+                continue
+            # If someone has marked an add form for deletion, don't save the
+            # object.
+            if self.can_delete and self._should_delete_form(form):
+                continue
+            self.new_objects.append(self.save_new(form, commit=commit))
+            if not commit:
+                self.saved_forms.append(form)
+        return self.new_objects
+
+
 
 
 def reverse_inlineformset_factory(parent_model,

@@ -7,6 +7,7 @@
 {% for inline_admin_form in inline_admin_formset %}
 {% if not forloop.last %}
 <div class="inline-related" id="{{ inline_admin_formset.formset.prefix }}-{{ forloop.counter0 }}">
+    {% if inline_admin_formset.formset.can_delete and inline_admin_form.original %}<h3>&nbsp;<span class="delete">{{ inline_admin_form.deletion_field.field }} {{ inline_admin_form.deletion_field.label_tag }}</span></h3>{% endif %}
   {% if inline_admin_form.form.non_field_errors %}{{ inline_admin_form.form.non_field_errors }}{% endif %}
   {% for fieldset in inline_admin_form %}
     {% include "admin/includes/fieldset.html" %}
