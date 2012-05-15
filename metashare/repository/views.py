@@ -304,49 +304,38 @@ def view(request, object_id=None):
     """
     Render browse or detail view for the repository application.
     """
-    # If an object id is given, try to look up the corresponding resource in
-    # the Django database, raising HTTP 404 if it cannot be found.
-    if object_id:
 
-        resource = get_object_or_404(resourceInfoType_model, pk=object_id)
+    resource = get_object_or_404(resourceInfoType_model, pk=object_id)
+    print "\n\n" + str(resource + "\n\n"
+    # Convert resource to ElementTree and then to template tuples.
+    resource_tree = resource.export_to_elementtree()
+    lr_content = _convert_to_template_tuples(resource_tree)
 
-        # Convert resource to ElementTree and then to template tuples.
-        resource_tree = resource.export_to_elementtree()
-        lr_content = _convert_to_template_tuples(resource_tree)
+    # we need to know if the resource is published or not
+    resource_published = resource.storage_object.published
 
-        # we need to know if the resource is published or not
-        resource_published = resource.storage_object.published
+    # Define context for template rendering.
+    context = {'resource': resource, 'lr_content': lr_content,
+               'RESOURCE_PUBLISHED': resource_published}
+    template = 'repository/lr_view.html'
 
-        # Define context for template rendering.
-        context = {'resource': resource, 'lr_content': lr_content,
-                   'RESOURCE_PUBLISHED': resource_published}
-        template = 'repository/lr_view.html'
+    # For staff users, we have to add LR_EDIT which contains the URL of
+    # the Django admin backend page for this resource.
+    if request.user.is_staff:
+        context['LR_EDIT'] = reverse(
+            'admin:repository_resourceinfotype_model_change', args=(object_id,))
 
-        # For staff users, we have to add LR_EDIT which contains the URL of
-        # the Django admin backend page for this resource.
-        if request.user.is_staff:
-            context['LR_EDIT'] = reverse(
-                'admin:repository_resourceinfotype_model_change', args=(object_id,))
+    # in general, only logged in users may download/purchase any resources
+    context['LR_DOWNLOAD'] = request.user.is_active
 
-        # in general, only logged in users may download/purchase any resources
-        context['LR_DOWNLOAD'] = request.user.is_active
-
-        # Update statistics and create a report about the user actions on LR
-        if hasattr(resource.storage_object, 'identifier'):
-            sessionid = ""
-            if request.COOKIES:
-                sessionid = request.COOKIES.get('sessionid', '')
-            saveLRStats(request.user.username,
-              resource.storage_object.identifier, sessionid, VIEW_STAT)
-            context['LR_STATS'] = getLRStats(resource.storage_object.identifier)
-
-    # Otherwise, we just collect all resources from the Django database.
-    else:
-        resources = resourceInfoType_model.objects.all()
-
-        # Define context for template rendering.
-        context = {'resources': resources}
-        template = 'repository/resources.html'
+    # Update statistics and create a report about the user actions on LR
+    if hasattr(resource.storage_object, 'identifier'):
+        sessionid = ""
+        if request.COOKIES:
+            sessionid = request.COOKIES.get('sessionid', '')
+        saveLRStats(request.user.username,
+          resource.storage_object.identifier, sessionid, VIEW_STAT)
+        context['LR_STATS'] = getLRStats(resource.storage_object.identifier)
 
     # Render and return template with the defined context.
     ctx = RequestContext(request)
