@@ -498,7 +498,7 @@ div.less_details{
 
 /*filters separate box*/
 div.left_box{
-	width: 20%;
+	width: 300px;
     	position: relative;
 	float: left;
 	display:block;
