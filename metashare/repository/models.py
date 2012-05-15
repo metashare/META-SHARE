@@ -5160,7 +5160,7 @@ class corpusTextNumericalInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      default="textNumerical", editable=False, max_length=10, )
+      default="textNumerical", editable=False, max_length=20, )
 
     # OneToMany field: modalityInfo
 
