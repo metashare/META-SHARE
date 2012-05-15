@@ -19,14 +19,13 @@ from metashare.repository.models import actorInfoType_model, \
     membershipInfoType_model, \
     personInfoType_model, \
     targetResourceInfoType_model, documentInfoType_model, \
-    annotationInfoType_model, languageVarietyInfoType_model, \
-    sizeInfoType_model, imageFormatInfoType_model, \
-    videoFormatInfoType_model, resolutionInfoType_model
+    languageVarietyInfoType_model, \
+    sizeInfoType_model, resolutionInfoType_model, audioSizeInfoType_model
 from metashare.repository.editor.lookups import ActorLookup, \
-    OrganizationLookup, ProjectLookup, MembershipLookup, \
+    OrganizationLookup, ProjectLookup, MembershipDummyLookup, \
     PersonLookup, TargetResourceLookup, DocumentLookup, \
-    DocumentationLookup, LanguageVarietyLookup, SizeLookup, \
-    AnnotationLookup, ImageFormatLookup, VideoFormatLookup, ResolutionLookup
+    DocumentationLookup, LanguageVarietyDummyLookup, SizeDummyLookup, \
+    ResolutionDummyLookup, AudioSizeDummyLookup
 
 class RelatedAdminMixin(object):
     '''
@@ -35,6 +34,7 @@ class RelatedAdminMixin(object):
     '''
     
     custom_m2m_widget_overrides = {
+        # Reusable types with actual ajax search:
         actorInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=ActorLookup), 
         documentationInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=DocumentationLookup),
         documentInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=DocumentLookup),
@@ -42,13 +42,12 @@ class RelatedAdminMixin(object):
         organizationInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=OrganizationLookup),
         projectInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=ProjectLookup),
         targetResourceInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=TargetResourceLookup),
-        membershipInfoType_model: OneToManyWidget(lookup_class=MembershipLookup),
-        annotationInfoType_model: OneToManyWidget(lookup_class=AnnotationLookup),
-        languageVarietyInfoType_model: OneToManyWidget(lookup_class=LanguageVarietyLookup),
-        sizeInfoType_model: OneToManyWidget(lookup_class=SizeLookup),
-        imageFormatInfoType_model: OneToManyWidget(lookup_class=ImageFormatLookup),
-        videoFormatInfoType_model: OneToManyWidget(lookup_class=VideoFormatLookup),
-        resolutionInfoType_model: OneToManyWidget(lookup_class=ResolutionLookup),
+        # Custom one-to-many widgets needed to avoid nested inlines:
+        membershipInfoType_model: OneToManyWidget(lookup_class=MembershipDummyLookup),
+        languageVarietyInfoType_model: OneToManyWidget(lookup_class=LanguageVarietyDummyLookup),
+        sizeInfoType_model: OneToManyWidget(lookup_class=SizeDummyLookup),
+        resolutionInfoType_model: OneToManyWidget(lookup_class=ResolutionDummyLookup),
+        audioSizeInfoType_model: OneToManyWidget(lookup_class=AudioSizeDummyLookup),
     }
     
     custom_m2o_widget_overrides = {

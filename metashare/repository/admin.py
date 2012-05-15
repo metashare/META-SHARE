@@ -174,11 +174,6 @@ class audioFormatInfo_model_inline_lexicalConceptualResourceAudioInfoType_model(
 
 
 # pylint: disable-msg=C0103
-class audioSizeInfo_model_inline(SchemaModelInline):
-    model = audioSizeInfoType_model
-
-
-# pylint: disable-msg=C0103
 class characterEncodingInfo_model_inline_corpusTextInfoType_model(SchemaModelInline):
     model = characterEncodingInfoType_model
     template = 'admin/edit_inline/tabular.html'
@@ -315,13 +310,13 @@ class domainInfo_model_inline_lexicalConceptualResourceVideoInfoType_model(Schem
 # pylint: disable-msg=C0103
 class durationOfAudioInfo_model_inline(SchemaModelInline):
     model = durationOfAudioInfoType_model
-    collapse = True
+    template = 'admin/edit_inline/tabular.html'
 
 
 # pylint: disable-msg=C0103
 class durationOfEffectiveSpeechInfo_model_inline(SchemaModelInline):
     model = durationOfEffectiveSpeechInfoType_model
-    collapse = True
+    template = 'admin/edit_inline/tabular.html'
 
 
 # pylint: disable-msg=C0103
@@ -680,6 +675,13 @@ class personInfo_model_inline(SchemaModelInline):
 class relationInfo_model_inline(SchemaModelInline):
     model = relationInfoType_model
     collapse = True
+
+
+# pylint: disable-msg=C0103
+class sizeInfo_model_inline_audioSizeInfoType_model(SchemaModelInline):
+    model = sizeInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_audiosizeinfotype_model'
 
 
 # pylint: disable-msg=C0103

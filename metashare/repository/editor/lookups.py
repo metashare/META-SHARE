@@ -10,7 +10,9 @@ from metashare.repository.models import personInfoType_model, \
     membershipInfoType_model, \
     targetResourceInfoType_model, languageVarietyInfoType_model, \
     sizeInfoType_model, annotationInfoType_model, videoFormatInfoType_model, \
-    imageFormatInfoType_model, resolutionInfoType_model
+    imageFormatInfoType_model, resolutionInfoType_model,\
+    durationOfEffectiveSpeechInfoType_model, durationOfAudioInfoType_model,\
+    audioSizeInfoType_model
 
 class PersonLookup(ModelLookup):
     model = personInfoType_model
@@ -95,7 +97,7 @@ class DocumentationLookup(ModelLookup):
             print u'No results'
         return results
 
-class MembershipLookup(ModelLookup):
+class MembershipDummyLookup(ModelLookup):
     '''
         Dummy class for use with OneToOneWidget.
         Should be removed when unnecessary dependencies are
@@ -127,7 +129,7 @@ class ImageFormatLookup(ModelLookup):
     '''
     model = imageFormatInfoType_model
 
-class ResolutionLookup(ModelLookup):
+class ResolutionDummyLookup(ModelLookup):
     '''
         Dummy class for use with OneToOneWidget.
         Should be removed when unnecessary dependencies are
@@ -135,7 +137,7 @@ class ResolutionLookup(ModelLookup):
     '''
     model = resolutionInfoType_model
 
-class LanguageVarietyLookup(ModelLookup):
+class LanguageVarietyDummyLookup(ModelLookup):
     '''
         Dummy class for use with OneToOneWidget.
         Should be removed when unnecessary dependencies are
@@ -143,13 +145,17 @@ class LanguageVarietyLookup(ModelLookup):
     '''
     model = languageVarietyInfoType_model
 
-class SizeLookup(ModelLookup):
+class SizeDummyLookup(ModelLookup):
     '''
         Dummy class for use with OneToOneWidget.
         Should be removed when unnecessary dependencies are
         removed from OneToOneWidget
     '''
     model = sizeInfoType_model
+
+class AudioSizeDummyLookup(ModelLookup):
+    model = audioSizeInfoType_model
+
 
 class ProjectLookup(ModelLookup):
     model = projectInfoType_model
