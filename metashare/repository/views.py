@@ -306,7 +306,7 @@ def view(request, object_id=None):
     """
 
     resource = get_object_or_404(resourceInfoType_model, pk=object_id)
-    print "\n\n" + str(resource + "\n\n"
+    print "\n\n" + str(resource) + "\n\n"
     # Convert resource to ElementTree and then to template tuples.
     resource_tree = resource.export_to_elementtree()
     lr_content = _convert_to_template_tuples(resource_tree)
