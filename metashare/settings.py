@@ -39,6 +39,9 @@ LOG_HANDLER.setFormatter(LOG_FORMATTER)
 MAXIMUM_UPLOAD_SIZE = 10 * 1024 * 1024
 
 
+# URL for the Metashare Knowledge Base
+KNOWLEDGE_BASE_URL = 'http://metashare.ilsp.gr/portal/knowledgebase/'
+
 
 # Import local settings, i.e., DEBUG, TEMPLATE_DEBUG, TIME_ZONE,
 # SECRET_KEY, DATABASE_* settings and ADMINS.
