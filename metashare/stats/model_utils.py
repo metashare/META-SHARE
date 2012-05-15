@@ -1,8 +1,6 @@
 import logging
 import json
 import threading
-import metashare
-
 from metashare.stats.models import LRStats, QueryStats, UsageStats
 from django.db.models import Count, Sum
 from django.contrib.auth.models import User
@@ -28,7 +26,7 @@ logging.basicConfig(level=LOG_LEVEL)
 LOGGER = logging.getLogger('metashare.stats.model_utils')
 LOGGER.addHandler(LOG_HANDLER)
 
-def saveLRStats(userid, lrid, sessid, action): 
+def saveLRStats(resource, userid, sessid, action): 
     """
     this function saves the actions on a resource (it takes into account the session to avoid to increment more than one time the stats counter)
     """
@@ -36,32 +34,27 @@ def saveLRStats(userid, lrid, sessid, action):
         sessid = ""
     
     
-    lrset = LRStats.objects.filter(userid=userid, lrid=lrid, sessid=sessid, action=action)
+    lrset = LRStats.objects.filter(userid=userid, lrid=resource.storage_object.identifier, sessid=sessid, action=action)
     if (lrset.count() > 0):
         record = lrset[0]
         #record.count = record.count+1
         record.sessid = sessid
         record.lasttime = datetime.now()
         record.save(force_update=True)
-        LOGGER.debug('UPDATESTATS: Saved LR {0}, {1} action={2} ({3}).'.format(lrid, sessid, action, record.lasttime))
+        LOGGER.debug('UPDATESTATS: Saved LR {0}, {1} action={2} ({3}).'.format(resource.storage_object.identifier, sessid, action, record.lasttime))
     else:       
         record = LRStats()
         record.userid = userid
-        record.lrid = lrid
+        record.lrid = resource.storage_object.identifier
         record.action = action
         record.sessid = sessid 
         record.save(force_insert=True)
-        LOGGER.debug('SAVESTATS: Saved LR {0}, {1} action={2}.'.format(lrid, sessid, action))
-    
-    
-    """
+        LOGGER.debug('SAVESTATS: Saved LR {0}, {1} action={2}.'.format(resource.storage_object.identifier, sessid, action))
     if action == UPDATE_STAT or action == PUBLISH_STAT:
-        resource = metashare.repository.models.resourceInfoType_model.objects.get(storage_object__identifier=lrid)
         if (resource.storage_object.published):
             UsageStats.objects.filter(lrid=resource.id).delete()
             _update_usage_stats(resource.id, resource.export_to_elementtree())
-            LOGGER.debug('STATS: Updating usage statistics: resource {0} updated'.format(lrid))
-    """
+            LOGGER.debug('STATS: Updating usage statistics: resource {0} updated'.format(resource.storage_object.identifier))
     
 def getLRStats(lrid):
     data = ""
@@ -120,7 +113,7 @@ def getLRLast(action, limit):
         action_list =  LRStats.objects.values('lrid', 'action', 'lasttime').order_by('-lasttime')[:limit]
     return action_list
 
-def saveQueryStats(userid, facets, query, found, exectime=0): 
+def saveQueryStats(query, facets, userid, found, exectime=0): 
     stat = QueryStats()
     stat.userid = userid
     stat.query = query
@@ -148,7 +141,7 @@ def _update_usage_stats(lrid, element_tree):
             if not isinstance(item[0], basestring):
                 lrset = UsageStats.objects.filter(lrid=lrid, elparent=element_tree.tag, elname=item[0][0].encode("utf-8"), text=item[0][1].encode("utf-8"))
                 if (lrset.count() > 1):
-                    print "ERROR! Saving " + str(element_tree.tag) + ", " + str(elname=item[0][0].encode("utf-8"))
+                    LOGGER.debug('ERROR! Saving usage stats in {}, {}'.format(str(element_tree.tag), str(elname=item[0][0].encode("utf-8"))))
                 if (lrset.count() > 0):
                     record = lrset[0]
                     record.count = record.count+1
@@ -211,5 +204,5 @@ class UsageThread(threading.Thread):
                     self.done += 1
                 # pylint: disable-msg=W0703
                 except Exception, e:
-                    print "ERROR! Usage statistics updating failed on resource {0}: {1}".format(resource.id, e)
+                    LOGGER.debug('ERROR! Usage statistics updating failed on resource {}: {}'.format(resource.id, e))
 
