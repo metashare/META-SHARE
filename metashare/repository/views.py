@@ -58,9 +58,8 @@ def _convert_to_template_tuples(element_tree):
         return (element_tree.tag, values)
 
     # Otherwise, we return a tuple containg (key, value), i.e., (tag, text).
-    else:
-        print "\n" + element_tree.tag + "  " + element_tree.text + "\n" + str(element_tree.required)
-        return ((element_tree.tag, element_tree.text),)
+    else:        
+        return ((element_tree.tag, element_tree.text, element_tree.required),)
 
 
 # a type providing an enumeration of META-SHARE member types
