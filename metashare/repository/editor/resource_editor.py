@@ -214,7 +214,7 @@ def publish_resources(modeladmin, request, queryset):
     for obj in queryset:
         change_resource_status(obj, status=PUBLISHED, precondition_status=INGESTED)
         if hasattr(obj, 'storage_object') and obj.storage_object is not None:
-            saveLRStats(obj,"", "", PUBLISH_STAT)
+            saveLRStats(obj, "", "", PUBLISH_STAT)
 publish_resources.short_description = "Publish selected ingested resources"
 
 def unpublish_resources(modeladmin, request, queryset):

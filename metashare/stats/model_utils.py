@@ -31,9 +31,7 @@ def saveLRStats(resource, userid, sessid, action):
     this function saves the actions on a resource (it takes into account the session to avoid to increment more than one time the stats counter)
     """
     if not sessid:
-        sessid = ""
-    
-    
+        sessid = ""   
     lrset = LRStats.objects.filter(userid=userid, lrid=resource.storage_object.identifier, sessid=sessid, action=action)
     if (lrset.count() > 0):
         record = lrset[0]

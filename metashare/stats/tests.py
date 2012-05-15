@@ -11,6 +11,7 @@ from metashare.repository.models import *
 
 ADMINROOT = '/{0}editor/'.format(DJANGO_BASE)
 TESTFIXTURES_ZIP = '{}/repository/fixtures/tworesources.zip'.format(ROOT_PATH)
+PSP_XML = '{}/repository/test_fixtures/PSP/UIB-M10-9_v2.xml'.format(ROOT_PATH)
 
 class StatsTest(django.test.TestCase):
     editor_login = None
