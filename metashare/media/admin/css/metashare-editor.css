@@ -32,6 +32,15 @@
 	background: url("../img/admin/default-bg.gif") repeat-x scroll left top #7CA0C7;	
 }
 
+div.form-row.distributionInfo > div.field-box, div.form-row.usageInfo > div.field-box, div.form-row.audioSizeInfo > div.field-box {
+
+	border-style:solid;
+	border-color:#CCC;
+	border-width:1px;
+	padding-left:4px;
+	padding-top:2px;
+}
+
 .module .inline-group {
 	margin: 10px;	
 }
@@ -114,8 +123,7 @@ a:link, a:visited {
 	display: inline;
 }
 
-.accordion li a {
-	border: 1px solid #ccc;
+.accordion li a {	
 	display: block;
 	padding: 4px 4px 4px 4px;
 	text-decoration: none;
