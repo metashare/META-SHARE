@@ -4,10 +4,9 @@
         <div class="description">{{ fieldset.description|safe }}</div>
     {% endif %}
     {% for line in fieldset %}
-        {% if line.is_field %}
-        <div class="form-row{% if line.fields|length_is:'1' and line.errors %} errors{% endif %}{% for field in line.fieldline %} {{ field.field.name }}{% endfor %}">
+        <div class="form-row{% if line.fields|length_is:'1' and line.errors %} errors{% endif %}{% for field in line %} {{ field.field.name }}{% endfor %}">
             {% if line.fields|length_is:'1' %}{{ line.errors }}{% endif %}
-            {% for field in line.fieldline %}
+            {% for field in line %}
                 <div{% if not line.fields|length_is:'1' %} class="field-box{% if not field.is_readonly and field.errors %} errors{% endif %}"{% endif %}>
                     {% if not line.fields|length_is:'1' and not field.is_readonly %}{{ field.errors }}{% endif %}
                     {% if field.is_checkbox %}
@@ -26,10 +25,5 @@
                 </div>
             {% endfor %}
         </div>
-        {% else %}
-        	{% include line.inline.opts.template with inline_admin_formset=line.inline %}
-        {% endif %}
-        {% comment %}
-        {% endcomment %}
     {% endfor %}
 </fieldset>
