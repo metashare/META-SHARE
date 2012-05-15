@@ -10,8 +10,7 @@ from metashare.repository.models import personInfoType_model, \
     membershipInfoType_model, \
     targetResourceInfoType_model, languageVarietyInfoType_model, \
     sizeInfoType_model, annotationInfoType_model, videoFormatInfoType_model, \
-    imageFormatInfoType_model, resolutionInfoType_model,\
-    durationOfEffectiveSpeechInfoType_model, durationOfAudioInfoType_model,\
+    imageFormatInfoType_model, resolutionInfoType_model, \
     audioSizeInfoType_model
 
 class PersonLookup(ModelLookup):

@@ -9,7 +9,7 @@ from metashare.repository.models import resourceInfoType_model, \
     metadataInfoType_model, communicationInfoType_model, \
     validationInfoType_model, relationInfoType_model, \
     foreseenUseInfoType_model, corpusMediaTypeType_model, \
-    corpusTextInfoType_model, corpusVideoInfoType_model, audioSizeInfoType_model, \
+    corpusTextInfoType_model, corpusVideoInfoType_model, \
     textNumericalFormatInfoType_model, videoClassificationInfoType_model, \
     imageClassificationInfoType_model, \
     participantInfoType_model, corpusAudioInfoType_model,\
