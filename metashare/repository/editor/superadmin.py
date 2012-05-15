@@ -25,7 +25,6 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_protect
 from django import template
 from django.shortcuts import render_to_response
-from metashare.utils import get_class_by_name
 
 # Setup logging support.
 logging.basicConfig(level=settings.LOG_LEVEL)
