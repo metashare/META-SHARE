@@ -171,6 +171,11 @@ EMAILADDRESS_VALIDATOR = RegexValidator(r'[^@]+@[^\.]+\..+',
 HTTPURI_VALIDATOR = RegexValidator(r'(https?://.*|ftp://.*|www*)',
   'Not a valid httpURI value.', ValidationError)
 
+# namespace of the META-SHARE metadata XML Schema
+SCHEMA_NAMESPACE = '{1}'
+# version of the META-SHARE metadata XML Schema
+SCHEMA_VERSION = '{2}'
+
 """
 
 
@@ -1069,7 +1074,8 @@ class Clazz(object):
         return result
 
     @classmethod
-    def generate(cls, outDirName, prefix, root, package_prefix):
+    def generate(cls, outDirName, prefix, root, target_ns, schema_version,
+                 package_prefix):
         cls.establish_one_to_many()
 
         models_file_name = os.path.join(outDirName, 'models.py')
@@ -1082,7 +1088,8 @@ class Clazz(object):
         cls.wrtmodels = models_writer.write
         cls.wrtforms = forms_writer.write
         cls.wrtadmin = admin_writer.write
-        cls.wrtmodels(MODEL_HEADER.format(package_prefix))
+        cls.wrtmodels(MODEL_HEADER.format(package_prefix, target_ns,
+                                          schema_version))
         cls.wrtforms('from django import forms\n\n')
 
         exportableClassList = list()
