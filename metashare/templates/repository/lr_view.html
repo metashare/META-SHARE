@@ -1,4 +1,27 @@
 {% extends "base.html" %}
+
+<script language="javascript">
+$(document).ready(function(){
+  $("div.filter").each(function() {
+    var allDds = $(this).children("div").not('.subresult').nextUntil("div.accordion");
+    if (allDds.length > 4) {{# for 5 or less items we don't want to collapse, however, including the "more" link we would like to have at most 5 <div>s #}
+var hideableDds = allDds.has("a.addableFacet");{# never hide selected facet items #}
+if (hideableDds.length > 1) {{# don't replace a single item with a "more" link #}
+        hiddenDds = hideableDds.slice(
+          Math.max(0, 4 - (allDds.length - hideableDds.length))).hide();
+        var moreTxt = 'more', lessTxt = 'less';
+        hiddenDds.last().after($("<div><a href='#'>" + moreTxt + "</a></div>")
+            .children().first().click({hiddenDds: hiddenDds}, function(e) {
+                e.preventDefault();
+                $(this).text($(this).text() == moreTxt ? lessTxt : moreTxt);
+                e.data.hiddenDds.slideToggle();
+              }).parent());
+      }
+    }
+  });
+});
+</script>
+
 {% block content %}
 		<script type="text/javascript" src="http://plugins.learningjquery.com/expander/jquery.expander.js"></script>
 		<script type="text/javascript">
