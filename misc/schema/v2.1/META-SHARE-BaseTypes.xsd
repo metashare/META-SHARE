@@ -222,7 +222,7 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>A short account of the validation details or a link to the validation report</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
+						<relation>many-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -230,7 +230,7 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>The name, the identifier or the url of the tool used for the validation of the resource</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
+						<relation>many-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -1018,7 +1018,7 @@ label added for specific elements -->
 				<xs:annotation>
 					<xs:documentation>The full name, the identifier or the url of the related resource</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
+						<relation>many-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -1849,6 +1849,9 @@ label added for specific elements -->
 	<xs:complexType name="resolutionInfoType">
 		<xs:annotation>
 			<xs:documentation>Groups together information on the image resolution</xs:documentation>
+			<xs:appinfo>
+			    <render-short>{sizeWidth} {sizeHeight} {resolutionStandard}</render-short>
+			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="sizeWidth" type="xs:int" minOccurs="0">

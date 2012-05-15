@@ -878,13 +878,13 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
                         media_type.corpusAudioInfo.audioformatinfotype_model_set.all()])
             for corpus_info in media_type.corpusvideoinfotype_model_set.all():
                 mimeType_list.extend([mimeType.mimeType for mimeType in
-                                      corpus_info.videoFormatInfo.all()])
+                                      corpus_info.videoformatinfotype_model_set.all()])
             if media_type.corpusTextNgramInfo:
                 mimeType_list.extend([mimeType.mimeType for mimeType in
                         media_type.corpusTextNgramInfo.textFormatInfo.all()])
             if media_type.corpusImageInfo:
                 mimeType_list.extend([mimeType.mimeType for mimeType in
-                        media_type.corpusImageInfo.imageFormatInfo.all()])
+                        media_type.corpusImageInfo.imageformatinfotype_model_set.all()])
 
         elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
             lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
@@ -899,11 +899,11 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             if lcr_media_type.lexicalConceptualResourceVideoInfo:
                 mimeType_list.extend([mimeType.mimeType for mimeType in
                         lcr_media_type.lexicalConceptualResourceVideoInfo \
-                            .videoFormatInfo.all()])
+                            .videoformatinfotype_model_set.all()])
             if lcr_media_type.lexicalConceptualResourceImageInfo:
                 mimeType_list.extend([mimeType.mimeType for mimeType in
                         lcr_media_type.lexicalConceptualResourceImageInfo \
-                            .imageFormatInfo.all()])
+                            .imageformatinfotype_model_set.all()])
 
         elif isinstance(corpus_media, languageDescriptionInfoType_model):
             ld_media_type = corpus_media.languageDescriptionMediaType
@@ -914,11 +914,11 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             if ld_media_type.languageDescriptionVideoInfo:
                 mimeType_list.extend([mimeType.mimeType for mimeType in
                         ld_media_type.languageDescriptionVideoInfo \
-                            .videoFormatInfo.all()])
+                            .videoformatinfotype_model_set.all()])
             if ld_media_type.languageDescriptionImageInfo:
                 mimeType_list.extend([mimeType.mimeType for mimeType in
                         ld_media_type.languageDescriptionImageInfo \
-                            .imageFormatInfo.all()])
+                            .imageformatinfotype_model_set.all()])
 
         elif isinstance(corpus_media, toolServiceInfoType_model):
             if corpus_media.inputInfo:
@@ -938,22 +938,22 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         if isinstance(corpus_media, corpusInfoType_model):
             media_type = corpus_media.corpusMediaType
             for corpus_info in media_type.corpustextinfotype_model_set.all():
-                for annotation_info in corpus_info.annotationInfo.all():
+                for annotation_info in corpus_info.annotationinfotype_model_set.all():
                     result.extend(annotation_info.get_conformanceToStandardsBestPractices_display_list())
             if media_type.corpusAudioInfo:
-                for annotation_info in media_type.corpusAudioInfo.annotationInfo.all():
+                for annotation_info in media_type.corpusAudioInfo.annotationinfotype_model_set.all():
                     result.extend(annotation_info.get_conformanceToStandardsBestPractices_display_list())
             for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-                for annotation_info in corpus_info.annotationInfo.all():
+                for annotation_info in corpus_info.annotationinfotype_model_set.all():
                     result.extend(annotation_info.get_conformanceToStandardsBestPractices_display_list())
             if media_type.corpusTextNgramInfo:
-                for annotation_info in media_type.corpusTextNgramInfo.annotationInfo.all():
+                for annotation_info in media_type.corpusTextNgramInfo.annotationinfotype_model_set.all():
                     result.extend(annotation_info.get_conformanceToStandardsBestPractices_display_list())
             if media_type.corpusImageInfo:
-                for annotation_info in media_type.corpusImageInfo.annotationInfo.all():
+                for annotation_info in media_type.corpusImageInfo.annotationinfotype_model_set.all():
                     result.extend(annotation_info.get_conformanceToStandardsBestPractices_display_list())
             if media_type.corpusTextNumericalInfo:
-                for annotation_info in media_type.corpusTextNumericalInfo.annotationInfo.all():
+                for annotation_info in media_type.corpusTextNumericalInfo.annotationinfotype_model_set.all():
                     result.extend(annotation_info.get_conformanceToStandardsBestPractices_display_list())
 
         elif isinstance(corpus_media, languageDescriptionInfoType_model):
@@ -1211,22 +1211,22 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         if isinstance(corpus_media, corpusInfoType_model):
             media_type = corpus_media.corpusMediaType
             for corpus_info in media_type.corpustextinfotype_model_set.all():
-                for annotation_info in corpus_info.annotationInfo.all():
+                for annotation_info in corpus_info.annotationinfotype_model_set.all():
                     result.append(annotation_info.get_annotationType_display())
             if media_type.corpusAudioInfo:
-                for annotation_info in media_type.corpusAudioInfo.annotationInfo.all():
+                for annotation_info in media_type.corpusAudioInfo.annotationinfotype_model_set.all():
                     result.append(annotation_info.get_annotationType_display())
             for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-                for annotation_info in corpus_info.annotationInfo.all():
+                for annotation_info in corpus_info.annotationinfotype_model_set.all():
                     result.append(annotation_info.get_annotationType_display())
             if media_type.corpusTextNgramInfo:
-                for annotation_info in media_type.corpusTextNgramInfo.annotationInfo.all():
+                for annotation_info in media_type.corpusTextNgramInfo.annotationinfotype_model_set.all():
                     result.append(annotation_info.get_annotationType_display())
             if media_type.corpusImageInfo:
-                for annotation_info in media_type.corpusImageInfo.annotationInfo.all():
+                for annotation_info in media_type.corpusImageInfo.annotationinfotype_model_set.all():
                     result.append(annotation_info.get_annotationType_display())
             if media_type.corpusTextNumericalInfo:
-                for annotation_info in media_type.corpusTextNumericalInfo.annotationInfo.all():
+                for annotation_info in media_type.corpusTextNumericalInfo.annotationinfotype_model_set.all():
                     result.append(annotation_info.get_annotationType_display())
 
         return result
@@ -1243,22 +1243,22 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         if isinstance(corpus_media, corpusInfoType_model):
             media_type = corpus_media.corpusMediaType
             for corpus_info in media_type.corpustextinfotype_model_set.all():
-                for annotation_info in corpus_info.annotationInfo.all():
+                for annotation_info in corpus_info.annotationinfotype_model_set.all():
                     result.append(annotation_info.annotationFormat)
             if media_type.corpusAudioInfo:
-                for annotation_info in media_type.corpusAudioInfo.annotationInfo.all():
+                for annotation_info in media_type.corpusAudioInfo.annotationinfotype_model_set.all():
                     result.append(annotation_info.annotationFormat)
             for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-                for annotation_info in corpus_info.annotationInfo.all():
+                for annotation_info in corpus_info.annotationinfotype_model_set.all():
                     result.append(annotation_info.annotationFormat)
             if media_type.corpusTextNgramInfo:
-                for annotation_info in media_type.corpusTextNgramInfo.annotationInfo.all():
+                for annotation_info in media_type.corpusTextNgramInfo.annotationinfotype_model_set.all():
                     result.append(annotation_info.annotationFormat)
             if media_type.corpusImageInfo:
-                for annotation_info in media_type.corpusImageInfo.annotationInfo.all():
+                for annotation_info in media_type.corpusImageInfo.annotationinfotype_model_set.all():
                     result.append(annotation_info.annotationFormat)
             if media_type.corpusTextNumericalInfo:
-                for annotation_info in media_type.corpusTextNumericalInfo.annotationInfo.all():
+                for annotation_info in media_type.corpusTextNumericalInfo.annotationinfotype_model_set.all():
                     result.append(annotation_info.annotationFormat)
 
         return result

@@ -105,26 +105,26 @@
 {{ object.resourceComponentType.as_subclass.languageDescriptionMediaType.languageDescriptionImageInfo.mediaType }}
 {{ object.resourceComponentType.as_subclass.inputInfo.get_mediaType_display }}
 {{ object.resourceComponentType.as_subclass.outputInfo.get_mediaType_display }}
-{% for annot_info in object.resourceComponentType.as_subclass.corpusMediaType.corpusAudioInfo.annotationInfo.all %}
+{% for annot_info in object.resourceComponentType.as_subclass.corpusMediaType.corpusAudioInfo.annotationinfotype_model_set.all %}
   {{ annot_info.get_annotationType_display }}
 {% endfor %}
 {% for corpus_info in object.resourceComponentType.as_subclass.corpusMediaType.corpustextinfotype_model_set.all %}
-  {% for annot_info in corpus_info.annotationInfo.all %}
+  {% for annot_info in corpus_info.annotationinfotype_model_set.all %}
     {{ annot_info.get_annotationType_display }}
   {% endfor %}
 {% endfor %}
 {% for corpus_info in object.resourceComponentType.as_subclass.corpusMediaType.corpusvideoinfotype_model_set.all %}
-  {% for annot_info in corpus_info.annotationInfo.all %}
+  {% for annot_info in corpus_info.annotationinfotype_model_set.all %}
     {{ annot_info.get_annotationType_display }}
   {% endfor %}
 {% endfor %}
-{% for annot_info in object.resourceComponentType.as_subclass.corpusMediaType.corpusTextNgramInfo.annotationInfo.all %}
+{% for annot_info in object.resourceComponentType.as_subclass.corpusMediaType.corpusTextNgramInfo.annotationinfotype_model_set.all %}
   {{ annot_info.get_annotationType_display }}
 {% endfor %}
-{% for annot_info in object.resourceComponentType.as_subclass.corpusMediaType.corpusImageInfo.annotationInfo.all %}
+{% for annot_info in object.resourceComponentType.as_subclass.corpusMediaType.corpusImageInfo.annotationinfotype_model_set.all %}
   {{ annot_info.get_annotationType_display }}
 {% endfor %}
-{% for annot_info in object.resourceComponentType.as_subclass.corpusMediaType.corpusTextNumericalInfo.annotationInfo.all %}
+{% for annot_info in object.resourceComponentType.as_subclass.corpusMediaType.corpusTextNumericalInfo.annotationinfotype_model_set.all %}
   {{ annot_info.get_annotationType_display }}
 {% endfor %}
 {% for licence in object.distributionInfo.licenceinfotype_model_set.all %}

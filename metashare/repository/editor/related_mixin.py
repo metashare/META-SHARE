@@ -18,11 +18,14 @@ from metashare.repository.models import actorInfoType_model, \
     organizationInfoType_model, projectInfoType_model,\
     membershipInfoType_model, \
     personInfoType_model, \
-    targetResourceInfoType_model, documentInfoType_model
+    targetResourceInfoType_model, documentInfoType_model, \
+    languageVarietyInfoType_model, \
+    sizeInfoType_model, resolutionInfoType_model, audioSizeInfoType_model
 from metashare.repository.editor.lookups import ActorLookup, \
-    OrganizationLookup, ProjectLookup, MembershipLookup, \
+    OrganizationLookup, ProjectLookup, MembershipDummyLookup, \
     PersonLookup, TargetResourceLookup, DocumentLookup, \
-    DocumentationLookup
+    DocumentationLookup, LanguageVarietyDummyLookup, SizeDummyLookup, \
+    ResolutionDummyLookup, AudioSizeDummyLookup
 
 class RelatedAdminMixin(object):
     '''
@@ -31,18 +34,25 @@ class RelatedAdminMixin(object):
     '''
     
     custom_m2m_widget_overrides = {
+        # Reusable types with actual ajax search:
         actorInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=ActorLookup), 
         documentationInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=DocumentationLookup),
         documentInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=DocumentLookup),
         personInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=PersonLookup),
         organizationInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=OrganizationLookup),
         projectInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=ProjectLookup),
-        membershipInfoType_model: OneToManyWidget(lookup_class=MembershipLookup),
         targetResourceInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=TargetResourceLookup),
+        # Custom one-to-many widgets needed to avoid nested inlines:
+        membershipInfoType_model: OneToManyWidget(lookup_class=MembershipDummyLookup),
+        languageVarietyInfoType_model: OneToManyWidget(lookup_class=LanguageVarietyDummyLookup),
+        sizeInfoType_model: OneToManyWidget(lookup_class=SizeDummyLookup),
+        resolutionInfoType_model: OneToManyWidget(lookup_class=ResolutionDummyLookup),
+        audioSizeInfoType_model: OneToManyWidget(lookup_class=AudioSizeDummyLookup),
     }
     
-    custom_o2m_widget_overrides = {
+    custom_m2o_widget_overrides = {
         documentationInfoType_model: AutoCompleteSelectWidget(lookup_class=DocumentationLookup),
+        targetResourceInfoType_model: AutoCompleteSelectWidget(lookup_class=TargetResourceLookup),
     }
     
     def hide_hidden_fields(self, db_field, kwargs):
@@ -87,8 +97,8 @@ class RelatedAdminMixin(object):
         # Get the correct formfield.
         if isinstance(db_field, models.ForeignKey):
             # Custom default widgets for certain relation fields:
-            if db_field.rel.to in self.custom_o2m_widget_overrides:
-                kwargs = dict({'widget':self.custom_o2m_widget_overrides[db_field.rel.to]}, **kwargs)
+            if db_field.rel.to in self.custom_m2o_widget_overrides:
+                kwargs = dict({'widget':self.custom_m2o_widget_overrides[db_field.rel.to]}, **kwargs)
             formfield = self.formfield_for_foreignkey(db_field, request, **kwargs)
         elif isinstance(db_field, models.ManyToManyField):
             # Custom default widgets for certain relation fields:

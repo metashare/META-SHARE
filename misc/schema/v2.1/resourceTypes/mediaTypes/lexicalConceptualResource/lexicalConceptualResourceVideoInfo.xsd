@@ -69,7 +69,7 @@
 					<xs:documentation>Groups information on the format(s) of a resource; repeated if parts of the resource are in different formats</xs:documentation>
 					<xs:appinfo>
 						<recommended>true</recommended>
-						<relation>many-to-many</relation>
+						<relation>one-to-many</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
