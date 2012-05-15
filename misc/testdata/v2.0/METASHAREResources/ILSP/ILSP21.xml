@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>COSMOROE Caricature Corpus</resourceName>
+      <description>Corpus of 50 caricatures by Yannis Ioannou covering the domains of politics and environment. They pertain to various types of visual-linguistic information. They have been annotated in different annotation levels in order to be used for the detection of the semantic relations between image and language</description>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-unrestrictedUse</availability>
+      <licenceInfo>
+         <licence>proprietary</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+      </licenceInfo>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Pastra</surname>
+      <givenName>Katerina</givenName>
+      <communicationInfo>
+      <email>kpastra@ilsp.gr</email>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2012-02-02</metadataCreationDate>
+    <source>META</source>
+   </metadataInfo>
+   <usageInfo>
+		    <foreseenUseInfo>
+			      <foreseenUse>nlpApplications</foreseenUse>
+			      
+		    </foreseenUseInfo>
+		    <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+      </actualUseInfo>
+	  </usageInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>monolingual</lingualityType>
+		             </lingualityInfo>
+               <languageInfo>
+			
+			               <languageId>ell</languageId>
+			               <languageName>Modern Greek (1453-)</languageName>
+		             </languageInfo>
+               <sizeInfo>
+			               <size>50</size>
+			               <sizeUnit>images</sizeUnit>
+		       </sizeInfo>
+               <annotationInfo>
+                  <annotationType>speechAnnotation</annotationType>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>modalityAnnotation-bodyMovements</annotationType>
+               </annotationInfo>
+               <annotationInfo>
+                  <annotationType>modalityAnnotation-handArmGestures</annotationType>
+               </annotationInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

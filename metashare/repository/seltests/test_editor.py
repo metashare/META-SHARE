@@ -12,7 +12,7 @@ import time
 from django.core.management import call_command
 
 
-TESTFIXTURE_XML = '{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
+TESTFIXTURE_XML = '{}/repository/fixtures/ILSP10.xml'.format(ROOT_PATH)
 
 class EditorTest(SeleniumTestCase):
     
@@ -71,9 +71,8 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("Select Resource to change | META-SHARE backend", driver.title)
         # check if LR entry is available and that its status is published
         try: 
-            self.assertEqual(
-              "Italian TTS Speech Corpus (Appen)", 
-              driver.find_element_by_link_text("Italian TTS Speech Corpus (Appen)").text)
+            self.assertEqual("REVEAL-THIS Corpus",
+                driver.find_element_by_link_text("REVEAL-THIS Corpus").text)
         except AssertionError as e: 
             self.verification_errors.append(str(e))
         try: 
@@ -83,10 +82,12 @@ class EditorTest(SeleniumTestCase):
         except AssertionError as e: 
             self.verification_errors.append(str(e))
         # click LR to edit it
-        driver.find_element_by_link_text("Italian TTS Speech Corpus (Appen)").click()
-        # add a short name and save the LR
-        driver.find_element_by_id("id_form-0-resourceShortName").clear()
-        driver.find_element_by_id("id_form-0-resourceShortName").send_keys("a random short name")
+        driver.find_element_by_link_text("REVEAL-THIS Corpus").click()
+        # change the short name and save the LR
+        driver.find_element_by_name("key_form-0-resourceShortName_0").clear()
+        driver.find_element_by_name("key_form-0-resourceShortName_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-resourceShortName_0").clear()
+        driver.find_element_by_name("val_form-0-resourceShortName_0").send_keys("a random short name")
         driver.find_element_by_name("_save").click()
         # make sure that the LR status is still published after saving
         try: 
@@ -128,11 +129,14 @@ class EditorTest(SeleniumTestCase):
         # remember root window id
         root_id = driver.current_window_handle
         # add required fields
-        driver.find_element_by_id("id_form-0-resourceName").clear()
-        driver.find_element_by_id("id_form-0-resourceName").send_keys("Test Text Corpus")
-        driver.find_element_by_id("id_form-0-description").clear()
-        driver.find_element_by_id("id_form-0-description").send_keys("Test Description")
-        driver.find_element_by_link_text("Today").click()
+        driver.find_element_by_name("key_form-0-resourceName_0").clear()
+        driver.find_element_by_name("key_form-0-resourceName_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-resourceName_0").clear()
+        driver.find_element_by_name("val_form-0-resourceName_0").send_keys("Test Text Corpus")
+        driver.find_element_by_name("key_form-0-description_0").clear()
+        driver.find_element_by_name("key_form-0-description_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-description_0").clear()
+        driver.find_element_by_name("val_form-0-description_0").send_keys("Test Description")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
@@ -194,11 +198,14 @@ class EditorTest(SeleniumTestCase):
         # remember root window id
         root_id = driver.current_window_handle
         # add required fields
-        driver.find_element_by_id("id_form-0-resourceName").clear()
-        driver.find_element_by_id("id_form-0-resourceName").send_keys("Test Text Language Description")
-        driver.find_element_by_id("id_form-0-description").clear()
-        driver.find_element_by_id("id_form-0-description").send_keys("Test Description")
-        driver.find_element_by_link_text("Today").click()
+        driver.find_element_by_name("key_form-0-resourceName_0").clear()
+        driver.find_element_by_name("key_form-0-resourceName_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-resourceName_0").clear()
+        driver.find_element_by_name("val_form-0-resourceName_0").send_keys("Test Text Language Description")
+        driver.find_element_by_name("key_form-0-description_0").clear()
+        driver.find_element_by_name("key_form-0-description_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-description_0").clear()
+        driver.find_element_by_name("val_form-0-description_0").send_keys("Test Description")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()
@@ -268,11 +275,14 @@ class EditorTest(SeleniumTestCase):
         # remember root window id
         root_id = driver.current_window_handle
         # add required fields
-        driver.find_element_by_id("id_form-0-resourceName").clear()
-        driver.find_element_by_id("id_form-0-resourceName").send_keys("Test Lexical Resource Text")
-        driver.find_element_by_id("id_form-0-description").clear()
-        driver.find_element_by_id("id_form-0-description").send_keys("Test Description")
-        driver.find_element_by_link_text("Today").click()
+        driver.find_element_by_name("key_form-0-resourceName_0").clear()
+        driver.find_element_by_name("key_form-0-resourceName_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-resourceName_0").clear()
+        driver.find_element_by_name("val_form-0-resourceName_0").send_keys("Test Lexical Resource Text")
+        driver.find_element_by_name("key_form-0-description_0").clear()
+        driver.find_element_by_name("key_form-0-description_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-description_0").clear()
+        driver.find_element_by_name("val_form-0-description_0").send_keys("Test Description")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()
@@ -343,11 +353,14 @@ class EditorTest(SeleniumTestCase):
         # remember root window id
         root_id = driver.current_window_handle
         # add required fields
-        driver.find_element_by_id("id_form-0-resourceName").clear()
-        driver.find_element_by_id("id_form-0-resourceName").send_keys("Test Tool")
-        driver.find_element_by_id("id_form-0-description").clear()
-        driver.find_element_by_id("id_form-0-description").send_keys("Test Description")
-        driver.find_element_by_link_text("Today").click()
+        driver.find_element_by_name("key_form-0-resourceName_0").clear()
+        driver.find_element_by_name("key_form-0-resourceName_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-resourceName_0").clear()
+        driver.find_element_by_name("val_form-0-resourceName_0").send_keys("Test Tool")
+        driver.find_element_by_name("key_form-0-description_0").clear()
+        driver.find_element_by_name("key_form-0-description_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-description_0").clear()
+        driver.find_element_by_name("val_form-0-description_0").send_keys("Test Description")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()
@@ -383,7 +396,7 @@ class EditorTest(SeleniumTestCase):
         driver.get(self.base_url)
         ss_path = setup_screenshots_folder(
           "PNG-metashare.repository.seltests.test_editor.EditorTest",
-          "LR_creation_corpus_text")
+          "sorting")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))  
         # login user
         login_user(driver, "editoruser", "secret")
@@ -453,8 +466,65 @@ class EditorTest(SeleniumTestCase):
           "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[10]").text)    
         # skip to end of list 
         self.assertEqual("words", driver.find_element_by_xpath(
-          "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[49]").text)        
+          "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[50]").text)        
 
+    
+    def test_multi_select_widget(self):
+        """
+        tests the usage of the FilteredSelectMultiple widget for multi select fields
+        """
+        driver = self.driver
+        driver.get(self.base_url)
+        ss_path = setup_screenshots_folder(
+          "PNG-metashare.repository.seltests.test_editor.EditorTest",
+          "multi_select_widget")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))  
+        # login user
+        login_user(driver, "editoruser", "secret")
+        # make sure login was successful
+        self.assertEqual("Logout", 
+          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Editor
+        driver.find_element_by_css_selector("div.button.middle_button").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Share/Create Resource
+        mouse_over(driver, driver.find_element_by_link_text("Share/Create"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_link_text("Resource").click()
+        # create text corpus
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
+        driver.find_element_by_id("id_corpusTextInfo").click()
+        driver.find_element_by_id("id_submit").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("Add Resource", 
+          driver.find_element_by_css_selector("#content > h1").text)
+        # distribution popup
+        driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
+        driver.switch_to_window("id_distributionInfo")
+        # show licenses
+        driver.find_element_by_id("fieldsetcollapser0").click()
+        # check that the left window contains all entries
+        self.assertEqual("underNegotiation", driver.find_element_by_xpath(
+          "//select[@id='id_licenceinfotype_model_set-0-licence_from']/option[41]").text)
+        # add an entry
+        driver.find_element_by_xpath(
+          "//select[@id='id_licenceinfotype_model_set-0-licence_from']/option[1]").click()
+        driver.find_element_by_link_text("Add").click()
+        # check that entry has moved to right site
+        self.assertEqual("AGPL", driver.find_element_by_xpath(
+          "//select[@id='id_licenceinfotype_model_set-0-licence_to']/option[1]").text)
+        self.assertEqual("ApacheLicence_V2.0", driver.find_element_by_xpath(
+          "//select[@id='id_licenceinfotype_model_set-0-licence_from']/option[1]").text)
+        # remove entry
+        driver.find_element_by_xpath(
+          "//select[@id='id_licenceinfotype_model_set-0-licence_to']/option[1]").click()
+        driver.find_element_by_link_text("Remove").click()
+        # entry is now at last position on left site
+        self.assertEqual("AGPL", driver.find_element_by_xpath(
+          "//select[@id='id_licenceinfotype_model_set-0-licence_from']/option[41]").text)
+        
         
     def fill_distribution(self, driver, ss_path, parent_id):
         """
@@ -475,8 +545,10 @@ class EditorTest(SeleniumTestCase):
         to the parent window
         """
         driver.switch_to_window("id_contactPerson")
-        driver.find_element_by_id("id_surname").clear()
-        driver.find_element_by_id("id_surname").send_keys("Mustermann")
+        driver.find_element_by_name("key_surname_0").clear()
+        driver.find_element_by_name("key_surname_0").send_keys("en")
+        driver.find_element_by_name("val_surname_0").clear()
+        driver.find_element_by_name("val_surname_0").send_keys("Mustermann")
         driver.find_element_by_id("id_form-0-email").clear()
         driver.find_element_by_id("id_form-0-email").send_keys("mustermann@org.com")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))

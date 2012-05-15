@@ -68,11 +68,10 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             if isinstance(field, models.OneToOneField):
                 name = field.name
                 if not name in self.no_inlines and not name in self.exclude and not name in self.readonly_fields:
-                    if any(f for f in field.rel.to.get_fields_flat()
-                           if f.endswith('_set')):
+                    if self.contains_inlines(field.rel.to):
                         # ignore fields referring to models that "contain"
-                        # one2many fields; if we wouldn't ignore these, the
-                        # whole inline would simply not show up because of its
+                        # inlines; if we wouldn't ignore these, these
+                        # inlines would simply not show up because of the
                         # internal nested structure
                         self.no_inlines.append(name)
                         continue
@@ -94,6 +93,9 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                     self.exclude.append(name)
 
 
+    def contains_inlines(self, model_class):
+        ''' Determine whether or not the editor for the given model_class will contain inlines ''' 
+        return any(f for f in model_class.get_fields_flat() if f.endswith('_set'))
 
     
     def get_fieldsets(self, request, obj=None):
@@ -129,6 +131,11 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         '''
         if '_popup' in request.REQUEST:
             return self.edit_response_close_popup_magic(obj)
+        elif '_popup_o2m' in request.REQUEST:
+            caller = None
+            if '_caller' in request.REQUEST:
+                caller = request.REQUEST['_caller']
+            return self.edit_response_close_popup_magic_o2m(obj, caller)
         else:
             return super(SchemaModelAdmin, self).response_change(request, obj)
 

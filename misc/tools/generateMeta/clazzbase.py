@@ -71,6 +71,7 @@ Integer_type_table = {
     'unsignedInt': None,
     'short': None,
     'unsignedShort': None,
+    'gYear': None,
 }
 Float_type_table = {
     'decimal': None,
@@ -152,7 +153,8 @@ from {0}supermodel import SchemaModel, SubclassableModel, \\
   REQUIRED, OPTIONAL, RECOMMENDED
 from {0}editor.widgets import MultiFieldWidget
 from {0}fields import MultiTextField, MetaBooleanField, \\
-  MultiSelectField
+  MultiSelectField, DictField, best_lang_value_retriever
+from {0}validators import validate_lang_code_keys
 
 from metashare.storage.models import StorageObject
 
@@ -168,6 +170,11 @@ EMAILADDRESS_VALIDATOR = RegexValidator(r'[^@]+@[^\.]+\..+',
 
 HTTPURI_VALIDATOR = RegexValidator(r'(https?://.*|ftp://.*|www*)',
   'Not a valid httpURI value.', ValidationError)
+
+# namespace of the META-SHARE metadata XML Schema
+SCHEMA_NAMESPACE = '{1}'
+# version of the META-SHARE metadata XML Schema
+SCHEMA_VERSION = '{2}'
 
 """
 
@@ -747,8 +754,9 @@ class Clazz(object):
                       options + choice_options, '')
                 else:
                     self.wrtmodels(
-                      '    %s = MultiTextField(%swidget = MultiFieldWidget(widget_id=%d), %s)\n' % (
-                        name, choice_options, multi_id, options, ))
+                      '    %s = MultiTextField(%swidget=MultiFieldWidget('
+                      'widget_id=%d, max_length=%s), %s)\n' % (
+                        name, choice_options, multi_id, maxlen, options, ))
                     self.wrtforms(
                       '    %s = forms.CharField(%s%s)### FIX_ME: MULTITEXT %d\n' % (
                         name, choice_options, options, multi_id, ))
@@ -757,7 +765,11 @@ class Clazz(object):
             logging.warn('Unhandled simple type: {} {}\n'.format(name, data_type))
         return multi_id
 
-    def generate_myString_member(self, member, name, multi_id, options):
+    def generate_myString_member(self, member, name, options):
+        maxlen = member.get_maxlength()
+        if maxlen:
+            options += "\n      max_val_length={}, ".format(maxlen)
+
         help_string = member.child.getHelpText()
         if help_string:
             _help_text = _truncate_long_string(help_string, 72, 6)
@@ -767,10 +779,9 @@ class Clazz(object):
             options += 'blank=True'
 
         self.wrtmodels(
-          '    %s = MultiTextField(widget = MultiFieldWidget(widget_id=%d), %s)\n' % (
-            name, multi_id, options, ))
-        multi_id += 1
-        return multi_id
+          '    %s = DictField(validators=[validate_lang_code_keys],\n'
+          '      default_retriever=best_lang_value_retriever, %s)\n' % (
+            name, options, ))
 
     def generate_complex_member(self, member, name, data_type, options):
         help_string = member.child.getHelpText()
@@ -787,18 +798,23 @@ class Clazz(object):
         else:
             if not member.is_unbounded():
                 field_type = member.child.getAppInfo('relation')
-                if field_type and (field_type == 'many-to-many' or
-                  field_type == 'one-to-many'):
-                    logging.warn(('wrong {} declaration for member {} '+ \
-                        'with at most one element').format(field_type, member))
-                # this is a one-to-one relation, maybe optional
-                #options = options + ', unique=True'
+                model_field_name = 'OneToOneField'
+                if field_type:
+                    if field_type == 'many-to-one':
+                        # A reusable component which can occur only once in this context:
+                        model_field_name = 'ForeignKey'
+                    elif field_type == 'many-to-many' or field_type == 'one-to-many':
+                        # Complain but default to one-to-one
+                        logging.warn(('wrong {} declaration for member {} '+ \
+                                      'with at most one element').format(field_type, member))
+                # this is a many-to-one or a one-to-one relation, maybe optional
                 if not member.is_required():
                     options += 'blank=True, null=True, on_delete=models.SET_NULL, '
 
+
                 self.wrtmodels(
-                    '    %s = models.OneToOneField("%s_model", %s)\n' % (
-                        name, data_type, options, ))
+                    '    %s = models.%s("%s_model", %s)\n' % (
+                        name, model_field_name, data_type, options, ))
                 self.wrtforms(
                     '    %s = forms.MultipleChoiceField(%s_model.objects.all())\n' % (
                         name, data_type, ))
@@ -1016,9 +1032,7 @@ class Clazz(object):
                 options += 'validators=[EMAILADDRESS_VALIDATOR], '
             
             if data_type == 'myString':
-                multi_id = self.generate_myString_member(member, name, multi_id,
-                                                         options)
-                MULTI_ID = multi_id
+                self.generate_myString_member(member, name, options)
             elif data_type in Simple_type_table:
                 # simple type member
                 multi_id = self.generate_simple_member(member, name, data_type,
@@ -1060,7 +1074,8 @@ class Clazz(object):
         return result
 
     @classmethod
-    def generate(cls, outDirName, prefix, root, package_prefix):
+    def generate(cls, outDirName, prefix, root, target_ns, schema_version,
+                 package_prefix):
         cls.establish_one_to_many()
 
         models_file_name = os.path.join(outDirName, 'models.py')
@@ -1073,7 +1088,8 @@ class Clazz(object):
         cls.wrtmodels = models_writer.write
         cls.wrtforms = forms_writer.write
         cls.wrtadmin = admin_writer.write
-        cls.wrtmodels(MODEL_HEADER.format(package_prefix))
+        cls.wrtmodels(MODEL_HEADER.format(package_prefix, target_ns,
+                                          schema_version))
         cls.wrtforms('from django import forms\n\n')
 
         exportableClassList = list()

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+  <identificationInfo>
+    <resourceName>Multimodal Corpus</resourceName>
+    <description>66 minutes from three TV interviews annotated with face, gesture info etc.</description>
+    <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+  </identificationInfo>
+  <distributionInfo>
+    <availability>available-restrictedUse</availability>
+    <licenceInfo>
+      <licence>proprietary</licence>
+    </licenceInfo>
+  </distributionInfo>
+  <contactPerson>
+    <surname>Papageorgiou</surname>
+    <givenName>Harris</givenName>
+    <communicationInfo>
+      <email>xaris@ilsp.gr</email>
+    </communicationInfo>
+  </contactPerson>
+  <contactPerson>
+    <surname>Koutsombogera</surname>
+    <givenName>Maria</givenName>
+    <communicationInfo>
+      <email>mkouts@ilsp.gr</email>
+    </communicationInfo>
+  </contactPerson>
+  <metadataInfo>
+    <metadataCreationDate>2012-02-02</metadataCreationDate>
+    <source>META</source>
+  </metadataInfo>
+  <usageInfo>
+    <foreseenUseInfo>
+      <foreseenUse>nlpApplications</foreseenUse>
+      <useNLPSpecific>multimediaDevelopment</useNLPSpecific>
+    </foreseenUseInfo>
+  </usageInfo>
+  <resourceComponentType>
+    <corpusInfo>
+      <resourceType>corpus</resourceType>
+      <corpusMediaType>
+        <corpusTextInfo>
+          <mediaType>text</mediaType>
+          <lingualityInfo>
+            <lingualityType>monolingual</lingualityType>
+          </lingualityInfo>
+          <languageInfo>
+            <languageId>ell</languageId>
+            <languageName>Modern Greek (1453-)</languageName>
+          </languageInfo>
+          <sizeInfo>
+            <size>66</size>
+            <sizeUnit>minutes</sizeUnit>
+          </sizeInfo>
+          <annotationInfo>
+            <annotationType>speechAnnotation-phoneticTranscription</annotationType>
+          </annotationInfo>
+          <annotationInfo>
+            <annotationType>speechAnnotation</annotationType>
+          </annotationInfo>
+          <annotationInfo>
+            <annotationType>modalityAnnotation-bodyMovements</annotationType>
+          </annotationInfo>
+          <annotationInfo>
+            <annotationType>modalityAnnotation-handArmGestures</annotationType>
+          </annotationInfo>
+          <annotationInfo>
+            <annotationType>modalityAnnotation-facialExpressions</annotationType>
+          </annotationInfo>
+          <annotationInfo>
+            <annotationType>other</annotationType>
+          </annotationInfo>
+        </corpusTextInfo>
+      </corpusMediaType>
+    </corpusInfo>
+  </resourceComponentType>
+</resourceInfo>

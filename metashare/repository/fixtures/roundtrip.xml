@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
 	<identificationInfo>
-		<resourceName>morphdb.hu</resourceName>
-		<description>Hungarian lexical database and morphological grammar</description>
-		<resourceShortName>n/a</resourceShortName>
+		<resourceName lang="en">morphdb.hu</resourceName>
+		<description lang="en">Hungarian lexical database and morphological grammar</description>
+		<resourceShortName lang="en">n/a</resourceShortName>
 		<metaShareId>107</metaShareId>
 		<identifier>107</identifier>
 	</identificationInfo>
@@ -14,11 +14,11 @@
 			<restrictionsOfUse>other</restrictionsOfUse>
 			<distributionAccessMedium>downloadable</distributionAccessMedium>
 			<downloadLocation>http://mokk.bme.hu/resources/morphdb-hu</downloadLocation>
-			<price>123.45 EUR</price>
+			<fee>123.45 EUR</fee>
 		</licenceInfo>
 	</distributionInfo>
 	<contactPerson>
-		<surname>Doe</surname>
+		<surname lang="en">Doe</surname>
 		<communicationInfo>
 			<email>daniel@mokk.bme.hu</email>
 			<address>Planet Mars, Cosmos</address>
@@ -32,13 +32,13 @@
 	<metadataInfo>
 		<metadataCreationDate>2011-11-13</metadataCreationDate>
 		<metadataCreator>
-			<surname>Doe</surname>
+			<surname lang="en">Doe</surname>
 			<communicationInfo>
 				<email>daniel@mokk.bme.hu</email>
 			</communicationInfo>
 			<position>BUTE Employee</position>
 			<affiliation>
-				<organizationName>Budapest University of Technology and Economics</organizationName>
+				<organizationName lang="en">Budapest University of Technology and Economics</organizationName>
 				<communicationInfo>
 					<email>daniel@mokk.bme.hu</email>
 					<address>Planet Mars, Cosmos</address>

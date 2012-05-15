@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: METANORD45.xml 42662 2011-12-01 14:33:59Z martha $ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName>Estonian Reference Corpus</resourceName>
+      <description>The Estonian reference Corpus is a selection of electronic research material that contains written Estonian from 1990 onwards. Raw text corpus. The corpus represents the written language and contains 75% newspaper texts, in lesser extent also fiction, science and legislation texts.</description>
+      <resourceShortName>ESTREFCORP</resourceShortName>
+      <metaShareId>
+				NOT_DEFINED_FOR_V2
+	  		</metaShareId>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Muischnek</surname>
+      <givenName>Kadri</givenName>
+      <communicationInfo>
+         <email>korpus.info@ut.ee</email>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2011-12-31</metadataCreationDate>
+   </metadataInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+			               <lingualityType>monolingual</lingualityType>
+		             </lingualityInfo>
+               <languageInfo>
+                  <languageId>est</languageId>
+                  <languageName>Estonian</languageName>
+               </languageInfo>
+               <sizeInfo>
+			               <size>245000000</size>
+			
+			               <sizeUnit>tokens</sizeUnit>
+		             </sizeInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

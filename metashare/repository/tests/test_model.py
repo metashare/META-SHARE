@@ -3,7 +3,7 @@ from xml.etree.ElementTree import fromstring, tostring, register_namespace
 from django.test import TestCase
 from metashare import test_utils
 from metashare.settings import ROOT_PATH
-from metashare.repository.models import resourceInfoType_model
+from metashare.repository.models import resourceInfoType_model, SCHEMA_NAMESPACE
 from metashare.repository.supermodel import pretty_xml
 from difflib import unified_diff
 
@@ -59,7 +59,7 @@ class ModelTest(TestCase):
         _result = test_utils.import_xml(_roundtrip)
         with open(_roundtrip) as _import_file:
             _import_xml = _import_file.read()
-            register_namespace('', 'http://www.ilsp.gr/META-XMLSchema')
+            register_namespace('', SCHEMA_NAMESPACE)
             _import_xml = tostring(fromstring(_import_xml))
         _export_xml = tostring(_result[0].export_to_elementtree())
     # cfedermann: uncomment these lines to dump import/export XML to file.

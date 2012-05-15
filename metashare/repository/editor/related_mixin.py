@@ -8,15 +8,24 @@ from django.http import HttpResponse
 from django.utils.html import escape, escapejs
 
 from metashare.repository.editor.related_widget import RelatedFieldWidgetWrapper
-from metashare.repository.editor.widgets import SubclassableRelatedFieldWidgetWrapper
+from metashare.repository.editor.widgets import SubclassableRelatedFieldWidgetWrapper, \
+    OneToManyWidget
 from selectable.forms.widgets import AutoCompleteSelectMultipleWidget, \
     AutoCompleteSelectWidget
 from django.db import models
 from metashare.repository.models import actorInfoType_model, \
-    documentationInfoType_model, personInfoType_model, \
-    targetResourceInfoType_model, documentInfoType_model
-from metashare.repository.editor.lookups import ActorLookup, DocumentationLookup, \
-    PersonLookup, TargetResourceLookup, DocumentLookup
+    documentationInfoType_model, \
+    organizationInfoType_model, projectInfoType_model,\
+    membershipInfoType_model, \
+    personInfoType_model, \
+    targetResourceInfoType_model, documentInfoType_model, \
+    languageVarietyInfoType_model, \
+    sizeInfoType_model, resolutionInfoType_model, audioSizeInfoType_model
+from metashare.repository.editor.lookups import ActorLookup, \
+    OrganizationLookup, ProjectLookup, MembershipDummyLookup, \
+    PersonLookup, TargetResourceLookup, DocumentLookup, \
+    DocumentationLookup, LanguageVarietyDummyLookup, SizeDummyLookup, \
+    ResolutionDummyLookup, AudioSizeDummyLookup
 
 class RelatedAdminMixin(object):
     '''
@@ -25,15 +34,25 @@ class RelatedAdminMixin(object):
     '''
     
     custom_m2m_widget_overrides = {
+        # Reusable types with actual ajax search:
         actorInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=ActorLookup), 
         documentationInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=DocumentationLookup),
         documentInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=DocumentLookup),
         personInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=PersonLookup),
+        organizationInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=OrganizationLookup),
+        projectInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=ProjectLookup),
         targetResourceInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=TargetResourceLookup),
+        # Custom one-to-many widgets needed to avoid nested inlines:
+        membershipInfoType_model: OneToManyWidget(lookup_class=MembershipDummyLookup),
+        languageVarietyInfoType_model: OneToManyWidget(lookup_class=LanguageVarietyDummyLookup),
+        sizeInfoType_model: OneToManyWidget(lookup_class=SizeDummyLookup),
+        resolutionInfoType_model: OneToManyWidget(lookup_class=ResolutionDummyLookup),
+        audioSizeInfoType_model: OneToManyWidget(lookup_class=AudioSizeDummyLookup),
     }
     
-    custom_o2m_widget_overrides = {
+    custom_m2o_widget_overrides = {
         documentationInfoType_model: AutoCompleteSelectWidget(lookup_class=DocumentationLookup),
+        targetResourceInfoType_model: AutoCompleteSelectWidget(lookup_class=TargetResourceLookup),
     }
     
     def hide_hidden_fields(self, db_field, kwargs):
@@ -78,8 +97,8 @@ class RelatedAdminMixin(object):
         # Get the correct formfield.
         if isinstance(db_field, models.ForeignKey):
             # Custom default widgets for certain relation fields:
-            if db_field.rel.to in self.custom_o2m_widget_overrides:
-                kwargs = dict({'widget':self.custom_o2m_widget_overrides[db_field.rel.to]}, **kwargs)
+            if db_field.rel.to in self.custom_m2o_widget_overrides:
+                kwargs = dict({'widget':self.custom_m2o_widget_overrides[db_field.rel.to]}, **kwargs)
             formfield = self.formfield_for_foreignkey(db_field, request, **kwargs)
         elif isinstance(db_field, models.ManyToManyField):
             # Custom default widgets for certain relation fields:
@@ -123,7 +142,8 @@ class RelatedAdminMixin(object):
         if formfield and \
                 isinstance(formfield.widget, admin.widgets.RelatedFieldWidgetWrapper) and \
                 not isinstance(formfield.widget.widget, SelectMultiple) and \
-                not ('widget' in kwargs and isinstance(kwargs['widget'], AutoCompleteSelectMultipleWidget)):
+                not ('widget' in kwargs and isinstance(kwargs['widget'], AutoCompleteSelectMultipleWidget)) and \
+                not ('widget' in kwargs and isinstance(kwargs['widget'], OneToManyWidget)):
             return True
         return False
 
@@ -150,6 +170,18 @@ class RelatedAdminMixin(object):
         return HttpResponse('<script type="text/javascript">opener.dismissEditRelatedPopup(window, "%s", "%s");</script>' % \
             # escape() calls force_unicode.
             (escape(pk_value), escapejs(obj)))
+
+    def edit_response_close_popup_magic_o2m(self, obj, caller=None):
+        '''
+        For related popups, send the javascript that triggers
+        (a) closing the popup, and
+        (b) updating the parent field with the ID of the object we just edited.
+        '''
+        pk_value = obj._get_pk_val()
+        caller = caller or 'opener'
+        return HttpResponse('<script type="text/javascript">%s.dismissEditPopup(window, "%s", "%s");</script>' % \
+            # escape() calls force_unicode.
+            (caller, escape(pk_value), escapejs(obj)))
 
 
 

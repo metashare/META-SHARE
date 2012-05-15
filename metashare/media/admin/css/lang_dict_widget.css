@@ -1,0 +1,34 @@
+ul.keyValuePairs,ul.keyValuePairs>li {
+  list-style: none;
+}
+
+ul.keyValuePairs>li>textarea {
+  width: 70%;
+  height: 75px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+ul.keyValuePairs>li>input {
+  width: 70%;
+}
+
+ul.keyValuePairs>li>div {
+  display: block;
+  float: right;
+  max-width: 20%;
+}
+
+a.kvPairDeleteButton {
+  line-height: 0;
+  font-size: 0;
+  color: transparent;
+}
+
+a.kvPairDeleteButton:before {
+  content: url("../img/admin/icon_deletelink.gif")
+}
+
+a.kvPairDeleteButtonHidden {
+  visibility: hidden;
+}

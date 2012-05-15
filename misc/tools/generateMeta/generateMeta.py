@@ -87,6 +87,7 @@ import sys
 import getopt
 import logging
 
+import parse_xsd
 from parse_xsd import mapName, cleanupName, ElementDict, SimpleTypeDict, \
   set_type_constants, load_config, parse_schema
 
@@ -292,7 +293,8 @@ def parseAndGenerate(outDirName, prefix, xschemaFileName, processIncludes,
         for key, value in Clazz.ClazzDict.items():
             print 'clazzName: {}  elt: {}'.format(key, value.schema_element)
     
-    Clazz.generate(outDirName, prefix, root, package_prefix)
+    Clazz.generate(outDirName, prefix, root, parse_xsd.Targetnamespace,
+                   parse_xsd.SchemaVersion, package_prefix)
 
 
 def err_msg(msg):
