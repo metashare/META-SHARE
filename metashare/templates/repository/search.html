@@ -75,8 +75,8 @@ if (hideableDds.length > 1) {{# don't replace a single item with a "more" link #
 
   <form class="form_helper" id="searchbox" action="." method="get">      
 	<table>
-	  <tr>
-	       <td>
+	  <tr><td class="logo"><img src="{{ MEDIA_URL }}images/keyvisual.png" width='200'  /></td>
+	  		<td>
 	       {{ form.q }}              
 	 		</td><td><input id="search_button" style="width:100px;" class="span-4 button middle_button" type="submit" value="Search" /></td>
 		</tr>
@@ -89,7 +89,7 @@ if (hideableDds.length > 1) {{# don't replace a single item with a "more" link #
  
  
  
-<div class="central"> 
+
 <div class="left_box">
 <div class="filters">
 	  <h4>Filter by:</h4>
@@ -182,6 +182,6 @@ if (hideableDds.length > 1) {{# don't replace a single item with a "more" link #
               {% endif %}
             
 </div>
-</div>
+
 
 {% endblock %}
