@@ -4,7 +4,7 @@ Author: Christian Girardi <cgirardi@fbk.eu>
 """
 
 from metashare.settings import DJANGO_URL, STATS_SERVER_URL
-from metashare.stats.models import LRStats, QueryStats
+from metashare.stats.models import LRStats, QueryStats, UsageStats
 # pylint: disable-msg=W0611, W0401
 from metashare.stats.model_utils import *
 
@@ -12,6 +12,7 @@ from metashare.stats.model_utils import *
 from metashare.repository.models import *
 
 from django.utils.importlib import import_module
+import django.utils.encoding
 from django.shortcuts import render_to_response     
 from django.db.models import Count, Max, Min, Avg
 from django.http import HttpResponse
@@ -31,17 +32,6 @@ try:
 except:
     import pickle
 
-#possible models and their default field
-SELECT_MODEL = {'Resource': ['corpusInfoType_model', 'resourceType'],
-                #'Tools': ['toolServiceInfoType_model', 'resourceType'],
-                #'Lexical resource': ['lexicalConceptualResourceInfoType_model', 'resourceType'],
-                'Language': ['languageInfoType_model', 'languageName'],
-                'Licence': ['licenceInfoType_model', 'licence'],
-                'Creator': ['communicationInfoType_model','country'],
-                'Organization': ['organizationInfoType_model','organizationName'],
-                'Distribution': ['distributionInfoType_model', 'availability'],
-                'Linguality': ['lingualityInfoType_model', 'lingualityType'],
-                'Annotation': ['annotationInfoType_model', 'annotationFormat']}
 #no accessable fields
 NOACCESS_FIELDS = ["downloadLocation", "executionLocation"]
 
@@ -61,78 +51,6 @@ def callServerStats():
                   
 thread = Timer(2.0, callServerStats)
 thread.start()
-
-def repostats (request):
-    selected_menu_value = []
-    modelname = request.POST.get('model', 'Language')
-    selected_menu_value.append(['model', modelname])
-    
-    # Get lists of languages, resource types and media types to show in filtering
-    dbmodel = SELECT_MODEL[str(modelname)][0]
-    dbfield = request.POST.get('field')   
-    if (dbfield == None or dbfield == ""):
-        dbfield = SELECT_MODEL[str(modelname)][1]
-    selected_menu_value.append(['field', dbfield])
-    
-    fields = []
-    mod = import_module("metashare.repository.models")
-    dbclasses = getattr(mod, dbmodel).__schema_classes__
-    dbfields = getattr(mod, dbmodel).__schema_fields__
-    relational_fields = []
-    for field in dbfields:
-        if field[0] in NOACCESS_FIELDS:
-            continue  
-        if (field[0] in dbclasses):
-            relational_fields.append(field)
-        else:
-            if (isinstance(field[0], unicode)):
-                fields.append(field)
-        
-    repodata = []
-    if (dbfield != ""):
-        if (dbfield in dbclasses):
-            values = eval(u'{0}._meta.get_field("{1}").choices'.format(dbclasses[dbfield], dbfield))
-        else:    
-            values = eval(u'{0}._meta.get_field("{1}").choices'.format(dbmodel, dbfield))
-        if (modelname == "Licence" and len(values) > 0):
-            dictlic = collections.defaultdict(int)
-            # pylint: disable-msg=W0612
-            licences = eval(u'{0}.objects.all()'.format(dbmodel))
-            for licence in eval(u'[name for licence_info in licences for name in licence_info.get_{0}_display_list()]'.format(dbfield)):
-                dictlic[str(licence)] += 1
-            for key, val in sorted(dictlic.iteritems(), key=lambda (k, v): (v, k), reverse=True):            
-                repodata.append([key, val])                   
-        else:
-            result = eval(u'{0}.objects.values("{1}").annotate(Count("{1}")).order_by("-{1}__count")'.format(dbmodel, dbfield))
-            for item in result:
-                value = item[dbfield]
-                if (value != None and value != ""):
-                    if (isinstance(value, basestring)):
-                        try:
-                            value = pickle.loads(base64.b64decode(str(value)))              
-                        except:
-                            if (hasattr(value, 'encode')):
-                                value = value.encode("utf-8")
-                            #LOGGER.debug("Warning! Value of field {0} is not encoded base64: {1}".format(dbfield, value))
-                                                
-                    if (isinstance(value, list)):
-                        for val in value:      
-                            repodata.append([val.encode("utf-8"), item[dbfield + "__count"]])
-                    else:
-                        if (values != None and len(values) > 0):
-                            repodata.append([str(values[int(value)][1]), item[dbfield + "__count"]])    
-                        else:
-                            repodata.append([str(value), item[dbfield + "__count"]])
-                    
-    return render_to_response('stats/repostats.html',
-        {'user': request.user, 
-         'result': repodata, 
-         'selected_menu_value': selected_menu_value,
-         'models': SELECT_MODEL.keys(),
-         'fields': fields,
-         'subfields': relational_fields,
-         'myres': isOwner(request.user.username)},
-         context_instance=RequestContext(request))
     
 def mystats (request):
     data = []
@@ -153,23 +71,114 @@ def isOwner(username):
         return True
     return False
     
+    
 def usagestats (request):
-    # Get lists of fields used in the advanced search
-    topdata = []
-    result = QueryStats.objects.filter(query__contains=':').values("query").annotate(Count("query")).order_by('-query__count')
-    if (len(result) == 0):
-        result = QueryStats.objects.values("query").annotate(Count("query")).order_by('-query__count')
-    for item in result:
-        value = urllib.unquote(item["query"])
-        topdata.append([value, item["query__count"]])       
+    """  Get usage of fields LR """
+    import sys
+    _models = [x for x in dir(sys.modules['metashare.repository.models']) if x.endswith('_model')]
+    mod = import_module("metashare.repository.models")
+    _fields = {}
+    _classes = {}
+    errors = None
+    for _model in _models:
+        # get info about classes
+        dbfields = getattr(mod, _model).__schema_classes__
+        for _class in dbfields:
+            _classes[_class] = dbfields[_class].replace("Type_model","")
+            
+        # get info about fields
+        dbfields = getattr(mod, _model).__schema_fields__
+        for _not_used, _field, _required in dbfields:
+            model_name = _model.replace("Type_model","")
+            if not _field.endswith('_set') and not model_name+" " + _field in _fields:
+                verbose_name = eval(u'{0}._meta.get_field("{1}").verbose_name'.format(_model, _field))
+                _fields[model_name+" " + _field] = [model_name, _field, verbose_name, _required, 0, 0]
+                
+    lrset = resourceInfoType_model.objects.all()
+    usageset = UsageStats.objects.values('elname', 'elparent').annotate(Count('lrid', distinct=True), \
+        Sum('count')).order_by('elparent', '-lrid__count', 'elname')        
+    if len(lrset) > 0:
+        if len(usageset) == 0:
+            usagethread = updateUsageStats(lrset, True)
+        else:
+            usagethread = updateUsageStats(lrset)
+        if usagethread != None:
+            errors = "Usage statistics updating is in progress... "+ str(usagethread.getProgress()) +"% completed"
+
+    if (len(usageset) > 0):
+        for item in usageset:
+            class_name = str(item["elparent"])
+            if class_name in _classes:
+                class_name = _classes[class_name]
+            key = str(class_name) + " " + str(item["elname"])
+            if key in _fields:
+                _fields[key][4] = item["lrid__count"]
+                _fields[key][5] = item["count__sum"]
+            #else:
+             #   errors = "Unexpected error occured during usage statistics execution"
+                
+    selected_filters = request.POST.getlist('filter')
+    fields_count = 0
+    usage_fields = {}
+    usage_filter = {"required": 0, "recommended": 0, "optional": 0, "never used": 0}
+    for key in _fields:
+        value = _fields[key]
+        _filters = []
+        if value[3] == 1:
+            _filters.append("required")
+        elif value[3] == 2:
+            _filters.append("optional")
+        elif value[3] == 3:
+            _filters.append("recommended")
+        
+        if value[5] == 0:
+            _filters.append("never used")
+        
+        #filter
+        for ifilter in _filters:
+            usage_filter[ifilter] += 1
+            
+        if len(selected_filters) > 0:
+            usedfilters = 0
+            for ifilter in selected_filters:
+                if ifilter in _filters:
+                    usedfilters += 1
+            if len(_filters) != usedfilters:
+                continue 
+            
+        if not value[0] in usage_fields:
+            usage_fields[value[0]] = [value]
+        else:
+            usage_fields[value[0]].append(value)
+        fields_count += 1
+        
+    
+    selected_class = request.POST.get('class')
+    selected_field = request.POST.get('field')
+    result = []
+    resultset = UsageStats.objects.values('text').filter(elparent=selected_class, \
+        elname=selected_field).annotate(Count('elname'), Sum('count')).order_by('-elname__count')
+    if len(resultset) > 0:
+        for item in resultset:
+            result.append([item["text"], item["elname__count"], item["count__sum"]])
+            #print "--> " +str(item["text"]) + ", "+ str(item["elname__count"]) + ", "+ str(item["count__sum"])
          
     return render_to_response('stats/usagestats.html',
-        {'user': request.user, 'result': topdata},
+        {'usage_fields': usage_fields,
+        'usage_filter': usage_filter,
+        'fields_count': fields_count,
+        'lr_count': len(lrset),
+        'selected_filters': selected_filters,
+        'selected_class': selected_class,
+        'selected_field': selected_field,
+        'result': result,
+        'errors': errors,
+        'myres': isOwner(request.user.username)},
         context_instance=RequestContext(request))
 
     
 def topstats (request):
-    """ viewing statistics about the top LR and latest queries. """
+    """ viewing statistics about the top LR and latest queries. """    
     topdata = []
     view = request.GET.get('view', 'topviewed')
     if view == "topviewed":

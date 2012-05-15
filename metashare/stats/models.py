@@ -4,6 +4,8 @@ from datetime import datetime
         
 class LRStats(models.Model):
     userid = models.CharField(blank=False, max_length=64)
+    ipaddress = models.CharField(blank=False, max_length=15)
+    geoinfo = models.CharField(blank=False, max_length=64)
     lrid = models.CharField(blank=False, max_length=64)
     sessid = models.CharField(blank=False, max_length=64)
     lasttime = models.DateTimeField(blank=False, auto_now_add=True, default=datetime.now())
@@ -16,6 +18,8 @@ class LRStats(models.Model):
 
 class QueryStats(models.Model):
     userid = models.CharField(blank=False, max_length=64)
+    ipaddress = models.CharField(blank=False, max_length=15)
+    geoinfo = models.CharField(blank=False, max_length=64)
     query = models.TextField(blank=False)
     facets = models.TextField(blank=False)
     lasttime = models.DateTimeField(blank=False, auto_now_add=True, default=datetime.now())
@@ -24,4 +28,15 @@ class QueryStats(models.Model):
     
     #def __unicode__(self):
     #    return "Q>> " +self.userid + "," + self.query + "," + str(self.lasttime)
+
+class UsageStats(models.Model):
+    lrid = models.CharField(blank=False, max_length=64)
+    elname = models.CharField(blank=False, max_length=64)
+    elparent = models.CharField(blank=False, max_length=64)
+    text = models.TextField(blank=False)
+    count = models.IntegerField(blank=False, default=1)
+    
+    #def __unicode__(self):
+    #    return "U>> " +str(self.lrid) + "," + str(self.elname) + "," + str(self.elparent) + "," +str(self.text)+ "," + str(self.count)
+
 

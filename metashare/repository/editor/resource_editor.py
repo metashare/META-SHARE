@@ -686,7 +686,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         super(ResourceModelAdmin, self).save_model(request, obj, form, change)
         #update statistics
         if hasattr(obj, 'storage_object') and obj.storage_object is not None:
-            saveLRStats("", obj.storage_object.identifier, "", UPDATE_STAT)            
+            saveLRStats("", obj.storage_object.identifier, "", UPDATE_STAT)          
         
     def change_view(self, request, object_id, extra_context=None):
         _extra_context = extra_context or {}

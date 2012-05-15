@@ -3,7 +3,7 @@
 {% block content %}
 
 <table><tr><td bgcolor=#dddddd nowrap><font size=+1>Top 10</font>&nbsp;&nbsp;</td>
-<td nowrap>&nbsp;&nbsp;<font size=+1><a href="{% url metashare.views.frontpage %}stats/repo/">Repository statistics</a></font>&nbsp;&nbsp; </td>
+<td nowrap>&nbsp;&nbsp;<font size=+1><a href="{% url metashare.views.frontpage %}stats/usage/">Usage statistics</a></font>&nbsp;&nbsp; </td>
 {% if user.username and myres %}
 <td nowrap>&nbsp;&nbsp;<font size=+1><a href="{% url metashare.views.frontpage %}stats/mystats/">My resources</a></font>&nbsp;&nbsp; </td>
 {% endif %}
@@ -57,7 +57,7 @@
   {% ifequal view "latestupdated" %}
     <td width="25%">Date</td>
   {% else %}
-    <td width="25%">Num.</td>
+    <td width="25%">Count</td>
   {% endifequal %}
 {% endifequal %}
 </tr>
@@ -65,12 +65,12 @@
 {% for stat in topdata %}
 <tr class="{% cycle odd,even %}">
 {% ifequal view "latestqueries" %}  
-   <td nowrap><a href="{% url metashare.views.frontpage %}repository/search/?{{ stat.4 }}">{{ stat.0 }}</a>
+   <td nowrap><a href="{% url metashare.views.frontpage %}repository/search/?{{ stat.4 }}"><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/zoom.png"> <font color=black>{{ stat.0 }}</font></a>
    {% ifnotequal stat.1 "" %}  
    {{ stat.1 }}
    {% endifnotequal %}
    </td>
-   <td width=100%><i>{{ stat.3 }}</i></td>
+   <td width=100%><i><font color=black>{{ stat.3 }}</font></i></td>
    <td nowrap>{{ stat.2 }}</td>
 {% else %} 
    <th style="text-align:right;" nowrap>{{ stat.0 }}</th>
@@ -79,7 +79,7 @@
    {% ifequal view "latestupdated" %}   
         {{ stat.2 }}
    {% else %}
-        <b>{{ stat.2 }}</b>
+        <b><font color=black>{{ stat.2 }}</font></b>
    {% endifequal %}
    </td>
 {% endifequal %}

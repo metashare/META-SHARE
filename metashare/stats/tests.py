@@ -1,10 +1,11 @@
+import metashare
 import django.test
 from django.test.client import Client
 from django.contrib.auth.models import User, Group
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.admin.sites import LOGIN_FORM_KEY
 from metashare.settings import DJANGO_BASE, DJANGO_URL, ROOT_PATH
-from metashare.stats.model_utils import saveLRStats, getLRLast, saveQueryStats, getLastQuery, UPDATE_STAT, VIEW_STAT, RETRIEVE_STAT, DOWNLOAD_STAT
+from metashare.stats.model_utils import updateUsageStats, saveLRStats, getLRLast, saveQueryStats, getLastQuery, UPDATE_STAT, VIEW_STAT, RETRIEVE_STAT, DOWNLOAD_STAT
 import urllib2
 from urllib import urlencode
 
@@ -101,7 +102,7 @@ class StatsTest(django.test.TestCase):
         client = Client()
         response = client.get('/{0}stats/get'.format(DJANGO_BASE))
         self.assertEquals(200, response.status_code)
-
+    
     def testMyResources(self):
         client = self.client_with_user_logged_in(StatsTest.editor_login)
         xmlfile = open(TESTFIXTURES_ZIP, 'rb')
@@ -131,3 +132,18 @@ class StatsTest(django.test.TestCase):
                 .format(user_credentials, response)
         return client
 
+    
+    def testUsage(self):
+        # checking if there are the usage statistics
+        
+        lrset = metashare.repository.models.resourceInfoType_model.objects.all()
+        usagethread = updateUsageStats(lrset, True)
+        usagethread.join()
+        client = Client()
+        response = client.get('/{0}stats/usage'.format(DJANGO_BASE))
+        if response.status_code != 200:
+            print Exception, 'could not get usage stats: {}% completed\nresponse was: {}'\
+                .format(usagethread.getProgress(), response)
+        else:
+            self.assertContains(response, "identificationInfo")
+    
