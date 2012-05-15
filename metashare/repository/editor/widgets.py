@@ -156,9 +156,9 @@ class LangDictWidget(DictWidget):
 
     def _get_dict_entry(self, field_name, idx, key, value):
         if not key:
-            # by default we (blindly) propose the ISO 639-2 language code for an
-            # undetermined language
-            key = 'und'
+            # by default we (blindly) propose the ISO 639-1 language code for
+            # English (as per WP7 request in issue #206)
+            key = 'en'
         return super(LangDictWidget, self)._get_dict_entry(field_name, idx, key,
                                                            value)
 

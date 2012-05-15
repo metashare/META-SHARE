@@ -16,7 +16,7 @@ div#banner_top{
 }
 div#banner_top div#inner{	
 	padding-top: 5px;
-	min-width: 960px;
+	min-width: 1024px;
 	max-width: 1440px;
 	margin: auto;
 	text-align: center;
