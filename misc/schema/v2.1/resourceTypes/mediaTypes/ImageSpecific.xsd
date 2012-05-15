@@ -161,7 +161,7 @@
 				<xs:annotation>
 					<xs:documentation>Groups together information on the image resolution</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-many</relation>
+						<relation>many-to-many</relation>
 						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>

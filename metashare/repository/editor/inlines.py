@@ -78,8 +78,12 @@ class ReverseInlineFormSet(BaseModelFormSet):
             # its forms may be empty
             form.empty_permitted = getattr(self, 'can_delete', False)
 
-
+    # pylint: disable-msg=E1101
     def save_new_objects(self, commit=True):
+        '''
+        This is identical with the super implementation
+        except for the "and form.empty_permitted" condition
+        '''
         self.new_objects = []
         for form in self.extra_forms:
             if not form.has_changed() and form.empty_permitted:

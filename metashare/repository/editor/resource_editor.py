@@ -30,7 +30,7 @@ from django.http import Http404
 from metashare.repository.editor.forms import StorageObjectUploadForm
 from django.utils.html import escape
 from django.utils.translation import ugettext as _
-from metashare.repository.editor.lookups import MembershipLookup
+from metashare.repository.editor.lookups import MembershipDummyLookup
 from metashare.repository.editor.widgets import OneToManyWidget
 import datetime
 
@@ -727,7 +727,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
 class LicenceForm(forms.ModelForm):
     class Meta:
         model = licenceInfoType_model
-        widgets = {'membershipInfo': OneToManyWidget(lookup_class=MembershipLookup)}
+        widgets = {'membershipInfo': OneToManyWidget(lookup_class=MembershipDummyLookup)}
 
 class LicenceModelAdmin(SchemaModelAdmin):
     form = LicenceForm

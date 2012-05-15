@@ -50,7 +50,7 @@
 				<xs:annotation>
 					<xs:documentation>SizeInfo Element for Audio parts of a resource</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-many</relation>
+						<relation>many-to-many</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -86,7 +86,7 @@
 					<xs:documentation>Groups information on the annotated part(s) of a resource</xs:documentation>
 					<xs:appinfo>
 						<recommended>true</recommended>
-						<relation>many-to-many</relation>
+						<relation>one-to-many</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>

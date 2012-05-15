@@ -92,7 +92,8 @@
 				<xs:annotation>
 					<xs:documentation>Groups information on the size of the resource or of resource parts</xs:documentation>
 					<xs:appinfo>
-						<relation>many-to-many</relation>
+						<relation>one-to-many</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -101,6 +102,7 @@
 					<xs:documentation>Groups together information on the duration of effective speech</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-many</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -109,6 +111,7 @@
 					<xs:documentation>Groups together information on the size of audio parts; for silences, music etc.</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-many</relation>
+						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -118,7 +121,7 @@
 		<xs:annotation>
 			<xs:documentation>Groups together information on the duration of effective speech</xs:documentation>
 			<xs:appinfo>
-				<relation>one-to-one</relation>
+				<render-short>{size} {durationUnit}</render-short>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
@@ -151,7 +154,7 @@
 		<xs:annotation>
 			<xs:documentation>Groups together information on the size of audio parts; for silences, music etc.</xs:documentation>
 			<xs:appinfo>
-				<relation>one-to-one</relation>
+				<render-short>{size} {durationUnit}</render-short>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
