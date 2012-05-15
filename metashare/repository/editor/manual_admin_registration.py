@@ -9,8 +9,7 @@ from metashare.repository.models import resourceInfoType_model, \
     metadataInfoType_model, communicationInfoType_model, \
     validationInfoType_model, relationInfoType_model, \
     foreseenUseInfoType_model, corpusMediaTypeType_model, \
-    corpusTextInfoType_model, corpusVideoInfoType_model, audioSizeInfoType_model, \
-    durationOfAudioInfoType_model, durationOfEffectiveSpeechInfoType_model, \
+    corpusTextInfoType_model, corpusVideoInfoType_model, \
     textNumericalFormatInfoType_model, videoClassificationInfoType_model, \
     imageClassificationInfoType_model, \
     participantInfoType_model, corpusAudioInfoType_model,\
@@ -24,10 +23,9 @@ from metashare.repository.models import resourceInfoType_model, \
     lexicalConceptualResourceAudioInfoType_model,\
     lexicalConceptualResourceVideoInfoType_model,\
     lexicalConceptualResourceImageInfoType_model, toolServiceInfoType_model,\
-    personInfoType_model, licenceInfoType_model
+    licenceInfoType_model
 from metashare.repository.editor.superadmin import SchemaModelAdmin
 from metashare.repository.editor import admin_site as editor_site
-from metashare.repository.editor.corpus_editor import CorpusAudioForm
 from metashare.repository.editor.resource_editor import ResourceModelAdmin, \
     LicenceModelAdmin
 
@@ -57,63 +55,21 @@ class LanguageDescriptionInfoAdmin(SchemaModelAdmin):
 
 
 class CorpusAudioModelAdmin(SchemaModelAdmin):
-    form = CorpusAudioForm
     show_tabbed_fieldsets = True
-    
-    def __init__(self, model, admin_site):
-        super(CorpusAudioModelAdmin, self).__init__(model, admin_site)
-        try:
-            for instance in self.inline_instances:
-                if instance.model().__class__.__name__ == 'audioSizeInfoType_model':
-                    self.inline_instances.remove(instance)
-                    break
-        except:
-            pass
-        
-    def build_fieldsets_from_schema(self, include_inlines=False, inlines=()):
-        fieldsets = super(CorpusAudioModelAdmin, self).build_fieldsets_from_schema(include_inlines, inlines)
-        for fieldset in fieldsets:
-            # name = fieldset[0]
-            values = fieldset[1]
-            try:
-                field_list = values['fields']
-                if u'_audiosizeinfotype_model_set' in field_list:
-                    index = field_list.index(u'_audiosizeinfotype_model_set')
-                    field_list.remove(u'_audiosizeinfotype_model_set')
-                    # pylint: disable-msg=E1101
-                    for new_field in self.form.declared_fields:
-                        field_list.insert(index, new_field)
-                        index = index + 1
-            except:
-                continue
-                
-        return fieldsets
-    
-    def save_model(self, request, obj, form, change):
-        super(CorpusAudioModelAdmin, self).save_model(request, obj, form, change)
-        form.save_audio_sizes()
 
             
 # Models which are always rendered inline so they don't need their own admin form:
 purely_inline_models = (
     identificationInfoType_model,
-#    distributionInfoType_model,
     metadataInfoType_model,
     communicationInfoType_model,
     validationInfoType_model,
     relationInfoType_model,
-#    licenceInfoType_model,
     foreseenUseInfoType_model,
     corpusMediaTypeType_model,
- #   corpusTextInfoType_model,
- #   corpusVideoInfoType_model,
-    audioSizeInfoType_model,
-    durationOfAudioInfoType_model,
-    durationOfEffectiveSpeechInfoType_model,
     textNumericalFormatInfoType_model,
     videoClassificationInfoType_model,
     imageClassificationInfoType_model,
-#    languageVarietyInfoType_model,
     participantInfoType_model,
 )
 

@@ -8,7 +8,10 @@ from metashare.repository.models import personInfoType_model, \
     actorInfoType_model, documentInfoType_model, documentationInfoType_model,\
     projectInfoType_model, organizationInfoType_model,\
     membershipInfoType_model, \
-    targetResourceInfoType_model
+    targetResourceInfoType_model, languageVarietyInfoType_model, \
+    sizeInfoType_model, annotationInfoType_model, videoFormatInfoType_model, \
+    imageFormatInfoType_model, resolutionInfoType_model, \
+    audioSizeInfoType_model
 
 class PersonLookup(ModelLookup):
     model = personInfoType_model
@@ -93,13 +96,65 @@ class DocumentationLookup(ModelLookup):
             print u'No results'
         return results
 
-class MembershipLookup(ModelLookup):
+class MembershipDummyLookup(ModelLookup):
     '''
         Dummy class for use with OneToOneWidget.
         Should be removed when unnecessary dependencies are
         removed from OneToOneWidget
     '''
     model = membershipInfoType_model
+
+class AnnotationLookup(ModelLookup):
+    '''
+        Dummy class for use with OneToOneWidget.
+        Should be removed when unnecessary dependencies are
+        removed from OneToOneWidget
+    '''
+    model = annotationInfoType_model
+
+class VideoFormatLookup(ModelLookup):
+    '''
+        Dummy class for use with OneToOneWidget.
+        Should be removed when unnecessary dependencies are
+        removed from OneToOneWidget
+    '''
+    model = videoFormatInfoType_model
+
+class ImageFormatLookup(ModelLookup):
+    '''
+        Dummy class for use with OneToOneWidget.
+        Should be removed when unnecessary dependencies are
+        removed from OneToOneWidget
+    '''
+    model = imageFormatInfoType_model
+
+class ResolutionDummyLookup(ModelLookup):
+    '''
+        Dummy class for use with OneToOneWidget.
+        Should be removed when unnecessary dependencies are
+        removed from OneToOneWidget
+    '''
+    model = resolutionInfoType_model
+
+class LanguageVarietyDummyLookup(ModelLookup):
+    '''
+        Dummy class for use with OneToOneWidget.
+        Should be removed when unnecessary dependencies are
+        removed from OneToOneWidget
+    '''
+    model = languageVarietyInfoType_model
+
+class SizeDummyLookup(ModelLookup):
+    '''
+        Dummy class for use with OneToOneWidget.
+        Should be removed when unnecessary dependencies are
+        removed from OneToOneWidget
+    '''
+    model = sizeInfoType_model
+
+class AudioSizeDummyLookup(ModelLookup):
+    model = audioSizeInfoType_model
+
 
 class ProjectLookup(ModelLookup):
     model = projectInfoType_model
@@ -112,7 +167,7 @@ class ProjectLookup(ModelLookup):
         def matches(project):
             'Helper function to group the search code for a project'
             for multifield in (project.projectName, project.projectShortName):
-                for field in multifield:
+                for field in multifield.itervalues():
                     if lcterm in field.lower():
                         return True
             return False
@@ -129,8 +184,8 @@ class ProjectLookup(ModelLookup):
         return results
     
     def get_item_label(self, item):
-        short_names = ''.join(item.projectShortName)
-        names = ''.join(item.projectName)
+        short_names = ''.join(item.projectShortName.itervalues())
+        names = ''.join(item.projectName.itervalues())
         res = u'%s: %s' % (short_names, names)
         return res
     
@@ -148,7 +203,7 @@ class OrganizationLookup(ModelLookup):
         def matches(org):
             'Helper function to group the search code for a person'
             for multifield in (org.organizationShortName, org.organizationName):
-                for field in multifield:
+                for field in multifield.itervalues():
                     if lcterm in field.lower():
                         return True
             return False
@@ -164,8 +219,8 @@ class OrganizationLookup(ModelLookup):
         return results
 
     def get_item_label(self, item):
-        short_names = ''.join(item.organizationShortName)
-        names = ''.join(item.organizationName)
+        short_names = ''.join(item.organizationShortName.itervalues())
+        names = ''.join(item.organizationName.itervalues())
         res = u'%s: %s' % (short_names, names)
         return res
     

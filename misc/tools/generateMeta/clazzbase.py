@@ -793,18 +793,23 @@ class Clazz(object):
         else:
             if not member.is_unbounded():
                 field_type = member.child.getAppInfo('relation')
-                if field_type and (field_type == 'many-to-many' or
-                  field_type == 'one-to-many'):
-                    logging.warn(('wrong {} declaration for member {} '+ \
-                        'with at most one element').format(field_type, member))
-                # this is a one-to-one relation, maybe optional
-                #options = options + ', unique=True'
+                model_field_name = 'OneToOneField'
+                if field_type:
+                    if field_type == 'many-to-one':
+                        # A reusable component which can occur only once in this context:
+                        model_field_name = 'ForeignKey'
+                    elif field_type == 'many-to-many' or field_type == 'one-to-many':
+                        # Complain but default to one-to-one
+                        logging.warn(('wrong {} declaration for member {} '+ \
+                                      'with at most one element').format(field_type, member))
+                # this is a many-to-one or a one-to-one relation, maybe optional
                 if not member.is_required():
                     options += 'blank=True, null=True, on_delete=models.SET_NULL, '
 
+
                 self.wrtmodels(
-                    '    %s = models.OneToOneField("%s_model", %s)\n' % (
-                        name, data_type, options, ))
+                    '    %s = models.%s("%s_model", %s)\n' % (
+                        name, model_field_name, data_type, options, ))
                 self.wrtforms(
                     '    %s = forms.MultipleChoiceField(%s_model.objects.all())\n' % (
                         name, data_type, ))
