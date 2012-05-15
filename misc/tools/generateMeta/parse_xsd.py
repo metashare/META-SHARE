@@ -72,6 +72,7 @@ ElementDict = OrderedDict()
 
 NamespacesDict = OrderedDict()
 Targetnamespace = ""
+SchemaVersion = ""
 
 NameTable = OrderedDict({
     'type': 'type_',
@@ -1134,7 +1135,7 @@ class XschemaHandler(handler.ContentHandler):
         return keys[0]
 
     def startElement(self, name, attrs):
-        global Targetnamespace, NamespacesDict, XsdNameSpace
+        global Targetnamespace, SchemaVersion, NamespacesDict, XsdNameSpace
         logging.debug("Start element: %s %s" % (name, repr(attrs.items())))
         if len(self.stack) == 0 and self.firstElement:
             self.firstElement = False
@@ -1161,6 +1162,8 @@ class XschemaHandler(handler.ContentHandler):
                     NamespacesDict[value] = nameSpace
                 elif name == 'targetNamespace':
                     Targetnamespace = value
+                elif name == 'version':
+                    SchemaVersion = value
         elif (name == ElementType or
             ((name == ComplexTypeType) and (len(self.stack) == 1))
             ):
