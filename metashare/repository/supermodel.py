@@ -37,6 +37,10 @@ REQUIRED = 1
 OPTIONAL = 2
 RECOMMENDED = 3
 
+# template of a META-SHARE metadata XML schema URL
+SCHEMA_URL = 'http://metashare.ilsp.gr/META-XMLSchema/v{0}/' \
+  'META-SHARE-Resource.xsd'
+
 XML_DECL = re.compile(r'\s*<\?xml version=".+" encoding=".+"\?>\s*\n?',
   re.I|re.S|re.U)
 
@@ -326,11 +330,16 @@ class SchemaModel(models.Model):
 
         # Fix namespace attributes for the resourceInfo root element.
         if _root.tag == 'resourceInfo':
-            _root.attrib['xmlns'] = "http://www.ilsp.gr/META-XMLSchema"
+            # only import on demand (metashare.repository.models depends on
+            # metashare.repository.supermodel, giving a circular dependency if
+            # importin 'globally')
+            from metashare.repository.models import SCHEMA_NAMESPACE, \
+                SCHEMA_VERSION
+            _root.attrib['xmlns'] = SCHEMA_NAMESPACE
             _root.attrib['xmlns:xsi'] = "http://www.w3.org/2001/" \
               "XMLSchema-instance"
-            _root.attrib['xsi:schemaLocation'] = "http://www.ilsp.gr/META-" \
-              "XMLSchema META-SHARE-Resource.xsd"
+            _root.attrib['xsi:schemaLocation'] = "{} {}" \
+              .format(SCHEMA_NAMESPACE, SCHEMA_URL.format(SCHEMA_VERSION))
 
         # We first serialize all schema attributes.  For the moment, we just
         # assume that attributes are Strings only.  This holds for the v1.1
