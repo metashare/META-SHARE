@@ -31,6 +31,11 @@ EMAILADDRESS_VALIDATOR = RegexValidator(r'[^@]+@[^\.]+\..+',
 HTTPURI_VALIDATOR = RegexValidator(r'(https?://.*|ftp://.*|www*)',
   'Not a valid httpURI value.', ValidationError)
 
+# namespace of the META-SHARE metadata XML Schema
+SCHEMA_NAMESPACE = 'http://www.ilsp.gr/META-XMLSchema'
+# version of the META-SHARE metadata XML Schema
+SCHEMA_VERSION = '2.1'
+
 
 # pylint: disable-msg=C0103
 class resourceInfoType_model(SchemaModel):
@@ -790,13 +795,13 @@ class documentInfoType_model(documentationInfoType_model):
       help_text='The title of the document reporting on the resource',
       )
 
-    author = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=4, max_length=100), 
+    author = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=4, max_length=1000), 
       verbose_name='Author', 
       help_text='The name(s) of the author(s), in the format described i' \
       'n the document',
       blank=True, )
 
-    editor = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=5, max_length=100), 
+    editor = MultiTextField(max_length=200, widget=MultiFieldWidget(widget_id=5, max_length=200), 
       verbose_name='Editor', 
       help_text='The name of the editor as mentioned in the document',
       blank=True, )
@@ -807,7 +812,7 @@ class documentInfoType_model(documentationInfoType_model):
       'e year it was written',
       blank=True, null=True, )
 
-    publisher = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=6, max_length=100), 
+    publisher = MultiTextField(max_length=200, widget=MultiFieldWidget(widget_id=6, max_length=200), 
       verbose_name='Publisher', 
       help_text='The name of the publisher',
       blank=True, )
@@ -1184,8 +1189,8 @@ class annotationInfoType_model(SchemaModel):
 
     tagsetLanguageId = models.CharField(
       verbose_name='Tagset language id', 
-      help_text='The identifier ofthe tagset language as expressed in th' \
-      'e values of IETF BP47',
+      help_text='The identifier of the tagset language as expressed in t' \
+      'he values of IETF BP47',
       blank=True, max_length=20, )
 
     tagsetLanguageName = models.CharField(
@@ -5382,7 +5387,7 @@ NGRAMINFOTYPE_BASEITEM_CHOICES = _make_choices_from_list([
 # pylint: disable-msg=C0103
 class ngramInfoType_model(SchemaModel):
     """
-    Groups information specific ton-gram resources (e.g. range of
+    Groups information specific to n-gram resources (e.g. range of
     n-grams, base item etc.)
     """
 
@@ -7287,8 +7292,8 @@ class toolServiceInfoType_model(resourceComponentTypeType_model):
 
     resourceType = models.CharField(
       verbose_name='Resource', 
-      help_text='The type of the resource that a tool or service takes a' \
-      's input or produces as output',
+      help_text='The type of the resource that atool or service takes as' \
+      ' input or produces as output',
       default="toolService", editable=False, max_length=30, )
 
     toolServiceType = models.CharField(
