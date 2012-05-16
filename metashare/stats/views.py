@@ -160,8 +160,10 @@ def usagestats (request):
         elname=selected_field).annotate(Count('elname'), Sum('count')).order_by('-elname__count')
     if len(resultset) > 0:
         for item in resultset:
-            result.append([item["text"], item["elname__count"], item["count__sum"]])
-            #print "--> " +str(item["text"]) + ", "+ str(item["elname__count"]) + ", "+ str(item["count__sum"])
+            text = item["text"]
+            if selected_field in NOACCESS_FIELDS:
+                text = "<HIDDEN VALUE>"   
+            result.append([text, item["elname__count"], item["count__sum"]])
          
     return render_to_response('stats/usagestats.html',
         {'usage_fields': usage_fields,
@@ -207,6 +209,20 @@ def topstats (request):
             except: 
                 LOGGER.debug("Warning! The object "+item['lrid']+ " has not been found.")
 
+    if view == "topqueries":
+        data = getTopQueries(10)
+        for item in data:
+            url = "q=" + item['query']
+            query = urllib.unquote(item['query'])
+            facets = ""
+            if (item['facets'] != ""):
+                facetlist = eval(item['facets'])
+                for face in facetlist:
+                    url += "&selected_facets=" + face
+                    facets += ", " + face.replace("Filter_exact:",": ")
+            topdata.append([query, facets, pretty_timeago(item['lasttime']), item['query_count'], url])       
+             
+    
     if view == "latestqueries":
         data = getLastQuery(10)
         for item in data:
@@ -259,11 +275,11 @@ def getstats (request):
         qltavg = QueryStats.objects.filter(lasttime__startswith=currdate, exectime__lt = int(extimes["exectime__avg"])).count()
     else:
         extimes["exectime__avg"] = 0
-        
+     
     return HttpResponse("["+JSONEncoder().encode({"date": str(currdate), "lrpublish": lrpublish, "user": \
         user, "lrupdate": lrupdate, "lrview": lrview, "lrdown": lrdown, "queries": queries, \
         "qexec_time_avg": extimes["exectime__avg"], "qlt_avg": qltavg})+"]")
-
+  
 
 # pylint: disable-msg=R0911
 def pretty_timeago(timein=False):

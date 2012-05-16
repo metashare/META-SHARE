@@ -143,6 +143,5 @@ def import_from_file(filehandle, descriptor, targetstatus, owner_id=None):
                 resource = import_from_string(xml_string, targetstatus, owner_id)
                 imported_resources.append(resource)
             except Exception as problem:
-                print str(descriptor) + " " + str(problem)
                 erroneous_descriptors.append((xml_name, problem))
     return imported_resources, erroneous_descriptors

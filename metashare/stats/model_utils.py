@@ -26,6 +26,7 @@ logging.basicConfig(level=LOG_LEVEL)
 LOGGER = logging.getLogger('metashare.stats.model_utils')
 LOGGER.addHandler(LOG_HANDLER)
 
+
 def saveLRStats(resource, userid, sessid, action): 
     """
     this function saves the actions on a resource (it takes into account the session to avoid to increment more than one time the stats counter)
@@ -121,6 +122,9 @@ def saveQueryStats(query, facets, userid, found, exectime=0):
     stat.save()
     LOGGER.debug('STATS: Query {0}.'.format(query))
 
+def getTopQueries(limit):
+    return QueryStats.objects.values('query', 'facets','lasttime').annotate(query_count=Count('query'), facets_count=Count('facets')).order_by('query_count','facets_count')[:limit]
+ 
 def getLastQuery (limit):
     return QueryStats.objects.values('query', 'facets', 'lasttime', 'found').order_by('-lasttime')[:limit]
  
