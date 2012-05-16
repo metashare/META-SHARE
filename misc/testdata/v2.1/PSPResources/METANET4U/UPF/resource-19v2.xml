@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>Galician LMF Apertium Dictionary</resourceName>
       <description>This is the LMF version of the Galician Apertium dictionary.       Monolingual dictionaries for Spanish, Catalan, Galician and Euskera have been generated from the Apertium expanded       lexicons of the es-ca (for both Spanish and Catalan) es-gl (for Galician) and eu-es (for Basque).       Apertium is a free/open-source machine translation platform, initially aimed at       related-language pairs but recently expanded to deal with more divergent language pairs (such as English-Catalan).       The platform provides: a language-independent machine translation engine; tools to manage the linguistic data necessary to build a machine       translation system for a given language pair and linguistic data for a growing number of language pairs.</description>

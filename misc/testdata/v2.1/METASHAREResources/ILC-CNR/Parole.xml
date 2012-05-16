@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>Corpus Parole</resourceName>
       <description>The PAROLE Italian Corpus comprises 3,135,651 words collected from four different domains:newspapers: 2,179,800 words from La Stampa, La Repubblica, Il Corriere della Sera, L’Unione Sarda, Il Sole 24ore, between 1992 and 1996, periodicals: 143,810 words from Casaviva, 100cose, Epoca, Espansione, Grazia, Panorama, Starbene, Storia Illustrata, Zerouno, between 1985 and 1988, books: 564,964 words, between 1970 and 1989, miscellaneous: 247,077 words from CNR documents, Patents, Maritime documents, Theater, between 1987 and 1997.</description>

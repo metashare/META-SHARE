@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>TextPro</resourceName>
       <description>TextPro is a suite of modular Natural Language Processing tools for analysis of Italian and English texts. The suite has been designed so as to integrate and reuse state of the art NLP components developed by researchers at FBK. The current version of the tool suite provides functions ranging from tokenization to chunking and Named Entity Recognition (NER).</description>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>PAROLE corpus</resourceName>
       <description>General language corpus of 20 million words of modern Greek based on common specifications for the 14 languages of the european project. The selection of texts was based on common parameters of time production (after 1970) and of proportionate distribution of the textual material along the publication medium (Book, Newspaper, Magazine and Various) - all the texts are structurally annotated and a subset of 250K words is linguistically annotated at belowPoS level.</description>

@@ -49,6 +49,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
     class Media:
         js = (settings.MEDIA_URL + 'js/addCollapseToAllStackedInlines.js',
               settings.MEDIA_URL + 'js/jquery-ui.min.js',
+              settings.MEDIA_URL + 'js/help.js',
               settings.ADMIN_MEDIA_PREFIX + 'js/collapse.min.js',)
         css = {'all': (settings.ADMIN_MEDIA_PREFIX + 'css/themes/smoothness/jquery-ui.css',)}
 
@@ -274,6 +275,8 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             'errors': helpers.AdminErrorList(form, formsets),
             'root_path': self.admin_site.root_path,
             'app_label': opts.app_label,
+            'kb_link': settings.KNOWLEDGE_BASE_URL,
+            'comp_name': _('%s') % force_unicode(opts.verbose_name),
         }
         context.update(extra_context or {})
         return self.render_change_form(request, context, form_url=form_url, add=True)
@@ -403,6 +406,8 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             'errors': helpers.AdminErrorList(form, formsets),
             'root_path': self.admin_site.root_path,
             'app_label': opts.app_label,
+            'kb_link': settings.KNOWLEDGE_BASE_URL,
+            'comp_name': _('%s') % force_unicode(opts.verbose_name),
         }
         context.update(extra_context or {})
         return self.render_change_form(request, context, change=True, obj=obj)
@@ -524,10 +529,11 @@ class OrderedFieldset(helpers.Fieldset):
                         raise InlineError('Incorrect inline: no opts.parent_fk_name or formset.prefix found')
 
 class OrderedElement():
-    def __init__(self, fieldline=None, inline=None):
+    def __init__(self, fieldline=None, inline=None, help_link=None):
         if fieldline:
             self.is_field = True
             self.fieldline = fieldline
+            self.help_link = help_link
         else:
             self.is_field = False
             self.inline = inline

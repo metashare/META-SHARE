@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>ROMANIAN TEXTUAL ENTAILMENT CORPUS</resourceName>
       <description>The corpus consists of 200 pairs of text-hypothesis in Romanian for which we know the human decision about entailment relation. The text-hypothesis pairs are uniform distributed into three classes of decisions: 72 Entailment, 60 Contradiction and 78 Unknown.</description>

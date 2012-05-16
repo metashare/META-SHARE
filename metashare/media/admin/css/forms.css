@@ -352,3 +352,12 @@ fieldset.monospace textarea {
 .empty-form {
     display: none;
 }
+
+.helpLink {
+	color: blue;
+}
+
+.helpLink:hover {
+	color: red;
+	cursor: pointer;
+}
