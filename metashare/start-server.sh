@@ -21,4 +21,4 @@ sleep 5 # give SOLR time to start up before trying to verify that it is there
 
 # Start the Django + lighttpd server:
 python2.7 manage.py runfcgi host=localhost port=9190 method=threaded pidfile=$DJANGO_PID
-lighttpd -f /opt/metashare_git/META-SHARE-Software/metashare/lighttpd/metashare.conf
+lighttpd -f /opt/metashare_git/META-SHARE/metashare/lighttpd/metashare.conf
