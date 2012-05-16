@@ -149,12 +149,12 @@ class SchemaModel(models.Model):
         abstract = True
 
     @classmethod
-    def is_required_field(self, name):
+    def is_required_field(cls, name):
         """
         Checks whether the field with the given name is a required field.
         """
         # pylint: disable-msg=E1101
-        _fields = self.get_fields()
+        _fields = cls.get_fields()
         return name in _fields['required']
 
     @classmethod
