@@ -490,14 +490,19 @@ class SchemaModel(models.Model):
                             # language code key
                             _element.set('lang', _sub_value[0])
                             _element.text = SchemaModel._python_to_xml(
-                                                                _sub_value[1])
-                                                                
-                            _element.required = self.is_required_field(_model_field)
-                            
+                                                                _sub_value[1])                            
+                            if self.is_required_field(_model_field):
+                                
+                                _element.required = self.is_required_field(_model_field)
+                            else:
+                                _element.required = 0                            
                         else:
                             _element.text = SchemaModel._python_to_xml(
-                                                                _sub_value)
-                            _element.required = self.is_required_field(_model_field)
+                                                                _sub_value)                            
+                            if self.is_required_field(_model_field):
+                                _element.required = self.is_required_field(_model_field)
+                            else:
+                                _element.required = 0
                         _current_node.append(_element)
 
         # Return root node of the ElementTree; can be converted to String
