@@ -61,7 +61,7 @@
 	{% endfor %}</ul>
         {% endif %}
 
-    <!-- Content -->
+    {# Content #}{% with help_icon_url=MEDIA_URL|add:"css/sexybuttons/images/icons/silk/help.png" %}
     <div id="content" class="{% block coltype %}colM{% endblock %}">
         {% block pretitle %}{% endblock %}
         {% block content_title %}{% if title %}<h1 class="customtitle">{{ title }}</h1><span class="helpLink" kbbase="{{ kb_link }}" kbcomp="{{ comp_name }}"><img class="help_icon" src="{{ help_icon_url }}" kbbase="{{ kb_link }}" kbcomp="{{ comp_name }}"></img></span><div style="clear: both"></div>{% endif %}{% endblock %}
@@ -72,7 +72,7 @@
         {% block sidebar %}{% endblock %}
         <br class="clear" />
     </div>
-    <!-- END Content -->
+    {# END Content #}{% endwith %}
 
     {% block footer %}<div id="footer"></div>{% endblock %}
 </div>

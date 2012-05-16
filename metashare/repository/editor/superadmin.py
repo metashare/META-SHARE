@@ -277,7 +277,6 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             'app_label': opts.app_label,
             'kb_link': settings.KNOWLEDGE_BASE_URL,
             'comp_name': _('%s') % force_unicode(opts.verbose_name),
-            'help_icon_url': u'%s%s' % (settings.MEDIA_URL, "css/sexybuttons/images/icons/silk/help.png"),
         }
         context.update(extra_context or {})
         return self.render_change_form(request, context, form_url=form_url, add=True)
@@ -409,7 +408,6 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             'app_label': opts.app_label,
             'kb_link': settings.KNOWLEDGE_BASE_URL,
             'comp_name': _('%s') % force_unicode(opts.verbose_name),
-            'help_icon_url': u'%s%s' % (settings.MEDIA_URL, "css/sexybuttons/images/icons/silk/help.png"),
         }
         context.update(extra_context or {})
         return self.render_change_form(request, context, change=True, obj=obj)
