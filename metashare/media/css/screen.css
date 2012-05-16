@@ -16,7 +16,7 @@ div#banner_top{
 }
 div#banner_top div#inner{	
 	padding-top: 5px;
-	min-width: 960px;
+	min-width: 1024px;
 	max-width: 1440px;
 	margin: auto;
 	text-align: center;
@@ -497,15 +497,11 @@ div.less_details{
 }
 
 /*filters separate box*/
-div.filters_box{
-	width: 20%;
+div.left_box{
+	width: 300px;
     	position: relative;
-	background-color: white;
-	padding: 20px 20px 20px 20px;	
-	-webkit-box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
-	-moz-box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
-	box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
-    	float: left;
+	float: left;
+	display:block;
 }
 /*end filters separate box*/
 
