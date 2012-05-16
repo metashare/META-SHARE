@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>Serbian Lemmatized and PoS Annotated Corpus</resourceName>
       <description>The Serbian Lematized and PoS Annotated Corpus consists of a sample of various texts from SrpKor. It is lemmatized and PoS tagged using TreeTagger. It consists of: daily news published in newspaper "Politika" in december 2009 (1,002,739 words), newspaper feuilletons (1,010,676) published in newspapers "Politika" (2001-2003) and "Danas" (2002-2006), fiction written by Serbian authors in 20th century (869,445), various scientific texts from various domains (both humanities and sciences) (773,119), and legislative texts (107,373). Total size of corpus is 3,763,352 words. More about the content of this corpus can be found at: http://www.korpus.matf.bg.ac.rs/SrpLemKor/SrpLemKor_2011_11.pdf</description>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>Multilingual Edition of Verne's Novel "Around the World in 80 Days"</resourceName>
       <description>This edition contains 17 editions of Jules Verne's novel "Around the World in 80 Days" - French original and 16 translations. The alignment was performed on the subsentencial level. Texts are segment and aligned automatically and then manually checked to obtain one-to-one alignment (in most of the cases). In this edition all translations are aligned with either French, English or Serbian version - there is a total of 17 aligned texts. All aligned texts are in TMX format. More about the content of this corpus can be found at: http://www.korpus.matf.bg.ac.rs/Verne80days/Verne80days_2011_11.pdf</description>

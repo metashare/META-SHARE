@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>Bulgarian Part-of–Speech Corpus</resourceName>
       <description>The Bulgarian Part-of–Speech Corpus (BulPosCor) is derived from the Brown Corpus of Bulgarian, automatically annotated respectively with PoS tags and manually disambiguated. The corpus for annotation was built by selecting portions of 150+ words from each sample from the Brown Corpus of Bulgarian.  The automatic grammatical annotation of the corpus employed the Bulgarian Grammar Dictionary containing about 85 000 words and over 1.5 million word forms specified with grammatical characteristics. 

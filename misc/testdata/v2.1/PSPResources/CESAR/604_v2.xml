@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>French-Serbian Aligned Corpus</resourceName>
       <description>The corpus includes French or Serbian source literary and newspaper texts and their translations.  The alignment was performed on the subsentencial level. Texts are segment and aligned automatically and then manually checked to obtain one-to-one alignment (in most of the cases). The corpus contains 25 literary texts: 22 French originals with Serbian translation (one with two translations), 2 Serbian originals with French translations, and one English novel translated to French and Serbian. The corpus also contains 15 articles from one issue of "Le monde diplomatique" from 2001. More about the content of this corpus can be found at: http://www.korpus.matf.bg.ac.rs/SrpFranKor/SrpFranKor_2011_11.pdf</description>
