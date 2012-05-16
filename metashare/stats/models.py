@@ -32,8 +32,8 @@ class QueryStats(models.Model):
 class UsageStats(models.Model):
     lrid = models.CharField(blank=False, max_length=64)
     elname = models.CharField(blank=False, max_length=64)
-    elparent = models.CharField(blank=False, max_length=64)
-    text = models.TextField(blank=False)
+    elparent = models.CharField(blank=True, max_length=64)
+    text = models.TextField(blank=True)
     count = models.IntegerField(blank=False, default=1)
     
     #def __unicode__(self):

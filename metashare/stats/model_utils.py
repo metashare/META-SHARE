@@ -141,15 +141,12 @@ def _update_usage_stats(lrid, element_tree):
             if (item == None or item[0] == None):
                 continue
             if not isinstance(item[0], basestring):
-                elname = item[0][0]
-                if elname != None:
-                    elname = elname.encode("utf-8")
-                text = item[0][1]
-                if text != None:
-                    text = text.encode("utf-8")
+                elname = item[0][0].encode("utf-8") if item[0][0] != None else ""
+                text = item[0][1].encode("utf-8") if item[0][1] != None else ""
                 lrset = UsageStats.objects.filter(lrid=lrid, elparent=element_tree.tag, elname=elname, text=text)
                 if (lrset.count() > 1):
                     LOGGER.debug('ERROR! Saving usage stats in {}, {}'.format(element_tree.tag, elname))
+                    continue
                 if (lrset.count() > 0):
                     record = lrset[0]
                     record.count = record.count+1
