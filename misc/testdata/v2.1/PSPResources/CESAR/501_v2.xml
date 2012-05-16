@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>PELCRA Polish-English parallel corpora (CC-BY)</resourceName>
       <description>A subset of the PELCRA Polish parallel corpora licensed under the CC-BY license. This resource contains 10268 texts from the CORDIS website, 23319 texts from the JRC-Acquis and 4740 texts from the RAPID site. Individual headers may override the licensing information.</description>

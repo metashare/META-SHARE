@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName lang="en">TC-STAR English-Spanish Training Corpora for Machine Translation: Aligned Final Text Editions of EPPS</resourceName>
       <resourceName lang="fr">Corpus d’entraînement TC-STAR anglais-espagnol pour la traduction automatique: Editions du texte final aligné EPPS</resourceName>

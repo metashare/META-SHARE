@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
   <identificationInfo>
       <resourceName>Greek Dependency Treebank</resourceName>
       <description>A resource for Modern Greek annotated at the syntactic and semantic levels. GDT is developed by researchers at the Insitute for Language and Speech Processing, with the help of students from the Texnoglwssia postgraduate program and the University of Athens. GDT includes texts from open-content sources and from corpora collected at ILSP in the framework of research projects aiming at multilingual, multimedia information extraction. The dependency-based annotation scheme used for the syntactic layer of the GDT allows for intuitive representations of structures common in languages with flexible word order. The annotation scheme is based on an adaptation of the guidelines for the Prague Dependency Treebank. Automatic preprocessing of GDT documents included sentence splitting, POS tagging and lemmatization with a suite of natural language processing tools developed at ILSP. The manual annotation of dependency relations is accompanied, for GDT subsets, by annotation of semantic roles (70K tokens) and event annotation based on a shallow domain specific ontology (31K tokens).</description>

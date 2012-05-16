@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>Organizing digitized material</resourceName>
       <description>This tool is an application for collecting and presenting multimedia informations. It works with multmedial documents and enables database search using different criteria. For various multimedia documents metadata describing them as well as links to their location (on web or locally) are stored into NDX database. Metadata define search criteria that is enabled through web interface. The demo-version illustrates its functionalities with soem data about CESAR project and its participants.

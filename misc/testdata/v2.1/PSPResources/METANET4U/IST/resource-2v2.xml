@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>Questions EN+PT CORPUS</resourceName>
       <description>This parallel corpus (Portuguese and English) consists of two sets of nearly 5,500 plus 500 questions each, to be used as training/testing corpora, respectively. Details on the translation and some experiments regarding statistical machine translation of questions can be found in [1] The original corpus of 6000 questions in English can be found in http://cogcomp.cs.illinois.edu/Data/QA/QC/.</description>

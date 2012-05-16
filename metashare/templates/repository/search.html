@@ -70,13 +70,13 @@ if (hideableDds.length > 1) {{# don't replace a single item with a "more" link #
 </script>
 
 
-<div class="topdiv">
+
 <div class="searchbox">
 
   <form class="form_helper" id="searchbox" action="." method="get">      
 	<table>
-	  <tr>
-	       <td>
+	  <tr><td class="logo"><img src="{{ MEDIA_URL }}images/keyvisual.png" width='200'  /></td>
+	  		<td>
 	       {{ form.q }}              
 	 		</td><td><input id="search_button" style="width:100px;" class="span-4 button middle_button" type="submit" value="Search" /></td>
 		</tr>
@@ -84,8 +84,24 @@ if (hideableDds.length > 1) {{# don't replace a single item with a "more" link #
   </form>
 </div>  
   
-  <div class="explanation_box">
-  	<div class="explanation first">
+  
+
+ 
+ 
+ 
+
+<div class="left_box">
+<div class="filters">
+	  <h4>Filter by:</h4>
+	  <div id="searchFilters">
+	  {% for filter in filters %}
+	    {% include "repository/filter.html" with filter=filter %}
+	  {% endfor %}
+	  </div>
+	   </div>
+
+	  <div class="explanation_box">
+  	<div class="explanation">
 		<h4>Resource Type:</h4>			
 		<table id="resource_type">
 			<tr>
@@ -197,6 +213,6 @@ if (hideableDds.length > 1) {{# don't replace a single item with a "more" link #
               {% endif %}
             
 </div>
-</div>
+
 
 {% endblock %}

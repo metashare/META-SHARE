@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>Hellenic National Corpus</resourceName>
       <description>HNC currently contains about 47.000.000 words, and is constantly being updated. It contains samples of written language exclusively. Oral samples have not  been incorporated in this version of Corpus. Texts in the ILSP Corpus represent modern Greek language use - most of them having been written after 1990. Texts written in highly idiomatic language have been excluded. Most texts have been selected based on their high readability (high circulation newspapers, best-selling books etc.). Texts from several media, belonging to different genres and dealing with various topics have been selected. These texts have been given to ILSP for this purpose by copyright owners and are available for research purposes only.</description>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>Questions + NE CORPUS</resourceName>
       <description>This corpus consists of a set of nearly 5,500 manually annotated questions to be used as training corpus in machine learning based NER systems and 500 annotated questions for testing. Named entities in these questions were identified and classified according to the categories: Person, Location and Organization. </description>
