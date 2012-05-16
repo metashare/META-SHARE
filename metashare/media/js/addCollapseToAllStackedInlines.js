@@ -11,11 +11,12 @@
 						var header = a(this).find('h2').get(0);
 						if(header)
 						{
-							var headerText = a(header).text();
+							var headerTitle = a(header).find('.formset_title').get(0);
+							var headerText = a(headerTitle).text();
 							if(headerText[0] == '_')
 							{
 								headerText = headerText.replace(/^_/, "");
-								a(header).text(headerText);
+								a(headerTitle).text(headerText);
 								a(this).wrapInner("<fieldset class=\"module aligned collapse\"></fieldset>");
 							}
 						}
