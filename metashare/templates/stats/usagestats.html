@@ -34,11 +34,7 @@ function getvalues(classname, fieldname) {
 <td width=80%></td></tr>
 <tr><td bgcolor=#dddddd colspan=4 valign=top>
 
-{% if usage_fields|length <= 1 %}
-    <center><strong>No data found</strong></center>
-{% else %}
-        
-    {% if usage_fields != None %}
+{% if usage_fields != None %}
     <table width=100% bgcolor="white" valign=top>
     <tr><td colspan=2>
         <form id="getusagestats" action="." method="POST">Found {{ fields_count }} field types<br>           
@@ -120,10 +116,8 @@ function getvalues(classname, fieldname) {
         
     </tr>
     <table>
-   {% endif %} 
-     
-    
-{% endif %}
+{% endif %} 
+
 
 </td></tr></table>
 {% endblock %}

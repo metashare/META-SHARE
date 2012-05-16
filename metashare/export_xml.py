@@ -87,7 +87,7 @@ if __name__ == "__main__":
                 RESOURCE_NO += 1
                 root_node = resource.export_to_elementtree()
                 xml_string = ElementTree.tostring(root_node, encoding="utf-8")
-                pretty = pretty_xml(xml_string).encode('utf-8');
+                pretty = pretty_xml(xml_string).encode('utf-8')
                 resource_filename = 'resource-{0}.xml'.format(RESOURCE_NO)
                 out.writestr(resource_filename, pretty)
                 SUCCESSFUL_EXPORTS += 1

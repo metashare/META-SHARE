@@ -138,12 +138,18 @@ def _update_usage_stats(lrid, element_tree):
     if len(element_tree.getchildren()):
         for child in element_tree.getchildren():
             item = _update_usage_stats(lrid, child)
-            if (item == None):
+            if (item == None or item[0] == None):
                 continue
             if not isinstance(item[0], basestring):
-                lrset = UsageStats.objects.filter(lrid=lrid, elparent=element_tree.tag, elname=item[0][0].encode("utf-8"), text=item[0][1].encode("utf-8"))
+                elname = item[0][0]
+                if elname != None:
+                    elname = elname.encode("utf-8")
+                text = item[0][1]
+                if text != None:
+                    text = text.encode("utf-8")
+                lrset = UsageStats.objects.filter(lrid=lrid, elparent=element_tree.tag, elname=elname, text=text)
                 if (lrset.count() > 1):
-                    LOGGER.debug('ERROR! Saving usage stats in {}, {}'.format(str(element_tree.tag), str(elname=item[0][0].encode("utf-8"))))
+                    LOGGER.debug('ERROR! Saving usage stats in {}, {}'.format(element_tree.tag, elname))
                 if (lrset.count() > 0):
                     record = lrset[0]
                     record.count = record.count+1
@@ -151,9 +157,9 @@ def _update_usage_stats(lrid, element_tree):
                 else:
                     record = UsageStats()
                     record.lrid = lrid
-                    record.elname = str(item[0][0].encode("utf-8"))
-                    record.elparent = str(element_tree.tag)
-                    record.text = str(item[0][1].encode("utf-8"))
+                    record.elname = elname
+                    record.elparent = element_tree.tag
+                    record.text = text
                     record.save(force_insert=True)
         return None
     # Otherwise, we return a tuple containg (key, value), i.e., (tag, text).
