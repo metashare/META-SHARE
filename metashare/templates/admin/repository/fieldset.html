@@ -21,7 +21,7 @@
                         {% endif %}
                     {% endif %}
                     {% if field.field.help_text %}
-                        <p class="help">{{ field.field.help_text|safe }} <span class="helpLink" kblink="{{ line.help_link }}">(More...)</span></p>
+                        <p class="help">{{ field.field.help_text|safe }} <span class="helpLink" kblink="{{ line.help_link }}"><img class="help_icon" src="{{ help_icon_url }}" kblink="{{ line.help_link }}"></img></span></p>
                     {% endif %}
                 </div>
             {% endfor %}
