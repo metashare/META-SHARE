@@ -1,66 +1,5 @@
 {% extends "base.html" %}
 
-<script language="javascript">
-$(document).ready(function(){
-  $("div.content_box").each(function() {
-    var allDds = $(this).children("div");
-	if (hideableDds.length > 1) {{# don't replace a single item with a "more" link #}
-        hiddenDds = hideableDds.slice(
-          Math.max(0, 4 - (allDds.length - hideableDds.length))).hide();
-        var moreTxt = 'more', lessTxt = 'less';
-        hiddenDds.last().after($("<div><a href='#'>" + moreTxt + "</a></div>")
-            .children().first().click({hiddenDds: hiddenDds}, function(e) {
-                e.preventDefault();
-                $(this).text($(this).text() == moreTxt ? lessTxt : moreTxt);
-                e.data.hiddenDds.slideToggle();
-              }).parent());
-      }
-    }
-  });
-});
-</script>
-
-<script>
-    $(document).ready(function(){
-        $("div.filter").hide();
-        $("div.accordion").each(function(){
-            $(this).next("div.filter").find("a.removableFacet").parents("div.filter").show();
-            addStatus($(this));
-        });
-
-		 $("div.accordion.expanded").each(function(){
-		 	if( $(this).next("div.filter").find("a.removableFacet").length > 0 ){
-		 		$(this).addClass("selected");
-		 	}
-		 });
-		
-        $("div.accordion").click(function() {
-            if($(this).next("div.filter").attr("style") == "display: none;" ){
-                $(this).addClass('expanded');
-                $(this).removeClass('collapsed');}
-            else{
-
-                $(this).addClass('collapsed');
-                $(this).removeClass('expanded');
-            }
-            $(this).next("div.filter").slideToggle();
-        });
-    });
-
-    function addStatus(filter){
-        if(filter.next("div.filter").attr("style") == "display: none;" ){
-            filter.addClass('collapsed');
-            filter.removeClass('expanded');
-        }
-        else{
-            filter.addClass('expanded');
-            filter.removeClass('collapsed');
-
-        }
-    }
-
-</script>
-
 
 {% block content %}
 		<script type="text/javascript" src="http://plugins.learningjquery.com/expander/jquery.expander.js"></script>
@@ -73,6 +12,71 @@ $(document).ready(function(){
 				});
 			});
 		</script>
+
+		<script type="text/javascript">
+			function getElementsByClassName(node,classname) 
+			{
+				if (node.getElementsByClassName)
+					{return node.getElementsByClassName(classname);}
+				else 
+				{
+				// your custom function
+				}
+			}
+			
+			function getElementsByClass(searchClass,node,tag) 
+			{
+				var classElements = new Array();
+				if ( node == null ){node = document;}
+				if ( tag == null ){tag = '*';}
+				var els = node.getElementsByTagName(tag);
+				var elsLen = els.length;
+				var pattern = new indexOf(searchClass);
+				for (i = 0, j = 0; i < elsLen; i++) 
+				{
+				if ( pattern.test(els[i].className) ) 
+					{
+					classElements[j] = els[i];
+					j++;
+					}
+				}
+				return classElements;
+			}	
+			
+			function toggle(el) 
+			{
+				if (el.style.display == '') 
+					{
+					el.style.display = 'none';
+					}
+					else 
+					{
+					el.style.display = '';
+					}
+			}	
+
+			function displayMandatory() 
+			{
+				var els = getElementsByClassName(document, 'mandatory');
+				var i;
+				for (i = 0; i < els.length; i += 1) 
+				{
+					toggle(els[i]);
+				}
+			}
+
+			function displayOptional() 
+			{
+				var els = getElementsByClassName(document, 'optional');
+				var i;
+				for (i = 0; i < els.length; i += 1) 
+				{
+					toggle(els[i]);
+				}
+			}
+			
+		</script>
+
 
 		<style type="text/css">
 			div#content dummy, span.details {
@@ -95,7 +99,6 @@ $(document).ready(function(){
                 {% endif %}
             {% endfor %}
         <hr></div>
-
   <a href="javascript:history.back();"><button class="span-12 button middle_button">&laquo; Back</button></a>
   {% if LR_DOWNLOAD %}
     <a href="{% url metashare.repository.views.download resource.id %}"><button class="span-4 button middle_button">Download</button></a>
@@ -104,8 +107,10 @@ $(document).ready(function(){
       <div onmouseover="$(this).siblings('div.popup').show();" onmouseout="$(this).siblings('div.popup').hide();"><button class="span-4 button middle_gray_button">Download</button></div><div class="popup" style="height:50px; left:190px; width:270px; top:50px;"><img style="left:10px;" src="{{ MEDIA_URL }}images/adv_search_pfeil.png" />&nbsp;You don&rsquo;t have the permission to download this resource. Please log in.</div>
     </div>
   {% endif %}
-  <div style="clear: both;"></div>
 
+  <div style="clear: both;"></div>
+  
+  <p><input type="checkbox" name="choose_view" onClick="displayOptional();"> Only show mandatory fields</p>
   <form class="form_helper" action="submit" method="get">
   <table>
     {% include "repository/detail_view.html" %}
