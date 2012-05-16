@@ -277,6 +277,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             'app_label': opts.app_label,
             'kb_link': settings.KNOWLEDGE_BASE_URL,
             'comp_name': _('%s') % force_unicode(opts.verbose_name),
+            'help_icon_url': u'%s%s' % (settings.MEDIA_URL, "css/sexybuttons/images/icons/silk/help.png"),
         }
         context.update(extra_context or {})
         return self.render_change_form(request, context, form_url=form_url, add=True)
@@ -512,14 +513,16 @@ class OrderedFieldset(helpers.Fieldset):
         for field in self.fields:
             if not is_inline(field):
                 fieldline = helpers.Fieldline(self.form, field, self.readonly_fields, model_admin=self.model_admin)
-                elem = OrderedElement(fieldline=fieldline)
+                help_link = u'%s%s' % (settings.KNOWLEDGE_BASE_URL, field)
+                elem = OrderedElement(fieldline=fieldline, help_link=help_link)
                 yield elem
             else:
                 field = decode_inline(field)
                 for inline in self.inlines:
                     if hasattr(inline.opts, 'parent_fk_name'):
                         if inline.opts.parent_fk_name == field:
-                            elem = OrderedElement(inline=inline)
+                            help_link = u'%s%s' % (settings.KNOWLEDGE_BASE_URL, field)
+                            elem = OrderedElement(inline=inline, help_link=help_link)
                             yield elem
                     elif hasattr(inline.formset, 'prefix'):
                         if inline.formset.prefix == field:
@@ -537,6 +540,7 @@ class OrderedElement():
         else:
             self.is_field = False
             self.inline = inline
+            self.help_link = help_link
     
             
 class InlineError(Exception):
