@@ -1,6 +1,7 @@
 package metashare.upgrader;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -150,7 +151,6 @@ public class XMLTool {
 		try {
 			validate(doc, schema);
 		} catch (Exception e) {
-			e.printStackTrace();
 			return false;
 		}
 		return true;
@@ -160,7 +160,7 @@ public class XMLTool {
 		Transformer transformer = TransformerFactory.newInstance().newTransformer();
 		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 		//initialize StreamResult with File object to save to file
-		StreamResult result = new StreamResult(new FileWriter(file));
+		StreamResult result = new StreamResult(new FileOutputStream(file));
 		DOMSource source = new DOMSource(doc);
 		transformer.transform(source, result);
 	}

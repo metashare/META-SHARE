@@ -5,7 +5,6 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 
 import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
 
 import metashare.upgrader.XMLTool.MetashareSchemaVersion;
 
@@ -16,7 +15,7 @@ public class Upgrader {
 			System.err.println("This tool will convert all META-SHARE XML files in a source folder to META-SHARE format 2.1 versions in a target folder.");
 			System.err.println("Usage:");
 			System.err.println("java [options] -jar metashare-resource-upgrader.jar source-folder/ target-folder/");
-			System.err.println("options: -Dmetashare.targetVersion= (one of v11, v20, v21)");
+			System.err.println("options: -Dmetashare.targetVersion=... (one of v11, v20, v21; defaults to v21)");
 			System.err.println("         -Dmetashare.sourceVersion=... (one of v10, v11, v20; if not set, will guess)");
 			System.exit(0);
 		}
@@ -44,7 +43,8 @@ public class Upgrader {
 		}
 		
 		MetashareSchemaVersion targetVersion = MetashareSchemaVersion.valueOf(System.getProperty("metashare.targetVersion", "v21"));
-		MetashareSchemaVersion sourceVersion = MetashareSchemaVersion.valueOf(System.getProperty("metashare.sourceVersion"));
+		String sourceVersionString = System.getProperty("metashare.sourceVersion");
+		MetashareSchemaVersion sourceVersion = sourceVersionString != null ? MetashareSchemaVersion.valueOf(sourceVersionString) : null;
 		
 		for (File sourceFile : sourceFiles) {
 			String filename = sourceFile.getName();
@@ -54,7 +54,7 @@ public class Upgrader {
 			MetashareSchemaVersion from = sourceVersion;
 			if (from == null) {
 				from = XMLTool.guessSchemaVersion(sourceDoc);
-				System.out.print("seems to be "+from+"... ");
+				System.out.print("version seems to be "+from+"... ");
 			}
 			
 			Document targetDoc = XMLTool.transform(sourceDoc, from, targetVersion);
