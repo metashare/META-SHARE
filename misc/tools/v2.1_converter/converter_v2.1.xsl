@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<xsl:stylesheet version="1.0" xmlns:redirect="http://xml.apache.org/xalan/redirect" extension-element-prefixes="redirect" xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs">
-    <xsl:output method="xml" encoding="UTF-8" indent="yes" xslt:indent-amount="4"/>
+<xsl:stylesheet version="1.0" xmlns:redirect="http://xml.apache.org/xalan/redirect" extension-element-prefixes="redirect" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs">
+    <xsl:output method="xml" encoding="UTF-8" indent="yes" />
     
 	<xsl:template match="@*|node()">
 		<xsl:copy copy-namespaces="no">
@@ -20,6 +20,8 @@
 		</xsl:choose>	
 	</xsl:template>
 	
+
+
 	
 	<xsl:template match="*[. = 'True']">
 	  <xsl:copy>
