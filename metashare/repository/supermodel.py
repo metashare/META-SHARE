@@ -149,6 +149,15 @@ class SchemaModel(models.Model):
         abstract = True
 
     @classmethod
+    def is_required_field(self, name):
+        """
+        Checks whether the field with the given name is a required field.
+        """
+        # pylint: disable-msg=E1101
+        _fields = self.get_fields()
+        return name in _fields['required']
+
+    @classmethod
     def get_many_to_many_fields(cls):
         """
         Returns a list containing all ManyToManyField fields for this model.
@@ -361,6 +370,9 @@ class SchemaModel(models.Model):
             if _value is not None:
                 _root.attrib[_xsd_attr] = SchemaModel._python_to_xml(_value)
 
+        #print self.get_fields()
+        #print self.get_field_sets()
+
         # Then, we loop over all schema fields, retrieve their values and put
         # XML-ified versions of these values into the XML tree.
         for _xsd_field, _model_field, _not_used in self.__schema_fields__:
@@ -478,10 +490,19 @@ class SchemaModel(models.Model):
                             # language code key
                             _element.set('lang', _sub_value[0])
                             _element.text = SchemaModel._python_to_xml(
-                                                                _sub_value[1])
+                                                                _sub_value[1])                            
+                            if self.is_required_field(_model_field):
+                                
+                                _element.required = self.is_required_field(_model_field)
+                            else:
+                                _element.required = 0                            
                         else:
                             _element.text = SchemaModel._python_to_xml(
-                                                                _sub_value)
+                                                                _sub_value)                            
+                            if self.is_required_field(_model_field):
+                                _element.required = self.is_required_field(_model_field)
+                            else:
+                                _element.required = 0
                         _current_node.append(_element)
 
         # Return root node of the ElementTree; can be converted to String
