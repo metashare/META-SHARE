@@ -329,8 +329,7 @@ def view(request, object_id=None):
         sessionid = ""
         if request.COOKIES:
             sessionid = request.COOKIES.get('sessionid', '')
-        saveLRStats(request.user.username,
-          resource.storage_object.identifier, sessionid, VIEW_STAT)
+        saveLRStats(resource, request.user.username, sessionid, VIEW_STAT)
         context['LR_STATS'] = getLRStats(resource.storage_object.identifier)
 
     # Render and return template with the defined context.
