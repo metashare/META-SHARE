@@ -556,7 +556,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
             'save_on_top': self.save_on_top,
             'kb_link': settings.KNOWLEDGE_BASE_URL,
             'comp_name': _('%s') % force_unicode(opts.verbose_name),
-            'help_icon_url': u'%s%s' % (settings.MEDIA_URL, "css/sexybuttons/images/icons/silk/help.png"),
         }
         if extra_context:
             context.update(extra_context)
