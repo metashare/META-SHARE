@@ -54,17 +54,6 @@ div.explanation{
 	padding: 3% 3% 3% 3%;	
 }
 
-div.explanation table.sort_results a.sortAsc:after {
-    content: "\a0" url(sexybuttons/images/icons/silk/bullet_arrow_down.png);
-    vertical-align: middle;
-}
-
-div.explanation table.sort_results a.sortDesc:after {
-    content: "\a0" url(sexybuttons/images/icons/silk/bullet_arrow_up.png);
-    vertical-align: middle;
-}
-
-
 div.content_box{	
 	width: 541px;
 	margin-right:10px;
