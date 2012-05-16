@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>INTERA Corpus</resourceName>
       <description>Greek-English, Serbian-English, Bulgarian-English, Slovene-English; multilingual, written, domain specific (law, education, environment, tourism, health), parallel corpora; Total 12 MWs: Greek-English 4MWs (2 MWs per language), Serbian-English 2MWs (1 MWs per language), Bulgarian-English 2MWs (1 MWs per language), Slovene-English 4MWs (2 MWs per language); TMX format, XCES-compatible annotation in XML format; POS-tagged and lemmatised in XML format; IMDI metadata elements in XML format </description>

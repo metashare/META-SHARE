@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>Basic Vocabulary of Human Genome</resourceName>
       <description>This is the LMF version of the Basic Vocabulary of Human Genome from the IULA UPF located at http://www.iula.upf.edu/rec/vbgenoma/esp/index.html             The project Vocabulary of the Human Genome (Biotechnology 2), approved in the 2003 plenary meeting of       REALITER, incorporates the basic terminology most used in texts about genomics. The vocabulary presents       selected entries in English and their equivalents in peninsular and Latin American Spanish, French, Italian,       Galician, Portuguese and Catalan. A long with the information on equivalents, the users can find grammatical       information and synonyms documented as variants in each of the languages.</description>

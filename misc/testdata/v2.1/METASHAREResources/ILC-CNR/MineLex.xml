@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>MINELex</resourceName>
       <description>MINELex (Multilingual, Interoperable Named Entity Lexicon) contains Named Entities (NEs) for English (974,567), Italian (125,806) and Spanish (137,583) connected to general domain lexicons (English WordNet, WordNet and the Italian SIMPLE-CLIPS) and two ontologies (SUMO and SIMPLE), in a format compliant with the ISO Lexical Markup Framework (LMF). Automatically built, it has been applied to validate questions regarding NEs in a state-of-the-art Question Answering system providing a 28% increment in accuracy.</description>

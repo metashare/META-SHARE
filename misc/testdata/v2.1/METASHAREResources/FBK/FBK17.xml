@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>Edits</resourceName>
       <description>A software package aimed at recognizing entailment relations between two portions of text, termed as T and H. The system is based on edit distance algorithms, and computes the T-H distance as the cost of the edit operations (i.e. insertion, deletion and substitution) that are necessary to transform T into H.</description>
