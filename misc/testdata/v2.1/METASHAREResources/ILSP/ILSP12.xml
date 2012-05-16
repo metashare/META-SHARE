@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
   <identificationInfo>
       <resourceName>ACCURAT Bilingual Comparable Corpora for under-resourced languages</resourceName>
       <description>Bilingual comparable corpora for 9 language pairs: Estonian-English, Latvian-English, Lithuanian-English, Greek-English, Greek-Romanian, Croatian-English, Romanian-English, Romanian-German and Slovenian-English. The objective of this work was to gather texts from the same domains and genres and with a similar level of comparability in order to use them as a starting point in defining criteria and metrics of comparability. These criteria and metrics will be applied to comparable texts to determine their suitability for use in Statistical Machine Translation, particularly in the case where translation is performed from or into under-resourced languages for which substantial parallel corpora are unavailable.</description>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>PELCRA Polish spoken corpus (CC-BY-NC)</resourceName>
       <description>A subset of the PELCRA Polish spoken corpus licensed under the CC-BY-NC license. This resource contains 347 transcriptions of recordings made in the years 2000-2010. Individual headers may override the licensing information.</description>

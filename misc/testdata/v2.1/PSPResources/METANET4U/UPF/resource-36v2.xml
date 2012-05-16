@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>LMF UPF Term</resourceName>
       <description>This is the LMF version of the LMF UPF Term located at http://www.iula.upf.edu/rec/upfterm/cat/index.htm             The UPF_TERM terminological data bank was created with the purpose of establishing an electronic       resort for the consultation and diffusion of terminological projects elaborated by students of the       Facultat de Traducció i Interpretació, by the IULA and other work and research centres in the Universitat Pompeu Fabra.             The UPF_TERM bank, placed in a database server devoted to this end, is free access for students,       lecturers and researchers, from the Universitat Pompeu Fabra as well as outside users.             UPF_TERM is the name that receives the set of global resorts of this terminology bank, which is       divided in several databases. Each database gathers terminological papers with common features;       therefore, the questions and answers can be more productive. Each register of each database has       the author, the title and the origin of each project.</description>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>Greek Textual Entailment Corpus</resourceName>
       <description>GTEC consits of 600 T-H pairs manually annotated for entailment (i.e. whether T entails H or not) by human annotators. The dataset which is tailored to guide training and evaluation of prospect RTE systems, is equally divided in three subsets each one representing the output of certain HLT application: Question Answering (QA), Comparable Documents (CD) and Machine Translation (MT), and pertaining to specific subject fields (i.e., law, politics, travel). T-H examples that correspond to success and failure cases of the afore-mentioned applications have been included in the corpus. The annotations provided are conformant to the RTE1 and RTE2 challenges.</description>

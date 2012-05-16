@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>Serbian Wordnet</resourceName>
       <description>Serbian WordNet (SrpWN) represents a lexical semantic network, containing synsets with glosses and various semantic relations, such as antonymy, meronymy, causation, category domain, etc.  The initial version of the Serbian Wordnet was produced in the scope of the EU-funded Balkanet project. Through interlingual relations it is connected to English Wordnet and wordnets of many other languages. Currently the Serbian Wordnet contains 16,891 synsets: 1118 adjectives (literals 1430), 2024 verbs (literals 3760), 13,717 nouns (literals 23239), other 32. 702 synsets are not connected to the PWN, being either Balkan specific concepts (532) or Serbian specific concepts (170). 16,827 synsets have definitions in Serbian. Sematic relations in SrpWN: hypernym - 15,473; holo_part - 1,127; holo_member - 3,632; holo_portion - 111; near_antonym - 704; be_in_state - 243; causes - 59. From 28,470 literals in SrpWN 9,338 are multi-word units.</description>

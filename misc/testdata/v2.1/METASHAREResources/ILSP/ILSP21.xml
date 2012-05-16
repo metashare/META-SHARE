@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>COSMOROE Caricature Corpus</resourceName>
       <description>Corpus of 50 caricatures by Yannis Ioannou covering the domains of politics and environment. They pertain to various types of visual-linguistic information. They have been annotated in different annotation levels in order to be used for the detection of the semantic relations between image and language</description>

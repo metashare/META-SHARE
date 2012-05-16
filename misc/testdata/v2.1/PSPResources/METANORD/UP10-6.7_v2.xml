@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Id: UP10-6.7.xml 42662 2011-12-01 14:33:59Z martha $ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>Modern Finnish Word List</resourceName>
       <description>The entries of the word list are simple XML elements that indicate the lemma and inflection type for basic words. Rare inflection types and other restrictions are marked with attributes. Compounds are usually listed as just the lemma. Examples of the 78 inflection types and 17 consonant gradation types are available on the web site.</description>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
   <identificationInfo>
       <resourceName>QALL-ME Ontology</resourceName>
       <description>A domain-specific ontology for question answering in the domain of tourism. It is encoded in OWL DL and covers several important aspects related to the tourism industry, including tourism destinations (i.e. cities and towns), tourism sites (i.e. accommodation, gastro, attraction, and infrastructure), tourism events (e.g. movie and show) and transportation. To expand domain-specific concepts to general terms, the QALL-ME ontology was aligned with two upper ontologies - WordNet and SUMO. The ontology contains 122 classes (concepts), 55 datatype properties and 52 object properties which indicate the relationships among the 122 classes. The 122 classes are categorized into 15 top-level classes. The class hierarchy has a maximum depth of 4 (http://qallme.fbk.eu/QALL-ME_LREC2008_final_submission_ou.pdf).</description>
