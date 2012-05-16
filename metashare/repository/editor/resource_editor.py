@@ -554,6 +554,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
             'opts': opts,
             'save_as': self.save_as,
             'save_on_top': self.save_on_top,
+            'kb_link': settings.KNOWLEDGE_BASE_URL,
+            'comp_name': _('%s') % force_unicode(opts.verbose_name),
         }
         if extra_context:
             context.update(extra_context)

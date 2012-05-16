@@ -512,14 +512,16 @@ class OrderedFieldset(helpers.Fieldset):
         for field in self.fields:
             if not is_inline(field):
                 fieldline = helpers.Fieldline(self.form, field, self.readonly_fields, model_admin=self.model_admin)
-                elem = OrderedElement(fieldline=fieldline)
+                help_link = u'%s%s' % (settings.KNOWLEDGE_BASE_URL, field)
+                elem = OrderedElement(fieldline=fieldline, help_link=help_link)
                 yield elem
             else:
                 field = decode_inline(field)
                 for inline in self.inlines:
                     if hasattr(inline.opts, 'parent_fk_name'):
                         if inline.opts.parent_fk_name == field:
-                            elem = OrderedElement(inline=inline)
+                            help_link = u'%s%s' % (settings.KNOWLEDGE_BASE_URL, field)
+                            elem = OrderedElement(inline=inline, help_link=help_link)
                             yield elem
                     elif hasattr(inline.formset, 'prefix'):
                         if inline.formset.prefix == field:
@@ -537,6 +539,7 @@ class OrderedElement():
         else:
             self.is_field = False
             self.inline = inline
+            self.help_link = help_link
     
             
 class InlineError(Exception):

@@ -64,7 +64,7 @@
     <!-- Content -->
     <div id="content" class="{% block coltype %}colM{% endblock %}">
         {% block pretitle %}{% endblock %}
-        {% block content_title %}{% if title %}<h1 class="customtitle">{{ title }}</h1><span class="helpLink" kblink="{{ kb_link }}{{ comp_name }}">(Show help...)</span><div style="clear: both"></div>{% endif %}{% endblock %}
+        {% block content_title %}{% if title %}<h1 class="customtitle">{{ title }}</h1><span class="helpLink" kbbase="{{ kb_link }}" kbcomp="{{ comp_name }}">(Show help...)</span><div style="clear: both"></div>{% endif %}{% endblock %}
         {% block content %}
         {% block object-tools %}{% endblock %}
         {{ content }}

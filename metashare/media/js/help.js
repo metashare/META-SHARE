@@ -11,6 +11,23 @@ function showHelp(event)
 	}
 	
 	var url = $(event.target).attr('kblink');
+	if(!url)
+	{
+		/*
+		 * From 'admin/edit_inline/stacked.html
+		 */
+		var base = $(event.target).attr('kbbase');
+		var compName = $(event.target).attr('kbcomp');
+		if(!base || !compName)
+		{
+			return false;
+		}
+		compName = compName.replace(/^_/, "");
+		compName = compName.replace(/s$/, "");
+		compName = compName.substring(0, 1).toLowerCase() + compName.substring(1);
+		compName = compName + "Info";
+		url = base + compName;
+	}
 	newwin = window.open(url, helpWinName);
 	if(window.focus)
 	{

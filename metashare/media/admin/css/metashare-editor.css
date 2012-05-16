@@ -190,6 +190,13 @@ a.error{
 
 
 .customtitle {
+	/*display: inline;*/
+}
+
+h1.customtitle {
 	display: inline;
 }
 
+h2.help_link {
+	/*display: inline;*/
+}

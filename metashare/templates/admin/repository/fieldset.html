@@ -21,13 +21,13 @@
                         {% endif %}
                     {% endif %}
                     {% if field.field.help_text %}
-                        <p class="help">{{ field.field.help_text|safe }} <span class="helpLink" kblink="{{ kb_link }}{{ field.field.name }}">(More...)</span></p>
+                        <p class="help">{{ field.field.help_text|safe }} <span class="helpLink" kblink="{{ line.help_link }}">(More...)</span></p>
                     {% endif %}
                 </div>
             {% endfor %}
         </div>
         {% else %}
-        	{% include line.inline.opts.template with inline_admin_formset=line.inline %}
+        	{% include line.inline.opts.template with inline_admin_formset=line.inline help_link=line.help_link %}
         {% endif %}
         {% comment %}
         {% endcomment %}

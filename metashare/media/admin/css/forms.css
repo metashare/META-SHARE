@@ -150,6 +150,14 @@ fieldset.collapsed .collapse-toggle {
     display: inline !important;
 }
 
+fieldset.collapsed h2 span.formset_title {
+	display: inline;
+}
+
+fieldset.collapsed h2 span.helpLink {
+	display: inline;
+}
+
 /* MONOSPACE TEXTAREAS */
 
 fieldset.monospace textarea {
