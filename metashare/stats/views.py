@@ -275,10 +275,23 @@ def getstats (request):
         qltavg = QueryStats.objects.filter(lasttime__startswith=currdate, exectime__lt = int(extimes["exectime__avg"])).count()
     else:
         extimes["exectime__avg"] = 0
-     
-    return HttpResponse("["+JSONEncoder().encode({"date": str(currdate), "lrpublish": lrpublish, "user": \
+    
+    data = {"date": str(currdate), "lrpublish": lrpublish, "user": \
         user, "lrupdate": lrupdate, "lrview": lrview, "lrdown": lrdown, "queries": queries, \
-        "qexec_time_avg": extimes["exectime__avg"], "qlt_avg": qltavg})+"]")
+        "qexec_time_avg": extimes["exectime__avg"], "qlt_avg": qltavg}
+    
+    usageset = UsageStats.objects.values('elname', 'elparent').annotate(Count('lrid', distinct=True), \
+        Sum('count')).order_by('elparent', '-lrid__count', 'elname')        
+    if (len(usageset) > 0):
+        usagedata = []
+        for item in usageset:
+            usagestats.append({"elparent": item["elparent"], 
+                    "elname": item["elname"],
+                    "lrcount": item["lrid__count"],
+                    "fieldcount": item["count__sum"]})          
+        data["usagestats"] = usagedata
+        
+    return HttpResponse("["+JSONEncoder().encode(data)+"]")
   
 
 # pylint: disable-msg=R0911
