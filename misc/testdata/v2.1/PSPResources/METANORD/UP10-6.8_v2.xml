@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Id: UP10-6.8.xml 42662 2011-12-01 14:33:59Z martha $ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>Frequency List of Written Finnish Word Forms</resourceName>
       <description>A ranked frequency list of Finnish word forms as they appear in the Finnish Parole text corpus of 17 million written tokens. The list is available for download in three different sizes: all tokens, tokens that occur more than once, and tokens that occur more than twice, all in ISO-8859-1 (Latin-1) one entry per line. The five thousand most ferquent forms are also available for browsing on the web site.</description>

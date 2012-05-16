@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Id: METANORD-L23.xml 42662 2011-12-01 14:33:59Z martha $ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>The Dictionary of Lithuanian</resourceName>
       <description>The main and biggest dictionary of Lithuanian. The dictionary article consists of a word geography, history, origin, grammatical forms and categories, structural relations and variants, semantic structure, accentuation, usage and style. Apart from a catchword, a grammatical, accentuation and other variants and also structurally related words of other parts of speech, phraseological units (rigid phrases) can be given in a lexicographical article.</description>

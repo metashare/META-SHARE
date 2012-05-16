@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>Wikisents for FrameNet:</resourceName>
       <description>Sentences extracted from the English and Italian Wikipedia (respectively 2,535,260 and 610,397) and provided with a frame label (the frame label set was taken from FrameNet 1.4)</description>

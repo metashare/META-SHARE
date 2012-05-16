@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
   <identificationInfo>
       <resourceName>COSMOROE Travel Series Corpus</resourceName>
       <description>It amounts 10 hours of TV travel series annotated in cross-media semantic level. The COSMOROE annotation schema has been used relating two or more information units expressed through different types of media. All data have been annotated with either activity or entity label.</description>

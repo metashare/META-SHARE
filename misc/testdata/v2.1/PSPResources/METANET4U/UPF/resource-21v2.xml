@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>Bank of Catalan Neologisms</resourceName>
       <description>This is the LMF version of the Spanish Bank of Neologisms at the Observatori de Neologia (UPF).       The Observatori de Neologia (OBNEO), under the direction by Dr. M. Teresa Cabré, is a public-funded       consolidated group within the Institut Universitari de Lingüística Aplicada at Universitat Pompeu Fabra.       This project analyzes the phenomenon of the appearance of new words or neologisms in the usage, both for       Catalan and Spanish. Since 1996 has been recognized as a consolidated research group of Universitat Pompeu Fabra.</description>

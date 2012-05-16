@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>Spanish LMF ParoleSimple Lexicon</resourceName>
       <description>This is the LMF version of the Spanish ParoleSimple lexicon.       The original PAROLE lexica (20,000 entries per language) were built conform to a model       based on EAGLES guidelines and GENELEX results, underlying a common lexical tool adapted from the       EUREKA-GENELEX project. This software tool was extended to support the PAROLE model and conversion       and management processes of the resulting resources. The languages involved in PAROLE lexica are:       Catalan, Danish, Dutch, English, Finnish, French, German, Greek, Italian, Portugese, Spanish and Swedish.       The goal of SIMPLE project was to add semantic information, selected for its relevance for LE applications,       to the set of harmonised multifunctional lexica built for 12 European languages by the PAROLE consortium.       PAROLE +SIMPLE lexicons contain morphological, syntactic and semantic information, organised according to a       common model and to common linguistic specifications.</description>

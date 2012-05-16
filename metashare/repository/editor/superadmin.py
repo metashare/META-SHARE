@@ -49,6 +49,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
     class Media:
         js = (settings.MEDIA_URL + 'js/addCollapseToAllStackedInlines.js',
               settings.MEDIA_URL + 'js/jquery-ui.min.js',
+              settings.MEDIA_URL + 'js/help.js',
               settings.ADMIN_MEDIA_PREFIX + 'js/collapse.min.js',)
         css = {'all': (settings.ADMIN_MEDIA_PREFIX + 'css/themes/smoothness/jquery-ui.css',)}
 
@@ -274,6 +275,8 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             'errors': helpers.AdminErrorList(form, formsets),
             'root_path': self.admin_site.root_path,
             'app_label': opts.app_label,
+            'kb_link': settings.KNOWLEDGE_BASE_URL,
+            'comp_name': _('%s') % force_unicode(opts.verbose_name),
         }
         context.update(extra_context or {})
         return self.render_change_form(request, context, form_url=form_url, add=True)
@@ -403,6 +406,8 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             'errors': helpers.AdminErrorList(form, formsets),
             'root_path': self.admin_site.root_path,
             'app_label': opts.app_label,
+            'kb_link': settings.KNOWLEDGE_BASE_URL,
+            'comp_name': _('%s') % force_unicode(opts.verbose_name),
         }
         context.update(extra_context or {})
         return self.render_change_form(request, context, change=True, obj=obj)
@@ -507,14 +512,16 @@ class OrderedFieldset(helpers.Fieldset):
         for field in self.fields:
             if not is_inline(field):
                 fieldline = helpers.Fieldline(self.form, field, self.readonly_fields, model_admin=self.model_admin)
-                elem = OrderedElement(fieldline=fieldline)
+                help_link = u'%s%s' % (settings.KNOWLEDGE_BASE_URL, field)
+                elem = OrderedElement(fieldline=fieldline, help_link=help_link)
                 yield elem
             else:
                 field = decode_inline(field)
                 for inline in self.inlines:
                     if hasattr(inline.opts, 'parent_fk_name'):
                         if inline.opts.parent_fk_name == field:
-                            elem = OrderedElement(inline=inline)
+                            help_link = u'%s%s' % (settings.KNOWLEDGE_BASE_URL, field)
+                            elem = OrderedElement(inline=inline, help_link=help_link)
                             yield elem
                     elif hasattr(inline.formset, 'prefix'):
                         if inline.formset.prefix == field:
@@ -524,13 +531,15 @@ class OrderedFieldset(helpers.Fieldset):
                         raise InlineError('Incorrect inline: no opts.parent_fk_name or formset.prefix found')
 
 class OrderedElement():
-    def __init__(self, fieldline=None, inline=None):
+    def __init__(self, fieldline=None, inline=None, help_link=None):
         if fieldline:
             self.is_field = True
             self.fieldline = fieldline
+            self.help_link = help_link
         else:
             self.is_field = False
             self.inline = inline
+            self.help_link = help_link
     
             
 class InlineError(Exception):

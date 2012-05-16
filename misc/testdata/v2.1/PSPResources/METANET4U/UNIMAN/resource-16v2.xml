@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>GENIA Event Corpus with meta-knowledge annotation</resourceName>
       <description>The corpus consists of 1000 MEDLINE abstracts. It is a subset of the original GENIA POS &amp; term corpus, which was selected using the three MeSH terms human, blood cells and transcription factors. In each sentence, three types of information are annotated 1) biomedical terms are identified and assigned categories from the GENIA term ontology. 2) event structures are identified and assigned categories from the GENIA event ontology. 3) Thirdly, detailed information is annotated about how the event should be interpreted, according to its textual context. We call this information meta-knowledge. </description>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Id: tilde_ltlv.xml 42662 2011-12-01 14:33:59Z martha $ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>Lithuanian-Latvian dictionary</resourceName>
       <description>The Lithuanian-Latvian dictionary is updeated electronic version of bilingual Lithuanian-Latvian dictionary (Lietuviešu-latviešu vārdnīca) by Jons Balkevičs, Laimute Balode, Apolonija Bojāte, Valters Subatnieks, redaktors Alberts Sarkanis, published in 1995.</description>

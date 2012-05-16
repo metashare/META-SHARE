@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Id: tilde_etlv.xml 42662 2011-12-01 14:33:59Z martha $ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>Estonian-Latvian dictionary</resourceName>
       <description>The bilingual online Estonian-Latvian dictionary is based on Karl’s Aben’s Estonian-Latvian dictionary published in 1967. The initial disctionary has been revised by Andra Kalnača, Ērika Krautmane, Jana Šteinberga-Ranki and Urve Aivare. During revision obsolote words were removed and about 2000 new lexical entries and 1000 terminology entries were added.</description>

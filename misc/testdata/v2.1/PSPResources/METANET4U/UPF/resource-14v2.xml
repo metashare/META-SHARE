@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+              xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
    <identificationInfo>
       <resourceName>Spanish-Catalan LMF Apertium Bilingual dictionary</resourceName>
       <description>This is the LMF version of the Apertium bilingual dictionary for Spanish and Catalan languages.       Bilingual LMF dictionaries were generated from Apertium bilingual dix files. For each Apertium bilingual correspondence,       the corresponding source and target monolingual entries (LexicalEntry) were generated in addition to the bilingual        correspondence (SenseAxis) element. Apertium is a free/open-source machine translation platform, initially aimed at       related-language pairs but recently expanded to deal with more divergent language pairs (such as English-Catalan).       The platform provides: a language-independent machine translation engine; tools to manage the linguistic data necessary       to build a machine translation system for a given language pair and linguistic data for a growing number of language pairs.</description>

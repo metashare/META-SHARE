@@ -84,8 +84,7 @@
       <inputInfo>
         <mediaType>text</mediaType>
         <characterEncoding>UTF-8</characterEncoding>
-        <ms:conformanceToStandardsBestPractices
-          xmlns:ms="http://www.ilsp.gr/META-XMLSchema">other</ms:conformanceToStandardsBestPractices>
+        <ms:conformanceToStandardsBestPractices xmlns:ms="http://www.ilsp.gr/META-XMLSchema">other</ms:conformanceToStandardsBestPractices>
       </inputInfo>
       <outputInfo>
         <mediaType>audio</mediaType>
