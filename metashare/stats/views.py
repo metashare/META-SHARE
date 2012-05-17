@@ -3,6 +3,10 @@ Project: META-SHARE
 Author: Christian Girardi <cgirardi@fbk.eu>
 """
 
+import sys
+import base64
+import collections
+import logging 
 from metashare.settings import DJANGO_URL, STATS_SERVER_URL
 from metashare.stats.models import LRStats, QueryStats, UsageStats
 # pylint: disable-msg=W0611, W0401
@@ -22,9 +26,6 @@ from json import JSONEncoder
 from datetime import datetime, date
 import urllib, urllib2
 from threading import Timer
-import base64
-import collections
-import logging 
 from metashare.settings import LOG_LEVEL, LOG_HANDLER, MEDIA_URL
 
 try:
@@ -74,7 +75,6 @@ def isOwner(username):
     
 def usagestats (request):
     """  Get usage of fields LR """
-    import sys
     _models = [x for x in dir(sys.modules['metashare.repository.models']) if x.endswith('_model')]
     mod = import_module("metashare.repository.models")
     _fields = {}
@@ -280,15 +280,32 @@ def getstats (request):
         user, "lrupdate": lrupdate, "lrview": lrview, "lrdown": lrdown, "queries": queries, \
         "qexec_time_avg": extimes["exectime__avg"], "qlt_avg": qltavg}
     
+    #get usage statistics
+    _models = [x for x in dir(sys.modules['metashare.repository.models']) if x.endswith('_model')]
+    mod = import_module("metashare.repository.models")
+    _fields = {}
+    for _model in _models:
+        # get info about fields
+        dbfields = getattr(mod, _model).__schema_fields__
+        for _not_used, _field, _required in dbfields:
+            model_name = _model.replace("Type_model","")
+            if not _field.endswith('_set') and not model_name+" " + _field in _fields:
+                verbose_name = eval(u'{0}._meta.get_field("{1}").verbose_name'.format(_model, _field))
+                _fields[model_name+" " + _field] = [model_name, _field, verbose_name, _required, 0, 0]
+   
     usageset = UsageStats.objects.values('elname', 'elparent').annotate(Count('lrid', distinct=True), \
         Sum('count')).order_by('elparent', '-lrid__count', 'elname')        
     if (len(usageset) > 0):
-        usagedata = []
+        usagedata = {}
+        currclass = {}
         for item in usageset:
-            usagestats.append({"elparent": item["elparent"], 
-                    "elname": item["elname"],
-                    "lrcount": item["lrid__count"],
-                    "fieldcount": item["count__sum"]})          
+            verbose = item["elname"]
+            if item["elparent"]+" "+item["elname"] in _fields:
+                verbose = _fields[item["elparent"]+" "+item["elname"]][2]
+            if not item["elparent"] in currclass:
+                usagedata[item["elparent"]] = [{"field": item["elname"], "label": verbose, "counters": [int(item["lrid__count"]), int(item["count__sum"])]}]
+            else:
+                usagedata[item["elparent"]].append({"field": item["elname"], "label": verbose, "counters": [int(item["lrid__count"]), int(item["count__sum"])]})
         data["usagestats"] = usagedata
         
     return HttpResponse("["+JSONEncoder().encode(data)+"]")
