@@ -72,6 +72,7 @@ ElementDict = OrderedDict()
 
 NamespacesDict = OrderedDict()
 Targetnamespace = ""
+SchemaVersion = ""
 
 NameTable = OrderedDict({
     'type': 'type_',
@@ -406,8 +407,11 @@ class SimpleTypeElement(XschemaElementBase):
             return 0
     
     # cfedermann: added appinfo for simple types to support v0 schema.
-    def addAppInfo(self, name, value): 
-        self.appinfo[name] = value
+    def addAppInfo(self, name, value):
+        if name in self.appinfo:
+            self.appinfo[name] = self.appinfo[name] + value
+        else:
+            self.appinfo[name] = value
 
 
 class XschemaElement(XschemaElementBase):
@@ -525,8 +529,11 @@ class XschemaElement(XschemaElementBase):
     def getAttributeGroup(self): return self.attributeGroup
     def setElementGroup(self, elementGroup): self.elementGroup = elementGroup
     def getElementGroup(self): return self.elementGroup
-    def addAppInfo(self, name, value): 
-        self.appinfo[name] = value
+    def addAppInfo(self, name, value):
+        if name in self.appinfo:
+            self.appinfo[name] = self.appinfo[name] + value
+        else:
+            self.appinfo[name] = value
     def getAppInfo(self, name): 
         if self.appinfo:
             return self.appinfo.get(name)
@@ -1128,7 +1135,7 @@ class XschemaHandler(handler.ContentHandler):
         return keys[0]
 
     def startElement(self, name, attrs):
-        global Targetnamespace, NamespacesDict, XsdNameSpace
+        global Targetnamespace, SchemaVersion, NamespacesDict, XsdNameSpace
         logging.debug("Start element: %s %s" % (name, repr(attrs.items())))
         if len(self.stack) == 0 and self.firstElement:
             self.firstElement = False
@@ -1155,6 +1162,8 @@ class XschemaHandler(handler.ContentHandler):
                     NamespacesDict[value] = nameSpace
                 elif name == 'targetNamespace':
                     Targetnamespace = value
+                elif name == 'version':
+                    SchemaVersion = value
         elif (name == ElementType or
             ((name == ComplexTypeType) and (len(self.stack) == 1))
             ):

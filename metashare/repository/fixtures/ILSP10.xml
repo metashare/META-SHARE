@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
   <identificationInfo>
-    <resourceName>REVEAL-THIS Corpus</resourceName>
-    <description>Multimodal (video recordings), multilingual, parallel, European Parliament Plenary Sessions and Press Conferences – recorded between Feb2005-May2005; 75h:28min:24sec</description>
-    <resourceShortName>REVEAL-THIS Corpus</resourceShortName>
+    <resourceName lang="en">REVEAL-THIS Corpus</resourceName>
+    <description lang="en">Multimodal (video recordings), multilingual, parallel, European Parliament Plenary Sessions and Press Conferences – recorded between Feb2005-May2005; 75h:28min:24sec</description>
+    <resourceShortName lang="en">REVEAL-THIS Corpus</resourceShortName>
     <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
   </identificationInfo>
   <distributionInfo>
@@ -14,8 +14,8 @@
     </licenceInfo>
   </distributionInfo>
   <contactPerson>
-    <surname>Piperidis</surname>
-    <givenName>Stelios</givenName>
+    <surname lang="en">Piperidis</surname>
+    <givenName lang="en">Stelios</givenName>
     <communicationInfo>
       <email>spip@ilsp.gr</email>
     </communicationInfo>

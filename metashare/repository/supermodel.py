@@ -14,7 +14,7 @@ from traceback import format_exc
 from xml.etree.ElementTree import Element, fromstring, tostring
 
 from metashare.repository.fields import MultiSelectField, MultiTextField, \
-  MetaBooleanField
+  MetaBooleanField, DictField
 
 from metashare.settings import LOG_LEVEL, LOG_HANDLER, \
   CHECK_FOR_DUPLICATE_INSTANCES
@@ -36,6 +36,10 @@ except ImproperlyConfigured:
 REQUIRED = 1
 OPTIONAL = 2
 RECOMMENDED = 3
+
+# template of a META-SHARE metadata XML schema URL
+SCHEMA_URL = 'http://metashare.ilsp.gr/META-XMLSchema/v{0}/' \
+  'META-SHARE-Resource.xsd'
 
 XML_DECL = re.compile(r'\s*<\?xml version=".+" encoding=".+"\?>\s*\n?',
   re.I|re.S|re.U)
@@ -143,6 +147,15 @@ class SchemaModel(models.Model):
         This is an abstract super class for all schema models.
         """
         abstract = True
+
+    @classmethod
+    def is_required_field(cls, name):
+        """
+        Checks whether the field with the given name is a required field.
+        """
+        # pylint: disable-msg=E1101
+        _fields = cls.get_fields()
+        return name in _fields['required']
 
     @classmethod
     def get_many_to_many_fields(cls):
@@ -326,11 +339,16 @@ class SchemaModel(models.Model):
 
         # Fix namespace attributes for the resourceInfo root element.
         if _root.tag == 'resourceInfo':
-            _root.attrib['xmlns'] = "http://www.ilsp.gr/META-XMLSchema"
+            # only import on demand (metashare.repository.models depends on
+            # metashare.repository.supermodel, giving a circular dependency if
+            # importin 'globally')
+            from metashare.repository.models import SCHEMA_NAMESPACE, \
+                SCHEMA_VERSION
+            _root.attrib['xmlns'] = SCHEMA_NAMESPACE
             _root.attrib['xmlns:xsi'] = "http://www.w3.org/2001/" \
               "XMLSchema-instance"
-            _root.attrib['xsi:schemaLocation'] = "http://www.ilsp.gr/META-" \
-              "XMLSchema META-SHARE-Resource.xsd"
+            _root.attrib['xsi:schemaLocation'] = "{} {}" \
+              .format(SCHEMA_NAMESPACE, SCHEMA_URL.format(SCHEMA_VERSION))
 
         # We first serialize all schema attributes.  For the moment, we just
         # assume that attributes are Strings only.  This holds for the v1.1
@@ -352,6 +370,9 @@ class SchemaModel(models.Model):
             if _value is not None:
                 _root.attrib[_xsd_attr] = SchemaModel._python_to_xml(_value)
 
+        #print self.get_fields()
+        #print self.get_field_sets()
+
         # Then, we loop over all schema fields, retrieve their values and put
         # XML-ified versions of these values into the XML tree.
         for _xsd_field, _model_field, _not_used in self.__schema_fields__:
@@ -372,7 +393,8 @@ class SchemaModel(models.Model):
                 else:
                     _field = None
 
-                # For MetaBooleanFields, we actually need the database value.
+                # For MetaBooleanFields, we actually need the database value
+                # (i.e., not the displayed value).
                 if isinstance(_field, MetaBooleanField):
                     _value = getattr(self, _model_field, [])
 
@@ -384,6 +406,10 @@ class SchemaModel(models.Model):
                     
                     # Sort MultiSelectField values to allow comparison!
                     _value.sort()
+
+                # For DictFields, we convert the dict to a list of tuples.
+                elif isinstance(_field, DictField):
+                    _value = _value.items()
 
                 # For ManyToManyFields, compute all related objects.
                 if isinstance(_value, models.Manager):
@@ -459,7 +485,24 @@ class SchemaModel(models.Model):
                     # Simple values are added to a new element and appended.
                     else:
                         _element = Element(_xsd_name)
-                        _element.text = SchemaModel._python_to_xml(_sub_value)
+                        if isinstance(_sub_value, tuple):
+                            # tuple values come from DictFields with an RFC 3066
+                            # language code key
+                            _element.set('lang', _sub_value[0])
+                            _element.text = SchemaModel._python_to_xml(
+                                                                _sub_value[1])                            
+                            if self.is_required_field(_model_field):
+                                
+                                _element.required = self.is_required_field(_model_field)
+                            else:
+                                _element.required = 0                            
+                        else:
+                            _element.text = SchemaModel._python_to_xml(
+                                                                _sub_value)                            
+                            if self.is_required_field(_model_field):
+                                _element.required = self.is_required_field(_model_field)
+                            else:
+                                _element.required = 0
                         _current_node.append(_element)
 
         # Return root node of the ElementTree; can be converted to String
@@ -735,7 +778,11 @@ class SchemaModel(models.Model):
         for xsd_field, _model_field, _required in _fields_before_sets:
             # We want to collect all values for the current model field.  This
             # may be several, e.g., for multiple contactPerson elements.
+            # Language tags currently only exist for DictFields. If the language
+            # tags list is not empty, then its indexes will always correspond to
+            # the indexes of the values list. 
             _values = []
+            _lang_tags = []
             _parent = None
 
             # If we are handling a field set, we have to make sure that our
@@ -794,7 +841,14 @@ class SchemaModel(models.Model):
                     if not _text:
                         continue
 
-                    if _value.tag in cls.__schema_classes__.keys():
+                    # If the current field is a DictField, then we do not only
+                    # have to fill the _values list
+                    if isinstance(_field, DictField):
+                        # 'und' is the ISO 639-2 special language code for an
+                        # undetermined language
+                        _lang_tags.append(_value.get('lang', 'und'))
+
+                    elif _value.tag in cls.__schema_classes__.keys():
                         LOGGER.debug(u'_schema_classes__[{}] = {}'.format(
                           _value.tag, cls.__schema_classes__[_value.tag]))
                         _sub_cls = _classify(
@@ -941,6 +995,19 @@ class SchemaModel(models.Model):
                 for _value in _values:
                     _model_setter.add(_value)
 
+            # For DictField instances, we have to assign a new dictionary with
+            # the collected language codes as keys.
+            elif isinstance(_field, DictField):
+                _dict = {}
+                for _key, _val in zip(_lang_tags, _values):
+                    if _key in _dict:
+                        # should only happen for 'und' _keys as otherwise the
+                        # schema was not valid
+                        LOGGER.warn(u'Throwing away duplicate "{0}" for '
+                                    u'language "{1}"!'.format(xsd_field, _key))
+                    _dict[_key] = _val
+                setattr(_object, _model_field, _dict)
+
             # For MultiSelectField instances, we have to assign the list.
             elif isinstance(_field, MultiSelectField):
                 setattr(_object, _model_field, _values)
@@ -1072,6 +1139,8 @@ class SchemaModel(models.Model):
                 return value
             elif isinstance(model_field[0], MultiTextField):
                 return separator.join(value)
+            elif isinstance(model_field[0], DictField):
+                return getattr(self, 'get_default_{}'.format(field_spec))()
             if hasattr(value, 'all') and \
               hasattr(getattr(value, 'all'), '__call__'):
                 return separator.join([u'{}'.format(child) for child in value.all()])

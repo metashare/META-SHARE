@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<h2{% if not resource.storage_object.published %} style="font-style:italic;"{% endif %}>{{ resource.identificationInfo.resourceName.0 }}</h2>
+<h2{% if not resource.storage_object.published %} style="font-style:italic;"{% endif %}>{{ resource }}</h2>
 <div class="content_box">
   <h3>Licence Agreement</h3>
 {% if licence_path %}

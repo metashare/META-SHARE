@@ -31,7 +31,7 @@
 				<xs:annotation>
 					<xs:documentation>Provides the description of the resource in prose</xs:documentation>
 					<xs:appinfo>
-						<maxlen>1000</maxlen>
+						<maxlen>10000</maxlen>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:unique name="uniqueLang3">

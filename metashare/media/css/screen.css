@@ -16,7 +16,7 @@ div#banner_top{
 }
 div#banner_top div#inner{	
 	padding-top: 5px;
-	min-width: 960px;
+	min-width: 1024px;
 	max-width: 1440px;
 	margin: auto;
 	text-align: center;
@@ -305,10 +305,10 @@ form.form_helper td input {
 
 /* Marc Schroeder, 9 August 2011: Deactivating the hiding code: */
 /*
-form.form_helper td ul {
-    display:none;
-}
-*/
+ * form.form_helper td ul {
+ *     display:none;
+ *     }
+ *     */
 
 form.form_helper div.component_left {
 	margin-top: 5px;
@@ -390,10 +390,10 @@ form.form_helper label {
 /* cfedermann patches end */
 
 /* Marc Schroeder, 9 August 2011: 
- * classes for displaying required/error state of 
- * form fields in create_account.html
- * (modified as_table() as used in accounts.forms.RegistrationRequestForm)  
- */ 
+ *  * classes for displaying required/error state of 
+ *   * form fields in create_account.html
+ *    * (modified as_table() as used in accounts.forms.RegistrationRequestForm)  
+ *     */ 
 
 form.form_helper tr.required th label {
 	    background-color: #666666;
@@ -497,15 +497,11 @@ div.less_details{
 }
 
 /*filters separate box*/
-div.filters_box{
-	width: 20%;
+div.left_box{
+	width: 300px;
     	position: relative;
-	background-color: white;
-	padding: 20px 20px 20px 20px;	
-	-webkit-box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
-	-moz-box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
-	box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
-    	float: left;
+	float: left;
+	display:block;
 }
 /*end filters separate box*/
 

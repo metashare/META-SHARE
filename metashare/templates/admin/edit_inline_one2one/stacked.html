@@ -1,12 +1,13 @@
 {% load i18n adminmedia %}
 <div class="inline-group" id="{{ inline_admin_formset.formset.prefix }}-group">
-  <h2>{{ inline_admin_formset.opts.verbose_name_plural|title }}</h2>
+  <h2 class="customtitle">{{ inline_admin_formset.opts.verbose_name_plural|title }}<span class="helpLink" kblink="{{ help_link }}"><img class="help_icon" src="{{ help_icon_url }}" kblink="{{ help_link }}"></img></span></h2><div style="clear: both"></div>
 {{ inline_admin_formset.formset.management_form }}
 {{ inline_admin_formset.formset.non_form_errors }}
 
 {% for inline_admin_form in inline_admin_formset %}
 {% if not forloop.last %}
 <div class="inline-related" id="{{ inline_admin_formset.formset.prefix }}-{{ forloop.counter0 }}">
+    {% if inline_admin_formset.formset.can_delete and inline_admin_form.original %}<h3>&nbsp;<span class="delete">{{ inline_admin_form.deletion_field.field }} {{ inline_admin_form.deletion_field.label_tag }}</span></h3>{% endif %}
   {% if inline_admin_form.form.non_field_errors %}{{ inline_admin_form.form.non_field_errors }}{% endif %}
   {% for fieldset in inline_admin_form %}
     {% include "admin/includes/fieldset.html" %}

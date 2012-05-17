@@ -38,6 +38,16 @@ if (!dismissAddAnotherPopup.original) {
 	dismissAddAnotherPopup.original = originalDismissAddAnotherPopup;
 }
 
+function dismissDeleteRelatedPopup(win) {
+	var name = windowname_to_id(win.name).replace(/^delete_/, '');
+	win.close();
+	var elem = document.getElementById(name);
+	elem.value = '';
+	$('#' + name).trigger('change');
+}
+
+
+
 django.jQuery(document).ready(function() {
   
   var $ = $ || jQuery || django.jQuery;
