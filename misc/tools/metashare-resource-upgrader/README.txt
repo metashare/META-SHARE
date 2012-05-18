@@ -10,3 +10,12 @@ options: -Dmetashare.targetVersion=... (one of v11, v20, v21; defaults to v21)
 
 For more information about upgrading META-SHARE to newer versions, see the Installation
 documentation at https://github.com/metashare/META-SHARE/tree/master/misc/docs.
+
+
+The XSLT stylesheets used for the conversion can also be used for manual conversion
+using any XSLT processor.
+
+They can be found in the following folder below this README:
+
+	src/src/main/resources/metashare/upgrader/conversion/
+	
