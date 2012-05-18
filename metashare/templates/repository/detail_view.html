@@ -15,7 +15,7 @@
         {% else %}
 			
 				{% if lr_content.0.1 != "" %}
-				<tr>
+				<tr {% if lr_content.0.2 == 1 %} class="mandatory" {% else %} class="optional" {% endif %}>
 
 						{% if lr_content.0.0 == "url" %}
 							<th><label>{{ lr_content.0.0|capfirst }} </label></th>
@@ -29,17 +29,16 @@
 									<th><label>{{ lr_content.0.0|capfirst }}</label> </th>
 									<td>{% if '.jpg' in lr_content.0.1 %}<img src="{{ MEDIA_URL }}images/emails/{{ value.1 }}" />{% else %} {% encrypt_email lr_content.0.1 %} {% endif %}</td>
 								{% else %}
-									{% if lr_content.0.2 == 1 %}
 										<th>
 											<label>{{lr_content.0.0|capfirst}}</label>
 										</th>
-									{% endif %}
 									{% ifnotequal lr_content.0.1 lr_content.0.1|truncatewords_html:20 %}
 										<td class="readmore">{{lr_content.0.1}}</td>
-									{% else %}
-										{% if lr_content.0.2 == 1 %}
-											<td>{{lr_content.0.1}}</td>
-										{% endif %}
+									{% else %}						
+										<td>
+											{{lr_content.0.1}}
+										</td>
+									
 									{% endifnotequal %}
 								{% endif %}
 							{% endif %}

@@ -1,15 +1,17 @@
 import django.test
+import urllib2
+from urllib import urlencode
 from django.test.client import Client
 from django.contrib.auth.models import User, Group
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.admin.sites import LOGIN_FORM_KEY
 from metashare.settings import DJANGO_BASE, DJANGO_URL, ROOT_PATH
-from metashare.stats.model_utils import saveLRStats, getLRLast, saveQueryStats, getLastQuery, UPDATE_STAT, VIEW_STAT, RETRIEVE_STAT, DOWNLOAD_STAT
-import urllib2
-from urllib import urlencode
+from metashare.stats.model_utils import _update_usage_stats, saveLRStats, getLRLast, saveQueryStats, getLastQuery, UPDATE_STAT, VIEW_STAT, RETRIEVE_STAT, DOWNLOAD_STAT
+from metashare.repository.models import *
 
 ADMINROOT = '/{0}editor/'.format(DJANGO_BASE)
 TESTFIXTURES_ZIP = '{}/repository/fixtures/tworesources.zip'.format(ROOT_PATH)
+PSP_XML = '{}/repository/test_fixtures/PSP/UIB-M10-9_v2.xml'.format(ROOT_PATH)
 
 class StatsTest(django.test.TestCase):
     editor_login = None
@@ -38,10 +40,23 @@ class StatsTest(django.test.TestCase):
         """
         Testing statistics functions about LR
         """
-        lrid = "00000000"
-        for action in (UPDATE_STAT, VIEW_STAT, RETRIEVE_STAT, DOWNLOAD_STAT):
-            saveLRStats("anonymous", lrid, "", action)
-            self.assertEqual(len(getLRLast(action, 10)), 1)
+        client = self.client_with_user_logged_in(StatsTest.editor_login)
+        xmlfile = open(TESTFIXTURES_ZIP, 'rb')
+        response = client.post(ADMINROOT+'upload_xml/', {'description': xmlfile, 'uploadTerms':'on' }, follow=True)
+        ##self.assertContains(response, 'Successfully uploaded 2 resource descriptions')
+        ##self.assertNotContains(response, 'Import failed')
+        # And verify that we have more than zero resources on the "my resources" page where we are being redirected:
+        self.assertContains(response, "My Resources")
+        self.assertNotContains(response, '0 Resources')
+        
+        statsdata = getLRLast(UPDATE_STAT, 2)
+        self.assertEqual(len(statsdata), 2)
+        
+        for action in (VIEW_STAT, RETRIEVE_STAT, DOWNLOAD_STAT):
+            for item in statsdata:
+                resource =  resourceInfoType_model.objects.get(storage_object__identifier=item['lrid'])
+                saveLRStats(resource, "anonymous", "", action)
+            self.assertEqual(len(getLRLast(action, 10)), 2)
         
     def testTop10(self):
         """
@@ -57,7 +72,7 @@ class StatsTest(django.test.TestCase):
         """
         Test whether there are latest queries
         """
-        saveQueryStats("anonymous", "", "testquery 000", 1, 0)
+        saveQueryStats("testquery 000", "", "anonymous", 1, 0)
         latest_query = getLastQuery(2)
         client = Client()
         _url = "/{0}stats/top/?view=latestqueries".format(DJANGO_BASE)
@@ -101,7 +116,7 @@ class StatsTest(django.test.TestCase):
         client = Client()
         response = client.get('/{0}stats/get'.format(DJANGO_BASE))
         self.assertEquals(200, response.status_code)
-
+    
     def testMyResources(self):
         client = self.client_with_user_logged_in(StatsTest.editor_login)
         xmlfile = open(TESTFIXTURES_ZIP, 'rb')
@@ -131,3 +146,24 @@ class StatsTest(django.test.TestCase):
                 .format(user_credentials, response)
         return client
 
+    
+    def testUsage(self):
+        # checking if there are the usage statistics
+        
+        client = self.client_with_user_logged_in(StatsTest.editor_login)
+        xmlfile = open(TESTFIXTURES_ZIP, 'rb')
+        response = client.post(ADMINROOT+'upload_xml/', {'description': xmlfile, 'uploadTerms':'on' }, follow=True)
+        
+        statsdata = getLRLast(UPDATE_STAT, 2)
+        self.assertEqual(len(statsdata), 2)
+        
+        for item in statsdata:
+            resource =  resourceInfoType_model.objects.get(storage_object__identifier=item['lrid'])
+            _update_usage_stats(resource.id, resource.export_to_elementtree())
+            
+        response = client.get('/{0}stats/usage'.format(DJANGO_BASE))
+        if response.status_code != 200:
+            print Exception, 'could not get usage stats: {}'.format(response)
+        else:
+            self.assertContains(response, "identificationInfo")
+    

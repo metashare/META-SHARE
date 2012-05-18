@@ -84,7 +84,7 @@ def create(xml_file):
             return
     
     #statistics call
-    saveLRStats("", storage_object.identifier, "", UPDATE_STAT)
+    #saveLRStats("", storage_object.identifier, "", UPDATE_STAT)
     
     print "Success: created new storage object {0} with id '{1}'.".format(
       storage_object, storage_object.identifier)
@@ -123,7 +123,7 @@ def update(object_id, xml_file):
         storage_object.save()
 
     #statistics call
-    saveLRStats("", storage_object.identifier, "", UPDATE_STAT)
+    #saveLRStats("", storage_object.identifier, "", UPDATE_STAT)
     
     print "Success: updated storage object {0} with id '{1}'.".format(
       storage_object, storage_object.identifier)
@@ -227,7 +227,7 @@ if __name__ == "__main__":
     sys.path.append(PROJECT_HOME)
     from metashare.storage.models import StorageObject
     from metashare.settings import STORAGE_PATH
-    from metashare.stats.model_utils import saveLRStats, UPDATE_STAT
+    #from metashare.stats.model_utils import saveLRStats, UPDATE_STAT
     
     # Check command line parameters first.
     if len(sys.argv) < 2 or sys.argv[1] not in USAGE_INFORMATION.keys():
