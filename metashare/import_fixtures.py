@@ -63,7 +63,7 @@ if __name__ == "__main__":
                     
                     SUCCESSFUL_IMPORTS += 1
 
-                    saveLRStats("", resource.storage_object.identifier, "", UPDATE_STAT)
+                    saveLRStats(resource, "", "", UPDATE_STAT)
     
             except:
                 ERRONEOUS_IMPORTS += 1
