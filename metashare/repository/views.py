@@ -245,8 +245,7 @@ def _provide_download(request, resource, download_urls):
                     _chunk = _local_data.read(MAXIMUM_READ_BLOCK_SIZE)
 
             # maintain download statistics and return the response for download
-            saveLRStats(request.user.username,
-                        resource.storage_object.identifier,
+            saveLRStats(resource, request.user.username,
                         _get_sessionid(request), DOWNLOAD_STAT)
             LOGGER.info("Offering a local download of resource #{0}." \
                         .format(resource.id))
@@ -260,8 +259,7 @@ def _provide_download(request, resource, download_urls):
         for url in download_urls:
             status_code = urlopen(url).getcode()
             if not status_code or status_code < 400:
-                saveLRStats(request.user.username,
-                            resource.storage_object.identifier,
+                saveLRStats(resource, request.user.username,
                             _get_sessionid(request), DOWNLOAD_STAT)
                 LOGGER.info("Redirecting to {0} for the download of resource " \
                             "#{1}.".format(url, resource.id))
@@ -303,7 +301,6 @@ def view(request, object_id=None):
     """
     Render browse or detail view for the repository application.
     """
-
     resource = get_object_or_404(resourceInfoType_model, pk=object_id)
     # print "\n\n" + str(resource) + "\n\n"
     # Convert resource to ElementTree and then to template tuples.
@@ -332,8 +329,7 @@ def view(request, object_id=None):
         sessionid = ""
         if request.COOKIES:
             sessionid = request.COOKIES.get('sessionid', '')
-        saveLRStats(request.user.username,
-          resource.storage_object.identifier, sessionid, VIEW_STAT)
+        saveLRStats(resource, request.user.username, sessionid, VIEW_STAT)
         context['LR_STATS'] = getLRStats(resource.storage_object.identifier)
 
     # Render and return template with the defined context.
@@ -380,8 +376,8 @@ class MetashareFacetedSearchView(FacetedSearchView):
         starttime = datetime.now()
         results_count = sqs.count()
         if self.query:
-            saveQueryStats(self.request.user.username, str(sorted(self.request.GET.getlist("selected_facets"))), self.query,
-                results_count, (datetime.now() - starttime).microseconds)
+            saveQueryStats(self.query, str(sorted(self.request.GET.getlist("selected_facets"))), \
+                self.request.user.username, results_count, (datetime.now() - starttime).microseconds)
 
         return sqs
     

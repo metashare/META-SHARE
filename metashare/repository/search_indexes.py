@@ -1692,23 +1692,24 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             media_type = corpus_media.corpusMediaType
             for corpus_info in media_type.corpusvideoinfotype_model_set.all():
                 if corpus_info.videoContentInfo:
-                    result.append(corpus_info.videoContentInfo.get_typeOfVideoContent_display())
+                    result.extend(corpus_info.videoContentInfo \
+                                  .typeOfVideoContent)
 
         # Filter for lexical conceptual
         elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
             lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
-            if lcr_media_type.lexicalConceptualResourceVideoInfo:
-                if lcr_media_type.lexicalConceptualResourceVideoInfo.videoContentInfo:
-                    result.append(lcr_media_type.lexicalConceptualResourceVideoInfo.videoContentInfo. \
-                      get_typeOfVideoContent_display())
+            if lcr_media_type.lexicalConceptualResourceVideoInfo \
+                    and lcr_media_type.lexicalConceptualResourceVideoInfo.videoContentInfo:
+                result.extend(lcr_media_type.lexicalConceptualResourceVideoInfo \
+                              .videoContentInfo.typeOfVideoContent)
 
         # Filter for language description
         elif isinstance(corpus_media, languageDescriptionInfoType_model):
             ld_media_type = corpus_media.languageDescriptionMediaType
-            if ld_media_type.languageDescriptionVideoInfo:
-                if ld_media_type.languageDescriptionVideoInfo.videoContentInfo:
-                    result.append(ld_media_type.languageDescriptionVideoInfo.videoContentInfo. \
-                      get_typeOfVideoContent_display())
+            if ld_media_type.languageDescriptionVideoInfo \
+                    and ld_media_type.languageDescriptionVideoInfo.videoContentInfo:
+                result.extend(ld_media_type.languageDescriptionVideoInfo \
+                              .videoContentInfo.typeOfVideoContent)
 
         return result
     
