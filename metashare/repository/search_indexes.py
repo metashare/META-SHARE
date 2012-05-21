@@ -995,9 +995,6 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             if media_type.corpusImageInfo:
                 result.extend([domain_info.domain for domain_info in
                                media_type.corpusImageInfo.domaininfotype_model_set.all()])
-            if media_type.corpusTextNumericalInfo:
-                result.extend([domain_info.domain for domain_info in
-                        media_type.corpusTextNumericalInfo.domaininfotype_model_set.all()])
 
         elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
             lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
@@ -1818,19 +1815,15 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         """
         Collect the data to filter the resources on Media Type children
         """
-        result = []
-
         corpus_media = obj.resourceComponentType.as_subclass()
-
         # Filter for corpus
         if isinstance(corpus_media, corpusInfoType_model):
             media_type = corpus_media.corpusMediaType
-            if media_type.corpusTextNumericalInfo:
-                if media_type.corpusTextNumericalInfo.textNumericalContentInfo:
-                    result.append(media_type.corpusTextNumericalInfo.textNumericalContentInfo. \
-                     get_typeOfTextNumericalContent_display())
-
-        return result
+            if media_type.corpusTextNumericalInfo \
+                    and media_type.corpusTextNumericalInfo.textNumericalContentInfo:
+                return media_type.corpusTextNumericalInfo \
+                    .textNumericalContentInfo.typeOfTextNumericalContent
+        return []
     
     def prepare_tnGramBaseItemFilter(self, obj):
         """
