@@ -233,16 +233,19 @@ def _provide_download(request, resource, download_urls):
     if resource.storage_object.has_local_download_copy():
         try:
             dl_path = resource.storage_object.get_download()
+            def dl_stream_generator():
+                with open(dl_path, 'rb') as _local_data:
+                    _chunk = _local_data.read(MAXIMUM_READ_BLOCK_SIZE)
+                    while _chunk:
+                        yield _chunk
+                        _chunk = _local_data.read(MAXIMUM_READ_BLOCK_SIZE)
 
-            # build HTTP response with a generic, binary mime type
-            response = HttpResponse(mimetype="application/octet-stream")
+            # build HTTP response with a generic, binary mime type; the response
+            # content is a stream of the download file
+            response = HttpResponse(dl_stream_generator(),
+                                    mimetype="application/octet-stream")
             response['Content-Disposition'] = 'attachment; filename={0}' \
                                                 .format(split(dl_path)[1])
-            with open(dl_path, 'rb') as _local_data:
-                _chunk = _local_data.read(MAXIMUM_READ_BLOCK_SIZE)
-                while _chunk:
-                    response.write(_chunk)
-                    _chunk = _local_data.read(MAXIMUM_READ_BLOCK_SIZE)
 
             # maintain download statistics and return the response for download
             saveLRStats(resource, request.user.username,
