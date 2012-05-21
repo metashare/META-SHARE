@@ -1671,8 +1671,10 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             media_type = corpus_media.corpusMediaType
             for corpus_info in media_type.corpusvideoinfotype_model_set.all():
                 if corpus_info.videoclassificationinfotype_model_set:
-                    result.extend([video_classification_info.get_videoGenre_display() for video_classification_info in
-                      corpus_info.videoclassificationinfotype_model_set.all()])
+                    result.extend([video_classification_info.videoGenre
+                        for video_classification_info
+                        in corpus_info.videoclassificationinfotype_model_set.all()
+                        if video_classification_info.videoGenre])
 
         return result
     
