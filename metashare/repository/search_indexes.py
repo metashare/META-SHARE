@@ -1618,9 +1618,9 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         # Filter for corpus
         if isinstance(corpus_media, corpusInfoType_model):
             media_type = corpus_media.corpusMediaType
-            if media_type.corpusAudioInfo:
-                if media_type.corpusAudioInfo.settingInfo:
-                    result.extend([media_type.corpusAudioInfo.settingInfo.get_naturality_display()])
+            if media_type.corpusAudioInfo \
+                    and media_type.corpusAudioInfo.settingInfo:
+                result.append(media_type.corpusAudioInfo.settingInfo.get_naturality_display())
 
         return result
     
@@ -1635,9 +1635,9 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         # Filter for corpus
         if isinstance(corpus_media, corpusInfoType_model):
             media_type = corpus_media.corpusMediaType
-            if media_type.corpusAudioInfo:
-                if media_type.corpusAudioInfo.settingInfo:
-                    result.extend([media_type.corpusAudioInfo.settingInfo.get_conversationalType_display()])
+            if media_type.corpusAudioInfo \
+                    and media_type.corpusAudioInfo.settingInfo:
+                result.append(media_type.corpusAudioInfo.settingInfo.get_conversationalType_display())
 
         return result
     
@@ -1652,9 +1652,9 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         # Filter for corpus
         if isinstance(corpus_media, corpusInfoType_model):
             media_type = corpus_media.corpusMediaType
-            if media_type.corpusAudioInfo:
-                if media_type.corpusAudioInfo.settingInfo:
-                    result.extend([media_type.corpusAudioInfo.settingInfo.get_scenarioType_display()])
+            if media_type.corpusAudioInfo \
+                    and media_type.corpusAudioInfo.settingInfo:
+                result.append(media_type.corpusAudioInfo.settingInfo.get_scenarioType_display())
 
         return result
     
