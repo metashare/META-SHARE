@@ -1775,8 +1775,10 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         if isinstance(corpus_media, corpusInfoType_model):
             media_type = corpus_media.corpusMediaType
             if media_type.corpusImageInfo:
-                for image_classification_info in media_type.imageClassificationInfo.all():
-                    result.append(image_classification_info.get_imageGenre_display())
+                for image_classification_info in media_type.corpusImageInfo \
+                        .imageclassificationinfotype_model_set.all():
+                    if image_classification_info.imageGenre:
+                        result.append(image_classification_info.imageGenre)
 
         return result
     
@@ -1791,25 +1793,27 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         # Filter for corpus
         if isinstance(corpus_media, corpusInfoType_model):
             media_type = corpus_media.corpusMediaType
-            if media_type.corpusImageInfo:
-                if media_type.imageContentInfo:
-                    result.append(media_type.imageContentInfo.get_typeOfImageContent_display())
+            if media_type.corpusImageInfo \
+                    and media_type.corpusImageInfo.imageContentInfo:
+                result.extend(media_type.corpusImageInfo \
+                              .imageContentInfo.typeOfImageContent)
 
         # Filter for lexical conceptual
         elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
             lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
-            if lcr_media_type.lexicalConceptualResourceImageInfo:
-                if lcr_media_type.lexicalConceptualResourceImageInfo.imageContentInfo:
-                    result.append(lcr_media_type.lexicalConceptualResourceImageInfo. \
-                      imageContentInfo.get_typeOfImageContent_display())
+            if lcr_media_type.lexicalConceptualResourceImageInfo \
+                    and lcr_media_type.lexicalConceptualResourceImageInfo \
+                        .imageContentInfo:
+                result.extend(lcr_media_type.lexicalConceptualResourceImageInfo \
+                              .imageContentInfo.typeOfImageContent)
 
         # Filter for language description
         elif isinstance(corpus_media, languageDescriptionInfoType_model):
             ld_media_type = corpus_media.languageDescriptionMediaType
-            if ld_media_type.languageDescriptionImageInfo:
-                if ld_media_type.languageDescriptionImageInfo.imageContentInfo:
-                    result.append(ld_media_type.languageDescriptionImageInfo.imageContentInfo. \
-                      get_typeOfImageContent_display())
+            if ld_media_type.languageDescriptionImageInfo \
+                    and ld_media_type.languageDescriptionImageInfo.imageContentInfo:
+                result.extend(ld_media_type.languageDescriptionImageInfo \
+                              .imageContentInfo.typeOfImageContent)
 
         return result
     
