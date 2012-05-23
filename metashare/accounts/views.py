@@ -119,7 +119,7 @@ def create(request):
             data = {'firstname': new_object.firstname,
               'lastname': new_object.lastname,
               'shortname': new_object.shortname,
-              'confirmation_url': '{0}/{1}/accounts/confirm/{2}/'.format(
+              'confirmation_url': '{0}/{1}accounts/confirm/{2}/'.format(
                 DJANGO_URL, DJANGO_BASE, new_object.uuid)}
             email = render_to_string('accounts/confirmation.email', data)
             
@@ -471,7 +471,7 @@ def reset(request, uuid=None):
                 data = {'firstname': user.first_name,
                   'lastname': user.last_name,
                   'shortname': user.username,
-                  'confirmation_url': '{0}/{1}/accounts/reset/{2}/'.format(
+                  'confirmation_url': '{0}/{1}accounts/reset/{2}/'.format(
                     DJANGO_URL, DJANGO_BASE, new_object.uuid)}
                 email = render_to_string('accounts/reset.email', data)
                 
