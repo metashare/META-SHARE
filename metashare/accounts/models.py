@@ -71,6 +71,14 @@ class UserProfile(models.Model):
     """
     Contains additional user data related to a Django User instance.
     """
+    class Meta:
+        # global permissions for which there does not seem to be any better
+        # place around ...
+        permissions = (
+            ("ms_associate_member", "Is a META-SHARE associate member."),
+            ("ms_full_member", "Is a META-SHARE full member."),
+        )
+
     user = models.OneToOneField(User)
     modified = models.DateTimeField(auto_now=True)
     uuid = models.CharField(max_length=32, verbose_name="UUID",
