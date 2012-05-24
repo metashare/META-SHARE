@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.db import models
 
+from metashare.accounts.models import EditorGroup
 # pylint: disable-msg=W0611
 from metashare.repository.supermodel import SchemaModel, SubclassableModel, \
   _make_choices_from_list, InvisibleStringModel, \
@@ -141,6 +142,7 @@ class resourceInfoType_model(SchemaModel):
         formatstring = u'{}'
         return self.unicode_(formatstring, formatargs)
 
+    editor_groups = models.ManyToManyField(EditorGroup, blank=True, null=True)
 
     owners = models.ManyToManyField(User, blank=True, null=True)
 
