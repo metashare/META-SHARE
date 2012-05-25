@@ -36,10 +36,10 @@
 <licenceInfo>
 <licence>ELRA_EVALUATION</licence>
 <restrictionsOfUse>evaluationUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 3600.00€</price>
-<price>Academic org. ELRA Non Member: 3600.00€</price>
-<price>Commercial org. ELRA Member: 3000.00€</price>
-<price>Academic org. ELRA Member: 3000.00€</price>
+<fee>Commercial org. ELRA Non Member: 3600.00€</fee>
+<fee>Academic org. ELRA Non Member: 3600.00€</fee>
+<fee>Commercial org. ELRA Member: 3000.00€</fee>
+<fee>Academic org. ELRA Member: 3000.00€</fee>
 <distributionAccessMedium>DVD-R</distributionAccessMedium>
 <availabilityStartDate>2011-09-20</availabilityStartDate>
 </licenceInfo>
