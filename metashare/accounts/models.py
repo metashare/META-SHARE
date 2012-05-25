@@ -7,7 +7,7 @@ import logging
 from traceback import extract_stack
 from uuid import uuid1
 
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group, Permission
 from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.core import serializers
 from django.db import models
@@ -117,6 +117,54 @@ class UserProfile(models.Model):
 # cfedermann: of course, we will now also have to call synchronise methods for
 #             delete() calls.  For this, we have to create receivers listening
 #             to the post_delete signal.  Again, this has to be tested!
+
+
+class EditorGroup(Group):
+    """
+    A specialized `Group` subtype which gives basic resource edit permissions. 
+    """
+    # Currently the group is just used as a marker, i.e., in order to
+    # differentiate its instances from other Django `Group`s.
+    class Meta:
+        proxy = True
+
+    def save(self, *args, **kwargs):
+        super(EditorGroup, self).save(*args, **kwargs)
+        # especially when saving for the first time, make sure that this group
+        # has all permissions that global editors have
+        # pylint: disable-msg=E1101
+        if not self.permissions or self.permissions.count() == 0:
+            from metashare.repository.management import GROUP_GLOBAL_EDITORS
+            for perm in Group.objects.get(name=GROUP_GLOBAL_EDITORS) \
+                    .permissions.all():
+                # pylint: disable-msg=E1101
+                self.permissions.add(perm)
+
+
+class ManagerGroup(Group):
+    """
+    A specialized `Group` which gives its members permissions to manage language
+    resources belonging to a certain (managed) group.
+    
+    Group members may choose the members of the managed group and they may
+    ingest/publish/delete resources belonging to the managed group.
+    """
+    # the `EditorGroup` which is managed by members of this `ManagerGroup`
+    managed_group = models.OneToOneField(EditorGroup)
+
+    def save(self, *args, **kwargs):
+        super(ManagerGroup, self).save(*args, **kwargs)
+        # especially when saving for the first time, make sure that this group
+        # has all required model permissions for deleting language resources
+        # pylint: disable-msg=E1101
+        if not self.permissions or self.permissions.count() == 0:
+            from metashare.repository.models import resourceInfoType_model
+            opts = resourceInfoType_model._meta
+            # pylint: disable-msg=E1101
+            self.permissions.add(Permission.objects.filter(
+                    content_type__app_label=opts.app_label,
+                    codename=opts.get_delete_permission())[0])
+
 
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
