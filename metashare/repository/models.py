@@ -142,9 +142,9 @@ class resourceInfoType_model(SchemaModel):
         formatstring = u'{}'
         return self.unicode_(formatstring, formatargs)
 
-    editor_groups = models.ManyToManyField(EditorGroup, blank=True, null=True)
+    editor_groups = models.ManyToManyField(EditorGroup, blank=True)
 
-    owners = models.ManyToManyField(User, blank=True, null=True)
+    owners = models.ManyToManyField(User, blank=True)
 
     storage_object = models.ForeignKey(StorageObject, blank=True, null=True,
       unique=True)

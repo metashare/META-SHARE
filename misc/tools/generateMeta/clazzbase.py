@@ -266,9 +266,9 @@ class {}_model(InvisibleStringModel, {}):
 '''
 
 TOP_LEVEL_TYPE_EXTRA_CODE_TEMPLATE = '''
-    editor_groups = models.ManyToManyField(EditorGroup, blank=True, null=True)
+    editor_groups = models.ManyToManyField(EditorGroup, blank=True)
 
-    owners = models.ManyToManyField(User, blank=True, null=True)
+    owners = models.ManyToManyField(User, blank=True)
 
     storage_object = models.ForeignKey(StorageObject, blank=True, null=True,
       unique=True)
