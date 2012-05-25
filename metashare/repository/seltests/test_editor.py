@@ -22,6 +22,7 @@ class EditorTest(SeleniumTestCase):
         editoruser = User.objects.create_user(
           'editoruser', 'editor@example.com', 'secret')
         editoruser.is_staff = True
+        editoruser.is_superuser = True
         globaleditors = Group.objects.get(name='globaleditors')
         editoruser.groups.add(globaleditors)
         editoruser.save()
@@ -145,16 +146,16 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
         self.fill_contact_person(driver, ss_path, root_id)
         
-        # corpus info text popup
+        # corpus text info popup
         driver.find_element_by_id("add_id_corpusTextInfo-0").click()
         driver.switch_to_window("id_corpusTextInfo__dash__0")
         Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
           "monolingual")
-        # corpus info text / language popup
+        # corpus text info / language
         self.fill_language(driver, ss_path, "languageinfotype_model_set-0-")
-        # corpus info text / size popup
-        self.fill_size(driver, ss_path, "sizeinfotype_model_set-0-")
-        # save and close corpus info text popup
+        # corpus text info / size
+        self.fill_text_size(driver, ss_path, "sizeinfotype_model_set-0-")
+        # save and close corpus text info popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         driver.find_element_by_name("_save").click()
         driver.switch_to_window(root_id)
@@ -165,7 +166,103 @@ class EditorTest(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         self.assertEqual("The Resource \"Test Text Corpus\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
-          
+
+        # ingest resource
+        self.ingest(driver)
+        self.assertEqual("ingested",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        # publish resource
+        self.publish(driver)
+        self.assertEqual("published",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        # delete resource
+        self.delete(driver)
+        self.assertEqual("Successfully deleted 1 Resource.", 
+         driver.find_element_by_css_selector("li.info").text)
+        
+        
+    def test_LR_creation_corpus_audio(self):
+        driver = self.driver
+        driver.get(self.base_url)
+        ss_path = setup_screenshots_folder(
+          "PNG-metashare.repository.seltests.test_editor.EditorTest",
+          "LR_creation_corpus_audio")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))  
+        # login user
+        login_user(driver, "editoruser", "secret")
+        # make sure login was successful
+        self.assertEqual("Logout", 
+          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Editor
+        driver.find_element_by_css_selector("div.button.middle_button").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Share/Create Resource
+        mouse_over(driver, driver.find_element_by_link_text("Share/Create"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_link_text("Resource").click()
+        # create audio corpus
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
+        driver.find_element_by_id("id_corpusAudioInfo").click()
+        driver.find_element_by_id("id_submit").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("Add Resource", 
+          driver.find_element_by_css_selector("#content > h1").text)
+        # remember root window id
+        root_id = driver.current_window_handle
+        # add required fields
+        driver.find_element_by_name("key_form-0-resourceName_0").clear()
+        driver.find_element_by_name("key_form-0-resourceName_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-resourceName_0").clear()
+        driver.find_element_by_name("val_form-0-resourceName_0").send_keys("Test Audio Corpus")
+        driver.find_element_by_name("key_form-0-description_0").clear()
+        driver.find_element_by_name("key_form-0-description_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-description_0").clear()
+        driver.find_element_by_name("val_form-0-description_0").send_keys("Test Description")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # distribution popup
+        driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
+        self.fill_distribution(driver, ss_path, root_id)
+        # contact person popup
+        driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
+        self.fill_contact_person(driver, ss_path, root_id)
+        
+        # corpus audio info popup
+        driver.find_element_by_id("add_id_corpusAudioInfo").click()
+        driver.switch_to_window("id_corpusAudioInfo")
+        Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
+          "monolingual")
+        # corpus audio info / language
+        self.fill_language(driver, ss_path, "languageinfotype_model_set-0-")
+        # corpus audio info / size popup
+        driver.find_element_by_css_selector("#add_id_audioSizeInfo > img[alt=\"Add Another\"]").click()
+        self.fill_audio_size(driver, ss_path, "id_corpusAudioInfo")
+        # save and close corpus audio info popup
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("_save").click()
+        driver.switch_to_window(root_id)
+        
+        # save audio corpus
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("_save").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("The Resource \"Test Audio Corpus\" was added successfully.", 
+          driver.find_element_by_css_selector("li.info").text)
+
+        # ingest resource
+        self.ingest(driver)
+        self.assertEqual("ingested",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        # publish resource
+        self.publish(driver)
+        self.assertEqual("published",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        # delete resource
+        self.delete(driver)
+        self.assertEqual("Successfully deleted 1 Resource.", 
+         driver.find_element_by_css_selector("li.info").text)
+
         
     def test_LR_creation_lang_descr_text(self):
         driver = self.driver
@@ -228,7 +325,7 @@ class EditorTest(SeleniumTestCase):
         driver.switch_to_window("id_languageDescriptionTextInfo")
         Select(driver.find_element_by_id("id_form-2-0-lingualityType")).select_by_visible_text(
           "monolingual")
-        # language description info text / language popup
+        # language description info text / language
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
         self.fill_language(driver, ss_path, "languageinfotype_model_set-0-")
         # save and close language description info text popup
@@ -242,6 +339,20 @@ class EditorTest(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         self.assertEqual("The Resource \"Test Text Language Description\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
+        
+        # ingest resource
+        # TODO ingesting creates an internal server error
+#        self.ingest(driver)
+#        self.assertEqual("ingested",
+#         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+#        # publish resource
+#        self.publish(driver)
+#        self.assertEqual("published",
+#         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+#        # delete resource
+#        self.delete(driver)
+#        self.assertEqual("Successfully deleted 1 Resource.", 
+#         driver.find_element_by_css_selector("li.info").text)
         
 
     def test_LR_creation_lex_resource_text(self):
@@ -305,10 +416,10 @@ class EditorTest(SeleniumTestCase):
         driver.switch_to_window("id_lexicalConceptualResourceTextInfo")
         Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
           "monolingual")
-        # lexical resource text info / language popup
+        # lexical resource text info / language
         self.fill_language(driver, ss_path, "languageinfotype_model_set-0-")
-        # lexical resource text info / size popup
-        self.fill_size(driver, ss_path, "sizeinfotype_model_set-0-")
+        # lexical resource text info / size
+        self.fill_text_size(driver, ss_path, "sizeinfotype_model_set-0-")
         # save and close lexical resource text info popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         driver.find_element_by_name("_save").click()
@@ -320,6 +431,19 @@ class EditorTest(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         self.assertEqual("The Resource \"Test Lexical Resource Text\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
+        
+        # ingest resource
+        self.ingest(driver)
+        self.assertEqual("ingested",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        # publish resource
+        self.publish(driver)
+        self.assertEqual("published",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        # delete resource
+        self.delete(driver)
+        self.assertEqual("Successfully deleted 1 Resource.", 
+         driver.find_element_by_css_selector("li.info").text)
         
         
     def test_LR_creation_tool(self):
@@ -386,6 +510,19 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("The Resource \"Test Tool\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
         
+        # ingest resource
+        self.ingest(driver)
+        self.assertEqual("ingested",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        # publish resource
+        self.publish(driver)
+        self.assertEqual("published",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        # delete resource
+        self.delete(driver)
+        self.assertEqual("Successfully deleted 1 Resource.", 
+         driver.find_element_by_css_selector("li.info").text)
+
 
     def test_sorting(self):
         """
@@ -558,8 +695,7 @@ class EditorTest(SeleniumTestCase):
         
     def fill_language(self, driver, ss_path, id_infix):
         """
-        fills the language popup with required information and returns to the
-        parent window
+        fills the language with required information
         """
         driver.find_element_by_id("id_{}languageId".format(id_infix)).clear()
         driver.find_element_by_id("id_{}languageId".format(id_infix)).send_keys("De")
@@ -567,14 +703,47 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_id("id_{}languageName".format(id_infix)).send_keys("German")
         
         
-    def fill_size(self, driver, ss_path, id_infix):
+    def fill_text_size(self, driver, ss_path, id_infix):
         """
-        fills the size popup with required information and returns to the
-        parent window
+        fills the text size with required information
         """
         driver.find_element_by_id("id_{}size".format(id_infix)).clear()
         driver.find_element_by_id("id_{}size".format(id_infix)).send_keys("10000")
         Select(driver.find_element_by_id("id_{}sizeUnit".format(id_infix))).select_by_visible_text("tokens")
+        
+        
+    def fill_audio_size(self, driver, ss_path, parent_id):
+        driver.switch_to_window("id_audioSizeInfo")
+        # TODO: the popup can be saved immediately, but still audio size is required in corpus audio info
+        driver.find_element_by_name("_save").click()
+        driver.switch_to_window(parent_id)
+        
+        
+    def ingest(self, driver):
+        """
+        selects all resources and ingests them
+        """
+        driver.find_element_by_id("action-toggle").click()
+        Select(driver.find_element_by_name("action")).select_by_visible_text("Ingest selected internal resources")
+        driver.find_element_by_name("index").click()
+
+        
+    def publish(self, driver):
+        """
+        selects all resources and publishes them
+        """
+        driver.find_element_by_id("action-toggle").click()
+        Select(driver.find_element_by_name("action")).select_by_visible_text("Publish selected ingested resources")
+        driver.find_element_by_name("index").click()
+        
+    def delete(self, driver):
+        """
+        selects all resources and deletes them
+        """
+        driver.find_element_by_id("action-toggle").click()
+        Select(driver.find_element_by_name("action")).select_by_visible_text("Delete selected Resources")
+        driver.find_element_by_name("index").click()
+        driver.find_element_by_css_selector("input[type=\"submit\"]").click()
 
         
     def is_element_present(self, how, what):
