@@ -1,42 +1,47 @@
+import datetime
+
+from django import forms
+from django.contrib.admin.util import unquote
+from django.contrib.admin.views.main import ChangeList
+from django.contrib.auth.decorators import permission_required
+from django.core.exceptions import ValidationError, PermissionDenied
+from django.http import Http404
+from django.shortcuts import render_to_response
+from django.template.context import RequestContext
+from django.utils.decorators import method_decorator
+from django.utils.encoding import force_unicode
+from django.utils.functional import update_wrapper
+from django.utils.html import escape
+from django.utils.safestring import mark_safe
+from django.utils.translation import ugettext as _
+from django.views.decorators.csrf import csrf_protect
+
+from metashare import settings
+from metashare.repository.editor.editorutils import FilteredChangeList
+from metashare.repository.editor.forms import StorageObjectUploadForm
 from metashare.repository.editor.inlines import ReverseInlineFormSet, \
     ReverseInlineModelAdmin
-from django.core.exceptions import ValidationError, PermissionDenied
+from metashare.repository.editor.lookups import MembershipDummyLookup
+from metashare.repository.editor.schemamodel_mixin import encode_as_inline
+from metashare.repository.editor.superadmin import SchemaModelAdmin
+from metashare.repository.editor.widgets import OneToManyWidget
 from metashare.repository.models import resourceComponentTypeType_model, \
     corpusInfoType_model, languageDescriptionInfoType_model, \
     lexicalConceptualResourceInfoType_model, toolServiceInfoType_model, \
     corpusMediaTypeType_model, languageDescriptionMediaTypeType_model, \
     lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model, \
     licenceInfoType_model
+from metashare.repository.supermodel import SchemaModel
+from metashare.stats.model_utils import saveLRStats, UPDATE_STAT, INGEST_STAT, \
+    PUBLISH_STAT
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
     ALLOWED_ARCHIVE_EXTENSIONS
 from metashare.utils import verify_subclass
-from metashare.stats.model_utils import saveLRStats, UPDATE_STAT, INGEST_STAT, PUBLISH_STAT
-from metashare.repository.supermodel import SchemaModel
-from django.utils.encoding import force_unicode
-from django.utils.safestring import mark_safe
-from django.template.context import RequestContext
-from django.shortcuts import render_to_response
-from metashare import settings
-from django.contrib.auth.decorators import permission_required
-from django.utils.decorators import method_decorator
-from metashare.repository.editor.superadmin import SchemaModelAdmin
-from metashare.repository.editor.schemamodel_mixin import encode_as_inline
-from django.utils.functional import update_wrapper
-from django.views.decorators.csrf import csrf_protect
-from metashare.repository.editor.editorutils import FilteredChangeList
-from django.contrib.admin.views.main import ChangeList
-from django.contrib.admin.util import unquote
-from django.http import Http404
-from metashare.repository.editor.forms import StorageObjectUploadForm
-from django.utils.html import escape
-from django.utils.translation import ugettext as _
-from metashare.repository.editor.lookups import MembershipDummyLookup
-from metashare.repository.editor.widgets import OneToManyWidget
-import datetime
+
 
 csrf_protect_m = method_decorator(csrf_protect)
 
-    
+
 class ResourceComponentInlineFormSet(ReverseInlineFormSet):
     '''
     A formset with custom save logic for resources.
@@ -265,7 +270,6 @@ def export_xml_resources(modeladmin, request, queryset):
         return response
 export_xml_resources.short_description = "Export selected resource descriptions to XML"
 
-from django import forms
 
 class MetadataForm(forms.ModelForm):
     def save(self, commit=True):
