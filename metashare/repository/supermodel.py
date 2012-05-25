@@ -492,9 +492,9 @@ class SchemaModel(models.Model):
                             _element.text = SchemaModel._python_to_xml(
                                                                 _sub_value[1])                            
                             if self.is_required_field(_model_field):
-								# If the element is "required" in the model,
-								# turn the "required" value of the element
-								# tree to "1" (true), otherwise "0" (false).
+                                # If the element is "required" in the model,
+                                # turn the "required" value of the element
+                                # tree to "1" (true), otherwise "0" (false).
                                 _element.required = self.is_required_field( \
                                                                 _model_field)
                             else:
