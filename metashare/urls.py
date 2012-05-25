@@ -41,6 +41,11 @@ urlpatterns += patterns('metashare.repository.views',
   (r'^{0}repository/'.format(DJANGO_BASE), include('metashare.repository.urls')),
 )
 
+urlpatterns += patterns('metashare.sync.views',
+  (r'^{0}sync/'.format(DJANGO_BASE), include('metashare.sync.urls')),
+)
+
+
 urlpatterns += patterns('',
   (r'^selectable/', include('selectable.urls')),
 )

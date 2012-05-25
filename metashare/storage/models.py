@@ -186,6 +186,11 @@ class StorageObject(models.Model):
     """
     __schema_name__ = "STORAGEOJBECT"
     
+    class Meta:
+        permissions = (
+            ('can_sync', 'Can synchronize'),
+        )
+    
     source = models.ForeignKey(StorageServer, blank=True, null=True,
       editable=False, help_text="(Read-only) source for this storage " \
       "object instance.")
