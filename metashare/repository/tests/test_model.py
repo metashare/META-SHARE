@@ -4,7 +4,7 @@ from django.test import TestCase
 from metashare import test_utils
 from metashare.settings import ROOT_PATH
 from metashare.repository.models import resourceInfoType_model, SCHEMA_NAMESPACE
-from metashare.repository.supermodel import pretty_xml
+from metashare.xml_utils import pretty_xml
 from difflib import unified_diff
 
 class ModelTest(TestCase):
