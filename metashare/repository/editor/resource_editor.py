@@ -667,10 +667,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
             return request.POST['resourceComponentId']
         return None
 
-    def add_to_my_resources(self, request):
+    def add_user_to_resource_owners(self, request):
         '''
-        Add the current user to the list of owners for the current resource,
-        thereby adding the resource to the 'my resources' list for the user.
+        Add the current user to the list of owners for the current resource.
         
         Due to the validation logic of django admin, we add the user to the
         form's clean_data object rather than the resource object's m2m field;
@@ -708,7 +707,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
             _structures = self.get_hidden_structures(request)
             _extra_context.update(_structures)
         # We add the current user to the resource owners:
-        self.add_to_my_resources(request)
+        self.add_user_to_resource_owners(request)
         # And in any case, we serve the usual change form if we have a post request
         return super(ResourceModelAdmin, self).add_view(request, form_url, _extra_context)
         
@@ -724,8 +723,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
         _extra_context.update({'DJANGO_BASE':settings.DJANGO_BASE})
         _structures = self.get_hidden_structures(request, object_id)
         _extra_context.update(_structures)
-        # We add the current user to the resource owners:
-        self.add_to_my_resources(request)
         return super(ResourceModelAdmin, self).change_view(request, object_id, _extra_context)
 
 class LicenceForm(forms.ModelForm):
