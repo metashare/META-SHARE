@@ -3,11 +3,12 @@ import django.db.models
 from django.contrib import admin
 from django.contrib.admin.sites import LOGIN_FORM_KEY
 from django.contrib.auth import REDIRECT_FIELD_NAME
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User
 from django.test import TestCase
 from django.test.client import Client
 
 from metashare import test_utils
+from metashare.accounts.models import EditorGroup
 from metashare.repository import models
 from metashare.repository.models import languageDescriptionInfoType_model, \
     lexicalConceptualResourceInfoType_model, resourceInfoType_model
@@ -27,16 +28,19 @@ class EditorTest(TestCase):
     Test the python/server side of the editor
     """
     # static variables to be initialized in setUpClass():
+    test_editor_group = None
     staff_login = None
     normal_login = None
     editor_login = None
     testfixture = None
 
     @classmethod
-    def import_test_resource(cls, path=TESTFIXTURE_XML):
+    def import_test_resource(cls, editor_group, path=TESTFIXTURE_XML):
         test_utils.setup_test_storage()
         result = test_utils.import_xml(path)
         resource = result[0]
+        resource.editor_groups.add(editor_group)
+        resource.save()
         return resource
 
     @classmethod
@@ -47,6 +51,9 @@ class EditorTest(TestCase):
         pollute the "normal" development db or the production db.
         As a consequence, they need no valuable password.
         """
+        EditorTest.test_editor_group = EditorGroup.objects.create(
+                                                    name='test_editor_group')
+
         staffuser = User.objects.create_user('staffuser', 'staff@example.com',
           'secret')
         staffuser.is_staff = True
@@ -57,8 +64,7 @@ class EditorTest(TestCase):
         editoruser = User.objects.create_user('editoruser', 'editor@example.com',
           'secret')
         editoruser.is_staff = True
-        globaleditors = Group.objects.get(name='globaleditors')
-        editoruser.groups.add(globaleditors)
+        editoruser.groups.add(EditorTest.test_editor_group)
         editoruser.save()
 
 
@@ -84,7 +90,8 @@ class EditorTest(TestCase):
             'password': 'secret',
         }
         
-        EditorTest.testfixture = cls.import_test_resource()
+        EditorTest.testfixture = cls.import_test_resource(
+                                                EditorTest.test_editor_group)
 
     @classmethod
     def tearDownClass(cls):
@@ -222,8 +229,9 @@ class EditorTest(TestCase):
         response = client.post(ADMINROOT+'upload_xml/', {'description': xmlfile, 'uploadTerms':'on' }, follow=True)
         self.assertContains(response, 'Successfully uploaded 2 resource descriptions')
         self.assertNotContains(response, 'Import failed')
-        # And verify that we have more than zero resources on the "my resources" page where we are being redirected:
-        self.assertContains(response, "My Resources")
+        # And verify that we have more than zero resources on the page where we
+        # are being redirected:
+        self.assertContains(response, "Editable Resources")
         self.assertNotContains(response, '0 Resources')
 
     def test_upload_broken_zip(self):
@@ -328,7 +336,8 @@ class EditorTest(TestCase):
 
     def test_hidden_field_is_not_referenced_in_fieldset_label(self):
         client = self.client_with_user_logged_in(EditorTest.editor_login)
-        resource = self.import_test_resource(LEX_CONC_RES_XML)
+        resource = self.import_test_resource(EditorTest.test_editor_group,
+                                             LEX_CONC_RES_XML)
         response = client.get('{}repository/lexicalconceptualresourceinfotype_model/{}/'.format(ADMINROOT, resource.resourceComponentType.id))
         self.assertNotContains(response, ' Lexical conceptual resource media</',
                                msg_prefix='Hidden fields must not be visible in fieldset labels.')
@@ -342,11 +351,6 @@ class EditorTest(TestCase):
     def test_resources_list(self):
         client = self.client_with_user_logged_in(EditorTest.editor_login)
         response = client.get(ADMINROOT+'repository/resourceinfotype_model/')
-        self.assertContains(response, 'Resources')
-
-    def test_myresources_list(self):
-        client = self.client_with_user_logged_in(EditorTest.editor_login)
-        response = client.get(ADMINROOT+'repository/resourceinfotype_model/my/')
         self.assertContains(response, 'Resources')
 
     def test_storage_object_is_hidden(self):

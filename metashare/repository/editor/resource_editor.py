@@ -2,9 +2,9 @@ import datetime
 
 from django import forms
 from django.contrib.admin.util import unquote
-from django.contrib.admin.views.main import ChangeList
 from django.contrib.auth.decorators import permission_required
 from django.core.exceptions import ValidationError, PermissionDenied
+from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
@@ -17,7 +17,6 @@ from django.utils.translation import ugettext as _
 from django.views.decorators.csrf import csrf_protect
 
 from metashare import settings
-from metashare.repository.editor.editorutils import FilteredChangeList
 from metashare.repository.editor.forms import StorageObjectUploadForm
 from metashare.repository.editor.inlines import ReverseInlineFormSet, \
     ReverseInlineModelAdmin
@@ -312,42 +311,11 @@ class ResourceModelAdmin(SchemaModelAdmin):
             url(r'^(.+)/upload-data/$',
                 wrap(self.uploaddata_view),
                 name='%s_%s_uploaddata' % info),
-            url(r'^my/$',
-                wrap(self.changelist_view_filtered),
-                name='%s_%s_myresources' % info),
             url(r'^(.+)/export-xml/$',
                 wrap(self.exportxml),
                 name='%s_%s_exportxml' % info),
         ) + urlpatterns
         return urlpatterns
-
-    @csrf_protect_m
-    def changelist_view_filtered(self, request, extra_context=None):
-        '''
-        The filtered changelist view for My Resources.
-        We reuse the generic django changelist_view and squeeze in our wish to
-        show the filtered view in two places:
-        1. we patch request.POST to insert a parameter 'myresources'='true',
-           which will be interpreted in get_changelist to show the filtered
-           version;
-        2. we pass a extra_context variable 'myresources' which will be
-           interpreted in the template change_list.html. 
-        '''
-        _post = request.POST.copy()
-        _post['myresources'] = 'true'
-        request.POST = _post
-        _extra_context = extra_context or {}
-        _extra_context.update({'myresources':True})
-        return self.changelist_view(request, _extra_context)
-
-    def get_changelist(self, request, **kwargs):
-        """
-        Returns the ChangeList class for use on the changelist page.
-        """
-        if 'myresources' in request.POST:
-            return FilteredChangeList
-        else:
-            return ChangeList
 
 
     @csrf_protect_m
@@ -578,8 +546,23 @@ class ResourceModelAdmin(SchemaModelAdmin):
             if item in post:
                 out[item] = True
         return out
+
+    def queryset(self, request):
+        """
+        Returns a QuerySet of all model instances that can be edited by the
+        admin site.
         
-        
+        This is used by changelist_view, for example, but also for determining
+        whether the current user may edit a resource or not.
+        """
+        result = super(ResourceModelAdmin, self).queryset(request)
+        # all users but the superusers may only see resources for which they are
+        # either owner or editor group member:
+        if not request.user.is_superuser:
+            result = result.distinct().filter(Q(owners=request.user)
+                    | Q(editor_groups__name__in=
+                           request.user.groups.values_list('name', flat=True)))
+        return result
 
     def create_hidden_structures(self, request):
         '''
