@@ -1,15 +1,18 @@
-from django.test import TestCase
 import django.db.models
-from django.contrib.auth.models import User, Group
-from django.test.client import Client
-from metashare.settings import DJANGO_BASE, ROOT_PATH
-from metashare.repository import models
+
 from django.contrib import admin
-from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.admin.sites import LOGIN_FORM_KEY
+from django.contrib.auth import REDIRECT_FIELD_NAME
+from django.contrib.auth.models import User, Group
+from django.test import TestCase
+from django.test.client import Client
+
+from metashare import test_utils
+from metashare.repository import models
 from metashare.repository.models import languageDescriptionInfoType_model, \
     lexicalConceptualResourceInfoType_model, resourceInfoType_model
-from metashare import test_utils
+from metashare.settings import DJANGO_BASE, ROOT_PATH
+
 
 ADMINROOT = '/{0}editor/'.format(DJANGO_BASE)
 TESTFIXTURE_XML = '{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
