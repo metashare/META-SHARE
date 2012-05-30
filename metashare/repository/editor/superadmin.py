@@ -3,28 +3,30 @@ Custom base classes for admin interface, for both the top-level admin page
 and for inline forms.
 '''
 import logging
+
+from django import template
 from django.contrib import admin
+from django.contrib.admin import helpers
 from django.contrib.admin.util import unquote, get_deleted_objects
 from django.core.exceptions import PermissionDenied
+from django.db import transaction, models, router
+from django.forms.formsets import all_valid
 from django.http import Http404, HttpResponseRedirect, HttpResponse
+from django.shortcuts import render_to_response
+from django.utils.decorators import method_decorator
 from django.utils.encoding import force_unicode
 from django.utils.html import escape
-from django.utils.translation import ugettext as _
-from django.contrib.admin import helpers
-from django.forms.formsets import all_valid
 from django.utils.safestring import mark_safe
-from django.db import transaction, models, router
-from metashare.repository.supermodel import REQUIRED, RECOMMENDED, \
-  OPTIONAL
+from django.utils.translation import ugettext as _
+from django.views.decorators.csrf import csrf_protect
+
 from metashare import settings
+from metashare.repository.editor.editorutils import is_inline, decode_inline
+from metashare.repository.editor.inlines import ReverseInlineModelAdmin
 from metashare.repository.editor.related_mixin import RelatedAdminMixin
 from metashare.repository.editor.schemamodel_mixin import SchemaModelLookup
-from metashare.repository.editor.inlines import ReverseInlineModelAdmin
-from metashare.repository.editor.editorutils import is_inline, decode_inline
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_protect
-from django import template
-from django.shortcuts import render_to_response
+from metashare.repository.supermodel import REQUIRED, RECOMMENDED, OPTIONAL
+
 
 # Setup logging support.
 logging.basicConfig(level=settings.LOG_LEVEL)
