@@ -36,19 +36,19 @@
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 6000.00€</price>
-<price>Academic org. ELRA Non Member: 1450.00€</price>
-<price>Commercial org. ELRA Member: 4500.00€</price>
-<price>Academic org. ELRA Member: 1200.00€</price>
+<fee>Commercial org. ELRA Non Member: 6000.00€</fee>
+<fee>Academic org. ELRA Non Member: 1450.00€</fee>
+<fee>Commercial org. ELRA Member: 4500.00€</fee>
+<fee>Academic org. ELRA Member: 1200.00€</fee>
 <availabilityStartDate>2009-03-23</availabilityStartDate>
 </licenceInfo>
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>Commercial org. ELRA Non Member: 6000.00€</price>
-<price>Academic org. ELRA Non Member: 6000.00€</price>
-<price>Commercial org. ELRA Member: 4500.00€</price>
-<price>Academic org. ELRA Member: 4500.00€</price>
+<fee>Commercial org. ELRA Non Member: 6000.00€</fee>
+<fee>Academic org. ELRA Non Member: 6000.00€</fee>
+<fee>Commercial org. ELRA Member: 4500.00€</fee>
+<fee>Academic org. ELRA Member: 4500.00€</fee>
 <availabilityStartDate>2009-03-23</availabilityStartDate>
 </licenceInfo>
 </distributionInfo>

@@ -80,7 +80,7 @@ if __name__ == "__main__":
     ERRONEOUS_EXPORTS = 0
     RESOURCE_NO = 0
     from metashare.repository.models import resourceInfoType_model
-    from metashare.repository.supermodel import pretty_xml
+    from metashare.xml_utils import pretty_xml
     with ZipFile(sys.argv[1], 'w') as out:
         for resource in resourceInfoType_model.objects.all():
             try:

@@ -41,9 +41,6 @@ RECOMMENDED = 3
 SCHEMA_URL = 'http://metashare.ilsp.gr/META-XMLSchema/v{0}/' \
   'META-SHARE-Resource.xsd'
 
-XML_DECL = re.compile(r'\s*<\?xml version=".+" encoding=".+"\?>\s*\n?',
-  re.I|re.S|re.U)
-
 METASHARE_ID_REGEXP = re.compile('<metashareId>.+</metashareId>',
   re.I|re.S|re.U)
 
@@ -51,50 +48,6 @@ OBJECT_XML_CACHE = {}
 
 # pylint: disable-msg=W0611
 from metashare import repository
-
-def pretty_xml(xml_string):
-    """
-    Pretty-print the given XML String with proper indentation.
-    """
-    xml_string = xml_string.decode('utf-8').replace('><', '>\n<')
-
-    # Delete any XML declaration inside the given XML String.
-    xml_string = XML_DECL.sub(u'', xml_string)
-
-    output = u'<?xml version="1.0" encoding="UTF-8"?>\n'
-
-    # Stores the current indentation level.
-    indent_level = 0
-    for line in xml_string.split('\n'):
-        line = line.strip()
-
-        if line.startswith('<') and line.endswith('/>'):
-            output += u'{0}{1}\n'.format('  ' * indent_level, line)
-            continue
-
-        if line.startswith('</') and line.endswith('>'):
-            indent_level -= 1
-            output += u'{0}{1}\n'.format('  ' * indent_level, line)
-            indent_level -= 1
-            continue
-
-        if line.startswith('<') and line.endswith('>') and '</' in line:
-            output += u'{0}{1}\n'.format('  ' * indent_level, line)
-            continue
-
-        if line.startswith('<') and line.endswith('>') and (not '</' in line):
-            indent_level += 1
-            output += u'{0}{1}\n'.format('  ' * indent_level, line)
-            indent_level += 1
-            continue
-
-        if not line.startswith('<') and line.endswith('>') and ('</' in line):
-            output += u'{0}{1}\n'.format('  ' * indent_level, line)
-            continue
-
-        output += u'{0}{1}\n'.format('  ' * indent_level, line)
-
-    return output
 
 def _remove_namespace_from_tags(element_tree):
     """
@@ -492,15 +445,19 @@ class SchemaModel(models.Model):
                             _element.text = SchemaModel._python_to_xml(
                                                                 _sub_value[1])                            
                             if self.is_required_field(_model_field):
-                                
-                                _element.required = self.is_required_field(_model_field)
+                                # If the element is "required" in the model,
+                                # turn the "required" value of the element
+                                # tree to "1" (true), otherwise "0" (false).
+                                _element.required = self.is_required_field(
+                                                                _model_field)
                             else:
                                 _element.required = 0                            
                         else:
                             _element.text = SchemaModel._python_to_xml(
                                                                 _sub_value)                            
                             if self.is_required_field(_model_field):
-                                _element.required = self.is_required_field(_model_field)
+                                _element.required = self.is_required_field(
+                                                                _model_field)
                             else:
                                 _element.required = 0
                         _current_node.append(_element)
