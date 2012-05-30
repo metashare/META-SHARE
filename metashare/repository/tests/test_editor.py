@@ -17,6 +17,7 @@ from metashare.settings import DJANGO_BASE, ROOT_PATH
 
 ADMINROOT = '/{0}editor/'.format(DJANGO_BASE)
 TESTFIXTURE_XML = '{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
+TESTFIXTURE2_XML = '{}/repository/fixtures/ILSP10.xml'.format(ROOT_PATH)
 BROKENFIXTURE_XML = '{}/repository/fixtures/broken.xml'.format(ROOT_PATH)
 TESTFIXTURES_ZIP = '{}/repository/fixtures/tworesources.zip'.format(ROOT_PATH)
 BROKENFIXTURES_ZIP = '{}/repository/fixtures/onegood_onebroken.zip'.format(ROOT_PATH)
@@ -35,11 +36,12 @@ class EditorTest(TestCase):
     testfixture = None
 
     @classmethod
-    def import_test_resource(cls, editor_group, path=TESTFIXTURE_XML):
+    def import_test_resource(cls, editor_group=None, path=TESTFIXTURE_XML):
         test_utils.setup_test_storage()
         result = test_utils.import_xml(path)
         resource = result[0]
-        resource.editor_groups.add(editor_group)
+        if not editor_group is None:
+            resource.editor_groups.add(editor_group)
         resource.save()
         return resource
 
@@ -67,6 +69,7 @@ class EditorTest(TestCase):
         editoruser.groups.add(EditorTest.test_editor_group)
         editoruser.save()
 
+        User.objects.create_superuser('superuser', 'su@example.com', 'secret')
 
         # login POST dicts
         EditorTest.staff_login = {
@@ -90,8 +93,18 @@ class EditorTest(TestCase):
             'password': 'secret',
         }
         
+        EditorTest.superuser_login = {
+            REDIRECT_FIELD_NAME: ADMINROOT,
+            LOGIN_FORM_KEY: 1,
+            'username': 'superuser',
+            'password': 'secret',
+        }
+        
         EditorTest.testfixture = cls.import_test_resource(
                                                 EditorTest.test_editor_group)
+        # second resource which is only visible by the superuser
+        EditorTest.testfixture2 = cls.import_test_resource(None,
+                                                           TESTFIXTURE2_XML)
 
     @classmethod
     def tearDownClass(cls):
@@ -349,9 +362,14 @@ class EditorTest(TestCase):
                             msg_prefix='Validator is not rendered as a ChoiceTypeWidget')
 
     def test_resources_list(self):
+        # test with editor user
         client = self.client_with_user_logged_in(EditorTest.editor_login)
         response = client.get(ADMINROOT+'repository/resourceinfotype_model/')
-        self.assertContains(response, 'Resources')
+        self.assertContains(response, '1 Resource')
+        # test with superuser
+        client = self.client_with_user_logged_in(EditorTest.superuser_login)
+        response = client.get(ADMINROOT+'repository/resourceinfotype_model/')
+        self.assertContains(response, '2 Resources')
 
     def test_storage_object_is_hidden(self):
         client = self.client_with_user_logged_in(EditorTest.editor_login)
