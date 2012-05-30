@@ -149,7 +149,7 @@ from xml.etree.ElementTree import tostring
 
 # pylint: disable-msg=W0611
 from {0}supermodel import SchemaModel, SubclassableModel, \\
-  _make_choices_from_list, InvisibleStringModel, pretty_xml, \\
+  _make_choices_from_list, InvisibleStringModel, \\
   REQUIRED, OPTIONAL, RECOMMENDED
 from {0}editor.widgets import MultiFieldWidget
 from {0}fields import MultiTextField, MetaBooleanField, \\
@@ -157,6 +157,7 @@ from {0}fields import MultiTextField, MetaBooleanField, \\
 from {0}validators import validate_lang_code_keys
 
 from metashare.storage.models import StorageObject
+from metashare.xml_utils import pretty_xml
 
 from metashare.settings import DJANGO_BASE, LOG_LEVEL, LOG_HANDLER
 

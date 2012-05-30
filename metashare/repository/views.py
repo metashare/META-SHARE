@@ -20,7 +20,6 @@ from haystack.views import FacetedSearchView
 from metashare.repository.forms import LicenseSelectionForm, LicenseAgreementForm
 from metashare.repository.models import licenceInfoType_model, resourceInfoType_model
 from metashare.repository.search_indexes import resourceInfoType_modelIndex
-#from metahsare.repository.editor.schemamodel_mixin import SchemaModelLookup
 from metashare.settings import LOG_LEVEL, LOG_HANDLER, MEDIA_URL
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
@@ -57,8 +56,12 @@ def _convert_to_template_tuples(element_tree):
             values.append(_convert_to_template_tuples(child))
         return (element_tree.tag, values)
 
-    # Otherwise, we return a tuple containg (key, value), i.e., (tag, text).
-    else:        
+    # Otherwise, we return a tuple containg (key, value, required), 
+    # i.e., (tag, text, <0,1>).
+    # The "required" element was added to the tree, for passing 
+    # information about whether a field is required or not, to correctly
+    # render the single resource view.
+    else:   
         return ((element_tree.tag, element_tree.text, element_tree.required),)
 
 
@@ -305,7 +308,7 @@ def view(request, object_id=None):
     Render browse or detail view for the repository application.
     """
     resource = get_object_or_404(resourceInfoType_model, pk=object_id)
-    # print "\n\n" + str(resource) + "\n\n"
+
     # Convert resource to ElementTree and then to template tuples.
     resource_tree = resource.export_to_elementtree()
     lr_content = _convert_to_template_tuples(resource_tree)
