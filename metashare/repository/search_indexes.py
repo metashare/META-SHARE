@@ -1264,48 +1264,33 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         """
         Collect the data to filter the resources on Resource Type children
         """
-        result = []
-
         corpus_media = obj.resourceComponentType.as_subclass()
-
         if isinstance(corpus_media, languageDescriptionInfoType_model):
-            result.append(corpus_media.languageDescriptionMediaType. \
-              get_languageDescriptionType_display())
+            return [corpus_media.get_languageDescriptionType_display()]
+        return []
 
-        return result
-    
     def prepare_ldEncodingLevelFilter(self, obj):
         """
         Collect the data to filter the resources on Resource Type children
         """
-        result = []
-
         corpus_media = obj.resourceComponentType.as_subclass()
+        if isinstance(corpus_media, languageDescriptionInfoType_model) \
+                and corpus_media.languageDescriptionEncodingInfo:
+            return corpus_media.languageDescriptionEncodingInfo \
+                .get_encodingLevel_display_list()
+        return []
 
-        if isinstance(corpus_media, languageDescriptionInfoType_model):
-            ld_media_type = corpus_media.languageDescriptionMediaType
-            if corpus_media.get_languageDescriptionEncodingInfo_display():
-                result.extend(ld_media_type.languageDescriptionEncodingInfo. \
-                  get_encodingLevel_display_list())
-
-        return result
-    
     def prepare_ldGrammaticalPhenomenaCoverageFilter(self, obj):
         """
         Collect the data to filter the resources on Resource Type children
         """
-        result = []
-
         corpus_media = obj.resourceComponentType.as_subclass()
+        if isinstance(corpus_media, languageDescriptionInfoType_model) \
+                and corpus_media.languageDescriptionEncodingInfo:
+            return corpus_media.languageDescriptionEncodingInfo \
+                .get_grammaticalPhenomenaCoverage_display_list()
+        return []
 
-        if isinstance(corpus_media, languageDescriptionInfoType_model):
-            ld_media_type = corpus_media.languageDescriptionMediaType
-            if corpus_media.get_languageDescriptionEncodingInfo_display():
-                result.extend(ld_media_type.languageDescriptionEncodingInfo. \
-                  get_grammaticalPhenomenaCoverage_display_list())
-
-        return result
-    
     def prepare_lcrLexicalResourceTypeFilter(self, obj):
         """
         Collect the data to filter the resources on Resource Type children
