@@ -6,8 +6,9 @@ Project: META-SHARE prototype implementation
 import logging
 
 from datetime import datetime
-from os.path import split
+from os.path import split, getsize
 from urllib import urlopen
+from mimetypes import guess_type
 
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
@@ -243,10 +244,14 @@ def _provide_download(request, resource, download_urls):
                         yield _chunk
                         _chunk = _local_data.read(MAXIMUM_READ_BLOCK_SIZE)
 
-            # build HTTP response with a generic, binary mime type; the response
+            # build HTTP response with a guessed mime type; the response
             # content is a stream of the download file
+            filemimetype , encod = guess_type(dl_path)
+            if not filemimetype:
+                filemimetype = "application/octet-stream"
             response = HttpResponse(dl_stream_generator(),
-                                    mimetype="application/octet-stream")
+                                    mimetype=filemimetype)
+            response['Content-Length'] = getsize(dl_path) 
             response['Content-Disposition'] = 'attachment; filename={0}' \
                                                 .format(split(dl_path)[1])
 
