@@ -42,7 +42,7 @@ urlpatterns += patterns('metashare.repository.views',
 )
 
 urlpatterns += patterns('',
-  (r'^selectable/', include('selectable.urls')),
+  (r'^{0}selectable/'.format(DJANGO_BASE), include('selectable.urls')),
 )
 
 if DEBUG:
