@@ -42,7 +42,7 @@ class EditorTest(TestCase):
         resource = result[0]
         if not editor_group is None:
             resource.editor_groups.add(editor_group)
-        resource.save()
+            resource.save()
         return resource
 
     @classmethod
