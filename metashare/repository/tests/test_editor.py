@@ -98,7 +98,7 @@ class EditorTest(TestCase):
                 .format(user_credentials, response)
         return client
 
-
+    
     def test_can_log_in_staff(self):
         client = Client()
         request = client.get(ADMINROOT)
@@ -117,12 +117,12 @@ class EditorTest(TestCase):
         login = client.post(ADMINROOT, EditorTest.normal_login)
         # successful login redirects (status 302), failed login gives a status of 200:
         self.assertContains(login, 'Please enter a correct username and password', status_code=200)
-            
+           
     def test_editor_can_see_model_list(self):
         client = self.client_with_user_logged_in(EditorTest.editor_login)
         response = client.get(ADMINROOT+'repository/')
         self.assertContains(response, 'Repository administration')
-        
+       
     def test_staff_cannot_see_model_list(self):
         client = self.client_with_user_logged_in(EditorTest.staff_login)
         response = client.get(ADMINROOT+'repository/')
@@ -359,3 +359,18 @@ class EditorTest(TestCase):
     def test_editor_cannot_delete_actorInfo(self):
         editoruser = User.objects.get(username='editoruser')
         self.assertFalse(editoruser.has_perm('repository.delete_actorinfotype_model'))
+       
+    def test_can_edit_master_copy(self):        
+        client = self.client_with_user_logged_in(EditorTest.editor_login)
+        resource = self.import_test_resource()
+        resource.storage_object.master_copy = True
+        response = client.get(ADMINROOT+'repository/corpusinfotype_model/1/')
+        self.assertContains(response, "Change Resource", status_code=200)
+        
+    def test_cannot_edit_not_master_copy(self):
+        client = self.client_with_user_logged_in(EditorTest.editor_login)
+        resource = self.import_test_resource()
+        resource.storage_object.master_copy = False
+        response = client.get(ADMINROOT+'repository/corpusinfotype_model/1/')
+        self.assertContains(response, "You will now be redirected", status_code=200)
+        
