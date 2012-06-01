@@ -23,6 +23,8 @@ from datetime import datetime
 from time import mktime
 import logging
 import re
+from metashare.xml_utils import pretty_xml
+from xml.etree.ElementTree import tostring
 
 # Setup logging support.
 logging.basicConfig(level=LOG_LEVEL)
@@ -300,6 +302,21 @@ class StorageObject(models.Model):
         
         # Call save() method from super class with all arguments.
         super(StorageObject, self).save(*args, **kwargs)
+        
+        # save metadata XML to storage folder
+        if self.publication_status in (INGESTED, PUBLISHED):
+            with open('{0}/metadata.xml'.format(self._storage_folder()), 'w') as _out:
+                _out.write(self.metadata.encode('utf-8'))
+    
+    def update_metadata(self):
+        """
+        Updates the metadata XML of this storage object. Use only after the initial
+        language resource and storage object have been saved.
+        """
+        _metadata = pretty_xml(tostring(
+          # pylint: disable-msg=E1101
+          self.resourceinfotype_model_set.all()[0].export_to_elementtree()))
+        self.metadata = _metadata
     
     def has_local_download_copy(self):
         """
