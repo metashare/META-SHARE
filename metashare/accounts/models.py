@@ -3,16 +3,20 @@ Project: META-SHARE prototype implementation
  Author: Christian Federmann <cfedermann@dfki.de>
 """
 import logging
-from uuid import uuid1
+
 from traceback import extract_stack
+from uuid import uuid1
+
 from django.contrib.auth.models import User
 from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.core import serializers
-from django.db.models.signals import post_save
 from django.db import models
+from django.db.models.signals import post_save
 from django.dispatch import receiver
-from metashare.storage.models import StorageServer
+
 from metashare.settings import LOG_LEVEL, LOG_HANDLER
+from metashare.storage.models import StorageServer
+
 
 # Setup logging support.
 logging.basicConfig(level=LOG_LEVEL)
