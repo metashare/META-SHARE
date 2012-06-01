@@ -264,9 +264,7 @@ def _provide_download(request, resource, download_urls):
 
             # build HTTP response with a guessed mime type; the response
             # content is a stream of the download file
-            filemimetype , encod = guess_type(dl_path)
-            if not filemimetype:
-                filemimetype = "application/octet-stream"
+            filemimetype = guess_type(dl_path)[0] or "application/octet-stream"
             response = HttpResponse(dl_stream_generator(),
                                     mimetype=filemimetype)
             response['Content-Length'] = getsize(dl_path) 
