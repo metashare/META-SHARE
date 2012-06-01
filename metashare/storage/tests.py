@@ -4,7 +4,7 @@ Project: META-SHARE prototype implementation
 """
 from time import sleep
 from os.path import exists
-from os import remove, rmdir
+from os import remove, rmdir, mkdir
 from django.core.exceptions import ValidationError
 from django.test.client import Client
 from django.utils import unittest
@@ -44,11 +44,11 @@ class StorageObjectTestCase(unittest.TestCase):
         # Load storage object instance from database.
         storage_object = StorageObject.objects.get(pk=self.object_id)
         
-        # The revision for our storage object should be 1, HTTP status 200.
+        # The revision for our storage object should be 0, HTTP status 200.
         _url = '/{0}storage/revision/{1}/'.format(DJANGO_BASE, storage_object.identifier)
         response = self.client.get(_url)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(int(response.content), 1)
+        self.assertEqual(int(response.content), 0)
         
         # If we update the revision information for the object, this should
         # also produce an updated result for the current URL.
@@ -84,6 +84,7 @@ class StorageObjectTestCase(unittest.TestCase):
         
         # Load storage object instance from database.
         storage_object = StorageObject.objects.get(pk=self.object_id)
+        mkdir(storage_object._storage_folder())
         
         # Create dummy binary file inside storage folder.
         _dummy_zip = '{0}/archive.zip'.format(storage_object._storage_folder())
@@ -126,8 +127,8 @@ class StorageObjectTestCase(unittest.TestCase):
         # Load storage object instance from database.
         storage_object = StorageObject.objects.get(pk=self.object_id)
         
-        # revision defaults to 1.
-        self.assertIs(storage_object.revision, 1)
+        # revision defaults to 0.
+        self.assertIs(storage_object.revision, 0)
                 
         # master_copy defaults to True.
         self.assertTrue(storage_object.master_copy)

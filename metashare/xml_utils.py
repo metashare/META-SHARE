@@ -85,6 +85,9 @@ def import_from_string(xml_string, targetstatus, owner_id=None):
         resource.owners.add(owner_id)
         
     resource.storage_object.save()
+    
+    # explicitly write metadata XML and storage object to the storage folder
+    resource.storage_object.update_storage()
 
     # Create log ADDITION message for the new object, but only if we have a user:
     if owner_id:
