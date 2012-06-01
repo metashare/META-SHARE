@@ -26,7 +26,7 @@ from metashare.accounts.forms import RegistrationRequestForm, \
   ResetRequestForm, UserProfileForm
 from metashare.accounts.models import RegistrationRequest, ResetRequest, \
   UserProfile
-from metashare.settings import SSO_SECRET_KEY, DJANGO_URL, DJANGO_BASE, \
+from metashare.settings import SSO_SECRET_KEY, DJANGO_URL, \
   PRIVATE_KEY_PATH, LOG_LEVEL, LOG_HANDLER, MAX_LIFETIME_FOR_SSO_TOKENS
 
 # Setup logging support.
@@ -119,8 +119,8 @@ def create(request):
             data = {'firstname': new_object.firstname,
               'lastname': new_object.lastname,
               'shortname': new_object.shortname,
-              'confirmation_url': '{0}/{1}accounts/confirm/{2}/'.format(
-                DJANGO_URL, DJANGO_BASE, new_object.uuid)}
+              'confirmation_url': '{0}/accounts/confirm/{1}/'.format(
+                DJANGO_URL, new_object.uuid)}
             email = render_to_string('accounts/confirmation.email', data)
             
             try:
@@ -471,8 +471,8 @@ def reset(request, uuid=None):
                 data = {'firstname': user.first_name,
                   'lastname': user.last_name,
                   'shortname': user.username,
-                  'confirmation_url': '{0}/{1}accounts/reset/{2}/'.format(
-                    DJANGO_URL, DJANGO_BASE, new_object.uuid)}
+                  'confirmation_url': '{0}/accounts/reset/{1}/'.format(
+                    DJANGO_URL, new_object.uuid)}
                 email = render_to_string('accounts/reset.email', data)
                 
                 try:

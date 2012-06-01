@@ -3,18 +3,21 @@ Project: META-SHARE prototype implementation
  Author: Christian Federmann <cfedermann@dfki.de>
 """
 import logging
+
 from django.contrib.auth.views import login as LOGIN, logout as LOGOUT
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from metashare.settings import LOG_LEVEL, LOG_HANDLER, DJANGO_BASE
 
 from metashare.repository.models import resourceInfoType_model
-from metashare.storage.models import INGESTED, PUBLISHED, INTERNAL
+from metashare.settings import LOG_LEVEL, LOG_HANDLER
+from metashare.storage.models import PUBLISHED, INTERNAL
+
 
 # Setup logging support.
 logging.basicConfig(level=LOG_LEVEL)
 LOGGER = logging.getLogger('metashare.views')
 LOGGER.addHandler(LOG_HANDLER)
+
 
 def frontpage(request):
     """Renders the front page view."""

@@ -20,7 +20,7 @@ fastcgi.server = (
 url.rewrite-once = (
     "^(/media.*)$" => "$1",
     "^/site_(media.*)$" => "/$1",
-    "^/favicon\.ico$" => "/media/favicon.ico",
+    "^/favicon\.ico$" => "/media/images/favicon.ico",
     "^(/.*)$" => "/metashare.fcgi$1",
 )
 
@@ -39,9 +39,24 @@ server.modules = (
 # mimetype mapping
 mimetype.assign = (
   ".pdf"          =>      "application/pdf",
-
-  (...)
-
+  ".sig"          =>      "application/pgp-signature",
+  ".gz"           =>      "application/x-gzip",
+  ".tar.gz"       =>      "application/x-tgz",
+  ".tgz"          =>      "application/x-tgz",
+  ".tar"          =>      "application/x-tar",
+  ".zip"          =>      "application/zip",
+  ".gif"          =>      "image/gif",
+  ".jpg"          =>      "image/jpeg",
+  ".jpeg"         =>      "image/jpeg",
+  ".png"          =>      "image/png",
+  ".css"          =>      "text/css",
+  ".html"         =>      "text/html",
+  ".htm"          =>      "text/html",
+  ".js"           =>      "text/javascript",
+  ".txt"          =>      "text/plain",
+  ".dtd"          =>      "text/xml",
+  ".xml"          =>      "text/xml",
+  ".bz2"          =>      "application/x-bzip",
   ".tar.bz2"      =>      "application/x-bzip-compressed-tar"
  )
 index-file.names = ( "index.html", )
