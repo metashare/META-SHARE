@@ -99,6 +99,7 @@ class MetadataSyncTest (TestCase):
         client = self.client_with_user_logged_in(self.syncuser_login)
         response = client.get(self.INVENTORY_URL)
         self.assertEquals(200, response.status_code)
+        self.assertEquals('application/zip', response['Content-Type'])
         with ZipFile(StringIO(response.content), 'r') as inzip:
             json_inventory = json.load(inzip.open('inventory.json'))
         self.assertValidInventory(json_inventory)
