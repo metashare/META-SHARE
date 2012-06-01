@@ -639,7 +639,11 @@ class SchemaModel(models.Model):
                     if OBJECT_XML_CACHE.has_key(cache_key):
                         OBJECT_XML_CACHE.pop(cache_key)
 
-                    obj.delete()
+                    if obj.__schema_name__ == "resourceInfo":
+                        storage_object = obj.storage_object
+                        storage_object.delete()
+                    
+                    obj.delete()             
 
                 except ObjectDoesNotExist:
                     continue

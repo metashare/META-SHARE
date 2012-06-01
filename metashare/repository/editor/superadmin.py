@@ -215,6 +215,10 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                 form.save_m2m()
                 for formset in unsaved_formsets:
                     self.save_formset(request, form, formset, change=False)
+                # for resource info, explicitly write its metadata XML and
+                # storage object to the storage folder
+                if self.model.__schema_name__ == "resourceInfo":
+                    new_object.storage_object.update_storage()
                 #### end modification ####
 
                 self.log_addition(request, new_object)
@@ -354,6 +358,10 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                         
                 self.save_model(request, new_object, form, change=True)
                 form.save_m2m()
+                # for resource info, explicitly write its metadata XML and
+                # storage object to the storage folder
+                if self.model.__schema_name__ == "resourceInfo":
+                    new_object.storage_object.update_storage()
                 #### end modification ####
 
                 change_message = self.construct_change_message(request, form, formsets)
