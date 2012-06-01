@@ -16,6 +16,7 @@ from metashare.settings import LOG_LEVEL, LOG_HANDLER
 from metashare import settings
 from os import mkdir, rename, rmdir
 from os.path import exists
+import os.path
 from urllib import urlencode
 from uuid import uuid1, uuid4
 from xml.etree import ElementTree as etree
@@ -207,7 +208,7 @@ class StorageObject(models.Model):
       help_text="(Read-only) MD5 checksum of the binary data for this " \
       "storage object instance.")
     
-    revision = models.PositiveIntegerField(default=1, help_text="Revision " \
+    revision = models.PositiveIntegerField(default=0, help_text="Revision " \
       "or version information for this storage object instance.")
     
     master_copy = models.BooleanField(default=True, help_text="Master copy " \
@@ -277,42 +278,6 @@ class StorageObject(models.Model):
         
         self.checksum = _checksum.hexdigest()
     
-    def save(self, *args, **kwargs):
-        """
-        Overwrites the predefined save() method to ensure that STORAGE_PATH
-        contains a folder for this storage object instance.  We also check
-        that the object validates.
-        """
-        # Perform a full validation for this storage object instance.
-        self.full_clean()
-        
-        # Check if the storage folder for this storage object instance exists.
-        if self._storage_folder() and not exists(self._storage_folder()):
-            # If not, create the storage folder.
-            mkdir(self._storage_folder())
-        
-        # Update the checksum, if a downloadable file exists.
-        if self.master_copy:
-            self._compute_checksum()
-        
-        # Call save() method from super class with all arguments.
-        super(StorageObject, self).save(*args, **kwargs)
-        
-        # save metadata XML to storage folder
-        if self.publication_status in (INGESTED, PUBLISHED):
-            with open('{0}/metadata.xml'.format(self._storage_folder()), 'w') as _out:
-                _out.write(self.metadata.encode('utf-8'))
-    
-    def update_metadata(self):
-        """
-        Updates the metadata XML of this storage object. Use only after the initial
-        language resource and storage object have been saved.
-        """
-        _metadata = pretty_xml(tostring(
-          # pylint: disable-msg=E1101
-          self.resourceinfotype_model_set.all()[0].export_to_elementtree()))
-        self.metadata = _metadata
-    
     def has_local_download_copy(self):
         """
         Checks if this instance has a local copy of the downloadable data.
@@ -357,7 +322,55 @@ class StorageObject(models.Model):
                 return _binary_data
 
         return None
-
+    
+    def save(self, *args, **kwargs):
+        """
+        Overwrites the predefined save() method to ensure that STORAGE_PATH
+        contains a folder for this storage object instance.  We also check
+        that the object validates.
+        """
+        # Perform a full validation for this storage object instance.
+        self.full_clean()
+        
+        # Call save() method from super class with all arguments.
+        super(StorageObject, self).save(*args, **kwargs)
+    
+    def update_storage(self):
+        """
+        Updates the metadata XML if required and serializes it and this storage
+        object to the storage folder.
+        """
+        # check if the storage folder for this storage object instance exists
+        if self._storage_folder() and not exists(self._storage_folder()):
+            # If not, create the storage folder.
+            mkdir(self._storage_folder())
+        
+        # update the checksum, if a downloadable file exists
+        if self.master_copy:
+            self._compute_checksum()
+        
+        # create current version of metadata XML
+        _metadata = pretty_xml(tostring(
+          # pylint: disable-msg=E1101
+          self.resourceinfotype_model_set.all()[0].export_to_elementtree()))
+        
+        # check if there exists a metadata XML file; this is not the case if
+        # the publication status just changed from internal to ingested
+        _xml_exists = os.path.isfile(
+          '{0}/metadata-{1:04d}.xml'.format(self._storage_folder(), self.revision))
+          
+        # check if metadata has changed; if yes, increase revision for ingested
+        # and published resources and save metadata to storage folder
+        if self.metadata != _metadata or not _xml_exists:
+            self.metadata = _metadata
+            if self.publication_status in (INGESTED, PUBLISHED):
+                self.revision += 1
+                with open('{0}/metadata-{1:04d}.xml'.format(
+                  self._storage_folder(), self.revision), 'w') as _out:
+                    _out.write(unicode(self.metadata).encode('utf-8'))    
+            self.save()
+            LOGGER.debug(u"\nMETADATA: {0}\n".format(self.metadata))
+       
 @receiver(pre_delete, sender=StorageObject)
 def _delete_storage_folder(sender, instance, **kwargs):
     """Deletes to storage folder for the sender instance, if possible."""
