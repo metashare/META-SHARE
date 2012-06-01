@@ -47,7 +47,14 @@ STATUS_CHOICES = (
     (PUBLISHED, 'published'),
 )
 
-
+# Copy status constants and choice:
+MASTER = 'm'
+REMOTE = 'r'
+PROXY = 'p'
+COPY_CHOICES = (
+    (MASTER, 'master copy'),
+    (REMOTE, 'remote copy'),
+    (PROXY, 'proxy copy'))
 
 
 def _validate_valid_xml(value):
@@ -189,9 +196,15 @@ class StorageObject(models.Model):
     """
     __schema_name__ = "STORAGEOJBECT"
     
+    #jsteffen: to be removed in later versions, replaced by source_url
     source = models.ForeignKey(StorageServer, blank=True, null=True,
       editable=False, help_text="(Read-only) source for this storage " \
       "object instance.")
+      
+    source_url = models.URLField(verify_exists=False, editable=False,
+      default=settings.DJANGO_URL,
+      help_text="(Read-only) base URL for the server where the master copy of " \
+      "the associated language resource is located.")
     
     identifier = models.CharField(max_length=64, default=_create_uuid,
       editable=False, unique=True, help_text="(Read-only) unique " \
@@ -208,11 +221,27 @@ class StorageObject(models.Model):
       help_text="(Read-only) MD5 checksum of the binary data for this " \
       "storage object instance.")
     
+    digest_checksum = models.CharField(blank=True, null=True, max_length=32,
+      help_text="(Read-only) MD5 checksum of the digest zip file containing the" \
+      "global serialized storage object and the metadata XML for this " \
+      "storage object instance.")
+      
     revision = models.PositiveIntegerField(default=0, help_text="Revision " \
       "or version information for this storage object instance.")
     
-    master_copy = models.BooleanField(default=True, help_text="Master copy " \
-      "status flag for this storage object instance.")
+    def _get_master_copy(self):
+        return self.copy_status == MASTER
+    
+    def _set_master_copy(self, value):
+        if value == True:
+            self.copy_status = MASTER
+        else:
+            self.copy_status = REMOTE
+    
+    master_copy = property(_get_master_copy, _set_master_copy)
+    
+    copy_status = models.CharField(default=MASTER, max_length=1, choices=COPY_CHOICES,
+        help_text="Generalized copy status flag for this storage object instance.")
     
     def _get_published(self):
         return self.publication_status == PUBLISHED
