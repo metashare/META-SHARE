@@ -196,6 +196,11 @@ class StorageObject(models.Model):
     """
     __schema_name__ = "STORAGEOJBECT"
     
+    class Meta:
+        permissions = (
+            ('can_sync', 'Can synchronize'),
+        )
+    
     #jsteffen: to be removed in later versions, replaced by source_url
     source = models.ForeignKey(StorageServer, blank=True, null=True,
       editable=False, help_text="(Read-only) source for this storage " \
