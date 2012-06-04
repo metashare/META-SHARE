@@ -26,6 +26,12 @@ import logging
 import re
 from metashare.xml_utils import pretty_xml
 from xml.etree.ElementTree import tostring
+from json.encoder import JSONEncoder
+from json import dumps
+from django.conf.locale import gl
+from django.core.serializers.json import DjangoJSONEncoder
+import zipfile
+from zipfile import ZIP_DEFLATED
 
 # Setup logging support.
 logging.basicConfig(level=LOG_LEVEL)
@@ -55,6 +61,12 @@ COPY_CHOICES = (
     (MASTER, 'master copy'),
     (REMOTE, 'remote copy'),
     (PROXY, 'proxy copy'))
+
+# attributes to by serialized in the global JSON of the storage object
+GLOBAL_STORAGE_ATTS = ['source_url', 'identifier', 'created', 'modified', 'revision', 'metashare_version']
+
+# attributes to be serialized in the local JSON of the storage object
+LOCAL_STORAGE_ATTS = ['digest_checksum', 'publication_status', 'copy_status']
 
 
 def _validate_valid_xml(value):
@@ -218,9 +230,9 @@ class StorageObject(models.Model):
     created = models.DateTimeField(auto_now_add=True, editable=False,
       help_text="(Read-only) creation date for this storage object instance.")
     
-    modified = models.DateTimeField(auto_now=True, editable=False,
-      help_text="(Read-only) last modification date for this storage " \
-      "object instance.")
+    modified = models.DateTimeField(editable=False, default=datetime.now(),
+      help_text="(Read-only) last modification date of the metadata XML " \
+      "for this storage object instance.")
     
     checksum = models.CharField(blank=True, null=True, max_length=32,
       help_text="(Read-only) MD5 checksum of the binary data for this " \
@@ -233,6 +245,10 @@ class StorageObject(models.Model):
       
     revision = models.PositiveIntegerField(default=0, help_text="Revision " \
       "or version information for this storage object instance.")
+      
+    metashare_version = models.CharField(max_length=32, editable=False, 
+      default=settings.METASHARE_VERSION,
+      help_text="(Read-only) META-SHARE version used with the storage object instance.")
     
     def _get_master_copy(self):
         return self.copy_status == MASTER
@@ -245,7 +261,7 @@ class StorageObject(models.Model):
     
     master_copy = property(_get_master_copy, _set_master_copy)
     
-    copy_status = models.CharField(default=MASTER, max_length=1, choices=COPY_CHOICES,
+    copy_status = models.CharField(default=MASTER, max_length=1, editable=False, choices=COPY_CHOICES,
         help_text="Generalized copy status flag for this storage object instance.")
     
     def _get_published(self):
@@ -273,6 +289,15 @@ class StorageObject(models.Model):
     metadata = models.TextField(validators=[_validate_valid_xml],
       help_text="XML containing the metadata description for this storage " \
       "object instance.")
+      
+    global_storage = models.TextField(default='not set yet',
+      help_text="text containing the JSON serialization of global attributes " \
+      "for this storage object instance.")
+    
+    local_storage = models.TextField(default='not set yet',
+      help_text="text containing the JSON serialization of local attributes " \
+      "for this storage object instance.")
+    
     
     def __unicode__(self):
         """
@@ -383,6 +408,12 @@ class StorageObject(models.Model):
         if self.master_copy:
             self._compute_checksum()
         
+        # flag to indicate if rebuilding of resource.zip is required
+        update_zip = False
+        
+        # flag to indicate if saving is required
+        update_obj = False
+        
         # create current version of metadata XML
         _metadata = pretty_xml(tostring(
           # pylint: disable-msg=E1101
@@ -397,13 +428,75 @@ class StorageObject(models.Model):
         # and published resources and save metadata to storage folder
         if self.metadata != _metadata or not _xml_exists:
             self.metadata = _metadata
+            self.modified = datetime.now()
+            update_obj = True
             if self.publication_status in (INGESTED, PUBLISHED):
                 self.revision += 1
+                # serialize metadata
                 with open('{0}/metadata-{1:04d}.xml'.format(
                   self._storage_folder(), self.revision), 'w') as _out:
-                    _out.write(unicode(self.metadata).encode('utf-8'))    
-            self.save()
+                    _out.write(unicode(self.metadata).encode('utf-8'))
+                update_zip = True
             LOGGER.debug(u"\nMETADATA: {0}\n".format(self.metadata))
+        
+        # check if global storage object serialization has changed; if yes,
+        # save it to storage folder
+        _dict_global = { }
+        for item in GLOBAL_STORAGE_ATTS:
+            _dict_global[item] = getattr(self, item)
+        _global_storage = \
+          dumps(_dict_global, cls=DjangoJSONEncoder, sort_keys=True, separators=(',',':'))
+        if self.global_storage != _global_storage:
+            self.global_storage = _global_storage
+            update_obj = True
+            if self.publication_status in (INGESTED, PUBLISHED):
+                with open('{0}/storage-global.json'.format(
+                  self._storage_folder()), 'w') as _out:
+                    _out.write(unicode(self.global_storage).encode('utf-8'))
+                update_zip = True
+        
+        # create new digest zip if required
+        if update_zip:
+            _zf_name = '{0}/resource.zip'.format(self._storage_folder())
+            _zf = zipfile.ZipFile(_zf_name, mode='w', compression=ZIP_DEFLATED)
+            try:
+                _zf.write(
+                  '{0}/metadata-{1:04d}.xml'.format(self._storage_folder(), self.revision),
+                  arcname='metadata.xml')
+                _zf.write(
+                  '{0}/storage-global.json'.format(self._storage_folder()),
+                  arcname='storage-global.json')
+            finally:
+                _zf.close()
+            # update zip digest checksum
+            _checksum = md5()
+            with open(_zf_name, 'rb') as _zf_reader:
+                _chunk = _zf_reader.read(MAXIMUM_MD5_BLOCK_SIZE)
+                while _chunk:
+                    _checksum.update(_chunk)
+                    _chunk = _zf_reader.read(MAXIMUM_MD5_BLOCK_SIZE)
+            self.digest_checksum = _checksum.hexdigest()
+            update_obj = True
+            
+        # check if local storage object serialization has changed; if yes,
+        # save it to storage folder
+        _dict_local = { }
+        for item in LOCAL_STORAGE_ATTS:
+            _dict_local[item] = getattr(self, item)
+        _local_storage = \
+          dumps(_dict_local, cls=DjangoJSONEncoder, sort_keys=True, separators=(',',':'))
+        if self.local_storage != _local_storage:
+            self.local_storage = _local_storage
+            update_obj = True
+            if self.publication_status in (INGESTED, PUBLISHED):
+                with open('{0}/storage-local.json'.format(
+                  self._storage_folder()), 'w') as _out:
+                    _out.write(unicode(self.local_storage).encode('utf-8'))
+        
+        # save storage object if required
+        if update_obj:
+            self.save()
+
        
 @receiver(pre_delete, sender=StorageObject)
 def _delete_storage_folder(sender, instance, **kwargs):
