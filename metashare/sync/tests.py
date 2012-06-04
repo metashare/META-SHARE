@@ -6,6 +6,7 @@ from django.contrib.admin.sites import LOGIN_FORM_KEY
 import json
 from StringIO import StringIO
 from zipfile import ZipFile
+from metashare import settings
 
 
 class MetadataSyncTest (TestCase):
@@ -27,8 +28,7 @@ class MetadataSyncTest (TestCase):
     def assertValidInventoryItem(self, entry):
         if not (entry['id'] and entry['digest']):
             raise Exception('Inventory item does not have "id" and "digest" key-value pairs: {}'.format(entry))
-    
-    
+        
     def assertValidInventory(self, json_inventory):
         is_empty = True
         for entry in json_inventory:
@@ -36,6 +36,14 @@ class MetadataSyncTest (TestCase):
             self.assertValidInventoryItem(entry)
         if is_empty:
             raise Exception("Not a valid inventory becuase it doesn't have any inventory items: {}".format(json_inventory))
+
+    def assertValidInventoryResponse(self, response):
+        self.assertEquals(200, response.status_code)
+        self.assertEquals('application/zip', response['Content-Type'])
+        self.assertEquals('2.2-SNAPSHOT', response['Metashare-Version'])
+        with ZipFile(StringIO(response.content), 'r') as inzip:
+            json_inventory = json.load(inzip.open('inventory.json'))
+        self.assertValidInventory(json_inventory)
 
 
     def client_with_user_logged_in(self, user_credentials):
@@ -95,22 +103,27 @@ class MetadataSyncTest (TestCase):
         User.objects.all().delete()
 
     
+
+    def test_unprotected_can_reach_inventory(self):
+        settings.SYNC_NEEDS_AUTHENTICATION = False
+        client = Client()
+        response = client.get(self.INVENTORY_URL)
+        self.assertValidInventoryResponse(response)
+
     def test_syncuser_can_reach_inventory(self):
+        settings.SYNC_NEEDS_AUTHENTICATION = True
         client = self.client_with_user_logged_in(self.syncuser_login)
         response = client.get(self.INVENTORY_URL)
-        self.assertEquals(200, response.status_code)
-        self.assertEquals('application/zip', response['Content-Type'])
-        self.assertEquals('2.2-SNAPSHOT', response['Metashare-Version'])
-        with ZipFile(StringIO(response.content), 'r') as inzip:
-            json_inventory = json.load(inzip.open('inventory.json'))
-        self.assertValidInventory(json_inventory)
+        self.assertValidInventoryResponse(response)
 
     def test_normaluser_cannot_reach_inventory(self):
+        settings.SYNC_NEEDS_AUTHENTICATION = True
         client = self.client_with_user_logged_in(self.normal_login)
         response = client.get(self.INVENTORY_URL)
         self.assertIsForbidden(response)
 
     def test_editoruser_cannot_reach_inventory(self):
+        settings.SYNC_NEEDS_AUTHENTICATION = True
         client = self.client_with_user_logged_in(self.editor_login)
         response = client.get(self.INVENTORY_URL)
         self.assertIsForbidden(response)

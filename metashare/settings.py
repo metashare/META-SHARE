@@ -38,6 +38,9 @@ LOG_HANDLER.setFormatter(LOG_FORMATTER)
 # bigger files, feel free to try and increase this value.
 MAXIMUM_UPLOAD_SIZE = 10 * 1024 * 1024
 
+# Synchronization info:
+SYNC_NEEDS_AUTHENTICATION = True
+
 
 # URL for the Metashare Knowledge Base
 KNOWLEDGE_BASE_URL = 'http://metashare.ilsp.gr/portal/knowledgebase/'
