@@ -17,6 +17,7 @@ from django.utils.translation import ugettext as _
 from django.views.decorators.csrf import csrf_protect
 
 from metashare import settings
+from metashare.accounts.models import ManagerGroup
 from metashare.repository.editor.forms import StorageObjectUploadForm
 from metashare.repository.editor.inlines import ReverseInlineFormSet, \
     ReverseInlineModelAdmin
@@ -562,6 +563,29 @@ class ResourceModelAdmin(SchemaModelAdmin):
             result = result.distinct().filter(Q(owners=request.user)
                     | Q(editor_groups__name__in=
                            request.user.groups.values_list('name', flat=True)))
+        return result
+
+    def has_delete_permission(self, request, obj=None):
+        """
+        Returns `True` if the given request has permission to change the given
+        Django model instance.
+        """
+        result = super(ResourceModelAdmin, self) \
+            .has_delete_permission(request, obj)
+        if result and obj:
+            if request.user.is_superuser:
+                return True
+            # in addition to the default delete permission determination, we
+            # only allow a user to delete a resource if either:
+            # (1) she is owner of the resource and the resource does not belong
+            #     to any `EditorGroup`
+            # (2) she is a manager of one of the resource's `EditorGroup`s
+            res_groups = obj.editor_groups.all()
+            return (request.user in obj.owners.all() and len(res_groups) == 0) \
+                or any(res_group.name == mgr_group.managed_group.name
+                       for res_group in res_groups
+                       for mgr_group in ManagerGroup.objects.filter(name__in=
+                            request.user.groups.values_list('name', flat=True)))
         return result
 
     def create_hidden_structures(self, request):

@@ -25,6 +25,7 @@ from metashare.repository.editor.editorutils import is_inline, decode_inline
 from metashare.repository.editor.inlines import ReverseInlineModelAdmin
 from metashare.repository.editor.related_mixin import RelatedAdminMixin
 from metashare.repository.editor.schemamodel_mixin import SchemaModelLookup
+from metashare.repository.model_utils import get_root_resources
 from metashare.repository.supermodel import REQUIRED, RECOMMENDED, OPTIONAL
 
 
@@ -125,6 +126,34 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         formfield = super(SchemaModelAdmin, self).formfield_for_dbfield(db_field, **kwargs)
         self.use_related_widget_where_appropriate(db_field, kwargs, formfield)
         return formfield
+
+
+    def has_change_permission(self, request, obj=None):
+        result = super(SchemaModelAdmin, self) \
+            .has_change_permission(request, obj)
+        if result and obj:
+            if request.user.is_superuser:
+                return True
+            # find out to which resourceInfoType_model instance the obj belongs
+            root_resources = get_root_resources(obj)
+            if len(root_resources) == 0:
+                # some model instances are created before the (future) root
+                # resource is actually saved, e.g., toolServiceInfo; in this
+                # case the user is probably in the process of editing this model
+                # instance and therefore we have to allow her to change it
+                return True
+            # in addition to the default change permission determination, we
+            # only allow a user to edit a model if she is either owner or an
+            # authorized editor of the resource to which the model belongs
+            usr_grp_names = request.user.groups.values_list('name', flat=True)
+            for res in root_resources:
+                if request.user in res.owners.all() \
+                        or any(res_group.name in usr_grp_names
+                               for res_group in res.editor_groups.all()):
+                    return True
+            return False
+        return result
+
 
     def response_change(self, request, obj):
         '''

@@ -18,6 +18,7 @@ from metashare.settings import DJANGO_BASE, ROOT_PATH
 ADMINROOT = '/{0}editor/'.format(DJANGO_BASE)
 TESTFIXTURE_XML = '{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
 TESTFIXTURE2_XML = '{}/repository/fixtures/ILSP10.xml'.format(ROOT_PATH)
+TESTFIXTURE3_XML = '{}/repository/test_fixtures/META-SHARE/DFKI2.xml'.format(ROOT_PATH)
 BROKENFIXTURE_XML = '{}/repository/fixtures/broken.xml'.format(ROOT_PATH)
 TESTFIXTURES_ZIP = '{}/repository/fixtures/tworesources.zip'.format(ROOT_PATH)
 BROKENFIXTURES_ZIP = '{}/repository/fixtures/onegood_onebroken.zip'.format(ROOT_PATH)
@@ -34,6 +35,8 @@ class EditorTest(TestCase):
     normal_login = None
     editor_login = None
     testfixture = None
+    testfixture2 = None
+    testfixture3 = None
 
     @classmethod
     def import_test_resource(cls, editor_group=None, path=TESTFIXTURE_XML):
@@ -105,13 +108,20 @@ class EditorTest(TestCase):
         # second resource which is only visible by the superuser
         EditorTest.testfixture2 = cls.import_test_resource(None,
                                                            TESTFIXTURE2_XML)
+        # third resource which is owned by the editoruser
+        EditorTest.testfixture3 = cls.import_test_resource(None,
+                                                           TESTFIXTURE3_XML)
+        EditorTest.testfixture3.owners.add(editoruser)
+        EditorTest.testfixture3.save()
+
 
     @classmethod
     def tearDownClass(cls):
         resourceInfoType_model.objects.all().delete()
         User.objects.all().delete()
-    
-    
+        EditorGroup.objects.all().delete()
+
+
     def client_with_user_logged_in(self, user_credentials):
         client = Client()
         client.get(ADMINROOT)
@@ -365,11 +375,11 @@ class EditorTest(TestCase):
         # test with editor user
         client = self.client_with_user_logged_in(EditorTest.editor_login)
         response = client.get(ADMINROOT+'repository/resourceinfotype_model/')
-        self.assertContains(response, '1 Resource')
+        self.assertContains(response, '2 Resources')
         # test with superuser
         client = self.client_with_user_logged_in(EditorTest.superuser_login)
         response = client.get(ADMINROOT+'repository/resourceinfotype_model/')
-        self.assertContains(response, '2 Resources')
+        self.assertContains(response, '3 Resources')
 
     def test_storage_object_is_hidden(self):
         client = self.client_with_user_logged_in(EditorTest.editor_login)
@@ -384,7 +394,7 @@ class EditorTest(TestCase):
     def test_editor_cannot_delete_actorInfo(self):
         editoruser = User.objects.get(username='editoruser')
         self.assertFalse(editoruser.has_perm('repository.delete_actorinfotype_model'))
-       
+
     def test_can_edit_master_copy(self):        
         client = self.client_with_user_logged_in(EditorTest.editor_login)
         resource = self.import_test_resource()
@@ -402,4 +412,110 @@ class EditorTest(TestCase):
         response = client.get('{}repository/resourceinfotype_model/{}/'
                               .format(ADMINROOT, resource.storage_object.id))
         self.assertContains(response, "You will now be redirected")
-        
+
+    def test_editor_can_change_own_resource_and_parts(self):
+        """
+        Verifies that the editor user can change his own resources and parts
+        thereof.
+        """
+        client = self.client_with_user_logged_in(EditorTest.editor_login)
+        # (1) editor is owner of the resource
+        self._test_user_can_change_resource_and_parts(client,
+                                                      EditorTest.testfixture3)
+        # (2) resource belongs to an editor group of the editor
+        self._test_user_can_change_resource_and_parts(client,
+                                                      EditorTest.testfixture)
+
+    def _test_user_can_change_resource_and_parts(self, client, res):
+        """
+        Verifies that the logged in user in the given client can change the
+        given resource and parts thereof.
+        """
+        # make sure the editor may change the resource:
+        response = client.get('{}repository/resourceinfotype_model/{}/'
+                              .format(ADMINROOT, res.id))
+        self.assertContains(response, '>Change Resource<', msg_prefix=
+            'expected the user to be allowed to change the resource')
+        # make sure the editor may change some part of the resource:
+        response = client.get('{}repository/distributioninfotype_model/{}/'
+                .format(ADMINROOT, res.distributionInfo.id))
+        self.assertContains(response, '>Change Distribution<', msg_prefix=
+            'expected the user to be allowed to change parts of the resource')
+
+    def test_editor_cannot_change_non_owned_resource_and_parts(self):
+        """
+        Verifies that the editor user can neither change non-owned resources nor
+        parts thereof.
+        """
+        client = self.client_with_user_logged_in(EditorTest.editor_login)
+        # make sure the editor may not change the resource:
+        response = client.get('{}repository/resourceinfotype_model/{}/'
+                              .format(ADMINROOT, EditorTest.testfixture2.id))
+        self.assertIn(response.status_code, (403, 404), msg=
+            'expected the editor to not be allowed to change the resource')
+        # make sure the editor may not change some part of the resource:
+        response = client.get('{}repository/distributioninfotype_model/{}/'
+                .format(ADMINROOT, EditorTest.testfixture2.distributionInfo.id))
+        self.assertIn(response.status_code, (403, 404), msg=
+            'expected the editor to not be allowed to change resource parts')
+
+    def test_editor_cannot_delete_any_resources_or_parts(self):
+        """
+        Verifies that the editor user can neither delete any resources nor any
+        parts thereof.
+        """
+        client = self.client_with_user_logged_in(EditorTest.editor_login)
+        # make sure the editor may not delete any resources:
+        response = client.get('{}repository/resourceinfotype_model/{}/delete/'
+                              .format(ADMINROOT, EditorTest.testfixture2.id))
+        self.assertIn(response.status_code, (403, 404), msg=
+            'expected the editor to not be allowed to delete the resource')
+        # make sure the editor may not delete any part of a resource:
+        response = client.get(
+            '{}repository/distributioninfotype_model/{}/delete/'
+                .format(ADMINROOT, EditorTest.testfixture2.distributionInfo.id))
+        self.assertIn(response.status_code, (403, 404), msg=
+            'expected the editor to not be allowed to delete resource parts')
+
+    def test_superuser_can_change_all_resources_and_their_parts(self):
+        """
+        Verifies that the superuser can change all resources and their parts,
+        irrespective of ownership.
+        """
+        client = self.client_with_user_logged_in(EditorTest.superuser_login)
+        self._test_user_can_change_resource_and_parts(client,
+                                                      EditorTest.testfixture)
+        self._test_user_can_change_resource_and_parts(client,
+                                                      EditorTest.testfixture2)
+        self._test_user_can_change_resource_and_parts(client,
+                                                      EditorTest.testfixture3)
+
+    def test_superuser_can_delete_all_resources_and_their_parts(self):
+        """
+        Verifies that the superuser can delete all resources and their parts,
+        irrespective of ownership.
+        """
+        client = self.client_with_user_logged_in(EditorTest.superuser_login)
+        self._test_superuser_can_delete_resource_and_its_parts(client,
+                                                        EditorTest.testfixture)
+        self._test_superuser_can_delete_resource_and_its_parts(client,
+                                                        EditorTest.testfixture2)
+        self._test_superuser_can_delete_resource_and_its_parts(client,
+                                                        EditorTest.testfixture3)
+
+    def _test_superuser_can_delete_resource_and_its_parts(self, client, res):
+        """
+        Verifies that the superuser logged into the given client can delete the
+        given resource and its parts.
+        """
+        # make sure the superuser may delete any resources:
+        response = client.get('{}repository/resourceinfotype_model/{}/delete/'
+                              .format(ADMINROOT, res.id))
+        self.assertContains(response, 'Are you sure?', msg_prefix=
+            'expected the superuser to be allowed to delete the resource')
+        # make sure the superuser may delete any part of a resource:
+        response = client.get(
+            '{}repository/distributioninfotype_model/{}/delete/'
+                .format(ADMINROOT, res.id))
+        self.assertContains(response, 'Are you sure?', msg_prefix=
+            'expected the superuser to be allowed to delete resource parts')
