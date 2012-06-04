@@ -588,6 +588,27 @@ class ResourceModelAdmin(SchemaModelAdmin):
                             request.user.groups.values_list('name', flat=True)))
         return result
 
+    def get_actions(self, request):
+        """
+        Return a dictionary mapping the names of all actions for this
+        `ModelAdmin` to a tuple of (callable, name, description) for each
+        action.
+        """
+        result = super(ResourceModelAdmin, self).get_actions(request)
+        if not request.user.is_superuser:
+            # only users with delete permissions can see the delete action:
+            if not self.has_delete_permission(request):
+                del result['delete_selected']
+            # only users who are the manager of some group can see the
+            # ingest/publish/unpublish actions:
+            if ManagerGroup.objects.filter(name__in=
+                        request.user.groups.values_list('name', flat=True)) \
+                    .count() == 0:
+                for action in (publish_resources, unpublish_resources,
+                               ingest_resources):
+                    del result[action.__name__]
+        return result
+
     def create_hidden_structures(self, request):
         '''
         For a new resource of the given resource type, create the

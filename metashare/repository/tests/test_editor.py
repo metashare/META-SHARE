@@ -8,7 +8,7 @@ from django.test import TestCase
 from django.test.client import Client
 
 from metashare import test_utils
-from metashare.accounts.models import EditorGroup
+from metashare.accounts.models import EditorGroup, ManagerGroup
 from metashare.repository import models
 from metashare.repository.models import languageDescriptionInfoType_model, \
     lexicalConceptualResourceInfoType_model, resourceInfoType_model
@@ -34,6 +34,7 @@ class EditorTest(TestCase):
     staff_login = None
     normal_login = None
     editor_login = None
+    manager_login = None
     testfixture = None
     testfixture2 = None
     testfixture3 = None
@@ -58,6 +59,9 @@ class EditorTest(TestCase):
         """
         EditorTest.test_editor_group = EditorGroup.objects.create(
                                                     name='test_editor_group')
+        EditorTest.test_manager_group = \
+            ManagerGroup.objects.create(name='test_manager_group',
+                                    managed_group=EditorTest.test_editor_group)
 
         staffuser = User.objects.create_user('staffuser', 'staff@example.com',
           'secret')
@@ -71,6 +75,13 @@ class EditorTest(TestCase):
         editoruser.is_staff = True
         editoruser.groups.add(EditorTest.test_editor_group)
         editoruser.save()
+
+        manageruser = User.objects.create_user('manageruser',
+                                               'manager@example.com', 'secret')
+        manageruser.is_staff = True
+        manageruser.groups.add(EditorTest.test_editor_group,
+                               EditorTest.test_manager_group)
+        manageruser.save()
 
         User.objects.create_superuser('superuser', 'su@example.com', 'secret')
 
@@ -93,6 +104,13 @@ class EditorTest(TestCase):
             REDIRECT_FIELD_NAME: ADMINROOT,
             LOGIN_FORM_KEY: 1,
             'username': 'editoruser',
+            'password': 'secret',
+        }
+        
+        EditorTest.manager_login = {
+            REDIRECT_FIELD_NAME: ADMINROOT,
+            LOGIN_FORM_KEY: 1,
+            'username': 'manageruser',
             'password': 'secret',
         }
         
@@ -221,12 +239,44 @@ class EditorTest(TestCase):
                     print
         print 'Checked models: {0}'.format(num)
 
-    
-    def test_resource_list_contains_publish_action(self):
+    def test_manage_action_visibility(self):
+        """
+        Verifies that manage actions (delete/ingest/publish/unpublish) are only
+        visible for authorized users.
+        """
+        # make sure the editor user cannot see the manage actions:
         client = self.client_with_user_logged_in(EditorTest.editor_login)
-        response = client.get(ADMINROOT+"repository/resourceinfotype_model/", follow=True)
-        self.assertContains(response, 'Publish selected ingested resources', msg_prefix='response: {0}'.format(response))
-        
+        response = client.get(ADMINROOT + 'repository/resourceinfotype_model/')
+        self.assertNotContains(response, 'Ingest selected internal resources',
+            msg_prefix='an editor user must not see the "ingest" action')
+        self.assertNotContains(response, 'Publish selected ingested resources',
+            msg_prefix='an editor user must not see the "publish" action')
+        self.assertNotContains(response, 'Unpublish selected published',
+            msg_prefix='an editor user must not see the "unpublish" action')
+        self.assertNotContains(response, 'Delete selected Resources',
+            msg_prefix='an editor user must not see the "delete" action')
+        # make sure the manager user can see the manage actions:
+        client = self.client_with_user_logged_in(EditorTest.manager_login)
+        response = client.get(ADMINROOT + 'repository/resourceinfotype_model/')
+        self.assertContains(response, 'Ingest selected internal resources',
+            msg_prefix='a manager user should see the "ingest" action')
+        self.assertContains(response, 'Publish selected ingested resources',
+            msg_prefix='a manager user should see the "publish" action')
+        self.assertContains(response, 'Unpublish selected published resources',
+            msg_prefix='a manager user should see the "unpublish" action')
+        self.assertContains(response, 'Delete selected Resources',
+            msg_prefix='a manager user should see the "delete" action')
+        # make sure the superuser can see the manage actions:
+        client = self.client_with_user_logged_in(EditorTest.superuser_login)
+        response = client.get(ADMINROOT + 'repository/resourceinfotype_model/')
+        self.assertContains(response, 'Ingest selected internal resources',
+            msg_prefix='a superuser should see the "ingest" action')
+        self.assertContains(response, 'Publish selected ingested resources',
+            msg_prefix='a superuser should see the "publish" action')
+        self.assertContains(response, 'Unpublish selected published resources',
+            msg_prefix='a superuser should see the "unpublish" action')
+        self.assertContains(response, 'Delete selected Resources',
+            msg_prefix='a superuser should see the "delete" action')
 
     def test_upload_single_xml(self):
         client = self.client_with_user_logged_in(EditorTest.editor_login)
