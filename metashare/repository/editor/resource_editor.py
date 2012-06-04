@@ -17,7 +17,7 @@ from django.utils.translation import ugettext as _
 from django.views.decorators.csrf import csrf_protect
 
 from metashare import settings
-from metashare.accounts.models import ManagerGroup
+from metashare.accounts.models import EditorGroup, ManagerGroup
 from metashare.repository.editor.forms import StorageObjectUploadForm
 from metashare.repository.editor.inlines import ReverseInlineFormSet, \
     ReverseInlineModelAdmin
@@ -294,7 +294,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
     content_fields = ('resourceComponentType',)
     list_display = ('__unicode__', 'resource_type', 'publication_status')
     actions = (publish_resources, unpublish_resources, ingest_resources, export_xml_resources, )
-    hidden_fields = ('storage_object', 'owners', )
+    hidden_fields = ('storage_object', 'owners', 'editor_groups', )
 
 
     def get_urls(self):
@@ -680,11 +680,12 @@ class ResourceModelAdmin(SchemaModelAdmin):
 
     def add_user_to_resource_owners(self, request):
         '''
-        Add the current user to the list of owners for the current resource.
+        Add the current user to the list of owners for the current resource and
+        the user's `EditorGroup`s to the resource' editor_groups list.
         
-        Due to the validation logic of django admin, we add the user to the
-        form's clean_data object rather than the resource object's m2m field;
-        the actual field will be filled in save_m2m().
+        Due to the validation logic of django admin, we add the user/groups to
+        the form's clean_data object rather than the resource object's m2m
+        fields; the actual fields will be filled in save_m2m().
         '''
         # Preconditions:
         if not request.user or not request.POST:
@@ -694,10 +695,15 @@ class ResourceModelAdmin(SchemaModelAdmin):
         # Target state already met:
         if user_id in owners:
             return
-        # Need to add user to owners
+        # Need to add user to owners and groups to editor_groups
         owners.append(user_id)
+        editor_groups = request.POST.getlist('editor_groups')
+        editor_groups.extend(EditorGroup.objects \
+            .filter(name__in=request.user.groups.values_list('name', flat=True))
+            .values_list('pk', flat=True))
         _post = request.POST.copy()
         _post.setlist('owners', owners)
+        _post.setlist('editor_groups', editor_groups)
         request.POST = _post
 
     @method_decorator(permission_required('repository.add_resourceinfotype_model'))
