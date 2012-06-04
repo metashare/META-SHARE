@@ -363,7 +363,7 @@ class EditorTest(TestCase):
     def test_can_edit_master_copy(self):        
         client = self.client_with_user_logged_in(EditorTest.editor_login)
         resource = self.import_test_resource()
-        resource.storage_object.master_copy = True
+        resource.storage_object.set_master_copy(True)
         response = client.get('{}repository/resourceinfotype_model/{}/'
                               .format(ADMINROOT, resource.storage_object.id))
         self.assertContains(response, "Change Resource", status_code=200)
@@ -371,8 +371,8 @@ class EditorTest(TestCase):
     def test_cannot_edit_not_master_copy(self):
         client = self.client_with_user_logged_in(EditorTest.editor_login)
         resource = self.import_test_resource()
-        resource.storage_object.master_copy = False
+        resource.storage_object.set_master_copy(False)
         response = client.get('{}repository/resourceinfotype_model/{}/'
                               .format(ADMINROOT, resource.storage_object.id))
-        self.assertContains(response, "You will now be redirected", status_code=200)
+        self.assertContains(response, "You will now be redirected")
         
