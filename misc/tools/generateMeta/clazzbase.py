@@ -287,19 +287,15 @@ TOP_LEVEL_TYPE_EXTRA_CODE_TEMPLATE = '''
             LOGGER.warning('Trying to modify non master copy {0}, ' \\
               'aborting!'.format(self.storage_object))
             return
-
-        # Call save() method from super class with all arguments.
-        super(resourceInfoType_model, self).save(*args, **kwargs)
         
-        self.storage_object.update_metadata()
         self.storage_object.save()
         # REMINDER: the SOLR indexer in search_indexes.py relies on us
         # calling storage_object.save() from resourceInfoType_model.save().
         # Should we ever change that, we must modify 
         # resourceInfoType_modelIndex._setup_save() accordingly!
         
-        LOGGER.debug(u"\\nMETADATA: {0}\\n".format(
-          self.storage_object.metadata))
+        # Call save() method from super class with all arguments.
+        super(resourceInfoType_model, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
         return '/{0}repository/browse/{1}/'.format(DJANGO_BASE, self.id)

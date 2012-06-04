@@ -34,15 +34,20 @@ class PersistenceTest(TestCase):
         test_utils.setup_test_storage()
         _result = test_utils.import_xml(TESTFIXTURE_XML)
         resource = resourceInfoType_model.objects.get(pk=_result[0].id)
+        _storage_object = resource.storage_object
+        _storage_object.update_storage()
         # initial status is 'internal'
-        self.assertTrue(resource.storage_object.publication_status == INTERNAL)
+        self.assertTrue(_storage_object.publication_status == INTERNAL)
         # internal resource has no metadata XML stored in storage folder
         self.assertFalse(
-          os.path.isfile('{0}/metadata.xml'.format(resource.storage_object._storage_folder())))
+          os.path.isfile('{0}/metadata-{1:04d}.xml'.format(
+                  _storage_object._storage_folder(), _storage_object.revision)))
         # set status to ingested
-        resource.storage_object.publication_status = INGESTED
-        resource.save()
+        _storage_object.publication_status = INGESTED
+        _storage_object.update_storage()
         # ingested resource has metadata XML stored in storage folder
         self.assertTrue(
-          os.path.isfile('{0}/metadata.xml'.format(resource.storage_object._storage_folder())))
+          os.path.isfile('{0}/metadata-{1:04d}.xml'.format(
+            _storage_object._storage_folder(), _storage_object.revision)))
+        
         

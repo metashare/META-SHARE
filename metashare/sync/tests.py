@@ -2,9 +2,7 @@ from django.test.testcases import TestCase
 from django.test.client import Client
 from metashare.settings import DJANGO_BASE, LOGIN_URL
 from django.contrib.auth.models import User, Group, Permission
-from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.admin.sites import LOGIN_FORM_KEY
-from django.contrib.contenttypes.models import ContentType
 import json
 from StringIO import StringIO
 from zipfile import ZipFile
@@ -56,7 +54,7 @@ class MetadataSyncTest (TestCase):
         """
         syncuser = User.objects.create_user('syncuser', 'staff@example.com',
           'secret')
-        syncpermission = Permission.objects.get(codename='can_sync');
+        syncpermission = Permission.objects.get(codename='can_sync')
         syncuser.user_permissions.add(syncpermission)
         syncuser.save()
         
