@@ -21,6 +21,8 @@ class MetadataSyncTest (TestCase):
         self.assertEquals(302, response.status_code)
         self.assertTrue(LOGIN_URL in response['Location'])
 
+    def assertIsForbidden(self, response):
+        self.assertContains(response, "Forbidden", status_code=403)
 
     def assertValidInventoryItem(self, entry):
         if not (entry['id'] and entry['digest']):
@@ -98,6 +100,7 @@ class MetadataSyncTest (TestCase):
         response = client.get(self.INVENTORY_URL)
         self.assertEquals(200, response.status_code)
         self.assertEquals('application/zip', response['Content-Type'])
+        self.assertEquals('2.2-SNAPSHOT', response['Metashare-Version'])
         with ZipFile(StringIO(response.content), 'r') as inzip:
             json_inventory = json.load(inzip.open('inventory.json'))
         self.assertValidInventory(json_inventory)
@@ -105,9 +108,9 @@ class MetadataSyncTest (TestCase):
     def test_normaluser_cannot_reach_inventory(self):
         client = self.client_with_user_logged_in(self.normal_login)
         response = client.get(self.INVENTORY_URL)
-        self.assertIsRedirectToLogin(response)
+        self.assertIsForbidden(response)
 
     def test_editoruser_cannot_reach_inventory(self):
         client = self.client_with_user_logged_in(self.editor_login)
         response = client.get(self.INVENTORY_URL)
-        self.assertIsRedirectToLogin(response)
+        self.assertIsForbidden(response)
