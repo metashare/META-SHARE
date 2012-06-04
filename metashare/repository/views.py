@@ -6,8 +6,9 @@ Project: META-SHARE prototype implementation
 import logging
 
 from datetime import datetime
-from os.path import split
+from os.path import split, getsize
 from urllib import urlopen
+from mimetypes import guess_type
 
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
@@ -20,7 +21,6 @@ from haystack.views import FacetedSearchView
 from metashare.repository.forms import LicenseSelectionForm, LicenseAgreementForm
 from metashare.repository.models import licenceInfoType_model, resourceInfoType_model
 from metashare.repository.search_indexes import resourceInfoType_modelIndex
-#from metahsare.repository.editor.schemamodel_mixin import SchemaModelLookup
 from metashare.settings import LOG_LEVEL, LOG_HANDLER, MEDIA_URL
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
@@ -57,8 +57,12 @@ def _convert_to_template_tuples(element_tree):
             values.append(_convert_to_template_tuples(child))
         return (element_tree.tag, values)
 
-    # Otherwise, we return a tuple containg (key, value), i.e., (tag, text).
-    else:        
+    # Otherwise, we return a tuple containg (key, value, required), 
+    # i.e., (tag, text, <0,1>).
+    # The "required" element was added to the tree, for passing 
+    # information about whether a field is required or not, to correctly
+    # render the single resource view.
+    else:   
         return ((element_tree.tag, element_tree.text, element_tree.required),)
 
 
@@ -233,16 +237,23 @@ def _provide_download(request, resource, download_urls):
     if resource.storage_object.has_local_download_copy():
         try:
             dl_path = resource.storage_object.get_download()
+            def dl_stream_generator():
+                with open(dl_path, 'rb') as _local_data:
+                    _chunk = _local_data.read(MAXIMUM_READ_BLOCK_SIZE)
+                    while _chunk:
+                        yield _chunk
+                        _chunk = _local_data.read(MAXIMUM_READ_BLOCK_SIZE)
 
-            # build HTTP response with a generic, binary mime type
-            response = HttpResponse(mimetype="application/octet-stream")
+            # build HTTP response with a guessed mime type; the response
+            # content is a stream of the download file
+            filemimetype , encod = guess_type(dl_path)
+            if not filemimetype:
+                filemimetype = "application/octet-stream"
+            response = HttpResponse(dl_stream_generator(),
+                                    mimetype=filemimetype)
+            response['Content-Length'] = getsize(dl_path) 
             response['Content-Disposition'] = 'attachment; filename={0}' \
                                                 .format(split(dl_path)[1])
-            with open(dl_path, 'rb') as _local_data:
-                _chunk = _local_data.read(MAXIMUM_READ_BLOCK_SIZE)
-                while _chunk:
-                    response.write(_chunk)
-                    _chunk = _local_data.read(MAXIMUM_READ_BLOCK_SIZE)
 
             # maintain download statistics and return the response for download
             saveLRStats(resource, DOWNLOAD_STAT, request)
@@ -289,7 +300,7 @@ def view(request, object_id=None):
     Render browse or detail view for the repository application.
     """
     resource = get_object_or_404(resourceInfoType_model, pk=object_id)
-    # print "\n\n" + str(resource) + "\n\n"
+
     # Convert resource to ElementTree and then to template tuples.
     resource_tree = resource.export_to_elementtree()
     lr_content = _convert_to_template_tuples(resource_tree)

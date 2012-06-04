@@ -36,7 +36,7 @@
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>94600.00</price>
+<fee>94600.00</fee>
 <userNature>commercial</userNature>
 <membershipInfo>
 <member>True</member>
@@ -46,7 +46,7 @@
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>94600.00</price>
+<fee>94600.00</fee>
 <userNature>commercial</userNature>
 <membershipInfo>
 <member>True</member>
@@ -56,7 +56,7 @@
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>18920.00</price>
+<fee>18920.00</fee>
 <userNature>academic</userNature>
 <membershipInfo>
 <member>True</member>
@@ -66,7 +66,7 @@
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>94600.00</price>
+<fee>94600.00</fee>
 <userNature>academic</userNature>
 <membershipInfo>
 <member>True</member>
@@ -76,7 +76,7 @@
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>103200.00</price>
+<fee>103200.00</fee>
 <userNature>academic</userNature>
 <membershipInfo>
 <member>False</member>
@@ -86,7 +86,7 @@
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>20640.00</price>
+<fee>20640.00</fee>
 <userNature>academic</userNature>
 <membershipInfo>
 <member>False</member>
@@ -96,7 +96,7 @@
 <licenceInfo>
 <licence>ELRA_VAR</licence>
 <restrictionsOfUse>commercialUse</restrictionsOfUse>
-<price>103200.00</price>
+<fee>103200.00</fee>
 <userNature>commercial</userNature>
 <membershipInfo>
 <member>False</member>
@@ -106,7 +106,7 @@
 <licenceInfo>
 <licence>ELRA_END_USER</licence>
 <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
-<price>103200.00</price>
+<fee>103200.00</fee>
 <userNature>commercial</userNature>
 <membershipInfo>
 <member>False</member>

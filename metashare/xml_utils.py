@@ -4,16 +4,17 @@ Call the external program xdiff to compare two XML files
 
 """
 
-from subprocess import call, STDOUT
-import sys
-import os
-import logging
-from metashare.settings import LOG_LEVEL, LOG_HANDLER, XDIFF_LOCATION
-from metashare.stats.model_utils import saveLRStats, UPDATE_STAT
-from zipfile import is_zipfile, ZipFile
 from django.contrib.admin.models import LogEntry, ADDITION
 from django.contrib.contenttypes.models import ContentType
 from django.utils.encoding import force_unicode
+from metashare.settings import LOG_LEVEL, LOG_HANDLER, XDIFF_LOCATION
+from metashare.stats.model_utils import saveLRStats, UPDATE_STAT
+from subprocess import call, STDOUT
+from zipfile import is_zipfile, ZipFile
+import logging
+import os
+import re
+import sys
 
 # Setup logging support.
 logging.basicConfig(level=LOG_LEVEL)
@@ -21,6 +22,9 @@ LOGGER = logging.getLogger('metashare.xml_utils')
 LOGGER.addHandler(LOG_HANDLER)
 
 CONSOLE = "/dev/null"
+
+XML_DECL = re.compile(r'\s*<\?xml version=".+" encoding=".+"\?>\s*\n?',
+  re.I|re.S|re.U)
 
 def xml_compare(file1, file2, outfile=None):
     """
@@ -81,6 +85,9 @@ def import_from_string(xml_string, targetstatus, owner_id=None):
         resource.owners.add(owner_id)
         
     resource.storage_object.save()
+    
+    # explicitly write metadata XML and storage object to the storage folder
+    resource.storage_object.update_storage()
 
     # Create log ADDITION message for the new object, but only if we have a user:
     if owner_id:
@@ -144,3 +151,48 @@ def import_from_file(filehandle, descriptor, targetstatus, owner_id=None):
             except Exception as problem:
                 erroneous_descriptors.append((xml_name, problem))
     return imported_resources, erroneous_descriptors
+
+
+def pretty_xml(xml_string):
+    """
+    Pretty-print the given XML String with proper indentation.
+    """
+    xml_string = xml_string.decode('utf-8').replace('><', '>\n<')
+
+    # Delete any XML declaration inside the given XML String.
+    xml_string = XML_DECL.sub(u'', xml_string)
+
+    output = u'<?xml version="1.0" encoding="UTF-8"?>\n'
+
+    # Stores the current indentation level.
+    indent_level = 0
+    for line in xml_string.split('\n'):
+        line = line.strip()
+
+        if line.startswith('<') and line.endswith('/>'):
+            output += u'{0}{1}\n'.format('  ' * indent_level, line)
+            continue
+
+        if line.startswith('</') and line.endswith('>'):
+            indent_level -= 1
+            output += u'{0}{1}\n'.format('  ' * indent_level, line)
+            indent_level -= 1
+            continue
+
+        if line.startswith('<') and line.endswith('>') and '</' in line:
+            output += u'{0}{1}\n'.format('  ' * indent_level, line)
+            continue
+
+        if line.startswith('<') and line.endswith('>') and (not '</' in line):
+            indent_level += 1
+            output += u'{0}{1}\n'.format('  ' * indent_level, line)
+            indent_level += 1
+            continue
+
+        if not line.startswith('<') and line.endswith('>') and ('</' in line):
+            output += u'{0}{1}\n'.format('  ' * indent_level, line)
+            continue
+
+        output += u'{0}{1}\n'.format('  ' * indent_level, line)
+
+    return output

@@ -209,6 +209,8 @@ def change_resource_status(resource, status, precondition_status=None):
             or precondition_status == resource.storage_object.publication_status:
         resource.storage_object.publication_status = status
         resource.storage_object.save()
+        # explicitly write metadata XML and storage object to the storage folder
+        resource.storage_object.update_storage()
     
 def publish_resources(modeladmin, request, queryset):
     for obj in queryset:
@@ -233,7 +235,7 @@ def export_xml_resources(modeladmin, request, queryset):
     from StringIO import StringIO
     from zipfile import ZipFile
     from xml.etree import ElementTree
-    from metashare.repository.supermodel import pretty_xml
+    from metashare.xml_utils import pretty_xml
     from django import http
 
     zipfilename = "resources_export.zip"
@@ -458,7 +460,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
               % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
         from xml.etree import ElementTree
-        from metashare.repository.supermodel import pretty_xml
+        from metashare.xml_utils import pretty_xml
         from django import http
 
         try:

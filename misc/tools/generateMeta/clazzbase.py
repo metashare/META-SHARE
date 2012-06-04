@@ -145,11 +145,9 @@ from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.db import models
 
-from xml.etree.ElementTree import tostring
-
 # pylint: disable-msg=W0611
 from {0}supermodel import SchemaModel, SubclassableModel, \\
-  _make_choices_from_list, InvisibleStringModel, pretty_xml, \\
+  _make_choices_from_list, InvisibleStringModel, \\
   REQUIRED, OPTIONAL, RECOMMENDED
 from {0}editor.widgets import MultiFieldWidget
 from {0}fields import MultiTextField, MetaBooleanField, \\
@@ -279,36 +277,23 @@ TOP_LEVEL_TYPE_EXTRA_CODE_TEMPLATE = '''
         StorageObject instance is existing, creating it if missing.  Also, we
         check that the storage object instance is a local master copy.
         """
-        # Serialize current object information into XML String.
-        try:
-            _metadata = pretty_xml(tostring(self.export_to_elementtree()))
-
-        except ValueError:
-            _metadata = '<NOT_READY_YET/>'
-
         # If we have not yet created a StorageObject for this resource, do so.
         if not self.storage_object:
             self.storage_object = StorageObject.objects.create(
-              metadata=_metadata)
+            metadata='<NOT_READY_YET/>')
 
-        # Otherwise, just update the metadata attribute of the StorageObject.
-        else:
-            # Check that the storage object instance is a local master copy.
-            if not self.storage_object.master_copy:
-                LOGGER.warning('Trying to modify non master copy {0}, ' \\
-                  'aborting!'.format(self.storage_object))
-                return
-
-            self.storage_object.metadata = _metadata
-            self.storage_object.save()
-            # REMINDER: the SOLR indexer in search_indexes.py relies on us
-            # calling storage_object.save() from resourceInfoType_model.save().
-            # Should we ever change that, we must modify 
-            # resourceInfoType_modelIndex._setup_save() accordingly!
-
-        LOGGER.debug(u"\\nMETADATA: {0}\\n".format(
-          self.storage_object.metadata))
-
+        # Check that the storage object instance is a local master copy.
+        if not self.storage_object.master_copy:
+            LOGGER.warning('Trying to modify non master copy {0}, ' \\
+              'aborting!'.format(self.storage_object))
+            return
+        
+        self.storage_object.save()
+        # REMINDER: the SOLR indexer in search_indexes.py relies on us
+        # calling storage_object.save() from resourceInfoType_model.save().
+        # Should we ever change that, we must modify 
+        # resourceInfoType_modelIndex._setup_save() accordingly!
+        
         # Call save() method from super class with all arguments.
         super(resourceInfoType_model, self).save(*args, **kwargs)
 
