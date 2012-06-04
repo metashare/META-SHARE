@@ -209,6 +209,8 @@ def change_resource_status(resource, status, precondition_status=None):
             or precondition_status == resource.storage_object.publication_status:
         resource.storage_object.publication_status = status
         resource.storage_object.save()
+        # explicitly write metadata XML and storage object to the storage folder
+        resource.storage_object.update_storage()
     
 def publish_resources(modeladmin, request, queryset):
     for obj in queryset:

@@ -165,7 +165,7 @@ INSTALLED_APPS = (
 
     'metashare.accounts',
     'metashare.storage',
-    
+    'metashare.sync',
     'metashare.stats',
 
     'metashare.repository',
@@ -186,6 +186,7 @@ PROJECT_APPS = (
     'metashare.repository',
     'metashare.accounts',
     'metashare.storage',
+    'metashare.sync',
 )
 
 # basic Haystack search backend configuration

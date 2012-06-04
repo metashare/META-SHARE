@@ -10,7 +10,7 @@ class StorageObjectAdmin(admin.ModelAdmin):
     """
     Model admin class for stored object instances.
     """
-    list_filter = ('master_copy', 'publication_status', 'deleted')
+    list_filter = ('copy_status', 'publication_status', 'deleted')
     readonly_fields = ('identifier', 'created', 'modified', 'checksum')
     search_fields = ('metadata',)
     
@@ -19,7 +19,7 @@ class StorageObjectAdmin(admin.ModelAdmin):
         'fields': ('identifier', 'created', 'modified', 'checksum'),
       }),
       ('Status Fields', {
-        'fields': ('revision', 'master_copy', 'publication_status', 'deleted'),
+        'fields': ('revision', 'publication_status', 'deleted'),
       }),
       ('Metadata Fields', {
         'fields': ('metadata',),
