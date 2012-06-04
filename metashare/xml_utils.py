@@ -93,7 +93,7 @@ def import_from_string(xml_string, targetstatus, owner_id=None):
         )
 
     # Update statistics
-    saveLRStats(resource, "", "", UPDATE_STAT)
+    saveLRStats(resource, UPDATE_STAT)
 
     return resource
     

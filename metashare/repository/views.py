@@ -245,8 +245,7 @@ def _provide_download(request, resource, download_urls):
                     _chunk = _local_data.read(MAXIMUM_READ_BLOCK_SIZE)
 
             # maintain download statistics and return the response for download
-            saveLRStats(resource, request.user.username,
-                        _get_sessionid(request), DOWNLOAD_STAT)
+            saveLRStats(resource, DOWNLOAD_STAT, request)
             LOGGER.info("Offering a local download of resource #{0}." \
                         .format(resource.id))
             return response
@@ -259,8 +258,7 @@ def _provide_download(request, resource, download_urls):
         for url in download_urls:
             status_code = urlopen(url).getcode()
             if not status_code or status_code < 400:
-                saveLRStats(resource, request.user.username,
-                            _get_sessionid(request), DOWNLOAD_STAT)
+                saveLRStats(resource, DOWNLOAD_STAT, request)
                 LOGGER.info("Redirecting to {0} for the download of resource " \
                             "#{1}.".format(url, resource.id))
                 return redirect(url)
@@ -276,17 +274,6 @@ def _provide_download(request, resource, download_urls):
     return render_to_response('repository/lr_not_downloadable.html',
                               { 'resource': resource, 'reason': 'internal' },
                               context_instance=RequestContext(request))
-
-
-def _get_sessionid(request):
-    """
-    Returns the session ID stored in the cookies of the given request.
-    
-    The empty string is returned, if there is no session ID available.
-    """
-    if request.COOKIES:
-        return request.COOKIES.get('sessionid', '')
-    return ''
 
 
 @login_required
@@ -329,7 +316,7 @@ def view(request, object_id=None):
         sessionid = ""
         if request.COOKIES:
             sessionid = request.COOKIES.get('sessionid', '')
-        saveLRStats(resource, request.user.username, sessionid, VIEW_STAT)
+        saveLRStats(resource, VIEW_STAT, request)
         context['LR_STATS'] = getLRStats(resource.storage_object.identifier)
 
     # Render and return template with the defined context.
@@ -377,7 +364,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
         results_count = sqs.count()
         if self.query:
             saveQueryStats(self.query, str(sorted(self.request.GET.getlist("selected_facets"))), \
-                self.request.user.username, results_count, (datetime.now() - starttime).microseconds)
+                results_count, (datetime.now() - starttime).microseconds, self.request)
 
         return sqs
     

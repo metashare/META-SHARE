@@ -55,7 +55,7 @@ class StatsTest(django.test.TestCase):
         for action in (VIEW_STAT, RETRIEVE_STAT, DOWNLOAD_STAT):
             for item in statsdata:
                 resource =  resourceInfoType_model.objects.get(storage_object__identifier=item['lrid'])
-                saveLRStats(resource, "anonymous", "", action)
+                saveLRStats(resource, action)
             self.assertEqual(len(getLRLast(action, 10)), 2)
         
     def testTop10(self):
@@ -72,7 +72,8 @@ class StatsTest(django.test.TestCase):
         """
         Test whether there are latest queries
         """
-        saveQueryStats("testquery 000", "", "anonymous", 1, 0)
+        saveQueryStats("tesQuerytquery 001", "", 10)
+        saveQueryStats("tesQuerytquery 002", "", 2)
         latest_query = getLastQuery(2)
         client = Client()
         _url = "/{0}stats/top/?view=latestqueries".format(DJANGO_BASE)

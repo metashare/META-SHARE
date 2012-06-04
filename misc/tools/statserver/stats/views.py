@@ -106,13 +106,10 @@ def updateNodeStats(node, daytime):
         node.checked = True
         node.timestamp = datetime.now()
         
-        
-        
-        
         for items in data:
             if (items.has_key("date")):
                 for key,val in items.items():
-                    if (key != "date"):
+                    if (key != "date" and isinstance(val, int)):
                         datestats = NodeStats.objects.filter(node=node, date=daytime, datakey=key)
                         updatestats = False
                         if (datestats.count() == 0):
@@ -120,7 +117,6 @@ def updateNodeStats(node, daytime):
                         else:
                             nodestats = datestats[0]
                             updatestats = True
-                    
                         nodestats.dataval = int(val)
                         nodestats.save(force_update=updatestats)        
     node.save(force_update=True)
