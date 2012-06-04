@@ -188,7 +188,7 @@ class EditorTest(TestCase):
                     print
         print 'Checked models: {0}'.format(num)
 
-
+    
     def test_resource_list_contains_publish_action(self):
         client = self.client_with_user_logged_in(EditorTest.editor_login)
         response = client.get(ADMINROOT+"repository/resourceinfotype_model/", follow=True)
@@ -374,5 +374,6 @@ class EditorTest(TestCase):
         resource.storage_object.master_copy = False
         response = client.get('{}repository/resourceinfotype_model/{}/'
                               .format(ADMINROOT, resource.storage_object.id))
+        print response
         self.assertContains(response, "You will now be redirected")
         
