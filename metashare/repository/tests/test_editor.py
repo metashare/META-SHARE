@@ -364,6 +364,7 @@ class EditorTest(TestCase):
         client = self.client_with_user_logged_in(EditorTest.editor_login)
         resource = self.import_test_resource()
         resource.storage_object.master_copy = True
+        resource.storage_object.save()
         response = client.get('{}repository/resourceinfotype_model/{}/'
                               .format(ADMINROOT, resource.storage_object.id))
         self.assertContains(response, "Change Resource")        
@@ -372,8 +373,8 @@ class EditorTest(TestCase):
         client = self.client_with_user_logged_in(EditorTest.editor_login)
         resource = self.import_test_resource()
         resource.storage_object.master_copy = False
+        resource.storage_object.save()
         response = client.get('{}repository/resourceinfotype_model/{}/'
                               .format(ADMINROOT, resource.storage_object.id))
-        print response
         self.assertContains(response, "You will now be redirected")
         
