@@ -366,8 +366,7 @@ class EditorTest(TestCase):
         resource.storage_object.set_master_copy(True)
         response = client.get('{}repository/resourceinfotype_model/{}/'
                               .format(ADMINROOT, resource.storage_object.id))
-        self.assertContains(response, "Change Resource", status_code=200)        
- 
+        self.assertContains(response, "Change Resource")        
         
     def test_cannot_edit_not_master_copy(self):
         client = self.client_with_user_logged_in(EditorTest.editor_login)
