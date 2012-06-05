@@ -9,7 +9,7 @@ def inventory(request):
     if settings.SYNC_NEEDS_AUTHENTICATION and not request.user.has_perm('storage.can_sync'):
         return HttpResponse("Forbidden: only synchronization users can access this page.", status=403)
     response = HttpResponse(status=200, content_type='application/zip')
-    response['Metashare-Version'] = '2.2-SNAPSHOT'
+    response['Metashare-Version'] = settings.METASHARE_VERSION
     response['Content-Disposition'] = 'attachment; filename="inventory.zip"'
     json_inventory = [
         {'id':'dummy_id', 'digest':'dummy_digest'},
@@ -27,7 +27,7 @@ def full_metadata(request, resource_uuid):
         return HttpResponse("Forbidden: only synchronization users can access this page.", status=403)
     storage_object = get_object_or_404(StorageObject, identifier=resource_uuid)
     response = HttpResponse(status=200, content_type='application/zip')
-    response['Metashare-Version'] = '2.2-SNAPSHOT'
+    response['Metashare-Version'] = settings.METASHARE_VERSION
     response['Content-Disposition'] = 'attachment; filename="full-metadata.zip"'
     with ZipFile(response, 'w') as outzip:
         outzip.writestr('storage-global.json', str(storage_object.identifier))

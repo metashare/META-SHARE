@@ -42,7 +42,7 @@ class MetadataSyncTest (TestCase):
     def assertValidInventoryResponse(self, response):
         self.assertEquals(200, response.status_code)
         self.assertEquals('application/zip', response['Content-Type'])
-        self.assertEquals('2.2-SNAPSHOT', response['Metashare-Version'])
+        self.assertEquals(settings.METASHARE_VERSION, response['Metashare-Version'])
         with ZipFile(StringIO(response.content), 'r') as inzip:
             json_inventory = json.load(inzip.open('inventory.json'))
         self.assertValidInventory(json_inventory)
@@ -50,7 +50,7 @@ class MetadataSyncTest (TestCase):
     def assertValidFullMetadataResponse(self, response):
         self.assertEquals(200, response.status_code)
         self.assertEquals('application/zip', response['Content-Type'])
-        self.assertEquals('2.2-SNAPSHOT', response['Metashare-Version'])
+        self.assertEquals(settings.METASHARE_VERSION, response['Metashare-Version'])
         with ZipFile(StringIO(response.content), 'r') as inzip:
             with inzip.open('storage-global.json') as storage_file:
                 storage_content = storage_file.read()
