@@ -11,12 +11,14 @@ class StorageObjectAdmin(admin.ModelAdmin):
     Model admin class for stored object instances.
     """
     list_filter = ('copy_status', 'publication_status', 'deleted')
-    readonly_fields = ('identifier', 'created', 'modified', 'checksum')
+    readonly_fields = ('source_url', 'identifier', 'created', 'modified', 
+      'checksum', 'digest_checksum', 'metashare_version')
     search_fields = ('metadata',)
     
     fieldsets = (
       ('Read-only Fields', {
-        'fields': ('identifier', 'created', 'modified', 'checksum'),
+        'fields': ('source_url', 'identifier', 'created', 'modified', 
+          'checksum', 'digest_checksum', 'metashare_version'),
       }),
       ('Status Fields', {
         'fields': ('revision', 'publication_status', 'deleted'),
