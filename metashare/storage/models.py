@@ -26,9 +26,7 @@ import logging
 import re
 from metashare.xml_utils import pretty_xml
 from xml.etree.ElementTree import tostring
-from json.encoder import JSONEncoder
 from json import dumps
-from django.conf.locale import gl
 from django.core.serializers.json import DjangoJSONEncoder
 import zipfile
 from zipfile import ZIP_DEFLATED
@@ -203,6 +201,7 @@ class StorageServer(models.Model):
         
         return response.status == 200
 
+# pylint: disable-msg=R0902
 class StorageObject(models.Model):
     """
     Models an object inside the persistent storage layer.

@@ -9,6 +9,7 @@ from metashare import settings, test_utils
 from metashare.repository.models import resourceInfoType_model
 from metashare.settings import ROOT_PATH
 from metashare.storage.models import INGESTED, INTERNAL
+# pylint: disable-msg=E0611
 from hashlib import md5
 import os.path
 import zipfile
