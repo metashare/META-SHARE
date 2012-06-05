@@ -30,7 +30,7 @@ def full_metadata(request, resource_uuid):
     response['Metashare-Version'] = '2.2-SNAPSHOT'
     response['Content-Disposition'] = 'attachment; filename="full-metadata.zip"'
     with ZipFile(response, 'w') as outzip:
-        outzip.writestr('storage.txt', str(storage_object.identifier))
-        outzip.writestr('resource.xml', storage_object.metadata.encode('utf-8'))
+        outzip.writestr('storage-global.json', str(storage_object.identifier))
+        outzip.writestr('metadata.xml', storage_object.metadata.encode('utf-8'))
     return response
     

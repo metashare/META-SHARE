@@ -65,9 +65,9 @@ def get_full_metadata(opener, full_metadata_url):
     with contextlib.closing(opener.open(full_metadata_url)) as response:
         data = response.read()
         with ZipFile(StringIO(data), 'r') as inzip:
-            with inzip.open('storage.txt') as storage_file:
+            with inzip.open('storage-global.json') as storage_file:
                 storage_json = storage_file.read()
-            with inzip.open('resource.xml') as resource_xml:
+            with inzip.open('metadata.xml') as resource_xml:
                 resource_xml_string = resource_xml.read()
             return storage_json, resource_xml_string
 

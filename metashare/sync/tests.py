@@ -52,10 +52,10 @@ class MetadataSyncTest (TestCase):
         self.assertEquals('application/zip', response['Content-Type'])
         self.assertEquals('2.2-SNAPSHOT', response['Metashare-Version'])
         with ZipFile(StringIO(response.content), 'r') as inzip:
-            with inzip.open('storage.txt') as storage_file:
+            with inzip.open('storage-global.json') as storage_file:
                 storage_content = storage_file.read()
                 self.assertIsNotNone(storage_content)
-            with inzip.open('resource.xml') as resource_xml:
+            with inzip.open('metadata.xml') as resource_xml:
                 resource_xml_string = resource_xml.read()
                 root = fromstring(resource_xml_string)
                 self.assertIsNotNone(root)
