@@ -9,7 +9,10 @@ from metashare import settings, test_utils
 from metashare.repository.models import resourceInfoType_model
 from metashare.settings import ROOT_PATH
 from metashare.storage.models import INGESTED, INTERNAL
+# pylint: disable-msg=E0611
+from hashlib import md5
 import os.path
+import zipfile
 
 TESTFIXTURE_XML = '{}/repository/fixtures/ILSP10.xml'.format(ROOT_PATH)
 
@@ -49,5 +52,25 @@ class PersistenceTest(TestCase):
         self.assertTrue(
           os.path.isfile('{0}/metadata-{1:04d}.xml'.format(
             _storage_object._storage_folder(), _storage_object.revision)))
-        
-        
+        # ingested resource has global part of storage object in storage folder
+        self.assertTrue(
+          os.path.isfile('{0}/storage-global.json'.format(
+            _storage_object._storage_folder())))
+        # ingested resource has local part of storage object in storage folder
+        self.assertTrue(
+          os.path.isfile('{0}/storage-local.json'.format(
+            _storage_object._storage_folder())))
+        # ingested resource has digest zip in storage folder
+        self.assertTrue(
+          os.path.isfile('{0}/resource.zip'.format(
+            _storage_object._storage_folder())))
+        # digest zip contains metadata.xml and storage-global.json
+        _zf_name = '{0}/resource.zip'.format( _storage_object._storage_folder())
+        _zf = zipfile.ZipFile(_zf_name, mode='r')
+        self.assertTrue('metadata.xml' in _zf.namelist())
+        self.assertTrue('storage-global.json' in _zf.namelist())
+        # md5 of digest zip is stored in storage object
+        _checksum = md5()
+        with open(_zf_name, 'rb') as _zf_reader:
+            _checksum.update(_zf_reader.read())
+        self.assertEqual(_checksum.hexdigest(), _storage_object.digest_checksum)
