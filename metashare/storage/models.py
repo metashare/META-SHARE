@@ -63,10 +63,11 @@ COPY_CHOICES = (
     (PROXY, 'proxy copy'))
 
 # attributes to by serialized in the global JSON of the storage object
-GLOBAL_STORAGE_ATTS = ['source_url', 'identifier', 'created', 'modified', 'revision', 'metashare_version']
+GLOBAL_STORAGE_ATTS = ['source_url', 'identifier', 'created', 'modified', 
+  'revision', 'publication_status', 'metashare_version']
 
 # attributes to be serialized in the local JSON of the storage object
-LOCAL_STORAGE_ATTS = ['digest_checksum', 'publication_status', 'copy_status']
+LOCAL_STORAGE_ATTS = ['digest_checksum', 'digest_modified', 'copy_status']
 
 
 def _validate_valid_xml(value):
@@ -242,6 +243,10 @@ class StorageObject(models.Model):
       help_text="(Read-only) MD5 checksum of the digest zip file containing the" \
       "global serialized storage object and the metadata XML for this " \
       "storage object instance.")
+      
+    digest_modified = models.DateTimeField(editable=False, null=True, blank=True,
+      help_text="(Read-only) last modification date of digest zip " \
+      "for this storage object instance.")
       
     revision = models.PositiveIntegerField(default=0, help_text="Revision " \
       "or version information for this storage object instance.")
@@ -427,11 +432,13 @@ class StorageObject(models.Model):
         # check if metadata has changed; if yes, increase revision for ingested
         # and published resources and save metadata to storage folder
         if self.metadata != _metadata or not _xml_exists:
-            self.metadata = _metadata
-            self.modified = datetime.now()
-            update_obj = True
+            if self.metadata != _metadata:
+                self.metadata = _metadata
+                self.modified = datetime.now()
+                update_obj = True
             if self.publication_status in (INGESTED, PUBLISHED):
                 self.revision += 1
+                update_obj = True
                 # serialize metadata
                 with open('{0}/metadata-{1:04d}.xml'.format(
                   self._storage_folder(), self.revision), 'w') as _out:
@@ -476,6 +483,8 @@ class StorageObject(models.Model):
                     _checksum.update(_chunk)
                     _chunk = _zf_reader.read(MAXIMUM_MD5_BLOCK_SIZE)
             self.digest_checksum = _checksum.hexdigest()
+            # update last modified timestamp
+            self.digest_modified = datetime.now()
             update_obj = True
             
         # check if local storage object serialization has changed; if yes,
