@@ -16,7 +16,7 @@
          <th{% if forloop.first %} colspan="2"{% endif %}{% if field.required %} class="required"{% endif %}>
 	         {{ field.label|capfirst }}
 	         <span class="helpLink" kblink="{{ kb_link }}{{ field.label }}">
-	         	<img class="help_icon" src="{{ help_icon_url }}" kblink="{{ kb_link }}{{ field.label|toFieldName }}"></img>
+	         	<img class="help_icon" src="{{ help_icon_url }}" kblink="{{ kb_link }}{{ field.label|to_field_name }}"></img>
 	         </span>
          </th>
        {% endif %}

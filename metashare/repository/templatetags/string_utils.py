@@ -1,17 +1,24 @@
 
+"""
+    Author: Salvatore Minutoli
+    String utility methods to be used in templates.
+"""
+
 from django import template
 
 register = template.Library()
 
-'''
+
+
+def to_field_name(value): 
+    """
     This template tag is used to convert a list of words
     into a single word that does not contain spaces.
     The words are capitalized as they are joined.
     It is used in some templates to get the correct
     knowledge base link for fields or components.
     Es. 'text classificationInfo' is converted into 'textClassificationInfo'
-'''
-def toFieldName(value): 
+    """
     str_list = value.split(' ')
     if str_list.__len__() == 0:
         return ''
@@ -21,4 +28,4 @@ def toFieldName(value):
         
     return new_value
 
-register.filter('toFieldName', toFieldName)
+register.filter('to_field_name', to_field_name)

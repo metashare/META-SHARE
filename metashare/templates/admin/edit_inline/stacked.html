@@ -3,7 +3,7 @@
 <div class="inline-group" id="{{ inline_admin_formset.formset.prefix }}-group">
   <h2 class="customtitle">
   	<span class="formset_title">{{ inline_admin_formset.opts.verbose_name_plural|title }}</span>
-  	<span class="helpLink" kbbase="{{ kb_link }}" kbcomp="{{ inline_admin_formset.opts.verbose_name_plural }}"><img class="help_icon" src="{{ help_icon_url }}" kbbase="{{ kb_link }}" kbcomp="{{ inline_admin_formset.opts.verbose_name_plural|toFieldName }}"></img></span>
+  	<span class="helpLink" kbbase="{{ kb_link }}" kbcomp="{{ inline_admin_formset.opts.verbose_name_plural }}"><img class="help_icon" src="{{ help_icon_url }}" kbbase="{{ kb_link }}" kbcomp="{{ inline_admin_formset.opts.verbose_name_plural|to_field_name }}"></img></span>
   </h2>
   <div style="clear: both"></div>
 {{ inline_admin_formset.formset.management_form }}
