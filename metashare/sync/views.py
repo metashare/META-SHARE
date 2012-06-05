@@ -15,8 +15,8 @@ def inventory(request):
         {'id':'dummy_id', 'digest':'dummy_digest'},
         {'id':'dummy_id2', 'digest':'dummy_digest2'},
     ]
-    qs = StorageObject.objects.filter(copy_status=MASTER)
-    for obj in qs:
+    objects_to_sync = StorageObject.objects.filter(copy_status=MASTER)
+    for obj in objects_to_sync:
         json_inventory.append({'id':str(obj.identifier), 'digest':str(obj.digest_checksum)})
     with ZipFile(response, 'w') as outzip:
         outzip.writestr('inventory.json', json.dumps(json_inventory))
