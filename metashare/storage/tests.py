@@ -174,10 +174,12 @@ class StorageObjectTestCase(unittest.TestCase):
           storage_object.identifier)
         self.assertEqual(storage_object._storage_folder(), _correct_path)
         
-        # The storage folder should be None if master_copy is False.
+        # The storage folder should be None if master_copy is False
+        # This has changed, the storage folder is now also available for
+        # non-master copies
         storage_object.master_copy = False
         storage_object.save()
-        self.assertEqual(storage_object._storage_folder(), None)
+        self.assertEqual(storage_object._storage_folder(), _correct_path)
         
         # Set master_copy again to allow cleanup of storage folder.
         storage_object.master_copy = True
