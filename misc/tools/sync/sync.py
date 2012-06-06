@@ -12,7 +12,7 @@ import json
 from zipfile import ZipFile
 from StringIO import StringIO
 
-# Taken from 
+# Idea taken from 
 # http://stackoverflow.com/questions/5082128/how-do-i-authenticate-a-urllib2-script-in-order-to-access-https-web-services-fro
 def login(login_url, username, password):
     """
@@ -20,28 +20,33 @@ def login(login_url, username, password):
     Returns an opener with which logged-in requests can be sent.
     Raises URLError if HTTP response status is in the 400-599 range.
     """
-    cookies = urllib2.HTTPCookieProcessor()
-    opener = urllib2.build_opener(cookies)
+    cookie_proc = urllib2.HTTPCookieProcessor()
+    opener = urllib2.build_opener(cookie_proc)
     urllib2.install_opener(opener)
-
     opener.open(login_url)
 
+    csrftoken = None
+    for cookie in cookie_proc.cookiejar:
+        if cookie.name == 'csrftoken':
+            csrftoken = cookie.value
+            break
+    if csrftoken is None:
+        raise Exception("Response does not contain a csrftoken, cannot continue")
+    
+    post_data = urllib.urlencode({
+        'username':username,
+        'password':password,
+        'this_is_the_login_form':1,
+        'csrfmiddlewaretoken':csrftoken,
+    })
+
     try:
-        token = [x.value for x in cookies.cookiejar if x.name == 'csrftoken'][0]
-    except IndexError:
-        raise Exception("no csrftoken")
-
-    params = dict(username=username, password=password,
-        this_is_the_login_form=True,
-        csrfmiddlewaretoken=token,
-    )
-    encoded_params = urllib.urlencode(params)
-
-    with contextlib.closing(opener.open(login_url, encoded_params)) as response:
+        response = opener.open(login_url, post_data)
         html = response.read()
         if not 'Logout' in html:
             raise Exception("Expected html page with a Logout button but got:\n{0}".format(html))
-
+    finally:
+        response.close()
     return opener
 
 
@@ -73,8 +78,8 @@ def get_full_metadata(opener, full_metadata_url):
 
 if __name__ == "__main__":
     base_url = "http://localhost:8000/metashare"
-    user = "marc"
-    password = "blabla7"
+    user = "syncuser"
+    password = "secret"
     opener = login("{0}/login/".format(base_url), user, password)
     
     if len(sys.argv) < 2:
