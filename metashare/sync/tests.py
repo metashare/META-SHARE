@@ -9,7 +9,8 @@ from zipfile import ZipFile
 from metashare import settings, test_utils
 from metashare.repository.models import resourceInfoType_model
 from xml.etree.ElementTree import fromstring
-from metashare.storage.models import INGESTED
+from metashare.storage.models import INGESTED, INTERNAL, StorageObject,\
+    PUBLISHED
 
 
 class MetadataSyncTest (TestCase):
@@ -38,7 +39,7 @@ class MetadataSyncTest (TestCase):
             is_empty = False
             self.assertValidInventoryItem(entry)
         if is_empty:
-            raise Exception("Not a valid inventory becuase it doesn't have any inventory items: {}".format(json_inventory))
+            raise Exception("Not a valid inventory because it doesn't have any inventory items: {}".format(json_inventory))
 
     def assertValidInventoryResponse(self, response):
         self.assertEquals(200, response.status_code)
@@ -71,12 +72,12 @@ class MetadataSyncTest (TestCase):
         return client
 
     @classmethod
-    def import_test_resource(cls):
+    def import_test_resource(cls, filename, status):
         test_utils.setup_test_storage()
-        _fixture = '{0}/repository/fixtures/testfixture.xml'.format(settings.ROOT_PATH)
+        _fixture = '{0}/repository/fixtures/{1}'.format(settings.ROOT_PATH, filename)
         result = test_utils.import_xml(_fixture)
         resource = result[0]
-        resource.storage_object.publication_status = INGESTED
+        resource.storage_object.publication_status = status
         resource.storage_object.save()
         resource.storage_object.update_storage()
 
@@ -123,12 +124,16 @@ class MetadataSyncTest (TestCase):
             'password': 'secret',
         }
         
-        cls.import_test_resource()
+        StorageObject.objects.all().delete()
+        cls.import_test_resource('testfixture.xml', INGESTED)
+        cls.import_test_resource('roundtrip.xml', INTERNAL)
+        cls.import_test_resource('ILSP10.xml', PUBLISHED)
         
 
     @classmethod
     def tearDownClass(cls):
         User.objects.all().delete()
+        StorageObject.objects.all().delete()
 
     
 
@@ -191,3 +196,41 @@ class MetadataSyncTest (TestCase):
         client = Client()
         response = client.get('{0}0000000000000000000000000000000000000000000000000000000000000000/metadata/'.format(self.SYNC_BASE))
         self.assertEquals(404, response.status_code)
+
+
+    def test_inventory_doesnt_include_internal(self):
+        settings.SYNC_NEEDS_AUTHENTICATION = False
+        client = Client()
+        response = client.get(self.INVENTORY_URL)
+        self.assertValidInventoryResponse(response)
+        with ZipFile(StringIO(response.content), 'r') as inzip:
+            json_inventory = json.load(inzip.open('inventory.json'))
+        self.assertEquals(2, len(json_inventory))
+        for struct in json_inventory:
+            storage_object = StorageObject.objects.get(identifier=struct['id'])
+            self.assertTrue(storage_object.publication_status in (INGESTED, PUBLISHED),
+                            "Resource {0} should not be included in inventory because it is not ingested or published".format(struct['id']))
+
+    def test_can_get_ingested_metadata(self):
+        settings.SYNC_NEEDS_AUTHENTICATION = False
+        client = Client()
+        storage_object = StorageObject.objects.filter(publication_status = INGESTED)[0]
+        resource_uuid = storage_object.identifier
+        response = client.get('{0}{1}/metadata/'.format(self.SYNC_BASE, resource_uuid))
+        self.assertValidFullMetadataResponse(response)
+
+    def test_can_get_published_metadata(self):
+        settings.SYNC_NEEDS_AUTHENTICATION = False
+        client = Client()
+        storage_object = StorageObject.objects.filter(publication_status = PUBLISHED)[0]
+        resource_uuid = storage_object.identifier
+        response = client.get('{0}{1}/metadata/'.format(self.SYNC_BASE, resource_uuid))
+        self.assertValidFullMetadataResponse(response)
+
+    def test_cannot_reach_internal_metadata(self):
+        settings.SYNC_NEEDS_AUTHENTICATION = False
+        client = Client()
+        storage_object = StorageObject.objects.filter(publication_status = INTERNAL)[0]
+        resource_uuid = storage_object.identifier
+        response = client.get('{0}{1}/metadata/'.format(self.SYNC_BASE, resource_uuid))
+        self.assertIsForbidden(response)
