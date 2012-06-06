@@ -6,6 +6,11 @@ from django.contrib.admin.sites import LOGIN_FORM_KEY
 import json
 from StringIO import StringIO
 from zipfile import ZipFile
+from metashare import settings, test_utils
+from metashare.repository.models import resourceInfoType_model
+from xml.etree.ElementTree import fromstring
+from metashare.storage.models import INGESTED, INTERNAL, StorageObject, \
+    PUBLISHED
 
 
 class MetadataSyncTest (TestCase):
@@ -21,19 +26,41 @@ class MetadataSyncTest (TestCase):
         self.assertEquals(302, response.status_code)
         self.assertTrue(LOGIN_URL in response['Location'])
 
+    def assertIsForbidden(self, response):
+        self.assertContains(response, "Forbidden", status_code=403)
 
     def assertValidInventoryItem(self, entry):
         if not (entry['id'] and entry['digest']):
             raise Exception('Inventory item does not have "id" and "digest" key-value pairs: {}'.format(entry))
-    
-    
+        
     def assertValidInventory(self, json_inventory):
         is_empty = True
         for entry in json_inventory:
             is_empty = False
             self.assertValidInventoryItem(entry)
         if is_empty:
-            raise Exception("Not a valid inventory becuase it doesn't have any inventory items: {}".format(json_inventory))
+            raise Exception("Not a valid inventory because it doesn't have any inventory items: {}".format(json_inventory))
+
+    def assertValidInventoryResponse(self, response):
+        self.assertEquals(200, response.status_code)
+        self.assertEquals('application/zip', response['Content-Type'])
+        self.assertEquals(settings.METASHARE_VERSION, response['Metashare-Version'])
+        with ZipFile(StringIO(response.content), 'r') as inzip:
+            json_inventory = json.load(inzip.open('inventory.json'))
+        self.assertValidInventory(json_inventory)
+
+    def assertValidFullMetadataResponse(self, response):
+        self.assertEquals(200, response.status_code)
+        self.assertEquals('application/zip', response['Content-Type'])
+        self.assertEquals(settings.METASHARE_VERSION, response['Metashare-Version'])
+        with ZipFile(StringIO(response.content), 'r') as inzip:
+            with inzip.open('storage-global.json') as storage_file:
+                storage_content = storage_file.read()
+                self.assertIsNotNone(storage_content)
+            with inzip.open('metadata.xml') as resource_xml:
+                resource_xml_string = resource_xml.read()
+                root = fromstring(resource_xml_string)
+                self.assertIsNotNone(root)
 
 
     def client_with_user_logged_in(self, user_credentials):
@@ -43,6 +70,16 @@ class MetadataSyncTest (TestCase):
             raise Exception, 'could not log in user with credentials: {}\nresponse was: {}'\
                 .format(user_credentials, response)
         return client
+
+    @classmethod
+    def import_test_resource(cls, filename, status):
+        test_utils.setup_test_storage()
+        _fixture = '{0}/repository/fixtures/{1}'.format(settings.ROOT_PATH, filename)
+        result = test_utils.import_xml(_fixture)
+        resource = result[0]
+        resource.storage_object.publication_status = status
+        resource.storage_object.save()
+        resource.storage_object.update_storage()
 
     @classmethod
     def setUpClass(cls):
@@ -87,27 +124,113 @@ class MetadataSyncTest (TestCase):
             'password': 'secret',
         }
         
+        StorageObject.objects.all().delete()
+        cls.import_test_resource('testfixture.xml', INGESTED)
+        cls.import_test_resource('roundtrip.xml', INTERNAL)
+        cls.import_test_resource('ILSP10.xml', PUBLISHED)
+        
 
     @classmethod
     def tearDownClass(cls):
         User.objects.all().delete()
+        StorageObject.objects.all().delete()
 
     
-    def test_syncuser_can_reach_inventory(self):
+
+    def test_unprotected_inventory(self):
+        settings.SYNC_NEEDS_AUTHENTICATION = False
+        client = Client()
+        response = client.get(self.INVENTORY_URL)
+        self.assertValidInventoryResponse(response)
+
+    def test_syncuser_get_inventory(self):
+        settings.SYNC_NEEDS_AUTHENTICATION = True
         client = self.client_with_user_logged_in(self.syncuser_login)
         response = client.get(self.INVENTORY_URL)
-        self.assertEquals(200, response.status_code)
-        self.assertEquals('application/zip', response['Content-Type'])
-        with ZipFile(StringIO(response.content), 'r') as inzip:
-            json_inventory = json.load(inzip.open('inventory.json'))
-        self.assertValidInventory(json_inventory)
+        self.assertValidInventoryResponse(response)
 
     def test_normaluser_cannot_reach_inventory(self):
+        settings.SYNC_NEEDS_AUTHENTICATION = True
         client = self.client_with_user_logged_in(self.normal_login)
         response = client.get(self.INVENTORY_URL)
-        self.assertIsRedirectToLogin(response)
+        self.assertIsForbidden(response)
 
     def test_editoruser_cannot_reach_inventory(self):
+        settings.SYNC_NEEDS_AUTHENTICATION = True
         client = self.client_with_user_logged_in(self.editor_login)
         response = client.get(self.INVENTORY_URL)
-        self.assertIsRedirectToLogin(response)
+        self.assertIsForbidden(response)    
+
+    def test_anonymous_cannot_reach_inventory(self):
+        settings.SYNC_NEEDS_AUTHENTICATION = True
+        client = Client()
+        response = client.get(self.INVENTORY_URL)
+        self.assertIsForbidden(response)
+        
+    def test_unprotected_full_metadata(self):
+        settings.SYNC_NEEDS_AUTHENTICATION = False
+        client = Client()
+        resource = resourceInfoType_model.objects.all()[0]
+        resource_uuid = resource.storage_object.identifier
+        response = client.get('{0}{1}/metadata/'.format(self.SYNC_BASE, resource_uuid))
+        self.assertValidFullMetadataResponse(response)
+        
+    def test_anonymous_cannot_reach_full_metadata(self):
+        settings.SYNC_NEEDS_AUTHENTICATION = True
+        client = Client()
+        resource = resourceInfoType_model.objects.all()[0]
+        resource_uuid = resource.storage_object.identifier
+        response = client.get('{0}{1}/metadata/'.format(self.SYNC_BASE, resource_uuid))
+        self.assertIsForbidden(response)
+
+    def test_editoruser_cannot_reach_full_metadata(self):
+        settings.SYNC_NEEDS_AUTHENTICATION = True
+        client = self.client_with_user_logged_in(self.editor_login)
+        resource = resourceInfoType_model.objects.all()[0]
+        resource_uuid = resource.storage_object.identifier
+        response = client.get('{0}{1}/metadata/'.format(self.SYNC_BASE, resource_uuid))
+        self.assertIsForbidden(response)
+    
+    def test_wrong_uuid_causes_404(self):
+        settings.SYNC_NEEDS_AUTHENTICATION = False
+        client = Client()
+        response = client.get('{0}0000000000000000000000000000000000000000000000000000000000000000/metadata/'.format(self.SYNC_BASE))
+        self.assertEquals(404, response.status_code)
+
+
+    def test_inventory_doesnt_include_internal(self):
+        settings.SYNC_NEEDS_AUTHENTICATION = False
+        client = Client()
+        response = client.get(self.INVENTORY_URL)
+        self.assertValidInventoryResponse(response)
+        with ZipFile(StringIO(response.content), 'r') as inzip:
+            json_inventory = json.load(inzip.open('inventory.json'))
+        self.assertEquals(2, len(json_inventory))
+        for struct in json_inventory:
+            storage_object = StorageObject.objects.get(identifier=struct['id'])
+            self.assertTrue(storage_object.publication_status in (INGESTED, PUBLISHED),
+                            "Resource {0} should not be included in inventory because it is not ingested or published".format(struct['id']))
+
+    def test_can_get_ingested_metadata(self):
+        settings.SYNC_NEEDS_AUTHENTICATION = False
+        client = Client()
+        storage_object = StorageObject.objects.filter(publication_status = INGESTED)[0]
+        resource_uuid = storage_object.identifier
+        response = client.get('{0}{1}/metadata/'.format(self.SYNC_BASE, resource_uuid))
+        self.assertValidFullMetadataResponse(response)
+
+    def test_can_get_published_metadata(self):
+        settings.SYNC_NEEDS_AUTHENTICATION = False
+        client = Client()
+        storage_object = StorageObject.objects.filter(publication_status = PUBLISHED)[0]
+        resource_uuid = storage_object.identifier
+        response = client.get('{0}{1}/metadata/'.format(self.SYNC_BASE, resource_uuid))
+        self.assertValidFullMetadataResponse(response)
+
+    def test_cannot_reach_internal_metadata(self):
+        settings.SYNC_NEEDS_AUTHENTICATION = False
+        client = Client()
+        storage_object = StorageObject.objects.filter(publication_status = INTERNAL)[0]
+        resource_uuid = storage_object.identifier
+        response = client.get('{0}{1}/metadata/'.format(self.SYNC_BASE, resource_uuid))
+        self.assertIsForbidden(response)

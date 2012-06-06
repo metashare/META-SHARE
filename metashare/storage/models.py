@@ -513,9 +513,11 @@ def _delete_storage_folder(sender, instance, **kwargs):
     if not instance._storage_folder():
         return
     
-    if not instance.has_download():
-        if exists(instance._storage_folder()):
-            rmdir(instance._storage_folder())
+    if not exists(instance._storage_folder()):
+        return
+    elif os.listdir(instance._storage_folder()) == '':
+        # Empty directory
+        rmdir(instance._storage_folder())
     
     # Otherwise, we can only rename the storage folder for later inspection.
     else:
