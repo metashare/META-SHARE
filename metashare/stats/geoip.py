@@ -277,50 +277,37 @@ country_info = {"A1": ["Anonymous Proxy", ""],
 "ZW": ["Zimbabwe", "-19.0,29.0"]}
 
 
-def iptonum(ip):
-	"""Convert IP address string to 32-bit integer, or return None if IP is bad.
-	
-	>>> iptonum('0.0.0.0')
-	0
-	>>> hex(iptonum('127.0.0.1'))
-	'0x7f000001'
-	>>> hex(iptonum('255.255.255.255'))
-	'0xffffffffL'
-	>>> iptonum('127.0.0.256')
-	>>> iptonum('1.2.3')
-	>>> iptonum('a.s.d.f')
-	>>> iptonum('1.2.3.-4')
-	>>> iptonum('')
-	"""
-	segments = ip.split('.')
-	if len(segments) != 4:
-		return None
-	num = 0
-	for segment in segments:
-		try:
-			segment = int(segment)
-		except ValueError:
-			return None
-		if segment < 0 or segment > 255:
-			return None
-		num = num << 8 | segment
-	return num
+def iptonum(ipaddress):
+    """Convert IP address string to 32-bit integer, or return None if IP is bad."""
+    segments = ipaddress.split('.')
+    if len(segments) != 4:
+        return None
+    num = 0
+    for segment in segments:
+        try:
+            segment = int(segment)
+        except ValueError:
+            return None
+        if segment < 0 or segment > 255:
+            return None
+        num = num << 8 | segment
+    return num
 
 class DatabaseError(Exception):
-	pass
+    pass
 
 class GeoIP(object):
     """Wraps GeoIP country database lookup into a class."""
     _record_length = 3
     _country_start = 16776960
-
+    
     def __init__(self, dbname='stats/resources/GeoIP.dat'):
         """Init GeoIP instance with given GeoIP country database file."""
         self._dbfile = open(dbname, 'rb')
 
-    def country(self, ip):
-        ipnum = iptonum(ip)
-        if ipnum is None or ip == "":
+    def country(self, ipaddress):
+        ipnum = iptonum(ipaddress)
+        if ipnum is None or ipaddress == "":
             return ''
         return countries[self._country_id(ipnum)]
 
@@ -331,14 +318,14 @@ class GeoIP(object):
         for depth in range(31, -1, -1):
             self._dbfile.seek(offset * 2 * self._record_length)
             data = self._dbfile.read(2 * self._record_length)
-            x = [0, 0]
+            coords = [0, 0]
             for i in range(2):
                 for j in range(self._record_length):
-                    x[i] += ord(data[self._record_length * i + j]) << (j * 8)
+                    coords[i] += ord(data[self._record_length * i + j]) << (j * 8)
             i = 1 if ipnum & (1 << depth) else 0
-            if x[i] >= self._country_start:
-                return x[i] - self._country_start
-            offset = x[i]
+            if coords[i] >= self._country_start:
+                return coords[i] - self._country_start
+            offset = coords[i]
         raise DatabaseError('GeoIP database corrupt: offset=%s' % offset)
     
 def getcountry_name(countryid):
@@ -351,6 +338,6 @@ def getcountry_coords(countryid):
         return country_info[countryid][1]
     return ""
         
-def getcountry(ip):
-    return GeoIP().country(ip)
+def getcountry(ipaddress):
+    return GeoIP().country(ipaddress)
     

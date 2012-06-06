@@ -131,7 +131,8 @@ def getLRLast(action, limit):
     return action_list
 
 def getTopQueries(limit):
-    return QueryStats.objects.values('query', 'facets','lasttime').annotate(query_count=Count('query'), facets_count=Count('facets')).order_by('query_count','facets_count')[:limit]
+    return QueryStats.objects.values('query', 'facets','lasttime').annotate(query_count=Count('query'), \
+        facets_count=Count('facets')).order_by('query_count','facets_count')[:limit]
  
 def getLastQuery (limit):
     return QueryStats.objects.values('query', 'facets', 'lasttime', 'found').order_by('-lasttime')[:limit]
@@ -196,7 +197,7 @@ def getCountryActions(action):
         sets = LRStats.objects.values('geoinfo').annotate(Count('action')).order_by('-action__count')
     
     for key in sets:
-        result.append([getcountry_name(key['geoinfo']), key['action__count'], getcountry_coords(key['geoinfo'])])
+        result.append([key['geoinfo'], key['action__count'], getcountry_name(key['geoinfo'])])
     return result
         
         
@@ -204,7 +205,7 @@ def getCountryQueries():
     result = []
     sets = QueryStats.objects.values('geoinfo').annotate(Count('geoinfo')).order_by('-geoinfo__count')
     for key in sets:
-        result.append([getcountry_name(key['geoinfo']), key['geoinfo__count'], getcountry_coords(key['geoinfo'])])
+        result.append([key['geoinfo'], key['geoinfo__count'], getcountry_name(key['geoinfo'])])
     return result
 
 def _get_sessionid(request):

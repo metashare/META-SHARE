@@ -110,12 +110,11 @@
     function drawVisualization() {
       var data = google.visualization.arrayToDataTable([
       ['Country', 'Count'],
-        {% for geoinfo in geovisits %}
-        {% if geoinfo.2|length > 0 %}
-        ['{{ geoinfo.0 }}', {{ geoinfo.1 }}],
+      {% for geoinfo in geovisits %}
+        {% if geoinfo.0|length > 0 %}
+            ['{{ geoinfo.0 }}', {{ geoinfo.1 }}],
         {% endif %}
-        {% endfor %}
-        
+      {% endfor %}
       ]);
     
       var geochart = new google.visualization.GeoChart(
@@ -128,11 +127,7 @@
   </script>
 
 
-<body onload="initialize()" onunload="GUnload()"> 
-     
-  </body> 
-  
-  
+<body> 
   {% if geovisits|length > 0 %}
     <div id="visits" style="background: #E6E6FA; border: 1px solid #000;">   
      <table width=50%><td width=40%><table>
@@ -140,7 +135,7 @@
      
      {% for geoinfo in geovisits %}
             <tr>
-            <td nowrap><font color=black>{{ geoinfo.0 }}</font></td>
+            <td nowrap><font color=black>{{ geoinfo.2 }}</font></td>
             <td><font color=black>{{ geoinfo.1 }}</font></td>
             </tr>
         {% endfor %}
@@ -155,5 +150,8 @@
 
 </td></tr></table>
 
-
 {% endblock %}
+</body> 
+  
+  
+
