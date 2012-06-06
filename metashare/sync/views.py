@@ -11,10 +11,7 @@ def inventory(request):
     response = HttpResponse(status=200, content_type='application/zip')
     response['Metashare-Version'] = settings.METASHARE_VERSION
     response['Content-Disposition'] = 'attachment; filename="inventory.zip"'
-    json_inventory = [
-        {'id':'dummy_id', 'digest':'dummy_digest'},
-        {'id':'dummy_id2', 'digest':'dummy_digest2'},
-    ]
+    json_inventory = []
     objects_to_sync = StorageObject.objects.filter(copy_status=MASTER)
     for obj in objects_to_sync:
         json_inventory.append({'id':str(obj.identifier), 'digest':str(obj.digest_checksum)})
@@ -29,8 +26,16 @@ def full_metadata(request, resource_uuid):
     response = HttpResponse(status=200, content_type='application/zip')
     response['Metashare-Version'] = settings.METASHARE_VERSION
     response['Content-Disposition'] = 'attachment; filename="full-metadata.zip"'
-    with ZipFile(response, 'w') as outzip:
-        outzip.writestr('storage-global.json', str(storage_object.identifier))
-        outzip.writestr('metadata.xml', storage_object.metadata.encode('utf-8'))
+    if storage_object.digest_checksum is None:
+        storage_object.update_storage()
+    #if storage_object.digest_checksum is None: # still no digest? something is very wrong here:
+    #    raise Exception("Object {0} has no digest".format(resource_uuid))
+    zipfilename = "{0}/resource.zip".format(storage_object._storage_folder())
+    with open(zipfilename, 'r') as inzip:
+        zipfiledata = inzip.read()
+        response.write(zipfiledata)
+#    with ZipFile(response, 'w') as outzip:
+#        outzip.writestr('storage-global.json', str(storage_object.identifier))
+#        outzip.writestr('metadata.xml', storage_object.metadata.encode('utf-8'))
     return response
     

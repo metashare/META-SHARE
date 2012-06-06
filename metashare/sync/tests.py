@@ -9,6 +9,7 @@ from zipfile import ZipFile
 from metashare import settings, test_utils
 from metashare.repository.models import resourceInfoType_model
 from xml.etree.ElementTree import fromstring
+from metashare.storage.models import INGESTED
 
 
 class MetadataSyncTest (TestCase):
@@ -75,6 +76,8 @@ class MetadataSyncTest (TestCase):
         _fixture = '{0}/repository/fixtures/testfixture.xml'.format(settings.ROOT_PATH)
         result = test_utils.import_xml(_fixture)
         resource = result[0]
+        resource.storage_object.publication_status = INGESTED
+        resource.storage_object.save()
         resource.storage_object.update_storage()
 
     @classmethod
