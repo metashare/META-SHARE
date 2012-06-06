@@ -9,7 +9,7 @@ from zipfile import ZipFile
 from metashare import settings, test_utils
 from metashare.repository.models import resourceInfoType_model
 from xml.etree.ElementTree import fromstring
-from metashare.storage.models import INGESTED, INTERNAL, StorageObject,\
+from metashare.storage.models import INGESTED, INTERNAL, StorageObject, \
     PUBLISHED
 
 
