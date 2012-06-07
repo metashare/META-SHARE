@@ -29,7 +29,7 @@ class PersonLookup(ModelLookup):
                     if lcterm in field.lower():
                         return True
             return False
-        persons = self.get_queryset()
+        persons = self.get_queryset().filter(personCopyStatus="m")
         if term == '*':
             results = persons
         else:
@@ -55,7 +55,15 @@ class GenericUnicodeLookup(ModelLookup):
         def matches(item):
             'Helper function to group the search code for a database item'
             return lcterm in unicode(item).lower()
-        items = self.get_queryset()
+        
+        items = ''
+        if isinstance(ModelLookup, actorInfoType_model):
+            items = self.get_queryset().filter(actorCopyStatus="m")
+        elif isinstance(ModelLookup, documentInfoType_model):
+            items = self.get_queryset().filter(documentCopyStatus="m")
+        elif isinstance(ModelLookup, targetResourceInfoType_model):
+            items = self.get_queryset().filter(targetResourceCopyStatus="m")
+                
         if term == '*':
             results = items
         else:
@@ -85,7 +93,7 @@ class DocumentationLookup(ModelLookup):
         def matches(item):
             'Helper function to group the search code for a database item'
             return lcterm in unicode(item).lower()
-        items = documentInfoType_model.objects.get_query_set()
+        items = documentInfoType_model.objects.get_query_set().filter(documentationCopyStatus="m")
         if term == '*':
             results = items
         else:
@@ -172,7 +180,7 @@ class ProjectLookup(ModelLookup):
                         return True
             return False
         
-        projects = self.get_queryset()
+        projects = self.get_queryset().filter(projectCopyStatus="m")
         if term == '*':
             results = projects
         else:
@@ -207,7 +215,7 @@ class OrganizationLookup(ModelLookup):
                     if lcterm in field.lower():
                         return True
             return False
-        orgs = self.get_queryset()
+        orgs = self.get_queryset().filter(organizationCopyStatus="m")
         if term == '*':
             results = orgs
         else:
