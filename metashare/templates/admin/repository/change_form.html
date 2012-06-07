@@ -34,6 +34,13 @@
   </ul>
 {% endif %}{% endif %}
 {% endblock %}
+
+
+{% if change and original.personCopyStatus == 'm' or original.organizationCopyStatus == 'm' or original.projectCopyStatus == 'm' or original.targetResourceCopyStatus == 'm' or original.documentCopyStatus == 'm' or original.documentationCopyStatus == 'm' or original.actorCopyStatus == 'm' %} 
+		condition should be changed to not equal 'm'
+		{% include "admin/repository/redirect.html" %}
+{% else %}
+
 <form {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post" id="{{ opts.module_name }}_form">{% csrf_token %}{% block form_top %}{% endblock %}
 <div>
 {% if is_popup %}<input type="hidden" name="_popup" value="1" />{% endif %}
@@ -63,6 +70,9 @@
 {% prepopulated_fields_js %}
 
 </div>
-</form></div>
+</form>
+
+{% endif %}
+</div>
 {% endblock %}
 
