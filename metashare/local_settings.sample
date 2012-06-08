@@ -107,3 +107,14 @@ SELENIUM_DRIVER = 'Firefox'
 # The port of the Selenium test server;
 # this must be the same port as used in DJANGO_URL
 SELENIUM_TESTSERVER_PORT = 8000
+
+# List of nodes with which the node will be synchronized
+# Only use if you are a core node!
+CORE_NODES = {
+    'node1': {
+        'NAME': 'ILSP',                       # This is the short name of the node.
+        'DESCRIPTION': 'xxx',                 # A short descpription of the node.
+        'URL': 'metashare.example.com:8080',  # The url of the core node (Please,
+                                              # also include a port if it is used).
+    },
+}
