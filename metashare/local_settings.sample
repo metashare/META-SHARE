@@ -118,12 +118,12 @@ CORE_NODES = {
     'node1': {
         'NAME': 'AUNI',                       # The short name of the node.
         'DESCRIPTION': 'xxx',                 # A short descpription of the node.
-        'URL': 'metashare.example.com:8080',  # The url of the core node (Please,
+        'URL': 'metashare.example.com:8000',  # The url of the core node (Please,
                                               # also include a port if it is used).
     },
     'node2': {
         'NAME': 'BUNI',                     
         'DESCRIPTION': 'xxx',               
-        'URL': 'metashare.test.com:8080',
+        'URL': 'metashare.test.com',
     },
 }
