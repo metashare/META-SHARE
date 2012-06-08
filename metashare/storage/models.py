@@ -5,16 +5,14 @@ Project: META-SHARE prototype implementation
 from Crypto import Random
 from Crypto.PublicKey import RSA
 from base64 import b64encode
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.db import models
-from django.db.models.signals import pre_delete
-from django.dispatch import receiver
 # pylint: disable-msg=E0611
 from hashlib import md5
 from httplib import HTTPConnection
 from metashare.settings import LOG_LEVEL, LOG_HANDLER
 from metashare import settings
-from os import mkdir, rename, rmdir
+from os import mkdir
 from os.path import exists
 import os.path
 from urllib import urlencode
@@ -26,7 +24,7 @@ import logging
 import re
 from metashare.xml_utils import pretty_xml
 from xml.etree.ElementTree import tostring
-from json import dumps
+from json import dumps, loads
 from django.core.serializers.json import DjangoJSONEncoder
 import zipfile
 from zipfile import ZIP_DEFLATED
@@ -312,13 +310,8 @@ class StorageObject(models.Model):
     def _storage_folder(self):
         """
         Returns the path to the local folder for this storage object instance.
-        
-        Returns None if the master copy attribute of the instance is not set.
         """
-        if self.master_copy:
-            return '{0}/{1}'.format(settings.STORAGE_PATH, self.identifier)
-        
-        return None
+        return '{0}/{1}'.format(settings.STORAGE_PATH, self.identifier)
     
     def _compute_checksum(self):
         """
@@ -403,6 +396,10 @@ class StorageObject(models.Model):
         Updates the metadata XML if required and serializes it and this storage
         object to the storage folder.
         """
+        # for internal resources, no serialization is done
+        if self.publication_status is INTERNAL:
+            return
+        
         # check if the storage folder for this storage object instance exists
         if self._storage_folder() and not exists(self._storage_folder()):
             # If not, create the storage folder.
@@ -440,7 +437,7 @@ class StorageObject(models.Model):
                 update_obj = True
                 # serialize metadata
                 with open('{0}/metadata-{1:04d}.xml'.format(
-                  self._storage_folder(), self.revision), 'w') as _out:
+                  self._storage_folder(), self.revision), 'wb') as _out:
                     _out.write(unicode(self.metadata).encode('utf-8'))
                 update_zip = True
             LOGGER.debug(u"\nMETADATA: {0}\n".format(self.metadata))
@@ -457,12 +454,12 @@ class StorageObject(models.Model):
             update_obj = True
             if self.publication_status in (INGESTED, PUBLISHED):
                 with open('{0}/storage-global.json'.format(
-                  self._storage_folder()), 'w') as _out:
+                  self._storage_folder()), 'wb') as _out:
                     _out.write(unicode(self.global_storage).encode('utf-8'))
                 update_zip = True
         
-        # create new digest zip if required
-        if update_zip:
+        # create new digest zip if required, but only for master copies
+        if update_zip and self.copy_status == MASTER:
             _zf_name = '{0}/resource.zip'.format(self._storage_folder())
             _zf = zipfile.ZipFile(_zf_name, mode='w', compression=ZIP_DEFLATED)
             try:
@@ -498,30 +495,104 @@ class StorageObject(models.Model):
             update_obj = True
             if self.publication_status in (INGESTED, PUBLISHED):
                 with open('{0}/storage-local.json'.format(
-                  self._storage_folder()), 'w') as _out:
+                  self._storage_folder()), 'wb') as _out:
                     _out.write(unicode(self.local_storage).encode('utf-8'))
         
         # save storage object if required
         if update_obj:
             self.save()
 
-       
-@receiver(pre_delete, sender=StorageObject)
-def _delete_storage_folder(sender, instance, **kwargs):
-    """Deletes to storage folder for the sender instance, if possible."""
-    # We can safely remove the storage folder if no binary data is present.
-    if not instance._storage_folder():
-        return
+def restore_from_folder(storage_id, copy_status=None):
+    """
+    Restores the storage object and the associated resource for the given
+    storage object identifier and makes it persistent in the database. 
     
-    if not exists(instance._storage_folder()):
-        return
-    elif os.listdir(instance._storage_folder()) == '':
-        # Empty directory
-        rmdir(instance._storage_folder())
+    storage_id: the storage object identifier; it is assumed that this is the
+    folder name in the storage folder folder where serialized storage object
+    and metadata XML are located
     
-    # Otherwise, we can only rename the storage folder for later inspection.
+    copy_status (optional): one of MASTER, REMOTE, PROXY; if present, used as
+        copy status for the restored resource
+        
+    Returns the restored resource with its storage object set.
+    """
+    from metashare.repository.models import resourceInfoType_model
+    
+    # if a storage object with this id already exists, delete it
+    try:
+        _so = StorageObject.objects.get(identifier=storage_id)
+        _so.delete()
+    except ObjectDoesNotExist:
+        _so = None
+    
+    storage_folder = os.path.join(settings.STORAGE_PATH, storage_id)
+
+    # get most current metadata.xml
+    _files = os.listdir(storage_folder)
+    _metadata_files = \
+      sorted(
+        [f for f in _files if f.startswith('metadata')],
+        reverse=True)
+    if not _metadata_files:
+        raise Exception('no metadata.xml found')
+    # restore resource from metadata.xml
+    _metadata_file = open('{0}/{1}'.format(storage_folder, _metadata_files[0]), 'rb')
+    _xml_string = _metadata_file.read()
+    _metadata_file.close()
+    result = resourceInfoType_model.import_from_string(_xml_string)
+    if not result[0]:
+        msg = u''
+        if len(result) > 2:
+            msg = u'{}'.format(result[2])
+        raise Exception(msg)
+    resource = result[0]
+    # at this point, a storage object is already created at the resource, so update it 
+    _storage_object = resource.storage_object
+    _storage_object.metadata = _xml_string
+    
+    # add global storage object attributes if available
+    if os.path.isfile('{0}/storage-global.json'.format(storage_folder)):
+        _global_json = \
+          _fill_storage_object(_storage_object, '{0}/storage-global.json'.format(storage_folder))
+        _storage_object.global_storage = _global_json
     else:
-        _old_name = instance._storage_folder()
-        _new_name = '{0}/DELETED-{1}'.format(settings.STORAGE_PATH,
-          instance.identifier)
-        rename(_old_name, _new_name)
+        LOGGER.warn('missing storage-global.json, importing resource as new')
+        _storage_object.identifier = storage_id
+    # add local storage object attributes if available 
+    if os.path.isfile('{0}/storage-local.json'.format(storage_folder)):
+        _local_json = \
+          _fill_storage_object(_storage_object, '{0}/storage-local.json'.format(storage_folder))
+        _storage_object.local_storage = _local_json
+        # always use the provided copy status, even if its different from the
+        # one in the local storage object
+        if copy_status:
+            if _storage_object.copy_status != copy_status:
+                LOGGER.warn('overwriting copy status from storage-local.json with "{}"'.format(copy_status))
+            _storage_object.copy_status = copy_status
+    else:
+        if not copy_status:
+            # no copy status and no local storage object is provided, so use
+            # a default
+            LOGGER.warn('no copy status provided, using default copy status MASTER')
+            _storage_object.copy_status = MASTER
+
+    _storage_object.save()
+    _storage_object.update_storage()
+        
+    return resource
+
+
+def _fill_storage_object(storage_obj, json_file_name):
+    """
+    Fills the given storage object with the entries of the given JSON file.
+    The JSON file contains the serialization of dictionary where it is assumed 
+    the dictionary keys are valid attributes of the storage object.
+    Returns the content of the JSON file.
+    """
+    with open(json_file_name, 'rb') as _in:
+        json_string = _in.read()
+        _dict = loads(json_string)
+        for _att in _dict.keys():
+            setattr(storage_obj, _att, _dict[_att])
+        return json_string
+            
