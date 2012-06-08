@@ -21,7 +21,9 @@ from metashare.repository.editor.related_mixin import RelatedAdminMixin
 from metashare.repository.editor.schemamodel_mixin import SchemaModelLookup
 from metashare.repository.editor.inlines import ReverseInlineModelAdmin
 from metashare.repository.editor.editorutils import is_inline, decode_inline
-from metashare.repository.models import resourceInfoType_model, personInfoType_model, projectInfoType_model, actorInfoType_model, documentInfoType_model, documentationInfoType_model, targetResourceInfoType_model
+from metashare.repository.models import resourceInfoType_model, personInfoType_model, \
+projectInfoType_model, actorInfoType_model, documentInfoType_model, \
+documentationInfoType_model, targetResourceInfoType_model
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_protect
 from django import template
@@ -406,7 +408,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
 
         url = ''
         if isinstance(obj, resourceInfoType_model):
-            if(obj.storage_object.master_copy):
+            if(not obj.storage_object.master_copy):
                 url = obj.storage_object.source_url
         elif isinstance(obj, documentInfoType_model):    
             if(documentCopyStatus != 'm'):
@@ -420,6 +422,9 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         elif isinstance(obj, personInfoType_model):    
             if(personCopyStatus != 'm'):
                 url = obj.personSourceUrl   
+        elif isinstance(obj, projectInfoType_model):    
+            if(projectCopyStatus != 'm'):
+                url = obj.projectSourceUrl           
         elif isinstance(obj, organizationInfoType_model):    
             if(organizationCopyStatus != 'm'):
                 url = obj.organizationSourceUrl 
