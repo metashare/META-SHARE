@@ -14,7 +14,7 @@ from metashare.repository.fields import MultiTextField, MetaBooleanField, \
   MultiSelectField, DictField, best_lang_value_retriever
 from metashare.repository.validators import validate_lang_code_keys
 
-from metashare.storage.models import StorageObject
+from metashare.storage.models import StorageObject, MASTER, REMOTE, PROXY, COPY_CHOICES
 
 from metashare.settings import DJANGO_BASE, LOG_LEVEL, LOG_HANDLER
 from metashare import settings
@@ -35,14 +35,7 @@ SCHEMA_NAMESPACE = 'http://www.ilsp.gr/META-XMLSchema'
 # version of the META-SHARE metadata XML Schema
 SCHEMA_VERSION = '2.1'
 
-# Copy status constants and choice:
-MASTER = 'm'
-REMOTE = 'r'
-PROXY = 'p'
-COPY_CHOICES = (
-    (MASTER, 'master copy'),
-    (REMOTE, 'remote copy'),
-    (PROXY, 'proxy copy'))
+
 
 # pylint: disable-msg=C0103
 class resourceInfoType_model(SchemaModel):
@@ -215,7 +208,7 @@ class resourceInfoType_model(SchemaModel):
         
         owners_list = ''
         for owner in owners.all():
-            owners_list += owner.surname
+            owners_list += owner.surname.join(", ")
         
         return owners_list
 
