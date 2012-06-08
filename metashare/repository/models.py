@@ -732,15 +732,7 @@ class documentationInfoType_model(SubclassableModel):
 
     class Meta:
         verbose_name = "Documentation"
-        
-    documentationSourceUrl = models.URLField(verify_exists=False, editable=False,
-      default=settings.DJANGO_URL,
-      help_text="(Read-only) base URL for the server where the master copy of " \
-      "the associated entity instance is located.")    
-        
-    documentationCopyStatus = models.CharField(default=MASTER, max_length=1, editable=False, choices=COPY_CHOICES,
-        help_text="Generalized copy status flag for this entity instance.")
-    
+           
         
 DOCUMENTINFOTYPE_DOCUMENTTYPE_CHOICES = _make_choices_from_list([
   u'article', u'book', u'booklet', u'manual', u'techReport',
@@ -905,12 +897,12 @@ class documentInfoType_model(documentationInfoType_model):
       'entioned in IETF BCP47',
       blank=True, max_length=20, )
     
-    documentSourceUrl = models.URLField(verify_exists=False, editable=False,
+    source_url = models.URLField(verify_exists=False, 
       default=settings.DJANGO_URL,
       help_text="(Read-only) base URL for the server where the master copy of " \
       "the associated entity instance is located.")
     
-    documentCopyStatus = models.CharField(default=MASTER, max_length=1, editable=False, choices=COPY_CHOICES,
+    copy_status = models.CharField(default=MASTER, max_length=1, choices=COPY_CHOICES,
         help_text="Generalized copy status flag for this entity instance.")
 
     def real_unicode_(self):
@@ -1331,15 +1323,7 @@ class targetResourceInfoType_model(SchemaModel):
       ' being described; to be used for identifiers also for this versio' \
       'n',
       max_length=4500, )
-    
-    targetResourceSourceUrl = models.URLField(verify_exists=False, editable=False,
-      default=settings.DJANGO_URL,
-      help_text="(Read-only) base URL for the server where the master copy of " \
-      "the associated entity instance is located.")
-    
-    targetResourceCopyStatus = models.CharField(default=MASTER, max_length=1, editable=False, choices=COPY_CHOICES,
-        help_text="Generalized copy status flag for this entity instance.")
-
+        
     def real_unicode_(self):
         # pylint: disable-msg=C0301
         formatargs = ['targetResourceNameURI', ]
@@ -2507,15 +2491,7 @@ class actorInfoType_model(SubclassableModel):
     __schema_name__ = 'SUBCLASSABLE'
 
     class Meta:
-        verbose_name = "Actor"
-        
-    actorSourceUrl = models.URLField(verify_exists=False, editable=False,
-      default=settings.DJANGO_URL,
-      help_text="(Read-only) base URL for the server where the master copy of " \
-      "the associated entity instance is located.")    
-        
-    actorCopyStatus = models.CharField(default=MASTER, max_length=1, editable=False, choices=COPY_CHOICES,
-        help_text="Generalized copy status flag for this entity instance.")
+        verbose_name = "Actor"       
     
       
 
@@ -2569,12 +2545,12 @@ class organizationInfoType_model(actorInfoType_model):
       ' or an organization',
       )
     
-    organizationSourceUrl = models.URLField(verify_exists=False, editable=False,
+    source_url = models.URLField(verify_exists=False,
       default=settings.DJANGO_URL,
       help_text="(Read-only) base URL for the server where the master copy of " \
       "the associated entity instance is located.")
    
-    organizationCopyStatus = models.CharField(default=MASTER, max_length=1, editable=False, choices=COPY_CHOICES,
+    copy_status = models.CharField(default=MASTER, max_length=1, choices=COPY_CHOICES,
         help_text="Generalized copy status flag for this entity instance.")
 
     def real_unicode_(self):
@@ -2658,12 +2634,12 @@ class personInfoType_model(actorInfoType_model):
       'affiliated',
       blank=True, null=True, related_name="affiliation_%(class)s_related", )
 
-    personSourceUrl = models.URLField(verify_exists=False, editable=False,
+    source_url = models.URLField(verify_exists=False,
       default=settings.DJANGO_URL,
       help_text="(Read-only) base URL for the server where the master copy of " \
       "the associated entity instance is located.")
     
-    personCopyStatus = models.CharField(default=MASTER, max_length=1, editable=False, choices=COPY_CHOICES,
+    copy_status = models.CharField(default=MASTER, max_length=1, choices=COPY_CHOICES,
         help_text="Generalized copy status flag for this entity instance.")
 
 
@@ -3429,12 +3405,12 @@ class projectInfoType_model(SchemaModel):
       help_text='The end date of a project related to the resources',
       blank=True, null=True, )
     
-    projectSourceUrl = models.URLField(verify_exists=False, editable=False,
+    source_url = models.URLField(verify_exists=False,
       default=settings.DJANGO_URL,
       help_text="(Read-only) base URL for the server where the master copy of " \
       "the associated entity instance is located.")
     
-    projectCopyStatus = models.CharField(default=MASTER, max_length=1, editable=False, choices=COPY_CHOICES,
+    copy_status = models.CharField(default=MASTER, max_length=1, choices=COPY_CHOICES,
         help_text="Generalized copy status flag for this entity instance.")
 
     def real_unicode_(self):
