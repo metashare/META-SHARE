@@ -112,11 +112,11 @@ SELENIUM_TESTSERVER_PORT = 8000
 # Time interval settings. It sets the intervals when the synchronization 
 # task will be triggered. Uses "crontab" conventions. 
 INTERVALS = {
-    'MINUTE' : '0',
-    'HOUR' : '0',
-    'DAY_OF_MONTH' : '0',
-    'MONTH' : '0',
-    'DAY_OF_WEEK' : '0',
+    'MINUTE' : '0',       # 0-59
+    'HOUR' : '0',         # 0-23
+    'DAY_OF_MONTH' : '0', # 1-31
+    'MONTH' : '0',        # 1-12
+    'DAY_OF_WEEK' : '0',  # 0-6 (0 is Sunday)
 }
 # List of external nodes with which the local node will be synchronized.
 # Only use if you are a core node!
