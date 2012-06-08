@@ -21,6 +21,7 @@ from metashare.repository.editor.related_mixin import RelatedAdminMixin
 from metashare.repository.editor.schemamodel_mixin import SchemaModelLookup
 from metashare.repository.editor.inlines import ReverseInlineModelAdmin
 from metashare.repository.editor.editorutils import is_inline, decode_inline
+from metashare.repository.models import resourceInfoType_model, personInfoType_model, projectInfoType_model, actorInfoType_model, documentInfoType_model, documentationInfoType_model, targetResourceInfoType_model
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_protect
 from django import template
@@ -403,6 +404,30 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         media = media + adminForm.media
         #### end modification ####
 
+        url = ''
+        if isinstance(obj, resourceInfoType_model):
+            if(obj.storage_object.master_copy):
+                url = obj.storage_object.source_url
+        elif isinstance(obj, documentInfoType_model):    
+            if(documentCopyStatus != 'm'):
+                url = obj.documentSourceUrl
+        elif isinstance(obj, documentationInfoType_model):    
+            if(documentationCopyStatus != 'm'):
+                url = obj.documentationSourceUrl        
+        elif isinstance(obj, actorInfoType_model):    
+            if(actorCopyStatus != 'm'):
+                url = obj.actorSourceUrl    
+        elif isinstance(obj, personInfoType_model):    
+            if(personCopyStatus != 'm'):
+                url = obj.personSourceUrl   
+        elif isinstance(obj, organizationInfoType_model):    
+            if(organizationCopyStatus != 'm'):
+                url = obj.organizationSourceUrl 
+        elif isinstance(obj, targetResourceInfoType_model):    
+            if(targetResourceCopyStatus != 'm'):
+                url = obj.targetResourceSourceUrl 
+                            
+
         context = {
             'title': _('Change %s') % force_unicode(opts.verbose_name),
             'adminform': adminForm,
@@ -416,6 +441,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             'app_label': opts.app_label,
             'kb_link': settings.KNOWLEDGE_BASE_URL,
             'comp_name': _('%s') % force_unicode(opts.verbose_name),
+            'redirection_url': url,
         }
         context.update(extra_context or {})
         return self.render_change_form(request, context, change=True, obj=obj)
