@@ -23,7 +23,7 @@ from metashare.repository.editor.inlines import ReverseInlineModelAdmin
 from metashare.repository.editor.editorutils import is_inline, decode_inline
 from metashare.repository.models import resourceInfoType_model, personInfoType_model, \
 projectInfoType_model, actorInfoType_model, documentInfoType_model, \
-documentationInfoType_model, targetResourceInfoType_model
+documentationInfoType_model, targetResourceInfoType_model, organizationInfoType_model
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_protect
 from django import template
