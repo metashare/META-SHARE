@@ -36,8 +36,7 @@
 {% endblock %}
 
 
-{% if change and original.personCopyStatus == 'm' or original.organizationCopyStatus == 'm' or original.projectCopyStatus == 'm' or original.targetResourceCopyStatus == 'm' or original.documentCopyStatus == 'm' or original.documentationCopyStatus == 'm' or original.actorCopyStatus == 'm' %} 
-		condition should be changed to not equal 'm'
+{% if change and redirection_url != '' %}		
 		{% include "admin/repository/redirect.html" %}
 {% else %}
 
