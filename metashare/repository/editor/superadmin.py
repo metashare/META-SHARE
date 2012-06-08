@@ -22,8 +22,7 @@ from metashare.repository.editor.schemamodel_mixin import SchemaModelLookup
 from metashare.repository.editor.inlines import ReverseInlineModelAdmin
 from metashare.repository.editor.editorutils import is_inline, decode_inline
 from metashare.repository.models import resourceInfoType_model, personInfoType_model, \
-projectInfoType_model, actorInfoType_model, documentInfoType_model, \
-documentationInfoType_model, targetResourceInfoType_model, organizationInfoType_model
+projectInfoType_model, documentInfoType_model, organizationInfoType_model
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_protect
 from django import template
@@ -117,7 +116,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         - hiding certain fields (they are present but invisible);
         - custom widgets for subclassable items such as actorInfo;
         - custom minimalistic "related" widget for non-inlined one2one fields;
-        """
+        """        
         self.hide_hidden_fields(db_field, kwargs)
         # ForeignKey or ManyToManyFields
         if self.is_x_to_many_relation(db_field):
@@ -410,28 +409,9 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         if isinstance(obj, resourceInfoType_model):
             if(not obj.storage_object.master_copy):
                 url = obj.storage_object.source_url
-        elif isinstance(obj, documentInfoType_model):    
-            if(documentCopyStatus != 'm'):
-                url = obj.documentSourceUrl
-        elif isinstance(obj, documentationInfoType_model):    
-            if(documentationCopyStatus != 'm'):
-                url = obj.documentationSourceUrl        
-        elif isinstance(obj, actorInfoType_model):    
-            if(actorCopyStatus != 'm'):
-                url = obj.actorSourceUrl    
-        elif isinstance(obj, personInfoType_model):    
-            if(personCopyStatus != 'm'):
-                url = obj.personSourceUrl   
-        elif isinstance(obj, projectInfoType_model):    
-            if(projectCopyStatus != 'm'):
-                url = obj.projectSourceUrl           
-        elif isinstance(obj, organizationInfoType_model):    
-            if(organizationCopyStatus != 'm'):
-                url = obj.organizationSourceUrl 
-        elif isinstance(obj, targetResourceInfoType_model):    
-            if(targetResourceCopyStatus != 'm'):
-                url = obj.targetResourceSourceUrl 
-                            
+        else: 
+            if(obj.copy_status != 'm'):
+                url = obj.source_url                            
 
         context = {
             'title': _('Change %s') % force_unicode(opts.verbose_name),
