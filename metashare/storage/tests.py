@@ -3,8 +3,6 @@ Project: META-SHARE prototype implementation
  Author: Christian Federmann <cfedermann@dfki.de>
 """
 from time import sleep
-from os.path import exists
-from os import remove, rmdir, mkdir
 from django.core.exceptions import ValidationError
 from django.test.client import Client
 from django.utils import unittest
@@ -76,38 +74,6 @@ class StorageObjectTestCase(unittest.TestCase):
         response = self.client.get(_url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(int(response.content), -1)
-
-    def test_delete(self):
-        """
-        Checks that pre_delete works for a storage object with binary data.
-        """
-        
-        # Load storage object instance from database.
-        storage_object = StorageObject.objects.get(pk=self.object_id)
-        mkdir(storage_object._storage_folder())
-        
-        # Create dummy binary file inside storage folder.
-        _dummy_zip = '{0}/archive.zip'.format(storage_object._storage_folder())
-        with open(_dummy_zip, 'w') as dummy_zip:
-            dummy_zip.write('DUMMY_ZIP')
-        
-        # Update storage object with checksum for dummy ZIP file.  Otherwise,
-        #   the delete() method cannot know that there is a download attached.
-        storage_object._compute_checksum()
-        
-        # Deleting the instance should result in a renamed storage folder.
-        _renamed_folder = '{0}/DELETED-{1}'.format(settings.STORAGE_PATH,
-          storage_object.identifier)
-        storage_object.delete()
-        
-        # Check that the renamed folder exists.
-        self.assertTrue(exists(_renamed_folder))
-        
-        # Then, clean up by deleting the dummy binary file and removing the
-        # renamed storage folder from disk.
-        _dummy_zip = '{0}/archive.zip'.format(_renamed_folder)
-        remove(_dummy_zip)
-        rmdir(_renamed_folder)
 
     def test_validation(self):
         """

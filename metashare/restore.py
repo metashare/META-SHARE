@@ -60,7 +60,7 @@ if __name__ == "__main__":
                 continue
             try:
                 print 'restoring from folder: "{0}"'.format(folder_name)
-                resource = restore_from_folder(folder_path)
+                resource = restore_from_folder(folder_name)
                 successful_restored += [resource]
             # pylint: disable-msg=W0703
             except Exception as problem:

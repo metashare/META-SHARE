@@ -5,16 +5,14 @@ Project: META-SHARE prototype implementation
 from Crypto import Random
 from Crypto.PublicKey import RSA
 from base64 import b64encode
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.db import models
-from django.db.models.signals import pre_delete
-from django.dispatch import receiver
 # pylint: disable-msg=E0611
 from hashlib import md5
 from httplib import HTTPConnection
 from metashare.settings import LOG_LEVEL, LOG_HANDLER
 from metashare import settings
-from os import mkdir, rename, rmdir
+from os import mkdir
 from os.path import exists
 import os.path
 from urllib import urlencode
@@ -398,6 +396,10 @@ class StorageObject(models.Model):
         Updates the metadata XML if required and serializes it and this storage
         object to the storage folder.
         """
+        # for internal resources, no serialization is done
+        if self.publication_status is INTERNAL:
+            return
+        
         # check if the storage folder for this storage object instance exists
         if self._storage_folder() and not exists(self._storage_folder()):
             # If not, create the storage folder.
@@ -500,45 +502,31 @@ class StorageObject(models.Model):
         if update_obj:
             self.save()
 
-       
-@receiver(pre_delete, sender=StorageObject)
-def _delete_storage_folder(sender, instance, **kwargs):
-    """Deletes to storage folder for the sender instance, if possible."""
-    # We can safely remove the storage folder if no binary data is present.
-    if not instance._storage_folder():
-        return
-    
-    if not instance.has_download():
-        if exists(instance._storage_folder()):
-            # delete possible serialization files
-            for _file in os.listdir(instance._storage_folder()):
-                os.remove(os.path.join(instance._storage_folder(), _file))
-            rmdir(instance._storage_folder())
-    
-    # Otherwise, we can only rename the storage folder for later inspection.
-    else:
-        _old_name = instance._storage_folder()
-        _new_name = '{0}/DELETED-{1}'.format(settings.STORAGE_PATH,
-          instance.identifier)
-        rename(_old_name, _new_name)
-
-
-def restore_from_folder(storage_folder, copy_status=None):
+def restore_from_folder(storage_id, copy_status=None):
     """
-    Restores the storage object and the associated resource from the given
-    folder and makes it persistent in the database. 
+    Restores the storage object and the associated resource for the given
+    storage object identifier and makes it persistent in the database. 
     
-    storage_folder: the folder where serialized storage object and metadata XML
-        is located
+    storage_id: the storage object identifier; it is assumed that this is the
+    folder name in the storage folder folder where serialized storage object
+    and metadata XML are located
+    
     copy_status (optional): one of MASTER, REMOTE, PROXY; if present, used as
         copy status for the restored resource
         
     Returns the restored resource with its storage object set.
     """
-
-    # first restore the resource    
     from metashare.repository.models import resourceInfoType_model
     
+    # if a storage object with this id already exists, delete it
+    try:
+        _so = StorageObject.objects.get(identifier=storage_id)
+        _so.delete()
+    except ObjectDoesNotExist:
+        _so = None
+    
+    storage_folder = os.path.join(settings.STORAGE_PATH, storage_id)
+
     # get most current metadata.xml
     _files = os.listdir(storage_folder)
     _metadata_files = \
@@ -569,6 +557,7 @@ def restore_from_folder(storage_folder, copy_status=None):
         _storage_object.global_storage = _global_json
     else:
         LOGGER.warn('missing storage-global.json, importing resource as new')
+        _storage_object.identifier = storage_id
     # add local storage object attributes if available 
     if os.path.isfile('{0}/storage-local.json'.format(storage_folder)):
         _local_json = \
