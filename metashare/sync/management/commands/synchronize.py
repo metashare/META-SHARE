@@ -35,8 +35,8 @@ class Command(BaseCommand):
         # Get the items that need to be updated.
         # For each item in the inventory, compare them
         for item in inventory:
-			uuid = item
-			storage_json, resource_xml_string = get_full_metadata(opener, "{0}/sync/{1}/metadata/".format(base_url, uuid))
+            uuid = item
+            storage_json, resource_xml_string = get_full_metadata(opener, "{0}/sync/{1}/metadata/".format(base_url, uuid))
         # If they have differences, add the item to the updateable list
         
         
