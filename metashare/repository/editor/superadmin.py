@@ -409,7 +409,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             if(not obj.storage_object.master_copy):
                 url = obj.storage_object.source_url
         elif(hasattr(obj, 'copy_status') and obj.copy_status != 'm'):
-                url = obj.source_url                            
+            url = obj.source_url                            
 
         context = {
             'title': _('Change %s') % force_unicode(opts.verbose_name),
