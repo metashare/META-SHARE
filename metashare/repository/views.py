@@ -190,7 +190,7 @@ def download(request, object_id):
 
     # here we are only interested in licenses (or their names) of the specified
     # resource that allow the current user a download/purchase
-    resource = get_object_or_404(resourceInfoType_model, pk=object_id)
+    resource = get_object_or_404(resourceInfoType_model, storage_object__identifier=object_id)
     licences = _get_licences(resource, request.user)
 
     licence_choice = None
@@ -316,7 +316,7 @@ def view(request, object_id=None):
     """
     Render browse or detail view for the repository application.
     """
-    resource = get_object_or_404(resourceInfoType_model, pk=object_id)
+    resource = get_object_or_404(resourceInfoType_model, storage_object__identifier=object_id)
 
     # Convert resource to ElementTree and then to template tuples.
     resource_tree = resource.export_to_elementtree()

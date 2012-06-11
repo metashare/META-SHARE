@@ -174,7 +174,10 @@ class resourceInfoType_model(SchemaModel):
         super(resourceInfoType_model, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return '/{0}repository/browse/{1}/'.format(DJANGO_BASE, self.id)
+        from django.template.defaultfilters import slugify
+        resourceName = slugify(u'{0}'.format(self))
+        
+        return '/{0}repository/browse/{1}/{2}/'.format(DJANGO_BASE, resourceName, self.storage_object.identifier)
 
     def publication_status(self):
         """
