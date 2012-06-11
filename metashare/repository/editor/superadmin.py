@@ -405,12 +405,14 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         media = media + adminForm.media
         #### end modification ####
 
+        #### begin modification ####
         url = ''
         if isinstance(obj, resourceInfoType_model):
             if(not obj.storage_object.master_copy):
                 url = obj.storage_object.source_url
         elif(hasattr(obj, 'copy_status') and obj.copy_status != MASTER):
-            url = obj.source_url                            
+            url = obj.source_url
+        #### end modification ####                                
 
         context = {
             'title': _('Change %s') % force_unicode(opts.verbose_name),
@@ -425,7 +427,9 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             'app_label': opts.app_label,
             'kb_link': settings.KNOWLEDGE_BASE_URL,
             'comp_name': _('%s') % force_unicode(opts.verbose_name),
+            #### begin modification ####
             'redirection_url': url,
+            #### end modification ####    
         }
         context.update(extra_context or {})
         return self.render_change_form(request, context, change=True, obj=obj)
