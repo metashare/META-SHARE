@@ -68,7 +68,7 @@ sqs = SearchQuerySet() \
 urlpatterns = patterns('metashare.repository.views',
   (r'^browse/[\w\-]*/(?P<object_id>\w+)/$',
     'view'),
-  (r'^download/[\w\-]*/(?P<object_id>\w+)/$',
+  (r'^download/(?P<object_id>\w+)/$',
     'download'),
   url(r'^search/$',
     search_view_factory(view_class=MetashareFacetedSearchView,
