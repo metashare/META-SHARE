@@ -53,17 +53,16 @@ class GenericUnicodeLookup(ModelLookup):
         # Note: this is inefficient, but in practice fast enough it seems (tested with >1000 resources)
         lcterm = term.lower()
         def matches(item):
+            if (isinstance(ModelLookup, actorInfoType_model) and item.as_subclass().copy_status != "m"):
+                return False 
             'Helper function to group the search code for a database item'
             return lcterm in unicode(item).lower()
         
         items = ''
-        if isinstance(ModelLookup, actorInfoType_model):
-            items = self.get_queryset().filter(actorCopyStatus="m")
-        elif isinstance(ModelLookup, documentInfoType_model):
+        if isinstance(ModelLookup, documentInfoType_model):
             items = self.get_queryset().filter(documentCopyStatus="m")
-        elif isinstance(ModelLookup, targetResourceInfoType_model):
-            items = self.get_queryset().filter(targetResourceCopyStatus="m")
-                
+        else:
+            items = self.get_queryset()
         if term == '*':
             results = items
         else:
@@ -91,9 +90,11 @@ class DocumentationLookup(ModelLookup):
         # Note: this is inefficient, but in practice fast enough it seems (tested with >1000 resources)
         lcterm = term.lower()
         def matches(item):
+            if item.as_subclass().copy_status != "m":
+                return False 
             'Helper function to group the search code for a database item'
             return lcterm in unicode(item).lower()
-        items = documentInfoType_model.objects.get_query_set().filter(documentationCopyStatus="m")
+        items = documentInfoType_model.objects.get_query_set()
         if term == '*':
             results = items
         else:
