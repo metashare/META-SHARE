@@ -195,9 +195,11 @@ def download(request, object_id):
 
     # Check whether the resource is from the current node, or whether it must be redirected to the master copy
     url = ''
-    if isinstance(resource, resourceInfoType_model):
-        if (not resource.storage_object.master_copy):
-            url = "{0}{1}".format(resource.storage_object.source_url, resource.get_absolute_url())
+    if (not resource.storage_object.master_copy):
+        url = "{0}{1}".format(resource.storage_object.source_url, resource.get_absolute_url())
+        return render_to_response('repository/redirect.html',
+                    { 'resource': resource, 'redirection_url': url },
+                    context_instance=RequestContext(request))
 
     licence_choice = None
     if request.method == "POST":
@@ -212,8 +214,7 @@ def download(request, object_id):
                     { 'form': la_form, 'resource': resource,
                       'licence_path': \
                       LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
-                      'download_available': licences[licence_choice][1],
-                      'redirection_url': url },
+                      'download_available': licences[licence_choice][1] },
                     context_instance=RequestContext(request))
         elif licence_choice and not licence_choice in licences:
             licence_choice = None
@@ -228,8 +229,7 @@ def download(request, object_id):
               'resource': resource,
               'licence_path': \
                 LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
-              'download_available': licences[licence_choice][1],
-              'redirection_url': url },
+              'download_available': licences[licence_choice][1] },
             context_instance=RequestContext(request))
     elif len(licences) > 1:
         return render_to_response('repository/licence_selection.html',
