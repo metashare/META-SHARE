@@ -8,6 +8,7 @@ from metashare.repository.models import resourceInfoType_model
 from metashare.repository import views
 from metashare.settings import DJANGO_BASE, ROOT_PATH
 from metashare.test_utils import create_user
+from django.template.defaultfilters import slugify
 
 
 def _import_resource(fixture_name):
@@ -35,6 +36,7 @@ class ViewTest(TestCase):
         """
         test_utils.setup_test_storage()
         self.resource_id = _import_resource('testfixture.xml')
+        resource = get_object_or_404(resourceInfoType_model, pk=object_id)
         # set up test users with and without staff permissions.
         # These will live in the test database only, so will not
         # pollute the "normal" development db or the production db.
@@ -56,7 +58,7 @@ class ViewTest(TestCase):
         Tries to view a resource
         """
         client = Client()
-        url = self.get_absolute_url()
+        url = resource.get_global_url()
         response = client.get(url, follow = True)
         self.assertTemplateUsed(response, 'repository/lr_view.html')
         self.assertNotContains(response, "Edit")
@@ -67,7 +69,7 @@ class ViewTest(TestCase):
         """
         client = Client()
         client.login(username='staffuser', password='secret')
-        url = self.get_absolute_url()
+        url = resource.get_global_url()
         response = client.get(url, follow = True)
         self.assertTemplateUsed(response, 'repository/lr_view.html')
         self.assertContains(response, "Editor")
@@ -78,7 +80,7 @@ class ViewTest(TestCase):
         """
         client = Client()
         client.login(username='normaluser', password='secret')
-        url = self.get_absolute_url()
+        url = resource.get_global_url()
         response = client.get(url, follow = True)
         self.assertTemplateUsed(response, 'repository/lr_view.html')
         self.assertNotContains(response, "Editor")
@@ -88,7 +90,7 @@ class ViewTest(TestCase):
         Tests whether an anonymous user cannot edit a resource
         """
         client = Client()
-        url = self.get_absolute_url()
+        url = resource.get_global_url()
         response = client.get(url, follow = True)
         self.assertTemplateUsed(response, 'repository/lr_view.html')
         self.assertNotContains(response, "Editor")
