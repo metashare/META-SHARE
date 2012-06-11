@@ -3,13 +3,16 @@ Project: META-SHARE
 Utility functions for unit tests useful across apps.
 """
 import os
+
+from django.contrib.auth.models import User
+from django.core.management import call_command
+from django.test.testcases import TestCase
+
 from metashare import settings
 from metashare.repository.models import resourceInfoType_model
-from django.test.testcases import TestCase
-from django.core.management import call_command
-from metashare.xml_utils import import_from_file
 from metashare.storage.models import PUBLISHED
-from django.contrib.auth.models import User
+from metashare.xml_utils import import_from_file
+
 
 def setup_test_storage():
     settings.STORAGE_PATH = '{0}/test-tmp'.format(settings.ROOT_PATH)
@@ -17,11 +20,12 @@ def setup_test_storage():
         os.mkdir(settings.STORAGE_PATH)
     except:
         pass
-    
-    
+
+
 def create_user(username, email, password):
     User.objects.all().filter(username=username).delete()
     return User.objects.create_user(username, email, password)
+
 
 def import_xml(filename):
     _xml = open(filename)
@@ -30,9 +34,11 @@ def import_xml(filename):
     result = resourceInfoType_model.import_from_string(_xml_string)
     return result
 
+
 def import_xml_or_zip(filename):
     _xml = open(filename, 'rb')
     return import_from_file(_xml, filename, PUBLISHED)
+
 
 class IndexAwareTestCase(TestCase):
     """
