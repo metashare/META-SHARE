@@ -3,7 +3,8 @@ from xml.etree.ElementTree import fromstring, tostring, register_namespace
 from django.test import TestCase
 from metashare import test_utils
 from metashare.settings import ROOT_PATH
-from metashare.repository.models import resourceInfoType_model, SCHEMA_NAMESPACE
+from metashare.repository.models import resourceInfoType_model, SCHEMA_NAMESPACE, \
+    lingualityInfoType_model
 from metashare.xml_utils import pretty_xml
 from difflib import unified_diff
 
@@ -87,6 +88,13 @@ class ModelTest(TestCase):
         """
         _roundtrip = '{0}/repository/fixtures/ILSP10.xml'.format(ROOT_PATH)
         self.assert_import_equals_export(_roundtrip)
+
+    def test_delete_deep(self):
+        resource = resourceInfoType_model.objects.get(pk=self.resource_id)
+        num_before = lingualityInfoType_model.objects.all().count()
+        resource.delete_deep()
+        num_after = lingualityInfoType_model.objects.all().count()
+        self.assertEquals(num_before - 1, num_after)
 
     if False:
         def testImportExportRoundtrip1(self):
