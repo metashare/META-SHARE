@@ -154,9 +154,9 @@ from {0}fields import MultiTextField, MetaBooleanField, \\
   MultiSelectField, DictField, best_lang_value_retriever
 from {0}validators import validate_lang_code_keys
 
-from metashare.storage.models import StorageObject
+from metashare.storage.models import StorageObject, MASTER, COPY_CHOICES
 
-from metashare.settings import DJANGO_BASE, LOG_LEVEL, LOG_HANDLER
+from metashare.settings import DJANGO_BASE, LOG_LEVEL, LOG_HANDLER, DJANGO_URL
 
 # Setup logging support.
 logging.basicConfig(level=LOG_LEVEL)
@@ -298,7 +298,10 @@ TOP_LEVEL_TYPE_EXTRA_CODE_TEMPLATE = '''
         super(resourceInfoType_model, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return '/{0}repository/browse/{1}/'.format(DJANGO_BASE, self.id)
+        from django.template.defaultfilters import slugify
+        resourceName = slugify(u'{0}'.format(self))
+        
+        return '/{0}repository/browse/{1}/{2}/'.format(DJANGO_BASE, resourceName, self.storage_object.identifier)
 
     def publication_status(self):
         """
@@ -320,7 +323,34 @@ TOP_LEVEL_TYPE_EXTRA_CODE_TEMPLATE = '''
 
         return resource_component.as_subclass()._meta.verbose_name
 
+    def resource_owners(self):
+        """
+        Method used for changelist view for resources.
+        """
+        owners = getattr(self, 'owners', None)
+        if not owners:
+            return None
+        
+        owners_list = ''
+        for owner in owners.all():
+            owners_list += owner.surname.join(", ")
+        
+        return owners_list
+
 '''
+
+REUSABLE_ENTITY_SNIPPET = '''
+    source_url = models.URLField(verify_exists=False, 
+      default=DJANGO_URL,
+      help_text="(Read-only) base URL for the server where the master copy of " \\
+      "the associated entity instance is located.")
+    
+    copy_status = models.CharField(default=MASTER, max_length=1, choices=COPY_CHOICES,
+        help_text="Generalized copy status flag for this entity instance.")
+
+'''
+
+REUSABLE_ENTITIES = ('documentInfoType', 'personInfoType', 'organizationInfoType', 'projectInfoType', )
 
 #
 # Local functions
@@ -1030,6 +1060,10 @@ class Clazz(object):
 
         if not self.choice_parent:
             self.generate_backref_members()
+
+        if self.name in REUSABLE_ENTITIES:
+            self.wrtmodels(REUSABLE_ENTITY_SNIPPET)
+
         self.generate_unicode_method()
 
         if self.name == 'resourceInfoType':

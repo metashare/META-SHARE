@@ -33,7 +33,7 @@ def full_metadata(request, resource_uuid):
     #if storage_object.digest_checksum is None: # still no digest? something is very wrong here:
     #    raise Exception("Object {0} has no digest".format(resource_uuid))
     zipfilename = "{0}/resource.zip".format(storage_object._storage_folder())
-    with open(zipfilename, 'r') as inzip:
+    with open(zipfilename, 'rb') as inzip:
         zipfiledata = inzip.read()
         response.write(zipfiledata)
 #    with ZipFile(response, 'w') as outzip:
