@@ -56,7 +56,7 @@ class ViewTest(TestCase):
         Tries to view a resource
         """
         client = Client()
-        url = '/{0}repository/browse/{1}/'.format(DJANGO_BASE, self.resource_id)
+        url = self.get_absolute_url()
         response = client.get(url, follow = True)
         self.assertTemplateUsed(response, 'repository/lr_view.html')
         self.assertNotContains(response, "Edit")
@@ -67,7 +67,7 @@ class ViewTest(TestCase):
         """
         client = Client()
         client.login(username='staffuser', password='secret')
-        url = '/{0}repository/browse/{1}/'.format(DJANGO_BASE, self.resource_id)
+        url = self.get_absolute_url()
         response = client.get(url, follow = True)
         self.assertTemplateUsed(response, 'repository/lr_view.html')
         self.assertContains(response, "Editor")
@@ -78,7 +78,7 @@ class ViewTest(TestCase):
         """
         client = Client()
         client.login(username='normaluser', password='secret')
-        url = '/{0}repository/browse/{1}/'.format(DJANGO_BASE, self.resource_id)
+        url = self.get_absolute_url()
         response = client.get(url, follow = True)
         self.assertTemplateUsed(response, 'repository/lr_view.html')
         self.assertNotContains(response, "Editor")
@@ -88,7 +88,7 @@ class ViewTest(TestCase):
         Tests whether an anonymous user cannot edit a resource
         """
         client = Client()
-        url = '/{0}repository/browse/{1}/'.format(DJANGO_BASE, self.resource_id)
+        url = self.get_absolute_url()
         response = client.get(url, follow = True)
         self.assertTemplateUsed(response, 'repository/lr_view.html')
         self.assertNotContains(response, "Editor")
