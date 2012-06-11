@@ -27,14 +27,17 @@ class Command(BaseCommand):
         # Login
         user_name = 'test_sync'
         password =  'test_sync123'
-        opener = login(server.URL, 'test_sync', 'test_sync123')
+        opener = login("{0}/login/".format(server.URL), user_name, password)
         
         # Get the inventory list. 
         
         
-    
-
         # Get the items that need to be updated.
+        # For each item in the inventory, compare them
+        # If they have differences, add the item to the updateable list
+        
+        
+    
         
         # For each updateable item:
             # Update item.
