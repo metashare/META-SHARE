@@ -1,6 +1,7 @@
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User
 from django_selenium.testcases import SeleniumTestCase
 from metashare import settings, test_utils
+from metashare.accounts.models import EditorGroup, ManagerGroup
 from metashare.repository.models import resourceInfoType_model
 from metashare.repository.seltests.test_utils import login_user, mouse_over, \
     setup_screenshots_folder
@@ -18,14 +19,17 @@ class EditorTest(SeleniumTestCase):
     
     
     def setUp(self):
-        # create editor user
-        editoruser = User.objects.create_user(
-          'editoruser', 'editor@example.com', 'secret')
-        editoruser.is_staff = True
-        editoruser.is_superuser = True
-        globaleditors = Group.objects.get(name='globaleditors')
-        editoruser.groups.add(globaleditors)
-        editoruser.save()
+        # create an editor group and a manager group for this group
+        self.test_editor_group = EditorGroup.objects.create(
+            name='test_editor_group')
+        self.test_manager_group = ManagerGroup.objects.create(
+            name='test_manager_group', managed_group=self.test_editor_group)
+        # create an editor group managing user
+        test_utils.create_manager_user('manageruser', 'manager@example.com',
+            'secret', (self.test_editor_group, self.test_manager_group))
+        # create an editor user
+        test_utils.create_editor_user('editoruser', 'editor@example.com',
+                                      'secret', (self.test_editor_group,))
         # make sure the index does not contain any stale entries
         call_command('rebuild_index', interactive=False, using=settings.TEST_MODE_NAME)
         
@@ -43,6 +47,8 @@ class EditorTest(SeleniumTestCase):
     def tearDown(self):
         resourceInfoType_model.objects.all().delete()
         User.objects.all().delete()
+        EditorGroup.objects.all().delete()
+        ManagerGroup.objects.all().delete()
         
         # clean up Selenium
         self.driver.quit()
@@ -55,13 +61,15 @@ class EditorTest(SeleniumTestCase):
         test_utils.setup_test_storage()
         _result = test_utils.import_xml(TESTFIXTURE_XML)
         resource = resourceInfoType_model.objects.get(pk=_result[0].id)
+        resource.editor_groups.add(self.test_editor_group)
         resource.storage_object.published = True
-        resource.storage_object.save()
+        # this also saves the storage object:
+        resource.save()
     
         driver = self.driver
         driver.get(self.base_url)
         # login user
-        login_user(driver, "editoruser", "secret")
+        login_user(driver, "manageruser", "secret")
         # make sure login was successful
         self.assertEqual("Logout", driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
         # go to Editor
@@ -107,7 +115,7 @@ class EditorTest(SeleniumTestCase):
           "LR_creation_corpus_text")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))  
         # login user
-        login_user(driver, "editoruser", "secret")
+        login_user(driver, "manageruser", "secret")
         # make sure login was successful
         self.assertEqual("Logout", 
           driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
@@ -189,7 +197,7 @@ class EditorTest(SeleniumTestCase):
           "LR_creation_corpus_audio")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))  
         # login user
-        login_user(driver, "editoruser", "secret")
+        login_user(driver, "manageruser", "secret")
         # make sure login was successful
         self.assertEqual("Logout", 
           driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
@@ -272,7 +280,7 @@ class EditorTest(SeleniumTestCase):
           "LR_creation_lang_descr_text")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))  
         # login user
-        login_user(driver, "editoruser", "secret")
+        login_user(driver, "manageruser", "secret")
         # make sure login was successful
         self.assertEqual("Logout", 
           driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
@@ -363,7 +371,7 @@ class EditorTest(SeleniumTestCase):
           "LR_creation_lex_resource_text")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))  
         # login user
-        login_user(driver, "editoruser", "secret")
+        login_user(driver, "manageruser", "secret")
         # make sure login was successful
         self.assertEqual("Logout", 
           driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
@@ -454,7 +462,7 @@ class EditorTest(SeleniumTestCase):
           "LR_creation_tool")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))  
         # login user
-        login_user(driver, "editoruser", "secret")
+        login_user(driver, "manageruser", "secret")
         # make sure login was successful
         self.assertEqual("Logout", 
           driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)

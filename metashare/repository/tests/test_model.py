@@ -1,12 +1,18 @@
 import sys
-from xml.etree.ElementTree import fromstring, tostring, register_namespace
-from django.test import TestCase
-from metashare import test_utils
-from metashare.settings import ROOT_PATH
-from metashare.repository.models import resourceInfoType_model, SCHEMA_NAMESPACE, \
-    lingualityInfoType_model
-from metashare.xml_utils import pretty_xml
+
 from difflib import unified_diff
+
+from django.test import TestCase
+
+from xml.etree.ElementTree import fromstring, tostring, register_namespace
+
+from metashare import test_utils
+from metashare.repository.models import resourceInfoType_model, \
+    SCHEMA_NAMESPACE, lingualityInfoType_model
+from metashare.repository.model_utils import get_root_resources
+from metashare.settings import ROOT_PATH
+from metashare.xml_utils import pretty_xml
+
 
 class ModelTest(TestCase):
     """
@@ -124,3 +130,75 @@ class ModelTest(TestCase):
             """
             _roundtrip = '{0}/repository/test_fixtures/published-lexConcept-Audio-EnglishGerman.xml'.format(ROOT_PATH)
             self.assert_import_equals_export(_roundtrip)
+
+
+class ModelUtilsTest(TestCase):
+    """
+    Tests for model_utils.py.
+    """
+    def setUp(self):
+        """
+        Imports a few test resources.
+        """
+        self.test_res_1 = test_utils.import_xml(
+            '{0}/repository/fixtures/testfixture.xml'.format(ROOT_PATH))[0]
+        self.test_res_2 = test_utils.import_xml(
+            '{0}/repository/fixtures/ILSP10.xml'.format(ROOT_PATH))[0]
+
+    def tearDown(self):
+        """
+        Cleans the database after a test.
+        """
+        resourceInfoType_model.objects.all().delete()
+
+    def test_get_root_resources(self):
+        """
+        Tests the `get_root_resources` method.
+        """
+        # test with no arguments
+        self.assertSetEqual(set(), get_root_resources())
+        # test with a resource argument
+        self.assertSetEqual(set((self.test_res_1,)),
+            get_root_resources(self.test_res_1))
+        # test with nested model instance
+        self.assertSetEqual(set((self.test_res_1,)),
+            get_root_resources(self.test_res_1.identificationInfo))
+        # test with a more deeply nested model instance
+        self.assertSetEqual(set((self.test_res_1,)),
+            get_root_resources(*self.test_res_1.resourceComponentType \
+                    .as_subclass().corpusMediaType \
+                    .corpustextinfotype_model_set.all()))
+        # test with twice the same more deeply nested model instance
+        self.assertSetEqual(set((self.test_res_1,)),
+            get_root_resources(*(list(self.test_res_1.resourceComponentType \
+                    .as_subclass().corpusMediaType \
+                    .corpustextinfotype_model_set.all())
+                + list(self.test_res_1.resourceComponentType \
+                    .as_subclass().corpusMediaType \
+                    .corpustextinfotype_model_set.all()))))
+        # test with two different nested model instances of the same resource
+        self.assertSetEqual(set((self.test_res_1,)),
+            get_root_resources(*(list(self.test_res_1.resourceComponentType \
+                    .as_subclass().corpusMediaType \
+                    .corpustextinfotype_model_set.all())
+                + list(self.test_res_1.metadataInfo.metadataCreator.all()))))
+        # test with two nested model instances of different resources
+        self.assertSetEqual(set((self.test_res_1, self.test_res_2)),
+            get_root_resources(*(list(self.test_res_1.resourceComponentType \
+                    .as_subclass().corpusMediaType \
+                    .corpustextinfotype_model_set.all())
+                + list(self.test_res_2.resourceComponentType \
+                    .as_subclass().corpusMediaType \
+                    .corpustextinfotype_model_set.all()))))
+        # test with multiple nested model instances of different resources
+        self.assertSetEqual(set((self.test_res_1, self.test_res_2)),
+            get_root_resources(*(list(self.test_res_1.resourceComponentType \
+                    .as_subclass().corpusMediaType \
+                    .corpustextinfotype_model_set.all())
+                + list(self.test_res_2.resourceComponentType \
+                    .as_subclass().corpusMediaType \
+                    .corpustextinfotype_model_set.all())
+                + list(self.test_res_1.metadataInfo.metadataCreator.all())
+                + list(self.test_res_2.contactPerson.all())
+                + [self.test_res_1.identificationInfo,
+                   self.test_res_2.identificationInfo])))
