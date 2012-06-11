@@ -7,7 +7,7 @@ from django.core.management import call_command
 from django.test.testcases import TestCase
 from metashare import settings, test_utils
 from metashare.repository.models import resourceInfoType_model
-from metashare.settings import ROOT_PATH
+from metashare.settings import ROOT_PATH, LOG_LEVEL, LOG_HANDLER
 from metashare.storage.models import StorageObject, restore_from_folder, \
 MASTER, INGESTED, INTERNAL, update_digests
 # pylint: disable-msg=E0611
@@ -17,8 +17,15 @@ import zipfile
 from xml.etree.ElementTree import ParseError
 import shutil
 import time
+import logging
 
 TESTFIXTURE_XML = '{}/repository/fixtures/ILSP10.xml'.format(ROOT_PATH)
+
+
+# Setup logging support.
+logging.basicConfig(level=LOG_LEVEL)
+LOGGER = logging.getLogger('metashare.repository.tests')
+LOGGER.addHandler(LOG_HANDLER)
 
 def copy_fixtures():
     """
@@ -292,17 +299,19 @@ class UpdateTest(TestCase):
         # set status to ingested
         _so.publication_status = INGESTED
         _so.update_storage()
-        _modified = _so.digest_modified
+        self.assertIsNotNone(_so.digest_last_checked)
         _last_checked = _so.digest_last_checked
-        self.assertIsNotNone(_last_checked)
+        _modified = _so.digest_modified
         # check if update is required
         update_digests()
         # check that digest was not updated
         self.assertEquals(_modified, _so.digest_modified)
-        self.assertEqual(_last_checked, _so.digest_last_checked)
+        self.assertEquals(_last_checked, _so.digest_last_checked)
         # wait 3 seconds and check again
         time.sleep(3)
+        LOGGER.info('1------- {}'.format(_so.digest_last_checked))
         update_digests()
+        LOGGER.info('2------- {}'.format(_so.digest_last_checked))
         # now an update should have happened, but the underlying data has not 
         # changed, so digest_modified is not changed
         self.assertEquals(_modified, _so.digest_modified)

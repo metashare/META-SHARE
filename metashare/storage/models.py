@@ -502,6 +502,7 @@ class StorageObject(models.Model):
         
         # save storage object if required; this is always required since at 
         # least self.digest_last_checked has changed
+        LOGGER.info('digest last checked: {}:'.format(self.digest_last_checked))
         self.save()
 
 def restore_from_folder(storage_id, copy_status=None):
