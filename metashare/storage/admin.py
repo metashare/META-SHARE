@@ -12,19 +12,21 @@ class StorageObjectAdmin(admin.ModelAdmin):
     """
     list_filter = ('copy_status', 'publication_status', 'deleted')
     readonly_fields = ('source_url', 'identifier', 'created', 'modified', 
-      'checksum', 'digest_checksum', 'metashare_version')
-    search_fields = ('metadata',)
+      'checksum', 'digest_checksum', 'digest_modified', 'metashare_version',
+      'copy_status')
+    search_fields = ('metadata', 'global_storage', 'local_storage')
     
     fieldsets = (
       ('Read-only Fields', {
         'fields': ('source_url', 'identifier', 'created', 'modified', 
-          'checksum', 'digest_checksum', 'metashare_version'),
+          'checksum', 'digest_checksum', 'digest_modified', 
+          'metashare_version', 'copy_status'),
       }),
       ('Status Fields', {
         'fields': ('revision', 'publication_status', 'deleted'),
       }),
       ('Metadata Fields', {
-        'fields': ('metadata',),
+        'fields': ('metadata', 'global_storage', 'local_storage'),
       }),
     )
 
