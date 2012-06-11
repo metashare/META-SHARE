@@ -233,8 +233,7 @@ def download(request, object_id):
             context_instance=RequestContext(request))
     elif len(licences) > 1:
         return render_to_response('repository/licence_selection.html',
-            { 'form': LicenseSelectionForm(licences), 'resource': resource,
-             'redirection_url': url },
+            { 'form': LicenseSelectionForm(licences), 'resource': resource},
             context_instance=RequestContext(request))
     else:
         return render_to_response('repository/lr_not_downloadable.html',
