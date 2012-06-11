@@ -288,7 +288,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                               'metadataInfo':MetadataInline,}
 
     content_fields = ('resourceComponentType',)
-    list_display = ('__unicode__', 'resource_type', 'publication_status')
+    list_display = ('__unicode__', 'resource_type', 'publication_status', 'resource_owners')
     actions = (publish_resources, unpublish_resources, ingest_resources, export_xml_resources, )
     hidden_fields = ('storage_object', 'owners', )
 

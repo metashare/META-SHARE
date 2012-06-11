@@ -29,7 +29,7 @@ class PersonLookup(ModelLookup):
                     if lcterm in field.lower():
                         return True
             return False
-        persons = self.get_queryset()
+        persons = self.get_queryset().filter(personCopyStatus="m")
         if term == '*':
             results = persons
         else:
@@ -53,9 +53,16 @@ class GenericUnicodeLookup(ModelLookup):
         # Note: this is inefficient, but in practice fast enough it seems (tested with >1000 resources)
         lcterm = term.lower()
         def matches(item):
+            if (isinstance(ModelLookup, actorInfoType_model) and item.as_subclass().copy_status != "m"):
+                return False 
             'Helper function to group the search code for a database item'
             return lcterm in unicode(item).lower()
-        items = self.get_queryset()
+        
+        items = ''
+        if isinstance(ModelLookup, documentInfoType_model):
+            items = self.get_queryset().filter(documentCopyStatus="m")
+        else:
+            items = self.get_queryset()
         if term == '*':
             results = items
         else:
@@ -83,6 +90,8 @@ class DocumentationLookup(ModelLookup):
         # Note: this is inefficient, but in practice fast enough it seems (tested with >1000 resources)
         lcterm = term.lower()
         def matches(item):
+            if item.as_subclass().copy_status != "m":
+                return False 
             'Helper function to group the search code for a database item'
             return lcterm in unicode(item).lower()
         items = documentInfoType_model.objects.get_query_set()
@@ -172,7 +181,7 @@ class ProjectLookup(ModelLookup):
                         return True
             return False
         
-        projects = self.get_queryset()
+        projects = self.get_queryset().filter(projectCopyStatus="m")
         if term == '*':
             results = projects
         else:
@@ -207,7 +216,7 @@ class OrganizationLookup(ModelLookup):
                     if lcterm in field.lower():
                         return True
             return False
-        orgs = self.get_queryset()
+        orgs = self.get_queryset().filter(organizationCopyStatus="m")
         if term == '*':
             results = orgs
         else:

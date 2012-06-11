@@ -42,7 +42,7 @@
 {% endif %}{% endif %}
 {% endblock %}
 
-{% if change and original.storage_object.master_copy != None and not original.storage_object.master_copy %} 
+{% if change and redirection_url != '' %} 
 		{% include "admin/repository/redirect.html" %}
 {% else %}
 

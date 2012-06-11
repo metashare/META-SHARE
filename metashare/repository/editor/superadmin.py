@@ -21,6 +21,7 @@ from metashare.repository.editor.related_mixin import RelatedAdminMixin
 from metashare.repository.editor.schemamodel_mixin import SchemaModelLookup
 from metashare.repository.editor.inlines import ReverseInlineModelAdmin
 from metashare.repository.editor.editorutils import is_inline, decode_inline
+from metashare.repository.models import resourceInfoType_model
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_protect
 from django import template
@@ -114,7 +115,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         - hiding certain fields (they are present but invisible);
         - custom widgets for subclassable items such as actorInfo;
         - custom minimalistic "related" widget for non-inlined one2one fields;
-        """
+        """        
         self.hide_hidden_fields(db_field, kwargs)
         # ForeignKey or ManyToManyFields
         if self.is_x_to_many_relation(db_field):
@@ -403,6 +404,13 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         media = media + adminForm.media
         #### end modification ####
 
+        url = ''
+        if isinstance(obj, resourceInfoType_model):
+            if(not obj.storage_object.master_copy):
+                url = obj.storage_object.source_url
+        elif(hasattr(obj, 'copy_status') and obj.copy_status != 'm'):
+            url = obj.source_url                            
+
         context = {
             'title': _('Change %s') % force_unicode(opts.verbose_name),
             'adminform': adminForm,
@@ -416,6 +424,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             'app_label': opts.app_label,
             'kb_link': settings.KNOWLEDGE_BASE_URL,
             'comp_name': _('%s') % force_unicode(opts.verbose_name),
+            'redirection_url': url,
         }
         context.update(extra_context or {})
         return self.render_change_form(request, context, change=True, obj=obj)
