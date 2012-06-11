@@ -1,25 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
 <h2{% if not resource.storage_object.published %} style="font-style:italic;"{% endif %}>{{ resource }}</h2>
-{% if redirection_url != '' %}
-	{% include "repository/redirect.html" %}
+<div class="content_box">
+  <h3>Licence Agreement</h3>
+{% if licence_path %}
+  <iframe src="{{ licence_path }}" width="700" height="400"><a href="{{ licence_path }}">View licence</a></iframe>
+  {% if not download_available %}
+    <p>Please contact the resource maintainer for more information on how to obtain the selected resource under these license terms.</p>
+  {% else %}
+    <form action="." method="post" target="_blank">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input class="span-8 button middle_button" type="submit" value="Download" />
+    </form>
+  {% endif %}
 {% else %}
-	<div class="content_box">
-	  <h3>Licence Agreement</h3>
-	{% if licence_path %}
-	  <iframe src="{{ licence_path }}" width="700" height="400"><a href="{{ licence_path }}">View licence</a></iframe>
-	  {% if not download_available %}
-	    <p>Please contact the resource maintainer for more information on how to obtain the selected resource under these license terms.</p>
-	  {% else %}
-	    <form action="." method="post" target="_blank">
-	      {% csrf_token %}
-	      {{ form.as_p }}
-	      <input class="span-8 button middle_button" type="submit" value="Download" />
-	    </form>
-	  {% endif %}
-	{% else %}
-	  <p>We&rsquo;re afraid, license terms for the download of the selected resource are not available. Please contact the resource maintainer for more information on how to obtain the resource.</p>
-	{% endif %}
-	</div>
+  <p>We&rsquo;re afraid, license terms for the download of the selected resource are not available. Please contact the resource maintainer for more information on how to obtain the resource.</p>
 {% endif %}
+</div>
 {% endblock %}
