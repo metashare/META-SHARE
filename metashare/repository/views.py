@@ -62,8 +62,12 @@ def _convert_to_template_tuples(element_tree):
     # The "required" element was added to the tree, for passing 
     # information about whether a field is required or not, to correctly
     # render the single resource view.
-    else:   
-        return ((element_tree.tag, element_tree.text, element_tree.required),)
+    else:
+        # cfedermann: use proper getattr access to prevent an AttributeError
+        # being thrown for cases, like /repository/browse/1222/, where some
+        # required attributes seem to be missing.
+        required = getattr(element_tree, 'required', 0)
+        return ((element_tree.tag, element_tree.text, required),)
 
 
 # a type providing an enumeration of META-SHARE member types
