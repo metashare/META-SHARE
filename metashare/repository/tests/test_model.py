@@ -91,9 +91,10 @@ class ModelTest(TestCase):
 
     def test_delete_deep(self):
         resource = resourceInfoType_model.objects.get(pk=self.resource_id)
-        self.assertEquals(1, lingualityInfoType_model.objects.all().count())
+        num_before = lingualityInfoType_model.objects.all().count()
         resource.delete_deep()
-        self.assertEquals(0, lingualityInfoType_model.objects.all().count())
+        num_after = lingualityInfoType_model.objects.all().count()
+        self.assertEquals(num_before - 1, num_after)
 
     if False:
         def testImportExportRoundtrip1(self):
