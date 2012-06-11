@@ -1,11 +1,15 @@
 {% extends "base.html" %}
 {% block content %}    
 <h2{% if not resource.storage_object.published %} style="font-style:italic;"{% endif %}>{{ resource }}</h2>
-<div class="content_box">
-  <h3>Choose a Licence for the Resource Download</h3>
-  <form action="." method="post" id="licence_sel_form">
-    {{ form }}
-    <input class="span-8 button middle_button" type="submit" value="Select Licence" />
-  </form>
-</div>
+{% if redirection_url != '' %}
+	{% include "repository/redirect.html" %}
+{% else %}
+	<div class="content_box">
+	  <h3>Choose a Licence for the Resource Download</h3>
+	  <form action="." method="post" id="licence_sel_form">
+	    {{ form }}
+	    <input class="span-8 button middle_button" type="submit" value="Select Licence" />
+	  </form>
+	</div>
+{% endif %}
 {% endblock %}
