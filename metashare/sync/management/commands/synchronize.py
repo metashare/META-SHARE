@@ -11,6 +11,7 @@ import contextlib
 import json
 
 from metashare.settings import CORE_NODES
+from metashare.sync.sync_utils import login
 from zipfile import ZipFile
 from StringIO import StringIO
 
@@ -21,14 +22,10 @@ from django.core.management.base import BaseCommand
 
 class Command(BaseCommand):
     # Get the list of the servers to be querried
-    for server in CORE_NODES:
-         
-    
-    
-    # Query each server. Add some error handling.
-    # For each server:
+    core_nodes = CORE_NODES
+    for server in core_nodes:
         # Login
-
+        login(server.URL, 'test_sync', 'test_sync123')
         # Get the inventory list. 
     
     
