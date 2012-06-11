@@ -204,6 +204,14 @@ def download(request, object_id):
                                  storage_object__identifier=object_id)
     licences = _get_licences(resource, user_membership)
 
+    # Check whether the resource is from the current node, or whether it must be redirected to the master copy
+    url = ''
+    if (not resource.storage_object.master_copy):
+        url = "{0}{1}".format(resource.storage_object.source_url, resource.get_absolute_url())
+        return render_to_response('repository/redirect.html',
+                    { 'resource': resource, 'redirection_url': url },
+                    context_instance=RequestContext(request))
+
     licence_choice = None
     if request.method == "POST":
         licence_choice = request.POST.get('licence', None)
@@ -239,7 +247,7 @@ def download(request, object_id):
             context_instance=RequestContext(request))
     elif len(licences) > 1:
         return render_to_response('repository/licence_selection.html',
-            { 'form': LicenseSelectionForm(licences), 'resource': resource },
+            { 'form': LicenseSelectionForm(licences), 'resource': resource},
             context_instance=RequestContext(request))
     else:
         return render_to_response('repository/lr_not_downloadable.html',

@@ -8,7 +8,7 @@ from metashare import test_utils
 from metashare.accounts.models import UserProfile
 from metashare.repository.models import resourceInfoType_model
 from metashare.repository import views
-from metashare.settings import ROOT_PATH
+from metashare.settings import DJANGO_BASE, ROOT_PATH
 from metashare.test_utils import create_user
 
 
@@ -278,6 +278,24 @@ class DownloadViewTest(TestCase):
         self.assertTemplateUsed(response, 'repository/lr_view.html')
         self.assertContains(response, "repository/download/{0}".format(
                         self.downloadable_resource_1.storage_object.identifier))
+
+    def test_can_download_master_copy(self):        
+        client = Client()
+        client.login(username='staffuser', password='secret')
+        self.downloadable_resource_1.storage_object.master_copy = True
+        self.downloadable_resource_1.storage_object.save()
+        response = client.get('/{0}repository/download/{1}/'
+                              .format(DJANGO_BASE, self.downloadable_resource_1.storage_object.identifier))
+        self.assertContains(response, "I agree to these licence terms")        
+        
+    def test_cannot_download_not_master_copy(self):
+        client = Client()
+        client.login(username='staffuser', password='secret')
+        self.downloadable_resource_1.storage_object.master_copy = False
+        self.downloadable_resource_1.storage_object.save()
+        response = client.get('/{0}repository/download/{1}/'
+                              .format(DJANGO_BASE, self.downloadable_resource_1.storage_object.identifier))
+        self.assertContains(response, "You will now be redirected")
 
     def test_resource_download_as_unauthorized_user(self):
         """
