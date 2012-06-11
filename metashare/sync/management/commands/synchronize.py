@@ -25,9 +25,13 @@ class Command(BaseCommand):
     core_nodes = CORE_NODES
     for server in core_nodes:
         # Login
-        login(server.URL, 'test_sync', 'test_sync123')
+        user_name = 'test_sync'
+        password =  'test_sync123'
+        opener = login(server.URL, 'test_sync', 'test_sync123')
+        
         # Get the inventory list. 
-    
+        
+        
     
 
         # Get the items that need to be updated.
