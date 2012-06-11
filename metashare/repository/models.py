@@ -14,10 +14,9 @@ from metashare.repository.fields import MultiTextField, MetaBooleanField, \
   MultiSelectField, DictField, best_lang_value_retriever
 from metashare.repository.validators import validate_lang_code_keys
 
-from metashare.storage.models import StorageObject, MASTER, REMOTE, PROXY, COPY_CHOICES
+from metashare.storage.models import StorageObject, MASTER, COPY_CHOICES
 
-from metashare.settings import DJANGO_BASE, LOG_LEVEL, LOG_HANDLER
-from metashare import settings
+from metashare.settings import DJANGO_BASE, LOG_LEVEL, LOG_HANDLER, DJANGO_URL
 
 # Setup logging support.
 logging.basicConfig(level=LOG_LEVEL)
@@ -34,7 +33,6 @@ HTTPURI_VALIDATOR = RegexValidator(r'(https?://.*|ftp://.*|www*)',
 SCHEMA_NAMESPACE = 'http://www.ilsp.gr/META-XMLSchema'
 # version of the META-SHARE metadata XML Schema
 SCHEMA_VERSION = '2.1'
-
 
 
 # pylint: disable-msg=C0103
@@ -200,7 +198,7 @@ class resourceInfoType_model(SchemaModel):
             return None
 
         return resource_component.as_subclass()._meta.verbose_name
-    
+
     def resource_owners(self):
         """
         Method used for changelist view for resources.
@@ -214,6 +212,7 @@ class resourceInfoType_model(SchemaModel):
             owners_list += owner.surname.join(", ")
         
         return owners_list
+
 
 SIZEINFOTYPE_SIZEUNIT_CHOICES = _make_choices_from_list([
   u'terms', u'entries', u'turns', u'utterances', u'articles', u'files',
@@ -735,8 +734,8 @@ class documentationInfoType_model(SubclassableModel):
 
     class Meta:
         verbose_name = "Documentation"
-           
-        
+
+
 DOCUMENTINFOTYPE_DOCUMENTTYPE_CHOICES = _make_choices_from_list([
   u'article', u'book', u'booklet', u'manual', u'techReport',
   u'mastersThesis',u'phdThesis', u'inBook', u'inCollection', u'proceedings',
@@ -899,9 +898,10 @@ class documentInfoType_model(documentationInfoType_model):
       help_text='The id of the language the document is written in, as m' \
       'entioned in IETF BCP47',
       blank=True, max_length=20, )
-    
+
+
     source_url = models.URLField(verify_exists=False, 
-      default=settings.DJANGO_URL,
+      default=DJANGO_URL,
       help_text="(Read-only) base URL for the server where the master copy of " \
       "the associated entity instance is located.")
     
@@ -1326,7 +1326,7 @@ class targetResourceInfoType_model(SchemaModel):
       ' being described; to be used for identifiers also for this versio' \
       'n',
       max_length=4500, )
-        
+
     def real_unicode_(self):
         # pylint: disable-msg=C0301
         formatargs = ['targetResourceNameURI', ]
@@ -2494,9 +2494,8 @@ class actorInfoType_model(SubclassableModel):
     __schema_name__ = 'SUBCLASSABLE'
 
     class Meta:
-        verbose_name = "Actor"       
-    
-      
+        verbose_name = "Actor"
+
 
 # pylint: disable-msg=C0103
 class organizationInfoType_model(actorInfoType_model):
@@ -2547,12 +2546,13 @@ class organizationInfoType_model(actorInfoType_model):
       help_text='Groups information on communication details of a person' \
       ' or an organization',
       )
-    
-    source_url = models.URLField(verify_exists=False,
-      default=settings.DJANGO_URL,
+
+
+    source_url = models.URLField(verify_exists=False, 
+      default=DJANGO_URL,
       help_text="(Read-only) base URL for the server where the master copy of " \
       "the associated entity instance is located.")
-   
+    
     copy_status = models.CharField(default=MASTER, max_length=1, choices=COPY_CHOICES,
         help_text="Generalized copy status flag for this entity instance.")
 
@@ -2600,7 +2600,7 @@ class personInfoType_model(actorInfoType_model):
       help_text='The surname (family name) of a person related to the re' \
       'source',
       )
-    
+
     givenName = DictField(validators=[validate_lang_code_keys],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Given name', 
@@ -2637,14 +2637,14 @@ class personInfoType_model(actorInfoType_model):
       'affiliated',
       blank=True, null=True, related_name="affiliation_%(class)s_related", )
 
-    source_url = models.URLField(verify_exists=False,
-      default=settings.DJANGO_URL,
+
+    source_url = models.URLField(verify_exists=False, 
+      default=DJANGO_URL,
       help_text="(Read-only) base URL for the server where the master copy of " \
       "the associated entity instance is located.")
     
     copy_status = models.CharField(default=MASTER, max_length=1, choices=COPY_CHOICES,
         help_text="Generalized copy status flag for this entity instance.")
-
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
@@ -3407,9 +3407,10 @@ class projectInfoType_model(SchemaModel):
       verbose_name='Project end date', 
       help_text='The end date of a project related to the resources',
       blank=True, null=True, )
-    
-    source_url = models.URLField(verify_exists=False,
-      default=settings.DJANGO_URL,
+
+
+    source_url = models.URLField(verify_exists=False, 
+      default=DJANGO_URL,
       help_text="(Read-only) base URL for the server where the master copy of " \
       "the associated entity instance is located.")
     
