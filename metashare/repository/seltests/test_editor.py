@@ -25,18 +25,11 @@ class EditorTest(SeleniumTestCase):
         self.test_manager_group = ManagerGroup.objects.create(
             name='test_manager_group', managed_group=self.test_editor_group)
         # create an editor group managing user
-        manageruser = User.objects.create_user(
-          'manageruser', 'manager@example.com', 'secret')
-        manageruser.is_staff = True
-        manageruser.groups.add(self.test_editor_group)
-        manageruser.groups.add(self.test_manager_group)
-        manageruser.save()
+        test_utils.create_manager_user('manageruser', 'manager@example.com',
+            'secret', (self.test_editor_group, self.test_manager_group))
         # create an editor user
-        editoruser = User.objects.create_user(
-          'editoruser', 'editor@example.com', 'secret')
-        editoruser.is_staff = True
-        editoruser.groups.add(self.test_editor_group)
-        editoruser.save()
+        test_utils.create_editor_user('editoruser', 'editor@example.com',
+                                      'secret', (self.test_editor_group,))
         # make sure the index does not contain any stale entries
         call_command('rebuild_index', interactive=False, using=settings.TEST_MODE_NAME)
         

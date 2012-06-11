@@ -70,18 +70,12 @@ class EditorTest(TestCase):
         
         User.objects.create_user('normaluser', 'normal@example.com', 'secret')
 
-        editoruser = User.objects.create_user('editoruser', 'editor@example.com',
-          'secret')
-        editoruser.is_staff = True
-        editoruser.groups.add(EditorTest.test_editor_group)
-        editoruser.save()
+        editoruser = test_utils.create_editor_user('editoruser',
+            'editor@example.com', 'secret', (EditorTest.test_editor_group,))
 
-        manageruser = User.objects.create_user('manageruser',
-                                               'manager@example.com', 'secret')
-        manageruser.is_staff = True
-        manageruser.groups.add(EditorTest.test_editor_group,
-                               EditorTest.test_manager_group)
-        manageruser.save()
+        test_utils.create_manager_user(
+            'manageruser', 'manager@example.com', 'secret',
+            (EditorTest.test_editor_group, EditorTest.test_manager_group))
 
         User.objects.create_superuser('superuser', 'su@example.com', 'secret')
 
