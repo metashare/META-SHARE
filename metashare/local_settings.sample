@@ -109,11 +109,16 @@ SELENIUM_DRIVER = 'Firefox'
 SELENIUM_TESTSERVER_PORT = 8000
 
 # Settings for synchronization:
-# Time interval settings. It uses the 
-# sets the intervals when the synchronization 
-# will be triggered. Uses "crontab" conventions. 
-# Dafaults will run the synchronization task once an hour.
-INTERVAL = 120
+# Time interval settings. It sets the intervals when the synchronization task 
+# will be triggered. Uses the "kronos" app which uses "crontab" conventions.
+# Dafaults will run the synchronization task once an hour (at HH:25).
+INTERVALS = {
+    'MINUTE' : '25',      # 0-59 - Default is 25
+    'HOUR' : '*',         # 0-23 - Default is *
+    'DAY_OF_MONTH' : '*', # 1-31 - Default is *
+    'MONTH' : '*',        # 1-12 - Default is *
+    'DAY_OF_WEEK' : '*',  # 0-6 (0 is Sunday) - Default is *
+}
 # List of external nodes with which the local node will be synchronized.
 # Use this if you are a core node!
 CORE_NODES = {
