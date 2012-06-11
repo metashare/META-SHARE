@@ -12,6 +12,7 @@ from metashare.repository.models import personInfoType_model, \
     sizeInfoType_model, annotationInfoType_model, videoFormatInfoType_model, \
     imageFormatInfoType_model, resolutionInfoType_model, \
     audioSizeInfoType_model
+from metashare.storage.models import MASTER
 
 class PersonLookup(ModelLookup):
     model = personInfoType_model
@@ -29,7 +30,7 @@ class PersonLookup(ModelLookup):
                     if lcterm in field.lower():
                         return True
             return False
-        persons = self.get_queryset().filter(copy_status="m")
+        persons = self.get_queryset().filter(copy_status = MASTER)
         if term == '*':
             results = persons
         else:
@@ -54,13 +55,13 @@ class GenericUnicodeLookup(ModelLookup):
         lcterm = term.lower()
         def matches(item):
             'Helper function to group the search code for a database item'
-            if (isinstance(ModelLookup, actorInfoType_model) and item.as_subclass().copy_status != "m"):
+            if (isinstance(ModelLookup, actorInfoType_model) and item.as_subclass().copy_status != MASTER):
                 return False             
             return lcterm in unicode(item).lower()
         
         items = ''
         if isinstance(ModelLookup, documentInfoType_model):
-            items = self.get_queryset().filter(copy_status="m")
+            items = self.get_queryset().filter(copy_status = MASTER)
         else:
             items = self.get_queryset()
         if term == '*':
@@ -91,7 +92,7 @@ class DocumentationLookup(ModelLookup):
         lcterm = term.lower()
         def matches(item):
             'Helper function to group the search code for a database item'
-            if item.as_subclass().copy_status != "m":
+            if item.as_subclass().copy_status != MASTER:
                 return False 
             
             return lcterm in unicode(item).lower()
@@ -182,7 +183,7 @@ class ProjectLookup(ModelLookup):
                         return True
             return False
         
-        projects = self.get_queryset().filter(copy_status="m")
+        projects = self.get_queryset().filter(copy_status = MASTER)
         if term == '*':
             results = projects
         else:
@@ -217,7 +218,7 @@ class OrganizationLookup(ModelLookup):
                     if lcterm in field.lower():
                         return True
             return False
-        orgs = self.get_queryset().filter(copy_status="m")
+        orgs = self.get_queryset().filter(copy_status = MASTER)
         if term == '*':
             results = orgs
         else:
