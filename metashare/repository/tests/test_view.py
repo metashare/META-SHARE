@@ -111,6 +111,9 @@ class DownloadViewTest(TestCase):
             _import_resource('downloadable_1_license.xml')
         self.downloadable_resource_id_2 = \
             _import_resource('downloadable_3_licenses.xml')
+        self.non_downloadable_resource = get_object_or_404(resourceInfoType_model, pk=self.non_downloadable_resource_id)
+        self.downloadable_resource_1 = get_object_or_404(resourceInfoType_model, pk=self.downloadable_resource_id_1)
+        self.downloadable_resource_2 = get_object_or_404(resourceInfoType_model, pk=self.downloadable_resource_id_2)
         # set up test users with and without staff permissions
         staffuser = create_user('staffuser', 'staff@example.com', 'secret')
         staffuser.is_staff = True
@@ -133,14 +136,14 @@ class DownloadViewTest(TestCase):
         client = Client()
         client.login(username='staffuser', password='secret')
         response = client.get(
-            reverse(views.download, args=(self.non_downloadable_resource_id,)),
+            reverse(views.download, args=(self.non_downloadable_resource.storage_object.identifier,)),
             follow = True)
         self.assertTemplateUsed(response, 'repository/lr_not_downloadable.html')
         # make sure a normal user gets the information page, too:
         client = Client()
         client.login(username='normaluser', password='secret')
         response = client.get(
-            reverse(views.download, args=(self.non_downloadable_resource_id,)),
+            reverse(views.download, args=(self.non_downloadable_resource.storage_object.identifier,)),
             follow = True)
         self.assertTemplateUsed(response, 'repository/lr_not_downloadable.html')
 
@@ -167,7 +170,7 @@ class DownloadViewTest(TestCase):
         """
         # make sure the license page is shown:
         response = client.get(
-            reverse(views.download, args=(self.downloadable_resource_id_1,)),
+            reverse(views.download, args=(self.downloadable_resource_1.storage_object.identifier,)),
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
@@ -177,7 +180,7 @@ class DownloadViewTest(TestCase):
         # make sure the license agreement page is shown again if the license was
         # not accepted:
         response = client.post(
-            reverse(views.download, args=(self.downloadable_resource_id_1,)),
+            reverse(views.download, args=(self.downloadable_resource_1.storage_object.identifier,)),
             { 'in_licence_agree_form': 'True', 'licence_agree': 'False',
               'licence': 'CC_BY-NC-SA' },
             follow = True)
@@ -188,7 +191,7 @@ class DownloadViewTest(TestCase):
                                 "be shown in an iframe")
         # make sure the download was started after accepting the license:
         response = client.post(
-            reverse(views.download, args=(self.downloadable_resource_id_1,)),
+            reverse(views.download, args=(self.downloadable_resource_1.storage_object.identifier,)),
             { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
               'licence': 'CC_BY-NC-SA' },
             follow = True)
@@ -224,7 +227,7 @@ class DownloadViewTest(TestCase):
         client = Client()
         client.login(username='normaluser', password='secret')
         response = client.post(
-            reverse(views.download, args=(self.downloadable_resource_id_1,)),
+            reverse(views.download, args=(self.downloadable_resource_1.storage_object.identifier,)),
             { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
               'licence': 'CC_BY-NC-SA' },
             follow = True)
@@ -238,23 +241,34 @@ class DownloadViewTest(TestCase):
         """
         # neither via GET ...
         response = Client().get(
-            reverse(views.download, args=(self.non_downloadable_resource_id,)),
+            reverse(views.download, args=(self.non_downloadable_resource.storage_object.identifier,)),
             follow = True)
         self.assertTemplateUsed(response, 'login.html')
         # ... nor via POST with no data ...
         response = Client().post(
-            reverse(views.download, args=(self.non_downloadable_resource_id,)),
+            reverse(views.download, args=(self.non_downloadable_resource.storage_object.identifier,)),
             follow = True)
         self.assertTemplateUsed(response, 'login.html')
         # ... nor via POST with a selected license ...
         response = Client().post(
-            reverse(views.download, args=(self.non_downloadable_resource_id,)),
+            reverse(views.download, args=(self.non_downloadable_resource.storage_object.identifier,)),
             { 'licence': 'GPL' },
             follow = True)
         # ... nor via POST with an agreement to some license:
         response = Client().post(
-            reverse(views.download, args=(self.non_downloadable_resource_id,)),
+            reverse(views.download, args=(self.non_downloadable_resource.storage_object.identifier,)),
             { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
               'licence': 'GPL' },
             follow = True)
         self.assertTemplateUsed(response, 'login.html')
+
+    def test_download_button_is_correct_with_staff_user(self):
+        """
+        Tests whether the link of the download button is the good one
+        """
+        client = Client()
+        client.login(username='staffuser', password='secret')
+        url = self.downloadable_resource_1.get_absolute_url()
+        response = client.get(url, follow = True)
+        self.assertTemplateUsed(response, 'repository/lr_view.html')
+        self.assertContains(response, "repository/download/{0}".format(self.downloadable_resource_1.storage_object.identifier))
