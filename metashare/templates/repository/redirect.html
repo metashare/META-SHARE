@@ -1,15 +1,20 @@
-<br/><br/><br/><h3 align="center">You cannot download this resource in the current META-SHARE node.
-<br/><br/>
-This resource is originally provided
-{% if resource.storage_object.source %}
-  by {{ resource.storage_object.source }}
-{% else %}
-  at {{ resource.storage_object.source_url }}
-{% endif %}
-<br/><br/>
-You will now be redirected in the META-SHARE node where the resource data is available...
-</h3>
-
+{% extends "base.html" %}
+{% block content %}    
 <script>
 setTimeout( 'window.location.replace("{{redirection_url}}")', 5*1000 );
 </script>
+
+<h3 align="center">
+<div class="content_box">
+<span>You cannot download this resource, originally provided
+{% if resource.storage_object.source %}
+  by {{ resource.storage_object.source }},
+{% else %}
+  at {{ resource.storage_object.source_url }},
+{% endif %}
+ in the current META-SHARE node.</span>
+
+<span>You will now be redirected in the META-SHARE node where the resource data is available...</span>
+</div>
+</h3>
+{% endblock %}
