@@ -23,7 +23,7 @@ class Command(BaseCommand):
         verbosity = int(options.get('verbosity', 1))
 
         # If not provided, create the user with an unusable password
-        password = None
+        password = options.get('password', None)
 
         # Prompt for username/email/password. Enclose this whole thing in a
         # try/except to trap for a keyboard interrupt and exit gracefully.
@@ -71,5 +71,5 @@ class Command(BaseCommand):
         syncpermission = Permission.objects.get(codename='can_sync', content_type__app_label='storage')
         user.user_permissions.add(syncpermission)
         if verbosity >= 1:
-            self.stdout.write("User with synchronization permissions created successfully.\n")
+            self.stdout.write("User '{0}' with synchronization permissions created successfully.\n".format(username))
 
