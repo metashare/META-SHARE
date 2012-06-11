@@ -408,8 +408,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         if isinstance(obj, resourceInfoType_model):
             if(not obj.storage_object.master_copy):
                 url = obj.storage_object.source_url
-        else:
-            if(hasattr(obj, copy_status) and obj.copy_status != 'm'):
+        elif(hasattr(obj, copy_status) and obj.copy_status != 'm'):
                 url = obj.source_url                            
 
         context = {
