@@ -140,10 +140,22 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
 }
 
 
-def _get_licences(resource, user):
+def _get_user_membership(user):
+    """
+    Returns a `MEMBER_TYPES` type based on the permissions of the given
+    authenticated user. 
+    """
+    if user.has_perm('accounts.ms_full_member'):
+        return MEMBER_TYPES.FULL
+    elif user.has_perm('accounts.ms_associate_member'):
+        return MEMBER_TYPES.ASSOCIATE
+    return MEMBER_TYPES.NON
+
+
+def _get_licences(resource, user_membership):
     """
     Returns the licences under which a download/purchase of the given resource
-    is possible for the given user.
+    is possible for the given user membership.
     
     The result is a dictionary mapping from licence names to pairs. Each pair
     contains the corresponding `licenceInfoType_model` and a boolean denoting
@@ -153,9 +165,6 @@ def _get_licences(resource, user):
     licence_infos = tuple(licenceInfoType_model.objects \
         .filter(back_to_distributioninfotype_model__id=\
                 resource.distributionInfo.id))
-    # TODO: derive MS membership from user object instead of simply assuming
-    #       full membership!
-    user_membership = MEMBER_TYPES.FULL
     
     all_licenses = dict([(l_name, l_info) for l_info in licence_infos
                          for l_name in l_info.get_licence_display_list()])
@@ -187,11 +196,13 @@ def download(request, object_id):
     """
     if not request.user.is_active:
         return HttpResponseForbidden()
+    user_membership = _get_user_membership(request.user)
 
     # here we are only interested in licenses (or their names) of the specified
     # resource that allow the current user a download/purchase
-    resource = get_object_or_404(resourceInfoType_model, storage_object__identifier=object_id)
-    licences = _get_licences(resource, request.user)
+    resource = get_object_or_404(resourceInfoType_model,
+                                 storage_object__identifier=object_id)
+    licences = _get_licences(resource, user_membership)
 
     # Check whether the resource is from the current node, or whether it must be redirected to the master copy
     url = ''
@@ -207,7 +218,10 @@ def download(request, object_id):
         if licence_choice and 'in_licence_agree_form' in request.POST:
             la_form = LicenseAgreementForm(licence_choice, data=request.POST)
             if la_form.is_valid():
-                return _provide_download(request, resource,
+                # before really providing the download, we have to make sure
+                # that the user hasn't tried to circumvent the permission system
+                if licences[licence_choice][1]:
+                    return _provide_download(request, resource,
                                 licences[licence_choice][0].downloadLocation)
             else:
                 return render_to_response('repository/licence_agreement.html',
@@ -258,9 +272,7 @@ def _provide_download(request, resource, download_urls):
 
             # build HTTP response with a guessed mime type; the response
             # content is a stream of the download file
-            filemimetype , encod = guess_type(dl_path)
-            if not filemimetype:
-                filemimetype = "application/octet-stream"
+            filemimetype = guess_type(dl_path)[0] or "application/octet-stream"
             response = HttpResponse(dl_stream_generator(),
                                     mimetype=filemimetype)
             response['Content-Length'] = getsize(dl_path) 

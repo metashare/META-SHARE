@@ -6,6 +6,10 @@ Methods for model data conversion between different representations.
 """
 
 import logging
+
+from django.db.models import OneToOneField
+
+from metashare.repository.models import resourceInfoType_model
 from metashare.settings import LOG_LEVEL, LOG_HANDLER
 
 # Setup logging support.
@@ -44,4 +48,73 @@ def get_related_models(instance, parent):
                 if model_name.endswith(related_suffix):
                     result.append(model_name)
     
+    return result
+
+
+def get_root_resources(*instances):
+    """
+    Returns the set of `resourceInfoType_model` instances which somewhere
+    contain the given model instances.
+    
+    If any of the given instances is a `resourceInfoType_model` itself, then
+    this instance will be in the returned set, too. The returned set can be
+    empty.
+    """
+    return _get_root_resources(set(), *instances)
+
+
+def _get_root_resources(ignore, *instances):
+    """
+    Returns the set of `resourceInfoType_model` instances which somewhere
+    contain the given model instances.
+    
+    If any of the given instances is a `resourceInfoType_model` itself, then
+    this instance will be in the returned set, too. The returned set can be
+    empty. All instances which are found in the given ignore set will not be
+    looked at. The ignore set will be extended with the given instances.
+    """
+    result = set()
+    for instance in instances:
+        if instance in ignore:
+            continue
+        ignore.add(instance)
+
+        # `resourceInfoType_model` instances are our actual results
+        if isinstance(instance, resourceInfoType_model):
+            result.add(instance)
+        # an instance may be None, in which case we ignore it
+        elif instance:
+            # There are 3 possibilities for going backward in our model graph:
+
+            # case (1): we have to follow a `ForeignKey` with a name starting
+            #   with "back_to_":
+            for rel in [r for r in instance._meta.get_all_field_names()
+                        if r.startswith('back_to_')]:
+                result.update(_get_root_resources(ignore,
+                                                  getattr(instance, rel)))
+
+            # case (2): we have to follow "reverse" `ForeignKey`s and
+            #   `OneToOneField`s which are pointing at the current instance from
+            #   a model which is closer to the searched root model:
+            for rel in instance._meta.get_all_related_objects():
+                accessor_name = rel.get_accessor_name()
+                # the accessor name may point to a field which is None, so test
+                # first, if a field instance is actually available (?)
+                if hasattr(instance, accessor_name):
+                    accessor = getattr(instance, accessor_name)
+                    if isinstance(rel.field, OneToOneField):
+                        # in the case of `OneToOneField`s the accessor is the
+                        # new instance itself
+                        result.update(_get_root_resources(ignore, accessor))
+                    else:
+                        result.update(_get_root_resources(ignore,
+                                                          *accessor.all()))
+
+            # case (2): we have to follow the "reverse" part of a `ManyToMany`
+            #   field which is pointing at the current instance from a model
+            #   which is closer to the searched root model:
+            for rel in instance._meta.get_all_related_many_to_many_objects():
+                result.update(_get_root_resources(ignore,
+                        *getattr(instance, rel.get_accessor_name()).all()))
+
     return result
