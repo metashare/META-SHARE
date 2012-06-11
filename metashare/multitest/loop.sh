@@ -39,8 +39,8 @@ stop_django()
 }
 
 OP=$1
-if [[  "$OP" != "start" && "$OP" != "stop" ]] ; then
-	echo "usage: $0 [start|stop]"
+if [[  "$OP" != "start" && "$OP" != "stop" && "$OP" != "clean" ]] ; then
+	echo "usage: $0 [start|stop|clean]"
 	exit 1
 fi
 
@@ -86,9 +86,11 @@ while python get_node_cfg.py $counter NODE_NAME &> /dev/null ; do
 		mkdir $STORAGE_PATH
 		# Start Django application
 		start_django
-	else
+	elif [[ "$OP" == "stop" ]] ; then
 		stop_django
 		stop_solr
+	else
+		rm -r $NODE_NAME
 	fi
 
 	cd $CURRENT_DIR

@@ -15,7 +15,16 @@ class mconfig:
 	solr_stop_port_base = 3333
 	solr_stop_key = 'stop'
 	solr_log_base = 'sol_log_'
-	solr_root = '/home/metashare/git/META-SHARE-NEW/solr/instances'
+	root_dir = ''
+	metashare_dir = root_dir + '/metashare'
+	solr_root = root_dir + '/solr/instances'
+	# Collect all inner nodes
+	inner_nodes = []
+
+	def set_root_dir(cls, metashare_dir):
+		mconfig.root_dir = root_dir
+		mconfig.metashare_dir = mconfig.root_dir + '/metashare'
+		mconfig.solr_root = mconfig.root_dir + '/solr/instances'
 
 	def __init__(self, node_id, node_name, meta_dir, django_port, node_type):
 		self.node_id = node_id
@@ -24,10 +33,19 @@ class mconfig:
 		self.django_port = django_port
 		self.node_type = node_type
 		self.outer_nodes = []
+		# List of proxy nodes. Usually there should be only one.
+		# We allow for multiple proxy to test if something wrong can
+		# happen when using inappropriate configurations.
+		self.proxy_nodes = []
+		if self.node_type == 'inner':
+			mconfig.inner_nodes.append(self)
 
 	def set_proxy(self, proxy_node):
-		self.proxy_node = proxy_node
-		self.proxy_node.outer_nodes.append(self)
+		self.proxy_nodes.append(proxy_node)
+		proxy_node.outer_nodes.append(self)
+
+	def get_proxy_nodes(self):
+		return self.proxy_nodes
 
 	def build_dict(self):
 		self.dict = {}
@@ -40,8 +58,20 @@ class mconfig:
 		self.dict['SOLR_PORT'] = self.solr_port_base + self.node_id
 		self.dict['SOLR_STOP_PORT'] = self.solr_stop_port_base + self.node_id
 		self.dict['SOLR_STOP_KEY'] = self.solr_stop_key
-		self.dict['SOLR_LOG'] = '{0}{1}.log'.format(self.solr_log_base,  self.node_id)
-		self.dict['SOLR_ROOT'] = '{0}/instance{1}'.format(self.solr_root,  self.node_id)
+		self.dict['SOLR_LOG'] = '{0}{1}.log'.format(self.solr_log_base, self.node_id)
+		self.dict['SOLR_ROOT'] = '{0}/instance{1}'.format(self.solr_root, self.node_id)
+
+	def get_other_inner_nodes(self):
+		if self.node_type == 'outer':
+			return []
+		other_inner_nodes = []
+		for n in mconfig.inner_nodes:
+			if n.node_id != self.node_id:
+				other_inner_nodes.append(n)
+		return other_inner_nodes
+
+	def get_outer_nodes(self):
+		return self.outer_nodes
 
 	def get(self, name):
 		self.build_dict()
@@ -66,4 +96,9 @@ count = count + 1
 cnf3 = mconfig(count, 'Node3', metashare_dir, dj_port, 'outer')
 cnf3.set_proxy(cnf2)
 CONFIGS.append(cnf3)
+
+dj_port = dj_port + 1
+count = count + 1
+cnf4 = mconfig(count, 'Node4', metashare_dir, dj_port, 'inner')
+CONFIGS.append(cnf4)
 
