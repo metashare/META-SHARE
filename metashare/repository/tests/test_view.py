@@ -6,7 +6,7 @@ from django.test.client import Client
 from metashare import test_utils
 from metashare.repository.models import resourceInfoType_model
 from metashare.repository import views
-from metashare.settings import DJANGO_BASE, ROOT_PATH
+from metashare.settings import ROOT_PATH
 from metashare.test_utils import create_user
 from django.shortcuts import get_object_or_404
 
