@@ -18,7 +18,9 @@ from metashare.repository.fields import MultiSelectField, MultiTextField, \
 
 from metashare.settings import LOG_LEVEL, LOG_HANDLER, \
   CHECK_FOR_DUPLICATE_INSTANCES
-from django.db.models.fields.related import ForeignRelatedObjectsDescriptor
+from django.db.models.fields.related import ForeignRelatedObjectsDescriptor,\
+    OneToOneField
+from Queue import Queue
 
 # Setup logging support.
 logging.basicConfig(level=LOG_LEVEL)
@@ -1184,6 +1186,37 @@ class SchemaModel(models.Model):
         #print u'deleting {}_{}'.format(self.__schema_name__, self.id)
         cache.delete(cache_key)
 
+
+    def delete_deep(self):
+        '''
+        Delete this resource, the corresponding storage object,
+        and all descendants connected through either a one-to-one
+        or a one-to-many relation (i.e., non-reusable information).
+        This will leave many-to-one or many-to-many relations untouched.
+        
+        This method is not automatically hooked into the default django
+        delete mechanism; it needs to be called explicitly.
+        '''
+        # Basic idea: do a breadth-first search, and delete each node when its children have ben enqueued.
+        to_delete = Queue()
+        to_delete.put(self)
+        while not to_delete.empty():
+            obj = to_delete.get()
+            if isinstance(obj, SubclassableModel):
+                obj = obj.as_subclass()
+            for fieldname in obj.get_fields_flat():
+                if fieldname.endswith("_set"):
+                    # a reverse foreign key
+                    related_mgr = getattr(obj, fieldname)
+                    for child in related_mgr.all():
+                        to_delete.put(child)
+                else:
+                    field = obj._meta.get_field(fieldname)
+                    if isinstance(field, OneToOneField):
+                        child = getattr(obj, fieldname)
+                        if child is not None:
+                            to_delete.put(child)
+            obj.delete()
 
 class SubclassableModel(SchemaModel):
     """
