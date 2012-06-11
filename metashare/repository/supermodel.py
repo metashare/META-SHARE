@@ -18,7 +18,7 @@ from metashare.repository.fields import MultiSelectField, MultiTextField, \
 
 from metashare.settings import LOG_LEVEL, LOG_HANDLER, \
   CHECK_FOR_DUPLICATE_INSTANCES
-from django.db.models.fields.related import ForeignRelatedObjectsDescriptor,\
+from django.db.models.fields.related import ForeignRelatedObjectsDescriptor, \
     OneToOneField
 from Queue import Queue
 

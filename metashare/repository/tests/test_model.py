@@ -3,7 +3,7 @@ from xml.etree.ElementTree import fromstring, tostring, register_namespace
 from django.test import TestCase
 from metashare import test_utils
 from metashare.settings import ROOT_PATH
-from metashare.repository.models import resourceInfoType_model, SCHEMA_NAMESPACE,\
+from metashare.repository.models import resourceInfoType_model, SCHEMA_NAMESPACE, \
     lingualityInfoType_model
 from metashare.xml_utils import pretty_xml
 from difflib import unified_diff
