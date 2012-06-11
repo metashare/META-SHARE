@@ -167,7 +167,6 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
 
     'haystack',
-    'kronos',
         
     'metashare.accounts',
     'metashare.storage',
