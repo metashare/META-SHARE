@@ -29,7 +29,7 @@ class PersonLookup(ModelLookup):
                     if lcterm in field.lower():
                         return True
             return False
-        persons = self.get_queryset().filter(personCopyStatus="m")
+        persons = self.get_queryset().filter(copy_status="m")
         if term == '*':
             results = persons
         else:
@@ -60,7 +60,7 @@ class GenericUnicodeLookup(ModelLookup):
         
         items = ''
         if isinstance(ModelLookup, documentInfoType_model):
-            items = self.get_queryset().filter(documentCopyStatus="m")
+            items = self.get_queryset().filter(copy_status="m")
         else:
             items = self.get_queryset()
         if term == '*':
@@ -181,7 +181,7 @@ class ProjectLookup(ModelLookup):
                         return True
             return False
         
-        projects = self.get_queryset().filter(projectCopyStatus="m")
+        projects = self.get_queryset().filter(copy_status="m")
         if term == '*':
             results = projects
         else:
@@ -216,7 +216,7 @@ class OrganizationLookup(ModelLookup):
                     if lcterm in field.lower():
                         return True
             return False
-        orgs = self.get_queryset().filter(organizationCopyStatus="m")
+        orgs = self.get_queryset().filter(copy_status="m")
         if term == '*':
             results = orgs
         else:
