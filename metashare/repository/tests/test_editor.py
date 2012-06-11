@@ -377,5 +377,4 @@ class EditorTest(TestCase):
         response = client.get('{}repository/resourceinfotype_model/{}/'
                               .format(ADMINROOT, resource.storage_object.id))
         self.assertContains(response, "You cannot edit the metadata")
-        self.assertRedirects(response,resource.storage_object.source_url.join('/editor'))
         
