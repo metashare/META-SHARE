@@ -7,7 +7,7 @@ from django.core.management import call_command
 from django.test.testcases import TestCase
 from metashare import settings, test_utils
 from metashare.repository.models import resourceInfoType_model
-from metashare.settings import ROOT_PATH, LOG_LEVEL, LOG_HANDLER
+from metashare.settings import ROOT_PATH
 from metashare.storage.models import StorageObject, restore_from_folder, \
 MASTER, INGESTED, INTERNAL, update_digests
 # pylint: disable-msg=E0611
@@ -17,15 +17,8 @@ import zipfile
 from xml.etree.ElementTree import ParseError
 import shutil
 import time
-import logging
 
 TESTFIXTURE_XML = '{}/repository/fixtures/ILSP10.xml'.format(ROOT_PATH)
-
-
-# Setup logging support.
-logging.basicConfig(level=LOG_LEVEL)
-LOGGER = logging.getLogger('metashare.repository.tests')
-LOGGER.addHandler(LOG_HANDLER)
 
 def copy_fixtures():
     """
@@ -288,8 +281,8 @@ class UpdateTest(TestCase):
         StorageObject.objects.all().delete()
         
     def test_update(self):
-        # define maximum age of 4 seconds; this means that every 2 seconds an
-        # update check is done
+        # define a maximum age of 4 seconds; this means that a resource is
+        # checked for an update if it's older than 2 seconds
         settings.MAX_DIGEST_AGE = 4
         # import resource
         _result = test_utils.import_xml(TESTFIXTURE_XML)
@@ -300,9 +293,10 @@ class UpdateTest(TestCase):
         _so.update_storage()
         _so = resourceInfoType_model.objects.get(pk=_result[0].id).storage_object
         self.assertIsNotNone(_so.digest_last_checked)
+        # remember 'last_checked' and 'modified' to compare against it later
         _last_checked = _so.digest_last_checked
         _modified = _so.digest_modified
-        # check if update is required
+        # check if an update is required; this is not the case
         update_digests()
         _so = resourceInfoType_model.objects.get(pk=_result[0].id).storage_object
         # check that digest was not updated
@@ -310,11 +304,10 @@ class UpdateTest(TestCase):
         self.assertEquals(_last_checked, _so.digest_last_checked)
         # wait 3 seconds and check again
         time.sleep(3)
-        LOGGER.info('1------- {}'.format(_so.digest_last_checked))
         update_digests()
         _so = resourceInfoType_model.objects.get(pk=_result[0].id).storage_object
-        LOGGER.info('2------- {}'.format(_so.digest_last_checked))
         # now an update should have happened, but the underlying data has not 
         # changed, so digest_modified is not changed
         self.assertEquals(_modified, _so.digest_modified)
+        # but it HAS been checked that the digest is still up-to-date
         self.assertNotEqual(_last_checked, _so.digest_last_checked)

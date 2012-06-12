@@ -494,15 +494,12 @@ class StorageObject(models.Model):
         if self.local_storage != _local_storage:
             self.local_storage = _local_storage
             if self.publication_status in (INGESTED, PUBLISHED):
-                LOGGER.info('*** saving {}'.format(self.local_storage))
-                LOGGER.info('***** {}'.format(self.digest_last_checked))
                 with open('{0}/storage-local.json'.format(
                   self._storage_folder()), 'wb') as _out:
                     _out.write(unicode(self.local_storage).encode('utf-8'))
         
         # save storage object if required; this is always required since at 
         # least self.digest_last_checked has changed
-        LOGGER.info('digest last checked: {}:'.format(self.digest_last_checked))
         self.save()
 
 def restore_from_folder(storage_id, copy_status=None):
@@ -617,7 +614,7 @@ def update_digests():
         _expiration_date = datetime.now() - max_age
         if _expiration_date > _so.digest_modified \
           and _expiration_date > _so.digest_last_checked: 
-            LOGGER.info('updating {}'.format(_so.identifier))
+            LOGGER.debug('updating {}'.format(_so.identifier))
             _so.update_storage()
         else:
-            LOGGER.info('{} is up to date'.format(_so.identifier))
+            LOGGER.debug('{} is up to date'.format(_so.identifier))
