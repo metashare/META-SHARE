@@ -2,43 +2,34 @@
 Management utility to trigger synchronization.
 """
 
-import getpass
-import re
-import sys
-import urllib
-import urllib2
-import contextlib
-import json
-
-from metashare.settings import CORE_NODES
-from metashare.sync.sync_utils import login
+from metashare.local_settings import CORE_NODES
+from metashare.sync.sync_utils import login, get_full_metadata
 from zipfile import ZipFile
 from StringIO import StringIO
-
-from optparse import make_option
-from django.contrib.auth.models import User, Permission
-from django.core.management.base import BaseCommand
 
 
 class Command(BaseCommand):
     # Get the list of the servers to be querried
     core_nodes = CORE_NODES
     for server in core_nodes:
+        updatable_resources = []
+                
         # Login
-        user_name = 'test_sync'
-        password =  'test_sync123'
+        user_name = core_nodes.username
+        password = core_nodes.password
         opener = login("{0}/login/".format(server.URL), user_name, password)
         
         # Get the inventory list. 
         inventory = get_inventory(opener, "{0}/sync/".format(server.URL))
         
         # Get the items that need to be updated.
-        # For each item in the inventory, compare them
+        # For each item in the inventory, compare them with existing resource.
+        
         for item in inventory:
             uuid = item
             storage_json, resource_xml_string = get_full_metadata(opener, "{0}/sync/{1}/metadata/".format(base_url, uuid))
         # If they have differences, add the item to the updateable list
-        
+            
         
     
         
