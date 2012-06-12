@@ -23,10 +23,13 @@ from metashare.repository.editor.inlines import ReverseInlineModelAdmin
 from metashare.repository.editor.editorutils import is_inline, decode_inline
 from metashare.repository.models import resourceInfoType_model
 from metashare.storage.models import MASTER
+from metashare.repository.model_utils import get_root_resources
+from os.path import normpath
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_protect
 from django import template
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404
+
 
 # Setup logging support.
 logging.basicConfig(level=settings.LOG_LEVEL)
@@ -406,14 +409,24 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         #### end modification ####
 
         #### begin modification ####
-        url = ''
-        if isinstance(obj, resourceInfoType_model):
-            if(not obj.storage_object.master_copy):
-                url = obj.storage_object.source_url
-        elif(hasattr(obj, 'copy_status') and obj.copy_status != MASTER):
-            url = obj.source_url
-        #### end modification ####                                
-
+        url = ''        
+        #for reusable entities
+        if(hasattr(obj, 'copy_status') and obj.copy_status == MASTER):
+            url = "{0}/editor/repository/{1}/{2}".format(obj.source_url.rstrip('/'), (obj.__class__.__name__).lower(), object_id)
+            return render_to_response('admin/repository/redirect.html',
+                   { 'object': obj, 'redirection_url': url },
+                   )            
+        #for resources and resources' parts
+        else:    
+            root_resources = get_root_resources(obj)
+            for res in root_resources:
+                if  res.storage_object.master_copy:
+                    url = "{0}/editor/repository/{1}/{2}".format(res.storage_object.source_url.rstrip('/'), (obj.__class__.__name__).lower(), object_id)
+                    return render_to_response('admin/repository/redirect.html',
+                           { 'resource': res, 'redirection_url': url },
+                           )
+        #### end modification ####
+        
         context = {
             'title': _('Change %s') % force_unicode(opts.verbose_name),
             'adminform': adminForm,
@@ -427,9 +440,6 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             'app_label': opts.app_label,
             'kb_link': settings.KNOWLEDGE_BASE_URL,
             'comp_name': _('%s') % force_unicode(opts.verbose_name),
-            #### begin modification ####
-            'redirection_url': url,
-            #### end modification ####    
         }
         context.update(extra_context or {})
         return self.render_change_form(request, context, change=True, obj=obj)
