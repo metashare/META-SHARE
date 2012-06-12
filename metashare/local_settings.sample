@@ -127,14 +127,16 @@ CORE_NODES = {
         'NAME': 'AUNI',                       # The short name of the node.
         'DESCRIPTION': 'xxx',                 # A short descpription of the node.
         'URL': 'metashare.example.com:8000',  # The url of the core node (also 
-                                              # include a port if needed).
-        'username': 'sync-user',              # The name of a sync user on 
+                                              # include the port if needed).
+        'USERNAME': 'sync-user-1',              # The name of a sync user on 
                                               # the core node.
-        'password': 'sync-user-pass',         # Sync user's password.
+        'PASSWORD': 'sync-user-pass',         # Sync user's password.
     },
     'node2': {
         'NAME': 'BUNI',                     
         'DESCRIPTION': 'xxx',               
         'URL': 'metashare.test.com',
+        'USERNAME': 'sync-user-2',
+        'PASSWORD': 'sync-user-pass-2',
     },
 }
