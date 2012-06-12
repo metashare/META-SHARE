@@ -28,6 +28,7 @@ from json import dumps, loads
 from django.core.serializers.json import DjangoJSONEncoder
 import zipfile
 from zipfile import ZIP_DEFLATED
+import json
 
 # Setup logging support.
 logging.basicConfig(level=LOG_LEVEL)
@@ -570,7 +571,9 @@ def restore_from_folder(storage_id, copy_status=None):
                 LOGGER.warn('overwriting copy status from storage-local.json with "{}"'.format(copy_status))
             _storage_object.copy_status = copy_status
     else:
-        if not copy_status:
+        if copy_status:
+            _storage_object.copy_status = copy_status
+        else:
             # no copy status and no local storage object is provided, so use
             # a default
             LOGGER.warn('no copy status provided, using default copy status MASTER')
@@ -580,6 +583,53 @@ def restore_from_folder(storage_id, copy_status=None):
     _storage_object.update_storage()
         
     return resource
+
+
+def update_resource(storage_json, resource_xml_string, copy_status=REMOTE):
+    '''
+    For the resource described by storage_json and resource_xml_string,
+    do the following:
+
+    - if it does not exist, import it with the given copy status;
+    - if it exists, delete it from the database, then import it with the given copy status.
+    '''
+    # Local helper functions first:
+    def write_to_disk(storage_id):
+        folder = os.path.join(settings.STORAGE_PATH, storage_id)
+        if not os.path.exists(folder):
+            os.mkdir(folder)
+        with open(os.path.join(folder, 'storage-global.json'), 'wb') as out:
+            json.dump(storage_json, out)
+        with open(os.path.join(folder, 'metadata.xml'), 'wb') as out:
+            out.write(resource_xml_string)
+
+    def storage_object_exists(storage_id):
+        return bool(StorageObject.objects.filter(identifier=storage_id).count() > 0)
+
+    def remove_files_from_disk(storage_id):
+        folder = os.path.join(settings.STORAGE_PATH, storage_id)
+        for _file in ('storage-local.json', 'storage-global.json', 'metadata.xml'):
+            path = os.path.join(folder, _file)
+            if os.path.exists(path):
+                os.remove(path)
+
+    def remove_database_entries(storage_id):
+        storage_object = StorageObject.objects.get(identifier=storage_id)
+        resource = storage_object.resourceinfotype_model_set.all()[0]
+        resource.delete_deep()
+        storage_object.delete()
+
+    # Now the actual update_resource():
+    storage_id = storage_json['identifier']
+    if storage_object_exists(storage_id):
+        if copy_status != MASTER and StorageObject.objects.get(identifier=storage_id).copy_status == MASTER:
+            raise Exception("Attempt to overwrite a master copy with a non-master-copy record; refusing");
+        remove_files_from_disk(storage_id)
+        remove_database_entries(storage_id)
+    write_to_disk(storage_id)
+    restore_from_folder(storage_id, copy_status=copy_status)
+
+
 
 
 def _fill_storage_object(storage_obj, json_file_name):

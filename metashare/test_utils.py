@@ -34,6 +34,13 @@ def import_xml_or_zip(filename):
     _xml = open(filename, 'rb')
     return import_from_file(_xml, filename, PUBLISHED)
 
+def set_index_active(is_active):
+    """
+    A helper allowing tests to disable the index if it is not needed,
+    e.g. for tests that have no front-facing UI component.
+    """
+    os.environ['DISABLE_INDEXING_DURING_IMPORT'] = str(bool(not is_active))
+
 class IndexAwareTestCase(TestCase):
     """
     A Django `TestCase` which makes sure to always rebuild the search index
