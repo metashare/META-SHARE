@@ -332,11 +332,13 @@ def create(request):
     return redirect(reverse('admin:repository_resourceinfotype_model_add'))
 
 
-def view(request, object_id=None):
+def view(request, resource_name=None, object_id=None):
     """
     Render browse or detail view for the repository application.
     """
     resource = get_object_or_404(resourceInfoType_model, storage_object__identifier=object_id)
+    if request.path_info != resource.get_absolute_url():
+        return redirect(resource.get_absolute_url())
 
     # Convert resource to ElementTree and then to template tuples.
     resource_tree = resource.export_to_elementtree()
