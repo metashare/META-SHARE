@@ -9,19 +9,52 @@ from metashare import settings, test_utils
 from metashare.repository.models import resourceInfoType_model
 from metashare.settings import ROOT_PATH
 from metashare.storage.models import StorageObject, restore_from_folder, \
-MASTER, INGESTED, INTERNAL
+MASTER, INGESTED, INTERNAL, update_digests
 # pylint: disable-msg=E0611
 from hashlib import md5
 import os.path
 import zipfile
 from xml.etree.ElementTree import ParseError
+import shutil
+import time
 
 TESTFIXTURE_XML = '{}/repository/fixtures/ILSP10.xml'.format(ROOT_PATH)
+
+def copy_fixtures():
+    """
+    Copies the test fixtures to the storage folder.
+    """
+    _fixture_folder = '{0}/storage/test_fixtures'.format(settings.ROOT_PATH)
+    for fixture_name in os.listdir(_fixture_folder):
+        shutil.copytree(
+          os.path.join(_fixture_folder, fixture_name),
+          os.path.join(settings.STORAGE_PATH, fixture_name))
+          
+def cleanup_storage():
+    """
+    Deletes the content of the storage folder.
+    """
+    for _folder in os.listdir(settings.STORAGE_PATH):
+        for _file in os.listdir(os.path.join(settings.STORAGE_PATH, _folder)):
+            os.remove(os.path.join(settings.STORAGE_PATH, _folder, _file))
+        os.rmdir(os.path.join(settings.STORAGE_PATH, _folder))
+
 
 class PersistenceTest(TestCase):
     """
     Tests persistence methods for saving data to the storage folder.
     """
+    
+    @classmethod
+    def setUpClass(cls):
+        test_utils.setup_test_storage()
+        # copy fixtures to storage folder
+        copy_fixtures()
+        
+    @classmethod
+    def tearDownClass(cls):
+        # delete content of storage folder
+        cleanup_storage()
     
     def setUp(self):
         # make sure the index does not contain any stale entries
@@ -40,7 +73,6 @@ class PersistenceTest(TestCase):
         resources but only when the resource is ingested
         """
         # load test fixture; its initial status is 'internal'
-        test_utils.setup_test_storage()
         _result = test_utils.import_xml(TESTFIXTURE_XML)
         resource = resourceInfoType_model.objects.get(pk=_result[0].id)
         _storage_object = resource.storage_object
@@ -87,20 +119,27 @@ class RestoreTest(TestCase):
     Tests method for restoring resource and storage object from storage folder.
     """
     
+    @classmethod
+    def setUpClass(cls):
+        test_utils.setup_test_storage()
+        # copy fixtures to storage folder
+        copy_fixtures()
+        
+    @classmethod
+    def tearDownClass(cls):
+        # delete content of storage folder
+        cleanup_storage()
+    
     def setUp(self):
         # make sure the index does not contain any stale entries
         call_command('rebuild_index', interactive=False, using=settings.TEST_MODE_NAME)
         # make sure all resources and storage objects are deleted
         resourceInfoType_model.objects.all().delete()
         StorageObject.objects.all().delete()
-        # use text fixture folder as storage path for these tests
-        settings.STORAGE_PATH = '{0}/storage/test_fixtures'.format(settings.ROOT_PATH)
         
     def tearDown(self):
         resourceInfoType_model.objects.all().delete()
         StorageObject.objects.all().delete()
-        # reset storage path
-        test_utils.setup_test_storage()
 
     def test_valid_restore(self):
         """
@@ -214,5 +253,61 @@ class RestoreTest(TestCase):
         resource.storage_object.delete()
         self.assertEqual(len(StorageObject.objects.all()), 0)
         self.assertEqual(len(resourceInfoType_model.objects.all()), 0)
-        
+   
+     
+class UpdateTest(TestCase):
+    """
+    Tests updating of metadata XML and storage object serialization
+    """
+    
+    @classmethod
+    def setUpClass(cls):
+        test_utils.setup_test_storage()
 
+    @classmethod
+    def tearDownClass(cls):
+        # delete content of storage folder
+        cleanup_storage()
+    
+    def setUp(self):
+        # make sure the index does not contain any stale entries
+        call_command('rebuild_index', interactive=False, using=settings.TEST_MODE_NAME)
+        # make sure all resources and storage objects are deleted
+        resourceInfoType_model.objects.all().delete()
+        StorageObject.objects.all().delete()
+        
+    def tearDown(self):
+        resourceInfoType_model.objects.all().delete()
+        StorageObject.objects.all().delete()
+        
+    def test_update(self):
+        # define a maximum age of 4 seconds; this means that a resource is
+        # checked for an update if it's older than 2 seconds
+        settings.MAX_DIGEST_AGE = 4
+        # import resource
+        _result = test_utils.import_xml(TESTFIXTURE_XML)
+        _so = resourceInfoType_model.objects.get(pk=_result[0].id).storage_object
+        self.assertIsNone(_so.digest_last_checked)
+        # set status to ingested
+        _so.publication_status = INGESTED
+        _so.update_storage()
+        _so = resourceInfoType_model.objects.get(pk=_result[0].id).storage_object
+        self.assertIsNotNone(_so.digest_last_checked)
+        # remember 'last_checked' and 'modified' to compare against it later
+        _last_checked = _so.digest_last_checked
+        _modified = _so.digest_modified
+        # check if an update is required; this is not the case
+        update_digests()
+        _so = resourceInfoType_model.objects.get(pk=_result[0].id).storage_object
+        # check that digest was not updated
+        self.assertEquals(_modified, _so.digest_modified)
+        self.assertEquals(_last_checked, _so.digest_last_checked)
+        # wait 3 seconds and check again
+        time.sleep(3)
+        update_digests()
+        _so = resourceInfoType_model.objects.get(pk=_result[0].id).storage_object
+        # now an update should have happened, but the underlying data has not 
+        # changed, so digest_modified is not changed
+        self.assertEquals(_modified, _so.digest_modified)
+        # but it HAS been checked that the digest is still up-to-date
+        self.assertNotEqual(_last_checked, _so.digest_last_checked)

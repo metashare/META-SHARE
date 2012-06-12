@@ -18,7 +18,7 @@ import os.path
 from urllib import urlencode
 from uuid import uuid1, uuid4
 from xml.etree import ElementTree as etree
-from datetime import datetime
+from datetime import datetime, timedelta
 from time import mktime
 import logging
 import re
@@ -28,6 +28,7 @@ from json import dumps, loads
 from django.core.serializers.json import DjangoJSONEncoder
 import zipfile
 from zipfile import ZIP_DEFLATED
+from django.db.models.query_utils import Q
 
 # Setup logging support.
 logging.basicConfig(level=LOG_LEVEL)
@@ -63,7 +64,8 @@ GLOBAL_STORAGE_ATTS = ['source_url', 'identifier', 'created', 'modified',
   'revision', 'publication_status', 'metashare_version']
 
 # attributes to be serialized in the local JSON of the storage object
-LOCAL_STORAGE_ATTS = ['digest_checksum', 'digest_modified', 'copy_status']
+LOCAL_STORAGE_ATTS = ['digest_checksum', 'digest_modified', 
+  'digest_last_checked', 'copy_status']
 
 
 def _validate_valid_xml(value):
@@ -244,7 +246,11 @@ class StorageObject(models.Model):
     digest_modified = models.DateTimeField(editable=False, null=True, blank=True,
       help_text="(Read-only) last modification date of digest zip " \
       "for this storage object instance.")
-      
+    
+    digest_last_checked = models.DateTimeField(editable=False, null=True, blank=True,
+      help_text="(Read-only) last update check date of digest zip " \
+      "for this storage object instance.")
+    
     revision = models.PositiveIntegerField(default=0, help_text="Revision " \
       "or version information for this storage object instance.")
       
@@ -412,8 +418,7 @@ class StorageObject(models.Model):
         # flag to indicate if rebuilding of resource.zip is required
         update_zip = False
         
-        # flag to indicate if saving is required
-        update_obj = False
+        self.digest_last_checked = datetime.now()        
         
         # create current version of metadata XML
         _metadata = pretty_xml(tostring(
@@ -431,10 +436,8 @@ class StorageObject(models.Model):
             if self.metadata != _metadata:
                 self.metadata = _metadata
                 self.modified = datetime.now()
-                update_obj = True
             if self.publication_status in (INGESTED, PUBLISHED):
                 self.revision += 1
-                update_obj = True
                 # serialize metadata
                 with open('{0}/metadata-{1:04d}.xml'.format(
                   self._storage_folder(), self.revision), 'wb') as _out:
@@ -451,7 +454,6 @@ class StorageObject(models.Model):
           dumps(_dict_global, cls=DjangoJSONEncoder, sort_keys=True, separators=(',',':'))
         if self.global_storage != _global_storage:
             self.global_storage = _global_storage
-            update_obj = True
             if self.publication_status in (INGESTED, PUBLISHED):
                 with open('{0}/storage-global.json'.format(
                   self._storage_folder()), 'wb') as _out:
@@ -481,7 +483,6 @@ class StorageObject(models.Model):
             self.digest_checksum = _checksum.hexdigest()
             # update last modified timestamp
             self.digest_modified = datetime.now()
-            update_obj = True
             
         # check if local storage object serialization has changed; if yes,
         # save it to storage folder
@@ -492,15 +493,14 @@ class StorageObject(models.Model):
           dumps(_dict_local, cls=DjangoJSONEncoder, sort_keys=True, separators=(',',':'))
         if self.local_storage != _local_storage:
             self.local_storage = _local_storage
-            update_obj = True
             if self.publication_status in (INGESTED, PUBLISHED):
                 with open('{0}/storage-local.json'.format(
                   self._storage_folder()), 'wb') as _out:
                     _out.write(unicode(self.local_storage).encode('utf-8'))
         
-        # save storage object if required
-        if update_obj:
-            self.save()
+        # save storage object if required; this is always required since at 
+        # least self.digest_last_checked has changed
+        self.save()
 
 def restore_from_folder(storage_id, copy_status=None):
     """
@@ -508,8 +508,8 @@ def restore_from_folder(storage_id, copy_status=None):
     storage object identifier and makes it persistent in the database. 
     
     storage_id: the storage object identifier; it is assumed that this is the
-    folder name in the storage folder folder where serialized storage object
-    and metadata XML are located
+        folder name in the storage folder folder where serialized storage object
+        and metadata XML are located
     
     copy_status (optional): one of MASTER, REMOTE, PROXY; if present, used as
         copy status for the restored resource
@@ -596,3 +596,25 @@ def _fill_storage_object(storage_obj, json_file_name):
             setattr(storage_obj, _att, _dict[_att])
         return json_string
             
+
+def update_digests():
+    """
+    Re-creates a digest if it is older than MAX_DIGEST_AGE / 2.
+    This assumes that this method is called in MAX_DIGEST_AGE / 2 intervals to
+    guarantee a maximum digest age of MAX_DIGEST_AGE.
+    """
+    
+    _half_time = settings.MAX_DIGEST_AGE / 2
+    max_age = timedelta(seconds=_half_time)
+    
+    # get all master copy storage object of ingested and published resources
+    for _so in StorageObject.objects.filter(
+      Q(copy_status=MASTER),
+      Q(publication_status=INGESTED) | Q(publication_status=PUBLISHED)):
+        _expiration_date = datetime.now() - max_age
+        if _expiration_date > _so.digest_modified \
+          and _expiration_date > _so.digest_last_checked: 
+            LOGGER.debug('updating {}'.format(_so.identifier))
+            _so.update_storage()
+        else:
+            LOGGER.debug('{} is up to date'.format(_so.identifier))
