@@ -42,9 +42,7 @@
 {% endif %}{% endif %}
 {% endblock %}
 
-{% if change and redirection_url != '' %} 
-		{% include "admin/repository/redirect.html" %}
-{% else %}
+
 
 <script>
 			$(document).ready(function(){			   
@@ -253,7 +251,7 @@
 
 {# JavaScript for prepopulated fields #}
 {% prepopulated_fields_js %}
-{% endif %}
+
 </div>
 </form></div>
 
