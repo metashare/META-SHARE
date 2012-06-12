@@ -592,6 +592,9 @@ def update_resource(storage_json, resource_xml_string, copy_status=REMOTE):
 
     - if it does not exist, import it with the given copy status;
     - if it exists, delete it from the database, then import it with the given copy status.
+    
+    Raises 'IllegalAccessException' if an attempt is made to overwrite
+    an existing master-copy resource with a non-master-copy one.
     '''
     # Local helper functions first:
     def write_to_disk(storage_id):
@@ -623,7 +626,7 @@ def update_resource(storage_json, resource_xml_string, copy_status=REMOTE):
     storage_id = storage_json['identifier']
     if storage_object_exists(storage_id):
         if copy_status != MASTER and StorageObject.objects.get(identifier=storage_id).copy_status == MASTER:
-            raise Exception("Attempt to overwrite a master copy with a non-master-copy record; refusing");
+            raise IllegalAccessException("Attempt to overwrite a master copy with a non-master-copy record; refusing")
         remove_files_from_disk(storage_id)
         remove_database_entries(storage_id)
     write_to_disk(storage_id)
@@ -645,4 +648,6 @@ def _fill_storage_object(storage_obj, json_file_name):
         for _att in _dict.keys():
             setattr(storage_obj, _att, _dict[_att])
         return json_string
-            
+
+class IllegalAccessException(Exception):
+    pass        
