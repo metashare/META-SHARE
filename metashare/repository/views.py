@@ -24,6 +24,7 @@ from metashare.repository.search_indexes import resourceInfoType_modelIndex
 from metashare.settings import LOG_LEVEL, LOG_HANDLER, MEDIA_URL
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
+from metashare.storage.models import PUBLISHED
 
 
 MAXIMUM_READ_BLOCK_SIZE = 4096
@@ -336,18 +337,17 @@ def view(request, object_id=None):
     """
     Render browse or detail view for the repository application.
     """
-    resource = get_object_or_404(resourceInfoType_model, storage_object__identifier=object_id)
+    # only published resources may be viewed
+    resource = get_object_or_404(resourceInfoType_model,
+                                 storage_object__identifier=object_id,
+                                 storage_object__publication_status=PUBLISHED)
 
     # Convert resource to ElementTree and then to template tuples.
     resource_tree = resource.export_to_elementtree()
     lr_content = _convert_to_template_tuples(resource_tree)
 
-    # we need to know if the resource is published or not
-    resource_published = resource.storage_object.published
-
     # Define context for template rendering.
-    context = {'resource': resource, 'lr_content': lr_content,
-               'RESOURCE_PUBLISHED': resource_published}
+    context = { 'resource': resource, 'lr_content': lr_content }
     template = 'repository/lr_view.html'
 
     # For staff users, we have to add LR_EDIT which contains the URL of
