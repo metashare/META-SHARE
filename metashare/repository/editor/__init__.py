@@ -89,10 +89,10 @@ class MetashareBackendSite(AdminSite):
                 else:
                     # Default case: either at least one failure, or more than one success
                     # We will redirect to upload page if we have no successes at all,
-                    # or to "my resources" if there is at least one success
+                    # or to the resource overview if there is at least one success
                     redirect_url = reverse('editor:upload_xml')
                     if len(successes) > 0:
-                        redirect_url = reverse('editor:repository_resourceinfotype_model_myresources')
+                        redirect_url = reverse('editor:repository_resourceinfotype_model_changelist')
                         messages.info(request, u'Successfully uploaded {} resource descriptions'.format(len(successes)))
                     if len(failures) > 0:
                         _msg = u'Import failed for {} files:\n'.format(len(failures))

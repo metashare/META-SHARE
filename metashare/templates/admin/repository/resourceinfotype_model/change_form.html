@@ -36,15 +36,13 @@
    <li><a href="upload-data/" class="uploadresourcelink">{% trans "Upload resource"%}</a></li>
    <li><a href="export-xml/" class="exportxmllink">{% trans "Export Resource Description to XML"%}</a></li>
    <li><a href="history/" class="historylink">{% trans "History" %}</a></li>
-   {% if has_absolute_url %}<li><a href="../../../r/{{ content_type_id }}/{{ object_id }}/" class="viewsitelink">{% trans "View on site" %}</a></li>{% endif%}
+   {% if original.storage_object.published and has_absolute_url %}<li><a href="../../../r/{{ content_type_id }}/{{ object_id }}/" class="viewsitelink">{% trans "View on site" %}</a></li>{% endif%}
    {% endblock %}
  </ul>
 {% endif %}{% endif %}
 {% endblock %}
 
-{% if change and original.storage_object.master_copy != None and not original.storage_object.master_copy %} 
-		{% include "admin/repository/redirect.html" %}
-{% else %}
+
 
 <script>
 			$(document).ready(function(){			   
@@ -253,7 +251,7 @@
 
 {# JavaScript for prepopulated fields #}
 {% prepopulated_fields_js %}
-{% endif %}
+
 </div>
 </form></div>
 

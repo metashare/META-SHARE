@@ -97,6 +97,14 @@ class ResourceMediaTypes(template.Node):
             image_tag = image_tag + ' <img title="video" src="{}css/sexybuttons/images/' \
               'icons/silk/film.png" />' \
               .format(MEDIA_URL)
+        if "textNumerical" in result:
+            image_tag = image_tag + ' <img title="textNumerical" src="{}css/sexybuttons/images/' \
+              'icons/silk/eye.png" />' \
+              .format(MEDIA_URL)
+        if "textNgram" in result:
+            image_tag = image_tag + ' <img title="textNgram" src="{}css/sexybuttons/images/' \
+              'icons/silk/text_align_left.png" />' \
+              .format(MEDIA_URL)
 
         return image_tag
 
