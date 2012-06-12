@@ -12,7 +12,8 @@ from metashare import settings, test_utils
 from metashare.settings import DJANGO_BASE
 import json
 import os
-from metashare.repository.models import metadataInfoType_model
+from metashare.repository.models import metadataInfoType_model,\
+    resourceInfoType_model
 from datetime import date
 from metashare.test_utils import set_index_active
 
@@ -219,13 +220,18 @@ class UpdateTests(unittest.TestCase):
         """
         Simulate update for already existing storage object
         """
+        # helper
+        def get_metadatacreationdate_for(storage_id):
+            resource = resourceInfoType_model.objects.get(storage_object__identifier=self.storage_id)
+            return resource.metadataInfo.metadataCreationDate
+        
         # setup
         update_resource(self.storage_json, self.metadata_before)
-        self.assertEquals(date(2005, 5, 12), metadataInfoType_model.objects.get(pk=1).metadataCreationDate)
+        self.assertEquals(date(2005, 5, 12), get_metadatacreationdate_for(self.storage_id))
         self.assertEquals(REMOTE, StorageObject.objects.get(identifier=self.storage_id).copy_status)
         # exercise
         update_resource(self.storage_json, self.metadata_modified)
-        self.assertEquals(date(2006, 12, 31), metadataInfoType_model.objects.get(pk=1).metadataCreationDate)
+        self.assertEquals(date(2006, 12, 31), get_metadatacreationdate_for(self.storage_id))
 
     def test_update_refuse_mastercopy(self):
         """
