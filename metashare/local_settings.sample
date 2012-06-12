@@ -120,6 +120,7 @@ INTERVALS = {
     'MONTH' : '*',        # 1-12 - Default is *
     'DAY_OF_WEEK' : '*',  # 0-6 (0 is Sunday) - Default is *
 }
+
 # List of external nodes with which the local node will be synchronized.
 # Use this if you are a core node!
 CORE_NODES = {
@@ -140,3 +141,10 @@ CORE_NODES = {
         'PASSWORD': 'sync-user-pass-2',
     },
 }
+
+# User accounts with the permission to access synchronization information:
+SYNC_USERS = {
+    #'syncuser1':'secret',
+    #'syncuser2':'alsosecret',
+}
+

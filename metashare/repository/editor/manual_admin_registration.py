@@ -23,7 +23,8 @@ from metashare.repository.models import resourceInfoType_model, \
     lexicalConceptualResourceAudioInfoType_model,\
     lexicalConceptualResourceVideoInfoType_model,\
     lexicalConceptualResourceImageInfoType_model, toolServiceInfoType_model,\
-    licenceInfoType_model
+    licenceInfoType_model, resourceInfoType_model, personInfoType_model, \
+projectInfoType_model, documentInfoType_model, organizationInfoType_model
 from metashare.repository.editor.superadmin import SchemaModelAdmin
 from metashare.repository.editor import admin_site as editor_site
 from metashare.repository.editor.resource_editor import ResourceModelAdmin, \
@@ -56,6 +57,19 @@ class LanguageDescriptionInfoAdmin(SchemaModelAdmin):
 
 class CorpusAudioModelAdmin(SchemaModelAdmin):
     show_tabbed_fieldsets = True
+    
+class PersonModelAdmin(SchemaModelAdmin):
+    hidden_fields = ('source_url', 'copy_status', ) 
+        
+class OrganizationModelAdmin(SchemaModelAdmin):
+    hidden_fields = ('source_url', 'copy_status', ) 
+    
+class ProjectModelAdmin(SchemaModelAdmin):
+    hidden_fields = ('source_url', 'copy_status', ) 
+    
+class DocumentModelAdmin(SchemaModelAdmin):
+    hidden_fields = ('source_url', 'copy_status', ) 
+    
 
             
 # Models which are always rendered inline so they don't need their own admin form:
@@ -92,6 +106,10 @@ custom_admin_classes = {
     lexicalConceptualResourceImageInfoType_model: GenericTabbedAdmin,
     toolServiceInfoType_model: GenericTabbedAdmin,
     licenceInfoType_model: LicenceModelAdmin,
+    personInfoType_model: PersonModelAdmin, 
+    organizationInfoType_model: OrganizationModelAdmin, 
+    projectInfoType_model: ProjectModelAdmin, 
+    documentInfoType_model: DocumentModelAdmin, 
 }
 
 def register():

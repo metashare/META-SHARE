@@ -15,9 +15,9 @@ from metashare.repository.fields import MultiTextField, MetaBooleanField, \
   MultiSelectField, DictField, best_lang_value_retriever
 from metashare.repository.validators import validate_lang_code_keys
 
-from metashare.storage.models import StorageObject
+from metashare.storage.models import StorageObject, MASTER, COPY_CHOICES
 
-from metashare.settings import DJANGO_BASE, LOG_LEVEL, LOG_HANDLER
+from metashare.settings import DJANGO_BASE, LOG_LEVEL, LOG_HANDLER, DJANGO_URL
 
 # Setup logging support.
 logging.basicConfig(level=LOG_LEVEL)
@@ -200,6 +200,20 @@ class resourceInfoType_model(SchemaModel):
             return None
 
         return resource_component.as_subclass()._meta.verbose_name
+
+    def resource_owners(self):
+        """
+        Method used for changelist view for resources.
+        """
+        owners = getattr(self, 'owners', None)
+        if not owners:
+            return None
+        
+        owners_list = ''
+        for owner in owners.all():
+            owners_list += owner.surname.join(", ")
+        
+        return owners_list
 
 
 SIZEINFOTYPE_SIZEUNIT_CHOICES = _make_choices_from_list([
@@ -886,6 +900,15 @@ class documentInfoType_model(documentationInfoType_model):
       help_text='The id of the language the document is written in, as m' \
       'entioned in IETF BCP47',
       blank=True, max_length=20, )
+
+
+    source_url = models.URLField(verify_exists=False, 
+      default=DJANGO_URL,
+      help_text="(Read-only) base URL for the server where the master copy of " \
+      "the associated entity instance is located.")
+    
+    copy_status = models.CharField(default=MASTER, max_length=1, choices=COPY_CHOICES,
+        help_text="Generalized copy status flag for this entity instance.")
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
@@ -2526,6 +2549,15 @@ class organizationInfoType_model(actorInfoType_model):
       ' or an organization',
       )
 
+
+    source_url = models.URLField(verify_exists=False, 
+      default=DJANGO_URL,
+      help_text="(Read-only) base URL for the server where the master copy of " \
+      "the associated entity instance is located.")
+    
+    copy_status = models.CharField(default=MASTER, max_length=1, choices=COPY_CHOICES,
+        help_text="Generalized copy status flag for this entity instance.")
+
     def real_unicode_(self):
         # pylint: disable-msg=C0301
         formatargs = ['organizationName', ]
@@ -2606,6 +2638,15 @@ class personInfoType_model(actorInfoType_model):
       help_text='Groups information on organization to whomtheperson is ' \
       'affiliated',
       blank=True, null=True, related_name="affiliation_%(class)s_related", )
+
+
+    source_url = models.URLField(verify_exists=False, 
+      default=DJANGO_URL,
+      help_text="(Read-only) base URL for the server where the master copy of " \
+      "the associated entity instance is located.")
+    
+    copy_status = models.CharField(default=MASTER, max_length=1, choices=COPY_CHOICES,
+        help_text="Generalized copy status flag for this entity instance.")
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
@@ -3368,6 +3409,15 @@ class projectInfoType_model(SchemaModel):
       verbose_name='Project end date', 
       help_text='The end date of a project related to the resources',
       blank=True, null=True, )
+
+
+    source_url = models.URLField(verify_exists=False, 
+      default=DJANGO_URL,
+      help_text="(Read-only) base URL for the server where the master copy of " \
+      "the associated entity instance is located.")
+    
+    copy_status = models.CharField(default=MASTER, max_length=1, choices=COPY_CHOICES,
+        help_text="Generalized copy status flag for this entity instance.")
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301

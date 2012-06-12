@@ -25,9 +25,9 @@ from metashare.repository.editor.editorutils import is_inline, decode_inline
 from metashare.repository.editor.inlines import ReverseInlineModelAdmin
 from metashare.repository.editor.related_mixin import RelatedAdminMixin
 from metashare.repository.editor.schemamodel_mixin import SchemaModelLookup
+from metashare.storage.models import MASTER
 from metashare.repository.model_utils import get_root_resources
 from metashare.repository.supermodel import REQUIRED, RECOMMENDED, OPTIONAL
-
 
 # Setup logging support.
 logging.basicConfig(level=settings.LOG_LEVEL)
@@ -117,7 +117,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         - hiding certain fields (they are present but invisible);
         - custom widgets for subclassable items such as actorInfo;
         - custom minimalistic "related" widget for non-inlined one2one fields;
-        """
+        """        
         self.hide_hidden_fields(db_field, kwargs)
         # ForeignKey or ManyToManyFields
         if self.is_x_to_many_relation(db_field):
@@ -434,6 +434,25 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         media = media + adminForm.media
         #### end modification ####
 
+        #### begin modification ####
+        url = ''        
+        #for reusable entities
+        if(hasattr(obj, 'copy_status') and obj.copy_status != MASTER):
+            url = "{0}/editor/repository/{1}/{2}".format(obj.source_url.rstrip('/'), (obj.__class__.__name__).lower(), object_id)
+            return render_to_response('admin/repository/redirect.html',
+                   { 'object': obj, 'redirection_url': url },
+                   )            
+        #for resources and resources' parts
+        else:    
+            root_resources = get_root_resources(obj)
+            for res in root_resources:
+                if  not res.storage_object.master_copy:
+                    url = "{0}/editor/repository/{1}/{2}".format(res.storage_object.source_url.rstrip('/'), (obj.__class__.__name__).lower(), object_id)
+                    return render_to_response('admin/repository/redirect.html',
+                           { 'resource': res, 'redirection_url': url },
+                           )
+        #### end modification ####
+        
         context = {
             'title': _('Change %s') % force_unicode(opts.verbose_name),
             'adminform': adminForm,

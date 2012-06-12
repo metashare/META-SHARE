@@ -24,6 +24,7 @@ from metashare.repository.search_indexes import resourceInfoType_modelIndex
 from metashare.settings import LOG_LEVEL, LOG_HANDLER, MEDIA_URL
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
+from metashare.storage.models import PUBLISHED
 
 
 MAXIMUM_READ_BLOCK_SIZE = 4096
@@ -201,7 +202,8 @@ def download(request, object_id):
     # here we are only interested in licenses (or their names) of the specified
     # resource that allow the current user a download/purchase
     resource = get_object_or_404(resourceInfoType_model,
-                                 storage_object__identifier=object_id)
+                                 storage_object__identifier=object_id,
+                                 storage_object__publication_status=PUBLISHED)
     licences = _get_licences(resource, user_membership)
 
     # Check whether the resource is from the current node, or whether it must be
@@ -332,22 +334,23 @@ def create(request):
     return redirect(reverse('admin:repository_resourceinfotype_model_add'))
 
 
-def view(request, object_id=None):
+def view(request, resource_name=None, object_id=None):
     """
     Render browse or detail view for the repository application.
     """
-    resource = get_object_or_404(resourceInfoType_model, storage_object__identifier=object_id)
+    # only published resources may be viewed
+    resource = get_object_or_404(resourceInfoType_model,
+                                 storage_object__identifier=object_id,
+                                 storage_object__publication_status=PUBLISHED)
+    if request.path_info != resource.get_absolute_url():
+        return redirect(resource.get_absolute_url())
 
     # Convert resource to ElementTree and then to template tuples.
     resource_tree = resource.export_to_elementtree()
     lr_content = _convert_to_template_tuples(resource_tree)
 
-    # we need to know if the resource is published or not
-    resource_published = resource.storage_object.published
-
     # Define context for template rendering.
-    context = {'resource': resource, 'lr_content': lr_content,
-               'RESOURCE_PUBLISHED': resource_published}
+    context = { 'resource': resource, 'lr_content': lr_content }
     template = 'repository/lr_view.html'
 
     # For staff users, we have to add LR_EDIT which contains the URL of
@@ -379,8 +382,6 @@ class MetashareFacetedSearchView(FacetedSearchView):
     """
     def get_results(self):
         sqs = super(MetashareFacetedSearchView, self).get_results()
-        if not self.request.user.is_staff:
-            sqs = sqs.filter(published=True)
 
         # Sort the results (on only one sorting value)
         if 'sort' in self.request.GET:
