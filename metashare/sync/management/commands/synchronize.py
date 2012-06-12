@@ -2,8 +2,9 @@
 Management utility to trigger synchronization.
 """
 
-from metashare.local_settings import CORE_NODES
-from metashare.sync.sync_utils import login, get_full_metadata
+from local_settings import CORE_NODES
+from sync.sync_utils import login, get_full_metadata
+from xml_utils import xml_compare
 from zipfile import ZipFile
 from StringIO import StringIO
 
