@@ -208,3 +208,8 @@ h1.customtitle {
 h2.help_link {
 	/*display: inline;*/
 }
+
+div#redirect_msg h3{
+	margin-top:20px;
+	text-align:center;
+}
