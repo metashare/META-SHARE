@@ -199,8 +199,8 @@
     <field name="lcrLinguisticInformationFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
-    <field name="timeCoverageFilter" type="text_en" indexed="true"
-      stored="true" multiValued="true" />
+    <field name="text" type="text_en" indexed="true"
+      stored="false" multiValued="false" />
     
     <field name="audioSpeechItemsFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
@@ -241,8 +241,8 @@
     <field name="audioNaturalityFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
-    <field name="text" type="text_en" indexed="true"
-      stored="false" multiValued="false" />
+    <field name="timeCoverageFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
     
     <field name="languageNameSort" type="text_en" indexed="true"
       stored="true" multiValued="false" />
@@ -387,9 +387,6 @@
     
     <field name="audioSpeechGenreFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
-    
-    <field name="published" type="boolean" indexed="true"
-      stored="false" multiValued="false" />
     
     <field name="resourceNameSort" type="text_en" indexed="true"
       stored="true" multiValued="false" />
