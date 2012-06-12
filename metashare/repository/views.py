@@ -202,7 +202,8 @@ def download(request, object_id):
     # here we are only interested in licenses (or their names) of the specified
     # resource that allow the current user a download/purchase
     resource = get_object_or_404(resourceInfoType_model,
-                                 storage_object__identifier=object_id)
+                                 storage_object__identifier=object_id,
+                                 storage_object__publication_status=PUBLISHED)
     licences = _get_licences(resource, user_membership)
 
     # Check whether the resource is from the current node, or whether it must be
