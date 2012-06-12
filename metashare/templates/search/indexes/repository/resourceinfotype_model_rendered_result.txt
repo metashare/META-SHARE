@@ -3,7 +3,7 @@
 {% load resource_media_types %}
 {% load get_media_url %}
 
-<div class="resourceName"{% if not object.storage_object.published %} style="font-style:italic;"{% endif %}>
+<div class="resourceName">
 
     {% if object.resourceComponentType.as_subclass.resourceType = "corpus" %}
 <img src="{% get_media_url %}css/sexybuttons/images/icons/silk/database_yellow.png" title="Corpus" /> 
@@ -21,7 +21,7 @@
    &nbsp;{% resource_media_types object.resourceComponentType.as_subclass %} 
 
 
-<ul{% if not object.storage_object.published %}style="font-style:italic;"{% endif %}><li>
+<ul>
   {% resource_languages object.resourceComponentType.as_subclass %}  
 </ul>  
 </div>

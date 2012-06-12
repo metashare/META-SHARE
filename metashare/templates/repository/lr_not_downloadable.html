@@ -11,6 +11,6 @@
   <p>We&rsquo;re afraid, the selected resource is currently not available for download. This problem may be temporary due to network connection problems or internal errors. Trying again later might solve the problem.</p>
   <p>Please contact the resource maintainer if this problem should persist.</p>
 {% endif %}
-  <p><a href="{% url metashare.repository.views.view resource.id %}"><button class="span-12 button middle_button">&laquo;&nbsp;Resource View</button></a></p>
+  <p><a href="{{ resource.get_absolute_url }}"><button class="span-12 button middle_button">&laquo;&nbsp;Resource View</button></a></p>
 </div>
 {% endblock %}

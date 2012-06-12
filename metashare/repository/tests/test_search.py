@@ -249,15 +249,6 @@ class SearchTest(test_utils.IndexAwareTestCase):
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "No results were found for search query", status_code=200)
 
-    def test_staff_user_sees_ingested_LR(self):
-        client = Client()
-        client.login(username='staffuser', password='secret')
-        self.importIngestedFixtures()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
-          data={'q':'INGESTED'})
-        self.assertEqual('repository/search.html', response.templates[0].name)
-        self.assertContains(response, "1 Language Resource", status_code=200, msg_prefix='Response: "{0}"'.format(response))
-        
     def test_normal_user_doesnt_see_ingested_LR(self):
         client = Client()
         client.login(username='normaluser', password='secret')

@@ -145,6 +145,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.db import models
 
+from metashare.accounts.models import EditorGroup
 # pylint: disable-msg=W0611
 from {0}supermodel import SchemaModel, SubclassableModel, \\
   _make_choices_from_list, InvisibleStringModel, \\
@@ -265,8 +266,9 @@ class {}_model(InvisibleStringModel, {}):
 '''
 
 TOP_LEVEL_TYPE_EXTRA_CODE_TEMPLATE = '''
+    editor_groups = models.ManyToManyField(EditorGroup, blank=True)
 
-    owners = models.ManyToManyField(User, blank=True, null=True)
+    owners = models.ManyToManyField(User, blank=True)
 
     storage_object = models.ForeignKey(StorageObject, blank=True, null=True,
       unique=True)
