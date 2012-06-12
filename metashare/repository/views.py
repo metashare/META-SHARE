@@ -379,8 +379,6 @@ class MetashareFacetedSearchView(FacetedSearchView):
     """
     def get_results(self):
         sqs = super(MetashareFacetedSearchView, self).get_results()
-        if not self.request.user.is_staff:
-            sqs = sqs.filter(published=True)
 
         # Sort the results (on only one sorting value)
         if 'sort' in self.request.GET:
