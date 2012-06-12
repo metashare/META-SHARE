@@ -92,6 +92,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
 TIME_ZONE = 'Europe/Berlin'
 
 # Shared secret used for Single-Sign-On between META-SHARE core nodes.
+
 SSO_SECRET_KEY = '6736d82b807811e0a1e51093e908621ab4e0e5225bde4fbcb1aa160fbd198e2a'
 
 # The URL for META-SHARE statistics server.
@@ -125,8 +126,11 @@ CORE_NODES = {
     'node1': {
         'NAME': 'AUNI',                       # The short name of the node.
         'DESCRIPTION': 'xxx',                 # A short descpription of the node.
-        'URL': 'metashare.example.com:8000',  # The url of the core node (Please,
-                                              # also include a port if it is used).
+        'URL': 'metashare.example.com:8000',  # The url of the core node (also 
+                                              # include a port if needed).
+        'username': 'sync-user',              # The name of a sync user on 
+                                              # the core node.
+        'password': 'sync-user-pass',         # Sync user's password.
     },
     'node2': {
         'NAME': 'BUNI',                     
