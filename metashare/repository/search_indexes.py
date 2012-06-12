@@ -532,7 +532,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             if media_type.corpusAudioInfo:
                 result.append(media_type.corpusAudioInfo.mediaType)
             for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-                result.append(corpus_info.mediaType)
+                result.append(corpus_info.get_mediaType_display())
             if media_type.corpusTextNgramInfo:
                 result.append(media_type.corpusTextNgramInfo.mediaType)
             if media_type.corpusImageInfo:
