@@ -6,9 +6,15 @@ from time import sleep
 from django.core.exceptions import ValidationError
 from django.test.client import Client
 from django.utils import unittest
-from metashare.storage.models import StorageObject, _validate_valid_xml
+from metashare.storage.models import StorageObject, _validate_valid_xml, \
+    update_resource, MASTER, REMOTE, IllegalAccessException
 from metashare import settings, test_utils
 from metashare.settings import DJANGO_BASE
+import json
+import os
+from metashare.repository.models import resourceInfoType_model
+from datetime import date
+from metashare.test_utils import set_index_active
 
 class StorageObjectTestCase(unittest.TestCase):
     """
@@ -23,7 +29,7 @@ class StorageObjectTestCase(unittest.TestCase):
         self._minimal_xml = u"""<?xml version="1.0"?>\n<foo/>"""
         obj = StorageObject.objects.create(metadata=self._minimal_xml)
         self.object_id = obj.id
-    
+
     def tearDown(self):
         """
         Removes the storage object instance from the database after testing.
@@ -34,6 +40,7 @@ class StorageObjectTestCase(unittest.TestCase):
         # Delete instance from database if still existing.
         if storage_object:
             storage_object[0].delete()
+
 
     def test_revision_view(self):
         """
@@ -150,3 +157,91 @@ class StorageObjectTestCase(unittest.TestCase):
         # Set master_copy again to allow cleanup of storage folder.
         storage_object.master_copy = True
         storage_object.save()
+
+
+class UpdateTests(unittest.TestCase):
+    """
+    Test case that checks the update mechanism used by the receiving end of synchronization.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        set_index_active(False)
+    
+    @classmethod
+    def tearDownClass(cls):
+        set_index_active(True)
+
+    def setUp(self):
+        """
+        Creates a new storage object instance for testing.
+        """
+        test_utils.setup_test_storage()
+        folder = '{0}/storage/test_fixtures/updatetest'.format(settings.ROOT_PATH)
+        with open('{0}/storage-global.json'.format(folder), 'rb') as storagein:
+            self.storage_json = json.load(storagein)
+        with open('{0}/metadata-before.xml'.format(folder), 'rb') as metadatain:
+            self.metadata_before = metadatain.read()
+        with open('{0}/metadata-modified.xml'.format(folder), 'rb') as metadatain:
+            self.metadata_modified = metadatain.read()
+        self.storage_id = self.storage_json['identifier']
+
+    
+    def cleanup_storage(self):
+        """
+        Deletes the content of the storage folder.
+        """
+        for _folder in os.listdir(settings.STORAGE_PATH):
+            for _file in os.listdir(os.path.join(settings.STORAGE_PATH, _folder)):
+                os.remove(os.path.join(settings.STORAGE_PATH, _folder, _file))
+            os.rmdir(os.path.join(settings.STORAGE_PATH, _folder))
+
+    def tearDown(self):
+        """
+        Removes all storage object instances from the database after testing.
+        """
+        StorageObject.objects.all().delete()
+        self.cleanup_storage()
+
+
+    def test_update_new(self):
+        """
+        Simulate the case where synchronization brings a new storage object to be instantiated.
+        """
+        # Exercise
+        update_resource(self.storage_json, self.metadata_before)
+        # Verify
+        self.assertEquals(1, StorageObject.objects.filter(identifier=self.storage_id).count())
+        storage_object = StorageObject.objects.get(identifier=self.storage_id)
+        self.assertEquals(self.metadata_before, storage_object.metadata)
+
+    def test_update_existing(self):
+        """
+        Simulate update for already existing storage object
+        """
+        # helper
+        def get_metadatacreationdate_for(storage_id):
+            resource = resourceInfoType_model.objects.get(storage_object__identifier=self.storage_id)
+            return resource.metadataInfo.metadataCreationDate
+        
+        # setup
+        update_resource(self.storage_json, self.metadata_before)
+        self.assertEquals(date(2005, 5, 12), get_metadatacreationdate_for(self.storage_id))
+        self.assertEquals(REMOTE, StorageObject.objects.get(identifier=self.storage_id).copy_status)
+        # exercise
+        update_resource(self.storage_json, self.metadata_modified)
+        self.assertEquals(date(2006, 12, 31), get_metadatacreationdate_for(self.storage_id))
+
+    def test_update_refuse_mastercopy(self):
+        """
+        Refuse to replace a master copy with a non-master copy during update 
+        """
+        # setup
+        update_resource(self.storage_json, self.metadata_before, MASTER)
+        self.assertEquals(MASTER, StorageObject.objects.get(identifier=self.storage_id).copy_status)
+        # exercise
+        try:
+            update_resource(self.storage_json, self.metadata_modified, REMOTE)
+            self.fail("Should have raised an exception")
+        except IllegalAccessException:
+            pass # Expected exception

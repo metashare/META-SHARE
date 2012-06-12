@@ -107,3 +107,9 @@ SELENIUM_DRIVER = 'Firefox'
 # The port of the Selenium test server;
 # this must be the same port as used in DJANGO_URL
 SELENIUM_TESTSERVER_PORT = 8000
+
+# User accounts with the permission to access synchronization information:
+SYNC_USERS = {
+    #'syncuser1':'secret',
+    #'syncuser2':'alsosecret',
+}
