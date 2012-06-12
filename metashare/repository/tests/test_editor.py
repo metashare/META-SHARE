@@ -455,7 +455,7 @@ class EditorTest(TestCase):
         resource.storage_object.save()
         response = client.get('{}repository/resourceinfotype_model/{}/'
                               .format(ADMINROOT, resource.storage_object.id))
-        self.assertContains(response, "You will now be redirected")
+        self.assertContains(response, "You cannot edit the metadata")
 
     def test_editor_can_change_own_resource_and_parts(self):
         """
