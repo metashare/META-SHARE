@@ -36,9 +36,7 @@
 {% endblock %}
 
 
-{% if change and redirection_url != '' %}		
-		{% include "admin/repository/redirect.html" %}
-{% else %}
+
 
 <form {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post" id="{{ opts.module_name }}_form">{% csrf_token %}{% block form_top %}{% endblock %}
 <div>
@@ -71,7 +69,6 @@
 </div>
 </form>
 
-{% endif %}
 </div>
 {% endblock %}
 
