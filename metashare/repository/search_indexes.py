@@ -5,7 +5,7 @@ Project: META-SHARE prototype implementation
 import logging
 import os
 
-from haystack.indexes import CharField, RealTimeSearchIndex, BooleanField
+from haystack.indexes import CharField, RealTimeSearchIndex
 from haystack import indexes
 
 from django.db.models import signals
@@ -78,10 +78,6 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
     resourceTypeSort = CharField(indexed=True, faceted=True)
     mediaTypeSort = CharField(indexed=True, faceted=True)
     languageNameSort = CharField(indexed=True, faceted=True)
-
-    # whether the resource has been published or not; used only to filter what
-    # a searching user may see
-    published = BooleanField(stored=False)
 
     # List of filters
     languageNameFilter = LabeledMultiValueField(
@@ -264,8 +260,8 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         """
         Returns the default QuerySet to index when doing a full index update.
 
-        In our case this is a QuerySet containing only resources that have not
-        been deleted, yet.
+        In our case this is a QuerySet containing only published resources that
+        have not been deleted, yet.
         """
         return self.read_queryset()
 
@@ -273,10 +269,11 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         """
         Returns the default QuerySet for read actions.
 
-        In our case this is a QuerySet containing only resources that have not
-        been deleted, yet.
+        In our case this is a QuerySet containing only published resources that
+        have not been deleted, yet.
         """
-        return self.get_model().objects.filter(storage_object__deleted=False)
+        return self.get_model().objects.filter(storage_object__deleted=False,
+            storage_object__publication_status=PUBLISHED)
 
     def should_update(self, instance, **kwargs):
         '''
@@ -451,12 +448,6 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         languageNameSort = languageNameSort.lower()
 
         return languageNameSort
-
-    def prepare_published(self, obj):
-        """
-        Collect the data to filter the Published resources
-        """
-        return obj.storage_object and obj.storage_object.published
 
     def prepare_languageNameFilter(self, obj):
         """

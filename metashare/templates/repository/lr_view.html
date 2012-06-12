@@ -86,7 +86,7 @@
 			 }
 		</style>
  
-<h2>{% if not RESOURCE_PUBLISHED %}<i>{% endif %}{{ resource }}{% if not RESOURCE_PUBLISHED %}</i>{% endif %}</h2>
+<h2>{{ resource }}</h2>
 	<div class="content_box">
         <div id="stats" align="right" style="float: right">
             {% for stat in LR_STATS %}
@@ -101,7 +101,7 @@
         <hr></div>
   <a href="javascript:history.back();"><button class="span-12 button middle_button">&laquo; Back</button></a>
   {% if LR_DOWNLOAD %}
-    <a href="{% url metashare.repository.views.download resource.id %}"><button class="span-4 button middle_button">Download</button></a>
+    <a href="{% url metashare.repository.views.download resource.storage_object.identifier %}"><button class="span-4 button middle_button">Download</button></a>
   {% else %}
     <div class="popup_box">
       <div onmouseover="$(this).siblings('div.popup').show();" onmouseout="$(this).siblings('div.popup').hide();"><button class="span-4 button middle_gray_button">Download</button></div><div class="popup" style="height:50px; left:190px; width:270px; top:50px;"><img style="left:10px;" src="{{ MEDIA_URL }}images/adv_search_pfeil.png" />&nbsp;You don&rsquo;t have the permission to download this resource. Please log in.</div>
@@ -119,7 +119,7 @@
 
   <a href="javascript:history.back();"><button class="span-12 button middle_button">&laquo; Back</button></a>
   {% if LR_DOWNLOAD %}
-    <a href="{% url metashare.repository.views.download resource.id %}"><button class="span-4 button middle_button">Download</button></a>
+    <a href="{% url metashare.repository.views.download resource.storage_object.identifier %}"><button class="span-4 button middle_button">Download</button></a>
   {% else %}
     <div class="popup_box">
       <div onmouseover="$(this).siblings('div.popup').show();" onmouseout="$(this).siblings('div.popup').hide();"><button class="span-4 button middle_gray_button">Download</button></div><div class="popup" style="height:50px; left:190px; width:270px; top:50px;"><img style="left:10px;" src="{{ MEDIA_URL }}images/adv_search_pfeil.png" />&nbsp;You don&rsquo;t have the permission to download this resource. Please log in.</div>

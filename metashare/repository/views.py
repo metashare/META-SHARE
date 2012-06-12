@@ -24,6 +24,7 @@ from metashare.repository.search_indexes import resourceInfoType_modelIndex
 from metashare.settings import LOG_LEVEL, LOG_HANDLER, MEDIA_URL
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
+from metashare.storage.models import PUBLISHED
 
 
 MAXIMUM_READ_BLOCK_SIZE = 4096
@@ -62,8 +63,12 @@ def _convert_to_template_tuples(element_tree):
     # The "required" element was added to the tree, for passing 
     # information about whether a field is required or not, to correctly
     # render the single resource view.
-    else:   
-        return ((element_tree.tag, element_tree.text, element_tree.required),)
+    else:
+        # cfedermann: use proper getattr access to prevent an AttributeError
+        # being thrown for cases, like /repository/browse/1222/, where some
+        # required attributes seem to be missing.
+        required = getattr(element_tree, 'required', 0)
+        return ((element_tree.tag, element_tree.text, required),)
 
 
 # a type providing an enumeration of META-SHARE member types
@@ -136,10 +141,22 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
 }
 
 
-def _get_licences(resource, user):
+def _get_user_membership(user):
+    """
+    Returns a `MEMBER_TYPES` type based on the permissions of the given
+    authenticated user. 
+    """
+    if user.has_perm('accounts.ms_full_member'):
+        return MEMBER_TYPES.FULL
+    elif user.has_perm('accounts.ms_associate_member'):
+        return MEMBER_TYPES.ASSOCIATE
+    return MEMBER_TYPES.NON
+
+
+def _get_licences(resource, user_membership):
     """
     Returns the licences under which a download/purchase of the given resource
-    is possible for the given user.
+    is possible for the given user membership.
     
     The result is a dictionary mapping from licence names to pairs. Each pair
     contains the corresponding `licenceInfoType_model` and a boolean denoting
@@ -149,9 +166,6 @@ def _get_licences(resource, user):
     licence_infos = tuple(licenceInfoType_model.objects \
         .filter(back_to_distributioninfotype_model__id=\
                 resource.distributionInfo.id))
-    # TODO: derive MS membership from user object instead of simply assuming
-    #       full membership!
-    user_membership = MEMBER_TYPES.FULL
     
     all_licenses = dict([(l_name, l_info) for l_info in licence_infos
                          for l_name in l_info.get_licence_display_list()])
@@ -183,11 +197,22 @@ def download(request, object_id):
     """
     if not request.user.is_active:
         return HttpResponseForbidden()
+    user_membership = _get_user_membership(request.user)
 
     # here we are only interested in licenses (or their names) of the specified
     # resource that allow the current user a download/purchase
-    resource = get_object_or_404(resourceInfoType_model, pk=object_id)
-    licences = _get_licences(resource, request.user)
+    resource = get_object_or_404(resourceInfoType_model,
+                                 storage_object__identifier=object_id,
+                                 storage_object__publication_status=PUBLISHED)
+    licences = _get_licences(resource, user_membership)
+
+    # Check whether the resource is from the current node, or whether it must be
+    # redirected to the master copy
+    if (not resource.storage_object.master_copy):
+        url = "{0}{1}".format(resource.storage_object.source_url, resource.get_absolute_url())
+        return render_to_response('repository/redirect.html',
+                    { 'resource': resource, 'redirection_url': url },
+                    context_instance=RequestContext(request))
 
     licence_choice = None
     if request.method == "POST":
@@ -195,7 +220,10 @@ def download(request, object_id):
         if licence_choice and 'in_licence_agree_form' in request.POST:
             la_form = LicenseAgreementForm(licence_choice, data=request.POST)
             if la_form.is_valid():
-                return _provide_download(request, resource,
+                # before really providing the download, we have to make sure
+                # that the user hasn't tried to circumvent the permission system
+                if licences[licence_choice][1]:
+                    return _provide_download(request, resource,
                                 licences[licence_choice][0].downloadLocation)
             else:
                 return render_to_response('repository/licence_agreement.html',
@@ -246,9 +274,7 @@ def _provide_download(request, resource, download_urls):
 
             # build HTTP response with a guessed mime type; the response
             # content is a stream of the download file
-            filemimetype , encod = guess_type(dl_path)
-            if not filemimetype:
-                filemimetype = "application/octet-stream"
+            filemimetype = guess_type(dl_path)[0] or "application/octet-stream"
             response = HttpResponse(dl_stream_generator(),
                                     mimetype=filemimetype)
             response['Content-Length'] = getsize(dl_path) 
@@ -308,22 +334,23 @@ def create(request):
     return redirect(reverse('admin:repository_resourceinfotype_model_add'))
 
 
-def view(request, object_id=None):
+def view(request, resource_name=None, object_id=None):
     """
     Render browse or detail view for the repository application.
     """
-    resource = get_object_or_404(resourceInfoType_model, pk=object_id)
+    # only published resources may be viewed
+    resource = get_object_or_404(resourceInfoType_model,
+                                 storage_object__identifier=object_id,
+                                 storage_object__publication_status=PUBLISHED)
+    if request.path_info != resource.get_absolute_url():
+        return redirect(resource.get_absolute_url())
 
     # Convert resource to ElementTree and then to template tuples.
     resource_tree = resource.export_to_elementtree()
     lr_content = _convert_to_template_tuples(resource_tree)
 
-    # we need to know if the resource is published or not
-    resource_published = resource.storage_object.published
-
     # Define context for template rendering.
-    context = {'resource': resource, 'lr_content': lr_content,
-               'RESOURCE_PUBLISHED': resource_published}
+    context = { 'resource': resource, 'lr_content': lr_content }
     template = 'repository/lr_view.html'
 
     # For staff users, we have to add LR_EDIT which contains the URL of
@@ -355,8 +382,6 @@ class MetashareFacetedSearchView(FacetedSearchView):
     """
     def get_results(self):
         sqs = super(MetashareFacetedSearchView, self).get_results()
-        if not self.request.user.is_staff:
-            sqs = sqs.filter(published=True)
 
         # Sort the results (on only one sorting value)
         if 'sort' in self.request.GET:

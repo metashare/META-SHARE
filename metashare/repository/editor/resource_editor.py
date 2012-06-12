@@ -1,42 +1,47 @@
+import datetime
+
+from django import forms
+from django.contrib.admin.util import unquote
+from django.contrib.auth.decorators import permission_required
+from django.core.exceptions import ValidationError, PermissionDenied
+from django.db.models import Q
+from django.http import Http404
+from django.shortcuts import render_to_response
+from django.template.context import RequestContext
+from django.utils.decorators import method_decorator
+from django.utils.encoding import force_unicode
+from django.utils.functional import update_wrapper
+from django.utils.html import escape
+from django.utils.safestring import mark_safe
+from django.utils.translation import ugettext as _
+from django.views.decorators.csrf import csrf_protect
+
+from metashare import settings
+from metashare.accounts.models import EditorGroup, ManagerGroup
+from metashare.repository.editor.forms import StorageObjectUploadForm
 from metashare.repository.editor.inlines import ReverseInlineFormSet, \
     ReverseInlineModelAdmin
-from django.core.exceptions import ValidationError, PermissionDenied
+from metashare.repository.editor.lookups import MembershipDummyLookup
+from metashare.repository.editor.schemamodel_mixin import encode_as_inline
+from metashare.repository.editor.superadmin import SchemaModelAdmin
+from metashare.repository.editor.widgets import OneToManyWidget
 from metashare.repository.models import resourceComponentTypeType_model, \
     corpusInfoType_model, languageDescriptionInfoType_model, \
     lexicalConceptualResourceInfoType_model, toolServiceInfoType_model, \
     corpusMediaTypeType_model, languageDescriptionMediaTypeType_model, \
     lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model, \
     licenceInfoType_model
+from metashare.repository.supermodel import SchemaModel
+from metashare.stats.model_utils import saveLRStats, UPDATE_STAT, INGEST_STAT, \
+    PUBLISH_STAT
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
     ALLOWED_ARCHIVE_EXTENSIONS
 from metashare.utils import verify_subclass
-from metashare.stats.model_utils import saveLRStats, UPDATE_STAT, INGEST_STAT, PUBLISH_STAT
-from metashare.repository.supermodel import SchemaModel
-from django.utils.encoding import force_unicode
-from django.utils.safestring import mark_safe
-from django.template.context import RequestContext
-from django.shortcuts import render_to_response
-from metashare import settings
-from django.contrib.auth.decorators import permission_required
-from django.utils.decorators import method_decorator
-from metashare.repository.editor.superadmin import SchemaModelAdmin
-from metashare.repository.editor.schemamodel_mixin import encode_as_inline
-from django.utils.functional import update_wrapper
-from django.views.decorators.csrf import csrf_protect
-from metashare.repository.editor.editorutils import FilteredChangeList
-from django.contrib.admin.views.main import ChangeList
-from django.contrib.admin.util import unquote
-from django.http import Http404
-from metashare.repository.editor.forms import StorageObjectUploadForm
-from django.utils.html import escape
-from django.utils.translation import ugettext as _
-from metashare.repository.editor.lookups import MembershipDummyLookup
-from metashare.repository.editor.widgets import OneToManyWidget
-import datetime
+
 
 csrf_protect_m = method_decorator(csrf_protect)
 
-    
+
 class ResourceComponentInlineFormSet(ReverseInlineFormSet):
     '''
     A formset with custom save logic for resources.
@@ -265,7 +270,6 @@ def export_xml_resources(modeladmin, request, queryset):
         return response
 export_xml_resources.short_description = "Export selected resource descriptions to XML"
 
-from django import forms
 
 class MetadataForm(forms.ModelForm):
     def save(self, commit=True):
@@ -290,7 +294,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
     content_fields = ('resourceComponentType',)
     list_display = ('__unicode__', 'resource_type', 'publication_status')
     actions = (publish_resources, unpublish_resources, ingest_resources, export_xml_resources, )
-    hidden_fields = ('storage_object', 'owners', )
+    hidden_fields = ('storage_object', 'owners', 'editor_groups', )
 
 
     def get_urls(self):
@@ -308,42 +312,11 @@ class ResourceModelAdmin(SchemaModelAdmin):
             url(r'^(.+)/upload-data/$',
                 wrap(self.uploaddata_view),
                 name='%s_%s_uploaddata' % info),
-            url(r'^my/$',
-                wrap(self.changelist_view_filtered),
-                name='%s_%s_myresources' % info),
             url(r'^(.+)/export-xml/$',
                 wrap(self.exportxml),
                 name='%s_%s_exportxml' % info),
         ) + urlpatterns
         return urlpatterns
-
-    @csrf_protect_m
-    def changelist_view_filtered(self, request, extra_context=None):
-        '''
-        The filtered changelist view for My Resources.
-        We reuse the generic django changelist_view and squeeze in our wish to
-        show the filtered view in two places:
-        1. we patch request.POST to insert a parameter 'myresources'='true',
-           which will be interpreted in get_changelist to show the filtered
-           version;
-        2. we pass a extra_context variable 'myresources' which will be
-           interpreted in the template change_list.html. 
-        '''
-        _post = request.POST.copy()
-        _post['myresources'] = 'true'
-        request.POST = _post
-        _extra_context = extra_context or {}
-        _extra_context.update({'myresources':True})
-        return self.changelist_view(request, _extra_context)
-
-    def get_changelist(self, request, **kwargs):
-        """
-        Returns the ChangeList class for use on the changelist page.
-        """
-        if 'myresources' in request.POST:
-            return FilteredChangeList
-        else:
-            return ChangeList
 
 
     @csrf_protect_m
@@ -574,8 +547,67 @@ class ResourceModelAdmin(SchemaModelAdmin):
             if item in post:
                 out[item] = True
         return out
+
+    def queryset(self, request):
+        """
+        Returns a QuerySet of all model instances that can be edited by the
+        admin site.
         
-        
+        This is used by changelist_view, for example, but also for determining
+        whether the current user may edit a resource or not.
+        """
+        result = super(ResourceModelAdmin, self).queryset(request)
+        # all users but the superusers may only see resources for which they are
+        # either owner or editor group member:
+        if not request.user.is_superuser:
+            result = result.distinct().filter(Q(owners=request.user)
+                    | Q(editor_groups__name__in=
+                           request.user.groups.values_list('name', flat=True)))
+        return result
+
+    def has_delete_permission(self, request, obj=None):
+        """
+        Returns `True` if the given request has permission to change the given
+        Django model instance.
+        """
+        result = super(ResourceModelAdmin, self) \
+            .has_delete_permission(request, obj)
+        if result and obj:
+            if request.user.is_superuser:
+                return True
+            # in addition to the default delete permission determination, we
+            # only allow a user to delete a resource if either:
+            # (1) she is owner of the resource and the resource does not belong
+            #     to any `EditorGroup`
+            # (2) she is a manager of one of the resource's `EditorGroup`s
+            res_groups = obj.editor_groups.all()
+            return (request.user in obj.owners.all() and len(res_groups) == 0) \
+                or any(res_group.name == mgr_group.managed_group.name
+                       for res_group in res_groups
+                       for mgr_group in ManagerGroup.objects.filter(name__in=
+                            request.user.groups.values_list('name', flat=True)))
+        return result
+
+    def get_actions(self, request):
+        """
+        Return a dictionary mapping the names of all actions for this
+        `ModelAdmin` to a tuple of (callable, name, description) for each
+        action.
+        """
+        result = super(ResourceModelAdmin, self).get_actions(request)
+        if not request.user.is_superuser:
+            # only users with delete permissions can see the delete action:
+            if not self.has_delete_permission(request):
+                del result['delete_selected']
+            # only users who are the manager of some group can see the
+            # ingest/publish/unpublish actions:
+            if ManagerGroup.objects.filter(name__in=
+                        request.user.groups.values_list('name', flat=True)) \
+                    .count() == 0:
+                for action in (publish_resources, unpublish_resources,
+                               ingest_resources):
+                    del result[action.__name__]
+        return result
 
     def create_hidden_structures(self, request):
         '''
@@ -667,14 +699,14 @@ class ResourceModelAdmin(SchemaModelAdmin):
             return request.POST['resourceComponentId']
         return None
 
-    def add_to_my_resources(self, request):
+    def add_user_to_resource_owners(self, request):
         '''
-        Add the current user to the list of owners for the current resource,
-        thereby adding the resource to the 'my resources' list for the user.
+        Add the current user to the list of owners for the current resource and
+        the user's `EditorGroup`s to the resource' editor_groups list.
         
-        Due to the validation logic of django admin, we add the user to the
-        form's clean_data object rather than the resource object's m2m field;
-        the actual field will be filled in save_m2m().
+        Due to the validation logic of django admin, we add the user/groups to
+        the form's clean_data object rather than the resource object's m2m
+        fields; the actual fields will be filled in save_m2m().
         '''
         # Preconditions:
         if not request.user or not request.POST:
@@ -684,10 +716,15 @@ class ResourceModelAdmin(SchemaModelAdmin):
         # Target state already met:
         if user_id in owners:
             return
-        # Need to add user to owners
+        # Need to add user to owners and groups to editor_groups
         owners.append(user_id)
+        editor_groups = request.POST.getlist('editor_groups')
+        editor_groups.extend(EditorGroup.objects \
+            .filter(name__in=request.user.groups.values_list('name', flat=True))
+            .values_list('pk', flat=True))
         _post = request.POST.copy()
         _post.setlist('owners', owners)
+        _post.setlist('editor_groups', editor_groups)
         request.POST = _post
 
     @method_decorator(permission_required('repository.add_resourceinfotype_model'))
@@ -708,7 +745,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
             _structures = self.get_hidden_structures(request)
             _extra_context.update(_structures)
         # We add the current user to the resource owners:
-        self.add_to_my_resources(request)
+        self.add_user_to_resource_owners(request)
         # And in any case, we serve the usual change form if we have a post request
         return super(ResourceModelAdmin, self).add_view(request, form_url, _extra_context)
         
@@ -724,8 +761,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
         _extra_context.update({'DJANGO_BASE':settings.DJANGO_BASE})
         _structures = self.get_hidden_structures(request, object_id)
         _extra_context.update(_structures)
-        # We add the current user to the resource owners:
-        self.add_to_my_resources(request)
         return super(ResourceModelAdmin, self).change_view(request, object_id, _extra_context)
 
 class LicenceForm(forms.ModelForm):
