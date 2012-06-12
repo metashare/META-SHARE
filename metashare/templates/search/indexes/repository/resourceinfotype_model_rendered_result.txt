@@ -21,7 +21,7 @@
    &nbsp;{% resource_media_types object.resourceComponentType.as_subclass %} 
 
 
-<ul{% if not object.storage_object.published %}style="font-style:italic;"{% endif %}><li>
+<ul{% if not object.storage_object.published %}style="font-style:italic;"{% endif %}>
   {% resource_languages object.resourceComponentType.as_subclass %}  
 </ul>  
 </div>
