@@ -3,16 +3,20 @@ Project: META-SHARE prototype implementation
  Author: Christian Federmann <cfedermann@dfki.de>
 """
 import logging
-from uuid import uuid1
+
 from traceback import extract_stack
-from django.contrib.auth.models import User
+from uuid import uuid1
+
+from django.contrib.auth.models import User, Group
 from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.core import serializers
-from django.db.models.signals import post_save
 from django.db import models
+from django.db.models.signals import post_save
 from django.dispatch import receiver
-from metashare.storage.models import StorageServer
+
 from metashare.settings import LOG_LEVEL, LOG_HANDLER
+from metashare.storage.models import StorageServer
+
 
 # Setup logging support.
 logging.basicConfig(level=LOG_LEVEL)
@@ -71,6 +75,14 @@ class UserProfile(models.Model):
     """
     Contains additional user data related to a Django User instance.
     """
+    class Meta:
+        # global permissions for which there does not seem to be any better
+        # place around ...
+        permissions = (
+            ("ms_associate_member", "Is a META-SHARE associate member."),
+            ("ms_full_member", "Is a META-SHARE full member."),
+        )
+
     user = models.OneToOneField(User)
     modified = models.DateTimeField(auto_now=True)
     uuid = models.CharField(max_length=32, verbose_name="UUID",
@@ -105,6 +117,34 @@ class UserProfile(models.Model):
 # cfedermann: of course, we will now also have to call synchronise methods for
 #             delete() calls.  For this, we have to create receivers listening
 #             to the post_delete signal.  Again, this has to be tested!
+
+
+class EditorGroup(Group):
+    """
+    A specialized `Group` subtype which is used to group resources that can only
+    be edited by users who are member of this group.
+    
+    The corresponding `ModelAdmin` class suggests basic resource edit
+    permissions for this group. 
+    """
+    # Currently the group is just used as a marker, i.e., in order to
+    # differentiate its instances from other Django `Group`s. That's why it
+    # doesn't have any custom fields.
+    pass
+
+
+class ManagerGroup(Group):
+    """
+    A specialized `Group` which gives its members permissions to manage language
+    resources belonging to a certain (managed) group.
+    
+    Group members may choose the members of the managed group and they may
+    ingest/publish resources belonging to the managed group. Delete permission
+    for a resource is suggested by the corresponding `ModelAdmin` class.
+    """
+    # the `EditorGroup` which is managed by members of this `ManagerGroup`
+    managed_group = models.OneToOneField(EditorGroup)
+
 
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):

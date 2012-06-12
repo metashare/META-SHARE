@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.db import models
 
+from metashare.accounts.models import EditorGroup
 # pylint: disable-msg=W0611
 from metashare.repository.supermodel import SchemaModel, SubclassableModel, \
   _make_choices_from_list, InvisibleStringModel, \
@@ -141,8 +142,9 @@ class resourceInfoType_model(SchemaModel):
         formatstring = u'{}'
         return self.unicode_(formatstring, formatargs)
 
+    editor_groups = models.ManyToManyField(EditorGroup, blank=True)
 
-    owners = models.ManyToManyField(User, blank=True, null=True)
+    owners = models.ManyToManyField(User, blank=True)
 
     storage_object = models.ForeignKey(StorageObject, blank=True, null=True,
       unique=True)
@@ -174,7 +176,10 @@ class resourceInfoType_model(SchemaModel):
         super(resourceInfoType_model, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return '/{0}repository/browse/{1}/'.format(DJANGO_BASE, self.id)
+        from django.template.defaultfilters import slugify
+        resourceName = slugify(u'{0}'.format(self))
+        
+        return '/{0}repository/browse/{1}/{2}/'.format(DJANGO_BASE, resourceName, self.storage_object.identifier)
 
     def publication_status(self):
         """
