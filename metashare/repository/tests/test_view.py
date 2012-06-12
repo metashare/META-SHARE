@@ -279,24 +279,6 @@ class DownloadViewTest(TestCase):
         self.assertContains(response, "repository/download/{0}".format(
                         self.downloadable_resource_1.storage_object.identifier))
 
-    def test_can_download_master_copy(self):        
-        client = Client()
-        client.login(username='staffuser', password='secret')
-        self.downloadable_resource_1.storage_object.master_copy = True
-        self.downloadable_resource_1.storage_object.save()
-        response = client.get('/{0}repository/download/{1}/'
-                              .format(DJANGO_BASE, self.downloadable_resource_1.storage_object.identifier))
-        self.assertContains(response, "I agree to these licence terms")        
-        
-    def test_cannot_download_not_master_copy(self):
-        client = Client()
-        client.login(username='staffuser', password='secret')
-        self.downloadable_resource_1.storage_object.master_copy = False
-        self.downloadable_resource_1.storage_object.save()
-        response = client.get('/{0}repository/download/{1}/'
-                              .format(DJANGO_BASE, self.downloadable_resource_1.storage_object.identifier))
-        self.assertContains(response, "You will now be redirected")
-
     def test_resource_download_as_unauthorized_user(self):
         """
         Verifies that a non-authorized user cannot download certain resources.
@@ -389,3 +371,21 @@ class DownloadViewTest(TestCase):
                             msg_prefix="a download should have been started")
         self.assertTemplateNotUsed(response, 'repository/lr_not_downloadable.html',
                             msg_prefix="a download should have been started")
+
+    def test_can_download_master_copy(self):        
+        client = Client()
+        client.login(username='staffuser', password='secret')
+        self.downloadable_resource_1.storage_object.master_copy = True
+        self.downloadable_resource_1.storage_object.save()
+        response = client.get('/{0}repository/download/{1}/'
+                              .format(DJANGO_BASE, self.downloadable_resource_1.storage_object.identifier))
+        self.assertContains(response, "I agree to these licence terms")        
+        
+    def test_cannot_download_not_master_copy(self):
+        client = Client()
+        client.login(username='staffuser', password='secret')
+        self.downloadable_resource_1.storage_object.master_copy = False
+        self.downloadable_resource_1.storage_object.save()
+        response = client.get('/{0}repository/download/{1}/'
+                              .format(DJANGO_BASE, self.downloadable_resource_1.storage_object.identifier))
+        self.assertContains(response, "You will now be redirected")
