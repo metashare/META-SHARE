@@ -21,14 +21,12 @@ from metashare.repository.editor.related_mixin import RelatedAdminMixin
 from metashare.repository.editor.schemamodel_mixin import SchemaModelLookup
 from metashare.repository.editor.inlines import ReverseInlineModelAdmin
 from metashare.repository.editor.editorutils import is_inline, decode_inline
-from metashare.repository.models import resourceInfoType_model
 from metashare.storage.models import MASTER
 from metashare.repository.model_utils import get_root_resources
-from os.path import normpath
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_protect
 from django import template
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import render_to_response
 
 
 # Setup logging support.
