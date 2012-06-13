@@ -75,22 +75,4 @@ def get_full_metadata(opener, full_metadata_url):
             with inzip.open('metadata.xml') as resource_xml:
                 resource_xml_string = resource_xml.read()
             return storage_json, resource_xml_string
-
-if __name__ == "__main__":
-    base_url = "http://localhost:8000/metashare"
-    user = "syncuser"
-    password = "secret"
-    opener = login("{0}/login/".format(base_url), user, password)
-    
-    if len(sys.argv) < 2:
-        print "Usage: sync.py (inventory | metadata <uuid>)"
-        sys.exit(1)
-        
-    if sys.argv[1] == 'inventory':
-        inventory = get_inventory(opener, "{0}/sync/".format(base_url))
-        print inventory
-    elif sys.argv[1] == 'metadata':
-        uuid = sys.argv[2]
-        storage_json, resource_xml_string = get_full_metadata(opener, "{0}/sync/{1}/metadata/".format(base_url, uuid))
-        print storage_json
-        print resource_xml_string
+            
