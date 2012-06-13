@@ -4,8 +4,6 @@ Management utility to trigger synchronization.
 
 from settings import CORE_NODES
 from sync.sync_utils import login, get_inventory, get_full_metadata
-from xml_utils import xml_compare
-from StringIO import StringIO
 from django.core.management.base import BaseCommand
 from metashare.storage.models import StorageObject, MASTER, update_resource
 
@@ -62,11 +60,6 @@ class Command(BaseCommand):
                     for local_item in local_inventory:
                         if (item_id == local_item['id']) and (item['digest'] <> local_item['digest']):
                             resources_to_update.append(item)
-                        
-                
-            print "\nNEW RESOURCES: \n" + str(new_resources)
-            print "\nRESOURCES TO UPDATE: \n" + str(resources_to_update)
-
 
             for resource in new_resources:
                 # Get the json storage object and the actual metadata xml
