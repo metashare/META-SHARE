@@ -4,7 +4,6 @@ A command-line enabled tool implementing the client end of the META-SHARE
 client-server protocol for synchronizing metadata.  
 '''
 
-import sys
 import urllib
 import urllib2
 import contextlib
