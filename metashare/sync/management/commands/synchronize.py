@@ -5,10 +5,9 @@ Management utility to trigger synchronization.
 from settings import CORE_NODES
 from sync.sync_utils import login, get_inventory, get_full_metadata
 from xml_utils import xml_compare
-from zipfile import ZipFile
 from StringIO import StringIO
 from django.core.management.base import BaseCommand
-from metashare.storage.models import StorageObject, MASTER, INTERNAL
+from metashare.storage.models import StorageObject, MASTER
 
 class Command(BaseCommand):
     # Get the list of the servers to be querried
