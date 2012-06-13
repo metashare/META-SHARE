@@ -30,6 +30,14 @@ def mouse_over(driver, web_ele):
     driver.execute_script(code, web_ele)
 
 
+def click_menu_item(driver, web_ele):
+    """
+    Simulates a click on the given web element which must have an attribute 
+    'href'. The click is simulated by just following the link.
+    """
+    driver.get(web_ele.get_attribute("href")) 
+
+
 def setup_screenshots_folder(test_class, test_method):
     """
     prepares a folder for screenshots for the given test

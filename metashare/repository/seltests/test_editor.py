@@ -4,7 +4,7 @@ from metashare import settings, test_utils
 from metashare.accounts.models import EditorGroup, ManagerGroup
 from metashare.repository.models import resourceInfoType_model
 from metashare.repository.seltests.test_utils import login_user, mouse_over, \
-    setup_screenshots_folder
+    setup_screenshots_folder, click_menu_item
 from metashare.settings import DJANGO_BASE, ROOT_PATH
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
@@ -76,7 +76,9 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_css_selector("div.button.middle_button").click()
         # go to Update->Resource
         mouse_over(driver, driver.find_element_by_link_text("Update"))
-        driver.find_element_by_link_text("Resource").click()        # make sure we are on the right site
+        #driver.find_element_by_link_text("Resource").click()        
+        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
+        # make sure we are on the right site
         self.assertEqual("Select Resource to change | META-SHARE backend", driver.title)
         # check if LR entry is available and that its status is published
         try: 
@@ -126,7 +128,8 @@ class EditorTest(SeleniumTestCase):
         # Share/Create Resource
         mouse_over(driver, driver.find_element_by_link_text("Share/Create"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        driver.find_element_by_link_text("Resource").click()
+        #driver.find_element_by_link_text("Resource").click()
+        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
         # create text corpus
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
@@ -208,7 +211,8 @@ class EditorTest(SeleniumTestCase):
         # Share/Create Resource
         mouse_over(driver, driver.find_element_by_link_text("Share/Create"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        driver.find_element_by_link_text("Resource").click()
+        #driver.find_element_by_link_text("Resource").click()
+        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
         # create audio corpus
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
@@ -291,7 +295,8 @@ class EditorTest(SeleniumTestCase):
         # Share/Create Resource
         mouse_over(driver, driver.find_element_by_link_text("Share/Create"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        driver.find_element_by_link_text("Resource").click()
+        #driver.find_element_by_link_text("Resource").click()
+        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
         # create language description
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text(
@@ -382,7 +387,8 @@ class EditorTest(SeleniumTestCase):
         # Share/Create Resource
         mouse_over(driver, driver.find_element_by_link_text("Share/Create"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        driver.find_element_by_link_text("Resource").click()
+        #driver.find_element_by_link_text("Resource").click()
+        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
         # create lexical resource
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text(
@@ -473,7 +479,8 @@ class EditorTest(SeleniumTestCase):
         # Share/Create Resource
         mouse_over(driver, driver.find_element_by_link_text("Share/Create"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        driver.find_element_by_link_text("Resource").click()
+        #driver.find_element_by_link_text("Resource").click()
+        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
         # create tool
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text(
@@ -555,7 +562,8 @@ class EditorTest(SeleniumTestCase):
         # Share/Create Resource
         mouse_over(driver, driver.find_element_by_link_text("Share/Create"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        driver.find_element_by_link_text("Resource").click()
+        #driver.find_element_by_link_text("Resource").click()
+        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
         # create text corpus
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
@@ -636,7 +644,8 @@ class EditorTest(SeleniumTestCase):
         # Share/Create Resource
         mouse_over(driver, driver.find_element_by_link_text("Share/Create"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        driver.find_element_by_link_text("Resource").click()
+        #driver.find_element_by_link_text("Resource").click()
+        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
         # create text corpus
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
