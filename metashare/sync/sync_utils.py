@@ -11,6 +11,7 @@ import contextlib
 import json
 from zipfile import ZipFile
 from StringIO import StringIO
+from metashare.storage.models import compute_checksum
 
 # Idea taken from 
 # http://stackoverflow.com/questions/5082128/how-do-i-authenticate-a-urllib2-script-in-order-to-access-https-web-services-fro
@@ -62,17 +63,26 @@ def get_inventory(opener, inventory_url):
             # TODO: add error handling and verification of json structure
             return json_inventory
 
-def get_full_metadata(opener, full_metadata_url):
+
+def get_full_metadata(opener, full_metadata_url, expected_digest):
     '''
     Obtain the full metadata record for one resource.
-    Returns a pair of storage_json, resource_xml_string.
+    Returns a pair of storage_json_string, resource_xml_string.
+    
+    Raises CorruptDataException if the zip data received from full_metadata_url
+    does not have an md5 digest identical to expected_digest.
     '''
     with contextlib.closing(opener.open(full_metadata_url)) as response:
         data = response.read()
+        if not expected_digest == compute_checksum(StringIO(data)):
+            raise CorruptDataException("Checksum error for resource '{0}'.".format(full_metadata_url))
         with ZipFile(StringIO(data), 'r') as inzip:
             with inzip.open('storage-global.json') as storage_file:
                 storage_json = storage_file.read()
             with inzip.open('metadata.xml') as resource_xml:
                 resource_xml_string = resource_xml.read()
             return storage_json, resource_xml_string
-            
+
+ 
+class CorruptDataException(Exception):
+    pass

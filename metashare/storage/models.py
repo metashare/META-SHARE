@@ -330,17 +330,9 @@ class StorageObject(models.Model):
         if not self.master_copy or not self.get_download():
             return
         
-        _checksum = md5()
-        
-        # Compute the MD5 hash from chunks of the downloadable data.
-        with open(self.get_download(), 'rb') as _downloadable_data:
-            _chunk = _downloadable_data.read(MAXIMUM_MD5_BLOCK_SIZE)
-            while _chunk:
-                _checksum.update(_chunk)
-                _chunk = _downloadable_data.read(MAXIMUM_MD5_BLOCK_SIZE)
-        
-        self.checksum = _checksum.hexdigest()
-    
+        self.checksum = compute_checksum(self.get_download())
+
+
     def has_local_download_copy(self):
         """
         Checks if this instance has a local copy of the downloadable data.
@@ -358,15 +350,8 @@ class StorageObject(models.Model):
             return True
         
         # Otherwise, we compute the MD5 hash from chunks of the local data.
-        _checksum = md5()
-        with open(_binary_data, 'rb') as _downloadable_data:
-            _chunk = _downloadable_data.read(MAXIMUM_MD5_BLOCK_SIZE)
-            while _chunk:
-                _checksum.update(_chunk)
-                _chunk = _downloadable_data.read(MAXIMUM_MD5_BLOCK_SIZE)
-        
         # And check if the local checksum matches the master copy's checksum.
-        return self.checksum == _checksum.hexdigest()
+        return self.checksum == compute_checksum(_binary_data)
     
     def has_download(self):
         """
@@ -475,13 +460,7 @@ class StorageObject(models.Model):
             finally:
                 _zf.close()
             # update zip digest checksum
-            _checksum = md5()
-            with open(_zf_name, 'rb') as _zf_reader:
-                _chunk = _zf_reader.read(MAXIMUM_MD5_BLOCK_SIZE)
-                while _chunk:
-                    _checksum.update(_chunk)
-                    _chunk = _zf_reader.read(MAXIMUM_MD5_BLOCK_SIZE)
-            self.digest_checksum = _checksum.hexdigest()
+            self.digest_checksum = compute_checksum(_zf_name)
             # update last modified timestamp
             self.digest_modified = datetime.now()
             
@@ -671,6 +650,26 @@ def update_digests():
             _so.update_storage()
         else:
             LOGGER.debug('{} is up to date'.format(_so.identifier))
+
+def compute_checksum(infile):
+    """
+    Compute the MD5 checksum of infile, and return it as a hexadecimal string.
+    infile: either a file-like object instance with a read() method, or
+            a file path which can be opened using open(infile, 'rb').
+    """
+    checksum = md5()
+    try:
+        if hasattr(infile, 'read'):
+            instream = infile
+        else:
+            instream = open(infile, 'rb')
+        chunk = instream.read(MAXIMUM_MD5_BLOCK_SIZE)
+        while chunk:
+            checksum.update(chunk)
+            chunk = instream.read(MAXIMUM_MD5_BLOCK_SIZE)
+    finally:
+        instream.close()
+    return checksum.hexdigest()
 
 
 class IllegalAccessException(Exception):
