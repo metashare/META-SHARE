@@ -230,7 +230,7 @@
 					<xs:documentation>The number of bits for each audio sample</xs:documentation>
 				</xs:annotation>
 				<xs:simpleType>
-					<xs:restriction base="xs:integer">
+					<xs:restriction base="xs:string">
 						<xs:enumeration value="8"/>
 						<xs:enumeration value="16"/>
 						<xs:enumeration value="32"/>
@@ -300,7 +300,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:simpleType>
-					<xs:restriction base="xs:integer">
+					<xs:restriction base="xs:string">
 						<xs:enumeration value="1"/>
 						<xs:enumeration value="2"/>
 						<xs:enumeration value="4"/>
