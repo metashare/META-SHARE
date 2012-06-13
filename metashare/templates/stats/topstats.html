@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-<noscript><b>JavaScript must be enabled in order for you to use Google Maps.</b>
-    However, it seems JavaScript is either disabled or not supported by your browser.
-    To view Google Maps enable JavaScript by changing your browser options, and then try again.
+<noscript><b>It seems JavaScript is either disabled or not supported by your browser.</b>
+    JavaScript should be enabled in order to support all functionalities.
+    Enable JavaScript by changing your browser options, and then try again.
 </noscript>
 <table><tr><td bgcolor=#dddddd nowrap><font size=+1>Top 10</font>&nbsp;&nbsp;</td>
 <td nowrap>&nbsp;&nbsp;<font size=+1><a href="{% url metashare.views.frontpage %}stats/usage/">Usage statistics</a></font>&nbsp;&nbsp; </td>
@@ -80,14 +80,14 @@
 </tr>
 
 {% for stat in topdata %}
-    <tr class="{% cycle odd,even %}">
+    <tr class="{% cycle odd,even %} content">
     {% if "quer" in view %}  
-       <td nowrap><a href="{% url metashare.views.frontpage %}repository/search/?{{ stat.4 }}"><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/zoom.png"> <font color=black>{{ stat.0 }}</font></a>
+       <td nowrap><a href="{% url metashare.views.frontpage %}repository/search/?{{ stat.4 }}"><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/zoom.png"> {{ stat.0 }}</a>
        {% ifnotequal stat.1 "" %}  
        {{ stat.1 }}
        {% endifnotequal %}
        </td>
-       <td width=100%><i><font color=black>{{ stat.3 }}</font></i></td>
+       <td width=100%>{{ stat.3 }}</td>
        <td nowrap>{{ stat.2 }}</td>
     {% else %} 
        <th style="text-align:right;" nowrap>{{ stat.0 }}</th>
@@ -96,7 +96,7 @@
        {% ifequal view "latestupdated" %}   
             {{ stat.2 }}
        {% else %}
-            <b><font color=black>{{ stat.2 }}</font></b>
+            <b>{{ stat.2 }}</b>
        {% endifequal %}
        </td>
     {% endif %}
@@ -126,32 +126,32 @@
     google.setOnLoadCallback(drawVisualization);
   </script>
 
-
-<body> 
-  {% if geovisits|length > 0 %}
-    <div id="visits" style="background: #E6E6FA; border: 1px solid #000;">   
+{% if geovisits|length > 0 %}
+    <div id="visits">   
      <table width=50%><td width=40%><table>
         <tr class="result_table_head">{{ visitstitle }}</td><tr>
      
      {% for geoinfo in geovisits %}
-            <tr>
-            <td nowrap><font color=black>{{ geoinfo.2 }}</font></td>
-            <td><font color=black>{{ geoinfo.1 }}</font></td>
-            </tr>
-        {% endfor %}
+        <tr class=content>
+            <td nowrap>{{ geoinfo.2 }}</td>
+            <td>{{ geoinfo.1 }}</td>
+        </tr>
+     {% endfor %}
         </table>
         </td>
-        <td><div id="googlemap" style="width: 100%; height: 300px;"></div></td>
+        <td><div id="googlemap" style="width: 100%; height: 300px;"></div>
+         <div id="footer" class="prepend-2 append-2 last" style="text-align:right">* This product includes GeoLite data created by MaxMind, available from http://maxmind.com/.</div></td>
         </table>
     </div>
 {% endif %}
+
 {% endif %}
 </div>
 
 </td></tr></table>
-
+  
 {% endblock %}
-</body> 
+
   
   
 

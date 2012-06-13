@@ -2,7 +2,7 @@ import logging
 import json
 import threading
 from metashare.stats.models import LRStats, QueryStats, UsageStats
-from metashare.stats.geoip import getcountry, getcountry_name, getcountry_coords
+from metashare.stats.geoip import getcountry_code, getcountry_name
 from django.db.models import Count, Sum
 from django.contrib.auth.models import User
 from datetime import datetime
@@ -49,8 +49,7 @@ def saveLRStats(resource, action, request=None):
         record.lrid = resource.storage_object.identifier
         record.action = action
         record.sessid = sessid
-        record.ipaddress = ipaddress
-        record.geoinfo = getcountry(ipaddress)
+        record.geoinfo = getcountry_code(ipaddress)
         record.save(force_insert=True)
         LOGGER.debug('SAVESTATS: Saved LR {0}, {1} action={2}.'.format(resource.storage_object.identifier, sessid, action))
     if action == UPDATE_STAT or action == PUBLISH_STAT:
@@ -63,8 +62,7 @@ def saveLRStats(resource, action, request=None):
 def saveQueryStats(query, facets, found, exectime=0, request=None): 
     stat = QueryStats()
     stat.userid = _get_userid(request)
-    stat.ipaddress = _get_ipaddress(request)
-    stat.geoinfo = getcountry(stat.ipaddress)    
+    stat.geoinfo = getcountry_code(_get_ipaddress(request))    
     stat.query = query
     stat.facets = facets
     stat.found = found

@@ -1,31 +1,7 @@
-# List of country codes (indexed by GeoIP country ID number)
-countries = (
-	'',	  'AP', 'EU', 'AD', 'AE', 'AF', 'AG', 'AI', 'AL', 'AM', 'AN', 'AO', 'AQ',
-	'AR', 'AS', 'AT', 'AU', 'AW', 'AZ', 'BA', 'BB', 'BD', 'BE', 'BF', 'BG', 'BH',
-	'BI', 'BJ', 'BM', 'BN', 'BO', 'BR', 'BS', 'BT', 'BV', 'BW', 'BY', 'BZ', 'CA',
-	'CC', 'CD', 'CF', 'CG', 'CH', 'CI', 'CK', 'CL', 'CM', 'CN', 'CO', 'CR', 'CU',
-	'CV', 'CX', 'CY', 'CZ', 'DE', 'DJ', 'DK', 'DM', 'DO', 'DZ', 'EC', 'EE', 'EG',
-	'EH', 'ER', 'ES', 'ET', 'FI', 'FJ', 'FK', 'FM', 'FO', 'FR', 'FX', 'GA', 'GB',
-	'GD', 'GE', 'GF', 'GH', 'GI', 'GL', 'GM', 'GN', 'GP', 'GQ', 'GR', 'GS', 'GT',
-	'GU', 'GW', 'GY', 'HK', 'HM', 'HN', 'HR', 'HT', 'HU', 'ID', 'IE', 'IL', 'IN',
-	'IO', 'IQ', 'IR', 'IS', 'IT', 'JM', 'JO', 'JP', 'KE', 'KG', 'KH', 'KI', 'KM',
-	'KN', 'KP', 'KR', 'KW', 'KY', 'KZ', 'LA', 'LB', 'LC', 'LI', 'LK', 'LR', 'LS',
-	'LT', 'LU', 'LV', 'LY', 'MA', 'MC', 'MD', 'MG', 'MH', 'MK', 'ML', 'MM', 'MN',
-	'MO', 'MP', 'MQ', 'MR', 'MS', 'MT', 'MU', 'MV', 'MW', 'MX', 'MY', 'MZ', 'NA',
-	'NC', 'NE', 'NF', 'NG', 'NI', 'NL', 'NO', 'NP', 'NR', 'NU', 'NZ', 'OM', 'PA',
-	'PE', 'PF', 'PG', 'PH', 'PK', 'PL', 'PM', 'PN', 'PR', 'PS', 'PT', 'PW', 'PY',
-	'QA', 'RE', 'RO', 'RU', 'RW', 'SA', 'SB', 'SC', 'SD', 'SE', 'SG', 'SH', 'SI',
-	'SJ', 'SK', 'SL', 'SM', 'SN', 'SO', 'SR', 'ST', 'SV', 'SY', 'SZ', 'TC', 'TD',
-	'TF', 'TG', 'TH', 'TJ', 'TK', 'TM', 'TN', 'TO', 'TL', 'TR', 'TT', 'TV', 'TW',
-	'TZ', 'UA', 'UG', 'UM', 'US', 'UY', 'UZ', 'VA', 'VC', 'VE', 'VG', 'VI', 'VN',
-	'VU', 'WF', 'WS', 'YE', 'YT', 'RS', 'ZA', 'ZM', 'ME', 'ZW', 'A1', 'A2', 'O1',
-	'AX', 'GG', 'IM', 'JE', 'BL', 'MF')
+import pygeoip
 
-# List of country info
-country_info = {"A1": ["Anonymous Proxy", ""],
-"A2": ["Satellite Provider", ""],
-"O1": ["Other Country", ""],
-"AD": ["Andorra", "42.5075314,1.5218156"],
+# Info about of the known countries
+country_info = {"AD": ["Andorra", "42.5075314,1.5218156"],
 "AE": ["United Arab Emirates", "23.424076,53.847818"],
 "AF": ["Afghanistan", "33.0,66.0"],
 "AG": ["Antigua and Barbuda", "17.060816,-61.796428"],
@@ -275,69 +251,19 @@ country_info = {"A1": ["Anonymous Proxy", ""],
 "ZA": ["South Africa", "-30.559482,22.937506"],
 "ZM": ["Zambia", "-15.0,30.0"],
 "ZW": ["Zimbabwe", "-19.0,29.0"]}
+        
+geoip = pygeoip.GeoIP('stats/resources/GeoIP.dat')
+def getcountry_name(countrycode):
+    if countrycode in country_info:
+        return country_info[countrycode][0]
+    return "Unknown country"
 
-
-def iptonum(ipaddress):
-    """Convert IP address string to 32-bit integer, or return None if IP is bad."""
-    segments = ipaddress.split('.')
-    if len(segments) != 4:
-        return None
-    num = 0
-    for segment in segments:
-        try:
-            segment = int(segment)
-        except ValueError:
-            return None
-        if segment < 0 or segment > 255:
-            return None
-        num = num << 8 | segment
-    return num
-
-class DatabaseError(Exception):
-    pass
-
-class GeoIP(object):
-    """Wraps GeoIP country database lookup into a class."""
-    _record_length = 3
-    _country_start = 16776960
-    
-    def __init__(self, dbname='stats/resources/GeoIP.dat'):
-        """Init GeoIP instance with given GeoIP country database file."""
-        self._dbfile = open(dbname, 'rb')
-
-    def country(self, ipaddress):
-        ipnum = iptonum(ipaddress)
-        if ipnum is None or ipaddress == "":
-            return ''
-        return countries[self._country_id(ipnum)]
-
-    def _country_id(self, ipnum):
-        """Look up and return country ID of given 32-bit IP address."""
-        # Search algorithm from: http://code.google.com/p/pygeoip/
-        offset = 0
-        for depth in range(31, -1, -1):
-            self._dbfile.seek(offset * 2 * self._record_length)
-            data = self._dbfile.read(2 * self._record_length)
-            coords = [0, 0]
-            for i in range(2):
-                for j in range(self._record_length):
-                    coords[i] += ord(data[self._record_length * i + j]) << (j * 8)
-            i = 1 if ipnum & (1 << depth) else 0
-            if coords[i] >= self._country_start:
-                return coords[i] - self._country_start
-            offset = coords[i]
-        raise DatabaseError('GeoIP database corrupt: offset=%s' % offset)
-    
-def getcountry_name(countryid):
-    if countryid in country_info:
-        return country_info[countryid][0]
-    return "Other Country"
-
-def getcountry_coords(countryid):
-    if countryid in country_info:
-        return country_info[countryid][1]
+def getcountry_coords(countrycode):
+    if countrycode in country_info:
+        return country_info[countrycode][1]
     return ""
         
-def getcountry(ipaddress):
-    return GeoIP().country(ipaddress)
-    
+def getcountry_code(ipaddress):
+    if (ipaddress != ""):
+        return geoip.country_code_by_addr(ipaddress)
+    return ""

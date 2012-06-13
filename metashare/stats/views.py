@@ -4,8 +4,6 @@ Author: Christian Girardi <cgirardi@fbk.eu>
 """
 
 import sys
-import base64
-import collections
 import logging 
 from metashare.settings import DJANGO_URL, STATS_SERVER_URL
 from metashare.stats.models import LRStats, QueryStats, UsageStats
