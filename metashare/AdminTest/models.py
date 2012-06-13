@@ -9,8 +9,8 @@ from django.db.models.fields import CharField, EmailField
 from django.db.models.fields.related import ForeignKey
 from django.contrib import admin
 
-from AdminTest.admin import TestAdmin, TestInline
-from AdminTest.admin2 import TestAdmin2
+from metashare.AdminTest.admin import TestAdmin, TestInline
+from metashare.AdminTest.admin2 import TestAdmin2
 
 class OrganizationInfo(Model):
     name = CharField(blank=False, max_length=100)

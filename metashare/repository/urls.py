@@ -66,9 +66,11 @@ sqs = SearchQuerySet() \
   .facet("tnGramOrderFilter")
 
 urlpatterns = patterns('metashare.repository.views',
-  (r'^browse/(?P<object_id>[123456789]\d*)/$',
+  (r'^browse/(?P<resource_name>[\w\-]*)/(?P<object_id>\w+)/$',
     'view'),
-  (r'^download/(?P<object_id>[123456789]\d*)/$',
+  (r'^browse/(?P<object_id>\w+)/$',
+    'view'),
+  (r'^download/(?P<object_id>\w+)/$',
     'download'),
   url(r'^search/$',
     search_view_factory(view_class=MetashareFacetedSearchView,

@@ -3,28 +3,31 @@ Custom base classes for admin interface, for both the top-level admin page
 and for inline forms.
 '''
 import logging
+
+from django import template
 from django.contrib import admin
+from django.contrib.admin import helpers
 from django.contrib.admin.util import unquote, get_deleted_objects
 from django.core.exceptions import PermissionDenied
+from django.db import transaction, models, router
+from django.forms.formsets import all_valid
 from django.http import Http404, HttpResponseRedirect, HttpResponse
+from django.shortcuts import render_to_response
+from django.utils.decorators import method_decorator
 from django.utils.encoding import force_unicode
 from django.utils.html import escape
-from django.utils.translation import ugettext as _
-from django.contrib.admin import helpers
-from django.forms.formsets import all_valid
 from django.utils.safestring import mark_safe
-from django.db import transaction, models, router
-from metashare.repository.supermodel import REQUIRED, RECOMMENDED, \
-  OPTIONAL
+from django.utils.translation import ugettext as _
+from django.views.decorators.csrf import csrf_protect
+
 from metashare import settings
+from metashare.repository.editor.editorutils import is_inline, decode_inline
+from metashare.repository.editor.inlines import ReverseInlineModelAdmin
 from metashare.repository.editor.related_mixin import RelatedAdminMixin
 from metashare.repository.editor.schemamodel_mixin import SchemaModelLookup
-from metashare.repository.editor.inlines import ReverseInlineModelAdmin
-from metashare.repository.editor.editorutils import is_inline, decode_inline
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_protect
-from django import template
-from django.shortcuts import render_to_response
+from metashare.storage.models import MASTER
+from metashare.repository.model_utils import get_root_resources
+from metashare.repository.supermodel import REQUIRED, RECOMMENDED, OPTIONAL
 
 # Setup logging support.
 logging.basicConfig(level=settings.LOG_LEVEL)
@@ -114,7 +117,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         - hiding certain fields (they are present but invisible);
         - custom widgets for subclassable items such as actorInfo;
         - custom minimalistic "related" widget for non-inlined one2one fields;
-        """
+        """        
         self.hide_hidden_fields(db_field, kwargs)
         # ForeignKey or ManyToManyFields
         if self.is_x_to_many_relation(db_field):
@@ -123,6 +126,34 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         formfield = super(SchemaModelAdmin, self).formfield_for_dbfield(db_field, **kwargs)
         self.use_related_widget_where_appropriate(db_field, kwargs, formfield)
         return formfield
+
+
+    def has_change_permission(self, request, obj=None):
+        result = super(SchemaModelAdmin, self) \
+            .has_change_permission(request, obj)
+        if result and obj:
+            if request.user.is_superuser:
+                return True
+            # find out to which resourceInfoType_model instance the obj belongs
+            root_resources = get_root_resources(obj)
+            if len(root_resources) == 0:
+                # some model instances are created before the (future) root
+                # resource is actually saved, e.g., toolServiceInfo; in this
+                # case the user is probably in the process of editing this model
+                # instance and therefore we have to allow her to change it
+                return True
+            # in addition to the default change permission determination, we
+            # only allow a user to edit a model if she is either owner or an
+            # authorized editor of the resource to which the model belongs
+            usr_grp_names = request.user.groups.values_list('name', flat=True)
+            for res in root_resources:
+                if request.user in res.owners.all() \
+                        or any(res_group.name in usr_grp_names
+                               for res_group in res.editor_groups.all()):
+                    return True
+            return False
+        return result
+
 
     def response_change(self, request, obj):
         '''
@@ -403,6 +434,25 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         media = media + adminForm.media
         #### end modification ####
 
+        #### begin modification ####
+        url = ''        
+        #for reusable entities
+        if(hasattr(obj, 'copy_status') and obj.copy_status != MASTER):
+            url = "{0}/editor/repository/{1}/{2}".format(obj.source_url.rstrip('/'), (obj.__class__.__name__).lower(), object_id)
+            return render_to_response('admin/repository/redirect.html',
+                   { 'object': obj, 'redirection_url': url },
+                   )            
+        #for resources and resources' parts
+        else:    
+            root_resources = get_root_resources(obj)
+            for res in root_resources:
+                if  not res.storage_object.master_copy:
+                    url = "{0}/editor/repository/{1}/{2}".format(res.storage_object.source_url.rstrip('/'), (obj.__class__.__name__).lower(), object_id)
+                    return render_to_response('admin/repository/redirect.html',
+                           { 'resource': res, 'redirection_url': url },
+                           )
+        #### end modification ####
+        
         context = {
             'title': _('Change %s') % force_unicode(opts.verbose_name),
             'adminform': adminForm,

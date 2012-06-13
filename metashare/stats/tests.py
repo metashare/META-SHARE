@@ -43,10 +43,9 @@ class StatsTest(django.test.TestCase):
         client = self.client_with_user_logged_in(StatsTest.editor_login)
         xmlfile = open(TESTFIXTURES_ZIP, 'rb')
         response = client.post(ADMINROOT+'upload_xml/', {'description': xmlfile, 'uploadTerms':'on' }, follow=True)
-        ##self.assertContains(response, 'Successfully uploaded 2 resource descriptions')
-        ##self.assertNotContains(response, 'Import failed')
-        # And verify that we have more than zero resources on the "my resources" page where we are being redirected:
-        self.assertContains(response, "My Resources")
+        # And verify that we have more than zero resources on the page where we
+        # are being redirected:
+        self.assertContains(response, "Editable Resources")
         self.assertNotContains(response, '0 Resources')
         
         statsdata = getLRLast(UPDATE_STAT, 2)
