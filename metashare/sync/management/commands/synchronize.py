@@ -2,7 +2,7 @@
 Management utility to trigger synchronization.
 """
 
-from local_settings import CORE_NODES, DJANGO_URL
+from settings import CORE_NODES
 from sync.sync_utils import login, get_inventory, get_full_metadata
 from xml_utils import xml_compare
 from zipfile import ZipFile
