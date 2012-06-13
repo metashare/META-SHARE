@@ -4,7 +4,6 @@ A command-line enabled tool implementing the client end of the META-SHARE
 client-server protocol for synchronizing metadata.  
 '''
 
-import sys
 import urllib
 import urllib2
 import contextlib
@@ -78,7 +77,8 @@ def get_full_metadata(opener, full_metadata_url, expected_digest):
             raise CorruptDataException("Checksum error for resource '{0}'.".format(full_metadata_url))
         with ZipFile(StringIO(data), 'r') as inzip:
             with inzip.open('storage-global.json') as storage_file:
-                storage_json = storage_file.read()
+                # should be a json object, not string
+                storage_json = json.loads(storage_file.read())
             with inzip.open('metadata.xml') as resource_xml:
                 resource_xml_string = resource_xml.read()
             return storage_json, resource_xml_string
