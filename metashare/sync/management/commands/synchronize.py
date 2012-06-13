@@ -3,7 +3,7 @@ Management utility to trigger synchronization.
 """
 
 from settings import CORE_NODES
-from sync.sync_utils import login, get_inventory, get_full_metadata
+from metashare.sync.sync_utils import login, get_inventory, get_full_metadata
 from django.core.management.base import BaseCommand
 from metashare.storage.models import StorageObject, MASTER, update_resource
 
@@ -63,11 +63,11 @@ class Command(BaseCommand):
 
             for resource in new_resources:
                 # Get the json storage object and the actual metadata xml
-                storage_json, resource_xml_string = get_full_metadata(opener, "{0}/sync/{1}/metadata/".format(url, resource['id']))
+                storage_json, resource_xml_string = get_full_metadata(opener, "{0}/sync/{1}/metadata/".format(url, resource['id']), resource['digest'])
                 update_resource(storage_json, resource_xml_string)
             
             for resource in resources_to_update:
                 # Get the json storage object and the actual metadata xml
-                storage_json, resource_xml_string = get_full_metadata(opener, "{0}/sync/{1}/metadata/".format(url, resource['id']))
+                storage_json, resource_xml_string = get_full_metadata(opener, "{0}/sync/{1}/metadata/".format(url, resource['id']), resource['digest'])
                 update_resource(storage_json, resource_xml_string)
             
