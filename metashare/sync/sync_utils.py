@@ -71,7 +71,8 @@ def get_full_metadata(opener, full_metadata_url):
         data = response.read()
         with ZipFile(StringIO(data), 'r') as inzip:
             with inzip.open('storage-global.json') as storage_file:
-                storage_json = storage_file.read()
+                # should be a json object, not string
+                storage_json = json.loads(storage_file.read())
             with inzip.open('metadata.xml') as resource_xml:
                 resource_xml_string = resource_xml.read()
             return storage_json, resource_xml_string
