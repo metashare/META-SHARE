@@ -11,6 +11,8 @@ import json
 from zipfile import ZipFile
 from StringIO import StringIO
 from metashare.storage.models import compute_checksum
+from urllib2 import HTTPError
+from traceback import format_exc
 
 # Idea taken from 
 # http://stackoverflow.com/questions/5082128/how-do-i-authenticate-a-urllib2-script-in-order-to-access-https-web-services-fro
@@ -55,12 +57,15 @@ def get_inventory(opener, inventory_url):
     Obtain the inventory from a logged-in opener and fill it into a JSON structure.
     Returns the JSON structure.
     '''
-    with contextlib.closing(opener.open(inventory_url)) as response:
-        data = response.read()
-        with ZipFile(StringIO(data), 'r') as inzip:
-            json_inventory = json.load(inzip.open('inventory.json'))
-            # TODO: add error handling and verification of json structure
-            return json_inventory
+    try:
+        with contextlib.closing(opener.open(inventory_url)) as response:
+            data = response.read()
+            with ZipFile(StringIO(data), 'r') as inzip:
+                json_inventory = json.load(inzip.open('inventory.json'))
+                # TODO: add error handling and verification of json structure
+                return json_inventory
+    except:
+        raise ConnectionException("Problem getting inventory from {0}: {1}".format(inventory_url, format_exc()))
 
 
 def get_full_metadata(opener, full_metadata_url, expected_digest):
@@ -83,6 +88,9 @@ def get_full_metadata(opener, full_metadata_url, expected_digest):
                 resource_xml_string = resource_xml.read()
             return storage_json, resource_xml_string
 
- 
+
+class ConnectionException(Exception):
+    pass
+
 class CorruptDataException(Exception):
     pass
