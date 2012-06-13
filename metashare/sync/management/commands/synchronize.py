@@ -72,4 +72,9 @@ class Command(BaseCommand):
                 # Get the json storage object and the actual metadata xml
                 storage_json, resource_xml_string = get_full_metadata(opener, "{0}/sync/{1}/metadata/".format(url, resource['id']))
                 update_resource(storage_json, resource_xml_string)
-       
+            
+            for resource in resources_to_update:
+                # Get the json storage object and the actual metadata xml
+                storage_json, resource_xml_string = get_full_metadata(opener, "{0}/sync/{1}/metadata/".format(url, resource['id']))
+                update_resource(storage_json, resource_xml_string)
+            
