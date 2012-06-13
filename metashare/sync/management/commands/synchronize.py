@@ -58,7 +58,7 @@ class Command(BaseCommand):
                     # Find the corresponding item in the local inventory
                     # and compare digests
                     for local_item in local_inventory:
-                        if (item_id == local_item['id']) and (item['digest'] <> local_item['digest']):
+                        if (item_id == local_item['id']) and not (item['digest'] == local_item['digest']):
                             resources_to_update.append(item)
 
             for resource in new_resources:
