@@ -35,7 +35,7 @@ class Command(BaseCommand):
             print "REMOTE INVENTORY: \n" + str(remote_inventory)
             
             # Get a list of uuid's and digests from the local inventory
-            non_master_storage_objects = StorageObject.objects.all() #.exclude(copy_status=MASTER)
+            non_master_storage_objects = StorageObject.objects.exclude(copy_status=MASTER)
             for item in non_master_storage_objects:
                 local_inventory.append({'id':str(item.identifier), 'digest':str(item.digest_checksum)})
             print "\nLOCAL INVENTORY: \n" + str(local_inventory)
@@ -54,7 +54,6 @@ class Command(BaseCommand):
             # inventories but the remote is different from the local
             for item in remote_inventory:
                 item_id = item['id']
-                #print "\nDIGEST HASHES\n" + item['digest'] + "  " + str(local_inventory.items())
                 if item_id not in local_inventory_indexed:
                     new_resources.append(item)
                 else:
@@ -72,6 +71,5 @@ class Command(BaseCommand):
             for resource in new_resources:
                 # Get the json storage object and the actual metadata xml
                 storage_json, resource_xml_string = get_full_metadata(opener, "{0}/sync/{1}/metadata/".format(url, resource['id']))
-                print resource_xml_string
                 update_resource(storage_json, resource_xml_string)
        
