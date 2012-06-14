@@ -10,7 +10,7 @@ ROOT_PATH = os.getcwd()
 #SVNVERSION = 'C:/Program Files/SlikSvn/bin/svnversion'
 
 # The URL for this META-SHARE node django application
-DJANGO_URL = 'http://localhost:{0}/metashare'.format(os.environ['DJANGO_PORT'])
+DJANGO_URL = 'http://localhost:{0}/metashare'.format(%%DJANGO_PORT%%)
 DJANGO_BASE = 'metashare/'
 
 # URL for the Metashare Knowledge Base
@@ -22,7 +22,8 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 DEBUG_JS = False
 
-STORAGE_PATH = ROOT_PATH + '/storageFolder'
+#STORAGE_PATH = ROOT_PATH + '/storageFolder'
+STORAGE_PATH = '%%STORAGE_PATH%%'
 
 # Configure administrators for this django project.  If DEBUG=False, errors
 # will be reported as emails to these persons...
@@ -34,7 +35,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql',
                                          # 'postgresql', 'sqlite3', 'oracle'.
-        'NAME': 'metashare{0}.db'.format(os.environ['DJANGO_CONF_NUM']),  # Or path to file if using sqlite3.
+        'NAME': '{0}'.format('%%DATABASE_FILE%%'),  # Or path to file if using sqlite3.
                                          # '{0}/development.db'.format(ROOT_PATH)
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
@@ -72,10 +73,18 @@ PRIVATE_KEY_PATH = '/path/to/private/key'
 STATS_SERVER_URL = "http://metastats.fbk.eu/"
 
 # the URL of the Solr server which is used as a search backend
-HAYSTACK_SOLR_URL = 'http://127.0.0.1:{0}/solr'.format(os.environ['SOLR_PORT'])
+HAYSTACK_SOLR_URL = 'http://127.0.0.1:{0}/solr'.format(%%SOLR_PORT%%)
 
 # the URL of the Solr server (or server core) which is used as a search backend
-SOLR_URL = 'http://127.0.0.1:{0}/solr/main'.format(os.environ['SOLR_PORT'])
+SOLR_URL = 'http://127.0.0.1:{0}/solr/main'.format(%%SOLR_PORT%%)
 # the URL of the Solr server (or server core) which is used as a search backend
 # when running tests
-TESTING_SOLR_URL = 'http://127.0.0.1:{0}/solr/testing'.format(os.environ['SOLR_PORT'])
+TESTING_SOLR_URL = 'http://127.0.0.1:{0}/solr/testing'.format(%%SOLR_PORT%%)
+
+# List of external nodes with which the local node will be synchronized.
+# Use this if you are a core node!
+%%CORE_NODES%%
+
+# User accounts with the permission to access synchronization information:
+%%SYNC_USERS%%
+

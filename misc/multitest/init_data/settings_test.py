@@ -48,7 +48,10 @@ KNOWLEDGE_BASE_URL = 'http://metashare.ilsp.gr/portal/knowledgebase/'
 
 # Import local settings, i.e., DEBUG, TEMPLATE_DEBUG, TIME_ZONE,
 # SECRET_KEY, DATABASE_* settings and ADMINS.
-from local_settings import *
+import sys
+cmd_folder = os.environ['NODE_DIR']
+sys.path.insert(0, cmd_folder)
+from dj_settings.local_settings import *
 
 # If STORAGE_PATH does not exist, try to create it and halt if not possible.
 from os.path import exists

@@ -62,6 +62,8 @@ class mconfig:
 		self.dict['SOLR_STOP_KEY'] = self.solr_stop_key
 		self.dict['SOLR_LOG'] = '{0}{1}.log'.format(self.solr_log_base, self.node_id)
 		self.dict['SOLR_ROOT'] = '{0}/instance{1}'.format(self.solr_root, self.node_id)
+		self.dict['SYNC_USERS'] = self.get_sync_users_data(escape=True)
+		self.dict['CORE_NODES'] = self.get_core_nodes_data(escape=True)
 
 	def get_other_inner_nodes(self):
 		if self.node_type == 'outer':
@@ -75,11 +77,46 @@ class mconfig:
 	def get_outer_nodes(self):
 		return self.outer_nodes
 
+	def get_core_nodes_data(self, escape=False):
+		counter = 1
+		end_str = ''
+		if escape:
+			end_str = '\\'
+		data_str = "CORE_NODES = {{{0}\n".format(end_str)
+		for n in self.get_other_inner_nodes():
+			data_str = data_str + "\t'node{0}' : {{{1}\n".format(counter, end_str)
+			data_str = data_str + "\t\t'NAME': '{0}',{1}\n".format(n.node_name, end_str)
+			data_str = data_str + "\t\t'DESCRIPTION': '{0} Metashare node',{1}\n".format(n.node_name, end_str)
+			data_str = data_str + "\t\t'URL': 'http://127.0.0.1:{0}',{1}\n".format(n.django_port, end_str)
+			data_str = data_str + "\t\t'USERNAME': 'sync-user-{0}',{1}\n".format(self.node_id, end_str)
+			data_str = data_str + "\t\t'PASSWORD': 'sync-user-pass-{0}',{1}\n".format(self.node_id, end_str)
+			data_str = data_str + "\t}},{0}\n".format(end_str)
+			counter = counter + 1
+		data_str = data_str + "}"
+		return data_str
+
+	def get_sync_users_data(self, escape=False):
+		counter = 1
+		end_str = ''
+		if escape:
+			end_str = '\\'
+		data_str = "SYNC_USERS = {{{0}\n".format(end_str)
+		if self.node_type == 'inner':
+			for n in self.get_other_inner_nodes():
+				data_str = data_str + "\t'sync-user-{0}' : 'sync-user-pass-{0}',{1}\n".format(n.node_id, end_str)
+				counter = counter + 1
+		else:
+			for n in self.get_proxy_nodes():
+				data_str = data_str + "\t'sync-user-{0}' : 'sync-user-pass-{0}',{1}\n".format(n.node_id, end_str)
+				counter = counter + 1
+		data_str = data_str + "}"
+		return data_str
+
 	def get(self, name):
 		self.build_dict()
 		return self.dict[name]
 
-dj_port = 8000
+dj_port = 18000
 metashare_dir = '{0}/metashare'.format(os.environ['METASHARE_SW_DIR'])
 count = 0
 

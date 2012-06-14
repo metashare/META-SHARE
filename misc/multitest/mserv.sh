@@ -21,6 +21,7 @@ start_django()
 {
 	echo "Starting Django server"
 	cd $METASHARE_DIR
+	export NODE_DIR=$TEST_DIR/$NODE_NAME
 	python manage.py runserver 0.0.0.0:$DJANGO_PORT --noreload &> $TEST_DIR/$NODE_NAME/metashare.log &
 	echo $! > $DJANGO_PID
 	cd $CURRENT_DIR
@@ -44,16 +45,19 @@ fi
 # Remove trailing slash if present
 METASHARE_SW_DIR=`echo $METASHARE_SW_DIR | sed -e "s/\/$//"`
 
-CURRENT_DIR=`pwd`
-export METASHARE_DIR="$METASHARE_SW_DIR/metashare"
-export TEST_DIR=$CURRENT_DIR/test_dir
-counter=0
-
 # Verify METASHARE_SW_DIR is a valid directory
 if [ ! -d "$METASHARE_SW_DIR" ] ; then
 	echo $METASHARE_SW_DIR " is not a valid directory."
 	exit 1
 fi
+
+CURRENT_DIR=`pwd`
+export METASHARE_DIR="$METASHARE_SW_DIR/metashare"
+if [[ "$TEST_DIR" == "" ]] ; then
+	export TEST_DIR=$CURRENT_DIR/test_dir
+fi
+
+counter=0
 
 OP=$1
 if [[  "$OP" != "start" && "$OP" != "stop" && "$OP" != "clean" ]] ; then
@@ -66,9 +70,11 @@ while python get_node_cfg.py $counter NODE_NAME &> /dev/null ; do
 	export NODE_NAME=`python $CURRENT_DIR/get_node_cfg.py $counter NODE_NAME`
 	echo "Processing " $NODE_NAME
 	# Create a directory for Node
+	export NODE_SETTINGS_DIR=$TEST_DIR/$NODE_NAME/dj_settings
 	cd $TEST_DIR
 	if [[ "$OP" == "start" ]] ; then
 		mkdir $NODE_NAME
+		mkdir $NODE_SETTINGS_DIR
 	fi
 
 	# Copy the solr empty tree
@@ -102,6 +108,20 @@ while python get_node_cfg.py $counter NODE_NAME &> /dev/null ; do
 		cp $CURRENT_DIR/init_data/metashare.db $TEST_DIR/$NODE_NAME/$DATABASE_NAME
 		export STORAGE_PATH=$TEST_DIR/$NODE_NAME/storageFolder
 		mkdir $STORAGE_PATH
+
+		CORE_NODES=`python $CURRENT_DIR/get_node_cfg.py $counter CORE_NODES`
+		SYNC_USERS=`python $CURRENT_DIR/get_node_cfg.py $counter SYNC_USERS`
+		# Create custom local_settings
+		echo "s/%%SOLR_PORT%%/$SOLR_PORT/g" > /tmp/sed.scr
+		echo "s#%%DATABASE_FILE%%#$DATABASE_FILE#g"  >> /tmp/sed.scr
+		echo "s#%%STORAGE_PATH%%#$STORAGE_PATH#g" >> /tmp/sed.scr
+		echo "s/%%DJANGO_PORT%%/$DJANGO_PORT/g" >> /tmp/sed.scr
+		echo "s#%%CORE_NODES%%#$CORE_NODES#g" >> /tmp/sed.scr
+		echo "s#%%SYNC_USERS%%#$SYNC_USERS#g" >> /tmp/sed.scr
+		cat $CURRENT_DIR/init_data/local_settings_test2.py | sed -f /tmp/sed.scr > $NODE_SETTINGS_DIR/local_settings.py
+		#rm /tmp/sed.scr
+		touch $NODE_SETTINGS_DIR/__init__.py
+
 		# Start Django application
 		start_django
 

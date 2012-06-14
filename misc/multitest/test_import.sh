@@ -33,7 +33,9 @@ if [ ! -d "$METASHARE_SW_DIR" ] ; then
 fi
 CURRENT_DIR=`pwd`
 export METASHARE_DIR="$METASHARE_SW_DIR/metashare"
-export TEST_DIR=$CURRENT_DIR/test_dir
+if [[ "$TEST_DIR" == "" ]] ; then
+	export TEST_DIR=$CURRENT_DIR/test_dir
+fi
 
 NUM=1
 NODE_NAME=`python get_node_cfg.py $NUM NODE_NAME`
