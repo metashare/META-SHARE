@@ -12,8 +12,6 @@ from metashare.storage.models import StorageObject, MASTER, update_resource
 BOLD = "\033[1m"
 RESET = "\033[0;0m"
 
-
-
 class Command(BaseCommand):
     
     help = 'Synchronizes with a predefined list of META-SHARE nodes'
@@ -75,12 +73,22 @@ class Command(BaseCommand):
             # Print informative messages to the user
             new_resources_count = len(new_resources)
             resources_to_update_count = len(resources_to_update)
-            sys.stdout.write("\n " + BOLD + str(new_resources_count) + \
-              " new resources"  + RESET + " will be added to your repository.\n")
-            sys.stdout.write("\n " + BOLD + str(resources_to_update_count) + \
-              " resources"  + RESET + " will be updated in your repository.\n")
             
-            sys.stdout.write("\n Importing and Indexing...\n")
+            if ((new_resources_count == 0) and (resources_to_update_count == 0)):
+                sys.stdout.write("\nThere are no resources marked for update! \
+                  \n\n\n")
+            else:			
+                sys.stdout.write("\n" + BOLD + \
+                  ("No" if new_resources_count == 0 \
+                  else str(new_resources_count)) + \
+                  " new resource" + ("" if new_resources_count == 1 else "s") \
+                  + RESET + " will be added to your repository.\n")
+                sys.stdout.write("\n" + BOLD + \
+                  ("No" if resources_to_update_count == 0 \
+                  else str(resources_to_update_count)) + \
+                  " resource" + ("" if resources_to_update_count == 1 else "s") \
+                  + RESET + " will be updated in your repository.\n")
+                sys.stdout.write("\nImporting and Indexing...\n")
             
             # Get the full xmls from remore inventory and update local inventory
             for resource in new_resources:
