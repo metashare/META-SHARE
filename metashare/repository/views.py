@@ -351,9 +351,6 @@ def view(request, resource_name=None, object_id=None):
 
     # Update statistics and create a report about the user actions on LR
     if hasattr(resource.storage_object, 'identifier'):
-        sessionid = ""
-        if request.COOKIES:
-            sessionid = request.COOKIES.get('sessionid', '')
         saveLRStats(resource, VIEW_STAT, request)
         context['LR_STATS'] = getLRStats(resource.storage_object.identifier)
 

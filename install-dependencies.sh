@@ -39,7 +39,7 @@ else
   fi  
 fi
 
-for package in 'pycrypto-2.5' 'Imaging-1.1.7' 'pygeoip-0.2.2.' ; do
+for package in 'pycrypto-2.5' 'Imaging-1.1.7' ; do
   cd $BASEDIR/installable-packages
   echo "Unpacking $package..."
   tar xzf $package.tar.gz
