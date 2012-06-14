@@ -83,7 +83,7 @@ class Command(BaseCommand):
             
             sys.stdout.write("\n Importing and Indexing...\n")
             
-            
+            # Get the full xmls from remore inventory and update local inventory
             for resource in new_resources:
                 # Get the json storage object and the actual metadata xml
                 storage_json, resource_xml_string, resource_digest = get_full_metadata(opener, "{0}/sync/{1}/metadata/".format(url, resource['id']), resource['digest'])
