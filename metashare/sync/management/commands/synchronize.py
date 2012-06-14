@@ -44,8 +44,6 @@ class Command(BaseCommand):
             non_master_storage_objects = StorageObject.objects.exclude(copy_status=MASTER)
             for item in non_master_storage_objects:
                 local_inventory.append({'id':str(item.identifier), 'digest':str(item.digest_checksum)})
-                print "Local digest: " + str(item.digest_checksum)
-            #print "\nLOCAL INVENTORY: \n" + str(local_inventory)
             local_inventory_count = len(local_inventory)
             sys.stdout.write("\nLocal node contains " + BOLD + str(local_inventory_count) + " resources.\n" + RESET)
             
@@ -94,6 +92,6 @@ class Command(BaseCommand):
             
             for resource in resources_to_update:
                 # Get the json storage object and the actual metadata xml
-                storage_json, resource_xml_string, digest = get_full_metadata(opener, "{0}/sync/{1}/metadata/".format(url, resource['id']), resource['digest'])
+                storage_json, resource_xml_string, resource_digest = get_full_metadata(opener, "{0}/sync/{1}/metadata/".format(url, resource['id']), resource['digest'])
                 update_resource(storage_json, resource_xml_string, resource_digest)
             
