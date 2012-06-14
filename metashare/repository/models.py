@@ -142,7 +142,7 @@ class resourceInfoType_model(SchemaModel):
         formatstring = u'{}'
         return self.unicode_(formatstring, formatargs)
 
-    editor_groups = models.ManyToManyField(EditorGroup, blank=True)
+    editor_groups = models.ManyToManyField(EditorGroup, blank=True, null=True)
 
     owners = models.ManyToManyField(User, blank=True)
 
@@ -206,14 +206,26 @@ class resourceInfoType_model(SchemaModel):
         Method used for changelist view for resources.
         """
         owners = getattr(self, 'owners', None)
-        if not owners:
-            return None
-        
+        if owners.count() == 0:
+            return None        
         owners_list = ''
         for owner in owners.all():
-            owners_list += owner.surname.join(", ")
-        
+            owners_list += owner.name + ', '
+        owners_list = owners_list.rstrip(', ')
         return owners_list
+    
+    def Editor_groups(self):
+        """
+        Method used for changelist view for resources.
+        """
+        editor_groups = getattr(self, 'editor_groups', None)
+        if editor_groups.count() == 0:
+            return None        
+        groups_list = ''
+        for group in editor_groups.all():            
+            groups_list += group.name + ', '
+        groups_list = groups_list.rstrip(', ')
+        return groups_list
 
 
 SIZEINFOTYPE_SIZEUNIT_CHOICES = _make_choices_from_list([
