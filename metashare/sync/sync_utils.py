@@ -10,6 +10,9 @@ import contextlib
 import json
 from zipfile import ZipFile
 from StringIO import StringIO
+from metashare.storage.models import compute_checksum
+from urllib2 import HTTPError
+from traceback import format_exc
 
 # Idea taken from 
 # http://stackoverflow.com/questions/5082128/how-do-i-authenticate-a-urllib2-script-in-order-to-access-https-web-services-fro
@@ -54,20 +57,29 @@ def get_inventory(opener, inventory_url):
     Obtain the inventory from a logged-in opener and fill it into a JSON structure.
     Returns the JSON structure.
     '''
-    with contextlib.closing(opener.open(inventory_url)) as response:
-        data = response.read()
-        with ZipFile(StringIO(data), 'r') as inzip:
-            json_inventory = json.load(inzip.open('inventory.json'))
-            # TODO: add error handling and verification of json structure
-            return json_inventory
+    try:
+        with contextlib.closing(opener.open(inventory_url)) as response:
+            data = response.read()
+            with ZipFile(StringIO(data), 'r') as inzip:
+                json_inventory = json.load(inzip.open('inventory.json'))
+                # TODO: add error handling and verification of json structure
+                return json_inventory
+    except:
+        raise ConnectionException("Problem getting inventory from {0}: {1}".format(inventory_url, format_exc()))
 
-def get_full_metadata(opener, full_metadata_url):
+
+def get_full_metadata(opener, full_metadata_url, expected_digest):
     '''
     Obtain the full metadata record for one resource.
-    Returns a pair of storage_json, resource_xml_string.
+    Returns a pair of storage_json_string, resource_xml_string.
+    
+    Raises CorruptDataException if the zip data received from full_metadata_url
+    does not have an md5 digest identical to expected_digest.
     '''
     with contextlib.closing(opener.open(full_metadata_url)) as response:
         data = response.read()
+        if not expected_digest == compute_checksum(StringIO(data)):
+            raise CorruptDataException("Checksum error for resource '{0}'.".format(full_metadata_url))
         with ZipFile(StringIO(data), 'r') as inzip:
             with inzip.open('storage-global.json') as storage_file:
                 # should be a json object, not string
@@ -75,4 +87,10 @@ def get_full_metadata(opener, full_metadata_url):
             with inzip.open('metadata.xml') as resource_xml:
                 resource_xml_string = resource_xml.read()
             return storage_json, resource_xml_string
-            
+
+
+class ConnectionException(Exception):
+    pass
+
+class CorruptDataException(Exception):
+    pass
