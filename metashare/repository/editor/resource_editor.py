@@ -1,11 +1,13 @@
 import datetime
 
 from django import forms
+from django.contrib import admin
 from django.contrib.admin.util import unquote
+from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.contrib.auth.decorators import permission_required
 from django.core.exceptions import ValidationError, PermissionDenied
 from django.db.models import Q
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from django.utils.decorators import method_decorator
@@ -15,6 +17,7 @@ from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 from django.views.decorators.csrf import csrf_protect
+from django.core.context_processors import csrf
 
 from metashare import settings
 from metashare.accounts.models import EditorGroup, ManagerGroup
@@ -33,7 +36,7 @@ from metashare.repository.models import resourceComponentTypeType_model, \
     licenceInfoType_model
 from metashare.repository.supermodel import SchemaModel
 from metashare.stats.model_utils import saveLRStats, UPDATE_STAT, INGEST_STAT, \
-    PUBLISH_STAT
+    PUBLISH_STAT, GROUP_STAT
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
     ALLOWED_ARCHIVE_EXTENSIONS
 from metashare.utils import verify_subclass
@@ -65,7 +68,7 @@ class ResourceComponentInlineFormSet(ReverseInlineFormSet):
         except ValidationError:
             #raise ValidationError('The content of the {} general info is not valid.'.format(self.get_actual_resourceComponentType()._meta.verbose_name))
             #raise AssertionError("Meaningful error message for general info")
-            error_list = error_list +  'The content of the {} general info is not valid.'.format(self.get_actual_resourceComponentType()._meta.verbose_name)
+            error_list = error_list + 'The content of the {} general info is not valid.'.format(self.get_actual_resourceComponentType()._meta.verbose_name)
         
         if error_list != '':
             raise ValidationError(error_list)
@@ -84,7 +87,7 @@ class ResourceComponentInlineFormSet(ReverseInlineFormSet):
             if not value:
                 # print error
                 #raise AssertionError("Meaningful error message")                
-                error = error + format(modelfieldname)+' error. '
+                error = error + format(modelfieldname) + ' error. '
                 
         return error
 
@@ -182,7 +185,7 @@ class ResourceComponentInlineFormSet(ReverseInlineFormSet):
         else:
             raise Exception, "unexpected resource component class type: {}".format(actual_instance.__class__.__name__)
         super(ResourceComponentInlineFormSet, self).save(commit)
-        return (actual_instance, )
+        return (actual_instance,)
         
 # pylint: disable-msg=R0901
 class ResourceComponentInline(ReverseInlineModelAdmin):
@@ -198,7 +201,7 @@ class ResourceComponentInline(ReverseInlineModelAdmin):
 
 # pylint: disable-msg=R0901
 class IdentificationInline(ReverseInlineModelAdmin):
-    readonly_fields = ('metaShareId', )
+    readonly_fields = ('metaShareId',)
 
 
 def change_resource_status(resource, status, precondition_status=None):
@@ -271,6 +274,20 @@ def export_xml_resources(modeladmin, request, queryset):
 export_xml_resources.short_description = "Export selected resource descriptions to XML"
 
 
+def edit_editor_groups(modeladmin, request, queryset, groups):
+    for obj in queryset:  
+        obj.editor_groups = groups
+        obj.save()
+        saveLRStats(obj, "", "", GROUP_STAT)
+
+def add_editor_groups(modeladmin, request, queryset, groups):
+    for obj in queryset:  
+        obj.editor_groups.add(*groups)
+        obj.save()
+        saveLRStats(obj, "", "", GROUP_STAT)
+
+
+
 class MetadataForm(forms.ModelForm):
     def save(self, commit=True):
         today = datetime.date.today()
@@ -282,21 +299,69 @@ class MetadataForm(forms.ModelForm):
 
 class MetadataInline(ReverseInlineModelAdmin):
     form = MetadataForm
-    readonly_fields = ('metadataCreationDate', 'metadataLastDateUpdated', )
+    readonly_fields = ('metadataCreationDate', 'metadataLastDateUpdated',)
     
 
 class ResourceModelAdmin(SchemaModelAdmin):
     inline_type = 'stacked'
     custom_one2one_inlines = {'identificationInfo':IdentificationInline,
                               'resourceComponentType':ResourceComponentInline,
-                              'metadataInfo':MetadataInline,}
+                              'metadataInfo':MetadataInline, }
 
     content_fields = ('resourceComponentType',)
-    list_display = ('__unicode__', 'resource_type', 'publication_status', 'resource_owners')
-    actions = (publish_resources, unpublish_resources, ingest_resources, export_xml_resources, )
-    hidden_fields = ('storage_object', 'owners', 'editor_groups', )
+    list_display = ('__unicode__', 'resource_type', 'publication_status', 'resource_owners', 'Editor_groups',)
+    actions = (publish_resources, unpublish_resources, ingest_resources, export_xml_resources, 'add_groups')
+    hidden_fields = ('storage_object', 'owners', 'editor_groups',)
 
+    
+    class EditorGroupFormSuperuser(forms.Form):
+        _selected_action = forms.CharField(widget=forms.MultipleHiddenInput) 
+        groups = forms.ModelMultipleChoiceField(EditorGroup.objects.all(),\
+                                                        widget=FilteredSelectMultiple("Editor Groups",False,attrs={'rows':'10'}))
+            
+    
+    class EditorGroupFormSimpleUser(forms.Form):
+        _selected_action = forms.CharField(widget=forms.MultipleHiddenInput)
+        groups = forms.ModelMultipleChoiceField(EditorGroup.objects)
 
+    
+    @csrf_protect_m    
+    def add_groups(self, request, queryset):    
+        delete_permission = False
+        if self.has_delete_permission(request, queryset):
+            delete_permission = True
+        form = None
+        if 'cancel' in request.POST:
+            self.message_user(request, 'Cancelled adding Editor Group.')
+            return
+        elif 'add_editor_group' in request.POST:
+            if delete_permission:
+                form = self.EditorGroupFormSuperuser(request.POST)
+            else:    
+                form = self.EditorGroupFormSimpleUser(request.POST)
+            if form.is_valid():
+                groups = form.cleaned_data['groups']
+                
+                if delete_permission:
+                    edit_editor_groups(self, request, queryset, groups)
+                    self.message_user(request, 'Successfully edited Editor Groups for selected resources.')
+                else:
+                    add_editor_groups(self, request, queryset, groups)
+                    self.message_user(request, 'Successfully added Editor Group to selected resources.')
+                return HttpResponseRedirect(request.get_full_path())
+        if not form:
+            if delete_permission:
+                form = self.EditorGroupFormSuperuser(initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
+            else:    
+                form = self.EditorGroupFormSimpleUser(initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
+
+        return render_to_response('admin/repository/resourceinfotype_model/add_editor_group.html', \
+                                  {'selected_resources': queryset, 'form': form, 'path':request.get_full_path(), \
+                                   'delete_permission': delete_permission}, context_instance=RequestContext(request)) 
+
+    add_groups.short_description = "Edit Editor Groups for selected resources"
+        
+    
     def get_urls(self):
         from django.conf.urls.defaults import patterns, url
         urlpatterns = super(ResourceModelAdmin, self).get_urls()
@@ -510,7 +575,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
 
         _hidden_fields = self.get_hidden_fields()
         if _hidden_fields:
-            _fieldsets.append((None, {'fields': _hidden_fields, 'classes':('display_none', )}))
+            _fieldsets.append((None, {'fields': _hidden_fields, 'classes':('display_none',)}))
 
         return _fieldsets
 
