@@ -72,11 +72,10 @@ class Command(BaseCommand):
                           and not (item['digest'] == local_item['digest']):
                             resources_to_update.append(item)
 
+ 
+            # Print informative messages to the user
             new_resources_count = len(new_resources)
             resources_to_update_count = len(resources_to_update)
-            
-            #print new_resources
-            
             sys.stdout.write("\n " + BOLD + str(new_resources_count) + \
               " new resources"  + RESET + " will be added to your repository.\n")
             sys.stdout.write("\n " + BOLD + str(resources_to_update_count) + \
