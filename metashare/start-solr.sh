@@ -3,6 +3,7 @@
 export METASHAREDIR=$(dirname "$0")
 export SOLR_ROOT=$(cd "$METASHAREDIR/../solr" ; pwd)
 export SOLR_LOG=$SOLR_ROOT/solr.log
+export SOLR_PORT=8983
 export SOLR_STOP_PORT=8079
 export SOLR_STOP_KEY=stopkey
 
@@ -22,7 +23,7 @@ echo "Trying to start SOLR server"
 
 # Actually start solr
 (cd "$SOLR_ROOT"
-nohup java -DSTOP.PORT=$SOLR_STOP_PORT -DSTOP.KEY="$SOLR_STOP_KEY" -jar start.jar > "$SOLR_LOG" &
+nohup java -Djetty.port=$SOLR_PORT -DSTOP.PORT=$SOLR_STOP_PORT -DSTOP.KEY="$SOLR_STOP_KEY" -jar start.jar > "$SOLR_LOG" &
 )
 
 

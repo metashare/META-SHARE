@@ -10,7 +10,11 @@ from metashare import settings, test_utils
 from metashare.repository.models import resourceInfoType_model
 from xml.etree.ElementTree import fromstring
 from metashare.storage.models import INGESTED, INTERNAL, StorageObject, \
-    PUBLISHED
+    PUBLISHED, compute_checksum
+from metashare.test_utils import set_index_active
+import datetime
+
+
 
 
 class MetadataSyncTest (TestCase):
@@ -21,6 +25,10 @@ class MetadataSyncTest (TestCase):
     syncuser_login = None
     normal_login = None
     editor_login = None
+
+    def extract_inventory(self, response):
+        with ZipFile(StringIO(response.content), 'r') as inzip:
+            return json.load(inzip.open('inventory.json'))
 
     def assertIsRedirectToLogin(self, response):
         self.assertEquals(302, response.status_code)
@@ -45,8 +53,7 @@ class MetadataSyncTest (TestCase):
         self.assertEquals(200, response.status_code)
         self.assertEquals('application/zip', response['Content-Type'])
         self.assertEquals(settings.METASHARE_VERSION, response['Metashare-Version'])
-        with ZipFile(StringIO(response.content), 'r') as inzip:
-            json_inventory = json.load(inzip.open('inventory.json'))
+        json_inventory = self.extract_inventory(response)
         self.assertValidInventory(json_inventory)
 
     def assertValidFullMetadataResponse(self, response):
@@ -80,6 +87,7 @@ class MetadataSyncTest (TestCase):
         resource.storage_object.publication_status = status
         resource.storage_object.save()
         resource.storage_object.update_storage()
+        return resource
 
     @classmethod
     def setUpClass(cls):
@@ -89,6 +97,7 @@ class MetadataSyncTest (TestCase):
         pollute the "normal" development db or the production db.
         As a consequence, they need no valuable password.
         """
+        set_index_active(False)
         syncuser = User.objects.create_user('syncuser', 'staff@example.com',
           'secret')
         syncpermission = Permission.objects.get(codename='can_sync')
@@ -125,16 +134,21 @@ class MetadataSyncTest (TestCase):
         }
         
         StorageObject.objects.all().delete()
-        cls.import_test_resource('testfixture.xml', INGESTED)
-        cls.import_test_resource('roundtrip.xml', INTERNAL)
-        cls.import_test_resource('ILSP10.xml', PUBLISHED)
+        testres = cls.import_test_resource('testfixture.xml', INGESTED)
+        testres.storage_object.digest_modified = datetime.date(2012, 6, 1)
+        testres.storage_object.save()
         
+        cls.import_test_resource('roundtrip.xml', INTERNAL)
+        
+        pubres = cls.import_test_resource('ILSP10.xml', PUBLISHED)
+        pubres.storage_object.digest_modified = datetime.date(2012, 1, 1)
+        pubres.storage_object.save()
 
     @classmethod
     def tearDownClass(cls):
         User.objects.all().delete()
         StorageObject.objects.all().delete()
-
+        set_index_active(True)
     
 
     def test_unprotected_inventory(self):
@@ -234,3 +248,36 @@ class MetadataSyncTest (TestCase):
         resource_uuid = storage_object.identifier
         response = client.get('{0}{1}/metadata/'.format(self.SYNC_BASE, resource_uuid))
         self.assertIsForbidden(response)
+
+    def test_metadata_digest(self):
+        settings.SYNC_NEEDS_AUTHENTICATION = False
+        client = Client()
+        resource = resourceInfoType_model.objects.all()[0]
+        resource_uuid = resource.storage_object.identifier
+        expected_digest = resource.storage_object.digest_checksum
+        response = client.get('{0}{1}/metadata/'.format(self.SYNC_BASE, resource_uuid))
+        self.assertEquals(expected_digest, compute_checksum(StringIO(response.content)))
+    
+    def test_inventory_undated(self):
+        settings.SYNC_NEEDS_AUTHENTICATION = False
+        response = Client().get(self.INVENTORY_URL)
+        inventory = self.extract_inventory(response)
+        self.assertEquals(2, len(inventory))
+
+    def test_inventory_veryolddate(self):
+        settings.SYNC_NEEDS_AUTHENTICATION = False
+        response = Client().get(self.INVENTORY_URL+"?from=2011-01-01")
+        inventory = self.extract_inventory(response)
+        self.assertEquals(2, len(inventory))
+
+    def test_inventory_mediumdate(self):
+        settings.SYNC_NEEDS_AUTHENTICATION = False
+        response = Client().get(self.INVENTORY_URL+"?from=2012-02-01")
+        inventory = self.extract_inventory(response)
+        self.assertEquals(1, len(inventory))
+
+    def test_inventory_toorecentdate(self):
+        settings.SYNC_NEEDS_AUTHENTICATION = False
+        response = Client().get(self.INVENTORY_URL+"?from=2013-01-01")
+        inventory = self.extract_inventory(response)
+        self.assertEquals(0, len(inventory))
