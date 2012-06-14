@@ -11,7 +11,6 @@ import json
 from zipfile import ZipFile
 from StringIO import StringIO
 from metashare.storage.models import compute_checksum
-from urllib2 import HTTPError
 from traceback import format_exc
 
 # Idea taken from 
