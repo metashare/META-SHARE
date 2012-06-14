@@ -10,7 +10,7 @@ from metashare import settings, test_utils
 from metashare.repository.models import resourceInfoType_model
 from xml.etree.ElementTree import fromstring
 from metashare.storage.models import INGESTED, INTERNAL, StorageObject, \
-    PUBLISHED
+    PUBLISHED, compute_checksum
 
 
 class MetadataSyncTest (TestCase):
@@ -234,3 +234,12 @@ class MetadataSyncTest (TestCase):
         resource_uuid = storage_object.identifier
         response = client.get('{0}{1}/metadata/'.format(self.SYNC_BASE, resource_uuid))
         self.assertIsForbidden(response)
+
+    def test_metadata_digest(self):
+        settings.SYNC_NEEDS_AUTHENTICATION = False
+        client = Client()
+        resource = resourceInfoType_model.objects.all()[0]
+        resource_uuid = resource.storage_object.identifier
+        expected_digest = resource.storage_object.digest_checksum
+        response = client.get('{0}{1}/metadata/'.format(self.SYNC_BASE, resource_uuid))
+        self.assertEquals(expected_digest, compute_checksum(StringIO(response.content)))
