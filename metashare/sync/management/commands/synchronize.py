@@ -72,12 +72,11 @@ class Command(BaseCommand):
  
             # Print informative messages to the user
             new_resources_count = len(new_resources)
-            resources_to_update_count = len(resources_to_update)
-            
+            resources_to_update_count = len(resources_to_update)            
             if ((new_resources_count == 0) and (resources_to_update_count == 0)):
                 sys.stdout.write("\nThere are no resources marked for update! \
                   \n\n\n")
-            else:			
+            else:           
                 sys.stdout.write("\n" + BOLD + \
                   ("No" if new_resources_count == 0 \
                   else str(new_resources_count)) + \
@@ -90,18 +89,18 @@ class Command(BaseCommand):
                   + RESET + " will be updated in your repository.\n")
                 sys.stdout.write("\nImporting and Indexing...\n")
             
-            # Get the full xmls from remore inventory and update local inventory
-            for resource in new_resources:
-                # Get the json storage object and the actual metadata xml
-                storage_json, resource_xml_string, resource_digest = \
-                  get_full_metadata(opener, "{0}/sync/{1}/metadata/".format( \
-                    url, resource['id']), resource['digest'])
-                update_resource(storage_json, resource_xml_string, resource_digest)
-            
-            for resource in resources_to_update:
-                # Get the json storage object and the actual metadata xml
-                storage_json, resource_xml_string, resource_digest = \
-                  get_full_metadata(opener, "{0}/sync/{1}/metadata/".format( \
-                    url, resource['id']), resource['digest'])
-                update_resource(storage_json, resource_xml_string, resource_digest)
-            
+                # Get the full xmls from remore inventory and update local inventory
+                for resource in new_resources:
+                    # Get the json storage object and the actual metadata xml
+                    storage_json, resource_xml_string, resource_digest = \
+                      get_full_metadata(opener, "{0}/sync/{1}/metadata/".format( \
+                        url, resource['id']), resource['digest'])
+                    update_resource(storage_json, resource_xml_string, resource_digest)
+                
+                for resource in resources_to_update:
+                    # Get the json storage object and the actual metadata xml
+                    storage_json, resource_xml_string, resource_digest = \
+                      get_full_metadata(opener, "{0}/sync/{1}/metadata/".format( \
+                        url, resource['id']), resource['digest'])
+                    update_resource(storage_json, resource_xml_string, resource_digest)
+                sys.stdout.write("\n\n")
