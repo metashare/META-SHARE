@@ -3,7 +3,7 @@ Management utility to trigger synchronization.
 """
 
 import sys
-from settings import CORE_NODES
+from metashare.settings import CORE_NODES
 from metashare.sync.sync_utils import login, get_inventory, get_full_metadata
 from django.core.management.base import BaseCommand
 from metashare.storage.models import StorageObject, MASTER, update_resource
