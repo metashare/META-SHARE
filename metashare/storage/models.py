@@ -307,6 +307,16 @@ class StorageObject(models.Model):
       help_text="text containing the JSON serialization of local attributes " \
       "for this storage object instance.")
     
+    def get_digest_checksum(self):
+        """
+        Checks if the current digest is till up-to-date, recreates it if
+        required, and return the up-to-date digest checksum.
+        """
+        _expiration_date = _get_expiration_date()
+        if _expiration_date > self.digest_modified \
+          and _expiration_date > self.digest_last_checked: 
+            self.update_storage()
+        return self.digest_checksum
     
     def __unicode__(self):
         """
@@ -640,14 +650,12 @@ def update_digests():
     guarantee a maximum digest age of MAX_DIGEST_AGE.
     """
     
-    _half_time = settings.MAX_DIGEST_AGE / 2
-    max_age = timedelta(seconds=_half_time)
+    _expiration_date = _get_expiration_date()
     
     # get all master copy storage object of ingested and published resources
     for _so in StorageObject.objects.filter(
       Q(copy_status=MASTER),
       Q(publication_status=INGESTED) | Q(publication_status=PUBLISHED)):
-        _expiration_date = datetime.now() - max_age
         if _expiration_date > _so.digest_modified \
           and _expiration_date > _so.digest_last_checked: 
             LOGGER.debug('updating {}'.format(_so.identifier))
@@ -678,3 +686,12 @@ def compute_checksum(infile):
 
 class IllegalAccessException(Exception):
     pass        
+
+def _get_expiration_date():
+    """
+    Returns the expiration date of a digest based on the maximum age.
+    """
+    _half_time = settings.MAX_DIGEST_AGE / 2
+    _td = timedelta(seconds=_half_time)
+    _expiration_date = datetime.now() - _td
+    return _expiration_date

@@ -283,7 +283,7 @@ class UpdateTest(TestCase):
     def test_update(self):
         # define a maximum age of 4 seconds; this means that a resource is
         # checked for an update if it's older than 2 seconds
-        settings.MAX_DIGEST_AGE = 4
+        settings.MAX_DIGEST_AGE = 6
         # import resource
         _result = test_utils.import_xml(TESTFIXTURE_XML)
         _so = resourceInfoType_model.objects.get(pk=_result[0].id).storage_object
@@ -310,4 +310,16 @@ class UpdateTest(TestCase):
         # changed, so digest_modified is not changed
         self.assertEquals(_modified, _so.digest_modified)
         # but it HAS been checked that the digest is still up-to-date
+        self.assertNotEqual(_last_checked, _so.digest_last_checked)
+        _last_checked = _so.digest_last_checked
+        _modified = _so.digest_modified
+        _checksum = _so.digest_checksum
+        # get digest checksum; since not enough time has passed yet, the
+        # digest is not updated
+        _so.get_digest_checksum()
+        self.assertEquals(_last_checked, _so.digest_last_checked) 
+        # again, wait 3 seconds so the digest requires another check
+        time.sleep(3)
+        self.assertEquals(_checksum, _so.get_digest_checksum())
+        self.assertEquals(_modified, _so.digest_modified)
         self.assertNotEqual(_last_checked, _so.digest_last_checked)
