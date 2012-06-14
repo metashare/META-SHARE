@@ -44,6 +44,7 @@ class Command(BaseCommand):
             non_master_storage_objects = StorageObject.objects.exclude(copy_status=MASTER)
             for item in non_master_storage_objects:
                 local_inventory.append({'id':str(item.identifier), 'digest':str(item.digest_checksum)})
+                print "Local digest: " + str(item.digest_checksum)
             #print "\nLOCAL INVENTORY: \n" + str(local_inventory)
             local_inventory_count = len(local_inventory)
             sys.stdout.write("\nLocal node contains " + BOLD + str(local_inventory_count) + " resources.\n" + RESET)
@@ -68,6 +69,7 @@ class Command(BaseCommand):
                     # Find the corresponding item in the local inventory
                     # and compare digests
                     for local_item in local_inventory:
+                        print "item: " + item['digest'] + "  local item: " + local_item['digest']
                         if (item_id == local_item['id']) \
                           and not (item['digest'] == local_item['digest']):
                             resources_to_update.append(item)
@@ -75,7 +77,7 @@ class Command(BaseCommand):
             new_resources_count = len(new_resources)
             resources_to_update_count = len(resources_to_update)
             
-            print new_resources
+            #print new_resources
             
             sys.stdout.write("\n " + BOLD + str(new_resources_count) + \
               " new resources"  + RESET + " will be added to your repository.\n")
@@ -87,11 +89,11 @@ class Command(BaseCommand):
             
             for resource in new_resources:
                 # Get the json storage object and the actual metadata xml
-                storage_json, resource_xml_string = get_full_metadata(opener, "{0}/sync/{1}/metadata/".format(url, resource['id']), resource['digest'])
-                update_resource(storage_json, resource_xml_string)
+                storage_json, resource_xml_string, resource_digest = get_full_metadata(opener, "{0}/sync/{1}/metadata/".format(url, resource['id']), resource['digest'])
+                update_resource(storage_json, resource_xml_string, resource_digest)
             
             for resource in resources_to_update:
                 # Get the json storage object and the actual metadata xml
-                storage_json, resource_xml_string = get_full_metadata(opener, "{0}/sync/{1}/metadata/".format(url, resource['id']), resource['digest'])
-                update_resource(storage_json, resource_xml_string)
+                storage_json, resource_xml_string, digest = get_full_metadata(opener, "{0}/sync/{1}/metadata/".format(url, resource['id']), resource['digest'])
+                update_resource(storage_json, resource_xml_string, resource_digest)
             
