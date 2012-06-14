@@ -17,8 +17,17 @@ will contain all the data related to the servers. If this variable
 is not set it will be used a 'test_dir' directory under the current
 directory.
 
+Currently it also necessary to manually copy the file
+misc/multitest/init_data/settings_test.py in
+metashare/settings.py
+This will be done automatically in a next fix.
+
+
 So, the typical use will be:
+export METASHARE_SW_DIR=/path/to/dir
+export TEST_DIR=/tmp  (or any other)
 cd $METASHARE_SW_DIR
+cp misc/multitest/init_data/settings_test.py metashare/settings.py
 ./mserv.sh start
 "run the tests"
 ./mserv.sh stop
