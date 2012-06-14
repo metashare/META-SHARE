@@ -83,7 +83,6 @@ def get_full_metadata(opener, full_metadata_url, expected_digest):
             with inzip.open('storage-global.json') as storage_file:
                 # should be a json object, not string
                 storage_json = json.loads(storage_file.read())
-                print "\n\n\n"  + str(storage_json) + "\n\n\n"
             with inzip.open('metadata.xml') as resource_xml:
                 resource_xml_string = resource_xml.read()
             return storage_json, resource_xml_string, expected_digest

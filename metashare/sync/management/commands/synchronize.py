@@ -67,7 +67,6 @@ class Command(BaseCommand):
                     # Find the corresponding item in the local inventory
                     # and compare digests
                     for local_item in local_inventory:
-                        print "item: " + item['digest'] + "  local item: " + local_item['digest']
                         if (item_id == local_item['id']) \
                           and not (item['digest'] == local_item['digest']):
                             resources_to_update.append(item)
@@ -86,11 +85,15 @@ class Command(BaseCommand):
             # Get the full xmls from remore inventory and update local inventory
             for resource in new_resources:
                 # Get the json storage object and the actual metadata xml
-                storage_json, resource_xml_string, resource_digest = get_full_metadata(opener, "{0}/sync/{1}/metadata/".format(url, resource['id']), resource['digest'])
+                storage_json, resource_xml_string, resource_digest = \
+                  get_full_metadata(opener, "{0}/sync/{1}/metadata/".format( \
+                    url, resource['id']), resource['digest'])
                 update_resource(storage_json, resource_xml_string, resource_digest)
             
             for resource in resources_to_update:
                 # Get the json storage object and the actual metadata xml
-                storage_json, resource_xml_string, resource_digest = get_full_metadata(opener, "{0}/sync/{1}/metadata/".format(url, resource['id']), resource['digest'])
+                storage_json, resource_xml_string, resource_digest = \
+                  get_full_metadata(opener, "{0}/sync/{1}/metadata/".format( \
+                    url, resource['id']), resource['digest'])
                 update_resource(storage_json, resource_xml_string, resource_digest)
             
