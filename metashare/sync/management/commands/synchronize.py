@@ -74,8 +74,8 @@ class Command(BaseCommand):
             new_resources_count = len(new_resources)
             resources_to_update_count = len(resources_to_update)            
             if ((new_resources_count == 0) and (resources_to_update_count == 0)):
-                sys.stdout.write("\nThere are no resources marked for update! \
-                  \n\n\n")
+                sys.stdout.write("\nThere are no resources marked \
+                  for updating!\n")
             else:           
                 sys.stdout.write("\n" + BOLD + \
                   ("No" if new_resources_count == 0 \
@@ -103,4 +103,5 @@ class Command(BaseCommand):
                       get_full_metadata(opener, "{0}/sync/{1}/metadata/".format( \
                         url, resource['id']), resource['digest'])
                     update_resource(storage_json, resource_xml_string, resource_digest)
-                sys.stdout.write("\n\n")
+            
+            sys.stdout.write("\n\n")
