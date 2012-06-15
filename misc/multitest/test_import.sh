@@ -48,6 +48,7 @@ echo "DATABASE_NAME = " $DATABASE_NAME
 export SOLR_PORT=`python $CURRENT_DIR/get_node_cfg.py $NUM SOLR_PORT`
 echo "SOLR_PORT = " $SOLR_PORT
 RES_FILE="$METASHARE_SW_DIR/misc/testdata/v2.1/ELRAResources/elra20.xml"
+export NODE_DIR=$TEST_DIR/$NODE_NAME
 echo "Starting import..."
 import_data
 #test_sync

@@ -73,6 +73,12 @@ if [[  "$OP" != "start" && "$OP" != "stop" && "$OP" != "clean" ]] ; then
 	exit 1
 fi
 
+if [[ "$OP" == "start" ]] ; then
+	# Replace the original settings.py with one that imports 
+	# local_settings for each specific node
+	cp $METASHARE_SW_DIR/misc/multitest/init_data/settings_test.py $METASHARE_DIR/settings.py
+fi
+
 # Loop until get_node_cfg returns an error
 while "$PYTHON" get_node_cfg.py $counter NODE_NAME &> /dev/null ; do
 	export NODE_NAME=`"$PYTHON" "$CURRENT_DIR/get_node_cfg.py" $counter NODE_NAME`
@@ -113,7 +119,7 @@ while "$PYTHON" get_node_cfg.py $counter NODE_NAME &> /dev/null ; do
 		export DJANGO_PORT=`"$PYTHON" "$CURRENT_DIR/get_node_cfg.py" $counter DJANGO_PORT`
 		DATABASE_NAME=`"$PYTHON" "$CURRENT_DIR/get_node_cfg.py" $counter DATABASE_NAME`
 		export DATABASE_FILE=$TEST_DIR/$NODE_NAME/$DATABASE_NAME
-		cp "$CURRENT_DIR/init_data/metashare.db" "$TEST_DIR/$NODE_NAME/$DATABASE_NAME"
+		cp "$CURRENT_DIR/init_data/metashare_test.db" "$TEST_DIR/$NODE_NAME/$DATABASE_NAME"
 		export STORAGE_PATH=$TEST_DIR/$NODE_NAME/storageFolder
 		mkdir "$STORAGE_PATH"
 
@@ -128,7 +134,7 @@ while "$PYTHON" get_node_cfg.py $counter NODE_NAME &> /dev/null ; do
 		echo "s#%%SYNC_USERS%%#$SYNC_USERS#g" >> /tmp/sed.scr
 		cat "$CURRENT_DIR/init_data/local_settings_test2.py" | sed -f /tmp/sed.scr \
 			> "$NODE_SETTINGS_DIR/local_settings.py"
-		#rm /tmp/sed.scr
+		rm /tmp/sed.scr
 		touch "$NODE_SETTINGS_DIR/__init__.py"
 
 		# Start Django application
