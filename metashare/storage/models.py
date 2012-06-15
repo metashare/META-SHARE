@@ -492,7 +492,7 @@ class StorageObject(models.Model):
         # least self.digest_last_checked has changed
         self.save()
 
-def restore_from_folder(storage_id, copy_status=None):
+def restore_from_folder(storage_id, copy_status=None, storage_digest=None):
     """
     Restores the storage object and the associated resource for the given
     storage object identifier and makes it persistent in the database. 
@@ -567,6 +567,10 @@ def restore_from_folder(storage_id, copy_status=None):
             # a default
             LOGGER.warn('no copy status provided, using default copy status MASTER')
             _storage_object.copy_status = MASTER
+    
+    # If object is synchronised, retaing the storage digest
+    if storage_digest:
+         _storage_object.digest_checksum = storage_digest
 
     _storage_object.save()
     _storage_object.update_storage()
@@ -574,7 +578,7 @@ def restore_from_folder(storage_id, copy_status=None):
     return resource
 
 
-def update_resource(storage_json, resource_xml_string, copy_status=REMOTE):
+def update_resource(storage_json, resource_xml_string, storage_digest, copy_status=REMOTE):
     '''
     For the resource described by storage_json and resource_xml_string,
     do the following:
@@ -619,7 +623,7 @@ def update_resource(storage_json, resource_xml_string, copy_status=REMOTE):
         remove_files_from_disk(storage_id)
         remove_database_entries(storage_id)
     write_to_disk(storage_id)
-    restore_from_folder(storage_id, copy_status=copy_status)
+    restore_from_folder(storage_id, copy_status=copy_status, storage_digest=storage_digest)
 
 
 

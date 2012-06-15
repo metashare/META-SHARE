@@ -51,10 +51,10 @@ def login(login_url, username, password):
 
 
 def get_inventory(opener, inventory_url):
-    '''
+    """
     Obtain the inventory from a logged-in opener and fill it into a JSON structure.
     Returns the JSON structure.
-    '''
+    """
     try:
         with contextlib.closing(opener.open(inventory_url)) as response:
             data = response.read()
@@ -67,13 +67,14 @@ def get_inventory(opener, inventory_url):
 
 
 def get_full_metadata(opener, full_metadata_url, expected_digest):
-    '''
+    """
     Obtain the full metadata record for one resource.
-    Returns a pair of storage_json_string, resource_xml_string.
+    Returns storage_json_string, resource_xml_string and expected_digest.
+    The expected_digest is just passed though withoug being used.
     
     Raises CorruptDataException if the zip data received from full_metadata_url
     does not have an md5 digest identical to expected_digest.
-    '''
+    """
     with contextlib.closing(opener.open(full_metadata_url)) as response:
         data = response.read()
         if not expected_digest == compute_checksum(StringIO(data)):
@@ -84,7 +85,7 @@ def get_full_metadata(opener, full_metadata_url, expected_digest):
                 storage_json = json.loads(storage_file.read())
             with inzip.open('metadata.xml') as resource_xml:
                 resource_xml_string = resource_xml.read()
-            return storage_json, resource_xml_string
+            return storage_json, resource_xml_string, expected_digest
 
 
 class ConnectionException(Exception):
