@@ -1,6 +1,7 @@
 from django_selenium.testcases import SeleniumTestCase
 from metashare import settings, test_utils
-from metashare.repository.seltests.test_utils import setup_screenshots_folder, import_dir
+from metashare.repository.seltests.test_utils import setup_screenshots_folder, import_dir,\
+    click_and_wait
 from metashare.settings import DJANGO_BASE, ROOT_PATH
 from selenium import webdriver
 import time
@@ -46,25 +47,23 @@ class FilterTest(SeleniumTestCase):
 
         driver = self.driver
         driver.get(self.base_url)
+        # TODO remove this workaround when Selenium starts working again as intended
+        driver.set_window_size(1280, 1024)
         driver.find_element_by_id("browse").click()
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         self.assertEqual("17 Language Resources", driver.find_element_by_css_selector("h3").text)
         # make sure all filters are available
-        self.assertEqual("Availability", driver.find_element_by_link_text("Availability").text)
         self.assertEqual("Language", driver.find_element_by_link_text("Language").text)
-        self.assertEqual("Licence", driver.find_element_by_link_text("Licence").text)
-        self.assertEqual("Linguality Type", driver.find_element_by_link_text("Linguality Type").text)
-        self.assertEqual("Media Type", driver.find_element_by_link_text("Media Type").text)
-        self.assertEqual("MIME Type", driver.find_element_by_link_text("MIME Type").text)
         self.assertEqual("Resource Type", driver.find_element_by_link_text("Resource Type").text)
+        self.assertEqual("Media Type", driver.find_element_by_link_text("Media Type").text)
+        self.assertEqual("Availability", driver.find_element_by_link_text("Availability").text)
+        self.assertEqual("Licence", driver.find_element_by_link_text("Licence").text)
         self.assertEqual("Restrictions of Use", driver.find_element_by_link_text("Restrictions of Use").text)
-        # check Availability filter
-        driver.find_element_by_link_text("Availability").click()
-        self.assertEqual("Available-restricted Use (17)", driver.find_element_by_xpath(
-          "//div[@id='searchFilters']/div[8]/div").text)
-        driver.find_element_by_link_text("Availability").click()
+        self.assertEqual("Linguality Type", driver.find_element_by_link_text("Linguality Type").text)
+        self.assertEqual("MIME Type", driver.find_element_by_link_text("MIME Type").text)
+        
         # check Language filter
-        driver.find_element_by_link_text("Language").click()
+        click_and_wait(driver.find_element_by_link_text("Language"))
         self.assertEqual("English (8)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[2]/div[1]").text)
         self.assertEqual("Spanish (6)", driver.find_element_by_xpath(
@@ -78,7 +77,7 @@ class FilterTest(SeleniumTestCase):
         self.assertEqual("more", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[2]/div[12]").text)
         # check language filter more/less
-        driver.find_element_by_link_text("more").click()
+        click_and_wait(driver.find_element_by_link_text("more"))
         self.assertEqual("Portuguese (2)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[2]/div[6]").text)
         self.assertEqual("Arabic (1)", driver.find_element_by_xpath(
@@ -93,52 +92,65 @@ class FilterTest(SeleniumTestCase):
           "//div[@id='searchFilters']/div[2]/div[11]").text)
         self.assertEqual("less", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[2]/div[12]").text)
-        driver.find_element_by_link_text("less").click()
+        click_and_wait(driver.find_element_by_link_text("less"))
         self.assertEqual("more", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[2]/div[12]").text)
-        driver.find_element_by_link_text("Language").click()
+        click_and_wait(driver.find_element_by_link_text("Language"))
+        
+        # check Resource Type filter        
+        click_and_wait(driver.find_element_by_link_text("Resource Type"))
+        self.assertEqual("Lexical Conceptual Resource (9)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[4]/div[1]").text)
+        self.assertEqual("Corpus (8)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[4]/div[2]").text)
+        click_and_wait(driver.find_element_by_link_text("Resource Type"))
+        
+        # check Media Type filter        
+        click_and_wait(driver.find_element_by_link_text("Media Type"))
+        self.assertEqual("Text (11)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[6]/div[1]").text)
+        self.assertEqual("Audio (6)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[6]/div[2]").text)
+        click_and_wait(driver.find_element_by_link_text("Media Type"))
+        
+        # check Availability filter
+        click_and_wait(driver.find_element_by_link_text("Availability"))
+        self.assertEqual("Available-restricted Use (17)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[8]/div").text)
+        click_and_wait(driver.find_element_by_link_text("Availability"))
+        
         # check Licence filter
-        driver.find_element_by_link_text("Licence").click()
+        click_and_wait(driver.find_element_by_link_text("Licence"))
         self.assertEqual("ELRA_VAR (14)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[10]/div[1]").text)
         self.assertEqual("ELRA_END_USER (13)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[10]/div[2]").text)
         self.assertEqual("ELRA_EVALUATION (3)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[10]/div[3]").text)
-        driver.find_element_by_link_text("Licence").click()
-        # check Linguality Type filter        
-        driver.find_element_by_link_text("Linguality Type").click()
-        self.assertEqual("Monolingual (17)", driver.find_element_by_xpath(
-          "//div[@id='searchFilters']/div[14]/div[1]").text)
-        driver.find_element_by_link_text("Linguality Type").click()
-        # check Media Type filter        
-        driver.find_element_by_link_text("Media Type").click()
-        self.assertEqual("Text (11)", driver.find_element_by_xpath(
-          "//div[@id='searchFilters']/div[6]/div[1]").text)
-        self.assertEqual("Audio (6)", driver.find_element_by_xpath(
-          "//div[@id='searchFilters']/div[6]/div[2]").text)
-        driver.find_element_by_link_text("Media Type").click()
-        # check MIME Type filter        
-        driver.find_element_by_link_text("MIME Type").click()
-        self.assertEqual("Plain text (2)", driver.find_element_by_xpath(
-          "//div[@id='searchFilters']/div[16]/div[1]").text)
-        driver.find_element_by_link_text("MIME Type").click()
-        # check Resource Type filter        
-        driver.find_element_by_link_text("Resource Type").click()
-        self.assertEqual("Lexical Conceptual Resource (9)", driver.find_element_by_xpath(
-          "//div[@id='searchFilters']/div[4]/div[1]").text)
-        self.assertEqual("Corpus (8)", driver.find_element_by_xpath(
-          "//div[@id='searchFilters']/div[4]/div[2]").text)
-        driver.find_element_by_link_text("Resource Type").click()
+        click_and_wait(driver.find_element_by_link_text("Licence"))
+       
         # check Restrictions of Use filter        
-        driver.find_element_by_link_text("Restrictions of Use").click()
+        click_and_wait(driver.find_element_by_link_text("Restrictions of Use"))
         self.assertEqual("Commercial Use (14)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[12]/div[1]").text)
         self.assertEqual("Academic-non Commercial Use (13)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[12]/div[2]").text)
         self.assertEqual("Evaluation Use (3)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[12]/div[3]").text)
-        driver.find_element_by_link_text("Restrictions of Use").click()
+        click_and_wait(driver.find_element_by_link_text("Restrictions of Use"))
+       
+        # check Linguality Type filter        
+        click_and_wait(driver.find_element_by_link_text("Linguality Type"))
+        self.assertEqual("Monolingual (17)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[14]/div[1]").text)
+        click_and_wait(driver.find_element_by_link_text("Linguality Type"))
+        
+        # check MIME Type filter        
+        click_and_wait(driver.find_element_by_link_text("MIME Type"))
+        self.assertEqual("Plain text (2)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[16]/div[1]").text)
+        click_and_wait(driver.find_element_by_link_text("MIME Type"))
+        
         if True:
             # test sorting:
             # default sorting is by resource name, ascending
