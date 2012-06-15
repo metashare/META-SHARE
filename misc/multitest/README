@@ -75,5 +75,6 @@ replaced with node specific data before starting each node.
 
 metashare.db contains an empty database obtained by:
 python manage.py syncdb
-
+It has a superuser "admin" with password "secret", i.e., all started nodes will
+have this superuser account.
 
