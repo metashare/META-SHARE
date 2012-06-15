@@ -51,10 +51,10 @@ def login(login_url, username, password):
 
 
 def get_inventory(opener, inventory_url):
-    '''
+    """
     Obtain the inventory from a logged-in opener and fill it into a JSON structure.
     Returns the JSON structure.
-    '''
+    """
     try:
         with contextlib.closing(opener.open(inventory_url)) as response:
             data = response.read()
@@ -67,17 +67,19 @@ def get_inventory(opener, inventory_url):
 
 
 def get_full_metadata(opener, full_metadata_url, expected_digest):
-    '''
+    """
     Obtain the full metadata record for one resource.
+    
     Returns a pair of storage_json_string, resource_xml_string.
     
     Raises CorruptDataException if the zip data received from full_metadata_url
     does not have an md5 digest identical to expected_digest.
-    '''
+    """
     with contextlib.closing(opener.open(full_metadata_url)) as response:
         data = response.read()
         if not expected_digest == compute_checksum(StringIO(data)):
-            raise CorruptDataException("Checksum error for resource '{0}'.".format(full_metadata_url))
+            raise CorruptDataException("Checksum error for resource '{0}'." \
+                                       .format(full_metadata_url))
         with ZipFile(StringIO(data), 'r') as inzip:
             with inzip.open('storage-global.json') as storage_file:
                 # should be a json object, not string

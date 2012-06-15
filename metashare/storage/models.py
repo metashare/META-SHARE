@@ -492,7 +492,7 @@ class StorageObject(models.Model):
         # least self.digest_last_checked has changed
         self.save()
 
-def restore_from_folder(storage_id, copy_status=None):
+def restore_from_folder(storage_id, copy_status=None, storage_digest=None):
     """
     Restores the storage object and the associated resource for the given
     storage object identifier and makes it persistent in the database. 
@@ -503,6 +503,9 @@ def restore_from_folder(storage_id, copy_status=None):
     
     copy_status (optional): one of MASTER, REMOTE, PROXY; if present, used as
         copy status for the restored resource
+    
+    storage_digest (optional): the digest_checksum to set in the restored
+        storage object
         
     Returns the restored resource with its storage object set.
     """
@@ -567,6 +570,10 @@ def restore_from_folder(storage_id, copy_status=None):
             # a default
             LOGGER.warn('no copy status provided, using default copy status MASTER')
             _storage_object.copy_status = MASTER
+    
+    # If object is synchronised, retain the storage digest
+    if storage_digest:
+        _storage_object.digest_checksum = storage_digest
 
     _storage_object.save()
     _storage_object.update_storage()
@@ -574,13 +581,16 @@ def restore_from_folder(storage_id, copy_status=None):
     return resource
 
 
-def update_resource(storage_json, resource_xml_string, copy_status=REMOTE):
+def update_resource(storage_json, resource_xml_string, storage_digest,
+                    copy_status=REMOTE):
     '''
     For the resource described by storage_json and resource_xml_string,
     do the following:
 
-    - if it does not exist, import it with the given copy status;
-    - if it exists, delete it from the database, then import it with the given copy status.
+    - if it does not exist, import it with the given copy status and
+        digest_checksum;
+    - if it exists, delete it from the database, then import it with the given
+        copy status and digest_checksum.
     
     Raises 'IllegalAccessException' if an attempt is made to overwrite
     an existing master-copy resource with a non-master-copy one.
@@ -619,9 +629,8 @@ def update_resource(storage_json, resource_xml_string, copy_status=REMOTE):
         remove_files_from_disk(storage_id)
         remove_database_entries(storage_id)
     write_to_disk(storage_id)
-    restore_from_folder(storage_id, copy_status=copy_status)
-
-
+    restore_from_folder(storage_id, copy_status=copy_status,
+                        storage_digest=storage_digest)
 
 
 def _fill_storage_object(storage_obj, json_file_name):
@@ -637,7 +646,7 @@ def _fill_storage_object(storage_obj, json_file_name):
         for _att in _dict.keys():
             setattr(storage_obj, _att, _dict[_att])
         return json_string
-            
+
 
 def update_digests():
     """
