@@ -249,6 +249,8 @@ class EditorTest(TestCase):
             msg_prefix='an editor user must not see the "unpublish" action')
         self.assertNotContains(response, 'Delete selected Resources',
             msg_prefix='an editor user must not see the "delete" action')
+        self.assertNotContains(response, 'Remove an Editor Group',
+            msg_prefix='an editor user must not see the "remove group" action')
         # make sure the manager user can see the manage actions:
         client = self.client_with_user_logged_in(EditorTest.manager_login)
         response = client.get(ADMINROOT + 'repository/resourceinfotype_model/')
@@ -260,6 +262,8 @@ class EditorTest(TestCase):
             msg_prefix='a manager user should see the "unpublish" action')
         self.assertContains(response, 'Delete selected Resources',
             msg_prefix='a manager user should see the "delete" action')
+        self.assertNotContains(response, 'Remove an Editor Group',
+            msg_prefix='an manager user must not see the "remove group" action')
         # make sure the superuser can see the manage actions:
         client = self.client_with_user_logged_in(EditorTest.superuser_login)
         response = client.get(ADMINROOT + 'repository/resourceinfotype_model/')
@@ -271,6 +275,8 @@ class EditorTest(TestCase):
             msg_prefix='a superuser should see the "unpublish" action')
         self.assertContains(response, 'Delete selected Resources',
             msg_prefix='a superuser should see the "delete" action')
+        self.assertContains(response, 'Remove an Editor Group',
+            msg_prefix='an superuser  should see the "remove groups" action')
 
     def test_upload_single_xml(self):
         client = self.client_with_user_logged_in(EditorTest.editor_login)
