@@ -4,7 +4,7 @@ from metashare import settings, test_utils
 from metashare.accounts.models import EditorGroup, ManagerGroup
 from metashare.repository.models import resourceInfoType_model
 from metashare.repository.seltests.test_utils import login_user, mouse_over, \
-    setup_screenshots_folder, click_menu_item
+    setup_screenshots_folder, click_menu_item, save_and_close
 from metashare.settings import DJANGO_BASE, ROOT_PATH
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
@@ -168,8 +168,7 @@ class EditorTest(SeleniumTestCase):
         self.fill_text_size(driver, ss_path, "sizeinfotype_model_set-0-")
         # save and close corpus text info popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        driver.find_element_by_name("_save").click()
-        driver.switch_to_window(root_id)
+        save_and_close(driver, root_id)
         
         # save text corpus
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -252,8 +251,7 @@ class EditorTest(SeleniumTestCase):
         self.fill_audio_size(driver, ss_path, "id_corpusAudioInfo")
         # save and close corpus audio info popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        driver.find_element_by_name("_save").click()
-        driver.switch_to_window(root_id)
+        save_and_close(driver, root_id)
         
         # save audio corpus
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -330,8 +328,7 @@ class EditorTest(SeleniumTestCase):
         Select(driver.find_element_by_id("id_languageDescriptionType")).select_by_visible_text(
           "grammar")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time())) 
-        driver.find_element_by_name("_save").click()
-        driver.switch_to_window(root_id)
+        save_and_close(driver, root_id)
           
         # language description info text popup
         driver.find_element_by_id("add_id_languageDescriptionTextInfo").click()
@@ -343,8 +340,7 @@ class EditorTest(SeleniumTestCase):
         self.fill_language(driver, ss_path, "languageinfotype_model_set-0-")
         # save and close language description info text popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        driver.find_element_by_name("_save").click()
-        driver.switch_to_window(root_id)
+        save_and_close(driver, root_id)
 
         # save language description text
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -422,8 +418,7 @@ class EditorTest(SeleniumTestCase):
         Select(driver.find_element_by_id("id_lexicalConceptualResourceType")).select_by_visible_text(
           "wordList")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time())) 
-        driver.find_element_by_name("_save").click()
-        driver.switch_to_window(root_id)
+        save_and_close(driver, root_id)
           
         # lexical resource text info popup
         driver.find_element_by_id("add_id_lexicalConceptualResourceTextInfo").click()
@@ -436,8 +431,7 @@ class EditorTest(SeleniumTestCase):
         self.fill_text_size(driver, ss_path, "sizeinfotype_model_set-0-")
         # save and close lexical resource text info popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        driver.find_element_by_name("_save").click()
-        driver.switch_to_window(root_id)
+        save_and_close(driver, root_id)
 
         # save lexical resource text
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -515,8 +509,7 @@ class EditorTest(SeleniumTestCase):
         Select(driver.find_element_by_id("id_languageDependent")).select_by_visible_text("Yes")
         # save and close tool info popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        driver.find_element_by_name("_save").click()
-        driver.switch_to_window(root_id)
+        save_and_close(driver, root_id)
 
         # save tool
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -586,8 +579,7 @@ class EditorTest(SeleniumTestCase):
           "//select[@id='id_availability']/option[4]").text)        
         self.assertEqual("underNegotiation", driver.find_element_by_xpath(
           "//select[@id='id_availability']/option[5]").text)
-        driver.find_element_by_name("_save").click()
-        driver.switch_to_window(root_id)
+        save_and_close(driver, root_id)
         # corpus info text popup
         driver.find_element_by_id("add_id_corpusTextInfo-0").click()
         driver.switch_to_window("id_corpusTextInfo__dash__0")
@@ -689,8 +681,7 @@ class EditorTest(SeleniumTestCase):
         Select(driver.find_element_by_id("id_availability")).select_by_visible_text(
           "available-unrestrictedUse")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        driver.find_element_by_name("_save").click()
-        driver.switch_to_window(parent_id)
+        save_and_close(driver, parent_id)
         
         
     def fill_contact_person(self, driver, ss_path, parent_id):
@@ -706,8 +697,7 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_id("id_form-0-email").clear()
         driver.find_element_by_id("id_form-0-email").send_keys("mustermann@org.com")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        driver.find_element_by_name("_save").click()
-        driver.switch_to_window(parent_id)
+        save_and_close(driver, parent_id)
         
         
     def fill_language(self, driver, ss_path, id_infix):
@@ -732,8 +722,7 @@ class EditorTest(SeleniumTestCase):
     def fill_audio_size(self, driver, ss_path, parent_id):
         driver.switch_to_window("id_audioSizeInfo")
         # TODO: the popup can be saved immediately, but still audio size is required in corpus audio info
-        driver.find_element_by_name("_save").click()
-        driver.switch_to_window(parent_id)
+        save_and_close(driver, parent_id)
         
         
     def ingest(self, driver):
