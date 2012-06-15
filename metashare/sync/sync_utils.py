@@ -69,8 +69,8 @@ def get_inventory(opener, inventory_url):
 def get_full_metadata(opener, full_metadata_url, expected_digest):
     """
     Obtain the full metadata record for one resource.
-    Returns storage_json_string, resource_xml_string and expected_digest.
-    The expected_digest is just passed though withoug being used.
+    
+    Returns a pair of storage_json_string, resource_xml_string.
     
     Raises CorruptDataException if the zip data received from full_metadata_url
     does not have an md5 digest identical to expected_digest.
@@ -78,14 +78,15 @@ def get_full_metadata(opener, full_metadata_url, expected_digest):
     with contextlib.closing(opener.open(full_metadata_url)) as response:
         data = response.read()
         if not expected_digest == compute_checksum(StringIO(data)):
-            raise CorruptDataException("Checksum error for resource '{0}'.".format(full_metadata_url))
+            raise CorruptDataException("Checksum error for resource '{0}'." \
+                                       .format(full_metadata_url))
         with ZipFile(StringIO(data), 'r') as inzip:
             with inzip.open('storage-global.json') as storage_file:
                 # should be a json object, not string
                 storage_json = json.loads(storage_file.read())
             with inzip.open('metadata.xml') as resource_xml:
                 resource_xml_string = resource_xml.read()
-            return storage_json, resource_xml_string, expected_digest
+            return storage_json, resource_xml_string
 
 
 class ConnectionException(Exception):
