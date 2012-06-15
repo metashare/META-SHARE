@@ -185,6 +185,7 @@ class UpdateTests(unittest.TestCase):
         with open('{0}/metadata-modified.xml'.format(folder), 'rb') as metadatain:
             self.metadata_modified = metadatain.read()
         self.storage_id = self.storage_json['identifier']
+        self.storage_digest = None
 
     
     def cleanup_storage(self):
@@ -209,7 +210,7 @@ class UpdateTests(unittest.TestCase):
         Simulate the case where synchronization brings a new storage object to be instantiated.
         """
         # Exercise
-        update_resource(self.storage_json, self.metadata_before)
+        update_resource(self.storage_json, self.metadata_before, self.storage_digest)
         # Verify
         self.assertEquals(1, StorageObject.objects.filter(identifier=self.storage_id).count())
         storage_object = StorageObject.objects.get(identifier=self.storage_id)
@@ -225,11 +226,11 @@ class UpdateTests(unittest.TestCase):
             return resource.metadataInfo.metadataCreationDate
         
         # setup
-        update_resource(self.storage_json, self.metadata_before)
+        update_resource(self.storage_json, self.metadata_before, self.storage_digest)
         self.assertEquals(date(2005, 5, 12), get_metadatacreationdate_for(self.storage_id))
         self.assertEquals(REMOTE, StorageObject.objects.get(identifier=self.storage_id).copy_status)
         # exercise
-        update_resource(self.storage_json, self.metadata_modified)
+        update_resource(self.storage_json, self.metadata_modified, self.storage_digest)
         self.assertEquals(date(2006, 12, 31), get_metadatacreationdate_for(self.storage_id))
 
     def test_update_refuse_mastercopy(self):
@@ -237,11 +238,11 @@ class UpdateTests(unittest.TestCase):
         Refuse to replace a master copy with a non-master copy during update 
         """
         # setup
-        update_resource(self.storage_json, self.metadata_before, MASTER)
+        update_resource(self.storage_json, self.metadata_before, self.storage_digest, MASTER)
         self.assertEquals(MASTER, StorageObject.objects.get(identifier=self.storage_id).copy_status)
         # exercise
         try:
-            update_resource(self.storage_json, self.metadata_modified, REMOTE)
+            update_resource(self.storage_json, self.metadata_modified, self.storage_digest, REMOTE)
             self.fail("Should have raised an exception")
         except IllegalAccessException:
             pass # Expected exception
