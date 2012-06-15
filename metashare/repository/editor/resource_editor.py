@@ -3,7 +3,6 @@ import datetime
 from django import forms
 from django.contrib import admin
 from django.contrib.admin.util import unquote
-from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.contrib.auth.decorators import permission_required
 from django.core.exceptions import ValidationError, PermissionDenied
 from django.db.models import Q
@@ -17,7 +16,6 @@ from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 from django.views.decorators.csrf import csrf_protect
-from django.core.context_processors import csrf
 
 from metashare import settings
 from metashare.accounts.models import EditorGroup, ManagerGroup
@@ -665,7 +663,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
         if not request.user.is_superuser:
             # only users with delete permissions can see the delete action:
             if not self.has_delete_permission(request):
-                del result['delete_selected', remove_group]
+                del result['delete_selected']
+                del result['remove_group']
             # only users who are the manager of some group can see the
             # ingest/publish/unpublish actions:
             if ManagerGroup.objects.filter(name__in=
