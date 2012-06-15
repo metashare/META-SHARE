@@ -92,6 +92,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
 TIME_ZONE = 'Europe/Berlin'
 
 # Shared secret used for Single-Sign-On between META-SHARE core nodes.
+
 SSO_SECRET_KEY = '6736d82b807811e0a1e51093e908621ab4e0e5225bde4fbcb1aa160fbd198e2a'
 
 # The URL for META-SHARE statistics server.
@@ -108,8 +109,31 @@ SELENIUM_DRIVER = 'Firefox'
 # this must be the same port as used in DJANGO_URL
 SELENIUM_TESTSERVER_PORT = 8000
 
-# User accounts with the permission to access synchronization information:
+# List of other META-SHARE nodes from which the local node imports resource
+# descriptions. Any remote changes will later be updated ("synchronized")
+# Use this if you are a META-SHARE core node!
+CORE_NODES = {
+#    'node1': {
+#        'NAME': 'AUNI',                       # The short name of the node.
+#        'DESCRIPTION': 'xxx',                 # A short descpription of the node.
+#        'URL': 'metashare.example.com:8000',  # The URL of the core node (also 
+#                                              # include the port if needed).
+#        'USERNAME': 'sync-user-1',            # The name of a sync user on 
+#                                              # the core node.
+#        'PASSWORD': 'sync-user-pass',         # Sync user's password.
+#    },
+#    'node2': {
+#        'NAME': 'BUNI',                     
+#        'DESCRIPTION': 'xxx',               
+#        'URL': 'metashare.test.com',
+#        'USERNAME': 'sync-user-2',
+#        'PASSWORD': 'sync-user-pass-2',
+#    },
+}
+
+# User accounts with the permission to access synchronization information on
+# this node:
 SYNC_USERS = {
-    #'syncuser1':'secret',
-    #'syncuser2':'alsosecret',
+    #'syncuser1': 'secret',
+    #'syncuser2': 'alsosecret',
 }
