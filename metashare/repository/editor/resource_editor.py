@@ -665,7 +665,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         if not request.user.is_superuser:
             # only users with delete permissions can see the delete action:
             if not self.has_delete_permission(request):
-                del result['delete_selected', 'remove_group']
+                del result['delete_selected', remove_group]
             # only users who are the manager of some group can see the
             # ingest/publish/unpublish actions:
             if ManagerGroup.objects.filter(name__in=
