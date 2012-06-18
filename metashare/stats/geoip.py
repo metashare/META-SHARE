@@ -2,10 +2,10 @@ import os
 import sys
 # Insert our dependencies:
 from os.path import abspath, dirname, join
-parentdir = dirname(dirname(abspath(__file__)))
+parentdir = dirname(dirname(dirname(abspath(__file__))))
 sys.path.insert(0, join(parentdir, 'lib', 'python2.7', 'site-packages'))
 import pygeoip
-
+print "???? " +join(parentdir, 'lib', 'python2.7', 'site-packages')
 # Info about of the known countries
 country_info = {"AD": ["Andorra", "42.5075314,1.5218156"],
 "AE": ["United Arab Emirates", "23.424076,53.847818"],
