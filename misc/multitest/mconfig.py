@@ -64,6 +64,7 @@ class mconfig:
 		self.dict['SOLR_ROOT'] = '{0}/instance{1}'.format(self.solr_root, self.node_id)
 		self.dict['SYNC_USERS'] = self.get_sync_users_data(escape=True)
 		self.dict['CORE_NODES'] = self.get_core_nodes_data(escape=True)
+		self.dict['PROXIED_NODES'] = self.get_outer_nodes_data(escape=True)
 
 	def get_other_inner_nodes(self):
 		if self.node_type == 'outer':
@@ -77,13 +78,21 @@ class mconfig:
 	def get_outer_nodes(self):
 		return self.outer_nodes
 
+	def get_outer_nodes_data(self, escape=False):
+		return self._get_other_nodes_data(
+			self.get_outer_nodes(), 'PROXIED_NODES', escape)
+
 	def get_core_nodes_data(self, escape=False):
+		return self._get_other_nodes_data(
+			self.get_other_inner_nodes(), 'CORE_NODES', escape)
+
+	def _get_other_nodes_data(self, nodes, data_name, escape):
 		counter = 1
 		end_str = ''
 		if escape:
 			end_str = '\\'
-		data_str = "CORE_NODES = {{{0}\n".format(end_str)
-		for n in self.get_other_inner_nodes():
+		data_str = "{0} = {{{1}\n".format(data_name, end_str)
+		for n in nodes:
 			data_str = data_str + "\t'node{0}' : {{{1}\n".format(counter, end_str)
 			data_str = data_str + "\t\t'NAME': '{0}',{1}\n".format(n.node_name, end_str)
 			data_str = data_str + "\t\t'DESCRIPTION': '{0} Metashare node',{1}\n".format(n.node_name, end_str)
