@@ -1,7 +1,7 @@
 from django_selenium.testcases import SeleniumTestCase
 from metashare import settings, test_utils
-from metashare.repository.seltests.test_utils import setup_screenshots_folder, import_dir,\
-    click_and_wait
+from metashare.repository.seltests.test_utils import setup_screenshots_folder, \
+    import_dir, click_and_wait
 from metashare.settings import DJANGO_BASE, ROOT_PATH
 from selenium import webdriver
 import time
