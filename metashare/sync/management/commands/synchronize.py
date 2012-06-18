@@ -3,10 +3,11 @@ Management utility to trigger synchronization.
 """
 
 import sys
-from metashare.settings import CORE_NODES
+from metashare import settings
 from metashare.sync.sync_utils import login, get_inventory, get_full_metadata
 from django.core.management.base import BaseCommand
-from metashare.storage.models import StorageObject, MASTER, update_resource
+from metashare.storage.models import StorageObject, MASTER, PROXY, REMOTE, \
+    update_resource
 
 # Constants to show bold-face fonts in standard output
 BOLD = "\033[1m"
@@ -17,10 +18,25 @@ class Command(BaseCommand):
     help = 'Synchronizes with a predefined list of META-SHARE nodes'
     
     def handle(self, *args, **options):
-        # Get the list of the servers to be querried
-        core_nodes = CORE_NODES
+        """
+        Synchronizes this META-SHARE node with the locally configured other
+        META-SHARE nodes.
+        """
+        Command.sync_with_nodes(getattr(settings, 'CORE_NODES', {}), False)
+        Command.sync_with_nodes(getattr(settings, 'PROXIED_NODES', {}), True)
 
-        for server in core_nodes.values():
+
+    @staticmethod
+    def sync_with_nodes(nodes, is_proxy):
+        """
+        Synchronizes this META-SHARE node with the given other META-SHARE nodes.
+        
+        `nodes` is a dict of dicts with synchronization settings for the nodes
+            to synchronize with
+        `is_proxy` must be True if this node is a proxy for the given nodes;
+            it must be False if the given nodes are not proxied by this node
+        """
+        for server in nodes.values():
             new_resources = []
             resources_to_update = []
             local_inventory = []
@@ -85,6 +101,11 @@ class Command(BaseCommand):
                   + RESET + " will be updated in your repository.\n")
                 sys.stdout.write("\nImporting and Indexing...\n")
 
+                if is_proxy:
+                    _copy_status = PROXY
+                else:
+                    _copy_status = REMOTE
+                
                 # Get the full xmls from remore inventory and update local inventory
                 for resource in new_resources:
                     # Get the json storage object and the actual metadata xml
@@ -92,7 +113,7 @@ class Command(BaseCommand):
                       get_full_metadata(opener, "{0}/sync/{1}/metadata/" \
                             .format(url, resource['id']), resource['digest'])
                     update_resource(storage_json, resource_xml_string,
-                                    resource['digest'])
+                                    resource['digest'], _copy_status)
 
                 for resource in resources_to_update:
                     # Get the json storage object and the actual metadata xml
@@ -100,6 +121,6 @@ class Command(BaseCommand):
                       get_full_metadata(opener, "{0}/sync/{1}/metadata/" \
                             .format(url, resource['id']), resource['digest'])
                     update_resource(storage_json, resource_xml_string,
-                                    resource['digest'])
+                                    resource['digest'], _copy_status)
 
             sys.stdout.write("\n\n")

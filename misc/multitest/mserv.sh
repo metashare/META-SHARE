@@ -34,6 +34,16 @@ stop_django()
 	rm -f -- "$DJANGO_PID"
 }
 
+run_syncdb()
+{
+	cd "$METASHARE_DIR"
+	echo "Running manage.py syncdb"
+	export NODE_DIR=$TEST_DIR/$NODE_NAME
+	"$PYTHON" manage.py syncdb
+	cd "$CURRENT_DIR"
+}
+
+
 # Check it the environment variable is set and points
 # to a valid directory
 if [[ "$METASHARE_SW_DIR" == "" ]] ; then
@@ -124,6 +134,7 @@ while "$PYTHON" get_node_cfg.py $counter NODE_NAME &> /dev/null ; do
 		mkdir "$STORAGE_PATH"
 
 		CORE_NODES=`"$PYTHON" "$CURRENT_DIR/get_node_cfg.py" $counter CORE_NODES`
+		PROXIED_NODES=`"$PYTHON" "$CURRENT_DIR/get_node_cfg.py" $counter PROXIED_NODES`
 		SYNC_USERS=`"$PYTHON" "$CURRENT_DIR/get_node_cfg.py" $counter SYNC_USERS`
 		# Create custom local_settings
 		echo "s/%%SOLR_PORT%%/$SOLR_PORT/g" > /tmp/sed.scr
@@ -131,11 +142,15 @@ while "$PYTHON" get_node_cfg.py $counter NODE_NAME &> /dev/null ; do
 		echo "s#%%STORAGE_PATH%%#$STORAGE_PATH#g" >> /tmp/sed.scr
 		echo "s/%%DJANGO_PORT%%/$DJANGO_PORT/g" >> /tmp/sed.scr
 		echo "s#%%CORE_NODES%%#$CORE_NODES#g" >> /tmp/sed.scr
+		echo "s#%%PROXIED_NODES%%#$PROXIED_NODES#g" >> /tmp/sed.scr
 		echo "s#%%SYNC_USERS%%#$SYNC_USERS#g" >> /tmp/sed.scr
 		cat "$CURRENT_DIR/init_data/local_settings_test2.py" | sed -f /tmp/sed.scr \
 			> "$NODE_SETTINGS_DIR/local_settings.py"
 		rm /tmp/sed.scr
 		touch "$NODE_SETTINGS_DIR/__init__.py"
+
+    # run syncdb on the new node to create all synchronization user accounts
+    run_syncdb
 
 		# Start Django application
 		start_django

@@ -1,12 +1,12 @@
 from django.db.models import get_models, signals
 from metashare.sync import models as sync_models
-from metashare import local_settings
+from metashare import settings
 from django.contrib.auth.models import User
 
 def create_syncuser(app, created_models, verbosity, **kwargs):
     from django.core.management import call_command
     
-    syncusers = getattr(local_settings, "SYNC_USERS", {})
+    syncusers = getattr(settings, "SYNC_USERS", {})
     
     for username, password in syncusers.iteritems():
         try:
