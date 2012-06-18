@@ -87,7 +87,7 @@ class mconfig:
 			data_str = data_str + "\t'node{0}' : {{{1}\n".format(counter, end_str)
 			data_str = data_str + "\t\t'NAME': '{0}',{1}\n".format(n.node_name, end_str)
 			data_str = data_str + "\t\t'DESCRIPTION': '{0} Metashare node',{1}\n".format(n.node_name, end_str)
-			data_str = data_str + "\t\t'URL': 'http://127.0.0.1:{0}',{1}\n".format(n.django_port, end_str)
+			data_str = data_str + "\t\t'URL': 'http://127.0.0.1:{0}/metashare',{1}\n".format(n.django_port, end_str)
 			data_str = data_str + "\t\t'USERNAME': 'sync-user-{0}',{1}\n".format(self.node_id, end_str)
 			data_str = data_str + "\t\t'PASSWORD': 'sync-user-pass-{0}',{1}\n".format(self.node_id, end_str)
 			data_str = data_str + "\t}},{0}\n".format(end_str)
