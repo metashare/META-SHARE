@@ -46,6 +46,8 @@ class ExampleSeleniumTest(SeleniumTestCase):
           driver.find_element_by_xpath(
             "//div[@id='content']/div[3]/div/p[2]").text)
         # login normaluser
+        # TODO remove this workaround when Selenium starts working again as intended
+        driver.set_window_size(1280, 1024)
         driver.find_element_by_xpath(
           "//div[@id='inner']/div[2]/a[2]/div").click()
         driver.find_element_by_id("id_username").clear()

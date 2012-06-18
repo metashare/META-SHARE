@@ -45,12 +45,8 @@ class MetashareTestRunner(SeleniumTestRunner):
 # if we're in a Jenkins test environment, then we also create a test runner for
 # Jenkins
 try:
-    from django_jenkins.runner import CITestSuiteRunner
-    class MetashareJenkinsTestRunner(CITestSuiteRunner):
-    # TODO: reenable Selenium tests again as soon as we know what is causing the
-    #   problems with Firefox 13:
-#    from django_selenium.jenkins_runner import JenkinsTestRunner
-#    class MetashareJenkinsTestRunner(JenkinsTestRunner):
+    from django_selenium.jenkins_runner import JenkinsTestRunner
+    class MetashareJenkinsTestRunner(JenkinsTestRunner):
         """
         A custom Django Jenkins test runner which inherits from Selenium's
         `JenkinsTestRunner` which in turn inherits from `CITestSuiteRunner`.
