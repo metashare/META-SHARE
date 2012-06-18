@@ -34,6 +34,16 @@ stop_django()
 	rm -f -- "$DJANGO_PID"
 }
 
+run_syncdb()
+{
+	cd "$METASHARE_DIR"
+	echo "Running manage.py syncdb"
+	export NODE_DIR=$TEST_DIR/$NODE_NAME
+	"$PYTHON" manage.py syncdb
+	cd "$CURRENT_DIR"
+}
+
+
 # Check it the environment variable is set and points
 # to a valid directory
 if [[ "$METASHARE_SW_DIR" == "" ]] ; then
@@ -136,6 +146,9 @@ while "$PYTHON" get_node_cfg.py $counter NODE_NAME &> /dev/null ; do
 			> "$NODE_SETTINGS_DIR/local_settings.py"
 		rm /tmp/sed.scr
 		touch "$NODE_SETTINGS_DIR/__init__.py"
+
+    # run syncdb on the new node to create all synchronization user accounts
+    run_syncdb
 
 		# Start Django application
 		start_django
