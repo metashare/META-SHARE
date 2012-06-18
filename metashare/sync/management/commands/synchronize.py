@@ -70,9 +70,10 @@ class Command(BaseCommand):
             new_resources_count = len(new_resources)
             resources_to_update_count = len(resources_to_update)            
             if ((new_resources_count == 0) and (resources_to_update_count == 0)):
-                sys.stdout.write("\nThere are no resources marked \
-                  for updating!\n")
-            else:           
+                sys.stdout.write("\nThere are no resources marked" +\
+                  " for updating!\n")
+            else:
+				# If there are resources to add or update
                 sys.stdout.write("\n" + BOLD + \
                   ("No" if new_resources_count == 0 \
                   else str(new_resources_count)) + \
