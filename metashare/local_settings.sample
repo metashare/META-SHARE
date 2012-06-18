@@ -109,9 +109,9 @@ SELENIUM_DRIVER = 'Firefox'
 # this must be the same port as used in DJANGO_URL
 SELENIUM_TESTSERVER_PORT = 8000
 
-# List of other META-SHARE nodes from which the local node imports resource
-# descriptions. Any remote changes will later be updated ("synchronized")
-# Use this if you are a META-SHARE core node!
+# List of other META-SHARE core ("inner circle") nodes from which the local node
+# imports resource descriptions. Any remote changes will later be updated
+# ("synchronized"). Use this if you are a META-SHARE core node!
 CORE_NODES = {
 #    'node1': {
 #        'NAME': 'AUNI',                       # The short name of the node.
@@ -137,3 +137,20 @@ SYNC_USERS = {
     #'syncuser1': 'secret',
     #'syncuser2': 'alsosecret',
 }
+
+# List of other META-SHARE nodes from which the local node imports resource
+# descriptions. Any remote changes will later be updated ("synchronized"). Any
+# imported resource descriptions will also be shared with other nodes that
+# synchronize with this local node, i.e., this node acts as a proxy for the
+# listed nodes. This setting is meant to be used by core nodes which make outer
+# node resource descriptions available on the nodes of the inner circle.
+PROXIED_NODES = {
+#    'proxied_node_1': {
+#        'NAME': 'Proxied Node 1',
+#        'DESCRIPTION': 'xxx',
+#        'URL': 'metashare.example.org',
+#        'USERNAME': 'sync-user-3',
+#        'PASSWORD': 'sync-user-pass-3',
+#    },
+}
+
