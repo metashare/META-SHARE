@@ -11,9 +11,7 @@ from metashare.storage.models import StorageObject, _validate_valid_xml, \
 from metashare import settings, test_utils
 from metashare.settings import DJANGO_BASE
 import json
-import os
-from metashare.repository.models import resourceInfoType_model, \
-    personInfoType_model
+from metashare.repository.models import resourceInfoType_model
 from datetime import date
 from metashare.test_utils import set_index_active
 
@@ -188,24 +186,12 @@ class UpdateTests(unittest.TestCase):
         self.storage_id = self.storage_json['identifier']
         self.storage_digest = None
 
-    
-    def cleanup_storage(self):
-        """
-        Deletes the content of the storage folder.
-        """
-        for _folder in os.listdir(settings.STORAGE_PATH):
-            for _file in os.listdir(os.path.join(settings.STORAGE_PATH, _folder)):
-                os.remove(os.path.join(settings.STORAGE_PATH, _folder, _file))
-            os.rmdir(os.path.join(settings.STORAGE_PATH, _folder))
-
     def tearDown(self):
         """
-        Removes all storage object instances from the database after testing.
+        Clean DB and storage folder after testing.
         """
-        StorageObject.objects.all().delete()
-        personInfoType_model.objects.all().delete()
-        self.cleanup_storage()
-
+        test_utils.clean_db()
+        test_utils.clean_storage()
 
     def test_update_new(self):
         """

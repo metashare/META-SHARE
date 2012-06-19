@@ -11,9 +11,8 @@ from metashare import test_utils
 from metashare.accounts.models import EditorGroup, ManagerGroup
 from metashare.repository import models
 from metashare.repository.models import languageDescriptionInfoType_model, \
-    lexicalConceptualResourceInfoType_model, resourceInfoType_model
+    lexicalConceptualResourceInfoType_model
 from metashare.settings import DJANGO_BASE, ROOT_PATH
-
 
 ADMINROOT = '/{0}editor/'.format(DJANGO_BASE)
 TESTFIXTURE_XML = '{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
@@ -57,6 +56,7 @@ class EditorTest(TestCase):
         pollute the "normal" development db or the production db.
         As a consequence, they need no valuable password.
         """
+        test_utils.set_index_active(False)
         EditorTest.test_editor_group = EditorGroup.objects.create(
                                                     name='test_editor_group')
         EditorTest.test_manager_group = \
@@ -129,9 +129,11 @@ class EditorTest(TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        resourceInfoType_model.objects.all().delete()
+        test_utils.clean_db()
+        test_utils.clean_storage()
         User.objects.all().delete()
         EditorGroup.objects.all().delete()
+        test_utils.set_index_active(True)
 
 
     def client_with_user_logged_in(self, user_credentials):

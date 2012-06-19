@@ -2,12 +2,20 @@ import os
 from django.test import TestCase
 from metashare import test_utils
 from metashare.settings import ROOT_PATH
-from metashare.repository.models import resourceInfoType_model
 
 class ImportTest(TestCase):
     """
     Tests the import procedure for resources
     """
+    
+    @classmethod
+    def setUpClass(cls):
+        test_utils.set_index_active(False)
+    
+    @classmethod
+    def tearDownClass(cls):
+        test_utils.set_index_active(True)
+        
     def setUp(self):
         """
         Set up the import test
@@ -18,7 +26,8 @@ class ImportTest(TestCase):
         """
         Clean up the test
         """
-        resourceInfoType_model.objects.all().delete()
+        test_utils.clean_db()
+        test_utils.clean_storage()
 
     def test_import_ELRA(self):      
         """

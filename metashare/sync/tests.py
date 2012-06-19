@@ -147,7 +147,8 @@ class MetadataSyncTest (TestCase):
     @classmethod
     def tearDownClass(cls):
         User.objects.all().delete()
-        StorageObject.objects.all().delete()
+        test_utils.clean_db()
+        test_utils.clean_storage()
         set_index_active(True)
     
 
