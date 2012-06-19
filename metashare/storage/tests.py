@@ -12,7 +12,7 @@ from metashare import settings, test_utils
 from metashare.settings import DJANGO_BASE
 import json
 import os
-from metashare.repository.models import resourceInfoType_model,\
+from metashare.repository.models import resourceInfoType_model, \
     personInfoType_model
 from datetime import date
 from metashare.test_utils import set_index_active
@@ -54,7 +54,7 @@ class StorageObjectTestCase(unittest.TestCase):
         _url = '/{0}storage/revision/{1}/'.format(DJANGO_BASE, storage_object.identifier)
         response = self.client.get(_url)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(int(response.content), 0)
+        self.assertEqual(int(response.content), 1)
         
         # If we update the revision information for the object, this should
         # also produce an updated result for the current URL.
@@ -102,7 +102,7 @@ class StorageObjectTestCase(unittest.TestCase):
         storage_object = StorageObject.objects.get(pk=self.object_id)
         
         # revision defaults to 0.
-        self.assertIs(storage_object.revision, 0)
+        self.assertIs(storage_object.revision, 1)
                 
         # master_copy defaults to True.
         self.assertTrue(storage_object.master_copy)

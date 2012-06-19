@@ -62,7 +62,7 @@ COPY_CHOICES = (
 
 # attributes to by serialized in the global JSON of the storage object
 GLOBAL_STORAGE_ATTS = ['source_url', 'identifier', 'created', 'modified', 
-  'revision', 'publication_status', 'metashare_version']
+  'revision', 'publication_status', 'metashare_version', 'deleted']
 
 # attributes to be serialized in the local JSON of the storage object
 LOCAL_STORAGE_ATTS = ['digest_checksum', 'digest_modified', 
@@ -252,7 +252,7 @@ class StorageObject(models.Model):
       help_text="(Read-only) last update check date of digest zip " \
       "for this storage object instance.")
     
-    revision = models.PositiveIntegerField(default=0, help_text="Revision " \
+    revision = models.PositiveIntegerField(default=1, help_text="Revision " \
       "or version information for this storage object instance.")
       
     metashare_version = models.CharField(max_length=32, editable=False, 
@@ -411,35 +411,43 @@ class StorageObject(models.Model):
         if self.master_copy:
             self._compute_checksum()
         
-        # flag to indicate if rebuilding of resource.zip is required
-        update_zip = False
-        
         self.digest_last_checked = datetime.now()        
+
+        # flag to indicate if rebuilding of metadata.xml is required
+        update_xml = False
         
         # create current version of metadata XML
         _metadata = pretty_xml(tostring(
           # pylint: disable-msg=E1101
           self.resourceinfotype_model_set.all()[0].export_to_elementtree()))
         
-        # check if there exists a metadata XML file; this is not the case if
-        # the publication status just changed from internal to ingested
-        _xml_exists = os.path.isfile(
-          '{0}/metadata-{1:04d}.xml'.format(self._storage_folder(), self.revision))
-          
-        # check if metadata has changed; if yes, increase revision for ingested
-        # and published resources and save metadata to storage folder
-        if self.metadata != _metadata or not _xml_exists:
-            if self.metadata != _metadata:
-                self.metadata = _metadata
-                self.modified = datetime.now()
+        if self.metadata != _metadata:
+            self.metadata = _metadata
+            self.modified = datetime.now()
+            # increase revision for ingested and published resources whenever 
+            # the metadata XML changes
             if self.publication_status in (INGESTED, PUBLISHED):
                 self.revision += 1
-                # serialize metadata
-                with open('{0}/metadata-{1:04d}.xml'.format(
-                  self._storage_folder(), self.revision), 'wb') as _out:
-                    _out.write(unicode(self.metadata).encode('utf-8'))
-                update_zip = True
+                update_xml = True
             LOGGER.debug(u"\nMETADATA: {0}\n".format(self.metadata))
+            
+        # check if there exists a metadata XML file; this is not the case if
+        # the publication status just changed from internal to ingested
+        # or if the resource was received when syncing
+        if self.publication_status in (INGESTED, PUBLISHED) \
+          and not os.path.isfile(
+          '{0}/metadata-{1:04d}.xml'.format(self._storage_folder(), self.revision)):
+            update_xml = True
+
+        # flag to indicate if rebuilding of resource.zip is required
+        update_zip = False
+          
+        if update_xml:
+            # serialize metadata
+            with open('{0}/metadata-{1:04d}.xml'.format(
+              self._storage_folder(), self.revision), 'wb') as _out:
+                _out.write(unicode(self.metadata).encode('utf-8'))
+            update_zip = True
         
         # check if global storage object serialization has changed; if yes,
         # save it to storage folder
@@ -456,8 +464,8 @@ class StorageObject(models.Model):
                     _out.write(unicode(self.global_storage).encode('utf-8'))
                 update_zip = True
         
-        # create new digest zip if required, but only for master copies
-        if update_zip and self.copy_status == MASTER:
+        # create new digest zip if required, but only for master and proxy copies
+        if update_zip and self.copy_status in (MASTER, PROXY):
             _zf_name = '{0}/resource.zip'.format(self._storage_folder())
             _zf = zipfile.ZipFile(_zf_name, mode='w', compression=ZIP_DEFLATED)
             try:
