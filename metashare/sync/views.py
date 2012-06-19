@@ -2,8 +2,9 @@ from django.http import HttpResponse
 import json
 from zipfile import ZipFile
 from metashare import settings
+from django.db.models import Q
 from django.shortcuts import get_object_or_404
-from metashare.storage.models import StorageObject, MASTER, INTERNAL
+from metashare.storage.models import StorageObject, MASTER, PROXY, INTERNAL
 import dateutil.parser
 
 def inventory(request):
@@ -13,7 +14,9 @@ def inventory(request):
     response['Metashare-Version'] = settings.METASHARE_VERSION
     response['Content-Disposition'] = 'attachment; filename="inventory.zip"'
     json_inventory = []
-    objects_to_sync = StorageObject.objects.filter(copy_status=MASTER).exclude(publication_status=INTERNAL)
+    objects_to_sync = StorageObject.objects \
+        .filter(Q(copy_status=MASTER) | Q(copy_status=PROXY)) \
+        .exclude(publication_status=INTERNAL)
     if 'from' in request.GET:
         try:
             fromdate = dateutil.parser.parse(request.GET['from'])
