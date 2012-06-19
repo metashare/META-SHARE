@@ -310,7 +310,7 @@ class EditorTest(TestCase):
         self.assertNotContains(response, 'Import failed')
         # And verify that we have more than zero resources on the page where we
         # are being redirected:
-        self.assertContains(response, "Editable Resources")
+        self.assertContains(response, "My Resources")
         self.assertNotContains(response, '0 Resources')
 
     def test_upload_broken_zip(self):
