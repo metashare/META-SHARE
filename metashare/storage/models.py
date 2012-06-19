@@ -629,7 +629,7 @@ def update_resource(storage_json, resource_xml_string, storage_digest,
         remove_files_from_disk(storage_id)
         remove_database_entries(storage_id)
     write_to_disk(storage_id)
-    restore_from_folder(storage_id, copy_status=copy_status,
+    return restore_from_folder(storage_id, copy_status=copy_status,
                         storage_digest=storage_digest)
 
 

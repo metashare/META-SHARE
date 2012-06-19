@@ -73,6 +73,13 @@ if __name__ == "__main__":
             else:
                 print "\t{}: {}".format(descriptor, exception.args)
     
+    # Salvatore:
+    # This is useful for tracking where the resource is stored.
+    # It is used by some scripts for testing purposes
+    for resource in successful_imports:
+        print '--->RESOURCE_ID:{0};STORAGE_IDENTIFIER:{1}'\
+            .format(resource.id, resource.storage_object.identifier)
+
     # Be nice and cleanup cache...
     _cache_size = sum([len(x) for x in OBJECT_XML_CACHE.values()])
     OBJECT_XML_CACHE.clear()

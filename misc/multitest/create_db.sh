@@ -24,8 +24,16 @@ if [[ "$1" == "-r" ]] ; then
 	fi
 fi
 
+# find the best Python binary to use: only use the platform default if ther is
+# no custom Python installation for META-SHARE available
+if [ -x "$METASHARE_SW_DIR/opt/bin/python" ] ; then
+	PYTHON="$METASHARE_SW_DIR/opt/bin/python"
+else
+	PYTHON=`which python`
+fi
+
 cd $METASHARE_DIR
-python manage.py syncdb
+"$PYTHON"  manage.py syncdb --noinput
 cd $CURRENT_DIR
 
 echo "Database file " $DATABASE_FILE " has been created/updated."
