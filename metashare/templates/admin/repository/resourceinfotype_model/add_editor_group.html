@@ -16,13 +16,13 @@
 	<table class='resource-group'>
 		<tr><th>Resource Name</th><th>Editor Groups</th></tr>
 	    {% for resource in selected_resources %}	    	
-	        <tr><td>{{ resource }}</td><td>{{ resource.Editor_groups }}</td></tr>
+	        <tr><td>{{ resource }}</td><td>{% if resource.editor_groups.count != 0 %}{% for group in resource.editor_groups.all %} {{ group }}, {% endfor %}{% else %}None{% endif %}</td></tr>
 	    {% endfor %}
 	<table>
 <br/><br/>
 	<form method="post" action="{{ path }}">{% csrf_token %}
 	    <table>
-	        {{ form }}
+	        {{ form }}	        
 	    </table>
 	    
 	        <input type="hidden" name="action" value="add_group"/>
