@@ -53,7 +53,7 @@ class EditorTest(SeleniumTestCase):
         # clean up Selenium
         self.driver.quit()
         self.assertEqual([], self.verification_errors)
-        
+    '''    
     def test_manager_can_only_add_groups_of_which_he_is_member(self):
         
         EditorTest.test_editor_group2 = EditorGroup.objects.create(
@@ -102,7 +102,7 @@ class EditorTest(SeleniumTestCase):
         #login user
         #select resource, select action, access page
         #find only one editor group in choices
-        
+     '''   
 
     def test_status_after_saving(self):
         
