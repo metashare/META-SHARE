@@ -492,7 +492,7 @@ class StorageObject(models.Model):
         # least self.digest_last_checked has changed
         self.save()
 
-def restore_from_folder(storage_id, copy_status=None, storage_digest=None):
+def restore_from_folder(storage_id, copy_status=MASTER, storage_digest=None):
     """
     Restores the storage object and the associated resource for the given
     storage object identifier and makes it persistent in the database. 
@@ -532,7 +532,7 @@ def restore_from_folder(storage_id, copy_status=None, storage_digest=None):
     _metadata_file = open('{0}/{1}'.format(storage_folder, _metadata_files[0]), 'rb')
     _xml_string = _metadata_file.read()
     _metadata_file.close()
-    result = resourceInfoType_model.import_from_string(_xml_string)
+    result = resourceInfoType_model.import_from_string(_xml_string, copy_status=copy_status)
     if not result[0]:
         msg = u''
         if len(result) > 2:

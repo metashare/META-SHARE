@@ -11,7 +11,7 @@ from django.test.testcases import TestCase
 from metashare import settings
 from metashare.repository.management import GROUP_GLOBAL_EDITORS
 from metashare.repository.models import resourceInfoType_model
-from metashare.storage.models import PUBLISHED
+from metashare.storage.models import PUBLISHED, MASTER
 from metashare.xml_utils import import_from_file
 
 
@@ -28,17 +28,17 @@ def create_user(username, email, password):
     return User.objects.create_user(username, email, password)
 
 
-def import_xml(filename):
+def import_xml(filename, copy_status=MASTER):
     _xml = open(filename)
     _xml_string = _xml.read()
     _xml.close()
-    result = resourceInfoType_model.import_from_string(_xml_string)
+    result = resourceInfoType_model.import_from_string(_xml_string, copy_status=copy_status)
     return result
 
 
-def import_xml_or_zip(filename):
+def import_xml_or_zip(filename, copy_status=MASTER):
     _xml = open(filename, 'rb')
-    return import_from_file(_xml, filename, PUBLISHED)
+    return import_from_file(_xml, filename, PUBLISHED, copy_status)
 
 def set_index_active(is_active):
     """
