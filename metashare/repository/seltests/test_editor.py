@@ -350,18 +350,17 @@ class EditorTest(SeleniumTestCase):
           driver.find_element_by_css_selector("li.info").text)
         
         # ingest resource
-        # TODO ingesting creates an internal server error
-#        self.ingest(driver)
-#        self.assertEqual("ingested",
-#         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
-#        # publish resource
-#        self.publish(driver)
-#        self.assertEqual("published",
-#         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
-#        # delete resource
-#        self.delete(driver)
-#        self.assertEqual("Successfully deleted 1 Resource.", 
-#         driver.find_element_by_css_selector("li.info").text)
+        self.ingest(driver)
+        self.assertEqual("ingested",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        # publish resource
+        self.publish(driver)
+        self.assertEqual("published",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        # delete resource
+        self.delete(driver)
+        self.assertEqual("Successfully deleted 1 Resource.", 
+         driver.find_element_by_css_selector("li.info").text)
         
 
     def test_LR_creation_lex_resource_text(self):
