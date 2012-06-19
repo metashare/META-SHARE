@@ -3,6 +3,7 @@ import datetime
 from django import forms
 from django.contrib import admin
 from django.contrib.admin.util import unquote
+from django.contrib.admin.views.main import ChangeList
 from django.contrib.auth.decorators import permission_required
 from django.core.exceptions import ValidationError, PermissionDenied
 from django.db.models import Q
@@ -19,6 +20,7 @@ from django.views.decorators.csrf import csrf_protect
 
 from metashare import settings
 from metashare.accounts.models import EditorGroup, ManagerGroup
+from metashare.repository.editor.editorutils import FilteredChangeList
 from metashare.repository.editor.forms import StorageObjectUploadForm
 from metashare.repository.editor.inlines import ReverseInlineFormSet, \
     ReverseInlineModelAdmin
@@ -329,7 +331,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
             return None        
         owners_list = ''
         for owner in owners.all():
-            owners_list += owner.name + ', '
+            print owner
+            owners_list += owner.username + ', '
         owners_list = owners_list.rstrip(', ')
         return owners_list    
     
@@ -423,11 +426,43 @@ class ResourceModelAdmin(SchemaModelAdmin):
             url(r'^(.+)/upload-data/$',
                 wrap(self.uploaddata_view),
                 name='%s_%s_uploaddata' % info),
+           url(r'^my/$',
+                wrap(self.changelist_view_filtered),
+                name='%s_%s_myresources' % info),
             url(r'^(.+)/export-xml/$',
                 wrap(self.exportxml),
                 name='%s_%s_exportxml' % info),
         ) + urlpatterns
         return urlpatterns
+    
+    
+    @csrf_protect_m
+    def changelist_view_filtered(self, request, extra_context=None):
+        '''
+        The filtered changelist view for My Resources.
+        We reuse the generic django changelist_view and squeeze in our wish to
+        show the filtered view in two places:
+        1. we patch request.POST to insert a parameter 'myresources'='true',
+        which will be interpreted in get_changelist to show the filtered
+        version;
+        2. we pass a extra_context variable 'myresources' which will be
+        interpreted in the template change_list.html.
+        '''
+        _post = request.POST.copy()
+        _post['myresources'] = 'true'
+        request.POST = _post
+        _extra_context = extra_context or {}
+        _extra_context.update({'myresources':True})
+        return self.changelist_view(request, _extra_context)
+
+    def get_changelist(self, request, **kwargs):
+        """
+        Returns the ChangeList class for use on the changelist page.
+        """
+        if 'myresources' in request.POST:
+            return FilteredChangeList
+        else:
+            return ChangeList
 
 
     @csrf_protect_m
