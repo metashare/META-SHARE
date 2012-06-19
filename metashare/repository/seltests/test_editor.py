@@ -54,7 +54,7 @@ class EditorTest(SeleniumTestCase):
         self.driver.quit()
         self.assertEqual([], self.verification_errors)
         
-    def test_manager_can_only_add_to_resources_editor_groups_of_which_he_is_member(self, client, res):
+    def test_manager_can_only_add_groups_of_which_he_is_member(self):
         
         EditorTest.test_editor_group2 = EditorGroup.objects.create(
                                                     name='test_editor_group2')
