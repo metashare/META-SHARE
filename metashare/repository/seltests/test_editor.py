@@ -53,7 +53,56 @@ class EditorTest(SeleniumTestCase):
         # clean up Selenium
         self.driver.quit()
         self.assertEqual([], self.verification_errors)
+        
+    def test_manager_can_only_add_to_resources_editor_groups_of_which_he_is_member(self, client, res):
+        
+        EditorTest.test_editor_group2 = EditorGroup.objects.create(
+                                                    name='test_editor_group2')
+        EditorTest.test_manager_group2 = \
+            ManagerGroup.objects.create(name='test_manager_group2',
+                                    managed_group=EditorTest.test_editor_group2)
 
+        test_utils.setup_test_storage()
+        _result = test_utils.import_xml(TESTFIXTURE_XML)
+        resource = resourceInfoType_model.objects.get(pk=_result[0].id)
+        resource.editor_groups.add(self.test_editor_group)
+        resource.storage_object.published = True
+        # this also saves the storage object:
+        resource.save()
+    
+        driver = self.driver
+        driver.get(self.base_url)
+        
+        # login user
+        login_user(driver, "manageruser", "secret")        
+        # go to Editor
+        driver.find_element_by_css_selector("div.button.middle_button").click()
+        # go to Update->Resource
+        mouse_over(driver, driver.find_element_by_link_text("Update"))
+        #driver.find_element_by_link_text("Resource").click()        
+        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
+        # make sure we are on the right site
+        self.assertEqual("Select Resource to change | META-SHARE backend", driver.title)
+        # click on resource
+        driver.find_element_by_xpath("(//input[@name='_selected_action'])[1]").click()
+        # select action
+        Select(driver.find_element_by_name("action")).select_by_visible_text("Add an Editor Group to selected resources")
+        # click on 'go'
+        driver.find_element_by_name("index").click() 
+        #check that only the group the user is a member of, is displayed
+        self.assertContains("test_editor_group",
+         driver.find_element_by_xpath("//select[@id='id_groups']/option").text)
+        self.assertNotContains("test_editor_group2",
+         driver.find_element_by_xpath("//select[@id='id_groups']/option").text)
+        driver.find_element_by_xpath("//select[@id='id_groups']/option").click()
+        driver.find_element_by_name("add_editor_group").click()
+        
+        #create new editor group
+        #create new manager group
+        #login user
+        #select resource, select action, access page
+        #find only one editor group in choices
+        
 
     def test_status_after_saving(self):
         
@@ -751,7 +800,7 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_name("index").click()
         driver.find_element_by_css_selector("input[type=\"submit\"]").click()
 
-        
+
     def is_element_present(self, how, what):
         try: 
             self.driver.find_element(by=how, value=what)
