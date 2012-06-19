@@ -325,32 +325,6 @@ TOP_LEVEL_TYPE_EXTRA_CODE_TEMPLATE = '''
 
         return resource_component.as_subclass()._meta.verbose_name
 
-    def resource_owners(self):
-        """
-        Method used for changelist view for resources.
-        """
-        owners = getattr(self, 'owners', None)
-        if owners.count() == 0:
-            return None        
-        owners_list = ''
-        for owner in owners.all():
-            owners_list += owner.name + ', '
-        owners_list = owners_list.rstrip(', ')
-        return owners_list
-    
-    def Editor_groups(self):
-        """
-        Method used for changelist view for resources.
-        """
-        editor_groups = getattr(self, 'editor_groups', None)
-        if editor_groups.count() == 0:
-            return None        
-        groups_list = ''
-        for group in editor_groups.all():            
-            groups_list += group.name + ', '
-        groups_list = groups_list.rstrip(', ')
-        return groups_list
-
 '''
 
 REUSABLE_ENTITY_SNIPPET = '''
