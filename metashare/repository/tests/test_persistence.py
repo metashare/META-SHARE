@@ -213,7 +213,7 @@ class RestoreTest(TestCase):
         self.assertEquals(resource.storage_object.copy_status, MASTER)
         self.assertEquals(resource.storage_object.publication_status, INTERNAL)
         # revision is only increased when the resource is ingested
-        self.assertEquals(resource.storage_object.revision, 0)
+        self.assertEquals(resource.storage_object.revision, 1)
         # ingest resource
         resource.storage_object.publication_status = INGESTED
         resource.storage_object.save()
