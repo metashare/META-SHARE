@@ -31,6 +31,7 @@ class EditorTest(TestCase):
     """
     # static variables to be initialized in setUpClass():
     test_editor_group = None
+    test_editor_group2 = None
     staff_login = None
     normal_login = None
     editor_login = None
@@ -48,6 +49,15 @@ class EditorTest(TestCase):
             resource.editor_groups.add(editor_group)
             resource.save()
         return resource
+    
+    def create_another_editor_and_manager_group():
+        EditorTest.test_editor_group2 = EditorGroup.objects.create(
+                                                    name='test_editor_group2')
+        EditorTest.test_manager_group2 = \
+            ManagerGroup.objects.create(name='test_manager_group2',
+                                    managed_group=EditorTest.test_editor_group2)
+        return EditorTest.test_manager_group2
+
 
     @classmethod
     def setUpClass(cls):
@@ -436,6 +446,13 @@ class EditorTest(TestCase):
         client = self.client_with_user_logged_in(EditorTest.superuser_login)
         response = client.get(ADMINROOT+'repository/resourceinfotype_model/')
         self.assertContains(response, '3 Resources')
+        
+        def test_myresources_list(self):
+            client = self.client_with_user_logged_in(EditorTest.editor_login)            
+            response = client.get(ADMINROOT+'repository/resourceinfotype_model/my/')            
+            self.assertContains(response, 'Resources')
+
+
 
     def test_storage_object_is_hidden(self):
         client = self.client_with_user_logged_in(EditorTest.editor_login)
@@ -575,3 +592,23 @@ class EditorTest(TestCase):
                 .format(ADMINROOT, res.id))
         self.assertContains(response, 'Are you sure?', msg_prefix=
             'expected the superuser to be allowed to delete resource parts')
+        
+        
+    def test_manager_can_only_add_to_resources_editor_groups_of_which_he_is_member(self, client, res):
+        managerGroup2 = EditorTest.create_another_editor_and_manager_group()
+        #test_editor_group2
+        
+        #create new editor group
+        #create new manager group
+        #select resource, select action, access page
+        #find only one editor group in choices
+        
+    def test_superuser_can__add_to_resources_any_editor_group(self, client, res):
+        #create new editor group
+        #create new manager group
+        #select resource, select action, access page
+        #find both editor groups in choices
+        
+        
+        
+        
