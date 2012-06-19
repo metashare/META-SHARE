@@ -352,34 +352,33 @@ class ResourceModelAdmin(SchemaModelAdmin):
     @csrf_protect_m    
     def add_group(self, request, queryset):            
         form = None
-        if self.has_delete_permission(request):
-            if 'cancel' in request.POST:
-                self.message_user(request, 'Cancelled adding Editor Group.')
-                return
-            elif 'add_editor_group' in request.POST:      
-                q = EditorGroup.objects.all() 
-                form = self.EditorGroupForm(q, request.POST)
-                if form.is_valid():
-                    groups = form.cleaned_data['groups']   
-                    add_editor_group(self, request, queryset, groups)
-                    self.message_user(request, 'Successfully added Editor Group to selected resources.')
-                    return HttpResponseRedirect(request.get_full_path())
-    
-            if not form:      
-               manager_groups = ManagerGroup.objects.filter(name__in=
-                            request.user.groups.values_list('name', flat=True))
-               editor_groups = EditorGroup.objects
-               for mg in manager_groups:
-                   editor_groups = EditorGroup.objects.filter('name', mg.managed_group.name)
-               if request.user.is_superuser:
-                   group = EditorGroup.objects.all()
-               else:
-                   group = editor_groups.all().values_list('name',flat=True)
-               form = self.EditorGroupForm(choices=group, initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
-            
-            return render_to_response('admin/repository/resourceinfotype_model/add_editor_group.html', \
-                                      {'selected_resources': queryset, 'form': form, 'path':request.get_full_path()}, \
-                                      context_instance=RequestContext(request)) 
+        if 'cancel' in request.POST:
+            self.message_user(request, 'Cancelled adding Editor Group.')
+            return
+        elif 'add_editor_group' in request.POST:      
+            q = EditorGroup.objects.all() 
+            form = self.EditorGroupForm(q, request.POST)
+            if form.is_valid():
+                groups = form.cleaned_data['groups']   
+                add_editor_group(self, request, queryset, groups)
+                self.message_user(request, 'Successfully added Editor Group to selected resources.')
+                return HttpResponseRedirect(request.get_full_path())
+
+        if not form:      
+           manager_groups = ManagerGroup.objects.filter(name__in=
+                        request.user.groups.values_list('name', flat=True))
+           editor_groups = EditorGroup.objects
+           for mg in manager_groups:
+               editor_groups = EditorGroup.objects.filter('name', mg.managed_group.name)
+           if request.user.is_superuser:
+               group = EditorGroup.objects.all()
+           else:
+               group = editor_groups.all().values_list('name',flat=True)
+           form = self.EditorGroupForm(choices=group, initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
+        
+        return render_to_response('admin/repository/resourceinfotype_model/add_editor_group.html', \
+                                  {'selected_resources': queryset, 'form': form, 'path':request.get_full_path()}, \
+                                  context_instance=RequestContext(request)) 
 
     add_group.short_description = "Add an Editor Group to selected resources"
     
