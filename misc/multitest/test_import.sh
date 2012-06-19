@@ -52,7 +52,7 @@ check_results()
 				# Extract the value of "digest_checksum"
 				CLIENT_DIG=`cat "$CLIENT_JSON" | sed -e "s/\(.*\)\(\"digest_checksum\":\)\(\"\)\([a-z0-9]*\)\(\"\)\(.*\)/\4/"`
 				SERVER_DIG=`cat "$SERVER_JSON" | sed -e "s/\(.*\)\(\"digest_checksum\":\)\(\"\)\([a-z0-9]*\)\(\"\)\(.*\)/\4/"`
-				if [[ "$CLIENT_DIG" -eq "$SERVER_DIG" ]] ; then
+				if [[ "$CLIENT_DIG" == "$SERVER_DIG" ]] ; then
 					echo "Synchronization successful"
 				else
 					echo "Synchronization failed: checksums differ"
