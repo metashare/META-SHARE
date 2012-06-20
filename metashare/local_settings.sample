@@ -109,6 +109,19 @@ SELENIUM_DRIVER = 'Firefox'
 # this must be the same port as used in DJANGO_URL
 SELENIUM_TESTSERVER_PORT = 8000
 
+
+# Settings for synchronization:
+# Time interval settings. It sets the intervals when the synchronization 
+# task will be triggered. Uses "crontab" conventions. 
+# Dafaults will run the synchronization task once an hour.
+INTERVALS = {
+    'MINUTE' : '25',      # 0-59 - Default is 25
+    'HOUR' : '*',         # 0-23 - Default is *
+    'DAY_OF_MONTH' : '*', # 1-31 - Default is *
+    'MONTH' : '*',        # 1-12 - Default is *
+    'DAY_OF_WEEK' : '*',  # 0-6 (0 is Sunday) - Default is *
+}
+
 # List of other META-SHARE core ("inner circle") nodes from which the local node
 # imports resource descriptions. Any remote changes will later be updated
 # ("synchronized"). Use this if you are a META-SHARE core node!
