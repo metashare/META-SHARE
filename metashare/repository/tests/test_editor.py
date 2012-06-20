@@ -50,7 +50,7 @@ class EditorTest(TestCase):
         return resource
     
     @classmethod
-    def setUpClass(cls):
+    def setUp(cls):
         """
         set up test users with and without staff permissions.
         These will live in the test database only, so will not
@@ -128,7 +128,7 @@ class EditorTest(TestCase):
 
 
     @classmethod
-    def tearDownClass(cls):
+    def tearDown(cls):
         resourceInfoType_model.objects.all().delete()
         User.objects.all().delete()
         EditorGroup.objects.all().delete()
@@ -235,8 +235,8 @@ class EditorTest(TestCase):
 
     def test_manage_action_visibility(self):
         """
-        Verifies that manage actions (delete/ingest/publish/unpublish) are only
-        visible for authorized users.
+        Verifies that manage actions (delete/ingest/publish/unpublish/add groups/
+        remove groups/add owners/remove owners) are only visible for authorized users.
         """
         # make sure the editor user cannot see the manage actions:
         client = self.client_with_user_logged_in(EditorTest.editor_login)
@@ -249,10 +249,14 @@ class EditorTest(TestCase):
             msg_prefix='an editor user must not see the "unpublish" action')
         self.assertNotContains(response, 'Delete selected Resources',
             msg_prefix='an editor user must not see the "delete" action')
-        self.assertContains(response, 'Add an Editor Group',
-            msg_prefix='an editor user should see the "add group" action')
-        self.assertNotContains(response, 'Remove an Editor Group',
-            msg_prefix='an editor user must not see the "remove group" action')
+        self.assertNotContains(response, 'Add Editor Groups',
+            msg_prefix='an editor user must not see the "add groups" action')
+        self.assertNotContains(response, 'Remove Editor Groups',
+            msg_prefix='an editor user must not see the "remove groups" action')
+        self.assertNotContains(response, 'Add Owners',
+            msg_prefix='an editor user must not see the "add owners" action')
+        self.assertNotContains(response, 'Remove Owners',
+            msg_prefix='an editor user must not see the "remove owners" action')
         # make sure the manager user can see the manage actions:
         client = self.client_with_user_logged_in(EditorTest.manager_login)
         response = client.get(ADMINROOT + 'repository/resourceinfotype_model/')
@@ -264,10 +268,25 @@ class EditorTest(TestCase):
             msg_prefix='a manager user should see the "unpublish" action')
         self.assertContains(response, 'Delete selected Resources',
             msg_prefix='a manager user should see the "delete" action')
-        self.assertContains(response, 'Add an Editor Group',
-            msg_prefix='a manager user should see the "add group" action')
-        self.assertNotContains(response, 'Remove an Editor Group',
-            msg_prefix='a manager user must not see the "remove group" action')
+        self.assertNotContains(response, 'Add Editor Groups',
+            msg_prefix='a manager user must not see the "add groups" action')
+        self.assertNotContains(response, 'Remove Editor Groups',
+            msg_prefix='a manager user must not see the "remove groups" action')
+        self.assertNotContains(response, 'Add Owners',
+            msg_prefix='a manager user must not see the "add owners" action')
+        self.assertNotContains(response, 'Remove Owners',
+            msg_prefix='a manager user must not see the "remove owners" action')
+        # make sure the manager user can see the manage actions in 'my resources':
+        responseMy = client.get(ADMINROOT + 'repository/resourceinfotype_model/my/')
+        self.assertContains(responseMy, 'Add Editor Groups',
+            msg_prefix='a manager user should see the "add groups" action')
+        self.assertContains(responseMy, 'Remove Editor Groups',
+            msg_prefix='a manager user should see the "remove groups" action')
+        self.assertContains(responseMy, 'Add Owners',
+            msg_prefix='a manager user should see the "add owners" action')
+        self.assertContains(responseMy, 'Remove Owners',
+            msg_prefix='a manager user should see the "remove owners" action')
+        
         # make sure the superuser can see the manage actions:
         client = self.client_with_user_logged_in(EditorTest.superuser_login)
         response = client.get(ADMINROOT + 'repository/resourceinfotype_model/')
@@ -279,10 +298,15 @@ class EditorTest(TestCase):
             msg_prefix='a superuser should see the "unpublish" action')
         self.assertContains(response, 'Delete selected Resources',
             msg_prefix='a superuser should see the "delete" action')
-        self.assertContains(response, 'Add an Editor Group',
-            msg_prefix='a superuser should see the "add group" action')
-        self.assertContains(response, 'Remove an Editor Group',
+        self.assertContains(response, 'Add Editor Groups',
+            msg_prefix='a superuser should see the "add groups" action')
+        self.assertContains(response, 'Remove Editor Groups',
             msg_prefix='a superuser should see the "remove groups" action')
+        self.assertContains(response, 'Add Owners',
+            msg_prefix='a superuser should see the "add owners" action')
+        self.assertContains(response, 'Remove Owners',
+            msg_prefix='a superuser should see the "remove owners" action')
+        
 
     def test_upload_single_xml(self):
         client = self.client_with_user_logged_in(EditorTest.editor_login)
