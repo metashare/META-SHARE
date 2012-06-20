@@ -627,7 +627,6 @@ class EditorTest(TestCase):
             'expected the superuser to be allowed to delete editor')
         EditorGroup.objects.filter(id=EditorTest.test_editor_group.id).delete()
     
-        editoruser = User.objects.get(username='editoruser')
         response = client.get('{}accounts/managergroup/'.format(ADMINROOT))
         self.assertNotContains(response, 'editoruser', msg_prefix=
             'expected the manager group to be removed when its editor group is removed')
