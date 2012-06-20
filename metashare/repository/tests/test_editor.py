@@ -35,6 +35,7 @@ class EditorTest(TestCase):
     normal_login = None
     editor_login = None
     manager_login = None
+    superuser_login = None
     testfixture = None
     testfixture2 = None
     testfixture3 = None
@@ -50,7 +51,7 @@ class EditorTest(TestCase):
         return resource
 
     @classmethod
-    def setUpClass(cls):
+    def setUp(cls):
         """
         set up test users with and without staff permissions.
         These will live in the test database only, so will not
@@ -73,11 +74,13 @@ class EditorTest(TestCase):
         editoruser = test_utils.create_editor_user('editoruser',
             'editor@example.com', 'secret', (EditorTest.test_editor_group,))
 
-        test_utils.create_manager_user(
+        manageruser = test_utils.create_manager_user(
             'manageruser', 'manager@example.com', 'secret',
             (EditorTest.test_editor_group, EditorTest.test_manager_group))
 
-        User.objects.create_superuser('superuser', 'su@example.com', 'secret')
+        superuser = User.objects.create_superuser('superuser', 'su@example.com', 'secret')
+        superuser.is_superuser = True
+        superuser.save()
 
         # login POST dicts
         EditorTest.staff_login = {
@@ -128,11 +131,10 @@ class EditorTest(TestCase):
 
 
     @classmethod
-    def tearDownClass(cls):
+    def tearDown(cls):
         resourceInfoType_model.objects.all().delete()
         User.objects.all().delete()
         EditorGroup.objects.all().delete()
-
 
     def client_with_user_logged_in(self, user_credentials):
         client = Client()
@@ -143,7 +145,6 @@ class EditorTest(TestCase):
                 .format(user_credentials, response)
         return client
 
-    
     def test_can_log_in_staff(self):
         client = Client()
         request = client.get(ADMINROOT)
@@ -154,7 +155,7 @@ class EditorTest(TestCase):
         self.assertRedirects(login, ADMINROOT)
         self.assertFalse(login.context)
         client.get(ADMINROOT+'logout/')
-        
+
     def test_cannot_log_in_normal(self):
         client = Client()
         request = client.get(ADMINROOT)
@@ -563,3 +564,70 @@ class EditorTest(TestCase):
                 .format(ADMINROOT, res.id))
         self.assertContains(response, 'Are you sure?', msg_prefix=
             'expected the superuser to be allowed to delete resource parts')
+
+    def test_deleted_editor_group_is_removed_from_all_relevant_resources(self):
+        """
+        Verifies that an editor group is removed from all relevant resources
+        """
+        client = self.client_with_user_logged_in(EditorTest.superuser_login)
+
+        response = client.get('{}accounts/editorgroup/{}/delete/'
+                              .format(ADMINROOT, EditorTest.test_editor_group.id))
+        self.assertContains(response, 'Are you sure?', msg_prefix=
+            'expected the superuser to be allowed to delete editor')
+        EditorGroup.objects.filter(id=EditorTest.test_editor_group.id).delete()
+
+        response = client.get('{}repository/resourceinfotype_model/'.format(ADMINROOT))
+        self.assertNotContains(response, 'editoruser', msg_prefix=
+            'expected the editor group to be removed from the resources')
+
+    def test_deleted_editor_group_is_removed_from_all_relevant_users(self):
+        """
+        Verifies that an editor group is removed from all relevant users
+        """
+        client = self.client_with_user_logged_in(EditorTest.superuser_login)
+    
+        response = client.get('{}accounts/editorgroup/{}/delete/'
+                              .format(ADMINROOT, EditorTest.test_editor_group.id))
+        self.assertContains(response, 'Are you sure?', msg_prefix=
+            'expected the superuser to be allowed to delete editor')
+        EditorGroup.objects.filter(id=EditorTest.test_editor_group.id).delete()
+    
+        editoruser = User.objects.get(username='editoruser')
+        response = client.get('{}auth/user/{}/'.format(ADMINROOT, editoruser.id))
+        self.assertNotContains(response, 'editoruser</option>', msg_prefix=
+            'expected the editor group to be removed from the users')
+            
+    def test_deleted_manager_group_is_removed_from_all_relevant_users(self):
+        """
+        Verifies that a manager group is removed from all relevant users
+        """
+        client = self.client_with_user_logged_in(EditorTest.superuser_login)
+    
+        response = client.get('{}accounts/managergroup/{}/delete/'
+                              .format(ADMINROOT, EditorTest.test_manager_group.id))
+        self.assertContains(response, 'Are you sure?', msg_prefix=
+            'expected the superuser to be allowed to delete manager')
+        ManagerGroup.objects.filter(id=EditorTest.test_manager_group.id).delete()
+    
+        manageruser = User.objects.get(username='manageruser')
+        response = client.get('{}auth/user/{}/'.format(ADMINROOT, manageruser.id))
+        self.assertNotContains(response, 'manageruser</option>', msg_prefix=
+            'expected the manager group to be removed from the users')
+        
+    def test_delete_editor_group_remove_from_all_its_managing_groups(self):
+        """
+        Verifies that when an editor group is removed, all its managing groups are removed
+        """
+        client = self.client_with_user_logged_in(EditorTest.superuser_login)
+    
+        response = client.get('{}accounts/editorgroup/{}/delete/'
+                              .format(ADMINROOT, EditorTest.test_editor_group.id))
+        self.assertContains(response, 'Are you sure?', msg_prefix=
+            'expected the superuser to be allowed to delete editor')
+        EditorGroup.objects.filter(id=EditorTest.test_editor_group.id).delete()
+    
+        editoruser = User.objects.get(username='editoruser')
+        response = client.get('{}accounts/managergroup/'.format(ADMINROOT))
+        self.assertNotContains(response, 'editoruser', msg_prefix=
+            'expected the manager group to be removed when its editor group is removed')
