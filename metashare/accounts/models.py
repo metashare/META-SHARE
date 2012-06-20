@@ -71,6 +71,36 @@ class ResetRequest(models.Model):
         """
         return u'<ResetRequest "{0}">'.format(self.user.username)
 
+class EditorGroup(Group):
+    """
+    A specialized `Group` subtype which is used to group resources that can only
+    be edited by users who are member of this group.
+    
+    The corresponding `ModelAdmin` class suggests basic resource edit
+    permissions for this group. 
+    """
+    # Currently the group is just used as a marker, i.e., in order to
+    # differentiate its instances from other Django `Group`s. That's why it
+    # doesn't have any custom fields.
+    
+    def get_users(self):
+       return UserProfile.objects.filter(editorgroup=self) 
+
+    def get_managers(self):
+       return UserProfile.objects.filter(managergroup__managed_group=self)
+
+class ManagerGroup(Group):
+    """
+    A specialized `Group` which gives its members permissions to manage language
+    resources belonging to a certain (managed) group.
+    
+    Group members may choose the members of the managed group and they may
+    ingest/publish resources belonging to the managed group. Delete permission
+    for a resource is suggested by the corresponding `ModelAdmin` class.
+    """
+    # the `EditorGroup` which is managed by members of this `ManagerGroup`
+    managed_group = models.OneToOneField(EditorGroup)
+
 class UserProfile(models.Model):
     """
     Contains additional user data related to a Django User instance.
@@ -94,6 +124,9 @@ class UserProfile(models.Model):
     position = models.CharField(max_length=50, blank=True)
     homepage = models.URLField(blank=True)
     
+    editorgroup = models.ManyToManyField(EditorGroup, blank=True)
+    managergroup = models.ManyToManyField(ManagerGroup, blank=True)
+
     # These fields can be edited by the user in the browser.
     __editable_fields__ = ('birthdate', 'affiliation', 'position', 'homepage')
     
@@ -118,33 +151,30 @@ class UserProfile(models.Model):
 #             delete() calls.  For this, we have to create receivers listening
 #             to the post_delete signal.  Again, this has to be tested!
 
+    def editor_group(self):
+        """
+        Return the editor group of a user profile
+        """
+        return ', '.join([eg.name for eg in self.editorgroup.all()])
 
-class EditorGroup(Group):
-    """
-    A specialized `Group` subtype which is used to group resources that can only
-    be edited by users who are member of this group.
-    
-    The corresponding `ModelAdmin` class suggests basic resource edit
-    permissions for this group. 
-    """
-    # Currently the group is just used as a marker, i.e., in order to
-    # differentiate its instances from other Django `Group`s. That's why it
-    # doesn't have any custom fields.
-    pass
+    def manager_group(self):
+        """
+        Return the manager group of a user profile
+        """
+        return ', '.join([mg.name for mg in self.managergroup.all()])
 
+    def has_editor_group_add_user_permission(self, editor_group):
+        """
+        Return whether the user profile has permission to add users in an specific editor group
+        """
+        if self.user.is_superuser:
+            return True
+        
+        for manager_group in self.managergroup.all():
+            if editor_group == manager_group.managed_group:
+                return True
 
-class ManagerGroup(Group):
-    """
-    A specialized `Group` which gives its members permissions to manage language
-    resources belonging to a certain (managed) group.
-    
-    Group members may choose the members of the managed group and they may
-    ingest/publish resources belonging to the managed group. Delete permission
-    for a resource is suggested by the corresponding `ModelAdmin` class.
-    """
-    # the `EditorGroup` which is managed by members of this `ManagerGroup`
-    managed_group = models.OneToOneField(EditorGroup)
-
+        return False
 
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
