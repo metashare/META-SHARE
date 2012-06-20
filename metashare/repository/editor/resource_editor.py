@@ -33,7 +33,7 @@ from metashare.repository.models import resourceComponentTypeType_model, \
     lexicalConceptualResourceInfoType_model, toolServiceInfoType_model, \
     corpusMediaTypeType_model, languageDescriptionMediaTypeType_model, \
     lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model, \
-    licenceInfoType_model
+    licenceInfoType_model, User
 from metashare.repository.supermodel import SchemaModel
 from metashare.stats.model_utils import saveLRStats, UPDATE_STAT, INGEST_STAT, \
     PUBLISH_STAT, GROUP_STAT
@@ -274,19 +274,6 @@ def export_xml_resources(modeladmin, request, queryset):
 export_xml_resources.short_description = "Export selected resource descriptions to XML"
 
 
-def remove_editor_group(modeladmin, request, queryset, groups):
-    for obj in queryset:  
-        obj.editor_groups.remove(*groups)
-        obj.save()
-        saveLRStats(obj, "", "", GROUP_STAT)
-
-def add_editor_group(modeladmin, request, queryset, groups):
-    for obj in queryset:  
-        obj.editor_groups.add(*groups)
-        obj.save()
-        saveLRStats(obj, "", "", GROUP_STAT)
-
-
 class MetadataForm(forms.ModelForm):
     def save(self, commit=True):
         today = datetime.date.today()
@@ -309,18 +296,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
 
     content_fields = ('resourceComponentType',)
     list_display = ('__unicode__', 'resource_type', 'publication_status', 'resource_Owners', 'editor_Groups',)
-    actions = (publish_resources, unpublish_resources, ingest_resources, export_xml_resources, 'add_group', 'remove_group')
+    actions = (publish_resources, unpublish_resources, ingest_resources, export_xml_resources, 'add_group', 'remove_group', 'add_owner', 'remove_owner')
     hidden_fields = ('storage_object', 'owners', 'editor_groups',)
-    
-    
-    class EditorGroupForm(forms.Form):
-        _selected_action = forms.CharField(widget=forms.MultipleHiddenInput)         
-        
-        def __init__(self, choices = None, *args, **kwargs):
-            super(forms.Form, self).__init__(*args, **kwargs)  
-            if choices is not None:
-                self.choices = choices
-                self.fields['groups'] = forms.ModelMultipleChoiceField(self.choices)        
+         
         
     def resource_Owners(self, obj):
         """
@@ -351,64 +329,137 @@ class ResourceModelAdmin(SchemaModelAdmin):
         groups_list = groups_list.rstrip(', ')
         return groups_list       
     
+    
+    class MyForm(forms.Form):
+        _selected_action = forms.CharField(widget=forms.MultipleHiddenInput)         
+        
+        def __init__(self, choices = None, *args, **kwargs):
+            super(ResourceModelAdmin.MyForm, self).__init__(*args, **kwargs)  
+            if choices is not None:
+                self.choices = choices
+                self.fields['multifield'] = forms.ModelMultipleChoiceField(self.choices)        
+                    
      
     @csrf_protect_m    
     def add_group(self, request, queryset):            
         form = None
-        if 'cancel' in request.POST:
-            self.message_user(request, 'Cancelled adding Editor Group.')
-            return
-        elif 'add_editor_group' in request.POST:      
-            query = EditorGroup.objects.all() 
-            form = self.EditorGroupForm(query, request.POST)
-            if form.is_valid():
-                groups = form.cleaned_data['groups']   
-                add_editor_group(self, request, queryset, groups)
-                self.message_user(request, 'Successfully added Editor Group to selected resources.')
-                return HttpResponseRedirect(request.get_full_path())
+        if 'myresources' in request.POST or request.user.is_superuser:
+            if 'cancel' in request.POST:
+                self.message_user(request, 'Cancelled adding Editor Groups.')
+                return
+            elif 'add_editor_group' in request.POST:      
+                query = EditorGroup.objects.all() 
+                form = self.MyForm(query, request.POST)
+                if form.is_valid():
+                    groups = form.cleaned_data['multifield']   
+                    for obj in queryset:  
+                        obj.editor_groups.add(*groups)
+                        obj.save()
+                        saveLRStats(obj, "", "", GROUP_STAT)
+                    self.message_user(request, 'Successfully added Editor Groups to selected resources.')
+                    return HttpResponseRedirect(request.get_full_path())
+    
+            if not form:      
+                manager_groups = ManagerGroup.objects.filter(name__in=
+                            request.user.groups.values_list('name', flat=True))
+                editor_groups = EditorGroup.objects
+                for manager_group in manager_groups:
+                    editor_groups = EditorGroup.objects.filter('name', manager_group.managed_group.name)
+                if request.user.is_superuser:
+                    group = EditorGroup.objects.all()
+                else:
+                    group = editor_groups.all().values_list('name', flat=True)
+                form = self.MyForm(choices=group, initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
+    
+            return render_to_response('admin/repository/resourceinfotype_model/add_editor_group.html', \
+                                      {'selected_resources': queryset, 'form': form, 'path':request.get_full_path()}, \
+                                      context_instance=RequestContext(request)) 
 
-        if not form:      
-            manager_groups = ManagerGroup.objects.filter(name__in=
-                        request.user.groups.values_list('name', flat=True))
-            editor_groups = EditorGroup.objects
-            for manager_group in manager_groups:
-                editor_groups = EditorGroup.objects.filter('name', manager_group.managed_group.name)
-            if request.user.is_superuser:
-                group = EditorGroup.objects.all()
-            else:
-                group = editor_groups.all().values_list('name', flat=True)
-            form = self.EditorGroupForm(choices=group, initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
-
-        return render_to_response('admin/repository/resourceinfotype_model/add_editor_group.html', \
-                                  {'selected_resources': queryset, 'form': form, 'path':request.get_full_path()}, \
-                                  context_instance=RequestContext(request)) 
-
-    add_group.short_description = "Add an Editor Group to selected resources"
+    add_group.short_description = "Add Editor Groups to selected resources"
     
     @csrf_protect_m    
     def remove_group(self, request, queryset):           
         form = None
         if request.user.is_superuser:
             if 'cancel' in request.POST:
-                self.message_user(request, 'Cancelled removing Editor Group.')
+                self.message_user(request, 'Cancelled removing Editor Groups.')
                 return
             elif 'remove_editor_group' in request.POST:  
                 query = EditorGroup.objects.all()           
-                form = self.EditorGroupForm(query, request.POST)            
+                form = self.MyForm(query, request.POST)            
                 if form.is_valid():
-                    groups = form.cleaned_data['groups']
-                    remove_editor_group(self, request, queryset, groups)
+                    groups = form.cleaned_data['multifield']
+                    for obj in queryset:  
+                        obj.editor_groups.remove(*groups)
+                        obj.save()
+                        saveLRStats(obj, "", "", GROUP_STAT)
                     self.message_user(request, 'Successfully removed Editor Groups from selected resources.')               
                     return HttpResponseRedirect(request.get_full_path())
             if not form:
                 groups = EditorGroup.objects.all()
-                form = self.EditorGroupForm(choices=groups, initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
+                form = self.MyForm(choices=groups, initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
         
             return render_to_response('admin/repository/resourceinfotype_model/remove_editor_group.html', \
                                       {'selected_resources': queryset, 'form': form, 'path':request.get_full_path()}, \
                                       context_instance=RequestContext(request)) 
 
-    remove_group.short_description = "Remove an Editor Group from selected resources"
+    remove_group.short_description = "Remove Editor Groups from selected resources"
+    
+    @csrf_protect_m    
+    def add_owner(self, request, queryset):           
+        form = None
+        if request.user.is_superuser:
+            if 'cancel' in request.POST:
+                self.message_user(request, 'Cancelled adding Owners.')
+                return
+            elif 'add_owner' in request.POST:  
+                query = User.objects.all()
+                form = self.MyForm(query, request.POST)     
+                if form.is_valid():
+                    owners = form.cleaned_data['multifield']
+                    print owners
+                    print 'aaaa'
+                    for obj in queryset:  
+                        obj.owners.add(*owners)
+                        obj.save()
+                    self.message_user(request, 'Successfully added Owners to selected resources.')               
+                    return HttpResponseRedirect(request.get_full_path())
+            if not form:
+                owners = User.objects.all()
+                form = self.MyForm(choices=owners, initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
+        
+            return render_to_response('admin/repository/resourceinfotype_model/add_owner.html', \
+                                      {'selected_resources': queryset, 'form': form, 'path':request.get_full_path()}, \
+                                      context_instance=RequestContext(request)) 
+
+    add_owner.short_description = "Add Owners to selected resources"
+    
+    @csrf_protect_m    
+    def remove_owner(self, request, queryset):           
+        form = None
+        if request.user.is_superuser:
+            if 'cancel' in request.POST:
+                self.message_user(request, 'Cancelled removing Owners.')
+                return
+            elif 'remove_owner' in request.POST:  
+                query = User.objects.all()
+                form = self.MyForm(query, request.POST)            
+                if form.is_valid():
+                    owners = form.cleaned_data['multifield']
+                    for obj in queryset:  
+                        obj.owners.remove(*owners)
+                        obj.save()
+                    self.message_user(request, 'Successfully removed Owners from selected resources.')               
+                    return HttpResponseRedirect(request.get_full_path())
+            if not form:
+                owners = User.objects.all()
+                form = self.MyForm(choices=owners, initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
+        
+            return render_to_response('admin/repository/resourceinfotype_model/remove_owner.html', \
+                                      {'selected_resources': queryset, 'form': form, 'path':request.get_full_path()}, \
+                                      context_instance=RequestContext(request)) 
+
+    remove_owner.short_description = "Remove Owners from selected resources"
         
     
     def get_urls(self):
@@ -743,6 +794,10 @@ class ResourceModelAdmin(SchemaModelAdmin):
         result = super(ResourceModelAdmin, self).get_actions(request)
         if not request.user.is_superuser:
             del result['remove_group']
+            del result['remove_owner']
+            if not 'myresources' in request.POST:
+                del result['add_group']
+                del result['add_owner']
             # only users with delete permissions can see the delete action:
             if not self.has_delete_permission(request):
                 del result['delete_selected']
