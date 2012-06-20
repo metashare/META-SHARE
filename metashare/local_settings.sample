@@ -113,7 +113,7 @@ SELENIUM_TESTSERVER_PORT = 8000
 # Settings for synchronization:
 # Time interval settings. It sets the intervals when the synchronization 
 # task will be triggered. Uses "crontab" conventions. 
-# Dafaults will run the synchronization task once an hour.
+# Defaults will run the synchronization task once an hour.
 INTERVALS = {
     'MINUTE' : '25',      # 0-59 - Default is 25
     'HOUR' : '*',         # 0-23 - Default is *
