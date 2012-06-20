@@ -7,12 +7,13 @@ from django.core.exceptions import ValidationError
 from django.test.client import Client
 from django.utils import unittest
 from metashare.storage.models import StorageObject, _validate_valid_xml, \
-    update_resource, MASTER, REMOTE, IllegalAccessException
+    update_resource, MASTER, REMOTE, PROXY, IllegalAccessException
 from metashare import settings, test_utils
 from metashare.settings import DJANGO_BASE
 import json
 import os
-from metashare.repository.models import resourceInfoType_model
+from metashare.repository.models import resourceInfoType_model, \
+    personInfoType_model
 from datetime import date
 from metashare.test_utils import set_index_active
 
@@ -53,7 +54,7 @@ class StorageObjectTestCase(unittest.TestCase):
         _url = '/{0}storage/revision/{1}/'.format(DJANGO_BASE, storage_object.identifier)
         response = self.client.get(_url)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(int(response.content), 0)
+        self.assertEqual(int(response.content), 1)
         
         # If we update the revision information for the object, this should
         # also produce an updated result for the current URL.
@@ -101,7 +102,7 @@ class StorageObjectTestCase(unittest.TestCase):
         storage_object = StorageObject.objects.get(pk=self.object_id)
         
         # revision defaults to 0.
-        self.assertIs(storage_object.revision, 0)
+        self.assertIs(storage_object.revision, 1)
                 
         # master_copy defaults to True.
         self.assertTrue(storage_object.master_copy)
@@ -202,6 +203,7 @@ class UpdateTests(unittest.TestCase):
         Removes all storage object instances from the database after testing.
         """
         StorageObject.objects.all().delete()
+        personInfoType_model.objects.all().delete()
         self.cleanup_storage()
 
 
@@ -246,3 +248,45 @@ class UpdateTests(unittest.TestCase):
             self.fail("Should have raised an exception")
         except IllegalAccessException:
             pass # Expected exception
+
+    def test_remote_copy(self):
+        """
+        Verify that reusable entities such as persons have copy status REMOTE
+        after synchronization.
+        """
+        # exercise
+        update_resource(self.storage_json, self.metadata_before, None, copy_status=REMOTE)
+        # verify
+        resource = resourceInfoType_model.objects.get(storage_object__identifier=self.storage_id)
+        persons = resource.contactPerson.all()
+        self.assertEquals(1, len(persons))
+        contact_person = persons[0]
+        self.assertEquals(REMOTE, contact_person.copy_status)
+        
+    def test_proxy_copy(self):
+        """
+        Verify that reusable entities such as persons have copy status PROXY
+        after synchronization.
+        """
+        # exercise
+        update_resource(self.storage_json, self.metadata_before, None, copy_status=PROXY)
+        # verify
+        resource = resourceInfoType_model.objects.get(storage_object__identifier=self.storage_id)
+        persons = resource.contactPerson.all()
+        self.assertEquals(1, len(persons))
+        contact_person = persons[0]
+        self.assertEquals(PROXY, contact_person.copy_status)
+        
+    def test_master_copy(self):
+        """
+        Verify that reusable entities such as persons have copy status MASTER
+        after synchronization.
+        """
+        # exercise
+        update_resource(self.storage_json, self.metadata_before, None, copy_status=MASTER)
+        # verify
+        resource = resourceInfoType_model.objects.get(storage_object__identifier=self.storage_id)
+        persons = resource.contactPerson.all()
+        self.assertEquals(1, len(persons))
+        contact_person = persons[0]
+        self.assertEquals(MASTER, contact_person.copy_status)
