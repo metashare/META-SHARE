@@ -3,7 +3,6 @@ Project: META-SHARE prototype implementation
  Author: Christian Federmann <cfedermann@dfki.de>
 """
 from django import forms
-from django.forms import Form
 from django.contrib import admin
 from django.contrib.admin.options import csrf_protect_m
 from django.contrib.auth.models import Permission, Group
@@ -49,11 +48,11 @@ class EditorGroupAdmin(admin.ModelAdmin):
     search_fields = ('name',)
     actions = ('add_user_profile_to_editor_group', 'remove_user_profile_from_editor_group', )
 
-    class UserProfileinEditorGroupForm(Form):
+    class UserProfileinEditorGroupForm(forms.Form):
         _selected_action = forms.CharField(widget=forms.MultipleHiddenInput)
 
         def __init__(self, choices = None, *args, **kwargs):
-            super(Form, self).__init__(*args, **kwargs)
+            super(EditorGroupAdmin.UserProfileinEditorGroupForm, self).__init__(*args, **kwargs)
             if choices is not None:
                 self.choices = choices
                 self.fields['user profiles'] = forms.ModelMultipleChoiceField(self.choices)
