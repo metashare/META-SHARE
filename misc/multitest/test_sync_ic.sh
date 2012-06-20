@@ -142,6 +142,19 @@ DO_IMPORT_FILES=1
 DO_SYNCHRONIZE=1
 DO_CHECK_RESOURCES=1
 
+for arg
+do
+	if [[ "$arg" == "--no-import" ]] ; then
+		DO_IMPORT_FILES=0
+	fi
+	if [[ "$arg" == "--no-sync" ]] ; then
+		DO_SYNCHRONIZE=0
+	fi
+	if [[ "$arg" == "--no-check" ]] ; then
+		DO_CHECK_RESOURCES=0
+	fi
+done
+
 if [[ $DO_IMPORT_FILES -eq 1 ]] ; then
   NODE_NUMBER=0
 
