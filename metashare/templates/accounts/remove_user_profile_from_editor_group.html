@@ -1,24 +1,18 @@
 {% extends "admin/base_site.html" %}
-{% load i18n admin_modify adminmedia %}
-{% load url from future %}
 
-{% block extrahead %}{{ block.super }}
-{% url 'admin:jsi18n' as jsi18nurl %}
-<script type="text/javascript" src="{{ jsi18nurl|default:"../../../jsi18n/" }}"></script>
-
-{{ media }}
-{% endblock %}
 {% block content %}
 <h3>Remove a User Profile from the following Editor Group{{ selected_editorgroups|pluralize }}:</h3>
 
-<br/><br/>
+<div class="content_box">
 <table class='editor-group'>
   <tr><th>Editor Group{{ selected_editorgroups|pluralize }}</th><th>Editors</th><th>Managers</th></tr>
   {% for editor_group in selected_editorgroups %}
   <tr><td>{{ editor_group }}</td><td>{{ editor_group.get_users|join:", "}}</td><td>{{ editor_group.get_managers|join:", "}}</td></tr>
   {% endfor %}
 <table>
-<br/><br/>
+</div>
+
+<div class="content_box">
 <form method="post" action="{{ path }}">{% csrf_token %}
 <table>
 {{ form }}
@@ -28,5 +22,5 @@
 <input type="submit" name="remove_user_profile_from_editor_group" value="Remove"/>
 <input type="submit" name="cancel" value="Cancel"/>
 </form>
-
+</div>
 {% endblock content %}
