@@ -417,8 +417,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 form = self.MyForm(query, request.POST)     
                 if form.is_valid():
                     owners = form.cleaned_data['multifield']
-                    print owners
-                    print 'aaaa'
                     for obj in queryset:  
                         obj.owners.add(*owners)
                         obj.save()
