@@ -15,28 +15,7 @@
 
 {% block bodyclass %}{{ opts.app_label }}-{{ opts.object_name.lower }} change-form{% endblock %}
 
-{% block breadcrumbs %}{% if not is_popup %}
-<div class="breadcrumbs">
-     <a href="../../../">{% trans "Home" %}</a> &rsaquo;
-     <a href="../../">{{ app_label|capfirst|escape }}</a> &rsaquo;
-     {% if has_change_permission %}<a href="../">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %} &rsaquo;
-     {% if add %}{% trans "Add" %} {{ opts.verbose_name }}{% else %}{{ original|truncatewords:"18" }}{% endif %}
-</div>
-{% endif %}{% endblock %}
-
-
 {% block content %}<div id="content-main">
-{% block object-tools %}
-{% if change %}{% if not is_popup %}
- <ul class="object-tools">
-   {% block object-tools-items %}
-   <li><a href="upload-data/" class="uploadresourcelink">{% trans "Upload resource"%}</a></li>
-   <li><a href="history/" class="historylink">{% trans "History" %}</a></li>
-   {% if has_absolute_url %}<li><a href="../../../r/{{ content_type_id }}/{{ object_id }}/" class="viewsitelink">{% trans "View on site" %}</a></li>{% endif%}
-   {% endblock %}
- </ul>
-{% endif %}{% endif %}
-{% endblock %}
 
 <script>
 			$(document).ready(function(){			   
@@ -107,102 +86,8 @@
 		    		 });
 	    		 }
 			 });		
-		</script>
-		
-			<script>	
-		//for text fields and calendar
-		$('div.form-row.errors div input').change(textfield);
-		$('div.form-row div.field-box.errors input').change(textfield2);		
-		//for related-widget-wrapper
-		$("div.field-box.errors input.related-widget-wrapper").change(oneToOne);		
-		
-		 function textfield() {		 	
-			 var input_value = $(this).attr('value');			 
-				if( input_value ) {				
-						$(this).parents('div').siblings(".errorlist").remove();				
-						$(this).parents('fieldset .form-row').removeClass("errors");
-						checkForErrors($(this));
-				}
-		 }
-		 function textfield2() {		 	
-			 var input_value = $(this).attr('value');			 
-				if( input_value ) {				
-						$(this).siblings(".errorlist").remove();				
-						$(this).parents('.field-box').removeClass("errors");
-						checkForErrors($(this));
-				}
-		 }		
-		 		
- 		 function oneToOne() {
-			 var input_value = $(this).attr('value');			 
-				if( input_value ) {					
-						$(this).siblings(".errorlist").remove();				
-						$(this).parents('div.field-box').removeClass("errors");
-						checkForErrors($(this));
-				}
-		 }				
-		 $("div div ul li input").each(function() { 
-			$(this).trigger('change');
-		});	
-		 $("div.form-row div.field-box.errors input").each(function() { 
-			$(this).trigger('change');
-		});	
-		
-		//for calendar when user inserts input in textfield	
-		$("div.form-row div input").each(function() { 
-			$(this).trigger('change');
-		});
-		
-		//for calendar when user clicks on calendar options 
-		$('div.form-row.errors div span.datetimeshortcuts a').live("click",function(){
-		
-			$(this).parents('div').siblings(".errorlist").remove();				
-			$(this).parents('div').removeClass("errors");
-			checkForErrors($(this));
-		});
-		
-		//related-widget-wrapper
-		$("div.field-box.errors input.related-widget-wrapper").each(function() { 			
-			$(this).trigger('change');
-		});	
-		
-				
-		//for many-to-many widgets (errors disappear only when you click directly on selector-chosen field)
-		$(document).on("change", "div.form-row div.errors div.selector-chosen select.filtered", function() {		  
-  			if( $(this).children().length > 0 ) {			
-				$(this).parents('div.selector').siblings(".errorlist").remove();				
-				$(this).parents('div').removeClass("errors");
-				checkForErrors($(this));
-			}
-		});
-		
-		
-		//for drop-down menus		
-		$(document).on("change", "div.form-row.errors select:not(.filtered)", function() {		  
-  			$(this).parents('div').siblings(".errorlist").remove();				
-			$(this).parents('div').removeClass("errors");
-			checkForErrors($(this));
-		});
-		$(document).on("change", "div.form-row div.errors select:not(.filtered)", function() {		  
-  			$(this).siblings(".errorlist").remove();				
-			$(this).parents('div').removeClass("errors");
-			checkForErrors($(this));
-		});
-		
+		</script>	
 
-		function checkForErrors(elem){
-			if(elem.parents('.tab_content>fieldset.module.aligned').find('.errorlist').length == 0) {
-				var field = elem.parents('.tab_content').attr('id');
-				$("a[href='#"+field+"']").removeClass("error");
-				if($('.errors').length == 0 && $('.error').length == 0) {
-					$('p.errornote').remove();				
-				}
-			}			
-		}
-
-
-		
-	</script>
 
 
 {% block after_field_sets %}{% endblock %}
