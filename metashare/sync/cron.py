@@ -4,7 +4,7 @@ from django.core.management import call_command
 
 interval_settings = ""
 # Get time interval settings
-interval_settings = "{0} {1} {2} {3} {4}".format( \
+interval_settings = "{} {} {} {} {}".format( \
     INTERVALS['MINUTE'],
     INTERVALS['HOUR'],
     INTERVALS['DAY_OF_MONTH'],
