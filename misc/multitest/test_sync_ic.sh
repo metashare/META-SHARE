@@ -6,6 +6,15 @@
 # has been copied to every other node.
 # Also verify that non-published resource are not copied to other nodes.
 
+usage()
+{
+	echo "usage: $0 [options]"
+	echo "   --help, -h  :   show this help"
+	echo "   --no-import :   skip import step"
+	echo "   --no-sync   :   skip synchronization step"
+	echo "   --no-check  :   skip resource checking step"
+}
+
 import_file_on_node()
 {
 	NODE_NUM="$1"
@@ -152,6 +161,10 @@ do
 	fi
 	if [[ "$arg" == "--no-check" ]] ; then
 		DO_CHECK_RESOURCES=0
+	fi
+	if [[ "$arg" == "--help" || "$arg" == "-h" ]] ; then
+		usage
+		exit
 	fi
 done
 
