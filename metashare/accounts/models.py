@@ -84,10 +84,10 @@ class EditorGroup(Group):
     # doesn't have any custom fields.
     
     def get_users(self):
-       return UserProfile.objects.filter(editorgroup=self) 
+        return UserProfile.objects.filter(editorgroup=self) 
 
     def get_managers(self):
-       return UserProfile.objects.filter(managergroup__managed_group=self)
+        return UserProfile.objects.filter(managergroup__managed_group=self)
 
 class ManagerGroup(Group):
     """
@@ -155,13 +155,13 @@ class UserProfile(models.Model):
         """
         Return the editor group of a user profile
         """
-        return ', '.join([eg.name for eg in self.editorgroup.all()])
+        return ', '.join([eg.name for eg in self.editorgroup])
 
     def manager_group(self):
         """
         Return the manager group of a user profile
         """
-        return ', '.join([mg.name for mg in self.managergroup.all()])
+        return ', '.join([mg.name for mg in self.managergroup])
 
     def has_editor_group_add_user_permission(self, editor_group):
         """
@@ -170,7 +170,7 @@ class UserProfile(models.Model):
         if self.user.is_superuser:
             return True
         
-        for manager_group in self.managergroup.all():
+        for manager_group in self.managergroup:
             if editor_group == manager_group.managed_group:
                 return True
 
