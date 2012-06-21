@@ -50,7 +50,7 @@ class EditorTest(TestCase):
         return resource
     
     @classmethod
-    def setUp(cls):
+    def setUpClass(cls):
         """
         set up test users with and without staff permissions.
         These will live in the test database only, so will not
@@ -128,7 +128,7 @@ class EditorTest(TestCase):
 
 
     @classmethod
-    def tearDown(cls):
+    def tearDownClass(cls):
         resourceInfoType_model.objects.all().delete()
         User.objects.all().delete()
         EditorGroup.objects.all().delete()
