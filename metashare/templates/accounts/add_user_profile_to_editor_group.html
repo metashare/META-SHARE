@@ -7,7 +7,7 @@
 <table class='editor-group'>
   <tr><th>Editor Group{{ selected_editorgroups|pluralize }}</th><th>Editors</th><th>Managers</th></tr>
   {% for editor_group in selected_editorgroups %}
-  <tr><td>{{ editor_group }}</td><td>{{ editor_group.get_users|join:", "}}</td><td>{{ editor_group.get_managers|join:", "}}</td></tr>
+  <tr><td>{{ editor_group }}</td><td>{{ editor_group.users|join:", "}}</td><td>{{ editor_group.managers|join:", "}}</td></tr>
   {% endfor %}
 <table>
 </div>
