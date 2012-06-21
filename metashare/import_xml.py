@@ -50,7 +50,7 @@ if __name__ == "__main__":
     successful_imports = []
     erroneous_imports = []
     from metashare.xml_utils import import_from_file
-    from metashare.storage.models import PUBLISHED
+    from metashare.storage.models import PUBLISHED, MASTER
     from metashare.repository.supermodel import OBJECT_XML_CACHE
     
     # Clean cache before starting the import process.
@@ -58,7 +58,7 @@ if __name__ == "__main__":
     
     for filename in sys.argv[1:]:
         temp_file = open(filename, 'rb')
-        success, failure = import_from_file(temp_file, filename, PUBLISHED)
+        success, failure = import_from_file(temp_file, filename, PUBLISHED, MASTER)
         successful_imports += success
         erroneous_imports += failure
         temp_file.close()
