@@ -30,16 +30,6 @@ def copy_fixtures():
           os.path.join(_fixture_folder, fixture_name),
           os.path.join(settings.STORAGE_PATH, fixture_name))
           
-def cleanup_storage():
-    """
-    Deletes the content of the storage folder.
-    """
-    for _folder in os.listdir(settings.STORAGE_PATH):
-        for _file in os.listdir(os.path.join(settings.STORAGE_PATH, _folder)):
-            os.remove(os.path.join(settings.STORAGE_PATH, _folder, _file))
-        os.rmdir(os.path.join(settings.STORAGE_PATH, _folder))
-
-
 class PersistenceTest(TestCase):
     """
     Tests persistence methods for saving data to the storage folder.
@@ -47,6 +37,7 @@ class PersistenceTest(TestCase):
     
     @classmethod
     def setUpClass(cls):
+        test_utils.set_index_active(False)
         test_utils.setup_test_storage()
         # copy fixtures to storage folder
         copy_fixtures()
@@ -54,18 +45,15 @@ class PersistenceTest(TestCase):
     @classmethod
     def tearDownClass(cls):
         # delete content of storage folder
-        cleanup_storage()
+        test_utils.clean_storage()
+        test_utils.set_index_active(True)
     
     def setUp(self):
         # make sure the index does not contain any stale entries
         call_command('rebuild_index', interactive=False, using=settings.TEST_MODE_NAME)
-        # make sure all resources and storage objects are deleted
-        resourceInfoType_model.objects.all().delete()
-        StorageObject.objects.all().delete()
         
     def tearDown(self):
-        resourceInfoType_model.objects.all().delete()
-        StorageObject.objects.all().delete()
+        test_utils.clean_db()
 
     def test_save_metadata(self):
         """
@@ -121,6 +109,7 @@ class RestoreTest(TestCase):
     
     @classmethod
     def setUpClass(cls):
+        test_utils.set_index_active(False)
         test_utils.setup_test_storage()
         # copy fixtures to storage folder
         copy_fixtures()
@@ -128,18 +117,15 @@ class RestoreTest(TestCase):
     @classmethod
     def tearDownClass(cls):
         # delete content of storage folder
-        cleanup_storage()
+        test_utils.clean_storage()
+        test_utils.set_index_active(True)
     
     def setUp(self):
         # make sure the index does not contain any stale entries
         call_command('rebuild_index', interactive=False, using=settings.TEST_MODE_NAME)
-        # make sure all resources and storage objects are deleted
-        resourceInfoType_model.objects.all().delete()
-        StorageObject.objects.all().delete()
-        
+
     def tearDown(self):
-        resourceInfoType_model.objects.all().delete()
-        StorageObject.objects.all().delete()
+        test_utils.clean_db()
 
     def test_valid_restore(self):
         """
@@ -262,23 +248,21 @@ class UpdateTest(TestCase):
     
     @classmethod
     def setUpClass(cls):
+        test_utils.set_index_active(False)
         test_utils.setup_test_storage()
 
     @classmethod
     def tearDownClass(cls):
         # delete content of storage folder
-        cleanup_storage()
+        test_utils.clean_storage()
+        test_utils.set_index_active(True)
     
     def setUp(self):
         # make sure the index does not contain any stale entries
         call_command('rebuild_index', interactive=False, using=settings.TEST_MODE_NAME)
-        # make sure all resources and storage objects are deleted
-        resourceInfoType_model.objects.all().delete()
-        StorageObject.objects.all().delete()
         
     def tearDown(self):
-        resourceInfoType_model.objects.all().delete()
-        StorageObject.objects.all().delete()
+        test_utils.clean_db()
         
     def test_update(self):
         # define a maximum age of 4 seconds; this means that a resource is

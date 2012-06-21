@@ -10,8 +10,11 @@ from django.test.testcases import TestCase
 
 from metashare import settings
 from metashare.repository.management import GROUP_GLOBAL_EDITORS
-from metashare.repository.models import resourceInfoType_model
-from metashare.storage.models import PUBLISHED, MASTER
+from metashare.repository.models import resourceInfoType_model, \
+    personInfoType_model, actorInfoType_model, documentationInfoType_model, \
+    documentInfoType_model, targetResourceInfoType_model, \
+    organizationInfoType_model, projectInfoType_model
+from metashare.storage.models import PUBLISHED, MASTER, StorageObject
 from metashare.xml_utils import import_from_file
 
 
@@ -22,11 +25,35 @@ def setup_test_storage():
     except:
         pass
 
+def clean_db():
+    """
+    Deletes all entities from db.
+    """
+    for res in resourceInfoType_model.objects.all():
+        res.delete_deep()
+    # delete storage objects
+    StorageObject.objects.all().delete()
+    # delete all reusable entities
+    actorInfoType_model.objects.all().delete()
+    documentationInfoType_model.objects.all().delete()
+    documentInfoType_model.objects.all().delete()
+    personInfoType_model.objects.all().delete()
+    targetResourceInfoType_model.objects.all().delete()
+    organizationInfoType_model.objects.all().delete()
+    projectInfoType_model.objects.all().delete()
+
+def clean_storage():
+    """
+    Deletes content of storage folder.
+    """
+    for _folder in os.listdir(settings.STORAGE_PATH):
+        for _file in os.listdir(os.path.join(settings.STORAGE_PATH, _folder)):
+            os.remove(os.path.join(settings.STORAGE_PATH, _folder, _file))
+        os.rmdir(os.path.join(settings.STORAGE_PATH, _folder))
 
 def create_user(username, email, password):
     User.objects.all().filter(username=username).delete()
     return User.objects.create_user(username, email, password)
-
 
 def import_xml(filename, copy_status=MASTER):
     _xml = open(filename)
@@ -34,7 +61,6 @@ def import_xml(filename, copy_status=MASTER):
     _xml.close()
     result = resourceInfoType_model.import_from_string(_xml_string, copy_status=copy_status)
     return result
-
 
 def import_xml_or_zip(filename, copy_status=MASTER):
     _xml = open(filename, 'rb')
