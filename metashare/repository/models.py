@@ -44,12 +44,12 @@ def _compute_documentationInfoType_key():
     - documentUnstructuredString_model.
     
     '''
-    k1 = list(documentInfoType_model.objects.all().order_by('-id'))
-    k2 = list(documentUnstructuredString_model.objects.all().order_by('-id'))
+    _k1 = list(documentInfoType_model.objects.all().order_by('-id'))
+    _k2 = list(documentUnstructuredString_model.objects.all().order_by('-id'))
     
-    LOGGER.debug('k1: {}, k2: {}'.format(k1, k2))
+    LOGGER.debug('k1: {}, k2: {}'.format(_k1, _k2))
 
-    return max(getattr(k1, '0', 0), getattr(k2, '0', 0)) + 1
+    return max(getattr(_k1, '0', 0), getattr(_k2, '0', 0)) + 1
 
 
 # pylint: disable-msg=C0103
