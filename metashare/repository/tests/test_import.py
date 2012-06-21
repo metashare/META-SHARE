@@ -2,12 +2,20 @@ import os
 from django.test import TestCase
 from metashare import test_utils
 from metashare.settings import ROOT_PATH
-from metashare.repository.models import resourceInfoType_model
 
 class ImportTest(TestCase):
     """
     Tests the import procedure for resources
     """
+    
+    @classmethod
+    def setUpClass(cls):
+        test_utils.set_index_active(False)
+    
+    @classmethod
+    def tearDownClass(cls):
+        test_utils.set_index_active(True)
+        
     def setUp(self):
         """
         Set up the import test
@@ -18,7 +26,8 @@ class ImportTest(TestCase):
         """
         Clean up the test
         """
-        resourceInfoType_model.objects.all().delete()
+        test_utils.clean_db()
+        test_utils.clean_storage()
 
     def test_import_ELRA(self):      
         """
@@ -84,3 +93,16 @@ class ImportTest(TestCase):
         self.assertEqual(1, len(failures), 'Could not import file {} -- successes is {}, failures is {}'.format(_currfile, successes, failures))
         self.assertEquals('broken.xml', failures[0][0])
 
+    def test_import_bug_1(self):
+        """
+        This constellation caused an import error with a Postgres DB backend.
+        """
+        self._test_import_dir(
+          '{}/repository/test_fixtures/import-bug-1/'.format(ROOT_PATH))
+        
+    def test_import_bug_2(self):
+        """
+        This constellation caused an import error with a Postgres DB backend.
+        """
+        self._test_import_dir(
+          '{}/repository/test_fixtures/import-bug-2/'.format(ROOT_PATH))
