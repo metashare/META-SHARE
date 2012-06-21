@@ -17,8 +17,9 @@ RETRIEVE_STAT = "r"
 DOWNLOAD_STAT = "d"
 PUBLISH_STAT = "p"
 INGEST_STAT = "i"
+GROUP_STAT = "g"
 
-STAT_LABELS = {UPDATE_STAT: "update", VIEW_STAT: "view", RETRIEVE_STAT: "retrieve", DOWNLOAD_STAT: "download", PUBLISH_STAT: "publish", INGEST_STAT: "ingest"}
+STAT_LABELS = {UPDATE_STAT: "update", VIEW_STAT: "view", RETRIEVE_STAT: "retrieve", DOWNLOAD_STAT: "download", PUBLISH_STAT: "publish", INGEST_STAT: "ingest", GROUP_STAT: "edit groups"}
 VISIBLE_STATS = [UPDATE_STAT, VIEW_STAT, RETRIEVE_STAT, DOWNLOAD_STAT]
     
 # Setup logging support.
@@ -49,7 +50,7 @@ def saveLRStats(resource, userid, sessid, action):
         record.sessid = sessid 
         record.save(force_insert=True)
         LOGGER.debug('SAVESTATS: Saved LR {0}, {1} action={2}.'.format(resource.storage_object.identifier, sessid, action))
-    if action == UPDATE_STAT or action == PUBLISH_STAT:
+    if action == UPDATE_STAT or action == PUBLISH_STAT or action == GROUP_STAT:
         if (resource.storage_object.published):
             UsageStats.objects.filter(lrid=resource.id).delete()
             _update_usage_stats(resource.id, resource.export_to_elementtree())

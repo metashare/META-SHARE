@@ -52,8 +52,8 @@ class EditorTest(SeleniumTestCase):
         
         # clean up Selenium
         self.driver.quit()
-        self.assertEqual([], self.verification_errors)
-
+        self.assertEqual([], self.verification_errors)    
+        
 
     def test_status_after_saving(self):
         
@@ -751,7 +751,7 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_name("index").click()
         driver.find_element_by_css_selector("input[type=\"submit\"]").click()
 
-        
+
     def is_element_present(self, how, what):
         try: 
             self.driver.find_element(by=how, value=what)

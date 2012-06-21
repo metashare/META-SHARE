@@ -201,19 +201,7 @@ class resourceInfoType_model(SchemaModel):
 
         return resource_component.as_subclass()._meta.verbose_name
 
-    def resource_owners(self):
-        """
-        Method used for changelist view for resources.
-        """
-        owners = getattr(self, 'owners', None)
-        if not owners:
-            return None
-        
-        owners_list = ''
-        for owner in owners.all():
-            owners_list += owner.surname.join(", ")
-        
-        return owners_list
+    
 
 
 SIZEINFOTYPE_SIZEUNIT_CHOICES = _make_choices_from_list([
