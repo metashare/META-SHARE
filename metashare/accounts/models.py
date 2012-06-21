@@ -83,11 +83,20 @@ class EditorGroup(Group):
     # differentiate its instances from other Django `Group`s. That's why it
     # doesn't have any custom fields.
     
-    def get_users(self):
-        return UserProfile.objects.filter(editorgroup=self) 
+    def users(self):
+        
+        return User.objects.filter(groups__name=self.name)
 
-    def get_managers(self):
-        return UserProfile.objects.filter(managergroup__managed_group=self)
+    def manager_group(self):
+
+        return ', '.join(mgr_group.name for mgr_group in ManagerGroup.objects.filter(managed_group__name__contains=
+                            self.name))
+
+    def managers(self):
+        
+        mgr_group = self.manager_group()
+
+        return User.objects.filter(groups__name=mgr_group)
 
 class ManagerGroup(Group):
     """
@@ -100,6 +109,10 @@ class ManagerGroup(Group):
     """
     # the `EditorGroup` which is managed by members of this `ManagerGroup`
     managed_group = models.OneToOneField(EditorGroup)
+
+    def managers(self):
+        
+        return User.objects.filter(groups__name__contains=self.name)
 
 class UserProfile(models.Model):
     """
@@ -124,9 +137,6 @@ class UserProfile(models.Model):
     position = models.CharField(max_length=50, blank=True)
     homepage = models.URLField(blank=True)
     
-    editorgroup = models.ManyToManyField(EditorGroup, blank=True)
-    managergroup = models.ManyToManyField(ManagerGroup, blank=True)
-
     # These fields can be edited by the user in the browser.
     __editable_fields__ = ('birthdate', 'affiliation', 'position', 'homepage')
     
@@ -155,26 +165,25 @@ class UserProfile(models.Model):
         """
         Return the editor group of a user profile
         """
-        return ', '.join([eg.name for eg in self.editorgroup])
+        return ', '.join([edit_group.name for edit_group in EditorGroup.objects.filter(name__in=
+                            self.user.groups.values_list('name', flat=True))])
 
     def manager_group(self):
         """
         Return the manager group of a user profile
         """
-        return ', '.join([mg.name for mg in self.managergroup])
+        return ', '.join([mgr_group.managed_group.name for mgr_group in ManagerGroup.objects.filter(name__in=
+                            self.user.groups.values_list('name', flat=True))])
 
-    def has_editor_group_add_user_permission(self, editor_group):
+    def has_manager_permission(self, editor_group):
         """
         Return whether the user profile has permission to add users in an specific editor group
         """
         if self.user.is_superuser:
             return True
         
-        for manager_group in self.managergroup:
-            if editor_group == manager_group.managed_group:
-                return True
-
-        return False
+        return any(editor_group.manager_group() == mgr_group.name for mgr_group in ManagerGroup.objects.filter(name__in=
+            self.user.groups.values_list('name', flat=True)))
 
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
