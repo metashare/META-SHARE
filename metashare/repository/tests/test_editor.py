@@ -74,11 +74,11 @@ class EditorTest(TestCase):
         editoruser = test_utils.create_editor_user('editoruser',
             'editor@example.com', 'secret', (EditorTest.test_editor_group,))
 
-        manageruser = test_utils.create_manager_user(
+        test_utils.create_manager_user(
             'manageruser', 'manager@example.com', 'secret',
             (EditorTest.test_editor_group, EditorTest.test_manager_group))
 
-        superuser = User.objects.create_superuser('superuser', 'su@example.com', 'secret')
+        User.objects.create_superuser('superuser', 'su@example.com', 'secret')
 
         # login POST dicts
         EditorTest.staff_login = {
