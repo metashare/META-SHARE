@@ -915,6 +915,14 @@ class documentInfoType_model(documentationInfoType_model):
         formatargs = ['author', 'title', ]
         formatstring = u'{}: {}'
         return self.unicode_(formatstring, formatargs)
+    
+    def save(self, *args, **kwargs):
+        """
+        Prevents id collisions for documentationInfoType_model sub classes.
+        """
+        self.id = _compute_documentationInfoType_key()
+        super(documentInfoType_model, self).save(*args, **kwargs)
+
 
 RESOURCEDOCUMENTATIONINFOTYPE_TOOLDOCUMENTATIONTYPE_CHOICES = _make_choices_from_list([
   u'online', u'manual', u'helpFunctions', u'none', u'other', 
@@ -7788,4 +7796,25 @@ class lexicalConceptualResourceMediaTypeType_model(SchemaModel):
 
 # pylint: disable-msg=C0103
 class documentUnstructuredString_model(InvisibleStringModel, documentationInfoType_model):
-    pass
+    def save(self, *args, **kwargs):
+        """
+        Prevents id collisions for documentationInfoType_model sub classes.
+        """
+        self.id = _compute_documentationInfoType_key()
+        super(documentUnstructuredString_model, self).save(*args, **kwargs)
+
+def _compute_documentationInfoType_key():
+    """
+    Prevents id collisions for documentationInfoType_model sub classes.
+    
+    These are:
+    - documentInfoType_model;
+    - documentUnstructuredString_model.
+    
+    """
+    k1 = list(documentInfoType_model.objects.all().order_by('-id'))
+    k2 = list(documentUnstructuredString_model.objects.all().order_by('-id'))
+    
+    LOGGER.debug('k1: {}, k2: {}'.format(k1, k2))
+
+    return max(getattr(k1, '0', 0), getattr(k2, '0', 0)) + 1
