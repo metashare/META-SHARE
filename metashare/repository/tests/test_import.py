@@ -93,3 +93,16 @@ class ImportTest(TestCase):
         self.assertEqual(1, len(failures), 'Could not import file {} -- successes is {}, failures is {}'.format(_currfile, successes, failures))
         self.assertEquals('broken.xml', failures[0][0])
 
+    def test_import_bug_1(self):
+        """
+        This constellation caused an import error with a Postgres DB backend.
+        """
+        self._test_import_dir(
+          '{}/repository/test_fixtures/import-bug-1/'.format(ROOT_PATH))
+        
+    def test_import_bug_2(self):
+        """
+        This constellation caused an import error with a Postgres DB backend.
+        """
+        self._test_import_dir(
+          '{}/repository/test_fixtures/import-bug-2/'.format(ROOT_PATH))
