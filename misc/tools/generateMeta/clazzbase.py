@@ -176,6 +176,22 @@ SCHEMA_NAMESPACE = '{1}'
 # version of the META-SHARE metadata XML Schema
 SCHEMA_VERSION = '{2}'
 
+def _compute_documentationInfoType_key():
+    '''
+    Prevents id collisions for documentationInfoType_model sub classes.
+    
+    These are:
+    - documentInfoType_model;
+    - documentUnstructuredString_model.
+    
+    '''
+    k1 = list(documentInfoType_model.objects.all().order_by('-id'))
+    k2 = list(documentUnstructuredString_model.objects.all().order_by('-id'))
+    
+    LOGGER.debug('k1: {{}}, k2: {{}}'.format(k1, k2))
+
+    return max(getattr(k1, '0', 0), getattr(k2, '0', 0)) + 1
+
 """
 
 
@@ -262,8 +278,13 @@ admin.site.register({0}_model)
 
 CHOICE_STRING_SUB_CLASS_TEMPLATE = '''
 # pylint: disable-msg=C0103
-class {}_model(InvisibleStringModel, {}):
-    pass
+class {0}_model(InvisibleStringModel, {1}):
+    def save(self, *args, **kwargs):
+        """
+        Prevents id collisions for documentationInfoType_model sub classes.
+        """
+        self.id = _compute_documentationInfoType_key()
+        super({0}_model, self).save(*args, **kwargs)
 '''
 
 TOP_LEVEL_TYPE_EXTRA_CODE_TEMPLATE = '''
@@ -1045,6 +1066,17 @@ class Clazz(object):
 
         if not self.choice_parent:
             self.generate_backref_members()
+
+        if self.name == 'documentInfoType':
+            self.wrtmodels('''    def save(self, *args, **kwargs):
+        """
+        Prevents id collisions for documentationInfoType_model sub classes.
+        """
+        self.id = _compute_documentationInfoType_key()
+        super(documentInfoType_model, self).save(*args, **kwargs)
+
+''')
+
         self.generate_unicode_method()
 
         if self.name == 'resourceInfoType':
