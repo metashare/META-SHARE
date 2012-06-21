@@ -44,7 +44,7 @@ class EditorGroupAdmin(admin.ModelAdmin):
     """
     Administration interface for `EditorGroup`s.
     """
-    list_display = ('name', 'get_users', 'get_managers')
+    list_display = ('name', 'users', 'managers', 'manager_group')
     search_fields = ('name',)
     actions = ('add_user_profile_to_editor_group', 'remove_user_profile_from_editor_group', )
 
@@ -82,9 +82,10 @@ class EditorGroupAdmin(admin.ModelAdmin):
         if request.user.is_superuser:
             return queryset
 
-        user_qs = UserProfile.objects.filter(user=request.user)
-        mg_user = user_qs[0].managergroup.all()
-        return queryset.filter(managergroup__in=mg_user)
+        #user_qs = UserProfile.objects.filter(user=request.user)
+        #mg_user = user_qs[0].managergroup.all()
+        return queryset.filter(managergroup__in=ManagerGroup.objects.filter(name__in=
+            request.user.groups.values_list('name', flat=True)))
 
     def add_user_profile_to_editor_group(self, request, queryset):
         form = None
@@ -98,8 +99,8 @@ class EditorGroupAdmin(admin.ModelAdmin):
                 userprofiles = form.cleaned_data['user profiles']
                 for userprofile in userprofiles:
                     for obj in queryset:
-                        if UserProfile.objects.filter(user=request.user)[0].has_editor_group_add_user_permission(obj):
-                            userprofile.editorgroup.add(obj)
+                        if UserProfile.objects.filter(user=request.user)[0].has_manager_permission(obj):
+                            userprofile.user.groups.add(obj)
                         else:
                             self.message_user(request,
                                 'You need to be group manager to add a user to this editor group.')
@@ -135,17 +136,12 @@ class EditorGroupAdmin(admin.ModelAdmin):
                     userprofiles = form.cleaned_data['user profiles']
                     for userprofile in userprofiles:
                         for obj in queryset:
-                            if UserProfile.objects.filter(user=request.user)[0].has_editor_group_add_user_permission(obj):
-                                userprofile.editorgroup.remove(obj)
-                            else:
-                                self.message_user(request,
-                                    'You need to be group manager to remove a user from this editor group.')
-                                return HttpResponseRedirect(request.get_full_path())
+                            userprofile.user.groups.remove(obj)
                     self.message_user(request, 'Successfully remove user profiles from editor group.')
                     return HttpResponseRedirect(request.get_full_path())
     
             if not form:
-                userprofiles = UserProfile.objects.all()                    
+                userprofiles = UserProfile.objects.all()
                 form = self.UserProfileinEditorGroupForm(choices=userprofiles,
                     initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
         
@@ -163,8 +159,18 @@ class ManagerGroupAdmin(admin.ModelAdmin):
     """
     Administration interface for `ManagerGroup`s.
     """
-    list_display = ('name', 'managed_group')
+    list_display = ('name', 'managed_group', 'managers')
     search_fields = ('name', 'managed_group')
+    actions = ('add_user_profile_to_manager_group', 'remove_user_profile_from_manager_group', )
+
+    class UserProfileinManagerGroupForm(forms.Form):
+        _selected_action = forms.CharField(widget=forms.MultipleHiddenInput)
+
+        def __init__(self, choices = None, *args, **kwargs):
+            super(ManagerGroupAdmin.UserProfileinManagerGroupForm, self).__init__(*args, **kwargs)
+            if choices is not None:
+                self.choices = choices
+                self.fields['user profiles'] = forms.ModelMultipleChoiceField(self.choices)
 
     @csrf_protect_m
     @transaction.commit_on_success
@@ -187,6 +193,77 @@ class ManagerGroupAdmin(admin.ModelAdmin):
         return super(ManagerGroupAdmin, self).add_view(request,
                                 form_url=form_url, extra_context=extra_context)
 
+    def add_user_profile_to_manager_group(self, request, queryset):
+        form = None
+        if request.user.is_superuser:
+            if 'cancel' in request.POST:
+                self.message_user(request, 'Cancelled adding user profiles to the manager group.')
+                return
+            elif 'add_user_profile_to_manager_group' in request.POST:
+                objs_up = UserProfile.objects.all()
+                form = self.UserProfileinManagerGroupForm(objs_up, request.POST)
+                if form.is_valid():
+                    userprofiles = form.cleaned_data['user profiles']
+                    for userprofile in userprofiles:
+                        for obj in queryset:
+                            userprofile.user.groups.add(obj)
+                    self.message_user(request, 'Successfully added user profiles to manager group.')
+                    return HttpResponseRedirect(request.get_full_path())
+    
+            if not form:
+                userprofiles = UserProfile.objects.all()
+                form = self.UserProfileinManagerGroupForm(choices=userprofiles,
+                    initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
+            
+            return render_to_response('accounts/add_user_profile_to_manager_group.html',
+                                      {
+                                       'selected_managergroups': queryset,
+                                       'form': form,
+                                       'path':request.get_full_path()
+                                      },
+                                      context_instance=RequestContext(request))
+        else:
+            self.message_user(request,
+                'You need to be super user to add a user to this manager group.')
+            return HttpResponseRedirect(request.get_full_path())
+
+    add_user_profile_to_manager_group.short_description = "Add user profiles to selected manager groups"
+
+    def remove_user_profile_from_manager_group(self, request, queryset):
+        form = None
+        if request.user.is_superuser:
+            if 'cancel' in request.POST:
+                self.message_user(request, 'Cancelled removing user profiles from the manager group.')
+                return
+            elif 'remove_user_profile_from_manager_group' in request.POST:
+                objs_up = UserProfile.objects.all()
+                form = self.UserProfileinManagerGroupForm(objs_up, request.POST)
+                if form.is_valid():
+                    userprofiles = form.cleaned_data['user profiles']
+                    for userprofile in userprofiles:
+                        for obj in queryset:
+                                userprofile.user.groups.remove(obj)
+                    self.message_user(request, 'Successfully remove user profiles from manager group.')
+                    return HttpResponseRedirect(request.get_full_path())
+    
+            if not form:
+                userprofiles = UserProfile.objects.all()                    
+                form = self.UserProfileinManagerGroupForm(choices=userprofiles,
+                    initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
+        
+            return render_to_response('accounts/remove_user_profile_from_manager_group.html',
+                                      {
+                                       'selected_managergroups': queryset,
+                                       'form': form,
+                                       'path':request.get_full_path()
+                                      },
+                                      context_instance=RequestContext(request))
+        else:
+            self.message_user(request,
+                'You need to be super user to add a user to this manager group.')
+            return HttpResponseRedirect(request.get_full_path())
+
+    remove_user_profile_from_manager_group.short_description = "Remove user profiles from selected manager groups"
 
 admin.site.register(RegistrationRequest, RegistrationRequestAdmin)
 admin.site.register(ResetRequest, ResetRequestAdmin)
