@@ -242,7 +242,7 @@ class ManagerGroupAdmin(admin.ModelAdmin):
                     userprofiles = form.cleaned_data['user profiles']
                     for userprofile in userprofiles:
                         for obj in queryset:
-                                userprofile.user.groups.remove(obj)
+                            userprofile.user.groups.remove(obj)
                     self.message_user(request, 'Successfully remove user profiles from manager group.')
                     return HttpResponseRedirect(request.get_full_path())
     
