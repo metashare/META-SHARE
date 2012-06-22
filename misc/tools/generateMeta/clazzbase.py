@@ -153,7 +153,7 @@ from {0}supermodel import SchemaModel, SubclassableModel, \\
 from {0}editor.widgets import MultiFieldWidget
 from {0}fields import MultiTextField, MetaBooleanField, \\
   MultiSelectField, DictField, best_lang_value_retriever
-from {0}validators import validate_lang_code_keys
+from {0}validators import validate_lang_code_keys, validate_dict_values
 
 from metashare.storage.models import StorageObject, MASTER, COPY_CHOICES
 
@@ -174,22 +174,6 @@ HTTPURI_VALIDATOR = RegexValidator(r'(https?://.*|ftp://.*|www*)',
 SCHEMA_NAMESPACE = '{1}'
 # version of the META-SHARE metadata XML Schema
 SCHEMA_VERSION = '{2}'
-
-def _compute_documentationInfoType_key():
-    '''
-    Prevents id collisions for documentationInfoType_model sub classes.
-    
-    These are:
-    - documentInfoType_model;
-    - documentUnstructuredString_model.
-    
-    '''
-    _k1 = list(documentInfoType_model.objects.all().order_by('-id'))
-    _k2 = list(documentUnstructuredString_model.objects.all().order_by('-id'))
-    
-    LOGGER.debug('k1: {{}}, k2: {{}}'.format(_k1, _k2))
-
-    return max(getattr(_k1, '0', 0), getattr(_k2, '0', 0)) + 1
 
 """
 
@@ -277,13 +261,8 @@ admin.site.register({0}_model)
 
 CHOICE_STRING_SUB_CLASS_TEMPLATE = '''
 # pylint: disable-msg=C0103
-class {0}_model(InvisibleStringModel, {1}):
-    def save(self, *args, **kwargs):
-        """
-        Prevents id collisions for documentationInfoType_model sub classes.
-        """
-        self.id = _compute_documentationInfoType_key()
-        super({0}_model, self).save(*args, **kwargs)
+class {}_model(InvisibleStringModel, {}):
+    pass
 '''
 
 TOP_LEVEL_TYPE_EXTRA_CODE_TEMPLATE = '''
@@ -803,7 +782,7 @@ class Clazz(object):
             options += 'blank=True'
 
         self.wrtmodels(
-          '    %s = DictField(validators=[validate_lang_code_keys],\n'
+          '    %s = DictField(validators=[validate_lang_code_keys, validate_dict_values],\n'
           '      default_retriever=best_lang_value_retriever, %s)\n' % (
             name, options, ))
 
@@ -1072,16 +1051,6 @@ class Clazz(object):
 
         if self.name in REUSABLE_ENTITIES:
             self.wrtmodels(REUSABLE_ENTITY_SNIPPET)
-
-        if self.name == 'documentInfoType':
-            self.wrtmodels('''    def save(self, *args, **kwargs):
-        """
-        Prevents id collisions for documentationInfoType_model sub classes.
-        """
-        self.id = _compute_documentationInfoType_key()
-        super(documentInfoType_model, self).save(*args, **kwargs)
-
-''')
 
         self.generate_unicode_method()
 
