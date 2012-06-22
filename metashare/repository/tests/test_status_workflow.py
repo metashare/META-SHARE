@@ -7,6 +7,15 @@ from metashare.repository.editor.resource_editor import publish_resources, \
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL
 
 class StatusWorkflowTest(TestCase):
+    
+    @classmethod
+    def setUpClass(cls):
+        test_utils.set_index_active(False)
+    
+    @classmethod
+    def tearDownClass(cls):
+        test_utils.set_index_active(True)
+        
     def setUp(self):
         """
         Import a resource to test the workflow changes for
@@ -16,6 +25,13 @@ class StatusWorkflowTest(TestCase):
         _result = test_utils.import_xml(_fixture)
         self.resource_id = _result[0].id
 
+    def tearDown(self):
+        """
+        Clean up the test
+        """
+        test_utils.clean_db()
+        test_utils.clean_storage()
+        
     def test_can_publish_ingested(self):
         resource = resourceInfoType_model.objects.get(pk=self.resource_id)
         resource.storage_object.publication_status = INGESTED
