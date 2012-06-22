@@ -13,6 +13,7 @@ usage()
 	echo "   --no-import :   skip import step"
 	echo "   --no-sync   :   skip synchronization step"
 	echo "   --no-check  :   skip resource checking step"
+	echo "   --no-digest :   skip digest updating step"
 }
 
 import_file_on_node()
@@ -134,6 +135,16 @@ check_resources_2()
 	fi
 }
 
+update_digests()
+{
+	NODE_NUM="$1"
+	NODE_NAME=`"$PYTHON" "$CURRENT_DIR/get_node_cfg.py" $NODE_NUM NODE_NAME`
+	export NODE_DIR=$TEST_DIR/$NODE_NAME
+	echo "Updating digests on node $NODE_NAME"
+	cd "$METASHARE_DIR"
+	"$PYTHON" update_digests.py
+	cd "$CURRENT_DIR"
+}
 
 CURRENT_DIR=`pwd`
 METASHARE_DIR=$METASHARE_SW_DIR/metashare
@@ -150,6 +161,7 @@ fi
 DO_IMPORT_FILES=1
 DO_SYNCHRONIZE=1
 DO_CHECK_RESOURCES=1
+DO_DIGEST_UPDATE=1
 
 for arg
 do
@@ -161,6 +173,9 @@ do
 	fi
 	if [[ "$arg" == "--no-check" ]] ; then
 		DO_CHECK_RESOURCES=0
+	fi
+	if [[ "$arg" == "--no-digest" ]] ; then
+		DO_DIGEST_UPDATE=0
 	fi
 	if [[ "$arg" == "--help" || "$arg" == "-h" ]] ; then
 		usage
@@ -220,9 +235,22 @@ if [[ $DO_SYNCHRONIZE -eq 1 ]] ; then
 
   synchronize_node 1
 
+  synchronize_node 2
+
   synchronize_node 3
 fi
 
+
+if [[ $DO_DIGEST_UPDATE -eq 1 ]] ; then
+  update_digests 0
+
+  update_digests 1
+
+  update_digests 2
+
+  update_digests 3
+
+fi
 
 if [[ $DO_CHECK_RESOURCES -eq 1 ]] ; then
   NODES="0 1 3"
