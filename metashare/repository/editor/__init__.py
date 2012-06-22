@@ -42,7 +42,7 @@ from django.utils.translation import ugettext as _
 from django.views.decorators.csrf import csrf_protect
 
 from metashare.repository.editor.forms import ResourceDescriptionUploadForm
-from metashare.storage.models import INTERNAL
+from metashare.storage.models import INTERNAL, MASTER
 from metashare.xml_utils import import_from_file
 
 csrf_protect_m = method_decorator(csrf_protect)
@@ -79,7 +79,8 @@ class MetashareBackendSite(AdminSite):
             if form.is_valid():
                 # Retrieve the upload resource description file.
                 description = request.FILES['description']
-                successes, failures = import_from_file(description, description.name, INTERNAL, request.user.id)
+                successes, failures = \
+                  import_from_file(description, description.name, INTERNAL, MASTER, request.user.id)
                 
                 if len(successes) == 1 and len(failures) == 0: # single resource successfully uploaded
                     resource_object = successes[0]
