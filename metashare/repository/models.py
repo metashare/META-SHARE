@@ -50,7 +50,14 @@ def _compute_documentationInfoType_key():
     
     LOGGER.debug('k1: {}, k2: {}'.format(_k1, _k2))
 
-    return max(getattr(_k1, '0', 0), getattr(_k2, '0', 0)) + 1
+    _k1_id = 0
+    if len(_k1) > 0:
+        _k1_id = _k1[0].id
+    _k2_id = 0
+    if len(_k2) > 0:
+        _k2_id = _k2[0].id
+
+    return max(_k1_id, _k2_id) + 1
 
 
 # pylint: disable-msg=C0103
