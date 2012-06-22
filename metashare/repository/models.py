@@ -35,6 +35,22 @@ SCHEMA_NAMESPACE = 'http://www.ilsp.gr/META-XMLSchema'
 # version of the META-SHARE metadata XML Schema
 SCHEMA_VERSION = '2.1'
 
+def _compute_documentationInfoType_key():
+    '''
+    Prevents id collisions for documentationInfoType_model sub classes.
+    
+    These are:
+    - documentInfoType_model;
+    - documentUnstructuredString_model.
+    
+    '''
+    _k1 = list(documentInfoType_model.objects.all().order_by('-id'))
+    _k2 = list(documentUnstructuredString_model.objects.all().order_by('-id'))
+    
+    LOGGER.debug('k1: {}, k2: {}'.format(_k1, _k2))
+
+    return max(getattr(_k1, '0', 0), getattr(_k2, '0', 0)) + 1
+
 
 # pylint: disable-msg=C0103
 class resourceInfoType_model(SchemaModel):
@@ -897,6 +913,13 @@ class documentInfoType_model(documentationInfoType_model):
     
     copy_status = models.CharField(default=MASTER, max_length=1, choices=COPY_CHOICES,
         help_text="Generalized copy status flag for this entity instance.")
+
+    def save(self, *args, **kwargs):
+        """
+        Prevents id collisions for documentationInfoType_model sub classes.
+        """
+        self.id = _compute_documentationInfoType_key()
+        super(documentInfoType_model, self).save(*args, **kwargs)
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
@@ -7776,4 +7799,9 @@ class lexicalConceptualResourceMediaTypeType_model(SchemaModel):
 
 # pylint: disable-msg=C0103
 class documentUnstructuredString_model(InvisibleStringModel, documentationInfoType_model):
-    pass
+    def save(self, *args, **kwargs):
+        """
+        Prevents id collisions for documentationInfoType_model sub classes.
+        """
+        self.id = _compute_documentationInfoType_key()
+        super(documentUnstructuredString_model, self).save(*args, **kwargs)

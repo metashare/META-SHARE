@@ -496,6 +496,9 @@ class SchemaModel(models.Model):
         if hasattr(_object, 'copy_status'):
             _fields.append('copy_status')
         
+        if _object.__schema_name__ == "STRINGMODEL":
+            _fields.append("value")
+        
         # Ensure that "back_to_" pointers are available for checking.
         for _field in cls._meta.fields:
             if isinstance(_field, related.ForeignKey):
