@@ -731,6 +731,8 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_id("action-toggle").click()
         Select(driver.find_element_by_name("action")).select_by_visible_text("Ingest selected internal resources")
         driver.find_element_by_name("index").click()
+        # TODO remove this workaround when Selenium starts working again as intended
+        time.sleep(1)
 
         
     def publish(self, driver):
@@ -740,6 +742,8 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_id("action-toggle").click()
         Select(driver.find_element_by_name("action")).select_by_visible_text("Publish selected ingested resources")
         driver.find_element_by_name("index").click()
+        # TODO remove this workaround when Selenium starts working again as intended
+        time.sleep(1)
         
     def delete(self, driver):
         """
@@ -749,6 +753,8 @@ class EditorTest(SeleniumTestCase):
         Select(driver.find_element_by_name("action")).select_by_visible_text("Delete selected Resources")
         driver.find_element_by_name("index").click()
         driver.find_element_by_css_selector("input[type=\"submit\"]").click()
+        # TODO remove this workaround when Selenium starts working again as intended
+        time.sleep(1)
 
 
     def is_element_present(self, how, what):
