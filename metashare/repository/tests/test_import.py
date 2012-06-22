@@ -2,6 +2,8 @@ import os
 from django.test import TestCase
 from metashare import test_utils
 from metashare.settings import ROOT_PATH
+from metashare.repository.models import documentUnstructuredString_model, \
+    documentInfoType_model
 
 class ImportTest(TestCase):
     """
@@ -106,3 +108,14 @@ class ImportTest(TestCase):
         """
         self._test_import_dir(
           '{}/repository/test_fixtures/import-bug-2/'.format(ROOT_PATH))
+
+    def test_res_doc_info(self):
+        """
+        Check if resourceDocumentationInfo is imported correctly.
+        """
+        self._test_import_dir(
+          '{}/repository/test_fixtures/resourceDocumentationInfo/'.format(ROOT_PATH))
+        # check that there are 3 documentUnstructured 
+        # and 1 documentInfo in the database
+        self.assertEqual(len(documentUnstructuredString_model.objects.all()), 2)
+        self.assertEqual(len(documentInfoType_model.objects.all()), 1)

@@ -175,6 +175,30 @@ SCHEMA_NAMESPACE = '{1}'
 # version of the META-SHARE metadata XML Schema
 SCHEMA_VERSION = '{2}'
 
+
+def _compute_documentationInfoType_key():
+    '''
+    Prevents id collisions for documentationInfoType_model sub classes.
+    
+    These are:
+    - documentInfoType_model;
+    - documentUnstructuredString_model.
+    
+    '''
+    _k1 = list(documentInfoType_model.objects.all().order_by('-id'))
+    _k2 = list(documentUnstructuredString_model.objects.all().order_by('-id'))
+    
+    LOGGER.debug('k1: {{}}, k2: {{}}'.format(_k1, _k2))
+
+    _k1_id = 0
+    if len(_k1) > 0:
+        _k1_id = _k1[0].id
+    _k2_id = 0
+    if len(_k2) > 0:
+        _k2_id = _k2[0].id
+
+    return max(_k1_id, _k2_id) + 1
+
 """
 
 
