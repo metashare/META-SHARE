@@ -6,7 +6,6 @@ from django.test.client import Client
 
 from metashare import test_utils
 from metashare.accounts.models import UserProfile
-from metashare.repository.models import resourceInfoType_model
 from metashare.repository import views
 from metashare.settings import DJANGO_BASE, ROOT_PATH
 from metashare.test_utils import create_user
@@ -29,6 +28,15 @@ class ViewTest(TestCase):
     """
     Test the detail view
     """
+    
+    @classmethod
+    def setUpClass(cls):
+        test_utils.set_index_active(False)
+    
+    @classmethod
+    def tearDownClass(cls):
+        test_utils.set_index_active(True)
+        
     def setUp(self):
         """
         Set up the detail view
@@ -48,7 +56,8 @@ class ViewTest(TestCase):
         """
         Clean up the test
         """
-        resourceInfoType_model.objects.all().delete()
+        test_utils.clean_db()
+        test_utils.clean_storage()
         User.objects.all().delete()
 
     def testView(self):
@@ -98,6 +107,15 @@ class DownloadViewTest(TestCase):
     """
     Tests for the license selection, license agreement and download views.
     """
+    
+    @classmethod
+    def setUpClass(cls):
+        test_utils.set_index_active(False)
+    
+    @classmethod
+    def tearDownClass(cls):
+        test_utils.set_index_active(True)
+        
     def setUp(self):
         """
         Sets up some resources with which to test.
@@ -129,7 +147,8 @@ class DownloadViewTest(TestCase):
         """
         Cleans up the test environment.
         """
-        resourceInfoType_model.objects.all().delete()
+        test_utils.clean_db()
+        test_utils.clean_storage()
         User.objects.all().delete()
 
     def test_non_downloadable_resource(self):

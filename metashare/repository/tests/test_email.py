@@ -1,12 +1,20 @@
 from django.test import TestCase
 from metashare import test_utils
 from metashare.settings import ROOT_PATH
-from metashare.repository.models import resourceInfoType_model
 
 class EmailPictureTest(TestCase):
     """
     Test the picture display instead of the email in plain text
     """
+    
+    @classmethod
+    def setUpClass(cls):
+        test_utils.set_index_active(False)
+    
+    @classmethod
+    def tearDownClass(cls):
+        test_utils.set_index_active(True)
+    
     def setUp(self):
         """
         Set up the email test
@@ -20,7 +28,8 @@ class EmailPictureTest(TestCase):
         """
         Clean up the test
         """
-        resourceInfoType_model.objects.all().delete()
+        test_utils.clean_db()
+        test_utils.clean_storage()
 
 # pylint: disable-msg=W0105
 '''
