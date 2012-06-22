@@ -213,3 +213,17 @@ div#redirect_msg h3{
 	margin-top:20px;
 	text-align:center;
 }
+
+.distance-div{
+	margin-top:20px;
+}
+
+.buttons{
+	margin-top:20px;
+}
+
+.resource-group, .resource-group th, .resource-group tr, .resource-group td {
+	border-style:solid;
+	border-color:#CCC;
+	border-width:1px;
+}

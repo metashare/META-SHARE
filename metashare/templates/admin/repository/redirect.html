@@ -8,7 +8,7 @@
 
 {{ media }}
 {% endblock %}
-{% block content %}<div id="content-main">
+{% block content %}
 <div id="redirect_msg"><h3>You cannot edit {% if resource %}the metadata for the resource "{{resource}}"{% else %}the entity "{{object}}"{% endif %}
 {% if resource %}
 , originally provided
@@ -20,7 +20,7 @@
 {% endif %} 
  in the current META-SHARE node.<br/>
 You will now be redirected in the META-SHARE node where {% if resource %}the resource metadata{% else %}this entity{% endif %} was originally created...
-</h3><div>
+</h3></div>
 
 
 
