@@ -14,7 +14,8 @@ from metashare.repository.supermodel import SchemaModel, SubclassableModel, \
 from metashare.repository.editor.widgets import MultiFieldWidget
 from metashare.repository.fields import MultiTextField, MetaBooleanField, \
   MultiSelectField, DictField, best_lang_value_retriever
-from metashare.repository.validators import validate_lang_code_keys
+from metashare.repository.validators import validate_lang_code_keys, \
+validate_dict_values
 
 from metashare.storage.models import StorageObject
 
@@ -331,21 +332,21 @@ class identificationInfoType_model(SchemaModel):
       ( u'identifier', u'identifier', OPTIONAL ),
     )
 
-    resourceName = DictField(validators=[validate_lang_code_keys],
+    resourceName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Resource name', 
       max_val_length=500, 
       help_text='The full name by which the resource is known',
       )
 
-    description = DictField(validators=[validate_lang_code_keys],
+    description = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Description', 
       max_val_length=10000, 
       help_text='Provides the description of the resource in prose',
       )
 
-    resourceShortName = DictField(validators=[validate_lang_code_keys],
+    resourceShortName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Resource short name', 
       max_val_length=500, 
@@ -811,7 +812,7 @@ class documentInfoType_model(documentationInfoType_model):
                      key=lambda choice: choice[1].lower()),
       )
 
-    title = DictField(validators=[validate_lang_code_keys],
+    title = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Title', 
       max_val_length=500, 
@@ -1512,7 +1513,7 @@ class participantInfoType_model(SchemaModel):
       ( u'educationLevel', u'educationLevel', OPTIONAL ),
     )
 
-    alias = DictField(validators=[validate_lang_code_keys],
+    alias = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Alias', 
       max_val_length=500, 
@@ -1567,7 +1568,7 @@ class participantInfoType_model(SchemaModel):
       help_text='The place in which the participant lived as a child',
       blank=True, max_length=100, )
 
-    dialectAccent = DictField(validators=[validate_lang_code_keys],
+    dialectAccent = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Dialect accent', 
       max_val_length=500, 
@@ -2537,14 +2538,14 @@ class organizationInfoType_model(actorInfoType_model):
       u'communicationInfo': "communicationInfoType_model",
     }
 
-    organizationName = DictField(validators=[validate_lang_code_keys],
+    organizationName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Organization name', 
       max_val_length=100, 
       help_text='The full name of an organization',
       )
 
-    organizationShortName = DictField(validators=[validate_lang_code_keys],
+    organizationShortName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Organization short name', 
       max_val_length=100, 
@@ -2552,7 +2553,7 @@ class organizationInfoType_model(actorInfoType_model):
       ' organization',
       blank=True)
 
-    departmentName = DictField(validators=[validate_lang_code_keys],
+    departmentName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Department name', 
       help_text='The name of the department or unit (e.g. specific unive' \
@@ -2603,7 +2604,7 @@ class personInfoType_model(actorInfoType_model):
       u'communicationInfo': "communicationInfoType_model",
     }
 
-    surname = DictField(validators=[validate_lang_code_keys],
+    surname = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Surname', 
       max_val_length=100, 
@@ -2611,7 +2612,7 @@ class personInfoType_model(actorInfoType_model):
       'source',
       )
 
-    givenName = DictField(validators=[validate_lang_code_keys],
+    givenName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Given name', 
       max_val_length=100, 
@@ -2873,7 +2874,7 @@ class licenceInfoType_model(SchemaModel):
       'ource, a fragment of the resource or to use atool or service',
       blank=True, max_length=100, )
 
-    attributionText = DictField(validators=[validate_lang_code_keys],
+    attributionText = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Attribution text', 
       max_val_length=1000, 
@@ -3352,14 +3353,14 @@ class projectInfoType_model(SchemaModel):
       ( u'projectEndDate', u'projectEndDate', OPTIONAL ),
     )
 
-    projectName = DictField(validators=[validate_lang_code_keys],
+    projectName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Project name', 
       max_val_length=500, 
       help_text='The full name of a project related to the resource',
       )
 
-    projectShortName = DictField(validators=[validate_lang_code_keys],
+    projectShortName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Project short name', 
       max_val_length=500, 
