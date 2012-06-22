@@ -293,10 +293,11 @@ class ResourceModelAdmin(SchemaModelAdmin):
 
     content_fields = ('resourceComponentType',)
     list_display = ('__unicode__', 'resource_type', 'publication_status', 'resource_Owners', 'editor_Groups',)
+    list_filter = ('storage_object__publication_status',)
     actions = (publish_resources, unpublish_resources, ingest_resources, export_xml_resources, 'add_group', 'remove_group', 'add_owner', 'remove_owner')
     hidden_fields = ('storage_object', 'owners', 'editor_groups',)
-         
-        
+
+
     def resource_Owners(self, obj):
         """
         Method used for changelist view for resources.
