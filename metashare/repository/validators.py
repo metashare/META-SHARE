@@ -41,6 +41,6 @@ def validate_dict_values(dict_value):
     """
     
     for value in dict_value.itervalues():
-        if value=='':
+        if value == '':
             # pylint: disable-msg=E1102
             raise ValidationError('This field is required.')  
