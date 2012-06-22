@@ -40,7 +40,6 @@ class EditorTest(TestCase):
 
     @classmethod
     def import_test_resource(cls, editor_group=None, path=TESTFIXTURE_XML):
-        test_utils.setup_test_storage()
         result = test_utils.import_xml(path)
         resource = result[0]
         if not editor_group is None:
@@ -57,6 +56,8 @@ class EditorTest(TestCase):
         As a consequence, they need no valuable password.
         """
         test_utils.set_index_active(False)
+        test_utils.setup_test_storage()
+
         EditorTest.test_editor_group = EditorGroup.objects.create(
                                                     name='test_editor_group')
         EditorTest.test_manager_group = \

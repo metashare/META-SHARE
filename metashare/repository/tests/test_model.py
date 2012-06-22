@@ -157,6 +157,7 @@ class ModelUtilsTest(TestCase):
         """
         Imports a few test resources.
         """
+        test_utils.setup_test_storage()
         self.test_res_1 = test_utils.import_xml(
             '{0}/repository/fixtures/testfixture.xml'.format(ROOT_PATH))[0]
         self.test_res_2 = test_utils.import_xml(

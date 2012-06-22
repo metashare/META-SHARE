@@ -80,7 +80,6 @@ class MetadataSyncTest (TestCase):
 
     @classmethod
     def import_test_resource(cls, filename, status):
-        test_utils.setup_test_storage()
         _fixture = '{0}/repository/fixtures/{1}'.format(settings.ROOT_PATH, filename)
         result = test_utils.import_xml(_fixture)
         resource = result[0]
@@ -98,6 +97,7 @@ class MetadataSyncTest (TestCase):
         As a consequence, they need no valuable password.
         """
         set_index_active(False)
+        test_utils.setup_test_storage()
         syncuser = User.objects.create_user('syncuser', 'staff@example.com',
           'secret')
         syncpermission = Permission.objects.get(codename='can_sync')

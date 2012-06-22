@@ -18,8 +18,10 @@ from metashare.storage.models import PUBLISHED, MASTER, StorageObject
 from metashare.xml_utils import import_from_file
 
 
+TEST_STORAGE_PATH = '{0}/test-tmp'.format(settings.ROOT_PATH)
+
 def setup_test_storage():
-    settings.STORAGE_PATH = '{0}/test-tmp'.format(settings.ROOT_PATH)
+    settings.STORAGE_PATH = TEST_STORAGE_PATH
     try:
         os.mkdir(settings.STORAGE_PATH)
     except:
@@ -46,10 +48,12 @@ def clean_storage():
     """
     Deletes content of storage folder.
     """
-    for _folder in os.listdir(settings.STORAGE_PATH):
-        for _file in os.listdir(os.path.join(settings.STORAGE_PATH, _folder)):
-            os.remove(os.path.join(settings.STORAGE_PATH, _folder, _file))
-        os.rmdir(os.path.join(settings.STORAGE_PATH, _folder))
+    # to sure, check that we only delete it if its the test storage path
+    if settings.STORAGE_PATH == TEST_STORAGE_PATH:
+        for _folder in os.listdir(settings.STORAGE_PATH):
+            for _file in os.listdir(os.path.join(settings.STORAGE_PATH, _folder)):
+                os.remove(os.path.join(settings.STORAGE_PATH, _folder, _file))
+            os.rmdir(os.path.join(settings.STORAGE_PATH, _folder))
 
 def create_user(username, email, password):
     User.objects.all().filter(username=username).delete()
