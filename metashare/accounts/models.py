@@ -4,18 +4,15 @@ Project: META-SHARE prototype implementation
 """
 import logging
 
-from traceback import extract_stack
 from uuid import uuid1
 
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.signals import user_logged_in, user_logged_out
-from django.core import serializers
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 from metashare.settings import LOG_LEVEL, LOG_HANDLER
-from metashare.storage.models import StorageServer
 
 
 # Setup logging support.
@@ -180,32 +177,6 @@ def create_profile(sender, instance, created, **kwargs):
 #    LOGGER.debug('Action: {0} for instance: {1}'.format(action, instance))
 #
 #m2m_changed.connect(do_something_with_permissions, sender=User.user_permissions.through)
-
-@receiver(post_save, sender=UserProfile)
-def synchronise_profile(sender, instance, created, **kwargs):
-    """
-    Synchronise local changes with other nodes.
-    
-    Synchronisation is NOT triggered if the save() method has been called from
-    within the accounts.views.update() method which is only receiving updates.
-    """
-    # Compute call stack and corresponding method names.
-    call_stack = [details[2] for details in extract_stack()]
-    
-    # Only synchronisze if 'update' is NOT inside the call stack.
-    if not 'update' in call_stack:
-        # Serialize user information and corresponding profile to XML.
-        profile = instance
-        user = instance.user
-        serialized = serializers.serialize("xml", [profile, user])
-        
-        # Send new user account data to all known META-SHARE nodes.
-        for server in StorageServer.objects.all():
-            if server.is_local_server():
-                continue
-            
-            # Target action will be /accounts/update/ as we're sending user data.
-            server.send_message(serialized, '/accounts/update/')
 
 @receiver(user_logged_in)
 def add_uuid_to_session(sender, request, user, **kwargs):
