@@ -71,6 +71,49 @@ class ResetRequest(models.Model):
         """
         return u'<ResetRequest "{0}">'.format(self.user.username)
 
+class EditorGroup(Group):
+    """
+    A specialized `Group` subtype which is used to group resources that can only
+    be edited by users who are member of this group.
+    
+    The corresponding `ModelAdmin` class suggests basic resource edit
+    permissions for this group. 
+    """
+    # Currently the group is just used as a marker, i.e., in order to
+    # differentiate its instances from other Django `Group`s. That's why it
+    # doesn't have any custom fields.
+    
+    def users(self):
+        
+        return User.objects.filter(groups__name=self.name)
+
+    def manager_group(self):
+
+        return ', '.join(mgr_group.name for mgr_group in ManagerGroup.objects.filter(managed_group__name__contains=
+                            self.name))
+
+    def managers(self):
+        
+        mgr_group = self.manager_group()
+
+        return User.objects.filter(groups__name=mgr_group)
+
+class ManagerGroup(Group):
+    """
+    A specialized `Group` which gives its members permissions to manage language
+    resources belonging to a certain (managed) group.
+    
+    Group members may choose the members of the managed group and they may
+    ingest/publish resources belonging to the managed group. Delete permission
+    for a resource is suggested by the corresponding `ModelAdmin` class.
+    """
+    # the `EditorGroup` which is managed by members of this `ManagerGroup`
+    managed_group = models.OneToOneField(EditorGroup)
+
+    def managers(self):
+        
+        return User.objects.filter(groups__name__contains=self.name)
+
 class UserProfile(models.Model):
     """
     Contains additional user data related to a Django User instance.
@@ -118,33 +161,29 @@ class UserProfile(models.Model):
 #             delete() calls.  For this, we have to create receivers listening
 #             to the post_delete signal.  Again, this has to be tested!
 
+    def editor_group(self):
+        """
+        Return the editor group of a user profile
+        """
+        return ', '.join([edit_group.name for edit_group in EditorGroup.objects.filter(name__in=
+                            self.user.groups.values_list('name', flat=True))])
 
-class EditorGroup(Group):
-    """
-    A specialized `Group` subtype which is used to group resources that can only
-    be edited by users who are member of this group.
-    
-    The corresponding `ModelAdmin` class suggests basic resource edit
-    permissions for this group. 
-    """
-    # Currently the group is just used as a marker, i.e., in order to
-    # differentiate its instances from other Django `Group`s. That's why it
-    # doesn't have any custom fields.
-    pass
+    def manager_group(self):
+        """
+        Return the manager group of a user profile
+        """
+        return ', '.join([mgr_group.managed_group.name for mgr_group in ManagerGroup.objects.filter(name__in=
+                            self.user.groups.values_list('name', flat=True))])
 
-
-class ManagerGroup(Group):
-    """
-    A specialized `Group` which gives its members permissions to manage language
-    resources belonging to a certain (managed) group.
-    
-    Group members may choose the members of the managed group and they may
-    ingest/publish resources belonging to the managed group. Delete permission
-    for a resource is suggested by the corresponding `ModelAdmin` class.
-    """
-    # the `EditorGroup` which is managed by members of this `ManagerGroup`
-    managed_group = models.OneToOneField(EditorGroup)
-
+    def has_manager_permission(self, editor_group):
+        """
+        Return whether the user profile has permission to add users in an specific editor group
+        """
+        if self.user.is_superuser:
+            return True
+        
+        return any(editor_group.manager_group() == mgr_group.name for mgr_group in ManagerGroup.objects.filter(name__in=
+            self.user.groups.values_list('name', flat=True)))
 
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
