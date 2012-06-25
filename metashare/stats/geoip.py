@@ -5,7 +5,9 @@ from os.path import abspath, dirname, join
 parentdir = dirname(dirname(dirname(abspath(__file__))))
 sys.path.insert(0, join(parentdir, 'lib', 'python2.7', 'site-packages'))
 import pygeoip
-print "???? " +join(parentdir, 'lib', 'python2.7', 'site-packages')
+from metashare.settings import ROOT_PATH
+
+
 # Info about of the known countries
 country_info = {"AD": ["Andorra", "42.5075314,1.5218156"],
 "AE": ["United Arab Emirates", "23.424076,53.847818"],
@@ -258,7 +260,7 @@ country_info = {"AD": ["Andorra", "42.5075314,1.5218156"],
 "ZM": ["Zambia", "-15.0,30.0"],
 "ZW": ["Zimbabwe", "-19.0,29.0"]}
         
-geoip = pygeoip.GeoIP('stats/resources/GeoIP.dat')
+geoip = pygeoip.GeoIP('{0}/stats/resources/GeoIP.dat'.format(ROOT_PATH))
 def getcountry_name(countrycode):
     if countrycode in country_info:
         return country_info[countrycode][0]
