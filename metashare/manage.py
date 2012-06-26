@@ -39,10 +39,5 @@ if __name__ == "__main__":
             setup_environ(settings)
             from metashare.repository import verify_at_startup
             verify_at_startup() # may raise Exception, which we don't want to catch.
-            # Register scripts for scheduled synchronization ;
-            # skip if running on Windows
-            if os.name != 'nt':
-                from django.core.management import call_command
-                call_command('installtasks')
     
     execute_manager(settings)
