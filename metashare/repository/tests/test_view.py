@@ -4,11 +4,12 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.client import Client
 
-from metashare import test_utils
+from metashare import test_utils, settings
 from metashare.accounts.models import UserProfile
 from metashare.repository import views
 from metashare.settings import DJANGO_BASE, ROOT_PATH
 from metashare.test_utils import create_user
+import shutil
 
 
 def _import_resource(fixture_name):
@@ -129,6 +130,17 @@ class DownloadViewTest(TestCase):
             _import_resource('downloadable_3_licenses.xml')
         self.ms_commons_resource = \
             _import_resource('downloadable_ms_commons_license.xml')
+        self.local_download_resource = \
+            _import_resource('local_download.xml')
+        # assign and copy downloadable resource
+        self.local_download_resource.storage_object.checksum = \
+            '3930f5022aff02c7fa27ffabf2eaaba0'
+        self.local_download_resource.storage_object.save()
+        self.local_download_resource.storage_object.update_storage()
+        shutil.copyfile(
+          '{0}/repository/fixtures/archive.zip'.format(settings.ROOT_PATH),
+          '{0}/{1}/archive.zip'.format(
+            settings.STORAGE_PATH, self.local_download_resource.storage_object.identifier))
         # set up test users with/without staff permissions and with/without
         # META-SHARE full membership
         staffuser = create_user('staffuser', 'staff@example.com', 'secret')
@@ -320,9 +332,17 @@ class DownloadViewTest(TestCase):
         Verifies that a resource which is locally downloadable can actually be
         downloaded appropriately.
         """
-        # TODO add assertions
-        pass
-
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        response = client.post(reverse(views.download, args=
+                (self.local_download_resource.storage_object.identifier,)),
+            { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
+              'licence': 'AGPL' },
+            follow = True)
+        self.assertEquals(200, response.status_code)
+        self.assertEquals('application/zip', response.__getitem__('Content-Type'))
+        self.assertEquals('attachment; filename=archive.zip', response.__getitem__('Content-Disposition'))
+        
     def test_externally_downloadable_resource(self):
         """
         Verifies that a resource which is externally downloadable can actually
