@@ -45,7 +45,7 @@ class StatsTest(django.test.TestCase):
         response = client.post(ADMINROOT+'upload_xml/', {'description': xmlfile, 'uploadTerms':'on' }, follow=True)
         # And verify that we have more than zero resources on the page where we
         # are being redirected:
-        self.assertContains(response, "Editable Resources")
+        self.assertContains(response, "My Resources")
         self.assertNotContains(response, '0 Resources')
         
         statsdata = getLRLast(UPDATE_STAT, 2)

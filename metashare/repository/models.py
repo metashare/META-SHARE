@@ -35,6 +35,29 @@ SCHEMA_NAMESPACE = 'http://www.ilsp.gr/META-XMLSchema'
 # version of the META-SHARE metadata XML Schema
 SCHEMA_VERSION = '2.1'
 
+def _compute_documentationInfoType_key():
+    '''
+    Prevents id collisions for documentationInfoType_model sub classes.
+    
+    These are:
+    - documentInfoType_model;
+    - documentUnstructuredString_model.
+    
+    '''
+    _k1 = list(documentInfoType_model.objects.all().order_by('-id'))
+    _k2 = list(documentUnstructuredString_model.objects.all().order_by('-id'))
+    
+    LOGGER.debug('k1: {}, k2: {}'.format(_k1, _k2))
+
+    _k1_id = 0
+    if len(_k1) > 0:
+        _k1_id = _k1[0].id
+    _k2_id = 0
+    if len(_k2) > 0:
+        _k2_id = _k2[0].id
+
+    return max(_k1_id, _k2_id) + 1
+
 
 # pylint: disable-msg=C0103
 class resourceInfoType_model(SchemaModel):
@@ -200,20 +223,6 @@ class resourceInfoType_model(SchemaModel):
             return None
 
         return resource_component.as_subclass()._meta.verbose_name
-
-    def resource_owners(self):
-        """
-        Method used for changelist view for resources.
-        """
-        owners = getattr(self, 'owners', None)
-        if not owners:
-            return None
-        
-        owners_list = ''
-        for owner in owners.all():
-            owners_list += owner.surname.join(", ")
-        
-        return owners_list
 
 
 SIZEINFOTYPE_SIZEUNIT_CHOICES = _make_choices_from_list([
@@ -909,6 +918,13 @@ class documentInfoType_model(documentationInfoType_model):
     
     copy_status = models.CharField(default=MASTER, max_length=1, choices=COPY_CHOICES,
         help_text="Generalized copy status flag for this entity instance.")
+
+    def save(self, *args, **kwargs):
+        """
+        Prevents id collisions for documentationInfoType_model sub classes.
+        """
+        self.id = _compute_documentationInfoType_key()
+        super(documentInfoType_model, self).save(*args, **kwargs)
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
@@ -7788,4 +7804,9 @@ class lexicalConceptualResourceMediaTypeType_model(SchemaModel):
 
 # pylint: disable-msg=C0103
 class documentUnstructuredString_model(InvisibleStringModel, documentationInfoType_model):
-    pass
+    def save(self, *args, **kwargs):
+        """
+        Prevents id collisions for documentationInfoType_model sub classes.
+        """
+        self.id = _compute_documentationInfoType_key()
+        super(documentUnstructuredString_model, self).save(*args, **kwargs)
