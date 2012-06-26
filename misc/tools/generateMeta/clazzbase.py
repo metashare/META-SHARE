@@ -153,7 +153,7 @@ from {0}supermodel import SchemaModel, SubclassableModel, \\
 from {0}editor.widgets import MultiFieldWidget
 from {0}fields import MultiTextField, MetaBooleanField, \\
   MultiSelectField, DictField, best_lang_value_retriever
-from {0}validators import validate_lang_code_keys
+from {0}validators import validate_lang_code_keys, validate_dict_values
 
 from metashare.storage.models import StorageObject, MASTER, COPY_CHOICES
 
@@ -810,7 +810,7 @@ class Clazz(object):
             options += 'blank=True'
 
         self.wrtmodels(
-          '    %s = DictField(validators=[validate_lang_code_keys],\n'
+          '    %s = DictField(validators=[validate_lang_code_keys, validate_dict_values],\n'
           '      default_retriever=best_lang_value_retriever, %s)\n' % (
             name, options, ))
 

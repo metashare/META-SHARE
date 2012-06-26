@@ -108,7 +108,7 @@ class EditorTest(SeleniumTestCase):
         except AssertionError as e: 
             self.verification_errors.append(str(e))
             
-
+    
     def test_LR_creation_corpus_text(self):
         driver = self.driver
         driver.get(self.base_url)
@@ -720,8 +720,11 @@ class EditorTest(SeleniumTestCase):
         
     def fill_audio_size(self, driver, ss_path, parent_id):
         driver.switch_to_window("id_audioSizeInfo")
-        # TODO: the popup can be saved immediately, but still audio size is required in corpus audio info
-        save_and_close(driver, parent_id)
+
+        driver.find_element_by_id("id_sizeinfotype_model_set-0-size").send_keys("100")
+        
+        Select(driver.find_element_by_id("id_sizeinfotype_model_set-0-sizeUnit")).select_by_visible_text("gb")
+        save_and_close(driver, parent_id) 
         
         
     def ingest(self, driver):
