@@ -94,16 +94,6 @@
 
 {% submit_row_resource_popup %}    
     
-<script>
-	$('input[name="_continue"]').click(function(){	
-		//alert('continue');
-		if($('ul.messagelist li.info').html().indexOf('You may edit it again below.') != -1){
-
-		}
-	});
-
-</script>
-
 {% if adminform and add %}
    <script type="text/javascript">document.getElementById("{{ adminform.first_field.id_for_label }}").focus();</script>
 {% endif %}
