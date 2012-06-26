@@ -1,7 +1,6 @@
 {% extends "admin/base_site.html" %}
 {% load i18n admin_modify adminmedia %}
 {% load url from future %}
-{% load validate_field %}
 
 {% block extrahead %}{{ block.super }}
 {% url 'admin:jsi18n' as jsi18nurl %}
@@ -42,8 +41,6 @@
  </ul>
 {% endif %}{% endif %}
 {% endblock %}
-
-
 
 <script>
 	$(document).ready(function(){			   
@@ -176,6 +173,7 @@
 
 </div>
 </form></div>
+
 
 {% endblock %}
 
