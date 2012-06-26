@@ -26,13 +26,14 @@ usage()
 }
 
 CURRENT_DIR=`pwd`
-METASHARE_DIR=$METASHARE_SW_DIR/metashare
 RES_DIR="$METASHARE_SW_DIR/misc/testdata/v2.1"
 
 DO_IMPORT_FILES=1
 DO_SYNCHRONIZE=1
 DO_CHECK_RESOURCES=1
 DO_DIGEST_UPDATE=1
+
+NODE_COUNT=`get_node_count`
 
 for arg
 do
@@ -54,21 +55,63 @@ do
 	fi
 done
 
-NODE_COUNT=4
+FILESET[0]=`cat << EOF
+$RES_DIR/ELRAResources/elra20.xml
+$RES_DIR/ELRAResources/elra30.xml
+$RES_DIR/ELRAResources/elra40.xml
+EOF`
 
-FSET_NAME=fileset1
+FILESET[1]=`cat << EOF
+$RES_DIR/ELRAResources/elra21.xml
+$RES_DIR/ELRAResources/elra31.xml
+$RES_DIR/ELRAResources/elra41.xml
+$RES_DIR/ELRAResources/elra51.xml
+$RES_DIR/ELRAResources/elra61.xml
+EOF`
+
+FILESET[2]=`cat << EOF
+$RES_DIR/METASHAREResources/ILC-CNR/Estuari.xml
+EOF`
+
+FILESET[3]=`cat << EOF
+$RES_DIR/METASHAREResources/ILSP/ILSP12.xml
+$RES_DIR/METASHAREResources/ILSP/ILSP16.xml
+$RES_DIR/METASHAREResources/ILSP/ILSP18.xml
+$RES_DIR/METASHAREResources/ILSP/ILSP25.xml
+EOF`
 
 if [[ $DO_IMPORT_FILES -eq 1 ]] ; then
-  import_files $FSET_NAME inner
+  import_files fileset1 inner
+fi
+
+
+if [[ $DO_SYNCHRONIZE -eq 1 ]] ; then
+  synchronize_nodes
+fi
+
+if [[ $DO_CHECK_RESOURCES -eq 1 ]] ; then
+  check_resources_on_inner_nodes
+fi
+
+
+if [[ $DO_IMPORT_FILES -eq 1 ]] ; then
+  import_files fileset1 outer
 fi
 
 if [[ $DO_SYNCHRONIZE -eq 1 ]] ; then
   synchronize_nodes
 fi
 
+if [[ $DO_CHECK_RESOURCES -eq 1 ]] ; then
+  check_resources_on_inner_nodes
+fi
 
 if [[ $DO_DIGEST_UPDATE -eq 1 ]] ; then
   update_digests
+fi
+
+if [[ $DO_SYNCHRONIZE -eq 1 ]] ; then
+  synchronize_nodes
 fi
 
 if [[ $DO_CHECK_RESOURCES -eq 1 ]] ; then

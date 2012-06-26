@@ -6,7 +6,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         for res in resourceInfoType_model.objects.all():
             sto_obj = res.storage_object
-            if sto_obj._get_published():
+            if sto_obj.published:
                 print "{1}:{2}".format(res.id, sto_obj.identifier, sto_obj.digest_checksum)
         return
 

@@ -34,6 +34,7 @@ fi
 
 cd $METASHARE_DIR
 "$PYTHON"  manage.py syncdb --noinput
+"$PYTHON"  manage.py createsuperuser --username=admin --password=secret
 cd $CURRENT_DIR
 
 echo "Database file " $DATABASE_FILE " has been created/updated."
