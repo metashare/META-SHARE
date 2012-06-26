@@ -23,6 +23,7 @@ logging.basicConfig(level=LOG_LEVEL)
 LOGGER = logging.getLogger('metashare.accounts.models')
 LOGGER.addHandler(LOG_HANDLER)
 
+
 def _create_uuid():
     """
     Creates a unique id using UUID-1, checks for collisions.
@@ -36,6 +37,7 @@ def _create_uuid():
       UserProfile.objects.filter(uuid=new_id):
         new_id = uuid1().hex
     return new_id
+
 
 class RegistrationRequest(models.Model):
     """
@@ -56,6 +58,7 @@ class RegistrationRequest(models.Model):
         """
         return u'<RegistrationRequest "{0}">'.format(self.shortname)
 
+
 class ResetRequest(models.Model):
     """
     Contains authentication key to reset the user password.
@@ -71,6 +74,7 @@ class ResetRequest(models.Model):
         """
         return u'<ResetRequest "{0}">'.format(self.user.username)
 
+
 class EditorGroup(Group):
     """
     A specialized `Group` subtype which is used to group resources that can only
@@ -82,21 +86,15 @@ class EditorGroup(Group):
     # Currently the group is just used as a marker, i.e., in order to
     # differentiate its instances from other Django `Group`s. That's why it
     # doesn't have any custom fields.
-    
-    def users(self):
-        
+
+    def get_members(self):
         return User.objects.filter(groups__name=self.name)
 
-    def manager_group(self):
+    def get_managers(self):
+        return User.objects.filter(groups__name__in=
+            ManagerGroup.objects.filter(managed_group__name=self.name)
+                .values_list('name', flat=True))
 
-        return ', '.join(mgr_group.name for mgr_group in ManagerGroup.objects.filter(managed_group__name__contains=
-                            self.name))
-
-    def managers(self):
-        
-        mgr_group = self.manager_group()
-
-        return User.objects.filter(groups__name=mgr_group)
 
 class ManagerGroup(Group):
     """
@@ -110,9 +108,9 @@ class ManagerGroup(Group):
     # the `EditorGroup` which is managed by members of this `ManagerGroup`
     managed_group = models.OneToOneField(EditorGroup)
 
-    def managers(self):
-        
-        return User.objects.filter(groups__name__contains=self.name)
+    def get_members(self):
+        return User.objects.filter(groups__name=self.name)
+
 
 class UserProfile(models.Model):
     """
@@ -161,29 +159,17 @@ class UserProfile(models.Model):
 #             delete() calls.  For this, we have to create receivers listening
 #             to the post_delete signal.  Again, this has to be tested!
 
-    def editor_group(self):
-        """
-        Return the editor group of a user profile
-        """
-        return ', '.join([edit_group.name for edit_group in EditorGroup.objects.filter(name__in=
-                            self.user.groups.values_list('name', flat=True))])
-
-    def manager_group(self):
-        """
-        Return the manager group of a user profile
-        """
-        return ', '.join([mgr_group.managed_group.name for mgr_group in ManagerGroup.objects.filter(name__in=
-                            self.user.groups.values_list('name', flat=True))])
-
     def has_manager_permission(self, editor_group):
         """
-        Return whether the user profile has permission to add users in an specific editor group
+        Return whether the user profile has permission to manage the given
+        editor group.
         """
         if self.user.is_superuser:
             return True
-        
-        return any(editor_group.manager_group() == mgr_group.name for mgr_group in ManagerGroup.objects.filter(name__in=
-            self.user.groups.values_list('name', flat=True)))
+        return any(editor_group.name == mgr_group.managed_group.name
+                   for mgr_group in ManagerGroup.objects.filter(
+                      name__in=self.user.groups.values_list('name', flat=True)))
+
 
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
