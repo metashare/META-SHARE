@@ -480,20 +480,21 @@ class EditorTest(TestCase):
 
     def test_can_edit_master_copy(self):        
         client = self.client_with_user_logged_in(EditorTest.editor_login)
-        resource = self.import_test_resource()
+        resource = self.import_test_resource(EditorTest.test_editor_group)
         resource.storage_object.master_copy = True
         resource.storage_object.save()
         response = client.get('{}repository/resourceinfotype_model/{}/'
-                              .format(ADMINROOT, resource.storage_object.id))
+                              .format(ADMINROOT, resource.id))
         self.assertContains(response, "Change Resource")        
+        self.assertContains(response, "Italian TTS Speech Corpus")        
         
     def test_cannot_edit_not_master_copy(self):
         client = self.client_with_user_logged_in(EditorTest.editor_login)
-        resource = self.import_test_resource()
+        resource = self.import_test_resource(EditorTest.test_editor_group)
         resource.storage_object.master_copy = False
         resource.storage_object.save()
         response = client.get('{}repository/resourceinfotype_model/{}/'
-                              .format(ADMINROOT, resource.storage_object.id))
+                              .format(ADMINROOT, resource.id))
         self.assertContains(response, "You cannot edit the metadata")
 
     def test_editor_can_change_own_resource_and_parts(self):

@@ -32,4 +32,15 @@ def validate_lang_code_keys(dict_value):
             # pylint: disable-msg=E1102
             raise ValidationError(_(u'Enter a valid language code as the key '
                                     u'for each pair. "{}" is not valid.')
-                                  .format(code), code='invalid')
+                                  .format(code), code='invalid')            
+            
+def validate_dict_values(dict_value):
+    """
+    A validator function which raises a ValidationError if any value of the given
+    dictionary should be empty.
+    """
+    
+    for value in dict_value.itervalues():
+        if value == '':
+            # pylint: disable-msg=E1102
+            raise ValidationError('This field is required.')  
