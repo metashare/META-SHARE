@@ -41,7 +41,7 @@ class RegistrationRequest(models.Model):
     shortname = models.CharField('Username', max_length=30, unique=True)
     firstname = models.CharField('First name', max_length=30)
     lastname = models.CharField('Last name', max_length=30)
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     
     uuid = models.CharField(max_length=32, verbose_name="UUID",
       default=_create_uuid)
