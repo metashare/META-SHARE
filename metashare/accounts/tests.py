@@ -48,13 +48,13 @@ class RegistrationRequestTest(unittest.TestCase):
     def setUp(self):
         self.reg_request = RegistrationRequest.objects.create(
           shortname='test', firstname='Test', lastname='Testson',
-          email='a@b.com')
+          email='test@b.com')
         self.broken_request1 = RegistrationRequest.objects.create(
-          firstname='Test', lastname='Testson', email='a@b.com')
+          firstname='Test', lastname='Testson', email='broken1@b.com')
         self.broken_request2 = RegistrationRequest.objects.create(
-          shortname='broken2',  lastname='Testson', email='a@b.com')
+          shortname='broken2',  lastname='Testson', email='broken2@b.com')
         self.broken_request3 = RegistrationRequest.objects.create(
-          shortname='broken3', firstname='Test',  email='a@b.com')
+          shortname='broken3', firstname='Test',  email='broken3@b.com')
         self.broken_request4 = RegistrationRequest.objects.create(
           shortname='broken4', firstname='Test', lastname='Testson',
           email='not an email')
@@ -67,7 +67,7 @@ class RegistrationRequestTest(unittest.TestCase):
         self.assertEqual('test', self.reg_request.shortname)
         self.assertEqual('Test', self.reg_request.firstname)
         self.assertEqual('Testson', self.reg_request.lastname)
-        self.assertEqual('a@b.com', self.reg_request.email)
+        self.assertEqual('test@b.com', self.reg_request.email)
 
     def testCanRetrieveFromDB(self):
         test_entry = RegistrationRequest.objects.get(pk=self.reg_request.pk)
