@@ -4,12 +4,12 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.client import Client
 
-from metashare import test_utils
+from metashare import test_utils, settings
 from metashare.accounts.models import UserProfile
-from metashare.repository.models import resourceInfoType_model
 from metashare.repository import views
 from metashare.settings import DJANGO_BASE, ROOT_PATH
 from metashare.test_utils import create_user
+import shutil
 
 
 def _import_resource(fixture_name):
@@ -29,6 +29,15 @@ class ViewTest(TestCase):
     """
     Test the detail view
     """
+    
+    @classmethod
+    def setUpClass(cls):
+        test_utils.set_index_active(False)
+    
+    @classmethod
+    def tearDownClass(cls):
+        test_utils.set_index_active(True)
+        
     def setUp(self):
         """
         Set up the detail view
@@ -48,7 +57,8 @@ class ViewTest(TestCase):
         """
         Clean up the test
         """
-        resourceInfoType_model.objects.all().delete()
+        test_utils.clean_db()
+        test_utils.clean_storage()
         User.objects.all().delete()
 
     def testView(self):
@@ -98,6 +108,15 @@ class DownloadViewTest(TestCase):
     """
     Tests for the license selection, license agreement and download views.
     """
+    
+    @classmethod
+    def setUpClass(cls):
+        test_utils.set_index_active(False)
+    
+    @classmethod
+    def tearDownClass(cls):
+        test_utils.set_index_active(True)
+        
     def setUp(self):
         """
         Sets up some resources with which to test.
@@ -107,8 +126,21 @@ class DownloadViewTest(TestCase):
         self.non_downloadable_resource = _import_resource('testfixture.xml')
         self.downloadable_resource_1 = \
             _import_resource('downloadable_1_license.xml')
+        self.downloadable_resource_3 = \
+            _import_resource('downloadable_3_licenses.xml')
         self.ms_commons_resource = \
             _import_resource('downloadable_ms_commons_license.xml')
+        self.local_download_resource = \
+            _import_resource('local_download.xml')
+        # assign and copy downloadable resource
+        self.local_download_resource.storage_object.checksum = \
+            '3930f5022aff02c7fa27ffabf2eaaba0'
+        self.local_download_resource.storage_object.save()
+        self.local_download_resource.storage_object.update_storage()
+        shutil.copyfile(
+          '{0}/repository/fixtures/archive.zip'.format(settings.ROOT_PATH),
+          '{0}/{1}/archive.zip'.format(
+            settings.STORAGE_PATH, self.local_download_resource.storage_object.identifier))
         # set up test users with/without staff permissions and with/without
         # META-SHARE full membership
         staffuser = create_user('staffuser', 'staff@example.com', 'secret')
@@ -129,7 +161,8 @@ class DownloadViewTest(TestCase):
         """
         Cleans up the test environment.
         """
-        resourceInfoType_model.objects.all().delete()
+        test_utils.clean_db()
+        test_utils.clean_storage()
         User.objects.all().delete()
 
     def test_non_downloadable_resource(self):
@@ -213,17 +246,103 @@ class DownloadViewTest(TestCase):
         amongst various other distribution licenses) can be downloaded
         appropriately.
         """
-        # TODO add assertions
-        pass
+        # test as staff user:
+        client = Client()
+        client.login(username='staffuser', password='secret')
+        self._test_downloadable_resource_with_multiple_licenses(client)
+        # test as normal user:
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        self._test_downloadable_resource_with_multiple_licenses(client)
+        
+    def _test_downloadable_resource_with_multiple_licenses(self, client):
+        """
+        Verifies that a resource with multiple download licenses (possibly
+        amongst various other distribution licenses) can be downloaded
+        appropriately using the given client.
+        """
+        # make sure the license selection page is shown:
+        response = client.get(reverse(views.download,
+                args=(self.downloadable_resource_3.storage_object.identifier,)),
+            follow = True)
+        self.assertTemplateUsed(response, 'repository/licence_selection.html',
+                                "license selection page expected")
+        self.assertContains(response, 'CC_BY-NC-SA',
+                            msg_prefix="an expected license appears to not " \
+                                "be shown")
+        self.assertContains(response, 'GPL',
+                            msg_prefix="an expected license appears to not " \
+                                "be shown")
+        self.assertContains(response, 'CC_BY-SA_3.0',
+                            msg_prefix="an expected license appears to not " \
+                                "be shown")
+        # make sure the license selection page is shown again if no license is selected
+        response = client.post(reverse(views.download,
+                args=(self.downloadable_resource_3.storage_object.identifier,)),
+            { 'licence': 'None' },
+            follow = True)
+        self.assertTemplateUsed(response, 'repository/licence_selection.html',
+                                "license selection page expected")
+        self.assertContains(response, 'CC_BY-NC-SA',
+                            msg_prefix="an expected license appears to not " \
+                                "be shown")
+        self.assertContains(response, 'GPL',
+                            msg_prefix="an expected license appears to not " \
+                                "be shown")
+        self.assertContains(response, 'CC_BY-SA_3.0',
+                            msg_prefix="an expected license appears to not " \
+                                "be shown")
+        # make sure the license page is shown after selecting a license
+        response = client.post(reverse(views.download,
+                args=(self.downloadable_resource_3.storage_object.identifier,)),
+            { 'licence': 'GPL' },
+            follow = True)
+        self.assertTemplateUsed(response, 'repository/licence_agreement.html',
+                                "license agreement page expected")
+        self.assertContains(response, 'licences/GNU_gpl-3.0.htm',
+                            msg_prefix="the correct license appears to not " \
+                                "be shown in an iframe")           
+        # make sure the license agreement page is shown again if the license was
+        # not accepted
+        response = client.post(reverse(views.download,
+                args=(self.downloadable_resource_3.storage_object.identifier,)),
+            { 'in_licence_agree_form': 'True', 'licence_agree': 'False',
+              'licence': 'GPL' },
+            follow = True)
+        self.assertTemplateUsed(response, 'repository/licence_agreement.html',
+                                "license agreement page expected")
+        self.assertContains(response, 'licences/GNU_gpl-3.0.htm',
+                            msg_prefix="the correct license appears to not " \
+                                "be shown in an iframe")
+        # make sure the download was started after accepting the license
+        response = client.post(reverse(views.download,
+                args=(self.downloadable_resource_3.storage_object.identifier,)),
+            { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
+              'licence': 'GPL' },
+            follow = True)
+        self.assertTemplateNotUsed(response, 'repository/licence_agreement.html',
+                            msg_prefix="a download should have been started")
+        self.assertTemplateNotUsed(response, 'repository/licence_selection.html',
+                            msg_prefix="a download should have been started")
+        self.assertTemplateNotUsed(response, 'repository/lr_not_downloadable.html',
+                            msg_prefix="a download should have been started")
 
     def test_locally_downloadable_resource(self):
         """
         Verifies that a resource which is locally downloadable can actually be
         downloaded appropriately.
         """
-        # TODO add assertions
-        pass
-
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        response = client.post(reverse(views.download, args=
+                (self.local_download_resource.storage_object.identifier,)),
+            { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
+              'licence': 'AGPL' },
+            follow = True)
+        self.assertEquals(200, response.status_code)
+        self.assertEquals('application/zip', response.__getitem__('Content-Type'))
+        self.assertEquals('attachment; filename=archive.zip', response.__getitem__('Content-Disposition'))
+        
     def test_externally_downloadable_resource(self):
         """
         Verifies that a resource which is externally downloadable can actually

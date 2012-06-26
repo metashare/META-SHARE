@@ -2,24 +2,18 @@
 Project: META-SHARE prototype implementation
  Author: Christian Federmann <cfedermann@dfki.de>
 """
-from Crypto import Random
-from Crypto.PublicKey import RSA
-from base64 import b64encode
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.db import models
 # pylint: disable-msg=E0611
 from hashlib import md5
-from httplib import HTTPConnection
 from metashare.settings import LOG_LEVEL, LOG_HANDLER
 from metashare import settings
 from os import mkdir
 from os.path import exists
 import os.path
-from urllib import urlencode
 from uuid import uuid1, uuid4
 from xml.etree import ElementTree as etree
 from datetime import datetime, timedelta
-from time import mktime
 import logging
 import re
 from metashare.xml_utils import pretty_xml
@@ -101,106 +95,7 @@ def _create_uuid():
         new_id = '{0}{1}'.format(uuid1().hex, uuid4().hex)
     
     return new_id
-
-class StorageServer(models.Model):
-    """
-    Models a remote storage server hosting storage objects.
-    """
-    shortname = models.CharField(max_length=50, unique=True,
-      help_text="Human-readable name for this storage server instance.")
     
-    hostname = models.URLField(verify_exists=False, help_text="The URL " \
-      "for this storage server instance. Use http://localhost/ for your " \
-      "local node.")
-    
-    updated = models.DateTimeField(null=True, editable=False,
-      help_text="(Read-only) last update date for this storage server " \
-      "instance.")
-    
-    public_key = models.TextField(help_text="Base64 Format. Used to " \
-      "encrypt data sent to this metadata server." )
-    
-    def __unicode__(self):
-        """
-        Returns the Unicode representation for this storage server instance.
-        """
-        return u'<StorageServer id="{0}">'.format(self.id)
-    
-    def synchronise(self):
-        """
-        Syncs local django with this storage server instance.
-        """
-        # Compose export URL for this storage server.
-        _sync_url = "{0}storage/export/".format(self.hostname)
-        if self.updated:
-            # Add from_date if appropriate.
-            _sync_url += "{0}/".format(self.updated.strftime('%Y-%m-%d'))
-        
-        return _sync_url
-    
-    def is_local_server(self):
-        """Checks if this StorageServer instance is the local server."""
-        return str(self.hostname).strip() == 'http://localhost/'
-    
-    def create_sso_token(self, uuid, timestamp=None):
-        """Creates new SSO token for non-managing nodes."""
-        if self.is_local_server():
-            LOGGER.info('Cannot send message to local server.')
-            return None
-        
-        # If no timestamp is given, we use the current time.
-        if not timestamp:
-            # Convert time tuple to timestamp String.
-            timestamp = str(int(mktime(datetime.now().timetuple())))
-        
-        _public_key = RSA.importKey(self.public_key)
-        _random_bytes = Random.get_random_bytes(16)
-        _message = '{0}{1}'.format(uuid, timestamp)
-        token = b64encode(_public_key.encrypt(_message, _random_bytes)[0])
-        return (uuid, timestamp, token)
-    
-    def send_message(self, msg, action):
-        """Send an encrypted message to this StorageServer."""
-        if self.is_local_server():
-            LOGGER.info('Cannot send message to local server.')
-            return False
-        
-        _public_key = RSA.importKey(self.public_key)
-        _random_bytes = Random.get_random_bytes(16)
-        _chunk_size = _public_key.size() / 8
-        _chunks = len(msg) / _chunk_size
-        
-        _encrypted = []
-        for offset in range(_chunks):
-            _offset = offset * _chunk_size
-            _chunk = msg[_offset:_offset+_chunk_size]
-            _encrypted.append(_public_key.encrypt(_chunk, _random_bytes))
-        
-        if len(msg) % _chunk_size:
-            _chunk = msg[_chunks * _chunk_size:]
-            _encrypted.append(_public_key.encrypt(_chunk, _random_bytes))
-        
-        params = urlencode({'message': _encrypted})
-        headers = {"Content-type": "application/x-www-form-urlencoded",
-          "Accept": "text/plain"}
-        _urls = str(self.hostname).strip('http://').strip('/').split('/')
-        if len(_urls) > 1:
-            _url = _urls[0]
-            _prefix = '/'.join(_urls[1:])
-            action = '/{0}{1}'.format(_prefix, action)
-        
-        else:
-            _url = _urls[0]
-
-        _conn = HTTPConnection(_url)
-        _conn.request("POST", action, params, headers)
-        response = _conn.getresponse()
-        
-        # cfedermann: for the moment, we are ignoring the HTTP response text.
-        #             It could be accessed using: data = response.read()
-        _conn.close()
-        
-        return response.status == 200
 
 # pylint: disable-msg=R0902
 class StorageObject(models.Model):
@@ -213,11 +108,6 @@ class StorageObject(models.Model):
         permissions = (
             ('can_sync', 'Can synchronize'),
         )
-    
-    #jsteffen: to be removed in later versions, replaced by source_url
-    source = models.ForeignKey(StorageServer, blank=True, null=True,
-      editable=False, help_text="(Read-only) source for this storage " \
-      "object instance.")
       
     source_url = models.URLField(verify_exists=False, editable=False,
       default=settings.DJANGO_URL,

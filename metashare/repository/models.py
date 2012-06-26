@@ -13,7 +13,8 @@ from metashare.repository.supermodel import SchemaModel, SubclassableModel, \
 from metashare.repository.editor.widgets import MultiFieldWidget
 from metashare.repository.fields import MultiTextField, MetaBooleanField, \
   MultiSelectField, DictField, best_lang_value_retriever
-from metashare.repository.validators import validate_lang_code_keys
+from metashare.repository.validators import validate_lang_code_keys, \
+validate_dict_values
 
 from metashare.storage.models import StorageObject, MASTER, COPY_CHOICES
 
@@ -34,6 +35,29 @@ HTTPURI_VALIDATOR = RegexValidator(r'(https?://.*|ftp://.*|www*)',
 SCHEMA_NAMESPACE = 'http://www.ilsp.gr/META-XMLSchema'
 # version of the META-SHARE metadata XML Schema
 SCHEMA_VERSION = '2.1'
+
+def _compute_documentationInfoType_key():
+    '''
+    Prevents id collisions for documentationInfoType_model sub classes.
+    
+    These are:
+    - documentInfoType_model;
+    - documentUnstructuredString_model.
+    
+    '''
+    _k1 = list(documentInfoType_model.objects.all().order_by('-id'))
+    _k2 = list(documentUnstructuredString_model.objects.all().order_by('-id'))
+    
+    LOGGER.debug('k1: {}, k2: {}'.format(_k1, _k2))
+
+    _k1_id = 0
+    if len(_k1) > 0:
+        _k1_id = _k1[0].id
+    _k2_id = 0
+    if len(_k2) > 0:
+        _k2_id = _k2[0].id
+
+    return max(_k1_id, _k2_id) + 1
 
 
 # pylint: disable-msg=C0103
@@ -201,20 +225,6 @@ class resourceInfoType_model(SchemaModel):
 
         return resource_component.as_subclass()._meta.verbose_name
 
-    def resource_owners(self):
-        """
-        Method used for changelist view for resources.
-        """
-        owners = getattr(self, 'owners', None)
-        if not owners:
-            return None
-        
-        owners_list = ''
-        for owner in owners.all():
-            owners_list += owner.surname.join(", ")
-        
-        return owners_list
-
 
 SIZEINFOTYPE_SIZEUNIT_CHOICES = _make_choices_from_list([
   u'terms', u'entries', u'turns', u'utterances', u'articles', u'files',
@@ -312,21 +322,21 @@ class identificationInfoType_model(SchemaModel):
       ( u'identifier', u'identifier', OPTIONAL ),
     )
 
-    resourceName = DictField(validators=[validate_lang_code_keys],
+    resourceName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Resource name', 
       max_val_length=500, 
       help_text='The full name by which the resource is known',
       )
 
-    description = DictField(validators=[validate_lang_code_keys],
+    description = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Description', 
       max_val_length=10000, 
       help_text='Provides the description of the resource in prose',
       )
 
-    resourceShortName = DictField(validators=[validate_lang_code_keys],
+    resourceShortName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Resource short name', 
       max_val_length=500, 
@@ -792,7 +802,7 @@ class documentInfoType_model(documentationInfoType_model):
                      key=lambda choice: choice[1].lower()),
       )
 
-    title = DictField(validators=[validate_lang_code_keys],
+    title = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Title', 
       max_val_length=500, 
@@ -909,6 +919,13 @@ class documentInfoType_model(documentationInfoType_model):
     
     copy_status = models.CharField(default=MASTER, max_length=1, choices=COPY_CHOICES,
         help_text="Generalized copy status flag for this entity instance.")
+
+    def save(self, *args, **kwargs):
+        """
+        Prevents id collisions for documentationInfoType_model sub classes.
+        """
+        self.id = _compute_documentationInfoType_key()
+        super(documentInfoType_model, self).save(*args, **kwargs)
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
@@ -1495,7 +1512,7 @@ class participantInfoType_model(SchemaModel):
       ( u'educationLevel', u'educationLevel', OPTIONAL ),
     )
 
-    alias = DictField(validators=[validate_lang_code_keys],
+    alias = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Alias', 
       max_val_length=500, 
@@ -1550,7 +1567,7 @@ class participantInfoType_model(SchemaModel):
       help_text='The place in which the participant lived as a child',
       blank=True, max_length=100, )
 
-    dialectAccent = DictField(validators=[validate_lang_code_keys],
+    dialectAccent = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Dialect accent', 
       max_val_length=500, 
@@ -2520,14 +2537,14 @@ class organizationInfoType_model(actorInfoType_model):
       u'communicationInfo': "communicationInfoType_model",
     }
 
-    organizationName = DictField(validators=[validate_lang_code_keys],
+    organizationName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Organization name', 
       max_val_length=100, 
       help_text='The full name of an organization',
       )
 
-    organizationShortName = DictField(validators=[validate_lang_code_keys],
+    organizationShortName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Organization short name', 
       max_val_length=100, 
@@ -2535,7 +2552,7 @@ class organizationInfoType_model(actorInfoType_model):
       ' organization',
       blank=True)
 
-    departmentName = DictField(validators=[validate_lang_code_keys],
+    departmentName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Department name', 
       help_text='The name of the department or unit (e.g. specific unive' \
@@ -2595,7 +2612,7 @@ class personInfoType_model(actorInfoType_model):
       u'communicationInfo': "communicationInfoType_model",
     }
 
-    surname = DictField(validators=[validate_lang_code_keys],
+    surname = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Surname', 
       max_val_length=100, 
@@ -2603,7 +2620,7 @@ class personInfoType_model(actorInfoType_model):
       'source',
       )
 
-    givenName = DictField(validators=[validate_lang_code_keys],
+    givenName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Given name', 
       max_val_length=100, 
@@ -2874,7 +2891,7 @@ class licenceInfoType_model(SchemaModel):
       'ource, a fragment of the resource or to use atool or service',
       blank=True, max_length=100, )
 
-    attributionText = DictField(validators=[validate_lang_code_keys],
+    attributionText = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Attribution text', 
       max_val_length=1000, 
@@ -3353,14 +3370,14 @@ class projectInfoType_model(SchemaModel):
       ( u'projectEndDate', u'projectEndDate', OPTIONAL ),
     )
 
-    projectName = DictField(validators=[validate_lang_code_keys],
+    projectName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Project name', 
       max_val_length=500, 
       help_text='The full name of a project related to the resource',
       )
 
-    projectShortName = DictField(validators=[validate_lang_code_keys],
+    projectShortName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Project short name', 
       max_val_length=500, 
@@ -7788,4 +7805,9 @@ class lexicalConceptualResourceMediaTypeType_model(SchemaModel):
 
 # pylint: disable-msg=C0103
 class documentUnstructuredString_model(InvisibleStringModel, documentationInfoType_model):
-    pass
+    def save(self, *args, **kwargs):
+        """
+        Prevents id collisions for documentationInfoType_model sub classes.
+        """
+        self.id = _compute_documentationInfoType_key()
+        super(documentUnstructuredString_model, self).save(*args, **kwargs)

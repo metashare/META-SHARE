@@ -52,8 +52,8 @@ class EditorTest(SeleniumTestCase):
         
         # clean up Selenium
         self.driver.quit()
-        self.assertEqual([], self.verification_errors)
-
+        self.assertEqual([], self.verification_errors)    
+        
 
     def test_status_after_saving(self):
         
@@ -108,7 +108,7 @@ class EditorTest(SeleniumTestCase):
         except AssertionError as e: 
             self.verification_errors.append(str(e))
             
-
+    
     def test_LR_creation_corpus_text(self):
         driver = self.driver
         driver.get(self.base_url)
@@ -350,18 +350,17 @@ class EditorTest(SeleniumTestCase):
           driver.find_element_by_css_selector("li.info").text)
         
         # ingest resource
-        # TODO ingesting creates an internal server error
-#        self.ingest(driver)
-#        self.assertEqual("ingested",
-#         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
-#        # publish resource
-#        self.publish(driver)
-#        self.assertEqual("published",
-#         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
-#        # delete resource
-#        self.delete(driver)
-#        self.assertEqual("Successfully deleted 1 Resource.", 
-#         driver.find_element_by_css_selector("li.info").text)
+        self.ingest(driver)
+        self.assertEqual("ingested",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        # publish resource
+        self.publish(driver)
+        self.assertEqual("published",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        # delete resource
+        self.delete(driver)
+        self.assertEqual("Successfully deleted 1 Resource.", 
+         driver.find_element_by_css_selector("li.info").text)
         
 
     def test_LR_creation_lex_resource_text(self):
@@ -721,8 +720,11 @@ class EditorTest(SeleniumTestCase):
         
     def fill_audio_size(self, driver, ss_path, parent_id):
         driver.switch_to_window("id_audioSizeInfo")
-        # TODO: the popup can be saved immediately, but still audio size is required in corpus audio info
-        save_and_close(driver, parent_id)
+
+        driver.find_element_by_id("id_sizeinfotype_model_set-0-size").send_keys("100")
+        
+        Select(driver.find_element_by_id("id_sizeinfotype_model_set-0-sizeUnit")).select_by_visible_text("gb")
+        save_and_close(driver, parent_id) 
         
         
     def ingest(self, driver):
@@ -732,6 +734,8 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_id("action-toggle").click()
         Select(driver.find_element_by_name("action")).select_by_visible_text("Ingest selected internal resources")
         driver.find_element_by_name("index").click()
+        # TODO remove this workaround when Selenium starts working again as intended
+        time.sleep(1)
 
         
     def publish(self, driver):
@@ -741,6 +745,8 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_id("action-toggle").click()
         Select(driver.find_element_by_name("action")).select_by_visible_text("Publish selected ingested resources")
         driver.find_element_by_name("index").click()
+        # TODO remove this workaround when Selenium starts working again as intended
+        time.sleep(1)
         
     def delete(self, driver):
         """
@@ -750,8 +756,10 @@ class EditorTest(SeleniumTestCase):
         Select(driver.find_element_by_name("action")).select_by_visible_text("Delete selected Resources")
         driver.find_element_by_name("index").click()
         driver.find_element_by_css_selector("input[type=\"submit\"]").click()
+        # TODO remove this workaround when Selenium starts working again as intended
+        time.sleep(1)
 
-        
+
     def is_element_present(self, how, what):
         try: 
             self.driver.find_element(by=how, value=what)

@@ -1,11 +1,13 @@
 import datetime
 
 from django import forms
+from django.contrib import admin
 from django.contrib.admin.util import unquote
+from django.contrib.admin.views.main import ChangeList
 from django.contrib.auth.decorators import permission_required
 from django.core.exceptions import ValidationError, PermissionDenied
 from django.db.models import Q
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from django.utils.decorators import method_decorator
@@ -18,6 +20,7 @@ from django.views.decorators.csrf import csrf_protect
 
 from metashare import settings
 from metashare.accounts.models import EditorGroup, ManagerGroup
+from metashare.repository.editor.editorutils import FilteredChangeList
 from metashare.repository.editor.forms import StorageObjectUploadForm
 from metashare.repository.editor.inlines import ReverseInlineFormSet, \
     ReverseInlineModelAdmin
@@ -30,7 +33,7 @@ from metashare.repository.models import resourceComponentTypeType_model, \
     lexicalConceptualResourceInfoType_model, toolServiceInfoType_model, \
     corpusMediaTypeType_model, languageDescriptionMediaTypeType_model, \
     lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model, \
-    licenceInfoType_model
+    licenceInfoType_model, User
 from metashare.repository.supermodel import SchemaModel
 from metashare.stats.model_utils import saveLRStats, UPDATE_STAT, INGEST_STAT, \
     PUBLISH_STAT
@@ -65,7 +68,7 @@ class ResourceComponentInlineFormSet(ReverseInlineFormSet):
         except ValidationError:
             #raise ValidationError('The content of the {} general info is not valid.'.format(self.get_actual_resourceComponentType()._meta.verbose_name))
             #raise AssertionError("Meaningful error message for general info")
-            error_list = error_list +  'The content of the {} general info is not valid.'.format(self.get_actual_resourceComponentType()._meta.verbose_name)
+            error_list = error_list + 'The content of the {} general info is not valid.'.format(self.get_actual_resourceComponentType()._meta.verbose_name)
         
         if error_list != '':
             raise ValidationError(error_list)
@@ -81,11 +84,8 @@ class ResourceComponentInlineFormSet(ReverseInlineFormSet):
             if modelfieldname not in self.data:
                 continue
             value = self.data[modelfieldname]
-            if not value:
-                # print error
-                #raise AssertionError("Meaningful error message")                
-                error = error + format(modelfieldname)+' error. '
-                
+            if not value:        
+                error = error + format(modelfieldname) + ' error. '                
         return error
 
     def clean_corpus_one2many(self, corpusmediatype):
@@ -182,7 +182,7 @@ class ResourceComponentInlineFormSet(ReverseInlineFormSet):
         else:
             raise Exception, "unexpected resource component class type: {}".format(actual_instance.__class__.__name__)
         super(ResourceComponentInlineFormSet, self).save(commit)
-        return (actual_instance, )
+        return (actual_instance,)
         
 # pylint: disable-msg=R0901
 class ResourceComponentInline(ReverseInlineModelAdmin):
@@ -198,7 +198,7 @@ class ResourceComponentInline(ReverseInlineModelAdmin):
 
 # pylint: disable-msg=R0901
 class IdentificationInline(ReverseInlineModelAdmin):
-    readonly_fields = ('metaShareId', )
+    readonly_fields = ('metaShareId',)
 
 
 def change_resource_status(resource, status, precondition_status=None):
@@ -282,21 +282,178 @@ class MetadataForm(forms.ModelForm):
 
 class MetadataInline(ReverseInlineModelAdmin):
     form = MetadataForm
-    readonly_fields = ('metadataCreationDate', 'metadataLastDateUpdated', )
+    readonly_fields = ('metadataCreationDate', 'metadataLastDateUpdated',)
     
 
-class ResourceModelAdmin(SchemaModelAdmin):
+class ResourceModelAdmin(SchemaModelAdmin):            
     inline_type = 'stacked'
     custom_one2one_inlines = {'identificationInfo':IdentificationInline,
                               'resourceComponentType':ResourceComponentInline,
-                              'metadataInfo':MetadataInline,}
+                              'metadataInfo':MetadataInline, }
 
     content_fields = ('resourceComponentType',)
-    list_display = ('__unicode__', 'resource_type', 'publication_status', 'resource_owners')
-    actions = (publish_resources, unpublish_resources, ingest_resources, export_xml_resources, )
-    hidden_fields = ('storage_object', 'owners', 'editor_groups', )
+    list_display = ('__unicode__', 'resource_type', 'publication_status', 'resource_Owners', 'editor_Groups',)
+    actions = (publish_resources, unpublish_resources, ingest_resources, export_xml_resources, 'add_group', 'remove_group', 'add_owner', 'remove_owner')
+    hidden_fields = ('storage_object', 'owners', 'editor_groups',)
+         
+        
+    def resource_Owners(self, obj):
+        """
+        Method used for changelist view for resources.
+        """
+        owners = obj.owners.all()
+        if owners.count() == 0:
+            return None        
+        owners_list = ''
+        for owner in owners.all():
+            owners_list += owner.username + ', '
+        owners_list = owners_list.rstrip(', ')
+        return owners_list    
+    
+    
+    #to change name, and to call it through the template
+    def editor_Groups(self, obj):
+        """
+        Method used for changelist view for resources.
+        """
+        editor_groups = obj.editor_groups.all()
+        if editor_groups.count() == 0:
+            return None        
+        groups_list = ''
+        for group in editor_groups.all():            
+            groups_list += group.name + ', '
+        groups_list = groups_list.rstrip(', ')
+        return groups_list       
+    
+    
+    class IntermediateMultiSelectForm(forms.Form):
+        _selected_action = forms.CharField(widget=forms.MultipleHiddenInput)         
+        
+        def __init__(self, choices = None, *args, **kwargs):
+            super(ResourceModelAdmin.IntermediateMultiSelectForm, self).__init__(*args, **kwargs)  
+            if choices is not None:
+                self.choices = choices
+                self.fields['multifield'] = forms.ModelMultipleChoiceField(self.choices)        
+                    
+     
+    @csrf_protect_m    
+    def add_group(self, request, queryset):            
+        form = None
+        if 'myresources' in request.POST or request.user.is_superuser:
+            if 'cancel' in request.POST:
+                self.message_user(request, 'Cancelled adding Editor Groups.')
+                return
+            elif 'add_editor_group' in request.POST:      
+                query = EditorGroup.objects.all() 
+                form = self.IntermediateMultiSelectForm(query, request.POST)
+                if form.is_valid():
+                    groups = form.cleaned_data['multifield']   
+                    for obj in queryset:  
+                        obj.editor_groups.add(*groups)
+                        obj.save()
+                    self.message_user(request, 'Successfully added Editor Groups to selected resources.')
+                    return HttpResponseRedirect(request.get_full_path())
+    
+            if not form:      
+                manager_groups = ManagerGroup.objects.filter(name__in=
+                            request.user.groups.values_list('name', flat=True))
+                editor_groups = EditorGroup.objects
+                for manager_group in manager_groups:
+                    editor_groups = EditorGroup.objects.filter('name', manager_group.managed_group.name)
+                if request.user.is_superuser:
+                    group = EditorGroup.objects.all()
+                else:
+                    group = editor_groups.all().values_list('name', flat=True)
+                form = self.IntermediateMultiSelectForm(choices=group, initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
+    
+            return render_to_response('admin/repository/resourceinfotype_model/add_editor_group.html', \
+                                      {'selected_resources': queryset, 'form': form, 'path':request.get_full_path()}, \
+                                      context_instance=RequestContext(request)) 
 
+    add_group.short_description = "Add Editor Groups to selected resources"
+    
+    @csrf_protect_m    
+    def remove_group(self, request, queryset):           
+        form = None
+        if request.user.is_superuser:
+            if 'cancel' in request.POST:
+                self.message_user(request, 'Cancelled removing Editor Groups.')
+                return
+            elif 'remove_editor_group' in request.POST:  
+                query = EditorGroup.objects.all()           
+                form = self.IntermediateMultiSelectForm(query, request.POST)            
+                if form.is_valid():
+                    groups = form.cleaned_data['multifield']
+                    for obj in queryset:  
+                        obj.editor_groups.remove(*groups)
+                        obj.save()
+                    self.message_user(request, 'Successfully removed Editor Groups from selected resources.')               
+                    return HttpResponseRedirect(request.get_full_path())
+            if not form:
+                groups = EditorGroup.objects.all()
+                form = self.IntermediateMultiSelectForm(choices=groups, initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
+        
+            return render_to_response('admin/repository/resourceinfotype_model/remove_editor_group.html', \
+                                      {'selected_resources': queryset, 'form': form, 'path':request.get_full_path()}, \
+                                      context_instance=RequestContext(request)) 
 
+    remove_group.short_description = "Remove Editor Groups from selected resources"
+    
+    @csrf_protect_m    
+    def add_owner(self, request, queryset):           
+        form = None
+        if request.user.is_superuser:
+            if 'cancel' in request.POST:
+                self.message_user(request, 'Cancelled adding Owners.')
+                return
+            elif 'add_owner' in request.POST:  
+                query = User.objects.all()
+                form = self.IntermediateMultiSelectForm(query, request.POST)     
+                if form.is_valid():
+                    owners = form.cleaned_data['multifield']
+                    for obj in queryset:  
+                        obj.owners.add(*owners)
+                        obj.save()
+                    self.message_user(request, 'Successfully added Owners to selected resources.')               
+                    return HttpResponseRedirect(request.get_full_path())
+            if not form:
+                owners = User.objects.all()
+                form = self.IntermediateMultiSelectForm(choices=owners, initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
+        
+            return render_to_response('admin/repository/resourceinfotype_model/add_owner.html', \
+                                      {'selected_resources': queryset, 'form': form, 'path':request.get_full_path()}, \
+                                      context_instance=RequestContext(request)) 
+
+    add_owner.short_description = "Add Owners to selected resources"
+    
+    @csrf_protect_m    
+    def remove_owner(self, request, queryset):           
+        form = None
+        if request.user.is_superuser:
+            if 'cancel' in request.POST:
+                self.message_user(request, 'Cancelled removing Owners.')
+                return
+            elif 'remove_owner' in request.POST:  
+                query = User.objects.all()
+                form = self.IntermediateMultiSelectForm(query, request.POST)            
+                if form.is_valid():
+                    owners = form.cleaned_data['multifield']
+                    for obj in queryset:  
+                        obj.owners.remove(*owners)
+                        obj.save()
+                    self.message_user(request, 'Successfully removed Owners from selected resources.')               
+                    return HttpResponseRedirect(request.get_full_path())
+            if not form:
+                owners = User.objects.all()
+                form = self.IntermediateMultiSelectForm(choices=owners, initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
+        
+            return render_to_response('admin/repository/resourceinfotype_model/remove_owner.html', \
+                                      {'selected_resources': queryset, 'form': form, 'path':request.get_full_path()}, \
+                                      context_instance=RequestContext(request)) 
+
+    remove_owner.short_description = "Remove Owners from selected resources"
+        
+    
     def get_urls(self):
         from django.conf.urls.defaults import patterns, url
         urlpatterns = super(ResourceModelAdmin, self).get_urls()
@@ -312,11 +469,43 @@ class ResourceModelAdmin(SchemaModelAdmin):
             url(r'^(.+)/upload-data/$',
                 wrap(self.uploaddata_view),
                 name='%s_%s_uploaddata' % info),
+           url(r'^my/$',
+                wrap(self.changelist_view_filtered),
+                name='%s_%s_myresources' % info),
             url(r'^(.+)/export-xml/$',
                 wrap(self.exportxml),
                 name='%s_%s_exportxml' % info),
         ) + urlpatterns
         return urlpatterns
+    
+    
+    @csrf_protect_m
+    def changelist_view_filtered(self, request, extra_context=None):
+        '''
+        The filtered changelist view for My Resources.
+        We reuse the generic django changelist_view and squeeze in our wish to
+        show the filtered view in two places:
+        1. we patch request.POST to insert a parameter 'myresources'='true',
+        which will be interpreted in get_changelist to show the filtered
+        version;
+        2. we pass a extra_context variable 'myresources' which will be
+        interpreted in the template change_list.html.
+        '''
+        _post = request.POST.copy()
+        _post['myresources'] = 'true'
+        request.POST = _post
+        _extra_context = extra_context or {}
+        _extra_context.update({'myresources':True})
+        return self.changelist_view(request, _extra_context)
+
+    def get_changelist(self, request, **kwargs):
+        """
+        Returns the ChangeList class for use on the changelist page.
+        """
+        if 'myresources' in request.POST:
+            return FilteredChangeList
+        else:
+            return ChangeList
 
 
     @csrf_protect_m
@@ -510,7 +699,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
 
         _hidden_fields = self.get_hidden_fields()
         if _hidden_fields:
-            _fieldsets.append((None, {'fields': _hidden_fields, 'classes':('display_none', )}))
+            _fieldsets.append((None, {'fields': _hidden_fields, 'classes':('display_none',)}))
 
         return _fieldsets
 
@@ -596,6 +785,11 @@ class ResourceModelAdmin(SchemaModelAdmin):
         """
         result = super(ResourceModelAdmin, self).get_actions(request)
         if not request.user.is_superuser:
+            del result['remove_group']
+            del result['remove_owner']
+            if not 'myresources' in request.POST:
+                del result['add_group']
+                del result['add_owner']
             # only users with delete permissions can see the delete action:
             if not self.has_delete_permission(request):
                 del result['delete_selected']
