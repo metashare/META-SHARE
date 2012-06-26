@@ -20,6 +20,7 @@ logging.basicConfig(level=LOG_LEVEL)
 LOGGER = logging.getLogger('metashare.accounts.models')
 LOGGER.addHandler(LOG_HANDLER)
 
+
 def _create_uuid():
     """
     Creates a unique id using UUID-1, checks for collisions.
@@ -33,6 +34,7 @@ def _create_uuid():
       UserProfile.objects.filter(uuid=new_id):
         new_id = uuid1().hex
     return new_id
+
 
 class RegistrationRequest(models.Model):
     """
@@ -53,6 +55,7 @@ class RegistrationRequest(models.Model):
         """
         return u'<RegistrationRequest "{0}">'.format(self.shortname)
 
+
 class ResetRequest(models.Model):
     """
     Contains authentication key to reset the user password.
@@ -67,6 +70,44 @@ class ResetRequest(models.Model):
         Return Unicode representation for this instance.
         """
         return u'<ResetRequest "{0}">'.format(self.user.username)
+
+
+class EditorGroup(Group):
+    """
+    A specialized `Group` subtype which is used to group resources that can only
+    be edited by users who are member of this group.
+    
+    The corresponding `ModelAdmin` class suggests basic resource edit
+    permissions for this group. 
+    """
+    # Currently the group is just used as a marker, i.e., in order to
+    # differentiate its instances from other Django `Group`s. That's why it
+    # doesn't have any custom fields.
+
+    def get_members(self):
+        return User.objects.filter(groups__name=self.name)
+
+    def get_managers(self):
+        return User.objects.filter(groups__name__in=
+            ManagerGroup.objects.filter(managed_group__name=self.name)
+                .values_list('name', flat=True))
+
+
+class ManagerGroup(Group):
+    """
+    A specialized `Group` which gives its members permissions to manage language
+    resources belonging to a certain (managed) group.
+    
+    Group members may choose the members of the managed group and they may
+    ingest/publish resources belonging to the managed group. Delete permission
+    for a resource is suggested by the corresponding `ModelAdmin` class.
+    """
+    # the `EditorGroup` which is managed by members of this `ManagerGroup`
+    managed_group = models.OneToOneField(EditorGroup)
+
+    def get_members(self):
+        return User.objects.filter(groups__name=self.name)
+
 
 class UserProfile(models.Model):
     """
@@ -115,32 +156,16 @@ class UserProfile(models.Model):
 #             delete() calls.  For this, we have to create receivers listening
 #             to the post_delete signal.  Again, this has to be tested!
 
-
-class EditorGroup(Group):
-    """
-    A specialized `Group` subtype which is used to group resources that can only
-    be edited by users who are member of this group.
-    
-    The corresponding `ModelAdmin` class suggests basic resource edit
-    permissions for this group. 
-    """
-    # Currently the group is just used as a marker, i.e., in order to
-    # differentiate its instances from other Django `Group`s. That's why it
-    # doesn't have any custom fields.
-    pass
-
-
-class ManagerGroup(Group):
-    """
-    A specialized `Group` which gives its members permissions to manage language
-    resources belonging to a certain (managed) group.
-    
-    Group members may choose the members of the managed group and they may
-    ingest/publish resources belonging to the managed group. Delete permission
-    for a resource is suggested by the corresponding `ModelAdmin` class.
-    """
-    # the `EditorGroup` which is managed by members of this `ManagerGroup`
-    managed_group = models.OneToOneField(EditorGroup)
+    def has_manager_permission(self, editor_group):
+        """
+        Return whether the user profile has permission to manage the given
+        editor group.
+        """
+        if self.user.is_superuser:
+            return True
+        return any(editor_group.name == mgr_group.managed_group.name
+                   for mgr_group in ManagerGroup.objects.filter(
+                      name__in=self.user.groups.values_list('name', flat=True)))
 
 
 @receiver(post_save, sender=User)
