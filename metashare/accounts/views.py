@@ -23,9 +23,9 @@ from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template.loader import render_to_string
 from django.template import RequestContext
 from metashare.accounts.forms import RegistrationRequestForm, \
-  ResetRequestForm, UserProfileForm
+  ResetRequestForm, UserProfileForm, EditorRegistrationRequestForm
 from metashare.accounts.models import RegistrationRequest, ResetRequest, \
-  UserProfile
+  UserProfile, EditorRegistrationRequest, EditorGroup
 from metashare.settings import SSO_SECRET_KEY, DJANGO_URL, \
   PRIVATE_KEY_PATH, LOG_LEVEL, LOG_HANDLER, MAX_LIFETIME_FOR_SSO_TOKENS
 
@@ -208,9 +208,92 @@ def edit_profile(request):
         form = UserProfileForm({'birthdate': profile.birthdate,
           'affiliation': profile.affiliation, 'position': profile.position,
           'homepage': profile.homepage})
+
+    editor_groups_applied = u', '.join(edt_reg.editor_groups() for edt_reg in EditorRegistrationRequest.objects.filter(user=profile.user))
     
-    dictionary = {'title': 'Edit profile information', 'form': form}
+    dictionary = {'title': 'Edit profile information', 'form': form, 
+                  'editor_registration_request': editor_groups_applied
+                 }
     return render_to_response('accounts/edit_profile.html', dictionary,
+      context_instance=RequestContext(request))
+
+@login_required
+def editor_registration_request(request):
+    """
+    Apply for Editor Groups membership.
+    """
+    # The "virtual" MetaShareUser cannot apply for membership
+    if request.user.username == 'MetaShareUser':
+        return redirect('metashare.views.frontpage')
+    
+    # Check if the edit form has been submitted.
+    if request.method == "POST":
+        # If so, bind the creation form to HTTP POST values.
+        form = EditorRegistrationRequestForm(request.POST)
+        
+        # Check if the form has validated successfully.
+        if form.is_valid():
+            existingReg = EditorRegistrationRequest.objects.filter(user=request.user)[0]
+            if existingReg:
+                for edt_grp in form.cleaned_data['editorgroups']: 
+                    existingReg.editorgroups.add(edt_grp)
+            else:
+                new_object = EditorRegistrationRequest(
+                user=request.user)
+                new_object.save()
+                new_object.editorgroups=form.cleaned_data['editorgroups']
+                new_object.save()
+
+            # Send notification email for each editor group applied
+            for edt_grp in form.cleaned_data['editorgroups']:
+                emails = []
+                # find out the group managers email
+                for managers in edt_grp.managers():
+                    emails.append(managers.email)
+                # find out the superuser email
+                for superuser in User.objects.filter(is_superuser=True):
+                    emails.append(superuser.email)
+
+                # Render notification email template with correct values.
+                data = {'editor_group': edt_grp.name,
+                  'shortname': request.user,
+                  'confirmation_url': '{0}/admin/accounts/editorregistrationrequest/'.format(
+                    DJANGO_URL)}
+                email = render_to_string('accounts/notification.email', data)
+                
+                try:
+                    # Send out notification email to the manager and superuser email address.
+                    send_mail('Please confirm your META-SHARE user account',
+                    email, 'no-reply@meta-share.eu', emails,
+                    fail_silently=False)
+                
+                except: #SMTPException:
+                    # If the email could not be sent successfully, tell the user
+                    # about it and also give the confirmation URL.
+                    messages.error(request,
+                      "There was an error sending out the notification email " \
+                      "for your editor registration.")
+                    
+                    # Redirect the user to the front page.
+                    return redirect('metashare.views.edit_profile')
+
+            # Add a message to the user after applying.
+            messages.success(request,
+              "You have applied to new editor groups.")
+            
+            # Redirect the user to the edit profile page.
+            return redirect('metashare.views.edit_profile')
+    
+    # Otherwise, fill UserProfileForm instance from current UserProfile.
+    else:
+        # Get UserProfile instance corresponding to the current user.
+        editorrequest = EditorRegistrationRequest.objects.filter(user=request.user)
+
+        # Fill EditorRegistrationRequest
+        form = EditorRegistrationRequestForm({'editorgroups': editorrequest.all()})
+    
+    dictionary = {'title': 'Apply for editor group membership', 'form': form}
+    return render_to_response('accounts/editor_registration_request.html', dictionary,
       context_instance=RequestContext(request))
 
 def update(request):
