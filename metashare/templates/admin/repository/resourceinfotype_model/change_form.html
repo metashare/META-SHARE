@@ -42,26 +42,24 @@
 {% endif %}{% endif %}
 {% endblock %}
 
-
-
 <script>
-			$(document).ready(function(){			   
-			    $(".accordion h1").click(function() {
-					$(this).next().slideToggle();
-					$(".accordion h1").not(this).next().hide("clip");
-					return false;
-				});
-				$(".fields li").click(function() {
-					$(".fields li").removeClass("active");
-					$(this).addClass("active");
-					$(".tab_content").hide();
-					var selected_tab = $(this).find("a").attr("href");
-					$(selected_tab).fadeIn();										
-					return false;
-          		});
-          		
-			});			
-		</script>		
+	$(document).ready(function(){			   
+	    $(".accordion h1").click(function() {
+			$(this).next().slideToggle();
+			$(".accordion h1").not(this).next().hide("clip");
+			return false;
+		});
+		$(".fields li").click(function() {
+			$(".fields li").removeClass("active");
+			$(this).addClass("active");
+			$(".tab_content").hide();
+			var selected_tab = $(this).find("a").attr("href");
+			$(selected_tab).fadeIn();										
+			return false;
+  		});
+  		
+	});			
+</script>		
 
 <form {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post" id="{{ opts.module_name }}_form">{% csrf_token %}{% block form_top %}{% endblock %}
 <div>
@@ -91,7 +89,6 @@
 				</ul>		
 			</div>
 	
-
 		<script type="text/javascript">
 
 		$(document).ready(function() {
@@ -106,13 +103,14 @@
 
 	<div id="tabs_content_container">
 		{% for fieldset in adminform %}		
-			
+
 				<div id="field-{{forloop.counter}}" class="tab_content" {% if "Required administration" in fieldset.name %} style="display:inline;" {% endif %}>
 					{% include "admin/repository/fieldset.html" %}
 				</div>	
 				
 		{% endfor %}		
 	</div>
+
 
 </div>
 	<script>	
@@ -144,86 +142,7 @@
 					
 	</script>
 	
-	<script>	
-		//for text fields and calendar
-		$('div.form-row.errors div input').change(textfield);
-		//for related-widget-wrapper
-		$("div.field-box.errors input.related-widget-wrapper").change(oneToOne);	
-				
-		 function textfield() {
-			 var input_value = $(this).attr('value');			 
-				if( input_value ) {				
-						$(this).parents('div').siblings(".errorlist").remove();				
-						$(this).parents('fieldset .form-row').removeClass("errors");
-						checkForErrors($(this));
-				}
-		 }		
- 		 function oneToOne() {
-			 var input_value = $(this).attr('value');			 
-				if( input_value ) {					
-						$(this).siblings(".errorlist").remove();				
-						$(this).parents('div.field-box').removeClass("errors");
-						checkForErrors($(this));
-				}
-		 }				
-		
-		$("fieldset .module div div ul li input").each(function() { 
-			$(this).trigger('change');
-		});	
-		
-		//for calendar when user inserts input in textfield	
-		$("div.form-row div input").each(function() { 
-			$(this).trigger('change');
-		});
-		
-		//for many-to-many ajax widget
-		$(document).on("click", "div.field-box.errors", function() {	 
-		    if( $(this).children('.ui-widget.selectable-deck.selectable-deck-bottom').children().length > 0 ){
-		    	$(this).children(".errorlist").remove();				
-				$(this).removeClass("errors");
-				checkForErrors($(this));
-		    }
-		});	
-			
-		//for calendar when user clicks on calendar options 
-		$('div.form-row.errors div span.datetimeshortcuts a').live("click",function(){		
-			$(this).parents('div').siblings(".errorlist").remove();				
-			$(this).parents('div').removeClass("errors");
-			checkForErrors($(this));
-		});
-		
-		//related-widget-wrapper
-		$("div.field-box.errors input.related-widget-wrapper").each(function() { 			
-			$(this).trigger('change');
-		});
-		
-		//for many-to-many widgets (errors disappear only when you click directly on selector-chosen field)
-		//$(document).on("change", "div.form-row div.errors div.selector-chosen select.filtered", function() {		  
-  		//	if( $(this).children().length > 0 ) {										
-		//			$(this).parents('div').siblings(".errorlist").remove();				
-		//			$(this).parents('div').removeClass("errors");
-		//			checkForErrors($(this));
-		//	}
-		//});	
-		
-		//for drop-down menus		
-		$(document).on("change", "div.form-row.errors select", function() {		  
-  			$(this).parents('div').siblings(".errorlist").remove();				
-			$(this).parents('div').removeClass("errors");
-			checkForErrors($(this));
-		});
-		
-		function checkForErrors(elem){
-			if(elem.parents('.tab_content>fieldset.module.aligned').find('.errorlist').length == 0) {
-				var field = elem.parents('.tab_content').attr('id');
-				$("a[href='#"+field+"']").removeClass("error");
-				if($('.errors').length == 0 && $('.error').length == 0) {
-					$('p.errornote').remove();				
-				}
-			}			
-		}
-		
-	</script>
+
 	
 	<script>		
 		 var link;	     
@@ -254,6 +173,7 @@
 
 </div>
 </form></div>
+
 
 {% endblock %}
 
