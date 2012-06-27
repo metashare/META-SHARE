@@ -138,14 +138,7 @@ class EditorGroupAdmin(admin.ModelAdmin):
         return queryset.filter(managergroup__in=ManagerGroup.objects.filter(
                 name__in=request.user.groups.values_list('name', flat=True)))
 
-<<<<<<< HEAD
-        return queryset.filter(managergroup__in=ManagerGroup.objects.filter(name__in=
-            request.user.groups.values_list('name', flat=True)))
-
-    def add_user_profile_to_editor_group(self, request, queryset):
-=======
     def add_user_to_editor_group(self, request, queryset):
->>>>>>> b2e599033233a054690ccd5dc8f282abc6b2b460
         form = None
         if 'cancel' in request.POST:
             self.message_user(request, _('Cancelled adding users to the editor group.'))
