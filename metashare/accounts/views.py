@@ -263,7 +263,7 @@ def editor_registration_request(request):
                 
                 try:
                     # Send out notification email to the manager and superuser email address.
-                    send_mail(_('Please confirm your META-SHARE user account'),
+                    send_mail('Please confirm your META-SHARE user account',
                     email, 'no-reply@meta-share.eu', emails,
                     fail_silently=False)
                 
@@ -271,15 +271,15 @@ def editor_registration_request(request):
                     # If the email could not be sent successfully, tell the user
                     # about it and also give the confirmation URL.
                     messages.error(request,
-                      _("There was an error sending out the notification email " \
-                      "for your editor registration."))
+                      "There was an error sending out the notification email " \
+                      "for your editor registration.")
                     
                     # Redirect the user to the front page.
                     return redirect('metashare.views.edit_profile')
 
             # Add a message to the user after applying.
             messages.success(request,
-              _("You have applied to new editor groups."))
+              "You have applied to new editor groups.")
             
             # Redirect the user to the edit profile page.
             return redirect('metashare.views.edit_profile')
