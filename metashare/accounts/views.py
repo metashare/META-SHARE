@@ -210,7 +210,7 @@ def edit_profile(request):
           'homepage': profile.homepage})
 
     editor_groups_applied = u', '.join(edt_reg.editor_groups() for edt_reg in EditorRegistrationRequest.objects.filter(user=profile.user))
-    
+
     dictionary = {'title': 'Edit profile information', 'form': form, 
                   'editor_registration_request': editor_groups_applied
                  }
@@ -248,7 +248,7 @@ def editor_registration_request(request):
             for edt_grp in form.cleaned_data['editorgroups']:
                 emails = []
                 # find out the group managers email
-                for managers in edt_grp.managers():
+                for managers in edt_grp.get_managers():
                     emails.append(managers.email)
                 # find out the superuser email
                 for superuser in User.objects.filter(is_superuser=True):
