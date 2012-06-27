@@ -162,6 +162,8 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         as response_add deals with add popups.
         '''
         if '_popup' in request.REQUEST:
+            if request.POST.has_key("_continue"):
+                return self.response_add(request, obj)
             return self.edit_response_close_popup_magic(obj)
         elif '_popup_o2m' in request.REQUEST:
             caller = None
@@ -197,13 +199,13 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         opts = model._meta
 
         if not self.has_add_permission(request):
-            raise PermissionDenied
+            raise PermissionDenied        
 
         ModelForm = self.get_form(request)
         formsets = []
-        if request.method == 'POST':
+        if request.method == 'POST':            
             form = ModelForm(request.POST, request.FILES)
-            if form.is_valid():
+            if form.is_valid():                
                 new_object = self.save_form(request, form, change=False)
                 form_validated = True
             else:
@@ -253,7 +255,10 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                 #### end modification ####
 
                 self.log_addition(request, new_object)
+                if request.POST.has_key("_continue"):
+                    return self.save_and_continue_in_popup(new_object, request)
                 return self.response_add(request, new_object)
+            
         else:
             # Prepare the dict of initial data from the request.
             # We have to special-case M2Ms as a list of comma-separated PKs.
@@ -397,6 +402,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
 
                 change_message = self.construct_change_message(request, form, formsets)
                 self.log_change(request, new_object, change_message)
+                                    
                 return self.response_change(request, new_object)
 
         else:
@@ -451,8 +457,8 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                     return render_to_response('admin/repository/redirect.html',
                            { 'resource': res, 'redirection_url': url },
                            )
-        #### end modification ####
-        
+        #### end modification ####        
+
         context = {
             'title': _('Change %s') % force_unicode(opts.verbose_name),
             'adminform': adminForm,
@@ -537,9 +543,6 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             "admin/%s/delete_confirmation.html" % app_label,
             "admin/delete_confirmation.html"
         ], context, context_instance=context_instance)
-
-
-
 
 
 class OrderedAdminForm(helpers.AdminForm):
