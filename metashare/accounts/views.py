@@ -25,7 +25,7 @@ from django.template import RequestContext
 from metashare.accounts.forms import RegistrationRequestForm, \
   ResetRequestForm, UserProfileForm, EditorRegistrationRequestForm
 from metashare.accounts.models import RegistrationRequest, ResetRequest, \
-  UserProfile, EditorRegistrationRequest, EditorGroup
+  UserProfile, EditorRegistrationRequest
 from metashare.settings import SSO_SECRET_KEY, DJANGO_URL, \
   PRIVATE_KEY_PATH, LOG_LEVEL, LOG_HANDLER, MAX_LIFETIME_FOR_SSO_TOKENS
 
@@ -233,15 +233,15 @@ def editor_registration_request(request):
         
         # Check if the form has validated successfully.
         if form.is_valid():
-            existingReg = EditorRegistrationRequest.objects.filter(user=request.user)[0]
-            if existingReg:
+            existing_registration = EditorRegistrationRequest.objects.filter(user=request.user)[0]
+            if existing_registration:
                 for edt_grp in form.cleaned_data['editorgroups']: 
-                    existingReg.editorgroups.add(edt_grp)
+                    existing_registration.editorgroups.add(edt_grp)
             else:
                 new_object = EditorRegistrationRequest(
                 user=request.user)
                 new_object.save()
-                new_object.editorgroups=form.cleaned_data['editorgroups']
+                new_object.editorgroups = form.cleaned_data['editorgroups']
                 new_object.save()
 
             # Send notification email for each editor group applied
@@ -263,7 +263,7 @@ def editor_registration_request(request):
                 
                 try:
                     # Send out notification email to the manager and superuser email address.
-                    send_mail('Please confirm your META-SHARE user account',
+                    send_mail(_('Please confirm your META-SHARE user account'),
                     email, 'no-reply@meta-share.eu', emails,
                     fail_silently=False)
                 
@@ -271,15 +271,15 @@ def editor_registration_request(request):
                     # If the email could not be sent successfully, tell the user
                     # about it and also give the confirmation URL.
                     messages.error(request,
-                      "There was an error sending out the notification email " \
-                      "for your editor registration.")
+                      _("There was an error sending out the notification email " \
+                      "for your editor registration."))
                     
                     # Redirect the user to the front page.
                     return redirect('metashare.views.edit_profile')
 
             # Add a message to the user after applying.
             messages.success(request,
-              "You have applied to new editor groups.")
+              _("You have applied to new editor groups."))
             
             # Redirect the user to the edit profile page.
             return redirect('metashare.views.edit_profile')
