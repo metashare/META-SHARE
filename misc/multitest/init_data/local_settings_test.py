@@ -80,3 +80,6 @@ SOLR_URL = 'http://127.0.0.1:{0}/solr/main'.format(os.environ['SOLR_PORT'])
 # the URL of the Solr server (or server core) which is used as a search backend
 # when running tests
 TESTING_SOLR_URL = 'http://127.0.0.1:{0}/solr/testing'.format(os.environ['SOLR_PORT'])
+
+MAX_DIGEST_AGE=4
+
