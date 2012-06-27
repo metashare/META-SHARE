@@ -108,3 +108,16 @@ $(document).ready(function()
 	$('#jsddm > li').bind('mouseout',  jsddm_timer);});
 
 document.onclick = jsddm_close;
+
+//enforce size requirement in audio
+$(document).ready(function(){
+	$('input[name="_save"]').click(function(){	
+		if( $('input#id_sizeinfotype_model_set-0-size').val() == '' && $('h1.customtitle').html().indexOf('Audio size') != -1){
+			if($('input#id_sizeinfotype_model_set-0-size').parents('table').prev('ul').length == 0 ){
+				$('input#id_sizeinfotype_model_set-0-size').parents('table').before('<ul class="errorlist"><li>This field is required.</li></ul>');
+			}			
+			return false;
+		}
+	});
+});
+

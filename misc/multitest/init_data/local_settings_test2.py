@@ -98,3 +98,5 @@ TESTING_SOLR_URL = 'http://127.0.0.1:{0}/solr/testing'.format(%%SOLR_PORT%%)
 # node resource descriptions available on the nodes of the inner circle.
 %%PROXIED_NODES%%
 
+MAX_DIGEST_AGE=4
+

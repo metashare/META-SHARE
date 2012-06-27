@@ -36,7 +36,7 @@ from metashare.repository.models import resourceComponentTypeType_model, \
     licenceInfoType_model, User
 from metashare.repository.supermodel import SchemaModel
 from metashare.stats.model_utils import saveLRStats, UPDATE_STAT, INGEST_STAT, \
-    PUBLISH_STAT, GROUP_STAT
+    PUBLISH_STAT
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
     ALLOWED_ARCHIVE_EXTENSIONS
 from metashare.utils import verify_subclass
@@ -84,11 +84,8 @@ class ResourceComponentInlineFormSet(ReverseInlineFormSet):
             if modelfieldname not in self.data:
                 continue
             value = self.data[modelfieldname]
-            if not value:
-                # print error
-                #raise AssertionError("Meaningful error message")                
-                error = error + format(modelfieldname) + ' error. '
-                
+            if not value:        
+                error = error + format(modelfieldname) + ' error. '                
         return error
 
     def clean_corpus_one2many(self, corpusmediatype):
@@ -296,10 +293,11 @@ class ResourceModelAdmin(SchemaModelAdmin):
 
     content_fields = ('resourceComponentType',)
     list_display = ('__unicode__', 'resource_type', 'publication_status', 'resource_Owners', 'editor_Groups',)
+    list_filter = ('storage_object__publication_status',)
     actions = (publish_resources, unpublish_resources, ingest_resources, export_xml_resources, 'add_group', 'remove_group', 'add_owner', 'remove_owner')
     hidden_fields = ('storage_object', 'owners', 'editor_groups',)
-         
-        
+
+
     def resource_Owners(self, obj):
         """
         Method used for changelist view for resources.
@@ -309,7 +307,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
             return None        
         owners_list = ''
         for owner in owners.all():
-            print owner
             owners_list += owner.username + ', '
         owners_list = owners_list.rstrip(', ')
         return owners_list    
@@ -330,11 +327,11 @@ class ResourceModelAdmin(SchemaModelAdmin):
         return groups_list       
     
     
-    class MyForm(forms.Form):
+    class IntermediateMultiSelectForm(forms.Form):
         _selected_action = forms.CharField(widget=forms.MultipleHiddenInput)         
         
         def __init__(self, choices = None, *args, **kwargs):
-            super(ResourceModelAdmin.MyForm, self).__init__(*args, **kwargs)  
+            super(ResourceModelAdmin.IntermediateMultiSelectForm, self).__init__(*args, **kwargs)  
             if choices is not None:
                 self.choices = choices
                 self.fields['multifield'] = forms.ModelMultipleChoiceField(self.choices)        
@@ -349,13 +346,12 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 return
             elif 'add_editor_group' in request.POST:      
                 query = EditorGroup.objects.all() 
-                form = self.MyForm(query, request.POST)
+                form = self.IntermediateMultiSelectForm(query, request.POST)
                 if form.is_valid():
                     groups = form.cleaned_data['multifield']   
                     for obj in queryset:  
                         obj.editor_groups.add(*groups)
                         obj.save()
-                        saveLRStats(obj, "", "", GROUP_STAT)
                     self.message_user(request, 'Successfully added Editor Groups to selected resources.')
                     return HttpResponseRedirect(request.get_full_path())
     
@@ -369,7 +365,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     group = EditorGroup.objects.all()
                 else:
                     group = editor_groups.all().values_list('name', flat=True)
-                form = self.MyForm(choices=group, initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
+                form = self.IntermediateMultiSelectForm(choices=group, initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
     
             return render_to_response('admin/repository/resourceinfotype_model/add_editor_group.html', \
                                       {'selected_resources': queryset, 'form': form, 'path':request.get_full_path()}, \
@@ -386,18 +382,17 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 return
             elif 'remove_editor_group' in request.POST:  
                 query = EditorGroup.objects.all()           
-                form = self.MyForm(query, request.POST)            
+                form = self.IntermediateMultiSelectForm(query, request.POST)            
                 if form.is_valid():
                     groups = form.cleaned_data['multifield']
                     for obj in queryset:  
                         obj.editor_groups.remove(*groups)
                         obj.save()
-                        saveLRStats(obj, "", "", GROUP_STAT)
                     self.message_user(request, 'Successfully removed Editor Groups from selected resources.')               
                     return HttpResponseRedirect(request.get_full_path())
             if not form:
                 groups = EditorGroup.objects.all()
-                form = self.MyForm(choices=groups, initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
+                form = self.IntermediateMultiSelectForm(choices=groups, initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
         
             return render_to_response('admin/repository/resourceinfotype_model/remove_editor_group.html', \
                                       {'selected_resources': queryset, 'form': form, 'path':request.get_full_path()}, \
@@ -414,7 +409,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 return
             elif 'add_owner' in request.POST:  
                 query = User.objects.all()
-                form = self.MyForm(query, request.POST)     
+                form = self.IntermediateMultiSelectForm(query, request.POST)     
                 if form.is_valid():
                     owners = form.cleaned_data['multifield']
                     for obj in queryset:  
@@ -424,7 +419,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     return HttpResponseRedirect(request.get_full_path())
             if not form:
                 owners = User.objects.all()
-                form = self.MyForm(choices=owners, initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
+                form = self.IntermediateMultiSelectForm(choices=owners, initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
         
             return render_to_response('admin/repository/resourceinfotype_model/add_owner.html', \
                                       {'selected_resources': queryset, 'form': form, 'path':request.get_full_path()}, \
@@ -441,7 +436,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 return
             elif 'remove_owner' in request.POST:  
                 query = User.objects.all()
-                form = self.MyForm(query, request.POST)            
+                form = self.IntermediateMultiSelectForm(query, request.POST)            
                 if form.is_valid():
                     owners = form.cleaned_data['multifield']
                     for obj in queryset:  
@@ -451,7 +446,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     return HttpResponseRedirect(request.get_full_path())
             if not form:
                 owners = User.objects.all()
-                form = self.MyForm(choices=owners, initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
+                form = self.IntermediateMultiSelectForm(choices=owners, initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
         
             return render_to_response('admin/repository/resourceinfotype_model/remove_owner.html', \
                                       {'selected_resources': queryset, 'form': form, 'path':request.get_full_path()}, \
