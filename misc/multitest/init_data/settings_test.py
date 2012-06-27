@@ -180,6 +180,9 @@ INSTALLED_APPS = (
     'metashare.AdminTest',
 )
 
+#if os.name != 'nt':
+#    INSTALLED_APPS += ('kronos',)
+
 # Continuous Integration support using django_jenkins: only add application
 # if django_jenkins module can be imported properly.
 try:

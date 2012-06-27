@@ -6,6 +6,7 @@ import sys
 from metashare import settings
 from metashare.sync.sync_utils import login, get_inventory, get_full_metadata
 from django.core.management.base import BaseCommand
+from optparse import make_option
 from metashare.storage.models import StorageObject, MASTER, PROXY, REMOTE, \
     update_resource
 
@@ -15,6 +16,13 @@ RESET = "\033[0;0m"
 
 class Command(BaseCommand):
     
+    option_list = BaseCommand.option_list + (
+        make_option('-i', '--id-file', action='store', dest='id_filename',
+                    default=None, help='file for IDs of new/modified resource'),
+        make_option('-n', '--node', action='store', dest='node',
+                    default=None, help='sync only with specified node'),
+    )
+
     help = 'Synchronizes with a predefined list of META-SHARE nodes'
     
     def handle(self, *args, **options):
@@ -22,12 +30,46 @@ class Command(BaseCommand):
         Synchronizes this META-SHARE node with the locally configured other
         META-SHARE nodes.
         """
-        Command.sync_with_nodes(getattr(settings, 'CORE_NODES', {}), False)
-        Command.sync_with_nodes(getattr(settings, 'PROXIED_NODES', {}), True)
+        # Check for --id-file option
+        id_filename = options.get('id_filename', None)
+        id_file = None
+        if not id_filename is None:
+            if len(id_filename) > 0:
+                try:
+                    id_file = open(id_filename, 'w')
+                except:
+                    print "Impossible to open file {0}".format(id_filename)
+                    print "  IDs will not be printed"
+      
+        node_name = options.get('node', None)
+        if node_name is None:
+            Command.sync_with_nodes(getattr(settings, 'CORE_NODES', {}), False, id_file)
+            Command.sync_with_nodes(getattr(settings, 'PROXIED_NODES', {}), True, id_file)
+        else:
+            # Synchronize only with the given node
+            node_list = {}
+            core_nodes = getattr(settings, 'CORE_NODES', {})
+            for key, value in core_nodes.items():
+                if value['NAME'] == node_name:
+                    node_list.update({key, value})
+                    Command.sync_with_nodes(node_list, False, id_file)
+                    break
+
+            node_list = {}
+            proxied_nodes = getattr(settings, 'PROXIED_NODES', {})
+            for key, value in proxied_nodes.items():
+                if value['NAME'] == node_name:
+                    node_list.update({key, value})
+                    Command.sync_with_nodes(node_list, True, id_file)
+                    break
+
+        # Close id file if used
+        if not id_file is None:
+            id_file.close()
 
 
     @staticmethod
-    def sync_with_nodes(nodes, is_proxy):
+    def sync_with_nodes(nodes, is_proxy, id_file=None):
         """
         Synchronizes this META-SHARE node with the given other META-SHARE nodes.
         
@@ -113,15 +155,23 @@ class Command(BaseCommand):
                     storage_json, resource_xml_string = \
                       get_full_metadata(opener, "{0}/sync/{1}/metadata/" \
                             .format(url, resource['id']), resource['digest'])
-                    update_resource(storage_json, resource_xml_string,
+                    res_obj = update_resource(storage_json, resource_xml_string,
                                     resource['digest'], _copy_status)
+                    if not id_file is None:
+                        id_file.write("--->RESOURCE_ID:{0};STORAGE_IDENTIFIER:{1}\n"\
+                            .format(res_obj.id, res_obj.storage_object.identifier))
 
                 for resource in resources_to_update:
                     # Get the json storage object and the actual metadata xml
                     storage_json, resource_xml_string = \
                       get_full_metadata(opener, "{0}/sync/{1}/metadata/" \
                             .format(url, resource['id']), resource['digest'])
-                    update_resource(storage_json, resource_xml_string,
+                    res_obj = update_resource(storage_json, resource_xml_string,
                                     resource['digest'], _copy_status)
+                    if not id_file is None:
+                        id_file.write("--->RESOURCE_ID:{0};STORAGE_IDENTIFIER:{1}\n"\
+                            .format(res_obj.id, res_obj.storage_object.identifier))
+                        if resource['digest'] != res_obj.storage_object.digest_checksum:
+                            id_file.write("Different digests!\n")
 
             sys.stdout.write("\n\n")
