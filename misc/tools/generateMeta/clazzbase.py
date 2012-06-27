@@ -137,6 +137,12 @@ SORTED_CHOICES_TEMPLATE_MAXLEN = """
                      key=lambda choice: choice[1].lower()),
       """
 
+SORTED_INT_CHOICES_TEMPLATE_MAXLEN = """
+      max_length={1},
+      choices=sorted({0}['choices'],
+                     key=lambda choice: choice[1]),
+      """
+
 MODEL_HEADER="""\
 # pylint: disable-msg=C0302
 import logging
@@ -144,17 +150,17 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.db import models
-from django.template.defaultfilters import slugify
 
 from metashare.accounts.models import EditorGroup
 # pylint: disable-msg=W0611
 from {0}supermodel import SchemaModel, SubclassableModel, \\
   _make_choices_from_list, InvisibleStringModel, \\
-  REQUIRED, OPTIONAL, RECOMMENDED
+  REQUIRED, OPTIONAL, RECOMMENDED, \\
+  _make_choices_from_int_list
 from {0}editor.widgets import MultiFieldWidget
 from {0}fields import MultiTextField, MetaBooleanField, \\
   MultiSelectField, DictField, best_lang_value_retriever
-from {0}validators import validate_lang_code_keys, validate_dict_values
+from {0}validators import validate_lang_code_keys
 
 from metashare.storage.models import StorageObject, MASTER, COPY_CHOICES
 
@@ -329,18 +335,10 @@ TOP_LEVEL_TYPE_EXTRA_CODE_TEMPLATE = '''
         super(resourceInfoType_model, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return '/{0}{1}'.format(DJANGO_BASE, self.get_relative_url())
-
-    def get_relative_url(self):
-        """
-        Returns part of the complete URL which resembles the single resource
-        view for this resource.
+        from django.template.defaultfilters import slugify
+        resourceName = slugify(u'{0}'.format(self))
         
-        The returned part prepended with a '/' can be appended to `DJANGO_URL`
-        in order to get the complete URL.
-        """
-        return 'repository/browse/{}/{}/'.format(slugify(self.__unicode__()),
-                                                 self.storage_object.identifier)
+        return '/{0}repository/browse/{1}/{2}/'.format(DJANGO_BASE, resourceName, self.storage_object.identifier)
 
     def publication_status(self):
         """
@@ -645,7 +643,20 @@ class Clazz(object):
 
             if data_type in Simple_type_table:
                 if data_type in Integer_type_table:
-                    pass
+                    if isinstance(member.get_data_type_chain(), list) and \
+                      member.get_values():
+                        _choice_name = class_name.upper()
+                        _choice_values = []
+                        _line = ''
+                        for _choice_value in member.get_values():
+                            _line = '{0}{1}, '.format(_line, int(_choice_value))
+                            _choice_values.append(int(_choice_value))
+                        
+                        
+                        self.embedded_enums.append('\n{}_{}_CHOICES = ' \
+                          '_make_choices_from_int_list([\n{}\n])\n'.format(
+                            _choice_name, name.upper(),
+                            _line))
                 elif data_type in Float_type_table:
                     pass
                 elif data_type in Date_type_table:
@@ -654,7 +665,7 @@ class Clazz(object):
                     pass
                 elif data_type in Boolean_type_table:
                     pass
-                elif data_type in String_type_table:
+                elif data_type in String_type_table or data_type in Integer_type_table:
                     if isinstance(member.get_data_type_chain(), list) and \
                       member.get_values():
                         _choice_name = class_name.upper()
@@ -738,7 +749,36 @@ class Clazz(object):
                 options += '\n      help_text={},\n      '.format(_help_text)
 
         if data_type in Integer_type_table:
-            self.generate_simple_field(name, 'IntegerField', options, required)
+            if isinstance(member.get_data_type_chain(), list) and \
+              member.get_values():
+                _choice_name = self.name.upper()
+                choice_name = '{}_{}_CHOICES' \
+                  .format(_choice_name, name.upper(), member.get_values())
+                maxlen = member.get_maxlength()
+                if maxlen:
+                    logging.warn("max_length overwritten for choice of " \
+                      "strings: {}".format(member))
+                    if member.is_unbounded():
+                        choice_options = \
+                          CHOICES_TEMPLATE_MAXLEN.format(choice_name, maxlen)
+                    else:
+                        choice_options = \
+                          SORTED_INT_CHOICES_TEMPLATE_MAXLEN.format(choice_name, maxlen)
+                else:
+                    choice_options = CHOICES_TEMPLATE.format(choice_name)
+                
+                # cfedermann: MultiSelectField generation...
+                if member.is_unbounded():
+                    choice_options = MULTI_CHOICES_TEMPLATE.format(choice_name)
+                    
+                    self.generate_simple_field(name, 'MultiSelectField',
+                      options + choice_options, '')
+
+                else:
+                    self.generate_simple_field(name, 'IntegerField',
+                      options + choice_options, '')
+            else:
+                self.generate_simple_field(name, 'IntegerField', options, required)
         elif data_type in Float_type_table:
             self.generate_simple_field(name, 'FloatField', options, required)
         elif data_type in Date_type_table:
@@ -819,7 +859,7 @@ class Clazz(object):
             options += 'blank=True'
 
         self.wrtmodels(
-          '    %s = DictField(validators=[validate_lang_code_keys, validate_dict_values],\n'
+          '    %s = DictField(validators=[validate_lang_code_keys],\n'
           '      default_retriever=best_lang_value_retriever, %s)\n' % (
             name, options, ))
 
