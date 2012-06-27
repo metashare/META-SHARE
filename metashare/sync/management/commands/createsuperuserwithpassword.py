@@ -8,15 +8,17 @@ class Command(BaseCommand):
             help='Specifies the username for the user.'),
         make_option('--password', dest='password', default=None,
             help='Specifies the password for the user.'),
+        make_option('--email', dest='email', default="",
+            help='Specifies the e-mail for the user. (optional)'),
     )
     def handle(self, *args, **options):
         username = options.get('username', None)
         password = options.get('password', None)
+        email = options.get('email', "")
         if username is None or password is None:
             print "Missing username or password"
             return
 
-        email = "admin@metashare-dummy.org"
         user = User.objects.create_superuser(username, email, password)
         if user is None:
             print "Error in creating user"
