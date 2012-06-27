@@ -6,6 +6,7 @@ from django import forms
 from metashare.accounts.models import RegistrationRequest, UserProfile, \
     EditorRegistrationRequest
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
 
 class ModelForm(forms.ModelForm):
@@ -66,6 +67,35 @@ class RegistrationRequestForm(ModelForm):
         """
         model = RegistrationRequest
         exclude = ('uuid', 'created')
+        
+    def clean_shortname(self):
+        """
+        Make sure that the user name is still available.
+        """
+        _user_name = self.cleaned_data['shortname']
+        try:
+            User.objects.get(username=_user_name)
+        except:
+            pass
+        else:
+            raise ValidationError('User name already exists, please choose another one.')
+    
+        return _user_name
+        
+    def clean_email(self):
+        """
+        Make sure that there is no account yet registered with this email.
+        """
+        _email = self.cleaned_data['email']
+        try:
+            User.objects.get(email=_email)
+        except:
+            pass
+        else:
+            raise ValidationError('There is already an account registered with this email.')
+    
+        return _email
+        
     
     # cfedermann: possible extensions for future improvements.
     #
