@@ -7,7 +7,7 @@ Project: META-SHARE prototype implementation
 
 from os.path import abspath, dirname, join
 import sys
-import os
+
 parentdir = dirname(dirname(abspath(__file__)))
 # Insert our dependencies:
 sys.path.insert(0, join(parentdir, 'lib', 'python2.7', 'site-packages'))
