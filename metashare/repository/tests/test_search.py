@@ -1,6 +1,5 @@
 from metashare import test_utils, settings
 from metashare.settings import DJANGO_BASE, ROOT_PATH
-from metashare.repository.models import resourceInfoType_model
 from haystack.query import SearchQuerySet
 from django.contrib.auth.models import User
 from django.test.client import Client
@@ -136,7 +135,8 @@ class SearchTest(test_utils.IndexAwareTestCase):
         """
         Clean up the test
         """
-        resourceInfoType_model.objects.all().delete()
+        test_utils.clean_db()
+        test_utils.clean_storage()
         User.objects.all().delete()
 
     def importOneFixture(self):
@@ -299,7 +299,8 @@ class SearchTestPublishedResources(TestCase):
         """
         Clean up the test
         """
-        resourceInfoType_model.objects.all().delete()
+        test_utils.clean_db()
+        test_utils.clean_storage()
         User.objects.all().delete()
 
     def testLanguageFacet(self):   

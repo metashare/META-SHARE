@@ -2,24 +2,18 @@
 Project: META-SHARE prototype implementation
  Author: Christian Federmann <cfedermann@dfki.de>
 """
-from Crypto import Random
-from Crypto.PublicKey import RSA
-from base64 import b64encode
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.db import models
 # pylint: disable-msg=E0611
 from hashlib import md5
-from httplib import HTTPConnection
 from metashare.settings import LOG_LEVEL, LOG_HANDLER
 from metashare import settings
 from os import mkdir
 from os.path import exists
 import os.path
-from urllib import urlencode
 from uuid import uuid1, uuid4
 from xml.etree import ElementTree as etree
 from datetime import datetime, timedelta
-from time import mktime
 import logging
 import re
 from metashare.xml_utils import pretty_xml
@@ -62,7 +56,7 @@ COPY_CHOICES = (
 
 # attributes to by serialized in the global JSON of the storage object
 GLOBAL_STORAGE_ATTS = ['source_url', 'identifier', 'created', 'modified', 
-  'revision', 'publication_status', 'metashare_version']
+  'revision', 'publication_status', 'metashare_version', 'deleted']
 
 # attributes to be serialized in the local JSON of the storage object
 LOCAL_STORAGE_ATTS = ['digest_checksum', 'digest_modified', 
@@ -101,106 +95,7 @@ def _create_uuid():
         new_id = '{0}{1}'.format(uuid1().hex, uuid4().hex)
     
     return new_id
-
-class StorageServer(models.Model):
-    """
-    Models a remote storage server hosting storage objects.
-    """
-    shortname = models.CharField(max_length=50, unique=True,
-      help_text="Human-readable name for this storage server instance.")
     
-    hostname = models.URLField(verify_exists=False, help_text="The URL " \
-      "for this storage server instance. Use http://localhost/ for your " \
-      "local node.")
-    
-    updated = models.DateTimeField(null=True, editable=False,
-      help_text="(Read-only) last update date for this storage server " \
-      "instance.")
-    
-    public_key = models.TextField(help_text="Base64 Format. Used to " \
-      "encrypt data sent to this metadata server." )
-    
-    def __unicode__(self):
-        """
-        Returns the Unicode representation for this storage server instance.
-        """
-        return u'<StorageServer id="{0}">'.format(self.id)
-    
-    def synchronise(self):
-        """
-        Syncs local django with this storage server instance.
-        """
-        # Compose export URL for this storage server.
-        _sync_url = "{0}storage/export/".format(self.hostname)
-        if self.updated:
-            # Add from_date if appropriate.
-            _sync_url += "{0}/".format(self.updated.strftime('%Y-%m-%d'))
-        
-        return _sync_url
-    
-    def is_local_server(self):
-        """Checks if this StorageServer instance is the local server."""
-        return str(self.hostname).strip() == 'http://localhost/'
-    
-    def create_sso_token(self, uuid, timestamp=None):
-        """Creates new SSO token for non-managing nodes."""
-        if self.is_local_server():
-            LOGGER.info('Cannot send message to local server.')
-            return None
-        
-        # If no timestamp is given, we use the current time.
-        if not timestamp:
-            # Convert time tuple to timestamp String.
-            timestamp = str(int(mktime(datetime.now().timetuple())))
-        
-        _public_key = RSA.importKey(self.public_key)
-        _random_bytes = Random.get_random_bytes(16)
-        _message = '{0}{1}'.format(uuid, timestamp)
-        token = b64encode(_public_key.encrypt(_message, _random_bytes)[0])
-        return (uuid, timestamp, token)
-    
-    def send_message(self, msg, action):
-        """Send an encrypted message to this StorageServer."""
-        if self.is_local_server():
-            LOGGER.info('Cannot send message to local server.')
-            return False
-        
-        _public_key = RSA.importKey(self.public_key)
-        _random_bytes = Random.get_random_bytes(16)
-        _chunk_size = _public_key.size() / 8
-        _chunks = len(msg) / _chunk_size
-        
-        _encrypted = []
-        for offset in range(_chunks):
-            _offset = offset * _chunk_size
-            _chunk = msg[_offset:_offset+_chunk_size]
-            _encrypted.append(_public_key.encrypt(_chunk, _random_bytes))
-        
-        if len(msg) % _chunk_size:
-            _chunk = msg[_chunks * _chunk_size:]
-            _encrypted.append(_public_key.encrypt(_chunk, _random_bytes))
-        
-        params = urlencode({'message': _encrypted})
-        headers = {"Content-type": "application/x-www-form-urlencoded",
-          "Accept": "text/plain"}
-        _urls = str(self.hostname).strip('http://').strip('/').split('/')
-        if len(_urls) > 1:
-            _url = _urls[0]
-            _prefix = '/'.join(_urls[1:])
-            action = '/{0}{1}'.format(_prefix, action)
-        
-        else:
-            _url = _urls[0]
-
-        _conn = HTTPConnection(_url)
-        _conn.request("POST", action, params, headers)
-        response = _conn.getresponse()
-        
-        # cfedermann: for the moment, we are ignoring the HTTP response text.
-        #             It could be accessed using: data = response.read()
-        _conn.close()
-        
-        return response.status == 200
 
 # pylint: disable-msg=R0902
 class StorageObject(models.Model):
@@ -213,11 +108,6 @@ class StorageObject(models.Model):
         permissions = (
             ('can_sync', 'Can synchronize'),
         )
-    
-    #jsteffen: to be removed in later versions, replaced by source_url
-    source = models.ForeignKey(StorageServer, blank=True, null=True,
-      editable=False, help_text="(Read-only) source for this storage " \
-      "object instance.")
       
     source_url = models.URLField(verify_exists=False, editable=False,
       default=settings.DJANGO_URL,
@@ -252,7 +142,7 @@ class StorageObject(models.Model):
       help_text="(Read-only) last update check date of digest zip " \
       "for this storage object instance.")
     
-    revision = models.PositiveIntegerField(default=0, help_text="Revision " \
+    revision = models.PositiveIntegerField(default=1, help_text="Revision " \
       "or version information for this storage object instance.")
       
     metashare_version = models.CharField(max_length=32, editable=False, 
@@ -411,35 +301,43 @@ class StorageObject(models.Model):
         if self.master_copy:
             self._compute_checksum()
         
-        # flag to indicate if rebuilding of resource.zip is required
-        update_zip = False
-        
         self.digest_last_checked = datetime.now()        
+
+        # flag to indicate if rebuilding of metadata.xml is required
+        update_xml = False
         
         # create current version of metadata XML
         _metadata = pretty_xml(tostring(
           # pylint: disable-msg=E1101
           self.resourceinfotype_model_set.all()[0].export_to_elementtree()))
         
-        # check if there exists a metadata XML file; this is not the case if
-        # the publication status just changed from internal to ingested
-        _xml_exists = os.path.isfile(
-          '{0}/metadata-{1:04d}.xml'.format(self._storage_folder(), self.revision))
-          
-        # check if metadata has changed; if yes, increase revision for ingested
-        # and published resources and save metadata to storage folder
-        if self.metadata != _metadata or not _xml_exists:
-            if self.metadata != _metadata:
-                self.metadata = _metadata
-                self.modified = datetime.now()
+        if self.metadata != _metadata:
+            self.metadata = _metadata
+            self.modified = datetime.now()
+            # increase revision for ingested and published resources whenever 
+            # the metadata XML changes
             if self.publication_status in (INGESTED, PUBLISHED):
                 self.revision += 1
-                # serialize metadata
-                with open('{0}/metadata-{1:04d}.xml'.format(
-                  self._storage_folder(), self.revision), 'wb') as _out:
-                    _out.write(unicode(self.metadata).encode('utf-8'))
-                update_zip = True
+                update_xml = True
             LOGGER.debug(u"\nMETADATA: {0}\n".format(self.metadata))
+            
+        # check if there exists a metadata XML file; this is not the case if
+        # the publication status just changed from internal to ingested
+        # or if the resource was received when syncing
+        if self.publication_status in (INGESTED, PUBLISHED) \
+          and not os.path.isfile(
+          '{0}/metadata-{1:04d}.xml'.format(self._storage_folder(), self.revision)):
+            update_xml = True
+
+        # flag to indicate if rebuilding of resource.zip is required
+        update_zip = False
+          
+        if update_xml:
+            # serialize metadata
+            with open('{0}/metadata-{1:04d}.xml'.format(
+              self._storage_folder(), self.revision), 'wb') as _out:
+                _out.write(unicode(self.metadata).encode('utf-8'))
+            update_zip = True
         
         # check if global storage object serialization has changed; if yes,
         # save it to storage folder
@@ -456,8 +354,8 @@ class StorageObject(models.Model):
                     _out.write(unicode(self.global_storage).encode('utf-8'))
                 update_zip = True
         
-        # create new digest zip if required, but only for master copies
-        if update_zip and self.copy_status == MASTER:
+        # create new digest zip if required, but only for master and proxy copies
+        if update_zip and self.copy_status in (MASTER, PROXY):
             _zf_name = '{0}/resource.zip'.format(self._storage_folder())
             _zf = zipfile.ZipFile(_zf_name, mode='w', compression=ZIP_DEFLATED)
             try:
@@ -492,7 +390,7 @@ class StorageObject(models.Model):
         # least self.digest_last_checked has changed
         self.save()
 
-def restore_from_folder(storage_id, copy_status=None, storage_digest=None):
+def restore_from_folder(storage_id, copy_status=MASTER, storage_digest=None):
     """
     Restores the storage object and the associated resource for the given
     storage object identifier and makes it persistent in the database. 
@@ -532,7 +430,7 @@ def restore_from_folder(storage_id, copy_status=None, storage_digest=None):
     _metadata_file = open('{0}/{1}'.format(storage_folder, _metadata_files[0]), 'rb')
     _xml_string = _metadata_file.read()
     _metadata_file.close()
-    result = resourceInfoType_model.import_from_string(_xml_string)
+    result = resourceInfoType_model.import_from_string(_xml_string, copy_status=copy_status)
     if not result[0]:
         msg = u''
         if len(result) > 2:

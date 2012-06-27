@@ -208,8 +208,9 @@ def download(request, object_id):
 
     # Check whether the resource is from the current node, or whether it must be
     # redirected to the master copy
-    if (not resource.storage_object.master_copy):
-        url = "{0}{1}".format(resource.storage_object.source_url, resource.get_absolute_url())
+    if not resource.storage_object.master_copy:
+        url = "{0}/{1}".format(resource.storage_object.source_url,
+                               resource.get_relative_url())
         return render_to_response('repository/redirect.html',
                     { 'resource': resource, 'redirection_url': url },
                     context_instance=RequestContext(request))
