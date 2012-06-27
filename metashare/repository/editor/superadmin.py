@@ -255,10 +255,11 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                 #### end modification ####
 
                 self.log_addition(request, new_object)
+                #### begin modification ####
                 if request.POST.has_key("_continue"):
                     return self.save_and_continue_in_popup(new_object, request)
+                #### end modification ####
                 return self.response_add(request, new_object)
-
         else:
             # Prepare the dict of initial data from the request.
             # We have to special-case M2Ms as a list of comma-separated PKs.
@@ -402,7 +403,6 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
 
                 change_message = self.construct_change_message(request, form, formsets)
                 self.log_change(request, new_object, change_message)
-
                 return self.response_change(request, new_object)
 
         else:
