@@ -114,7 +114,8 @@ class EditorRegistrationRequest(models.Model):
         """
         Return Unicode representation of Editor Groups
         """
-        return u', '.join(edt_group.name for edt_group in self.editorgroups.objects.all())
+        #pylint: disable-msg=E1101
+        return u', '.join(edt_group.name for edt_group in self.editorgroups.all())
 
 class ManagerGroup(Group):
     """
