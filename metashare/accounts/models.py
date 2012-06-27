@@ -114,7 +114,7 @@ class EditorRegistrationRequest(models.Model):
         """
         Return Unicode representation of Editor Groups
         """
-        return u', '.join(edt_group.name for edt_group in self.editorgroups.all())
+        return u', '.join(edt_group.name for edt_group in self.editorgroups.objects.all())
 
 class ManagerGroup(Group):
     """
