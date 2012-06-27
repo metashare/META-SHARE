@@ -15,4 +15,8 @@ if [ -f $LIGHTTPD_PID ]; then
     rm -f $LIGHTTPD_PID
 fi
 
+# Unregister scheduled task(s) for synchronization
+python2.7 manage.py uninstalltasks
+
+
 $PROJECT_ROOT/stop-solr.sh

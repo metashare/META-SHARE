@@ -7,7 +7,7 @@ Project: META-SHARE prototype implementation
 
 from os.path import abspath, dirname, join
 import sys
-import os
+
 parentdir = dirname(dirname(abspath(__file__)))
 # Insert our dependencies:
 sys.path.insert(0, join(parentdir, 'lib', 'python2.7', 'site-packages'))
@@ -41,9 +41,3 @@ if __name__ == "__main__":
             verify_at_startup() # may raise Exception, which we don't want to catch.
     
     execute_manager(settings)
-
-    # Register scripts for scheduled synchronization ;
-    # skip if running on Windows
-    if os.name != 'nt':
-        from django.core.management import call_command
-        call_command('installtasks')

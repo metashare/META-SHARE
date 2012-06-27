@@ -1,6 +1,5 @@
-
 from django.core.management.base import BaseCommand
-from django.contrib.auth.models import User, Permission
+from django.contrib.auth.models import User
 from optparse import make_option
 
 class Command(BaseCommand):
