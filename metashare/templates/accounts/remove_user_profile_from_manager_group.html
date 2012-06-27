@@ -1,0 +1,26 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<h3>Remove a user from the following manager group{{ selected_managergroups|pluralize }}:</h3>
+
+<div class="content_box">
+<table class='manager-group'>
+  <tr><th>Manager Group{{ selected_managergroups|pluralize }}</th><th>Members</th></tr>
+  {% for manager_group in selected_managergroups %}
+  <tr><td>{{ manager_group }}</td><td>{{ manager_group.get_members|join:", "}}</td></tr>
+  {% endfor %}
+<table>
+</div>
+
+<div class="content_box">
+<form method="post" action="{{ path }}">{% csrf_token %}
+<table>
+{{ form }}
+</table>
+
+<input type="hidden" name="action" value="remove_user_from_manager_group"/>
+<input type="submit" name="remove_user_profile_from_manager_group" value="Remove"/>
+<input type="submit" name="cancel" value="Cancel"/>
+</form>
+</div>
+{% endblock content %}
