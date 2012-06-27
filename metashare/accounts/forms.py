@@ -4,7 +4,7 @@ Project: META-SHARE prototype implementation
 """
 from django import forms
 from metashare.accounts.models import RegistrationRequest, UserProfile, \
-    EditorRegistrationRequest, EditorGroup
+    EditorRegistrationRequest
 from django.contrib.auth.models import User
 
 
