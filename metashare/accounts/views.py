@@ -28,6 +28,7 @@ from metashare.accounts.models import RegistrationRequest, ResetRequest, \
   UserProfile, EditorRegistrationRequest
 from metashare.settings import SSO_SECRET_KEY, DJANGO_URL, \
   PRIVATE_KEY_PATH, LOG_LEVEL, LOG_HANDLER, MAX_LIFETIME_FOR_SSO_TOKENS
+from metashare.accounts.models import EditorGroup
 
 # Setup logging support.
 logging.basicConfig(level=LOG_LEVEL)
@@ -225,7 +226,7 @@ def editor_registration_request(request):
     # The "virtual" MetaShareUser cannot apply for membership
     if request.user.username == 'MetaShareUser':
         return redirect('metashare.views.frontpage')
-    
+
     # Check if the edit form has been submitted.
     if request.method == "POST":
         # If so, bind the creation form to HTTP POST values.
@@ -233,10 +234,10 @@ def editor_registration_request(request):
         
         # Check if the form has validated successfully.
         if form.is_valid():
-            existing_registration = EditorRegistrationRequest.objects.filter(user=request.user)[0]
+            existing_registration = EditorRegistrationRequest.objects.filter(user=request.user)
             if existing_registration:
                 for edt_grp in form.cleaned_data['editorgroups']: 
-                    existing_registration.editorgroups.add(edt_grp)
+                    existing_registration[0].editorgroups.add(edt_grp)
             else:
                 new_object = EditorRegistrationRequest(
                 user=request.user)
@@ -263,15 +264,15 @@ def editor_registration_request(request):
                 
                 try:
                     # Send out notification email to the manager and superuser email address.
-                    send_mail('Please confirm your META-SHARE user account',
+                    send_mail('New editor membership request',
                     email, 'no-reply@meta-share.eu', emails,
                     fail_silently=False)
                 
                 except: #SMTPException:
                     # If the email could not be sent successfully, tell the user
-                    # about it and also give the confirmation URL.
+                    # about it.
                     messages.error(request,
-                      "There was an error sending out the notification email " \
+                      "There was an error sending out the request email " \
                       "for your editor registration.")
                     
                     # Redirect the user to the front page.
@@ -284,14 +285,19 @@ def editor_registration_request(request):
             # Redirect the user to the edit profile page.
             return redirect('metashare.views.edit_profile')
     
-    # Otherwise, fill UserProfileForm instance from current UserProfile.
+    # Otherwise, render a new EditorRegistrationRequestForm instance
     else:
-        # Get UserProfile instance corresponding to the current user.
-        editorrequest = EditorRegistrationRequest.objects.filter(user=request.user)
+        print EditorGroup.objects.all()
+        if EditorGroup.objects.count() == 0:
+            # If there is no editor group created yet, send an error message.
+            messages.error(request,
+              "There is no Editor Group in the database yet.")
 
-        # Fill EditorRegistrationRequest
-        form = EditorRegistrationRequestForm({'editorgroups': editorrequest.all()})
-    
+            # Redirect the user to the edit profile page.
+            return redirect('metashare.views.edit_profile')
+
+        form = EditorRegistrationRequestForm()
+
     dictionary = {'title': 'Apply for editor group membership', 'form': form}
     return render_to_response('accounts/editor_registration_request.html', dictionary,
       context_instance=RequestContext(request))
