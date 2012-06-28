@@ -13,14 +13,6 @@ from metashare.storage.models import INGESTED, INTERNAL, StorageObject, \
     PUBLISHED, compute_checksum
 from metashare.test_utils import set_index_active
 import datetime
-<<<<<<< HEAD
-import os
-import metashare.sync.multitest.mconfig
-from metashare.settings import ROOT_PATH
-=======
->>>>>>> b92e241ea540cd8a22c66ec265a5d052e500d8a4
-
-
 
 
 class MetadataSyncTest (TestCase):
