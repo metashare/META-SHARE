@@ -1,0 +1,18 @@
+#!/bin/sh
+#set -x
+#GEN_DS_HOME=$(dirname $(readlink -f "$0"))
+GEN_DS_HOME=$(dirname "$0")
+
+export PYTHONPATH=$GEN_DS_HOME:$PYTHONPATH:.
+
+if test -z "$1"; then
+    echo "\
+tool to process all inlines in an xml schema and produce a single unified schema
+file containing the complete schema.
+
+usage: gen-combixsd 'root-schema-file.xsd' > combined.xsd
+"
+    exit 1
+fi
+
+python $GEN_DS_HOME/process_includes.py "$@"

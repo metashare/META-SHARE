@@ -1,0 +1,161 @@
+/* {
+	font-family: "Trebuchet MS", Arial, Verdana, sans-serif;
+}
+pre {
+	font-family: "Courier New";
+}*/
+body {
+	/*font-size: 70%;*/
+}
+#demo-header {
+	background-color: #36332D;
+	margin: 0;
+	padding: 0 10px;
+	text-align: center;
+	height: 64px;
+}
+#demo-header h1 {
+	margin: 0;
+	color: #CCC;
+	font-size: 20px;
+}
+#demo-header p {
+	margin: 0;
+	padding-bottom: 10px;
+	color: #CCC;
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	width: 17%;
+	text-align: left;
+	font-size: .9em;
+}
+#demo-menu {
+	position: absolute;
+	left: 0;
+	width: 20%;
+	border-bottom: 1px solid silver;
+	padding-top: 23px;
+	background-color: #36332D;
+	min-height: 100%;
+}
+#demo-menu h4 {
+	background: #7F7867 url(/templates/yoo_symphony/images/submenu_level1_item.png) bottom right;
+	_background: #7F7867;
+	margin: 0 0 0 10px;
+	color: white;
+	font-weight: bold;
+	padding: 3px 0 3px 10px;
+	text-shadow: 0 -1px 1px #000000;
+}
+#demo-menu ul {
+	margin: 0 0 0 10px;
+	padding: 0;
+}
+
+#demo-menu li {
+	margin: 0;
+	border-bottom: none;
+	list-style-type: none;
+}
+#demo-menu li.active a {
+	font-weight: bold;
+	text-align: right;
+	background: white;
+	color: #333;
+	text-shadow: none;
+}
+#demo-menu a {
+	text-decoration: none;
+	background: #5D584B url(/templates/yoo_symphony/images/submenu_level1_item.png) bottom right;
+	_background: #5D584B;
+	_height: 18px;
+	_border-bottom: 1px solid #7F7867;
+	display: block;
+	padding: 2px 0 2px 20px;
+	color: white;
+	text-shadow: 0 -1px 1px #000000;
+}
+#demo-menu a:hover {
+	background-color: #7D796F;
+}
+
+#styleswitcher {
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-color: #36332D;
+	width: 100%;
+}
+#styleswitcher ul {
+	margin: 0;
+	padding: 0 0 0 20px;
+	background-color: #36332D;
+	height: 24px;
+}
+#styleswitcher li {
+	display: block;
+	float: left;
+	list-style-type: none;
+	padding: 2px 1em;
+	height: 18px;
+	border: none;
+	border-left: 1px solid #7D796F;
+	border-right: 1px solid #454440;
+	margin: 0;
+	background: #5D584B;
+}
+
+#styleswitcher li.active {
+	border-bottom: none;
+	font-weight: bold;
+	background: white;
+	height: 20px;
+}
+#styleswitcher a {
+	text-decoration: none;
+	color: white;
+	text-shadow: 0 -1px 1px #000000;
+}
+#styleswitcher li:hover {
+	
+	background-color: #7D796F;
+}
+#styleswitcher li.active a {
+	color: #333;
+	text-shadow: none;
+}
+
+
+#demo-content {
+	position: absolute;
+	width: 80%;
+	left: 20%;
+	padding: 0;
+	border: none;
+}
+.highslide-header {
+	border-bottom: 1px solid silver;
+}
+.highslide-footer {
+}
+
+.buttons {
+	text-align: center;
+	border-top: 1px solid silver;
+	margin-top: 2em;
+	padding-top: 1em;
+}
+.buttons a {
+	border-top: 1px solid #7D796F;
+	border-left: 1px solid #7D796F;
+	border-right: 1px solid #454440;
+	border-bottom: 1px solid #454440;
+	background: #5D584B;
+	padding: 3px 5px;
+	color: white;
+	text-shadow: 0 -1px 1px #000000;
+}
+.buttons a:hover {
+	background: #7D796F;
+}

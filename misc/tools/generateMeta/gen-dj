@@ -1,0 +1,5 @@
+#!/bin/sh
+
+GEN_DS_HOME=$(dirname "$0")
+
+python2.7 $GEN_DS_HOME/generateMeta.py "$@"

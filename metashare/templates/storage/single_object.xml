@@ -1,0 +1,11 @@
+<storage-object>
+  <identifier>{{storage_object.identifier}}</identifier>
+  <created>{{storage_object.created|date:"c"}}</created>
+  <modified>{{storage_object.modified|date:"c"}}</modified>
+  <checksum>{{storage_object.checksum}}</checksum>
+  <revision>{{storage_object.revision}}</revision>
+  <master-copy>False</master-copy>
+  <published>{{storage_object.published}}</published>
+  <deleted>{{storage_object.deleted}}</deleted>
+  <metadata>{{metadata|safe}}</metadata>
+</storage-object>

@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+  
+{% block content %}
+
+<style>
+ div.coverage { display: inline; border: 1px solid #777; margin-left: 1px; margin-right: 2px; -moz-border-radius: 15px; border-radius: 15px;}
+ div.required { background-color: lightgreen }
+ div.optional { background-color: yellow }
+ div.recommended { background-color: orange }
+ td.aligntop {vertical-align: top} 
+ div.fieldvalues {background: #E6E6FA; border: 1px solid #000; position:relative; vertical-align: top}
+ div.warning {background: lightyellow; border: 1px solid #000; position:relative; width: 400px}
+</style>
+<script>
+function hidediv( id ) { 
+    document.getElementById(id).style.visibility = 'hidden';
+    document.getElementById(id).style.display = 'none';
+}
+function getvalues(classname, fieldname) {
+    obj = document.getElementById('classname');
+    obj.value=classname;
+    document.getElementById('fieldname').value=fieldname;
+    
+    document.forms["getusagestats"].submit(); 
+}
+
+</script>
+
+<table><tr><td nowrap><a href="{% url metashare.views.frontpage %}stats/top/"><font size=+1>Top 10</font></a>&nbsp;&nbsp;</td>
+<td nowrap><td bgcolor=#dddddd nowrap><font size=+1>Usage statistics</a></font>&nbsp;&nbsp; </td>
+{% if user.username and myres %}
+<td nowrap>&nbsp;&nbsp;<font size=+1><a href="{% url metashare.views.frontpage %}stats/mystats/">My resources</a></font>&nbsp;&nbsp; </td>
+{% endif %}
+<td width=80%></td></tr>
+<tr><td bgcolor=#dddddd colspan=4 valign=top>
+
+{% if usage_fields != None %}
+    <table width=100% bgcolor="white" valign=top>
+    <tr><td colspan=2>
+        <form id="getusagestats" action="." method="POST">Found {{ fields_count }} field types<br>           
+        Filter by: &nbsp;
+        {% for filter,counter in usage_filter.items %}
+           &nbsp;<input type="checkbox" name=filter value="{{ filter }}" onClick="submit()"
+           {% if filter in selected_filters or selected_filters|length == 0%}
+                checked
+           {% endif %}     
+           >
+           <div class="coverage {{ filter }}">&nbsp; {{ filter }} &nbsp;</div>({{ counter }}) &nbsp;
+        {% endfor %}
+        <input type="hidden" name="class" id="classname" value="{{ selected_class }}">
+        <input type="hidden" name="field" id="fieldname" value="{{ selected_field }}">
+        
+        </form>
+    </td></tr>
+    {% if errors != None %}
+        <tr><td colspan=2>
+            <div id=warning class=warning>
+            &nbsp; <img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/error.png"> &nbsp; {{ errors }} &nbsp;
+            </div>
+        </td></tr>
+    {% endif %}
+    
+            
+    <tr class="result_table_head" style="">
+        <td class=aligntop nowrap>       
+        {% for class,fields in usage_fields.items %}
+            <dt class="accordion">{{ class }}</dt> 
+            {% for field in fields %}
+                <dd><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/bullet_arrow_right.png">&nbsp;
+                <a name="{{ class }}/{{ field.1 }}" href="javascript:getvalues('{{ class }}','{{ field.1 }}')">{{ field.2 }}</a>&nbsp;
+                {% if field.3 == 1 %}
+                      <div class="coverage required">
+                {% else %}
+                    {% if field.3 == 2 %}
+                         <div class="coverage optional">
+                    {% else %}
+                        {% if field.3 == 3 %}
+                            <div class="coverage recommended">
+                        {% else %}
+                            <div class="coverage never">
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+                {% if field.5 == 0 %}
+                    &nbsp;<i>never used</i>&nbsp;
+                {% else %}
+                     &nbsp; <b>{{ field.4 }}</b>/<b>{{ field.5 }}</b> &nbsp;
+                {% endif %}
+                </div>
+                 </dd>                  
+             {% endfor %}
+             
+        {% endfor %}
+        </td>
+        <td class=aligntop>
+        {% if result != None and result|length > 0 %}
+            <div id=fieldvalues class=fieldvalues>
+            <table border=1 width=100% valign=top>
+                <tr bgcolor=lightgray>
+                    <th>[<a href="javascript:hidediv('fieldvalues');" title="Close">X</a>] <a href="#{{ selected_class }}/{{ selected_field }}"><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/bullet_arrow_right.png">&nbsp;</a>{{ selected_class }}/{{ selected_field }} values</th>
+                    <th>LRs coverage</th>
+                    <th>Filled fields</th>
+                </tr>
+                 
+            {% for field in result %}
+                <tr>
+                <td><a href="{% url metashare.views.frontpage %}repository/search/?q={{ field.0 }}"><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/zoom.png"></a> {{ field.0 }}</td>
+                <td align=right>{{ field.1 }}</td>
+                <td align=right>{{ field.2 }}</td>
+                </tr>
+            {% endfor %}
+            </table>
+            </div>
+        {% endif %} 
+        </td>
+        
+    </tr>
+    <table>
+{% endif %} 
+
+
+</td></tr></table>
+{% endblock %}

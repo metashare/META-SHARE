@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<table><tr>
+<td nowrap><a href="{% url metashare.views.frontpage %}stats/top/"><font size=+1>Top 10</font></a>&nbsp;&nbsp;</td>
+<td nowrap>&nbsp;&nbsp;<font size=+1><a href="{% url metashare.views.frontpage %}stats/usage/">Usage statistics</a></font>&nbsp;&nbsp; </td>
+{% if user.username %}
+<td bgcolor=#dddddd align=left nowrap>&nbsp;&nbsp;<font size=+1>My resources</font>&nbsp;&nbsp; </td>
+{% endif %}
+<td width=80%></td></tr>
+<tr><td bgcolor=#dddddd colspan=4>
+
+<div class="content_box">
+<table width=100% class="result_table">
+<tr class="result_table_head">
+    <td width="5%">Id</td>
+    <td width="60%">Title</td>
+    <td width="10%">Actions</td>
+    <td width="15%">Users</td>
+    <td width="10%" nowrap>Last access</td>
+<tr>
+{% for lr in data %} 
+    <tr class="{% cycle odd,even %}">
+        <th style="text-align:right;" nowrap>{{ lr.0 }}</th>
+        <td><a href="{{ lr.1 }}">{{ lr.2 }}</a></td>
+        <td align=right nowrap>
+            {% for stat in lr.3 %}
+                <img src="{{ MEDIA_URL }}stats/img/{{ stat.action }}_icon.gif"
+                    alt="Last {{ stat.action }}: {{ stat.last }}" title="Last {{ stat.action }}: {{ stat.last }}" />
+                    <b>{{  stat.count }}</b>&nbsp;
+            {% endfor %}
+        </td>
+        <td align=right nowrap>
+            {% for stat in lr.4 %}
+                {{stat.user }}<br>
+            {% endfor %}            
+        </td>
+        <td align=right nowrap>
+            {% for stat in lr.4 %}
+                {{stat.lastaccess }}<br>
+            {% endfor %}            
+        </td>
+    <tr>
+{%endfor%}
+</table>
+</div>
+</td></tr></table>
+
+{% endblock %}

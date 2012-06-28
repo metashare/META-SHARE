@@ -1,0 +1,18 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block breadcrumbs %}<div class="breadcrumbs"><a href="../">{% trans 'Home' %}</a></div>{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block content %}
+
+<p>{% trans "Thanks for using the META-SHARE editor." %}</p>
+
+<p>Now you can:</p>
+<ul>
+<li><a href="../">{% trans 'Log in again' %}</a></li>
+
+<li><a href="../../">Proceed to the META-SHARE main site</a></li>
+</ul>
+{% endblock %}
