@@ -3,7 +3,8 @@ Project: META-SHARE prototype implementation
  Author: Christian Federmann <cfedermann@dfki.de>
 """
 from django import forms
-from metashare.accounts.models import RegistrationRequest, UserProfile
+from metashare.accounts.models import RegistrationRequest, UserProfile, \
+    EditorRegistrationRequest
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
@@ -136,3 +137,15 @@ class UserProfileForm(ModelForm):
         """
         model = UserProfile
         exclude = ('user', 'modified', 'uuid')
+
+class EditorRegistrationRequestForm(ModelForm):
+    """
+    Form used to apply to new editor groups membership.
+    """
+
+    class Meta:
+        """
+        Meta class connecting to EditorRegistrationRequest object model.
+        """
+        model = EditorRegistrationRequest
+        exclude = ('user', 'uuid', 'created')

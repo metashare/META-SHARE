@@ -22,6 +22,16 @@
   </td></tr>
 
 {{ form.as_table }}
+
+  {% if editor_registration_request %}
+  <tr><td colspan="2" style="text-align:center; height:40px;">You already applied membership for the following group{{ editor_registration_request.editor_groups|pluralize }}: {{ editor_registration_request }}.
+  </td></tr>
+  {% endif %}
+  <tr>
+    <td colspan="2" style="text-align:center; height:40px;"><a href="{% url metashare.accounts.views.editor_registration_request %}"> Apply for new membership of editor groups.</a> </td>
+  </tr>
+  
+
 <tr><th></th><td><input class="button middle_button" type="submit" value="Edit Profile" /></td></tr>
 </table>
 </form>
