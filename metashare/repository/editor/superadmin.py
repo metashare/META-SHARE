@@ -63,7 +63,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
           self.get_inline_classes(model, status=OPTIONAL))
         # Show m2m fields as horizontal filter widget unless they have a custom widget:
         self.filter_horizontal = self.list_m2m_fields_without_custom_widget(model)
-        super(SchemaModelAdmin, self).__init__(model, admin_site)    
+        super(SchemaModelAdmin, self).__init__(model, admin_site)
         # Reverse inline code:
         self.no_inlines = []
         self.exclude = self.exclude or []
@@ -98,14 +98,14 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
 
 
     def contains_inlines(self, model_class):
-        ''' Determine whether or not the editor for the given model_class will contain inlines ''' 
+        ''' Determine whether or not the editor for the given model_class will contain inlines '''
         return any(f for f in model_class.get_fields_flat() if f.endswith('_set'))
 
-    
+
     def get_fieldsets(self, request, obj=None):
         return SchemaModelLookup.get_fieldsets(self, request, obj)
 
-            
+
     def formfield_for_dbfield(self, db_field, **kwargs):
         """
         This is a crucial step in the workflow: for a given db field,
@@ -117,7 +117,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         - hiding certain fields (they are present but invisible);
         - custom widgets for subclassable items such as actorInfo;
         - custom minimalistic "related" widget for non-inlined one2one fields;
-        """        
+        """
         self.hide_hidden_fields(db_field, kwargs)
         # ForeignKey or ManyToManyFields
         if self.is_x_to_many_relation(db_field):
@@ -190,7 +190,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
     def add_view(self, request, form_url='', extra_context=None):
         """
         The 'add' admin view for this model.
-        This follows closely the base implementation from Django 1.3's 
+        This follows closely the base implementation from Django 1.3's
         django.contrib.admin.options.ModelAdmin,
         with the explicitly marked modifications.
         """
@@ -199,13 +199,13 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         opts = model._meta
 
         if not self.has_add_permission(request):
-            raise PermissionDenied        
+            raise PermissionDenied
 
         ModelForm = self.get_form(request)
         formsets = []
-        if request.method == 'POST':            
+        if request.method == 'POST':
             form = ModelForm(request.POST, request.FILES)
-            if form.is_valid():                
+            if form.is_valid():
                 new_object = self.save_form(request, form, change=False)
                 form_validated = True
             else:
@@ -255,10 +255,11 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                 #### end modification ####
 
                 self.log_addition(request, new_object)
+                #### begin modification ####
                 if request.POST.has_key("_continue"):
                     return self.save_and_continue_in_popup(new_object, request)
+                #### end modification ####
                 return self.response_add(request, new_object)
-            
         else:
             # Prepare the dict of initial data from the request.
             # We have to special-case M2Ms as a list of comma-separated PKs.
@@ -326,7 +327,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
     def change_view(self, request, object_id, extra_context=None):
         """
         The 'change' admin view for this model.
-        This follows closely the base implementation from Django 1.3's 
+        This follows closely the base implementation from Django 1.3's
         django.contrib.admin.options.ModelAdmin,
         with the explicitly marked modifications.
         """
@@ -391,7 +392,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                         parent_fk_name = getattr(formset, 'parent_fk_name', '')
                         if parent_fk_name:
                             setattr(new_object, parent_fk_name, None)
-                        
+
                 self.save_model(request, new_object, form, change=True)
                 form.save_m2m()
                 # for resource info, explicitly write its metadata XML and
@@ -402,7 +403,6 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
 
                 change_message = self.construct_change_message(request, form, formsets)
                 self.log_change(request, new_object, change_message)
-                                    
                 return self.response_change(request, new_object)
 
         else:
@@ -441,15 +441,15 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         #### end modification ####
 
         #### begin modification ####
-        url = ''        
+        url = ''
         #for reusable entities
         if(hasattr(obj, 'copy_status') and obj.copy_status != MASTER):
             url = "{0}/editor/repository/{1}/{2}".format(obj.source_url.rstrip('/'), (obj.__class__.__name__).lower(), object_id)
             return render_to_response('admin/repository/redirect.html',
                    { 'object': obj, 'redirection_url': url },
-                   )            
+                   )
         #for resources and resources' parts
-        else:    
+        else:
             root_resources = get_root_resources(obj)
             for res in root_resources:
                 if  not res.storage_object.master_copy:
@@ -457,7 +457,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                     return render_to_response('admin/repository/redirect.html',
                            { 'resource': res, 'redirection_url': url },
                            )
-        #### end modification ####        
+        #### end modification ####
 
         context = {
             'title': _('Change %s') % force_unicode(opts.verbose_name),
@@ -481,7 +481,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
     def delete_view(self, request, object_id, extra_context=None):
         """
         The 'delete' admin view for this model.
-        This follows closely the base implementation from Django 1.3's 
+        This follows closely the base implementation from Django 1.3's
         django.contrib.admin.options.ModelAdmin,
         with the explicitly marked modifications.
         """
@@ -549,7 +549,7 @@ class OrderedAdminForm(helpers.AdminForm):
     def __init__(self, form, fieldsets, prepopulated_fields, readonly_fields=None, model_admin=None, inlines=None):
         self.inlines = inlines
         super(OrderedAdminForm, self).__init__(form, fieldsets, prepopulated_fields, readonly_fields, model_admin)
-        
+
     def __iter__(self):
         for name, options in self.fieldsets:
             yield OrderedFieldset(self.form, name,
@@ -557,6 +557,7 @@ class OrderedAdminForm(helpers.AdminForm):
                 model_admin=self.model_admin, inlines=self.inlines,
                 **options
             )
+
 
 class OrderedFieldset(helpers.Fieldset):
     def __init__(self, form, name=None, readonly_fields=(), fields=(), classes=(),
@@ -568,7 +569,7 @@ class OrderedFieldset(helpers.Fieldset):
                     # an inline is in the field list, but the list of inlines is empty
                     pass
         super(OrderedFieldset, self).__init__(form, name, readonly_fields, fields, classes, description, model_admin)
-        
+
     def __iter__(self):
         for field in self.fields:
             if not is_inline(field):
@@ -591,6 +592,7 @@ class OrderedFieldset(helpers.Fieldset):
                     else:
                         raise InlineError('Incorrect inline: no opts.parent_fk_name or formset.prefix found')
 
+
 class OrderedElement():
     def __init__(self, fieldline=None, inline=None, help_link=None):
         if fieldline:
@@ -601,8 +603,8 @@ class OrderedElement():
             self.is_field = False
             self.inline = inline
             self.help_link = help_link
-    
-            
+
+
 class InlineError(Exception):
     def __init__(self, msg=None):
         super(InlineError, self).__init__()
