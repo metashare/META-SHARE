@@ -719,6 +719,9 @@ class EditorTest(SeleniumTestCase):
         
         
     def fill_audio_size(self, driver, ss_path, parent_id):
+        """
+        fills the text size with required information
+        """
         driver.switch_to_window("id_audioSizeInfo")
 
         driver.find_element_by_id("id_sizeinfotype_model_set-0-size").send_keys("100")

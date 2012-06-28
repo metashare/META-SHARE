@@ -1,6 +1,7 @@
 {% extends "admin/base_site.html" %}
 {% load i18n admin_modify adminmedia %}
 {% load url from future %}
+{% load submit_row_resource_popup %}
 
 {% block extrahead %}{{ block.super }}
 {% url 'admin:jsi18n' as jsi18nurl %}
@@ -91,8 +92,8 @@
 
 {% block after_related_objects %}{% endblock %}
 
-{% submit_row %}
-
+{% submit_row_resource_popup %}    
+    
 {% if adminform and add %}
    <script type="text/javascript">document.getElementById("{{ adminform.first_field.id_for_label }}").focus();</script>
 {% endif %}
