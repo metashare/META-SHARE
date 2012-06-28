@@ -93,6 +93,28 @@ class EditorGroup(Group):
                 .values_list('name', flat=True))
 
 
+class EditorRegistrationRequest(models.Model):
+    """
+    Contains user data related to a user editor registration request.
+    """
+    user = models.OneToOneField(User)
+    editorgroups = models.ManyToManyField(EditorGroup)
+    
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        """
+        Return Unicode representation for this instance.
+        """
+        return u'<EditorRegistrationRequest "{0}">'.format(self.user)
+
+    def editor_groups(self):
+        """
+        Return Unicode representation of Editor Groups
+        """
+        #pylint: disable-msg=E1101
+        return u', '.join(edt_group.name for edt_group in self.editorgroups.all())
+
 class ManagerGroup(Group):
     """
     A specialized `Group` which gives its members permissions to manage language

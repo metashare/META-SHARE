@@ -13,7 +13,7 @@ from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext as _
 
 from metashare.accounts.models import RegistrationRequest, ResetRequest, \
-  UserProfile, EditorGroup, ManagerGroup
+  UserProfile, EditorGroup, EditorRegistrationRequest, ManagerGroup
 
 class RegistrationRequestAdmin(admin.ModelAdmin):
     """
@@ -207,6 +207,29 @@ class EditorGroupAdmin(admin.ModelAdmin):
     remove_user_from_editor_group.short_description = _("Remove users from selected editor groups")
 
 
+class EditorRegistrationRequestAdmin(admin.ModelAdmin):
+    """
+    Administration interface for user editor registration requests.
+    """
+    list_display = ('user', 'editor_groups', 'created')
+    actions = ('accept_request', )
+
+    def accept_request(self, request, queryset):
+        """
+        The action to accept editor registration requests.
+        """
+        if request.user.is_superuser:
+            for req in queryset:
+                for obj in req.editorgroups.all():
+                    req.user.groups.add(obj)
+                EditorRegistrationRequest.objects.filter(uuid=req.uuid).delete()
+            self.message_user(request, 'Successfully added user to editor groups.')
+            return HttpResponseRedirect(request.get_full_path())
+        self.message_user(request, 'You must be super user to accept the requests.')
+        return HttpResponseRedirect(request.get_full_path())
+
+    accept_request.short_description = "Accept selected editor registration requests"
+
 class ManagerGroupAdmin(admin.ModelAdmin):
     """
     Administration interface for `ManagerGroup`s.
@@ -331,4 +354,5 @@ admin.site.register(RegistrationRequest, RegistrationRequestAdmin)
 admin.site.register(ResetRequest, ResetRequestAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(EditorGroup, EditorGroupAdmin)
+admin.site.register(EditorRegistrationRequest, EditorRegistrationRequestAdmin)
 admin.site.register(ManagerGroup, ManagerGroupAdmin)
