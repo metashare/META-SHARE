@@ -657,7 +657,7 @@ def _check_sso_token(uuid, timestamp, token):
         return False
     
     # Re-compute the SSO token wrt. the given uuid and timestamp.
-    _, _, recomputed_token = _compute_sso_token(uuid, timestamp)
+    dummy1, dummy2, recomputed_token = _compute_sso_token(uuid, timestamp)
     
     # Check if token and recomputed_token are identical.
     return token == recomputed_token
