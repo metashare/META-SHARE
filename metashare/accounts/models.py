@@ -99,11 +99,9 @@ class EditorRegistrationRequest(models.Model):
     """
     user = models.OneToOneField(User)
     editorgroups = models.ManyToManyField(EditorGroup)
-
-    uuid = models.CharField(max_length=32, verbose_name="UUID",
-      default=_create_uuid)
-    created = models.DateTimeField(auto_now_add=True)
     
+    created = models.DateTimeField(auto_now_add=True)
+
     def __unicode__(self):
         """
         Return Unicode representation for this instance.
