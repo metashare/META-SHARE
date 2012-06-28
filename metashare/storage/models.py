@@ -130,7 +130,7 @@ class StorageObject(models.Model):
       "storage object instance.")
     
     digest_checksum = models.CharField(blank=True, null=True, max_length=32,
-      help_text="(Read-only) MD5 checksum of the digest zip file containing the" \
+      help_text="(Read-only) MD5 checksum of the digest zip file containing the " \
       "global serialized storage object and the metadata XML for this " \
       "storage object instance.")
       
@@ -469,7 +469,7 @@ def restore_from_folder(storage_id, copy_status=MASTER, storage_digest=None):
             LOGGER.warn('no copy status provided, using default copy status MASTER')
             _storage_object.copy_status = MASTER
     
-    # If object is synchronised, retain the storage digest
+    # If object is synchronized, retain the storage digest
     if storage_digest:
         _storage_object.digest_checksum = storage_digest
 
