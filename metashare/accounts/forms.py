@@ -142,10 +142,9 @@ class EditorRegistrationRequestForm(ModelForm):
     """
     Form used to apply to new editor groups membership.
     """
-
     class Meta:
         """
         Meta class connecting to EditorRegistrationRequest object model.
         """
         model = EditorRegistrationRequest
-        exclude = ('user', 'uuid', 'created')
+        exclude = ('user', 'created')

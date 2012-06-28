@@ -95,25 +95,19 @@ class EditorGroup(Group):
 
 class EditorRegistrationRequest(models.Model):
     """
-    Contains user data related to a user editor registration request.
+    Contains user data related to a user application for being an editor.
     """
-    user = models.OneToOneField(User)
-    editorgroups = models.ManyToManyField(EditorGroup)
-    
+    user = models.ForeignKey(User)
+    editor_group = models.OneToOneField(EditorGroup)
     created = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
         """
         Return Unicode representation for this instance.
         """
-        return u'<EditorRegistrationRequest "{0}">'.format(self.user)
+        return u'<EditorRegistrationRequest of "{0}" for "{1}">'.format(
+                self.user, self.editor_group)
 
-    def editor_groups(self):
-        """
-        Return Unicode representation of Editor Groups
-        """
-        #pylint: disable-msg=E1101
-        return u', '.join(edt_group.name for edt_group in self.editorgroups.all())
 
 class ManagerGroup(Group):
     """

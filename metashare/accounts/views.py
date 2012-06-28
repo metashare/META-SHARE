@@ -22,6 +22,8 @@ from django.http import HttpResponse, HttpResponseBadRequest, \
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template.loader import render_to_string
 from django.template import RequestContext
+from django.utils.translation import ugettext as _
+
 from metashare.accounts.forms import RegistrationRequestForm, \
   ResetRequestForm, UserProfileForm, EditorRegistrationRequestForm
 from metashare.accounts.models import RegistrationRequest, ResetRequest, \
@@ -210,11 +212,9 @@ def edit_profile(request):
           'affiliation': profile.affiliation, 'position': profile.position,
           'homepage': profile.homepage})
 
-    editor_groups_applied = u', '.join(edt_reg.editor_groups() for edt_reg in EditorRegistrationRequest.objects.filter(user=profile.user))
-
     dictionary = {'title': 'Edit profile information', 'form': form, 
-                  'editor_registration_request': editor_groups_applied
-                 }
+        'groups_applied_for': [edt_reg.editor_group.name for edt_reg
+                in EditorRegistrationRequest.objects.filter(user=profile.user)]}
     return render_to_response('accounts/edit_profile.html', dictionary,
       context_instance=RequestContext(request))
 
@@ -234,73 +234,62 @@ def editor_registration_request(request):
         
         # Check if the form has validated successfully.
         if form.is_valid():
-            existing_registration = EditorRegistrationRequest.objects.filter(user=request.user)
-            if existing_registration:
-                for edt_grp in form.cleaned_data['editorgroups']: 
-                    existing_registration[0].editorgroups.add(edt_grp)
+            edt_grp = form.cleaned_data['editor_group']
+            if EditorRegistrationRequest.objects.filter(
+                    user=request.user, editor_group=edt_grp).count() != 0:
+                messages.success(request, _('An older application of yours for '
+                    'editor group "%s" is still pending.') % (edt_grp.name,))
             else:
-                new_object = EditorRegistrationRequest(
-                user=request.user)
-                new_object.save()
-                new_object.editorgroups = form.cleaned_data['editorgroups']
+                new_object = EditorRegistrationRequest(user=request.user,
+                    editor_group=edt_grp)
                 new_object.save()
 
-            # Send notification email for each editor group applied
-            for edt_grp in form.cleaned_data['editorgroups']:
+                # send a notification email to the relevant managers/superusers
                 emails = []
-                # find out the group managers email
-                for managers in edt_grp.get_managers():
-                    emails.append(managers.email)
-                # find out the superuser email
+                # find out the relevant group managers' emails
+                for manager in edt_grp.get_managers():
+                    emails.append(manager.email)
+                # find out the superusers' emails
                 for superuser in User.objects.filter(is_superuser=True):
                     emails.append(superuser.email)
-
                 # Render notification email template with correct values.
                 data = {'editor_group': edt_grp.name,
                   'shortname': request.user,
                   'confirmation_url': '{0}/admin/accounts/editorregistrationrequest/'.format(
                     DJANGO_URL)}
-                email = render_to_string('accounts/notification.email', data)
-                
                 try:
-                    # Send out notification email to the manager and superuser email address.
+                    # send out notification email to the managers and superusers
                     send_mail('New editor membership request',
-                    email, 'no-reply@meta-share.eu', emails,
-                    fail_silently=False)
-                
+                        render_to_string('accounts/notification.email', data),
+                        'no-reply@meta-share.eu', emails, fail_silently=False)
                 except: #SMTPException:
                     # If the email could not be sent successfully, tell the user
                     # about it.
                     messages.error(request,
                       "There was an error sending out the request email " \
                       "for your editor registration.")
-                    
-                    # Redirect the user to the front page.
-                    return redirect('metashare.views.edit_profile')
+                else:
+                    messages.success(request, _('You have successfully ' \
+                        'applied for editor group "%s".') % (edt_grp.name,))
 
-            # Add a message to the user after applying.
-            messages.success(request,
-              "You have applied to new editor groups.")
-            
             # Redirect the user to the edit profile page.
             return redirect('metashare.views.edit_profile')
-    
+
     # Otherwise, render a new EditorRegistrationRequestForm instance
     else:
-        print EditorGroup.objects.all()
         if EditorGroup.objects.count() == 0:
             # If there is no editor group created yet, send an error message.
-            messages.error(request,
-              "There is no Editor Group in the database yet.")
-
+            messages.error(request, _('There are no editor groups in the '
+                'database, yet, for which you could apply. Please ask the '
+                'system administrator to create one.'))
             # Redirect the user to the edit profile page.
             return redirect('metashare.views.edit_profile')
-
         form = EditorRegistrationRequestForm()
 
     dictionary = {'title': 'Apply for editor group membership', 'form': form}
-    return render_to_response('accounts/editor_registration_request.html', dictionary,
-      context_instance=RequestContext(request))
+    return render_to_response('accounts/editor_registration_request.html',
+                        dictionary, context_instance=RequestContext(request))
+
 
 def update(request):
     """

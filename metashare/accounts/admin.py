@@ -3,7 +3,7 @@ Project: META-SHARE prototype implementation
  Author: Christian Federmann <cfedermann@dfki.de>
 """
 from django import forms
-from django.contrib import admin
+from django.contrib import admin, messages
 from django.contrib.admin.options import csrf_protect_m
 from django.contrib.auth.models import Permission, Group, User
 from django.db import transaction
@@ -211,24 +211,48 @@ class EditorRegistrationRequestAdmin(admin.ModelAdmin):
     """
     Administration interface for user editor registration requests.
     """
-    list_display = ('user', 'editor_groups', 'created')
+    list_display = ('user', 'editor_group', 'created')
     actions = ('accept_request', )
 
     def accept_request(self, request, queryset):
         """
         The action to accept editor registration requests.
         """
-        if request.user.is_superuser:
-            for req in queryset:
-                for obj in req.editorgroups.all():
-                    req.user.groups.add(obj)
-                EditorRegistrationRequest.objects.filter(uuid=req.uuid).delete()
-            self.message_user(request, 'Successfully added user to editor groups.')
+        if not request.user.is_superuser and \
+                not request.user.get_profile().has_manager_permission():
+            messages.error(request,
+                _('You must be superuser or group manager to accept requests.'))
             return HttpResponseRedirect(request.get_full_path())
-        self.message_user(request, 'You must be super user to accept the requests.')
-        return HttpResponseRedirect(request.get_full_path())
+        if queryset.count() == 0:
+            return HttpResponseRedirect(request.get_full_path())
 
-    accept_request.short_description = "Accept selected editor registration requests"
+        _total_groups = 0
+        _accepted_groups = 0
+        for req in queryset:
+            _total_groups += 1
+            if request.user.get_profile().has_manager_permission(
+                    req.editor_group) or request.user.is_superuser:
+                req.user.groups.add(req.editor_group)
+                req.delete()
+                _accepted_groups += 1
+                # if the applying user is not a staff user, yet, then we have
+                # to make sure that she becomes a staff user for being an editor
+                if not req.user.is_staff:
+                    req.user.is_staff = True
+                    req.user.save()
+        if _total_groups != _accepted_groups:
+            messages.warning(request, _('Successfully accepted %(accepted)d of '
+                '%(total)d requests. You have no permissions to accept the '
+                'remaining requests.') % {'accepted': _accepted_groups,
+                                          'total': _total_groups})
+        else:
+            messages.success(request,
+                             _('Successfully accepted all requests.'))
+            return HttpResponseRedirect(request.get_full_path())
+
+    accept_request.short_description = \
+        _("Accept selected editor registration requests")
+
 
 class ManagerGroupAdmin(admin.ModelAdmin):
     """
@@ -264,16 +288,28 @@ class ManagerGroupAdmin(admin.ModelAdmin):
         """
         # when showing a certain add view for the first time, prepopulate the
         # permissions field: we suggest that the new group has all required
-        # model permissions for deleting language resources
+        # model permissions for deleting language resources and for changing and
+        # deleting editor group application requests
         if request.method == 'GET':
             # request `QueryDict`s are immutable; create a copy before upadating
             request.GET = request.GET.copy()
+            _perms_ids = []
+            # add lanaguage resource delete permission
             from metashare.repository.models import resourceInfoType_model
             opts = resourceInfoType_model._meta
-            # pylint: disable-msg=E1101
-            request.GET.update({'permissions': str(Permission.objects.filter(
+            _perms_ids.append(Permission.objects.filter(
                     content_type__app_label=opts.app_label,
-                    codename=opts.get_delete_permission())[0].pk)})
+                    codename=opts.get_delete_permission())[0].pk)
+            # add editor group application request change/delete permission
+            opts = EditorRegistrationRequest._meta
+            _perms_ids.append(Permission.objects.filter(
+                    content_type__app_label=opts.app_label,
+                    codename=opts.get_change_permission())[0].pk)
+            _perms_ids.append(Permission.objects.filter(
+                    content_type__app_label=opts.app_label,
+                    codename=opts.get_delete_permission())[0].pk)
+            request.GET.update({'permissions':
+                    ','.join(str(_perm_id) for _perm_id in _perms_ids)})
         return super(ManagerGroupAdmin, self).add_view(request,
                                 form_url=form_url, extra_context=extra_context)
 
