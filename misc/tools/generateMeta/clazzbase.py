@@ -150,6 +150,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.db import models
+from django.template.defaultfilters import slugify
 
 from metashare.accounts.models import EditorGroup
 # pylint: disable-msg=W0611
@@ -160,7 +161,7 @@ from {0}supermodel import SchemaModel, SubclassableModel, \\
 from {0}editor.widgets import MultiFieldWidget
 from {0}fields import MultiTextField, MetaBooleanField, \\
   MultiSelectField, DictField, best_lang_value_retriever
-from {0}validators import validate_lang_code_keys
+from {0}validators import validate_lang_code_keys, validate_dict_values
 
 from metashare.storage.models import StorageObject, MASTER, COPY_CHOICES
 
@@ -335,10 +336,18 @@ TOP_LEVEL_TYPE_EXTRA_CODE_TEMPLATE = '''
         super(resourceInfoType_model, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        from django.template.defaultfilters import slugify
-        resourceName = slugify(u'{0}'.format(self))
+        return '/{0}{1}'.format(DJANGO_BASE, self.get_relative_url())
         
-        return '/{0}repository/browse/{1}/{2}/'.format(DJANGO_BASE, resourceName, self.storage_object.identifier)
+    def get_relative_url(self):
+        """
+        Returns part of the complete URL which resembles the single resource
+        view for this resource.
+        
+        The returned part prepended with a '/' can be appended to `DJANGO_URL`
+        in order to get the complete URL.
+        """
+        return 'repository/browse/{}/{}/'.format(slugify(self.__unicode__()),
+                                                 self.storage_object.identifier)
 
     def publication_status(self):
         """
@@ -665,7 +674,7 @@ class Clazz(object):
                     pass
                 elif data_type in Boolean_type_table:
                     pass
-                elif data_type in String_type_table or data_type in Integer_type_table:
+                elif data_type in String_type_table:
                     if isinstance(member.get_data_type_chain(), list) and \
                       member.get_values():
                         _choice_name = class_name.upper()
@@ -859,7 +868,7 @@ class Clazz(object):
             options += 'blank=True'
 
         self.wrtmodels(
-          '    %s = DictField(validators=[validate_lang_code_keys],\n'
+          '    %s = DictField(validators=[validate_lang_code_keys, validate_dict_values],\n'
           '      default_retriever=best_lang_value_retriever, %s)\n' % (
             name, options, ))
 
