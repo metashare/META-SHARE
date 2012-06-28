@@ -178,16 +178,23 @@ class UserProfile(models.Model):
 #             delete() calls.  For this, we have to create receivers listening
 #             to the post_delete signal.  Again, this has to be tested!
 
-    def has_manager_permission(self, editor_group):
+    def has_manager_permission(self, editor_group=None):
         """
         Return whether the user profile has permission to manage the given
         editor group.
+        
+        If no editor group is given, then the method returns whether the user
+        profile has manager permission for any editor group.
         """
         if self.user.is_superuser:
             return True
-        return any(editor_group.name == mgr_group.managed_group.name
-                   for mgr_group in ManagerGroup.objects.filter(
-                      name__in=self.user.groups.values_list('name', flat=True)))
+        mgr_groups = ManagerGroup.objects.filter(
+            name__in=self.user.groups.values_list('name', flat=True))
+        if editor_group:
+            return any(editor_group.name == mgr_group.managed_group.name
+                       for mgr_group in mgr_groups)
+        else:
+            return mgr_groups.count() != 0
 
 
 @receiver(post_save, sender=User)
