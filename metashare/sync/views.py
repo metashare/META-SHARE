@@ -25,7 +25,7 @@ def inventory(request):
             # If we cannot parse the date string, act as if none was provided
             pass
     for obj in objects_to_sync:
-        json_inventory.append({'id':str(obj.identifier), 'digest':str(obj.digest_checksum)})
+        json_inventory.append({'id':str(obj.identifier), 'digest':str(obj.get_digest_checksum)})
     with ZipFile(response, 'w') as outzip:
         outzip.writestr('inventory.json', json.dumps(json_inventory))
     return response
