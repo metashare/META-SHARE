@@ -101,7 +101,7 @@ class EditorGroupAdmin(admin.ModelAdmin):
             for mgr_group in ManagerGroup.objects.filter(managed_group=obj)
             for usr in User.objects.filter(groups__name=mgr_group.name))
 
-    _managing_group_display.short_description = _('Managing groups')
+    _managers_display.short_description = _('Managers')
 
     class UserProfileinEditorGroupForm(forms.Form):
         _selected_action = forms.CharField(widget=forms.MultipleHiddenInput)
