@@ -288,32 +288,3 @@ class MetadataSyncTest (TestCase):
         response = Client().get(self.INVENTORY_URL+"?from=2013-01-01")
         inventory = self.extract_inventory(response)
         self.assertEquals(0, len(inventory))
-<<<<<<< HEAD
-=======
-
-class SyncScriptTest(TestCase):
-    def test_create_one(self):
-        # setup second running server (start solr and django server)
-        # import one resource on remote server
-        # synchronize the local server
-        # Check the results of the synchronization script
-        pass
-
-    def test_update_one(self):
-        # setup second running server (start solr and django server)
-        # import one resource on remote server
-        # synchronize the local server
-        # check the results of the synchronization script
-        # change the remote resource (a small change)
-        # synchronize the local server
-        # check the results of the synchronization script
-        pass
-        
-        
-    def test_no_resources_to_update(self):
-        # 
-        pass
-        
-    def test_update_one_create_one(self):
-        pass 
->>>>>>> b92e241ea540cd8a22c66ec265a5d052e500d8a4
