@@ -7,7 +7,7 @@ function dismissEditRelatedPopup(win, objId, newRepr) {
 	newRepr = html_unescape(newRepr);
 	newRepr = newRepr.replace(/</g, '&lt;');
 	newRepr = newRepr.replace(/>/g, '&gt;');
-	var name = windowname_to_id(win.name).replace(/^edit_/, '');;
+	var name = windowname_to_id(win.name).replace(/^edit_/, '');
 	var elem = document.getElementById(name);
 	if (elem && elem.nodeName == 'SELECT') {
 		var opts = elem.options,
@@ -18,13 +18,51 @@ function dismissEditRelatedPopup(win, objId, newRepr) {
 			}
 		}
 	}
-
-	if( $("a#edit_"+elem.id).text().indexOf("General Info") !=-1 || $("a#edit_"+elem.id).text().indexOf("Tool") !=-1){	 
+	if( $("a#edit_"+elem.id).text().indexOf("General Info") !=-1 || $("a#edit_"+elem.id).text().indexOf("Tool") !=-1){
 		$("input.edit_"+elem.id).attr('value', objId);
 		$("input.edit_"+elem.id).trigger('change');		
 	}
 	win.close();
 };
+
+function saveAndContinuePopup(win, newId, newRepr, url) {
+    newId = html_unescape(newId);
+    newRepr = html_unescape(newRepr);
+    var name = windowname_to_id(win.name);
+    var elem = document.getElementById(name);
+    if (elem) {
+        if (elem.nodeName == 'SELECT') {
+            var o = new Option(newRepr, newId);
+            elem.options[elem.options.length] = o;
+            o.selected = true;
+        } else if (elem.nodeName == 'INPUT') {
+            if (elem.className.indexOf('vManyToManyRawIdAdminField') != -1 && elem.value) {
+                elem.value += ',' + newId;
+            } else {
+                elem.value = newId;
+            }
+        }
+    } else {
+        var toId = name + "_to";
+        elem = document.getElementById(toId);
+        var o = new Option(newRepr, newId);
+        SelectBox.add_to_cache(toId, o);
+        SelectBox.redisplay(toId);
+    }
+	win.location.replace(url);
+};
+
+if (!saveAndContinuePopup.original) {
+	var originalsaveAndContinuePopup = saveAndContinuePopup;
+	saveAndContinuePopup = function(win, newId, newRepr, url) {
+		originalsaveAndContinuePopup(win, newId, newRepr, url);
+		newId = html_unescape(newId);
+		newRepr = html_unescape(newRepr);
+		var id = windowname_to_id(win.name);
+		$('#' + id).trigger('change');
+	};
+	saveAndContinuePopup.original = originalsaveAndContinuePopup;
+}
 
 if (!dismissAddAnotherPopup.original) {
 	var originalDismissAddAnotherPopup = dismissAddAnotherPopup;
@@ -45,8 +83,6 @@ function dismissDeleteRelatedPopup(win) {
 	elem.value = '';
 	$('#' + name).trigger('change');
 }
-
-
 
 django.jQuery(document).ready(function() {
   

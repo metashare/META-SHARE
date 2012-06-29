@@ -6,6 +6,7 @@ from django.db.models.fields import related
 from django.forms.widgets import SelectMultiple, HiddenInput
 from django.http import HttpResponse
 from django.utils.html import escape, escapejs
+from django.utils.translation import ugettext as _
 
 from metashare.repository.editor.related_widget import RelatedFieldWidgetWrapper
 from metashare.repository.editor.widgets import SubclassableRelatedFieldWidgetWrapper, \
@@ -159,6 +160,20 @@ class RelatedAdminMixin(object):
                 can_change_related, 
                 can_delete_related)
             formfield.widget = widget
+            
+    def save_and_continue_in_popup(self, obj, request):
+        '''
+        For related popups, send the javascript that triggers
+        (a) reloading the popup, and
+        (b) updating the parent field with the ID of the object we just edited.
+        '''
+        pk_value = obj._get_pk_val()
+        msg = _('The %(name)s "%(obj)s" was added successfully.') % {'name': obj._meta.verbose_name, 'obj': obj} 
+        self.message_user(request, msg + ' ' + _("You may edit it again below.")) 
+        post_url_continue = '../%s/?_popup=1'
+        return HttpResponse('<script type="text/javascript">opener.saveAndContinuePopup(window, "%s", "%s", "%s");</script>' % \
+            # escape() calls force_unicode.
+            (escape(pk_value), escapejs(obj), escapejs(post_url_continue % pk_value)))
 
     def edit_response_close_popup_magic(self, obj):
         '''
@@ -182,7 +197,6 @@ class RelatedAdminMixin(object):
         return HttpResponse('<script type="text/javascript">%s.dismissEditPopup(window, "%s", "%s");</script>' % \
             # escape() calls force_unicode.
             (caller, escape(pk_value), escapejs(obj)))
-
 
 
     def list_m2m_fields_without_custom_widget(self, model):

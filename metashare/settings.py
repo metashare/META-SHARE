@@ -3,7 +3,6 @@ Project: META-SHARE prototype implementation
 Author: Christian Federmann <cfedermann@dfki.de>
 """
 from os.path import abspath, dirname, join
-import subprocess
 ROOT_PATH = abspath(dirname(__file__))
 
 import os
@@ -167,7 +166,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
 
     'haystack',
-
+        
     'metashare.accounts',
     'metashare.storage',
     'metashare.sync',
@@ -176,6 +175,10 @@ INSTALLED_APPS = (
     'metashare.repository',
     'metashare.AdminTest',
 )
+
+# add Kronos to installed apps if not running on Windows
+if os.name != 'nt':
+    INSTALLED_APPS += ('kronos',)
 
 # Continuous Integration support using django_jenkins: only add application
 # if django_jenkins module can be imported properly.

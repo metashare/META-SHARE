@@ -34,6 +34,21 @@
             <li><a href="{% url editor:repository_documentinfotype_model_changelist %}">Document</a></li>
           </ul>
         </li>
+        <li title="Remove, save or publish on the archive"><a href="{% url editor:repository_resourceinfotype_model_myresources %}">My Resources</a></li>
+        {% if user.is_superuser or user.get_profile.has_manager_permission %}
+        <li title="Manage groups and users"><a href="#">Manage</a>
+          <ul>
+          {% if user.is_superuser %}
+            <li><a href="{% url admin:auth_user_changelist %}">Users</a></li>
+            <li><a href="{% url editor:accounts_editorgroup_changelist %}">Editor groups</a></li>
+            <li><a href="{% url editor:accounts_managergroup_changelist %}">Manager groups</a></li>
+          {% endif %}
+          {% if user.is_superuser or user.get_profile.has_manager_permission %}
+            <li><a href="{% url admin:accounts_editorregistrationrequest_changelist %}">Editor group applications</a></li>
+          {% endif %}
+          </ul>
+        </li>
+        {% endif %}
         <li title="Mailing lists, wiki, and more"><a href="http://metashare.ilsp.gr/forum">Community</a></li>
         {# <li title="Workflow, Schema specifications"><a href="{% url editor:documentation %}">Documentation</a></li> #}
         {# <li><a href="{% url editor:about %}">About</a></li> #}

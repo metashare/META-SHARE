@@ -2,8 +2,10 @@ from django.http import HttpResponse
 import json
 from zipfile import ZipFile
 from metashare import settings
+from django.db.models import Q
 from django.shortcuts import get_object_or_404
-from metashare.storage.models import StorageObject, MASTER, INTERNAL
+from metashare.storage.models import StorageObject, MASTER, PROXY, INTERNAL
+import dateutil.parser
 
 def inventory(request):
     if settings.SYNC_NEEDS_AUTHENTICATION and not request.user.has_perm('storage.can_sync'):
@@ -12,9 +14,18 @@ def inventory(request):
     response['Metashare-Version'] = settings.METASHARE_VERSION
     response['Content-Disposition'] = 'attachment; filename="inventory.zip"'
     json_inventory = []
-    objects_to_sync = StorageObject.objects.filter(copy_status=MASTER).exclude(publication_status=INTERNAL)
+    objects_to_sync = StorageObject.objects \
+        .filter(Q(copy_status=MASTER) | Q(copy_status=PROXY)) \
+        .exclude(publication_status=INTERNAL)
+    if 'from' in request.GET:
+        try:
+            fromdate = dateutil.parser.parse(request.GET['from'])
+            objects_to_sync = objects_to_sync.filter(digest_modified__gte=fromdate)
+        except ValueError:
+            # If we cannot parse the date string, act as if none was provided
+            pass
     for obj in objects_to_sync:
-        json_inventory.append({'id':str(obj.identifier), 'digest':str(obj.digest_checksum)})
+        json_inventory.append({'id':str(obj.identifier), 'digest':str(obj.get_digest_checksum)})
     with ZipFile(response, 'w') as outzip:
         outzip.writestr('inventory.json', json.dumps(json_inventory))
     return response

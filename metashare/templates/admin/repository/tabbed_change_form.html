@@ -1,6 +1,7 @@
 {% extends "admin/base_site.html" %}
 {% load i18n admin_modify adminmedia %}
 {% load url from future %}
+{% load submit_row_resource_popup %}
 
 {% block extrahead %}{{ block.super }}
 {% url 'admin:jsi18n' as jsi18nurl %}
@@ -15,54 +16,32 @@
 
 {% block bodyclass %}{{ opts.app_label }}-{{ opts.object_name.lower }} change-form{% endblock %}
 
-{% block breadcrumbs %}{% if not is_popup %}
-<div class="breadcrumbs">
-     <a href="../../../">{% trans "Home" %}</a> &rsaquo;
-     <a href="../../">{{ app_label|capfirst|escape }}</a> &rsaquo;
-     {% if has_change_permission %}<a href="../">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %} &rsaquo;
-     {% if add %}{% trans "Add" %} {{ opts.verbose_name }}{% else %}{{ original|truncatewords:"18" }}{% endif %}
-</div>
-{% endif %}{% endblock %}
-
-
 {% block content %}<div id="content-main">
-{% block object-tools %}
-{% if change %}{% if not is_popup %}
- <ul class="object-tools">
-   {% block object-tools-items %}
-   <li><a href="upload-data/" class="uploadresourcelink">{% trans "Upload resource"%}</a></li>
-   <li><a href="history/" class="historylink">{% trans "History" %}</a></li>
-   {% if has_absolute_url %}<li><a href="../../../r/{{ content_type_id }}/{{ object_id }}/" class="viewsitelink">{% trans "View on site" %}</a></li>{% endif%}
-   {% endblock %}
- </ul>
-{% endif %}{% endif %}
-{% endblock %}
 
 <script>
-			$(document).ready(function(){			   
-			    $(".accordion h1").click(function() {
-					$(this).next().slideToggle();
-					$(".accordion h1").not(this).next().hide("clip");
-					return false;
-				});
-				$(".fields li").click(function() {
-					$(".fields li").removeClass("active");
-					$(this).addClass("active");
-					$(".tab_content").hide();
-					var selected_tab = $(this).find("a").attr("href");
-					$(selected_tab).fadeIn();										
-					return false;
-          		});
-          		
-			});			
-		</script>		
+	$(document).ready(function(){			   
+	    $(".accordion h1").click(function() {
+			$(this).next().slideToggle();
+			$(".accordion h1").not(this).next().hide("clip");
+			return false;
+		});
+		$(".fields li").click(function() {
+			$(".fields li").removeClass("active");
+			$(this).addClass("active");
+			$(".tab_content").hide();
+			var selected_tab = $(this).find("a").attr("href");
+			$(selected_tab).fadeIn();										
+			return false;
+  		});
+  		
+	});			
+</script>		
 
 <form {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post" id="{{ opts.module_name }}_form">{% csrf_token %}{% block form_top %}{% endblock %}
 <div>
 {% if is_popup %}<input type="hidden" name="_popup" value="1" />{% endif %}
 {% if save_on_top %}{% submit_row %}{% endif %}
 {% if errors %}
-
     <p class="errornote">
     {% blocktrans count errors|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
     </p>
@@ -70,7 +49,7 @@
 {% endif %}
 
 <div>
-		<div id="tabs_container">	
+	<div id="tabs_container">	
 		<div id="firstlevel" class="accordion">
 			<h1><a href="#">Information</a></h1>
 			<div class="fields">
@@ -95,122 +74,26 @@
 
 </div>
 
-		<script>		
-			var link;	     
-		     $("ul.errorlist").each(function() { 
-		     	if(link != $(this).parents("div .tab_content").attr("id") ){
-		     		link = $(this).parents("div .tab_content").attr("id");	     				     	
-		     		$(".fields ul li a").each(function() { 
-		     			if($(this).attr("href") == "#"+link){
-					     	$(this).attr('class', 'error');
-				     	}
-		    		 });
-	    		 }
-			 });		
-		</script>
-		
-			<script>	
-		//for text fields and calendar
-		$('div.form-row.errors div input').change(textfield);
-		$('div.form-row div.field-box.errors input').change(textfield2);		
-		//for related-widget-wrapper
-		$("div.field-box.errors input.related-widget-wrapper").change(oneToOne);		
-		
-		 function textfield() {		 	
-			 var input_value = $(this).attr('value');			 
-				if( input_value ) {				
-						$(this).parents('div').siblings(".errorlist").remove();				
-						$(this).parents('fieldset .form-row').removeClass("errors");
-						checkForErrors($(this));
-				}
+<script>		
+	var link;	     
+     $("ul.errorlist").each(function() { 
+     	if(link != $(this).parents("div .tab_content").attr("id") ){
+     		link = $(this).parents("div .tab_content").attr("id");	     				     	
+     		$(".fields ul li a").each(function() { 
+     			if($(this).attr("href") == "#"+link){
+			     	$(this).attr('class', 'error');
+		     	}
+    		 });
 		 }
-		 function textfield2() {		 	
-			 var input_value = $(this).attr('value');			 
-				if( input_value ) {				
-						$(this).siblings(".errorlist").remove();				
-						$(this).parents('.field-box').removeClass("errors");
-						checkForErrors($(this));
-				}
-		 }		
-		 		
- 		 function oneToOne() {
-			 var input_value = $(this).attr('value');			 
-				if( input_value ) {					
-						$(this).siblings(".errorlist").remove();				
-						$(this).parents('div.field-box').removeClass("errors");
-						checkForErrors($(this));
-				}
-		 }				
-		 $("div div ul li input").each(function() { 
-			$(this).trigger('change');
-		});	
-		 $("div.form-row div.field-box.errors input").each(function() { 
-			$(this).trigger('change');
-		});	
-		
-		//for calendar when user inserts input in textfield	
-		$("div.form-row div input").each(function() { 
-			$(this).trigger('change');
-		});
-		
-		//for calendar when user clicks on calendar options 
-		$('div.form-row.errors div span.datetimeshortcuts a').live("click",function(){
-		
-			$(this).parents('div').siblings(".errorlist").remove();				
-			$(this).parents('div').removeClass("errors");
-			checkForErrors($(this));
-		});
-		
-		//related-widget-wrapper
-		$("div.field-box.errors input.related-widget-wrapper").each(function() { 			
-			$(this).trigger('change');
-		});	
-		
-				
-		//for many-to-many widgets (errors disappear only when you click directly on selector-chosen field)
-		$(document).on("change", "div.form-row div.errors div.selector-chosen select.filtered", function() {		  
-  			if( $(this).children().length > 0 ) {			
-				$(this).parents('div.selector').siblings(".errorlist").remove();				
-				$(this).parents('div').removeClass("errors");
-				checkForErrors($(this));
-			}
-		});
-		
-		
-		//for drop-down menus		
-		$(document).on("change", "div.form-row.errors select:not(.filtered)", function() {		  
-  			$(this).parents('div').siblings(".errorlist").remove();				
-			$(this).parents('div').removeClass("errors");
-			checkForErrors($(this));
-		});
-		$(document).on("change", "div.form-row div.errors select:not(.filtered)", function() {		  
-  			$(this).siblings(".errorlist").remove();				
-			$(this).parents('div').removeClass("errors");
-			checkForErrors($(this));
-		});
-		
-
-		function checkForErrors(elem){
-			if(elem.parents('.tab_content>fieldset.module.aligned').find('.errorlist').length == 0) {
-				var field = elem.parents('.tab_content').attr('id');
-				$("a[href='#"+field+"']").removeClass("error");
-				if($('.errors').length == 0 && $('.error').length == 0) {
-					$('p.errornote').remove();				
-				}
-			}			
-		}
-
-
-		
-	</script>
-
+	 });		
+</script>
 
 {% block after_field_sets %}{% endblock %}
 
 {% block after_related_objects %}{% endblock %}
 
-{% submit_row %}
-
+{% submit_row_resource_popup %}    
+    
 {% if adminform and add %}
    <script type="text/javascript">document.getElementById("{{ adminform.first_field.id_for_label }}").focus();</script>
 {% endif %}

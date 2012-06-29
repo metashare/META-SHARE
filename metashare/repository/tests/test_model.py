@@ -13,11 +13,19 @@ from metashare.repository.model_utils import get_root_resources
 from metashare.settings import ROOT_PATH
 from metashare.xml_utils import pretty_xml
 
-
 class ModelTest(TestCase):
     """
     Tests the import/export properties of the generated object model.
     """
+    
+    @classmethod
+    def setUpClass(cls):
+        test_utils.set_index_active(False)
+    
+    @classmethod
+    def tearDownClass(cls):
+        test_utils.set_index_active(True)
+    
     def setUp(self):
         """
         Set up the email test
@@ -31,7 +39,8 @@ class ModelTest(TestCase):
         """
         Clean up the test
         """
-        resourceInfoType_model.objects.all().delete()
+        test_utils.clean_db()
+        test_utils.clean_storage()
     
     def testRollbackOnImportError(self):
         """
@@ -136,10 +145,19 @@ class ModelUtilsTest(TestCase):
     """
     Tests for model_utils.py.
     """
+    @classmethod
+    def setUpClass(cls):
+        test_utils.set_index_active(False)
+    
+    @classmethod
+    def tearDownClass(cls):
+        test_utils.set_index_active(True)
+    
     def setUp(self):
         """
         Imports a few test resources.
         """
+        test_utils.setup_test_storage()
         self.test_res_1 = test_utils.import_xml(
             '{0}/repository/fixtures/testfixture.xml'.format(ROOT_PATH))[0]
         self.test_res_2 = test_utils.import_xml(
@@ -149,7 +167,8 @@ class ModelUtilsTest(TestCase):
         """
         Cleans the database after a test.
         """
-        resourceInfoType_model.objects.all().delete()
+        test_utils.clean_db()
+        test_utils.clean_storage()
 
     def test_get_root_resources(self):
         """

@@ -61,7 +61,7 @@ if __name__ == "__main__":
         print "not equal"
 
 
-def import_from_string(xml_string, targetstatus, owner_id=None):
+def import_from_string(xml_string, targetstatus, copy_status, owner_id=None):
     """
     Import a single resource from a string representation of its XML tree, 
     and save it with the given target status.
@@ -69,7 +69,7 @@ def import_from_string(xml_string, targetstatus, owner_id=None):
     Returns the imported resource object on success, raises and Exception on failure.
     """
     from metashare.repository.models import resourceInfoType_model
-    result = resourceInfoType_model.import_from_string(xml_string)
+    result = resourceInfoType_model.import_from_string(xml_string, copy_status=copy_status)
     
     if not result[0]:
         msg = u''
@@ -105,7 +105,7 @@ def import_from_string(xml_string, targetstatus, owner_id=None):
     return resource
     
     
-def import_from_file(filehandle, descriptor, targetstatus, owner_id=None):
+def import_from_file(filehandle, descriptor, targetstatus, copy_status, owner_id=None):
     """
     Import the xml metadata record(s) contained in the opened file identified by filehandle.
     filehandle: an opened file handle to either a single XML file or a zip archive containing
@@ -130,7 +130,7 @@ def import_from_file(filehandle, descriptor, targetstatus, owner_id=None):
         try:
             print 'Importing XML file: "{0}"'.format(descriptor)
             xml_string = filehandle.read()
-            resource = import_from_string(xml_string, targetstatus, owner_id)
+            resource = import_from_string(xml_string, targetstatus, copy_status, owner_id)
             imported_resources.append(resource)
         except Exception as problem:
             erroneous_descriptors.append((descriptor, problem))
@@ -146,7 +146,7 @@ def import_from_file(filehandle, descriptor, targetstatus, owner_id=None):
                 
                 print 'Importing extracted XML file: "{0}"'.format(xml_name)
                 xml_string = temp_zip.read(xml_name)
-                resource = import_from_string(xml_string, targetstatus, owner_id)
+                resource = import_from_string(xml_string, targetstatus, copy_status, owner_id)
                 imported_resources.append(resource)
             except Exception as problem:
                 erroneous_descriptors.append((xml_name, problem))

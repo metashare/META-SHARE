@@ -2,36 +2,40 @@ import django.test
 import urllib2
 from urllib import urlencode
 from django.test.client import Client
-from django.contrib.auth.models import User, Group
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.admin.sites import LOGIN_FORM_KEY
+
+from metashare import test_utils
+from metashare.accounts.models import EditorGroup, ManagerGroup
+from metashare.repository.models import resourceInfoType_model
 from metashare.settings import DJANGO_BASE, DJANGO_URL, ROOT_PATH
-from metashare.stats.model_utils import _update_usage_stats, saveLRStats, getLRLast, saveQueryStats, getLastQuery, UPDATE_STAT, VIEW_STAT, RETRIEVE_STAT, DOWNLOAD_STAT
-from metashare.repository.models import *
+from metashare.stats.model_utils import _update_usage_stats, saveLRStats, \
+    getLRLast, saveQueryStats, getLastQuery, UPDATE_STAT, VIEW_STAT, \
+    RETRIEVE_STAT, DOWNLOAD_STAT
+
 
 ADMINROOT = '/{0}editor/'.format(DJANGO_BASE)
 TESTFIXTURES_ZIP = '{}/repository/fixtures/tworesources.zip'.format(ROOT_PATH)
 PSP_XML = '{}/repository/test_fixtures/PSP/UIB-M10-9_v2.xml'.format(ROOT_PATH)
 
 class StatsTest(django.test.TestCase):
-    editor_login = None
+    manager_login = None
     
     def setUp(self):
         """
         Sets up some resources with which to test.
         """
         self.stats_server_url = "http://metastats.fbk.eu/"
-        editoruser = User.objects.create_user('editoruser', 'editor@example.com',
-          'secret')
-        editoruser.is_staff = True
-        globaleditors = Group.objects.get(name='globaleditors')
-        editoruser.groups.add(globaleditors)
-        editoruser.save()
         
-        StatsTest.editor_login = {
+        test_editor_group = EditorGroup.objects.create(name='test_editor_group')
+        test_manager_group = ManagerGroup.objects.create(
+            name='test_manager_group', managed_group=test_editor_group)
+        test_utils.create_manager_user('manageruser', 'manager@example.com',
+            'secret', (test_editor_group, test_manager_group))
+        StatsTest.manager_login = {
             REDIRECT_FIELD_NAME: ADMINROOT,
             LOGIN_FORM_KEY: 1,
-            'username': 'editoruser',
+            'username': 'manageruser',
             'password': 'secret',
         }
         
@@ -40,12 +44,12 @@ class StatsTest(django.test.TestCase):
         """
         Testing statistics functions about LR
         """
-        client = self.client_with_user_logged_in(StatsTest.editor_login)
+        client = self.client_with_user_logged_in(StatsTest.manager_login)
         xmlfile = open(TESTFIXTURES_ZIP, 'rb')
         response = client.post(ADMINROOT+'upload_xml/', {'description': xmlfile, 'uploadTerms':'on' }, follow=True)
         # And verify that we have more than zero resources on the page where we
         # are being redirected:
-        self.assertContains(response, "Editable Resources")
+        self.assertContains(response, "My Resources")
         self.assertNotContains(response, '0 Resources')
         
         statsdata = getLRLast(UPDATE_STAT, 2)
@@ -118,7 +122,7 @@ class StatsTest(django.test.TestCase):
         self.assertEquals(200, response.status_code)
     
     def testMyResources(self):
-        client = self.client_with_user_logged_in(StatsTest.editor_login)
+        client = self.client_with_user_logged_in(StatsTest.manager_login)
         xmlfile = open(TESTFIXTURES_ZIP, 'rb')
         response = client.post(ADMINROOT+'upload_xml/', {'description': xmlfile, 'uploadTerms':'on' }, follow=True)
         self.assertContains(response, 'Successfully uploaded 2 resource descriptions')
@@ -126,9 +130,11 @@ class StatsTest(django.test.TestCase):
         
         response = client.get(ADMINROOT+"repository/resourceinfotype_model/", follow=True)
         self.assertContains(response, 'Publish selected ingested resources', msg_prefix='response: {0}'.format(response))
-        
-        url = '/{0}repository/browse/1/'.format(DJANGO_BASE)
-        response = client.get(url, follow = True)
+
+        imported_res = resourceInfoType_model.objects.get(pk=1)
+        imported_res.storage_object.published = True
+        imported_res.storage_object.save()
+        response = client.get(imported_res.get_absolute_url(), follow=True)
         self.assertTemplateUsed(response, 'repository/lr_view.html')
         self.assertContains(response, "Edit")
 
@@ -150,7 +156,7 @@ class StatsTest(django.test.TestCase):
     def testUsage(self):
         # checking if there are the usage statistics
         
-        client = self.client_with_user_logged_in(StatsTest.editor_login)
+        client = self.client_with_user_logged_in(StatsTest.manager_login)
         xmlfile = open(TESTFIXTURES_ZIP, 'rb')
         response = client.post(ADMINROOT+'upload_xml/', {'description': xmlfile, 'uploadTerms':'on' }, follow=True)
         

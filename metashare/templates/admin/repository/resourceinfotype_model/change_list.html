@@ -2,7 +2,7 @@
 {% load adminmedia admin_list i18n %}
 
 	{% block content_title %}
-      <h1>Editable Resources</h1>
+      <h1>{% if myresources %}My Resources{% else %}Editable Resources{% endif %}</h1>
 	{% endblock %}
 
 {% block content %}
@@ -43,7 +43,6 @@
       {% if cl.formset %}
         <div>{{ cl.formset.management_form }}</div>
       {% endif %}
-
 
       {% block result_list %}
           {% if action_form and actions_on_top and cl.full_result_count %}{% admin_actions %}{% endif %}

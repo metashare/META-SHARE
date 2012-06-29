@@ -42,7 +42,7 @@ from django.utils.translation import ugettext as _
 from django.views.decorators.csrf import csrf_protect
 
 from metashare.repository.editor.forms import ResourceDescriptionUploadForm
-from metashare.storage.models import INTERNAL
+from metashare.storage.models import INTERNAL, MASTER
 from metashare.xml_utils import import_from_file
 
 csrf_protect_m = method_decorator(csrf_protect)
@@ -79,7 +79,8 @@ class MetashareBackendSite(AdminSite):
             if form.is_valid():
                 # Retrieve the upload resource description file.
                 description = request.FILES['description']
-                successes, failures = import_from_file(description, description.name, INTERNAL, request.user.id)
+                successes, failures = \
+                  import_from_file(description, description.name, INTERNAL, MASTER, request.user.id)
                 
                 if len(successes) == 1 and len(failures) == 0: # single resource successfully uploaded
                     resource_object = successes[0]
@@ -89,10 +90,10 @@ class MetashareBackendSite(AdminSite):
                 else:
                     # Default case: either at least one failure, or more than one success
                     # We will redirect to upload page if we have no successes at all,
-                    # or to the resource overview if there is at least one success
+                    # or to "my resources" if there is at least one success
                     redirect_url = reverse('editor:upload_xml')
                     if len(successes) > 0:
-                        redirect_url = reverse('editor:repository_resourceinfotype_model_changelist')
+                        redirect_url = reverse('editor:repository_resourceinfotype_model_myresources')
                         messages.info(request, u'Successfully uploaded {} resource descriptions'.format(len(successes)))
                     if len(failures) > 0:
                         _msg = u'Import failed for {} files:\n'.format(len(failures))

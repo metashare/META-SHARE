@@ -21,6 +21,7 @@ from metashare.settings import LOG_LEVEL, LOG_HANDLER, \
 from django.db.models.fields.related import ForeignRelatedObjectsDescriptor, \
     OneToOneField
 from Queue import Queue
+from metashare.storage.models import MASTER
 
 # Setup logging support.
 logging.basicConfig(level=LOG_LEVEL)
@@ -492,7 +493,12 @@ class SchemaModel(models.Model):
         # comparison code.
         _fields = [x[1] for x in cls.__schema_fields__]
         _fields.extend([x[1] for x in cls.__schema_attrs__])
-
+        if hasattr(_object, 'copy_status'):
+            _fields.append('copy_status')
+        
+        if _object.__schema_name__ == "STRINGMODEL":
+            _fields.append("value")
+        
         # Ensure that "back_to_" pointers are available for checking.
         for _field in cls._meta.fields:
             if isinstance(_field, related.ForeignKey):
@@ -654,7 +660,8 @@ class SchemaModel(models.Model):
 
     # pylint: disable-msg=R0911
     @classmethod
-    def import_from_elementtree(cls, element_tree, cleanup=True, parent=None):
+    def import_from_elementtree(
+      cls, element_tree, cleanup=True, parent=None, copy_status=MASTER):
         """
         Imports the given XML ElementTree into an instance of type cls.
 
@@ -683,6 +690,9 @@ class SchemaModel(models.Model):
 
         # We also need to instantiate a new instance of this class type.
         _object = cls()
+        
+        if hasattr(_object, 'copy_status'):
+            _object.copy_status = copy_status
 
         # If a parent instance is given, add it to the object instance.
         if parent:
@@ -887,7 +897,8 @@ class SchemaModel(models.Model):
                     LOGGER.debug(u'Trying to import sub object {0}'.format(
                       _value.tag))
                     _sub_result = _sub_cls.import_from_elementtree(_value,
-                      cleanup=_delete_duplicate_objects, parent=_parent)
+                      cleanup=_delete_duplicate_objects, parent=_parent,
+                      copy_status=copy_status)
 
                     _sub_object = _sub_result[0]
                     _sub_created = _sub_result[1]
@@ -1066,7 +1077,7 @@ class SchemaModel(models.Model):
         return (_object, set(_created))
 
     @classmethod
-    def import_from_string(cls, element_string, parent=None):
+    def import_from_string(cls, element_string, parent=None, copy_status=MASTER):
         """
         Imports the given string representation of an XML element tree
         into an instance of type cls.
@@ -1078,7 +1089,7 @@ class SchemaModel(models.Model):
         Returns (None, []) in case of errors.
         """
         return cls.import_from_elementtree(fromstring(element_string),
-          parent=parent)
+          parent=parent, copy_status=copy_status)
 
     def get_unicode(self, field_spec, separator):
         field_path = re.split(r'/', field_spec)
