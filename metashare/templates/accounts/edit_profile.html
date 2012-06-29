@@ -20,8 +20,15 @@
   </tr>
   <tr><td colspan="2" style="text-align:center; height:40px;">If you need to change any of the above settings, please contact the <a href="mailto:helpdesk@meta-share.eu">META-SHARE Helpdesk</a>.
   </td></tr>
+  {{ form.as_table }}
+  {% if groups_applied_for %}
+  <tr><td colspan="2" style="text-align:center; height:40px;">You already applied for a membership of the following group{{ groups_applied_for|pluralize }}: {{ groups_applied_for|join:", " }}</td></tr>
+  {% endif %}
+  <tr>
+    <td colspan="2" style="text-align:center; height:40px;"><a href="{% url metashare.accounts.views.editor_registration_request %}"> Apply for new membership of editor groups.</a> </td>
+  </tr>
+  
 
-{{ form.as_table }}
 <tr><th></th><td><input class="button middle_button" type="submit" value="Edit Profile" /></td></tr>
 </table>
 </form>
