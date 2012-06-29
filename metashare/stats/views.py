@@ -202,7 +202,7 @@ def topstats (request):
                 LOGGER.debug("Warning! The object "+item['lrid']+ " has not been found.")               
     if (view == "latestupdated"):
         geovisits = getCountryActions(UPDATE_STAT)
-        visitstitle = "Updated resources from  the world:"
+        visitstitle = "Updated resources from the world:"
         data = getLRLast(UPDATE_STAT, 10)
         for item in data:
             try:
@@ -212,7 +212,7 @@ def topstats (request):
                 LOGGER.debug("Warning! The object "+item['lrid']+ " has not been found.")
     if (view == "topdownloaded"):
         geovisits = getCountryActions(DOWNLOAD_STAT)
-        visitstitle = "Downloaded resources from  the world:"
+        visitstitle = "Downloaded resources from the world:"
         data = getLRTop(DOWNLOAD_STAT, 10)
         for item in data:
             try:
@@ -223,7 +223,7 @@ def topstats (request):
 
     if view == "topqueries":
         geovisits = getCountryQueries()
-        visitstitle = "Queries made from  the world:"
+        visitstitle = "Fired queries from the world:"
         data = getTopQueries(10)
         for item in data:
             url = "q=" + item['query']
@@ -234,10 +234,10 @@ def topstats (request):
                 for face in facetlist:
                     url += "&selected_facets=" + face
                     facets += ", " + face.replace("Filter_exact:",": ")
-            topdata.append([query, facets, pretty_timeago(item['lasttime']), item['query_count'], url])         
+            topdata.append([query, facets, "", item['query_count'], url])         
     if view == "latestqueries":
         geovisits = getCountryQueries()
-        visitstitle = "Queries made from the world:"
+        visitstitle = "Fired queries from the world:"
         data = getLastQuery(10)
         for item in data:
             url = "q=" + item['query']

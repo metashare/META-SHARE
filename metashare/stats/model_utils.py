@@ -129,8 +129,8 @@ def getLRLast(action, limit):
     return action_list
 
 def getTopQueries(limit):
-    return QueryStats.objects.values('query', 'facets','lasttime').annotate(query_count=Count('query'), \
-        facets_count=Count('facets')).order_by('query_count','facets_count')[:limit]
+    return QueryStats.objects.values('query', 'facets').annotate(query_count=Count('query'), \
+        facets_count=Count('facets')).order_by('-query_count','-facets_count')[:limit]
  
 def getLastQuery (limit):
     return QueryStats.objects.values('query', 'facets', 'lasttime', 'found').order_by('-lasttime')[:limit]

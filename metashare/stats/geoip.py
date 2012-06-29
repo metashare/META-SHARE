@@ -1,4 +1,3 @@
-import os
 import sys
 # Insert our dependencies:
 from os.path import abspath, dirname, join
