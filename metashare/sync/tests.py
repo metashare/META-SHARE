@@ -15,8 +15,6 @@ from metashare.test_utils import set_index_active
 import datetime
 
 
-
-
 class MetadataSyncTest (TestCase):
     SYNC_BASE = "/{0}sync/".format(DJANGO_BASE)
     INVENTORY_URL = SYNC_BASE
