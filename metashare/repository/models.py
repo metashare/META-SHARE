@@ -14,8 +14,7 @@ from metashare.repository.supermodel import SchemaModel, SubclassableModel, \
 from metashare.repository.editor.widgets import MultiFieldWidget
 from metashare.repository.fields import MultiTextField, MetaBooleanField, \
   MultiSelectField, DictField, best_lang_value_retriever
-from metashare.repository.validators import validate_lang_code_keys, \
-validate_dict_values
+from metashare.repository.validators import validate_lang_code_keys, validate_dict_values
 
 from metashare.storage.models import StorageObject
 
