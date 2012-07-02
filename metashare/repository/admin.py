@@ -112,48 +112,6 @@ class actualUseInfo_model_inline(SchemaModelInline):
 
 
 # pylint: disable-msg=C0103
-class annotationInfo_model_inline_corpusAudioInfoType_model(SchemaModelInline):
-    model = annotationInfoType_model
-    collapse = True
-    fk_name = 'back_to_corpusaudioinfotype_model'
-
-
-# pylint: disable-msg=C0103
-class annotationInfo_model_inline_corpusImageInfoType_model(SchemaModelInline):
-    model = annotationInfoType_model
-    collapse = True
-    fk_name = 'back_to_corpusimageinfotype_model'
-
-
-# pylint: disable-msg=C0103
-class annotationInfo_model_inline_corpusTextInfoType_model(SchemaModelInline):
-    model = annotationInfoType_model
-    collapse = True
-    fk_name = 'back_to_corpustextinfotype_model'
-
-
-# pylint: disable-msg=C0103
-class annotationInfo_model_inline_corpusTextNgramInfoType_model(SchemaModelInline):
-    model = annotationInfoType_model
-    collapse = True
-    fk_name = 'back_to_corpustextngraminfotype_model'
-
-
-# pylint: disable-msg=C0103
-class annotationInfo_model_inline_corpusTextNumericalInfoType_model(SchemaModelInline):
-    model = annotationInfoType_model
-    collapse = True
-    fk_name = 'back_to_corpustextnumericalinfotype_model'
-
-
-# pylint: disable-msg=C0103
-class annotationInfo_model_inline_corpusVideoInfoType_model(SchemaModelInline):
-    model = annotationInfoType_model
-    collapse = True
-    fk_name = 'back_to_corpusvideoinfotype_model'
-
-
-# pylint: disable-msg=C0103
 class audioClassificationInfo_model_inline(SchemaModelInline):
     model = audioClassificationInfoType_model
     collapse = True
@@ -171,6 +129,11 @@ class audioFormatInfo_model_inline_lexicalConceptualResourceAudioInfoType_model(
     model = audioFormatInfoType_model
     collapse = True
     fk_name = 'back_to_lexicalconceptualresourceaudioinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class audioSizeInfo_model_inline(SchemaModelInline):
+    model = audioSizeInfoType_model
 
 
 # pylint: disable-msg=C0103
@@ -310,13 +273,13 @@ class domainInfo_model_inline_lexicalConceptualResourceVideoInfoType_model(Schem
 # pylint: disable-msg=C0103
 class durationOfAudioInfo_model_inline(SchemaModelInline):
     model = durationOfAudioInfoType_model
-    template = 'admin/edit_inline/tabular.html'
+    collapse = True
 
 
 # pylint: disable-msg=C0103
 class durationOfEffectiveSpeechInfo_model_inline(SchemaModelInline):
     model = durationOfEffectiveSpeechInfoType_model
-    template = 'admin/edit_inline/tabular.html'
+    collapse = True
 
 
 # pylint: disable-msg=C0103
@@ -413,27 +376,6 @@ class geographicCoverageInfo_model_inline_lexicalConceptualResourceVideoInfoType
 class imageClassificationInfo_model_inline(SchemaModelInline):
     model = imageClassificationInfoType_model
     collapse = True
-
-
-# pylint: disable-msg=C0103
-class imageFormatInfo_model_inline_corpusImageInfoType_model(SchemaModelInline):
-    model = imageFormatInfoType_model
-    collapse = True
-    fk_name = 'back_to_corpusimageinfotype_model'
-
-
-# pylint: disable-msg=C0103
-class imageFormatInfo_model_inline_languageDescriptionImageInfoType_model(SchemaModelInline):
-    model = imageFormatInfoType_model
-    collapse = True
-    fk_name = 'back_to_languagedescriptionimageinfotype_model'
-
-
-# pylint: disable-msg=C0103
-class imageFormatInfo_model_inline_lexicalConceptualResourceImageInfoType_model(SchemaModelInline):
-    model = imageFormatInfoType_model
-    collapse = True
-    fk_name = 'back_to_lexicalconceptualresourceimageinfotype_model'
 
 
 # pylint: disable-msg=C0103
@@ -678,10 +620,17 @@ class relationInfo_model_inline(SchemaModelInline):
 
 
 # pylint: disable-msg=C0103
-class sizeInfo_model_inline_audioSizeInfoType_model(SchemaModelInline):
-    model = sizeInfoType_model
+class resolutionInfo_model_inline_imageFormatInfoType_model(SchemaModelInline):
+    model = resolutionInfoType_model
     template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_audiosizeinfotype_model'
+    fk_name = 'back_to_imageformatinfotype_model'
+
+
+# pylint: disable-msg=C0103
+class resolutionInfo_model_inline_videoFormatInfoType_model(SchemaModelInline):
+    model = resolutionInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_videoformatinfotype_model'
 
 
 # pylint: disable-msg=C0103
@@ -915,27 +864,6 @@ class validationInfo_model_inline(SchemaModelInline):
 class videoClassificationInfo_model_inline(SchemaModelInline):
     model = videoClassificationInfoType_model
     collapse = True
-
-
-# pylint: disable-msg=C0103
-class videoFormatInfo_model_inline_corpusVideoInfoType_model(SchemaModelInline):
-    model = videoFormatInfoType_model
-    collapse = True
-    fk_name = 'back_to_corpusvideoinfotype_model'
-
-
-# pylint: disable-msg=C0103
-class videoFormatInfo_model_inline_languageDescriptionVideoInfoType_model(SchemaModelInline):
-    model = videoFormatInfoType_model
-    collapse = True
-    fk_name = 'back_to_languagedescriptionvideoinfotype_model'
-
-
-# pylint: disable-msg=C0103
-class videoFormatInfo_model_inline_lexicalConceptualResourceVideoInfoType_model(SchemaModelInline):
-    model = videoFormatInfoType_model
-    collapse = True
-    fk_name = 'back_to_lexicalconceptualresourcevideoinfotype_model'
 
 
 admin.site.register(actorInfoType_model, SchemaModelAdmin)
