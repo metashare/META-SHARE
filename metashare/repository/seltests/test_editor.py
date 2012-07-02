@@ -173,6 +173,8 @@ class EditorTest(SeleniumTestCase):
         # save text corpus
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         driver.find_element_by_name("_save").click()
+        # TODO remove this workaround when Selenium starts working again as intended
+        time.sleep(1)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         self.assertEqual("The Resource \"Test Text Corpus\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
@@ -256,6 +258,8 @@ class EditorTest(SeleniumTestCase):
         # save audio corpus
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         driver.find_element_by_name("_save").click()
+        # TODO remove this workaround when Selenium starts working again as intended
+        time.sleep(1)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         self.assertEqual("The Resource \"Test Audio Corpus\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
@@ -345,6 +349,8 @@ class EditorTest(SeleniumTestCase):
         # save language description text
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         driver.find_element_by_name("_save").click()
+        # TODO remove this workaround when Selenium starts working again as intended
+        time.sleep(1)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         self.assertEqual("The Resource \"Test Text Language Description\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
@@ -435,6 +441,8 @@ class EditorTest(SeleniumTestCase):
         # save lexical resource text
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         driver.find_element_by_name("_save").click()
+        # TODO remove this workaround when Selenium starts working again as intended
+        time.sleep(1)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         self.assertEqual("The Resource \"Test Lexical Resource Text\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
@@ -513,6 +521,8 @@ class EditorTest(SeleniumTestCase):
         # save tool
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         driver.find_element_by_name("_save").click()
+        # TODO remove this workaround when Selenium starts working again as intended
+        time.sleep(1)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         self.assertEqual("The Resource \"Test Tool\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
