@@ -96,7 +96,7 @@ def _make_choices_from_int_list(source_list):
     - choices: the list of (value, value) tuple choices.
     """
     _choices = []
-    for index, value in enumerate(source_list):
+    for value in source_list:
         _choices.append((value, value))
     return {'max_length': len(_choices)/10+1, 'choices': tuple(_choices)}
 
