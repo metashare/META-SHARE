@@ -769,11 +769,11 @@ class Clazz(object):
                     choice_options = MULTI_CHOICES_TEMPLATE.format(choice_name)
                     
                     self.generate_simple_field(name, 'MultiSelectField',
-                      options + choice_options, '')
+                      options + choice_options, required)
 
                 else:
                     self.generate_simple_field(name, 'IntegerField',
-                      options + choice_options, '')
+                      options + choice_options, required)
             else:
                 self.generate_simple_field(name, 'IntegerField', options, required)
         elif data_type in Float_type_table:

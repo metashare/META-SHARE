@@ -4086,7 +4086,7 @@ class audioFormatInfoType_model(SchemaModel):
       
       max_length=AUDIOFORMATINFOTYPE_QUANTIZATION_CHOICES['max_length'],
       choices=AUDIOFORMATINFOTYPE_QUANTIZATION_CHOICES['choices'],
-      )
+      blank=True, null=True, )
 
     byteOrder = models.CharField(
       verbose_name='Byte order', 
@@ -4128,7 +4128,7 @@ class audioFormatInfoType_model(SchemaModel):
       max_length=30,
       choices=sorted(AUDIOFORMATINFOTYPE_NUMBEROFTRACKS_CHOICES['choices'],
                      key=lambda choice: choice[1]),
-      )
+      blank=True, null=True, )
 
     recordingQuality = models.CharField(
       verbose_name='Recording quality', 
