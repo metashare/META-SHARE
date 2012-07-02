@@ -16,6 +16,13 @@ fi
 
 counter=0
 
+CREATE_DB=1
+OP=$1
+if [[ "$OP" == "--nodb" ]] ; then
+	CREATE_DB=0
+	shift
+fi
+
 OP=$1
 if [[  "$OP" != "start" && "$OP" != "stop" && "$OP" != "clean" ]] ; then
 	echo "usage: $0 [start|stop|clean]"
@@ -23,6 +30,14 @@ if [[  "$OP" != "start" && "$OP" != "stop" && "$OP" != "clean" ]] ; then
 fi
 
 if [[ "$OP" == "start" ]] ; then
+	if [[ "$CREATE_DB" == "1" ]] ; then
+		# Create a new empty database compatible with the models.py
+		./create_db.sh -r
+	fi
+
+	# Remove local_settings from metashare directory since it
+	# may override the node specific one
+	# rm -f "$METASHARE_DIR/local_settings.py"
 	# Replace the original settings.py with one that imports 
 	# local_settings for each specific node
 	cp $MSERV_DIR/init_data/settings_test.py $METASHARE_DIR/settings.py
