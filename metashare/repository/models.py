@@ -10,7 +10,8 @@ from xml.etree.ElementTree import tostring
 # pylint: disable-msg=W0611
 from metashare.repository.supermodel import SchemaModel, SubclassableModel, \
   _make_choices_from_list, InvisibleStringModel, pretty_xml, \
-  REQUIRED, OPTIONAL, RECOMMENDED
+  REQUIRED, OPTIONAL, RECOMMENDED, \
+  _make_choices_from_int_list
 from metashare.repository.editor.widgets import MultiFieldWidget
 from metashare.repository.fields import MultiTextField, MetaBooleanField, \
   MultiSelectField, DictField, best_lang_value_retriever
@@ -4002,6 +4003,10 @@ AUDIOFORMATINFOTYPE_SIGNALENCODING_CHOICES = _make_choices_from_list([
   u'aLaw', u'linearPCM', u'\xb5-law', u'ADPCM', u'other', 
 ])
 
+AUDIOFORMATINFOTYPE_QUANTIZATION_CHOICES = _make_choices_from_int_list([
+8, 16, 32, 64, 
+])
+
 AUDIOFORMATINFOTYPE_BYTEORDER_CHOICES = _make_choices_from_list([
   u'littleEndian', u'bigEndian', 
 ])
@@ -4012,6 +4017,10 @@ AUDIOFORMATINFOTYPE_SIGNCONVENTION_CHOICES = _make_choices_from_list([
 
 AUDIOFORMATINFOTYPE_AUDIOQUALITYMEASURESINCLUDED_CHOICES = _make_choices_from_list([
   u'SNR', u'crossTalk', u'clippingRate', u'backgroundNoise', u'other', 
+])
+
+AUDIOFORMATINFOTYPE_NUMBEROFTRACKS_CHOICES = _make_choices_from_int_list([
+1, 2, 4, 8, 
 ])
 
 AUDIOFORMATINFOTYPE_RECORDINGQUALITY_CHOICES = _make_choices_from_list([
@@ -4074,6 +4083,9 @@ class audioFormatInfoType_model(SchemaModel):
     quantization = models.IntegerField(
       verbose_name='Quantization', 
       help_text='The number of bits for each audio sample',
+      
+      max_length=AUDIOFORMATINFOTYPE_QUANTIZATION_CHOICES['max_length'],
+      choices=AUDIOFORMATINFOTYPE_QUANTIZATION_CHOICES['choices'],
       blank=True, null=True, )
 
     byteOrder = models.CharField(
@@ -4112,6 +4124,10 @@ class audioFormatInfoType_model(SchemaModel):
     numberOfTracks = models.IntegerField(
       verbose_name='Number of tracks', 
       help_text='Specifies the number of audio channels',
+      
+      max_length=30,
+      choices=sorted(AUDIOFORMATINFOTYPE_NUMBEROFTRACKS_CHOICES['choices'],
+                     key=lambda choice: choice[1]),
       blank=True, null=True, )
 
     recordingQuality = models.CharField(
