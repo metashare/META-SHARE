@@ -154,7 +154,7 @@ from {0}supermodel import SchemaModel, SubclassableModel, \\
 from {0}editor.widgets import MultiFieldWidget
 from {0}fields import MultiTextField, MetaBooleanField, \\
   MultiSelectField, DictField, best_lang_value_retriever
-from {0}validators import validate_lang_code_keys
+from {0}validators import validate_lang_code_keys, validate_dict_values
 
 from metashare.storage.models import StorageObject
 
@@ -175,6 +175,29 @@ HTTPURI_VALIDATOR = RegexValidator(r'(https?://.*|ftp://.*|www*)',
 SCHEMA_NAMESPACE = '{1}'
 # version of the META-SHARE metadata XML Schema
 SCHEMA_VERSION = '{2}'
+
+def _compute_documentationInfoType_key():
+    '''
+    Prevents id collisions for documentationInfoType_model sub classes.
+    
+    These are:
+    - documentInfoType_model;
+    - documentUnstructuredString_model.
+    
+    '''
+    _k1 = list(documentInfoType_model.objects.all().order_by('-id'))
+    _k2 = list(documentUnstructuredString_model.objects.all().order_by('-id'))
+    
+    LOGGER.debug('k1: {{}}, k2: {{}}'.format(_k1, _k2))
+
+    _k1_id = 0
+    if len(_k1) > 0:
+        _k1_id = _k1[0].id
+    _k2_id = 0
+    if len(_k2) > 0:
+        _k2_id = _k2[0].id
+
+    return max(_k1_id, _k2_id) + 1
 
 """
 
@@ -262,8 +285,13 @@ admin.site.register({0}_model)
 
 CHOICE_STRING_SUB_CLASS_TEMPLATE = '''
 # pylint: disable-msg=C0103
-class {}_model(InvisibleStringModel, {}):
-    pass
+class {0}_model(InvisibleStringModel, {1}):
+    def save(self, *args, **kwargs):
+        """
+        Prevents id collisions for documentationInfoType_model sub classes.
+        """
+        self.id = _compute_documentationInfoType_key()
+        super({0}_model, self).save(*args, **kwargs)
 '''
 
 TOP_LEVEL_TYPE_EXTRA_CODE_TEMPLATE = '''
@@ -779,7 +807,7 @@ class Clazz(object):
             options += 'blank=True'
 
         self.wrtmodels(
-          '    %s = DictField(validators=[validate_lang_code_keys],\n'
+          '    %s = DictField(validators=[validate_lang_code_keys, validate_dict_values],\n'
           '      default_retriever=best_lang_value_retriever, %s)\n' % (
             name, options, ))
 
@@ -1045,6 +1073,17 @@ class Clazz(object):
 
         if not self.choice_parent:
             self.generate_backref_members()
+
+        if self.name == 'documentInfoType':
+            self.wrtmodels('''    def save(self, *args, **kwargs):
+        """
+        Prevents id collisions for documentationInfoType_model sub classes.
+        """
+        self.id = _compute_documentationInfoType_key()
+        super(documentInfoType_model, self).save(*args, **kwargs)
+
+''')
+
         self.generate_unicode_method()
 
         if self.name == 'resourceInfoType':

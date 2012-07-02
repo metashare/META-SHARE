@@ -534,6 +534,9 @@ class SchemaModel(models.Model):
         _fields = [x[1] for x in cls.__schema_fields__]
         _fields.extend([x[1] for x in cls.__schema_attrs__])
 
+        if _object.__schema_name__ == "STRINGMODEL":
+            _fields.append("value")
+
         # Ensure that "back_to_" pointers are available for checking.
         for _field in cls._meta.fields:
             if isinstance(_field, related.ForeignKey):
