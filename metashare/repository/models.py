@@ -35,7 +35,7 @@ HTTPURI_VALIDATOR = RegexValidator(r'(https?://.*|ftp://.*|www*)',
 # namespace of the META-SHARE metadata XML Schema
 SCHEMA_NAMESPACE = 'http://www.ilsp.gr/META-XMLSchema'
 # version of the META-SHARE metadata XML Schema
-SCHEMA_VERSION = '1.0'
+SCHEMA_VERSION = '2.1'
 
 def _compute_documentationInfoType_key():
     '''
@@ -142,7 +142,7 @@ class resourceInfoType_model(SchemaModel):
       'ded and actual use)',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    resourceDocumentationInfo = models.ForeignKey("resourceDocumentationInfoType_model", 
+    resourceDocumentationInfo = models.OneToOneField("resourceDocumentationInfoType_model", 
       verbose_name='Resource documentation', 
       help_text='Groups together information on any document describing ' \
       'the resource',
@@ -244,7 +244,7 @@ SIZEINFOTYPE_SIZEUNIT_CHOICES = _make_choices_from_list([
   u'syntacticUnits',u'semanticUnits', u'predicates', u'phonemes',
   u'diphones',u'T-HPairs', u'syllables', u'frames', u'images', u'kb', u'mb',
   u'gb',u'rb', u'shots', u'unigrams', u'bigrams', u'trigrams', u'4-grams',
-  u'5-grams',u'rules', u'other', 
+  u'5-grams',u'rules', u'questions', u'other', 
 ])
 
 # pylint: disable-msg=C0103
@@ -278,6 +278,8 @@ class sizeInfoType_model(SchemaModel):
       choices=sorted(SIZEINFOTYPE_SIZEUNIT_CHOICES['choices'],
                      key=lambda choice: choice[1].lower()),
       )
+
+    back_to_audiosizeinfotype_model = models.ForeignKey("audioSizeInfoType_model",  blank=True, null=True)
 
     back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
 
@@ -477,7 +479,7 @@ class validationInfoType_model(SchemaModel):
       )
 
     validationType = models.CharField(
-      verbose_name='Validation', 
+      verbose_name='Validation type', 
       help_text='Specifies the type of the validation that have been per' \
       'formed',
       blank=True, 
@@ -522,13 +524,13 @@ class validationInfoType_model(SchemaModel):
       help_text='Specifies the size of the validated part of a resource',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    validationReport = models.OneToOneField("documentationInfoType_model", 
+    validationReport = models.ForeignKey("documentationInfoType_model", 
       verbose_name='Validation report', 
       help_text='A short account of the validation details or a link to ' \
       'the validation report',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    validationTool = models.OneToOneField("targetResourceInfoType_model", 
+    validationTool = models.ForeignKey("targetResourceInfoType_model", 
       verbose_name='Validation tool', 
       help_text='The name, the identifier or the url of the tool used fo' \
       'r the validation of the resource',
@@ -764,8 +766,8 @@ DOCUMENTINFOTYPE_DOCUMENTTYPE_CHOICES = _make_choices_from_list([
 # pylint: disable-msg=C0103
 class documentInfoType_model(documentationInfoType_model):
     """
-    Groups information on all the documents resporting onvarious aspects
-    of the resource (creation, usage etc.), published or
+    Groups information on all the documents resporting on various
+    aspects of the resource (creation, usage etc.), published or
     unpublished; it is used in various places of the metadata schema
     depending on its role (e.g. usage report, validation report,
     annotation manual etc.)
@@ -816,24 +818,24 @@ class documentInfoType_model(documentationInfoType_model):
       help_text='The title of the document reporting on the resource',
       )
 
-    author = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=4, max_length=100), 
+    author = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=4, max_length=1000), 
       verbose_name='Author', 
       help_text='The name(s) of the author(s), in the format described i' \
       'n the document',
       blank=True, )
 
-    editor = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=5, max_length=100), 
+    editor = MultiTextField(max_length=200, widget=MultiFieldWidget(widget_id=5, max_length=200), 
       verbose_name='Editor', 
       help_text='The name of the editor as mentioned in the document',
       blank=True, )
 
-    year = models.DateField(
+    year = models.IntegerField(
       verbose_name='Year', 
       help_text='The year of publication or, for an unpublished work, th' \
       'e year it was written',
       blank=True, null=True, )
 
-    publisher = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=6, max_length=100), 
+    publisher = MultiTextField(max_length=200, widget=MultiFieldWidget(widget_id=6, max_length=200), 
       verbose_name='Publisher', 
       help_text='The name of the publisher',
       blank=True, )
@@ -1119,13 +1121,14 @@ ANNOTATIONINFOTYPE_SEGMENTATIONLEVEL_CHOICES = _make_choices_from_list([
 ])
 
 ANNOTATIONINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES = _make_choices_from_list([
-  u'CES', u'EML', u'EMMA', u'GMX', u'HamNoSys', u'InkML', u'ISO12620',
-  u'ISO16642',u'ISO1987', u'ISO26162', u'ISO30042', u'ISO704', u'LMF',
-  u'MAF',u'MLIF', u'MULTEXT', u'multimodalInteractionFramework', u'OAXAL',
-  u'OWL',u'pennTreeBank', u'pragueTreebank', u'RDF', u'SemAF', u'SemAF_DA',
-  u'SemAF_NE',u'SemAF_SRL', u'SemAF_DS', u'SKOS', u'SRX', u'SynAF', u'TBX',
-  u'TMX',u'TEI', u'TEI_P3', u'TEI_P4', u'TEI_P5', u'TimeML', u'XCES',
-  u'XLIFF',u'MUMIN', u'BLM', u'other', 
+  u'BLM', u'CES', u'EAGLES', u'EML', u'EMMA', u'GMX', u'GrAF', u'HamNoSys',
+  u'InkML',u'ISO12620', u'ISO16642', u'ISO1987', u'ISO26162', u'ISO30042',
+  u'ISO704',u'LMF', u'MAF', u'MLIF', u'MULTEXT', u'MUMIN',
+  u'multimodalInteractionFramework',u'OAXAL', u'OWL', u'pennTreeBank',
+  u'pragueTreebank',u'RDF', u'SemAF', u'SemAF_DA', u'SemAF_NE',
+  u'SemAF_SRL',u'SemAF_DS', u'SKOS', u'SRX', u'SynAF', u'TBX', u'TMX',
+  u'TEI',u'TEI_P3', u'TEI_P4', u'TEI_P5', u'TimeML', u'XCES', u'XLIFF',
+  u'WordNet',u'other', 
 ])
 
 ANNOTATIONINFOTYPE_ANNOTATIONMODE_CHOICES = _make_choices_from_list([
@@ -1177,7 +1180,7 @@ class annotationInfoType_model(SchemaModel):
     }
 
     annotationType = models.CharField(
-      verbose_name='Annotation', 
+      verbose_name='Annotation type', 
       help_text='Specifies the annotation level of the resource or the a' \
       'nnotation type a tool/ service requires or produces as an output',
       
@@ -1313,6 +1316,18 @@ class annotationInfoType_model(SchemaModel):
       'notation type',
       blank=True, null=True, related_name="annotator_%(class)s_related", )
 
+    back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
+
+    back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
+
+    back_to_corpusvideoinfotype_model = models.ForeignKey("corpusVideoInfoType_model",  blank=True, null=True)
+
+    back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
+
+    back_to_corpustextnumericalinfotype_model = models.ForeignKey("corpusTextNumericalInfoType_model",  blank=True, null=True)
+
+    back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
+
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
@@ -1367,12 +1382,12 @@ class relationInfoType_model(SchemaModel):
     }
 
     relationType = models.CharField(
-      verbose_name='Relation', 
+      verbose_name='Relation type', 
       help_text='Specifies the type of relation not covered by the ones ' \
       'proposed by META-SHARE',
       max_length=100, )
 
-    relatedResource = models.OneToOneField("targetResourceInfoType_model", 
+    relatedResource = models.ForeignKey("targetResourceInfoType_model", 
       verbose_name='Related resource', 
       help_text='The full name, the identifier or the url of the related' \
       ' resource',
@@ -1411,7 +1426,7 @@ class modalityInfoType_model(SchemaModel):
     }
 
     modalityType = MultiSelectField(
-      verbose_name='Modality', 
+      verbose_name='Modality type', 
       help_text='Specifies the type of the modality represented in the r' \
       'esource or processed by a tool/service',
       
@@ -1420,7 +1435,7 @@ class modalityInfoType_model(SchemaModel):
       )
 
     modalityTypeDetails = models.CharField(
-      verbose_name='Modality details', 
+      verbose_name='Modality type details', 
       help_text='Provides further information on modalities',
       blank=True, max_length=500, )
 
@@ -1679,7 +1694,7 @@ class captureInfoType_model(SchemaModel):
     }
 
     capturingDeviceType = MultiSelectField(
-      verbose_name='Capturing device', 
+      verbose_name='Capturing device type', 
       help_text='The transducers through which the data is captured',
       blank=True, 
       max_length=1 + len(CAPTUREINFOTYPE_CAPTURINGDEVICETYPE_CHOICES['choices']) / 4,
@@ -1687,7 +1702,7 @@ class captureInfoType_model(SchemaModel):
       )
 
     capturingDeviceTypeDetails = models.CharField(
-      verbose_name='Capturing device details', 
+      verbose_name='Capturing device type details', 
       help_text='Provides further information on the capturing device',
       blank=True, max_length=400, )
 
@@ -1936,7 +1951,7 @@ class settingInfoType_model(SchemaModel):
       )
 
     conversationalType = models.CharField(
-      verbose_name='Conversational', 
+      verbose_name='Conversational type', 
       help_text='Specifies the conversational type of the resource',
       blank=True, 
       max_length=30,
@@ -1945,7 +1960,7 @@ class settingInfoType_model(SchemaModel):
       )
 
     scenarioType = models.CharField(
-      verbose_name='Scenario', 
+      verbose_name='Scenario type', 
       help_text='Indicates the task defined for the conversation or the ' \
       'interaction of participants',
       blank=True, 
@@ -2199,13 +2214,11 @@ class resolutionInfoType_model(SchemaModel):
                      key=lambda choice: choice[1].lower()),
       )
 
-    back_to_videoformatinfotype_model = models.ForeignKey("videoFormatInfoType_model",  blank=True, null=True)
-
-    back_to_imageformatinfotype_model = models.ForeignKey("imageFormatInfoType_model",  blank=True, null=True)
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+    def real_unicode_(self):
+        # pylint: disable-msg=C0301
+        formatargs = ['sizeWidth', 'sizeHeight', 'resolutionStandard', ]
+        formatstring = u'{} {} {}'
+        return self.unicode_(formatstring, formatargs)
 
 COMPRESSIONINFOTYPE_COMPRESSIONNAME_CHOICES = _make_choices_from_list([
   u'mpg', u'avi', u'mov', u'flac', u'shorten', u'mp3', u'oggVorbis',
@@ -2584,9 +2597,10 @@ PERSONINFOTYPE_SEX_CHOICES = _make_choices_from_list([
 # pylint: disable-msg=C0103
 class personInfoType_model(actorInfoType_model):
     """
-    Groups information relevant to personsrelated to the resource; to be
-    used mainly for contact persons, resource creators, validators,
-    annotators etc. for whom personal data can be provided
+    Groups information relevant to persons related to the resource; to
+    be used mainly for contact persons, resource creators,
+    validators, annotators etc. for whom personal data can be
+    provided
     """
 
     class Meta:
@@ -2662,7 +2676,7 @@ class personInfoType_model(actorInfoType_model):
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
-        formatargs = ['givenName', 'surname', 'communicationInfo/email', 'affiliation', ]
+        formatargs = ['surname', 'givenName', 'communicationInfo/email', 'affiliation', ]
         formatstring = u'{} {} {} {}'
         return self.unicode_(formatstring, formatargs)
 
@@ -2786,11 +2800,10 @@ LICENCEINFOTYPE_LICENCE_CHOICES = _make_choices_from_list([
   u'MSCommons_COM-NR-ND-FF',u'MSCommons_COM-NR-ND',
   u'MSCommons_NoCOM-NC-NR-ND-FF',u'MSCommons_NoCOM-NC-NR-ND',
   u'MSCommons_NoCOM-NC-NR-FF',u'MSCommons_NoCOM-NC-NR', u'ELRA_EVALUATION',
-  u'ELRA_VAR',u'ELRA_END_USER', u'ELRA_LIMITED', u'proprietary', u'CC',
-  u'CLARIN_PUB',u'CLARIN_ACA-NC', u'CC_BY-SA_3.0', u'LGPLv3', u'CLARIN_ACA',
-  u'CLARIN_RES',u'Princeton_Wordnet', u'GPL', u'GeneralLicenceGrant',
-  u'GFDL',u'CC_BY-NC-SA_3.0', u'ApacheLicence_V2.0', u'BSD-style',
-  u'underNegotiation',u'other', 
+  u'ELRA_VAR',u'ELRA_END_USER', u'proprietary', u'CC0', u'CLARIN_PUB',
+  u'CLARIN_ACA-NC',u'CC_BY-SA_3.0', u'LGPLv3', u'CLARIN_ACA', u'CLARIN_RES',
+  u'Princeton_Wordnet',u'GPL', u'GFDL', u'CC_BY-NC-SA_3.0',
+  u'ApacheLicence_V2.0',u'BSD-style', u'underNegotiation', u'other', 
 ])
 
 LICENCEINFOTYPE_RESTRICTIONSOFUSE_CHOICES = _make_choices_from_list([
@@ -2829,7 +2842,7 @@ class licenceInfoType_model(SchemaModel):
       ( u'distributionAccessMedium', u'distributionAccessMedium', RECOMMENDED ),
       ( u'downloadLocation', u'downloadLocation', OPTIONAL ),
       ( u'executionLocation', u'executionLocation', OPTIONAL ),
-      ( u'price', u'price', OPTIONAL ),
+      ( u'fee', u'fee', OPTIONAL ),
       ( u'attributionText', u'attributionText', OPTIONAL ),
       ( 'licensor/personInfo', 'licensor', RECOMMENDED ),
       ( 'licensor/organizationInfo', 'licensor', RECOMMENDED ),
@@ -2881,8 +2894,8 @@ class licenceInfoType_model(SchemaModel):
       'e is being executed',
       blank=True, )
 
-    price = models.CharField(
-      verbose_name='Price', 
+    fee = models.CharField(
+      verbose_name='Fee', 
       help_text='Specifies the costs that are required to access the res' \
       'ource, a fragment of the resource or to use atool or service',
       blank=True, max_length=100, )
@@ -3168,7 +3181,7 @@ class lingualityInfoType_model(SchemaModel):
     )
 
     lingualityType = models.CharField(
-      verbose_name='Linguality', 
+      verbose_name='Linguality type', 
       help_text='Indicates whether the resource includes one, two or mor' \
       'e languages',
       
@@ -3178,7 +3191,7 @@ class lingualityInfoType_model(SchemaModel):
       )
 
     multilingualityType = models.CharField(
-      verbose_name='Multilinguality', 
+      verbose_name='Multilinguality type', 
       help_text='Indicates whether the corpus is parallel, comparable or' \
       ' mixed',
       blank=True, 
@@ -3188,7 +3201,7 @@ class lingualityInfoType_model(SchemaModel):
       )
 
     multilingualityTypeDetails = models.CharField(
-      verbose_name='Multilinguality details', 
+      verbose_name='Multilinguality type details', 
       help_text='Provides further information on multilinguality of a re' \
       'source in free text',
       blank=True, max_length=512, )
@@ -3218,14 +3231,14 @@ class languageVarietyInfoType_model(SchemaModel):
     __schema_fields__ = (
       ( u'languageVarietyType', u'languageVarietyType', REQUIRED ),
       ( u'languageVarietyName', u'languageVarietyName', REQUIRED ),
-      ( u'sizePerLanguageVariety', u'sizePerLanguageVariety', REQUIRED ),
+      ( u'sizePerLanguageVariety', u'sizePerLanguageVariety', OPTIONAL ),
     )
     __schema_classes__ = {
       u'sizePerLanguageVariety': "sizeInfoType_model",
     }
 
     languageVarietyType = models.CharField(
-      verbose_name='Language variety', 
+      verbose_name='Language variety type', 
       help_text='Specifies the type of the language variety that occurs ' \
       'in the resource or is supported by a tool/service',
       
@@ -3240,11 +3253,11 @@ class languageVarietyInfoType_model(SchemaModel):
       'ource or is supported by a tool/service',
       max_length=1000, )
 
-    sizePerLanguageVariety = models.ForeignKey("sizeInfoType_model", 
+    sizePerLanguageVariety = models.OneToOneField("sizeInfoType_model", 
       verbose_name='Size per language variety', 
       help_text='Provides information on the size per language variety c' \
       'omponent',
-      )
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
@@ -3395,7 +3408,7 @@ class projectInfoType_model(SchemaModel):
       blank=True, )
 
     fundingType = MultiSelectField(
-      verbose_name='Funding', 
+      verbose_name='Funding type', 
       help_text='Specifies the type of funding of the project',
       
       max_length=1 + len(PROJECTINFOTYPE_FUNDINGTYPE_CHOICES['choices']) / 4,
@@ -3432,9 +3445,11 @@ class projectInfoType_model(SchemaModel):
     copy_status = models.CharField(default=MASTER, max_length=1, choices=COPY_CHOICES,
         help_text="Generalized copy status flag for this entity instance.")
 
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+    def real_unicode_(self):
+        # pylint: disable-msg=C0301
+        formatargs = ['projectName', 'projectShortName', ]
+        formatstring = u'{} ({})'
+        return self.unicode_(formatstring, formatargs)
 
 # pylint: disable-msg=C0103
 class usageInfoType_model(SchemaModel):
@@ -3717,11 +3732,11 @@ class corpusAudioInfoType_model(SchemaModel):
       ( u'lingualityInfo', u'lingualityInfo', REQUIRED ),
       ( u'languageInfo', u'languageinfotype_model_set', REQUIRED ),
       ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
-      ( u'audioSizeInfo', u'audiosizeinfotype_model_set', REQUIRED ),
+      ( u'audioSizeInfo', u'audioSizeInfo', REQUIRED ),
       ( u'audioContentInfo', u'audioContentInfo', RECOMMENDED ),
       ( u'settingInfo', u'settingInfo', RECOMMENDED ),
       ( u'audioFormatInfo', u'audioformatinfotype_model_set', RECOMMENDED ),
-      ( u'annotationInfo', u'annotationInfo', RECOMMENDED ),
+      ( u'annotationInfo', u'annotationinfotype_model_set', RECOMMENDED ),
       ( u'domainInfo', u'domaininfotype_model_set', RECOMMENDED ),
       ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', RECOMMENDED ),
       ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', RECOMMENDED ),
@@ -3770,7 +3785,10 @@ class corpusAudioInfoType_model(SchemaModel):
 
     # OneToMany field: modalityInfo
 
-    # OneToMany field: audioSizeInfo
+    audioSizeInfo = models.ManyToManyField("audioSizeInfoType_model", 
+      verbose_name='Audio size', 
+      help_text='SizeInfo Element for Audio parts of a resource',
+      related_name="audioSizeInfo_%(class)s_related", )
 
     audioContentInfo = models.OneToOneField("audioContentInfoType_model", 
       verbose_name='Audio content', 
@@ -3786,11 +3804,7 @@ class corpusAudioInfoType_model(SchemaModel):
 
     # OneToMany field: audioFormatInfo
 
-    annotationInfo = models.ManyToManyField("annotationInfoType_model", 
-      verbose_name='Annotation', 
-      help_text='Groups information on the annotated part(s) of a resour' \
-      'ce',
-      blank=True, null=True, related_name="annotationInfo_%(class)s_related", )
+    # OneToMany field: annotationInfo
 
     # OneToMany field: domainInfo
 
@@ -3912,7 +3926,7 @@ class audioSizeInfoType_model(SchemaModel):
 
     __schema_name__ = 'audioSizeInfoType'
     __schema_fields__ = (
-      ( u'sizeInfo', u'sizeInfo', REQUIRED ),
+      ( u'sizeInfo', u'sizeinfotype_model_set', REQUIRED ),
       ( u'durationOfEffectiveSpeechInfo', u'durationofeffectivespeechinfotype_model_set', OPTIONAL ),
       ( u'durationOfAudioInfo', u'durationofaudioinfotype_model_set', OPTIONAL ),
     )
@@ -3922,17 +3936,11 @@ class audioSizeInfoType_model(SchemaModel):
       u'sizeInfo': "sizeInfoType_model",
     }
 
-    sizeInfo = models.ManyToManyField("sizeInfoType_model", 
-      verbose_name='Size', 
-      help_text='Groups information on the size of the resource or of re' \
-      'source parts',
-      related_name="sizeInfo_%(class)s_related", )
+    # OneToMany field: sizeInfo
 
     # OneToMany field: durationOfEffectiveSpeechInfo
 
     # OneToMany field: durationOfAudioInfo
-
-    back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -3975,9 +3983,11 @@ class durationOfEffectiveSpeechInfoType_model(SchemaModel):
 
     back_to_audiosizeinfotype_model = models.ForeignKey("audioSizeInfoType_model",  blank=True, null=True)
 
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+    def real_unicode_(self):
+        # pylint: disable-msg=C0301
+        formatargs = ['size', 'durationUnit', ]
+        formatstring = u'{} {}'
+        return self.unicode_(formatstring, formatargs)
 
 DURATIONOFAUDIOINFOTYPE_DURATIONUNIT_CHOICES = _make_choices_from_list([
   u'hours', u'minutes', u'seconds', 
@@ -4018,16 +4028,14 @@ class durationOfAudioInfoType_model(SchemaModel):
 
     back_to_audiosizeinfotype_model = models.ForeignKey("audioSizeInfoType_model",  blank=True, null=True)
 
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+    def real_unicode_(self):
+        # pylint: disable-msg=C0301
+        formatargs = ['size', 'durationUnit', ]
+        formatstring = u'{} {}'
+        return self.unicode_(formatstring, formatargs)
 
 AUDIOFORMATINFOTYPE_SIGNALENCODING_CHOICES = _make_choices_from_list([
   u'aLaw', u'linearPCM', u'\xb5-law', u'ADPCM', u'other', 
-])
-
-AUDIOFORMATINFOTYPE_SAMPLINGRATE_CHOICES = _make_choices_from_int_list([
-8000, 16000, 44100, 48000, 96000, 
 ])
 
 AUDIOFORMATINFOTYPE_QUANTIZATION_CHOICES = _make_choices_from_int_list([
@@ -4085,7 +4093,7 @@ class audioFormatInfoType_model(SchemaModel):
     }
 
     mimeType = models.CharField(
-      verbose_name='Mime', 
+      verbose_name='Mime type', 
       help_text='The mime-type of the resource which is a formalized spe' \
       'cifier for the format included or a mime-type that the tool/servi' \
       'ce accepts; value to be taken from a subset of the official mime ' \
@@ -4105,10 +4113,7 @@ class audioFormatInfoType_model(SchemaModel):
       verbose_name='Sampling rate', 
       help_text='Specifies the format of files contained in the resource' \
       ' in Hertz',
-      
-      max_length=AUDIOFORMATINFOTYPE_SAMPLINGRATE_CHOICES['max_length'],
-      choices=AUDIOFORMATINFOTYPE_SAMPLINGRATE_CHOICES['choices'],
-      )
+      blank=True, null=True, )
 
     quantization = models.IntegerField(
       verbose_name='Quantization', 
@@ -4299,7 +4304,7 @@ class corpusTextInfoType_model(SchemaModel):
       ( u'sizeInfo', u'sizeinfotype_model_set', REQUIRED ),
       ( u'textFormatInfo', u'textformatinfotype_model_set', RECOMMENDED ),
       ( u'characterEncodingInfo', u'characterencodinginfotype_model_set', RECOMMENDED ),
-      ( u'annotationInfo', u'annotationInfo', RECOMMENDED ),
+      ( u'annotationInfo', u'annotationinfotype_model_set', RECOMMENDED ),
       ( u'domainInfo', u'domaininfotype_model_set', RECOMMENDED ),
       ( u'textClassificationInfo', u'textclassificationinfotype_model_set', RECOMMENDED ),
       ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', RECOMMENDED ),
@@ -4349,11 +4354,7 @@ class corpusTextInfoType_model(SchemaModel):
 
     # OneToMany field: characterEncodingInfo
 
-    annotationInfo = models.ManyToManyField("annotationInfoType_model", 
-      verbose_name='Annotation', 
-      help_text='Groups information on the annotated part(s) of a resour' \
-      'ce',
-      blank=True, null=True, related_name="annotationInfo_%(class)s_related", )
+    # OneToMany field: annotationInfo
 
     # OneToMany field: domainInfo
 
@@ -4401,7 +4402,7 @@ class textFormatInfoType_model(SchemaModel):
     }
 
     mimeType = models.CharField(
-      verbose_name='Mime', 
+      verbose_name='Mime type', 
       help_text='The mime-type of the resource which is a formalized spe' \
       'cifier for the format included or a mime-type that the tool/servi' \
       'ce accepts; value to be taken from a subset of the official mime ' \
@@ -4467,7 +4468,7 @@ class textClassificationInfoType_model(SchemaModel):
       blank=True, max_length=50, )
 
     textType = models.CharField(
-      verbose_name='Text', 
+      verbose_name='Text type', 
       help_text='Specifies the type of the text according to a text type' \
       ' classification',
       blank=True, max_length=50, )
@@ -4506,6 +4507,10 @@ class textClassificationInfoType_model(SchemaModel):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
 
+CORPUSVIDEOINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
+  u'text', u'audio', u'video', u'image', u'textNumerical', 
+])
+
 # pylint: disable-msg=C0103
 class corpusVideoInfoType_model(SchemaModel):
     """
@@ -4525,8 +4530,8 @@ class corpusVideoInfoType_model(SchemaModel):
       ( u'sizeInfo', u'sizeinfotype_model_set', REQUIRED ),
       ( u'videoContentInfo', u'videoContentInfo', RECOMMENDED ),
       ( u'settingInfo', u'settingInfo', RECOMMENDED ),
-      ( u'videoFormatInfo', u'videoFormatInfo', RECOMMENDED ),
-      ( u'annotationInfo', u'annotationInfo', RECOMMENDED ),
+      ( u'videoFormatInfo', u'videoformatinfotype_model_set', RECOMMENDED ),
+      ( u'annotationInfo', u'annotationinfotype_model_set', RECOMMENDED ),
       ( u'domainInfo', u'domaininfotype_model_set', RECOMMENDED ),
       ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', RECOMMENDED ),
       ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', RECOMMENDED ),
@@ -4563,7 +4568,11 @@ class corpusVideoInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      default="video", editable=False, max_length=10, )
+      
+      max_length=30,
+      choices=sorted(CORPUSVIDEOINFOTYPE_MEDIATYPE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
+      )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -4593,17 +4602,9 @@ class corpusVideoInfoType_model(SchemaModel):
       ' and/or video part of a resource',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    videoFormatInfo = models.ManyToManyField("videoFormatInfoType_model", 
-      verbose_name='Video format', 
-      help_text='Groups information on the format(s) of a resource; repe' \
-      'ated if parts of the resource are in different formats',
-      blank=True, null=True, related_name="videoFormatInfo_%(class)s_related", )
+    # OneToMany field: videoFormatInfo
 
-    annotationInfo = models.ManyToManyField("annotationInfoType_model", 
-      verbose_name='Annotation', 
-      help_text='Groups information on the annotated part(s) of a resour' \
-      'ce',
-      blank=True, null=True, related_name="annotationInfo_%(class)s_related", )
+    # OneToMany field: annotationInfo
 
     # OneToMany field: domainInfo
 
@@ -4717,7 +4718,7 @@ class videoFormatInfoType_model(SchemaModel):
       ( u'colourSpace', u'colourSpace', RECOMMENDED ),
       ( u'colourDepth', u'colourDepth', OPTIONAL ),
       ( u'frameRate', u'frameRate', OPTIONAL ),
-      ( u'resolutionInfo', u'resolutioninfotype_model_set', RECOMMENDED ),
+      ( u'resolutionInfo', u'resolutionInfo', RECOMMENDED ),
       ( u'visualModelling', u'visualModelling', OPTIONAL ),
       ( u'fidelity', u'fidelity', OPTIONAL ),
       ( u'compressionInfo', u'compressionInfo', OPTIONAL ),
@@ -4730,7 +4731,7 @@ class videoFormatInfoType_model(SchemaModel):
     }
 
     mimeType = models.CharField(
-      verbose_name='Mime', 
+      verbose_name='Mime type', 
       help_text='The mime-type of the resource which is a formalized spe' \
       'cifier for the format included or a mime-type that the tool/servi' \
       'ce accepts; value to be taken from a subset of the official mime ' \
@@ -4757,7 +4758,10 @@ class videoFormatInfoType_model(SchemaModel):
       help_text='The number of frames per second',
       blank=True, null=True, )
 
-    # OneToMany field: resolutionInfo
+    resolutionInfo = models.ManyToManyField("resolutionInfoType_model", 
+      verbose_name='Resolution', 
+      help_text='Groups together information on the image resolution',
+      blank=True, null=True, related_name="resolutionInfo_%(class)s_related", )
 
     visualModelling = models.CharField(
       verbose_name='Visual modelling', 
@@ -4784,6 +4788,12 @@ class videoFormatInfoType_model(SchemaModel):
       help_text='Used to give info on size of parts of a resource that d' \
       'iffer as to the format',
       blank=True, null=True, on_delete=models.SET_NULL, )
+
+    back_to_corpusvideoinfotype_model = models.ForeignKey("corpusVideoInfoType_model",  blank=True, null=True)
+
+    back_to_languagedescriptionvideoinfotype_model = models.ForeignKey("languageDescriptionVideoInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -4868,8 +4878,8 @@ class corpusImageInfoType_model(SchemaModel):
       ( u'languageInfo', u'languageinfotype_model_set', OPTIONAL ),
       ( u'sizeInfo', u'sizeinfotype_model_set', REQUIRED ),
       ( u'imageContentInfo', u'imageContentInfo', RECOMMENDED ),
-      ( u'imageFormatInfo', u'imageFormatInfo', RECOMMENDED ),
-      ( u'annotationInfo', u'annotationInfo', RECOMMENDED ),
+      ( u'imageFormatInfo', u'imageformatinfotype_model_set', RECOMMENDED ),
+      ( u'annotationInfo', u'annotationinfotype_model_set', RECOMMENDED ),
       ( u'domainInfo', u'domaininfotype_model_set', OPTIONAL ),
       ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', OPTIONAL ),
       ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', OPTIONAL ),
@@ -4923,17 +4933,9 @@ class corpusImageInfoType_model(SchemaModel):
       'e part of a resource',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    imageFormatInfo = models.ManyToManyField("imageFormatInfoType_model", 
-      verbose_name='Image format', 
-      help_text='Groups information on the format of the image component' \
-      ' of the resource',
-      blank=True, null=True, related_name="imageFormatInfo_%(class)s_related", )
+    # OneToMany field: imageFormatInfo
 
-    annotationInfo = models.ManyToManyField("annotationInfoType_model", 
-      verbose_name='Annotation', 
-      help_text='Groups information on the annotated part(s) of a resour' \
-      'ce',
-      blank=True, null=True, related_name="annotationInfo_%(class)s_related", )
+    # OneToMany field: annotationInfo
 
     # OneToMany field: domainInfo
 
@@ -5048,7 +5050,7 @@ class imageFormatInfoType_model(SchemaModel):
       ( u'colourSpace', u'colourSpace', RECOMMENDED ),
       ( u'colourDepth', u'colourDepth', OPTIONAL ),
       ( u'compressionInfo', u'compressionInfo', OPTIONAL ),
-      ( u'resolutionInfo', u'resolutioninfotype_model_set', OPTIONAL ),
+      ( u'resolutionInfo', u'resolutionInfo', OPTIONAL ),
       ( u'visualModelling', u'visualModelling', OPTIONAL ),
       ( u'rasterOrVectorGraphics', u'rasterOrVectorGraphics', OPTIONAL ),
       ( u'quality', u'quality', OPTIONAL ),
@@ -5061,7 +5063,7 @@ class imageFormatInfoType_model(SchemaModel):
     }
 
     mimeType = models.CharField(
-      verbose_name='Mime', 
+      verbose_name='Mime type', 
       help_text='The mime-type of the resource which is a formalized spe' \
       'cifier for the format included or a mime-type that the tool/servi' \
       'ce accepts; value to be taken from a subset of the official mime ' \
@@ -5089,7 +5091,10 @@ class imageFormatInfoType_model(SchemaModel):
       'nd method of a resource',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    # OneToMany field: resolutionInfo
+    resolutionInfo = models.ManyToManyField("resolutionInfoType_model", 
+      verbose_name='Resolution', 
+      help_text='Groups together information on the image resolution',
+      blank=True, null=True, related_name="resolutionInfo_%(class)s_related", )
 
     visualModelling = models.CharField(
       verbose_name='Visual modelling', 
@@ -5124,6 +5129,12 @@ class imageFormatInfoType_model(SchemaModel):
       help_text='Used to give info on size of parts of a resource that d' \
       'iffer as to the format',
       blank=True, null=True, on_delete=models.SET_NULL, )
+
+    back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
+
+    back_to_languagedescriptionimageinfotype_model = models.ForeignKey("languageDescriptionImageInfoType_model",  blank=True, null=True)
+
+    back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -5212,7 +5223,7 @@ class corpusTextNumericalInfoType_model(SchemaModel):
       ( u'recordingInfo', u'recordingInfo', RECOMMENDED ),
       ( u'captureInfo', u'captureInfo', RECOMMENDED ),
       ( u'creationInfo', u'creationInfo', RECOMMENDED ),
-      ( u'annotationInfo', u'annotationInfo', RECOMMENDED ),
+      ( u'annotationInfo', u'annotationinfotype_model_set', RECOMMENDED ),
       ( u'linkToOtherMediaInfo', u'linktoothermediainfotype_model_set', RECOMMENDED ),
     )
     __schema_classes__ = {
@@ -5235,7 +5246,7 @@ class corpusTextNumericalInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      default="textNumerical", editable=False, max_length=10, )
+      default="textNumerical", editable=False, max_length=20, )
 
     # OneToMany field: modalityInfo
 
@@ -5269,11 +5280,7 @@ class corpusTextNumericalInfoType_model(SchemaModel):
       'ma list etc.)',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    annotationInfo = models.OneToOneField("annotationInfoType_model", 
-      verbose_name='Annotation', 
-      help_text='Groups information on the annotated part(s) of a resour' \
-      'ce',
-      blank=True, null=True, on_delete=models.SET_NULL, )
+    # OneToMany field: annotationInfo
 
     # OneToMany field: linkToOtherMediaInfo
 
@@ -5330,7 +5337,7 @@ class textNumericalFormatInfoType_model(SchemaModel):
     }
 
     mimeType = models.CharField(
-      verbose_name='Mime', 
+      verbose_name='Mime type', 
       help_text='The mime-type of the resource which is a formalized spe' \
       'cifier for the format included or a mime-type that the tool/servi' \
       'ce accepts; value to be taken from a subset of the official mime ' \
@@ -5374,7 +5381,7 @@ class corpusTextNgramInfoType_model(SchemaModel):
       ( u'sizeInfo', u'sizeinfotype_model_set', REQUIRED ),
       ( u'textFormatInfo', u'textformatinfotype_model_set', RECOMMENDED ),
       ( u'characterEncodingInfo', u'characterencodinginfotype_model_set', RECOMMENDED ),
-      ( u'annotationInfo', u'annotationInfo', RECOMMENDED ),
+      ( u'annotationInfo', u'annotationinfotype_model_set', RECOMMENDED ),
       ( u'domainInfo', u'domaininfotype_model_set', RECOMMENDED ),
       ( u'textClassificationInfo', u'textclassificationinfotype_model_set', RECOMMENDED ),
       ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', RECOMMENDED ),
@@ -5430,11 +5437,7 @@ class corpusTextNgramInfoType_model(SchemaModel):
 
     # OneToMany field: characterEncodingInfo
 
-    annotationInfo = models.ManyToManyField("annotationInfoType_model", 
-      verbose_name='Annotation', 
-      help_text='Groups information on the annotated part(s) of a resour' \
-      'ce',
-      blank=True, null=True, related_name="annotationInfo_%(class)s_related", )
+    # OneToMany field: annotationInfo
 
     # OneToMany field: domainInfo
 
@@ -5559,7 +5562,7 @@ class relatedLexiconInfoType_model(SchemaModel):
     )
 
     relatedLexiconType = models.CharField(
-      verbose_name='Related lexicon', 
+      verbose_name='Related lexicon type', 
       help_text='Indicates the position of the lexica that must or can b' \
       'e used with the grammar',
       
@@ -5575,7 +5578,7 @@ class relatedLexiconInfoType_model(SchemaModel):
       blank=True, max_length=500, )
 
     compatibleLexiconType = MultiSelectField(
-      verbose_name='Compatible lexicon', 
+      verbose_name='Compatible lexicon type', 
       help_text='Type of (external) lexicon that can be used with the gr' \
       'ammar',
       blank=True, 
@@ -5590,6 +5593,17 @@ class relatedLexiconInfoType_model(SchemaModel):
 LANGUAGEDESCRIPTIONENCODINGINFOTYPE_ENCODINGLEVEL_CHOICES = _make_choices_from_list([
   u'phonetics', u'phonology', u'semantics', u'morphology', u'syntax',
   u'pragmatics',u'other', 
+])
+
+LANGUAGEDESCRIPTIONENCODINGINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES = _make_choices_from_list([
+  u'BLM', u'CES', u'EAGLES', u'EML', u'EMMA', u'GMX', u'GrAF', u'HamNoSys',
+  u'InkML',u'ISO12620', u'ISO16642', u'ISO1987', u'ISO26162', u'ISO30042',
+  u'ISO704',u'LMF', u'MAF', u'MLIF', u'MULTEXT', u'MUMIN',
+  u'multimodalInteractionFramework',u'OAXAL', u'OWL', u'pennTreeBank',
+  u'pragueTreebank',u'RDF', u'SemAF', u'SemAF_DA', u'SemAF_NE',
+  u'SemAF_SRL',u'SemAF_DS', u'SKOS', u'SRX', u'SynAF', u'TBX', u'TMX',
+  u'TEI',u'TEI_P3', u'TEI_P4', u'TEI_P5', u'TimeML', u'XCES', u'XLIFF',
+  u'WordNet',u'other', 
 ])
 
 LANGUAGEDESCRIPTIONENCODINGINFOTYPE_TASK_CHOICES = _make_choices_from_list([
@@ -5634,13 +5648,16 @@ class languageDescriptionEncodingInfoType_model(SchemaModel):
       choices=LANGUAGEDESCRIPTIONENCODINGINFOTYPE_ENCODINGLEVEL_CHOICES['choices'],
       )
 
-    conformanceToStandardsBestPractices = MultiTextField(max_length=500, widget=MultiFieldWidget(widget_id=26, max_length=500), 
+    conformanceToStandardsBestPractices = MultiSelectField(
       verbose_name='Conformance to standards best practices', 
       help_text='Specifies the standards or the best practices to which ' \
       'the tagset used for the annotation conforms',
-      blank=True, )
+      blank=True, 
+      max_length=1 + len(LANGUAGEDESCRIPTIONENCODINGINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES['choices']) / 4,
+      choices=LANGUAGEDESCRIPTIONENCODINGINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES['choices'],
+      )
 
-    theoreticModel = MultiTextField(max_length=500, widget=MultiFieldWidget(widget_id=27, max_length=500), 
+    theoreticModel = MultiTextField(max_length=500, widget=MultiFieldWidget(widget_id=26, max_length=500), 
       verbose_name='Theoretic model', 
       help_text='Name of the theoretic model applied for the creation/en' \
       'richment of the resource, and/or reference (URL or bibliographic ' \
@@ -5875,7 +5892,7 @@ class languageDescriptionVideoInfoType_model(SchemaModel):
       ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
       ( u'sizeInfo', u'sizeinfotype_model_set', RECOMMENDED ),
       ( u'videoContentInfo', u'videoContentInfo', RECOMMENDED ),
-      ( u'videoFormatInfo', u'videoFormatInfo', RECOMMENDED ),
+      ( u'videoFormatInfo', u'videoformatinfotype_model_set', RECOMMENDED ),
       ( u'domainInfo', u'domaininfotype_model_set', RECOMMENDED ),
       ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', RECOMMENDED ),
       ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', RECOMMENDED ),
@@ -5932,11 +5949,7 @@ class languageDescriptionVideoInfoType_model(SchemaModel):
       'o part of a resource',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    videoFormatInfo = models.ManyToManyField("videoFormatInfoType_model", 
-      verbose_name='Video format', 
-      help_text='Groups information on the format(s) of a resource; repe' \
-      'ated if parts of the resource are in different formats',
-      blank=True, null=True, related_name="videoFormatInfo_%(class)s_related", )
+    # OneToMany field: videoFormatInfo
 
     # OneToMany field: domainInfo
 
@@ -5970,7 +5983,7 @@ class languageDescriptionImageInfoType_model(SchemaModel):
       ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
       ( u'sizeInfo', u'sizeinfotype_model_set', RECOMMENDED ),
       ( u'imageContentInfo', u'imageContentInfo', RECOMMENDED ),
-      ( u'imageFormatInfo', u'imageFormatInfo', RECOMMENDED ),
+      ( u'imageFormatInfo', u'imageformatinfotype_model_set', RECOMMENDED ),
       ( u'domainInfo', u'domaininfotype_model_set', OPTIONAL ),
       ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', OPTIONAL ),
       ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', OPTIONAL ),
@@ -6027,11 +6040,7 @@ class languageDescriptionImageInfoType_model(SchemaModel):
       'e part of a resource',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    imageFormatInfo = models.ManyToManyField("imageFormatInfoType_model", 
-      verbose_name='Image format', 
-      help_text='Groups information on the format of the image component' \
-      ' of the resource',
-      blank=True, null=True, related_name="imageFormatInfo_%(class)s_related", )
+    # OneToMany field: imageFormatInfo
 
     # OneToMany field: domainInfo
 
@@ -6066,6 +6075,17 @@ LEXICALCONCEPTUALRESOURCEENCODINGINFOTYPE_LINGUISTICINFORMATION_CHOICES = _make_
   u'semantics-EventType',u'semantics-SemanticRoles',
   u'statisticalProperties',u'morpho-Derivation',
   u'semantics-QualiaStructure',u'syntacticoSemanticLinks', u'other', 
+])
+
+LEXICALCONCEPTUALRESOURCEENCODINGINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES = _make_choices_from_list([
+  u'BLM', u'CES', u'EAGLES', u'EML', u'EMMA', u'GMX', u'GrAF', u'HamNoSys',
+  u'InkML',u'ISO12620', u'ISO16642', u'ISO1987', u'ISO26162', u'ISO30042',
+  u'ISO704',u'LMF', u'MAF', u'MLIF', u'MULTEXT', u'MUMIN',
+  u'multimodalInteractionFramework',u'OAXAL', u'OWL', u'pennTreeBank',
+  u'pragueTreebank',u'RDF', u'SemAF', u'SemAF_DA', u'SemAF_NE',
+  u'SemAF_SRL',u'SemAF_DS', u'SKOS', u'SRX', u'SynAF', u'TBX', u'TMX',
+  u'TEI',u'TEI_P3', u'TEI_P4', u'TEI_P5', u'TimeML', u'XCES', u'XLIFF',
+  u'WordNet',u'other', 
 ])
 
 LEXICALCONCEPTUALRESOURCEENCODINGINFOTYPE_EXTRATEXTUALINFORMATION_CHOICES = _make_choices_from_list([
@@ -6109,7 +6129,7 @@ class lexicalConceptualResourceEncodingInfoType_model(SchemaModel):
       )
 
     linguisticInformation = MultiSelectField(
-      verbose_name='Linguisticrmation', 
+      verbose_name='Linguistic information', 
       help_text='A more detailed account of the linguistic information c' \
       'ontained in the lexicalConceptualResource',
       blank=True, 
@@ -6117,13 +6137,16 @@ class lexicalConceptualResourceEncodingInfoType_model(SchemaModel):
       choices=LEXICALCONCEPTUALRESOURCEENCODINGINFOTYPE_LINGUISTICINFORMATION_CHOICES['choices'],
       )
 
-    conformanceToStandardsBestPractices = MultiTextField(max_length=500, widget=MultiFieldWidget(widget_id=28, max_length=500), 
+    conformanceToStandardsBestPractices = MultiSelectField(
       verbose_name='Conformance to standards best practices', 
       help_text='Specifies the standards or the best practices to which ' \
       'the tagset used for the annotation conforms',
-      blank=True, )
+      blank=True, 
+      max_length=1 + len(LEXICALCONCEPTUALRESOURCEENCODINGINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES['choices']) / 4,
+      choices=LEXICALCONCEPTUALRESOURCEENCODINGINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES['choices'],
+      )
 
-    theoreticModel = MultiTextField(max_length=500, widget=MultiFieldWidget(widget_id=29, max_length=500), 
+    theoreticModel = MultiTextField(max_length=500, widget=MultiFieldWidget(widget_id=27, max_length=500), 
       verbose_name='Theoretic model', 
       help_text='Name of the theoretic model applied for the creation/en' \
       'richment of the resource, and/or reference (URL or bibliographic ' \
@@ -6131,14 +6154,14 @@ class lexicalConceptualResourceEncodingInfoType_model(SchemaModel):
       '',
       blank=True, )
 
-    externalRef = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=30, max_length=100), 
+    externalRef = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=28, max_length=100), 
       verbose_name='External ref', 
       help_text='Another resource to which the lexicalConceptualResource' \
       ' is linked (e.g. link to a wordnet or ontology)',
       blank=True, )
 
     extratextualInformation = MultiSelectField(
-      verbose_name='Extratextualrmation', 
+      verbose_name='Extratextual information', 
       help_text='An indication of the extratextual information contained' \
       ' in the lexicalConceptualResouce; can be used as an alternative t' \
       'o audio, image, videos etc. for cases where these are not conside' \
@@ -6149,7 +6172,7 @@ class lexicalConceptualResourceEncodingInfoType_model(SchemaModel):
       )
 
     extraTextualInformationUnit = MultiSelectField(
-      verbose_name='Extra textualrmation unit', 
+      verbose_name='Extratextual information unit', 
       help_text='The unit of the extratextual information contained in t' \
       'he lexical conceptual resource',
       blank=True, 
@@ -6328,7 +6351,7 @@ class lexicalConceptualResourceVideoInfoType_model(SchemaModel):
       ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
       ( u'sizeInfo', u'sizeinfotype_model_set', RECOMMENDED ),
       ( u'videoContentInfo', u'videoContentInfo', REQUIRED ),
-      ( u'videoFormatInfo', u'videoFormatInfo', RECOMMENDED ),
+      ( u'videoFormatInfo', u'videoformatinfotype_model_set', RECOMMENDED ),
       ( u'domainInfo', u'domaininfotype_model_set', OPTIONAL ),
       ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', OPTIONAL ),
       ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', OPTIONAL ),
@@ -6373,11 +6396,7 @@ class lexicalConceptualResourceVideoInfoType_model(SchemaModel):
       'o part of a resource',
       )
 
-    videoFormatInfo = models.ManyToManyField("videoFormatInfoType_model", 
-      verbose_name='Video format', 
-      help_text='Groups information on the format(s) of a resource; repe' \
-      'ated if parts of the resource are in different formats',
-      blank=True, null=True, related_name="videoFormatInfo_%(class)s_related", )
+    # OneToMany field: videoFormatInfo
 
     # OneToMany field: domainInfo
 
@@ -6408,7 +6427,7 @@ class lexicalConceptualResourceImageInfoType_model(SchemaModel):
       ( u'languageInfo', u'languageinfotype_model_set', OPTIONAL ),
       ( u'sizeInfo', u'sizeinfotype_model_set', RECOMMENDED ),
       ( u'imageContentInfo', u'imageContentInfo', RECOMMENDED ),
-      ( u'imageFormatInfo', u'imageFormatInfo', RECOMMENDED ),
+      ( u'imageFormatInfo', u'imageformatinfotype_model_set', RECOMMENDED ),
       ( u'domainInfo', u'domaininfotype_model_set', OPTIONAL ),
       ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', OPTIONAL ),
       ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', OPTIONAL ),
@@ -6453,11 +6472,7 @@ class lexicalConceptualResourceImageInfoType_model(SchemaModel):
       'e part of a resource',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    imageFormatInfo = models.ManyToManyField("imageFormatInfoType_model", 
-      verbose_name='Image format', 
-      help_text='Groups information on the format of the image component' \
-      ' of the resource',
-      blank=True, null=True, related_name="imageFormatInfo_%(class)s_related", )
+    # OneToMany field: imageFormatInfo
 
     # OneToMany field: domainInfo
 
@@ -6555,13 +6570,14 @@ INPUTINFOTYPE_SEGMENTATIONLEVEL_CHOICES = _make_choices_from_list([
 ])
 
 INPUTINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES = _make_choices_from_list([
-  u'CES', u'EML', u'EMMA', u'GMX', u'HamNoSys', u'InkML', u'ISO12620',
-  u'ISO16642',u'ISO1987', u'ISO26162', u'ISO30042', u'ISO704', u'LMF',
-  u'MAF',u'MLIF', u'MULTEXT', u'multimodalInteractionFramework', u'OAXAL',
-  u'OWL',u'pennTreeBank', u'pragueTreebank', u'RDF', u'SemAF', u'SemAF_DA',
-  u'SemAF_NE',u'SemAF_SRL', u'SemAF_DS', u'SKOS', u'SRX', u'SynAF', u'TBX',
-  u'TMX',u'TEI', u'TEI_P3', u'TEI_P4', u'TEI_P5', u'TimeML', u'XCES',
-  u'XLIFF',u'MUMIN', u'BLM', u'other', 
+  u'BLM', u'CES', u'EAGLES', u'EML', u'EMMA', u'GMX', u'GrAF', u'HamNoSys',
+  u'InkML',u'ISO12620', u'ISO16642', u'ISO1987', u'ISO26162', u'ISO30042',
+  u'ISO704',u'LMF', u'MAF', u'MLIF', u'MULTEXT', u'MUMIN',
+  u'multimodalInteractionFramework',u'OAXAL', u'OWL', u'pennTreeBank',
+  u'pragueTreebank',u'RDF', u'SemAF', u'SemAF_DA', u'SemAF_NE',
+  u'SemAF_SRL',u'SemAF_DS', u'SKOS', u'SRX', u'SynAF', u'TBX', u'TMX',
+  u'TEI',u'TEI_P3', u'TEI_P4', u'TEI_P5', u'TimeML', u'XCES', u'XLIFF',
+  u'WordNet',u'other', 
 ])
 
 # pylint: disable-msg=C0103
@@ -6593,7 +6609,7 @@ class inputInfoType_model(SchemaModel):
     )
 
     mediaType = MultiSelectField(
-      verbose_name='Media', 
+      verbose_name='Media type', 
       help_text='Specifies the media type of the resource and basically ' \
       'corresponds to the physical medium of the content representation.' \
       ' Each media type is described through a distinctive set of featur' \
@@ -6606,7 +6622,7 @@ class inputInfoType_model(SchemaModel):
       )
 
     resourceType = MultiSelectField(
-      verbose_name='Resource', 
+      verbose_name='Resource type', 
       help_text='The type of the resource that a tool or service takes a' \
       's input or produces as output',
       blank=True, 
@@ -6615,7 +6631,7 @@ class inputInfoType_model(SchemaModel):
       )
 
     modalityType = MultiSelectField(
-      verbose_name='Modality', 
+      verbose_name='Modality type', 
       help_text='Specifies the type of the modality represented in the r' \
       'esource or processed by a tool/service',
       blank=True, 
@@ -6623,28 +6639,28 @@ class inputInfoType_model(SchemaModel):
       choices=INPUTINFOTYPE_MODALITYTYPE_CHOICES['choices'],
       )
 
-    languageName = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=31, max_length=1000), 
+    languageName = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=29, max_length=1000), 
       verbose_name='Language name', 
       help_text='A human understandable name of the language that is use' \
       'd in the resource or supported by the tool/service according to t' \
       'he IETF BCP47 standard',
       blank=True, )
 
-    languageId = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=32, max_length=1000), 
+    languageId = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=30, max_length=1000), 
       verbose_name='Language id', 
       help_text='The identifier of the language that is included in the ' \
       'resource or supported by the tool/service according to the IETF B' \
       'CP47 standard',
       blank=True, )
 
-    languageVarietyName = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=33, max_length=1000), 
+    languageVarietyName = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=31, max_length=1000), 
       verbose_name='Language variety name', 
       help_text='Specifies the type of the language variety that occurs ' \
       'in the resource or is supported by a tool/service',
       blank=True, )
 
-    mimeType = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=34, max_length=1000), 
-      verbose_name='Mime', 
+    mimeType = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=32, max_length=1000), 
+      verbose_name='Mime type', 
       help_text='The mime-type of the resource which is a formalized spe' \
       'cifier for the format included or a mime-type that the tool/servi' \
       'ce accepts; value to be taken from a subset of the official mime ' \
@@ -6662,7 +6678,7 @@ class inputInfoType_model(SchemaModel):
       )
 
     annotationType = MultiSelectField(
-      verbose_name='Annotation', 
+      verbose_name='Annotation type', 
       help_text='Specifies the annotation level of the resource or the a' \
       'nnotation type a tool/ service requires or produces as an output',
       blank=True, 
@@ -6670,14 +6686,14 @@ class inputInfoType_model(SchemaModel):
       choices=INPUTINFOTYPE_ANNOTATIONTYPE_CHOICES['choices'],
       )
 
-    annotationFormat = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=35, max_length=1000), 
+    annotationFormat = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=33, max_length=1000), 
       verbose_name='Annotation format', 
       help_text='Specifies the format that is used in the annotation pro' \
       'cess since often the mime type will not be sufficient for machine' \
       ' processing',
       blank=True, )
 
-    tagset = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=36, max_length=1000), 
+    tagset = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=34, max_length=1000), 
       verbose_name='Tagset', 
       help_text='A name or a url reference to the tagset used in the ann' \
       'otation of the resource or used by the tool/service',
@@ -6792,13 +6808,14 @@ OUTPUTINFOTYPE_SEGMENTATIONLEVEL_CHOICES = _make_choices_from_list([
 ])
 
 OUTPUTINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES = _make_choices_from_list([
-  u'CES', u'EML', u'EMMA', u'GMX', u'HamNoSys', u'InkML', u'ISO12620',
-  u'ISO16642',u'ISO1987', u'ISO26162', u'ISO30042', u'ISO704', u'LMF',
-  u'MAF',u'MLIF', u'MULTEXT', u'multimodalInteractionFramework', u'OAXAL',
-  u'OWL',u'pennTreeBank', u'pragueTreebank', u'RDF', u'SemAF', u'SemAF_DA',
-  u'SemAF_NE',u'SemAF_SRL', u'SemAF_DS', u'SKOS', u'SRX', u'SynAF', u'TBX',
-  u'TMX',u'TEI', u'TEI_P3', u'TEI_P4', u'TEI_P5', u'TimeML', u'XCES',
-  u'XLIFF',u'MUMIN', u'BLM', u'other', 
+  u'BLM', u'CES', u'EAGLES', u'EML', u'EMMA', u'GMX', u'GrAF', u'HamNoSys',
+  u'InkML',u'ISO12620', u'ISO16642', u'ISO1987', u'ISO26162', u'ISO30042',
+  u'ISO704',u'LMF', u'MAF', u'MLIF', u'MULTEXT', u'MUMIN',
+  u'multimodalInteractionFramework',u'OAXAL', u'OWL', u'pennTreeBank',
+  u'pragueTreebank',u'RDF', u'SemAF', u'SemAF_DA', u'SemAF_NE',
+  u'SemAF_SRL',u'SemAF_DS', u'SKOS', u'SRX', u'SynAF', u'TBX', u'TMX',
+  u'TEI',u'TEI_P3', u'TEI_P4', u'TEI_P5', u'TimeML', u'XCES', u'XLIFF',
+  u'WordNet',u'other', 
 ])
 
 # pylint: disable-msg=C0103
@@ -6830,7 +6847,7 @@ class outputInfoType_model(SchemaModel):
     )
 
     mediaType = MultiSelectField(
-      verbose_name='Media', 
+      verbose_name='Media type', 
       help_text='Specifies the media type of the resource and basically ' \
       'corresponds to the physical medium of the content representation.' \
       ' Each media type is described through a distinctive set of featur' \
@@ -6843,7 +6860,7 @@ class outputInfoType_model(SchemaModel):
       )
 
     resourceType = MultiSelectField(
-      verbose_name='Resource', 
+      verbose_name='Resource type', 
       help_text='The type of the resource that a tool or service takes a' \
       's input or produces as output',
       blank=True, 
@@ -6852,7 +6869,7 @@ class outputInfoType_model(SchemaModel):
       )
 
     modalityType = MultiSelectField(
-      verbose_name='Modality', 
+      verbose_name='Modality type', 
       help_text='Specifies the type of the modality represented in the r' \
       'esource or processed by a tool/service',
       blank=True, 
@@ -6860,28 +6877,28 @@ class outputInfoType_model(SchemaModel):
       choices=OUTPUTINFOTYPE_MODALITYTYPE_CHOICES['choices'],
       )
 
-    languageName = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=37, max_length=1000), 
+    languageName = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=35, max_length=1000), 
       verbose_name='Language name', 
       help_text='A human understandable name of the language that is use' \
       'd in the resource or supported by the tool/service according to t' \
       'he IETF BCP47 standard',
       blank=True, )
 
-    languageId = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=38, max_length=1000), 
+    languageId = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=36, max_length=1000), 
       verbose_name='Language id', 
       help_text='The identifier of the language that is included in the ' \
       'resource or supported by the tool/service according to the IETF B' \
       'CP47 standard',
       blank=True, )
 
-    languageVarietyName = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=39, max_length=1000), 
+    languageVarietyName = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=37, max_length=1000), 
       verbose_name='Language variety name', 
       help_text='Specifies the type of the language variety that occurs ' \
       'in the resource or is supported by a tool/service',
       blank=True, )
 
-    mimeType = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=40, max_length=1000), 
-      verbose_name='Mime', 
+    mimeType = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=38, max_length=1000), 
+      verbose_name='Mime type', 
       help_text='The mime-type of the resource which is a formalized spe' \
       'cifier for the format included or a mime-type that the tool/servi' \
       'ce accepts; value to be taken from a subset of the official mime ' \
@@ -6899,7 +6916,7 @@ class outputInfoType_model(SchemaModel):
       )
 
     annotationType = MultiSelectField(
-      verbose_name='Annotation', 
+      verbose_name='Annotation type', 
       help_text='Specifies the annotation level of the resource or the a' \
       'nnotation type a tool/ service requires or produces as an output',
       blank=True, 
@@ -6907,14 +6924,14 @@ class outputInfoType_model(SchemaModel):
       choices=OUTPUTINFOTYPE_ANNOTATIONTYPE_CHOICES['choices'],
       )
 
-    annotationFormat = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=41, max_length=1000), 
+    annotationFormat = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=39, max_length=1000), 
       verbose_name='Annotation format', 
       help_text='Specifies the format that is used in the annotation pro' \
       'cess since often the mime type will not be sufficient for machine' \
       ' processing',
       blank=True, )
 
-    tagset = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=42, max_length=1000), 
+    tagset = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=40, max_length=1000), 
       verbose_name='Tagset', 
       help_text='A name or a url reference to the tagset used in the ann' \
       'otation of the resource or used by the tool/service',
@@ -7007,7 +7024,7 @@ class toolServiceEvaluationInfoType_model(SchemaModel):
       )
 
     evaluationType = MultiSelectField(
-      verbose_name='Evaluation', 
+      verbose_name='Evaluation type', 
       help_text='Indicates the evaluation type',
       blank=True, 
       max_length=1 + len(TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONTYPE_CHOICES['choices']) / 4,
@@ -7129,14 +7146,14 @@ class toolServiceCreationInfoType_model(SchemaModel):
       u'originalSource': "targetResourceInfoType_model",
     }
 
-    implementationLanguage = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=43, max_length=100), 
+    implementationLanguage = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=41, max_length=100), 
       verbose_name='Implementation language', 
       help_text='The programming languages needed for allowing user cont' \
       'ributions, or for running the tools, in case no executables are a' \
       'vailable',
       blank=True, )
 
-    formalism = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=44, max_length=100), 
+    formalism = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=42, max_length=100), 
       verbose_name='Formalism', 
       help_text='Reference (name, bibliographic reference or link to url' \
       ') for the formalism used for the creation/enrichment of the resou' \
@@ -7205,7 +7222,7 @@ class lexicalConceptualResourceInfoType_model(resourceComponentTypeType_model):
       default="lexicalConceptualResource", editable=False, max_length=30, )
 
     lexicalConceptualResourceType = models.CharField(
-      verbose_name='Lexical conceptual resource', 
+      verbose_name='Lexical conceptual resource type', 
       help_text='Specifies the subtype of lexicalConceptualResource',
       
       max_length=LEXICALCONCEPTUALRESOURCEINFOTYPE_LEXICALCONCEPTUALRESOURCETYPE_CHOICES['max_length'],
@@ -7276,7 +7293,7 @@ class languageDescriptionInfoType_model(resourceComponentTypeType_model):
       default="languageDescription", editable=False, max_length=30, )
 
     languageDescriptionType = models.CharField(
-      verbose_name='Language description', 
+      verbose_name='Language description type', 
       help_text='The type of the language description',
       
       max_length=30,
@@ -7356,12 +7373,12 @@ class toolServiceInfoType_model(resourceComponentTypeType_model):
 
     resourceType = models.CharField(
       verbose_name='Resource', 
-      help_text='The type of the resource that a tool or service takes a' \
-      's input or produces as output',
+      help_text='The type of the resource that atool or service takes as' \
+      ' input or produces as output',
       default="toolService", editable=False, max_length=30, )
 
     toolServiceType = models.CharField(
-      verbose_name='Tool service', 
+      verbose_name='Tool service type', 
       help_text='Specifies the type of the tool or service',
       
       max_length=100,
@@ -7369,7 +7386,7 @@ class toolServiceInfoType_model(resourceComponentTypeType_model):
                      key=lambda choice: choice[1].lower()),
       )
 
-    toolServiceSubtype = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=45, max_length=100), 
+    toolServiceSubtype = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=43, max_length=100), 
       verbose_name='Tool service subtype', 
       help_text='Specifies the subtype of tool or service',
       blank=True, )
@@ -7543,7 +7560,7 @@ class dynamicElementInfoType_model(SchemaModel):
       ( u'posesPerSubject', u'posesPerSubject', OPTIONAL ),
     )
 
-    typeOfElement = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=46, max_length=1000), 
+    typeOfElement = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=44, max_length=1000), 
       verbose_name='Type of element', 
       help_text='The type of objects or people that represented in the v' \
       'ideo or image part of the resource',
@@ -7558,58 +7575,58 @@ class dynamicElementInfoType_model(SchemaModel):
       choices=DYNAMICELEMENTINFOTYPE_BODYPARTS_CHOICES['choices'],
       )
 
-    distractors = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=47, max_length=1000), 
+    distractors = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=45, max_length=1000), 
       verbose_name='Distractors', 
       help_text='Any distractors visible in the resource',
       blank=True, )
 
-    interactiveMedia = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=48, max_length=1000), 
+    interactiveMedia = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=46, max_length=1000), 
       verbose_name='Interactive media', 
       help_text='Any interactive media visible in the resource',
       blank=True, )
 
-    faceViews = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=49, max_length=1000), 
+    faceViews = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=47, max_length=1000), 
       verbose_name='Face views', 
       help_text='Indicates the view of the face(s) that appear in the vi' \
       'deo or on the image part of the resource',
       blank=True, )
 
-    faceExpressions = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=50, max_length=1000), 
+    faceExpressions = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=48, max_length=1000), 
       verbose_name='Face expressions', 
       help_text='Indicates the facial expressions visible in the resourc' \
       'e',
       blank=True, )
 
-    bodyMovement = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=51, max_length=1000), 
+    bodyMovement = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=49, max_length=1000), 
       verbose_name='Body movement', 
       help_text='Indicates the body parts that move in the video part of' \
       ' the resource',
       blank=True, )
 
-    gestures = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=52, max_length=1000), 
+    gestures = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=50, max_length=1000), 
       verbose_name='Gestures', 
       help_text='Indicates the type of gestures visible in the resource',
       blank=True, )
 
-    handArmMovement = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=53, max_length=1000), 
+    handArmMovement = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=51, max_length=1000), 
       verbose_name='Hand arm movement', 
       help_text='Indicates the movement of hands and/or arms visible in ' \
       'the resource',
       blank=True, )
 
-    handManipulation = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=54, max_length=1000), 
+    handManipulation = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=52, max_length=1000), 
       verbose_name='Hand manipulation', 
       help_text='Gives information on the manipulation of objects by han' \
       'd',
       blank=True, )
 
-    headMovement = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=55, max_length=1000), 
+    headMovement = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=53, max_length=1000), 
       verbose_name='Head movement', 
       help_text='Indicates the movements of the head visible in the reso' \
       'urce',
       blank=True, )
 
-    eyeMovement = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=56, max_length=1000), 
+    eyeMovement = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=54, max_length=1000), 
       verbose_name='Eye movement', 
       help_text='Indicates the movement of the eyes visible in the resou' \
       'rce',
@@ -7651,7 +7668,7 @@ class staticElementInfoType_model(SchemaModel):
       ( u'eventDescription', u'eventDescription', OPTIONAL ),
     )
 
-    typeOfElement = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=57, max_length=1000), 
+    typeOfElement = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=55, max_length=1000), 
       verbose_name='Type of element', 
       help_text='The type of objects or people that represented in the v' \
       'ideo or image part of the resource',
@@ -7666,48 +7683,48 @@ class staticElementInfoType_model(SchemaModel):
       choices=STATICELEMENTINFOTYPE_BODYPARTS_CHOICES['choices'],
       )
 
-    faceViews = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=58, max_length=1000), 
+    faceViews = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=56, max_length=1000), 
       verbose_name='Face views', 
       help_text='Indicates the view of the face(s) that appear in the vi' \
       'deo or on the image part of the resource',
       blank=True, )
 
-    faceExpressions = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=59, max_length=1000), 
+    faceExpressions = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=57, max_length=1000), 
       verbose_name='Face expressions', 
       help_text='Indicates the facial expressions visible in the resourc' \
       'e',
       blank=True, )
 
-    artifactParts = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=60, max_length=1000), 
+    artifactParts = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=58, max_length=1000), 
       verbose_name='Artifact parts', 
       help_text='Indicates the parts of the artifacts represented in the' \
       ' image corpus',
       blank=True, )
 
-    landscapeParts = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=61, max_length=1000), 
+    landscapeParts = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=59, max_length=1000), 
       verbose_name='Landscape parts', 
       help_text='landscape parts represented in the image corpus',
       blank=True, )
 
-    personDescription = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=62, max_length=1000), 
+    personDescription = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=60, max_length=1000), 
       verbose_name='Person description', 
       help_text='Provides descriptive features for the persons represent' \
       'ed in the image corpus',
       blank=True, )
 
-    thingDescription = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=63, max_length=1000), 
+    thingDescription = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=61, max_length=1000), 
       verbose_name='Thing description', 
       help_text='Provides description of the things represented in the i' \
       'mage corpus',
       blank=True, )
 
-    organizationDescription = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=64, max_length=1000), 
+    organizationDescription = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=62, max_length=1000), 
       verbose_name='Organization description', 
       help_text='Provides description of the organizations that may appe' \
       'ar in the image corpus',
       blank=True, )
 
-    eventDescription = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=65, max_length=1000), 
+    eventDescription = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=63, max_length=1000), 
       verbose_name='Event description', 
       help_text='Provides description of any events represented in the i' \
       'mage corpus',
