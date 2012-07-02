@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
+      <identificationInfo>
+        <resourceName lang="en">resName</resourceName>
+        <description lang="en">descr</description>
+        <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      </identificationInfo>
+      <distributionInfo>
+        <availability>available-unrestrictedUse</availability>
+      </distributionInfo>
+      <contactPerson>
+        <surname lang="en">mustermann</surname>
+          <communicationInfo>
+            <email>mustermann@de.de</email>
+          </communicationInfo>
+      </contactPerson>
+      <metadataInfo>
+        <metadataCreationDate>2012-06-22</metadataCreationDate>
+        <metadataLastDateUpdated>2012-06-22</metadataLastDateUpdated>
+      </metadataInfo>
+      <resourceDocumentationInfo>
+          <documentation>
+            <documentUnstructured>unstruct1</documentUnstructured>
+          </documentation>
+          <documentation>
+            <documentUnstructured>unstruct2</documentUnstructured>
+          </documentation>
+          <documentation>
+              <documentInfo>
+                <documentType>manual</documentType>
+                <title lang="en">test docInfo</title>
+              </documentInfo>
+          </documentation>
+      </resourceDocumentationInfo>
+      <resourceComponentType>
+          <corpusInfo>
+            <resourceType>corpus</resourceType>
+              <corpusMediaType>
+                  <corpusTextInfo>
+                    <mediaType>text</mediaType>
+                      <lingualityInfo>
+                        <lingualityType>monolingual</lingualityType>
+                      </lingualityInfo>
+                  </corpusTextInfo>
+              </corpusMediaType>
+          </corpusInfo>
+      </resourceComponentType>
+  </resourceInfo>
