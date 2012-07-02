@@ -92,7 +92,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
 TIME_ZONE = 'Europe/Berlin'
 
 # Shared secret used for Single-Sign-On between META-SHARE core nodes.
-
 SSO_SECRET_KEY = '6736d82b807811e0a1e51093e908621ab4e0e5225bde4fbcb1aa160fbd198e2a'
 
 # The URL for META-SHARE statistics server.
@@ -121,6 +120,9 @@ INTERVALS = {
     'MONTH' : '*',        # 1-12 - Default is *
     'DAY_OF_WEEK' : '*',  # 0-6 (0 is Sunday) - Default is *
 }
+
+# Maximum age of digests in storage folder in seconds
+MAX_DIGEST_AGE = 60 * 60 * 24
 
 # List of other META-SHARE core ("inner circle") nodes from which the local node
 # imports resource descriptions. Any remote changes will later be updated
