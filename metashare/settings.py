@@ -173,7 +173,6 @@ INSTALLED_APPS = (
     'metashare.stats',
 
     'metashare.repository',
-    'metashare.AdminTest',
 )
 
 # add Kronos to installed apps if not running on Windows

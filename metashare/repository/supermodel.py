@@ -87,6 +87,19 @@ def _make_choices_from_list(source_list):
         _choices.append((str(index), value))
     return {'max_length': len(_choices)/10+1, 'choices': tuple(_choices)}
 
+def _make_choices_from_int_list(source_list):
+    """
+    Converts a given list of Integers to tuple choices.
+
+    Returns a dictionary containing two keys:
+    - max_length: the maximum char length for this source list,
+    - choices: the list of (value, value) tuple choices.
+    """
+    _choices = []
+    for value in source_list:
+        _choices.append((value, value))
+    return {'max_length': len(_choices)/10+1, 'choices': tuple(_choices)}
+
 
 class SchemaModel(models.Model):
     """
