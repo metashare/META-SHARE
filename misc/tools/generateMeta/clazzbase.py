@@ -161,7 +161,7 @@ from {0}supermodel import SchemaModel, SubclassableModel, \\
 from {0}editor.widgets import MultiFieldWidget
 from {0}fields import MultiTextField, MetaBooleanField, \\
   MultiSelectField, DictField, best_lang_value_retriever
-from {0}validators import validate_lang_code_keys
+from {0}validators import validate_lang_code_keys, validate_dict_values
 
 from metashare.storage.models import StorageObject
 
@@ -662,7 +662,7 @@ class Clazz(object):
                     pass
                 elif data_type in Boolean_type_table:
                     pass
-                elif data_type in String_type_table or data_type in Integer_type_table:
+                elif data_type in String_type_table:
                     if isinstance(member.get_data_type_chain(), list) and \
                       member.get_values():
                         _choice_name = class_name.upper()
@@ -856,7 +856,7 @@ class Clazz(object):
             options += 'blank=True'
 
         self.wrtmodels(
-          '    %s = DictField(validators=[validate_lang_code_keys],\n'
+          '    %s = DictField(validators=[validate_lang_code_keys, validate_dict_values],\n'
           '      default_retriever=best_lang_value_retriever, %s)\n' % (
             name, options, ))
 
