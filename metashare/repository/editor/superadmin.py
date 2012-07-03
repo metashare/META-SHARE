@@ -3,7 +3,6 @@ Custom base classes for admin interface, for both the top-level admin page
 and for inline forms.
 '''
 import logging
-import simplejson
 
 from django import template
 from django.contrib import admin
