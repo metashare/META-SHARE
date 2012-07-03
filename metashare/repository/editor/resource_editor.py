@@ -221,14 +221,14 @@ def publish_resources(modeladmin, request, queryset):
     for obj in queryset:
         change_resource_status(obj, status=PUBLISHED, precondition_status=INGESTED)
         if hasattr(obj, 'storage_object') and obj.storage_object is not None:
-            saveLRStats(obj, "", "", PUBLISH_STAT)
+            saveLRStats(obj, PUBLISH_STAT, request)
 publish_resources.short_description = "Publish selected ingested resources"
 
 def unpublish_resources(modeladmin, request, queryset):
     for obj in queryset:
         change_resource_status(obj, status=INGESTED, precondition_status=PUBLISHED)
         if hasattr(obj, 'storage_object') and obj.storage_object is not None:
-            saveLRStats(obj, "", "", INGEST_STAT)
+            saveLRStats(obj, INGEST_STAT, request)
 unpublish_resources.short_description = "Unpublish selected published resources"
 
 def ingest_resources(modeladmin, request, queryset):
@@ -949,7 +949,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         super(ResourceModelAdmin, self).save_model(request, obj, form, change)
         #update statistics
         if hasattr(obj, 'storage_object') and obj.storage_object is not None:
-            saveLRStats(obj, "", "", UPDATE_STAT)          
+            saveLRStats(obj, UPDATE_STAT, request)          
         
     def change_view(self, request, object_id, extra_context=None):
         _extra_context = extra_context or {}
