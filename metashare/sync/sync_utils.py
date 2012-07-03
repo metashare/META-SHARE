@@ -9,7 +9,7 @@ import contextlib
 import json
 from zipfile import ZipFile
 from StringIO import StringIO
-from metashare.storage.models import compute_checksum
+from metashare.storage.models import compute_digest_checksum
 from traceback import format_exc
 
 # Idea taken from 
@@ -77,15 +77,18 @@ def get_full_metadata(opener, full_metadata_url, expected_digest):
     """
     with contextlib.closing(opener.open(full_metadata_url)) as response:
         data = response.read()
-        if not expected_digest == compute_checksum(StringIO(data)):
-            raise CorruptDataException("Checksum error for resource '{0}'." \
-                                       .format(full_metadata_url))
         with ZipFile(StringIO(data), 'r') as inzip:
-            with inzip.open('storage-global.json') as storage_file:
-                # should be a json object, not string
-                storage_json = json.loads(storage_file.read())
             with inzip.open('metadata.xml') as resource_xml:
                 resource_xml_string = resource_xml.read()
+            with inzip.open('storage-global.json') as storage_file:
+                # read json string
+                storage_json_string = storage_file.read() 
+                # convert to json object
+                storage_json = json.loads(storage_json_string)
+            if not expected_digest == \
+              compute_digest_checksum(resource_xml_string, storage_json_string):
+                raise CorruptDataException("Checksum error for resource '{0}'." \
+                  .format(full_metadata_url))
             return storage_json, resource_xml_string
 
 
