@@ -203,8 +203,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
 
         ModelForm = self.get_form(request)
         formsets = []
-        if request.method == 'POST':
-            
+        if request.method == 'POST':            
             form = ModelForm(request.POST, request.FILES)
             if form.is_valid():
                 new_object = self.save_form(request, form, change=False)
@@ -264,8 +263,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                 if request.POST.has_key("_continue"):
                     return self.save_and_continue_in_popup(new_object, request)
                 #### end modification ####
-                return self.response_add(request, new_object)            
-                                    
+                return self.response_add(request, new_object)
         else:
             # Prepare the dict of initial data from the request.
             # We have to special-case M2Ms as a list of comma-separated PKs.
@@ -455,9 +453,8 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         url = ''
         #for reusable entities
         if(hasattr(obj, 'copy_status') and obj.copy_status != MASTER):
-            url = "{0}/editor/repository/{1}/{2}".format(obj.source_url.rstrip('/'), (obj.__class__.__name__).lower(), object_id)
             return render_to_response('admin/repository/redirect.html',
-                   { 'object': obj, 'redirection_url': url },
+                   { 'object': obj, 'redirection_url': None },
                    )
         #for resources and resources' parts
         else:
