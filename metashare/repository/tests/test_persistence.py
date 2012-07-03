@@ -9,7 +9,7 @@ from metashare import settings, test_utils
 from metashare.repository.models import resourceInfoType_model
 from metashare.settings import ROOT_PATH
 from metashare.storage.models import StorageObject, restore_from_folder, \
-MASTER, INGESTED, INTERNAL, update_digests
+MASTER, INGESTED, INTERNAL, update_digests, compute_digest_checksum
 # pylint: disable-msg=E0611
 from hashlib import md5
 import os.path
@@ -17,6 +17,7 @@ import zipfile
 from xml.etree.ElementTree import ParseError
 import shutil
 import time
+from zipfile import ZipFile
 
 TESTFIXTURE_XML = '{}/repository/fixtures/ILSP10.xml'.format(ROOT_PATH)
 
@@ -96,10 +97,15 @@ class PersistenceTest(TestCase):
         self.assertTrue('metadata.xml' in _zf.namelist())
         self.assertTrue('storage-global.json' in _zf.namelist())
         # md5 of digest zip is stored in storage object
-        _checksum = md5()
-        with open(_zf_name, 'rb') as _zf_reader:
-            _checksum.update(_zf_reader.read())
-        self.assertEqual(_checksum.hexdigest(), _storage_object.digest_checksum)
+        with ZipFile(_zf_name, 'r') as inzip:
+            with inzip.open('metadata.xml') as resource_xml:
+                resource_xml_string = resource_xml.read()
+            with inzip.open('storage-global.json') as storage_file:
+                # read json string
+                storage_json_string = storage_file.read() 
+            _checksum = compute_digest_checksum(
+              resource_xml_string, storage_json_string)
+            self.assertEqual(_checksum, _storage_object.digest_checksum)
 
 
 class RestoreTest(TestCase):
