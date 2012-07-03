@@ -135,53 +135,53 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
                                 label=_('Subject'), facet_id=18, parent_id=0,
                                 faceted=True)
 
-    corporaAnnotationTypeFilter = LabeledMultiValueField(
+    corpusAnnotationTypeFilter = LabeledMultiValueField(
                                 label=_('Annotation Type'), facet_id=19, parent_id=2,
                                 faceted=True)
-    corporaAnnotationFormatFilter = LabeledMultiValueField(
+    corpusAnnotationFormatFilter = LabeledMultiValueField(
                                 label=_('Annotation Format'), facet_id=20, parent_id=2,
                                 faceted=True)
-    ldLanguageDescriptionTypeFilter = LabeledMultiValueField(
+    languageDescriptionLDTypeFilter = LabeledMultiValueField(
                                 label=_('Language Description Type'), facet_id=21, parent_id=2,
                                 faceted=True)
-    ldEncodingLevelFilter = LabeledMultiValueField(
+    languageDescriptionEncodingLevelFilter = LabeledMultiValueField(
                                 label=_('Encoding Level'), facet_id=22, parent_id=2,
                                 faceted=True)
-    ldGrammaticalPhenomenaCoverageFilter = LabeledMultiValueField(
+    languageDescriptionGrammaticalPhenomenaCoverageFilter = LabeledMultiValueField(
                                 label=_('Grammatical Phenomena Coverage'), facet_id=23, parent_id=2,
                                 faceted=True)
-    lcrLexicalResourceTypeFilter = LabeledMultiValueField(
+    lexicalConceptualResourceLRTypeFilter = LabeledMultiValueField(
                                 label=_('Lexical/Conceptual Resource Type'), facet_id=24, parent_id=2,
                                 faceted=True)
-    lcrEncodingLevelFilter = LabeledMultiValueField(
+    lexicalConceptualResourceEncodingLevelFilter = LabeledMultiValueField(
                                 label=_('Encoding Level'), facet_id=25, parent_id=2,
                                 faceted=True)
-    lcrLinguisticInformationFilter = LabeledMultiValueField(
+    lexicalConceptualResourceLinguisticInformationFilter = LabeledMultiValueField(
                                 label=_('Linguistic Information'), facet_id=26, parent_id=2,
                                 faceted=True)
 
-    tsToolServiceTypeFilter = LabeledMultiValueField(
+    toolServiceToolServiceTypeFilter = LabeledMultiValueField(
                                 label=_('Tool/Service Type'), facet_id=27, parent_id=2,
                                 faceted=True)
-    tsToolServiceSubTypeFilter = LabeledMultiValueField(
+    toolServiceToolServiceSubTypeFilter = LabeledMultiValueField(
                                 label=_('Tool/Service Subtype'), facet_id=28, parent_id=2,
                                 faceted=True)
-    tsLanguageDependentTypeFilter = LabeledMultiValueField(
+    toolServiceLanguageDependentTypeFilter = LabeledMultiValueField(
                                 label=_('Language Dependent'), facet_id=29, parent_id=2,
                                 faceted=True)
-    tsInputOutputResourceTypeFilter = LabeledMultiValueField(
+    toolServiceInputOutputResourceTypeFilter = LabeledMultiValueField(
                                 label=_('InputInfo/OutputInfo Resource Type'), facet_id=30, parent_id=2,
                                 faceted=True)
-    tsInputOutputMediaTypeFilter = LabeledMultiValueField(
+    toolServiceInputOutputMediaTypeFilter = LabeledMultiValueField(
                                 label=_('InputInfo/OutputInfo Media Type'), facet_id=31, parent_id=2,
                                 faceted=True)
-    tsAnnotationTypeFilter = LabeledMultiValueField(
+    toolServiceAnnotationTypeFilter = LabeledMultiValueField(
                                 label=_('Annotation Type'), facet_id=32, parent_id=2,
                                 faceted=True)
-    tsAnnotationFormatFilter = LabeledMultiValueField(
+    toolServiceAnnotationFormatFilter = LabeledMultiValueField(
                                 label=_('Annotation Format'), facet_id=33, parent_id=2,
                                 faceted=True)
-    tsEvaluatedFilter = LabeledMultiValueField(
+    toolServiceEvaluatedFilter = LabeledMultiValueField(
                                 label=_('Evaluated'), facet_id=34, parent_id=2,
                                 faceted=True)
 
@@ -1187,7 +1187,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
 
         return result
 
-    def prepare_corporaAnnotationTypeFilter(self, obj):
+    def prepare_corpusAnnotationTypeFilter(self, obj):
         """
         Collect the data to filter the resources on Resource Type children
         """
@@ -1219,7 +1219,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
 
         return result
     
-    def prepare_corporaAnnotationFormatFilter(self, obj):
+    def prepare_corpusAnnotationFormatFilter(self, obj):
         """
         Collect the data to filter the resources on Resource Type children
         """
@@ -1251,7 +1251,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
 
         return result
     
-    def prepare_ldLanguageDescriptionTypeFilter(self, obj):
+    def prepare_languageDescriptionLDTypeFilter(self, obj):
         """
         Collect the data to filter the resources on Resource Type children
         """
@@ -1260,7 +1260,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             return [corpus_media.get_languageDescriptionType_display()]
         return []
 
-    def prepare_ldEncodingLevelFilter(self, obj):
+    def prepare_languageDescriptionEncodingLevelFilter(self, obj):
         """
         Collect the data to filter the resources on Resource Type children
         """
@@ -1271,7 +1271,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
                 .get_encodingLevel_display_list()
         return []
 
-    def prepare_ldGrammaticalPhenomenaCoverageFilter(self, obj):
+    def prepare_languageDescriptionGrammaticalPhenomenaCoverageFilter(self, obj):
         """
         Collect the data to filter the resources on Resource Type children
         """
@@ -1282,7 +1282,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
                 .get_grammaticalPhenomenaCoverage_display_list()
         return []
 
-    def prepare_lcrLexicalResourceTypeFilter(self, obj):
+    def prepare_lexicalConceptualResourceLRTypeFilter(self, obj):
         """
         Collect the data to filter the resources on Resource Type children
         """
@@ -1296,7 +1296,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
 
         return result
     
-    def prepare_lcrEncodingLevelFilter(self, obj):
+    def prepare_lexicalConceptualResourceEncodingLevelFilter(self, obj):
         """
         Collect the data to filter the resources on Resource Type children
         """
@@ -1312,7 +1312,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
 
         return result
     
-    def prepare_lcrLinguisticInformationFilter(self, obj):
+    def prepare_lexicalConceptualResourceLinguisticInformationFilter(self, obj):
         """
         Collect the data to filter the resources on Resource Type children
         """
@@ -1329,7 +1329,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         return result
     
 
-    def prepare_tsToolServiceTypeFilter(self, obj):
+    def prepare_toolServiceToolServiceTypeFilter(self, obj):
         """
         Collect the data to filter the resources on Resource Type children
         """
@@ -1343,7 +1343,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
 
         return result
     
-    def prepare_tsToolServiceSubTypeFilter(self, obj):
+    def prepare_toolServiceToolServiceSubTypeFilter(self, obj):
         """
         Collect the data to filter the resources on Resource Type children
         """
@@ -1356,8 +1356,8 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             result.extend(corpus_media.toolServiceSubtype)
 
         return result
-############################################################################################
-    def prepare_tsLanguageDependentTypeFilter(self, obj):
+
+    def prepare_toolServiceLanguageDependentTypeFilter(self, obj):
         """
         Collect the data to filter the resources on Resource Type children
         """
@@ -1371,7 +1371,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
 
         return result
     
-    def prepare_tsInputOutputResourceTypeFilter(self, obj):
+    def prepare_toolServiceInputOutputResourceTypeFilter(self, obj):
         """
         Collect the data to filter the resources on Resource Type children
         """
@@ -1390,7 +1390,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
 
         return result
     
-    def prepare_tsInputOutputMediaTypeFilter(self, obj):
+    def prepare_toolServiceInputOutputMediaTypeFilter(self, obj):
         """
         Collect the data to filter the resources on Resource Type children
         """
@@ -1407,7 +1407,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
 
         return result
     
-    def prepare_tsAnnotationTypeFilter(self, obj):
+    def prepare_toolServiceAnnotationTypeFilter(self, obj):
         """
         Collect the data to filter the resources on Resource Type children
         """
@@ -1423,7 +1423,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
 
         return result
     
-    def prepare_tsAnnotationFormatFilter(self, obj):
+    def prepare_toolServiceAnnotationFormatFilter(self, obj):
         """
         Collect the data to filter the resources on Resource Type children
         """
@@ -1442,7 +1442,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
 
         return result
     
-    def prepare_tsEvaluatedFilter(self, obj):
+    def prepare_toolServiceEvaluatedFilter(self, obj):
         """
         Collect the data to filter the resources on Resource Type children
         """

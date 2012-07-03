@@ -28,22 +28,22 @@ sqs = SearchQuerySet() \
   .facet("geographicCoverageFilter") \
   .facet("timeCoverageFilter") \
   .facet("subjectFilter") \
-  .facet("corporaAnnotationTypeFilter") \
-  .facet("corporaAnnotationFormatFilter") \
-  .facet("ldLanguageDescriptionTypeFilter") \
-  .facet("ldEncodingLevelFilter") \
-  .facet("ldGrammaticalPhenomenaCoverageFilter") \
-  .facet("lcrLexicalResourceTypeFilter") \
-  .facet("lcrEncodingLevelFilter") \
-  .facet("lcrLinguisticInformationFilter") \
-  .facet("tsToolServiceTypeFilter") \
-  .facet("tsToolServiceSubTypeFilter") \
-  .facet("tsLanguageDependentTypeFilter") \
-  .facet("tsInputOutputResourceTypeFilter") \
-  .facet("tsInputOutputMediaTypeFilter") \
-  .facet("tsAnnotationTypeFilter") \
-  .facet("tsAnnotationFormatFilter") \
-  .facet("tsEvaluatedFilter") \
+  .facet("corpusAnnotationTypeFilter") \
+  .facet("corpusAnnotationFormatFilter") \
+  .facet("languageDescriptionLDTypeFilter") \
+  .facet("languageDescriptionEncodingLevelFilter") \
+  .facet("languageDescriptionGrammaticalPhenomenaCoverageFilter") \
+  .facet("lexicalConceptualResourceLRTypeFilter") \
+  .facet("lexicalConceptualResourceEncodingLevelFilter") \
+  .facet("lexicalConceptualResourceLinguisticInformationFilter") \
+  .facet("toolServiceToolServiceTypeFilter") \
+  .facet("toolServiceToolServiceSubTypeFilter") \
+  .facet("toolServiceLanguageDependentTypeFilter") \
+  .facet("toolServiceInputOutputResourceTypeFilter") \
+  .facet("toolServiceInputOutputMediaTypeFilter") \
+  .facet("toolServiceAnnotationTypeFilter") \
+  .facet("toolServiceAnnotationFormatFilter") \
+  .facet("toolServiceEvaluatedFilter") \
   .facet("textTextGenreFilter") \
   .facet("textTextTypeFilter") \
   .facet("textRegisterFilter") \
