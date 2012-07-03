@@ -10,7 +10,7 @@ from metashare import settings, test_utils
 from metashare.repository.models import resourceInfoType_model
 from xml.etree.ElementTree import fromstring
 from metashare.storage.models import INGESTED, INTERNAL, StorageObject, \
-    PUBLISHED, compute_checksum
+    PUBLISHED, compute_digest_checksum
 from metashare.test_utils import set_index_active
 import datetime
 
@@ -255,7 +255,15 @@ class MetadataSyncTest (TestCase):
         resource_uuid = resource.storage_object.identifier
         expected_digest = resource.storage_object.digest_checksum
         response = client.get('{0}{1}/metadata/'.format(self.SYNC_BASE, resource_uuid))
-        self.assertEquals(expected_digest, compute_checksum(StringIO(response.content)))
+        # read zip file from response
+        with ZipFile(StringIO(response.content), 'r') as inzip:
+            with inzip.open('metadata.xml') as resource_xml:
+                resource_xml_string = resource_xml.read()
+            with inzip.open('storage-global.json') as storage_file:
+                # should be a json object, not string
+                storage_json_string = storage_file.read() 
+        self.assertEquals(expected_digest, compute_digest_checksum(
+          resource_xml_string, storage_json_string))
     
     def test_inventory_undated(self):
         settings.SYNC_NEEDS_AUTHENTICATION = False
