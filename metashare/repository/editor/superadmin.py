@@ -8,7 +8,6 @@ from django import template
 from django.contrib import admin
 from django.contrib.admin import helpers
 from django.contrib.admin.util import unquote, get_deleted_objects
-from django.core import serializers
 from django.core.exceptions import PermissionDenied
 from django.db import transaction, models, router
 from django.forms.formsets import all_valid
@@ -49,12 +48,6 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
     custom_one2many_inlines = {}
     inline_type = 'stacked'
     inlines = ()
-
-    def get_errors(self):
-            errors = {}
-            for key, value in self.form.errors:
-                errors += value
-            return errors
     
     class Media:
         js = (settings.MEDIA_URL + 'js/addCollapseToAllStackedInlines.js',
