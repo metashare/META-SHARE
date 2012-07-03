@@ -1,13 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+<noscript><b>It seems JavaScript is either disabled or not supported by your browser.</b>
+    JavaScript should be enabled in order to support all functionalities.
+    Enable JavaScript by changing your browser options, and then try again.
+</noscript>
 <table><tr><td bgcolor=#dddddd nowrap><font size=+1>Top 10</font>&nbsp;&nbsp;</td>
 <td nowrap>&nbsp;&nbsp;<font size=+1><a href="{% url metashare.views.frontpage %}stats/usage/">Usage statistics</a></font>&nbsp;&nbsp; </td>
 {% if user.username and myres %}
 <td nowrap>&nbsp;&nbsp;<font size=+1><a href="{% url metashare.views.frontpage %}stats/mystats/">My resources</a></font>&nbsp;&nbsp; </td>
 {% endif %}
-<td width=80%></td></tr>
+<td></td></tr>
 <tr><td bgcolor=#dddddd colspan=4>
 
 <div class="content_box">
@@ -46,26 +49,23 @@
 {% endifequal %}
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Latest Queries
 </select>
-</td>
-</tr>
-</table>
+</td></tr></table>
 </form>
 
 {% if topdata|length <= 0 %}
     <center><strong>No data found</strong></center>
 {% else %}
 <div id="results">
-<table width=100% class="result_table">
-<tr class="result_table_head" style="">
+<table class="result_table">
+<tr class="result_table_head">
 {% ifequal view "latestqueries" %}
   <td width="60%" nowrap>Query, Filters</td>
   <td width="15%" nowrap>Found results</td>
   <td width="25%">Time</td>
 {% else %}
     {% ifequal view "topqueries" %}
-        <td width="60%" nowrap>Query, Filters</td>
+        <td width="80%" nowrap>Query, Filters</td>
         <td width="15%" nowrap>Count</td>
-        <td width="25%">Time</td> 
     {% else %}
       <td width="5%">Id</td>
       <td width="70%">Title</td>
@@ -79,33 +79,78 @@
 </tr>
 
 {% for stat in topdata %}
-<tr class="{% cycle odd,even %}">
-{% if "quer" in view %}  
-   <td nowrap><a href="{% url metashare.views.frontpage %}repository/search/?{{ stat.4 }}"><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/zoom.png"> <font color=black>{{ stat.0 }}</font></a>
-   {% ifnotequal stat.1 "" %}  
-   {{ stat.1 }}
-   {% endifnotequal %}
-   </td>
-   <td width=100%><i><font color=black>{{ stat.3 }}</font></i></td>
-   <td nowrap>{{ stat.2 }}</td>
-{% else %} 
-   <th style="text-align:right;" nowrap>{{ stat.0 }}</th>
-   <td width=100%><a href="{{ stat.1 }}">{{ stat.3 }}</a></td>
-   <td nowrap>
-   {% ifequal view "latestupdated" %}   
-        {{ stat.2 }}
-   {% else %}
-        <b><font color=black>{{ stat.2 }}</font></b>
-   {% endifequal %}
-   </td>
-{% endif %}
-</tr>
+    <tr class="{% cycle odd,even %} content">
+    {% if "quer" in view %}  
+       <td nowrap><a href="{% url metashare.views.frontpage %}repository/search/?{{ stat.4 }}"><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/zoom.png"> {{ stat.0 }}</a>
+       {% ifnotequal stat.1 "" %}  
+       {{ stat.1 }}
+       {% endifnotequal %}
+       </td>
+       <td width=100%>{{ stat.3 }}</td>
+       <td nowrap>{{ stat.2 }}</td>
+    {% else %} 
+       <th style="text-align:right;" nowrap>{{ stat.0 }}</th>
+       <td width=100%><a href="{{ stat.1 }}">{{ stat.3 }}</a></td>
+       <td nowrap>
+       {% ifequal view "latestupdated" %}   
+            {{ stat.2 }}
+       {% else %}
+            <b>{{ stat.2 }}</b>
+       {% endifequal %}
+       </td>
+    {% endif %}
+    </tr>
 {% endfor %}
-
 </table>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+  <script type="text/javascript">
+    google.load('visualization', '1', {packages: ['geochart']});
+
+    function drawVisualization() {
+      var data = google.visualization.arrayToDataTable([
+      ['Country', 'Count'],
+      {% for geoinfo in geovisits %}
+        {% if geoinfo.0|length > 0 %}
+            ['{{ geoinfo.0 }}', {{ geoinfo.1 }}],
+        {% endif %}
+      {% endfor %}
+      ]);
+    
+      var geochart = new google.visualization.GeoChart(
+          document.getElementById('googlemap'));
+      geochart.draw(data, {width: 530, height: 300});
+    }
+    
+
+    google.setOnLoadCallback(drawVisualization);
+  </script>
+
+{% if geovisits|length > 0 %}
+    <div id="visits">   
+     <table width=50%><td width=40%><table>
+        <tr class="result_table_head">{{ visitstitle }}</td><tr>
+     
+     {% for geoinfo in geovisits %}
+        <tr class=content>
+            <td nowrap>{{ geoinfo.2 }}</td>
+            <td>{{ geoinfo.1 }}</td>
+        </tr>
+     {% endfor %}
+        </table>
+        </td>
+        <td><div id="googlemap" style="width: 100%; height: 300px;"></div>
+         <div id="footer" class="prepend-2 append-2 last" style="text-align:right">* This product includes GeoLite data created by MaxMind, available from http://maxmind.com/.</div></td>
+        </table>
+    </div>
 {% endif %}
 
+{% endif %}
 </div>
-</td></tr></table>
 
+</td></tr></table>
+  
 {% endblock %}
+
+  
+  
+

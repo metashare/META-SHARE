@@ -4,8 +4,6 @@ Author: Christian Girardi <cgirardi@fbk.eu>
 """
 
 import sys
-import base64
-import collections
 import logging 
 from metashare.settings import DJANGO_URL, STATS_SERVER_URL
 from metashare.stats.models import LRStats, QueryStats, UsageStats
@@ -41,6 +39,15 @@ logging.basicConfig(level=LOG_LEVEL)
 LOGGER = logging.getLogger('metashare.stats.views')
 LOGGER.addHandler(LOG_HANDLER)
 
+from django.db.models.sql import aggregates
+
+class CountIf(aggregates.Count):
+    """ 
+    Hack Count() to get a conditional count working.
+    """
+    is_ordinal = True
+    sql_function = 'COUNT'
+    sql_template = '%(function)s(IF(%(condition)s,TRUE,NULL))'
 
 def callServerStats():
     url = urllib.urlencode({'url': DJANGO_URL})
@@ -184,23 +191,28 @@ def topstats (request):
     topdata = []
     view = request.GET.get('view', 'topviewed')
     if view == "topviewed":
+        geovisits = getCountryActions(VIEW_STAT)
+        visitstitle = "Viewed resources from  the world:"
         data = getLRTop(VIEW_STAT, 10)
         for item in data:
             try:
                 res_info =  resourceInfoType_model.objects.get(storage_object__identifier=item['lrid'])
                 topdata.append([res_info.id, res_info.get_absolute_url, item['sum_count'], res_info])
             except: 
-                LOGGER.debug("Warning! The object "+item['lrid']+ " has not been found.")
-                
+                LOGGER.debug("Warning! The object "+item['lrid']+ " has not been found.")               
     if (view == "latestupdated"):
+        geovisits = getCountryActions(UPDATE_STAT)
+        visitstitle = "Updated resources from the world:"
         data = getLRLast(UPDATE_STAT, 10)
         for item in data:
             try:
                 res_info =  resourceInfoType_model.objects.get(storage_object__identifier=item['lrid'])
-                topdata.append([res_info.id,  res_info.get_absolute_url, pretty_timeago(item['lasttime']), res_info])
+                topdata.append([res_info.id, res_info.get_absolute_url, pretty_timeago(item['lasttime']), res_info])
             except: 
                 LOGGER.debug("Warning! The object "+item['lrid']+ " has not been found.")
     if (view == "topdownloaded"):
+        geovisits = getCountryActions(DOWNLOAD_STAT)
+        visitstitle = "Downloaded resources from the world:"
         data = getLRTop(DOWNLOAD_STAT, 10)
         for item in data:
             try:
@@ -210,6 +222,8 @@ def topstats (request):
                 LOGGER.debug("Warning! The object "+item['lrid']+ " has not been found.")
 
     if view == "topqueries":
+        geovisits = getCountryQueries()
+        visitstitle = "Fired queries from the world:"
         data = getTopQueries(10)
         for item in data:
             url = "q=" + item['query']
@@ -220,10 +234,10 @@ def topstats (request):
                 for face in facetlist:
                     url += "&selected_facets=" + face
                     facets += ", " + face.replace("Filter_exact:",": ")
-            topdata.append([query, facets, pretty_timeago(item['lasttime']), item['query_count'], url])       
-             
-    
+            topdata.append([query, facets, "", item['query_count'], url])         
     if view == "latestqueries":
+        geovisits = getCountryQueries()
+        visitstitle = "Fired queries from the world:"
         data = getLastQuery(10)
         for item in data:
             url = "q=" + item['query']
@@ -235,14 +249,16 @@ def topstats (request):
                     url += "&selected_facets=" + face
                     facets += ", " + face.replace("Filter_exact:",": ")
             topdata.append([query, facets, pretty_timeago(item['lasttime']), item['found'], url])       
-             
+    
     return render_to_response('stats/topstats.html',
         {'user': request.user, 
         'topdata': topdata[:10], 
         'view': view,
+        'geovisits': geovisits,
+        'visitstitle': visitstitle,
         'myres': isOwner(request.user.username)},
         context_instance=RequestContext(request))
-
+    
 def statdays (request):
     """ get dates where there are some statistics """
     dates = []
@@ -280,7 +296,7 @@ def getstats (request):
         user, "lrupdate": lrupdate, "lrview": lrview, "lrdown": lrdown, "queries": queries, \
         "qexec_time_avg": extimes["exectime__avg"], "qlt_avg": qltavg}
     
-    #get usage statistics
+    ###get usage statistics
     _models = [x for x in dir(sys.modules['metashare.repository.models']) if x.endswith('_model')]
     mod = import_module("metashare.repository.models")
     _fields = {}
@@ -307,7 +323,7 @@ def getstats (request):
             else:
                 usagedata[item["elparent"]].append({"field": item["elname"], "label": verbose, "counters": [int(item["lrid__count"]), int(item["count__sum"])]})
         data["usagestats"] = usagedata
-        
+    
     return HttpResponse("["+JSONEncoder().encode(data)+"]")
   
 
