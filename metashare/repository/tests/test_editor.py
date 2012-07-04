@@ -13,7 +13,7 @@ from metashare.repository import models
 from metashare.repository.models import languageDescriptionInfoType_model, \
     lexicalConceptualResourceInfoType_model
 from metashare.settings import DJANGO_BASE, ROOT_PATH
-from metashare.storage.models import COPY_CHOICES
+from metashare.storage.models import COPY_CHOICES, REMOTE
 
 ADMINROOT = '/{0}editor/'.format(DJANGO_BASE)
 TESTFIXTURE_XML = '{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
