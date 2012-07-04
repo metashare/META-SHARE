@@ -468,7 +468,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         else:
             root_resources = get_root_resources(obj)
             for res in root_resources:
-                if  not res.storage_object.master_copy:
+                if not res.storage_object.master_copy:
                     url = "{0}/editor/repository/{1}/{2}".format(res.storage_object.source_url.rstrip('/'), (obj.__class__.__name__).lower(), object_id)
                     return render_to_response('admin/repository/cannot_edit.html',
                            { 'resource': res, 'redirection_url': url },
