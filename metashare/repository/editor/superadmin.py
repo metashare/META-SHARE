@@ -379,6 +379,10 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                 formset = FormSet(request.POST, request.FILES,
                                   instance=new_object, prefix=prefix,
                                   queryset=inline.queryset(request))
+                #### begin modification ####
+                if prefix in self.model.get_fields()['required']:
+                    formset.forms[0].empty_permitted = False
+                #### end modification ####    
 
                 formsets.append(formset)
 
@@ -428,6 +432,10 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                     prefix = "%s-%s" % (prefix, prefixes[prefix])
                 formset = FormSet(instance=obj, prefix=prefix,
                                   queryset=inline.queryset(request))
+                #### begin modification ####
+                if prefix in self.model.get_fields()['required']:
+                    formset.forms[0].empty_permitted = False
+                #### end modification ####    
                 formsets.append(formset)
 
         #### begin modification ####
@@ -453,16 +461,16 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         url = ''
         #for reusable entities
         if(hasattr(obj, 'copy_status') and obj.copy_status != MASTER):
-            return render_to_response('admin/repository/cannot_edit.html',
-                   { 'object': obj, 'url': obj.source_url },
+            return render_to_response('admin/repository/redirect.html',
+                   { 'object': obj, 'redirection_url': None },
                    )
         #for resources and resources' parts
         else:
             root_resources = get_root_resources(obj)
             for res in root_resources:
-                if not res.storage_object.master_copy:
+                if  not res.storage_object.master_copy:
                     url = "{0}/editor/repository/{1}/{2}".format(res.storage_object.source_url.rstrip('/'), (obj.__class__.__name__).lower(), object_id)
-                    return render_to_response('admin/repository/cannot_edit.html',
+                    return render_to_response('admin/repository/redirect.html',
                            { 'resource': res, 'redirection_url': url },
                            )
         #### end modification ####
