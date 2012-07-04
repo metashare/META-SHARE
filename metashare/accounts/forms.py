@@ -139,6 +139,7 @@ class UserProfileForm(ModelForm):
         model = UserProfile
         exclude = ('user', 'modified', 'uuid')
 
+
 class EditorRegistrationRequestForm(ModelForm):
     """
     Form used to apply to new editor groups membership.
@@ -150,11 +151,11 @@ class EditorRegistrationRequestForm(ModelForm):
         model = EditorRegistrationRequest
         exclude = ('user', 'created')
 
-    def __init__(self, editor_group, *args, **kwargs):
+    def __init__(self, editor_group_qs, *args, **kwargs):
         """
-        Initializes the `EditorRegistrationRequestForm` with the editor groups of which the user can apply.
+        Initializes the `EditorRegistrationRequestForm` with the editor groups
+        of the given query set.
         """
         super(EditorRegistrationRequestForm, self).__init__(*args, **kwargs)
         # If there is a list of editor groups, then modify the ModelChoiceField
-        self.fields['editor_group'].queryset = EditorGroup.objects.filter(
-          name__in=editor_group.values_list('name', flat=True))
+        self.fields['editor_group'].queryset = editor_group_qs
