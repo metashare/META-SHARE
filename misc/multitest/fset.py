@@ -26,10 +26,10 @@ subset.append('METASHAREResources/ILC-CNR/Estuari.xml')
 fileset.append(subset)
 
 subset = []
-subset.append('METASHAREResources/ILSP/ILSP12.xml')
-subset.append('METASHAREResources/ILSP/ILSP16.xml')
-subset.append('METASHAREResources/ILSP/ILSP18.xml')
-subset.append('METASHAREResources/ILSP/ILSP25.xml')
+subset.append('METASHAREResources/ILSP/ILSP-resource-12.xml')
+subset.append('METASHAREResources/ILSP/ILSP-resource-16.xml')
+subset.append('METASHAREResources/ILSP/ILSP-resource-18.xml')
+subset.append('METASHAREResources/ILSP/ILSP-resource-25.xml')
 fileset.append(subset)
 
 #subset = []

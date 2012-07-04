@@ -55,31 +55,6 @@ do
 	fi
 done
 
-FILESET[0]=`cat << EOF
-$RES_DIR/ELRAResources/elra20.xml
-$RES_DIR/ELRAResources/elra30.xml
-$RES_DIR/ELRAResources/elra40.xml
-EOF`
-
-FILESET[1]=`cat << EOF
-$RES_DIR/ELRAResources/elra21.xml
-$RES_DIR/ELRAResources/elra31.xml
-$RES_DIR/ELRAResources/elra41.xml
-$RES_DIR/ELRAResources/elra51.xml
-$RES_DIR/ELRAResources/elra61.xml
-EOF`
-
-FILESET[2]=`cat << EOF
-$RES_DIR/METASHAREResources/ILC-CNR/Estuari.xml
-EOF`
-
-FILESET[3]=`cat << EOF
-$RES_DIR/METASHAREResources/ILSP/ILSP12.xml
-$RES_DIR/METASHAREResources/ILSP/ILSP16.xml
-$RES_DIR/METASHAREResources/ILSP/ILSP18.xml
-$RES_DIR/METASHAREResources/ILSP/ILSP25.xml
-EOF`
-
 if [[ $DO_IMPORT_FILES -eq 1 ]] ; then
   import_files fileset1 inner
 fi
