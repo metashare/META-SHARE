@@ -7,6 +7,7 @@ from metashare.accounts.models import RegistrationRequest, UserProfile, \
     EditorRegistrationRequest
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from metashare.accounts.models import EditorGroup
 
 
 class ModelForm(forms.ModelForm):
@@ -148,3 +149,12 @@ class EditorRegistrationRequestForm(ModelForm):
         """
         model = EditorRegistrationRequest
         exclude = ('user', 'created')
+
+    def __init__(self, editor_group, *args, **kwargs):
+        """
+        Initializes the `EditorRegistrationRequestForm` with the editor groups of which the user can apply.
+        """
+        super(EditorRegistrationRequestForm, self).__init__(*args, **kwargs)
+        # If there is a list of editor groups, then modify the ModelChoiceField
+        self.fields['editor_group'].queryset = EditorGroup.objects.filter(
+          name__in=editor_group.values_list('name', flat=True))
