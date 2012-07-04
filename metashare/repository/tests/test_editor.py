@@ -479,7 +479,7 @@ class EditorTest(TestCase):
         editoruser = User.objects.get(username='editoruser')
         self.assertFalse(editoruser.has_perm('repository.delete_actorinfotype_model'))
 
-    def test_can_edit_resource_master_copy(self):        
+    def test_can_edit_master_copy(self):        
         client = _client_with_user_logged_in(EditorTest.editor_login)
         resource = _import_test_resource(EditorTest.test_editor_group)
         resource.storage_object.master_copy = True
@@ -489,7 +489,7 @@ class EditorTest(TestCase):
         self.assertContains(response, "Change Resource")        
         self.assertContains(response, "Italian TTS Speech Corpus")        
         
-    def test_cannot_edit_resource_non_master_copy(self):
+    def test_cannot_edit_not_master_copy(self):
         client = _client_with_user_logged_in(EditorTest.editor_login)
         resource = _import_test_resource(EditorTest.test_editor_group)
         resource.storage_object.master_copy = False
@@ -497,26 +497,6 @@ class EditorTest(TestCase):
         response = client.get('{}repository/resourceinfotype_model/{}/'
                               .format(ADMINROOT, resource.id))
         self.assertContains(response, "You cannot edit the metadata")
-        self.assertContains(response, "You will now be redirected")
-        
-    def test_can_edit_reusable_entity_master_copy(self):        
-        client = _client_with_user_logged_in(EditorTest.editor_login)
-        resource = _import_test_resource(EditorTest.test_editor_group)
-        resource.storage_object.master_copy = True
-        resource.storage_object.save()
-        response = client.get('{}repository/personinfotype_model/1/'
-                              .format(ADMINROOT))
-        self.assertContains(response, "Change Person")      
-        
-    def test_cannot_edit_reusable_entity_non_master_copy(self):
-        client = _client_with_user_logged_in(EditorTest.editor_login)
-        resource = _import_test_resource(EditorTest.test_editor_group)
-        resource.storage_object.master_copy = False
-        resource.storage_object.save()
-        response = client.get('{}repository/personinfotype_model/1/'
-                              .format(ADMINROOT))
-        self.assertContains(response, "You cannot edit the entity")
-        self.assertNotContains(response, "You will now be redirected")        
 
     def test_editor_can_change_own_resource_and_parts(self):
         """
