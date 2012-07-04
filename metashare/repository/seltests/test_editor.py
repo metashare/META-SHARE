@@ -6,7 +6,6 @@ from metashare.repository.models import resourceInfoType_model
 from metashare.repository.seltests.test_utils import login_user, mouse_over, \
     setup_screenshots_folder, click_menu_item, save_and_close
 from metashare.settings import DJANGO_BASE, ROOT_PATH
-from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support.ui import Select
 import time
@@ -32,28 +31,22 @@ class EditorTest(SeleniumTestCase):
                                       'secret', (self.test_editor_group,))
         # make sure the index does not contain any stale entries
         call_command('rebuild_index', interactive=False, using=settings.TEST_MODE_NAME)
-        
-        # init Selenium
-        driver = getattr(webdriver, settings.SELENIUM_DRIVER, None)
-        assert driver, "settings.SELENIUM_DRIVER contains non-existing driver"
-        self.driver = driver()
-        self.driver.implicitly_wait(30)
-        host = getattr(settings, 'SELENIUM_TESTSERVER_HOST', 'localhost')
-        port = getattr(settings, 'SELENIUM_TESTSERVER_PORT', 8000)
-        self.base_url = 'http://{0}:{1}/{2}'.format(host, port, DJANGO_BASE)
+
+        super(EditorTest, self).setUp()
+        self.base_url = 'http://{}:{}/{}' \
+            .format(self.testserver_host, self.testserver_port, DJANGO_BASE)
         self.verification_errors = []
 
-    
+
     def tearDown(self):
         resourceInfoType_model.objects.all().delete()
         User.objects.all().delete()
         EditorGroup.objects.all().delete()
         ManagerGroup.objects.all().delete()
-        
-        # clean up Selenium
-        self.driver.quit()
-        self.assertEqual([], self.verification_errors)    
-        
+
+        super(EditorTest, self).tearDown()
+        self.assertEqual([], self.verification_errors)
+
 
     def test_status_after_saving(self):
         
