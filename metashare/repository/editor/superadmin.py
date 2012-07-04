@@ -379,6 +379,10 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                 formset = FormSet(request.POST, request.FILES,
                                   instance=new_object, prefix=prefix,
                                   queryset=inline.queryset(request))
+                #### begin modification ####
+                if prefix in self.model.get_fields()['required']:
+                    formset.forms[0].empty_permitted = False
+                #### end modification ####    
 
                 formsets.append(formset)
 
@@ -428,6 +432,10 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                     prefix = "%s-%s" % (prefix, prefixes[prefix])
                 formset = FormSet(instance=obj, prefix=prefix,
                                   queryset=inline.queryset(request))
+                #### begin modification ####
+                if prefix in self.model.get_fields()['required']:
+                    formset.forms[0].empty_permitted = False
+                #### end modification ####    
                 formsets.append(formset)
 
         #### begin modification ####
