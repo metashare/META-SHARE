@@ -13,6 +13,7 @@ from metashare.repository import models
 from metashare.repository.models import languageDescriptionInfoType_model, \
     lexicalConceptualResourceInfoType_model
 from metashare.settings import DJANGO_BASE, ROOT_PATH
+from metashare.storage.models import COPY_CHOICES
 
 ADMINROOT = '/{0}editor/'.format(DJANGO_BASE)
 TESTFIXTURE_XML = '{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
@@ -511,12 +512,12 @@ class EditorTest(TestCase):
     def test_cannot_edit_reusable_entity_non_master_copy(self):
         client = _client_with_user_logged_in(EditorTest.editor_login)
         resource = _import_test_resource(EditorTest.test_editor_group)
-        resource.storage_object.master_copy = False
-        resource.storage_object.save()
+        for person in resource.contactPerson.all():
+            person.copy_status = REMOTE
         response = client.get('{}repository/personinfotype_model/1/'
                               .format(ADMINROOT))
         self.assertContains(response, "You cannot edit the metadata for the entity")
-        self.assertNotContains(response, "You will now be redirected")        
+        self.assertNotContains(response, "You will now be redirected")
 
     def test_editor_can_change_own_resource_and_parts(self):
         """
