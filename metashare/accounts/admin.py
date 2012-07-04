@@ -7,7 +7,6 @@ from django.contrib import admin, messages
 from django.contrib.admin.options import csrf_protect_m
 from django.contrib.auth.models import Permission, Group, User
 from django.db import transaction
-from django.core.exceptions import PermissionDenied
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from django.http import HttpResponseRedirect
@@ -290,10 +289,11 @@ class EditorRegistrationRequestAdmin(admin.ModelAdmin):
         Managers cannot modify applications, they can only add them or delete them.
         """
         if not request.user.is_superuser:
-            return list_display
+            return self.list_display
 
         return super(EditorRegistrationRequestAdmin, self).get_readonly_fields(request, obj)
 
+    # pylint: disable-msg=W0622
     def log_deletion(self, request, object, object_repr):
         """
         When a request is deleted by a manager, send an email to the user before
