@@ -113,9 +113,23 @@ SELENIUM_TESTSERVER_PORT = 8000
 # Time interval settings. It sets the intervals when the synchronization 
 # task will be triggered. Uses "crontab" conventions. 
 # Defaults will run the synchronization task once an hour.
-INTERVALS = {
+SYNC_INTERVALS = {
     'MINUTE' : '25',      # 0-59 - Default is 25
     'HOUR' : '*',         # 0-23 - Default is *
+    'DAY_OF_MONTH' : '*', # 1-31 - Default is *
+    'MONTH' : '*',        # 1-12 - Default is *
+    'DAY_OF_WEEK' : '*',  # 0-6 (0 is Sunday) - Default is *
+}
+
+# Settings for digest updating:
+# Time interval settings. It sets the intervals when the digest updating  
+# task will be triggered. Uses "crontab" conventions. 
+# Defaults will run the updating task twice a day.
+# The update intervals should roughly be half of the MAX_DIGEST_AGE as
+# defined below
+UPDATE_INTERVALS = {
+    'MINUTE' : '*',      # 0-59 - Default is *
+    'HOUR' : '*/12',         # 0-23 - Default is */12
     'DAY_OF_MONTH' : '*', # 1-31 - Default is *
     'MONTH' : '*',        # 1-12 - Default is *
     'DAY_OF_WEEK' : '*',  # 0-6 (0 is Sunday) - Default is *
