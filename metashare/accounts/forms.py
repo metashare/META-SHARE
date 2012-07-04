@@ -7,7 +7,6 @@ from metashare.accounts.models import RegistrationRequest, UserProfile, \
     EditorRegistrationRequest
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from metashare.accounts.models import EditorGroup
 
 
 class ModelForm(forms.ModelForm):
