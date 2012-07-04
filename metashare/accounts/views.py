@@ -227,14 +227,24 @@ def editor_registration_request(request):
     if request.user.username == 'MetaShareUser':
         return redirect('metashare.views.frontpage')
 
+    # Exclude from the list the editor groups the user cannot apply for:
+    # - editor groups for which the user is already a member
+    # - editor groups for which the user already applied for
+    # - editor groups that are not handled by a manager
+    available_editor_groups = EditorGroup.objects.exclude(
+      name__in=request.user.groups.values_list('name', flat=True)).exclude(
+      name__in=EditorRegistrationRequest.objects.filter(user=request.user).values_list(
+      'editor_group__name', flat=True)).exclude(
+      name__in=[edt_grp for edt_grp in EditorGroup.objects.all() if edt_grp.get_managers().count() == 0])
+
     # Check if the edit form has been submitted.
     if request.method == "POST":
         # If so, bind the creation form to HTTP POST values.
-        form = EditorRegistrationRequestForm(request.POST)
-        
+        form = EditorRegistrationRequestForm(available_editor_groups, request.POST)
         # Check if the form has validated successfully.
         if form.is_valid():
             edt_grp = form.cleaned_data['editor_group']
+
             if EditorRegistrationRequest.objects.filter(
                     user=request.user, editor_group=edt_grp).count() != 0:
                 messages.success(request, _('An older application of yours for '
@@ -244,12 +254,12 @@ def editor_registration_request(request):
                     editor_group=edt_grp)
                 new_object.save()
 
-                # send a notification email to the relevant managers/superusers
+                # Send a notification email to the relevant managers/superusers
                 emails = []
-                # find out the relevant group managers' emails
+                # Find out the relevant group managers' emails
                 for manager in edt_grp.get_managers():
                     emails.append(manager.email)
-                # find out the superusers' emails
+                # Find out the superusers' emails
                 for superuser in User.objects.filter(is_superuser=True):
                     emails.append(superuser.email)
                 # Render notification email template with correct values.
@@ -258,7 +268,7 @@ def editor_registration_request(request):
                   'confirmation_url': '{0}/admin/accounts/editorregistrationrequest/'.format(
                     DJANGO_URL)}
                 try:
-                    # send out notification email to the managers and superusers
+                    # Send out notification email to the managers and superusers
                     send_mail('New editor membership request',
                         render_to_string('accounts/notification.email', data),
                         'no-reply@meta-share.eu', emails, fail_silently=False)
@@ -277,14 +287,16 @@ def editor_registration_request(request):
 
     # Otherwise, render a new EditorRegistrationRequestForm instance
     else:
-        if EditorGroup.objects.count() == 0:
+        # Check whether there is an editor group the user can apply for.
+        if available_editor_groups.count() == 0:
             # If there is no editor group created yet, send an error message.
             messages.error(request, _('There are no editor groups in the '
                 'database, yet, for which you could apply. Please ask the '
                 'system administrator to create one.'))
             # Redirect the user to the edit profile page.
             return redirect('metashare.views.edit_profile')
-        form = EditorRegistrationRequestForm()
+        
+        form = EditorRegistrationRequestForm(available_editor_groups)
 
     dictionary = {'title': 'Apply for editor group membership', 'form': form}
     return render_to_response('accounts/editor_registration_request.html',
