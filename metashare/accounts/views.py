@@ -27,15 +27,16 @@ from django.utils.translation import ugettext as _
 from metashare.accounts.forms import RegistrationRequestForm, \
   ResetRequestForm, UserProfileForm, EditorRegistrationRequestForm
 from metashare.accounts.models import RegistrationRequest, ResetRequest, \
-  UserProfile, EditorRegistrationRequest
+  UserProfile, EditorRegistrationRequest, ManagerGroup, EditorGroup
 from metashare.settings import SSO_SECRET_KEY, DJANGO_URL, \
   PRIVATE_KEY_PATH, LOG_LEVEL, LOG_HANDLER, MAX_LIFETIME_FOR_SSO_TOKENS
-from metashare.accounts.models import EditorGroup
+
 
 # Setup logging support.
 logging.basicConfig(level=LOG_LEVEL)
 LOGGER = logging.getLogger('metashare.accounts.views')
 LOGGER.addHandler(LOG_HANDLER)
+
 
 def confirm(request, uuid):
     """
@@ -229,13 +230,15 @@ def editor_registration_request(request):
 
     # Exclude from the list the editor groups the user cannot apply for:
     # - editor groups for which the user is already a member
-    # - editor groups for which the user already applied for
-    # - editor groups that are not handled by a manager
-    available_editor_groups = EditorGroup.objects.exclude(
-      name__in=request.user.groups.values_list('name', flat=True)).exclude(
-      name__in=EditorRegistrationRequest.objects.filter(user=request.user).values_list(
-      'editor_group__name', flat=True)).exclude(
-      name__in=[edt_grp for edt_grp in EditorGroup.objects.all() if edt_grp.get_managers().count() == 0])
+    # - editor groups for which the user has already applied
+    # - editor groups that are not handled by manager
+    available_editor_groups = EditorGroup.objects \
+        .exclude(name__in=request.user.groups.values_list('name', flat=True)) \
+        .exclude(name__in=EditorRegistrationRequest.objects.filter(
+            user=request.user).values_list('editor_group__name', flat=True)) \
+        .filter(name__in=ManagerGroup.objects.all().filter(
+                name__in=User.objects.values_list('groups__name', flat=True)) \
+            .values_list('managed_group__name', flat=True))
 
     # Check if the edit form has been submitted.
     if request.method == "POST":
