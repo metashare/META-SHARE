@@ -11,7 +11,7 @@ from metashare import test_utils
 from metashare.accounts.models import EditorGroup, ManagerGroup
 from metashare.repository import models
 from metashare.repository.models import languageDescriptionInfoType_model, \
-    lexicalConceptualResourceInfoType_model
+    lexicalConceptualResourceInfoType_model, personInfoType_model
 from metashare.settings import DJANGO_BASE, ROOT_PATH
 from metashare.storage.models import REMOTE
 
@@ -147,7 +147,7 @@ class EditorTest(TestCase):
         ManagerGroup.objects.all().delete()
         test_utils.set_index_active(True)
 
-
+    
     def test_can_log_in_staff(self):
         client = Client()
         request = client.get(ADMINROOT)
@@ -508,16 +508,13 @@ class EditorTest(TestCase):
         response = client.get('{}repository/personinfotype_model/1/'
                               .format(ADMINROOT))
         self.assertContains(response, "Change Person")      
-        
+
     def test_cannot_edit_reusable_entity_non_master_copy(self):
         client = _client_with_user_logged_in(EditorTest.editor_login)
         resource = _import_test_resource(EditorTest.test_editor_group)
-        for person in resource.contactPerson.all():                           
-            temp_pers = person
-            temp_pers.copy_status = REMOTE
+        personInfoType_model.objects.all().update(copy_status=REMOTE)           
         response = client.get('{}repository/personinfotype_model/1/'
                               .format(ADMINROOT))
-        print response
         self.assertContains(response, "You cannot edit the metadata for the entity")
         self.assertNotContains(response, "You will now be redirected")
     
