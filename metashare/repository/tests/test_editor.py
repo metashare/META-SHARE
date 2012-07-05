@@ -862,6 +862,19 @@ class EditorGroupRegistrationRequestTests(TestCase):
         self.assertContains(response, 'There are no editor groups in the database, yet, for which you could apply.',
           msg_prefix='expected the system to prevent access to the form when no editor group is available.')
 
+    def test_superuser_can_change_the_application(self):
+        """
+        Verifies that a superuser can change an editor group application request
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+        new_reg = EditorRegistrationRequest(user=User.objects.get(username='normaluser'),
+            editor_group=self.test_editor_group)
+        new_reg.save()
+        response = client.get('{}accounts/editorregistrationrequest/{}/'.format(ADMINROOT, new_reg.pk))
+        self.assertContains(response, 'normaluser</option>', msg_prefix=
+            'expected a superuser to be able to modify an application.')
+
     #TODO: function to be corrected: manager connection get an access denied
     if 0:
         def test_manager_cannot_change_the_application(self):
@@ -879,16 +892,3 @@ class EditorGroupRegistrationRequestTests(TestCase):
             self.assertContains(response, 'normaluser', msg_prefix='expected a manager to be able to see the details of an application.')
             self.assertNotContains(response, '<option value="1" selected="selected">normaluser</option>', msg_prefix=
                 'expected a manager not to be able to modify an application.')
-
-    def test_superuser_can_change_the_application(self):
-        """
-        Verifies that a superuser can change an editor group application request
-        """
-        client = Client()
-        client.login(username='superuser', password='secret')
-        new_reg = EditorRegistrationRequest(user=User.objects.get(username='normaluser'),
-            editor_group=self.test_editor_group)
-        new_reg.save()
-        response = client.get('{}accounts/editorregistrationrequest/{}/'.format(ADMINROOT, new_reg.pk))
-        self.assertContains(response, 'normaluser</option>', msg_prefix=
-            'expected a superuser to be able to modify an application.')
