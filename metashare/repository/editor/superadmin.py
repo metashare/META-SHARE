@@ -28,7 +28,6 @@ from metashare.repository.editor.schemamodel_mixin import SchemaModelLookup
 from metashare.storage.models import MASTER
 from metashare.repository.model_utils import get_root_resources
 from metashare.repository.supermodel import REQUIRED, RECOMMENDED, OPTIONAL
-from metashare.repository.models import personInfoType_model
 
 # Setup logging support.
 logging.basicConfig(level=settings.LOG_LEVEL)
