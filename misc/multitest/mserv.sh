@@ -23,6 +23,13 @@ if [[ "$OP" == "--nodb" ]] ; then
 	shift
 fi
 
+CREATE_SOLR_SCHEMA=1
+OP=$1
+if [[ "$OP" == "--noschema" ]] ; then
+	CREATE_SOLR_SCHEMA=0
+	shift
+fi
+
 OP=$1
 if [[  "$OP" != "start" && "$OP" != "stop" && "$OP" != "clean" ]] ; then
 	echo "usage: $0 [start|stop|clean]"
@@ -35,9 +42,15 @@ if [[ "$OP" == "start" ]] ; then
 		./create_db.sh -r
 	fi
 
+	if [[ "$CREATE_SOLR_SCHEMA" == "1" ]] ; then
+		# Create a new SOLR schema compatible with the models.py
+		./create_solr_schema.sh
+	fi
+
 	# Remove local_settings from metashare directory since it
 	# may override the node specific one
-	# rm -f "$METASHARE_DIR/local_settings.py"
+	rm -f "$METASHARE_DIR/local_settings.py"
+	rm -f "$METASHARE_DIR/local_settings.pyc"
 	# Replace the original settings.py with one that imports 
 	# local_settings for each specific node
 	cp $MSERV_DIR/init_data/settings_test.py $METASHARE_DIR/settings.py
