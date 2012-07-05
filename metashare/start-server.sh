@@ -19,7 +19,7 @@ $PROJECT_ROOT/start-solr.sh
 
 sleep 5 # give SOLR time to start up before trying to verify that it is there
 
-# Register scheduled task(s) for synchronization
+# Register scheduled tasks for synchronization, session cleanup, etc.
 python2.7 manage.py installtasks
 
 # Start the Django + lighttpd server:

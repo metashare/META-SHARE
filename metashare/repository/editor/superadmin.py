@@ -5,6 +5,7 @@ and for inline forms.
 import logging
 
 from django import template
+from django.conf import settings
 from django.contrib import admin
 from django.contrib.admin import helpers
 from django.contrib.admin.util import unquote, get_deleted_objects
@@ -20,7 +21,6 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 from django.views.decorators.csrf import csrf_protect
 
-from metashare import settings
 from metashare.repository.editor.editorutils import is_inline, decode_inline
 from metashare.repository.editor.inlines import ReverseInlineModelAdmin
 from metashare.repository.editor.related_mixin import RelatedAdminMixin
@@ -201,6 +201,12 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         if not self.has_add_permission(request):
             raise PermissionDenied
 
+        #### begin modification ####
+        # make sure that the user has a full session length time for the current
+        # edit activity
+        request.session.set_expiry(settings.SESSION_COOKIE_AGE)
+        #### end modification ####
+
         ModelForm = self.get_form(request)
         formsets = []
         if request.method == 'POST':            
@@ -348,6 +354,12 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
 
         if not self.has_change_permission(request, obj):
             raise PermissionDenied
+
+        #### begin modification ####
+        # make sure that the user has a full session length time for the current
+        # edit activity
+        request.session.set_expiry(settings.SESSION_COOKIE_AGE)
+        #### end modification ####
 
         if obj is None:
             raise Http404(_('%(name)s object with primary key %(key)r does not exist.') % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
