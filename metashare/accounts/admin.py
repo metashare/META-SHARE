@@ -244,12 +244,6 @@ class EditorRegistrationRequestAdmin(admin.ModelAdmin):
                     req.user.is_staff = True
                     req.user.save()
 
-                # Send a notification email to the relevant user
-                emails = []
-         
-                # Find out the user email
-                emails.append(req.user.email)
-    
                 # Render notification email template with correct values.
                 data = {'editor_group': req.editor_group,
                   'shortname': req.user.get_full_name }
@@ -257,13 +251,13 @@ class EditorRegistrationRequestAdmin(admin.ModelAdmin):
                     # Send out notification email to the user
                     send_mail('Request accepted',
                       render_to_string('accounts/notification_editor_request_accepted.email', data),
-                      'no-reply@meta-share.eu', emails, fail_silently=False)
+                      'no-reply@meta-share.eu', (req.user.email,),
+                      fail_silently=False)
                 except: #SMTPException:
                     # If the email could not be sent successfully, tell the user
                     # about it.
-                    messages.error(request,
-                      "There was an error sending out the request email " \
-                      "for the request acceptance.")
+                    messages.error(request, _("There was an error sending " \
+                                   "out an application acceptance e-mail."))
                 else:
                     messages.success(request, _('You have successfully ' \
                       'accepted "%s" in the editor group "%s".') % (req.user.get_full_name,
@@ -289,44 +283,40 @@ class EditorRegistrationRequestAdmin(admin.ModelAdmin):
         Managers cannot modify applications, they can only add them or delete them.
         """
         if not request.user.is_superuser:
-            return self.list_display
-
-        return super(EditorRegistrationRequestAdmin, self).get_readonly_fields(request, obj)
+            # for non-superusers no part of the group application is editable
+            return [field.name for field
+                    in EditorRegistrationRequest._meta.fields]
+        return super(EditorRegistrationRequestAdmin, self) \
+            .get_readonly_fields(request, obj)
 
     # pylint: disable-msg=W0622
-    def log_deletion(self, request, object, object_repr):
+    def log_deletion(self, request, obj, object_repr):
         """
         When a request is deleted by a manager, send an email to the user before
         logging the deletion
         """
-        # Send a notification email to the relevant user
-        emails = []
- 
-        # Find out the user email
-        for edt_reg_req in EditorRegistrationRequest.objects.filter(pk=object.pk):
-            emails.append(edt_reg_req.user.email)
+        # Render notification email template with correct values.
+        data = {'editor_group': obj.editor_group,
+          'shortname': obj.user.get_full_name }
+        try:
+            # Send out notification email to the user
+            send_mail('Request rejected', render_to_string('accounts/'
+                            'notification_editor_request_deleted.email', data),
+                'no-reply@meta-share.eu', (obj.user.email,),
+                fail_silently=False)
+        except: #SMTPException:
+            # If the email could not be sent successfully, tell the user
+            # about it.
+            messages.error(request, _("There was an error sending out an "
+                           "application rejection e-mail."))
+        else:
+            messages.success(request, _('You have successfully deleted "%s" ' \
+              'from the editor group "%s".') % (obj.user.get_full_name,
+                                                obj.editor_group,))
 
-            # Render notification email template with correct values.
-            data = {'editor_group': edt_reg_req.editor_group,
-              'shortname': edt_reg_req.user.get_full_name }
-            try:
-                # Send out notification email to the user
-                send_mail('Request rejected',
-                  render_to_string('accounts/notification_editor_request_deleted.email', data),
-                  'no-reply@meta-share.eu', emails, fail_silently=False)
-            except: #SMTPException:
-                # If the email could not be sent successfully, tell the user
-                # about it.
-                messages.error(request,
-                  "There was an error sending out the request email " \
-                  "for the request deletion.")
-            else:
-                messages.success(request, _('You have successfully ' \
-                  'deleted "%s" from the editor group "%s".') % (edt_reg_req.user.get_full_name,
-                  edt_reg_req.editor_group,))
+        super(EditorRegistrationRequestAdmin, self).log_deletion(request, obj, object_repr)        
 
-        super(EditorRegistrationRequestAdmin, self).log_deletion(request, object, object_repr)        
-        
+
 class ManagerGroupAdmin(admin.ModelAdmin):
     """
     Administration interface for `ManagerGroup`s.
