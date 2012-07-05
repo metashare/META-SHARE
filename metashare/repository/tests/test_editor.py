@@ -511,7 +511,7 @@ class EditorTest(TestCase):
 
     def test_cannot_edit_reusable_entity_non_master_copy(self):
         client = _client_with_user_logged_in(EditorTest.editor_login)
-        resource = _import_test_resource(EditorTest.test_editor_group)
+        _import_test_resource(EditorTest.test_editor_group)
         personInfoType_model.objects.all().update(copy_status=REMOTE)           
         response = client.get('{}repository/personinfotype_model/1/'
                               .format(ADMINROOT))
