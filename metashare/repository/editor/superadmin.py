@@ -28,6 +28,7 @@ from metashare.repository.editor.schemamodel_mixin import SchemaModelLookup
 from metashare.storage.models import MASTER
 from metashare.repository.model_utils import get_root_resources
 from metashare.repository.supermodel import REQUIRED, RECOMMENDED, OPTIONAL
+from metashare.repository.models import personInfoType_model
 
 # Setup logging support.
 logging.basicConfig(level=settings.LOG_LEVEL)
@@ -458,7 +459,6 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         #### end modification ####
 
         #### begin modification ####
-        url = ''
         #for reusable entities
         if(hasattr(obj, 'copy_status') and obj.copy_status != MASTER):
             return render_to_response('admin/repository/cannot_edit.html',
