@@ -748,7 +748,7 @@ class EditorGroupRegistrationRequestTests(TestCase):
 
         test_utils.create_editor_user('editoruser',
             'editor@example.com', 'secret', (self.test_editor_group,))
-        manageruser = test_utils.create_manager_user(
+        test_utils.create_manager_user(
             'manageruser', 'manager@example.com', 'secret',
             (self.test_editor_group, self.test_manager_group, self.test_manager_group2))
 
