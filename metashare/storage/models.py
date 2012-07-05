@@ -564,10 +564,10 @@ def update_digests():
       Q(publication_status=INGESTED) | Q(publication_status=PUBLISHED)):
         if _expiration_date > _so.digest_modified \
           and _expiration_date > _so.digest_last_checked: 
-            LOGGER.debug('updating {}'.format(_so.identifier))
+            LOGGER.info('updating {}'.format(_so.identifier))
             _so.update_storage()
         else:
-            LOGGER.debug('{} is up to date'.format(_so.identifier))
+            LOGGER.info('{} is up to date'.format(_so.identifier))
 
 def compute_checksum(infile):
     """

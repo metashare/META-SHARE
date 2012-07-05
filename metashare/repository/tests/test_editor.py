@@ -305,7 +305,54 @@ class EditorTest(TestCase):
             msg_prefix='a superuser should see the "add owners" action')
         self.assertContains(response, 'Remove Owners',
             msg_prefix='a superuser should see the "remove owners" action')
+
+    def test_enough_editing_time_before_session_expiry(self):
+        """
+        Verifies that a user always has enough time for editing a resource or
+        reusable entity before there is a session timeout.
+        """
+        client = _client_with_user_logged_in(EditorTest.editor_login)
+        # test that there is enough time when adding a shared object
+        self._test_enough_editing_time_before_session_expiry(client,
+            'organizationinfotype_model/add/',
+            'A user must have more than one day time for adding an entity.')
+        # test that there is enough time when editing a shared object
+        self._test_enough_editing_time_before_session_expiry(client,
+            'personinfotype_model/{}/'.format(
+                EditorTest.testfixture3.contactPerson.all()[0].id),
+            'A user must have more than one day time for editing an entity.')
+        # test that there is enough time when adding a (tool/service) resource
+        _session = client.session
+        _session.set_expiry(5)
+        _session.save()
+        # when accessing the (actual) resource editor, the expiration time for
+        # the session is expected to be a lot higher again than one day
+        client.post('{}repository/resourceinfotype_model/add/'
+                    .format(ADMINROOT), {'resourceType': 'toolservice'})
+        self.assertLess(86400, client.session.get_expiry_age(),
+            'A user must have more than one day time for adding a resource.')
+        # test that there is enough time when editing a resource
+        self._test_enough_editing_time_before_session_expiry(client,
+            'resourceinfotype_model/{}/'.format(EditorTest.testfixture3.id),
+            'A user must have more than one day time for editing a resource.')
+
+    def _test_enough_editing_time_before_session_expiry(self, client, url_tail,
+                                                        fail_msg):
+        """
+        Verifies that the user logged in with the given client always has more
+        than one day time for editing the model instance with the editor URL
+        ending in the given `url_tail`.
         
+        The given failure message is used if the test fails.
+        """
+        # set an expiration time for the session of just 5 seconds
+        _session = client.session
+        _session.set_expiry(5)
+        _session.save()
+        # when accessing the editor, the expiration time for the session is
+        # expected to be a lot higher again (i.e., more than one day)
+        client.get('{}repository/{}'.format(ADMINROOT, url_tail))
+        self.assertLess(86400, client.session.get_expiry_age(), fail_msg)
 
     def test_upload_single_xml(self):
         client = _client_with_user_logged_in(EditorTest.editor_login)

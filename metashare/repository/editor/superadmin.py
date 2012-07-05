@@ -5,6 +5,7 @@ and for inline forms.
 import logging
 
 from django import template
+from django.conf import settings
 from django.contrib import admin
 from django.contrib.admin import helpers
 from django.contrib.admin.util import unquote, get_deleted_objects
@@ -20,7 +21,6 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 from django.views.decorators.csrf import csrf_protect
 
-from metashare import settings
 from metashare.repository.editor.editorutils import is_inline, decode_inline
 from metashare.repository.editor.inlines import ReverseInlineModelAdmin
 from metashare.repository.editor.related_mixin import RelatedAdminMixin
@@ -43,12 +43,12 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
     Patched ModelAdmin class. The add_view method is overridden to
     allow the reverse inline formsets to be saved before the parent
     model.
-    '''
+    '''    
     custom_one2one_inlines = {}
     custom_one2many_inlines = {}
     inline_type = 'stacked'
     inlines = ()
-
+    
     class Media:
         js = (settings.MEDIA_URL + 'js/addCollapseToAllStackedInlines.js',
               settings.MEDIA_URL + 'js/jquery-ui.min.js',
@@ -201,14 +201,20 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         if not self.has_add_permission(request):
             raise PermissionDenied
 
+        #### begin modification ####
+        # make sure that the user has a full session length time for the current
+        # edit activity
+        request.session.set_expiry(settings.SESSION_COOKIE_AGE)
+        #### end modification ####
+
         ModelForm = self.get_form(request)
         formsets = []
-        if request.method == 'POST':
+        if request.method == 'POST':            
             form = ModelForm(request.POST, request.FILES)
             if form.is_valid():
                 new_object = self.save_form(request, form, change=False)
                 form_validated = True
-            else:
+            else:                
                 form_validated = False
                 new_object = self.model()
             prefixes = {}
@@ -225,6 +231,10 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                                   instance=new_object,
                                   save_as_new="_saveasnew" in request.POST,
                                   prefix=prefix, queryset=inline.queryset(request))
+                #### begin modification ####
+                if prefix in self.model.get_fields()['required']:
+                    formset.forms[0].empty_permitted = False
+                #### end modification ####
                 formsets.append(formset)
             if all_valid(formsets) and form_validated:
                 #### begin modification ####
@@ -285,6 +295,10 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                     prefix = "%s-%s" % (prefix, prefixes[prefix])
                 formset = FormSet(instance=self.model(), prefix=prefix,
                                   queryset=inline.queryset(request))
+                #### begin modification ####
+                if prefix in self.model.get_fields()['required']:
+                    formset.forms[0].empty_permitted = False
+                #### end modification ####    
                 formsets.append(formset)
 
         #### begin modification ####
@@ -304,8 +318,8 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             self.prepopulated_fields, self.get_readonly_fields(request),
             model_admin=self, inlines=inline_admin_formsets)
         media = media + adminForm.media
-        #### end modification ####
-
+        #### end modification ####          
+        
         context = {
             'title': _('Add %s') % force_unicode(opts.verbose_name),
             'adminform': adminForm,
@@ -320,8 +334,9 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             'comp_name': _('%s') % force_unicode(opts.verbose_name),
         }
         context.update(extra_context or {})
-        return self.render_change_form(request, context, form_url=form_url, add=True)
 
+        return self.render_change_form(request, context, form_url=form_url, add=True)
+    
     @csrf_protect_m
     @transaction.commit_on_success
     def change_view(self, request, object_id, extra_context=None):
@@ -339,6 +354,12 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
 
         if not self.has_change_permission(request, obj):
             raise PermissionDenied
+
+        #### begin modification ####
+        # make sure that the user has a full session length time for the current
+        # edit activity
+        request.session.set_expiry(settings.SESSION_COOKIE_AGE)
+        #### end modification ####
 
         if obj is None:
             raise Http404(_('%(name)s object with primary key %(key)r does not exist.') % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
@@ -370,6 +391,10 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                 formset = FormSet(request.POST, request.FILES,
                                   instance=new_object, prefix=prefix,
                                   queryset=inline.queryset(request))
+                #### begin modification ####
+                if prefix in self.model.get_fields()['required']:
+                    formset.forms[0].empty_permitted = False
+                #### end modification ####    
 
                 formsets.append(formset)
 
@@ -419,6 +444,10 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                     prefix = "%s-%s" % (prefix, prefixes[prefix])
                 formset = FormSet(instance=obj, prefix=prefix,
                                   queryset=inline.queryset(request))
+                #### begin modification ####
+                if prefix in self.model.get_fields()['required']:
+                    formset.forms[0].empty_permitted = False
+                #### end modification ####    
                 formsets.append(formset)
 
         #### begin modification ####
@@ -444,9 +473,8 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         url = ''
         #for reusable entities
         if(hasattr(obj, 'copy_status') and obj.copy_status != MASTER):
-            url = "{0}/editor/repository/{1}/{2}".format(obj.source_url.rstrip('/'), (obj.__class__.__name__).lower(), object_id)
             return render_to_response('admin/repository/redirect.html',
-                   { 'object': obj, 'redirection_url': url },
+                   { 'object': obj, 'redirection_url': None },
                    )
         #for resources and resources' parts
         else:
