@@ -13,7 +13,7 @@ from metashare.repository import models
 from metashare.repository.models import languageDescriptionInfoType_model, \
     lexicalConceptualResourceInfoType_model
 from metashare.settings import DJANGO_BASE, ROOT_PATH
-from metashare.storage.models import COPY_CHOICES, REMOTE
+from metashare.storage.models import REMOTE
 
 ADMINROOT = '/{0}editor/'.format(DJANGO_BASE)
 TESTFIXTURE_XML = '{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
@@ -158,7 +158,7 @@ class EditorTest(TestCase):
         self.assertRedirects(login, ADMINROOT)
         self.assertFalse(login.context)
         client.get(ADMINROOT+'logout/')
-
+    
     def test_cannot_log_in_normal(self):
         client = Client()
         request = client.get(ADMINROOT)
@@ -512,13 +512,15 @@ class EditorTest(TestCase):
     def test_cannot_edit_reusable_entity_non_master_copy(self):
         client = _client_with_user_logged_in(EditorTest.editor_login)
         resource = _import_test_resource(EditorTest.test_editor_group)
-        for person in resource.contactPerson.all():
-            person.copy_status = REMOTE
+        for person in resource.contactPerson.all():                           
+            temp_pers = person
+            temp_pers.copy_status = REMOTE
         response = client.get('{}repository/personinfotype_model/1/'
                               .format(ADMINROOT))
+        print response
         self.assertContains(response, "You cannot edit the metadata for the entity")
         self.assertNotContains(response, "You will now be redirected")
-
+    
     def test_editor_can_change_own_resource_and_parts(self):
         """
         Verifies that the editor user can change his own resources and parts
@@ -738,3 +740,4 @@ class DeletionTests(TestCase):
         response = client.get('{}accounts/managergroup/'.format(ADMINROOT))
         self.assertNotContains(response, 'editoruser', msg_prefix=
             'expected the manager group to be removed when its editor group is removed')
+    
