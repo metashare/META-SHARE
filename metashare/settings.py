@@ -167,6 +167,7 @@ INSTALLED_APPS = (
 
     'haystack',
     'google_analytics',    
+
     'metashare.accounts',
     'metashare.storage',
     'metashare.sync',
