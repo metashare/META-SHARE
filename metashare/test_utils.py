@@ -4,11 +4,12 @@ Utility functions for unit tests useful across apps.
 """
 import os
 
-from django.contrib.auth.models import Group, User, Permission
+from django.contrib.auth.models import Group, User
 from django.core.management import call_command
 from django.test.testcases import TestCase
 
 from metashare import settings
+from metashare.accounts.admin import ManagerGroupAdmin
 from metashare.repository.management import GROUP_GLOBAL_EDITORS
 from metashare.repository.models import resourceInfoType_model, \
     personInfoType_model, actorInfoType_model, documentationInfoType_model, \
@@ -83,11 +84,8 @@ def create_manager_user(user_name, email, password, groups=None):
     group memberships.
     """
     result = create_editor_user(user_name, email, password, groups)
-    # add resource delete permission
-    opts = resourceInfoType_model._meta
-    result.user_permissions.add(Permission.objects.filter(
-        content_type__app_label=opts.app_label,
-        codename=opts.get_delete_permission())[0])
+    for _perm in ManagerGroupAdmin.get_suggested_manager_permissions():
+        result.user_permissions.add(_perm)
     return result
 
 
