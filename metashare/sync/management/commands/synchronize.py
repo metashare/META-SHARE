@@ -4,11 +4,12 @@ Management utility to trigger synchronization.
 
 import sys
 from metashare import settings
-from metashare.sync.sync_utils import login, get_inventory, get_full_metadata
+from metashare.sync.sync_utils import login, get_inventory, get_full_metadata, \
+    remove_resource
 from django.core.management.base import BaseCommand
 from optparse import make_option
 from metashare.storage.models import StorageObject, MASTER, PROXY, REMOTE, \
-    update_resource
+    update_resource, RemovedObject
 
 # Constants to show bold-face fonts in standard output
 BOLD = "\033[1m"
@@ -91,16 +92,20 @@ class Command(BaseCommand):
             
             # Get the inventory list. 
             remote_inventory = get_inventory(opener, "{0}/sync/".format(url))
+            
+            # handle existing resources
             remote_inventory_existing = remote_inventory['existing']
             remote_inventory_count = len(remote_inventory_existing)
-            sys.stdout.write("\nRemote node " + BOLD + url + RESET + " contains " + BOLD + str(remote_inventory_count) + " resources.\n" + RESET)
+            sys.stdout.write("\nRemote node " + BOLD + url + RESET + " contains " \
+              + BOLD + str(remote_inventory_count) + " resources.\n" + RESET)
             
             # Get a list of uuid's and digests from the local inventory
             non_master_storage_objects = StorageObject.objects.exclude(copy_status=MASTER)
             for item in non_master_storage_objects:
                 local_inventory.append({'id':str(item.identifier), 'digest':str(item.digest_checksum)})
             local_inventory_count = len(local_inventory)
-            sys.stdout.write("\nLocal node contains " + BOLD + str(local_inventory_count) + " resources.\n" + RESET)
+            sys.stdout.write("\nLocal node contains " + BOLD + str(local_inventory_count) \
+              + " resources.\n" + RESET)
 
             # Create an list of ids to speed-up matching
             local_inventory_indexed = []
@@ -132,7 +137,7 @@ class Command(BaseCommand):
                 sys.stdout.write("\nThere are no resources marked" +\
                   " for updating!\n")
             else:
-				# If there are resources to add or update
+                # If there are resources to add or update
                 sys.stdout.write("\n" + BOLD + \
                   ("No" if new_resources_count == 0 \
                   else str(new_resources_count)) + \
@@ -176,3 +181,25 @@ class Command(BaseCommand):
                             id_file.write("Different digests!\n")
 
             sys.stdout.write("\n\n")
+            
+            # handle removed resources
+            remote_inventory_removed = remote_inventory['removed']
+            remote_inventory_removed_count = len(remote_inventory_removed)
+            sys.stdout.write("\nRemote node " + BOLD + url + RESET + " lists " \
+              + BOLD + str(remote_inventory_removed_count) + " resources as removed.\n" + RESET)
+            
+            removed_count = 0
+            for removed_id in remote_inventory_removed:
+                if removed_id in local_inventory_indexed:
+                    # remove resource from this node;
+                    # if it is a PROXY copy, also create a corresponding removed object,
+                    # so that the removal is propagated to other inner nodes
+                    sys.stdout.write("\nRemoving id {}...\n".format(removed_id))
+                    removed_count += 1
+                    _so_to_remove = StorageObject.objects.get(identifier=removed_id)
+                    if _so_to_remove.copy_status is PROXY:
+                        _rem_obj = RemovedObject.objects.create(identifier=removed_id)
+                        _rem_obj.save()
+                    remove_resource(_so_to_remove) 
+                    
+            sys.stdout.write("\n{} resources removed\n".format(removed_count))
