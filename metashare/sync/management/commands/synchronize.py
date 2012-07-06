@@ -91,7 +91,8 @@ class Command(BaseCommand):
             
             # Get the inventory list. 
             remote_inventory = get_inventory(opener, "{0}/sync/".format(url))
-            remote_inventory_count = len(remote_inventory)
+            remote_inventory_existing = remote_inventory['existing']
+            remote_inventory_count = len(remote_inventory_existing)
             sys.stdout.write("\nRemote node " + BOLD + url + RESET + " contains " + BOLD + str(remote_inventory_count) + " resources.\n" + RESET)
             
             # Get a list of uuid's and digests from the local inventory
@@ -111,7 +112,7 @@ class Command(BaseCommand):
             # remote inventory and not in the local.
             # 2. Containing items to be updated - items that exist in both
             # inventories but the remote is different from the local
-            for item in remote_inventory:
+            for item in remote_inventory_existing:
                 item_id = item['id']
                 if item_id not in local_inventory_indexed:
                     new_resources.append(item)

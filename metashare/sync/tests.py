@@ -10,7 +10,7 @@ from metashare import settings, test_utils
 from metashare.repository.models import resourceInfoType_model
 from xml.etree.ElementTree import fromstring
 from metashare.storage.models import INGESTED, INTERNAL, StorageObject, \
-    PUBLISHED, compute_digest_checksum
+    PUBLISHED, compute_digest_checksum, RemovedObject
 from metashare.test_utils import set_index_active
 import datetime
 
@@ -37,21 +37,28 @@ class MetadataSyncTest (TestCase):
 
     def assertValidInventoryItem(self, entry):
         if not (entry['id'] and entry['digest']):
-            raise Exception('Inventory item does not have "id" and "digest" key-value pairs: {}'.format(entry))
+            raise Exception(
+              'Inventory item does not have "id" and "digest" key-value pairs: {}'.format(entry))
         
     def assertValidInventory(self, json_inventory):
+        # inventory contains a 'removed' and an 'existing' section
+        if not (json_inventory['removed'] or json_inventory['existing']):
+            raise Exception(
+              'Inventory item does not have "removed" or "existing" key-value pairs: {}'.format(json_inventory))
         is_empty = True
-        for entry in json_inventory:
+        for entry in json_inventory['existing']:
             is_empty = False
             self.assertValidInventoryItem(entry)
         if is_empty:
-            raise Exception("Not a valid inventory because it doesn't have any inventory items: {}".format(json_inventory))
+            raise Exception(
+              'Not a valid inventory because it does not have any existing inventory items: {}'.format(json_inventory))
 
     def assertValidInventoryResponse(self, response):
         self.assertEquals(200, response.status_code)
         self.assertEquals('application/zip', response['Content-Type'])
         self.assertEquals(settings.METASHARE_VERSION, response['Metashare-Version'])
-        json_inventory = self.extract_inventory(response)
+        with ZipFile(StringIO(response.content), 'r') as inzip:
+            json_inventory = json.load(inzip.open('inventory.json'))
         self.assertValidInventory(json_inventory)
 
     def assertValidFullMetadataResponse(self, response):
@@ -141,6 +148,15 @@ class MetadataSyncTest (TestCase):
         pubres = cls.import_test_resource('ILSP10.xml', PUBLISHED)
         pubres.storage_object.digest_modified = datetime.date(2012, 1, 1)
         pubres.storage_object.save()
+        
+        # some resources have been removed
+        rem1 = RemovedObject.objects.create(identifier='rem1')
+        rem1.save()
+        rem2 = RemovedObject.objects.create(identifier='rem2')
+        rem2.save()
+        rem3 = RemovedObject.objects.create(identifier='rem4')
+        rem3.save()
+
 
     @classmethod
     def tearDownClass(cls):
@@ -210,19 +226,17 @@ class MetadataSyncTest (TestCase):
         response = client.get('{0}0000000000000000000000000000000000000000000000000000000000000000/metadata/'.format(self.SYNC_BASE))
         self.assertEquals(404, response.status_code)
 
-
     def test_inventory_doesnt_include_internal(self):
         settings.SYNC_NEEDS_AUTHENTICATION = False
         client = Client()
         response = client.get(self.INVENTORY_URL)
         self.assertValidInventoryResponse(response)
-        with ZipFile(StringIO(response.content), 'r') as inzip:
-            json_inventory = json.load(inzip.open('inventory.json'))
-        self.assertEquals(2, len(json_inventory))
-        for struct in json_inventory:
+        json_inventory = self.extract_inventory(response)
+        self.assertEquals(2, len(json_inventory['existing']))
+        for struct in json_inventory['existing']:
             storage_object = StorageObject.objects.get(identifier=struct['id'])
             self.assertTrue(storage_object.publication_status in (INGESTED, PUBLISHED),
-                            "Resource {0} should not be included in inventory because it is not ingested or published".format(struct['id']))
+              "Resource {0} should not be included in inventory because it is not ingested or published".format(struct['id']))
 
     def test_can_get_ingested_metadata(self):
         settings.SYNC_NEEDS_AUTHENTICATION = False
@@ -269,22 +283,26 @@ class MetadataSyncTest (TestCase):
         settings.SYNC_NEEDS_AUTHENTICATION = False
         response = Client().get(self.INVENTORY_URL)
         inventory = self.extract_inventory(response)
-        self.assertEquals(2, len(inventory))
+        self.assertEquals(2, len(inventory['existing']))
+        self.assertEquals(3, len(inventory['removed']))
 
     def test_inventory_veryolddate(self):
         settings.SYNC_NEEDS_AUTHENTICATION = False
         response = Client().get(self.INVENTORY_URL+"?from=2011-01-01")
         inventory = self.extract_inventory(response)
-        self.assertEquals(2, len(inventory))
+        self.assertEquals(2, len(inventory['existing']))
+        self.assertEquals(3, len(inventory['removed']))
 
     def test_inventory_mediumdate(self):
         settings.SYNC_NEEDS_AUTHENTICATION = False
         response = Client().get(self.INVENTORY_URL+"?from=2012-02-01")
         inventory = self.extract_inventory(response)
-        self.assertEquals(1, len(inventory))
+        self.assertEquals(1, len(inventory['existing']))
+        self.assertEquals(3, len(inventory['removed']))
 
     def test_inventory_toorecentdate(self):
         settings.SYNC_NEEDS_AUTHENTICATION = False
-        response = Client().get(self.INVENTORY_URL+"?from=2013-01-01")
+        response = Client().get(self.INVENTORY_URL+"?from=2099-01-01")
         inventory = self.extract_inventory(response)
-        self.assertEquals(0, len(inventory))
+        self.assertEquals(0, len(inventory['existing']))
+        self.assertEquals(0, len(inventory['removed']))
