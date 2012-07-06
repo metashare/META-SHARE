@@ -9,6 +9,7 @@ from django.core.management import call_command
 from django.test.testcases import TestCase
 
 from metashare import settings
+from metashare.accounts.models import EditorRegistrationRequest
 from metashare.repository.management import GROUP_GLOBAL_EDITORS
 from metashare.repository.models import resourceInfoType_model, \
     personInfoType_model, actorInfoType_model, documentationInfoType_model, \
@@ -88,6 +89,13 @@ def create_manager_user(user_name, email, password, groups=None):
     result.user_permissions.add(Permission.objects.filter(
         content_type__app_label=opts.app_label,
         codename=opts.get_delete_permission())[0])
+    # add editor group application request change/delete permission
+    opts = EditorRegistrationRequest._meta
+    result.user_permissions.add(
+        Permission.objects.filter(content_type__app_label=opts.app_label,
+            codename=opts.get_change_permission())[0],
+        Permission.objects.filter(content_type__app_label=opts.app_label,
+            codename=opts.get_delete_permission())[0])
     return result
 
 
