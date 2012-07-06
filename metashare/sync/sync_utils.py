@@ -11,6 +11,9 @@ from zipfile import ZipFile
 from StringIO import StringIO
 from metashare.storage.models import compute_digest_checksum
 from traceback import format_exc
+import os
+from metashare import settings
+import shutil
 
 # Idea taken from 
 # http://stackoverflow.com/questions/5082128/how-do-i-authenticate-a-urllib2-script-in-order-to-access-https-web-services-fro
@@ -91,6 +94,17 @@ def get_full_metadata(opener, full_metadata_url, expected_digest):
                   .format(full_metadata_url))
             return storage_json, resource_xml_string
 
+
+def remove_resource(storage_object):
+    """
+    Completely removes the given storage object and its associated language 
+    resource from the storage layer.
+    """
+    resource = storage_object.resourceinfotype_model_set.all()[0]
+    folder = os.path.join(settings.STORAGE_PATH, storage_object.identifier)
+    shutil.rmtree(folder)
+    resource.delete_deep()
+    storage_object.delete()
 
 class ConnectionException(Exception):
     pass
