@@ -3,7 +3,7 @@ Project: META-SHARE prototype implementation
  Author: Christian Federmann <cfedermann@dfki.de>
 """
 from django.contrib import admin
-from metashare.storage.models import StorageObject
+from metashare.storage.models import StorageObject, RemovedObject
 
 class StorageObjectAdmin(admin.ModelAdmin):
     """
@@ -30,4 +30,17 @@ class StorageObjectAdmin(admin.ModelAdmin):
     )
 
 
+class RemovedObjectAdmin(admin.ModelAdmin):
+    """
+    Model admin class for removed object instances.
+    """
+    readonly_fields = ('identifier', 'removed')
+    
+    fieldsets = (
+      ('Read-only Fields', {
+        'fields': ('identifier', 'removed'),
+      }),
+    )
+
 admin.site.register(StorageObject, StorageObjectAdmin)
+admin.site.register(RemovedObject, RemovedObjectAdmin)

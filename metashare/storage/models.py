@@ -610,3 +610,24 @@ def _get_expiration_date():
     _td = timedelta(seconds=_half_time)
     _expiration_date = datetime.now() - _td
     return _expiration_date
+
+
+class RemovedObject(models.Model):
+    """
+    Models a language resource that was completely removed from the storage layer.
+    """
+    __schema_name__ = "REMOVEDOJBECT"
+    
+    identifier = models.CharField(max_length=64, blank=False,
+      editable=False, unique=True, help_text="(Read-only) unique " \
+      "identifier holding the identifier of the removed language resource.")
+    
+    removed = models.DateTimeField(editable=False, default=datetime.now(),
+      help_text="(Read-only) removal date of the metadata XML " \
+        "for this removed object instance.")
+    
+    def __unicode__(self):
+        """
+        Returns the Unicode representation for this reomved object instance.
+        """
+        return u'<RemovedObject id="{0}">'.format(self.id)
