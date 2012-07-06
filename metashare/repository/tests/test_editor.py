@@ -807,11 +807,12 @@ class EditorGroupRegistrationRequestTests(TestCase):
         User.objects.all().delete()
         EditorGroup.objects.all().delete()
         ManagerGroup.objects.all().delete()
+        EditorRegistrationRequest.objects.all().delete()
         test_utils.set_index_active(True)
 
     def test_request_page_with_one_editor_group(self):
         """
-        Verifies that a user cannot apply when there is no editor group
+        Verifies that a user can apply when there is at least one editor group.
         """
         client = Client()
         client.login(username='normaluser', password='secret')
@@ -832,9 +833,10 @@ class EditorGroupRegistrationRequestTests(TestCase):
           self.test_editor_group.name), msg_prefix='expected the system to accept a new request.')
         self.assertEquals(EditorRegistrationRequest.objects.count(), current_requests + 1)
 
-    def test_apply_when_member_of_one_group(self):
+    def test_apply_when_there_is_a_pending_application(self):
         """
-        Verifies that a user can apply to a new group
+        Verifies that a user can apply for new group when another application is
+        still pending.
         """
         client = Client()
         client.login(username='normaluser', password='secret')
@@ -922,20 +924,23 @@ class EditorGroupRegistrationRequestTests(TestCase):
         self.assertContains(response, 'normaluser</option>', msg_prefix=
             'expected a superuser to be able to modify an application.')
 
-    #TODO: function to be corrected: manager connection get an access denied
-    if 0:
-        def test_manager_cannot_change_the_application(self):
-            """
-            Verifies that a manager cannot change an editor group application request
-            
-            The manager can view the applicatino details anyway
-            """
-            client = Client()
-            client.login(username='manageruser', password='secret')
-            new_reg = EditorRegistrationRequest(user=User.objects.get(username='normaluser'),
-                editor_group=self.test_editor_group)
-            new_reg.save()
-            response = client.get('{}accounts/editorregistrationrequest/{}/'.format(ADMINROOT, new_reg.pk))
-            self.assertContains(response, 'normaluser', msg_prefix='expected a manager to be able to see the details of an application.')
-            self.assertNotContains(response, '<option value="1" selected="selected">normaluser</option>', msg_prefix=
-                'expected a manager not to be able to modify an application.')
+    def test_manager_cannot_change_the_application(self):
+        """
+        Verifies that a manager cannot change an editor group application
+        request.
+        
+        The manager can view the applicatino details anyway.
+        """
+        client = Client()
+        client.login(username='manageruser', password='secret')
+        new_reg = EditorRegistrationRequest(
+            user=User.objects.get(username='normaluser'),
+            editor_group=self.test_editor_group)
+        new_reg.save()
+        response = client.get('{}accounts/editorregistrationrequest/{}/'
+                              .format(ADMINROOT, new_reg.pk))
+        self.assertContains(response, 'normaluser', msg_prefix='expected a '
+                'manager to be able to see the details of an application.')
+        self.assertNotContains(response, '<option value="1" '
+                'selected="selected">normaluser</option>', msg_prefix=
+            'expected a manager not to be able to modify an application.')
