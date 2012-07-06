@@ -1,4 +1,7 @@
+#!/bin/bash
 
+. _meta_dir.sh
+. _conf.sh
 
 
 
@@ -31,9 +34,6 @@ replace_vars()
 IN_FILE=lighttpd-ssl.conf.sample
 OUT_FILE=lighttpd-ssl.conf
 
-LOG_DIR=/var/log
-
-METASHARE_SW_DIR=/home/metashare/current/META-SHARE
 SERVER_NAME=0.0.0.0
 LIGHT_ADDR=0.0.0.0
 LIGHT_HTTP_PORT=6789
@@ -47,6 +47,7 @@ PEM_FILE=$METASHARE_SW_DIR/misc/ssl-config/cert/metashare.pem
 CA_FILE=$METASHARE_SW_DIR/misc/ssl-config/cert/metashare.crt
 
 LOG_DIR=/tmp/log/light
+mkdir -p "$LOG_DIR"
 
 replace_vars "$IN_FILE" "$OUT_FILE"
 
