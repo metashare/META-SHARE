@@ -14,7 +14,8 @@ from metashare.repository.models import resourceInfoType_model, \
     personInfoType_model, actorInfoType_model, documentationInfoType_model, \
     documentInfoType_model, targetResourceInfoType_model, \
     organizationInfoType_model, projectInfoType_model
-from metashare.storage.models import PUBLISHED, MASTER, StorageObject
+from metashare.storage.models import PUBLISHED, MASTER, StorageObject,\
+    RemovedObject
 from metashare.xml_utils import import_from_file
 
 
@@ -33,8 +34,9 @@ def clean_db():
     """
     for res in resourceInfoType_model.objects.all():
         res.delete_deep()
-    # delete storage objects
+    # delete storage objects and removed objects
     StorageObject.objects.all().delete()
+    RemovedObject.objects.all().delete()
     # delete all reusable entities
     actorInfoType_model.objects.all().delete()
     documentationInfoType_model.objects.all().delete()
