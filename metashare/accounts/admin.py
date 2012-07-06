@@ -356,25 +356,32 @@ class ManagerGroupAdmin(admin.ModelAdmin):
         if request.method == 'GET':
             # request `QueryDict`s are immutable; create a copy before upadating
             request.GET = request.GET.copy()
-            _perms_ids = []
-            # add lanaguage resource delete permission
-            from metashare.repository.models import resourceInfoType_model
-            opts = resourceInfoType_model._meta
-            _perms_ids.append(Permission.objects.filter(
-                    content_type__app_label=opts.app_label,
-                    codename=opts.get_delete_permission())[0].pk)
-            # add editor group application request change/delete permission
-            opts = EditorRegistrationRequest._meta
-            _perms_ids.append(Permission.objects.filter(
-                    content_type__app_label=opts.app_label,
-                    codename=opts.get_change_permission())[0].pk)
-            _perms_ids.append(Permission.objects.filter(
-                    content_type__app_label=opts.app_label,
-                    codename=opts.get_delete_permission())[0].pk)
-            request.GET.update({'permissions':
-                    ','.join(str(_perm_id) for _perm_id in _perms_ids)})
+            request.GET.update({'permissions': ','.join(str(_perm.pk) for _perm
+                    in ManagerGroupAdmin.get_suggested_manager_permissions())})
         return super(ManagerGroupAdmin, self).add_view(request,
                                 form_url=form_url, extra_context=extra_context)
+
+    @staticmethod
+    def get_suggested_manager_permissions():
+        """
+        Returns a list of `Permission`s that all `ManagerGroup`s should have.
+        """
+        result = []
+        # add lanaguage resource delete permission
+        from metashare.repository.models import resourceInfoType_model
+        opts = resourceInfoType_model._meta
+        result.append(Permission.objects.filter(
+                content_type__app_label=opts.app_label,
+                codename=opts.get_delete_permission())[0])
+        # add editor group application request change/delete permission
+        opts = EditorRegistrationRequest._meta
+        result.append(Permission.objects.filter(
+                content_type__app_label=opts.app_label,
+                codename=opts.get_change_permission())[0])
+        result.append(Permission.objects.filter(
+                content_type__app_label=opts.app_label,
+                codename=opts.get_delete_permission())[0])
+        return result
 
     def add_user_to_manager_group(self, request, queryset):
         form = None

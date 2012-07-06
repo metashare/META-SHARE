@@ -8,7 +8,7 @@ from django.test import TestCase
 from django.test.client import Client
 
 from metashare import test_utils
-from metashare.accounts.models import EditorGroup, ManagerGroup
+from metashare.accounts.models import EditorGroup, ManagerGroup, EditorRegistrationRequest
 from metashare.repository import models
 from metashare.repository.models import languageDescriptionInfoType_model, \
     lexicalConceptualResourceInfoType_model
@@ -764,3 +764,183 @@ class DeletionTests(TestCase):
         response = client.get('{}accounts/managergroup/'.format(ADMINROOT))
         self.assertNotContains(response, 'editoruser', msg_prefix=
             'expected the manager group to be removed when its editor group is removed')
+
+class EditorGroupRegistrationRequestTests(TestCase):
+    """
+    Test case for the user registration to one or several Editors of various model instances.
+    """
+
+    def setUp(self):
+        """
+        Sets up test users with and without staff permissions.
+        """
+        test_utils.set_index_active(False)
+        test_utils.setup_test_storage()
+
+        User.objects.create_user('normaluser', 'normal@example.com', 'secret')
+
+        self.test_editor_group = EditorGroup.objects.create(
+                                                    name='test_editor_group')
+        self.test_editor_group2 = EditorGroup.objects.create(
+                                                    name='test_editor_group2')
+        self.test_editor_group3 = EditorGroup.objects.create(
+                                                    name='test_editor_group3')
+
+        self.test_manager_group = \
+            ManagerGroup.objects.create(name='test_manager_group',
+                                        managed_group=self.test_editor_group)
+        self.test_manager_group2 = \
+            ManagerGroup.objects.create(name='test_manager_group2',
+                                        managed_group=self.test_editor_group2)
+
+        test_utils.create_editor_user('editoruser',
+            'editor@example.com', 'secret', (self.test_editor_group,))
+        test_utils.create_manager_user(
+            'manageruser', 'manager@example.com', 'secret',
+            (self.test_editor_group, self.test_manager_group, self.test_manager_group2))
+
+        User.objects.create_superuser('superuser', 'su@example.com', 'secret')
+
+    def tearDown(self):
+        test_utils.clean_db()
+        test_utils.clean_storage()
+        User.objects.all().delete()
+        EditorGroup.objects.all().delete()
+        ManagerGroup.objects.all().delete()
+        EditorRegistrationRequest.objects.all().delete()
+        test_utils.set_index_active(True)
+
+    def test_request_page_with_one_editor_group(self):
+        """
+        Verifies that a user can apply when there is at least one editor group.
+        """
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        response = client.get('/{0}accounts/editor_registration_request/'.format(DJANGO_BASE))
+        self.assertContains(response, 'Apply for editor group membership', msg_prefix=
+          'expected the system to allow the user to apply to an editor group')
+
+    def test_apply_when_not_member_of_any_group(self):
+        """
+        Verifies that a user can apply to a first group
+        """
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        current_requests = EditorRegistrationRequest.objects.count()
+        response = client.post('/{0}accounts/editor_registration_request/'.format(DJANGO_BASE), \
+          {'editor_group': self.test_editor_group.pk}, follow=True)
+        self.assertContains(response, 'You have successfully applied for editor group "{0}"'.format(
+          self.test_editor_group.name), msg_prefix='expected the system to accept a new request.')
+        self.assertEquals(EditorRegistrationRequest.objects.count(), current_requests + 1)
+
+    def test_apply_when_there_is_a_pending_application(self):
+        """
+        Verifies that a user can apply for new group when another application is
+        still pending.
+        """
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        current_requests = EditorRegistrationRequest.objects.count()
+        response = client.post('/{0}accounts/editor_registration_request/'.format(DJANGO_BASE), \
+          {'editor_group': self.test_editor_group.pk}, follow=True)
+        self.assertContains(response, 'You have successfully applied for editor group "{0}"'.format(
+          self.test_editor_group.name), msg_prefix='expected the system to accept a new request.')
+        response = client.post('/{0}accounts/editor_registration_request/'.format(DJANGO_BASE), \
+          {'editor_group': self.test_editor_group2.pk}, follow=True)
+        self.assertContains(response, 'You have successfully applied for editor group "{0}"'.format(
+          self.test_editor_group2.name), msg_prefix='expected the system to accept a new request.')
+        self.assertEquals(EditorRegistrationRequest.objects.count(), current_requests + 2)
+
+    def test_notification_email_when_apply(self):
+        """
+        Verifies that an email is sent when the user apply to a group
+        """
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        current_requests = EditorRegistrationRequest.objects.count()
+        response = client.post('/{0}accounts/editor_registration_request/'.format(DJANGO_BASE), \
+          {'editor_group': self.test_editor_group.pk}, follow=True)
+        self.assertNotContains(response, 'There was an error sending out the request email', msg_prefix=
+          'expected the system to be able to send an email.')
+        self.assertEquals(EditorRegistrationRequest.objects.count(), current_requests + 1)
+
+    def test_cannot_apply_a_group_of_which_the_user_is_member(self):
+        """
+        Verifies that a user cannot apply to a group he/she is already a member
+        """
+        client = Client()
+        client.login(username='editoruser', password='secret')
+        response = client.get('/{0}accounts/editor_registration_request/'.format(DJANGO_BASE), follow=True)
+        self.assertNotContains(response, '{}</option>'.format(self.test_editor_group),
+          msg_prefix='expected the system not to propose the registration to a group the user is already a member.')
+
+    def test_cannot_apply_a_group_already_applied(self):
+        """
+        Verifies that a user cannot apply to a group he/she already applied for
+        """
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        response = client.post('/{0}accounts/editor_registration_request/'.format(DJANGO_BASE), \
+          {'editor_group': self.test_editor_group.pk}, follow=True)
+        self.assertContains(response, 'You have successfully applied for editor group "{0}"'.format(
+          self.test_editor_group.name), msg_prefix='expected the system to accept a new request.')
+        response = client.get('/{0}accounts/editor_registration_request/'.format(DJANGO_BASE), follow=True)
+        self.assertNotContains(response, '{}</option>'.format(self.test_editor_group),
+          msg_prefix='expected the system not to propose the registration to a group \
+          the user already applied for.')
+        
+    def test_cannot_apply_a_group_without_manager(self):
+        """
+        Verifies that a user cannot apply to a group without a manager
+        """
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        response = client.get('/{0}accounts/editor_registration_request/'.format(DJANGO_BASE), follow=True)
+        self.assertNotContains(response, '{}</option>'.format(self.test_editor_group3),
+          msg_prefix='expected the system not to propose the registration to a group \
+          without a manager.')
+
+    def test_cannot_access_the_form_when_no_group_available(self):
+        """
+        Verifies that a user cannot apply when there is no editor group available
+        """
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        EditorGroup.objects.all().delete()
+        response = client.get('/{0}accounts/editor_registration_request/'.format(DJANGO_BASE), follow=True)
+        self.assertContains(response, 'There are no editor groups in the database, yet, for which you could apply.',
+          msg_prefix='expected the system to prevent access to the form when no editor group is available.')
+
+    def test_superuser_can_change_the_application(self):
+        """
+        Verifies that a superuser can change an editor group application request
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+        new_reg = EditorRegistrationRequest(user=User.objects.get(username='normaluser'),
+            editor_group=self.test_editor_group)
+        new_reg.save()
+        response = client.get('{}accounts/editorregistrationrequest/{}/'.format(ADMINROOT, new_reg.pk))
+        self.assertContains(response, 'normaluser</option>', msg_prefix=
+            'expected a superuser to be able to modify an application.')
+
+    def test_manager_cannot_change_the_application(self):
+        """
+        Verifies that a manager cannot change an editor group application
+        request.
+        
+        The manager can view the applicatino details anyway.
+        """
+        client = Client()
+        client.login(username='manageruser', password='secret')
+        new_reg = EditorRegistrationRequest(
+            user=User.objects.get(username='normaluser'),
+            editor_group=self.test_editor_group)
+        new_reg.save()
+        response = client.get('{}accounts/editorregistrationrequest/{}/'
+                              .format(ADMINROOT, new_reg.pk))
+        self.assertContains(response, 'normaluser', msg_prefix='expected a '
+                'manager to be able to see the details of an application.')
+        self.assertNotContains(response, '<option value="1" '
+                'selected="selected">normaluser</option>', msg_prefix=
+            'expected a manager not to be able to modify an application.')
