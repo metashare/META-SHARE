@@ -1,4 +1,4 @@
-{% load analytics %}
+{% load google_analytics %}
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
    "http://www.w3.org/TR/html4/strict.dtd">
@@ -22,7 +22,7 @@
 	<link href='http://fonts.googleapis.com/css?family=Rokkitt' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Cantarell:regular,italic,bold,bolditalic&v1' rel='stylesheet' type='text/css'>
 	{% block links %}{% endblock %}
-
+    {% google_analytics	 %}
   </head>
     
   <body>
@@ -113,7 +113,6 @@
 	  
 	</script>
 
-	{% analytics %}
   </body>
 
 </html>
