@@ -4,7 +4,7 @@ from zipfile import ZipFile
 from metashare import settings
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
-from metashare.storage.models import StorageObject, MASTER, PROXY, INTERNAL,\
+from metashare.storage.models import StorageObject, MASTER, PROXY, INTERNAL, \
     RemovedObject
 import dateutil.parser
 
