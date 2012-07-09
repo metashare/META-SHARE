@@ -182,8 +182,8 @@ class EditorTest(SeleniumTestCase):
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         # delete resource
         self.delete(driver)
-        self.assertEqual("Successfully deleted 1 Resource.", 
-         driver.find_element_by_css_selector("li.info").text)
+        self.assertEqual("0 Resources", 
+         driver.find_element_by_css_selector("p.paginator").text)
         
         
     def test_LR_creation_corpus_audio(self):
@@ -267,8 +267,8 @@ class EditorTest(SeleniumTestCase):
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         # delete resource
         self.delete(driver)
-        self.assertEqual("Successfully deleted 1 Resource.", 
-         driver.find_element_by_css_selector("li.info").text)
+        self.assertEqual("0 Resources", 
+         driver.find_element_by_css_selector("p.paginator").text)
 
         
     def test_LR_creation_lang_descr_text(self):
@@ -358,8 +358,8 @@ class EditorTest(SeleniumTestCase):
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         # delete resource
         self.delete(driver)
-        self.assertEqual("Successfully deleted 1 Resource.", 
-         driver.find_element_by_css_selector("li.info").text)
+        self.assertEqual("0 Resources", 
+         driver.find_element_by_css_selector("p.paginator").text)
         
 
     def test_LR_creation_lex_resource_text(self):
@@ -450,8 +450,8 @@ class EditorTest(SeleniumTestCase):
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         # delete resource
         self.delete(driver)
-        self.assertEqual("Successfully deleted 1 Resource.", 
-         driver.find_element_by_css_selector("li.info").text)
+        self.assertEqual("0 Resources", 
+         driver.find_element_by_css_selector("p.paginator").text)
         
         
     def test_LR_creation_tool(self):
@@ -530,8 +530,8 @@ class EditorTest(SeleniumTestCase):
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         # delete resource
         self.delete(driver)
-        self.assertEqual("Successfully deleted 1 Resource.", 
-         driver.find_element_by_css_selector("li.info").text)
+        self.assertEqual("0 Resources", 
+         driver.find_element_by_css_selector("p.paginator").text)
 
 
     def test_sorting(self):
@@ -759,9 +759,8 @@ class EditorTest(SeleniumTestCase):
         selects all resources and deletes them
         """
         driver.find_element_by_id("action-toggle").click()
-        Select(driver.find_element_by_name("action")).select_by_visible_text("Delete selected Resources")
+        Select(driver.find_element_by_name("action")).select_by_visible_text("Mark selected resources as deleted")
         driver.find_element_by_name("index").click()
-        driver.find_element_by_css_selector("input[type=\"submit\"]").click()
         # TODO remove this workaround when Selenium starts working again as intended
         time.sleep(1)
 
