@@ -15,7 +15,7 @@ if [ -f $LIGHTTPD_PID ]; then
     rm -f $LIGHTTPD_PID
 fi
 
-# Unregister scheduled task(s) for synchronization
+# Unregister scheduled tasks for synchronization, session cleanup, etc.
 python2.7 manage.py uninstalltasks
 
 

@@ -11,6 +11,7 @@ from django.test.client import Client
 from metashare.settings import DJANGO_BASE
 from django.db.utils import IntegrityError
 from django.contrib.auth.models import User
+from django.db.transaction import rollback
 
 class CreateViewTest(django.test.TestCase):
     def testCreateInitial(self):
@@ -131,7 +132,10 @@ class RegistrationRequestTest(django.test.TestCase):
             self.fail("Should have thrown an IntegrityError due to duplicate " \
               "user name")
         except IntegrityError:
-            pass
+            # we have to trigger the rollback manually, otherwise we run into 
+            # a DatabaseError: current transaction is aborted
+            # when using PostgreSQL 
+            rollback()
     
     def testUniqueEmailRegistration(self):
         try:
@@ -141,7 +145,10 @@ class RegistrationRequestTest(django.test.TestCase):
             self.fail("Should have thrown an IntegrityError due to duplicate " \
               "email")
         except IntegrityError:
-            pass
+            # we have to trigger the rollback manually, otherwise we run into 
+            # a DatabaseError: current transaction is aborted
+            # when using PostgreSQL 
+            rollback()
 
     def testUniqueUserNameAccount(self):
         User.objects.create_user(

@@ -2,6 +2,13 @@ import kronos
 from metashare.settings import SYNC_INTERVALS, UPDATE_INTERVALS
 from django.core.management import call_command
 
+
+# clean up the session database every Monday night
+@kronos.register("12 4 * * 1")
+def run_session_cleanup():
+    call_command('cleanup', interactive=False)
+
+
 sync_interval_settings = ""
 # Get sync interval settings
 sync_interval_settings = "{} {} {} {} {}".format( \
@@ -30,8 +37,3 @@ update_interval_settings = "{} {} {} {} {}".format( \
 @kronos.register(update_interval_settings)
 def run_digest_update():
     call_command('update_digests', interactive=False)
-
-
-    
-
-    
