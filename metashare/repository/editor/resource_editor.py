@@ -952,6 +952,12 @@ class ResourceModelAdmin(SchemaModelAdmin):
         #update statistics
         if hasattr(obj, 'storage_object') and obj.storage_object is not None:
             saveLRStats(obj, UPDATE_STAT, request)          
+    
+    def delete_model(self, request, obj):
+        obj.storage_object.deleted = True
+        obj.storage_object.save()
+        # explicitly write metadata XML and storage object to the storage folder
+        obj.storage_object.update_storage()
         
     def change_view(self, request, object_id, extra_context=None):
         _extra_context = extra_context or {}
