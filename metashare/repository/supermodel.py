@@ -273,7 +273,8 @@ class SchemaModel(models.Model):
                     if _readable_value == value:
                         result = _db_value
 
-                if result == value:
+                if result == value \
+                        and not isinstance(field, models.IntegerField):
                     LOGGER.error(u'Value {} not found in choices for ' \
                       '{}'.format(repr(value), field.name))
 
