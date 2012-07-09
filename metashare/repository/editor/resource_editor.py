@@ -747,6 +747,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
         whether the current user may edit a resource or not.
         """
         result = super(ResourceModelAdmin, self).queryset(request)
+        # filter results marked as deleted:
+        result = result.distinct().filter(storage_object__deleted=False)
         # all users but the superusers may only see resources for which they are
         # either owner or editor group member:
         if not request.user.is_superuser:
