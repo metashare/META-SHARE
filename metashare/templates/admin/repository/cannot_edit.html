@@ -9,21 +9,20 @@
 {{ media }}
 {% endblock %}
 {% block content %}
-<div id="redirect_msg"><h3>You cannot edit the metadata for the {% if resource %}resource "{{resource}}"{% else %}entity "{{object}}"{% endif %}
-{% if resource %}
-, originally provided
+<div class="redirect_msg">You cannot edit the metadata for the {% if resource %}resource "{{resource}}"{% else %}entity "{{object}}"{% endif %}{% if resource %}, originally provided
 	{% if resource.storage_object.source %}
 	  by {{ resource.storage_object.source }},
 	{% else %}
 	  at {{ resource.storage_object.source_url }},
 	{% endif %} 
 {% endif %} 
- in the current META-SHARE node.<br/>
+ in the current META-SHARE node.</div>
+ <div class="redirect_msg">
 {% if resource %}You will now be redirected in the META-SHARE node where the resource metadata was originally created...
 {% else %}
 The metadata for this entity was originally created <a href={{url}}>here</a>.
 {% endif %} 
-</h3></div>
+</div>
 {% if resource %}
 <script>
 setTimeout( 'window.location.replace("{{redirection_url}}")', 5*1000 ); 
