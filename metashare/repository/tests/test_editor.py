@@ -18,6 +18,7 @@ ADMINROOT = '/{0}editor/'.format(DJANGO_BASE)
 TESTFIXTURE_XML = '{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
 TESTFIXTURE2_XML = '{}/repository/fixtures/ILSP10.xml'.format(ROOT_PATH)
 TESTFIXTURE3_XML = '{}/repository/test_fixtures/META-SHARE/DFKI2.xml'.format(ROOT_PATH)
+DELETED_TESTFIXTURE_XML = '{}/repository/test_fixtures/META-SHARE/FBK16.xml'.format(ROOT_PATH)
 BROKENFIXTURE_XML = '{}/repository/fixtures/broken.xml'.format(ROOT_PATH)
 TESTFIXTURES_ZIP = '{}/repository/fixtures/tworesources.zip'.format(ROOT_PATH)
 BROKENFIXTURES_ZIP = '{}/repository/fixtures/onegood_onebroken.zip'.format(ROOT_PATH)
@@ -57,6 +58,7 @@ class EditorTest(TestCase):
     testfixture = None
     testfixture2 = None
     testfixture3 = None
+    deleted_testfixture = None
     
     @classmethod
     def setUpClass(cls):
@@ -135,6 +137,11 @@ class EditorTest(TestCase):
         EditorTest.testfixture3 = _import_test_resource(None, TESTFIXTURE3_XML)
         EditorTest.testfixture3.owners.add(editoruser)
         EditorTest.testfixture3.save()
+        # delete resource
+        EditorTest.delete_testfixture = _import_test_resource(None, DELETED_TESTFIXTURE_XML)
+        EditorTest.delete_testfixture.storage_object.deleted = True
+        EditorTest.delete_testfixture.storage_object.save()
+        
 
 
     @classmethod
@@ -275,7 +282,7 @@ class EditorTest(TestCase):
             msg_prefix='a manager user should see the "publish" action')
         self.assertContains(response, 'Unpublish selected published resources',
             msg_prefix='a manager user should see the "unpublish" action')
-        self.assertContains(response, 'Delete selected Resources',
+        self.assertContains(response, 'Mark selected resources as deleted',
             msg_prefix='a manager user should see the "delete" action')
         self.assertNotContains(response, 'Add Editor Groups',
             msg_prefix='a manager user must not see the "add groups" action')
@@ -295,7 +302,7 @@ class EditorTest(TestCase):
             msg_prefix='a superuser should see the "publish" action')
         self.assertContains(response, 'Unpublish selected published resources',
             msg_prefix='a superuser should see the "unpublish" action')
-        self.assertContains(response, 'Delete selected Resources',
+        self.assertContains(response, 'Mark selected resources as deleted',
             msg_prefix='a superuser should see the "delete" action')
         self.assertContains(response, 'Add Editor Groups',
             msg_prefix='a superuser should see the "add groups" action')
