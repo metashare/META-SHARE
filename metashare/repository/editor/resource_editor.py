@@ -294,8 +294,38 @@ class ResourceModelAdmin(SchemaModelAdmin):
     content_fields = ('resourceComponentType',)
     list_display = ('__unicode__', 'resource_type', 'publication_status', 'resource_Owners', 'editor_Groups',)
     list_filter = ('storage_object__publication_status',)
-    actions = (publish_resources, unpublish_resources, ingest_resources, export_xml_resources, 'add_group', 'remove_group', 'add_owner', 'remove_owner')
+    actions = (publish_resources, unpublish_resources, ingest_resources, export_xml_resources,'delete', 'add_group', 'remove_group', 'add_owner', 'remove_owner')
     hidden_fields = ('storage_object', 'owners', 'editor_groups',)
+    
+    @csrf_protect_m    
+    def delete(self, request, queryset):
+        form = None
+        can_be_deleted = []
+        cannot_be_deleted = []
+        for resource in queryset:
+            for group in resource.editor_groups.all():
+                if request.user in group.get_managers():
+                    can_be_deleted.append(resource)
+                else:
+                    cannot_be_deleted.append(resource)
+        if 'cancel' in request.POST:
+            self.message_user(request, 'Cancelled deleting selected resources.')
+            return
+        elif 'delete' in request.POST:
+            #perform the delete action
+            form = self.ConfirmDeleteForm(request.POST)
+            if form.is_valid():
+                for resource in can_be_deleted:
+                    resource.delete_deep()
+                self.message_user(request, 'Successfully deleted selected resources.')
+                return HttpResponseRedirect(request.get_full_path())
+        if not form:      
+            form = self.ConfirmDeleteForm(initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
+        return render_to_response('admin/repository/resourceinfotype_model/confirm_delete.html', \
+                                      {'can_be_deleted': can_be_deleted, 'cannot_be_deleted': cannot_be_deleted, \
+                                       'form': form, 'path':request.get_full_path()}, \
+                                      context_instance=RequestContext(request)) 
+    delete.short_description = "Delete selected resources"
 
 
     def resource_Owners(self, obj):
@@ -324,11 +354,13 @@ class ResourceModelAdmin(SchemaModelAdmin):
         for group in editor_groups.all():            
             groups_list += group.name + ', '
         groups_list = groups_list.rstrip(', ')
-        return groups_list       
-    
+        return groups_list
+
+    class ConfirmDeleteForm(forms.Form):
+            _selected_action = forms.CharField(widget=forms.MultipleHiddenInput)
     
     class IntermediateMultiSelectForm(forms.Form):
-        _selected_action = forms.CharField(widget=forms.MultipleHiddenInput)         
+        _selected_action = forms.CharField(widget=forms.MultipleHiddenInput)
         
         def __init__(self, choices = None, *args, **kwargs):
             super(ResourceModelAdmin.IntermediateMultiSelectForm, self).__init__(*args, **kwargs)  
@@ -785,6 +817,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         action.
         """
         result = super(ResourceModelAdmin, self).get_actions(request)
+        del result['delete_selected']
         if not request.user.is_superuser:
             del result['remove_group']
             del result['remove_owner']
@@ -793,7 +826,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 del result['add_owner']
             # only users with delete permissions can see the delete action:
             if not self.has_delete_permission(request):
-                del result['delete_selected']
+                del result['delete']
             # only users who are the manager of some group can see the
             # ingest/publish/unpublish actions:
             if ManagerGroup.objects.filter(name__in=
