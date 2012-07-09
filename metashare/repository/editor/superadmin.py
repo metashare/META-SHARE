@@ -470,19 +470,18 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         #### end modification ####
 
         #### begin modification ####
-        url = ''
         #for reusable entities
         if(hasattr(obj, 'copy_status') and obj.copy_status != MASTER):
-            return render_to_response('admin/repository/redirect.html',
-                   { 'object': obj, 'redirection_url': None },
+            return render_to_response('admin/repository/cannot_edit.html',
+                   { 'object': obj, 'url': obj.source_url },
                    )
         #for resources and resources' parts
         else:
             root_resources = get_root_resources(obj)
             for res in root_resources:
-                if  not res.storage_object.master_copy:
+                if not res.storage_object.master_copy:
                     url = "{0}/editor/repository/{1}/{2}".format(res.storage_object.source_url.rstrip('/'), (obj.__class__.__name__).lower(), object_id)
-                    return render_to_response('admin/repository/redirect.html',
+                    return render_to_response('admin/repository/cannot_edit.html',
                            { 'resource': res, 'redirection_url': url },
                            )
         #### end modification ####
