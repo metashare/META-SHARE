@@ -179,8 +179,9 @@ INSTALLED_APPS = (
 if os.name != 'nt':
     INSTALLED_APPS += ('kronos',)
 
-if GOOGLE_ANALYTICS_ENABLED:
-    INSTALLED_APPS += ('analytical',)
+if 'GOOGLE_ANALYTICS_PROPERTY_ID' in globals():
+    if GOOGLE_ANALYTICS_ENABLED:
+        INSTALLED_APPS += ('analytical',)
 
 
 # Continuous Integration support using django_jenkins: only add application
