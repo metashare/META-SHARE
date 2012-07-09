@@ -522,7 +522,7 @@ class EditorTest(TestCase):
     def test_editor_can_delete_annotationInfo(self):
         editoruser = User.objects.get(username='editoruser')
         self.assertTrue(editoruser.has_perm('repository.delete_annotationinfotype_model'))
-
+    
     def test_editor_cannot_delete_actorInfo(self):
         editoruser = User.objects.get(username='editoruser')
         self.assertFalse(editoruser.has_perm('repository.delete_actorinfotype_model'))
@@ -535,35 +535,14 @@ class EditorTest(TestCase):
         response = client.get('{}repository/resourceinfotype_model/{}/'
                               .format(ADMINROOT, resource.id))
         self.assertContains(response, "Change Resource")        
-        self.assertContains(response, "Italian TTS Speech Corpus")        
-        
-    def test_cannot_edit_resource_non_master_copy(self):
-        client = _client_with_user_logged_in(EditorTest.editor_login)
-        resource = _import_test_resource(EditorTest.test_editor_group)
-        resource.storage_object.master_copy = False
-        resource.storage_object.save()
-        response = client.get('{}repository/resourceinfotype_model/{}/'
-                              .format(ADMINROOT, resource.id))
-        self.assertContains(response, "You cannot edit the metadata for the resource")
-        self.assertContains(response, "You will now be redirected")
+        self.assertContains(response, "Italian TTS Speech Corpus")
         
     def test_can_edit_reusable_entity_master_copy(self):        
         client = _client_with_user_logged_in(EditorTest.editor_login)
-        resource = _import_test_resource(EditorTest.test_editor_group)
-        resource.storage_object.master_copy = True
-        resource.storage_object.save()
-        response = client.get('{}repository/personinfotype_model/1/'
-                              .format(ADMINROOT))
-        self.assertContains(response, "Change Person")      
-
-    def test_cannot_edit_reusable_entity_non_master_copy(self):
-        client = _client_with_user_logged_in(EditorTest.editor_login)
         _import_test_resource(EditorTest.test_editor_group)
-        personInfoType_model.objects.all().update(copy_status=REMOTE)           
         response = client.get('{}repository/personinfotype_model/1/'
                               .format(ADMINROOT))
-        self.assertContains(response, "You cannot edit the metadata for the entity")
-        self.assertNotContains(response, "You will now be redirected")
+        self.assertContains(response, "Change Person")    
     
     def test_editor_can_change_own_resource_and_parts(self):
         """
@@ -691,7 +670,7 @@ class EditorTest(TestCase):
                               .format(ADMINROOT, EditorTest.test_manager_group.id))
         self.assertContains(response, 'Are you sure?', msg_prefix=
             'expected the superuser to be allowed to delete manager')
-
+        
 
 class DeletionTests(TestCase):
     """
@@ -728,6 +707,12 @@ class DeletionTests(TestCase):
             'username': 'superuser',
             'password': 'secret',
         }
+        self.editor_login = {
+            REDIRECT_FIELD_NAME: ADMINROOT,
+            LOGIN_FORM_KEY: 1,
+            'username': 'editoruser',
+            'password': 'secret',
+        }
 
         self.testfixture = _import_test_resource(self.test_editor_group)
 
@@ -738,7 +723,7 @@ class DeletionTests(TestCase):
         EditorGroup.objects.all().delete()
         ManagerGroup.objects.all().delete()
         test_utils.set_index_active(True)
-
+    
     def test_deleted_editor_group_is_removed_from_all_relevant_resources(self):
         """
         Verifies that an editor group is removed from all relevant resources
@@ -784,6 +769,26 @@ class DeletionTests(TestCase):
         response = client.get('{}accounts/managergroup/'.format(ADMINROOT))
         self.assertNotContains(response, 'editoruser', msg_prefix=
             'expected the manager group to be removed when its editor group is removed')
+    
+    def test_cannot_edit_resource_non_master_copy(self):
+        client = _client_with_user_logged_in(self.editor_login)
+        resource = _import_test_resource(self.test_editor_group)
+        resource.storage_object.master_copy = False
+        resource.storage_object.save()
+        response = client.get('{}repository/resourceinfotype_model/{}/'
+                              .format(ADMINROOT, resource.id))
+        self.assertContains(response, "You cannot edit the metadata for the resource")
+        self.assertContains(response, "You will now be redirected")
+        
+    def test_cannot_edit_reusable_entity_non_master_copy(self):
+        client = _client_with_user_logged_in(self.editor_login)
+        _import_test_resource(self.test_editor_group)
+        personInfoType_model.objects.all().update(copy_status=REMOTE)           
+        response = client.get('{}repository/personinfotype_model/1/'
+                              .format(ADMINROOT))
+        self.assertContains(response, "You cannot edit the metadata for the entity")
+        self.assertNotContains(response, "You will now be redirected")
+    
 
 class EditorGroupRegistrationRequestTests(TestCase):
     """
