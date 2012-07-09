@@ -235,6 +235,15 @@ def ingest_resources(modeladmin, request, queryset):
     for obj in queryset:
         change_resource_status(obj, status=INGESTED, precondition_status=INTERNAL)
 ingest_resources.short_description = "Ingest selected internal resources"
+    
+# TODO this has to be merged with Ioanna's work about bulk delete for group managers!!     
+def mark_resources_as_deleted(modeladmin, request, queryset):
+    for res in queryset:
+        res.storage_object.deleted = True
+        res.storage_object.save()
+        # explicitly write metadata XML and storage object to the storage folder
+        res.storage_object.update_storage()
+mark_resources_as_deleted.short_description = "Mark selected resources as deleted"
 
 def export_xml_resources(modeladmin, request, queryset):
     from StringIO import StringIO
@@ -294,7 +303,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
     content_fields = ('resourceComponentType',)
     list_display = ('__unicode__', 'resource_type', 'publication_status', 'resource_Owners', 'editor_Groups',)
     list_filter = ('storage_object__publication_status',)
-    actions = (publish_resources, unpublish_resources, ingest_resources, export_xml_resources, 'add_group', 'remove_group', 'add_owner', 'remove_owner')
+    actions = (publish_resources, unpublish_resources, ingest_resources, \
+      export_xml_resources, mark_resources_as_deleted, \
+      'add_group', 'remove_group', 'add_owner', 'remove_owner')
     hidden_fields = ('storage_object', 'owners', 'editor_groups',)
 
 
@@ -787,6 +798,10 @@ class ResourceModelAdmin(SchemaModelAdmin):
         action.
         """
         result = super(ResourceModelAdmin, self).get_actions(request)
+        # remove the Django delete action; we use our own that only marks resources
+        # as deleted, but does not really delete them
+        del result['delete_selected']
+        
         if not request.user.is_superuser:
             del result['remove_group']
             del result['remove_owner']
@@ -795,7 +810,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 del result['add_owner']
             # only users with delete permissions can see the delete action:
             if not self.has_delete_permission(request):
-                del result['delete_selected']
+                del result['mark_resources_as_deleted']
             # only users who are the manager of some group can see the
             # ingest/publish/unpublish actions:
             if ManagerGroup.objects.filter(name__in=
