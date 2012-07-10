@@ -13,12 +13,12 @@ from metashare.repository import models
 from metashare.repository.models import languageDescriptionInfoType_model, \
     lexicalConceptualResourceInfoType_model
 from metashare.settings import DJANGO_BASE, ROOT_PATH
+from metashare.storage.models import PUBLISHED
 
 ADMINROOT = '/{0}editor/'.format(DJANGO_BASE)
 TESTFIXTURE_XML = '{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
 TESTFIXTURE2_XML = '{}/repository/fixtures/ILSP10.xml'.format(ROOT_PATH)
 TESTFIXTURE3_XML = '{}/repository/test_fixtures/META-SHARE/DFKI2.xml'.format(ROOT_PATH)
-DELETED_TESTFIXTURE_XML = '{}/repository/test_fixtures/META-SHARE/FBK16.xml'.format(ROOT_PATH)
 BROKENFIXTURE_XML = '{}/repository/fixtures/broken.xml'.format(ROOT_PATH)
 TESTFIXTURES_ZIP = '{}/repository/fixtures/tworesources.zip'.format(ROOT_PATH)
 BROKENFIXTURES_ZIP = '{}/repository/fixtures/onegood_onebroken.zip'.format(ROOT_PATH)
@@ -58,7 +58,6 @@ class EditorTest(TestCase):
     testfixture = None
     testfixture2 = None
     testfixture3 = None
-    deleted_testfixture = None
     
     @classmethod
     def setUpClass(cls):
@@ -137,11 +136,6 @@ class EditorTest(TestCase):
         EditorTest.testfixture3 = _import_test_resource(None, TESTFIXTURE3_XML)
         EditorTest.testfixture3.owners.add(editoruser)
         EditorTest.testfixture3.save()
-        # delete resource
-        EditorTest.delete_testfixture = _import_test_resource(None, DELETED_TESTFIXTURE_XML)
-        EditorTest.delete_testfixture.storage_object.deleted = True
-        EditorTest.delete_testfixture.storage_object.save()
-        
 
 
     @classmethod
@@ -692,7 +686,6 @@ class DeletionTests(TestCase):
         """
         Sets up test users with and without staff permissions.
         """
-        test_utils.set_index_active(False)
         test_utils.setup_test_storage()
 
         self.test_editor_group = EditorGroup.objects.create(
@@ -715,8 +708,16 @@ class DeletionTests(TestCase):
             'username': 'superuser',
             'password': 'secret',
         }
-
+        self.editoruser_login = {
+            REDIRECT_FIELD_NAME: ADMINROOT,
+            LOGIN_FORM_KEY: 1,
+            'username': 'editoruser',
+            'password': 'secret',
+        }
+        
         self.testfixture = _import_test_resource(self.test_editor_group)
+        self.testfixture.storage_object.publication_status = PUBLISHED
+        self.testfixture.storage_object.save()
 
     def tearDown(self):
         test_utils.clean_db()
@@ -724,7 +725,6 @@ class DeletionTests(TestCase):
         User.objects.all().delete()
         EditorGroup.objects.all().delete()
         ManagerGroup.objects.all().delete()
-        test_utils.set_index_active(True)
 
     def test_deleted_editor_group_is_removed_from_all_relevant_resources(self):
         """
@@ -771,6 +771,96 @@ class DeletionTests(TestCase):
         response = client.get('{}accounts/managergroup/'.format(ADMINROOT))
         self.assertNotContains(response, 'editoruser', msg_prefix=
             'expected the manager group to be removed when its editor group is removed')
+
+    def test_editor_user_cannot_see_deleted_resource(self):
+        client = _client_with_user_logged_in(self.editoruser_login)
+        self._test_user_cannot_see_deleted_resource(client)
+        
+    def test_super_user_cannot_see_deleted_resource(self):
+        client = _client_with_user_logged_in(self.superuser_login)
+        self._test_user_cannot_see_deleted_resource(client)
+        
+    def _test_user_cannot_see_deleted_resource(self, client):
+        response = client.get(ADMINROOT+'repository/resourceinfotype_model/')
+        self.assertContains(response, '1 Resource')
+        self.testfixture.storage_object.deleted = True
+        self.testfixture.storage_object.save()
+        response = client.get(ADMINROOT+'repository/resourceinfotype_model/')
+        self.assertContains(response, '0 Resources')
+        
+    def test_editor_user_cannot_edit_deleted_resource(self):
+        client = _client_with_user_logged_in(self.editoruser_login)
+        self._test_user_cannot_edit_deleted_resource(client)
+        
+    def test_super_user_cannot_edit_deleted_resource(self):
+        client = _client_with_user_logged_in(self.superuser_login)
+        self._test_user_cannot_edit_deleted_resource(client)
+
+    def _test_user_cannot_edit_deleted_resource(self, client):
+        response = client.get(
+          ADMINROOT+'repository/resourceinfotype_model/{}/'.format(self.testfixture.id))
+        self.assertContains(response, 'Change Resource')
+        self.testfixture.storage_object.deleted = True
+        self.testfixture.storage_object.save()
+        response = client.get(
+          ADMINROOT+'repository/resourceinfotype_model/{}/'.format(self.testfixture.id))
+        self.assertContains(response, 'Page not found', status_code=404)
+        
+    def test_editor_user_cannot_export_deleted_resource(self):
+        client = _client_with_user_logged_in(self.editoruser_login)
+        self._test_user_cannot_export_deleted_resource(client)
+        
+    def test_super_user_cannot_export_deleted_resource(self):
+        client = _client_with_user_logged_in(self.superuser_login)
+        self._test_user_cannot_export_deleted_resource(client)
+    
+    def _test_user_cannot_export_deleted_resource(self, client):
+        response = client.get(
+          ADMINROOT+'repository/resourceinfotype_model/{}/export-xml/'.format(self.testfixture.id))
+        self.assertEquals(200, response.status_code)
+        self.assertEquals('text/xml', response.__getitem__('Content-Type'))
+        self.assertEquals('attachment; filename=resource-{}.xml'.format(self.testfixture.id), 
+          response.__getitem__('Content-Disposition'))
+        self.testfixture.storage_object.deleted = True
+        self.testfixture.storage_object.save()
+        response = client.get(
+          ADMINROOT+'repository/resourceinfotype_model/{}/export-xml/'.format(self.testfixture.id))
+        self.assertContains(response, 'Page not found', status_code=404)
+
+    def test_editor_user_cannot_browse_deleted_resource(self):
+        client = _client_with_user_logged_in(self.editoruser_login)
+        self._test_user_cannot_browse_deleted_resource(client)
+        
+    def test_super_user_cannot_browse_deleted_resource(self):
+        client = _client_with_user_logged_in(self.superuser_login)
+        self._test_user_cannot_browse_deleted_resource(client)
+    
+    def _test_user_cannot_browse_deleted_resource(self, client):
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE))
+        self.assertContains(response, '1 Language Resource')
+        self.testfixture.storage_object.deleted = True
+        self.testfixture.storage_object.save()
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE))
+        self.assertContains(response, '0 Language Resources')
+        
+    def test_editor_user_cannot_search_deleted_resource(self):
+        client = _client_with_user_logged_in(self.editoruser_login)
+        self._test_user_cannot_search_deleted_resource(client)
+        
+    def test_super_user_cannot_search_deleted_resource(self):
+        client = _client_with_user_logged_in(self.superuser_login)
+        self._test_user_cannot_search_deleted_resource(client)
+    
+    def _test_user_cannot_search_deleted_resource(self, client):
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE),
+          follow=True, data={'q': 'italian'})
+        self.assertContains(response, '1 Language Resource')
+        self.testfixture.storage_object.deleted = True
+        self.testfixture.storage_object.save()
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE),
+          follow=True, data={'q': 'reveal'})
+        self.assertContains(response, 'No results were found')
+        
 
 class EditorGroupRegistrationRequestTests(TestCase):
     """
