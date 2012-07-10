@@ -298,42 +298,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
                'add_group', 'remove_group', 'add_owner', 'remove_owner')
     hidden_fields = ('storage_object', 'owners', 'editor_groups',)
     
-    @csrf_protect_m    
-    def delete(self, request, queryset):
-        form = None
-        if request.user.is_superuser or self.has_delete_permission(request):
-            can_be_deleted = []
-            cannot_be_deleted = []
-            for resource in queryset:
-                if self.has_delete_permission(request, resource):
-                    can_be_deleted.append(resource)
-                else:
-                    cannot_be_deleted.append(resource)                        
-            if 'cancel' in request.POST:
-                self.message_user(request, 'Cancelled deleting selected resources.')
-                return
-            elif 'delete' in request.POST:
-                form = self.ConfirmDeleteForm(request.POST)
-                if form.is_valid():
-                    for resource in can_be_deleted:
-                        resource.delete_deep()
-                    count= len(can_be_deleted)
-                        
-                    msg = ungettext('Successfully deleted %(count)d resource.', 'Successfully deleted %(count)d resources.', count) % {
-                        'count': len(can_be_deleted),
-                    }                    
-                    self.message_user(request, msg)
-                    return HttpResponseRedirect(request.get_full_path())
-            if not form:      
-                form = self.ConfirmDeleteForm(initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
-            return render_to_response('admin/repository/resourceinfotype_model/confirm_delete.html', \
-                                          {'can_be_deleted': can_be_deleted, 'cannot_be_deleted': cannot_be_deleted, \
-                                           'form': form, 'path':request.get_full_path()}, \
-                                          context_instance=RequestContext(request)) 
-        messages.error(request, 'You do not have the rights to perform this action.')
-        
-    delete.short_description = "Delete selected resources"
-
 
     def resource_Owners(self, obj):
         """
@@ -373,7 +337,44 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 self.choices = choices
                 self.fields['multifield'] = forms.ModelMultipleChoiceField(self.choices)        
                     
-     
+    
+    @csrf_protect_m    
+    def delete(self, request, queryset):
+        form = None
+        if not request.user.is_superuser or self.has_delete_permission(request):
+            can_be_deleted = []
+            cannot_be_deleted = []
+            for resource in queryset:
+                if self.has_delete_permission(request, resource):
+                    can_be_deleted.append(resource)
+                else:
+                    cannot_be_deleted.append(resource)                        
+            if 'cancel' in request.POST:
+                self.message_user(request, 'Cancelled deleting selected resources.')
+                return
+            elif 'delete' in request.POST:
+                form = self.ConfirmDeleteForm(request.POST)
+                if form.is_valid():
+                    for resource in can_be_deleted:
+                        resource.delete_deep()
+                    count = len(can_be_deleted)                        
+                    msg = ungettext('Successfully deleted %(count)d resource.', 'Successfully deleted %(count)d resources.', count) % {
+                        'count': len(can_be_deleted),
+                    }                    
+                    self.message_user(request, msg)
+                    return HttpResponseRedirect(request.get_full_path())
+            if not form:      
+                form = self.ConfirmDeleteForm(initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
+            return render_to_response('admin/repository/resourceinfotype_model/confirm_delete.html', \
+                                          {'can_be_deleted': can_be_deleted, 'cannot_be_deleted': cannot_be_deleted, \
+                                           'form': form, 'path':request.get_full_path()}, \
+                                          context_instance=RequestContext(request)) 
+        messages.error(request, 'You do not have the rights to perform this action.')
+        
+    delete.short_description = "Delete selected resources"
+    
+    
+    
     @csrf_protect_m    
     def add_group(self, request, queryset):            
         form = None
