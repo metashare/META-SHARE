@@ -759,7 +759,7 @@ class EditorTest(SeleniumTestCase):
         selects all resources and deletes them
         """
         driver.find_element_by_id("action-toggle").click()
-        Select(driver.find_element_by_name("action")).select_by_visible_text("Delete selected Resources")
+        Select(driver.find_element_by_name("action")).select_by_visible_text("Delete selected resources")
         driver.find_element_by_name("index").click()
         driver.find_element_by_css_selector("input[type=\"submit\"]").click()
         # TODO remove this workaround when Selenium starts working again as intended
