@@ -1,6 +1,4 @@
-{% if GOOGLE_ANALYTICS_ENABLED %}
-  {% load google_analytics %}
-{% endif %}
+{% load analytical %}
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
    "http://www.w3.org/TR/html4/strict.dtd">
@@ -8,7 +6,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>MetaShare</title>
+    
     <link rel="shortcut icon" href="{{ MEDIA_URL }}images/favicon.ico" />
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/blueprint/screen.css" type="text/css" media="screen, projection">
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/blueprint/print.css" type="text/css" media="print">
@@ -24,10 +22,6 @@
     <link href='http://fonts.googleapis.com/css?family=Rokkitt' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Cantarell:regular,italic,bold,bolditalic&v1' rel='stylesheet' type='text/css'>
     {% block links %}{% endblock %}
-    {% if GOOGLE_ANALYTICS_ENABLED %}
-      {% google_analytics %}
-    {% endif %}
-    
   </head>
     
   <body>

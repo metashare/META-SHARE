@@ -166,6 +166,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
 
     'haystack',
+    'analytical',
 
     'metashare.accounts',
     'metashare.storage',
@@ -178,11 +179,6 @@ INSTALLED_APPS = (
 # add Kronos to installed apps if not running on Windows
 if os.name != 'nt':
     INSTALLED_APPS += ('kronos',)
-
-if 'GOOGLE_ANALYTICS_PROPERTY_ID' in globals():
-    if GOOGLE_ANALYTICS_ENABLED:
-        INSTALLED_APPS += ('analytical',)
-
 
 # Continuous Integration support using django_jenkins: only add application
 # if django_jenkins module can be imported properly.
