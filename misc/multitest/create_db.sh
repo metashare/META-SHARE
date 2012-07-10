@@ -20,7 +20,7 @@ export DATABASE_FILE=$CURRENT_DIR/init_data/metashare_test.db
 if [[ "$1" == "-r" ]] ; then
 	if [[ -f $DATABASE_FILE ]] ; then
 		echo "Deleting current database ..."
-		rm $DATABASE_FILE
+		rm -f $DATABASE_FILE
 	fi
 fi
 
@@ -36,6 +36,8 @@ cd $METASHARE_DIR
 "$PYTHON"  manage.py syncdb --noinput
 "$PYTHON"  manage.py createsuperuserwithpassword --username=admin --password=secret
 cd $CURRENT_DIR
+
+rmdir "$STORAGE_PATH"
 
 echo "Database file " $DATABASE_FILE " has been created/updated."
 

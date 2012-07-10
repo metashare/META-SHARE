@@ -60,18 +60,34 @@ FSET_NAME=fileset1
 
 if [[ $DO_IMPORT_FILES -eq 1 ]] ; then
   import_files $FSET_NAME inner
+  ret_val=$?
+  if [[ $ret_val -ne 0 ]] ; then
+    exit $ret_val
+  fi
 fi
 
 if [[ $DO_SYNCHRONIZE -eq 1 ]] ; then
   synchronize_nodes
+  ret_val=$?
+  if [[ $ret_val -ne 0 ]] ; then
+    exit $ret_val
+  fi
 fi
 
 
 if [[ $DO_DIGEST_UPDATE -eq 1 ]] ; then
   update_digests
+  ret_val=$?
+  if [[ $ret_val -ne 0 ]] ; then
+    exit $ret_val
+  fi
 fi
 
 if [[ $DO_CHECK_RESOURCES -eq 1 ]] ; then
   check_resources_on_inner_nodes
+  ret_val=$?
+  if [[ $ret_val -ne 0 ]] ; then
+    exit $ret_val
+  fi
 fi
 

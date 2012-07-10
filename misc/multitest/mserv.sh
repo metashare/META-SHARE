@@ -54,6 +54,7 @@ if [[ "$OP" == "start" ]] ; then
 	# Replace the original settings.py with one that imports 
 	# local_settings for each specific node
 	cp $MSERV_DIR/init_data/settings_test.py $METASHARE_DIR/settings.py
+	sync
 fi
 
 # Loop until get_node_cfg returns an error
@@ -120,3 +121,4 @@ while get_node_info $counter NODE_NAME &> /dev/null ; do
 	let counter=counter+1
 done
 
+exit 0
