@@ -616,7 +616,6 @@ class RemovedObject(models.Model):
     """
     Models a language resource that was completely removed from the storage layer.
     """
-    __schema_name__ = "REMOVEDOJBECT"
     
     identifier = models.CharField(max_length=64, blank=False,
       editable=False, unique=True, help_text="(Read-only) unique " \
