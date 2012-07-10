@@ -183,3 +183,7 @@ PROXIED_NODES = {
 #    },
 }
 
+# Analytics application sample settings. More analytics services are available. 
+# For more options, check http://packages.python.org/django-analytical/
+#GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-XXXXXXXX-X'
+#GOOGLE_ANALYTICS_SITE_SPEED = True
