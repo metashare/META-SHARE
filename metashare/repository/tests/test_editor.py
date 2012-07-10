@@ -276,7 +276,7 @@ class EditorTest(TestCase):
             msg_prefix='a manager user should see the "publish" action')
         self.assertContains(response, 'Unpublish selected published resources',
             msg_prefix='a manager user should see the "unpublish" action')
-        self.assertContains(response, 'Delete selected Resources',
+        self.assertContains(response, 'Delete selected resources',
             msg_prefix='a manager user should see the "delete" action')
         self.assertNotContains(response, 'Add Editor Groups',
             msg_prefix='a manager user must not see the "add groups" action')
@@ -296,7 +296,7 @@ class EditorTest(TestCase):
             msg_prefix='a superuser should see the "publish" action')
         self.assertContains(response, 'Unpublish selected published resources',
             msg_prefix='a superuser should see the "unpublish" action')
-        self.assertContains(response, 'Delete selected Resources',
+        self.assertContains(response, 'Delete selected resources',
             msg_prefix='a superuser should see the "delete" action')
         self.assertContains(response, 'Add Editor Groups',
             msg_prefix='a superuser should see the "add groups" action')
