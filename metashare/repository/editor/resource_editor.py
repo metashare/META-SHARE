@@ -342,8 +342,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
         owners_list = owners_list.rstrip(', ')
         return owners_list    
     
-    
-    #to change name, and to call it through the template
     def editor_Groups(self, obj):
         """
         Method used for changelist view for resources.
