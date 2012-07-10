@@ -294,7 +294,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
     content_fields = ('resourceComponentType',)
     list_display = ('__unicode__', 'resource_type', 'publication_status', 'resource_Owners', 'editor_Groups',)
     list_filter = ('storage_object__publication_status',)
-    actions = (publish_resources, unpublish_resources, ingest_resources, export_xml_resources,'delete', 'add_group', 'remove_group', 'add_owner', 'remove_owner')
+    actions = (publish_resources, unpublish_resources, ingest_resources, export_xml_resources, 'delete', \
+               'add_group', 'remove_group', 'add_owner', 'remove_owner')
     hidden_fields = ('storage_object', 'owners', 'editor_groups',)
     
     @csrf_protect_m    
@@ -357,7 +358,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         return groups_list
 
     class ConfirmDeleteForm(forms.Form):
-            _selected_action = forms.CharField(widget=forms.MultipleHiddenInput)
+        _selected_action = forms.CharField(widget=forms.MultipleHiddenInput)
     
     class IntermediateMultiSelectForm(forms.Form):
         _selected_action = forms.CharField(widget=forms.MultipleHiddenInput)
