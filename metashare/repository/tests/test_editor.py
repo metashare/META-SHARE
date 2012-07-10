@@ -251,7 +251,7 @@ class EditorTest(TestCase):
             msg_prefix='an editor user must not see the "publish" action')
         self.assertNotContains(response, 'Unpublish selected published',
             msg_prefix='an editor user must not see the "unpublish" action')
-        self.assertNotContains(response, 'Delete selected Resources',
+        self.assertNotContains(response, 'Delete selected resources',
             msg_prefix='an editor user must not see the "delete" action')
         self.assertNotContains(response, 'Add Editor Groups',
             msg_prefix='an editor user must not see the "add groups" action')
