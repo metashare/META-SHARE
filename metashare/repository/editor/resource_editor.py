@@ -216,24 +216,59 @@ def change_resource_status(resource, status, precondition_status=None):
         resource.storage_object.save()
         # explicitly write metadata XML and storage object to the storage folder
         resource.storage_object.update_storage()
+        return True
+    return False
     
 def publish_resources(modeladmin, request, queryset):
+    successful = 0
     for obj in queryset:
-        change_resource_status(obj, status=PUBLISHED, precondition_status=INGESTED)
+        success = change_resource_status(obj, status=PUBLISHED, precondition_status=INGESTED)
+        if success:
+            successful += 1
         if hasattr(obj, 'storage_object') and obj.storage_object is not None:
             saveLRStats(obj, PUBLISH_STAT, request)
+    if successful > 0:
+        ingested = successful
+        messages.info(request, (ungettext('Successfully published %(ingested)s ingested resource.', \
+                                             'Successfully published %(ingested)s ingested resources.', successful) % \
+                                   {'ingested': successful}))
+    else:
+        messages.error(request, 'Only ingested resources can be published.')
+        
 publish_resources.short_description = "Publish selected ingested resources"
 
 def unpublish_resources(modeladmin, request, queryset):
+    successful = 0
     for obj in queryset:
-        change_resource_status(obj, status=INGESTED, precondition_status=PUBLISHED)
+        success = change_resource_status(obj, status=INGESTED, precondition_status=PUBLISHED)
+        if success:
+            successful += 1
         if hasattr(obj, 'storage_object') and obj.storage_object is not None:
             saveLRStats(obj, INGEST_STAT, request)
+    if successful > 0:
+        published = successful
+        messages.info(request, (ungettext('Successfully unpublished %(published)s published resource.', \
+                                     'Successfully unpublished %(published)s published resources.', successful) % \
+                           {'published': successful}))    
+    else:
+        messages.error(request, 'Only published resources can be unpublished.')
+        
 unpublish_resources.short_description = "Unpublish selected published resources"
 
 def ingest_resources(modeladmin, request, queryset):
+    successful = 0
     for obj in queryset:
-        change_resource_status(obj, status=INGESTED, precondition_status=INTERNAL)
+        success = change_resource_status(obj, status=INGESTED, precondition_status=INTERNAL)
+        if success:
+            successful += 1
+    if successful > 0:
+        published = successful
+        messages.info(request, (ungettext('Successfully ingested %(internal)s internal resource.', \
+                                     'Successfully ingested %(internal)s internal resources.', successful) % \
+                           {'internal': successful}))    
+    else:
+        messages.error(request, 'Only internal resources can be ingested.')
+        
 ingest_resources.short_description = "Ingest selected internal resources"
 
 def export_xml_resources(modeladmin, request, queryset):
@@ -341,7 +376,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
     @csrf_protect_m    
     def delete(self, request, queryset):
         form = None
-        if not request.user.is_superuser or self.has_delete_permission(request):
+        if self.has_delete_permission(request):
             can_be_deleted = []
             cannot_be_deleted = []
             for resource in queryset:
