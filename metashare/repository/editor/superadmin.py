@@ -29,6 +29,9 @@ from metashare.storage.models import MASTER
 from metashare.repository.model_utils import get_root_resources
 from metashare.repository.supermodel import REQUIRED, RECOMMENDED, OPTIONAL
 
+from metashare.repository.models import resourceInfoType_model
+
+
 # Setup logging support.
 logging.basicConfig(level=settings.LOG_LEVEL)
 LOGGER = logging.getLogger('metashare.repository.superadmin')
@@ -131,6 +134,8 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
     def has_change_permission(self, request, obj=None):
         result = super(SchemaModelAdmin, self) \
             .has_change_permission(request, obj)
+        print result
+        print obj
         if result and obj:
             if request.user.is_superuser:
                 return True
@@ -152,6 +157,16 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                                for res_group in res.editor_groups.all()):
                     return True
             return False
+        # authorize an owner to edit specific resources
+        if obj:
+            if obj in resourceInfoType_model.objects.filter(owners__username=request.user.username):
+                return True
+            
+        # authorize an owner to access his/her my "resources page"
+        if 'myresources' in request.POST:
+            # Check if the use is owner of resources
+            if resourceInfoType_model.objects.filter(owners__username=request.user.username):
+                return True
         return result
 
 
