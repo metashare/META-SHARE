@@ -345,7 +345,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 self.message_user(request, _('Cancelled adding editor groups.'))
                 return
             elif 'add_editor_group' in request.POST:      
-                query = EditorGroup.objects.all() 
+                query = EditorGroup.objects.all()
                 form = self.IntermediateMultiSelectForm(query, request.POST)
                 if form.is_valid():
                     groups = form.cleaned_data['multifield']   
@@ -356,18 +356,18 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                         'groups to the selected resources.'))
                     return HttpResponseRedirect(request.get_full_path())
     
-            if not form:      
-                manager_groups = ManagerGroup.objects.filter(name__in=
-                            request.user.groups.values_list('name', flat=True))
-                editor_groups = EditorGroup.objects
-                for manager_group in manager_groups:
-                    editor_groups = EditorGroup.objects.filter('name', manager_group.managed_group.name)
+            if not form:
                 if request.user.is_superuser:
-                    group = EditorGroup.objects.all()
+                    groups = EditorGroup.objects.all()
                 else:
-                    group = editor_groups.all().values_list('name', flat=True)
-                form = self.IntermediateMultiSelectForm(choices=group, initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
-    
+                    groups = EditorGroup.objects.filter(name__in=
+                        ManagerGroup.objects.filter(name__in=
+                            request.user.groups.values_list('name', flat=True)) \
+                                .values_list('managed_group__name', flat=True))
+                form = self.IntermediateMultiSelectForm(choices=groups,
+                    initial={'_selected_action':
+                             request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
+
             return render_to_response('admin/repository/resourceinfotype_model/add_editor_group.html', \
                                       {'selected_resources': queryset, 'form': form, 'path':request.get_full_path()}, \
                                       context_instance=RequestContext(request)) 
