@@ -1,7 +1,7 @@
 import datetime
 
 from django import forms
-from django.contrib import admin
+from django.contrib import admin, messages
 from django.contrib.admin.util import unquote
 from django.contrib.admin.views.main import ChangeList
 from django.contrib.auth.decorators import permission_required
@@ -15,7 +15,7 @@ from django.utils.encoding import force_unicode
 from django.utils.functional import update_wrapper
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext as _, ungettext
 from django.views.decorators.csrf import csrf_protect
 
 from metashare import settings
@@ -301,31 +301,37 @@ class ResourceModelAdmin(SchemaModelAdmin):
     @csrf_protect_m    
     def delete(self, request, queryset):
         form = None
-        can_be_deleted = []
-        cannot_be_deleted = []
-        for resource in queryset:
-            for group in resource.editor_groups.all():
-                if request.user in group.get_managers():
+        if request.user.is_superuser or self.has_delete_permission(request):
+            can_be_deleted = []
+            cannot_be_deleted = []
+            for resource in queryset:
+                if self.has_delete_permission(request, resource):
                     can_be_deleted.append(resource)
                 else:
-                    cannot_be_deleted.append(resource)
-        if 'cancel' in request.POST:
-            self.message_user(request, 'Cancelled deleting selected resources.')
-            return
-        elif 'delete' in request.POST:
-            #perform the delete action
-            form = self.ConfirmDeleteForm(request.POST)
-            if form.is_valid():
-                for resource in can_be_deleted:
-                    resource.delete_deep()
-                self.message_user(request, 'Successfully deleted selected resources.')
-                return HttpResponseRedirect(request.get_full_path())
-        if not form:      
-            form = self.ConfirmDeleteForm(initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
-        return render_to_response('admin/repository/resourceinfotype_model/confirm_delete.html', \
-                                      {'can_be_deleted': can_be_deleted, 'cannot_be_deleted': cannot_be_deleted, \
-                                       'form': form, 'path':request.get_full_path()}, \
-                                      context_instance=RequestContext(request)) 
+                    cannot_be_deleted.append(resource)                        
+            if 'cancel' in request.POST:
+                self.message_user(request, 'Cancelled deleting selected resources.')
+                return
+            elif 'delete' in request.POST:
+                form = self.ConfirmDeleteForm(request.POST)
+                if form.is_valid():
+                    for resource in can_be_deleted:
+                        resource.delete_deep()
+                    count= len(can_be_deleted)
+                        
+                    msg = ungettext('Successfully deleted %(count)d resource.', 'Successfully deleted %(count)d resources.', count) % {
+                        'count': len(can_be_deleted),
+                    }                    
+                    self.message_user(request, msg)
+                    return HttpResponseRedirect(request.get_full_path())
+            if not form:      
+                form = self.ConfirmDeleteForm(initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
+            return render_to_response('admin/repository/resourceinfotype_model/confirm_delete.html', \
+                                          {'can_be_deleted': can_be_deleted, 'cannot_be_deleted': cannot_be_deleted, \
+                                           'form': form, 'path':request.get_full_path()}, \
+                                          context_instance=RequestContext(request)) 
+        messages.error(request, 'You do not have the rights to perform this action.')
+        
     delete.short_description = "Delete selected resources"
 
 
@@ -401,6 +407,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
             return render_to_response('admin/repository/resourceinfotype_model/add_editor_group.html', \
                                       {'selected_resources': queryset, 'form': form, 'path':request.get_full_path()}, \
                                       context_instance=RequestContext(request)) 
+        messages.error(request, 'You do not have the rights to perform this action.')
 
     add_group.short_description = "Add Editor Groups to selected resources"
     
@@ -428,6 +435,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
             return render_to_response('admin/repository/resourceinfotype_model/remove_editor_group.html', \
                                       {'selected_resources': queryset, 'form': form, 'path':request.get_full_path()}, \
                                       context_instance=RequestContext(request)) 
+        messages.error(request, 'You do not have the rights to perform this action.')
 
     remove_group.short_description = "Remove Editor Groups from selected resources"
     
@@ -455,7 +463,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
             return render_to_response('admin/repository/resourceinfotype_model/add_owner.html', \
                                       {'selected_resources': queryset, 'form': form, 'path':request.get_full_path()}, \
                                       context_instance=RequestContext(request)) 
-
+        messages.error(request, 'You do not have the rights to perform this action.')
+        
     add_owner.short_description = "Add Owners to selected resources"
     
     @csrf_protect_m    
@@ -482,6 +491,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
             return render_to_response('admin/repository/resourceinfotype_model/remove_owner.html', \
                                       {'selected_resources': queryset, 'form': form, 'path':request.get_full_path()}, \
                                       context_instance=RequestContext(request)) 
+        messages.error(request, 'You do not have the rights to perform this action.')
 
     remove_owner.short_description = "Remove Owners from selected resources"
         
