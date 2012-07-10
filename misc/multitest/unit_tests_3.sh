@@ -1,7 +1,7 @@
 #!/bin/bash
 
-export METASHARE_SW_DIR=/home/metashare/current/META-SHARE
-export TEST_DIR=/tmp
+THIS_DIR=$(dirname "$0")
+. "${THIS_DIR}/setvars.sh"
 
 cd "$METASHARE_SW_DIR/misc/multitest"
 
@@ -59,11 +59,10 @@ TEST_LIST="test_sync_inner test_sync_outer"
 
 run_tests()
 {
-	REPORT="$WORKSPACE/${TESTSUITE_NAME}_report.xml"
-	STDOUT="$WORKSPACE/${TESTSUITE_NAME}_stdout.log"
-	STDERR="$WORKSPACE/${TESTSUITE_NAME}_stderr.log"
-	DETAILS="$WORKSPACE/${TESTSUITE_NAME}_details.log"
-	TESTSUITE_NAME="MultiNodeTest"
+	REPORT="$REPORT_DIR/${TESTSUITE_NAME}_report.xml"
+	STDOUT="$REPORT_DIR/${TESTSUITE_NAME}_stdout.log"
+	STDERR="$REPORT_DIR/${TESTSUITE_NAME}_stderr.log"
+	DETAILS="$REPORT_DIR/${TESTSUITE_NAME}_details.log"
 	CLASSNAME="Sync"
 
 	echo -n > "$STDOUT"

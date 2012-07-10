@@ -20,14 +20,18 @@ import_file_on_node()
 	local NODE_NAME=`get_node_info $NODE_NUM NODE_NAME`
 	local IMPORTS_LOG=$TEST_DIR/imp.log
 	export NODE_DIR=$TEST_DIR/$NODE_NAME
+	local ret_val
 	echo "Import file $IMP_FILE on node $NODE_NAME"
 	cd "$METASHARE_DIR"
 	if [[ "$ID_FILE" == "" ]] ; then
 		"$PYTHON" import_xml.py "$IMP_FILE" > "$IMPORTS_LOG"
+		ret_val=$?
 	else
 		"$PYTHON" import_xml.py --id-file="$ID_FILE" "$IMP_FILE" > "$IMPORTS_LOG"
+		ret_val=$?
 	fi
 	cd "$CURRENT_DIR"
+	return $ret_val
 }
 
 import_fileset_on_node()
@@ -79,7 +83,9 @@ synchronize_node()
 	echo "Synchronizing $NODE_NAME"
 	cd "$METASHARE_DIR"
 	"$PYTHON" manage.py synchronize > $REMOTE_DATA_FILE
+	local ret_val=$?
 	cd "$CURRENT_DIR"
+	return $ret_val
 }
 
 synchronize_node_idf()
@@ -93,16 +99,25 @@ synchronize_node_idf()
 	echo "Synchronizing $NODE_NAME"
 	cd "$METASHARE_DIR"
 	"$PYTHON" manage.py synchronize --id-file=$ID_FILE > $REMOTE_DATA_FILE
+	local ret_val=$?
 	cd "$CURRENT_DIR"
+	return $ret_val
 }
 
 synchronize_nodes()
 {
 	local NODE_COUNT=`get_node_count`
+	local ret_val=0
+	local last_ret_val
 	for (( j=0; j<$NODE_COUNT; j++ ))
 	do
 		synchronize_node $j
+		last_ret_val=$?
+		if [[ $ret_val -eq 0 ]] ; then
+			ret_val=$last_ret_val
+		fi
 	done
+	return $ret_val
 }
 
 get_node_resource_list()
@@ -151,8 +166,10 @@ update_digests_on_node()
 	export NODE_DIR=$TEST_DIR/$NODE_NAME
 	echo "Updating digests on node $NODE_NAME"
 	cd "$METASHARE_DIR"
-	"$PYTHON" update_digests.py
+	"$PYTHON" manage.py update_digests
+	local ret_val=$?
 	cd "$CURRENT_DIR"
+	return $ret_val
 }
 
 update_digests()

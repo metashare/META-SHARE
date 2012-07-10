@@ -8,27 +8,42 @@ cd "$METASHARE_SW_DIR/misc/multitest"
 . _meta_dir.sh
 . _python.sh
 
-
-TESTSUITE_NAME="ConfigData"
+TESTSUITE_NAME="AllNodesSync"
 
 setUp()
 {
-	return 0
-}
-
-tearDown()
-{
-	return 0
-}
-
-test_filesets()
-{
-	"$PYTHON" check_fset.py
+	cd "$MSERV_DIR"
+	"$MSERV_DIR"/mserv.sh start
 	local ret_val=$?
 	return $ret_val
 }
 
-TEST_LIST="test_filesets"
+tearDown()
+{
+	cd "$MSERV_DIR"
+	"$MSERV_DIR"/mserv.sh stop
+	local ret_val=$?
+
+	if [[ $ret_val -ne 0 ]] ; then
+		return $ret_val
+	fi
+
+	cd "$MSERV_DIR"
+	"$MSERV_DIR"/mserv.sh clean
+	local ret_val=$?
+
+	return $ret_val
+}
+
+test_sync_all_nodes()
+{
+	cd "$MSERV_DIR"
+	"$MSERV_DIR/test_sync_all.sh"
+	local ret_val=$?
+	return $ret_val
+}
+
+TEST_LIST="test_sync_all_nodes"
 
 run_tests()
 {
@@ -45,7 +60,7 @@ run_tests()
 	SUCCESS=0
 	echo "Running tests."
 
-	setUp
+	setUp 1>>"$STDOUT" 2>>"$STDERR"
 
 	for F in $TEST_LIST ; do
 		echo "Running " $F
@@ -76,7 +91,7 @@ run_tests()
 	echo "]]></system-err>" >> "$REPORT"
 	echo "</testsuite>" >> "$REPORT"
 
-	tearDown
+	tearDown 1>>"$STDOUT" 2>>"$STDERR"
 }
 
 METASHARE_DIR="$METASHARE_SW_DIR/metashare"

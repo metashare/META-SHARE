@@ -55,8 +55,11 @@ do
 	fi
 done
 
+if [[ $DO_IMPORT_FILES -eq 1 ]] ; then
+  import_files fileset1 inner
+fi
 
-# Synchronize and check before importing into the outer node
+
 if [[ $DO_SYNCHRONIZE -eq 1 ]] ; then
   synchronize_nodes
 fi
@@ -64,8 +67,6 @@ fi
 if [[ $DO_CHECK_RESOURCES -eq 1 ]] ; then
   check_resources_on_inner_nodes
 fi
-
-
 
 
 if [[ $DO_IMPORT_FILES -eq 1 ]] ; then
@@ -76,16 +77,9 @@ if [[ $DO_SYNCHRONIZE -eq 1 ]] ; then
   synchronize_nodes
 fi
 
-# Check resources after importing files on outer nodes.
-# At this time a failure is acceptable since involving
-# outer nodes can require two steps:
-# 1) resources sent from outer nodes to proxy nodes
-# 2) resources sent from proxy nodes to other inner nodes
 if [[ $DO_CHECK_RESOURCES -eq 1 ]] ; then
   check_resources_on_inner_nodes
 fi
-
-
 
 if [[ $DO_DIGEST_UPDATE -eq 1 ]] ; then
   update_digests
@@ -95,8 +89,6 @@ if [[ $DO_SYNCHRONIZE -eq 1 ]] ; then
   synchronize_nodes
 fi
 
-# Check resources again.
-# This time the check should alwayd be successful.
 if [[ $DO_CHECK_RESOURCES -eq 1 ]] ; then
   check_resources_on_inner_nodes
 fi
