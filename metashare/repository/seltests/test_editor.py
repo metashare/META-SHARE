@@ -182,7 +182,7 @@ class EditorTest(SeleniumTestCase):
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         # delete resource
         self.delete(driver)
-        self.assertEqual("Successfully deleted 1 Resource.", 
+        self.assertEqual("Successfully deleted 1 resource.", 
          driver.find_element_by_css_selector("li.info").text)
         
         
@@ -267,7 +267,7 @@ class EditorTest(SeleniumTestCase):
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         # delete resource
         self.delete(driver)
-        self.assertEqual("Successfully deleted 1 Resource.", 
+        self.assertEqual("Successfully deleted 1 resource.", 
          driver.find_element_by_css_selector("li.info").text)
 
         
@@ -358,7 +358,7 @@ class EditorTest(SeleniumTestCase):
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         # delete resource
         self.delete(driver)
-        self.assertEqual("Successfully deleted 1 Resource.", 
+        self.assertEqual("Successfully deleted 1 resource.", 
          driver.find_element_by_css_selector("li.info").text)
         
 
@@ -450,7 +450,7 @@ class EditorTest(SeleniumTestCase):
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         # delete resource
         self.delete(driver)
-        self.assertEqual("Successfully deleted 1 Resource.", 
+        self.assertEqual("Successfully deleted 1 resource.", 
          driver.find_element_by_css_selector("li.info").text)
         
         
@@ -530,7 +530,7 @@ class EditorTest(SeleniumTestCase):
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         # delete resource
         self.delete(driver)
-        self.assertEqual("Successfully deleted 1 Resource.", 
+        self.assertEqual("Successfully deleted 1 resource.", 
          driver.find_element_by_css_selector("li.info").text)
 
 
