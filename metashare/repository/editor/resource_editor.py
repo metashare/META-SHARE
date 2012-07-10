@@ -342,7 +342,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         form = None
         if 'myresources' in request.POST or request.user.is_superuser:
             if 'cancel' in request.POST:
-                self.message_user(request, 'Cancelled adding Editor Groups.')
+                self.message_user(request, _('Cancelled adding editor groups.'))
                 return
             elif 'add_editor_group' in request.POST:      
                 query = EditorGroup.objects.all() 
@@ -352,7 +352,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     for obj in queryset:  
                         obj.editor_groups.add(*groups)
                         obj.save()
-                    self.message_user(request, 'Successfully added Editor Groups to selected resources.')
+                    self.message_user(request, _('Successfully added editor '
+                                        'groups to the selected resources.'))
                     return HttpResponseRedirect(request.get_full_path())
     
             if not form:      
@@ -371,14 +372,15 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                       {'selected_resources': queryset, 'form': form, 'path':request.get_full_path()}, \
                                       context_instance=RequestContext(request)) 
 
-    add_group.short_description = "Add Editor Groups to selected resources"
+    add_group.short_description = _("Add editor groups to selected resources")
     
     @csrf_protect_m    
     def remove_group(self, request, queryset):           
         form = None
         if request.user.is_superuser:
             if 'cancel' in request.POST:
-                self.message_user(request, 'Cancelled removing Editor Groups.')
+                self.message_user(request,
+                                  _('Cancelled removing editor groups.'))
                 return
             elif 'remove_editor_group' in request.POST:  
                 query = EditorGroup.objects.all()           
@@ -388,7 +390,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     for obj in queryset:  
                         obj.editor_groups.remove(*groups)
                         obj.save()
-                    self.message_user(request, 'Successfully removed Editor Groups from selected resources.')               
+                    self.message_user(request, _('Successfully removed ' \
+                                'editor groups from the selected resources.'))
                     return HttpResponseRedirect(request.get_full_path())
             if not form:
                 groups = EditorGroup.objects.all()
@@ -398,14 +401,15 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                       {'selected_resources': queryset, 'form': form, 'path':request.get_full_path()}, \
                                       context_instance=RequestContext(request)) 
 
-    remove_group.short_description = "Remove Editor Groups from selected resources"
+    remove_group.short_description = _("Remove editor groups from selected " \
+                                       "resources")
     
     @csrf_protect_m    
     def add_owner(self, request, queryset):           
         form = None
         if request.user.is_superuser:
             if 'cancel' in request.POST:
-                self.message_user(request, 'Cancelled adding Owners.')
+                self.message_user(request, _('Cancelled adding owners.'))
                 return
             elif 'add_owner' in request.POST:  
                 query = User.objects.all()
@@ -415,7 +419,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     for obj in queryset:  
                         obj.owners.add(*owners)
                         obj.save()
-                    self.message_user(request, 'Successfully added Owners to selected resources.')               
+                    self.message_user(request, _('Successfully added owners ' \
+                                                 'to the selected resources.'))               
                     return HttpResponseRedirect(request.get_full_path())
             if not form:
                 owners = User.objects.all()
@@ -425,14 +430,14 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                       {'selected_resources': queryset, 'form': form, 'path':request.get_full_path()}, \
                                       context_instance=RequestContext(request)) 
 
-    add_owner.short_description = "Add Owners to selected resources"
+    add_owner.short_description = _("Add owners to selected resources")
     
     @csrf_protect_m    
     def remove_owner(self, request, queryset):           
         form = None
         if request.user.is_superuser:
             if 'cancel' in request.POST:
-                self.message_user(request, 'Cancelled removing Owners.')
+                self.message_user(request, _('Cancelled removing owners.'))
                 return
             elif 'remove_owner' in request.POST:  
                 query = User.objects.all()
@@ -442,7 +447,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     for obj in queryset:  
                         obj.owners.remove(*owners)
                         obj.save()
-                    self.message_user(request, 'Successfully removed Owners from selected resources.')               
+                    self.message_user(request, _('Successfully removed ' \
+                                        'owners from the selected resources.'))               
                     return HttpResponseRedirect(request.get_full_path())
             if not form:
                 owners = User.objects.all()
@@ -452,7 +458,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                       {'selected_resources': queryset, 'form': form, 'path':request.get_full_path()}, \
                                       context_instance=RequestContext(request)) 
 
-    remove_owner.short_description = "Remove Owners from selected resources"
+    remove_owner.short_description = _("Remove owners from selected resources")
         
     
     def get_urls(self):
