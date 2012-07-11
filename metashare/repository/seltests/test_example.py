@@ -34,7 +34,7 @@ class ExampleSeleniumTest(SeleniumTestCase):
         driver = self.driver
         # check start site
         driver.get(self.base_url)
-        self.assertEqual("MetaShare", driver.title)
+        self.assertEqual("META-SHARE", driver.title)
         self.assertEqual("1 language resources at your disposal...", 
           driver.find_element_by_xpath(
             "//div[@id='content']/div[3]/div/p[2]").text)
