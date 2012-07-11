@@ -172,6 +172,12 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("The Resource \"Test Text Corpus\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
 
+        #make sure an internal resource cannot be published
+        self.publish(driver)
+        self.assertEqual("published",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Only ingested resources can be published.", 
+         driver.find_element_by_css_selector("li.error").text)
         # ingest resource
         self.ingest(driver)
         self.assertEqual("ingested",
@@ -261,6 +267,12 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("The Resource \"Test Audio Corpus\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
 
+        #make sure an internal resource cannot be published
+        self.publish(driver)
+        self.assertEqual("published",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Only ingested resources can be published.", 
+         driver.find_element_by_css_selector("li.error").text)
         # ingest resource
         self.ingest(driver)
         self.assertEqual("ingested",
@@ -356,6 +368,12 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("The Resource \"Test Text Language Description\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
         
+        #make sure an internal resource cannot be published
+        self.publish(driver)
+        self.assertEqual("published",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Only ingested resources can be published.", 
+         driver.find_element_by_css_selector("li.error").text)
         # ingest resource
         self.ingest(driver)
         self.assertEqual("ingested",
@@ -452,6 +470,12 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("The Resource \"Test Lexical Resource Text\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
         
+        #make sure an internal resource cannot be published
+        self.publish(driver)
+        self.assertEqual("published",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Only ingested resources can be published.", 
+         driver.find_element_by_css_selector("li.error").text)
         # ingest resource
         self.ingest(driver)
         self.assertEqual("ingested",
@@ -536,6 +560,12 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("The Resource \"Test Tool\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
         
+        #make sure an internal resource cannot be published
+        self.publish(driver)
+        self.assertEqual("published",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Only ingested resources can be published.", 
+         driver.find_element_by_css_selector("li.error").text)
         # ingest resource
         self.ingest(driver)
         self.assertEqual("ingested",
