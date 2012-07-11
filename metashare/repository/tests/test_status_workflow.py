@@ -19,7 +19,7 @@ class StatusWorkflowTest(TestCase):
     factory = RequestFactory()
     
     @classmethod
-    def setUp(cls):
+    def setUpClass(cls):
         """
         Import a resource to test the workflow changes for
         """
@@ -29,8 +29,7 @@ class StatusWorkflowTest(TestCase):
                                                     name='test_editor_group')
         StatusWorkflowTest.test_manager_group = \
             ManagerGroup.objects.create(name='test_manager_group',
-                                    managed_group=StatusWorkflowTest.test_editor_group)
-            
+                                    managed_group=StatusWorkflowTest.test_editor_group)            
         test_utils.create_manager_user(
             'manageruser', 'manager@example.com', 'secret',
             (StatusWorkflowTest.test_editor_group, StatusWorkflowTest.test_manager_group))
@@ -40,7 +39,7 @@ class StatusWorkflowTest(TestCase):
         StatusWorkflowTest.resource_id = _result[0].id
     
     @classmethod
-    def tearDown(cls):
+    def tearDownClass(cls):
         """
         Clean up the test
         """
