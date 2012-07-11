@@ -55,7 +55,23 @@ test_sync_outer()
 	return $ret_val
 }
 
-TEST_LIST="test_sync_inner test_sync_outer"
+test_del_inner()
+{
+	cd "$MSERV_DIR"
+	"$MSERV_DIR/test_del_s.sh" 1 0
+	local ret_val=$?
+	return $ret_val
+}
+
+test_del_outer()
+{
+	cd "$MSERV_DIR"
+	"$MSERV_DIR/test_del_s.sh" 2 1
+	local ret_val=$?
+	return $ret_val
+}
+
+TEST_LIST="test_sync_inner test_sync_outer test_del_inner test_del_outer"
 
 run_tests()
 {
