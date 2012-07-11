@@ -8,6 +8,9 @@ server.tag = "lighttpd"
 server.pid-file = "/PATH/TO/METANODE/metashare/lighttpd.pid"
 
 # The following will enable SSL with the use of a server certificate
+# The script misc/tools/ssl-config/gen_cert.sh can be used to create a
+# self-signed certificate, if needed. Look at the README
+# in misc/tools/ssl-config for some hints on how to use it.
 ssl.engine = "enable"
 ssl.pemfile = "/PATH/TO/CERTIFICATE/metashare.pem"
 ssl.ca-file = "/PATH/TO/CERTIFICATE/metashare.crt"
