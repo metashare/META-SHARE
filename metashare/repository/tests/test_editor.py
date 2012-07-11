@@ -4,7 +4,6 @@ from django.contrib import admin
 from django.contrib.admin.sites import LOGIN_FORM_KEY
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth.models import User
-from django.template.context import RequestContext
 from django.test import TestCase
 from django.test.client import Client
 
@@ -788,20 +787,7 @@ class DeletionTests(TestCase):
         response = client.get('{}repository/personinfotype_model/1/'
                               .format(ADMINROOT))
         self.assertContains(response, "You cannot edit the metadata for the entity")
-        self.assertNotContains(response, "You will now be redirected")
-        
-    def test_cannot_access_delete_page(self):
-        
-        client = _client_with_user_logged_in(self.editor_login)
-        request = client.get(ADMINROOT)
-        resource = _import_test_resource()
-        
-        response = client.post('/{0}accounts/editor_registration_request/'.format(DJANGO_BASE), \
-          {'editor_group': self.test_editor_group.pk}, follow=True)
-        
-        
-        
-        
+        self.assertNotContains(response, "You will now be redirected")        
     
 
 class EditorGroupRegistrationRequestTests(TestCase):
