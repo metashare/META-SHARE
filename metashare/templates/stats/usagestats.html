@@ -104,7 +104,7 @@ function getvalues(classname, fieldname) {
                  
             {% for field in result %}
                 <tr>
-                <td><a href="{% url metashare.views.frontpage %}repository/search/?q={{ field.0 }}"><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/zoom.png"></a> {{ field.0 }}</td>
+                <td>{{ field.0 }}</td>
                 <td style="align: right">{{ field.2 }}</td>
                 <td style="align: right">{{ field.1 }}</td>
                 </tr>
