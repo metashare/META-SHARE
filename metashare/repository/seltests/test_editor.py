@@ -176,10 +176,14 @@ class EditorTest(SeleniumTestCase):
         self.ingest(driver)
         self.assertEqual("ingested",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully ingested 1 internal resource.", 
+         driver.find_element_by_css_selector("li.info").text)
         # publish resource
         self.publish(driver)
         self.assertEqual("published",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully published 1 ingested resource.", 
+         driver.find_element_by_css_selector("li.info").text)
         # delete resource
         self.delete(driver)
         self.assertEqual("Successfully deleted 1 resource.", 
@@ -261,10 +265,14 @@ class EditorTest(SeleniumTestCase):
         self.ingest(driver)
         self.assertEqual("ingested",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully ingested 1 internal resource.", 
+         driver.find_element_by_css_selector("li.info").text)
         # publish resource
         self.publish(driver)
         self.assertEqual("published",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully published 1 ingested resource.", 
+         driver.find_element_by_css_selector("li.info").text)
         # delete resource
         self.delete(driver)
         self.assertEqual("Successfully deleted 1 resource.", 
@@ -352,10 +360,14 @@ class EditorTest(SeleniumTestCase):
         self.ingest(driver)
         self.assertEqual("ingested",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully ingested 1 internal resource.", 
+         driver.find_element_by_css_selector("li.info").text)
         # publish resource
         self.publish(driver)
         self.assertEqual("published",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully published 1 ingested resource.", 
+         driver.find_element_by_css_selector("li.info").text)
         # delete resource
         self.delete(driver)
         self.assertEqual("Successfully deleted 1 resource.", 
@@ -444,10 +456,14 @@ class EditorTest(SeleniumTestCase):
         self.ingest(driver)
         self.assertEqual("ingested",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully ingested 1 internal resource.", 
+         driver.find_element_by_css_selector("li.info").text)
         # publish resource
         self.publish(driver)
         self.assertEqual("published",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully published 1 ingested resource.", 
+         driver.find_element_by_css_selector("li.info").text)
         # delete resource
         self.delete(driver)
         self.assertEqual("Successfully deleted 1 resource.", 
@@ -524,10 +540,14 @@ class EditorTest(SeleniumTestCase):
         self.ingest(driver)
         self.assertEqual("ingested",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully ingested 1 internal resource.", 
+         driver.find_element_by_css_selector("li.info").text)
         # publish resource
         self.publish(driver)
         self.assertEqual("published",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully published 1 ingested resource.", 
+         driver.find_element_by_css_selector("li.info").text)
         # delete resource
         self.delete(driver)
         self.assertEqual("Successfully deleted 1 resource.", 
