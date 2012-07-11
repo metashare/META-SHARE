@@ -4,17 +4,19 @@ Utility functions for unit tests useful across apps.
 """
 import os
 
-from django.contrib.auth.models import Group, User, Permission
+from django.contrib.auth.models import Group, User
 from django.core.management import call_command
 from django.test.testcases import TestCase
 
 from metashare import settings
+from metashare.accounts.admin import ManagerGroupAdmin
 from metashare.repository.management import GROUP_GLOBAL_EDITORS
 from metashare.repository.models import resourceInfoType_model, \
     personInfoType_model, actorInfoType_model, documentationInfoType_model, \
     documentInfoType_model, targetResourceInfoType_model, \
     organizationInfoType_model, projectInfoType_model
-from metashare.storage.models import PUBLISHED, MASTER, StorageObject
+from metashare.storage.models import PUBLISHED, MASTER, StorageObject,\
+    RemovedObject
 from metashare.xml_utils import import_from_file
 
 
@@ -33,8 +35,9 @@ def clean_db():
     """
     for res in resourceInfoType_model.objects.all():
         res.delete_deep()
-    # delete storage objects
+    # delete storage objects and removed objects
     StorageObject.objects.all().delete()
+    RemovedObject.objects.all().delete()
     # delete all reusable entities
     actorInfoType_model.objects.all().delete()
     documentationInfoType_model.objects.all().delete()
@@ -83,11 +86,8 @@ def create_manager_user(user_name, email, password, groups=None):
     group memberships.
     """
     result = create_editor_user(user_name, email, password, groups)
-    # add resource delete permission
-    opts = resourceInfoType_model._meta
-    result.user_permissions.add(Permission.objects.filter(
-        content_type__app_label=opts.app_label,
-        codename=opts.get_delete_permission())[0])
+    for _perm in ManagerGroupAdmin.get_suggested_manager_permissions():
+        result.user_permissions.add(_perm)
     return result
 
 

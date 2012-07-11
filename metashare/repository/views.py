@@ -443,18 +443,18 @@ class MetashareFacetedSearchView(FacetedSearchView):
                 name_exact = '{0}_exact'.format(name)
                 # only add selected facets in step (1)
                 if name_exact in sel_facets:
-                    subfacets = [f for f in filter_labels if f[3] == facet_id]
-                    subfacets_exactname_list = []
-                    subfacets_exactname_list.extend([u'{0}_exact'.format(subfacet[0]) for subfacet in subfacets])
-                    subresults = []
-                    for facet in subfacets:
-                        subresults = self.show_subfilter(facet, sel_facets, facet_fields, subresults)
                     items = facet_fields.get(name)
                     if items:
                         removable = []
                         addable = []
                         # only items with a count > 0 are shown
                         for item in [i for i in items if i[1] > 0]:
+                            subfacets = [f for f in filter_labels if (f[3] == facet_id and item[0] in f[0]) ]
+                            subfacets_exactname_list = []
+                            subfacets_exactname_list.extend([u'{0}_exact'.format(subfacet[0]) for subfacet in subfacets])
+                            subresults = []
+                            for facet in subfacets:
+                                subresults = self.show_subfilter(facet, sel_facets, facet_fields, subresults)
                             if item[0] in sel_facets[name_exact]:
                                 if item[0] != "":
                                     lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', item[0][0].capitalize()+item[0][1:]))[:-1]
@@ -464,7 +464,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
                                              for name, values in
                                              sel_facets.iteritems() for value in
                                              values if (name != name_exact
-                                             or value != item[0]) and name not in subfacets_exactname_list]})
+                                             or value != item[0]) and name not in subfacets_exactname_list], 'subresults': subresults})
                             else:
                                 targets = [u'{0}:{1}'.format(name, value)
                                            for name, values in
@@ -476,10 +476,10 @@ class MetashareFacetedSearchView(FacetedSearchView):
                                     lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', item[0][0].capitalize()+item[0][1:]))[:-1]
                                     addable.append({'label': lab_item,
                                                 'count': item[1],
-                                                'targets': targets})
+                                                'targets': targets, 'subresults': subresults})
 
                         result.append({'label': label, 'removable': removable,
-                                       'addable': addable, 'subresults': subresults})                    
+                                       'addable': addable})                    
 
         # Step (2): add all top level facets without selected facet items at the
         # end (sorted by their facet IDs):
@@ -516,6 +516,9 @@ class MetashareFacetedSearchView(FacetedSearchView):
         return extra
     
     def show_subfilter(self, facet, sel_facets, facet_fields, results):
+        """
+        Creates a second level for faceting. Sub filters are included after the parent filters.
+        """
         import re
 
         name = facet[0]

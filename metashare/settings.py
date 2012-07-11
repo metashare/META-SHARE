@@ -166,14 +166,14 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
 
     'haystack',
-        
+    'analytical',
+
     'metashare.accounts',
     'metashare.storage',
     'metashare.sync',
     'metashare.stats',
 
     'metashare.repository',
-    'metashare.AdminTest',
 )
 
 # add Kronos to installed apps if not running on Windows

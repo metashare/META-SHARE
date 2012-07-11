@@ -8,11 +8,12 @@ from django.test import TestCase
 from django.test.client import Client
 
 from metashare import test_utils
-from metashare.accounts.models import EditorGroup, ManagerGroup
+from metashare.accounts.models import EditorGroup, ManagerGroup, EditorRegistrationRequest
 from metashare.repository import models
 from metashare.repository.models import languageDescriptionInfoType_model, \
-    lexicalConceptualResourceInfoType_model
+    lexicalConceptualResourceInfoType_model, personInfoType_model
 from metashare.settings import DJANGO_BASE, ROOT_PATH
+from metashare.storage.models import REMOTE
 
 ADMINROOT = '/{0}editor/'.format(DJANGO_BASE)
 TESTFIXTURE_XML = '{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
@@ -146,7 +147,7 @@ class EditorTest(TestCase):
         ManagerGroup.objects.all().delete()
         test_utils.set_index_active(True)
 
-
+    
     def test_can_log_in_staff(self):
         client = Client()
         request = client.get(ADMINROOT)
@@ -157,7 +158,7 @@ class EditorTest(TestCase):
         self.assertRedirects(login, ADMINROOT)
         self.assertFalse(login.context)
         client.get(ADMINROOT+'logout/')
-
+    
     def test_cannot_log_in_normal(self):
         client = Client()
         request = client.get(ADMINROOT)
@@ -305,7 +306,54 @@ class EditorTest(TestCase):
             msg_prefix='a superuser should see the "add owners" action')
         self.assertContains(response, 'Remove Owners',
             msg_prefix='a superuser should see the "remove owners" action')
+
+    def test_enough_editing_time_before_session_expiry(self):
+        """
+        Verifies that a user always has enough time for editing a resource or
+        reusable entity before there is a session timeout.
+        """
+        client = _client_with_user_logged_in(EditorTest.editor_login)
+        # test that there is enough time when adding a shared object
+        self._test_enough_editing_time_before_session_expiry(client,
+            'organizationinfotype_model/add/',
+            'A user must have more than one day time for adding an entity.')
+        # test that there is enough time when editing a shared object
+        self._test_enough_editing_time_before_session_expiry(client,
+            'personinfotype_model/{}/'.format(
+                EditorTest.testfixture3.contactPerson.all()[0].id),
+            'A user must have more than one day time for editing an entity.')
+        # test that there is enough time when adding a (tool/service) resource
+        _session = client.session
+        _session.set_expiry(5)
+        _session.save()
+        # when accessing the (actual) resource editor, the expiration time for
+        # the session is expected to be a lot higher again than one day
+        client.post('{}repository/resourceinfotype_model/add/'
+                    .format(ADMINROOT), {'resourceType': 'toolservice'})
+        self.assertLess(86400, client.session.get_expiry_age(),
+            'A user must have more than one day time for adding a resource.')
+        # test that there is enough time when editing a resource
+        self._test_enough_editing_time_before_session_expiry(client,
+            'resourceinfotype_model/{}/'.format(EditorTest.testfixture3.id),
+            'A user must have more than one day time for editing a resource.')
+
+    def _test_enough_editing_time_before_session_expiry(self, client, url_tail,
+                                                        fail_msg):
+        """
+        Verifies that the user logged in with the given client always has more
+        than one day time for editing the model instance with the editor URL
+        ending in the given `url_tail`.
         
+        The given failure message is used if the test fails.
+        """
+        # set an expiration time for the session of just 5 seconds
+        _session = client.session
+        _session.set_expiry(5)
+        _session.save()
+        # when accessing the editor, the expiration time for the session is
+        # expected to be a lot higher again (i.e., more than one day)
+        client.get('{}repository/{}'.format(ADMINROOT, url_tail))
+        self.assertLess(86400, client.session.get_expiry_age(), fail_msg)
 
     def test_upload_single_xml(self):
         client = _client_with_user_logged_in(EditorTest.editor_login)
@@ -474,12 +522,12 @@ class EditorTest(TestCase):
     def test_editor_can_delete_annotationInfo(self):
         editoruser = User.objects.get(username='editoruser')
         self.assertTrue(editoruser.has_perm('repository.delete_annotationinfotype_model'))
-
+    
     def test_editor_cannot_delete_actorInfo(self):
         editoruser = User.objects.get(username='editoruser')
         self.assertFalse(editoruser.has_perm('repository.delete_actorinfotype_model'))
 
-    def test_can_edit_master_copy(self):        
+    def test_can_edit_resource_master_copy(self):        
         client = _client_with_user_logged_in(EditorTest.editor_login)
         resource = _import_test_resource(EditorTest.test_editor_group)
         resource.storage_object.master_copy = True
@@ -487,17 +535,15 @@ class EditorTest(TestCase):
         response = client.get('{}repository/resourceinfotype_model/{}/'
                               .format(ADMINROOT, resource.id))
         self.assertContains(response, "Change Resource")        
-        self.assertContains(response, "Italian TTS Speech Corpus")        
+        self.assertContains(response, "Italian TTS Speech Corpus")
         
-    def test_cannot_edit_not_master_copy(self):
+    def test_can_edit_reusable_entity_master_copy(self):        
         client = _client_with_user_logged_in(EditorTest.editor_login)
-        resource = _import_test_resource(EditorTest.test_editor_group)
-        resource.storage_object.master_copy = False
-        resource.storage_object.save()
-        response = client.get('{}repository/resourceinfotype_model/{}/'
-                              .format(ADMINROOT, resource.id))
-        self.assertContains(response, "You cannot edit the metadata")
-
+        _import_test_resource(EditorTest.test_editor_group)
+        response = client.get('{}repository/personinfotype_model/1/'
+                              .format(ADMINROOT))
+        self.assertContains(response, "Change Person")    
+    
     def test_editor_can_change_own_resource_and_parts(self):
         """
         Verifies that the editor user can change his own resources and parts
@@ -624,7 +670,7 @@ class EditorTest(TestCase):
                               .format(ADMINROOT, EditorTest.test_manager_group.id))
         self.assertContains(response, 'Are you sure?', msg_prefix=
             'expected the superuser to be allowed to delete manager')
-
+        
 
 class DeletionTests(TestCase):
     """
@@ -661,6 +707,12 @@ class DeletionTests(TestCase):
             'username': 'superuser',
             'password': 'secret',
         }
+        self.editor_login = {
+            REDIRECT_FIELD_NAME: ADMINROOT,
+            LOGIN_FORM_KEY: 1,
+            'username': 'editoruser',
+            'password': 'secret',
+        }
 
         self.testfixture = _import_test_resource(self.test_editor_group)
 
@@ -671,7 +723,7 @@ class DeletionTests(TestCase):
         EditorGroup.objects.all().delete()
         ManagerGroup.objects.all().delete()
         test_utils.set_index_active(True)
-
+    
     def test_deleted_editor_group_is_removed_from_all_relevant_resources(self):
         """
         Verifies that an editor group is removed from all relevant resources
@@ -717,3 +769,203 @@ class DeletionTests(TestCase):
         response = client.get('{}accounts/managergroup/'.format(ADMINROOT))
         self.assertNotContains(response, 'editoruser', msg_prefix=
             'expected the manager group to be removed when its editor group is removed')
+    
+    def test_cannot_edit_resource_non_master_copy(self):
+        client = _client_with_user_logged_in(self.editor_login)
+        resource = _import_test_resource(self.test_editor_group)
+        resource.storage_object.master_copy = False
+        resource.storage_object.save()
+        response = client.get('{}repository/resourceinfotype_model/{}/'
+                              .format(ADMINROOT, resource.id))
+        self.assertContains(response, "You cannot edit the metadata for the resource")
+        self.assertContains(response, "You will now be redirected")
+        
+    def test_cannot_edit_reusable_entity_non_master_copy(self):
+        client = _client_with_user_logged_in(self.editor_login)
+        _import_test_resource(self.test_editor_group)
+        personInfoType_model.objects.all().update(copy_status=REMOTE)           
+        response = client.get('{}repository/personinfotype_model/1/'
+                              .format(ADMINROOT))
+        self.assertContains(response, "You cannot edit the metadata for the entity")
+        self.assertNotContains(response, "You will now be redirected")
+    
+
+class EditorGroupRegistrationRequestTests(TestCase):
+    """
+    Test case for the user registration to one or several Editors of various model instances.
+    """
+
+    def setUp(self):
+        """
+        Sets up test users with and without staff permissions.
+        """
+        test_utils.set_index_active(False)
+        test_utils.setup_test_storage()
+
+        User.objects.create_user('normaluser', 'normal@example.com', 'secret')
+
+        self.test_editor_group = EditorGroup.objects.create(
+                                                    name='test_editor_group')
+        self.test_editor_group2 = EditorGroup.objects.create(
+                                                    name='test_editor_group2')
+        self.test_editor_group3 = EditorGroup.objects.create(
+                                                    name='test_editor_group3')
+
+        self.test_manager_group = \
+            ManagerGroup.objects.create(name='test_manager_group',
+                                        managed_group=self.test_editor_group)
+        self.test_manager_group2 = \
+            ManagerGroup.objects.create(name='test_manager_group2',
+                                        managed_group=self.test_editor_group2)
+
+        test_utils.create_editor_user('editoruser',
+            'editor@example.com', 'secret', (self.test_editor_group,))
+        test_utils.create_manager_user(
+            'manageruser', 'manager@example.com', 'secret',
+            (self.test_editor_group, self.test_manager_group, self.test_manager_group2))
+
+        User.objects.create_superuser('superuser', 'su@example.com', 'secret')
+
+    def tearDown(self):
+        test_utils.clean_db()
+        test_utils.clean_storage()
+        User.objects.all().delete()
+        EditorGroup.objects.all().delete()
+        ManagerGroup.objects.all().delete()
+        EditorRegistrationRequest.objects.all().delete()
+        test_utils.set_index_active(True)
+
+    def test_request_page_with_one_editor_group(self):
+        """
+        Verifies that a user can apply when there is at least one editor group.
+        """
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        response = client.get('/{0}accounts/editor_registration_request/'.format(DJANGO_BASE))
+        self.assertContains(response, 'Apply for editor group membership', msg_prefix=
+          'expected the system to allow the user to apply to an editor group')
+
+    def test_apply_when_not_member_of_any_group(self):
+        """
+        Verifies that a user can apply to a first group
+        """
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        current_requests = EditorRegistrationRequest.objects.count()
+        response = client.post('/{0}accounts/editor_registration_request/'.format(DJANGO_BASE), \
+          {'editor_group': self.test_editor_group.pk}, follow=True)
+        self.assertContains(response, 'You have successfully applied for editor group "{0}"'.format(
+          self.test_editor_group.name), msg_prefix='expected the system to accept a new request.')
+        self.assertEquals(EditorRegistrationRequest.objects.count(), current_requests + 1)
+
+    def test_apply_when_there_is_a_pending_application(self):
+        """
+        Verifies that a user can apply for new group when another application is
+        still pending.
+        """
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        current_requests = EditorRegistrationRequest.objects.count()
+        response = client.post('/{0}accounts/editor_registration_request/'.format(DJANGO_BASE), \
+          {'editor_group': self.test_editor_group.pk}, follow=True)
+        self.assertContains(response, 'You have successfully applied for editor group "{0}"'.format(
+          self.test_editor_group.name), msg_prefix='expected the system to accept a new request.')
+        response = client.post('/{0}accounts/editor_registration_request/'.format(DJANGO_BASE), \
+          {'editor_group': self.test_editor_group2.pk}, follow=True)
+        self.assertContains(response, 'You have successfully applied for editor group "{0}"'.format(
+          self.test_editor_group2.name), msg_prefix='expected the system to accept a new request.')
+        self.assertEquals(EditorRegistrationRequest.objects.count(), current_requests + 2)
+
+    def test_notification_email_when_apply(self):
+        """
+        Verifies that an email is sent when the user apply to a group
+        """
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        current_requests = EditorRegistrationRequest.objects.count()
+        response = client.post('/{0}accounts/editor_registration_request/'.format(DJANGO_BASE), \
+          {'editor_group': self.test_editor_group.pk}, follow=True)
+        self.assertNotContains(response, 'There was an error sending out the request email', msg_prefix=
+          'expected the system to be able to send an email.')
+        self.assertEquals(EditorRegistrationRequest.objects.count(), current_requests + 1)
+
+    def test_cannot_apply_a_group_of_which_the_user_is_member(self):
+        """
+        Verifies that a user cannot apply to a group he/she is already a member
+        """
+        client = Client()
+        client.login(username='editoruser', password='secret')
+        response = client.get('/{0}accounts/editor_registration_request/'.format(DJANGO_BASE), follow=True)
+        self.assertNotContains(response, '{}</option>'.format(self.test_editor_group),
+          msg_prefix='expected the system not to propose the registration to a group the user is already a member.')
+
+    def test_cannot_apply_a_group_already_applied(self):
+        """
+        Verifies that a user cannot apply to a group he/she already applied for
+        """
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        response = client.post('/{0}accounts/editor_registration_request/'.format(DJANGO_BASE), \
+          {'editor_group': self.test_editor_group.pk}, follow=True)
+        self.assertContains(response, 'You have successfully applied for editor group "{0}"'.format(
+          self.test_editor_group.name), msg_prefix='expected the system to accept a new request.')
+        response = client.get('/{0}accounts/editor_registration_request/'.format(DJANGO_BASE), follow=True)
+        self.assertNotContains(response, '{}</option>'.format(self.test_editor_group),
+          msg_prefix='expected the system not to propose the registration to a group \
+          the user already applied for.')
+        
+    def test_cannot_apply_a_group_without_manager(self):
+        """
+        Verifies that a user cannot apply to a group without a manager
+        """
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        response = client.get('/{0}accounts/editor_registration_request/'.format(DJANGO_BASE), follow=True)
+        self.assertNotContains(response, '{}</option>'.format(self.test_editor_group3),
+          msg_prefix='expected the system not to propose the registration to a group \
+          without a manager.')
+
+    def test_cannot_access_the_form_when_no_group_available(self):
+        """
+        Verifies that a user cannot apply when there is no editor group available
+        """
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        EditorGroup.objects.all().delete()
+        response = client.get('/{0}accounts/editor_registration_request/'.format(DJANGO_BASE), follow=True)
+        self.assertContains(response, 'There are no editor groups in the database, yet, for which you could apply.',
+          msg_prefix='expected the system to prevent access to the form when no editor group is available.')
+
+    def test_superuser_can_change_the_application(self):
+        """
+        Verifies that a superuser can change an editor group application request
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+        new_reg = EditorRegistrationRequest(user=User.objects.get(username='normaluser'),
+            editor_group=self.test_editor_group)
+        new_reg.save()
+        response = client.get('{}accounts/editorregistrationrequest/{}/'.format(ADMINROOT, new_reg.pk))
+        self.assertContains(response, 'normaluser</option>', msg_prefix=
+            'expected a superuser to be able to modify an application.')
+
+    def test_manager_cannot_change_the_application(self):
+        """
+        Verifies that a manager cannot change an editor group application
+        request.
+        
+        The manager can view the applicatino details anyway.
+        """
+        client = Client()
+        client.login(username='manageruser', password='secret')
+        new_reg = EditorRegistrationRequest(
+            user=User.objects.get(username='normaluser'),
+            editor_group=self.test_editor_group)
+        new_reg.save()
+        response = client.get('{}accounts/editorregistrationrequest/{}/'
+                              .format(ADMINROOT, new_reg.pk))
+        self.assertContains(response, 'normaluser', msg_prefix='expected a '
+                'manager to be able to see the details of an application.')
+        self.assertNotContains(response, '<option value="1" '
+                'selected="selected">normaluser</option>', msg_prefix=
+            'expected a manager not to be able to modify an application.')
