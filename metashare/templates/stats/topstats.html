@@ -49,6 +49,10 @@
 {% endifequal %}
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Latest Queries
 </select>
+
+{% if countrycode != None and countrycode|length > 0 %}
+    from <img height=20 src="{{ MEDIA_URL }}css/international_flags/iso/32x32/flag-{{ countrycode }}.png">
+{% endif %} 
 </td></tr></table>
 </form>
 
@@ -81,13 +85,13 @@
 {% for stat in topdata %}
     <tr class="{% cycle odd,even %} content">
     {% if "quer" in view %}  
-       <td nowrap><a href="{% url metashare.views.frontpage %}repository/search/?{{ stat.4 }}"><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/zoom.png"> {{ stat.0 }}</a>
-       {% ifnotequal stat.1 "" %}  
-       {{ stat.1 }}
-       {% endifnotequal %}
-       </td>
-       <td width=100%>{{ stat.3 }}</td>
-       <td nowrap>{{ stat.2 }}</td>
+        <td nowrap><a href="{% url metashare.views.frontpage %}repository/search/?{{ stat.4 }}"><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/zoom.png"> {{ stat.0 }}</a>
+        {% ifnotequal stat.1 "" %}  
+            {{ stat.1 }}
+        {% endifnotequal %}
+        </td>
+        <td width=100%>{{ stat.3 }}</td>
+        <td nowrap>{{ stat.2 }}</td>
     {% else %} 
        <th style="text-align:right;" nowrap>{{ stat.0 }}</th>
        <td width=100%><a href="{{ stat.1 }}">{{ stat.3 }}</a></td>
@@ -127,20 +131,30 @@
 
 {% if geovisits|length > 0 %}
     <div id="visits">   
-     <table width=50%><td width=40%><table>
-        <tr class="result_table_head">{{ visitstitle }}</td><tr>
-     
-     {% for geoinfo in geovisits %}
-        <tr class=content>
-            <td nowrap>{{ geoinfo.2 }}</td>
-            <td>{{ geoinfo.1 }}</td>
-        </tr>
-     {% endfor %}
+     <table width=50%>
+     <td width=40%>
+        <table><tr class="result_table_head">{{ visitstitle }}</td><tr
+        {% for geoinfo in geovisits %}
+            <tr class=content>
+                <td nowrap> 
+                    {% if geoinfo.0|length > 0 %}
+                        <a href="{% url metashare.views.frontpage %}stats/top/?view={{ view }}&country={{ geoinfo.0 }}">{{ geoinfo.2 }}</a> </td>
+                        <td>
+                        <img height=20 src="{{ MEDIA_URL }}css/international_flags/iso/32x32/flag-{{ geoinfo.0 }}.png">
+                    {% else %}
+                        {{ geoinfo.2 }}</td>
+                        <td>
+                    {% endif %}
+                </td>
+                <td>{{ geoinfo.1 }}</td>
+            </tr>
+        {% endfor %}
         </table>
-        </td>
-        <td><div id="googlemap" style="width: 100%; height: 300px;"></div>
-         <div id="footer" class="prepend-2 append-2 last" style="text-align:right">* This product includes GeoLite data created by MaxMind, available from http://maxmind.com/.</div></td>
-        </table>
+     </td>
+     <td><div id="googlemap" style="width: 100%; height: 300px;"></div>
+         <div id="footer" class="prepend-2 append-2 last" style="text-align:right">* This product includes GeoLite data created by MaxMind, available from http://maxmind.com/.</div>
+     </td>
+     </table>
     </div>
 {% endif %}
 

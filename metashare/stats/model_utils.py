@@ -1,6 +1,7 @@
 import logging
 import json
 import threading
+import itertools 
 from metashare.stats.models import LRStats, QueryStats, UsageStats
 from metashare.stats.geoip import getcountry_code, getcountry_name
 from django.db.models import Count, Sum
@@ -114,32 +115,48 @@ def getUserStats(lrid):
 
     
 ## get the top data (limited by a number) 
-def getLRTop(action, limit):
+def getLRTop(action, limit, geoinfo=None):
     action_list = []
     if (action and not action == ""):
-        action_list = LRStats.objects.values('lrid').filter(action=action).annotate(sum_count=Sum('count')).order_by('-sum_count')[:limit]                
+        if (geoinfo != None and geoinfo is not ""):
+            action_list = LRStats.objects.values('lrid').filter(action=action, geoinfo=geoinfo).annotate(sum_count=Sum('count')).order_by('-sum_count')[:limit]
+        else:
+            action_list = LRStats.objects.values('lrid').filter(action=action).annotate(sum_count=Sum('count')).order_by('-sum_count')[:limit]                
     return action_list
 
-def getLRLast(action, limit):
+def getLRLast(action, limit, geoinfo=None):
     action_list = []
     if (action and not action == ""):
-        action_list =  LRStats.objects.values('lrid', 'action', 'lasttime').filter(action=action).order_by('-lasttime')[:limit]
+        if (geoinfo != None and geoinfo is not ""):
+            action_list =  LRStats.objects.values('lrid', 'action', 'lasttime').filter(action=action, geoinfo=geoinfo).order_by('-lasttime')[:limit]
+        else:
+            action_list =  LRStats.objects.values('lrid', 'action', 'lasttime').filter(action=action).order_by('-lasttime')[:limit]    
     else:
         action_list =  LRStats.objects.values('lrid', 'action', 'lasttime').order_by('-lasttime')[:limit]
     return action_list
 
-def getTopQueries(limit):
-    return QueryStats.objects.values('query', 'facets').annotate(query_count=Count('query'), \
+def getTopQueries(limit, geoinfo=None):
+    if (geoinfo != None and geoinfo is not ""):
+        topqueries = QueryStats.objects.values('query', 'facets').filter(geoinfo=geoinfo).annotate(query_count=Count('query'), \
+        facets_count=Count('facets')).order_by('-query_count','-facets_count')[:limit]        
+    else:
+        topqueries = QueryStats.objects.values('query', 'facets').annotate(query_count=Count('query'), \
         facets_count=Count('facets')).order_by('-query_count','-facets_count')[:limit]
- 
-def getLastQuery (limit):
-    return QueryStats.objects.values('query', 'facets', 'lasttime', 'found').order_by('-lasttime')[:limit]
- 
+    return topqueries
+    
+def getLastQuery (limit, geoinfo=None):
+    if (geoinfo != None and geoinfo is not ""):
+        lastquery = QueryStats.objects.values('query', 'facets', 'lasttime', 'found').filter(geoinfo=geoinfo).order_by('-lasttime')[:limit]
+    else:
+        lastquery = QueryStats.objects.values('query', 'facets', 'lasttime', 'found').order_by('-lasttime')[:limit]
+    return lastquery
+    
 def statByDate(date):
     return LRStats.objects.values("action").filter(lasttime__year=date[0:4], lasttime__month=date[4:6], lasttime__day=date[6:8]).annotate(Count('action'))
     
 def statDays():
-    return LRStats.objects.dates('lasttime', 'day')
+    return itertools.chain(LRStats.objects.dates('lasttime', 'day'), QueryStats.objects.dates('lasttime', 'day'))
+    
 
 def _update_usage_stats(lrid, element_tree):
     if len(element_tree.getchildren()):
