@@ -1,11 +1,23 @@
 server.document-root = "/PATH/TO/METANODE/metashare"
 
-server.port = 9191
+server.port = SSL_PORT_NUM
 server.username = "lighttpd"
 server.groupname = "lighttpd"
 server.bind = "134.96.187.245"
 server.tag = "lighttpd"
 server.pid-file = "/PATH/TO/METANODE/metashare/lighttpd.pid"
+
+# The following will enable SSL with the use of a server certificate
+ssl.engine = "enable"
+ssl.pemfile = "/PATH/TO/CERTIFICATE/metashare.pem"
+ssl.ca-file = "/PATH/TO/CERTIFICATE/metashare.crt"
+
+# The following should be enabled only for debugging
+#debug.log-file-not-found = "enable"
+#debug.log-request-header = "enable"
+#debug.log-request-handling = "enable"
+#debug.log-response-header = "enable"
+
 
 fastcgi.server = (
   "/metashare.fcgi" => (
@@ -16,6 +28,16 @@ fastcgi.server = (
     )
   ),
 )
+
+# This should redirect all non-SSL request to the SSL port
+$SERVER["socket"] == ":NON_SSL_PORT_NUM" {
+  $HTTP["host"] =~ "(.*)" {
+    url.redirect = (
+      "^/metashare.fcgi/(.*)" => "https://localhost:SSL_PORT_NUM/$1",
+      "^/(.*)" => "https://localhost:SSL_PORT_NUM/$1"
+    )
+  }
+}
 
 url.rewrite-once = (
     "^(/media.*)$" => "$1",
@@ -28,6 +50,7 @@ server.errorlog = "/PATH/TO/METANODE/lighttpd/var/log/metashare-error.log"
 accesslog.filename = "/PATH/TO/METANODE/lighttpd/var/log/metashare-access.log"
 
 server.modules = (
+  "mod_redirect",
   "mod_rewrite",
   "mod_access",
   "mod_fastcgi",
