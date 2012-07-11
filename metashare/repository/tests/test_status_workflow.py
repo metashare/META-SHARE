@@ -1,5 +1,3 @@
-from django.contrib.admin.sites import LOGIN_FORM_KEY
-from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth.models import User
 from django.test.client import Client, RequestFactory
 from django.test.testcases import TestCase
@@ -22,12 +20,10 @@ class StatusWorkflowTest(TestCase):
     
     @classmethod
     def setUp(cls):
-        test_utils.set_index_active(False)
         """
         Import a resource to test the workflow changes for
         """
-        
-        
+        test_utils.set_index_active(False)        
         test_utils.setup_test_storage()
         StatusWorkflowTest.test_editor_group = EditorGroup.objects.create(
                                                     name='test_editor_group')
@@ -45,10 +41,10 @@ class StatusWorkflowTest(TestCase):
     
     @classmethod
     def tearDown(cls):
-        test_utils.set_index_active(True)
         """
         Clean up the test
         """
+        test_utils.set_index_active(True)
         test_utils.clean_db()
         test_utils.clean_storage()
         
