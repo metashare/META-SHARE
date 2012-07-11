@@ -221,7 +221,7 @@ def change_resource_status(resource, status, precondition_status=None):
     
 def publish_resources(modeladmin, request, queryset):
 
-    if modeladmin.has_publish_permission(request, queryset):
+    if ResourceModelAdmin.has_publish_permission(request, queryset):
         successful = 0
         for obj in queryset:
             success = change_resource_status(obj, status=PUBLISHED, precondition_status=INGESTED)
@@ -379,7 +379,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 self.choices = choices
                 self.fields['multifield'] = forms.ModelMultipleChoiceField(self.choices)        
                     
-    
+                    
     @csrf_protect_m    
     def delete(self, request, queryset):
         form = None
