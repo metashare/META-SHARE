@@ -672,9 +672,10 @@ class EditorTest(TestCase):
             'expected the superuser to be allowed to delete manager')
         
 
-class DeletionTests(TestCase):
+class DestructiveTests(TestCase):
     """
-    Test case for the deletion of various model instances.
+    Test case for tests that are in some way 'destructive' with regard to the
+    test data.
     
     This test case is separate from the `EditorTest` above as it requires setup
     and teardown methods per test.
