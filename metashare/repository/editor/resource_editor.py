@@ -366,7 +366,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
             groups_list += group.name + ', '
         groups_list = groups_list.rstrip(', ')
         return groups_list
-
+    
     class ConfirmDeleteForm(forms.Form):
         _selected_action = forms.CharField(widget=forms.MultipleHiddenInput)
     
@@ -392,7 +392,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 else:
                     cannot_be_deleted.append(resource)                        
             if 'cancel' in request.POST:
-                self.message_user(request, 'Cancelled deleting selected resources.')
+                self.message_user(request, _('Cancelled deleting selected resources.'))
                 return
             elif 'delete' in request.POST:
                 form = self.ConfirmDeleteForm(request.POST)
@@ -411,9 +411,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                           {'can_be_deleted': can_be_deleted, 'cannot_be_deleted': cannot_be_deleted, \
                                            'form': form, 'path':request.get_full_path()}, \
                                           context_instance=RequestContext(request))
-        messages.error(request, 'You do not have the rights to perform this action.')
+        messages.error(request, _('You do not have the rights to perform this action.'))
         
-    delete.short_description = "Delete selected resources"
+    delete.short_description = _("Delete selected resources")
     
     
     
@@ -422,44 +422,46 @@ class ResourceModelAdmin(SchemaModelAdmin):
         form = None
         if 'myresources' in request.POST or request.user.is_superuser:
             if 'cancel' in request.POST:
-                self.message_user(request, 'Cancelled adding Editor Groups.')
+                self.message_user(request, _('Cancelled adding editor groups.'))
                 return
             elif 'add_editor_group' in request.POST:      
-                query = EditorGroup.objects.all() 
+                query = EditorGroup.objects.all()
                 form = self.IntermediateMultiSelectForm(query, request.POST)
                 if form.is_valid():
                     groups = form.cleaned_data['multifield']   
                     for obj in queryset:  
                         obj.editor_groups.add(*groups)
                         obj.save()
-                    self.message_user(request, 'Successfully added Editor Groups to selected resources.')
+                    self.message_user(request, _('Successfully added editor '
+                                        'groups to the selected resources.'))
                     return HttpResponseRedirect(request.get_full_path())
     
-            if not form:      
-                manager_groups = ManagerGroup.objects.filter(name__in=
-                            request.user.groups.values_list('name', flat=True))
-                editor_groups = EditorGroup.objects
-                for manager_group in manager_groups:
-                    editor_groups = EditorGroup.objects.filter('name', manager_group.managed_group.name)
+            if not form:
                 if request.user.is_superuser:
-                    group = EditorGroup.objects.all()
+                    groups = EditorGroup.objects.all()
                 else:
-                    group = editor_groups.all().values_list('name', flat=True)
-                form = self.IntermediateMultiSelectForm(choices=group, initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
-    
+                    groups = EditorGroup.objects.filter(name__in=
+                        ManagerGroup.objects.filter(name__in=
+                            request.user.groups.values_list('name', flat=True)) \
+                                .values_list('managed_group__name', flat=True))
+                form = self.IntermediateMultiSelectForm(choices=groups,
+                    initial={'_selected_action':
+                             request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
+
             return render_to_response('admin/repository/resourceinfotype_model/add_editor_group.html', \
                                       {'selected_resources': queryset, 'form': form, 'path':request.get_full_path()}, \
                                       context_instance=RequestContext(request)) 
         messages.error(request, 'You do not have the rights to perform this action.')
 
-    add_group.short_description = "Add Editor Groups to selected resources"
+    add_group.short_description = _("Add editor groups to selected resources")
     
     @csrf_protect_m    
     def remove_group(self, request, queryset):
         form = None
         if request.user.is_superuser:
             if 'cancel' in request.POST:
-                self.message_user(request, 'Cancelled removing Editor Groups.')
+                self.message_user(request,
+                                  _('Cancelled removing editor groups.'))
                 return
             elif 'remove_editor_group' in request.POST:  
                 query = EditorGroup.objects.all()           
@@ -469,7 +471,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     for obj in queryset:  
                         obj.editor_groups.remove(*groups)
                         obj.save()
-                    self.message_user(request, 'Successfully removed Editor Groups from selected resources.')               
+                    self.message_user(request, _('Successfully removed ' \
+                                'editor groups from the selected resources.'))
                     return HttpResponseRedirect(request.get_full_path())
             if not form:
                 groups = EditorGroup.objects.all()
@@ -480,14 +483,15 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                       context_instance=RequestContext(request)) 
         messages.error(request, 'You do not have the rights to perform this action.')
 
-    remove_group.short_description = "Remove Editor Groups from selected resources"
+    remove_group.short_description = _("Remove editor groups from selected " \
+                                       "resources")
     
     @csrf_protect_m    
     def add_owner(self, request, queryset):
         form = None
         if request.user.is_superuser:
             if 'cancel' in request.POST:
-                self.message_user(request, 'Cancelled adding Owners.')
+                self.message_user(request, _('Cancelled adding owners.'))
                 return
             elif 'add_owner' in request.POST:  
                 query = User.objects.all()
@@ -497,7 +501,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     for obj in queryset:  
                         obj.owners.add(*owners)
                         obj.save()
-                    self.message_user(request, 'Successfully added Owners to selected resources.')               
+                    self.message_user(request, _('Successfully added owners ' \
+                                                 'to the selected resources.'))               
                     return HttpResponseRedirect(request.get_full_path())
             if not form:
                 owners = User.objects.all()
@@ -508,14 +513,14 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                       context_instance=RequestContext(request)) 
         messages.error(request, 'You do not have the rights to perform this action.')
         
-    add_owner.short_description = "Add Owners to selected resources"
+    add_owner.short_description = _("Add owners to selected resources")
     
     @csrf_protect_m    
     def remove_owner(self, request, queryset):
         form = None
         if request.user.is_superuser:
             if 'cancel' in request.POST:
-                self.message_user(request, 'Cancelled removing Owners.')
+                self.message_user(request, _('Cancelled removing owners.'))
                 return
             elif 'remove_owner' in request.POST:  
                 query = User.objects.all()
@@ -525,7 +530,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     for obj in queryset:  
                         obj.owners.remove(*owners)
                         obj.save()
-                    self.message_user(request, 'Successfully removed Owners from selected resources.')               
+                    self.message_user(request, _('Successfully removed ' \
+                                        'owners from the selected resources.'))               
                     return HttpResponseRedirect(request.get_full_path())
             if not form:
                 owners = User.objects.all()
@@ -536,7 +542,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                       context_instance=RequestContext(request)) 
         messages.error(request, 'You do not have the rights to perform this action.')
 
-    remove_owner.short_description = "Remove Owners from selected resources"
+    remove_owner.short_description = _("Remove owners from selected resources")
         
     
     def get_urls(self):
