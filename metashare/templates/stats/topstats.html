@@ -51,7 +51,7 @@
 </select>
 
 {% if countrycode != None and countrycode|length > 0 %}
-    from <img height=20 src="{{ MEDIA_URL }}css/international_flags/iso/32x32/flag-{{ countrycode }}.png">
+    from <img height=20 src="{{ MEDIA_URL }}css/international_flags/iso/32x32/flag-{{ countrycode|lower }}.png">
 {% endif %} 
 </td></tr></table>
 </form>
@@ -140,7 +140,7 @@
                     {% if geoinfo.0|length > 0 %}
                         <a href="{% url metashare.views.frontpage %}stats/top/?view={{ view }}&country={{ geoinfo.0 }}">{{ geoinfo.2 }}</a> </td>
                         <td>
-                        <img height=20 src="{{ MEDIA_URL }}css/international_flags/iso/32x32/flag-{{ geoinfo.0 }}.png">
+                        <img height=20 src="{{ MEDIA_URL }}css/international_flags/iso/32x32/flag-{{ geoinfo.0|lower }}.png">
                     {% else %}
                         {{ geoinfo.2 }}</td>
                         <td>
