@@ -134,8 +134,6 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
     def has_change_permission(self, request, obj=None):
         result = super(SchemaModelAdmin, self) \
             .has_change_permission(request, obj)
-        print result
-        print obj
         if result and obj:
             if request.user.is_superuser:
                 return True
