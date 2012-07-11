@@ -220,54 +220,60 @@ def change_resource_status(resource, status, precondition_status=None):
     return False
     
 def publish_resources(modeladmin, request, queryset):
-    successful = 0
-    for obj in queryset:
-        success = change_resource_status(obj, status=PUBLISHED, precondition_status=INGESTED)
-        if success:
-            successful += 1
-        if hasattr(obj, 'storage_object') and obj.storage_object is not None:
-            saveLRStats(obj, PUBLISH_STAT, request)
-    if successful > 0:
-        ingested = successful
-        messages.info(request, (ungettext('Successfully published %(ingested)s ingested resource.', \
-                                             'Successfully published %(ingested)s ingested resources.', successful) % \
-                                   {'ingested': successful}))
-    else:
-        messages.error(request, 'Only ingested resources can be published.')
+    if ManagerGroup.objects.filter(name__in= request.user.groups.values_list('name', flat=True)) \
+    .count() != 0:
+        successful = 0
+        for obj in queryset:
+            success = change_resource_status(obj, status=PUBLISHED, precondition_status=INGESTED)
+            if success:
+                successful += 1
+            if hasattr(obj, 'storage_object') and obj.storage_object is not None:
+                saveLRStats(obj, PUBLISH_STAT, request)
+        if successful > 0:
+            messages.info(request, (ungettext('Successfully published %(ingested)s ingested resource.', \
+                                                 'Successfully published %(ingested)s ingested resources.', successful) % \
+                                       {'ingested': successful}))
+        else:
+            messages.error(request, 'Only ingested resources can be published.')
+    messages.error(request, 'You do not have the rights to perform this action.')
         
 publish_resources.short_description = "Publish selected ingested resources"
 
 def unpublish_resources(modeladmin, request, queryset):
-    successful = 0
-    for obj in queryset:
-        success = change_resource_status(obj, status=INGESTED, precondition_status=PUBLISHED)
-        if success:
-            successful += 1
-        if hasattr(obj, 'storage_object') and obj.storage_object is not None:
-            saveLRStats(obj, INGEST_STAT, request)
-    if successful > 0:
-        published = successful
-        messages.info(request, (ungettext('Successfully unpublished %(published)s published resource.', \
-                                     'Successfully unpublished %(published)s published resources.', successful) % \
-                           {'published': successful}))    
-    else:
-        messages.error(request, 'Only published resources can be unpublished.')
+    if ManagerGroup.objects.filter(name__in= request.user.groups.values_list('name', flat=True)) \
+    .count() != 0:
+        successful = 0
+        for obj in queryset:
+            success = change_resource_status(obj, status=INGESTED, precondition_status=PUBLISHED)
+            if success:
+                successful += 1
+            if hasattr(obj, 'storage_object') and obj.storage_object is not None:
+                saveLRStats(obj, INGEST_STAT, request)
+        if successful > 0:
+            messages.info(request, (ungettext('Successfully unpublished %(published)s published resource.', \
+                                         'Successfully unpublished %(published)s published resources.', successful) % \
+                               {'published': successful}))    
+        else:
+            messages.error(request, 'Only published resources can be unpublished.')
+    messages.error(request, 'You do not have the rights to perform this action.')
         
 unpublish_resources.short_description = "Unpublish selected published resources"
 
 def ingest_resources(modeladmin, request, queryset):
-    successful = 0
-    for obj in queryset:
-        success = change_resource_status(obj, status=INGESTED, precondition_status=INTERNAL)
-        if success:
-            successful += 1
-    if successful > 0:
-        published = successful
-        messages.info(request, (ungettext('Successfully ingested %(internal)s internal resource.', \
-                                     'Successfully ingested %(internal)s internal resources.', successful) % \
-                           {'internal': successful}))    
-    else:
-        messages.error(request, 'Only internal resources can be ingested.')
+    if ManagerGroup.objects.filter(name__in= request.user.groups.values_list('name', flat=True)) \
+    .count() != 0:
+        successful = 0
+        for obj in queryset:
+            success = change_resource_status(obj, status=INGESTED, precondition_status=INTERNAL)
+            if success:
+                successful += 1
+        if successful > 0:
+            messages.info(request, (ungettext('Successfully ingested %(internal)s internal resource.', \
+                                         'Successfully ingested %(internal)s internal resources.', successful) % \
+                               {'internal': successful}))    
+        else:
+            messages.error(request, 'Only internal resources can be ingested.')
+    messages.error(request, 'You do not have the rights to perform this action.')
         
 ingest_resources.short_description = "Ingest selected internal resources"
 
@@ -395,15 +401,15 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     count = len(can_be_deleted)                        
                     msg = ungettext('Successfully deleted %(count)d resource.', 'Successfully deleted %(count)d resources.', count) % {
                         'count': len(can_be_deleted),
-                    }                    
+                    }
                     self.message_user(request, msg)
                     return HttpResponseRedirect(request.get_full_path())
-            if not form:      
+            if not form:
                 form = self.ConfirmDeleteForm(initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
             return render_to_response('admin/repository/resourceinfotype_model/confirm_delete.html', \
                                           {'can_be_deleted': can_be_deleted, 'cannot_be_deleted': cannot_be_deleted, \
                                            'form': form, 'path':request.get_full_path()}, \
-                                          context_instance=RequestContext(request)) 
+                                          context_instance=RequestContext(request))
         messages.error(request, 'You do not have the rights to perform this action.')
         
     delete.short_description = "Delete selected resources"
@@ -411,7 +417,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
     
     
     @csrf_protect_m    
-    def add_group(self, request, queryset):            
+    def add_group(self, request, queryset):
         form = None
         if 'myresources' in request.POST or request.user.is_superuser:
             if 'cancel' in request.POST:
@@ -448,7 +454,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
     add_group.short_description = "Add Editor Groups to selected resources"
     
     @csrf_protect_m    
-    def remove_group(self, request, queryset):           
+    def remove_group(self, request, queryset):
         form = None
         if request.user.is_superuser:
             if 'cancel' in request.POST:
@@ -476,7 +482,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
     remove_group.short_description = "Remove Editor Groups from selected resources"
     
     @csrf_protect_m    
-    def add_owner(self, request, queryset):           
+    def add_owner(self, request, queryset):
         form = None
         if request.user.is_superuser:
             if 'cancel' in request.POST:
@@ -504,7 +510,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
     add_owner.short_description = "Add Owners to selected resources"
     
     @csrf_protect_m    
-    def remove_owner(self, request, queryset):           
+    def remove_owner(self, request, queryset):
         form = None
         if request.user.is_superuser:
             if 'cancel' in request.POST:
