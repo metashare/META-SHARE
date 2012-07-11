@@ -6,6 +6,8 @@ Author: Christian Girardi <cgirardi@fbk.eu>
 import sys
 import logging 
 from metashare.settings import DJANGO_URL, STATS_SERVER_URL
+from metashare.repository.models import resourceInfoType_model
+from metashare.storage.models import PUBLISHED
 from metashare.stats.models import LRStats, QueryStats, UsageStats
 # pylint: disable-msg=W0611, W0401
 from metashare.stats.model_utils import *
@@ -190,10 +192,11 @@ def topstats (request):
     """ viewing statistics about the top LR and latest queries. """    
     topdata = []
     view = request.GET.get('view', 'topviewed')
+    countrycode = request.GET.get('country', None)
     if view == "topviewed":
         geovisits = getCountryActions(VIEW_STAT)
         visitstitle = "Viewed resources from  the world:"
-        data = getLRTop(VIEW_STAT, 10)
+        data = getLRTop(VIEW_STAT, 10, countrycode)
         for item in data:
             try:
                 res_info =  resourceInfoType_model.objects.get(storage_object__identifier=item['lrid'])
@@ -203,7 +206,7 @@ def topstats (request):
     if (view == "latestupdated"):
         geovisits = getCountryActions(UPDATE_STAT)
         visitstitle = "Updated resources from the world:"
-        data = getLRLast(UPDATE_STAT, 10)
+        data = getLRLast(UPDATE_STAT, 10, countrycode)
         for item in data:
             try:
                 res_info =  resourceInfoType_model.objects.get(storage_object__identifier=item['lrid'])
@@ -213,7 +216,7 @@ def topstats (request):
     if (view == "topdownloaded"):
         geovisits = getCountryActions(DOWNLOAD_STAT)
         visitstitle = "Downloaded resources from the world:"
-        data = getLRTop(DOWNLOAD_STAT, 10)
+        data = getLRTop(DOWNLOAD_STAT, 10, countrycode)
         for item in data:
             try:
                 res_info =  resourceInfoType_model.objects.get(storage_object__identifier=item['lrid'])
@@ -224,7 +227,7 @@ def topstats (request):
     if view == "topqueries":
         geovisits = getCountryQueries()
         visitstitle = "Fired queries from the world:"
-        data = getTopQueries(10)
+        data = getTopQueries(10, countrycode)
         for item in data:
             url = "q=" + item['query']
             query = urllib.unquote(item['query'])
@@ -238,7 +241,7 @@ def topstats (request):
     if view == "latestqueries":
         geovisits = getCountryQueries()
         visitstitle = "Fired queries from the world:"
-        data = getLastQuery(10)
+        data = getLastQuery(10, countrycode)
         for item in data:
             url = "q=" + item['query']
             query = urllib.unquote(item['query'])
@@ -255,6 +258,7 @@ def topstats (request):
         'topdata': topdata[:10], 
         'view': view,
         'geovisits': geovisits,
+        'countrycode': countrycode,
         'visitstitle': visitstitle,
         'myres': isOwner(request.user.username)},
         context_instance=RequestContext(request))
@@ -264,26 +268,24 @@ def statdays (request):
     dates = []
     for day in statDays():
         dates.append(day.strftime("%Y-%m-%d"))
-    return HttpResponse(JSONEncoder().encode(dates))
+    return HttpResponse(JSONEncoder().encode(dates), mimetype="application/json")
 
 def getstats (request):
     """ get statistics for a date in terms of user action made """
+    data = {}
     currdate = request.GET.get('date',"")
     if (not currdate):
         currdate = date.today()
         
-    user = LRStats.objects.filter(lasttime__startswith=currdate).values('sessid').annotate(Count('sessid')).count()
-    ##optimize these calls just using one (model_utils.statByDate)
-    lrpublish_stat = LRStats.objects.values('lrid' , 'lasttime').filter(action=PUBLISH_STAT).order_by('lasttime')
-    lrpublish = 0
-    for stat in lrpublish_stat:
-        lringest = LRStats.objects.filter(lrid=stat["lrid"], action=INGEST_STAT, lasttime__gt=stat["lasttime"]).count()
-        if (lringest == 0):
-            lrpublish += 1
-    lrupdate = LRStats.objects.filter(lasttime__startswith=currdate, action=UPDATE_STAT).count()
-    lrview = LRStats.objects.filter(lasttime__startswith=currdate, action=VIEW_STAT).count()
-    lrdown = LRStats.objects.filter(lasttime__startswith=currdate, action=DOWNLOAD_STAT).count()
-    queries = QueryStats.objects.filter(lasttime__startswith=currdate).count()
+    data['date'] = str(currdate)    
+    data['user'] = LRStats.objects.filter(lasttime__startswith=currdate).values('sessid').annotate(Count('sessid')).count()
+    data['lrcount'] = resourceInfoType_model.objects.filter(
+        storage_object__publication_status=PUBLISHED,
+        storage_object__deleted=False).count()
+    data['lrupdate'] = LRStats.objects.filter(lasttime__startswith=currdate, action=UPDATE_STAT).count()
+    data['lrview'] = LRStats.objects.filter(lasttime__startswith=currdate, action=VIEW_STAT).count()
+    data['lrdown'] = LRStats.objects.filter(lasttime__startswith=currdate, action=DOWNLOAD_STAT).count()
+    data['queries'] = QueryStats.objects.filter(lasttime__startswith=currdate).count()
     extimes = QueryStats.objects.filter(lasttime__startswith=currdate).aggregate(Avg('exectime'), Max('exectime'), Min('exectime'))
     
     qltavg = 0
@@ -292,9 +294,8 @@ def getstats (request):
     else:
         extimes["exectime__avg"] = 0
     
-    data = {"date": str(currdate), "lrpublish": lrpublish, "user": \
-        user, "lrupdate": lrupdate, "lrview": lrview, "lrdown": lrdown, "queries": queries, \
-        "qexec_time_avg": extimes["exectime__avg"], "qlt_avg": qltavg}
+    data['qexec_time_avg'] = extimes["exectime__avg"]
+    data['qlt_avg'] = qltavg
     
     ###get usage statistics
     _models = [x for x in dir(sys.modules['metashare.repository.models']) if x.endswith('_model')]
@@ -324,8 +325,9 @@ def getstats (request):
                 usagedata[item["elparent"]].append({"field": item["elname"], "label": verbose, "counters": [int(item["lrid__count"]), int(item["count__sum"])]})
         data["usagestats"] = usagedata
     
-    return HttpResponse("["+JSONEncoder().encode(data)+"]")
-  
+    #return HttpResponse("["+JSONEncoder().encode(data)+"]", mimetype="application/json")
+    return HttpResponse("["+json.dumps(data)+"]", mimetype="application/json")
+    
 
 # pylint: disable-msg=R0911
 def pretty_timeago(timein=False):
