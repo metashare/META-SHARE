@@ -43,8 +43,8 @@ LIGHT_GROUPNAME=lighttpd
 LIGHT_TAG=lighttpd
 PYTHON_ADDR=127.0.0.1
 PYTHON_PORT=9191
-PEM_FILE=$METASHARE_SW_DIR/misc/ssl-config/cert/metashare.pem
-CA_FILE=$METASHARE_SW_DIR/misc/ssl-config/cert/metashare.crt
+PEM_FILE=$METASHARE_SW_DIR/misc/tools/ssl-config/cert/metashare.pem
+CA_FILE=$METASHARE_SW_DIR/misc/tools/ssl-config/cert/metashare.crt
 
 LOG_DIR=/tmp/log/light
 mkdir -p "$LOG_DIR"

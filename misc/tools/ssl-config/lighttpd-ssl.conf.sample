@@ -33,7 +33,7 @@ $SERVER["socket"] == ":%%LIGHT_HTTP_PORT%%" {
   $HTTP["host"] =~ "(.*)" {
     url.redirect = (
       "^/metashare.fcgi/(.*)" => "https://localhost:%%LIGHT_HTTPS_PORT%%/$1",
-      "^/(.*)" => "https://localhost:%%LIGHT_HTTPS_PORT%%/$1"
+      "^/(.*)" => "https://localhost:" + server.port + "/$1"
     )
   }
 }

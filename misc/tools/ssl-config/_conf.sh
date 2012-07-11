@@ -10,5 +10,5 @@ DJANGO_PID=$METASHARE_DIR/django.pid
 LIGHTTPD_PID=$METASHARE_DIR/lighttpd.pid
 DATABASE_FILE=$METASHARE_DIR/metashare.db
 STORAGE_PATH=$METASHARE_DIR/storageFolder
-LIGHT_CONF_FILE=$METASHARE_SW_DIR/misc/ssl-config/lighttpd-ssl.conf
+LIGHT_CONF_FILE=$METASHARE_SW_DIR/misc/tools/ssl-config/lighttpd-ssl.conf
 

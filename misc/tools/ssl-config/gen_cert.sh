@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SSL_DIR=/home/metashare/current/META-SHARE/misc/ssl-config/cert
+SSL_DIR=/home/metashare/current/META-SHARE/misc/tools/ssl-config/cert
 PRIV_KEY=$SSL_DIR/metashare.key
 PRIV_KEY_ORIG=$SSL_DIR/metashare.key.orig
 CSR=$SSL_DIR/metashare.csr

@@ -34,4 +34,4 @@ start_django $PYTHON_PORT "$DJANGO_PID"
 #"$PYTHON" manage.py runfcgi host=localhost port=$DJANGO_PORT method=threaded pidfile=$DJANGO_PID
 
 start_light "$LIGHT_CONF_FILE"
-#lighttpd -f "$METASHARE_SW_DIR/misc/ssl-config/lighttpd-ssl.conf
+#lighttpd -f "$METASHARE_SW_DIR/misc/tools/ssl-config/lighttpd-ssl.conf
