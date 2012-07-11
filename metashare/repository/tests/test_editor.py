@@ -72,6 +72,7 @@ class EditorTest(TestCase):
 
         EditorTest.test_editor_group = EditorGroup.objects.create(
                                                     name='test_editor_group')
+        EditorGroup.objects.create(name='test_editor_group_2')
         EditorTest.test_manager_group = \
             ManagerGroup.objects.create(name='test_manager_group',
                                     managed_group=EditorTest.test_editor_group)
@@ -650,6 +651,20 @@ class EditorTest(TestCase):
                 .format(ADMINROOT, res.id))
         self.assertContains(response, 'Are you sure?', msg_prefix=
             'expected the superuser to be allowed to delete resource parts')
+
+    def test_only_superuser_sees_editor_groups_list(self):
+        """
+        Verifies that only a superuser sees the editor groups list (with all
+        editor groups).
+        """
+        client = _client_with_user_logged_in(EditorTest.superuser_login)
+        response = client.get('{}accounts/editorgroup/'.format(ADMINROOT))
+        self.assertContains(response, '0 of 2 selected',
+            msg_prefix='expected the superuser to see all editor groups')
+        client = _client_with_user_logged_in(EditorTest.manager_login)
+        response = client.get('{}accounts/editorgroup/'.format(ADMINROOT))
+        self.assertIn(response.status_code, (403, 404),
+            'expected that a manager user does not see the editor groups list')
 
     def test_superuser_allowed_to_delete_editor_group(self):
         """
