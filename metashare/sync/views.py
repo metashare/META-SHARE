@@ -4,7 +4,8 @@ from zipfile import ZipFile
 from metashare import settings
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
-from metashare.storage.models import StorageObject, MASTER, PROXY, INTERNAL
+from metashare.storage.models import StorageObject, MASTER, PROXY, INTERNAL, \
+    RemovedObject
 import dateutil.parser
 
 def inventory(request):
@@ -13,7 +14,10 @@ def inventory(request):
     response = HttpResponse(status=200, content_type='application/zip')
     response['Metashare-Version'] = settings.METASHARE_VERSION
     response['Content-Disposition'] = 'attachment; filename="inventory.zip"'
-    json_inventory = []
+
+    json_response = {}
+    # collect inventory for existing resources
+    json_existing = []
     objects_to_sync = StorageObject.objects \
         .filter(Q(copy_status=MASTER) | Q(copy_status=PROXY)) \
         .exclude(publication_status=INTERNAL)
@@ -25,9 +29,25 @@ def inventory(request):
             # If we cannot parse the date string, act as if none was provided
             pass
     for obj in objects_to_sync:
-        json_inventory.append({'id':str(obj.identifier), 'digest':str(obj.get_digest_checksum)})
+        json_existing.append({'id':str(obj.identifier), 'digest':str(obj.get_digest_checksum())})
+    json_response['existing'] = json_existing
+    
+    # collect inventory for removed resources
+    json_removed = []
+    objects_to_remove = RemovedObject.objects.all()
+    if 'from' in request.GET:
+        try:
+            fromdate = dateutil.parser.parse(request.GET['from'])
+            objects_to_remove = objects_to_remove.filter(removed__gte=fromdate)
+        except ValueError:
+            # If we cannot parse the date string, act as if none was provided
+            pass
+    for obj in objects_to_remove:
+        json_removed.append(str(obj.identifier))
+    json_response['removed'] = json_removed
+    
     with ZipFile(response, 'w') as outzip:
-        outzip.writestr('inventory.json', json.dumps(json_inventory))
+        outzip.writestr('inventory.json', json.dumps(json_response))
     return response
 
 def full_metadata(request, resource_uuid):

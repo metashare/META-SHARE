@@ -1,9 +1,8 @@
 from django.contrib.auth.models import User
 from django_selenium.testcases import SeleniumTestCase
-from metashare import test_utils, settings
+from metashare import test_utils
 from metashare.repository.models import resourceInfoType_model
 from metashare.settings import ROOT_PATH, DJANGO_BASE
-from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 
 class ExampleSeleniumTest(SeleniumTestCase):
@@ -26,17 +25,11 @@ class ExampleSeleniumTest(SeleniumTestCase):
         staffuser.is_staff = True
         staffuser.save()
         User.objects.create_user('normaluser', 'normal@example.com', 'secret')
-        
-        # init Selenium
-        driver = getattr(webdriver, settings.SELENIUM_DRIVER, None)
-        assert driver, "settings.SELENIUM_DRIVER contains non-existing driver"
-        self.driver = driver()
-        self.driver.implicitly_wait(30)
-        host = getattr(settings, 'SELENIUM_TESTSERVER_HOST', 'localhost')
-        port = getattr(settings, 'SELENIUM_TESTSERVER_PORT', 8011)
-        self.base_url = 'http://{0}:{1}/{2}'.format(host, port, DJANGO_BASE)
-        self.verification_errors = []
-    
+
+        super(ExampleSeleniumTest, self).setUp()
+        self.base_url = 'http://{}:{}/{}' \
+            .format(self.testserver_host, self.testserver_port, DJANGO_BASE)
+
     def test_login_logout(self):
         driver = self.driver
         # check start site
@@ -79,9 +72,6 @@ class ExampleSeleniumTest(SeleniumTestCase):
         return True
     
     def tearDown(self):
-        
         resourceInfoType_model.objects.all().delete()
-        
-        self.driver.quit()
-        self.assertEqual([], self.verification_errors)
 
+        super(ExampleSeleniumTest, self).tearDown()

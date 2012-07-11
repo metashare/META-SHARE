@@ -35,7 +35,7 @@ def addnode(request):
     if (request.GET.has_key('url')):
         hostname = str(request.GET['url'])
         nodestat = getNodeStats(hostname + "/stats/get")
-        if (nodestat is not ""):
+        if (len(nodestat) == 1 and nodestat[0]['date'] is not None and nodestat[0]['lrview'] is not None):
             nodes = Node.objects.filter(hostname=hostname)
             if (nodes.count() == 0):
                 node = Node()
@@ -44,11 +44,22 @@ def addnode(request):
             else:
                 node = nodes[0]
             
+            nodes = Node.objects.filter(ip__contains=ip_address).exclude(hostname=hostname)
+            if (nodes.count() > 0):
+                node.suspected = node.suspected + 1
+                
+            if (ip_address not in node.ip):
+                node.ip = node.ip + " " + ip_address
             node.timestamp = datetime.now()
             node.checked = True
             node.save()
+            
+            #if (node.suspected == 0):
             collectnodestats(node)
             return HttpResponse({'success': True})
+        else:
+            print "Excluded node: " + hostname
+            Node.objects.filter(hostname=hostname).delete()
             
     return HttpResponse({'fail': True})
                    
@@ -59,6 +70,7 @@ def getNodeStats (url):
         urlthread.start()
         urlthread.join()
         data = urlthread.getcontent()
+        #print str(json.dumps(data)) 
         if data:
             return json.loads(data)
     except URLError, (err):
@@ -106,13 +118,10 @@ def updateNodeStats(node, daytime):
         node.checked = True
         node.timestamp = datetime.now()
         
-        
-        
-        
         for items in data:
             if (items.has_key("date")):
                 for key,val in items.items():
-                    if (key != "date"):
+                    if (key != "date" and (isinstance(val, int) or isinstance(val, float))):
                         datestats = NodeStats.objects.filter(node=node, date=daytime, datakey=key)
                         updatestats = False
                         if (datestats.count() == 0):
@@ -120,7 +129,6 @@ def updateNodeStats(node, daytime):
                         else:
                             nodestats = datestats[0]
                             updatestats = True
-                    
                         nodestats.dataval = int(val)
                         nodestats.save(force_update=updatestats)        
     node.save(force_update=True)
@@ -129,18 +137,18 @@ def updateNodeStats(node, daytime):
 
 # create a view about actions made on all METASHARE nodes	
 def browse(request):
-    hosts = {}
-    total_counter = [0] * (len(DATA_STATS_CHOICES) + 2)
-    total_counter[0] = "TOTAL"
-    total_counter[1] = ""
+    hosts = []
+    total_counter = {}
     
     actions_byhost = {}
     actions_bydate = {}
     host_labels = []
     currdate = None
     hosts_with_qexec = 0
-    idx_qexec_time_avg = -1
     try:
+        showupnodes = ""
+        if (request.GET.has_key('showupnodes')):
+            showupnodes = request.GET['showupnodes']
         if (request.GET.has_key('date')):
             currdate = str(request.GET['date'])
             if (currdate.find(",") != -1):
@@ -153,38 +161,60 @@ def browse(request):
         currdate = None
     
     days = NodeStats.objects.values('date').order_by('-date').distinct('date')
-    traffic = Node.objects.values('hostname', 'checked', 'timestamp').distinct('hostname')
-    
+    if (showupnodes == ""):
+        traffic = Node.objects.values('hostname', 'checked', 'suspected', 'timestamp').distinct('hostname').order_by('-checked')
+    else:    
+        traffic = Node.objects.values('hostname', 'checked', 'suspected', 'timestamp').filter(checked=True).distinct('hostname')
+        
     for node in traffic:
         hostname = str(node['hostname'])
         host_labels.append(hostname)
-        hosts[hostname] = [0] * (len(DATA_STATS_CHOICES) + 2)
-        hosts[hostname][0] = int(node['checked'])
-        hosts[hostname][1] = pretty_timeago(node['timestamp'])
-        c=1
+        host_info = []
+        host_info.append(int(node['checked']))
+        host_info.append(hostname)
+        host_info.append(int(node['suspected']))
+        host_info.append(pretty_timeago(node['timestamp']))
         for datakey, datalabel in DATA_STATS_CHOICES:
-            c+=1
             if (currdate):
-                datastats = NodeStats.objects.values('node__hostname').filter(node__hostname=hostname, date=currdate, datakey=datakey).annotate(Sum("dataval"))
+                datastats = NodeStats.objects.values('node__hostname').filter(node__hostname=hostname, date=currdate, datakey=datakey).annotate(Sum('dataval'))
             else:
-                datastats = NodeStats.objects.values('node__hostname').filter(node__hostname=hostname, datakey=datakey).annotate(Sum("dataval"))
-            
-            if (datastats):
-                if (datakey == "qexec_time_avg"):
-                    hosts[hostname][c] = "%0.0f" % int(datastats[0]["dataval__sum"]/1000)
-                    total_counter[c] += int(datastats[0]["dataval__sum"]/1000)
-                    hosts_with_qexec += 1
-                    idx_qexec_time_avg = c
+                if (datalabel[1] == "global"):
+                    datastats = NodeStats.objects.values('node__hostname').filter(node__hostname=hostname, datakey=datakey).order_by("-date")[:1].annotate(Sum('dataval'))
                 else:
-                    hosts[hostname][c] = int(datastats[0]["dataval__sum"])
-                    total_counter[c] += int(datastats[0]["dataval__sum"])
+                    datastats = NodeStats.objects.values('node__hostname').filter(node__hostname=hostname, datakey=datakey).annotate(Sum('dataval'))
+                    
+            if (datastats):
+                if (datakey not in total_counter):
+                    total_counter[datakey] = 0
+                if (datakey == "qexec_time_avg"):
+                    host_info.append(int(datastats[0]["dataval__sum"])/1000)
+                    total_counter[datakey] += int(datastats[0]["dataval__sum"]/1000)
+                    hosts_with_qexec += 1
+                else:
+                    host_info.append(int(datastats[0]["dataval__sum"]))
+                    if (datalabel[1] == "global"):
+                        total_counter[datakey] = ""
+                    else:
+                        total_counter[datakey] += int(datastats[0]["dataval__sum"])
             else:
-                hosts[hostname][c] = 0
-        
-    if (idx_qexec_time_avg>=0 and total_counter[idx_qexec_time_avg] > 0):
-        total_counter[idx_qexec_time_avg] = "%0.0f" % (total_counter[idx_qexec_time_avg] / hosts_with_qexec)               
+                host_info.append(0)
+        hosts.append(host_info) 
             
-
+    if ("qexec_time_avg" in total_counter):
+        total_counter["qexec_time_avg"] = "%0.0f" % (total_counter["qexec_time_avg"] / hosts_with_qexec)               
+            
+    host_info = []
+    host_info.append("")
+    host_info.append("TOTAL")
+    host_info.append("")
+    host_info.append("")
+    for datakey, datalabel in DATA_STATS_CHOICES:
+        if (datakey in total_counter):
+            host_info.append(total_counter[datakey])
+        else:
+            host_info.append("")
+    hosts.append(host_info)
+        
     for alabel, aid in action_labels.items():
         if (not actions_byhost.has_key(alabel)):
             actions_byhost[alabel] = []
@@ -209,11 +239,10 @@ def browse(request):
             day = str(key['date'])  
             labeldate = day[0:4] +","+str(int(day[5:7])-1)+","+day[8:10]
             dates[labeldate] = int(key["dataval__sum"])
-        
         actions_bydate[alabel] = dates
     return render_to_response('templates/metastats.html', {'host_labels': host_labels, \
-            'stats_fields': DATA_STATS_CHOICES, 'traffic': hosts, 'host_total_counter': total_counter, 'actions_byhost': actions_byhost, \
-    'actions_bydate': actions_bydate, 'media_prefix': MEDIA_URL, 'date': days, 'currdate': currdate})
+            'stats_fields': DATA_STATS_CHOICES, 'traffic': hosts, 'actions_byhost': actions_byhost, \
+    'actions_bydate': actions_bydate, 'media_prefix': MEDIA_URL, 'date': days, 'currdate': currdate, 'showupnodes': showupnodes})
 
 
 def collectnodestats(node=None):

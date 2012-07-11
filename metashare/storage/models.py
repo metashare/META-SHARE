@@ -22,7 +22,6 @@ from json import dumps, loads
 from django.core.serializers.json import DjangoJSONEncoder
 import zipfile
 from zipfile import ZIP_DEFLATED
-import json
 from django.db.models.query_utils import Q
 
 # Setup logging support.
@@ -368,7 +367,8 @@ class StorageObject(models.Model):
             finally:
                 _zf.close()
             # update zip digest checksum
-            self.digest_checksum = compute_checksum(_zf_name)
+            self.digest_checksum = \
+              compute_digest_checksum(self.metadata, self.global_storage)
             # update last modified timestamp
             self.digest_modified = datetime.now()
             
@@ -499,9 +499,12 @@ def update_resource(storage_json, resource_xml_string, storage_digest,
         if not os.path.exists(folder):
             os.mkdir(folder)
         with open(os.path.join(folder, 'storage-global.json'), 'wb') as out:
-            json.dump(storage_json, out)
+            out.write(
+              unicode(
+                dumps(storage_json, cls=DjangoJSONEncoder, sort_keys=True, separators=(',',':')))
+                .encode('utf-8'))
         with open(os.path.join(folder, 'metadata.xml'), 'wb') as out:
-            out.write(resource_xml_string)
+            out.write(unicode(resource_xml_string).encode('utf-8'))
 
     def storage_object_exists(storage_id):
         return bool(StorageObject.objects.filter(identifier=storage_id).count() > 0)
@@ -561,10 +564,10 @@ def update_digests():
       Q(publication_status=INGESTED) | Q(publication_status=PUBLISHED)):
         if _expiration_date > _so.digest_modified \
           and _expiration_date > _so.digest_last_checked: 
-            LOGGER.debug('updating {}'.format(_so.identifier))
+            LOGGER.info('updating {}'.format(_so.identifier))
             _so.update_storage()
         else:
-            LOGGER.debug('{} is up to date'.format(_so.identifier))
+            LOGGER.info('{} is up to date'.format(_so.identifier))
 
 def compute_checksum(infile):
     """
@@ -587,6 +590,15 @@ def compute_checksum(infile):
     return checksum.hexdigest()
 
 
+def compute_digest_checksum(metadata, global_storage):
+    """
+    Computes the digest checksum for the given metadata and global storage objects.
+    """
+    _cs = md5() 
+    _cs.update(metadata)
+    _cs.update(global_storage)
+    return _cs.hexdigest()
+
 class IllegalAccessException(Exception):
     pass        
 
@@ -598,3 +610,23 @@ def _get_expiration_date():
     _td = timedelta(seconds=_half_time)
     _expiration_date = datetime.now() - _td
     return _expiration_date
+
+
+class RemovedObject(models.Model):
+    """
+    Models a language resource that was completely removed from the storage layer.
+    """
+    
+    identifier = models.CharField(max_length=64, blank=False,
+      editable=False, unique=True, help_text="(Read-only) unique " \
+      "identifier holding the identifier of the removed language resource.")
+    
+    removed = models.DateTimeField(editable=False, default=datetime.now(),
+      help_text="(Read-only) removal date of the metadata XML " \
+        "for this removed object instance.")
+    
+    def __unicode__(self):
+        """
+        Returns the Unicode representation for this reomved object instance.
+        """
+        return u'<RemovedObject id="{0}">'.format(self.id)

@@ -37,20 +37,20 @@ function getvalues(classname, fieldname) {
 {% if usage_fields != None %}
     <table width=100% bgcolor="white" valign=top>
     <tr><td colspan=2>
-        <form id="getusagestats" action="." method="POST">Found {{ fields_count }} field types<br>           
-        Filter by: &nbsp;
-        {% for filter,counter in usage_filter.items %}
-           &nbsp;<input type="checkbox" name=filter value="{{ filter }}" onClick="submit()"
-           {% if filter in selected_filters or selected_filters|length == 0%}
-                checked
-           {% endif %}     
-           >
-           <div class="coverage {{ filter }}">&nbsp; {{ filter }} &nbsp;</div>({{ counter }}) &nbsp;
-        {% endfor %}
-        <input type="hidden" name="class" id="classname" value="{{ selected_class }}">
-        <input type="hidden" name="field" id="fieldname" value="{{ selected_field }}">
-        
+        <form id="getusagestats" action="." method="POST"><font size=-1>Found <font size=+1>{{ fields_count }}</font> field types (#filled-fields/#linguistic-resources)</font><br>           
+            Filter by: &nbsp;
+            {% for filter,counter in usage_filter.items %}
+               &nbsp;<input type="checkbox" name=filter value="{{ filter }}" onClick="submit()"
+               {% if filter in selected_filters or selected_filters|length == 0%}
+                    checked
+               {% endif %}     
+               >
+               <div class="coverage {{ filter }}">&nbsp; {{ filter }} &nbsp;</div>({{ counter }}) &nbsp;
+            {% endfor %}
+            <input type="hidden" name="class" id="classname" value="{{ selected_class }}">
+            <input type="hidden" name="field" id="fieldname" value="{{ selected_field }}">
         </form>
+        <hr>
     </td></tr>
     {% if errors != None %}
         <tr><td colspan=2>
@@ -84,7 +84,7 @@ function getvalues(classname, fieldname) {
                 {% if field.5 == 0 %}
                     &nbsp;<i>never used</i>&nbsp;
                 {% else %}
-                     &nbsp; <b>{{ field.4 }}</b>/<b>{{ field.5 }}</b> &nbsp;
+                     &nbsp; {{ field.5 }}/{{ field.4 }} &nbsp;
                 {% endif %}
                 </div>
                  </dd>                  
@@ -98,15 +98,15 @@ function getvalues(classname, fieldname) {
             <table border=1 width=100% valign=top>
                 <tr bgcolor=lightgray>
                     <th>[<a href="javascript:hidediv('fieldvalues');" title="Close">X</a>] <a href="#{{ selected_class }}/{{ selected_field }}"><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/bullet_arrow_right.png">&nbsp;</a>{{ selected_class }}/{{ selected_field }} values</th>
-                    <th>LRs coverage</th>
-                    <th>Filled fields</th>
+                    <th style="align: left" nowrap>Filled fields</th>
+                    <th style="align: left">LRs</th>                    
                 </tr>
                  
             {% for field in result %}
                 <tr>
-                <td><a href="{% url metashare.views.frontpage %}repository/search/?q={{ field.0 }}"><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/zoom.png"></a> {{ field.0 }}</td>
-                <td align=right>{{ field.1 }}</td>
-                <td align=right>{{ field.2 }}</td>
+                <td>{{ field.0 }}</td>
+                <td style="align: right">{{ field.2 }}</td>
+                <td style="align: right">{{ field.1 }}</td>
                 </tr>
             {% endfor %}
             </table>

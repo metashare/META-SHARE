@@ -1,7 +1,9 @@
 import logging
 import json
 import threading
+import itertools 
 from metashare.stats.models import LRStats, QueryStats, UsageStats
+from metashare.stats.geoip import getcountry_code, getcountry_name
 from django.db.models import Count, Sum
 from django.contrib.auth.models import User
 from datetime import datetime
@@ -27,17 +29,18 @@ LOGGER = logging.getLogger('metashare.stats.model_utils')
 LOGGER.addHandler(LOG_HANDLER)
 
 
-def saveLRStats(resource, userid, sessid, action): 
+def saveLRStats(resource, action, request=None): 
     """
     this function saves the actions on a resource (it takes into account the session to avoid to increment more than one time the stats counter)
     """
-    if not sessid:
-        sessid = ""   
+    userid = _get_userid(request)
+    sessid = _get_sessionid(request)
+    ipaddress =  _get_ipaddress(request)
     lrset = LRStats.objects.filter(userid=userid, lrid=resource.storage_object.identifier, sessid=sessid, action=action)
     if (lrset.count() > 0):
         record = lrset[0]
         #record.count = record.count+1
-        record.sessid = sessid
+        #record.sessid = sessid
         record.lasttime = datetime.now()
         record.save(force_update=True)
         LOGGER.debug('UPDATESTATS: Saved LR {0}, {1} action={2} ({3}).'.format(resource.storage_object.identifier, sessid, action, record.lasttime))
@@ -46,7 +49,8 @@ def saveLRStats(resource, userid, sessid, action):
         record.userid = userid
         record.lrid = resource.storage_object.identifier
         record.action = action
-        record.sessid = sessid 
+        record.sessid = sessid
+        record.geoinfo = getcountry_code(ipaddress)
         record.save(force_insert=True)
         LOGGER.debug('SAVESTATS: Saved LR {0}, {1} action={2}.'.format(resource.storage_object.identifier, sessid, action))
     if action == UPDATE_STAT or action == PUBLISH_STAT:
@@ -54,7 +58,20 @@ def saveLRStats(resource, userid, sessid, action):
             UsageStats.objects.filter(lrid=resource.id).delete()
             _update_usage_stats(resource.id, resource.export_to_elementtree())
             LOGGER.debug('STATS: Updating usage statistics: resource {0} updated'.format(resource.storage_object.identifier))
-    
+ 
+
+def saveQueryStats(query, facets, found, exectime=0, request=None): 
+    stat = QueryStats()
+    stat.userid = _get_userid(request)
+    stat.geoinfo = getcountry_code(_get_ipaddress(request))    
+    stat.query = query
+    stat.facets = facets
+    stat.found = found
+    stat.exectime = exectime    
+    stat.save()
+    LOGGER.debug('STATS: Query {0}.'.format(query))
+
+
 def getLRStats(lrid):
     data = ""
     action_list = LRStats.objects.values('lrid', 'action').filter(lrid=lrid).annotate(Count('action'), Sum('count')).order_by('-action')
@@ -98,41 +115,48 @@ def getUserStats(lrid):
 
     
 ## get the top data (limited by a number) 
-def getLRTop(action, limit):
+def getLRTop(action, limit, geoinfo=None):
     action_list = []
     if (action and not action == ""):
-        action_list = LRStats.objects.values('lrid').filter(action=action).annotate(sum_count=Sum('count')).order_by('-sum_count')[:limit]                
+        if (geoinfo != None and geoinfo is not ""):
+            action_list = LRStats.objects.values('lrid').filter(action=action, geoinfo=geoinfo).annotate(sum_count=Sum('count')).order_by('-sum_count')[:limit]
+        else:
+            action_list = LRStats.objects.values('lrid').filter(action=action).annotate(sum_count=Sum('count')).order_by('-sum_count')[:limit]                
     return action_list
 
-def getLRLast(action, limit):
+def getLRLast(action, limit, geoinfo=None):
     action_list = []
     if (action and not action == ""):
-        action_list =  LRStats.objects.values('lrid', 'action', 'lasttime').filter(action=action).order_by('-lasttime')[:limit]
+        if (geoinfo != None and geoinfo is not ""):
+            action_list =  LRStats.objects.values('lrid', 'action', 'lasttime').filter(action=action, geoinfo=geoinfo).order_by('-lasttime')[:limit]
+        else:
+            action_list =  LRStats.objects.values('lrid', 'action', 'lasttime').filter(action=action).order_by('-lasttime')[:limit]    
     else:
         action_list =  LRStats.objects.values('lrid', 'action', 'lasttime').order_by('-lasttime')[:limit]
     return action_list
 
-def saveQueryStats(query, facets, userid, found, exectime=0): 
-    stat = QueryStats()
-    stat.userid = userid
-    stat.query = query
-    stat.facets = facets
-    stat.found = found
-    stat.exectime = exectime    
-    stat.save()
-    LOGGER.debug('STATS: Query {0}.'.format(query))
-
-def getTopQueries(limit):
-    return QueryStats.objects.values('query', 'facets','lasttime').annotate(query_count=Count('query'), facets_count=Count('facets')).order_by('query_count','facets_count')[:limit]
- 
-def getLastQuery (limit):
-    return QueryStats.objects.values('query', 'facets', 'lasttime', 'found').order_by('-lasttime')[:limit]
- 
+def getTopQueries(limit, geoinfo=None):
+    if (geoinfo != None and geoinfo is not ""):
+        topqueries = QueryStats.objects.values('query', 'facets').filter(geoinfo=geoinfo).annotate(query_count=Count('query'), \
+        facets_count=Count('facets')).order_by('-query_count','-facets_count')[:limit]        
+    else:
+        topqueries = QueryStats.objects.values('query', 'facets').annotate(query_count=Count('query'), \
+        facets_count=Count('facets')).order_by('-query_count','-facets_count')[:limit]
+    return topqueries
+    
+def getLastQuery (limit, geoinfo=None):
+    if (geoinfo != None and geoinfo is not ""):
+        lastquery = QueryStats.objects.values('query', 'facets', 'lasttime', 'found').filter(geoinfo=geoinfo).order_by('-lasttime')[:limit]
+    else:
+        lastquery = QueryStats.objects.values('query', 'facets', 'lasttime', 'found').order_by('-lasttime')[:limit]
+    return lastquery
+    
 def statByDate(date):
     return LRStats.objects.values("action").filter(lasttime__year=date[0:4], lasttime__month=date[4:6], lasttime__day=date[6:8]).annotate(Count('action'))
     
 def statDays():
-    return LRStats.objects.dates('lasttime', 'day')
+    return itertools.chain(LRStats.objects.dates('lasttime', 'day'), QueryStats.objects.dates('lasttime', 'day'))
+    
 
 def _update_usage_stats(lrid, element_tree):
     if len(element_tree.getchildren()):
@@ -177,6 +201,55 @@ def updateUsageStats(resources, create=False):
         usagethread.start()
         return usagethread    
     return None
+    
+    
+def getCountryActions(action):
+    result = []
+    sets = None
+    if (action != None):
+        sets = LRStats.objects.values('geoinfo').filter(action=action).annotate(Count('action')).order_by('-action__count')
+    else:
+        sets = LRStats.objects.values('geoinfo').annotate(Count('action')).order_by('-action__count')
+    
+    for key in sets:
+        result.append([key['geoinfo'], key['action__count'], getcountry_name(key['geoinfo'])])
+    return result
+        
+        
+def getCountryQueries():
+    result = []
+    sets = QueryStats.objects.values('geoinfo').annotate(Count('geoinfo')).order_by('-geoinfo__count')
+    for key in sets:
+        result.append([key['geoinfo'], key['geoinfo__count'], getcountry_name(key['geoinfo'])])
+    return result
+
+def _get_sessionid(request):
+    """
+    Returns the session ID stored in the cookies of the given request.
+    
+    The empty string is returned, if there is no session ID available.
+    """
+    if request != None and request.COOKIES:
+        return request.COOKIES.get('sessionid', '')
+    return ''
+
+def _get_userid(request):
+    """
+    Returns the username in the user of the given request.
+    """
+    if request != None and request.user and hasattr(request.user,'username'):
+        return request.user.username
+    return ''
+
+
+def _get_ipaddress(request):
+    """
+    Returns the IP address store in META request.
+    """
+    if request != None and request.META.has_key('REMOTE_ADDR'):
+        return request.META['REMOTE_ADDR']
+    return ''
+
 
 class UsageThread(threading.Thread):
     """
