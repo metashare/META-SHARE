@@ -807,7 +807,7 @@ class DestructiveTests(TestCase):
                               .format(ADMINROOT))
         self.assertContains(response, "You cannot edit the metadata for the entity")
         self.assertNotContains(response, "You will now be redirected")        
-    
+
 
 class EditorGroupRegistrationRequestTests(TestCase):
     """
