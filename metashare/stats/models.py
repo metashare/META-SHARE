@@ -59,8 +59,10 @@ class TogetherManager(models.Model):
         tells the manager that the resources with the given ids have appeared
         together
         """
+        # pylint: disable-msg=E1101
         res_count_dict_1 = self.resourcecountdict_set.get_or_create(identifier = res_id_1)[0]
         res_count_dict_1.addResource(res_id_2)
+        # pylint: disable-msg=E1101
         res_count_dict_2 = self.resourcecountdict_set.get_or_create(identifier = res_id_2)[0]
         res_count_dict_2.addResource(res_id_1)
         
@@ -69,6 +71,7 @@ class TogetherManager(models.Model):
         returns how often the resources with the given ids have appeared together
         """
         try:
+            # pylint: disable-msg=E1101
             res_count_dict = self.resourcecountdict_set.get(identifier = res_id_1)
         except ResourceCountDict.DoesNotExist:
             return 0
@@ -84,6 +87,7 @@ class TogetherManager(models.Model):
         """
         unicode_list = []
         unicode_list.append('{}:\n'.format(self.name))
+        # pylint: disable-msg=E1101
         for rcd in self.resourcecountdict_set.all():
             unicode_list.append(unicode(rcd))
         return ''.join(unicode_list)
@@ -101,8 +105,9 @@ class ResourceCountDict(models.Model):
         """
         increases the count for the resource with the given id by 1
         """
-        resCountPair = self.resourcecountpair_set.get_or_create(identifier = res_id)[0]
-        resCountPair.increaseCount()
+        # pylint: disable-msg=E1101
+        res_count_pair = self.resourcecountpair_set.get_or_create(identifier = res_id)[0]
+        res_count_pair.increaseCount()
         
     def __unicode__(self):
         """
@@ -110,6 +115,7 @@ class ResourceCountDict(models.Model):
         """
         unicode_list = []
         unicode_list.append('{}:\n'.format(self.identifier))
+        # pylint: disable-msg=E1101
         for pair in self.resourcecountpair_set.all():
             unicode_list.append('  {}\n'.format(unicode(pair)))
         return ''.join(unicode_list)
