@@ -10,7 +10,7 @@ from django.contrib.sitemaps import Sitemap, FlatPageSitemap
 
 from metashare.settings import MEDIA_ROOT, DEBUG, DJANGO_BASE
 from metashare.repository.editor import admin_site as editor_site
-from sitemap import *
+from repository.sitemap import *
 
 admin.autodiscover()
 
