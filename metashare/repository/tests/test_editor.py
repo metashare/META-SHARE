@@ -13,7 +13,7 @@ from metashare.repository import models
 from metashare.repository.models import languageDescriptionInfoType_model, \
     lexicalConceptualResourceInfoType_model, personInfoType_model
 from metashare.settings import DJANGO_BASE, ROOT_PATH
-from metashare.storage.models import REMOTE
+from metashare.storage.models import PUBLISHED, REMOTE
 
 ADMINROOT = '/{0}editor/'.format(DJANGO_BASE)
 TESTFIXTURE_XML = '{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
@@ -150,7 +150,7 @@ class EditorTest(TestCase):
         ManagerGroup.objects.all().delete()
         test_utils.set_index_active(True)
 
-    
+
     def test_can_log_in_staff(self):
         client = Client()
         request = client.get(ADMINROOT)
@@ -161,7 +161,7 @@ class EditorTest(TestCase):
         self.assertRedirects(login, ADMINROOT)
         self.assertFalse(login.context)
         client.get(ADMINROOT+'logout/')
-    
+
     def test_cannot_log_in_normal(self):
         client = Client()
         request = client.get(ADMINROOT)
@@ -254,7 +254,7 @@ class EditorTest(TestCase):
             msg_prefix='an editor user must not see the "publish" action')
         self.assertNotContains(response, 'Unpublish selected published',
             msg_prefix='an editor user must not see the "unpublish" action')
-        self.assertNotContains(response, 'Delete selected resources',
+        self.assertNotContains(response, 'Mark selected resources as deleted',
             msg_prefix='an editor user must not see the "delete" action')
         self.assertNotContains(response, 'Add editor groups',
             msg_prefix='an editor user must not see the "add groups" action')
@@ -279,7 +279,7 @@ class EditorTest(TestCase):
             msg_prefix='a manager user should see the "publish" action')
         self.assertContains(response, 'Unpublish selected published resources',
             msg_prefix='a manager user should see the "unpublish" action')
-        self.assertContains(response, 'Delete selected resources',
+        self.assertContains(response, 'Mark selected resources as deleted',
             msg_prefix='a manager user should see the "delete" action')
         self.assertNotContains(response, 'Add editor groups',
             msg_prefix='a manager user must not see the "add groups" action')
@@ -302,7 +302,7 @@ class EditorTest(TestCase):
             msg_prefix='a superuser should see the "publish" action')
         self.assertContains(response, 'Unpublish selected published resources',
             msg_prefix='a superuser should see the "unpublish" action')
-        self.assertContains(response, 'Delete selected resources',
+        self.assertContains(response, 'Mark selected resources as deleted',
             msg_prefix='a superuser should see the "delete" action')
         self.assertContains(response, 'Add editor groups',
             msg_prefix='a superuser should see the "add groups" action')
@@ -528,7 +528,7 @@ class EditorTest(TestCase):
     def test_editor_can_delete_annotationInfo(self):
         editoruser = User.objects.get(username='editoruser')
         self.assertTrue(editoruser.has_perm('repository.delete_annotationinfotype_model'))
-    
+
     def test_editor_cannot_delete_actorInfo(self):
         editoruser = User.objects.get(username='editoruser')
         self.assertFalse(editoruser.has_perm('repository.delete_actorinfotype_model'))
@@ -730,7 +730,7 @@ class EditorTest(TestCase):
                               .format(ADMINROOT, EditorTest.test_manager_group.id))
         self.assertContains(response, 'Are you sure?', msg_prefix=
             'expected the superuser to be allowed to delete manager')
-        
+
 
 class DestructiveTests(TestCase):
     """
@@ -745,7 +745,6 @@ class DestructiveTests(TestCase):
         """
         Sets up test users with and without staff permissions.
         """
-        test_utils.set_index_active(False)
         test_utils.setup_test_storage()
 
         self.test_editor_group = EditorGroup.objects.create(
@@ -782,6 +781,8 @@ class DestructiveTests(TestCase):
         }
 
         self.testfixture = _import_test_resource(self.test_editor_group)
+        self.testfixture.storage_object.publication_status = PUBLISHED
+        self.testfixture.storage_object.save()
 
     def tearDown(self):
         test_utils.clean_db()
@@ -789,7 +790,6 @@ class DestructiveTests(TestCase):
         User.objects.all().delete()
         EditorGroup.objects.all().delete()
         ManagerGroup.objects.all().delete()
-        test_utils.set_index_active(True)
 
     def test_editor_user_can_add_editor_group_to_own_resources_only(self):
         """
@@ -1172,7 +1172,96 @@ class DestructiveTests(TestCase):
         response = client.get('{}repository/personinfotype_model/1/'
                               .format(ADMINROOT))
         self.assertContains(response, "You cannot edit the metadata for the entity")
-        self.assertNotContains(response, "You will now be redirected")        
+        self.assertNotContains(response, "You will now be redirected")
+
+    def test_editor_user_cannot_see_deleted_resource(self):
+        client = _client_with_user_logged_in(self.editor_login)
+        self._test_user_cannot_see_deleted_resource(client)
+        
+    def test_super_user_cannot_see_deleted_resource(self):
+        client = _client_with_user_logged_in(self.superuser_login)
+        self._test_user_cannot_see_deleted_resource(client)
+        
+    def _test_user_cannot_see_deleted_resource(self, client):
+        response = client.get(ADMINROOT+'repository/resourceinfotype_model/')
+        self.assertContains(response, '1 Resource')
+        self.testfixture.storage_object.deleted = True
+        self.testfixture.storage_object.save()
+        response = client.get(ADMINROOT+'repository/resourceinfotype_model/')
+        self.assertContains(response, '0 Resources')
+        
+    def test_editor_user_cannot_edit_deleted_resource(self):
+        client = _client_with_user_logged_in(self.editor_login)
+        self._test_user_cannot_edit_deleted_resource(client)
+        
+    def test_super_user_cannot_edit_deleted_resource(self):
+        client = _client_with_user_logged_in(self.superuser_login)
+        self._test_user_cannot_edit_deleted_resource(client)
+
+    def _test_user_cannot_edit_deleted_resource(self, client):
+        response = client.get(
+          ADMINROOT+'repository/resourceinfotype_model/{}/'.format(self.testfixture.id))
+        self.assertContains(response, 'Change Resource')
+        self.testfixture.storage_object.deleted = True
+        self.testfixture.storage_object.save()
+        response = client.get(
+          ADMINROOT+'repository/resourceinfotype_model/{}/'.format(self.testfixture.id))
+        self.assertContains(response, 'Page not found', status_code=404)
+        
+    def test_editor_user_cannot_export_deleted_resource(self):
+        client = _client_with_user_logged_in(self.editor_login)
+        self._test_user_cannot_export_deleted_resource(client)
+        
+    def test_super_user_cannot_export_deleted_resource(self):
+        client = _client_with_user_logged_in(self.superuser_login)
+        self._test_user_cannot_export_deleted_resource(client)
+    
+    def _test_user_cannot_export_deleted_resource(self, client):
+        response = client.get(
+          ADMINROOT+'repository/resourceinfotype_model/{}/export-xml/'.format(self.testfixture.id))
+        self.assertEquals(200, response.status_code)
+        self.assertEquals('text/xml', response.__getitem__('Content-Type'))
+        self.assertEquals('attachment; filename=resource-{}.xml'.format(self.testfixture.id), 
+          response.__getitem__('Content-Disposition'))
+        self.testfixture.storage_object.deleted = True
+        self.testfixture.storage_object.save()
+        response = client.get(
+          ADMINROOT+'repository/resourceinfotype_model/{}/export-xml/'.format(self.testfixture.id))
+        self.assertContains(response, 'Page not found', status_code=404)
+
+    def test_editor_user_cannot_browse_deleted_resource(self):
+        client = _client_with_user_logged_in(self.editor_login)
+        self._test_user_cannot_browse_deleted_resource(client)
+        
+    def test_super_user_cannot_browse_deleted_resource(self):
+        client = _client_with_user_logged_in(self.superuser_login)
+        self._test_user_cannot_browse_deleted_resource(client)
+    
+    def _test_user_cannot_browse_deleted_resource(self, client):
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE))
+        self.assertContains(response, '1 Language Resource')
+        self.testfixture.storage_object.deleted = True
+        self.testfixture.storage_object.save()
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE))
+        self.assertContains(response, '0 Language Resources')
+        
+    def test_editor_user_cannot_search_deleted_resource(self):
+        client = _client_with_user_logged_in(self.editor_login)
+        self._test_user_cannot_search_deleted_resource(client)
+        
+    def test_super_user_cannot_search_deleted_resource(self):
+        client = _client_with_user_logged_in(self.superuser_login)
+        self._test_user_cannot_search_deleted_resource(client)
+    
+    def _test_user_cannot_search_deleted_resource(self, client):
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE),
+          follow=True, data={'q': 'italian'})
+        self.assertContains(response, '1 Language Resource')
+        self.testfixture.storage_object.deleted = True
+        self.testfixture.storage_object.save()
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE),
+          follow=True, data={'q': 'reveal'})
+        self.assertContains(response, 'No results were found')
 
 
 class EditorGroupRegistrationRequestTests(TestCase):

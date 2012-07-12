@@ -429,7 +429,11 @@ class ResourceModelAdmin(SchemaModelAdmin):
             form = self.ConfirmDeleteForm(request.POST)
             if form.is_valid():
                 for resource in can_be_deleted:
-                    resource.delete_deep()
+                    resource.storage_object.deleted = True
+                    resource.storage_object.save()
+                    # explicitly write metadata XML and storage object to the storage folder
+                    resource.storage_object.update_storage()
+                    
                 count = len(can_be_deleted)
                 messages.success(request,
                     ungettext('Successfully deleted %d resource.',
@@ -445,7 +449,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
              cannot_be_deleted, 'form': form, 'path':request.get_full_path()},
             context_instance=RequestContext(request))
 
-    delete.short_description = _("Delete selected resources")
+    delete.short_description = _("Mark selected resources as deleted")
 
 
     @csrf_protect_m    
@@ -910,6 +914,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
         whether the current user may edit a resource or not.
         """
         result = super(ResourceModelAdmin, self).queryset(request)
+        # filter results marked as deleted:
+        result = result.distinct().filter(storage_object__deleted=False)
         # all users but the superusers may only see resources for which they are
         # either owner or editor group member:
         if not request.user.is_superuser:
@@ -1117,6 +1123,12 @@ class ResourceModelAdmin(SchemaModelAdmin):
         #update statistics
         if hasattr(obj, 'storage_object') and obj.storage_object is not None:
             saveLRStats(obj, UPDATE_STAT, request)          
+    
+    def delete_model(self, request, obj):
+        obj.storage_object.deleted = True
+        obj.storage_object.save()
+        # explicitly write metadata XML and storage object to the storage folder
+        obj.storage_object.update_storage()
         
     def change_view(self, request, object_id, extra_context=None):
         _extra_context = extra_context or {}
