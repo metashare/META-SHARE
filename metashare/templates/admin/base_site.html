@@ -44,7 +44,7 @@
             <li><a href="{% url editor:accounts_managergroup_changelist %}">Manager groups</a></li>
           {% endif %}
           {% if user.is_superuser or user.get_profile.has_manager_permission %}
-            <li><a href="{% url admin:accounts_editorregistrationrequest_changelist %}">Editor group applications</a></li>
+            <li><a href="{% url admin:accounts_editorgroupapplication_changelist %}">Editor group applications</a></li>
           {% endif %}
           </ul>
         </li>
