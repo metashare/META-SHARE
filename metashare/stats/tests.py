@@ -12,6 +12,7 @@ from metashare.settings import DJANGO_BASE, DJANGO_URL, ROOT_PATH
 from metashare.stats.model_utils import _update_usage_stats, saveLRStats, \
     getLRLast, saveQueryStats, getLastQuery, UPDATE_STAT, VIEW_STAT, \
     RETRIEVE_STAT, DOWNLOAD_STAT
+from metashare.stats.models import TogetherManager
 
 
 ADMINROOT = '/{0}editor/'.format(DJANGO_BASE)
@@ -172,4 +173,26 @@ class StatsTest(django.test.TestCase):
             print Exception, 'could not get usage stats: {}'.format(response)
         else:
             self.assertContains(response, "identificationInfo")
+    
+
+class TogetherManagerTest(django.test.TestCase):
+    
+    def test_usage(self):
+        """
+        Tests the basic usage of the TogetherHandler
+        """
+        man = TogetherManager.getManager('views')
+        self.assertEquals(0, man.getTogetherCount('res1', 'res2'))
+        man.addResourcePair('res1', 'res2')
+        self.assertEquals(0, man.getTogetherCount('res1', 'res3'))
+        self.assertEquals(1, man.getTogetherCount('res1', 'res2'))
+        self.assertEquals(1, man.getTogetherCount('res2', 'res1'))
+        man.addResourcePair('res1', 'res3')
+        self.assertEquals(1, man.getTogetherCount('res1', 'res3'))
+        self.assertEquals(1, man.getTogetherCount('res3', 'res1'))
+        man.addResourcePair('res1', 'res2')
+        self.assertEquals(2, man.getTogetherCount('res1', 'res2'))
+        self.assertEquals(3, man.getTogetherCount('res1', 'res2'))
+        
+        
     
