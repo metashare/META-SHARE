@@ -13,7 +13,7 @@ from metashare.repository import models
 from metashare.repository.models import languageDescriptionInfoType_model, \
     lexicalConceptualResourceInfoType_model, personInfoType_model
 from metashare.settings import DJANGO_BASE, ROOT_PATH
-from metashare.storage.models import REMOTE
+from metashare.storage.models import PUBLISHED, REMOTE
 
 ADMINROOT = '/{0}editor/'.format(DJANGO_BASE)
 TESTFIXTURE_XML = '{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
@@ -72,9 +72,12 @@ class EditorTest(TestCase):
 
         EditorTest.test_editor_group = EditorGroup.objects.create(
                                                     name='test_editor_group')
+        
         EditorTest.test_manager_group = \
             ManagerGroup.objects.create(name='test_manager_group',
                                     managed_group=EditorTest.test_editor_group)
+        ManagerGroup.objects.create(name='test_manager_group_2', managed_group=
+                EditorGroup.objects.create(name='test_editor_group_2'))
 
         staffuser = User.objects.create_user('staffuser', 'staff@example.com',
           'secret')
@@ -147,7 +150,7 @@ class EditorTest(TestCase):
         ManagerGroup.objects.all().delete()
         test_utils.set_index_active(True)
 
-    
+
     def test_can_log_in_staff(self):
         client = Client()
         request = client.get(ADMINROOT)
@@ -158,7 +161,7 @@ class EditorTest(TestCase):
         self.assertRedirects(login, ADMINROOT)
         self.assertFalse(login.context)
         client.get(ADMINROOT+'logout/')
-    
+
     def test_cannot_log_in_normal(self):
         client = Client()
         request = client.get(ADMINROOT)
@@ -251,22 +254,22 @@ class EditorTest(TestCase):
             msg_prefix='an editor user must not see the "publish" action')
         self.assertNotContains(response, 'Unpublish selected published',
             msg_prefix='an editor user must not see the "unpublish" action')
-        self.assertNotContains(response, 'Delete selected Resources',
+        self.assertNotContains(response, 'Mark selected resources as deleted',
             msg_prefix='an editor user must not see the "delete" action')
-        self.assertNotContains(response, 'Add Editor Groups',
+        self.assertNotContains(response, 'Add editor groups',
             msg_prefix='an editor user must not see the "add groups" action')
-        self.assertNotContains(response, 'Remove Editor Groups',
+        self.assertNotContains(response, 'Remove editor groups',
             msg_prefix='an editor user must not see the "remove groups" action')
-        self.assertNotContains(response, 'Add Owners',
+        self.assertNotContains(response, 'Add owners',
             msg_prefix='an editor user must not see the "add owners" action')
-        self.assertNotContains(response, 'Remove Owners',
+        self.assertNotContains(response, 'Remove owners',
             msg_prefix='an editor user must not see the "remove owners" action')
         # make sure the manager user can see the manage actions in 'my resources':
         response_my = client.get(ADMINROOT + 'repository/resourceinfotype_model/my/')
-        self.assertContains(response_my, 'Add Editor Groups',
-            msg_prefix='an editor user should see the "add groups" action')
-        self.assertContains(response_my, 'Add Owners',
-            msg_prefix='an editor user should see the "add owners" action')
+        self.assertContains(response_my, 'Add editor groups',
+            msg_prefix='a manager user should see the "add groups" action')
+        self.assertContains(response_my, 'Add owners',
+            msg_prefix='a manager user should see the "add owners" action')
         # make sure the manager user can see the manage actions:
         client = _client_with_user_logged_in(EditorTest.manager_login)
         response = client.get(ADMINROOT + 'repository/resourceinfotype_model/')
@@ -276,17 +279,20 @@ class EditorTest(TestCase):
             msg_prefix='a manager user should see the "publish" action')
         self.assertContains(response, 'Unpublish selected published resources',
             msg_prefix='a manager user should see the "unpublish" action')
-        self.assertContains(response, 'Delete selected Resources',
+        self.assertContains(response, 'Mark selected resources as deleted',
             msg_prefix='a manager user should see the "delete" action')
-        self.assertNotContains(response, 'Add Editor Groups',
+        self.assertNotContains(response, 'Add editor groups',
             msg_prefix='a manager user must not see the "add groups" action')
-        self.assertNotContains(response, 'Remove Editor Groups',
+        self.assertNotContains(response, 'Remove editor groups',
             msg_prefix='a manager user must not see the "remove groups" action')
-        self.assertNotContains(response, 'Add Owners',
+        self.assertNotContains(response, 'Add owners',
             msg_prefix='a manager user must not see the "add owners" action')
-        self.assertNotContains(response, 'Remove Owners',
+        self.assertNotContains(response, 'Remove owners',
             msg_prefix='a manager user must not see the "remove owners" action')
-        
+        # make sure the editor user can see the relevant manage actions in 'my
+        # 'resources':
+        self.assertContains(response_my, 'Add owners',
+            msg_prefix='an editor user should see the "add owners" action')
         # make sure the superuser can see the manage actions:
         client = _client_with_user_logged_in(EditorTest.superuser_login)
         response = client.get(ADMINROOT + 'repository/resourceinfotype_model/')
@@ -296,15 +302,15 @@ class EditorTest(TestCase):
             msg_prefix='a superuser should see the "publish" action')
         self.assertContains(response, 'Unpublish selected published resources',
             msg_prefix='a superuser should see the "unpublish" action')
-        self.assertContains(response, 'Delete selected Resources',
+        self.assertContains(response, 'Mark selected resources as deleted',
             msg_prefix='a superuser should see the "delete" action')
-        self.assertContains(response, 'Add Editor Groups',
+        self.assertContains(response, 'Add editor groups',
             msg_prefix='a superuser should see the "add groups" action')
-        self.assertContains(response, 'Remove Editor Groups',
+        self.assertContains(response, 'Remove editor groups',
             msg_prefix='a superuser should see the "remove groups" action')
-        self.assertContains(response, 'Add Owners',
+        self.assertContains(response, 'Add owners',
             msg_prefix='a superuser should see the "add owners" action')
-        self.assertContains(response, 'Remove Owners',
+        self.assertContains(response, 'Remove owners',
             msg_prefix='a superuser should see the "remove owners" action')
 
     def test_enough_editing_time_before_session_expiry(self):
@@ -522,7 +528,7 @@ class EditorTest(TestCase):
     def test_editor_can_delete_annotationInfo(self):
         editoruser = User.objects.get(username='editoruser')
         self.assertTrue(editoruser.has_perm('repository.delete_annotationinfotype_model'))
-    
+
     def test_editor_cannot_delete_actorInfo(self):
         editoruser = User.objects.get(username='editoruser')
         self.assertFalse(editoruser.has_perm('repository.delete_actorinfotype_model'))
@@ -651,6 +657,33 @@ class EditorTest(TestCase):
         self.assertContains(response, 'Are you sure?', msg_prefix=
             'expected the superuser to be allowed to delete resource parts')
 
+    def test_only_superuser_sees_editor_groups_list(self):
+        """
+        Verifies that only a superuser sees the editor groups list (with all
+        editor groups).
+        """
+        client = _client_with_user_logged_in(EditorTest.superuser_login)
+        response = client.get('{}accounts/editorgroup/'.format(ADMINROOT))
+        self.assertContains(response, '0 of 2 selected',
+            msg_prefix='expected the superuser to see all editor groups')
+        client = _client_with_user_logged_in(EditorTest.manager_login)
+        response = client.get('{}accounts/editorgroup/'.format(ADMINROOT))
+        self.assertIn(response.status_code, (403, 404),
+            'expected that a manager user does not see the editor groups list')
+
+    def test_superuser_sees_editor_group_manage_actions(self):
+        """
+        Verifies that a superuser sees all editor group manage actions.
+        """
+        client = _client_with_user_logged_in(EditorTest.superuser_login)
+        response = client.get('{}accounts/editorgroup/'.format(ADMINROOT))
+        self.assertContains(response, 'Add users to selected editor groups',
+            msg_prefix='a superuser must see the add editor group action')
+        self.assertContains(response, 'Delete selected editor groups',
+            msg_prefix='a superuser must see the delete editor group action')
+        self.assertContains(response, 'Remove users from selected editor group',
+            msg_prefix='a superuser must see the remove editor group action')
+
     def test_superuser_allowed_to_delete_editor_group(self):
         """
         Verifies that an editor group is removed from all relevant resources
@@ -661,6 +694,33 @@ class EditorTest(TestCase):
         self.assertContains(response, 'Are you sure?', msg_prefix=
             'expected the superuser to be allowed to delete editor')
 
+    def test_only_superuser_sees_manager_groups_list(self):
+        """
+        Verifies that only a superuser sees the manager groups list (with all
+        manager groups).
+        """
+        client = _client_with_user_logged_in(EditorTest.superuser_login)
+        response = client.get('{}accounts/managergroup/'.format(ADMINROOT))
+        self.assertContains(response, '0 of 2 selected',
+            msg_prefix='expected the superuser to see all manager groups')
+        client = _client_with_user_logged_in(EditorTest.manager_login)
+        response = client.get('{}accounts/managergroup/'.format(ADMINROOT))
+        self.assertIn(response.status_code, (403, 404),
+            'expected that a manager user does not see the manager groups list')
+
+    def test_superuser_sees_manager_group_manage_actions(self):
+        """
+        Verifies that a superuser sees all manager group manage actions.
+        """
+        client = _client_with_user_logged_in(EditorTest.superuser_login)
+        response = client.get('{}accounts/managergroup/'.format(ADMINROOT))
+        self.assertContains(response, 'Add users to selected manager groups',
+            msg_prefix='a superuser must see the add manager group action')
+        self.assertContains(response, 'Delete selected manager groups',
+            msg_prefix='a superuser must see the delete manager group action')
+        self.assertContains(response, 'Remove users from selected manager group',
+            msg_prefix='a superuser must see the remove manager group action')
+
     def test_superuser_allowed_to_delete_manager_group(self):
         """
         Verifies that a manager group is removed from all relevant users
@@ -670,11 +730,12 @@ class EditorTest(TestCase):
                               .format(ADMINROOT, EditorTest.test_manager_group.id))
         self.assertContains(response, 'Are you sure?', msg_prefix=
             'expected the superuser to be allowed to delete manager')
-        
 
-class DeletionTests(TestCase):
+
+class DestructiveTests(TestCase):
     """
-    Test case for the deletion of various model instances.
+    Test case for tests that are in some way 'destructive' with regard to the
+    test data.
     
     This test case is separate from the `EditorTest` above as it requires setup
     and teardown methods per test.
@@ -684,7 +745,6 @@ class DeletionTests(TestCase):
         """
         Sets up test users with and without staff permissions.
         """
-        test_utils.set_index_active(False)
         test_utils.setup_test_storage()
 
         self.test_editor_group = EditorGroup.objects.create(
@@ -693,9 +753,9 @@ class DeletionTests(TestCase):
             ManagerGroup.objects.create(name='test_manager_group',
                                         managed_group=self.test_editor_group)
 
-        test_utils.create_editor_user('editoruser',
+        self.test_editor = test_utils.create_editor_user('editoruser',
             'editor@example.com', 'secret', (self.test_editor_group,))
-        test_utils.create_manager_user(
+        self.test_manager = test_utils.create_manager_user(
             'manageruser', 'manager@example.com', 'secret',
             (self.test_editor_group, self.test_manager_group))
 
@@ -713,8 +773,16 @@ class DeletionTests(TestCase):
             'username': 'editoruser',
             'password': 'secret',
         }
+        self.manager_login = {
+            REDIRECT_FIELD_NAME: ADMINROOT,
+            LOGIN_FORM_KEY: 1,
+            'username': 'manageruser',
+            'password': 'secret',
+        }
 
         self.testfixture = _import_test_resource(self.test_editor_group)
+        self.testfixture.storage_object.publication_status = PUBLISHED
+        self.testfixture.storage_object.save()
 
     def tearDown(self):
         test_utils.clean_db()
@@ -722,8 +790,278 @@ class DeletionTests(TestCase):
         User.objects.all().delete()
         EditorGroup.objects.all().delete()
         ManagerGroup.objects.all().delete()
-        test_utils.set_index_active(True)
-    
+
+    def test_editor_user_can_add_editor_group_to_own_resources_only(self):
+        """
+        Verifies that an editor user can add one of his editor groups to his own
+        resources.
+        """
+        # create some test objects first:
+        test_res = _import_test_resource(None, TESTFIXTURE3_XML)
+        test_res.owners.add(self.test_editor)
+        test_res.save()
+        test_eg = EditorGroup.objects.create(name='a_test_eg')
+        self.test_editor.groups.add(test_eg)
+        # run the actual test:
+        client = _client_with_user_logged_in(self.editor_login)
+        response = client.post(
+            '{}repository/resourceinfotype_model/my/'.format(ADMINROOT),
+            {"action": "add_group", admin.ACTION_CHECKBOX_NAME: test_res.id})
+        self.assertContains(response,
+            "Add editor groups to the following resource:", msg_prefix=
+                "expected to be on the page for adding an editor group")
+        for group in self.test_editor.groups.filter(
+                name__in=EditorGroup.objects.values_list('name', flat=True)):
+            self.assertContains(response, group.name, msg_prefix=
+                "expected to see all own editor groups as possible selections")
+        response = client.post(
+            '{}repository/resourceinfotype_model/my/'.format(ADMINROOT),
+            {"multifield": test_eg.id, "add_editor_group": "Add", "action":
+             "add_group", admin.ACTION_CHECKBOX_NAME: test_res.id},
+            follow=True)
+        self.assertContains(response, test_eg.name, msg_prefix="the resource " \
+                            "is expected to be member of another editor group")
+        self.assertTrue(test_res.editor_groups.filter(
+                name=test_eg.name).count() == 1,
+            "the resource is expected to be member of another editor group")
+
+    def test_editor_user_cannot_add_editor_group_to_non_owned_resources(self):
+        """
+        Verifies that an editor user cannot add one of her editor groups to
+        resources which are not her own.
+        """
+        # create a test object first:
+        test_eg = EditorGroup.objects.create(name='a_test_eg')
+        self.test_editor.groups.add(test_eg)
+        # run the actual test:
+        client = _client_with_user_logged_in(self.editor_login)
+        response = client.post(
+            '{}repository/resourceinfotype_model/my/'.format(ADMINROOT),
+            {"action": "add_group",
+             admin.ACTION_CHECKBOX_NAME: self.testfixture.id})
+        self.assertContains(response,
+            "Add editor groups to the following resource", msg_prefix=
+                "expected to be on the page for adding an editor group")
+        for group in self.test_editor.groups.filter(
+                name__in=EditorGroup.objects.values_list('name', flat=True)):
+            self.assertContains(response, group.name, msg_prefix=
+                "expected to see all own editor groups as possible selections")
+        response = client.post(
+            '{}repository/resourceinfotype_model/my/'.format(ADMINROOT),
+            {"multifield": test_eg.id, "add_editor_group": "Add", "action":
+             "add_group", admin.ACTION_CHECKBOX_NAME: self.testfixture.id},
+            follow=True)
+        self.assertTrue(self.testfixture.editor_groups.filter(
+                name=test_eg.name).count() == 0,
+            "the resource is expected to not be member of another editor group")
+
+    def test_manager_user_can_add_editor_group_to_own_resources(self):
+        """
+        Verifies that a manager user can add one of his managed editor groups to
+        his own resources.
+        """
+        # create some test objects first:
+        test_res = _import_test_resource(None, TESTFIXTURE3_XML)
+        test_res.owners.add(self.test_manager)
+        test_res.save()
+        test_eg = EditorGroup.objects.create(name='a_test_eg')
+        self.test_manager.groups.add(ManagerGroup.objects.create(
+                name='a_test_mg', managed_group=test_eg))
+        # run the actual test:
+        client = _client_with_user_logged_in(self.manager_login)
+        response = client.post(
+            '{}repository/resourceinfotype_model/my/'.format(ADMINROOT),
+            {"action": "add_group", admin.ACTION_CHECKBOX_NAME: test_res.id})
+        self.assertContains(response,
+            "Add editor groups to the following resource:", msg_prefix=
+                "expected to be on the page for adding an editor group")
+        for group in self.test_manager.groups.filter(
+                name__in=EditorGroup.objects.values_list('name', flat=True)):
+            self.assertContains(response, group.name, msg_prefix=
+                "expected to see all own editor groups as possible selections")
+        for group in EditorGroup.objects.filter(name__in=
+                self.test_manager.groups.values_list(
+                    'managergroup__managed_group__name', flat=True)):
+            self.assertContains(response, group.name, msg_prefix=
+                "expected to see all managed groups as possible selections")
+        response = client.post(
+            '{}repository/resourceinfotype_model/my/'.format(ADMINROOT),
+            {"multifield": test_eg.id, "add_editor_group": "Add", "action":
+             "add_group", admin.ACTION_CHECKBOX_NAME: test_res.id},
+            follow=True)
+        self.assertContains(response, test_eg.name, msg_prefix="the resource " \
+                            "is expected to be member of another editor group")
+        self.assertTrue(test_res.editor_groups.filter(
+                name=test_eg.name).count() == 1,
+            "the resource is expected to be member of another editor group")
+
+    def test_manager_user_cannot_add_editor_group_to_non_owned_resources(self):
+        """
+        Verifies that a manager user cannot add one of her managed editor groups
+        to resources which are not her own.
+        """
+        # create a test object first:
+        test_eg = EditorGroup.objects.create(name='a_test_eg')
+        self.test_manager.groups.add(ManagerGroup.objects.create(
+                name='a_test_mg', managed_group=test_eg))
+        # run the actual test:
+        client = _client_with_user_logged_in(self.manager_login)
+        response = client.post(
+            '{}repository/resourceinfotype_model/my/'.format(ADMINROOT),
+            {"action": "add_group",
+             admin.ACTION_CHECKBOX_NAME: self.testfixture.id})
+        self.assertContains(response,
+            "Add editor groups to the following resource", msg_prefix=
+                "expected to be on the page for adding an editor group")
+        for group in self.test_manager.groups.filter(
+                name__in=EditorGroup.objects.values_list('name', flat=True)):
+            self.assertContains(response, group.name, msg_prefix=
+                "expected to see all own editor groups as possible selections")
+        for group in EditorGroup.objects.filter(name__in=
+                self.test_manager.groups.values_list(
+                    'managergroup__managed_group__name', flat=True)):
+            self.assertContains(response, group.name, msg_prefix=
+                "expected to see all managed groups as possible selections")
+        response = client.post(
+            '{}repository/resourceinfotype_model/my/'.format(ADMINROOT),
+            {"multifield": test_eg.id, "add_editor_group": "Add", "action":
+             "add_group", admin.ACTION_CHECKBOX_NAME: self.testfixture.id},
+            follow=True)
+        self.assertTrue(self.testfixture.editor_groups.filter(
+                name=test_eg.name).count() == 0,
+            "the resource is expected to not be member of another editor group")
+
+    def test_superuser_can_add_any_editor_group_to_any_resource(self):
+        """
+        Verifies that a superuser can add any editor groups to any resources.
+        """
+        # create a test object first:
+        test_eg = EditorGroup.objects.create(name='some_editor_group')
+        # run the actual test:
+        client = _client_with_user_logged_in(self.superuser_login)
+        response = client.post(
+            '{}repository/resourceinfotype_model/'.format(ADMINROOT),
+            {"action": "add_group",
+             admin.ACTION_CHECKBOX_NAME: self.testfixture.id})
+        self.assertContains(response,
+            "Add editor groups to the following resource:", msg_prefix=
+                "expected to be on the page for adding an editor group")
+        response = client.post(
+            '{}repository/resourceinfotype_model/'.format(ADMINROOT),
+            {"multifield": test_eg.id, "add_editor_group": "Add", "action":
+             "add_group", admin.ACTION_CHECKBOX_NAME: self.testfixture.id},
+            follow=True)
+        self.assertContains(response, test_eg.name, msg_prefix="the resource " \
+                            "is expected to be member of another editor group")
+        self.assertTrue(self.testfixture.editor_groups.filter(
+                name=test_eg.name).count() == 1,
+            "the resource is expected to be member of another editor group")
+
+    def test_editor_user_cannot_remove_editor_group_from_any_resource(self):
+        """
+        Verifies that an editor user cannot remove any editor groups from any
+        resources.
+        """
+        client = _client_with_user_logged_in(self.editor_login)
+        response = client.post(
+            '{}repository/resourceinfotype_model/'.format(ADMINROOT),
+            {"action": "remove_group",
+             admin.ACTION_CHECKBOX_NAME: self.testfixture.id})
+        if response.status_code == 200:
+            self.assertNotContains(response, "Remove editor groups", 200,
+                "an editor user must not remove any editor groups")
+        else:
+            self.assertEqual(response.status_code, 403,
+                "an editor user must not remove any editor groups")
+
+    def test_manager_user_cannot_remove_editor_group_from_any_resource(self):
+        """
+        Verifies that a manager user cannot remove any editor groups from any
+        resources.
+        """
+        client = _client_with_user_logged_in(self.manager_login)
+        response = client.post(
+            '{}repository/resourceinfotype_model/'.format(ADMINROOT),
+            {"action": "remove_group",
+             admin.ACTION_CHECKBOX_NAME: self.testfixture.id})
+        if response.status_code == 200:
+            self.assertNotContains(response, "Remove editor groups", 200,
+                "a manager user must not remove any editor groups")
+        else:
+            self.assertEqual(response.status_code, 403,
+                "a manager user must not remove any editor groups")
+
+    def test_superuser_can_remove_editor_group_from_any_resource(self):
+        """
+        Verifies that a superuser can remove any editor group from any resource.
+        """
+        client = _client_with_user_logged_in(self.superuser_login)
+        response = client.post(
+            '{}repository/resourceinfotype_model/'.format(ADMINROOT),
+            {"action": "remove_group",
+             admin.ACTION_CHECKBOX_NAME: self.testfixture.id})
+        self.assertContains(response,
+            "Remove editor groups from the following resource:", msg_prefix=
+                "expected to be on the page for removing an editor group")
+        response = client.post(
+            '{}repository/resourceinfotype_model/'.format(ADMINROOT),
+            {"multifield": self.test_editor_group.id,
+             "remove_editor_group": "Remove", "action": "remove_group",
+             admin.ACTION_CHECKBOX_NAME: self.testfixture.id}, follow=True)
+        self.assertNotContains(response, self.test_editor_group.name,
+            msg_prefix="the resource is expected to not be member of the " \
+                "editor group anymore")
+        self.assertTrue(self.testfixture.editor_groups.filter(
+                name=self.test_editor_group.name).count() == 0, "the " \
+            "resource is expected to not be member of the editor group anymore")
+
+    def test_superuser_can_add_user_to_editor_group(self):
+        """
+        Verifies that a superuser can add a user to an editor group.
+        """
+        test_user = User.objects.create_user('normaluser', 'normal@example.com',
+                                             'secret')
+        client = _client_with_user_logged_in(self.superuser_login)
+        response = client.post('{}accounts/editorgroup/'.format(ADMINROOT),
+            {"action": "add_user_to_editor_group",
+             admin.ACTION_CHECKBOX_NAME: self.test_editor_group.id})
+        self.assertContains(response,
+            "Add a user to the following editor group:", msg_prefix=
+                "expected to be on the action page for adding an editor group")
+        response = client.post('{}accounts/editorgroup/'.format(ADMINROOT),
+            {"users": test_user.id, "add_user_profile_to_editor_group": "Add",
+             "action": "add_user_to_editor_group", admin.ACTION_CHECKBOX_NAME:
+             self.test_editor_group.id}, follow=True)
+        self.assertContains(response, "normaluser", msg_prefix=
+                "the user is expected to be member of the editor group now")
+        self.assertTrue(test_user.groups.filter(
+                name=self.test_editor_group.name).count() == 1,
+            "the user is expected to be member of the editor group now")
+
+    def test_superuser_can_remove_user_from_editor_group(self):
+        """
+        Verifies that a superuser can remove a user from an editor group.
+        """
+        test_user = test_utils.create_editor_user('ex_editoruser',
+            'ex_editor@example.com', 'secret', (self.test_editor_group,))
+        client = _client_with_user_logged_in(self.superuser_login)
+        response = client.post('{}accounts/editorgroup/'.format(ADMINROOT),
+            {"action": "remove_user_from_editor_group",
+             admin.ACTION_CHECKBOX_NAME: self.test_editor_group.id})
+        self.assertContains(response,
+            "Remove a user from the following editor group:", msg_prefix=
+                "expected to be on the page for removing an editor group")
+        response = client.post('{}accounts/editorgroup/'.format(ADMINROOT),
+            {"users": test_user.id, "remove_user_profile_from_editor_group":
+                "Remove", "action": "remove_user_from_editor_group",
+             admin.ACTION_CHECKBOX_NAME: self.test_editor_group.id},
+            follow=True)
+        self.assertNotContains(response, test_user.username, msg_prefix=
+            "the user is expected to not be member of the editor group anymore")
+        self.assertTrue(test_user.groups.filter(
+                name=self.test_editor_group.name).count() == 0,
+            "the user is expected to not be member of the editor group anymore")
+
     def test_deleted_editor_group_is_removed_from_all_relevant_resources(self):
         """
         Verifies that an editor group is removed from all relevant resources
@@ -746,7 +1084,54 @@ class DeletionTests(TestCase):
         response = client.get('{}auth/user/{}/'.format(ADMINROOT, editoruser.id))
         self.assertNotContains(response, 'editoruser</option>', msg_prefix=
             'expected the editor group to be removed from the users')
-            
+
+    def test_superuser_can_add_user_to_manager_group(self):
+        """
+        Verifies that a superuser can add a user to a manager group.
+        """
+        test_user = User.objects.create_user('normaluser', 'normal@example.com',
+                                             'secret')
+        client = _client_with_user_logged_in(self.superuser_login)
+        response = client.post('{}accounts/managergroup/'.format(ADMINROOT),
+            {"action": "add_user_to_manager_group",
+             admin.ACTION_CHECKBOX_NAME: self.test_manager_group.id})
+        self.assertContains(response,
+            "Add a user to the following manager group:", msg_prefix=
+                "expected to be on the action page for adding a manager group")
+        response = client.post('{}accounts/managergroup/'.format(ADMINROOT),
+            {"users": test_user.id, "add_user_profile_to_manager_group": "Add",
+             "action": "add_user_to_manager_group", admin.ACTION_CHECKBOX_NAME:
+             self.test_manager_group.id}, follow=True)
+        self.assertContains(response, "normaluser", msg_prefix=
+                "the user is expected to be member of the manager group now")
+        self.assertTrue(test_user.groups.filter(
+                name=self.test_manager_group.name).count() == 1,
+            "the user is expected to be member of the manager group now")
+
+    def test_superuser_can_remove_user_from_manager_group(self):
+        """
+        Verifies that a superuser can remove a user from a manager group.
+        """
+        test_user = test_utils.create_manager_user('ex_manageruser',
+            'ex_manager@example.com', 'secret', (self.test_manager_group,))
+        client = _client_with_user_logged_in(self.superuser_login)
+        response = client.post('{}accounts/managergroup/'.format(ADMINROOT),
+            {"action": "remove_user_from_manager_group",
+             admin.ACTION_CHECKBOX_NAME: self.test_manager_group.id})
+        self.assertContains(response,
+            "Remove a user from the following manager group:", msg_prefix=
+                "expected to be on the page for removing a manager group")
+        response = client.post('{}accounts/managergroup/'.format(ADMINROOT),
+            {"users": test_user.id, "remove_user_profile_from_manager_group":
+                "Remove", "action": "remove_user_from_manager_group",
+             admin.ACTION_CHECKBOX_NAME: self.test_manager_group.id},
+            follow=True)
+        self.assertNotContains(response, test_user.username, msg_prefix=
+            "the user is expected to not be a manager group member anymore")
+        self.assertTrue(test_user.groups.filter(
+                name=self.test_manager_group.name).count() == 0,
+            "the user is expected to not be a manager group member anymore")
+
     def test_deleted_manager_group_is_removed_from_all_relevant_users(self):
         """
         Verifies that a manager group is removed from all relevant users
@@ -788,7 +1173,96 @@ class DeletionTests(TestCase):
                               .format(ADMINROOT))
         self.assertContains(response, "You cannot edit the metadata for the entity")
         self.assertNotContains(response, "You will now be redirected")
+
+    def test_editor_user_cannot_see_deleted_resource(self):
+        client = _client_with_user_logged_in(self.editor_login)
+        self._test_user_cannot_see_deleted_resource(client)
+        
+    def test_super_user_cannot_see_deleted_resource(self):
+        client = _client_with_user_logged_in(self.superuser_login)
+        self._test_user_cannot_see_deleted_resource(client)
+        
+    def _test_user_cannot_see_deleted_resource(self, client):
+        response = client.get(ADMINROOT+'repository/resourceinfotype_model/')
+        self.assertContains(response, '1 Resource')
+        self.testfixture.storage_object.deleted = True
+        self.testfixture.storage_object.save()
+        response = client.get(ADMINROOT+'repository/resourceinfotype_model/')
+        self.assertContains(response, '0 Resources')
+        
+    def test_editor_user_cannot_edit_deleted_resource(self):
+        client = _client_with_user_logged_in(self.editor_login)
+        self._test_user_cannot_edit_deleted_resource(client)
+        
+    def test_super_user_cannot_edit_deleted_resource(self):
+        client = _client_with_user_logged_in(self.superuser_login)
+        self._test_user_cannot_edit_deleted_resource(client)
+
+    def _test_user_cannot_edit_deleted_resource(self, client):
+        response = client.get(
+          ADMINROOT+'repository/resourceinfotype_model/{}/'.format(self.testfixture.id))
+        self.assertContains(response, 'Change Resource')
+        self.testfixture.storage_object.deleted = True
+        self.testfixture.storage_object.save()
+        response = client.get(
+          ADMINROOT+'repository/resourceinfotype_model/{}/'.format(self.testfixture.id))
+        self.assertContains(response, 'Page not found', status_code=404)
+        
+    def test_editor_user_cannot_export_deleted_resource(self):
+        client = _client_with_user_logged_in(self.editor_login)
+        self._test_user_cannot_export_deleted_resource(client)
+        
+    def test_super_user_cannot_export_deleted_resource(self):
+        client = _client_with_user_logged_in(self.superuser_login)
+        self._test_user_cannot_export_deleted_resource(client)
     
+    def _test_user_cannot_export_deleted_resource(self, client):
+        response = client.get(
+          ADMINROOT+'repository/resourceinfotype_model/{}/export-xml/'.format(self.testfixture.id))
+        self.assertEquals(200, response.status_code)
+        self.assertEquals('text/xml', response.__getitem__('Content-Type'))
+        self.assertEquals('attachment; filename=resource-{}.xml'.format(self.testfixture.id), 
+          response.__getitem__('Content-Disposition'))
+        self.testfixture.storage_object.deleted = True
+        self.testfixture.storage_object.save()
+        response = client.get(
+          ADMINROOT+'repository/resourceinfotype_model/{}/export-xml/'.format(self.testfixture.id))
+        self.assertContains(response, 'Page not found', status_code=404)
+
+    def test_editor_user_cannot_browse_deleted_resource(self):
+        client = _client_with_user_logged_in(self.editor_login)
+        self._test_user_cannot_browse_deleted_resource(client)
+        
+    def test_super_user_cannot_browse_deleted_resource(self):
+        client = _client_with_user_logged_in(self.superuser_login)
+        self._test_user_cannot_browse_deleted_resource(client)
+    
+    def _test_user_cannot_browse_deleted_resource(self, client):
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE))
+        self.assertContains(response, '1 Language Resource')
+        self.testfixture.storage_object.deleted = True
+        self.testfixture.storage_object.save()
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE))
+        self.assertContains(response, '0 Language Resources')
+        
+    def test_editor_user_cannot_search_deleted_resource(self):
+        client = _client_with_user_logged_in(self.editor_login)
+        self._test_user_cannot_search_deleted_resource(client)
+        
+    def test_super_user_cannot_search_deleted_resource(self):
+        client = _client_with_user_logged_in(self.superuser_login)
+        self._test_user_cannot_search_deleted_resource(client)
+    
+    def _test_user_cannot_search_deleted_resource(self, client):
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE),
+          follow=True, data={'q': 'italian'})
+        self.assertContains(response, '1 Language Resource')
+        self.testfixture.storage_object.deleted = True
+        self.testfixture.storage_object.save()
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE),
+          follow=True, data={'q': 'reveal'})
+        self.assertContains(response, 'No results were found')
+
 
 class EditorGroupRegistrationRequestTests(TestCase):
     """
