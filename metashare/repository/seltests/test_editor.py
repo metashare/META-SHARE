@@ -172,18 +172,28 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("The Resource \"Test Text Corpus\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
 
+        #make sure an internal resource cannot be published
+        self.publish(driver)
+        self.assertEqual("internal",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Only ingested resources can be published.", 
+         driver.find_element_by_css_selector("ul.messagelist>li.error").text)
         # ingest resource
         self.ingest(driver)
         self.assertEqual("ingested",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully ingested 1 internal resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
         # publish resource
         self.publish(driver)
         self.assertEqual("published",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully published 1 ingested resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
         # delete resource
         self.delete(driver)
-        self.assertEqual("0 Resources", 
-         driver.find_element_by_css_selector("p.paginator").text)
+        self.assertEqual("Successfully deleted 1 resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
         
         
     def test_LR_creation_corpus_audio(self):
@@ -257,18 +267,28 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("The Resource \"Test Audio Corpus\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
 
+        #make sure an internal resource cannot be published
+        self.publish(driver)
+        self.assertEqual("internal",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Only ingested resources can be published.", 
+         driver.find_element_by_css_selector("ul.messagelist>li.error").text)
         # ingest resource
         self.ingest(driver)
         self.assertEqual("ingested",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully ingested 1 internal resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
         # publish resource
         self.publish(driver)
         self.assertEqual("published",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully published 1 ingested resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
         # delete resource
         self.delete(driver)
-        self.assertEqual("0 Resources", 
-         driver.find_element_by_css_selector("p.paginator").text)
+        self.assertEqual("Successfully deleted 1 resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
 
         
     def test_LR_creation_lang_descr_text(self):
@@ -348,18 +368,28 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("The Resource \"Test Text Language Description\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
         
+        #make sure an internal resource cannot be published
+        self.publish(driver)
+        self.assertEqual("internal",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Only ingested resources can be published.", 
+         driver.find_element_by_css_selector("ul.messagelist>li.error").text)
         # ingest resource
         self.ingest(driver)
         self.assertEqual("ingested",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully ingested 1 internal resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
         # publish resource
         self.publish(driver)
         self.assertEqual("published",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully published 1 ingested resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
         # delete resource
         self.delete(driver)
-        self.assertEqual("0 Resources", 
-         driver.find_element_by_css_selector("p.paginator").text)
+        self.assertEqual("Successfully deleted 1 resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
         
 
     def test_LR_creation_lex_resource_text(self):
@@ -439,19 +469,29 @@ class EditorTest(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         self.assertEqual("The Resource \"Test Lexical Resource Text\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
-        
+
+        #make sure an internal resource cannot be published
+        self.publish(driver)
+        self.assertEqual("internal",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Only ingested resources can be published.", 
+         driver.find_element_by_css_selector("ul.messagelist>li.error").text)
         # ingest resource
         self.ingest(driver)
         self.assertEqual("ingested",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully ingested 1 internal resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
         # publish resource
         self.publish(driver)
         self.assertEqual("published",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully published 1 ingested resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
         # delete resource
         self.delete(driver)
-        self.assertEqual("0 Resources", 
-         driver.find_element_by_css_selector("p.paginator").text)
+        self.assertEqual("Successfully deleted 1 resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
         
         
     def test_LR_creation_tool(self):
@@ -520,18 +560,28 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("The Resource \"Test Tool\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
         
+        #make sure an internal resource cannot be published
+        self.publish(driver)
+        self.assertEqual("internal",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Only ingested resources can be published.", 
+         driver.find_element_by_css_selector("ul.messagelist>li.error").text)
         # ingest resource
         self.ingest(driver)
         self.assertEqual("ingested",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully ingested 1 internal resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
         # publish resource
         self.publish(driver)
         self.assertEqual("published",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully published 1 ingested resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
         # delete resource
         self.delete(driver)
-        self.assertEqual("0 Resources", 
-         driver.find_element_by_css_selector("p.paginator").text)
+        self.assertEqual("Successfully deleted 1 resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
 
 
     def test_sorting(self):
