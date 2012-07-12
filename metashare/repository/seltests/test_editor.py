@@ -174,7 +174,7 @@ class EditorTest(SeleniumTestCase):
 
         #make sure an internal resource cannot be published
         self.publish(driver)
-        self.assertEqual("published",
+        self.assertEqual("internal",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Only ingested resources can be published.", 
          driver.find_element_by_css_selector("li.error").text)
@@ -269,7 +269,7 @@ class EditorTest(SeleniumTestCase):
 
         #make sure an internal resource cannot be published
         self.publish(driver)
-        self.assertEqual("published",
+        self.assertEqual("internal",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Only ingested resources can be published.", 
          driver.find_element_by_css_selector("li.error").text)
@@ -370,7 +370,7 @@ class EditorTest(SeleniumTestCase):
         
         #make sure an internal resource cannot be published
         self.publish(driver)
-        self.assertEqual("published",
+        self.assertEqual("internal",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Only ingested resources can be published.", 
          driver.find_element_by_css_selector("li.error").text)
@@ -469,10 +469,10 @@ class EditorTest(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         self.assertEqual("The Resource \"Test Lexical Resource Text\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
-        
+
         #make sure an internal resource cannot be published
         self.publish(driver)
-        self.assertEqual("published",
+        self.assertEqual("internal",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Only ingested resources can be published.", 
          driver.find_element_by_css_selector("li.error").text)
@@ -562,7 +562,7 @@ class EditorTest(SeleniumTestCase):
         
         #make sure an internal resource cannot be published
         self.publish(driver)
-        self.assertEqual("published",
+        self.assertEqual("internal",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Only ingested resources can be published.", 
          driver.find_element_by_css_selector("li.error").text)
