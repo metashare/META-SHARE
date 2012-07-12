@@ -1,7 +1,7 @@
 import datetime
 
 from django import forms
-from django.contrib import admin
+from django.contrib import admin, messages
 from django.contrib.admin.util import unquote
 from django.contrib.admin.views.main import ChangeList
 from django.contrib.auth.decorators import permission_required
@@ -15,7 +15,7 @@ from django.utils.encoding import force_unicode
 from django.utils.functional import update_wrapper
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext as _, ungettext
 from django.views.decorators.csrf import csrf_protect
 
 from metashare import settings
@@ -216,24 +216,88 @@ def change_resource_status(resource, status, precondition_status=None):
         resource.storage_object.save()
         # explicitly write metadata XML and storage object to the storage folder
         resource.storage_object.update_storage()
-    
-def publish_resources(modeladmin, request, queryset):
+        return True
+    return False
+
+
+def has_publish_permission(request, queryset):
+    """
+    Returns `True` if the given request has permission to change the given
+    Django model instance.
+    """
+    if request.user.is_superuser:
+        return True
+        # we only allow a user to ingest/publish/unpublish a resource if either:
+        # (1) she is owner of the resource 
+        # (2) she is a manager of one of the resource's `EditorGroup`s
     for obj in queryset:
-        change_resource_status(obj, status=PUBLISHED, precondition_status=INGESTED)
-        if hasattr(obj, 'storage_object') and obj.storage_object is not None:
-            saveLRStats(obj, PUBLISH_STAT, request)
+        res_groups = obj.editor_groups.all()
+        can_publish = (request.user in obj.owners.all()) \
+            or any(res_group.name == mgr_group.managed_group.name
+                   for res_group in res_groups
+                   for mgr_group in ManagerGroup.objects.filter(name__in=
+                        request.user.groups.values_list('name', flat=True)))
+        if can_publish:
+            return True
+    return False
+
+def publish_resources(modeladmin, request, queryset):
+
+    if has_publish_permission(request, queryset):
+        successful = 0
+        for obj in queryset:
+            success = change_resource_status(obj, status=PUBLISHED, precondition_status=INGESTED)
+            if success:
+                successful += 1
+            if hasattr(obj, 'storage_object') and obj.storage_object is not None:
+                saveLRStats(obj, PUBLISH_STAT, request)
+        if successful > 0:
+            messages.info(request, (ungettext('Successfully published %(ingested)s ingested resource.', \
+                                                 'Successfully published %(ingested)s ingested resources.', successful) % \
+                                       {'ingested': successful}))
+        else:
+            messages.error(request, 'Only ingested resources can be published.')
+    else:
+        messages.error(request, 'You do not have the rights to perform this action.')
+        
 publish_resources.short_description = "Publish selected ingested resources"
 
 def unpublish_resources(modeladmin, request, queryset):
-    for obj in queryset:
-        change_resource_status(obj, status=INGESTED, precondition_status=PUBLISHED)
-        if hasattr(obj, 'storage_object') and obj.storage_object is not None:
-            saveLRStats(obj, INGEST_STAT, request)
+    if has_publish_permission(request, queryset):
+        successful = 0
+        for obj in queryset:
+            success = change_resource_status(obj, status=INGESTED, precondition_status=PUBLISHED)
+            if success:
+                successful += 1
+            if hasattr(obj, 'storage_object') and obj.storage_object is not None:
+                saveLRStats(obj, INGEST_STAT, request)
+        if successful > 0:
+            messages.info(request, (ungettext('Successfully unpublished %(published)s published resource.', \
+                                         'Successfully unpublished %(published)s published resources.', successful) % \
+                               {'published': successful}))    
+        else:
+            messages.error(request, 'Only published resources can be unpublished.')
+    else:
+        messages.error(request, 'You do not have the rights to perform this action.')
+        
 unpublish_resources.short_description = "Unpublish selected published resources"
 
 def ingest_resources(modeladmin, request, queryset):
-    for obj in queryset:
-        change_resource_status(obj, status=INGESTED, precondition_status=INTERNAL)
+    if has_publish_permission(request, queryset):
+        successful = 0
+        for obj in queryset:
+            success = change_resource_status(obj, status=INGESTED, precondition_status=INTERNAL)
+            if success:
+                successful += 1
+        if successful > 0:
+            messages.info(request, (ungettext('Successfully ingested %(internal)s internal resource.', \
+                                         'Successfully ingested %(internal)s internal resources.', successful) % \
+                               {'internal': successful}))    
+        else:
+            messages.error(request, 'Only internal resources can be ingested.')
+    else:
+        messages.error(request, 'You do not have the rights to perform this action.')
+        
 ingest_resources.short_description = "Ingest selected internal resources"
 
 def export_xml_resources(modeladmin, request, queryset):
@@ -294,9 +358,10 @@ class ResourceModelAdmin(SchemaModelAdmin):
     content_fields = ('resourceComponentType',)
     list_display = ('__unicode__', 'resource_type', 'publication_status', 'resource_Owners', 'editor_Groups',)
     list_filter = ('storage_object__publication_status',)
-    actions = (publish_resources, unpublish_resources, ingest_resources, export_xml_resources, 'add_group', 'remove_group', 'add_owner', 'remove_owner')
+    actions = (publish_resources, unpublish_resources, ingest_resources, export_xml_resources, 'delete', \
+               'add_group', 'remove_group', 'add_owner', 'remove_owner')
     hidden_fields = ('storage_object', 'owners', 'editor_groups',)
-
+    
 
     def resource_Owners(self, obj):
         """
@@ -311,8 +376,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
         owners_list = owners_list.rstrip(', ')
         return owners_list    
     
-    
-    #to change name, and to call it through the template
     def editor_Groups(self, obj):
         """
         Method used for changelist view for resources.
@@ -324,11 +387,13 @@ class ResourceModelAdmin(SchemaModelAdmin):
         for group in editor_groups.all():            
             groups_list += group.name + ', '
         groups_list = groups_list.rstrip(', ')
-        return groups_list       
+        return groups_list
     
+    class ConfirmDeleteForm(forms.Form):
+        _selected_action = forms.CharField(widget=forms.MultipleHiddenInput)
     
     class IntermediateMultiSelectForm(forms.Form):
-        _selected_action = forms.CharField(widget=forms.MultipleHiddenInput)         
+        _selected_action = forms.CharField(widget=forms.MultipleHiddenInput)
         
         def __init__(self, choices = None, *args, **kwargs):
             super(ResourceModelAdmin.IntermediateMultiSelectForm, self).__init__(*args, **kwargs)  
@@ -336,9 +401,46 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 self.choices = choices
                 self.fields['multifield'] = forms.ModelMultipleChoiceField(self.choices)        
                     
-     
+                    
     @csrf_protect_m    
-    def add_group(self, request, queryset):            
+    def delete(self, request, queryset):
+        form = None
+        if self.has_delete_permission(request):
+            can_be_deleted = []
+            cannot_be_deleted = []
+            for resource in queryset:
+                if self.has_delete_permission(request, resource):
+                    can_be_deleted.append(resource)
+                else:
+                    cannot_be_deleted.append(resource)                        
+            if 'cancel' in request.POST:
+                self.message_user(request, _('Cancelled deleting selected resources.'))
+                return
+            elif 'delete' in request.POST:
+                form = self.ConfirmDeleteForm(request.POST)
+                if form.is_valid():
+                    for resource in can_be_deleted:
+                        resource.delete_deep()
+                    count = len(can_be_deleted)                        
+                    msg = ungettext('Successfully deleted %(count)d resource.', 'Successfully deleted %(count)d resources.', count) % {
+                        'count': len(can_be_deleted),
+                    }
+                    self.message_user(request, msg)
+                    return HttpResponseRedirect(request.get_full_path())
+            if not form:
+                form = self.ConfirmDeleteForm(initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
+            return render_to_response('admin/repository/resourceinfotype_model/confirm_delete.html', \
+                                          {'can_be_deleted': can_be_deleted, 'cannot_be_deleted': cannot_be_deleted, \
+                                           'form': form, 'path':request.get_full_path()}, \
+                                          context_instance=RequestContext(request))
+        messages.error(request, _('You do not have the rights to perform this action.'))
+        
+    delete.short_description = _("Delete selected resources")
+    
+    
+    
+    @csrf_protect_m    
+    def add_group(self, request, queryset):
         form = None
         if 'myresources' in request.POST or request.user.is_superuser:
             if 'cancel' in request.POST:
@@ -371,11 +473,12 @@ class ResourceModelAdmin(SchemaModelAdmin):
             return render_to_response('admin/repository/resourceinfotype_model/add_editor_group.html', \
                                       {'selected_resources': queryset, 'form': form, 'path':request.get_full_path()}, \
                                       context_instance=RequestContext(request)) 
+        messages.error(request, 'You do not have the rights to perform this action.')
 
     add_group.short_description = _("Add editor groups to selected resources")
     
     @csrf_protect_m    
-    def remove_group(self, request, queryset):           
+    def remove_group(self, request, queryset):
         form = None
         if request.user.is_superuser:
             if 'cancel' in request.POST:
@@ -400,12 +503,13 @@ class ResourceModelAdmin(SchemaModelAdmin):
             return render_to_response('admin/repository/resourceinfotype_model/remove_editor_group.html', \
                                       {'selected_resources': queryset, 'form': form, 'path':request.get_full_path()}, \
                                       context_instance=RequestContext(request)) 
+        messages.error(request, 'You do not have the rights to perform this action.')
 
     remove_group.short_description = _("Remove editor groups from selected " \
                                        "resources")
     
     @csrf_protect_m    
-    def add_owner(self, request, queryset):           
+    def add_owner(self, request, queryset):
         form = None
         if request.user.is_superuser:
             if 'cancel' in request.POST:
@@ -429,11 +533,12 @@ class ResourceModelAdmin(SchemaModelAdmin):
             return render_to_response('admin/repository/resourceinfotype_model/add_owner.html', \
                                       {'selected_resources': queryset, 'form': form, 'path':request.get_full_path()}, \
                                       context_instance=RequestContext(request)) 
-
+        messages.error(request, 'You do not have the rights to perform this action.')
+        
     add_owner.short_description = _("Add owners to selected resources")
     
     @csrf_protect_m    
-    def remove_owner(self, request, queryset):           
+    def remove_owner(self, request, queryset):
         form = None
         if request.user.is_superuser:
             if 'cancel' in request.POST:
@@ -457,6 +562,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
             return render_to_response('admin/repository/resourceinfotype_model/remove_owner.html', \
                                       {'selected_resources': queryset, 'form': form, 'path':request.get_full_path()}, \
                                       context_instance=RequestContext(request)) 
+        messages.error(request, 'You do not have the rights to perform this action.')
 
     remove_owner.short_description = _("Remove owners from selected resources")
         
@@ -760,6 +866,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     | Q(editor_groups__name__in=
                            request.user.groups.values_list('name', flat=True)))
         return result
+    
+
 
     def has_delete_permission(self, request, obj=None):
         """
@@ -791,6 +899,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         action.
         """
         result = super(ResourceModelAdmin, self).get_actions(request)
+        del result['delete_selected']
         if not request.user.is_superuser:
             del result['remove_group']
             del result['remove_owner']
@@ -799,7 +908,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 del result['add_owner']
             # only users with delete permissions can see the delete action:
             if not self.has_delete_permission(request):
-                del result['delete_selected']
+                del result['delete']
             # only users who are the manager of some group can see the
             # ingest/publish/unpublish actions:
             if ManagerGroup.objects.filter(name__in=
