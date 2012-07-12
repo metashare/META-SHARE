@@ -72,9 +72,12 @@ class EditorTest(TestCase):
 
         EditorTest.test_editor_group = EditorGroup.objects.create(
                                                     name='test_editor_group')
+        
         EditorTest.test_manager_group = \
             ManagerGroup.objects.create(name='test_manager_group',
                                     managed_group=EditorTest.test_editor_group)
+        ManagerGroup.objects.create(name='test_manager_group_2', managed_group=
+                EditorGroup.objects.create(name='test_editor_group_2'))
 
         staffuser = User.objects.create_user('staffuser', 'staff@example.com',
           'secret')
@@ -253,20 +256,20 @@ class EditorTest(TestCase):
             msg_prefix='an editor user must not see the "unpublish" action')
         self.assertNotContains(response, 'Delete selected Resources',
             msg_prefix='an editor user must not see the "delete" action')
-        self.assertNotContains(response, 'Add Editor Groups',
+        self.assertNotContains(response, 'Add editor groups',
             msg_prefix='an editor user must not see the "add groups" action')
-        self.assertNotContains(response, 'Remove Editor Groups',
+        self.assertNotContains(response, 'Remove editor groups',
             msg_prefix='an editor user must not see the "remove groups" action')
-        self.assertNotContains(response, 'Add Owners',
+        self.assertNotContains(response, 'Add owners',
             msg_prefix='an editor user must not see the "add owners" action')
-        self.assertNotContains(response, 'Remove Owners',
+        self.assertNotContains(response, 'Remove owners',
             msg_prefix='an editor user must not see the "remove owners" action')
         # make sure the manager user can see the manage actions in 'my resources':
         response_my = client.get(ADMINROOT + 'repository/resourceinfotype_model/my/')
-        self.assertContains(response_my, 'Add Editor Groups',
-            msg_prefix='an editor user should see the "add groups" action')
-        self.assertContains(response_my, 'Add Owners',
-            msg_prefix='an editor user should see the "add owners" action')
+        self.assertContains(response_my, 'Add editor groups',
+            msg_prefix='a manager user should see the "add groups" action')
+        self.assertContains(response_my, 'Add owners',
+            msg_prefix='a manager user should see the "add owners" action')
         # make sure the manager user can see the manage actions:
         client = _client_with_user_logged_in(EditorTest.manager_login)
         response = client.get(ADMINROOT + 'repository/resourceinfotype_model/')
@@ -278,15 +281,18 @@ class EditorTest(TestCase):
             msg_prefix='a manager user should see the "unpublish" action')
         self.assertContains(response, 'Delete selected Resources',
             msg_prefix='a manager user should see the "delete" action')
-        self.assertNotContains(response, 'Add Editor Groups',
+        self.assertNotContains(response, 'Add editor groups',
             msg_prefix='a manager user must not see the "add groups" action')
-        self.assertNotContains(response, 'Remove Editor Groups',
+        self.assertNotContains(response, 'Remove editor groups',
             msg_prefix='a manager user must not see the "remove groups" action')
-        self.assertNotContains(response, 'Add Owners',
+        self.assertNotContains(response, 'Add owners',
             msg_prefix='a manager user must not see the "add owners" action')
-        self.assertNotContains(response, 'Remove Owners',
+        self.assertNotContains(response, 'Remove owners',
             msg_prefix='a manager user must not see the "remove owners" action')
-        
+        # make sure the editor user can see the relevant manage actions in 'my
+        # 'resources':
+        self.assertContains(response_my, 'Add owners',
+            msg_prefix='an editor user should see the "add owners" action')
         # make sure the superuser can see the manage actions:
         client = _client_with_user_logged_in(EditorTest.superuser_login)
         response = client.get(ADMINROOT + 'repository/resourceinfotype_model/')
@@ -298,13 +304,13 @@ class EditorTest(TestCase):
             msg_prefix='a superuser should see the "unpublish" action')
         self.assertContains(response, 'Delete selected Resources',
             msg_prefix='a superuser should see the "delete" action')
-        self.assertContains(response, 'Add Editor Groups',
+        self.assertContains(response, 'Add editor groups',
             msg_prefix='a superuser should see the "add groups" action')
-        self.assertContains(response, 'Remove Editor Groups',
+        self.assertContains(response, 'Remove editor groups',
             msg_prefix='a superuser should see the "remove groups" action')
-        self.assertContains(response, 'Add Owners',
+        self.assertContains(response, 'Add owners',
             msg_prefix='a superuser should see the "add owners" action')
-        self.assertContains(response, 'Remove Owners',
+        self.assertContains(response, 'Remove owners',
             msg_prefix='a superuser should see the "remove owners" action')
 
     def test_enough_editing_time_before_session_expiry(self):
@@ -651,6 +657,33 @@ class EditorTest(TestCase):
         self.assertContains(response, 'Are you sure?', msg_prefix=
             'expected the superuser to be allowed to delete resource parts')
 
+    def test_only_superuser_sees_editor_groups_list(self):
+        """
+        Verifies that only a superuser sees the editor groups list (with all
+        editor groups).
+        """
+        client = _client_with_user_logged_in(EditorTest.superuser_login)
+        response = client.get('{}accounts/editorgroup/'.format(ADMINROOT))
+        self.assertContains(response, '0 of 2 selected',
+            msg_prefix='expected the superuser to see all editor groups')
+        client = _client_with_user_logged_in(EditorTest.manager_login)
+        response = client.get('{}accounts/editorgroup/'.format(ADMINROOT))
+        self.assertIn(response.status_code, (403, 404),
+            'expected that a manager user does not see the editor groups list')
+
+    def test_superuser_sees_editor_group_manage_actions(self):
+        """
+        Verifies that a superuser sees all editor group manage actions.
+        """
+        client = _client_with_user_logged_in(EditorTest.superuser_login)
+        response = client.get('{}accounts/editorgroup/'.format(ADMINROOT))
+        self.assertContains(response, 'Add users to selected editor groups',
+            msg_prefix='a superuser must see the add editor group action')
+        self.assertContains(response, 'Delete selected editor groups',
+            msg_prefix='a superuser must see the delete editor group action')
+        self.assertContains(response, 'Remove users from selected editor group',
+            msg_prefix='a superuser must see the remove editor group action')
+
     def test_superuser_allowed_to_delete_editor_group(self):
         """
         Verifies that an editor group is removed from all relevant resources
@@ -660,6 +693,33 @@ class EditorTest(TestCase):
                               .format(ADMINROOT, EditorTest.test_editor_group.id))
         self.assertContains(response, 'Are you sure?', msg_prefix=
             'expected the superuser to be allowed to delete editor')
+
+    def test_only_superuser_sees_manager_groups_list(self):
+        """
+        Verifies that only a superuser sees the manager groups list (with all
+        manager groups).
+        """
+        client = _client_with_user_logged_in(EditorTest.superuser_login)
+        response = client.get('{}accounts/managergroup/'.format(ADMINROOT))
+        self.assertContains(response, '0 of 2 selected',
+            msg_prefix='expected the superuser to see all manager groups')
+        client = _client_with_user_logged_in(EditorTest.manager_login)
+        response = client.get('{}accounts/managergroup/'.format(ADMINROOT))
+        self.assertIn(response.status_code, (403, 404),
+            'expected that a manager user does not see the manager groups list')
+
+    def test_superuser_sees_manager_group_manage_actions(self):
+        """
+        Verifies that a superuser sees all manager group manage actions.
+        """
+        client = _client_with_user_logged_in(EditorTest.superuser_login)
+        response = client.get('{}accounts/managergroup/'.format(ADMINROOT))
+        self.assertContains(response, 'Add users to selected manager groups',
+            msg_prefix='a superuser must see the add manager group action')
+        self.assertContains(response, 'Delete selected manager groups',
+            msg_prefix='a superuser must see the delete manager group action')
+        self.assertContains(response, 'Remove users from selected manager group',
+            msg_prefix='a superuser must see the remove manager group action')
 
     def test_superuser_allowed_to_delete_manager_group(self):
         """
@@ -672,9 +732,10 @@ class EditorTest(TestCase):
             'expected the superuser to be allowed to delete manager')
         
 
-class DeletionTests(TestCase):
+class DestructiveTests(TestCase):
     """
-    Test case for the deletion of various model instances.
+    Test case for tests that are in some way 'destructive' with regard to the
+    test data.
     
     This test case is separate from the `EditorTest` above as it requires setup
     and teardown methods per test.
@@ -723,7 +784,53 @@ class DeletionTests(TestCase):
         EditorGroup.objects.all().delete()
         ManagerGroup.objects.all().delete()
         test_utils.set_index_active(True)
-    
+
+    def test_superuser_can_add_user_to_editor_group(self):
+        """
+        Verifies that a superuser can add a user to an editor group.
+        """
+        test_user = User.objects.create_user('normaluser', 'normal@example.com',
+                                             'secret')
+        client = _client_with_user_logged_in(self.superuser_login)
+        response = client.post('{}accounts/editorgroup/'.format(ADMINROOT),
+            {"action": "add_user_to_editor_group",
+             "_selected_action": self.test_editor_group.id})
+        self.assertContains(response,
+            "Add a user to the following editor group:", msg_prefix=
+                "expected to be on the action page for adding an editor group")
+        response = client.post('{}accounts/editorgroup/'.format(ADMINROOT),
+            {"users": test_user.id, "add_user_profile_to_editor_group": "Add",
+             "action": "add_user_to_editor_group",
+             "_selected_action": self.test_editor_group.id}, follow=True)
+        self.assertContains(response, "normaluser", msg_prefix=
+                "the user is expected to be member of the editor group now")
+        self.assertTrue(test_user.groups.filter(
+                name=self.test_editor_group.name).count() == 1,
+            "the user is expected to be member of the editor group now")
+
+    def test_superuser_can_remove_user_from_editor_group(self):
+        """
+        Verifies that a superuser can remove a user from an editor group.
+        """
+        test_user = test_utils.create_editor_user('ex_editoruser',
+            'ex_editor@example.com', 'secret', (self.test_editor_group,))
+        client = _client_with_user_logged_in(self.superuser_login)
+        response = client.post('{}accounts/editorgroup/'.format(ADMINROOT),
+            {"action": "remove_user_from_editor_group",
+             "_selected_action": self.test_editor_group.id})
+        self.assertContains(response,
+            "Remove a user from the following editor group:", msg_prefix=
+                "expected to be on the page for removing an editor group")
+        response = client.post('{}accounts/editorgroup/'.format(ADMINROOT),
+            {"users": test_user.id, "remove_user_profile_from_editor_group":
+                "Remove", "action": "remove_user_from_editor_group",
+             "_selected_action": self.test_editor_group.id}, follow=True)
+        self.assertNotContains(response, test_user.username, msg_prefix=
+            "the user is expected to not be member of the editor group anymore")
+        self.assertTrue(test_user.groups.filter(
+                name=self.test_editor_group.name).count() == 0,
+            "the user is expected to not be member of the editor group anymore")
+
     def test_deleted_editor_group_is_removed_from_all_relevant_resources(self):
         """
         Verifies that an editor group is removed from all relevant resources
@@ -746,7 +853,53 @@ class DeletionTests(TestCase):
         response = client.get('{}auth/user/{}/'.format(ADMINROOT, editoruser.id))
         self.assertNotContains(response, 'editoruser</option>', msg_prefix=
             'expected the editor group to be removed from the users')
-            
+
+    def test_superuser_can_add_user_to_manager_group(self):
+        """
+        Verifies that a superuser can add a user to a manager group.
+        """
+        test_user = User.objects.create_user('normaluser', 'normal@example.com',
+                                             'secret')
+        client = _client_with_user_logged_in(self.superuser_login)
+        response = client.post('{}accounts/managergroup/'.format(ADMINROOT),
+            {"action": "add_user_to_manager_group",
+             "_selected_action": self.test_manager_group.id})
+        self.assertContains(response,
+            "Add a user to the following manager group:", msg_prefix=
+                "expected to be on the action page for adding a manager group")
+        response = client.post('{}accounts/managergroup/'.format(ADMINROOT),
+            {"users": test_user.id, "add_user_profile_to_manager_group": "Add",
+             "action": "add_user_to_manager_group",
+             "_selected_action": self.test_manager_group.id}, follow=True)
+        self.assertContains(response, "normaluser", msg_prefix=
+                "the user is expected to be member of the manager group now")
+        self.assertTrue(test_user.groups.filter(
+                name=self.test_manager_group.name).count() == 1,
+            "the user is expected to be member of the manager group now")
+
+    def test_superuser_can_remove_user_from_manager_group(self):
+        """
+        Verifies that a superuser can remove a user from a manager group.
+        """
+        test_user = test_utils.create_manager_user('ex_manageruser',
+            'ex_manager@example.com', 'secret', (self.test_manager_group,))
+        client = _client_with_user_logged_in(self.superuser_login)
+        response = client.post('{}accounts/managergroup/'.format(ADMINROOT),
+            {"action": "remove_user_from_manager_group",
+             "_selected_action": self.test_manager_group.id})
+        self.assertContains(response,
+            "Remove a user from the following manager group:", msg_prefix=
+                "expected to be on the page for removing a manager group")
+        response = client.post('{}accounts/managergroup/'.format(ADMINROOT),
+            {"users": test_user.id, "remove_user_profile_from_manager_group":
+                "Remove", "action": "remove_user_from_manager_group",
+             "_selected_action": self.test_manager_group.id}, follow=True)
+        self.assertNotContains(response, test_user.username, msg_prefix=
+            "the user is expected to not be a manager group member anymore")
+        self.assertTrue(test_user.groups.filter(
+                name=self.test_manager_group.name).count() == 0,
+            "the user is expected to not be a manager group member anymore")
+
     def test_deleted_manager_group_is_removed_from_all_relevant_users(self):
         """
         Verifies that a manager group is removed from all relevant users

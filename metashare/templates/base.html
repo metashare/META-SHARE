@@ -1,10 +1,9 @@
-{% load analytical %}
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
    "http://www.w3.org/TR/html4/strict.dtd">
-
+{% load analytical %}
 <html lang="en">
   <head>
+    {% analytical_head_top %}
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>{% spaceless %}{% block title %}META-SHARE{% endblock %}{% endspaceless %}</title>
     <link rel="shortcut icon" href="{{ MEDIA_URL }}images/favicon.ico" />
@@ -21,16 +20,11 @@
 
     <link href='http://fonts.googleapis.com/css?family=Rokkitt' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Cantarell:regular,italic,bold,bolditalic&v1' rel='stylesheet' type='text/css'>
-    {% block links %}{% endblock %}
-    {% analytical_head_top %}
-      <!-- 
-           Put your custom analytical code here. For more details, check:
-           http://packages.python.org/django-analytical/
-      -->
-    {% analytical_head_bottom %}
+    {% block links %}{% endblock %}{% analytical_head_bottom %}
   </head>
     
   <body>
+    {% analytical_body_top %}
     <div id="banner_top" class="gradient_orange" style="float:left;">
       <div id="inner">
         <div class="inner_box" style="width:280px;float:left;">
@@ -117,7 +111,7 @@
       
       
     </script>
-
+    {% analytical_body_bottom %}
   </body>
 
 </html>

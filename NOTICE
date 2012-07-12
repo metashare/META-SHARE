@@ -736,6 +736,36 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
+===========================
+International Flags Package  (http://openiconlibrary.sourceforge.net/)
+===========================
+
+Open Icon Library.
+
+Date:		
+	16 Dec 2009
+
+License:	
+	Public Domain
+
+Original Source of svg file:	
+	Wikimedia Commons - Category:SVG sovereign state flags
+	http://commons.wikimedia.org/wiki/Category:SVG_sovereign_state_flags
+
+Description: 
+	This package include flags for most independent and dependent 
+nations.  This includes svg and png images of many sizes and shapes.  
+The original directory includes images with the shape of the actual 
+flags.  Standard and iso directories include square images with the 
+flags.  The flags still have the actual shape with the excess space 
+filled with transparency.  Original and standard directories have 
+files named with the nations names.  The iso directory has files 
+named with the ISO-3166 codes.
+
+ISO-3166 Codes: 
+	http://www.iso.org/iso/english_country_names_and_code_elements
+
+
 =================
 Django Analytical (http://packages.python.org/django-analytical/)
 =================
@@ -761,3 +791,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN 
 THE SOFTWARE.
+
