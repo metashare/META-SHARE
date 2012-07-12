@@ -29,8 +29,6 @@ from metashare.storage.models import MASTER
 from metashare.repository.model_utils import get_root_resources
 from metashare.repository.supermodel import REQUIRED, RECOMMENDED, OPTIONAL
 
-from metashare.repository.models import resourceInfoType_model
-
 
 # Setup logging support.
 logging.basicConfig(level=settings.LOG_LEVEL)
@@ -155,16 +153,6 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                                for res_group in res.editor_groups.all()):
                     return True
             return False
-        # authorize an owner to edit specific resources
-        if obj:
-            if obj in resourceInfoType_model.objects.filter(owners__username=request.user.username):
-                return True
-            
-        # authorize an owner to access his/her my "resources page"
-        if 'myresources' in request.POST:
-            # Check if the use is owner of resources
-            if resourceInfoType_model.objects.filter(owners__username=request.user.username):
-                return True
         return result
 
 
