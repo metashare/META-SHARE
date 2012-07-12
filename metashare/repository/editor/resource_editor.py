@@ -222,83 +222,90 @@ def change_resource_status(resource, status, precondition_status=None):
 
 def has_publish_permission(request, queryset):
     """
-    Returns `True` if the given request has permission to change the given
-    Django model instance.
+    Returns `True` if the given request has permission to change the publication
+    status of all given language resources, `False` otherwise.
     """
-    if request.user.is_superuser:
-        return True
-        # we only allow a user to ingest/publish/unpublish a resource if either:
-        # (1) she is owner of the resource 
-        # (2) she is a manager of one of the resource's `EditorGroup`s
-    for obj in queryset:
-        res_groups = obj.editor_groups.all()
-        can_publish = (request.user in obj.owners.all()) \
-            or any(res_group.name == mgr_group.managed_group.name
-                   for res_group in res_groups
-                   for mgr_group in ManagerGroup.objects.filter(name__in=
-                        request.user.groups.values_list('name', flat=True)))
-        if can_publish:
-            return True
-    return False
+    if not request.user.is_superuser:
+        for obj in queryset:
+            res_groups = obj.editor_groups.all()
+            # we only allow a user to ingest/publish/unpublish a resource if she
+            # is a manager of one of the resource's `EditorGroup`s
+            if not any(res_group.name == mgr_group.managed_group.name
+                       for res_group in res_groups
+                       for mgr_group in ManagerGroup.objects.filter(name__in=
+                           request.user.groups.values_list('name', flat=True))):
+                return False
+    return True
+
 
 def publish_resources(modeladmin, request, queryset):
-
     if has_publish_permission(request, queryset):
         successful = 0
         for obj in queryset:
-            success = change_resource_status(obj, status=PUBLISHED, precondition_status=INGESTED)
-            if success:
+            if change_resource_status(obj, status=PUBLISHED,
+                                      precondition_status=INGESTED):
                 successful += 1
-            if hasattr(obj, 'storage_object') and obj.storage_object is not None:
                 saveLRStats(obj, PUBLISH_STAT, request)
         if successful > 0:
-            messages.info(request, (ungettext('Successfully published %(ingested)s ingested resource.', \
-                                                 'Successfully published %(ingested)s ingested resources.', successful) % \
-                                       {'ingested': successful}))
+            messages.info(request, ungettext(
+                    'Successfully published %(ingested)s ingested resource.',
+                    'Successfully published %(ingested)s ingested resources.',
+                    successful) % {'ingested': successful})
         else:
-            messages.error(request, 'Only ingested resources can be published.')
+            messages.error(request,
+                           _('Only ingested resources can be published.'))
     else:
-        messages.error(request, 'You do not have the rights to perform this action.')
-        
-publish_resources.short_description = "Publish selected ingested resources"
+        messages.error(request, _('You do not have the permission to perform ' \
+                                  'this action for all selected resources.'))
+
+publish_resources.short_description = _("Publish selected ingested resources")
+
 
 def unpublish_resources(modeladmin, request, queryset):
     if has_publish_permission(request, queryset):
         successful = 0
         for obj in queryset:
-            success = change_resource_status(obj, status=INGESTED, precondition_status=PUBLISHED)
-            if success:
+            if change_resource_status(obj, status=INGESTED,
+                                      precondition_status=PUBLISHED):
                 successful += 1
-            if hasattr(obj, 'storage_object') and obj.storage_object is not None:
                 saveLRStats(obj, INGEST_STAT, request)
         if successful > 0:
-            messages.info(request, (ungettext('Successfully unpublished %(published)s published resource.', \
-                                         'Successfully unpublished %(published)s published resources.', successful) % \
-                               {'published': successful}))    
+            messages.info(request, ungettext(
+                    'Successfully unpublished %s published resource.',
+                    'Successfully unpublished %s published resources.',
+                    successful) % (successful,))
         else:
-            messages.error(request, 'Only published resources can be unpublished.')
+            messages.error(request,
+                           _('Only published resources can be unpublished.'))
     else:
-        messages.error(request, 'You do not have the rights to perform this action.')
-        
-unpublish_resources.short_description = "Unpublish selected published resources"
+        messages.error(request, _('You do not have the permission to perform ' \
+                                  'this action for all selected resources.'))
+
+unpublish_resources.short_description = \
+    _("Unpublish selected published resources")
+
 
 def ingest_resources(modeladmin, request, queryset):
     if has_publish_permission(request, queryset):
         successful = 0
         for obj in queryset:
-            success = change_resource_status(obj, status=INGESTED, precondition_status=INTERNAL)
-            if success:
+            if change_resource_status(obj, status=INGESTED,
+                                      precondition_status=INTERNAL):
                 successful += 1
         if successful > 0:
-            messages.info(request, (ungettext('Successfully ingested %(internal)s internal resource.', \
-                                         'Successfully ingested %(internal)s internal resources.', successful) % \
-                               {'internal': successful}))    
+            messages.info(request, ungettext(
+                    'Successfully ingested %(internal)s internal resource.',
+                    'Successfully ingested %(internal)s internal resources.',
+                    successful) % {'internal': successful})
         else:
-            messages.error(request, 'Only internal resources can be ingested.')
+            messages.error(request,
+                           _('Only internal resources can be ingested.'))
     else:
-        messages.error(request, 'You do not have the rights to perform this action.')
-        
-ingest_resources.short_description = "Ingest selected internal resources"
+        messages.error(request, _('You do not have the permission to perform ' \
+                                  'this action for all selected resources.'))
+
+ingest_resources.short_description = _("Ingest selected internal resources")
+
 
 def export_xml_resources(modeladmin, request, queryset):
     from StringIO import StringIO
@@ -332,7 +339,7 @@ def export_xml_resources(modeladmin, request, queryset):
         response.write(in_memory.read())  
 
         return response
-export_xml_resources.short_description = "Export selected resource descriptions to XML"
+export_xml_resources.short_description = _("Export selected resource descriptions to XML")
 
 
 class MetadataForm(forms.ModelForm):
@@ -400,45 +407,47 @@ class ResourceModelAdmin(SchemaModelAdmin):
             if choices is not None:
                 self.choices = choices
                 self.fields['multifield'] = forms.ModelMultipleChoiceField(self.choices)        
-                    
-                    
+
+
     @csrf_protect_m    
     def delete(self, request, queryset):
-        form = None
-        if self.has_delete_permission(request):
-            can_be_deleted = []
-            cannot_be_deleted = []
-            for resource in queryset:
-                if self.has_delete_permission(request, resource):
-                    can_be_deleted.append(resource)
-                else:
-                    cannot_be_deleted.append(resource)                        
-            if 'cancel' in request.POST:
-                self.message_user(request, _('Cancelled deleting selected resources.'))
-                return
-            elif 'delete' in request.POST:
-                form = self.ConfirmDeleteForm(request.POST)
-                if form.is_valid():
-                    for resource in can_be_deleted:
-                        resource.delete_deep()
-                    count = len(can_be_deleted)                        
-                    msg = ungettext('Successfully deleted %(count)d resource.', 'Successfully deleted %(count)d resources.', count) % {
-                        'count': len(can_be_deleted),
-                    }
-                    self.message_user(request, msg)
-                    return HttpResponseRedirect(request.get_full_path())
-            if not form:
-                form = self.ConfirmDeleteForm(initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
-            return render_to_response('admin/repository/resourceinfotype_model/confirm_delete.html', \
-                                          {'can_be_deleted': can_be_deleted, 'cannot_be_deleted': cannot_be_deleted, \
-                                           'form': form, 'path':request.get_full_path()}, \
-                                          context_instance=RequestContext(request))
-        messages.error(request, _('You do not have the rights to perform this action.'))
-        
+        if not self.has_delete_permission(request):
+            raise PermissionDenied
+        if 'cancel' in request.POST:
+            self.message_user(request,
+                              _('Cancelled deleting the selected resources.'))
+            return
+
+        can_be_deleted = []
+        cannot_be_deleted = []
+        for resource in queryset:
+            if self.has_delete_permission(request, resource):
+                can_be_deleted.append(resource)
+            else:
+                cannot_be_deleted.append(resource)   
+        if 'delete' in request.POST:
+            form = self.ConfirmDeleteForm(request.POST)
+            if form.is_valid():
+                for resource in can_be_deleted:
+                    resource.delete_deep()
+                count = len(can_be_deleted)
+                messages.success(request,
+                    ungettext('Successfully deleted %d resource.',
+                              'Successfully deleted %d resources.', count)
+                        % (count,))
+                return HttpResponseRedirect(request.get_full_path())
+        else:
+            form = self.ConfirmDeleteForm(initial={admin.ACTION_CHECKBOX_NAME:
+                            request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
+        return render_to_response(
+            'admin/repository/resourceinfotype_model/confirm_delete.html',
+            {'can_be_deleted': can_be_deleted, 'cannot_be_deleted':
+             cannot_be_deleted, 'form': form, 'path':request.get_full_path()},
+            context_instance=RequestContext(request))
+
     delete.short_description = _("Delete selected resources")
-    
-    
-    
+
+
     @csrf_protect_m    
     def add_group(self, request, queryset):
         form = None
@@ -899,6 +908,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         action.
         """
         result = super(ResourceModelAdmin, self).get_actions(request)
+        # always remove the standard Django bulk delete action
         del result['delete_selected']
         if not request.user.is_superuser:
             del result['remove_group']
