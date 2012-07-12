@@ -449,7 +449,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
              cannot_be_deleted, 'form': form, 'path':request.get_full_path()},
             context_instance=RequestContext(request))
 
-    delete.short_description = _("Delete selected resources")
+    delete.short_description = _("Mark selected resources as deleted")
 
 
     @csrf_protect_m    
