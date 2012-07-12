@@ -407,7 +407,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
     @csrf_protect_m    
     def add_owner(self, request, queryset):           
         form = None
-        if request.user.is_superuser:
+        if 'myresources' in request.POST or request.user.is_superuser:
             if 'cancel' in request.POST:
                 self.message_user(request, _('Cancelled adding owners.'))
                 return
@@ -503,6 +503,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         request.POST = _post
         _extra_context = extra_context or {}
         _extra_context.update({'myresources':True})
+
         return self.changelist_view(request, _extra_context)
 
     def get_changelist(self, request, **kwargs):
