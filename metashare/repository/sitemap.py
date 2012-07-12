@@ -18,6 +18,3 @@ class RepositorySitemap(Sitemap):
         if url.startswith("http://"):
 			url = url[7:]
         return url
-    
-    def lastmod(self, obj):
-		return obj.pub_date
