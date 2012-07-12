@@ -19,7 +19,7 @@ class StatusWorkflowTest(TestCase):
     factory = RequestFactory()
     
     @classmethod
-    def setUpClass(cls):
+    def setUp(cls):
         """
         Import a resource to test the workflow changes for
         """
@@ -39,7 +39,7 @@ class StatusWorkflowTest(TestCase):
         StatusWorkflowTest.resource_id = _result[0].id
     
     @classmethod
-    def tearDownClass(cls):
+    def tearDown(cls):
         """
         Clean up the test
         """
@@ -56,6 +56,7 @@ class StatusWorkflowTest(TestCase):
             user = User.objects.get(username='manageruser')
             setattr(request, 'user', user)
         resource = resourceInfoType_model.objects.get(pk=self.resource_id)
+        resource.editor_groups.add(StatusWorkflowTest.test_editor_group)
         resource.storage_object.publication_status = INGESTED
         resource.storage_object.save()
         publish_resources(None, request, (resource,))
@@ -69,6 +70,7 @@ class StatusWorkflowTest(TestCase):
             user = User.objects.get(username='manageruser')
             setattr(request, 'user', user)
         resource = resourceInfoType_model.objects.get(pk=self.resource_id)
+        resource.editor_groups.add(StatusWorkflowTest.test_editor_group)
         resource.storage_object.publication_status = INTERNAL
         resource.storage_object.save()
         publish_resources(None, request, (resource,))
@@ -82,6 +84,7 @@ class StatusWorkflowTest(TestCase):
             user = User.objects.get(username='manageruser')
             setattr(request, 'user', user)
         resource = resourceInfoType_model.objects.get(pk=self.resource_id)
+        resource.editor_groups.add(StatusWorkflowTest.test_editor_group)
         resource.storage_object.publication_status = INTERNAL
         resource.storage_object.save()
         ingest_resources(None, request, (resource,))
@@ -95,11 +98,12 @@ class StatusWorkflowTest(TestCase):
             user = User.objects.get(username='manageruser')
             setattr(request, 'user', user)
         resource = resourceInfoType_model.objects.get(pk=self.resource_id)
+        resource.editor_groups.add(StatusWorkflowTest.test_editor_group)
         resource.storage_object.publication_status = PUBLISHED
         resource.storage_object.save()
         ingest_resources(None, request, (resource,))
         self.assertEquals('published', resource.publication_status())
-        
+
     def test_can_unpublish_published(self):
         client = Client()
         client.login(username='manageruser', password='secret')        
@@ -108,6 +112,7 @@ class StatusWorkflowTest(TestCase):
             user = User.objects.get(username='manageruser')
             setattr(request, 'user', user)
         resource = resourceInfoType_model.objects.get(pk=self.resource_id)
+        resource.editor_groups.add(StatusWorkflowTest.test_editor_group)
         resource.storage_object.publication_status = PUBLISHED
         resource.storage_object.save()
         unpublish_resources(None, request, (resource,))
@@ -121,8 +126,8 @@ class StatusWorkflowTest(TestCase):
             user = User.objects.get(username='manageruser')
             setattr(request, 'user', user)
         resource = resourceInfoType_model.objects.get(pk=self.resource_id)
+        resource.editor_groups.add(StatusWorkflowTest.test_editor_group)
         resource.storage_object.publication_status = INTERNAL
         resource.storage_object.save()
         unpublish_resources(None, request, (resource,))
-        self.assertEquals('internal', resource.publication_status())
-        
+        self.assertEquals('internal', resource.publication_status()) 
