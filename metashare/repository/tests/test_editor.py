@@ -254,7 +254,7 @@ class EditorTest(TestCase):
             msg_prefix='an editor user must not see the "publish" action')
         self.assertNotContains(response, 'Unpublish selected published',
             msg_prefix='an editor user must not see the "unpublish" action')
-        self.assertNotContains(response, 'Delete selected Resources',
+        self.assertNotContains(response, 'Delete selected resources',
             msg_prefix='an editor user must not see the "delete" action')
         self.assertNotContains(response, 'Add editor groups',
             msg_prefix='an editor user must not see the "add groups" action')
@@ -279,7 +279,7 @@ class EditorTest(TestCase):
             msg_prefix='a manager user should see the "publish" action')
         self.assertContains(response, 'Unpublish selected published resources',
             msg_prefix='a manager user should see the "unpublish" action')
-        self.assertContains(response, 'Delete selected Resources',
+        self.assertContains(response, 'Delete selected resources',
             msg_prefix='a manager user should see the "delete" action')
         self.assertNotContains(response, 'Add editor groups',
             msg_prefix='a manager user must not see the "add groups" action')
@@ -302,7 +302,7 @@ class EditorTest(TestCase):
             msg_prefix='a superuser should see the "publish" action')
         self.assertContains(response, 'Unpublish selected published resources',
             msg_prefix='a superuser should see the "unpublish" action')
-        self.assertContains(response, 'Delete selected Resources',
+        self.assertContains(response, 'Delete selected resources',
             msg_prefix='a superuser should see the "delete" action')
         self.assertContains(response, 'Add editor groups',
             msg_prefix='a superuser should see the "add groups" action')
@@ -1172,8 +1172,8 @@ class DestructiveTests(TestCase):
         response = client.get('{}repository/personinfotype_model/1/'
                               .format(ADMINROOT))
         self.assertContains(response, "You cannot edit the metadata for the entity")
-        self.assertNotContains(response, "You will now be redirected")
-    
+        self.assertNotContains(response, "You will now be redirected")        
+
 
 class EditorGroupRegistrationRequestTests(TestCase):
     """
