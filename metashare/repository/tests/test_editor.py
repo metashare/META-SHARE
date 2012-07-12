@@ -794,14 +794,14 @@ class DestructiveTests(TestCase):
         client = _client_with_user_logged_in(self.superuser_login)
         response = client.post('{}accounts/editorgroup/'.format(ADMINROOT),
             {"action": "add_user_to_editor_group",
-             "_selected_action": self.test_editor_group.id})
+             admin.ACTION_CHECKBOX_NAME: self.test_editor_group.id})
         self.assertContains(response,
             "Add a user to the following editor group:", msg_prefix=
                 "expected to be on the action page for adding an editor group")
         response = client.post('{}accounts/editorgroup/'.format(ADMINROOT),
             {"users": test_user.id, "add_user_profile_to_editor_group": "Add",
-             "action": "add_user_to_editor_group",
-             "_selected_action": self.test_editor_group.id}, follow=True)
+             "action": "add_user_to_editor_group", admin.ACTION_CHECKBOX_NAME:
+             self.test_editor_group.id}, follow=True)
         self.assertContains(response, "normaluser", msg_prefix=
                 "the user is expected to be member of the editor group now")
         self.assertTrue(test_user.groups.filter(
@@ -817,14 +817,15 @@ class DestructiveTests(TestCase):
         client = _client_with_user_logged_in(self.superuser_login)
         response = client.post('{}accounts/editorgroup/'.format(ADMINROOT),
             {"action": "remove_user_from_editor_group",
-             "_selected_action": self.test_editor_group.id})
+             admin.ACTION_CHECKBOX_NAME: self.test_editor_group.id})
         self.assertContains(response,
             "Remove a user from the following editor group:", msg_prefix=
                 "expected to be on the page for removing an editor group")
         response = client.post('{}accounts/editorgroup/'.format(ADMINROOT),
             {"users": test_user.id, "remove_user_profile_from_editor_group":
                 "Remove", "action": "remove_user_from_editor_group",
-             "_selected_action": self.test_editor_group.id}, follow=True)
+             admin.ACTION_CHECKBOX_NAME: self.test_editor_group.id},
+            follow=True)
         self.assertNotContains(response, test_user.username, msg_prefix=
             "the user is expected to not be member of the editor group anymore")
         self.assertTrue(test_user.groups.filter(
@@ -863,14 +864,14 @@ class DestructiveTests(TestCase):
         client = _client_with_user_logged_in(self.superuser_login)
         response = client.post('{}accounts/managergroup/'.format(ADMINROOT),
             {"action": "add_user_to_manager_group",
-             "_selected_action": self.test_manager_group.id})
+             admin.ACTION_CHECKBOX_NAME: self.test_manager_group.id})
         self.assertContains(response,
             "Add a user to the following manager group:", msg_prefix=
                 "expected to be on the action page for adding a manager group")
         response = client.post('{}accounts/managergroup/'.format(ADMINROOT),
             {"users": test_user.id, "add_user_profile_to_manager_group": "Add",
-             "action": "add_user_to_manager_group",
-             "_selected_action": self.test_manager_group.id}, follow=True)
+             "action": "add_user_to_manager_group", admin.ACTION_CHECKBOX_NAME:
+             self.test_manager_group.id}, follow=True)
         self.assertContains(response, "normaluser", msg_prefix=
                 "the user is expected to be member of the manager group now")
         self.assertTrue(test_user.groups.filter(
@@ -886,14 +887,15 @@ class DestructiveTests(TestCase):
         client = _client_with_user_logged_in(self.superuser_login)
         response = client.post('{}accounts/managergroup/'.format(ADMINROOT),
             {"action": "remove_user_from_manager_group",
-             "_selected_action": self.test_manager_group.id})
+             admin.ACTION_CHECKBOX_NAME: self.test_manager_group.id})
         self.assertContains(response,
             "Remove a user from the following manager group:", msg_prefix=
                 "expected to be on the page for removing a manager group")
         response = client.post('{}accounts/managergroup/'.format(ADMINROOT),
             {"users": test_user.id, "remove_user_profile_from_manager_group":
                 "Remove", "action": "remove_user_from_manager_group",
-             "_selected_action": self.test_manager_group.id}, follow=True)
+             admin.ACTION_CHECKBOX_NAME: self.test_manager_group.id},
+            follow=True)
         self.assertNotContains(response, test_user.username, msg_prefix=
             "the user is expected to not be a manager group member anymore")
         self.assertTrue(test_user.groups.filter(
