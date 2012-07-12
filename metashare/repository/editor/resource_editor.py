@@ -218,10 +218,32 @@ def change_resource_status(resource, status, precondition_status=None):
         resource.storage_object.update_storage()
         return True
     return False
-    
+
+
+def has_publish_permission(request, queryset):
+    """
+    Returns `True` if the given request has permission to change the given
+    Django model instance.
+    """
+    if request.user.is_superuser:
+        return True
+        # we only allow a user to ingest/publish/unpublish a resource if either:
+        # (1) she is owner of the resource 
+        # (2) she is a manager of one of the resource's `EditorGroup`s
+    for obj in queryset:
+        res_groups = obj.editor_groups.all()
+        can_publish = (request.user in obj.owners.all()) \
+            or any(res_group.name == mgr_group.managed_group.name
+                   for res_group in res_groups
+                   for mgr_group in ManagerGroup.objects.filter(name__in=
+                        request.user.groups.values_list('name', flat=True)))
+        if can_publish:
+            return True
+    return False
+
 def publish_resources(modeladmin, request, queryset):
 
-    if ResourceModelAdmin.has_publish_permission(request, queryset):
+    if has_publish_permission(request, queryset):
         successful = 0
         for obj in queryset:
             success = change_resource_status(obj, status=PUBLISHED, precondition_status=INGESTED)
@@ -241,7 +263,7 @@ def publish_resources(modeladmin, request, queryset):
 publish_resources.short_description = "Publish selected ingested resources"
 
 def unpublish_resources(modeladmin, request, queryset):
-    if modeladmin.has_publish_permission(request, queryset):
+    if has_publish_permission(request, queryset):
         successful = 0
         for obj in queryset:
             success = change_resource_status(obj, status=INGESTED, precondition_status=PUBLISHED)
@@ -261,7 +283,7 @@ def unpublish_resources(modeladmin, request, queryset):
 unpublish_resources.short_description = "Unpublish selected published resources"
 
 def ingest_resources(modeladmin, request, queryset):
-    if modeladmin.has_publish_permission(request, queryset):
+    if has_publish_permission(request, queryset):
         successful = 0
         for obj in queryset:
             success = change_resource_status(obj, status=INGESTED, precondition_status=INTERNAL)
@@ -845,26 +867,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                            request.user.groups.values_list('name', flat=True)))
         return result
     
-    def has_publish_permission(self, request, queryset):
-        """
-        Returns `True` if the given request has permission to change the given
-        Django model instance.
-        """
-        if request.user.is_superuser:
-            return True
-            # we only allow a user to ingest/publish/unpublish a resource if either:
-            # (1) she is owner of the resource 
-            # (2) she is a manager of one of the resource's `EditorGroup`s
-        for obj in queryset:
-            res_groups = obj.editor_groups.all()
-            can_publish = (request.user in obj.owners.all()) \
-                or any(res_group.name == mgr_group.managed_group.name
-                       for res_group in res_groups
-                       for mgr_group in ManagerGroup.objects.filter(name__in=
-                            request.user.groups.values_list('name', flat=True)))
-            if can_publish:
-                return True
-        return False
+
 
     def has_delete_permission(self, request, obj=None):
         """
