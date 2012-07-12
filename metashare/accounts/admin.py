@@ -325,6 +325,7 @@ class EditorGroupApplicationAdmin(admin.ModelAdmin):
         from django.contrib.admin import helpers
         from django.db import router
         from django.utils.encoding import force_unicode
+        from django.core.exceptions import PermissionDenied
 
         opts = self.model._meta
         app_label = opts.app_label
@@ -345,14 +346,14 @@ class EditorGroupApplicationAdmin(admin.ModelAdmin):
         if request.POST.get('post'):
             if perms_needed:
                 raise PermissionDenied
-            n = queryset.count()
-            if n:
+            n_count = queryset.count()
+            if n_count:
                 for obj in queryset:
                     obj_display = force_unicode(obj)
                     self.log_deletion(request, obj, obj_display)
                 queryset.delete()
                 self.message_user(request, _("Successfully turned down %(count)d %(items)s.") % {
-                    "count": n, "items": model_ngettext(self.opts, n)
+                    "count": n_count, "items": model_ngettext(self.opts, n_count)
                 })
             # Return None to display the change list page again.
             return None
