@@ -1,8 +1,6 @@
-from django.contrib.sitemaps import Sitemap, FlatPageSitemap
-from models import *
-import datetime
+from django.contrib.sitemaps import Sitemap
+from repository.models import resourceInfoType_model
 from settings import FULL_DJANGO_URL
-from django.core.urlresolvers import *
 
 class RepositorySitemap(Sitemap):
     changefreq = "monthly"
@@ -16,5 +14,5 @@ class RepositorySitemap(Sitemap):
         # Specific to sitemap module. It insists on prepending a
         # "http://" before the url.
         if url.startswith("http://"):
-			url = url[7:]
+            url = url[7:]
         return url
