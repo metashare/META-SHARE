@@ -19,7 +19,7 @@ class StatusWorkflowTest(TestCase):
     factory = RequestFactory()
     
     @classmethod
-    def setUp(cls):
+    def setUpClass(cls):
         """
         Import a resource to test the workflow changes for
         """
@@ -39,7 +39,7 @@ class StatusWorkflowTest(TestCase):
         StatusWorkflowTest.resource_id = _result[0].id
     
     @classmethod
-    def tearDown(cls):
+    def tearDownClass(cls):
         """
         Clean up the test
         """
