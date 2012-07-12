@@ -8,7 +8,7 @@ from django.test import TestCase
 from django.test.client import Client
 
 from metashare import test_utils
-from metashare.accounts.models import EditorGroup, ManagerGroup, EditorRegistrationRequest
+from metashare.accounts.models import EditorGroup, ManagerGroup, EditorGroupApplication
 from metashare.repository import models
 from metashare.repository.models import languageDescriptionInfoType_model, \
     lexicalConceptualResourceInfoType_model, personInfoType_model
@@ -1175,9 +1175,9 @@ class DestructiveTests(TestCase):
         self.assertNotContains(response, "You will now be redirected")
     
 
-class EditorGroupRegistrationRequestTests(TestCase):
+class EditorGroupApplicationTests(TestCase):
     """
-    Test case for the user registration to one or several Editors of various model instances.
+    Test case for the user application to one or several Editors of various model instances.
     """
 
     def setUp(self):
@@ -1217,62 +1217,62 @@ class EditorGroupRegistrationRequestTests(TestCase):
         User.objects.all().delete()
         EditorGroup.objects.all().delete()
         ManagerGroup.objects.all().delete()
-        EditorRegistrationRequest.objects.all().delete()
+        EditorGroupApplication.objects.all().delete()
         test_utils.set_index_active(True)
 
-    def test_request_page_with_one_editor_group(self):
+    def test_application_page_with_one_editor_group(self):
         """
         Verifies that a user can apply when there is at least one editor group.
         """
         client = Client()
         client.login(username='normaluser', password='secret')
-        response = client.get('/{0}accounts/editor_registration_request/'.format(DJANGO_BASE))
+        response = client.get('/{0}accounts/editor_group_application/'.format(DJANGO_BASE))
         self.assertContains(response, 'Apply for editor group membership', msg_prefix=
           'expected the system to allow the user to apply to an editor group')
 
-    def test_apply_when_not_member_of_any_group(self):
+    def test_application_when_not_member_of_any_group(self):
         """
         Verifies that a user can apply to a first group
         """
         client = Client()
         client.login(username='normaluser', password='secret')
-        current_requests = EditorRegistrationRequest.objects.count()
-        response = client.post('/{0}accounts/editor_registration_request/'.format(DJANGO_BASE), \
+        current_requests = EditorGroupApplication.objects.count()
+        response = client.post('/{0}accounts/editor_group_application/'.format(DJANGO_BASE), \
           {'editor_group': self.test_editor_group.pk}, follow=True)
         self.assertContains(response, 'You have successfully applied for editor group "{0}"'.format(
           self.test_editor_group.name), msg_prefix='expected the system to accept a new request.')
-        self.assertEquals(EditorRegistrationRequest.objects.count(), current_requests + 1)
+        self.assertEquals(EditorGroupApplication.objects.count(), current_requests + 1)
 
-    def test_apply_when_there_is_a_pending_application(self):
+    def test_application_when_there_is_a_pending_application(self):
         """
         Verifies that a user can apply for new group when another application is
         still pending.
         """
         client = Client()
         client.login(username='normaluser', password='secret')
-        current_requests = EditorRegistrationRequest.objects.count()
-        response = client.post('/{0}accounts/editor_registration_request/'.format(DJANGO_BASE), \
+        current_requests = EditorGroupApplication.objects.count()
+        response = client.post('/{0}accounts/editor_group_application/'.format(DJANGO_BASE), \
           {'editor_group': self.test_editor_group.pk}, follow=True)
         self.assertContains(response, 'You have successfully applied for editor group "{0}"'.format(
           self.test_editor_group.name), msg_prefix='expected the system to accept a new request.')
-        response = client.post('/{0}accounts/editor_registration_request/'.format(DJANGO_BASE), \
+        response = client.post('/{0}accounts/editor_group_application/'.format(DJANGO_BASE), \
           {'editor_group': self.test_editor_group2.pk}, follow=True)
         self.assertContains(response, 'You have successfully applied for editor group "{0}"'.format(
           self.test_editor_group2.name), msg_prefix='expected the system to accept a new request.')
-        self.assertEquals(EditorRegistrationRequest.objects.count(), current_requests + 2)
+        self.assertEquals(EditorGroupApplication.objects.count(), current_requests + 2)
 
-    def test_notification_email_when_apply(self):
+    def test_notification_email(self):
         """
         Verifies that an email is sent when the user apply to a group
         """
         client = Client()
         client.login(username='normaluser', password='secret')
-        current_requests = EditorRegistrationRequest.objects.count()
-        response = client.post('/{0}accounts/editor_registration_request/'.format(DJANGO_BASE), \
+        current_requests = EditorGroupApplication.objects.count()
+        response = client.post('/{0}accounts/editor_group_application/'.format(DJANGO_BASE), \
           {'editor_group': self.test_editor_group.pk}, follow=True)
         self.assertNotContains(response, 'There was an error sending out the request email', msg_prefix=
           'expected the system to be able to send an email.')
-        self.assertEquals(EditorRegistrationRequest.objects.count(), current_requests + 1)
+        self.assertEquals(EditorGroupApplication.objects.count(), current_requests + 1)
 
     def test_cannot_apply_a_group_of_which_the_user_is_member(self):
         """
@@ -1280,9 +1280,9 @@ class EditorGroupRegistrationRequestTests(TestCase):
         """
         client = Client()
         client.login(username='editoruser', password='secret')
-        response = client.get('/{0}accounts/editor_registration_request/'.format(DJANGO_BASE), follow=True)
+        response = client.get('/{0}accounts/editor_group_application/'.format(DJANGO_BASE), follow=True)
         self.assertNotContains(response, '{}</option>'.format(self.test_editor_group),
-          msg_prefix='expected the system not to propose the registration to a group the user is already a member.')
+          msg_prefix='expected the system not to propose the application to a group the user is already a member.')
 
     def test_cannot_apply_a_group_already_applied(self):
         """
@@ -1290,13 +1290,13 @@ class EditorGroupRegistrationRequestTests(TestCase):
         """
         client = Client()
         client.login(username='normaluser', password='secret')
-        response = client.post('/{0}accounts/editor_registration_request/'.format(DJANGO_BASE), \
+        response = client.post('/{0}accounts/editor_group_application/'.format(DJANGO_BASE), \
           {'editor_group': self.test_editor_group.pk}, follow=True)
         self.assertContains(response, 'You have successfully applied for editor group "{0}"'.format(
           self.test_editor_group.name), msg_prefix='expected the system to accept a new request.')
-        response = client.get('/{0}accounts/editor_registration_request/'.format(DJANGO_BASE), follow=True)
+        response = client.get('/{0}accounts/editor_group_application/'.format(DJANGO_BASE), follow=True)
         self.assertNotContains(response, '{}</option>'.format(self.test_editor_group),
-          msg_prefix='expected the system not to propose the registration to a group \
+          msg_prefix='expected the system not to propose the application to a group \
           the user already applied for.')
         
     def test_cannot_apply_a_group_without_manager(self):
@@ -1305,9 +1305,9 @@ class EditorGroupRegistrationRequestTests(TestCase):
         """
         client = Client()
         client.login(username='normaluser', password='secret')
-        response = client.get('/{0}accounts/editor_registration_request/'.format(DJANGO_BASE), follow=True)
+        response = client.get('/{0}accounts/editor_group_application/'.format(DJANGO_BASE), follow=True)
         self.assertNotContains(response, '{}</option>'.format(self.test_editor_group3),
-          msg_prefix='expected the system not to propose the registration to a group \
+          msg_prefix='expected the system not to propose the application to a group \
           without a manager.')
 
     def test_cannot_access_the_form_when_no_group_available(self):
@@ -1317,7 +1317,7 @@ class EditorGroupRegistrationRequestTests(TestCase):
         client = Client()
         client.login(username='normaluser', password='secret')
         EditorGroup.objects.all().delete()
-        response = client.get('/{0}accounts/editor_registration_request/'.format(DJANGO_BASE), follow=True)
+        response = client.get('/{0}accounts/editor_group_application/'.format(DJANGO_BASE), follow=True)
         self.assertContains(response, 'There are no editor groups in the database, yet, for which you could apply.',
           msg_prefix='expected the system to prevent access to the form when no editor group is available.')
 
@@ -1327,10 +1327,10 @@ class EditorGroupRegistrationRequestTests(TestCase):
         """
         client = Client()
         client.login(username='superuser', password='secret')
-        new_reg = EditorRegistrationRequest(user=User.objects.get(username='normaluser'),
+        new_reg = EditorGroupApplication(user=User.objects.get(username='normaluser'),
             editor_group=self.test_editor_group)
         new_reg.save()
-        response = client.get('{}accounts/editorregistrationrequest/{}/'.format(ADMINROOT, new_reg.pk))
+        response = client.get('{}accounts/editorgroupapplication/{}/'.format(ADMINROOT, new_reg.pk))
         self.assertContains(response, 'normaluser</option>', msg_prefix=
             'expected a superuser to be able to modify an application.')
 
@@ -1339,15 +1339,15 @@ class EditorGroupRegistrationRequestTests(TestCase):
         Verifies that a manager cannot change an editor group application
         request.
         
-        The manager can view the applicatino details anyway.
+        The manager can view the application details anyway.
         """
         client = Client()
         client.login(username='manageruser', password='secret')
-        new_reg = EditorRegistrationRequest(
+        new_reg = EditorGroupApplication(
             user=User.objects.get(username='normaluser'),
             editor_group=self.test_editor_group)
         new_reg.save()
-        response = client.get('{}accounts/editorregistrationrequest/{}/'
+        response = client.get('{}accounts/editorgroupapplication/{}/'
                               .format(ADMINROOT, new_reg.pk))
         self.assertContains(response, 'normaluser', msg_prefix='expected a '
                 'manager to be able to see the details of an application.')
