@@ -142,6 +142,12 @@ class FilterTest(SeleniumTestCase):
           "//div[@id='searchFilters']/div[16]/div[1]").text)
         click_and_wait(driver.find_element_by_link_text("MIME Type"))
         
+        # check Language Variety filter        
+        click_and_wait(driver.find_element_by_link_text("Language Variety"))
+        self.assertEqual("Castillian (6)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[18]/div[1]").text)
+        click_and_wait(driver.find_element_by_link_text("Language Variety"))
+        
         if True:
             # test sorting:
             # default sorting is by resource name, ascending
