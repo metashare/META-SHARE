@@ -1,6 +1,0 @@
-Dear {{ shortname }},
-
-The registration request to the editor group "{{ editor_group }}"
-has been rejected by a manager of the group.
-
-Best regards,

@@ -1,9 +1,0 @@
-Dear editor group manager,
-
-We have received a registration request to your editor group "{{editor_group}}"
-from the META-SHARE user account "{{shortname}}".
-
-You can confirm that registration by going to the following page in the administration section:
-- {{confirmation_url}}
-
-Best regards
