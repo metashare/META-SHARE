@@ -63,7 +63,8 @@ sqs = SearchQuerySet() \
   .facet("imageTypeOfImageContentFilter") \
   .facet("tnTypeOfTnContentFilter") \
   .facet("tnGramBaseItemFilter") \
-  .facet("tnGramOrderFilter")
+  .facet("tnGramOrderFilter") \
+  .facet("languageVarietyFilter")
 
 urlpatterns = patterns('metashare.repository.views',
   (r'^browse/(?P<resource_name>[\w\-]*)/(?P<object_id>\w+)/$',
