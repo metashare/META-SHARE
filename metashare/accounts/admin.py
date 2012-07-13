@@ -15,7 +15,7 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 
 from metashare.accounts.models import RegistrationRequest, ResetRequest, \
-  UserProfile, EditorGroup, EditorRegistrationRequest, ManagerGroup
+  UserProfile, EditorGroup, EditorGroupApplication, ManagerGroup
 
 class RegistrationRequestAdmin(admin.ModelAdmin):
     """
@@ -209,21 +209,21 @@ class EditorGroupAdmin(admin.ModelAdmin):
     remove_user_from_editor_group.short_description = _("Remove users from selected editor groups")
 
 
-class EditorRegistrationRequestAdmin(admin.ModelAdmin):
+class EditorGroupApplicationAdmin(admin.ModelAdmin):
     """
-    Administration interface for user editor registration requests.
+    Administration interface for user editor group application.
     """
     list_display = ('user', 'editor_group', 'created')
-    actions = ('accept_selected', )
+    actions = ('accept_selected', 'delete_selected')
 
     def accept_selected(self, request, queryset):
         """
-        The action to accept editor registration requests.
+        The action to accept editor group applications.
         """
         if not request.user.is_superuser and \
                 not request.user.get_profile().has_manager_permission():
             messages.error(request,
-                _('You must be superuser or group manager to accept requests.'))
+                _('You must be superuser or group manager to accept applications.'))
             return HttpResponseRedirect(request.get_full_path())
         if queryset.count() == 0:
             return HttpResponseRedirect(request.get_full_path())
@@ -249,8 +249,8 @@ class EditorRegistrationRequestAdmin(admin.ModelAdmin):
                   'shortname': req.user.get_full_name }
                 try:
                     # Send out notification email to the user
-                    send_mail('Request accepted',
-                      render_to_string('accounts/notification_editor_request_accepted.email', data),
+                    send_mail('Application accepted',
+                      render_to_string('accounts/notification_editor_group_application_accepted.email', data),
                       'no-reply@meta-share.eu', (req.user.email,),
                       fail_silently=False)
                 except: #SMTPException:
@@ -265,8 +265,8 @@ class EditorRegistrationRequestAdmin(admin.ModelAdmin):
 
         if _total_groups != _accepted_groups:
             messages.warning(request, _('Successfully accepted %(accepted)d of '
-                '%(total)d requests. You have no permissions to accept the '
-                'remaining requests.') % {'accepted': _accepted_groups,
+                '%(total)d applications. You have no permissions to accept the '
+                'remaining applications.') % {'accepted': _accepted_groups,
                                           'total': _total_groups})
         else:
             messages.success(request,
@@ -274,7 +274,7 @@ class EditorRegistrationRequestAdmin(admin.ModelAdmin):
             return HttpResponseRedirect(request.get_full_path())
 
     accept_selected.short_description = \
-        _("Accept selected editor registration requests")
+        _("Accept selected editor group applications")
 
     def get_readonly_fields(self, request, obj=None):
         """
@@ -285,14 +285,14 @@ class EditorRegistrationRequestAdmin(admin.ModelAdmin):
         if not request.user.is_superuser:
             # for non-superusers no part of the group application is editable
             return [field.name for field
-                    in EditorRegistrationRequest._meta.fields]
-        return super(EditorRegistrationRequestAdmin, self) \
+                    in EditorGroupApplication._meta.fields]
+        return super(EditorGroupApplicationAdmin, self) \
             .get_readonly_fields(request, obj)
 
     # pylint: disable-msg=W0622
     def log_deletion(self, request, obj, object_repr):
         """
-        When a request is deleted by a manager, send an email to the user before
+        When an application is turned down by a manager, send an email to the user before
         logging the deletion
         """
         # Render notification email template with correct values.
@@ -300,22 +300,93 @@ class EditorRegistrationRequestAdmin(admin.ModelAdmin):
           'shortname': obj.user.get_full_name }
         try:
             # Send out notification email to the user
-            send_mail('Request rejected', render_to_string('accounts/'
-                            'notification_editor_request_deleted.email', data),
+            send_mail('Application turned down', render_to_string('accounts/'
+                            'notification_editor_group_application_turned_down.email', data),
                 'no-reply@meta-share.eu', (obj.user.email,),
                 fail_silently=False)
         except: #SMTPException:
             # If the email could not be sent successfully, tell the user
             # about it.
             messages.error(request, _("There was an error sending out an "
-                           "application rejection e-mail."))
+                           "e-mail about turning down the application."))
         else:
-            messages.success(request, _('You have successfully deleted "%s" ' \
+            messages.success(request, _('You have successfully turned down "%s" ' \
               'from the editor group "%s".') % (obj.user.get_full_name,
                                                 obj.editor_group,))
 
-        super(EditorRegistrationRequestAdmin, self).log_deletion(request, obj, object_repr)        
+        super(EditorGroupApplicationAdmin, self).log_deletion(request, obj, object_repr)        
 
+    def delete_selected(self, request, queryset):
+        """
+        The action to turn down editor group applications.
+        """
+        from django import template
+        from django.contrib.admin.util import get_deleted_objects, model_ngettext
+        from django.contrib.admin import helpers
+        from django.db import router
+        from django.utils.encoding import force_unicode
+        from django.core.exceptions import PermissionDenied
+
+        opts = self.model._meta
+        app_label = opts.app_label
+    
+        # Check that the user has delete permission for the actual model
+        if not self.has_delete_permission(request):
+            raise PermissionDenied
+    
+        using = router.db_for_write(self.model)
+    
+        # Populate deletable_objects, a data structure of all related objects that
+        # will also be deleted.
+        deletable_objects, perms_needed, protected = get_deleted_objects(
+            queryset, opts, request.user, self.admin_site, using)
+    
+        # The user has already confirmed the deletion.
+        # Do the deletion and return a None to display the change list view again.
+        if request.POST.get('post'):
+            if perms_needed:
+                raise PermissionDenied
+            n_count = queryset.count()
+            if n_count:
+                for obj in queryset:
+                    obj_display = force_unicode(obj)
+                    self.log_deletion(request, obj, obj_display)
+                queryset.delete()
+                self.message_user(request, _("Successfully turned down %(count)d %(items)s.") % {
+                    "count": n_count, "items": model_ngettext(self.opts, n_count)
+                })
+            # Return None to display the change list page again.
+            return None
+    
+        if len(queryset) == 1:
+            objects_name = force_unicode(opts.verbose_name)
+        else:
+            objects_name = force_unicode(opts.verbose_name_plural)
+    
+        if perms_needed or protected:
+            title = _("Cannot turn down %(name)s") % {"name": objects_name}
+        else:
+            title = _("Are you sure?")
+    
+        context = {
+            "title": title,
+            "objects_name": objects_name,
+            "deletable_objects": [deletable_objects],
+            'queryset': queryset,
+            "perms_lacking": perms_needed,
+            "protected": protected,
+            "opts": opts,
+            "root_path": self.admin_site.root_path,
+            "app_label": app_label,
+            'action_checkbox_name': helpers.ACTION_CHECKBOX_NAME,
+        }
+    
+        # Display the confirmation page
+        return render_to_response("accounts/delete_editor_group_application_selected_confirmation.html", \
+          context, context_instance=template.RequestContext(request))
+
+    delete_selected.short_description = \
+        _("Turn down selected editor group applications")
 
 class ManagerGroupAdmin(admin.ModelAdmin):
     """
@@ -374,7 +445,7 @@ class ManagerGroupAdmin(admin.ModelAdmin):
                 content_type__app_label=opts.app_label,
                 codename=opts.get_delete_permission())[0])
         # add editor group application request change/delete permission
-        opts = EditorRegistrationRequest._meta
+        opts = EditorGroupApplication._meta
         result.append(Permission.objects.filter(
                 content_type__app_label=opts.app_label,
                 codename=opts.get_change_permission())[0])
@@ -460,5 +531,5 @@ admin.site.register(RegistrationRequest, RegistrationRequestAdmin)
 admin.site.register(ResetRequest, ResetRequestAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(EditorGroup, EditorGroupAdmin)
-admin.site.register(EditorRegistrationRequest, EditorRegistrationRequestAdmin)
+admin.site.register(EditorGroupApplication, EditorGroupApplicationAdmin)
 admin.site.register(ManagerGroup, ManagerGroupAdmin)
