@@ -7,6 +7,7 @@ from django.conf.urls.defaults import patterns, include, handler404, \
   handler500
 from django.contrib import admin
 from django.contrib.sitemaps import Sitemap, FlatPageSitemap
+from django.views.generic.simple import direct_to_template
 
 from metashare.settings import MEDIA_ROOT, DEBUG, DJANGO_BASE
 from metashare.repository.editor import admin_site as editor_site
@@ -59,6 +60,10 @@ urlpatterns += patterns('',
   (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
 )
 
+urlpatterns += patterns('',
+  (r'^robots\.txt$', direct_to_template, 
+    {'template': 'robots.txt', 'mimetype': 'text/plain'}),
+)
 
 if DEBUG:
     urlpatterns += patterns('',

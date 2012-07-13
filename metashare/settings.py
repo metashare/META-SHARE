@@ -75,7 +75,7 @@ if not DJANGO_BASE.strip().endswith('/'):
 if DJANGO_BASE.strip().startswith('/'):
     DJANGO_BASE = DJANGO_BASE.strip()[1:]
 
-FULL_DJANGO_URL = '{}{}'.format(DJANGO_URL, DJANGO_BASE)
+DJANGO_FULL_URL = '{}{}'.format(DJANGO_URL, DJANGO_BASE)
 
 # Defines the maximal lifetime for SSO tokens in seconds.
 MAX_LIFETIME_FOR_SSO_TOKENS = 30
@@ -239,3 +239,6 @@ if 'DISPLAY' in os.environ:
     import re
     SELENIUM_DISPLAY = re.sub(r'[^\:]*(\:\d{1,2})(?:\.\d+)?', r'\1', 
       os.environ['DISPLAY'])
+
+# sitemap url to be used in "robots.txt"
+SITEMAP_URL = '{}/sitemap.xml'.format(DJANGO_FULL_URL)

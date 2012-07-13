@@ -1,0 +1,13 @@
+User-agent: *
+
+Disallow: /login/
+Disallow: /logout/
+Disallow: /admin/
+Disallow: /editor/
+Disallow: /accounts/
+Disallow: /storage/
+Disallow: /sync/
+Disallow: /site_media/
+Disallow: /selectable/
+
+Sitemap: {{ SITEMAP_URL }}
