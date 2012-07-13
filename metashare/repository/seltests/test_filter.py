@@ -145,7 +145,7 @@ class FilterTest(SeleniumTestCase):
         
         # check Language Variety filter        
         click_and_wait(driver.find_element_by_link_text("Language Variety"))
-        self.assertEqual("Castillian (6)", driver.find_element_by_xpath(
+        self.assertEqual("Castilian (6)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[18]/div[1]").text)
         click_and_wait(driver.find_element_by_link_text("Language Variety"))
         
