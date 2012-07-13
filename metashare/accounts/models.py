@@ -84,6 +84,12 @@ class EditorGroup(Group):
     # differentiate its instances from other Django `Group`s. That's why it
     # doesn't have any custom fields.
 
+    def __unicode__(self):
+        """
+        Return Unicode representation for this instance.
+        """
+        return u'<EditorGroup "{0}">'.format(self.name)
+
     def get_members(self):
         return User.objects.filter(groups__name=self.name)
 
@@ -93,7 +99,7 @@ class EditorGroup(Group):
                 .values_list('name', flat=True))
 
 
-class EditorRegistrationRequest(models.Model):
+class EditorGroupApplication(models.Model):
     """
     Contains user data related to a user application for being an editor.
     """
@@ -105,7 +111,7 @@ class EditorRegistrationRequest(models.Model):
         """
         Return Unicode representation for this instance.
         """
-        return u'<EditorRegistrationRequest of "{0}" for "{1}">'.format(
+        return u'<EditorGroupApplication of "{0}" for "{1}">'.format(
                 self.user, self.editor_group)
 
 
