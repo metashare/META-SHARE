@@ -13,6 +13,7 @@ from metashare.storage.models import compute_digest_checksum
 from traceback import format_exc
 import os
 from metashare import settings
+from metashare.stats.model_utils import saveLRStats, DELETE_STAT
 import shutil
 
 # Idea taken from 
@@ -105,7 +106,8 @@ def remove_resource(storage_object):
     shutil.rmtree(folder)
     resource.delete_deep()
     storage_object.delete()
-
+    saveLRStats(resource, DELETE_STAT)    
+    
 class ConnectionException(Exception):
     pass
 

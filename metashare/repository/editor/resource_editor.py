@@ -36,7 +36,7 @@ from metashare.repository.models import resourceComponentTypeType_model, \
     licenceInfoType_model, User
 from metashare.repository.supermodel import SchemaModel
 from metashare.stats.model_utils import saveLRStats, UPDATE_STAT, INGEST_STAT, \
-    PUBLISH_STAT
+    DELETE_STAT
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
     ALLOWED_ARCHIVE_EXTENSIONS
 from metashare.utils import verify_subclass
@@ -220,20 +220,19 @@ def change_resource_status(resource, status, precondition_status=None):
 def publish_resources(modeladmin, request, queryset):
     for obj in queryset:
         change_resource_status(obj, status=PUBLISHED, precondition_status=INGESTED)
-        if hasattr(obj, 'storage_object') and obj.storage_object is not None:
-            saveLRStats(obj, PUBLISH_STAT, request)
+        saveLRStats(obj, UPDATE_STAT, request)
 publish_resources.short_description = "Publish selected ingested resources"
 
 def unpublish_resources(modeladmin, request, queryset):
     for obj in queryset:
         change_resource_status(obj, status=INGESTED, precondition_status=PUBLISHED)
-        if hasattr(obj, 'storage_object') and obj.storage_object is not None:
-            saveLRStats(obj, INGEST_STAT, request)
+        saveLRStats(obj, INGEST_STAT, request)
 unpublish_resources.short_description = "Unpublish selected published resources"
 
 def ingest_resources(modeladmin, request, queryset):
     for obj in queryset:
         change_resource_status(obj, status=INGESTED, precondition_status=INTERNAL)
+        saveLRStats(obj, INGEST_STAT, request)
 ingest_resources.short_description = "Ingest selected internal resources"
 
 def export_xml_resources(modeladmin, request, queryset):
@@ -802,6 +801,12 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 for action in (publish_resources, unpublish_resources,
                                ingest_resources):
                     del result[action.__name__]
+        if 'action' in request.POST and request.POST.get('action') == 'delete_selected' \
+            and request.POST.get('post') == 'yes':
+            resource_id = request.POST.get('_selected_action', None)
+            if resource_id != None:
+                resource = resourceInfoType_model.objects.get(pk=resource_id)
+            saveLRStats(resource, DELETE_STAT)
         return result
 
     def create_hidden_structures(self, request):

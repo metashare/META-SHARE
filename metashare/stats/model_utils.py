@@ -19,8 +19,9 @@ RETRIEVE_STAT = "r"
 DOWNLOAD_STAT = "d"
 PUBLISH_STAT = "p"
 INGEST_STAT = "i"
+DELETE_STAT = "e"
 
-STAT_LABELS = {UPDATE_STAT: "update", VIEW_STAT: "view", RETRIEVE_STAT: "retrieve", DOWNLOAD_STAT: "download", PUBLISH_STAT: "publish", INGEST_STAT: "ingest"}
+STAT_LABELS = {UPDATE_STAT: "update", VIEW_STAT: "view", RETRIEVE_STAT: "retrieve", DOWNLOAD_STAT: "download", PUBLISH_STAT: "publish", INGEST_STAT: "ingest", DELETE_STAT: "delete"}
 VISIBLE_STATS = [UPDATE_STAT, VIEW_STAT, RETRIEVE_STAT, DOWNLOAD_STAT]
     
 # Setup logging support.
@@ -33,32 +34,39 @@ def saveLRStats(resource, action, request=None):
     """
     this function saves the actions on a resource (it takes into account the session to avoid to increment more than one time the stats counter)
     """
+    if not hasattr(resource, 'storage_object') or resource.storage_object is None:
+        return
+        
     userid = _get_userid(request)
     sessid = _get_sessionid(request)
-    ipaddress =  _get_ipaddress(request)
-    lrset = LRStats.objects.filter(userid=userid, lrid=resource.storage_object.identifier, sessid=sessid, action=action)
+    ipaddress = _get_ipaddress(request)
+    lrid = resource.storage_object.identifier
+    lrset = LRStats.objects.filter(userid=userid, lrid=lrid, sessid=sessid, action=action)
     if (lrset.count() > 0):
         record = lrset[0]
         #record.count = record.count+1
         #record.sessid = sessid
         record.lasttime = datetime.now()
         record.save(force_update=True)
-        LOGGER.debug('UPDATESTATS: Saved LR {0}, {1} action={2} ({3}).'.format(resource.storage_object.identifier, sessid, action, record.lasttime))
+        LOGGER.debug('UPDATESTATS: Saved LR {0}, {1} action={2} ({3}).'.format(lrid, sessid, action, record.lasttime))
     else:       
         record = LRStats()
         record.userid = userid
-        record.lrid = resource.storage_object.identifier
+        record.lrid = lrid
         record.action = action
         record.sessid = sessid
         record.geoinfo = getcountry_code(ipaddress)
         record.save(force_insert=True)
-        LOGGER.debug('SAVESTATS: Saved LR {0}, {1} action={2}.'.format(resource.storage_object.identifier, sessid, action))
-    if action == UPDATE_STAT or action == PUBLISH_STAT:
+        LOGGER.debug('SAVESTATS: Saved LR {0}, {1} action={2}.'.format(lrid, sessid, action))
+    if action == UPDATE_STAT:
         if (resource.storage_object.published):
             UsageStats.objects.filter(lrid=resource.id).delete()
             _update_usage_stats(resource.id, resource.export_to_elementtree())
-            LOGGER.debug('STATS: Updating usage statistics: resource {0} updated'.format(resource.storage_object.identifier))
- 
+            LOGGER.debug('STATS: Updating usage statistics: resource {0} updated'.format(lrid))
+    if action == INGEST_STAT or action == DELETE_STAT:
+        UsageStats.objects.filter(lrid=lrid).delete()
+        LRStats.objects.filter(lrid=lrid).delete()
+        
 
 def saveQueryStats(query, facets, found, exectime=0, request=None): 
     stat = QueryStats()
@@ -70,8 +78,8 @@ def saveQueryStats(query, facets, found, exectime=0, request=None):
     stat.exectime = exectime    
     stat.save()
     LOGGER.debug('STATS: Query {0}.'.format(query))
-
-
+         
+         
 def getLRStats(lrid):
     data = ""
     action_list = LRStats.objects.values('lrid', 'action').filter(lrid=lrid).annotate(Count('action'), Sum('count')).order_by('-action')
@@ -253,7 +261,7 @@ def _get_ipaddress(request):
 
 class UsageThread(threading.Thread):
     """
-    Thread updating usage statistics.
+    Thread updating usage statistics from scratch.
     """
     resources = None
     done = 0
