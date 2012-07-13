@@ -9,7 +9,7 @@ from django.contrib import admin
 from django.contrib.sitemaps import Sitemap, FlatPageSitemap
 from django.views.generic.simple import direct_to_template
 
-from metashare.settings import MEDIA_ROOT, DEBUG, DJANGO_BASE
+from metashare.settings import MEDIA_ROOT, DEBUG, DJANGO_BASE, SITEMAP_URL
 from metashare.repository.editor import admin_site as editor_site
 from repository.sitemap import *
 
@@ -62,7 +62,7 @@ urlpatterns += patterns('',
 
 urlpatterns += patterns('',
   (r'^robots\.txt$', direct_to_template, 
-    {'template': 'robots.txt', 'mimetype': 'text/plain'}),
+    {'template': 'robots.txt', 'mimetype': 'text/plain', 'extra_context' : { 'sitemap_url' : SITEMAP_URL }}),
 )
 
 if DEBUG:

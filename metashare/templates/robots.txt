@@ -10,4 +10,4 @@ Disallow: /sync/
 Disallow: /site_media/
 Disallow: /selectable/
 
-Sitemap: {{ SITEMAP_URL }}
+Sitemap: {{ sitemap_url }}
