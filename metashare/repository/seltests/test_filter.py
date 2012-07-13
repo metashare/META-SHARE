@@ -52,6 +52,7 @@ class FilterTest(SeleniumTestCase):
         self.assertEqual("Restrictions of Use", driver.find_element_by_link_text("Restrictions of Use").text)
         self.assertEqual("Linguality Type", driver.find_element_by_link_text("Linguality Type").text)
         self.assertEqual("MIME Type", driver.find_element_by_link_text("MIME Type").text)
+        self.assertEqual("Language Variety", driver.find_element_by_link_text("Language Variety").text)
         
         # check Language filter
         click_and_wait(driver.find_element_by_link_text("Language"))
