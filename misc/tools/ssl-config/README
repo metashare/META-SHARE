@@ -1,0 +1,29 @@
+
+Configuration of lighttpd to support SSL.
+
+To use lighttpd with SSL, a certificate and its private key must be available.
+The following script generates a self-signed certificate that can
+be used in lighttpd.
+Before running it you should customize it with your specific
+data. The main changes must be done in the lines between
+"cat > "$CONF" << EOF" and "EOF"
+If you customize settings outside of the previous lines you have to change
+other scripts too.
+
+gen_cert.sh
+
+
+The file lighttpd-ssl.conf.sample is a template that must be customized
+with the correct data.
+The gen_light_conf.sh script can helpin generating a lighttpd configuration
+file with data contained in the script itself and in _meta_dir.sh/_conf.sh files.
+
+
+When the configuration files are correctly generated it is possible to
+run start-server.sh and stop-server.sh to respectively start and stop
+the servers (SOLR, Django and lighttpd).
+ 
+The configuration file for lighttpd makes it possible to listen on two
+separate ports: one for HTTP and one for HTTPS. All the requests for HTTP port
+are redirected to HTTPS port.
+
