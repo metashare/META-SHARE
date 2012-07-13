@@ -5,8 +5,8 @@ CURRENT_DIR=`pwd`
 METASHARE_DIR=$METASHARE_SW_DIR/metashare
 SCHEMA_FILE=$CURRENT_DIR/init_data/schema.xml
 
-cp init_data/settings_orig.py ../../metashare/settings.py
-cp init_data/local_settings_test.py ../../metashare/local_settings.py
+cp init_data/settings_orig.py $METASHARE_DIR/settings.py
+cp init_data/local_settings_test.py $METASHARE_DIR/local_settings.py
 
 export DJANGO_PORT=12345
 export STORAGE_PATH=/tmp/storageFolder

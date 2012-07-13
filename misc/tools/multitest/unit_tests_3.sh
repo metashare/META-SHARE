@@ -3,7 +3,7 @@
 THIS_DIR=$(dirname "$0")
 . "${THIS_DIR}/setvars.sh"
 
-cd "$METASHARE_SW_DIR/misc/multitest"
+cd "$MSERV_DIR"
 
 . _meta_dir.sh
 . _python.sh

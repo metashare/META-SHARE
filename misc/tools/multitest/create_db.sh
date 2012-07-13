@@ -6,11 +6,13 @@
 # If '-r' option is given in command line the database is deleted
 # if already exists and created empty.
 
-CURRENT_DIR=`pwd`
-METASHARE_DIR=$METASHARE_SW_DIR/metashare
+. _meta_dir.sh
+. _python.sh
 
-cp init_data/settings_orig.py ../../metashare/settings.py
-cp init_data/local_settings_test.py ../../metashare/local_settings.py
+CURRENT_DIR=`pwd`
+
+cp init_data/settings_orig.py $METASHARE_DIR/settings.py
+cp init_data/local_settings_test.py $METASHARE_DIR/local_settings.py
 
 export DJANGO_PORT=12345
 export STORAGE_PATH=/tmp/storageFolder
@@ -22,14 +24,6 @@ if [[ "$1" == "-r" ]] ; then
 		echo "Deleting current database ..."
 		rm -f $DATABASE_FILE
 	fi
-fi
-
-# find the best Python binary to use: only use the platform default if ther is
-# no custom Python installation for META-SHARE available
-if [ -x "$METASHARE_SW_DIR/opt/bin/python" ] ; then
-	PYTHON="$METASHARE_SW_DIR/opt/bin/python"
-else
-	PYTHON=`which python`
 fi
 
 cd $METASHARE_DIR

@@ -174,7 +174,6 @@ INSTALLED_APPS = (
     'metashare.stats',
 
     'metashare.repository',
-    'metashare.AdminTest',
 )
 
 # Continuous Integration support using django_jenkins: only add application

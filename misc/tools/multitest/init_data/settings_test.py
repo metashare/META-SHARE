@@ -177,7 +177,6 @@ INSTALLED_APPS = (
     'metashare.stats',
 
     'metashare.repository',
-    'metashare.AdminTest',
 )
 
 #if os.name != 'nt':
