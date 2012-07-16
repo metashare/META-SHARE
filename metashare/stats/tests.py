@@ -5,7 +5,7 @@ from django.test.client import Client
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.admin.sites import LOGIN_FORM_KEY
 
-from metashare import test_utils
+from metashare import test_utils, settings
 from metashare.accounts.models import EditorGroup, ManagerGroup
 from metashare.repository.models import resourceInfoType_model
 from metashare.settings import DJANGO_BASE, DJANGO_URL, ROOT_PATH
@@ -14,6 +14,8 @@ from metashare.stats.model_utils import _update_usage_stats, saveLRStats, \
     RETRIEVE_STAT, DOWNLOAD_STAT
 from metashare.stats.models import TogetherManager
 from metashare.storage.models import PUBLISHED, INGESTED
+from metashare.stats.recommendations import SessionResourcesTracker, Resource
+import datetime
 
 
 ADMINROOT = '/{0}editor/'.format(DJANGO_BASE)
@@ -174,7 +176,21 @@ class StatsTest(django.test.TestCase):
             print Exception, 'could not get usage stats: {}'.format(response)
         else:
             self.assertContains(response, "identificationInfo")
-    
+
+
+def _import_resource(res_file_name):
+    """
+    Imports the resource with the given file name; looks for the file in
+    the folder repository/test_fixtures/ELRA/; sets publication status to
+    PUBLISHED; returns the resource
+    """
+    res = test_utils.import_xml(
+      '{0}/repository/test_fixtures/ELRA/{1}'.format(ROOT_PATH, res_file_name))[0]
+    res.storage_object.publication_status = PUBLISHED
+    res.storage_object.save()
+    res.storage_object.update_storage()
+    return res
+
 
 class SimpleTogetherManagerTest(django.test.TestCase):
 
@@ -322,15 +338,100 @@ class TogetherManagerTest(django.test.TestCase):
         self.assertEquals(self.res_4, sorted_res[1])
 
 
-def _import_resource(res_file_name):
-    """
-    Imports the resource with the given file name; looks for the file in
-    the folder repository/test_fixtures/ELRA/; sets publication status to
-    PUBLISHED; returns the resource
-    """
-    res = test_utils.import_xml(
-      '{0}/repository/test_fixtures/ELRA/{1}'.format(ROOT_PATH, res_file_name))[0]
-    res.storage_object.publication_status = PUBLISHED
-    res.storage_object.save()
-    res.storage_object.update_storage()
-    return res
+class SessionResourcesTrackerTest(django.test.TestCase):
+    
+    # test resources to be initialized in setup
+    res_1 = None
+    res_2 = None
+    res_3 = None
+    res_4 = None
+    
+    @classmethod
+    def setUpClass(cls):
+        test_utils.set_index_active(False)
+    
+    @classmethod
+    def tearDownClass(cls):
+        test_utils.set_index_active(True)
+    
+    def setUp(self):
+        """
+        Import test fixtures and add resource pairs to TogetherManager
+        """
+        test_utils.setup_test_storage()
+        self.res_1 = _import_resource('elra112.xml')
+        self.res_2 = _import_resource('elra135.xml')
+        self.res_3 = _import_resource('elra260.xml')
+        self.res_4 = _import_resource('elra295.xml')
+        self.max_view_interval_backup = settings.MAX_VIEW_INTERVAL
+        settings.MAX_VIEW_INTERVAL = 5
+        self.max_download_interval_backup = settings.MAX_DOWNLOAD_INTERVAL
+        settings.MAX_DOWNLOAD_INTERVAL = 10
+    
+    def tearDown(self):
+        """
+        Clean up the test
+        """
+        test_utils.clean_db()
+        test_utils.clean_storage()
+        settings.MAX_VIEW_INTERVAL = self.max_view_interval_backup
+        settings.MAX_DOWNLOAD_INTERVAL = self.max_download_interval_backup 
+        
+    def test_usage(self):
+        
+        # test views:
+        man = TogetherManager.getManager(Resource.VIEW)
+        tracker = SessionResourcesTracker()
+        tracker.add_view(self.res_1, datetime.datetime(2012, 7, 16, 18, 0, 0))
+        tracker.add_view(self.res_2, datetime.datetime(2012, 7, 16, 18, 0, 1))
+        # both resources have been viewed 'together'
+        self.assertEquals(1, len(man.getTogetherList(self.res_1, 0)))
+        self.assertEquals(1, len(man.getTogetherList(self.res_2, 0)))
+        self.assertEquals(1, man.getTogetherCount(self.res_1, self.res_2))
+        # viewing the same resource again does NOT increase the count
+        tracker.add_view(self.res_2, datetime.datetime(2012, 7, 16, 18, 0, 2))
+        self.assertEquals(1, len(man.getTogetherList(self.res_1, 0)))
+        self.assertEquals(1, len(man.getTogetherList(self.res_2, 0)))
+        self.assertEquals(1, man.getTogetherCount(self.res_1, self.res_2))
+        # viewing a resource after the max view interval changes nothing
+        tracker.add_view(self.res_3, datetime.datetime(2012, 7, 16, 18, 0, 10))
+        self.assertEquals(1, len(man.getTogetherList(self.res_1, 0)))
+        self.assertEquals(1, len(man.getTogetherList(self.res_2, 0)))
+        self.assertEquals(1, man.getTogetherCount(self.res_1, self.res_2))
+        self.assertEquals(0, len(man.getTogetherList(self.res_3, 0)))
+        # add another resource
+        tracker.add_view(self.res_4, datetime.datetime(2012, 7, 16, 18, 0, 12))
+        self.assertEquals(1, len(man.getTogetherList(self.res_1, 0)))
+        self.assertEquals(1, len(man.getTogetherList(self.res_2, 0)))
+        self.assertEquals(1, man.getTogetherCount(self.res_1, self.res_2))
+        self.assertEquals(1, len(man.getTogetherList(self.res_3, 0)))
+        self.assertEquals(1, len(man.getTogetherList(self.res_4, 0)))
+        self.assertEquals(1, man.getTogetherCount(self.res_3, self.res_4))
+        
+        # test downloads:
+        man = TogetherManager.getManager(Resource.DOWNLOAD)
+        tracker.add_download(self.res_1, datetime.datetime(2012, 7, 16, 18, 0, 0))
+        tracker.add_download(self.res_2, datetime.datetime(2012, 7, 16, 18, 0, 1))
+        # both resources have been downloaded 'together'
+        self.assertEquals(1, len(man.getTogetherList(self.res_1, 0)))
+        self.assertEquals(1, len(man.getTogetherList(self.res_2, 0)))
+        self.assertEquals(1, man.getTogetherCount(self.res_1, self.res_2))
+        # downloading the same resource again does NOT increase the count
+        tracker.add_download(self.res_2, datetime.datetime(2012, 7, 16, 18, 0, 2))
+        self.assertEquals(1, len(man.getTogetherList(self.res_1, 0)))
+        self.assertEquals(1, len(man.getTogetherList(self.res_2, 0)))
+        self.assertEquals(1, man.getTogetherCount(self.res_1, self.res_2))
+        # downloading a resource after the max download interval changes nothing
+        tracker.add_download(self.res_3, datetime.datetime(2012, 7, 16, 18, 0, 20))
+        self.assertEquals(1, len(man.getTogetherList(self.res_1, 0)))
+        self.assertEquals(1, len(man.getTogetherList(self.res_2, 0)))
+        self.assertEquals(1, man.getTogetherCount(self.res_1, self.res_2))
+        self.assertEquals(0, len(man.getTogetherList(self.res_3, 0)))
+        # add another resource
+        tracker.add_download(self.res_4, datetime.datetime(2012, 7, 16, 18, 0, 22))
+        self.assertEquals(1, len(man.getTogetherList(self.res_1, 0)))
+        self.assertEquals(1, len(man.getTogetherList(self.res_2, 0)))
+        self.assertEquals(1, man.getTogetherCount(self.res_1, self.res_2))
+        self.assertEquals(1, len(man.getTogetherList(self.res_3, 0)))
+        self.assertEquals(1, len(man.getTogetherList(self.res_4, 0)))
+        self.assertEquals(1, man.getTogetherCount(self.res_3, self.res_4))

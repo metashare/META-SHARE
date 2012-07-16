@@ -187,3 +187,13 @@ PROXIED_NODES = {
 # For more options, check http://packages.python.org/django-analytical/
 #GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-XXXXXXXX-X'
 #GOOGLE_ANALYTICS_SITE_SPEED = True
+
+# maximum time interval in seconds allowed between two resource views so that
+# the resources are still considered as 'viewed together';
+# used in recommendations
+MAX_VIEW_INTERVAL = 60 * 5
+
+# maximum time interval in seconds allowed between two resource downloads so
+# that the resources are still considered as 'downloaded together';
+# used in recommendations
+MAX_DOWNLOAD_INTERVAL = 60 * 10
