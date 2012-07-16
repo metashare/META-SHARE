@@ -18,6 +18,7 @@ from metashare.repository.models import resourceInfoType_model, \
 from metashare.storage.models import PUBLISHED, MASTER, StorageObject,\
     RemovedObject
 from metashare.xml_utils import import_from_file
+from metashare.stats.models import TogetherManager
 
 
 TEST_STORAGE_PATH = '{0}/test-tmp'.format(settings.ROOT_PATH)
@@ -46,6 +47,8 @@ def clean_db():
     targetResourceInfoType_model.objects.all().delete()
     organizationInfoType_model.objects.all().delete()
     projectInfoType_model.objects.all().delete()
+    # delete recommendation objects
+    TogetherManager.objects.all().delete()
 
 def clean_storage():
     """
