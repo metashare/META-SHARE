@@ -13,6 +13,7 @@ from metashare.stats.model_utils import _update_usage_stats, saveLRStats, \
     getLRLast, saveQueryStats, getLastQuery, UPDATE_STAT, VIEW_STAT, \
     RETRIEVE_STAT, DOWNLOAD_STAT
 from metashare.stats.models import TogetherManager
+from metashare.storage.models import PUBLISHED, INGESTED
 
 
 ADMINROOT = '/{0}editor/'.format(DJANGO_BASE)
@@ -175,24 +176,161 @@ class StatsTest(django.test.TestCase):
             self.assertContains(response, "identificationInfo")
     
 
-class TogetherManagerTest(django.test.TestCase):
+class SimpleTogetherManagerTest(django.test.TestCase):
+
+    # test resources to be initialized in setup
+    res_1 = None
+    res_2 = None
+    res_3 = None
     
-    def test_usage(self):
+    @classmethod
+    def setUpClass(cls):
+        test_utils.set_index_active(False)
+    
+    @classmethod
+    def tearDownClass(cls):
+        test_utils.set_index_active(True)
+    
+    def setUp(self):
         """
-        Tests the basic usage of the TogetherHandler
+        Import test fixtures and add resource pairs to TogetherManager
+        """
+        test_utils.setup_test_storage()
+        self.res_1 = _import_resource('elra112.xml')
+        self.res_2 = _import_resource('elra135.xml')
+        self.res_3 = _import_resource('elra260.xml')
+    
+    def tearDown(self):
+        """
+        Clean up the test
+        """
+        test_utils.clean_db()
+        test_utils.clean_storage()
+    
+
+    def test_counts(self):
+        """
+        tests the addResourcePair and getTogetherCount methods of TogetherManager
         """
         man = TogetherManager.getManager('views')
-        self.assertEquals(0, man.getTogetherCount('res1', 'res2'))
-        man.addResourcePair('res1', 'res2')
-        self.assertEquals(0, man.getTogetherCount('res1', 'res3'))
-        self.assertEquals(1, man.getTogetherCount('res1', 'res2'))
-        self.assertEquals(1, man.getTogetherCount('res2', 'res1'))
-        man.addResourcePair('res1', 'res3')
-        self.assertEquals(1, man.getTogetherCount('res1', 'res3'))
-        self.assertEquals(1, man.getTogetherCount('res3', 'res1'))
-        man.addResourcePair('res1', 'res2')
-        self.assertEquals(2, man.getTogetherCount('res1', 'res2'))
-        self.assertEquals(3, man.getTogetherCount('res1', 'res2'))
-        
-        
+        self.assertEquals(0, man.getTogetherCount(self.res_1, self.res_2))
+        man.addResourcePair(self.res_1, self.res_2)
+        self.assertEquals(0, man.getTogetherCount(self.res_1, self.res_3))
+        self.assertEquals(1, man.getTogetherCount(self.res_1, self.res_2))
+        self.assertEquals(1, man.getTogetherCount(self.res_2, self.res_1))
+        man.addResourcePair(self.res_1, self.res_3)
+        self.assertEquals(1, man.getTogetherCount(self.res_1, self.res_3))
+        self.assertEquals(1, man.getTogetherCount(self.res_3, self.res_1))
+        man.addResourcePair(self.res_1, self.res_2)
+        self.assertEquals(2, man.getTogetherCount(self.res_1, self.res_2))
+        self.assertEquals(2, man.getTogetherCount(self.res_2, self.res_1))
+
+
+class TogetherManagerTest(django.test.TestCase):
     
+    # test resources to be initialized in setup
+    res_1 = None
+    res_2 = None
+    res_3 = None
+    res_4 = None
+    
+    @classmethod
+    def setUpClass(cls):
+        test_utils.set_index_active(False)
+    
+    @classmethod
+    def tearDownClass(cls):
+        test_utils.set_index_active(True)
+    
+    def setUp(self):
+        """
+        Import test fixtures and add resource pairs to TogetherManager
+        """
+        test_utils.setup_test_storage()
+        self.res_1 = _import_resource('elra112.xml')
+        self.res_2 = _import_resource('elra135.xml')
+        self.res_3 = _import_resource('elra260.xml')
+        self.res_4 = _import_resource('elra295.xml')
+        man = TogetherManager.getManager('views')
+        count = 0
+        while (count < 5):
+            man.addResourcePair(self.res_1, self.res_2)
+            count += 1
+        count = 0
+        while (count < 10):
+            man.addResourcePair(self.res_1, self.res_3)
+            count += 1
+        count = 0
+        while (count < 3):
+            man.addResourcePair(self.res_1, self.res_4)
+            count += 1
+        man = TogetherManager.getManager('downloads')
+        count = 0
+        while (count < 15):
+            man.addResourcePair(self.res_1, self.res_2)
+            count += 1
+        count = 0
+        while (count < 10):
+            man.addResourcePair(self.res_1, self.res_3)
+            count += 1
+        count = 0
+        while (count < 5):
+            man.addResourcePair(self.res_1, self.res_4)
+            count += 1
+        
+    def tearDown(self):
+        """
+        Clean up the test
+        """
+        test_utils.clean_db()
+        test_utils.clean_storage()
+    
+
+    def test_sorting(self):
+        man = TogetherManager.getManager('views')
+        sorted_res = man.getTogetherList(self.res_1, 0)
+        self.assertEqual(3, len(sorted_res))
+        self.assertEquals(self.res_3, sorted_res[0])
+        self.assertEquals(self.res_2, sorted_res[1])
+        self.assertEquals(self.res_4, sorted_res[2])
+        
+    def test_threshold_filter(self):
+        man = TogetherManager.getManager('views')
+        sorted_res = man.getTogetherList(self.res_1, 5)
+        self.assertEqual(2, len(sorted_res))
+        self.assertEquals(self.res_3, sorted_res[0])
+        self.assertEquals(self.res_2, sorted_res[1])
+        
+    def test_publication_status_filter(self):
+        self.res_3.storage_object.publication_status = INGESTED
+        self.res_3.storage_object.save()
+        self.res_3.storage_object.update_storage()
+        man = TogetherManager.getManager('views')
+        sorted_res = man.getTogetherList(self.res_1, 0)
+        self.assertEqual(2, len(sorted_res))
+        self.assertEquals(self.res_2, sorted_res[0])
+        self.assertEquals(self.res_4, sorted_res[1])
+        
+    def test_deleted_filter(self):
+        self.res_2.storage_object.deleted = True
+        self.res_2.storage_object.save()
+        self.res_2.storage_object.update_storage()
+        man = TogetherManager.getManager('views')
+        sorted_res = man.getTogetherList(self.res_1, 0)
+        self.assertEqual(2, len(sorted_res))
+        self.assertEquals(self.res_3, sorted_res[0])
+        self.assertEquals(self.res_4, sorted_res[1])
+
+
+def _import_resource(res_file_name):
+    """
+    Imports the resource with the given file name; looks for the file in
+    the folder repository/test_fixtures/ELRA/; sets publication status to
+    PUBLISHED; returns the resource
+    """
+    res = test_utils.import_xml(
+      '{0}/repository/test_fixtures/ELRA/{1}'.format(ROOT_PATH, res_file_name))[0]
+    res.storage_object.publication_status = PUBLISHED
+    res.storage_object.save()
+    res.storage_object.update_storage()
+    return res
