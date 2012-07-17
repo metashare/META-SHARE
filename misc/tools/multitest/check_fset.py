@@ -1,5 +1,6 @@
 
 import os
+import sys
 from fset import FILESETS, RES_ROOT
 
 if __name__ == "__main__":
@@ -17,6 +18,10 @@ if __name__ == "__main__":
           print 'WARNING: File {0} does not exist!!'.format(full_name)
   if errors > 0:
     print '{0} file(s) missing!'.format(errors)
+    det_f = os.fdopen(3, 'w')
+    det_f.write('FileNotFound')
+    sys.exit(1)
   else:
     print 'All files have been found.'
+    sys.exit(0)
 
