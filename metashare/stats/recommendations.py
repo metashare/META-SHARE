@@ -18,6 +18,17 @@ class SessionResourcesTracker:
     Keeps track of resources the user has viewed/downloaded within a session.
     """
     
+    @staticmethod
+    def getTracker(request):
+        """
+        get tracker for the given request; creates new tracker if required
+        """
+        tracker = request.session.get('tracker')
+        if not tracker:
+            tracker = SessionResourcesTracker()
+            request.session['tracker'] = tracker
+        return tracker
+    
     def __init__(self):
         
         # set of resource ids that have been downloaded together; 
@@ -40,7 +51,6 @@ class SessionResourcesTracker:
         Tells the tracker that the given resource has been viewed 
         at the given time.
         """
-
         # check if this view is still considered 'together' with 
         # the previous views
         _expiration_date = \
@@ -100,4 +110,21 @@ class SessionResourcesTracker:
         _td = datetime.timedelta(seconds=seconds)
         _expiration_date = time + _td
         return _expiration_date
-            
+    
+
+def get_view_recommendations(resource):
+    """
+    Returns a list of ranked view recommendations for the given resource.
+    """
+    # TODO: decide what threshold to use; may restrict recommendation to top X resources of the list
+    return TogetherManager.getManager(Resource.VIEW)\
+      .getTogetherList(resource, 0)
+    
+
+def get_download_recommendations(resource):
+    """
+    Returns a list of ranked download recommendations for the given resource.
+    """
+    # TODO: decide what threshold to use; may restrict recommendation to top X resources of the list 
+    return TogetherManager.getManager(Resource.DOWNLOAD)\
+      .getTogetherList(resource, 0)

@@ -15,7 +15,11 @@ from metashare.stats.model_utils import _update_usage_stats, saveLRStats, \
 from metashare.stats.models import TogetherManager
 from metashare.storage.models import PUBLISHED, INGESTED
 from metashare.stats.recommendations import SessionResourcesTracker, Resource
+from metashare.repository import views
 import datetime
+import shutil
+from metashare.test_utils import create_user
+from django.core.urlresolvers import reverse
 
 
 ADMINROOT = '/{0}editor/'.format(DJANGO_BASE)
@@ -181,16 +185,44 @@ class StatsTest(django.test.TestCase):
 def _import_resource(res_file_name):
     """
     Imports the resource with the given file name; looks for the file in
-    the folder repository/test_fixtures/ELRA/; sets publication status to
+    the folder repository/fixtures/; sets publication status to
     PUBLISHED; returns the resource
     """
     res = test_utils.import_xml(
-      '{0}/repository/test_fixtures/ELRA/{1}'.format(ROOT_PATH, res_file_name))[0]
+      '{0}/repository/fixtures/{1}'.format(ROOT_PATH, res_file_name))[0]
     res.storage_object.publication_status = PUBLISHED
     res.storage_object.save()
     res.storage_object.update_storage()
     return res
 
+
+def _import_downloadable_resource(res_file_name):
+    """
+    Imports the resource with the given file name; looks for the file in
+    the folder repository/fixtures/; sets publication status to
+    PUBLISHED; adds a downloadable archive; returns the resource
+    """
+    res = _import_resource(res_file_name)
+    res.storage_object.checksum = '3930f5022aff02c7fa27ffabf2eaaba0'
+    res.storage_object.save()
+    res.storage_object.update_storage()
+    shutil.copyfile(
+      '{0}/repository/fixtures/archive.zip'.format(settings.ROOT_PATH),
+      '{0}/{1}/archive.zip'.format(
+        settings.STORAGE_PATH, res.storage_object.identifier))
+    return res
+    
+    
+def _download_resource(client, resource):
+    """
+    Downloads the given resource for the given client;
+    it is assumed that it is downloadable and has an AGPL license; 
+    returns the http response
+    """
+    return client.post(reverse(views.download, args=(resource.storage_object.identifier,)),
+      { 'in_licence_agree_form': 'True', 'licence_agree': 'True', 'licence': 'AGPL' },
+        follow = True)
+        
 
 class SimpleTogetherManagerTest(django.test.TestCase):
 
@@ -228,7 +260,7 @@ class SimpleTogetherManagerTest(django.test.TestCase):
         """
         tests the addResourcePair and getTogetherCount methods of TogetherManager
         """
-        man = TogetherManager.getManager('views')
+        man = TogetherManager.getManager(Resource.VIEW)
         self.assertEquals(0, man.getTogetherCount(self.res_1, self.res_2))
         man.addResourcePair(self.res_1, self.res_2)
         self.assertEquals(0, man.getTogetherCount(self.res_1, self.res_3))
@@ -267,7 +299,7 @@ class TogetherManagerTest(django.test.TestCase):
         self.res_2 = _import_resource('elra135.xml')
         self.res_3 = _import_resource('elra260.xml')
         self.res_4 = _import_resource('elra295.xml')
-        man = TogetherManager.getManager('views')
+        man = TogetherManager.getManager(Resource.VIEW)
         count = 0
         while (count < 5):
             man.addResourcePair(self.res_1, self.res_2)
@@ -280,7 +312,7 @@ class TogetherManagerTest(django.test.TestCase):
         while (count < 3):
             man.addResourcePair(self.res_1, self.res_4)
             count += 1
-        man = TogetherManager.getManager('downloads')
+        man = TogetherManager.getManager(Resource.DOWNLOAD)
         count = 0
         while (count < 15):
             man.addResourcePair(self.res_1, self.res_2)
@@ -303,7 +335,7 @@ class TogetherManagerTest(django.test.TestCase):
     
 
     def test_sorting(self):
-        man = TogetherManager.getManager('views')
+        man = TogetherManager.getManager(Resource.VIEW)
         sorted_res = man.getTogetherList(self.res_1, 0)
         self.assertEqual(3, len(sorted_res))
         self.assertEquals(self.res_3, sorted_res[0])
@@ -311,7 +343,7 @@ class TogetherManagerTest(django.test.TestCase):
         self.assertEquals(self.res_4, sorted_res[2])
         
     def test_threshold_filter(self):
-        man = TogetherManager.getManager('views')
+        man = TogetherManager.getManager(Resource.VIEW)
         sorted_res = man.getTogetherList(self.res_1, 5)
         self.assertEqual(2, len(sorted_res))
         self.assertEquals(self.res_3, sorted_res[0])
@@ -321,7 +353,7 @@ class TogetherManagerTest(django.test.TestCase):
         self.res_3.storage_object.publication_status = INGESTED
         self.res_3.storage_object.save()
         self.res_3.storage_object.update_storage()
-        man = TogetherManager.getManager('views')
+        man = TogetherManager.getManager(Resource.VIEW)
         sorted_res = man.getTogetherList(self.res_1, 0)
         self.assertEqual(2, len(sorted_res))
         self.assertEquals(self.res_2, sorted_res[0])
@@ -331,7 +363,7 @@ class TogetherManagerTest(django.test.TestCase):
         self.res_2.storage_object.deleted = True
         self.res_2.storage_object.save()
         self.res_2.storage_object.update_storage()
-        man = TogetherManager.getManager('views')
+        man = TogetherManager.getManager(Resource.VIEW)
         sorted_res = man.getTogetherList(self.res_1, 0)
         self.assertEqual(2, len(sorted_res))
         self.assertEquals(self.res_3, sorted_res[0])
@@ -435,3 +467,159 @@ class SessionResourcesTrackerTest(django.test.TestCase):
         self.assertEquals(1, len(man.getTogetherList(self.res_3, 0)))
         self.assertEquals(1, len(man.getTogetherList(self.res_4, 0)))
         self.assertEquals(1, man.getTogetherCount(self.res_3, self.res_4))
+
+
+class SessionTest(django.test.TestCase):
+    
+    # test resources to be initialized in setup
+    res_1 = None
+    res_2 = None
+    res_3 = None
+    res_4 = None
+    
+    @classmethod
+    def setUpClass(cls):
+        test_utils.set_index_active(False)
+    
+    @classmethod
+    def tearDownClass(cls):
+        test_utils.set_index_active(True)
+    
+    def setUp(self):
+        """
+        Import test fixtures and add resource pairs to TogetherManager
+        """
+        test_utils.setup_test_storage()
+        self.res_1 = _import_downloadable_resource('elra112.xml')
+        self.res_2 = _import_downloadable_resource('elra135.xml')
+        self.res_3 = _import_downloadable_resource('elra260.xml')
+        self.res_4 = _import_downloadable_resource('elra295.xml')
+        create_user('normaluser', 'normal@example.com', 'secret')
+        create_user('normaluser2', 'normal2@example.com', 'secret')
+        
+    def tearDown(self):
+        """
+        Clean up the test
+        """
+        test_utils.clean_db()
+        test_utils.clean_storage()
+        
+    def test_views(self):
+        # client 1 views all 4 resources
+        client_1 = Client()
+        man = TogetherManager.getManager(Resource.VIEW)
+        response = client_1.get(self.res_1.get_absolute_url(), follow = True)
+        self.assertEquals(200, response.status_code)
+        view_res = man.getTogetherList(self.res_1, 0)
+        self.assertEqual(0, len(view_res))
+        
+        response = client_1.get(self.res_2.get_absolute_url(), follow = True)
+        self.assertEquals(200, response.status_code)
+        view_res = man.getTogetherList(self.res_1, 0)
+        self.assertEqual(1, len(view_res))
+        view_res = man.getTogetherList(self.res_2, 0)
+        self.assertEqual(1, len(view_res))
+        self.assertEqual(1, man.getTogetherCount(self.res_1, self.res_2))
+        
+        response = client_1.get(self.res_3.get_absolute_url(), follow = True)
+        self.assertEquals(200, response.status_code)
+        view_res = man.getTogetherList(self.res_1, 0)
+        self.assertEqual(2, len(view_res))
+        view_res = man.getTogetherList(self.res_2, 0)
+        self.assertEqual(2, len(view_res))
+        view_res = man.getTogetherList(self.res_3, 0)
+        self.assertEqual(2, len(view_res))
+        
+        response = client_1.get(self.res_4.get_absolute_url(), follow = True)
+        self.assertEquals(200, response.status_code)
+        view_res = man.getTogetherList(self.res_1, 0)
+        self.assertEqual(3, len(view_res))
+        view_res = man.getTogetherList(self.res_2, 0)
+        self.assertEqual(3, len(view_res))
+        view_res = man.getTogetherList(self.res_3, 0)
+        self.assertEqual(3, len(view_res))
+        view_res = man.getTogetherList(self.res_4, 0)
+        self.assertEqual(3, len(view_res))
+        
+        # another client views 2 of the resources, counts are increased
+        client_2 = Client()
+        response = client_2.get(self.res_1.get_absolute_url(), follow = True)
+        self.assertEquals(200, response.status_code)
+        view_res = man.getTogetherList(self.res_1, 0)
+        self.assertEqual(3, len(view_res))
+        
+        response = client_2.get(self.res_2.get_absolute_url(), follow = True)
+        self.assertEquals(200, response.status_code)
+        view_res = man.getTogetherList(self.res_1, 0)
+        self.assertEqual(3, len(view_res))
+        view_res = man.getTogetherList(self.res_2, 0)
+        self.assertEqual(3, len(view_res))
+        # counts of res_1 and res_2 appearing together is increased
+        self.assertEqual(2, man.getTogetherCount(self.res_1, self.res_2))
+        
+        # make sure that downloads are no touched
+        man = TogetherManager.getManager(Resource.DOWNLOAD)
+        download_res = man.getTogetherList(self.res_1, 0)
+        self.assertEqual(0, len(download_res))
+        
+    def test_downloads(self):
+        # client 1 downloads all 4 resources
+        client_1 = Client()
+        client_1.login(username='normaluser', password='secret')
+        man = TogetherManager.getManager(Resource.DOWNLOAD)
+        response = _download_resource(client_1, self.res_1)
+        self.assertEquals(200, response.status_code)
+        download_res = man.getTogetherList(self.res_1, 0)
+        self.assertEqual(0, len(download_res))
+        
+        response = _download_resource(client_1, self.res_2)
+        self.assertEquals(200, response.status_code)
+        download_res = man.getTogetherList(self.res_1, 0)
+        self.assertEqual(1, len(download_res))
+        download_res = man.getTogetherList(self.res_2, 0)
+        self.assertEqual(1, len(download_res))
+        self.assertEqual(1, man.getTogetherCount(self.res_1, self.res_2))
+        
+        response = _download_resource(client_1, self.res_3)
+        self.assertEquals(200, response.status_code)
+        download_res = man.getTogetherList(self.res_1, 0)
+        self.assertEqual(2, len(download_res))
+        download_res = man.getTogetherList(self.res_2, 0)
+        self.assertEqual(2, len(download_res))
+        download_res = man.getTogetherList(self.res_3, 0)
+        self.assertEqual(2, len(download_res))
+        
+        response = _download_resource(client_1, self.res_4)
+        self.assertEquals(200, response.status_code)
+        download_res = man.getTogetherList(self.res_1, 0)
+        self.assertEqual(3, len(download_res))
+        download_res = man.getTogetherList(self.res_2, 0)
+        self.assertEqual(3, len(download_res))
+        download_res = man.getTogetherList(self.res_3, 0)
+        self.assertEqual(3, len(download_res))
+        download_res = man.getTogetherList(self.res_4, 0)
+        self.assertEqual(3, len(download_res))
+        
+        # another client downloads 2 of the resources, counts are increased
+        client_2 = Client()
+        client_2.login(username='normaluser2', password='secret')
+        response = _download_resource(client_2, self.res_1)
+        self.assertEquals(200, response.status_code)
+        download_res = man.getTogetherList(self.res_1, 0)
+        self.assertEqual(3, len(download_res))
+        
+        response = _download_resource(client_2, self.res_2)
+        self.assertEquals(200, response.status_code)
+        download_res = man.getTogetherList(self.res_1, 0)
+        self.assertEqual(3, len(download_res))
+        download_res = man.getTogetherList(self.res_2, 0)
+        self.assertEqual(3, len(download_res))
+        # counts of res_1 and res_2 appearing together is increased
+        self.assertEqual(2, man.getTogetherCount(self.res_1, self.res_2))
+
+        # make sure that views are no touched;
+        # in the web interface, the resource has of course to be viewed first
+        # before it could be downloaded 
+        man = TogetherManager.getManager(Resource.VIEW)
+        view_res = man.getTogetherList(self.res_1, 0)
+        self.assertEqual(0, len(view_res))
