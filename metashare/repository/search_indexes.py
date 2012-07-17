@@ -875,7 +875,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
                                       corpus_info.videoformatinfotype_model_set.all()])
             if media_type.corpusTextNgramInfo:
                 mimeType_list.extend([mimeType.mimeType for mimeType in
-                        media_type.corpusTextNgramInfo.textFormatInfo.all()])
+                        media_type.corpusTextNgramInfo.textformatinfotype_model_set.all()])
             if media_type.corpusImageInfo:
                 mimeType_list.extend([mimeType.mimeType for mimeType in
                         media_type.corpusImageInfo.imageformatinfotype_model_set.all()])
@@ -1814,37 +1814,26 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         """
         Collect the data to filter the resources on Media Type children
         """
-        result = []
-
         corpus_media = obj.resourceComponentType.as_subclass()
-
         # Filter for corpus
         if isinstance(corpus_media, corpusInfoType_model):
             media_type = corpus_media.corpusMediaType
             if media_type.corpusTextNgramInfo:
-                if media_type.corpusTextNgramInfo.ngramInfo:
-                    result.extend([ngram_info.get_baseItem_display() for ngram_info in
-                      media_type.corpusTextNgramInfo.ngramInfo.all()])
+                return [media_type.corpusTextNgramInfo.ngramInfo \
+                        .get_baseItem_display()]
+        return []
 
-        return result
-    
     def prepare_tnGramOrderFilter(self, obj):
         """
         Collect the data to filter the resources on Media Type children
         """
-        result = []
-
         corpus_media = obj.resourceComponentType.as_subclass()
-
         # Filter for corpus
         if isinstance(corpus_media, corpusInfoType_model):
             media_type = corpus_media.corpusMediaType
             if media_type.corpusTextNgramInfo:
-                if media_type.corpusTextNgramInfo.ngramInfo:
-                    result.extend([ngram_info.get_order_display() for ngram_info in
-                      media_type.corpusTextNgramInfo.ngramInfo.all()])
-
-        return result
+                return [str(media_type.corpusTextNgramInfo.ngramInfo.order)]
+        return []
 
     def prepare_languageVarietyFilter(self, obj):
         """
