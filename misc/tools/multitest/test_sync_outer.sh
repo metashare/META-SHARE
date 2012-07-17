@@ -26,13 +26,14 @@ usage()
 }
 
 CURRENT_DIR=`pwd`
-METASHARE_DIR=$METASHARE_SW_DIR/metashare
 RES_DIR="$METASHARE_SW_DIR/misc/testdata/v2.1"
 
 DO_IMPORT_FILES=1
 DO_SYNCHRONIZE=1
 DO_CHECK_RESOURCES=1
 DO_DIGEST_UPDATE=1
+
+NODE_COUNT=`get_node_count`
 
 for arg
 do
@@ -54,23 +55,48 @@ do
 	fi
 done
 
-NODE_COUNT=4
 
-FSET_NAME=fileset1
+# Synchronize and check before importing into the outer node
+if [[ $DO_SYNCHRONIZE -eq 1 ]] ; then
+  synchronize_nodes
+fi
+
+if [[ $DO_CHECK_RESOURCES -eq 1 ]] ; then
+  check_resources_on_inner_nodes
+fi
+
+
+
 
 if [[ $DO_IMPORT_FILES -eq 1 ]] ; then
-  import_files $FSET_NAME inner
+  import_files fileset1 outer
 fi
 
 if [[ $DO_SYNCHRONIZE -eq 1 ]] ; then
   synchronize_nodes
 fi
 
+# Check resources after importing files on outer nodes.
+# At this time a failure is acceptable since involving
+# outer nodes can require two steps:
+# 1) resources sent from outer nodes to proxy nodes
+# 2) resources sent from proxy nodes to other inner nodes
+if [[ $DO_CHECK_RESOURCES -eq 1 ]] ; then
+  check_resources_on_inner_nodes
+fi
+
+
 
 if [[ $DO_DIGEST_UPDATE -eq 1 ]] ; then
   update_digests
 fi
 
+if [[ $DO_SYNCHRONIZE -eq 1 ]] ; then
+  synchronize_nodes
+fi
+
+# Check resources again.
+# This time the check should alwayd be successful.
 if [[ $DO_CHECK_RESOURCES -eq 1 ]] ; then
   check_resources_on_inner_nodes
 fi
