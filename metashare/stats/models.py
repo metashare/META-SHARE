@@ -50,7 +50,7 @@ class TogetherManager(models.Model):
     @staticmethod
     def getManager(name):
         """
-        get the TogetherMaanger with the given name or creates a it if required
+        get the TogetherManager with the given name or creates a it if required
         """
         man = TogetherManager.objects.select_related().get_or_create(name=name)[0]
         return man
