@@ -3,11 +3,10 @@
 THIS_DIR=$(dirname "$0")
 . "${THIS_DIR}/setvars.sh"
 
-cd "$MSERV_DIR"
-
 . _meta_dir.sh
 . _python.sh
 
+cd "$MSERV_DIR"
 
 TESTSUITE_NAME="ConfigData"
 
@@ -45,7 +44,7 @@ run_tests()
 	SUCCESS=0
 	echo "Running tests."
 
-	setUp
+	setUp 1>>"$STDOUT" 2>>"$STDERR"
 
 	for F in $TEST_LIST ; do
 		echo "Running " $F
@@ -76,7 +75,7 @@ run_tests()
 	echo "]]></system-err>" >> "$REPORT"
 	echo "</testsuite>" >> "$REPORT"
 
-	tearDown
+	tearDown 1>>"$STDOUT" 2>>"$STDERR"
 }
 
 METASHARE_DIR="$METASHARE_SW_DIR/metashare"

@@ -3,10 +3,10 @@
 THIS_DIR=$(dirname "$0")
 . "${THIS_DIR}/setvars.sh"
 
-cd "$MSERV_DIR"
-
 . _meta_dir.sh
 . _python.sh
+
+cd "$MSERV_DIR"
 
 TESTSUITE_NAME="CoreNodesSync"
 

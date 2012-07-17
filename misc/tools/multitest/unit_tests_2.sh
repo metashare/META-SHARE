@@ -2,11 +2,10 @@
 
 THIS_DIR=$(dirname "$0")
 . "${THIS_DIR}/setvars.sh"
-
-cd "$MSERV_DIR"
-
 . _meta_dir.sh
 . _python.sh
+
+cd "$MSERV_DIR"
 
 TESTSUITE_NAME="MultiNodeServerTest"
 
@@ -23,24 +22,36 @@ tearDown()
 test_start()
 {
 	cd "$MSERV_DIR"
-	"$MSERV_DIR"/mserv.sh start
+	local DET_FILE=`tempfile`
+	"$MSERV_DIR"/mserv.sh --det-file "$DET_FILE" start
 	local ret_val=$?
+	if [[ $ret_val -ne 0 ]] ; then
+		cat "$DET_FILE" >&3
+	fi
 	return $ret_val
 }
 
 test_stop()
 {
 	cd "$MSERV_DIR"
-	"$MSERV_DIR"/mserv.sh stop
+	local DET_FILE=`tempfile`
+	"$MSERV_DIR"/mserv.sh --det-file "$DET_FILE" stop
 	local ret_val=$?
+	if [[ $ret_val -ne 0 ]] ; then
+		cat "$DET_FILE" >&3
+	fi
 	return $ret_val
 }
 
 test_clean()
 {
 	cd "$MSERV_DIR"
-	"$MSERV_DIR"/mserv.sh clean
+	local DET_FILE=`tempfile`
+	"$MSERV_DIR"/mserv.sh --det-file "$DET_FILE" clean
 	local ret_val=$?
+	if [[ $ret_val -ne 0 ]] ; then
+		cat "$DET_FILE" >&3
+	fi
 	return $ret_val
 }
 
@@ -61,7 +72,7 @@ run_tests()
 	SUCCESS=0
 	echo "Running tests."
 
-	setUp
+	setUp 1>>"$STDOUT" 2>>"$STDERR"
 
 	for F in $TEST_LIST ; do
 		echo "Running " $F
@@ -92,7 +103,7 @@ run_tests()
 	echo "]]></system-err>" >> "$REPORT"
 	echo "</testsuite>" >> "$REPORT"
 
-	tearDown
+	tearDown 1>>"$STDOUT" 2>>"$STDERR"
 }
 
 METASHARE_DIR="$METASHARE_SW_DIR/metashare"
