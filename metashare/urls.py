@@ -56,9 +56,10 @@ sitemaps = {
   'site': RepositorySitemap,
 }
 
-urlpatterns += patterns('',
-  (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
-)
+if DJANGO_BASE != "":
+    urlpatterns += patterns('',
+      (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
+    )
 
 urlpatterns += patterns('',
   (r'^robots\.txt$', direct_to_template, 
