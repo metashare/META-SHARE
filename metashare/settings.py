@@ -195,6 +195,7 @@ PROJECT_APPS = (
     'metashare.accounts',
     'metashare.storage',
     'metashare.sync',
+    'metashare.stats',
 )
 
 # basic Haystack search backend configuration
