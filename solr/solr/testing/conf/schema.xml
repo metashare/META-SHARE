@@ -379,8 +379,14 @@
     <field name="audioSpeechGenreFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
+    <field name="languageVarietyFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
     <field name="resourceNameSort" type="text_en" indexed="true"
       stored="true" multiValued="false" />
+    
+    <field name="languageVarietyFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
     
     <field name="modalityTypeFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
