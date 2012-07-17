@@ -7,7 +7,6 @@ Disallow: /editor/
 Disallow: /accounts/
 Disallow: /storage/
 Disallow: /sync/
-Disallow: /site_media/
 Disallow: /selectable/
 
 Sitemap: {{ sitemap_url }}
