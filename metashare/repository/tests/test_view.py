@@ -111,7 +111,7 @@ class ViewTest(TestCase):
         url = self.resource.get_absolute_url()
         response = client.get(url, follow = True)
         self.assertTemplateUsed(response, 'repository/lr_view.html')
-        self.assertContains(response, '<title>Italian TTS Speech Corpus (Appen)</title>')
+        self.assertContains(response, '<title>Italian TTS Speech Corpus (Appen) - META-SHARE</title>')
 
 
 class DownloadViewTest(TestCase):
