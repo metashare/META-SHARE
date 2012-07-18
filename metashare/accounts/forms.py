@@ -136,7 +136,7 @@ class UserProfileForm(ModelForm):
         Meta class connecting to UserProfile object model.
         """
         model = UserProfile
-        exclude = ('user', 'modified', 'uuid')
+        exclude = ('user', 'modified', 'uuid', 'default_editor_group')
 
 
 class EditorGroupApplicationForm(ModelForm):
@@ -158,3 +158,24 @@ class EditorGroupApplicationForm(ModelForm):
         super(EditorGroupApplicationForm, self).__init__(*args, **kwargs)
         # If there is a list of editor groups, then modify the ModelChoiceField
         self.fields['editor_group'].queryset = editor_group_qs
+
+class DefaultEditorGroupForm(ModelForm):
+    """
+    Form used to add default editor groups.
+    """
+    class Meta:
+        """
+        Meta class connecting to UserProfile object model.
+        """
+        model = UserProfile
+        exclude = ('user', 'modified', 'uuid', 'birthdate', 'affiliation', \
+          'position', 'homepage')
+
+    def __init__(self, editor_group_qs, *args, **kwargs):
+        """
+        Initializes the `DefaultEditorGroupForm` with the editor groups
+        of the given query set.
+        """
+        super(DefaultEditorGroupForm, self).__init__(*args, **kwargs)
+        # If there is a list of editor groups, then modify the ModelChoiceField
+        self.fields['default_editor_group'].queryset = editor_group_qs
