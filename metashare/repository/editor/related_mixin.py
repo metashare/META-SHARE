@@ -61,9 +61,7 @@ class RelatedAdminMixin(object):
         '''
         Return True if db_field is marked as a hidden field, False otherwise.
         '''
-        _hidden_fields = getattr(self, 'hidden_fields', None)
-        _hidden_fields = _hidden_fields or []
-        if db_field.name in _hidden_fields:
+        if db_field.name in getattr(self, 'hidden_fields', ()):
             kwargs['widget'] = HiddenInput()
             kwargs['label'] = ''
 
