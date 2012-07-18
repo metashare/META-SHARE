@@ -25,7 +25,7 @@ from metashare.settings import LOG_LEVEL, LOG_HANDLER, MEDIA_URL
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
 from metashare.storage.models import PUBLISHED
-from metashare.stats.recommendations import SessionResourcesTracker
+from metashare.recommendations.recommendations import SessionResourcesTracker
 
 
 MAXIMUM_READ_BLOCK_SIZE = 4096

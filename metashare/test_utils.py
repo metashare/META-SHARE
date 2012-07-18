@@ -14,7 +14,7 @@ from metashare.repository.models import resourceInfoType_model, \
     personInfoType_model, actorInfoType_model, documentationInfoType_model, \
     documentInfoType_model, targetResourceInfoType_model, organizationInfoType_model, \
     projectInfoType_model
-from metashare.stats.models import TogetherManager
+from metashare.recommendations.models import TogetherManager
 from metashare.storage.models import PUBLISHED, MASTER, StorageObject, \
     RemovedObject
 from metashare.xml_utils import import_from_file

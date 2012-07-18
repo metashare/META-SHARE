@@ -3,9 +3,9 @@ Created on 16.07.2012
 
 @author: steffen
 '''
-import datetime
-from metashare.stats.models import TogetherManager
 from metashare import settings
+from metashare.recommendations.models import TogetherManager
+import datetime
 
 # viewed and downloaded resources are tracked
 class Resource:
