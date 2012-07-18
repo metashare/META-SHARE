@@ -429,11 +429,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
             form = self.ConfirmDeleteForm(request.POST)
             if form.is_valid():
                 for resource in can_be_deleted:
-                    resource.storage_object.deleted = True
-                    resource.storage_object.save()
-                    # explicitly write metadata XML and storage object to the storage folder
-                    resource.storage_object.update_storage()
-                    
+                    self.delete_model(request, resource)
                 count = len(can_be_deleted)
                 messages.success(request,
                     ungettext('Successfully deleted %d resource.',

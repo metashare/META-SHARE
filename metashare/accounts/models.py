@@ -84,12 +84,6 @@ class EditorGroup(Group):
     # differentiate its instances from other Django `Group`s. That's why it
     # doesn't have any custom fields.
 
-    def __unicode__(self):
-        """
-        Return Unicode representation for this instance.
-        """
-        return u'<EditorGroup "{0}">'.format(self.name)
-
     def get_members(self):
         return User.objects.filter(groups__name=self.name)
 

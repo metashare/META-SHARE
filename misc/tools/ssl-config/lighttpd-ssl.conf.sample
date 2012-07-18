@@ -1,0 +1,82 @@
+server.modules = (
+  "mod_redirect",
+  "mod_rewrite",
+  "mod_access",
+  "mod_fastcgi",
+  "mod_accesslog",
+  "mod_auth",
+  "mod_alias"
+)
+
+
+server.document-root = "%%METASHARE_SW_DIR%%/metashare"
+server.name = "%%SERVER_NAME%%"
+server.port = %%LIGHT_HTTPS_PORT%%
+server.username = "%%LIGHT_USERNAME%%"
+server.groupname = "%%LIGHT_GROUPNAME%%"
+server.bind = "%%LIGHT_ADDR%%"
+server.tag = "%%LIGHT_TAG%%"
+server.pid-file = "%%METASHARE_SW_DIR%%/metashare/lighttpd.pid"
+server.errorlog = "%%LOG_DIR%%/metashare-error.log"
+accesslog.filename = "%%LOG_DIR%%/metashare-access.log"
+
+ssl.engine = "enable"
+ssl.pemfile = "%%PEM_FILE%%"
+ssl.ca-file = "%%CA_FILE%%"
+
+debug.log-file-not-found = "enable"
+debug.log-request-header = "enable"
+debug.log-request-handling = "enable"
+debug.log-response-header = "enable"
+
+$SERVER["socket"] == ":%%LIGHT_HTTP_PORT%%" {
+  $HTTP["host"] =~ "(.*)" {
+    url.redirect = (
+      "^/metashare.fcgi/(.*)" => "https://localhost:%%LIGHT_HTTPS_PORT%%/$1",
+      "^/(.*)" => "https://localhost:" + server.port + "/$1"
+    )
+  }
+}
+
+fastcgi.server = (
+  "/metashare.fcgi" => (
+    "main" => (
+      "host" => "%%PYTHON_ADDR%%",
+      "port" => %%PYTHON_PORT%%,
+      "check-local" => "disable",
+    )
+  ),
+)
+
+url.rewrite-once = (
+    "^(/media.*)$" => "$1",
+    "^/site_(media.*)$" => "/$1",
+    "^/favicon\.ico$" => "/media/images/favicon.ico",
+    "^(/.*)$" => "/metashare.fcgi$1",
+)
+
+
+# mimetype mapping
+mimetype.assign = (
+  ".pdf"          =>      "application/pdf",
+  ".sig"          =>      "application/pgp-signature",
+  ".gz"           =>      "application/x-gzip",
+  ".tar.gz"       =>      "application/x-tgz",
+  ".tgz"          =>      "application/x-tgz",
+  ".tar"          =>      "application/x-tar",
+  ".zip"          =>      "application/zip",
+  ".gif"          =>      "image/gif",
+  ".jpg"          =>      "image/jpeg",
+  ".jpeg"         =>      "image/jpeg",
+  ".png"          =>      "image/png",
+  ".css"          =>      "text/css",
+  ".html"         =>      "text/html; charset=utf-8",
+  ".htm"          =>      "text/html; charset=utf-8",
+  ".js"           =>      "text/javascript",
+  ".txt"          =>      "text/plain",
+  ".dtd"          =>      "text/xml",
+  ".xml"          =>      "text/xml",
+  ".bz2"          =>      "application/x-bzip",
+  ".tar.bz2"      =>      "application/x-bzip-compressed-tar"
+ )
+index-file.names = ( "index.html", )

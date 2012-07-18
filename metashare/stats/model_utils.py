@@ -69,7 +69,7 @@ def saveQueryStats(query, facets, found, exectime=0, request=None):
     stat.found = found
     stat.exectime = exectime    
     stat.save()
-    LOGGER.debug('STATS: Query {0}.'.format(query))
+    LOGGER.debug(u'STATS: Query {0}.'.format(query))
 
 
 def getLRStats(lrid):
