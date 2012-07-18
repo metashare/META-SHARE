@@ -26,7 +26,7 @@ from django.utils.translation import ugettext as _
 
 from metashare.accounts.forms import RegistrationRequestForm, \
   ResetRequestForm, UserProfileForm, EditorGroupApplicationForm, \
-  DefaultEditorGroupForm
+  AddDefaultEditorGroupForm, RemoveDefaultEditorGroupForm
 from metashare.accounts.models import RegistrationRequest, ResetRequest, \
   UserProfile, EditorGroupApplication, ManagerGroup, EditorGroup
 from metashare.settings import SSO_SECRET_KEY, DJANGO_URL, \
@@ -216,9 +216,9 @@ def edit_profile(request):
     editor_groups_member_of = []
     for edt_group in EditorGroup.objects.filter(name__in=profile.user.groups.values_list('name', flat=True)):
         if profile.default_editor_group.filter(name=edt_group.name).count() == 0:
-            editor_groups_member_of.append({'name': edt_group.name, 'default': 'no'})
+            editor_groups_member_of.append({'name': edt_group.name, 'default': False})
         else:
-            editor_groups_member_of.append({'name': edt_group.name, 'default': 'yes'})
+            editor_groups_member_of.append({'name': edt_group.name, 'default': True})
 
     dictionary = {'title': 'Edit profile information', 'form': form, 
         'groups_applied_for': [edt_reg.editor_group.name for edt_reg
@@ -326,23 +326,23 @@ def add_default_editor_group(request):
     if request.user.username == 'MetaShareUser':
         return redirect('metashare.views.frontpage')
 
+    # Get UserProfile instance corresponding to the current user.
+    profile = request.user.get_profile()
+
     # Exclude from the list the editor groups for which the user is not a member
-    #TODO: and that are already default
     available_editor_groups = EditorGroup.objects \
         .filter(name__in=request.user.groups.values_list('name', flat=True)) \
-        .filter(name__in=request.user.groups.values_list('name', flat=True))
+        .exclude(name__in=profile.default_editor_group.values_list('name', flat=True))
 
     # Check if the form has been submitted.
     if request.method == "POST":
         # If so, bind the creation form to HTTP POST values.
-        form = DefaultEditorGroupForm(available_editor_groups, request.POST)
+        form = AddDefaultEditorGroupForm(available_editor_groups, request.POST)
         # Check if the form has validated successfully.
         if form.is_valid():
             # Get submitted editor groups
             dflt_edt_grps = form.cleaned_data['default_editor_group']
 
-            # Get UserProfile instance corresponding to the current user.
-            profile = request.user.get_profile()
             for dflt_edt_grp in dflt_edt_grps:
                 for edt_grp in EditorGroup.objects.filter(name=dflt_edt_grp.name):
                     profile.default_editor_group.add(edt_grp)
@@ -353,7 +353,7 @@ def add_default_editor_group(request):
             # Redirect the user to the edit profile page.
             return redirect('metashare.views.edit_profile')
 
-    # Otherwise, render a new DefaultEditorGroupForm instance
+    # Otherwise, render a new AddDefaultEditorGroupForm instance
     else:
         # Check whether there is an editor group the user can add to the default list.
         if available_editor_groups.count() == 0:
@@ -363,10 +363,61 @@ def add_default_editor_group(request):
             # Redirect the user to the edit profile page.
             return redirect('metashare.views.edit_profile')
         
-        form = DefaultEditorGroupForm(available_editor_groups)
+        form = AddDefaultEditorGroupForm(available_editor_groups)
 
     dictionary = {'title': 'Add default editor group', 'form': form}
-    return render_to_response('accounts/default_editor_group.html',
+    return render_to_response('accounts/add_default_editor_group.html',
+                        dictionary, context_instance=RequestContext(request))
+
+@login_required
+def remove_default_editor_group(request):
+    """
+    Remove default Editor Groups.
+    """
+    # The "virtual" MetaShareUser cannot remove default editor group
+    if request.user.username == 'MetaShareUser':
+        return redirect('metashare.views.frontpage')
+
+    # Get UserProfile instance corresponding to the current user.
+    profile = request.user.get_profile()
+
+    # Include in the list only the default editor groups of the user
+    available_editor_groups = EditorGroup.objects \
+        .filter(name__in=profile.default_editor_group.values_list('name', flat=True))
+
+    # Check if the form has been submitted.
+    if request.method == "POST":
+        # If so, bind the creation form to HTTP POST values.
+        form = RemoveDefaultEditorGroupForm(available_editor_groups, request.POST)
+        # Check if the form has validated successfully.
+        if form.is_valid():
+            # Get submitted editor groups
+            dflt_edt_grps = form.cleaned_data['default_editor_group']
+
+            for dflt_edt_grp in dflt_edt_grps:
+                for edt_grp in EditorGroup.objects.filter(name=dflt_edt_grp.name):
+                    profile.default_editor_group.remove(edt_grp)
+                    messages.success(request, _('You have successfully ' \
+                      'removed default editor group "%s".') % (dflt_edt_grp.name,))
+            profile.save()
+
+            # Redirect the user to the edit profile page.
+            return redirect('metashare.views.edit_profile')
+
+    # Otherwise, render a new RemoveDefaultEditorGroupForm instance
+    else:
+        # Check whether there is an editor group the user can remove from the default list.
+        if available_editor_groups.count() == 0:
+            # If there is no editor group created yet, send an error message.
+            messages.error(request, _('There are no editor groups you can '
+                'remove from your default list.'))
+            # Redirect the user to the edit profile page.
+            return redirect('metashare.views.edit_profile')
+        
+        form = RemoveDefaultEditorGroupForm(available_editor_groups)
+
+    dictionary = {'title': 'Remove default editor group', 'form': form}
+    return render_to_response('accounts/remove_default_editor_group.html',
                         dictionary, context_instance=RequestContext(request))
 
 
