@@ -36,5 +36,3 @@ class UsageStats(models.Model):
     
     #def __unicode__(self):
     #    return "U>> " +str(self.lrid) + "," + str(self.elname) + "," + str(self.elparent) + "," +str(self.text)+ "," + str(self.count)
-
-

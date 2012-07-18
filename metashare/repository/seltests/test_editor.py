@@ -1,4 +1,3 @@
-from django.contrib.auth.models import User
 from django_selenium.testcases import SeleniumTestCase
 from metashare import settings, test_utils
 from metashare.accounts.models import EditorGroup, ManagerGroup
@@ -39,10 +38,9 @@ class EditorTest(SeleniumTestCase):
 
 
     def tearDown(self):
-        resourceInfoType_model.objects.all().delete()
-        User.objects.all().delete()
-        EditorGroup.objects.all().delete()
-        ManagerGroup.objects.all().delete()
+        test_utils.clean_resources_db()
+        test_utils.clean_storage()
+        test_utils.clean_user_db()
 
         super(EditorTest, self).tearDown()
         self.assertEqual([], self.verification_errors)

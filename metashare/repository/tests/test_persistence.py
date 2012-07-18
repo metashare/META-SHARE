@@ -54,7 +54,7 @@ class PersistenceTest(TestCase):
         call_command('rebuild_index', interactive=False, using=settings.TEST_MODE_NAME)
         
     def tearDown(self):
-        test_utils.clean_db()
+        test_utils.clean_resources_db()
 
     def test_save_metadata(self):
         """
@@ -131,7 +131,7 @@ class RestoreTest(TestCase):
         call_command('rebuild_index', interactive=False, using=settings.TEST_MODE_NAME)
 
     def tearDown(self):
-        test_utils.clean_db()
+        test_utils.clean_resources_db()
 
     def test_valid_restore(self):
         """
@@ -268,7 +268,7 @@ class UpdateTest(TestCase):
         call_command('rebuild_index', interactive=False, using=settings.TEST_MODE_NAME)
         
     def tearDown(self):
-        test_utils.clean_db()
+        test_utils.clean_resources_db()
         
     def test_update(self):
         # define a maximum age of 4 seconds; this means that a resource is

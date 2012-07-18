@@ -1,5 +1,5 @@
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.auth.models import User, Permission
+from django.contrib.auth.models import Permission
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.client import Client
@@ -57,9 +57,9 @@ class ViewTest(TestCase):
         """
         Clean up the test
         """
-        test_utils.clean_db()
+        test_utils.clean_resources_db()
         test_utils.clean_storage()
-        User.objects.all().delete()
+        test_utils.clean_user_db()
 
     def testView(self):
         """
@@ -161,9 +161,9 @@ class DownloadViewTest(TestCase):
         """
         Cleans up the test environment.
         """
-        test_utils.clean_db()
+        test_utils.clean_resources_db()
         test_utils.clean_storage()
-        User.objects.all().delete()
+        test_utils.clean_user_db()
 
     def test_non_downloadable_resource(self):
         """
