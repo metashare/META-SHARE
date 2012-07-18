@@ -34,15 +34,16 @@ class RelatedAdminMixin(object):
     the ModelAdmin and the Inline subclasses.
     '''
     
+    kwargs = {'position':'top'}
     custom_m2m_widget_overrides = {
         # Reusable types with actual ajax search:
-        actorInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=ActorLookup), 
-        documentationInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=DocumentationLookup),
-        documentInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=DocumentLookup),
-        personInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=PersonLookup),
-        organizationInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=OrganizationLookup),
-        projectInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=ProjectLookup),
-        targetResourceInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=TargetResourceLookup),
+        actorInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=ActorLookup, **kwargs), 
+        documentationInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=DocumentationLookup, **kwargs),
+        documentInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=DocumentLookup, **kwargs),
+        personInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=PersonLookup, **kwargs),
+        organizationInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=OrganizationLookup, **kwargs),
+        projectInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=ProjectLookup, **kwargs),
+        targetResourceInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=TargetResourceLookup, **kwargs),
         # Custom one-to-many widgets needed to avoid nested inlines:
         membershipInfoType_model: OneToManyWidget(lookup_class=MembershipDummyLookup),
         languageVarietyInfoType_model: OneToManyWidget(lookup_class=LanguageVarietyDummyLookup),
