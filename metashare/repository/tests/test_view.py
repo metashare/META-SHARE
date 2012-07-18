@@ -61,16 +61,6 @@ class ViewTest(TestCase):
         test_utils.clean_storage()
         test_utils.clean_user_db()
 
-    def testView(self):
-        """
-        Tries to view a resource
-        """
-        client = Client()
-        url = self.resource.get_absolute_url()
-        response = client.get(url, follow = True)
-        self.assertTemplateUsed(response, 'repository/lr_view.html')
-        self.assertNotContains(response, "Edit")
-
     def test_staff_user_sees_editor(self):
         """
         Tests whether a staff user can edit a resource (in seeing the edit button)
@@ -102,6 +92,47 @@ class ViewTest(TestCase):
         response = client.get(url, follow = True)
         self.assertTemplateUsed(response, 'repository/lr_view.html')
         self.assertNotContains(response, "Editor")
+        
+    def test_manager_can_edit_resource(self):
+        """
+        Tests whether the link of the edit button is the good one
+        """
+        client = Client()
+        client.login(username='manageruser', password='secret')
+        resource = _import_resource('testfixture.xml', ViewTest.test_editor_group)
+        url = self.resource.get_absolute_url()
+        response = client.get(url, follow = True)
+        self.assertTemplateUsed(response, 'repository/lr_view.html')
+        self.assertContains(response, "repository/resourceinfotype_model/{0}".format(
+                        self.resource.id))
+        
+    def test_owner_can_edit_resource(self):
+        """
+        Tests whether the link of the edit button is the good one
+        """
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        resource = _import_resource('testfixture.xml')
+        resource.owners.add(User.objects.get(username='normaluser'))
+        resource.save()
+        url = self.resource.get_absolute_url()
+        response = client.get(url, follow = True)
+        self.assertTemplateUsed(response, 'repository/lr_view.html')
+        self.assertContains(response, "repository/resourceinfotype_model/{0}".format(
+                        self.resource.id))
+        
+    def test_normal_user_cannot_edit_resource(self):
+        """
+        Tests that there is no edit button link for an unauthorized user
+        """
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        resource = _import_resource('testfixture.xml')
+        url = self.resource.get_absolute_url()
+        response = client.get(url, follow = True)
+        self.assertTemplateUsed(response, 'repository/lr_view.html')
+        self.assertNotContains(response, "repository/resourceinfotype_model/{0}".format(
+                        self.resource.id))
 
 
 class DownloadViewTest(TestCase):
