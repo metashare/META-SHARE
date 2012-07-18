@@ -9,11 +9,3 @@ class RepositorySitemap(Sitemap):
     
     def items(self):
         return resourceInfoType_model.objects.filter(storage_object__publication_status=PUBLISHED).filter(storage_object__deleted=False)
-
-    def location(self, obj):
-        url = '{}{}'.format(DJANGO_URL, obj.get_absolute_url())
-        # Specific to sitemap module. It insists on prepending a
-        # "http://" before the url.
-        if url.startswith("http://"):
-            url = url[7:]
-        return url
