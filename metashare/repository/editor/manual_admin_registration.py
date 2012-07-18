@@ -54,24 +54,22 @@ class LanguageDescriptionInfoAdmin(SchemaModelAdmin):
     readonly_fields = ('languageDescriptionMediaType', )
     show_tabbed_fieldsets = True
 
-
 class CorpusAudioModelAdmin(SchemaModelAdmin):
     show_tabbed_fieldsets = True
-    
-class PersonModelAdmin(SchemaModelAdmin):
-    hidden_fields = ('source_url', 'copy_status', ) 
-        
-class OrganizationModelAdmin(SchemaModelAdmin):
-    hidden_fields = ('source_url', 'copy_status', ) 
-    
-class ProjectModelAdmin(SchemaModelAdmin):
-    hidden_fields = ('source_url', 'copy_status', ) 
-    
-class DocumentModelAdmin(SchemaModelAdmin):
-    hidden_fields = ('source_url', 'copy_status', ) 
-    
 
-            
+class PersonModelAdmin(SchemaModelAdmin):
+    exclude = ('source_url', 'copy_status')
+
+class OrganizationModelAdmin(SchemaModelAdmin):
+    exclude = ('source_url', 'copy_status')
+
+class ProjectModelAdmin(SchemaModelAdmin):
+    exclude = ('source_url', 'copy_status')
+
+class DocumentModelAdmin(SchemaModelAdmin):
+    exclude = ('source_url', 'copy_status')
+
+
 # Models which are always rendered inline so they don't need their own admin form:
 purely_inline_models = (
     identificationInfoType_model,
