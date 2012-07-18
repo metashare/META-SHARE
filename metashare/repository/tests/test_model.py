@@ -39,7 +39,7 @@ class ModelTest(TestCase):
         """
         Clean up the test
         """
-        test_utils.clean_db()
+        test_utils.clean_resources_db()
         test_utils.clean_storage()
     
     def testRollbackOnImportError(self):
@@ -167,7 +167,7 @@ class ModelUtilsTest(TestCase):
         """
         Cleans the database after a test.
         """
-        test_utils.clean_db()
+        test_utils.clean_resources_db()
         test_utils.clean_storage()
 
     def test_get_root_resources(self):
