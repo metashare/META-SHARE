@@ -5,7 +5,7 @@ from django.test import TestCase
 from django.test.client import Client
 
 from metashare import test_utils, settings
-from metashare.accounts.models import UserProfile
+from metashare.accounts.models import UserProfile, EditorGroup, ManagerGroup
 from metashare.repository import views
 from metashare.settings import DJANGO_BASE, ROOT_PATH
 from metashare.test_utils import create_user
