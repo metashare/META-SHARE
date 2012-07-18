@@ -4507,10 +4507,6 @@ class textClassificationInfoType_model(SchemaModel):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
 
-CORPUSVIDEOINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
-])
-
 # pylint: disable-msg=C0103
 class corpusVideoInfoType_model(SchemaModel):
     """
@@ -4568,11 +4564,7 @@ class corpusVideoInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      
-      max_length=30,
-      choices=sorted(CORPUSVIDEOINFOTYPE_MEDIATYPE_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
+      default="video", editable=False, max_length=5, )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -7373,8 +7365,8 @@ class toolServiceInfoType_model(resourceComponentTypeType_model):
 
     resourceType = models.CharField(
       verbose_name='Resource', 
-      help_text='The type of the resource that atool or service takes as' \
-      ' input or produces as output',
+      help_text='The type of the resource that a tool or service takes a' \
+      's input or produces as output',
       default="toolService", editable=False, max_length=30, )
 
     toolServiceType = models.CharField(
