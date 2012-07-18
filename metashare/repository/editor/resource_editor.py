@@ -1080,8 +1080,10 @@ class ResourceModelAdmin(SchemaModelAdmin):
         # Target state already met:
         if user_id in owners:
             return
+
         # Get UserProfile instance corresponding to the current user.
         profile = request.user.get_profile()
+
         # Need to add user to owners and groups to editor_groups
         owners.append(user_id)
         editor_groups = request.POST.getlist('editor_groups')
