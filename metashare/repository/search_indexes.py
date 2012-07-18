@@ -120,7 +120,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
                                 label=_('MIME Type'), facet_id=13, parent_id=0,
                                 faceted=True)
     bestPracticesFilter = LabeledMultiValueField(
-                                label=_('Best Practices'), facet_id=14, parent_id=0,
+                                label=_('Conformance to Standards/Best Practices'), facet_id=14, parent_id=0,
                                 faceted=True)
     domainFilter = LabeledMultiValueField(
                                 label=_('Domain'), facet_id=15, parent_id=0,
