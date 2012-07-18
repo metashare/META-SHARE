@@ -2,23 +2,25 @@
 Project: META-SHARE
 Utility functions for unit tests useful across apps.
 """
-import os
-
 from django.contrib.auth.models import Group, User
 from django.core.management import call_command
 from django.test.testcases import TestCase
-
 from metashare import settings
 from metashare.accounts.admin import ManagerGroupAdmin
+from metashare.accounts.models import EditorGroupApplication, EditorGroup, \
+    ManagerGroup, RegistrationRequest, ResetRequest, UserProfile
 from metashare.repository.management import GROUP_GLOBAL_EDITORS
 from metashare.repository.models import resourceInfoType_model, \
     personInfoType_model, actorInfoType_model, documentationInfoType_model, \
-    documentInfoType_model, targetResourceInfoType_model, \
-    organizationInfoType_model, projectInfoType_model
-from metashare.storage.models import PUBLISHED, MASTER, StorageObject,\
+    documentInfoType_model, targetResourceInfoType_model, organizationInfoType_model, \
+    projectInfoType_model
+from metashare.stats.models import TogetherManager
+from metashare.storage.models import PUBLISHED, MASTER, StorageObject, \
     RemovedObject
 from metashare.xml_utils import import_from_file
-from metashare.stats.models import TogetherManager
+import os
+
+
 
 
 TEST_STORAGE_PATH = '{0}/test-tmp'.format(settings.ROOT_PATH)
@@ -30,7 +32,7 @@ def setup_test_storage():
     except:
         pass
 
-def clean_db():
+def clean_resources_db():
     """
     Deletes all entities from db.
     """
@@ -49,6 +51,19 @@ def clean_db():
     projectInfoType_model.objects.all().delete()
     # delete recommendation objects
     TogetherManager.objects.all().delete()
+
+def clean_user_db():
+    """
+    Deletes all user related entities from db.
+    """    
+    EditorGroupApplication.objects.all().delete()
+    EditorGroup.objects.exclude(name=GROUP_GLOBAL_EDITORS).delete()
+    Group.objects.exclude(name=GROUP_GLOBAL_EDITORS).delete()
+    ManagerGroup.objects.all().delete()
+    RegistrationRequest.objects.all().delete()
+    ResetRequest.objects.all().delete()
+    UserProfile.objects.all().delete()
+    User.objects.all().delete()
 
 def clean_storage():
     """

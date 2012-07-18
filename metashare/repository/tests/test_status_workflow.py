@@ -43,10 +43,10 @@ class StatusWorkflowTest(TestCase):
         """
         Clean up the test
         """
-        test_utils.set_index_active(True)
-        test_utils.clean_db()
+        test_utils.clean_resources_db()
         test_utils.clean_storage()
-        
+        test_utils.clean_user_db()
+        test_utils.set_index_active(True)
         
     def test_can_publish_ingested(self):
         client = Client()

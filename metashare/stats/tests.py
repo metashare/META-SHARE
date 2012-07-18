@@ -59,8 +59,9 @@ class StatsTest(django.test.TestCase):
         """
         Clean up the test
         """
-        test_utils.clean_db()
+        test_utils.clean_resources_db()
         test_utils.clean_storage()
+        test_utils.clean_user_db()
     
     def testStatActions(self):
         """
@@ -180,7 +181,7 @@ class StatsTest(django.test.TestCase):
         
         client = self.client_with_user_logged_in(StatsTest.manager_login)
         xmlfile = open(TESTFIXTURES_ZIP, 'rb')
-        response = client.post(ADMINROOT+'upload_xml/', {'description': xmlfile, 'uploadTerms':'on' }, follow=True)
+        client.post(ADMINROOT+'upload_xml/', {'description': xmlfile, 'uploadTerms':'on' }, follow=True)
         
         statsdata = getLRLast(UPDATE_STAT, 2)
         self.assertEqual(len(statsdata), 2)
@@ -266,7 +267,7 @@ class SimpleTogetherManagerTest(django.test.TestCase):
         """
         Clean up the test
         """
-        test_utils.clean_db()
+        test_utils.clean_resources_db()
         test_utils.clean_storage()
     
 
@@ -344,7 +345,7 @@ class TogetherManagerTest(django.test.TestCase):
         """
         Clean up the test
         """
-        test_utils.clean_db()
+        test_utils.clean_resources_db()
         test_utils.clean_storage()
     
 
@@ -418,7 +419,7 @@ class SessionResourcesTrackerTest(django.test.TestCase):
         """
         Clean up the test
         """
-        test_utils.clean_db()
+        test_utils.clean_resources_db()
         test_utils.clean_storage()
         settings.MAX_VIEW_INTERVAL = self.max_view_interval_backup
         settings.MAX_DOWNLOAD_INTERVAL = self.max_download_interval_backup 
@@ -515,8 +516,9 @@ class SessionTest(django.test.TestCase):
         """
         Clean up the test
         """
-        test_utils.clean_db()
+        test_utils.clean_resources_db()
         test_utils.clean_storage()
+        test_utils.clean_user_db()
         
     def test_views(self):
         # client 1 views all 4 resources
