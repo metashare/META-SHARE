@@ -173,8 +173,12 @@ class EditorTest(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         self.assertEqual("The Resource \"Test Text Corpus\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
+        
+        # check the editor group of the resource is the default editor group of the user
+        self.assertEqual(self.test_editor_group, 
+          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
 
-        #make sure an internal resource cannot be published
+        # make sure an internal resource cannot be published
         self.publish(driver)
         self.assertEqual("internal",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
@@ -269,7 +273,11 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("The Resource \"Test Audio Corpus\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
 
-        #make sure an internal resource cannot be published
+        # check the editor group of the resource is the default editor group of the user
+        self.assertEqual(self.test_editor_group, 
+          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
+
+        # make sure an internal resource cannot be published
         self.publish(driver)
         self.assertEqual("internal",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
@@ -370,7 +378,11 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("The Resource \"Test Text Language Description\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
         
-        #make sure an internal resource cannot be published
+        # check the editor group of the resource is the default editor group of the user
+        self.assertEqual(self.test_editor_group, 
+          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
+
+        # make sure an internal resource cannot be published
         self.publish(driver)
         self.assertEqual("internal",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
@@ -472,7 +484,11 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("The Resource \"Test Lexical Resource Text\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
 
-        #make sure an internal resource cannot be published
+        # check the editor group of the resource is the default editor group of the user
+        self.assertEqual(self.test_editor_group, 
+          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
+
+        # make sure an internal resource cannot be published
         self.publish(driver)
         self.assertEqual("internal",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
@@ -562,7 +578,11 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("The Resource \"Test Tool\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
         
-        #make sure an internal resource cannot be published
+        # check the editor group of the resource is the default editor group of the user
+        self.assertEqual(self.test_editor_group, 
+          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
+
+        # make sure an internal resource cannot be published
         self.publish(driver)
         self.assertEqual("internal",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
