@@ -1,36 +1,33 @@
 '''
-This file contains the manually chosen admin forms, as needed for an easy-to-use editor.
+This file contains the manually chosen admin forms, as needed for an easy-to-use
+editor.
 '''
-
 from django.contrib import admin
-# pylint: disable-msg=W0611
-from metashare.repository.models import resourceInfoType_model, \
-    identificationInfoType_model, \
-    metadataInfoType_model, communicationInfoType_model, \
-    validationInfoType_model, relationInfoType_model, \
-    foreseenUseInfoType_model, corpusMediaTypeType_model, \
-    corpusTextInfoType_model, corpusVideoInfoType_model, \
-    textNumericalFormatInfoType_model, videoClassificationInfoType_model, \
-    imageClassificationInfoType_model, \
-    participantInfoType_model, corpusAudioInfoType_model,\
-    corpusImageInfoType_model, corpusTextNumericalInfoType_model,\
-    corpusTextNgramInfoType_model, languageDescriptionInfoType_model,\
-    languageDescriptionTextInfoType_model,\
-    languageDescriptionVideoInfoType_model,\
-    languageDescriptionImageInfoType_model,\
-    lexicalConceptualResourceInfoType_model,\
-    lexicalConceptualResourceTextInfoType_model,\
-    lexicalConceptualResourceAudioInfoType_model,\
-    lexicalConceptualResourceVideoInfoType_model,\
-    lexicalConceptualResourceImageInfoType_model, toolServiceInfoType_model,\
-    licenceInfoType_model, resourceInfoType_model, personInfoType_model, \
-projectInfoType_model, documentInfoType_model, organizationInfoType_model
-from metashare.repository.editor.superadmin import SchemaModelAdmin
+
 from metashare.repository.editor import admin_site as editor_site
 from metashare.repository.editor.resource_editor import ResourceModelAdmin, \
     LicenceModelAdmin
-
-
+from metashare.repository.editor.superadmin import SchemaModelAdmin
+from metashare.repository.models import resourceInfoType_model, \
+    identificationInfoType_model, metadataInfoType_model, \
+    communicationInfoType_model, validationInfoType_model, \
+    relationInfoType_model, foreseenUseInfoType_model, \
+    corpusMediaTypeType_model, corpusTextInfoType_model, \
+    corpusVideoInfoType_model, textNumericalFormatInfoType_model, \
+    videoClassificationInfoType_model, imageClassificationInfoType_model, \
+    participantInfoType_model, corpusAudioInfoType_model, \
+    corpusImageInfoType_model, corpusTextNumericalInfoType_model, \
+    corpusTextNgramInfoType_model, languageDescriptionInfoType_model, \
+    languageDescriptionTextInfoType_model, \
+    languageDescriptionVideoInfoType_model, \
+    languageDescriptionImageInfoType_model, \
+    lexicalConceptualResourceInfoType_model, \
+    lexicalConceptualResourceTextInfoType_model, \
+    lexicalConceptualResourceAudioInfoType_model, \
+    lexicalConceptualResourceVideoInfoType_model, \
+    lexicalConceptualResourceImageInfoType_model, toolServiceInfoType_model, \
+    licenceInfoType_model, personInfoType_model, projectInfoType_model, \
+    documentInfoType_model, organizationInfoType_model
 
 
 # Custom admin classes
