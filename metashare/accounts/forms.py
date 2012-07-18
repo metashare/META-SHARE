@@ -159,7 +159,7 @@ class EditorGroupApplicationForm(ModelForm):
         # If there is a list of editor groups, then modify the ModelChoiceField
         self.fields['editor_group'].queryset = editor_group_qs
 
-class DefaultEditorGroupForm(ModelForm):
+class AddDefaultEditorGroupForm(ModelForm):
     """
     Form used to add default editor groups.
     """
@@ -173,9 +173,30 @@ class DefaultEditorGroupForm(ModelForm):
 
     def __init__(self, editor_group_qs, *args, **kwargs):
         """
-        Initializes the `DefaultEditorGroupForm` with the editor groups
+        Initializes the `AddDefaultEditorGroupForm` with the editor groups
         of the given query set.
         """
-        super(DefaultEditorGroupForm, self).__init__(*args, **kwargs)
+        super(AddDefaultEditorGroupForm, self).__init__(*args, **kwargs)
+        # If there is a list of editor groups, then modify the ModelChoiceField
+        self.fields['default_editor_group'].queryset = editor_group_qs
+
+class RemoveDefaultEditorGroupForm(ModelForm):
+    """
+    Form used to remove default editor groups.
+    """
+    class Meta:
+        """
+        Meta class connecting to UserProfile object model.
+        """
+        model = UserProfile
+        exclude = ('user', 'modified', 'uuid', 'birthdate', 'affiliation', \
+          'position', 'homepage')
+
+    def __init__(self, editor_group_qs, *args, **kwargs):
+        """
+        Initializes the `RemoveDefaultEditorGroupForm` with the editor groups
+        of the given query set.
+        """
+        super(RemoveDefaultEditorGroupForm, self).__init__(*args, **kwargs)
         # If there is a list of editor groups, then modify the ModelChoiceField
         self.fields['default_editor_group'].queryset = editor_group_qs
