@@ -16,11 +16,11 @@ import shutil
 def _import_resource(res_file_name):
     """
     Imports the resource with the given file name; looks for the file in
-    the folder repository/fixtures/; sets publication status to
+    the folder recommendations/fixtures/; sets publication status to
     PUBLISHED; returns the resource
     """
     res = test_utils.import_xml(
-      '{0}/repository/fixtures/{1}'.format(ROOT_PATH, res_file_name))[0]
+      '{0}/recommendations/fixtures/{1}'.format(ROOT_PATH, res_file_name))[0]
     res.storage_object.publication_status = PUBLISHED
     res.storage_object.save()
     res.storage_object.update_storage()
