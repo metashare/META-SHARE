@@ -7,50 +7,14 @@ from django.test.client import Client
 from metashare import test_utils, settings
 from metashare.accounts.models import UserProfile
 from metashare.repository import views
-from metashare.settings import DJANGO_BASE, ROOT_PATH, DJANGO_URL
+from metashare.settings import DJANGO_BASE, ROOT_PATH, DJANGO_URL, SITEMAP_URL
 
 
-def _import_resource(fixture_name):
+class SEOTest(TestCase):
     """
-    Imports the XML resource description with the given file name.
-    
-    The new resource is published and returned.
+    Check the sitemap's and robots.txt's format
     """
-    result = test_utils.import_xml('{0}/repository/fixtures/{1}'
-                                    .format(ROOT_PATH, fixture_name))[0]
-    result.storage_object.published = True
-    result.storage_object.save()
-    return result
 
-class SitemapTest(TestCase):
-    """
-    Check the sitemap's format
-    """
-    
-    @classmethod
-    def set_up_class(cls):
-        test_utils.set_index_active(False)
-    
-    @classmethod
-    def tear_down_class(cls):
-        test_utils.set_index_active(True)
-        
-    def set_up(self):
-        """
-        Set up the detail view
-        """
-        test_utils.setup_test_storage()
-        self.resource = _import_resource('testfixture.xml')
-
-    def tear_down(self):
-        """
-        Clean up the test
-        """
-        test_utils.clean_db()
-        test_utils.clean_storage()
-        User.objects.all().delete()
-
-        
     def test_sitemap(self):
         """
         Tests the correct appearance of the sitemap
@@ -75,16 +39,13 @@ class SitemapTest(TestCase):
         """
         Tests the correct appearance of the robots.txt file
         """
+        client = Client()
         if DJANGO_BASE == '':
-            
+            response = client.get('/{0}robots.txt'.format(DJANGO_BASE),
+              follow=True)
+            self.assertContains(response, 
+              'Disallow: /admin/', status_code=200)
+            self.assertContains(response,
+              'Sitemap: {}'.format(SITEMAP_URL), status_code=200)
         else:
-			pass
-        
-        
-        
-    def test_title():
-        """
-        Tests whether the title of the resource is the resource name
-        """
-        
-        
+            pass
