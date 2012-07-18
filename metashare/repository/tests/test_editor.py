@@ -1443,3 +1443,15 @@ class EditorGroupApplicationTests(TestCase):
         self.assertNotContains(response, '<option value="1" '
                 'selected="selected">normaluser</option>', msg_prefix=
             'expected a manager not to be able to modify an application.')
+
+    def test_user_can_add_default_group(self):
+        """
+        Verifies that a user can set an editor group as default
+        """
+        client = Client()
+        client.login(username='editoruser', password='secret')
+        response = client.post('/{0}accounts/default_editor_group/'.format(DJANGO_BASE), \
+          {'editor_group': self.test_editor_group.pk}, follow=True)
+        self.assertNotContains(response, 'You have successfully added default editor group "{}".'.format(self.test_editor_group),
+          msg_prefix='expected the system to set an editor group as default.')
+        
