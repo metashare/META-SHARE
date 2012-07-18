@@ -5,7 +5,6 @@ from metashare.repository.seltests.test_utils import setup_screenshots_folder, \
 from metashare.settings import DJANGO_BASE, ROOT_PATH
 import time
 from django.core.management import call_command
-from metashare.repository.models import resourceInfoType_model
 from selenium.webdriver.support.select import Select
 
 
@@ -26,7 +25,8 @@ class FilterTest(SeleniumTestCase):
 
 
     def tearDown(self):
-        resourceInfoType_model.objects.all().delete()
+        test_utils.clean_resources_db()
+        test_utils.clean_storage()
 
         super(FilterTest, self).tearDown()
 

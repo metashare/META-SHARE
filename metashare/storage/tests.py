@@ -33,12 +33,7 @@ class StorageObjectTestCase(unittest.TestCase):
         """
         Removes the storage object instance from the database after testing.
         """
-        # Load storage object instance from database.
-        storage_object = StorageObject.objects.filter(pk=self.object_id)
-
-        # Delete instance from database if still existing.
-        if storage_object:
-            storage_object[0].delete()
+        test_utils.clean_resources_db()
 
 
     def test_revision_view(self):
@@ -190,7 +185,7 @@ class UpdateTests(unittest.TestCase):
         """
         Clean DB and storage folder after testing.
         """
-        test_utils.clean_db()
+        test_utils.clean_resources_db()
         test_utils.clean_storage()
 
     def test_update_new(self):

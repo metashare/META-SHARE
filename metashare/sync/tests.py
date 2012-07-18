@@ -142,7 +142,6 @@ class MetadataSyncTest (TestCase):
             'password': 'secret',
         }
         
-        StorageObject.objects.all().delete()
         testres = cls.import_test_resource('testfixture.xml', INGESTED)
         testres.storage_object.digest_modified = datetime.date(2012, 6, 1)
         testres.storage_object.save()
@@ -164,9 +163,9 @@ class MetadataSyncTest (TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        User.objects.all().delete()
-        test_utils.clean_db()
+        test_utils.clean_resources_db()
         test_utils.clean_storage()
+        test_utils.clean_user_db()
         set_index_active(True)
     
 
