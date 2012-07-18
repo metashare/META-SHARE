@@ -88,11 +88,12 @@ def set_site_from_django_url(app, created_models, verbosity, **kwargs):
     '''
     from metashare.settings import DJANGO_URL
     url_host = '://' in DJANGO_URL and DJANGO_URL[DJANGO_URL.find('://')+3:] or DJANGO_URL
-    url_host = '/' in url_host and url_host[:url_host.find('/')] or ''
+    url_host = '/' in url_host and url_host[:url_host.find('/')] or url_host
     from django.contrib.sites.models import Site
     site = Site.objects.get(pk=1)
     if site.domain != url_host:
         site.domain = url_host
+        site.name = 'META-SHARE'
         site.save()
 
 

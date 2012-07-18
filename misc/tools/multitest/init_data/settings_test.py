@@ -11,9 +11,11 @@ import tempfile
 import logging
 from logging.handlers import RotatingFileHandler
 
+cmd_folder = os.environ['NODE_DIR']
+
 # Logging settings for this Django project.
 LOG_LEVEL = logging.INFO
-LOG_FILENAME = join(tempfile.gettempdir(), "metashare.log")
+LOG_FILENAME = join(cmd_folder, "metashare.log")
 LOG_FORMAT = "[%(asctime)s] %(name)s::%(levelname)s %(message)s"
 LOG_DATE = "%m/%d/%Y @ %H:%M:%S"
 LOG_FORMATTER = logging.Formatter(LOG_FORMAT, LOG_DATE)
@@ -48,7 +50,9 @@ KNOWLEDGE_BASE_URL = 'http://metashare.ilsp.gr/portal/knowledgebase/'
 
 # Import local settings, i.e., DEBUG, TEMPLATE_DEBUG, TIME_ZONE,
 # SECRET_KEY, DATABASE_* settings and ADMINS.
-from local_settings import *
+import sys
+sys.path.insert(0, cmd_folder)
+from dj_settings.local_settings import *
 
 # If STORAGE_PATH does not exist, try to create it and halt if not possible.
 from os.path import exists
@@ -174,8 +178,10 @@ INSTALLED_APPS = (
     'metashare.stats',
 
     'metashare.repository',
-    'metashare.AdminTest',
 )
+
+#if os.name != 'nt':
+#    INSTALLED_APPS += ('kronos',)
 
 # Continuous Integration support using django_jenkins: only add application
 # if django_jenkins module can be imported properly.
