@@ -13,7 +13,7 @@ from metashare.repository import models
 from metashare.repository.models import languageDescriptionInfoType_model, \
     lexicalConceptualResourceInfoType_model, personInfoType_model
 from metashare.settings import DJANGO_BASE, ROOT_PATH
-from metashare.storage.models import PUBLISHED, REMOTE
+from metashare.storage.models import PUBLISHED, INGESTED, REMOTE
 
 ADMINROOT = '/{0}editor/'.format(DJANGO_BASE)
 TESTFIXTURE_XML = '{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
@@ -25,12 +25,15 @@ BROKENFIXTURES_ZIP = '{}/repository/fixtures/onegood_onebroken.zip'.format(ROOT_
 LEX_CONC_RES_XML = '{}/repository/test_fixtures/published-lexConcept-Text-FreEngGer.xml'.format(ROOT_PATH)
 
 
-def _import_test_resource(editor_group=None, path=TESTFIXTURE_XML):
+def _import_test_resource(editor_group=None, path=TESTFIXTURE_XML,
+                          pub_status=INGESTED):
     result = test_utils.import_xml(path)
     resource = result[0]
     if not editor_group is None:
         resource.editor_groups.add(editor_group)
         resource.save()
+    resource.storage_object.publication_status = pub_status
+    resource.storage_object.save()
     return resource
 
 
@@ -778,9 +781,8 @@ class DestructiveTests(TestCase):
             'password': 'secret',
         }
 
-        self.testfixture = _import_test_resource(self.test_editor_group)
-        self.testfixture.storage_object.publication_status = PUBLISHED
-        self.testfixture.storage_object.save()
+        self.testfixture = _import_test_resource(self.test_editor_group,
+                                                 pub_status=PUBLISHED)
 
     def tearDown(self):
         test_utils.clean_resources_db()
