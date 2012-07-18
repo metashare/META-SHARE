@@ -42,7 +42,7 @@ SYNC_NEEDS_AUTHENTICATION = True
 
 
 # URL for the Metashare Knowledge Base
-KNOWLEDGE_BASE_URL = 'http://metashare.ilsp.gr/portal/knowledgebase/'
+KNOWLEDGE_BASE_URL = 'http://www.meta-share.org/portal/knowledgebase/'
 
 
 # Import local settings, i.e., DEBUG, TEMPLATE_DEBUG, TIME_ZONE,
@@ -74,8 +74,6 @@ if not DJANGO_BASE.strip().endswith('/'):
 
 if DJANGO_BASE.strip().startswith('/'):
     DJANGO_BASE = DJANGO_BASE.strip()[1:]
-
-DJANGO_FULL_URL = '{}{}'.format(DJANGO_URL, DJANGO_BASE)
 
 # Defines the maximal lifetime for SSO tokens in seconds.
 MAX_LIFETIME_FOR_SSO_TOKENS = 30
@@ -240,4 +238,4 @@ if 'DISPLAY' in os.environ:
       os.environ['DISPLAY'])
 
 # sitemap url to be used in "robots.txt"
-SITEMAP_URL = '{}/sitemap.xml'.format(DJANGO_FULL_URL)
+SITEMAP_URL = '{}/sitemap.xml'.format(DJANGO_URL)
