@@ -29,6 +29,14 @@ PSP_XML = '{}/repository/test_fixtures/PSP/UIB-M10-9_v2.xml'.format(ROOT_PATH)
 class StatsTest(django.test.TestCase):
     manager_login = None
     
+    @classmethod
+    def setUpClass(cls):
+        test_utils.set_index_active(False)
+    
+    @classmethod
+    def tearDownClass(cls):
+        test_utils.set_index_active(True)
+    
     def setUp(self):
         """
         Sets up some resources with which to test.
@@ -47,6 +55,12 @@ class StatsTest(django.test.TestCase):
             'password': 'secret',
         }
         
+    def tearDown(self):
+        """
+        Clean up the test
+        """
+        test_utils.clean_db()
+        test_utils.clean_storage()
     
     def testStatActions(self):
         """
