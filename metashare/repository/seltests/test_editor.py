@@ -25,7 +25,7 @@ class EditorTest(SeleniumTestCase):
         # create an editor group managing user
         manager_user = test_utils.create_manager_user('manageruser', 'manager@example.com',
             'secret', (self.test_editor_group, self.test_manager_group))
-        manager_user.get_profile().default_editor_group.add(self.test_editor_group)
+        manager_user.get_profile().default_editor_groups.add(self.test_editor_group)
 
         # create an editor user
         test_utils.create_editor_user('editoruser', 'editor@example.com',

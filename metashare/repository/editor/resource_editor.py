@@ -1100,7 +1100,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         owners.append(user_id)
         editor_groups = request.POST.getlist('editor_groups')
         editor_groups.extend(EditorGroup.objects \
-            .filter(name__in=profile.default_editor_group.values_list('name', flat=True))
+            .filter(name__in=profile.default_editor_groups.values_list('name', flat=True))
             .values_list('pk', flat=True))
 
         _post = request.POST.copy()

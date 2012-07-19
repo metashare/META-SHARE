@@ -215,7 +215,7 @@ def edit_profile(request):
     
     editor_groups_member_of = []
     for edt_group in EditorGroup.objects.filter(name__in=profile.user.groups.values_list('name', flat=True)):
-        if profile.default_editor_group.filter(name=edt_group.name).count() == 0:
+        if profile.default_editor_groups.filter(name=edt_group.name).count() == 0:
             editor_groups_member_of.append({'name': edt_group.name, 'default': False})
         else:
             editor_groups_member_of.append({'name': edt_group.name, 'default': True})
@@ -318,7 +318,7 @@ def editor_group_application(request):
 
 
 @login_required
-def add_default_editor_group(request):
+def add_default_editor_groups(request):
     """
     Add default Editor Groups.
     """
@@ -332,7 +332,7 @@ def add_default_editor_group(request):
     # Exclude from the list the editor groups for which the user is not a member
     available_editor_groups = EditorGroup.objects \
         .filter(name__in=request.user.groups.values_list('name', flat=True)) \
-        .exclude(name__in=profile.default_editor_group.values_list('name', flat=True))
+        .exclude(name__in=profile.default_editor_groups.values_list('name', flat=True))
 
     # Check if the form has been submitted.
     if request.method == "POST":
@@ -341,11 +341,11 @@ def add_default_editor_group(request):
         # Check if the form has validated successfully.
         if form.is_valid():
             # Get submitted editor groups
-            dflt_edt_grps = form.cleaned_data['default_editor_group']
+            dflt_edt_grps = form.cleaned_data['default_editor_groups']
 
             for dflt_edt_grp in dflt_edt_grps:
                 for edt_grp in EditorGroup.objects.filter(name=dflt_edt_grp.name):
-                    profile.default_editor_group.add(edt_grp)
+                    profile.default_editor_groups.add(edt_grp)
                     messages.success(request, _('You have successfully ' \
                       'added default editor group "%s".') % (dflt_edt_grp.name,))
             profile.save()
@@ -366,11 +366,11 @@ def add_default_editor_group(request):
         form = AddDefaultEditorGroupForm(available_editor_groups)
 
     dictionary = {'title': 'Add default editor group', 'form': form}
-    return render_to_response('accounts/add_default_editor_group.html',
+    return render_to_response('accounts/add_default_editor_groups.html',
                         dictionary, context_instance=RequestContext(request))
 
 @login_required
-def remove_default_editor_group(request):
+def remove_default_editor_groups(request):
     """
     Remove default Editor Groups.
     """
@@ -383,7 +383,7 @@ def remove_default_editor_group(request):
 
     # Include in the list only the default editor groups of the user
     available_editor_groups = EditorGroup.objects \
-        .filter(name__in=profile.default_editor_group.values_list('name', flat=True))
+        .filter(name__in=profile.default_editor_groups.values_list('name', flat=True))
 
     # Check if the form has been submitted.
     if request.method == "POST":
@@ -392,11 +392,11 @@ def remove_default_editor_group(request):
         # Check if the form has validated successfully.
         if form.is_valid():
             # Get submitted editor groups
-            dflt_edt_grps = form.cleaned_data['default_editor_group']
+            dflt_edt_grps = form.cleaned_data['default_editor_groups']
 
             for dflt_edt_grp in dflt_edt_grps:
                 for edt_grp in EditorGroup.objects.filter(name=dflt_edt_grp.name):
-                    profile.default_editor_group.remove(edt_grp)
+                    profile.default_editor_groups.remove(edt_grp)
                     messages.success(request, _('You have successfully ' \
                       'removed default editor group "%s".') % (dflt_edt_grp.name,))
             profile.save()
@@ -417,7 +417,7 @@ def remove_default_editor_group(request):
         form = RemoveDefaultEditorGroupForm(available_editor_groups)
 
     dictionary = {'title': 'Remove default editor group', 'form': form}
-    return render_to_response('accounts/remove_default_editor_group.html',
+    return render_to_response('accounts/remove_default_editor_groups.html',
                         dictionary, context_instance=RequestContext(request))
 
 
