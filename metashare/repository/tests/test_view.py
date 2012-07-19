@@ -71,7 +71,6 @@ class ViewTest(TestCase):
         """
         test_utils.clean_resources_db()
         test_utils.clean_storage()
-        User.objects.all().delete()
         test_utils.clean_user_db()
 
     def test_staff_user_sees_editor(self):

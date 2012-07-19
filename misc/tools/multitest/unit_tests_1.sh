@@ -2,10 +2,8 @@
 
 THIS_DIR=$(dirname "$0")
 . "${THIS_DIR}/setvars.sh"
-
-. _meta_dir.sh
-. _python.sh
-
+. "${THIS_DIR}/_meta_dir.sh"
+. "${THIS_DIR}/_python.sh"
 cd "$MSERV_DIR"
 
 TESTSUITE_NAME="ConfigData"

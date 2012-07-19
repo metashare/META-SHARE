@@ -18,6 +18,7 @@ from django.template import RequestContext
 
 from haystack.views import FacetedSearchView
 
+from metashare.repository.editor.resource_editor import has_edit_permission
 from metashare.repository.forms import LicenseSelectionForm, LicenseAgreementForm
 from metashare.repository.models import licenceInfoType_model, resourceInfoType_model
 from metashare.repository.search_indexes import resourceInfoType_modelIndex
@@ -372,19 +373,6 @@ def view(request, resource_name=None, object_id=None):
     ctx = RequestContext(request)
     return render_to_response(template, context, context_instance=ctx)
 
-
-def has_edit_permission(request, obj):
-    """
-    Returns `True` if the given request has permission to edit the metadata
-    for the current resource, `False` otherwise.
-    """
-    if request.user.is_superuser or request.user in obj.owners.all():
-        return True    
-    for group in obj.editor_groups.all():
-        if request.user in group.get_members():
-            return True
-        return False
-    
 
 class MetashareFacetedSearchView(FacetedSearchView):
     """
