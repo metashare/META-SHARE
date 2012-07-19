@@ -23,8 +23,12 @@ class EditorTest(SeleniumTestCase):
         self.test_manager_group = ManagerGroup.objects.create(
             name='test_manager_group', managed_group=self.test_editor_group)
         # create an editor group managing user
-        test_utils.create_manager_user('manageruser', 'manager@example.com',
-            'secret', (self.test_editor_group, self.test_manager_group))
+        self.manager_user = test_utils.create_manager_user('manageruser',
+            'manager@example.com', 'secret',
+            (self.test_editor_group, self.test_manager_group))
+        self.manager_user.get_profile().default_editor_groups \
+            .add(self.test_editor_group)
+
         # create an editor user
         test_utils.create_editor_user('editoruser', 'editor@example.com',
                                       'secret', (self.test_editor_group,))
@@ -169,8 +173,12 @@ class EditorTest(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         self.assertEqual("The Resource \"Test Text Corpus\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
+        
+        # check the editor group of the resource is the default editor group of the user
+        self.assertEqual(self.test_editor_group.name, 
+          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
 
-        #make sure an internal resource cannot be published
+        # make sure an internal resource cannot be published
         self.publish(driver)
         self.assertEqual("internal",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
@@ -265,7 +273,11 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("The Resource \"Test Audio Corpus\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
 
-        #make sure an internal resource cannot be published
+        # check the editor group of the resource is the default editor group of the user
+        self.assertEqual(self.test_editor_group.name, 
+          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
+
+        # make sure an internal resource cannot be published
         self.publish(driver)
         self.assertEqual("internal",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
@@ -366,7 +378,11 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("The Resource \"Test Text Language Description\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
         
-        #make sure an internal resource cannot be published
+        # check the editor group of the resource is the default editor group of the user
+        self.assertEqual(self.test_editor_group.name, 
+          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
+
+        # make sure an internal resource cannot be published
         self.publish(driver)
         self.assertEqual("internal",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
@@ -468,7 +484,11 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("The Resource \"Test Lexical Resource Text\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
 
-        #make sure an internal resource cannot be published
+        # check the editor group of the resource is the default editor group of the user
+        self.assertEqual(self.test_editor_group.name, 
+          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
+
+        # make sure an internal resource cannot be published
         self.publish(driver)
         self.assertEqual("internal",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
@@ -493,6 +513,10 @@ class EditorTest(SeleniumTestCase):
         
         
     def test_LR_creation_tool(self):
+        # set up the current manager user profile so that it doesn't have any
+        # default editor groups
+        self.manager_user.get_profile().default_editor_groups.clear()
+
         driver = self.driver
         driver.get(self.base_url)
         ss_path = setup_screenshots_folder(
@@ -557,8 +581,18 @@ class EditorTest(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         self.assertEqual("The Resource \"Test Tool\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
-        
-        #make sure an internal resource cannot be published
+
+        # make sure that the editor groups list of the created resource is empty
+        # (which resembles the default editor groups list of the creating user)
+        _created_res = resourceInfoType_model.objects.get(pk=1)
+        self.assertEqual(0, _created_res.editor_groups.count(),
+            'the created resource must not have any editor groups (just like ' \
+                'the default groups set of the creating user)')
+        # for the following tests to not fail, we have to add the resource to an
+        # editor group again which is managed by the current user
+        _created_res.editor_groups.add(self.test_editor_group)
+
+        # make sure an internal resource cannot be published
         self.publish(driver)
         self.assertEqual("internal",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)

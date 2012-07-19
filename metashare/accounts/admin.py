@@ -466,8 +466,10 @@ class ManagerGroupAdmin(admin.ModelAdmin):
                 if form.is_valid():
                     userprofiles = form.cleaned_data['users']
                     for userprofile in userprofiles:
+                        user = userprofile.user
                         for obj in queryset:
-                            userprofile.user.groups.add(obj)
+                            user.groups.add(obj)
+                            user.groups.add(obj.managed_group)
                     self.message_user(request, _('Successfully added users to manager group.'))
                     return HttpResponseRedirect(request.get_full_path())
     

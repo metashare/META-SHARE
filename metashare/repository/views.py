@@ -18,6 +18,7 @@ from django.template import RequestContext
 
 from haystack.views import FacetedSearchView
 
+from metashare.repository.editor.resource_editor import has_edit_permission
 from metashare.repository.forms import LicenseSelectionForm, LicenseAgreementForm
 from metashare.repository.models import licenceInfoType_model, resourceInfoType_model
 from metashare.repository.search_indexes import resourceInfoType_modelIndex
@@ -350,11 +351,11 @@ def view(request, resource_name=None, object_id=None):
     context = { 'resource': resource, 'lr_content': lr_content }
     template = 'repository/lr_view.html'
 
-    # For staff users, we have to add LR_EDIT which contains the URL of
-    # the Django admin backend page for this resource.
-    if request.user.is_staff:
+    # For users who have edit permission for this resource, we have to add LR_EDIT 
+    # which contains the URL of the Django admin backend page for this resource.
+    if has_edit_permission(request, resource):
         context['LR_EDIT'] = reverse(
-            'admin:repository_resourceinfotype_model_change', args=(object_id,))
+            'admin:repository_resourceinfotype_model_change', args=(resource.id,))
 
     # in general, only logged in users may download/purchase any resources
     context['LR_DOWNLOAD'] = request.user.is_active

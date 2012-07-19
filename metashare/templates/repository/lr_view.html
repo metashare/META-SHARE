@@ -115,7 +115,11 @@
       <div onmouseover="$(this).siblings('div.popup').show();" onmouseout="$(this).siblings('div.popup').hide();"><button class="span-4 button middle_gray_button">Download</button></div><div class="popup" style="height:50px; left:190px; width:270px; top:50px;"><img style="left:10px;" src="{{ MEDIA_URL }}images/adv_search_pfeil.png" />&nbsp;You don&rsquo;t have the permission to download this resource. Please log in.</div>
     </div>
   {% endif %}
-
+  {% if LR_EDIT %}
+    <a href="{{ LR_EDIT }}"><button class="span-4 button middle_button">Edit Resource</button></a>
+  {% else %}
+    <div onmouseover="$(this).siblings('div.popup').show();" onmouseout="$(this).siblings('div.popup').hide();"><button class="span-4 button middle_gray_button">Edit Resource</button></div><div class="popup" style="height:50px; left:350px; width:270px; top:60px;"><img style="left:10px;" src="{{ MEDIA_URL }}images/adv_search_pfeil.png" />&nbsp;You don&rsquo;t have the permission to edit this resource.</div>
+  {% endif %}
   <div style="clear: both;"></div>
   
   <p><input type="checkbox" name="choose_view" onClick="displayOptional();"> Only show mandatory fields</p>
@@ -132,6 +136,11 @@
     <div class="popup_box">
       <div onmouseover="$(this).siblings('div.popup').show();" onmouseout="$(this).siblings('div.popup').hide();"><button class="span-4 button middle_gray_button">Download</button></div><div class="popup" style="height:50px; left:190px; width:270px; top:50px;"><img style="left:10px;" src="{{ MEDIA_URL }}images/adv_search_pfeil.png" />&nbsp;You don&rsquo;t have the permission to download this resource. Please log in.</div>
     </div>
+  {% endif %}
+  {% if LR_EDIT %}
+    <a href="{{ LR_EDIT }}"><button class="span-4 button middle_button">Edit Resource</button></a>
+  {% else %}
+    <div onmouseover="$(this).siblings('div.popup').show();" onmouseout="$(this).siblings('div.popup').hide();"><button class="span-4 button middle_gray_button">Edit Resource</button></div><div class="popup" style="height:50px; left:350px; width:270px; top:60px;"><img style="left:10px;" src="{{ MEDIA_URL }}images/adv_search_pfeil.png" />&nbsp;You don&rsquo;t have the permission to edit this resource.</div>
   {% endif %}
 
 </div>

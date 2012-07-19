@@ -44,6 +44,9 @@ SYNC_NEEDS_AUTHENTICATION = True
 # URL for the Metashare Knowledge Base
 KNOWLEDGE_BASE_URL = 'http://www.meta-share.org/portal/knowledgebase/'
 
+# The URL for META-SHARE statistics server.
+STATS_SERVER_URL = "http://metastats.fbk.eu/"
+
 
 # Import local settings, i.e., DEBUG, TEMPLATE_DEBUG, TIME_ZONE,
 # SECRET_KEY, DATABASE_* settings and ADMINS.
@@ -241,3 +244,13 @@ if 'DISPLAY' in os.environ:
 
 # sitemap url to be used in "robots.txt"
 SITEMAP_URL = '{}/sitemap.xml'.format(DJANGO_URL)
+
+# maximum time interval in seconds allowed between two resource views so that
+# the resources are still considered as 'viewed together';
+# used in recommendations
+MAX_VIEW_INTERVAL = 60 * 5
+
+# maximum time interval in seconds allowed between two resource downloads so
+# that the resources are still considered as 'downloaded together';
+# used in recommendations
+MAX_DOWNLOAD_INTERVAL = 60 * 10
