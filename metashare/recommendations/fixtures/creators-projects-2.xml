@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns:xslt="http://xml.apache.org/xsltm"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema"
+  xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema">
+  <identificationInfo>
+    <resourceName lang="en">The CINTIL Corpus – International
+      Corpus of Portuguese
+    </resourceName>
+    <resourceName lang="fr">Corpus CINTIL – Corpus international
+      du portugais
+    </resourceName>
+    <description lang="en">CINTIL-Corpus Internacional do
+      Português is a linguistically interpreted written and spoken
+      corpus of European Portuguese.
+    </description>
+    <description lang="fr">CINTIL-Corpus Internacional do
+      Português est un corpus du portugais européen écrit et parlé,
+      fourni avec une interprétation linguistique.
+    </description>
+    <resourceShortName />
+    <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+    <url>http://catalog.elra.info/product_info.php?products_id=1102
+    </url>
+    <identifier>ELRA-W0050</identifier>
+  </identificationInfo>
+  <metadataInfo>
+    <metadataCreationDate>2005-05-12</metadataCreationDate>
+    <metadataCreator>
+      <surname lang="en-us">Valérie</surname>
+      <givenName lang="en-us">Mapelli</givenName>
+      <communicationInfo>
+        <email>mapelli@elda.org</email>
+        <url>http://www.elda.org</url>
+        <address>55-57 rue Brillat-Savarin</address>
+        <zipcode>75013</zipcode>
+        <city>Paris</city>
+        <country>France</country>
+        <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+        <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+    </metadataCreator>
+  </metadataInfo>
+  <versionInfo>
+    <version>1.0</version>
+    <lastDateUpdated>2009-06-09</lastDateUpdated>
+  </versionInfo>
+  <distributionInfo>
+    <availability>available-unrestrictedUse</availability>
+    <licenceInfo>
+      <licence>AGPL</licence>
+    </licenceInfo>
+  </distributionInfo>
+  <resourceCreationInfo>
+    <resourceCreator>
+      <personInfo>
+        <surname lang="en">test-creator-person</surname>
+        <communicationInfo>
+          <email>test.creator.pers@test.com</email>
+        </communicationInfo>
+      </personInfo>
+    </resourceCreator>
+    <fundingProject>
+      <projectName lang="en">test-project-1</projectName>
+      <fundingType>euFunds</fundingType>
+    </fundingProject>
+  </resourceCreationInfo>
+  <resourceComponentType>
+    <corpusInfo>
+      <resourceType>corpus</resourceType>
+      <corpusMediaType>
+        <corpusTextInfo>
+          <mediaType>text</mediaType>
+          <lingualityInfo>
+            <lingualityType>monolingual</lingualityType>
+          </lingualityInfo>
+          <languageInfo>
+            <languageId>por</languageId>
+            <languageName>Portuguese</languageName>
+          </languageInfo>
+          <textFormatInfo>
+            <mimeType>Plain text</mimeType>
+          </textFormatInfo>
+        </corpusTextInfo>
+      </corpusMediaType>
+    </corpusInfo>
+  </resourceComponentType>
+</resourceInfo>

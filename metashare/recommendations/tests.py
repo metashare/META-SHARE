@@ -3,7 +3,8 @@ from django.test.client import Client
 from metashare import test_utils, settings
 from metashare.recommendations.models import TogetherManager
 from metashare.recommendations.recommendations import Resource, \
-    SessionResourcesTracker
+    SessionResourcesTracker, get_more_from_same_creators,\
+    get_more_from_same_projects
 from metashare.repository import views
 from metashare.settings import ROOT_PATH
 from metashare.storage.models import PUBLISHED, INGESTED
@@ -16,11 +17,11 @@ import shutil
 def _import_resource(res_file_name):
     """
     Imports the resource with the given file name; looks for the file in
-    the folder repository/fixtures/; sets publication status to
+    the folder recommendations/fixtures/; sets publication status to
     PUBLISHED; returns the resource
     """
     res = test_utils.import_xml(
-      '{0}/repository/fixtures/{1}'.format(ROOT_PATH, res_file_name))[0]
+      '{0}/recommendations/fixtures/{1}'.format(ROOT_PATH, res_file_name))[0]
     res.storage_object.publication_status = PUBLISHED
     res.storage_object.save()
     res.storage_object.update_storage()
@@ -455,3 +456,52 @@ class SessionTest(django.test.TestCase):
         man = TogetherManager.getManager(Resource.VIEW)
         view_res = man.getTogetherList(self.res_1, 0)
         self.assertEqual(0, len(view_res))
+        
+
+class CreatorTest(django.test.TestCase):
+    
+    # test resources to be initialized in setup
+    res_1 = None
+    res_2 = None
+    res_3 = None
+    res_4 = None
+    
+    @classmethod
+    def setUpClass(cls):
+        test_utils.set_index_active(False)
+    
+    @classmethod
+    def tearDownClass(cls):
+        test_utils.set_index_active(True)
+    
+    def setUp(self):
+        """
+        Import test fixtures and add resource pairs to TogetherManager
+        """
+        test_utils.setup_test_storage()
+        self.res_1 = _import_downloadable_resource('creators-projects-1.xml')
+        self.res_2 = _import_downloadable_resource('creators-projects-2.xml')
+        self.res_3 = _import_downloadable_resource('creators-projects-3.xml')
+        self.res_4 = _import_downloadable_resource('creators-projects-4.xml')
+        
+    def tearDown(self):
+        """
+        Clean up the test
+        """
+        test_utils.clean_resources_db()
+        test_utils.clean_storage()
+        test_utils.clean_user_db()
+        
+    def test_creator(self):
+        self.assertEquals(2, len(get_more_from_same_creators(self.res_1)))
+        self.assertEquals(1, len(get_more_from_same_creators(self.res_2)))
+        self.assertEquals(1, len(get_more_from_same_creators(self.res_3)))
+        self.assertEquals(0, len(get_more_from_same_creators(self.res_4)))
+        
+    def test_project(self):
+        self.assertEquals(0, len(get_more_from_same_projects(self.res_1)))
+        self.assertEquals(1, len(get_more_from_same_projects(self.res_2)))
+        self.assertEquals(1, len(get_more_from_same_projects(self.res_3)))
+        self.assertEquals(2, len(get_more_from_same_projects(self.res_4)))
+        
+    

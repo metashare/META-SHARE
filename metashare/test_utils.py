@@ -19,6 +19,7 @@ from metashare.storage.models import PUBLISHED, MASTER, StorageObject, \
     RemovedObject
 from metashare.xml_utils import import_from_file
 import os
+from metashare.repository import supermodel
 
 
 
@@ -51,6 +52,8 @@ def clean_resources_db():
     projectInfoType_model.objects.all().delete()
     # delete recommendation objects
     TogetherManager.objects.all().delete()
+    # delete object cache used for duplicate recognition in import
+    supermodel.OBJECT_XML_CACHE = {}
 
 def clean_user_db():
     """
