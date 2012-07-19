@@ -20,6 +20,9 @@ class SEOTest(TestCase):
         imported_res.storage_object.published = True
         imported_res.storage_object.save()
         client = Client()
+        print "\n\n" + DJANGO_BASE + "\n\n"
+        print "\n\n" + '/{0}sitemap.xml'.format(DJANGO_BASE) + "\n\n"
+        
         # assert that a two-token search finds a camelCase term:
         response = client.get('/{0}sitemap.xml'.format(DJANGO_BASE))
         self.assertContains(response, 
