@@ -148,6 +148,8 @@ class UserProfile(models.Model):
     position = models.CharField(max_length=50, blank=True)
     homepage = models.URLField(blank=True)
     
+    default_editor_group = models.ManyToManyField(EditorGroup, blank=True)
+
     # These fields can be edited by the user in the browser.
     __editable_fields__ = ('birthdate', 'affiliation', 'position', 'homepage')
     
