@@ -18,9 +18,14 @@ function dismissEditRelatedPopup(win, objId, newRepr) {
 			}
 		}
 	}
+	
 	if( $("a#edit_"+elem.id).text().indexOf("General Info") !=-1 || $("a#edit_"+elem.id).text().indexOf("Tool") !=-1){
 		$("input.edit_"+elem.id).attr('value', objId);
 		$("input.edit_"+elem.id).trigger('change');		
+	}
+	else
+	{
+		$("#"+elem.id).trigger('change', newRepr);
 	}
 	win.close();
 };
@@ -59,7 +64,7 @@ if (!saveAndContinuePopup.original) {
 		newId = html_unescape(newId);
 		newRepr = html_unescape(newRepr);
 		var id = windowname_to_id(win.name);
-		$('#' + id).trigger('change');
+		$('#' + id).trigger('change', newRepr);
 	};
 	saveAndContinuePopup.original = originalsaveAndContinuePopup;
 }
@@ -71,7 +76,7 @@ if (!dismissAddAnotherPopup.original) {
 		newId = html_unescape(newId);
 		newRepr = html_unescape(newRepr);
 		var id = windowname_to_id(win.name);
-		$('#' + id).trigger('change');
+		$('#' + id).trigger('change', newRepr);
 	};
 	dismissAddAnotherPopup.original = originalDismissAddAnotherPopup;
 }
@@ -81,7 +86,7 @@ function dismissDeleteRelatedPopup(win) {
 	win.close();
 	var elem = document.getElementById(name);
 	elem.value = '';
-	$('#' + name).trigger('change');
+	$('#' + name).trigger('change', '__delete__');
 }
 
 django.jQuery(document).ready(function() {
@@ -92,7 +97,7 @@ django.jQuery(document).ready(function() {
   var deleteSelector = '.related-widget-wrapper-delete-link';
   var hrefTemplateAttr = 'data-href-template';
   
-  $('.related-widget-wrapper').live('change', function(){
+  $('.related-widget-wrapper').live('change', function(event, newRepr){
   	var changeLink = $(this).nextAll(changeSelector);
   	var addLink = $(this).nextAll(addSelector);
   	var deleteLink = $(this).nextAll(deleteSelector);
@@ -115,6 +120,27 @@ django.jQuery(document).ready(function() {
   		changeLink.removeAttr('href').hide();
   		deleteLink.removeAttr('href').hide();
   		addLink.show();
+  	}
+  	if(newRepr)
+  	{
+  		var elem = $(this);
+  		if(elem)
+  		{
+  			var content = $(elem).parent().children('span.related-widget-wrapper-content').get(0);
+  			if(content)
+  			{
+  				if(newRepr == '__delete__')
+  				{
+  	  				var jqContent = $(content);
+  	  				jqContent.text('');
+  				}
+  				else
+  				{
+  	  				var jqContent = $(content);
+  	  				jqContent.text(newRepr);
+  				}
+  			}
+  		}
   	}
   });
 

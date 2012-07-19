@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns:xslt="http://xml.apache.org/xsltm"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema"
+  xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema">
+  <identificationInfo>
+    <resourceName lang="en">EuroWordNet Spanish</resourceName>
+    <resourceName lang="fr">EuroWordNet espagnol</resourceName>
+    <description lang="en">A. Available Wordnets Following the
+      announcement of the EuroWordNet databases in the last issue of the
+      ELRA Newsletter (Vol.4 N.2), we are happy to announce that the
+      list of EuroWordNet languages has grown.
+    </description>
+    <description lang="fr">A. Wordnets disponibles
+    </description>
+    <resourceShortName />
+    <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+    <url>http://catalog.elra.info/product_info.php?products_id=547</url>
+    <identifier>ELRA-M0017</identifier>
+  </identificationInfo>
+  <metadataInfo>
+    <metadataCreationDate>2005-05-12</metadataCreationDate>
+    <metadataCreator>
+      <surname lang="en-us">Valérie</surname>
+      <givenName lang="en-us">Mapelli</givenName>
+      <communicationInfo>
+        <email>mapelli@elda.org</email>
+        <url>http://www.elda.org</url>
+        <address>55-57 rue Brillat-Savarin</address>
+        <zipcode>75013</zipcode>
+        <city>Paris</city>
+        <country>France</country>
+        <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+        <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+    </metadataCreator>
+  </metadataInfo>
+  <versionInfo>
+    <version>1.0</version>
+    <lastDateUpdated>2005-05-30</lastDateUpdated>
+  </versionInfo>
+  <distributionInfo>
+    <availability>available-unrestrictedUse</availability>
+    <licenceInfo>
+      <licence>AGPL</licence>
+    </licenceInfo>
+  </distributionInfo>
+  <resourceCreationInfo>
+    <resourceCreator>
+      <organizationInfo>
+        <organizationName lang="en">test-creator-organization
+        </organizationName>
+        <communicationInfo>
+          <email>test.creator.org@test.com</email>
+        </communicationInfo>
+      </organizationInfo>
+    </resourceCreator>
+    <fundingProject>
+      <projectName lang="en">test-project-2</projectName>
+      <fundingType>euFunds</fundingType>
+    </fundingProject>
+  </resourceCreationInfo>
+  <resourceComponentType>
+    <lexicalConceptualResourceInfo>
+      <resourceType>lexicalConceptualResource</resourceType>
+      <lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+      <lexicalConceptualResourceMediaType>
+        <lexicalConceptualResourceTextInfo>
+          <mediaType>text</mediaType>
+          <lingualityInfo>
+            <lingualityType>monolingual</lingualityType>
+          </lingualityInfo>
+          <languageInfo>
+            <languageId>spa</languageId>
+            <languageName>Spanish</languageName>
+            <languageVarietyInfo>
+              <languageVarietyType>dialect</languageVarietyType>
+              <languageVarietyName>Castilian</languageVarietyName>
+              <sizePerLanguageVariety>
+                <size>2</size>
+                <sizeUnit>gb</sizeUnit>
+              </sizePerLanguageVariety>
+            </languageVarietyInfo>
+          </languageInfo>
+        </lexicalConceptualResourceTextInfo>
+      </lexicalConceptualResourceMediaType>
+    </lexicalConceptualResourceInfo>
+  </resourceComponentType>
+</resourceInfo>
