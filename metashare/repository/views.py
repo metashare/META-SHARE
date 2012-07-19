@@ -350,11 +350,11 @@ def view(request, resource_name=None, object_id=None):
     context = { 'resource': resource, 'lr_content': lr_content }
     template = 'repository/lr_view.html'
 
-    # For staff users, we have to add LR_EDIT which contains the URL of
-    # the Django admin backend page for this resource.
-    if request.user.is_staff:
+    # For users who have edit permission for this resource, we have to add LR_EDIT 
+    # which contains the URL of the Django admin backend page for this resource.
+    if has_edit_permission(request, resource):
         context['LR_EDIT'] = reverse(
-            'admin:repository_resourceinfotype_model_change', args=(object_id,))
+            'admin:repository_resourceinfotype_model_change', args=(resource.id,))
 
     # in general, only logged in users may download/purchase any resources
     context['LR_DOWNLOAD'] = request.user.is_active
@@ -372,6 +372,19 @@ def view(request, resource_name=None, object_id=None):
     ctx = RequestContext(request)
     return render_to_response(template, context, context_instance=ctx)
 
+
+def has_edit_permission(request, obj):
+    """
+    Returns `True` if the given request has permission to edit the metadata
+    for the current resource, `False` otherwise.
+    """
+    if request.user.is_superuser or request.user in obj.owners.all():
+        return True    
+    for group in obj.editor_groups.all():
+        if request.user in group.get_members():
+            return True
+        return False
+    
 
 class MetashareFacetedSearchView(FacetedSearchView):
     """
