@@ -13,24 +13,28 @@ from metashare.repository import models
 from metashare.repository.models import languageDescriptionInfoType_model, \
     lexicalConceptualResourceInfoType_model, personInfoType_model
 from metashare.settings import DJANGO_BASE, ROOT_PATH
-from metashare.storage.models import PUBLISHED, REMOTE
+from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, REMOTE
 
 ADMINROOT = '/{0}editor/'.format(DJANGO_BASE)
 TESTFIXTURE_XML = '{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
 TESTFIXTURE2_XML = '{}/repository/fixtures/ILSP10.xml'.format(ROOT_PATH)
 TESTFIXTURE3_XML = '{}/repository/test_fixtures/META-SHARE/DFKI2.xml'.format(ROOT_PATH)
+TESTFIXTURE4_XML = '{}/repository/test_fixtures/META-SHARE/FBK16.xml'.format(ROOT_PATH)
 BROKENFIXTURE_XML = '{}/repository/fixtures/broken.xml'.format(ROOT_PATH)
 TESTFIXTURES_ZIP = '{}/repository/fixtures/tworesources.zip'.format(ROOT_PATH)
 BROKENFIXTURES_ZIP = '{}/repository/fixtures/onegood_onebroken.zip'.format(ROOT_PATH)
 LEX_CONC_RES_XML = '{}/repository/test_fixtures/published-lexConcept-Text-FreEngGer.xml'.format(ROOT_PATH)
 
 
-def _import_test_resource(editor_group=None, path=TESTFIXTURE_XML):
+def _import_test_resource(editor_group=None, path=TESTFIXTURE_XML,
+                          pub_status=INGESTED):
     result = test_utils.import_xml(path)
     resource = result[0]
     if not editor_group is None:
         resource.editor_groups.add(editor_group)
         resource.save()
+    resource.storage_object.publication_status = pub_status
+    resource.storage_object.save()
     return resource
 
 
@@ -58,6 +62,7 @@ class EditorTest(TestCase):
     testfixture = None
     testfixture2 = None
     testfixture3 = None
+    testfixture4 = None
     
     @classmethod
     def setUpClass(cls):
@@ -136,9 +141,15 @@ class EditorTest(TestCase):
         # second resource which is only visible by the superuser
         EditorTest.testfixture2 = _import_test_resource(None, TESTFIXTURE2_XML)
         # third resource which is owned by the editoruser
-        EditorTest.testfixture3 = _import_test_resource(None, TESTFIXTURE3_XML)
+        EditorTest.testfixture3 = _import_test_resource(None, TESTFIXTURE3_XML,
+                                                        pub_status=PUBLISHED)
         EditorTest.testfixture3.owners.add(editoruser)
         EditorTest.testfixture3.save()
+        # fourth test resource which is owned by the editor user
+        EditorTest.testfixture4 = _import_test_resource(
+            EditorTest.test_editor_group, TESTFIXTURE4_XML, pub_status=INTERNAL)
+        EditorTest.testfixture4.owners.add(editoruser)
+        EditorTest.testfixture4.save()
 
 
     @classmethod
@@ -198,6 +209,46 @@ class EditorTest(TestCase):
         response = client.get(ADMINROOT+'repository/corpusinfotype_model/add/')
         self.assertContains(response, 'Permission denied', status_code=403)
 
+    def test_superuser_can_always_upload_data(self):
+        """
+        Verifies that a superuser may upload actual resource data to any
+        resource.
+        """
+        client = _client_with_user_logged_in(EditorTest.superuser_login)
+        for res in (EditorTest.testfixture, EditorTest.testfixture2,
+                    EditorTest.testfixture3, EditorTest.testfixture4):
+            response = client.get("{}repository/resourceinfotype_model/{}/" \
+                    "upload-data/".format(ADMINROOT, res.id))
+            self.assertEquals(200, response.status_code, "expected that a " \
+                              "superuser may always upload resource data")
+
+    def test_editor_can_upload_data(self):
+        """
+        Verifies that an editor user may upload actual resource data to owned
+        resources and to resources that are in her editor group.
+        """
+        client = _client_with_user_logged_in(EditorTest.editor_login)
+        # make sure data can be uploaded to owned resources:
+        response = client.get("{}repository/resourceinfotype_model/{}/" \
+                "upload-data/".format(ADMINROOT, EditorTest.testfixture3.id))
+        self.assertEquals(200, response.status_code, "expected that an " \
+                          "editor may upload resource data to owned resources")
+        # make sure data can be uploaded to editable resources:
+        response = client.get("{}repository/resourceinfotype_model/{}/" \
+                "upload-data/".format(ADMINROOT, EditorTest.testfixture.id))
+        self.assertEquals(200, response.status_code, "expected that an " \
+            "editor may upload resource data to resources of her editor group")
+
+    def test_editor_cannot_upload_data_to_invisible_resources(self):
+        """
+        Verifies that an editor user must not upload actual resource data to
+        resources that do not belong to her editor group and which are not hers.
+        """
+        client = _client_with_user_logged_in(EditorTest.editor_login)
+        response = client.get("{}repository/resourceinfotype_model/{}/" \
+                "upload-data/".format(ADMINROOT, EditorTest.testfixture2.id))
+        self.assertIn(response.status_code, (403, 404), "expected that an " \
+            "editor must not upload resource data to invisible resources")
 
     def test_editor_can_see_models_add(self):
         # We don't expect the following add forms to work, because the editor
@@ -506,16 +557,16 @@ class EditorTest(TestCase):
         # test with editor user
         client = _client_with_user_logged_in(EditorTest.editor_login)
         response = client.get(ADMINROOT+'repository/resourceinfotype_model/')
-        self.assertContains(response, '2 Resources')
+        self.assertContains(response, '3 Resources')
         # test with superuser
         client = _client_with_user_logged_in(EditorTest.superuser_login)
         response = client.get(ADMINROOT+'repository/resourceinfotype_model/')
-        self.assertContains(response, '3 Resources')
+        self.assertContains(response, '4 Resources')
         
     def test_myresources_list(self):
         client = _client_with_user_logged_in(EditorTest.editor_login)            
         response = client.get(ADMINROOT+'repository/resourceinfotype_model/my/')            
-        self.assertContains(response, '1 Resource')
+        self.assertContains(response, '2 Resource')
 
     def test_storage_object_is_hidden(self):
         client = _client_with_user_logged_in(EditorTest.editor_login)
@@ -594,23 +645,34 @@ class EditorTest(TestCase):
         self.assertIn(response.status_code, (403, 404), msg=
             'expected the editor to not be allowed to change resource parts')
 
-    def test_editor_cannot_delete_any_resources_or_parts(self):
+    def test_editor_cannot_delete_any_parts_or_non_internal_resources(self):
         """
-        Verifies that the editor user can neither delete any resources nor any
-        parts thereof.
+        Verifies that the editor user can neither delete any non-internal
+        resources nor any parts of any resources.
         """
         client = _client_with_user_logged_in(EditorTest.editor_login)
-        # make sure the editor may not delete any resources:
+        # make sure the editor may not delete any ingested resources:
         response = client.get('{}repository/resourceinfotype_model/{}/delete/'
                               .format(ADMINROOT, EditorTest.testfixture2.id))
-        self.assertIn(response.status_code, (403, 404), msg=
-            'expected the editor to not be allowed to delete the resource')
-        # make sure the editor may not delete any part of a resource:
+        self.assertIn(response.status_code, (403, 404), msg='expected that ' \
+                'the editor is not allowed to delete an ingested resource')
+        # make sure the editor may not delete any published resources:
+        response = client.get('{}repository/resourceinfotype_model/{}/delete/'
+                              .format(ADMINROOT, EditorTest.testfixture3.id))
+        self.assertIn(response.status_code, (403, 404), msg='expected that ' \
+                'the editor is not allowed to delete a published resource')
+        # make sure the editor may not delete any part of non-internal resources
         response = client.get(
             '{}repository/distributioninfotype_model/{}/delete/'
                 .format(ADMINROOT, EditorTest.testfixture2.distributionInfo.id))
-        self.assertIn(response.status_code, (403, 404), msg=
-            'expected the editor to not be allowed to delete resource parts')
+        self.assertIn(response.status_code, (403, 404), msg='expected the ' \
+                'editor to not be allowed to delete any resource parts')
+        # make sure the editor may not delete any part of internal resources:
+        response = client.get(
+            '{}repository/distributioninfotype_model/{}/delete/'
+                .format(ADMINROOT, EditorTest.testfixture4.distributionInfo.id))
+        self.assertIn(response.status_code, (403, 404), msg="expected the " \
+                "editor to not be allowed to delete internal resource' parts")
 
     def test_superuser_can_change_all_resources_and_their_parts(self):
         """
@@ -654,6 +716,18 @@ class EditorTest(TestCase):
                 .format(ADMINROOT, res.id))
         self.assertContains(response, 'Are you sure?', msg_prefix=
             'expected the superuser to be allowed to delete resource parts')
+
+    def test_editor_can_delete_owned_internal_resources(self):
+        """
+        Verifies that an editor user can delete owned resources that have
+        "internal" as publication status.
+        """
+        client = _client_with_user_logged_in(EditorTest.superuser_login)
+        # make sure the superuser may delete any resources:
+        response = client.get('{}repository/resourceinfotype_model/{}/delete/'
+                              .format(ADMINROOT, EditorTest.testfixture4.id))
+        self.assertContains(response, 'Are you sure?', msg_prefix='expected ' \
+                'that the editor user may delete his own internal resource')
 
     def test_only_superuser_sees_editor_groups_list(self):
         """
@@ -778,9 +852,8 @@ class DestructiveTests(TestCase):
             'password': 'secret',
         }
 
-        self.testfixture = _import_test_resource(self.test_editor_group)
-        self.testfixture.storage_object.publication_status = PUBLISHED
-        self.testfixture.storage_object.save()
+        self.testfixture = _import_test_resource(self.test_editor_group,
+                                                 pub_status=PUBLISHED)
 
     def tearDown(self):
         test_utils.clean_resources_db()
@@ -1436,3 +1509,28 @@ class EditorGroupApplicationTests(TestCase):
         self.assertNotContains(response, '<option value="1" '
                 'selected="selected">normaluser</option>', msg_prefix=
             'expected a manager not to be able to modify an application.')
+
+    def test_user_can_add_default_group(self):
+        """
+        Verifies that a user can set an editor group as default
+        """
+        client = Client()
+        client.login(username='editoruser', password='secret')
+        response = client.post('/{0}accounts/add_default_editor_groups/'.format(DJANGO_BASE), \
+          {'editor_group': self.test_editor_group.pk}, follow=True)
+        self.assertNotContains(response, 'You have successfully added default editor group "{}".'.format(self.test_editor_group),
+          msg_prefix='expected the system to set an editor group as default.')
+        
+    def test_user_can_remove_default_group(self):
+        """
+        Verifies that a user can remove an editor group from the default list
+        """
+        client = Client()
+        client.login(username='editoruser', password='secret')
+        response = client.post('/{0}accounts/add_default_editor_groups/'.format(DJANGO_BASE), \
+          {'editor_group': self.test_editor_group.pk}, follow=True)
+        response = client.post('/{0}accounts/remove_default_editor_groups/'.format(DJANGO_BASE), \
+          {'editor_group': self.test_editor_group.pk}, follow=True)
+        self.assertNotContains(response, 'You have successfully removed default editor group "{}".'.format(self.test_editor_group),
+          msg_prefix='expected the system to remove a default editor group.')
+        
