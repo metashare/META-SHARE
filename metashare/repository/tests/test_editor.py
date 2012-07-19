@@ -209,6 +209,46 @@ class EditorTest(TestCase):
         response = client.get(ADMINROOT+'repository/corpusinfotype_model/add/')
         self.assertContains(response, 'Permission denied', status_code=403)
 
+    def test_superuser_can_always_upload_data(self):
+        """
+        Verifies that a superuser may upload actual resource data to any
+        resource.
+        """
+        client = _client_with_user_logged_in(EditorTest.superuser_login)
+        for res in (EditorTest.testfixture, EditorTest.testfixture2,
+                    EditorTest.testfixture3, EditorTest.testfixture4):
+            response = client.get("{}repository/resourceinfotype_model/{}/" \
+                    "upload-data/".format(ADMINROOT, res.id))
+            self.assertEquals(200, response.status_code, "expected that a " \
+                              "superuser may always upload resource data")
+
+    def test_editor_can_upload_data(self):
+        """
+        Verifies that an editor user may upload actual resource data to owned
+        resources and to resources that are in her editor group.
+        """
+        client = _client_with_user_logged_in(EditorTest.editor_login)
+        # make sure data can be uploaded to owned resources:
+        response = client.get("{}repository/resourceinfotype_model/{}/" \
+                "upload-data/".format(ADMINROOT, EditorTest.testfixture3.id))
+        self.assertEquals(200, response.status_code, "expected that an " \
+                          "editor may upload resource data to owned resources")
+        # make sure data can be uploaded to editable resources:
+        response = client.get("{}repository/resourceinfotype_model/{}/" \
+                "upload-data/".format(ADMINROOT, EditorTest.testfixture.id))
+        self.assertEquals(200, response.status_code, "expected that an " \
+            "editor may upload resource data to resources of her editor group")
+
+    def test_editor_cannot_upload_data_to_invisible_resources(self):
+        """
+        Verifies that an editor user must not upload actual resource data to
+        resources that do not belong to her editor group and which are not hers.
+        """
+        client = _client_with_user_logged_in(EditorTest.editor_login)
+        response = client.get("{}repository/resourceinfotype_model/{}/" \
+                "upload-data/".format(ADMINROOT, EditorTest.testfixture2.id))
+        self.assertIn(response.status_code, (403, 404), "expected that an " \
+            "editor must not upload resource data to invisible resources")
 
     def test_editor_can_see_models_add(self):
         # We don't expect the following add forms to work, because the editor
