@@ -44,6 +44,9 @@ SYNC_NEEDS_AUTHENTICATION = True
 # URL for the Metashare Knowledge Base
 KNOWLEDGE_BASE_URL = 'http://metashare.ilsp.gr/portal/knowledgebase/'
 
+# The URL for META-SHARE statistics server.
+STATS_SERVER_URL = "http://metastats.fbk.eu/"
+
 
 # Import local settings, i.e., DEBUG, TEMPLATE_DEBUG, TIME_ZONE,
 # SECRET_KEY, DATABASE_* settings and ADMINS.
@@ -172,6 +175,7 @@ INSTALLED_APPS = (
     'metashare.storage',
     'metashare.sync',
     'metashare.stats',
+    'metashare.recommendations',
 
     'metashare.repository',
 )
@@ -195,6 +199,7 @@ PROJECT_APPS = (
     'metashare.accounts',
     'metashare.storage',
     'metashare.sync',
+    'metashare.recommendations',
 )
 
 # basic Haystack search backend configuration
@@ -235,3 +240,13 @@ if 'DISPLAY' in os.environ:
     import re
     SELENIUM_DISPLAY = re.sub(r'[^\:]*(\:\d{1,2})(?:\.\d+)?', r'\1', 
       os.environ['DISPLAY'])
+
+# maximum time interval in seconds allowed between two resource views so that
+# the resources are still considered as 'viewed together';
+# used in recommendations
+MAX_VIEW_INTERVAL = 60 * 5
+
+# maximum time interval in seconds allowed between two resource downloads so
+# that the resources are still considered as 'downloaded together';
+# used in recommendations
+MAX_DOWNLOAD_INTERVAL = 60 * 10

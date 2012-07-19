@@ -72,6 +72,8 @@ class ExampleSeleniumTest(SeleniumTestCase):
         return True
     
     def tearDown(self):
-        resourceInfoType_model.objects.all().delete()
+        test_utils.clean_resources_db()
+        test_utils.clean_storage()
+        test_utils.clean_user_db()
 
         super(ExampleSeleniumTest, self).tearDown()

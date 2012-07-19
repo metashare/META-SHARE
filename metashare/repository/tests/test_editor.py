@@ -143,11 +143,9 @@ class EditorTest(TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        test_utils.clean_db()
+        test_utils.clean_resources_db()
         test_utils.clean_storage()
-        User.objects.all().delete()
-        EditorGroup.objects.all().delete()
-        ManagerGroup.objects.all().delete()
+        test_utils.clean_user_db()
         test_utils.set_index_active(True)
 
 
@@ -785,11 +783,9 @@ class DestructiveTests(TestCase):
         self.testfixture.storage_object.save()
 
     def tearDown(self):
-        test_utils.clean_db()
+        test_utils.clean_resources_db()
         test_utils.clean_storage()
-        User.objects.all().delete()
-        EditorGroup.objects.all().delete()
-        ManagerGroup.objects.all().delete()
+        test_utils.clean_user_db()
 
     def test_editor_user_can_add_editor_group_to_own_resources_only(self):
         """
@@ -1301,12 +1297,9 @@ class EditorGroupApplicationTests(TestCase):
         User.objects.create_superuser('superuser', 'su@example.com', 'secret')
 
     def tearDown(self):
-        test_utils.clean_db()
+        test_utils.clean_resources_db()
         test_utils.clean_storage()
-        User.objects.all().delete()
-        EditorGroup.objects.all().delete()
-        ManagerGroup.objects.all().delete()
-        EditorGroupApplication.objects.all().delete()
+        test_utils.clean_user_db()
         test_utils.set_index_active(True)
 
     def test_application_page_with_one_editor_group(self):
