@@ -7,6 +7,6 @@ class RepositorySitemap(Sitemap):
     priority = 0.5
     
     def items(self):
-        return resourceInfoType_model.objects.
-          filter(storage_object__publication_status=PUBLISHED).
-          filter(storage_object__deleted=False)
+        return resourceInfoType_model.objects \
+          .filter(storage_object__publication_status=PUBLISHED) \
+          .filter(storage_object__deleted=False)
