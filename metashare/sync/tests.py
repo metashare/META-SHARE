@@ -1,20 +1,21 @@
 from django.test.testcases import TestCase
 from django.test.client import Client
-from metashare.settings import DJANGO_BASE, LOGIN_URL
 from django.contrib.auth.models import User, Group, Permission
 from django.contrib.admin.sites import LOGIN_FORM_KEY
-import json
+from django.core.management import call_command
+from xml.etree.ElementTree import fromstring
 from StringIO import StringIO
 from zipfile import ZipFile
+import datetime
+import os
+import json
+
 from metashare import settings, test_utils
 from metashare.repository.models import resourceInfoType_model
-from xml.etree.ElementTree import fromstring
 from metashare.storage.models import INGESTED, INTERNAL, StorageObject, \
     PUBLISHED, compute_digest_checksum, RemovedObject, MASTER, PROXY
+from metashare.settings import DJANGO_BASE, LOGIN_URL
 from metashare.test_utils import set_index_active
-import datetime
-from django.core.management import call_command
-import os
 
 
 class MetadataSyncTest (TestCase):
