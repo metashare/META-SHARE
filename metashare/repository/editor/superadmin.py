@@ -68,6 +68,8 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         # Reverse inline code:
         self.no_inlines = []
         self.exclude = self.exclude or []
+        if not isinstance(self.exclude, list):
+            self.exclude = list(self.exclude)
         # Prepare inlines for the required one2one fields:
         for field in model._meta.fields:
             if isinstance(field, models.OneToOneField):
