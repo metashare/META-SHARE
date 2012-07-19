@@ -345,9 +345,9 @@ class MetadataSyncTest (TestCase):
         res1_folder = os.path.join(settings.STORAGE_PATH, res1.storage_object.identifier)
         res2_folder = os.path.join(settings.STORAGE_PATH, res2.storage_object.identifier)
         res3_folder = os.path.join(settings.STORAGE_PATH, res3.storage_object.identifier)
-        self.assertEquals(3, len(StorageObject.objects.filter(copy_status=PROXY)))
+        self.assertEquals(3, StorageObject.objects.filter(copy_status=PROXY).count())
         # there are already 3 RemovedObjects from the setup method
-        self.assertEquals(3, len(RemovedObject.objects.all()))
+        self.assertEquals(3, RemovedObject.objects.count())
         self.assertTrue(os.path.isdir(res1_folder))
         self.assertTrue(os.path.isdir(res2_folder))
         self.assertTrue(os.path.isdir(res3_folder))
@@ -355,9 +355,9 @@ class MetadataSyncTest (TestCase):
         # check proxied nodes
         call_command('check_proxied_nodes', interactive=False)
         # no proxied resource has been removed
-        self.assertEquals(3, len(StorageObject.objects.filter(copy_status=PROXY)))
+        self.assertEquals(3, StorageObject.objects.filter(copy_status=PROXY).count())
         # there are already 3 RemovedObjects from the setup method
-        self.assertEquals(3, len(RemovedObject.objects.all()))
+        self.assertEquals(3, RemovedObject.objects.count())
 
         # remove proxied node
         del settings.PROXIED_NODES['proxied_node_1']
@@ -369,4 +369,4 @@ class MetadataSyncTest (TestCase):
         self.assertFalse(os.path.isdir(res2_folder))
         self.assertTrue(os.path.isdir(res3_folder))        
         # two more RemovedObjects have been created
-        self.assertEquals(5, len(RemovedObject.objects.all()))
+        self.assertEquals(5, RemovedObject.objects.count())
