@@ -21,8 +21,7 @@ class SEOTest(TestCase):
         imported_res.storage_object.save()
         client = Client()
         # assert that a two-token search finds a camelCase term:
-        response = client.get('/{0}sitemap.xml'.format(DJANGO_BASE),
-          follow=True)
+        response = client.get('/{0}sitemap.xml'.format(DJANGO_BASE))
         self.assertContains(response, 
           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">', \
           status_code=200)
@@ -37,8 +36,7 @@ class SEOTest(TestCase):
         """
         client = Client()
         if DJANGO_BASE == '':
-            response = client.get('/{0}robots.txt'.format(DJANGO_BASE),
-              follow=True)
+            response = client.get('/{0}robots.txt'.format(DJANGO_BASE))
             self.assertContains(response, 
               'Disallow: /admin/', status_code=200)
             self.assertContains(response,
