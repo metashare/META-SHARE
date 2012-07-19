@@ -15,7 +15,7 @@
         {% else %}
 			
 				{% if lr_content.0.1 != "" %}
-				<tr {% if lr_content.0.2 == True %} class="mandatory" {% else %} class="optional" {% endif %}>
+				<tr {% if lr_content.0.2 == 1 %} class="mandatory" {% else %} class="optional" {% endif %}>
 
 						{% if lr_content.0.0 == "url" %}
 							<th><label>{{ lr_content.0.0|capfirst }} </label></th>
