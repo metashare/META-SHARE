@@ -364,7 +364,7 @@ class MetadataSyncTest (TestCase):
         # check proxied nodes
         call_command('check_proxied_nodes', interactive=False)
         # now, two proxied resources has been removed
-        self.assertEquals(1, len(StorageObject.objects.filter(copy_status=PROXY)))
+        self.assertEquals(1, StorageObject.objects.filter(copy_status=PROXY).count())
         self.assertFalse(os.path.isdir(res1_folder))
         self.assertFalse(os.path.isdir(res2_folder))
         self.assertTrue(os.path.isdir(res3_folder))        
