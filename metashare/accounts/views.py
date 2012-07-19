@@ -207,23 +207,17 @@ def edit_profile(request):
     
     # Otherwise, fill UserProfileForm instance from current UserProfile.
     else:
-
-        # Fill UserProfileForm from current UserProfile instance.
         form = UserProfileForm({'birthdate': profile.birthdate,
           'affiliation': profile.affiliation, 'position': profile.position,
           'homepage': profile.homepage})
-    
-    editor_groups_member_of = []
-    for edt_group in EditorGroup.objects.filter(name__in=profile.user.groups.values_list('name', flat=True)):
-        if profile.default_editor_groups.filter(name=edt_group.name).count() == 0:
-            editor_groups_member_of.append({'name': edt_group.name, 'default': False})
-        else:
-            editor_groups_member_of.append({'name': edt_group.name, 'default': True})
 
     dictionary = {'title': 'Edit profile information', 'form': form, 
         'groups_applied_for': [edt_reg.editor_group.name for edt_reg
                 in EditorGroupApplication.objects.filter(user=profile.user)],
-        'editor_groups_member_of': editor_groups_member_of,
+        'editor_groups_member_of': [{'name': eg.name, 'default':
+                profile.default_editor_groups.filter(name=eg.name).count() != 0}
+            for eg in EditorGroup.objects.filter(name__in=
+                        profile.user.groups.values_list('name', flat=True))],
         'manager_groups_member_of': [mgr_group.name for mgr_group
                 in ManagerGroup.objects.filter(name__in=profile.user.groups.values_list('name', flat=True))]}
     
