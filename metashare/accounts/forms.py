@@ -105,8 +105,6 @@ class RegistrationRequestForm(ModelForm):
         """
         pswrd = self.cleaned_data['password']
         pswrd_conf = self.cleaned_data['confirm_password']
-        print pswrd
-        print pswrd_conf
         if pswrd != pswrd_conf:
             raise ValidationError('The two password fields did not match.')
 
