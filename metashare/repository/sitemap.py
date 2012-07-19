@@ -1,6 +1,5 @@
 from django.contrib.sitemaps import Sitemap
 from metashare.repository.models import resourceInfoType_model
-from metashare.settings import DJANGO_URL
 from metashare.storage.models import PUBLISHED
 
 class RepositorySitemap(Sitemap):
