@@ -17,7 +17,7 @@
 <table>
 {{ form }}
 </table>
-
+<p>Note: the selected users will also be added to the managed editor group{{ selected_managergroups|pluralize }} if they should not be a member of {{ selected_managergroups|pluralize:"it,them" }}, yet.</p>
 <input type="hidden" name="action" value="add_user_to_manager_group"/>
 <input type="submit" name="add_user_profile_to_manager_group" value="Add"/>
 <input type="submit" name="cancel" value="Cancel"/>
