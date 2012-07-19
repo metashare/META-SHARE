@@ -83,6 +83,9 @@ if __name__ == "__main__":
     from metashare.xml_utils import pretty_xml
     with ZipFile(sys.argv[1], 'w') as out:
         for resource in resourceInfoType_model.objects.all():
+            # skip rsources marked as deleted
+            if resource.storage_object.deleted == True:
+                continue
             try:
                 RESOURCE_NO += 1
                 root_node = resource.export_to_elementtree()

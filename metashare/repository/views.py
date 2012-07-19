@@ -18,6 +18,7 @@ from django.template import RequestContext
 
 from haystack.views import FacetedSearchView
 
+from metashare.repository.editor.resource_editor import has_edit_permission
 from metashare.repository.forms import LicenseSelectionForm, LicenseAgreementForm
 from metashare.repository.models import licenceInfoType_model, resourceInfoType_model
 from metashare.repository.search_indexes import resourceInfoType_modelIndex
@@ -25,6 +26,7 @@ from metashare.settings import LOG_LEVEL, LOG_HANDLER, MEDIA_URL
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
 from metashare.storage.models import PUBLISHED
+from metashare.recommendations.recommendations import SessionResourcesTracker
 
 
 MAXIMUM_READ_BLOCK_SIZE = 4096
@@ -284,6 +286,10 @@ def _provide_download(request, resource, download_urls):
 
             # maintain download statistics and return the response for download
             saveLRStats(resource, DOWNLOAD_STAT, request)
+            # update download tracker
+            tracker = SessionResourcesTracker.getTracker(request)
+            tracker.add_download(resource, datetime.now())
+            request.session['tracker'] = tracker
             LOGGER.info("Offering a local download of resource #{0}." \
                         .format(resource.id))
             return response
@@ -297,6 +303,10 @@ def _provide_download(request, resource, download_urls):
             status_code = urlopen(url).getcode()
             if not status_code or status_code < 400:
                 saveLRStats(resource, DOWNLOAD_STAT, request)
+                # update download tracker
+                tracker = SessionResourcesTracker.getTracker(request)
+                tracker.add_download(resource, datetime.now())
+                request.session['tracker'] = tracker
                 LOGGER.info("Redirecting to {0} for the download of resource " \
                             "#{1}.".format(url, resource.id))
                 return redirect(url)
@@ -341,11 +351,11 @@ def view(request, resource_name=None, object_id=None):
     context = { 'resource': resource, 'lr_content': lr_content }
     template = 'repository/lr_view.html'
 
-    # For staff users, we have to add LR_EDIT which contains the URL of
-    # the Django admin backend page for this resource.
-    if request.user.is_staff:
+    # For users who have edit permission for this resource, we have to add LR_EDIT 
+    # which contains the URL of the Django admin backend page for this resource.
+    if has_edit_permission(request, resource):
         context['LR_EDIT'] = reverse(
-            'admin:repository_resourceinfotype_model_change', args=(object_id,))
+            'admin:repository_resourceinfotype_model_change', args=(resource.id,))
 
     # in general, only logged in users may download/purchase any resources
     context['LR_DOWNLOAD'] = request.user.is_active
@@ -354,7 +364,11 @@ def view(request, resource_name=None, object_id=None):
     if hasattr(resource.storage_object, 'identifier'):
         saveLRStats(resource, VIEW_STAT, request)
         context['LR_STATS'] = getLRStats(resource.storage_object.identifier)
-
+        # update view tracker
+        tracker = SessionResourcesTracker.getTracker(request)
+        tracker.add_view(resource, datetime.now())
+        request.session['tracker'] = tracker
+            
     # Render and return template with the defined context.
     ctx = RequestContext(request)
     return render_to_response(template, context, context_instance=ctx)

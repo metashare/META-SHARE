@@ -24,11 +24,45 @@
     <td colspan="2" style="text-align:center; height:40px;"><a href="{% url django.contrib.auth.views.password_change %}"> Change your password.</a> </td>
   </tr>
   {{ form.as_table }}
+  {% if manager_groups_member_of %}
+  <tr>
+    <th> <label>Manager Group{{ manager_groups_member_of|pluralize }}</label></th>
+    <td>{{ manager_groups_member_of|join:", " }}</td>
+  </tr>
+  {% endif %}
+  {% if editor_groups_member_of %}
+  <tr>
+    <th> <label>Editor Group{{ editor_groups_member_of|pluralize }} <i>(default)</i></label></th>
+    {% regroup editor_groups_member_of by default as edt_grp_list %}
+    <td>
+	{% for edt_grp in edt_grp_list %}
+      {% if not forloop.first %}, {% endif %} 
+	  {% if edt_grp.grouper %}
+	    {% for e in edt_grp.list %}
+	      {% if forloop.first %}{% else %}, {% endif %} 
+	      <i>{{ e.name }}</i>
+	    {% endfor %}
+      {% else %}
+	    {% for e in edt_grp.list %}
+	      {% if not forloop.first %}, {% endif %} 
+	      {{ e.name }}
+	    {% endfor %}
+      {% endif %}
+	{% endfor %}
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" style="text-align:center; height:40px;"><a href="{% url metashare.accounts.views.add_default_editor_groups %}"> Add default editor groups.</a> </td>
+  </tr>
+  <tr>
+    <td colspan="2" style="text-align:center; height:40px;"><a href="{% url metashare.accounts.views.remove_default_editor_groups %}">Remove default editor groups.</a> </td>
+  </tr>
+  {% endif %}
   {% if groups_applied_for %}
-  <tr><td colspan="2" style="text-align:center; height:40px;">You already applied for a membership of the following group{{ groups_applied_for|pluralize }}: {{ groups_applied_for|join:", " }}</td></tr>
+  <tr><td colspan="2" style="text-align:center; height:40px;">You already applied for a membership of the following editor group{{ groups_applied_for|pluralize }}: {{ groups_applied_for|join:", " }}</td></tr>
   {% endif %}
   <tr>
-    <td colspan="2" style="text-align:center; height:40px;"><a href="{% url metashare.accounts.views.editor_registration_request %}"> Apply for new membership of editor groups.</a> </td>
+    <td colspan="2" style="text-align:center; height:40px;"><a href="{% url metashare.accounts.views.editor_group_application %}"> Apply for new membership of editor groups.</a> </td>
   </tr>
   
 

@@ -69,7 +69,7 @@ window.onload=beginrefresh
   
 <table width=100% border=0>
 <td valign=top>
-{% if traffic|length <= 0 %}
+{% if traffic|length <= 1 %}
     No data found
 </td>
 </table>
@@ -86,41 +86,56 @@ Show statistics for <select onchange="submit()" name="date">
     >{{ day.date|date:"Y/m/d" }}
 {% endfor %}
 </select>
+<div class=font12>
+<input type="checkbox" name="showupnodes" onChange="javascript:submit()" 
+    {% if showupnodes == "on" %}
+        checked="checked"
+    {% endif %}
+/> Show running nodes only
+</div>
 </form>
 </div>
 <table id="nodes" cellspacing=1 class="tablesorter">
 	<thead><tr valign=top>
-	    <th class="header" width=30%>META-SHARE Node</th>
+	    <th class="header" width=30%>META-SHARE Nodes ({{ traffic|length|add:-1 }})</th>
 	    <th class="header">Last check</th>
 	    {% for fieldname, fieldlabel in stats_fields %}
-	        <th class="header">{{ fieldlabel }}</th>
+	        <th class="header">{{ fieldlabel.0 }}</th>
 	    {% endfor %}
 	</tr></thead> 
 	<tbody>
-	{% for host,info in traffic.items %}
-	    <tr class="font12">
-	    {% for item in info %}
-	      {% if forloop.counter == 1 %}
-	          <td nowrap>
-	          {% if item == 1 %}
-	              <img src="{{ media_prefix }}images/icon_success.gif" title="This node is running" width=16>
-	          {% else %}
-	              <img src="{{ media_prefix }}images/icon_error.gif" title="This node is down or some unexpected result to getting statistics occurred" width=18>	            
-	          {% endif %}
-	          <a href='{{ host }}' target=_new><font color=blue><strong>{{ host }}</strong></font></a>
-	          </td>
-	      {% else %}
-	          <td align=right nowrap>{{ item }} </td>
-	      {% endif %}
-	    {% endfor %}
-	    </tr>
-	{% endfor %}
-	
+	{% for host in traffic %}
 	<tr class="font12">
-	{% for info in host_total_counter %} 
-	    <td align=right><b>{{ info }}</b></td>
+	    
+	{% for item in host %}
+        {% if forloop.counter == 1 %}
+            {% if host.1 == "TOTAL" %}
+                <td align=right nowrap>
+                TOTAL
+            {% else %}
+                <td nowrap>
+                {% if item == 1 %}
+                    <img src="{{ media_prefix }}images/icon_success.gif" title="This node is running" width=16>
+                {% else %}
+                    <img src="{{ media_prefix }}images/icon_error.gif" title="This node is down or some unexpected result to getting statistics occurred" width=16>               
+                {% endif %}
+                <a href='{{ host }}' target=_new><font color=blue><strong>{{ host.1 }}</strong></font></a>
+                {% if host.2 > 0 %}
+                    <img src="{{ media_prefix }}images/icon_alert.gif" title="This node seems not valid." width=16>
+                {% endif %}
+                
+            {% endif %} 
+            </td>
+            
+        {% else %}
+            {% if forloop.counter > 3 %}
+                <td align=right nowrap>{{ item }} </td>
+            {% endif %}
+        {% endif %}   
 	{% endfor %}
-	</tr>        
+	 </tr>
+	 {% endfor %}
+	 
 	</tbody> 
 </table>
 
@@ -215,10 +230,10 @@ jQuery(document).ready(function() {
         },
 
         series: [
-        	{% for action,val in actions_bydate.items %}
+        	{% for action, val in actions_bydate.items %}
 		  {name: '{{action}}',
             data: [
-            	{% for date,val in val.items %}
+            	{% for date, val in val.items %}
 					{x: Date.UTC({{date}}),y:{{ val }}, url: "?date={{date}}" },
 				{% endfor %}
 			]},
@@ -293,7 +308,7 @@ jQuery(document).ready(function() {
                 }
             },
             series: [
-            {% for action,val in actions_byhost.items %}
+            {% for action, val in actions_byhost.items %}
             { /* type: 'column', */
                 name: '{{ action }}',
                 data: {{ val }}

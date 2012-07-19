@@ -12,6 +12,7 @@ from metashare.settings import DJANGO_BASE
 from django.db.utils import IntegrityError
 from django.contrib.auth.models import User
 from django.db.transaction import rollback
+from metashare import test_utils
 
 class CreateViewTest(django.test.TestCase):
     def testCreateInitial(self):
@@ -46,8 +47,7 @@ class CreateViewTest(django.test.TestCase):
           status_code=200)
 
     def tearDown(self):
-        RegistrationRequest.objects.all().delete()
-        User.objects.all().delete()
+        test_utils.clean_user_db()
 
 class RegistrationRequestTest(django.test.TestCase):
 
@@ -175,8 +175,7 @@ class RegistrationRequestTest(django.test.TestCase):
           status_code=200)
        
     def tearDown(self):
-        RegistrationRequest.objects.all().delete()
-        User.objects.all().delete()
+        test_utils.clean_user_db()
 
 if __name__ == "__main__":
     unittest.main()

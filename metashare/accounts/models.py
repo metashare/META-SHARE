@@ -93,7 +93,7 @@ class EditorGroup(Group):
                 .values_list('name', flat=True))
 
 
-class EditorRegistrationRequest(models.Model):
+class EditorGroupApplication(models.Model):
     """
     Contains user data related to a user application for being an editor.
     """
@@ -105,7 +105,7 @@ class EditorRegistrationRequest(models.Model):
         """
         Return Unicode representation for this instance.
         """
-        return u'<EditorRegistrationRequest of "{0}" for "{1}">'.format(
+        return u'<EditorGroupApplication of "{0}" for "{1}">'.format(
                 self.user, self.editor_group)
 
 
@@ -148,6 +148,8 @@ class UserProfile(models.Model):
     position = models.CharField(max_length=50, blank=True)
     homepage = models.URLField(blank=True)
     
+    default_editor_groups = models.ManyToManyField(EditorGroup, blank=True)
+
     # These fields can be edited by the user in the browser.
     __editable_fields__ = ('birthdate', 'affiliation', 'position', 'homepage')
     

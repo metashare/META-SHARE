@@ -25,9 +25,10 @@ from django.template import RequestContext
 from django.utils.translation import ugettext as _
 
 from metashare.accounts.forms import RegistrationRequestForm, \
-  ResetRequestForm, UserProfileForm, EditorRegistrationRequestForm
+  ResetRequestForm, UserProfileForm, EditorGroupApplicationForm, \
+  AddDefaultEditorGroupForm, RemoveDefaultEditorGroupForm
 from metashare.accounts.models import RegistrationRequest, ResetRequest, \
-  UserProfile, EditorRegistrationRequest, ManagerGroup, EditorGroup
+  UserProfile, EditorGroupApplication, ManagerGroup, EditorGroup
 from metashare.settings import SSO_SECRET_KEY, DJANGO_URL, \
   PRIVATE_KEY_PATH, LOG_LEVEL, LOG_HANDLER, MAX_LIFETIME_FOR_SSO_TOKENS
 
@@ -170,6 +171,9 @@ def edit_profile(request):
     if request.user.username == 'MetaShareUser':
         return redirect('metashare.views.frontpage')
     
+    # Get UserProfile instance corresponding to the current user.
+    profile = request.user.get_profile()
+
     # Check if the edit form has been submitted.
     if request.method == "POST":
         # If so, bind the creation form to HTTP POST values.
@@ -177,9 +181,7 @@ def edit_profile(request):
         
         # Check if the form has validated successfully.
         if form.is_valid():
-            # Get UserProfile instance corresponding to the current user.
-            profile = request.user.get_profile()
-            
+
             # Loop over all editable fields and check for updates.
             _profile_requires_save = False
             for __field__ in profile.__editable_fields__:
@@ -205,22 +207,25 @@ def edit_profile(request):
     
     # Otherwise, fill UserProfileForm instance from current UserProfile.
     else:
-        # Get UserProfile instance corresponding to the current user.
-        profile = request.user.get_profile()
-        
-        # Fill UserProfileForm from current UserProfile instance.
         form = UserProfileForm({'birthdate': profile.birthdate,
           'affiliation': profile.affiliation, 'position': profile.position,
           'homepage': profile.homepage})
 
     dictionary = {'title': 'Edit profile information', 'form': form, 
         'groups_applied_for': [edt_reg.editor_group.name for edt_reg
-                in EditorRegistrationRequest.objects.filter(user=profile.user)]}
+                in EditorGroupApplication.objects.filter(user=profile.user)],
+        'editor_groups_member_of': [{'name': eg.name, 'default':
+                profile.default_editor_groups.filter(name=eg.name).count() != 0}
+            for eg in EditorGroup.objects.filter(name__in=
+                        profile.user.groups.values_list('name', flat=True))],
+        'manager_groups_member_of': [mgr_group.name for mgr_group
+                in ManagerGroup.objects.filter(name__in=profile.user.groups.values_list('name', flat=True))]}
+    
     return render_to_response('accounts/edit_profile.html', dictionary,
       context_instance=RequestContext(request))
 
 @login_required
-def editor_registration_request(request):
+def editor_group_application(request):
     """
     Apply for Editor Groups membership.
     """
@@ -234,7 +239,7 @@ def editor_registration_request(request):
     # - editor groups that are not handled by manager
     available_editor_groups = EditorGroup.objects \
         .exclude(name__in=request.user.groups.values_list('name', flat=True)) \
-        .exclude(name__in=EditorRegistrationRequest.objects.filter(
+        .exclude(name__in=EditorGroupApplication.objects.filter(
             user=request.user).values_list('editor_group__name', flat=True)) \
         .filter(name__in=ManagerGroup.objects.all().filter(
                 name__in=User.objects.values_list('groups__name', flat=True)) \
@@ -243,17 +248,17 @@ def editor_registration_request(request):
     # Check if the edit form has been submitted.
     if request.method == "POST":
         # If so, bind the creation form to HTTP POST values.
-        form = EditorRegistrationRequestForm(available_editor_groups, request.POST)
+        form = EditorGroupApplicationForm(available_editor_groups, request.POST)
         # Check if the form has validated successfully.
         if form.is_valid():
             edt_grp = form.cleaned_data['editor_group']
 
-            if EditorRegistrationRequest.objects.filter(
+            if EditorGroupApplication.objects.filter(
                     user=request.user, editor_group=edt_grp).count() != 0:
                 messages.success(request, _('An older application of yours for '
                     'editor group "%s" is still pending.') % (edt_grp.name,))
             else:
-                new_object = EditorRegistrationRequest(user=request.user,
+                new_object = EditorGroupApplication(user=request.user,
                     editor_group=edt_grp)
                 new_object.save()
 
@@ -268,19 +273,19 @@ def editor_registration_request(request):
                 # Render notification email template with correct values.
                 data = {'editor_group': edt_grp.name,
                   'shortname': request.user,
-                  'confirmation_url': '{0}/admin/accounts/editorregistrationrequest/'.format(
+                  'confirmation_url': '{0}/admin/accounts/editorgroupapplication/'.format(
                     DJANGO_URL)}
                 try:
                     # Send out notification email to the managers and superusers
                     send_mail('New editor membership request',
-                        render_to_string('accounts/notification.email', data),
+                        render_to_string('accounts/notification_manager_editor_group_application.email', data),
                         'no-reply@meta-share.eu', emails, fail_silently=False)
                 except: #SMTPException:
                     # If the email could not be sent successfully, tell the user
                     # about it.
                     messages.error(request,
                       "There was an error sending out the request email " \
-                      "for your editor registration.")
+                      "for your editor group application.")
                 else:
                     messages.success(request, _('You have successfully ' \
                         'applied for editor group "%s".') % (edt_grp.name,))
@@ -288,7 +293,7 @@ def editor_registration_request(request):
             # Redirect the user to the edit profile page.
             return redirect('metashare.views.edit_profile')
 
-    # Otherwise, render a new EditorRegistrationRequestForm instance
+    # Otherwise, render a new EditorGroupApplicationForm instance
     else:
         # Check whether there is an editor group the user can apply for.
         if available_editor_groups.count() == 0:
@@ -299,10 +304,114 @@ def editor_registration_request(request):
             # Redirect the user to the edit profile page.
             return redirect('metashare.views.edit_profile')
         
-        form = EditorRegistrationRequestForm(available_editor_groups)
+        form = EditorGroupApplicationForm(available_editor_groups)
 
     dictionary = {'title': 'Apply for editor group membership', 'form': form}
-    return render_to_response('accounts/editor_registration_request.html',
+    return render_to_response('accounts/editor_group_application.html',
+                        dictionary, context_instance=RequestContext(request))
+
+
+@login_required
+def add_default_editor_groups(request):
+    """
+    Add default Editor Groups.
+    """
+    # The "virtual" MetaShareUser cannot add default editor group
+    if request.user.username == 'MetaShareUser':
+        return redirect('metashare.views.frontpage')
+
+    # Get UserProfile instance corresponding to the current user.
+    profile = request.user.get_profile()
+
+    # Exclude from the list the editor groups for which the user is not a member
+    available_editor_groups = EditorGroup.objects \
+        .filter(name__in=request.user.groups.values_list('name', flat=True)) \
+        .exclude(name__in=profile.default_editor_groups.values_list('name', flat=True))
+
+    # Check if the form has been submitted.
+    if request.method == "POST":
+        # If so, bind the creation form to HTTP POST values.
+        form = AddDefaultEditorGroupForm(available_editor_groups, request.POST)
+        # Check if the form has validated successfully.
+        if form.is_valid():
+            # Get submitted editor groups
+            dflt_edt_grps = form.cleaned_data['default_editor_groups']
+
+            for dflt_edt_grp in dflt_edt_grps:
+                for edt_grp in EditorGroup.objects.filter(name=dflt_edt_grp.name):
+                    profile.default_editor_groups.add(edt_grp)
+                    messages.success(request, _('You have successfully ' \
+                      'added default editor group "%s".') % (dflt_edt_grp.name,))
+            profile.save()
+
+            # Redirect the user to the edit profile page.
+            return redirect('metashare.views.edit_profile')
+
+    # Otherwise, render a new AddDefaultEditorGroupForm instance
+    else:
+        # Check whether there is an editor group the user can add to the default list.
+        if available_editor_groups.count() == 0:
+            # If there is no editor group created yet, send an error message.
+            messages.error(request, _('There are no editor groups you can '
+                'add to your default list.'))
+            # Redirect the user to the edit profile page.
+            return redirect('metashare.views.edit_profile')
+        
+        form = AddDefaultEditorGroupForm(available_editor_groups)
+
+    dictionary = {'title': 'Add default editor group', 'form': form}
+    return render_to_response('accounts/add_default_editor_groups.html',
+                        dictionary, context_instance=RequestContext(request))
+
+@login_required
+def remove_default_editor_groups(request):
+    """
+    Remove default Editor Groups.
+    """
+    # The "virtual" MetaShareUser cannot remove default editor group
+    if request.user.username == 'MetaShareUser':
+        return redirect('metashare.views.frontpage')
+
+    # Get UserProfile instance corresponding to the current user.
+    profile = request.user.get_profile()
+
+    # Include in the list only the default editor groups of the user
+    available_editor_groups = EditorGroup.objects \
+        .filter(name__in=profile.default_editor_groups.values_list('name', flat=True))
+
+    # Check if the form has been submitted.
+    if request.method == "POST":
+        # If so, bind the creation form to HTTP POST values.
+        form = RemoveDefaultEditorGroupForm(available_editor_groups, request.POST)
+        # Check if the form has validated successfully.
+        if form.is_valid():
+            # Get submitted editor groups
+            dflt_edt_grps = form.cleaned_data['default_editor_groups']
+
+            for dflt_edt_grp in dflt_edt_grps:
+                for edt_grp in EditorGroup.objects.filter(name=dflt_edt_grp.name):
+                    profile.default_editor_groups.remove(edt_grp)
+                    messages.success(request, _('You have successfully ' \
+                      'removed default editor group "%s".') % (dflt_edt_grp.name,))
+            profile.save()
+
+            # Redirect the user to the edit profile page.
+            return redirect('metashare.views.edit_profile')
+
+    # Otherwise, render a new RemoveDefaultEditorGroupForm instance
+    else:
+        # Check whether there is an editor group the user can remove from the default list.
+        if available_editor_groups.count() == 0:
+            # If there is no editor group created yet, send an error message.
+            messages.error(request, _('There are no editor groups you can '
+                'remove from your default list.'))
+            # Redirect the user to the edit profile page.
+            return redirect('metashare.views.edit_profile')
+        
+        form = RemoveDefaultEditorGroupForm(available_editor_groups)
+
+    dictionary = {'title': 'Remove default editor group', 'form': form}
+    return render_to_response('accounts/remove_default_editor_groups.html',
                         dictionary, context_instance=RequestContext(request))
 
 

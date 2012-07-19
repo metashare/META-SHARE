@@ -4,7 +4,7 @@ Project: META-SHARE prototype implementation
 """
 from django import forms
 from metashare.accounts.models import RegistrationRequest, UserProfile, \
-    EditorRegistrationRequest
+    EditorGroupApplication
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
@@ -136,25 +136,67 @@ class UserProfileForm(ModelForm):
         Meta class connecting to UserProfile object model.
         """
         model = UserProfile
-        exclude = ('user', 'modified', 'uuid')
+        exclude = ('user', 'modified', 'uuid', 'default_editor_groups')
 
 
-class EditorRegistrationRequestForm(ModelForm):
+class EditorGroupApplicationForm(ModelForm):
     """
     Form used to apply to new editor groups membership.
     """
     class Meta:
         """
-        Meta class connecting to EditorRegistrationRequest object model.
+        Meta class connecting to EditorGroupApplication object model.
         """
-        model = EditorRegistrationRequest
+        model = EditorGroupApplication
         exclude = ('user', 'created')
 
     def __init__(self, editor_group_qs, *args, **kwargs):
         """
-        Initializes the `EditorRegistrationRequestForm` with the editor groups
+        Initializes the `EditorGroupApplicationForm` with the editor groups
         of the given query set.
         """
-        super(EditorRegistrationRequestForm, self).__init__(*args, **kwargs)
+        super(EditorGroupApplicationForm, self).__init__(*args, **kwargs)
         # If there is a list of editor groups, then modify the ModelChoiceField
         self.fields['editor_group'].queryset = editor_group_qs
+
+class AddDefaultEditorGroupForm(ModelForm):
+    """
+    Form used to add default editor groups.
+    """
+    class Meta:
+        """
+        Meta class connecting to UserProfile object model.
+        """
+        model = UserProfile
+        exclude = ('user', 'modified', 'uuid', 'birthdate', 'affiliation', \
+          'position', 'homepage')
+
+    def __init__(self, editor_group_qs, *args, **kwargs):
+        """
+        Initializes the `AddDefaultEditorGroupForm` with the editor groups
+        of the given query set.
+        """
+        super(AddDefaultEditorGroupForm, self).__init__(*args, **kwargs)
+        # If there is a list of editor groups, then modify the ModelChoiceField
+        self.fields['default_editor_groups'].queryset = editor_group_qs
+
+class RemoveDefaultEditorGroupForm(ModelForm):
+    """
+    Form used to remove default editor groups.
+    """
+    class Meta:
+        """
+        Meta class connecting to UserProfile object model.
+        """
+        model = UserProfile
+        exclude = ('user', 'modified', 'uuid', 'birthdate', 'affiliation', \
+          'position', 'homepage')
+
+    def __init__(self, editor_group_qs, *args, **kwargs):
+        """
+        Initializes the `RemoveDefaultEditorGroupForm` with the editor groups
+        of the given query set.
+        """
+        super(RemoveDefaultEditorGroupForm, self).__init__(*args, **kwargs)
+        # If there is a list of editor groups, then modify the ModelChoiceField
+        self.fields['default_editor_groups'].queryset = editor_group_qs
