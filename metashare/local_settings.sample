@@ -94,9 +94,6 @@ TIME_ZONE = 'Europe/Berlin'
 # Shared secret used for Single-Sign-On between META-SHARE core nodes.
 SSO_SECRET_KEY = '6736d82b807811e0a1e51093e908621ab4e0e5225bde4fbcb1aa160fbd198e2a'
 
-# The URL for META-SHARE statistics server.
-STATS_SERVER_URL = "http://metastats.fbk.eu/"
-
 # The location of the xdiff tool to compare XML files.
 XDIFF_LOCATION = "{0}/../misc/tools/xdiff-src/xdiff".format(ROOT_PATH)
 
@@ -187,13 +184,3 @@ PROXIED_NODES = {
 # For more options, check http://packages.python.org/django-analytical/
 #GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-XXXXXXXX-X'
 #GOOGLE_ANALYTICS_SITE_SPEED = True
-
-# maximum time interval in seconds allowed between two resource views so that
-# the resources are still considered as 'viewed together';
-# used in recommendations
-MAX_VIEW_INTERVAL = 60 * 5
-
-# maximum time interval in seconds allowed between two resource downloads so
-# that the resources are still considered as 'downloaded together';
-# used in recommendations
-MAX_DOWNLOAD_INTERVAL = 60 * 10
