@@ -11,7 +11,7 @@ from django.views.generic.simple import direct_to_template
 
 from metashare.settings import MEDIA_ROOT, DEBUG, DJANGO_BASE, SITEMAP_URL
 from metashare.repository.editor import admin_site as editor_site
-from repository.sitemap import *
+from metashare.repository.sitemap import *
 
 admin.autodiscover()
 
