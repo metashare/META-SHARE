@@ -220,6 +220,17 @@ def change_resource_status(resource, status, precondition_status=None):
     return False
 
 
+def has_edit_permission(request, res_obj):
+    """
+    Returns `True` if the given request has permission to edit the metadata
+    for the current resource, `False` otherwise.
+    """
+    return request.user.is_active and (request.user.is_superuser \
+        or request.user in res_obj.owners.all() \
+        or res_obj.editor_groups.filter(name__in=
+            request.user.groups.values_list('name', flat=True)).count() != 0)
+
+
 def has_publish_permission(request, queryset):
     """
     Returns `True` if the given request has permission to change the publication
