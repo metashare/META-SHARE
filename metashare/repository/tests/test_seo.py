@@ -24,11 +24,12 @@ class SEOTest(TestCase):
         response = client.get('/{0}sitemap.xml'.format(DJANGO_BASE),
           follow=True)
         self.assertContains(response, 
-          '{}/repository/browse/italian-tts-speech-corpus-appen/' \
-          .format(DJANGO_URL), status_code=200)
-        self.assertContains(response, 
           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">', \
           status_code=200)
+        self.assertContains(response, 
+          '{}/repository/browse/italian-tts-speech-corpus-appen/' \
+          .format(DJANGO_URL), status_code=200)
+
 
     def test_robots_txt(self):
         """
