@@ -934,11 +934,12 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 return True
             # in addition to the default delete permission determination, we
             # only allow a user to delete a resource if either:
-            # (1) she is owner of the resource and the resource does not belong
-            #     to any `EditorGroup`
+            # (1) she is owner of the resource and the resource has not been
+            #     ingested, yet
             # (2) she is a manager of one of the resource's `EditorGroup`s
             res_groups = obj.editor_groups.all()
-            return (request.user in obj.owners.all() and len(res_groups) == 0) \
+            return (request.user in obj.owners.all()
+                    and obj.storage_object.publication_status == INTERNAL) \
                 or any(res_group.name == mgr_group.managed_group.name
                        for res_group in res_groups
                        for mgr_group in ManagerGroup.objects.filter(name__in=

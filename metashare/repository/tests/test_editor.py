@@ -13,12 +13,13 @@ from metashare.repository import models
 from metashare.repository.models import languageDescriptionInfoType_model, \
     lexicalConceptualResourceInfoType_model, personInfoType_model
 from metashare.settings import DJANGO_BASE, ROOT_PATH
-from metashare.storage.models import PUBLISHED, INGESTED, REMOTE
+from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, REMOTE
 
 ADMINROOT = '/{0}editor/'.format(DJANGO_BASE)
 TESTFIXTURE_XML = '{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
 TESTFIXTURE2_XML = '{}/repository/fixtures/ILSP10.xml'.format(ROOT_PATH)
 TESTFIXTURE3_XML = '{}/repository/test_fixtures/META-SHARE/DFKI2.xml'.format(ROOT_PATH)
+TESTFIXTURE4_XML = '{}/repository/test_fixtures/META-SHARE/FBK16.xml'.format(ROOT_PATH)
 BROKENFIXTURE_XML = '{}/repository/fixtures/broken.xml'.format(ROOT_PATH)
 TESTFIXTURES_ZIP = '{}/repository/fixtures/tworesources.zip'.format(ROOT_PATH)
 BROKENFIXTURES_ZIP = '{}/repository/fixtures/onegood_onebroken.zip'.format(ROOT_PATH)
@@ -61,6 +62,7 @@ class EditorTest(TestCase):
     testfixture = None
     testfixture2 = None
     testfixture3 = None
+    testfixture4 = None
     
     @classmethod
     def setUpClass(cls):
@@ -139,9 +141,15 @@ class EditorTest(TestCase):
         # second resource which is only visible by the superuser
         EditorTest.testfixture2 = _import_test_resource(None, TESTFIXTURE2_XML)
         # third resource which is owned by the editoruser
-        EditorTest.testfixture3 = _import_test_resource(None, TESTFIXTURE3_XML)
+        EditorTest.testfixture3 = _import_test_resource(None, TESTFIXTURE3_XML,
+                                                        pub_status=PUBLISHED)
         EditorTest.testfixture3.owners.add(editoruser)
         EditorTest.testfixture3.save()
+        # fourth test resource which is owned by the editor user
+        EditorTest.testfixture4 = _import_test_resource(
+            EditorTest.test_editor_group, TESTFIXTURE4_XML, pub_status=INTERNAL)
+        EditorTest.testfixture4.owners.add(editoruser)
+        EditorTest.testfixture4.save()
 
 
     @classmethod
@@ -509,16 +517,16 @@ class EditorTest(TestCase):
         # test with editor user
         client = _client_with_user_logged_in(EditorTest.editor_login)
         response = client.get(ADMINROOT+'repository/resourceinfotype_model/')
-        self.assertContains(response, '2 Resources')
+        self.assertContains(response, '3 Resources')
         # test with superuser
         client = _client_with_user_logged_in(EditorTest.superuser_login)
         response = client.get(ADMINROOT+'repository/resourceinfotype_model/')
-        self.assertContains(response, '3 Resources')
+        self.assertContains(response, '4 Resources')
         
     def test_myresources_list(self):
         client = _client_with_user_logged_in(EditorTest.editor_login)            
         response = client.get(ADMINROOT+'repository/resourceinfotype_model/my/')            
-        self.assertContains(response, '1 Resource')
+        self.assertContains(response, '2 Resource')
 
     def test_storage_object_is_hidden(self):
         client = _client_with_user_logged_in(EditorTest.editor_login)
@@ -597,23 +605,34 @@ class EditorTest(TestCase):
         self.assertIn(response.status_code, (403, 404), msg=
             'expected the editor to not be allowed to change resource parts')
 
-    def test_editor_cannot_delete_any_resources_or_parts(self):
+    def test_editor_cannot_delete_any_parts_or_non_internal_resources(self):
         """
-        Verifies that the editor user can neither delete any resources nor any
-        parts thereof.
+        Verifies that the editor user can neither delete any non-internal
+        resources nor any parts of any resources.
         """
         client = _client_with_user_logged_in(EditorTest.editor_login)
-        # make sure the editor may not delete any resources:
+        # make sure the editor may not delete any ingested resources:
         response = client.get('{}repository/resourceinfotype_model/{}/delete/'
                               .format(ADMINROOT, EditorTest.testfixture2.id))
-        self.assertIn(response.status_code, (403, 404), msg=
-            'expected the editor to not be allowed to delete the resource')
-        # make sure the editor may not delete any part of a resource:
+        self.assertIn(response.status_code, (403, 404), msg='expected that ' \
+                'the editor is not allowed to delete an ingested resource')
+        # make sure the editor may not delete any published resources:
+        response = client.get('{}repository/resourceinfotype_model/{}/delete/'
+                              .format(ADMINROOT, EditorTest.testfixture3.id))
+        self.assertIn(response.status_code, (403, 404), msg='expected that ' \
+                'the editor is not allowed to delete a published resource')
+        # make sure the editor may not delete any part of non-internal resources
         response = client.get(
             '{}repository/distributioninfotype_model/{}/delete/'
                 .format(ADMINROOT, EditorTest.testfixture2.distributionInfo.id))
-        self.assertIn(response.status_code, (403, 404), msg=
-            'expected the editor to not be allowed to delete resource parts')
+        self.assertIn(response.status_code, (403, 404), msg='expected the ' \
+                'editor to not be allowed to delete any resource parts')
+        # make sure the editor may not delete any part of internal resources:
+        response = client.get(
+            '{}repository/distributioninfotype_model/{}/delete/'
+                .format(ADMINROOT, EditorTest.testfixture4.distributionInfo.id))
+        self.assertIn(response.status_code, (403, 404), msg="expected the " \
+                "editor to not be allowed to delete internal resource' parts")
 
     def test_superuser_can_change_all_resources_and_their_parts(self):
         """
@@ -657,6 +676,18 @@ class EditorTest(TestCase):
                 .format(ADMINROOT, res.id))
         self.assertContains(response, 'Are you sure?', msg_prefix=
             'expected the superuser to be allowed to delete resource parts')
+
+    def test_editor_can_delete_owned_internal_resources(self):
+        """
+        Verifies that an editor user can delete owned resources that have
+        "internal" as publication status.
+        """
+        client = _client_with_user_logged_in(EditorTest.superuser_login)
+        # make sure the superuser may delete any resources:
+        response = client.get('{}repository/resourceinfotype_model/{}/delete/'
+                              .format(ADMINROOT, EditorTest.testfixture4.id))
+        self.assertContains(response, 'Are you sure?', msg_prefix='expected ' \
+                'that the editor user may delete his own internal resource')
 
     def test_only_superuser_sees_editor_groups_list(self):
         """
