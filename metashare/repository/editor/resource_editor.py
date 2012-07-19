@@ -1072,7 +1072,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         the form's clean_data object rather than the resource object's m2m
         fields; the actual fields will be filled in save_m2m().
         '''
-        # Preconditions:  
+        # Preconditions
         if not request.user or not request.POST:
             return
         user_id = str(request.user.pk)
