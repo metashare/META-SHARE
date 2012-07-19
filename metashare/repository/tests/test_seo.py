@@ -1,12 +1,7 @@
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.auth.models import User, Permission
-from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.client import Client
 
-from metashare import test_utils, settings
-from metashare.accounts.models import UserProfile
-from metashare.repository import views
+from metashare import test_utils
 from metashare.settings import DJANGO_BASE, ROOT_PATH, DJANGO_URL, SITEMAP_URL
 
 
