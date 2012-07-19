@@ -22,7 +22,6 @@
 				// your custom function
 				}
 			}
-			
 			function getElementsByClass(searchClass,node,tag) 
 			{
 				var classElements = new Array();
@@ -40,8 +39,7 @@
 					}
 				}
 				return classElements;
-			}	
-			
+			}
 			function toggle(el) 
 			{
 				if (el.style.display == '') 
@@ -52,9 +50,8 @@
 					{
 					el.style.display = '';
 					}
-			}	
-
-			function displayMandatory() 
+			}
+			function displayMandatory()
 			{
 				var els = getElementsByClassName(document, 'mandatory');
 				var i;
@@ -63,7 +60,6 @@
 					toggle(els[i]);
 				}
 			}
-
 			function displayOptional() 
 			{
 				var els = getElementsByClassName(document, 'optional');
@@ -73,7 +69,6 @@
 					toggle(els[i]);
 				}
 			}
-			
 		</script>
 
 
