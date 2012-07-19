@@ -463,14 +463,6 @@ class MetashareFacetedSearchView(FacetedSearchView):
                         # only items with a count > 0 are shown
                         for item in [i for i in items if i[1] > 0]:
                             subfacets = [f for f in filter_labels if (f[3] == facet_id and item[0] in f[0]) ]
-                            for f in filter_labels:
-                                print item[0]
-                                if (f[3] == facet_id and item[0] in f[0]):
-                                    print "EEEEEEEEEEEEEEee"
-                                    print f
-                                else:
-                                    print "AAAAAAAAAAAAAAAAAAa"
-                                    print f
                             subfacets_exactname_list = []
                             subfacets_exactname_list.extend([u'{0}_exact'.format(subfacet[0]) for subfacet in subfacets])
                             subresults = []
