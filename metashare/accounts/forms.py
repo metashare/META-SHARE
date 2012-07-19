@@ -59,7 +59,7 @@ class RegistrationRequestForm(ModelForm):
     """
     Form used to create user account requests from new users.
     """
-
+    confirm_password = forms.CharField(label="Password confirmation", widget=forms.PasswordInput())        
         
     class Meta:
         """
@@ -67,6 +67,9 @@ class RegistrationRequestForm(ModelForm):
         """
         model = RegistrationRequest
         exclude = ('uuid', 'created')
+        widgets = {
+            'password': forms.PasswordInput(),
+        }
         
     def clean_shortname(self):
         """
@@ -96,7 +99,19 @@ class RegistrationRequestForm(ModelForm):
     
         return _email
         
-    
+    def clean_confirm_password(self):
+        """
+        Make sure that the password confirmation is the same than password
+        """
+        pswrd = self.cleaned_data['password']
+        pswrd_conf = self.cleaned_data['confirm_password']
+        print pswrd
+        print pswrd_conf
+        if pswrd != pswrd_conf:
+            raise ValidationError('The two password fields did not match.')
+
+        return pswrd
+
     # cfedermann: possible extensions for future improvements.
     #
     # - add validation for email address which checks that it's unique.
