@@ -175,7 +175,7 @@ class EditorTest(SeleniumTestCase):
           driver.find_element_by_css_selector("li.info").text)
         
         # check the editor group of the resource is the default editor group of the user
-        self.assertEqual(self.test_editor_group, 
+        self.assertEqual(self.test_editor_group.name, 
           driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
 
         # make sure an internal resource cannot be published
@@ -274,7 +274,7 @@ class EditorTest(SeleniumTestCase):
           driver.find_element_by_css_selector("li.info").text)
 
         # check the editor group of the resource is the default editor group of the user
-        self.assertEqual(self.test_editor_group, 
+        self.assertEqual(self.test_editor_group.name, 
           driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
 
         # make sure an internal resource cannot be published
@@ -379,7 +379,7 @@ class EditorTest(SeleniumTestCase):
           driver.find_element_by_css_selector("li.info").text)
         
         # check the editor group of the resource is the default editor group of the user
-        self.assertEqual(self.test_editor_group, 
+        self.assertEqual(self.test_editor_group.name, 
           driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
 
         # make sure an internal resource cannot be published
@@ -485,7 +485,7 @@ class EditorTest(SeleniumTestCase):
           driver.find_element_by_css_selector("li.info").text)
 
         # check the editor group of the resource is the default editor group of the user
-        self.assertEqual(self.test_editor_group, 
+        self.assertEqual(self.test_editor_group.name, 
           driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
 
         # make sure an internal resource cannot be published
@@ -579,7 +579,7 @@ class EditorTest(SeleniumTestCase):
           driver.find_element_by_css_selector("li.info").text)
         
         # check the editor group of the resource is the default editor group of the user
-        self.assertEqual(self.test_editor_group, 
+        self.assertEqual(self.test_editor_group.name, 
           driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
 
         # make sure an internal resource cannot be published
