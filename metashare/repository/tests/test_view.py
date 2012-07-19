@@ -117,7 +117,7 @@ class ViewTest(TestCase):
         response = client.get(url, follow = True)
         self.assertTemplateUsed(response, 'repository/lr_view.html')
         self.assertContains(response, "repository/resourceinfotype_model/{0}".format(
-                        self.resource.id))
+                        resource.id))
         
     def test_owner_can_edit_resource(self):
         """
@@ -132,7 +132,7 @@ class ViewTest(TestCase):
         response = client.get(url, follow = True)
         self.assertTemplateUsed(response, 'repository/lr_view.html')
         self.assertContains(response, "repository/resourceinfotype_model/{0}".format(
-                        self.resource.id))
+                        resource.id))
         
     def test_normal_user_cannot_edit_resource(self):
         """
@@ -145,7 +145,7 @@ class ViewTest(TestCase):
         response = client.get(url, follow = True)
         self.assertTemplateUsed(response, 'repository/lr_view.html')
         self.assertNotContains(response, "repository/resourceinfotype_model/{0}".format(
-                        self.resource.id))
+                        resource.id))
 
 class DownloadViewTest(TestCase):
     """
