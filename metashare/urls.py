@@ -62,8 +62,8 @@ urlpatterns += patterns('',
 
 if DJANGO_BASE == "":
     urlpatterns += patterns('',
-      (r'^robots\.txt$', direct_to_template, 
-        {'template': 'robots.txt'.format(DJANGO_BASE), 'mimetype': 'text/plain', 'extra_context' : { 'sitemap_url' : SITEMAP_URL }}),
+      (r'^robots\.txt$'.format(DJANGO_BASE), direct_to_template, 
+        {'template': 'robots.txt', 'mimetype': 'text/plain', 'extra_context' : { 'sitemap_url' : SITEMAP_URL }}),
     )
 
 if DEBUG:
