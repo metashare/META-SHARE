@@ -101,7 +101,7 @@ class RegistrationRequestForm(ModelForm):
         
     def clean_confirm_password(self):
         """
-        Make sure that the password confirmation is the same than password
+        Make sure that the password confirmation is the same as password.
         """
         pswrd = self.cleaned_data['password']
         pswrd_conf = self.cleaned_data['confirm_password']
@@ -112,7 +112,6 @@ class RegistrationRequestForm(ModelForm):
 
     # cfedermann: possible extensions for future improvements.
     #
-    # - add validation for email address which checks that it's unique.
     # - add validation for shortname for max_length and forbidden characters
     # - add validation for firstname for max_length
     # - add validation for lastname for max_length

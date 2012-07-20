@@ -58,39 +58,30 @@ def confirm(request, uuid):
     # Save the new User instance to the django database.  This will also
     # create a corresponding UserProfile instance by post_save "magic".
     user.save()
-    
-    # Delete registration request instance.
-    registration_request.delete()
-    
+
     # For convenience, log user in:
-    authuser = authenticate(username=user.username, password=registration_request.password)
+    authuser = authenticate(username=user.username,
+                            password=registration_request.password)
     login(request, authuser)
     request.session['METASHARE_UUID'] = uuid
 
+    # Delete registration request instance.
+    registration_request.delete()
+
     # Render activation email template with correct values.
     data = {'firstname': user.first_name, 'lastname': user.last_name,
-      'shortname': user.username, 'password': registration_request.password}
+      'shortname': user.username}
     email = render_to_string('accounts/activation.email', data)
-    
     try:
-        # Send out activation email containing the random password.
+        # Send an activation email.
         send_mail('Your META-SHARE user account has been activated',
         email, 'no-reply@meta-share.eu', [user.email], fail_silently=False)
-    
     except: # SMTPException:
-        # If the email could not be sent successfully, tell the user about it.
-        messages.error(request,
-          "There was an error sending out the activation email " \
-          "for your user account.  Your password is <b>{0}</b>.".format(
-            registration_request.password))
-        
-        # Redirect the user to the front page.
-        return redirect('metashare.views.frontpage')
-    
+        # there was a problem sending the activation e-mail -- not too bad
+        pass
+
     # Add a message to the user after successful creation.
-    messages.success(request,
-      "We have activated your user account and sent you an email with " \
-      "your personal password which allows you to login to the website.")
+    messages.success(request, "We have activated your user account.")
     
     # Redirect the user to the front page.
     return redirect('metashare.views.frontpage')
@@ -152,7 +143,7 @@ def create(request):
             # Redirect the user to the front page.
             return redirect('metashare.views.frontpage')
     
-    # Otherwise, create an empty UploadCreateForm instance.
+    # Otherwise, create an empty RegistrationRequestForm instance.
     else:
         form = RegistrationRequestForm()
     
