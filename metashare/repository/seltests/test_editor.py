@@ -28,7 +28,6 @@ class EditorTest(SeleniumTestCase):
             (self.test_editor_group, self.test_manager_group))
         self.manager_user.get_profile().default_editor_groups \
             .add(self.test_editor_group)
-
         # create an editor user
         test_utils.create_editor_user('editoruser', 'editor@example.com',
                                       'secret', (self.test_editor_group,))
@@ -67,12 +66,9 @@ class EditorTest(SeleniumTestCase):
         login_user(driver, "manageruser", "secret")
         # make sure login was successful
         self.assertEqual("Logout", driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
-        # go to Editor
-        driver.find_element_by_css_selector("div.button.middle_button").click()
-        # go to Update->Resource
-        mouse_over(driver, driver.find_element_by_link_text("Update"))
-        #driver.find_element_by_link_text("Resource").click()        
-        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
+        # Manage metadata -> Resource
+        driver.find_element_by_link_text("Resource").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # make sure we are on the right site
         self.assertEqual("Select Resource to change | META-SHARE backend", driver.title)
         # check if LR entry is available and that its status is published
@@ -117,15 +113,13 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("Logout", 
           driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Editor
-        driver.find_element_by_css_selector("div.button.middle_button").click()
+        # Manage metadata -> Resource
+        driver.find_element_by_link_text("Resource").click()
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Share/Create Resource
-        mouse_over(driver, driver.find_element_by_link_text("Share/Create"))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        #driver.find_element_by_link_text("Resource").click()
-        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
-        # create text corpus
+        #Select resource type
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
         driver.find_element_by_id("id_corpusTextInfo").click()
@@ -215,14 +209,12 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("Logout", 
           driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Editor
-        driver.find_element_by_css_selector("div.button.middle_button").click()
+         # Manage metadata -> Resource
+        driver.find_element_by_link_text("Resource").click()
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Share/Create Resource
-        mouse_over(driver, driver.find_element_by_link_text("Share/Create"))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        #driver.find_element_by_link_text("Resource").click()
-        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
         # create audio corpus
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
@@ -314,14 +306,12 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("Logout", 
           driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Editor
-        driver.find_element_by_css_selector("div.button.middle_button").click()
+        # Manage metadata -> Resource
+        driver.find_element_by_link_text("Resource").click()
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Share/Create Resource
-        mouse_over(driver, driver.find_element_by_link_text("Share/Create"))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        #driver.find_element_by_link_text("Resource").click()
-        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
         # create language description
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text(
@@ -419,14 +409,12 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("Logout", 
           driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Editor
-        driver.find_element_by_css_selector("div.button.middle_button").click()
+        # Manage metadata -> Resource
+        driver.find_element_by_link_text("Resource").click()
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Share/Create Resource
-        mouse_over(driver, driver.find_element_by_link_text("Share/Create"))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        #driver.find_element_by_link_text("Resource").click()
-        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
         # create lexical resource
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text(
@@ -529,14 +517,12 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("Logout", 
           driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Editor
-        driver.find_element_by_css_selector("div.button.middle_button").click()
+        # Manage metadata -> Resource
+        driver.find_element_by_link_text("Resource").click()
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Share/Create Resource
-        mouse_over(driver, driver.find_element_by_link_text("Share/Create"))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        #driver.find_element_by_link_text("Resource").click()
-        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
         # create tool
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text(
@@ -633,14 +619,12 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("Logout", 
           driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Editor
-        driver.find_element_by_css_selector("div.button.middle_button").click()
+        # Manage metadata -> Resource
+        driver.find_element_by_link_text("Resource").click()
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Share/Create Resource
-        mouse_over(driver, driver.find_element_by_link_text("Share/Create"))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        #driver.find_element_by_link_text("Resource").click()
-        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
         # create text corpus
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
@@ -714,14 +698,12 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("Logout", 
           driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Editor
-        driver.find_element_by_css_selector("div.button.middle_button").click()
+        # Manage metadata -> Resource
+        driver.find_element_by_link_text("Resource").click()
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Share/Create Resource
-        mouse_over(driver, driver.find_element_by_link_text("Share/Create"))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        #driver.find_element_by_link_text("Resource").click()
-        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
         # create text corpus
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
