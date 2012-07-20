@@ -17,5 +17,6 @@
 {% else %}
   <p>We&rsquo;re afraid, license terms for the download of the selected resource are not available. Please contact the resource maintainer for more information on how to obtain the resource.</p>
 {% endif %}
+    <a href="{% url metashare.repository.views.download_contact resource.storage_object.identifier %}"><button class="span-12 button middle_button">Contact resource maintainer</button></a>
 </div>
 {% endblock %}
