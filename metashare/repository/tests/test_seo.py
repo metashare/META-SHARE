@@ -19,17 +19,17 @@ class SEOTest(TestCase):
           'testfixture.xml'.format(ROOT_PATH))[0]
         imported_res.storage_object.published = True
         imported_res.storage_object.save()
-        #client = Client()
+        client = Client()
         
-        # assert that a two-token search finds a camelCase term:
-        response = self.client.get(SITEMAP_URL)
+        # Assert that the sitemap page contains the xmlsn and the entry
+        # of the imported resource.
+        response = client.get(SITEMAP_URL)
+        self.assertEqual(response.status_code, 200)
         self.assertContains(response, 
-          '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">', \
-          status_code=200)
+          '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
         self.assertContains(response, 
           '{}/repository/browse/italian-tts-speech-corpus-appen/' \
-          .format(DJANGO_URL), status_code=200)
-
+          .format(DJANGO_URL))
 
     def test_robots_txt(self):
         """
@@ -38,9 +38,9 @@ class SEOTest(TestCase):
         client = Client()
         if DJANGO_BASE == '':
             response = client.get('/{0}robots.txt'.format(DJANGO_BASE))
-            self.assertContains(response, 
-              'Disallow: /admin/', status_code=200)
+            self.assertEqual(response.status_code, 200)
+            self.assertContains(response, 'Disallow: /admin/')
             self.assertContains(response,
-              'Sitemap: {}'.format(SITEMAP_URL), status_code=200)
+              'Sitemap: {}'.format(SITEMAP_URL))
         else:
             pass
