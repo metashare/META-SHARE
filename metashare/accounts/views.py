@@ -46,12 +46,9 @@ def confirm(request, uuid):
     # Loads the RegistrationRequest instance for the given uuid.
     registration_request = get_object_or_404(RegistrationRequest, uuid=uuid)
     
-    # We are using randomly generated passwords for the moment.
-    random_password = User.objects.make_random_password()
-    
     # Create a new User instance from the registration request data.
     user = User.objects.create_user(registration_request.shortname,
-      registration_request.email, random_password)
+      registration_request.email, registration_request.password)
     
     # Update User instance attributes and activate it.
     user.first_name = registration_request.firstname
@@ -61,40 +58,30 @@ def confirm(request, uuid):
     # Save the new User instance to the django database.  This will also
     # create a corresponding UserProfile instance by post_save "magic".
     user.save()
-    
-    # Delete registration request instance.
-    registration_request.delete()
-    
+
     # For convenience, log user in:
-    authuser = authenticate(username=user.username, password=random_password)
+    authuser = authenticate(username=user.username,
+                            password=registration_request.password)
     login(request, authuser)
     request.session['METASHARE_UUID'] = uuid
 
-    
+    # Delete registration request instance.
+    registration_request.delete()
+
     # Render activation email template with correct values.
     data = {'firstname': user.first_name, 'lastname': user.last_name,
-      'shortname': user.username, 'random_password': random_password}
+      'shortname': user.username}
     email = render_to_string('accounts/activation.email', data)
-    
     try:
-        # Send out activation email containing the random password.
+        # Send an activation email.
         send_mail('Your META-SHARE user account has been activated',
         email, 'no-reply@meta-share.eu', [user.email], fail_silently=False)
-    
     except: # SMTPException:
-        # If the email could not be sent successfully, tell the user about it.
-        messages.error(request,
-          "There was an error sending out the activation email " \
-          "for your user account.  Your password is <b>{0}</b>.".format(
-            random_password))
-        
-        # Redirect the user to the front page.
-        return redirect('metashare.views.frontpage')
-    
+        # there was a problem sending the activation e-mail -- not too bad
+        pass
+
     # Add a message to the user after successful creation.
-    messages.success(request,
-      "We have activated your user account and sent you an email with " \
-      "your personal password which allows you to login to the website.")
+    messages.success(request, "We have activated your user account.")
     
     # Redirect the user to the front page.
     return redirect('metashare.views.frontpage')
@@ -115,7 +102,9 @@ def create(request):
               shortname=form.cleaned_data['shortname'],
               firstname=form.cleaned_data['firstname'],
               lastname=form.cleaned_data['lastname'],
-              email=form.cleaned_data['email'])
+              email=form.cleaned_data['email'],
+              password=form.cleaned_data['password']
+              )
             
             # Save new RegistrationRequest instance to django database.
             new_object.save()
@@ -154,7 +143,7 @@ def create(request):
             # Redirect the user to the front page.
             return redirect('metashare.views.frontpage')
     
-    # Otherwise, create an empty UploadCreateForm instance.
+    # Otherwise, create an empty RegistrationRequestForm instance.
     else:
         form = RegistrationRequestForm()
     

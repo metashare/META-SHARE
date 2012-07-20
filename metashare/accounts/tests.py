@@ -26,7 +26,8 @@ class CreateViewTest(django.test.TestCase):
     def testCreatePost(self):
         client = Client()
         post_data = {'shortname':'test', 'firstname':'Test',
-          'lastname':'Testson', 'email':'a@b.com'}
+          'lastname':'Testson', 'email':'a@b.com', 'password':'test',
+          'confirm_password': 'test'}
         response = client.post('/{0}accounts/create/'.format(DJANGO_BASE),
           follow=True, data=post_data)
         self.assertEqual('frontpage.html', response.templates[0].name)
@@ -36,7 +37,8 @@ class CreateViewTest(django.test.TestCase):
     def testBrokenPost(self):
         client = Client()
         post_data = {'shortname':'test', 'firstname':'Test',
-          'lastname':'Testson'}
+          'lastname':'Testson', 'password':'test',
+          'confirm_password': 'test'}
         response = client.post('/{0}accounts/create/'.format(DJANGO_BASE),
           follow=True, data=post_data)
         self.assertEqual('accounts/create_account.html',
@@ -54,18 +56,22 @@ class RegistrationRequestTest(django.test.TestCase):
     def setUp(self):
         self.reg_request = RegistrationRequest.objects.create(
           shortname='test', firstname='Test', lastname='Testson',
-          email='test@test.com')
+          email='test@test.com', password='test')
         self.broken_request1 = RegistrationRequest.objects.create(
-          firstname='Test', lastname='Testson', email='broken1@test.com')
+          firstname='Test', lastname='Testson', email='broken1@test.com',
+          password='test1')
         self.broken_request2 = RegistrationRequest.objects.create(
-          shortname='broken2',  lastname='Testson', email='broken2@test.com')
+          shortname='broken2',  lastname='Testson', email='broken2@test.com',
+          password='test2')
         self.broken_request3 = RegistrationRequest.objects.create(
-          shortname='broken3', firstname='Test',  email='broken3@test.com')
+          shortname='broken3', firstname='Test',  email='broken3@test.com',
+          password='test3')
         self.broken_request4 = RegistrationRequest.objects.create(
           shortname='broken4', firstname='Test', lastname='Testson',
-          email='not an email')
+          email='not an email', password='test4')
         self.broken_request5 = RegistrationRequest.objects.create(
-          shortname='broken5', firstname='Test', lastname='Testson')
+          shortname='broken5', firstname='Test', lastname='Testson',
+          password='test5')
 
     def testRegistrationRequestionCorrect(self):
         self.assertEqual('<RegistrationRequest "test">',
@@ -128,7 +134,7 @@ class RegistrationRequestTest(django.test.TestCase):
             self.reg_request = RegistrationRequest.objects.create(
               shortname=self.reg_request.shortname,
               firstname='Test', lastname='Testson',
-              email='test2@test2.com')
+              email='test2@test2.com', password='test')
             self.fail("Should have thrown an IntegrityError due to duplicate " \
               "user name")
         except IntegrityError:
@@ -141,7 +147,7 @@ class RegistrationRequestTest(django.test.TestCase):
         try:
             self.reg_request = RegistrationRequest.objects.create(
               shortname='test2', firstname='Test', lastname='Testson',
-              email=self.reg_request.email)
+              email=self.reg_request.email, password='test')
             self.fail("Should have thrown an IntegrityError due to duplicate " \
               "email")
         except IntegrityError:
@@ -155,7 +161,8 @@ class RegistrationRequestTest(django.test.TestCase):
             self.reg_request.shortname, self.reg_request.email, 'secret')
         client = Client()
         post_data = {'shortname':self.reg_request.shortname, 'firstname':'Test',
-          'lastname':'Testson', 'email':'test2@test2.com'}
+          'lastname':'Testson', 'email':'test2@test2.com', 'password':'test',
+          'confirm_password': 'test'}
         response = client.post('/{0}accounts/create/'.format(DJANGO_BASE),
           follow=True, data=post_data)
         self.assertEqual('accounts/create_account.html', response.templates[0].name)
@@ -167,11 +174,25 @@ class RegistrationRequestTest(django.test.TestCase):
             self.reg_request.shortname, self.reg_request.email, 'secret')
         client = Client()
         post_data = {'shortname':'test2', 'firstname':'Test',
-          'lastname':'Testson', 'email':self.reg_request.email}
+          'lastname':'Testson', 'email':self.reg_request.email,
+          'password':'test', 'confirm_password': 'test'}
         response = client.post('/{0}accounts/create/'.format(DJANGO_BASE),
           follow=True, data=post_data)
         self.assertEqual('accounts/create_account.html', response.templates[0].name)
         self.assertContains(response, "There is already an account registered with this email.",
+          status_code=200)
+       
+    def testPasswordConfirmationAccount(self):
+        User.objects.create_user(
+            self.reg_request.shortname, self.reg_request.email, 'secret')
+        client = Client()
+        post_data = {'shortname':'test2', 'firstname':'Test',
+          'lastname':'Testson', 'email':self.reg_request.email,
+          'password':'test', 'confirm_password': 'wrongtest'}
+        response = client.post('/{0}accounts/create/'.format(DJANGO_BASE),
+          follow=True, data=post_data)
+        self.assertEqual('accounts/create_account.html', response.templates[0].name)
+        self.assertContains(response, "The two password fields did not match.",
           status_code=200)
        
     def tearDown(self):
