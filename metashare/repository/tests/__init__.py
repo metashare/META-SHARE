@@ -12,3 +12,4 @@ from metashare.repository.tests.test_model import *
 from metashare.repository.tests.test_import import *
 from metashare.repository.tests.test_status_workflow import *
 from metashare.repository.tests.test_persistence import *
+from metashare.repository.tests.test_special_queries import *

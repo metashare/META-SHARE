@@ -525,8 +525,14 @@ class MetashareFacetedSearchView(FacetedSearchView):
         extra = super(MetashareFacetedSearchView, self).extra_context()
         # add a data structure encapsulating most of the logic which is required
         # for rendering the filters/facets
-        extra['filters'] = self._create_filters_structure(
+        if 'fields' in extra['facets']:
+            extra['filters'] = self._create_filters_structure(
                                         extra['facets']['fields'])
+        else:
+            # in case of forced empty search results, the fields entry is not set;
+            # this can happen with recommendations when using the
+            # get_more_from_same_... methods
+            extra['filters'] = []
         return extra
     
     def show_subfilter(self, facet, sel_facets, facet_fields, results):
