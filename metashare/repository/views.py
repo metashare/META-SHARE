@@ -18,7 +18,6 @@ from django.template import RequestContext
 from django.contrib import messages
 from django.template.loader import render_to_string
 from django.core.mail import send_mail
-from django.utils.translation import ugettext as _
 
 from haystack.views import FacetedSearchView
 
@@ -369,7 +368,6 @@ Please kindly use the above mentioned email address for any further communicatio
             data = { 'message': message,
               'resource': resource,
               'resourceContactName': resource_contacts,
-              'message': message,
               'user': request.user }
             try:
                 # Send out email to the resource contacts
@@ -382,8 +380,8 @@ Please kindly use the above mentioned email address for any further communicatio
                 messages.error(request,
                   "There was an error sending out the request email.")
             else:
-                messages.success(request, _('You have successfully ' \
-                    'sent a request for the resource.'))
+                messages.success(request, 'You have successfully ' \
+                    'sent a request for the resource.')
 
             # Redirect the user to the resource page.
             return redirect(resource.get_absolute_url())
