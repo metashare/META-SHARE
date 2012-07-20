@@ -180,7 +180,7 @@ class UserProfile(models.Model):
         Return whether the user profile belongs to any editor_group or not.
         """
         if self.user.is_superuser:
-           return True      
+            return True      
                 
         return self.user.groups.count() != 0
         
