@@ -15,10 +15,15 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
+from django.contrib import messages
+from django.template.loader import render_to_string
+from django.core.mail import send_mail
+from django.utils.translation import ugettext as _
 
 from haystack.views import FacetedSearchView
 
-from metashare.repository.forms import LicenseSelectionForm, LicenseAgreementForm
+from metashare.repository.forms import LicenseSelectionForm, LicenseAgreementForm, \
+  DownloadContactForm
 from metashare.repository.models import licenceInfoType_model, resourceInfoType_model
 from metashare.repository.search_indexes import resourceInfoType_modelIndex
 from metashare.settings import LOG_LEVEL, LOG_HANDLER, MEDIA_URL
@@ -322,6 +327,78 @@ def _provide_download(request, resource, download_urls):
                               { 'resource': resource, 'reason': 'internal' },
                               context_instance=RequestContext(request))
 
+@login_required
+def download_contact(request, object_id):
+    """
+    Renders the download contact view to request information regarding a resource
+    """
+    resource = get_object_or_404(resourceInfoType_model,
+                                 storage_object__identifier=object_id,
+                                 storage_object__publication_status=PUBLISHED)
+
+    default_message = "We are interested in using the above mentioned resource.\n\
+Since you have so indicated, please provide us with all the \
+relevant information (e.g licensing provisions and restrictions, \
+any fees required etc) necessary for concluding a deal for \
+getting a license. We are happy to provide any more information \
+on our request and our envisaged usage of your resource.\n\n \
+\
+[Please include here any other request you may have \
+regarding this resource:  ........................]\n\n\
+\
+Please kindly use the above mentioned email address for any further communication"
+
+    resource_emails = []
+    resource_contacts = []
+   
+    # Find out the relevant resource contact emails
+    for person in resource.contactPerson.all():
+        resource_emails.append(person.communicationInfo.email[0])
+        resource_contacts.append(person.get_default_surname() )
+
+    # Check if the edit form has been submitted.
+    if request.method == "POST":
+        # If so, bind the creation form to HTTP POST values.
+        form = DownloadContactForm(request.user.email, default_message, request.POST)
+        # Check if the form has validated successfully.
+        if form.is_valid():
+            message = form.cleaned_data['message']
+            useremail = form.cleaned_data['userEmail']
+
+            # Render notification email template with correct values.
+            data = { 'message': message,
+              'resource': resource,
+              'resourceContactName': resource_contacts,
+              'message': message,
+              'user': request.user }
+            try:
+                # Send out email to the resource contacts
+                send_mail('Request for information regarding a resource',
+                    render_to_string('repository/resource_download_information.email', data),
+                    useremail, resource_emails, fail_silently=False)
+            except: #SMTPException:
+                # If the email could not be sent successfully, tell the user
+                # about it.
+                messages.error(request,
+                  "There was an error sending out the request email.")
+            else:
+                messages.success(request, _('You have successfully ' \
+                    'sent a request for the resource.'))
+
+            # Redirect the user to the resource page.
+            return redirect(resource.get_absolute_url())
+
+    # Otherwise, render a new DownloadContactForm instance
+    else:
+        form = DownloadContactForm(request.user.email, default_message)
+
+    dictionary = { 'username': request.user,
+      'resource': resource,
+      'resourceContactName': resource_contacts,
+      'resourceContactEmail': resource_emails,
+      'form': form }
+    return render_to_response('repository/download_contact_form.html',
+                        dictionary, context_instance=RequestContext(request))
 
 @login_required
 def create(request):
