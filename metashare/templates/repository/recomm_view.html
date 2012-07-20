@@ -1,0 +1,25 @@
+<div class="recommendations content_box" style="float: left">
+	<div>Recommendations</div>
+	<div>
+		<span>Also viewed</span>
+		<ul>
+			{% if also_viewed %}
+				{% for res in also_viewed %}
+					<li><a href="{{ res.url }}">{{ res.name }}</a></li>
+				{% endfor %}
+			{% endif %}
+		</ul>
+	</div>
+	<div>
+		<span>Also downloaded</span>
+		<ul>
+			{% if also_downloaded %}
+				{% for res in also_downloaded %}
+					<li><a href="{{ res.url }}">{{ res.name }}</a></li>
+				{% endfor %}
+			{% endif %}
+		</ul>
+	</div>
+	<div><a href="#">Resources from related projects</a></div>
+	<div><a href="#">Resources from related creators</a></div>
+</div>
