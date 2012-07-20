@@ -28,6 +28,7 @@ class EditorTest(SeleniumTestCase):
             (self.test_editor_group, self.test_manager_group))
         self.manager_user.get_profile().default_editor_groups \
             .add(self.test_editor_group)
+
         # create an editor user
         test_utils.create_editor_user('editoruser', 'editor@example.com',
                                       'secret', (self.test_editor_group,))
@@ -67,8 +68,8 @@ class EditorTest(SeleniumTestCase):
         # make sure login was successful
         self.assertEqual("Logout", driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
         # Manage metadata -> Resource
-        driver.find_element_by_link_text("Resource").click()
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        mouse_over(driver, driver.find_element_by_link_text("Manage Metadata"))
+        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
         # make sure we are on the right site
         self.assertEqual("Select Resource to change | META-SHARE backend", driver.title)
         # check if LR entry is available and that its status is published
@@ -114,11 +115,12 @@ class EditorTest(SeleniumTestCase):
           driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # Manage metadata -> Resource
-        driver.find_element_by_link_text("Resource").click()
+        mouse_over(driver, driver.find_element_by_link_text("Manage Metadata"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # Add resource
         driver.find_element_by_link_text("Add Resource").click()
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         #Select resource type
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
@@ -209,12 +211,13 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("Logout", 
           driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-         # Manage metadata -> Resource
-        driver.find_element_by_link_text("Resource").click()
+        # Manage metadata -> Resource
+        mouse_over(driver, driver.find_element_by_link_text("Manage Metadata"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # Add resource
         driver.find_element_by_link_text("Add Resource").click()
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # create audio corpus
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
@@ -307,11 +310,12 @@ class EditorTest(SeleniumTestCase):
           driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # Manage metadata -> Resource
-        driver.find_element_by_link_text("Resource").click()
+        mouse_over(driver, driver.find_element_by_link_text("Manage Metadata"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # Add resource
         driver.find_element_by_link_text("Add Resource").click()
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # create language description
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text(
@@ -410,11 +414,12 @@ class EditorTest(SeleniumTestCase):
           driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # Manage metadata -> Resource
-        driver.find_element_by_link_text("Resource").click()
+        mouse_over(driver, driver.find_element_by_link_text("Manage Metadata"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # Add resource
         driver.find_element_by_link_text("Add Resource").click()
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # create lexical resource
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text(
@@ -518,11 +523,12 @@ class EditorTest(SeleniumTestCase):
           driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # Manage metadata -> Resource
-        driver.find_element_by_link_text("Resource").click()
+        mouse_over(driver, driver.find_element_by_link_text("Manage Metadata"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # Add resource
         driver.find_element_by_link_text("Add Resource").click()
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # create tool
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text(
@@ -620,11 +626,12 @@ class EditorTest(SeleniumTestCase):
           driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # Manage metadata -> Resource
-        driver.find_element_by_link_text("Resource").click()
+        mouse_over(driver, driver.find_element_by_link_text("Manage Metadata"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # Add resource
         driver.find_element_by_link_text("Add Resource").click()
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # create text corpus
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
@@ -699,11 +706,12 @@ class EditorTest(SeleniumTestCase):
           driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # Manage metadata -> Resource
-        driver.find_element_by_link_text("Resource").click()
+        mouse_over(driver, driver.find_element_by_link_text("Manage Metadata"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # Add resource
         driver.find_element_by_link_text("Add Resource").click()
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # create text corpus
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
