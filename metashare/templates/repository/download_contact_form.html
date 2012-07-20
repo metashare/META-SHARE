@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}    
+
+<div>
+</div>
+
+<h2{% if not resource.storage_object.published %} style="font-style:italic;"{% endif %}>{{ resource }} Contact Form</h2>
+
+<div class="content_box">
+  <form class="form_helper" action="{% url metashare.repository.views.download_contact resource.storage_object.identifier %}" method="post">
+    <table>
+	  <tr>
+        <th> <label>Resource name</label></th><td class="readonly"> {{ resource }} </td>
+	  </tr>
+      <tr>
+        <th> <label>Resource contact name{{ resourceContactName|pluralize }}</label></th><td class="readonly"> {{ resourceContactName|join:", " }} </td>
+	  </tr>
+      <tr>
+        <th> <label>Resource contact email{{ resourceContactEmail|pluralize }}</label></th><td class="readonly"> {{ resourceContactEmail|join:", " }} </td>
+	  </tr>
+      <tr>
+        <th> <label>Requester username</label></th><td class="readonly"> {{ user.username }} </td>
+      </tr>
+      {{ form.as_table }}
+	  <tr><th></th><td><input class="button middle_button" type="submit" value="contact" /></td></tr>
+    </table>
+  </form>
+
+  <p>
+    <a href="javascript:history.back();"><button class="span-12 button middle_button">&laquo; Back</button></a>
+  </p>
+</div>
+{% endblock %}
