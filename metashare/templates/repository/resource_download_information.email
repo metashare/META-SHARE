@@ -1,0 +1,8 @@
+Dear {{ resourceContactName|join:", " }},
+
+The user {{ user.username }} ({{ user.email }}) requests information regarding the resource {{ resource }}.
+You will find the request below, please reply as soon as possible.
+
+{{ message }}
+
+Best regards,
