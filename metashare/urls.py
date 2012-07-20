@@ -57,12 +57,12 @@ sitemaps = {
 }
 
 urlpatterns += patterns('',
-  (r'^sitemap\.xml$'.format(DJANGO_BASE), 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
+  (r'^{}sitemap\.xml$'.format(DJANGO_BASE), 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
 )
 
 if DJANGO_BASE == "":
     urlpatterns += patterns('',
-      (r'^robots\.txt$'.format(DJANGO_BASE), direct_to_template, 
+      (r'^{}robots\.txt$'.format(DJANGO_BASE), direct_to_template, 
         {'template': 'robots.txt', 'mimetype': 'text/plain', 'extra_context' : { 'sitemap_url' : SITEMAP_URL }}),
     )
 
