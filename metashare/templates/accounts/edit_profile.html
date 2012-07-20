@@ -29,7 +29,7 @@
   {% endif %}
   {% if editor_groups_member_of %}
   <tr>
-    <th> <label>Editor Group{{ editor_groups_member_of|pluralize }} <i>(default)</i></label></th>
+    <th> <label title="Displays all the editor groups you belong in. Editor groups that are applied by default to your resources, are shown in italic.">Editor Group{{ editor_groups_member_of|pluralize }}</label></th>
     {% regroup editor_groups_member_of by default as edt_grp_list %}
     <td>
 	{% for edt_grp in edt_grp_list %}
@@ -37,7 +37,7 @@
 	  {% if edt_grp.grouper %}
 	    {% for e in edt_grp.list %}
 	      {% if forloop.first %}{% else %}, {% endif %} 
-	      <i>{{ e.name }}</i>
+	      <i title="This editor group is set by default to your resources.">{{ e.name }}</i>
 	    {% endfor %}
       {% else %}
 	    {% for e in edt_grp.list %}
@@ -47,12 +47,6 @@
       {% endif %}
 	{% endfor %}
     </td>
-  </tr>
-  <tr>
-    <td colspan="2" style="text-align:center; height:40px;"><a href="{% url metashare.accounts.views.add_default_editor_groups %}"> Add default editor groups.</a> </td>
-  </tr>
-  <tr>
-    <td colspan="2" style="text-align:center; height:40px;"><a href="{% url metashare.accounts.views.remove_default_editor_groups %}">Remove default editor groups.</a> </td>
   </tr>
   {% endif %}
   {% if groups_applied_for %}
