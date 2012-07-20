@@ -104,6 +104,16 @@ class ViewTest(TestCase):
         response = client.get(url, follow = True)
         self.assertTemplateUsed(response, 'repository/lr_view.html')
         self.assertNotContains(response, "Editor")
+        
+    def testPageTitle(self):
+        """
+        Tests whether the title of the resource is the resource name
+        """
+        client = Client()
+        url = self.resource.get_absolute_url()
+        response = client.get(url, follow = True)
+        self.assertTemplateUsed(response, 'repository/lr_view.html')
+        self.assertContains(response, '<title>Italian TTS Speech Corpus (Appen) - META-SHARE</title>')
     
     def test_manager_can_edit_resource(self):
         """

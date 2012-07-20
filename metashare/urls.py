@@ -6,9 +6,12 @@ Project: META-SHARE prototype implementation
 from django.conf.urls.defaults import patterns, include, handler404, \
   handler500
 from django.contrib import admin
+from django.contrib.sitemaps import Sitemap, FlatPageSitemap
+from django.views.generic.simple import direct_to_template
 
-from metashare.settings import MEDIA_ROOT, DEBUG, DJANGO_BASE
+from metashare.settings import MEDIA_ROOT, DEBUG, DJANGO_BASE, SITEMAP_URL
 from metashare.repository.editor import admin_site as editor_site
+from metashare.repository.sitemap import *
 
 admin.autodiscover()
 
@@ -45,10 +48,23 @@ urlpatterns += patterns('metashare.sync.views',
   (r'^{0}sync/'.format(DJANGO_BASE), include('metashare.sync.urls')),
 )
 
-
 urlpatterns += patterns('',
   (r'^{0}selectable/'.format(DJANGO_BASE), include('selectable.urls')),
 )
+
+sitemaps = {
+  'site': RepositorySitemap,
+}
+
+urlpatterns += patterns('',
+  (r'^{}sitemap\.xml$'.format(DJANGO_BASE), 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
+)
+
+if DJANGO_BASE == "":
+    urlpatterns += patterns('',
+      (r'^{}robots\.txt$'.format(DJANGO_BASE), direct_to_template, 
+        {'template': 'robots.txt', 'mimetype': 'text/plain', 'extra_context' : { 'sitemap_url' : SITEMAP_URL }}),
+    )
 
 if DEBUG:
     urlpatterns += patterns('',

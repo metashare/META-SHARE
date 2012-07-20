@@ -1,6 +1,5 @@
 Dear {{firstname}} {{lastname}},
 
 We have now activated your META-SHARE user account "{{shortname}}".
-Your password is "{{random_password}}".
 
 Welcome to META-SHARE!
