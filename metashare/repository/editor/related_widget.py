@@ -7,6 +7,8 @@ from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
+from django.utils.html import escape
+
 
 class RelatedFieldWidgetWrapper(widgets.RelatedFieldWidgetWrapper):
     
@@ -43,7 +45,17 @@ class RelatedFieldWidgetWrapper(widgets.RelatedFieldWidgetWrapper):
         info = (rel_to._meta.app_label, rel_to._meta.object_name.lower())
         self.widget.choices = self.choices
         attrs['class'] = ' '.join((attrs.get('class', ''), 'related-widget-wrapper'))
-        context = {'widget': self.widget.render(name, value, attrs, *args, **kwargs),
+        rendered_widget = self.widget.render(name, value, attrs, *args, **kwargs)
+        repr_value = ''
+        if value:
+            model_class = rel_to
+            model_inst = model_class.objects.get(pk=value)
+            repr_value = model_inst.__unicode__()
+            repr_value = escape(repr_value)
+        repr_widget = '<span class="related-widget-wrapper-content">{0}</span>'.format(repr_value)
+        rendered_widget = rendered_widget + repr_widget
+        rendered_widget = mark_safe(rendered_widget)
+        context = {'widget': rendered_widget,
                    'name': name,
                    'media_prefix': settings.ADMIN_MEDIA_PREFIX,
                    'can_change_related': self.can_change_related,
