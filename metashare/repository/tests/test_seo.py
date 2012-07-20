@@ -19,10 +19,10 @@ class SEOTest(TestCase):
           'testfixture.xml'.format(ROOT_PATH))[0]
         imported_res.storage_object.published = True
         imported_res.storage_object.save()
-        client = Client()
+        #client = Client()
         
         # assert that a two-token search finds a camelCase term:
-        response = client.get(SITEMAP_URL)
+        response = self.client.get(SITEMAP_URL)
         self.assertContains(response, 
           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">', \
           status_code=200)
