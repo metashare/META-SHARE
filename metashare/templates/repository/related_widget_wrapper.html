@@ -1,6 +1,5 @@
 <!-- From http://djangosnippets.org/snippets/2563/ -->
 {{ widget }}
-<!--<span class="related-widget-wrapper-content"></span>-->
 {% if can_change_related %}
 	<a class="related-widget-wrapper-link related-widget-wrapper-change-link" id="edit_id_{{ name }}" data-href-template="{{ change_url_template }}"{% if change_url %} href="{{ change_url }}"{% endif %} title="{{ change_help_text }}">
 		<img src="{{ media_prefix }}img/admin/icon_changelink.gif" width="10" height="10" alt="{{ change_help_text }}"/>
