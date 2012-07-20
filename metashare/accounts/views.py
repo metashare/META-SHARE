@@ -360,7 +360,7 @@ def add_default_editor_groups(request):
         form = AddDefaultEditorGroupForm(available_editor_groups)
 
     dictionary = {'title': 'Add default editor group', 'form': form}
-    return render_to_response('accounts/add_default_editor_groups.html',
+    return render_to_response('accounts/add_default_editor_group.html',
                         dictionary, context_instance=RequestContext(request))
 
 @login_required
@@ -411,7 +411,7 @@ def remove_default_editor_groups(request):
         form = RemoveDefaultEditorGroupForm(available_editor_groups)
 
     dictionary = {'title': 'Remove default editor group', 'form': form}
-    return render_to_response('accounts/remove_default_editor_groups.html',
+    return render_to_response('accounts/remove_default_editor_group.html',
                         dictionary, context_instance=RequestContext(request))
 
 
