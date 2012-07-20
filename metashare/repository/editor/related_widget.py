@@ -46,7 +46,7 @@ class RelatedFieldWidgetWrapper(widgets.RelatedFieldWidgetWrapper):
         attrs['class'] = ' '.join((attrs.get('class', ''), 'related-widget-wrapper'))
         rendered_widget = self.widget.render(name, value, attrs, *args, **kwargs)
         repr_value = ''
-        if value is not None:
+        if value:
             model_class = rel_to
             model_inst = model_class.objects.get(pk=value)
             repr_value = model_inst.__unicode__()
