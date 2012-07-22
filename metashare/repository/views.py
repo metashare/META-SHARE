@@ -22,7 +22,7 @@ from metashare.repository.editor.resource_editor import has_edit_permission
 from metashare.repository.forms import LicenseSelectionForm, LicenseAgreementForm
 from metashare.repository.models import licenceInfoType_model, resourceInfoType_model
 from metashare.repository.search_indexes import resourceInfoType_modelIndex
-from metashare.settings import LOG_LEVEL, LOG_HANDLER, MEDIA_URL
+from metashare.settings import LOG_LEVEL, LOG_HANDLER, MEDIA_URL, DJANGO_URL
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
 from metashare.storage.models import PUBLISHED
@@ -393,6 +393,12 @@ def view(request, resource_name=None, object_id=None):
                                res.get_relative_url())
         also_downloaded_resources.append(res_item)
     context['also_downloaded'] = also_downloaded_resources
+    
+    context['search_rel_projects'] = '{0}/repository/search?q=mfsp:{1}'.format(DJANGO_URL,
+                                            resource.storage_object.identifier)
+    
+    context['search_rel_creators'] = '{0}/repository/search?q=mfsc:{1}'.format(DJANGO_URL,
+                                            resource.storage_object.identifier)
     
     # Render and return template with the defined context.
     ctx = RequestContext(request)
