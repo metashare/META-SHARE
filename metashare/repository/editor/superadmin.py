@@ -28,8 +28,8 @@ from metashare.repository.editor.schemamodel_mixin import SchemaModelLookup
 from metashare.storage.models import MASTER
 from metashare.repository.model_utils import get_root_resources
 from metashare.repository.supermodel import REQUIRED, RECOMMENDED, OPTIONAL
-
-
+from metashare.repository.editor.widgets import ComboWidget
+from django.forms import Select
 # Setup logging support.
 logging.basicConfig(level=settings.LOG_LEVEL)
 LOGGER = logging.getLogger('metashare.repository.superadmin')
@@ -126,6 +126,10 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         if self.is_x_to_many_relation(db_field):
             return self.formfield_for_relation(db_field, **kwargs)
         self.use_hidden_widget_for_one2one(db_field, kwargs)
+        if db_field.name == 'languageId':
+            kwargs.update({'widget': ComboWidget})
+        if db_field.name == 'languageName':
+            kwargs.update({'widget': ComboWidget})
         formfield = super(SchemaModelAdmin, self).formfield_for_dbfield(db_field, **kwargs)
         self.use_related_widget_where_appropriate(db_field, kwargs, formfield)
         return formfield

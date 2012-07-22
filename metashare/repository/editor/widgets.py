@@ -10,6 +10,7 @@ except:
     import pickle
 
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
+from django.contrib.admin.widgets import AdminTextInputWidget
 from django.forms import widgets, TextInput, Textarea, Media
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
@@ -17,6 +18,7 @@ from selectable.forms.widgets import SelectableMediaMixin, SelectableMultiWidget
     LookupMultipleHiddenInput
 from django.utils.http import urlencode
 from metashare import settings
+from metashare.repository.editor import lang
 
 # Setup logging support.
 logging.basicConfig(level=settings.LOG_LEVEL)
@@ -465,3 +467,40 @@ class OneToManyWidget(SelectableMultiWidget, SelectableMediaMixin):
     
     def decompress(self, value):
         pass
+
+class ComboWidget(AdminTextInputWidget):
+    class Media:
+        """
+        Media sub class to inject custom CSS and JavaScript code.
+        """
+        css = {
+          'all': ('css/jquery-ui-1.8.15.custom.css',)
+        }
+        js = ('js/jquery-ui-1.8.15.custom.js',
+              'js/autocomp.js',
+              'js/pycountry.js' )
+    
+    def __init__(self, attrs=None):
+        if not attrs:
+            attrs = {}
+        super(ComboWidget, self).__init__(attrs)
+        if 'class' in self.attrs:
+            classes = self.attrs['class']
+        else:
+            classes = ''
+        self.attrs['class'] = classes
+        return
+        
+    def render(self, name, value, attrs=None):
+        val = super(ComboWidget, self).render(name, value, attrs)
+        if 'id' in attrs:
+            id = attrs['id']
+            if name.find('languageId') != -1:
+                linked_to = attrs['id'].replace('languageId', 'languageName')
+                js_script = u'<script>autocomp_id($("input#{0}"), "{1}");</script>'.format(id, linked_to)
+            elif name.find('languageName') != -1:
+                js_script = u'<script>autocomp_name($("input#{0}"));</script>'.format(id)
+            val = val + js_script
+
+        return mark_safe(val)
+    
