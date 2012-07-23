@@ -113,8 +113,9 @@ class ViewTest(TestCase):
         url = self.resource.get_absolute_url()
         response = client.get(url, follow = True)
         self.assertTemplateUsed(response, 'repository/lr_view.html')
-        self.assertContains(response, '<title>Italian TTS Speech Corpus (Appen) - META-SHARE</title>')
-    
+        self.assertContains(response, '<title>Italian TTS Speech Corpus ' \
+                            '(Appen) &ndash; META-SHARE</title>')
+
     def test_manager_can_edit_resource(self):
         """
         Tests whether the link of the edit button is the good one

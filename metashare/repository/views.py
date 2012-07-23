@@ -535,7 +535,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
         # Step (1): if there are any selected facets, then add these first:
         if sel_facets:
             # add all top level facets (sorted by their facet IDs):
-            for name, label, facet_id, _ in [f for f in filter_labels if f[3] == 0]:
+            for name, label, facet_id, _dummy in [f for f in filter_labels if f[3] == 0]:
                 name_exact = '{0}_exact'.format(name)
                 # only add selected facets in step (1)
                 if name_exact in sel_facets:
@@ -579,7 +579,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
 
         # Step (2): add all top level facets without selected facet items at the
         # end (sorted by their facet IDs):
-        for name, label, facet_id, _ in [f for f in filter_labels if f[3] == 0]:
+        for name, label, facet_id, _dummy in [f for f in filter_labels if f[3] == 0]:
             name_exact = '{0}_exact'.format(name)
             # only add facets without selected items in step (2)
             if not name_exact in sel_facets:
