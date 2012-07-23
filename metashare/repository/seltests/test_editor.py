@@ -1,6 +1,6 @@
 from django_selenium.testcases import SeleniumTestCase
 from metashare import settings, test_utils
-from metashare.accounts.models import EditorGroup, ManagerGroup
+from metashare.accounts.models import EditorGroup, EditorGroupManagers
 from metashare.repository.models import resourceInfoType_model
 from metashare.repository.seltests.test_utils import login_user, mouse_over, \
     setup_screenshots_folder, click_menu_item, save_and_close
@@ -20,7 +20,7 @@ class EditorTest(SeleniumTestCase):
         # create an editor group and a manager group for this group
         self.test_editor_group = EditorGroup.objects.create(
             name='test_editor_group')
-        self.test_manager_group = ManagerGroup.objects.create(
+        self.test_manager_group = EditorGroupManagers.objects.create(
             name='test_manager_group', managed_group=self.test_editor_group)
         # create an editor group managing user
         manager_user = test_utils.create_manager_user('manageruser', 'manager@example.com',

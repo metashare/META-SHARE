@@ -6,17 +6,18 @@ from django.contrib.auth.models import Group, User
 from django.core.management import call_command
 from django.test.testcases import TestCase
 from metashare import settings
-from metashare.accounts.admin import ManagerGroupAdmin
+from metashare.accounts.admin import EditorGroupManagersAdmin, \
+  OrganizationManagersAdmin
 from metashare.accounts.models import EditorGroupApplication, EditorGroup, \
-    ManagerGroup, RegistrationRequest, ResetRequest, UserProfile
+  EditorGroupManagers, RegistrationRequest, ResetRequest, UserProfile
 from metashare.repository.management import GROUP_GLOBAL_EDITORS
 from metashare.repository.models import resourceInfoType_model, \
-    personInfoType_model, actorInfoType_model, documentationInfoType_model, \
-    documentInfoType_model, targetResourceInfoType_model, organizationInfoType_model, \
-    projectInfoType_model
+  personInfoType_model, actorInfoType_model, documentationInfoType_model, \
+  documentInfoType_model, targetResourceInfoType_model, organizationInfoType_model, \
+  projectInfoType_model
 from metashare.recommendations.models import TogetherManager
 from metashare.storage.models import PUBLISHED, MASTER, StorageObject, \
-    RemovedObject
+  RemovedObject
 from metashare.xml_utils import import_from_file
 import os
 
@@ -59,7 +60,7 @@ def clean_user_db():
     EditorGroupApplication.objects.all().delete()
     EditorGroup.objects.exclude(name=GROUP_GLOBAL_EDITORS).delete()
     Group.objects.exclude(name=GROUP_GLOBAL_EDITORS).delete()
-    ManagerGroup.objects.all().delete()
+    EditorGroupManagers.objects.all().delete()
     RegistrationRequest.objects.all().delete()
     ResetRequest.objects.all().delete()
     UserProfile.objects.all().delete()
@@ -104,7 +105,7 @@ def create_manager_user(user_name, email, password, groups=None):
     group memberships.
     """
     result = create_editor_user(user_name, email, password, groups)
-    for _perm in ManagerGroupAdmin.get_suggested_manager_permissions():
+    for _perm in EditorGroupManagersAdmin.get_suggested_manager_permissions():
         result.user_permissions.add(_perm)
     return result
 
@@ -121,6 +122,30 @@ def create_editor_user(user_name, email, password, groups=None):
             result.groups.add(group)
     # always add basic editing permissions
     result.groups.add(Group.objects.get(name=GROUP_GLOBAL_EDITORS))
+    result.save()
+    return result
+
+def create_organization_manager_user(user_name, email, password, groups=None):
+    """
+    Creates a new managing organization user account with the given credentials and
+    organization memberships.
+    """
+    result = create_organizer_user(user_name, email, password, groups)
+    for _perm in OrganizationManagersAdmin.get_suggested_organization_manager_permissions():
+        result.user_permissions.add(_perm)
+    return result
+
+
+def create_organizer_user(user_name, email, password, groups=None):
+    """
+    Creates a new organizer user account with the given credentials and group
+    memberships.
+    """
+    result = User.objects.create_user(user_name, email, password)
+    result.is_staff = True
+    if groups:
+        for group in groups:
+            result.groups.add(group)
     result.save()
     return result
 

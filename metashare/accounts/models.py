@@ -90,7 +90,7 @@ class EditorGroup(Group):
 
     def get_managers(self):
         return User.objects.filter(groups__name__in=
-            ManagerGroup.objects.filter(managed_group__name=self.name)
+            EditorGroupManagers.objects.filter(managed_group__name=self.name)
                 .values_list('name', flat=True))
 
 
@@ -110,7 +110,7 @@ class EditorGroupApplication(models.Model):
                 self.user, self.editor_group)
 
 
-class ManagerGroup(Group):
+class EditorGroupManagers(Group):
     """
     A specialized `Group` which gives its members permissions to manage language
     resources belonging to a certain (managed) group.
@@ -119,8 +119,50 @@ class ManagerGroup(Group):
     ingest/publish resources belonging to the managed group. Delete permission
     for a resource is suggested by the corresponding `ModelAdmin` class.
     """
-    # the `EditorGroup` which is managed by members of this `ManagerGroup`
+    # the `EditorGroup` which is managed by members of this `EditorGroupManagers`
     managed_group = models.OneToOneField(EditorGroup)
+
+    def get_members(self):
+        return User.objects.filter(groups__name=self.name)
+
+
+class Organization(Group):
+    """
+    A specialized `Group` subtype which is used to group users from a same organization
+    who get specific access rights to the resources.
+    """
+
+    def get_members(self):
+        return User.objects.filter(groups__name=self.name)
+
+    def get_managers(self):
+        return User.objects.filter(groups__name__in=
+            OrganizationManagers.objects.filter(managed_organization__name=self.name)
+                .values_list('name', flat=True))
+
+
+class OrganizationApplication(models.Model):
+    """
+    Contains user data related to a user application for being member of an organization.
+    """
+    user = models.ForeignKey(User)
+    organization = models.OneToOneField(Organization)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        """
+        Return Unicode representation for this instance.
+        """
+        return u'<OrganizationApplication of "{0}" for "{1}">'.format(
+                self.user, self.organization)
+
+
+class OrganizationManagers(Group):
+    """
+    A specialized `Group` which gives its members permissions to manage a certain organization.
+    """
+    # the `Organization` which is managed by members of this `OrganizationManagers`
+    managed_organization = models.OneToOneField(Organization)
 
     def get_members(self):
         return User.objects.filter(groups__name=self.name)
@@ -185,13 +227,31 @@ class UserProfile(models.Model):
         """
         if self.user.is_superuser:
             return True
-        mgr_groups = ManagerGroup.objects.filter(
+        mgr_groups = EditorManagers.objects.filter(
             name__in=self.user.groups.values_list('name', flat=True))
         if editor_group:
             return any(editor_group.name == mgr_group.managed_group.name
                        for mgr_group in mgr_groups)
         else:
             return mgr_groups.count() != 0
+
+    def has_organization_manager_permission(self, organization=None):
+        """
+        Return whether the user profile has permission to manage the given
+        organization.
+        
+        If no organization is given, then the method returns whether the user
+        profile has manager permission for any organization.
+        """
+        if self.user.is_superuser:
+            return True
+        org_mgr_groups = OrganizationManagers.objects.filter(
+            name__in=self.user.groups.values_list('name', flat=True))
+        if organization:
+            return any(organization.name == org_mgr_group.managed_organization.name
+                       for org_mgr_group in org_mgr_groups)
+        else:
+            return org_mgr_groups.count() != 0
 
 
 @receiver(post_save, sender=User)

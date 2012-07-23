@@ -8,10 +8,12 @@ from django.test import TestCase
 from django.test.client import Client
 
 from metashare import test_utils
-from metashare.accounts.models import EditorGroup, ManagerGroup, EditorGroupApplication
+from metashare.accounts.models import EditorGroup, EditorGroupManagers, \
+  EditorGroupApplication, Organization, OrganizationManagers, \
+  OrganizationApplication
 from metashare.repository import models
 from metashare.repository.models import languageDescriptionInfoType_model, \
-    lexicalConceptualResourceInfoType_model, personInfoType_model
+  lexicalConceptualResourceInfoType_model, personInfoType_model
 from metashare.settings import DJANGO_BASE, ROOT_PATH
 from metashare.storage.models import PUBLISHED, REMOTE
 
@@ -74,9 +76,9 @@ class EditorTest(TestCase):
                                                     name='test_editor_group')
         
         EditorTest.test_manager_group = \
-            ManagerGroup.objects.create(name='test_manager_group',
+            EditorGroupManagers.objects.create(name='test_manager_group',
                                     managed_group=EditorTest.test_editor_group)
-        ManagerGroup.objects.create(name='test_manager_group_2', managed_group=
+        EditorGroupManagers.objects.create(name='test_manager_group_2', managed_group=
                 EditorGroup.objects.create(name='test_editor_group_2'))
 
         staffuser = User.objects.create_user('staffuser', 'staff@example.com',
@@ -698,11 +700,11 @@ class EditorTest(TestCase):
         manager groups).
         """
         client = _client_with_user_logged_in(EditorTest.superuser_login)
-        response = client.get('{}accounts/managergroup/'.format(ADMINROOT))
+        response = client.get('{}accounts/editorgroupmanagers/'.format(ADMINROOT))
         self.assertContains(response, '0 of 2 selected',
             msg_prefix='expected the superuser to see all manager groups')
         client = _client_with_user_logged_in(EditorTest.manager_login)
-        response = client.get('{}accounts/managergroup/'.format(ADMINROOT))
+        response = client.get('{}accounts/editorgroupmanagers/'.format(ADMINROOT))
         self.assertIn(response.status_code, (403, 404),
             'expected that a manager user does not see the manager groups list')
 
@@ -711,7 +713,7 @@ class EditorTest(TestCase):
         Verifies that a superuser sees all manager group manage actions.
         """
         client = _client_with_user_logged_in(EditorTest.superuser_login)
-        response = client.get('{}accounts/managergroup/'.format(ADMINROOT))
+        response = client.get('{}accounts/editorgroupmanagers/'.format(ADMINROOT))
         self.assertContains(response, 'Add users to selected manager groups',
             msg_prefix='a superuser must see the add manager group action')
         self.assertContains(response, 'Delete selected manager groups',
@@ -724,7 +726,7 @@ class EditorTest(TestCase):
         Verifies that a manager group is removed from all relevant users
         """
         client = _client_with_user_logged_in(EditorTest.superuser_login)
-        response = client.get('{}accounts/managergroup/{}/delete/'
+        response = client.get('{}accounts/editorgroupmanagers/{}/delete/'
                               .format(ADMINROOT, EditorTest.test_manager_group.id))
         self.assertContains(response, 'Are you sure?', msg_prefix=
             'expected the superuser to be allowed to delete manager')
@@ -748,7 +750,7 @@ class DestructiveTests(TestCase):
         self.test_editor_group = EditorGroup.objects.create(
                                                     name='test_editor_group')
         self.test_manager_group = \
-            ManagerGroup.objects.create(name='test_manager_group',
+            EditorGroupManagers.objects.create(name='test_manager_group',
                                         managed_group=self.test_editor_group)
 
         self.test_editor = test_utils.create_editor_user('editoruser',
@@ -861,7 +863,7 @@ class DestructiveTests(TestCase):
         test_res.owners.add(self.test_manager)
         test_res.save()
         test_eg = EditorGroup.objects.create(name='a_test_eg')
-        self.test_manager.groups.add(ManagerGroup.objects.create(
+        self.test_manager.groups.add(EditorGroupManagers.objects.create(
                 name='a_test_mg', managed_group=test_eg))
         # run the actual test:
         client = _client_with_user_logged_in(self.manager_login)
@@ -877,7 +879,7 @@ class DestructiveTests(TestCase):
                 "expected to see all own editor groups as possible selections")
         for group in EditorGroup.objects.filter(name__in=
                 self.test_manager.groups.values_list(
-                    'managergroup__managed_group__name', flat=True)):
+                    'editorgroupmanagers__managed_group__name', flat=True)):
             self.assertContains(response, group.name, msg_prefix=
                 "expected to see all managed groups as possible selections")
         response = client.post(
@@ -898,7 +900,7 @@ class DestructiveTests(TestCase):
         """
         # create a test object first:
         test_eg = EditorGroup.objects.create(name='a_test_eg')
-        self.test_manager.groups.add(ManagerGroup.objects.create(
+        self.test_manager.groups.add(EditorGroupManagers.objects.create(
                 name='a_test_mg', managed_group=test_eg))
         # run the actual test:
         client = _client_with_user_logged_in(self.manager_login)
@@ -915,7 +917,7 @@ class DestructiveTests(TestCase):
                 "expected to see all own editor groups as possible selections")
         for group in EditorGroup.objects.filter(name__in=
                 self.test_manager.groups.values_list(
-                    'managergroup__managed_group__name', flat=True)):
+                    'editorgroupmanagers__managed_group__name', flat=True)):
             self.assertContains(response, group.name, msg_prefix=
                 "expected to see all managed groups as possible selections")
         response = client.post(
@@ -1088,13 +1090,13 @@ class DestructiveTests(TestCase):
         test_user = User.objects.create_user('normaluser', 'normal@example.com',
                                              'secret')
         client = _client_with_user_logged_in(self.superuser_login)
-        response = client.post('{}accounts/managergroup/'.format(ADMINROOT),
+        response = client.post('{}accounts/editorgroupmanagers/'.format(ADMINROOT),
             {"action": "add_user_to_manager_group",
              admin.ACTION_CHECKBOX_NAME: self.test_manager_group.id})
         self.assertContains(response,
             "Add a user to the following manager group:", msg_prefix=
                 "expected to be on the action page for adding a manager group")
-        response = client.post('{}accounts/managergroup/'.format(ADMINROOT),
+        response = client.post('{}accounts/editorgroupmanagers/'.format(ADMINROOT),
             {"users": test_user.id, "add_user_profile_to_manager_group": "Add",
              "action": "add_user_to_manager_group", admin.ACTION_CHECKBOX_NAME:
              self.test_manager_group.id}, follow=True)
@@ -1111,13 +1113,13 @@ class DestructiveTests(TestCase):
         test_user = test_utils.create_manager_user('ex_manageruser',
             'ex_manager@example.com', 'secret', (self.test_manager_group,))
         client = _client_with_user_logged_in(self.superuser_login)
-        response = client.post('{}accounts/managergroup/'.format(ADMINROOT),
+        response = client.post('{}accounts/editorgroupmanagers/'.format(ADMINROOT),
             {"action": "remove_user_from_manager_group",
              admin.ACTION_CHECKBOX_NAME: self.test_manager_group.id})
         self.assertContains(response,
             "Remove a user from the following manager group:", msg_prefix=
                 "expected to be on the page for removing a manager group")
-        response = client.post('{}accounts/managergroup/'.format(ADMINROOT),
+        response = client.post('{}accounts/editorgroupmanagers/'.format(ADMINROOT),
             {"users": test_user.id, "remove_user_profile_from_manager_group":
                 "Remove", "action": "remove_user_from_manager_group",
              admin.ACTION_CHECKBOX_NAME: self.test_manager_group.id},
@@ -1133,7 +1135,7 @@ class DestructiveTests(TestCase):
         Verifies that a manager group is removed from all relevant users
         """
         client = _client_with_user_logged_in(self.superuser_login)
-        ManagerGroup.objects.filter(id=self.test_manager_group.id).delete()
+        EditorGroupManagers.objects.filter(id=self.test_manager_group.id).delete()
         manageruser = User.objects.get(username='manageruser')
         self.assertEquals(manageruser.groups.filter(name=self.test_manager_group.name).count(), 0)
         response = client.get('{}auth/user/{}/'.format(ADMINROOT, manageruser.id))
@@ -1146,8 +1148,8 @@ class DestructiveTests(TestCase):
         """
         client = _client_with_user_logged_in(self.superuser_login)
         EditorGroup.objects.filter(id=self.test_editor_group.id).delete()
-        self.assertEquals(ManagerGroup.objects.filter(managed_group=self.test_editor_group).count(), 0)
-        response = client.get('{}accounts/managergroup/'.format(ADMINROOT))
+        self.assertEquals(EditorGroupManagers.objects.filter(managed_group=self.test_editor_group).count(), 0)
+        response = client.get('{}accounts/editorgroupmanagers/'.format(ADMINROOT))
         self.assertNotContains(response, 'editoruser', msg_prefix=
             'expected the manager group to be removed when its editor group is removed')
     
@@ -1282,10 +1284,10 @@ class EditorGroupApplicationTests(TestCase):
                                                     name='test_editor_group3')
 
         self.test_manager_group = \
-            ManagerGroup.objects.create(name='test_manager_group',
+            EditorGroupManagers.objects.create(name='test_manager_group',
                                         managed_group=self.test_editor_group)
         self.test_manager_group2 = \
-            ManagerGroup.objects.create(name='test_manager_group2',
+            EditorGroupManagers.objects.create(name='test_manager_group2',
                                         managed_group=self.test_editor_group2)
 
         test_utils.create_editor_user('editoruser',
@@ -1461,3 +1463,180 @@ class EditorGroupApplicationTests(TestCase):
         self.assertNotContains(response, 'You have successfully removed default editor group "{}".'.format(self.test_editor_group),
           msg_prefix='expected the system to remove a default editor group.')
         
+
+class OrganizationApplicationTests(TestCase):
+    """
+    Test case for the user application to one or several organization of various model instances.
+    """
+
+    def setUp(self):
+        """
+        Sets up test users with and without staff permissions.
+        """
+        test_utils.set_index_active(False)
+        test_utils.setup_test_storage()
+
+        User.objects.create_user('normaluser', 'normal@example.com', 'secret')
+
+        self.test_organization = Organization.objects.create(
+                                                    name='test_organization')
+        self.test_organization2 = Organization.objects.create(
+                                                    name='test_organization2')
+        self.test_organization3 = Organization.objects.create(
+                                                    name='test_organization3')
+
+        self.test_organization_managers = \
+            OrganizationManagers.objects.create(name='test_organization_manager',
+                                        managed_organization=self.test_organization)
+        self.test_organization_managers2 = \
+            OrganizationManagers.objects.create(name='test_organization_managers2',
+                                        managed_organization=self.test_organization2)
+
+        test_utils.create_organizer_user('organizeruser',
+            'organizer@example.com', 'secret', (self.test_organization,))
+        test_utils.create_organization_manager_user(
+            'organizationmanageruser', 'organizationmanager@example.com', 'secret',
+            (self.test_organization, self.test_organization_managers, self.test_organization_managers2))
+
+        User.objects.create_superuser('superuser', 'su@example.com', 'secret')
+
+    def tearDown(self):
+        test_utils.clean_resources_db()
+        test_utils.clean_storage()
+        test_utils.clean_user_db()
+        test_utils.set_index_active(True)
+
+    def test_application_page_with_one_organization_group(self):
+        """
+        Verifies that a user can apply when there is at least one organization group.
+        """
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        response = client.get('/{0}accounts/organization_application/'.format(DJANGO_BASE))
+        self.assertContains(response, 'Apply for organization membership', msg_prefix=
+          'expected the system to allow the user to apply to an organization')
+
+    def test_application_when_not_member_of_any_organization(self):
+        """
+        Verifies that a user can apply to a first organization
+        """
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        current_requests = OrganizationApplication.objects.count()
+        response = client.post('/{0}accounts/organization_application/'.format(DJANGO_BASE), \
+          {'organization': self.test_organization.pk}, follow=True)
+        self.assertContains(response, 'You have successfully applied for organization "{0}"'.format(
+          self.test_organization.name), msg_prefix='expected the system to accept a new request.')
+        self.assertEquals(OrganizationApplication.objects.count(), current_requests + 1)
+
+    def test_application_when_there_is_a_pending_application(self):
+        """
+        Verifies that a user can apply for new organization when another application is
+        still pending.
+        """
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        current_requests = OrganizationApplication.objects.count()
+        response = client.post('/{0}accounts/organization_application/'.format(DJANGO_BASE), \
+          {'organization': self.test_organization.pk}, follow=True)
+        self.assertContains(response, 'You have successfully applied for organization "{0}"'.format(
+          self.test_organization.name), msg_prefix='expected the system to accept a new request.')
+        response = client.post('/{0}accounts/organization_application/'.format(DJANGO_BASE), \
+          {'organization': self.test_organization2.pk}, follow=True)
+        self.assertContains(response, 'You have successfully applied for organization "{0}"'.format(
+          self.test_organization2.name), msg_prefix='expected the system to accept a new request.')
+        self.assertEquals(OrganizationApplication.objects.count(), current_requests + 2)
+
+    def test_notification_email(self):
+        """
+        Verifies that an email is sent when the user apply to an organization
+        """
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        current_requests = OrganizationApplication.objects.count()
+        response = client.post('/{0}accounts/organization_application/'.format(DJANGO_BASE), \
+          {'organization': self.test_organization.pk}, follow=True)
+        self.assertNotContains(response, 'There was an error sending out the request email', msg_prefix=
+          'expected the system to be able to send an email.')
+        self.assertEquals(OrganizationApplication.objects.count(), current_requests + 1)
+
+    def test_cannot_apply_an_organization_of_which_the_user_is_member(self):
+        """
+        Verifies that a user cannot apply to an organization he/she is already a member
+        """
+        client = Client()
+        client.login(username='organizeruser', password='secret')
+        response = client.get('/{0}accounts/organization_application/'.format(DJANGO_BASE), follow=True)
+        self.assertNotContains(response, '{}</option>'.format(self.test_organization),
+          msg_prefix='expected the system not to propose the application to an organization the user is already a member.')
+
+    def test_cannot_apply_an_organization_already_applied(self):
+        """
+        Verifies that a user cannot apply to an organization he/she already applied for
+        """
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        response = client.post('/{0}accounts/organization_application/'.format(DJANGO_BASE), \
+          {'organization': self.test_organization.pk}, follow=True)
+        self.assertContains(response, 'You have successfully applied for organization "{0}"'.format(
+          self.test_organization.name), msg_prefix='expected the system to accept a new request.')
+        response = client.get('/{0}accounts/organization_application/'.format(DJANGO_BASE), follow=True)
+        self.assertNotContains(response, '{}</option>'.format(self.test_organization),
+          msg_prefix='expected the system not to propose the application to an organization \
+          the user already applied for.')
+        
+    def test_cannot_apply_an_organization_without_manager(self):
+        """
+        Verifies that a user cannot apply to an organization without a manager
+        """
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        response = client.get('/{0}accounts/organization_application/'.format(DJANGO_BASE), follow=True)
+        self.assertNotContains(response, '{}</option>'.format(self.test_organization3),
+          msg_prefix='expected the system not to propose the application to an organization \
+          without a manager.')
+
+    def test_cannot_access_the_form_when_no_organization_available(self):
+        """
+        Verifies that a user cannot apply when there is no organization available
+        """
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        Organization.objects.all().delete()
+        response = client.get('/{0}accounts/organization_application/'.format(DJANGO_BASE), follow=True)
+        self.assertContains(response, 'There are no organizations in the database, yet, for which you could apply.',
+          msg_prefix='expected the system to prevent access to the form when no organization is available.')
+
+    def test_superuser_can_change_the_application(self):
+        """
+        Verifies that a superuser can change an organization application request
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+        new_reg = OrganizationApplication(user=User.objects.get(username='normaluser'),
+            organization=self.test_organization)
+        new_reg.save()
+        response = client.get('{}accounts/organizationapplication/{}/'.format(ADMINROOT, new_reg.pk))
+        self.assertContains(response, 'normaluser</option>', msg_prefix=
+            'expected a superuser to be able to modify an application.')
+
+    def test_manager_cannot_change_the_application(self):
+        """
+        Verifies that a manager cannot change an organization application
+        request.
+        
+        The manager can view the application details anyway.
+        """
+        client = Client()
+        client.login(username='organizationmanageruser', password='secret')
+        new_reg = OrganizationApplication(
+            user=User.objects.get(username='normaluser'),
+            organization=self.test_organization)
+        new_reg.save()
+        response = client.get('{}accounts/organizationapplication/{}/'
+                              .format(ADMINROOT, new_reg.pk))
+        self.assertContains(response, 'normaluser', msg_prefix='expected an '
+                'organization manager to be able to see the details of an application.')
+        self.assertNotContains(response, '<option value="1" '
+                'selected="selected">normaluser</option>', msg_prefix=
+            'expected an organization manager not to be able to modify an application.')

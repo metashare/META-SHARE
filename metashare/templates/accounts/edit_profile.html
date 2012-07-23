@@ -24,10 +24,10 @@
     <td colspan="2" style="text-align:center; height:40px;"><a href="{% url django.contrib.auth.views.password_change %}"> Change your password.</a> </td>
   </tr>
   {{ form.as_table }}
-  {% if manager_groups_member_of %}
+  {% if editor_group_managers_member_of %}
   <tr>
-    <th> <label>Manager Group{{ manager_groups_member_of|pluralize }}</label></th>
-    <td>{{ manager_groups_member_of|join:", " }}</td>
+    <th> <label>Editor Group Manager Group{{ editor_group_managers_member_of|pluralize }}</label></th>
+    <td>{{ editor_group_managers_member_of|join:", " }}</td>
   </tr>
   {% endif %}
   {% if editor_groups_member_of %}
@@ -66,6 +66,25 @@
   </tr>
   
 
+  {% if organization_managers_member_of %}
+  <tr>
+    <th> <label>Organization Manager Group{{ organization_managers_member_of|pluralize }}</label></th>
+    <td>{{ organization_managers_member_of|join:", " }}</td>
+  </tr>
+  {% endif %}
+  {% if organizations_member_of %}
+  <tr>
+    <th> <label>Organization{{ organizations_member_of|pluralize }}</label> </th>
+    <td>{{ organizations_member_of|join:", " }}</td>
+  </tr>
+  {% endif %}
+  {% if organizations_applied_for %}
+  <tr><td colspan="2" style="text-align:center; height:40px;">You already applied for a membership of the following organization{{ organizations_applied_for|pluralize }}: {{ organizations_applied_for|join:", " }}</td></tr>
+  {% endif %}
+  <tr>
+    <td colspan="2" style="text-align:center; height:40px;"><a href="{% url metashare.accounts.views.organization_application %}"> Apply for new membership of organizations.</a> </td>
+  </tr>
+  
 <tr><th></th><td><input class="button middle_button" type="submit" value="Edit Profile" /></td></tr>
 </table>
 </form>
