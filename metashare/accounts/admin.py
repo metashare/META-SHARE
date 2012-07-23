@@ -849,6 +849,7 @@ class OrganizationApplicationAdmin(admin.ModelAdmin):
     delete_selected.short_description = \
         _("Turn down selected organization applications")
 
+
 class OrganizationManagersAdmin(admin.ModelAdmin):
     """
     Administration interface for `OrganizationManagers`s.
