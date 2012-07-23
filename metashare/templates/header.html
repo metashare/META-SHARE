@@ -77,7 +77,7 @@
 	           	<li><a href="{% url metashare.accounts.views.add_default_editor_groups %}" title='Add editor groups to be applied by default to all the new resources you create'>Add default editor groups</a></li>
 		      	<li><a href="{% url metashare.accounts.views.remove_default_editor_groups %}" title='Remove default editor groups'>Remove default editor groups</a></li>
 		  	   	{% if user.is_staff %}
-					<li><a href="{% url editor:index %}" title='View your recent actions'>History of actions</a></li>
+					<li><a href="{% url editor:index %}" title='View your recent actions'>View your recent actions</a></li>
         	   	{% endif %}
 			  </ul>
 	        </li>   
