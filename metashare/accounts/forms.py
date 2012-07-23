@@ -213,7 +213,7 @@ class RemoveDefaultEditorGroupForm(ModelForm):
         """
         super(RemoveDefaultEditorGroupForm, self).__init__(*args, **kwargs)
         # If there is a list of editor groups, then modify the ModelChoiceField
-        self.fields['default_editor_group'].queryset = editor_group_qs
+        self.fields['default_editor_groups'].queryset = editor_group_qs
 
 
 class OrganizationApplicationForm(ModelForm):
