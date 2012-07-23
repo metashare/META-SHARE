@@ -3,10 +3,10 @@ Project: META-SHARE prototype implementation
  Author: Christian Federmann <cfedermann@dfki.de>
 """
 from django import forms
-from metashare.accounts.models import RegistrationRequest, UserProfile, \
-    EditorGroupApplication
+from metashare.accounts.models import UserProfile, EditorGroupApplication
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from django.utils.translation import ugettext as _
 
 
 class ModelForm(forms.ModelForm):
@@ -55,22 +55,23 @@ class Form(forms.Form):
             errors_on_separate_row = False)
     
 
-class RegistrationRequestForm(ModelForm):
+class RegistrationRequestForm(Form):
     """
     Form used to create user account requests from new users.
     """
-    confirm_password = forms.CharField(label="Password confirmation", widget=forms.PasswordInput())        
-        
-    class Meta:
-        """
-        Meta class connecting to RegistrationRequest object model.
-        """
-        model = RegistrationRequest
-        exclude = ('uuid', 'created')
-        widgets = {
-            'password': forms.PasswordInput(),
-        }
-        
+    shortname = forms.CharField(User._meta.get_field('username').max_length,
+                                label=_("Desired account name"))
+    first_name = forms.CharField(User._meta.get_field('first_name').max_length,
+                                 label=_("First name"))
+    last_name = forms.CharField(User._meta.get_field('last_name').max_length,
+                                label=_("Last name"))
+    email = forms.EmailField(label=_("E-mail"))
+    password = forms.CharField(User._meta.get_field('password').max_length,
+        label=_("Password"), widget=forms.PasswordInput())
+    confirm_password = forms.CharField(
+        User._meta.get_field('password').max_length,
+        label=_("Password confirmation"), widget=forms.PasswordInput())
+
     def clean_shortname(self):
         """
         Make sure that the user name is still available.
@@ -81,10 +82,10 @@ class RegistrationRequestForm(ModelForm):
         except:
             pass
         else:
-            raise ValidationError('User name already exists, please choose another one.')
-    
+            raise ValidationError(_('User account name already exists, ' \
+                                    'please choose another one.'))
         return _user_name
-        
+
     def clean_email(self):
         """
         Make sure that there is no account yet registered with this email.
@@ -95,27 +96,22 @@ class RegistrationRequestForm(ModelForm):
         except:
             pass
         else:
-            raise ValidationError('There is already an account registered with this email.')
-    
+            raise ValidationError(_('There is already an account registered ' \
+                                    'with this e-mail address.'))
         return _email
-        
+
     def clean_confirm_password(self):
         """
         Make sure that the password confirmation is the same as password.
         """
-        pswrd = self.cleaned_data['password']
+        pswrd = self.cleaned_data.get('password', None)
         pswrd_conf = self.cleaned_data['confirm_password']
         if pswrd != pswrd_conf:
             raise ValidationError('The two password fields did not match.')
-
         return pswrd
 
     # cfedermann: possible extensions for future improvements.
-    #
-    # - add validation for shortname for max_length and forbidden characters
-    # - add validation for firstname for max_length
-    # - add validation for lastname for max_length
-    
+    # - add validation for shortname for forbidden characters
 
 
 class ResetRequestForm(Form):

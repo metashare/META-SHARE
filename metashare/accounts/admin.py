@@ -17,13 +17,14 @@ from django.template.loader import render_to_string
 from metashare.accounts.models import RegistrationRequest, ResetRequest, \
   UserProfile, EditorGroup, EditorGroupApplication, ManagerGroup
 
+
 class RegistrationRequestAdmin(admin.ModelAdmin):
     """
     Administration interface for user registration requests.
     """
-    list_display = ('shortname', 'firstname', 'lastname', 'email', 'uuid',
-      'created')
-    search_fields = ('shortname', 'firstname', 'lastname', 'email')
+    list_display = ('user',)
+    search_fields = ('user__username', 'user__first_name', 'user__last_name',
+                     'user__email')
 
 
 class ResetRequestAdmin(admin.ModelAdmin):
