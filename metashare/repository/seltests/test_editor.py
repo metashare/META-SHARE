@@ -66,7 +66,7 @@ class EditorTest(SeleniumTestCase):
         # login user
         login_user(driver, "manageruser", "secret")
         # make sure login was successful
-        self.assertEqual("Logout", driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
+        self.assertEqual("Logout", driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
         # Manage metadata -> Resource
         mouse_over(driver, driver.find_element_by_link_text("Manage Metadata"))
         click_menu_item(driver, driver.find_element_by_link_text("Resource"))
@@ -112,7 +112,7 @@ class EditorTest(SeleniumTestCase):
         login_user(driver, "manageruser", "secret")
         # make sure login was successful
         self.assertEqual("Logout", 
-          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
+          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # Manage metadata -> Resource
         mouse_over(driver, driver.find_element_by_link_text("Manage Metadata"))
@@ -209,7 +209,7 @@ class EditorTest(SeleniumTestCase):
         login_user(driver, "manageruser", "secret")
         # make sure login was successful
         self.assertEqual("Logout", 
-          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
+          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # Manage metadata -> Resource
         mouse_over(driver, driver.find_element_by_link_text("Manage Metadata"))
@@ -307,7 +307,7 @@ class EditorTest(SeleniumTestCase):
         login_user(driver, "manageruser", "secret")
         # make sure login was successful
         self.assertEqual("Logout", 
-          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
+          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # Manage metadata -> Resource
         mouse_over(driver, driver.find_element_by_link_text("Manage Metadata"))
@@ -411,7 +411,7 @@ class EditorTest(SeleniumTestCase):
         login_user(driver, "manageruser", "secret")
         # make sure login was successful
         self.assertEqual("Logout", 
-          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
+          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # Manage metadata -> Resource
         mouse_over(driver, driver.find_element_by_link_text("Manage Metadata"))
@@ -520,7 +520,7 @@ class EditorTest(SeleniumTestCase):
         login_user(driver, "manageruser", "secret")
         # make sure login was successful
         self.assertEqual("Logout", 
-          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
+          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # Manage metadata -> Resource
         mouse_over(driver, driver.find_element_by_link_text("Manage Metadata"))
@@ -623,7 +623,7 @@ class EditorTest(SeleniumTestCase):
         login_user(driver, "editoruser", "secret")
         # make sure login was successful
         self.assertEqual("Logout", 
-          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
+          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # Manage metadata -> Resource
         mouse_over(driver, driver.find_element_by_link_text("Manage Metadata"))
@@ -703,7 +703,7 @@ class EditorTest(SeleniumTestCase):
         login_user(driver, "editoruser", "secret")
         # make sure login was successful
         self.assertEqual("Logout", 
-          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
+          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # Manage metadata -> Resource
         mouse_over(driver, driver.find_element_by_link_text("Manage Metadata"))
