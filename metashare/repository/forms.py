@@ -187,3 +187,11 @@ class LicenseAgreementForm(forms.Form):
         super(LicenseAgreementForm, self).__init__(*args, **kwargs)
         self.fields['licence'] = forms.CharField(initial=licence,
                                                  widget=forms.HiddenInput())
+
+
+class DownloadContactForm(forms.Form):
+    """
+    A `Form` for sending a contact request regarding the download of a resource
+    """
+    userEmail = forms.EmailField(label=_("Your e-mail"))
+    message = forms.CharField(label=_("Your message"), widget=forms.Textarea())
