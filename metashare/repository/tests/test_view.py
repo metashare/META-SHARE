@@ -54,10 +54,14 @@ class ViewTest(TestCase):
         staffuser = create_user('staffuser', 'staff@example.com', 'secret')
         staffuser.is_staff = True
         staffuser.save()
-        create_user('normaluser', 'normal@example.com', 'secret')
-        
+        create_user('normaluser', 'normal@example.com', 'secret')        
+       
         ViewTest.test_editor_group = EditorGroup.objects.create(
                                                     name='test_editor_group')
+        
+        editoruser = test_utils.create_editor_user('editoruser',
+            'editor@example.com', 'secret', (ViewTest.test_editor_group,))
+                
         ViewTest.test_manager_group = \
             ManagerGroup.objects.create(name='test_manager_group',
                                     managed_group=ViewTest.test_editor_group)            
@@ -73,17 +77,17 @@ class ViewTest(TestCase):
         test_utils.clean_storage()
         test_utils.clean_user_db()
 
-    def test_staff_user_sees_editor(self):
+    def test_editor_user_sees_editor(self):
         """
-        Tests whether a staff user can edit a resource (in seeing the editor button)
+        Tests whether an editor user can edit a resource (in seeing the "Manage Metadata" button)
         """
         client = Client()
-        client.login(username='staffuser', password='secret')
+        client.login(username='editoruser', password='secret')
         url = self.resource.get_absolute_url()
         response = client.get(url, follow = True)
         self.assertTemplateUsed(response, 'repository/lr_view.html')
-        self.assertContains(response, "Editor")
-
+        self.assertContains(response, "Manage Metadata")
+    
     def test_normal_user_doesnt_see_editor(self):
         """
         Tests whether a normal user cannot edit a resource
@@ -93,7 +97,7 @@ class ViewTest(TestCase):
         url = self.resource.get_absolute_url()
         response = client.get(url, follow = True)
         self.assertTemplateUsed(response, 'repository/lr_view.html')
-        self.assertNotContains(response, "Editor")
+        self.assertNotContains(response, "Manage Metadata")
     
     def test_anonymous_doesnt_see_editor(self):
         """
@@ -103,7 +107,7 @@ class ViewTest(TestCase):
         url = self.resource.get_absolute_url()
         response = client.get(url, follow = True)
         self.assertTemplateUsed(response, 'repository/lr_view.html')
-        self.assertNotContains(response, "Editor")
+        self.assertNotContains(response, "Manage Metadata")
         
     def testPageTitle(self):
         """
