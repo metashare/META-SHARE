@@ -465,6 +465,7 @@ class CreatorTest(django.test.TestCase):
     res_2 = None
     res_3 = None
     res_4 = None
+    res_5 = None
     
     @classmethod
     def setUpClass(cls):
@@ -483,6 +484,7 @@ class CreatorTest(django.test.TestCase):
         self.res_2 = _import_downloadable_resource('creators-projects-2.xml')
         self.res_3 = _import_downloadable_resource('creators-projects-3.xml')
         self.res_4 = _import_downloadable_resource('creators-projects-4.xml')
+        self.res_5 = _import_downloadable_resource('creators-projects-5.xml')
         
     def tearDown(self):
         """
@@ -497,11 +499,13 @@ class CreatorTest(django.test.TestCase):
         self.assertEquals(1, len(get_more_from_same_creators(self.res_2)))
         self.assertEquals(1, len(get_more_from_same_creators(self.res_3)))
         self.assertEquals(0, len(get_more_from_same_creators(self.res_4)))
+        self.assertEquals(0, len(get_more_from_same_creators(self.res_5)))
         
     def test_project(self):
         self.assertEquals(0, len(get_more_from_same_projects(self.res_1)))
         self.assertEquals(1, len(get_more_from_same_projects(self.res_2)))
         self.assertEquals(1, len(get_more_from_same_projects(self.res_3)))
         self.assertEquals(2, len(get_more_from_same_projects(self.res_4)))
+        self.assertEquals(0, len(get_more_from_same_projects(self.res_5)))
         
     
