@@ -59,7 +59,7 @@ class ViewTest(TestCase):
         ViewTest.test_editor_group = EditorGroup.objects.create(
                                                     name='test_editor_group')
         ViewTest.test_editor_group_manager = \
-            ManagerGroup.objects.create(name='test_editor_group_manager',
+            EditorGroupManager.objects.create(name='test_editor_group_manager',
                                     managed_group=ViewTest.test_editor_group)            
         test_utils.create_manager_user(
             'manageruser', 'manager@example.com', 'secret',
