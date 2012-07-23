@@ -29,6 +29,7 @@ urlpatterns = patterns('metashare.accounts.views',
   (r'sso/(?P<uuid>[0-9a-f]{32})1(?P<timestamp>\d+)0(?P<token>.+)/$',
     'sso'),
 )
+
 urlpatterns += patterns('django.contrib.auth.views',
   (r'^profile/change_password/$', 'password_change', 
         {'post_change_redirect' : '/accounts/profile/change_password/done/', 'template_name': 'accounts/change_password.html'}),
