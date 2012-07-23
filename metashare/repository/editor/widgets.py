@@ -30,6 +30,18 @@ LOGGER.addHandler(settings.LOG_HANDLER)
 _MAX_TEXT_INPUT_SIZE = 150
 
 
+# Fields that need the ComboWidget with autocomplete functionality
+# to use with languageId,languageName pairs.
+# Format (modelName, languageIdFieldName, languageNameFieldName)
+LANGUAGE_ID_NAME_FIELDS = [
+   ("inputInfoType_model", "languageId", "languageName"),
+   ("outputInfoType_model", "languageId", "languageName"),
+   ("languageInfoType_model", "languageId", "languageName"),
+   #("metadataInfoType_model", "metadataLanguageId", "metadataLanguageName"),
+   ("documentInfoType_model", "documentLanguageId", "documentLanguageName"),
+   ("tagsetInfoType_model", "tagsetLanguageId", "tagsetLanguageName"),
+]
+
 class DictWidget(widgets.Widget):
     """
     A widget for rendering dictionaries as represented by `DictField` form
@@ -474,32 +486,29 @@ class ComboWidget(AdminTextInputWidget):
         Media sub class to inject custom CSS and JavaScript code.
         """
         css = {
-          'all': ('css/jquery-ui-1.8.15.custom.css',)
+          'all': ('css/jquery-ui-1.8.15.custom.css', 'admin/css/combo.css')
         }
         js = ('js/jquery-ui-1.8.15.custom.js',
               'js/autocomp.js',
               'js/pycountry.js' )
     
-    def __init__(self, attrs=None):
+    def __init__(self, field_type=None, attrs=None):
+        self.field_type = field_type
+        self.id_field = attrs.pop('id_field')
+        self.name_field = attrs.pop('name_field')
         if not attrs:
             attrs = {}
         super(ComboWidget, self).__init__(attrs)
-        if 'class' in self.attrs:
-            classes = self.attrs['class']
-        else:
-            classes = ''
-        self.attrs['class'] = classes
-        return
         
     def render(self, name, value, attrs=None):
         val = super(ComboWidget, self).render(name, value, attrs)
         if 'id' in attrs:
-            id = attrs['id']
-            if name.find('languageId') != -1:
-                linked_to = attrs['id'].replace('languageId', 'languageName')
-                js_script = u'<script>autocomp_id($("input#{0}"), "{1}");</script>'.format(id, linked_to)
-            elif name.find('languageName') != -1:
-                js_script = u'<script>autocomp_name($("input#{0}"));</script>'.format(id)
+            id1 = attrs['id']
+            if self.field_type == 'id':
+                linked_to = attrs['id'].replace(self.id_field, self.name_field)
+                js_script = u'<script>autocomp_id($("input#{0}"), "{1}");</script>'.format(id1, linked_to)
+            elif self.field_type == 'name':
+                js_script = u'<script>autocomp_name($("input#{0}"));</script>'.format(id1)
             val = val + js_script
 
         return mark_safe(val)

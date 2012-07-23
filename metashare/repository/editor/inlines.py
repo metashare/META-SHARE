@@ -10,7 +10,7 @@ from django.utils.encoding import force_unicode
 from metashare.repository.editor.related_mixin import RelatedAdminMixin
 from metashare.repository.editor.schemamodel_mixin import SchemaModelLookup
 from django.contrib.admin.options import InlineModelAdmin
-from metashare.repository.editor.widgets import ComboWidget
+from metashare.repository.editor.widgets import ComboWidget, LANGUAGE_ID_NAME_FIELDS
 
 
 
@@ -35,10 +35,19 @@ class SchemaModelInline(InlineModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         if self.is_x_to_many_relation(db_field):
             return self.formfield_for_relation(db_field, **kwargs)
         self.use_hidden_widget_for_one2one(db_field, kwargs)
-        if db_field.name == 'languageId':
-            kwargs.update({'widget': ComboWidget})
-        if db_field.name == 'languageName':
-            kwargs.update({'widget': ComboWidget})
+        model_name = self.model().__class__.__name__
+        for item in LANGUAGE_ID_NAME_FIELDS:
+            if item[0] == model_name:
+                if db_field.name == item[1]:
+                    attrs = {}
+                    attrs['id_field'] = item[1]
+                    attrs['name_field'] = item[2]
+                    kwargs.update({'widget': ComboWidget(field_type='id', attrs=attrs)})
+                elif db_field.name == item[2]:
+                    attrs = {}
+                    attrs['id_field'] = item[1]
+                    attrs['name_field'] = item[2]
+                    kwargs.update({'widget': ComboWidget(field_type='name', attrs=attrs)})
         formfield = super(SchemaModelInline, self).formfield_for_dbfield(db_field, **kwargs)
         self.use_related_widget_where_appropriate(db_field, kwargs, formfield)
         return formfield
