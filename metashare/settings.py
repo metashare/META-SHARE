@@ -42,7 +42,7 @@ SYNC_NEEDS_AUTHENTICATION = True
 
 
 # URL for the Metashare Knowledge Base
-KNOWLEDGE_BASE_URL = 'http://metashare.ilsp.gr/portal/knowledgebase/'
+KNOWLEDGE_BASE_URL = 'http://www.meta-share.org/portal/knowledgebase/'
 
 # The URL for META-SHARE statistics server.
 STATS_SERVER_URL = "http://metastats.fbk.eu/"
@@ -167,6 +167,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.messages',
     'django.contrib.humanize',
+    'django.contrib.sitemaps',
 
     'haystack',
     'analytical',
@@ -240,6 +241,9 @@ if 'DISPLAY' in os.environ:
     import re
     SELENIUM_DISPLAY = re.sub(r'[^\:]*(\:\d{1,2})(?:\.\d+)?', r'\1', 
       os.environ['DISPLAY'])
+
+# sitemap url to be used in "robots.txt"
+SITEMAP_URL = '{}/sitemap.xml'.format(DJANGO_URL)
 
 # maximum time interval in seconds allowed between two resource views so that
 # the resources are still considered as 'viewed together';
