@@ -138,14 +138,16 @@ def get_more_from_same_creators(resource):
     """
     
     # get all creators of the resource; this includes persons and organizations
-    creators = resource.resourceCreationInfo.resourceCreator.all()
     result = set()
-    for _creator in creators:
-        for _res in resourceInfoType_model.objects.filter(
-          resourceCreationInfo__resourceCreator=_creator):
-            if _res == resource:
-                continue
-            result.add(_res)
+    creation_info = resource.resourceCreationInfo
+    if creation_info:
+        creators = creation_info.resourceCreator.all()
+        for _creator in creators:
+            for _res in resourceInfoType_model.objects.filter(
+              resourceCreationInfo__resourceCreator=_creator):
+                if _res == resource:
+                    continue
+                result.add(_res)
 
     return result
     
@@ -157,14 +159,16 @@ def get_more_from_same_projects(resource):
     """
     
     # get all projects of the resource
-    projects = resource.resourceCreationInfo.fundingProject.all()
     result = set()
-    for _project in projects:
-        for _res in resourceInfoType_model.objects.filter(
-          resourceCreationInfo__fundingProject=_project):
-            if _res == resource:
-                continue
-            result.add(_res)
+    creation_info = resource.resourceCreationInfo
+    if creation_info:
+        projects = creation_info.fundingProject.all()
+        for _project in projects:
+            for _res in resourceInfoType_model.objects.filter(
+              resourceCreationInfo__fundingProject=_project):
+                if _res == resource:
+                    continue
+                result.add(_res)
 
     return result
         
