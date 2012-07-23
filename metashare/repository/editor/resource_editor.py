@@ -220,6 +220,17 @@ def change_resource_status(resource, status, precondition_status=None):
     return False
 
 
+def has_edit_permission(request, res_obj):
+    """
+    Returns `True` if the given request has permission to edit the metadata
+    for the current resource, `False` otherwise.
+    """
+    return request.user.is_active and (request.user.is_superuser \
+        or request.user in res_obj.owners.all() \
+        or res_obj.editor_groups.filter(name__in=
+            request.user.groups.values_list('name', flat=True)).count() != 0)
+
+
 def has_publish_permission(request, queryset):
     """
     Returns `True` if the given request has permission to change the publication
@@ -934,11 +945,12 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 return True
             # in addition to the default delete permission determination, we
             # only allow a user to delete a resource if either:
-            # (1) she is owner of the resource and the resource does not belong
-            #     to any `EditorGroup`
+            # (1) she is owner of the resource and the resource has not been
+            #     ingested, yet
             # (2) she is a manager of one of the resource's `EditorGroup`s
             res_groups = obj.editor_groups.all()
-            return (request.user in obj.owners.all() and len(res_groups) == 0) \
+            return (request.user in obj.owners.all()
+                    and obj.storage_object.publication_status == INTERNAL) \
                 or any(res_group.name == mgr_group.managed_group.name
                        for res_group in res_groups
                        for mgr_group in EditorGroupManagers.objects.filter(name__in=
@@ -1088,7 +1100,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         owners.append(user_id)
         editor_groups = request.POST.getlist('editor_groups')
         editor_groups.extend(EditorGroup.objects \
-            .filter(name__in=profile.default_editor_group.values_list('name', flat=True))
+            .filter(name__in=profile.default_editor_groups.values_list('name', flat=True))
             .values_list('pk', flat=True))
 
         _post = request.POST.copy()

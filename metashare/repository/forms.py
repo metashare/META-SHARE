@@ -1,4 +1,5 @@
 import logging
+import re
 
 from django import forms
 from django.utils.encoding import force_unicode
@@ -7,13 +8,23 @@ from django.utils.translation import ugettext as _
 
 
 from metashare.settings import LOG_LEVEL, LOG_HANDLER
+from metashare.repository.models import resourceInfoType_model
+from metashare.recommendations.recommendations import get_more_from_same_creators, \
+    get_more_from_same_projects
 
 from haystack.forms import FacetedSearchForm
+from haystack.query import SQ
+
 
 # Setup logging support.
 logging.basicConfig(level=LOG_LEVEL)
 LOGGER = logging.getLogger('metashare.repository.forms')
 LOGGER.addHandler(LOG_HANDLER)
+
+
+# define special query prefixes
+MORE_FROM_SAME_CREATORS = "mfsc"
+MORE_FROM_SAME_PROJECTS = "mfsp"
 
 
 class FacetedBrowseForm(FacetedSearchForm):
@@ -27,7 +38,26 @@ class FacetedBrowseForm(FacetedSearchForm):
         """
         sqs = self.searchqueryset
         if self.is_valid() and self.cleaned_data.get('q'):
-            sqs = sqs.auto_query(self.cleaned_data['q'])
+            # extract special queries
+            special_queries, query = \
+              _extract_special_queries(self.cleaned_data.get('q'))
+            if query:
+                sqs = sqs.auto_query(query)
+            if (special_queries):
+                # for each special query, get the Django internal resource ids
+                # matching the query and filter the SearchQuerySet accordingly
+                for _sq in special_queries:
+                    _res_ids = _process_special_query(_sq)
+                    if _res_ids:
+                        _sq = SQ()
+                        for _id in _res_ids:
+                            _sq.add(SQ(django_id=_id), SQ.OR)
+                        sqs = sqs.filter(_sq)
+                    else:
+                        # force empty search result if no ids are returned
+                        # for a special query
+                        sqs = sqs.none()
+                        break
         if self.load_all:
             sqs = sqs.load_all()
         # we need to process each facet to ensure that the field name and the
@@ -38,6 +68,53 @@ class FacetedBrowseForm(FacetedSearchForm):
                 sqs = sqs.narrow(u'%s:"%s"' % (field, sqs.query.clean(value)))
         return sqs
 
+
+def _extract_special_queries(query):
+    """
+    Extracts from the given query string all special queries;
+    returns the original query that is stripped from the special queries
+    and the extracted special queries;
+    currently , we have two special queries:
+    more-from-creator-of:<resource-id>
+    more-from-project-of:<resource-id>
+    """
+    # here we collect the special queries
+    special_queries = []
+    
+    for _token in query.split():
+        if _token.startswith(MORE_FROM_SAME_CREATORS)\
+          or _token.startswith(MORE_FROM_SAME_PROJECTS):
+            special_queries.append(_token)
+    # remove special queries from original query
+    if special_queries:
+        for _sq in special_queries:
+            query = query.replace(_sq, "")
+        ws_pattern = re.compile(r'\s+')
+        query = re.sub(ws_pattern, " ", query)
+        query = query.strip()
+        
+    return special_queries, query
+         
+         
+def _process_special_query(query):
+    """
+    Processes the given special query;
+    returns a list of resource ids matching the query;
+    ids are the INTERNAL Django ids, not the StorageObject identifiers!!!
+    """
+    query_type, resource_id = query.split(":")
+    # get resource
+    res = resourceInfoType_model.objects.get(storage_object__identifier=resource_id)
+    # get related resources
+    if query_type == MORE_FROM_SAME_CREATORS:
+        rel_res = get_more_from_same_creators(res)
+    elif query_type == MORE_FROM_SAME_PROJECTS:
+        rel_res = get_more_from_same_projects(res)
+    else:
+        return []
+    # return internal ids from related resources
+    return [x.id for x in rel_res]
+    
 
 class LicenseSelectionForm(forms.Form):
     """
@@ -111,19 +188,10 @@ class LicenseAgreementForm(forms.Form):
         self.fields['licence'] = forms.CharField(initial=licence,
                                                  widget=forms.HiddenInput())
 
+
 class DownloadContactForm(forms.Form):
     """
     A `Form` for sending a contact request regarding the download of a resource
     """
-    userEmail = forms.EmailField(label="User email")
-    message = forms.CharField(label="Information request", widget=forms.Textarea())
-
-    def __init__(self, email, request, *args, **kwargs):
-        """
-        Initializes the `LicenseAgreementForm` with the given licence.
-        """
-        super(DownloadContactForm, self).__init__(*args, **kwargs)
-        self.fields['userEmail'] = forms.CharField(initial=email)
-        self.fields['message'] = forms.CharField(initial=request,
-                                                 widget=forms.Textarea())
-
+    userEmail = forms.EmailField(label=_("Your e-mail"))
+    message = forms.CharField(label=_("Your message"), widget=forms.Textarea())

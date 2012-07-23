@@ -60,39 +60,30 @@ def confirm(request, uuid):
     # Save the new User instance to the django database.  This will also
     # create a corresponding UserProfile instance by post_save "magic".
     user.save()
-    
-    # Delete registration request instance.
-    registration_request.delete()
-    
+
     # For convenience, log user in:
-    authuser = authenticate(username=user.username, password=registration_request.password)
+    authuser = authenticate(username=user.username,
+                            password=registration_request.password)
     login(request, authuser)
     request.session['METASHARE_UUID'] = uuid
 
+    # Delete registration request instance.
+    registration_request.delete()
+
     # Render activation email template with correct values.
     data = {'firstname': user.first_name, 'lastname': user.last_name,
-      'shortname': user.username, 'password': registration_request.password}
+      'shortname': user.username}
     email = render_to_string('accounts/activation.email', data)
-    
     try:
-        # Send out activation email containing the random password.
+        # Send an activation email.
         send_mail('Your META-SHARE user account has been activated',
         email, 'no-reply@meta-share.eu', [user.email], fail_silently=False)
-    
     except: # SMTPException:
-        # If the email could not be sent successfully, tell the user about it.
-        messages.error(request,
-          "There was an error sending out the activation email " \
-          "for your user account.  Your password is <b>{0}</b>.".format(
-            registration_request.password))
-        
-        # Redirect the user to the front page.
-        return redirect('metashare.views.frontpage')
-    
+        # there was a problem sending the activation e-mail -- not too bad
+        pass
+
     # Add a message to the user after successful creation.
-    messages.success(request,
-      "We have activated your user account and sent you an email with " \
-      "your personal password which allows you to login to the website.")
+    messages.success(request, "We have activated your user account.")
     
     # Redirect the user to the front page.
     return redirect('metashare.views.frontpage')
@@ -155,7 +146,7 @@ def create(request):
             # Redirect the user to the front page.
             return redirect('metashare.views.frontpage')
     
-    # Otherwise, create an empty UploadCreateForm instance.
+    # Otherwise, create an empty RegistrationRequestForm instance.
     else:
         form = RegistrationRequestForm()
     
@@ -209,25 +200,19 @@ def edit_profile(request):
     
     # Otherwise, fill UserProfileForm instance from current UserProfile.
     else:
-
-        # Fill UserProfileForm from current UserProfile instance.
         form = UserProfileForm({'birthdate': profile.birthdate,
           'affiliation': profile.affiliation, 'position': profile.position,
           'homepage': profile.homepage})
-    
-    editor_groups_member_of = []
-    for edt_group in EditorGroup.objects.filter(name__in=profile.user.groups.values_list('name', flat=True)):
-        if profile.default_editor_group.filter(name=edt_group.name).count() == 0:
-            editor_groups_member_of.append({'name': edt_group.name, 'default': False})
-        else:
-            editor_groups_member_of.append({'name': edt_group.name, 'default': True})
 
     dictionary = {'title': 'Edit profile information', 'form': form, 
         'groups_applied_for': [edt_reg.editor_group.name for edt_reg
                 in EditorGroupApplication.objects.filter(user=profile.user)],
         'organizations_applied_for': [org_reg.organization.name for org_reg
                 in OrganizationApplication.objects.filter(user=profile.user)],
-        'editor_groups_member_of': editor_groups_member_of,
+        'editor_groups_member_of': [{'name': eg.name, 'default':
+                profile.default_editor_groups.filter(name=eg.name).count() != 0}
+            for eg in EditorGroup.objects.filter(name__in=
+                        profile.user.groups.values_list('name', flat=True))],
         'editor_group_managers_member_of': [edt_grp_mgrs.name for edt_grp_mgrs
                 in EditorGroupManagers.objects.filter(name__in=profile.user.groups.values_list('name', flat=True))],
         'organizations_member_of': [orga.name for orga
@@ -327,7 +312,7 @@ def editor_group_application(request):
 
 
 @login_required
-def add_default_editor_group(request):
+def add_default_editor_groups(request):
     """
     Add default Editor Groups.
     """
@@ -341,7 +326,7 @@ def add_default_editor_group(request):
     # Exclude from the list the editor groups for which the user is not a member
     available_editor_groups = EditorGroup.objects \
         .filter(name__in=request.user.groups.values_list('name', flat=True)) \
-        .exclude(name__in=profile.default_editor_group.values_list('name', flat=True))
+        .exclude(name__in=profile.default_editor_groups.values_list('name', flat=True))
 
     # Check if the form has been submitted.
     if request.method == "POST":
@@ -350,11 +335,11 @@ def add_default_editor_group(request):
         # Check if the form has validated successfully.
         if form.is_valid():
             # Get submitted editor groups
-            dflt_edt_grps = form.cleaned_data['default_editor_group']
+            dflt_edt_grps = form.cleaned_data['default_editor_groups']
 
             for dflt_edt_grp in dflt_edt_grps:
                 for edt_grp in EditorGroup.objects.filter(name=dflt_edt_grp.name):
-                    profile.default_editor_group.add(edt_grp)
+                    profile.default_editor_groups.add(edt_grp)
                     messages.success(request, _('You have successfully ' \
                       'added default editor group "%s".') % (dflt_edt_grp.name,))
             profile.save()
@@ -375,12 +360,12 @@ def add_default_editor_group(request):
         form = AddDefaultEditorGroupForm(available_editor_groups)
 
     dictionary = {'title': 'Add default editor group', 'form': form}
-    return render_to_response('accounts/add_default_editor_group.html',
+    return render_to_response('accounts/add_default_editor_groups.html',
                         dictionary, context_instance=RequestContext(request))
 
 
 @login_required
-def remove_default_editor_group(request):
+def remove_default_editor_groups(request):
     """
     Remove default Editor Groups.
     """
@@ -393,7 +378,7 @@ def remove_default_editor_group(request):
 
     # Include in the list only the default editor groups of the user
     available_editor_groups = EditorGroup.objects \
-        .filter(name__in=profile.default_editor_group.values_list('name', flat=True))
+        .filter(name__in=profile.default_editor_groups.values_list('name', flat=True))
 
     # Check if the form has been submitted.
     if request.method == "POST":
@@ -402,11 +387,11 @@ def remove_default_editor_group(request):
         # Check if the form has validated successfully.
         if form.is_valid():
             # Get submitted editor groups
-            dflt_edt_grps = form.cleaned_data['default_editor_group']
+            dflt_edt_grps = form.cleaned_data['default_editor_groups']
 
             for dflt_edt_grp in dflt_edt_grps:
                 for edt_grp in EditorGroup.objects.filter(name=dflt_edt_grp.name):
-                    profile.default_editor_group.remove(edt_grp)
+                    profile.default_editor_groups.remove(edt_grp)
                     messages.success(request, _('You have successfully ' \
                       'removed default editor group "%s".') % (dflt_edt_grp.name,))
             profile.save()
@@ -427,7 +412,7 @@ def remove_default_editor_group(request):
         form = RemoveDefaultEditorGroupForm(available_editor_groups)
 
     dictionary = {'title': 'Remove default editor group', 'form': form}
-    return render_to_response('accounts/remove_default_editor_group.html',
+    return render_to_response('accounts/remove_default_editor_groups.html',
                         dictionary, context_instance=RequestContext(request))
 
 

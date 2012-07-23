@@ -101,7 +101,7 @@ class RegistrationRequestForm(ModelForm):
         
     def clean_confirm_password(self):
         """
-        Make sure that the password confirmation is the same than password
+        Make sure that the password confirmation is the same as password.
         """
         pswrd = self.cleaned_data['password']
         pswrd_conf = self.cleaned_data['confirm_password']
@@ -112,7 +112,6 @@ class RegistrationRequestForm(ModelForm):
 
     # cfedermann: possible extensions for future improvements.
     #
-    # - add validation for email address which checks that it's unique.
     # - add validation for shortname for max_length and forbidden characters
     # - add validation for firstname for max_length
     # - add validation for lastname for max_length
@@ -149,7 +148,7 @@ class UserProfileForm(ModelForm):
         Meta class connecting to UserProfile object model.
         """
         model = UserProfile
-        exclude = ('user', 'modified', 'uuid', 'default_editor_group')
+        exclude = ('user', 'modified', 'uuid', 'default_editor_groups')
 
 
 class EditorGroupApplicationForm(ModelForm):
@@ -192,7 +191,7 @@ class AddDefaultEditorGroupForm(ModelForm):
         """
         super(AddDefaultEditorGroupForm, self).__init__(*args, **kwargs)
         # If there is a list of editor groups, then modify the ModelChoiceField
-        self.fields['default_editor_group'].queryset = editor_group_qs
+        self.fields['default_editor_groups'].queryset = editor_group_qs
 
 
 class RemoveDefaultEditorGroupForm(ModelForm):
