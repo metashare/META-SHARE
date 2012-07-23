@@ -1240,7 +1240,7 @@ class DestructiveTests(TestCase):
         client = _client_with_user_logged_in(self.editor_login)
         _import_test_resource(self.test_editor_group)
         personInfoType_model.objects.all().update(copy_status=REMOTE)
-        response = client.get('{}repository/personinfotype_model/7/'
+        response = client.get('{}repository/personinfotype_model/1/'
                               .format(ADMINROOT))
         self.assertContains(response, "You cannot edit the metadata for the entity")
         self.assertNotContains(response, "You will now be redirected")
