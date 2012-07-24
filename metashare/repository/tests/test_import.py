@@ -31,30 +31,6 @@ class ImportTest(TestCase):
         test_utils.clean_resources_db()
         test_utils.clean_storage()
 
-    def test_import_ELRA(self):      
-        """
-        Run tests on ELRA resources
-        Representative xml files have been taken
-        """
-        self._test_import_dir('{0}/repository/test_fixtures/ELRA/'
-                              .format(ROOT_PATH))
-
-    def test_import_PSP(self):
-        """
-        Run tests on PSP resources
-        Representative xml files from all PSP providers have been taken
-        """
-        self._test_import_dir('{0}/repository/test_fixtures/PSP/'
-                              .format(ROOT_PATH))
-
-    def test_import_METASHARE(self):
-        """
-        Run tests on META-SHARE resources
-        Representative xml files from all META-SHARE partners have been taken
-        """
-        self._test_import_dir('{0}/repository/test_fixtures/META-SHARE/'
-                              .format(ROOT_PATH))
-
     def _test_import_dir(self, path):
         """Asserts that all XML files in the given directory can be imported."""
         _files = os.listdir(path)
