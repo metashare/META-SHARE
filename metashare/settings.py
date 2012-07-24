@@ -93,7 +93,7 @@ LANGUAGE_CODE = 'en-us'
 
 SITE_ID = 1
 
-METASHARE_VERSION = '2.2-SNAPSHOT'
+METASHARE_VERSION = '3.0-SNAPSHOT'
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
