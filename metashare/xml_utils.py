@@ -15,6 +15,8 @@ import logging
 import os
 import re
 import sys
+from metashare.repository.models import User
+from metashare.accounts.models import EditorGroup
 
 # Setup logging support.
 logging.basicConfig(level=LOG_LEVEL)
@@ -83,6 +85,15 @@ def import_from_string(xml_string, targetstatus, copy_status, owner_id=None):
     resource.storage_object.publication_status = targetstatus
     if owner_id:
         resource.owners.add(owner_id)
+        
+        user_profile = User.objects.get(id=owner_id).get_profile()
+
+        editor_groups = []
+        editor_groups.extend(EditorGroup.objects \
+            .filter(name__in=user_profile.default_editor_groups.values_list('name', flat=True))
+            .values_list('pk', flat=True))
+        for edt_grp in editor_groups:
+            resource.editor_groups.add(edt_grp)
         
     resource.storage_object.save()
     
