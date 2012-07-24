@@ -931,7 +931,7 @@ class OrganizationManagersAdmin(admin.ModelAdmin):
                         user = userprofile.user
                         for obj in queryset:
                             user.groups.add(obj)
-                            user.groups.add(obj.managed_group)
+                            user.groups.add(obj.managed_organization)
                     self.message_user(request, _('Successfully added users to organization managers.'))
                     return HttpResponseRedirect(request.get_full_path())
     
