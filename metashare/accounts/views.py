@@ -26,9 +26,11 @@ from django.utils.translation import ugettext as _
 
 from metashare.accounts.forms import RegistrationRequestForm, \
   ResetRequestForm, UserProfileForm, EditorGroupApplicationForm, \
-  AddDefaultEditorGroupForm, RemoveDefaultEditorGroupForm
+  AddDefaultEditorGroupForm, RemoveDefaultEditorGroupForm, \
+  OrganizationApplicationForm
 from metashare.accounts.models import RegistrationRequest, ResetRequest, \
-  UserProfile, EditorGroupApplication, ManagerGroup, EditorGroup
+  UserProfile, EditorGroupApplication, EditorGroupManagers, EditorGroup, \
+  OrganizationApplication, OrganizationManagers, Organization
 from metashare.settings import SSO_SECRET_KEY, DJANGO_URL, \
   PRIVATE_KEY_PATH, LOG_LEVEL, LOG_HANDLER, MAX_LIFETIME_FOR_SSO_TOKENS
 
@@ -78,6 +80,7 @@ def confirm(request, uuid):
     
     # Redirect the user to the front page.
     return redirect('metashare.views.frontpage')
+
 
 def create(request):
     """
@@ -145,6 +148,7 @@ def create(request):
     return render_to_response('accounts/create_account.html', dictionary,
       context_instance=RequestContext(request))
 
+
 @login_required
 def edit_profile(request):
     """
@@ -197,15 +201,22 @@ def edit_profile(request):
     dictionary = {'title': 'Edit profile information', 'form': form, 
         'groups_applied_for': [edt_reg.editor_group.name for edt_reg
                 in EditorGroupApplication.objects.filter(user=profile.user)],
+        'organizations_applied_for': [org_reg.organization.name for org_reg
+                in OrganizationApplication.objects.filter(user=profile.user)],
         'editor_groups_member_of': [{'name': eg.name, 'default':
                 profile.default_editor_groups.filter(name=eg.name).count() != 0}
             for eg in EditorGroup.objects.filter(name__in=
                         profile.user.groups.values_list('name', flat=True))],
-        'manager_groups_member_of': [mgr_group.name for mgr_group
-                in ManagerGroup.objects.filter(name__in=profile.user.groups.values_list('name', flat=True))]}
+        'editor_group_managers_member_of': [edt_grp_mgrs.name for edt_grp_mgrs
+                in EditorGroupManagers.objects.filter(name__in=profile.user.groups.values_list('name', flat=True))],
+        'organizations_member_of': [orga.name for orga
+                in Organization.objects.filter(name__in=profile.user.groups.values_list('name', flat=True))],
+        'organization_managers_member_of': [org_mgrs.name for org_mgrs
+                in OrganizationManagers.objects.filter(name__in=profile.user.groups.values_list('name', flat=True))]}
     
     return render_to_response('accounts/edit_profile.html', dictionary,
       context_instance=RequestContext(request))
+
 
 @login_required
 def editor_group_application(request):
@@ -219,14 +230,10 @@ def editor_group_application(request):
     # Exclude from the list the editor groups the user cannot apply for:
     # - editor groups for which the user is already a member
     # - editor groups for which the user has already applied
-    # - editor groups that are not handled by manager
     available_editor_groups = EditorGroup.objects \
         .exclude(name__in=request.user.groups.values_list('name', flat=True)) \
         .exclude(name__in=EditorGroupApplication.objects.filter(
-            user=request.user).values_list('editor_group__name', flat=True)) \
-        .filter(name__in=ManagerGroup.objects.all().filter(
-                name__in=User.objects.values_list('groups__name', flat=True)) \
-            .values_list('managed_group__name', flat=True))
+            user=request.user).values_list('editor_group__name', flat=True))
 
     # Check if the edit form has been submitted.
     if request.method == "POST":
@@ -261,7 +268,7 @@ def editor_group_application(request):
                 try:
                     # Send out notification email to the managers and superusers
                     send_mail('New editor membership request',
-                        render_to_string('accounts/notification_manager_editor_group_application.email', data),
+                        render_to_string('accounts/notification_editor_group_managers_application.email', data),
                         'no-reply@meta-share.eu', emails, fail_silently=False)
                 except: #SMTPException:
                     # If the email could not be sent successfully, tell the user
@@ -346,6 +353,7 @@ def add_default_editor_groups(request):
     return render_to_response('accounts/add_default_editor_groups.html',
                         dictionary, context_instance=RequestContext(request))
 
+
 @login_required
 def remove_default_editor_groups(request):
     """
@@ -395,6 +403,89 @@ def remove_default_editor_groups(request):
 
     dictionary = {'title': 'Remove default editor group', 'form': form}
     return render_to_response('accounts/remove_default_editor_groups.html',
+                        dictionary, context_instance=RequestContext(request))
+
+
+@login_required
+def organization_application(request):
+    """
+    Apply for Organization membership.
+    """
+    # The "virtual" MetaShareUser cannot apply for membership
+    if request.user.username == 'MetaShareUser':
+        return redirect('metashare.views.frontpage')
+
+    # Exclude from the list the organization that the user cannot apply for:
+    # - organization for which the user is already a member
+    # - organization for which the user has already applied
+    available_organization = Organization.objects \
+        .exclude(name__in=request.user.groups.values_list('name', flat=True)) \
+        .exclude(name__in=OrganizationApplication.objects.filter(
+            user=request.user).values_list('organization__name', flat=True))
+
+    # Check if the edit form has been submitted.
+    if request.method == "POST":
+        # If so, bind the creation form to HTTP POST values.
+        form = OrganizationApplicationForm(available_organization, request.POST)
+        # Check if the form has validated successfully.
+        if form.is_valid():
+            organization = form.cleaned_data['organization']
+
+            if OrganizationApplication.objects.filter(
+                    user=request.user, organization=organization).count() != 0:
+                messages.success(request, _('An older application of yours for '
+                    'organization "%s" is still pending.') % (organization.name,))
+            else:
+                new_object = OrganizationApplication(user=request.user,
+                    organization=organization)
+                new_object.save()
+
+                # Send a notification email to the relevant organization managers/superusers
+                emails = []
+                # Find out the relevant group managers' emails
+                for org_manager in organization.get_managers():
+                    emails.append(org_manager.email)
+                # Find out the superusers' emails
+                for superuser in User.objects.filter(is_superuser=True):
+                    emails.append(superuser.email)
+                # Render notification email template with correct values.
+                data = {'organization': organization.name,
+                  'shortname': request.user,
+                  'confirmation_url': '{0}/admin/accounts/organizationapplication/'.format(
+                    DJANGO_URL)}
+                try:
+                    # Send out notification email to the organization managers and superusers
+                    send_mail('New organization membership request',
+                        render_to_string('accounts/notification_organization_managers_application.email', data),
+                        'no-reply@meta-share.eu', emails, fail_silently=False)
+                except: #SMTPException:
+                    # If the email could not be sent successfully, tell the user
+                    # about it.
+                    messages.error(request,
+                      "There was an error sending out the request email " \
+                      "for your organization application.")
+                else:
+                    messages.success(request, _('You have successfully ' \
+                        'applied for organization "%s".') % (organization.name,))
+
+            # Redirect the user to the edit profile page.
+            return redirect('metashare.views.edit_profile')
+
+    # Otherwise, render a new OrganizationApplicationForm instance
+    else:
+        # Check whether there is an organization the user can apply for.
+        if available_organization.count() == 0:
+            # If there is no organization created yet, send an error message.
+            messages.error(request, _('There are no organizations in the '
+                'database, yet, for which you could apply. Please ask the '
+                'system administrator to create one.'))
+            # Redirect the user to the edit profile page.
+            return redirect('metashare.views.edit_profile')
+        
+        form = OrganizationApplicationForm(available_organization)
+
+    dictionary = {'title': 'Apply for organization membership', 'form': form}
+    return render_to_response('accounts/organization_application.html',
                         dictionary, context_instance=RequestContext(request))
 
 

@@ -1,0 +1,9 @@
+Dear organization manager,
+
+We have received an application to your organization "{{ organization }}"
+from the META-SHARE user account "{{ shortname }}".
+
+You can confirm or reject that application by going to the following page in the administration section:
+- {{ confirmation_url }}
+
+Best regards
