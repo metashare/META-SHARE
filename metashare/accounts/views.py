@@ -110,7 +110,7 @@ def create(request):
             # Render confirmation email template with correct values.
             data = {'firstname': _user.first_name,
               'lastname': _user.last_name,
-              'shortname': _user.username,
+              'shortname': _user.username, 'node_url': DJANGO_URL,
               'confirmation_url': '{0}/accounts/confirm/{1}/'.format(
                 DJANGO_URL, new_object.uuid)}
             email = render_to_string('accounts/confirmation.email', data)
