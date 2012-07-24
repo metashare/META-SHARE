@@ -1455,17 +1455,6 @@ class EditorGroupApplicationTests(TestCase):
         self.assertNotContains(response, '{}</option>'.format(self.test_editor_group),
           msg_prefix='expected the system not to propose the application to a group \
           the user already applied for.')
-        
-    def test_cannot_apply_a_group_without_manager(self):
-        """
-        Verifies that a user cannot apply to a group without a manager
-        """
-        client = Client()
-        client.login(username='normaluser', password='secret')
-        response = client.get('/{0}accounts/editor_group_application/'.format(DJANGO_BASE), follow=True)
-        self.assertNotContains(response, '{}</option>'.format(self.test_editor_group3),
-          msg_prefix='expected the system not to propose the application to a group \
-          without a manager.')
 
     def test_cannot_access_the_form_when_no_group_available(self):
         """
@@ -1657,17 +1646,6 @@ class OrganizationApplicationTests(TestCase):
         self.assertNotContains(response, '{}</option>'.format(self.test_organization),
           msg_prefix='expected the system not to propose the application to an organization \
           the user already applied for.')
-        
-    def test_cannot_apply_an_organization_without_manager(self):
-        """
-        Verifies that a user cannot apply to an organization without a manager
-        """
-        client = Client()
-        client.login(username='normaluser', password='secret')
-        response = client.get('/{0}accounts/organization_application/'.format(DJANGO_BASE), follow=True)
-        self.assertNotContains(response, '{}</option>'.format(self.test_organization3),
-          msg_prefix='expected the system not to propose the application to an organization \
-          without a manager.')
 
     def test_cannot_access_the_form_when_no_organization_available(self):
         """
