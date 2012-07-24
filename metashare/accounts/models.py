@@ -7,7 +7,6 @@ import logging
 from uuid import uuid1
 
 from django.contrib.auth.models import User, Group
-from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.db import models
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
@@ -231,10 +230,6 @@ class UserProfile(models.Model):
         if not self.user:
             super(UserProfile, self).delete(*args, **kwargs)
 
-# cfedermann: of course, we will now also have to call synchronise methods for
-#             delete() calls.  For this, we have to create receivers listening
-#             to the post_delete signal.  Again, this has to be tested!
-
     def has_manager_permission(self, editor_group=None):
         """
         Return whether the user profile has permission to manage the given
@@ -291,32 +286,3 @@ def create_profile(sender, instance, created, **kwargs):
     else:
         profile = instance.get_profile()
         profile.save()
-
-# cfedermann: the following code allows to catch the m2m update signals, i.e.
-#             pre/post_{clear,add,remove}.
-#
-#from django.db.models.signals import m2m_changed
-#
-#def do_something_with_permissions(sender, instance, action, **kwargs):
-#    """
-#    We want to use the "post_" actions: post_add, post_remove, post_clear.
-#    - https://docs.djangoproject.com/en/dev/ref/signals/ \
-#      #django.db.models.signals.m2m_changed
-#    """
-#    LOGGER.debug('Action: {0} for instance: {1}'.format(action, instance))
-#
-#m2m_changed.connect(do_something_with_permissions, sender=User.user_permissions.through)
-
-@receiver(user_logged_in)
-def add_uuid_to_session(sender, request, user, **kwargs):
-    """
-    Add the logged in user's UUID to the session object.
-    """
-    request.session['METASHARE_UUID'] = user.get_profile().uuid
-
-@receiver(user_logged_out)
-def del_uuid_from_session(sender, request, user, **kwargs):
-    """
-    Delete the current UUID from the session object.
-    """
-    request.session['METASHARE_UUID'] = None

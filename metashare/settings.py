@@ -49,7 +49,7 @@ STATS_SERVER_URL = "http://metastats.fbk.eu/"
 
 
 # Import local settings, i.e., DEBUG, TEMPLATE_DEBUG, TIME_ZONE,
-# SECRET_KEY, DATABASE_* settings and ADMINS.
+# DATABASE_* settings, ADMINS, etc.
 from local_settings import *
 
 # If STORAGE_PATH does not exist, try to create it and halt if not possible.
@@ -77,9 +77,6 @@ if not DJANGO_BASE.strip().endswith('/'):
 
 if DJANGO_BASE.strip().startswith('/'):
     DJANGO_BASE = DJANGO_BASE.strip()[1:]
-
-# Defines the maximal lifetime for SSO tokens in seconds.
-MAX_LIFETIME_FOR_SSO_TOKENS = 30
 
 # Pagination settings for this django project.
 PAGINATION_ITEMS_PER_PAGE = 50
@@ -156,7 +153,6 @@ AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'metashare.accounts.auth.SingleSignOnTokenBackend',
 )
 
 INSTALLED_APPS = (

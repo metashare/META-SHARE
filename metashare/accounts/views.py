@@ -3,36 +3,25 @@ Project: META-SHARE prototype implementation
  Author: Christian Federmann <cfedermann@dfki.de>
 """
 import logging
-from Crypto.PublicKey import RSA
-from datetime import datetime
-# pylint: disable-msg=E0611
-from hashlib import md5
 from smtplib import SMTPException
-from time import mktime
-from traceback import format_exc
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User, Group, Permission
-from django.contrib.auth import authenticate, login
+
 from django.contrib import messages
-from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
+from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.core.mail import send_mail
-from django.core import serializers
-from django.http import HttpResponse, HttpResponseBadRequest, \
-  HttpResponseForbidden
 from django.shortcuts import render_to_response, get_object_or_404, redirect
-from django.template.loader import render_to_string
 from django.template import RequestContext
+from django.template.loader import render_to_string
 from django.utils.translation import ugettext as _
 
-from metashare.accounts.forms import RegistrationRequestForm, \
-  ResetRequestForm, UserProfileForm, EditorGroupApplicationForm, \
-  AddDefaultEditorGroupForm, RemoveDefaultEditorGroupForm, \
-  OrganizationApplicationForm
+from metashare.accounts.forms import RegistrationRequestForm, ResetRequestForm, \
+    UserProfileForm, EditorGroupApplicationForm, AddDefaultEditorGroupForm, \
+    RemoveDefaultEditorGroupForm, OrganizationApplicationForm
 from metashare.accounts.models import RegistrationRequest, ResetRequest, \
-  UserProfile, EditorGroupApplication, EditorGroupManagers, EditorGroup, \
-  OrganizationApplication, OrganizationManagers, Organization
-from metashare.settings import SSO_SECRET_KEY, DJANGO_URL, \
-  PRIVATE_KEY_PATH, LOG_LEVEL, LOG_HANDLER, MAX_LIFETIME_FOR_SSO_TOKENS
+    EditorGroupApplication, EditorGroupManagers, EditorGroup, \
+    OrganizationApplication, OrganizationManagers, Organization
+from metashare.settings import DJANGO_URL, LOG_LEVEL, LOG_HANDLER
 
 
 # Setup logging support.
@@ -58,7 +47,6 @@ def confirm(request, uuid):
     user.backend = 'django.contrib.auth.backends.ModelBackend'
     user.save()
     login(request, user)
-    request.session['METASHARE_UUID'] = uuid
 
     # Delete registration request instance.
     registration_request.delete()
@@ -154,10 +142,6 @@ def edit_profile(request):
     """
     Edits user account profile for the logged in user.
     """
-    # The "virtual" MetaShareUser cannot edit profile information!
-    if request.user.username == 'MetaShareUser':
-        return redirect('metashare.views.frontpage')
-    
     # Get UserProfile instance corresponding to the current user.
     profile = request.user.get_profile()
 
@@ -223,10 +207,6 @@ def editor_group_application(request):
     """
     Apply for Editor Groups membership.
     """
-    # The "virtual" MetaShareUser cannot apply for membership
-    if request.user.username == 'MetaShareUser':
-        return redirect('metashare.views.frontpage')
-
     # Exclude from the list the editor groups the user cannot apply for:
     # - editor groups for which the user is already a member
     # - editor groups for which the user has already applied
@@ -306,10 +286,6 @@ def add_default_editor_groups(request):
     """
     Add default Editor Groups.
     """
-    # The "virtual" MetaShareUser cannot add default editor group
-    if request.user.username == 'MetaShareUser':
-        return redirect('metashare.views.frontpage')
-
     # Get UserProfile instance corresponding to the current user.
     profile = request.user.get_profile()
 
@@ -359,10 +335,6 @@ def remove_default_editor_groups(request):
     """
     Remove default Editor Groups.
     """
-    # The "virtual" MetaShareUser cannot remove default editor group
-    if request.user.username == 'MetaShareUser':
-        return redirect('metashare.views.frontpage')
-
     # Get UserProfile instance corresponding to the current user.
     profile = request.user.get_profile()
 
@@ -411,10 +383,6 @@ def organization_application(request):
     """
     Apply for Organization membership.
     """
-    # The "virtual" MetaShareUser cannot apply for membership
-    if request.user.username == 'MetaShareUser':
-        return redirect('metashare.views.frontpage')
-
     # Exclude from the list the organization that the user cannot apply for:
     # - organization for which the user is already a member
     # - organization for which the user has already applied
@@ -487,228 +455,6 @@ def organization_application(request):
     dictionary = {'title': 'Apply for organization membership', 'form': form}
     return render_to_response('accounts/organization_application.html',
                         dictionary, context_instance=RequestContext(request))
-
-
-def update(request):
-    """
-    Updates the user information with the given serialized data.
-    
-    This method only accepts encrypted data sent via HTTP POST and raises an
-    AssertionError in case of other connections.  The received data is decoded
-    using the local private key and from the decrypted data a list of User and
-    UserProfile is de-serialized.  These data are then used to update the user
-    information in the Django database.
-    
-    Please note that permissions and groups for User objects are NOT sync'ed
-    by this method as they cannot be transmitted reliably in a post_save hook.
-    """
-    assert(request.method == "POST"), "Requires a HTTP POST connection."
-    
-    # First, we extract the message from the HTTP POST QueryDict.
-    _message = request.POST.get('message', None)
-    
-    # If there is no message, this is a bad request.
-    if not _message:
-        return HttpResponseBadRequest()
-    
-    # Otherwise, we have to eval() the message to re-construct the list.
-    else:
-        _message = eval(_message)
-    
-    # Load private key from PRIVATE_KEY_PATH file.
-    with open(PRIVATE_KEY_PATH, 'r') as pem:
-        my_private_pem = pem.read()
-    
-    # Create private key for local django instance.
-    my_private_key = RSA.importKey(my_private_pem)
-    
-    # Reconstruct original message from encrypted chunks.
-    _chunks = []
-    for _chunk in _message:
-        _chunks.append(my_private_key.decrypt(_chunk))
-    message = ''.join(_chunks)
-    
-    # Extract profiles and user instances from the serialized message.
-    profiles = []
-    users = []
-    
-    # We have to pass the DeserializedObject instances here in order to
-    # preserve the m2m_data dictionary which is required to synchronize
-    # user groups and user_permissions.
-    try:
-        for obj in serializers.deserialize("xml", message):
-            if isinstance(obj.object, UserProfile):
-                profiles.append(obj)
-            
-            elif isinstance(obj.object, User):
-                users.append(obj)
-    
-    except:
-        LOGGER.error(format_exc())
-        return HttpResponseBadRequest(format_exc(), mimetype='text/plain')
-    
-    # We assume profiles and user instances to be in order, e.g. profiles[0]
-    # belongs to users[0], etc.  For django 1.3, this seems to be working.
-    for profile, user in zip(profiles, users):
-        _create_or_update_user_data(profile, user)
-    
-    # Return a minimal HTTP 200 OK response.
-    return HttpResponse("OK", mimetype='text/plain')
-
-def _create_or_update_user_data(profile, user):
-    """
-    Updates or creates the given user data.
-    """
-    # Check if there exists a local profile for the given uuid.
-    local_profile = UserProfile.objects.filter(uuid=profile.object.uuid)
-    
-    # Also, check if there exists a local user with matching email, username.
-    local_user = User.objects.filter(email=user.object.email,
-      username=user.object.username)
-    
-    # We are assuming that a UserProfile and the related User must co-exist.
-    # Otherwise, something wrong must have happened and we raise an exception.
-    if not local_profile:
-        assert(not local_user), "Stale user without attached profile found!"
-        
-        # If both the User and corresponding UserProfile are new, all we have
-        # to do is to save them into the django database.
-        profile.save()
-        user.save()
-        
-        # We also have to make sure that the user relation is correct.
-        profile.user = user
-        profile.save()
-    
-    # If a local UserProfile has been found, we also expect the local User
-    # instance to be available. Otherwise, we raise an exception.
-    else:
-        assert(local_user), "Stale profile without attached user found!"
-        
-        # Convert QuerySets to single UserProfile and User instances.
-        local_profile = local_profile[0]
-        local_user = local_user[0]
-        
-        # Verify that the UserProfile and User instances are connected.
-        assert(local_profile.user == local_user), "Disconnected user data!"
-        
-        # Check if the local profile is more recent than the received version.
-        if local_profile.modified >= profile.object.modified:
-            # We can return without any further changes.
-            LOGGER.info('Local profile is more recent than received version.')
-            return
-        
-        # Copy received profile data to local profile instance.
-        for __field__ in profile.object.__synchronized_fields__:
-            _value = getattr(profile.object, __field__, None)
-            LOGGER.info("Setting UserProfile.{0} = {1}.".format(__field__,
-              _value))
-            setattr(local_profile, __field__, _value)
-        
-        # Save updated local UserProfile instance.
-        local_profile.save()
-        
-        # Copy received user attributes to local user instance.
-        __synchronized_user_fields__ = ('username', 'first_name', 'last_name',
-          'email', 'password', 'is_active', 'is_staff', 'is_superuser',
-          'last_login', 'date_joined')
-        for __field__ in __synchronized_user_fields__:
-            _value = getattr(user.object, __field__)
-            LOGGER.info("Setting User.{0} = {1}.".format(__field__, _value))
-            setattr(local_user, __field__, _value)
-        
-        # Save updated local User instance.
-        local_user.save()
-
-def permissions(request):
-    """
-    Updates groups and permissions for a list of serialized User instances.
-    """
-    assert(request.method == "POST"), "Requires a HTTP POST connection."
-    
-    # First, we extract the message from the HTTP POST QueryDict.
-    _message = request.POST.get('message', None)
-    
-    # If there is no message, this is a bad request.
-    if not _message:
-        return HttpResponseBadRequest()
-    
-    # Otherwise, we have to eval() the message to re-construct the list.
-    else:
-        _message = eval(_message)
-    
-    # Load private key from PRIVATE_KEY_PATH file.
-    with open(PRIVATE_KEY_PATH, 'r') as pem:
-        my_private_pem = pem.read()
-    
-    # Create private key for local django instance.
-    my_private_key = RSA.importKey(my_private_pem)
-    
-    # Reconstruct original message from encrypted chunks.
-    _chunks = []
-    for _chunk in _message:
-        _chunks.append(my_private_key.decrypt(_chunk))
-    message = ''.join(_chunks)
-    
-    # Extract user instances from the serialized message.
-    users = []
-    
-    # We have to pass the DeserializedObject instances here in order to
-    # preserve the m2m_data dictionary which is required to synchronize
-    # user groups and user_permissions.
-    try:
-        for obj in serializers.deserialize("xml", message):
-            if isinstance(obj.object, User):
-                users.append(obj)
-    
-    except:
-        LOGGER.error(format_exc())
-        return HttpResponseBadRequest(format_exc(), mimetype='text/plain')
-    
-    # Loop over the given User objects and update the corresponding groups and
-    # permission settings for each of these.
-    for user in users:
-        # Check if there exists a local user with matching email, username.
-        local_user = User.objects.filter(email=user.object.email,
-          username=user.object.username)
-        
-        if not local_user:
-            LOGGER.error('No such user: {0}.'.format(user.object.username))
-            continue
-        
-        # Copy user groups and permissions wherever possible.
-        if user.m2m_data.has_key('groups'):
-            # We overwrite local groups completely, hence first we erase them.
-            local_user.groups.clear()
-            
-            # Loop over all group_ids inside the many-to-many group data.
-            for group_id in user.m2m_data['groups']:
-                try:
-                    # If there exists a group with this group_id, add it.
-                    group = Group.objects.get(pk=group_id)
-                    LOGGER.info('Group: {0}'.format(group))
-                    local_user.groups.add(group)
-                
-                except (ObjectDoesNotExist, MultipleObjectsReturned):
-                    # We simply ignore non-existing groups for the moment.
-                    continue
-        
-        # Same routine for user permissions.
-        if user.m2m_data.has_key('user_permissions'):
-            # Again, we first erase old, local permissions.
-            local_user.user_permissions.clear()
-            
-            # Then, we loop over all many-to-many user permissions.
-            for permission_id in user.m2m_data['user_permissions']:
-                try:
-                    # If there exists a permission matching the id, add it.
-                    permission = Permission.objects.get(pk=permission_id)
-                    LOGGER.info('Permission: {0}'.format(permission))
-                    local_user.user_permissions.add(permission)
-                
-                except (ObjectDoesNotExist, MultipleObjectsReturned):
-                    # We also ignore non-existing permissions for the moment.
-                    continue
 
 def reset(request, uuid=None):
     """
@@ -816,69 +562,6 @@ def reset(request, uuid=None):
     messages.success(request,
       "We have re-activated your user account and sent you an email with " \
       "your personal password which allows you to login to the website.")
-    
-    # Redirect the user to the front page.
-    return redirect('metashare.views.frontpage')
-
-def _compute_sso_token(uuid, timestamp=None):
-    """
-    Returns a triple containing (uuid, timestamp, token) for SSO.
-    """
-    # If no timestamp is given, we use the current time.
-    if not timestamp:
-        # Convert time tuple to timestamp String.
-        timestamp = str(int(mktime(datetime.now().timetuple())))
-    
-    # Create MD5 hash instance and fill in uuid, timestamp, SSO secret key.
-    _md5 = md5()
-    _md5.update('{0}{1}{2}'.format(uuid, timestamp, SSO_SECRET_KEY))
-    
-    # Compute SSO token in hexadecimal form.
-    token = _md5.hexdigest()
-    
-    # Return triple containing valid SSO information for the given uuid.
-    # Note that this information will become invalid after a time interval of
-    # MAX_LIFETIME_FOR_SSO_TOKENS seconds has expired.  If you need more time,
-    # you will have to used a future-based timestamp...
-    return (uuid, timestamp, token)
-
-def _check_sso_token(uuid, timestamp, token):
-    """
-    Verifies the given SSO token wrt. the given uuid and timestamp.
-    """
-    # Compute timedelta between now and the given timestamp.
-    _delta =  datetime.now() - datetime.fromtimestamp(int(timestamp))
-
-    # Is the timestamp outdated? Compare to MAX_LIFETIME_FOR_SSO_TOKENS.
-    if abs(_delta.total_seconds()) >= MAX_LIFETIME_FOR_SSO_TOKENS:
-        LOGGER.info('Outdated SSO token used!')
-        return False
-    
-    # Re-compute the SSO token wrt. the given uuid and timestamp.
-    dummy1, dummy2, recomputed_token = _compute_sso_token(uuid, timestamp)
-    
-    # Check if token and recomputed_token are identical.
-    return token == recomputed_token
-
-def sso(request, uuid, timestamp, token):
-    """
-    Verifies the given SSO token and logs in the given user on success.
-    """
-    # Try to authenticate given the SSO token, UUID and timestamp.
-    # Falls back to the SingleSignOnTokenBackend class for authentication.
-    user = authenticate(uuid=uuid, timestamp=timestamp, token=token)
-    
-    # If authentication is not successful, access has to be forbidden!
-    if not user:
-        return HttpResponseForbidden('Forbidden')
-    
-    # Login user and update session to include corresponding UUID.
-    login(request, user)
-    request.session['METASHARE_UUID'] = uuid
-    
-    # CHECK: check what are the best session settings for META-SHARE?
-    #       Do we want to use SESSION_EXPIRE_AT_BROWSER_CLOSE?
-    # - http://docs.djangoproject.com/en/dev/topics/http/sessions/#settings
     
     # Redirect the user to the front page.
     return redirect('metashare.views.frontpage')
