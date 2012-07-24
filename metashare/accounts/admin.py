@@ -40,9 +40,9 @@ class UserProfileAdmin(admin.ModelAdmin):
     """
     Administration interface for user profiles.
     """
-    list_display = ('user', 'modified', 'birthdate', 'affiliation',
-      'position', 'homepage', '_editor_group_display', '_editor_group_managers_display',
-      '_organization_display', '_organization_managers_display')
+    list_display = ('user', 'modified', 'birthdate', 'affiliation', 'position',
+      'homepage', '_editor_group_display', '_managed_editor_groups_display',
+      '_organization_display', '_managed_organizations_display')
     search_fields = ('user__username', 'user__first_name', 'user__last_name',
       'birthdate', 'affiliation', 'position', 'homepage')
 
@@ -57,16 +57,17 @@ class UserProfileAdmin(admin.ModelAdmin):
 
     _editor_group_display.short_description = _('Editor groups')
 
-    def _editor_group_managers_display(self, obj):
+    def _managed_editor_groups_display(self, obj):
         """
-        Returns a string representing a list of the editor groups managers of a user
-        profile.
+        Returns a string representing a list of the editor groups that the user
+        manages.
         """
-        return ', '.join([mgr_group.name for mgr_group
+        return ', '.join([mgr_group.managed_group.name for mgr_group
             in EditorGroupManagers.objects.filter(name__in=
                             obj.user.groups.values_list('name', flat=True))])
 
-    _editor_group_managers_display.short_description = _('Editor Group Managers')
+    _managed_editor_groups_display.short_description = \
+        _('Managed Editor Groups')
 
     def _organization_display(self, obj):
         """
@@ -79,16 +80,17 @@ class UserProfileAdmin(admin.ModelAdmin):
 
     _organization_display.short_description = _('Organizations')
 
-    def _organization_managers_display(self, obj):
+    def _managed_organizations_display(self, obj):
         """
-        Returns a string representing a list of the the organization managers of a user
-        profile.
+        Returns a string representing a list of the organization that the user
+        manages.
         """
-        return ', '.join([org_mgr_group.name for org_mgr_group
-            in OrganizationManagers.objects.filter(name__in=
-                            obj.user.groups.values_list('name', flat=True))])
+        return ', '.join([org_mgr_group.managed_organization.name
+                for org_mgr_group in OrganizationManagers.objects.filter(
+                    name__in=obj.user.groups.values_list('name', flat=True))])
 
-    _organization_managers_display.short_description = _('Organization Managers')
+    _managed_organizations_display.short_description = \
+        _('Managed organizations')
 
 
 class EditorGroupAdmin(admin.ModelAdmin):
@@ -271,7 +273,7 @@ class EditorGroupApplicationAdmin(admin.ModelAdmin):
 
                 # Render notification email template with correct values.
                 data = {'editor_group': req.editor_group,
-                  'shortname': req.user.get_full_name }
+                  'shortname': req.user.get_full_name() }
                 try:
                     # Send out notification email to the user
                     send_mail('Application accepted',
@@ -285,8 +287,8 @@ class EditorGroupApplicationAdmin(admin.ModelAdmin):
                                    "out an application acceptance e-mail."))
                 else:
                     messages.success(request, _('You have successfully ' \
-                      'accepted "%s" in the editor group "%s".') % (req.user.get_full_name,
-                      req.editor_group,))
+                        'accepted "%s" as member of the editor group "%s".')
+                            % (req.user.get_full_name(), req.editor_group,))
 
         if _total_groups != _accepted_groups:
             messages.warning(request, _('Successfully accepted %(accepted)d of '
@@ -322,7 +324,7 @@ class EditorGroupApplicationAdmin(admin.ModelAdmin):
         """
         # Render notification email template with correct values.
         data = {'editor_group': obj.editor_group,
-          'shortname': obj.user.get_full_name }
+          'shortname': obj.user.get_full_name() }
         try:
             # Send out notification email to the user
             send_mail('Application turned down', render_to_string('accounts/'
@@ -336,7 +338,7 @@ class EditorGroupApplicationAdmin(admin.ModelAdmin):
                            "e-mail about turning down the application."))
         else:
             messages.success(request, _('You have successfully turned down "%s" ' \
-              'from the editor group "%s".') % (obj.user.get_full_name,
+              'from the editor group "%s".') % (obj.user.get_full_name(),
                                                 obj.editor_group,))
 
         super(EditorGroupApplicationAdmin, self).log_deletion(request, obj, object_repr)        
@@ -509,8 +511,8 @@ class EditorGroupManagersAdmin(admin.ModelAdmin):
                                       },
                                       context_instance=RequestContext(request))
         else:
-            self.message_user(request,
-                _('You need to be a superuser to add a user to this editor group managers.'))
+            self.message_user(request, _('You need to be a superuser to add ' \
+                                    'a user to these editor group managers.'))
             return HttpResponseRedirect(request.get_full_path())
 
     add_user_to_editor_group_managers.short_description = _("Add users to selected editor group managers")
@@ -519,7 +521,8 @@ class EditorGroupManagersAdmin(admin.ModelAdmin):
         form = None
         if request.user.is_superuser:
             if 'cancel' in request.POST:
-                self.message_user(request, _('Cancelled removing users from the editor group managers.'))
+                self.message_user(request, _('Cancelled removing users from ' \
+                                             'editor group managers.'))
                 return
             elif 'remove_user_profile_from_editor_group_managers' in request.POST:
                 objs_up = UserProfile.objects.filter(user__is_active=True)
@@ -529,7 +532,8 @@ class EditorGroupManagersAdmin(admin.ModelAdmin):
                     for userprofile in userprofiles:
                         for obj in queryset:
                             userprofile.user.groups.remove(obj)
-                    self.message_user(request, _('Successfully removed users from editor_group managers.'))
+                    self.message_user(request, _('Successfully removed users ' \
+                                                 'from editor group managers.'))
                     return HttpResponseRedirect(request.get_full_path())
     
             if not form:
@@ -545,8 +549,8 @@ class EditorGroupManagersAdmin(admin.ModelAdmin):
                                       },
                                       context_instance=RequestContext(request))
         else:
-            self.message_user(request,
-                _('You need to be a superuser to remove a user to this editor group managers.'))
+            self.message_user(request, _('You need to be a superuser to ' \
+                            'remove a user from these editor group managers.'))
             return HttpResponseRedirect(request.get_full_path())
 
     remove_user_from_editor_group_managers.short_description = _("Remove users from selected editor group managers")
@@ -708,7 +712,7 @@ class OrganizationApplicationAdmin(admin.ModelAdmin):
 
                 # Render notification email template with correct values.
                 data = {'organization': req.organization,
-                  'shortname': req.user.get_full_name }
+                  'shortname': req.user.get_full_name() }
                 try:
                     # Send out notification email to the user
                     send_mail('Application accepted',
@@ -722,8 +726,8 @@ class OrganizationApplicationAdmin(admin.ModelAdmin):
                                    "out an application acceptance e-mail."))
                 else:
                     messages.success(request, _('You have successfully ' \
-                      'accepted "%s" in the organization "%s".') % (req.user.get_full_name,
-                      req.organization,))
+                          'accepted "%s" as member of the organization "%s".')
+                              % (req.user.get_full_name(), req.organization,))
 
         if _total_groups != _accepted_groups:
             messages.warning(request, _('Successfully accepted %(accepted)d of '
@@ -759,7 +763,7 @@ class OrganizationApplicationAdmin(admin.ModelAdmin):
         """
         # Render notification email template with correct values.
         data = {'organization': obj.organization,
-          'shortname': obj.user.get_full_name }
+          'shortname': obj.user.get_full_name() }
         try:
             # Send out notification email to the user
             send_mail('Application turned down', render_to_string('accounts/'
@@ -772,9 +776,9 @@ class OrganizationApplicationAdmin(admin.ModelAdmin):
             messages.error(request, _("There was an error sending out an "
                            "e-mail about turning down the application."))
         else:
-            messages.success(request, _('You have successfully turned down "%s" ' \
-              'from the organization "%s".') % (obj.user.get_full_name,
-                                                obj.organization,))
+            messages.success(request, _('You have turned down the application' \
+                    ' of "%s" for membership in the organization "%s".')
+                            % (obj.user.get_full_name(), obj.organization,))
 
         super(OrganizationApplicationAdmin, self).log_deletion(request, obj, object_repr)        
 
@@ -898,7 +902,8 @@ class OrganizationManagersAdmin(admin.ModelAdmin):
     @staticmethod
     def get_suggested_organization_manager_permissions():
         """
-        Returns a list of `Permission`s that all `OrganizationManagers`s should have.
+        Returns a list of `Permission`s that all `OrganizationManagers`s should
+        have.
         """
         result = []
         # add organization application request change/delete permission
@@ -943,8 +948,8 @@ class OrganizationManagersAdmin(admin.ModelAdmin):
                                       },
                                       context_instance=RequestContext(request))
         else:
-            self.message_user(request,
-                _('You need to be a superuser to add a user to this organization managers.'))
+            self.message_user(request, _('You need to be a superuser to add ' \
+                                    'a user to these organization managers.'))
             return HttpResponseRedirect(request.get_full_path())
 
     add_user_to_organization_managers.short_description = _("Add users to selected organization managers")
@@ -979,8 +984,8 @@ class OrganizationManagersAdmin(admin.ModelAdmin):
                                       },
                                       context_instance=RequestContext(request))
         else:
-            self.message_user(request,
-                _('You need to be a superuser to remove a user to this organization managers.'))
+            self.message_user(request, _('You need to be a superuser to ' \
+                            'remove a user from these organization managers.'))
             return HttpResponseRedirect(request.get_full_path())
 
     remove_user_from_organization_managers.short_description = _("Remove users from selected organization managers")

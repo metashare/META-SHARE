@@ -770,8 +770,8 @@ class EditorTest(TestCase):
 
     def test_only_superuser_sees_editor_group_managers_list(self):
         """
-        Verifies that only a superuser sees the eeditor group managers list (with all
-        editor group managers).
+        Verifies that only a superuser sees the editor group managers list (with
+        all editor group managers).
         """
         client = _client_with_user_logged_in(EditorTest.superuser_login)
         response = client.get('{}accounts/editorgroupmanagers/'.format(ADMINROOT))
@@ -1565,7 +1565,7 @@ class OrganizationApplicationTests(TestCase):
             OrganizationManagers.objects.create(name='test_organization_managers2',
                                         managed_organization=self.test_organization2)
 
-        test_utils.create_organizer_user('organizeruser',
+        test_utils.create_organization_member('organizeruser',
             'organizer@example.com', 'secret', (self.test_organization,))
         test_utils.create_organization_manager_user(
             'organizationmanageruser', 'organizationmanager@example.com', 'secret',

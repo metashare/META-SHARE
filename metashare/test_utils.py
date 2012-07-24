@@ -130,19 +130,21 @@ def create_editor_user(user_name, email, password, groups=None):
 
 def create_organization_manager_user(user_name, email, password, groups=None):
     """
-    Creates a new managing organization user account with the given credentials and
-    organization memberships.
+    Creates a new user account with the given credentials and organization group
+    membership.
+    
+    The user will also have suitable permissions of an organization manager.
     """
-    result = create_organizer_user(user_name, email, password, groups)
+    result = create_organization_member(user_name, email, password, groups)
     for _perm in OrganizationManagersAdmin.get_suggested_organization_manager_permissions():
         result.user_permissions.add(_perm)
     return result
 
 
-def create_organizer_user(user_name, email, password, groups=None):
+def create_organization_member(user_name, email, password, groups=None):
     """
-    Creates a new organizer user account with the given credentials and group
-    memberships.
+    Creates a new user account with the given credentials which is member of the
+    given organization groups.
     """
     result = User.objects.create_user(user_name, email, password)
     result.is_staff = True

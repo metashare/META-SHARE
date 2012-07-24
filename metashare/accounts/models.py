@@ -134,6 +134,9 @@ class EditorGroupManagers(Group):
     # the `EditorGroup` which is managed by members of this `EditorGroupManagers`
     managed_group = models.OneToOneField(EditorGroup)
 
+    class Meta:
+        verbose_name = "editor group managers group"
+
     def get_members(self):
         return User.objects.filter(groups__name=self.name)
 
@@ -175,6 +178,9 @@ class OrganizationManagers(Group):
     """
     # the `Organization` which is managed by members of this `OrganizationManagers`
     managed_organization = models.OneToOneField(Organization)
+
+    class Meta:
+        verbose_name = "organization managers group"
 
     def get_members(self):
         return User.objects.filter(groups__name=self.name)
