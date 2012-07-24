@@ -230,14 +230,10 @@ def editor_group_application(request):
     # Exclude from the list the editor groups the user cannot apply for:
     # - editor groups for which the user is already a member
     # - editor groups for which the user has already applied
-    # - editor groups that are not handled by manager
     available_editor_groups = EditorGroup.objects \
         .exclude(name__in=request.user.groups.values_list('name', flat=True)) \
         .exclude(name__in=EditorGroupApplication.objects.filter(
-            user=request.user).values_list('editor_group__name', flat=True)) \
-        .filter(name__in=EditorGroupManagers.objects.all().filter(
-                name__in=User.objects.values_list('groups__name', flat=True)) \
-            .values_list('managed_group__name', flat=True))
+            user=request.user).values_list('editor_group__name', flat=True))
 
     # Check if the edit form has been submitted.
     if request.method == "POST":
@@ -419,17 +415,13 @@ def organization_application(request):
     if request.user.username == 'MetaShareUser':
         return redirect('metashare.views.frontpage')
 
-    # Exclude from the list the organization the user cannot apply for:
+    # Exclude from the list the organization that the user cannot apply for:
     # - organization for which the user is already a member
     # - organization for which the user has already applied
-    # - organization that are not handled by organization manager
     available_organization = Organization.objects \
         .exclude(name__in=request.user.groups.values_list('name', flat=True)) \
         .exclude(name__in=OrganizationApplication.objects.filter(
-            user=request.user).values_list('organization__name', flat=True)) \
-        .filter(name__in=OrganizationManagers.objects.all().filter(
-                name__in=User.objects.values_list('groups__name', flat=True)) \
-            .values_list('managed_organization__name', flat=True))
+            user=request.user).values_list('organization__name', flat=True))
 
     # Check if the edit form has been submitted.
     if request.method == "POST":
