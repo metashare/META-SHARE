@@ -211,7 +211,7 @@ def edit_profile(request):
                 in EditorGroupManagers.objects.filter(name__in=profile.user.groups.values_list('name', flat=True))],
         'organizations_member_of': [orga.name for orga
                 in Organization.objects.filter(name__in=profile.user.groups.values_list('name', flat=True))],
-        'organization_managers_member_of': [org_mgrs.name for org_mgs
+        'organization_managers_member_of': [org_mgrs.name for org_mgrs
                 in OrganizationManagers.objects.filter(name__in=profile.user.groups.values_list('name', flat=True))]}
     
     return render_to_response('accounts/edit_profile.html', dictionary,
