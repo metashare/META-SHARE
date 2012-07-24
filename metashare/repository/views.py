@@ -24,14 +24,17 @@ from haystack.views import FacetedSearchView
 
 from metashare.repository.editor.resource_editor import has_edit_permission
 from metashare.repository.forms import LicenseSelectionForm, \
-    LicenseAgreementForm, DownloadContactForm
+    LicenseAgreementForm, DownloadContactForm, MORE_FROM_SAME_CREATORS, \
+    MORE_FROM_SAME_PROJECTS
 from metashare.repository.models import licenceInfoType_model, resourceInfoType_model
 from metashare.repository.search_indexes import resourceInfoType_modelIndex
 from metashare.settings import LOG_LEVEL, LOG_HANDLER, MEDIA_URL, DJANGO_URL
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
 from metashare.storage.models import PUBLISHED
-from metashare.recommendations.recommendations import SessionResourcesTracker
+from metashare.recommendations.models import TogetherManager
+from metashare.recommendations.recommendations import SessionResourcesTracker, \
+    Resource
 
 
 MAXIMUM_READ_BLOCK_SIZE = 4096
@@ -451,9 +454,36 @@ def view(request, resource_name=None, object_id=None):
         tracker.add_view(resource, datetime.now())
         request.session['tracker'] = tracker
             
+    # Add recommendations for 'also viewed' resources
+    context['also_viewed'] = \
+        _get_together_recommendations(resource, Resource.VIEW)
+    # Add recommendations for 'also downloaded' resources
+    context['also_downloaded'] = \
+        _get_together_recommendations(resource, Resource.DOWNLOAD)
+    # Add 'more from same' links
+    context['search_rel_projects'] = '{}/repository/search?q={}:{}'.format(
+        DJANGO_URL, MORE_FROM_SAME_PROJECTS, resource.storage_object.identifier)
+    context['search_rel_creators'] = '{}/repository/search?q={}:{}'.format(
+        DJANGO_URL, MORE_FROM_SAME_CREATORS, resource.storage_object.identifier)
+
     # Render and return template with the defined context.
     ctx = RequestContext(request)
     return render_to_response(template, context, context_instance=ctx)
+
+
+def _get_together_recommendations(resource, together_type):
+    '''
+    Returns a list of recommendations of the given `Resource` type for the given
+    resource (as used in the single resource view).
+    '''
+    result = []
+    for res in TogetherManager.getManager(together_type) \
+            .getTogetherList(resource, 0):
+        res_item = {}
+        res_item['name'] = res.__unicode__()
+        res_item['url'] = res.get_absolute_url()
+        result.append(res_item)
+        return result
 
 
 class MetashareFacetedSearchView(FacetedSearchView):
