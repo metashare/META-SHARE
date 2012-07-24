@@ -486,7 +486,7 @@ class EditorGroupManagersAdmin(admin.ModelAdmin):
                 self.message_user(request, _('Cancelled adding users to the editor group managers.'))
                 return
             elif 'add_user_profile_to_editor_group_managers' in request.POST:
-                objs_up = UserProfile.objects.all()
+                objs_up = UserProfile.objects.filter(user__is_active=True)
                 form = self.UserProfileinEditorGroupManagersForm(objs_up, request.POST)
                 if form.is_valid():
                     userprofiles = form.cleaned_data['users']
@@ -497,7 +497,7 @@ class EditorGroupManagersAdmin(admin.ModelAdmin):
                     return HttpResponseRedirect(request.get_full_path())
     
             if not form:
-                userprofiles = UserProfile.objects.all()
+                userprofiles = UserProfile.objects.filter(user__is_active=True)
                 form = self.UserProfileinEditorGroupManagersForm(choices=userprofiles,
                     initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
             
@@ -522,7 +522,7 @@ class EditorGroupManagersAdmin(admin.ModelAdmin):
                 self.message_user(request, _('Cancelled removing users from the editor group managers.'))
                 return
             elif 'remove_user_profile_from_editor_group_managers' in request.POST:
-                objs_up = UserProfile.objects.all()
+                objs_up = UserProfile.objects.filter(user__is_active=True)
                 form = self.UserProfileinEditorGroupManagersForm(objs_up, request.POST)
                 if form.is_valid():
                     userprofiles = form.cleaned_data['users']
@@ -533,7 +533,7 @@ class EditorGroupManagersAdmin(admin.ModelAdmin):
                     return HttpResponseRedirect(request.get_full_path())
     
             if not form:
-                userprofiles = UserProfile.objects.all()                    
+                userprofiles = UserProfile.objects.filter(user__is_active=True)                    
                 form = self.UserProfileinEditorGroupManagersForm(choices=userprofiles,
                     initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
         
@@ -613,7 +613,7 @@ class OrganizationAdmin(admin.ModelAdmin):
             self.message_user(request, _('Cancelled adding users to the organization.'))
             return
         elif 'add_user_profile_to_organization' in request.POST:
-            objs_up = UserProfile.objects.all()
+            objs_up = UserProfile.objects.filter(user__is_active=True)
             form = self.UserProfileinOrganizationForm(objs_up, request.POST)
             if form.is_valid():
                 userprofiles = form.cleaned_data['users']
@@ -629,7 +629,7 @@ class OrganizationAdmin(admin.ModelAdmin):
                 return HttpResponseRedirect(request.get_full_path())
 
         if not form:
-            userprofiles = UserProfile.objects.all()
+            userprofiles = UserProfile.objects.filter(user__is_active=True)
             form = self.UserProfileinOrganizationForm(choices=userprofiles,
                 initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
         
@@ -650,7 +650,7 @@ class OrganizationAdmin(admin.ModelAdmin):
                 self.message_user(request, _('Cancelled removing users from the organization.'))
                 return
             elif 'remove_user_profile_from_organization' in request.POST:
-                objs_up = UserProfile.objects.all()
+                objs_up = UserProfile.objects.filter(user__is_active=True)
                 form = self.UserProfileinOrganizationForm(objs_up, request.POST)
                 if form.is_valid():
                     userprofiles = form.cleaned_data['users']
@@ -661,7 +661,7 @@ class OrganizationAdmin(admin.ModelAdmin):
                     return HttpResponseRedirect(request.get_full_path())
     
             if not form:
-                userprofiles = UserProfile.objects.all()
+                userprofiles = UserProfile.objects.filter(user__is_active=True)
                 form = self.UserProfileinOrganizationForm(choices=userprofiles,
                     initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
         
@@ -918,7 +918,7 @@ class OrganizationManagersAdmin(admin.ModelAdmin):
                 self.message_user(request, _('Cancelled adding users to the organization managers.'))
                 return
             elif 'add_user_profile_to_organization_managers' in request.POST:
-                objs_up = UserProfile.objects.all(user__is_active=True)
+                objs_up = UserProfile.objects.filter(user__is_active=True)
                 form = self.UserProfileinOrganizationManagersForm(objs_up, request.POST)
                 if form.is_valid():
                     userprofiles = form.cleaned_data['users']
@@ -931,7 +931,7 @@ class OrganizationManagersAdmin(admin.ModelAdmin):
                     return HttpResponseRedirect(request.get_full_path())
     
             if not form:
-                userprofiles = UserProfile.objects.all(user__is_active=True)
+                userprofiles = UserProfile.objects.filter(user__is_active=True)
                 form = self.UserProfileinOrganizationManagersForm(choices=userprofiles,
                     initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
             
@@ -956,7 +956,7 @@ class OrganizationManagersAdmin(admin.ModelAdmin):
                 self.message_user(request, _('Cancelled removing users from the organization managers.'))
                 return
             elif 'remove_user_profile_from_organization_managers' in request.POST:
-                objs_up = UserProfile.objects.all(user__is_active=True)
+                objs_up = UserProfile.objects.filter(user__is_active=True)
                 form = self.UserProfileinOrganizationManagersForm(objs_up, request.POST)
                 if form.is_valid():
                     userprofiles = form.cleaned_data['users']
@@ -967,7 +967,7 @@ class OrganizationManagersAdmin(admin.ModelAdmin):
                     return HttpResponseRedirect(request.get_full_path())
     
             if not form:
-                userprofiles = UserProfile.objects.all(user__is_active=True)                    
+                userprofiles = UserProfile.objects.filter(user__is_active=True)                    
                 form = self.UserProfileinOrganizationManagersForm(choices=userprofiles,
                     initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
         
