@@ -153,15 +153,6 @@ class SearchTest(test_utils.IndexAwareTestCase):
                 successes[0].storage_object.save()    
             if failures:
                 print failures    
-    #def importInternalFixtures(self):
-    #   _path = '{}/repository/test_fixtures/internal/'.format(ROOT_PATH)
-    #   files = os.listdir(_path)   
-    #   for filename in files:
-    #       fullpath = os.path.join(_path, filename)  
-    #       test_utils.import_xml_or_zip(fullpath)
-    #       if successes:                
-    #           successes[0].storage_object.publication_status = 'i'
-    #           successes[0].storage_object.save()   
 
     def test_case_insensitive_search(self):
         """
