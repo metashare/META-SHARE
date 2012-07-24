@@ -45,24 +45,17 @@ def confirm(request, uuid):
     """
     # Loads the RegistrationRequest instance for the given uuid.
     registration_request = get_object_or_404(RegistrationRequest, uuid=uuid)
-    
-    # Create a new User instance from the registration request data.
-    user = User.objects.create_user(registration_request.shortname,
-      registration_request.email, registration_request.password)
-    
-    # Update User instance attributes and activate it.
-    user.first_name = registration_request.firstname
-    user.last_name = registration_request.lastname
-    user.is_active = True
-    
-    # Save the new User instance to the django database.  This will also
-    # create a corresponding UserProfile instance by post_save "magic".
-    user.save()
 
+    # Activate the corresponding User instance.
+    user = registration_request.user
+    user.is_active = True
     # For convenience, log user in:
-    authuser = authenticate(username=user.username,
-                            password=registration_request.password)
-    login(request, authuser)
+    # (We would actually have to authenticate the user before logging in,
+    # however, as we don't know the password, we manually set the authenication
+    # backend.)
+    user.backend = 'django.contrib.auth.backends.ModelBackend'
+    user.save()
+    login(request, user)
     request.session['METASHARE_UUID'] = uuid
 
     # Delete registration request instance.
@@ -97,22 +90,24 @@ def create(request):
         
         # Check if the form has validated successfully.
         if form.is_valid():
+            # Create a new (inactive) User account so that we can discard the
+            # plain text password. This will also create a corresponding
+            # `UserProfile` instance by post_save "magic".
+            _user = User.objects.create_user(form.cleaned_data['shortname'],
+                form.cleaned_data['email'], form.cleaned_data['password'])
+            _user.first_name = form.cleaned_data['first_name']
+            _user.last_name = form.cleaned_data['last_name']
+            _user.is_active = False
+            _user.save()
             # Create new RegistrationRequest instance.
-            new_object = RegistrationRequest(
-              shortname=form.cleaned_data['shortname'],
-              firstname=form.cleaned_data['firstname'],
-              lastname=form.cleaned_data['lastname'],
-              email=form.cleaned_data['email'],
-              password=form.cleaned_data['password']
-              )
-            
+            new_object = RegistrationRequest(user=_user)
             # Save new RegistrationRequest instance to django database.
             new_object.save()
             
             # Render confirmation email template with correct values.
-            data = {'firstname': new_object.firstname,
-              'lastname': new_object.lastname,
-              'shortname': new_object.shortname,
+            data = {'firstname': _user.first_name,
+              'lastname': _user.last_name,
+              'shortname': _user.username,
               'confirmation_url': '{0}/accounts/confirm/{1}/'.format(
                 DJANGO_URL, new_object.uuid)}
             email = render_to_string('accounts/confirmation.email', data)
@@ -120,9 +115,8 @@ def create(request):
             try:
                 # Send out confirmation email to the given email address.
                 send_mail('Please confirm your META-SHARE user account',
-                email, 'no-reply@meta-share.eu', [new_object.email],
+                email, 'no-reply@meta-share.eu', [_user.email],
                 fail_silently=False)
-            
             except: #SMTPException:
                 # If the email could not be sent successfully, tell the user
                 # about it and also give the confirmation URL.
