@@ -239,7 +239,7 @@ class UserProfile(models.Model):
         """
         if self.user.is_superuser:
             return True
-        mgr_groups = EditorManagers.objects.filter(
+        mgr_groups = EditorGroupManagers.objects.filter(
             name__in=self.user.groups.values_list('name', flat=True))
         if editor_group:
             return any(editor_group.name == mgr_group.managed_group.name
