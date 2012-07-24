@@ -506,9 +506,9 @@ class ComboWidget(AdminTextInputWidget):
             id1 = attrs['id']
             if self.field_type == 'id':
                 linked_to = attrs['id'].replace(self.id_field, self.name_field)
-                js_script = u'<script>autocomp_id($("input#{0}"), "{1}");</script>'.format(id1, linked_to)
+                js_script = u'<script>autocomp_id("{0}", "{1}");</script>'.format(id1, linked_to)
             elif self.field_type == 'name':
-                js_script = u'<script>autocomp_name($("input#{0}"));</script>'.format(id1)
+                js_script = u'<script>autocomp_name("{0}");</script>'.format(id1)
             val = val + js_script
 
         return mark_safe(val)

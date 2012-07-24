@@ -201,6 +201,14 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         return HttpResponseRedirect("../../")
 
 
+    def add_lang_templ_params(self, inline_admin_formset):
+        model_name = inline_admin_formset.formset.form.Meta.model().__class__.__name__
+        for item in LANGUAGE_ID_NAME_FIELDS:
+            if item[0] == model_name:
+                inline_admin_formset.has_lang = True
+                inline_admin_formset.lang_id = item[1]
+                inline_admin_formset.lang_name = item[2]
+    
     @csrf_protect_m
     @transaction.commit_on_success
     def add_view(self, request, form_url='', extra_context=None):
@@ -326,6 +334,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             readonly = list(inline.get_readonly_fields(request))
             inline_admin_formset = helpers.InlineAdminFormSet(inline, formset,
                 fieldsets, readonly, model_admin=self)
+            self.add_lang_templ_params(inline_admin_formset)
             inline_admin_formsets.append(inline_admin_formset)
             media = media + inline_admin_formset.media
 
@@ -475,6 +484,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             readonly = list(inline.get_readonly_fields(request, obj))
             inline_admin_formset = helpers.InlineAdminFormSet(inline, formset,
                 fieldsets, readonly, model_admin=self)
+            self.add_lang_templ_params(inline_admin_formset)
             inline_admin_formsets.append(inline_admin_formset)
             media = media + inline_admin_formset.media
 
