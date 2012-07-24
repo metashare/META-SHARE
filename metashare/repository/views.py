@@ -34,7 +34,7 @@ from metashare.stats.model_utils import getLRStats, saveLRStats, \
 from metashare.storage.models import PUBLISHED
 from metashare.recommendations.models import TogetherManager
 from metashare.recommendations.recommendations import SessionResourcesTracker, \
-    Resource
+    get_download_recommendations, get_view_recommendations
 
 
 MAXIMUM_READ_BLOCK_SIZE = 4096
@@ -456,10 +456,10 @@ def view(request, resource_name=None, object_id=None):
             
     # Add recommendations for 'also viewed' resources
     context['also_viewed'] = \
-        _get_together_recommendations(resource, Resource.VIEW)
+        _format_recommendations(get_view_recommendations(resource))
     # Add recommendations for 'also downloaded' resources
     context['also_downloaded'] = \
-        _get_together_recommendations(resource, Resource.DOWNLOAD)
+        _format_recommendations(get_download_recommendations(resource))
     # Add 'more from same' links
     context['search_rel_projects'] = '{}/repository/search?q={}:{}'.format(
         DJANGO_URL, MORE_FROM_SAME_PROJECTS, resource.storage_object.identifier)
@@ -471,19 +471,19 @@ def view(request, resource_name=None, object_id=None):
     return render_to_response(template, context, context_instance=ctx)
 
 
-def _get_together_recommendations(resource, together_type):
+def _format_recommendations(recommended_resources):
     '''
-    Returns a list of recommendations of the given `Resource` type for the given
-    resource (as used in the single resource view).
+    Returns the given resource recommendations list formatted as a list of
+    dictionaries with the two keys "name" and "url" (for use in the single
+    resource view).
     '''
     result = []
-    for res in TogetherManager.getManager(together_type) \
-            .getTogetherList(resource, 0):
+    for res in recommended_resources:
         res_item = {}
         res_item['name'] = res.__unicode__()
         res_item['url'] = res.get_absolute_url()
         result.append(res_item)
-        return result
+    return result
 
 
 class MetashareFacetedSearchView(FacetedSearchView):
