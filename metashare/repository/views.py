@@ -34,7 +34,8 @@ from metashare.stats.model_utils import getLRStats, saveLRStats, \
 from metashare.storage.models import PUBLISHED
 from metashare.recommendations.models import TogetherManager
 from metashare.recommendations.recommendations import SessionResourcesTracker, \
-    get_download_recommendations, get_view_recommendations
+    get_download_recommendations, get_view_recommendations, \
+    get_more_from_same_creators_qs, get_more_from_same_projects_qs
 
 
 MAXIMUM_READ_BLOCK_SIZE = 4096
@@ -461,10 +462,14 @@ def view(request, resource_name=None, object_id=None):
     context['also_downloaded'] = \
         _format_recommendations(get_download_recommendations(resource))
     # Add 'more from same' links
-    context['search_rel_projects'] = '{}/repository/search?q={}:{}'.format(
-        DJANGO_URL, MORE_FROM_SAME_PROJECTS, resource.storage_object.identifier)
-    context['search_rel_creators'] = '{}/repository/search?q={}:{}'.format(
-        DJANGO_URL, MORE_FROM_SAME_CREATORS, resource.storage_object.identifier)
+    if get_more_from_same_projects_qs(resource).count():
+        context['search_rel_projects'] = '{}/repository/search?q={}:{}'.format(
+            DJANGO_URL, MORE_FROM_SAME_PROJECTS,
+            resource.storage_object.identifier)
+    if get_more_from_same_creators_qs(resource).count():
+        context['search_rel_creators'] = '{}/repository/search?q={}:{}'.format(
+            DJANGO_URL, MORE_FROM_SAME_CREATORS,
+            resource.storage_object.identifier)
 
     # Render and return template with the defined context.
     ctx = RequestContext(request)
