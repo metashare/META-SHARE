@@ -195,7 +195,8 @@ class UserProfile(models.Model):
         if self.user.is_superuser:
             return True      
                 
-        return self.user.groups.count() != 0
+        return EditorGroup.objects.filter(name__in=
+            self.user.groups.values_list('name', flat=True)).count() != 0
         
         
 
