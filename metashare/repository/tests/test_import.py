@@ -3,7 +3,7 @@ from django.test import TestCase
 from metashare import test_utils
 from metashare.settings import ROOT_PATH
 from metashare.repository.models import documentUnstructuredString_model, \
-    documentInfoType_model
+    documentInfoType_model, User
 from metashare.accounts.models import EditorGroup
 from django.test.client import Client
 from metashare.settings import DJANGO_BASE, ROOT_PATH
@@ -14,7 +14,7 @@ class ImportTest(TestCase):
     """
 
     test_editor_group = None
-    editor_user = None
+    super_user = None
     
     @classmethod
     def setUpClass(cls):
@@ -23,8 +23,7 @@ class ImportTest(TestCase):
         ImportTest.test_editor_group = EditorGroup.objects.create(
                                                     name='test_editor_group')
 
-        ImportTest.editor_user = test_utils.create_editor_user('editoruser',
-            'editor@example.com', 'secret', (ImportTest.test_editor_group,))
+        ImportTest.super_user = User.objects.create_superuser('superuser', 'su@example.com', 'secret')
    
     @classmethod
     def tearDownClass(cls):
@@ -113,9 +112,9 @@ class ImportTest(TestCase):
         Check if resource editor group is set to the default editor group of the user.
         """
         client = Client()
-        client.login(username='editoruser', password='secret')
+        client.login(username='superuser', password='secret')
 
-        ImportTest.editor_user.get_profile().default_editor_groups \
+        ImportTest.super_user.get_profile().default_editor_groups \
             .add(ImportTest.test_editor_group)
 
         resourcefile = open('{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH))
@@ -129,7 +128,7 @@ class ImportTest(TestCase):
         Check if resource editor group is set to None if the user do not have a default editor group.
         """
         client = Client()
-        client.login(username='editoruser', password='secret')
+        client.login(username='superuser', password='secret')
 
         resourcefile = open('{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH))
         response = client.post('/{0}/upload_xml/'.format(DJANGO_BASE), \
