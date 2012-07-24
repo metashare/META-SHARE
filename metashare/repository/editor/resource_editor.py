@@ -19,7 +19,7 @@ from django.utils.translation import ugettext as _, ungettext
 from django.views.decorators.csrf import csrf_protect
 
 from metashare import settings
-from metashare.accounts.models import EditorGroup, ManagerGroup
+from metashare.accounts.models import EditorGroup, EditorGroupManagers
 from metashare.repository.editor.editorutils import FilteredChangeList
 from metashare.repository.editor.forms import StorageObjectUploadForm
 from metashare.repository.editor.inlines import ReverseInlineFormSet, \
@@ -243,7 +243,7 @@ def has_publish_permission(request, queryset):
             # is a manager of one of the resource's `EditorGroup`s
             if not any(res_group.name == mgr_group.managed_group.name
                        for res_group in res_groups
-                       for mgr_group in ManagerGroup.objects.filter(name__in=
+                       for mgr_group in EditorGroupManagers.objects.filter(name__in=
                            request.user.groups.values_list('name', flat=True))):
                 return False
     return True
@@ -520,7 +520,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 # either a group member
                 Q(name__in=user.groups.values_list('name', flat=True))
                 # or a manager of the editor group
-              | Q(name__in=ManagerGroup.objects.filter(name__in=
+              | Q(name__in=EditorGroupManagers.objects.filter(name__in=
                     user.groups.values_list('name', flat=True)) \
                         .values_list('managed_group__name', flat=True)))
 
@@ -955,7 +955,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     and obj.storage_object.publication_status == INTERNAL) \
                 or any(res_group.name == mgr_group.managed_group.name
                        for res_group in res_groups
-                       for mgr_group in ManagerGroup.objects.filter(name__in=
+                       for mgr_group in EditorGroupManagers.objects.filter(name__in=
                             request.user.groups.values_list('name', flat=True)))
         return result
 
@@ -979,7 +979,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 del result['delete']
             # only users who are the manager of some group can see the
             # ingest/publish/unpublish actions:
-            if ManagerGroup.objects.filter(name__in=
+            if EditorGroupManagers.objects.filter(name__in=
                         request.user.groups.values_list('name', flat=True)) \
                     .count() == 0:
                 for action in (publish_resources, unpublish_resources,

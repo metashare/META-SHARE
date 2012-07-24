@@ -3,7 +3,8 @@ Project: META-SHARE prototype implementation
  Author: Christian Federmann <cfedermann@dfki.de>
 """
 from django import forms
-from metashare.accounts.models import UserProfile, EditorGroupApplication
+from metashare.accounts.models import UserProfile, EditorGroupApplication, \
+    OrganizationApplication
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext as _
@@ -167,6 +168,7 @@ class EditorGroupApplicationForm(ModelForm):
         # If there is a list of editor groups, then modify the ModelChoiceField
         self.fields['editor_group'].queryset = editor_group_qs
 
+
 class AddDefaultEditorGroupForm(ModelForm):
     """
     Form used to add default editor groups.
@@ -188,6 +190,7 @@ class AddDefaultEditorGroupForm(ModelForm):
         # If there is a list of editor groups, then modify the ModelChoiceField
         self.fields['default_editor_groups'].queryset = editor_group_qs
 
+
 class RemoveDefaultEditorGroupForm(ModelForm):
     """
     Form used to remove default editor groups.
@@ -208,3 +211,24 @@ class RemoveDefaultEditorGroupForm(ModelForm):
         super(RemoveDefaultEditorGroupForm, self).__init__(*args, **kwargs)
         # If there is a list of editor groups, then modify the ModelChoiceField
         self.fields['default_editor_groups'].queryset = editor_group_qs
+
+
+class OrganizationApplicationForm(ModelForm):
+    """
+    Form used to apply to new organizations membership.
+    """
+    class Meta:
+        """
+        Meta class connecting to OrganizationApplication object model.
+        """
+        model = OrganizationApplication
+        exclude = ('user', 'created')
+
+    def __init__(self, organization_qs, *args, **kwargs):
+        """
+        Initializes the `OrganizationApplicationForm` with the organizations
+        of the given query set.
+        """
+        super(OrganizationApplicationForm, self).__init__(*args, **kwargs)
+        # If there is a list of organizations, then modify the ModelChoiceField
+        self.fields['organization'].queryset = organization_qs

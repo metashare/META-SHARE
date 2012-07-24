@@ -6,7 +6,7 @@ from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.admin.sites import LOGIN_FORM_KEY
 
 from metashare import test_utils
-from metashare.accounts.models import EditorGroup, ManagerGroup
+from metashare.accounts.models import EditorGroup, EditorGroupManagers
 from metashare.repository.models import resourceInfoType_model
 from metashare.settings import DJANGO_BASE, DJANGO_URL, ROOT_PATH
 from metashare.stats.model_utils import _update_usage_stats, saveLRStats, \
@@ -36,7 +36,7 @@ class StatsTest(django.test.TestCase):
         self.stats_server_url = "http://metastats.fbk.eu/"
         
         test_editor_group = EditorGroup.objects.create(name='test_editor_group')
-        test_manager_group = ManagerGroup.objects.create(
+        test_manager_group = EditorGroupManagers.objects.create(
             name='test_manager_group', managed_group=test_editor_group)
         test_utils.create_manager_user('manageruser', 'manager@example.com',
             'secret', (test_editor_group, test_manager_group))
