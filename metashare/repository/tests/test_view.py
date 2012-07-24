@@ -54,17 +54,15 @@ class ViewTest(TestCase):
         staffuser = create_user('staffuser', 'staff@example.com', 'secret')
         staffuser.is_staff = True
         staffuser.save()
-        create_user('normaluser', 'normal@example.com', 'secret')        
-       
+        create_user('normaluser', 'normal@example.com', 'secret')
+        
         ViewTest.test_editor_group = EditorGroup.objects.create(
                                                     name='test_editor_group')
-        
-        editoruser = test_utils.create_editor_user('editoruser',
-            'editor@example.com', 'secret', (ViewTest.test_editor_group,))
-                
         ViewTest.test_manager_group = \
             ManagerGroup.objects.create(name='test_manager_group',
-                                    managed_group=ViewTest.test_editor_group)            
+                                    managed_group=ViewTest.test_editor_group)  
+        test_utils.create_editor_user('editoruser',
+            'editor@example.com', 'secret', (ViewTest.test_editor_group,))          
         test_utils.create_manager_user(
             'manageruser', 'manager@example.com', 'secret',
             (ViewTest.test_editor_group, ViewTest.test_manager_group))
