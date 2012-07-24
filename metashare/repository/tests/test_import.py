@@ -20,11 +20,6 @@ class ImportTest(TestCase):
     def setUpClass(cls):
         test_utils.set_index_active(False)
 
-        ImportTest.test_editor_group = EditorGroup.objects.create(
-                                                    name='test_editor_group')
-
-        ImportTest.super_user = User.objects.create_superuser('superuser', 'su@example.com', 'secret')
-   
     @classmethod
     def tearDownClass(cls):
         test_utils.set_index_active(True)
@@ -35,12 +30,18 @@ class ImportTest(TestCase):
         """        
         test_utils.setup_test_storage()
         
+        ImportTest.test_editor_group = EditorGroup.objects.create(
+                                                    name='test_editor_group')
+
+        ImportTest.super_user = User.objects.create_superuser('superuser', 'su@example.com', 'secret')
+   
     def tearDown(self):
         """
         Clean up the test
         """
         test_utils.clean_resources_db()
         test_utils.clean_storage()
+        test_utils.clean_user_db()
 
     def _test_import_dir(self, path):
         """Asserts that all XML files in the given directory can be imported."""
