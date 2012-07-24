@@ -9,7 +9,7 @@ from uuid import uuid1
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.db import models
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 
 from metashare.settings import LOG_LEVEL, LOG_HANDLER
@@ -40,21 +40,33 @@ class RegistrationRequest(models.Model):
     """
     Contains user data related to a user registration request.
     """
-    shortname = models.CharField('Username', max_length=30, unique=True)
-    firstname = models.CharField('First name', max_length=30)
-    lastname = models.CharField('Last name', max_length=30)
-    email = models.EmailField(unique=True)
-    password = models.CharField('password', max_length=128)
-    
+    user = models.OneToOneField(User)
     uuid = models.CharField(max_length=32, verbose_name="UUID",
-      default=_create_uuid)
+                            default=_create_uuid)
     created = models.DateTimeField(auto_now_add=True)
     
+    def __init__(self, *args, **kwargs):
+        super(RegistrationRequest, self).__init__(*args, **kwargs)
+
+    @staticmethod
+    def _delete_related_user(instance, **kwargs):
+        """
+        Deletes the related `User` object of the given deleted
+        `RegistrationRequest` instance, if the former is not active, yet.
+        """
+        if not instance.user.is_active:
+            instance.user.delete()
+
     def __unicode__(self):
         """
         Return Unicode representation for this instance.
         """
-        return u'<RegistrationRequest "{0}">'.format(self.shortname)
+        return u'<RegistrationRequest "{0}">'.format(self.user.username)
+
+# make sure to delete the related `User` object of a deleted
+# `RegistrationRequest`, if necessary
+post_delete.connect(RegistrationRequest._delete_related_user,
+                    sender=RegistrationRequest)
 
 
 class ResetRequest(models.Model):

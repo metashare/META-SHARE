@@ -17,13 +17,14 @@ from django.template.loader import render_to_string
 from metashare.accounts.models import RegistrationRequest, ResetRequest, \
   UserProfile, EditorGroup, EditorGroupApplication, ManagerGroup
 
+
 class RegistrationRequestAdmin(admin.ModelAdmin):
     """
     Administration interface for user registration requests.
     """
-    list_display = ('shortname', 'firstname', 'lastname', 'email', 'uuid',
-      'created')
-    search_fields = ('shortname', 'firstname', 'lastname', 'email')
+    list_display = ('user',)
+    search_fields = ('user__username', 'user__first_name', 'user__last_name',
+                     'user__email')
 
 
 class ResetRequestAdmin(admin.ModelAdmin):
@@ -146,7 +147,7 @@ class EditorGroupAdmin(admin.ModelAdmin):
             self.message_user(request, _('Cancelled adding users to the editor group.'))
             return
         elif 'add_user_profile_to_editor_group' in request.POST:
-            objs_up = UserProfile.objects.all()
+            objs_up = UserProfile.objects.filter(user__is_active=True)
             form = self.UserProfileinEditorGroupForm(objs_up, request.POST)
             if form.is_valid():
                 userprofiles = form.cleaned_data['users']
@@ -162,7 +163,7 @@ class EditorGroupAdmin(admin.ModelAdmin):
                 return HttpResponseRedirect(request.get_full_path())
 
         if not form:
-            userprofiles = UserProfile.objects.all()
+            userprofiles = UserProfile.objects.filter(user__is_active=True)
             form = self.UserProfileinEditorGroupForm(choices=userprofiles,
                 initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
         
@@ -183,7 +184,7 @@ class EditorGroupAdmin(admin.ModelAdmin):
                 self.message_user(request, _('Cancelled removing users from the editor group.'))
                 return
             elif 'remove_user_profile_from_editor_group' in request.POST:
-                objs_up = UserProfile.objects.all()
+                objs_up = UserProfile.objects.filter(user__is_active=True)
                 form = self.UserProfileinEditorGroupForm(objs_up, request.POST)
                 if form.is_valid():
                     userprofiles = form.cleaned_data['users']
@@ -194,7 +195,7 @@ class EditorGroupAdmin(admin.ModelAdmin):
                     return HttpResponseRedirect(request.get_full_path())
     
             if not form:
-                userprofiles = UserProfile.objects.all()
+                userprofiles = UserProfile.objects.filter(user__is_active=True)
                 form = self.UserProfileinEditorGroupForm(choices=userprofiles,
                     initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
         
@@ -461,7 +462,7 @@ class ManagerGroupAdmin(admin.ModelAdmin):
                 self.message_user(request, _('Cancelled adding users to the manager group.'))
                 return
             elif 'add_user_profile_to_manager_group' in request.POST:
-                objs_up = UserProfile.objects.all()
+                objs_up = UserProfile.objects.filter(user__is_active=True)
                 form = self.UserProfileinManagerGroupForm(objs_up, request.POST)
                 if form.is_valid():
                     userprofiles = form.cleaned_data['users']
@@ -474,7 +475,7 @@ class ManagerGroupAdmin(admin.ModelAdmin):
                     return HttpResponseRedirect(request.get_full_path())
     
             if not form:
-                userprofiles = UserProfile.objects.all()
+                userprofiles = UserProfile.objects.filter(user__is_active=True)
                 form = self.UserProfileinManagerGroupForm(choices=userprofiles,
                     initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
             
@@ -499,7 +500,7 @@ class ManagerGroupAdmin(admin.ModelAdmin):
                 self.message_user(request, _('Cancelled removing users from the manager group.'))
                 return
             elif 'remove_user_profile_from_manager_group' in request.POST:
-                objs_up = UserProfile.objects.all()
+                objs_up = UserProfile.objects.filter(user__is_active=True)
                 form = self.UserProfileinManagerGroupForm(objs_up, request.POST)
                 if form.is_valid():
                     userprofiles = form.cleaned_data['users']
@@ -510,7 +511,7 @@ class ManagerGroupAdmin(admin.ModelAdmin):
                     return HttpResponseRedirect(request.get_full_path())
     
             if not form:
-                userprofiles = UserProfile.objects.all()                    
+                userprofiles = UserProfile.objects.filter(user__is_active=True)
                 form = self.UserProfileinManagerGroupForm(choices=userprofiles,
                     initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
         

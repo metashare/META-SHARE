@@ -564,8 +564,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
             self.message_user(request, _('Cancelled adding owners.'))
             return
         elif 'add_owner' in request.POST:
-            form = self.IntermediateMultiSelectForm(User.objects.all(),
-                                                    request.POST)
+            form = self.IntermediateMultiSelectForm(
+                User.objects.filter(is_active=True), request.POST)
             if form.is_valid():
                 _successes = 0
                 owners = form.cleaned_data['multifield']
@@ -586,7 +586,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                                 'to all selected resources.'))
                 return HttpResponseRedirect(request.get_full_path())
         else:
-            form = self.IntermediateMultiSelectForm(User.objects.all(),
+            form = self.IntermediateMultiSelectForm(
+                User.objects.filter(is_active=True),
                 initial={admin.ACTION_CHECKBOX_NAME:
                          request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
         return render_to_response(
@@ -606,8 +607,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
             self.message_user(request, _('Cancelled removing owners.'))
             return
         elif 'remove_owner' in request.POST:
-            form = self.IntermediateMultiSelectForm(User.objects.all(),
-                                                    request.POST)            
+            form = self.IntermediateMultiSelectForm(
+                User.objects.filter(is_active=True), request.POST)            
             if form.is_valid():
                 owners = form.cleaned_data['multifield']
                 for obj in queryset:  
@@ -617,7 +618,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                              'from the selected resources.'))               
                 return HttpResponseRedirect(request.get_full_path())
         else:
-            form = self.IntermediateMultiSelectForm(User.objects.all(),
+            form = self.IntermediateMultiSelectForm(
+                User.objects.filter(is_active=True),
                 initial={admin.ACTION_CHECKBOX_NAME:
                          request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
         return render_to_response(

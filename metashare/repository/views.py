@@ -15,14 +15,19 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
+from django.contrib import messages
+from django.template.loader import render_to_string
+from django.core.mail import send_mail
+from django.utils.translation import ugettext as _
 
 from haystack.views import FacetedSearchView
 
 from metashare.repository.editor.resource_editor import has_edit_permission
-from metashare.repository.forms import LicenseSelectionForm, LicenseAgreementForm
+from metashare.repository.forms import LicenseSelectionForm, \
+    LicenseAgreementForm, DownloadContactForm
 from metashare.repository.models import licenceInfoType_model, resourceInfoType_model
 from metashare.repository.search_indexes import resourceInfoType_modelIndex
-from metashare.settings import LOG_LEVEL, LOG_HANDLER, MEDIA_URL
+from metashare.settings import LOG_LEVEL, LOG_HANDLER, MEDIA_URL, DJANGO_URL
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
 from metashare.storage.models import PUBLISHED
@@ -325,6 +330,83 @@ def _provide_download(request, resource, download_urls):
 
 
 @login_required
+def download_contact(request, object_id):
+    """
+    Renders the download contact view to request information regarding a resource
+    """
+    resource = get_object_or_404(resourceInfoType_model,
+                                 storage_object__identifier=object_id,
+                                 storage_object__publication_status=PUBLISHED)
+
+    default_message = "We are interested in using the above mentioned " \
+        "resource. Please provide us with all the relevant information (e.g.," \
+        " licensing provisions and restrictions, any fees required etc.) " \
+        "which is necessary for concluding a deal for getting a license. We " \
+        "are happy to provide any more information on our request and our " \
+        "envisaged usage of your resource.\n\n" \
+        "[Please include here any other request you may have regarding this " \
+        "resource or change this message altogether]\n\n" \
+        "Please kindly use the above mentioned e-mail address for any " \
+        "further communication."
+
+    # Find out the relevant resource contact emails and names
+    resource_emails = []
+    resource_contacts = []
+    for person in resource.contactPerson.all():
+        resource_emails.append(person.communicationInfo.email[0])
+        if person.givenName:
+            _name = u'{} '.format(person.get_default_givenName())
+        else:
+            _name = u''
+        resource_contacts.append(_name + person.get_default_surname())
+
+    # Check if the edit form has been submitted.
+    if request.method == "POST":
+        # If so, bind the creation form to HTTP POST values.
+        form = DownloadContactForm(initial={'userEmail': request.user.email,
+                                            'message': default_message},
+                                   data=request.POST)
+        # Check if the form has validated successfully.
+        if form.is_valid():
+            message = form.cleaned_data['message']
+            user_email = form.cleaned_data['userEmail']
+
+            # Render notification email template with correct values.
+            data = {'message': message, 'resource': resource,
+                'resourceContactName': resource_contacts, 'user': request.user,
+                'user_email': user_email, 'node_url': DJANGO_URL}
+            try:
+                # Send out email to the resource contacts
+                send_mail('Request for information regarding a resource',
+                    render_to_string('repository/resource_download_information.email', data),
+                    user_email, resource_emails, fail_silently=False)
+            except: #SMTPException:
+                # If the email could not be sent successfully, tell the user
+                # about it.
+                messages.error(request,
+                  _("There was an error sending out the request email."))
+            else:
+                messages.success(request, _('You have successfully ' \
+                    'sent a message to the resource contact person.'))
+
+            # Redirect the user to the resource page.
+            return redirect(resource.get_absolute_url())
+
+    # Otherwise, render a new DownloadContactForm instance
+    else:
+        form = DownloadContactForm(initial={'userEmail': request.user.email,
+                                            'message': default_message})
+
+    dictionary = { 'username': request.user,
+      'resource': resource,
+      'resourceContactName': resource_contacts,
+      'resourceContactEmail': resource_emails,
+      'form': form }
+    return render_to_response('repository/download_contact_form.html',
+                        dictionary, context_instance=RequestContext(request))
+
+
+@login_required
 def create(request):
     """
     Redirects to the Django admin backend editor for resources.
@@ -453,7 +535,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
         # Step (1): if there are any selected facets, then add these first:
         if sel_facets:
             # add all top level facets (sorted by their facet IDs):
-            for name, label, facet_id, _ in [f for f in filter_labels if f[3] == 0]:
+            for name, label, facet_id, _dummy in [f for f in filter_labels if f[3] == 0]:
                 name_exact = '{0}_exact'.format(name)
                 # only add selected facets in step (1)
                 if name_exact in sel_facets:
@@ -497,7 +579,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
 
         # Step (2): add all top level facets without selected facet items at the
         # end (sorted by their facet IDs):
-        for name, label, facet_id, _ in [f for f in filter_labels if f[3] == 0]:
+        for name, label, facet_id, _dummy in [f for f in filter_labels if f[3] == 0]:
             name_exact = '{0}_exact'.format(name)
             # only add facets without selected items in step (2)
             if not name_exact in sel_facets:
