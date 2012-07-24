@@ -34,7 +34,7 @@ class ExampleSeleniumTest(SeleniumTestCase):
         driver = self.driver
         # check start site
         driver.get(self.base_url)
-        self.assertEqual("MetaShare", driver.title)
+        self.assertEqual("META-SHARE", driver.title)
         self.assertEqual("1 language resources at your disposal...", 
           driver.find_element_by_xpath(
             "//div[@id='content']/div[3]/div/p[2]").text)
@@ -72,6 +72,8 @@ class ExampleSeleniumTest(SeleniumTestCase):
         return True
     
     def tearDown(self):
-        resourceInfoType_model.objects.all().delete()
+        test_utils.clean_resources_db()
+        test_utils.clean_storage()
+        test_utils.clean_user_db()
 
         super(ExampleSeleniumTest, self).tearDown()

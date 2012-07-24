@@ -2,22 +2,27 @@
 Project: META-SHARE
 Utility functions for unit tests useful across apps.
 """
-import os
-
 from django.contrib.auth.models import Group, User
 from django.core.management import call_command
 from django.test.testcases import TestCase
-
 from metashare import settings
-from metashare.accounts.admin import ManagerGroupAdmin
+from metashare.accounts.admin import EditorGroupManagersAdmin, \
+  OrganizationManagersAdmin
+from metashare.accounts.models import EditorGroupApplication, EditorGroup, \
+  EditorGroupManagers, RegistrationRequest, ResetRequest, UserProfile
 from metashare.repository.management import GROUP_GLOBAL_EDITORS
 from metashare.repository.models import resourceInfoType_model, \
-    personInfoType_model, actorInfoType_model, documentationInfoType_model, \
-    documentInfoType_model, targetResourceInfoType_model, \
-    organizationInfoType_model, projectInfoType_model
-from metashare.storage.models import PUBLISHED, MASTER, StorageObject,\
-    RemovedObject
+  personInfoType_model, actorInfoType_model, documentationInfoType_model, \
+  documentInfoType_model, targetResourceInfoType_model, organizationInfoType_model, \
+  projectInfoType_model
+from metashare.recommendations.models import TogetherManager
+from metashare.storage.models import PUBLISHED, MASTER, StorageObject, \
+  RemovedObject
 from metashare.xml_utils import import_from_file
+import os
+from metashare.repository import supermodel
+
+
 
 
 TEST_STORAGE_PATH = '{0}/test-tmp'.format(settings.ROOT_PATH)
@@ -29,7 +34,7 @@ def setup_test_storage():
     except:
         pass
 
-def clean_db():
+def clean_resources_db():
     """
     Deletes all entities from db.
     """
@@ -46,6 +51,23 @@ def clean_db():
     targetResourceInfoType_model.objects.all().delete()
     organizationInfoType_model.objects.all().delete()
     projectInfoType_model.objects.all().delete()
+    # delete recommendation objects
+    TogetherManager.objects.all().delete()
+    # delete object cache used for duplicate recognition in import
+    supermodel.OBJECT_XML_CACHE = {}
+
+def clean_user_db():
+    """
+    Deletes all user related entities from db.
+    """    
+    EditorGroupApplication.objects.all().delete()
+    EditorGroup.objects.exclude(name=GROUP_GLOBAL_EDITORS).delete()
+    Group.objects.exclude(name=GROUP_GLOBAL_EDITORS).delete()
+    EditorGroupManagers.objects.all().delete()
+    RegistrationRequest.objects.all().delete()
+    ResetRequest.objects.all().delete()
+    UserProfile.objects.all().delete()
+    User.objects.all().delete()
 
 def clean_storage():
     """
@@ -86,7 +108,7 @@ def create_manager_user(user_name, email, password, groups=None):
     group memberships.
     """
     result = create_editor_user(user_name, email, password, groups)
-    for _perm in ManagerGroupAdmin.get_suggested_manager_permissions():
+    for _perm in EditorGroupManagersAdmin.get_suggested_manager_permissions():
         result.user_permissions.add(_perm)
     return result
 
@@ -103,6 +125,32 @@ def create_editor_user(user_name, email, password, groups=None):
             result.groups.add(group)
     # always add basic editing permissions
     result.groups.add(Group.objects.get(name=GROUP_GLOBAL_EDITORS))
+    result.save()
+    return result
+
+def create_organization_manager_user(user_name, email, password, groups=None):
+    """
+    Creates a new user account with the given credentials and organization group
+    membership.
+    
+    The user will also have suitable permissions of an organization manager.
+    """
+    result = create_organization_member(user_name, email, password, groups)
+    for _perm in OrganizationManagersAdmin.get_suggested_organization_manager_permissions():
+        result.user_permissions.add(_perm)
+    return result
+
+
+def create_organization_member(user_name, email, password, groups=None):
+    """
+    Creates a new user account with the given credentials which is member of the
+    given organization groups.
+    """
+    result = User.objects.create_user(user_name, email, password)
+    result.is_staff = True
+    if groups:
+        for group in groups:
+            result.groups.add(group)
     result.save()
     return result
 

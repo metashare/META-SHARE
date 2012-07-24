@@ -211,9 +211,6 @@
     <field name="availabilityFilter" type="text_en" indexed="true"
       stored="true" multiValued="false" />
     
-    <field name="tnGramBaseItemFilter_exact" type="string" indexed="true"
-      stored="true" multiValued="true" />
-    
     <field name="toolServiceAnnotationFormatFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
     
@@ -253,6 +250,9 @@
     <field name="audioScenarioTypeFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
     
+    <field name="textNgramBaseItemFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
     <field name="videoNaturalityFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
@@ -271,13 +271,7 @@
     <field name="audioRegisterFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
-    <field name="tnTypeOfTnContentFilter" type="text_en" indexed="true"
-      stored="true" multiValued="true" />
-    
-    <field name="tnGramBaseItemFilter" type="text_en" indexed="true"
-      stored="true" multiValued="true" />
-    
-    <field name="tnGramOrderFilter" type="text_en" indexed="true"
+    <field name="toolServiceInputOutputMediaTypeFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
     <field name="geographicCoverageFilter_exact" type="string" indexed="true"
@@ -290,9 +284,6 @@
       stored="true" multiValued="true" />
     
     <field name="modalityTypeFilter_exact" type="string" indexed="true"
-      stored="true" multiValued="true" />
-    
-    <field name="tnTypeOfTnContentFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
     <field name="toolServiceAnnotationTypeFilter_exact" type="string" indexed="true"
@@ -311,9 +302,6 @@
       stored="true" multiValued="true" />
     
     <field name="validatedFilter_exact" type="string" indexed="true"
-      stored="true" multiValued="true" />
-    
-    <field name="toolServiceInputOutputMediaTypeFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
     <field name="resourceTypeFilter" type="text_en" indexed="true"
@@ -349,6 +337,9 @@
     <field name="mimeTypeFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
     
+    <field name="textNumericalTypeOfTnContentFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
     <field name="audioConversationalTypeFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
     
@@ -379,8 +370,17 @@
     <field name="audioSpeechGenreFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
+    <field name="languageVarietyFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
     <field name="resourceNameSort" type="text_en" indexed="true"
       stored="true" multiValued="false" />
+    
+    <field name="languageVarietyFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="textNgramOrderFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
     
     <field name="modalityTypeFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
@@ -412,7 +412,13 @@
     <field name="domainFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
+    <field name="textNgramBaseItemFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
     <field name="restrictionsOfUseFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="textNgramOrderFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
     <field name="toolServiceToolServiceTypeFilter" type="text_en" indexed="true"
@@ -428,6 +434,9 @@
       stored="true" multiValued="true" />
     
     <field name="lexicalConceptualResourceEncodingLevelFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="textNumericalTypeOfTnContentFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
     <field name="toolServiceLanguageDependentTypeFilter" type="text_en" indexed="true"
@@ -500,9 +509,6 @@
       stored="true" multiValued="true" />
     
     <field name="corpusAnnotationFormatFilter_exact" type="string" indexed="true"
-      stored="true" multiValued="true" />
-    
-    <field name="tnGramOrderFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
     <field name="licenceFilter" type="text_en" indexed="true"

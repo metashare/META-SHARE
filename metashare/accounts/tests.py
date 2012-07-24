@@ -3,15 +3,16 @@ Created on 09.08.2011
 
 @author: marc
 '''
-import unittest
 import django.test
-from metashare.accounts.models import RegistrationRequest
-from django.core.exceptions import ValidationError
-from django.test.client import Client
-from metashare.settings import DJANGO_BASE
-from django.db.utils import IntegrityError
 from django.contrib.auth.models import User
-from django.db.transaction import rollback
+from django.core.urlresolvers import reverse
+from django.test.client import Client
+
+from metashare import test_utils
+from metashare.accounts import views
+from metashare.accounts.models import RegistrationRequest
+from metashare.settings import DJANGO_BASE
+
 
 class CreateViewTest(django.test.TestCase):
     def testCreateInitial(self):
@@ -24,8 +25,9 @@ class CreateViewTest(django.test.TestCase):
 
     def testCreatePost(self):
         client = Client()
-        post_data = {'shortname':'test', 'firstname':'Test',
-          'lastname':'Testson', 'email':'a@b.com'}
+        post_data = {'shortname':'test', 'first_name':'Test',
+          'last_name':'Testson', 'email':'a@b.com', 'password':'test',
+          'confirm_password': 'test'}
         response = client.post('/{0}accounts/create/'.format(DJANGO_BASE),
           follow=True, data=post_data)
         self.assertEqual('frontpage.html', response.templates[0].name)
@@ -34,8 +36,9 @@ class CreateViewTest(django.test.TestCase):
 
     def testBrokenPost(self):
         client = Client()
-        post_data = {'shortname':'test', 'firstname':'Test',
-          'lastname':'Testson'}
+        post_data = {'shortname':'test', 'first_name':'Test',
+          'last_name':'Testson', 'password':'test',
+          'confirm_password': 'test'}
         response = client.post('/{0}accounts/create/'.format(DJANGO_BASE),
           follow=True, data=post_data)
         self.assertEqual('accounts/create_account.html',
@@ -46,34 +49,25 @@ class CreateViewTest(django.test.TestCase):
           status_code=200)
 
     def tearDown(self):
-        RegistrationRequest.objects.all().delete()
-        User.objects.all().delete()
+        test_utils.clean_user_db()
 
 class RegistrationRequestTest(django.test.TestCase):
 
     def setUp(self):
-        self.reg_request = RegistrationRequest.objects.create(
-          shortname='test', firstname='Test', lastname='Testson',
-          email='test@test.com')
-        self.broken_request1 = RegistrationRequest.objects.create(
-          firstname='Test', lastname='Testson', email='broken1@test.com')
-        self.broken_request2 = RegistrationRequest.objects.create(
-          shortname='broken2',  lastname='Testson', email='broken2@test.com')
-        self.broken_request3 = RegistrationRequest.objects.create(
-          shortname='broken3', firstname='Test',  email='broken3@test.com')
-        self.broken_request4 = RegistrationRequest.objects.create(
-          shortname='broken4', firstname='Test', lastname='Testson',
-          email='not an email')
-        self.broken_request5 = RegistrationRequest.objects.create(
-          shortname='broken5', firstname='Test', lastname='Testson')
+        _user = User.objects.create_user('test', 'test@test.com', 'test')
+        _user.first_name = 'Test'
+        _user.last_name = 'Testson'
+        _user.save()
+        self.reg_request = RegistrationRequest.objects.create(user=_user)
+        self.client = Client()
 
     def testRegistrationRequestionCorrect(self):
         self.assertEqual('<RegistrationRequest "test">',
           self.reg_request.__unicode__())
-        self.assertEqual('test', self.reg_request.shortname)
-        self.assertEqual('Test', self.reg_request.firstname)
-        self.assertEqual('Testson', self.reg_request.lastname)
-        self.assertEqual('test@test.com', self.reg_request.email)
+        self.assertEqual('test', self.reg_request.user.username)
+        self.assertEqual('Test', self.reg_request.user.first_name)
+        self.assertEqual('Testson', self.reg_request.user.last_name)
+        self.assertEqual('test@test.com', self.reg_request.user.email)
 
     def testCanRetrieveFromDB(self):
         test_entry = RegistrationRequest.objects.get(pk=self.reg_request.pk)
@@ -83,100 +77,95 @@ class RegistrationRequestTest(django.test.TestCase):
     def testCanValidate(self):
         self.reg_request.full_clean()
 
+    def testCanRegister(self):
+        _prev_count = RegistrationRequest.objects.count()
+        response = self.client.post(reverse(views.create),
+            {'first_name': 'Test', 'last_name': 'Testson2', 'shortname': 'good',
+             'email': 'ok@example.com', 'password': 'secret',
+             'confirm_password': 'secret'}, follow=True)
+        self.assertContains(response, 'received your registration data',
+            msg_prefix="should have successfully created a registration")
+        self.assertEquals(_prev_count + 1, RegistrationRequest.objects.count(),
+            "should have successfully created an additional registration")
+
     def testValidateCatchesBrokenRequest1(self):
-        try:
-            self.broken_request1.full_clean()
-            self.fail("Should have thrown a ValidationError due to missing " \
-              "shortname")
-        except ValidationError:
-            pass
+        response = self.client.post(reverse(views.create),
+            {'first_name': 'Test', 'last_name': 'Testson',
+             'email': 'broken1@test.com', 'password': 'test1',
+             'confirm_password': 'test1'})
+        self.assertContains(response, 'This field is required.',
+            msg_prefix="should have shown an error due to missing user name")
 
     def testValidateCatchesBrokenRequest2(self):
-        try:
-            self.broken_request2.full_clean()
-            self.fail("Should have thrown a ValidationError due to missing " \
-              "firstname")
-        except ValidationError:
-            pass
+        response = self.client.post(reverse(views.create),
+            {'shortname': 'broken2', 'last_name': 'Testson',
+             'email': 'broken2@test.com', 'password': 'test2',
+             'confirm_password': 'test2'})
+        self.assertContains(response, 'This field is required.',
+            msg_prefix="should have shown an error due to missing first name")
 
     def testValidateCatchesBrokenRequest3(self):
-        try:
-            self.broken_request3.full_clean()
-            self.fail("Should have thrown a ValidationError due to missing " \
-              "lastname")
-        except ValidationError:
-            pass
+        response = self.client.post(reverse(views.create),
+            {'shortname': 'broken3', 'first_name': 'Test',
+             'email': 'broken3@test.com', 'password': 'test3',
+             'confirm_password': 'test3'})
+        self.assertContains(response, 'This field is required.',
+            msg_prefix="should have shown an error due to missing last name")
 
     def testValidateCatchesBrokenRequest4(self):
-        try:
-            self.broken_request4.full_clean()
-            self.fail("Should have thrown a ValidationError due to wrong " \
-              "email")
-        except ValidationError:
-            pass
+        response = self.client.post(reverse(views.create),
+            {'shortname': 'broken4', 'first_name': 'Test',
+             'last_name': 'Testson', 'email': 'not an email',
+             'password': 'test4', 'confirm_password': 'test4'})
+        self.assertContains(response, 'Enter a valid e-mail address.',
+            msg_prefix="should have shown an error due to bad e-mail")
 
     def testValidateCatchesBrokenRequest5(self):
-        try:
-            self.broken_request5.full_clean()
-            self.fail("Should have thrown a ValidationError due to missing " \
-              "email")
-        except ValidationError:
-            pass
+        response = self.client.post(reverse(views.create),
+            {'shortname': 'broken5', 'first_name': 'Test',
+             'last_name': 'Testson', 'password': 'test5',
+             'confirm_password': 'test5'})
+        self.assertContains(response, 'This field is required.',
+            msg_prefix="should have shown an error due to missing e-mail")
+
+    def testValidateCatchesBrokenRequest6(self):
+        response = self.client.post(reverse(views.create),
+            {'shortname': 'broken6', 'first_name': 'Test', 'email': 'x@bla.com',
+             'last_name': 'Testson', 'confirm_password': 'test6'})
+        self.assertContains(response, 'This field is required.',
+            msg_prefix="should have shown an error due to missing password")
+
+    def testValidateCatchesBrokenRequest7(self):
+        response = self.client.post(reverse(views.create),
+            {'shortname': 'broken7', 'first_name': 'Test', 'email': 'x@bla.com',
+             'last_name': 'Testson', 'password': 'test7'})
+        self.assertContains(response, 'This field is required.',
+            msg_prefix="should have shown an error due to missing confirmation")
+
+    def testValidateCatchesBrokenRequest8(self):
+        response = self.client.post(reverse(views.create),
+            {'shortname': 'broken8', 'first_name': 'Test', 'email': 'x@bla.com',
+             'last_name': 'Testson', 'password': 'test8',
+             'confirm_password': 'bad'})
+        self.assertContains(response, "The two password fields did not match.",
+            msg_prefix="should have shown an error due to bad confirmation")
 
     def testUniqueUserNameRegistration(self):
-        try:
-            self.reg_request = RegistrationRequest.objects.create(
-              shortname=self.reg_request.shortname,
-              firstname='Test', lastname='Testson',
-              email='test2@test2.com')
-            self.fail("Should have thrown an IntegrityError due to duplicate " \
-              "user name")
-        except IntegrityError:
-            # we have to trigger the rollback manually, otherwise we run into 
-            # a DatabaseError: current transaction is aborted
-            # when using PostgreSQL 
-            rollback()
-    
+        response = self.client.post(reverse(views.create),
+            {'shortname': self.reg_request.user.username, 'first_name': 'Test',
+             'email': 'x@bla.com', 'last_name': 'Testson', 'password': 'test',
+             'confirm_password': 'test'})
+        self.assertContains(response, "account name already exists",
+            msg_prefix="should have shown an error due to duplicate account")
+
     def testUniqueEmailRegistration(self):
-        try:
-            self.reg_request = RegistrationRequest.objects.create(
-              shortname='test2', firstname='Test', lastname='Testson',
-              email=self.reg_request.email)
-            self.fail("Should have thrown an IntegrityError due to duplicate " \
-              "email")
-        except IntegrityError:
-            # we have to trigger the rollback manually, otherwise we run into 
-            # a DatabaseError: current transaction is aborted
-            # when using PostgreSQL 
-            rollback()
+        response = self.client.post(reverse(views.create),
+            {'shortname': 'bla', 'first_name': 'Test',
+             'email': self.reg_request.user.email, 'last_name': 'Testson',
+             'password': 'test', 'confirm_password': 'test'})
+        self.assertContains(response,
+            "already an account registered with this e-mail address",
+            msg_prefix="should have shown an error due to duplicate e-mail")
 
-    def testUniqueUserNameAccount(self):
-        User.objects.create_user(
-            self.reg_request.shortname, self.reg_request.email, 'secret')
-        client = Client()
-        post_data = {'shortname':self.reg_request.shortname, 'firstname':'Test',
-          'lastname':'Testson', 'email':'test2@test2.com'}
-        response = client.post('/{0}accounts/create/'.format(DJANGO_BASE),
-          follow=True, data=post_data)
-        self.assertEqual('accounts/create_account.html', response.templates[0].name)
-        self.assertContains(response, "User name already exists, please choose another one.",
-          status_code=200)
-          
-    def testUniqueEmailAccount(self):
-        User.objects.create_user(
-            self.reg_request.shortname, self.reg_request.email, 'secret')
-        client = Client()
-        post_data = {'shortname':'test2', 'firstname':'Test',
-          'lastname':'Testson', 'email':self.reg_request.email}
-        response = client.post('/{0}accounts/create/'.format(DJANGO_BASE),
-          follow=True, data=post_data)
-        self.assertEqual('accounts/create_account.html', response.templates[0].name)
-        self.assertContains(response, "There is already an account registered with this email.",
-          status_code=200)
-       
     def tearDown(self):
-        RegistrationRequest.objects.all().delete()
-        User.objects.all().delete()
-
-if __name__ == "__main__":
-    unittest.main()
+        test_utils.clean_user_db()

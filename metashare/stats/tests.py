@@ -6,7 +6,7 @@ from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.admin.sites import LOGIN_FORM_KEY
 
 from metashare import test_utils
-from metashare.accounts.models import EditorGroup, ManagerGroup
+from metashare.accounts.models import EditorGroup, EditorGroupManagers
 from metashare.repository.models import resourceInfoType_model
 from metashare.settings import DJANGO_BASE, DJANGO_URL, ROOT_PATH
 from metashare.stats.model_utils import _update_usage_stats, saveLRStats, \
@@ -21,6 +21,14 @@ PSP_XML = '{}/repository/test_fixtures/PSP/UIB-M10-9_v2.xml'.format(ROOT_PATH)
 class StatsTest(django.test.TestCase):
     manager_login = None
     
+    @classmethod
+    def setUpClass(cls):
+        test_utils.set_index_active(False)
+    
+    @classmethod
+    def tearDownClass(cls):
+        test_utils.set_index_active(True)
+    
     def setUp(self):
         """
         Sets up some resources with which to test.
@@ -28,7 +36,7 @@ class StatsTest(django.test.TestCase):
         self.stats_server_url = "http://metastats.fbk.eu/"
         
         test_editor_group = EditorGroup.objects.create(name='test_editor_group')
-        test_manager_group = ManagerGroup.objects.create(
+        test_manager_group = EditorGroupManagers.objects.create(
             name='test_manager_group', managed_group=test_editor_group)
         test_utils.create_manager_user('manageruser', 'manager@example.com',
             'secret', (test_editor_group, test_manager_group))
@@ -39,6 +47,13 @@ class StatsTest(django.test.TestCase):
             'password': 'secret',
         }
         
+    def tearDown(self):
+        """
+        Clean up the test
+        """
+        test_utils.clean_resources_db()
+        test_utils.clean_storage()
+        test_utils.clean_user_db()
     
     def testStatActions(self):
         """
@@ -158,7 +173,7 @@ class StatsTest(django.test.TestCase):
         
         client = self.client_with_user_logged_in(StatsTest.manager_login)
         xmlfile = open(TESTFIXTURES_ZIP, 'rb')
-        response = client.post(ADMINROOT+'upload_xml/', {'description': xmlfile, 'uploadTerms':'on' }, follow=True)
+        client.post(ADMINROOT+'upload_xml/', {'description': xmlfile, 'uploadTerms':'on' }, follow=True)
         
         statsdata = getLRLast(UPDATE_STAT, 2)
         self.assertEqual(len(statsdata), 2)
@@ -172,4 +187,5 @@ class StatsTest(django.test.TestCase):
             print Exception, 'could not get usage stats: {}'.format(response)
         else:
             self.assertContains(response, "identificationInfo")
-    
+
+

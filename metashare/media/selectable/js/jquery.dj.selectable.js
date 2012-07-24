@@ -31,12 +31,38 @@
             if (style === 'bottom' || style === 'bottom-inline') {
                 $(this.element).after(this.deck);
             } else {
-                $(this.element).before(this.deck);
+                //$(this.element).before(this.deck);
+                $(this.searchIcon).before(this.deck);
             }
             $(self.hiddenMultipleSelector).each(function(i, input) {
                 self._addDeckItem(input);
             });
-        },		
+        },
+        
+        _handleAlignment: function() {
+            /* Handle correct alignment */
+            if(this.deck.hasClass('selectable-deck-top'))
+            {
+                var jqLab = $(this.deck.parent().children('label').get(0));
+                var jqImg = $(this.deck.parent().children('img').get(0));
+                var labBottom = jqLab.position().top + jqLab.height();
+                var deckBottom = this.deck.position().top + this.deck.height() + parseInt(this.deck.css('margin-bottom'));
+                var imgTop = jqImg.position().top;
+                if(deckBottom < labBottom)
+                {
+                	jqImg.css('margin-left', 0);
+                	jqImg.css('padding-left', 0);
+                }
+                else
+                {
+                	var mgLeft = this.deck.css('margin-left');
+                	var pdLeft = this.deck.css('padding-left');
+                	jqImg.css('margin-left', mgLeft);
+                	jqImg.css('padding-left', pdLeft);
+                }
+            }
+            
+        },
 
         _addDeckItem: function(input) {
             /* Add new deck list item from a given hidden input */
@@ -71,10 +97,13 @@
                         }
                     	$(input).remove();
                         $(this).closest('li').remove();
+                        self._handleAlignment();
                         return false;
                     })
                 )
             );
+            self._handleAlignment();
+            
             if(self.allowEditing && (self.baseEditingUrl != null))
             {
                 jqItem.append(
@@ -141,6 +170,7 @@
             self.baseEditingUrl = null;
             var jqParent = $(input).parent();
             var jqA = jqParent.find('a');
+            self.searchIcon = jqParent.children('img').get(0);
             var href = jqA.attr('href');
             if(href)
             {

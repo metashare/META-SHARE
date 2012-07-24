@@ -7,9 +7,8 @@ import logging
 from uuid import uuid1
 
 from django.contrib.auth.models import User, Group
-from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.db import models
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 
 from metashare.settings import LOG_LEVEL, LOG_HANDLER
@@ -40,20 +39,33 @@ class RegistrationRequest(models.Model):
     """
     Contains user data related to a user registration request.
     """
-    shortname = models.CharField('Username', max_length=30, unique=True)
-    firstname = models.CharField('First name', max_length=30)
-    lastname = models.CharField('Last name', max_length=30)
-    email = models.EmailField(unique=True)
-    
+    user = models.OneToOneField(User)
     uuid = models.CharField(max_length=32, verbose_name="UUID",
-      default=_create_uuid)
+                            default=_create_uuid)
     created = models.DateTimeField(auto_now_add=True)
     
+    def __init__(self, *args, **kwargs):
+        super(RegistrationRequest, self).__init__(*args, **kwargs)
+
+    @staticmethod
+    def _delete_related_user(instance, **kwargs):
+        """
+        Deletes the related `User` object of the given deleted
+        `RegistrationRequest` instance, if the former is not active, yet.
+        """
+        if not instance.user.is_active:
+            instance.user.delete()
+
     def __unicode__(self):
         """
         Return Unicode representation for this instance.
         """
-        return u'<RegistrationRequest "{0}">'.format(self.shortname)
+        return u'<RegistrationRequest "{0}">'.format(self.user.username)
+
+# make sure to delete the related `User` object of a deleted
+# `RegistrationRequest`, if necessary
+post_delete.connect(RegistrationRequest._delete_related_user,
+                    sender=RegistrationRequest)
 
 
 class ResetRequest(models.Model):
@@ -89,11 +101,11 @@ class EditorGroup(Group):
 
     def get_managers(self):
         return User.objects.filter(groups__name__in=
-            ManagerGroup.objects.filter(managed_group__name=self.name)
+            EditorGroupManagers.objects.filter(managed_group__name=self.name)
                 .values_list('name', flat=True))
 
 
-class EditorRegistrationRequest(models.Model):
+class EditorGroupApplication(models.Model):
     """
     Contains user data related to a user application for being an editor.
     """
@@ -105,11 +117,11 @@ class EditorRegistrationRequest(models.Model):
         """
         Return Unicode representation for this instance.
         """
-        return u'<EditorRegistrationRequest of "{0}" for "{1}">'.format(
+        return u'<EditorGroupApplication of "{0}" for "{1}">'.format(
                 self.user, self.editor_group)
 
 
-class ManagerGroup(Group):
+class EditorGroupManagers(Group):
     """
     A specialized `Group` which gives its members permissions to manage language
     resources belonging to a certain (managed) group.
@@ -118,8 +130,56 @@ class ManagerGroup(Group):
     ingest/publish resources belonging to the managed group. Delete permission
     for a resource is suggested by the corresponding `ModelAdmin` class.
     """
-    # the `EditorGroup` which is managed by members of this `ManagerGroup`
+    # the `EditorGroup` which is managed by members of this `EditorGroupManagers`
     managed_group = models.OneToOneField(EditorGroup)
+
+    class Meta:
+        verbose_name = "editor group managers group"
+
+    def get_members(self):
+        return User.objects.filter(groups__name=self.name)
+
+
+class Organization(Group):
+    """
+    A specialized `Group` subtype which is used to group users from a same organization
+    who get specific access rights to the resources.
+    """
+
+    def get_members(self):
+        return User.objects.filter(groups__name=self.name)
+
+    def get_managers(self):
+        return User.objects.filter(groups__name__in=
+            OrganizationManagers.objects.filter(managed_organization__name=self.name)
+                .values_list('name', flat=True))
+
+
+class OrganizationApplication(models.Model):
+    """
+    Contains user data related to a user application for being member of an organization.
+    """
+    user = models.ForeignKey(User)
+    organization = models.OneToOneField(Organization)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        """
+        Return Unicode representation for this instance.
+        """
+        return u'<OrganizationApplication of "{0}" for "{1}">'.format(
+                self.user, self.organization)
+
+
+class OrganizationManagers(Group):
+    """
+    A specialized `Group` which gives its members permissions to manage a certain organization.
+    """
+    # the `Organization` which is managed by members of this `OrganizationManagers`
+    managed_organization = models.OneToOneField(Organization)
+
+    class Meta:
+        verbose_name = "organization managers group"
 
     def get_members(self):
         return User.objects.filter(groups__name=self.name)
@@ -148,6 +208,8 @@ class UserProfile(models.Model):
     position = models.CharField(max_length=50, blank=True)
     homepage = models.URLField(blank=True)
     
+    default_editor_groups = models.ManyToManyField(EditorGroup, blank=True)
+
     # These fields can be edited by the user in the browser.
     __editable_fields__ = ('birthdate', 'affiliation', 'position', 'homepage')
     
@@ -168,10 +230,6 @@ class UserProfile(models.Model):
         if not self.user:
             super(UserProfile, self).delete(*args, **kwargs)
 
-# cfedermann: of course, we will now also have to call synchronise methods for
-#             delete() calls.  For this, we have to create receivers listening
-#             to the post_delete signal.  Again, this has to be tested!
-
     def has_manager_permission(self, editor_group=None):
         """
         Return whether the user profile has permission to manage the given
@@ -182,13 +240,31 @@ class UserProfile(models.Model):
         """
         if self.user.is_superuser:
             return True
-        mgr_groups = ManagerGroup.objects.filter(
+        mgr_groups = EditorGroupManagers.objects.filter(
             name__in=self.user.groups.values_list('name', flat=True))
         if editor_group:
             return any(editor_group.name == mgr_group.managed_group.name
                        for mgr_group in mgr_groups)
         else:
             return mgr_groups.count() != 0
+
+    def has_organization_manager_permission(self, organization=None):
+        """
+        Return whether the user profile has permission to manage the given
+        organization.
+        
+        If no organization is given, then the method returns whether the user
+        profile has manager permission for any organization.
+        """
+        if self.user.is_superuser:
+            return True
+        org_mgr_groups = OrganizationManagers.objects.filter(
+            name__in=self.user.groups.values_list('name', flat=True))
+        if organization:
+            return any(organization.name == org_mgr_group.managed_organization.name
+                       for org_mgr_group in org_mgr_groups)
+        else:
+            return org_mgr_groups.count() != 0
 
 
 @receiver(post_save, sender=User)
@@ -210,32 +286,3 @@ def create_profile(sender, instance, created, **kwargs):
     else:
         profile = instance.get_profile()
         profile.save()
-
-# cfedermann: the following code allows to catch the m2m update signals, i.e.
-#             pre/post_{clear,add,remove}.
-#
-#from django.db.models.signals import m2m_changed
-#
-#def do_something_with_permissions(sender, instance, action, **kwargs):
-#    """
-#    We want to use the "post_" actions: post_add, post_remove, post_clear.
-#    - https://docs.djangoproject.com/en/dev/ref/signals/ \
-#      #django.db.models.signals.m2m_changed
-#    """
-#    LOGGER.debug('Action: {0} for instance: {1}'.format(action, instance))
-#
-#m2m_changed.connect(do_something_with_permissions, sender=User.user_permissions.through)
-
-@receiver(user_logged_in)
-def add_uuid_to_session(sender, request, user, **kwargs):
-    """
-    Add the logged in user's UUID to the session object.
-    """
-    request.session['METASHARE_UUID'] = user.get_profile().uuid
-
-@receiver(user_logged_out)
-def del_uuid_from_session(sender, request, user, **kwargs):
-    """
-    Delete the current UUID from the session object.
-    """
-    request.session['METASHARE_UUID'] = None

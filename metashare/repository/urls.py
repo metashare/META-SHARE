@@ -61,9 +61,10 @@ sqs = SearchQuerySet() \
   .facet("videoScenarioTypeFilter") \
   .facet("imageImageGenreFilter") \
   .facet("imageTypeOfImageContentFilter") \
-  .facet("tnTypeOfTnContentFilter") \
-  .facet("tnGramBaseItemFilter") \
-  .facet("tnGramOrderFilter")
+  .facet("textNumericalTypeOfTnContentFilter") \
+  .facet("textNgramBaseItemFilter") \
+  .facet("textNgramOrderFilter") \
+  .facet("languageVarietyFilter")
 
 urlpatterns = patterns('metashare.repository.views',
   (r'^browse/(?P<resource_name>[\w\-]*)/(?P<object_id>\w+)/$',
@@ -72,6 +73,8 @@ urlpatterns = patterns('metashare.repository.views',
     'view'),
   (r'^download/(?P<object_id>\w+)/$',
     'download'),
+  (r'^download_contact/(?P<object_id>\w+)/$',
+    'download_contact'),
   url(r'^search/$',
     search_view_factory(view_class=MetashareFacetedSearchView,
                         form_class=FacetedBrowseForm,

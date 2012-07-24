@@ -16,7 +16,6 @@ from xml.etree import ElementTree as etree
 from datetime import datetime, timedelta
 import logging
 import re
-from metashare.xml_utils import pretty_xml
 from xml.etree.ElementTree import tostring
 from json import dumps, loads
 from django.core.serializers.json import DjangoJSONEncoder
@@ -306,6 +305,7 @@ class StorageObject(models.Model):
         update_xml = False
         
         # create current version of metadata XML
+        from metashare.xml_utils import pretty_xml
         _metadata = pretty_xml(tostring(
           # pylint: disable-msg=E1101
           self.resourceinfotype_model_set.all()[0].export_to_elementtree()))
@@ -616,7 +616,6 @@ class RemovedObject(models.Model):
     """
     Models a language resource that was completely removed from the storage layer.
     """
-    __schema_name__ = "REMOVEDOJBECT"
     
     identifier = models.CharField(max_length=64, blank=False,
       editable=False, unique=True, help_text="(Read-only) unique " \

@@ -2,7 +2,7 @@
 Project: META-SHARE prototype implementation
  Author: Christian Federmann <cfedermann@dfki.de>
 """
-from os.path import abspath, dirname, join
+from os.path import abspath, dirname
 ROOT_PATH = abspath(dirname(__file__))
 
 # The URL for this META-SHARE node django application.  Do not use trailing /.
@@ -16,18 +16,6 @@ DJANGO_BASE = 'path/to/metashare/'
 
 # Required if deployed with lighttpd.
 # FORCE_SCRIPT_NAME = ""
-
-# Make this unique, and don't share it with anybody.
-# You can generate a new SECRET_KEY like this:
-#
-# import string
-# from random import choice
-# alphabet = string.letters + string.digits + string.punctuation
-# SECRET_KEY = ''.join([choice(alphabet) for i in range(50)])
-SECRET_KEY = '7h$+o^h4f%q#d$u7d^1!3s#a-+u5p*+p*lpz++z^q^9^+a5p--'
-
-# Path to the local private key used for decryption of content.
-PRIVATE_KEY_PATH = '/path/to/private/key'
 
 # Path to the local storage layer path used for persistent object storage.
 STORAGE_PATH = '/path/to/storage/path'
@@ -90,12 +78,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
 TIME_ZONE = 'Europe/Berlin'
-
-# Shared secret used for Single-Sign-On between META-SHARE core nodes.
-SSO_SECRET_KEY = '6736d82b807811e0a1e51093e908621ab4e0e5225bde4fbcb1aa160fbd198e2a'
-
-# The URL for META-SHARE statistics server.
-STATS_SERVER_URL = "http://metastats.fbk.eu/"
 
 # The location of the xdiff tool to compare XML files.
 XDIFF_LOCATION = "{0}/../misc/tools/xdiff-src/xdiff".format(ROOT_PATH)
@@ -183,3 +165,7 @@ PROXIED_NODES = {
 #    },
 }
 
+# Analytics application sample settings. More analytics services are available. 
+# For more options, check http://packages.python.org/django-analytical/
+#GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-XXXXXXXX-X'
+#GOOGLE_ANALYTICS_SITE_SPEED = True

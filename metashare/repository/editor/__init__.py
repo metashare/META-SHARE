@@ -43,7 +43,6 @@ from django.views.decorators.csrf import csrf_protect
 
 from metashare.repository.editor.forms import ResourceDescriptionUploadForm
 from metashare.storage.models import INTERNAL, MASTER
-from metashare.xml_utils import import_from_file
 
 csrf_protect_m = method_decorator(csrf_protect)
 
@@ -79,6 +78,7 @@ class MetashareBackendSite(AdminSite):
             if form.is_valid():
                 # Retrieve the upload resource description file.
                 description = request.FILES['description']
+                from metashare.xml_utils import import_from_file
                 successes, failures = \
                   import_from_file(description, description.name, INTERNAL, MASTER, request.user.id)
                 
@@ -98,7 +98,12 @@ class MetashareBackendSite(AdminSite):
                     if len(failures) > 0:
                         _msg = u'Import failed for {} files:\n'.format(len(failures))
                         for descriptor, exception in failures:
-                            _msg += u'\t{}: {}\n'.format(descriptor, ' '.join(exception.args))
+                            _msg += u'\t{}: '.format(descriptor)
+                            if isinstance(exception.args, tuple):
+                                _msg += u'{}\n'.format(
+                                    ' '.join([str(a) for a in exception.args]))
+                            else:
+                                _msg += u'{}\n'.format(exception.args)
                         messages.error(request, _msg)
                 return HttpResponseRedirect(redirect_url)
         else: # not a POST request

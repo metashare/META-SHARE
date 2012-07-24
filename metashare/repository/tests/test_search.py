@@ -1,7 +1,6 @@
 from metashare import test_utils, settings
 from metashare.settings import DJANGO_BASE, ROOT_PATH
 from haystack.query import SearchQuerySet
-from django.contrib.auth.models import User
 from django.test.client import Client
 import os
 from metashare.test_utils import create_user
@@ -135,9 +134,9 @@ class SearchTest(test_utils.IndexAwareTestCase):
         """
         Clean up the test
         """
-        test_utils.clean_db()
+        test_utils.clean_resources_db()
         test_utils.clean_storage()
-        User.objects.all().delete()
+        test_utils.clean_user_db()
 
     def importOneFixture(self):
         _currfile = '{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
@@ -154,15 +153,6 @@ class SearchTest(test_utils.IndexAwareTestCase):
                 successes[0].storage_object.save()    
             if failures:
                 print failures    
-    #def importInternalFixtures(self):
-    #   _path = '{}/repository/test_fixtures/internal/'.format(ROOT_PATH)
-    #   files = os.listdir(_path)   
-    #   for filename in files:
-    #       fullpath = os.path.join(_path, filename)  
-    #       test_utils.import_xml_or_zip(fullpath)
-    #       if successes:                
-    #           successes[0].storage_object.publication_status = 'i'
-    #           successes[0].storage_object.save()   
 
     def test_case_insensitive_search(self):
         """
@@ -299,9 +289,9 @@ class SearchTestPublishedResources(TestCase):
         """
         Clean up the test
         """
-        test_utils.clean_db()
+        test_utils.clean_resources_db()
         test_utils.clean_storage()
-        User.objects.all().delete()
+        test_utils.clean_user_db()
 
     def testLanguageFacet(self):   
         client = Client()

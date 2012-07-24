@@ -28,7 +28,7 @@ class EmailPictureTest(TestCase):
         """
         Clean up the test
         """
-        test_utils.clean_db()
+        test_utils.clean_resources_db()
         test_utils.clean_storage()
 
 # pylint: disable-msg=W0105
