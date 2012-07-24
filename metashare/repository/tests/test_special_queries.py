@@ -3,7 +3,7 @@ Created on 20.07.2012
 
 @author: steffen
 '''
-from metashare.repository.forms import _extract_special_queries,\
+from metashare.repository.forms import _extract_special_queries, \
     _process_special_query, MORE_FROM_SAME_CREATORS, MORE_FROM_SAME_PROJECTS
 from metashare import test_utils
 from metashare.recommendations.tests import _import_resource
