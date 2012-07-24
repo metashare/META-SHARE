@@ -2,16 +2,14 @@
 Project: META-SHARE prototype implementation
  Author: Christian Federmann <cfedermann@dfki.de>
 """
-# pylint: disable-msg=W0611
-from django.conf.urls.defaults import patterns, include, handler404, \
-  handler500
+from django.conf.urls.defaults import patterns, include
 from django.contrib import admin
-from django.contrib.sitemaps import Sitemap, FlatPageSitemap
 from django.views.generic.simple import direct_to_template
 
-from metashare.settings import MEDIA_ROOT, DEBUG, DJANGO_BASE, SITEMAP_URL
 from metashare.repository.editor import admin_site as editor_site
-from metashare.repository.sitemap import *
+from metashare.repository.sitemap import RepositorySitemap
+from metashare.settings import MEDIA_ROOT, DEBUG, DJANGO_BASE, SITEMAP_URL
+
 
 admin.autodiscover()
 
