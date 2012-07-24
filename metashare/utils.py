@@ -3,20 +3,6 @@ This file holds globally useful utility functions,
 i.e. functions that are generic enough not to be
 specific to one app.
 '''
-
-def find_first_uppercase(astring):
-    '''
-    Return the position of the first uppercase character in astring,
-    or -1 if there is no such character
-    '''
-    if astring is None:
-        return -1
-    for i in range(0, len(astring)):
-        if astring[i].isupper():
-            return i
-    return -1
-
-
 def get_class_by_name(module_name, class_name):
     '''
     Given the name of a module (e.g., 'metashare.resedit.admin')
@@ -39,4 +25,3 @@ def verify_subclass(subclass, superclass):
     '''
     if not issubclass(subclass, superclass):
         raise TypeError('class {0} is not a subclass of class {1}'.format(subclass, superclass))
-        

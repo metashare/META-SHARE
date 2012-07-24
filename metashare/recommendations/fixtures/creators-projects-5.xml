@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns:xslt="http://xml.apache.org/xsltm"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema"
+  xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema">
+  <identificationInfo>
+    <resourceName lang="en">AURORA-5</resourceName>
+    <resourceName lang="fr">AURORA-5</resourceName>
+    <description lang="en">The Aurora project was originally set
+      up to establish a worldwide standard for the feature extraction
+      software which forms the core of the front-end of a DSR
+      (Distributed Speech Recognition) system.</description>
+    <description lang="fr">Le projet Aurora a été créé à
+      l’origine pour établir un standard international pour les
+      logiciels d’extraction de caractéristiques qui forment le noyau du
+      « front-end » d’un système DSR (Distributed Speech Recognition –
+      Reconnaissance de la parole distribuée).</description>
+    <resourceShortName />
+    <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+    <url>http://catalog.elra.info/product_info.php?products_id=1015</url>
+    <identifier>ELRA-AURORA-CD0005</identifier>
+  </identificationInfo>
+  <metadataInfo>
+    <metadataCreationDate>2005-05-12</metadataCreationDate>
+    <metadataCreator>
+      <surname lang="en-us">Valérie</surname>
+      <givenName lang="en-us">Mapelli</givenName>
+      <communicationInfo>
+        <email>mapelli@elda.org</email>
+        <url>http://www.elda.org</url>
+        <address>55-57 rue Brillat-Savarin</address>
+        <zipcode>75013</zipcode>
+        <city>Paris</city>
+        <country>France</country>
+        <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+        <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+    </metadataCreator>
+  </metadataInfo>
+  <versionInfo>
+    <version>1.0</version>
+    <lastDateUpdated>2010-03-12</lastDateUpdated>
+  </versionInfo>
+  <distributionInfo>
+    <availability>available-restrictedUse</availability>
+    <licenceInfo>
+      <licence>ELRA_END_USER</licence>
+      <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+      <fee>250.00</fee>
+      <userNature>commercial</userNature>
+      <membershipInfo>
+        <member>False</member>
+        <membershipInstitution>ELRA</membershipInstitution>
+      </membershipInfo>
+    </licenceInfo>
+    <licenceInfo>
+      <licence>ELRA_END_USER</licence>
+      <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+      <fee>250.00</fee>
+      <userNature>academic</userNature>
+      <membershipInfo>
+        <member>False</member>
+        <membershipInstitution>ELRA</membershipInstitution>
+      </membershipInfo>
+    </licenceInfo>
+    <licenceInfo>
+      <licence>ELRA_END_USER</licence>
+      <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+      <fee>250.00</fee>
+      <userNature>commercial</userNature>
+      <membershipInfo>
+        <member>True</member>
+        <membershipInstitution>ELRA</membershipInstitution>
+      </membershipInfo>
+    </licenceInfo>
+    <licenceInfo>
+      <licence>ELRA_END_USER</licence>
+      <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+      <fee>250.00</fee>
+      <userNature>academic</userNature>
+      <membershipInfo>
+        <member>True</member>
+        <membershipInstitution>ELRA</membershipInstitution>
+      </membershipInfo>
+    </licenceInfo>
+    <availabilityStartDate>2007-10-08</availabilityStartDate>
+  </distributionInfo>
+  <usageInfo>
+    <actualUseInfo>
+      <actualUse>nlpApplications</actualUse>
+      <useNLPSpecific>speechRecognition</useNLPSpecific>
+    </actualUseInfo>
+  </usageInfo>
+  <resourceComponentType>
+    <corpusInfo>
+      <resourceType>corpus</resourceType>
+      <corpusMediaType>
+        <corpusAudioInfo>
+          <mediaType>audio</mediaType>
+          <lingualityInfo>
+            <lingualityType>monolingual</lingualityType>
+          </lingualityInfo>
+          <languageInfo>
+            <languageId>eng</languageId>
+            <languageName>English</languageName>
+          </languageInfo>
+        </corpusAudioInfo>
+      </corpusMediaType>
+    </corpusInfo>
+  </resourceComponentType>
+</resourceInfo>

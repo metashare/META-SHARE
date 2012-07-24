@@ -468,7 +468,7 @@ class SchemaModel(models.Model):
                                 _element.required = self.is_required_field(
                                                                 _model_field)
                             else:
-                                _element.required = 0                            
+                                _element.required = False
                         else:
                             _element.text = SchemaModel._python_to_xml(
                                                                 _sub_value)                            
@@ -476,7 +476,7 @@ class SchemaModel(models.Model):
                                 _element.required = self.is_required_field(
                                                                 _model_field)
                             else:
-                                _element.required = 0
+                                _element.required = False
                         _current_node.append(_element)
 
         # Return root node of the ElementTree; can be converted to String

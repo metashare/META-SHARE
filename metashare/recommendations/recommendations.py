@@ -129,44 +129,57 @@ def get_download_recommendations(resource):
     # TODO: decide what threshold to use; may restrict recommendation to top X resources of the list 
     return TogetherManager.getManager(Resource.DOWNLOAD)\
       .getTogetherList(resource, 0)
-      
-      
+
+
 def get_more_from_same_creators(resource):
     """
     Returns all resources where at least one of the creators of the given
     resource is also an assigned creator.
     """
-    
     # get all creators of the resource; this includes persons and organizations
-    creators = resource.resourceCreationInfo.resourceCreator.all()
-    result = set()
-    for _creator in creators:
-        for _res in resourceInfoType_model.objects.filter(
-          resourceCreationInfo__resourceCreator=_creator):
-            if _res == resource:
-                continue
-            result.add(_res)
+    creation_info = resource.resourceCreationInfo
+    if creation_info:
+        return tuple(get_more_from_same_creators_qs(resource))
+    return ()
 
-    return result
-    
+
+def get_more_from_same_creators_qs(resource):
+    """
+    Returns a query set of all resources where at least one of the creators of
+    the given resource is also an assigned creator.
+    """
+    # get all creators of the resource; this includes persons and organizations
+    creation_info = resource.resourceCreationInfo
+    if creation_info:
+        return resourceInfoType_model.objects.exclude(pk=resource.pk) \
+                    .filter(resourceCreationInfo__resourceCreator__in=
+                                creation_info.resourceCreator.all()) \
+                    .distinct()
+    return resourceInfoType_model.objects.none()
+
 
 def get_more_from_same_projects(resource):
     """
     Returns all resources where at least one of the projects of the given
     resource is also an assigned project.
     """
-    
     # get all projects of the resource
-    projects = resource.resourceCreationInfo.fundingProject.all()
-    result = set()
-    for _project in projects:
-        for _res in resourceInfoType_model.objects.filter(
-          resourceCreationInfo__fundingProject=_project):
-            if _res == resource:
-                continue
-            result.add(_res)
+    creation_info = resource.resourceCreationInfo
+    if creation_info:
+        return tuple(get_more_from_same_projects_qs(resource))
+    return ()
 
-    return result
-        
-    
-          
+
+def get_more_from_same_projects_qs(resource):
+    """
+    Returns a query set of all resources where at least one of the projects of
+    the given resource is also an assigned project.
+    """
+    # get all projects of the resource
+    creation_info = resource.resourceCreationInfo
+    if creation_info:
+        return resourceInfoType_model.objects.exclude(pk=resource.pk) \
+                    .filter(resourceCreationInfo__fundingProject__in=
+                                creation_info.fundingProject.all()) \
+                    .distinct()
+    return resourceInfoType_model.objects.none()

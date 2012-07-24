@@ -52,9 +52,7 @@
                 <a href="{% url editor:index %}"><div class="button middle_button">Editor</div></a>
             {% endif %}
             {% if user.username %}
-                {% if user.username != 'MetaShareUser' %}
-                    <a href="{% url metashare.accounts.views.edit_profile %}"><div class="button middle_button">Profile</div></a>
-                {% endif %}
+                <a href="{% url metashare.accounts.views.edit_profile %}"><div class="button middle_button">Profile</div></a>
                 <a href="{% url metashare.views.logout %}"><div class="button middle_button">Logout</div></a>
             {% else %}
                 <a href="{% url metashare.accounts.views.create %}"><div class="button middle_button">Register</div></a>

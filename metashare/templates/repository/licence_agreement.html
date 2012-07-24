@@ -1,6 +1,9 @@
 {% extends "base.html" %}
+{% block title %}
+{{ resource }} &ndash; Download Licence Agreement &ndash; META-SHARE
+{% endblock %}
 {% block content %}
-<h2{% if not resource.storage_object.published %} style="font-style:italic;"{% endif %}>{{ resource }}</h2>
+<h2>{{ resource }}</h2>
 <div class="content_box">
   <h3>Licence Agreement</h3>
 {% if licence_path %}
@@ -17,5 +20,6 @@
 {% else %}
   <p>We&rsquo;re afraid, license terms for the download of the selected resource are not available. Please contact the resource maintainer for more information on how to obtain the resource.</p>
 {% endif %}
+  <a href="{% url metashare.repository.views.download_contact resource.storage_object.identifier %}"><input type="button" class="span-8 button middle_button" value="Contact Resource Maintainer" /></a>
 </div>
 {% endblock %}

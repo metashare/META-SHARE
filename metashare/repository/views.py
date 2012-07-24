@@ -15,20 +15,27 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
+from django.contrib import messages
+from django.template.loader import render_to_string
+from django.core.mail import send_mail
+from django.utils.translation import ugettext as _
 
 from haystack.views import FacetedSearchView
 
 from metashare.repository.editor.resource_editor import has_edit_permission
-from metashare.repository.forms import LicenseSelectionForm, LicenseAgreementForm
+from metashare.repository.forms import LicenseSelectionForm, \
+    LicenseAgreementForm, DownloadContactForm, MORE_FROM_SAME_CREATORS, \
+    MORE_FROM_SAME_PROJECTS
 from metashare.repository.models import licenceInfoType_model, resourceInfoType_model
 from metashare.repository.search_indexes import resourceInfoType_modelIndex
 from metashare.settings import LOG_LEVEL, LOG_HANDLER, MEDIA_URL, DJANGO_URL
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
 from metashare.storage.models import PUBLISHED
-from metashare.recommendations.recommendations import SessionResourcesTracker
-from metashare.recommendations.recommendations import Resource
-from metashare.recommendations.models import TogetherManager
+from metashare.recommendations.recommendations import SessionResourcesTracker, \
+    get_download_recommendations, get_view_recommendations, \
+    get_more_from_same_creators_qs, get_more_from_same_projects_qs
+
 
 MAXIMUM_READ_BLOCK_SIZE = 4096
 
@@ -326,6 +333,83 @@ def _provide_download(request, resource, download_urls):
 
 
 @login_required
+def download_contact(request, object_id):
+    """
+    Renders the download contact view to request information regarding a resource
+    """
+    resource = get_object_or_404(resourceInfoType_model,
+                                 storage_object__identifier=object_id,
+                                 storage_object__publication_status=PUBLISHED)
+
+    default_message = "We are interested in using the above mentioned " \
+        "resource. Please provide us with all the relevant information (e.g.," \
+        " licensing provisions and restrictions, any fees required etc.) " \
+        "which is necessary for concluding a deal for getting a license. We " \
+        "are happy to provide any more information on our request and our " \
+        "envisaged usage of your resource.\n\n" \
+        "[Please include here any other request you may have regarding this " \
+        "resource or change this message altogether]\n\n" \
+        "Please kindly use the above mentioned e-mail address for any " \
+        "further communication."
+
+    # Find out the relevant resource contact emails and names
+    resource_emails = []
+    resource_contacts = []
+    for person in resource.contactPerson.all():
+        resource_emails.append(person.communicationInfo.email[0])
+        if person.givenName:
+            _name = u'{} '.format(person.get_default_givenName())
+        else:
+            _name = u''
+        resource_contacts.append(_name + person.get_default_surname())
+
+    # Check if the edit form has been submitted.
+    if request.method == "POST":
+        # If so, bind the creation form to HTTP POST values.
+        form = DownloadContactForm(initial={'userEmail': request.user.email,
+                                            'message': default_message},
+                                   data=request.POST)
+        # Check if the form has validated successfully.
+        if form.is_valid():
+            message = form.cleaned_data['message']
+            user_email = form.cleaned_data['userEmail']
+
+            # Render notification email template with correct values.
+            data = {'message': message, 'resource': resource,
+                'resourceContactName': resource_contacts, 'user': request.user,
+                'user_email': user_email, 'node_url': DJANGO_URL}
+            try:
+                # Send out email to the resource contacts
+                send_mail('Request for information regarding a resource',
+                    render_to_string('repository/resource_download_information.email', data),
+                    user_email, resource_emails, fail_silently=False)
+            except: #SMTPException:
+                # If the email could not be sent successfully, tell the user
+                # about it.
+                messages.error(request,
+                  _("There was an error sending out the request email."))
+            else:
+                messages.success(request, _('You have successfully ' \
+                    'sent a message to the resource contact person.'))
+
+            # Redirect the user to the resource page.
+            return redirect(resource.get_absolute_url())
+
+    # Otherwise, render a new DownloadContactForm instance
+    else:
+        form = DownloadContactForm(initial={'userEmail': request.user.email,
+                                            'message': default_message})
+
+    dictionary = { 'username': request.user,
+      'resource': resource,
+      'resourceContactName': resource_contacts,
+      'resourceContactEmail': resource_emails,
+      'form': form }
+    return render_to_response('repository/download_contact_form.html',
+                        dictionary, context_instance=RequestContext(request))
+
+
+@login_required
 def create(request):
     """
     Redirects to the Django admin backend editor for resources.
@@ -370,39 +454,40 @@ def view(request, resource_name=None, object_id=None):
         tracker.add_view(resource, datetime.now())
         request.session['tracker'] = tracker
             
-    # Add 'also viewed' resources
-    also_viewed_resources = []
-    man = TogetherManager.getManager(Resource.VIEW)
-    view_res = man.getTogetherList(resource, 0)
-    for res in view_res:
-        res_item = {}
-        res_item['name'] = res.__unicode__()
-        res_item['url'] = "{0}/{1}".format(res.storage_object.source_url,
-                               res.get_relative_url())
-        also_viewed_resources.append(res_item)
-    context['also_viewed'] = also_viewed_resources
-    
-    # Add 'also downloaded' resources
-    also_downloaded_resources = []
-    man = TogetherManager.getManager(Resource.DOWNLOAD)
-    down_res = man.getTogetherList(resource, 0)
-    for res in down_res:
-        res_item = {}
-        res_item['name'] = res.__unicode__()
-        res_item['url'] = "{0}/{1}".format(res.storage_object.source_url,
-                               res.get_relative_url())
-        also_downloaded_resources.append(res_item)
-    context['also_downloaded'] = also_downloaded_resources
-    
-    context['search_rel_projects'] = '{0}/repository/search?q=mfsp:{1}'.format(DJANGO_URL,
-                                            resource.storage_object.identifier)
-    
-    context['search_rel_creators'] = '{0}/repository/search?q=mfsc:{1}'.format(DJANGO_URL,
-                                            resource.storage_object.identifier)
-    
+    # Add recommendations for 'also viewed' resources
+    context['also_viewed'] = \
+        _format_recommendations(get_view_recommendations(resource))
+    # Add recommendations for 'also downloaded' resources
+    context['also_downloaded'] = \
+        _format_recommendations(get_download_recommendations(resource))
+    # Add 'more from same' links
+    if get_more_from_same_projects_qs(resource).count():
+        context['search_rel_projects'] = '{}/repository/search?q={}:{}'.format(
+            DJANGO_URL, MORE_FROM_SAME_PROJECTS,
+            resource.storage_object.identifier)
+    if get_more_from_same_creators_qs(resource).count():
+        context['search_rel_creators'] = '{}/repository/search?q={}:{}'.format(
+            DJANGO_URL, MORE_FROM_SAME_CREATORS,
+            resource.storage_object.identifier)
+
     # Render and return template with the defined context.
     ctx = RequestContext(request)
     return render_to_response(template, context, context_instance=ctx)
+
+
+def _format_recommendations(recommended_resources):
+    '''
+    Returns the given resource recommendations list formatted as a list of
+    dictionaries with the two keys "name" and "url" (for use in the single
+    resource view).
+    '''
+    result = []
+    for res in recommended_resources:
+        res_item = {}
+        res_item['name'] = res.__unicode__()
+        res_item['url'] = res.get_absolute_url()
+        result.append(res_item)
+    return result
 
 
 class MetashareFacetedSearchView(FacetedSearchView):
@@ -484,7 +569,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
         # Step (1): if there are any selected facets, then add these first:
         if sel_facets:
             # add all top level facets (sorted by their facet IDs):
-            for name, label, facet_id, _ in [f for f in filter_labels if f[3] == 0]:
+            for name, label, facet_id, _dummy in [f for f in filter_labels if f[3] == 0]:
                 name_exact = '{0}_exact'.format(name)
                 # only add selected facets in step (1)
                 if name_exact in sel_facets:
@@ -528,7 +613,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
 
         # Step (2): add all top level facets without selected facet items at the
         # end (sorted by their facet IDs):
-        for name, label, facet_id, _ in [f for f in filter_labels if f[3] == 0]:
+        for name, label, facet_id, _dummy in [f for f in filter_labels if f[3] == 0]:
             name_exact = '{0}_exact'.format(name)
             # only add facets without selected items in step (2)
             if not name_exact in sel_facets:
