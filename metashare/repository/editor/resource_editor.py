@@ -422,6 +422,13 @@ class ResourceModelAdmin(SchemaModelAdmin):
 
     @csrf_protect_m    
     def delete(self, request, queryset):
+        """
+        Form to mark a resource as delete.
+        """
+        # pylint: disable-msg=C0103
+        model = self.model
+        opts = model._meta
+
         if not self.has_delete_permission(request):
             raise PermissionDenied
         if 'cancel' in request.POST:
@@ -450,17 +457,30 @@ class ResourceModelAdmin(SchemaModelAdmin):
         else:
             form = self.ConfirmDeleteForm(initial={admin.ACTION_CHECKBOX_NAME:
                             request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
-        return render_to_response(
-            'admin/repository/resourceinfotype_model/confirm_delete.html',
-            {'can_be_deleted': can_be_deleted, 'cannot_be_deleted':
-             cannot_be_deleted, 'form': form, 'path':request.get_full_path()},
-            context_instance=RequestContext(request))
+        return render_to_response('admin/repository/resourceinfotype_model/confirm_delete.html',
+                                  { 
+                                   'can_be_deleted': can_be_deleted,
+                                   'cannot_be_deleted': cannot_be_deleted,
+                                   'form': form,
+                                   'app_label': opts.app_label,
+                                   'verbose_name': opts.verbose_name,
+                                   'action': 'Delete resource',
+                                   'path': request.get_full_path()
+                                  },
+                                  context_instance=RequestContext(request))
 
     delete.short_description = _("Mark selected resources as deleted")
 
 
     @csrf_protect_m    
     def add_group(self, request, queryset):
+        """
+        Form to add an editor group to a resource.
+        """
+        # pylint: disable-msg=C0103
+        model = self.model
+        opts = model._meta
+
         if 'cancel' in request.POST:
             self.message_user(request, _('Cancelled adding editor groups.'))
             return
@@ -496,10 +516,16 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 ResourceModelAdmin._get_addable_editor_groups(request.user),
                 initial={admin.ACTION_CHECKBOX_NAME:
                          request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
-        return render_to_response(
-            'admin/repository/resourceinfotype_model/add_editor_group.html',
-            {'selected_resources': queryset, 'form': form, 'path':
-             request.get_full_path()}, context_instance=RequestContext(request))
+        return render_to_response('admin/repository/resourceinfotype_model/add_editor_group.html',
+                                  {
+                                   'selected_resources': queryset,
+                                   'form': form,
+                                   'app_label': opts.app_label,
+                                   'verbose_name': opts.verbose_name,
+                                   'action': 'Add editor group',
+                                   'path': request.get_full_path()
+                                  },
+                                  context_instance=RequestContext(request))
 
     add_group.short_description = _("Add editor groups to selected resources")
 
@@ -527,6 +553,13 @@ class ResourceModelAdmin(SchemaModelAdmin):
 
     @csrf_protect_m
     def remove_group(self, request, queryset):
+        """
+        Form to remove an editor group from a resource.
+        """
+        # pylint: disable-msg=C0103
+        model = self.model
+        opts = model._meta
+
         if not request.user.is_superuser:
             raise PermissionDenied
 
@@ -549,10 +582,17 @@ class ResourceModelAdmin(SchemaModelAdmin):
             form = self.IntermediateMultiSelectForm(EditorGroup.objects.all(),
                 initial={admin.ACTION_CHECKBOX_NAME:
                          request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
-        return render_to_response('admin/repository/resourceinfotype_model/' \
-                'remove_editor_group.html', {'selected_resources':
-             queryset, 'form': form, 'path': request.get_full_path()},
-            context_instance=RequestContext(request))
+        return render_to_response('admin/repository/resourceinfotype_model/'
+                                  'remove_editor_group.html',
+                                  {
+                                   'selected_resources': queryset,
+                                   'form': form,
+                                   'app_label': opts.app_label,
+                                   'verbose_name': opts.verbose_name,
+                                   'action': 'Remove editor group',
+                                   'path': request.get_full_path()
+                                  },
+                                  context_instance=RequestContext(request))
 
     remove_group.short_description = _("Remove editor groups from selected " \
                                        "resources")
@@ -560,6 +600,13 @@ class ResourceModelAdmin(SchemaModelAdmin):
 
     @csrf_protect_m    
     def add_owner(self, request, queryset):
+        """
+        Form to add an owner to a resource.
+        """
+        # pylint: disable-msg=C0103
+        model = self.model
+        opts = model._meta
+
         if 'cancel' in request.POST:
             self.message_user(request, _('Cancelled adding owners.'))
             return
@@ -590,16 +637,29 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 User.objects.filter(is_active=True),
                 initial={admin.ACTION_CHECKBOX_NAME:
                          request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
-        return render_to_response(
-            'admin/repository/resourceinfotype_model/add_owner.html',
-            {'selected_resources': queryset, 'form': form, 'path':
-             request.get_full_path()}, context_instance=RequestContext(request))
+        return render_to_response('admin/repository/resourceinfotype_model/add_owner.html',
+                                  {
+                                   'selected_resources': queryset,
+                                   'form': form,
+                                   'app_label': opts.app_label,
+                                   'verbose_name': opts.verbose_name,
+                                   'action': 'Add owner',
+                                   'path': request.get_full_path()
+                                  },
+                                  context_instance=RequestContext(request))
 
     add_owner.short_description = _("Add owners to selected resources")
 
 
     @csrf_protect_m    
     def remove_owner(self, request, queryset):
+        """
+        Form to remove an owner from a resource.
+        """
+        # pylint: disable-msg=C0103
+        model = self.model
+        opts = model._meta
+
         if not request.user.is_superuser:
             raise PermissionDenied
 
@@ -622,10 +682,16 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 User.objects.filter(is_active=True),
                 initial={admin.ACTION_CHECKBOX_NAME:
                          request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
-        return render_to_response(
-            'admin/repository/resourceinfotype_model/remove_owner.html',
-            {'selected_resources': queryset, 'form': form, 'path':
-             request.get_full_path()}, context_instance=RequestContext(request)) 
+        return render_to_response('admin/repository/resourceinfotype_model/remove_owner.html',
+                                  {
+                                   'selected_resources': queryset,
+                                   'form': form,
+                                   'app_label': opts.app_label,
+                                   'verbose_name': opts.verbose_name,
+                                   'action': 'Remove owner',
+                                   'path': request.get_full_path()
+                                  },
+                                  context_instance=RequestContext(request)) 
 
     remove_owner.short_description = _("Remove owners from selected resources")
 
