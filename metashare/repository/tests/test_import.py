@@ -3,17 +3,23 @@ from django.test import TestCase
 from metashare import test_utils
 from metashare.settings import ROOT_PATH
 from metashare.repository.models import documentUnstructuredString_model, \
-    documentInfoType_model
+    documentInfoType_model, User
+from metashare.accounts.models import EditorGroup
+from django.test.client import Client
+from metashare.settings import DJANGO_BASE, ROOT_PATH
 
 class ImportTest(TestCase):
     """
     Tests the import procedure for resources
     """
+
+    test_editor_group = None
+    super_user = None
     
     @classmethod
     def setUpClass(cls):
         test_utils.set_index_active(False)
-    
+
     @classmethod
     def tearDownClass(cls):
         test_utils.set_index_active(True)
@@ -24,12 +30,18 @@ class ImportTest(TestCase):
         """        
         test_utils.setup_test_storage()
         
+        ImportTest.test_editor_group = EditorGroup.objects.create(
+                                                    name='test_editor_group')
+
+        ImportTest.super_user = User.objects.create_superuser('superuser', 'su@example.com', 'secret')
+   
     def tearDown(self):
         """
         Clean up the test
         """
         test_utils.clean_resources_db()
         test_utils.clean_storage()
+        test_utils.clean_user_db()
 
     def _test_import_dir(self, path):
         """Asserts that all XML files in the given directory can be imported."""
@@ -95,3 +107,32 @@ class ImportTest(TestCase):
         # and 1 documentInfo in the database
         self.assertEqual(len(documentUnstructuredString_model.objects.all()), 2)
         self.assertEqual(len(documentInfoType_model.objects.all()), 1)
+
+    def test_imported_resource_get_user_default_editor_group(self):
+        """
+        Check if resource editor group is set to the default editor group of the user.
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+
+        ImportTest.super_user.get_profile().default_editor_groups \
+            .add(ImportTest.test_editor_group)
+
+        resourcefile = open('{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH))
+        response = client.post('/{0}editor/upload_xml/'.format(DJANGO_BASE), \
+          {'resource': resourcefile}, follow=True)
+        self.assertNotContains(response, '<td>{}</td>'.format(ImportTest.test_editor_group.name),
+          msg_prefix='expected the system to set an editor group to the resource.')
+
+    def test_imported_resource_get_none_if_no_default_editor_group(self):
+        """
+        Check if resource editor group is set to None if the user do not have a default editor group.
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+
+        resourcefile = open('{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH))
+        response = client.post('/{0}editor/upload_xml/'.format(DJANGO_BASE), \
+          {'resource': resourcefile}, follow=True)
+        self.assertNotContains(response, '<td>{}</td>'.format(ImportTest.test_editor_group.name),
+          msg_prefix='expected the system to set None as editor group to the resource.')
