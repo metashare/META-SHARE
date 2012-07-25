@@ -433,14 +433,20 @@ def view(request, resource_name=None, object_id=None):
     resource_tree = resource.export_to_elementtree()
     lr_content = _convert_to_template_tuples(resource_tree)
    
-    lr_content_paths = get_paths(lr_content)
+    # Get the paths of each items
+    lr_content_paths = get_structure_paths(lr_content)
     
+    list_of_main_components = resourceInfoType_model.get_fields_flat()
+
+    main_component_paths_dict = {}
     
-    for item in lr_content_paths:
-        print item
+    for item, value in lr_content_paths:
+        if value in list_of_main_components:
+			main_component_paths_dict[value] = item
+    print main_component_paths_dict
         
     # Define context for template rendering.
-    context = { 'resource': resource, 'lr_content': lr_content }
+    context = { 'resource': resource, 'lr_content': lr_content, 'component_paths': main_component_paths_dict }
     template = 'repository/lr_view.html'
 
     # For users who have edit permission for this resource, we have to add LR_EDIT 
@@ -482,10 +488,10 @@ def view(request, resource_name=None, object_id=None):
     return render_to_response(template, context, context_instance=ctx)
 
 
-def get_paths(obj, path=(), memo=None):
+def get_structure_paths(obj, path=(), memo=None):
     """
     Returns a list of tuples containing the path of each item in 
-    a nested structure of tuples and lists (among others).
+    a nested structure of tuples and lists.
     Source:
     http://code.activestate.com/recipes/577982-recursively-walk-python-objects/
     """
@@ -500,7 +506,7 @@ def get_paths(obj, path=(), memo=None):
         if id(obj) not in memo:
             memo.add(id(obj))
             for path_component, value in iterator(obj):
-                for result in get_paths(value, path + (path_component,), memo):
+                for result in get_structure_paths(value, path + (path_component,), memo):
                     yield result
             memo.remove(id(obj))
     else:
