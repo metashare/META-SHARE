@@ -14,7 +14,6 @@ from django.contrib.admin.models import LogEntry, ADDITION
 from django.contrib.contenttypes.models import ContentType
 from django.utils.encoding import force_unicode
 
-from metashare.accounts.models import EditorGroup
 from metashare.repository.models import User
 from metashare.settings import LOG_LEVEL, LOG_HANDLER, XDIFF_LOCATION
 from metashare.stats.model_utils import saveLRStats, UPDATE_STAT
@@ -87,18 +86,14 @@ def import_from_string(xml_string, targetstatus, copy_status, owner_id=None):
     resource.storage_object.publication_status = targetstatus
     if owner_id:
         resource.owners.add(owner_id)
-        
-        user_profile = User.objects.get(id=owner_id).get_profile()
-
-        editor_groups = []
-        editor_groups.extend(EditorGroup.objects \
-            .filter(name__in=user_profile.default_editor_groups.values_list('name', flat=True))
-            .values_list('pk', flat=True))
-        for edt_grp in editor_groups:
+        for edt_grp in User.objects.get(id=owner_id).get_profile() \
+                .default_editor_groups.all():
             resource.editor_groups.add(edt_grp)
-        
-    resource.storage_object.save()
-    
+        # this also takes care of saving the storage_object
+        resource.save()
+    else:
+        resource.storage_object.save()
+
     # explicitly write metadata XML and storage object to the storage folder
     resource.storage_object.update_storage()
 
