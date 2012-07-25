@@ -74,7 +74,7 @@
 	          	<li><a href="{% url django.contrib.auth.views.password_change %}" title=''>Change your password</a></li>
 	            <li><a href="{% url metashare.accounts.views.editor_group_application %}" title="Apply for membership to editor groups">Apply to editor groups</a></li>
 	            <li><a href="{% url metashare.accounts.views.edit_profile %}" title=''>Edit your information</a></li>
-	           	<li><a href="{% url metashare.accounts.views.add_default_editor_groups %}" title='Add editor groups to be applied by default to all the new resources you create'>Add default editor groups</a></li>
+	           	<li><a href="{% url metashare.accounts.views.add_default_editor_groups %}" title='Set editor groups to be applied by default to all the new resources you create'>Add default editor groups</a></li>
 		      	<li><a href="{% url metashare.accounts.views.remove_default_editor_groups %}" title='Remove default editor groups'>Remove default editor groups</a></li>
 		  	   	{% if user.is_staff %}
 					<li><a href="{% url editor:index %}" title='View your recent actions'>View your recent actions</a></li>
