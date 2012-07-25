@@ -168,6 +168,10 @@ class EditorGroupAdmin(admin.ModelAdmin):
                 name__in=request.user.groups.values_list('name', flat=True)))
 
     def add_user_to_editor_group(self, request, queryset):
+        # pylint: disable-msg=C0103
+        model = self.model
+        opts = model._meta
+
         form = None
         if 'cancel' in request.POST:
             self.message_user(request, _('Cancelled adding users to the editor group.'))
@@ -197,6 +201,9 @@ class EditorGroupAdmin(admin.ModelAdmin):
                                   {
                                    'selected_editorgroups': queryset,
                                    'form': form,
+                                   'app_label': opts.app_label,
+                                   'verbose_name': opts.verbose_name,
+                                   'action': 'Add user',
                                    'path':request.get_full_path()
                                   },
                                   context_instance=RequestContext(request))
@@ -204,6 +211,10 @@ class EditorGroupAdmin(admin.ModelAdmin):
     add_user_to_editor_group.short_description = _("Add users to selected editor groups")
 
     def remove_user_from_editor_group(self, request, queryset):
+        # pylint: disable-msg=C0103
+        model = self.model
+        opts = model._meta
+
         form = None
         if request.user.is_superuser:
             if 'cancel' in request.POST:
@@ -229,6 +240,9 @@ class EditorGroupAdmin(admin.ModelAdmin):
                                       {
                                        'selected_editorgroups': queryset,
                                        'form': form,
+                                       'app_label': opts.app_label,
+                                       'verbose_name': opts.verbose_name,
+                                       'action': 'Remove user',
                                        'path':request.get_full_path()
                                       },
                                       context_instance=RequestContext(request))
@@ -482,6 +496,10 @@ class EditorGroupManagersAdmin(admin.ModelAdmin):
         return result
 
     def add_user_to_editor_group_managers(self, request, queryset):
+        # pylint: disable-msg=C0103
+        model = self.model
+        opts = model._meta
+
         form = None
         if request.user.is_superuser:
             if 'cancel' in request.POST:
@@ -507,6 +525,9 @@ class EditorGroupManagersAdmin(admin.ModelAdmin):
                                       {
                                        'selected_editorgroupmanagers': queryset,
                                        'form': form,
+                                       'app_label': opts.app_label,
+                                       'verbose_name': opts.verbose_name,
+                                       'action': 'Add user',
                                        'path':request.get_full_path()
                                       },
                                       context_instance=RequestContext(request))
@@ -518,6 +539,10 @@ class EditorGroupManagersAdmin(admin.ModelAdmin):
     add_user_to_editor_group_managers.short_description = _("Add users to selected editor group managers")
 
     def remove_user_from_editor_group_managers(self, request, queryset):
+        # pylint: disable-msg=C0103
+        model = self.model
+        opts = model._meta
+
         form = None
         if request.user.is_superuser:
             if 'cancel' in request.POST:
@@ -545,6 +570,9 @@ class EditorGroupManagersAdmin(admin.ModelAdmin):
                                       {
                                        'selected_editorgroupmanagers': queryset,
                                        'form': form,
+                                       'app_label': opts.app_label,
+                                       'verbose_name': opts.verbose_name,
+                                       'action': 'Remove user',
                                        'path':request.get_full_path()
                                       },
                                       context_instance=RequestContext(request))
@@ -612,6 +640,10 @@ class OrganizationAdmin(admin.ModelAdmin):
                 name__in=request.user.groups.values_list('name', flat=True)))
 
     def add_user_to_organization(self, request, queryset):
+        # pylint: disable-msg=C0103
+        model = self.model
+        opts = model._meta
+
         form = None
         if 'cancel' in request.POST:
             self.message_user(request, _('Cancelled adding users to the organization.'))
@@ -641,6 +673,9 @@ class OrganizationAdmin(admin.ModelAdmin):
                                   {
                                    'selected_organizations': queryset,
                                    'form': form,
+                                   'app_label': opts.app_label,
+                                   'verbose_name': opts.verbose_name,
+                                   'action': 'Add user',
                                    'path':request.get_full_path()
                                   },
                                   context_instance=RequestContext(request))
@@ -648,6 +683,10 @@ class OrganizationAdmin(admin.ModelAdmin):
     add_user_to_organization.short_description = _("Add users to selected organizations")
 
     def remove_user_from_organization(self, request, queryset):
+        # pylint: disable-msg=C0103
+        model = self.model
+        opts = model._meta
+
         form = None
         if request.user.is_superuser:
             if 'cancel' in request.POST:
@@ -673,6 +712,9 @@ class OrganizationAdmin(admin.ModelAdmin):
                                       {
                                        'selected_organizations': queryset,
                                        'form': form,
+                                       'app_label': opts.app_label,
+                                       'verbose_name': opts.verbose_name,
+                                       'action': 'Remove user',
                                        'path':request.get_full_path()
                                       },
                                       context_instance=RequestContext(request))
@@ -917,6 +959,10 @@ class OrganizationManagersAdmin(admin.ModelAdmin):
         return result
 
     def add_user_to_organization_managers(self, request, queryset):
+        # pylint: disable-msg=C0103
+        model = self.model
+        opts = model._meta
+
         form = None
         if request.user.is_superuser:
             if 'cancel' in request.POST:
@@ -944,6 +990,9 @@ class OrganizationManagersAdmin(admin.ModelAdmin):
                                       {
                                        'selected_organizationmanagers': queryset,
                                        'form': form,
+                                       'app_label': opts.app_label,
+                                       'verbose_name': opts.verbose_name,
+                                       'action': 'Add user',
                                        'path':request.get_full_path()
                                       },
                                       context_instance=RequestContext(request))
@@ -955,6 +1004,10 @@ class OrganizationManagersAdmin(admin.ModelAdmin):
     add_user_to_organization_managers.short_description = _("Add users to selected organization managers")
 
     def remove_user_from_organization_managers(self, request, queryset):
+        # pylint: disable-msg=C0103
+        model = self.model
+        opts = model._meta
+
         form = None
         if request.user.is_superuser:
             if 'cancel' in request.POST:
@@ -980,6 +1033,9 @@ class OrganizationManagersAdmin(admin.ModelAdmin):
                                       {
                                        'selected_organizationmanagers': queryset,
                                        'form': form,
+                                       'app_label': opts.app_label,
+                                       'verbose_name': opts.verbose_name,
+                                       'action': 'Remove user',
                                        'path':request.get_full_path()
                                       },
                                       context_instance=RequestContext(request))
