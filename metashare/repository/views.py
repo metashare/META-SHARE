@@ -9,6 +9,7 @@ from datetime import datetime
 from os.path import split, getsize
 from urllib import urlopen
 from mimetypes import guess_type
+from collections import Mapping, Set, Sequence 
 
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
@@ -432,18 +433,12 @@ def view(request, resource_name=None, object_id=None):
     resource_tree = resource.export_to_elementtree()
     lr_content = _convert_to_template_tuples(resource_tree)
    
-   
-    print tuple(getSubComponent(lr_content, "identificationInfo"))
+    lr_content_paths = get_paths(lr_content)
     
     
-    identification_info = resource.identificationInfo
-    identificationInfo_tree = identification_info.export_to_elementtree()
-    identificationInfo_content = _convert_to_template_tuples(identificationInfo_tree)[1]
+    for item in lr_content_paths:
+        print item
         
-    distribution_info = resource.distributionInfo
-    distributionInfo_tree = distribution_info.export_to_elementtree()
-    distributionInfo_content = _convert_to_template_tuples(distributionInfo_tree)[1]
-    
     # Define context for template rendering.
     context = { 'resource': resource, 'lr_content': lr_content }
     template = 'repository/lr_view.html'
@@ -486,56 +481,31 @@ def view(request, resource_name=None, object_id=None):
     ctx = RequestContext(request)
     return render_to_response(template, context, context_instance=ctx)
 
-def getSubComponent(resource_tuple, component):
+
+def get_paths(obj, path=(), memo=None):
     """
-    Get the subtree of nested tuples from a given tuple (t)
-    of the specific element (e)  
+    Returns a list of tuples containing the path of each item in 
+    a nested structure of tuples and lists (among others).
+    Source:
+    http://code.activestate.com/recipes/577982-recursively-walk-python-objects/
     """
-    #elem = ()
-    print "component: " + unicode(component) + "     resource_tuple: " + unicode(resource_tuple)
-    if isinstance(resource_tuple, (list, tuple)):
-        for element in resource_tuple:
-            for elem in getSubComponent(element, component):
-                if (elem == component):
-                    yield elem
+    if memo is None:
+        memo = set()
+    iterator = None
+    if isinstance(obj, Mapping):
+        iterator = iteritems
+    elif isinstance(obj, (Sequence, Set)) and not isinstance(obj, (str, unicode)):
+        iterator = enumerate
+    if iterator:
+        if id(obj) not in memo:
+            memo.add(id(obj))
+            for path_component, value in iterator(obj):
+                for result in get_paths(value, path + (path_component,), memo):
+                    yield result
+            memo.remove(id(obj))
     else:
-        yield resource_tuple
+        yield path, obj
 
-
-
-'''
-# This is the function that effectively flattens a complex structure of 
-# nested lists and tuples.
-def flattenTuplesLists(resource_tuple, component=None):
-    """
-    Get the subtree of nested tuples from a given tuple (t)
-    of the specific element (e)  
-    """
-    if isinstance(resource_tuple, (list, tuple)):
-        for element in resource_tuple:
-            for elem in getSubComponent(element):
-                yield elem
-    else:
-        yield resource_tuple
- '''
-    
-'''
-def getSubtuple(t, e):
-    """
-    Get the subtree of nested tuples from a given tuple (t)
-    of the specific element (e)  
-    """
-    sub_tuple = t
-    for x in t:
-        if type(x) in (list, tuple):
-            sub_tuple = getSubtuple(x, e)
-        if e in x:
-            sub_tuple = x
-            break
-
-    return sub_tuple
-'''
-    
 
 def _format_recommendations(recommended_resources):
     '''
