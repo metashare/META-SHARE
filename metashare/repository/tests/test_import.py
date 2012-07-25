@@ -1,12 +1,15 @@
 import os
+
+from django.contrib.auth.models import User
 from django.test import TestCase
-from metashare import test_utils
-from metashare.settings import ROOT_PATH
-from metashare.repository.models import documentUnstructuredString_model, \
-    documentInfoType_model, User
-from metashare.accounts.models import EditorGroup
 from django.test.client import Client
+
+from metashare import test_utils
+from metashare.accounts.models import EditorGroup
+from metashare.repository.models import documentUnstructuredString_model, \
+    documentInfoType_model
 from metashare.settings import DJANGO_BASE, ROOT_PATH
+
 
 class ImportTest(TestCase):
     """
