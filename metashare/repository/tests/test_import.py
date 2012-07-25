@@ -119,7 +119,7 @@ class ImportTest(TestCase):
             .add(ImportTest.test_editor_group)
 
         resourcefile = open('{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH))
-        response = client.post('{0}/editor/upload_xml/'.format(DJANGO_BASE), \
+        response = client.post('/{0}editor/upload_xml/'.format(DJANGO_BASE), \
           {'resource': resourcefile}, follow=True)
         self.assertNotContains(response, '<td>{}</td>'.format(ImportTest.test_editor_group.name),
           msg_prefix='expected the system to set an editor group to the resource.')
@@ -132,7 +132,7 @@ class ImportTest(TestCase):
         client.login(username='superuser', password='secret')
 
         resourcefile = open('{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH))
-        response = client.post('{0}/editor/upload_xml/'.format(DJANGO_BASE), \
+        response = client.post('/{0}editor/upload_xml/'.format(DJANGO_BASE), \
           {'resource': resourcefile}, follow=True)
         self.assertNotContains(response, '<td>{}</td>'.format(ImportTest.test_editor_group.name),
           msg_prefix='expected the system to set None as editor group to the resource.')
