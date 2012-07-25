@@ -47,6 +47,10 @@ if [[  "$OP" != "start" && "$OP" != "stop" && "$OP" != "clean" ]] ; then
 fi
 
 if [[ "$OP" == "start" ]] ; then
+
+	# Copy settings.py and local_settings.sample
+	./create_settings_files.sh
+
 	if [[ "$CREATE_DB" == "1" ]] ; then
 		# Create a new empty database compatible with the models.py
 		./create_db.sh -r
@@ -70,14 +74,9 @@ if [[ "$OP" == "start" ]] ; then
 			exit $ret_val
 		fi
 	fi
-
-	# Remove local_settings from metashare directory since it
-	# may override the node specific one
-	rm -f "$METASHARE_DIR/local_settings.py"
-	rm -f "$METASHARE_DIR/local_settings.pyc"
 	# Replace the original settings.py with one that imports 
 	# local_settings for each specific node
-	cp $MSERV_DIR/init_data/settings_test.py $METASHARE_DIR/settings.py
+	cp $MSERV_DIR/init_data/settings_multitest.py $METASHARE_DIR/settings.py
 	ret_val=$?
 	if [[ $ret_val -ne 0 ]] ; then
 		if [[ "$DET_FILE" != "" ]] ; then

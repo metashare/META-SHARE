@@ -93,9 +93,10 @@ create_django_settings()
 	echo "s#%%CORE_NODES%%#$CORE_NODES#g" >> /tmp/sed.scr
 	echo "s#%%PROXIED_NODES%%#$PROXIED_NODES#g" >> /tmp/sed.scr
 	echo "s#%%SYNC_USERS%%#$SYNC_USERS#g" >> /tmp/sed.scr
-	cat "$MSERV_DIR/init_data/local_settings_test2.py" | sed -f /tmp/sed.scr \
-		> "$NODE_SETTINGS_DIR/local_settings.py"
+	cat "$MSERV_DIR/init_data/node_settings.py" | sed -f /tmp/sed.scr \
+		> "$NODE_SETTINGS_DIR/node_settings.py"
 	rm /tmp/sed.scr
+	cp "$MSERV_DIR/init_data/local_settings.sample" "$NODE_SETTINGS_DIR/multilocal_settings.py"
 	touch "$NODE_SETTINGS_DIR/__init__.py"
 }
 
