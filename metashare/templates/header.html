@@ -26,7 +26,7 @@
 	<!-- drop-down menu created with http://javascript-array.com/scripts/jquery_simple_drop_down_menu/ -->
 	<ul id="jsddm">
 			<li title="Browse resources in the META-SHARE catalogue"><a href="{% url metashare.views.frontpage %}repository/search/">Browse resources</a></li>
-			{% if user.get_profile.has_editor_permission %}	        
+			{% if user.is_staff and user.get_profile.has_editor_permission %}	        
 	        <!--li title="Share/create Corpora, Licenses, Tools and more"><a href="#">Share/Create</a>
 	          <ul>
 	            <li><a href="{% url editor:repository_resourceinfotype_model_add %}">Resource</a></li>
