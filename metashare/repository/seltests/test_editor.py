@@ -67,9 +67,9 @@ class EditorTest(SeleniumTestCase):
         login_user(driver, "manageruser", "secret")
         # make sure login was successful
         self.assertEqual("Logout", driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
-        # Manage metadata -> Resource
-        mouse_over(driver, driver.find_element_by_link_text("Manage Metadata"))
-        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
         # make sure we are on the right site
         self.assertEqual("Select Resource to change | META-SHARE backend", driver.title)
         # check if LR entry is available and that its status is published
@@ -114,10 +114,10 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("Logout", 
           driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Manage metadata -> Resource
-        mouse_over(driver, driver.find_element_by_link_text("Manage Metadata"))
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # Add resource
         driver.find_element_by_link_text("Add Resource").click()
@@ -211,10 +211,10 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("Logout", 
           driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Manage metadata -> Resource
-        mouse_over(driver, driver.find_element_by_link_text("Manage Metadata"))
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # Add resource
         driver.find_element_by_link_text("Add Resource").click()
@@ -309,10 +309,10 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("Logout", 
           driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Manage metadata -> Resource
-        mouse_over(driver, driver.find_element_by_link_text("Manage Metadata"))
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # Add resource
         driver.find_element_by_link_text("Add Resource").click()
@@ -413,10 +413,10 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("Logout", 
           driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Manage metadata -> Resource
-        mouse_over(driver, driver.find_element_by_link_text("Manage Metadata"))
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # Add resource
         driver.find_element_by_link_text("Add Resource").click()
@@ -522,10 +522,10 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("Logout", 
           driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Manage metadata -> Resource
-        mouse_over(driver, driver.find_element_by_link_text("Manage Metadata"))
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # Add resource
         driver.find_element_by_link_text("Add Resource").click()
@@ -625,10 +625,10 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("Logout", 
           driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Manage metadata -> Resource
-        mouse_over(driver, driver.find_element_by_link_text("Manage Metadata"))
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # Add resource
         driver.find_element_by_link_text("Add Resource").click()
@@ -705,10 +705,10 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("Logout", 
           driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Manage metadata -> Resource
-        mouse_over(driver, driver.find_element_by_link_text("Manage Metadata"))
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # Add resource
         driver.find_element_by_link_text("Add Resource").click()

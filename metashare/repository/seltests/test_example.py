@@ -50,7 +50,7 @@ class ExampleSeleniumTest(SeleniumTestCase):
         driver.find_element_by_css_selector(
           "input.button.middle_button").click()
         self.assertEqual(
-          "Profile: normaluser", 
+          "Your Profile, normaluser", 
           driver.find_element_by_xpath("//div[@id='header']/ul/li[last()]/a").text)
         # click 'browse'
         driver.find_element_by_xpath("//div[@id='header']/ul/li[1]/a").click()
