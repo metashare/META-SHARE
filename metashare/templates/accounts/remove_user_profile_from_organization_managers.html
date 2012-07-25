@@ -1,4 +1,14 @@
 {% extends "admin/base_site.html" %}
+{% load i18n admin_modify adminmedia %}
+
+{% block breadcrumbs %}
+  <div class="breadcrumbs">
+    <a href="../../">{% trans "Home" %}</a> &rsaquo;
+    <a href="../">{{ app_label|capfirst|escape }}</a> &rsaquo;
+    <a href="./">{{ verbose_name|capfirst|escape }}</a> &rsaquo;
+    {{ action|capfirst|escape }}
+  </div>
+{% endblock %}
 
 {% block content %}
 <h3>Remove a user from the following organization manager group{{ selected_organizationmanagers|pluralize }}:</h3>
