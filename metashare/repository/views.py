@@ -428,13 +428,19 @@ def view(request, resource_name=None, object_id=None):
     # Convert resource to ElementTree and then to template tuples.
     resource_tree = resource.export_to_elementtree()
     lr_content = _convert_to_template_tuples(resource_tree)
+   
+   
+    print tuple(getSubComponent(lr_content, "identificationInfo"))
+    
     
     identification_info = resource.identificationInfo
     identificationInfo_tree = identification_info.export_to_elementtree()
-    identificationInfo_content = _convert_to_template_tuples(identificationInfo_tree)
+    identificationInfo_content = _convert_to_template_tuples(identificationInfo_tree)[1]
+        
+    distribution_info = resource.distributionInfo
+    distributionInfo_tree = distribution_info.export_to_elementtree()
+    distributionInfo_content = _convert_to_template_tuples(distributionInfo_tree)[1]
     
-    print identificationInfo_content
-
     # Define context for template rendering.
     context = { 'resource': resource, 'lr_content': lr_content }
     template = 'repository/lr_view.html'
@@ -461,6 +467,40 @@ def view(request, resource_name=None, object_id=None):
     ctx = RequestContext(request)
     return render_to_response(template, context, context_instance=ctx)
 
+def getSubComponent(resource_tuple, component):
+    """
+    Get the subtree of nested tuples from a given tuple (t)
+    of the specific element (e)  
+    """
+    #elem = ()
+    print "component: " + unicode(component) + "     resource_tuple: " + unicode(resource_tuple)
+    if isinstance(resource_tuple, (list, tuple)):
+        for element in resource_tuple:
+            for elem in getSubComponent(element, component):
+                if (elem == component):
+                    yield elem
+    else:
+        yield resource_tuple
+
+
+
+'''
+# This is the function that effectively flattens a complex structure of 
+# nested lists and tuples.
+def flattenTuplesLists(resource_tuple, component=None):
+    """
+    Get the subtree of nested tuples from a given tuple (t)
+    of the specific element (e)  
+    """
+    if isinstance(resource_tuple, (list, tuple)):
+        for element in resource_tuple:
+            for elem in getSubComponent(element):
+                yield elem
+    else:
+        yield resource_tuple
+ '''
+    
+'''
 def getSubtuple(t, e):
     """
     Get the subtree of nested tuples from a given tuple (t)
@@ -471,11 +511,12 @@ def getSubtuple(t, e):
         if type(x) in (list, tuple):
             sub_tuple = getSubtuple(x, e)
         if e in x:
-            break
             sub_tuple = x
+            break
 
     return sub_tuple
-
+'''
+    
 
 class MetashareFacetedSearchView(FacetedSearchView):
     """
