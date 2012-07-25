@@ -1,0 +1,83 @@
+{% if page == "admin" and user.username or page == "frontpage" %}
+<div id="header">
+    {% block branding %} 
+		      <div id="inner">
+		        <div class="inner_box" style="width:200px;float:left;padding-top:5px;">
+		            <div class="short popup_box">
+		                <a href="{% url metashare.views.frontpage %}"><div class="icon" onmouseover="$('#popup1').show();" onmouseout="$('#popup1').hide();"><img src="{{ MEDIA_URL }}images/home.png" height="25" /></div></a>
+		                <div id="popup1" class="popup" style="left:5px; top:60px;"><img style="left:20px;" src="{{ MEDIA_URL }}images/adv_search_pfeil.png" />Home</div>
+		            </div>		
+		            
+		        </div>
+		        
+		        <span>
+		            <img class="icon" src="{{ MEDIA_URL }}images/metashare.png" />
+		        </span>
+		        <div class="inner_box" style="width:200px;float:right;">
+		            {% if user.username %}
+		                <a href="{% url metashare.views.logout %}" style="float:right; margin-right:20px;"><div class="topright">Logout</div></a>
+		            {% else %}
+		                <a href="{% url metashare.accounts.views.create %}"><div class="topright">Register</div></a>
+		                <a href="{% url metashare.views.login %}"><div class="topright">Login</div></a>
+		            {% endif %}
+		        </div>
+			</div><!-- end inner --> 
+
+	<!-- drop-down menu created with http://javascript-array.com/scripts/jquery_simple_drop_down_menu/ -->
+	<ul id="jsddm">
+			<li title="Browse the resources of the META-SHARE catalogue"><a href="{% url metashare.views.frontpage %}repository/search/">Browse Resources</a></li>
+			{% if user.is_staff and user.get_profile.has_editor_permission %}	        
+	        <li title="Create/edit resource metadata or upload resource data"><a>Manage Resources</a>
+	          <ul>
+                <li title="Create/edit your own resource metadata or upload resource data"><a href="{% url editor:repository_resourceinfotype_model_myresources %}">Manage your own resources</a></li>
+	            <li title="Create/edit resource metadata or upload resource data"><a href="{% url editor:repository_resourceinfotype_model_changelist %}">Manage all resources</a></li>
+	            <li title="Create/edit person object metadata"><a href="{% url editor:repository_personinfotype_model_changelist %}">Manage person objects</a></li>
+	            <li title="Create/edit organization object metadata"><a href="{% url editor:repository_organizationinfotype_model_changelist %}">Manage organization objects</a></li>
+	            <li title="Create/edit project object metadata"><a href="{% url editor:repository_projectinfotype_model_changelist %}">Manage project objects</a></li>
+	            <li title="Create/edit document/paper object metadata"><a href="{% url editor:repository_documentinfotype_model_changelist %}">Manage document objects</a></li>
+                <li title="Upload XML resource descriptions"><a href="{% url editor:upload_xml %}">Upload resource descriptions</a></li>
+	          </ul>
+	        </li>
+	        {% endif %}
+	        {% if user.is_superuser or user.get_profile.has_organization_manager_permission or user.get_profile.has_manager_permission %}
+	        <li title="Manage groups and users"><a>Administration</a>
+	          <ul>
+	          {% if user.is_superuser %}
+	            <li><a href="{% url admin:auth_user_changelist %}">Users</a></li>
+	            <li><a href="{% url editor:accounts_editorgroup_changelist %}">Editor groups</a></li>
+	            <li><a href="{% url editor:accounts_editorgroupmanagers_changelist %}">Editor group managers</a></li>
+                <li><a href="{% url editor:accounts_organization_changelist %}">Organizations</a></li>
+	          {% endif %}
+	          {% if user.get_profile.has_manager_permission %}
+	            <li><a href="{% url admin:accounts_editorgroupapplication_changelist %}">Editor group applications</a></li>
+	          {% endif %}
+              {% if user.is_superuser or user.get_profile.has_organization_manager_permission %}
+                <li><a href="{% url admin:accounts_organizationapplication_changelist %}">Organization applications</a></li>
+              {% endif %}
+	          </ul>
+	        </li>
+	        {% endif %}
+	        <li title="Mailing lists, wiki, and more"><a target="_blank" href="http://metashare.ilsp.gr/forum">Community</a></li>
+	        {# <li title="Workflow, Schema specifications"><a href="{% url editor:documentation %}">Documentation</a></li> #}
+	        {# <li><a href="{% url editor:about %}">About</a></li> #}        
+			<li title="Download the META-SHARE user's manual"><a href="{{ MEDIA_URL }}documentation.pdf">Documentation</a></li>
+			<li title="View various statistics"><a href="{% url metashare.views.frontpage %}stats/top/">Statistics</a></li>
+            {% if user.is_active %}
+            <li title="Profile settings and actions"><a>Your Profile, {% filter force_escape %}{% firstof user.first_name user.username %}{% endfilter %}</a>
+			  <ul>
+                {% if user.is_staff %}<li><a href="{% url editor:index %}">View your recent actions</a></li>{% endif %}
+                <li><a href="{% url metashare.accounts.views.edit_profile %}" title='View or edit your personal details'>Edit your profile</a></li>
+                <li><a href="{% url django.contrib.auth.views.password_change %}">Change your password</a></li>
+	            <li><a href="{% url metashare.accounts.views.editor_group_application %}" title="Apply for membership in editor groups">Apply for editor group membership</a></li>
+	           	<li><a href="{% url metashare.accounts.views.add_default_editor_groups %}" title='Set the editor groups to which all new resources you create shall belong'>Add default editor groups</a></li>
+		      	<li><a href="{% url metashare.accounts.views.remove_default_editor_groups %}" title='Remove editor groups from the defaults list'>Remove default editor groups</a></li>
+			  </ul>
+	        </li>
+            {% endif %}
+	</ul>
+	{% endblock %}
+
+</div>
+
+
+{% endif %}
