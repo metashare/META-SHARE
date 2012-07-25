@@ -3,20 +3,22 @@
 Call the external program xdiff to compare two XML files
 
 """
-
-from django.contrib.admin.models import LogEntry, ADDITION
-from django.contrib.contenttypes.models import ContentType
-from django.utils.encoding import force_unicode
-from metashare.settings import LOG_LEVEL, LOG_HANDLER, XDIFF_LOCATION
-from metashare.stats.model_utils import saveLRStats, UPDATE_STAT
-from subprocess import call, STDOUT
-from zipfile import is_zipfile, ZipFile
 import logging
 import os
 import re
 import sys
-from metashare.repository.models import User
+from subprocess import call, STDOUT
+from zipfile import is_zipfile, ZipFile
+
+from django.contrib.admin.models import LogEntry, ADDITION
+from django.contrib.contenttypes.models import ContentType
+from django.utils.encoding import force_unicode
+
 from metashare.accounts.models import EditorGroup
+from metashare.repository.models import User
+from metashare.settings import LOG_LEVEL, LOG_HANDLER, XDIFF_LOCATION
+from metashare.stats.model_utils import saveLRStats, UPDATE_STAT
+
 
 # Setup logging support.
 logging.basicConfig(level=LOG_LEVEL)
