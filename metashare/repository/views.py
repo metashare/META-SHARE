@@ -66,7 +66,7 @@ def _convert_to_template_tuples(element_tree):
         return (element_tree.tag, values)
 
     # Otherwise, we return a tuple containg (key, value, required), 
-    # i.e., (tag, text, <0,1>).
+    # i.e., (tag, text, <True,False>).
     # The "required" element was added to the tree, for passing 
     # information about whether a field is required or not, to correctly
     # render the single resource view.
@@ -428,6 +428,12 @@ def view(request, resource_name=None, object_id=None):
     # Convert resource to ElementTree and then to template tuples.
     resource_tree = resource.export_to_elementtree()
     lr_content = _convert_to_template_tuples(resource_tree)
+    
+    identification_info = resource.identificationInfo
+    identificationInfo_tree = identification_info.export_to_elementtree()
+    identificationInfo_content = _convert_to_template_tuples(identificationInfo_tree)
+    
+    print identificationInfo_content
 
     # Define context for template rendering.
     context = { 'resource': resource, 'lr_content': lr_content }
@@ -454,6 +460,21 @@ def view(request, resource_name=None, object_id=None):
     # Render and return template with the defined context.
     ctx = RequestContext(request)
     return render_to_response(template, context, context_instance=ctx)
+
+def getSubtuple(t, e):
+    """
+    Get the subtree of nested tuples from a given tuple (t)
+    of the specific element (e)  
+    """
+    sub_tuple = t
+    for x in t:
+        if type(x) in (list, tuple):
+            sub_tuple = getSubtuple(x, e)
+        if e in x:
+            break
+            sub_tuple = x
+
+    return sub_tuple
 
 
 class MetashareFacetedSearchView(FacetedSearchView):
