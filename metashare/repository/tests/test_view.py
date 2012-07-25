@@ -5,7 +5,7 @@ from django.test import TestCase
 from django.test.client import Client
 
 from metashare import test_utils, settings
-from metashare.accounts.models import UserProfile, EditorGroup, ManagerGroup
+from metashare.accounts.models import UserProfile, EditorGroup, EditorGroupManagers
 from metashare.repository import views
 from metashare.settings import DJANGO_BASE, ROOT_PATH
 from metashare.test_utils import create_user
@@ -58,12 +58,12 @@ class ViewTest(TestCase):
         
         ViewTest.test_editor_group = EditorGroup.objects.create(
                                                     name='test_editor_group')
-        ViewTest.test_manager_group = \
-            ManagerGroup.objects.create(name='test_manager_group',
+        ViewTest.test_editor_group_manager = \
+            EditorGroupManagers.objects.create(name='test_editor_group_manager',
                                     managed_group=ViewTest.test_editor_group)            
         test_utils.create_manager_user(
             'manageruser', 'manager@example.com', 'secret',
-            (ViewTest.test_editor_group, ViewTest.test_manager_group))
+            (ViewTest.test_editor_group, ViewTest.test_editor_group_manager))
 
     def tearDown(self):
         """

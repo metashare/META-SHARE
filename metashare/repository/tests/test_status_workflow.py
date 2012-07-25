@@ -4,7 +4,7 @@ from django.test.testcases import TestCase
 from metashare import test_utils
 from metashare.settings import DJANGO_BASE, ROOT_PATH
 from metashare.repository.models import resourceInfoType_model
-from metashare.accounts.models import EditorGroup, ManagerGroup
+from metashare.accounts.models import EditorGroup, EditorGroupManagers
 from metashare.repository.editor.resource_editor import publish_resources, \
     ingest_resources, unpublish_resources
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL
@@ -28,7 +28,7 @@ class StatusWorkflowTest(TestCase):
         StatusWorkflowTest.test_editor_group = EditorGroup.objects.create(
                                                     name='test_editor_group')
         StatusWorkflowTest.test_manager_group = \
-            ManagerGroup.objects.create(name='test_manager_group',
+            EditorGroupManagers.objects.create(name='test_manager_group',
                                     managed_group=StatusWorkflowTest.test_editor_group)            
         test_utils.create_manager_user(
             'manageruser', 'manager@example.com', 'secret',

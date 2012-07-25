@@ -24,14 +24,17 @@ from haystack.views import FacetedSearchView
 
 from metashare.repository.editor.resource_editor import has_edit_permission
 from metashare.repository.forms import LicenseSelectionForm, \
-    LicenseAgreementForm, DownloadContactForm
+    LicenseAgreementForm, DownloadContactForm, MORE_FROM_SAME_CREATORS, \
+    MORE_FROM_SAME_PROJECTS
 from metashare.repository.models import licenceInfoType_model, resourceInfoType_model
 from metashare.repository.search_indexes import resourceInfoType_modelIndex
 from metashare.settings import LOG_LEVEL, LOG_HANDLER, MEDIA_URL, DJANGO_URL
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
 from metashare.storage.models import PUBLISHED
-from metashare.recommendations.recommendations import SessionResourcesTracker
+from metashare.recommendations.recommendations import SessionResourcesTracker, \
+    get_download_recommendations, get_view_recommendations, \
+    get_more_from_same_creators_qs, get_more_from_same_projects_qs
 
 
 MAXIMUM_READ_BLOCK_SIZE = 4096
@@ -463,6 +466,22 @@ def view(request, resource_name=None, object_id=None):
         tracker.add_view(resource, datetime.now())
         request.session['tracker'] = tracker
             
+    # Add recommendations for 'also viewed' resources
+    context['also_viewed'] = \
+        _format_recommendations(get_view_recommendations(resource))
+    # Add recommendations for 'also downloaded' resources
+    context['also_downloaded'] = \
+        _format_recommendations(get_download_recommendations(resource))
+    # Add 'more from same' links
+    if get_more_from_same_projects_qs(resource).count():
+        context['search_rel_projects'] = '{}/repository/search?q={}:{}'.format(
+            DJANGO_URL, MORE_FROM_SAME_PROJECTS,
+            resource.storage_object.identifier)
+    if get_more_from_same_creators_qs(resource).count():
+        context['search_rel_creators'] = '{}/repository/search?q={}:{}'.format(
+            DJANGO_URL, MORE_FROM_SAME_CREATORS,
+            resource.storage_object.identifier)
+
     # Render and return template with the defined context.
     ctx = RequestContext(request)
     return render_to_response(template, context, context_instance=ctx)
@@ -517,6 +536,21 @@ def getSubtuple(t, e):
     return sub_tuple
 '''
     
+
+def _format_recommendations(recommended_resources):
+    '''
+    Returns the given resource recommendations list formatted as a list of
+    dictionaries with the two keys "name" and "url" (for use in the single
+    resource view).
+    '''
+    result = []
+    for res in recommended_resources:
+        res_item = {}
+        res_item['name'] = res.__unicode__()
+        res_item['url'] = res.get_absolute_url()
+        result.append(res_item)
+    return result
+
 
 class MetashareFacetedSearchView(FacetedSearchView):
     """
