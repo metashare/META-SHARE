@@ -4,7 +4,7 @@ Project: META-SHARE prototype implementation
 """
 from os.path import abspath, dirname, join
 import tempfile
-ROOT_PATH = abspath(dirname(__file__))
+#ROOT_PATH = abspath(dirname(__file__))
 
 # The URL for this META-SHARE node django application.  Do not use trailing /.
 # This URL has to include DJANGO_BASE (without its trailing /)!
