@@ -11,7 +11,6 @@ from metashare.settings import DJANGO_BASE, ROOT_PATH
 from metashare.test_utils import create_user
 import shutil
 
-test_editor_group = None
 
 def _import_resource(fixture_name, editor_group=None):
     """
@@ -28,10 +27,123 @@ def _import_resource(fixture_name, editor_group=None):
     result.storage_object.save()
     return result
 
+
+class FrontpageTest(TestCase):
+    """
+    Tests for the frontpage of a META-SHARE node.
+    """
+    editor_user = None
+    editor_user_password = 'secret'
+    frontpage_url = '/' + DJANGO_BASE
+
+    @classmethod
+    def setUpClass(cls):
+        """
+        Sets up this test case.
+        """
+        FrontpageTest.editor_user = test_utils.create_editor_user('editoruser',
+            'editor@example.com', FrontpageTest.editor_user_password,
+            (EditorGroup.objects.create(name='test_editor_group'),))
+
+    @classmethod
+    def tearDownClass(cls):
+        """
+        Makes required cleanups after all tests have run.
+        """
+        test_utils.clean_user_db()
+
+    def setUp(self):
+        """
+        Set up logic for each test.
+        """
+        self.client = Client()
+
+    def test_frontpage_provides_login_button(self):
+        """
+        Verifies that the frontpage provides a login button for anonymous users
+        (only).
+        """
+        # look for the login button as an anonymous user:
+        response = self.client.get(FrontpageTest.frontpage_url)
+        self.assertContains(response, ">Login<",
+            msg_prefix="There must be a login button for anonymous users.")
+        # look for the login button as an editor user:
+        self.client.login(username=FrontpageTest.editor_user.username,
+                          password=FrontpageTest.editor_user_password)
+        response = self.client.get(FrontpageTest.frontpage_url)
+        self.assertNotContains(response, ">Login<",
+            msg_prefix="There must not be any login button for editor users.")
+
+    def test_frontpage_provides_logout_button(self):
+        """
+        Verifies that the frontpage provides a logout button for logged in users
+        (only).
+        """
+        # look for the logout button as an anonymous user:
+        response = self.client.get(FrontpageTest.frontpage_url)
+        self.assertNotContains(response, ">Logout<", msg_prefix="There must " \
+                               "not be any logout button for anonymous users.")
+        # look for the logout button as an editor user:
+        self.client.login(username=FrontpageTest.editor_user.username,
+                          password=FrontpageTest.editor_user_password)
+        response = self.client.get(FrontpageTest.frontpage_url)
+        self.assertContains(response, ">Logout<",
+            msg_prefix="There must be a logout button for editor users.")
+
+    def test_frontpage_provides_register_button(self):
+        """
+        Verifies that the frontpage provides an account register button for
+        anonymous users (only).
+        """
+        # look for the register button as an anonymous user:
+        response = self.client.get(FrontpageTest.frontpage_url)
+        self.assertContains(response, ">Register<",
+            msg_prefix="There must be a register button for anonymous users.")
+        # look for the register button as an editor user:
+        self.client.login(username=FrontpageTest.editor_user.username,
+                          password=FrontpageTest.editor_user_password)
+        response = self.client.get(FrontpageTest.frontpage_url)
+        self.assertNotContains(response, ">Register<", msg_prefix="There must" \
+                               " not be any register button for editor users.")
+
+    def test_frontpage_provides_editor_button_for_staff_users(self):
+        """
+        Verifies that the frontpage provides an editor link for staff users
+        (only).
+        """
+        # look for the editor button as an anonymous user:
+        response = self.client.get(FrontpageTest.frontpage_url)
+        self.assertNotContains(response, ">Editor<", msg_prefix="There must " \
+                               "not be any editor button for anonymous users.")
+        # look for the editor button as an editor user:
+        self.client.login(username=FrontpageTest.editor_user.username,
+                          password=FrontpageTest.editor_user_password)
+        response = self.client.get(FrontpageTest.frontpage_url)
+        self.assertContains(response, ">Editor<",
+            msg_prefix="There must be an editor button for editor users.")
+
+    def test_frontpage_provides_search_button(self):
+        """
+        Verifies that the frontpage provides a search button for all kinds of
+        users.
+        """
+        # look for the search button as an anonymous user:
+        response = self.client.get(FrontpageTest.frontpage_url)
+        self.assertContains(response, ">Search<",
+            msg_prefix="There must be a search button for anonymous users.")
+        # look for the search button as an editor user:
+        self.client.login(username=FrontpageTest.editor_user.username,
+                          password=FrontpageTest.editor_user_password)
+        response = self.client.get(FrontpageTest.frontpage_url)
+        self.assertContains(response, ">Search<",
+            msg_prefix="There must be a search button for editor users.")
+
+
 class ViewTest(TestCase):
     """
     Test the detail view
     """
+    test_editor_group = None
     
     @classmethod
     def setUpClass(cls):
