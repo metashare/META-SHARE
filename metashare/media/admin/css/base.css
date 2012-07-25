@@ -716,8 +716,6 @@ table#change-history tbody th {
 
 #header {
     background: #417690;
-    color: #ffc;
-    overflow: hidden;
 }
 
 #header a:link, #header a:visited {
@@ -728,21 +726,6 @@ table#change-history tbody th {
     text-decoration: underline;
 }
 
-#branding h1 {
-    padding: 0 10px;
-    font-size: 18px;
-    margin: 8px 0;
-    font-weight: normal;
-    color: #f4f379;
-}
-
-#branding h2 {
-    padding: 0 10px;
-    font-size: 14px;
-    margin: -8px 0 8px 0;
-    font-weight: normal;
-    color: #ffc;
-}
 
 #user-tools {
     position: absolute;

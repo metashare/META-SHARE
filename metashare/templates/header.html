@@ -1,0 +1,92 @@
+{% if page == "admin" and user.username or page == "frontpage" %}
+<div id="header">
+    {% block branding %} 
+		      <div id="inner">
+		        <div class="inner_box" style="width:200px;float:left;padding-top:5px;">
+		            <div class="short popup_box">
+		                <a href="{% url metashare.views.frontpage %}"><div class="icon" onmouseover="$('#popup1').show();" onmouseout="$('#popup1').hide();"><img src="{{ MEDIA_URL }}images/home.png" height="25" /></div></a>
+		                <div id="popup1" class="popup" style="left:5px; top:60px;"><img style="left:20px;" src="{{ MEDIA_URL }}images/adv_search_pfeil.png" />Home</div>
+		            </div>		
+		            
+		        </div>
+		        
+		        <span>
+		            <img class="icon" src="{{ MEDIA_URL }}images/metashare.png" />
+		        </span>
+		        <div class="inner_box" style="width:200px;float:right;">
+		            {% if user.username %}
+		                <a href="{% url metashare.views.logout %}" style="float:right; margin-right:20px;"><div class="topright">Logout</div></a>
+		            {% else %}
+		                <a href="{% url metashare.accounts.views.create %}"><div class="topright">Register</div></a>
+		                <a href="{% url metashare.views.login %}"><div class="topright">Login </div></a>
+		            {% endif %}
+		        </div>
+			</div><!-- end inner --> 
+
+	<!-- drop-down menu created with http://javascript-array.com/scripts/jquery_simple_drop_down_menu/ -->
+	<ul id="jsddm">
+			<li title="Browse resources in the META-SHARE catalogue"><a href="{% url metashare.views.frontpage %}repository/search/">Browse resources</a></li>
+			{% if user.is_staff and user.get_profile.has_editor_permission %}	        
+	        <!--li title="Share/create Corpora, Licenses, Tools and more"><a href="#">Share/Create</a>
+	          <ul>
+	            <li><a href="{% url editor:repository_resourceinfotype_model_add %}">Resource</a></li>
+	            <li><a href="{% url editor:repository_personinfotype_model_add %}">Person</a></li>
+	            <li><a href="{% url editor:repository_organizationinfotype_model_add %}">Organization</a></li>
+	            <li><a href="{% url editor:repository_projectinfotype_model_add %}">Project</a></li>
+	            <li><a href="{% url editor:repository_documentinfotype_model_add %}">Document</a></li>
+	          </ul>
+	        </li-->
+	        <li title="Enrich existing metasources"><a href="#">Manage Metadata</a>
+	          <ul>
+	          	<li><a href="{% url editor:upload_xml %}">Upload metasources xml</a></li>
+	            <li><a href="{% url editor:repository_resourceinfotype_model_changelist %}">Resource</a></li>
+	            <li><a href="{% url editor:repository_personinfotype_model_changelist %}">Person</a></li>
+	            <li><a href="{% url editor:repository_organizationinfotype_model_changelist %}">Organization</a></li>
+	            <li><a href="{% url editor:repository_projectinfotype_model_changelist %}">Project</a></li>
+	            <li><a href="{% url editor:repository_documentinfotype_model_changelist %}">Document</a></li>
+	          </ul>
+	        </li>
+	        <li title="Remove, save or publish on the archive"><a href="{% url editor:repository_resourceinfotype_model_myresources %}">My Resources</a></li>
+	        {% endif %}
+	        {% if user.is_superuser or user.get_profile.has_organization_manager_permission or user.get_profile.has_manager_permission %}
+	        <li title="Manage groups and users"><a href="#">Administration</a>
+	          <ul>
+	          {% if user.is_superuser %}
+	            <li><a href="{% url admin:auth_user_changelist %}">Users</a></li>
+	            <li><a href="{% url editor:accounts_editorgroup_changelist %}">Editor groups</a></li>
+	            <li><a href="{% url editor:accounts_managergroup_changelist %}">Manager groups</a></li>
+	          {% endif %}
+	          {% if user.get_profile.has_manager_permission %}
+	            <li><a href="{% url admin:accounts_editorgroupapplication_changelist %}">Editor group applications</a></li>
+	          {% endif %}
+              {% if user.is_superuser or user.get_profile.has_organization_manager_permission %}
+                <li><a href="{% url admin:accounts_organizationapplication_changelist %}">Organization applications</a></li>
+              {% endif %}
+	          </ul>
+	        </li>
+	        {% endif %}
+	        <li title="Mailing lists, wiki, and more"><a target="_blank" href="http://metashare.ilsp.gr/forum">Community</a></li>
+	        {# <li title="Workflow, Schema specifications"><a href="{% url editor:documentation %}">Documentation</a></li> #}
+	        {# <li><a href="{% url editor:about %}">About</a></li> #}        
+            
+			<li title="Download the META-SHARE user's manual"><a href="{{ MEDIA_URL }}documentation.pdf">Documentation</a></li>
+			<li title="View various statistics"><a href="{% url metashare.views.frontpage %}stats/top/">Statistics</a></li>
+            <li title="Profile settings and actions"><a href="#">Profile: {% filter force_escape %}{% firstof user.first_name user.username %}{% endfilter %}</a>
+			  <ul>
+	          	<li><a href="{% url django.contrib.auth.views.password_change %}" title=''>Change your password</a></li>
+	            <li><a href="{% url metashare.accounts.views.editor_group_application %}" title="Apply for membership to editor groups">Apply to editor groups</a></li>
+	            <li><a href="{% url metashare.accounts.views.edit_profile %}" title=''>Edit your information</a></li>
+	           	<li><a href="{% url metashare.accounts.views.add_default_editor_groups %}" title='Set editor groups to be applied by default to all the new resources you create'>Add default editor groups</a></li>
+		      	<li><a href="{% url metashare.accounts.views.remove_default_editor_groups %}" title='Remove default editor groups'>Remove default editor groups</a></li>
+		  	   	{% if user.is_staff %}
+					<li><a href="{% url editor:index %}" title='View your recent actions'>View your recent actions</a></li>
+        	   	{% endif %}
+			  </ul>
+	        </li>   
+	</ul>
+	{% endblock %}
+
+</div>
+
+
+{% endif %}
