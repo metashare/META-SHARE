@@ -11,7 +11,6 @@ from metashare.settings import DJANGO_BASE, ROOT_PATH
 from metashare.test_utils import create_user
 import shutil
 
-test_editor_group = None
 
 def _import_resource(fixture_name, editor_group=None):
     """
@@ -28,10 +27,12 @@ def _import_resource(fixture_name, editor_group=None):
     result.storage_object.save()
     return result
 
+
 class ViewTest(TestCase):
     """
     Test the detail view
     """
+    test_editor_group = None
     
     @classmethod
     def setUpClass(cls):
