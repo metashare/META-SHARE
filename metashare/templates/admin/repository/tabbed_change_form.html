@@ -36,6 +36,7 @@
   		
 	});			
 </script>		
+<div id="explanation">Fields marked with <img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/asterisk_orange.png" style="height:8px;"/> are required.</div>
 
 <form {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post" id="{{ opts.module_name }}_form">{% csrf_token %}{% block form_top %}{% endblock %}
 <div>

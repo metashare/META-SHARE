@@ -230,6 +230,16 @@ class UserProfile(models.Model):
         if not self.user:
             super(UserProfile, self).delete(*args, **kwargs)
 
+    def has_editor_permission(self):
+        """
+        Return whether the user profile belongs to any editor_group or not.
+        """
+        if self.user.is_superuser:
+            return True      
+                
+        return EditorGroup.objects.filter(name__in=
+            self.user.groups.values_list('name', flat=True)).count() != 0
+
     def has_manager_permission(self, editor_group=None):
         """
         Return whether the user profile has permission to manage the given

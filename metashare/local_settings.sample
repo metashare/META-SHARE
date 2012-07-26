@@ -2,7 +2,8 @@
 Project: META-SHARE prototype implementation
  Author: Christian Federmann <cfedermann@dfki.de>
 """
-from os.path import abspath, dirname
+from os.path import abspath, dirname, join
+import tempfile
 ROOT_PATH = abspath(dirname(__file__))
 
 # The URL for this META-SHARE node django application.  Do not use trailing /.
@@ -24,6 +25,8 @@ STORAGE_PATH = '/path/to/storage/path'
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 DEBUG_JS = DEBUG
+
+LOG_FILENAME = join(tempfile.gettempdir(), "metashare.log")
 
 # Configure administrators for this django project.  If DEBUG=False, errors
 # will be reported as emails to these persons...
