@@ -197,7 +197,7 @@ class EditorGroupAdmin(admin.ModelAdmin):
         dictionary = {
                       'selected_editorgroups': queryset,
                       'form': form,
-                      'path':request.get_full_path()
+                      'path': request.get_full_path()
                      }
         dictionary.update(create_breadcrumb_template_params(self.model, _('Add user')))
         
@@ -232,7 +232,7 @@ class EditorGroupAdmin(admin.ModelAdmin):
             dictionary = {
                           'selected_editorgroups': queryset,
                           'form': form,
-                          'path':request.get_full_path()
+                          'path': request.get_full_path()
                          }
             dictionary.update(create_breadcrumb_template_params(self.model, _('Remove user')))
         
@@ -513,7 +513,7 @@ class EditorGroupManagersAdmin(admin.ModelAdmin):
             dictionary = {
                           'selected_editorgroups': queryset,
                           'form': form,
-                          'path':request.get_full_path()
+                          'path': request.get_full_path()
                          }
             dictionary.update(create_breadcrumb_template_params(self.model, _('Add user')))
         
@@ -554,7 +554,7 @@ class EditorGroupManagersAdmin(admin.ModelAdmin):
             dictionary = {
                           'selected_editorgroups': queryset,
                           'form': form,
-                          'path':request.get_full_path()
+                          'path': request.get_full_path()
                          }
             dictionary.update(create_breadcrumb_template_params(self.model, _('Remove user')))
         
@@ -650,15 +650,15 @@ class OrganizationAdmin(admin.ModelAdmin):
             form = self.UserProfileinOrganizationForm(choices=userprofiles,
                 initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
         
+            dictionary = {
+                          'selected_editorgroups': queryset,
+                          'form': form,
+                          'path': request.get_full_path()
+                         }
+            dictionary.update(create_breadcrumb_template_params(self.model, _('Add user')))
+        
         return render_to_response('accounts/add_user_profile_to_organization.html',
-                                  {
-                                   'selected_organizations': queryset,
-                                   'form': form,
-                                   'app_label': opts.app_label,
-                                   'verbose_name': opts.verbose_name,
-                                   'action': 'Add user',
-                                   'path':request.get_full_path()
-                                  },
+                                  dictionary,
                                   context_instance=RequestContext(request))
 
     add_user_to_organization.short_description = _("Add users to selected organizations")
@@ -685,15 +685,15 @@ class OrganizationAdmin(admin.ModelAdmin):
                 form = self.UserProfileinOrganizationForm(choices=userprofiles,
                     initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
         
+            dictionary = {
+                          'selected_editorgroups': queryset,
+                          'form': form,
+                          'path': request.get_full_path()
+                         }
+            dictionary.update(create_breadcrumb_template_params(self.model, _('Remove user')))
+        
             return render_to_response('accounts/remove_user_profile_from_organization.html',
-                                      {
-                                       'selected_organizations': queryset,
-                                       'form': form,
-                                       'app_label': opts.app_label,
-                                       'verbose_name': opts.verbose_name,
-                                       'action': 'Remove user',
-                                       'path':request.get_full_path()
-                                      },
+                                      dictionary,
                                       context_instance=RequestContext(request))
 
     remove_user_from_organization.short_description = _("Remove users from selected organizations")
@@ -959,15 +959,15 @@ class OrganizationManagersAdmin(admin.ModelAdmin):
                 form = self.UserProfileinOrganizationManagersForm(choices=userprofiles,
                     initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
             
+            dictionary = {
+                          'selected_editorgroups': queryset,
+                          'form': form,
+                          'path': request.get_full_path()
+                         }
+            dictionary.update(create_breadcrumb_template_params(self.model, _('Add user')))
+        
             return render_to_response('accounts/add_user_profile_to_organization_managers.html',
-                                      {
-                                       'selected_organizationmanagers': queryset,
-                                       'form': form,
-                                       'app_label': opts.app_label,
-                                       'verbose_name': opts.verbose_name,
-                                       'action': 'Add user',
-                                       'path':request.get_full_path()
-                                      },
+                                      dictionary,
                                       context_instance=RequestContext(request))
         else:
             self.message_user(request, _('You need to be a superuser to add ' \
@@ -998,15 +998,15 @@ class OrganizationManagersAdmin(admin.ModelAdmin):
                 form = self.UserProfileinOrganizationManagersForm(choices=userprofiles,
                     initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
         
+            dictionary = {
+                          'selected_editorgroups': queryset,
+                          'form': form,
+                          'path': request.get_full_path()
+                         }
+            dictionary.update(create_breadcrumb_template_params(self.model, _('Remove user')))
+        
             return render_to_response('accounts/remove_user_profile_from_organization_managers.html',
-                                      {
-                                       'selected_organizationmanagers': queryset,
-                                       'form': form,
-                                       'app_label': opts.app_label,
-                                       'verbose_name': opts.verbose_name,
-                                       'action': 'Remove user',
-                                       'path':request.get_full_path()
-                                      },
+                                      dictionary,
                                       context_instance=RequestContext(request))
         else:
             self.message_user(request, _('You need to be a superuser to ' \
