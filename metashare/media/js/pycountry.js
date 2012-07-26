@@ -145,7 +145,8 @@ var _lang_name_list = [
 "Zhuang; Chuang", "Zande languages", "Zulu", "Zuni", 
 "No linguistic content; Not applicable", "Zaza; Dimili; Dimli; Kirdki; Kirmanjki; Zazaki"];
 
-var _lang_alpha2_to_name = new Array();_lang_alpha2_to_name["aa"] = "Afar";
+var _lang_alpha2_to_name = new Array();
+_lang_alpha2_to_name["aa"] = "Afar";
 _lang_alpha2_to_name["ab"] = "Abkhazian";
 _lang_alpha2_to_name["af"] = "Afrikaans";
 _lang_alpha2_to_name["ak"] = "Akan";

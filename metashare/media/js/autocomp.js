@@ -15,7 +15,13 @@ var autocomp_id = function(elementId, linkedToId)
 			autocomp_jquery('input#' + linkedToId).val(name);
 		},
 		source: _lang_alpha2_list
-	});
+	}).data("autocomplete")._renderItem = function(ul, item){
+		var langName = _lang_alpha2_to_name[item.label];
+		var a = autocomp_jquery('<li></li>')
+			.data("item.autocomplete", item)
+			.append(autocomp_jquery("<a></a>")["text"](item.label + " - " + langName)).
+			appendTo(ul);
+	};
 }
 
 var autocomp_name = function(elementId)
