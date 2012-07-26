@@ -417,7 +417,6 @@ def create(request):
     """
     return redirect(reverse('admin:repository_resourceinfotype_model_add'))
 
-
 def view(request, resource_name=None, object_id=None):
     """
     Render browse or detail view for the repository application.
@@ -439,14 +438,17 @@ def view(request, resource_name=None, object_id=None):
     list_of_main_components = resourceInfoType_model.get_fields_flat()
 
     main_component_paths_dict = {}
+    main_components_tuple = []
     
     for item, value in lr_content_paths:
         if value in list_of_main_components:
-			main_component_paths_dict[value] = item
-    print main_component_paths_dict
-        
+            tuple_index = str(item).replace(", ", "][").replace("(","[").replace(")","]")
+            tuple_index = tuple_index[:-3]
+            main_component_paths_dict[value] = item
+            main_components_tuple.append(eval("lr_content" + tuple_index))
+      
     # Define context for template rendering.
-    context = { 'resource': resource, 'lr_content': lr_content, 'component_paths': main_component_paths_dict }
+    context = { 'resource': resource, 'lr_content': lr_content, 'components_tuple': main_components_tuple }
     template = 'repository/lr_view.html'
 
     # For users who have edit permission for this resource, we have to add LR_EDIT 
