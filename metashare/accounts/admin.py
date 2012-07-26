@@ -511,7 +511,7 @@ class EditorGroupManagersAdmin(admin.ModelAdmin):
                     initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
             
             dictionary = {
-                          'selected_editorgroups': queryset,
+                          'selected_editorgroupmanagers': queryset,
                           'form': form,
                           'path': request.get_full_path()
                          }
@@ -552,7 +552,7 @@ class EditorGroupManagersAdmin(admin.ModelAdmin):
                     initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
         
             dictionary = {
-                          'selected_editorgroups': queryset,
+                          'selected_editorgroupmanagers': queryset,
                           'form': form,
                           'path': request.get_full_path()
                          }
@@ -651,7 +651,7 @@ class OrganizationAdmin(admin.ModelAdmin):
                 initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
         
             dictionary = {
-                          'selected_editorgroups': queryset,
+                          'selected_organizations': queryset,
                           'form': form,
                           'path': request.get_full_path()
                          }
@@ -686,7 +686,7 @@ class OrganizationAdmin(admin.ModelAdmin):
                     initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
         
             dictionary = {
-                          'selected_editorgroups': queryset,
+                          'selected_organizations': queryset,
                           'form': form,
                           'path': request.get_full_path()
                          }
@@ -960,7 +960,7 @@ class OrganizationManagersAdmin(admin.ModelAdmin):
                     initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
             
             dictionary = {
-                          'selected_editorgroups': queryset,
+                          'selected_organizationmanagers': queryset,
                           'form': form,
                           'path': request.get_full_path()
                          }
@@ -999,7 +999,7 @@ class OrganizationManagersAdmin(admin.ModelAdmin):
                     initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
         
             dictionary = {
-                          'selected_editorgroups': queryset,
+                          'selected_organizationmanagers': queryset,
                           'form': form,
                           'path': request.get_full_path()
                          }
