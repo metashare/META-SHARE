@@ -1691,3 +1691,436 @@ class OrganizationApplicationTests(TestCase):
         self.assertNotContains(response, '<option value="1" '
                 'selected="selected">normaluser</option>', msg_prefix=
             'expected an organization manager not to be able to modify an application.')
+
+class EditorGroupApplicationTests(TestCase):
+    """
+    Test case for the user application to one or several Editors of various model instances.
+    """
+
+    def setUp(self):
+        """
+        Sets up test users with and without staff permissions.
+        """
+        test_utils.set_index_active(False)
+        test_utils.setup_test_storage()
+
+        User.objects.create_user('normaluser', 'normal@example.com', 'secret')
+
+        self.test_editor_group = EditorGroup.objects.create(
+                                                    name='test_editor_group')
+        self.test_editor_group2 = EditorGroup.objects.create(
+                                                    name='test_editor_group2')
+        self.test_editor_group3 = EditorGroup.objects.create(
+                                                    name='test_editor_group3')
+
+        self.test_editor_group_manager = \
+            EditorGroupManagers.objects.create(name='test_editor_group_manager',
+                                        managed_group=self.test_editor_group)
+        self.test_editor_group_manager2 = \
+            EditorGroupManagers.objects.create(name='test_editor_group_manager2',
+                                        managed_group=self.test_editor_group2)
+
+        test_utils.create_editor_user('editoruser',
+            'editor@example.com', 'secret', (self.test_editor_group,))
+        test_utils.create_manager_user(
+            'manageruser', 'manager@example.com', 'secret',
+            (self.test_editor_group, self.test_editor_group_manager, self.test_editor_group_manager2))
+
+        User.objects.create_superuser('superuser', 'su@example.com', 'secret')
+
+    def tearDown(self):
+        test_utils.clean_resources_db()
+        test_utils.clean_storage()
+        test_utils.clean_user_db()
+        test_utils.set_index_active(True)
+
+    def test_application_page_with_one_editor_group(self):
+        """
+        Verifies that a user can apply when there is at least one editor group.
+        """
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        response = client.get('/{0}accounts/editor_group_application/'.format(DJANGO_BASE))
+        self.assertContains(response, 'Apply for editor group membership', msg_prefix=
+          'expected the system to allow the user to apply to an editor group')
+
+    def test_application_when_not_member_of_any_group(self):
+        """
+        Verifies that a user can apply to a first group
+        """
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        current_requests = EditorGroupApplication.objects.count()
+        response = client.post('/{0}accounts/editor_group_application/'.format(DJANGO_BASE), \
+          {'editor_group': self.test_editor_group.pk}, follow=True)
+        self.assertContains(response, 'You have successfully applied for editor group "{0}"'.format(
+          self.test_editor_group.name), msg_prefix='expected the system to accept a new request.')
+        self.assertEquals(EditorGroupApplication.objects.count(), current_requests + 1)
+
+    def test_application_when_there_is_a_pending_application(self):
+        """
+        Verifies that a user can apply for new group when another application is
+        still pending.
+        """
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        current_requests = EditorGroupApplication.objects.count()
+        response = client.post('/{0}accounts/editor_group_application/'.format(DJANGO_BASE), \
+          {'editor_group': self.test_editor_group.pk}, follow=True)
+        self.assertContains(response, 'You have successfully applied for editor group "{0}"'.format(
+          self.test_editor_group.name), msg_prefix='expected the system to accept a new request.')
+        response = client.post('/{0}accounts/editor_group_application/'.format(DJANGO_BASE), \
+          {'editor_group': self.test_editor_group2.pk}, follow=True)
+        self.assertContains(response, 'You have successfully applied for editor group "{0}"'.format(
+          self.test_editor_group2.name), msg_prefix='expected the system to accept a new request.')
+        self.assertEquals(EditorGroupApplication.objects.count(), current_requests + 2)
+
+    def test_notification_email(self):
+        """
+        Verifies that an email is sent when the user apply to a group
+        """
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        current_requests = EditorGroupApplication.objects.count()
+        response = client.post('/{0}accounts/editor_group_application/'.format(DJANGO_BASE), \
+          {'editor_group': self.test_editor_group.pk}, follow=True)
+        self.assertNotContains(response, 'There was an error sending out the request email', msg_prefix=
+          'expected the system to be able to send an email.')
+        self.assertEquals(EditorGroupApplication.objects.count(), current_requests + 1)
+
+    def test_cannot_apply_a_group_of_which_the_user_is_member(self):
+        """
+        Verifies that a user cannot apply to a group he/she is already a member
+        """
+        client = Client()
+        client.login(username='editoruser', password='secret')
+        response = client.get('/{0}accounts/editor_group_application/'.format(DJANGO_BASE), follow=True)
+        self.assertNotContains(response, '{}</option>'.format(self.test_editor_group),
+          msg_prefix='expected the system not to propose the application to a group the user is already a member.')
+
+    def test_cannot_apply_a_group_already_applied(self):
+        """
+        Verifies that a user cannot apply to a group he/she already applied for
+        """
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        response = client.post('/{0}accounts/editor_group_application/'.format(DJANGO_BASE), \
+          {'editor_group': self.test_editor_group.pk}, follow=True)
+        self.assertContains(response, 'You have successfully applied for editor group "{0}"'.format(
+          self.test_editor_group.name), msg_prefix='expected the system to accept a new request.')
+        response = client.get('/{0}accounts/editor_group_application/'.format(DJANGO_BASE), follow=True)
+        self.assertNotContains(response, '{}</option>'.format(self.test_editor_group),
+          msg_prefix='expected the system not to propose the application to a group \
+          the user already applied for.')
+
+    def test_cannot_access_the_form_when_no_group_available(self):
+        """
+        Verifies that a user cannot apply when there is no editor group available
+        """
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        EditorGroup.objects.all().delete()
+        response = client.get('/{0}accounts/editor_group_application/'.format(DJANGO_BASE), follow=True)
+        self.assertContains(response, 'There are no editor groups in the database, yet, for which you could apply.',
+          msg_prefix='expected the system to prevent access to the form when no editor group is available.')
+
+    def test_superuser_can_change_the_application(self):
+        """
+        Verifies that a superuser can change an editor group application request
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+        new_reg = EditorGroupApplication(user=User.objects.get(username='normaluser'),
+            editor_group=self.test_editor_group)
+        new_reg.save()
+        response = client.get('{}accounts/editorgroupapplication/{}/'.format(ADMINROOT, new_reg.pk))
+        self.assertContains(response, 'normaluser</option>', msg_prefix=
+            'expected a superuser to be able to modify an application.')
+
+    def test_manager_cannot_change_the_application(self):
+        """
+        Verifies that a manager cannot change an editor group application
+        request.
+        
+        The manager can view the application details anyway.
+        """
+        client = Client()
+        client.login(username='manageruser', password='secret')
+        new_reg = EditorGroupApplication(
+            user=User.objects.get(username='normaluser'),
+            editor_group=self.test_editor_group)
+        new_reg.save()
+        response = client.get('{}accounts/editorgroupapplication/{}/'
+                              .format(ADMINROOT, new_reg.pk))
+        self.assertContains(response, 'normaluser', msg_prefix='expected a '
+                'manager to be able to see the details of an application.')
+        self.assertNotContains(response, '<option value="1" '
+                'selected="selected">normaluser</option>', msg_prefix=
+            'expected a manager not to be able to modify an application.')
+
+    def test_user_can_add_default_group(self):
+        """
+        Verifies that a user can set an editor group as default
+        """
+        client = Client()
+        client.login(username='editoruser', password='secret')
+        response = client.post('/{0}accounts/add_default_editor_groups/'.format(DJANGO_BASE), \
+          {'editor_group': self.test_editor_group.pk}, follow=True)
+        self.assertNotContains(response, 'You have successfully added default editor group "{}".'.format(self.test_editor_group),
+          msg_prefix='expected the system to set an editor group as default.')
+        
+    def test_user_can_remove_default_group(self):
+        """
+        Verifies that a user can remove an editor group from the default list
+        """
+        client = Client()
+        client.login(username='editoruser', password='secret')
+        response = client.post('/{0}accounts/add_default_editor_groups/'.format(DJANGO_BASE), \
+          {'editor_group': self.test_editor_group.pk}, follow=True)
+        response = client.post('/{0}accounts/remove_default_editor_groups/'.format(DJANGO_BASE), \
+          {'editor_group': self.test_editor_group.pk}, follow=True)
+        self.assertNotContains(response, 'You have successfully removed default editor group "{}".'.format(self.test_editor_group),
+          msg_prefix='expected the system to remove a default editor group.')
+        
+
+class BreadcrumbTests(TestCase):
+    """
+    Test case for the display of some manually added breadcrumbs in the back office.
+    """
+
+    def setUp(self):
+        """
+        Sets up test users.
+        """
+        test_utils.set_index_active(False)
+        test_utils.setup_test_storage()
+
+        self.test_editor_group = EditorGroup.objects.create(
+                                                    name='test_editor_group')
+        self.test_editor_group_managers = \
+            EditorGroupManagers.objects.create(name='test_editor_group_manager',
+                                        managed_group=self.test_editor_group)
+        self.test_organization = Organization.objects.create(
+                                                    name='test_organization')
+        self.test_organization_managers = \
+            OrganizationManagers.objects.create(name='test_organization_manager',
+                                        managed_organization=self.test_organization)
+
+        User.objects.create_superuser('superuser', 'su@example.com', 'secret')
+
+        self.testfixture = _import_test_resource()
+
+    def tearDown(self):
+        test_utils.clean_resources_db()
+        test_utils.clean_storage()
+        test_utils.clean_user_db()
+        test_utils.set_index_active(True)
+
+    def test_breadcrumb_in_add_users_to_editor_group(self):
+        """
+        Verifies breadcrumb in the add users to editor group page.
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+
+        response = client.post('{}accounts/editorgroup/'.format(ADMINROOT),
+            {"action": "add_user_to_editor_group",
+             admin.ACTION_CHECKBOX_NAME: self.test_editor_group.id})
+        self.assertContains(response,
+            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
+    <a href=\"../\">Accounts</a> &rsaquo;\n    <a href=\"./\">Editor group</a> &rsaquo;\n\
+    Add user\n  </div>", msg_prefix=
+                "expected to display a correct breadcrumb.")
+
+    def test_breadcrumb_in_remove_users_from_editor_group(self):
+        """
+        Verifies breadcrumb in the remove users from editor group page.
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+
+        response = client.post('{}accounts/editorgroup/'.format(ADMINROOT),
+            {"action": "remove_user_from_editor_group",
+             admin.ACTION_CHECKBOX_NAME: self.test_editor_group.id})
+        self.assertContains(response,
+            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
+    <a href=\"../\">Accounts</a> &rsaquo;\n    <a href=\"./\">Editor group</a> &rsaquo;\n\
+    Remove user\n  </div>", msg_prefix=
+                "expected to display a correct breadcrumb.")
+
+    def test_breadcrumb_in_add_users_to_editor_group_managers(self):
+        """
+        Verifies breadcrumb in the add users to editor group managers page.
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+
+        response = client.post('{}accounts/editorgroupmanagers/'.format(ADMINROOT),
+            {"action": "add_user_to_editor_group_managers",
+             admin.ACTION_CHECKBOX_NAME: self.test_editor_group_managers.id})
+        self.assertContains(response,
+            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
+    <a href=\"../\">Accounts</a> &rsaquo;\n    <a href=\"./\">Editor group managers group</a> &rsaquo;\n\
+    Add user\n  </div>", msg_prefix=
+                "expected to display a correct breadcrumb.")
+
+    def test_breadcrumb_in_remove_users_from_editor_group_managers(self):
+        """
+        Verifies breadcrumb in the remove users from editor group managers page.
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+
+        response = client.post('{}accounts/editorgroupmanagers/'.format(ADMINROOT),
+            {"action": "remove_user_from_editor_group_managers",
+             admin.ACTION_CHECKBOX_NAME: self.test_editor_group_managers.id})
+        self.assertContains(response,
+            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
+    <a href=\"../\">Accounts</a> &rsaquo;\n    <a href=\"./\">Editor group managers group</a> &rsaquo;\n\
+    Remove user\n  </div>", msg_prefix=
+                "expected to display a correct breadcrumb.")
+
+    def test_breadcrumb_in_add_users_to_organization(self):
+        """
+        Verifies breadcrumb in the add users to organization page.
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+
+        response = client.post('{}accounts/organization/'.format(ADMINROOT),
+            {"action": "add_user_to_organization",
+             admin.ACTION_CHECKBOX_NAME: self.test_organization.id})
+        self.assertContains(response,
+            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
+    <a href=\"../\">Accounts</a> &rsaquo;\n    <a href=\"./\">Organization</a> &rsaquo;\n\
+    Add user\n  </div>", msg_prefix=
+                "expected to display a correct breadcrumb.")
+
+    def test_breadcrumb_in_remove_users_from_organization(self):
+        """
+        Verifies breadcrumb in the remove users from organization page.
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+
+        response = client.post('{}accounts/organization/'.format(ADMINROOT),
+            {"action": "remove_user_from_organization",
+             admin.ACTION_CHECKBOX_NAME: self.test_organization.id})
+        self.assertContains(response,
+            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
+    <a href=\"../\">Accounts</a> &rsaquo;\n    <a href=\"./\">Organization</a> &rsaquo;\n\
+    Remove user\n  </div>", msg_prefix=
+                "expected to display a correct breadcrumb.")
+
+    def test_breadcrumb_in_add_users_to_organization_managers(self):
+        """
+        Verifies breadcrumb in the add users to organization managers page.
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+
+        response = client.post('{}accounts/organizationmanagers/'.format(ADMINROOT),
+            {"action": "add_user_to_organization_managers",
+             admin.ACTION_CHECKBOX_NAME: self.test_organization_managers.id})
+        self.assertContains(response,
+            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
+    <a href=\"../\">Accounts</a> &rsaquo;\n    <a href=\"./\">Organization managers group</a> &rsaquo;\n\
+    Add user\n  </div>", msg_prefix=
+                "expected to display a correct breadcrumb.")
+
+    def test_breadcrumb_in_remove_users_from_organization_managers(self):
+        """
+        Verifies breadcrumb in the remove users from organization managers page.
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+
+        response = client.post('{}accounts/organizationmanagers/'.format(ADMINROOT),
+            {"action": "remove_user_from_organization_managers",
+             admin.ACTION_CHECKBOX_NAME: self.test_organization_managers.id})
+        self.assertContains(response,
+            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
+    <a href=\"../\">Accounts</a> &rsaquo;\n    <a href=\"./\">Organization managers group</a> &rsaquo;\n\
+    Remove user\n  </div>", msg_prefix=
+                "expected to display a correct breadcrumb.")
+
+    def test_breadcrumb_in_add_editor_groups_to_resource(self):
+        """
+        Verifies breadcrumb in the add editor groups to resource page.
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+
+        response = client.post('{}repository/resourceinfotype_model/'.format(ADMINROOT),
+            {"action": "add_group",
+             admin.ACTION_CHECKBOX_NAME: self.testfixture.id})
+        self.assertContains(response,
+            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
+    <a href=\"../\">Repository</a> &rsaquo;\n    <a href=\"./\">Resource</a> &rsaquo;\n\
+    Add editor group\n  </div>", msg_prefix=
+                "expected to display a correct breadcrumb.")
+
+    def test_breadcrumb_in_remove_editor_groups_from_resource(self):
+        """
+        Verifies breadcrumb in the remove editor groups from resource page.
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+
+        response = client.post('{}repository/resourceinfotype_model/'.format(ADMINROOT),
+            {"action": "remove_group",
+             admin.ACTION_CHECKBOX_NAME: self.testfixture.id})
+        self.assertContains(response,
+            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
+    <a href=\"../\">Repository</a> &rsaquo;\n    <a href=\"./\">Resource</a> &rsaquo;\n\
+    Remove editor group\n  </div>", msg_prefix=
+                "expected to display a correct breadcrumb.")
+
+    def test_breadcrumb_in_add_owners_to_resource(self):
+        """
+        Verifies breadcrumb in the add owners to resource page.
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+
+        response = client.post('{}repository/resourceinfotype_model/'.format(ADMINROOT),
+            {"action": "add_owner",
+             admin.ACTION_CHECKBOX_NAME: self.testfixture.id})
+        self.assertContains(response,
+            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
+    <a href=\"../\">Repository</a> &rsaquo;\n    <a href=\"./\">Resource</a> &rsaquo;\n\
+    Add owner\n  </div>", msg_prefix=
+                "expected to display a correct breadcrumb.")
+
+    def test_breadcrumb_in_remove_owners_from_resource(self):
+        """
+        Verifies breadcrumb in the remove owners to resource page.
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+
+        response = client.post('{}repository/resourceinfotype_model/'.format(ADMINROOT),
+            {"action": "remove_owner",
+             admin.ACTION_CHECKBOX_NAME: self.testfixture.id})
+        self.assertContains(response,
+            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
+    <a href=\"../\">Repository</a> &rsaquo;\n    <a href=\"./\">Resource</a> &rsaquo;\n\
+    Remove owner\n  </div>", msg_prefix=
+                "expected to display a correct breadcrumb.")
+
+    def test_breadcrumb_in_mark_resource_as_deleted(self):
+        """
+        Verifies breadcrumb in the mark resource as deleted page.
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+
+        response = client.post('{}repository/resourceinfotype_model/'.format(ADMINROOT),
+            {"action": "delete",
+             admin.ACTION_CHECKBOX_NAME: self.testfixture.id})
+        self.assertContains(response,
+            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
+    <a href=\"../\">Repository</a> &rsaquo;\n    <a href=\"./\">Resource</a> &rsaquo;\n\
+    Delete resource\n  </div>", msg_prefix=
+                "expected to display a correct breadcrumb.")
+
