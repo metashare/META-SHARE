@@ -32,9 +32,20 @@ label {
     font-size: 12px;
 }
 
-.required label, label.required {
-    font-weight: bold !important;
-    color: #333 !important;
+.required {
+    background: url(../../css/sexybuttons/images/icons/silk/asterisk_orange.png) no-repeat;
+    
+    background-repeat:no-repeat;
+    background-position:top left;
+    background-size:8px;
+    padding-left: 12px !important;
+
+   /* font-weight: bold !important;
+    color: #333 !important;*/
+}
+
+th.required {
+	background-position:left;
 }
 
 /* RADIO BUTTONS */
@@ -372,4 +383,13 @@ fieldset.monospace textarea {
 .helpLink:hover {
 	color: red;
 	cursor: pointer;
+}
+
+#explanation{
+    font-size: 11px;
+    color: #666;
+    background-color: #eee;
+    width: 200px;
+    margin: 10px 0px 10px 0px;
+    
 }
