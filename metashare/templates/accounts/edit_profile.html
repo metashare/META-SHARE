@@ -20,12 +20,14 @@
   </tr>
   <tr><td colspan="2" style="text-align:center; height:40px;">If you need to change any of the above details, please contact a superuser of this META-SHARE node.</td></tr>  
   {{ form.as_table }}
+
   {% if editor_group_managers_member_of %}
   <tr>
     <th> <label>Editor Group Manager Group{{ editor_group_managers_member_of|pluralize }}</label></th>
     <td>{{ editor_group_managers_member_of|join:", " }}</td>
   </tr>
   {% endif %}
+
   {% if editor_groups_member_of %}
   <tr>
     <th> <label title="Displays all the editor groups you belong in. Editor groups that are applied by default to your resources, are shown in italic.">Editor Group{{ editor_groups_member_of|pluralize }}</label></th>
@@ -52,8 +54,6 @@
   <tr><td colspan="2" style="text-align:center; height:40px;">You already applied for a membership of the following editor group{{ groups_applied_for|pluralize }}: {{ groups_applied_for|join:", " }}</td></tr>
   {% endif %}
 
-  
-
   {% if organization_managers_member_of %}
   <tr>
     <th> <label>Organization Manager Group{{ organization_managers_member_of|pluralize }}</label></th>
@@ -69,9 +69,6 @@
   {% if organizations_applied_for %}
   <tr><td colspan="2" style="text-align:center; height:40px;">You already applied for a membership of the following organization{{ organizations_applied_for|pluralize }}: {{ organizations_applied_for|join:", " }}</td></tr>
   {% endif %}
-  <tr>
-    <td colspan="2" style="text-align:center; height:40px;"><a href="{% url metashare.accounts.views.organization_application %}"> Apply for new membership of organizations.</a> </td>
-  </tr>
   
 <tr><th></th><td><input class="button middle_button" type="submit" value="Edit Profile" /></td></tr>
 </table>
