@@ -15,10 +15,6 @@ from local_settings import *
 
 # Logging settings for this Django project.
 LOG_LEVEL = logging.INFO
-<<<<<<< HEAD
-LOG_FILENAME = join(tempfile.gettempdir(), "metashare.log")
-=======
->>>>>>> 220a68f1bb04cd26185498362bff5cec868850c9
 LOG_FORMAT = "[%(asctime)s] %(name)s::%(levelname)s %(message)s"
 LOG_DATE = "%m/%d/%Y @ %H:%M:%S"
 LOG_FORMATTER = logging.Formatter(LOG_FORMAT, LOG_DATE)
