@@ -13,12 +13,6 @@ p.bold{
 	font-weight: 600 !important;
 }
 
-
-div.search_box h1{
-	font-family: 'TitilliumText25L', "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 48pt;
-}
-
 h1,h2,h3,h4,h5,h6{
 	font-family: "TitilliumText25L", "Helvetica Neue", "Helvetica", Arial, sans-serif;
 }
@@ -91,10 +85,6 @@ input.big_input:focus{
 }
 input.middle_input:focus{
 	border: solid 3px #99CCFF;  
-}
-div.search_label{
-	font-family: 	'TitilliumText25L', "Helvetica",arial, serif;
-	font-weight: 600;
 }
 
 div#content p, span{

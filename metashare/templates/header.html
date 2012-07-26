@@ -15,15 +15,19 @@
 		        </span>
 		        <div class="inner_box" style="width:200px;float:right;">
 		            {% if user.username %}
-		                <a href="{% url metashare.views.logout %}" style="float:right; margin-right:20px;"><div class="topright">Logout</div></a>
+		                <a href="{% url metashare.views.logout %}?next={{ request.path }}" style="float:right; margin-right:20px;"><div class="topright">Logout</div></a>
 		            {% else %}
 		                <a href="{% url metashare.accounts.views.create %}"><div class="topright">Register</div></a>
+<<<<<<< HEAD
 		                <a href="{% url metashare.views.login %}?next={{request.path}}"><div class="topright">Login</div></a>
+=======
+		                <a href="{% url metashare.views.login %}?next={{ request.path }}"><div class="topright">Login</div></a>
+>>>>>>> 220a68f1bb04cd26185498362bff5cec868850c9
 		            {% endif %}
 		        </div>
-			</div><!-- end inner --> 
+			</div>
 
-	<!-- drop-down menu created with http://javascript-array.com/scripts/jquery_simple_drop_down_menu/ -->
+	{# drop-down menu created with http://javascript-array.com/scripts/jquery_simple_drop_down_menu/ #}
 	<ul id="jsddm">
 			<li title="Browse the resources of the META-SHARE catalogue"><a href="{% url metashare.views.frontpage %}repository/search/">Browse Resources</a></li>
 			{% if user.is_staff and user.get_profile.has_editor_permission %}	        

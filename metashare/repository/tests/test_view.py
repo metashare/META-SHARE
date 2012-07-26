@@ -1,11 +1,11 @@
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.auth.models import Permission
+from django.contrib.auth.models import Permission, Group
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.client import Client
 
 from metashare import test_utils, settings
-from metashare.accounts.models import UserProfile, EditorGroup, EditorGroupManagers
+from metashare.accounts.models import UserProfile, EditorGroup, EditorGroupManagers, Organization
 from metashare.repository import views
 from metashare.settings import DJANGO_BASE, ROOT_PATH
 from metashare.test_utils import create_user
@@ -302,6 +302,13 @@ class DownloadViewTest(TestCase):
         ms_member.user_permissions.add(Permission.objects.get(
                     content_type=profile_ct, codename='ms_associate_member'))
         ms_member.save()
+
+        create_user('organization_member', 'om@example.com', 'secret')
+        test_organization = Organization.objects.create(
+                                                    name='test_organization')
+        test_organization.permissions.add(Permission.objects.get(
+                    content_type=profile_ct, codename='ms_full_member'))
+        test_organization.save()
 
     def tearDown(self):
         """
@@ -654,3 +661,51 @@ class DownloadViewTest(TestCase):
         response = client.get('/{0}repository/download/{1}/'
                               .format(DJANGO_BASE, self.downloadable_resource_1.storage_object.identifier))
         self.assertContains(response, "You will now be redirected")
+
+
+
+    def test_downloadable_resource_for_organization_ms_full_members(self):
+        """
+        Verifies that a resource with an MS Commons license can be downloaded by
+        a user which has the META-SHARE full member permission.
+        """
+        client = Client()
+        client.login(username='organization_member', password='secret')
+
+        # make sure the license page is shown:
+        response = client.get(reverse(views.download,
+                    args=(self.ms_commons_resource.storage_object.identifier,)),
+            follow = True)
+        self.assertTemplateUsed(response, 'repository/licence_agreement.html',
+                                "license agreement page expected")
+        self.assertContains(response,
+                            'licences/META-SHARE_COMMONS_BYNCSA_v1.0.htm',
+                            msg_prefix="the correct license appears to not " \
+                                "be shown in an iframe")
+        # make sure the license agreement page is shown again if the license was
+        # not accepted:
+        response = client.post(reverse(views.download,
+                    args=(self.ms_commons_resource.storage_object.identifier,)),
+            { 'in_licence_agree_form': 'True', 'licence_agree': 'False',
+              'licence': 'MSCommons_BY-NC-SA' },
+            follow = True)
+        self.assertTemplateUsed(response, 'repository/licence_agreement.html',
+                                "license agreement page expected")
+        self.assertContains(response,
+                            'licences/META-SHARE_COMMONS_BYNCSA_v1.0.htm',
+                            msg_prefix="the correct license appears to not " \
+                                "be shown in an iframe")
+        # make sure the download was started after accepting the license:
+        response = client.post(reverse(views.download,
+                    args=(self.ms_commons_resource.storage_object.identifier,)),
+            { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
+              'licence': 'MSCommons_BY-NC-SA' },
+            follow = True)
+        print response
+        self.assertTemplateNotUsed(response, 'repository/licence_agreement.html',
+                            msg_prefix="a download should have been started")
+        self.assertTemplateNotUsed(response, 'repository/licence_selection.html',
+                            msg_prefix="a download should have been started")
+        self.assertTemplateNotUsed(response, 'repository/lr_not_downloadable.html',
+                            msg_prefix="a download should have been started")
+
