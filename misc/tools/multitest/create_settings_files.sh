@@ -16,6 +16,7 @@ copy_settings()
     if [[ "$res" == "" ]] ; then
         echo "Copying original settings.py"
         cp "$SETT_FILE" "$MSERV_DIR/init_data/settings_original.py"
+        local root_path_line=`grep -e "^ROOT_PATH =" "$SETT_FILE"`
         echo "1 i\
 $MULTI_TEST_SETT_MARKER" > /tmp/sed.scr
         echo "/^from local_settings import */ c\
@@ -24,6 +25,7 @@ import sys\n\
 sys.path.insert(0, cmd_folder)\n\
 from dj_settings.multilocal_settings import *\n\
 from dj_settings.node_settings import *\n\
+$root_path_line\n\
 " >> /tmp/sed.scr
         sed -f /tmp/sed.scr init_data/settings_original.py > init_data/settings_multitest.py
         rm /tmp/sed.scr
@@ -34,8 +36,11 @@ copy_local_settings()
 {
     local METASHARE_DIR="$METASHARE_SW_DIR/metashare"
     local L_SETT_FILE="$METASHARE_DIR/local_settings.sample"
+    local root_path_line="ROOT_PATH = \'$METASHARE_DIR\'"
+    echo "/^ROOT_PATH =/c \
+$root_path_line" > /tmp/sed.scr
 
-    cp "$L_SETT_FILE" init_data/local_settings.sample
+    sed -f /tmp/sed.scr "$L_SETT_FILE" > init_data/local_settings.sample
 }
 
 copy_settings

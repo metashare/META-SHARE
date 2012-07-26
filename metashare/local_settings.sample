@@ -4,7 +4,7 @@ Project: META-SHARE prototype implementation
 """
 from os.path import abspath, dirname, join
 import tempfile
-#ROOT_PATH = abspath(dirname(__file__))
+ROOT_PATH = abspath(dirname(__file__))
 
 # The URL for this META-SHARE node django application.  Do not use trailing /.
 # This URL has to include DJANGO_BASE (without its trailing /)!
@@ -83,7 +83,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
 TIME_ZONE = 'Europe/Berlin'
 
 # The location of the xdiff tool to compare XML files.
-#XDIFF_LOCATION = "{0}/../misc/tools/xdiff-src/xdiff".format(ROOT_PATH)
+XDIFF_LOCATION = "{0}/../misc/tools/xdiff-src/xdiff".format(ROOT_PATH)
 
 # The web browser to use for the Selenium tests; possible values are:
 # Firefox, Ie, Opera, Chrome
