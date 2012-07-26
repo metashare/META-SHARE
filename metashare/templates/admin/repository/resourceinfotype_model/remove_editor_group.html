@@ -8,6 +8,11 @@
 
 {{ media }}
 {% endblock %}
+
+{% block breadcrumbs %}
+{% include "breadcrumbs.html" %}
+{% endblock %}
+
 {% block content %}
 <h3>Remove editor groups from the following resource{{ selected_resources|pluralize }}:</h3>
 

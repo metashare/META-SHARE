@@ -25,3 +25,17 @@ def verify_subclass(subclass, superclass):
     '''
     if not issubclass(subclass, superclass):
         raise TypeError('class {0} is not a subclass of class {1}'.format(subclass, superclass))
+
+def create_breadcrumb_template_params(model, action):
+    '''
+    Create a dictionary for breadcrumb templates.
+    '''
+    opts = model._meta
+
+    dictionary = {
+                  'app_label': opts.app_label,
+                  'verbose_name': opts.verbose_name,
+                  'action': action,
+                 }
+    
+    return dictionary

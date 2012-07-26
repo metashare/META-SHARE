@@ -1,5 +1,9 @@
 {% extends "admin/base_site.html" %}
 
+{% block breadcrumbs %}
+{% include "breadcrumbs.html" %}
+{% endblock %}
+
 {% block content %}
 <h3>Add a user to the following organization manager group{{ selected_organizationmanagers|pluralize }}:</h3>
 
