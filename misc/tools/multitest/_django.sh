@@ -86,7 +86,9 @@ create_django_settings()
 	local SYNC_USERS="$1" ; shift
 
 	local NODE_SETTINGS_DIR="$TEST_DIR/$NODE_NAME/dj_settings"
-	echo "s/%%SOLR_PORT%%/$SOLR_PORT/g" > /tmp/sed.scr
+	local LOG_FILENAME="$TEST_DIR/$NODE_NAME/metashare.log"
+	echo "s#%%LOG_FILENAME%%#$LOG_FILENAME#g" > /tmp/sed.scr
+	echo "s/%%SOLR_PORT%%/$SOLR_PORT/g" >> /tmp/sed.scr
 	echo "s#%%DATABASE_FILE%%#$DATABASE_FILE#g"  >> /tmp/sed.scr
 	echo "s#%%STORAGE_PATH%%#$STORAGE_PATH#g" >> /tmp/sed.scr
 	echo "s/%%DJANGO_PORT%%/$DJANGO_PORT/g" >> /tmp/sed.scr
