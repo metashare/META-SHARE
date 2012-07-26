@@ -454,7 +454,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         dictionary = {
                       'can_be_deleted': can_be_deleted,
                       'cannot_be_deleted': cannot_be_deleted,
-                      'selected_editorgroups': queryset,
+                      'selected_resources': queryset,
                       'form': form,
                       'path': request.get_full_path()
                      }
@@ -510,7 +510,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                          request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
     
         dictionary = {
-                      'selected_editorgroups': queryset,
+                      'selected_resources': queryset,
                       'form': form,
                       'path': request.get_full_path()
                      }
@@ -574,7 +574,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                          request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
     
         dictionary = {
-                      'selected_editorgroups': queryset,
+                      'selected_resources': queryset,
                       'form': form,
                       'path': request.get_full_path()
                      }
@@ -627,7 +627,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                          request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
     
         dictionary = {
-                      'selected_editorgroups': queryset,
+                      'selected_resources': queryset,
                       'form': form,
                       'path': request.get_full_path()
                      }
@@ -670,7 +670,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                          request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
     
         dictionary = {
-                      'selected_editorgroups': queryset,
+                      'selected_resources': queryset,
                       'form': form,
                       'path': request.get_full_path()
                      }
