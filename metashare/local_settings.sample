@@ -83,7 +83,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
 TIME_ZONE = 'Europe/Berlin'
 
 # The location of the xdiff tool to compare XML files.
-XDIFF_LOCATION = "{0}/../misc/tools/xdiff-src/xdiff".format(ROOT_PATH)
+#XDIFF_LOCATION = "{0}/../misc/tools/xdiff-src/xdiff".format(ROOT_PATH)
 
 # The web browser to use for the Selenium tests; possible values are:
 # Firefox, Ie, Opera, Chrome
