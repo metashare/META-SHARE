@@ -7,10 +7,11 @@
 {% if show_save_and_continue %}<input type="submit" value="{% trans 'Save and continue editing' %}" name="_continue" {{ onclick_attrib }}/>{% endif %}
 <input type="button" value="{% trans 'Cancel' %}" title="{% trans 'Abort editing and discard any changes' %}" name="_cancel" />
 </div>
-
-<!-- This prevents accidental loss of information by informing the user about
-     losing unsaved information and then asking the user to confirm that he
-     really wants to leave the current editor page. -->
+{% comment %}
+  This prevents accidental loss of information by informing the user about
+  losing unsaved information and then asking the user to confirm that he
+  really wants to leave the current editor page.
+{% endcomment %}
 <script language="JavaScript">
 $(document).ready(function() {
   $(window).bind('beforeunload', function() {

@@ -56,7 +56,7 @@
 			<div class="fields">
 				<ul>
 					{% for fieldset in adminform %}
-						{% if fieldset.name %}		<!--fieldset "None" in fact does not have a name, so it is not displayed-->													
+						{% if fieldset.name %}{# fieldset "None" in fact does not have a name, so it is not displayed #}													
 							<li{% if "Required" in fieldset.name %} class= "active"{% endif %}><a href="#field-{{forloop.counter}}">{{fieldset.name|truncatewords:1|slice:":-4"}}</a></li>
 						{% endif %}						
 					{% endfor %}	

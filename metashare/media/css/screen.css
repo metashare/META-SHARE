@@ -195,18 +195,6 @@ div#header a:link, a:visited,a:hover,a:active{
 
 /* banner end */
 
-
-/* advanced search panel */
-search_box{
-	overflow-x: hidden;
-	text-align: center;
-	
-	padding-top: 15px;
-	padding-bottom: 40px;
-	
-	margin-bottom: 10px;
-}
-
 input{
 	background-image: 		url(../images/bg_search.png);
 	background-repeat: 		repeat-x;
@@ -228,64 +216,6 @@ input.big_input{
 input.middle_input{
 	height: 50px;
 }
-
-div.search_box input{
-	word-spacing: 	2px;
-
-	padding-left: 	20px;
-	margin-top: 	3px;
-}
-div#advanced_search_panel div#background{
-	background-image: url(../images/carbon_fibre.png);
-    -webkit-border-radius: 	5px;
-    -khtml-border-radius: 	5px;
-    -moz-border-radius: 	5px;
-    border-radius: 			5px;		
-}
-div#advanced_search_panel input{
-	width: 		480px;
-	
-	padding-top:		0px;
-	padding-bottom: 	0px;
-	padding-left: 		160px;
-}
-div.search_box{
-	margin-top:		25px;
-	margin-bottom:	0px;
-	text-align: center;
-}
-
-div.search_panel {
-    position: relative;
-    margin-top: 3px;
-    margin-bottom: 16px;
-    height: 55px;
-}
-div.search_label {
-    position: 	absolute;
-    top: 		28px;
-    left: 		162px;
-    color: 		#999999;
-    line-height: 1.8;
-    
-	height: 	20px;
-	width: 		100px;
-	font-size: 	12px;
-    text-shadow: 0px 1px 1px black;
-
-	text-align: 	right;
-	padding-right: 	10px;
-	padding-top: 0px;
-
-	border-top-left-radius:1em;
-	-moz-border-radius-topleft:1em;
-	-webkit-border-top-left-radius:1em;
-	
-	border-bottom-left-radius:1em;
-	-moz-border-radius-bottomleft:1em;
-	-webkit-border-bottom-left-radius:1em;
-}
-/* advanced search panel end */
 
 /* cfedermann patches */
 
@@ -457,20 +387,21 @@ form.form_helper tr td textarea {
     background-repeat: repeat-x;
     border-radius: 10px 10px 10px 10px;
     box-shadow: 0 1px 1px #CCCCCC;
-	width:350px;
+	width:400px;
 	height:150px;
 	padding:5px;
+	font-size: 		16px;
 }
 
 form.form_helper tr td input {
-	width:350px;
+	width:400px;
+	font-size: 		16px;
 }
 
 form.form_helper td.readonly {
 	font-family: 	'TitilliumText25L', "Helvetica Neue", Helvetica, Arial, sans-serif;
 	color: 			#999999;
-	font-size: 		28px;
-	font-weight: 	600;
+	font-size: 		16px;
 }
 
 /* Marc Schroeder end */
@@ -513,20 +444,6 @@ div.text_header{
 	margin-bottom: 5px;
 }
 /* license end */
-
-div.more_details{
-	width: 200px;
-	height: 50px;
-	background-image: url(../images/more_details.png);
-	background-repeat: no-repeat;
-}
-
-div.less_details{
-	width: 200px;
-	height: 50px;
-	background-image: url(../images/less_details.png);
-	background-repeat: no-repeat;
-}
 
 /*filters separate box*/
 div.left_box{

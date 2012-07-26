@@ -1,5 +1,9 @@
 {% extends "admin/base_site.html" %}
 
+{% block breadcrumbs %}
+{% include "breadcrumbs.html" %}
+{% endblock %}
+
 {% block content %}
 <h3>Remove a user from the following editor group manager group{{ selected_editorgroupmanagers|pluralize }}:</h3>
 

@@ -1,25 +1,37 @@
 {% extends "base.html" %}
+
 {% block title %}
 {{ resource }} &ndash; Download Licence Agreement &ndash; META-SHARE
 {% endblock %}
+
 {% block content %}
-<h2>{{ resource }}</h2>
-<div class="content_box">
-  <h3>Licence Agreement</h3>
-{% if licence_path %}
-  <iframe src="{{ licence_path }}" width="700" height="400"><a href="{{ licence_path }}">View licence</a></iframe>
-  {% if not download_available %}
-    <p>Please contact the resource maintainer for more information on how to obtain the selected resource under these license terms.</p>
-  {% else %}
-    <form action="." method="post" target="_blank">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <input class="span-8 button middle_button" type="submit" value="Download" />
-    </form>
-  {% endif %}
-{% else %}
-  <p>We&rsquo;re afraid, license terms for the download of the selected resource are not available. Please contact the resource maintainer for more information on how to obtain the resource.</p>
-{% endif %}
-  <a href="{% url metashare.repository.views.download_contact resource.storage_object.identifier %}"><input type="button" class="span-8 button middle_button" value="Contact Resource Maintainer" /></a>
-</div>
+
+  <h2>{{ resource }}</h2>
+  <div class="content_box">
+    <h3>Licence Agreement</h3>
+    {% if licence_path %}
+      <iframe src="{{ licence_path }}" width="700" height="400"><a href="{{ licence_path }}">View licence</a></iframe>
+      <table style="margin:15px;">
+        <tr><td>
+        {% if not download_available %}
+          <p>Please contact the resource maintainer for more information on how to obtain the selected resource under these license terms.</p>
+        {% else %}
+          <form action="{% url metashare.repository.views.download resource.storage_object.identifier %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input class="span-8 button middle_button" style="margin-left:150px;" type="submit" value="Download" />
+          </form>
+        {% endif %}
+      {% else %}
+        <p>We&rsquo;re afraid, license terms for the download of the selected resource are not available.</p>
+        <p>Please contact the resource maintainer for more information on how to obtain the resource.</p>
+      {% endif %}
+    </td></tr>
+    <tr><td>
+      <a href="{{ resource.get_absolute_url }}"><input type="button" class="span-6 button middle_button" value="&laquo;&nbsp;Resource View" /></a>
+      <a href="{% url metashare.repository.views.download_contact resource.storage_object.identifier %}"><input type="button" class="span-8 button middle_button" value="Contact Resource Maintainer" /></a>
+    </td></tr>
+    </table>
+  </div>
+
 {% endblock %}
