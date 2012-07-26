@@ -53,10 +53,10 @@
             {% endif %}
             {% if user.username %}
                 <a href="{% url metashare.accounts.views.edit_profile %}"><div class="button middle_button">Profile</div></a>
-                <a href="{% url metashare.views.logout %}"><div class="button middle_button">Logout</div></a>
+                <a href="{% url metashare.views.logout %}?next={{request.path}}"><div class="button middle_button">Logout</div></a>
             {% else %}
                 <a href="{% url metashare.accounts.views.create %}"><div class="button middle_button">Register</div></a>
-                <a href="{% url metashare.views.login %}"><div class="button middle_button">Login</div></a>
+                <a href="{% url metashare.views.login %}?next={{request.path}}"><div class="button middle_button">Login</div></a>
             {% endif %}
         </div>
      </div><!-- end inner -->    
