@@ -10,9 +10,13 @@ import tempfile
 import logging
 from logging.handlers import RotatingFileHandler
 
+# Import local settings, i.e., DEBUG, TEMPLATE_DEBUG, TIME_ZONE,
+# DATABASE_* settings, ADMINS, etc.
+from local_settings import *
+
 # Logging settings for this Django project.
 LOG_LEVEL = logging.INFO
-LOG_FILENAME = join(tempfile.gettempdir(), "metashare.log")
+#LOG_FILENAME = join(tempfile.gettempdir(), "metashare.log")
 LOG_FORMAT = "[%(asctime)s] %(name)s::%(levelname)s %(message)s"
 LOG_DATE = "%m/%d/%Y @ %H:%M:%S"
 LOG_FORMATTER = logging.Formatter(LOG_FORMAT, LOG_DATE)
@@ -47,10 +51,6 @@ KNOWLEDGE_BASE_URL = 'http://www.meta-share.org/portal/knowledgebase/'
 # The URL for META-SHARE statistics server.
 STATS_SERVER_URL = "http://metastats.fbk.eu/"
 
-
-# Import local settings, i.e., DEBUG, TEMPLATE_DEBUG, TIME_ZONE,
-# DATABASE_* settings, ADMINS, etc.
-from local_settings import *
 
 # If STORAGE_PATH does not exist, try to create it and halt if not possible.
 from os.path import exists
