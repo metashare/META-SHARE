@@ -111,34 +111,33 @@ class ModelTest(TestCase):
         num_after = lingualityInfoType_model.objects.all().count()
         self.assertEquals(num_before - 1, num_after)
 
-    if False:
-        def testImportExportRoundtrip1(self):
-            """
-            Checks that there is no data lost when exporting an imported XML.
-            """
-            _roundtrip = '{0}/repository/test_fixtures/ingested-corpus-AudioVideo-French.xml'.format(ROOT_PATH)
-            self.assert_import_equals_export(_roundtrip)
-    
-        def testImportExportRoundtrip2(self):
-            """
-            Checks that there is no data lost when exporting an imported XML.
-            """
-            _roundtrip = '{0}/repository/test_fixtures/internal-lexConcept-Text-Eng.xml'.format(ROOT_PATH)
-            self.assert_import_equals_export(_roundtrip)
-    
-        def testImportExportRoundtrip3(self):
-            """
-            Checks that there is no data lost when exporting an imported XML.
-            """
-            _roundtrip = '{0}/repository/fixtures/published-corpus-AudioVideo-English.xml'.format(ROOT_PATH)
-            self.assert_import_equals_export(_roundtrip)
-    
-        def testImportExportRoundtrip4(self):
-            """
-            Checks that there is no data lost when exporting an imported XML.
-            """
-            _roundtrip = '{0}/repository/test_fixtures/published-lexConcept-Audio-EnglishGerman.xml'.format(ROOT_PATH)
-            self.assert_import_equals_export(_roundtrip)
+    def testImportExportRoundtrip1(self):
+        """
+        Checks that there is no data lost when exporting an imported XML.
+        """
+        _roundtrip = '{0}/repository/test_fixtures/ingested-corpus-AudioVideo-French.xml'.format(ROOT_PATH)
+        self.assert_import_equals_export(_roundtrip)
+
+    def testImportExportRoundtrip2(self):
+        """
+        Checks that there is no data lost when exporting an imported XML.
+        """
+        _roundtrip = '{0}/repository/test_fixtures/internal-lexConcept-Text-Eng.xml'.format(ROOT_PATH)
+        self.assert_import_equals_export(_roundtrip)
+
+    def testImportExportRoundtrip3(self):
+        """
+        Checks that there is no data lost when exporting an imported XML.
+        """
+        _roundtrip = '{0}/repository/test_fixtures/published-corpus-AudioVideo-English.xml'.format(ROOT_PATH)
+        self.assert_import_equals_export(_roundtrip)
+
+    def testImportExportRoundtrip4(self):
+        """
+        Checks that there is no data lost when exporting an imported XML.
+        """
+        _roundtrip = '{0}/repository/test_fixtures/published-lexConcept-Audio-EnglishGerman.xml'.format(ROOT_PATH)
+        self.assert_import_equals_export(_roundtrip)
 
 
 class ModelUtilsTest(TestCase):
