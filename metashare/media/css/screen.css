@@ -425,20 +425,21 @@ form.form_helper tr td textarea {
     background-repeat: repeat-x;
     border-radius: 10px 10px 10px 10px;
     box-shadow: 0 1px 1px #CCCCCC;
-	width:350px;
+	width:400px;
 	height:150px;
 	padding:5px;
+	font-size: 		16px;
 }
 
 form.form_helper tr td input {
-	width:350px;
+	width:400px;
+	font-size: 		16px;
 }
 
 form.form_helper td.readonly {
 	font-family: 	'TitilliumText25L', "Helvetica Neue", Helvetica, Arial, sans-serif;
 	color: 			#999999;
-	font-size: 		28px;
-	font-weight: 	600;
+	font-size: 		16px;
 }
 
 /* Marc Schroeder end */
