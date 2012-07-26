@@ -34,10 +34,6 @@
     {% include "header.html" with page="frontpage" %}
     {% endblock %}
    <div class="container">
-<!--        <div class="span-22" style="height: 410px; margin-top: 20px; text-align:center; margin-left:20px;">
-            <img src="{{ MEDIA_URL }}images/teaser01.png" />
-        </div>-->
-
     <div id="content">
 
         <div id="messages">
@@ -47,13 +43,6 @@
             <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|safe }}</p>
             {% endfor %}
             {% endif %}
-
-            <!--
-            <p class="success">Success message</p>
-            <p class="notice">Notice message</p>
-            <p class="info">Info message</p>
-            <p class="error">Error message</p>
-            -->
         </div>
 
       {% block content %}{% endblock %}

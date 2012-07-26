@@ -21,9 +21,9 @@
 		                <a href="{% url metashare.views.login %}"><div class="topright">Login</div></a>
 		            {% endif %}
 		        </div>
-			</div><!-- end inner --> 
+			</div>
 
-	<!-- drop-down menu created with http://javascript-array.com/scripts/jquery_simple_drop_down_menu/ -->
+	{# drop-down menu created with http://javascript-array.com/scripts/jquery_simple_drop_down_menu/ #}
 	<ul id="jsddm">
 			<li title="Browse the resources of the META-SHARE catalogue"><a href="{% url metashare.views.frontpage %}repository/search/">Browse Resources</a></li>
 			{% if user.is_staff and user.get_profile.has_editor_permission %}	        
