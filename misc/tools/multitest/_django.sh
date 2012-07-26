@@ -86,16 +86,19 @@ create_django_settings()
 	local SYNC_USERS="$1" ; shift
 
 	local NODE_SETTINGS_DIR="$TEST_DIR/$NODE_NAME/dj_settings"
-	echo "s/%%SOLR_PORT%%/$SOLR_PORT/g" > /tmp/sed.scr
+	local LOG_FILENAME="$TEST_DIR/$NODE_NAME/metashare.log"
+	echo "s#%%LOG_FILENAME%%#$LOG_FILENAME#g" > /tmp/sed.scr
+	echo "s/%%SOLR_PORT%%/$SOLR_PORT/g" >> /tmp/sed.scr
 	echo "s#%%DATABASE_FILE%%#$DATABASE_FILE#g"  >> /tmp/sed.scr
 	echo "s#%%STORAGE_PATH%%#$STORAGE_PATH#g" >> /tmp/sed.scr
 	echo "s/%%DJANGO_PORT%%/$DJANGO_PORT/g" >> /tmp/sed.scr
 	echo "s#%%CORE_NODES%%#$CORE_NODES#g" >> /tmp/sed.scr
 	echo "s#%%PROXIED_NODES%%#$PROXIED_NODES#g" >> /tmp/sed.scr
 	echo "s#%%SYNC_USERS%%#$SYNC_USERS#g" >> /tmp/sed.scr
-	cat "$MSERV_DIR/init_data/local_settings_test2.py" | sed -f /tmp/sed.scr \
-		> "$NODE_SETTINGS_DIR/local_settings.py"
+	cat "$MSERV_DIR/init_data/node_settings.py" | sed -f /tmp/sed.scr \
+		> "$NODE_SETTINGS_DIR/node_settings.py"
 	rm /tmp/sed.scr
+	cp "$MSERV_DIR/init_data/local_settings.sample" "$NODE_SETTINGS_DIR/multilocal_settings.py"
 	touch "$NODE_SETTINGS_DIR/__init__.py"
 }
 

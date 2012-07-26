@@ -84,6 +84,11 @@ synchronize_node()
 	echo "Synchronizing $NODE_NAME"
 	cd "$METASHARE_DIR"
 	"$PYTHON" manage.py synchronize > "$REMOTE_DATA_FILE"
+	local ret_val=$?
+	if [[ $ret_val -ne 0 ]] ; then
+		echo -n "Error in synchronizing $NODE_NAME" >&3
+		return $ret_val
+	fi
 	rm -f "$REMOTE_DATA_FILE"
 	local ret_val=$?
 	cd "$CURRENT_DIR"

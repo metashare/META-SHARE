@@ -9,22 +9,32 @@
 . _meta_dir.sh
 . _python.sh
 . _utils.sh
+. _django.sh
 
 CURRENT_DIR=`pwd`
 
-cp init_data/settings_orig.py $METASHARE_DIR/settings.py
+cp init_data/settings_multitest.py $METASHARE_DIR/settings.py
 ret_val=$?
-cp init_data/local_settings_test.py $METASHARE_DIR/local_settings.py
-ret_val=$?
+#cp init_data/local_settings.sample $METASHARE_DIR/local_settings.py
+#ret_val=$?
 if [[ $ret_val -ne 0 ]] ; then
 	echo "Cannot copy settings/local_settings"
 	exit $ret_val
 fi
 
-export DJANGO_PORT=12345
-export STORAGE_PATH=/tmp/storageFolder
-export SOLR_PORT=54321
-export DATABASE_FILE=$CURRENT_DIR/init_data/metashare_test.db
+NODE_NAME="NodeDB"
+DJANGO_PORT=12345
+STORAGE_PATH="$TEST_DIR/$NODE_NAME/storageFolder"
+SOLR_PORT=54321
+DATABASE_FILE=$CURRENT_DIR/init_data/metashare_test.db
+CORE_NODES="()"
+PROXIED_NODES="()"
+SYNC_USERS="()"
+export NODE_DIR="$TEST_DIR/$NODE_NAME"
+mkdir -p "$TEST_DIR/$NODE_NAME/dj_settings"
+create_django_settings "$NODE_NAME" $SOLR_PORT "$DATABASE_FILE" \
+	"$STORAGE_PATH" $DJANGO_PORT "$CORE_NODES" \
+	"$PROXIED_NODES" "$SYNC_USERS"
 
 if [[ "$1" == "-r" ]] ; then
 	if [[ -f $DATABASE_FILE ]] ; then
@@ -39,6 +49,8 @@ if [[ "$1" == "-r" ]] ; then
 fi
 
 cd $METASHARE_DIR
+echo "NODE_DIR = $NODE_DIR"
+echo "Creating database ...."
 "$PYTHON"  manage.py syncdb --noinput
 ret_val=$?
 if [[ $ret_val -ne 0 ]] ; then
@@ -59,3 +71,4 @@ rmdir "$STORAGE_PATH"
 
 echo "Database file " $DATABASE_FILE " has been created/updated."
 
+rm -r "$TEST_DIR/$NODE_NAME"
