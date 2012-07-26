@@ -1,0 +1,7 @@
+{% load i18n admin_modify adminmedia %}
+  <div class="breadcrumbs">
+    <a href="../../">{% trans "Home" %}</a> &rsaquo;
+    <a href="../">{{ app_label|capfirst|escape }}</a> &rsaquo;
+    <a href="./">{{ verbose_name|capfirst|escape }}</a> &rsaquo;
+    {{ action|capfirst|escape }}
+  </div>

@@ -8,6 +8,11 @@
 
 {{ media }}
 {% endblock %}
+
+{% block breadcrumbs %}
+{% include "breadcrumbs.html" %}
+{% endblock %}
+
 {% block content %}
 <h3>Add owners to the following resource{{ selected_resources|pluralize }}:</h3>
 
