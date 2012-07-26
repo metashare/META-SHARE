@@ -469,23 +469,10 @@ def reset(request, uuid=None):
             
             # Check if the form has validated successfully.
             if form.is_valid():
-                # Check if there exists a User instance with matching username
-                # and email inside the django database.
-                user = User.objects.filter(
+                # Create a new ResetRequest instance for the User.
+                user = User.objects.get(
                   username=form.cleaned_data['username'],
                   email=form.cleaned_data['email'])
-                
-                # Marc, 25 Aug 2011:
-                # The check that this exists is now done in ResetRequestForm.clean(),
-                # so we trust we have a user when we get here
-#                
-#                # If not, redirect the user to the front page.
-#                if not user:
-#                    return redirect('metashare.views.frontpage')
-#                
-#                # Otherwise, create a new ResetRequest instance for this User.                
-                # Otherwise, create a new ResetRequest instance for this User.
-                user = user[0]
                 new_object = ResetRequest(user=user)
                 new_object.save()
                 
