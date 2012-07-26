@@ -3,18 +3,21 @@
 Call the external program xdiff to compare two XML files
 
 """
-
-from django.contrib.admin.models import LogEntry, ADDITION
-from django.contrib.contenttypes.models import ContentType
-from django.utils.encoding import force_unicode
-from metashare.settings import LOG_LEVEL, LOG_HANDLER, XDIFF_LOCATION
-from metashare.stats.model_utils import saveLRStats, UPDATE_STAT
-from subprocess import call, STDOUT
-from zipfile import is_zipfile, ZipFile
 import logging
 import os
 import re
 import sys
+from subprocess import call, STDOUT
+from zipfile import is_zipfile, ZipFile
+
+from django.contrib.admin.models import LogEntry, ADDITION
+from django.contrib.contenttypes.models import ContentType
+from django.utils.encoding import force_unicode
+
+from metashare.repository.models import User
+from metashare.settings import LOG_LEVEL, LOG_HANDLER, XDIFF_LOCATION
+from metashare.stats.model_utils import saveLRStats, UPDATE_STAT
+
 
 # Setup logging support.
 logging.basicConfig(level=LOG_LEVEL)
@@ -83,9 +86,14 @@ def import_from_string(xml_string, targetstatus, copy_status, owner_id=None):
     resource.storage_object.publication_status = targetstatus
     if owner_id:
         resource.owners.add(owner_id)
-        
-    resource.storage_object.save()
-    
+        for edt_grp in User.objects.get(id=owner_id).get_profile() \
+                .default_editor_groups.all():
+            resource.editor_groups.add(edt_grp)
+        # this also takes care of saving the storage_object
+        resource.save()
+    else:
+        resource.storage_object.save()
+
     # explicitly write metadata XML and storage object to the storage folder
     resource.storage_object.update_storage()
 

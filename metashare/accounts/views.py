@@ -374,7 +374,7 @@ def remove_default_editor_groups(request):
         form = RemoveDefaultEditorGroupForm(available_editor_groups)
 
     dictionary = {'title': 'Remove default editor group', 'form': form}
-    return render_to_response('accounts/remove_default_editor_groups.html',
+    return render_to_response('accounts/remove_default_editor_group.html',
                         dictionary, context_instance=RequestContext(request))
 
 

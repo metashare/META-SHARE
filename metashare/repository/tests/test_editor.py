@@ -307,9 +307,10 @@ class EditorTest(TestCase):
             msg_prefix='an editor user must not see the "unpublish" action')
         self.assertNotContains(response, 'Mark selected resources as deleted',
             msg_prefix='an editor user must not see the "delete" action')
-        self.assertNotContains(response, 'Add editor groups',
+        self.assertNotContains(response, 'value="add_group">Add editor groups',
             msg_prefix='an editor user must not see the "add groups" action')
-        self.assertNotContains(response, 'Remove editor groups',
+        self.assertNotContains(response,
+            'value="remove_group">Remove editor groups from selected',
             msg_prefix='an editor user must not see the "remove groups" action')
         self.assertNotContains(response, 'Add owners',
             msg_prefix='an editor user must not see the "add owners" action')
@@ -332,9 +333,10 @@ class EditorTest(TestCase):
             msg_prefix='a manager user should see the "unpublish" action')
         self.assertContains(response, 'Mark selected resources as deleted',
             msg_prefix='a manager user should see the "delete" action')
-        self.assertNotContains(response, 'Add editor groups',
+        self.assertNotContains(response, 'value="add_group">Add editor groups',
             msg_prefix='a manager user must not see the "add groups" action')
-        self.assertNotContains(response, 'Remove editor groups',
+        self.assertNotContains(response, 
+            'value="remove_group">Remove editor groups from selected',
             msg_prefix='a manager user must not see the "remove groups" action')
         self.assertNotContains(response, 'Add owners',
             msg_prefix='a manager user must not see the "add owners" action')
@@ -355,9 +357,10 @@ class EditorTest(TestCase):
             msg_prefix='a superuser should see the "unpublish" action')
         self.assertContains(response, 'Mark selected resources as deleted',
             msg_prefix='a superuser should see the "delete" action')
-        self.assertContains(response, 'Add editor groups',
+        self.assertContains(response, 'value="add_group">Add editor groups',
             msg_prefix='a superuser should see the "add groups" action')
-        self.assertContains(response, 'Remove editor groups',
+        self.assertContains(response, 
+            'value="remove_group">Remove editor groups from selected',
             msg_prefix='a superuser should see the "remove groups" action')
         self.assertContains(response, 'Add owners',
             msg_prefix='a superuser should see the "add owners" action')
@@ -1039,7 +1042,7 @@ class DestructiveTests(TestCase):
             {"action": "remove_group",
              admin.ACTION_CHECKBOX_NAME: self.testfixture.id})
         if response.status_code == 200:
-            self.assertNotContains(response, "Remove editor groups", 200,
+            self.assertNotContains(response, "<h3>Remove editor groups", 200,
                 "an editor user must not remove any editor groups")
         else:
             self.assertEqual(response.status_code, 403,
@@ -1056,7 +1059,7 @@ class DestructiveTests(TestCase):
             {"action": "remove_group",
              admin.ACTION_CHECKBOX_NAME: self.testfixture.id})
         if response.status_code == 200:
-            self.assertNotContains(response, "Remove editor groups", 200,
+            self.assertNotContains(response, "<h3>Remove editor groups", 200,
                 "a manager user must not remove any editor groups")
         else:
             self.assertEqual(response.status_code, 403,
