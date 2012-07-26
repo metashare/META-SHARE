@@ -18,11 +18,7 @@
 		                <a href="{% url metashare.views.logout %}?next={{ request.path }}" style="float:right; margin-right:20px;"><div class="topright">Logout</div></a>
 		            {% else %}
 		                <a href="{% url metashare.accounts.views.create %}"><div class="topright">Register</div></a>
-<<<<<<< HEAD
-		                <a href="{% url metashare.views.login %}?next={{request.path}}"><div class="topright">Login</div></a>
-=======
 		                <a href="{% url metashare.views.login %}?next={{ request.path }}"><div class="topright">Login</div></a>
->>>>>>> 220a68f1bb04cd26185498362bff5cec868850c9
 		            {% endif %}
 		        </div>
 			</div>
@@ -75,6 +71,7 @@
 	            <li><a href="{% url metashare.accounts.views.editor_group_application %}" title="Apply for membership in editor groups">Apply for editor group membership</a></li>
 	           	<li><a href="{% url metashare.accounts.views.add_default_editor_groups %}" title='Set the editor groups to which all new resources you create shall belong'>Add default editor groups</a></li>
 		      	<li><a href="{% url metashare.accounts.views.remove_default_editor_groups %}" title='Remove editor groups from the defaults list'>Remove default editor groups</a></li>
+	            <li><a href="{% url metashare.accounts.views.organization_application %}" title="Apply for membership in editor groups">Apply for organization membership</a></li>
 			  </ul>
 	        </li>
             {% endif %}
