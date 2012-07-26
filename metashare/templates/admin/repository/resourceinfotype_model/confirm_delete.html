@@ -8,6 +8,11 @@
 
 {{ media }}
 {% endblock %}
+
+{% block breadcrumbs %}
+{% include "breadcrumbs.html" %}
+{% endblock %}
+
 {% block content %}
 
 {% if cannot_be_deleted %}

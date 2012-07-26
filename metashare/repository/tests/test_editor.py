@@ -1694,3 +1694,245 @@ class OrganizationApplicationTests(TestCase):
         self.assertNotContains(response, '<option value="1" '
                 'selected="selected">normaluser</option>', msg_prefix=
             'expected an organization manager not to be able to modify an application.')
+
+class BreadcrumbTests(TestCase):
+    """
+    Test case for the display of some manually added breadcrumbs in the back office.
+    """
+
+    def setUp(self):
+        """
+        Sets up test users.
+        """
+        test_utils.set_index_active(False)
+        test_utils.setup_test_storage()
+
+        self.test_editor_group = EditorGroup.objects.create(
+                                                    name='test_editor_group')
+        self.test_editor_group_managers = \
+            EditorGroupManagers.objects.create(name='test_editor_group_manager',
+                                        managed_group=self.test_editor_group)
+        self.test_organization = Organization.objects.create(
+                                                    name='test_organization')
+        self.test_organization_managers = \
+            OrganizationManagers.objects.create(name='test_organization_manager',
+                                        managed_organization=self.test_organization)
+
+        User.objects.create_superuser('superuser', 'su@example.com', 'secret')
+
+        self.testfixture = _import_test_resource()
+
+    def tearDown(self):
+        test_utils.clean_resources_db()
+        test_utils.clean_storage()
+        test_utils.clean_user_db()
+        test_utils.set_index_active(True)
+
+    def test_breadcrumb_in_add_users_to_editor_group(self):
+        """
+        Verifies breadcrumb in the add users to editor group page.
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+
+        response = client.post('{}accounts/editorgroup/'.format(ADMINROOT),
+            {"action": "add_user_to_editor_group",
+             admin.ACTION_CHECKBOX_NAME: self.test_editor_group.id})
+        self.assertContains(response,
+            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
+    <a href=\"../\">Accounts</a> &rsaquo;\n    <a href=\"./\">Editor group</a> &rsaquo;\n\
+    Add user\n  </div>", msg_prefix=
+                "expected to display a correct breadcrumb.")
+
+    def test_breadcrumb_in_remove_users_from_editor_group(self):
+        """
+        Verifies breadcrumb in the remove users from editor group page.
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+
+        response = client.post('{}accounts/editorgroup/'.format(ADMINROOT),
+            {"action": "remove_user_from_editor_group",
+             admin.ACTION_CHECKBOX_NAME: self.test_editor_group.id})
+        self.assertContains(response,
+            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
+    <a href=\"../\">Accounts</a> &rsaquo;\n    <a href=\"./\">Editor group</a> &rsaquo;\n\
+    Remove user\n  </div>", msg_prefix=
+                "expected to display a correct breadcrumb.")
+
+    def test_breadcrumb_in_add_users_to_editor_group_managers(self):
+        """
+        Verifies breadcrumb in the add users to editor group managers page.
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+
+        response = client.post('{}accounts/editorgroupmanagers/'.format(ADMINROOT),
+            {"action": "add_user_to_editor_group_managers",
+             admin.ACTION_CHECKBOX_NAME: self.test_editor_group_managers.id})
+        self.assertContains(response,
+            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
+    <a href=\"../\">Accounts</a> &rsaquo;\n    <a href=\"./\">Editor group managers group</a> &rsaquo;\n\
+    Add user\n  </div>", msg_prefix=
+                "expected to display a correct breadcrumb.")
+
+    def test_breadcrumb_in_remove_users_from_editor_group_managers(self):
+        """
+        Verifies breadcrumb in the remove users from editor group managers page.
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+
+        response = client.post('{}accounts/editorgroupmanagers/'.format(ADMINROOT),
+            {"action": "remove_user_from_editor_group_managers",
+             admin.ACTION_CHECKBOX_NAME: self.test_editor_group_managers.id})
+        self.assertContains(response,
+            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
+    <a href=\"../\">Accounts</a> &rsaquo;\n    <a href=\"./\">Editor group managers group</a> &rsaquo;\n\
+    Remove user\n  </div>", msg_prefix=
+                "expected to display a correct breadcrumb.")
+
+    def test_breadcrumb_in_add_users_to_organization(self):
+        """
+        Verifies breadcrumb in the add users to organization page.
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+
+        response = client.post('{}accounts/organization/'.format(ADMINROOT),
+            {"action": "add_user_to_organization",
+             admin.ACTION_CHECKBOX_NAME: self.test_organization.id})
+        self.assertContains(response,
+            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
+    <a href=\"../\">Accounts</a> &rsaquo;\n    <a href=\"./\">Organization</a> &rsaquo;\n\
+    Add user\n  </div>", msg_prefix=
+                "expected to display a correct breadcrumb.")
+
+    def test_breadcrumb_in_remove_users_from_organization(self):
+        """
+        Verifies breadcrumb in the remove users from organization page.
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+
+        response = client.post('{}accounts/organization/'.format(ADMINROOT),
+            {"action": "remove_user_from_organization",
+             admin.ACTION_CHECKBOX_NAME: self.test_organization.id})
+        self.assertContains(response,
+            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
+    <a href=\"../\">Accounts</a> &rsaquo;\n    <a href=\"./\">Organization</a> &rsaquo;\n\
+    Remove user\n  </div>", msg_prefix=
+                "expected to display a correct breadcrumb.")
+
+    def test_breadcrumb_in_add_users_to_organization_managers(self):
+        """
+        Verifies breadcrumb in the add users to organization managers page.
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+
+        response = client.post('{}accounts/organizationmanagers/'.format(ADMINROOT),
+            {"action": "add_user_to_organization_managers",
+             admin.ACTION_CHECKBOX_NAME: self.test_organization_managers.id})
+        self.assertContains(response,
+            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
+    <a href=\"../\">Accounts</a> &rsaquo;\n    <a href=\"./\">Organization managers group</a> &rsaquo;\n\
+    Add user\n  </div>", msg_prefix=
+                "expected to display a correct breadcrumb.")
+
+    def test_breadcrumb_in_remove_users_from_organization_managers(self):
+        """
+        Verifies breadcrumb in the remove users from organization managers page.
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+
+        response = client.post('{}accounts/organizationmanagers/'.format(ADMINROOT),
+            {"action": "remove_user_from_organization_managers",
+             admin.ACTION_CHECKBOX_NAME: self.test_organization_managers.id})
+        self.assertContains(response,
+            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
+    <a href=\"../\">Accounts</a> &rsaquo;\n    <a href=\"./\">Organization managers group</a> &rsaquo;\n\
+    Remove user\n  </div>", msg_prefix=
+                "expected to display a correct breadcrumb.")
+
+    def test_breadcrumb_in_add_editor_groups_to_resource(self):
+        """
+        Verifies breadcrumb in the add editor groups to resource page.
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+
+        response = client.post('{}repository/resourceinfotype_model/'.format(ADMINROOT),
+            {"action": "add_group",
+             admin.ACTION_CHECKBOX_NAME: self.testfixture.id})
+        self.assertContains(response,
+            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
+    <a href=\"../\">Repository</a> &rsaquo;\n    <a href=\"./\">Resource</a> &rsaquo;\n\
+    Add editor group\n  </div>", msg_prefix=
+                "expected to display a correct breadcrumb.")
+
+    def test_breadcrumb_in_remove_editor_groups_from_resource(self):
+        """
+        Verifies breadcrumb in the remove editor groups from resource page.
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+
+        response = client.post('{}repository/resourceinfotype_model/'.format(ADMINROOT),
+            {"action": "remove_group",
+             admin.ACTION_CHECKBOX_NAME: self.testfixture.id})
+        self.assertContains(response,
+            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
+    <a href=\"../\">Repository</a> &rsaquo;\n    <a href=\"./\">Resource</a> &rsaquo;\n\
+    Remove editor group\n  </div>", msg_prefix=
+                "expected to display a correct breadcrumb.")
+
+    def test_breadcrumb_in_add_owners_to_resource(self):
+        """
+        Verifies breadcrumb in the add owners to resource page.
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+
+        response = client.post('{}repository/resourceinfotype_model/'.format(ADMINROOT),
+            {"action": "add_owner",
+             admin.ACTION_CHECKBOX_NAME: self.testfixture.id})
+        self.assertContains(response,
+            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
+    <a href=\"../\">Repository</a> &rsaquo;\n    <a href=\"./\">Resource</a> &rsaquo;\n\
+    Add owner\n  </div>", msg_prefix=
+                "expected to display a correct breadcrumb.")
+
+    def test_breadcrumb_in_remove_owners_from_resource(self):
+        """
+        Verifies breadcrumb in the remove owners to resource page.
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+
+        response = client.post('{}repository/resourceinfotype_model/'.format(ADMINROOT),
+            {"action": "remove_owner",
+             admin.ACTION_CHECKBOX_NAME: self.testfixture.id})
+        self.assertContains(response,
+            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
+    <a href=\"../\">Repository</a> &rsaquo;\n    <a href=\"./\">Resource</a> &rsaquo;\n\
+    Remove owner\n  </div>", msg_prefix=
+                "expected to display a correct breadcrumb.")
+
+    def test_breadcrumb_in_mark_resource_as_deleted(self):
+        """
+        Verifies breadcrumb in the mark resource as deleted page.
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+
+        response = client.post('{}repository/resourceinfotype_model/'.format(ADMINROOT),
+            {"action": "delete",
+             admin.ACTION_CHECKBOX_NAME: self.testfixture.id})
+        self.assertContains(response,
+            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
+    <a href=\"../\">Repository</a> &rsaquo;\n    <a href=\"./\">Resource</a> &rsaquo;\n\
+    Delete resource\n  </div>", msg_prefix=
+                "expected to display a correct breadcrumb.")
+
