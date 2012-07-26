@@ -34,12 +34,12 @@ _MAX_TEXT_INPUT_SIZE = 150
 # to use with languageId,languageName pairs.
 # Format (modelName, languageIdFieldName, languageNameFieldName)
 LANGUAGE_ID_NAME_FIELDS = [
-   ("inputInfoType_model", "languageId", "languageName"),
-   ("outputInfoType_model", "languageId", "languageName"),
+   #("inputInfoType_model", "languageId", "languageName"),
+   #("outputInfoType_model", "languageId", "languageName"),
    ("languageInfoType_model", "languageId", "languageName"),
    #("metadataInfoType_model", "metadataLanguageId", "metadataLanguageName"),
    ("documentInfoType_model", "documentLanguageId", "documentLanguageName"),
-   ("tagsetInfoType_model", "tagsetLanguageId", "tagsetLanguageName"),
+   ("annotationInfoType_model", "tagsetLanguageId", "tagsetLanguageName"),
 ]
 
 class DictWidget(widgets.Widget):
