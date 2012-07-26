@@ -1,5 +1,5 @@
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.auth.models import Permission, User
+from django.contrib.auth.models import Permission
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.client import Client
@@ -11,7 +11,6 @@ from metashare.settings import DJANGO_BASE, ROOT_PATH
 from metashare.test_utils import create_user
 import shutil
 
-test_editor_group = None
 
 def _import_resource(fixture_name, editor_group=None):
     """
@@ -28,10 +27,123 @@ def _import_resource(fixture_name, editor_group=None):
     result.storage_object.save()
     return result
 
+
+class FrontpageTest(TestCase):
+    """
+    Tests for the frontpage of a META-SHARE node.
+    """
+    editor_user = None
+    editor_user_password = 'secret'
+    frontpage_url = '/' + DJANGO_BASE
+
+    @classmethod
+    def setUpClass(cls):
+        """
+        Sets up this test case.
+        """
+        FrontpageTest.editor_user = test_utils.create_editor_user('editoruser',
+            'editor@example.com', FrontpageTest.editor_user_password,
+            (EditorGroup.objects.create(name='test_editor_group'),))
+
+    @classmethod
+    def tearDownClass(cls):
+        """
+        Makes required cleanups after all tests have run.
+        """
+        test_utils.clean_user_db()
+
+    def setUp(self):
+        """
+        Set up logic for each test.
+        """
+        self.client = Client()
+
+    def test_frontpage_provides_login_button(self):
+        """
+        Verifies that the frontpage provides a login button for anonymous users
+        (only).
+        """
+        # look for the login button as an anonymous user:
+        response = self.client.get(FrontpageTest.frontpage_url)
+        self.assertContains(response, ">Login<",
+            msg_prefix="There must be a login button for anonymous users.")
+        # look for the login button as an editor user:
+        self.client.login(username=FrontpageTest.editor_user.username,
+                          password=FrontpageTest.editor_user_password)
+        response = self.client.get(FrontpageTest.frontpage_url)
+        self.assertNotContains(response, ">Login<",
+            msg_prefix="There must not be any login button for editor users.")
+
+    def test_frontpage_provides_logout_button(self):
+        """
+        Verifies that the frontpage provides a logout button for logged in users
+        (only).
+        """
+        # look for the logout button as an anonymous user:
+        response = self.client.get(FrontpageTest.frontpage_url)
+        self.assertNotContains(response, ">Logout<", msg_prefix="There must " \
+                               "not be any logout button for anonymous users.")
+        # look for the logout button as an editor user:
+        self.client.login(username=FrontpageTest.editor_user.username,
+                          password=FrontpageTest.editor_user_password)
+        response = self.client.get(FrontpageTest.frontpage_url)
+        self.assertContains(response, ">Logout<",
+            msg_prefix="There must be a logout button for editor users.")
+
+    def test_frontpage_provides_register_button(self):
+        """
+        Verifies that the frontpage provides an account register button for
+        anonymous users (only).
+        """
+        # look for the register button as an anonymous user:
+        response = self.client.get(FrontpageTest.frontpage_url)
+        self.assertContains(response, ">Register<",
+            msg_prefix="There must be a register button for anonymous users.")
+        # look for the register button as an editor user:
+        self.client.login(username=FrontpageTest.editor_user.username,
+                          password=FrontpageTest.editor_user_password)
+        response = self.client.get(FrontpageTest.frontpage_url)
+        self.assertNotContains(response, ">Register<", msg_prefix="There must" \
+                               " not be any register button for editor users.")
+
+    def test_frontpage_provides_editor_button_for_staff_users(self):
+        """
+        Verifies that the frontpage provides an editor link for staff users
+        (only).
+        """
+        # look for the editor button as an anonymous user:
+        response = self.client.get(FrontpageTest.frontpage_url)
+        self.assertNotContains(response, ">Manage Resources<",
+            msg_prefix="there mustn't be any editor button for anonymous users")
+        # look for the editor button as an editor user:
+        self.client.login(username=FrontpageTest.editor_user.username,
+                          password=FrontpageTest.editor_user_password)
+        response = self.client.get(FrontpageTest.frontpage_url)
+        self.assertContains(response, ">Manage Resources<",
+            msg_prefix="There must be an editor button for editor users.")
+
+    def test_frontpage_provides_search_button(self):
+        """
+        Verifies that the frontpage provides a search button for all kinds of
+        users.
+        """
+        # look for the search button as an anonymous user:
+        response = self.client.get(FrontpageTest.frontpage_url)
+        self.assertContains(response, ">Search<",
+            msg_prefix="There must be a search button for anonymous users.")
+        # look for the search button as an editor user:
+        self.client.login(username=FrontpageTest.editor_user.username,
+                          password=FrontpageTest.editor_user_password)
+        response = self.client.get(FrontpageTest.frontpage_url)
+        self.assertContains(response, ">Search<",
+            msg_prefix="There must be a search button for editor users.")
+
+
 class ViewTest(TestCase):
     """
     Test the detail view
     """
+    test_editor = None
     
     @classmethod
     def setUpClass(cls):
@@ -46,24 +158,17 @@ class ViewTest(TestCase):
         Set up the detail view
         """
         test_utils.setup_test_storage()
-        self.resource = _import_resource('testfixture.xml')
-        # set up test users with and without staff permissions.
-        # These will live in the test database only, so will not
-        # pollute the "normal" development db or the production db.
-        # As a consequence, they need no valuable password.
-        staffuser = create_user('staffuser', 'staff@example.com', 'secret')
-        staffuser.is_staff = True
-        staffuser.save()
         create_user('normaluser', 'normal@example.com', 'secret')
-        
-        ViewTest.test_editor_group = EditorGroup.objects.create(
+        _test_editor_group = EditorGroup.objects.create(
                                                     name='test_editor_group')
-        ViewTest.test_editor_group_manager = \
-            EditorGroupManagers.objects.create(name='test_editor_group_manager',
-                                    managed_group=ViewTest.test_editor_group)            
-        test_utils.create_manager_user(
-            'manageruser', 'manager@example.com', 'secret',
-            (ViewTest.test_editor_group, ViewTest.test_editor_group_manager))
+        self.resource = _import_resource('testfixture.xml',
+                                         _test_editor_group)
+        ViewTest.test_editor = test_utils.create_editor_user('editoruser',
+            'editor@example.com', 'secret', (_test_editor_group,))          
+        test_utils.create_manager_user('manageruser', 'manager@example.com',
+            'secret', (EditorGroupManagers.objects.create(
+                            name='test_editor_group_manager',
+                            managed_group=_test_editor_group),))
 
     def tearDown(self):
         """
@@ -73,16 +178,18 @@ class ViewTest(TestCase):
         test_utils.clean_storage()
         test_utils.clean_user_db()
 
-    def test_staff_user_sees_editor(self):
+    def test_editor_user_sees_editor(self):
         """
-        Tests whether a staff user can edit a resource (in seeing the editor button)
+        Tests whether an editor user can edit a resource (in seeing the
+        "Edit Resource" button)
         """
         client = Client()
-        client.login(username='staffuser', password='secret')
+        client.login(username='editoruser', password='secret')
         url = self.resource.get_absolute_url()
         response = client.get(url, follow = True)
         self.assertTemplateUsed(response, 'repository/lr_view.html')
-        self.assertContains(response, "Editor")
+        self.assertContains(response, 'middle_button">Edit Resource<')
+        self.assertNotContains(response, 'middle_gray_button">Edit Resource<')
 
     def test_normal_user_doesnt_see_editor(self):
         """
@@ -93,8 +200,9 @@ class ViewTest(TestCase):
         url = self.resource.get_absolute_url()
         response = client.get(url, follow = True)
         self.assertTemplateUsed(response, 'repository/lr_view.html')
-        self.assertNotContains(response, "Editor")
-    
+        self.assertNotContains(response, 'middle_button">Edit Resource<')
+        self.assertContains(response, 'middle_gray_button">Edit Resource<')
+
     def test_anonymous_doesnt_see_editor(self):
         """
         Tests whether an anonymous user cannot edit a resource
@@ -103,8 +211,9 @@ class ViewTest(TestCase):
         url = self.resource.get_absolute_url()
         response = client.get(url, follow = True)
         self.assertTemplateUsed(response, 'repository/lr_view.html')
-        self.assertNotContains(response, "Editor")
-        
+        self.assertNotContains(response, 'middle_button">Edit Resource<')
+        self.assertContains(response, 'middle_gray_button">Edit Resource<')
+
     def testPageTitle(self):
         """
         Tests whether the title of the resource is the resource name
@@ -116,46 +225,30 @@ class ViewTest(TestCase):
         self.assertContains(response, '<title>Italian TTS Speech Corpus ' \
                             '(Appen) &ndash; META-SHARE</title>')
 
-    def test_manager_can_edit_resource(self):
-        """
-        Tests whether the link of the edit button is the good one
-        """
-        client = Client()
-        client.login(username='manageruser', password='secret')
-        resource = _import_resource('testfixture.xml', ViewTest.test_editor_group)
-        url = resource.get_absolute_url()
-        response = client.get(url, follow = True)
-        self.assertTemplateUsed(response, 'repository/lr_view.html')
-        self.assertContains(response, "repository/resourceinfotype_model/{0}".format(
-                        resource.id))
-        
     def test_owner_can_edit_resource(self):
         """
         Tests whether the link of the edit button is the good one
         """
         client = Client()
-        client.login(username='normaluser', password='secret')
-        resource = _import_resource('testfixture.xml')
-        resource.owners.add(User.objects.get(username='normaluser'))
-        resource.save()
-        url = resource.get_absolute_url()
-        response = client.get(url, follow = True)
+        client.login(username=ViewTest.test_editor.username, password='secret')
+        self.resource.owners.add(ViewTest.test_editor)
+        self.resource.save()
+        response = client.get(self.resource.get_absolute_url())
         self.assertTemplateUsed(response, 'repository/lr_view.html')
-        self.assertContains(response, "repository/resourceinfotype_model/{0}".format(
-                        resource.id))
-        
+        self.assertContains(response,
+            "repository/resourceinfotype_model/{0}/".format(self.resource.id))
+
     def test_normal_user_cannot_edit_resource(self):
         """
         Tests that there is no edit button link for an unauthorized user
         """
         client = Client()
         client.login(username='normaluser', password='secret')
-        resource = _import_resource('testfixture.xml')
-        url = resource.get_absolute_url()
-        response = client.get(url, follow = True)
+        response = client.get(self.resource.get_absolute_url())
         self.assertTemplateUsed(response, 'repository/lr_view.html')
-        self.assertNotContains(response, "repository/resourceinfotype_model/{0}".format(
-                        resource.id))
+        self.assertNotContains(response,
+            "repository/resourceinfotype_model/{0}/".format(self.resource.id))
+
 
 class DownloadViewTest(TestCase):
     """

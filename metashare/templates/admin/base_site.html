@@ -7,58 +7,6 @@
 <script type="text/javascript" src="{% admin_media_prefix %}js/jquery.min.js"></script>
 <script type="text/javascript" src="{% admin_media_prefix %}js/metashare-editor.js"></script>
 {% endblock %}
-{% block branding %}
-<h1 id="site-name">META-SHARE backend for resource providers</h1>
+{% block header %} 
+{% include "header.html" with page="admin" %}
 {% endblock %}
-
-{% block nav-global %}
-<div id="editornavi">
-<!-- drop-down menu created with http://javascript-array.com/scripts/jquery_simple_drop_down_menu/ -->
-<ul id="jsddm">
-        <li title="Upload one or more metasources"><a href="{% url editor:upload_xml %}">Upload</a></li>
-        <li title="Share/create Corpora, Licenses, Tools and more"><a href="#">Share/Create</a>
-          <ul>
-            <li><a href="{% url editor:repository_resourceinfotype_model_add %}">Resource</a></li>
-            <li><a href="{% url editor:repository_personinfotype_model_add %}">Person</a></li>
-            <li><a href="{% url editor:repository_organizationinfotype_model_add %}">Organization</a></li>
-            <li><a href="{% url editor:repository_projectinfotype_model_add %}">Project</a></li>
-            <li><a href="{% url editor:repository_documentinfotype_model_add %}">Document</a></li>
-          </ul>
-        </li>
-        <li title="Enrich existing metasources"><a href="#">Update</a>
-          <ul>
-            <li><a href="{% url editor:repository_resourceinfotype_model_changelist %}">Resource</a></li>
-            <li><a href="{% url editor:repository_personinfotype_model_changelist %}">Person</a></li>
-            <li><a href="{% url editor:repository_organizationinfotype_model_changelist %}">Organization</a></li>
-            <li><a href="{% url editor:repository_projectinfotype_model_changelist %}">Project</a></li>
-            <li><a href="{% url editor:repository_documentinfotype_model_changelist %}">Document</a></li>
-          </ul>
-        </li>
-        <li title="Remove, save or publish on the archive"><a href="{% url editor:repository_resourceinfotype_model_myresources %}">My Resources</a></li>
-        {% if user.is_superuser or user.get_profile.has_manager_permission %}
-        <li title="Manage groups and users"><a href="#">Manage</a>
-          <ul>
-          {% if user.is_superuser %}
-            <li><a href="{% url admin:auth_user_changelist %}">Users</a></li>
-            <li><a href="{% url editor:accounts_editorgroup_changelist %}">Editor groups</a></li>
-            <li><a href="{% url editor:accounts_editorgroupmanagers_changelist %}">Editor group managers</a></li>
-            <li><a href="{% url editor:accounts_organization_changelist %}">Organizations</a></li>
-            <li><a href="{% url editor:accounts_organizationmanagers_changelist %}">Organization managers</a></li>
-          {% endif %}
-          {% if user.is_superuser or user.get_profile.has_manager_permission %}
-            <li><a href="{% url admin:accounts_editorgroupapplication_changelist %}">Editor group applications</a></li>
-          {% endif %}
-          {% if user.is_superuser or user.get_profile.has_organization_manager_permission %}
-            <li><a href="{% url admin:accounts_organizationapplication_changelist %}">Organization applications</a></li>
-          {% endif %}
-          </ul>
-        </li>
-        {% endif %}
-        <li title="Mailing lists, wiki, and more"><a href="http://metashare.ilsp.gr/forum">Community</a></li>
-        {# <li title="Workflow, Schema specifications"><a href="{% url editor:documentation %}">Documentation</a></li> #}
-        {# <li><a href="{% url editor:about %}">About</a></li> #}
-</ul>
-<div style="clear:both;"></div>
-</div>
-{% endblock %}
-

@@ -20,38 +20,7 @@
 
     {% if not is_popup %}
     <!-- Header -->
-    <div id="header">
-        <div id="branding">
-        {% block branding %}{% endblock %}
-        </div>
-        {% if user.is_active and user.is_staff %}
-        <div id="user-tools">
-            {% trans 'Welcome,' %}
-            <strong>{% filter force_escape %}{% firstof user.first_name user.username %}{% endfilter %}</strong>.
-            {% block userlinks %}
-                {% url 'django-admindocs-docroot' as docsroot %}
-                {% if docsroot %}
-                    <a href="{{ docsroot }}">{% trans 'Documentation' %}</a> /
-                {% endif %}
-                {% url 'admin:password_change' as password_change_url %}
-                {% if password_change_url %}
-                    <a href="{{ password_change_url }}">
-                {% else %}
-                    <a href="{{ root_path }}password_change/">
-                {% endif %}
-                {% trans 'Change password' %}</a> /
-                {% url 'admin:logout' as logout_url %}
-                {% if logout_url %}
-                    <a href="{{ logout_url }}">
-                {% else %}
-                    <a href="{{ root_path }}logout/">
-                {% endif %}
-                {% trans 'Log out' %}</a>
-            {% endblock %}
-        </div>
-        {% endif %}
-        {% block nav-global %}{% endblock %}
-    </div>
+    {% block header %}{% endblock %}
     <!-- END Header -->
     {% block breadcrumbs %}<div class="breadcrumbs"><a href="/">{% trans 'Home' %}</a>{% if title %} &rsaquo; {{ title }}{% endif %}</div>{% endblock %}
     {% endif %}
@@ -74,10 +43,10 @@
         <br class="clear" />
     </div>
     {# END Content #}{% endwith %}
+	
 
-    {% block footer %}<div id="footer"></div>{% endblock %}
 </div>
 <!-- END Container -->
-
+	{% include "footer.html" %}
 </body>
 </html>
