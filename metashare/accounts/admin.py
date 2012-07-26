@@ -17,6 +17,7 @@ from django.template.loader import render_to_string
 from metashare.accounts.models import RegistrationRequest, ResetRequest, \
   UserProfile, EditorGroup, EditorGroupApplication, EditorGroupManagers, \
   Organization, OrganizationApplication, OrganizationManagers
+from metashare.utils import create_breadcrumb_template_params
 
 
 class RegistrationRequestAdmin(admin.ModelAdmin):
@@ -168,10 +169,6 @@ class EditorGroupAdmin(admin.ModelAdmin):
                 name__in=request.user.groups.values_list('name', flat=True)))
 
     def add_user_to_editor_group(self, request, queryset):
-        # pylint: disable-msg=C0103
-        model = self.model
-        opts = model._meta
-
         form = None
         if 'cancel' in request.POST:
             self.message_user(request, _('Cancelled adding users to the editor group.'))
@@ -197,24 +194,20 @@ class EditorGroupAdmin(admin.ModelAdmin):
             form = self.UserProfileinEditorGroupForm(choices=userprofiles,
                 initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
         
+        dictionary = {
+                      'selected_editorgroups': queryset,
+                      'form': form,
+                      'path':request.get_full_path()
+                     }
+        dictionary.update(create_breadcrumb_template_params(self.model, _('Add user')))
+        
         return render_to_response('accounts/add_user_profile_to_editor_group.html',
-                                  {
-                                   'selected_editorgroups': queryset,
-                                   'form': form,
-                                   'app_label': opts.app_label,
-                                   'verbose_name': opts.verbose_name,
-                                   'action': 'Add user',
-                                   'path':request.get_full_path()
-                                  },
+                                  dictionary,
                                   context_instance=RequestContext(request))
 
     add_user_to_editor_group.short_description = _("Add users to selected editor groups")
 
     def remove_user_from_editor_group(self, request, queryset):
-        # pylint: disable-msg=C0103
-        model = self.model
-        opts = model._meta
-
         form = None
         if request.user.is_superuser:
             if 'cancel' in request.POST:
@@ -236,15 +229,15 @@ class EditorGroupAdmin(admin.ModelAdmin):
                 form = self.UserProfileinEditorGroupForm(choices=userprofiles,
                     initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
         
+            dictionary = {
+                          'selected_editorgroups': queryset,
+                          'form': form,
+                          'path':request.get_full_path()
+                         }
+            dictionary.update(create_breadcrumb_template_params(self.model, _('Remove user')))
+        
             return render_to_response('accounts/remove_user_profile_from_editor_group.html',
-                                      {
-                                       'selected_editorgroups': queryset,
-                                       'form': form,
-                                       'app_label': opts.app_label,
-                                       'verbose_name': opts.verbose_name,
-                                       'action': 'Remove user',
-                                       'path':request.get_full_path()
-                                      },
+                                      dictionary,
                                       context_instance=RequestContext(request))
 
     remove_user_from_editor_group.short_description = _("Remove users from selected editor groups")
@@ -496,10 +489,6 @@ class EditorGroupManagersAdmin(admin.ModelAdmin):
         return result
 
     def add_user_to_editor_group_managers(self, request, queryset):
-        # pylint: disable-msg=C0103
-        model = self.model
-        opts = model._meta
-
         form = None
         if request.user.is_superuser:
             if 'cancel' in request.POST:
@@ -521,15 +510,15 @@ class EditorGroupManagersAdmin(admin.ModelAdmin):
                 form = self.UserProfileinEditorGroupManagersForm(choices=userprofiles,
                     initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
             
+            dictionary = {
+                          'selected_editorgroups': queryset,
+                          'form': form,
+                          'path':request.get_full_path()
+                         }
+            dictionary.update(create_breadcrumb_template_params(self.model, _('Add user')))
+        
             return render_to_response('accounts/add_user_profile_to_editor_group_managers.html',
-                                      {
-                                       'selected_editorgroupmanagers': queryset,
-                                       'form': form,
-                                       'app_label': opts.app_label,
-                                       'verbose_name': opts.verbose_name,
-                                       'action': 'Add user',
-                                       'path':request.get_full_path()
-                                      },
+                                      dictionary,
                                       context_instance=RequestContext(request))
         else:
             self.message_user(request, _('You need to be a superuser to add ' \
@@ -539,10 +528,6 @@ class EditorGroupManagersAdmin(admin.ModelAdmin):
     add_user_to_editor_group_managers.short_description = _("Add users to selected editor group managers")
 
     def remove_user_from_editor_group_managers(self, request, queryset):
-        # pylint: disable-msg=C0103
-        model = self.model
-        opts = model._meta
-
         form = None
         if request.user.is_superuser:
             if 'cancel' in request.POST:
@@ -566,15 +551,15 @@ class EditorGroupManagersAdmin(admin.ModelAdmin):
                 form = self.UserProfileinEditorGroupManagersForm(choices=userprofiles,
                     initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
         
+            dictionary = {
+                          'selected_editorgroups': queryset,
+                          'form': form,
+                          'path':request.get_full_path()
+                         }
+            dictionary.update(create_breadcrumb_template_params(self.model, _('Remove user')))
+        
             return render_to_response('accounts/remove_user_profile_from_editor_group_managers.html',
-                                      {
-                                       'selected_editorgroupmanagers': queryset,
-                                       'form': form,
-                                       'app_label': opts.app_label,
-                                       'verbose_name': opts.verbose_name,
-                                       'action': 'Remove user',
-                                       'path':request.get_full_path()
-                                      },
+                                      dictionary,
                                       context_instance=RequestContext(request))
         else:
             self.message_user(request, _('You need to be a superuser to ' \
@@ -640,10 +625,6 @@ class OrganizationAdmin(admin.ModelAdmin):
                 name__in=request.user.groups.values_list('name', flat=True)))
 
     def add_user_to_organization(self, request, queryset):
-        # pylint: disable-msg=C0103
-        model = self.model
-        opts = model._meta
-
         form = None
         if 'cancel' in request.POST:
             self.message_user(request, _('Cancelled adding users to the organization.'))
@@ -683,10 +664,6 @@ class OrganizationAdmin(admin.ModelAdmin):
     add_user_to_organization.short_description = _("Add users to selected organizations")
 
     def remove_user_from_organization(self, request, queryset):
-        # pylint: disable-msg=C0103
-        model = self.model
-        opts = model._meta
-
         form = None
         if request.user.is_superuser:
             if 'cancel' in request.POST:
@@ -959,10 +936,6 @@ class OrganizationManagersAdmin(admin.ModelAdmin):
         return result
 
     def add_user_to_organization_managers(self, request, queryset):
-        # pylint: disable-msg=C0103
-        model = self.model
-        opts = model._meta
-
         form = None
         if request.user.is_superuser:
             if 'cancel' in request.POST:
@@ -1004,10 +977,6 @@ class OrganizationManagersAdmin(admin.ModelAdmin):
     add_user_to_organization_managers.short_description = _("Add users to selected organization managers")
 
     def remove_user_from_organization_managers(self, request, queryset):
-        # pylint: disable-msg=C0103
-        model = self.model
-        opts = model._meta
-
         form = None
         if request.user.is_superuser:
             if 'cancel' in request.POST:
