@@ -1,9 +1,20 @@
 {% for item in detailed_component %}
   {% with "repository/detailed_component.html" as filename %}
     {% with item as detailed_component.1 %} {# the ".1" should not be there if the tuple does not contain the root of the components tree #}
-		  <tr>
-			  <td>{% include filename %}</td>
-		  </tr>
+        {% ifequal detailed_component|length 2 %}
+			<tr>
+				<td>{% include filename %}</td>
+			</tr>
+        {% else %}
+        <tr>
+			<td>
+				<u>{{detailed_component.0.0|capfirst}}</u>
+			</td>
+			<td>
+				{{detailed_component.0.1}}
+			</td>
+		</tr>
+		{% endifnotequal %}
     {% endwith %}
   {% endwith %}
 {% endfor %}
