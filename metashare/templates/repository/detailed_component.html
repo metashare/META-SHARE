@@ -1,20 +1,26 @@
-{% for item in detailed_component %}
+{% if detailed_component.0 != "usageInfo" %}
+    {{detailed_component.0}}
+{% endif %}
+
+{% for item in detailed_component.1 %}
   {% with "repository/detailed_component.html" as filename %}
-    {% with item as detailed_component.1 %} {# the ".1" should not be there if the tuple does not contain the root of the components tree #}
-        {% ifequal detailed_component|length 2 %}
-			<tr>
-				<td>{% include filename %}</td>
-			</tr>
-        {% else %}
+    {% with item as detailed_component %} {# the ".1" should not be there if the tuple does not contain the root of the components tree #}
+      {% ifequal detailed_component|length 2 %}
+		
+		<tr>
+			<td>{% include filename %}</td>
+		</tr>
+		
+      {% else %}
         <tr>
 			<td>
-				<u>{{detailed_component.0.0|capfirst}}</u>
+				<u>{{ detailed_component.0.0 }}</u>
 			</td>
 			<td>
-				{{detailed_component.0.1}}
+				{{ detailed_component.0.1 }}
 			</td>
 		</tr>
-		{% endifnotequal %}
+	  {% endifequal %}
     {% endwith %}
   {% endwith %}
 {% endfor %}

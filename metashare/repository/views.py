@@ -435,10 +435,14 @@ def view(request, resource_name=None, object_id=None):
     # Get the paths of each items and sort them
     lr_content_paths = get_structure_paths(lr_content)
     sorted_tuple = sorted(set(lr_content_paths))
+    #for item in sorted_tuple:
+#		print item
     
     list_of_all_components = resourceInfoType_model.get_fields_flat()
-    print list_of_all_components
+    #print list_of_all_components
 
+    detailed_component = lr_content[1][7]
+    print detailed_component
 
     #main_component_paths_dict = {}
     main_components_tuple = []
@@ -454,7 +458,7 @@ def view(request, resource_name=None, object_id=None):
       
     # Define context for template rendering.
     context = { 'resource': resource, 'lr_content': lr_content, 
-                'components_tuple': main_components_tuple,  }
+                'components_tuple': main_components_tuple, 'detailed_component': detailed_component}
     template = 'repository/lr_view.html'
 
     # For users who have edit permission for this resource, we have to add LR_EDIT 

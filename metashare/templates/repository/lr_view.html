@@ -124,6 +124,13 @@
   </table>
   </form>
 
+  <form class="form_helper" action="submit" method="get">
+  <table>
+    {% include "repository/detailed_component.html" %}
+  </table>
+  </form>
+
+
   <a href="javascript:history.back();"><button class="span-12 button middle_button">&laquo; Back</button></a>
   {% if LR_DOWNLOAD %}
     <a href="{% url metashare.repository.views.download resource.storage_object.identifier %}"><button class="span-4 button middle_button">Download</button></a>
