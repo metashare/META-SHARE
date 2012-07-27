@@ -432,23 +432,29 @@ def view(request, resource_name=None, object_id=None):
     resource_tree = resource.export_to_elementtree()
     lr_content = _convert_to_template_tuples(resource_tree)
    
-    # Get the paths of each items
+    # Get the paths of each items and sort them
     lr_content_paths = get_structure_paths(lr_content)
+    sorted_tuple = sorted(set(lr_content_paths))
     
-    list_of_main_components = resourceInfoType_model.get_fields_flat()
+    list_of_all_components = resourceInfoType_model.get_fields_flat()
+    print list_of_all_components
 
-    main_component_paths_dict = {}
+
+    #main_component_paths_dict = {}
     main_components_tuple = []
     
+    # Create tuples for the top-level components
     for item, value in lr_content_paths:
-        if value in list_of_main_components:
-            tuple_index = str(item).replace(", ", "][").replace("(","[").replace(")","]")
+        
+        if item in list_of_main_components:
+            tuple_index = str(value).replace(", ", "][").replace("(","[").replace(")","]")
             tuple_index = tuple_index[:-3]
-            main_component_paths_dict[value] = item
+            #main_component_paths_dict[value] = item
             main_components_tuple.append(eval("lr_content" + tuple_index))
       
     # Define context for template rendering.
-    context = { 'resource': resource, 'lr_content': lr_content, 'components_tuple': main_components_tuple }
+    context = { 'resource': resource, 'lr_content': lr_content, 
+                'components_tuple': main_components_tuple,  }
     template = 'repository/lr_view.html'
 
     # For users who have edit permission for this resource, we have to add LR_EDIT 
@@ -500,9 +506,7 @@ def get_structure_paths(obj, path=(), memo=None):
     if memo is None:
         memo = set()
     iterator = None
-    if isinstance(obj, Mapping):
-        iterator = iteritems
-    elif isinstance(obj, (Sequence, Set)) and not isinstance(obj, (str, unicode)):
+    if isinstance(obj, (Sequence, Set)) and not isinstance(obj, (str, unicode)):
         iterator = enumerate
     if iterator:
         if id(obj) not in memo:
@@ -512,7 +516,7 @@ def get_structure_paths(obj, path=(), memo=None):
                     yield result
             memo.remove(id(obj))
     else:
-        yield path, obj
+        yield obj, path
 
 
 def _format_recommendations(recommended_resources):

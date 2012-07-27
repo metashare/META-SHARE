@@ -1,0 +1,9 @@
+{% for item in detailed_component %}
+  {% with "repository/detailed_component.html" as filename %}
+    {% with item as detailed_component.1 %} {# the ".1" should not be there if the tuple does not contain the root of the components tree #}
+		  <tr>
+			  <td>{% include filename %}</td>
+		  </tr>
+    {% endwith %}
+  {% endwith %}
+{% endfor %}
