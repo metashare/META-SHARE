@@ -14,7 +14,8 @@ var autocomp_id = function(elementId, linkedToId)
 			var name = _lang_alpha2_to_name[ui.item.value]
 			autocomp_jquery('input#' + linkedToId).val(name);
 		},
-		source: _lang_alpha2_list
+		source: _lang_alpha2_list,
+		minLength: 0
 	}).data("autocomplete")._renderItem = function(ul, item){
 		var langName = _lang_alpha2_to_name[item.label];
 		var a = autocomp_jquery('<li></li>')
@@ -31,7 +32,8 @@ var autocomp_name = function(elementId)
 		select: function(event, ui)
 		{
 		},
-		source: _lang_name_list
+		source: _lang_name_list,
+		minLength: 0
 	});
 }
 
