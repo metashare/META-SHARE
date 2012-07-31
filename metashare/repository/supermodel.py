@@ -4,6 +4,8 @@ Project: META-SHARE prototype implementation
 """
 import logging
 import re
+import sys
+import inspect
 
 from django.core.cache import cache
 from django.core.exceptions import ValidationError, ObjectDoesNotExist, \
@@ -101,6 +103,20 @@ def _make_choices_from_int_list(source_list):
     return {'max_length': len(_choices)/10+1, 'choices': tuple(_choices)}
 
 
+
+def get_classes(class_name):
+    """
+    Returns all "Type_model" classes
+    """
+    models_list = []
+    for name, obj in inspect.getmembers(sys.modules["{}.models".format(class_name)]):
+        if inspect.isclass(obj):
+            if name.endswith("Type_model"):
+                models_list.append(name[:-10])
+            else:
+				models_list.append(name)
+    return models_list
+
 class SchemaModel(models.Model):
     """
     Super class for all XSD schema types/components.
@@ -116,6 +132,10 @@ class SchemaModel(models.Model):
         This is an abstract super class for all schema models.
         """
         abstract = True
+
+    @classmethod
+    def get_schema_name(cls):
+        return type(self).__schema_name__
 
     @classmethod
     def is_required_field(cls, name):

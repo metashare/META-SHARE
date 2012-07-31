@@ -4,6 +4,7 @@ Project: META-SHARE prototype implementation
 """
 
 import logging
+import sys
 
 from datetime import datetime
 from os.path import split, getsize
@@ -28,6 +29,7 @@ from metashare.repository.forms import LicenseSelectionForm, \
     LicenseAgreementForm, DownloadContactForm, MORE_FROM_SAME_CREATORS, \
     MORE_FROM_SAME_PROJECTS
 from metashare.repository.models import licenceInfoType_model, resourceInfoType_model
+from metashare.repository.supermodel import get_classes
 from metashare.repository.search_indexes import resourceInfoType_modelIndex
 from metashare.settings import LOG_LEVEL, LOG_HANDLER, MEDIA_URL, DJANGO_URL
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
@@ -430,31 +432,36 @@ def view(request, resource_name=None, object_id=None):
 
     # Convert resource to ElementTree and then to template tuples.
     resource_tree = resource.export_to_elementtree()
-    lr_content = _convert_to_template_tuples(resource_tree)
+    lr_content = _convert_to_template_tuples(resource_tree)[1]
    
     # Get the paths of each items and sort them
     lr_content_paths = get_structure_paths(lr_content)
+    #lr_content_paths.delete("resourceInfo")
     sorted_tuple = sorted(set(lr_content_paths))
-    #for item in sorted_tuple:
-#		print item
+       
+    # Get repository classes names
+    available_classes = get_classes("metashare.repository")
+
+    detailed_component = () #lr_content[1][7]
     
-    list_of_all_components = resourceInfoType_model.get_fields_flat()
-    #print list_of_all_components
-
-    detailed_component = lr_content[1][7]
-    print detailed_component
-
     #main_component_paths_dict = {}
     main_components_tuple = []
     
+    
+    
     # Create tuples for the top-level components
-    for item, value in lr_content_paths:
+    for item, value in sorted_tuple:
         
-        if item in list_of_main_components:
+        if item in available_classes:
+            print item
             tuple_index = str(value).replace(", ", "][").replace("(","[").replace(")","]")
+            print tuple_index
             tuple_index = tuple_index[:-3]
-            #main_component_paths_dict[value] = item
             main_components_tuple.append(eval("lr_content" + tuple_index))
+            
+            
+#    for item in main_components_tuple:
+#        print item
       
     # Define context for template rendering.
     context = { 'resource': resource, 'lr_content': lr_content, 
