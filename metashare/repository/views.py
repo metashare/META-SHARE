@@ -436,12 +436,13 @@ def view(request, resource_name=None, object_id=None):
    
     # Get the paths of each items and sort them
     lr_content_paths = get_structure_paths(lr_content)
+    
     #lr_content_paths.delete("resourceInfo")
     sorted_tuple = sorted(set(lr_content_paths))
        
     # Get repository classes names
     available_classes = get_classes("metashare.repository")
-
+    print available_classes
     detailed_component = () #lr_content[1][7]
     
     #main_component_paths_dict = {}
@@ -451,7 +452,8 @@ def view(request, resource_name=None, object_id=None):
     
     # Create tuples for the top-level components
     for item, value in sorted_tuple:
-        
+        print item
+        print item
         if item in available_classes:
             print item
             tuple_index = str(value).replace(", ", "][").replace("(","[").replace(")","]")
@@ -460,8 +462,9 @@ def view(request, resource_name=None, object_id=None):
             main_components_tuple.append(eval("lr_content" + tuple_index))
             
             
-#    for item in main_components_tuple:
-#        print item
+    for item in main_components_tuple:
+        print item
+        print 
       
     # Define context for template rendering.
     context = { 'resource': resource, 'lr_content': lr_content, 
@@ -511,7 +514,7 @@ def get_structure_paths(obj, path=(), memo=None):
     """
     Returns a list of tuples containing the path of each item in 
     a nested structure of tuples and lists.
-    Source:
+    Mostly taken from:
     http://code.activestate.com/recipes/577982-recursively-walk-python-objects/
     """
     if memo is None:
