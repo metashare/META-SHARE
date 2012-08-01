@@ -452,23 +452,14 @@ def view(request, resource_name=None, object_id=None):
     
     # Create tuples for the top-level components
     for item, value in sorted_tuple:
-        print item
-        print item
         if item in available_classes:
-            print item
             tuple_index = str(value).replace(", ", "][").replace("(","[").replace(")","]")
-            print tuple_index
             tuple_index = tuple_index[:-3]
             main_components_tuple.append(eval("lr_content" + tuple_index))
-            
-            
-    for item in main_components_tuple:
-        print item
-        print 
-      
+                              
     # Define context for template rendering.
     context = { 'resource': resource, 'lr_content': lr_content, 
-                'components_tuple': main_components_tuple, 'detailed_component': detailed_component}
+                'components_tuple': main_components_tuple }
     template = 'repository/lr_view.html'
 
     # For users who have edit permission for this resource, we have to add LR_EDIT 
