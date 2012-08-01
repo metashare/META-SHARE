@@ -104,7 +104,7 @@ def _make_choices_from_int_list(source_list):
 def get_classes(module_name):
     """
     Returns class' name in a module.
-    If class' name ends with "Type_model", it is removed.
+    If class' name ends with "Type_model", the trailing characters are removed.
     """
     models_list = []
     for name, obj in inspect.getmembers(sys.modules["{}.models".format(module_name)]):
