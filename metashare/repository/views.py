@@ -447,9 +447,7 @@ def view(request, resource_name=None, object_id=None):
     
     #main_component_paths_dict = {}
     main_components_tuple = []
-    
-    
-    
+
     # Create tuples for the top-level components
     for item, value in sorted_tuple:
         if item in available_classes:
