@@ -75,7 +75,6 @@ def _classify(class_name):
     except NameError:
         return None
 
-
 def _make_choices_from_list(source_list):
     """
     Converts a given list of Strings to tuple choices.
@@ -102,19 +101,19 @@ def _make_choices_from_int_list(source_list):
         _choices.append((value, value))
     return {'max_length': len(_choices)/10+1, 'choices': tuple(_choices)}
 
-
-
-def get_classes(class_name):
+def get_classes(module_name):
     """
-    Returns all "Type_model" classes
+    Returns each module class' __schema_name__ if it exists.
     """
     models_list = []
-    for name, obj in inspect.getmembers(sys.modules["{}.models".format(class_name)]):
+    for name, obj in inspect.getmembers(sys.modules["{}.models".format(module_name)]):
         if inspect.isclass(obj):
-            if name.endswith("Type_model"):
-                models_list.append(name[:-10])
+            class_obj = _classify(name)
+            if hasattr(class_obj, "__schema_name__"):
+                models_list.append(class_obj.__schema_name__)
             else:
-				models_list.append(name)
+                models_list.append(class_obj.__name__)
+    print models_list
     return models_list
 
 class SchemaModel(models.Model):
