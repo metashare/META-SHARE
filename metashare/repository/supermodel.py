@@ -103,17 +103,16 @@ def _make_choices_from_int_list(source_list):
 
 def get_classes(module_name):
     """
-    Returns each module class' __schema_name__ if it exists.
+    Returns class' name in a module.
+    If class' name ends with "Type_model", it is removed.
     """
     models_list = []
     for name, obj in inspect.getmembers(sys.modules["{}.models".format(module_name)]):
         if inspect.isclass(obj):
-            class_obj = _classify(name)
-            if hasattr(class_obj, "__schema_name__"):
-                models_list.append(class_obj.__schema_name__)
+            if name.endswith("Type_model"):
+                models_list.append(name[:-10])
             else:
-                models_list.append(class_obj.__name__)
-    print models_list
+                models_list.append(name)
     return models_list
 
 class SchemaModel(models.Model):
