@@ -4,13 +4,12 @@ Project: META-SHARE prototype implementation
 """
 
 import logging
-import sys
 
 from datetime import datetime
 from os.path import split, getsize
 from urllib import urlopen
 from mimetypes import guess_type
-from collections import Mapping, Set, Sequence 
+from collections import Set, Sequence 
 
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
@@ -439,22 +438,18 @@ def view(request, resource_name=None, object_id=None):
     # Get the paths of each items and sort them
     lr_content_paths = get_structure_paths(lr_content)
     sorted_tuple = sorted(set(lr_content_paths))
-
-    for item in sorted_tuple:
-        print item
-       
+    
     # Get repository classes names
     available_classes = get_classes("metashare.repository")
 
     # Create components lists 
-    corpusTextInfo_list = []
+    corpus_text_info_list = []
 
     # Create fields lists
     descriptions = []
-    titles = []
-    resourceNames = []
-    resourceShortNames = []
-    mediaTypes = []
+    resource_names = []
+    resource_short_names = []
+    media_types = []
     availabilities = []
     licences = []
     
@@ -476,15 +471,15 @@ def view(request, resource_name=None, object_id=None):
             if item == "description":
                 descriptions.append(eval("lr_content" + tuple_index))
             elif item == "resourceName":
-                resourceNames.append(eval("lr_content" + tuple_index))
+                resource_names.append(eval("lr_content" + tuple_index))
             elif item == "resourceShortName":
-                resourceShortNames.append(eval("lr_content" + tuple_index))
+                resource_short_names.append(eval("lr_content" + tuple_index))
             elif item == "mediaType":
-                mediaTypes.append(eval("lr_content" + tuple_index))
+                media_types.append(eval("lr_content" + tuple_index))
             elif item == "resourceType":
-                resourceType = eval("lr_content" + tuple_index)
+                resource_type = eval("lr_content" + tuple_index)
             elif item == "lingualityType":
-                lingualityType = eval("lr_content" + tuple_index)
+                linguality_type = eval("lr_content" + tuple_index)
             elif item == "availability":
                 availabilities.append(eval("lr_content" + tuple_index))
             elif item == "licence":
@@ -496,12 +491,12 @@ def view(request, resource_name=None, object_id=None):
                               
     # Define context for template rendering.
     context = { 'resource': resource, 
-                'identification_tuple': identificationInfo_tuple, 
-                'corpusTextInfo': corpusTextInfo_list, 
-                'descriptions': descriptions, 'resourceNames': resourceNames, 
-                'resourceShortNames': resourceShortNames, 
-                'resourceType': resourceType, 
-                'lingualityType': lingualityType, 'mediaTypes': mediaTypes, 
+                'identification_tuple': identification_info_tuple, 
+                'corpusTextInfo': corpus_text_info_list, 
+                'descriptions': descriptions, 'resourceNames': resource_names, 
+                'resourceShortNames': resource_short_names, 
+                'resourceType': resource_type, 
+                'lingualityType': linguality_type, 'mediaTypes': media_types, 
                 'availabilities': availabilities, 'licences': licences, }
     template = 'repository/lr_view.html'
 
