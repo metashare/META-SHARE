@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-  {{ lr_content.1.0.1.0.0.1 }} &ndash; META-SHARE
+  {{ resourceNames.0 }} &ndash; META-SHARE
 {% endblock %}
 
 {% block links %}
@@ -9,11 +9,20 @@
 {% endblock %}
 
 {% block description %}
-  {{ lr_content.1.0.1.1.0.1|truncatewords:20}}...
+  {% for item in descriptions %}
+    {{ item|truncatewords:20}}...
+  {% endfor %}
 {% endblock %}
 
 {% block keywords %}
-  {{ lr_content.1.1.1.0.0.1 }}, {{ lr_content.1.1.1.1.1.0.0.1 }}, {{ lr_content.1.8.1.0.1.0.0.1 }}, {{ lr_content.1.8.1.0.1.1.1.0.1.0.0.1 }}, {{ lr_content.1.8.1.0.1.1.1.0.1.1.1.0.0.1 }}
+  {# here, we should put resource type, media type, linguality type, licence, availability. #}
+  {{ resourceType }}, 
+  {% for item in mediaTypes %}
+    {{ item }}, 
+  {% endfor %}
+  {{ lingualityType }},
+  {{ availability }},
+  {{ licence }}
 {% endblock %}
 
 
@@ -129,7 +138,7 @@
         
 		<h2>{{ resource }}</h2>	
 		<h4>shortname if exists</h4>
-		<h3 style="text-align:justify">description{{components_tuple.0.1.3.0.1|truncatewords:50}}...</h3>
+		<h3 style="text-align:justify">{{ description|truncatewords:50 }}...</h3>
 		<h4><a href="{{url}}" target="_blank">url if exists</a></h4>
 	
 	

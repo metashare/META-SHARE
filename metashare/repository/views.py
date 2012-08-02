@@ -430,34 +430,72 @@ def view(request, resource_name=None, object_id=None):
     if request.path_info != resource.get_absolute_url():
         return redirect(resource.get_absolute_url())
 
+    #    print resource.get_field_sets()
+    
     # Convert resource to ElementTree and then to template tuples.
     resource_tree = resource.export_to_elementtree()
     lr_content = _convert_to_template_tuples(resource_tree)[1]
    
     # Get the paths of each items and sort them
     lr_content_paths = get_structure_paths(lr_content)
-    
-    #lr_content_paths.delete("resourceInfo")
     sorted_tuple = sorted(set(lr_content_paths))
+
+    for item in sorted_tuple:
+        print item
        
     # Get repository classes names
     available_classes = get_classes("metashare.repository")
-    print available_classes
-    detailed_component = () #lr_content[1][7]
-    
-    #main_component_paths_dict = {}
-    main_components_tuple = []
 
-    # Create tuples for the top-level components
+    # Create components lists 
+    corpusTextInfo_list = []
+
+    # Create fields lists
+    descriptions = []
+    titles = []
+    resourceNames = []
+    resourceShortNames = []
+    mediaTypes = []
+    
+    
+    # For each component or field, create a list of items.
+    # This is because 
     for item, value in sorted_tuple:
         if item in available_classes:
+            # Create tuples for components
             tuple_index = str(value).replace(", ", "][").replace("(","[").replace(")","]")
             tuple_index = tuple_index[:-3]
-            main_components_tuple.append(eval("lr_content" + tuple_index))
+            if item == "identificationInfo":
+                identificationInfo_tuple = eval("lr_content" + tuple_index)
+            if item == "corpusTextInfo":
+                corpusTextInfo_list.append(eval("lr_content" + tuple_index))
+        else:
+            # Create tuples for individual fields
+            tuple_index = str(value).replace(", ", "][").replace("(","[").replace(")","]")
+            tuple_index = "{}[1]".format(tuple_index[:-3])
+            if item == "description":
+                descriptions.append(eval("lr_content" + tuple_index))
+            elif item == "resourceName":
+                resourceNames.append(eval("lr_content" + tuple_index))
+            elif item == "resourceShoerName":
+                resourceShortNames.append(eval("lr_content" + tuple_index))
+            elif item == "mediaType":
+                mediaTypes.append(eval("lr_content" + tuple_index))
+            elif item == "resourceType":
+                resourceType = eval("lr_content" + tuple_index)
+            elif item == "lingualityType":
+                lingualityType = eval("lr_content" + tuple_index)
+    
+    
+    print corpusTextInfo_list
                               
     # Define context for template rendering.
-    context = { 'resource': resource, 'lr_content': lr_content, 
-                'components_tuple': main_components_tuple }
+    context = { 'resource': resource, 
+                'identification_tuple': identificationInfo_tuple, 
+                'corpusTextInfo': corpusTextInfo_list, 
+                'descriptions': descriptions, 'resourceNames': resourceNames, 
+                'resourceShortNames': resourceShortNames, 
+                'resourceType': resourceType, 
+                'lingualityType': lingualityType, 'mediaTypes': mediaTypes}
     template = 'repository/lr_view.html'
 
     # For users who have edit permission for this resource, we have to add LR_EDIT 
