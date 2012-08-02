@@ -457,7 +457,7 @@ def view(request, resource_name=None, object_id=None):
     # This is because 
     for item, value in sorted_tuple:
         if item in available_classes:
-            # Create tuples for components
+            # Create lists for components
             tuple_index = str(value).replace(", ", "][").replace("(","[").replace(")","]")
             tuple_index = tuple_index[:-3]
             if item == "identificationInfo":
@@ -465,7 +465,7 @@ def view(request, resource_name=None, object_id=None):
             if item == "corpusTextInfo":
                 corpus_text_info_list.append(eval("lr_content" + tuple_index))
         else:
-            # Create tuples for individual fields
+            # Create lists for individual fields
             tuple_index = str(value).replace(", ", "][").replace("(","[").replace(")","]")
             tuple_index = "{}[1]".format(tuple_index[:-3])
             if item == "description":
@@ -484,11 +484,7 @@ def view(request, resource_name=None, object_id=None):
                 availabilities.append(eval("lr_content" + tuple_index))
             elif item == "licence":
                 licences.append(eval("lr_content" + tuple_index))
-            
-    
-    
-    print corpusTextInfo_list
-                              
+
     # Define context for template rendering.
     context = { 'resource': resource, 
                 'identification_tuple': identification_info_tuple, 
