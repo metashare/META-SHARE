@@ -33,12 +33,12 @@
 		</script>
 
 		<script type="text/javascript">
-			function getElementsByClassName(node,classname) 
+			function getElementsByClassName(node,classname)
 			{
 				if (node.getElementsByClassName)
 					{return node.getElementsByClassName(classname);}
 			}
-			function getElementsByClass(searchClass,node,tag) 
+			function getElementsByClass(searchClass,node,tag)
 			{
 				var classElements = new Array();
 				if ( node == null ){node = document;}
@@ -46,9 +46,9 @@
 				var els = node.getElementsByTagName(tag);
 				var elsLen = els.length;
 				var pattern = new indexOf(searchClass);
-				for (i = 0, j = 0; i < elsLen; i++) 
+				for (i = 0, j = 0; i < elsLen; i++)
 				{
-				if ( pattern.test(els[i].className) ) 
+				if ( pattern.test(els[i].className) )
 					{
 					classElements[j] = els[i];
 					j++;
@@ -56,13 +56,13 @@
 				}
 				return classElements;
 			}
-			function toggle(el) 
+			function toggle(el)
 			{
-				if (el.style.display == '') 
+				if (el.style.display == '')
 					{
 					el.style.display = 'none';
 					}
-					else 
+					else
 					{
 					el.style.display = '';
 					}
@@ -76,7 +76,7 @@
 					toggle(els[i]);
 				}
 			}
-			function displayOptional() 
+			function displayOptional()
 			{
 				var els = getElementsByClassName(document, 'optional');
 				var i;
@@ -89,20 +89,20 @@
 		
 		<script>
 			$(document).ready(function(){
-				var selected_tab = $(".fields li.active").find("a").attr("href");				
+				var selected_tab = $(".fields li.active").find("a").attr("href");
 				$(".tab_content").hide();
-				$(selected_tab).fadeIn();						
+				$(selected_tab).fadeIn();
 				$(".fields li").click(function() {
 					$(".fields li").removeClass("active");
 					$(this).addClass("active");
 					$(".tab_content").hide();
 					var selected_tab = $(this).find("a").attr("href");
-					$(selected_tab).fadeIn();										
+					$(selected_tab).fadeIn();			
 					return false;
 		  		});
 		  		
-			});			
-		</script>	
+			});
+		</script>
 
 
 		<style type="text/css">
@@ -131,7 +131,7 @@
         </div>
         
 		<h2>{{ resourceNames.0 }}</h2>
-		<h4>{{ resourceShortNames.1 }}</h4> {# Here we should choose the english version of resource short name (should be provided by views.py) #}
+		<h4>{{ resourceShortNames.0 }}</h4> {# Here we should choose the english version of resource short name (should be provided by views.py) #}
 		<h3 style="text-align:justify">{{ descriptions.0|truncatewords:50 }}...</h3>
 		<h4><a href="{{url}}" target="_blank">url if exists</a></h4>
 	
@@ -147,32 +147,32 @@
 		
 		<div class="column">
 			<div class="fields">
-					<ul>									
+					<ul>
 						<li class= "active"><a href="#first">Text</a></li>
 						<li><a href="#second">Audio</a></li>
 						<li><a href="#second">Video</a></li>
 						<li><a href="#second">Image</a></li>
-					</ul>		
+					</ul>
 				</div>
 			<div class="white_box middle">
 				
 		
 				<div id="tabs_content_container">
 					<div id="first" class="tab_content">
-						{{resource}}			
-					</div>	
+						{{resource}}
+					</div>
 					<div id="second" class="tab_content">
 						{{resource}}
-					</div>			
-				</div>			
+					</div>
+				</div>
 			</div>
-		</div>	
+		</div>
 		<div class="white_box column corner">
-		{% include "repository/detailed_component.html" %}
-		</div>				
-		
+		  {% include "repository/detailed_component.html" %}
+		</div>
+
 	</div>
-		
+
 	<div class='bottom_box'>
         
   <a href="javascript:history.back();"><button class="span-12 button middle_button">&laquo; Back</button></a>

@@ -461,7 +461,7 @@ def view(request, resource_name=None, object_id=None):
             tuple_index = str(value).replace(", ", "][").replace("(","[").replace(")","]")
             tuple_index = tuple_index[:-3]
             if item == "identificationInfo":
-                identificationInfo_tuple = eval("lr_content" + tuple_index)
+                identification_info_tuple = eval("lr_content" + tuple_index)
             if item == "corpusTextInfo":
                 corpus_text_info_list.append(eval("lr_content" + tuple_index))
         else:
@@ -488,7 +488,7 @@ def view(request, resource_name=None, object_id=None):
     # Define context for template rendering.
     context = { 'resource': resource, 
                 'identification_tuple': identification_info_tuple, 
-                'corpusTextInfo': corpus_text_info_list, 
+                'corpusTextInfo': corpus_text_info_list,
                 'descriptions': descriptions, 'resourceNames': resource_names, 
                 'resourceShortNames': resource_short_names, 
                 'resourceType': resource_type, 
