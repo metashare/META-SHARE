@@ -16,13 +16,7 @@
 
 {% block keywords %}
   {# here, we should put resource type, media type, linguality type, licence, availability. #}
-  {{ resourceType }}, 
-  {% for item in mediaTypes %}
-    {{ item }}, 
-  {% endfor %}
-  {{ lingualityType }},
-  {{ availability }},
-  {{ licence }}
+  {{ resourceType }}, {{ mediaTypes|join:", " }}, {{ lingualityType }}, {{ availabilities|join:", " }}, {{ licences|join:", " }}
 {% endblock %}
 
 
@@ -136,7 +130,7 @@
             {% endfor %}
         </div>
         
-		<h2>{{ resource }}</h2>
+		<h2>{{ resourceNames.0 }}</h2>
 		<h4>{{ resourceShortNames.1 }}</h4> {# Here we should choose the english version of resource short name (should be provided by views.py) #}
 		<h3 style="text-align:justify">{{ descriptions.0|truncatewords:50 }}...</h3>
 		<h4><a href="{{url}}" target="_blank">url if exists</a></h4>

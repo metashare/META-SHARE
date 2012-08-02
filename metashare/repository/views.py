@@ -455,7 +455,8 @@ def view(request, resource_name=None, object_id=None):
     resourceNames = []
     resourceShortNames = []
     mediaTypes = []
-    
+    availabilities = []
+    licences = []
     
     # For each component or field, create a list of items.
     # This is because 
@@ -484,6 +485,11 @@ def view(request, resource_name=None, object_id=None):
                 resourceType = eval("lr_content" + tuple_index)
             elif item == "lingualityType":
                 lingualityType = eval("lr_content" + tuple_index)
+            elif item == "availability":
+                availabilities.append(eval("lr_content" + tuple_index))
+            elif item == "licence":
+                licences.append(eval("lr_content" + tuple_index))
+            
     
     
     print corpusTextInfo_list
@@ -495,7 +501,8 @@ def view(request, resource_name=None, object_id=None):
                 'descriptions': descriptions, 'resourceNames': resourceNames, 
                 'resourceShortNames': resourceShortNames, 
                 'resourceType': resourceType, 
-                'lingualityType': lingualityType, 'mediaTypes': mediaTypes}
+                'lingualityType': lingualityType, 'mediaTypes': mediaTypes, 
+                'availabilities': availabilities, 'licences': licences, }
     template = 'repository/lr_view.html'
 
     # For users who have edit permission for this resource, we have to add LR_EDIT 
