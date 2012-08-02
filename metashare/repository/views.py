@@ -463,7 +463,7 @@ def view(request, resource_name=None, object_id=None):
             if item == "identificationInfo":
                 identificationInfo_tuple = eval("lr_content" + tuple_index)
             if item == "corpusTextInfo":
-                corpusTextInfo_list.append(eval("lr_content" + tuple_index))
+                corpus_text_info_list.append(eval("lr_content" + tuple_index))
         else:
             # Create tuples for individual fields
             tuple_index = str(value).replace(", ", "][").replace("(","[").replace(")","]")
