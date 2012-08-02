@@ -452,6 +452,7 @@ def view(request, resource_name=None, object_id=None):
     media_types = []
     availabilities = []
     licences = []
+    linguality_type = []
     
     # For each component or field, create a list of items.
     # This is because 
