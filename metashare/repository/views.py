@@ -476,7 +476,7 @@ def view(request, resource_name=None, object_id=None):
                 descriptions.append(eval("lr_content" + tuple_index))
             elif item == "resourceName":
                 resourceNames.append(eval("lr_content" + tuple_index))
-            elif item == "resourceShoerName":
+            elif item == "resourceShortName":
                 resourceShortNames.append(eval("lr_content" + tuple_index))
             elif item == "mediaType":
                 mediaTypes.append(eval("lr_content" + tuple_index))
