@@ -397,10 +397,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                                   queryset=inline.queryset(request))
                 #### begin modification ####
                 if prefix in self.model.get_fields()['required']:
-                    forms = formset.forms
-                    for form in forms:
-                        if not 'DELETE' in form.changed_data:
-                            form.empty_permitted = False
+                    formset.forms[0].empty_permitted = False
                 #### end modification ####    
 
                 formsets.append(formset)
