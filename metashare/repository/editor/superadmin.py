@@ -28,8 +28,6 @@ from metashare.repository.editor.schemamodel_mixin import SchemaModelLookup
 from metashare.storage.models import MASTER
 from metashare.repository.model_utils import get_root_resources
 from metashare.repository.supermodel import REQUIRED, RECOMMENDED, OPTIONAL
-from metashare.repository.editor.widgets import ComboWidget, LANGUAGE_ID_NAME_FIELDS
-from django.forms import Select
 # Setup logging support.
 logging.basicConfig(level=settings.LOG_LEVEL)
 LOGGER = logging.getLogger('metashare.repository.superadmin')
@@ -126,19 +124,8 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         if self.is_x_to_many_relation(db_field):
             return self.formfield_for_relation(db_field, **kwargs)
         self.use_hidden_widget_for_one2one(db_field, kwargs)
-        model_name = self.model().__class__.__name__
-        for item in LANGUAGE_ID_NAME_FIELDS:
-            if item[0] == model_name:
-                if db_field.name == item[1]:
-                    attrs = {}
-                    attrs['id_field'] = item[1]
-                    attrs['name_field'] = item[2]
-                    kwargs.update({'widget': ComboWidget(field_type='id', attrs=attrs)})
-                elif db_field.name == item[2]:
-                    attrs = {}
-                    attrs['id_field'] = item[1]
-                    attrs['name_field'] = item[2]
-                    kwargs.update({'widget': ComboWidget(field_type='name', attrs=attrs)})
+        lang_widget = self.add_lang_widget(db_field)
+        kwargs.update(lang_widget)
         formfield = super(SchemaModelAdmin, self).formfield_for_dbfield(db_field, **kwargs)
         self.use_related_widget_where_appropriate(db_field, kwargs, formfield)
         return formfield
@@ -201,14 +188,6 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         return HttpResponseRedirect("../../")
 
 
-    def add_lang_templ_params(self, inline_admin_formset):
-        model_name = inline_admin_formset.formset.form.Meta.model().__class__.__name__
-        for item in LANGUAGE_ID_NAME_FIELDS:
-            if item[0] == model_name:
-                inline_admin_formset.has_lang = True
-                inline_admin_formset.lang_id = item[1]
-                inline_admin_formset.lang_name = item[2]
-    
     @csrf_protect_m
     @transaction.commit_on_success
     def add_view(self, request, form_url='', extra_context=None):
@@ -418,7 +397,10 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                                   queryset=inline.queryset(request))
                 #### begin modification ####
                 if prefix in self.model.get_fields()['required']:
-                    formset.forms[0].empty_permitted = False
+                    forms = formset.forms
+                    for form in forms:
+                        if not 'DELETE' in form.changed_data:
+                            form.empty_permitted = False
                 #### end modification ####    
 
                 formsets.append(formset)

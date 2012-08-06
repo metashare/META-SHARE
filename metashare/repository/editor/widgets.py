@@ -18,7 +18,6 @@ from selectable.forms.widgets import SelectableMediaMixin, SelectableMultiWidget
     LookupMultipleHiddenInput
 from django.utils.http import urlencode
 from metashare import settings
-from metashare.repository.editor import lang
 
 # Setup logging support.
 logging.basicConfig(level=settings.LOG_LEVEL)
@@ -29,18 +28,6 @@ LOGGER.addHandler(settings.LOG_HANDLER)
 # used; for larger sizes we use `Textarea` widgets
 _MAX_TEXT_INPUT_SIZE = 150
 
-
-# Fields that need the ComboWidget with autocomplete functionality
-# to use with languageId,languageName pairs.
-# Format (modelName, languageIdFieldName, languageNameFieldName)
-LANGUAGE_ID_NAME_FIELDS = [
-   #("inputInfoType_model", "languageId", "languageName"),
-   #("outputInfoType_model", "languageId", "languageName"),
-   ("languageInfoType_model", "languageId", "languageName"),
-   #("metadataInfoType_model", "metadataLanguageId", "metadataLanguageName"),
-   ("documentInfoType_model", "documentLanguageId", "documentLanguageName"),
-   ("annotationInfoType_model", "tagsetLanguageId", "tagsetLanguageName"),
-]
 
 class DictWidget(widgets.Widget):
     """
@@ -303,6 +290,13 @@ class MultiFieldWidget(widgets.Widget):
             result = TextInput().render(name, value, attrs)
         return result
 
+    def _render_container(self, _context):
+        return render_to_string('repository/container.html', _context)
+    
+    def _render_multifield(self, _context):
+        return render_to_string('repository/multi_field_widget.html', _context)
+    
+    
     def render(self, name, value, attrs=None):
         """
         Renders the MultiFieldWidget with the given name and value.
@@ -342,14 +336,15 @@ class MultiFieldWidget(widgets.Widget):
             # Define context for container template rendering.
             _context = {'id': _id, 'field_widget': _field_widget,
               'widget_id': self.widget_id,
-              'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX}
+              'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX,
+              'field_name': name}
             
             # If there have been any validation errors, add the message.
             if _value in self.errors.keys():
                 _context.update({'error_msg': self.errors[_value]})
             
             # Render container for this sub value's widget and append to list.
-            _container = render_to_string('repository/container.html', _context)
+            _container = self._render_container(_context)
             _field_widgets.append(_container)
         
         # If list of values is empty, render an empty container instead.
@@ -359,9 +354,10 @@ class MultiFieldWidget(widgets.Widget):
             _field_widget = self._render_input_widget(name, '', _field_attrs)
             _context = {'id': _id, 'field_widget': _field_widget,
               'widget_id': self.widget_id,
-              'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX}
+              'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX,
+              'field_name': name}
             
-            _container = render_to_string('repository/container.html', _context)
+            _container = self._render_container(_context)
             _field_widgets.append(_container)
         
             _field_widget = self._render_input_widget(name, '', _field_attrs)
@@ -375,10 +371,11 @@ class MultiFieldWidget(widgets.Widget):
         _context = {'empty_widget': _empty_widget,
           'field_widgets': mark_safe(u'\n'.join(_field_widgets)),
           'widget_id': self.widget_id,
-          'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX}
+          'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX,
+          'field_name': name}
         
         # Render final HTML for this MultiFieldWidget instance.
-        _html = render_to_string('repository/multi_field_widget.html', _context)
+        _html = self._render_multifield(_context)
         return mark_safe(_html)
     
     def value_from_datadict(self, data, files, name):
@@ -512,4 +509,44 @@ class ComboWidget(AdminTextInputWidget):
             val = val + js_script
 
         return mark_safe(val)
+
+class MultiComboWidget(MultiFieldWidget):
+    class Media:
+        """
+        Media sub class to inject custom CSS and JavaScript code.
+        """
+        css = {
+          'all': ('css/jquery-ui-1.8.15.custom.css', 'admin/css/combo.css')
+        }
+        js = ('js/jquery-ui-1.8.15.custom.js',
+              'js/autocomp.js',
+              'js/pycountry.js' )
     
+    def __init__(self, field_type=None, attrs=None, widget_id=None, max_length=None, **kwargs):
+        self.field_type = field_type
+        self.id_field = attrs.pop('id_field')
+        self.name_field = attrs.pop('name_field')
+        super(MultiComboWidget, self).__init__(widget_id, max_length, **kwargs)
+        
+    def _render_container(self, _context):
+        if self.field_type == 'name':
+            _context.update({'autocomp_name': True})
+        elif self.field_type == 'id':
+            _context.update({'autocomp_id': True})
+            linked_field_name = _context['field_name']
+            linked_field_name = linked_field_name.replace(self.id_field, self.name_field)
+            _context.update({'linked_field_name': linked_field_name})
+        val = super(MultiComboWidget, self)._render_container(_context)
+        return val
+    
+    def _render_multifield(self, _context):
+        if self.field_type == 'name':
+            _context.update({'autocomp_name': True})
+        elif self.field_type == 'id':
+            _context.update({'autocomp_id': True})
+            linked_field_name = _context['field_name']
+            linked_field_name = linked_field_name.replace(self.id_field, self.name_field)
+            _context.update({'linked_field_name': linked_field_name})
+        val = super(MultiComboWidget, self)._render_multifield(_context)
+        return val
+        
