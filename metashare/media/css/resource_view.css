@@ -1,0 +1,165 @@
+#content{
+	padding:0px!important;
+}
+
+.white_box{
+   background-color:white;
+   box-shadow: 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
+   padding:10px;
+}
+
+.top_box, .container_box{
+   width:860px;
+}
+
+.top_box{
+   padding: 20px;
+   margin:10px 0 10px 0 !important;
+}
+
+div#stats{
+	padding:7px;
+	height:20px;
+	background-color: #EEEEEE;
+	float: right;
+	border-radius:7px;
+        box-shadow:0 3px 10px #CCCCCC, 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
+}
+
+.column{
+   float:left;
+   margin-top:5px;
+   width:273px;
+   margin-left:0px!important;
+   margin-right:10px;
+}
+
+
+div.right-corner{
+   margin-right:0px!important;
+}
+
+.dataline label{
+    font-size: 14px;
+    font-weight: normal;
+    color: #333;
+}
+
+.dataline label.title{
+	background-color: #fda;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 0;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 0;
+	color: #555;
+	font-size: 12px;
+	font-weight: 600;
+	margin-bottom: 0.3em;
+	margin-left: 0;
+	margin-right: 0;
+	margin-top: 0.9em;
+	padding-left: 4px;
+	width: 100%;
+}
+
+.fields ul{
+   list-style: none;
+   padding:0px;
+}
+
+.fields ul li{
+   float:left;
+   background-color:#fff;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+        box-shadow:0 3px 10px #CCCCCC, 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
+	font-size: 12px;
+	font-weight: 600;
+	margin-right: 1px;	
+	padding-top: 1px;
+	padding-bottom: 1px;
+	padding-left: 5px;
+	padding-right: 5px;
+	height:18px;
+}
+
+.fields ul li.active{
+   height:20px;
+}
+
+.tab_content{
+   clear:both;
+}
+
+.bottom_box{
+	margin-top: 400px;
+	background-color: #ddd;
+}
+
+.middle_box{
+   margin:0;
+   float:left;
+   width:273px;
+}
+
+.middle{
+   padding-right:20px;
+}
+.corner{
+   margin-top:45px;   
+}
+
+/*CSS for tooltip*/
+
+a.tip {    
+    text-decoration: none;
+}
+a.tip:hover {
+    cursor: default;
+    position: relative;
+}
+a.tip span {
+    display: none;
+}
+a.tip:hover span {
+    padding: 5px;
+    display: block;
+    z-index: 100;
+    background: #ddd;
+    opacity:0.8;
+    border-radius:7px;
+    position: absolute;
+    width:180px;
+    top: 15px;
+    text-decoration: none;
+    text-align:justify;
+}
+
+    
+
+/*End CSS for tooltip*/
+
+
+.recommendations{
+   width:870px;
+}
+
+.recommendations ul{
+    list-style: none;
+}
+
+.recommendations li{
+	font-size:14px;
+	line-height:25px;
+}
+
+.trenner{
+	height:20px;
+	padding:0 10px 0 10px;
+}
+
+.trenner:last-child{
+	display:none;
+}
