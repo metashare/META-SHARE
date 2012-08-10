@@ -1,15 +1,22 @@
 {% extends "base.html" %}
 
 {% block title %}
-  {{ lr_content.1.0.1.0.0.1 }} &ndash; META-SHARE
+  {{ resourceNames.0 }} &ndash; META-SHARE
+{% endblock %}
+
+{% block links %}
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/resource_view.css" />
 {% endblock %}
 
 {% block description %}
-  {{ lr_content.1.0.1.1.0.1|truncatewords:20}}...
+  {% for item in descriptions %}
+    {{ item|truncatewords:20}}...
+  {% endfor %}
 {% endblock %}
 
 {% block keywords %}
-  {{ lr_content.1.1.1.0.0.1 }}, {{ lr_content.1.1.1.1.1.0.0.1 }}, {{ lr_content.1.8.1.0.1.0.0.1 }}, {{ lr_content.1.8.1.0.1.1.1.0.1.0.0.1 }}, {{ lr_content.1.8.1.0.1.1.1.0.1.1.1.0.0.1 }}
+  {# here, we should put resource type, media type, linguality type, licence, availability. #}
+  {{ resourceType }}, {{ mediaTypes|join:", " }}, {{ lingualityType }}, {{ availabilities|join:", " }}, {{ licences|join:", " }}
 {% endblock %}
 
 
@@ -17,7 +24,7 @@
 		<script type="text/javascript" src="http://plugins.learningjquery.com/expander/jquery.expander.js"></script>
 		<script type="text/javascript">
 			$(function () {
-				$('td.readmore').expander({
+				$('.readmore').expander({
 					slicePoint: 300,
 					expandText: 'Read More',
 					userCollapseText: 'Read Less'
@@ -26,12 +33,12 @@
 		</script>
 
 		<script type="text/javascript">
-			function getElementsByClassName(node,classname) 
+			function getElementsByClassName(node,classname)
 			{
 				if (node.getElementsByClassName)
 					{return node.getElementsByClassName(classname);}
 			}
-			function getElementsByClass(searchClass,node,tag) 
+			function getElementsByClass(searchClass,node,tag)
 			{
 				var classElements = new Array();
 				if ( node == null ){node = document;}
@@ -39,9 +46,9 @@
 				var els = node.getElementsByTagName(tag);
 				var elsLen = els.length;
 				var pattern = new indexOf(searchClass);
-				for (i = 0, j = 0; i < elsLen; i++) 
+				for (i = 0, j = 0; i < elsLen; i++)
 				{
-				if ( pattern.test(els[i].className) ) 
+				if ( pattern.test(els[i].className) )
 					{
 					classElements[j] = els[i];
 					j++;
@@ -49,13 +56,13 @@
 				}
 				return classElements;
 			}
-			function toggle(el) 
+			function toggle(el)
 			{
-				if (el.style.display == '') 
+				if (el.style.display == '')
 					{
 					el.style.display = 'none';
 					}
-					else 
+					else
 					{
 					el.style.display = '';
 					}
@@ -69,7 +76,7 @@
 					toggle(els[i]);
 				}
 			}
-			function displayOptional() 
+			function displayOptional()
 			{
 				var els = getElementsByClassName(document, 'optional');
 				var i;
@@ -78,6 +85,23 @@
 					toggle(els[i]);
 				}
 			}
+		</script>
+		
+		<script>
+			$(document).ready(function(){
+				var selected_tab = $(".fields li.active").find("a").attr("href");
+				$(".tab_content").hide();
+				$(selected_tab).fadeIn();
+				$(".fields li").click(function() {
+					$(".fields li").removeClass("active");
+					$(this).addClass("active");
+					$(".tab_content").hide();
+					var selected_tab = $(this).find("a").attr("href");
+					$(selected_tab).fadeIn();			
+					return false;
+		  		});
+		  		
+			});
 		</script>
 
 
@@ -88,20 +112,66 @@
 				vertical-align: inherit;
 			 }
 		</style>
- 
-<h2>{{ resource }}</h2>
-	<div class="content_box">
-        <div id="stats" align="right" style="float: right">
+		
+		
+	<div class="top_box white_box">
+		<div id="stats" align="right">
             {% for stat in LR_STATS %}
                 {%if "updated" in stat.action %}
                     &nbsp;<div align=right style="float: right"><i>(Last modified: {{ stat.last }})</i>&nbsp;</div>
                 {% else %}
+                	<a href="#" class="tip">
                     <img src="{{ MEDIA_URL }}stats/img/{{ stat.action }}_icon.gif"
-                    alt="Last {{ stat.action }}: {{ stat.last }}" title="Last {{ stat.action }}: {{ stat.last }}" />
+                    alt="Last {{ stat.action }}: {{ stat.last }}"/>
+                    <span>Last {{ stat.action }}: {{ stat.last }}</span>
+                    </a>
                     <b>{{  stat.count }}</b>&nbsp;
                 {% endif %}
             {% endfor %}
-        <hr></div>
+        </div>
+        
+		<h2>{{ resourceNames.0 }}</h2>
+		<h3>{% for name in resourceShortNames %}{{ name }}<img src="{{ MEDIA_URL }}images/trenner.png" class="trenner" />{% endfor %}</h3> {# Here we should choose the english version of resource short name (should be provided by views.py) #}
+		<h4 style="text-align:justify" class="readmore">{{ descriptions.0 }}</h4>
+		{% if url.0 %}
+		<h4><a href="{{url.0}}" target="_blank">{{url.0}}</a></h4>
+		{% endif %}
+	
+	
+	</div>
+	
+		<div class="white_box column corner readmore">
+		
+			<div class="dataline"><label class='title'>{{info|capfirst }}info label: </label><label>info</label></div>
+		</div>
+		
+		<div class="column middle">
+			<div class="fields">
+					<ul>
+						{% for type in mediaTypes %}
+							<li><a href="#{{forloop.counter}}">{{type}}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+			<div class="white_box middle_box">
+				
+			{% for type in mediaTypes %}
+				<div id="tabs_content_container">
+					<div id="{{forloop.counter}}" class="tab_content">
+						{% ifequal type "text" %}
+							{% include "repository/text_corpus_info.html" %}
+						{% endifequal %}	
+					</div>
+				</div>
+			{% endfor %}
+			</div>
+		</div>
+		<div class="white_box column corner right-corner">
+		</div>
+
+
+	<div class='bottom_box'>
+        
   <a href="javascript:history.back();"><button class="span-12 button middle_button">&laquo; Back</button></a>
   {% if LR_DOWNLOAD %}
     <a href="{% url metashare.repository.views.download resource.storage_object.identifier %}"><button class="span-4 button middle_button">Download</button></a>
@@ -118,25 +188,6 @@
   <div style="clear: both;"></div>
   
   <p><input type="checkbox" name="choose_view" onClick="displayOptional();"> Only show mandatory fields</p>
-  <form class="form_helper" action="submit" method="get">
-  <table>
-    {% include "repository/detail_view.html" %}
-  </table>
-  </form>
-
-  <a href="javascript:history.back();"><button class="span-12 button middle_button">&laquo; Back</button></a>
-  {% if LR_DOWNLOAD %}
-    <a href="{% url metashare.repository.views.download resource.storage_object.identifier %}"><button class="span-4 button middle_button">Download</button></a>
-  {% else %}
-    <div class="popup_box">
-      <div onmouseover="$(this).siblings('div.popup').show();" onmouseout="$(this).siblings('div.popup').hide();"><button class="span-4 button middle_gray_button">Download</button></div><div class="popup" style="height:50px; left:190px; width:270px; top:50px;"><img style="left:10px;" src="{{ MEDIA_URL }}images/adv_search_pfeil.png" />&nbsp;You don&rsquo;t have the permission to download this resource. Please log in.</div>
-    </div>
-  {% endif %}
-  {% if LR_EDIT %}
-    <a href="{{ LR_EDIT }}"><button class="span-4 button middle_button">Edit Resource</button></a>
-  {% else %}
-    <div onmouseover="$(this).siblings('div.popup').show();" onmouseout="$(this).siblings('div.popup').hide();"><button class="span-4 button middle_gray_button">Edit Resource</button></div><div class="popup" style="height:50px; left:350px; width:270px; top:60px;"><img style="left:10px;" src="{{ MEDIA_URL }}images/adv_search_pfeil.png" />&nbsp;You don&rsquo;t have the permission to edit this resource.</div>
-  {% endif %}
 
 </div>
 
