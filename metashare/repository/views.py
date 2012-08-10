@@ -9,6 +9,7 @@ from datetime import datetime
 from os.path import split, getsize
 from urllib import urlopen
 from mimetypes import guess_type
+from collections import Set, Sequence 
 
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
@@ -27,6 +28,7 @@ from metashare.repository.forms import LicenseSelectionForm, \
     LicenseAgreementForm, DownloadContactForm, MORE_FROM_SAME_CREATORS, \
     MORE_FROM_SAME_PROJECTS
 from metashare.repository.models import licenceInfoType_model, resourceInfoType_model
+from metashare.repository.supermodel import get_classes
 from metashare.repository.search_indexes import resourceInfoType_modelIndex
 from metashare.settings import LOG_LEVEL, LOG_HANDLER, MEDIA_URL, DJANGO_URL
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
@@ -69,7 +71,7 @@ def _convert_to_template_tuples(element_tree):
         return (element_tree.tag, values)
 
     # Otherwise, we return a tuple containg (key, value, required), 
-    # i.e., (tag, text, <0,1>).
+    # i.e., (tag, text, <True,False>).
     # The "required" element was added to the tree, for passing 
     # information about whether a field is required or not, to correctly
     # render the single resource view.
@@ -416,7 +418,6 @@ def create(request):
     """
     return redirect(reverse('admin:repository_resourceinfotype_model_add'))
 
-
 def view(request, resource_name=None, object_id=None):
     """
     Render browse or detail view for the repository application.
@@ -428,12 +429,77 @@ def view(request, resource_name=None, object_id=None):
     if request.path_info != resource.get_absolute_url():
         return redirect(resource.get_absolute_url())
 
+    #    print resource.get_field_sets()
+    
     # Convert resource to ElementTree and then to template tuples.
     resource_tree = resource.export_to_elementtree()
-    lr_content = _convert_to_template_tuples(resource_tree)
+    lr_content = _convert_to_template_tuples(resource_tree)[1]
+   
+    # Get the paths of each items and sort them
+    lr_content_paths = get_structure_paths(lr_content)
+    sorted_tuple = sorted(set(lr_content_paths))
+    
+    # Get repository classes names
+    available_classes = get_classes("metashare.repository")
+
+    # Create components lists 
+    corpus_text_info_list = []
+
+    # Create fields lists
+    descriptions = []
+    resource_names = []
+    resource_short_names = []
+    media_types = []
+    availabilities = []
+    licences = []
+    linguality_type = []
+    url = []
+    
+    # For each component or field, create a list of items.
+    # This is because 
+    for item, value in sorted_tuple:
+        
+        if item in available_classes:
+            # Create lists for components
+            tuple_index = str(value).replace(", ", "][").replace("(","[").replace(")","]")
+            tuple_index = tuple_index[:-3]
+            if item == "identificationInfo":
+                identification_info_tuple = eval("lr_content" + tuple_index)
+            if item == "corpusTextInfo":
+                corpus_text_info_list.append(eval("lr_content" + tuple_index))
+        else:
+            # Create lists for individual fields
+            tuple_index = str(value).replace(", ", "][").replace("(","[").replace(")","]")
+            tuple_index = "{}[1]".format(tuple_index[:-3])
+            if item == "description":
+                descriptions.append(eval("lr_content" + tuple_index))
+            elif item == "resourceName":
+                resource_names.append(eval("lr_content" + tuple_index))
+            elif item == "resourceShortName":
+                resource_short_names.append(eval("lr_content" + tuple_index))
+            elif item == "mediaType":
+                media_types.append(eval("lr_content" + tuple_index))
+            elif item == "resourceType":
+                resource_type = eval("lr_content" + tuple_index)
+            elif item == "lingualityType":
+                linguality_type = eval("lr_content" + tuple_index)
+            elif item == "availability":
+                availabilities.append(eval("lr_content" + tuple_index))
+            elif item == "licence":
+                licences.append(eval("lr_content" + tuple_index))
+            elif item == "url":
+                url.append(eval("lr_content" + tuple_index))
 
     # Define context for template rendering.
-    context = { 'resource': resource, 'lr_content': lr_content }
+    context = { 'resource': resource, 
+                'identification_tuple': identification_info_tuple, 
+                'corpusTextInfo': corpus_text_info_list,
+                'descriptions': descriptions, 'resourceNames': resource_names, 
+                'resourceShortNames': resource_short_names, 
+                'resourceType': resource_type, 
+                'lingualityType': linguality_type, 'mediaTypes': media_types, 
+                'availabilities': availabilities, 'licences': licences, 
+                'url': url}
     template = 'repository/lr_view.html'
 
     # For users who have edit permission for this resource, we have to add LR_EDIT 
@@ -473,6 +539,29 @@ def view(request, resource_name=None, object_id=None):
     # Render and return template with the defined context.
     ctx = RequestContext(request)
     return render_to_response(template, context, context_instance=ctx)
+
+
+def get_structure_paths(obj, path=(), memo=None):
+    """
+    Returns a list of tuples containing the path of each item in 
+    a nested structure of tuples and lists.
+    Mostly taken from:
+    http://code.activestate.com/recipes/577982-recursively-walk-python-objects/
+    """
+    if memo is None:
+        memo = set()
+    iterator = None
+    if isinstance(obj, (Sequence, Set)) and not isinstance(obj, (str, unicode)):
+        iterator = enumerate
+    if iterator:
+        if id(obj) not in memo:
+            memo.add(id(obj))
+            for path_component, value in iterator(obj):
+                for result in get_structure_paths(value, path + (path_component,), memo):
+                    yield result
+            memo.remove(id(obj))
+    else:
+        yield obj, path
 
 
 def _format_recommendations(recommended_resources):
