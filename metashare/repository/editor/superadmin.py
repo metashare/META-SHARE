@@ -28,8 +28,6 @@ from metashare.repository.editor.schemamodel_mixin import SchemaModelLookup
 from metashare.storage.models import MASTER
 from metashare.repository.model_utils import get_root_resources
 from metashare.repository.supermodel import REQUIRED, RECOMMENDED, OPTIONAL
-
-
 # Setup logging support.
 logging.basicConfig(level=settings.LOG_LEVEL)
 LOGGER = logging.getLogger('metashare.repository.superadmin')
@@ -126,6 +124,8 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         if self.is_x_to_many_relation(db_field):
             return self.formfield_for_relation(db_field, **kwargs)
         self.use_hidden_widget_for_one2one(db_field, kwargs)
+        lang_widget = self.add_lang_widget(db_field)
+        kwargs.update(lang_widget)
         formfield = super(SchemaModelAdmin, self).formfield_for_dbfield(db_field, **kwargs)
         self.use_related_widget_where_appropriate(db_field, kwargs, formfield)
         return formfield
@@ -313,6 +313,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             readonly = list(inline.get_readonly_fields(request))
             inline_admin_formset = helpers.InlineAdminFormSet(inline, formset,
                 fieldsets, readonly, model_admin=self)
+            self.add_lang_templ_params(inline_admin_formset)
             inline_admin_formsets.append(inline_admin_formset)
             media = media + inline_admin_formset.media
 
@@ -396,7 +397,13 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                                   queryset=inline.queryset(request))
                 #### begin modification ####
                 if prefix in self.model.get_fields()['required']:
-                    formset.forms[0].empty_permitted = False
+                    #formset.forms[0].empty_permitted = False
+                    req_forms = formset.forms
+                    for req_form in req_forms:
+                        if hasattr(req_form, 'changed_data'):
+                            if not 'DELETE' in req_form.changed_data:
+                                req_form.empty_permitted = False
+                                break
                 #### end modification ####    
 
                 formsets.append(formset)
@@ -449,7 +456,13 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                                   queryset=inline.queryset(request))
                 #### begin modification ####
                 if prefix in self.model.get_fields()['required']:
-                    formset.forms[0].empty_permitted = False
+                    #formset.forms[0].empty_permitted = False
+                    req_forms = formset.forms
+                    for req_form in req_forms:
+                        if hasattr(req_form, 'changed_data'):
+                            if not 'DELETE' in req_form.changed_data:
+                                req_form.empty_permitted = False
+                                break
                 #### end modification ####    
                 formsets.append(formset)
 
@@ -462,6 +475,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             readonly = list(inline.get_readonly_fields(request, obj))
             inline_admin_formset = helpers.InlineAdminFormSet(inline, formset,
                 fieldsets, readonly, model_admin=self)
+            self.add_lang_templ_params(inline_admin_formset)
             inline_admin_formsets.append(inline_admin_formset)
             media = media + inline_admin_formset.media
 
