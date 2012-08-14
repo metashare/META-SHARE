@@ -313,7 +313,9 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             readonly = list(inline.get_readonly_fields(request))
             inline_admin_formset = helpers.InlineAdminFormSet(inline, formset,
                 fieldsets, readonly, model_admin=self)
+            #### begin modification ####
             self.add_lang_templ_params(inline_admin_formset)
+            #### end modification ####
             inline_admin_formsets.append(inline_admin_formset)
             media = media + inline_admin_formset.media
 
@@ -463,7 +465,9 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             readonly = list(inline.get_readonly_fields(request, obj))
             inline_admin_formset = helpers.InlineAdminFormSet(inline, formset,
                 fieldsets, readonly, model_admin=self)
+            #### begin modification ####
             self.add_lang_templ_params(inline_admin_formset)
+            #### end modification ####
             inline_admin_formsets.append(inline_admin_formset)
             media = media + inline_admin_formset.media
 
