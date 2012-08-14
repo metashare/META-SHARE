@@ -683,7 +683,7 @@ class SchemaModel(models.Model):
         as first value and the list of all objects that have been created when
         import the given XML ElementTree as second value.
 
-        Returns (None, []) in case of errors.
+        Returns (None, [], error_msg) in case of errors.
         """
         LOGGER.debug(u'parent: {0}'.format(parent))
         
@@ -855,18 +855,19 @@ class SchemaModel(models.Model):
                             # list with correct status: 'D' if it was a
                             # duplicate, 'C' otherwise.
                             if _was_duplicate:
-                                _created.append((_instance, 'D'))
-
                                 # If we are allowed to perform cleanup, we do
                                 # so and also replace our _instance instance
                                 # with the "original" object.
                                 if _delete_duplicate_objects:
-                                    _created = SchemaModel._cleanup(_created,
+                                    SchemaModel._cleanup([(_instance, 'D')],
                                       only_remove_duplicates=True)
 
                                     # Replace _instance with "original".
                                     _instance = _duplicates[0]
                                     _created.append((_instance, 'O'))
+
+                                else:
+                                    _created.append((_instance, 'D'))
 
                             else:
                                 _created.append((_instance, 'C'))
@@ -1100,7 +1101,12 @@ class SchemaModel(models.Model):
         as first value and the list of all objects that have been created when
         import the given XML ElementTree as second value.
 
-        Returns (None, []) in case of errors.
+        Note that the storage object of an imported resource which had already
+        been imported previously but had been deleted later on, may still have
+        the deletion flag set to `True` (and may possibly have other storage
+        object fields with older values)!
+
+        Returns (None, [], error_msg) in case of errors.
         """
         return cls.import_from_elementtree(fromstring(element_string),
           parent=parent, copy_status=copy_status)
