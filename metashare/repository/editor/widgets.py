@@ -483,12 +483,14 @@ class ComboWidget(AdminTextInputWidget):
         Media sub class to inject custom CSS and JavaScript code.
         """
         css = {
-          'all': ('css/jquery-ui-1.8.15.custom.css', 'admin/css/combo.css')
+          'all': ('{}css/themes/smoothness/jquery-ui.css'
+                    .format(settings.ADMIN_MEDIA_PREFIX),
+                  '{}css/combo.css'.format(settings.ADMIN_MEDIA_PREFIX))
         }
-        js = ('js/jquery-ui-1.8.15.custom.js',
-              'js/autocomp.js',
-              'js/pycountry.js' )
-    
+        js = ('js/jquery-ui.min.js',
+              '{}js/autocomp.js'.format(settings.ADMIN_MEDIA_PREFIX),
+              '{}js/pycountry.js'.format(settings.ADMIN_MEDIA_PREFIX))
+
     def __init__(self, field_type=None, attrs=None):
         self.field_type = field_type
         self.id_field = attrs.pop('id_field')
@@ -516,12 +518,14 @@ class MultiComboWidget(MultiFieldWidget):
         Media sub class to inject custom CSS and JavaScript code.
         """
         css = {
-          'all': ('css/jquery-ui-1.8.15.custom.css', 'admin/css/combo.css')
+          'all': ('{}css/themes/smoothness/jquery-ui.css'
+                    .format(settings.ADMIN_MEDIA_PREFIX),
+                  '{}css/combo.css'.format(settings.ADMIN_MEDIA_PREFIX))
         }
-        js = ('js/jquery-ui-1.8.15.custom.js',
-              'js/autocomp.js',
-              'js/pycountry.js' )
-    
+        js = ('js/jquery-ui.min.js',
+              '{}js/autocomp.js'.format(settings.ADMIN_MEDIA_PREFIX),
+              '{}js/pycountry.js'.format(settings.ADMIN_MEDIA_PREFIX))
+
     def __init__(self, field_type=None, attrs=None, widget_id=None, max_length=None, **kwargs):
         self.field_type = field_type
         self.id_field = attrs.pop('id_field')
