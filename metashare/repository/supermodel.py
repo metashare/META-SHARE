@@ -855,18 +855,19 @@ class SchemaModel(models.Model):
                             # list with correct status: 'D' if it was a
                             # duplicate, 'C' otherwise.
                             if _was_duplicate:
-                                _created.append((_instance, 'D'))
-
                                 # If we are allowed to perform cleanup, we do
                                 # so and also replace our _instance instance
                                 # with the "original" object.
                                 if _delete_duplicate_objects:
-                                    _created = SchemaModel._cleanup(_created,
+                                    SchemaModel._cleanup([(_instance, 'D')],
                                       only_remove_duplicates=True)
 
                                     # Replace _instance with "original".
                                     _instance = _duplicates[0]
                                     _created.append((_instance, 'O'))
+
+                                else:
+                                    _created.append((_instance, 'D'))
 
                             else:
                                 _created.append((_instance, 'C'))
