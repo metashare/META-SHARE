@@ -6,21 +6,24 @@ from metashare.repository.supermodel import SchemaModel
 from metashare.repository.editor.editorutils import encode_as_inline
 from django.db.models.fields import FieldDoesNotExist
 from metashare.repository.editor.widgets import ComboWidget, MultiComboWidget
+from metashare.repository.models import inputInfoType_model,\
+    outputInfoType_model, languageInfoType_model, metadataInfoType_model,\
+    documentInfoType_model, annotationInfoType_model
 
 # Fields that need the ComboWidget/MultiComboWidget with autocomplete functionality
 # to use with languageId,languageName pairs.
 LANGUAGE_ID_NAME_FIELDS = {
-   "inputInfoType_model":
+   inputInfoType_model:
        {'type': 'multiple', 'id': "languageId", 'name': "languageName"},
-   "outputInfoType_model":
+   outputInfoType_model:
        {'type': 'multiple', 'id': "languageId", 'name': "languageName"},
-   "languageInfoType_model":
+   languageInfoType_model:
        {'type': 'single', 'id': "languageId", 'name': "languageName"},
-   "metadataInfoType_model":
+   metadataInfoType_model:
        {'type': 'multiple', 'id': "metadataLanguageId", 'name': "metadataLanguageName"},
-   "documentInfoType_model":
+   documentInfoType_model:
        {'type': 'single', 'id': "documentLanguageId", 'name': "documentLanguageName"},
-   "annotationInfoType_model":
+   annotationInfoType_model:
        {'type': 'single', 'id': "tagsetLanguageId", 'name': "tagsetLanguageName"},
 }
 
@@ -207,10 +210,10 @@ class SchemaModelLookup(object):
         return get_class_by_name('metashare.repository.admin', inline_class_name)
     
     def add_lang_widget(self, db_field):
-        model_name = self.model().__class__.__name__
+        model_cls = self.model().__class__
         widget_dict = {}
-        if model_name in LANGUAGE_ID_NAME_FIELDS:
-            item = LANGUAGE_ID_NAME_FIELDS[model_name]
+        if model_cls in LANGUAGE_ID_NAME_FIELDS:
+            item = LANGUAGE_ID_NAME_FIELDS[model_cls]
             if item['type'] == 'single':
                 attrs = {}
                 attrs['id_field'] = item['id']
@@ -237,11 +240,9 @@ class SchemaModelLookup(object):
         return widget_dict
     
     def add_lang_templ_params(self, inline_admin_formset):
-        model_name = inline_admin_formset.formset.form.Meta.model().__class__.__name__
-        if model_name in LANGUAGE_ID_NAME_FIELDS:
-            item = LANGUAGE_ID_NAME_FIELDS[model_name]
+        model_cls = inline_admin_formset.formset.form.Meta.model().__class__
+        if model_cls in LANGUAGE_ID_NAME_FIELDS:
+            item = LANGUAGE_ID_NAME_FIELDS[model_cls]
             inline_admin_formset.has_lang = True
             inline_admin_formset.lang_id = item['id']
             inline_admin_formset.lang_name = item['name']
-    
-
