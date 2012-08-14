@@ -1,15 +1,17 @@
+import shutil
+
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.auth.models import Permission, Group
+from django.contrib.auth.models import Permission
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.client import Client
 
 from metashare import test_utils, settings
-from metashare.accounts.models import UserProfile, EditorGroup, EditorGroupManagers, Organization
+from metashare.accounts.models import UserProfile, EditorGroup, \
+    EditorGroupManagers, Organization
 from metashare.repository import views
 from metashare.settings import DJANGO_BASE, ROOT_PATH
 from metashare.test_utils import create_user
-import shutil
 
 
 def _import_resource(fixture_name, editor_group=None):
