@@ -6,8 +6,8 @@ from metashare.repository.supermodel import SchemaModel
 from metashare.repository.editor.editorutils import encode_as_inline
 from django.db.models.fields import FieldDoesNotExist
 from metashare.repository.editor.widgets import ComboWidget, MultiComboWidget
-from metashare.repository.models import inputInfoType_model,\
-    outputInfoType_model, languageInfoType_model, metadataInfoType_model,\
+from metashare.repository.models import inputInfoType_model, \
+    outputInfoType_model, languageInfoType_model, metadataInfoType_model, \
     documentInfoType_model, annotationInfoType_model
 
 # Fields that need the ComboWidget/MultiComboWidget with autocomplete functionality
@@ -210,6 +210,7 @@ class SchemaModelLookup(object):
         return get_class_by_name('metashare.repository.admin', inline_class_name)
     
     def add_lang_widget(self, db_field):
+        # pylint: disable-msg=E1101
         model_cls = self.model().__class__
         widget_dict = {}
         if model_cls in LANGUAGE_ID_NAME_FIELDS:

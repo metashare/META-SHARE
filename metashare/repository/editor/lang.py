@@ -47,9 +47,9 @@ def read_lang_alpha2():
 def get_lang_list(xml_tree):
     lang_el_list = xml_tree.findall('lang')
     lang_list = []
-    for el in lang_el_list:
-        lang_id = el.find('id').text
-        lang_name = el.find('name').text
+    for lel in lang_el_list:
+        lang_id = lel.find('id').text
+        lang_name = lel.find('name').text
         lang_list.append((lang_id, lang_name))
     return lang_list
 
