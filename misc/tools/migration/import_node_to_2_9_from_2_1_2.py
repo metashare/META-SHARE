@@ -48,8 +48,11 @@ def import_users(import_folder):
     """
     # import users
     _import(os.path.join(import_folder, "{}".format(USERS)))
+    _update_pk("auth")
+    
     # import user profiles
     _import(os.path.join(import_folder, "{}".format(USER_PROFILES)))
+    _update_pk("accounts")
 
 
 def import_stats(import_folder):
@@ -62,6 +65,8 @@ def import_stats(import_folder):
     _import(os.path.join(import_folder, "{}".format(QUERY_STATS)))
     # import usage stats
     _import(os.path.join(import_folder, "{}".format(USAGE_STATS)))
+
+    _update_pk("stats")
 
 
 def import_resources(import_folder):
@@ -201,6 +206,25 @@ def _import(import_file):
         print "importing {}".format(_obj)
         _obj.save()
     _in.close()
+
+
+def _update_pk(app_name):
+    """
+    Updates the primary keys for the tables of the given app; 
+    required for PostgreSQL to avoid the next db element created using a pk that
+    already exists.
+    """
+    from StringIO import StringIO
+    from django.db import connection
+    from django.db.models.loading import get_app
+    from django.core.management import call_command
+    
+    commands = StringIO()
+    cursorll = connection.cursor()
+
+    if get_app(app_name, emptyOK=True):
+        call_command('sqlsequencereset', app_name, stdout=commands)
+        cursorll.execute(commands.getvalue())
 
 
 def recreate_sync_users():
