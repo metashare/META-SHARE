@@ -1231,11 +1231,6 @@ class Clazz(object):
                 sys.stdout.write("{}, ".format(clazz.name))
             sys.stdout.write('\n')
 
-        # We actually do not need the myString_model class inside models.py
-        # hence we remove it from the clazz_list before starting generation.
-        clazz_list.remove(cls.ClazzDict['myString'])
-        logging.warning('Removed unneeded class myString from class list.')
-
         for clazz in clazz_list:
             if clazz.choice_of:
                 clazz.generate_choice_model_()
@@ -1327,8 +1322,10 @@ class ClazzBaseMember(object):
             return 'OPTIONAL'
 
     def get_maxlength(self):
-        if isinstance(self.child, XschemaElement):
-            return self.child.getAppInfo('maxlen')
+        if isinstance(self.child, XschemaElementBase):
+            result = self.child.getRestrictionMaxLength()
+            if result != -1:
+                return result
         return None
 
 
