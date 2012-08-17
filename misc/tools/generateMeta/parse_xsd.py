@@ -113,7 +113,7 @@ def set_type_constants(nameSpace):
         NameType, NCNameType, QNameType, NameTypes, \
         AnyAttributeType, SimpleTypeType, RestrictionType, \
         WhiteSpaceType, ListType, EnumerationType, UnionType, \
-        AppInfoType, RelationType, \
+        AppInfoType, MaxLengthType, RelationType, \
         AnyType, \
         AnnotationType, DocumentationType, \
         OtherSimpleTypes
@@ -182,6 +182,7 @@ def set_type_constants(nameSpace):
     AnnotationType = nameSpace + 'annotation'
     DocumentationType = nameSpace + 'documentation'
     AppInfoType = nameSpace + 'appinfo'
+    MaxLengthType = nameSpace + 'maxLength'
     RelationType = u'relation'
     AnyType = nameSpace + 'any'
     OtherSimpleTypes = (
@@ -483,6 +484,7 @@ class XschemaElement(XschemaElementBase):
         self.listType = 0
         self.simpleBase = []
         self.documentation = ''
+        self.restrictionMaxLength = -1
         self.restrictionBase = None
         self.simpleContent = False
         self.extended = False
@@ -549,6 +551,8 @@ class XschemaElement(XschemaElementBase):
     def getSimpleBase(self): return self.simpleBase
     def setSimpleBase(self, simpleBase): self.simpleBase = simpleBase
     def addSimpleBase(self, simpleBase): self.simpleBase.append(simpleBase)
+    def getRestrictionMaxLength(self): return self.restrictionMaxLength
+    def setRestrictionMaxLength(self, mxLen): self.restrictionMaxLength = mxLen
     def getRestrictionBase(self): return self.restrictionBase
     def setRestrictionBase(self, base): self.restrictionBase = base
     def getRestrictionBaseObj(self):
@@ -1376,6 +1380,17 @@ class XschemaHandler(handler.ContentHandler):
                 self.inAppInfoType = 1
         elif self.inAppInfoType:
             self.appInfoTag = name
+        elif name == MaxLengthType:
+            # currently we only handle "maxLength" elements in restrictions
+            if self.inRestrictionType and attrs.has_key('value'):
+                parent_elem = self.stack[-1]
+                if isinstance(parent_elem, SimpleTypeElement):
+                    if len(self.stack) > 1:
+                        self.stack[-2].setRestrictionMaxLength(
+                                                        attrs.getValue('value'))
+                    # otherwise we currently don't use the maxLength restriction
+                else:
+                    parent_elem.setRestrictionMaxLength(attrs.getValue('value'))
         logging.debug("Start element stack: %d" % len(self.stack))
 
     def endElement(self, name):

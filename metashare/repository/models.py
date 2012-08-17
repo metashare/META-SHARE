@@ -35,7 +35,7 @@ HTTPURI_VALIDATOR = RegexValidator(r'(https?://.*|ftp://.*|www*)',
 # namespace of the META-SHARE metadata XML Schema
 SCHEMA_NAMESPACE = 'http://www.ilsp.gr/META-XMLSchema'
 # version of the META-SHARE metadata XML Schema
-SCHEMA_VERSION = '2.1'
+SCHEMA_VERSION = '3.0'
 
 def _compute_documentationInfoType_key():
     '''
@@ -3773,7 +3773,7 @@ class corpusAudioInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      default="audio", editable=False, max_length=10, )
+      default="audio", editable=False, max_length=1000, )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -4160,9 +4160,8 @@ class audioFormatInfoType_model(SchemaModel):
       verbose_name='Number of tracks', 
       help_text='Specifies the number of audio channels',
       
-      max_length=30,
-      choices=sorted(AUDIOFORMATINFOTYPE_NUMBEROFTRACKS_CHOICES['choices'],
-                     key=lambda choice: choice[1]),
+      max_length=AUDIOFORMATINFOTYPE_NUMBEROFTRACKS_CHOICES['max_length'],
+      choices=AUDIOFORMATINFOTYPE_NUMBEROFTRACKS_CHOICES['choices'],
       blank=True, null=True, )
 
     recordingQuality = models.CharField(
@@ -4336,7 +4335,7 @@ class corpusTextInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      default="text", editable=False, max_length=10, )
+      default="text", editable=False, max_length=1000, )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -4564,7 +4563,7 @@ class corpusVideoInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      default="video", editable=False, max_length=5, )
+      default="video", editable=False, max_length=1000, )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -4905,7 +4904,7 @@ class corpusImageInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      default="image", editable=False, max_length=10, )
+      default="image", editable=False, max_length=1000, )
 
     # OneToMany field: modalityInfo
 
@@ -5238,7 +5237,7 @@ class corpusTextNumericalInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      default="textNumerical", editable=False, max_length=20, )
+      default="textNumerical", editable=False, max_length=1000, )
 
     # OneToMany field: modalityInfo
 
@@ -5404,7 +5403,7 @@ class corpusTextNgramInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      default="textNgram", editable=False, max_length=10, )
+      default="textNgram", editable=False, max_length=1000, )
 
     ngramInfo = models.OneToOneField("ngramInfoType_model", 
       verbose_name='Ngram', )
@@ -5820,7 +5819,7 @@ class languageDescriptionTextInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      default="text", editable=False, max_length=10, )
+      default="text", editable=False, max_length=1000, )
 
     creationInfo = models.OneToOneField("creationInfoType_model", 
       verbose_name='Creation', 
@@ -5911,7 +5910,7 @@ class languageDescriptionVideoInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      default="video", editable=False, max_length=10, )
+      default="video", editable=False, max_length=1000, )
 
     creationInfo = models.OneToOneField("creationInfoType_model", 
       verbose_name='Creation', 
@@ -6002,7 +6001,7 @@ class languageDescriptionImageInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      default="image", editable=False, max_length=10, )
+      default="image", editable=False, max_length=1000, )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -6220,7 +6219,7 @@ class lexicalConceptualResourceAudioInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      default="audio", editable=False, max_length=10, )
+      default="audio", editable=False, max_length=1000, )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -6296,7 +6295,7 @@ class lexicalConceptualResourceTextInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      default="text", editable=False, max_length=10, )
+      default="text", editable=False, max_length=1000, )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -6368,7 +6367,7 @@ class lexicalConceptualResourceVideoInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      default="video", editable=False, max_length=10, )
+      default="video", editable=False, max_length=1000, )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -6444,7 +6443,7 @@ class lexicalConceptualResourceImageInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      default="image", editable=False, max_length=10, )
+      default="image", editable=False, max_length=1000, )
 
     # OneToMany field: modalityInfo
 
@@ -7211,7 +7210,7 @@ class lexicalConceptualResourceInfoType_model(resourceComponentTypeType_model):
     resourceType = models.CharField(
       verbose_name='Resource', 
       help_text='Specifies the type of the resource being described',
-      default="lexicalConceptualResource", editable=False, max_length=30, )
+      default="lexicalConceptualResource", editable=False, max_length=1000, )
 
     lexicalConceptualResourceType = models.CharField(
       verbose_name='Lexical conceptual resource type', 
@@ -7367,7 +7366,7 @@ class toolServiceInfoType_model(resourceComponentTypeType_model):
       verbose_name='Resource', 
       help_text='The type of the resource that a tool or service takes a' \
       's input or produces as output',
-      default="toolService", editable=False, max_length=30, )
+      default="toolService", editable=False, max_length=1000, )
 
     toolServiceType = models.CharField(
       verbose_name='Tool service type', 
@@ -7447,7 +7446,7 @@ class corpusInfoType_model(resourceComponentTypeType_model):
     resourceType = models.CharField(
       verbose_name='Resource', 
       help_text='Specifies the type of the resource being described',
-      default="corpus", editable=False, max_length=30, )
+      default="corpus", editable=False, max_length=1000, )
 
     corpusMediaType = models.OneToOneField("corpusMediaTypeType_model", 
       verbose_name='Corpus media', 

@@ -266,7 +266,8 @@ def replace_group_defs(def_dict, refs):
 
 
 def raise_anon_complextypes(root):
-    """ Raise each anonymous complexType to top level and give it a name.
+    """ Raise each anonymous complexType without simple content to top level and
+    give it a name.
     Rename if necessary to prevent duplicates.
     """
     element_tag = '{%s}element' % (Xsd_namespace_uri, )
@@ -281,7 +282,7 @@ def raise_anon_complextypes(root):
     for node in defs:
         type_name = node.get('name')
         def_names[type_name] = node
-    # Find all complexTypes below top level.
+    # Find all complexTypes below top level which do not have simple content.
     #   Raise them to top level and name them.
     #   Re-name if there is a duplicate (simpleType, complexType, or
     #   previous renamed type).
@@ -291,7 +292,8 @@ def raise_anon_complextypes(root):
     el = etree.Comment(text="Raised anonymous complexType definitions")
     el.tail = "\n\n"
     root.append(el)
-    defs = root.xpath('./*/*//xs:complexType', namespaces=Namespaces)
+    defs = root.xpath('./*/*//xs:complexType[not(xs:simpleContent)]',
+                      namespaces=Namespaces)
     for node in defs:
         parent = node.getparent()
         if parent.tag != element_tag:

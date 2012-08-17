@@ -214,6 +214,9 @@ def createClazz(prefix, element, processed):
     if not element.isExplicitDefine():
         logging.debug("Not an explicit define, returning.")
         return
+    if element.getSimpleContent():
+        logging.debug("Simple content, returning.")
+        return
     # If this element is an extension (has a base) and the base has
     #   not been generated, then postpone it.
     if parentName:
