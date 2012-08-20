@@ -55,7 +55,7 @@ class EditorTest(SeleniumTestCase):
         # load test fixture and set its status to 'published'
         test_utils.setup_test_storage()
         _result = test_utils.import_xml(TESTFIXTURE_XML)
-        resource = resourceInfoType_model.objects.get(pk=_result[0].id)
+        resource = resourceInfoType_model.objects.get(pk=_result.id)
         resource.editor_groups.add(self.test_editor_group)
         resource.storage_object.published = True
         # this also saves the storage object:

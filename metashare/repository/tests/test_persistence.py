@@ -63,7 +63,7 @@ class PersistenceTest(TestCase):
         """
         # load test fixture; its initial status is 'internal'
         _result = test_utils.import_xml(TESTFIXTURE_XML)
-        resource = resourceInfoType_model.objects.get(pk=_result[0].id)
+        resource = resourceInfoType_model.objects.get(pk=_result.id)
         _storage_object = resource.storage_object
         _storage_object.update_storage()
         # initial status is 'internal'
@@ -276,26 +276,26 @@ class UpdateTest(TestCase):
         settings.MAX_DIGEST_AGE = 6
         # import resource
         _result = test_utils.import_xml(TESTFIXTURE_XML)
-        _so = resourceInfoType_model.objects.get(pk=_result[0].id).storage_object
+        _so = resourceInfoType_model.objects.get(pk=_result.id).storage_object
         self.assertIsNone(_so.digest_last_checked)
         # set status to ingested
         _so.publication_status = INGESTED
         _so.update_storage()
-        _so = resourceInfoType_model.objects.get(pk=_result[0].id).storage_object
+        _so = resourceInfoType_model.objects.get(pk=_result.id).storage_object
         self.assertIsNotNone(_so.digest_last_checked)
         # remember 'last_checked' and 'modified' to compare against it later
         _last_checked = _so.digest_last_checked
         _modified = _so.digest_modified
         # check if an update is required; this is not the case
         update_digests()
-        _so = resourceInfoType_model.objects.get(pk=_result[0].id).storage_object
+        _so = resourceInfoType_model.objects.get(pk=_result.id).storage_object
         # check that digest was not updated
         self.assertEquals(_modified, _so.digest_modified)
         self.assertEquals(_last_checked, _so.digest_last_checked)
         # wait 3 seconds and check again
         time.sleep(3)
         update_digests()
-        _so = resourceInfoType_model.objects.get(pk=_result[0].id).storage_object
+        _so = resourceInfoType_model.objects.get(pk=_result.id).storage_object
         # now an update should have happened, but the underlying data has not 
         # changed, so digest_modified is not changed
         self.assertEquals(_modified, _so.digest_modified)
