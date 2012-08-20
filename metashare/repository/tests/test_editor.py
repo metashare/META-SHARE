@@ -12,9 +12,11 @@ from metashare.accounts.models import EditorGroup, EditorGroupManagers, \
     OrganizationApplication
 from metashare.repository import models
 from metashare.repository.models import languageDescriptionInfoType_model, \
-    lexicalConceptualResourceInfoType_model, personInfoType_model
+    lexicalConceptualResourceInfoType_model, personInfoType_model,\
+    resourceInfoType_model
 from metashare.settings import DJANGO_BASE, ROOT_PATH
-from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, REMOTE
+from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, REMOTE,\
+    StorageObject
 
 
 
@@ -1336,6 +1338,32 @@ class DestructiveTests(TestCase):
         response = client.get('/{0}repository/search/'.format(DJANGO_BASE),
           follow=True, data={'q': 'reveal'})
         self.assertContains(response, 'No results were found')
+        
+    def test_reimporting_deleted_resource_unsets_deleted_flag(self):
+        # one resource in db
+        self.assertEqual(len(StorageObject.objects.all()), 1)
+        self.assertEqual(len(resourceInfoType_model.objects.all()), 1)
+        client = _client_with_user_logged_in(self.superuser_login)
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE))
+        self.assertContains(response, '1 Language Resource')
+        # resource still in db after setting the deleted flag
+        self.testfixture.storage_object.deleted = True
+        self.testfixture.storage_object.save()
+        self.assertEqual(len(StorageObject.objects.all()), 1)
+        self.assertEqual(len(resourceInfoType_model.objects.all()), 1)
+        # but not visible
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE))
+        self.assertContains(response, '0 Language Resources')
+        # reimport the same resource
+        self.testfixture = _import_test_resource(pub_status=PUBLISHED)
+        # still only one resource in db
+        self.assertEqual(len(StorageObject.objects.all()), 1)   
+        self.assertEqual(len(resourceInfoType_model.objects.all()), 1)
+        # but it is undeleted now
+        self.assertFalse(self.testfixture.storage_object.deleted)
+        # and visible again
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE))
+        self.assertContains(response, '1 Language Resource')
 
 
 class EditorGroupApplicationTests(TestCase):
