@@ -21,7 +21,7 @@ def _import_resource(res_file_name):
     PUBLISHED; returns the resource
     """
     res = test_utils.import_xml(
-      '{0}/recommendations/fixtures/{1}'.format(ROOT_PATH, res_file_name))[0]
+      '{0}/recommendations/fixtures/{1}'.format(ROOT_PATH, res_file_name))
     res.storage_object.publication_status = PUBLISHED
     res.storage_object.save()
     res.storage_object.update_storage()

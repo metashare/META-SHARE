@@ -6,16 +6,17 @@ from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.test.client import Client
-
 from metashare import test_utils
 from metashare.accounts.models import EditorGroup, EditorGroupManagers, \
-  EditorGroupApplication, Organization, OrganizationManagers, \
-  OrganizationApplication
+    EditorGroupApplication, Organization, OrganizationManagers, \
+    OrganizationApplication
 from metashare.repository import models
 from metashare.repository.models import languageDescriptionInfoType_model, \
-  lexicalConceptualResourceInfoType_model, personInfoType_model
+    lexicalConceptualResourceInfoType_model, personInfoType_model
 from metashare.settings import DJANGO_BASE, ROOT_PATH
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, REMOTE
+
+
 
 ADMINROOT = '/{0}editor/'.format(DJANGO_BASE)
 TESTFIXTURE_XML = '{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
@@ -30,8 +31,7 @@ LEX_CONC_RES_XML = '{}/repository/test_fixtures/published-lexConcept-Text-FreEng
 
 def _import_test_resource(editor_group=None, path=TESTFIXTURE_XML,
                           pub_status=INGESTED):
-    result = test_utils.import_xml(path)
-    resource = result[0]
+    resource = test_utils.import_xml(path)
     if not editor_group is None:
         resource.editor_groups.add(editor_group)
         resource.save()
@@ -1521,7 +1521,7 @@ class EditorGroupApplicationTests(TestCase):
         """
         client = Client()
         client.login(username='editoruser', password='secret')
-        response = client.post('/{0}accounts/add_default_editor_groups/'.format(DJANGO_BASE), \
+        client.post('/{0}accounts/add_default_editor_groups/'.format(DJANGO_BASE), \
           {'editor_group': self.test_editor_group.pk}, follow=True)
         response = client.post('/{0}accounts/remove_default_editor_groups/'.format(DJANGO_BASE), \
           {'editor_group': self.test_editor_group.pk}, follow=True)

@@ -33,7 +33,7 @@ class ModelTest(TestCase):
         test_utils.setup_test_storage()
         _fixture = '{0}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
         _result = test_utils.import_xml(_fixture)
-        self.resource_id = _result[0].id
+        self.resource_id = _result.id
     
     def tearDown(self):
         """
@@ -56,9 +56,7 @@ class ModelTest(TestCase):
                 _database[_model] = _inst.objects.count()
         
         _broken_fixture = '{0}/repository/fixtures/broken.xml'.format(ROOT_PATH)
-        result = test_utils.import_xml(_broken_fixture)
-        
-        self.assertEqual(result[:2], (None, []))
+        self.assertRaises(Exception, test_utils.import_xml, _broken_fixture)
         
         errors = []
         for _model in _models:
@@ -77,7 +75,7 @@ class ModelTest(TestCase):
             _import_xml = _import_file.read()
             register_namespace('', SCHEMA_NAMESPACE)
             _import_xml = tostring(fromstring(_import_xml))
-        _export_xml = tostring(_result[0].export_to_elementtree())
+        _export_xml = tostring(_result.export_to_elementtree())
     # cfedermann: uncomment these lines to dump import/export XML to file.
     #
     #with open('/tmp/_import.xml', 'w') as _out:
@@ -158,9 +156,9 @@ class ModelUtilsTest(TestCase):
         """
         test_utils.setup_test_storage()
         self.test_res_1 = test_utils.import_xml(
-            '{0}/repository/fixtures/testfixture.xml'.format(ROOT_PATH))[0]
+            '{0}/repository/fixtures/testfixture.xml'.format(ROOT_PATH))
         self.test_res_2 = test_utils.import_xml(
-            '{0}/repository/fixtures/ILSP10.xml'.format(ROOT_PATH))[0]
+            '{0}/repository/fixtures/ILSP10.xml'.format(ROOT_PATH))
 
     def tearDown(self):
         """

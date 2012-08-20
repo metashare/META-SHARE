@@ -91,8 +91,7 @@ class MetadataSyncTest (TestCase):
     @classmethod
     def import_test_resource(cls, filename, pub_status, copy_status=MASTER, url=settings.DJANGO_URL):
         _fixture = '{0}/repository/fixtures/{1}'.format(settings.ROOT_PATH, filename)
-        result = test_utils.import_xml(_fixture)
-        resource = result[0]
+        resource = test_utils.import_xml(_fixture)
         resource.storage_object.publication_status = pub_status
         resource.storage_object.copy_status = copy_status
         resource.storage_object.source_url = url
