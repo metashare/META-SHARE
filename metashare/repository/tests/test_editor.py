@@ -15,7 +15,7 @@ from metashare.repository.models import languageDescriptionInfoType_model, \
     lexicalConceptualResourceInfoType_model, personInfoType_model,\
     resourceInfoType_model
 from metashare.settings import DJANGO_BASE, ROOT_PATH
-from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, REMOTE,\
+from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, REMOTE, \
     StorageObject
 
 
@@ -819,6 +819,34 @@ class DestructiveTests(TestCase):
     This test case is separate from the `EditorTest` above as it requires setup
     and teardown methods per test.
     """
+    
+    # static variables to be initialized in setUpClass():
+    superuser_login = None
+    editor_login = None
+    manager_login = None
+
+    @classmethod
+    def setUpClass(cls):
+        
+        # login POST dict
+        DestructiveTests.superuser_login = {
+            REDIRECT_FIELD_NAME: ADMINROOT,
+            LOGIN_FORM_KEY: 1,
+            'username': 'superuser',
+            'password': 'secret',
+        }
+        DestructiveTests.editor_login = {
+            REDIRECT_FIELD_NAME: ADMINROOT,
+            LOGIN_FORM_KEY: 1,
+            'username': 'editoruser',
+            'password': 'secret',
+        }
+        DestructiveTests.manager_login = {
+            REDIRECT_FIELD_NAME: ADMINROOT,
+            LOGIN_FORM_KEY: 1,
+            'username': 'manageruser',
+            'password': 'secret',
+        }
 
     def setUp(self):
         """
@@ -839,25 +867,6 @@ class DestructiveTests(TestCase):
             (self.test_editor_group, self.test_editor_group_manager))
 
         User.objects.create_superuser('superuser', 'su@example.com', 'secret')
-        # login POST dict
-        self.superuser_login = {
-            REDIRECT_FIELD_NAME: ADMINROOT,
-            LOGIN_FORM_KEY: 1,
-            'username': 'superuser',
-            'password': 'secret',
-        }
-        self.editor_login = {
-            REDIRECT_FIELD_NAME: ADMINROOT,
-            LOGIN_FORM_KEY: 1,
-            'username': 'editoruser',
-            'password': 'secret',
-        }
-        self.manager_login = {
-            REDIRECT_FIELD_NAME: ADMINROOT,
-            LOGIN_FORM_KEY: 1,
-            'username': 'manageruser',
-            'password': 'secret',
-        }
 
         self.testfixture = _import_test_resource(self.test_editor_group,
                                                  pub_status=PUBLISHED)
