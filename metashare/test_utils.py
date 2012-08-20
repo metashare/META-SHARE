@@ -5,7 +5,7 @@ Utility functions for unit tests useful across apps.
 from django.contrib.auth.models import Group, User
 from django.core.management import call_command
 from django.test.testcases import TestCase
-from metashare import settings
+from metashare import settings, xml_utils
 from metashare.accounts.admin import EditorGroupManagersAdmin, \
   OrganizationManagersAdmin
 from metashare.accounts.models import EditorGroupApplication, EditorGroup, \
@@ -17,7 +17,7 @@ from metashare.repository.models import resourceInfoType_model, \
   projectInfoType_model
 from metashare.recommendations.models import TogetherManager
 from metashare.storage.models import PUBLISHED, MASTER, StorageObject, \
-  RemovedObject
+  RemovedObject, INTERNAL
 from metashare.xml_utils import import_from_file
 import os
 from metashare.repository import supermodel
@@ -85,11 +85,13 @@ def create_user(username, email, password):
     return User.objects.create_user(username, email, password)
 
 def import_xml(filename, copy_status=MASTER):
+    """
+    Returns the imported resource object on success, raises and Exception on failure.
+    """
     _xml = open(filename)
     _xml_string = _xml.read()
     _xml.close()
-    result = resourceInfoType_model.import_from_string(_xml_string, copy_status=copy_status)
-    return result
+    return xml_utils.import_from_string(_xml_string, INTERNAL, copy_status)
 
 def import_xml_or_zip(filename, copy_status=MASTER):
     _xml = open(filename, 'rb')

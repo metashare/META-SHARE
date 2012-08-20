@@ -22,7 +22,7 @@ class EmailPictureTest(TestCase):
         test_utils.setup_test_storage()
         _fixture = '{0}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
         _result = test_utils.import_xml(_fixture)
-        self.resource_id = _result[0].id
+        self.resource_id = _result.id
     
     def tearDown(self):
         """
