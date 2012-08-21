@@ -529,7 +529,7 @@ def reset(request, uuid=None):
       'lastname': user.last_name,
       'shortname': user.username,
       'random_password': random_password}
-    email = render_to_string('accounts/activation.email', data)
+    email = render_to_string('accounts/reactivation.email', data)
     
     try:
         # Send out re-activation email to the given email address.

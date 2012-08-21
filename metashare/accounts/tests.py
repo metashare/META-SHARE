@@ -10,7 +10,7 @@ from django.test.client import Client
 
 from metashare import test_utils
 from metashare.accounts import views
-from metashare.accounts.models import RegistrationRequest
+from metashare.accounts.models import RegistrationRequest, ResetRequest
 from metashare.settings import DJANGO_BASE
 
 
@@ -169,3 +169,80 @@ class RegistrationRequestTest(django.test.TestCase):
 
     def tearDown(self):
         test_utils.clean_user_db()
+
+
+class ResetPasswordTest(django.test.TestCase):
+    
+    user = None
+    
+    def setUp(self):
+        """
+        Sets up some resources with which to test.
+        """
+        self.user = User.objects.create_user('normaluser', 'normal@example.com', 'secret')
+        
+        
+    def tearDown(self):
+        """
+        Clean up the test
+        """
+        test_utils.clean_user_db()
+    
+    
+    def test_reset_requires_user_name_and_email(self):
+        client = Client()
+        # invalid user name
+        post_data = {'username':'normaluserABC', 'email':'normal@example.com'}
+        response = client.post('/{0}accounts/reset/'.format(DJANGO_BASE),
+          follow=True, data=post_data)
+        self.assertEqual('accounts/reset_account.html', response.templates[0].name)
+        self.assertContains(response, "Not a valid username-email combination",
+          status_code=200)
+        # invalid email
+        post_data = {'username':'normaluser', 'email':'normal@example.comABC'}
+        response = client.post('/{0}accounts/reset/'.format(DJANGO_BASE),
+          follow=True, data=post_data)
+        self.assertEqual('accounts/reset_account.html', response.templates[0].name)
+        self.assertContains(response, "Not a valid username-email combination",
+          status_code=200)
+        # invalid user name and email
+        post_data = {'username':'normaluserABC', 'email':'normal@example.comABC'}
+        response = client.post('/{0}accounts/reset/'.format(DJANGO_BASE),
+          follow=True, data=post_data)
+        self.assertEqual('accounts/reset_account.html', response.templates[0].name)
+        self.assertContains(response, "Not a valid username-email combination",
+          status_code=200)
+        # valid user name and email
+        post_data = {'username':'normaluser', 'email':'normal@example.com'}
+        response = client.post('/{0}accounts/reset/'.format(DJANGO_BASE),
+          follow=True, data=post_data)
+        self.assertEqual('frontpage.html', response.templates[0].name)
+        self.assertContains(
+          response, 
+          "We have received your reset request and sent you an email with further reset instructions",
+          status_code=200)
+
+
+    def test_reset_request_validation(self):
+        client = Client()
+        old_passwd = self.user.password
+        post_data = {'username':'normaluser', 'email':'normal@example.com'}
+        # create reset request
+        client.post('/{0}accounts/reset/'.format(DJANGO_BASE),
+          follow=True, data=post_data)
+        self.assertNotEqual(None, ResetRequest.objects.get(user=self.user))
+        request = ResetRequest.objects.get(user=self.user)
+        # confirm reset request
+        response = client.get(
+          '/{0}accounts/reset/{1}/'.format(DJANGO_BASE, request.uuid), 
+          follow=True)
+        self.assertEqual('frontpage.html', response.templates[0].name)
+        self.assertContains(
+          response, 
+          "We have re-activated your user account and sent you an email with your personal password which allows you to login to the website.",
+          status_code=200)
+        # check that password has changed for user
+        self.user = User.objects.get(username=self.user.username)
+        self.assertNotEquals(old_passwd, self.user.password)
+        # check that reset request is deleted
+        self.assertEquals(0, len(ResetRequest.objects.all()))
