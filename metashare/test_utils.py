@@ -4,25 +4,25 @@ Utility functions for unit tests useful across apps.
 """
 from django.contrib.auth.models import Group, User
 from django.core.management import call_command
+from django.test.client import Client
 from django.test.testcases import TestCase
 from metashare import settings, xml_utils
 from metashare.accounts.admin import EditorGroupManagersAdmin, \
-  OrganizationManagersAdmin
+    OrganizationManagersAdmin
 from metashare.accounts.models import EditorGroupApplication, EditorGroup, \
-  EditorGroupManagers, RegistrationRequest, ResetRequest, UserProfile
+    EditorGroupManagers, RegistrationRequest, ResetRequest, UserProfile
+from metashare.recommendations.models import TogetherManager
+from metashare.repository import supermodel
 from metashare.repository.management import GROUP_GLOBAL_EDITORS
 from metashare.repository.models import resourceInfoType_model, \
-  personInfoType_model, actorInfoType_model, documentationInfoType_model, \
-  documentInfoType_model, targetResourceInfoType_model, organizationInfoType_model, \
-  projectInfoType_model
-from metashare.recommendations.models import TogetherManager
+    personInfoType_model, actorInfoType_model, documentationInfoType_model, \
+    documentInfoType_model, targetResourceInfoType_model, organizationInfoType_model, \
+    projectInfoType_model
+from metashare.settings import DJANGO_BASE
 from metashare.storage.models import PUBLISHED, MASTER, StorageObject, \
-  RemovedObject, INTERNAL
+    RemovedObject, INTERNAL
 from metashare.xml_utils import import_from_file
 import os
-from metashare.repository import supermodel
-
-
 
 
 TEST_STORAGE_PATH = '{0}/test-tmp'.format(settings.ROOT_PATH)
@@ -83,6 +83,16 @@ def clean_storage():
 def create_user(username, email, password):
     User.objects.all().filter(username=username).delete()
     return User.objects.create_user(username, email, password)
+
+def get_client_with_user_logged_in(user_credentials):
+    admin_root = '/{0}editor/'.format(DJANGO_BASE)
+    client = Client()
+    client.get(admin_root)
+    response = client.post(admin_root, user_credentials)
+    if response.status_code != 302:
+        raise Exception, 'could not log in user with credentials: {}\n' \
+            'response was: {}'.format(user_credentials, response)
+    return client
 
 def import_xml(filename, copy_status=MASTER):
     """
