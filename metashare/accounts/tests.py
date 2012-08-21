@@ -246,3 +246,37 @@ class ResetPasswordTest(django.test.TestCase):
         self.assertNotEquals(old_passwd, self.user.password)
         # check that reset request is deleted
         self.assertEquals(0, len(ResetRequest.objects.all()))
+
+
+class ChangePasswordTest(django.test.TestCase):
+    
+    user = None
+    
+    def setUp(self):
+        """
+        Sets up some resources with which to test.
+        """
+        self.user = User.objects.create_user('normaluser', 'normal@example.com', 'secret')
+        
+        
+    def tearDown(self):
+        """
+        Clean up the test
+        """
+        test_utils.clean_user_db()
+    
+    def test_password_change(self):
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        old_passwd = self.user.password
+        post_data = {'old_password':'secret', 'new_password1':'new_secret', 'new_password2':'new_secret'}
+        response = client.post('/{0}accounts/profile/change_password/'.format(DJANGO_BASE),
+          follow=True, data=post_data)
+        self.assertEqual('accounts/change_password_done.html', response.templates[0].name)
+        self.assertContains(
+          response, "Password change successful", status_code=200)
+        # check that password has changed for user
+        self.user = User.objects.get(username=self.user.username)
+        self.assertNotEquals(old_passwd, self.user.password)
+        
+        
