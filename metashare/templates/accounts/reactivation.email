@@ -1,0 +1,7 @@
+Dear {{firstname}} {{lastname}},
+
+We have now reset your META-SHARE user account "{{shortname}}".
+Your password is "{{random_password}}".
+We advise that you change your password the next time you login to META-SHARE. 
+
+Thank you for using META-SHARE!
