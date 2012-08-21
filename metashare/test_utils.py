@@ -18,7 +18,7 @@ from metashare.repository.models import resourceInfoType_model, \
     personInfoType_model, actorInfoType_model, documentationInfoType_model, \
     documentInfoType_model, targetResourceInfoType_model, organizationInfoType_model, \
     projectInfoType_model
-from metashare.settings import DJANGO_BASE
+from metashare.settings import LOGIN_URL
 from metashare.storage.models import PUBLISHED, MASTER, StorageObject, \
     RemovedObject, INTERNAL
 from metashare.xml_utils import import_from_file
@@ -85,10 +85,9 @@ def create_user(username, email, password):
     return User.objects.create_user(username, email, password)
 
 def get_client_with_user_logged_in(user_credentials):
-    admin_root = '/{0}editor/'.format(DJANGO_BASE)
     client = Client()
-    client.get(admin_root)
-    response = client.post(admin_root, user_credentials)
+    client.get(LOGIN_URL)
+    response = client.post(LOGIN_URL, user_credentials)
     if response.status_code != 302:
         raise Exception, 'could not log in user with credentials: {}\n' \
             'response was: {}'.format(user_credentials, response)
