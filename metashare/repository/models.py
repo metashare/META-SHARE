@@ -2745,9 +2745,11 @@ class distributionInfoType_model(SchemaModel):
       help_text='Specifies the start date of availability of a resource',
       blank=True, null=True, )
 
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+    def real_unicode_(self):
+        # pylint: disable-msg=C0301
+        formatargs = ['availability', 'licenceInfo', ]
+        formatstring = u'{}, licenses: {}'
+        return self.unicode_(formatstring, formatargs)
 
 MEMBERSHIPINFOTYPE_MEMBERSHIPINSTITUTION_CHOICES = _make_choices_from_list([
   u'ELRA', u'LDC', u'TST-CENTRALE', u'other', 
@@ -2957,9 +2959,11 @@ class licenceInfoType_model(SchemaModel):
 
     back_to_distributioninfotype_model = models.ForeignKey("distributionInfoType_model",  blank=True, null=True)
 
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+    def real_unicode_(self):
+        # pylint: disable-msg=C0301
+        formatargs = ['licence', ]
+        formatstring = u'{}'
+        return self.unicode_(formatstring, formatargs)
 
 CHARACTERENCODINGINFOTYPE_CHARACTERENCODING_CHOICES = _make_choices_from_list([
   u'US-ASCII', u'windows-1250', u'windows-1251', u'windows-1252',
@@ -3495,7 +3499,7 @@ class usageInfoType_model(SchemaModel):
     def real_unicode_(self):
         # pylint: disable-msg=C0301
         formatargs = ['foreseenUseInfo', 'actualUseInfo', ]
-        formatstring = u'foreseen: {} / actual: {}'
+        formatstring = u'foreseen uses: {} / actual uses: {}'
         return self.unicode_(formatstring, formatargs)
 
 FORESEENUSEINFOTYPE_FORESEENUSE_CHOICES = _make_choices_from_list([
@@ -3574,9 +3578,11 @@ class foreseenUseInfoType_model(SchemaModel):
 
     back_to_usageinfotype_model = models.ForeignKey("usageInfoType_model",  blank=True, null=True)
 
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+    def real_unicode_(self):
+        # pylint: disable-msg=C0301
+        formatargs = ['foreseenUse', 'useNLPSpecific', ]
+        formatstring = u'{}, NLP specific: {}'
+        return self.unicode_(formatstring, formatargs)
 
 ACTUALUSEINFOTYPE_ACTUALUSE_CHOICES = _make_choices_from_list([
   u'humanUse', u'nlpApplications', 
@@ -3691,7 +3697,7 @@ class actualUseInfoType_model(SchemaModel):
     def real_unicode_(self):
         # pylint: disable-msg=C0301
         formatargs = ['actualUse', 'useNLPSpecific', ]
-        formatstring = u'{} {}'
+        formatstring = u'{}, NLP specific: {}'
         return self.unicode_(formatstring, formatargs)
 
 # pylint: disable-msg=C0103

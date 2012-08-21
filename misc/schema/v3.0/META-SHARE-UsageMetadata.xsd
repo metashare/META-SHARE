@@ -163,7 +163,7 @@
 		<xs:annotation>
 			<xs:documentation>Groups information on usage of the resource (both intended and actual use)</xs:documentation>
 			<xs:appinfo>
-				<render-short>foreseen: {foreseenUseInfo} / actual: {actualUseInfo}</render-short>
+				<render-short>foreseen uses: {foreseenUseInfo} / actual uses: {actualUseInfo}</render-short>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
@@ -205,6 +205,9 @@
 	<xs:complexType name="foreseenUseInfoType">
 		<xs:annotation>
 			<xs:documentation>Groups information on the use for which the resource is created</xs:documentation>
+			<xs:appinfo>
+				<render-short>{foreseenUse}, NLP specific: {useNLPSpecific}</render-short>
+			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="foreseenUse">
@@ -237,7 +240,7 @@
 		<xs:annotation>
 			<xs:documentation>Groups information on how the resource has already been used</xs:documentation>
 			<xs:appinfo>
-				<render-short>{actualUse} {useNLPSpecific}</render-short>
+				<render-short>{actualUse}, NLP specific: {useNLPSpecific}</render-short>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>

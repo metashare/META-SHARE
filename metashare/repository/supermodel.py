@@ -1118,10 +1118,17 @@ class SchemaModel(models.Model):
     def get_unicode_rec_(self, field_path, separator):
         field_spec = field_path[0]
         if len(field_path) == 1:
-            value = getattr(self, field_spec, None)
-            if not value:
+            if not any(field_spec == xsd_name
+                       for xsd_name, _, _ in self.__schema_fields__):
                 return u''
-            model_field = self._meta.get_field_by_name(field_spec)
+            field_name = (field_name for xsd_name, field_name, _
+                    in self.__schema_fields__ if xsd_name == field_spec).next()
+            value = getattr(self, field_name, None)
+            if field_name.endswith('_set'):
+                field_name = field_name[:-4]
+            if not value:
+                return u'?'
+            model_field = self._meta.get_field_by_name(field_name)
             if isinstance(model_field[0], models.CharField) or \
               isinstance(model_field[0], MultiSelectField):
                 # see if it's an enum CharField with options and return the
@@ -1137,7 +1144,8 @@ class SchemaModel(models.Model):
                 return getattr(self, 'get_default_{}'.format(field_spec))()
             if hasattr(value, 'all') and \
               hasattr(getattr(value, 'all'), '__call__'):
-                return separator.join([u'{}'.format(child) for child in value.all()])
+                return separator.join(
+                    [u'{}'.format(child) for child in value.all()] or u'?')
             else:
                 try:
                     return separator.join([u'{}'.format(child) for child in value])

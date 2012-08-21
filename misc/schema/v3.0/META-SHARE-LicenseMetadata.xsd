@@ -8,6 +8,9 @@
 	<xs:complexType name="distributionInfoType">
 		<xs:annotation>
 			<xs:documentation>Groups information on the distribution of the resource</xs:documentation>
+			<xs:appinfo>
+				<render-short>{availability}, licenses: {licenceInfo}</render-short>
+			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="availability">
@@ -115,6 +118,9 @@
 	<xs:complexType name="licenceInfoType">
 		<xs:annotation>
 			<xs:documentation>Groups information on licences for the resource; can be repeated to allow for different modes of access and restrictions of use (e.g. free for academic use, on-a-fee basis for commercial use, download of a sample for free use etc.)</xs:documentation>
+			<xs:appinfo>
+				<render-short>{licence}</render-short>
+			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="licence" maxOccurs="unbounded">
