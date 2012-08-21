@@ -59,7 +59,7 @@ class StatsTest(django.test.TestCase):
         """
         Testing statistics functions about LR
         """
-        client = self.client_with_user_logged_in(StatsTest.manager_login)
+        client = test_utils.get_client_with_user_logged_in(StatsTest.manager_login)
         xmlfile = open(TESTFIXTURES_ZIP, 'rb')
         response = client.post(ADMINROOT+'upload_xml/', {'description': xmlfile, 'uploadTerms':'on' }, follow=True)
         # And verify that we have more than zero resources on the page where we
@@ -137,7 +137,7 @@ class StatsTest(django.test.TestCase):
         self.assertEquals(200, response.status_code)
     
     def testMyResources(self):
-        client = self.client_with_user_logged_in(StatsTest.manager_login)
+        client = test_utils.get_client_with_user_logged_in(StatsTest.manager_login)
         xmlfile = open(TESTFIXTURES_ZIP, 'rb')
         response = client.post(ADMINROOT+'upload_xml/', {'description': xmlfile, 'uploadTerms':'on' }, follow=True)
         self.assertContains(response, 'Successfully uploaded 2 resource descriptions')
@@ -158,20 +158,11 @@ class StatsTest(django.test.TestCase):
         self.assertContains(response, 'My resources')
         self.assertContains(response, 'Last view:')
 
-    def client_with_user_logged_in(self, user_credentials):
-        client = Client()
-        client.get(ADMINROOT)
-        response = client.post(ADMINROOT, user_credentials)
-        if response.status_code != 302:
-            raise Exception, 'could not log in user with credentials: {}\nresponse was: {}'\
-                .format(user_credentials, response)
-        return client
-
     
     def testUsage(self):
         # checking if there are the usage statistics
         
-        client = self.client_with_user_logged_in(StatsTest.manager_login)
+        client = test_utils.get_client_with_user_logged_in(StatsTest.manager_login)
         xmlfile = open(TESTFIXTURES_ZIP, 'rb')
         client.post(ADMINROOT+'upload_xml/', {'description': xmlfile, 'uploadTerms':'on' }, follow=True)
         
