@@ -188,6 +188,13 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         return HttpResponseRedirect("../../")
 
 
+    def set_required_formset(self, formset):
+        req_forms = formset.forms
+        for req_form in req_forms:
+            if not 'DELETE' in req_form.changed_data:
+                req_form.empty_permitted = False
+                break
+        
     @csrf_protect_m
     @transaction.commit_on_success
     def add_view(self, request, form_url='', extra_context=None):
@@ -236,7 +243,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                                   prefix=prefix, queryset=inline.queryset(request))
                 #### begin modification ####
                 if prefix in self.model.get_fields()['required']:
-                    formset.forms[0].empty_permitted = False
+                    self.set_required_formset(formset)
                 #### end modification ####
                 formsets.append(formset)
             if all_valid(formsets) and form_validated:
@@ -298,10 +305,6 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                     prefix = "%s-%s" % (prefix, prefixes[prefix])
                 formset = FormSet(instance=self.model(), prefix=prefix,
                                   queryset=inline.queryset(request))
-                #### begin modification ####
-                if prefix in self.model.get_fields()['required']:
-                    formset.forms[0].empty_permitted = False
-                #### end modification ####    
                 formsets.append(formset)
 
         #### begin modification ####
@@ -396,7 +399,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                                   queryset=inline.queryset(request))
                 #### begin modification ####
                 if prefix in self.model.get_fields()['required']:
-                    formset.forms[0].empty_permitted = False
+                    self.set_required_formset(formset)
                 #### end modification ####    
 
                 formsets.append(formset)
@@ -447,10 +450,6 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                     prefix = "%s-%s" % (prefix, prefixes[prefix])
                 formset = FormSet(instance=obj, prefix=prefix,
                                   queryset=inline.queryset(request))
-                #### begin modification ####
-                if prefix in self.model.get_fields()['required']:
-                    formset.forms[0].empty_permitted = False
-                #### end modification ####    
                 formsets.append(formset)
 
         #### begin modification ####
