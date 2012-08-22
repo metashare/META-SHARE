@@ -10,7 +10,8 @@ from metashare import settings, xml_utils
 from metashare.accounts.admin import EditorGroupManagersAdmin, \
     OrganizationManagersAdmin
 from metashare.accounts.models import EditorGroupApplication, EditorGroup, \
-    EditorGroupManagers, RegistrationRequest, ResetRequest, UserProfile
+    EditorGroupManagers, RegistrationRequest, ResetRequest, UserProfile, \
+    OrganizationApplication, OrganizationManagers, Organization
 from metashare.recommendations.models import TogetherManager
 from metashare.repository import supermodel
 from metashare.repository.management import GROUP_GLOBAL_EDITORS
@@ -58,12 +59,15 @@ def clean_resources_db():
 
 def clean_user_db():
     """
-    Deletes all user related entities from db.
-    """    
+    Deletes all user and group related entities from the database.
+    """
     EditorGroupApplication.objects.all().delete()
-    EditorGroup.objects.exclude(name=GROUP_GLOBAL_EDITORS).delete()
-    Group.objects.exclude(name=GROUP_GLOBAL_EDITORS).delete()
     EditorGroupManagers.objects.all().delete()
+    EditorGroup.objects.all().delete()
+    OrganizationApplication.objects.all().delete()
+    OrganizationManagers.objects.all().delete()
+    Organization.objects.all().delete()
+    Group.objects.exclude(name=GROUP_GLOBAL_EDITORS).delete()
     RegistrationRequest.objects.all().delete()
     ResetRequest.objects.all().delete()
     UserProfile.objects.all().delete()
