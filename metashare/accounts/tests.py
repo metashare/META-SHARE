@@ -4,14 +4,160 @@ Created on 09.08.2011
 @author: marc
 '''
 import django.test
-from django.contrib.auth.models import User
+from django.contrib.admin.sites import LOGIN_FORM_KEY
+from django.contrib.auth import REDIRECT_FIELD_NAME
+from django.contrib.auth.models import User, Permission
+from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.test.client import Client
 
 from metashare import test_utils
 from metashare.accounts import views
-from metashare.accounts.models import RegistrationRequest, ResetRequest
+from metashare.accounts.models import RegistrationRequest, ResetRequest, \
+    EditorGroup, UserProfile, Organization
 from metashare.settings import DJANGO_BASE
+
+
+class UserProfileTest(django.test.TestCase):
+    """
+    A test case for tests around the user profile page.
+    """
+    test_login = None
+    test_organization_1 = None
+    test_organization_2 = None
+    test_editor_group_1 = None
+    test_editor_group_2 = None
+    ms_full_member_perm = None
+    ms_assoc_member_perm = None
+    
+    @classmethod
+    def setUpClass(cls):
+        UserProfileTest.test_login = {
+            REDIRECT_FIELD_NAME: '/{}'.format(DJANGO_BASE),
+            LOGIN_FORM_KEY: 1,
+            'username': 'editoruser',
+            'password': 'secret',
+        }
+        # create some test organizations
+        UserProfileTest.test_organization_1 = \
+            Organization.objects.create(name='test_organization_1')
+        UserProfileTest.test_organization_2 = \
+            Organization.objects.create(name='test_organization_2')
+        # create some test editor groups
+        UserProfileTest.test_editor_group_1 = \
+            EditorGroup.objects.create(name='test_editor_group_1')
+        UserProfileTest.test_editor_group_2 = \
+            EditorGroup.objects.create(name='test_editor_group_2')
+        # get the two META-SHARE membership permissions
+        _profile_ct = ContentType.objects.get_for_model(UserProfile)
+        UserProfileTest.ms_full_member_perm = Permission.objects.get(
+            content_type=_profile_ct, codename='ms_full_member')
+        UserProfileTest.ms_assoc_member_perm = Permission.objects.get(
+            content_type=_profile_ct, codename='ms_associate_member')
+
+    @classmethod
+    def tearDownClass(cls):
+        test_utils.clean_user_db()
+
+    def setUp(self):
+        self.test_user = test_utils.create_editor_user(
+            UserProfileTest.test_login['username'], 'editor@example.com',
+            UserProfileTest.test_login['password'],
+            (UserProfileTest.test_editor_group_1,))
+        self.client = test_utils.get_client_with_user_logged_in(
+            UserProfileTest.test_login)
+
+    def test_verify_profile_is_editable(self):
+        """
+        Verifies that the user profile page can be edited.
+        """
+        _profile = self.test_user.get_profile()
+        _profile.position = 'whatever'
+        _profile.homepage = 'http://example.org'
+        _profile.save()
+        self.client.post(reverse(views.edit_profile), data={'affiliation':
+                'test organization', 'homepage': 'http://www.example.com/new',
+                'birthdate': '', 'position': 'whatever'},
+            follow=True)
+        # reload the profile from the database to work around Django bug #17750
+        _profile = UserProfile.objects.get(user=self.test_user)
+        self.assertEquals(_profile.affiliation, 'test organization')
+        self.assertEquals(_profile.homepage, 'http://www.example.com/new')
+        self.assertEquals(_profile.birthdate, None)
+        self.assertEquals(_profile.position, 'whatever')
+
+    def test_verify_ms_membership_shown(self):
+        """
+        Verifies that the current META-SHARE membership status is shown on the
+        user profile page.
+        """
+        # verify that the user doesn't have any META-SHARE membership by default
+        response = self.client.get(reverse(views.edit_profile))
+        self.assertNotContains(response, 'META-SHARE Membership')
+        # verify that an added META-SHARE associate membership is shown
+        self.test_user.user_permissions.add(
+            UserProfileTest.ms_assoc_member_perm)
+        response = self.client.get(reverse(views.edit_profile))
+        self.assertContains(response, 'META-SHARE Membership')
+        self.assertContains(response, 'associate member')
+        self.test_user.user_permissions.remove(
+            UserProfileTest.ms_assoc_member_perm)
+        response = self.client.get(reverse(views.edit_profile))
+        self.assertNotContains(response, 'META-SHARE Membership')
+        # verify that an added META-SHARE full membership is shown
+        self.test_user.user_permissions.add(UserProfileTest.ms_full_member_perm)
+        response = self.client.get(reverse(views.edit_profile))
+        self.assertContains(response, 'META-SHARE Membership')
+        self.assertContains(response, 'full member')
+        self.test_user.user_permissions.remove(
+            UserProfileTest.ms_full_member_perm)
+        response = self.client.get(reverse(views.edit_profile))
+        self.assertNotContains(response, 'META-SHARE Membership')
+
+    def test_verify_editor_groups_shown(self):
+        """
+        Verifies that the current editor group memberships are shown on the user
+        profile page.
+        """
+        # verify that the user is shown as belonging to editor group 1
+        response = self.client.get(reverse(views.edit_profile))
+        self.assertContains(response, 'Editor Group')
+        self.assertContains(response, 'test_editor_group_1')
+        # verify that the user is shown as belonging to editor groups 1 and 2
+        # after adding editor group 2
+        self.test_user.groups.add(UserProfileTest.test_editor_group_2)
+        response = self.client.get(reverse(views.edit_profile))
+        self.assertContains(response, 'Editor Group')
+        self.assertContains(response, 'test_editor_group_1')
+        self.assertContains(response, 'test_editor_group_2')
+        # verify that the user is not shown as belonging to any editor groups
+        # after removing group membership
+        self.test_user.groups.clear()
+        response = self.client.get(reverse(views.edit_profile))
+        self.assertNotContains(response, 'Editor Group')
+
+    def test_verify_organizations_shown(self):
+        """
+        Verifies that the current organization memberships are shown on the user
+        profile page.
+        """
+        # verify that the user is not shown as belonging to any organizations by
+        # default
+        response = self.client.get(reverse(views.edit_profile))
+        self.assertNotContains(response, 'Organization')
+        # verify that the user is shown as belonging to organization 1 after
+        # adding organization 1
+        self.test_user.groups.add(UserProfileTest.test_organization_1)
+        response = self.client.get(reverse(views.edit_profile))
+        self.assertContains(response, 'Organization')
+        self.assertContains(response, 'test_organization_1')
+        # verify that the user is shown as belonging to organizations 1 and 2
+        # after adding organization 2
+        self.test_user.groups.add(UserProfileTest.test_organization_2)
+        response = self.client.get(reverse(views.edit_profile))
+        self.assertContains(response, 'Organization')
+        self.assertContains(response, 'test_organization_1')
+        self.assertContains(response, 'test_organization_2')
 
 
 class CreateViewTest(django.test.TestCase):
