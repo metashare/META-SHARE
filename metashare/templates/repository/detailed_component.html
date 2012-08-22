@@ -1,0 +1,20 @@
+{% load email_protection %}
+
+
+<label class='title component'>{{lr_content.0}}</label>
+
+
+{% for item in lr_content.1 %}
+  {% with "repository/detailed_component.html" as filename %}
+    {% with item as lr_content %}
+        {% ifequal lr_content|length 2 %}
+			{% include filename %}
+        {% else %}
+			{% if lr_content.0.1 != "" %}
+				<tr {% if lr_content.0.2 == 1 %} class="mandatory" {% else %} class="optional" {% endif %}>
+				<div class="dataline"><label class='title'>{{lr_content.0.0|capfirst }}: </label><label>{{lr_content.0.1}}</label></div>
+			{% endif %}
+        {% endifequal %}
+    {% endwith %}
+  {% endwith %}
+{% endfor %}
