@@ -9,6 +9,11 @@ $(document).ready(function() {
     while (true) {
       var existing = $('#'+prefix+'-'+counter);
       if (existing.length === 0) break;
+      else {
+    	  var edit = $('#edit_'+prefix+'-'+counter);
+    	  var href = edit.attr('href');
+    	  if(!href) break;
+      }
       counter++;
     }
     return prefix+'-'+counter;
