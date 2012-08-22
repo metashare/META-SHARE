@@ -1,0 +1,11 @@
+{% for item in lr_content.1 %}
+  {% with "repository/corpus_audio_info.html" as filename %}
+    {% with item as lr_content %}
+        {% ifnotequal lr_content.0 'corpusAudioInfo' %}
+			{% include filename %}
+        {% else %}
+			{% include "repository/detailed_component.html" with lr_content=lr_content %}
+        {% endifnotequal %}
+    {% endwith %}
+  {% endwith %}
+{% endfor %}
