@@ -88,19 +88,19 @@
 		</script>
 		
 		<script>
-			$(document).ready(function(){
-				var selected_tab = $(".fields li.active").find("a").attr("href");
+			$(document).ready(function(){  
 				$(".tab_content").hide();
+				$(".fields li:first-child").addClass("active");
+				var selected_tab = $(".fields li.active").find("a").attr("href");
 				$(selected_tab).fadeIn();
 				$(".fields li").click(function() {
 					$(".fields li").removeClass("active");
 					$(this).addClass("active");
 					$(".tab_content").hide();
 					var selected_tab = $(this).find("a").attr("href");
-					$(selected_tab).fadeIn();			
+					$(selected_tab).fadeIn();
 					return false;
-		  		});
-		  		
+		  		});		  		
 			});
 		</script>
 
@@ -141,8 +141,12 @@
 	</div>
 	
 		<div class="white_box column corner readmore">
-		
-			<div class="dataline"><label class='title'>{{info|capfirst }}info label: </label><label>info</label></div>
+			{% include "repository/detailed_component.html" with lr_content=distribution_info_tuple %}
+			{% include "repository/detailed_component.html" with lr_content=resource_creation_info_tuple %}
+			{% if relation_info_tuple %}
+			{% include "repository/detailed_component.html" with lr_content=relation_info_tuple %}
+			{% endif %}
+			
 		</div>
 		
 		<div class="column middle">
@@ -159,14 +163,31 @@
 				<div id="tabs_content_container">
 					<div id="{{forloop.counter}}" class="tab_content">
 						{% ifequal type "text" %}
-							{% include "repository/text_corpus_info.html" %}
-						{% endifequal %}	
+							{% include "repository/corpus_text_info.html" %}
+						{% endifequal %}
+						{% ifequal type "audio" %}
+							{% include "repository/corpus_audio_info.html" %}
+						{% endifequal %}
+						{% ifequal type "video" %}
+							{% include "repository/corpus_video_info.html" %}
+						{% endifequal %}
+						{% ifequal type "image" %}
+							{% include "repository/corpus_image_info.html" %}
+						{% endifequal %}
+						{% ifequal type "textNumerical" %}
+							{% include "repository/corpus_textNumerical_info.html" %}
+						{% endifequal %}
+						{% ifequal type "textNgram" %}
+							{% include "repository/corpus_textNgram_info.html" %}
+						{% endifequal %}
+						
 					</div>
 				</div>
 			{% endfor %}
 			</div>
 		</div>
 		<div class="white_box column corner right-corner">
+			{% include "repository/detailed_component.html" with lr_content=metadata_info_tuple %}
 		</div>
 
 
