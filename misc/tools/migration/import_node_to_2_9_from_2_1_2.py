@@ -46,10 +46,16 @@ def import_users(import_folder):
     """
     Imports user related entities from XML in the given folder.
     """
+    # delete existing users
+    from django.contrib.auth.models import User
+    User.objects.all().delete()
     # import users
     _import(os.path.join(import_folder, "{}".format(USERS)))
     _update_pk("auth")
     
+    # delete existing user profiles
+    from metashare.accounts.models import UserProfile
+    UserProfile.objects.all().delete()
     # import user profiles
     _import(os.path.join(import_folder, "{}".format(USER_PROFILES)))
     _update_pk("accounts")
@@ -133,7 +139,6 @@ def import_resources(import_folder):
                         msg = u'{}'.format(result[2])
                     raise Exception(msg)
                 res = result[0]
-                imported_resources.append(res)
                 # update imported resource with imported resource object 
                 # and storage object
                 _update_resource(res, res_obj, storage_obj)
@@ -145,6 +150,7 @@ def import_resources(import_folder):
                     print "copying archive"
                     shutil.copy(
                       archive_filename, os.path.join(res_storage_path, ARCHIVE))
+                imported_resources.append(res)
             except Exception as problem:
                 erroneous_descriptors.append((folder_name, problem))
 
@@ -178,7 +184,7 @@ def _update_resource(res, res_obj, storage_obj):
     # transfer attributes from old storage object; skip attributes that were not
     # available in 2.1.2
     skip_fields = (
-      'copy_status', 'digest_checksum', 'digest_last_checked', 'digest_modified', 
+      'id', 'copy_status', 'digest_checksum', 'digest_last_checked', 'digest_modified', 
       'global_storage', 'local_storage', 'metashare_version', 'source_url',)
     for field in storage_obj._meta.local_fields:
         if field.attname in skip_fields:
