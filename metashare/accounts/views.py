@@ -57,14 +57,14 @@ def confirm(request, uuid):
     email = render_to_string('accounts/activation.email', data)
     try:
         # Send an activation email.
-        send_mail('Your META-SHARE user account has been activated',
+        send_mail(_('Your META-SHARE user account has been activated'),
         email, 'no-reply@meta-share.eu', [user.email], fail_silently=False)
     except: # SMTPException:
         # there was a problem sending the activation e-mail -- not too bad
         pass
 
     # Add a message to the user after successful creation.
-    messages.success(request, "We have activated your user account.")
+    messages.success(request, _("We have activated your user account."))
     
     # Redirect the user to the front page.
     return redirect('metashare.views.frontpage')
@@ -105,25 +105,25 @@ def create(request):
             
             try:
                 # Send out confirmation email to the given email address.
-                send_mail('Please confirm your META-SHARE user account',
+                send_mail(_('Please confirm your META-SHARE user account'),
                 email, 'no-reply@meta-share.eu', [_user.email],
                 fail_silently=False)
             except: #SMTPException:
                 # If the email could not be sent successfully, tell the user
                 # about it and also give the confirmation URL.
                 messages.error(request,
-                  "There was an error sending out the confirmation email " \
-                  "for your registration account.  You can confirm your " \
-                  "account by <a href='{0}'>clicking here</a>.".format(
-                    data['confirmation_url']))
+                  _("There was an error sending out the confirmation email " \
+                      "for your registration account.  You can confirm your " \
+                      "account by <a href='%s'>clicking here</a>.")
+                    % (data['confirmation_url'],))
                 
                 # Redirect the user to the front page.
                 return redirect('metashare.views.frontpage')
             
             # Add a message to the user after successful creation.
             messages.success(request,
-              "We have received your registration data and sent you an " \
-              "email with further activation instructions.")
+              _("We have received your registration data and sent you an " \
+                "email with further activation instructions."))
             
             # Redirect the user to the front page.
             return redirect('metashare.views.frontpage')
@@ -171,7 +171,7 @@ def edit_profile(request):
                 
                 # Add a message to the user after successful creation.
                 messages.success(request,
-                  "You have successfully updated your profile information.")
+                  _("You have successfully updated your profile information."))
             
             # Redirect the user to the front page.
             return redirect('metashare.views.frontpage')
@@ -188,7 +188,7 @@ def edit_profile(request):
         ms_membership = _('associate member')
     else:
         ms_membership = None
-    dictionary = {'title': 'Edit profile information', 'form': form,
+    dictionary = {'title': _('Edit Profile Information'), 'form': form,
         'metashare_membership': ms_membership,
         'groups_applied_for': [edt_reg.editor_group.name for edt_reg
                 in EditorGroupApplication.objects.filter(user=profile.user)],
@@ -261,8 +261,8 @@ def editor_group_application(request):
                     # If the email could not be sent successfully, tell the user
                     # about it.
                     messages.error(request,
-                      "There was an error sending out the request email " \
-                      "for your editor group application.")
+                      _("There was an error sending out the request email " \
+                        "for your editor group application."))
                 else:
                     messages.success(request, _('You have successfully ' \
                         'applied for editor group "%s".') % (edt_grp.name,))
@@ -283,7 +283,7 @@ def editor_group_application(request):
         
         form = EditorGroupApplicationForm(available_editor_groups)
 
-    dictionary = {'title': 'Apply for editor group membership', 'form': form}
+    dictionary = {'title': _('Apply for editor group membership'), 'form': form}
     return render_to_response('accounts/editor_group_application.html',
                         dictionary, context_instance=RequestContext(request))
 
@@ -332,7 +332,7 @@ def add_default_editor_groups(request):
         
         form = AddDefaultEditorGroupForm(available_editor_groups)
 
-    dictionary = {'title': 'Add default editor group', 'form': form}
+    dictionary = {'title': _('Add default editor group'), 'form': form}
     return render_to_response('accounts/add_default_editor_group.html',
                         dictionary, context_instance=RequestContext(request))
 
@@ -380,7 +380,7 @@ def remove_default_editor_groups(request):
         
         form = RemoveDefaultEditorGroupForm(available_editor_groups)
 
-    dictionary = {'title': 'Remove default editor group', 'form': form}
+    dictionary = {'title': _('Remove default editor group'), 'form': form}
     return render_to_response('accounts/remove_default_editor_group.html',
                         dictionary, context_instance=RequestContext(request))
 
@@ -437,8 +437,8 @@ def organization_application(request):
                     # If the email could not be sent successfully, tell the user
                     # about it.
                     messages.error(request,
-                      "There was an error sending out the request email " \
-                      "for your organization application.")
+                      _("There was an error sending out the request email " \
+                        "for your organization application."))
                 else:
                     messages.success(request, _('You have successfully ' \
                         'applied for organization "%s".') % (organization.name,))
@@ -459,7 +459,7 @@ def organization_application(request):
         
         form = OrganizationApplicationForm(available_organization)
 
-    dictionary = {'title': 'Apply for organization membership', 'form': form}
+    dictionary = {'title': _('Apply for organization membership'), 'form': form}
     return render_to_response('accounts/organization_application.html',
                         dictionary, context_instance=RequestContext(request))
 
@@ -493,7 +493,7 @@ def reset(request, uuid=None):
                 
                 try:
                     # Send out reset email to the given email address.
-                    send_mail('Please confirm your META-SHARE reset request',
+                    send_mail(_('Please confirm your META-SHARE reset request'),
                     email, 'no-reply@meta-share.eu', [user.email],
                     fail_silently=False)
                 
@@ -504,8 +504,8 @@ def reset(request, uuid=None):
                 
                 # Add a message to the user after successful creation.
                 messages.success(request,
-                  "We have received your reset request and sent you an " \
-                  "email with further reset instructions.")
+                  _("We have received your reset request and sent you an " \
+                    "email with further reset instructions."))
                 
                 # Redirect the user to the front page.
                 return redirect('metashare.views.frontpage')
@@ -514,7 +514,7 @@ def reset(request, uuid=None):
         else:
             form = ResetRequestForm()
         
-        dictionary = {'title': 'Reset user account', 'form': form}
+        dictionary = {'title': _('Reset user account'), 'form': form}
         return render_to_response('accounts/reset_account.html', dictionary,
           context_instance=RequestContext(request))
     
@@ -540,22 +540,22 @@ def reset(request, uuid=None):
     
     try:
         # Send out re-activation email to the given email address.
-        send_mail('Your META-SHARE user account has been re-activated',
+        send_mail(_('Your META-SHARE user account has been re-activated'),
         email, 'no-reply@meta-share.eu', [user.email], fail_silently=False)
     
     except SMTPException:
         # If the email could not be sent successfully, tell the user about it.
         messages.error(request,
-          "There was an error sending out the activation email " \
-          "for your user account. Please contact the administrator.")
+          _("There was an error sending out the activation email " \
+            "for your user account. Please contact the administrator."))
         
         # Redirect the user to the front page.
         return redirect('metashare.views.frontpage')
     
     # Add a message to the user after successful creation.
     messages.success(request,
-      "We have re-activated your user account and sent you an email with " \
-      "your personal password which allows you to login to the website.")
+      _("We have re-activated your user account and sent you an email with " \
+        "your personal password which allows you to login to the website."))
     
     # Redirect the user to the front page.
     return redirect('metashare.views.frontpage')
