@@ -1,0 +1,11 @@
+{% for item in lr_content.1 %}
+  {% with "repository/corpus_textNumerical_info.html" as filename %}
+    {% with item as lr_content %}
+        {% ifnotequal lr_content.0 'corpusTextNumericalInfo' %}
+			{% include filename %}
+        {% else %}
+			{% include "repository/detailed_component.html" with lr_content=lr_content %}
+        {% endifnotequal %}
+    {% endwith %}
+  {% endwith %}
+{% endfor %}
