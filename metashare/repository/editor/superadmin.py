@@ -166,7 +166,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         '''
         if '_popup' in request.REQUEST:
             if request.POST.has_key("_continue"):
-                return self.response_add(request, obj)
+                return self.save_and_continue_in_popup(obj, request)
             return self.edit_response_close_popup_magic(obj)
         elif '_popup_o2m' in request.REQUEST:
             caller = None
@@ -275,10 +275,6 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                 #### end modification ####
 
                 self.log_addition(request, new_object)
-                #### begin modification ####
-                if request.POST.has_key("_continue"):
-                    return self.save_and_continue_in_popup(new_object, request)
-                #### end modification ####
                 return self.response_add(request, new_object)
         else:
             # Prepare the dict of initial data from the request.
