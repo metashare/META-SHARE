@@ -18,7 +18,10 @@
   <tr>
     <th> <label>Email</label></th><td class="readonly"> {{ user.email }} </td>
   </tr>
-  <tr><td colspan="2" style="text-align:center; height:40px;">If you need to change any of the above details, please contact a superuser of this META-SHARE node.</td></tr>  
+  {% if metashare_membership %}
+  <tr><th><label>META-SHARE Membership</label></th><td class="readonly">{{ metashare_membership }}</td></tr>
+  {% endif %}
+  <tr><td colspan="2" style="text-align:center; height:40px;">If you would like to change any of the above details, please contact a superuser of this META-SHARE node.</td></tr>  
   {{ form.as_table }}
 
   {% if editor_group_managers_member_of %}

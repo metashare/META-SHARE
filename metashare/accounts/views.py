@@ -182,7 +182,14 @@ def edit_profile(request):
           'affiliation': profile.affiliation, 'position': profile.position,
           'homepage': profile.homepage})
 
-    dictionary = {'title': 'Edit profile information', 'form': form, 
+    if request.user.has_perm('accounts.ms_full_member'):
+        ms_membership = _('full member')
+    elif request.user.has_perm('accounts.ms_associate_member'):
+        ms_membership = _('associate member')
+    else:
+        ms_membership = None
+    dictionary = {'title': 'Edit profile information', 'form': form,
+        'metashare_membership': ms_membership,
         'groups_applied_for': [edt_reg.editor_group.name for edt_reg
                 in EditorGroupApplication.objects.filter(user=profile.user)],
         'organizations_applied_for': [org_reg.organization.name for org_reg
