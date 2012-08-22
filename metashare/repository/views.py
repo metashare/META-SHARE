@@ -29,6 +29,7 @@ from metashare.repository.forms import LicenseSelectionForm, \
     MORE_FROM_SAME_PROJECTS
 from metashare.repository.models import licenceInfoType_model, resourceInfoType_model
 from metashare.repository.supermodel import get_classes
+
 from metashare.repository.search_indexes import resourceInfoType_modelIndex
 from metashare.settings import LOG_LEVEL, LOG_HANDLER, MEDIA_URL, DJANGO_URL
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
@@ -433,7 +434,7 @@ def view(request, resource_name=None, object_id=None):
     
     # Convert resource to ElementTree and then to template tuples.
     resource_tree = resource.export_to_elementtree()
-    lr_content = _convert_to_template_tuples(resource_tree)[1]
+    lr_content = _convert_to_template_tuples(resource_tree)
    
     # Get the paths of each items and sort them
     lr_content_paths = get_structure_paths(lr_content)
@@ -441,9 +442,6 @@ def view(request, resource_name=None, object_id=None):
     
     # Get repository classes names
     available_classes = get_classes("metashare.repository")
-
-    # Create components lists 
-    corpus_text_info_list = []
 
     # Create fields lists
     descriptions = []
@@ -454,19 +452,30 @@ def view(request, resource_name=None, object_id=None):
     licences = []
     linguality_type = []
     url = []
+    distributionInfo = []
+    resource_creation_info_tuple = []
+    relation_info_tuple = []
     
     # For each component or field, create a list of items.
     # This is because 
     for item, value in sorted_tuple:
         
         if item in available_classes:
+            print available_classes
+            print "@@@@@@"
             # Create lists for components
             tuple_index = str(value).replace(", ", "][").replace("(","[").replace(")","]")
             tuple_index = tuple_index[:-3]
             if item == "identificationInfo":
                 identification_info_tuple = eval("lr_content" + tuple_index)
-            if item == "corpusTextInfo":
-                corpus_text_info_list.append(eval("lr_content" + tuple_index))
+            if item == "metadataInfo":
+                metadata_info_tuple = eval("lr_content" + tuple_index)
+            if item == "distributionInfo":
+                distribution_info_tuple = eval("lr_content" + tuple_index)
+            if item == "resourceCreationInfo":
+                resource_creation_info_tuple = eval("lr_content" + tuple_index)
+            if item == "relationInfo":
+                relation_info_tuple = eval("lr_content" + tuple_index)
         else:
             # Create lists for individual fields
             tuple_index = str(value).replace(", ", "][").replace("(","[").replace(")","]")
@@ -490,15 +499,23 @@ def view(request, resource_name=None, object_id=None):
             elif item == "url":
                 url.append(eval("lr_content" + tuple_index))
 
+
     # Define context for template rendering.
-    context = { 'resource': resource, 
+    context = { 'resource': resource,
+                'lr_content': lr_content, 
                 'identification_tuple': identification_info_tuple, 
-                'corpusTextInfo': corpus_text_info_list,
-                'descriptions': descriptions, 'resourceNames': resource_names, 
+                'distribution_info_tuple': distribution_info_tuple,
+                'metadata_info_tuple': metadata_info_tuple,
+                'resource_creation_info_tuple': resource_creation_info_tuple,
+                'relation_info_tuple': relation_info_tuple,                       
+                'descriptions': descriptions, 
+                'resourceNames': resource_names, 
                 'resourceShortNames': resource_short_names, 
                 'resourceType': resource_type, 
-                'lingualityType': linguality_type, 'mediaTypes': media_types, 
-                'availabilities': availabilities, 'licences': licences, 
+                'lingualityType': linguality_type, 
+                'mediaTypes': media_types, 
+                'availabilities': availabilities, 
+                'licences': licences, 
                 'url': url}
     template = 'repository/lr_view.html'
 
