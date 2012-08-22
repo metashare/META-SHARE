@@ -55,11 +55,20 @@ div.right-corner{
 	font-size: 12px;
 	font-weight: 600;
 	margin-bottom: 0.3em;
-	margin-left: 0;
+	margin-left: 10px;
 	margin-right: 0;
 	margin-top: 0.9em;
 	padding-left: 4px;
 	width: 100%;
+}
+
+label.component{
+	padding:3px;
+	background-color: #fff;
+	color: #FF9900;
+	border-radius:10px;
+	font-size:12px;
+	clear:both;
 }
 
 .fields ul{
