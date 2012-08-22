@@ -167,8 +167,9 @@ class RelatedAdminMixin(object):
         (b) updating the parent field with the ID of the object we just edited.
         '''
         pk_value = obj._get_pk_val()
-        msg = _('The %(name)s "%(obj)s" was added successfully.') % {'name': obj._meta.verbose_name, 'obj': obj} 
-        self.message_user(request, msg + ' ' + _("You may edit it again below.")) 
+        msg = _('The %(name)s "%(obj)s" was saved successfully. You may edit ' \
+            'it again below.') % {'name': obj._meta.verbose_name, 'obj': obj} 
+        self.message_user(request, msg)
         post_url_continue = '../%s/?_popup=1'
         return HttpResponse('<script type="text/javascript">opener.saveAndContinuePopup(window, "%s", "%s", "%s");</script>' % \
             # escape() calls force_unicode.
