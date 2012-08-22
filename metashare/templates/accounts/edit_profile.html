@@ -1,13 +1,7 @@
 {% extends "base.html" %}
-
+{% block title %}{{ title }} &ndash; META-SHARE{% endblock %}
 {% block content %}
-
-<div>
-</div>
-
 <form class="form_helper" action="{% url metashare.accounts.views.edit_profile %}" method="post">
-
-
 <table>
   <tr>
     <th> <label>First name</label></th><td class="readonly"> {{ user.first_name }} </td>
