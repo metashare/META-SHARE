@@ -102,11 +102,6 @@ label.component{
    clear:both;
 }
 
-.bottom_box{
-	margin-top: 400px;
-	background-color: #ddd;
-}
-
 .middle_box{
    margin:0;
    float:left;
@@ -149,6 +144,7 @@ a.tip:hover span {
     
 
 /*End CSS for tooltip*/
+
 
 
 .recommendations{
