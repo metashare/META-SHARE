@@ -443,17 +443,24 @@ def view(request, resource_name=None, object_id=None):
     # Get repository classes names
     available_classes = get_classes("metashare.repository")
 
+    #get the 'best' language version of a "DictField"
+    resourceName = resource.identificationInfo.get_default_resourceName()
+    
     # Create fields lists
     descriptions = []
     resource_names = []
     resource_short_names = []
     media_types = []
-    availabilities = []
-    licences = []
-    linguality_type = []
     url = []
+    metaShareId = []
     distributionInfo = []
-    resource_creation_info_tuple = []
+    contact_person_tuple = []
+    metadata_info_tuple = []
+    version_info_tuple = []
+    validation_info_tuple = []
+    usage_info_tuple = []
+    resource_documentation_info_tuple = []    
+    resource_creation_info_tuple = []    
     relation_info_tuple = []
     
     # For each component or field, create a list of items.
@@ -461,17 +468,25 @@ def view(request, resource_name=None, object_id=None):
     for item, value in sorted_tuple:
         
         if item in available_classes:
-            print available_classes
-            print "@@@@@@"
             # Create lists for components
             tuple_index = str(value).replace(", ", "][").replace("(","[").replace(")","]")
             tuple_index = tuple_index[:-3]
             if item == "identificationInfo":
                 identification_info_tuple = eval("lr_content" + tuple_index)
-            if item == "metadataInfo":
-                metadata_info_tuple = eval("lr_content" + tuple_index)
             if item == "distributionInfo":
                 distribution_info_tuple = eval("lr_content" + tuple_index)
+            if item == "contactPerson":
+                contact_person_tuple = eval("lr_content" + tuple_index)            
+            if item == "metadataInfo":
+                metadata_info_tuple = eval("lr_content" + tuple_index)
+            if item == "versionInfo":
+                version_info_tuple = eval("lr_content" + tuple_index)
+            if item == "validationInfo":
+                validation_info_tuple = eval("lr_content" + tuple_index)
+            if item == "usageInfo":
+                usage_info_tuple = eval("lr_content" + tuple_index)
+            if item == "resourceDocumentationInfo":
+                resource_documentation_info_tuple = eval("lr_content" + tuple_index)            
             if item == "resourceCreationInfo":
                 resource_creation_info_tuple = eval("lr_content" + tuple_index)
             if item == "relationInfo":
@@ -490,33 +505,32 @@ def view(request, resource_name=None, object_id=None):
                 media_types.append(eval("lr_content" + tuple_index))
             elif item == "resourceType":
                 resource_type = eval("lr_content" + tuple_index)
-            elif item == "lingualityType":
-                linguality_type = eval("lr_content" + tuple_index)
-            elif item == "availability":
-                availabilities.append(eval("lr_content" + tuple_index))
-            elif item == "licence":
-                licences.append(eval("lr_content" + tuple_index))
             elif item == "url":
                 url.append(eval("lr_content" + tuple_index))
-
-
+            elif item == "metaShareId":
+                metaShareId.append(eval("lr_content" + tuple_index))
+    
     # Define context for template rendering.
-    context = { 'resource': resource,
+    context = { 'resourceName': resourceName,
+                'resource': resource,
                 'lr_content': lr_content, 
-                'identification_tuple': identification_info_tuple, 
-                'distribution_info_tuple': distribution_info_tuple,
-                'metadata_info_tuple': metadata_info_tuple,
+                'distribution_info_tuple': distribution_info_tuple,                
+                'contact_person_tuple': contact_person_tuple,                
+                'metadata_info_tuple': metadata_info_tuple,               
+                'version_info_tuple': version_info_tuple,
+                'validation_info_tuple': validation_info_tuple,
+                'usage_info_tuple': usage_info_tuple,
+                'resource_documentation_info_tuple': resource_documentation_info_tuple,                
                 'resource_creation_info_tuple': resource_creation_info_tuple,
                 'relation_info_tuple': relation_info_tuple,                       
                 'descriptions': descriptions, 
                 'resourceNames': resource_names, 
                 'resourceShortNames': resource_short_names, 
                 'resourceType': resource_type, 
-                'lingualityType': linguality_type, 
-                'mediaTypes': media_types, 
-                'availabilities': availabilities, 
-                'licences': licences, 
-                'url': url}
+                'mediaTypes': media_types,
+                'url': url,
+                'metaShareId': metaShareId                
+                }
     template = 'repository/lr_view.html'
 
     # For users who have edit permission for this resource, we have to add LR_EDIT 
