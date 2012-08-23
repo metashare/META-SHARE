@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% block title %}{% if title %}{{ title }}{% else %}Log in{% endif %} &ndash; META-SHARE{% endblock %}
+
 {% block messages %}
 {% if form.errors %}
 <p class="error">Your username and password didn't match. Please try again.</p>
@@ -17,8 +19,7 @@
 <input class="button middle_button" style="margin-left:auto;margin-right:auto;" type="submit" value="Login" />
 <input type="hidden" name="next" value="{{ next }}" />  
 </form>
-
-<p><br/>
-<a href="{% url metashare.accounts.views.reset %}">Forgotten your username or password? Click here to reset your account.</a></p>
+<p><a href="{% url metashare.accounts.views.reset %}">Forgotten your username or password? Click here to reset your password.</a></p>
+<p><a href="{% url metashare.accounts.views.create %}">Don&rsquo;t have an account, yet? Click here to create one.</a></p>
 </div>
 {% endblock %}
