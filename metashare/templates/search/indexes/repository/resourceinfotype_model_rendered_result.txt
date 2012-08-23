@@ -14,6 +14,9 @@
   {% if object.resourceComponentType.as_subclass.resourceType = "lexicalConceptualResource" %}
 <img src="{% get_media_url %}css/sexybuttons/images/icons/silk/text_ab.png" title="Lexical Conceptual" /> 
   {% endif %}
+  {% if resource.resourceComponentType.as_subclass.resourceType = "languageDescription" %}
+<img src="{% get_media_url %}css/sexybuttons/images/icons/silk/script.png" title="Language Description" width=2.5%/> 
+  {% endif %}
    
   {# { object.resourceComponentType.as_subclass.get_resourceType_display } #}
    &nbsp;
