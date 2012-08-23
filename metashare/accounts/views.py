@@ -323,9 +323,9 @@ def editor_group_application(request):
             messages.error(request, _('There are no editor groups in the '
                 'database, yet, for which you could apply. Please ask the '
                 'system administrator to create one.'))
-            # Redirect the user to the edit profile page.
-            return redirect('metashare.views.edit_profile')
-        
+            # Redirect the user to the superuser contact page.
+            return redirect(contact)
+
         form = EditorGroupApplicationForm(available_editor_groups)
 
     dictionary = {'title': _('Apply for editor group membership'), 'form': form}
@@ -499,9 +499,9 @@ def organization_application(request):
             messages.error(request, _('There are no organizations in the '
                 'database, yet, for which you could apply. Please ask the '
                 'system administrator to create one.'))
-            # Redirect the user to the edit profile page.
-            return redirect('metashare.views.edit_profile')
-        
+            # Redirect the user to the superuser contact page.
+            return redirect(contact)
+
         form = OrganizationApplicationForm(available_organization)
 
     dictionary = {'title': _('Apply for organization membership'), 'form': form}
