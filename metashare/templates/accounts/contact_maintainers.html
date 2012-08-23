@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} &ndash; META-SHARE{% endblock %}
+
+{% block content %}
+<h2>{{ title }}</h2>
+<div class="content_box">
+  <p>With this form you can send messages to the node maintainers, for example, if you would like to suggest the creation of a new editor group or a new organization. There are extra forms available for applying for membership in existing <a href="{% url metashare.accounts.views.editor_group_application %}">editor groups</a> or <a href="{% url metashare.accounts.views.organization_application %}">organizations</a>.</p>
+  <form class="form_helper" method="post" action="{% url metashare.accounts.views.contact %}">
+    {% csrf_token %}
+    <table>
+      {{ form.as_table }}
+    </table>
+    <input class="button middle_button" style="margin-left:auto;margin-right:auto;" type="submit" value="Send Message" />
+  </form>
+  <p>Note: along with your message, the node maintainers will automatically receive your name and the e-mail address which is set in <a href="{% url metashare.accounts.views.edit_profile %}">your user profile</a>.</p>
+</div>
+{% endblock %}
