@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load get_icon %}
 
 {% block title %}
   {{ resourceNames.0 }} &ndash; META-SHARE
@@ -129,23 +130,25 @@
                 {% endif %}
             {% endfor %}
         </div>
-        
-		<h2>{{ resourceNames.0 }}</h2>
+		<h2>{{ resourceName }}
+		    {% get_icon resource.resourceComponentType.as_subclass.resourceType %}
+		
+		</h2>
 		<h3>{% for name in resourceShortNames %}{{ name }}<img src="{{ MEDIA_URL }}images/trenner.png" class="trenner" />{% endfor %}</h3> {# Here we should choose the english version of resource short name (should be provided by views.py) #}
+		<h4>{{metaShareId.0}}</h4>
 		<h4 style="text-align:justify" class="readmore">{{ descriptions.0 }}</h4>
 		{% if url.0 %}
 		<h4><a href="{{url.0}}" target="_blank">{{url.0}}</a></h4>
 		{% endif %}
-	
+		
+		
 	
 	</div>
 	
-		<div class="white_box column corner readmore">
-			{% include "repository/detailed_component.html" with lr_content=distribution_info_tuple %}
-			{% include "repository/detailed_component.html" with lr_content=resource_creation_info_tuple %}
-			{% if relation_info_tuple %}
-			{% include "repository/detailed_component.html" with lr_content=relation_info_tuple %}
-			{% endif %}
+		<div class="white_box column corner">
+			{% include "repository/detailed_component.html" with lr_content=distribution_info_tuple %}			
+			{% include "repository/detailed_component.html" with lr_content=contact_person_tuple %}
+			
 			
 		</div>
 		
@@ -153,7 +156,7 @@
 			<div class="fields">
 					<ul>
 						{% for type in mediaTypes %}
-							<li><a href="#{{forloop.counter}}">{{type}}</a></li>
+							<li><a href="#{{forloop.counter}}">{{type}}{% get_icon type %}</a></li>
 						{% endfor %}
 					</ul>
 				</div>
@@ -162,23 +165,56 @@
 			{% for type in mediaTypes %}
 				<div id="tabs_content_container">
 					<div id="{{forloop.counter}}" class="tab_content">
-						{% ifequal type "text" %}
-							{% include "repository/corpus_text_info.html" %}
-						{% endifequal %}
-						{% ifequal type "audio" %}
-							{% include "repository/corpus_audio_info.html" %}
-						{% endifequal %}
-						{% ifequal type "video" %}
-							{% include "repository/corpus_video_info.html" %}
-						{% endifequal %}
-						{% ifequal type "image" %}
-							{% include "repository/corpus_image_info.html" %}
-						{% endifequal %}
-						{% ifequal type "textNumerical" %}
-							{% include "repository/corpus_textNumerical_info.html" %}
-						{% endifequal %}
-						{% ifequal type "textNgram" %}
-							{% include "repository/corpus_textNgram_info.html" %}
+						{% ifequal resourceType "corpus" %}
+							{% ifequal type "text" %}
+								{% include "repository/corpus_text_info.html" with type='corpusTextInfo' %}
+							{% endifequal %}
+							{% ifequal type "audio" %}
+								{% include "repository/corpus_text_info.html" with type='corpusAudioInfo' %}
+							{% endifequal %}
+							{% ifequal type "video" %}
+								{% include "repository/corpus_text_info.html" with type='corpusVideoInfo' %}
+							{% endifequal %}
+							{% ifequal type "image" %}
+								{% include "repository/corpus_text_info.html" with type='corpusImageInfo' %}
+							{% endifequal %}
+							{% ifequal type "textNumerical" %}
+								{% include "repository/corpus_text_info.html" with type='corpusTextNumericalInfo' %}
+							{% endifequal %}
+							{% ifequal type "textNgram" %}
+								{% include "repository/corpus_text_info.html" with type='corpusTextNgramInfo' %}
+							{% endifequal %}
+						{% else %}
+							{% ifequal resourceType "lexicalConceptualResource" %}
+								{% ifequal type "text" %}
+									{% include "repository/corpus_text_info.html" with type='lexicalConceptualResourceTextInfo' %}
+								{% endifequal %}
+								{% ifequal type "audio" %}
+									{% include "repository/corpus_text_info.html" with type='lexicalConceptualResourceAudioInfo' %}
+								{% endifequal %}
+								{% ifequal type "video" %}
+									{% include "repository/corpus_text_info.html" with type='lexicalConceptualResourceVideoInfo' %}
+								{% endifequal %}
+								{% ifequal type "image" %}
+									{% include "repository/corpus_text_info.html" with type='lexicalConceptualResourceImageInfo' %}
+								{% endifequal %}
+							{% else %}	
+								{% ifequal resourceType "languageDescription" %}
+									{% ifequal type "text" %}
+										{% include "repository/corpus_text_info.html" with type='languageDescriptionTextInfo' %}
+									{% endifequal %}
+									{% ifequal type "video" %}
+										{% include "repository/corpus_text_info.html" with type='languageDescriptionVideoInfo' %}
+									{% endifequal %}
+									{% ifequal type "image" %}
+										{% include "repository/corpus_text_info.html" with type='languageDescriptionImageInfo' %}
+									{% endifequal %}
+								{% else %}
+									{% ifequal resourceType "toolService" %}
+										asdf
+									{% endifequal %}		
+								{% endifequal %}		
+							{% endifequal %}
 						{% endifequal %}
 						
 					</div>
@@ -187,7 +223,16 @@
 			</div>
 		</div>
 		<div class="white_box column corner right-corner">
+				
+			{% include "repository/detailed_component.html" with lr_content=resource_creation_info_tuple %}
 			{% include "repository/detailed_component.html" with lr_content=metadata_info_tuple %}
+			{% include "repository/detailed_component.html" with lr_content=version_info_tuple %}			
+			{% include "repository/detailed_component.html" with lr_content=validation_info_tuple %}		
+			{% include "repository/detailed_component.html" with lr_content=usage_info_tuple %}
+			{% include "repository/detailed_component.html" with lr_content=resource_documentation_info_tuple %}
+			
+			
+			{% include "repository/detailed_component.html" with lr_content=relation_info_tuple %}
 		</div>
 
 
