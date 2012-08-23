@@ -313,7 +313,7 @@ def editor_group_application(request):
                         'applied for editor group "%s".') % (edt_grp.name,))
 
             # Redirect the user to the edit profile page.
-            return redirect('metashare.views.edit_profile')
+            return redirect(edit_profile)
 
     # Otherwise, render a new EditorGroupApplicationForm instance
     else:
@@ -363,7 +363,7 @@ def add_default_editor_groups(request):
             profile.save()
 
             # Redirect the user to the edit profile page.
-            return redirect('metashare.views.edit_profile')
+            return redirect(edit_profile)
 
     # Otherwise, render a new AddDefaultEditorGroupForm instance
     else:
@@ -373,7 +373,7 @@ def add_default_editor_groups(request):
             messages.error(request, _('There are no editor groups you can '
                 'add to your default list.'))
             # Redirect the user to the edit profile page.
-            return redirect('metashare.views.edit_profile')
+            return redirect(edit_profile)
         
         form = AddDefaultEditorGroupForm(available_editor_groups)
 
@@ -411,7 +411,7 @@ def remove_default_editor_groups(request):
             profile.save()
 
             # Redirect the user to the edit profile page.
-            return redirect('metashare.views.edit_profile')
+            return redirect(edit_profile)
 
     # Otherwise, render a new RemoveDefaultEditorGroupForm instance
     else:
@@ -421,7 +421,7 @@ def remove_default_editor_groups(request):
             messages.error(request, _('There are no editor groups you can '
                 'remove from your default list.'))
             # Redirect the user to the edit profile page.
-            return redirect('metashare.views.edit_profile')
+            return redirect(edit_profile)
         
         form = RemoveDefaultEditorGroupForm(available_editor_groups)
 
@@ -489,7 +489,7 @@ def organization_application(request):
                         'applied for organization "%s".') % (organization.name,))
 
             # Redirect the user to the edit profile page.
-            return redirect('metashare.views.edit_profile')
+            return redirect(edit_profile)
 
     # Otherwise, render a new OrganizationApplicationForm instance
     else:
