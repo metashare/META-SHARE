@@ -1,8 +1,6 @@
 {% load email_protection %}
 
-
 <label class='title component'>{{lr_content.0}}</label>
-
 
 {% for item in lr_content.1 %}
   {% with "repository/detailed_component.html" as filename %}
@@ -11,8 +9,11 @@
 			{% include filename %}
         {% else %}
 			{% if lr_content.0.1 != "" %}
-				<tr {% if lr_content.0.2 == 1 %} class="mandatory" {% else %} class="optional" {% endif %}>
-				<div class="dataline"><label class='title'>{{lr_content.0.0|capfirst }}: </label><label>{{lr_content.0.1}}</label></div>
+				{% if lr_content.0.0 == "email" %}
+	        		<div class="dataline"><label class='title'>{{lr_content.0.0|capfirst }}: </label><label>{% encrypt_email lr_content.0.1 %}</label></div>
+				{% else %}
+					<div class="dataline{% if lr_content.0.2 == 1 %} mandatory{% else %} optional{% endif %}"><label class='title'>{{lr_content.0.0|capfirst }}: </label><label>{{lr_content.0.1}}</label></div>
+				{% endif %}
 			{% endif %}
         {% endifequal %}
     {% endwith %}
