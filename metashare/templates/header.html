@@ -47,6 +47,7 @@
 	            <li><a href="{% url editor:accounts_editorgroup_changelist %}">Editor groups</a></li>
 	            <li><a href="{% url editor:accounts_editorgroupmanagers_changelist %}">Editor group managers</a></li>
                 <li><a href="{% url editor:accounts_organization_changelist %}">Organizations</a></li>
+                <li><a href="{% url editor:accounts_organizationmanagers_changelist %}">Organization managers</a></li>
 	          {% endif %}
 	          {% if user.get_profile.has_manager_permission %}
 	            <li><a href="{% url admin:accounts_editorgroupapplication_changelist %}">Editor group applications</a></li>
@@ -71,6 +72,7 @@
 	            <li><a href="{% url metashare.accounts.views.editor_group_application %}" title="Apply for membership in editor groups">Apply for editor group membership</a></li>
 	           	<li><a href="{% url metashare.accounts.views.add_default_editor_groups %}" title='Set the editor groups to which all new resources you create shall belong'>Add default editor groups</a></li>
 		      	<li><a href="{% url metashare.accounts.views.remove_default_editor_groups %}" title='Remove editor groups from the defaults list'>Remove default editor groups</a></li>
+	            <li><a href="{% url metashare.accounts.views.organization_application %}" title="Apply for membership in organizations">Apply for organization membership</a></li>
 			  </ul>
 	        </li>
             {% endif %}

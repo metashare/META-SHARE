@@ -12,7 +12,7 @@ class ExampleSeleniumTest(SeleniumTestCase):
         test_utils.setup_test_storage()
         _fixture = '{0}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
         _result = test_utils.import_xml(_fixture)
-        self.resource_id = _result[0].id
+        self.resource_id = _result.id
         resource = resourceInfoType_model.objects.get(pk=self.resource_id)
         resource.storage_object.published = True
         resource.storage_object.save()

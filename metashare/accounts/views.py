@@ -13,11 +13,12 @@ from django.core.mail import send_mail
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
 from django.template.loader import render_to_string
+from django.utils.html import escape
 from django.utils.translation import ugettext as _
 
 from metashare.accounts.forms import RegistrationRequestForm, ResetRequestForm, \
     UserProfileForm, EditorGroupApplicationForm, AddDefaultEditorGroupForm, \
-    RemoveDefaultEditorGroupForm, OrganizationApplicationForm
+    RemoveDefaultEditorGroupForm, OrganizationApplicationForm, ContactForm
 from metashare.accounts.models import RegistrationRequest, ResetRequest, \
     EditorGroupApplication, EditorGroupManagers, EditorGroup, \
     OrganizationApplication, OrganizationManagers, Organization
@@ -57,17 +58,61 @@ def confirm(request, uuid):
     email = render_to_string('accounts/activation.email', data)
     try:
         # Send an activation email.
-        send_mail('Your META-SHARE user account has been activated',
+        send_mail(_('Your META-SHARE user account has been activated'),
         email, 'no-reply@meta-share.eu', [user.email], fail_silently=False)
     except: # SMTPException:
         # there was a problem sending the activation e-mail -- not too bad
         pass
 
     # Add a message to the user after successful creation.
-    messages.success(request, "We have activated your user account.")
+    messages.success(request, _("We have activated your user account."))
     
     # Redirect the user to the front page.
     return redirect('metashare.views.frontpage')
+
+
+@login_required
+def contact(request):
+    """
+    Provides a form for contacting the superuser(s) of this META-SHARE node.
+    """
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            # render contact email template with correct values
+            data = {'user_first_name': request.user.first_name,
+              'user_last_name': request.user.last_name,
+              'user_account_name': request.user.username,
+              'node_url': DJANGO_URL, 'message': form.cleaned_data['message'],
+              'subject': form.cleaned_data['subject']}
+            email_msg = render_to_string('accounts/contact_maintainers.email',
+                                         data)
+            # send out the email to all superusers
+            superuser_emails = User.objects.filter(is_superuser=True) \
+                .values_list('email', flat=True)
+            try:
+                send_mail(_('[META-SHARE] Contact Form Request: %s')
+                        % (data['subject'],), email_msg,
+                    'no-reply@meta-share.eu', superuser_emails,
+                    fail_silently=False)
+            except:
+                # if the email could not be sent successfully, tell the user
+                # about it
+                messages.error(request, _("Oops, there was an error sending out"
+                    " your contact request. You can copy your message and try "
+                    "again later: <pre>%s</pre>") % (escape(data['message']),))
+            else:
+                # show a message to the user after successfully sending the mail
+                messages.success(request, _("We have received your message and "
+                    "successfully sent it to the node maintainers. Please give "
+                    "them some days to get back to you."))
+            # redirect the user to the front page
+            return redirect('metashare.views.frontpage')
+    else:
+        form = ContactForm()
+    dictionary = {'title': 'Contact Node Maintainers', 'form': form}
+    return render_to_response('accounts/contact_maintainers.html', dictionary,
+                              context_instance=RequestContext(request))
 
 
 def create(request):
@@ -105,25 +150,25 @@ def create(request):
             
             try:
                 # Send out confirmation email to the given email address.
-                send_mail('Please confirm your META-SHARE user account',
+                send_mail(_('Please confirm your META-SHARE user account'),
                 email, 'no-reply@meta-share.eu', [_user.email],
                 fail_silently=False)
             except: #SMTPException:
                 # If the email could not be sent successfully, tell the user
                 # about it and also give the confirmation URL.
                 messages.error(request,
-                  "There was an error sending out the confirmation email " \
-                  "for your registration account.  You can confirm your " \
-                  "account by <a href='{0}'>clicking here</a>.".format(
-                    data['confirmation_url']))
+                  _("There was an error sending out the confirmation email " \
+                      "for your registration account.  You can confirm your " \
+                      "account by <a href='%s'>clicking here</a>.")
+                    % (data['confirmation_url'],))
                 
                 # Redirect the user to the front page.
                 return redirect('metashare.views.frontpage')
             
             # Add a message to the user after successful creation.
             messages.success(request,
-              "We have received your registration data and sent you an " \
-              "email with further activation instructions.")
+              _("We have received your registration data and sent you an " \
+                "email with further activation instructions."))
             
             # Redirect the user to the front page.
             return redirect('metashare.views.frontpage')
@@ -171,7 +216,7 @@ def edit_profile(request):
                 
                 # Add a message to the user after successful creation.
                 messages.success(request,
-                  "You have successfully updated your profile information.")
+                  _("You have successfully updated your profile information."))
             
             # Redirect the user to the front page.
             return redirect('metashare.views.frontpage')
@@ -182,7 +227,14 @@ def edit_profile(request):
           'affiliation': profile.affiliation, 'position': profile.position,
           'homepage': profile.homepage})
 
-    dictionary = {'title': 'Edit profile information', 'form': form, 
+    if request.user.has_perm('accounts.ms_full_member'):
+        ms_membership = _('full member')
+    elif request.user.has_perm('accounts.ms_associate_member'):
+        ms_membership = _('associate member')
+    else:
+        ms_membership = None
+    dictionary = {'title': _('Edit Profile Information'), 'form': form,
+        'metashare_membership': ms_membership,
         'groups_applied_for': [edt_reg.editor_group.name for edt_reg
                 in EditorGroupApplication.objects.filter(user=profile.user)],
         'organizations_applied_for': [org_reg.organization.name for org_reg
@@ -254,14 +306,14 @@ def editor_group_application(request):
                     # If the email could not be sent successfully, tell the user
                     # about it.
                     messages.error(request,
-                      "There was an error sending out the request email " \
-                      "for your editor group application.")
+                      _("There was an error sending out the request email " \
+                        "for your editor group application."))
                 else:
                     messages.success(request, _('You have successfully ' \
                         'applied for editor group "%s".') % (edt_grp.name,))
 
             # Redirect the user to the edit profile page.
-            return redirect('metashare.views.edit_profile')
+            return redirect(edit_profile)
 
     # Otherwise, render a new EditorGroupApplicationForm instance
     else:
@@ -271,12 +323,12 @@ def editor_group_application(request):
             messages.error(request, _('There are no editor groups in the '
                 'database, yet, for which you could apply. Please ask the '
                 'system administrator to create one.'))
-            # Redirect the user to the edit profile page.
-            return redirect('metashare.views.edit_profile')
-        
+            # Redirect the user to the superuser contact page.
+            return redirect(contact)
+
         form = EditorGroupApplicationForm(available_editor_groups)
 
-    dictionary = {'title': 'Apply for editor group membership', 'form': form}
+    dictionary = {'title': _('Apply for editor group membership'), 'form': form}
     return render_to_response('accounts/editor_group_application.html',
                         dictionary, context_instance=RequestContext(request))
 
@@ -311,7 +363,7 @@ def add_default_editor_groups(request):
             profile.save()
 
             # Redirect the user to the edit profile page.
-            return redirect('metashare.views.edit_profile')
+            return redirect(edit_profile)
 
     # Otherwise, render a new AddDefaultEditorGroupForm instance
     else:
@@ -321,11 +373,11 @@ def add_default_editor_groups(request):
             messages.error(request, _('There are no editor groups you can '
                 'add to your default list.'))
             # Redirect the user to the edit profile page.
-            return redirect('metashare.views.edit_profile')
+            return redirect(edit_profile)
         
         form = AddDefaultEditorGroupForm(available_editor_groups)
 
-    dictionary = {'title': 'Add default editor group', 'form': form}
+    dictionary = {'title': _('Add default editor group'), 'form': form}
     return render_to_response('accounts/add_default_editor_group.html',
                         dictionary, context_instance=RequestContext(request))
 
@@ -359,7 +411,7 @@ def remove_default_editor_groups(request):
             profile.save()
 
             # Redirect the user to the edit profile page.
-            return redirect('metashare.views.edit_profile')
+            return redirect(edit_profile)
 
     # Otherwise, render a new RemoveDefaultEditorGroupForm instance
     else:
@@ -369,11 +421,11 @@ def remove_default_editor_groups(request):
             messages.error(request, _('There are no editor groups you can '
                 'remove from your default list.'))
             # Redirect the user to the edit profile page.
-            return redirect('metashare.views.edit_profile')
+            return redirect(edit_profile)
         
         form = RemoveDefaultEditorGroupForm(available_editor_groups)
 
-    dictionary = {'title': 'Remove default editor group', 'form': form}
+    dictionary = {'title': _('Remove default editor group'), 'form': form}
     return render_to_response('accounts/remove_default_editor_group.html',
                         dictionary, context_instance=RequestContext(request))
 
@@ -430,14 +482,14 @@ def organization_application(request):
                     # If the email could not be sent successfully, tell the user
                     # about it.
                     messages.error(request,
-                      "There was an error sending out the request email " \
-                      "for your organization application.")
+                      _("There was an error sending out the request email " \
+                        "for your organization application."))
                 else:
                     messages.success(request, _('You have successfully ' \
                         'applied for organization "%s".') % (organization.name,))
 
             # Redirect the user to the edit profile page.
-            return redirect('metashare.views.edit_profile')
+            return redirect(edit_profile)
 
     # Otherwise, render a new OrganizationApplicationForm instance
     else:
@@ -447,12 +499,12 @@ def organization_application(request):
             messages.error(request, _('There are no organizations in the '
                 'database, yet, for which you could apply. Please ask the '
                 'system administrator to create one.'))
-            # Redirect the user to the edit profile page.
-            return redirect('metashare.views.edit_profile')
-        
+            # Redirect the user to the superuser contact page.
+            return redirect(contact)
+
         form = OrganizationApplicationForm(available_organization)
 
-    dictionary = {'title': 'Apply for organization membership', 'form': form}
+    dictionary = {'title': _('Apply for organization membership'), 'form': form}
     return render_to_response('accounts/organization_application.html',
                         dictionary, context_instance=RequestContext(request))
 
@@ -486,7 +538,7 @@ def reset(request, uuid=None):
                 
                 try:
                     # Send out reset email to the given email address.
-                    send_mail('Please confirm your META-SHARE reset request',
+                    send_mail(_('Please confirm your META-SHARE reset request'),
                     email, 'no-reply@meta-share.eu', [user.email],
                     fail_silently=False)
                 
@@ -497,8 +549,8 @@ def reset(request, uuid=None):
                 
                 # Add a message to the user after successful creation.
                 messages.success(request,
-                  "We have received your reset request and sent you an " \
-                  "email with further reset instructions.")
+                  _("We have received your reset request and sent you an " \
+                    "email with further reset instructions."))
                 
                 # Redirect the user to the front page.
                 return redirect('metashare.views.frontpage')
@@ -507,7 +559,7 @@ def reset(request, uuid=None):
         else:
             form = ResetRequestForm()
         
-        dictionary = {'title': 'Reset user account', 'form': form}
+        dictionary = {'title': _('Reset user account'), 'form': form}
         return render_to_response('accounts/reset_account.html', dictionary,
           context_instance=RequestContext(request))
     
@@ -529,26 +581,27 @@ def reset(request, uuid=None):
       'lastname': user.last_name,
       'shortname': user.username,
       'random_password': random_password}
-    email = render_to_string('accounts/activation.email', data)
+    email = render_to_string('accounts/reactivation.email', data)
     
     try:
         # Send out re-activation email to the given email address.
-        send_mail('Your META-SHARE user account has been re-activated',
+        send_mail(_('Your META-SHARE user account has been re-activated'),
         email, 'no-reply@meta-share.eu', [user.email], fail_silently=False)
     
     except SMTPException:
         # If the email could not be sent successfully, tell the user about it.
         messages.error(request,
-          "There was an error sending out the activation email " \
-          "for your user account. Please contact the administrator.")
-        
+          _("There was an error sending out the activation email " \
+            "for your user account. Please contact the administrator at %s.")
+          % (User.objects.filter(is_superuser=True) \
+             .values_list('email', flat=True)[0],))
         # Redirect the user to the front page.
         return redirect('metashare.views.frontpage')
     
     # Add a message to the user after successful creation.
     messages.success(request,
-      "We have re-activated your user account and sent you an email with " \
-      "your personal password which allows you to login to the website.")
+      _("We have re-activated your user account and sent you an email with " \
+        "your personal password which allows you to login to the website."))
     
     # Redirect the user to the front page.
     return redirect('metashare.views.frontpage')

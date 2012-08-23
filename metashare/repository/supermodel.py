@@ -701,7 +701,7 @@ class SchemaModel(models.Model):
         as first value and the list of all objects that have been created when
         import the given XML ElementTree as second value.
 
-        Returns (None, []) in case of errors.
+        Returns (None, [], error_msg) in case of errors.
         """
         LOGGER.debug(u'parent: {0}'.format(parent))
         
@@ -873,18 +873,19 @@ class SchemaModel(models.Model):
                             # list with correct status: 'D' if it was a
                             # duplicate, 'C' otherwise.
                             if _was_duplicate:
-                                _created.append((_instance, 'D'))
-
                                 # If we are allowed to perform cleanup, we do
                                 # so and also replace our _instance instance
                                 # with the "original" object.
                                 if _delete_duplicate_objects:
-                                    _created = SchemaModel._cleanup(_created,
+                                    SchemaModel._cleanup([(_instance, 'D')],
                                       only_remove_duplicates=True)
 
                                     # Replace _instance with "original".
                                     _instance = _duplicates[0]
                                     _created.append((_instance, 'O'))
+
+                                else:
+                                    _created.append((_instance, 'D'))
 
                             else:
                                 _created.append((_instance, 'C'))
@@ -1118,7 +1119,12 @@ class SchemaModel(models.Model):
         as first value and the list of all objects that have been created when
         import the given XML ElementTree as second value.
 
-        Returns (None, []) in case of errors.
+        Note that the storage object of an imported resource which had already
+        been imported previously but had been deleted later on, may still have
+        the deletion flag set to `True` (and may possibly have other storage
+        object fields with older values)!
+
+        Returns (None, [], error_msg) in case of errors.
         """
         return cls.import_from_elementtree(fromstring(element_string),
           parent=parent, copy_status=copy_status)
@@ -1130,10 +1136,17 @@ class SchemaModel(models.Model):
     def get_unicode_rec_(self, field_path, separator):
         field_spec = field_path[0]
         if len(field_path) == 1:
-            value = getattr(self, field_spec, None)
-            if not value:
+            if not any(field_spec == xsd_name
+                       for xsd_name, _, _ in self.__schema_fields__):
                 return u''
-            model_field = self._meta.get_field_by_name(field_spec)
+            field_name = (field_name for xsd_name, field_name, _
+                    in self.__schema_fields__ if xsd_name == field_spec).next()
+            value = getattr(self, field_name, None)
+            if field_name.endswith('_set'):
+                field_name = field_name[:-4]
+            if not value:
+                return u'?'
+            model_field = self._meta.get_field_by_name(field_name)
             if isinstance(model_field[0], models.CharField) or \
               isinstance(model_field[0], MultiSelectField):
                 # see if it's an enum CharField with options and return the
@@ -1149,7 +1162,8 @@ class SchemaModel(models.Model):
                 return getattr(self, 'get_default_{}'.format(field_spec))()
             if hasattr(value, 'all') and \
               hasattr(getattr(value, 'all'), '__call__'):
-                return separator.join([u'{}'.format(child) for child in value.all()])
+                return separator.join(
+                    [u'{}'.format(child) for child in value.all()] or u'?')
             else:
                 try:
                     return separator.join([u'{}'.format(child) for child in value])

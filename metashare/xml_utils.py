@@ -82,8 +82,11 @@ def import_from_string(xml_string, targetstatus, copy_status, owner_id=None):
     
     resource = result[0]
     
-    # Set publication_status for new object.
+    # Set publication_status for the new object. Also make sure that the
+    # deletion flag is not set (may happen in case of re-importing a previously
+    # deleted resource).
     resource.storage_object.publication_status = targetstatus
+    resource.storage_object.deleted = False
     if owner_id:
         resource.owners.add(owner_id)
         for edt_grp in User.objects.get(id=owner_id).get_profile() \
