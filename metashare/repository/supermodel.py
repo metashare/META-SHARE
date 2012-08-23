@@ -4,24 +4,24 @@ Project: META-SHARE prototype implementation
 """
 import logging
 import re
-
-from django.core.cache import cache
-from django.core.exceptions import ValidationError, ObjectDoesNotExist, \
-  ImproperlyConfigured
-from django.db.models.fields import related
-from django.db import models, IntegrityError
+from Queue import Queue
 from traceback import format_exc
 from xml.etree.ElementTree import Element, fromstring, tostring
 
-from metashare.repository.fields import MultiSelectField, MultiTextField, \
-  MetaBooleanField, DictField
-
-from metashare.settings import LOG_LEVEL, LOG_HANDLER, \
-  CHECK_FOR_DUPLICATE_INSTANCES
+from django.core.cache import cache
+from django.core.exceptions import ValidationError, ObjectDoesNotExist, \
+    ImproperlyConfigured
+from django.db import models, IntegrityError
+from django.db.models.fields import related
 from django.db.models.fields.related import ForeignRelatedObjectsDescriptor, \
     OneToOneField
-from Queue import Queue
+
+from metashare.repository.fields import MultiSelectField, MultiTextField, \
+    MetaBooleanField, DictField
+from metashare.settings import LOG_LEVEL, LOG_HANDLER, \
+    CHECK_FOR_DUPLICATE_INSTANCES
 from metashare.storage.models import MASTER
+
 
 # Setup logging support.
 logging.basicConfig(level=LOG_LEVEL)
@@ -49,8 +49,10 @@ METASHARE_ID_REGEXP = re.compile('<metashareId>.+</metashareId>',
 
 OBJECT_XML_CACHE = {}
 
+# This import is required for at least an `eval` in the `_classify` function:
 # pylint: disable-msg=W0611
 from metashare import repository
+
 
 def _remove_namespace_from_tags(element_tree):
     """
