@@ -2,6 +2,7 @@
 Project: META-SHARE prototype implementation
  Author: Christian Federmann <cfedermann@dfki.de>
 """
+import datetime
 import logging
 import re
 from Queue import Queue
@@ -21,6 +22,7 @@ from metashare.repository.fields import MultiSelectField, MultiTextField, \
 from metashare.settings import LOG_LEVEL, LOG_HANDLER, \
     CHECK_FOR_DUPLICATE_INSTANCES
 from metashare.storage.models import MASTER
+from metashare.utils import SimpleTimezone
 
 
 # Setup logging support.
@@ -1019,7 +1021,38 @@ class SchemaModel(models.Model):
                     LOGGER.error(_msg)
                     SchemaModel._cleanup(_created)
                     return (None, [], _msg)
-                setattr(_object, _model_field, _values[0])
+
+                # For dates we have to use a slightly more advanced parser than
+                # the standard DateField parser which does not allow some
+                # correct xsd:date values with timezones, such as "2012-08-22Z"
+                # or "2012-08-22+02:00"
+                if isinstance(_field, models.DateField):
+                    _match = re.match(r""" ^
+                        # year - month - day
+                        (?P<year>-?\d{4}) - (?P<month>\d{2}) - (?P<day>\d{2})
+                        # timezone ('Z' or anything <= 14:00) 
+                        (?P<tz> Z | 14:00 |
+                          (?P<tz_hr>[\-\+](?:0\d|1[0123])):(?P<tz_mn>[0-5]\d))?
+                        $ """, _values[0], re.X)
+                    if _match is None:
+                        _msg = u'Invalid xsd:date value found for {0}: {1}' \
+                            .format(_model_field, _values)
+                        LOGGER.error(_msg)
+                        SchemaModel._cleanup(_created)
+                        return (None, [], _msg)
+                    _parts = _match.groupdict()
+                    if _parts.get('tz', None) in ('Z', None):
+                        tzone = SimpleTimezone(0)
+                    elif _parts.get('tz', None) == '14:00':
+                        tzone = SimpleTimezone(14 * 60)
+                    else:
+                        tzone = SimpleTimezone(int(_parts.get('tz_hr')) * 60
+                                               + int(_parts.get('tz_mn')))
+                    _value = datetime.datetime(int(_parts['year']),
+                        int(_parts['month']), int(_parts['day']), tzinfo=tzone)
+                else:
+                    _value = _values[0]
+                setattr(_object, _model_field, _value)
 
         # This raises a django.db.IntegrityError if the current object does
         # not validate;  if that is the  case, we have to rollback any changes
