@@ -3,10 +3,6 @@ Project: META-SHARE prototype implementation
  Author: Christian Federmann <cfedermann@dfki.de>
 """
 from django import template
-
-from metashare.repository.models import corpusInfoType_model, \
-    toolServiceInfoType_model, lexicalConceptualResourceInfoType_model, \
-    languageDescriptionInfoType_model
 from metashare.settings import MEDIA_URL
 
 register = template.Library()
