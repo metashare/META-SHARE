@@ -18,6 +18,69 @@ from metashare.accounts.models import RegistrationRequest, ResetRequest, \
 from metashare.settings import DJANGO_BASE
 
 
+class ContactFormTest(django.test.TestCase):
+    """
+    A test case for tests around the node maintainer contact form page.
+    """
+    test_login = None
+    
+    @classmethod
+    def setUpClass(cls):
+        UserProfileTest.test_login = {
+            REDIRECT_FIELD_NAME: '/{}'.format(DJANGO_BASE),
+            LOGIN_FORM_KEY: 1,
+            'username': 'editoruser',
+            'password': 'secret',
+        }
+        User.objects.create_user(UserProfileTest.test_login['username'],
+            'editor@example.com', UserProfileTest.test_login['password'])
+
+    @classmethod
+    def tearDownClass(cls):
+        test_utils.clean_user_db()
+
+    def test_contact_form_access(self):
+        """
+        Verifies that the contact form page is only accessible by registered users.
+        """
+        # verify that anonymous access is forbidden and we are redirected to the
+        # login page
+        client = Client()
+        response = client.get(reverse(views.contact), follow=True)
+        self.assertNotContains(response, 'Contact Node Maintainers')
+        self.assertTemplateUsed(response, 'login.html')
+        # verify that access with a normal/registered user is possible
+        client = test_utils.get_client_with_user_logged_in(
+            UserProfileTest.test_login)
+        response = client.get(reverse(views.contact))
+        self.assertContains(response, 'Contact Node Maintainers')
+        self.assertTemplateUsed(response, 'accounts/contact_maintainers.html')
+
+    def test_contact_form_sending(self):
+        """
+        Verifies that the submitting the contact form is possible.
+        """
+        # verify that submitting as an anonymous user is forbidden and we are
+        # redirected to the login page
+        client = Client()
+        response = client.post(reverse(views.contact), data={'message':
+                'This is a sufficiently long test message for the node '
+                'maintainer contact form.', 'subject': 'Test Request'},
+            follow=True)
+        self.assertNotContains(response,
+            'We have received your message and successfully sent it')
+        self.assertTemplateUsed(response, 'login.html')
+        # verify that submitting with a normal/registered user is possible
+        client = test_utils.get_client_with_user_logged_in(
+            UserProfileTest.test_login)
+        response = client.post(reverse(views.contact), data={'message':
+                'This is a sufficiently long test message for the node '
+                'maintainer contact form.', 'subject': 'Test Request'},
+            follow=True)
+        self.assertContains(response,
+            'We have received your message and successfully sent it')
+
+
 class UserProfileTest(django.test.TestCase):
     """
     A test case for tests around the user profile page.

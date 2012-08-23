@@ -13,11 +13,12 @@ from django.core.mail import send_mail
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
 from django.template.loader import render_to_string
+from django.utils.html import escape
 from django.utils.translation import ugettext as _
 
 from metashare.accounts.forms import RegistrationRequestForm, ResetRequestForm, \
     UserProfileForm, EditorGroupApplicationForm, AddDefaultEditorGroupForm, \
-    RemoveDefaultEditorGroupForm, OrganizationApplicationForm
+    RemoveDefaultEditorGroupForm, OrganizationApplicationForm, ContactForm
 from metashare.accounts.models import RegistrationRequest, ResetRequest, \
     EditorGroupApplication, EditorGroupManagers, EditorGroup, \
     OrganizationApplication, OrganizationManagers, Organization
@@ -68,6 +69,50 @@ def confirm(request, uuid):
     
     # Redirect the user to the front page.
     return redirect('metashare.views.frontpage')
+
+
+@login_required
+def contact(request):
+    """
+    Provides a form for contacting the superuser(s) of this META-SHARE node.
+    """
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            # render contact email template with correct values
+            data = {'user_first_name': request.user.first_name,
+              'user_last_name': request.user.last_name,
+              'user_account_name': request.user.username,
+              'node_url': DJANGO_URL, 'message': form.cleaned_data['message'],
+              'subject': form.cleaned_data['subject']}
+            email_msg = render_to_string('accounts/contact_maintainers.email',
+                                         data)
+            # send out the email to all superusers
+            superuser_emails = User.objects.filter(is_superuser=True) \
+                .values_list('email', flat=True)
+            try:
+                send_mail(_('[META-SHARE] Contact Form Request: %s')
+                        % (data['subject'],), email_msg,
+                    'no-reply@meta-share.eu', superuser_emails,
+                    fail_silently=False)
+            except:
+                # if the email could not be sent successfully, tell the user
+                # about it
+                messages.error(request, _("Oops, there was an error sending out"
+                    " your contact request. You can copy your message and try "
+                    "again later: <pre>%s</pre>") % (escape(data['message']),))
+            else:
+                # show a message to the user after successfully sending the mail
+                messages.success(request, _("We have received your message and "
+                    "successfully sent it to the node maintainers. Please give "
+                    "them some days to get back to you."))
+            # redirect the user to the front page
+            return redirect('metashare.views.frontpage')
+    else:
+        form = ContactForm()
+    dictionary = {'title': 'Contact Node Maintainers', 'form': form}
+    return render_to_response('accounts/contact_maintainers.html', dictionary,
+                              context_instance=RequestContext(request))
 
 
 def create(request):
@@ -268,7 +313,7 @@ def editor_group_application(request):
                         'applied for editor group "%s".') % (edt_grp.name,))
 
             # Redirect the user to the edit profile page.
-            return redirect('metashare.views.edit_profile')
+            return redirect(edit_profile)
 
     # Otherwise, render a new EditorGroupApplicationForm instance
     else:
@@ -278,9 +323,9 @@ def editor_group_application(request):
             messages.error(request, _('There are no editor groups in the '
                 'database, yet, for which you could apply. Please ask the '
                 'system administrator to create one.'))
-            # Redirect the user to the edit profile page.
-            return redirect('metashare.views.edit_profile')
-        
+            # Redirect the user to the superuser contact page.
+            return redirect(contact)
+
         form = EditorGroupApplicationForm(available_editor_groups)
 
     dictionary = {'title': _('Apply for editor group membership'), 'form': form}
@@ -318,7 +363,7 @@ def add_default_editor_groups(request):
             profile.save()
 
             # Redirect the user to the edit profile page.
-            return redirect('metashare.views.edit_profile')
+            return redirect(edit_profile)
 
     # Otherwise, render a new AddDefaultEditorGroupForm instance
     else:
@@ -328,7 +373,7 @@ def add_default_editor_groups(request):
             messages.error(request, _('There are no editor groups you can '
                 'add to your default list.'))
             # Redirect the user to the edit profile page.
-            return redirect('metashare.views.edit_profile')
+            return redirect(edit_profile)
         
         form = AddDefaultEditorGroupForm(available_editor_groups)
 
@@ -366,7 +411,7 @@ def remove_default_editor_groups(request):
             profile.save()
 
             # Redirect the user to the edit profile page.
-            return redirect('metashare.views.edit_profile')
+            return redirect(edit_profile)
 
     # Otherwise, render a new RemoveDefaultEditorGroupForm instance
     else:
@@ -376,7 +421,7 @@ def remove_default_editor_groups(request):
             messages.error(request, _('There are no editor groups you can '
                 'remove from your default list.'))
             # Redirect the user to the edit profile page.
-            return redirect('metashare.views.edit_profile')
+            return redirect(edit_profile)
         
         form = RemoveDefaultEditorGroupForm(available_editor_groups)
 
@@ -444,7 +489,7 @@ def organization_application(request):
                         'applied for organization "%s".') % (organization.name,))
 
             # Redirect the user to the edit profile page.
-            return redirect('metashare.views.edit_profile')
+            return redirect(edit_profile)
 
     # Otherwise, render a new OrganizationApplicationForm instance
     else:
@@ -454,9 +499,9 @@ def organization_application(request):
             messages.error(request, _('There are no organizations in the '
                 'database, yet, for which you could apply. Please ask the '
                 'system administrator to create one.'))
-            # Redirect the user to the edit profile page.
-            return redirect('metashare.views.edit_profile')
-        
+            # Redirect the user to the superuser contact page.
+            return redirect(contact)
+
         form = OrganizationApplicationForm(available_organization)
 
     dictionary = {'title': _('Apply for organization membership'), 'form': form}
@@ -547,8 +592,9 @@ def reset(request, uuid=None):
         # If the email could not be sent successfully, tell the user about it.
         messages.error(request,
           _("There was an error sending out the activation email " \
-            "for your user account. Please contact the administrator."))
-        
+            "for your user account. Please contact the administrator at %s.")
+          % (User.objects.filter(is_superuser=True) \
+             .values_list('email', flat=True)[0],))
         # Redirect the user to the front page.
         return redirect('metashare.views.frontpage')
     
