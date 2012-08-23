@@ -1013,16 +1013,13 @@ class SchemaModel(models.Model):
             # Otherwise, we are handling a single-valued field.  Similar to
             # ForeignKey fields, this can be handled using setattr().
             elif _field is not None:
-                try:
-                    # assert(len(_values) == 1)
-                    setattr(_object, _model_field, _values[0])
-
-                except AssertionError:
+                if len(_values) != 1:
                     _msg = u'Single value required: {0}:{1}'.format(
                       _model_field, _values)
                     LOGGER.error(_msg)
                     SchemaModel._cleanup(_created)
                     return (None, [], _msg)
+                setattr(_object, _model_field, _values[0])
 
         # This raises a django.db.IntegrityError if the current object does
         # not validate;  if that is the  case, we have to rollback any changes
