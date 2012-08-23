@@ -592,8 +592,9 @@ def reset(request, uuid=None):
         # If the email could not be sent successfully, tell the user about it.
         messages.error(request,
           _("There was an error sending out the activation email " \
-            "for your user account. Please contact the administrator."))
-        
+            "for your user account. Please contact the administrator at %s.")
+          % (User.objects.filter(is_superuser=True) \
+             .values_list('email', flat=True)[0],))
         # Redirect the user to the front page.
         return redirect('metashare.views.frontpage')
     
