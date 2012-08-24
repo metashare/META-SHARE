@@ -298,7 +298,8 @@ class {0}_model(InvisibleStringModel, {1}):
         """
         Prevents id collisions for documentationInfoType_model sub classes.
         """
-        self.id = _compute_documentationInfoType_key()
+        if not self.id:
+            self.id = _compute_documentationInfoType_key()
         super({0}_model, self).save(*args, **kwargs)
 '''
 
@@ -1150,7 +1151,8 @@ class Clazz(object):
         """
         Prevents id collisions for documentationInfoType_model sub classes.
         """
-        self.id = _compute_documentationInfoType_key()
+        if not self.id:
+            self.id = _compute_documentationInfoType_key()
         super(documentInfoType_model, self).save(*args, **kwargs)
 
 ''')
