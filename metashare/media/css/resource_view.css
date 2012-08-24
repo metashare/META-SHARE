@@ -57,7 +57,6 @@ div.right-corner{
 	margin-bottom: 0.3em;
 	margin-left: 10px;
 	margin-right: 0;
-	margin-top: 0.9em;
 	padding-left: 4px;
 	width: 100%;
 }
@@ -68,7 +67,11 @@ label.component{
 	color: #FF9900;
 	border-radius:10px;
 	font-size:12px;
-	clear:both;
+	display:block;
+}
+
+.title.component + .title.component{
+	margin-left:10px;
 }
 
 .fields ul{
@@ -139,9 +142,7 @@ a.tip:hover span {
     top: 15px;
     text-decoration: none;
     text-align:justify;
-}
-
-    
+}   
 
 /*End CSS for tooltip*/
 
@@ -167,4 +168,8 @@ a.tip:hover span {
 
 .trenner:last-child{
 	display:none;
+}
+
+label span a{
+	font-size:12px;
 }
