@@ -453,6 +453,7 @@ def view(request, resource_name=None, object_id=None):
     media_types = []
     url = []
     metashare_id = []
+    distribution_info_tuple = []
     contact_person_tuple = []
     metadata_info_tuple = []
     version_info_tuple = []
@@ -470,6 +471,8 @@ def view(request, resource_name=None, object_id=None):
             # Create lists for components
             tuple_index = str(value).replace(", ", "][").replace("(","[").replace(")","]")
             tuple_index = tuple_index[:-3]
+            if item == "distributionInfo":
+                distribution_info_tuple = eval("lr_content" + tuple_index)
             if item == "contactPerson":
                 contact_person_tuple = eval("lr_content" + tuple_index)            
             if item == "metadataInfo":
