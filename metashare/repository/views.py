@@ -444,7 +444,7 @@ def view(request, resource_name=None, object_id=None):
     available_classes = get_classes("metashare.repository")
 
     #get the 'best' language version of a "DictField"
-    resourceName = resource.identificationInfo.get_default_resourceName()
+    resource_name = resource.identificationInfo.get_default_resourceName()
     
     # Create fields lists
     descriptions = []
@@ -452,8 +452,7 @@ def view(request, resource_name=None, object_id=None):
     resource_short_names = []
     media_types = []
     url = []
-    metaShareId = []
-    distributionInfo = []
+    metashare_id = []
     contact_person_tuple = []
     metadata_info_tuple = []
     version_info_tuple = []
@@ -471,10 +470,6 @@ def view(request, resource_name=None, object_id=None):
             # Create lists for components
             tuple_index = str(value).replace(", ", "][").replace("(","[").replace(")","]")
             tuple_index = tuple_index[:-3]
-            if item == "identificationInfo":
-                identification_info_tuple = eval("lr_content" + tuple_index)
-            if item == "distributionInfo":
-                distribution_info_tuple = eval("lr_content" + tuple_index)
             if item == "contactPerson":
                 contact_person_tuple = eval("lr_content" + tuple_index)            
             if item == "metadataInfo":
@@ -508,10 +503,10 @@ def view(request, resource_name=None, object_id=None):
             elif item == "url":
                 url.append(eval("lr_content" + tuple_index))
             elif item == "metaShareId":
-                metaShareId.append(eval("lr_content" + tuple_index))
+                metashare_id.append(eval("lr_content" + tuple_index))
     
     # Define context for template rendering.
-    context = { 'resourceName': resourceName,
+    context = { 'resourceName': resource_name,
                 'resource': resource,
                 'lr_content': lr_content, 
                 'distribution_info_tuple': distribution_info_tuple,                
@@ -529,7 +524,7 @@ def view(request, resource_name=None, object_id=None):
                 'resourceType': resource_type, 
                 'mediaTypes': media_types,
                 'url': url,
-                'metaShareId': metaShareId                
+                'metaShareId': metashare_id                
                 }
     template = 'repository/lr_view.html'
 
