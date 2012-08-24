@@ -106,10 +106,16 @@
 		</script>
 		
 		<script>
-		//an exei paidia tha exei kai eikonidio
-			$(document).ready(function(){  
+			$(document).ready(function(){				
+				
+				$(".title.component").each(function() {
+					if($(this).nextUntil(".title.component").hasClass("optional")){
+						$(this).addClass("expandable");
+					}
+				});
+				
 				$(".dataline.optional").hide();
-				$(".title.component").hover(function() {
+				$(".expandable").hover(function() {
 				 	$(this).nextUntil(".title.component").show();
 				 	}, function() { 
 					 	$(".dataline.optional").hide();
@@ -151,7 +157,7 @@
 		</h2>
 		<h3>{% for name in resourceShortNames %}{{ name }}<img src="{{ MEDIA_URL }}images/trenner.png" class="trenner" />{% endfor %}</h3> {# Here we should choose the english version of resource short name (should be provided by views.py) #}
 		<h4>{{metaShareId.0}}</h4>
-		<h4 style="text-align:justify" class="readmore">{{ descriptions.0 }}</h4>
+		<h4 style="text-align:justify" class="readmore">{{ description }}</h4>
 		{% if url.0 %}
 		<h4><a href="{{url.0}}" target="_blank">{{url.0}}</a></h4>
 		{% endif %}
