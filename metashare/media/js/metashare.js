@@ -6,7 +6,7 @@ function addFormHelper(){
     }
   }
 
-  $('.form_helper').find('input').focusin(
+  $('.form_helper').find('input[defaultText]').focusin(
       function(){
         if($(this).attr('type') == 'text'){
           var deftext = $(this).attr("defaultText");
@@ -18,13 +18,27 @@ function addFormHelper(){
       }
   );
 
-  $('.form_helper').find('input').focusout(
+  $('.form_helper').find('input[defaultText]').focusout(
       function(){
           var deftext = $(this).attr("defaultText");
           var text    = $(this).attr("value");
           if(text==""){
              $(this).attr({value : deftext});
           }
+      }
+  );
+
+  $('.form_helper').submit(
+      function(){
+        $(this).find('input[defaultText]').each(
+            function(){
+              var deftext = $(this).attr("defaultText");
+              var text    = $(this).attr("value");
+              if(text==deftext){
+                 $(this).attr({value : ""});
+              }
+            }
+        )
       }
   );
 }

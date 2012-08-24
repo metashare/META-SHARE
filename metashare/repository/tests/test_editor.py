@@ -28,7 +28,7 @@ TESTFIXTURE4_XML = '{}/repository/test_fixtures/META-SHARE/FBK16.xml'.format(ROO
 BROKENFIXTURE_XML = '{}/repository/fixtures/broken.xml'.format(ROOT_PATH)
 TESTFIXTURES_ZIP = '{}/repository/fixtures/tworesources.zip'.format(ROOT_PATH)
 BROKENFIXTURES_ZIP = '{}/repository/fixtures/onegood_onebroken.zip'.format(ROOT_PATH)
-LEX_CONC_RES_XML = '{}/repository/test_fixtures/published-lexConcept-Text-FreEngGer.xml'.format(ROOT_PATH)
+LEX_CONC_RES_XML = '{}/repository/test_fixtures/published-lexConcept-Audio-EnglishGerman.xml'.format(ROOT_PATH)
 
 
 def _import_test_resource(editor_group=None, path=TESTFIXTURE_XML,

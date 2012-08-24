@@ -1,8 +1,10 @@
 '''
-This file holds globally useful utility functions,
-i.e. functions that are generic enough not to be
-specific to one app.
+This file holds globally useful utility classes and functions, i.e., classes and
+functions that are generic enough not to be specific to one app.
 '''
+from datetime import tzinfo, timedelta
+
+
 def get_class_by_name(module_name, class_name):
     '''
     Given the name of a module (e.g., 'metashare.resedit.admin')
@@ -39,3 +41,20 @@ def create_breadcrumb_template_params(model, action):
                  }
     
     return dictionary
+
+
+class SimpleTimezone(tzinfo):
+    """
+    A fixed offset timezone with an unknown name and an unknown DST adjustment.
+    """
+    def __init__(self, offset):
+        self.__offset = timedelta(minutes=offset)
+
+    def utcoffset(self, dt):
+        return self.__offset
+
+    def tzname(self, dt):
+        return None
+
+    def dst(self, dt):
+        return None
