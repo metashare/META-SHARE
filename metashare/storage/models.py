@@ -16,7 +16,6 @@ from xml.etree import ElementTree as etree
 from datetime import datetime, timedelta
 import logging
 import re
-from xml.etree.ElementTree import tostring
 from json import dumps, loads
 from django.core.serializers.json import DjangoJSONEncoder
 import zipfile
@@ -305,10 +304,12 @@ class StorageObject(models.Model):
         update_xml = False
         
         # create current version of metadata XML
-        from metashare.xml_utils import pretty_xml
-        _metadata = pretty_xml(tostring(
+        from metashare.xml_utils import to_xml_string
+        _metadata = to_xml_string(
           # pylint: disable-msg=E1101
-          self.resourceinfotype_model_set.all()[0].export_to_elementtree()))
+          self.resourceinfotype_model_set.all()[0].export_to_elementtree(),
+          # use ASCII encoding to convert non-ASCII chars to entities
+          encoding="ASCII")
         
         if self.metadata != _metadata:
             self.metadata = _metadata
