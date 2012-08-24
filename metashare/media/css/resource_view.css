@@ -74,6 +74,11 @@ label.component{
 	margin-left:10px;
 }
 
+.expandable{
+	cursor: pointer; 
+	background:#eee !important;
+}
+
 .fields ul{
    list-style: none;
    padding:0px;
