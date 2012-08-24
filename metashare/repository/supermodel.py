@@ -137,7 +137,7 @@ class SchemaModel(models.Model):
 
     @classmethod
     def get_schema_name(cls):
-        return type(self).__schema_name__
+        return type(cls).__schema_name__
 
     @classmethod
     def is_required_field(cls, name):
