@@ -104,6 +104,21 @@
 		  		});		  		
 			});
 		</script>
+		
+		<script>
+		//an exei paidia tha exei kai eikonidio
+			$(document).ready(function(){  
+				$(".dataline.optional").hide();
+				$(".title.component").hover(function() {
+				 	$(this).nextUntil(".title.component").show();
+				 	}, function() { 
+					 	$(".dataline.optional").hide();
+				});
+				$(".title.component").click(function() {
+				 	$(this).nextUntil(".title.component").show();
+				});
+			});
+		</script>
 
 
 		<style type="text/css">
@@ -155,71 +170,82 @@
 		<div class="column middle">
 			<div class="fields">
 					<ul>
-						{% for type in mediaTypes %}
-							<li><a href="#{{forloop.counter}}">{{type}}{% get_icon type %}</a></li>
-						{% endfor %}
+						{% ifequal resourceType "toolService" %}
+							<li><a href="#1">toolService{% get_icon "toolService" %}</a></li>
+						{% else %}
+							{% for type in mediaTypes %}
+								<li><a href="#{{forloop.counter}}">{{type}}{% get_icon type %}</a></li>
+							{% endfor %}
+						{% endifequal %}
+						
+						
 					</ul>
 				</div>
 			<div class="white_box middle_box">
-				
-			{% for type in mediaTypes %}
+			
+			{% ifequal resourceType "toolService" %}
 				<div id="tabs_content_container">
-					<div id="{{forloop.counter}}" class="tab_content">
-						{% ifequal resourceType "corpus" %}
-							{% ifequal type "text" %}
-								{% include "repository/corpus_text_info.html" with type='corpusTextInfo' %}
-							{% endifequal %}
-							{% ifequal type "audio" %}
-								{% include "repository/corpus_text_info.html" with type='corpusAudioInfo' %}
-							{% endifequal %}
-							{% ifequal type "video" %}
-								{% include "repository/corpus_text_info.html" with type='corpusVideoInfo' %}
-							{% endifequal %}
-							{% ifequal type "image" %}
-								{% include "repository/corpus_text_info.html" with type='corpusImageInfo' %}
-							{% endifequal %}
-							{% ifequal type "textNumerical" %}
-								{% include "repository/corpus_text_info.html" with type='corpusTextNumericalInfo' %}
-							{% endifequal %}
-							{% ifequal type "textNgram" %}
-								{% include "repository/corpus_text_info.html" with type='corpusTextNgramInfo' %}
-							{% endifequal %}
-						{% else %}
-							{% ifequal resourceType "lexicalConceptualResource" %}
-								{% ifequal type "text" %}
-									{% include "repository/corpus_text_info.html" with type='lexicalConceptualResourceTextInfo' %}
-								{% endifequal %}
-								{% ifequal type "audio" %}
-									{% include "repository/corpus_text_info.html" with type='lexicalConceptualResourceAudioInfo' %}
-								{% endifequal %}
-								{% ifequal type "video" %}
-									{% include "repository/corpus_text_info.html" with type='lexicalConceptualResourceVideoInfo' %}
-								{% endifequal %}
-								{% ifequal type "image" %}
-									{% include "repository/corpus_text_info.html" with type='lexicalConceptualResourceImageInfo' %}
-								{% endifequal %}
-							{% else %}	
-								{% ifequal resourceType "languageDescription" %}
-									{% ifequal type "text" %}
-										{% include "repository/corpus_text_info.html" with type='languageDescriptionTextInfo' %}
-									{% endifequal %}
-									{% ifequal type "video" %}
-										{% include "repository/corpus_text_info.html" with type='languageDescriptionVideoInfo' %}
-									{% endifequal %}
-									{% ifequal type "image" %}
-										{% include "repository/corpus_text_info.html" with type='languageDescriptionImageInfo' %}
-									{% endifequal %}
-								{% else %}
-									{% ifequal resourceType "toolService" %}
-										asdf
-									{% endifequal %}		
-								{% endifequal %}		
-							{% endifequal %}
-						{% endifequal %}
-						
+					<div id="1" class="tab_content">
+						{% include "repository/media_info.html" with type='toolServiceInfo' %}
 					</div>
 				</div>
-			{% endfor %}
+			{% else %}
+				{% for type in mediaTypes %}
+					<div id="tabs_content_container">
+						<div id="{{forloop.counter}}" class="tab_content">
+							{% ifequal resourceType "corpus" %}
+								{% ifequal type "text" %}
+									{% include "repository/media_info.html" with type='corpusTextInfo' %}
+								{% endifequal %}
+								{% ifequal type "audio" %}
+									{% include "repository/media_info.html" with type='corpusAudioInfo' %}
+								{% endifequal %}
+								{% ifequal type "video" %}
+									{% include "repository/media_info.html" with type='corpusVideoInfo' %}
+								{% endifequal %}
+								{% ifequal type "image" %}
+									{% include "repository/media_info.html" with type='corpusImageInfo' %}
+								{% endifequal %}
+								{% ifequal type "textNumerical" %}
+									{% include "repository/media_info.html" with type='corpusTextNumericalInfo' %}
+								{% endifequal %}
+								{% ifequal type "textNgram" %}
+									{% include "repository/media_info.html" with type='corpusTextNgramInfo' %}
+								{% endifequal %}
+							{% else %}
+								{% ifequal resourceType "lexicalConceptualResource" %}
+									{% ifequal type "text" %}
+										{% include "repository/media_info.html" with type='lexicalConceptualResourceTextInfo' %}
+									{% endifequal %}
+									{% ifequal type "audio" %}
+										{% include "repository/media_info.html" with type='lexicalConceptualResourceAudioInfo' %}
+									{% endifequal %}
+									{% ifequal type "video" %}
+										{% include "repository/media_info.html" with type='lexicalConceptualResourceVideoInfo' %}
+									{% endifequal %}
+									{% ifequal type "image" %}
+										{% include "repository/media_info.html" with type='lexicalConceptualResourceImageInfo' %}
+									{% endifequal %}
+								{% else %}	
+									{% ifequal resourceType "languageDescription" %}
+										{% ifequal type "text" %}
+											{% include "repository/media_info.html" with type='languageDescriptionTextInfo' %}
+										{% endifequal %}
+										{% ifequal type "video" %}
+											{% include "repository/media_info.html" with type='languageDescriptionVideoInfo' %}
+										{% endifequal %}
+										{% ifequal type "image" %}
+											{% include "repository/media_info.html" with type='languageDescriptionImageInfo' %}
+										{% endifequal %}										
+									{% endifequal %}		
+								{% endifequal %}
+							{% endifequal %}
+							
+						</div>
+					</div>
+				{% endfor %}
+			{% endifequal %}
+			
 			</div>
 		</div>
 		<div class="white_box column corner right-corner">
