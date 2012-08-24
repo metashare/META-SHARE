@@ -15,7 +15,8 @@ from metashare.repository.supermodel import SchemaModel, SubclassableModel, \
 from metashare.repository.editor.widgets import MultiFieldWidget
 from metashare.repository.fields import MultiTextField, MetaBooleanField, \
   MultiSelectField, DictField, best_lang_value_retriever
-from metashare.repository.validators import validate_lang_code_keys, validate_dict_values
+from metashare.repository.validators import validate_lang_code_keys, \
+  validate_dict_values, validate_xml_schema_year
 
 from metashare.storage.models import StorageObject, MASTER, COPY_CHOICES
 
@@ -829,11 +830,11 @@ class documentInfoType_model(documentationInfoType_model):
       help_text='The name of the editor as mentioned in the document',
       blank=True, )
 
-    year = models.IntegerField(
+    year = models.CharField(
       verbose_name='Year', 
       help_text='The year of publication or, for an unpublished work, th' \
       'e year it was written',
-      blank=True, null=True, )
+      blank=True, validators=[validate_xml_schema_year], max_length=1000, )
 
     publisher = MultiTextField(max_length=200, widget=MultiFieldWidget(widget_id=6, max_length=200), 
       verbose_name='Publisher', 
