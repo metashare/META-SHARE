@@ -934,7 +934,9 @@ class documentInfoType_model(documentationInfoType_model):
         """
         Prevents id collisions for documentationInfoType_model sub classes.
         """
+        # pylint: disable-msg=E0203
         if not self.id:
+            # pylint: disable-msg=W0201
             self.id = _compute_documentationInfoType_key()
         super(documentInfoType_model, self).save(*args, **kwargs)
 
@@ -7832,6 +7834,8 @@ class documentUnstructuredString_model(InvisibleStringModel, documentationInfoTy
         """
         Prevents id collisions for documentationInfoType_model sub classes.
         """
+        # pylint: disable-msg=E0203
         if not self.id:
+            # pylint: disable-msg=W0201
             self.id = _compute_documentationInfoType_key()
         super(documentUnstructuredString_model, self).save(*args, **kwargs)
