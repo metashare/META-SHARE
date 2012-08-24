@@ -459,7 +459,7 @@ def view(request, resource_name=None, object_id=None):
     version_info_tuple = []
     validation_info_tuple = []
     usage_info_tuple = []
-    resource_documentation_info_tuple = []    
+    documentation_info_tuple = []    
     resource_creation_info_tuple = []    
     relation_info_tuple = []
     
@@ -484,7 +484,7 @@ def view(request, resource_name=None, object_id=None):
             if item == "usageInfo":
                 usage_info_tuple = eval("lr_content" + tuple_index)
             if item == "resourceDocumentationInfo":
-                resource_documentation_info_tuple = eval("lr_content" + tuple_index)            
+                documentation_info_tuple = eval("lr_content" + tuple_index)            
             if item == "resourceCreationInfo":
                 resource_creation_info_tuple = eval("lr_content" + tuple_index)
             if item == "relationInfo":
@@ -518,7 +518,7 @@ def view(request, resource_name=None, object_id=None):
                 'version_info_tuple': version_info_tuple,
                 'validation_info_tuple': validation_info_tuple,
                 'usage_info_tuple': usage_info_tuple,
-                'resource_documentation_info_tuple': resource_documentation_info_tuple,                
+                'documentation_info_tuple': documentation_info_tuple,                
                 'resource_creation_info_tuple': resource_creation_info_tuple,
                 'relation_info_tuple': relation_info_tuple,                       
                 'descriptions': descriptions, 
