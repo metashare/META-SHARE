@@ -445,10 +445,10 @@ def view(request, resource_name=None, object_id=None):
 
     #get the 'best' language version of a "DictField"
     resource_name = resource.identificationInfo.get_default_resourceName()
+    description = resource.identificationInfo.get_default_description()
+
     
     # Create fields lists
-    descriptions = []
-    resource_names = []
     resource_short_names = []
     media_types = []
     url = []
@@ -493,11 +493,7 @@ def view(request, resource_name=None, object_id=None):
             # Create lists for individual fields
             tuple_index = str(value).replace(", ", "][").replace("(","[").replace(")","]")
             tuple_index = "{}[1]".format(tuple_index[:-3])
-            if item == "description":
-                descriptions.append(eval("lr_content" + tuple_index))
-            elif item == "resourceName":
-                resource_names.append(eval("lr_content" + tuple_index))
-            elif item == "resourceShortName":
+            if item == "resourceShortName":
                 resource_short_names.append(eval("lr_content" + tuple_index))
             elif item == "mediaType":
                 media_types.append(eval("lr_content" + tuple_index))
@@ -521,8 +517,7 @@ def view(request, resource_name=None, object_id=None):
                 'documentation_info_tuple': documentation_info_tuple,                
                 'resource_creation_info_tuple': resource_creation_info_tuple,
                 'relation_info_tuple': relation_info_tuple,                       
-                'descriptions': descriptions, 
-                'resourceNames': resource_names, 
+                'description': description, 
                 'resourceShortNames': resource_short_names, 
                 'resourceType': resource_type, 
                 'mediaTypes': media_types,
