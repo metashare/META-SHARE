@@ -934,7 +934,8 @@ class documentInfoType_model(documentationInfoType_model):
         """
         Prevents id collisions for documentationInfoType_model sub classes.
         """
-        self.id = _compute_documentationInfoType_key()
+        if not self.id:
+            self.id = _compute_documentationInfoType_key()
         super(documentInfoType_model, self).save(*args, **kwargs)
 
     def real_unicode_(self):
@@ -7831,5 +7832,6 @@ class documentUnstructuredString_model(InvisibleStringModel, documentationInfoTy
         """
         Prevents id collisions for documentationInfoType_model sub classes.
         """
-        self.id = _compute_documentationInfoType_key()
+        if not self.id:
+            self.id = _compute_documentationInfoType_key()
         super(documentUnstructuredString_model, self).save(*args, **kwargs)
