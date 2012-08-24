@@ -4,25 +4,26 @@ Utility functions for unit tests useful across apps.
 """
 from django.contrib.auth.models import Group, User
 from django.core.management import call_command
+from django.test.client import Client
 from django.test.testcases import TestCase
-from metashare import settings
+from metashare import settings, xml_utils
 from metashare.accounts.admin import EditorGroupManagersAdmin, \
-  OrganizationManagersAdmin
+    OrganizationManagersAdmin
 from metashare.accounts.models import EditorGroupApplication, EditorGroup, \
-  EditorGroupManagers, RegistrationRequest, ResetRequest, UserProfile
+    EditorGroupManagers, RegistrationRequest, ResetRequest, UserProfile, \
+    OrganizationApplication, OrganizationManagers, Organization
+from metashare.recommendations.models import TogetherManager
+from metashare.repository import supermodel
 from metashare.repository.management import GROUP_GLOBAL_EDITORS
 from metashare.repository.models import resourceInfoType_model, \
-  personInfoType_model, actorInfoType_model, documentationInfoType_model, \
-  documentInfoType_model, targetResourceInfoType_model, organizationInfoType_model, \
-  projectInfoType_model
-from metashare.recommendations.models import TogetherManager
+    personInfoType_model, actorInfoType_model, documentationInfoType_model, \
+    documentInfoType_model, targetResourceInfoType_model, organizationInfoType_model, \
+    projectInfoType_model
+from metashare.settings import LOGIN_URL
 from metashare.storage.models import PUBLISHED, MASTER, StorageObject, \
-  RemovedObject
+    RemovedObject, INTERNAL
 from metashare.xml_utils import import_from_file
 import os
-from metashare.repository import supermodel
-
-
 
 
 TEST_STORAGE_PATH = '{0}/test-tmp'.format(settings.ROOT_PATH)
@@ -58,12 +59,15 @@ def clean_resources_db():
 
 def clean_user_db():
     """
-    Deletes all user related entities from db.
-    """    
+    Deletes all user and group related entities from the database.
+    """
     EditorGroupApplication.objects.all().delete()
-    EditorGroup.objects.exclude(name=GROUP_GLOBAL_EDITORS).delete()
-    Group.objects.exclude(name=GROUP_GLOBAL_EDITORS).delete()
     EditorGroupManagers.objects.all().delete()
+    EditorGroup.objects.all().delete()
+    OrganizationApplication.objects.all().delete()
+    OrganizationManagers.objects.all().delete()
+    Organization.objects.all().delete()
+    Group.objects.exclude(name=GROUP_GLOBAL_EDITORS).delete()
     RegistrationRequest.objects.all().delete()
     ResetRequest.objects.all().delete()
     UserProfile.objects.all().delete()
@@ -84,12 +88,23 @@ def create_user(username, email, password):
     User.objects.all().filter(username=username).delete()
     return User.objects.create_user(username, email, password)
 
+def get_client_with_user_logged_in(user_credentials):
+    client = Client()
+    client.get(LOGIN_URL)
+    response = client.post(LOGIN_URL, user_credentials)
+    if response.status_code != 302:
+        raise Exception, 'could not log in user with credentials: {}\n' \
+            'response was: {}'.format(user_credentials, response)
+    return client
+
 def import_xml(filename, copy_status=MASTER):
+    """
+    Returns the imported resource object on success, raises and Exception on failure.
+    """
     _xml = open(filename)
     _xml_string = _xml.read()
     _xml.close()
-    result = resourceInfoType_model.import_from_string(_xml_string, copy_status=copy_status)
-    return result
+    return xml_utils.import_from_string(_xml_string, INTERNAL, copy_status)
 
 def import_xml_or_zip(filename, copy_status=MASTER):
     _xml = open(filename, 'rb')

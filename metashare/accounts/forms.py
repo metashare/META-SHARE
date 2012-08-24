@@ -115,6 +115,20 @@ class RegistrationRequestForm(Form):
     # - add validation for shortname for forbidden characters
 
 
+class ContactForm(Form):
+    """
+    Form used to contact the superusers of the META-SHARE node.
+    """
+    subject = forms.CharField(min_length=6, max_length=80,
+        error_messages={'min_length': _('Please provide a meaningful and '
+                                        'sufficiently indicative subject.')})
+    message = forms.CharField(min_length=30, max_length=2500,
+        widget=forms.Textarea, error_messages={'min_length': _('Your message '
+            'appears to be rather short. Please make sure to phrase your '
+            'request as precise as possible. This will help us to process it '
+            'as quick as possible.')})
+
+
 class ResetRequestForm(Form):
     """
     Form used to reset an existing user account.

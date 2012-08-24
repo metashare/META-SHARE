@@ -21,7 +21,7 @@ def _import_resource(fixture_name, editor_group=None):
     The new resource is published and returned.
     """
     result = test_utils.import_xml('{0}/repository/fixtures/{1}'
-                                    .format(ROOT_PATH, fixture_name))[0]
+                                    .format(ROOT_PATH, fixture_name))
     result.storage_object.published = True
     if not editor_group is None:
         result.editor_groups.add(editor_group)

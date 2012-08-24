@@ -2,26 +2,28 @@
 Project: META-SHARE prototype implementation
  Author: Christian Federmann <cfedermann@dfki.de>
 """
+import datetime
 import logging
 import re
-
-from django.core.cache import cache
-from django.core.exceptions import ValidationError, ObjectDoesNotExist, \
-  ImproperlyConfigured
-from django.db.models.fields import related
-from django.db import models, IntegrityError
+from Queue import Queue
 from traceback import format_exc
 from xml.etree.ElementTree import Element, fromstring, tostring
 
-from metashare.repository.fields import MultiSelectField, MultiTextField, \
-  MetaBooleanField, DictField
-
-from metashare.settings import LOG_LEVEL, LOG_HANDLER, \
-  CHECK_FOR_DUPLICATE_INSTANCES
+from django.core.cache import cache
+from django.core.exceptions import ValidationError, ObjectDoesNotExist, \
+    ImproperlyConfigured
+from django.db import models, IntegrityError
+from django.db.models.fields import related
 from django.db.models.fields.related import ForeignRelatedObjectsDescriptor, \
     OneToOneField
-from Queue import Queue
+
+from metashare.repository.fields import MultiSelectField, MultiTextField, \
+    MetaBooleanField, DictField
+from metashare.settings import LOG_LEVEL, LOG_HANDLER, \
+    CHECK_FOR_DUPLICATE_INSTANCES
 from metashare.storage.models import MASTER
+from metashare.utils import SimpleTimezone
+
 
 # Setup logging support.
 logging.basicConfig(level=LOG_LEVEL)
@@ -49,8 +51,10 @@ METASHARE_ID_REGEXP = re.compile('<metashareId>.+</metashareId>',
 
 OBJECT_XML_CACHE = {}
 
+# This import is required for at least an `eval` in the `_classify` function:
 # pylint: disable-msg=W0611
 from metashare import repository
+
 
 def _remove_namespace_from_tags(element_tree):
     """
@@ -1011,16 +1015,44 @@ class SchemaModel(models.Model):
             # Otherwise, we are handling a single-valued field.  Similar to
             # ForeignKey fields, this can be handled using setattr().
             elif _field is not None:
-                try:
-                    # assert(len(_values) == 1)
-                    setattr(_object, _model_field, _values[0])
-
-                except AssertionError:
+                if len(_values) != 1:
                     _msg = u'Single value required: {0}:{1}'.format(
                       _model_field, _values)
                     LOGGER.error(_msg)
                     SchemaModel._cleanup(_created)
                     return (None, [], _msg)
+
+                # For dates we have to use a slightly more advanced parser than
+                # the standard DateField parser which does not allow some
+                # correct xsd:date values with timezones, such as "2012-08-22Z"
+                # or "2012-08-22+02:00"
+                if isinstance(_field, models.DateField):
+                    _match = re.match(r""" ^
+                        # year - month - day
+                        (?P<year>-?\d{4}) - (?P<month>\d{2}) - (?P<day>\d{2})
+                        # timezone ('Z' or anything <= 14:00) 
+                        (?P<tz> Z | 14:00 |
+                          (?P<tz_hr>[\-\+](?:0\d|1[0123])):(?P<tz_mn>[0-5]\d))?
+                        $ """, _values[0], re.X)
+                    if _match is None:
+                        _msg = u'Invalid xsd:date value found for {0}: {1}' \
+                            .format(_model_field, _values)
+                        LOGGER.error(_msg)
+                        SchemaModel._cleanup(_created)
+                        return (None, [], _msg)
+                    _parts = _match.groupdict()
+                    if _parts.get('tz', None) in ('Z', None):
+                        tzone = SimpleTimezone(0)
+                    elif _parts.get('tz', None) == '14:00':
+                        tzone = SimpleTimezone(14 * 60)
+                    else:
+                        tzone = SimpleTimezone(int(_parts.get('tz_hr')) * 60
+                                               + int(_parts.get('tz_mn')))
+                    _value = datetime.datetime(int(_parts['year']),
+                        int(_parts['month']), int(_parts['day']), tzinfo=tzone)
+                else:
+                    _value = _values[0]
+                setattr(_object, _model_field, _value)
 
         # This raises a django.db.IntegrityError if the current object does
         # not validate;  if that is the  case, we have to rollback any changes
@@ -1118,10 +1150,17 @@ class SchemaModel(models.Model):
     def get_unicode_rec_(self, field_path, separator):
         field_spec = field_path[0]
         if len(field_path) == 1:
-            value = getattr(self, field_spec, None)
-            if not value:
+            if not any(field_spec == xsd_name
+                       for xsd_name, _, _ in self.__schema_fields__):
                 return u''
-            model_field = self._meta.get_field_by_name(field_spec)
+            field_name = (field_name for xsd_name, field_name, _
+                    in self.__schema_fields__ if xsd_name == field_spec).next()
+            value = getattr(self, field_name, None)
+            if field_name.endswith('_set'):
+                field_name = field_name[:-4]
+            if not value:
+                return u'?'
+            model_field = self._meta.get_field_by_name(field_name)
             if isinstance(model_field[0], models.CharField) or \
               isinstance(model_field[0], MultiSelectField):
                 # see if it's an enum CharField with options and return the
@@ -1137,7 +1176,8 @@ class SchemaModel(models.Model):
                 return getattr(self, 'get_default_{}'.format(field_spec))()
             if hasattr(value, 'all') and \
               hasattr(getattr(value, 'all'), '__call__'):
-                return separator.join([u'{}'.format(child) for child in value.all()])
+                return separator.join(
+                    [u'{}'.format(child) for child in value.all()] or u'?')
             else:
                 try:
                     return separator.join([u'{}'.format(child) for child in value])

@@ -24,7 +24,7 @@ class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
         """
         self.assert_index_is_empty()
         # import a single resource and save it in the DB
-        resource = test_utils.import_xml(SearchIndexUpdateTests.RES_PATH_1)[0]
+        resource = test_utils.import_xml(SearchIndexUpdateTests.RES_PATH_1)
         resource.storage_object.publication_status = INGESTED
         resource.storage_object.save()
         # make sure the import has automatically changed the search index
@@ -32,7 +32,7 @@ class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
             "After the import of a resource the index must automatically " \
             "have changed and contain that resource.")
         # import another resource and save it in the DB
-        resource = test_utils.import_xml(SearchIndexUpdateTests.RES_PATH_2)[0]
+        resource = test_utils.import_xml(SearchIndexUpdateTests.RES_PATH_2)
         resource.storage_object.publication_status = INGESTED
         resource.storage_object.save()
         # make sure the import has automatically changed the search index
@@ -105,7 +105,7 @@ class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
         """
         self.assert_index_is_empty()
         # import a single resource and save it in the DB
-        resource = test_utils.import_xml(SearchIndexUpdateTests.RES_PATH_1)[0]
+        resource = test_utils.import_xml(SearchIndexUpdateTests.RES_PATH_1)
         resource.storage_object.publication_status = INGESTED
         resource.storage_object.save()
         # make sure the import has automatically changed the search index
@@ -159,7 +159,7 @@ class SearchTest(test_utils.IndexAwareTestCase):
         Asserts that case-insensitive searching is done.
         """
         imported_res = test_utils.import_xml('{}/repository/test_fixtures/'
-                        'internal-corpus-Text-EngPers.xml'.format(ROOT_PATH))[0]
+                        'internal-corpus-Text-EngPers.xml'.format(ROOT_PATH))
         imported_res.storage_object.published = True
         imported_res.storage_object.save()
         client = Client()
@@ -199,7 +199,7 @@ class SearchTest(test_utils.IndexAwareTestCase):
         Asserts that the search engine is camelCase-aware.
         """
         imported_res = test_utils.import_xml('{}/repository/test_fixtures/'
-                        'internal-corpus-Text-EngPers.xml'.format(ROOT_PATH))[0]
+                        'internal-corpus-Text-EngPers.xml'.format(ROOT_PATH))
         imported_res.storage_object.published = True
         imported_res.storage_object.save()
         client = Client()

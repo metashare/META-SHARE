@@ -15,7 +15,8 @@ from metashare.repository.supermodel import SchemaModel, SubclassableModel, \
 from metashare.repository.editor.widgets import MultiFieldWidget
 from metashare.repository.fields import MultiTextField, MetaBooleanField, \
   MultiSelectField, DictField, best_lang_value_retriever
-from metashare.repository.validators import validate_lang_code_keys, validate_dict_values
+from metashare.repository.validators import validate_lang_code_keys, \
+  validate_dict_values, validate_xml_schema_year
 
 from metashare.storage.models import StorageObject, MASTER, COPY_CHOICES
 
@@ -35,7 +36,7 @@ HTTPURI_VALIDATOR = RegexValidator(r'(https?://.*|ftp://.*|www*)',
 # namespace of the META-SHARE metadata XML Schema
 SCHEMA_NAMESPACE = 'http://www.ilsp.gr/META-XMLSchema'
 # version of the META-SHARE metadata XML Schema
-SCHEMA_VERSION = '2.1'
+SCHEMA_VERSION = '3.0'
 
 def _compute_documentationInfoType_key():
     '''
@@ -829,11 +830,11 @@ class documentInfoType_model(documentationInfoType_model):
       help_text='The name of the editor as mentioned in the document',
       blank=True, )
 
-    year = models.IntegerField(
+    year = models.CharField(
       verbose_name='Year', 
       help_text='The year of publication or, for an unpublished work, th' \
       'e year it was written',
-      blank=True, null=True, )
+      blank=True, validators=[validate_xml_schema_year], max_length=1000, )
 
     publisher = MultiTextField(max_length=200, widget=MultiFieldWidget(widget_id=6, max_length=200), 
       verbose_name='Publisher', 
@@ -933,7 +934,10 @@ class documentInfoType_model(documentationInfoType_model):
         """
         Prevents id collisions for documentationInfoType_model sub classes.
         """
-        self.id = _compute_documentationInfoType_key()
+        # pylint: disable-msg=E0203
+        if not self.id:
+            # pylint: disable-msg=W0201
+            self.id = _compute_documentationInfoType_key()
         super(documentInfoType_model, self).save(*args, **kwargs)
 
     def real_unicode_(self):
@@ -2745,9 +2749,11 @@ class distributionInfoType_model(SchemaModel):
       help_text='Specifies the start date of availability of a resource',
       blank=True, null=True, )
 
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+    def real_unicode_(self):
+        # pylint: disable-msg=C0301
+        formatargs = ['availability', 'licenceInfo', ]
+        formatstring = u'{}, licenses: {}'
+        return self.unicode_(formatstring, formatargs)
 
 MEMBERSHIPINFOTYPE_MEMBERSHIPINSTITUTION_CHOICES = _make_choices_from_list([
   u'ELRA', u'LDC', u'TST-CENTRALE', u'other', 
@@ -2957,9 +2963,11 @@ class licenceInfoType_model(SchemaModel):
 
     back_to_distributioninfotype_model = models.ForeignKey("distributionInfoType_model",  blank=True, null=True)
 
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+    def real_unicode_(self):
+        # pylint: disable-msg=C0301
+        formatargs = ['licence', ]
+        formatstring = u'{}'
+        return self.unicode_(formatstring, formatargs)
 
 CHARACTERENCODINGINFOTYPE_CHARACTERENCODING_CHOICES = _make_choices_from_list([
   u'US-ASCII', u'windows-1250', u'windows-1251', u'windows-1252',
@@ -3495,7 +3503,7 @@ class usageInfoType_model(SchemaModel):
     def real_unicode_(self):
         # pylint: disable-msg=C0301
         formatargs = ['foreseenUseInfo', 'actualUseInfo', ]
-        formatstring = u'foreseen: {} / actual: {}'
+        formatstring = u'foreseen uses: {} / actual uses: {}'
         return self.unicode_(formatstring, formatargs)
 
 FORESEENUSEINFOTYPE_FORESEENUSE_CHOICES = _make_choices_from_list([
@@ -3574,9 +3582,11 @@ class foreseenUseInfoType_model(SchemaModel):
 
     back_to_usageinfotype_model = models.ForeignKey("usageInfoType_model",  blank=True, null=True)
 
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+    def real_unicode_(self):
+        # pylint: disable-msg=C0301
+        formatargs = ['foreseenUse', 'useNLPSpecific', ]
+        formatstring = u'{}, NLP specific: {}'
+        return self.unicode_(formatstring, formatargs)
 
 ACTUALUSEINFOTYPE_ACTUALUSE_CHOICES = _make_choices_from_list([
   u'humanUse', u'nlpApplications', 
@@ -3691,7 +3701,7 @@ class actualUseInfoType_model(SchemaModel):
     def real_unicode_(self):
         # pylint: disable-msg=C0301
         formatargs = ['actualUse', 'useNLPSpecific', ]
-        formatstring = u'{} {}'
+        formatstring = u'{}, NLP specific: {}'
         return self.unicode_(formatstring, formatargs)
 
 # pylint: disable-msg=C0103
@@ -3773,7 +3783,7 @@ class corpusAudioInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      default="audio", editable=False, max_length=10, )
+      default="audio", editable=False, max_length=1000, )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -4160,9 +4170,8 @@ class audioFormatInfoType_model(SchemaModel):
       verbose_name='Number of tracks', 
       help_text='Specifies the number of audio channels',
       
-      max_length=30,
-      choices=sorted(AUDIOFORMATINFOTYPE_NUMBEROFTRACKS_CHOICES['choices'],
-                     key=lambda choice: choice[1]),
+      max_length=AUDIOFORMATINFOTYPE_NUMBEROFTRACKS_CHOICES['max_length'],
+      choices=AUDIOFORMATINFOTYPE_NUMBEROFTRACKS_CHOICES['choices'],
       blank=True, null=True, )
 
     recordingQuality = models.CharField(
@@ -4336,7 +4345,7 @@ class corpusTextInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      default="text", editable=False, max_length=10, )
+      default="text", editable=False, max_length=1000, )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -4564,7 +4573,7 @@ class corpusVideoInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      default="video", editable=False, max_length=5, )
+      default="video", editable=False, max_length=1000, )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -4905,7 +4914,7 @@ class corpusImageInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      default="image", editable=False, max_length=10, )
+      default="image", editable=False, max_length=1000, )
 
     # OneToMany field: modalityInfo
 
@@ -5238,7 +5247,7 @@ class corpusTextNumericalInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      default="textNumerical", editable=False, max_length=20, )
+      default="textNumerical", editable=False, max_length=1000, )
 
     # OneToMany field: modalityInfo
 
@@ -5404,7 +5413,7 @@ class corpusTextNgramInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      default="textNgram", editable=False, max_length=10, )
+      default="textNgram", editable=False, max_length=1000, )
 
     ngramInfo = models.OneToOneField("ngramInfoType_model", 
       verbose_name='Ngram', )
@@ -5820,7 +5829,7 @@ class languageDescriptionTextInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      default="text", editable=False, max_length=10, )
+      default="text", editable=False, max_length=1000, )
 
     creationInfo = models.OneToOneField("creationInfoType_model", 
       verbose_name='Creation', 
@@ -5911,7 +5920,7 @@ class languageDescriptionVideoInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      default="video", editable=False, max_length=10, )
+      default="video", editable=False, max_length=1000, )
 
     creationInfo = models.OneToOneField("creationInfoType_model", 
       verbose_name='Creation', 
@@ -6002,7 +6011,7 @@ class languageDescriptionImageInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      default="image", editable=False, max_length=10, )
+      default="image", editable=False, max_length=1000, )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -6220,7 +6229,7 @@ class lexicalConceptualResourceAudioInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      default="audio", editable=False, max_length=10, )
+      default="audio", editable=False, max_length=1000, )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -6296,7 +6305,7 @@ class lexicalConceptualResourceTextInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      default="text", editable=False, max_length=10, )
+      default="text", editable=False, max_length=1000, )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -6368,7 +6377,7 @@ class lexicalConceptualResourceVideoInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      default="video", editable=False, max_length=10, )
+      default="video", editable=False, max_length=1000, )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
       verbose_name='Linguality', 
@@ -6444,7 +6453,7 @@ class lexicalConceptualResourceImageInfoType_model(SchemaModel):
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
       'different media types.',
-      default="image", editable=False, max_length=10, )
+      default="image", editable=False, max_length=1000, )
 
     # OneToMany field: modalityInfo
 
@@ -7211,7 +7220,7 @@ class lexicalConceptualResourceInfoType_model(resourceComponentTypeType_model):
     resourceType = models.CharField(
       verbose_name='Resource', 
       help_text='Specifies the type of the resource being described',
-      default="lexicalConceptualResource", editable=False, max_length=30, )
+      default="lexicalConceptualResource", editable=False, max_length=1000, )
 
     lexicalConceptualResourceType = models.CharField(
       verbose_name='Lexical conceptual resource type', 
@@ -7367,7 +7376,7 @@ class toolServiceInfoType_model(resourceComponentTypeType_model):
       verbose_name='Resource', 
       help_text='The type of the resource that a tool or service takes a' \
       's input or produces as output',
-      default="toolService", editable=False, max_length=30, )
+      default="toolService", editable=False, max_length=1000, )
 
     toolServiceType = models.CharField(
       verbose_name='Tool service type', 
@@ -7447,7 +7456,7 @@ class corpusInfoType_model(resourceComponentTypeType_model):
     resourceType = models.CharField(
       verbose_name='Resource', 
       help_text='Specifies the type of the resource being described',
-      default="corpus", editable=False, max_length=30, )
+      default="corpus", editable=False, max_length=1000, )
 
     corpusMediaType = models.OneToOneField("corpusMediaTypeType_model", 
       verbose_name='Corpus media', 
@@ -7825,5 +7834,8 @@ class documentUnstructuredString_model(InvisibleStringModel, documentationInfoTy
         """
         Prevents id collisions for documentationInfoType_model sub classes.
         """
-        self.id = _compute_documentationInfoType_key()
+        # pylint: disable-msg=E0203
+        if not self.id:
+            # pylint: disable-msg=W0201
+            self.id = _compute_documentationInfoType_key()
         super(documentUnstructuredString_model, self).save(*args, **kwargs)

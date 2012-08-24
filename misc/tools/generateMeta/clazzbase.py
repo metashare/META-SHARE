@@ -71,7 +71,6 @@ Integer_type_table = {
     'unsignedInt': None,
     'short': None,
     'unsignedShort': None,
-    'gYear': None,
 }
 Float_type_table = {
     'decimal': None,
@@ -97,6 +96,7 @@ String_type_table = {
     'duration': None,
     'Name': None,
     'language': None,
+    'gYear': None,
 }
 Date_type_table = {
     'date': None,
@@ -161,7 +161,8 @@ from {0}supermodel import SchemaModel, SubclassableModel, \\
 from {0}editor.widgets import MultiFieldWidget
 from {0}fields import MultiTextField, MetaBooleanField, \\
   MultiSelectField, DictField, best_lang_value_retriever
-from {0}validators import validate_lang_code_keys, validate_dict_values
+from {0}validators import validate_lang_code_keys, \\
+  validate_dict_values, validate_xml_schema_year
 
 from metashare.storage.models import StorageObject, MASTER, COPY_CHOICES
 
@@ -297,7 +298,8 @@ class {0}_model(InvisibleStringModel, {1}):
         """
         Prevents id collisions for documentationInfoType_model sub classes.
         """
-        self.id = _compute_documentationInfoType_key()
+        if not self.id:
+            self.id = _compute_documentationInfoType_key()
         super({0}_model, self).save(*args, **kwargs)
 '''
 
@@ -383,6 +385,9 @@ REUSABLE_ENTITY_SNIPPET = '''
 '''
 
 REUSABLE_ENTITIES = ('documentInfoType', 'personInfoType', 'organizationInfoType', 'projectInfoType', )
+
+GYEAR_VALIDATOR_OPTION_SNIPPET = "validators=[validate_xml_schema_year], "
+
 
 #
 # Local functions
@@ -833,6 +838,9 @@ class Clazz(object):
                     self.generate_simple_field(name, 'CharField',
                       options + choice_options, '')
             else:
+                if data_type == 'gYear':
+                    options += GYEAR_VALIDATOR_OPTION_SNIPPET
+
                 maxlen = member.get_maxlength()
                 if not maxlen:
                     maxlen = DEFAULT_MAXLENGTH
@@ -1143,7 +1151,8 @@ class Clazz(object):
         """
         Prevents id collisions for documentationInfoType_model sub classes.
         """
-        self.id = _compute_documentationInfoType_key()
+        if not self.id:
+            self.id = _compute_documentationInfoType_key()
         super(documentInfoType_model, self).save(*args, **kwargs)
 
 ''')
@@ -1230,11 +1239,6 @@ class Clazz(object):
             for clazz in clazz_list:
                 sys.stdout.write("{}, ".format(clazz.name))
             sys.stdout.write('\n')
-
-        # We actually do not need the myString_model class inside models.py
-        # hence we remove it from the clazz_list before starting generation.
-        clazz_list.remove(cls.ClazzDict['myString'])
-        logging.warning('Removed unneeded class myString from class list.')
 
         for clazz in clazz_list:
             if clazz.choice_of:
@@ -1327,8 +1331,10 @@ class ClazzBaseMember(object):
             return 'OPTIONAL'
 
     def get_maxlength(self):
-        if isinstance(self.child, XschemaElement):
-            return self.child.getAppInfo('maxlen')
+        if isinstance(self.child, XschemaElementBase):
+            result = self.child.getRestrictionMaxLength()
+            if result != -1:
+                return result
         return None
 
 

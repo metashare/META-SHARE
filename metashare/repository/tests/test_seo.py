@@ -16,7 +16,7 @@ class SEOTest(TestCase):
         """
        
         imported_res = test_utils.import_xml('{}/repository/fixtures/'
-          'testfixture.xml'.format(ROOT_PATH))[0]
+          'testfixture.xml'.format(ROOT_PATH))
         imported_res.storage_object.published = True
         imported_res.storage_object.save()
         client = Client()

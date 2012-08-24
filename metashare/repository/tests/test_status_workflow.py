@@ -36,7 +36,7 @@ class StatusWorkflowTest(TestCase):
         
         _fixture = '{0}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
         _result = test_utils.import_xml(_fixture)
-        StatusWorkflowTest.resource_id = _result[0].id
+        StatusWorkflowTest.resource_id = _result.id
     
     @classmethod
     def tearDownClass(cls):
