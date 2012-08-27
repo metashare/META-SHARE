@@ -17,6 +17,7 @@ from django.utils.encoding import force_unicode
 from metashare.repository.models import User
 from metashare.settings import LOG_LEVEL, LOG_HANDLER, XDIFF_LOCATION
 from metashare.stats.model_utils import saveLRStats, UPDATE_STAT
+from xml.etree import ElementTree
 
 
 # Setup logging support.
@@ -27,6 +28,9 @@ LOGGER.addHandler(LOG_HANDLER)
 CONSOLE = "/dev/null"
 
 XML_DECL = re.compile(r'\s*<\?xml version=".+" encoding=".+"\?>\s*\n?',
+  re.I|re.S|re.U)
+# same as above, but using using ' quotes for attributes
+XML_DECL_2 = re.compile(r"\s*<\?xml version='.+' encoding='.+'\?>\s*\n?",
   re.I|re.S|re.U)
 
 def xml_compare(file1, file2, outfile=None):
@@ -164,46 +168,16 @@ def import_from_file(filehandle, descriptor, targetstatus, copy_status, owner_id
     return imported_resources, erroneous_descriptors
 
 
-def pretty_xml(xml_string):
+def to_xml_string(node, encoding="ASCII"):
     """
-    Pretty-print the given XML String with proper indentation.
+    Serialize the given XML node as Unicode string using the given encoding.
     """
-    xml_string = xml_string.decode('utf-8').replace('><', '>\n<')
-
+    
+    xml_string = ElementTree.tostring(node, encoding=encoding)
+    xml_string = xml_string.decode(encoding)
+    
     # Delete any XML declaration inside the given XML String.
     xml_string = XML_DECL.sub(u'', xml_string)
+    xml_string = XML_DECL_2.sub(u'', xml_string)
 
-    output = u'<?xml version="1.0" encoding="UTF-8"?>\n'
-
-    # Stores the current indentation level.
-    indent_level = 0
-    for line in xml_string.split('\n'):
-        line = line.strip()
-
-        if line.startswith('<') and line.endswith('/>'):
-            output += u'{0}{1}\n'.format('  ' * indent_level, line)
-            continue
-
-        if line.startswith('</') and line.endswith('>'):
-            indent_level -= 1
-            output += u'{0}{1}\n'.format('  ' * indent_level, line)
-            indent_level -= 1
-            continue
-
-        if line.startswith('<') and line.endswith('>') and '</' in line:
-            output += u'{0}{1}\n'.format('  ' * indent_level, line)
-            continue
-
-        if line.startswith('<') and line.endswith('>') and (not '</' in line):
-            indent_level += 1
-            output += u'{0}{1}\n'.format('  ' * indent_level, line)
-            indent_level += 1
-            continue
-
-        if not line.startswith('<') and line.endswith('>') and ('</' in line):
-            output += u'{0}{1}\n'.format('  ' * indent_level, line)
-            continue
-
-        output += u'{0}{1}\n'.format('  ' * indent_level, line)
-
-    return output
+    return u'<?xml version="1.0" encoding="{}"?>{}'.format(encoding, xml_string)
