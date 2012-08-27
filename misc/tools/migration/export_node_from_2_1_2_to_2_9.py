@@ -4,6 +4,7 @@ Project: META-SHARE prototype implementation
  Author: Christian Federmann <cfedermann@dfki.de>
 """
 import os
+import re
 import sys
 import shutil
 from StringIO import StringIO
@@ -43,6 +44,12 @@ STORAGE = "storage.xml"
 METADATA = "metadata.xml"
 RESOURCE = "resource.xml"
 ARCHIVE = "archive.zip"
+
+XML_DECL = re.compile(r'\s*<\?xml version=".+" encoding=".+"\?>\s*\n?',
+  re.I|re.S|re.U)
+# same as above, but using using ' quotes for attributes
+XML_DECL_2 = re.compile(r"\s*<\?xml version='.+' encoding='.+'\?>\s*\n?",
+  re.I|re.S|re.U)
 
 from django.core.serializers import xml_serializer
 class MigrationSerializer(xml_serializer.Serializer):
@@ -185,8 +192,6 @@ def _export_resource(res, folder, serializer):
     serializer to serialize the associated storage object.
     """
     
-    from metashare.repository.supermodel import pretty_xml
-    
     storage_obj = res.storage_object
     
     target_storage_path = os.path.join(folder, STORAGE_FOLDER, storage_obj.identifier)
@@ -195,10 +200,9 @@ def _export_resource(res, folder, serializer):
     # export resource metadata XML
     print "exporting {}".format(res)
     root_node = res.export_to_elementtree()
-    xml_string = ElementTree.tostring(root_node, encoding="utf-8")
-    pretty = pretty_xml(xml_string).encode('utf-8')
+    xml_string = _to_xml_string(root_node, encoding="ASCII").encode('ASCII')
     with open(os.path.join(target_storage_path, METADATA), 'wb') as _out:
-        _out.write(pretty)
+        _out.write(xml_string)
     
     # export elected fields of resource object
     _export(
@@ -219,6 +223,21 @@ def _export_resource(res, folder, serializer):
         print "copying archive of resource {}".format(res)
         shutil.copy(
           archive_path, os.path.join(target_storage_path, ARCHIVE))
+
+
+def _to_xml_string(node, encoding="ASCII"):
+    """
+    Serialize the given XML node as Unicode string using the given encoding.
+    """
+    
+    xml_string = ElementTree.tostring(node, encoding=encoding)
+    xml_string = xml_string.decode(encoding)
+    
+    # Delete any XML declaration inside the given XML String.
+    xml_string = XML_DECL.sub(u'', xml_string)
+    xml_string = XML_DECL_2.sub(u'', xml_string)
+
+    return u'<?xml version="1.0" encoding="{}"?>{}'.format(encoding, xml_string)
 
 
 if __name__ == "__main__":
