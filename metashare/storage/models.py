@@ -336,7 +336,7 @@ class StorageObject(models.Model):
             # serialize metadata
             with open('{0}/metadata-{1:04d}.xml'.format(
               self._storage_folder(), self.revision), 'wb') as _out:
-                _out.write(unicode(self.metadata).encode('utf-8'))
+                _out.write(unicode(self.metadata).encode('ASCII'))
             update_zip = True
         
         # check if global storage object serialization has changed; if yes,
