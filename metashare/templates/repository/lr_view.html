@@ -23,64 +23,7 @@
 					userCollapseText: 'Read Less'
 				});
 			});
-		</script>
 
-		<script type="text/javascript">
-			function getElementsByClassName(node,classname)
-			{
-				if (node.getElementsByClassName)
-					{return node.getElementsByClassName(classname);}
-			}
-			function getElementsByClass(searchClass,node,tag)
-			{
-				var classElements = new Array();
-				if ( node == null ){node = document;}
-				if ( tag == null ){tag = '*';}
-				var els = node.getElementsByTagName(tag);
-				var elsLen = els.length;
-				var pattern = new indexOf(searchClass);
-				for (i = 0, j = 0; i < elsLen; i++)
-				{
-				if ( pattern.test(els[i].className) )
-					{
-					classElements[j] = els[i];
-					j++;
-					}
-				}
-				return classElements;
-			}
-			function toggle(el)
-			{
-				if (el.style.display == '')
-					{
-					el.style.display = 'none';
-					}
-					else
-					{
-					el.style.display = '';
-					}
-			}
-			function displayMandatory()
-			{
-				var els = getElementsByClassName(document, 'mandatory');
-				var i;
-				for (i = 0; i < els.length; i += 1) 
-				{
-					toggle(els[i]);
-				}
-			}
-			function displayOptional()
-			{
-				var els = getElementsByClassName(document, 'optional');
-				var i;
-				for (i = 0; i < els.length; i += 1) 
-				{
-					toggle(els[i]);
-				}
-			}
-		</script>
-		
-		<script>
 			$(document).ready(function(){  
 				$(".tab_content").hide();
 				$(".fields li:first-child").addClass("active");
@@ -93,13 +36,8 @@
 					var selected_tab = $(this).find("a").attr("href");
 					$(selected_tab).fadeIn();
 					return false;
-		  		});		  		
-			});
-		</script>
-		
-		<script>
-			$(document).ready(function(){				
-				
+		  		});
+
 				$(".title.component").each(function() {
 					if($(this).nextUntil(".title.component").hasClass("optional")){
 						$(this).addClass("expandable");
@@ -118,7 +56,6 @@
 			});
 		</script>
 
-
 		<style type="text/css">
 			div#content dummy, span.details {
 				font: inherit;
@@ -126,8 +63,7 @@
 				vertical-align: inherit;
 			 }
 		</style>
-		
-		
+
 	<div class="top_box white_box">
 		<div id="stats" align="right">
             {% for stat in LR_STATS %}
@@ -150,9 +86,7 @@
 		{% if url.0 %}
 		<h4><a href="{{url.0}}" target="_blank">{{url.0}}</a></h4>
 		{% endif %}
-		
-		
-	
+
 	</div>
 	
 		<div class="white_box column corner">
