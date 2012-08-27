@@ -544,9 +544,11 @@ def _format_recommendations(recommended_resources):
     Returns the given resource recommendations list formatted as a list of
     dictionaries with the two keys "name" and "url" (for use in the single
     resource view).
+    
+    The number of returned recommendations is restricted to at most 4.
     '''
     result = []
-    for res in recommended_resources:
+    for res in recommended_resources[:4]:
         res_item = {}
         res_item['name'] = res.__unicode__()
         res_item['url'] = res.get_absolute_url()
