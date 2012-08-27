@@ -16,7 +16,6 @@ from xml.etree import ElementTree as etree
 from datetime import datetime, timedelta
 import logging
 import re
-from xml.etree.ElementTree import tostring
 from json import dumps, loads
 from django.core.serializers.json import DjangoJSONEncoder
 import zipfile
@@ -305,10 +304,12 @@ class StorageObject(models.Model):
         update_xml = False
         
         # create current version of metadata XML
-        from metashare.xml_utils import pretty_xml
-        _metadata = pretty_xml(tostring(
+        from metashare.xml_utils import to_xml_string
+        _metadata = to_xml_string(
           # pylint: disable-msg=E1101
-          self.resourceinfotype_model_set.all()[0].export_to_elementtree()))
+          self.resourceinfotype_model_set.all()[0].export_to_elementtree(),
+          # use ASCII encoding to convert non-ASCII chars to entities
+          encoding="ASCII")
         
         if self.metadata != _metadata:
             self.metadata = _metadata
@@ -335,7 +336,7 @@ class StorageObject(models.Model):
             # serialize metadata
             with open('{0}/metadata-{1:04d}.xml'.format(
               self._storage_folder(), self.revision), 'wb') as _out:
-                _out.write(unicode(self.metadata).encode('utf-8'))
+                _out.write(unicode(self.metadata).encode('ASCII'))
             update_zip = True
         
         # check if global storage object serialization has changed; if yes,
