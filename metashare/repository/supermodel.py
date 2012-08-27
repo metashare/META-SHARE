@@ -5,8 +5,6 @@ Project: META-SHARE prototype implementation
 import datetime
 import logging
 import re
-import sys
-import inspect
 from Queue import Queue
 from traceback import format_exc
 from xml.etree.ElementTree import Element, fromstring, tostring
@@ -105,19 +103,6 @@ def _make_choices_from_int_list(source_list):
         _choices.append((value, value))
     return {'max_length': len(_choices)/10+1, 'choices': tuple(_choices)}
 
-def get_classes(module_name):
-    """
-    Returns class' name in a module.
-    If class' name ends with "Type_model", the trailing characters are removed.
-    """
-    models_list = []
-    for name, obj in inspect.getmembers(sys.modules["{}.models".format(module_name)]):
-        if inspect.isclass(obj):
-            if name.endswith("Type_model"):
-                models_list.append(name[:-10])
-            else:
-                models_list.append(name)
-    return models_list
 
 class SchemaModel(models.Model):
     """
@@ -134,10 +119,6 @@ class SchemaModel(models.Model):
         This is an abstract super class for all schema models.
         """
         abstract = True
-
-    @classmethod
-    def get_schema_name(cls):
-        return type(cls).__schema_name__
 
     @classmethod
     def is_required_field(cls, name):

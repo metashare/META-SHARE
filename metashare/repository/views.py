@@ -9,7 +9,6 @@ from datetime import datetime
 from os.path import split, getsize
 from urllib import urlopen
 from mimetypes import guess_type
-from collections import Set, Sequence 
 
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
@@ -27,9 +26,9 @@ from metashare.repository.editor.resource_editor import has_edit_permission
 from metashare.repository.forms import LicenseSelectionForm, \
     LicenseAgreementForm, DownloadContactForm, MORE_FROM_SAME_CREATORS, \
     MORE_FROM_SAME_PROJECTS
-from metashare.repository.models import licenceInfoType_model, resourceInfoType_model
-from metashare.repository.supermodel import get_classes
-
+from metashare.repository import model_utils
+from metashare.repository.models import licenceInfoType_model, \
+    resourceInfoType_model
 from metashare.repository.search_indexes import resourceInfoType_modelIndex
 from metashare.settings import LOG_LEVEL, LOG_HANDLER, MEDIA_URL, DJANGO_URL
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
@@ -419,6 +418,7 @@ def create(request):
     """
     return redirect(reverse('admin:repository_resourceinfotype_model_add'))
 
+
 def view(request, resource_name=None, object_id=None):
     """
     Render browse or detail view for the repository application.
@@ -430,95 +430,69 @@ def view(request, resource_name=None, object_id=None):
     if request.path_info != resource.get_absolute_url():
         return redirect(resource.get_absolute_url())
 
-    #    print resource.get_field_sets()
-    
     # Convert resource to ElementTree and then to template tuples.
-    resource_tree = resource.export_to_elementtree()
-    lr_content = _convert_to_template_tuples(resource_tree)
-   
-    # Get the paths of each items and sort them
-    lr_content_paths = get_structure_paths(lr_content)
-    sorted_tuple = sorted(set(lr_content_paths))
-    
-    # Get repository classes names
-    available_classes = get_classes("metashare.repository")
+    lr_content = _convert_to_template_tuples(resource.export_to_elementtree())
 
     #get the 'best' language version of a "DictField"
     resource_name = resource.identificationInfo.get_default_resourceName()
+    resource_short_name = \
+        resource.identificationInfo.get_default_resourceShortName()
     description = resource.identificationInfo.get_default_description()
 
-    
     # Create fields lists
-    resource_short_names = []
-    media_types = []
-    url = []
-    metashare_id = []
-    distribution_info_tuple = []
-    contact_person_tuple = []
-    metadata_info_tuple = []
-    version_info_tuple = []
-    validation_info_tuple = []
-    usage_info_tuple = []
-    documentation_info_tuple = []    
-    resource_creation_info_tuple = []    
-    relation_info_tuple = []
-    
-    # For each component or field, create a list of items.
-    # This is because 
-    for item, value in sorted_tuple:
-        
-        if item in available_classes:
-            # Create lists for components
-            tuple_index = str(value).replace(", ", "][").replace("(","[").replace(")","]")
-            tuple_index = tuple_index[:-3]
-            if item == "distributionInfo":
-                distribution_info_tuple = eval("lr_content" + tuple_index)
-            if item == "contactPerson":
-                contact_person_tuple = eval("lr_content" + tuple_index)            
-            if item == "metadataInfo":
-                metadata_info_tuple = eval("lr_content" + tuple_index)
-            if item == "versionInfo":
-                version_info_tuple = eval("lr_content" + tuple_index)
-            if item == "validationInfo":
-                validation_info_tuple = eval("lr_content" + tuple_index)
-            if item == "usageInfo":
-                usage_info_tuple = eval("lr_content" + tuple_index)
-            if item == "resourceDocumentationInfo":
-                documentation_info_tuple = eval("lr_content" + tuple_index)            
-            if item == "resourceCreationInfo":
-                resource_creation_info_tuple = eval("lr_content" + tuple_index)
-            if item == "relationInfo":
-                relation_info_tuple = eval("lr_content" + tuple_index)
-        else:
-            # Create lists for individual fields
-            tuple_index = str(value).replace(", ", "][").replace("(","[").replace(")","]")
-            tuple_index = "{}[1]".format(tuple_index[:-3])
-            if item == "resourceShortName":
-                resource_short_names.append(eval("lr_content" + tuple_index))
-            elif item == "mediaType":
-                media_types.append(eval("lr_content" + tuple_index))
-            elif item == "resourceType":
-                resource_type = eval("lr_content" + tuple_index)
-            elif item == "url":
-                url.append(eval("lr_content" + tuple_index))
-            elif item == "metaShareId":
-                metashare_id.append(eval("lr_content" + tuple_index))
-    
+    url = resource.identificationInfo.url
+    metashare_id = resource.identificationInfo.metaShareId
+    resource_type = resource.resourceComponentType.as_subclass().resourceType
+    media_types = set(model_utils.get_resource_media_types(resource))
+    linguality_infos = set(model_utils.get_resource_linguality_infos(resource))
+    license_types = set(model_utils.get_resource_license_types(resource))
+
+    distribution_info_tuple = None
+    contact_person_tuples = []
+    metadata_info_tuple = None
+    version_info_tuple = None
+    validation_info_tuples = []
+    usage_info_tuple = None
+    documentation_info_tuple = None
+    resource_creation_info_tuple = None
+    relation_info_tuples = []
+    for _tuple in lr_content[1]:
+        if _tuple[0] == "distributionInfo":
+            distribution_info_tuple = _tuple
+        elif _tuple[0] == "contactPerson":
+            contact_person_tuples.append(_tuple)
+        elif _tuple[0] == "metadataInfo":
+            metadata_info_tuple = _tuple
+        elif _tuple[0] == "versionInfo":
+            version_info_tuple = _tuple
+        elif _tuple[0] == "validationInfo":
+            validation_info_tuples.append(_tuple)
+        elif _tuple[0] == "usageInfo":
+            usage_info_tuple = _tuple
+        elif _tuple[0] == "resourceDocumentationInfo":
+            documentation_info_tuple = _tuple            
+        elif _tuple[0] == "resourceCreationInfo":
+            resource_creation_info_tuple = _tuple
+        elif _tuple[0] == "relationInfo":
+            relation_info_tuples.append(_tuple)
+
     # Define context for template rendering.
     context = { 'resourceName': resource_name,
                 'resource': resource,
                 'lr_content': lr_content, 
                 'distribution_info_tuple': distribution_info_tuple,                
-                'contact_person_tuple': contact_person_tuple,                
+                'contact_person_tuples': contact_person_tuples,                
                 'metadata_info_tuple': metadata_info_tuple,               
                 'version_info_tuple': version_info_tuple,
-                'validation_info_tuple': validation_info_tuple,
+                'validation_info_tuples': validation_info_tuples,
                 'usage_info_tuple': usage_info_tuple,
                 'documentation_info_tuple': documentation_info_tuple,                
                 'resource_creation_info_tuple': resource_creation_info_tuple,
-                'relation_info_tuple': relation_info_tuple,                       
+                'relation_info_tuples': relation_info_tuples,
+                'linguality_infos': linguality_infos,
+                'license_types': license_types,
                 'description': description, 
-                'resourceShortNames': resource_short_names, 
+                'resourceShortName': resource_short_name, 
                 'resourceType': resource_type, 
                 'mediaTypes': media_types,
                 'url': url,
@@ -563,29 +537,6 @@ def view(request, resource_name=None, object_id=None):
     # Render and return template with the defined context.
     ctx = RequestContext(request)
     return render_to_response(template, context, context_instance=ctx)
-
-
-def get_structure_paths(obj, path=(), memo=None):
-    """
-    Returns a list of tuples containing the path of each item in 
-    a nested structure of tuples and lists.
-    Mostly taken from:
-    http://code.activestate.com/recipes/577982-recursively-walk-python-objects/
-    """
-    if memo is None:
-        memo = set()
-    iterator = None
-    if isinstance(obj, (Sequence, Set)) and not isinstance(obj, (str, unicode)):
-        iterator = enumerate
-    if iterator:
-        if id(obj) not in memo:
-            memo.add(id(obj))
-            for path_component, value in iterator(obj):
-                for result in get_structure_paths(value, path + (path_component,), memo):
-                    yield result
-            memo.remove(id(obj))
-    else:
-        yield obj, path
 
 
 def _format_recommendations(recommended_resources):

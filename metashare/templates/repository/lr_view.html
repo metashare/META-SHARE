@@ -9,17 +9,9 @@
 <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/resource_view.css" />
 {% endblock %}
 
-{% block description %}
-  {% for item in descriptions %}
-    {{ item|truncatewords:20}}...
-  {% endfor %}
-{% endblock %}
+{% block description %}{{ description }}{% endblock %}
 
-{% block keywords %}
-  {# here, we should put resource type, media type, linguality type, licence, availability. #}
-  {{ resourceType }}, {{ mediaTypes|join:", " }}, {{ lingualityType }}, {{ availabilities|join:", " }}, {{ licences|join:", " }}
-{% endblock %}
-
+{% block keywords %}{{ resourceType }}, {{ mediaTypes|join:", " }}, {{ linguality_infos|join:", " }}, {{ resource.distributionInfo.get_availability_display }}, {{ license_types|join:", " }}{% endblock %}
 
 {% block content %}
 		<script type="text/javascript" src="http://plugins.learningjquery.com/expander/jquery.expander.js"></script>
@@ -151,12 +143,9 @@
                 {% endif %}
             {% endfor %}
         </div>
-		<h2>{{ resourceName }}
-		    {% get_icon resource.resourceComponentType.as_subclass.resourceType %}
-		
-		</h2>
-		<h3>{% for name in resourceShortNames %}{{ name }}<img src="{{ MEDIA_URL }}images/trenner.png" class="trenner" />{% endfor %}</h3> {# Here we should choose the english version of resource short name (should be provided by views.py) #}
-		<h4>{{metaShareId.0}}</h4>
+		<h2>{{ resourceName }} {% get_icon resourceType %}</h2>
+		<h3>{{ resourceShortName }}</h3>
+		<h4>{{ metaShareId }}</h4>
 		<h4 style="text-align:justify" class="readmore">{{ description }}</h4>
 		{% if url.0 %}
 		<h4><a href="{{url.0}}" target="_blank">{{url.0}}</a></h4>
@@ -167,10 +156,10 @@
 	</div>
 	
 		<div class="white_box column corner">
-			{% include "repository/detailed_component.html" with lr_content=distribution_info_tuple %}			
-			{% include "repository/detailed_component.html" with lr_content=contact_person_tuple %}
-			
-			
+          {% include "repository/detailed_component.html" with lr_content=distribution_info_tuple %}
+          {% for contact_person_tuple in contact_person_tuples %}
+            {% include "repository/detailed_component.html" with lr_content=contact_person_tuple %}
+          {% endfor %}
 		</div>
 		
 		<div class="column middle">
@@ -188,7 +177,6 @@
 					</ul>
 				</div>
 			<div class="white_box middle_box">
-			
 			{% ifequal resourceType "toolService" %}
 				<div id="tabs_content_container">
 					<div id="1" class="tab_content">
@@ -246,25 +234,32 @@
 									{% endifequal %}		
 								{% endifequal %}
 							{% endifequal %}
-							
 						</div>
 					</div>
 				{% endfor %}
 			{% endifequal %}
-			
 			</div>
 		</div>
 		<div class="white_box column corner right-corner">
-				
-			{% include "repository/detailed_component.html" with lr_content=resource_creation_info_tuple %}
-			{% include "repository/detailed_component.html" with lr_content=metadata_info_tuple %}
-			{% include "repository/detailed_component.html" with lr_content=version_info_tuple %}			
-			{% include "repository/detailed_component.html" with lr_content=validation_info_tuple %}		
-			{% include "repository/detailed_component.html" with lr_content=usage_info_tuple %}
-			{% include "repository/detailed_component.html" with lr_content=resource_documentation_info_tuple %}
-			
-			
-			{% include "repository/detailed_component.html" with lr_content=relation_info_tuple %}
+          {% if resource_creation_info_tuple %}
+            {% include "repository/detailed_component.html" with lr_content=resource_creation_info_tuple %}
+          {% endif %}
+          {% include "repository/detailed_component.html" with lr_content=metadata_info_tuple %}
+          {% if resource_creation_info_tuple %}
+	        {% include "repository/detailed_component.html" with lr_content=version_info_tuple %}
+          {% endif %}
+          {% for validation_info_tuple in validation_info_tuples %}
+            {% include "repository/detailed_component.html" with lr_content=validation_info_tuple %}
+          {% endfor %}
+          {% if resource_creation_info_tuple %}
+            {% include "repository/detailed_component.html" with lr_content=usage_info_tuple %}
+          {% endif %}
+          {% if resource_creation_info_tuple %}
+            {% include "repository/detailed_component.html" with lr_content=resource_documentation_info_tuple %}
+          {% endif %}
+          {% for relation_info_tuple in relation_info_tuples %}
+            {% include "repository/detailed_component.html" with lr_content=relation_info_tuple %}
+          {% endfor %}
 		</div>
 
 
