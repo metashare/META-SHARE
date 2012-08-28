@@ -295,6 +295,9 @@
     <field name="toolServiceToolServiceSubTypeFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
+    <field name="dl_count" type="long" indexed="true"
+      stored="false" multiValued="false" />
+    
     <field name="languageDescriptionLDTypeFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
     
@@ -397,8 +400,8 @@
     <field name="geographicCoverageFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
     
-    <field name="languageDescriptionEncodingLevelFilter_exact" type="string" indexed="true"
-      stored="true" multiValued="true" />
+    <field name="view_count" type="long" indexed="true"
+      stored="false" multiValued="false" />
     
     <field name="corpusAnnotationFormatFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
@@ -467,6 +470,9 @@
       stored="true" multiValued="true" />
     
     <field name="toolServiceToolServiceSubTypeFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="languageDescriptionEncodingLevelFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
     <field name="languageDescriptionLDTypeFilter_exact" type="string" indexed="true"
