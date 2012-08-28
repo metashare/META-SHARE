@@ -527,6 +527,10 @@ class MetashareFacetedSearchView(FacetedSearchView):
                 sqs = sqs.order_by('languageNameSort_exact')
             elif sort_list[0] == 'languagename_desc':
                 sqs = sqs.order_by('-languageNameSort_exact')
+            elif sort_list[0] == 'dl_count_desc':
+                sqs = sqs.order_by('-dl_count', 'resourceNameSort_exact')
+            elif sort_list[0] == 'view_count_desc':
+                sqs = sqs.order_by('-view_count', 'resourceNameSort_exact')
             else:
                 sqs = sqs.order_by('resourceNameSort_exact')
         else:
