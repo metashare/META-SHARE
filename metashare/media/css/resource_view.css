@@ -79,6 +79,16 @@ label.component{
 	background:#eee !important;
 }
 
+.expandable.collapsed:before{
+    content: " " url(sexybuttons/images/icons/silk/bullet_arrow_right.png);
+    vertical-align: top;
+}
+
+.expandable.expanded:before{
+    content: " " url(sexybuttons/images/icons/silk/bullet_arrow_down.png);
+    vertical-align: top;
+}
+
 .fields ul{
    list-style: none;
    padding:0px;
@@ -151,10 +161,14 @@ a.tip:hover span {
 
 /*End CSS for tooltip*/
 
-
+.bottom-box{
+   clear: both;	
+   margin-top:10px;
+}
 
 .recommendations{
-   width:870px;
+   width:860px;
+   margin-top:10px;
 }
 
 .recommendations ul{
