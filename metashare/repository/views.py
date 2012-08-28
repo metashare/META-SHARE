@@ -27,7 +27,8 @@ from metashare.repository.forms import LicenseSelectionForm, \
     LicenseAgreementForm, DownloadContactForm, MORE_FROM_SAME_CREATORS, \
     MORE_FROM_SAME_PROJECTS
 from metashare.repository.models import licenceInfoType_model, resourceInfoType_model
-from metashare.repository.search_indexes import resourceInfoType_modelIndex
+from metashare.repository.search_indexes import resourceInfoType_modelIndex, \
+    update_lr_index_entry
 from metashare.settings import LOG_LEVEL, LOG_HANDLER, MEDIA_URL, DJANGO_URL
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
@@ -291,13 +292,7 @@ def _provide_download(request, resource, download_urls):
             response['Content-Length'] = getsize(dl_path) 
             response['Content-Disposition'] = 'attachment; filename={0}' \
                                                 .format(split(dl_path)[1])
-
-            # maintain download statistics and return the response for download
-            saveLRStats(resource, DOWNLOAD_STAT, request)
-            # update download tracker
-            tracker = SessionResourcesTracker.getTracker(request)
-            tracker.add_download(resource, datetime.now())
-            request.session['tracker'] = tracker
+            _update_download_stats(resource, request)
             LOGGER.info("Offering a local download of resource #{0}." \
                         .format(resource.id))
             return response
@@ -310,11 +305,7 @@ def _provide_download(request, resource, download_urls):
         for url in download_urls:
             status_code = urlopen(url).getcode()
             if not status_code or status_code < 400:
-                saveLRStats(resource, DOWNLOAD_STAT, request)
-                # update download tracker
-                tracker = SessionResourcesTracker.getTracker(request)
-                tracker.add_download(resource, datetime.now())
-                request.session['tracker'] = tracker
+                _update_download_stats(resource, request)
                 LOGGER.info("Redirecting to {0} for the download of resource " \
                             "#{1}.".format(url, resource.id))
                 return redirect(url)
@@ -330,6 +321,21 @@ def _provide_download(request, resource, download_urls):
     return render_to_response('repository/lr_not_downloadable.html',
                               { 'resource': resource, 'reason': 'internal' },
                               context_instance=RequestContext(request))
+
+
+def _update_download_stats(resource, request):
+    """
+    Updates all relevant statistics counters for a the given successful resource
+    download request.
+    """
+    # maintain general download statistics
+    if saveLRStats(resource, DOWNLOAD_STAT, request):
+        # update download count in the search index, too
+        update_lr_index_entry(resource)
+    # update download tracker
+    tracker = SessionResourcesTracker.getTracker(request)
+    tracker.add_download(resource, datetime.now())
+    request.session['tracker'] = tracker
 
 
 @login_required
@@ -445,14 +451,17 @@ def view(request, resource_name=None, object_id=None):
     # in general, only logged in users may download/purchase any resources
     context['LR_DOWNLOAD'] = request.user.is_active
 
-    # Update statistics and create a report about the user actions on LR
-    if hasattr(resource.storage_object, 'identifier'):
-        saveLRStats(resource, VIEW_STAT, request)
-        context['LR_STATS'] = getLRStats(resource.storage_object.identifier)
-        # update view tracker
-        tracker = SessionResourcesTracker.getTracker(request)
-        tracker.add_view(resource, datetime.now())
-        request.session['tracker'] = tracker
+    # Update statistics:
+    if saveLRStats(resource, VIEW_STAT, request):
+        # update view count in the search index, too
+        update_lr_index_entry(resource)
+    # update view tracker
+    tracker = SessionResourcesTracker.getTracker(request)
+    tracker.add_view(resource, datetime.now())
+    request.session['tracker'] = tracker
+
+    # Add download/view/last updated statistics to the template context.
+    context['LR_STATS'] = getLRStats(resource.storage_object.identifier)
             
     # Add recommendations for 'also viewed' resources
     context['also_viewed'] = \
