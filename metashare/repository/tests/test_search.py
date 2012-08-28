@@ -7,6 +7,9 @@ from metashare.test_utils import create_user
 from django.core.management import call_command
 from django.test.testcases import TestCase
 from metashare.storage.models import INGESTED
+from metashare.repository import views
+from django.core.urlresolvers import reverse
+from metashare.stats.models import LRStats
 
 
 _SEARCH_PAGE_PATH = '/{0}repository/search/'.format(DJANGO_BASE)
@@ -151,7 +154,65 @@ class SearchTest(test_utils.IndexAwareTestCase):
                 successes[0].storage_object.publication_status = 'g'
                 successes[0].storage_object.save()    
             if failures:
-                print failures    
+                print failures
+
+    def test_view_count_visible_and_updated_in_search_results(self):
+        """
+        Verifies that the view count of a resource is visible and updated in
+        the search results list.
+        """
+        test_res = test_utils.import_xml('{}/repository/test_fixtures/'
+                        'internal-corpus-Text-EngPers.xml'.format(ROOT_PATH))
+        test_res.storage_object.published = True
+        test_res.storage_object.save()
+        client = Client()
+        # to be on the safe side, clear any existing stats
+        LRStats.objects.all().delete()
+        # assert that the download/view counts are both zero at first:
+        response = client.get(_SEARCH_PAGE_PATH)
+        self.assertContains(response, 'title="Number of downloads" />&nbsp;0')
+        self.assertContains(response, 'title="Number of views" />&nbsp;0')
+        # view the resource, then go back to the browse page and assert that the
+        # view count has changed:
+        client.get(test_res.get_absolute_url())
+        response = client.get(_SEARCH_PAGE_PATH)
+        self.assertContains(response, 'title="Number of downloads" />&nbsp;0')
+        self.assertContains(response, 'title="Number of views" />&nbsp;1')
+        # log in, view the resource again, go back to the browse page and then
+        # assert that the view count has changed again:
+        client.login(username='normaluser', password='secret')
+        client.get(test_res.get_absolute_url())
+        response = client.get(_SEARCH_PAGE_PATH)
+        self.assertContains(response, 'title="Number of downloads" />&nbsp;0')
+        self.assertContains(response, 'title="Number of views" />&nbsp;2')
+
+    def test_download_count_visible_and_updated_in_search_results(self):
+        """
+        Verifies that the download count of a resource is visible and updated in
+        the search results list.
+        """
+        test_res = test_utils.import_xml('{}/repository/fixtures/'
+                'downloadable_1_license.xml'.format(ROOT_PATH))
+        test_res.storage_object.published = True
+        test_res.storage_object.save()
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        # to be on the safe side, clear any existing stats
+        LRStats.objects.all().delete()
+        # assert that the download/view counts are both zero at first:
+        response = client.get(_SEARCH_PAGE_PATH)
+        self.assertContains(response, 'title="Number of downloads" />&nbsp;0')
+        self.assertContains(response, 'title="Number of views" />&nbsp;0')
+        # view the resource, download it, go back to the browse page and then
+        # assert that both view and download counts have changed:
+        client.get(test_res.get_absolute_url())
+        client.post(
+            reverse(views.download, args=(test_res.storage_object.identifier,)),
+            { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
+              'licence': 'CC_BY-NC-SA' })
+        response = client.get(_SEARCH_PAGE_PATH)
+        self.assertContains(response, 'title="Number of downloads" />&nbsp;1')
+        self.assertContains(response, 'title="Number of views" />&nbsp;1')
 
     def test_case_insensitive_search(self):
         """
