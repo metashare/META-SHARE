@@ -7,12 +7,14 @@ Methods for model data conversion between different representations.
 
 import logging
 
-from django.db.models import OneToOneField
+from django.db.models import OneToOneField, Sum
 
 from metashare.repository.models import resourceInfoType_model, \
     corpusInfoType_model, lexicalConceptualResourceInfoType_model, \
     languageDescriptionInfoType_model, toolServiceInfoType_model
 from metashare.settings import LOG_LEVEL, LOG_HANDLER
+from metashare.stats.models import LRStats
+
 
 # Setup logging support.
 logging.basicConfig(level=LOG_LEVEL)
@@ -256,3 +258,18 @@ def get_resource_media_types(res_obj):
                           .get_mediaType_display_list())
 
     return result
+
+def get_lr_stat_action_count(obj_identifier, stats_action):
+    """
+    Returns the count of the given stats action for the given resource instance.
+    
+    The obj_identifier is the identifier from the storage object.
+    """
+    result = LRStats.objects.filter(lrid=obj_identifier, action=stats_action) \
+        .aggregate(Sum('count'))['count__sum']
+    # `result` may be None in case the filter doesn't match any LRStats for the
+    # specified resource and action
+    if result is not None:
+        return result
+    else:
+        return 0

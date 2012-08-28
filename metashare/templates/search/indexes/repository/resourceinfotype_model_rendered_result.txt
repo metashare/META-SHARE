@@ -1,6 +1,7 @@
 {% spaceless %}
 {% load resource_languages %}
 {% load resource_media_types %}
+{% load resource_access_stats %}
 {% load get_media_url %}
 {% load get_icon %}
 
@@ -13,9 +14,28 @@
   <a href="{{ object.get_absolute_url }}"{% ifnotequal object.identificationInfo.get_default_description "METASHARE_NULL" %} title="{{ object.identificationInfo.get_default_description|escape }}"{% endifnotequal %}>{{ object }}</a>
    &nbsp;{% resource_media_types object.resourceComponentType.as_subclass %} 
 
+{% if object.resourceComponentType.as_subclass.resourceType = "corpus" %}
+<img src="{% get_media_url %}css/sexybuttons/images/icons/silk/database_yellow.png" title="Corpus" /> 
+{% endif %}
+{% if object.resourceComponentType.as_subclass.resourceType = "toolService" %}
+<img src="{% get_media_url %}css/sexybuttons/images/icons/silk/page_white_gear.png" title="Tool/Service" />
+{% endif %}
+{% if object.resourceComponentType.as_subclass.resourceType = "lexicalConceptualResource" %}
+<img src="{% get_media_url %}css/sexybuttons/images/icons/silk/text_ab.png" title="Lexical Conceptual" /> 
+{% endif %}
+
+&nbsp;<a href="{{ object.get_absolute_url }}"{% ifnotequal object.identificationInfo.get_default_description "METASHARE_NULL" %} title="{{ object.identificationInfo.get_default_description|escape }}"{% endifnotequal %}>{{ object }}</a>
+
+&nbsp;{% resource_media_types object.resourceComponentType.as_subclass %} 
+
+<div class="accessStats">
+  <img src="{% get_media_url %}stats/img/download_icon.gif" alt="Number of downloads" title="Number of downloads" />&nbsp;{{ object.storage_object.identifier|get_download_count }}
+  <img src="{% get_media_url %}stats/img/view_icon.gif" alt="Number of views" title="Number of views" />&nbsp;{{ object.storage_object.identifier|get_view_count }}
+</div>
 
 <ul>
   {% resource_languages object.resourceComponentType.as_subclass %}  
-</ul>  
+</ul>
+
 </div>
 {% endspaceless %}
