@@ -181,3 +181,18 @@ def to_xml_string(node, encoding="ASCII"):
     xml_string = XML_DECL_2.sub(u'', xml_string)
 
     return u'<?xml version="1.0" encoding="{}"?>{}'.format(encoding, xml_string)
+
+
+html_escape_table = {
+    "&": "&amp;",
+    '"': "&quot;",
+    "'": "&#39;",
+    ">": "&gt;",
+    "<": "&lt;",
+    }
+    
+def html_escape(text):
+    """
+    Produce entities within text.
+    """
+    return "".join(html_escape_table.get(c, c) for c in text)
