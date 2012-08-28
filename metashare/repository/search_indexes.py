@@ -6,7 +6,8 @@ import logging
 import os
 
 from haystack.indexes import CharField, RealTimeSearchIndex
-from haystack import indexes
+from haystack import indexes, connections as haystack_connections, \
+    connection_router as haystack_connection_router
 
 from django.db.models import signals
 from django.utils.translation import ugettext as _
@@ -20,10 +21,23 @@ from metashare.repository.search_fields import LabeledCharField, \
 from metashare.storage.models import StorageObject, INGESTED, PUBLISHED
 from metashare.settings import LOG_LEVEL, LOG_HANDLER
 
+
 # Setup logging support.
 logging.basicConfig(level=LOG_LEVEL)
 LOGGER = logging.getLogger('metashare.repository.search_indexes')
 LOGGER.addHandler(LOG_HANDLER)
+
+
+def update_lr_index_entry(res_obj):
+    """
+    Updates/creates the search index entry for the given language resource
+    object.
+    
+    The appropriate search index is automatically chosen.
+    """
+    haystack_connections[haystack_connection_router.for_write()] \
+        .get_unified_index().get_index(resourceInfoType_model) \
+        .update_object(res_obj)
 
 
 class PatchedRealTimeSearchIndex(RealTimeSearchIndex):
