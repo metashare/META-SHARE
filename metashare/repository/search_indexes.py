@@ -5,13 +5,14 @@ Project: META-SHARE prototype implementation
 import logging
 import os
 
-from haystack.indexes import CharField, RealTimeSearchIndex
+from haystack.indexes import CharField, IntegerField, RealTimeSearchIndex
 from haystack import indexes, connections as haystack_connections, \
     connection_router as haystack_connection_router
 
 from django.db.models import signals
 from django.utils.translation import ugettext as _
 
+from metashare.repository import model_utils
 from metashare.repository.models import resourceInfoType_model, \
     corpusInfoType_model, \
     toolServiceInfoType_model, lexicalConceptualResourceInfoType_model, \
@@ -20,6 +21,7 @@ from metashare.repository.search_fields import LabeledCharField, \
     LabeledMultiValueField
 from metashare.storage.models import StorageObject, INGESTED, PUBLISHED
 from metashare.settings import LOG_LEVEL, LOG_HANDLER
+from metashare.stats.model_utils import DOWNLOAD_STAT, VIEW_STAT
 
 
 # Setup logging support.
@@ -86,6 +88,10 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
     """
     # in the text field we list all resource model field that shall be searched
     text = CharField(document=True, use_template=True, stored=False)
+
+    # view and download counts of the resource
+    dl_count = IntegerField(stored=False)
+    view_count = IntegerField(stored=False)
 
     # List of sorting results
     resourceNameSort = CharField(indexed=True, faceted=True)
@@ -387,6 +393,20 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         super(resourceInfoType_modelIndex, self).remove_object(instance,
                                                                using=using,
                                                                **kwargs)
+
+    def prepare_dl_count(self, obj):
+        """
+        Returns the download count for the given resource object.
+        """
+        return model_utils.get_lr_stat_action_count(
+            obj.storage_object.identifier, DOWNLOAD_STAT)
+
+    def prepare_view_count(self, obj):
+        """
+        Returns the view count for the given resource object.
+        """
+        return model_utils.get_lr_stat_action_count(
+            obj.storage_object.identifier, VIEW_STAT)
 
     def prepare_resourceNameSort(self, obj):
         """
