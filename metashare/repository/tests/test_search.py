@@ -1,15 +1,18 @@
-from metashare import test_utils, settings
-from metashare.settings import DJANGO_BASE, ROOT_PATH
-from haystack.query import SearchQuerySet
-from django.test.client import Client
 import os
-from metashare.test_utils import create_user
+
 from django.core.management import call_command
-from django.test.testcases import TestCase
-from metashare.storage.models import INGESTED
-from metashare.repository import views
 from django.core.urlresolvers import reverse
+from django.test.client import Client
+from django.test.testcases import TestCase
+
+from haystack.query import SearchQuerySet
+
+from metashare import test_utils, settings
+from metashare.repository import views
+from metashare.settings import DJANGO_BASE, ROOT_PATH
 from metashare.stats.models import LRStats
+from metashare.storage.models import INGESTED
+from metashare.test_utils import create_user
 
 
 _SEARCH_PAGE_PATH = '/{0}repository/search/'.format(DJANGO_BASE)
