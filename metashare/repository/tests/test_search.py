@@ -123,10 +123,6 @@ class SearchTest(test_utils.IndexAwareTestCase):
         Set up the view
         """
         test_utils.setup_test_storage()                        
-     
-        staffuser = create_user('staffuser', 'staff@example.com', 'secret')
-        staffuser.is_staff = True
-        staffuser.save()
         normaluser =  create_user('normaluser', 'normal@example.com', 'secret')
         normaluser.save()
 
@@ -275,11 +271,6 @@ class SearchTestPublishedResources(TestCase):
         Set up the view
         """
         test_utils.setup_test_storage()                        
-     
-        staffuser = create_user('staffuser', 'staff@example.com', 'secret')
-        staffuser.is_staff = True
-        staffuser.save()
-        create_user('normaluser', 'normal@example.com', 'secret')
         # Make sure the index does not contain any stale entries:
         call_command('rebuild_index', interactive=False, using=settings.TEST_MODE_NAME)
         cls.importPublishedFixtures()
