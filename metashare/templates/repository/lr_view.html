@@ -45,13 +45,24 @@
 				});
 				
 				$(".dataline.optional").hide();
-				$(".expandable").hover(function() {
-				 	$(this).nextUntil(".title.component").show();
-				 	}, function() { 
-					 	$(".dataline.optional").hide();
-				});
-				$(".title.component").click(function() {
-				 	$(this).nextUntil(".title.component").show();
+				$(".expandable").addClass("collapsed");
+				$(".expandable").click(function() {
+					if($(this).hasClass("collapsed")){
+						$(this).removeClass('collapsed');
+						$(this).addClass('expanded');
+						$(this).nextUntil(".title.component").show();
+					}
+					else{
+						$(this).removeClass('expanded');
+						$(this).addClass('collapsed');						
+						 $(this).nextAll().each( function() {
+					           if ($(this).filter('.title').length) {
+					              return false;
+					           }
+					           $(this).filter('.optional').hide();
+					       });
+						
+					}
 				});
 			});
 		</script>
