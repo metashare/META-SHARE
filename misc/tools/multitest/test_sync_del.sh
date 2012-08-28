@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Import several files in each node of the inner circle.
+# Import several files in each node of the inner circle (i.e., the network of
+# the META-SHARE Managing Nodes).
 # Trigger synchronization on each node.
 # Then verify that every published resource from each master node
 # has been copied to every other node.

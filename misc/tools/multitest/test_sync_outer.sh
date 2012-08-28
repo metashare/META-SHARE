@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Import several files in each node of the inner circle.
+# Import several files in each node of the inner circle (i.e., the network of
+# the META-SHARE Managing Nodes).
 # Trigger synchronization on each node.
 # Then verify that every published resource from each master node
 # has been copied to every other node.
@@ -56,7 +57,8 @@ do
 done
 
 
-# Synchronize and check before importing into the outer node
+# Synchronize and check before importing into the outer node (i.e., a
+# non-managing META-SHARE node)
 if [[ $DO_SYNCHRONIZE -eq 1 ]] ; then
   synchronize_nodes
 fi
@@ -76,11 +78,13 @@ if [[ $DO_SYNCHRONIZE -eq 1 ]] ; then
   synchronize_nodes
 fi
 
-# Check resources after importing files on outer nodes.
+# Check resources after importing files on outer nodes (i.e., the non-managing
+# META-SHARE Nodes).
 # At this time a failure is acceptable since involving
 # outer nodes can require two steps:
 # 1) resources sent from outer nodes to proxy nodes
-# 2) resources sent from proxy nodes to other inner nodes
+# 2) resources sent from proxy nodes to other inner nodes (i.e., other
+# META-SHARE Managing Nodes)
 if [[ $DO_CHECK_RESOURCES -eq 1 ]] ; then
   check_resources_on_inner_nodes
 fi
