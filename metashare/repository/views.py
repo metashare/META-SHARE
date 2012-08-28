@@ -26,16 +26,13 @@ from metashare.repository.editor.resource_editor import has_edit_permission
 from metashare.repository.forms import LicenseSelectionForm, \
     LicenseAgreementForm, DownloadContactForm, MORE_FROM_SAME_CREATORS, \
     MORE_FROM_SAME_PROJECTS
-<<<<<<< HEAD
 from metashare.repository import model_utils
 from metashare.repository.models import licenceInfoType_model, \
     resourceInfoType_model
 from metashare.repository.search_indexes import resourceInfoType_modelIndex
-=======
 from metashare.repository.models import licenceInfoType_model, resourceInfoType_model
 from metashare.repository.search_indexes import resourceInfoType_modelIndex, \
     update_lr_index_entry
->>>>>>> c68adda291345153263b465635d4f72549792007
 from metashare.settings import LOG_LEVEL, LOG_HANDLER, MEDIA_URL, DJANGO_URL
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
