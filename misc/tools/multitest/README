@@ -52,23 +52,3 @@ Note: for each of this port the first actually used (for the first node) will be
 The set of nodes is obtained by:
 creating each node by 'cnf1 = mconfig()'
 adding the node to the list by 'CONFIGS.append(cnf1)
-
-
-Files in ./init_data
-settings_test.py is the same as settings.py except that it 
-imports dj_settings.local_settings instead of local_settings .
-
-local_settings_test.py (not used anymore) uses the following environment variables:
-DJANGO_PORT: the port number on which the python runserver is run.
-DJANGO_CONF_NUM: is a progressive number used to name the database sqlite file.
-      Es. metashare1.db, metshare2.db, etc.
-SOLR_PORT: the port on which the related Solr server is running.
-
-local_settings_test2.py contains some macros that will be
-replaced with node specific data before starting each node.
-
-metashare.db contains an empty database obtained by:
-python manage.py syncdb
-It has a superuser "admin" with password "secret", i.e., all started nodes will
-have this superuser account.
-

@@ -9,8 +9,6 @@ CURRENT_DIR=`pwd`
 SCHEMA_FILE=$CURRENT_DIR/init_data/schema.xml
 
 cp init_data/settings_multitest.py $METASHARE_DIR/settings.py
-#cp init_data/settings_orig.py $METASHARE_DIR/settings.py
-#cp init_data/local_settings_test.py $METASHARE_DIR/local_settings.py
 
 NODE_NAME="NodeSolr"
 DJANGO_PORT=12345
@@ -27,6 +25,7 @@ create_django_settings "$NODE_NAME" $SOLR_PORT "$DATABASE_FILE" \
 	"$PROXIED_NODES" "$SYNC_USERS"
 
 cd $METASHARE_DIR
+mkdir -p "$(basename $SCHEMA_FILE)"
 python manage.py build_solr_schema --filename="$SCHEMA_FILE"
 cd $CURRENT_DIR
 
