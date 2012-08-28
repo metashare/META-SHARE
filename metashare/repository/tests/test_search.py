@@ -9,6 +9,9 @@ from django.test.testcases import TestCase
 from metashare.storage.models import INGESTED
 
 
+_SEARCH_PAGE_PATH = '/{0}repository/search/'.format(DJANGO_BASE)
+
+
 class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
     """
     A test case for testing various aspects of the automatic reindexing on
@@ -160,32 +163,32 @@ class SearchTest(test_utils.IndexAwareTestCase):
         imported_res.storage_object.save()
         client = Client()
         # assert that a lower case search for an upper case term succeeds:
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE),
+        response = client.get(_SEARCH_PAGE_PATH,
                               follow=True, data={'q': 'fixture'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
         # assert that an upper case search for a lower case term succeeds:
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE),
+        response = client.get(_SEARCH_PAGE_PATH,
                               follow=True, data={'q': 'ORIGINALLY'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
         # assert that a lower case search for a mixed case term succeeds:
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE),
+        response = client.get(_SEARCH_PAGE_PATH,
                               follow=True, data={'q': 'unicode'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
         # assert that a mixed case search for an upper case term succeeds:
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE),
+        response = client.get(_SEARCH_PAGE_PATH,
                               follow=True, data={'q': 'FiXTuRe'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
         # assert that a camelCase search for an upper case term succeeds:
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE),
+        response = client.get(_SEARCH_PAGE_PATH,
                               follow=True, data={'q': 'fixTure'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
         # assert that an all lower case search finds a camelCase term:
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE),
+        response = client.get(_SEARCH_PAGE_PATH,
                               follow=True, data={'q': 'speechsynthesis'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
@@ -200,12 +203,12 @@ class SearchTest(test_utils.IndexAwareTestCase):
         imported_res.storage_object.save()
         client = Client()
         # assert that a two-token search finds a camelCase term:
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE),
+        response = client.get(_SEARCH_PAGE_PATH,
                               follow=True, data={'q': 'speech synthesis'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
         # assert that a camelCase search term also finds the camelCase term:
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE),
+        response = client.get(_SEARCH_PAGE_PATH,
                               follow=True, data={'q': 'speechSynthesis'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
@@ -221,7 +224,7 @@ class SearchTest(test_utils.IndexAwareTestCase):
     def testSearch(self):        
         client = Client()
         self.importOneFixture()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True,
+        response = client.get(_SEARCH_PAGE_PATH, follow=True,
           data={'q':'Italian'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
@@ -230,7 +233,7 @@ class SearchTest(test_utils.IndexAwareTestCase):
     def testSearchForNoResults(self):        
         client = Client()
         self.importOneFixture()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True,
+        response = client.get(_SEARCH_PAGE_PATH, follow=True,
           data={'q':'querywhichwillgivenoresults'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "No results were found for search query", status_code=200)
@@ -239,7 +242,7 @@ class SearchTest(test_utils.IndexAwareTestCase):
         client = Client()
         client.login(username='normaluser', password='secret')
         self.importIngestedFixtures()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
+        response = client.get(_SEARCH_PAGE_PATH, follow=True, 
           data={'q':'INGESTED'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "No results were found for search query", status_code=200)
@@ -247,7 +250,7 @@ class SearchTest(test_utils.IndexAwareTestCase):
     def test_anonymous_doesnt_sees_ingested_LR(self):
         client = Client()
         self.importIngestedFixtures()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
+        response = client.get(_SEARCH_PAGE_PATH, follow=True, 
           data={'q':'INGESTED'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "No results were found for search query", status_code=200)
@@ -286,46 +289,51 @@ class SearchTestPublishedResources(TestCase):
 
     def testLanguageFacet(self):   
         client = Client()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, data={'selected_facets':'languageNameFilter_exact:Chinese'})
+        response = client.get(_SEARCH_PAGE_PATH,
+            data={'selected_facets':'languageNameFilter_exact:Chinese'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         print response
         self.assertContains(response, "2 Language Resources", status_code=200)
              
     def testLanguageFacetForNoResults(self):   
         client = Client()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, data={'selected_facets':'languageNameFilter_exact:Italian'})
+        response = client.get(_SEARCH_PAGE_PATH,
+            data={'selected_facets':'languageNameFilter_exact:Italian'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "No results were found for search query", status_code=200)
         
     def testResourceTypeFacet(self):   
         client = Client()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, data={'selected_facets':'resourceTypeFilter_exact:corpus'})
+        response = client.get(_SEARCH_PAGE_PATH,
+            data={'selected_facets':'resourceTypeFilter_exact:corpus'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
         
     def testMediaTypeFacet(self):   
         client = Client()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, data={'selected_facets':'mediaTypeFilter_exact:audio'})
+        response = client.get(_SEARCH_PAGE_PATH,
+            data={'selected_facets':'mediaTypeFilter_exact:audio'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "2 Language Resources", status_code=200)
      
     def testAvailabilityFacet(self):   
         client = Client()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
+        response = client.get(_SEARCH_PAGE_PATH, follow=True, 
           data={'selected_facets':'availabilityFilter_exact:available-unrestrictedUse'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
               
     def testLicenceFacet(self):   
         client = Client()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, data={'selected_facets':'licenceFilter_exact:ELRA_END_USER'})
+        response = client.get(_SEARCH_PAGE_PATH,
+            data={'selected_facets':'licenceFilter_exact:ELRA_END_USER'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "2 Language Resources", status_code=200)
     
     
     #def testLicenceFacetForTwoLicences(self):   
     #   client = Client()
-    #   response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
+    #   response = client.get(_SEARCH_PAGE_PATH, follow=True, 
     #     data={'selected_facets':'licenceFilter_exact:ELRA_END_USER', 'selected_facets':'licenceFilter_exact:ELRA_VAR'})
     #   self.assertEqual('repository/search.html', response.templates[0].name)
     #   print response
@@ -334,77 +342,77 @@ class SearchTestPublishedResources(TestCase):
     
     def testRestrictionsOfUseFacet(self):   
         client = Client()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
+        response = client.get(_SEARCH_PAGE_PATH, follow=True, 
           data={'selected_facets':'restrictionsOfUseFilter_exact:academic-nonCommercialUse'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "2 Language Resources", status_code=200)
       
     def testValidatedFacet(self):   
         client = Client()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
+        response = client.get(_SEARCH_PAGE_PATH, follow=True, 
           data={'selected_facets':'validatedFilter_exact:true'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "2 Language Resources", status_code=200)
         
     def testForeseenUseFacet(self):   
         client = Client()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
+        response = client.get(_SEARCH_PAGE_PATH, follow=True, 
           data={'selected_facets':'foreseenUseFilter_exact:nlpApplications'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "2 Language Resources", status_code=200)
      
     def testUseNlpSpecificFacet(self):   
         client = Client()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
+        response = client.get(_SEARCH_PAGE_PATH, follow=True, 
           data={'selected_facets':'useNlpSpecificFilter_exact:speechRecognition'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
       
     def testLingualityTypeFacet(self):   
         client = Client()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
+        response = client.get(_SEARCH_PAGE_PATH, follow=True, 
           data={'selected_facets':'lingualityTypeFilter_exact:monolingual'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "2 Language Resources", status_code=200)
         
     def testMultilingualityTypeFacet(self):   
         client = Client()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
+        response = client.get(_SEARCH_PAGE_PATH, follow=True, 
           data={'selected_facets':'multilingualityTypeFilter_exact:comparable'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
         
     def testModalityTypeFacet(self):   
         client = Client()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
+        response = client.get(_SEARCH_PAGE_PATH, follow=True, 
           data={'selected_facets':'modalityTypeFilter_exact:other'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
         
     def testMimeTypeFacet(self):   
         client = Client()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
+        response = client.get(_SEARCH_PAGE_PATH, follow=True, 
           data={'selected_facets':'mimeTypeFilter_exact:audio mime type'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
     
     def testDomainFacet(self):   
         client = Client()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
+        response = client.get(_SEARCH_PAGE_PATH, follow=True, 
           data={'selected_facets':'domainFilter_exact:science'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "2 Language Resources", status_code=200)
       
     def testGeographicCoverageFacet(self):   
         client = Client()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
+        response = client.get(_SEARCH_PAGE_PATH, follow=True, 
           data={'selected_facets':'geographicCoverageFilter_exact:European Union'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)          
          
     def testCombinedSearchAndFacet(self):   
         client = Client()
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True, 
+        response = client.get(_SEARCH_PAGE_PATH, follow=True, 
           data={'q':'recordingFree', 'selected_facets':'languageNameFilter_exact:Chinese'})
         # print response
         self.assertEqual('repository/search.html', response.templates[0].name)
