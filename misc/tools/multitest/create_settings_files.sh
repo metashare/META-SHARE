@@ -15,6 +15,7 @@ copy_settings()
     echo $res
     if [[ "$res" == "" ]] ; then
         echo "Copying original settings.py"
+        mkdir -p "$MSERV_DIR/init_data"
         cp "$SETT_FILE" "$MSERV_DIR/init_data/settings_original.py"
         local root_path_line=`grep -e "^ROOT_PATH =" "$SETT_FILE"`
         echo "1 i\
@@ -40,6 +41,7 @@ copy_local_settings()
     echo "/^ROOT_PATH =/c \
 $root_path_line" > /tmp/sed.scr
 
+    mkdir -p init_data
     sed -f /tmp/sed.scr "$L_SETT_FILE" > init_data/local_settings.sample
 }
 

@@ -35,20 +35,21 @@ SOLR_URL = 'http://127.0.0.1:{0}/solr/main'.format(%%SOLR_PORT%%)
 # when running tests
 TESTING_SOLR_URL = 'http://127.0.0.1:{0}/solr/testing'.format(%%SOLR_PORT%%)
 
-# List of other META-SHARE core ("inner circle") nodes from which the local node
-# imports resource descriptions. Any remote changes will later be updated
-# ("synchronized"). Use this if you are a META-SHARE core node!
+# List of other META-SHARE Managing Nodes from which the local node imports
+# resource descriptions. Any remote changes will later be updated
+# ("synchronized"). Use this if you are a META-SHARE Managing Node!
 %%CORE_NODES%%
 
 # User accounts with the permission to access synchronization information on
 # this node:
 %%SYNC_USERS%%
 
-# List of other META-SHARE nodes from which the local node imports resource
+# List of other META-SHARE Nodes from which the local node imports resource
 # descriptions. Any remote changes will later be updated ("synchronized"). Any
 # imported resource descriptions will also be shared with other nodes that
 # synchronize with this local node, i.e., this node acts as a proxy for the
-# listed nodes. This setting is meant to be used by core nodes which make outer
-# node resource descriptions available on the nodes of the inner circle.
+# listed nodes. This setting is meant to be used by META-SHARE Managing Nodes
+# which make normal META-SHARE Node resource descriptions available on the
+# META-SHARE Managing Nodes.
 %%PROXIED_NODES%%
 
