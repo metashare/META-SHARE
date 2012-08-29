@@ -1,5 +1,4 @@
 """
-Project: META-SHARE
 Utility functions for unit tests useful across apps.
 """
 from django.contrib.auth.models import Group, User
@@ -42,18 +41,28 @@ def clean_resources_db():
     for res in resourceInfoType_model.objects.all():
         res.delete_deep()
     # delete storage objects and removed objects
-    StorageObject.objects.all().delete()
-    RemovedObject.objects.all().delete()
+    for sto in StorageObject.objects.all():
+        sto.delete()
+    for rmo in RemovedObject.objects.all():
+        rmo.delete()
     # delete all reusable entities
-    actorInfoType_model.objects.all().delete()
-    documentationInfoType_model.objects.all().delete()
-    documentInfoType_model.objects.all().delete()
-    personInfoType_model.objects.all().delete()
-    targetResourceInfoType_model.objects.all().delete()
-    organizationInfoType_model.objects.all().delete()
-    projectInfoType_model.objects.all().delete()
+    for ait in actorInfoType_model.objects.all():
+        ait.delete()
+    for dmntit in documentationInfoType_model.objects.all():
+        dmntit.delete() 
+    for docit in documentInfoType_model.objects.all(): 
+        docit.delete()
+    for persit in personInfoType_model.objects.all():
+        persit.delete()
+    for trit in targetResourceInfoType_model.objects.all():
+        trit.delete()
+    for oit in organizationInfoType_model.objects.all():
+        oit.delete()
+    for proit in projectInfoType_model.objects.all():
+        proit.delete()
     # delete recommendation objects
-    TogetherManager.objects.all().delete()
+    for tgm in TogetherManager.objects.all():
+        tgm.delete()
     # delete object cache used for duplicate recognition in import
     supermodel.OBJECT_XML_CACHE = {}
 

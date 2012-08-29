@@ -1,8 +1,3 @@
-"""
-Project: META-SHARE prototype implementation
- Author: Christian Federmann <cfedermann@dfki.de>
-"""
-
 import logging
 
 from datetime import datetime
@@ -27,7 +22,8 @@ from metashare.repository.forms import LicenseSelectionForm, \
     LicenseAgreementForm, DownloadContactForm, MORE_FROM_SAME_CREATORS, \
     MORE_FROM_SAME_PROJECTS
 from metashare.repository.models import licenceInfoType_model, resourceInfoType_model
-from metashare.repository.search_indexes import resourceInfoType_modelIndex
+from metashare.repository.search_indexes import resourceInfoType_modelIndex, \
+    update_lr_index_entry
 from metashare.settings import LOG_LEVEL, LOG_HANDLER, MEDIA_URL, DJANGO_URL
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
@@ -66,7 +62,9 @@ def _convert_to_template_tuples(element_tree):
         values = []
         for child in element_tree.getchildren():
             values.append(_convert_to_template_tuples(child))
-        return (element_tree.tag, values)
+        # use pretty print name of element instead of tag; requires that 
+        # element_tree is created using export_to_elementtree(pretty=True)
+        return (element_tree.attrib["pretty"], values)
 
     # Otherwise, we return a tuple containg (key, value, required), 
     # i.e., (tag, text, <0,1>).
@@ -78,7 +76,9 @@ def _convert_to_template_tuples(element_tree):
         # being thrown for cases, like /repository/browse/1222/, where some
         # required attributes seem to be missing.
         required = getattr(element_tree, 'required', 0)
-        return ((element_tree.tag, element_tree.text, required),)
+        # use pretty print name of element instead of tag; requires that 
+        # element_tree is created using export_to_elementtree(pretty=True)
+        return ((element_tree.attrib["pretty"], element_tree.text, required),)
 
 
 # a type providing an enumeration of META-SHARE member types
@@ -178,7 +178,7 @@ def _get_licences(resource, user_membership):
                 resource.distributionInfo.id))
     
     all_licenses = dict([(l_name, l_info) for l_info in licence_infos
-                         for l_name in l_info.get_licence_display_list()])
+                         for l_name in l_info.licence])
     result = {}
     for name, info in all_licenses.items():
         access = LICENCEINFOTYPE_URLS_LICENCE_CHOICES.get(name, None)
@@ -291,13 +291,7 @@ def _provide_download(request, resource, download_urls):
             response['Content-Length'] = getsize(dl_path) 
             response['Content-Disposition'] = 'attachment; filename={0}' \
                                                 .format(split(dl_path)[1])
-
-            # maintain download statistics and return the response for download
-            saveLRStats(resource, DOWNLOAD_STAT, request)
-            # update download tracker
-            tracker = SessionResourcesTracker.getTracker(request)
-            tracker.add_download(resource, datetime.now())
-            request.session['tracker'] = tracker
+            _update_download_stats(resource, request)
             LOGGER.info("Offering a local download of resource #{0}." \
                         .format(resource.id))
             return response
@@ -310,11 +304,7 @@ def _provide_download(request, resource, download_urls):
         for url in download_urls:
             status_code = urlopen(url).getcode()
             if not status_code or status_code < 400:
-                saveLRStats(resource, DOWNLOAD_STAT, request)
-                # update download tracker
-                tracker = SessionResourcesTracker.getTracker(request)
-                tracker.add_download(resource, datetime.now())
-                request.session['tracker'] = tracker
+                _update_download_stats(resource, request)
                 LOGGER.info("Redirecting to {0} for the download of resource " \
                             "#{1}.".format(url, resource.id))
                 return redirect(url)
@@ -330,6 +320,21 @@ def _provide_download(request, resource, download_urls):
     return render_to_response('repository/lr_not_downloadable.html',
                               { 'resource': resource, 'reason': 'internal' },
                               context_instance=RequestContext(request))
+
+
+def _update_download_stats(resource, request):
+    """
+    Updates all relevant statistics counters for a the given successful resource
+    download request.
+    """
+    # maintain general download statistics
+    if saveLRStats(resource, DOWNLOAD_STAT, request):
+        # update download count in the search index, too
+        update_lr_index_entry(resource)
+    # update download tracker
+    tracker = SessionResourcesTracker.getTracker(request)
+    tracker.add_download(resource, datetime.now())
+    request.session['tracker'] = tracker
 
 
 @login_required
@@ -429,7 +434,7 @@ def view(request, resource_name=None, object_id=None):
         return redirect(resource.get_absolute_url())
 
     # Convert resource to ElementTree and then to template tuples.
-    resource_tree = resource.export_to_elementtree()
+    resource_tree = resource.export_to_elementtree(pretty=True)
     lr_content = _convert_to_template_tuples(resource_tree)
 
     # Define context for template rendering.
@@ -445,14 +450,17 @@ def view(request, resource_name=None, object_id=None):
     # in general, only logged in users may download/purchase any resources
     context['LR_DOWNLOAD'] = request.user.is_active
 
-    # Update statistics and create a report about the user actions on LR
-    if hasattr(resource.storage_object, 'identifier'):
-        saveLRStats(resource, VIEW_STAT, request)
-        context['LR_STATS'] = getLRStats(resource.storage_object.identifier)
-        # update view tracker
-        tracker = SessionResourcesTracker.getTracker(request)
-        tracker.add_view(resource, datetime.now())
-        request.session['tracker'] = tracker
+    # Update statistics:
+    if saveLRStats(resource, VIEW_STAT, request):
+        # update view count in the search index, too
+        update_lr_index_entry(resource)
+    # update view tracker
+    tracker = SessionResourcesTracker.getTracker(request)
+    tracker.add_view(resource, datetime.now())
+    request.session['tracker'] = tracker
+
+    # Add download/view/last updated statistics to the template context.
+    context['LR_STATS'] = getLRStats(resource.storage_object.identifier)
             
     # Add recommendations for 'also viewed' resources
     context['also_viewed'] = \
@@ -518,6 +526,10 @@ class MetashareFacetedSearchView(FacetedSearchView):
                 sqs = sqs.order_by('languageNameSort_exact')
             elif sort_list[0] == 'languagename_desc':
                 sqs = sqs.order_by('-languageNameSort_exact')
+            elif sort_list[0] == 'dl_count_desc':
+                sqs = sqs.order_by('-dl_count', 'resourceNameSort_exact')
+            elif sort_list[0] == 'view_count_desc':
+                sqs = sqs.order_by('-view_count', 'resourceNameSort_exact')
             else:
                 sqs = sqs.order_by('resourceNameSort_exact')
         else:

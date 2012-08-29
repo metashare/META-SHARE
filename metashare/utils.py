@@ -2,6 +2,7 @@
 This file holds globally useful utility classes and functions, i.e., classes and
 functions that are generic enough not to be specific to one app.
 '''
+import re
 from datetime import tzinfo, timedelta
 
 
@@ -27,6 +28,24 @@ def verify_subclass(subclass, superclass):
     '''
     if not issubclass(subclass, superclass):
         raise TypeError('class {0} is not a subclass of class {1}'.format(subclass, superclass))
+
+
+def prettify_camel_case_string(cc_str):
+    '''
+    Prettifies the given camelCase string so that it is better readable.
+    
+    For example, "speechAnnotation-soundToTextAlignment" is converted to "Speech
+    Annotation - Sound To Text Alignment". N.B.: The conversion currently only
+    recognizes boundaries with ASCII letters.
+    '''
+    result = cc_str
+    if len(result) > 1:
+        result = result.replace('-', ' - ')
+        result = re.sub(r'(.)(?=[A-Z][a-z])', r'\1 ', result)
+        result = ' '.join([(len(token) > 1 and (token[0].upper() + token[1:]))
+                           or token[0].upper() for token in result.split()])
+    return result
+
 
 def create_breadcrumb_template_params(model, action):
     '''

@@ -1,8 +1,3 @@
-'''
-Created on 16.07.2012
-
-@author: steffen
-'''
 from metashare import settings
 from metashare.recommendations.models import TogetherManager
 import datetime
