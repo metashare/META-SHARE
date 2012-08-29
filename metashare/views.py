@@ -1,7 +1,3 @@
-"""
-Project: META-SHARE prototype implementation
- Author: Christian Federmann <cfedermann@dfki.de>
-"""
 import logging
 
 from django.contrib.auth.views import login as LOGIN, logout as LOGOUT

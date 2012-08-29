@@ -1,7 +1,3 @@
-"""
-Project: META-SHARE prototype implementation
- Author: Christian Federmann <cfedermann@dfki.de>
-"""
 from django import forms
 from metashare.accounts.models import UserProfile, EditorGroupApplication, \
     OrganizationApplication

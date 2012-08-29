@@ -1,7 +1,3 @@
-"""
-Project: META-SHARE prototype implementation
- Author: Christian Federmann <cfedermann@dfki.de>
-"""
 import os
 # Magic python path, based on http://djangosnippets.org/snippets/281/
 

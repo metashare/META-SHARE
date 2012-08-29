@@ -1,8 +1,5 @@
 #!/usr/bin/env python
-"""
-Project: META-SHARE prototype implementation
- Author: Christian Federmann <cfedermann@dfki.de>
-"""
+
 # Magic python path, based on http://djangosnippets.org/snippets/281/
 
 from os.path import abspath, dirname, join

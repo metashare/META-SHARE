@@ -108,7 +108,7 @@ class FilterTest(SeleniumTestCase):
         
         # check Availability filter
         click_and_wait(driver.find_element_by_link_text("Availability"))
-        self.assertEqual("Available-restricted Use (17)", driver.find_element_by_xpath(
+        self.assertEqual("Available - Restricted Use (17)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[8]/div").text)
         click_and_wait(driver.find_element_by_link_text("Availability"))
         
@@ -126,7 +126,7 @@ class FilterTest(SeleniumTestCase):
         click_and_wait(driver.find_element_by_link_text("Restrictions of Use"))
         self.assertEqual("Commercial Use (14)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[12]/div[1]").text)
-        self.assertEqual("Academic-non Commercial Use (13)", driver.find_element_by_xpath(
+        self.assertEqual("Academic - Non Commercial Use (13)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[12]/div[2]").text)
         self.assertEqual("Evaluation Use (3)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[12]/div[3]").text)

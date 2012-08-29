@@ -1,7 +1,3 @@
-"""
-Project: META-SHARE prototype implementation
-Author: Christian Federmann <cfedermann@dfki.de>
-"""
 from os.path import abspath, dirname
 ROOT_PATH = abspath(dirname(__file__))
 

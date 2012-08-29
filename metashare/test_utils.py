@@ -1,5 +1,4 @@
 """
-Project: META-SHARE
 Utility functions for unit tests useful across apps.
 """
 from django.contrib.auth.models import Group, User

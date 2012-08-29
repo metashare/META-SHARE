@@ -1,7 +1,3 @@
-"""
-Project: META-SHARE prototype implementation
- Author: Christian Federmann <cfedermann@dfki.de>
-"""
 import re
 from datetime import datetime
 from xml.etree import ElementTree as etree

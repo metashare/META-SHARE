@@ -1,7 +1,5 @@
-
 """
-    Author: Salvatore Minutoli
-    String utility methods to be used in templates.
+String utility methods to be used in templates.
 """
 
 from django import template

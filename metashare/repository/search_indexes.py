@@ -1,7 +1,3 @@
-"""
-Project: META-SHARE prototype implementation
- Author: Christian Spurk <cspurk@dfki.de>
-"""
 import logging
 import os
 

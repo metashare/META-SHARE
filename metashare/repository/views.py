@@ -1,8 +1,3 @@
-"""
-Project: META-SHARE prototype implementation
- Author: Christian Federmann <cfedermann@dfki.de>
-"""
-
 import logging
 
 from collections import Set, Sequence 
@@ -70,7 +65,9 @@ def _convert_to_template_tuples(element_tree):
         values = []
         for child in element_tree.getchildren():
             values.append(_convert_to_template_tuples(child))
-        return (element_tree.tag, values)
+        # use pretty print name of element instead of tag; requires that 
+        # element_tree is created using export_to_elementtree(pretty=True)
+        return (element_tree.attrib["pretty"], values)
 
     # Otherwise, we return a tuple containg (key, value, required), 
     # i.e., (tag, text, <True,False>).
@@ -82,7 +79,9 @@ def _convert_to_template_tuples(element_tree):
         # being thrown for cases, like /repository/browse/1222/, where some
         # required attributes seem to be missing.
         required = getattr(element_tree, 'required', 0)
-        return ((element_tree.tag, element_tree.text, required),)
+        # use pretty print name of element instead of tag; requires that 
+        # element_tree is created using export_to_elementtree(pretty=True)
+        return ((element_tree.attrib["pretty"], element_tree.text, required),)
 
 
 # a type providing an enumeration of META-SHARE member types
@@ -182,7 +181,7 @@ def _get_licences(resource, user_membership):
                 resource.distributionInfo.id))
     
     all_licenses = dict([(l_name, l_info) for l_info in licence_infos
-                         for l_name in l_info.get_licence_display_list()])
+                         for l_name in l_info.licence])
     result = {}
     for name, info in all_licenses.items():
         access = LICENCEINFOTYPE_URLS_LICENCE_CHOICES.get(name, None)
@@ -507,6 +506,10 @@ def view(request, resource_name=None, object_id=None):
         for desc in descriptions:
             if desc == description:
                 descriptions.remove(desc)
+                
+    resource_tree = resource.export_to_elementtree(pretty=True)
+    lr_content = _convert_to_template_tuples(resource_tree)
+
 
     # Define context for template rendering.
     context = { 'resourceName': resource_name,
