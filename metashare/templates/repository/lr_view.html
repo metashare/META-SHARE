@@ -102,22 +102,22 @@
         </div>
 		<h2>{{ resourceName }} {% get_icon resourceType %}</h2>
 		
-		{% ifnotequal resource_names|length 0 %}
+		{% ifnotequal other_res_names|length 0 %}
 			<div class='more'>View resource name in all available languages</div>
 			<div class='otherlang'>
-			{% for name in resource_names %}<h3>{{ name }}</h3>{% endfor %} 
+			{% for name in other_res_names %}<h3>{{ name }}</h3>{% endfor %} 
 			</div>
 		{% endifnotequal %}
 		
-		<h3>{% for name in resource_short_names %}{{ name }}<img src="{{ MEDIA_URL }}images/trenner.png" class="trenner" />{% endfor %}</h3> 
+		<h3>{% for name in res_short_names %}{{ name }}<img src="{{ MEDIA_URL }}images/trenner.png" class="trenner" />{% endfor %}</h3> 
 		
 		<h4 class="identifier">{{ metaShareId }}</h4>
 		<h4 style="text-align:justify" class="readmore">{{ description }}</h4>
 		
-		{% ifnotequal descriptions|length 0 %}
+		{% ifnotequal other_descriptions|length 0 %}
 			<div class='more'>View resource description in all available languages</div>
 			<div class='otherlang'>
-			{% for desc in descriptions %}<h4 style="text-align:justify" class="readmore">{{ desc }}</h4>{% endfor %} 
+			{% for desc in other_descriptions %}<h4 style="text-align:justify" class="readmore">{{ desc }}</h4>{% endfor %} 
 			</div> 
 		{% endifnotequal %}
 		

@@ -440,14 +440,14 @@ def view(request, resource_name=None, object_id=None):
     lr_content = _convert_to_template_tuples(
         resource.export_to_elementtree(pretty=True))
 
-    lr_content_paths = get_structure_paths(lr_content)
-    sorted_tuple = sorted(set(lr_content_paths))
-
-    #get the 'best' language version of a "DictField"
+    # get the 'best' language version of a "DictField" and all other versions
     resource_name = resource.identificationInfo.get_default_resourceName()
-    resource_short_name = \
-        resource.identificationInfo.get_default_resourceShortName()
+    res_short_names = resource.identificationInfo.resourceShortName.values()
     description = resource.identificationInfo.get_default_description()
+    other_res_names = [name for name in resource.identificationInfo \
+            .resourceName.itervalues() if name != resource_name]
+    other_descriptions = [name for name in resource.identificationInfo \
+            .description.itervalues() if name != description]
 
     # Create fields lists
     url = resource.identificationInfo.url
@@ -457,9 +457,6 @@ def view(request, resource_name=None, object_id=None):
     linguality_infos = set(model_utils.get_resource_linguality_infos(resource))
     license_types = set(model_utils.get_resource_license_types(resource))
 
-    descriptions = []
-    resource_names = []
-    resource_short_names = []
     distribution_info_tuple = None
     contact_person_tuples = []
     metadata_info_tuple = None
@@ -489,29 +486,14 @@ def view(request, resource_name=None, object_id=None):
             resource_creation_info_tuple = _tuple
         elif _tuple[0] == "Relation":
             relation_info_tuples.append(_tuple)
-          
-          
-    for item, value in sorted_tuple:
-        tuple_index = str(value).replace(", ", "][").replace("(","[").replace(")","]")
-        tuple_index = "{}[1]".format(tuple_index[:-3])
-        if item == "Description":
-            descriptions.append(eval("lr_content" + tuple_index))
-        elif item == "Resource name":
-            resource_names.append(eval("lr_content" + tuple_index))
-        elif item == "Resource short name":
-            resource_short_names.append(eval("lr_content" + tuple_index))
-            
-        for name in resource_names:
-            if name == resource_name:
-                resource_names.remove(name)
-                
-        for desc in descriptions:
-            if desc == description:
-                descriptions.remove(desc)
 
     # Define context for template rendering.
-    context = { 'resourceName': resource_name,
-                'resource': resource,
+    context = { 'resource': resource,
+                'resourceName': resource_name,
+                'res_short_names': res_short_names,
+                'description': description,
+                'other_res_names': other_res_names,
+                'other_descriptions': other_descriptions,
                 'lr_content': lr_content, 
                 'distribution_info_tuple': distribution_info_tuple,
                 'contact_person_tuples': contact_person_tuples,                
@@ -524,15 +506,10 @@ def view(request, resource_name=None, object_id=None):
                 'relation_info_tuples': relation_info_tuples,
                 'linguality_infos': linguality_infos,
                 'license_types': license_types,
-                'description': description, 
-                'resourceShortName': resource_short_name, 
-                'resourceType': resource_type, 
+                'resourceType': resource_type,
                 'mediaTypes': media_types,
                 'url': url,
-                'metaShareId': metashare_id,
-                'descriptions': descriptions,
-                'resource_names': resource_names,
-                'resource_short_names': resource_short_names                
+                'metaShareId': metashare_id                
                 }
     template = 'repository/lr_view.html'
 
