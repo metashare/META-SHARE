@@ -98,4 +98,8 @@ div.resourceName ul li:not(:empty) {
 	border:1px solid #bbc; 
 }
 
+div.results {
+    margin-bottom: 1.5em;
+}
+
 /*end override container size*/

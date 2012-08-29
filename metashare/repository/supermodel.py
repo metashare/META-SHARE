@@ -73,7 +73,6 @@ def _classify(class_name):
     except NameError:
         return None
 
-
 def _make_choices_from_list(source_list):
     """
     Converts a given list of Strings to tuple choices.
