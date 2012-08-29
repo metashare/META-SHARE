@@ -5,6 +5,7 @@ Project: META-SHARE prototype implementation
 
 import logging
 
+from collections import Set, Sequence 
 from datetime import datetime
 from os.path import split, getsize
 from urllib import urlopen
@@ -440,6 +441,9 @@ def view(request, resource_name=None, object_id=None):
 
     # Convert resource to ElementTree and then to template tuples.
     lr_content = _convert_to_template_tuples(resource.export_to_elementtree())
+    
+    lr_content_paths = get_structure_paths(lr_content)
+    sorted_tuple = sorted(set(lr_content_paths))
 
     #get the 'best' language version of a "DictField"
     resource_name = resource.identificationInfo.get_default_resourceName()
@@ -455,6 +459,9 @@ def view(request, resource_name=None, object_id=None):
     linguality_infos = set(model_utils.get_resource_linguality_infos(resource))
     license_types = set(model_utils.get_resource_license_types(resource))
 
+    descriptions = []
+    resource_names = []
+    resource_short_names = []
     distribution_info_tuple = None
     contact_person_tuples = []
     metadata_info_tuple = None
@@ -483,12 +490,31 @@ def view(request, resource_name=None, object_id=None):
             resource_creation_info_tuple = _tuple
         elif _tuple[0] == "relationInfo":
             relation_info_tuples.append(_tuple)
+          
+          
+    for item, value in sorted_tuple:
+        tuple_index = str(value).replace(", ", "][").replace("(","[").replace(")","]")
+        tuple_index = "{}[1]".format(tuple_index[:-3])
+        if item == "description":
+            descriptions.append(eval("lr_content" + tuple_index))
+        elif item == "resourceName":
+            resource_names.append(eval("lr_content" + tuple_index))
+        elif item == "resourceShortName":
+            resource_short_names.append(eval("lr_content" + tuple_index))
+            
+        for name in resource_names:
+            if name==resource_name:
+                resource_names.remove(name)
+                
+        for desc in descriptions:
+            if desc==description:
+                descriptions.remove(desc)
 
     # Define context for template rendering.
     context = { 'resourceName': resource_name,
                 'resource': resource,
                 'lr_content': lr_content, 
-                'distribution_info_tuple': distribution_info_tuple,                
+                'distribution_info_tuple': distribution_info_tuple,
                 'contact_person_tuples': contact_person_tuples,                
                 'metadata_info_tuple': metadata_info_tuple,               
                 'version_info_tuple': version_info_tuple,
@@ -504,7 +530,10 @@ def view(request, resource_name=None, object_id=None):
                 'resourceType': resource_type, 
                 'mediaTypes': media_types,
                 'url': url,
-                'metaShareId': metashare_id                
+                'metaShareId': metashare_id,
+                'descriptions': descriptions,
+                'resource_names': resource_names,
+                'resource_short_names': resource_short_names                
                 }
     template = 'repository/lr_view.html'
 
@@ -549,6 +578,28 @@ def view(request, resource_name=None, object_id=None):
     ctx = RequestContext(request)
     return render_to_response(template, context, context_instance=ctx)
 
+
+def get_structure_paths(obj, path=(), memo=None):
+    """
+    Returns a list of tuples containing the path of each item in
+    a nested structure of tuples and lists.
+    Mostly taken from:
+    http://code.activestate.com/recipes/577982-recursively-walk-python-objects/
+    """
+    if memo is None:
+        memo = set()
+    iterator = None
+    if isinstance(obj, (Sequence, Set)) and not isinstance(obj, (str, unicode)):
+        iterator = enumerate
+    if iterator:
+        if id(obj) not in memo:
+            memo.add(id(obj))
+            for path_component, value in iterator(obj):
+                for result in get_structure_paths(value, path + (path_component,), memo):
+                    yield result
+            memo.remove(id(obj))
+    else:
+        yield obj, path
 
 def _format_recommendations(recommended_resources):
     '''
