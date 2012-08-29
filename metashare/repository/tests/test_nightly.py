@@ -35,7 +35,7 @@ class NightlyTests(TestCase):
         # enable indexing 
         test_utils.set_index_active(True)
     
-        # build index
+        # update index
         from django.core.management import call_command
         call_command('rebuild_index', interactive=False)
         
@@ -45,10 +45,20 @@ class NightlyTests(TestCase):
         """
         Clean up the test
         """
+        # disable indexing during import
+        test_utils.set_index_active(False)
+        
         test_utils.clean_resources_db()
         test_utils.clean_storage()
         OBJECT_XML_CACHE.clear()
         
+        # enable indexing 
+        test_utils.set_index_active(True)
+    
+        # update index
+        from django.core.management import call_command
+        call_command('rebuild_index', interactive=False)
+
         
     def testSuccessfulImport(self):
         """
@@ -70,9 +80,15 @@ class NightlyTests(TestCase):
         Checks that each resource's single view is displayed correctly.
         """
         
+        # disable indexing; we don't need stat updates for this test
+        test_utils.set_index_active(False)
+        
         client = Client()
         for _res in resourceInfoType_model.objects.all():
             response = client.get(_res.get_absolute_url(), follow = True)
             self.assertEquals(200, response.status_code)
             self.assertTemplateUsed(response, 'repository/lr_view.html')
             self.assertContains(response, xml_utils.html_escape(_res.real_unicode_()))
+
+        # enable indexing 
+        test_utils.set_index_active(True)
