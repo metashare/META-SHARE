@@ -152,7 +152,7 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_id("add_id_corpusTextInfo-0").click()
         driver.switch_to_window("id_corpusTextInfo__dash__0")
         Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
-          "monolingual")
+          "Monolingual")
         # corpus text info / language
         self.fill_language(driver, ss_path, "languageinfotype_model_set-0-")
         # corpus text info / size
@@ -249,7 +249,7 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_id("add_id_corpusAudioInfo").click()
         driver.switch_to_window("id_corpusAudioInfo")
         Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
-          "monolingual")
+          "Monolingual")
         # corpus audio info / language
         self.fill_language(driver, ss_path, "languageinfotype_model_set-0-")
         # corpus audio info / size popup
@@ -347,7 +347,7 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_id("edit_id_langdescInfo").click()
         driver.switch_to_window("edit_id_langdescInfo")
         Select(driver.find_element_by_id("id_languageDescriptionType")).select_by_visible_text(
-          "grammar")
+          "Grammar")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time())) 
         save_and_close(driver, root_id)
           
@@ -355,7 +355,7 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_id("add_id_languageDescriptionTextInfo").click()
         driver.switch_to_window("id_languageDescriptionTextInfo")
         Select(driver.find_element_by_id("id_form-2-0-lingualityType")).select_by_visible_text(
-          "monolingual")
+          "Monolingual")
         # language description info text / language
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
         self.fill_language(driver, ss_path, "languageinfotype_model_set-0-")
@@ -451,7 +451,7 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_id("edit_id_lexiconInfo").click()
         driver.switch_to_window("edit_id_lexiconInfo")
         Select(driver.find_element_by_id("id_lexicalConceptualResourceType")).select_by_visible_text(
-          "wordList")
+          "Word List")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time())) 
         save_and_close(driver, root_id)
           
@@ -459,7 +459,7 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_id("add_id_lexicalConceptualResourceTextInfo").click()
         driver.switch_to_window("id_lexicalConceptualResourceTextInfo")
         Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
-          "monolingual")
+          "Monolingual")
         # lexical resource text info / language
         self.fill_language(driver, ss_path, "languageinfotype_model_set-0-")
         # lexical resource text info / size
@@ -559,7 +559,7 @@ class EditorTest(SeleniumTestCase):
         # tool info popup
         driver.find_element_by_id("edit_id_toolServiceInfo").click()
         driver.switch_to_window("edit_id_toolServiceInfo")
-        Select(driver.find_element_by_id("id_toolServiceType")).select_by_visible_text("tool")
+        Select(driver.find_element_by_id("id_toolServiceType")).select_by_visible_text("Tool")
         Select(driver.find_element_by_id("id_languageDependent")).select_by_visible_text("Yes")
         # save and close tool info popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -646,46 +646,46 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
         driver.switch_to_window("id_distributionInfo")
         # check sorting of Availability
-        self.assertEqual("available-restrictedUse", driver.find_element_by_xpath(
+        self.assertEqual("Available - Restricted Use", driver.find_element_by_xpath(
           "//select[@id='id_availability']/option[2]").text)
-        self.assertEqual("available-unrestrictedUse", driver.find_element_by_xpath(
+        self.assertEqual("Available - Unrestricted Use", driver.find_element_by_xpath(
           "//select[@id='id_availability']/option[3]").text)
-        self.assertEqual("notAvailableThroughMetaShare", driver.find_element_by_xpath(
+        self.assertEqual("Not Available Through Meta Share", driver.find_element_by_xpath(
           "//select[@id='id_availability']/option[4]").text)        
-        self.assertEqual("underNegotiation", driver.find_element_by_xpath(
+        self.assertEqual("Under Negotiation", driver.find_element_by_xpath(
           "//select[@id='id_availability']/option[5]").text)
         save_and_close(driver, root_id)
         # corpus info text popup
         driver.find_element_by_id("add_id_corpusTextInfo-0").click()
         driver.switch_to_window("id_corpusTextInfo__dash__0")
         # check sorting of Linguality
-        self.assertEqual("bilingual", driver.find_element_by_xpath(
+        self.assertEqual("Bilingual", driver.find_element_by_xpath(
           "//select[@id='id_form-0-lingualityType']/option[2]").text)
-        self.assertEqual("monolingual", driver.find_element_by_xpath(
+        self.assertEqual("Monolingual", driver.find_element_by_xpath(
           "//select[@id='id_form-0-lingualityType']/option[3]").text)
-        self.assertEqual("multilingual", driver.find_element_by_xpath(
+        self.assertEqual("Multilingual", driver.find_element_by_xpath(
           "//select[@id='id_form-0-lingualityType']/option[4]").text)
         # check sorting of Size unit
-        self.assertEqual("4-grams", driver.find_element_by_xpath(
+        self.assertEqual("4 - Grams", driver.find_element_by_xpath(
           "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[2]").text)
-        self.assertEqual("5-grams", driver.find_element_by_xpath(
+        self.assertEqual("5 - Grams", driver.find_element_by_xpath(
           "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[3]").text)
-        self.assertEqual("articles", driver.find_element_by_xpath(
+        self.assertEqual("Articles", driver.find_element_by_xpath(
           "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[4]").text)
-        self.assertEqual("bigrams", driver.find_element_by_xpath(
+        self.assertEqual("Bigrams", driver.find_element_by_xpath(
           "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[5]").text)
-        self.assertEqual("bytes", driver.find_element_by_xpath(
+        self.assertEqual("Bytes", driver.find_element_by_xpath(
           "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[6]").text)
-        self.assertEqual("classes", driver.find_element_by_xpath(
+        self.assertEqual("Classes", driver.find_element_by_xpath(
           "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[7]").text)
-        self.assertEqual("concepts", driver.find_element_by_xpath(
+        self.assertEqual("Concepts", driver.find_element_by_xpath(
           "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[8]").text)                                        
-        self.assertEqual("diphones", driver.find_element_by_xpath(
+        self.assertEqual("Diphones", driver.find_element_by_xpath(
           "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[9]").text)
-        self.assertEqual("elements", driver.find_element_by_xpath(
+        self.assertEqual("Elements", driver.find_element_by_xpath(
           "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[10]").text)    
         # skip to end of list 
-        self.assertEqual("words", driver.find_element_by_xpath(
+        self.assertEqual("Words", driver.find_element_by_xpath(
           "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[50]").text)        
 
     
@@ -726,7 +726,7 @@ class EditorTest(SeleniumTestCase):
         # show licenses
         driver.find_element_by_id("fieldsetcollapser0").click()
         # check that the left window contains all entries
-        self.assertEqual("underNegotiation", driver.find_element_by_xpath(
+        self.assertEqual("Under Negotiation", driver.find_element_by_xpath(
           "//select[@id='id_licenceinfotype_model_set-0-licence_from']/option[41]").text)
         # add an entry
         driver.find_element_by_xpath(
@@ -735,7 +735,7 @@ class EditorTest(SeleniumTestCase):
         # check that entry has moved to right site
         self.assertEqual("AGPL", driver.find_element_by_xpath(
           "//select[@id='id_licenceinfotype_model_set-0-licence_to']/option[1]").text)
-        self.assertEqual("ApacheLicence_V2.0", driver.find_element_by_xpath(
+        self.assertEqual("Apache Licence_V2.0", driver.find_element_by_xpath(
           "//select[@id='id_licenceinfotype_model_set-0-licence_from']/option[1]").text)
         # remove entry
         driver.find_element_by_xpath(
@@ -753,7 +753,7 @@ class EditorTest(SeleniumTestCase):
         """
         driver.switch_to_window("id_distributionInfo")
         Select(driver.find_element_by_id("id_availability")).select_by_visible_text(
-          "available-unrestrictedUse")
+          "Available - Unrestricted Use")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         save_and_close(driver, parent_id)
         
@@ -790,7 +790,7 @@ class EditorTest(SeleniumTestCase):
         """
         driver.find_element_by_id("id_{}size".format(id_infix)).clear()
         driver.find_element_by_id("id_{}size".format(id_infix)).send_keys("10000")
-        Select(driver.find_element_by_id("id_{}sizeUnit".format(id_infix))).select_by_visible_text("tokens")
+        Select(driver.find_element_by_id("id_{}sizeUnit".format(id_infix))).select_by_visible_text("Tokens")
         
         
     def fill_audio_size(self, driver, ss_path, parent_id):
@@ -801,7 +801,7 @@ class EditorTest(SeleniumTestCase):
 
         driver.find_element_by_id("id_sizeinfotype_model_set-0-size").send_keys("100")
         
-        Select(driver.find_element_by_id("id_sizeinfotype_model_set-0-sizeUnit")).select_by_visible_text("gb")
+        Select(driver.find_element_by_id("id_sizeinfotype_model_set-0-sizeUnit")).select_by_visible_text("Gb")
         save_and_close(driver, parent_id) 
         
         

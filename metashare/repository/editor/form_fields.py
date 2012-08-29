@@ -1,7 +1,3 @@
-"""
-Project: META-SHARE prototype implementation
- Author: Christian Spurk <cspurk@dfki.de>
-"""
 from django.core.exceptions import ValidationError
 from django.forms.fields import Field
 from django.utils.translation import ugettext_lazy as _

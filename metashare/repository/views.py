@@ -1,8 +1,3 @@
-"""
-Project: META-SHARE prototype implementation
- Author: Christian Federmann <cfedermann@dfki.de>
-"""
-
 import logging
 
 from collections import Set, Sequence 
@@ -70,7 +65,9 @@ def _convert_to_template_tuples(element_tree):
         values = []
         for child in element_tree.getchildren():
             values.append(_convert_to_template_tuples(child))
-        return (element_tree.tag, values)
+        # use pretty print name of element instead of tag; requires that 
+        # element_tree is created using export_to_elementtree(pretty=True)
+        return (element_tree.attrib["pretty"], values)
 
     # Otherwise, we return a tuple containg (key, value, required), 
     # i.e., (tag, text, <True,False>).
@@ -82,7 +79,9 @@ def _convert_to_template_tuples(element_tree):
         # being thrown for cases, like /repository/browse/1222/, where some
         # required attributes seem to be missing.
         required = getattr(element_tree, 'required', 0)
-        return ((element_tree.tag, element_tree.text, required),)
+        # use pretty print name of element instead of tag; requires that 
+        # element_tree is created using export_to_elementtree(pretty=True)
+        return ((element_tree.attrib["pretty"], element_tree.text, required),)
 
 
 # a type providing an enumeration of META-SHARE member types
@@ -182,7 +181,7 @@ def _get_licences(resource, user_membership):
                 resource.distributionInfo.id))
     
     all_licenses = dict([(l_name, l_info) for l_info in licence_infos
-                         for l_name in l_info.get_licence_display_list()])
+                         for l_name in l_info.licence])
     result = {}
     for name, info in all_licenses.items():
         access = LICENCEINFOTYPE_URLS_LICENCE_CHOICES.get(name, None)
@@ -438,8 +437,9 @@ def view(request, resource_name=None, object_id=None):
         return redirect(resource.get_absolute_url())
 
     # Convert resource to ElementTree and then to template tuples.
-    lr_content = _convert_to_template_tuples(resource.export_to_elementtree())
-    
+    lr_content = _convert_to_template_tuples(
+        resource.export_to_elementtree(pretty=True))
+
     lr_content_paths = get_structure_paths(lr_content)
     sorted_tuple = sorted(set(lr_content_paths))
 
@@ -470,34 +470,35 @@ def view(request, resource_name=None, object_id=None):
     resource_creation_info_tuple = None
     relation_info_tuples = []
     for _tuple in lr_content[1]:
-        if _tuple[0] == "distributionInfo":
+        LOGGER.info(_tuple[0])
+        if _tuple[0] == "Distribution":
             distribution_info_tuple = _tuple
-        elif _tuple[0] == "contactPerson":
+        elif _tuple[0] == "Person":
             contact_person_tuples.append(_tuple)
-        elif _tuple[0] == "metadataInfo":
+        elif _tuple[0] == "Metadata":
             metadata_info_tuple = _tuple
-        elif _tuple[0] == "versionInfo":
+        elif _tuple[0] == "Version":
             version_info_tuple = _tuple
-        elif _tuple[0] == "validationInfo":
+        elif _tuple[0] == "Validation":
             validation_info_tuples.append(_tuple)
-        elif _tuple[0] == "usageInfo":
+        elif _tuple[0] == "Usage":
             usage_info_tuple = _tuple
-        elif _tuple[0] == "resourceDocumentationInfo":
+        elif _tuple[0] == "Resource documentation":
             documentation_info_tuple = _tuple            
-        elif _tuple[0] == "resourceCreationInfo":
+        elif _tuple[0] == "Resource creation":
             resource_creation_info_tuple = _tuple
-        elif _tuple[0] == "relationInfo":
+        elif _tuple[0] == "Relation":
             relation_info_tuples.append(_tuple)
           
           
     for item, value in sorted_tuple:
         tuple_index = str(value).replace(", ", "][").replace("(","[").replace(")","]")
         tuple_index = "{}[1]".format(tuple_index[:-3])
-        if item == "description":
+        if item == "Description":
             descriptions.append(eval("lr_content" + tuple_index))
-        elif item == "resourceName":
+        elif item == "Resource name":
             resource_names.append(eval("lr_content" + tuple_index))
-        elif item == "resourceShortName":
+        elif item == "Resource short name":
             resource_short_names.append(eval("lr_content" + tuple_index))
             
         for name in resource_names:

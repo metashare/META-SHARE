@@ -253,7 +253,7 @@ class SearchTest(test_utils.IndexAwareTestCase):
         self.assertContains(response, "1 Language Resource", status_code=200)
         # assert that an all lower case search finds a camelCase term:
         response = client.get(_SEARCH_PAGE_PATH,
-                              follow=True, data={'q': 'speechsynthesis'})
+                              follow=True, data={'q': 'camelcasetest'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
 
@@ -266,14 +266,14 @@ class SearchTest(test_utils.IndexAwareTestCase):
         imported_res.storage_object.published = True
         imported_res.storage_object.save()
         client = Client()
-        # assert that a two-token search finds a camelCase term:
+        # assert that a three-token search finds a camelCase term:
         response = client.get(_SEARCH_PAGE_PATH,
-                              follow=True, data={'q': 'speech synthesis'})
+                              follow=True, data={'q': 'camel case test'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
         # assert that a camelCase search term also finds the camelCase term:
         response = client.get(_SEARCH_PAGE_PATH,
-                              follow=True, data={'q': 'speechSynthesis'})
+                              follow=True, data={'q': 'camelCaseTest'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
 
@@ -383,7 +383,8 @@ class SearchTestPublishedResources(TestCase):
     def testAvailabilityFacet(self):   
         client = Client()
         response = client.get(_SEARCH_PAGE_PATH, follow=True, 
-          data={'selected_facets':'availabilityFilter_exact:available-unrestrictedUse'})
+          data={'selected_facets':
+                'availabilityFilter_exact:Available - Unrestricted Use'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
               
@@ -407,7 +408,8 @@ class SearchTestPublishedResources(TestCase):
     def testRestrictionsOfUseFacet(self):   
         client = Client()
         response = client.get(_SEARCH_PAGE_PATH, follow=True, 
-          data={'selected_facets':'restrictionsOfUseFilter_exact:academic-nonCommercialUse'})
+          data={'selected_facets':
+                'restrictionsOfUseFilter_exact:Academic - Non Commercial Use'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "2 Language Resources", status_code=200)
       
@@ -421,35 +423,36 @@ class SearchTestPublishedResources(TestCase):
     def testForeseenUseFacet(self):   
         client = Client()
         response = client.get(_SEARCH_PAGE_PATH, follow=True, 
-          data={'selected_facets':'foreseenUseFilter_exact:nlpApplications'})
+          data={'selected_facets':'foreseenUseFilter_exact:Nlp Applications'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "2 Language Resources", status_code=200)
      
     def testUseNlpSpecificFacet(self):   
         client = Client()
         response = client.get(_SEARCH_PAGE_PATH, follow=True, 
-          data={'selected_facets':'useNlpSpecificFilter_exact:speechRecognition'})
+          data={'selected_facets':
+                'useNlpSpecificFilter_exact:Speech Recognition'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
       
     def testLingualityTypeFacet(self):   
         client = Client()
         response = client.get(_SEARCH_PAGE_PATH, follow=True, 
-          data={'selected_facets':'lingualityTypeFilter_exact:monolingual'})
+          data={'selected_facets':'lingualityTypeFilter_exact:Monolingual'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "2 Language Resources", status_code=200)
         
     def testMultilingualityTypeFacet(self):   
         client = Client()
         response = client.get(_SEARCH_PAGE_PATH, follow=True, 
-          data={'selected_facets':'multilingualityTypeFilter_exact:comparable'})
+          data={'selected_facets':'multilingualityTypeFilter_exact:Comparable'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
         
     def testModalityTypeFacet(self):   
         client = Client()
         response = client.get(_SEARCH_PAGE_PATH, follow=True, 
-          data={'selected_facets':'modalityTypeFilter_exact:other'})
+          data={'selected_facets':'modalityTypeFilter_exact:Other'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
         

@@ -152,7 +152,7 @@
 			{% ifequal resourceType "toolService" %}
 				<div id="tabs_content_container">
 					<div id="1" class="tab_content">
-						{% include "repository/media_info.html" with type='toolServiceInfo' %}
+						{% include "repository/media_info.html" with type='Tool service' %}
 					</div>
 				</div>
 			{% else %}
@@ -161,47 +161,47 @@
 						<div id="{{forloop.counter}}" class="tab_content">
 							{% ifequal resourceType "corpus" %}
 								{% ifequal type "text" %}
-									{% include "repository/media_info.html" with type='corpusTextInfo' %}
+									{% include "repository/media_info.html" with type='Corpus text' %}
 								{% endifequal %}
 								{% ifequal type "audio" %}
-									{% include "repository/media_info.html" with type='corpusAudioInfo' %}
+									{% include "repository/media_info.html" with type='Corpus audio' %}
 								{% endifequal %}
 								{% ifequal type "video" %}
-									{% include "repository/media_info.html" with type='corpusVideoInfo' %}
+									{% include "repository/media_info.html" with type='Corpus video' %}
 								{% endifequal %}
 								{% ifequal type "image" %}
-									{% include "repository/media_info.html" with type='corpusImageInfo' %}
+									{% include "repository/media_info.html" with type='Corpus image' %}
 								{% endifequal %}
 								{% ifequal type "textNumerical" %}
-									{% include "repository/media_info.html" with type='corpusTextNumericalInfo' %}
+									{% include "repository/media_info.html" with type='Corpus text numerical' %}
 								{% endifequal %}
 								{% ifequal type "textNgram" %}
-									{% include "repository/media_info.html" with type='corpusTextNgramInfo' %}
+									{% include "repository/media_info.html" with type='Corpus text ngram' %}
 								{% endifequal %}
 							{% else %}
 								{% ifequal resourceType "lexicalConceptualResource" %}
 									{% ifequal type "text" %}
-										{% include "repository/media_info.html" with type='lexicalConceptualResourceTextInfo' %}
+										{% include "repository/media_info.html" with type='Lexical conceptual resource text' %}
 									{% endifequal %}
 									{% ifequal type "audio" %}
-										{% include "repository/media_info.html" with type='lexicalConceptualResourceAudioInfo' %}
+										{% include "repository/media_info.html" with type='Lexical conceptual resource audio' %}
 									{% endifequal %}
 									{% ifequal type "video" %}
-										{% include "repository/media_info.html" with type='lexicalConceptualResourceVideoInfo' %}
+										{% include "repository/media_info.html" with type='Lexical conceptual resource video' %}
 									{% endifequal %}
 									{% ifequal type "image" %}
-										{% include "repository/media_info.html" with type='lexicalConceptualResourceImageInfo' %}
+										{% include "repository/media_info.html" with type='Lexical conceptual resource image' %}
 									{% endifequal %}
 								{% else %}	
 									{% ifequal resourceType "languageDescription" %}
 										{% ifequal type "text" %}
-											{% include "repository/media_info.html" with type='languageDescriptionTextInfo' %}
+											{% include "repository/media_info.html" with type='Language description text' %}
 										{% endifequal %}
 										{% ifequal type "video" %}
-											{% include "repository/media_info.html" with type='languageDescriptionVideoInfo' %}
+											{% include "repository/media_info.html" with type='Language description video' %}
 										{% endifequal %}
 										{% ifequal type "image" %}
-											{% include "repository/media_info.html" with type='languageDescriptionImageInfo' %}
+											{% include "repository/media_info.html" with type='Language description image' %}
 										{% endifequal %}										
 									{% endifequal %}		
 								{% endifequal %}
