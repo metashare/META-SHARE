@@ -30,8 +30,6 @@ from metashare.repository.forms import LicenseSelectionForm, \
 from metashare.repository import model_utils
 from metashare.repository.models import licenceInfoType_model, \
     resourceInfoType_model
-from metashare.repository.search_indexes import resourceInfoType_modelIndex
-from metashare.repository.models import licenceInfoType_model, resourceInfoType_model
 from metashare.repository.search_indexes import resourceInfoType_modelIndex, \
     update_lr_index_entry
 from metashare.settings import LOG_LEVEL, LOG_HANDLER, MEDIA_URL, DJANGO_URL
@@ -503,11 +501,11 @@ def view(request, resource_name=None, object_id=None):
             resource_short_names.append(eval("lr_content" + tuple_index))
             
         for name in resource_names:
-            if name==resource_name:
+            if name == resource_name:
                 resource_names.remove(name)
                 
         for desc in descriptions:
-            if desc==description:
+            if desc == description:
                 descriptions.remove(desc)
 
     # Define context for template rendering.
