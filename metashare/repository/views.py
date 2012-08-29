@@ -178,7 +178,7 @@ def _get_licences(resource, user_membership):
                 resource.distributionInfo.id))
     
     all_licenses = dict([(l_name, l_info) for l_info in licence_infos
-                         for l_name in l_info.get_licence_display_list()])
+                         for l_name in l_info.licence])
     result = {}
     for name, info in all_licenses.items():
         access = LICENCEINFOTYPE_URLS_LICENCE_CHOICES.get(name, None)
