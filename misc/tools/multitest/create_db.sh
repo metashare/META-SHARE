@@ -15,8 +15,6 @@ CURRENT_DIR=`pwd`
 
 cp init_data/settings_multitest.py $METASHARE_DIR/settings.py
 ret_val=$?
-#cp init_data/local_settings.sample $METASHARE_DIR/local_settings.py
-#ret_val=$?
 if [[ $ret_val -ne 0 ]] ; then
 	echo "Cannot copy settings/local_settings"
 	exit $ret_val

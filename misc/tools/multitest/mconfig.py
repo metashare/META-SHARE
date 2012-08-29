@@ -20,7 +20,7 @@ class mconfig:
 	root_dir = ''
 	metashare_dir = root_dir + '/metashare'
 	solr_root = root_dir + '/solr/instances'
-	# Collect all inner nodes
+	# Collect all META-SHARE Managing Nodes (aka. inner nodes)
 	inner_nodes = []
 
 	def set_root_dir(cls, metashare_dir):
