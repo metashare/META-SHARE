@@ -154,12 +154,13 @@ def import_from_file(filehandle, descriptor, targetstatus, copy_status, owner_id
         temp_zip = ZipFile(filehandle)
         
         print 'Importing ZIP file: "{0}"'.format(descriptor)
+        file_count = 0
         for xml_name in temp_zip.namelist():
             try:
                 if xml_name.endswith('/') or xml_name.endswith('\\'):
                     continue
-                
-                print 'Importing extracted XML file: "{0}"'.format(xml_name)
+                file_count += 1
+                print 'Importing {0}. extracted XML file: "{1}"'.format(file_count, xml_name)
                 xml_string = temp_zip.read(xml_name)
                 resource = import_from_string(xml_string, targetstatus, copy_status, owner_id)
                 imported_resources.append(resource)
@@ -181,3 +182,18 @@ def to_xml_string(node, encoding="ASCII"):
     xml_string = XML_DECL_2.sub(u'', xml_string)
 
     return u'<?xml version="1.0" encoding="{}"?>{}'.format(encoding, xml_string)
+
+
+html_escape_table = {
+    "&": "&amp;",
+    '"': "&quot;",
+    "'": "&#39;",
+    ">": "&gt;",
+    "<": "&lt;",
+    }
+    
+def html_escape(text):
+    """
+    Produce entities within text.
+    """
+    return "".join(html_escape_table.get(c, c) for c in text)
