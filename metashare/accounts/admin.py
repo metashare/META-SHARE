@@ -1,7 +1,3 @@
-"""
-Project: META-SHARE prototype implementation
- Author: Christian Federmann <cfedermann@dfki.de>
-"""
 from django import forms
 from django.contrib import admin, messages
 from django.contrib.admin.options import csrf_protect_m

@@ -1,8 +1,3 @@
-"""
-Project: META-SHARE prototype implementation
- Author: Christian Federmann <cfedermann@dfki.de>
-"""
-
 from django.conf.urls.defaults import patterns
 from metashare.settings import DJANGO_BASE
 

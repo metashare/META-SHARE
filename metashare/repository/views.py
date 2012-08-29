@@ -1,8 +1,3 @@
-"""
-Project: META-SHARE prototype implementation
- Author: Christian Federmann <cfedermann@dfki.de>
-"""
-
 import logging
 
 from datetime import datetime

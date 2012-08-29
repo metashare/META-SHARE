@@ -1,7 +1,5 @@
 """
-Project: META-SHARE
 Utility functions for Selenium unit tests.
-@author: steffen
 """
 from metashare.settings import ROOT_PATH, TEST_MODE_NAME
 import os

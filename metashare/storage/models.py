@@ -1,7 +1,3 @@
-"""
-Project: META-SHARE prototype implementation
- Author: Christian Federmann <cfedermann@dfki.de>
-"""
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.db import models
 # pylint: disable-msg=E0611

@@ -1,7 +1,3 @@
-"""
-Project: META-SHARE
- Author: Christian Spurk <cspurk@dfki.de>
-"""
 from django import template
 
 from metashare.repository import model_utils
