@@ -154,12 +154,13 @@ def import_from_file(filehandle, descriptor, targetstatus, copy_status, owner_id
         temp_zip = ZipFile(filehandle)
         
         print 'Importing ZIP file: "{0}"'.format(descriptor)
+        file_count = 0
         for xml_name in temp_zip.namelist():
             try:
                 if xml_name.endswith('/') or xml_name.endswith('\\'):
                     continue
-                
-                print 'Importing extracted XML file: "{0}"'.format(xml_name)
+                file_count += 1
+                print 'Importing {0}. extracted XML file: "{1}"'.format(file_count, xml_name)
                 xml_string = temp_zip.read(xml_name)
                 resource = import_from_string(xml_string, targetstatus, copy_status, owner_id)
                 imported_resources.append(resource)
