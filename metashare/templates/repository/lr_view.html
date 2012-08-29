@@ -14,76 +14,76 @@
 {% block keywords %}{{ resourceType }}, {{ mediaTypes|join:", " }}, {{ linguality_infos|join:", " }}, {{ resource.distributionInfo.get_availability_display }}, {{ license_types|join:", " }}{% endblock %}
 
 {% block content %}
-		<script type="text/javascript" src="http://plugins.learningjquery.com/expander/jquery.expander.js"></script>
-		<script type="text/javascript">
-			$(function () {
-				$('.readmore').expander({
-					slicePoint: 300,
-					expandText: 'Read More',
-					userCollapseText: 'Read Less'
-				});
+	<script type="text/javascript" src="http://plugins.learningjquery.com/expander/jquery.expander.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			$('.readmore').expander({
+				slicePoint: 300,
+				expandText: 'Read More',
+				userCollapseText: 'Read Less'
 			});
+		});
 
-			$(document).ready(function(){  
+		$(document).ready(function(){  
+			$(".tab_content").hide();
+			$(".fields li:first-child").addClass("active");
+			var selected_tab = $(".fields li.active").find("a").attr("href");
+			$(selected_tab).fadeIn();
+			$(".fields li").click(function() {
+				$(".fields li").removeClass("active");
+				$(this).addClass("active");
 				$(".tab_content").hide();
-				$(".fields li:first-child").addClass("active");
-				var selected_tab = $(".fields li.active").find("a").attr("href");
+				var selected_tab = $(this).find("a").attr("href");
 				$(selected_tab).fadeIn();
-				$(".fields li").click(function() {
-					$(".fields li").removeClass("active");
-					$(this).addClass("active");
-					$(".tab_content").hide();
-					var selected_tab = $(this).find("a").attr("href");
-					$(selected_tab).fadeIn();
-					return false;
-		  		});
+				return false;
+	  		});
 
-				$(".title.component").each(function() {
-					if($(this).nextUntil(".title.component").hasClass("optional")){
-						$(this).addClass("expandable");
-					}
-				});
+			$(".title.component").each(function() {
+				if($(this).nextUntil(".title.component").hasClass("optional")){
+					$(this).addClass("expandable");
+				}
+			});
+			
+			$(".dataline.optional").hide();
+			$(".expandable").addClass("collapsed");
+			$(".expandable").click(function() {
+				if($(this).hasClass("collapsed")){
+					$(this).removeClass('collapsed');
+					$(this).addClass('expanded');
+					$(this).nextUntil(".title.component").show();
+				}
+				else{
+					$(this).removeClass('expanded');
+					$(this).addClass('collapsed');						
+					 $(this).nextAll().each( function() {
+				           if ($(this).filter('.title').length) {
+				              return false;
+				           }
+				           $(this).filter('.optional').hide();
+				       });
+					
+				}
+			});
+			
+			$(".more").addClass("collapsed");
+			$(".otherlang").hide();
+			$(".more").click(function() {
+				if($(this).hasClass("collapsed")){
+					$(this).removeClass('collapsed');
+					$(this).addClass('expanded');
+				}
+				else{
+					$(this).removeClass('expanded');
+					$(this).addClass('collapsed');					
+				}
 				
-				$(".dataline.optional").hide();
-				$(".expandable").addClass("collapsed");
-				$(".expandable").click(function() {
-					if($(this).hasClass("collapsed")){
-						$(this).removeClass('collapsed');
-						$(this).addClass('expanded');
-						$(this).nextUntil(".title.component").show();
-					}
-					else{
-						$(this).removeClass('expanded');
-						$(this).addClass('collapsed');						
-						 $(this).nextAll().each( function() {
-					           if ($(this).filter('.title').length) {
-					              return false;
-					           }
-					           $(this).filter('.optional').hide();
-					       });
-						
-					}
-				});
 				
-				$(".more").addClass("collapsed");
-				$(".otherlang").hide();
-				$(".more").click(function() {
-					if($(this).hasClass("collapsed")){
-						$(this).removeClass('collapsed');
-						$(this).addClass('expanded');
-					}
-					else{
-						$(this).removeClass('expanded');
-						$(this).addClass('collapsed');					
-					}
-					
-					
-					$(this).next().toggle();
-					
-				});
+				$(this).next().toggle();
 				
 			});
-		</script>
+			
+		});
+	</script>
 
 	<div class="top_box white_box">
 		<div id="stats" align="right">
