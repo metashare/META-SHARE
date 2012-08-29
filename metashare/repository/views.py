@@ -1,5 +1,6 @@
 import logging
 
+from collections import Set, Sequence 
 from datetime import datetime
 from os.path import split, getsize
 from urllib import urlopen
@@ -21,7 +22,9 @@ from metashare.repository.editor.resource_editor import has_edit_permission
 from metashare.repository.forms import LicenseSelectionForm, \
     LicenseAgreementForm, DownloadContactForm, MORE_FROM_SAME_CREATORS, \
     MORE_FROM_SAME_PROJECTS
-from metashare.repository.models import licenceInfoType_model, resourceInfoType_model
+from metashare.repository import model_utils
+from metashare.repository.models import licenceInfoType_model, \
+    resourceInfoType_model
 from metashare.repository.search_indexes import resourceInfoType_modelIndex, \
     update_lr_index_entry
 from metashare.settings import LOG_LEVEL, LOG_HANDLER, MEDIA_URL, DJANGO_URL
@@ -67,7 +70,7 @@ def _convert_to_template_tuples(element_tree):
         return (element_tree.attrib["pretty"], values)
 
     # Otherwise, we return a tuple containg (key, value, required), 
-    # i.e., (tag, text, <0,1>).
+    # i.e., (tag, text, <True,False>).
     # The "required" element was added to the tree, for passing 
     # information about whether a field is required or not, to correctly
     # render the single resource view.
@@ -434,11 +437,80 @@ def view(request, resource_name=None, object_id=None):
         return redirect(resource.get_absolute_url())
 
     # Convert resource to ElementTree and then to template tuples.
-    resource_tree = resource.export_to_elementtree(pretty=True)
-    lr_content = _convert_to_template_tuples(resource_tree)
+    lr_content = _convert_to_template_tuples(
+        resource.export_to_elementtree(pretty=True))
+
+    # get the 'best' language version of a "DictField" and all other versions
+    resource_name = resource.identificationInfo.get_default_resourceName()
+    res_short_names = resource.identificationInfo.resourceShortName.values()
+    description = resource.identificationInfo.get_default_description()
+    other_res_names = [name for name in resource.identificationInfo \
+            .resourceName.itervalues() if name != resource_name]
+    other_descriptions = [name for name in resource.identificationInfo \
+            .description.itervalues() if name != description]
+
+    # Create fields lists
+    url = resource.identificationInfo.url
+    metashare_id = resource.identificationInfo.metaShareId
+    resource_type = resource.resourceComponentType.as_subclass().resourceType
+    media_types = set(model_utils.get_resource_media_types(resource))
+    linguality_infos = set(model_utils.get_resource_linguality_infos(resource))
+    license_types = set(model_utils.get_resource_license_types(resource))
+
+    distribution_info_tuple = None
+    contact_person_tuples = []
+    metadata_info_tuple = None
+    version_info_tuple = None
+    validation_info_tuples = []
+    usage_info_tuple = None
+    documentation_info_tuple = None
+    resource_creation_info_tuple = None
+    relation_info_tuples = []
+    for _tuple in lr_content[1]:
+        LOGGER.info(_tuple[0])
+        if _tuple[0] == "Distribution":
+            distribution_info_tuple = _tuple
+        elif _tuple[0] == "Person":
+            contact_person_tuples.append(_tuple)
+        elif _tuple[0] == "Metadata":
+            metadata_info_tuple = _tuple
+        elif _tuple[0] == "Version":
+            version_info_tuple = _tuple
+        elif _tuple[0] == "Validation":
+            validation_info_tuples.append(_tuple)
+        elif _tuple[0] == "Usage":
+            usage_info_tuple = _tuple
+        elif _tuple[0] == "Resource documentation":
+            documentation_info_tuple = _tuple            
+        elif _tuple[0] == "Resource creation":
+            resource_creation_info_tuple = _tuple
+        elif _tuple[0] == "Relation":
+            relation_info_tuples.append(_tuple)
 
     # Define context for template rendering.
-    context = { 'resource': resource, 'lr_content': lr_content }
+    context = { 'resource': resource,
+                'resourceName': resource_name,
+                'res_short_names': res_short_names,
+                'description': description,
+                'other_res_names': other_res_names,
+                'other_descriptions': other_descriptions,
+                'lr_content': lr_content, 
+                'distribution_info_tuple': distribution_info_tuple,
+                'contact_person_tuples': contact_person_tuples,                
+                'metadata_info_tuple': metadata_info_tuple,               
+                'version_info_tuple': version_info_tuple,
+                'validation_info_tuples': validation_info_tuples,
+                'usage_info_tuple': usage_info_tuple,
+                'documentation_info_tuple': documentation_info_tuple,                
+                'resource_creation_info_tuple': resource_creation_info_tuple,
+                'relation_info_tuples': relation_info_tuples,
+                'linguality_infos': linguality_infos,
+                'license_types': license_types,
+                'resourceType': resource_type,
+                'mediaTypes': media_types,
+                'url': url,
+                'metaShareId': metashare_id                
+                }
     template = 'repository/lr_view.html'
 
     # For users who have edit permission for this resource, we have to add LR_EDIT 
@@ -483,14 +555,38 @@ def view(request, resource_name=None, object_id=None):
     return render_to_response(template, context, context_instance=ctx)
 
 
+def get_structure_paths(obj, path=(), memo=None):
+    """
+    Returns a list of tuples containing the path of each item in
+    a nested structure of tuples and lists.
+    Mostly taken from:
+    http://code.activestate.com/recipes/577982-recursively-walk-python-objects/
+    """
+    if memo is None:
+        memo = set()
+    iterator = None
+    if isinstance(obj, (Sequence, Set)) and not isinstance(obj, (str, unicode)):
+        iterator = enumerate
+    if iterator:
+        if id(obj) not in memo:
+            memo.add(id(obj))
+            for path_component, value in iterator(obj):
+                for result in get_structure_paths(value, path + (path_component,), memo):
+                    yield result
+            memo.remove(id(obj))
+    else:
+        yield obj, path
+
 def _format_recommendations(recommended_resources):
     '''
     Returns the given resource recommendations list formatted as a list of
     dictionaries with the two keys "name" and "url" (for use in the single
     resource view).
+    
+    The number of returned recommendations is restricted to at most 4.
     '''
     result = []
-    for res in recommended_resources:
+    for res in recommended_resources[:4]:
         res_item = {}
         res_item['name'] = res.__unicode__()
         res_item['url'] = res.get_absolute_url()

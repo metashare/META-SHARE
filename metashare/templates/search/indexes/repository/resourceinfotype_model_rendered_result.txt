@@ -3,18 +3,11 @@
 {% load resource_media_types %}
 {% load resource_access_stats %}
 {% load get_media_url %}
+{% load get_icon %}
 
 <div class="resourceName">
 
-{% if object.resourceComponentType.as_subclass.resourceType = "corpus" %}
-<img src="{% get_media_url %}css/sexybuttons/images/icons/silk/database_yellow.png" title="Corpus" /> 
-{% endif %}
-{% if object.resourceComponentType.as_subclass.resourceType = "toolService" %}
-<img src="{% get_media_url %}css/sexybuttons/images/icons/silk/page_white_gear.png" title="Tool/Service" />
-{% endif %}
-{% if object.resourceComponentType.as_subclass.resourceType = "lexicalConceptualResource" %}
-<img src="{% get_media_url %}css/sexybuttons/images/icons/silk/text_ab.png" title="Lexical Conceptual" /> 
-{% endif %}
+{% get_icon object.resourceComponentType.as_subclass.resourceType %}
 
 &nbsp;<a href="{{ object.get_absolute_url }}"{% ifnotequal object.identificationInfo.get_default_description "METASHARE_NULL" %} title="{{ object.identificationInfo.get_default_description|escape }}"{% endifnotequal %}>{{ object }}</a>
 
