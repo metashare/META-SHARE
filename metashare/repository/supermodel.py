@@ -301,15 +301,23 @@ class SchemaModel(models.Model):
 
         return result
 
-    def export_to_elementtree(self):
+    def export_to_elementtree(self, pretty=False):
         """
-        Exports this instance to an XML ElementTree.
+        Exports this instance to an XML ElementTree. If pretty is True, XML
+        elements include an additional attribute 'pretty' with the pretty-print
+        name as defined in the model.
         """
         if self.__schema_name__ == "SUBCLASSABLE":
             # pylint: disable-msg=E1101
-            return self.as_subclass().export_to_elementtree()
+            return self.as_subclass().export_to_elementtree(pretty=pretty)
 
         _root = Element(self.__schema_name__)
+        
+        if pretty:
+            try:
+                _root.attrib["pretty"] = self._meta.verbose_name
+            except AttributeError:
+                _root.attrib["pretty"] = _root.tag
 
         # Fix namespace attributes for the resourceInfo root element.
         if _root.tag == 'resourceInfo':
@@ -432,6 +440,8 @@ class SchemaModel(models.Model):
 
                             if _element is None:
                                 _element = Element(_tag)
+                                if pretty:
+                                    _element.attrib["pretty"] = self.get_verbose_name(_model_field)
                                 _current_node.append(_element)
 
                             _current_node = _element
@@ -443,11 +453,13 @@ class SchemaModel(models.Model):
                     if isinstance(_sub_value, SchemaModel):
                         if _sub_value.__schema_name__ == "STRINGMODEL":
                             _element = Element(_xsd_name)
+                            if pretty:
+                                _element.attrib["pretty"] = self.get_verbose_name(_model_field)
                             _element.text = SchemaModel._python_to_xml(_sub_value.value)
                             _current_node.append(_element)
 
                         else:
-                            _sub_value = _sub_value.export_to_elementtree()
+                            _sub_value = _sub_value.export_to_elementtree(pretty=pretty)
 
                             # We fix the sub value's tag as it may be "wrong".
                             # E.g., PersonInfo is sometimes called contactPerson.
@@ -459,6 +471,8 @@ class SchemaModel(models.Model):
                     # Simple values are added to a new element and appended.
                     else:
                         _element = Element(_xsd_name)
+                        if pretty:
+                            _element.attrib["pretty"] = self.get_verbose_name(_model_field)
                         if isinstance(_sub_value, tuple):
                             # tuple values come from DictFields with an RFC 3066
                             # language code key
