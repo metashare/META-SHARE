@@ -222,6 +222,18 @@ class SchemaModel(models.Model):
                 return remote.related.model._meta.verbose_name
             return fieldname
 
+    @classmethod
+    def is_choice(cls, fieldname):
+        """
+        Checks if the given field contains choices.
+        """
+        try:
+            field = cls._meta.get_field(fieldname)
+            _choices = field.choices
+            return len(_choices) != 0
+        except:
+            return False
+
     @staticmethod
     def _python_to_xml(value):
         """
@@ -422,9 +434,12 @@ class SchemaModel(models.Model):
                     if isinstance(_sub_value, SchemaModel):
                         if _sub_value.__schema_name__ == "STRINGMODEL":
                             _element = Element(_xsd_name)
+                            _element_text = SchemaModel._python_to_xml(_sub_value.value)
                             if pretty:
                                 _element.attrib["pretty"] = self.get_verbose_name(_model_field)
-                            _element.text = SchemaModel._python_to_xml(_sub_value.value)
+                                if self.is_choice(_model_field):
+                                    _element_text = prettify_camel_case_string(_element_text)
+                            _element.text = _element_text
                             _current_node.append(_element)
 
                         else:
@@ -446,7 +461,7 @@ class SchemaModel(models.Model):
                             # tuple values come from DictFields with an RFC 3066
                             # language code key
                             _element.set('lang', _sub_value[0])
-                            _element.text = SchemaModel._python_to_xml(
+                            _element_text = SchemaModel._python_to_xml(
                                                                 _sub_value[1])                            
                             if self.is_required_field(_model_field):
                                 # If the element is "required" in the model,
@@ -457,13 +472,17 @@ class SchemaModel(models.Model):
                             else:
                                 _element.required = False
                         else:
-                            _element.text = SchemaModel._python_to_xml(
+                            _element_text = SchemaModel._python_to_xml(
                                                                 _sub_value)                            
                             if self.is_required_field(_model_field):
                                 _element.required = self.is_required_field(
                                                                 _model_field)
                             else:
                                 _element.required = False
+                        if pretty:
+                            if self.is_choice(_model_field):
+                                _element_text = prettify_camel_case_string(_element_text)
+                        _element.text = _element_text
                         _current_node.append(_element)
 
         # Return root node of the ElementTree; can be converted to String
