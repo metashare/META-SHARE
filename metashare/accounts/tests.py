@@ -1,8 +1,3 @@
-'''
-Created on 09.08.2011
-
-@author: marc
-'''
 import django.test
 from django.contrib.admin.sites import LOGIN_FORM_KEY
 from django.contrib.auth import REDIRECT_FIELD_NAME

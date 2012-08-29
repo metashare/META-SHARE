@@ -1,7 +1,3 @@
-"""
-Project: META-SHARE prototype implementation
- Author: Christian Girardi <cgirardi@fbk.eu>
-"""
 from django.conf.urls.defaults import patterns
 
 urlpatterns = patterns('metashare.stats.views',

@@ -1,7 +1,4 @@
 """
-Project: META-SHARE version v1 release
- Author: Christian Federmann <cfedermann@dfki.de>
-
 Methods for model data conversion between different representations.
 """
 

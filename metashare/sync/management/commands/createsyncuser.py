@@ -1,5 +1,6 @@
 """
-Management utility to create users with the permission to access syncrhonization data.
+Management utility to create users with the permission to access syncrhonization
+data.
 """
 
 import getpass

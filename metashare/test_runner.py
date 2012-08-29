@@ -1,7 +1,3 @@
-"""
-Project: META-SHARE prototype implementation
- Author: Christian Spurk <cspurk@dfki.de>
-"""
 import logging
 
 from django_selenium.selenium_runner import SeleniumTestRunner
