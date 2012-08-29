@@ -505,9 +505,10 @@ class ComboWidget(AdminTextInputWidget):
             id1 = attrs['id']
             if self.field_type == 'id':
                 linked_to = attrs['id'].replace(self.id_field, self.name_field)
-                js_script = u'<script>autocomp_id("{0}", "{1}");</script>'.format(id1, linked_to)
+                js_script = u'<script>autocomp_single("id", "{0}", "{1}");</script>'.format(id1, linked_to)
             elif self.field_type == 'name':
-                js_script = u'<script>autocomp_name("{0}");</script>'.format(id1)
+                linked_to = attrs['id'].replace(self.name_field, self.id_field)
+                js_script = u'<script>autocomp_single("name", "{0}", "{1}");</script>'.format(id1, linked_to)
             val = val + js_script
 
         return mark_safe(val)
@@ -535,6 +536,9 @@ class MultiComboWidget(MultiFieldWidget):
     def _render_container(self, _context):
         if self.field_type == 'name':
             _context.update({'autocomp_name': True})
+            linked_field_name = _context['field_name']
+            linked_field_name = linked_field_name.replace(self.name_field, self.id_field)
+            _context.update({'linked_field_name': linked_field_name})
         elif self.field_type == 'id':
             _context.update({'autocomp_id': True})
             linked_field_name = _context['field_name']
@@ -546,6 +550,9 @@ class MultiComboWidget(MultiFieldWidget):
     def _render_multifield(self, _context):
         if self.field_type == 'name':
             _context.update({'autocomp_name': True})
+            linked_field_name = _context['field_name']
+            linked_field_name = linked_field_name.replace(self.name_field, self.id_field)
+            _context.update({'linked_field_name': linked_field_name})
         elif self.field_type == 'id':
             _context.update({'autocomp_id': True})
             linked_field_name = _context['field_name']

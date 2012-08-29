@@ -73,8 +73,8 @@
         	var nameElemId = 'id_' + row.attr('id') + '-' + nameField;
         	var idElem = row.find('input#' + idElemId);
         	var nameElem = row.find('input#' + nameElemId);
-        	autocomp_id(idElemId, nameElemId);
-        	autocomp_name(nameElemId);
+        	autocomp_single("id", idElemId, nameElemId);
+        	autocomp_single("name", nameElemId, idElemId);
         }
         $(rows).formset({
             prefix: "{{ inline_admin_formset.formset.prefix }}",
