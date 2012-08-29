@@ -1,8 +1,3 @@
-'''
-Created on 29.05.2012
-
-@author: steffen
-'''
 from django.core.management import call_command
 from django.test.testcases import TestCase
 from metashare import settings, test_utils

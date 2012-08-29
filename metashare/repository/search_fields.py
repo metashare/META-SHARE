@@ -1,7 +1,3 @@
-"""
-Project: META-SHARE prototype implementation
- Author: Christian Spurk <cspurk@dfki.de>
-"""
 from haystack.exceptions import SearchFieldError
 from haystack.indexes import SearchField, CharField, MultiValueField
 

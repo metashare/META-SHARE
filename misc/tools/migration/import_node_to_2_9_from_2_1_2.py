@@ -1,8 +1,5 @@
 #!/usr/bin/env python
-"""
-Project: META-SHARE prototype implementation
- Author: Christian Federmann <cfedermann@dfki.de>
-"""
+
 import os
 import sys
 import shutil

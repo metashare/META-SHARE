@@ -1,9 +1,3 @@
-'''
-Created on 27.08.2012
-
-@author: steffen
-'''
-
 from django.test import TestCase
 from metashare import test_utils, xml_utils
 from metashare.settings import ROOT_PATH

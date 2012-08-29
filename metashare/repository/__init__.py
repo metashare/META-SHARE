@@ -1,8 +1,3 @@
-"""
-Project: META-SHARE prototype implementation
- Author: Christian Federmann <cfedermann@dfki.de>
-"""
-
 def verify_at_startup():
     """
     A generic verification method called for certain commands directly from our custom manage.py.

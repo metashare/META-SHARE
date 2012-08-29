@@ -1,8 +1,3 @@
-"""
-Project: META-SHARE 
-Author: Christian Girardi <cgirardi@fbk.eu>
-"""
-
 import sys
 import logging 
 from metashare.settings import DJANGO_URL, STATS_SERVER_URL

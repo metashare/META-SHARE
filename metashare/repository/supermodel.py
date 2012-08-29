@@ -1,7 +1,3 @@
-"""
-Project: META-SHARE prototype implementation
- Author: Christian Federmann <cfedermann@dfki.de>
-"""
 import datetime
 import logging
 import re
@@ -22,7 +18,7 @@ from metashare.repository.fields import MultiSelectField, MultiTextField, \
 from metashare.settings import LOG_LEVEL, LOG_HANDLER, \
     CHECK_FOR_DUPLICATE_INSTANCES
 from metashare.storage.models import MASTER
-from metashare.utils import SimpleTimezone
+from metashare.utils import SimpleTimezone, prettify_camel_case_string
 
 
 # Setup logging support.
@@ -84,12 +80,14 @@ def _make_choices_from_list(source_list):
 
     Returns a dictionary containing two keys:
     - max_length: the maximum char length for this source list,
-    - choices: the list of (index, value) tuple choices.
+    - choices: the list of (value, pretty_print_value) tuple choices.
     """
     _choices = []
-    for index, value in enumerate(source_list):
-        _choices.append((str(index), value))
-    return {'max_length': len(_choices)/10+1, 'choices': tuple(_choices)}
+    _max_len = 1
+    for value in source_list:
+        _choices.append((value, prettify_camel_case_string(value)))
+        _max_len = max(_max_len, len(value))
+    return {'max_length': _max_len, 'choices': tuple(_choices)}
 
 def _make_choices_from_int_list(source_list):
     """
@@ -256,8 +254,9 @@ class SchemaModel(models.Model):
 
         result = value
 
-        # Handle fields with choices as we need to convert the current value
-        # to the database representation value of the respective choice.
+        # Handle certain fields with choices specially as we need to convert the
+        # current value to the database representation value of the respective
+        # choice.
         if len(field.choices) > 0:
             # MetaBooleanField instances are a special case: here, we need to
             # return either 'Yes' or 'No', depending on the given value.
@@ -271,16 +270,6 @@ class SchemaModel(models.Model):
                 else:
                     LOGGER.error(u'Value {} not a valid MetaBooleanField ' \
                       'choice for {}'.format(repr(value), field.name))
-
-            else:
-                for _db_value, _readable_value in field.choices:
-                    if _readable_value == value:
-                        result = _db_value
-
-                if result == value \
-                        and not isinstance(field, models.IntegerField):
-                    LOGGER.error(u'Value {} not found in choices for ' \
-                      '{}'.format(repr(value), field.name))
 
         elif isinstance(field, models.BooleanField) \
           or isinstance(field, models.NullBooleanField):
@@ -337,16 +326,8 @@ class SchemaModel(models.Model):
         # representative XSD, still more clever value handling might actually
         # be required for version v2; depends on the final schema...
         for _xsd_attr, _model_field, _not_used in self.__schema_attrs__:
-            try:
-                # First, we check if there is a get_FOO_display() method.
-                _func = getattr(self, 'get_{0}_display'.format(_model_field))
-
-                # If so, we call this method to determine the current value.
-                _value = _func()
-
-            except AttributeError:
-                # Otherwise, we try to retrieve the value via getattr().
-                _value = getattr(self, _model_field, None)
+            # Try to retrieve the value via getattr().
+            _value = getattr(self, _model_field, None)
 
             # If a value could be found, it becomes an attribute of the node.
             if _value is not None:
@@ -358,14 +339,8 @@ class SchemaModel(models.Model):
         # Then, we loop over all schema fields, retrieve their values and put
         # XML-ified versions of these values into the XML tree.
         for _xsd_field, _model_field, _not_used in self.__schema_fields__:
-            try:
-                # Again, we first check for a get_FOO_display() method.
-                _func = getattr(self, 'get_{0}_display'.format(_model_field))
-                _value = _func()
-
-            except AttributeError:
-                # Only falling back to getattr() if it doesn't exist.
-                _value = getattr(self, _model_field, None)
+            # Try to retrieve the value via getattr().
+            _value = getattr(self, _model_field, None)
 
             if _value is not None and _value != "":
                 _model_set_value = _model_field.endswith('_model_set')
@@ -380,13 +355,8 @@ class SchemaModel(models.Model):
                 if isinstance(_field, MetaBooleanField):
                     _value = getattr(self, _model_field, [])
 
-                # For MultiSelectFields, we call get_FOO_display_list().
+                # Sort MultiSelectField values to allow comparison.
                 elif isinstance(_field, MultiSelectField):
-                    _func = getattr(self, 'get_{0}_display_list'.format(
-                      _model_field))
-                    _value = _func()
-                    
-                    # Sort MultiSelectField values to allow comparison!
                     _value.sort()
 
                 # For DictFields, we convert the dict to a list of tuples.

@@ -1,7 +1,3 @@
-"""
-Project: META-SHARE prototype implementation
- Author: Christian Federmann <cfedermann@dfki.de>
-"""
 from time import sleep
 from django.core.exceptions import ValidationError
 from django.test.client import Client
