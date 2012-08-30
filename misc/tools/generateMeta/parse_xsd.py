@@ -1507,12 +1507,10 @@ class XschemaHandler(handler.ContentHandler):
         # Careful! If the cases are not exclusive, one can hide the other!
         if self.inDocumentationType:
             # If there is an annotation/documentation element, save it.
-            text = ' '.join(chrs.strip().split())
             if len(self.stack) > 1 and len(chrs) > 0:
-                self.stack[-1].documentation += text
+                self.stack[-1].documentation += chrs
         elif self.inAppInfoType and self.appInfoTag:
-            text = ' '.join(chrs.strip().split())
-            self.stack[-1].addAppInfo(self.appInfoTag, text)
+            self.stack[-1].addAppInfo(self.appInfoTag, chrs)
         elif self.inElement:
             pass
         elif self.inComplexType:

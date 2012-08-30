@@ -134,7 +134,7 @@
 		<xs:annotation>
 			<xs:documentation>Groups information on organizations related to the resource</xs:documentation>
 			<xs:appinfo>
-				<render-short>{organizationName}</render-short>
+				<render-short>{organizationName} – department: {departmentName}</render-short>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
