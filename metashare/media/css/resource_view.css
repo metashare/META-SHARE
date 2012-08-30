@@ -3,18 +3,18 @@
 }
 
 .white_box{
-   background-color:white;
-   box-shadow: 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
-   padding:10px;
+	background-color:white;
+	box-shadow: 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
+	padding:10px;
 }
 
 .top_box, .container_box{
-   width:860px;
+	width:860px;
 }
 
 .top_box{
-   padding: 20px;
-   margin:10px 0 10px 0 !important;
+	padding: 20px;
+	margin-top:10px !important;
 }
 
 div#stats{
@@ -27,23 +27,23 @@ div#stats{
 }
 
 .column{
-   float:left;
-   margin-top:5px;
-   width:273px;
-   margin-left:0px!important;
-   margin-right:10px;
-   margin-bottom:10px;
+	float:left;
+	margin-top:5px;
+	width:273px;
+	margin-left:0px!important;
+	margin-right:10px;
+	margin-bottom:10px;
 }
 
 
 div.right-corner{
-   margin-right:0px!important;
+	margin-right:0px!important;
 }
 
 .dataline label{
-    font-size: 14px;
-    font-weight: normal;
-    color: #333;
+	font-size: 14px;
+	font-weight: normal;
+	color: #333;
 }
 
 .dataline label.title{
@@ -57,7 +57,7 @@ div.right-corner{
 	font-weight: 600;
 	margin-bottom: 0.3em;
 	margin-left: 10px;
-	margin-right: 0;
+	margin-right: 5px;
 	padding-left: 4px;
 	width: 100%;
 }
@@ -96,8 +96,8 @@ label.component{
 }
 
 .fields ul li{
-   float:left;
-   background-color:#fff;
+	float:left;
+	background-color:#fff;
 	border-bottom-left-radius: 0;
 	border-bottom-right-radius: 0;
 	border-top-left-radius: 10px;
@@ -209,6 +209,20 @@ label span a{
 	display:none;
 }
 
+.desc{
+	clear:both;
+}
+
+.shortnames{
+	display:inline-block;
+	float:left;
+}
+
+.url{
+	display:inline-block;
+	float:right;
+}
+
 .more{
 	color:#666;
 	margin-bottom:20px;
@@ -218,11 +232,20 @@ label span a{
 	color:#111;
 }
 
+.read-more{
+	padding-bottom:3px;
+}
+
+
+.read-less{
+	padding-bottom:3px;
+}
+
 .details{
 	font-family: "TitilliumText25L","Helvetica Neue","Helvetica",Arial,sans-serif;
 	font-size: 14px;
 	line-height: 1.25;
-	margin-bottom: 1.25em;
 	color: #111111;
 	font-weight: normal;
+	padding-bottom:3px;
 }

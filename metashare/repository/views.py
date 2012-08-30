@@ -469,7 +469,7 @@ def view(request, resource_name=None, object_id=None):
     for _tuple in lr_content[1]:
         if _tuple[0] == "Distribution":
             distribution_info_tuple = _tuple
-        elif _tuple[0] == "Contact person":
+        elif _tuple[0] == "Person":
             contact_person_tuples.append(_tuple)
         elif _tuple[0] == "Metadata":
             metadata_info_tuple = _tuple

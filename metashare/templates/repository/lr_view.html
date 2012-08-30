@@ -20,7 +20,11 @@
 			$('.readmore').expander({
 				slicePoint: 300,
 				expandText: 'Read More',
-				userCollapseText: 'Read Less'
+				userCollapseText: 'Read Less',
+				expandEffect: 'show',
+				expandSpeed: 0,
+				collapseEffect: 'hide',
+				collapseSpeed: 0
 			});
 		});
 
@@ -109,22 +113,39 @@
 			</div>
 		{% endifnotequal %}
 		
-		<h3>{% for name in res_short_names %}{{ name }}<img src="{{ MEDIA_URL }}images/trenner.png" class="trenner" />{% endfor %}</h3> 
+		<h3 class="shortnames">{% for name in res_short_names %}{{ name }}<img src="{{ MEDIA_URL }}images/trenner.png" class="trenner" />{% endfor %}</h3> 
+		{% if url.0 %}
+		<h4 class='url'><a href="{{url.0}}" target="_blank">{{url.0}}</a></h4>
+		{% endif %}
 		
-		<h4 class="identifier">{{ metaShareId }}</h4>
-		<h4 style="text-align:justify" class="readmore">{{ description }}</h4>
+		{% if not 'NOT_DEFINED' in metaShareId %}<h4 class="identifier">{{ metaShareId }}</h4>{% endif %}
+		<h4 style="text-align:justify" class="readmore desc">{{ description }}</h4>
 		
 		{% ifnotequal other_descriptions|length 0 %}
 			<div class='more'>View resource description in all available languages</div>
 			<div class='otherlang'>
 			{% for desc in other_descriptions %}<h4 style="text-align:justify" class="readmore">{{ desc }}</h4>{% endfor %} 
 			</div> 
-		{% endifnotequal %}
+		{% endifnotequal %}			
 		
-		{% if url.0 %}
-		<h4><a href="{{url.0}}" target="_blank">{{url.0}}</a></h4>
-		{% endif %}
-
+		<div style="clear: both;">
+	        
+		  <a href="javascript:history.back();"><button class="span-12 button middle_button">&laquo; Back</button></a>
+		  {% if LR_DOWNLOAD %}
+		    <a href="{% url metashare.repository.views.download resource.storage_object.identifier %}"><button class="span-4 button middle_button">Download</button></a>
+		  {% else %}
+		    <div class="popup_box">
+		      <div onmouseover="$(this).siblings('div.popup').show();" onmouseout="$(this).siblings('div.popup').hide();"><button class="span-4 button middle_gray_button">Download</button></div><div class="popup" style="height:50px; left:190px; width:270px; top:50px;"><img style="left:10px;" src="{{ MEDIA_URL }}images/adv_search_pfeil.png" />&nbsp;You don&rsquo;t have the permission to download this resource. Please log in.</div>
+		    </div>
+		  {% endif %}
+		  {% if LR_EDIT %}
+		    <a href="{{ LR_EDIT }}"><button class="span-4 button middle_button">Edit Resource</button></a>
+		  {% else %}
+		    <div onmouseover="$(this).siblings('div.popup').show();" onmouseout="$(this).siblings('div.popup').hide();"><button class="span-4 button middle_gray_button">Edit Resource</button></div><div class="popup" style="height:50px; left:350px; width:270px; top:60px;"><img style="left:10px;" src="{{ MEDIA_URL }}images/adv_search_pfeil.png" />&nbsp;You don&rsquo;t have the permission to edit this resource.</div>
+		  {% endif %}
+			<div style="clear: both;"></div>
+		</div>
+		
 	</div>
 	
 		<div class="white_box column corner">
@@ -143,8 +164,7 @@
 							{% for type in mediaTypes %}
 								<li><a href="#{{forloop.counter}}">{{type}}{% get_icon type %}</a></li>
 							{% endfor %}
-						{% endifequal %}
-						
+						{% endifequal %}						
 						
 					</ul>
 				</div>
@@ -233,25 +253,6 @@
             {% include "repository/detailed_component.html" with lr_content=relation_info_tuple %}
           {% endfor %}
 		</div>
-
-
-	<div class='bottom_box white_box' style="clear: both;">
-	        
-	  <a href="javascript:history.back();"><button class="span-12 button middle_button">&laquo; Back</button></a>
-	  {% if LR_DOWNLOAD %}
-	    <a href="{% url metashare.repository.views.download resource.storage_object.identifier %}"><button class="span-4 button middle_button">Download</button></a>
-	  {% else %}
-	    <div class="popup_box">
-	      <div onmouseover="$(this).siblings('div.popup').show();" onmouseout="$(this).siblings('div.popup').hide();"><button class="span-4 button middle_gray_button">Download</button></div><div class="popup" style="height:50px; left:190px; width:270px; top:50px;"><img style="left:10px;" src="{{ MEDIA_URL }}images/adv_search_pfeil.png" />&nbsp;You don&rsquo;t have the permission to download this resource. Please log in.</div>
-	    </div>
-	  {% endif %}
-	  {% if LR_EDIT %}
-	    <a href="{{ LR_EDIT }}"><button class="span-4 button middle_button">Edit Resource</button></a>
-	  {% else %}
-	    <div onmouseover="$(this).siblings('div.popup').show();" onmouseout="$(this).siblings('div.popup').hide();"><button class="span-4 button middle_gray_button">Edit Resource</button></div><div class="popup" style="height:50px; left:350px; width:270px; top:60px;"><img style="left:10px;" src="{{ MEDIA_URL }}images/adv_search_pfeil.png" />&nbsp;You don&rsquo;t have the permission to edit this resource.</div>
-	  {% endif %}
-		<div style="clear: both;"></div>
-	</div>
 
 {% include "repository/recomm_view.html" %}
 
