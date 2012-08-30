@@ -9,7 +9,7 @@
 			{% include filename %}
         {% else %}
 			{% if lr_content.0.1 != "" %}
-				{% if lr_content.0.0 == "email" %}
+				{% if lr_content.0.0 == "Email" %}
 	        		<div class="dataline"><label class='title'>{{lr_content.0.0|capfirst }}: </label><label>{% encrypt_email lr_content.0.1 %}</label></div>
 				{% else %}
 					<div class="dataline{% if lr_content.0.2 == 1 %} mandatory{% else %} optional{% endif %}"><label class='title'>{{lr_content.0.0|capfirst }}: </label><label>{{lr_content.0.1}}</label></div>
