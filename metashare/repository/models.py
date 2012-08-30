@@ -2590,8 +2590,8 @@ class organizationInfoType_model(actorInfoType_model):
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
-        formatargs = ['organizationName', ]
-        formatstring = u'{}'
+        formatargs = ['organizationName', 'departmentName', ]
+        formatstring = u'{} \u2013 department: {}'
         return self.unicode_(formatstring, formatargs)
 
 PERSONINFOTYPE_SEX_CHOICES = _make_choices_from_list([
