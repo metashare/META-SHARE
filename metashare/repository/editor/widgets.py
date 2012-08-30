@@ -6,6 +6,7 @@ except:
     import pickle
 
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
+from django.contrib.admin.widgets import AdminTextInputWidget
 from django.forms import widgets, TextInput, Textarea, Media
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
@@ -285,6 +286,13 @@ class MultiFieldWidget(widgets.Widget):
             result = TextInput().render(name, value, attrs)
         return result
 
+    def _render_container(self, _context):
+        return render_to_string('repository/container.html', _context)
+    
+    def _render_multifield(self, _context):
+        return render_to_string('repository/multi_field_widget.html', _context)
+    
+    
     def render(self, name, value, attrs=None):
         """
         Renders the MultiFieldWidget with the given name and value.
@@ -324,14 +332,15 @@ class MultiFieldWidget(widgets.Widget):
             # Define context for container template rendering.
             _context = {'id': _id, 'field_widget': _field_widget,
               'widget_id': self.widget_id,
-              'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX}
+              'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX,
+              'field_name': name}
             
             # If there have been any validation errors, add the message.
             if _value in self.errors.keys():
                 _context.update({'error_msg': self.errors[_value]})
             
             # Render container for this sub value's widget and append to list.
-            _container = render_to_string('repository/container.html', _context)
+            _container = self._render_container(_context)
             _field_widgets.append(_container)
         
         # If list of values is empty, render an empty container instead.
@@ -341,9 +350,10 @@ class MultiFieldWidget(widgets.Widget):
             _field_widget = self._render_input_widget(name, '', _field_attrs)
             _context = {'id': _id, 'field_widget': _field_widget,
               'widget_id': self.widget_id,
-              'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX}
+              'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX,
+              'field_name': name}
             
-            _container = render_to_string('repository/container.html', _context)
+            _container = self._render_container(_context)
             _field_widgets.append(_container)
         
             _field_widget = self._render_input_widget(name, '', _field_attrs)
@@ -357,10 +367,11 @@ class MultiFieldWidget(widgets.Widget):
         _context = {'empty_widget': _empty_widget,
           'field_widgets': mark_safe(u'\n'.join(_field_widgets)),
           'widget_id': self.widget_id,
-          'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX}
+          'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX,
+          'field_name': name}
         
         # Render final HTML for this MultiFieldWidget instance.
-        _html = render_to_string('repository/multi_field_widget.html', _context)
+        _html = self._render_multifield(_context)
         return mark_safe(_html)
     
     def value_from_datadict(self, data, files, name):
@@ -461,3 +472,88 @@ class OneToManyWidget(SelectableMultiWidget, SelectableMediaMixin):
     
     def decompress(self, value):
         pass
+
+class ComboWidget(AdminTextInputWidget):
+    class Media:
+        """
+        Media sub class to inject custom CSS and JavaScript code.
+        """
+        css = {
+          'all': ('{}css/themes/smoothness/jquery-ui.css'
+                    .format(settings.ADMIN_MEDIA_PREFIX),
+                  '{}css/combo.css'.format(settings.ADMIN_MEDIA_PREFIX))
+        }
+        js = ('js/jquery-ui.min.js',
+              '{}js/autocomp.js'.format(settings.ADMIN_MEDIA_PREFIX),
+              '{}js/pycountry.js'.format(settings.ADMIN_MEDIA_PREFIX))
+
+    def __init__(self, field_type=None, attrs=None):
+        self.field_type = field_type
+        self.id_field = attrs.pop('id_field')
+        self.name_field = attrs.pop('name_field')
+        if not attrs:
+            attrs = {}
+        super(ComboWidget, self).__init__(attrs)
+        
+    def render(self, name, value, attrs=None):
+        val = super(ComboWidget, self).render(name, value, attrs)
+        if 'id' in attrs:
+            id1 = attrs['id']
+            if self.field_type == 'id':
+                linked_to = attrs['id'].replace(self.id_field, self.name_field)
+                js_script = u'<script>autocomp_single("id", "{0}", "{1}");</script>'.format(id1, linked_to)
+            elif self.field_type == 'name':
+                linked_to = attrs['id'].replace(self.name_field, self.id_field)
+                js_script = u'<script>autocomp_single("name", "{0}", "{1}");</script>'.format(id1, linked_to)
+            val = val + js_script
+
+        return mark_safe(val)
+
+class MultiComboWidget(MultiFieldWidget):
+    class Media:
+        """
+        Media sub class to inject custom CSS and JavaScript code.
+        """
+        css = {
+          'all': ('{}css/themes/smoothness/jquery-ui.css'
+                    .format(settings.ADMIN_MEDIA_PREFIX),
+                  '{}css/combo.css'.format(settings.ADMIN_MEDIA_PREFIX))
+        }
+        js = ('js/jquery-ui.min.js',
+              '{}js/autocomp.js'.format(settings.ADMIN_MEDIA_PREFIX),
+              '{}js/pycountry.js'.format(settings.ADMIN_MEDIA_PREFIX))
+
+    def __init__(self, field_type=None, attrs=None, widget_id=None, max_length=None, **kwargs):
+        self.field_type = field_type
+        self.id_field = attrs.pop('id_field')
+        self.name_field = attrs.pop('name_field')
+        super(MultiComboWidget, self).__init__(widget_id, max_length, **kwargs)
+        
+    def _render_container(self, _context):
+        if self.field_type == 'name':
+            _context.update({'autocomp_name': True})
+            linked_field_name = _context['field_name']
+            linked_field_name = linked_field_name.replace(self.name_field, self.id_field)
+            _context.update({'linked_field_name': linked_field_name})
+        elif self.field_type == 'id':
+            _context.update({'autocomp_id': True})
+            linked_field_name = _context['field_name']
+            linked_field_name = linked_field_name.replace(self.id_field, self.name_field)
+            _context.update({'linked_field_name': linked_field_name})
+        val = super(MultiComboWidget, self)._render_container(_context)
+        return val
+    
+    def _render_multifield(self, _context):
+        if self.field_type == 'name':
+            _context.update({'autocomp_name': True})
+            linked_field_name = _context['field_name']
+            linked_field_name = linked_field_name.replace(self.name_field, self.id_field)
+            _context.update({'linked_field_name': linked_field_name})
+        elif self.field_type == 'id':
+            _context.update({'autocomp_id': True})
+            linked_field_name = _context['field_name']
+            linked_field_name = linked_field_name.replace(self.id_field, self.name_field)
+            _context.update({'linked_field_name': linked_field_name})
+        val = super(MultiComboWidget, self)._render_multifield(_context)
+        return val
+        
