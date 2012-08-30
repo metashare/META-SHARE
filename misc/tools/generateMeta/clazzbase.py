@@ -394,6 +394,14 @@ GYEAR_VALIDATOR_OPTION_SNIPPET = "validators=[validate_xml_schema_year], "
 #
 # Local functions
 
+def _escape_non_ascii_chars(string):
+    """
+    Returns a copy of the given string with all non-ASCII characters replaced
+    in Python Unicode-Escape encoding (e.g., '\u2013').
+    """
+    return ''.join([(ord(c) < 128 and c) or r'\u{0:0>4x}'.format(ord(c))
+                    for c in string])
+
 def _truncate_long_string(string, max_length, indent=0):
     """
     Returns a multi-line version of string with each line shorter max_length.
@@ -981,11 +989,12 @@ class Clazz(object):
             formatstring = ''
             formatargs = ''
             for match in re.finditer(r'{([^}]*)}', rendering_hint):
-                formatstring += rendering_hint[start:match.start(1)] + \
-                  rendering_hint[match.end(1):match.end(0)]
+                formatstring += _escape_non_ascii_chars(
+                        rendering_hint[start:match.start(1)]) \
+                    + rendering_hint[match.end(1):match.end(0)]
                 start = match.end(0)
                 formatargs += '\'' + match.group(1) + '\', '
-            formatstring += rendering_hint[start:]
+            formatstring += _escape_non_ascii_chars(rendering_hint[start:])
             self.wrtmodels(UNICODE_METHOD_TEMPLATE.format(formatstring,
               formatargs))
 
