@@ -448,6 +448,11 @@ class SchemaModel(models.Model):
                             # We fix the sub value's tag as it may be "wrong".
                             # E.g., PersonInfo is sometimes called contactPerson.
                             _sub_value.tag = _xsd_name
+                            if pretty:
+                                # use the pretty-print name of the field instead
+                                # of the one of the complex value, 
+                                # e.g. "Contact Person" instead of just "Person"
+                                _sub_value.attrib["pretty"] = self.get_verbose_name(_model_field)
 
                             # And append the sub structure to the current node.
                             _current_node.append(_sub_value)
