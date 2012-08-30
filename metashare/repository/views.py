@@ -467,7 +467,6 @@ def view(request, resource_name=None, object_id=None):
     resource_creation_info_tuple = None
     relation_info_tuples = []
     for _tuple in lr_content[1]:
-        LOGGER.info(_tuple[0])
         if _tuple[0] == "Distribution":
             distribution_info_tuple = _tuple
         elif _tuple[0] == "Contact person":
