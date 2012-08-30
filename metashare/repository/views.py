@@ -437,11 +437,6 @@ def view(request, resource_name=None, object_id=None):
         return redirect(resource.get_absolute_url())
 
     # Convert resource to ElementTree and then to template tuples.
-
-    lr_content = _convert_to_template_tuples(resource.export_to_elementtree())
-    
-    lr_content_paths = get_structure_paths(lr_content)
-    sorted_tuple = sorted(set(lr_content_paths))
     lr_content = _convert_to_template_tuples(
         resource.export_to_elementtree(pretty=True))
 
@@ -475,7 +470,7 @@ def view(request, resource_name=None, object_id=None):
         LOGGER.info(_tuple[0])
         if _tuple[0] == "Distribution":
             distribution_info_tuple = _tuple
-        elif _tuple[0] == "Contact person":
+        elif _tuple[0] == "Person":
             contact_person_tuples.append(_tuple)
         elif _tuple[0] == "Metadata":
             metadata_info_tuple = _tuple
@@ -491,29 +486,6 @@ def view(request, resource_name=None, object_id=None):
             resource_creation_info_tuple = _tuple
         elif _tuple[0] == "Relation":
             relation_info_tuples.append(_tuple)
-          
-          
-    for item, value in sorted_tuple:
-        tuple_index = str(value).replace(", ", "][").replace("(","[").replace(")","]")
-        tuple_index = "{}[1]".format(tuple_index[:-3])
-        if item == "description":
-            descriptions.append(eval("lr_content" + tuple_index))
-        elif item == "resourceName":
-            resource_names.append(eval("lr_content" + tuple_index))
-        elif item == "resourceShortName":
-            resource_short_names.append(eval("lr_content" + tuple_index))
-            
-        for name in resource_names:
-            if name == resource_name:
-                resource_names.remove(name)
-                
-        for desc in descriptions:
-            if desc == description:
-                descriptions.remove(desc)
-                
-    resource_tree = resource.export_to_elementtree(pretty=True)
-    lr_content = _convert_to_template_tuples(resource_tree)
-
 
     # Define context for template rendering.
     context = { 'resource': resource,
