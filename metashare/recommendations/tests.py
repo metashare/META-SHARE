@@ -6,13 +6,18 @@ from metashare.recommendations.recommendations import Resource, \
     SessionResourcesTracker, get_more_from_same_creators,\
     get_more_from_same_projects
 from metashare.repository import views
-from metashare.settings import ROOT_PATH
+from metashare.settings import ROOT_PATH, LOG_LEVEL, LOG_HANDLER
 from metashare.storage.models import PUBLISHED, INGESTED
 from metashare.test_utils import create_user
 import datetime
 import django.test
 import shutil
+import logging
 
+# Setup logging support.
+logging.basicConfig(level=LOG_LEVEL)
+LOGGER = logging.getLogger(__name__)
+LOGGER.addHandler(LOG_HANDLER)
 
 def _import_resource(res_file_name):
     """
@@ -65,11 +70,13 @@ class SimpleTogetherManagerTest(django.test.TestCase):
     
     @classmethod
     def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
         test_utils.set_index_active(False)
     
     @classmethod
     def tearDownClass(cls):
         test_utils.set_index_active(True)
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
     
     def setUp(self):
         """
@@ -116,11 +123,13 @@ class TogetherManagerTest(django.test.TestCase):
     
     @classmethod
     def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
         test_utils.set_index_active(False)
     
     @classmethod
     def tearDownClass(cls):
         test_utils.set_index_active(True)
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
     
     def setUp(self):
         """
@@ -212,11 +221,13 @@ class SessionResourcesTrackerTest(django.test.TestCase):
     
     @classmethod
     def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
         test_utils.set_index_active(False)
     
     @classmethod
     def tearDownClass(cls):
         test_utils.set_index_active(True)
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
     
     def setUp(self):
         """
@@ -311,11 +322,13 @@ class SessionTest(django.test.TestCase):
     
     @classmethod
     def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
         test_utils.set_index_active(False)
     
     @classmethod
     def tearDownClass(cls):
         test_utils.set_index_active(True)
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
     
     def setUp(self):
         """
@@ -469,11 +482,13 @@ class CreatorTest(django.test.TestCase):
     
     @classmethod
     def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
         test_utils.set_index_active(False)
     
     @classmethod
     def tearDownClass(cls):
         test_utils.set_index_active(True)
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
     
     def setUp(self):
         """

@@ -1,4 +1,5 @@
 import shutil
+import logging
 
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import Permission
@@ -10,9 +11,13 @@ from metashare import test_utils, settings
 from metashare.accounts.models import UserProfile, EditorGroup, \
     EditorGroupManagers, Organization
 from metashare.repository import views
-from metashare.settings import DJANGO_BASE, ROOT_PATH
+from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_LEVEL, LOG_HANDLER
 from metashare.test_utils import create_user
 
+# Setup logging support.
+logging.basicConfig(level=LOG_LEVEL)
+LOGGER = logging.getLogger(__name__)
+LOGGER.addHandler(LOG_HANDLER)
 
 def _import_resource(fixture_name, editor_group=None):
     """
@@ -43,6 +48,7 @@ class FrontpageTest(TestCase):
         """
         Sets up this test case.
         """
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
         FrontpageTest.editor_user = test_utils.create_editor_user('editoruser',
             'editor@example.com', FrontpageTest.editor_user_password,
             (EditorGroup.objects.create(name='test_editor_group'),))
@@ -53,6 +59,7 @@ class FrontpageTest(TestCase):
         Makes required cleanups after all tests have run.
         """
         test_utils.clean_user_db()
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
 
     def setUp(self):
         """
@@ -149,11 +156,13 @@ class ViewTest(TestCase):
     
     @classmethod
     def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
         test_utils.set_index_active(False)
     
     @classmethod
     def tearDownClass(cls):
         test_utils.set_index_active(True)
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
         
     def setUp(self):
         """
@@ -259,11 +268,13 @@ class DownloadViewTest(TestCase):
     
     @classmethod
     def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
         test_utils.set_index_active(False)
     
     @classmethod
     def tearDownClass(cls):
         test_utils.set_index_active(True)
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
         
     def setUp(self):
         """

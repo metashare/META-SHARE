@@ -1,3 +1,4 @@
+import logging
 import django.db.models
 
 from django.contrib import admin
@@ -14,11 +15,14 @@ from metashare.repository import models
 from metashare.repository.models import languageDescriptionInfoType_model, \
     lexicalConceptualResourceInfoType_model, personInfoType_model,\
     resourceInfoType_model
-from metashare.settings import DJANGO_BASE, ROOT_PATH
+from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_LEVEL, LOG_HANDLER
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, REMOTE, \
     StorageObject
 
-
+# Setup logging support.
+logging.basicConfig(level=LOG_LEVEL)
+LOGGER = logging.getLogger(__name__)
+LOGGER.addHandler(LOG_HANDLER)
 
 ADMINROOT = '/{0}editor/'.format(DJANGO_BASE)
 TESTFIXTURE_XML = '{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
@@ -66,6 +70,7 @@ class EditorTest(TestCase):
         pollute the "normal" development db or the production db.
         As a consequence, they need no valuable password.
         """
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
         test_utils.set_index_active(False)
         test_utils.setup_test_storage()
 
@@ -152,6 +157,7 @@ class EditorTest(TestCase):
         test_utils.clean_storage()
         test_utils.clean_user_db()
         test_utils.set_index_active(True)
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
 
 
     def test_can_log_in_staff(self):
@@ -818,6 +824,8 @@ class DestructiveTests(TestCase):
     @classmethod
     def setUpClass(cls):
         
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
+        
         # login POST dict
         DestructiveTests.superuser_login = {
             REDIRECT_FIELD_NAME: ADMINROOT,
@@ -837,6 +845,10 @@ class DestructiveTests(TestCase):
             'username': 'manageruser',
             'password': 'secret',
         }
+
+    @classmethod
+    def tearDownClass(cls):
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
 
     def setUp(self):
         """
@@ -1369,6 +1381,14 @@ class EditorGroupApplicationTests(TestCase):
     """
     Test case for the user application to one or several Editors of various model instances.
     """
+    
+    @classmethod
+    def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
+        
+    @classmethod
+    def tearDownClass(cls):
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
 
     def setUp(self):
         """
@@ -1561,6 +1581,14 @@ class OrganizationApplicationTests(TestCase):
     Test case for the user application to one or several organization of various model instances.
     """
 
+    @classmethod
+    def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
+        
+    @classmethod
+    def tearDownClass(cls):
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
+        
     def setUp(self):
         """
         Sets up test users with and without staff permissions.
@@ -1727,6 +1755,14 @@ class BreadcrumbTests(TestCase):
     Test case for the display of some manually added breadcrumbs in the back office.
     """
 
+    @classmethod
+    def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
+        
+    @classmethod
+    def tearDownClass(cls):
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
+        
     def setUp(self):
         """
         Sets up test users.

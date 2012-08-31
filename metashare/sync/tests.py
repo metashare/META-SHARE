@@ -1,6 +1,7 @@
 import datetime
 import os
 import json
+import logging
 
 from xml.etree.ElementTree import fromstring
 from StringIO import StringIO
@@ -16,9 +17,13 @@ from metashare import settings, test_utils
 from metashare.repository.models import resourceInfoType_model
 from metashare.storage.models import INGESTED, INTERNAL, StorageObject, \
     PUBLISHED, compute_digest_checksum, RemovedObject, MASTER, PROXY
-from metashare.settings import DJANGO_BASE, LOGIN_URL
+from metashare.settings import DJANGO_BASE, LOGIN_URL, LOG_LEVEL, LOG_HANDLER
 from metashare.test_utils import set_index_active
 
+# Setup logging support.
+logging.basicConfig(level=LOG_LEVEL)
+LOGGER = logging.getLogger(__name__)
+LOGGER.addHandler(LOG_HANDLER)
 
 class MetadataSyncTest (TestCase):
     SYNC_BASE = "/{0}sync/".format(DJANGO_BASE)
@@ -99,6 +104,8 @@ class MetadataSyncTest (TestCase):
         pollute the "normal" development db or the production db.
         As a consequence, they need no valuable password.
         """
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
+        
         set_index_active(False)
         test_utils.setup_test_storage()
         syncuser = User.objects.create_user('syncuser', 'staff@example.com',
@@ -161,6 +168,7 @@ class MetadataSyncTest (TestCase):
         test_utils.clean_storage()
         test_utils.clean_user_db()
         set_index_active(True)
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
     
 
     def test_unprotected_inventory(self):

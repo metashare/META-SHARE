@@ -1,10 +1,16 @@
+import logging
 from django.test import TestCase
 from metashare import test_utils, xml_utils
-from metashare.settings import ROOT_PATH, TEST_MODE_NAME
+from metashare.settings import ROOT_PATH, LOG_LEVEL, LOG_HANDLER, TEST_MODE_NAME
 from metashare.repository.supermodel import OBJECT_XML_CACHE
 from metashare.repository.models import resourceInfoType_model
 from zipfile import ZipFile
 from django.test.client import Client
+
+# Setup logging support.
+logging.basicConfig(level=LOG_LEVEL)
+LOGGER = logging.getLogger(__name__)
+LOGGER.addHandler(LOG_HANDLER)
 
 RESOURCES_ZIP_FILE = '{0}/../misc/testdata/v2.1/metashare_resources_v2.1.zip'.format(ROOT_PATH) 
 
@@ -18,6 +24,8 @@ class NightlyTests(TestCase):
         """
         Set up the test
         """
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
+        
         # disable indexing during import
         test_utils.set_index_active(False)
         
@@ -35,10 +43,12 @@ class NightlyTests(TestCase):
         
     
     @classmethod
-    def tearDown(cls):
+    def tearDownClass(cls):
         """
         Clean up the test
         """
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
+        
         # disable indexing during import
         test_utils.set_index_active(False)
         
