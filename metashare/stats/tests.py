@@ -1,5 +1,6 @@
 import django.test
 import urllib2
+import logging
 from urllib import urlencode
 from django.test.client import Client
 from django.contrib.auth import REDIRECT_FIELD_NAME
@@ -8,11 +9,16 @@ from django.contrib.admin.sites import LOGIN_FORM_KEY
 from metashare import test_utils
 from metashare.accounts.models import EditorGroup, EditorGroupManagers
 from metashare.repository.models import resourceInfoType_model
-from metashare.settings import DJANGO_BASE, DJANGO_URL, ROOT_PATH
+from metashare.settings import DJANGO_BASE, DJANGO_URL, ROOT_PATH, LOG_LEVEL, \
+    LOG_HANDLER
 from metashare.stats.model_utils import _update_usage_stats, saveLRStats, \
     getLRLast, saveQueryStats, getLastQuery, UPDATE_STAT, VIEW_STAT, \
     RETRIEVE_STAT, DOWNLOAD_STAT
 
+# Setup logging support.
+logging.basicConfig(level=LOG_LEVEL)
+LOGGER = logging.getLogger(__name__)
+LOGGER.addHandler(LOG_HANDLER)
 
 ADMINROOT = '/{0}editor/'.format(DJANGO_BASE)
 TESTFIXTURES_ZIP = '{}/repository/fixtures/tworesources.zip'.format(ROOT_PATH)
@@ -23,11 +29,13 @@ class StatsTest(django.test.TestCase):
     
     @classmethod
     def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
         test_utils.set_index_active(False)
     
     @classmethod
     def tearDownClass(cls):
         test_utils.set_index_active(True)
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
     
     def setUp(self):
         """

@@ -1,4 +1,5 @@
 import sys
+import logging
 
 from difflib import unified_diff
 
@@ -10,8 +11,13 @@ from metashare import test_utils
 from metashare.repository.models import resourceInfoType_model, \
     SCHEMA_NAMESPACE, lingualityInfoType_model
 from metashare.repository.model_utils import get_root_resources
-from metashare.settings import ROOT_PATH
+from metashare.settings import ROOT_PATH, LOG_LEVEL, LOG_HANDLER
 from metashare.xml_utils import to_xml_string
+
+# Setup logging support.
+logging.basicConfig(level=LOG_LEVEL)
+LOGGER = logging.getLogger(__name__)
+LOGGER.addHandler(LOG_HANDLER)
 
 class ModelTest(TestCase):
     """
@@ -20,11 +26,13 @@ class ModelTest(TestCase):
     
     @classmethod
     def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
         test_utils.set_index_active(False)
     
     @classmethod
     def tearDownClass(cls):
         test_utils.set_index_active(True)
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
     
     def setUp(self):
         """
@@ -142,11 +150,13 @@ class ModelUtilsTest(TestCase):
     """
     @classmethod
     def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
         test_utils.set_index_active(False)
     
     @classmethod
     def tearDownClass(cls):
         test_utils.set_index_active(True)
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
     
     def setUp(self):
         """

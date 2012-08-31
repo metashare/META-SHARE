@@ -1,6 +1,12 @@
+import logging
 from django.test import TestCase
 from metashare import test_utils
-from metashare.settings import ROOT_PATH
+from metashare.settings import ROOT_PATH, LOG_LEVEL, LOG_HANDLER
+
+# Setup logging support.
+logging.basicConfig(level=LOG_LEVEL)
+LOGGER = logging.getLogger(__name__)
+LOGGER.addHandler(LOG_HANDLER)
 
 class EmailPictureTest(TestCase):
     """
@@ -9,11 +15,13 @@ class EmailPictureTest(TestCase):
     
     @classmethod
     def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
         test_utils.set_index_active(False)
     
     @classmethod
     def tearDownClass(cls):
         test_utils.set_index_active(True)
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
     
     def setUp(self):
         """

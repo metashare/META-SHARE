@@ -2,7 +2,7 @@ from django.core.management import call_command
 from django.test.testcases import TestCase
 from metashare import settings, test_utils
 from metashare.repository.models import resourceInfoType_model
-from metashare.settings import ROOT_PATH
+from metashare.settings import ROOT_PATH, LOG_LEVEL, LOG_HANDLER
 from metashare.storage.models import StorageObject, restore_from_folder, \
 MASTER, INGESTED, INTERNAL, update_digests, compute_digest_checksum
 # pylint: disable-msg=E0611
@@ -12,7 +12,13 @@ import zipfile
 from xml.etree.ElementTree import ParseError
 import shutil
 import time
+import logging
 from zipfile import ZipFile
+
+# Setup logging support.
+logging.basicConfig(level=LOG_LEVEL)
+LOGGER = logging.getLogger(__name__)
+LOGGER.addHandler(LOG_HANDLER)
 
 TESTFIXTURE_XML = '{}/repository/fixtures/ILSP10.xml'.format(ROOT_PATH)
 
@@ -33,6 +39,7 @@ class PersistenceTest(TestCase):
     
     @classmethod
     def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
         test_utils.set_index_active(False)
         test_utils.setup_test_storage()
         # copy fixtures to storage folder
@@ -43,6 +50,7 @@ class PersistenceTest(TestCase):
         # delete content of storage folder
         test_utils.clean_storage()
         test_utils.set_index_active(True)
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
     
     def setUp(self):
         # make sure the index does not contain any stale entries
@@ -110,6 +118,7 @@ class RestoreTest(TestCase):
     
     @classmethod
     def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
         test_utils.set_index_active(False)
         test_utils.setup_test_storage()
         # copy fixtures to storage folder
@@ -120,6 +129,7 @@ class RestoreTest(TestCase):
         # delete content of storage folder
         test_utils.clean_storage()
         test_utils.set_index_active(True)
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
     
     def setUp(self):
         # make sure the index does not contain any stale entries
@@ -249,6 +259,7 @@ class UpdateTest(TestCase):
     
     @classmethod
     def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
         test_utils.set_index_active(False)
         test_utils.setup_test_storage()
 
@@ -257,6 +268,7 @@ class UpdateTest(TestCase):
         # delete content of storage folder
         test_utils.clean_storage()
         test_utils.set_index_active(True)
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
     
     def setUp(self):
         # make sure the index does not contain any stale entries
