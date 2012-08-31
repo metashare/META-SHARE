@@ -1,3 +1,4 @@
+import logging
 import django.test
 from django.contrib.admin.sites import LOGIN_FORM_KEY
 from django.contrib.auth import REDIRECT_FIELD_NAME
@@ -10,8 +11,12 @@ from metashare import test_utils
 from metashare.accounts import views
 from metashare.accounts.models import RegistrationRequest, ResetRequest, \
     EditorGroup, UserProfile, Organization
-from metashare.settings import DJANGO_BASE
+from metashare.settings import DJANGO_BASE, LOG_LEVEL, LOG_HANDLER
 
+# Setup logging support.
+logging.basicConfig(level=LOG_LEVEL)
+LOGGER = logging.getLogger(__name__)
+LOGGER.addHandler(LOG_HANDLER)
 
 class ContactFormTest(django.test.TestCase):
     """
@@ -21,6 +26,7 @@ class ContactFormTest(django.test.TestCase):
     
     @classmethod
     def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
         UserProfileTest.test_login = {
             REDIRECT_FIELD_NAME: '/{}'.format(DJANGO_BASE),
             LOGIN_FORM_KEY: 1,
@@ -33,6 +39,7 @@ class ContactFormTest(django.test.TestCase):
     @classmethod
     def tearDownClass(cls):
         test_utils.clean_user_db()
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
 
     def test_contact_form_access(self):
         """
@@ -90,6 +97,7 @@ class UserProfileTest(django.test.TestCase):
     
     @classmethod
     def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
         UserProfileTest.test_login = {
             REDIRECT_FIELD_NAME: '/{}'.format(DJANGO_BASE),
             LOGIN_FORM_KEY: 1,
@@ -116,6 +124,7 @@ class UserProfileTest(django.test.TestCase):
     @classmethod
     def tearDownClass(cls):
         test_utils.clean_user_db()
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
 
     def setUp(self):
         self.test_user = test_utils.create_editor_user(
@@ -219,6 +228,15 @@ class UserProfileTest(django.test.TestCase):
 
 
 class CreateViewTest(django.test.TestCase):
+    
+    @classmethod
+    def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
+        
+    @classmethod
+    def tearDownClass(cls):
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
+    
     def testCreateInitial(self):
         client = Client()
         response = client.get('/{0}accounts/create/'.format(DJANGO_BASE))
@@ -256,6 +274,14 @@ class CreateViewTest(django.test.TestCase):
         test_utils.clean_user_db()
 
 class RegistrationRequestTest(django.test.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
+        
+    @classmethod
+    def tearDownClass(cls):
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
 
     def setUp(self):
         _user = User.objects.create_user('test', 'test@test.com', 'test')
@@ -379,6 +405,14 @@ class ResetPasswordTest(django.test.TestCase):
     
     user = None
     
+    @classmethod
+    def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
+        
+    @classmethod
+    def tearDownClass(cls):
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
+    
     def setUp(self):
         """
         Sets up some resources with which to test.
@@ -456,12 +490,19 @@ class ChangePasswordTest(django.test.TestCase):
     
     user = None
     
+    @classmethod
+    def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
+        
+    @classmethod
+    def tearDownClass(cls):
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
+    
     def setUp(self):
         """
         Sets up some resources with which to test.
         """
         self.user = User.objects.create_user('normaluser', 'normal@example.com', 'secret')
-        
         
     def tearDown(self):
         """

@@ -1,4 +1,5 @@
 import os
+import logging
 
 from django.core.management import call_command
 from django.core.urlresolvers import reverse
@@ -9,11 +10,15 @@ from haystack.query import SearchQuerySet
 
 from metashare import test_utils, settings
 from metashare.repository import views
-from metashare.settings import DJANGO_BASE, ROOT_PATH
+from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_LEVEL, LOG_HANDLER
 from metashare.stats.models import LRStats
 from metashare.storage.models import INGESTED
 from metashare.test_utils import create_user
 
+# Setup logging support.
+logging.basicConfig(level=LOG_LEVEL)
+LOGGER = logging.getLogger(__name__)
+LOGGER.addHandler(LOG_HANDLER)
 
 _SEARCH_PAGE_PATH = '/{0}repository/search/'.format(DJANGO_BASE)
 
@@ -26,6 +31,14 @@ class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
     # paths to XML files containing test resources
     RES_PATH_1 = "{0}/repository/fixtures/roundtrip.xml".format(ROOT_PATH)
     RES_PATH_2 = "{0}/repository/fixtures/testfixture.xml".format(ROOT_PATH)
+    
+    @classmethod
+    def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
+        
+    @classmethod
+    def tearDownClass(cls):
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
     
     def test_index_updates_on_import(self):
         """
@@ -127,6 +140,14 @@ class SearchTest(test_utils.IndexAwareTestCase):
     """
     Test the search functionality
     """
+    @classmethod
+    def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
+        
+    @classmethod
+    def tearDownClass(cls):
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
+        
     def setUp(self):
         """
         Set up the view
@@ -337,6 +358,7 @@ class SearchTestPublishedResources(TestCase):
         """
         Set up the view
         """
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
         test_utils.setup_test_storage()                        
         # Make sure the index does not contain any stale entries:
         call_command('rebuild_index', interactive=False, using=settings.TEST_MODE_NAME)
@@ -350,6 +372,7 @@ class SearchTestPublishedResources(TestCase):
         test_utils.clean_resources_db()
         test_utils.clean_storage()
         test_utils.clean_user_db()
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
 
     def testLanguageFacet(self):   
         client = Client()
