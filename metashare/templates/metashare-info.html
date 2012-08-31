@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+{% load email_protection %}
+
+{% block content %}
+<div id="META-SHARE_Members" class="anchor"></div>
+<h2>META-SHARE Members</h2>
+<div class="content_box">
+<p>All organisations wishing to become META-SHARE members, by signing the <a href="http://www.meta-net.eu/meta-share/memorandum-of-understanding">META-SHARE Memorandum of Understanding (MoU)</a> undertake the following obligations:</p>
+<ul> 
+  <li>to follow the META-SHARE metadata schema, as defined in the <a href="http://www.meta-net.eu/meta-share/metadata-schema/">META-SHARE Metadata specifications document</a>;</li>
+  <li>to clear all rights before conferring an LR to the network;</li>
+  <li>to store the LRs and metadata in their repositories OR use one of the META-SHARE hosting Repositories;</li>
+  <li>to maintain an inventory (a local inventory) with all the metadata records of their LR OR use one of the META-SHARE hosting Repositories;</li>
+  <li>to keep  identifiers for all their LRs;</li>
+  <li>to adhere to the META-SHARE <a href="#Notice_and_Take_Down_Policy">Notice and Take Down policy</a></li>
+  <li>to export the metadata records of their LRs and allow their harvesting and synchronization by the META-SHARE Managing Nodes</li>
+</ul>
+<p>Members can:</p>
+<ul>
+  <li>search the central inventory using multifaceted search facilities;</li>
+  <li>access the actual resources by visiting the local and/or hosting Repositories for browsing and downloading them;</li>
+  <li>get information about the usage of specific resources, their relation (e.g. compatibility, suitability, etc) to other resources as well as recommendations;</li>
+  <li>get statistics on number of downloads, types of consumers, etc.</li>
+</ul>
+</div>
+
+<div id="META-SHARE_Repositories" class="anchor"></div>
+<h2>META-SHARE Repositories</h2>
+<div class="content_box">
+<p>META-SHARE Repositories are set up, operated and maintained by META-SHARE Members, acting as META-SHARE Repository Service Providers. META-SHARE Repositories can have a local or hosting (non-local) role.</p> 
+<p>Local repositories are set up and maintained by organisations participating in the META-SHARE network, storing their own resources.</p>
+<p>Hosting repositories are also set up and maintained by organisations participating in the META-SHARE network acting as storage and documentation facilities for resources either developed in organisations not wishing to set up their own repository, or donated or considered orphan resources, i.e. resources without an owner. A hosting repository may also store its own resources.</p>
+<p>Every LR in META-SHARE has to be primarily assigned to one of the network's repositories, with the member maintaining that repository undertaking the curation of the resource.</p>
+<p>META-SHARE Members maintaining repositories are responsible for providing to the Managing Nodes all the information necessary for them to fulfill their mission.</p>
+<p>META-SHARE Members depositing their language resources to a META-SHARE hosting repository will take all reasonable steps so that the META-SHARE Managing Nodes and repositories are able to perform their respective tasks and obligations.</p>
+</div>
+
+<div id="META-SHARE_Managing_Nodes" class="anchor"></div>
+<h2>META-SHARE Managing Nodes: Core Service and User Support Service Providers</h2>
+<div class="content_box">
+<p>A number of members with certain technical and organisational characteristics undertake the role of META-SHARE Managing Node acting as <a href="#META-SHARE_Core_Services">Core Service</a> and <a href="#META-SHARE_User_Support_Services">User Support Service</a> Providers with the obligation to provide one or more of the Core Services critical to the whole of the META-SHARE network.</p>
+<p>META-SHARE Managing Nodes harvest and store metadata records from the META-SHARE Nodes of the entire META-SHARE Network. META-SHARE Managing Nodes share metadata, create, host and maintain a central inventory which includes metadata-based descriptions of all language resources available in the distributed network. Each META-SHARE Managing Node effectively hosts a copy of the central inventory.</p> 
+<p>META-SHARE Members meeting the organizational and technical standards necessary to provide Core Services and User Support Services can be invited and introduced as new Managing Nodes, in accordance to the procedures of the META-SHARE network.</p> 
+<p>META-SHARE Managing Nodes do not have any additional privileges with respect to access to LRs.</p>
+<p>The following Members initially assume the role of META-SHARE Managing Node  and act as Core Service and User Support Service Providers: CNR, DFKI, ELDA, FBK, ILSP</p>
+
+<div id="META-SHARE_Core_Services" class="anchor"></div>
+<h3>META-SHARE Core Services</h3>
+<p>The following services are considered as Core Services:</p>
+<ul>
+  <li>Metadata and other data harvesting and synchronisation</li>
+  <li>User and repository registration, authentication and authorisation</li>
+  <li>Search, browsing and viewing</li>
+  <li>Uploading and downloading of language resources</li>
+  <li>Documentation of language resources</li>
+  <li>Reporting on the use of language resources</li>
+  <li>(Electronic) <a href="#LR_Sharing_within_the_META-SHARE_Network">licensing</a></li>
+  <li>Billing and payment (available in the future)</li>
+</ul>
+
+<div id="META-SHARE_User_Support_Services" class="anchor"></div>
+<h3>META-SHARE User Support Services</h3>
+<p>The following services are considered as User Support Services offered to META-SHARE Members:</p>
+<ul>
+  <li>META-SHARE User Forum enabling META-SHARE Members to ask questions, get and view answers to questions.</li>
+  <li>META-SHARE Knowledge Base providing information about the use of META-SHARE and its components and services in a structured way</li>
+  <li>Legal helpdesk enabling META-SHARE Members to ask questions concerning the use of licences, rights of use, IPR issues, etc. - {% encrypt_email 'helpdesk-legal@meta-share.eu' %};</li>
+  <li>Technical helpdesk enabling META-SHARE Members to ask questions concerning the META-SHARE software platform installation and use - {% encrypt_email 'helpdesk-technical@meta-share.eu' %};</li>
+  <li>Metadata helpdesk enabling META-SHARE Members to ask questions concerning the META-SHARE metadata based LR documentation - {% encrypt_email 'helpdesk-metadata@meta-share.eu' %}.</li>
+</ul>
+</div>
+
+<div id="LR_Sharing_within_the_META-SHARE_Network" class="anchor"></div>
+<h2>LR Sharing within the META-SHARE Network</h2>
+<div class="content_box">
+<p>All META-SHARE members have full access to the META-SHARE infrastructure and the META-SHARE Commons licensed LRs for as long as they retain their membership status, as well as all other LRs in accordance to the LRs relevant licensing terms.</p>  
+<p>META-SHARE metadata are licenced under the Creative Commons Attribution Unported (CC-BY) version 3.0 or higher, or the EU Open Metadata Licence. All META-SHARE members and associate members are obliged to allow the harvesting of their meta-data.</p>
+<p>META-SHARE members are encouraged, when they publish or distribute a Resource or any Derivative, to redeposit the Derivative work in the META-SHARE network.</p>
+<p>LRs available under a licence allowing redistribution may be replicated and flow in the META-SHARE network  according to the terms and conditions specified in the respective licence.</p> 
+<p>Members maintaining repositories are responsible for all LRs entering the META-SHARE network through their repositories:</p>
+<ul>
+  <li>If the LR comes with a 3rd party licence, this member is responsible for properly documenting the licence in the metadata and ensuring its terms and conditions are clearly available to all members of the network;</li>
+  <li>If the LR comes with a Share-alike licence, this member should take all necessary and reasonable measures, so that any subsequent derivative works and their authors may be identified;</li>
+  <li>If this member has all IPR over the LR, then this member is encouraged to use one of the <a href="#Licensing_LRs_through_META-SHARE">licences recommended by META-SHARE</a>, i.e. a Creative Commons (CC), or a CC-compatible, licence, or a META-SHARE Commons, or a META-SHARE No Redistribution licence, or an Open Source Software licence.</li> 
+</ul>
+</div>
+
+<div id="Licensing_LRs_through_META-SHARE" class="anchor"></div>
+<h2>Licensing LRs through META-SHARE</h2>
+<div class="content_box">
+<p>Any grant of access to LRs through META-SHARE should include not only the right to read  the relevant content but also to allow transformative uses, dissemination and distribution of such resources and their derivatives, according to the needs and policies of LR owners and users. To limit the complexity of licensing, <a href="http://www.meta-net.eu/meta-share/licenses">a range of recommended license setups are provided</a> by META-SHARE in the form of templates or ready-made licences for the members to choose from.</p>
+<p>The META-SHARE model licensing scheme, with a firm orientation towards the creation of an openness culture and the relevant ecosystem for LRs, is organised on the following axes, further described in the paragraphs to follow:</p>
+<ul>
+  <li><b>Creative Commons</b> licences (starting with Creative Commons Zero (CC-0) and all possible combinations along the CC differentiation of rights of use) are the first level of legal machinery applied.</li>
+  <li>A second layer includes <b>META-SHARE Commons</b> Licences, a fully developed CC-based licensing tool that allows META-SHARE members and Extraneous Depositors to make their resources available to other network members only.</li>
+  <li>The third legal layer is a set of licenses that allow use and exploitation of the Resources while permitting the LR Owner to have full control over the Resource distribution. These <b>“No Redistribution”</b> licences will effectively help get “closed” resources safely out to the community. These licenses also come with a Commercial flavour and are accompanied by their for-a-fee counterparts.</li>
+  <li>Software tools and network services are either provided though one of the standard <b>Open Source</b> licenses or under a custom commercial license. Open Source Licenses proposed by META-SHARE include BSD, GPL, LGPL, Apache and AGPL. Other open licences are not excluded, but LR owners are being advised to always keep in mind certain selection criteria that will allow their LRs to be legally easy and straightforward to share.</li>
+</ul>
+<p>These ready-to-use licensing schemes are as quick and easy to apply as possible, in particular for new resources. A META-SHARE helpdesk facility ({% encrypt_email 'helpdesk-legal@meta-share.eu' %}) has been set up for assistance in understanding, choosing and using any of these licence and other legal tools.</p>
+<p>The rights of use of the resource, any possible restrictions, as well as rights and restrictions on the original raw data are under the control and responsibility of the resource owners. The repository in which the resource resides acts mainly as a facilitator for the search-and-get procedure while providing guidelines and metadata curation activities.</p>
+<p>Metadata elements regarding rights of use, availability and distribution are among the mandatory elements of the minimal metadata schema and are harvested by the central META-SHARE servers so that users (essentially language resource consumers) can promptly understand what they are allowed to do with a specific resource. Users are asked to always refer to these metadata before using any of the resources on META-SHARE.</p>
+<p>Soon, we will be providing a set of guidelines on the use of the proposed licensing scheme, according to their specific features, as an additional online help.</p>
+</div>
+
+<div id="Notice_and_Take_Down_Policy" class="anchor"></div>
+<h2>Notice and Take Down Policy</h2>
+<div class="content_box">
+<p>If a rights holder is concerned that she has found Language Resources (LRs) on one of the META-SHARE repositories, for which she has not given permission, granted a licence or is not covered by a limitation or exception in national law, such rights holder is asked to contact META-SHARE through the META-SHARE Legal Helpdesk ({% encrypt_email 'helpdesk-legal@meta-share.eu' %}), in writing stating the following:</p>
+<ol>
+  <li>Her contact details.</li>
+  <li>The full bibliographic details of the LR.</li>
+  <li>The exact and full URL where she found the LR.</li>
+  <li>Proof that she is the rights holder and a statement that, under penalty of perjury, she is the rights holder or are an authorised representative.</li>
+</ol>
+<p>Upon receipt of notification the ‘Notice and Takedown’ procedure is then invoked as follows:</p>
+<ol>
+  <li>META-SHARE will acknowledge receipt of your complaint by email or letter and will make an initial assessment of the validity and plausibility of the complaint.</li>
+  <li>Upon receipt of a valid complaint, the LR will be temporarily removed from the META-SHARE catalogue pending an agreed solution.</li>
+  <li>META-SHARE will contact the member who deposited the material. The META-SHARE member will be notified that the material is subject to a complaint, under what allegations, and will be encouraged to assuage the complaints concerned.</li>
+  <li>The complainant and the META-SHARE member will be encouraged to resolve the issue swiftly and amicably and to the satisfaction of both parties, with the following possible outcomes:
+    <ul>
+      <li>The LR is replaced on the META-SHARE inventory unchanged.</li>
+      <li>The LR is replaced on the META-SHARE inventory with changes.</li>
+      <li>The LR is permanently removed from the META-SHARE inventory.</li>
+    </ul>
+  </li>
+  <li>If the META-SHARE member and the complainant are unable to agree a solution, the LR will remain unavailable through the META-SHARE inventory until a time when a resolution has been reached.</li>
+</ol>
+</div>
+
+<div id="Privacy" class="anchor"></div>
+<h2>Privacy</h2>
+<div class="content_box">
+<p>In common with most websites, the METASHARE website and services log certain information about every request sent to them. This information is used for system administration and for producing usage statistics. Summary statistics are extracted from this data and some of these may be made publicly available, but these do not include information from which individuals could be identified. Relevant subsets of this data may be used as part of investigations of computer misuse involving this site. Data may also on occasion be used to enable investigation of technical problems on the website. Otherwise logged information is not passed to any third party except if required by law.</p>
+</div>
+
+<div id="Data_Protection" class="anchor"></div>
+<h2>Data Protection</h2>
+<div class="content_box">
+<p>From time to time the META-SHARE Service Providers may use electronic forms on this site to gather personal information for purposes directly related to a service, function or activity of the METASHARE service. When the Service Provider will do so it will let users know the purpose for which the information is being collected (including if the information is to be published). Completion of and submission of any form on this website is entirely at the discretion of the user.</p>
+</div>
+
+<div id="Data_Protection_Statement" class="anchor"></div>
+<h2>Data Protection Statement</h2>
+<div class="content_box">
+<p>In using and submitting content on the METASHARE services users agree that the Service Provider may use any personal data that users supply through contributing content or by filling in electronic forms. The META-SHARE Service Providers respect users’ privacy and seek to protect their personal data.</p>
+</div>
+{% endblock %}
