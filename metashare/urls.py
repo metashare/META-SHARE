@@ -12,6 +12,8 @@ admin.autodiscover()
 urlpatterns = patterns('',
   (r'^{0}$'.format(DJANGO_BASE),
     'metashare.views.frontpage'),
+  (r'^{0}info/$'.format(DJANGO_BASE),
+     direct_to_template, {'template': 'metashare-info.html'}),
   (r'^{0}login/$'.format(DJANGO_BASE),
     'metashare.views.login', {'template_name': 'login.html'}),
   (r'^{0}logout/$'.format(DJANGO_BASE),

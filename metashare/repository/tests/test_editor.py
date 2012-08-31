@@ -187,7 +187,7 @@ class EditorTest(TestCase):
     def test_staff_cannot_see_model_list(self):
         client = test_utils.get_client_with_user_logged_in(EditorTest.staff_login)
         response = client.get(ADMINROOT+'repository/')
-        self.assertContains(response, 'Page not found', status_code=404)
+        self.assertContains(response, 'Page not Found', status_code=404)
 
     def test_editor_can_see_resource_add(self):
         client = test_utils.get_client_with_user_logged_in(EditorTest.editor_login)
@@ -1293,7 +1293,7 @@ class DestructiveTests(TestCase):
         self.testfixture.storage_object.save()
         response = client.get(
           ADMINROOT+'repository/resourceinfotype_model/{}/'.format(self.testfixture.id))
-        self.assertContains(response, 'Page not found', status_code=404)
+        self.assertContains(response, 'Page not Found', status_code=404)
         
     def test_editor_user_cannot_export_deleted_resource(self):
         client = test_utils.get_client_with_user_logged_in(self.editor_login)
@@ -1314,7 +1314,7 @@ class DestructiveTests(TestCase):
         self.testfixture.storage_object.save()
         response = client.get(
           ADMINROOT+'repository/resourceinfotype_model/{}/export-xml/'.format(self.testfixture.id))
-        self.assertContains(response, 'Page not found', status_code=404)
+        self.assertContains(response, 'Page not Found', status_code=404)
 
     def test_editor_user_cannot_browse_deleted_resource(self):
         client = test_utils.get_client_with_user_logged_in(self.editor_login)
