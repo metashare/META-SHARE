@@ -458,7 +458,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                      }
         dictionary.update(create_breadcrumb_template_params(self.model, _('Delete resource')))
     
-        return render_to_response('admin/repository/resourceinfotype_model/confirm_delete.html',
+        return render_to_response('admin/repository/resourceinfotype_model/delete_selected_confirmation.html',
                                   dictionary,
                                   context_instance=RequestContext(request))
 
