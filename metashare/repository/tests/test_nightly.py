@@ -1,6 +1,6 @@
 from django.test import TestCase
 from metashare import test_utils, xml_utils
-from metashare.settings import ROOT_PATH
+from metashare.settings import ROOT_PATH, TEST_MODE_NAME
 from metashare.repository.supermodel import OBJECT_XML_CACHE
 from metashare.repository.models import resourceInfoType_model
 from zipfile import ZipFile
@@ -31,7 +31,7 @@ class NightlyTests(TestCase):
     
         # update index
         from django.core.management import call_command
-        call_command('rebuild_index', interactive=False)
+        call_command('rebuild_index', interactive=False, using=TEST_MODE_NAME)
         
     
     @classmethod
@@ -51,7 +51,7 @@ class NightlyTests(TestCase):
     
         # update index
         from django.core.management import call_command
-        call_command('rebuild_index', interactive=False)
+        call_command('rebuild_index', interactive=False, using=TEST_MODE_NAME)
 
         
     def testSuccessfulImport(self):
