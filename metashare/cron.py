@@ -10,8 +10,7 @@ from metashare.accounts.models import RegistrationRequest
 
 
 # Setup logging support.
-logging.basicConfig(level=settings.LOG_LEVEL)
-LOGGER = logging.getLogger('metashare.cron')
+LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(settings.LOG_HANDLER)
 
 

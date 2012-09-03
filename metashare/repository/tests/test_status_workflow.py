@@ -1,16 +1,20 @@
+import logging
 from django.contrib.auth.models import User
 from django.test.client import Client, RequestFactory
 from django.test.testcases import TestCase
 from metashare import test_utils
-from metashare.settings import DJANGO_BASE, ROOT_PATH
+from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER
 from metashare.repository.models import resourceInfoType_model
 from metashare.accounts.models import EditorGroup, EditorGroupManagers
 from metashare.repository.editor.resource_editor import publish_resources, \
     ingest_resources, unpublish_resources
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL
 
-ADMINROOT = '/{0}editor/repository/resourceinfotype_model/'.format(DJANGO_BASE)
+# Setup logging support.
+LOGGER = logging.getLogger(__name__)
+LOGGER.addHandler(LOG_HANDLER)
 
+ADMINROOT = '/{0}editor/repository/resourceinfotype_model/'.format(DJANGO_BASE)
 
 class StatusWorkflowTest(TestCase):
     
@@ -23,6 +27,7 @@ class StatusWorkflowTest(TestCase):
         """
         Import a resource to test the workflow changes for
         """
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
         test_utils.set_index_active(False)        
         test_utils.setup_test_storage()
         StatusWorkflowTest.test_editor_group = EditorGroup.objects.create(
@@ -36,7 +41,7 @@ class StatusWorkflowTest(TestCase):
         
         _fixture = '{0}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
         _result = test_utils.import_xml(_fixture)
-        StatusWorkflowTest.resource_id = _result[0].id
+        StatusWorkflowTest.resource_id = _result.id
     
     @classmethod
     def tearDownClass(cls):
@@ -47,6 +52,7 @@ class StatusWorkflowTest(TestCase):
         test_utils.clean_storage()
         test_utils.clean_user_db()
         test_utils.set_index_active(True)
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
         
     def test_can_publish_ingested(self):
         client = Client()

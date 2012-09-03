@@ -1,6 +1,7 @@
 import datetime
 import os
 import json
+import logging
 
 from xml.etree.ElementTree import fromstring
 from StringIO import StringIO
@@ -16,9 +17,12 @@ from metashare import settings, test_utils
 from metashare.repository.models import resourceInfoType_model
 from metashare.storage.models import INGESTED, INTERNAL, StorageObject, \
     PUBLISHED, compute_digest_checksum, RemovedObject, MASTER, PROXY
-from metashare.settings import DJANGO_BASE, LOGIN_URL
+from metashare.settings import DJANGO_BASE, LOGIN_URL, LOG_HANDLER
 from metashare.test_utils import set_index_active
 
+# Setup logging support.
+LOGGER = logging.getLogger(__name__)
+LOGGER.addHandler(LOG_HANDLER)
 
 class MetadataSyncTest (TestCase):
     SYNC_BASE = "/{0}sync/".format(DJANGO_BASE)
@@ -80,19 +84,10 @@ class MetadataSyncTest (TestCase):
                 self.assertIsNotNone(root)
 
 
-    def client_with_user_logged_in(self, user_credentials):
-        client = Client()
-        response = client.post(LOGIN_URL, user_credentials)
-        if response.status_code != 302:
-            raise Exception, 'could not log in user with credentials: {}\nresponse was: {}'\
-                .format(user_credentials, response)
-        return client
-
     @classmethod
     def import_test_resource(cls, filename, pub_status, copy_status=MASTER, url=settings.DJANGO_URL):
         _fixture = '{0}/repository/fixtures/{1}'.format(settings.ROOT_PATH, filename)
-        result = test_utils.import_xml(_fixture)
-        resource = result[0]
+        resource = test_utils.import_xml(_fixture)
         resource.storage_object.publication_status = pub_status
         resource.storage_object.copy_status = copy_status
         resource.storage_object.source_url = url
@@ -108,6 +103,8 @@ class MetadataSyncTest (TestCase):
         pollute the "normal" development db or the production db.
         As a consequence, they need no valuable password.
         """
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
+        
         set_index_active(False)
         test_utils.setup_test_storage()
         syncuser = User.objects.create_user('syncuser', 'staff@example.com',
@@ -170,6 +167,7 @@ class MetadataSyncTest (TestCase):
         test_utils.clean_storage()
         test_utils.clean_user_db()
         set_index_active(True)
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
     
 
     def test_unprotected_inventory(self):
@@ -180,19 +178,19 @@ class MetadataSyncTest (TestCase):
 
     def test_syncuser_get_inventory(self):
         settings.SYNC_NEEDS_AUTHENTICATION = True
-        client = self.client_with_user_logged_in(self.syncuser_login)
+        client = test_utils.get_client_with_user_logged_in(self.syncuser_login)
         response = client.get(self.INVENTORY_URL)
         self.assertValidInventoryResponse(response)
 
     def test_normaluser_cannot_reach_inventory(self):
         settings.SYNC_NEEDS_AUTHENTICATION = True
-        client = self.client_with_user_logged_in(self.normal_login)
+        client = test_utils.get_client_with_user_logged_in(self.normal_login)
         response = client.get(self.INVENTORY_URL)
         self.assertIsForbidden(response)
 
     def test_editoruser_cannot_reach_inventory(self):
         settings.SYNC_NEEDS_AUTHENTICATION = True
-        client = self.client_with_user_logged_in(self.editor_login)
+        client = test_utils.get_client_with_user_logged_in(self.editor_login)
         response = client.get(self.INVENTORY_URL)
         self.assertIsForbidden(response)    
 
@@ -220,7 +218,7 @@ class MetadataSyncTest (TestCase):
 
     def test_editoruser_cannot_reach_full_metadata(self):
         settings.SYNC_NEEDS_AUTHENTICATION = True
-        client = self.client_with_user_logged_in(self.editor_login)
+        client = test_utils.get_client_with_user_logged_in(self.editor_login)
         resource = resourceInfoType_model.objects.all()[0]
         resource_uuid = resource.storage_object.identifier
         response = client.get('{0}{1}/metadata/'.format(self.SYNC_BASE, resource_uuid))

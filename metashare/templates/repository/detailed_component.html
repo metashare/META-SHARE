@@ -1,26 +1,21 @@
-{% if detailed_component.0 != "usageInfo" %}
-    {{detailed_component.0}}
-{% endif %}
+{% load email_protection %}
 
-{% for item in detailed_component.1 %}
+<label class='title component'>{{lr_content.0}}</label>
+
+{% for item in lr_content.1 %}
   {% with "repository/detailed_component.html" as filename %}
-    {% with item as detailed_component %} {# the ".1" should not be there if the tuple does not contain the root of the components tree #}
-      {% ifequal detailed_component|length 2 %}
-		
-		<tr>
-			<td>{% include filename %}</td>
-		</tr>
-		
-      {% else %}
-        <tr>
-			<td>
-				<u>{{ detailed_component.0.0 }}</u>
-			</td>
-			<td>
-				{{ detailed_component.0.1 }}
-			</td>
-		</tr>
-	  {% endifequal %}
+    {% with item as lr_content %}
+        {% ifequal lr_content|length 2 %}
+			{% include filename %}
+        {% else %}
+			{% if lr_content.0.1 != "" %}
+				{% if lr_content.0.0 == "Email" %}
+	        		<div class="dataline"><label class='title'>{{lr_content.0.0|capfirst }}: </label><label>{% encrypt_email lr_content.0.1 %}</label></div>
+				{% else %}
+					<div class="dataline{% if lr_content.0.2 == 1 %} mandatory{% else %} optional{% endif %}"><label class='title'>{{lr_content.0.0|capfirst }}: </label><label>{{lr_content.0.1}}</label></div>
+				{% endif %}
+			{% endif %}
+        {% endifequal %}
     {% endwith %}
   {% endwith %}
 {% endfor %}

@@ -18,7 +18,7 @@ from metashare.repository.models import resourceInfoType_model, \
     participantInfoType_model, corpusAudioInfoType_model, \
     corpusImageInfoType_model, corpusTextNumericalInfoType_model, \
     corpusTextNgramInfoType_model, languageDescriptionInfoType_model, \
-    languageDescriptionTextInfoType_model, \
+    languageDescriptionTextInfoType_model, actualUseInfoType_model, \
     languageDescriptionVideoInfoType_model, \
     languageDescriptionImageInfoType_model, \
     lexicalConceptualResourceInfoType_model, \
@@ -69,6 +69,7 @@ class DocumentModelAdmin(SchemaModelAdmin):
 
 # Models which are always rendered inline so they don't need their own admin form:
 purely_inline_models = (
+    actualUseInfoType_model,
     identificationInfoType_model,
     metadataInfoType_model,
     communicationInfoType_model,

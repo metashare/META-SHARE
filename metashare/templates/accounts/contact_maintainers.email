@@ -1,0 +1,17 @@
+Dear superuser,
+
+{{ user_first_name }} {{ user_last_name }} (user account: {{ user_account_name }}) has sent you a message through the contact form of the META-SHARE node at [1].
+
+Subject: {{ subject }}
+Message: see below
+
+Please try to answer this request soon by responding to {{ user_email }}.
+
+Best regards,
+your META-SHARE node
+
+[1] {{ node_url }}
+
+====================================================================
+
+{{ message }}

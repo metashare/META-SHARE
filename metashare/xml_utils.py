@@ -15,18 +15,21 @@ from django.contrib.contenttypes.models import ContentType
 from django.utils.encoding import force_unicode
 
 from metashare.repository.models import User
-from metashare.settings import LOG_LEVEL, LOG_HANDLER, XDIFF_LOCATION
+from metashare.settings import LOG_HANDLER, XDIFF_LOCATION
 from metashare.stats.model_utils import saveLRStats, UPDATE_STAT
+from xml.etree import ElementTree
 
 
 # Setup logging support.
-logging.basicConfig(level=LOG_LEVEL)
-LOGGER = logging.getLogger('metashare.xml_utils')
+LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 
 CONSOLE = "/dev/null"
 
 XML_DECL = re.compile(r'\s*<\?xml version=".+" encoding=".+"\?>\s*\n?',
+  re.I|re.S|re.U)
+# same as above, but using using ' quotes for attributes
+XML_DECL_2 = re.compile(r"\s*<\?xml version='.+' encoding='.+'\?>\s*\n?",
   re.I|re.S|re.U)
 
 def xml_compare(file1, file2, outfile=None):
@@ -82,8 +85,11 @@ def import_from_string(xml_string, targetstatus, copy_status, owner_id=None):
     
     resource = result[0]
     
-    # Set publication_status for new object.
+    # Set publication_status for the new object. Also make sure that the
+    # deletion flag is not set (may happen in case of re-importing a previously
+    # deleted resource).
     resource.storage_object.publication_status = targetstatus
+    resource.storage_object.deleted = False
     if owner_id:
         resource.owners.add(owner_id)
         for edt_grp in User.objects.get(id=owner_id).get_profile() \
@@ -136,7 +142,7 @@ def import_from_file(filehandle, descriptor, targetstatus, copy_status, owner_id
 
     if not handling_zip_file:
         try:
-            print 'Importing XML file: "{0}"'.format(descriptor)
+            LOGGER.info('Importing XML file: "{0}"'.format(descriptor))
             xml_string = filehandle.read()
             resource = import_from_string(xml_string, targetstatus, copy_status, owner_id)
             imported_resources.append(resource)
@@ -146,13 +152,14 @@ def import_from_file(filehandle, descriptor, targetstatus, copy_status, owner_id
     else:
         temp_zip = ZipFile(filehandle)
         
-        print 'Importing ZIP file: "{0}"'.format(descriptor)
+        LOGGER.info('Importing ZIP file: "{0}"'.format(descriptor))
+        file_count = 0
         for xml_name in temp_zip.namelist():
             try:
                 if xml_name.endswith('/') or xml_name.endswith('\\'):
                     continue
-                
-                print 'Importing extracted XML file: "{0}"'.format(xml_name)
+                file_count += 1
+                LOGGER.info('Importing {0}. extracted XML file: "{1}"'.format(file_count, xml_name))
                 xml_string = temp_zip.read(xml_name)
                 resource = import_from_string(xml_string, targetstatus, copy_status, owner_id)
                 imported_resources.append(resource)
@@ -161,46 +168,31 @@ def import_from_file(filehandle, descriptor, targetstatus, copy_status, owner_id
     return imported_resources, erroneous_descriptors
 
 
-def pretty_xml(xml_string):
+def to_xml_string(node, encoding="ASCII"):
     """
-    Pretty-print the given XML String with proper indentation.
+    Serialize the given XML node as Unicode string using the given encoding.
     """
-    xml_string = xml_string.decode('utf-8').replace('><', '>\n<')
-
+    
+    xml_string = ElementTree.tostring(node, encoding=encoding)
+    xml_string = xml_string.decode(encoding)
+    
     # Delete any XML declaration inside the given XML String.
     xml_string = XML_DECL.sub(u'', xml_string)
+    xml_string = XML_DECL_2.sub(u'', xml_string)
 
-    output = u'<?xml version="1.0" encoding="UTF-8"?>\n'
+    return u'<?xml version="1.0" encoding="{}"?>{}'.format(encoding, xml_string)
 
-    # Stores the current indentation level.
-    indent_level = 0
-    for line in xml_string.split('\n'):
-        line = line.strip()
 
-        if line.startswith('<') and line.endswith('/>'):
-            output += u'{0}{1}\n'.format('  ' * indent_level, line)
-            continue
-
-        if line.startswith('</') and line.endswith('>'):
-            indent_level -= 1
-            output += u'{0}{1}\n'.format('  ' * indent_level, line)
-            indent_level -= 1
-            continue
-
-        if line.startswith('<') and line.endswith('>') and '</' in line:
-            output += u'{0}{1}\n'.format('  ' * indent_level, line)
-            continue
-
-        if line.startswith('<') and line.endswith('>') and (not '</' in line):
-            indent_level += 1
-            output += u'{0}{1}\n'.format('  ' * indent_level, line)
-            indent_level += 1
-            continue
-
-        if not line.startswith('<') and line.endswith('>') and ('</' in line):
-            output += u'{0}{1}\n'.format('  ' * indent_level, line)
-            continue
-
-        output += u'{0}{1}\n'.format('  ' * indent_level, line)
-
-    return output
+html_escape_table = {
+    "&": "&amp;",
+    '"': "&quot;",
+    "'": "&#39;",
+    ">": "&gt;",
+    "<": "&lt;",
+    }
+    
+def html_escape(text):
+    """
+    Produce entities within text.
+    """
+    return "".join(html_escape_table.get(c, c) for c in text)

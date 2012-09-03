@@ -1,12 +1,8 @@
-"""
-Project: META-SHARE prototype implementation
- Author: Christian Federmann <cfedermann@dfki.de>
-"""
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.db import models
 # pylint: disable-msg=E0611
 from hashlib import md5
-from metashare.settings import LOG_LEVEL, LOG_HANDLER
+from metashare.settings import LOG_HANDLER
 from metashare import settings
 from os import mkdir
 from os.path import exists
@@ -16,7 +12,6 @@ from xml.etree import ElementTree as etree
 from datetime import datetime, timedelta
 import logging
 import re
-from xml.etree.ElementTree import tostring
 from json import dumps, loads
 from django.core.serializers.json import DjangoJSONEncoder
 import zipfile
@@ -24,8 +19,7 @@ from zipfile import ZIP_DEFLATED
 from django.db.models.query_utils import Q
 
 # Setup logging support.
-logging.basicConfig(level=LOG_LEVEL)
-LOGGER = logging.getLogger('metashare.storage.models')
+LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 
 ALLOWED_ARCHIVE_EXTENSIONS = ('zip', 'tar.gz', 'gz', 'tgz', 'tar', 'bzip2')
@@ -305,10 +299,12 @@ class StorageObject(models.Model):
         update_xml = False
         
         # create current version of metadata XML
-        from metashare.xml_utils import pretty_xml
-        _metadata = pretty_xml(tostring(
+        from metashare.xml_utils import to_xml_string
+        _metadata = to_xml_string(
           # pylint: disable-msg=E1101
-          self.resourceinfotype_model_set.all()[0].export_to_elementtree()))
+          self.resourceinfotype_model_set.all()[0].export_to_elementtree(),
+          # use ASCII encoding to convert non-ASCII chars to entities
+          encoding="ASCII")
         
         if self.metadata != _metadata:
             self.metadata = _metadata
@@ -335,7 +331,7 @@ class StorageObject(models.Model):
             # serialize metadata
             with open('{0}/metadata-{1:04d}.xml'.format(
               self._storage_folder(), self.revision), 'wb') as _out:
-                _out.write(unicode(self.metadata).encode('utf-8'))
+                _out.write(unicode(self.metadata).encode('ASCII'))
             update_zip = True
         
         # check if global storage object serialization has changed; if yes,

@@ -1,7 +1,3 @@
-"""
-Project: META-SHARE prototype implementation
-Author: Christian Federmann <cfedermann@dfki.de>
-"""
 from django.conf.urls.defaults import patterns, url
 from haystack.views import search_view_factory
 from haystack.query import SearchQuerySet

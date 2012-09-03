@@ -1,7 +1,3 @@
-"""
-Project: META-SHARE prototype implementation
- Author: Christian Federmann <cfedermann@dfki.de>
-"""
 from django.contrib import admin
 from metashare.storage.models import StorageObject, RemovedObject
 

@@ -1,7 +1,4 @@
-"""
-Project: META-SHARE prototype implementation
- Author: Christian Federmann <cfedermann@dfki.de>
-"""
+import logging
 from time import sleep
 from django.core.exceptions import ValidationError
 from django.test.client import Client
@@ -9,16 +6,28 @@ from django.utils import unittest
 from metashare.storage.models import StorageObject, _validate_valid_xml, \
     update_resource, MASTER, REMOTE, PROXY, IllegalAccessException
 from metashare import settings, test_utils
-from metashare.settings import DJANGO_BASE
+from metashare.settings import DJANGO_BASE, LOG_HANDLER
 import json
 from metashare.repository.models import resourceInfoType_model
 from datetime import date
 from metashare.test_utils import set_index_active
 
+# Setup logging support.
+LOGGER = logging.getLogger(__name__)
+LOGGER.addHandler(LOG_HANDLER)
+
 class StorageObjectTestCase(unittest.TestCase):
     """
     Test case that checks the StorageObject model implementation.
     """
+    @classmethod
+    def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
+        
+    @classmethod
+    def tearDownClass(cls):
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
+        
     def setUp(self):
         """
         Creates a new storage object instance for testing.
@@ -160,11 +169,13 @@ class UpdateTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
         set_index_active(False)
     
     @classmethod
     def tearDownClass(cls):
         set_index_active(True)
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
 
     def setUp(self):
         """

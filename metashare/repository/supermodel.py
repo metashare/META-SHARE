@@ -1,33 +1,28 @@
-"""
-Project: META-SHARE prototype implementation
- Author: Christian Federmann <cfedermann@dfki.de>
-"""
+import datetime
 import logging
 import re
-import sys
-import inspect
-
-from django.core.cache import cache
-from django.core.exceptions import ValidationError, ObjectDoesNotExist, \
-  ImproperlyConfigured
-from django.db.models.fields import related
-from django.db import models, IntegrityError
+from Queue import Queue
 from traceback import format_exc
 from xml.etree.ElementTree import Element, fromstring, tostring
 
-from metashare.repository.fields import MultiSelectField, MultiTextField, \
-  MetaBooleanField, DictField
-
-from metashare.settings import LOG_LEVEL, LOG_HANDLER, \
-  CHECK_FOR_DUPLICATE_INSTANCES
+from django.core.cache import cache
+from django.core.exceptions import ValidationError, ObjectDoesNotExist, \
+    ImproperlyConfigured
+from django.db import models, IntegrityError
+from django.db.models.fields import related
 from django.db.models.fields.related import ForeignRelatedObjectsDescriptor, \
     OneToOneField
-from Queue import Queue
+
+from metashare.repository.fields import MultiSelectField, MultiTextField, \
+    MetaBooleanField, DictField
+from metashare.settings import LOG_HANDLER, \
+    CHECK_FOR_DUPLICATE_INSTANCES
 from metashare.storage.models import MASTER
+from metashare.utils import SimpleTimezone, prettify_camel_case_string
+
 
 # Setup logging support.
-logging.basicConfig(level=LOG_LEVEL)
-LOGGER = logging.getLogger('metashare.repository.supermodel')
+LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 
 # cfedermann: this prevents a bug with PostgreSQL databases and Django 1.3
@@ -51,8 +46,10 @@ METASHARE_ID_REGEXP = re.compile('<metashareId>.+</metashareId>',
 
 OBJECT_XML_CACHE = {}
 
+# This import is required for at least an `eval` in the `_classify` function:
 # pylint: disable-msg=W0611
 from metashare import repository
+
 
 def _remove_namespace_from_tags(element_tree):
     """
@@ -81,12 +78,14 @@ def _make_choices_from_list(source_list):
 
     Returns a dictionary containing two keys:
     - max_length: the maximum char length for this source list,
-    - choices: the list of (index, value) tuple choices.
+    - choices: the list of (value, pretty_print_value) tuple choices.
     """
     _choices = []
-    for index, value in enumerate(source_list):
-        _choices.append((str(index), value))
-    return {'max_length': len(_choices)/10+1, 'choices': tuple(_choices)}
+    _max_len = 1
+    for value in source_list:
+        _choices.append((value, prettify_camel_case_string(value)))
+        _max_len = max(_max_len, len(value))
+    return {'max_length': _max_len, 'choices': tuple(_choices)}
 
 def _make_choices_from_int_list(source_list):
     """
@@ -101,19 +100,6 @@ def _make_choices_from_int_list(source_list):
         _choices.append((value, value))
     return {'max_length': len(_choices)/10+1, 'choices': tuple(_choices)}
 
-def get_classes(module_name):
-    """
-    Returns class' name in a module.
-    If class' name ends with "Type_model", the trailing characters are removed.
-    """
-    models_list = []
-    for name, obj in inspect.getmembers(sys.modules["{}.models".format(module_name)]):
-        if inspect.isclass(obj):
-            if name.endswith("Type_model"):
-                models_list.append(name[:-10])
-            else:
-                models_list.append(name)
-    return models_list
 
 class SchemaModel(models.Model):
     """
@@ -130,10 +116,6 @@ class SchemaModel(models.Model):
         This is an abstract super class for all schema models.
         """
         abstract = True
-
-    @classmethod
-    def get_schema_name(cls):
-        return type(self).__schema_name__
 
     @classmethod
     def is_required_field(cls, name):
@@ -239,6 +221,18 @@ class SchemaModel(models.Model):
                 return remote.related.model._meta.verbose_name
             return fieldname
 
+    @classmethod
+    def is_choice(cls, fieldname):
+        """
+        Checks if the given field contains choices.
+        """
+        try:
+            field = cls._meta.get_field(fieldname)
+            _choices = field.choices
+            return len(_choices) != 0
+        except:
+            return False
+
     @staticmethod
     def _python_to_xml(value):
         """
@@ -270,8 +264,9 @@ class SchemaModel(models.Model):
 
         result = value
 
-        # Handle fields with choices as we need to convert the current value
-        # to the database representation value of the respective choice.
+        # Handle certain fields with choices specially as we need to convert the
+        # current value to the database representation value of the respective
+        # choice.
         if len(field.choices) > 0:
             # MetaBooleanField instances are a special case: here, we need to
             # return either 'Yes' or 'No', depending on the given value.
@@ -285,16 +280,6 @@ class SchemaModel(models.Model):
                 else:
                     LOGGER.error(u'Value {} not a valid MetaBooleanField ' \
                       'choice for {}'.format(repr(value), field.name))
-
-            else:
-                for _db_value, _readable_value in field.choices:
-                    if _readable_value == value:
-                        result = _db_value
-
-                if result == value \
-                        and not isinstance(field, models.IntegerField):
-                    LOGGER.error(u'Value {} not found in choices for ' \
-                      '{}'.format(repr(value), field.name))
 
         elif isinstance(field, models.BooleanField) \
           or isinstance(field, models.NullBooleanField):
@@ -315,15 +300,23 @@ class SchemaModel(models.Model):
 
         return result
 
-    def export_to_elementtree(self):
+    def export_to_elementtree(self, pretty=False):
         """
-        Exports this instance to an XML ElementTree.
+        Exports this instance to an XML ElementTree. If pretty is True, XML
+        elements include an additional attribute 'pretty' with the pretty-print
+        name as defined in the model.
         """
         if self.__schema_name__ == "SUBCLASSABLE":
             # pylint: disable-msg=E1101
-            return self.as_subclass().export_to_elementtree()
+            return self.as_subclass().export_to_elementtree(pretty=pretty)
 
         _root = Element(self.__schema_name__)
+        
+        if pretty:
+            try:
+                _root.attrib["pretty"] = self._meta.verbose_name
+            except AttributeError:
+                _root.attrib["pretty"] = _root.tag
 
         # Fix namespace attributes for the resourceInfo root element.
         if _root.tag == 'resourceInfo':
@@ -343,16 +336,8 @@ class SchemaModel(models.Model):
         # representative XSD, still more clever value handling might actually
         # be required for version v2; depends on the final schema...
         for _xsd_attr, _model_field, _not_used in self.__schema_attrs__:
-            try:
-                # First, we check if there is a get_FOO_display() method.
-                _func = getattr(self, 'get_{0}_display'.format(_model_field))
-
-                # If so, we call this method to determine the current value.
-                _value = _func()
-
-            except AttributeError:
-                # Otherwise, we try to retrieve the value via getattr().
-                _value = getattr(self, _model_field, None)
+            # Try to retrieve the value via getattr().
+            _value = getattr(self, _model_field, None)
 
             # If a value could be found, it becomes an attribute of the node.
             if _value is not None:
@@ -364,14 +349,8 @@ class SchemaModel(models.Model):
         # Then, we loop over all schema fields, retrieve their values and put
         # XML-ified versions of these values into the XML tree.
         for _xsd_field, _model_field, _not_used in self.__schema_fields__:
-            try:
-                # Again, we first check for a get_FOO_display() method.
-                _func = getattr(self, 'get_{0}_display'.format(_model_field))
-                _value = _func()
-
-            except AttributeError:
-                # Only falling back to getattr() if it doesn't exist.
-                _value = getattr(self, _model_field, None)
+            # Try to retrieve the value via getattr().
+            _value = getattr(self, _model_field, None)
 
             if _value is not None and _value != "":
                 _model_set_value = _model_field.endswith('_model_set')
@@ -386,13 +365,8 @@ class SchemaModel(models.Model):
                 if isinstance(_field, MetaBooleanField):
                     _value = getattr(self, _model_field, [])
 
-                # For MultiSelectFields, we call get_FOO_display_list().
+                # Sort MultiSelectField values to allow comparison.
                 elif isinstance(_field, MultiSelectField):
-                    _func = getattr(self, 'get_{0}_display_list'.format(
-                      _model_field))
-                    _value = _func()
-                    
-                    # Sort MultiSelectField values to allow comparison!
                     _value.sort()
 
                 # For DictFields, we convert the dict to a list of tuples.
@@ -446,6 +420,8 @@ class SchemaModel(models.Model):
 
                             if _element is None:
                                 _element = Element(_tag)
+                                if pretty:
+                                    _element.attrib["pretty"] = self.get_verbose_name(_model_field)
                                 _current_node.append(_element)
 
                             _current_node = _element
@@ -457,15 +433,25 @@ class SchemaModel(models.Model):
                     if isinstance(_sub_value, SchemaModel):
                         if _sub_value.__schema_name__ == "STRINGMODEL":
                             _element = Element(_xsd_name)
-                            _element.text = SchemaModel._python_to_xml(_sub_value.value)
+                            _element_text = SchemaModel._python_to_xml(_sub_value.value)
+                            if pretty:
+                                _element.attrib["pretty"] = self.get_verbose_name(_model_field)
+                                if self.is_choice(_model_field):
+                                    _element_text = prettify_camel_case_string(_element_text)
+                            _element.text = _element_text
                             _current_node.append(_element)
 
                         else:
-                            _sub_value = _sub_value.export_to_elementtree()
+                            _sub_value = _sub_value.export_to_elementtree(pretty=pretty)
 
                             # We fix the sub value's tag as it may be "wrong".
                             # E.g., PersonInfo is sometimes called contactPerson.
                             _sub_value.tag = _xsd_name
+                            if pretty:
+                                # use the pretty-print name of the field instead
+                                # of the one of the complex value, 
+                                # e.g. "Contact Person" instead of just "Person"
+                                _sub_value.attrib["pretty"] = self.get_verbose_name(_model_field)
 
                             # And append the sub structure to the current node.
                             _current_node.append(_sub_value)
@@ -473,11 +459,13 @@ class SchemaModel(models.Model):
                     # Simple values are added to a new element and appended.
                     else:
                         _element = Element(_xsd_name)
+                        if pretty:
+                            _element.attrib["pretty"] = self.get_verbose_name(_model_field)
                         if isinstance(_sub_value, tuple):
                             # tuple values come from DictFields with an RFC 3066
                             # language code key
                             _element.set('lang', _sub_value[0])
-                            _element.text = SchemaModel._python_to_xml(
+                            _element_text = SchemaModel._python_to_xml(
                                                                 _sub_value[1])                            
                             if self.is_required_field(_model_field):
                                 # If the element is "required" in the model,
@@ -488,13 +476,17 @@ class SchemaModel(models.Model):
                             else:
                                 _element.required = False
                         else:
-                            _element.text = SchemaModel._python_to_xml(
+                            _element_text = SchemaModel._python_to_xml(
                                                                 _sub_value)                            
                             if self.is_required_field(_model_field):
                                 _element.required = self.is_required_field(
                                                                 _model_field)
                             else:
                                 _element.required = False
+                        if pretty:
+                            if self.is_choice(_model_field):
+                                _element_text = prettify_camel_case_string(_element_text)
+                        _element.text = _element_text
                         _current_node.append(_element)
 
         # Return root node of the ElementTree; can be converted to String
@@ -701,7 +693,7 @@ class SchemaModel(models.Model):
         as first value and the list of all objects that have been created when
         import the given XML ElementTree as second value.
 
-        Returns (None, []) in case of errors.
+        Returns (None, [], error_msg) in case of errors.
         """
         LOGGER.debug(u'parent: {0}'.format(parent))
         
@@ -873,18 +865,19 @@ class SchemaModel(models.Model):
                             # list with correct status: 'D' if it was a
                             # duplicate, 'C' otherwise.
                             if _was_duplicate:
-                                _created.append((_instance, 'D'))
-
                                 # If we are allowed to perform cleanup, we do
                                 # so and also replace our _instance instance
                                 # with the "original" object.
                                 if _delete_duplicate_objects:
-                                    _created = SchemaModel._cleanup(_created,
+                                    SchemaModel._cleanup([(_instance, 'D')],
                                       only_remove_duplicates=True)
 
                                     # Replace _instance with "original".
                                     _instance = _duplicates[0]
                                     _created.append((_instance, 'O'))
+
+                                else:
+                                    _created.append((_instance, 'D'))
 
                             else:
                                 _created.append((_instance, 'C'))
@@ -1028,16 +1021,44 @@ class SchemaModel(models.Model):
             # Otherwise, we are handling a single-valued field.  Similar to
             # ForeignKey fields, this can be handled using setattr().
             elif _field is not None:
-                try:
-                    # assert(len(_values) == 1)
-                    setattr(_object, _model_field, _values[0])
-
-                except AssertionError:
+                if len(_values) != 1:
                     _msg = u'Single value required: {0}:{1}'.format(
                       _model_field, _values)
                     LOGGER.error(_msg)
                     SchemaModel._cleanup(_created)
                     return (None, [], _msg)
+
+                # For dates we have to use a slightly more advanced parser than
+                # the standard DateField parser which does not allow some
+                # correct xsd:date values with timezones, such as "2012-08-22Z"
+                # or "2012-08-22+02:00"
+                if isinstance(_field, models.DateField):
+                    _match = re.match(r""" ^
+                        # year - month - day
+                        (?P<year>-?\d{4}) - (?P<month>\d{2}) - (?P<day>\d{2})
+                        # timezone ('Z' or anything <= 14:00) 
+                        (?P<tz> Z | 14:00 |
+                          (?P<tz_hr>[\-\+](?:0\d|1[0123])):(?P<tz_mn>[0-5]\d))?
+                        $ """, _values[0], re.X)
+                    if _match is None:
+                        _msg = u'Invalid xsd:date value found for {0}: {1}' \
+                            .format(_model_field, _values)
+                        LOGGER.error(_msg)
+                        SchemaModel._cleanup(_created)
+                        return (None, [], _msg)
+                    _parts = _match.groupdict()
+                    if _parts.get('tz', None) in ('Z', None):
+                        tzone = SimpleTimezone(0)
+                    elif _parts.get('tz', None) == '14:00':
+                        tzone = SimpleTimezone(14 * 60)
+                    else:
+                        tzone = SimpleTimezone(int(_parts.get('tz_hr')) * 60
+                                               + int(_parts.get('tz_mn')))
+                    _value = datetime.datetime(int(_parts['year']),
+                        int(_parts['month']), int(_parts['day']), tzinfo=tzone)
+                else:
+                    _value = _values[0]
+                setattr(_object, _model_field, _value)
 
         # This raises a django.db.IntegrityError if the current object does
         # not validate;  if that is the  case, we have to rollback any changes
@@ -1118,7 +1139,12 @@ class SchemaModel(models.Model):
         as first value and the list of all objects that have been created when
         import the given XML ElementTree as second value.
 
-        Returns (None, []) in case of errors.
+        Note that the storage object of an imported resource which had already
+        been imported previously but had been deleted later on, may still have
+        the deletion flag set to `True` (and may possibly have other storage
+        object fields with older values)!
+
+        Returns (None, [], error_msg) in case of errors.
         """
         return cls.import_from_elementtree(fromstring(element_string),
           parent=parent, copy_status=copy_status)
@@ -1130,10 +1156,17 @@ class SchemaModel(models.Model):
     def get_unicode_rec_(self, field_path, separator):
         field_spec = field_path[0]
         if len(field_path) == 1:
-            value = getattr(self, field_spec, None)
-            if not value:
+            if not any(field_spec == xsd_name
+                       for xsd_name, _, _ in self.__schema_fields__):
                 return u''
-            model_field = self._meta.get_field_by_name(field_spec)
+            field_name = (field_name for xsd_name, field_name, _
+                    in self.__schema_fields__ if xsd_name == field_spec).next()
+            value = getattr(self, field_name, None)
+            if field_name.endswith('_set'):
+                field_name = field_name[:-4]
+            if not value:
+                return u'?'
+            model_field = self._meta.get_field_by_name(field_name)
             if isinstance(model_field[0], models.CharField) or \
               isinstance(model_field[0], MultiSelectField):
                 # see if it's an enum CharField with options and return the
@@ -1149,7 +1182,8 @@ class SchemaModel(models.Model):
                 return getattr(self, 'get_default_{}'.format(field_spec))()
             if hasattr(value, 'all') and \
               hasattr(getattr(value, 'all'), '__call__'):
-                return separator.join([u'{}'.format(child) for child in value.all()])
+                return separator.join(
+                    [u'{}'.format(child) for child in value.all()] or u'?')
             else:
                 try:
                     return separator.join([u'{}'.format(child) for child in value])

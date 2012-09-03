@@ -1,14 +1,28 @@
+import logging
+
 from django.test import TestCase
 from django.test.client import Client
 
 from metashare import test_utils
-from metashare.settings import DJANGO_BASE, ROOT_PATH, DJANGO_URL, SITEMAP_URL
+from metashare.settings import DJANGO_BASE, ROOT_PATH, DJANGO_URL, SITEMAP_URL, \
+    LOG_HANDLER
 
+# Setup logging support.
+LOGGER = logging.getLogger(__name__)
+LOGGER.addHandler(LOG_HANDLER)
 
 class SEOTest(TestCase):
     """
     Check the sitemap's and robots.txt's format
     """
+
+    @classmethod
+    def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
+        
+    @classmethod
+    def tearDownClass(cls):
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
 
     def test_sitemap(self):
         """
@@ -16,7 +30,7 @@ class SEOTest(TestCase):
         """
        
         imported_res = test_utils.import_xml('{}/repository/fixtures/'
-          'testfixture.xml'.format(ROOT_PATH))[0]
+          'testfixture.xml'.format(ROOT_PATH))
         imported_res.storage_object.published = True
         imported_res.storage_object.save()
         client = Client()

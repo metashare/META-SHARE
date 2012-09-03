@@ -1,7 +1,3 @@
-"""
-Project: META-SHARE prototype implementation
-Author: Christian Federmann <cfedermann@dfki.de>
-"""
 from os.path import abspath, dirname
 ROOT_PATH = abspath(dirname(__file__))
 
@@ -32,6 +28,9 @@ else:
         encoding="utf-8")
 LOG_HANDLER.setLevel(level=LOG_LEVEL)
 LOG_HANDLER.setFormatter(LOG_FORMATTER)
+
+# init root logger
+logging.basicConfig(format=LOG_FORMAT, datefmt=LOG_DATE, level=LOG_LEVEL)
 
 # Maximum size of files uploaded as resrouce data.
 # The default is a cautious value in order to protect the server
@@ -143,6 +142,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.media',
     'django.contrib.messages.context_processors.messages',
+    "django.core.context_processors.request",
 )
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
