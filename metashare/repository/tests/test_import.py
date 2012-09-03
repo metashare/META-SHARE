@@ -1,4 +1,5 @@
 import os
+import logging
 
 from django.contrib.auth.models import User
 from django.test import TestCase
@@ -8,8 +9,11 @@ from metashare import test_utils
 from metashare.accounts.models import EditorGroup
 from metashare.repository.models import documentUnstructuredString_model, \
     documentInfoType_model
-from metashare.settings import DJANGO_BASE, ROOT_PATH
+from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER
 
+# Setup logging support.
+LOGGER = logging.getLogger(__name__)
+LOGGER.addHandler(LOG_HANDLER)
 
 class ImportTest(TestCase):
     """
@@ -21,11 +25,13 @@ class ImportTest(TestCase):
     
     @classmethod
     def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
         test_utils.set_index_active(False)
 
     @classmethod
     def tearDownClass(cls):
         test_utils.set_index_active(True)
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
         
     def setUp(self):
         """

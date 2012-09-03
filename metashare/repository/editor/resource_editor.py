@@ -317,8 +317,7 @@ ingest_resources.short_description = _("Ingest selected internal resources")
 def export_xml_resources(modeladmin, request, queryset):
     from StringIO import StringIO
     from zipfile import ZipFile
-    from xml.etree import ElementTree
-    from metashare.xml_utils import pretty_xml
+    from metashare.xml_utils import to_xml_string
     from django import http
 
     zipfilename = "resources_export.zip"
@@ -328,10 +327,9 @@ def export_xml_resources(modeladmin, request, queryset):
         for obj in queryset:
             try:
                 root_node = obj.export_to_elementtree()
-                xml_string = ElementTree.tostring(root_node, encoding="utf-8")
-                pretty = pretty_xml(xml_string).encode('utf-8')
+                xml_string = to_xml_string(root_node, encoding="utf-8").encode("utf-8")
                 resource_filename = 'resource-{0}.xml'.format(obj.storage_object.id)
-                zipfile.writestr(resource_filename, pretty)
+                zipfile.writestr(resource_filename, xml_string)
     
             except Exception:
                 raise Http404(_('Could not export resource "%(name)s" with primary key %(key)s.') \
@@ -460,7 +458,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                      }
         dictionary.update(create_breadcrumb_template_params(self.model, _('Delete resource')))
     
-        return render_to_response('admin/repository/resourceinfotype_model/confirm_delete.html',
+        return render_to_response('admin/repository/resourceinfotype_model/delete_selected_confirmation.html',
                                   dictionary,
                                   context_instance=RequestContext(request))
 
@@ -851,17 +849,15 @@ class ResourceModelAdmin(SchemaModelAdmin):
             raise Http404(_('%(name)s object with primary key %(key)s does not exist anymore.') \
               % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
-        from xml.etree import ElementTree
-        from metashare.xml_utils import pretty_xml
+        from metashare.xml_utils import to_xml_string
         from django import http
 
         try:
             root_node = obj.export_to_elementtree()
-            xml_string = ElementTree.tostring(root_node, encoding="utf-8")
-            pretty = pretty_xml(xml_string).encode('utf-8')
+            xml_string = to_xml_string(root_node, encoding="utf-8").encode('utf-8')
             resource_filename = 'resource-{0}.xml'.format(object_id)
         
-            response = http.HttpResponse(pretty, mimetype='text/xml')
+            response = http.HttpResponse(xml_string, mimetype='text/xml')
             response['Content-Disposition'] = 'attachment; filename=%s' % (resource_filename)
             return response
 

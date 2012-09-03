@@ -1,13 +1,8 @@
-'''
-Created on 29.05.2012
-
-@author: steffen
-'''
 from django.core.management import call_command
 from django.test.testcases import TestCase
 from metashare import settings, test_utils
 from metashare.repository.models import resourceInfoType_model
-from metashare.settings import ROOT_PATH
+from metashare.settings import ROOT_PATH, LOG_HANDLER
 from metashare.storage.models import StorageObject, restore_from_folder, \
 MASTER, INGESTED, INTERNAL, update_digests, compute_digest_checksum
 # pylint: disable-msg=E0611
@@ -17,7 +12,12 @@ import zipfile
 from xml.etree.ElementTree import ParseError
 import shutil
 import time
+import logging
 from zipfile import ZipFile
+
+# Setup logging support.
+LOGGER = logging.getLogger(__name__)
+LOGGER.addHandler(LOG_HANDLER)
 
 TESTFIXTURE_XML = '{}/repository/fixtures/ILSP10.xml'.format(ROOT_PATH)
 
@@ -38,6 +38,7 @@ class PersistenceTest(TestCase):
     
     @classmethod
     def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
         test_utils.set_index_active(False)
         test_utils.setup_test_storage()
         # copy fixtures to storage folder
@@ -48,6 +49,7 @@ class PersistenceTest(TestCase):
         # delete content of storage folder
         test_utils.clean_storage()
         test_utils.set_index_active(True)
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
     
     def setUp(self):
         # make sure the index does not contain any stale entries
@@ -63,7 +65,7 @@ class PersistenceTest(TestCase):
         """
         # load test fixture; its initial status is 'internal'
         _result = test_utils.import_xml(TESTFIXTURE_XML)
-        resource = resourceInfoType_model.objects.get(pk=_result[0].id)
+        resource = resourceInfoType_model.objects.get(pk=_result.id)
         _storage_object = resource.storage_object
         _storage_object.update_storage()
         # initial status is 'internal'
@@ -115,6 +117,7 @@ class RestoreTest(TestCase):
     
     @classmethod
     def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
         test_utils.set_index_active(False)
         test_utils.setup_test_storage()
         # copy fixtures to storage folder
@@ -125,6 +128,7 @@ class RestoreTest(TestCase):
         # delete content of storage folder
         test_utils.clean_storage()
         test_utils.set_index_active(True)
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
     
     def setUp(self):
         # make sure the index does not contain any stale entries
@@ -254,6 +258,7 @@ class UpdateTest(TestCase):
     
     @classmethod
     def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
         test_utils.set_index_active(False)
         test_utils.setup_test_storage()
 
@@ -262,6 +267,7 @@ class UpdateTest(TestCase):
         # delete content of storage folder
         test_utils.clean_storage()
         test_utils.set_index_active(True)
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
     
     def setUp(self):
         # make sure the index does not contain any stale entries
@@ -276,26 +282,26 @@ class UpdateTest(TestCase):
         settings.MAX_DIGEST_AGE = 6
         # import resource
         _result = test_utils.import_xml(TESTFIXTURE_XML)
-        _so = resourceInfoType_model.objects.get(pk=_result[0].id).storage_object
+        _so = resourceInfoType_model.objects.get(pk=_result.id).storage_object
         self.assertIsNone(_so.digest_last_checked)
         # set status to ingested
         _so.publication_status = INGESTED
         _so.update_storage()
-        _so = resourceInfoType_model.objects.get(pk=_result[0].id).storage_object
+        _so = resourceInfoType_model.objects.get(pk=_result.id).storage_object
         self.assertIsNotNone(_so.digest_last_checked)
         # remember 'last_checked' and 'modified' to compare against it later
         _last_checked = _so.digest_last_checked
         _modified = _so.digest_modified
         # check if an update is required; this is not the case
         update_digests()
-        _so = resourceInfoType_model.objects.get(pk=_result[0].id).storage_object
+        _so = resourceInfoType_model.objects.get(pk=_result.id).storage_object
         # check that digest was not updated
         self.assertEquals(_modified, _so.digest_modified)
         self.assertEquals(_last_checked, _so.digest_last_checked)
         # wait 3 seconds and check again
         time.sleep(3)
         update_digests()
-        _so = resourceInfoType_model.objects.get(pk=_result[0].id).storage_object
+        _so = resourceInfoType_model.objects.get(pk=_result.id).storage_object
         # now an update should have happened, but the underlying data has not 
         # changed, so digest_modified is not changed
         self.assertEquals(_modified, _so.digest_modified)

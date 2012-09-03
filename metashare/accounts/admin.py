@@ -1,7 +1,3 @@
-"""
-Project: META-SHARE prototype implementation
- Author: Christian Federmann <cfedermann@dfki.de>
-"""
 from django import forms
 from django.contrib import admin, messages
 from django.contrib.admin.options import csrf_protect_m
@@ -194,7 +190,7 @@ class EditorGroupAdmin(admin.ModelAdmin):
             form = self.UserProfileinEditorGroupForm(choices=userprofiles,
                 initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
         
-        dictionary = {
+        dictionary = {'title': _('Add Users to Editor Group'),
                       'selected_editorgroups': queryset,
                       'form': form,
                       'path': request.get_full_path()
@@ -229,7 +225,7 @@ class EditorGroupAdmin(admin.ModelAdmin):
                 form = self.UserProfileinEditorGroupForm(choices=userprofiles,
                     initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
         
-            dictionary = {
+            dictionary = {'title': _('Remove Users from Editor Group'),
                           'selected_editorgroups': queryset,
                           'form': form,
                           'path': request.get_full_path()
@@ -510,7 +506,7 @@ class EditorGroupManagersAdmin(admin.ModelAdmin):
                 form = self.UserProfileinEditorGroupManagersForm(choices=userprofiles,
                     initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
             
-            dictionary = {
+            dictionary = {'title': _('Add Users to Editor Group Managers'),
                           'selected_editorgroupmanagers': queryset,
                           'form': form,
                           'path': request.get_full_path()
@@ -551,7 +547,7 @@ class EditorGroupManagersAdmin(admin.ModelAdmin):
                 form = self.UserProfileinEditorGroupManagersForm(choices=userprofiles,
                     initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
         
-            dictionary = {
+            dictionary = {'title': _('Remove Users from Editor Group Managers'),
                           'selected_editorgroupmanagers': queryset,
                           'form': form,
                           'path': request.get_full_path()
@@ -650,7 +646,7 @@ class OrganizationAdmin(admin.ModelAdmin):
             form = self.UserProfileinOrganizationForm(choices=userprofiles,
                 initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
         
-            dictionary = {
+            dictionary = {'title': _('Add Users to Organization'),
                           'selected_organizations': queryset,
                           'form': form,
                           'path': request.get_full_path()
@@ -685,7 +681,7 @@ class OrganizationAdmin(admin.ModelAdmin):
                 form = self.UserProfileinOrganizationForm(choices=userprofiles,
                     initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
         
-            dictionary = {
+            dictionary = {'title': _('Remove Users from Organization'),
                           'selected_organizations': queryset,
                           'form': form,
                           'path': request.get_full_path()
@@ -959,7 +955,7 @@ class OrganizationManagersAdmin(admin.ModelAdmin):
                 form = self.UserProfileinOrganizationManagersForm(choices=userprofiles,
                     initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
             
-            dictionary = {
+            dictionary = {'title': _('Add Users to Organization Manager Group'),
                           'selected_organizationmanagers': queryset,
                           'form': form,
                           'path': request.get_full_path()
@@ -998,7 +994,8 @@ class OrganizationManagersAdmin(admin.ModelAdmin):
                 form = self.UserProfileinOrganizationManagersForm(choices=userprofiles,
                     initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
         
-            dictionary = {
+            dictionary = {'title':
+                            _('Remove Users from Organization Manager Group'),
                           'selected_organizationmanagers': queryset,
                           'form': form,
                           'path': request.get_full_path()

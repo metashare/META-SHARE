@@ -1,10 +1,5 @@
 #!/usr/bin/env python
-"""
-Created on 05.06.2012
 
-@author: Joerg Steffen, DFKI <steffen@dfki.de>
-@author: Christian Federmann <cfedermann@dfki.de>
-"""
 import os
 import sys
 

@@ -1,8 +1,3 @@
-"""
-Project: META-SHARE prototype implementation
- Author: Christian Spurk <cspurk@dfki.de>
-"""
-
 from haystack.routers import DefaultRouter
 from metashare.settings import TEST_MODE_NAME
 

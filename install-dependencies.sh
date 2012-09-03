@@ -39,17 +39,6 @@ else
   fi  
 fi
 
-for package in 'Imaging-1.1.7' ; do
-  cd $BASEDIR/installable-packages
-  echo "Unpacking $package..."
-  tar xzf $package.tar.gz
-  cd $package
-  echo "Compiling $package..."
-  $PYTHON setup.py build
-  echo "Installing $package..."
-  $PYTHON setup.py install --prefix ../..
-done
-
 echo
 echo
 echo "Installation of META-SHARE dependencies complete."

@@ -1,16 +1,15 @@
-'''
-Created on 20.07.2012
-
-@author: steffen
-'''
+import logging
 from metashare.repository.forms import _extract_special_queries, \
     _process_special_query, MORE_FROM_SAME_CREATORS, MORE_FROM_SAME_PROJECTS
 from metashare import test_utils
 from metashare.recommendations.tests import _import_resource
 import django.test
 from django.test.client import Client
-from metashare.settings import DJANGO_BASE
+from metashare.settings import DJANGO_BASE, LOG_HANDLER
 
+# Setup logging support.
+LOGGER = logging.getLogger(__name__)
+LOGGER.addHandler(LOG_HANDLER)
 
 class SpecialQueryTest(django.test.TestCase):
 
@@ -19,6 +18,14 @@ class SpecialQueryTest(django.test.TestCase):
     res_2 = None
     res_3 = None
     res_4 = None
+    
+    @classmethod
+    def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
+        
+    @classmethod
+    def tearDownClass(cls):
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
     
     def setUp(self):
         """

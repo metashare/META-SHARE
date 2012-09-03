@@ -28,11 +28,8 @@ from metashare.repository.editor.schemamodel_mixin import SchemaModelLookup
 from metashare.storage.models import MASTER
 from metashare.repository.model_utils import get_root_resources
 from metashare.repository.supermodel import REQUIRED, RECOMMENDED, OPTIONAL
-
-
 # Setup logging support.
-logging.basicConfig(level=settings.LOG_LEVEL)
-LOGGER = logging.getLogger('metashare.repository.superadmin')
+LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(settings.LOG_HANDLER)
 
 csrf_protect_m = method_decorator(csrf_protect)
@@ -126,6 +123,8 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         if self.is_x_to_many_relation(db_field):
             return self.formfield_for_relation(db_field, **kwargs)
         self.use_hidden_widget_for_one2one(db_field, kwargs)
+        lang_widget = self.add_lang_widget(db_field)
+        kwargs.update(lang_widget)
         formfield = super(SchemaModelAdmin, self).formfield_for_dbfield(db_field, **kwargs)
         self.use_related_widget_where_appropriate(db_field, kwargs, formfield)
         return formfield
@@ -166,7 +165,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         '''
         if '_popup' in request.REQUEST:
             if request.POST.has_key("_continue"):
-                return self.response_add(request, obj)
+                return self.save_and_continue_in_popup(obj, request)
             return self.edit_response_close_popup_magic(obj)
         elif '_popup_o2m' in request.REQUEST:
             caller = None
@@ -188,6 +187,13 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         return HttpResponseRedirect("../../")
 
 
+    def set_required_formset(self, formset):
+        req_forms = formset.forms
+        for req_form in req_forms:
+            if not 'DELETE' in req_form.changed_data:
+                req_form.empty_permitted = False
+                break
+        
     @csrf_protect_m
     @transaction.commit_on_success
     def add_view(self, request, form_url='', extra_context=None):
@@ -236,7 +242,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                                   prefix=prefix, queryset=inline.queryset(request))
                 #### begin modification ####
                 if prefix in self.model.get_fields()['required']:
-                    formset.forms[0].empty_permitted = False
+                    self.set_required_formset(formset)
                 #### end modification ####
                 formsets.append(formset)
             if all_valid(formsets) and form_validated:
@@ -268,10 +274,6 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                 #### end modification ####
 
                 self.log_addition(request, new_object)
-                #### begin modification ####
-                if request.POST.has_key("_continue"):
-                    return self.save_and_continue_in_popup(new_object, request)
-                #### end modification ####
                 return self.response_add(request, new_object)
         else:
             # Prepare the dict of initial data from the request.
@@ -298,10 +300,6 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                     prefix = "%s-%s" % (prefix, prefixes[prefix])
                 formset = FormSet(instance=self.model(), prefix=prefix,
                                   queryset=inline.queryset(request))
-                #### begin modification ####
-                if prefix in self.model.get_fields()['required']:
-                    formset.forms[0].empty_permitted = False
-                #### end modification ####    
                 formsets.append(formset)
 
         #### begin modification ####
@@ -313,6 +311,9 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             readonly = list(inline.get_readonly_fields(request))
             inline_admin_formset = helpers.InlineAdminFormSet(inline, formset,
                 fieldsets, readonly, model_admin=self)
+            #### begin modification ####
+            self.add_lang_templ_params(inline_admin_formset)
+            #### end modification ####
             inline_admin_formsets.append(inline_admin_formset)
             media = media + inline_admin_formset.media
 
@@ -396,7 +397,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                                   queryset=inline.queryset(request))
                 #### begin modification ####
                 if prefix in self.model.get_fields()['required']:
-                    formset.forms[0].empty_permitted = False
+                    self.set_required_formset(formset)
                 #### end modification ####    
 
                 formsets.append(formset)
@@ -447,10 +448,6 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                     prefix = "%s-%s" % (prefix, prefixes[prefix])
                 formset = FormSet(instance=obj, prefix=prefix,
                                   queryset=inline.queryset(request))
-                #### begin modification ####
-                if prefix in self.model.get_fields()['required']:
-                    formset.forms[0].empty_permitted = False
-                #### end modification ####    
                 formsets.append(formset)
 
         #### begin modification ####
@@ -462,6 +459,9 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             readonly = list(inline.get_readonly_fields(request, obj))
             inline_admin_formset = helpers.InlineAdminFormSet(inline, formset,
                 fieldsets, readonly, model_admin=self)
+            #### begin modification ####
+            self.add_lang_templ_params(inline_admin_formset)
+            #### end modification ####
             inline_admin_formsets.append(inline_admin_formset)
             media = media + inline_admin_formset.media
 

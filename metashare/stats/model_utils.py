@@ -7,7 +7,7 @@ from metashare.stats.geoip import getcountry_code, getcountry_name
 from django.db.models import Count, Sum
 from django.contrib.auth.models import User
 from datetime import datetime
-from metashare.settings import LOG_LEVEL, LOG_HANDLER
+from metashare.settings import LOG_HANDLER
 from math import trunc
 
 USAGETHREADNAME = "usagethread"
@@ -24,18 +24,20 @@ STAT_LABELS = {UPDATE_STAT: "update", VIEW_STAT: "view", RETRIEVE_STAT: "retriev
 VISIBLE_STATS = [UPDATE_STAT, VIEW_STAT, RETRIEVE_STAT, DOWNLOAD_STAT]
     
 # Setup logging support.
-logging.basicConfig(level=LOG_LEVEL)
-LOGGER = logging.getLogger('metashare.stats.model_utils')
+LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 
 
 def saveLRStats(resource, action, request=None): 
     """
-    this function saves the actions on a resource (it takes into account the session to avoid to increment more than one time the stats counter)
+    Saves the actions on a resource.
+    
+    Takes into account the session to avoid to increment more than one time the
+    stats counter. Returns whether the stats counter was incremented or not.
     """
+    result = False
     userid = _get_userid(request)
     sessid = _get_sessionid(request)
-    ipaddress =  _get_ipaddress(request)
     lrset = LRStats.objects.filter(userid=userid, lrid=resource.storage_object.identifier, sessid=sessid, action=action)
     if (lrset.count() > 0):
         record = lrset[0]
@@ -50,14 +52,16 @@ def saveLRStats(resource, action, request=None):
         record.lrid = resource.storage_object.identifier
         record.action = action
         record.sessid = sessid
-        record.geoinfo = getcountry_code(ipaddress)
+        record.geoinfo = getcountry_code(_get_ipaddress(request))
         record.save(force_insert=True)
         LOGGER.debug('SAVESTATS: Saved LR {0}, {1} action={2}.'.format(resource.storage_object.identifier, sessid, action))
+        result = True
     if action == UPDATE_STAT or action == PUBLISH_STAT:
         if (resource.storage_object.published):
             UsageStats.objects.filter(lrid=resource.id).delete()
             _update_usage_stats(resource.id, resource.export_to_elementtree())
             LOGGER.debug('STATS: Updating usage statistics: resource {0} updated'.format(resource.storage_object.identifier))
+    return result
  
 
 def saveQueryStats(query, facets, found, exectime=0, request=None): 

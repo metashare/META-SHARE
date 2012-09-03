@@ -1,13 +1,9 @@
 #!/usr/bin/env python
-"""
-Project: META-SHARE prototype implementation
- Author: Christian Federmann <cfedermann@dfki.de>
-"""
+
 import os
 import sys
 import traceback
 from zipfile import ZipFile
-from xml.etree import ElementTree
 
 # Magic python path, based on http://djangosnippets.org/snippets/281/
 from os.path import abspath, dirname, join
@@ -80,7 +76,7 @@ if __name__ == "__main__":
     ERRONEOUS_EXPORTS = 0
     RESOURCE_NO = 0
     from metashare.repository.models import resourceInfoType_model
-    from metashare.xml_utils import pretty_xml
+    from metashare.xml_utils import to_xml_string
     with ZipFile(sys.argv[1], 'w') as out:
         for resource in resourceInfoType_model.objects.all():
             # skip rsources marked as deleted
@@ -89,10 +85,10 @@ if __name__ == "__main__":
             try:
                 RESOURCE_NO += 1
                 root_node = resource.export_to_elementtree()
-                xml_string = ElementTree.tostring(root_node, encoding="utf-8")
-                pretty = pretty_xml(xml_string).encode('utf-8')
+                xml_string = to_xml_string(
+                  root_node, encoding="utf-8").encode('utf-8')
                 resource_filename = 'resource-{0}.xml'.format(RESOURCE_NO)
-                out.writestr(resource_filename, pretty)
+                out.writestr(resource_filename, xml_string)
                 SUCCESSFUL_EXPORTS += 1
             
             except Exception:

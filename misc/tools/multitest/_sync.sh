@@ -47,8 +47,8 @@ import_fileset_on_node()
 }
 
 # The import_files accept a parameter 'type' that can have the following values:
-#   inner : import files only on inner nodes
-#   outer : import files only on outer nodes
+#   inner : import files only on META-SHARE Managing Nodes (aka. inner nodes)
+#   outer : import files only on normal META-SHARE Nodes (aka. outer nodes)
 #   all (default): import files on all nodes
 import_files()
 {

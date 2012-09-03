@@ -1,6 +1,9 @@
 '''
-A number of utility functions and classes which do not easily fit into a single place.
-To avoid circular imports, this file must not import anything from metashare.repository.editor. 
+A number of utility functions and classes which do not easily fit into a single
+place.
+
+To avoid circular imports, this file must not import anything from
+metashare.repository.editor. 
 '''
 from django.db import models
 from django.contrib.admin.views.main import ChangeList
@@ -25,10 +28,11 @@ def is_inline(fieldname):
 
 class FilteredChangeList(ChangeList):
     """
-A FilteredChangeList filters the result_list for request.user objects.
-This implementation always filters; use the superclass ChangeList for
-unfiltered views.
-"""
+    A FilteredChangeList filters the result_list for request.user objects.
+    
+    This implementation always filters; use the superclass ChangeList for
+    unfiltered views.
+    """
     def __init__(self, request, model, list_display, list_display_links,
       list_filter, date_hierarchy, search_fields, list_select_related,
       list_per_page, list_editable, model_admin):

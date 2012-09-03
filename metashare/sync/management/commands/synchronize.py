@@ -192,8 +192,9 @@ class Command(BaseCommand):
             for removed_id in remote_inventory_removed:
                 if removed_id in local_inventory_indexed:
                     # remove resource from this node;
-                    # if it is a PROXY copy, also create a corresponding removed object,
-                    # so that the removal is propagated to other inner nodes
+                    # if it is a PROXY copy, also create a corresponding removed
+                    # object, so that the removal is propagated to other
+                    # META-SHARE Managing Nodes (aka. inner nodes)
                     sys.stdout.write("\nRemoving id {}...\n".format(removed_id))
                     removed_count += 1
                     _so_to_remove = StorageObject.objects.get(identifier=removed_id)
