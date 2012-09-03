@@ -68,8 +68,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
 # For production use, you have to configure a proper mail server:
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 #
-# See the Django documentation for more detais:
-# - https://docs.djangoproject.com/en/dev/topics/email/#smtp-backend
+# See the Django documentation for more details:
+# - https://docs.djangoproject.com/en/1.3/topics/email/#smtp-backend
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
