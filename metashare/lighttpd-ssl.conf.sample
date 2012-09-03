@@ -1,8 +1,8 @@
-
-# Set this variable to the directory in which the Metashare software in installed
+# Set this variable to the directory in which the META-SHARE software is
+# installed.
 var.sw_path = "/PATH/TO/METANODE"
 
-# Set this variable to the directory that contain certificates
+# Set this variable to the directory that contains certificates.
 var.cert_dir = "/PATH/TO/CERTIFICATE"
 
 server.document-root = sw_path + "/metashare"
@@ -10,14 +10,13 @@ server.document-root = sw_path + "/metashare"
 # Replace SSL_PORT_NUM with the SSL port (usually 443)
 server.port = SSL_PORT_NUM
 
-# Replace the following with the port number
-# used for non-SSL requests
+# Replace the following with the port number used for non-SSL requests.
 var.non_ssl_port = 80
 
 server.username = "lighttpd"
 server.groupname = "lighttpd"
 
-# Set the IP address on which the lighttpd should listen for requests
+# Set the IP address on which lighttpd should listen for requests.
 server.bind = "134.96.187.245"
 
 # Set the host name
@@ -30,26 +29,23 @@ accesslog.filename = "/var/log/lighttpd/metashare-access.log"
 
 server.pid-file = "/tmp/metashare/lighttpd.pid"
 
-# The following will enable SSL with the use of a server certificate
+# The following will enable SSL with the use of a server certificate.
 # The script misc/tools/ssl-config/gen_cert.sh can be used to create a
-# self-signed certificate, if needed. Look at the README
-# in misc/tools/ssl-config for some hints on how to use it.
+# self-signed certificate, if needed. Look at the README in
+# misc/tools/ssl-config for some hints on how to use it.
 ssl.engine = "enable"
 
-# Replace metashare.pem with the name of the file that contains
-# certificates and private keys
+# Replace metashare.pem with the name of the file that contains certificates and
+# private keys.
 ssl.pemfile = cert_dir + "/" + "metashare.pem"
 
-# Replace metashare.crt with the name of the file that contains
-# the certificate of the CA used to sign the server certificate
+# Replace metashare.crt with the name of the file that contains the certificate
+# of the CA used to sign the server certificate.
 ssl.ca-file = cert_dir + "/" + "metashare.crt"
 
-# Replace the following with the IP address on which
-# the Django fcgi listens for requests
+# Replace the following with the IP address and port on which the Django FCGI
+# listens for requests.
 var.django_addr = "134.96.187.245"
-
-# Replace the following with the port number on which
-# the Django fcgi listens for requests
 var.django_port = 9190
 
 # The following should be enabled only for debugging
