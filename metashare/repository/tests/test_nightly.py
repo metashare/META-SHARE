@@ -1,14 +1,13 @@
 import logging
 from django.test import TestCase
 from metashare import test_utils, xml_utils
-from metashare.settings import ROOT_PATH, LOG_LEVEL, LOG_HANDLER, TEST_MODE_NAME
+from metashare.settings import ROOT_PATH, LOG_HANDLER, TEST_MODE_NAME
 from metashare.repository.supermodel import OBJECT_XML_CACHE
 from metashare.repository.models import resourceInfoType_model
 from zipfile import ZipFile
 from django.test.client import Client
 
 # Setup logging support.
-logging.basicConfig(level=LOG_LEVEL)
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 
@@ -88,7 +87,10 @@ class NightlyTests(TestCase):
         test_utils.set_index_active(False)
         
         client = Client()
+        count = 0
         for _res in resourceInfoType_model.objects.all():
+            count += 1
+            LOGGER.info("calling {}. resource at {}".format(count, _res.get_absolute_url()))
             response = client.get(_res.get_absolute_url(), follow = True)
             self.assertEquals(200, response.status_code)
             self.assertTemplateUsed(response, 'repository/lr_view.html')

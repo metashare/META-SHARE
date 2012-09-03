@@ -29,8 +29,7 @@ from metashare.storage.models import MASTER
 from metashare.repository.model_utils import get_root_resources
 from metashare.repository.supermodel import REQUIRED, RECOMMENDED, OPTIONAL
 # Setup logging support.
-logging.basicConfig(level=settings.LOG_LEVEL)
-LOGGER = logging.getLogger('metashare.repository.superadmin')
+LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(settings.LOG_HANDLER)
 
 csrf_protect_m = method_decorator(csrf_protect)

@@ -6,7 +6,7 @@ from metashare.recommendations.recommendations import Resource, \
     SessionResourcesTracker, get_more_from_same_creators,\
     get_more_from_same_projects
 from metashare.repository import views
-from metashare.settings import ROOT_PATH, LOG_LEVEL, LOG_HANDLER
+from metashare.settings import ROOT_PATH, LOG_HANDLER
 from metashare.storage.models import PUBLISHED, INGESTED
 from metashare.test_utils import create_user
 import datetime
@@ -15,7 +15,6 @@ import shutil
 import logging
 
 # Setup logging support.
-logging.basicConfig(level=LOG_LEVEL)
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 

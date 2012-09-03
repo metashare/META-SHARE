@@ -29,6 +29,9 @@ else:
 LOG_HANDLER.setLevel(level=LOG_LEVEL)
 LOG_HANDLER.setFormatter(LOG_FORMATTER)
 
+# init root logger
+logging.basicConfig(format=LOG_FORMAT, datefmt=LOG_DATE, level=LOG_LEVEL)
+
 # Maximum size of files uploaded as resrouce data.
 # The default is a cautious value in order to protect the server
 # against resource starvation; if you think your server can handle

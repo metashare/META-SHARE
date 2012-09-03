@@ -5,10 +5,9 @@ from metashare import test_utils
 from metashare.recommendations.tests import _import_resource
 import django.test
 from django.test.client import Client
-from metashare.settings import DJANGO_BASE, LOG_LEVEL, LOG_HANDLER
+from metashare.settings import DJANGO_BASE, LOG_HANDLER
 
 # Setup logging support.
-logging.basicConfig(level=LOG_LEVEL)
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 

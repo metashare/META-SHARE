@@ -16,13 +16,12 @@ from metashare.repository.models import resourceInfoType_model, \
 from metashare.repository.search_fields import LabeledCharField, \
     LabeledMultiValueField
 from metashare.storage.models import StorageObject, INGESTED, PUBLISHED
-from metashare.settings import LOG_LEVEL, LOG_HANDLER
+from metashare.settings import LOG_HANDLER
 from metashare.stats.model_utils import DOWNLOAD_STAT, VIEW_STAT
 
 
 # Setup logging support.
-logging.basicConfig(level=LOG_LEVEL)
-LOGGER = logging.getLogger('metashare.repository.search_indexes')
+LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 
 

@@ -5,10 +5,9 @@ from django.test.client import Client
 
 from metashare import test_utils
 from metashare.settings import DJANGO_BASE, ROOT_PATH, DJANGO_URL, SITEMAP_URL, \
-    LOG_LEVEL, LOG_HANDLER
+    LOG_HANDLER
 
 # Setup logging support.
-logging.basicConfig(level=LOG_LEVEL)
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 
