@@ -16,8 +16,7 @@ from django.utils.http import urlencode
 from metashare import settings
 
 # Setup logging support.
-logging.basicConfig(level=settings.LOG_LEVEL)
-LOGGER = logging.getLogger('metashare.repository.widgets')
+LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(settings.LOG_HANDLER)
 
 # the maximum length (in characters) where `TextInput` widgets will still be

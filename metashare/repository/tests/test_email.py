@@ -1,10 +1,9 @@
 import logging
 from django.test import TestCase
 from metashare import test_utils
-from metashare.settings import ROOT_PATH, LOG_LEVEL, LOG_HANDLER
+from metashare.settings import ROOT_PATH, LOG_HANDLER
 
 # Setup logging support.
-logging.basicConfig(level=LOG_LEVEL)
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 

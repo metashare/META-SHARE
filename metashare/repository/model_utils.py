@@ -9,13 +9,12 @@ from django.db.models import OneToOneField, Sum
 from metashare.repository.models import resourceInfoType_model, \
     corpusInfoType_model, lexicalConceptualResourceInfoType_model, \
     languageDescriptionInfoType_model, toolServiceInfoType_model
-from metashare.settings import LOG_LEVEL, LOG_HANDLER
+from metashare.settings import LOG_HANDLER
 from metashare.stats.models import LRStats
 
 
 # Setup logging support.
-logging.basicConfig(level=LOG_LEVEL)
-LOGGER = logging.getLogger('metashare.repository.model_utils')
+LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 
 

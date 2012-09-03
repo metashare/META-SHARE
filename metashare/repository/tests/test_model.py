@@ -11,11 +11,10 @@ from metashare import test_utils
 from metashare.repository.models import resourceInfoType_model, \
     SCHEMA_NAMESPACE, lingualityInfoType_model
 from metashare.repository.model_utils import get_root_resources
-from metashare.settings import ROOT_PATH, LOG_LEVEL, LOG_HANDLER
+from metashare.settings import ROOT_PATH, LOG_HANDLER
 from metashare.xml_utils import to_xml_string
 
 # Setup logging support.
-logging.basicConfig(level=LOG_LEVEL)
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 

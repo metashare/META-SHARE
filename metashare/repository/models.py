@@ -20,11 +20,10 @@ from metashare.repository.validators import validate_lang_code_keys, \
 
 from metashare.storage.models import StorageObject, MASTER, COPY_CHOICES
 
-from metashare.settings import DJANGO_BASE, LOG_LEVEL, LOG_HANDLER, DJANGO_URL
+from metashare.settings import DJANGO_BASE, LOG_HANDLER, DJANGO_URL
 
 # Setup logging support.
-logging.basicConfig(level=LOG_LEVEL)
-LOGGER = logging.getLogger('metashare.repository.models')
+LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 
 EMAILADDRESS_VALIDATOR = RegexValidator(r'[^@]+@[^\.]+\..+',

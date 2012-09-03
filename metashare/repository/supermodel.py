@@ -15,15 +15,14 @@ from django.db.models.fields.related import ForeignRelatedObjectsDescriptor, \
 
 from metashare.repository.fields import MultiSelectField, MultiTextField, \
     MetaBooleanField, DictField
-from metashare.settings import LOG_LEVEL, LOG_HANDLER, \
+from metashare.settings import LOG_HANDLER, \
     CHECK_FOR_DUPLICATE_INSTANCES
 from metashare.storage.models import MASTER
 from metashare.utils import SimpleTimezone, prettify_camel_case_string
 
 
 # Setup logging support.
-logging.basicConfig(level=LOG_LEVEL)
-LOGGER = logging.getLogger('metashare.repository.supermodel')
+LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 
 # cfedermann: this prevents a bug with PostgreSQL databases and Django 1.3

@@ -17,11 +17,10 @@ from metashare import settings, test_utils
 from metashare.repository.models import resourceInfoType_model
 from metashare.storage.models import INGESTED, INTERNAL, StorageObject, \
     PUBLISHED, compute_digest_checksum, RemovedObject, MASTER, PROXY
-from metashare.settings import DJANGO_BASE, LOGIN_URL, LOG_LEVEL, LOG_HANDLER
+from metashare.settings import DJANGO_BASE, LOGIN_URL, LOG_HANDLER
 from metashare.test_utils import set_index_active
 
 # Setup logging support.
-logging.basicConfig(level=LOG_LEVEL)
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 

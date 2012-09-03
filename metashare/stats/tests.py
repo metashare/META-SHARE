@@ -9,14 +9,12 @@ from django.contrib.admin.sites import LOGIN_FORM_KEY
 from metashare import test_utils
 from metashare.accounts.models import EditorGroup, EditorGroupManagers
 from metashare.repository.models import resourceInfoType_model
-from metashare.settings import DJANGO_BASE, DJANGO_URL, ROOT_PATH, LOG_LEVEL, \
-    LOG_HANDLER
+from metashare.settings import DJANGO_BASE, DJANGO_URL, ROOT_PATH, LOG_HANDLER
 from metashare.stats.model_utils import _update_usage_stats, saveLRStats, \
     getLRLast, saveQueryStats, getLastQuery, UPDATE_STAT, VIEW_STAT, \
     RETRIEVE_STAT, DOWNLOAD_STAT
 
 # Setup logging support.
-logging.basicConfig(level=LOG_LEVEL)
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 
