@@ -10,13 +10,12 @@ from haystack.query import SearchQuerySet
 
 from metashare import test_utils, settings
 from metashare.repository import views
-from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_LEVEL, LOG_HANDLER
+from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER
 from metashare.stats.models import LRStats
 from metashare.storage.models import INGESTED
 from metashare.test_utils import create_user
 
 # Setup logging support.
-logging.basicConfig(level=LOG_LEVEL)
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 

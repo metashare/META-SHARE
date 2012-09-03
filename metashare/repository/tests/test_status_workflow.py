@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.test.client import Client, RequestFactory
 from django.test.testcases import TestCase
 from metashare import test_utils
-from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_LEVEL, LOG_HANDLER
+from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER
 from metashare.repository.models import resourceInfoType_model
 from metashare.accounts.models import EditorGroup, EditorGroupManagers
 from metashare.repository.editor.resource_editor import publish_resources, \
@@ -11,7 +11,6 @@ from metashare.repository.editor.resource_editor import publish_resources, \
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL
 
 # Setup logging support.
-logging.basicConfig(level=LOG_LEVEL)
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 

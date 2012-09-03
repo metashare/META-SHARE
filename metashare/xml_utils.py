@@ -15,14 +15,13 @@ from django.contrib.contenttypes.models import ContentType
 from django.utils.encoding import force_unicode
 
 from metashare.repository.models import User
-from metashare.settings import LOG_LEVEL, LOG_HANDLER, XDIFF_LOCATION
+from metashare.settings import LOG_HANDLER, XDIFF_LOCATION
 from metashare.stats.model_utils import saveLRStats, UPDATE_STAT
 from xml.etree import ElementTree
 
 
 # Setup logging support.
-logging.basicConfig(level=LOG_LEVEL)
-LOGGER = logging.getLogger('metashare.xml_utils')
+LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 
 CONSOLE = "/dev/null"
@@ -143,7 +142,7 @@ def import_from_file(filehandle, descriptor, targetstatus, copy_status, owner_id
 
     if not handling_zip_file:
         try:
-            print 'Importing XML file: "{0}"'.format(descriptor)
+            LOGGER.info('Importing XML file: "{0}"'.format(descriptor))
             xml_string = filehandle.read()
             resource = import_from_string(xml_string, targetstatus, copy_status, owner_id)
             imported_resources.append(resource)
@@ -153,14 +152,14 @@ def import_from_file(filehandle, descriptor, targetstatus, copy_status, owner_id
     else:
         temp_zip = ZipFile(filehandle)
         
-        print 'Importing ZIP file: "{0}"'.format(descriptor)
+        LOGGER.info('Importing ZIP file: "{0}"'.format(descriptor))
         file_count = 0
         for xml_name in temp_zip.namelist():
             try:
                 if xml_name.endswith('/') or xml_name.endswith('\\'):
                     continue
                 file_count += 1
-                print 'Importing {0}. extracted XML file: "{1}"'.format(file_count, xml_name)
+                LOGGER.info('Importing {0}. extracted XML file: "{1}"'.format(file_count, xml_name))
                 xml_string = temp_zip.read(xml_name)
                 resource = import_from_string(xml_string, targetstatus, copy_status, owner_id)
                 imported_resources.append(resource)

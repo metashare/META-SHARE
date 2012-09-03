@@ -15,12 +15,11 @@ from metashare.repository import models
 from metashare.repository.models import languageDescriptionInfoType_model, \
     lexicalConceptualResourceInfoType_model, personInfoType_model,\
     resourceInfoType_model
-from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_LEVEL, LOG_HANDLER
+from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, REMOTE, \
     StorageObject
 
 # Setup logging support.
-logging.basicConfig(level=LOG_LEVEL)
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 

@@ -7,12 +7,11 @@ from django.db import models
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 
-from metashare.settings import LOG_LEVEL, LOG_HANDLER
+from metashare.settings import LOG_HANDLER
 
 
 # Setup logging support.
-logging.basicConfig(level=LOG_LEVEL)
-LOGGER = logging.getLogger('metashare.accounts.models')
+LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 
 

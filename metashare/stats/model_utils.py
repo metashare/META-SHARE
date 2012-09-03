@@ -7,7 +7,7 @@ from metashare.stats.geoip import getcountry_code, getcountry_name
 from django.db.models import Count, Sum
 from django.contrib.auth.models import User
 from datetime import datetime
-from metashare.settings import LOG_LEVEL, LOG_HANDLER
+from metashare.settings import LOG_HANDLER
 from math import trunc
 
 USAGETHREADNAME = "usagethread"
@@ -24,8 +24,7 @@ STAT_LABELS = {UPDATE_STAT: "update", VIEW_STAT: "view", RETRIEVE_STAT: "retriev
 VISIBLE_STATS = [UPDATE_STAT, VIEW_STAT, RETRIEVE_STAT, DOWNLOAD_STAT]
     
 # Setup logging support.
-logging.basicConfig(level=LOG_LEVEL)
-LOGGER = logging.getLogger('metashare.stats.model_utils')
+LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 
 

@@ -11,11 +11,10 @@ from metashare import test_utils, settings
 from metashare.accounts.models import UserProfile, EditorGroup, \
     EditorGroupManagers, Organization
 from metashare.repository import views
-from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_LEVEL, LOG_HANDLER
+from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER
 from metashare.test_utils import create_user
 
 # Setup logging support.
-logging.basicConfig(level=LOG_LEVEL)
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 

@@ -21,7 +21,7 @@ from json import JSONEncoder
 from datetime import datetime, date
 import urllib, urllib2
 from threading import Timer
-from metashare.settings import LOG_LEVEL, LOG_HANDLER, MEDIA_URL
+from metashare.settings import LOG_HANDLER, MEDIA_URL
 
 try:
     import cPickle as pickle
@@ -32,8 +32,7 @@ except:
 NOACCESS_FIELDS = ["downloadLocation", "executionLocation"]
 
 # Setup logging support.
-logging.basicConfig(level=LOG_LEVEL)
-LOGGER = logging.getLogger('metashare.stats.views')
+LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 
 from django.db.models.sql import aggregates

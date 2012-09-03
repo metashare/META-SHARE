@@ -9,10 +9,9 @@ from metashare import test_utils
 from metashare.accounts.models import EditorGroup
 from metashare.repository.models import documentUnstructuredString_model, \
     documentInfoType_model
-from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_LEVEL, LOG_HANDLER
+from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER
 
 # Setup logging support.
-logging.basicConfig(level=LOG_LEVEL)
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 

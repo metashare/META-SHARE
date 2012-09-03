@@ -5,13 +5,12 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 
 from metashare.repository.models import resourceInfoType_model
-from metashare.settings import LOG_LEVEL, LOG_HANDLER
+from metashare.settings import LOG_HANDLER
 from metashare.storage.models import PUBLISHED
 
 
 # Setup logging support.
-logging.basicConfig(level=LOG_LEVEL)
-LOGGER = logging.getLogger('metashare.views')
+LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 
 

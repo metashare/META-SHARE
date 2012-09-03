@@ -2,7 +2,7 @@ from django.core.management import call_command
 from django.test.testcases import TestCase
 from metashare import settings, test_utils
 from metashare.repository.models import resourceInfoType_model
-from metashare.settings import ROOT_PATH, LOG_LEVEL, LOG_HANDLER
+from metashare.settings import ROOT_PATH, LOG_HANDLER
 from metashare.storage.models import StorageObject, restore_from_folder, \
 MASTER, INGESTED, INTERNAL, update_digests, compute_digest_checksum
 # pylint: disable-msg=E0611
@@ -16,7 +16,6 @@ import logging
 from zipfile import ZipFile
 
 # Setup logging support.
-logging.basicConfig(level=LOG_LEVEL)
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 

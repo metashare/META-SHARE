@@ -27,7 +27,7 @@ from metashare.repository.models import licenceInfoType_model, \
     resourceInfoType_model
 from metashare.repository.search_indexes import resourceInfoType_modelIndex, \
     update_lr_index_entry
-from metashare.settings import LOG_LEVEL, LOG_HANDLER, MEDIA_URL, DJANGO_URL
+from metashare.settings import LOG_HANDLER, MEDIA_URL, DJANGO_URL
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
 from metashare.storage.models import PUBLISHED
@@ -39,8 +39,7 @@ from metashare.recommendations.recommendations import SessionResourcesTracker, \
 MAXIMUM_READ_BLOCK_SIZE = 4096
 
 # Setup logging support.
-logging.basicConfig(level=LOG_LEVEL)
-LOGGER = logging.getLogger('metashare.repository.views')
+LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 
 
