@@ -8,7 +8,7 @@
     html * { padding:0; margin:0; }
     body * { padding:10px 10px; }
     body * * { padding:0; }
-    body { font-family:"Trebuchet MS", Helvetica, sans-serif; font-size:0.8em; }
+    body { font-family:"Trebuchet MS", Helvetica, sans-serif; font-size:0.8em; max-width:900px; margin:0 auto; }
     body>div { border-bottom:1px solid #ddd; }
     
     td.counter { text-align:right; color:#dedede; padding-left:10px; }
@@ -46,8 +46,8 @@
     .orange_light { color:#ffcb00; }
     .grey_dark { color:#696969; }
     .grey_light { color:#ababab; }
-    
-    h1, h2, h3, h4, h5, h6 { font-weight:normal; }
+
+    h3 { font-weight:normal; }
 
     p { padding-left:5px; padding-bottom:10px; }
 
@@ -56,8 +56,8 @@
     a:clicked { color:#ffaa00; }
 
     #errors { background:#ffcb00; border:1px solid #ffaa00; padding:2px; }
-    #header { background:#ffffff; padding-left:270px; padding-bottom:20px; }
-    #header img { position:absolute; top:10px; left:10px; height:40px; border:0px; }
+    #header { background:#ffffff; padding-bottom:20px; }
+    #header img { height:40px; border:0px; margin-right:16px; }
     #content { background:#f6f6f6; }
     #options { padding-top:20px; }
     #footer { background:#eeeeee; padding:2px; font-size:0.8em; }
@@ -85,24 +85,28 @@
 
 <body>
   <div id="header">
-    <a href="/"><img src="meta-share-logo.png" /></a>
-    
-  <h1 class="grey_dark">Welcome to META-SHARE!</h1>
-  <h3 class="grey_light">META-SHARE is developed within the META-NET Network of Excellence</h3>
-
+  <div style="float:left;">
+    <img src="meta-share-logo.png" />
+  </div>
+  <div style="float:left;">
+    <h1 class="grey_dark">Welcome to META-SHARE!</h1>
+    <h3 class="grey_light">META-SHARE is developed within the META-NET Network of Excellence</h3>
+  </div>
+  <div style="clear:both;"></div>
   </div>
   <div id="content">
-  <h3 class="orange_dark">About the project</h3>
+  <h2 class="orange_dark">About the project</h2>
   <p>META-NET is designing and implementing META-SHARE, a sustainable network of repositories of language data, tools and related web services documented with high-quality metadata, aggregated in central inventories allowing for uniform search and access to resources. Data and tools can be both open and with restricted access rights, free and for-a-fee. META-SHARE targets existing but also new and emerging language data, tools and systems required for building and evaluating new technologies, products and services.</p>
 
   <p class="metanet"><a href="http://www.meta-net.eu/"><img class="metanet" src="meta-net-logo.png" /></a></p>
 
-  <h3 class="orange_medium">About the partners</h3>
+  <h2 class="orange_medium">About the partners</h2>
   <p>META-SHARE will start by integrating nodes and centres represented by the partners of the META-NET consortium. It will gradually be extended to encompass additional nodes/centres and provide more functionality with the goal of turning into an as largely distributed infrastructure as possible.</p>
 
-  <h3 class="orange_light">Select network node</h3>
+  <h2 class="orange_light">Select network node</h2>
   <p>Please select one of the following META-SHARE network nodes to proceed:</p>
-  
+
+  <h3>META-SHARE Managing Nodes</h3>
   <table class="mirrors">
     <tr>
       <td><a href="http://langtech1.ilc.cnr.it:8000/"><img class="mirror" src="cnr-logo.png" /></a><br/>CNR &mdash; National Research Council of Italy</td>
@@ -110,6 +114,13 @@
       <td><a href="http://metashare.elda.org/"><img class="mirror" src="elda-logo.png" /></a><br/>ELDA &mdash; Evaluations and Language resources Distribution Agency</td>
       <td><a href="http://metashare.fbk.eu/"><img class="mirror" src="fbk-logo.png" /></a><br/>FBK &mdash; Fondazione Bruno Kessler</td>
       <td><a href="http://metashare.ilsp.gr:8080/"><img class="mirror" src="ilsp-logo.png" /></a><br/>ILSP &mdash; Institute for Language and Speech Processing</td>
+    </tr>
+  </table>
+
+  <h3>Other META-SHARE Nodes</h3>
+  <table class="mirrors">
+    <tr>
+      <td><a href="http://nlp.ipipan.waw.pl/metashare"><img class="mirror" src="cesar-logo.png" /></a><br/>CESAR &mdash; Central and South-East European Resources</td>
     </tr>
   </table>
 
