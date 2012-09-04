@@ -227,7 +227,7 @@ class ViewTest(TestCase):
     def testPageTitle(self):
         """
         Tests whether the title inside the header of the web page 
-        is the name of the resource (SEO).
+        is the name of the resource (SEO)
         """
         client = Client()
         url = self.resource.get_absolute_url()
@@ -244,8 +244,8 @@ class ViewTest(TestCase):
         url = self.resource.get_absolute_url()
         response = client.get(url, follow = True)
         self.assertTemplateUsed(response, 'repository/lr_view.html')
-        self.assertContains(response, '<h2>Italian TTS Speech Corpus (Appen)' \
-          '  <img title="Corpus" src="/site_media/css/sexybuttons/images/' \
+        self.assertContains(response, '<h2>Italian TTS Speech Corpus (Appen) ' \
+          ' <img title="Corpus" src="/site_media/css/sexybuttons/images/' \
           'icons/silk/database_yellow.png" /></h2>')
 
     def test_owner_can_edit_resource(self):
