@@ -152,7 +152,7 @@ class StatsTest(django.test.TestCase):
         response = client.get(ADMINROOT+"repository/resourceinfotype_model/", follow=True)
         self.assertContains(response, 'Publish selected ingested resources', msg_prefix='response: {0}'.format(response))
 
-        imported_res = resourceInfoType_model.objects.get(pk=1)
+        imported_res = resourceInfoType_model.objects.all()[0]
         imported_res.storage_object.published = True
         imported_res.storage_object.save()
         response = client.get(imported_res.get_absolute_url(), follow=True)
@@ -184,5 +184,4 @@ class StatsTest(django.test.TestCase):
             print Exception, 'could not get usage stats: {}'.format(response)
         else:
             self.assertContains(response, "identificationInfo")
-
 
