@@ -597,8 +597,8 @@ class EditorTest(TestCase):
     def test_can_edit_reusable_entity_master_copy(self):        
         client = test_utils.get_client_with_user_logged_in(EditorTest.editor_login)
         _import_test_resource(EditorTest.test_editor_group)
-        response = client.get('{}repository/personinfotype_model/1/'
-                              .format(ADMINROOT))
+        response = client.get('{}repository/personinfotype_model/{}/'
+                              .format(ADMINROOT, personInfoType_model.objects.all()[0].id))
         self.assertContains(response, "Change Person")    
     
     def test_editor_can_change_own_resource_and_parts(self):
@@ -1115,7 +1115,7 @@ class DestructiveTests(TestCase):
             "Add a user to the following editor group:", msg_prefix=
                 "expected to be on the action page for adding an editor group")
         response = client.post('{}accounts/editorgroup/'.format(ADMINROOT),
-            {"users": test_user.id, "add_user_profile_to_editor_group": "Add",
+            {"users": test_user.userprofile.id, "add_user_profile_to_editor_group": "Add",
              "action": "add_user_to_editor_group", admin.ACTION_CHECKBOX_NAME:
              self.test_editor_group.id}, follow=True)
         self.assertContains(response, "normaluser", msg_prefix=
@@ -1138,7 +1138,7 @@ class DestructiveTests(TestCase):
             "Remove a user from the following editor group:", msg_prefix=
                 "expected to be on the page for removing an editor group")
         response = client.post('{}accounts/editorgroup/'.format(ADMINROOT),
-            {"users": test_user.id, "remove_user_profile_from_editor_group":
+            {"users": test_user.userprofile.id, "remove_user_profile_from_editor_group":
                 "Remove", "action": "remove_user_from_editor_group",
              admin.ACTION_CHECKBOX_NAME: self.test_editor_group.id},
             follow=True)
@@ -1185,7 +1185,7 @@ class DestructiveTests(TestCase):
             "Add a user to the following editor group manager group", msg_prefix=
                 "expected to be on the action page for adding an editor group manager")
         response = client.post('{}accounts/editorgroupmanagers/'.format(ADMINROOT),
-            {"users": test_user.id, "add_user_profile_to_editor_group_managers": "Add",
+            {"users": test_user.userprofile.id, "add_user_profile_to_editor_group_managers": "Add",
              "action": "add_user_to_editor_group_managers", admin.ACTION_CHECKBOX_NAME:
              self.test_editor_group_manager.id}, follow=True)
         self.assertContains(response, "normaluser", msg_prefix=
@@ -1208,7 +1208,7 @@ class DestructiveTests(TestCase):
             "Remove a user from the following editor group manager group", msg_prefix=
                 "expected to be on the page for removing an editor group manager")
         response = client.post('{}accounts/editorgroupmanagers/'.format(ADMINROOT),
-            {"users": test_user.id, "remove_user_profile_from_editor_group_managers":
+            {"users": test_user.userprofile.id, "remove_user_profile_from_editor_group_managers":
                 "Remove", "action": "remove_user_from_editor_group_managers",
              admin.ACTION_CHECKBOX_NAME: self.test_editor_group_manager.id},
             follow=True)
@@ -1255,8 +1255,8 @@ class DestructiveTests(TestCase):
         client = test_utils.get_client_with_user_logged_in(self.editor_login)
         _import_test_resource(self.test_editor_group)
         personInfoType_model.objects.all().update(copy_status=REMOTE)
-        response = client.get('{}repository/personinfotype_model/1/'
-                              .format(ADMINROOT))
+        response = client.get('{}repository/personinfotype_model/{}/'
+                              .format(ADMINROOT, personInfoType_model.objects.all()[0].id))
         self.assertContains(response, "You cannot edit the metadata for the entity")
         self.assertNotContains(response, "You will now be redirected")
 
