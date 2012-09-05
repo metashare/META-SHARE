@@ -149,7 +149,7 @@ class FrontpageTest(TestCase):
 
 class ViewTest(TestCase):
     """
-    Test the detail view
+    Test the single resource view
     """
     test_editor = None
     
@@ -226,7 +226,8 @@ class ViewTest(TestCase):
 
     def testPageTitle(self):
         """
-        Tests whether the title of the resource is the resource name
+        Tests whether the title inside the header of the web page 
+        is the name of the resource (SEO)
         """
         client = Client()
         url = self.resource.get_absolute_url()
@@ -234,6 +235,16 @@ class ViewTest(TestCase):
         self.assertTemplateUsed(response, 'repository/lr_view.html')
         self.assertContains(response, '<title>Italian TTS Speech Corpus ' \
                             '(Appen) &ndash; META-SHARE</title>')
+
+    def testResourceTitle(self):
+        """
+        Tests whether the resource title is correct 
+        """
+        client = Client()
+        url = self.resource.get_absolute_url()
+        response = client.get(url, follow = True)
+        self.assertTemplateUsed(response, 'repository/lr_view.html')
+        self.assertContains(response, '<h2>Italian TTS Speech Corpus (Appen)')
 
     def test_owner_can_edit_resource(self):
         """
