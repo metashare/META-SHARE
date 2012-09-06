@@ -334,13 +334,6 @@ h2.help_link {
 	/*display: inline;*/
 }
 
-div.redirect_msg {
-	margin-top:20px;
-	text-align:center;
-	font-size: 14px;
-	color: #777;
-}
-
 .distance-div{
 	margin-top:20px;
 }
@@ -367,19 +360,6 @@ div.split{
 	padding-left: 0px;
 	padding-right: 0px;
 	overflow: hidden;
-}
-
-html, body {
-	height: 100%;
-}
-
-
-
-#container {
-	min-height: 100%;
-	height: auto !important;
-	height: 100%;
-	/*margin: 0 auto -150px;  the bottom margin is the negative value of the footer's height */
 }
 
 #container > div:last-child{
