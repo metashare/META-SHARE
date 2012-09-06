@@ -27,6 +27,7 @@ from metashare.repository.editor.lookups import ActorLookup, \
     PersonLookup, TargetResourceLookup, DocumentLookup, \
     DocumentationLookup, LanguageVarietyDummyLookup, SizeDummyLookup, \
     ResolutionDummyLookup, AudioSizeDummyLookup
+from metashare.repository.editor.widgets import AutoCompleteSelectMultipleWidgetMS
 
 class RelatedAdminMixin(object):
     '''
@@ -38,7 +39,7 @@ class RelatedAdminMixin(object):
     custom_m2m_widget_overrides = {
         # Reusable types with actual ajax search:
         actorInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=ActorLookup, **kwargs), 
-        documentationInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=DocumentationLookup, **kwargs),
+        documentationInfoType_model: AutoCompleteSelectMultipleWidgetMS(lookup_class=DocumentationLookup, **kwargs),
         documentInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=DocumentLookup, **kwargs),
         personInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=PersonLookup, **kwargs),
         organizationInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=OrganizationLookup, **kwargs),

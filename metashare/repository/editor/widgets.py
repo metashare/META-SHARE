@@ -31,7 +31,7 @@ class DictWidget(widgets.Widget):
     
     By default key/value input widgets will be `TextInput` widgets. If a
     sufficiently large maximum size is specified for either of them, the input
-    wisgets may also become `Textarea` widgets.
+    widgets may also become `Textarea` widgets.
     """
     class Media:
         css = { 'all': ('{}css/dict_widget.css'.format(
@@ -228,7 +228,7 @@ class SubclassableRelatedFieldWidgetWrapper(RelatedFieldWidgetWrapper):
         if self.can_add_related:
             output.append(' ')
             # Salvatore: changed from 'onclick' to 'onchange' because
-            # on Windwos browsers onclick is triggered as soon as the
+            # on Windows browsers onclick is triggered as soon as the
             # user click on the down arrow and before he/she actually
             # selects the item from the list.
             output.append(self.subclass_select.render('subclass_select', '',
@@ -555,4 +555,35 @@ class MultiComboWidget(MultiFieldWidget):
             _context.update({'linked_field_name': linked_field_name})
         val = super(MultiComboWidget, self)._render_multifield(_context)
         return val
-        
+
+from selectable.forms.widgets import AutoCompleteWidget        
+class AutoCompleteSelectMultipleWidgetMS(SelectableMultiWidget, SelectableMediaMixin):
+
+    def __init__(self, lookup_class, *args, **kwargs):
+        self.lookup_class = lookup_class
+        self.limit = kwargs.pop('limit', None)
+        position = kwargs.pop('position', 'bottom')
+        attrs = {
+            u'data-selectable-multiple': 'true',
+            u'data-selectable-position': position,
+            u'data-selectable-allow-editing': 'true',
+            u'data-selectable-is-subclassable': 'true'
+        }
+        query_params = kwargs.pop('query_params', {})
+        widgets = [
+            AutoCompleteWidget(
+                lookup_class, allow_new=False,
+                limit=self.limit, query_params=query_params, attrs=attrs
+            ),
+            LookupMultipleHiddenInput(lookup_class)
+        ]
+        super(AutoCompleteSelectMultipleWidgetMS, self).__init__(widgets, *args, **kwargs)
+
+    def value_from_datadict(self, data, files, name):
+        return self.widgets[1].value_from_datadict(data, files, name + '_1')
+
+    def render(self, name, value, attrs=None):
+        if value and not hasattr(value, '__iter__'):
+            value = [value]
+        value = [u'', value]
+        return super(AutoCompleteSelectMultipleWidgetMS, self).render(name, value, attrs)

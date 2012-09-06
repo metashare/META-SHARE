@@ -6,9 +6,9 @@ function createNewSubInstance(select, proto_name, proto_href) {
 
         href = proto_href + '/' + selected_subclass + '/add/';
         if (href.indexOf('?') == -1) {
-            href += '?_popup=1';
+            href += '?_popup=1&_subclass=1';
         } else {
-            href  += '&_popup=1';
+            href  += '&_popup=1&_subclass=1';
         }
         var win = window.open(href, name, 'height=500,width=800,resizable=yes,scrollbars=yes');
         if (win != undefined) {

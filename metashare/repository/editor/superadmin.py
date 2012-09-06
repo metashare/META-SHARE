@@ -157,6 +157,9 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         return result
 
 
+    def response_add(self, request, obj):
+        return super(SchemaModelAdmin, self).response_add(request, obj)
+    
     def response_change(self, request, obj):
         '''
         Response sent after a successful submission of a change form.
