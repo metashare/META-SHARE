@@ -66,7 +66,8 @@ function addStatus(filter){
 
 
 <div class="searchbox">
-  <form class="form_helper" id="searchbox" action="." method="get">      
+  <form class="form_helper" id="searchbox" action="." method="get">
+    {{ form.non_field_errors }}
 	<table>
 	  <tr><td class="logo"><img src="{{ MEDIA_URL }}images/keyvisual.png" width='200'  /></td>
 	  		<td>
