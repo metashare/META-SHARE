@@ -35,8 +35,7 @@ from metashare.repository.models import resourceComponentTypeType_model, \
     lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model, \
     licenceInfoType_model, User
 from metashare.repository.supermodel import SchemaModel
-from metashare.stats.model_utils import saveLRStats, UPDATE_STAT, INGEST_STAT, \
-    DELETE_STAT
+from metashare.stats.model_utils import saveLRStats, UPDATE_STAT, INGEST_STAT
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
     ALLOWED_ARCHIVE_EXTENSIONS
 from metashare.utils import verify_subclass
@@ -804,9 +803,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
         if 'action' in request.POST and request.POST.get('action') == 'delete_selected' \
             and request.POST.get('post') == 'yes':
             resource_id = request.POST.get('_selected_action', None)
-            if resource_id != None:
-                resource = resourceInfoType_model.objects.get(pk=resource_id)
-            saveLRStats(resource, DELETE_STAT)
         return result
 
     def create_hidden_structures(self, request):

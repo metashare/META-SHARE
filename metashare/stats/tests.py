@@ -14,6 +14,8 @@ from metashare.settings import DJANGO_BASE, DJANGO_URL, ROOT_PATH
 from metashare.stats.model_utils import _update_usage_stats, saveLRStats, \
     getLRLast, saveQueryStats, getLastQuery, UPDATE_STAT, VIEW_STAT, \
     RETRIEVE_STAT, DOWNLOAD_STAT
+from selenium.webdriver.firefox.webdriver import WebDriver
+from django_selenium.testcases import SeleniumTestCase
 
 
 ADMINROOT = '/{0}editor/'.format(DJANGO_BASE)
@@ -115,7 +117,7 @@ class StatsTest(django.test.TestCase):
         except urllib2.URLError:
             print 'WARNING! Failed contacting statistics server on %s' % self.stats_server_url
         
-    def testGet(self):
+    def testGetDailyStats(self):
         """
         checking if there are the statistics of the day
         """
@@ -136,30 +138,50 @@ class StatsTest(django.test.TestCase):
         response = client.get(ADMINROOT+"repository/resourceinfotype_model/", follow=True)
         self.assertContains(response, 'Publish selected ingested resources', msg_prefix='response: {0}'.format(response))
 
-        resource = resourceInfoType_model.objects.get(pk=1)
-        resource.storage_object.published = True
-        resource.storage_object.save()
-        response = client.get(resource.get_absolute_url(), follow=True)
-        self.assertTemplateUsed(response, 'repository/lr_view.html')
-        self.assertContains(response, "Edit")
+        #publish the resources
+        for i in range(1, 3):
+            resource = resourceInfoType_model.objects.get(pk=i)
+            resource.storage_object.published = True
+            resource.storage_object.save()
+            response = client.get(resource.get_absolute_url(), follow=True)
+            self.assertTemplateUsed(response, 'repository/lr_view.html')
+            self.assertContains(response, "Edit")
 
         response = client.get('/{0}stats/mystats/'.format(DJANGO_BASE))
         self.assertEquals(200, response.status_code)
         self.assertContains(response, 'My resources')
         self.assertContains(response, 'Last view:')
         
+        statsdata = getLRLast(VIEW_STAT, 10)
+        self.assertEqual(2, len(statsdata))
         
-        resource.storage_object.publication_status = INGESTED
-        resource.storage_object.save()
+        #ingest the first resource
+        resource = resourceInfoType_model.objects.get(pk=1)
         ingest_resources(None, None, (resource,))
         statsdata = getLRLast(UPDATE_STAT, 10)
         self.assertEqual(1, len(statsdata))
+        statsdata = getLRLast(VIEW_STAT, 10)
+        self.assertEqual(1, len(statsdata))
         
-        resource = resourceInfoType_model.objects.get(pk=2)
-        resource.storage_object.publication_status = INTERNAL
+        #publish the second resource again
+        resource.storage_object.published = True
         resource.storage_object.save()
+        response = client.get(resource.get_absolute_url(), follow=True)
+        statsdata = getLRLast(VIEW_STAT, 10)
+        self.assertEqual(2, len(statsdata))
+         
+        #delete the second resource
+        resource.delete_deep();        
+        print "STATUS: " + str(response.status_code)
+        statsdata = getLRLast(VIEW_STAT, 10)
+        self.assertEqual(1, len(statsdata))
+        
+        #unpublish the second resource
+        resource = resourceInfoType_model.objects.get(pk=2)
         unpublish_resources(None, None, (resource,))
         statsdata = getLRLast(UPDATE_STAT, 10)
+        self.assertEqual(0, len(statsdata))
+        statsdata = getLRLast(VIEW_STAT, 10)
         self.assertEqual(0, len(statsdata))
         
     def client_with_user_logged_in(self, user_credentials):

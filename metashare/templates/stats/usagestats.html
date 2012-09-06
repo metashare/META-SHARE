@@ -61,13 +61,19 @@ function getvalues(classname, fieldname) {
     {% endif %}
     
             
-    <tr class="result_table_head" style="">
         <td class=aligntop nowrap>       
-        {% for class,fields in usage_fields.items %}
-            <dt class="accordion">{{ class }}</dt> 
+        {% for class, fields in usage_fields.items %}
+            <a name="{{ class }}"></a>
+            <dt class="accordion"><span>{{ class }}</span></dt> 
             {% for field in fields %}
                 <dd><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/bullet_arrow_right.png">&nbsp;
-                <a name="{{ class }}/{{ field.1 }}" href="javascript:getvalues('{{ class }}','{{ field.1 }}')">{{ field.2 }}</a>&nbsp;
+                {% if field.6 == "component" %}
+                    <a href="#{{ field.2 }}" style=""><p style="font-size:8pt;text-align:left;display:inline">{{ field.2 }}</p></a>
+                {% else %}
+                    <a name="{{ field.7 }}/{{ field.1 }}" href="javascript:getvalues('{{ field.7 }}','{{ field.1 }}')">{{ field.2 }}</a>&nbsp;
+                {% endif %}
+                
+                
                 {% if field.3 == 1 %}
                       <div class="coverage required">
                 {% else %}
@@ -84,10 +90,11 @@ function getvalues(classname, fieldname) {
                 {% if field.5 == 0 %}
                     &nbsp;<i>never used</i>&nbsp;
                 {% else %}
-                     &nbsp; {{ field.5 }}/{{ field.4 }} &nbsp;
+                    &nbsp; {{ field.5 }}/{{ field.4 }} &nbsp;
                 {% endif %}
-                </div>
-                 </dd>                  
+                
+                 </div>
+               </dd>                  
              {% endfor %}
              
         {% endfor %}

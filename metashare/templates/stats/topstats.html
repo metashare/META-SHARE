@@ -5,6 +5,62 @@
     JavaScript should be enabled in order to support all functionalities.
     Enable JavaScript by changing your browser options, and then try again.
 </noscript>
+
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+  <script type="text/javascript">
+    google.load('visualization', '1', {packages: ['geochart']});
+    google.setOnLoadCallback(drawVisualization);
+    var data; 
+    var setOn = 0;
+    function drawVisualization() {
+      data = google.visualization.arrayToDataTable([
+      ['Country', 'Count'],
+      {% for geoinfo in geovisits %}
+        {% if geoinfo.0|length > 0 %}
+            ['{{ geoinfo.0 }}', {{ geoinfo.1 }}],
+        {% endif %}
+      {% endfor %}
+      ]);
+    
+      var geochart = new google.visualization.GeoChart(
+          document.getElementById('googlemap'));
+      google.visualization.events.addListener(geochart, 'select',
+            function () {
+               var selection = geochart.getSelection()[0];
+               var countrycode = data.getValue(selection.row, 0);
+               window.location.replace("{% url metashare.views.frontpage %}stats/top/?view={{ view }}&country="+countrycode);
+      });
+      
+      geochart.draw(data, {width: 530, height: 300});     
+    }
+   
+    
+    function print_r(arr,level) {
+var dumped_text = "";
+if(!level) level = 0;
+
+//The padding given at the beginning of the line.
+var level_padding = "";
+for(var j=0;j<level+1;j++) level_padding += "    ";
+
+if(typeof(arr) == 'object') { //Array/Hashes/Objects 
+    for(var item in arr) {
+        var value = arr[item];
+
+        if(typeof(value) == 'object') { //If it is an array,
+            dumped_text += level_padding + "'" + item + "' ...\n";
+            dumped_text += print_r(value,level+1);
+        } else {
+            dumped_text += level_padding + "'" + item + "' => \"" + value + "\"\n";
+        }
+    }
+} else { //Stings/Chars/Numbers etc.
+    dumped_text = "===>"+arr+"<===("+typeof(arr)+")";
+}
+return dumped_text;
+}
+  </script>
+  
 <table><tr><td bgcolor=#dddddd nowrap><font size=+1>Top 10</font>&nbsp;&nbsp;</td>
 <td nowrap>&nbsp;&nbsp;<font size=+1><a href="{% url metashare.views.frontpage %}stats/usage/">Usage statistics</a></font>&nbsp;&nbsp; </td>
 {% if user.username and myres %}
@@ -51,7 +107,7 @@
 </select>
 
 {% if countrycode != None and countrycode|length > 0 %}
-    from <img height=20 src="{{ MEDIA_URL }}css/international_flags/iso/32x32/flag-{{ countrycode|lower }}.png">
+    from {{ countryname }} <img height=20 src="{{ MEDIA_URL }}css/international_flags/iso/32x32/flag-{{ countrycode|lower }}.png">
 {% endif %} 
 </td></tr></table>
 </form>
@@ -59,7 +115,6 @@
 {% if topdata|length <= 0 %}
     <center><strong>No data found</strong></center>
 {% else %}
-<div id="results">
 <table class="result_table">
 <tr class="result_table_head">
 {% ifequal view "latestqueries" %}
@@ -106,36 +161,17 @@
     </tr>
 {% endfor %}
 </table>
-<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-  <script type="text/javascript">
-    google.load('visualization', '1', {packages: ['geochart']});
+</div>
 
-    function drawVisualization() {
-      var data = google.visualization.arrayToDataTable([
-      ['Country', 'Count'],
-      {% for geoinfo in geovisits %}
-        {% if geoinfo.0|length > 0 %}
-            ['{{ geoinfo.0 }}', {{ geoinfo.1 }}],
-        {% endif %}
-      {% endfor %}
-      ]);
-    
-      var geochart = new google.visualization.GeoChart(
-          document.getElementById('googlemap'));
-      geochart.draw(data, {width: 530, height: 300});
-    }
-    
-
-    google.setOnLoadCallback(drawVisualization);
-  </script>
 
 {% if geovisits|length > 0 %}
-    <div id="visits">   
-     <table width=50%>
-     <td width=40%>
-        <table><tr class="result_table_head">{{ visitstitle }}</td><tr
+<div class="filter_box" style="margin-top: 10px; margin-left: 10px">
+  <table class="result_table">
+     <td valign=top>
+        <table valign=top>
+            <tr class="result_table_head"><td nowrap>{{ visitstitle }}</td></tr>
         {% for geoinfo in geovisits %}
-            <tr class=content>
+            <tr>
                 <td nowrap> 
                     {% if geoinfo.0|length > 0 %}
                         <a href="{% url metashare.views.frontpage %}stats/top/?view={{ view }}&country={{ geoinfo.0 }}">{{ geoinfo.2 }}</a> </td>
@@ -152,14 +188,14 @@
         </table>
      </td>
      <td><div id="googlemap" style="width: 100%; height: 300px;"></div>
-         <div id="footer" class="prepend-2 append-2 last" style="text-align:right">* This product includes GeoLite data created by MaxMind, available from http://maxmind.com/.</div>
+         <div style="font-size:7pt;text-align:left">* This product includes GeoLite data created by MaxMind, available from http://maxmind.com/ and a Google Maps chart.</div>
      </td>
      </table>
-    </div>
+</div>
 {% endif %}
 
 {% endif %}
-</div>
+
 
 </td></tr></table>
   

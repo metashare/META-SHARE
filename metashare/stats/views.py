@@ -27,6 +27,7 @@ from datetime import datetime, date
 import urllib, urllib2
 from threading import Timer
 from metashare.settings import LOG_LEVEL, LOG_HANDLER, MEDIA_URL
+from metashare.stats.geoip import getcountry_name
 
 try:
     import cPickle as pickle
@@ -97,12 +98,19 @@ def usagestats (request):
             
         # get info about fields
         dbfields = getattr(mod, _model).__schema_fields__
-        for _not_used, _field, _required in dbfields:
+        for _component, _field, _required in dbfields:
             model_name = _model.replace("Type_model","")
-            if not _field.endswith('_set') and not model_name+" " + _field in _fields:
-                verbose_name = eval(u'{0}._meta.get_field("{1}").verbose_name'.format(_model, _field))
-                _fields[model_name+" " + _field] = [model_name, _field, verbose_name, _required, 0, 0]
-                
+            component_name = eval(u'{0}Type_model._meta.verbose_name'.format(model_name))
+                    
+            if (not _field.endswith('_set')):
+                if (not model_name+" "+_field in _fields):
+                    field_name = eval(u'{0}._meta.get_field("{1}").verbose_name'.format(_model, _field))
+                    _fields[model_name+" "+_field] = [component_name, _field, field_name, _required, 0, 0, "field",model_name]            
+            else:
+                if (not model_name+" "+_component in _fields):
+                    field_name = eval(u'{0}Type_model._meta.verbose_name'.format(_component))
+                    _fields[model_name+" "+_component] = [component_name, _component, field_name, _required, 0, 0, "component",model_name]
+            
     lrset = resourceInfoType_model.objects.all()
     usageset = UsageStats.objects.values('elname', 'elparent').annotate(Count('lrid', distinct=True), \
         Sum('count')).order_by('elparent', '-lrid__count', 'elname')        
@@ -193,9 +201,13 @@ def topstats (request):
     topdata = []
     view = request.GET.get('view', 'topviewed')
     countrycode = request.GET.get('country', None)
+    countryname = ""
+    if (countrycode != None):
+        countryname = getcountry_name(countrycode)
+        
     if view == "topviewed":
         geovisits = getCountryActions(VIEW_STAT)
-        visitstitle = "Viewed resources from  the world:"
+        visitstitle = "Viewed resources from the world:"
         data = getLRTop(VIEW_STAT, 10, countrycode)
         for item in data:
             try:
@@ -259,6 +271,7 @@ def topstats (request):
         'view': view,
         'geovisits': geovisits,
         'countrycode': countrycode,
+        'countryname': countryname,
         'visitstitle': visitstitle,
         'myres': isOwner(request.user.username)},
         context_instance=RequestContext(request))

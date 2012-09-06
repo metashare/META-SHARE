@@ -37,10 +37,15 @@ def saveLRStats(resource, action, request=None):
     if not hasattr(resource, 'storage_object') or resource.storage_object is None:
         return
         
+    lrid = resource.storage_object.identifier
+    if action == INGEST_STAT or action == DELETE_STAT:
+        UsageStats.objects.filter(lrid=lrid).delete()
+        LRStats.objects.filter(lrid=lrid).delete()
+        return
+    
     userid = _get_userid(request)
     sessid = _get_sessionid(request)
-    ipaddress = _get_ipaddress(request)
-    lrid = resource.storage_object.identifier
+    ipaddress = _get_ipaddress(request)    
     lrset = LRStats.objects.filter(userid=userid, lrid=lrid, sessid=sessid, action=action)
     if (lrset.count() > 0):
         record = lrset[0]
@@ -63,9 +68,6 @@ def saveLRStats(resource, action, request=None):
             UsageStats.objects.filter(lrid=resource.id).delete()
             _update_usage_stats(resource.id, resource.export_to_elementtree())
             LOGGER.debug('STATS: Updating usage statistics: resource {0} updated'.format(lrid))
-    if action == INGEST_STAT or action == DELETE_STAT:
-        UsageStats.objects.filter(lrid=lrid).delete()
-        LRStats.objects.filter(lrid=lrid).delete()
         
 
 def saveQueryStats(query, facets, found, exectime=0, request=None): 
@@ -163,14 +165,28 @@ def statByDate(date):
     return LRStats.objects.values("action").filter(lasttime__year=date[0:4], lasttime__month=date[4:6], lasttime__day=date[6:8]).annotate(Count('action'))
     
 def statDays():
-    return itertools.chain(LRStats.objects.dates('lasttime', 'day'), QueryStats.objects.dates('lasttime', 'day'))
-    
+    days = itertools.chain(LRStats.objects.dates('lasttime', 'day'), QueryStats.objects.dates('lasttime', 'day'))
+    return reduce(lambda x, y: x if y in x else x + [y], days, [])
 
 def _update_usage_stats(lrid, element_tree):
     if len(element_tree.getchildren()):
         for child in element_tree.getchildren():
             item = _update_usage_stats(lrid, child)
             if (item == None or item[0] == None):
+                lrset = UsageStats.objects.filter(lrid=lrid, elparent=element_tree.tag, elname=child.tag)
+                if (lrset.count() > 1):
+                    LOGGER.debug('ERROR! Saving usage stats in {}, {}'.format(element_tree.tag, child.tag))
+                    continue
+                if (lrset.count() > 0):
+                    record = lrset[0]
+                    record.count = record.count+1
+                    record.save(force_update=True)
+                else:
+                    record = UsageStats()
+                    record.lrid = lrid
+                    record.elname = child.tag
+                    record.elparent = element_tree.tag
+                    record.save(force_insert=True)
                 continue
             if not isinstance(item[0], basestring):
                 elname = item[0][0].encode("utf-8") if item[0][0] != None else ""

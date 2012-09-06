@@ -22,6 +22,7 @@ from django.db.models.fields.related import ForeignRelatedObjectsDescriptor, \
     OneToOneField
 from Queue import Queue
 from metashare.storage.models import MASTER
+from metashare.stats.model_utils import saveLRStats, DELETE_STAT
 
 # Setup logging support.
 logging.basicConfig(level=LOG_LEVEL)
@@ -1242,7 +1243,8 @@ class SchemaModel(models.Model):
                         if child is not None:
                             to_delete.put(child)
             obj.delete()
-
+            saveLRStats(self, DELETE_STAT)
+            
 class SubclassableModel(SchemaModel):
     """
     Generic superclass for all models that want to allow getting a
