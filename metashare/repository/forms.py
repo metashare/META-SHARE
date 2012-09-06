@@ -65,6 +65,7 @@ class FacetedBrowseForm(FacetedSearchForm):
         for facet in [f for f in self.selected_facets if ":" in f]:
             field, value = facet.split(":", 1)
             # only add facets which are also in the search index
+            # pylint: disable-msg=E1101
             if not field in resourceInfoType_modelIndex.fields:
                 LOGGER.info('Ignoring unknown facet field "%s".', field)
                 continue
@@ -77,6 +78,7 @@ class FacetedBrowseForm(FacetedSearchForm):
         _errors = []
         for facet in self.selected_facets:
             field = facet.split(":", 1)[0]
+            # pylint: disable-msg=E1101
             if not field in resourceInfoType_modelIndex.fields:
                 _errors.append(
                     _("Ignoring an unknown filter from your query: %s") % field)
