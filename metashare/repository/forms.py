@@ -9,6 +9,7 @@ from django.utils.translation import ugettext as _
 
 from metashare.settings import LOG_HANDLER
 from metashare.repository.models import resourceInfoType_model
+from metashare.repository.search_indexes import resourceInfoType_modelIndex
 from metashare.recommendations.recommendations import get_more_from_same_creators, \
     get_more_from_same_projects
 
@@ -63,9 +64,28 @@ class FacetedBrowseForm(FacetedSearchForm):
         # value are quoted correctly and separately:
         for facet in [f for f in self.selected_facets if ":" in f]:
             field, value = facet.split(":", 1)
+            # only add facets which are also in the search index
+            # pylint: disable-msg=E1101
+            if not field in resourceInfoType_modelIndex.fields:
+                LOGGER.info('Ignoring unknown facet field "%s".', field)
+                continue
             if value:
                 sqs = sqs.narrow(u'%s:"%s"' % (field, sqs.query.clean(value)))
         return sqs
+
+    def clean(self):
+        # add validation errors for unknown facet fields in the request:
+        _errors = []
+        for facet in self.selected_facets:
+            field = facet.split(":", 1)[0]
+            # pylint: disable-msg=E1101
+            if not field in resourceInfoType_modelIndex.fields:
+                _errors.append(
+                    _("Ignoring an unknown filter from your query: %s") % field)
+        if _errors:
+            raise forms.ValidationError(_errors)
+
+        return super(FacetedBrowseForm, self).clean()
 
 
 def _extract_special_queries(query):

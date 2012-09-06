@@ -103,3 +103,12 @@ div.results {
 }
 
 /*end override container size*/
+
+ul.errorlist {
+	background:#ffcb00;
+	border:1px solid #ffaa00;
+	padding:2px;
+	list-style-type:none;
+	margin:0em;
+}
+ul.errorlist li { padding:0px; }

@@ -145,7 +145,8 @@ CORE_NODES = {
 }
 
 # User accounts with the permission to access synchronization information on
-# this node:
+# this node; whenever you change this setting, make sure to run
+# "manage.py syncdb" for the changes to take effect!
 SYNC_USERS = {
     #'syncuser1': 'secret',
     #'syncuser2': 'alsosecret',
