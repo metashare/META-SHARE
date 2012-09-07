@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}{{ title }} &ndash; META-SHARE{% endblock %}
+{% block messages %}
+{% if form.errors %}
+<p class="error">Please give at least one organization.</p>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<h2>Apply for organization membership</h2>
+<div class="content_box">
+<form class="form_helper" method="post" action="{% url metashare.accounts.views.organization_application %}">
+{% csrf_token %}
+<table>
+  {{ form.as_table }}
+</table>
+<input class="button middle_button" style="margin-left:auto;margin-right:auto;" type="submit" value="Apply" />
+</form>
+</div>
+{% endblock %}
+

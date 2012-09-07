@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<django-objects version="1.0"><object pk="1" model="stats.querystats"><field type="CharField" name="userid"></field><field type="CharField" name="geoinfo"></field><field type="TextField" name="query">Italian</field><field type="TextField" name="facets">[]</field><field type="DateTimeField" name="lasttime">2012-08-27 10:00:33</field><field type="IntegerField" name="found">1</field><field type="IntegerField" name="exectime">21000</field></object></django-objects>

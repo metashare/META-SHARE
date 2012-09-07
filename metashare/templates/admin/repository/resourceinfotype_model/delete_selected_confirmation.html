@@ -1,0 +1,61 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_modify adminmedia %}
+{% load url from future %}
+
+{% block extrahead %}{{ block.super }}
+{% url 'admin:jsi18n' as jsi18nurl %}
+<script type="text/javascript" src="{{ jsi18nurl|default:"../../../jsi18n/" }}"></script>
+
+{{ media }}
+{% endblock %}
+
+{% block breadcrumbs %}
+{% include "breadcrumbs.html" %}
+{% endblock %}
+
+{% block content %}
+
+{% if cannot_be_deleted %}
+
+<h3>You do not have the rights to delete the following resource{{ cannot_be_deleted|pluralize }}:</h3>
+<div class='distance-div'>
+	<table class='resource-group'>
+		<tr><th>Resource Name</th></tr>
+	    {% for resource in cannot_be_deleted %}	    	
+	        <tr><td>{{ resource }}</td></tr>
+	    {% endfor %}
+	<table>
+</div>
+
+{% endif %}
+
+{% if can_be_deleted %}
+
+<h3>Are you sure you want to delete the following resource{{ can_be_deleted|pluralize }}?</h3>
+<div class='distance-div'>
+	<table class='resource-group'>
+		<tr><th>Resource Name</th></tr>
+	    {% for resource in can_be_deleted %}	    	
+	        <tr><td>{{ resource }}</td></tr>
+	    {% endfor %}
+	<table>
+</div>
+
+{% endif %}
+
+<form method="post" action="{{ path }}">{% csrf_token %}
+	<table>
+        {{ form }}	        
+    </table>
+    <div class='distance-div'>
+        <input type="hidden" name="action" value="delete"/>
+        {% if can_be_deleted %}
+	        <input type="submit" name="delete" value="Delete"/>
+	        <input type="submit" name="cancel" value="Cancel"/>
+        {% else %}
+        	<input type="submit" name="cancel" value="Back"/>
+        {% endif %}
+    </div>
+</form>
+
+{% endblock content %}

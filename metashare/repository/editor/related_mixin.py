@@ -34,15 +34,16 @@ class RelatedAdminMixin(object):
     the ModelAdmin and the Inline subclasses.
     '''
     
+    kwargs = {'position':'top'}
     custom_m2m_widget_overrides = {
         # Reusable types with actual ajax search:
-        actorInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=ActorLookup), 
-        documentationInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=DocumentationLookup),
-        documentInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=DocumentLookup),
-        personInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=PersonLookup),
-        organizationInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=OrganizationLookup),
-        projectInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=ProjectLookup),
-        targetResourceInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=TargetResourceLookup),
+        actorInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=ActorLookup, **kwargs), 
+        documentationInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=DocumentationLookup, **kwargs),
+        documentInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=DocumentLookup, **kwargs),
+        personInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=PersonLookup, **kwargs),
+        organizationInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=OrganizationLookup, **kwargs),
+        projectInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=ProjectLookup, **kwargs),
+        targetResourceInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=TargetResourceLookup, **kwargs),
         # Custom one-to-many widgets needed to avoid nested inlines:
         membershipInfoType_model: OneToManyWidget(lookup_class=MembershipDummyLookup),
         languageVarietyInfoType_model: OneToManyWidget(lookup_class=LanguageVarietyDummyLookup),
@@ -60,9 +61,7 @@ class RelatedAdminMixin(object):
         '''
         Return True if db_field is marked as a hidden field, False otherwise.
         '''
-        _hidden_fields = getattr(self, 'hidden_fields', None)
-        _hidden_fields = _hidden_fields or []
-        if db_field.name in _hidden_fields:
+        if db_field.name in getattr(self, 'hidden_fields', ()):
             kwargs['widget'] = HiddenInput()
             kwargs['label'] = ''
 
@@ -168,8 +167,9 @@ class RelatedAdminMixin(object):
         (b) updating the parent field with the ID of the object we just edited.
         '''
         pk_value = obj._get_pk_val()
-        msg = _('The %(name)s "%(obj)s" was added successfully.') % {'name': obj._meta.verbose_name, 'obj': obj} 
-        self.message_user(request, msg + ' ' + _("You may edit it again below.")) 
+        msg = _('The %(name)s "%(obj)s" was saved successfully. You may edit ' \
+            'it again below.') % {'name': obj._meta.verbose_name, 'obj': obj} 
+        self.message_user(request, msg)
         post_url_continue = '../%s/?_popup=1'
         return HttpResponse('<script type="text/javascript">opener.saveAndContinuePopup(window, "%s", "%s", "%s");</script>' % \
             # escape() calls force_unicode.

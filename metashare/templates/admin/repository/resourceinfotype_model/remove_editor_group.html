@@ -8,8 +8,13 @@
 
 {{ media }}
 {% endblock %}
+
+{% block breadcrumbs %}
+{% include "breadcrumbs.html" %}
+{% endblock %}
+
 {% block content %}
-<h3>Remove Editor Groups from the following resource{{ selected_resources|pluralize }}:</h3>
+<h3>Remove editor groups from the following resource{{ selected_resources|pluralize }}:</h3>
 
 <div class='distance-div'>
 	<table class='resource-group'>

@@ -1,22 +1,42 @@
+import logging
+from datetime import datetime, timedelta
+
 import kronos
-from metashare.settings import SYNC_INTERVALS, UPDATE_INTERVALS
+
+from django.conf import settings
 from django.core.management import call_command
+
+from metashare.accounts.models import RegistrationRequest
+
+
+# Setup logging support.
+LOGGER = logging.getLogger(__name__)
+LOGGER.addHandler(settings.LOG_HANDLER)
 
 
 # clean up the session database every Monday night
 @kronos.register("12 4 * * 1")
 def run_session_cleanup():
+    LOGGER.info("Will now clean up the session database.")
     call_command('cleanup', interactive=False)
+
+
+# every night remove account registration requests which are older than 3 days
+@kronos.register("12 5 * * *")
+def run_account_registration_request_cleanup():
+    LOGGER.info("Will now clean up the account registration request database.")
+    RegistrationRequest.objects.filter(
+        created_lt=(datetime.now() - timedelta(days=3))).delete()
 
 
 sync_interval_settings = ""
 # Get sync interval settings
 sync_interval_settings = "{} {} {} {} {}".format( \
-    SYNC_INTERVALS['MINUTE'],
-    SYNC_INTERVALS['HOUR'],
-    SYNC_INTERVALS['DAY_OF_MONTH'],
-    SYNC_INTERVALS['MONTH'],
-    SYNC_INTERVALS['DAY_OF_WEEK']
+    settings.SYNC_INTERVALS['MINUTE'],
+    settings.SYNC_INTERVALS['HOUR'],
+    settings.SYNC_INTERVALS['DAY_OF_MONTH'],
+    settings.SYNC_INTERVALS['MONTH'],
+    settings.SYNC_INTERVALS['DAY_OF_WEEK']
     )
 
 @kronos.register(sync_interval_settings)
@@ -27,11 +47,11 @@ def run_synchronization():
 update_interval_settings = ""
 # Get update interval settings
 update_interval_settings = "{} {} {} {} {}".format( \
-    UPDATE_INTERVALS['MINUTE'],
-    UPDATE_INTERVALS['HOUR'],
-    UPDATE_INTERVALS['DAY_OF_MONTH'],
-    UPDATE_INTERVALS['MONTH'],
-    UPDATE_INTERVALS['DAY_OF_WEEK']
+    settings.UPDATE_INTERVALS['MINUTE'],
+    settings.UPDATE_INTERVALS['HOUR'],
+    settings.UPDATE_INTERVALS['DAY_OF_MONTH'],
+    settings.UPDATE_INTERVALS['MONTH'],
+    settings.UPDATE_INTERVALS['DAY_OF_WEEK']
     )
 
 @kronos.register(update_interval_settings)

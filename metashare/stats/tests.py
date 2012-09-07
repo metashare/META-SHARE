@@ -1,22 +1,24 @@
 import django.test
 import urllib2
+import logging
 from urllib import urlencode
 from django.test.client import Client
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.admin.sites import LOGIN_FORM_KEY
 
 from metashare import test_utils
-from metashare.accounts.models import EditorGroup, ManagerGroup
-from metashare.repository.models import resourceInfoType_model, lingualityInfoType_model
-from metashare.repository.editor.resource_editor import publish_resources, unpublish_resources, ingest_resources
-from metashare.storage.models import INTERNAL, INGESTED
-from metashare.settings import DJANGO_BASE, DJANGO_URL, ROOT_PATH
+from metashare.accounts.models import EditorGroup, EditorGroupManagers
+from metashare.repository.models import resourceInfoType_model
+from metashare.repository.editor.resource_editor import unpublish_resources, \
+    ingest_resources
+from metashare.settings import DJANGO_BASE, DJANGO_URL, ROOT_PATH, LOG_HANDLER
 from metashare.stats.model_utils import _update_usage_stats, saveLRStats, \
     getLRLast, saveQueryStats, getLastQuery, UPDATE_STAT, VIEW_STAT, \
     RETRIEVE_STAT, DOWNLOAD_STAT
-from selenium.webdriver.firefox.webdriver import WebDriver
-from django_selenium.testcases import SeleniumTestCase
 
+# Setup logging support.
+LOGGER = logging.getLogger(__name__)
+LOGGER.addHandler(LOG_HANDLER)
 
 ADMINROOT = '/{0}editor/'.format(DJANGO_BASE)
 TESTFIXTURES_ZIP = '{}/repository/fixtures/tworesources.zip'.format(ROOT_PATH)
@@ -25,6 +27,16 @@ PSP_XML = '{}/repository/test_fixtures/PSP/UIB-M10-9_v2.xml'.format(ROOT_PATH)
 class StatsTest(django.test.TestCase):
     manager_login = None
     
+    @classmethod
+    def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
+        test_utils.set_index_active(False)
+    
+    @classmethod
+    def tearDownClass(cls):
+        test_utils.set_index_active(True)
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
+    
     def setUp(self):
         """
         Sets up some resources with which to test.
@@ -32,7 +44,7 @@ class StatsTest(django.test.TestCase):
         self.stats_server_url = "http://metastats.fbk.eu/"
         
         test_editor_group = EditorGroup.objects.create(name='test_editor_group')
-        test_manager_group = ManagerGroup.objects.create(
+        test_manager_group = EditorGroupManagers.objects.create(
             name='test_manager_group', managed_group=test_editor_group)
         test_utils.create_manager_user('manageruser', 'manager@example.com',
             'secret', (test_editor_group, test_manager_group))
@@ -43,12 +55,19 @@ class StatsTest(django.test.TestCase):
             'password': 'secret',
         }
         
+    def tearDown(self):
+        """
+        Clean up the test
+        """
+        test_utils.clean_resources_db()
+        test_utils.clean_storage()
+        test_utils.clean_user_db()
     
     def testStatActions(self):
         """
         Testing statistics functions about LR
         """
-        client = self.client_with_user_logged_in(StatsTest.manager_login)
+        client = test_utils.get_client_with_user_logged_in(StatsTest.manager_login)
         xmlfile = open(TESTFIXTURES_ZIP, 'rb')
         response = client.post(ADMINROOT+'upload_xml/', {'description': xmlfile, 'uploadTerms':'on' }, follow=True)
         # And verify that we have more than zero resources on the page where we
@@ -126,7 +145,7 @@ class StatsTest(django.test.TestCase):
         self.assertEquals(200, response.status_code)
     
     def testMyResources(self):
-        client = self.client_with_user_logged_in(StatsTest.manager_login)
+        client = test_utils.get_client_with_user_logged_in(StatsTest.manager_login)
         xmlfile = open(TESTFIXTURES_ZIP, 'rb')
         response = client.post(ADMINROOT+'upload_xml/', {'description': xmlfile, 'uploadTerms':'on' }, follow=True)
         self.assertContains(response, 'Successfully uploaded 2 resource descriptions')
@@ -171,8 +190,7 @@ class StatsTest(django.test.TestCase):
         self.assertEqual(2, len(statsdata))
          
         #delete the second resource
-        resource.delete_deep();        
-        print "STATUS: " + str(response.status_code)
+        resource.delete_deep()        
         statsdata = getLRLast(VIEW_STAT, 10)
         self.assertEqual(1, len(statsdata))
         
@@ -193,13 +211,14 @@ class StatsTest(django.test.TestCase):
                 .format(user_credentials, response)
         return client
 
-        
+
+    
     def testUsage(self):
         # checking if there are the usage statistics
         
-        client = self.client_with_user_logged_in(StatsTest.manager_login)
+        client = test_utils.get_client_with_user_logged_in(StatsTest.manager_login)
         xmlfile = open(TESTFIXTURES_ZIP, 'rb')
-        response = client.post(ADMINROOT+'upload_xml/', {'description': xmlfile, 'uploadTerms':'on' }, follow=True)
+        client.post(ADMINROOT+'upload_xml/', {'description': xmlfile, 'uploadTerms':'on' }, follow=True)
         
         statsdata = getLRLast(UPDATE_STAT, 2)
         self.assertEqual(len(statsdata), 2)
@@ -213,4 +232,4 @@ class StatsTest(django.test.TestCase):
             print Exception, 'could not get usage stats: {}'.format(response)
         else:
             self.assertContains(response, "identificationInfo")
-    
+

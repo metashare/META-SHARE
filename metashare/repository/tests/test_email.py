@@ -1,6 +1,11 @@
+import logging
 from django.test import TestCase
 from metashare import test_utils
-from metashare.settings import ROOT_PATH
+from metashare.settings import ROOT_PATH, LOG_HANDLER
+
+# Setup logging support.
+LOGGER = logging.getLogger(__name__)
+LOGGER.addHandler(LOG_HANDLER)
 
 class EmailPictureTest(TestCase):
     """
@@ -9,11 +14,13 @@ class EmailPictureTest(TestCase):
     
     @classmethod
     def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
         test_utils.set_index_active(False)
     
     @classmethod
     def tearDownClass(cls):
         test_utils.set_index_active(True)
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
     
     def setUp(self):
         """
@@ -22,13 +29,13 @@ class EmailPictureTest(TestCase):
         test_utils.setup_test_storage()
         _fixture = '{0}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
         _result = test_utils.import_xml(_fixture)
-        self.resource_id = _result[0].id
+        self.resource_id = _result.id
     
     def tearDown(self):
         """
         Clean up the test
         """
-        test_utils.clean_db()
+        test_utils.clean_resources_db()
         test_utils.clean_storage()
 
 # pylint: disable-msg=W0105

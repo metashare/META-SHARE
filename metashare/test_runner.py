@@ -1,7 +1,3 @@
-"""
-Project: META-SHARE prototype implementation
- Author: Christian Spurk <cspurk@dfki.de>
-"""
 import logging
 
 from django_selenium.selenium_runner import SeleniumTestRunner
@@ -11,8 +7,7 @@ from metashare import settings
 from metashare.haystack_routers import MetashareRouter
 
 # set up logging support
-logging.basicConfig(level=settings.LOG_LEVEL)
-LOGGER = logging.getLogger('metashare.test_runner')
+LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(settings.LOG_HANDLER)
 
 

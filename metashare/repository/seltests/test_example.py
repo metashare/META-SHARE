@@ -12,7 +12,7 @@ class ExampleSeleniumTest(SeleniumTestCase):
         test_utils.setup_test_storage()
         _fixture = '{0}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
         _result = test_utils.import_xml(_fixture)
-        self.resource_id = _result[0].id
+        self.resource_id = _result.id
         resource = resourceInfoType_model.objects.get(pk=self.resource_id)
         resource.storage_object.published = True
         resource.storage_object.save()
@@ -34,10 +34,10 @@ class ExampleSeleniumTest(SeleniumTestCase):
         driver = self.driver
         # check start site
         driver.get(self.base_url)
-        self.assertEqual("MetaShare", driver.title)
-        self.assertEqual("1 language resources at your disposal...", 
+        self.assertEqual("META-SHARE", driver.title)
+        self.assertEqual("1 language resource at your disposal...", 
           driver.find_element_by_xpath(
-            "//div[@id='content']/div[3]/div/p[2]").text)
+            "//div[@id='content']/div[2]/div/p[2]").text)
         # login normaluser
         # TODO remove this workaround when Selenium starts working again as intended
         driver.set_window_size(1280, 1024)
@@ -50,15 +50,15 @@ class ExampleSeleniumTest(SeleniumTestCase):
         driver.find_element_by_css_selector(
           "input.button.middle_button").click()
         self.assertEqual(
-          "Username: normaluser", 
-          driver.find_element_by_css_selector("p > i").text)
+          "Your Profile, normaluser", 
+          driver.find_element_by_xpath("//div[@id='header']/ul/li[last()]/a").text)
         # click 'browse'
-        driver.find_element_by_id("browse").click()
+        driver.find_element_by_xpath("//div[@id='header']/ul/li[1]/a").click()
         self.assertEqual(
           "Search", driver.find_element_by_css_selector("input#search_button").get_attribute("value"))
         # logout normaluser
         driver.find_element_by_xpath(
-          "//div[@id='inner']/div[2]/a[2]/div").click()
+             "//div[@id='inner']/div[2]/a/div").click()
         self.assertEqual(
           "Login", 
           driver.find_element_by_xpath(
@@ -72,6 +72,8 @@ class ExampleSeleniumTest(SeleniumTestCase):
         return True
     
     def tearDown(self):
-        resourceInfoType_model.objects.all().delete()
+        test_utils.clean_resources_db()
+        test_utils.clean_storage()
+        test_utils.clean_user_db()
 
         super(ExampleSeleniumTest, self).tearDown()

@@ -1,10 +1,6 @@
-"""
-Project: META-SHARE prototype implementation
- Author: Christian Federmann <cfedermann@dfki.de>
-"""
-
 import logging
 
+from collections import Set, Sequence 
 from datetime import datetime
 from os.path import split, getsize
 from urllib import urlopen
@@ -15,23 +11,35 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
+from django.contrib import messages
+from django.template.loader import render_to_string
+from django.core.mail import send_mail
+from django.utils.translation import ugettext as _
 
 from haystack.views import FacetedSearchView
 
-from metashare.repository.forms import LicenseSelectionForm, LicenseAgreementForm
-from metashare.repository.models import licenceInfoType_model, resourceInfoType_model
-from metashare.repository.search_indexes import resourceInfoType_modelIndex
-from metashare.settings import LOG_LEVEL, LOG_HANDLER, MEDIA_URL
+from metashare.repository.editor.resource_editor import has_edit_permission
+from metashare.repository.forms import LicenseSelectionForm, \
+    LicenseAgreementForm, DownloadContactForm, MORE_FROM_SAME_CREATORS, \
+    MORE_FROM_SAME_PROJECTS
+from metashare.repository import model_utils
+from metashare.repository.models import licenceInfoType_model, \
+    resourceInfoType_model
+from metashare.repository.search_indexes import resourceInfoType_modelIndex, \
+    update_lr_index_entry
+from metashare.settings import LOG_HANDLER, MEDIA_URL, DJANGO_URL
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
 from metashare.storage.models import PUBLISHED
+from metashare.recommendations.recommendations import SessionResourcesTracker, \
+    get_download_recommendations, get_view_recommendations, \
+    get_more_from_same_creators_qs, get_more_from_same_projects_qs
 
 
 MAXIMUM_READ_BLOCK_SIZE = 4096
 
 # Setup logging support.
-logging.basicConfig(level=LOG_LEVEL)
-LOGGER = logging.getLogger('metashare.repository.views')
+LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 
 
@@ -56,10 +64,12 @@ def _convert_to_template_tuples(element_tree):
         values = []
         for child in element_tree.getchildren():
             values.append(_convert_to_template_tuples(child))
-        return (element_tree.tag, values)
+        # use pretty print name of element instead of tag; requires that 
+        # element_tree is created using export_to_elementtree(pretty=True)
+        return (element_tree.attrib["pretty"], values)
 
     # Otherwise, we return a tuple containg (key, value, required), 
-    # i.e., (tag, text, <0,1>).
+    # i.e., (tag, text, <True,False>).
     # The "required" element was added to the tree, for passing 
     # information about whether a field is required or not, to correctly
     # render the single resource view.
@@ -68,7 +78,9 @@ def _convert_to_template_tuples(element_tree):
         # being thrown for cases, like /repository/browse/1222/, where some
         # required attributes seem to be missing.
         required = getattr(element_tree, 'required', 0)
-        return ((element_tree.tag, element_tree.text, required),)
+        # use pretty print name of element instead of tag; requires that 
+        # element_tree is created using export_to_elementtree(pretty=True)
+        return ((element_tree.attrib["pretty"], element_tree.text, required),)
 
 
 # a type providing an enumeration of META-SHARE member types
@@ -168,7 +180,7 @@ def _get_licences(resource, user_membership):
                 resource.distributionInfo.id))
     
     all_licenses = dict([(l_name, l_info) for l_info in licence_infos
-                         for l_name in l_info.get_licence_display_list()])
+                         for l_name in l_info.licence])
     result = {}
     for name, info in all_licenses.items():
         access = LICENCEINFOTYPE_URLS_LICENCE_CHOICES.get(name, None)
@@ -281,9 +293,7 @@ def _provide_download(request, resource, download_urls):
             response['Content-Length'] = getsize(dl_path) 
             response['Content-Disposition'] = 'attachment; filename={0}' \
                                                 .format(split(dl_path)[1])
-
-            # maintain download statistics and return the response for download
-            saveLRStats(resource, DOWNLOAD_STAT, request)
+            _update_download_stats(resource, request)
             LOGGER.info("Offering a local download of resource #{0}." \
                         .format(resource.id))
             return response
@@ -296,7 +306,7 @@ def _provide_download(request, resource, download_urls):
         for url in download_urls:
             status_code = urlopen(url).getcode()
             if not status_code or status_code < 400:
-                saveLRStats(resource, DOWNLOAD_STAT, request)
+                _update_download_stats(resource, request)
                 LOGGER.info("Redirecting to {0} for the download of resource " \
                             "#{1}.".format(url, resource.id))
                 return redirect(url)
@@ -312,6 +322,98 @@ def _provide_download(request, resource, download_urls):
     return render_to_response('repository/lr_not_downloadable.html',
                               { 'resource': resource, 'reason': 'internal' },
                               context_instance=RequestContext(request))
+
+
+def _update_download_stats(resource, request):
+    """
+    Updates all relevant statistics counters for a the given successful resource
+    download request.
+    """
+    # maintain general download statistics
+    if saveLRStats(resource, DOWNLOAD_STAT, request):
+        # update download count in the search index, too
+        update_lr_index_entry(resource)
+    # update download tracker
+    tracker = SessionResourcesTracker.getTracker(request)
+    tracker.add_download(resource, datetime.now())
+    request.session['tracker'] = tracker
+
+
+@login_required
+def download_contact(request, object_id):
+    """
+    Renders the download contact view to request information regarding a resource
+    """
+    resource = get_object_or_404(resourceInfoType_model,
+                                 storage_object__identifier=object_id,
+                                 storage_object__publication_status=PUBLISHED)
+
+    default_message = "We are interested in using the above mentioned " \
+        "resource. Please provide us with all the relevant information (e.g.," \
+        " licensing provisions and restrictions, any fees required etc.) " \
+        "which is necessary for concluding a deal for getting a license. We " \
+        "are happy to provide any more information on our request and our " \
+        "envisaged usage of your resource.\n\n" \
+        "[Please include here any other request you may have regarding this " \
+        "resource or change this message altogether]\n\n" \
+        "Please kindly use the above mentioned e-mail address for any " \
+        "further communication."
+
+    # Find out the relevant resource contact emails and names
+    resource_emails = []
+    resource_contacts = []
+    for person in resource.contactPerson.all():
+        resource_emails.append(person.communicationInfo.email[0])
+        if person.givenName:
+            _name = u'{} '.format(person.get_default_givenName())
+        else:
+            _name = u''
+        resource_contacts.append(_name + person.get_default_surname())
+
+    # Check if the edit form has been submitted.
+    if request.method == "POST":
+        # If so, bind the creation form to HTTP POST values.
+        form = DownloadContactForm(initial={'userEmail': request.user.email,
+                                            'message': default_message},
+                                   data=request.POST)
+        # Check if the form has validated successfully.
+        if form.is_valid():
+            message = form.cleaned_data['message']
+            user_email = form.cleaned_data['userEmail']
+
+            # Render notification email template with correct values.
+            data = {'message': message, 'resource': resource,
+                'resourceContactName': resource_contacts, 'user': request.user,
+                'user_email': user_email, 'node_url': DJANGO_URL}
+            try:
+                # Send out email to the resource contacts
+                send_mail('Request for information regarding a resource',
+                    render_to_string('repository/resource_download_information.email', data),
+                    user_email, resource_emails, fail_silently=False)
+            except: #SMTPException:
+                # If the email could not be sent successfully, tell the user
+                # about it.
+                messages.error(request,
+                  _("There was an error sending out the request email."))
+            else:
+                messages.success(request, _('You have successfully ' \
+                    'sent a message to the resource contact person.'))
+
+            # Redirect the user to the resource page.
+            return redirect(resource.get_absolute_url())
+
+    # Otherwise, render a new DownloadContactForm instance
+    else:
+        form = DownloadContactForm(initial={'userEmail': request.user.email,
+                                            'message': default_message})
+
+    dictionary = { 'username': request.user,
+      'resource': resource,
+      'resourceContactName': resource_contacts,
+      'resourceContactEmail': resource_emails,
+      'form': form }
+    return render_to_response('repository/download_contact_form.html',
+                        dictionary, context_instance=RequestContext(request))
 
 
 @login_required
@@ -334,30 +436,160 @@ def view(request, resource_name=None, object_id=None):
         return redirect(resource.get_absolute_url())
 
     # Convert resource to ElementTree and then to template tuples.
-    resource_tree = resource.export_to_elementtree()
-    lr_content = _convert_to_template_tuples(resource_tree)
+    lr_content = _convert_to_template_tuples(
+        resource.export_to_elementtree(pretty=True))
+
+    # get the 'best' language version of a "DictField" and all other versions
+    resource_name = resource.identificationInfo.get_default_resourceName()
+    res_short_names = resource.identificationInfo.resourceShortName.values()
+    description = resource.identificationInfo.get_default_description()
+    other_res_names = [name for name in resource.identificationInfo \
+            .resourceName.itervalues() if name != resource_name]
+    other_descriptions = [name for name in resource.identificationInfo \
+            .description.itervalues() if name != description]
+
+    # Create fields lists
+    url = resource.identificationInfo.url
+    metashare_id = resource.identificationInfo.metaShareId
+    resource_type = resource.resourceComponentType.as_subclass().resourceType
+    media_types = set(model_utils.get_resource_media_types(resource))
+    linguality_infos = set(model_utils.get_resource_linguality_infos(resource))
+    license_types = set(model_utils.get_resource_license_types(resource))
+
+    distribution_info_tuple = None
+    contact_person_tuples = []
+    metadata_info_tuple = None
+    version_info_tuple = None
+    validation_info_tuples = []
+    usage_info_tuple = None
+    documentation_info_tuple = None
+    resource_creation_info_tuple = None
+    relation_info_tuples = []
+    for _tuple in lr_content[1]:
+        if _tuple[0] == "Distribution":
+            distribution_info_tuple = _tuple
+        elif _tuple[0] == "Contact person":
+            contact_person_tuples.append(_tuple)
+        elif _tuple[0] == "Metadata":
+            metadata_info_tuple = _tuple
+        elif _tuple[0] == "Version":
+            version_info_tuple = _tuple
+        elif _tuple[0] == "Validation":
+            validation_info_tuples.append(_tuple)
+        elif _tuple[0] == "Usage":
+            usage_info_tuple = _tuple
+        elif _tuple[0] == "Resource documentation":
+            documentation_info_tuple = _tuple            
+        elif _tuple[0] == "Resource creation":
+            resource_creation_info_tuple = _tuple
+        elif _tuple[0] == "Relation":
+            relation_info_tuples.append(_tuple)
 
     # Define context for template rendering.
-    context = { 'resource': resource, 'lr_content': lr_content }
+    context = { 'resource': resource,
+                'resourceName': resource_name,
+                'res_short_names': res_short_names,
+                'description': description,
+                'other_res_names': other_res_names,
+                'other_descriptions': other_descriptions,
+                'lr_content': lr_content, 
+                'distribution_info_tuple': distribution_info_tuple,
+                'contact_person_tuples': contact_person_tuples,                
+                'metadata_info_tuple': metadata_info_tuple,               
+                'version_info_tuple': version_info_tuple,
+                'validation_info_tuples': validation_info_tuples,
+                'usage_info_tuple': usage_info_tuple,
+                'documentation_info_tuple': documentation_info_tuple,                
+                'resource_creation_info_tuple': resource_creation_info_tuple,
+                'relation_info_tuples': relation_info_tuples,
+                'linguality_infos': linguality_infos,
+                'license_types': license_types,
+                'resourceType': resource_type,
+                'mediaTypes': media_types,
+                'url': url,
+                'metaShareId': metashare_id                
+                }
     template = 'repository/lr_view.html'
 
-    # For staff users, we have to add LR_EDIT which contains the URL of
-    # the Django admin backend page for this resource.
-    if request.user.is_staff:
+    # For users who have edit permission for this resource, we have to add LR_EDIT 
+    # which contains the URL of the Django admin backend page for this resource.
+    if has_edit_permission(request, resource):
         context['LR_EDIT'] = reverse(
-            'admin:repository_resourceinfotype_model_change', args=(object_id,))
+            'admin:repository_resourceinfotype_model_change', args=(resource.id,))
 
     # in general, only logged in users may download/purchase any resources
     context['LR_DOWNLOAD'] = request.user.is_active
 
-    # Update statistics and create a report about the user actions on LR
-    if hasattr(resource.storage_object, 'identifier'):
-        saveLRStats(resource, VIEW_STAT, request)
-        context['LR_STATS'] = getLRStats(resource.storage_object.identifier)
+    # Update statistics:
+    if saveLRStats(resource, VIEW_STAT, request):
+        # update view count in the search index, too
+        update_lr_index_entry(resource)
+    # update view tracker
+    tracker = SessionResourcesTracker.getTracker(request)
+    tracker.add_view(resource, datetime.now())
+    request.session['tracker'] = tracker
+
+    # Add download/view/last updated statistics to the template context.
+    context['LR_STATS'] = getLRStats(resource.storage_object.identifier)
+            
+    # Add recommendations for 'also viewed' resources
+    context['also_viewed'] = \
+        _format_recommendations(get_view_recommendations(resource))
+    # Add recommendations for 'also downloaded' resources
+    context['also_downloaded'] = \
+        _format_recommendations(get_download_recommendations(resource))
+    # Add 'more from same' links
+    if get_more_from_same_projects_qs(resource).count():
+        context['search_rel_projects'] = '{}/repository/search?q={}:{}'.format(
+            DJANGO_URL, MORE_FROM_SAME_PROJECTS,
+            resource.storage_object.identifier)
+    if get_more_from_same_creators_qs(resource).count():
+        context['search_rel_creators'] = '{}/repository/search?q={}:{}'.format(
+            DJANGO_URL, MORE_FROM_SAME_CREATORS,
+            resource.storage_object.identifier)
 
     # Render and return template with the defined context.
     ctx = RequestContext(request)
     return render_to_response(template, context, context_instance=ctx)
+
+
+def get_structure_paths(obj, path=(), memo=None):
+    """
+    Returns a list of tuples containing the path of each item in
+    a nested structure of tuples and lists.
+    Mostly taken from:
+    http://code.activestate.com/recipes/577982-recursively-walk-python-objects/
+    """
+    if memo is None:
+        memo = set()
+    iterator = None
+    if isinstance(obj, (Sequence, Set)) and not isinstance(obj, (str, unicode)):
+        iterator = enumerate
+    if iterator:
+        if id(obj) not in memo:
+            memo.add(id(obj))
+            for path_component, value in iterator(obj):
+                for result in get_structure_paths(value, path + (path_component,), memo):
+                    yield result
+            memo.remove(id(obj))
+    else:
+        yield obj, path
+
+def _format_recommendations(recommended_resources):
+    '''
+    Returns the given resource recommendations list formatted as a list of
+    dictionaries with the two keys "name" and "url" (for use in the single
+    resource view).
+    
+    The number of returned recommendations is restricted to at most 4.
+    '''
+    result = []
+    for res in recommended_resources[:4]:
+        res_item = {}
+        res_item['name'] = res.__unicode__()
+        res_item['url'] = res.get_absolute_url()
+        result.append(res_item)
+    return result
 
 
 class MetashareFacetedSearchView(FacetedSearchView):
@@ -388,6 +620,10 @@ class MetashareFacetedSearchView(FacetedSearchView):
                 sqs = sqs.order_by('languageNameSort_exact')
             elif sort_list[0] == 'languagename_desc':
                 sqs = sqs.order_by('-languageNameSort_exact')
+            elif sort_list[0] == 'dl_count_desc':
+                sqs = sqs.order_by('-dl_count', 'resourceNameSort_exact')
+            elif sort_list[0] == 'view_count_desc':
+                sqs = sqs.order_by('-view_count', 'resourceNameSort_exact')
             else:
                 sqs = sqs.order_by('resourceNameSort_exact')
         else:
@@ -439,7 +675,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
         # Step (1): if there are any selected facets, then add these first:
         if sel_facets:
             # add all top level facets (sorted by their facet IDs):
-            for name, label, facet_id, _ in [f for f in filter_labels if f[3] == 0]:
+            for name, label, facet_id, _dummy in [f for f in filter_labels if f[3] == 0]:
                 name_exact = '{0}_exact'.format(name)
                 # only add selected facets in step (1)
                 if name_exact in sel_facets:
@@ -483,7 +719,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
 
         # Step (2): add all top level facets without selected facet items at the
         # end (sorted by their facet IDs):
-        for name, label, facet_id, _ in [f for f in filter_labels if f[3] == 0]:
+        for name, label, facet_id, _dummy in [f for f in filter_labels if f[3] == 0]:
             name_exact = '{0}_exact'.format(name)
             # only add facets without selected items in step (2)
             if not name_exact in sel_facets:
@@ -511,8 +747,14 @@ class MetashareFacetedSearchView(FacetedSearchView):
         extra = super(MetashareFacetedSearchView, self).extra_context()
         # add a data structure encapsulating most of the logic which is required
         # for rendering the filters/facets
-        extra['filters'] = self._create_filters_structure(
+        if 'fields' in extra['facets']:
+            extra['filters'] = self._create_filters_structure(
                                         extra['facets']['fields'])
+        else:
+            # in case of forced empty search results, the fields entry is not set;
+            # this can happen with recommendations when using the
+            # get_more_from_same_... methods
+            extra['filters'] = []
         return extra
     
     def show_subfilter(self, facet, sel_facets, facet_fields, results):

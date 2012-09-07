@@ -1,7 +1,6 @@
-from django.contrib.auth.models import User
 from django_selenium.testcases import SeleniumTestCase
 from metashare import settings, test_utils
-from metashare.accounts.models import EditorGroup, ManagerGroup
+from metashare.accounts.models import EditorGroup, EditorGroupManagers
 from metashare.repository.models import resourceInfoType_model
 from metashare.repository.seltests.test_utils import login_user, mouse_over, \
     setup_screenshots_folder, click_menu_item, save_and_close
@@ -21,11 +20,15 @@ class EditorTest(SeleniumTestCase):
         # create an editor group and a manager group for this group
         self.test_editor_group = EditorGroup.objects.create(
             name='test_editor_group')
-        self.test_manager_group = ManagerGroup.objects.create(
+        self.test_manager_group = EditorGroupManagers.objects.create(
             name='test_manager_group', managed_group=self.test_editor_group)
         # create an editor group managing user
-        test_utils.create_manager_user('manageruser', 'manager@example.com',
-            'secret', (self.test_editor_group, self.test_manager_group))
+        self.manager_user = test_utils.create_manager_user('manageruser',
+            'manager@example.com', 'secret',
+            (self.test_editor_group, self.test_manager_group))
+        self.manager_user.get_profile().default_editor_groups \
+            .add(self.test_editor_group)
+
         # create an editor user
         test_utils.create_editor_user('editoruser', 'editor@example.com',
                                       'secret', (self.test_editor_group,))
@@ -39,10 +42,9 @@ class EditorTest(SeleniumTestCase):
 
 
     def tearDown(self):
-        resourceInfoType_model.objects.all().delete()
-        User.objects.all().delete()
-        EditorGroup.objects.all().delete()
-        ManagerGroup.objects.all().delete()
+        test_utils.clean_resources_db()
+        test_utils.clean_storage()
+        test_utils.clean_user_db()
 
         super(EditorTest, self).tearDown()
         self.assertEqual([], self.verification_errors)
@@ -53,7 +55,7 @@ class EditorTest(SeleniumTestCase):
         # load test fixture and set its status to 'published'
         test_utils.setup_test_storage()
         _result = test_utils.import_xml(TESTFIXTURE_XML)
-        resource = resourceInfoType_model.objects.get(pk=_result[0].id)
+        resource = resourceInfoType_model.objects.get(pk=_result.id)
         resource.editor_groups.add(self.test_editor_group)
         resource.storage_object.published = True
         # this also saves the storage object:
@@ -64,13 +66,10 @@ class EditorTest(SeleniumTestCase):
         # login user
         login_user(driver, "manageruser", "secret")
         # make sure login was successful
-        self.assertEqual("Logout", driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
-        # go to Editor
-        driver.find_element_by_css_selector("div.button.middle_button").click()
-        # go to Update->Resource
-        mouse_over(driver, driver.find_element_by_link_text("Update"))
-        #driver.find_element_by_link_text("Resource").click()        
-        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
+        self.assertEqual("Logout", driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
         # make sure we are on the right site
         self.assertEqual("Select Resource to change | META-SHARE backend", driver.title)
         # check if LR entry is available and that its status is published
@@ -113,17 +112,16 @@ class EditorTest(SeleniumTestCase):
         login_user(driver, "manageruser", "secret")
         # make sure login was successful
         self.assertEqual("Logout", 
-          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
+          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Editor
-        driver.find_element_by_css_selector("div.button.middle_button").click()
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Share/Create Resource
-        mouse_over(driver, driver.find_element_by_link_text("Share/Create"))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        #driver.find_element_by_link_text("Resource").click()
-        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
-        # create text corpus
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
+        #Select resource type
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
         driver.find_element_by_id("id_corpusTextInfo").click()
@@ -154,7 +152,7 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_id("add_id_corpusTextInfo-0").click()
         driver.switch_to_window("id_corpusTextInfo__dash__0")
         Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
-          "monolingual")
+          "Monolingual")
         # corpus text info / language
         self.fill_language(driver, ss_path, "languageinfotype_model_set-0-")
         # corpus text info / size
@@ -171,19 +169,33 @@ class EditorTest(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         self.assertEqual("The Resource \"Test Text Corpus\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
+        
+        # check the editor group of the resource is the default editor group of the user
+        self.assertEqual(self.test_editor_group.name, 
+          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
 
+        # make sure an internal resource cannot be published
+        self.publish(driver)
+        self.assertEqual("internal",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Only ingested resources can be published.", 
+         driver.find_element_by_css_selector("ul.messagelist>li.error").text)
         # ingest resource
         self.ingest(driver)
         self.assertEqual("ingested",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully ingested 1 internal resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
         # publish resource
         self.publish(driver)
         self.assertEqual("published",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully published 1 ingested resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
         # delete resource
         self.delete(driver)
-        self.assertEqual("Successfully deleted 1 Resource.", 
-         driver.find_element_by_css_selector("li.info").text)
+        self.assertEqual("Successfully deleted 1 resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
         
         
     def test_LR_creation_corpus_audio(self):
@@ -197,16 +209,15 @@ class EditorTest(SeleniumTestCase):
         login_user(driver, "manageruser", "secret")
         # make sure login was successful
         self.assertEqual("Logout", 
-          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
+          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Editor
-        driver.find_element_by_css_selector("div.button.middle_button").click()
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Share/Create Resource
-        mouse_over(driver, driver.find_element_by_link_text("Share/Create"))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        #driver.find_element_by_link_text("Resource").click()
-        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
         # create audio corpus
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
@@ -238,7 +249,7 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_id("add_id_corpusAudioInfo").click()
         driver.switch_to_window("id_corpusAudioInfo")
         Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
-          "monolingual")
+          "Monolingual")
         # corpus audio info / language
         self.fill_language(driver, ss_path, "languageinfotype_model_set-0-")
         # corpus audio info / size popup
@@ -257,18 +268,32 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("The Resource \"Test Audio Corpus\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
 
+        # check the editor group of the resource is the default editor group of the user
+        self.assertEqual(self.test_editor_group.name, 
+          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
+
+        # make sure an internal resource cannot be published
+        self.publish(driver)
+        self.assertEqual("internal",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Only ingested resources can be published.", 
+         driver.find_element_by_css_selector("ul.messagelist>li.error").text)
         # ingest resource
         self.ingest(driver)
         self.assertEqual("ingested",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully ingested 1 internal resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
         # publish resource
         self.publish(driver)
         self.assertEqual("published",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully published 1 ingested resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
         # delete resource
         self.delete(driver)
-        self.assertEqual("Successfully deleted 1 Resource.", 
-         driver.find_element_by_css_selector("li.info").text)
+        self.assertEqual("Successfully deleted 1 resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
 
         
     def test_LR_creation_lang_descr_text(self):
@@ -282,16 +307,15 @@ class EditorTest(SeleniumTestCase):
         login_user(driver, "manageruser", "secret")
         # make sure login was successful
         self.assertEqual("Logout", 
-          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
+          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Editor
-        driver.find_element_by_css_selector("div.button.middle_button").click()
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Share/Create Resource
-        mouse_over(driver, driver.find_element_by_link_text("Share/Create"))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        #driver.find_element_by_link_text("Resource").click()
-        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
         # create language description
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text(
@@ -323,7 +347,7 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_id("edit_id_langdescInfo").click()
         driver.switch_to_window("edit_id_langdescInfo")
         Select(driver.find_element_by_id("id_languageDescriptionType")).select_by_visible_text(
-          "grammar")
+          "Grammar")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time())) 
         save_and_close(driver, root_id)
           
@@ -331,7 +355,7 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_id("add_id_languageDescriptionTextInfo").click()
         driver.switch_to_window("id_languageDescriptionTextInfo")
         Select(driver.find_element_by_id("id_form-2-0-lingualityType")).select_by_visible_text(
-          "monolingual")
+          "Monolingual")
         # language description info text / language
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
         self.fill_language(driver, ss_path, "languageinfotype_model_set-0-")
@@ -348,18 +372,32 @@ class EditorTest(SeleniumTestCase):
         self.assertEqual("The Resource \"Test Text Language Description\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
         
+        # check the editor group of the resource is the default editor group of the user
+        self.assertEqual(self.test_editor_group.name, 
+          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
+
+        # make sure an internal resource cannot be published
+        self.publish(driver)
+        self.assertEqual("internal",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Only ingested resources can be published.", 
+         driver.find_element_by_css_selector("ul.messagelist>li.error").text)
         # ingest resource
         self.ingest(driver)
         self.assertEqual("ingested",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully ingested 1 internal resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
         # publish resource
         self.publish(driver)
         self.assertEqual("published",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully published 1 ingested resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
         # delete resource
         self.delete(driver)
-        self.assertEqual("Successfully deleted 1 Resource.", 
-         driver.find_element_by_css_selector("li.info").text)
+        self.assertEqual("Successfully deleted 1 resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
         
 
     def test_LR_creation_lex_resource_text(self):
@@ -373,16 +411,15 @@ class EditorTest(SeleniumTestCase):
         login_user(driver, "manageruser", "secret")
         # make sure login was successful
         self.assertEqual("Logout", 
-          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
+          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Editor
-        driver.find_element_by_css_selector("div.button.middle_button").click()
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Share/Create Resource
-        mouse_over(driver, driver.find_element_by_link_text("Share/Create"))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        #driver.find_element_by_link_text("Resource").click()
-        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
         # create lexical resource
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text(
@@ -414,7 +451,7 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_id("edit_id_lexiconInfo").click()
         driver.switch_to_window("edit_id_lexiconInfo")
         Select(driver.find_element_by_id("id_lexicalConceptualResourceType")).select_by_visible_text(
-          "wordList")
+          "Word List")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time())) 
         save_and_close(driver, root_id)
           
@@ -422,7 +459,7 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_id("add_id_lexicalConceptualResourceTextInfo").click()
         driver.switch_to_window("id_lexicalConceptualResourceTextInfo")
         Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
-          "monolingual")
+          "Monolingual")
         # lexical resource text info / language
         self.fill_language(driver, ss_path, "languageinfotype_model_set-0-")
         # lexical resource text info / size
@@ -439,22 +476,40 @@ class EditorTest(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         self.assertEqual("The Resource \"Test Lexical Resource Text\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
-        
+
+        # check the editor group of the resource is the default editor group of the user
+        self.assertEqual(self.test_editor_group.name, 
+          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
+
+        # make sure an internal resource cannot be published
+        self.publish(driver)
+        self.assertEqual("internal",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Only ingested resources can be published.", 
+         driver.find_element_by_css_selector("ul.messagelist>li.error").text)
         # ingest resource
         self.ingest(driver)
         self.assertEqual("ingested",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully ingested 1 internal resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
         # publish resource
         self.publish(driver)
         self.assertEqual("published",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully published 1 ingested resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
         # delete resource
         self.delete(driver)
-        self.assertEqual("Successfully deleted 1 Resource.", 
-         driver.find_element_by_css_selector("li.info").text)
+        self.assertEqual("Successfully deleted 1 resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
         
         
     def test_LR_creation_tool(self):
+        # set up the current manager user profile so that it doesn't have any
+        # default editor groups
+        self.manager_user.get_profile().default_editor_groups.clear()
+
         driver = self.driver
         driver.get(self.base_url)
         ss_path = setup_screenshots_folder(
@@ -465,16 +520,15 @@ class EditorTest(SeleniumTestCase):
         login_user(driver, "manageruser", "secret")
         # make sure login was successful
         self.assertEqual("Logout", 
-          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
+          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Editor
-        driver.find_element_by_css_selector("div.button.middle_button").click()
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Share/Create Resource
-        mouse_over(driver, driver.find_element_by_link_text("Share/Create"))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        #driver.find_element_by_link_text("Resource").click()
-        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
         # create tool
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text(
@@ -505,7 +559,7 @@ class EditorTest(SeleniumTestCase):
         # tool info popup
         driver.find_element_by_id("edit_id_toolServiceInfo").click()
         driver.switch_to_window("edit_id_toolServiceInfo")
-        Select(driver.find_element_by_id("id_toolServiceType")).select_by_visible_text("tool")
+        Select(driver.find_element_by_id("id_toolServiceType")).select_by_visible_text("Tool")
         Select(driver.find_element_by_id("id_languageDependent")).select_by_visible_text("Yes")
         # save and close tool info popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -519,19 +573,39 @@ class EditorTest(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         self.assertEqual("The Resource \"Test Tool\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
-        
+
+        # make sure that the editor groups list of the created resource is empty
+        # (which resembles the default editor groups list of the creating user)
+        _created_res = resourceInfoType_model.objects.get(pk=1)
+        self.assertEqual(0, _created_res.editor_groups.count(),
+            'the created resource must not have any editor groups (just like ' \
+                'the default groups set of the creating user)')
+        # for the following tests to not fail, we have to add the resource to an
+        # editor group again which is managed by the current user
+        _created_res.editor_groups.add(self.test_editor_group)
+
+        # make sure an internal resource cannot be published
+        self.publish(driver)
+        self.assertEqual("internal",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Only ingested resources can be published.", 
+         driver.find_element_by_css_selector("ul.messagelist>li.error").text)
         # ingest resource
         self.ingest(driver)
         self.assertEqual("ingested",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully ingested 1 internal resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
         # publish resource
         self.publish(driver)
         self.assertEqual("published",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully published 1 ingested resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
         # delete resource
         self.delete(driver)
-        self.assertEqual("Successfully deleted 1 Resource.", 
-         driver.find_element_by_css_selector("li.info").text)
+        self.assertEqual("Successfully deleted 1 resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
 
 
     def test_sorting(self):
@@ -549,16 +623,15 @@ class EditorTest(SeleniumTestCase):
         login_user(driver, "editoruser", "secret")
         # make sure login was successful
         self.assertEqual("Logout", 
-          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
+          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Editor
-        driver.find_element_by_css_selector("div.button.middle_button").click()
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Share/Create Resource
-        mouse_over(driver, driver.find_element_by_link_text("Share/Create"))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        #driver.find_element_by_link_text("Resource").click()
-        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
         # create text corpus
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
@@ -573,46 +646,46 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
         driver.switch_to_window("id_distributionInfo")
         # check sorting of Availability
-        self.assertEqual("available-restrictedUse", driver.find_element_by_xpath(
+        self.assertEqual("Available - Restricted Use", driver.find_element_by_xpath(
           "//select[@id='id_availability']/option[2]").text)
-        self.assertEqual("available-unrestrictedUse", driver.find_element_by_xpath(
+        self.assertEqual("Available - Unrestricted Use", driver.find_element_by_xpath(
           "//select[@id='id_availability']/option[3]").text)
-        self.assertEqual("notAvailableThroughMetaShare", driver.find_element_by_xpath(
+        self.assertEqual("Not Available Through Meta Share", driver.find_element_by_xpath(
           "//select[@id='id_availability']/option[4]").text)        
-        self.assertEqual("underNegotiation", driver.find_element_by_xpath(
+        self.assertEqual("Under Negotiation", driver.find_element_by_xpath(
           "//select[@id='id_availability']/option[5]").text)
         save_and_close(driver, root_id)
         # corpus info text popup
         driver.find_element_by_id("add_id_corpusTextInfo-0").click()
         driver.switch_to_window("id_corpusTextInfo__dash__0")
         # check sorting of Linguality
-        self.assertEqual("bilingual", driver.find_element_by_xpath(
+        self.assertEqual("Bilingual", driver.find_element_by_xpath(
           "//select[@id='id_form-0-lingualityType']/option[2]").text)
-        self.assertEqual("monolingual", driver.find_element_by_xpath(
+        self.assertEqual("Monolingual", driver.find_element_by_xpath(
           "//select[@id='id_form-0-lingualityType']/option[3]").text)
-        self.assertEqual("multilingual", driver.find_element_by_xpath(
+        self.assertEqual("Multilingual", driver.find_element_by_xpath(
           "//select[@id='id_form-0-lingualityType']/option[4]").text)
         # check sorting of Size unit
-        self.assertEqual("4-grams", driver.find_element_by_xpath(
+        self.assertEqual("4 - Grams", driver.find_element_by_xpath(
           "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[2]").text)
-        self.assertEqual("5-grams", driver.find_element_by_xpath(
+        self.assertEqual("5 - Grams", driver.find_element_by_xpath(
           "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[3]").text)
-        self.assertEqual("articles", driver.find_element_by_xpath(
+        self.assertEqual("Articles", driver.find_element_by_xpath(
           "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[4]").text)
-        self.assertEqual("bigrams", driver.find_element_by_xpath(
+        self.assertEqual("Bigrams", driver.find_element_by_xpath(
           "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[5]").text)
-        self.assertEqual("bytes", driver.find_element_by_xpath(
+        self.assertEqual("Bytes", driver.find_element_by_xpath(
           "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[6]").text)
-        self.assertEqual("classes", driver.find_element_by_xpath(
+        self.assertEqual("Classes", driver.find_element_by_xpath(
           "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[7]").text)
-        self.assertEqual("concepts", driver.find_element_by_xpath(
+        self.assertEqual("Concepts", driver.find_element_by_xpath(
           "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[8]").text)                                        
-        self.assertEqual("diphones", driver.find_element_by_xpath(
+        self.assertEqual("Diphones", driver.find_element_by_xpath(
           "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[9]").text)
-        self.assertEqual("elements", driver.find_element_by_xpath(
+        self.assertEqual("Elements", driver.find_element_by_xpath(
           "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[10]").text)    
         # skip to end of list 
-        self.assertEqual("words", driver.find_element_by_xpath(
+        self.assertEqual("Words", driver.find_element_by_xpath(
           "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[50]").text)        
 
     
@@ -630,16 +703,15 @@ class EditorTest(SeleniumTestCase):
         login_user(driver, "editoruser", "secret")
         # make sure login was successful
         self.assertEqual("Logout", 
-          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[3]/div").text)
+          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Editor
-        driver.find_element_by_css_selector("div.button.middle_button").click()
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Share/Create Resource
-        mouse_over(driver, driver.find_element_by_link_text("Share/Create"))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        #driver.find_element_by_link_text("Resource").click()
-        click_menu_item(driver, driver.find_element_by_link_text("Resource"))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
         # create text corpus
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
@@ -654,7 +726,7 @@ class EditorTest(SeleniumTestCase):
         # show licenses
         driver.find_element_by_id("fieldsetcollapser0").click()
         # check that the left window contains all entries
-        self.assertEqual("underNegotiation", driver.find_element_by_xpath(
+        self.assertEqual("Under Negotiation", driver.find_element_by_xpath(
           "//select[@id='id_licenceinfotype_model_set-0-licence_from']/option[41]").text)
         # add an entry
         driver.find_element_by_xpath(
@@ -663,7 +735,7 @@ class EditorTest(SeleniumTestCase):
         # check that entry has moved to right site
         self.assertEqual("AGPL", driver.find_element_by_xpath(
           "//select[@id='id_licenceinfotype_model_set-0-licence_to']/option[1]").text)
-        self.assertEqual("ApacheLicence_V2.0", driver.find_element_by_xpath(
+        self.assertEqual("Apache Licence_V2.0", driver.find_element_by_xpath(
           "//select[@id='id_licenceinfotype_model_set-0-licence_from']/option[1]").text)
         # remove entry
         driver.find_element_by_xpath(
@@ -681,7 +753,7 @@ class EditorTest(SeleniumTestCase):
         """
         driver.switch_to_window("id_distributionInfo")
         Select(driver.find_element_by_id("id_availability")).select_by_visible_text(
-          "available-unrestrictedUse")
+          "Available - Unrestricted Use")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         save_and_close(driver, parent_id)
         
@@ -718,7 +790,7 @@ class EditorTest(SeleniumTestCase):
         """
         driver.find_element_by_id("id_{}size".format(id_infix)).clear()
         driver.find_element_by_id("id_{}size".format(id_infix)).send_keys("10000")
-        Select(driver.find_element_by_id("id_{}sizeUnit".format(id_infix))).select_by_visible_text("tokens")
+        Select(driver.find_element_by_id("id_{}sizeUnit".format(id_infix))).select_by_visible_text("Tokens")
         
         
     def fill_audio_size(self, driver, ss_path, parent_id):
@@ -729,7 +801,7 @@ class EditorTest(SeleniumTestCase):
 
         driver.find_element_by_id("id_sizeinfotype_model_set-0-size").send_keys("100")
         
-        Select(driver.find_element_by_id("id_sizeinfotype_model_set-0-sizeUnit")).select_by_visible_text("gb")
+        Select(driver.find_element_by_id("id_sizeinfotype_model_set-0-sizeUnit")).select_by_visible_text("Gb")
         save_and_close(driver, parent_id) 
         
         
@@ -759,7 +831,7 @@ class EditorTest(SeleniumTestCase):
         selects all resources and deletes them
         """
         driver.find_element_by_id("action-toggle").click()
-        Select(driver.find_element_by_name("action")).select_by_visible_text("Delete selected Resources")
+        Select(driver.find_element_by_name("action")).select_by_visible_text("Mark selected resources as deleted")
         driver.find_element_by_name("index").click()
         driver.find_element_by_css_selector("input[type=\"submit\"]").click()
         # TODO remove this workaround when Selenium starts working again as intended

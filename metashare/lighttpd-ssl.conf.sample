@@ -1,0 +1,118 @@
+# Set this variable to the directory in which the META-SHARE software is
+# installed.
+var.sw_path = "/PATH/TO/METANODE"
+
+# Set this variable to the directory that contains certificates.
+var.cert_dir = "/PATH/TO/CERTIFICATE"
+
+server.document-root = sw_path + "/metashare"
+
+# Replace SSL_PORT_NUM with the SSL port (usually 443)
+server.port = SSL_PORT_NUM
+
+# Replace the following with the port number used for non-SSL requests.
+var.non_ssl_port = 80
+
+server.username = "lighttpd"
+server.groupname = "lighttpd"
+
+# Set the IP address on which lighttpd should listen for requests.
+server.bind = "134.96.187.245"
+
+# Set the host name
+server.name = "localhost"
+
+server.tag = "lighttpd"
+
+server.errorlog = "/var/log/lighttpd/metashare-error.log"
+accesslog.filename = "/var/log/lighttpd/metashare-access.log"
+
+server.pid-file = "/tmp/metashare/lighttpd.pid"
+
+# The following will enable SSL with the use of a server certificate.
+# The script misc/tools/ssl-config/gen_cert.sh can be used to create a
+# self-signed certificate, if needed. Look at the README in
+# misc/tools/ssl-config for some hints on how to use it.
+ssl.engine = "enable"
+
+# Replace metashare.pem with the name of the file that contains certificates and
+# private keys.
+ssl.pemfile = cert_dir + "/" + "metashare.pem"
+
+# Replace metashare.crt with the name of the file that contains the certificate
+# of the CA used to sign the server certificate.
+ssl.ca-file = cert_dir + "/" + "metashare.crt"
+
+# Replace the following with the IP address and port on which the Django FCGI
+# listens for requests.
+var.django_addr = "134.96.187.245"
+var.django_port = 9190
+
+# The following should be enabled only for debugging
+#debug.log-file-not-found = "enable"
+#debug.log-request-header = "enable"
+#debug.log-request-handling = "enable"
+#debug.log-response-header = "enable"
+
+fastcgi.server = (
+  "/metashare.fcgi" => (
+    "main" => (
+      "host" => django_addr,
+      "port" => django_port,
+      "check-local" => "disable",
+    )
+  ),
+)
+
+# This should redirect all non-SSL request to the SSL port
+$SERVER["socket"] == server.bind + ":" + non_ssl_port {
+  $HTTP["host"] =~ "(.*)" {
+    url.redirect = (
+      "^/metashare.fcgi/(.*)" => "https://" + server.name + ":" + server.port + "/$1",
+      "^/(.*)" => "https://" + server.name + ":" + server.port + "/$1"
+    )
+  }
+}
+
+url.rewrite-once = (
+    "^(/media.*)$" => "$1",
+    "^/site_(media.*)$" => "/$1",
+    "^/favicon\.ico$" => "/media/images/favicon.ico",
+    "^(/.*)$" => "/metashare.fcgi$1",
+)
+
+
+server.modules = (
+  "mod_redirect",
+  "mod_rewrite",
+  "mod_access",
+  "mod_fastcgi",
+  "mod_accesslog",
+  "mod_auth",
+  "mod_alias"
+)
+
+# mimetype mapping
+mimetype.assign = (
+  ".pdf"          =>      "application/pdf",
+  ".sig"          =>      "application/pgp-signature",
+  ".gz"           =>      "application/x-gzip",
+  ".tar.gz"       =>      "application/x-tgz",
+  ".tgz"          =>      "application/x-tgz",
+  ".tar"          =>      "application/x-tar",
+  ".zip"          =>      "application/zip",
+  ".gif"          =>      "image/gif",
+  ".jpg"          =>      "image/jpeg",
+  ".jpeg"         =>      "image/jpeg",
+  ".png"          =>      "image/png",
+  ".css"          =>      "text/css",
+  ".html"         =>      "text/html",
+  ".htm"          =>      "text/html",
+  ".js"           =>      "text/javascript",
+  ".txt"          =>      "text/plain",
+  ".dtd"          =>      "text/xml",
+  ".xml"          =>      "text/xml",
+  ".bz2"          =>      "application/x-bzip",
+  ".tar.bz2"      =>      "application/x-bzip-compressed-tar"
+ )
+index-file.names = ( "index.html", )

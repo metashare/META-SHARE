@@ -1,0 +1,31 @@
+{% extends "admin/base_site.html" %}
+
+{% block breadcrumbs %}
+{% include "breadcrumbs.html" %}
+{% endblock %}
+
+{% block content %}
+<h3>Add a user to the following organization manager group{{ selected_organizationmanagers|pluralize }}:</h3>
+
+<div class="content_box">
+<table class='organization'>
+  <tr><th>Organization Manager{{ selected_organizationmanagers|pluralize }}</th><th>Members</th></tr>
+  {% for organization_managers in selected_organizationmanagers %}
+  <tr><td>{{ organization_managers }}</td><td>{{ organization_managers.get_members|join:", "}}</td></tr>
+  {% endfor %}
+<table>
+</div>
+
+<div class="content_box">
+<form method="post" action="{{ path }}">{% csrf_token %}
+<table>
+{{ form }}
+</table>
+
+<input type="hidden" name="action" value="add_user_to_organization_managers"/>
+<input type="submit" name="add_user_profile_to_organization_managers" value="Add"/>
+<input type="submit" name="cancel" value="Cancel"/>
+</form>
+</div>
+
+{% endblock content %}

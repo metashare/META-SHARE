@@ -1,8 +1,3 @@
-"""
-Project: META-SHARE 
-Author: Christian Girardi <cgirardi@fbk.eu>
-"""
-
 import sys
 import logging 
 from metashare.settings import DJANGO_URL, STATS_SERVER_URL
@@ -26,7 +21,7 @@ from json import JSONEncoder
 from datetime import datetime, date
 import urllib, urllib2
 from threading import Timer
-from metashare.settings import LOG_LEVEL, LOG_HANDLER, MEDIA_URL
+from metashare.settings import LOG_HANDLER, MEDIA_URL
 from metashare.stats.geoip import getcountry_name
 
 try:
@@ -38,8 +33,7 @@ except:
 NOACCESS_FIELDS = ["downloadLocation", "executionLocation"]
 
 # Setup logging support.
-logging.basicConfig(level=LOG_LEVEL)
-LOGGER = logging.getLogger('metashare.stats.views')
+LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 
 from django.db.models.sql import aggregates
@@ -105,11 +99,11 @@ def usagestats (request):
             if (not _field.endswith('_set')):
                 if (not model_name+" "+_field in _fields):
                     field_name = eval(u'{0}._meta.get_field("{1}").verbose_name'.format(_model, _field))
-                    _fields[model_name+" "+_field] = [component_name, _field, field_name, _required, 0, 0, "field",model_name]            
+                    _fields[model_name+" "+_field] = [component_name, _field, field_name, _required, 0, 0, "field", model_name]            
             else:
                 if (not model_name+" "+_component in _fields):
                     field_name = eval(u'{0}Type_model._meta.verbose_name'.format(_component))
-                    _fields[model_name+" "+_component] = [component_name, _component, field_name, _required, 0, 0, "component",model_name]
+                    _fields[model_name+" "+_component] = [component_name, _component, field_name, _required, 0, 0, "component", model_name]
             
     lrset = resourceInfoType_model.objects.all()
     usageset = UsageStats.objects.values('elname', 'elparent').annotate(Count('lrid', distinct=True), \

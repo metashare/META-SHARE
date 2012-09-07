@@ -5,7 +5,6 @@ from metashare.repository.seltests.test_utils import setup_screenshots_folder, \
 from metashare.settings import DJANGO_BASE, ROOT_PATH
 import time
 from django.core.management import call_command
-from metashare.repository.models import resourceInfoType_model
 from selenium.webdriver.support.select import Select
 
 
@@ -26,7 +25,8 @@ class FilterTest(SeleniumTestCase):
 
 
     def tearDown(self):
-        resourceInfoType_model.objects.all().delete()
+        test_utils.clean_resources_db()
+        test_utils.clean_storage()
 
         super(FilterTest, self).tearDown()
 
@@ -40,7 +40,8 @@ class FilterTest(SeleniumTestCase):
         driver.get(self.base_url)
         # TODO remove this workaround when Selenium starts working again as intended
         driver.set_window_size(1280, 1024)
-        driver.find_element_by_id("browse").click()
+        # click 'browse'
+        driver.find_element_by_xpath("//div[@id='header']/ul/li[1]/a").click()
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         self.assertEqual("17 Language Resources", driver.find_element_by_css_selector("h3").text)
         # make sure all filters are available
@@ -52,6 +53,7 @@ class FilterTest(SeleniumTestCase):
         self.assertEqual("Restrictions of Use", driver.find_element_by_link_text("Restrictions of Use").text)
         self.assertEqual("Linguality Type", driver.find_element_by_link_text("Linguality Type").text)
         self.assertEqual("MIME Type", driver.find_element_by_link_text("MIME Type").text)
+        self.assertEqual("Language Variety", driver.find_element_by_link_text("Language Variety").text)
         
         # check Language filter
         click_and_wait(driver.find_element_by_link_text("Language"))
@@ -106,7 +108,7 @@ class FilterTest(SeleniumTestCase):
         
         # check Availability filter
         click_and_wait(driver.find_element_by_link_text("Availability"))
-        self.assertEqual("Available-restricted Use (17)", driver.find_element_by_xpath(
+        self.assertEqual("Available - Restricted Use (17)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[8]/div").text)
         click_and_wait(driver.find_element_by_link_text("Availability"))
         
@@ -124,7 +126,7 @@ class FilterTest(SeleniumTestCase):
         click_and_wait(driver.find_element_by_link_text("Restrictions of Use"))
         self.assertEqual("Commercial Use (14)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[12]/div[1]").text)
-        self.assertEqual("Academic-non Commercial Use (13)", driver.find_element_by_xpath(
+        self.assertEqual("Academic - Non Commercial Use (13)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[12]/div[2]").text)
         self.assertEqual("Evaluation Use (3)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[12]/div[3]").text)
@@ -141,6 +143,12 @@ class FilterTest(SeleniumTestCase):
         self.assertEqual("Plain text (2)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[16]/div[1]").text)
         click_and_wait(driver.find_element_by_link_text("MIME Type"))
+        
+        # check Language Variety filter        
+        click_and_wait(driver.find_element_by_link_text("Language Variety"))
+        self.assertEqual("Castilian (6)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[18]/div[1]").text)
+        click_and_wait(driver.find_element_by_link_text("Language Variety"))
         
         if True:
             # test sorting:

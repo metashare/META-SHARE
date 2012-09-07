@@ -1,0 +1,6 @@
+Dear {{ shortname }},
+
+The application to the editor group "{{ editor_group }}"
+has been accepted by a manager of the group.
+
+Best regards,

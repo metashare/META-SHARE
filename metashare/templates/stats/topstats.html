@@ -21,7 +21,9 @@
         {% endif %}
       {% endfor %}
       ]);
-    
+      var options = {width: 560, height: 320, legend: false, colorAxis: {colors: ['#FF6600']}}; 
+      options["datalessRegionColor"] = 'efefef'; 
+
       var geochart = new google.visualization.GeoChart(
           document.getElementById('googlemap'));
       google.visualization.events.addListener(geochart, 'select',
@@ -31,7 +33,7 @@
                window.location.replace("{% url metashare.views.frontpage %}stats/top/?view={{ view }}&country="+countrycode);
       });
       
-      geochart.draw(data, {width: 530, height: 300});     
+      geochart.draw(data, options);     
     }
    
     

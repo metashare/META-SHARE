@@ -1,0 +1,6 @@
+Dear {{ shortname }},
+
+The application to the organization "{{ organization }}"
+has been accepted by a manager of the organization.
+
+Best regards,

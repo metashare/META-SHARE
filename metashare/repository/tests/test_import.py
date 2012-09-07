@@ -1,22 +1,37 @@
 import os
+import logging
+
+from django.contrib.auth.models import User
 from django.test import TestCase
+from django.test.client import Client
+
 from metashare import test_utils
-from metashare.settings import ROOT_PATH
+from metashare.accounts.models import EditorGroup
 from metashare.repository.models import documentUnstructuredString_model, \
     documentInfoType_model
+from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER
+
+# Setup logging support.
+LOGGER = logging.getLogger(__name__)
+LOGGER.addHandler(LOG_HANDLER)
 
 class ImportTest(TestCase):
     """
     Tests the import procedure for resources
     """
+
+    test_editor_group = None
+    super_user = None
     
     @classmethod
     def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
         test_utils.set_index_active(False)
-    
+
     @classmethod
     def tearDownClass(cls):
         test_utils.set_index_active(True)
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
         
     def setUp(self):
         """
@@ -24,36 +39,18 @@ class ImportTest(TestCase):
         """        
         test_utils.setup_test_storage()
         
+        ImportTest.test_editor_group = EditorGroup.objects.create(
+                                                    name='test_editor_group')
+
+        ImportTest.super_user = User.objects.create_superuser('superuser', 'su@example.com', 'secret')
+   
     def tearDown(self):
         """
         Clean up the test
         """
-        test_utils.clean_db()
+        test_utils.clean_resources_db()
         test_utils.clean_storage()
-
-    def test_import_ELRA(self):      
-        """
-        Run tests on ELRA resources
-        Representative xml files have been taken
-        """
-        self._test_import_dir('{0}/repository/test_fixtures/ELRA/'
-                              .format(ROOT_PATH))
-
-    def test_import_PSP(self):
-        """
-        Run tests on PSP resources
-        Representative xml files from all PSP providers have been taken
-        """
-        self._test_import_dir('{0}/repository/test_fixtures/PSP/'
-                              .format(ROOT_PATH))
-
-    def test_import_METASHARE(self):
-        """
-        Run tests on META-SHARE resources
-        Representative xml files from all META-SHARE partners have been taken
-        """
-        self._test_import_dir('{0}/repository/test_fixtures/META-SHARE/'
-                              .format(ROOT_PATH))
+        test_utils.clean_user_db()
 
     def _test_import_dir(self, path):
         """Asserts that all XML files in the given directory can be imported."""
@@ -119,3 +116,32 @@ class ImportTest(TestCase):
         # and 1 documentInfo in the database
         self.assertEqual(len(documentUnstructuredString_model.objects.all()), 2)
         self.assertEqual(len(documentInfoType_model.objects.all()), 1)
+
+    def test_imported_resource_get_user_default_editor_group(self):
+        """
+        Check if resource editor group is set to the default editor group of the user.
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+
+        ImportTest.super_user.get_profile().default_editor_groups \
+            .add(ImportTest.test_editor_group)
+
+        resourcefile = open('{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH))
+        response = client.post('/{0}editor/upload_xml/'.format(DJANGO_BASE), \
+          {'resource': resourcefile}, follow=True)
+        self.assertNotContains(response, '<td>{}</td>'.format(ImportTest.test_editor_group.name),
+          msg_prefix='expected the system to set an editor group to the resource.')
+
+    def test_imported_resource_get_none_if_no_default_editor_group(self):
+        """
+        Check if resource editor group is set to None if the user do not have a default editor group.
+        """
+        client = Client()
+        client.login(username='superuser', password='secret')
+
+        resourcefile = open('{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH))
+        response = client.post('/{0}editor/upload_xml/'.format(DJANGO_BASE), \
+          {'resource': resourcefile}, follow=True)
+        self.assertNotContains(response, '<td>{}</td>'.format(ImportTest.test_editor_group.name),
+          msg_prefix='expected the system to set None as editor group to the resource.')

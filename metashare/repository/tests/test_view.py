@@ -1,86 +1,205 @@
+import shutil
+import logging
+
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.auth.models import User, Permission
+from django.contrib.auth.models import Permission
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.client import Client
 
 from metashare import test_utils, settings
-from metashare.accounts.models import UserProfile
+from metashare.accounts.models import UserProfile, EditorGroup, \
+    EditorGroupManagers, Organization
 from metashare.repository import views
-from metashare.settings import DJANGO_BASE, ROOT_PATH
+from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER
 from metashare.test_utils import create_user
-import shutil
 
+# Setup logging support.
+LOGGER = logging.getLogger(__name__)
+LOGGER.addHandler(LOG_HANDLER)
 
-def _import_resource(fixture_name):
+def _import_resource(fixture_name, editor_group=None):
     """
     Imports the XML resource description with the given file name.
     
     The new resource is published and returned.
     """
     result = test_utils.import_xml('{0}/repository/fixtures/{1}'
-                                    .format(ROOT_PATH, fixture_name))[0]
+                                    .format(ROOT_PATH, fixture_name))
     result.storage_object.published = True
+    if not editor_group is None:
+        result.editor_groups.add(editor_group)
+        result.save()
     result.storage_object.save()
     return result
 
 
+class FrontpageTest(TestCase):
+    """
+    Tests for the frontpage of a META-SHARE node.
+    """
+    editor_user = None
+    editor_user_password = 'secret'
+    frontpage_url = '/' + DJANGO_BASE
+
+    @classmethod
+    def setUpClass(cls):
+        """
+        Sets up this test case.
+        """
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
+        FrontpageTest.editor_user = test_utils.create_editor_user('editoruser',
+            'editor@example.com', FrontpageTest.editor_user_password,
+            (EditorGroup.objects.create(name='test_editor_group'),))
+
+    @classmethod
+    def tearDownClass(cls):
+        """
+        Makes required cleanups after all tests have run.
+        """
+        test_utils.clean_user_db()
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
+
+    def setUp(self):
+        """
+        Set up logic for each test.
+        """
+        self.client = Client()
+
+    def test_frontpage_provides_login_button(self):
+        """
+        Verifies that the frontpage provides a login button for anonymous users
+        (only).
+        """
+        # look for the login button as an anonymous user:
+        response = self.client.get(FrontpageTest.frontpage_url)
+        self.assertContains(response, ">Login<",
+            msg_prefix="There must be a login button for anonymous users.")
+        # look for the login button as an editor user:
+        self.client.login(username=FrontpageTest.editor_user.username,
+                          password=FrontpageTest.editor_user_password)
+        response = self.client.get(FrontpageTest.frontpage_url)
+        self.assertNotContains(response, ">Login<",
+            msg_prefix="There must not be any login button for editor users.")
+
+    def test_frontpage_provides_logout_button(self):
+        """
+        Verifies that the frontpage provides a logout button for logged in users
+        (only).
+        """
+        # look for the logout button as an anonymous user:
+        response = self.client.get(FrontpageTest.frontpage_url)
+        self.assertNotContains(response, ">Logout<", msg_prefix="There must " \
+                               "not be any logout button for anonymous users.")
+        # look for the logout button as an editor user:
+        self.client.login(username=FrontpageTest.editor_user.username,
+                          password=FrontpageTest.editor_user_password)
+        response = self.client.get(FrontpageTest.frontpage_url)
+        self.assertContains(response, ">Logout<",
+            msg_prefix="There must be a logout button for editor users.")
+
+    def test_frontpage_provides_register_button(self):
+        """
+        Verifies that the frontpage provides an account register button for
+        anonymous users (only).
+        """
+        # look for the register button as an anonymous user:
+        response = self.client.get(FrontpageTest.frontpage_url)
+        self.assertContains(response, ">Register<",
+            msg_prefix="There must be a register button for anonymous users.")
+        # look for the register button as an editor user:
+        self.client.login(username=FrontpageTest.editor_user.username,
+                          password=FrontpageTest.editor_user_password)
+        response = self.client.get(FrontpageTest.frontpage_url)
+        self.assertNotContains(response, ">Register<", msg_prefix="There must" \
+                               " not be any register button for editor users.")
+
+    def test_frontpage_provides_editor_button_for_staff_users(self):
+        """
+        Verifies that the frontpage provides an editor link for staff users
+        (only).
+        """
+        # look for the editor button as an anonymous user:
+        response = self.client.get(FrontpageTest.frontpage_url)
+        self.assertNotContains(response, ">Manage Resources<",
+            msg_prefix="there mustn't be any editor button for anonymous users")
+        # look for the editor button as an editor user:
+        self.client.login(username=FrontpageTest.editor_user.username,
+                          password=FrontpageTest.editor_user_password)
+        response = self.client.get(FrontpageTest.frontpage_url)
+        self.assertContains(response, ">Manage Resources<",
+            msg_prefix="There must be an editor button for editor users.")
+
+    def test_frontpage_provides_search_button(self):
+        """
+        Verifies that the frontpage provides a search button for all kinds of
+        users.
+        """
+        # look for the search button as an anonymous user:
+        response = self.client.get(FrontpageTest.frontpage_url)
+        self.assertContains(response, ">Search<",
+            msg_prefix="There must be a search button for anonymous users.")
+        # look for the search button as an editor user:
+        self.client.login(username=FrontpageTest.editor_user.username,
+                          password=FrontpageTest.editor_user_password)
+        response = self.client.get(FrontpageTest.frontpage_url)
+        self.assertContains(response, ">Search<",
+            msg_prefix="There must be a search button for editor users.")
+
+
 class ViewTest(TestCase):
     """
-    Test the detail view
+    Test the single resource view
     """
+    test_editor = None
     
     @classmethod
     def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
         test_utils.set_index_active(False)
     
     @classmethod
     def tearDownClass(cls):
         test_utils.set_index_active(True)
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
         
     def setUp(self):
         """
         Set up the detail view
         """
         test_utils.setup_test_storage()
-        self.resource = _import_resource('testfixture.xml')
-        # set up test users with and without staff permissions.
-        # These will live in the test database only, so will not
-        # pollute the "normal" development db or the production db.
-        # As a consequence, they need no valuable password.
-        staffuser = create_user('staffuser', 'staff@example.com', 'secret')
-        staffuser.is_staff = True
-        staffuser.save()
         create_user('normaluser', 'normal@example.com', 'secret')
+        _test_editor_group = EditorGroup.objects.create(
+                                                    name='test_editor_group')
+        self.resource = _import_resource('testfixture.xml',
+                                         _test_editor_group)
+        ViewTest.test_editor = test_utils.create_editor_user('editoruser',
+            'editor@example.com', 'secret', (_test_editor_group,))          
+        test_utils.create_manager_user('manageruser', 'manager@example.com',
+            'secret', (EditorGroupManagers.objects.create(
+                            name='test_editor_group_manager',
+                            managed_group=_test_editor_group),))
 
     def tearDown(self):
         """
         Clean up the test
         """
-        test_utils.clean_db()
+        test_utils.clean_resources_db()
         test_utils.clean_storage()
-        User.objects.all().delete()
+        test_utils.clean_user_db()
 
-    def testView(self):
+    def test_editor_user_sees_editor(self):
         """
-        Tries to view a resource
+        Tests whether an editor user can edit a resource (in seeing the
+        "Edit Resource" button)
         """
         client = Client()
+        client.login(username='editoruser', password='secret')
         url = self.resource.get_absolute_url()
         response = client.get(url, follow = True)
         self.assertTemplateUsed(response, 'repository/lr_view.html')
-        self.assertNotContains(response, "Edit")
-
-    def test_staff_user_sees_editor(self):
-        """
-        Tests whether a staff user can edit a resource (in seeing the edit button)
-        """
-        client = Client()
-        client.login(username='staffuser', password='secret')
-        url = self.resource.get_absolute_url()
-        response = client.get(url, follow = True)
-        self.assertTemplateUsed(response, 'repository/lr_view.html')
-        self.assertContains(response, "Editor")
+        self.assertContains(response, 'middle_button">Edit Resource<')
+        self.assertNotContains(response, 'middle_gray_button">Edit Resource<')
 
     def test_normal_user_doesnt_see_editor(self):
         """
@@ -91,7 +210,8 @@ class ViewTest(TestCase):
         url = self.resource.get_absolute_url()
         response = client.get(url, follow = True)
         self.assertTemplateUsed(response, 'repository/lr_view.html')
-        self.assertNotContains(response, "Editor")
+        self.assertNotContains(response, 'middle_button">Edit Resource<')
+        self.assertContains(response, 'middle_gray_button">Edit Resource<')
 
     def test_anonymous_doesnt_see_editor(self):
         """
@@ -101,7 +221,54 @@ class ViewTest(TestCase):
         url = self.resource.get_absolute_url()
         response = client.get(url, follow = True)
         self.assertTemplateUsed(response, 'repository/lr_view.html')
-        self.assertNotContains(response, "Editor")
+        self.assertNotContains(response, 'middle_button">Edit Resource<')
+        self.assertContains(response, 'middle_gray_button">Edit Resource<')
+
+    def testPageTitle(self):
+        """
+        Tests whether the title inside the header of the web page 
+        is the name of the resource (SEO)
+        """
+        client = Client()
+        url = self.resource.get_absolute_url()
+        response = client.get(url, follow = True)
+        self.assertTemplateUsed(response, 'repository/lr_view.html')
+        self.assertContains(response, '<title>Italian TTS Speech Corpus ' \
+                            '(Appen) &ndash; META-SHARE</title>')
+
+    def testResourceTitle(self):
+        """
+        Tests whether the resource title is correct 
+        """
+        client = Client()
+        url = self.resource.get_absolute_url()
+        response = client.get(url, follow = True)
+        self.assertTemplateUsed(response, 'repository/lr_view.html')
+        self.assertContains(response, '<h2>Italian TTS Speech Corpus (Appen)')
+
+    def test_owner_can_edit_resource(self):
+        """
+        Tests whether the link of the edit button is the good one
+        """
+        client = Client()
+        client.login(username=ViewTest.test_editor.username, password='secret')
+        self.resource.owners.add(ViewTest.test_editor)
+        self.resource.save()
+        response = client.get(self.resource.get_absolute_url())
+        self.assertTemplateUsed(response, 'repository/lr_view.html')
+        self.assertContains(response,
+            "repository/resourceinfotype_model/{0}/".format(self.resource.id))
+
+    def test_normal_user_cannot_edit_resource(self):
+        """
+        Tests that there is no edit button link for an unauthorized user
+        """
+        client = Client()
+        client.login(username='normaluser', password='secret')
+        response = client.get(self.resource.get_absolute_url())
+        self.assertTemplateUsed(response, 'repository/lr_view.html')
+        self.assertNotContains(response,
+            "repository/resourceinfotype_model/{0}/".format(self.resource.id))
 
 
 class DownloadViewTest(TestCase):
@@ -111,11 +278,13 @@ class DownloadViewTest(TestCase):
     
     @classmethod
     def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
         test_utils.set_index_active(False)
     
     @classmethod
     def tearDownClass(cls):
         test_utils.set_index_active(True)
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
         
     def setUp(self):
         """
@@ -148,22 +317,30 @@ class DownloadViewTest(TestCase):
         staffuser.save()
         create_user('normaluser', 'normal@example.com', 'secret')
         profile_ct = ContentType.objects.get_for_model(UserProfile)
+        ms_full_member_perm = Permission.objects.get(content_type=profile_ct,
+                                                     codename='ms_full_member')
         ms_member = create_user('fullmember', 'fm@example.com', 'secret')
-        ms_member.user_permissions.add(Permission.objects.get(
-                    content_type=profile_ct, codename='ms_full_member'))
+        ms_member.user_permissions.add(ms_full_member_perm)
         ms_member.save()
         ms_member = create_user('associatemember', 'am@example.com', 'secret')
         ms_member.user_permissions.add(Permission.objects.get(
                     content_type=profile_ct, codename='ms_associate_member'))
         ms_member.save()
+        # create a test organization with META-SHARE full membership
+        test_organization_ms = Organization.objects.create(
+                                                    name='test_organization_ms')
+        test_organization_ms.permissions.add(ms_full_member_perm)
+        test_organization_ms.save()
+        test_utils.create_organization_member('organization_member_ms',
+            'om_ms@example.com', 'secret', (test_organization_ms,))
 
     def tearDown(self):
         """
         Cleans up the test environment.
         """
-        test_utils.clean_db()
+        test_utils.clean_resources_db()
         test_utils.clean_storage()
-        User.objects.all().delete()
+        test_utils.clean_user_db()
 
     def test_non_downloadable_resource(self):
         """
@@ -508,3 +685,69 @@ class DownloadViewTest(TestCase):
         response = client.get('/{0}repository/download/{1}/'
                               .format(DJANGO_BASE, self.downloadable_resource_1.storage_object.identifier))
         self.assertContains(response, "You will now be redirected")
+
+    def test_downloadable_resource_for_organization_ms_full_members(self):
+        """
+        Verifies that a resource with an MS Commons license can be downloaded by
+        a user of an organization which has the META-SHARE full member
+        permission.
+        """
+        client = Client()
+        client.login(username='organization_member_ms', password='secret')
+        # make sure the license page is shown:
+        response = client.get(
+            reverse(views.download,
+                    args=(self.ms_commons_resource.storage_object.identifier,)),
+            follow = True)
+        self.assertTemplateUsed(response, 'repository/licence_agreement.html',
+                                "license agreement page expected")
+        self.assertContains(response,
+            'licences/META-SHARE_COMMONS_BYNCSA_v1.0.htm', msg_prefix="the " \
+                "correct license appears to not be shown in an iframe")
+        # make sure the download is started after accepting the license:
+        response = client.post(
+            reverse(views.download,
+                    args=(self.ms_commons_resource.storage_object.identifier,)),
+            { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
+              'licence': 'MSCommons_BY-NC-SA' },
+            follow = True)
+        self.assertTemplateNotUsed(response,
+            'repository/licence_agreement.html',
+            msg_prefix="a download should have been started")
+        self.assertTemplateNotUsed(response,
+            'repository/licence_selection.html',
+            msg_prefix="a download should have been started")
+        self.assertTemplateNotUsed(response,
+            'repository/lr_not_downloadable.html',
+            msg_prefix="a download should have been started")
+
+    def test_non_downloadable_resource_for_normal_organization_members(self):
+        """
+        Verifies that a resource with an MS Commons license cannot be downloaded
+        by a user of an organization which does not have the META-SHARE full
+        member permission.
+        """
+        test_passwd = 'secret'
+        test_user = test_utils.create_organization_member(
+            'organization_member_non_ms', 'om_non_ms@example.com', test_passwd,
+            (Organization.objects.create(name='test_organization_non_ms'),))
+        client = Client()
+        client.login(username=test_user.username, password=test_passwd)
+        # make sure the license page is shown:
+        response = client.get(reverse(views.download,
+                    args=(self.ms_commons_resource.storage_object.identifier,)),
+            follow = True)
+        self.assertTemplateUsed(response, 'repository/licence_agreement.html',
+                                "license agreement page expected")
+        self.assertContains(response,
+            'licences/META-SHARE_COMMONS_BYNCSA_v1.0.htm', msg_prefix="the " \
+                "correct license appears to not be shown in an iframe")
+        # make sure the download cannot be started:
+        response = client.post(
+            reverse(views.download,
+                    args=(self.ms_commons_resource.storage_object.identifier,)),
+            { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
+              'licence': 'MSCommons_BY-NC-SA' },
+            follow = True)
+        self.assertTemplateUsed(response, 'repository/licence_agreement.html',
+            msg_prefix="a download should not have been started")

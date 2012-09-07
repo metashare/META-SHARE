@@ -1,12 +1,9 @@
-"""
-Project: META-SHARE prototype implementation
- Author: Christian Federmann <cfedermann@dfki.de>
-"""
 from django import forms
-from metashare.accounts.models import RegistrationRequest, UserProfile, \
-    EditorRegistrationRequest
+from metashare.accounts.models import UserProfile, EditorGroupApplication, \
+    OrganizationApplication
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from django.utils.translation import ugettext as _
 
 
 class ModelForm(forms.ModelForm):
@@ -55,19 +52,23 @@ class Form(forms.Form):
             errors_on_separate_row = False)
     
 
-class RegistrationRequestForm(ModelForm):
+class RegistrationRequestForm(Form):
     """
     Form used to create user account requests from new users.
     """
+    shortname = forms.CharField(User._meta.get_field('username').max_length,
+                                label=_("Desired account name"))
+    first_name = forms.CharField(User._meta.get_field('first_name').max_length,
+                                 label=_("First name"))
+    last_name = forms.CharField(User._meta.get_field('last_name').max_length,
+                                label=_("Last name"))
+    email = forms.EmailField(label=_("E-mail"))
+    password = forms.CharField(User._meta.get_field('password').max_length,
+        label=_("Password"), widget=forms.PasswordInput())
+    confirm_password = forms.CharField(
+        User._meta.get_field('password').max_length,
+        label=_("Password confirmation"), widget=forms.PasswordInput())
 
-        
-    class Meta:
-        """
-        Meta class connecting to RegistrationRequest object model.
-        """
-        model = RegistrationRequest
-        exclude = ('uuid', 'created')
-        
     def clean_shortname(self):
         """
         Make sure that the user name is still available.
@@ -78,10 +79,10 @@ class RegistrationRequestForm(ModelForm):
         except:
             pass
         else:
-            raise ValidationError('User name already exists, please choose another one.')
-    
+            raise ValidationError(_('User account name already exists, ' \
+                                    'please choose another one.'))
         return _user_name
-        
+
     def clean_email(self):
         """
         Make sure that there is no account yet registered with this email.
@@ -92,18 +93,36 @@ class RegistrationRequestForm(ModelForm):
         except:
             pass
         else:
-            raise ValidationError('There is already an account registered with this email.')
-    
+            raise ValidationError(_('There is already an account registered ' \
+                                    'with this e-mail address.'))
         return _email
-        
-    
+
+    def clean_confirm_password(self):
+        """
+        Make sure that the password confirmation is the same as password.
+        """
+        pswrd = self.cleaned_data.get('password', None)
+        pswrd_conf = self.cleaned_data['confirm_password']
+        if pswrd != pswrd_conf:
+            raise ValidationError('The two password fields did not match.')
+        return pswrd
+
     # cfedermann: possible extensions for future improvements.
-    #
-    # - add validation for email address which checks that it's unique.
-    # - add validation for shortname for max_length and forbidden characters
-    # - add validation for firstname for max_length
-    # - add validation for lastname for max_length
-    
+    # - add validation for shortname for forbidden characters
+
+
+class ContactForm(Form):
+    """
+    Form used to contact the superusers of the META-SHARE node.
+    """
+    subject = forms.CharField(min_length=6, max_length=80,
+        error_messages={'min_length': _('Please provide a meaningful and '
+                                        'sufficiently indicative subject.')})
+    message = forms.CharField(min_length=30, max_length=2500,
+        widget=forms.Textarea, error_messages={'min_length': _('Your message '
+            'appears to be rather short. Please make sure to phrase your '
+            'request as precise as possible. This will help us to process it '
+            'as quick as possible.')})
 
 
 class ResetRequestForm(Form):
@@ -136,25 +155,90 @@ class UserProfileForm(ModelForm):
         Meta class connecting to UserProfile object model.
         """
         model = UserProfile
-        exclude = ('user', 'modified', 'uuid')
+        exclude = ('user', 'modified', 'uuid', 'default_editor_groups')
 
 
-class EditorRegistrationRequestForm(ModelForm):
+class EditorGroupApplicationForm(ModelForm):
     """
     Form used to apply to new editor groups membership.
     """
     class Meta:
         """
-        Meta class connecting to EditorRegistrationRequest object model.
+        Meta class connecting to EditorGroupApplication object model.
         """
-        model = EditorRegistrationRequest
+        model = EditorGroupApplication
         exclude = ('user', 'created')
 
     def __init__(self, editor_group_qs, *args, **kwargs):
         """
-        Initializes the `EditorRegistrationRequestForm` with the editor groups
+        Initializes the `EditorGroupApplicationForm` with the editor groups
         of the given query set.
         """
-        super(EditorRegistrationRequestForm, self).__init__(*args, **kwargs)
+        super(EditorGroupApplicationForm, self).__init__(*args, **kwargs)
         # If there is a list of editor groups, then modify the ModelChoiceField
         self.fields['editor_group'].queryset = editor_group_qs
+
+
+class AddDefaultEditorGroupForm(ModelForm):
+    """
+    Form used to add default editor groups.
+    """
+    class Meta:
+        """
+        Meta class connecting to UserProfile object model.
+        """
+        model = UserProfile
+        exclude = ('user', 'modified', 'uuid', 'birthdate', 'affiliation', \
+          'position', 'homepage')
+
+    def __init__(self, editor_group_qs, *args, **kwargs):
+        """
+        Initializes the `AddDefaultEditorGroupForm` with the editor groups
+        of the given query set.
+        """
+        super(AddDefaultEditorGroupForm, self).__init__(*args, **kwargs)
+        # If there is a list of editor groups, then modify the ModelChoiceField
+        self.fields['default_editor_groups'].queryset = editor_group_qs
+
+
+class RemoveDefaultEditorGroupForm(ModelForm):
+    """
+    Form used to remove default editor groups.
+    """
+    class Meta:
+        """
+        Meta class connecting to UserProfile object model.
+        """
+        model = UserProfile
+        exclude = ('user', 'modified', 'uuid', 'birthdate', 'affiliation', \
+          'position', 'homepage')
+
+    def __init__(self, editor_group_qs, *args, **kwargs):
+        """
+        Initializes the `RemoveDefaultEditorGroupForm` with the editor groups
+        of the given query set.
+        """
+        super(RemoveDefaultEditorGroupForm, self).__init__(*args, **kwargs)
+        # If there is a list of editor groups, then modify the ModelChoiceField
+        self.fields['default_editor_groups'].queryset = editor_group_qs
+
+
+class OrganizationApplicationForm(ModelForm):
+    """
+    Form used to apply to new organizations membership.
+    """
+    class Meta:
+        """
+        Meta class connecting to OrganizationApplication object model.
+        """
+        model = OrganizationApplication
+        exclude = ('user', 'created')
+
+    def __init__(self, organization_qs, *args, **kwargs):
+        """
+        Initializes the `OrganizationApplicationForm` with the organizations
+        of the given query set.
+        """
+        super(OrganizationApplicationForm, self).__init__(*args, **kwargs)
+        # If there is a list of organizations, then modify the ModelChoiceField
+        self.fields['organization'].queryset = organization_qs
