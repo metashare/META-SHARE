@@ -269,3 +269,13 @@ def get_lr_stat_action_count(obj_identifier, stats_action):
         return result
     else:
         return 0
+
+def get_lr_master_url(resource):
+    """
+    Returns the full URL of the master copy of the given resource object.
+    
+    This URL points to the single resource view of the resource on the resource'
+    master node.
+    """
+    return "{0}/{1}".format(resource.storage_object.source_url,
+                            resource.get_relative_url())
