@@ -27,8 +27,9 @@ from metashare.repository.models import resourceInfoType_model, \
     lexicalConceptualResourceVideoInfoType_model, \
     lexicalConceptualResourceImageInfoType_model, toolServiceInfoType_model, \
     licenceInfoType_model, personInfoType_model, projectInfoType_model, \
-    documentInfoType_model, organizationInfoType_model
-
+    documentInfoType_model, organizationInfoType_model, \
+    documentUnstructuredString_model
+from metashare.repository.editor.related_mixin import RelatedAdminMixin
 
 # Custom admin classes
 
@@ -65,6 +66,25 @@ class ProjectModelAdmin(SchemaModelAdmin):
 
 class DocumentModelAdmin(SchemaModelAdmin):
     exclude = ('source_url', 'copy_status')
+
+class DocumentUnstructuredStringModelAdmin(admin.ModelAdmin, RelatedAdminMixin):
+    def response_change(self, request, obj):
+        '''
+        Response sent after a successful submission of a change form.
+        We customize this to allow closing edit popups in the same way
+        as response_add deals with add popups.
+        '''
+        if '_popup' in request.REQUEST:
+            if request.POST.has_key("_continue"):
+                return self.save_and_continue_in_popup(obj, request)
+            return self.edit_response_close_popup_magic(obj)
+        elif '_popup_o2m' in request.REQUEST:
+            caller = None
+            if '_caller' in request.REQUEST:
+                caller = request.REQUEST['_caller']
+            return self.edit_response_close_popup_magic_o2m(obj, caller)
+        else:
+            return super(SchemaModelAdmin, self).response_change(request, obj)
 
 
 # Models which are always rendered inline so they don't need their own admin form:
@@ -105,7 +125,8 @@ custom_admin_classes = {
     personInfoType_model: PersonModelAdmin, 
     organizationInfoType_model: OrganizationModelAdmin, 
     projectInfoType_model: ProjectModelAdmin, 
-    documentInfoType_model: DocumentModelAdmin, 
+    documentInfoType_model: DocumentModelAdmin,
+    documentUnstructuredString_model: DocumentUnstructuredStringModelAdmin, 
 }
 
 def register():
@@ -120,7 +141,7 @@ def register():
     for modelclass, adminclass in custom_admin_classes.items():
         admin.site.unregister(modelclass)
         admin.site.register(modelclass, adminclass)
-    
+        
     # And finally, make sure that our editor has the exact same model/admin pairs registered:
     for modelclass, adminobject in admin.site._registry.items():
         editor_site.register(modelclass, adminobject.__class__)

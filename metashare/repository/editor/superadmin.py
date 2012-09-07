@@ -16,7 +16,7 @@ from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_unicode
-from django.utils.html import escape
+from django.utils.html import escape, escapejs
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 from django.views.decorators.csrf import csrf_protect
@@ -158,6 +158,13 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
 
 
     def response_add(self, request, obj):
+        if '_popup' in request.REQUEST:
+            if '_subclass' in request.REQUEST:
+                pk_value = obj._get_pk_val()
+                class_name = obj.__class__.__name__.lower()
+                return HttpResponse('<script type="text/javascript">opener.dismissAddAnotherPopup(window, "%s", "%s", "%s");</script>' % \
+                    # escape() calls force_unicode.
+                    (escape(pk_value), escapejs(obj), escapejs(class_name)))
         return super(SchemaModelAdmin, self).response_add(request, obj)
     
     def response_change(self, request, obj):

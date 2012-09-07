@@ -14,6 +14,9 @@ from selectable.forms.widgets import SelectableMediaMixin, SelectableMultiWidget
     LookupMultipleHiddenInput
 from django.utils.http import urlencode
 from metashare import settings
+from selectable.forms.widgets import AutoCompleteWidget        
+from django.forms.util import flatatt
+from django.utils.encoding import force_unicode
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -556,7 +559,6 @@ class MultiComboWidget(MultiFieldWidget):
         val = super(MultiComboWidget, self)._render_multifield(_context)
         return val
 
-from selectable.forms.widgets import AutoCompleteWidget        
 class AutoCompleteSelectMultipleWidgetMS(SelectableMultiWidget, SelectableMediaMixin):
 
     def __init__(self, lookup_class, *args, **kwargs):
@@ -575,7 +577,7 @@ class AutoCompleteSelectMultipleWidgetMS(SelectableMultiWidget, SelectableMediaM
                 lookup_class, allow_new=False,
                 limit=self.limit, query_params=query_params, attrs=attrs
             ),
-            LookupMultipleHiddenInput(lookup_class)
+            LookupMultipleHiddenInputMS(lookup_class)
         ]
         super(AutoCompleteSelectMultipleWidgetMS, self).__init__(widgets, *args, **kwargs)
 
@@ -586,4 +588,33 @@ class AutoCompleteSelectMultipleWidgetMS(SelectableMultiWidget, SelectableMediaM
         if value and not hasattr(value, '__iter__'):
             value = [value]
         value = [u'', value]
+        #if self.lookup_class:
+        #    lookup = self.lookup_class()
+        #    item = lookup.get_item(v)
         return super(AutoCompleteSelectMultipleWidgetMS, self).render(name, value, attrs)
+
+class LookupMultipleHiddenInputMS(LookupMultipleHiddenInput):
+    def render(self, name, value, attrs=None, choices=()):
+        lookup = self.lookup_class()
+        if value is None: value = []
+        final_attrs = self.build_attrs(attrs, type=self.input_type, name=name)
+        id_ = final_attrs.get('id', None)
+        inputs = []
+        model = getattr(self.lookup_class, 'model', None)
+        for i, v in enumerate(value):
+            item = None
+            if model and isinstance(v, model):
+                item = v
+                v = lookup.get_item_id(item)
+            input_attrs = dict(value=force_unicode(v), **final_attrs)
+            if id_:
+                # An ID attribute was given. Add a numeric index as a suffix
+                # so that the inputs don't all have the same ID attribute.
+                input_attrs['id'] = '%s_%s' % (id_, i)
+            if v:
+                item = item or lookup.get_item(v)
+                item_cls = item.as_subclass().__class__.__name__.lower()
+                input_attrs['title'] = lookup.get_item_value(item)
+                input_attrs['model-class'] = item_cls
+            inputs.append(u'<input%s />' % flatatt(input_attrs))
+        return mark_safe(u'\n'.join(inputs))

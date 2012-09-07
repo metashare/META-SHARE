@@ -11,8 +11,9 @@ from metashare.repository.models import personInfoType_model, \
     targetResourceInfoType_model, languageVarietyInfoType_model, \
     sizeInfoType_model, annotationInfoType_model, videoFormatInfoType_model, \
     imageFormatInfoType_model, resolutionInfoType_model, \
-    audioSizeInfoType_model
+    audioSizeInfoType_model, documentUnstructuredString_model
 from metashare.storage.models import MASTER
+from itertools import chain
 
 class PersonLookup(ModelLookup):
     model = personInfoType_model
@@ -92,11 +93,14 @@ class DocumentationLookup(ModelLookup):
         lcterm = term.lower()
         def matches(item):
             'Helper function to group the search code for a database item'
-            if item.as_subclass().copy_status != MASTER:
-                return False 
+            if hasattr(item.as_subclass(), 'copy_status'):
+                if item.as_subclass().copy_status != MASTER:
+                    return False 
             
             return lcterm in unicode(item).lower()
         items = documentInfoType_model.objects.get_query_set()
+        items2 = documentUnstructuredString_model.objects.get_query_set()
+        items = list(chain(items, items2))
         if term == '*':
             results = items
         else:
@@ -106,7 +110,7 @@ class DocumentationLookup(ModelLookup):
         else:
             print u'No results'
         return results
-
+    
 class MembershipDummyLookup(ModelLookup):
     '''
         Dummy class for use with OneToOneWidget.
