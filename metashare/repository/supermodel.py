@@ -717,6 +717,7 @@ class SchemaModel(models.Model):
         _object = cls()
         
         if hasattr(_object, 'copy_status'):
+            # pylint: disable-msg=W0201
             _object.copy_status = copy_status
 
         # If a parent instance is given, add it to the object instance.

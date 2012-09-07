@@ -1248,7 +1248,8 @@ class DestructiveTests(TestCase):
         resource.storage_object.save()
         response = client.get('{}repository/resourceinfotype_model/{}/'
                               .format(ADMINROOT, resource.id))
-        self.assertContains(response, "You cannot edit the metadata for the resource")
+        self.assertContains(response, "You will now be redirected to the " \
+            "META-SHARE node where the resource")
         self.assertContains(response, "You will now be redirected")
         
     def test_cannot_edit_reusable_entity_non_master_copy(self):
@@ -1257,7 +1258,8 @@ class DestructiveTests(TestCase):
         personInfoType_model.objects.all().update(copy_status=REMOTE)
         response = client.get('{}repository/personinfotype_model/{}/'
                               .format(ADMINROOT, personInfoType_model.objects.all()[0].id))
-        self.assertContains(response, "You cannot edit the metadata for the entity")
+        self.assertContains(response,
+            "The metadata for this entity was originally created")
         self.assertNotContains(response, "You will now be redirected")
 
     def test_editor_user_cannot_see_deleted_resource(self):

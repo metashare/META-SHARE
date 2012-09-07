@@ -21,6 +21,7 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 from django.views.decorators.csrf import csrf_protect
 
+from metashare.repository import model_utils
 from metashare.repository.editor.editorutils import is_inline, decode_inline
 from metashare.repository.editor.inlines import ReverseInlineModelAdmin
 from metashare.repository.editor.related_mixin import RelatedAdminMixin
@@ -472,23 +473,6 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         media = media + adminForm.media
         #### end modification ####
 
-        #### begin modification ####
-        #for reusable entities
-        if(hasattr(obj, 'copy_status') and obj.copy_status != MASTER):
-            return render_to_response('admin/repository/cannot_edit.html',
-                   { 'object': obj, 'url': obj.source_url },
-                   )
-        #for resources and resources' parts
-        else:
-            root_resources = get_root_resources(obj)
-            for res in root_resources:
-                if not res.storage_object.master_copy:
-                    url = "{0}/editor/repository/{1}/{2}".format(res.storage_object.source_url.rstrip('/'), (obj.__class__.__name__).lower(), object_id)
-                    return render_to_response('admin/repository/cannot_edit.html',
-                           { 'resource': res, 'redirection_url': url },
-                           )
-        #### end modification ####
-
         context = {
             'title': _('Change %s') % force_unicode(opts.verbose_name),
             'adminform': adminForm,
@@ -504,6 +488,27 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             'comp_name': _('%s') % force_unicode(opts.verbose_name),
         }
         context.update(extra_context or {})
+
+        #### begin modification ####
+        # redirection for reusable entities which are no master copies:
+        if hasattr(obj, 'copy_status') and obj.copy_status != MASTER:
+            context['url'] = obj.source_url
+            context_instance = template.RequestContext(
+                request, current_app=self.admin_site.name)
+            return render_to_response('admin/repository/cannot_edit.html',
+                context, context_instance=context_instance)
+        # redirection for resources and their parts which are no master copies:
+        else:
+            for res in [r for r in get_root_resources(obj)
+                        if not r.storage_object.master_copy]:
+                context['redirection_url'] = model_utils.get_lr_master_url(res)
+                context['resource'] = res
+                context_instance = template.RequestContext(
+                    request, current_app=self.admin_site.name)
+                return render_to_response('admin/repository/cannot_edit.html',
+                    context, context_instance=context_instance)
+        #### end modification ####
+
         return self.render_change_form(request, context, change=True, obj=obj)
 
     @csrf_protect_m

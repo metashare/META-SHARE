@@ -1,31 +1,39 @@
 {% extends "admin/base_site.html" %}
-{% load i18n admin_modify adminmedia %}
-{% load url from future %}
 
-{% block extrahead %}{{ block.super }}
-{% url 'admin:jsi18n' as jsi18nurl %}
-<script type="text/javascript" src="{{ jsi18nurl|default:"../../../jsi18n/" }}"></script>
-
-{{ media }}
-{% endblock %}
 {% block content %}
-<div class="redirect_msg">You cannot edit the metadata for the {% if resource %}resource "{{resource}}"{% else %}entity "{{object}}"{% endif %}{% if resource %}, originally provided
-	{% if resource.storage_object.source %}
-	  by {{ resource.storage_object.source }},
-	{% else %}
-	  at {{ resource.storage_object.source_url }},
-	{% endif %} 
-{% endif %} 
- in the current META-SHARE node.</div>
- <div class="redirect_msg">
-{% if resource %}You will now be redirected in the META-SHARE node where the resource metadata was originally created...
-{% else %}
-The metadata for this entity was originally created <a href={{url}}>here</a>.
-{% endif %} 
+{% spaceless %}
+<div id="content-main">
+  <p>
+    You cannot edit the metadata for the
+    {% if resource %}
+      resource &ldquo;{{ resource }}&rdquo;
+    {% else %}
+      entity &ldquo;{{ original }}&rdquo;
+    {% endif %}
+    on the current META-SHARE node.
+    {% if resource %}
+      It was originally created
+      {% if resource.storage_object.source %}
+        by {{ resource.storage_object.source }}.
+      {% else %}
+        at {{ resource.storage_object.source_url }}.
+      {% endif %}
+    {% endif %}
+  </p>
+  {% if resource %}
+    <p>You will now be redirected to the META-SHARE node where the resource
+    metadata was originally created&nbsp;&hellip;</p>
+    <script>
+      setTimeout('window.location.replace("{{ redirection_url }}")', 6000); 
+    </script>
+    <p>
+      <a href="{{ redirection_url }}">Click here</a> to immediately go to the
+      other node.
+    </p>
+  {% else %}
+    <p>The metadata for this entity was originally created
+    <a href="{{ url }}">here</a>.</p>
+  {% endif %}
 </div>
-{% if resource %}
-<script>
-setTimeout( 'window.location.replace("{{redirection_url}}")', 5*1000 ); 
-</script>
-{% endif %}
+{% endspaceless %}
 {% endblock content %}
