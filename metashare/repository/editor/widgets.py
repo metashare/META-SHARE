@@ -565,11 +565,13 @@ class AutoCompleteSelectMultipleWidgetMS(SelectableMultiWidget, SelectableMediaM
         self.lookup_class = lookup_class
         self.limit = kwargs.pop('limit', None)
         position = kwargs.pop('position', 'bottom')
+        proto_url = '/{}editor/repository/'.format(settings.DJANGO_BASE)
         attrs = {
             u'data-selectable-multiple': 'true',
             u'data-selectable-position': position,
             u'data-selectable-allow-editing': 'true',
-            u'data-selectable-is-subclassable': 'true'
+            u'data-selectable-is-subclassable': 'true',
+            u'data-selectable-base-url': proto_url,
         }
         query_params = kwargs.pop('query_params', {})
         widgets = [

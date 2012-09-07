@@ -109,7 +109,7 @@
                 var modelClass = $(input).attr('model-class');
                 if(modelClass)
                 {
-                	var editingUrl = '/metashare/editor/repository/' + modelClass;
+                	var editingUrl = self.baseUrl + modelClass;
                 	$(input).attr('editing-url', editingUrl);
                 }
             }
@@ -186,6 +186,7 @@
             self.allowNew = data.selectableAllowNew || data['selectable-allow-new'];
             self.isSubclassable = data.selectableIsSubclassable || data['selectable-is-subclassable'];
             self.allowEditing = data.selectableAllowEditing || data['selectable-allow-editing'];
+            self.baseUrl = data.selectableBaseUrl || data['selectable-base-url'];
             self.baseEditingUrl = null;
             var jqParent = $(input).parent();
             var jqA = jqParent.find('a');
