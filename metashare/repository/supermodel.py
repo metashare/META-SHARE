@@ -300,15 +300,26 @@ class SchemaModel(models.Model):
 
         return result
 
-    def export_to_elementtree(self, pretty=False):
+    def export_to_elementtree(self, pretty=False, elements=None, parent_dict=None):
         """
         Exports this instance to an XML ElementTree. If pretty is True, XML
         elements include an additional attribute 'pretty' with the pretty-print
         name as defined in the model.
+        In the given values list, each XML element is stored as a tuple of
+        its tag and its text content; this list is used to have an easy access
+        to all content of a resource in unit testing.
+        In the given parent directory, a mapping of each element to its parent
+        element is stored.
         """
+        if elements is None: 
+            elements = []
+        if parent_dict is None:
+            parent_dict = {}
+        
         if self.__schema_name__ == "SUBCLASSABLE":
             # pylint: disable-msg=E1101
-            return self.as_subclass().export_to_elementtree(pretty=pretty)
+            return self.as_subclass().export_to_elementtree(
+              pretty=pretty, elements=elements, parent_dict=parent_dict)
 
         _root = Element(self.__schema_name__)
         
@@ -423,7 +434,7 @@ class SchemaModel(models.Model):
                                 if pretty:
                                     _element.attrib["pretty"] = self.get_verbose_name(_model_field)
                                 _current_node.append(_element)
-
+                                parent_dict[_element] = _current_node
                             _current_node = _element
 
                     # The last name inside the path becomes our _xsd_name.
@@ -439,10 +450,13 @@ class SchemaModel(models.Model):
                                 if self.is_choice(_model_field):
                                     _element_text = prettify_camel_case_string(_element_text)
                             _element.text = _element_text
+                            parent_dict[_element] = _current_node
+                            elements.append(_element)
                             _current_node.append(_element)
 
                         else:
-                            _sub_value = _sub_value.export_to_elementtree(pretty=pretty)
+                            _sub_value = _sub_value.export_to_elementtree(
+                              pretty=pretty, elements=elements, parent_dict=parent_dict)
 
                             # We fix the sub value's tag as it may be "wrong".
                             # E.g., PersonInfo is sometimes called contactPerson.
@@ -455,6 +469,7 @@ class SchemaModel(models.Model):
 
                             # And append the sub structure to the current node.
                             _current_node.append(_sub_value)
+                            parent_dict[_sub_value] = _current_node
 
                     # Simple values are added to a new element and appended.
                     else:
@@ -487,6 +502,8 @@ class SchemaModel(models.Model):
                             if self.is_choice(_model_field):
                                 _element_text = prettify_camel_case_string(_element_text)
                         _element.text = _element_text
+                        parent_dict[_element] = _current_node
+                        elements.append(_element)
                         _current_node.append(_element)
 
         # Return root node of the ElementTree; can be converted to String
