@@ -86,11 +86,12 @@ class NightlyTests(TestCase):
         # disable indexing; we don't need stat updates for this test
         test_utils.set_index_active(False)
         
-        client = Client()
         count = 0
         for _res in resourceInfoType_model.objects.all():
             count += 1
             LOGGER.info("calling {}. resource at {}".format(count, _res.get_absolute_url()))
+            # always create a new client to force a new session
+            client = Client()
             response = client.get(_res.get_absolute_url(), follow = True)
             self.assertEquals(200, response.status_code)
             self.assertTemplateUsed(response, 'repository/lr_view.html')
