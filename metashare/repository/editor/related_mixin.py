@@ -38,7 +38,7 @@ class RelatedAdminMixin(object):
     kwargs = {'position':'top'}
     custom_m2m_widget_overrides = {
         # Reusable types with actual ajax search:
-        actorInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=ActorLookup, **kwargs), 
+        actorInfoType_model: AutoCompleteSelectMultipleWidgetMS(lookup_class=ActorLookup, **kwargs), 
         documentationInfoType_model: AutoCompleteSelectMultipleWidgetMS(lookup_class=DocumentationLookup, **kwargs),
         documentInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=DocumentLookup, **kwargs),
         personInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=PersonLookup, **kwargs),
