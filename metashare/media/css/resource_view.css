@@ -23,7 +23,7 @@ div#stats{
 	background-color: #EEEEEE;
 	float: right;
 	border-radius:7px;
-        box-shadow:0 3px 10px #CCCCCC, 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
+    box-shadow:0 3px 10px #CCCCCC, 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
 }
 
 .column{
@@ -56,7 +56,7 @@ div.right-corner{
 	font-size: 14px;
 	font-weight: 600;
 	margin-bottom: 0.3em;
-	margin-left: 10px;
+	margin-left: 5px;
 	margin-right: 5px;
 	padding-left: 4px;
 	width: 100%;
@@ -72,7 +72,8 @@ label.component{
 }
 
 .title.component + .title.component{
-	margin-left:10px;
+	margin-left:5px;
+	font-size:15px;
 }
 
 .expandable{
@@ -248,4 +249,9 @@ label span a{
 	color: #111111;
 	font-weight: normal;
 	padding-bottom:3px;
+}
+
+img.line{
+	width:273px;
+	height:20px;
 }

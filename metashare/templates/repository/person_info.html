@@ -10,10 +10,14 @@
 	{# Name, Surname and sex #}
 	<div>
 		<label class="dataline">
-			<a href="{{communication_person_dict.Url}}">
-				{{ contact_person_dict.GivenName }}
-				{{ contact_person_dict.Surname }}
-			</a>
+			{% if communication_person_dict.Url %}
+				<a href="{{communication_person_dict.Url}}">
+			{% endif %}
+					{{ contact_person_dict.GivenName }}
+					{{ contact_person_dict.Surname }}
+			{% if communication_person_dict.Url %}
+				</a>
+			{% endif %}
 			{% if contact_person_dict.Sex == "Male" %}
 				{% get_icon "male" %}
 			{% else %}
@@ -46,10 +50,6 @@
 	<div>
 		<label class="dataline">
 			{{ communication_person_dict.ZipCode }}
-		</label>
-	</div>
-	<div>
-		<label class="dataline">
 			{{ communication_person_dict.City }}
 		</label>
 	</div>
@@ -64,27 +64,89 @@
 		</label>
 	</div>
 	
+	{% if communication_person_dict.TelephoneNumber %}
 	<div>
 		<label class="dataline">
 			Telephone: {{ communication_person_dict.TelephoneNumber }}
 		</label>
 	</div>
+	{% endif %}
+	{% if communication_person_dict.FaxNumber %}
 	<div>
 		<label class="dataline">
 			Fax: {{ communication_person_dict.FaxNumber }}
 		</label>
 	</div>
+	{% endif %}
 	
-	
-	
+	<img class='line' src="/site_media/images/line.png" />
+
 	<div>
 		<label class="dataline">
-			{{ affiliation_dict.OrganizationName }}			
+			{{ affiliation_dict.DepartmentName }}
+		</label>
+	</div>	
+	<div>
+		<label class="dataline">
+			{% if communication_org_dict.Url %}
+				<a href="{{communication_org_dict.Url}}">
+			{% endif %}
+					{{ affiliation_dict.OrganizationName }}
+			{% if communication_org_dict.Url %}
+				</a>
+			{% endif %}
 		</label>
 	</div>
-	
-	
-	
-	
+	<div>
+		<label class="dataline">
+			{{ affiliation_dict.OrganizationShortName }}
+		</label>
+	</div>
+
+	<div>
+		<label class="dataline">
+			{{ communication_org_dict.Email }}
+		</label>
+	</div>
+	<div>
+		<label class="dataline">
+			{{ communication_org_dict.Address }}
+		</label>
+	</div>
+	<div>
+		<label class="dataline">
+			{{ communication_org_dict.ZipCode }}
+			{{ communication_org_dict.City }}
+		</label>
+	</div>
+	<div>
+		<label class="dataline">
+			{{ communication_org_dict.Region }}
+		</label>
+	</div>
+	<div>
+		<label class="dataline">
+			{{ communication_org_dict.Country }}
+		</label>
+	</div>
+	<div>
+		<label class="dataline">
+			{{ communication_org_dict.Email }}
+		</label>
+	</div>
+	{% if communication_org_dict.TelephoneNumber %}
+	<div>
+		<label class="dataline">
+			Telephone: {{ communication_org_dict.TelephoneNumber }}
+		</label>
+	</div>
+	{% endif %}
+	{% if communication_org_dict.FaxNumber %}
+	<div>
+		<label class="dataline">
+			Telephone: {{ communication_org_dict.FaxNumber }}
+		</label>
+	</div>
+	{% endif %}	
 </div>
 
