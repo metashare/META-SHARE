@@ -485,6 +485,47 @@ def view(request, resource_name=None, object_id=None):
         elif _tuple[0] == "Relation":
             relation_info_tuples.append(_tuple)
 
+    # Preprocess some of the information withing the tuples for better
+    # presentation in the single resource view.
+    # Contact Person:
+    contact_person_list = []
+    communication_list = []
+    contact_persons = []
+#    for _tuple in contact_person_tuples:
+#        for item in _tuple[1]:
+#            if item[0][0] == "Surname":
+#                contact_person_list.append(item[0][1])
+#            if item[0][0] == "Given name":
+#                contact_person_list.append(item[0][1])
+#            if item[0][0] == "Sex":
+#                if item[0][1] == "Male":
+#                    contact_person_list.append("SEX_MALE")
+#                else:
+#                    contact_person_list.append("SEX_FEMALE")
+#            if item[0] == "Communication":
+#                for _item in item[1]:
+#                    if _item[0][0] == "Email":
+#                        communication_list.append(_item[0][1])
+#                    if _item[0][0] == "Url":
+#                        communication_list.append(_item[0][1])
+        #    if item[0] == "Affiliation":
+        
+        
+#        contact_persons.append(contact_person_list)
+        
+#    contact_persons.append(['maria', 'anastasopoulou', 'MALE'])        
+        
+        
+        
+        #contact_person_str = ' '.join(contact_person_list)
+        #communication_str = ' '.join(communication_list)
+        #print contact_persons
+        #print communication_str
+    print contact_persons
+            
+            
+
+
     # Define context for template rendering.
     context = { 'resource': resource,
                 'resourceName': resource_name,
@@ -507,7 +548,9 @@ def view(request, resource_name=None, object_id=None):
                 'resourceType': resource_type,
                 'mediaTypes': media_types,
                 'url': url,
-                'metaShareId': metashare_id                
+                'metaShareId': metashare_id,
+                'contact_persons': contact_person_list,
+#                'communication_list': communication_list,
                 }
     template = 'repository/lr_view.html'
 
@@ -557,7 +600,7 @@ def get_structure_paths(obj, path=(), memo=None):
     """
     Returns a list of tuples containing the path of each item in
     a nested structure of tuples and lists.
-    Mostly taken from:
+    Adapted from:
     http://code.activestate.com/recipes/577982-recursively-walk-python-objects/
     """
     if memo is None:
