@@ -488,41 +488,75 @@ def view(request, resource_name=None, object_id=None):
     # Preprocess some of the information withing the tuples for better
     # presentation in the single resource view.
     # Contact Person:
+    contact_person_dict = {}
     contact_person_list = []
     communication_list = []
-    contact_persons = []
-#    for _tuple in contact_person_tuples:
-#        for item in _tuple[1]:
-#            if item[0][0] == "Surname":
-#                contact_person_list.append(item[0][1])
-#            if item[0][0] == "Given name":
-#                contact_person_list.append(item[0][1])
-#            if item[0][0] == "Sex":
-#                if item[0][1] == "Male":
-#                    contact_person_list.append("SEX_MALE")
-#                else:
-#                    contact_person_list.append("SEX_FEMALE")
-#            if item[0] == "Communication":
-#                for _item in item[1]:
-#                    if _item[0][0] == "Email":
-#                        communication_list.append(_item[0][1])
-#                    if _item[0][0] == "Url":
-#                        communication_list.append(_item[0][1])
-        #    if item[0] == "Affiliation":
-        
-        
-#        contact_persons.append(contact_person_list)
-        
-#    contact_persons.append(['maria', 'anastasopoulou', 'MALE'])        
-        
-        
-        
-        #contact_person_str = ' '.join(contact_person_list)
-        #communication_str = ' '.join(communication_list)
-        #print contact_persons
-        #print communication_str
-    print contact_persons
-            
+    communication_person_dict = {}
+    affiliation_dict = {}
+    communication_org_dict = {}
+    for _tuple in contact_person_tuples:
+        for item in _tuple[1]:
+            if item[0][0] == "Surname":
+                contact_person_dict["Surname"] = item[0][1]
+            if item[0][0] == "Given name":
+                contact_person_dict["GivenName"] = item[0][1]
+            if item[0][0] == "Sex":
+                contact_person_dict["Sex"] = item[0][1]
+            if item[0][0] == "Position":
+                contact_person_dict["Position"] = item[0][1]
+            if item[0] == "Communication":
+                for _item in item[1]:
+                    if _item[0][0] == "Email":
+                        communication_person_dict["Email"] = _item[0][1]
+                    if _item[0][0] == "Url":
+                        communication_person_dict["Url"] = _item[0][1]
+                    if _item[0][0] == "Address":
+                        communication_person_dict["Address"] = _item[0][1]
+                    if _item[0][0] == "Zip code":
+                        communication_person_dict["ZipCode"] = _item[0][1]
+                    if _item[0][0] == "City":
+                        communication_person_dict["City"] = _item[0][1]
+                    if _item[0][0] == "Region":
+                        communication_person_dict["Region"] = _item[0][1]
+                    if _item[0][0] == "Country":
+                        communication_person_dict["Country"] = _item[0][1]
+                    if _item[0][0] == "Telephone number":
+                        communication_person_dict["TelephoneNumber"] = _item[0][1]
+                    if _item[0][0] == "Fax number":
+                        communication_person_dict["FaxNumber"] = _item[0][1]
+            if item[0] == "Affiliation":
+                for _item in item[1]:
+                    if _item[0][0] == "Organization name":
+                        affiliation_dict["OrganizationName"] = _item[0][1]
+                    if _item[0][0] == "Organization short name":
+                        affiliation_dict["OrganizationShortName"] = _item[0][1]
+                    if _item[0][0] == "Department name":
+                        affiliation_dict["DepartmentName"] = _item[0][1]
+                    if _item[0] == "Communication":
+                        for _item in item[1]:
+                            if _item[0][0] == "Email":
+                                communication_org_dict["Email"] = _item[0][1]
+                            if _item[0][0] == "Url":
+                                communication_org_dict["Url"] = _item[0][1]
+                            if _item[0][0] == "Address":
+                                communication__org_dict["Address"] = _item[0][1]
+                            if _item[0][0] == "Zip code":
+                                communication_org_dict["ZipCode"] = _item[0][1]
+                            if _item[0][0] == "City":
+                                communication_org_dict["City"] = _item[0][1]
+                            if _item[0][0] == "Region":
+                                communication_org_dict["Region"] = _item[0][1]
+                            if _item[0][0] == "Country":
+                                communication_org_dict["Country"] = _item[0][1]
+                            if _item[0][0] == "Telephone number":
+                                communication_org_dict["TelephoneNumber"] = _item[0][1]
+                            if _item[0][0] == "Fax number":
+                                communication_org_dict["FaxNumber"] = _item[0][1]
+                        
+    print contact_person_dict
+    print communication_person_dict
+    print affiliation_dict
+    print communication_org_dict
             
 
 
@@ -549,8 +583,10 @@ def view(request, resource_name=None, object_id=None):
                 'mediaTypes': media_types,
                 'url': url,
                 'metaShareId': metashare_id,
-                'contact_persons': contact_person_list,
-#                'communication_list': communication_list,
+                'contact_person_dict': contact_person_dict,
+                'communication_person_dict' : communication_person_dict,
+                'affiliation_dict': affiliation_dict,
+                'communication_org_dict': communication_org_dict,
                 }
     template = 'repository/lr_view.html'
 
