@@ -359,12 +359,6 @@ form.form_helper label {
 
 /* cfedermann patches end */
 
-/* Marc Schroeder, 9 August 2011: 
- *  * classes for displaying required/error state of 
- *   * form fields in create_account.html
- *    * (modified as_table() as used in accounts.forms.RegistrationRequestForm)  
- *     */ 
-
 form.form_helper tr.required th label {
 	    background-color: #666666;
 }
@@ -373,8 +367,38 @@ form.form_helper tr.error th label {
 	    background-color: red;
 }
 
+form.form_helper>label {
+  width: 40%;
+  float: left;
+  text-align: right;
+  margin: 0;
+}
 
-form.form_helper th ul.errorlist {
+form.form_helper>label+input {
+  width: 56%;
+  float: right;
+  margin: 0;
+}
+
+form.form_helper>input[type=checkbox] {
+  margin-left: 40%
+}
+
+form.form_helper>input+label {
+  width: 56%;
+  float: right;
+  text-align: left;
+  background: none;
+  color: black;
+  padding: 0;
+}
+
+form.form_helper>div {
+  clear: both;
+  height: 3ex;
+}
+
+form.form_helper ul.errorlist {
 	clear:both;
 	list-style-type:none;
 	margin:0px;
