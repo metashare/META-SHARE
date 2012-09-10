@@ -221,11 +221,10 @@ def download(request, object_id):
     # Check whether the resource is from the current node, or whether it must be
     # redirected to the master copy
     if not resource.storage_object.master_copy:
-        url = "{0}/{1}".format(resource.storage_object.source_url,
-                               resource.get_relative_url())
         return render_to_response('repository/redirect.html',
-                    { 'resource': resource, 'redirection_url': url },
-                    context_instance=RequestContext(request))
+                { 'resource': resource,
+                  'redirection_url': model_utils.get_lr_master_url(resource) },
+                context_instance=RequestContext(request))
 
     licence_choice = None
     if request.method == "POST":
