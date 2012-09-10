@@ -497,66 +497,62 @@ def view(request, resource_name=None, object_id=None):
         for item in _tuple[1]:
             if item[0][0] == "Surname":
                 contact_person_dict["Surname"] = item[0][1]
-            if item[0][0] == "Given name":
+            elif item[0][0] == "Given name":
                 contact_person_dict["GivenName"] = item[0][1]
-            if item[0][0] == "Sex":
+            elif item[0][0] == "Sex":
                 contact_person_dict["Sex"] = item[0][1]
-            if item[0][0] == "Position":
+            elif item[0][0] == "Position":
                 contact_person_dict["Position"] = item[0][1]
-            if item[0] == "Communication":
+            elif item[0] == "Communication":
                 for _item in item[1]:
                     if _item[0][0] == "Email":
                         communication_person_dict["Email"] = _item[0][1]
-                    if _item[0][0] == "Url":
+                    elif _item[0][0] == "Url":
                         communication_person_dict["Url"] = _item[0][1]
-                    if _item[0][0] == "Address":
+                    elif _item[0][0] == "Address":
                         communication_person_dict["Address"] = _item[0][1]
-                    if _item[0][0] == "Zip code":
+                    elif _item[0][0] == "Zip code":
                         communication_person_dict["ZipCode"] = _item[0][1]
-                    if _item[0][0] == "City":
+                    elif _item[0][0] == "City":
                         communication_person_dict["City"] = _item[0][1]
-                    if _item[0][0] == "Region":
+                    elif _item[0][0] == "Region":
                         communication_person_dict["Region"] = _item[0][1]
-                    if _item[0][0] == "Country":
+                    elif _item[0][0] == "Country":
                         communication_person_dict["Country"] = _item[0][1]
-                    if _item[0][0] == "Telephone number":
+                    elif _item[0][0] == "Telephone number":
                         communication_person_dict["TelephoneNumber"] = _item[0][1]
-                    if _item[0][0] == "Fax number":
+                    elif _item[0][0] == "Fax number":
                         communication_person_dict["FaxNumber"] = _item[0][1]
-            if item[0] == "Affiliation":
+            elif item[0] == "Affiliation":
                 for _item in item[1]:
                     if _item[0][0] == "Organization name":
                         affiliation_dict["OrganizationName"] = _item[0][1]
-                    if _item[0][0] == "Organization short name":
+                    elif _item[0][0] == "Organization short name":
                         affiliation_dict["OrganizationShortName"] = _item[0][1]
-                    if _item[0][0] == "Department name":
+                    elif _item[0][0] == "Department name":
                         affiliation_dict["DepartmentName"] = _item[0][1]
-                    if _item[0] == "Communication":
+                    elif _item[0] == "Communication":
                         for _item in item[1]:
                             if _item[0][0] == "Email":
                                 communication_org_dict["Email"] = _item[0][1]
-                            if _item[0][0] == "Url":
+                            elif _item[0][0] == "Url":
                                 communication_org_dict["Url"] = _item[0][1]
-                            if _item[0][0] == "Address":
+                            elif _item[0][0] == "Address":
                                 communication__org_dict["Address"] = _item[0][1]
-                            if _item[0][0] == "Zip code":
+                            elif _item[0][0] == "Zip code":
                                 communication_org_dict["ZipCode"] = _item[0][1]
-                            if _item[0][0] == "City":
+                            elif _item[0][0] == "City":
                                 communication_org_dict["City"] = _item[0][1]
-                            if _item[0][0] == "Region":
+                            elif _item[0][0] == "Region":
                                 communication_org_dict["Region"] = _item[0][1]
-                            if _item[0][0] == "Country":
+                            elif _item[0][0] == "Country":
                                 communication_org_dict["Country"] = _item[0][1]
-                            if _item[0][0] == "Telephone number":
+                            elif _item[0][0] == "Telephone number":
                                 communication_org_dict["TelephoneNumber"] = _item[0][1]
-                            if _item[0][0] == "Fax number":
+                            elif _item[0][0] == "Fax number":
                                 communication_org_dict["FaxNumber"] = _item[0][1]
                         
-    print contact_person_dict
-    print communication_person_dict
-    print affiliation_dict
-    print communication_org_dict
-            
+
 
 
     # Define context for template rendering.

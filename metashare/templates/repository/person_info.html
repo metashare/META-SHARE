@@ -1,23 +1,35 @@
 {% load email_protection %}
 {% load get_icon %}
 
-
+<img src="/site_media/images/line.png" />
 
 <label class='title component'>Contact Person:</label>
 
 
 <div class="dataline">
-	<label>
-		{{ contact_person_dict.GivenName }}
-		{{ contact_person_dict.Surname }}
-		{% if contact_person_dict.Sex == "Male" %}
-			{% get_icon "male" %}
-		{% else %}
-			{% if contact_person_dict.Sex == "Female" %}
-				{% get_icon "female" %}
+	
+	{# Name, Surname and sex #}
+	<div>
+		<label class="dataline">
+			{{ contact_person_dict.GivenName }}
+			{{ contact_person_dict.Surname }}
+			{% if contact_person_dict.Sex == "Male" %}
+				{% get_icon "male" %}
+			{% else %}
+				{% if contact_person_dict.Sex == "Female" %}
+					{% get_icon "female" %}
+				{% endif %}
 			{% endif %}
-		{% endif %}
-	</label>
+		</label>
+	</div>
+	<div>
+		<label class="dataline">
+			{{ contact_person_dict.Position }}
+		</label>
+	</div>
+
+	
+	
 	
 	
 	
