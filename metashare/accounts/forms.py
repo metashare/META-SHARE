@@ -68,6 +68,7 @@ class RegistrationRequestForm(Form):
     confirm_password = forms.CharField(
         User._meta.get_field('password').max_length,
         label=_("Password confirmation"), widget=forms.PasswordInput())
+    accepted_tos = forms.BooleanField()
 
     def clean_shortname(self):
         """

@@ -1,11 +1,12 @@
 from django.core.exceptions import ValidationError
-from django.forms.fields import Field
+from django.forms import fields as django_fields
 from django.utils.translation import ugettext_lazy as _
 
+from metashare.repository import validators
 from metashare.repository.editor.widgets import LangDictWidget
 
 
-class DictField(Field):
+class DictField(django_fields.Field):
     """
     A form field which represents a Python dictionary.
     
@@ -55,3 +56,20 @@ class DictField(Field):
                                       .format(key))
             result[key] = val
         return result
+
+
+class XmlCharField(django_fields.CharField):
+    """
+    A `CharField` which only allows the characters that match the Char
+    production from XML 1.0 (Second Edition), cf.
+    http://www.w3.org/TR/2000/WD-xml-2e-20000814#NT-Char.
+    """
+    default_error_messages = {
+        # pylint: disable-msg=E1102
+        'invalid': _(u'The character at position %(char_pos)s '
+            u'(&#x%(char_code)04x;) must not be used. Enter a string '
+            u'consisting of only characters that match the Char production '
+            u'from XML 1.0 (Second Edition), cf. '
+            u'http://www.w3.org/TR/2000/WD-xml-2e-20000814#NT-Char.'),
+    }
+    default_validators = [validators.validate_matches_xml_char_production]
