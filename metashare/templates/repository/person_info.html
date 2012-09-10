@@ -1,10 +1,12 @@
 {% load email_protection %}
 {% load get_icon %}
 
+
+
 <label class='title component'>Contact Person:</label>
 
 
-<div class="dataline{% if lr_content.0.2 == 1 %} mandatory{% else %} optional{% endif %}">
+<div class="dataline">
 	<label>
 		{{ contact_person_dict.GivenName }}
 		{{ contact_person_dict.Surname }}
