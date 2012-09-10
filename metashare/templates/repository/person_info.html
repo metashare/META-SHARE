@@ -1,18 +1,19 @@
 {% load email_protection %}
 {% load get_icon %}
 
-<img src="/site_media/images/line.png" />
+<img class='line' src="/site_media/images/line.png" />
+
 
 <label class='title component'>Contact Person:</label>
-
-
 <div class="dataline">
 	
 	{# Name, Surname and sex #}
 	<div>
 		<label class="dataline">
-			{{ contact_person_dict.GivenName }}
-			{{ contact_person_dict.Surname }}
+			<a href="{{communication_person_dict.Url}}">
+				{{ contact_person_dict.GivenName }}
+				{{ contact_person_dict.Surname }}
+			</a>
 			{% if contact_person_dict.Sex == "Male" %}
 				{% get_icon "male" %}
 			{% else %}
@@ -27,8 +28,60 @@
 			{{ contact_person_dict.Position }}
 		</label>
 	</div>
-
+	<div>
+		<label class="dataline">
+			{{ affiliation_dict.DepartmentName }}
+		</label>
+	</div>
+	<div>
+		<label class="dataline">
+			{{ communication_person_dict.Email }}
+		</label>
+	</div>
+	<div>
+		<label class="dataline">
+			{{ communication_person_dict.Adress }}
+		</label>
+	</div>
+	<div>
+		<label class="dataline">
+			{{ communication_person_dict.ZipCode }}
+		</label>
+	</div>
+	<div>
+		<label class="dataline">
+			{{ communication_person_dict.City }}
+		</label>
+	</div>
+	<div>
+		<label class="dataline">
+			{{ communication_person_dict.Region }}
+		</label>
+	</div>
+	<div>
+		<label class="dataline">
+			{{ communication_person_dict.Country }}
+		</label>
+	</div>
 	
+	<div>
+		<label class="dataline">
+			Telephone: {{ communication_person_dict.TelephoneNumber }}
+		</label>
+	</div>
+	<div>
+		<label class="dataline">
+			Fax: {{ communication_person_dict.FaxNumber }}
+		</label>
+	</div>
+	
+	
+	
+	<div>
+		<label class="dataline">
+			{{ affiliation_dict.OrganizationName }}			
+		</label>
+	</div>
 	
 	
 	
