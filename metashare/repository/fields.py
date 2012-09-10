@@ -541,6 +541,18 @@ class DictField(models.Field):
                 curry(self._get_default_FIELD, field=self))
 
 
+class XmlCharField(models.CharField):
+    """
+    A `CharField` which only allows the characters that match the Char
+    production from XML 1.0 (Second Edition) (cf.
+    http://www.w3.org/TR/2000/WD-xml-2e-20000814#NT-Char).
+    """
+    def formfield(self, **kwargs):
+        defaults = {'form_class': form_fields.XmlCharField}
+        defaults.update(kwargs)
+        return super(XmlCharField, self).formfield(**defaults)
+
+
 def best_lang_value_retriever(_dict):
     """
     A `default_retriever` function which can be passed into a `DicField`.

@@ -540,10 +540,12 @@ class EditorTest(SeleniumTestCase):
         # remember root window id
         root_id = driver.current_window_handle
         # add required fields
+        # (add an invalid character in the resource name to verify that invalid
+        # characters are found in DictField values)
         driver.find_element_by_name("key_form-0-resourceName_0").clear()
         driver.find_element_by_name("key_form-0-resourceName_0").send_keys("en")
         driver.find_element_by_name("val_form-0-resourceName_0").clear()
-        driver.find_element_by_name("val_form-0-resourceName_0").send_keys("Test Tool")
+        driver.find_element_by_name("val_form-0-resourceName_0").send_keys(u"Test\u000b Tool")
         driver.find_element_by_name("key_form-0-description_0").clear()
         driver.find_element_by_name("key_form-0-description_0").send_keys("en")
         driver.find_element_by_name("val_form-0-description_0").clear()
@@ -564,6 +566,46 @@ class EditorTest(SeleniumTestCase):
         # save and close tool info popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         save_and_close(driver, root_id)
+
+        # add both optional "Identifier" and "Original metadata schema" fields
+        # (add an invalid character here to verify that invalid characters are
+        # found in both MultiTextField values and in XmlCharField values)
+        _identifier_elem = \
+            driver.find_element_by_xpath("//ul[@id='widget_1']/li[1]/input")
+        _identifier_elem.clear()
+        _identifier_elem.send_keys(u"test \u0007identifier")
+        driver.find_element_by_id("id_form-2-0-originalMetadataSchema").clear()
+        driver.find_element_by_id("id_form-2-0-originalMetadataSchema") \
+            .send_keys(u"test metadata schema \u0016A")
+
+        # save tool - we expect three error messages due to the invalid
+        # characters in some fields:
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("_save").click()
+        # TODO remove this workaround when Selenium starts working again as intended
+        time.sleep(1)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertTrue(driver.find_element_by_xpath(
+            "//div[@id='form-0']/fieldset/div/ul/li").text.startswith(
+                "The character at position 5 (&#x000b;) must not be used."))
+        self.assertTrue(driver.find_element_by_xpath(
+            "//ul[@id='widget_1']/li[1]/small").text.startswith(
+                "The character at position 6 (&#x0007;) must not be used."))
+        self.assertTrue(driver.find_element_by_xpath(
+            "//div[@id='form-2-0']/fieldset/div[3]/ul/li").text.startswith(
+                "The character at position 22 (&#x0016;) must not be used."))
+        # correct the resource name now
+        driver.find_element_by_name("val_form-0-resourceName_0").clear()
+        driver.find_element_by_name("val_form-0-resourceName_0").send_keys("Test Tool")
+        # correct the optional "Identifier" field now
+        _identifier_elem = \
+            driver.find_element_by_xpath("//ul[@id='widget_1']/li[1]/input")
+        _identifier_elem.clear()
+        _identifier_elem.send_keys(u"test identifier")
+        # correct the optional "Original metadata schema" field now
+        driver.find_element_by_id("id_form-2-0-originalMetadataSchema").clear()
+        driver.find_element_by_id("id_form-2-0-originalMetadataSchema") \
+            .send_keys(u"test metadata schema")
 
         # save tool
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
