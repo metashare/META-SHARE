@@ -234,6 +234,7 @@
 					<xs:restriction base="xs:integer">
 						<xs:enumeration value="8"/>
 						<xs:enumeration value="16"/>
+						<xs:enumeration value="24"/>
 						<xs:enumeration value="32"/>
 						<xs:enumeration value="64"/>
 					</xs:restriction>
