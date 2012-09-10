@@ -248,7 +248,7 @@ class CreateViewTest(django.test.TestCase):
         client = Client()
         post_data = {'shortname':'test', 'first_name':'Test',
           'last_name':'Testson', 'email':'a@b.com', 'password':'test',
-          'confirm_password': 'test'}
+          'confirm_password': 'test', 'accepted_tos': 'yes'}
         response = client.post('/{0}accounts/create/'.format(DJANGO_BASE),
           follow=True, data=post_data)
         self.assertEqual('frontpage.html', response.templates[0].name)
@@ -311,7 +311,7 @@ class RegistrationRequestTest(django.test.TestCase):
         response = self.client.post(reverse(views.create),
             {'first_name': 'Test', 'last_name': 'Testson2', 'shortname': 'good',
              'email': 'ok@example.com', 'password': 'secret',
-             'confirm_password': 'secret'}, follow=True)
+             'confirm_password': 'secret', 'accepted_tos': 'yes'}, follow=True)
         self.assertContains(response, 'received your registration data',
             msg_prefix="should have successfully created a registration")
         self.assertEquals(_prev_count + 1, RegistrationRequest.objects.count(),
