@@ -12,7 +12,7 @@ from metashare.repository.models import resourceInfoType_model
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 
-RESOURCES_ZIP_FILE = '{0}/../misc/testdata/v2.1/metashare_resources_v2.zip'.format(ROOT_PATH) 
+RESOURCES_ZIP_FILE = '{0}/../misc/testdata/v2.1/metashare_resources_v2.1.zip'.format(ROOT_PATH) 
 
 class NightlyTests(TestCase):
     """
