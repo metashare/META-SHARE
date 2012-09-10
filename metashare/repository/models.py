@@ -4048,7 +4048,7 @@ AUDIOFORMATINFOTYPE_SIGNALENCODING_CHOICES = _make_choices_from_list([
 ])
 
 AUDIOFORMATINFOTYPE_QUANTIZATION_CHOICES = _make_choices_from_int_list([
-8, 16, 32, 64, 
+8, 16, 24, 32, 64, 
 ])
 
 AUDIOFORMATINFOTYPE_BYTEORDER_CHOICES = _make_choices_from_list([
