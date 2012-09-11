@@ -199,14 +199,16 @@ class IdentificationInline(ReverseInlineModelAdmin):
 def change_resource_status(resource, status, precondition_status=None):
     '''
     Change the status of the given resource to the new status given.
-    If precondition_status is not None, then apply the change ONLY IF
-    the current status of the resource is precondition_status;
-    otherwise do nothing.
+    
+    If precondition_status is not None, then apply the change ONLY IF the
+    current status of the resource is precondition_status; otherwise do nothing.
+    The status of non-master copy resources is never changed.
     '''
     if not hasattr(resource, 'storage_object'):
         raise NotImplementedError, "{0} has no storage object".format(resource)
-    if precondition_status is None \
-            or precondition_status == resource.storage_object.publication_status:
+    if resource.storage_object.master_copy and \
+      (precondition_status is None \
+       or precondition_status == resource.storage_object.publication_status):
         resource.storage_object.publication_status = status
         resource.storage_object.save()
         # explicitly write metadata XML and storage object to the storage folder

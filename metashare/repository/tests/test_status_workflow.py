@@ -1,12 +1,13 @@
 import logging
 from django.contrib.admin.helpers import ACTION_CHECKBOX_NAME
+from django.contrib.auth.models import User
 from django.test.client import Client
 from django.test.testcases import TestCase
 from metashare import test_utils
 from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER
 from metashare.repository.models import resourceInfoType_model
 from metashare.accounts.models import EditorGroup, EditorGroupManagers
-from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL
+from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, REMOTE
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -128,3 +129,34 @@ class StatusWorkflowTest(TestCase):
         # fetch the resource from DB as our object is not up-to-date anymore
         resource = resourceInfoType_model.objects.get(pk=self.resource_id)
         self.assertEquals('internal', resource.publication_status())
+
+    def test_cannot_change_publication_status_of_remote_copies(self):
+        # not even a superuser must change the publication status of a remote
+        # resource copy
+        superuser = User.objects.create_superuser(
+            "superuser", "su@example.com", "secret")
+        client = Client()
+        client.login(username=superuser.username, password='secret')
+        # import a temporary resource to not mess with the other tests and set
+        # the copy status to remote
+        resource = test_utils.import_xml(
+            '{0}/repository/fixtures/ILSP10.xml'.format(ROOT_PATH))
+        resource.storage_object.copy_status = REMOTE
+        # (1) verify that a status change from published is not possible:
+        resource.storage_object.publication_status = PUBLISHED
+        resource.storage_object.save()
+        client.post(ADMINROOT,
+            {"action": "unpublish_action", ACTION_CHECKBOX_NAME: resource.id},
+            follow=True)
+        # fetch the resource from DB as our object is not up-to-date anymore
+        resource = resourceInfoType_model.objects.get(pk=resource.id)
+        self.assertEquals('published', resource.publication_status())
+        # (2) verify that a status change from ingested is not possible:
+        resource.storage_object.publication_status = INGESTED
+        resource.storage_object.save()
+        client.post(ADMINROOT,
+            {"action": "publish_action", ACTION_CHECKBOX_NAME: resource.id},
+            follow=True)
+        # fetch the resource from DB as our object is not up-to-date anymore
+        resource = resourceInfoType_model.objects.get(pk=resource.id)
+        self.assertEquals('ingested', resource.publication_status())
