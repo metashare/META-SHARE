@@ -1,6 +1,7 @@
 from django import forms
 from metashare.accounts.models import UserProfile, EditorGroupApplication, \
     OrganizationApplication
+from django.contrib.admin import widgets
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext as _
@@ -180,10 +181,13 @@ class EditorGroupApplicationForm(ModelForm):
         self.fields['editor_group'].queryset = editor_group_qs
 
 
-class AddDefaultEditorGroupForm(ModelForm):
+class UpdateDefaultEditorGroupForm(ModelForm):
     """
-    Form used to add default editor groups.
+    Form used to update default editor groups.
     """
+    default_editor_groups = forms.ModelMultipleChoiceField([], widget=widgets \
+      .FilteredSelectMultiple("Default Editor Group", is_stacked=False), required = False)
+
     class Meta:
         """
         Meta class connecting to UserProfile object model.
@@ -192,36 +196,15 @@ class AddDefaultEditorGroupForm(ModelForm):
         exclude = ('user', 'modified', 'uuid', 'birthdate', 'affiliation', \
           'position', 'homepage')
 
-    def __init__(self, editor_group_qs, *args, **kwargs):
+    def __init__(self, available_editor_group, chosen_editor_group, *args, **kwargs):
         """
-        Initializes the `AddDefaultEditorGroupForm` with the editor groups
+        Initializes the `UpdateDefaultEditorGroupForm` with the editor groups
         of the given query set.
         """
-        super(AddDefaultEditorGroupForm, self).__init__(*args, **kwargs)
+        super(UpdateDefaultEditorGroupForm, self).__init__(*args, **kwargs)
         # If there is a list of editor groups, then modify the ModelChoiceField
-        self.fields['default_editor_groups'].queryset = editor_group_qs
-
-
-class RemoveDefaultEditorGroupForm(ModelForm):
-    """
-    Form used to remove default editor groups.
-    """
-    class Meta:
-        """
-        Meta class connecting to UserProfile object model.
-        """
-        model = UserProfile
-        exclude = ('user', 'modified', 'uuid', 'birthdate', 'affiliation', \
-          'position', 'homepage')
-
-    def __init__(self, editor_group_qs, *args, **kwargs):
-        """
-        Initializes the `RemoveDefaultEditorGroupForm` with the editor groups
-        of the given query set.
-        """
-        super(RemoveDefaultEditorGroupForm, self).__init__(*args, **kwargs)
-        # If there is a list of editor groups, then modify the ModelChoiceField
-        self.fields['default_editor_groups'].queryset = editor_group_qs
+        self.fields['default_editor_groups'].queryset = available_editor_group
+        self.fields['default_editor_groups'].initial = chosen_editor_group
 
 
 class OrganizationApplicationForm(ModelForm):
