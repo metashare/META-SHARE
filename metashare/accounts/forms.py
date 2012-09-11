@@ -185,7 +185,7 @@ class UpdateDefaultEditorGroupForm(ModelForm):
     """
     Form used to update default editor groups.
     """
-    default_editor_groups=forms.ModelMultipleChoiceField([], widget=widgets \
+    default_editor_groups = forms.ModelMultipleChoiceField([], widget=widgets \
       .FilteredSelectMultiple("Default Editor Group", is_stacked=False), required = False)
 
     class Meta:
