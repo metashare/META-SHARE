@@ -128,13 +128,19 @@ def getUserStats(lrid):
 
     
 ## get the top data (limited by a number) 
-def getLRTop(action, limit, geoinfo=None):
+def getLRTop(action, limit, geoinfo=None, since=None):
     action_list = []
     if (action and not action == ""):
         if (geoinfo != None and geoinfo is not ""):
-            action_list = LRStats.objects.values('lrid').filter(action=action, geoinfo=geoinfo).annotate(sum_count=Sum('count')).order_by('-sum_count')[:limit]
+            if (since):
+                action_list = LRStats.objects.values('lrid').filter(action=action, geoinfo=geoinfo, lasttime__gte=since).annotate(sum_count=Sum('count')).order_by('-sum_count')[:limit]
+            else:
+                action_list = LRStats.objects.values('lrid').filter(action=action, geoinfo=geoinfo).annotate(sum_count=Sum('count')).order_by('-sum_count')[:limit]
         else:
-            action_list = LRStats.objects.values('lrid').filter(action=action).annotate(sum_count=Sum('count')).order_by('-sum_count')[:limit]                
+            if (since):
+                 action_list = LRStats.objects.values('lrid').filter(action=action, lasttime__gte=since).annotate(sum_count=Sum('count')).order_by('-sum_count')[:limit]
+            else:
+                 action_list = LRStats.objects.values('lrid').filter(action=action).annotate(sum_count=Sum('count')).order_by('-sum_count')[:limit]
     return action_list
 
 def getLRLast(action, limit, geoinfo=None):
@@ -148,13 +154,21 @@ def getLRLast(action, limit, geoinfo=None):
         action_list =  LRStats.objects.values('lrid', 'action', 'lasttime').order_by('-lasttime')[:limit]
     return action_list
 
-def getTopQueries(limit, geoinfo=None):
+def getTopQueries(limit, geoinfo=None, since=None):
     if (geoinfo != None and geoinfo is not ""):
-        topqueries = QueryStats.objects.values('query', 'facets').filter(geoinfo=geoinfo).annotate(query_count=Count('query'), \
-        facets_count=Count('facets')).order_by('-query_count','-facets_count')[:limit]        
+        if (since):
+             topqueries = QueryStats.objects.values('query', 'facets').filter(lasttime__gte=since, geoinfo=geoinfo).annotate(query_count=Count('query'), \
+                 facets_count=Count('facets')).order_by('-query_count','-facets_count')[:limit]
+        else:
+            topqueries = QueryStats.objects.values('query', 'facets').filter(geoinfo=geoinfo).annotate(query_count=Count('query'), \
+                facets_count=Count('facets')).order_by('-query_count','-facets_count')[:limit] 
     else:
-        topqueries = QueryStats.objects.values('query', 'facets').annotate(query_count=Count('query'), \
-        facets_count=Count('facets')).order_by('-query_count','-facets_count')[:limit]
+        if (since):
+            topqueries = QueryStats.objects.values('query', 'facets').filter(lasttime__gte=since).annotate(query_count=Count('query'), \
+                facets_count=Count('facets')).order_by('-query_count','-facets_count')[:limit]
+        else:
+            topqueries = QueryStats.objects.values('query', 'facets').annotate(query_count=Count('query'), \
+                facets_count=Count('facets')).order_by('-query_count','-facets_count')[:limit]
     return topqueries
     
 def getLastQuery (limit, geoinfo=None):
@@ -234,7 +248,7 @@ def getCountryActions(action):
     result = []
     sets = None
     if (action != None):
-        sets = LRStats.objects.values('geoinfo').filter(action=action).annotate(Count('action')).order_by('-action__count')
+        sets = LRStats.objects.values('geoinfo').exclude(geoinfo=u'').filter(action=action).annotate(Count('action')).order_by('-action__count')
     else:
         sets = LRStats.objects.values('geoinfo').annotate(Count('action')).order_by('-action__count')
     
@@ -245,7 +259,7 @@ def getCountryActions(action):
         
 def getCountryQueries():
     result = []
-    sets = QueryStats.objects.values('geoinfo').annotate(Count('geoinfo')).order_by('-geoinfo__count')
+    sets = QueryStats.objects.values('geoinfo').exclude(geoinfo=u'').annotate(Count('geoinfo')).order_by('-geoinfo__count')
     for key in sets:
         result.append([key['geoinfo'], key['geoinfo__count'], getcountry_name(key['geoinfo'])])
     return result
