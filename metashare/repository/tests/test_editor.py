@@ -1572,7 +1572,7 @@ class EditorGroupApplicationTests(TestCase):
         client.post('/{0}accounts/update_default_editor_groups/'.format(DJANGO_BASE), \
           {'editor_group': self.test_editor_group.pk}, follow=True)
         response = client.post('/{0}accounts/update_default_editor_groups/'.format(DJANGO_BASE), \
-          {'editor_group': None}, follow=True)
+          {'editor_group': []}, follow=True)
         self.assertNotContains(response, 'You have successfully removed default editor group "{}".'.format(self.test_editor_group),
           msg_prefix='expected the system to remove a default editor group.')
         
