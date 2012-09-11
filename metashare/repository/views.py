@@ -492,6 +492,7 @@ def view(request, resource_name=None, object_id=None):
     communication_list = []
     communication_person_dict = {}
     affiliation_dict = {}
+    affiliation_list = []
     communication_org_dict = {}
     for _tuple in contact_person_tuples:
         for item in _tuple[1]:
@@ -551,9 +552,13 @@ def view(request, resource_name=None, object_id=None):
                                 communication_org_dict["TelephoneNumber"] = __item[0][1]
                             elif __item[0][0] == "Fax number":
                                 communication_org_dict["FaxNumber"] = __item[0][1]
-                        
+        affiliation_list.append(affiliation_dict)
+        
+        
+    
     print communication_person_dict
     print affiliation_dict
+    print affiliation_list
     print communication_org_dict
             
 
@@ -629,28 +634,6 @@ def view(request, resource_name=None, object_id=None):
     ctx = RequestContext(request)
     return render_to_response(template, context, context_instance=ctx)
 
-
-def get_structure_paths(obj, path=(), memo=None):
-    """
-    Returns a list of tuples containing the path of each item in
-    a nested structure of tuples and lists.
-    Adapted from:
-    http://code.activestate.com/recipes/577982-recursively-walk-python-objects/
-    """
-    if memo is None:
-        memo = set()
-    iterator = None
-    if isinstance(obj, (Sequence, Set)) and not isinstance(obj, (str, unicode)):
-        iterator = enumerate
-    if iterator:
-        if id(obj) not in memo:
-            memo.add(id(obj))
-            for path_component, value in iterator(obj):
-                for result in get_structure_paths(value, path + (path_component,), memo):
-                    yield result
-            memo.remove(id(obj))
-    else:
-        yield obj, path
 
 def _format_recommendations(recommended_resources):
     '''
