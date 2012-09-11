@@ -74,15 +74,15 @@ class DocumentUnstructuredStringModelAdmin(admin.ModelAdmin, RelatedAdminMixin):
         We customize this to allow closing edit popups in the same way
         as response_add deals with add popups.
         '''
-        if '_popup' in request.REQUEST:
-            if request.POST.has_key("_continue"):
-                return self.save_and_continue_in_popup(obj, request)
-            return self.edit_response_close_popup_magic(obj)
-        elif '_popup_o2m' in request.REQUEST:
+        if '_popup_o2m' in request.REQUEST:
             caller = None
             if '_caller' in request.REQUEST:
                 caller = request.REQUEST['_caller']
             return self.edit_response_close_popup_magic_o2m(obj, caller)
+        if '_popup' in request.REQUEST:
+            if request.POST.has_key("_continue"):
+                return self.save_and_continue_in_popup(obj, request)
+            return self.edit_response_close_popup_magic(obj)
         else:
             return super(SchemaModelAdmin, self).response_change(request, obj)
 

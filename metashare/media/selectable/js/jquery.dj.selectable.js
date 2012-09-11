@@ -80,12 +80,13 @@
                 .append(
                     $('<a>')
                     .attr('href', '#')
-                    .button({
-                        icons: {
-                            primary: self.options.removeIcon
-                        },
-                        text: false
-                    })
+                    .append(
+                    	$('<img>')
+                    	.attr('src', window.__admin_media_prefix__ + 'img/admin/icon_deletelink.gif')
+                    	.attr('width', '10px')
+                    	.attr('height', '10px')
+                    	.attr('alt', 'Delete related model')
+                    )
                     .click(function() {
                         if(self.allowEditing)
                         {
@@ -121,12 +122,14 @@
                         .append(
                             $('<a>')
                             .attr('href', '#')
-                            .button({
-                                icons: {
-                                    primary: self.options.editIcon
-                                },
-                                text: false
-                            })
+                           	.css('margin-right', '4px')
+                            .append(
+                            	$('<img>')
+                            	.attr('src', window.__admin_media_prefix__ + 'img/admin/icon_changelink.gif')
+                            	.attr('width', '10px')
+                            	.attr('height', '10px')
+                            	.attr('alt', 'Edit related model')
+                            )
                             .click(function() {
                                 var recId = $(input).attr('value');
                                 var link = null;

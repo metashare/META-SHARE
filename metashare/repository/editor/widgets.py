@@ -559,7 +559,7 @@ class MultiComboWidget(MultiFieldWidget):
         val = super(MultiComboWidget, self)._render_multifield(_context)
         return val
 
-class AutoCompleteSelectMultipleWidgetMS(SelectableMultiWidget, SelectableMediaMixin):
+class AutoCompleteSelectMultipleSubClsWidget(SelectableMultiWidget, SelectableMediaMixin):
 
     def __init__(self, lookup_class, *args, **kwargs):
         self.lookup_class = lookup_class
@@ -581,7 +581,7 @@ class AutoCompleteSelectMultipleWidgetMS(SelectableMultiWidget, SelectableMediaM
             ),
             LookupMultipleHiddenInputMS(lookup_class)
         ]
-        super(AutoCompleteSelectMultipleWidgetMS, self).__init__(widgets, *args, **kwargs)
+        super(AutoCompleteSelectMultipleSubClsWidget, self).__init__(widgets, *args, **kwargs)
 
     def value_from_datadict(self, data, files, name):
         return self.widgets[1].value_from_datadict(data, files, name + '_1')
@@ -590,10 +590,40 @@ class AutoCompleteSelectMultipleWidgetMS(SelectableMultiWidget, SelectableMediaM
         if value and not hasattr(value, '__iter__'):
             value = [value]
         value = [u'', value]
-        #if self.lookup_class:
-        #    lookup = self.lookup_class()
-        #    item = lookup.get_item(v)
-        return super(AutoCompleteSelectMultipleWidgetMS, self).render(name, value, attrs)
+        return super(AutoCompleteSelectMultipleSubClsWidget, self).render(name, value, attrs)
+
+class AutoCompleteSelectMultipleEditWidget(SelectableMultiWidget, SelectableMediaMixin):
+
+    def __init__(self, lookup_class, *args, **kwargs):
+        self.lookup_class = lookup_class
+        self.limit = kwargs.pop('limit', None)
+        position = kwargs.pop('position', 'bottom')
+        proto_url = '/{}editor/repository/'.format(settings.DJANGO_BASE)
+        attrs = {
+            u'data-selectable-multiple': 'true',
+            u'data-selectable-position': position,
+            u'data-selectable-allow-editing': 'true',
+            u'data-selectable-base-url': proto_url,
+        }
+        query_params = kwargs.pop('query_params', {})
+        widgets = [
+            AutoCompleteWidget(
+                lookup_class, allow_new=False,
+                limit=self.limit, query_params=query_params, attrs=attrs
+            ),
+            LookupMultipleHiddenInput(lookup_class)
+        ]
+        super(AutoCompleteSelectMultipleEditWidget, self).__init__(widgets, *args, **kwargs)
+
+    def value_from_datadict(self, data, files, name):
+        return self.widgets[1].value_from_datadict(data, files, name + '_1')
+
+    def render(self, name, value, attrs=None):
+        if value and not hasattr(value, '__iter__'):
+            value = [value]
+        value = [u'', value]
+        return super(AutoCompleteSelectMultipleEditWidget, self).render(name, value, attrs)
+
 
 class LookupMultipleHiddenInputMS(LookupMultipleHiddenInput):
     def render(self, name, value, attrs=None, choices=()):

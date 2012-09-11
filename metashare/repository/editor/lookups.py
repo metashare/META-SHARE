@@ -77,6 +77,11 @@ class GenericUnicodeLookup(ModelLookup):
 
 class ActorLookup(GenericUnicodeLookup):
     model = actorInfoType_model
+    
+    def format_item(self, item):
+        fmt_item = super(ActorLookup, self).format_item(item)
+        fmt_item['cls'] = item.as_subclass().__class__.__name__.lower()
+        return fmt_item
 
 class DocumentationLookup(ModelLookup):
     '''

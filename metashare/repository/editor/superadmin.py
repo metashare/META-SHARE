@@ -173,15 +173,15 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         We customize this to allow closing edit popups in the same way
         as response_add deals with add popups.
         '''
-        if '_popup' in request.REQUEST:
-            if request.POST.has_key("_continue"):
-                return self.save_and_continue_in_popup(obj, request)
-            return self.edit_response_close_popup_magic(obj)
-        elif '_popup_o2m' in request.REQUEST:
+        if '_popup_o2m' in request.REQUEST:
             caller = None
             if '_caller' in request.REQUEST:
                 caller = request.REQUEST['_caller']
             return self.edit_response_close_popup_magic_o2m(obj, caller)
+        elif '_popup' in request.REQUEST:
+            if request.POST.has_key("_continue"):
+                return self.save_and_continue_in_popup(obj, request)
+            return self.edit_response_close_popup_magic(obj)
         else:
             return super(SchemaModelAdmin, self).response_change(request, obj)
 
@@ -337,7 +337,8 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         context = {
             'title': _('Add %s') % force_unicode(opts.verbose_name),
             'adminform': adminForm,
-            'is_popup': "_popup" in request.REQUEST,
+            'is_popup': "_popup" in request.REQUEST or \
+                        "_popup_o2m" in request.REQUEST,
             'show_delete': False,
             'media': mark_safe(media),
             'inline_admin_formsets': inline_admin_formsets,
@@ -504,7 +505,8 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             'adminform': adminForm,
             'object_id': object_id,
             'original': obj,
-            'is_popup': "_popup" in request.REQUEST,
+            'is_popup': "_popup" in request.REQUEST or \
+                        "_popup_o2m" in request.REQUEST,
             'media': mark_safe(media),
             'inline_admin_formsets': inline_admin_formsets,
             'errors': helpers.AdminErrorList(form, formsets),

@@ -27,7 +27,8 @@ from metashare.repository.editor.lookups import ActorLookup, \
     PersonLookup, TargetResourceLookup, DocumentLookup, \
     DocumentationLookup, LanguageVarietyDummyLookup, SizeDummyLookup, \
     ResolutionDummyLookup, AudioSizeDummyLookup
-from metashare.repository.editor.widgets import AutoCompleteSelectMultipleWidgetMS
+from metashare.repository.editor.widgets import AutoCompleteSelectMultipleSubClsWidget
+from metashare.repository.editor.widgets import AutoCompleteSelectMultipleEditWidget
 
 class RelatedAdminMixin(object):
     '''
@@ -38,13 +39,13 @@ class RelatedAdminMixin(object):
     kwargs = {'position':'top'}
     custom_m2m_widget_overrides = {
         # Reusable types with actual ajax search:
-        actorInfoType_model: AutoCompleteSelectMultipleWidgetMS(lookup_class=ActorLookup, **kwargs), 
-        documentationInfoType_model: AutoCompleteSelectMultipleWidgetMS(lookup_class=DocumentationLookup, **kwargs),
-        documentInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=DocumentLookup, **kwargs),
-        personInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=PersonLookup, **kwargs),
-        organizationInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=OrganizationLookup, **kwargs),
-        projectInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=ProjectLookup, **kwargs),
-        targetResourceInfoType_model: AutoCompleteSelectMultipleWidget(lookup_class=TargetResourceLookup, **kwargs),
+        actorInfoType_model: AutoCompleteSelectMultipleSubClsWidget(lookup_class=ActorLookup, **kwargs), 
+        documentationInfoType_model: AutoCompleteSelectMultipleSubClsWidget(lookup_class=DocumentationLookup, **kwargs),
+        documentInfoType_model: AutoCompleteSelectMultipleEditWidget(lookup_class=DocumentLookup, **kwargs),
+        personInfoType_model: AutoCompleteSelectMultipleEditWidget(lookup_class=PersonLookup, **kwargs),
+        organizationInfoType_model: AutoCompleteSelectMultipleEditWidget(lookup_class=OrganizationLookup, **kwargs),
+        projectInfoType_model: AutoCompleteSelectMultipleEditWidget(lookup_class=ProjectLookup, **kwargs),
+        targetResourceInfoType_model: AutoCompleteSelectMultipleEditWidget(lookup_class=TargetResourceLookup, **kwargs),
         # Custom one-to-many widgets needed to avoid nested inlines:
         membershipInfoType_model: OneToManyWidget(lookup_class=MembershipDummyLookup),
         languageVarietyInfoType_model: OneToManyWidget(lookup_class=LanguageVarietyDummyLookup),
