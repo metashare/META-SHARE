@@ -1,13 +1,16 @@
 import logging
+
 from django.contrib.admin.helpers import ACTION_CHECKBOX_NAME
 from django.contrib.auth.models import User
 from django.test.client import Client
 from django.test.testcases import TestCase
+
 from metashare import test_utils
-from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER
-from metashare.repository.models import resourceInfoType_model
 from metashare.accounts.models import EditorGroup, EditorGroupManagers
+from metashare.repository.models import resourceInfoType_model
+from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, REMOTE
+
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
