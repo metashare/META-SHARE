@@ -1,6 +1,5 @@
 import logging
 
-from collections import Set, Sequence 
 from datetime import datetime
 from os.path import split, getsize
 from urllib import urlopen
@@ -387,7 +386,8 @@ def download_contact(request, object_id):
             try:
                 # Send out email to the resource contacts
                 send_mail('Request for information regarding a resource',
-                    render_to_string('repository/resource_download_information.email', data),
+                    render_to_string('repository/' \
+                      'resource_download_information.email', data),
                     user_email, resource_emails, fail_silently=False)
             except: #SMTPException:
                 # If the email could not be sent successfully, tell the user
@@ -413,14 +413,6 @@ def download_contact(request, object_id):
       'form': form }
     return render_to_response('repository/download_contact_form.html',
                         dictionary, context_instance=RequestContext(request))
-
-
-@login_required
-def create(request):
-    """
-    Redirects to the Django admin backend editor for resources.
-    """
-    return redirect(reverse('admin:repository_resourceinfotype_model_add'))
 
 
 def view(request, resource_name=None, object_id=None):
@@ -489,7 +481,6 @@ def view(request, resource_name=None, object_id=None):
     # Contact Person:
     contact_person_dict = {}
     contact_person_list = []
-    communication_list = []
     communication_person_dict = {}
     affiliation_dict = {}
     affiliation_list = []
@@ -521,7 +512,8 @@ def view(request, resource_name=None, object_id=None):
                     elif _item[0][0] == "Country":
                         communication_person_dict["Country"] = _item[0][1]
                     elif _item[0][0] == "Telephone number":
-                        communication_person_dict["TelephoneNumber"] = _item[0][1]
+                        communication_person_dict["TelephoneNumber"] = \
+                          _item[0][1]
                     elif _item[0][0] == "Fax number":
                         communication_person_dict["FaxNumber"] = _item[0][1]
             elif item[0] == "Affiliation":
@@ -549,10 +541,13 @@ def view(request, resource_name=None, object_id=None):
                             elif __item[0][0] == "Country":
                                 communication_org_dict["Country"] = __item[0][1]
                             elif __item[0][0] == "Telephone number":
-                                communication_org_dict["TelephoneNumber"] = __item[0][1]
+                                communication_org_dict["TelephoneNumber"] = \
+                                  __item[0][1]
                             elif __item[0][0] == "Fax number":
-                                communication_org_dict["FaxNumber"] = __item[0][1]
+                                communication_org_dict["FaxNumber"] = \
+                                  __item[0][1]
         affiliation_list.append(affiliation_dict)
+    contact_person_list.append(contact_person_dict)
         
         
     
@@ -577,7 +572,7 @@ def view(request, resource_name=None, object_id=None):
                 'version_info_tuple': version_info_tuple,
                 'validation_info_tuples': validation_info_tuples,
                 'usage_info_tuple': usage_info_tuple,
-                'documentation_info_tuple': documentation_info_tuple,                
+                'documentation_info_tuple': documentation_info_tuple,
                 'resource_creation_info_tuple': resource_creation_info_tuple,
                 'relation_info_tuples': relation_info_tuples,
                 'linguality_infos': linguality_infos,
@@ -593,11 +588,13 @@ def view(request, resource_name=None, object_id=None):
                 }
     template = 'repository/lr_view.html'
 
-    # For users who have edit permission for this resource, we have to add LR_EDIT 
-    # which contains the URL of the Django admin backend page for this resource.
+    # For users who have edit permission for this resource, we have to add 
+    # LR_EDIT which contains the URL of the Django admin backend page 
+    # for this resource.
     if has_edit_permission(request, resource):
         context['LR_EDIT'] = reverse(
-            'admin:repository_resourceinfotype_model_change', args=(resource.id,))
+            'admin:repository_resourceinfotype_model_change', \
+              args=(resource.id,))
 
     # in general, only logged in users may download/purchase any resources
     context['LR_DOWNLOAD'] = request.user.is_active
@@ -693,8 +690,10 @@ class MetashareFacetedSearchView(FacetedSearchView):
         starttime = datetime.now()
         results_count = sqs.count()
         if self.query:
-            saveQueryStats(self.query, str(sorted(self.request.GET.getlist("selected_facets"))), \
-                results_count, (datetime.now() - starttime).microseconds, self.request)
+            saveQueryStats(self.query, \
+                str(sorted(self.request.GET.getlist("selected_facets"))), \
+                results_count, \
+                (datetime.now() - starttime).microseconds, self.request)
 
         return sqs
     
@@ -735,7 +734,8 @@ class MetashareFacetedSearchView(FacetedSearchView):
         # Step (1): if there are any selected facets, then add these first:
         if sel_facets:
             # add all top level facets (sorted by their facet IDs):
-            for name, label, facet_id, _dummy in [f for f in filter_labels if f[3] == 0]:
+            for name, label, facet_id, _dummy in \
+              [f for f in filter_labels if f[3] == 0]:
                 name_exact = '{0}_exact'.format(name)
                 # only add selected facets in step (1)
                 if name_exact in sel_facets:
@@ -745,22 +745,30 @@ class MetashareFacetedSearchView(FacetedSearchView):
                         addable = []
                         # only items with a count > 0 are shown
                         for item in [i for i in items if i[1] > 0]:
-                            subfacets = [f for f in filter_labels if (f[3] == facet_id and item[0] in f[0]) ]
+                            subfacets = [f for f in filter_labels if (f[3] == \
+                              facet_id and item[0] in f[0]) ]
                             subfacets_exactname_list = []
-                            subfacets_exactname_list.extend([u'{0}_exact'.format(subfacet[0]) for subfacet in subfacets])
+                            subfacets_exactname_list.extend( \
+                              [u'{0}_exact'.format(subfacet[0]) \
+                              for subfacet in subfacets])
                             subresults = []
                             for facet in subfacets:
-                                subresults = self.show_subfilter(facet, sel_facets, facet_fields, subresults)
+                                subresults = self.show_subfilter( \
+                                  facet, sel_facets, facet_fields, subresults)
                             if item[0] in sel_facets[name_exact]:
                                 if item[0] != "":
-                                    lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', item[0][0].capitalize()+item[0][1:]))[:-1]
+                                    lab_item = " ".join(re.findall( \
+                                      '[A-Z\_]*[^A-Z]*', \
+                                      item[0][0].capitalize()+item[0][1:]))[:-1]
                                     removable.append({'label': lab_item,
                                         'count': item[1], 'targets':
                                             [u'{0}:{1}'.format(name, value)
                                              for name, values in
                                              sel_facets.iteritems() for value in
                                              values if (name != name_exact
-                                             or value != item[0]) and name not in subfacets_exactname_list], 'subresults': subresults})
+                                             or value != item[0]) and name \
+                                               not in subfacets_exactname_list], \
+                                               'subresults': subresults})
                             else:
                                 targets = [u'{0}:{1}'.format(name, value)
                                            for name, values in
@@ -769,17 +777,21 @@ class MetashareFacetedSearchView(FacetedSearchView):
                                 targets.append(u'{0}:{1}'.format(name_exact,
                                                                  item[0]))
                                 if item[0] != "":
-                                    lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', item[0][0].capitalize()+item[0][1:]))[:-1]
+                                    lab_item = " ".join(re.findall( \
+                                      '[A-Z\_]*[^A-Z]*', \
+                                      item[0][0].capitalize()+item[0][1:]))[:-1]
                                     addable.append({'label': lab_item,
                                                 'count': item[1],
-                                                'targets': targets, 'subresults': subresults})
+                                                'targets': targets,
+                                                'subresults': subresults})
 
                         result.append({'label': label, 'removable': removable,
                                        'addable': addable})                    
 
         # Step (2): add all top level facets without selected facet items at the
         # end (sorted by their facet IDs):
-        for name, label, facet_id, _dummy in [f for f in filter_labels if f[3] == 0]:
+        for name, label, facet_id, _dummy in \
+		  [f for f in filter_labels if f[3] == 0]:
             name_exact = '{0}_exact'.format(name)
             # only add facets without selected items in step (2)
             if not name_exact in sel_facets:
@@ -794,7 +806,8 @@ class MetashareFacetedSearchView(FacetedSearchView):
                         targets.append(u'{0}:{1}'.format(name_exact, item[0]))
 
                         if item[0] != "":
-                            lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', item[0][0].capitalize()+item[0][1:]))[:-1]
+                            lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', 
+                              item[0][0].capitalize()+item[0][1:]))[:-1]
                             addable.append({'label': lab_item, 'count': item[1],
                                         'targets': targets})
                     subresults = [f for f in filter_labels if f[3] == facet_id] 
@@ -819,7 +832,8 @@ class MetashareFacetedSearchView(FacetedSearchView):
     
     def show_subfilter(self, facet, sel_facets, facet_fields, results):
         """
-        Creates a second level for faceting. Sub filters are included after the parent filters.
+        Creates a second level for faceting. 
+        Sub filters are included after the parent filters.
         """
         import re
 
@@ -837,7 +851,8 @@ class MetashareFacetedSearchView(FacetedSearchView):
                 for item in [i for i in items if i[1] > 0]:
                     if item[0] in sel_facets[name_exact]:
                         if item[0] != "":
-                            lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', item[0][0].capitalize()+item[0][1:]))[:-1]
+                            lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', 
+                              item[0][0].capitalize()+item[0][1:]))[:-1]
                             removable.append({'label': lab_item,
                                 'count': item[1], 'targets':
                                     [u'{0}:{1}'.format(name, value)
@@ -853,7 +868,8 @@ class MetashareFacetedSearchView(FacetedSearchView):
                         targets.append(u'{0}:{1}'.format(name_exact,
                                                          item[0]))
                         if item[0] != "":
-                            lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', item[0][0].capitalize()+item[0][1:]))[:-1]
+                            lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', 
+                              item[0][0].capitalize()+item[0][1:]))[:-1]
                             addable.append({'label': lab_item,
                                         'count': item[1],
                                         'targets': targets})
@@ -871,7 +887,8 @@ class MetashareFacetedSearchView(FacetedSearchView):
                                for value in values]
                     targets.append(u'{0}:{1}'.format(name_exact, item[0]))
                     if item[0] != "":
-                        lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', item[0][0].capitalize()+item[0][1:]))[:-1]
+                        lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', 
+                          item[0][0].capitalize()+item[0][1:]))[:-1]
                         addable.append({'label': lab_item, 'count': item[1],
                                     'targets': targets})
                 if addable:
