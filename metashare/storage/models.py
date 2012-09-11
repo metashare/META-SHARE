@@ -17,6 +17,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 import zipfile
 from zipfile import ZIP_DEFLATED
 from django.db.models.query_utils import Q
+import glob
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -567,6 +568,28 @@ def update_digests():
             _so.update_storage()
         else:
             LOGGER.info('{} is up to date'.format(_so.identifier))
+
+def repair_storage_folder():
+    """
+    Repairs the storage folder by forcing the recreation of all files.
+    Superfluous files are deleted."
+    """
+    for _so in StorageObject.objects.all():
+        if _so.publication_status == INTERNAL:
+            # if storage folder is found, delete all files except a possible
+            # binary
+            folder = os.path.join(settings.STORAGE_PATH, _so.identifier)
+            for _file in ('storage-local.json', 'storage-global.json', 
+              'resource.zip', 'metadata-*.xml'):
+                path = os.path.join(folder, _file)
+                for _path in glob.glob(path):
+                    if os.path.exists(_path):
+                        os.remove(_path)
+        else:
+            _so.metadata = None
+            _so.global_storage = None
+            _so.local_storage = None
+            _so.update_storage()
 
 def compute_checksum(infile):
     """
