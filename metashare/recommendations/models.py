@@ -6,7 +6,7 @@ from metashare.repository.models import resourceInfoType_model
 
 class TogetherManager(models.Model):
     """
-    a data structure keeping track of resources that have been view are downloaded together
+    a data structure keeping track of resources that have been view or downloaded together
     """
     name = models.CharField(max_length=255)
     

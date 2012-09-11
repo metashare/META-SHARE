@@ -78,6 +78,7 @@ def contact(request):
             data = {'user_first_name': request.user.first_name,
               'user_last_name': request.user.last_name,
               'user_account_name': request.user.username,
+              'user_email': request.user.email,
               'node_url': DJANGO_URL, 'message': form.cleaned_data['message'],
               'subject': form.cleaned_data['subject']}
             email_msg = render_to_string('accounts/contact_maintainers.email',

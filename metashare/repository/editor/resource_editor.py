@@ -450,6 +450,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                             request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
     
         dictionary = {
+                      'title': _('Are you sure?'),
                       'can_be_deleted': can_be_deleted,
                       'cannot_be_deleted': cannot_be_deleted,
                       'selected_resources': queryset,
