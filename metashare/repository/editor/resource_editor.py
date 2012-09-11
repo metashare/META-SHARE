@@ -1035,9 +1035,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 for action in (publish_resources, unpublish_resources,
                                ingest_resources):
                     del result[action.__name__]
-        if 'action' in request.POST and request.POST.get('action') == 'delete_selected' \
-            and request.POST.get('post') == 'yes':
-            resource_id = request.POST.get('_selected_action', None)
         return result
 
     def create_hidden_structures(self, request):

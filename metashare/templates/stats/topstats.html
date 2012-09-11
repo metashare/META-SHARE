@@ -262,7 +262,7 @@ function addStatus(filter){
     {% else %}   
         <div class="resourceName">
         {% get_icon object.0.resourceComponentType.as_subclass.resourceType %}
-        &nbsp;<a href="{{ object.get_absolute_url }}"{% ifnotequal object.0.identificationInfo.get_default_description "METASHARE_NULL" %} title="{{ object.0.identificationInfo.get_default_description|escape }}"{% endifnotequal %}>{{ object.0 }}</a>
+        &nbsp;<a href="{{ object.0.get_absolute_url }}"{% ifnotequal object.0.identificationInfo.get_default_description "METASHARE_NULL" %} title="{{ object.0.identificationInfo.get_default_description|escape }}"{% endifnotequal %}>{{ object.0 }}</a>
         
         &nbsp;{% resource_media_types object.0.resourceComponentType.as_subclass %} 
         

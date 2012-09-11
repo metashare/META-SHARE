@@ -37,6 +37,8 @@ def saveLRStats(resource, action, request=None):
     Takes into account the session to avoid to increment more than one time the
     stats counter. Returns whether the stats counter was incremented or not.
     """
+    
+    print "saveLRStats " + str(action) + " " + str(resource.storage_object.identifier)
     if not hasattr(resource, 'storage_object') or resource.storage_object is None:
         return
         

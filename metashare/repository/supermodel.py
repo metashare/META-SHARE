@@ -18,7 +18,6 @@ from metashare.repository.fields import MultiSelectField, MultiTextField, \
 from metashare.settings import LOG_HANDLER, \
     CHECK_FOR_DUPLICATE_INSTANCES
 from metashare.storage.models import MASTER
-from metashare.stats.model_utils import saveLRStats, DELETE_STAT
 from metashare.utils import SimpleTimezone, prettify_camel_case_string
 
 
@@ -1306,7 +1305,6 @@ class SchemaModel(models.Model):
                         if child is not None:
                             to_delete.put(child)
             obj.delete()
-            saveLRStats(self, DELETE_STAT)
             
 class SubclassableModel(SchemaModel):
     """
