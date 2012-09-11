@@ -71,9 +71,15 @@ div.coverage {
 div.required { background-color: lightgreen }
 div.optional { background-color: yellow }
 div.recommended { background-color: orange }
-td.aligntop {vertical-align: top} 
-div.fieldvalues {background: #E6E6FA; border: 1px solid #000; position:relative; vertical-align: top}
-div.warning {background: lightyellow; border: 1px solid #000; position:relative; width: 400px}
+div.fieldvalues {background: #E6E6FA; 
+    border: 1px solid #000; 
+    float: right;
+    margin-top: 40px;
+    vertical-align: top}
+div.warning {background: lightyellow; 
+    border: 1px solid #000; 
+    position:relative; 
+    width: 400px}
 
 /* checkable facets */
 a.deleteFilter:before {

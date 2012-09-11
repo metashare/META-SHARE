@@ -119,24 +119,50 @@ function addStatus(filter){
     {% endif %}
     
             
-        <td class=aligntop nowrap>  
+        <td nowrap>  
         {% for class, fields in usage_fields.items %}
-            <a name="{{ class }}"></a>
+            <a name="{{ class.split|join:"_" }}"></a>
+            <!-- used values table -->
+            {% if selected_class == fields.0.7 %}
+             {% if result != None and result|length > 0 %}
+            <div id=fieldvalues class=fieldvalues>
+            <table border=1 valign=top>
+                <tr bgcolor=lightgray>
+                    <th>[<a href="javascript:hidediv('fieldvalues');" title="Close"><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/cross.png"></a>]  &nbsp; used values for {{ selected_class }}/{{ selected_field }} values</th>
+                    <th style="align: left" nowrap>value<br>counter</th>
+                    <th style="align: left">resources<br>counter</th>                    
+                </tr>
+                 
+            {% for field in result %}
+                <tr>
+                <td>{{ field.0 }}</td>
+                <td style="align: right">{{ field.2 }}</td>
+                <td style="align: right">{{ field.1 }}</td>
+                </tr>
+            {% endfor %}
+            </table>
+            <script>
+                window.location = "#{{ class.split|join:"_" }}";</script>
+            </div>
+            {% endif %} 
+            {% endif %} 
+            <!-- end table -->
+            
             <div class="accordion"><a href="#" onclick="return false">{{ class }}</a></div> 
             <div class="filter">
             {% for field in fields %}
                 <div>
                 {% if field.6 == "component" %}
-                    <img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/bullet_arrow_right.png">&nbsp;
+                    &nbsp;&nbsp;&nbsp;<img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/bullet_arrow_right.png">
                     <a href="#{{ field.2 }}" style=""><p style="font-size:8pt;text-align:left;display:inline">{{ field.2 }}</p></a>
                 {% else %}
-                    <a name="{{ field.7 }}/{{ field.1 }}" href="javascript:getvalues('{{ field.7 }}','{{ field.1 }}')"
+                    &nbsp;&nbsp;<a name="{{ field.7 }}/{{ field.1 }}" href="javascript:getvalues('{{ field.7 }}','{{ field.1 }}')"
                     {% if selected_class == field.7 and selected_field == field.1 %}
                         class="addFilter"   
                     {% else %}
                         class="deleteFilter"
                     {% endif %}
-                    >{{ field.2 }}</a>&nbsp;
+                    >&nbsp;{{ field.2 }}</a>&nbsp;
                 {% endif %}
                 
                 
@@ -160,33 +186,12 @@ function addStatus(filter){
                 {% endif %}
                 </div>
                 
-                 </div>                
-             {% endfor %}
-             </div>
+                </div>                
+            {% endfor %}
+             </div> <!-- end filter -->
+             
         {% endfor %}
         </td>
-        <td class=aligntop>
-        {% if result != None and result|length > 0 %}
-            <div id=fieldvalues class=fieldvalues>
-            <table border=1 width=100% valign=top>
-                <tr bgcolor=lightgray>
-                    <th>[<a href="javascript:hidediv('fieldvalues');" title="Close"><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/cross.png"></a>]  &nbsp; used values for <a href="#{{ selected_class }}/{{ selected_field }}">{{ selected_class }}/{{ selected_field }} values</th>
-                    <th style="align: left" nowrap>value<br>counter</th>
-                    <th style="align: left">resources<br>counter</th>                    
-                </tr>
-                 
-            {% for field in result %}
-                <tr>
-                <td>{{ field.0 }}</td>
-                <td style="align: right">{{ field.2 }}</td>
-                <td style="align: right">{{ field.1 }}</td>
-                </tr>
-            {% endfor %}
-            </table>
-            </div>
-        {% endif %} 
-        </td>
-        
     </tr>
     <table>
 {% endif %} 
