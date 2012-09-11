@@ -244,109 +244,6 @@ def has_publish_permission(request, queryset):
     return True
 
 
-def publish_resources(modeladmin, request, queryset):
-    if has_publish_permission(request, queryset):
-        successful = 0
-        for obj in queryset:
-            if change_resource_status(obj, status=PUBLISHED,
-                                      precondition_status=INGESTED):
-                successful += 1
-                saveLRStats(obj, UPDATE_STAT, request)
-        if successful > 0:
-            messages.info(request, ungettext(
-                    'Successfully published %(ingested)s ingested resource.',
-                    'Successfully published %(ingested)s ingested resources.',
-                    successful) % {'ingested': successful})
-        else:
-            messages.error(request,
-                           _('Only ingested resources can be published.'))
-    else:
-        messages.error(request, _('You do not have the permission to perform ' \
-                                  'this action for all selected resources.'))
-
-publish_resources.short_description = _("Publish selected ingested resources")
-
-
-def unpublish_resources(modeladmin, request, queryset):
-    if has_publish_permission(request, queryset):
-        successful = 0
-        for obj in queryset:
-            if change_resource_status(obj, status=INGESTED,
-                                      precondition_status=PUBLISHED):
-                successful += 1
-                saveLRStats(obj, INGEST_STAT, request)
-        if successful > 0:
-            messages.info(request, ungettext(
-                    'Successfully unpublished %s published resource.',
-                    'Successfully unpublished %s published resources.',
-                    successful) % (successful,))
-        else:
-            messages.error(request,
-                           _('Only published resources can be unpublished.'))
-    else:
-        messages.error(request, _('You do not have the permission to perform ' \
-                                  'this action for all selected resources.'))
-
-unpublish_resources.short_description = \
-    _("Unpublish selected published resources")
-
-
-def ingest_resources(modeladmin, request, queryset):
-    if has_publish_permission(request, queryset):
-        successful = 0
-        for obj in queryset:
-            if change_resource_status(obj, status=INGESTED,
-                                      precondition_status=INTERNAL):
-                successful += 1
-                saveLRStats(obj, INGEST_STAT, request)
-        if successful > 0:
-            messages.info(request, ungettext(
-                    'Successfully ingested %(internal)s internal resource.',
-                    'Successfully ingested %(internal)s internal resources.',
-                    successful) % {'internal': successful})
-        else:
-            messages.error(request,
-                           _('Only internal resources can be ingested.'))
-    else:
-        messages.error(request, _('You do not have the permission to perform ' \
-                                  'this action for all selected resources.'))
-
-ingest_resources.short_description = _("Ingest selected internal resources")
-
-
-def export_xml_resources(modeladmin, request, queryset):
-    from StringIO import StringIO
-    from zipfile import ZipFile
-    from metashare.xml_utils import to_xml_string
-    from django import http
-
-    zipfilename = "resources_export.zip"
-    in_memory = StringIO()
-    
-    with ZipFile(in_memory, 'w') as zipfile:
-        for obj in queryset:
-            try:
-                root_node = obj.export_to_elementtree()
-                xml_string = to_xml_string(root_node, encoding="utf-8").encode("utf-8")
-                resource_filename = 'resource-{0}.xml'.format(obj.storage_object.id)
-                zipfile.writestr(resource_filename, xml_string)
-    
-            except Exception:
-                raise Http404(_('Could not export resource "%(name)s" with primary key %(key)s.') \
-                  % {'name': force_unicode(obj), 'key': escape(obj.storage_object.id)})
-
-        zipfile.close()  
-
-        response = http.HttpResponse(mimetype='application/zip')
-        response['Content-Disposition'] = 'attachment; filename=%s' % (zipfilename)
-        
-        in_memory.seek(0)      
-        response.write(in_memory.read())  
-
-        return response
-export_xml_resources.short_description = _("Export selected resource descriptions to XML")
-
-
 class MetadataForm(forms.ModelForm):
     def save(self, commit=True):
         today = datetime.date.today()
@@ -370,10 +267,111 @@ class ResourceModelAdmin(SchemaModelAdmin):
     content_fields = ('resourceComponentType',)
     list_display = ('__unicode__', 'resource_type', 'publication_status', 'resource_Owners', 'editor_Groups',)
     list_filter = ('storage_object__publication_status',)
-    actions = (publish_resources, unpublish_resources, ingest_resources, export_xml_resources, 'delete', \
-               'add_group', 'remove_group', 'add_owner', 'remove_owner')
+    actions = ('publish_action', 'unpublish_action', 'ingest_action',
+        'export_xml_action', 'delete', 'add_group', 'remove_group',
+        'add_owner', 'remove_owner')
     hidden_fields = ('storage_object', 'owners', 'editor_groups',)
-    
+
+    def publish_action(self, request, queryset):
+        if has_publish_permission(request, queryset):
+            successful = 0
+            for obj in queryset:
+                if change_resource_status(obj, status=PUBLISHED,
+                                          precondition_status=INGESTED):
+                    successful += 1
+                    saveLRStats(obj, UPDATE_STAT, request)
+            if successful > 0:
+                messages.info(request, ungettext(
+                    'Successfully published %(ingested)s ingested resource.',
+                    'Successfully published %(ingested)s ingested resources.',
+                    successful) % {'ingested': successful})
+            else:
+                messages.error(request,
+                               _('Only ingested resources can be published.'))
+        else:
+            messages.error(request, _('You do not have the permission to ' \
+                            'perform this action for all selected resources.'))
+
+    publish_action.short_description = _("Publish selected ingested resources")
+
+    def unpublish_action(self, request, queryset):
+        if has_publish_permission(request, queryset):
+            successful = 0
+            for obj in queryset:
+                if change_resource_status(obj, status=INGESTED,
+                                          precondition_status=PUBLISHED):
+                    successful += 1
+                    saveLRStats(obj, INGEST_STAT, request)
+            if successful > 0:
+                messages.info(request, ungettext(
+                        'Successfully unpublished %s published resource.',
+                        'Successfully unpublished %s published resources.',
+                        successful) % (successful,))
+            else:
+                messages.error(request,
+                    _('Only published resources can be unpublished.'))
+        else:
+            messages.error(request, _('You do not have the permission to ' \
+                            'perform this action for all selected resources.'))
+
+    unpublish_action.short_description = \
+        _("Unpublish selected published resources")
+
+    def ingest_action(self, request, queryset):
+        if has_publish_permission(request, queryset):
+            successful = 0
+            for obj in queryset:
+                if change_resource_status(obj, status=INGESTED,
+                                          precondition_status=INTERNAL):
+                    successful += 1
+                    saveLRStats(obj, INGEST_STAT, request)
+            if successful > 0:
+                messages.info(request, ungettext(
+                    'Successfully ingested %(internal)s internal resource.',
+                    'Successfully ingested %(internal)s internal resources.',
+                    successful) % {'internal': successful})
+            else:
+                messages.error(request,
+                               _('Only internal resources can be ingested.'))
+        else:
+            messages.error(request, _('You do not have the permission to ' \
+                            'perform this action for all selected resources.'))
+
+    ingest_action.short_description = _("Ingest selected internal resources")
+
+    def export_xml_action(self, request, queryset):
+        from StringIO import StringIO
+        from zipfile import ZipFile
+        from metashare.xml_utils import to_xml_string
+        from django import http
+
+        zipfilename = "resources_export.zip"
+        in_memory = StringIO()
+        with ZipFile(in_memory, 'w') as zipfile:
+            for obj in queryset:
+                try:
+                    xml_string = to_xml_string(obj.export_to_elementtree(),
+                                               encoding="utf-8").encode("utf-8")
+                    resource_filename = \
+                        'resource-{0}.xml'.format(obj.storage_object.id)
+                    zipfile.writestr(resource_filename, xml_string)
+
+                except Exception:
+                    raise Http404(_('Could not export resource "%(name)s" '
+                        'with primary key %(key)s.') \
+                            % {'name': force_unicode(obj),
+                               'key': escape(obj.storage_object.id)})
+            zipfile.close()
+
+        response = http.HttpResponse(mimetype='application/zip')
+        response['Content-Disposition'] = \
+            'attachment; filename=%s' % (zipfilename)
+        in_memory.seek(0)
+        response.write(in_memory.read())  
+        return response
+
+    export_xml_action.short_description = \
+        _("Export selected resource descriptions to XML")
 
     def resource_Owners(self, obj):
         """
@@ -1032,8 +1030,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
             if EditorGroupManagers.objects.filter(name__in=
                         request.user.groups.values_list('name', flat=True)) \
                     .count() == 0:
-                for action in (publish_resources, unpublish_resources,
-                               ingest_resources):
+                for action in (self.publish_action, self.unpublish_action,
+                               self.ingest_action):
                     del result[action.__name__]
         return result
 

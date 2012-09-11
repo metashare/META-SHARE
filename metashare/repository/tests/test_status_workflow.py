@@ -1,13 +1,11 @@
 import logging
-from django.contrib.auth.models import User
-from django.test.client import Client, RequestFactory
+from django.contrib.admin.helpers import ACTION_CHECKBOX_NAME
+from django.test.client import Client
 from django.test.testcases import TestCase
 from metashare import test_utils
 from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER
 from metashare.repository.models import resourceInfoType_model
 from metashare.accounts.models import EditorGroup, EditorGroupManagers
-from metashare.repository.editor.resource_editor import publish_resources, \
-    ingest_resources, unpublish_resources
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL
 
 # Setup logging support.
@@ -17,10 +15,8 @@ LOGGER.addHandler(LOG_HANDLER)
 ADMINROOT = '/{0}editor/repository/resourceinfotype_model/'.format(DJANGO_BASE)
 
 class StatusWorkflowTest(TestCase):
-    
-    test_editor_group = None
+
     resource_id = None
-    factory = RequestFactory()
     
     @classmethod
     def setUpClass(cls):
@@ -30,17 +26,18 @@ class StatusWorkflowTest(TestCase):
         LOGGER.info("running '{}' tests...".format(cls.__name__))
         test_utils.set_index_active(False)        
         test_utils.setup_test_storage()
-        StatusWorkflowTest.test_editor_group = EditorGroup.objects.create(
-                                                    name='test_editor_group')
-        StatusWorkflowTest.test_manager_group = \
+        _test_editor_group = \
+            EditorGroup.objects.create(name='test_editor_group')
+        _test_manager_group = \
             EditorGroupManagers.objects.create(name='test_manager_group',
-                                    managed_group=StatusWorkflowTest.test_editor_group)            
+                                               managed_group=_test_editor_group)            
         test_utils.create_manager_user(
             'manageruser', 'manager@example.com', 'secret',
-            (StatusWorkflowTest.test_editor_group, StatusWorkflowTest.test_manager_group))
+            (_test_editor_group, _test_manager_group))
         
         _fixture = '{0}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
         _result = test_utils.import_xml(_fixture)
+        _result.editor_groups.add(_test_editor_group)
         StatusWorkflowTest.resource_id = _result.id
     
     @classmethod
@@ -53,87 +50,81 @@ class StatusWorkflowTest(TestCase):
         test_utils.clean_user_db()
         test_utils.set_index_active(True)
         LOGGER.info("finished '{}' tests".format(cls.__name__))
-        
+
     def test_can_publish_ingested(self):
         client = Client()
-        client.login(username='manageruser', password='secret')        
-        request = self.factory.get(ADMINROOT)
-        if not hasattr(request, 'user'):
-            user = User.objects.get(username='manageruser')
-            setattr(request, 'user', user)
+        client.login(username='manageruser', password='secret')
         resource = resourceInfoType_model.objects.get(pk=self.resource_id)
-        resource.editor_groups.add(StatusWorkflowTest.test_editor_group)
         resource.storage_object.publication_status = INGESTED
         resource.storage_object.save()
-        publish_resources(None, request, (resource,))
+        client.post(ADMINROOT,
+            {"action": "publish_action", ACTION_CHECKBOX_NAME: resource.id},
+            follow=True)
+        # fetch the resource from DB as our object is not up-to-date anymore
+        resource = resourceInfoType_model.objects.get(pk=self.resource_id)
         self.assertEquals('published', resource.publication_status())
-    
+
     def test_cannot_publish_internal(self):
         client = Client()
         client.login(username='manageruser', password='secret')        
-        request = self.factory.get(ADMINROOT)
-        if not hasattr(request, 'user'):
-            user = User.objects.get(username='manageruser')
-            setattr(request, 'user', user)
         resource = resourceInfoType_model.objects.get(pk=self.resource_id)
-        resource.editor_groups.add(StatusWorkflowTest.test_editor_group)
         resource.storage_object.publication_status = INTERNAL
         resource.storage_object.save()
-        publish_resources(None, request, (resource,))
+        client.post(ADMINROOT,
+            {"action": "publish_action", ACTION_CHECKBOX_NAME: resource.id},
+            follow=True)
+        # fetch the resource from DB as our object is not up-to-date anymore
+        resource = resourceInfoType_model.objects.get(pk=self.resource_id)
         self.assertEquals('internal', resource.publication_status())
 
     def test_can_ingest_internal(self):
         client = Client()
         client.login(username='manageruser', password='secret')        
-        request = self.factory.get(ADMINROOT)
-        if not hasattr(request, 'user'):
-            user = User.objects.get(username='manageruser')
-            setattr(request, 'user', user)
         resource = resourceInfoType_model.objects.get(pk=self.resource_id)
-        resource.editor_groups.add(StatusWorkflowTest.test_editor_group)
         resource.storage_object.publication_status = INTERNAL
         resource.storage_object.save()
-        ingest_resources(None, request, (resource,))
+        client.post(ADMINROOT,
+            {"action": "ingest_action", ACTION_CHECKBOX_NAME: resource.id},
+            follow=True)
+        # fetch the resource from DB as our object is not up-to-date anymore
+        resource = resourceInfoType_model.objects.get(pk=self.resource_id)
         self.assertEquals('ingested', resource.publication_status())
 
     def test_cannot_ingest_published(self):
         client = Client()
         client.login(username='manageruser', password='secret')        
-        request = self.factory.get(ADMINROOT)
-        if not hasattr(request, 'user'):
-            user = User.objects.get(username='manageruser')
-            setattr(request, 'user', user)
         resource = resourceInfoType_model.objects.get(pk=self.resource_id)
-        resource.editor_groups.add(StatusWorkflowTest.test_editor_group)
         resource.storage_object.publication_status = PUBLISHED
         resource.storage_object.save()
-        ingest_resources(None, request, (resource,))
+        client.post(ADMINROOT,
+            {"action": "ingest_action", ACTION_CHECKBOX_NAME: resource.id},
+            follow=True)
+        # fetch the resource from DB as our object is not up-to-date anymore
+        resource = resourceInfoType_model.objects.get(pk=self.resource_id)
         self.assertEquals('published', resource.publication_status())
 
     def test_can_unpublish_published(self):
         client = Client()
         client.login(username='manageruser', password='secret')        
-        request = self.factory.get(ADMINROOT)
-        if not hasattr(request, 'user'):
-            user = User.objects.get(username='manageruser')
-            setattr(request, 'user', user)
         resource = resourceInfoType_model.objects.get(pk=self.resource_id)
-        resource.editor_groups.add(StatusWorkflowTest.test_editor_group)
         resource.storage_object.publication_status = PUBLISHED
         resource.storage_object.save()
-        unpublish_resources(None, request, (resource,))
+        client.post(ADMINROOT,
+            {"action": "unpublish_action", ACTION_CHECKBOX_NAME: resource.id},
+            follow=True)
+        # fetch the resource from DB as our object is not up-to-date anymore
+        resource = resourceInfoType_model.objects.get(pk=self.resource_id)
         self.assertEquals('ingested', resource.publication_status())
 
     def test_cannot_unpublish_internal(self):
         client = Client()
         client.login(username='manageruser', password='secret')        
-        request = self.factory.get(ADMINROOT)
-        if not hasattr(request, 'user'):
-            user = User.objects.get(username='manageruser')
-            setattr(request, 'user', user)
         resource = resourceInfoType_model.objects.get(pk=self.resource_id)
-        resource.editor_groups.add(StatusWorkflowTest.test_editor_group)
         resource.storage_object.publication_status = INTERNAL
         resource.storage_object.save()
-        unpublish_resources(None, request, (resource,))
-        self.assertEquals('internal', resource.publication_status()) 
+        client.post(ADMINROOT,
+            {"action": "unpublish_action", ACTION_CHECKBOX_NAME: resource.id},
+            follow=True)
+        # fetch the resource from DB as our object is not up-to-date anymore
+        resource = resourceInfoType_model.objects.get(pk=self.resource_id)
+        self.assertEquals('internal', resource.publication_status())
