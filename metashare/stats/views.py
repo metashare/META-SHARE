@@ -1,6 +1,6 @@
 import sys
 import logging 
-from metashare.settings import DJANGO_URL, STATS_SERVER_URL
+from metashare.settings import DJANGO_URL, STATS_SERVER_URL, METASHARE_VERSION
 from metashare.repository.models import resourceInfoType_model
 from metashare.storage.models import PUBLISHED
 from metashare.stats.models import LRStats, QueryStats, UsageStats
@@ -16,9 +16,12 @@ from django.shortcuts import render_to_response
 from django.db.models import Count, Max, Min, Avg
 from django.http import HttpResponse
 from django.template import RequestContext
+from django.core.paginator import Paginator
 
 from json import JSONEncoder
+import datetime
 from datetime import datetime, date
+from dateutil.relativedelta import relativedelta
 import urllib, urllib2
 from threading import Timer
 from metashare.settings import LOG_HANDLER, MEDIA_URL
@@ -194,59 +197,69 @@ def topstats (request):
     """ viewing statistics about the top LR and latest queries. """    
     topdata = []
     view = request.GET.get('view', 'topviewed')
+    last = request.GET.get('last', '')
+    since = None
+    if (last == "day"):
+        since = date.today() + relativedelta(days = -1)
+    elif (last == "week"):
+        since = date.today() + relativedelta(days = -7)
+    elif (last == "month"):
+        since = date.today() + relativedelta(months = -1)
+    elif (last == "year"):
+        since = date.today() + relativedelta(years = -1)
+        
     countrycode = request.GET.get('country', None)
     countryname = ""
     if (countrycode != None):
         countryname = getcountry_name(countrycode)
-        
     if view == "topviewed":
         geovisits = getCountryActions(VIEW_STAT)
-        visitstitle = "Viewed resources from the world:"
-        data = getLRTop(VIEW_STAT, 10, countrycode)
+        visitstitle = "viewing resources"
+        data = getLRTop(VIEW_STAT, 10, countrycode, since)
         for item in data:
             try:
                 res_info =  resourceInfoType_model.objects.get(storage_object__identifier=item['lrid'])
-                topdata.append([res_info.id, res_info.get_absolute_url, item['sum_count'], res_info])
+                topdata.append([res_info,""])
             except: 
                 LOGGER.debug("Warning! The object "+item['lrid']+ " has not been found.")               
-    if (view == "latestupdated"):
+    elif (view == "latestupdated"):
         geovisits = getCountryActions(UPDATE_STAT)
-        visitstitle = "Updated resources from the world:"
+        visitstitle = "updating resources"
         data = getLRLast(UPDATE_STAT, 10, countrycode)
         for item in data:
             try:
                 res_info =  resourceInfoType_model.objects.get(storage_object__identifier=item['lrid'])
-                topdata.append([res_info.id, res_info.get_absolute_url, pretty_timeago(item['lasttime']), res_info])
+                topdata.append([res_info, pretty_timeago(item['lasttime'])])
             except: 
                 LOGGER.debug("Warning! The object "+item['lrid']+ " has not been found.")
-    if (view == "topdownloaded"):
+    elif (view == "topdownloaded"):
         geovisits = getCountryActions(DOWNLOAD_STAT)
-        visitstitle = "Downloaded resources from the world:"
-        data = getLRTop(DOWNLOAD_STAT, 10, countrycode)
+        visitstitle = "downloading resources"
+        data = getLRTop(DOWNLOAD_STAT, 10, countrycode, since)
         for item in data:
             try:
                 res_info =  resourceInfoType_model.objects.get(storage_object__identifier=item['lrid'])
-                topdata.append([res_info.id, res_info.get_absolute_url, item['sum_count'], res_info])
+                topdata.append([res_info,""])
             except: 
                 LOGGER.debug("Warning! The object "+item['lrid']+ " has not been found.")
-
-    if view == "topqueries":
+    elif view == "topqueries":
+            geovisits = getCountryQueries()
+            visitstitle = "queries"
+            data = getTopQueries(10, countrycode, since)
+            for item in data:
+                url = "q=" + item['query']
+                query = urllib.unquote(item['query'])
+                facets = ""
+                if (item['facets'] != ""):
+                    facetlist = eval(item['facets'])
+                    for face in facetlist:
+                        url += "&selected_facets=" + face
+                        facets += ", " + face.replace("Filter_exact:",": ")
+                    facets = facets.replace(", ", "", 1)     
+                topdata.append([query, facets, "", item['query_count'], url])         
+    elif view == "latestqueries":
         geovisits = getCountryQueries()
-        visitstitle = "Fired queries from the world:"
-        data = getTopQueries(10, countrycode)
-        for item in data:
-            url = "q=" + item['query']
-            query = urllib.unquote(item['query'])
-            facets = ""
-            if (item['facets'] != ""):
-                facetlist = eval(item['facets'])
-                for face in facetlist:
-                    url += "&selected_facets=" + face
-                    facets += ", " + face.replace("Filter_exact:",": ")
-            topdata.append([query, facets, "", item['query_count'], url])         
-    if view == "latestqueries":
-        geovisits = getCountryQueries()
-        visitstitle = "Fired queries from the world:"
+        visitstitle = "queries"
         data = getLastQuery(10, countrycode)
         for item in data:
             url = "q=" + item['query']
@@ -257,6 +270,7 @@ def topstats (request):
                 for face in facetlist:
                     url += "&selected_facets=" + face
                     facets += ", " + face.replace("Filter_exact:",": ")
+                facets = facets.replace(", ", "", 1) 
             topdata.append([query, facets, pretty_timeago(item['lasttime']), item['found'], url])       
     
     return render_to_response('stats/topstats.html',
@@ -267,6 +281,7 @@ def topstats (request):
         'countrycode': countrycode,
         'countryname': countryname,
         'visitstitle': visitstitle,
+        'last' : last,
         'myres': isOwner(request.user.username)},
         context_instance=RequestContext(request))
     
@@ -285,6 +300,7 @@ def getstats (request):
         currdate = date.today()
         
     data['date'] = str(currdate)    
+    data['metashare_version'] = METASHARE_VERSION  
     data['user'] = LRStats.objects.filter(lasttime__startswith=currdate).values('sessid').annotate(Count('sessid')).count()
     data['lrcount'] = resourceInfoType_model.objects.filter(
         storage_object__publication_status=PUBLISHED,
