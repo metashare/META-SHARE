@@ -21,7 +21,8 @@ PUBLISH_STAT = "p"
 INGEST_STAT = "i"
 DELETE_STAT = "e"
 
-STAT_LABELS = {UPDATE_STAT: "update", VIEW_STAT: "view", RETRIEVE_STAT: "retrieve", DOWNLOAD_STAT: "download", PUBLISH_STAT: "publish", INGEST_STAT: "ingest", DELETE_STAT: "delete"}
+STAT_LABELS = {UPDATE_STAT: "update", VIEW_STAT: "view", RETRIEVE_STAT: "retrieve", \
+    DOWNLOAD_STAT: "download", PUBLISH_STAT: "publish", INGEST_STAT: "ingest", DELETE_STAT: "delete"}
 VISIBLE_STATS = [UPDATE_STAT, VIEW_STAT, RETRIEVE_STAT, DOWNLOAD_STAT]
     
 # Setup logging support.
@@ -133,21 +134,24 @@ def getLRTop(action, limit, geoinfo=None, since=None):
     if (action and not action == ""):
         if (geoinfo != None and geoinfo is not ""):
             if (since):
-                action_list = LRStats.objects.values('lrid').filter(action=action, geoinfo=geoinfo, lasttime__gte=since).annotate(sum_count=Sum('count')).order_by('-sum_count')[:limit]
+                action_list = LRStats.objects.values('lrid').filter(action=action, geoinfo=geoinfo, \
+                    lasttime__gte=since).annotate(sum_count=Sum('count')).order_by('-sum_count')[:limit]
             else:
                 action_list = LRStats.objects.values('lrid').filter(action=action, geoinfo=geoinfo).annotate(sum_count=Sum('count')).order_by('-sum_count')[:limit]
         else:
             if (since):
-                 action_list = LRStats.objects.values('lrid').filter(action=action, lasttime__gte=since).annotate(sum_count=Sum('count')).order_by('-sum_count')[:limit]
+                action_list = LRStats.objects.values('lrid').filter(action=action, \
+                    lasttime__gte=since).annotate(sum_count=Sum('count')).order_by('-sum_count')[:limit]
             else:
-                 action_list = LRStats.objects.values('lrid').filter(action=action).annotate(sum_count=Sum('count')).order_by('-sum_count')[:limit]
+                action_list = LRStats.objects.values('lrid').filter(action=action).annotate(sum_count=Sum('count')).order_by('-sum_count')[:limit]
     return action_list
 
 def getLRLast(action, limit, geoinfo=None):
     action_list = []
     if (action and not action == ""):
         if (geoinfo != None and geoinfo is not ""):
-            action_list =  LRStats.objects.values('lrid', 'action', 'lasttime').filter(action=action, geoinfo=geoinfo).order_by('-lasttime')[:limit]
+            action_list =  LRStats.objects.values('lrid', 'action', 'lasttime').filter(action=action, \
+                geoinfo=geoinfo).order_by('-lasttime')[:limit]
         else:
             action_list =  LRStats.objects.values('lrid', 'action', 'lasttime').filter(action=action).order_by('-lasttime')[:limit]    
     else:
@@ -157,8 +161,8 @@ def getLRLast(action, limit, geoinfo=None):
 def getTopQueries(limit, geoinfo=None, since=None):
     if (geoinfo != None and geoinfo is not ""):
         if (since):
-             topqueries = QueryStats.objects.values('query', 'facets').filter(lasttime__gte=since, geoinfo=geoinfo).annotate(query_count=Count('query'), \
-                 facets_count=Count('facets')).order_by('-query_count','-facets_count')[:limit]
+            topqueries = QueryStats.objects.values('query', 'facets').filter(lasttime__gte=since, \
+                geoinfo=geoinfo).annotate(query_count=Count('query'), facets_count=Count('facets')).order_by('-query_count','-facets_count')[:limit]
         else:
             topqueries = QueryStats.objects.values('query', 'facets').filter(geoinfo=geoinfo).annotate(query_count=Count('query'), \
                 facets_count=Count('facets')).order_by('-query_count','-facets_count')[:limit] 
@@ -177,9 +181,10 @@ def getLastQuery (limit, geoinfo=None):
     else:
         lastquery = QueryStats.objects.values('query', 'facets', 'lasttime', 'found').order_by('-lasttime')[:limit]
     return lastquery
-    
+
 def statByDate(date):
-    return LRStats.objects.values("action").filter(lasttime__year=date[0:4], lasttime__month=date[4:6], lasttime__day=date[6:8]).annotate(Count('action'))
+    return LRStats.objects.values("action").filter(lasttime__year=date[0:4], lasttime__month=date[4:6], \
+        lasttime__day=date[6:8]).annotate(Count('action'))
     
 def statDays():
     days = itertools.chain(LRStats.objects.dates('lasttime', 'day'), QueryStats.objects.dates('lasttime', 'day'))

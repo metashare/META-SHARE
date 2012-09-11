@@ -243,20 +243,20 @@ def topstats (request):
             except: 
                 LOGGER.debug("Warning! The object "+item['lrid']+ " has not been found.")
     elif view == "topqueries":
-            geovisits = getCountryQueries()
-            visitstitle = "queries"
-            data = getTopQueries(10, countrycode, since)
-            for item in data:
-                url = "q=" + item['query']
-                query = urllib.unquote(item['query'])
-                facets = ""
-                if (item['facets'] != ""):
-                    facetlist = eval(item['facets'])
-                    for face in facetlist:
-                        url += "&selected_facets=" + face
-                        facets += ", " + face.replace("Filter_exact:",": ")
-                    facets = facets.replace(", ", "", 1)     
-                topdata.append([query, facets, "", item['query_count'], url])         
+        geovisits = getCountryQueries()
+        visitstitle = "queries"
+        data = getTopQueries(10, countrycode, since)
+        for item in data:
+            url = "q=" + item['query']
+            query = urllib.unquote(item['query'])
+            facets = ""
+            if (item['facets'] != ""):
+                facetlist = eval(item['facets'])
+                for face in facetlist:
+                    url += "&selected_facets=" + face
+                    facets += ", " + face.replace("Filter_exact:",": ")
+                facets = facets.replace(", ", "", 1)     
+            topdata.append([query, facets, "", item['query_count'], url])         
     elif view == "latestqueries":
         geovisits = getCountryQueries()
         visitstitle = "queries"
