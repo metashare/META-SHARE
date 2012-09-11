@@ -90,7 +90,7 @@
                     .click(function() {
                         if(self.allowEditing)
                         {
-                        	var isSure = confirm("Are you sure you want to delete this item?");
+                        	var isSure = confirm("Are you sure you want to remove this item from the list?");
                         	if(!isSure)
                         	{
                         		return false;
