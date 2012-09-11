@@ -263,7 +263,7 @@ geoip = pygeoip.GeoIP('{0}/stats/resources/GeoIP.dat'.format(ROOT_PATH))
 def getcountry_name(countrycode):
     if countrycode in country_info:
         return country_info[countrycode][0]
-    return "Unknown country"
+    return ""
 
 def getcountry_coords(countrycode):
     if countrycode in country_info:
