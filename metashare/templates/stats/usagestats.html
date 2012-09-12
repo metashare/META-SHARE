@@ -155,7 +155,12 @@ function addStatus(filter){
                     &nbsp;&nbsp;&nbsp;<a href="javascript:scrollToAnchor('{{ field.2.split|join:"_" }}')"><label class='component'><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/bullet_arrow_right.png">
                      {{ field.2 }}</label></a>
                 {% else %}
-                    &nbsp;&nbsp;<a href="javascript:getvalues('{{ field.7 }}','{{ field.1 }}')"
+                    &nbsp;&nbsp;
+                    {% if field.5 > 0 %}
+                        <a href="javascript:getvalues('{{ field.7 }}','{{ field.1 }}')" 
+                    {% else %}
+                        <a href="#" 
+                    {% endif %}
                     {% if selected_class == field.7 and selected_field == field.1 %}
                         class="addFilter"   
                     {% else %}
@@ -201,7 +206,9 @@ function addStatus(filter){
         setTimeout("window.scrollBy(0, -100)", 1);
         document.getElementById(name).click();
     }
-    scrollToAnchor("fieldvalues");
+    {% if selected_field != "" %}
+        scrollToAnchor("fieldvalues");
+    {% endif %}
     </script>
             
 {% endif %} 
