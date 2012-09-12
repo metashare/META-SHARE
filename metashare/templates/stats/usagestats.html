@@ -2,15 +2,9 @@
   
 {% block content %}
 
-<style>
- div.coverage { display: inline; border: 1px solid #777; margin-left: 1px; margin-right: 2px; -moz-border-radius: 15px; border-radius: 15px;}
- div.required { background-color: lightgreen }
- div.optional { background-color: yellow }
- div.recommended { background-color: orange }
- td.aligntop {vertical-align: top} 
- div.fieldvalues {background: #E6E6FA; border: 1px solid #000; position:relative; vertical-align: top}
- div.warning {background: lightyellow; border: 1px solid #000; position:relative; width: 400px}
-</style>
+<link rel="stylesheet" href="{{ MEDIA_URL }}/css/view_stats.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="{{ MEDIA_URL }}/css/results.css" type="text/css" media="screen" />
+
 <script>
 function hidediv( id ) { 
     document.getElementById(id).style.visibility = 'hidden';
@@ -23,21 +17,85 @@ function getvalues(classname, fieldname) {
     
     document.forms["getusagestats"].submit(); 
 }
-
 </script>
 
-<table><tr><td nowrap><a href="{% url metashare.views.frontpage %}stats/top/"><font size=+1>Top 10</font></a>&nbsp;&nbsp;</td>
-<td nowrap><td bgcolor=#dddddd nowrap><font size=+1>Usage statistics</a></font>&nbsp;&nbsp; </td>
-{% if user.username and myres %}
-<td nowrap>&nbsp;&nbsp;<font size=+1><a href="{% url metashare.views.frontpage %}stats/mystats/">My resources</a></font>&nbsp;&nbsp; </td>
-{% endif %}
-<td width=80%></td></tr>
-<tr><td bgcolor=#dddddd colspan=4 valign=top>
+<script language="javascript">
+$(document).ready(function(){
+  $("div.filter").each(function() {
+    var allDds = $(this).children("div").not('.subresult').nextUntil("div.accordion");
+    if (allDds.length > 4) {
+	var hideableDds = allDds.has("a.addableFacet");
+	if (hideableDds.length > 1) {
+        hiddenDds = hideableDds.slice(
+          Math.max(0, 4 - (allDds.length - hideableDds.length))).hide();
+        var moreTxt = 'more', lessTxt = 'less';
+        hiddenDds.last().after($("<div><a href='#'>" + moreTxt + "</a></div>")
+            .children().first().click({hiddenDds: hiddenDds}, function(e) {
+                e.preventDefault();
+                $(this).text($(this).text() == moreTxt ? lessTxt : moreTxt);
+                e.data.hiddenDds.slideToggle();
+              }).parent());
+      }
+    }
+  });
+  $("div.filter").hide();
+  $("div.accordion").each(function(){
+      $(this).next("div.filter").find("a.removableFacet").parents("div.filter").show();
+      addStatus($(this));
+      $(this).next("div.filter").find("a.addFilter").parents("div.filter").show();
+      addStatus($(this));
+  });
+
+  $("div.accordion.expanded").each(function(){
+ 	if( $(this).next("div.filter").find("a.removableFacet").length > 0 ){
+ 		$(this).addClass("selected");
+ 	}
+ 	if( $(this).next("div.filter").find("a.addFilter").length > 0 ){
+ 		$(this).addClass("selected");
+ 	}
+  });
+
+  $("div.accordion").click(function() {
+      if($(this).next("div.filter").attr("style") == "display: none;" ){
+          $(this).addClass('expanded');
+          $(this).removeClass('collapsed');}
+      else {
+          $(this).addClass('collapsed');
+          $(this).removeClass('expanded');
+      }
+      $(this).next("div.filter").slideToggle();
+  });
+});
+
+function addStatus(filter){
+  if(filter.next("div.filter").attr("style") == "display: none;" ){
+    filter.addClass('collapsed');
+    filter.removeClass('expanded');
+  }
+  else{
+    filter.addClass('expanded');
+    filter.removeClass('collapsed');
+  }
+}
+</script>
+
+
+<div class='tab-container'>
+ <ul class='etabs'>
+   <li class='tab'><a href="{% url metashare.views.frontpage %}stats/top/">Statistics about visiting this META-SHARE node</a></li>
+   <li class='tab tab-nobr'>Statistics about resource metadata</li>
+   {% if user.username and myres %}
+        <li class='tab'><a href="{% url metashare.views.frontpage %}stats/mystats/">My resources</a></li>
+   {% endif %}
+ </ul>
+</div>
+
+<div class="content_tab"> 
 
 {% if usage_fields != None %}
     <table width=100% bgcolor="white" valign=top>
     <tr><td colspan=2>
-        <form id="getusagestats" action="." method="POST"><font size=-1>Found <font size=+1>{{ fields_count }}</font> field types (#filled-fields/#linguistic-resources)</font><br>           
+        <form id="getusagestats" action="." method="POST"><font size=-1>Found <font size=+1>{{ fields_count }}</font> metadata</font><br>           
             Filter by: &nbsp;
             {% for filter,counter in usage_filter.items %}
                &nbsp;<input type="checkbox" name=filter value="{{ filter }}" onClick="submit()"
@@ -61,13 +119,53 @@ function getvalues(classname, fieldname) {
     {% endif %}
     
             
-    <tr class="result_table_head" style="">
-        <td class=aligntop nowrap>       
-        {% for class,fields in usage_fields.items %}
-            <dt class="accordion">{{ class }}</dt> 
+        <td nowrap>  
+        {% for class, fields in usage_fields.items %}
+            <a name="{{ class.split|join:"_" }}"></a>
+            <!-- used values table -->
+            {% if selected_class == fields.0.7 %}
+             {% if result != None and result|length > 0 %}
+            <div id=fieldvalues class=fieldvalues>
+            <table border=1 valign=top>
+                <tr bgcolor=lightgray>
+                    <th>[<a href="javascript:hidediv('fieldvalues');" title="Close"><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/cross.png"></a>]  &nbsp; used values for {{ selected_class }}/{{ selected_field }} values</th>
+                    <th style="align: left" nowrap>value<br>counter</th>
+                    <th style="align: left">resources<br>counter</th>                    
+                </tr>
+                 
+            {% for field in result %}
+                <tr>
+                <td>{{ field.0 }}</td>
+                <td style="align: right">{{ field.2 }}</td>
+                <td style="align: right">{{ field.1 }}</td>
+                </tr>
+            {% endfor %}
+            </table>
+            <script>
+                window.location = "#{{ class.split|join:"_" }}";</script>
+            </div>
+            {% endif %} 
+            {% endif %} 
+            <!-- end table -->
+            
+            <div class="accordion"><a href="#" onclick="return false">{{ class }}</a></div> 
+            <div class="filter">
             {% for field in fields %}
-                <dd><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/bullet_arrow_right.png">&nbsp;
-                <a name="{{ class }}/{{ field.1 }}" href="javascript:getvalues('{{ class }}','{{ field.1 }}')">{{ field.2 }}</a>&nbsp;
+                <div>
+                {% if field.6 == "component" %}
+                    &nbsp;&nbsp;&nbsp;<img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/bullet_arrow_right.png">
+                    <a href="#{{ field.2 }}" style=""><p style="font-size:8pt;text-align:left;display:inline">{{ field.2 }}</p></a>
+                {% else %}
+                    &nbsp;&nbsp;<a name="{{ field.7 }}/{{ field.1 }}" href="javascript:getvalues('{{ field.7 }}','{{ field.1 }}')"
+                    {% if selected_class == field.7 and selected_field == field.1 %}
+                        class="addFilter"   
+                    {% else %}
+                        class="deleteFilter"
+                    {% endif %}
+                    >&nbsp;{{ field.2 }}</a>&nbsp;
+                {% endif %}
+                
+                
                 {% if field.3 == 1 %}
                       <div class="coverage required">
                 {% else %}
@@ -84,40 +182,17 @@ function getvalues(classname, fieldname) {
                 {% if field.5 == 0 %}
                     &nbsp;<i>never used</i>&nbsp;
                 {% else %}
-                     &nbsp; {{ field.5 }}/{{ field.4 }} &nbsp;
+                    &nbsp; {{ field.5 }}/{{ field.4 }} &nbsp;
                 {% endif %}
                 </div>
-                 </dd>                  
-             {% endfor %}
+                
+                </div>                
+            {% endfor %}
+             </div> <!-- end filter -->
              
         {% endfor %}
         </td>
-        <td class=aligntop>
-        {% if result != None and result|length > 0 %}
-            <div id=fieldvalues class=fieldvalues>
-            <table border=1 width=100% valign=top>
-                <tr bgcolor=lightgray>
-                    <th>[<a href="javascript:hidediv('fieldvalues');" title="Close">X</a>] <a href="#{{ selected_class }}/{{ selected_field }}"><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/bullet_arrow_right.png">&nbsp;</a>{{ selected_class }}/{{ selected_field }} values</th>
-                    <th style="align: left" nowrap>Filled fields</th>
-                    <th style="align: left">LRs</th>                    
-                </tr>
-                 
-            {% for field in result %}
-                <tr>
-                <td>{{ field.0 }}</td>
-                <td style="align: right">{{ field.2 }}</td>
-                <td style="align: right">{{ field.1 }}</td>
-                </tr>
-            {% endfor %}
-            </table>
-            </div>
-        {% endif %} 
-        </td>
-        
     </tr>
     <table>
 {% endif %} 
-
-
-</td></tr></table>
 {% endblock %}

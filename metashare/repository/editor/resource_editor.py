@@ -35,8 +35,7 @@ from metashare.repository.models import resourceComponentTypeType_model, \
     lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model, \
     licenceInfoType_model, User
 from metashare.repository.supermodel import SchemaModel
-from metashare.stats.model_utils import saveLRStats, UPDATE_STAT, INGEST_STAT, \
-    PUBLISH_STAT
+from metashare.stats.model_utils import saveLRStats, UPDATE_STAT, INGEST_STAT
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
     ALLOWED_ARCHIVE_EXTENSIONS
 from metashare.utils import verify_subclass, create_breadcrumb_template_params
@@ -252,7 +251,7 @@ def publish_resources(modeladmin, request, queryset):
             if change_resource_status(obj, status=PUBLISHED,
                                       precondition_status=INGESTED):
                 successful += 1
-                saveLRStats(obj, PUBLISH_STAT, request)
+                saveLRStats(obj, UPDATE_STAT, request)
         if successful > 0:
             messages.info(request, ungettext(
                     'Successfully published %(ingested)s ingested resource.',
@@ -299,6 +298,7 @@ def ingest_resources(modeladmin, request, queryset):
             if change_resource_status(obj, status=INGESTED,
                                       precondition_status=INTERNAL):
                 successful += 1
+                saveLRStats(obj, INGEST_STAT, request)
         if successful > 0:
             messages.info(request, ungettext(
                     'Successfully ingested %(internal)s internal resource.',

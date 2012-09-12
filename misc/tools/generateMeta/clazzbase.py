@@ -164,10 +164,10 @@ from {0}fields import MultiTextField, MetaBooleanField, \\
 from {0}validators import validate_lang_code_keys, \\
   validate_dict_values, validate_xml_schema_year, \\
   validate_matches_xml_char_production
-
+from metashare.settings import DJANGO_BASE, LOG_HANDLER, DJANGO_URL
+from metashare.stats.model_utils import saveLRStats, DELETE_STAT
 from metashare.storage.models import StorageObject, MASTER, COPY_CHOICES
 
-from metashare.settings import DJANGO_BASE, LOG_HANDLER, DJANGO_URL
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -338,6 +338,14 @@ TOP_LEVEL_TYPE_EXTRA_CODE_TEMPLATE = '''
         
         # Call save() method from super class with all arguments.
         super(resourceInfoType_model, self).save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        """
+        Overrides the predefined delete() method to update the statistics.
+        """
+        saveLRStats(self, DELETE_STAT)
+        # Call delete() method from super class with all arguments.
+        super(resourceInfoType_model, self).delete(*args, **kwargs)
 
     def get_absolute_url(self):
         return '/{0}{1}'.format(DJANGO_BASE, self.get_relative_url())

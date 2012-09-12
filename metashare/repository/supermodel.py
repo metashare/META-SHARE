@@ -1305,7 +1305,7 @@ class SchemaModel(models.Model):
                         if child is not None:
                             to_delete.put(child)
             obj.delete()
-
+            
 class SubclassableModel(SchemaModel):
     """
     Generic superclass for all models that want to allow getting a

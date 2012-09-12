@@ -2,27 +2,27 @@
 
 {% block content %}
 
-<table><tr>
-<td nowrap><a href="{% url metashare.views.frontpage %}stats/top/"><font size=+1>Top 10</font></a>&nbsp;&nbsp;</td>
-<td nowrap>&nbsp;&nbsp;<font size=+1><a href="{% url metashare.views.frontpage %}stats/usage/">Usage statistics</a></font>&nbsp;&nbsp; </td>
-{% if user.username %}
-<td bgcolor=#dddddd align=left nowrap>&nbsp;&nbsp;<font size=+1>My resources</font>&nbsp;&nbsp; </td>
-{% endif %}
-<td width=80%></td></tr>
-<tr><td bgcolor=#dddddd colspan=4>
+<link rel="stylesheet" href="{{ MEDIA_URL }}/css/view_stats.css" type="text/css" media="screen" />
 
-<div class="content_box">
+<div class='tab-container'>
+ <ul class='etabs'>
+    <li class='tab'><a href="{% url metashare.views.frontpage %}stats/top/">Statistics about visiting this META-SHARE node</a></li>
+    <li class='tab'><a href="{% url metashare.views.frontpage %}stats/usage/">Statistics about resource metadata</a></li>
+    <li class='tab tab-nobr'>My resources</li>
+ </ul>
+</div>
+
+
+<div class="content_tab"> 
 <table width=100% class="result_table">
 <tr class="result_table_head">
-    <td width="5%">Id</td>
     <td width="60%">Title</td>
     <td width="10%">Actions</td>
-    <td width="15%">Users</td>
+    <td width="20%">Users</td>
     <td width="10%" nowrap>Last access</td>
-<tr>
+</tr>
 {% for lr in data %} 
     <tr class="{% cycle odd,even %}">
-        <th style="text-align:right;" nowrap>{{ lr.0 }}</th>
         <td><a href="{{ lr.1 }}">{{ lr.2 }}</a></td>
         <td align=right nowrap>
             {% for stat in lr.3 %}
@@ -45,6 +45,6 @@
 {%endfor%}
 </table>
 </div>
-</td></tr></table>
 
 {% endblock %}
+
