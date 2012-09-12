@@ -105,7 +105,7 @@ def remove_resource(storage_object):
     shutil.rmtree(folder)
     resource.delete_deep()
     storage_object.delete()
-
+    
 class ConnectionException(Exception):
     pass
 
