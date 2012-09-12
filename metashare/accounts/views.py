@@ -339,8 +339,7 @@ def update_default_editor_groups(request):
 
     # Exclude from the list the editor groups for which the user is not a member
     available_editor_groups = EditorGroup.objects \
-        .filter(name__in=request.user.groups.values_list('name', flat=True)) \
-        #.exclude(name__in=profile.default_editor_groups.values_list('name', flat=True))
+        .filter(name__in=request.user.groups.values_list('name', flat=True))
 
     chosen_editor_groups = EditorGroup.objects \
         .filter(name__in=profile.default_editor_groups.values_list('name', flat=True))
