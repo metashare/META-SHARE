@@ -98,7 +98,7 @@ class DocumentUnstructuredStringModelAdmin(admin.ModelAdmin, RelatedAdminMixin):
                 return self.save_and_continue_in_popup(obj, request)
             return self.edit_response_close_popup_magic(obj)
         else:
-            return super(SchemaModelAdmin, self).response_change(request, obj)
+            return super(DocumentUnstructuredStringModelAdmin, self).response_change(request, obj)
 
     @csrf_protect_m
     @transaction.commit_on_success

@@ -574,14 +574,14 @@ class AutoCompleteSelectMultipleSubClsWidget(SelectableMultiWidget, SelectableMe
             u'data-selectable-base-url': proto_url,
         }
         query_params = kwargs.pop('query_params', {})
-        widgets = [
+        widget_list = [
             AutoCompleteWidget(
                 lookup_class, allow_new=False,
                 limit=self.limit, query_params=query_params, attrs=attrs
             ),
             LookupMultipleHiddenInputMS(lookup_class)
         ]
-        super(AutoCompleteSelectMultipleSubClsWidget, self).__init__(widgets, *args, **kwargs)
+        super(AutoCompleteSelectMultipleSubClsWidget, self).__init__(widget_list, *args, **kwargs)
 
     def value_from_datadict(self, data, files, name):
         return self.widgets[1].value_from_datadict(data, files, name + '_1')
@@ -591,6 +591,9 @@ class AutoCompleteSelectMultipleSubClsWidget(SelectableMultiWidget, SelectableMe
             value = [value]
         value = [u'', value]
         return super(AutoCompleteSelectMultipleSubClsWidget, self).render(name, value, attrs)
+
+    def decompress(self, value):
+        pass
 
 class AutoCompleteSelectMultipleEditWidget(SelectableMultiWidget, SelectableMediaMixin):
 
@@ -606,14 +609,14 @@ class AutoCompleteSelectMultipleEditWidget(SelectableMultiWidget, SelectableMedi
             u'data-selectable-base-url': proto_url,
         }
         query_params = kwargs.pop('query_params', {})
-        widgets = [
+        widget_list = [
             AutoCompleteWidget(
                 lookup_class, allow_new=False,
                 limit=self.limit, query_params=query_params, attrs=attrs
             ),
             LookupMultipleHiddenInput(lookup_class)
         ]
-        super(AutoCompleteSelectMultipleEditWidget, self).__init__(widgets, *args, **kwargs)
+        super(AutoCompleteSelectMultipleEditWidget, self).__init__(widget_list, *args, **kwargs)
 
     def value_from_datadict(self, data, files, name):
         return self.widgets[1].value_from_datadict(data, files, name + '_1')
@@ -624,27 +627,31 @@ class AutoCompleteSelectMultipleEditWidget(SelectableMultiWidget, SelectableMedi
         value = [u'', value]
         return super(AutoCompleteSelectMultipleEditWidget, self).render(name, value, attrs)
 
+    def decompress(self, value):
+        pass
+
 
 class LookupMultipleHiddenInputMS(LookupMultipleHiddenInput):
     def render(self, name, value, attrs=None, choices=()):
         lookup = self.lookup_class()
-        if value is None: value = []
+        if value is None:
+            value = []
         final_attrs = self.build_attrs(attrs, type=self.input_type, name=name)
         id_ = final_attrs.get('id', None)
         inputs = []
         model = getattr(self.lookup_class, 'model', None)
-        for i, v in enumerate(value):
+        for index, val in enumerate(value):
             item = None
-            if model and isinstance(v, model):
-                item = v
-                v = lookup.get_item_id(item)
-            input_attrs = dict(value=force_unicode(v), **final_attrs)
+            if model and isinstance(val, model):
+                item = val
+                val = lookup.get_item_id(item)
+            input_attrs = dict(value=force_unicode(val), **final_attrs)
             if id_:
                 # An ID attribute was given. Add a numeric index as a suffix
                 # so that the inputs don't all have the same ID attribute.
-                input_attrs['id'] = '%s_%s' % (id_, i)
-            if v:
-                item = item or lookup.get_item(v)
+                input_attrs['id'] = '%s_%s' % (id_, index)
+            if val:
+                item = item or lookup.get_item(val)
                 item_cls = item.as_subclass().__class__.__name__.lower()
                 input_attrs['title'] = lookup.get_item_value(item)
                 input_attrs['model-class'] = item_cls

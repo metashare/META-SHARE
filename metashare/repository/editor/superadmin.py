@@ -157,7 +157,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         return result
 
 
-    def response_add(self, request, obj):
+    def response_add(self, request, obj, post_url_continue='../%s/'):
         if '_popup' in request.REQUEST:
             if '_subclass' in request.REQUEST:
                 pk_value = obj._get_pk_val()
@@ -165,7 +165,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                 return HttpResponse('<script type="text/javascript">opener.dismissAddAnotherPopup(window, "%s", "%s", "%s");</script>' % \
                     # escape() calls force_unicode.
                     (escape(pk_value), escapejs(obj), escapejs(class_name)))
-        return super(SchemaModelAdmin, self).response_add(request, obj)
+        return super(SchemaModelAdmin, self).response_add(request, obj, post_url_continue)
     
     def response_change(self, request, obj):
         '''
