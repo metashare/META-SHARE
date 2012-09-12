@@ -33,6 +33,10 @@
             $(this).attr('name',
               $(this).attr('name') + (list.children().length - 1));
           });
+        newEntry.find('input.lang_autocomplete').each(function(){
+        	var elem = autocomp_jquery(this);
+        	autocomp_my_string(elem);
+        });
         successor.before(newEntry);
         list.find('a.kvPairDeleteButton').removeClass('kvPairDeleteButtonHidden');
       });

@@ -138,9 +138,8 @@ var autocomp_multi = function(fieldType, containerId, elementId, linkedElementId
 }
 
 
-var autocomp_my_string= function(elementId)
+var autocomp_my_string= function(element)
 {
-	var element = autocomp_jquery('#' + elementId);
 	var itemList = _lang_code_list;
 	element.autocomplete({
 		select: function(event, ui)
@@ -150,16 +149,8 @@ var autocomp_my_string= function(elementId)
 		minLength: 0
 	}).data("autocomplete")._renderItem = function(ul, item){
 		var itemText;
-		if(fieldType == "name")
-		{
-			var langCode = _lang_name_to_code[item.label];
-			itemText = langCode + " - " + item.label;
-		}
-		else
-		{
-			var langName = _lang_code_to_name[item.label];
-			itemText = item.label + " - " + langName;
-		}
+		var langName = _lang_code_to_name[item.label];
+		itemText = item.label + " - " + langName;
 		var a = autocomp_jquery('<li></li>')
 		.data("item.autocomplete", item)
 		.append(autocomp_jquery("<a></a>")["text"](itemText)).
@@ -167,11 +158,9 @@ var autocomp_my_string= function(elementId)
 	};
 }
 
-(function($) {
-	  $(document).ready(function() {
-		  $('input.lang_autocomplete').each(function(){
-			  var elemId = $(this).attr('id');
-			  autocomp_my_string(elemId);
-		  })
-	  });
-})(autocomp_jquery);	
+autocomp_jquery(document).ready(function(){
+	$('input.lang_autocomplete').each(function(index){
+		var elem = $(this);
+		autocomp_my_string(elem);
+	});
+});
