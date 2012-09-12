@@ -41,6 +41,8 @@ class DictWidget(widgets.Widget):
     # templates for the names of key/value "<input/>" fields
     _key_field_name_tpl = 'key_{}_{}'
     _val_field_name_tpl = 'val_{}_{}'
+    
+    key_widget = None
 
     def __init__(self, blank=False, max_key_length=None, max_val_length=None):
         """
@@ -96,15 +98,20 @@ class DictWidget(widgets.Widget):
         `field_name` and `id` will be used in the names of the input fields.
         """
         _key_field_name = DictWidget._key_field_name_tpl.format(field_name, idx)
-        if self.max_key_length:
-            if self.max_key_length > _MAX_TEXT_INPUT_SIZE:
-                rendered_key = Textarea().render(_key_field_name, key)
-            else:
-                rendered_key = \
-                    TextInput(attrs={ 'maxlength': self.max_key_length }) \
-                        .render(_key_field_name, key)
+        if self.key_widget:
+            if isinstance(self.key_widget, type):
+                self.key_widget = self.key_widget()
+            rendered_key = self.key_widget.render(_key_field_name , key)
         else:
-            rendered_key = TextInput().render(_key_field_name, key)
+            if self.max_key_length:
+                if self.max_key_length > _MAX_TEXT_INPUT_SIZE:
+                    rendered_key = Textarea().render(_key_field_name, key)
+                else:
+                    rendered_key = \
+                        TextInput(attrs={ 'maxlength': self.max_key_length }) \
+                            .render(_key_field_name, key)
+            else:
+                rendered_key = TextInput().render(_key_field_name, key)
 
         _val_field_name = DictWidget._val_field_name_tpl.format(field_name, idx)
         if self.max_val_length:
@@ -146,6 +153,7 @@ class LangDictWidget(DictWidget):
     A `DictWidget` which has RFC 3066 language codes as keys.
     """
     def __init__(self, *args, **kwargs):
+        self.key_widget = LangAutoCompleteWidget
         super(LangDictWidget, self).__init__(*args, **kwargs)
         # path to the Django template which is used to render this widget
         self._template = 'repository/editor/lang_dict_widget.html'
@@ -483,8 +491,8 @@ class ComboWidget(AdminTextInputWidget):
                   '{}css/combo.css'.format(settings.ADMIN_MEDIA_PREFIX))
         }
         js = ('js/jquery-ui.min.js',
-              '{}js/autocomp.js'.format(settings.ADMIN_MEDIA_PREFIX),
-              '{}js/pycountry.js'.format(settings.ADMIN_MEDIA_PREFIX))
+              '{}js/pycountry.js'.format(settings.ADMIN_MEDIA_PREFIX),
+              '{}js/autocomp.js'.format(settings.ADMIN_MEDIA_PREFIX),)
 
     def __init__(self, field_type=None, attrs=None):
         self.field_type = field_type
@@ -519,8 +527,8 @@ class MultiComboWidget(MultiFieldWidget):
                   '{}css/combo.css'.format(settings.ADMIN_MEDIA_PREFIX))
         }
         js = ('js/jquery-ui.min.js',
-              '{}js/autocomp.js'.format(settings.ADMIN_MEDIA_PREFIX),
-              '{}js/pycountry.js'.format(settings.ADMIN_MEDIA_PREFIX))
+              '{}js/pycountry.js'.format(settings.ADMIN_MEDIA_PREFIX),
+              '{}js/autocomp.js'.format(settings.ADMIN_MEDIA_PREFIX),)
 
     def __init__(self, field_type=None, attrs=None, widget_id=None, max_length=None, **kwargs):
         self.field_type = field_type
@@ -556,3 +564,19 @@ class MultiComboWidget(MultiFieldWidget):
         val = super(MultiComboWidget, self)._render_multifield(_context)
         return val
         
+class LangAutoCompleteWidget(widgets.Widget):
+    class Media:
+        js = ('js/jquery-ui.min.js',
+              '{}js/pycountry.js'.format(settings.ADMIN_MEDIA_PREFIX),
+              '{}js/autocomp.js'.format(settings.ADMIN_MEDIA_PREFIX),)
+        css = {}
+        
+    def __init__(self, attrs=None):
+        super(LangAutoCompleteWidget, self).__init__(attrs)
+        
+    def render(self, name, value):
+        if not value:
+            value = u''
+        res = u'<input type="text" class="lang_autocomplete" name="{0}" value="{1}"/>'.format(name, value)
+        res = mark_safe(res)
+        return res
