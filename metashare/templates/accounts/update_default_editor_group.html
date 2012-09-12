@@ -1,25 +1,19 @@
 {% extends "base.html" %}
 
-{% load adminmedia %}
-
 {% block title %}{{ title }} &ndash; META-SHARE{% endblock %}
+
 {% block messages %}
 {% if form.errors %}
 <p class="error">Please give at least one editor group.</p>
 {% endif %}
 {% endblock %}
-  
+
+{% block links %}
+{{ form.media }}
+{% endblock %}
+
 {% block content %}
-<script type="text/javascript" src="{% admin_media_prefix %}js/core.js"></script>
-<script type="text/javascript" src="{% admin_media_prefix %}js/SelectBox.js"></script>
-<script type="text/javascript" src="{% admin_media_prefix %}js/SelectFilter2.js"></script>
-
-<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}css/widgets.css"/>
-
-<script type="text/javascript" src="{{MEDIA_URL}}/js/jsi18n.js"></script>
-
-{% admin_media_prefix %}
-<h2>Update default editor group</h2>
+<h2>{{ title }}</h2>
 <div class="content_box">
 <form class="form_helper" method="post" action="{% url metashare.accounts.views.update_default_editor_groups %}">
 {% csrf_token %}
@@ -30,4 +24,3 @@
 </form>
 </div>
 {% endblock %}
-

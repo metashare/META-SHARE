@@ -1,7 +1,7 @@
 from django import forms
 from metashare.accounts.models import UserProfile, EditorGroupApplication, \
     OrganizationApplication, Organization, OrganizationManagers
-# pylint: disable-msg=W0611
+from django.conf import settings
 from django.contrib.admin import widgets
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
@@ -190,6 +190,14 @@ class UpdateDefaultEditorGroupForm(ModelForm):
         widget=widgets.FilteredSelectMultiple(_("default editor groups"),
                                               is_stacked=False),
         required=False)
+
+    class Media:
+        css = {
+            # required by the FilteredSelectMultiple widget
+            'all':['{}css/widgets.css'.format(settings.ADMIN_MEDIA_PREFIX)],
+        }
+        # required by the FilteredSelectMultiple widget
+        js = ['/{}admin/jsi18n/'.format(settings.DJANGO_BASE)]
 
     class Meta:
         """
