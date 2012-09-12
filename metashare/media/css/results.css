@@ -21,12 +21,13 @@ div.searchbox table{
 	padding-top:20px;	
 }
 
-div.searchbox input#id_q{
-	margin-left: 20px;
+#search_button{
+    width: 6em;
 }
 
-div.searchbox input#search_button{
-	margin-top: 10px;
+#searchbox img{
+    width: 200px;
+    margin-right: 20px;
 }
 
 div.filters{
