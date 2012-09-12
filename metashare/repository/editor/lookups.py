@@ -72,14 +72,12 @@ class GenericUnicodeLookup(ModelLookup):
             return lcterm in unicode(item).lower()
         
         items = ''
-        if isinstance(ModelLookup, documentInfoType_model):
-            items = self.get_queryset().filter(copy_status = MASTER)
-        else:
-            items = self.get_queryset()
+        items = self.get_queryset()
         if term == '*':
             results = items
         else:
             results = [p for p in items if matches(p)]
+        results = self.filter_results(results)
         print_query_results(results)
         return results
     
@@ -87,6 +85,9 @@ class GenericUnicodeLookup(ModelLookup):
         fmt_item = super(GenericUnicodeLookup, self).format_item(item)
         fmt_item['cls'] = item.as_subclass().__class__.__name__.lower()
         return fmt_item
+    
+    def filter_results(self, results):
+        return results
 
 class ActorLookup(GenericUnicodeLookup):
     model = actorInfoType_model
@@ -98,6 +99,10 @@ class DocumentationLookup(GenericUnicodeLookup):
     but which performes lookup only on the structured entries.
     '''
     model = documentationInfoType_model
+
+    def filter_results(self, results):
+        filtered_results = [p for p in results if p.as_subclass().__class__ == documentInfoType_model]
+        return filtered_results
 
 class MembershipDummyLookup(ModelLookup):
     '''
