@@ -13,8 +13,8 @@ from django.utils.html import escape
 from django.utils.translation import ugettext as _
 
 from metashare.accounts.forms import RegistrationRequestForm, ResetRequestForm, \
-    UserProfileForm, EditorGroupApplicationForm, AddDefaultEditorGroupForm, \
-    RemoveDefaultEditorGroupForm, OrganizationApplicationForm, ContactForm
+    UserProfileForm, EditorGroupApplicationForm, UpdateDefaultEditorGroupForm, \
+    OrganizationApplicationForm, ContactForm
 from metashare.accounts.models import RegistrationRequest, ResetRequest, \
     EditorGroupApplication, EditorGroupManagers, EditorGroup, \
     OrganizationApplication, OrganizationManagers, Organization
@@ -330,9 +330,9 @@ def editor_group_application(request):
 
 
 @login_required
-def add_default_editor_groups(request):
+def update_default_editor_groups(request):
     """
-    Add default Editor Groups.
+    Update default Editor Groups.
     """
     # Get UserProfile instance corresponding to the current user.
     profile = request.user.get_profile()
@@ -340,89 +340,68 @@ def add_default_editor_groups(request):
     # Exclude from the list the editor groups for which the user is not a member
     available_editor_groups = EditorGroup.objects \
         .filter(name__in=request.user.groups.values_list('name', flat=True)) \
-        .exclude(name__in=profile.default_editor_groups.values_list('name', flat=True))
+        #.exclude(name__in=profile.default_editor_groups.values_list('name', flat=True))
 
-    # Check if the form has been submitted.
-    if request.method == "POST":
-        # If so, bind the creation form to HTTP POST values.
-        form = AddDefaultEditorGroupForm(available_editor_groups, request.POST)
-        # Check if the form has validated successfully.
-        if form.is_valid():
-            # Get submitted editor groups
-            dflt_edt_grps = form.cleaned_data['default_editor_groups']
-
-            for dflt_edt_grp in dflt_edt_grps:
-                for edt_grp in EditorGroup.objects.filter(name=dflt_edt_grp.name):
-                    profile.default_editor_groups.add(edt_grp)
-                    messages.success(request, _('You have successfully ' \
-                      'added default editor group "%s".') % (dflt_edt_grp.name,))
-            profile.save()
-
-            # Redirect the user to the edit profile page.
-            return redirect(edit_profile)
-
-    # Otherwise, render a new AddDefaultEditorGroupForm instance
-    else:
-        # Check whether there is an editor group the user can add to the default list.
-        if available_editor_groups.count() == 0:
-            # If there is no editor group created yet, send an error message.
-            messages.error(request, _('There are no editor groups you can '
-                'add to your default list.'))
-            # Redirect the user to the edit profile page.
-            return redirect(edit_profile)
-        
-        form = AddDefaultEditorGroupForm(available_editor_groups)
-
-    dictionary = {'title': _('Add default editor group'), 'form': form}
-    return render_to_response('accounts/add_default_editor_group.html',
-                        dictionary, context_instance=RequestContext(request))
-
-
-@login_required
-def remove_default_editor_groups(request):
-    """
-    Remove default Editor Groups.
-    """
-    # Get UserProfile instance corresponding to the current user.
-    profile = request.user.get_profile()
-
-    # Include in the list only the default editor groups of the user
-    available_editor_groups = EditorGroup.objects \
+    chosen_editor_groups = EditorGroup.objects \
         .filter(name__in=profile.default_editor_groups.values_list('name', flat=True))
 
     # Check if the form has been submitted.
     if request.method == "POST":
         # If so, bind the creation form to HTTP POST values.
-        form = RemoveDefaultEditorGroupForm(available_editor_groups, request.POST)
+        form = UpdateDefaultEditorGroupForm(available_editor_groups, chosen_editor_groups, request.POST)
         # Check if the form has validated successfully.
         if form.is_valid():
             # Get submitted editor groups
             dflt_edt_grps = form.cleaned_data['default_editor_groups']
+            edt_grps_to_add = []
+            edt_grps_to_remove = []
 
-            for dflt_edt_grp in dflt_edt_grps:
-                for edt_grp in EditorGroup.objects.filter(name=dflt_edt_grp.name):
+            if not dflt_edt_grps:
+                # No selected groups: remove all the previous selected groups
+                edt_grps_to_remove.extend(chosen_editor_groups)
+            else:
+                if not chosen_editor_groups:
+                    # Selected groups and no previously selected groups: add all the new selected groups
+                    edt_grps_to_add.extend(dflt_edt_grps)
+                else:
+                    # Selected groups: add new groups if any, remove previous groups if any
+                    edt_grps_to_add.extend(dflt_edt_grps \
+                      .exclude(name__in=chosen_editor_groups.values_list('name', flat=True)))
+                    edt_grps_to_remove.extend(chosen_editor_groups \
+                      .exclude(name__in=dflt_edt_grps.values_list('name', flat=True)))
+
+            # Add editor groups in profile
+            for edt_grp_to_add in edt_grps_to_add:
+                for edt_grp in EditorGroup.objects.filter(name=edt_grp_to_add.name):
+                    profile.default_editor_groups.add(edt_grp)
+                    messages.success(request, _('You have successfully ' \
+                      'added default editor group "%s".') % (edt_grp_to_add.name,))
+
+            # Remove editor groups in profile
+            for edt_grp_to_remove in edt_grps_to_remove:
+                for edt_grp in EditorGroup.objects.filter(name=edt_grp_to_remove.name):
                     profile.default_editor_groups.remove(edt_grp)
                     messages.success(request, _('You have successfully ' \
-                      'removed default editor group "%s".') % (dflt_edt_grp.name,))
+                      'removed default editor group "%s".') % (edt_grp_to_remove.name,))
             profile.save()
 
             # Redirect the user to the edit profile page.
             return redirect(edit_profile)
 
-    # Otherwise, render a new RemoveDefaultEditorGroupForm instance
+    # Otherwise, render a new UpdateDefaultEditorGroupForm instance
     else:
-        # Check whether there is an editor group the user can remove from the default list.
+        # Check whether there is an editor group the user can update to the default list.
         if available_editor_groups.count() == 0:
             # If there is no editor group created yet, send an error message.
             messages.error(request, _('There are no editor groups you can '
-                'remove from your default list.'))
+                'update to your default list.'))
             # Redirect the user to the edit profile page.
             return redirect(edit_profile)
         
-        form = RemoveDefaultEditorGroupForm(available_editor_groups)
+        form = UpdateDefaultEditorGroupForm(available_editor_groups, chosen_editor_groups)
 
-    dictionary = {'title': _('Remove default editor group'), 'form': form}
-    return render_to_response('accounts/remove_default_editor_group.html',
+    dictionary = {'title': _('Update default editor group'), 'form': form}
+    return render_to_response('accounts/update_default_editor_group.html',
                         dictionary, context_instance=RequestContext(request))
 
 
