@@ -392,14 +392,14 @@ def update_default_editor_groups(request):
         # Check whether there is an editor group the user can update to the default list.
         if available_editor_groups.count() == 0:
             # If there is no editor group created yet, send an error message.
-            messages.error(request, _('There are no editor groups you can '
-                'update to your default list.'))
+            messages.error(request, _('There are no editor groups you could '
+                'add to your default list.'))
             # Redirect the user to the edit profile page.
             return redirect(edit_profile)
         
         form = UpdateDefaultEditorGroupForm(available_editor_groups, chosen_editor_groups)
 
-    dictionary = {'title': _('Update default editor group'), 'form': form}
+    dictionary = {'title': _('Update default editor groups'), 'form': form}
     return render_to_response('accounts/update_default_editor_group.html',
                         dictionary, context_instance=RequestContext(request))
 
