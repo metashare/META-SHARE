@@ -387,7 +387,7 @@ def pretty_timeago(timein=False):
             return str( second_diff / 3600 ) + " hours ago"
     if day_diff == 1:
         return "Yesterday"
-    if day_diff < 7:
+    if day_diff < 14:
         return str(day_diff) + " days ago"
     if day_diff < 31:
         return str(day_diff/7) + " weeks ago"
