@@ -14,6 +14,9 @@ from selectable.forms.widgets import SelectableMediaMixin, SelectableMultiWidget
     LookupMultipleHiddenInput
 from django.utils.http import urlencode
 from metashare import settings
+from selectable.forms.widgets import AutoCompleteWidget        
+from django.forms.util import flatatt
+from django.utils.encoding import force_unicode
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -31,7 +34,7 @@ class DictWidget(widgets.Widget):
     
     By default key/value input widgets will be `TextInput` widgets. If a
     sufficiently large maximum size is specified for either of them, the input
-    wisgets may also become `Textarea` widgets.
+    widgets may also become `Textarea` widgets.
     """
     class Media:
         css = { 'all': ('{}css/dict_widget.css'.format(
@@ -228,7 +231,7 @@ class SubclassableRelatedFieldWidgetWrapper(RelatedFieldWidgetWrapper):
         if self.can_add_related:
             output.append(' ')
             # Salvatore: changed from 'onclick' to 'onchange' because
-            # on Windwos browsers onclick is triggered as soon as the
+            # on Windows browsers onclick is triggered as soon as the
             # user click on the down arrow and before he/she actually
             # selects the item from the list.
             output.append(self.subclass_select.render('subclass_select', '',
@@ -555,4 +558,82 @@ class MultiComboWidget(MultiFieldWidget):
             _context.update({'linked_field_name': linked_field_name})
         val = super(MultiComboWidget, self)._render_multifield(_context)
         return val
+
+class AutoCompleteSelectMultipleEditWidget(SelectableMultiWidget, SelectableMediaMixin):
+
+    def __init__(self, lookup_class, *args, **kwargs):
+        self.lookup_class = lookup_class
+        default_lookup_widget = LookupMultipleHiddenInput
+        self.lookup_widget = kwargs.pop('lookup_widget', None)
+        if not self.lookup_widget:
+            self.lookup_widget = default_lookup_widget
+        self.limit = kwargs.pop('limit', None)
+        position = kwargs.pop('position', 'bottom')
+        more_attrs = kwargs.pop('attrs', None)
         
+        proto_url = '/{}editor/repository/'.format(settings.DJANGO_BASE)
+        attrs = {
+            u'data-selectable-multiple': 'true',
+            u'data-selectable-position': position,
+            u'data-selectable-allow-editing': 'true',
+            u'data-selectable-base-url': proto_url,
+        }
+        if more_attrs:
+            attrs.update(more_attrs)
+        query_params = kwargs.pop('query_params', {})
+        widget_list = [
+            AutoCompleteWidget(
+                lookup_class, allow_new=False,
+                limit=self.limit, query_params=query_params, attrs=attrs
+            ),
+            self.lookup_widget(lookup_class)
+        ]
+        super(AutoCompleteSelectMultipleEditWidget, self).__init__(widget_list, *args, **kwargs)
+
+    def value_from_datadict(self, data, files, name):
+        return self.widgets[1].value_from_datadict(data, files, name + '_1')
+
+    def render(self, name, value, attrs=None):
+        if value and not hasattr(value, '__iter__'):
+            value = [value]
+        value = [u'', value]
+        return super(AutoCompleteSelectMultipleEditWidget, self).render(name, value, attrs)
+
+    def decompress(self, value):
+        pass
+
+class AutoCompleteSelectMultipleSubClsWidget(AutoCompleteSelectMultipleEditWidget):
+
+    def __init__(self, lookup_class, *args, **kwargs):
+        new_attrs = {u'data-selectable-is-subclassable': 'true',}
+        kwargs.update({'attrs': new_attrs})
+        kwargs.update({'lookup_widget': LookupMultipleHiddenInputMS})
+        super(AutoCompleteSelectMultipleSubClsWidget, self).__init__(lookup_class, *args, **kwargs)
+
+
+class LookupMultipleHiddenInputMS(LookupMultipleHiddenInput):
+    def render(self, name, value, attrs=None, choices=()):
+        lookup = self.lookup_class()
+        if value is None:
+            value = []
+        final_attrs = self.build_attrs(attrs, type=self.input_type, name=name)
+        id_ = final_attrs.get('id', None)
+        inputs = []
+        model = getattr(self.lookup_class, 'model', None)
+        for index, val in enumerate(value):
+            item = None
+            if model and isinstance(val, model):
+                item = val
+                val = lookup.get_item_id(item)
+            input_attrs = dict(value=force_unicode(val), **final_attrs)
+            if id_:
+                # An ID attribute was given. Add a numeric index as a suffix
+                # so that the inputs don't all have the same ID attribute.
+                input_attrs['id'] = '%s_%s' % (id_, index)
+            if val:
+                item = item or lookup.get_item(val)
+                item_cls = item.as_subclass().__class__.__name__.lower()
+                input_attrs['title'] = lookup.get_item_value(item)
+                input_attrs['model-class'] = item_cls
+            inputs.append(u'<input%s />' % flatatt(input_attrs))
+        return mark_safe(u'\n'.join(inputs))
