@@ -13,12 +13,19 @@ from metashare.repository.models import personInfoType_model, \
     imageFormatInfoType_model, resolutionInfoType_model, \
     audioSizeInfoType_model
 from metashare.storage.models import MASTER
+import logging
+from metashare.settings import LOG_HANDLER
+
+# Setup logging support.
+LOGGER = logging.getLogger(__name__)
+LOGGER.addHandler(LOG_HANDLER)
 
 def print_query_results(results):
-    if results is not None:
-        print u'{} results'.format(results.__len__())
-    else:
-        print u'No results'
+    if LOGGER.isEnabledFor(logging.DEBUG):
+        if results is not None:
+            LOGGER.debug(u'{0} results'.format(results.__len__()))
+        else:
+            LOGGER.debug(u'No results')
     return
 
 class PersonLookup(ModelLookup):
