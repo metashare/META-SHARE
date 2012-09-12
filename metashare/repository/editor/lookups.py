@@ -13,6 +13,20 @@ from metashare.repository.models import personInfoType_model, \
     imageFormatInfoType_model, resolutionInfoType_model, \
     audioSizeInfoType_model
 from metashare.storage.models import MASTER
+import logging
+from metashare.settings import LOG_HANDLER
+
+# Setup logging support.
+LOGGER = logging.getLogger(__name__)
+LOGGER.addHandler(LOG_HANDLER)
+
+def print_query_results(results):
+    if LOGGER.isEnabledFor(logging.DEBUG):
+        if results is not None:
+            LOGGER.debug(u'{0} results'.format(results.__len__()))
+        else:
+            LOGGER.debug(u'No results')
+    return
 
 class PersonLookup(ModelLookup):
     model = personInfoType_model
@@ -35,10 +49,7 @@ class PersonLookup(ModelLookup):
             results = persons
         else:
             results = [p for p in persons if matches(p)]
-        if results is not None:
-            print u'{} results'.format(results.__len__())
-        else:
-            print u'No results'
+        print_query_results(results)
         return results
 
 
@@ -55,29 +66,33 @@ class GenericUnicodeLookup(ModelLookup):
         lcterm = term.lower()
         def matches(item):
             'Helper function to group the search code for a database item'
-            if (isinstance(ModelLookup, actorInfoType_model) and item.as_subclass().copy_status != MASTER):
-                return False             
+            if hasattr(item.as_subclass(), 'copy_status'):
+                if item.as_subclass().copy_status != MASTER:
+                    return False 
             return lcterm in unicode(item).lower()
         
         items = ''
-        if isinstance(ModelLookup, documentInfoType_model):
-            items = self.get_queryset().filter(copy_status = MASTER)
-        else:
-            items = self.get_queryset()
+        items = self.get_queryset()
         if term == '*':
             results = items
         else:
             results = [p for p in items if matches(p)]
-        if results is not None:
-            print u'{} results'.format(results.__len__())
-        else:
-            print u'No results'
+        results = self.filter_results(results)
+        print_query_results(results)
+        return results
+    
+    def format_item(self, item):
+        fmt_item = super(GenericUnicodeLookup, self).format_item(item)
+        fmt_item['cls'] = item.as_subclass().__class__.__name__.lower()
+        return fmt_item
+    
+    def filter_results(self, results):
         return results
 
 class ActorLookup(GenericUnicodeLookup):
     model = actorInfoType_model
-
-class DocumentationLookup(ModelLookup):
+    
+class DocumentationLookup(GenericUnicodeLookup):
     '''
     A special lookup which can represent values of both
     the (structured) documentInfo type and the documentUnstructured text-only type,
@@ -85,27 +100,9 @@ class DocumentationLookup(ModelLookup):
     '''
     model = documentationInfoType_model
 
-    def get_query(self, request, term):
-        # Since Subclassables and some other classes cannot be searched using query sets,
-        # we must do the searching by hand.
-        # Note: this is inefficient, but in practice fast enough it seems (tested with >1000 resources)
-        lcterm = term.lower()
-        def matches(item):
-            'Helper function to group the search code for a database item'
-            if item.as_subclass().copy_status != MASTER:
-                return False 
-            
-            return lcterm in unicode(item).lower()
-        items = documentInfoType_model.objects.get_query_set()
-        if term == '*':
-            results = items
-        else:
-            results = [p for p in items if matches(p)]
-        if results is not None:
-            print u'{} results'.format(results.__len__())
-        else:
-            print u'No results'
-        return results
+    def filter_results(self, results):
+        filtered_results = [p for p in results if p.as_subclass().__class__ == documentInfoType_model]
+        return filtered_results
 
 class MembershipDummyLookup(ModelLookup):
     '''
@@ -188,10 +185,7 @@ class ProjectLookup(ModelLookup):
             results = projects
         else:
             results = [p for p in projects if matches(p)]
-        if results is not None:
-            print u'{} results'.format(results.__len__())
-        else:
-            print u'No results'
+        print_query_results(results)
         return results
     
     def get_item_label(self, item):
@@ -223,10 +217,7 @@ class OrganizationLookup(ModelLookup):
             results = orgs
         else:
             results = [p for p in orgs if matches(p)]
-        if results is not None:
-            print u'{} results'.format(results.__len__())
-        else:
-            print u'No results'
+        print_query_results(results)
         return results
 
     def get_item_label(self, item):
