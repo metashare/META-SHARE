@@ -1,6 +1,8 @@
 from django import forms
 from metashare.accounts.models import UserProfile, EditorGroupApplication, \
-    OrganizationApplication
+    OrganizationApplication, Organization, OrganizationManagers
+# pylint: disable-msg=W0611
+from django.contrib.admin import widgets
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext as _
@@ -243,3 +245,29 @@ class OrganizationApplicationForm(ModelForm):
         super(OrganizationApplicationForm, self).__init__(*args, **kwargs)
         # If there is a list of organizations, then modify the ModelChoiceField
         self.fields['organization'].queryset = organization_qs
+
+
+class OrganizationForm(ModelForm):
+    """
+    Form used to render the add/change admin views for `Organization` model
+    instances.
+    """
+    class Meta:
+        model = Organization
+        widgets = {
+            'permissions': widgets.FilteredSelectMultiple(
+                Organization._meta.get_field('permissions').verbose_name, False)
+        }
+
+
+class OrganizationManagersForm(ModelForm):
+    """
+    Form used to render the add/change admin views for `OrganizationManagers`
+    model instances.
+    """
+    class Meta:
+        model = OrganizationManagers
+        widgets = {
+            'permissions': widgets.FilteredSelectMultiple(OrganizationManagers \
+                    ._meta.get_field('permissions').verbose_name, False)
+        }

@@ -10,6 +10,7 @@ from django.utils.translation import ugettext as _
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 
+from metashare.accounts.forms import OrganizationForm, OrganizationManagersForm
 from metashare.accounts.models import RegistrationRequest, ResetRequest, \
   UserProfile, EditorGroup, EditorGroupApplication, EditorGroupManagers, \
   Organization, OrganizationApplication, OrganizationManagers
@@ -98,7 +99,8 @@ class EditorGroupAdmin(admin.ModelAdmin):
                     '_managers_display')
     search_fields = ('name',)
     actions = ('add_user_to_editor_group', 'remove_user_from_editor_group', )
-    
+    exclude = ('permissions',)
+
     def _members_display(self, obj):
         """
         Returns a string representing a list of the members of the given
@@ -425,7 +427,8 @@ class EditorGroupManagersAdmin(admin.ModelAdmin):
     list_display = ('name', 'managed_group', '_members_display')
     search_fields = ('name', 'managed_group')
     actions = ('add_user_to_editor_group_managers', 'remove_user_from_editor_group_managers', )
-    
+    exclude = ('permissions',)
+
     def _members_display(self, obj):
         """
         Returns a string representing a list of the members of the given
@@ -573,7 +576,8 @@ class OrganizationAdmin(admin.ModelAdmin):
                     '_organization_managers_display')
     search_fields = ('name',)
     actions = ('add_user_to_organization', 'remove_user_from_organization', )
-    
+    form = OrganizationForm
+
     def _members_display(self, obj):
         """
         Returns a string representing a list of the members of the given
@@ -877,7 +881,8 @@ class OrganizationManagersAdmin(admin.ModelAdmin):
     list_display = ('name', 'managed_organization', '_members_display')
     search_fields = ('name', 'managed_organization')
     actions = ('add_user_to_organization_managers', 'remove_user_from_organization_managers', )
-    
+    form = OrganizationManagersForm
+
     def _members_display(self, obj):
         """
         Returns a string representing a list of the members of the given
