@@ -1,6 +1,7 @@
 from django import forms
 from metashare.accounts.models import UserProfile, EditorGroupApplication, \
     OrganizationApplication, Organization, OrganizationManagers
+# pylint: disable-msg=W0611
 from django.contrib.admin import widgets
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
