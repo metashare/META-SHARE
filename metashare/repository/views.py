@@ -4,6 +4,7 @@ from datetime import datetime
 from os.path import split, getsize
 from urllib import urlopen
 from mimetypes import guess_type
+from types import *
 
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
@@ -479,84 +480,23 @@ def view(request, resource_name=None, object_id=None):
     # Preprocess some of the information withing the tuples for better
     # presentation in the single resource view.
     # Contact Person:
-    contact_person_dict = {}
-    contact_person_list = []
-    communication_person_dict = {}
-    affiliation_dict = {}
-    affiliation_list = []
-    communication_org_dict = {}
-    for _tuple in contact_person_tuples:
-        for item in _tuple[1]:
-            if item[0][0] == "Surname":
-                contact_person_dict["Surname"] = item[0][1]
-            elif item[0][0] == "Given name":
-                contact_person_dict["GivenName"] = item[0][1]
-            elif item[0][0] == "Sex":
-                contact_person_dict["Sex"] = item[0][1]
-            elif item[0][0] == "Position":
-                contact_person_dict["Position"] = item[0][1]
-            elif item[0] == "Communication":
-                for _item in item[1]:
-                    if _item[0][0] == "Email":
-                        communication_person_dict["Email"] = _item[0][1]
-                    elif _item[0][0] == "Url":
-                        communication_person_dict["Url"] = _item[0][1]
-                    elif _item[0][0] == "Address":
-                        communication_person_dict["Address"] = _item[0][1]
-                    elif _item[0][0] == "Zip code":
-                        communication_person_dict["ZipCode"] = _item[0][1]
-                    elif _item[0][0] == "City":
-                        communication_person_dict["City"] = _item[0][1]
-                    elif _item[0][0] == "Region":
-                        communication_person_dict["Region"] = _item[0][1]
-                    elif _item[0][0] == "Country":
-                        communication_person_dict["Country"] = _item[0][1]
-                    elif _item[0][0] == "Telephone number":
-                        communication_person_dict["TelephoneNumber"] = \
-                          _item[0][1]
-                    elif _item[0][0] == "Fax number":
-                        communication_person_dict["FaxNumber"] = _item[0][1]
-            elif item[0] == "Affiliation":
-                for _item in item[1]:
-                    if _item[0][0] == "Organization name":
-                        affiliation_dict["OrganizationName"] = _item[0][1]
-                    elif _item[0][0] == "Organization short name":
-                        affiliation_dict["OrganizationShortName"] = _item[0][1]
-                    elif _item[0][0] == "Department name":
-                        affiliation_dict["DepartmentName"] = _item[0][1]
-                    elif _item[0] == "Communication":
-                        for __item in _item[1]:
-                            if __item[0][0] == "Email":
-                                communication_org_dict["Email"] = __item[0][1]
-                            elif __item[0][0] == "Url":
-                                communication_org_dict["Url"] = __item[0][1]
-                            elif __item[0][0] == "Address":
-                                communication_org_dict["Address"] = __item[0][1]
-                            elif __item[0][0] == "Zip code":
-                                communication_org_dict["ZipCode"] = __item[0][1]
-                            elif __item[0][0] == "City":
-                                communication_org_dict["City"] = __item[0][1]
-                            elif __item[0][0] == "Region":
-                                communication_org_dict["Region"] = __item[0][1]
-                            elif __item[0][0] == "Country":
-                                communication_org_dict["Country"] = __item[0][1]
-                            elif __item[0][0] == "Telephone number":
-                                communication_org_dict["TelephoneNumber"] = \
-                                  __item[0][1]
-                            elif __item[0][0] == "Fax number":
-                                communication_org_dict["FaxNumber"] = \
-                                  __item[0][1]
-        affiliation_list.append(affiliation_dict)
-    contact_person_list.append(contact_person_dict)
-        
-        
+    contact_person_list, communication_person_list, affiliation_list, \
+      communication_org_list = create_contact_person_list(contact_person_tuples)
     
-    print communication_person_dict
-    print affiliation_dict
-    print affiliation_list
-    print communication_org_dict
-            
+    print tuple2dict(contact_person_tuples)
+    
+    
+    #print contact_person_list
+    #print communication_person_list
+    #print affiliation_list
+    #print communication_org_list
 
+    #    affiliation_list.append(affiliation_dict)
+    #print contact_person_list
+    #print communication_person_dict
+    #print affiliation_dict
+    #print affiliation_list
+    #print communication_org_dict
 
     # Define context for template rendering.
     context = { 'resource': resource,
@@ -581,10 +521,10 @@ def view(request, resource_name=None, object_id=None):
                 'mediaTypes': media_types,
                 'url': url,
                 'metaShareId': metashare_id,
-                'contact_person_dict': contact_person_dict,
-                'communication_person_dict' : communication_person_dict,
-                'affiliation_dict': affiliation_dict,
-                'communication_org_dict': communication_org_dict,
+                'contact_person_list': contact_person_list,
+                'communication_person_list' : communication_person_list,
+                'affiliation_list': affiliation_list,
+                'communication_org_list': communication_org_list,
                 }
     template = 'repository/lr_view.html'
 
@@ -630,6 +570,111 @@ def view(request, resource_name=None, object_id=None):
     # Render and return template with the defined context.
     ctx = RequestContext(request)
     return render_to_response(template, context, context_instance=ctx)
+
+def tuple2dict(_tuple):
+    '''
+    Recursively converts a tuple to a dictionary.
+    '''
+    _dict = {}
+    for item in _tuple:
+#        print item
+#        print item[0]
+#        print type(item[0])
+        #print item[1]
+        #print type(item[1])
+        
+        if type(item[0]) == StringType or type(item[0]) == UnicodeType:
+            if type(item[1]) == StringType or type(item[1]) == UnicodeType:
+                _dict[item[0]] = item[1]
+            else:
+                _dict[item[0]] = tuple2dict(item[1])
+        elif type(item[0]) == bool:
+            pass
+        else:
+            _dict[item[0]] = tuple2dict(item)
+    print _dict
+    return _dict
+#        print item
+#        if item.count(item) > 1:
+#            if not (isinstance(item[1], basestring) or isinstance(item[1], bool)):
+#                #print item
+#                tuple2dict(item)
+#            else:
+#                print item
+#                _dict[item[0]] = item[1]
+#        else:
+#            tuple2dict(item[0])
+
+
+
+def create_contact_person_list(contact_persons_tuple):
+    '''
+    Creates a dictionary with required information for contact person.
+    Takes a tuple as input.
+    '''
+    
+    contact_person_dict = {}
+    contact_person_list = []
+    communication_person_list = []
+    affiliation_dict = {}
+    affiliation_list = []
+    communication_org_list = []
+    contact_persons = []
+    for _tuple in contact_persons_tuple:
+        for item in _tuple[1]:
+            if item[0][0] == "Surname":
+                contact_person_dict["Surname"] = item[0][1]
+            elif item[0][0] == "Given name":
+                contact_person_dict["GivenName"] = item[0][1]
+            elif item[0][0] == "Sex":
+                contact_person_dict["Sex"] = item[0][1]
+            elif item[0][0] == "Position":
+                contact_person_dict["Position"] = item[0][1]
+            elif item[0] == "Communication":
+                communication_person_list.append(create_communication_list(item[1]))
+            elif item[0] == "Affiliation":
+                for _item in item[1]:
+                    if _item[0][0] == "Organization name":
+                        affiliation_dict["OrganizationName"] = _item[0][1]
+                    elif _item[0][0] == "Organization short name":
+                        affiliation_dict["OrganizationShortName"] = _item[0][1]
+                    elif _item[0][0] == "Department name":
+                        affiliation_dict["DepartmentName"] = _item[0][1]
+                    elif _item[0] == "Communication":
+                        communication_org_list.append(create_communication_list(_item[1]))
+                affiliation_list.append(affiliation_dict)
+                affiliation_dict = {}
+        contact_person_list.append(contact_person_dict)
+        contact_person_dict = {}
+    return contact_person_list, communication_person_list, affiliation_list, \
+      communication_org_list
+
+def create_communication_list(communication_tuple):
+    communication_dict = {}
+    for item in communication_tuple:
+        if item[0][0] == "Email":
+            communication_dict["Email"] = item[0][1]
+        elif item[0][0] == "Url":
+            communication_dict["Url"] = item[0][1]
+        elif item[0][0] == "Address":
+            communication_dict["Address"] = item[0][1]
+        elif item[0][0] == "Zip code":
+            communication_dict["ZipCode"] = item[0][1]
+        elif item[0][0] == "City":
+            communication_dict["City"] = item[0][1]
+        elif item[0][0] == "Region":
+            communication_dict["Region"] = item[0][1]
+        elif item[0][0] == "Country":
+            communication_dict["Country"] = item[0][1]
+        elif item[0][0] == "Telephone number":
+            communication_dict["TelephoneNumber"] = \
+              item[0][1]
+        elif item[0][0] == "Fax number":
+            communication_dict["FaxNumber"] = \
+              item[0][1]
+    return communication_dict
+
+
 
 
 def _format_recommendations(recommended_resources):
@@ -791,7 +836,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
         # Step (2): add all top level facets without selected facet items at the
         # end (sorted by their facet IDs):
         for name, label, facet_id, _dummy in \
-		  [f for f in filter_labels if f[3] == 0]:
+          [f for f in filter_labels if f[3] == 0]:
             name_exact = '{0}_exact'.format(name)
             # only add facets without selected items in step (2)
             if not name_exact in sel_facets:
