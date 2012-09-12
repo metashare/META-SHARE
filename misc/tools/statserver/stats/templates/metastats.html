@@ -88,7 +88,7 @@ Show statistics for <select onchange="submit()" name="date">
 </select>
 <div class=font12>
 <input type="checkbox" name="showupnodes" onChange="javascript:submit()" 
-    {% if showupnodes == "on" %}
+    {% if not showupnodes or showupnodes == "on" %}
         checked="checked"
     {% endif %}
 /> Show running nodes only
@@ -119,7 +119,7 @@ Show statistics for <select onchange="submit()" name="date">
                 {% else %}
                     <img src="{{ media_prefix }}images/icon_error.gif" title="This node is down or some unexpected result to getting statistics occurred" width=16>               
                 {% endif %}
-                <a href='{{ host }}' target=_new><font color=blue><strong>{{ host.1 }}</strong></font></a>
+                <a href='{{ host.1 }}' target=_new><font color=blue><strong>{{ host.1 }}</strong></font></a>
                 {% if host.2 > 0 %}
                     <img src="{{ media_prefix }}images/icon_alert.gif" title="This node seems not valid." width=16>
                 {% endif %}
