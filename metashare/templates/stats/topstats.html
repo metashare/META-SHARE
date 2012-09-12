@@ -157,18 +157,17 @@ function addStatus(filter){
             {% endifequal %}
             > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Latest Queries
             
-            <option value='latestupdated' style="background-image: url({{ MEDIA_URL }}stats/img/update_icon.gif); background-repeat: no-repeat;"
-            {% ifequal view "latestupdated" %}
-                    selected
-            {% endifequal %}
-            > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Latest Updated Resources
-            
             <option value='topdownloaded' style="background-image: url({{ MEDIA_URL }}stats/img/download_icon.gif); background-repeat: no-repeat;"
             {% ifequal view "topdownloaded" %}
                     selected
             {% endifequal %}
             > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Top Downloaded Resources
             
+            <option value='latestupdated' style="background-image: url({{ MEDIA_URL }}stats/img/update_icon.gif); background-repeat: no-repeat;"
+            {% ifequal view "latestupdated" %}
+                    selected
+            {% endifequal %}
+            > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Latest Updated Resources
             </select>
 
             {% if countrycode != None and countrycode|length > 0 %}

@@ -74,12 +74,37 @@ div.recommended { background-color: orange }
 div.fieldvalues {background: #E6E6FA; 
     border: 1px solid #000; 
     float: right;
-    margin-top: 40px;
+    width: 540px;
     vertical-align: top}
 div.warning {background: lightyellow; 
     border: 1px solid #000; 
     position:relative; 
     width: 400px}
+    
+label.title {background-color: #fda;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 0;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 0;
+        color: #000;
+        font-size: 12px;
+        font-weight: 600;
+        margin-bottom: 0.3em;
+        margin-left: 10px;
+        margin-right: 5px;
+        padding-left: 4px;
+        width: 100%;
+        cursor: pointer;
+}
+
+label.component{
+        padding:3px;
+        background-color: #fff;
+        border-radius:10px;
+        font-size:12px;
+        color: #666;
+}
+
 
 /* checkable facets */
 a.deleteFilter:before {

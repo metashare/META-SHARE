@@ -119,14 +119,14 @@ function addStatus(filter){
     {% endif %}
     
             
-        <td nowrap>  
+        <td>  
         {% for class, fields in usage_fields.items %}
-            <a name="{{ class.split|join:"_" }}"></a>
             <!-- used values table -->
             {% if selected_class == fields.0.7 %}
+             <a name="fieldvalues"></a>
              {% if result != None and result|length > 0 %}
             <div id=fieldvalues class=fieldvalues>
-            <table border=1 valign=top>
+             <table border=1 valign=top>
                 <tr bgcolor=lightgray>
                     <th>[<a href="javascript:hidediv('fieldvalues');" title="Close"><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/cross.png"></a>]  &nbsp; used values for {{ selected_class }}/{{ selected_field }} values</th>
                     <th style="align: left" nowrap>value<br>counter</th>
@@ -141,28 +141,27 @@ function addStatus(filter){
                 </tr>
             {% endfor %}
             </table>
-            <script>
-                window.location = "#{{ class.split|join:"_" }}";</script>
             </div>
             {% endif %} 
             {% endif %} 
             <!-- end table -->
             
-            <div class="accordion"><a href="#" onclick="return false">{{ class }}</a></div> 
+            <a name="{{ class.split|join:"_" }}"></a>
+            <div id="{{ class.split|join:"_" }}" class="accordion"><a href="#" onclick="return false"><label class='component'>&nbsp;{{ class }}&nbsp;</label></a></div> 
             <div class="filter">
             {% for field in fields %}
-                <div>
+                <div style="width:100%">
                 {% if field.6 == "component" %}
-                    &nbsp;&nbsp;&nbsp;<img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/bullet_arrow_right.png">
-                    <a href="#{{ field.2 }}" style=""><p style="font-size:8pt;text-align:left;display:inline">{{ field.2 }}</p></a>
+                    &nbsp;&nbsp;&nbsp;<a href="javascript:scrollToAnchor('{{ field.2.split|join:"_" }}')"><label class='component'><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/bullet_arrow_right.png">
+                     {{ field.2 }}</label></a>
                 {% else %}
-                    &nbsp;&nbsp;<a name="{{ field.7 }}/{{ field.1 }}" href="javascript:getvalues('{{ field.7 }}','{{ field.1 }}')"
+                    &nbsp;&nbsp;<a href="javascript:getvalues('{{ field.7 }}','{{ field.1 }}')"
                     {% if selected_class == field.7 and selected_field == field.1 %}
                         class="addFilter"   
                     {% else %}
                         class="deleteFilter"
                     {% endif %}
-                    >&nbsp;{{ field.2 }}</a>&nbsp;
+                    ><label class='title'>&nbsp;{{ field.2 }}&nbsp;</label></a>&nbsp;
                 {% endif %}
                 
                 
@@ -194,5 +193,16 @@ function addStatus(filter){
         </td>
     </tr>
     <table>
+</div>
+
+    <script>
+    function scrollToAnchor(name) {
+        window.location = "#"+name;
+        setTimeout("window.scrollBy(0, -100)", 1);
+        document.getElementById(name).click();
+    }
+    scrollToAnchor("fieldvalues");
+    </script>
+            
 {% endif %} 
 {% endblock %}
