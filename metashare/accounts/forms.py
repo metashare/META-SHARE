@@ -1,6 +1,8 @@
 from django import forms
 from metashare.accounts.models import UserProfile, EditorGroupApplication, \
-    OrganizationApplication
+    OrganizationApplication, Organization, OrganizationManagers
+from django.conf import settings
+from django.contrib.admin import widgets
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext as _
@@ -180,10 +182,23 @@ class EditorGroupApplicationForm(ModelForm):
         self.fields['editor_group'].queryset = editor_group_qs
 
 
-class AddDefaultEditorGroupForm(ModelForm):
+class UpdateDefaultEditorGroupForm(ModelForm):
     """
-    Form used to add default editor groups.
+    Form used to update default editor groups.
     """
+    default_editor_groups = forms.ModelMultipleChoiceField([],
+        widget=widgets.FilteredSelectMultiple(_("default editor groups"),
+                                              is_stacked=False),
+        required=False)
+
+    class Media:
+        css = {
+            # required by the FilteredSelectMultiple widget
+            'all':['{}css/widgets.css'.format(settings.ADMIN_MEDIA_PREFIX)],
+        }
+        # required by the FilteredSelectMultiple widget
+        js = ['/{}admin/jsi18n/'.format(settings.DJANGO_BASE)]
+
     class Meta:
         """
         Meta class connecting to UserProfile object model.
@@ -192,36 +207,15 @@ class AddDefaultEditorGroupForm(ModelForm):
         exclude = ('user', 'modified', 'uuid', 'birthdate', 'affiliation', \
           'position', 'homepage')
 
-    def __init__(self, editor_group_qs, *args, **kwargs):
+    def __init__(self, available_editor_group, chosen_editor_group, *args, **kwargs):
         """
-        Initializes the `AddDefaultEditorGroupForm` with the editor groups
+        Initializes the `UpdateDefaultEditorGroupForm` with the editor groups
         of the given query set.
         """
-        super(AddDefaultEditorGroupForm, self).__init__(*args, **kwargs)
+        super(UpdateDefaultEditorGroupForm, self).__init__(*args, **kwargs)
         # If there is a list of editor groups, then modify the ModelChoiceField
-        self.fields['default_editor_groups'].queryset = editor_group_qs
-
-
-class RemoveDefaultEditorGroupForm(ModelForm):
-    """
-    Form used to remove default editor groups.
-    """
-    class Meta:
-        """
-        Meta class connecting to UserProfile object model.
-        """
-        model = UserProfile
-        exclude = ('user', 'modified', 'uuid', 'birthdate', 'affiliation', \
-          'position', 'homepage')
-
-    def __init__(self, editor_group_qs, *args, **kwargs):
-        """
-        Initializes the `RemoveDefaultEditorGroupForm` with the editor groups
-        of the given query set.
-        """
-        super(RemoveDefaultEditorGroupForm, self).__init__(*args, **kwargs)
-        # If there is a list of editor groups, then modify the ModelChoiceField
-        self.fields['default_editor_groups'].queryset = editor_group_qs
+        self.fields['default_editor_groups'].queryset = available_editor_group
+        self.fields['default_editor_groups'].initial = chosen_editor_group
 
 
 class OrganizationApplicationForm(ModelForm):
@@ -243,3 +237,29 @@ class OrganizationApplicationForm(ModelForm):
         super(OrganizationApplicationForm, self).__init__(*args, **kwargs)
         # If there is a list of organizations, then modify the ModelChoiceField
         self.fields['organization'].queryset = organization_qs
+
+
+class OrganizationForm(ModelForm):
+    """
+    Form used to render the add/change admin views for `Organization` model
+    instances.
+    """
+    class Meta:
+        model = Organization
+        widgets = {
+            'permissions': widgets.FilteredSelectMultiple(
+                Organization._meta.get_field('permissions').verbose_name, False)
+        }
+
+
+class OrganizationManagersForm(ModelForm):
+    """
+    Form used to render the add/change admin views for `OrganizationManagers`
+    model instances.
+    """
+    class Meta:
+        model = OrganizationManagers
+        widgets = {
+            'permissions': widgets.FilteredSelectMultiple(OrganizationManagers \
+                    ._meta.get_field('permissions').verbose_name, False)
+        }

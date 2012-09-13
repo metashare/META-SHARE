@@ -279,14 +279,16 @@ class EditorTest(TestCase):
                         if value in admin.site._registry:
                             model_url = key.lower()
                             url = ADMINROOT+"repository/{}/add/".format(model_url)
-                            print "For class {}, trying to access page {} ...".format(cls_name, url)
+                            LOGGER.debug("For class %s, trying to access page "
+                                         "%s ...", cls_name, url)
                             response = client.get(url, follow=True)
                             self.assertEquals(200, response.status_code)
                             num = num + 1
                         else:
-                            print 'Class {} has no registered admin form.'.format(cls_name)
+                            LOGGER.debug('Class %s has no registered admin '
+                                         'form.', cls_name)
                     print
-        print 'Checked models: {0}'.format(num)
+        LOGGER.debug('Checked models: %d', num)
 
     def test_manage_action_visibility(self):
         """
@@ -1558,7 +1560,7 @@ class EditorGroupApplicationTests(TestCase):
         """
         client = Client()
         client.login(username='editoruser', password='secret')
-        response = client.post('/{0}accounts/add_default_editor_groups/'.format(DJANGO_BASE), \
+        response = client.post('/{0}accounts/update_default_editor_groups/'.format(DJANGO_BASE), \
           {'editor_group': self.test_editor_group.pk}, follow=True)
         self.assertNotContains(response, 'You have successfully added default editor group "{}".'.format(self.test_editor_group),
           msg_prefix='expected the system to set an editor group as default.')
@@ -1569,10 +1571,10 @@ class EditorGroupApplicationTests(TestCase):
         """
         client = Client()
         client.login(username='editoruser', password='secret')
-        client.post('/{0}accounts/add_default_editor_groups/'.format(DJANGO_BASE), \
+        client.post('/{0}accounts/update_default_editor_groups/'.format(DJANGO_BASE), \
           {'editor_group': self.test_editor_group.pk}, follow=True)
-        response = client.post('/{0}accounts/remove_default_editor_groups/'.format(DJANGO_BASE), \
-          {'editor_group': self.test_editor_group.pk}, follow=True)
+        response = client.post('/{0}accounts/update_default_editor_groups/'.format(DJANGO_BASE), \
+          {'editor_group': []}, follow=True)
         self.assertNotContains(response, 'You have successfully removed default editor group "{}".'.format(self.test_editor_group),
           msg_prefix='expected the system to remove a default editor group.')
         

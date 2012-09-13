@@ -140,10 +140,11 @@ class NightlyTests(TestCase):
                     error_atts.append(path)
                 # TODO activate when single resource view is complete
                 #self.assertContains(response, xml_utils.html_escape(_ele.text))
-                
-        print "missing paths:"
-        for path in sorted(set(error_atts)):
-            print path
+
+        if LOGGER.isEnabledFor(logging.WARN):
+            LOGGER.warn("missing paths:")
+            for path in sorted(set(error_atts)):
+                LOGGER.warn(path)
         # enable indexing 
         test_utils.set_index_active(True)
         

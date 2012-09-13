@@ -1,0 +1,152 @@
+{% load email_protection %}
+{% load get_icon %}
+
+<img class='line' src="/site_media/images/line.png" />
+
+
+<label class='title component'>Contact Person:</label>
+<div class="dataline">
+	
+	{# Name, Surname and sex #}
+	<div>
+		<label class="dataline">
+			{% if contact_person_dict.Contact_person.Communication.Url %}
+				<a href="{{contact_person_dict.Contact_person.Communication.Url}}">
+			{% endif %}
+					{{ contact_person_dict.Contact_person.Given_name }}
+					{{ contact_person_dict.Contact_person.Surname }}
+			{% if contact_person_dict.Contact_person.Communication.Url %}
+				</a>
+			{% endif %}
+			{% if contact_person_dict.Contact_person.Sex == "Male" %}
+				{% get_icon "male" %}
+			{% else %}
+				{% if contact_person_dict.Contact_person.Sex == "Female" %}
+					{% get_icon "female" %}
+				{% endif %}
+			{% endif %}
+		</label>
+	</div>
+	<div>
+		<label class="dataline">
+			{{ contact_person_dict.Contact_person.Position }}
+		</label>
+	</div>
+	<div>
+		<label class="dataline">
+			{{ contact_person_dict.Contact_person.Affiliation.Department_name }}
+		</label>
+	</div>
+	<div>
+		<label class="dataline">
+			{{ contact_person_dict.Contact_person.Communication.Email }}
+		</label>
+	</div>
+	<div>
+		<label class="dataline">
+			{{ contact_person_dict.Contact_person.Communication.Address }}
+		</label>
+	</div>
+	<div>
+		<label class="dataline">
+			{{ contact_person_dict.Contact_person.Communication.Zip_code }}
+			{{ contact_person_dict.Contact_person.Communication.City }}
+		</label>
+	</div>
+	<div>
+		<label class="dataline">
+			{{ contact_person_dict.Contact_person.Communication.Region }}
+		</label>
+	</div>
+	<div>
+		<label class="dataline">
+			{{ contact_person_dict.Contact_person.Communication.Country }}
+		</label>
+	</div>
+	
+	{% if contact_person_dict.Contact_person.Communication.Telephone_number %}
+	<div>
+		<label class="dataline">
+			Tel.: {{ contact_person_dict.Contact_person.Communication.Telephone_number }}
+		</label>
+	</div>
+	{% endif %}
+	{% if contact_person_dict.Contact_person.Communication.Fax_number %}
+	<div>
+		<label class="dataline">
+			Fax: {{ contact_person_dict.Contact_person.Communication.Fax_number }}
+		</label>
+	</div>
+	{% endif %}
+	
+	<img class='line' src="/site_media/images/line.png" />
+
+	<div>
+		<label class="dataline">
+			{{ contact_person_dict.Contact_person.Affiliation.Department_name }}
+		</label>
+	</div>	
+	<div>
+		<label class="dataline">
+			{% if contact_person_dict.Contact_person.Affiliation.Url %}
+				<a href="{{communication_org_dict.Url}}">
+			{% endif %}
+					{{ contact_person_dict.Contact_person.Affiliation.Organization_name }}
+			{% if contact_person_dict.Contact_person.Affiliation.Url %}
+				</a>
+			{% endif %}
+		</label>
+	</div>
+	<div>
+		<label class="dataline">
+			{{ contact_person_dict.Contact_person.Affiliation.OrganizationShortName }}
+		</label>
+	</div>
+
+	<div>
+		<label class="dataline">
+			{{ contact_person_dict.Contact_person.Affiliation.Email }}
+		</label>
+	</div>
+	<div>
+		<label class="dataline">
+			{{ contact_person_dict.Contact_person.Affiliation.Communication.Address }}
+		</label>
+	</div>
+	<div>
+		<label class="dataline">
+			{{ contact_person_dict.Contact_person.Affiliation.Communication.ZipCode }}
+			{{ contact_person_dict.Contact_person.Affiliation.Communication.City }}
+		</label>
+	</div>
+	<div>
+		<label class="dataline">
+			{{ contact_person_dict.Contact_person.Affiliation.Communication.Region }}
+		</label>
+	</div>
+	<div>
+		<label class="dataline">
+			{{ contact_person_dict.Contact_person.Affiliation.Communication.Country }}
+		</label>
+	</div>
+	<div>
+		<label class="dataline">
+			{{ contact_person_dict.Contact_person.Affiliation.Communication.Email }}
+		</label>
+	</div>
+	{% if contact_person_dict.Contact_person.Affiliation.Communication.TelephoneNumber %}
+	<div>
+		<label class="dataline">
+			Tel.: {{ contact_person_dict.Contact_person.Affiliation.Communication.TelephoneNumber }}
+		</label>
+	</div>
+	{% endif %}
+	{% if contact_person_dict.Contact_person.Affiliation.Communication.FaxNumber %}
+	<div>
+		<label class="dataline">
+			Fax: {{ contact_person_dict.Contact_person.Affiliation.Communication.FaxNumber }}
+		</label>
+	</div>
+	{% endif %}	
+</div>
+
