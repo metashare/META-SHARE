@@ -1,7 +1,8 @@
 from django.core.urlresolvers import reverse
 from django.test.client import Client
 from metashare import test_utils, settings
-from metashare.recommendations.models import TogetherManager
+from metashare.recommendations.models import TogetherManager, ResourceCountPair, \
+    ResourceCountDict
 from metashare.recommendations.recommendations import Resource, \
     SessionResourcesTracker, get_more_from_same_creators,\
     get_more_from_same_projects
@@ -110,7 +111,23 @@ class SimpleTogetherManagerTest(django.test.TestCase):
         man.addResourcePair(self.res_1, self.res_2)
         self.assertEquals(2, man.getTogetherCount(self.res_1, self.res_2))
         self.assertEquals(2, man.getTogetherCount(self.res_2, self.res_1))
-
+        
+    def test_delete_deep(self):
+        """
+        tests that deep deleting a resource removes it from the counts
+        """
+        man = TogetherManager.getManager(Resource.VIEW)
+        self.assertEquals(0, man.getTogetherCount(self.res_1, self.res_2))
+        man.addResourcePair(self.res_1, self.res_2)
+        self.assertEquals(1, man.getTogetherCount(self.res_1, self.res_2))
+        self.assertEquals(2, len(ResourceCountPair.objects.all()))
+        self.assertEquals(2, len(ResourceCountDict.objects.all()))
+        self.res_1.delete_deep()
+        # after deep deletion, only on instance remains:
+        # the (empty) resource count dcitionary of res_2            
+        self.assertEquals(0, len(ResourceCountPair.objects.all()))
+        self.assertEquals(1, len(ResourceCountDict.objects.all()))
+        
 
 class TogetherManagerTest(django.test.TestCase):
     
@@ -209,6 +226,14 @@ class TogetherManagerTest(django.test.TestCase):
         self.assertEquals(self.res_3, sorted_res[0])
         self.assertEquals(self.res_4, sorted_res[1])
 
+    def test_delete_deep(self):
+        man = TogetherManager.getManager(Resource.VIEW)
+        sorted_res = man.getTogetherList(self.res_2, 0)
+        self.assertEqual(1, len(sorted_res))
+        self.res_1.delete_deep()
+        sorted_res = man.getTogetherList(self.res_2, 0)
+        self.assertEqual(0, len(sorted_res))
+
 
 class SessionResourcesTrackerTest(django.test.TestCase):
     
@@ -281,7 +306,7 @@ class SessionResourcesTrackerTest(django.test.TestCase):
         self.assertEquals(1, len(man.getTogetherList(self.res_3, 0)))
         self.assertEquals(1, len(man.getTogetherList(self.res_4, 0)))
         self.assertEquals(1, man.getTogetherCount(self.res_3, self.res_4))
-        
+       
         # test downloads:
         man = TogetherManager.getManager(Resource.DOWNLOAD)
         tracker.add_download(self.res_1, datetime.datetime(2012, 7, 16, 18, 0, 0))
@@ -310,6 +335,33 @@ class SessionResourcesTrackerTest(django.test.TestCase):
         self.assertEquals(1, len(man.getTogetherList(self.res_4, 0)))
         self.assertEquals(1, man.getTogetherCount(self.res_3, self.res_4))
 
+    def test_delete_deep(self):
+        
+        # test views:
+        man = TogetherManager.getManager(Resource.VIEW)
+        tracker = SessionResourcesTracker()
+        tracker.add_view(self.res_1, datetime.datetime(2012, 7, 16, 18, 0, 0))
+        tracker.add_view(self.res_2, datetime.datetime(2012, 7, 16, 18, 0, 1))
+        # both resources have been viewed 'together'
+        self.assertEquals(1, len(man.getTogetherList(self.res_1, 0)))
+        self.assertEquals(1, len(man.getTogetherList(self.res_2, 0)))
+        self.assertEquals(1, man.getTogetherCount(self.res_1, self.res_2))
+        # deep delete resource
+        self.res_1.delete_deep()
+        self.assertEquals(0, len(man.getTogetherList(self.res_2, 0)))
+        
+        # test downloads:
+        man = TogetherManager.getManager(Resource.DOWNLOAD)
+        tracker.add_download(self.res_3, datetime.datetime(2012, 7, 16, 18, 0, 0))
+        tracker.add_download(self.res_4, datetime.datetime(2012, 7, 16, 18, 0, 1))
+        # both resources have been downloaded 'together'
+        self.assertEquals(1, len(man.getTogetherList(self.res_3, 0)))
+        self.assertEquals(1, len(man.getTogetherList(self.res_4, 0)))
+        self.assertEquals(1, man.getTogetherCount(self.res_3, self.res_4))
+        # deep delete resource
+        self.res_3.delete_deep()
+        self.assertEquals(0, len(man.getTogetherList(self.res_4, 0)))
+        
 
 class SessionTest(django.test.TestCase):
     
