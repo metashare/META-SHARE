@@ -357,7 +357,6 @@ class SearchTestPublishedResources(TestCase):
         response = client.get(_SEARCH_PAGE_PATH,
             data={'selected_facets':'languageNameFilter_exact:Chinese'})
         self.assertEqual('repository/search.html', response.templates[0].name)
-        print response
         self.assertContains(response, "2 Language Resources", status_code=200)
              
     def testLanguageFacetForNoResults(self):   
@@ -402,7 +401,6 @@ class SearchTestPublishedResources(TestCase):
     #   response = client.get(_SEARCH_PAGE_PATH, follow=True, 
     #     data={'selected_facets':'licenceFilter_exact:ELRA_END_USER', 'selected_facets':'licenceFilter_exact:ELRA_VAR'})
     #   self.assertEqual('repository/search.html', response.templates[0].name)
-    #   print response
     #   self.assertContains(response, "1 Language Resource", status_code=200)
     
     
@@ -482,6 +480,5 @@ class SearchTestPublishedResources(TestCase):
         client = Client()
         response = client.get(_SEARCH_PAGE_PATH, follow=True, 
           data={'q':'recordingFree', 'selected_facets':'languageNameFilter_exact:Chinese'})
-        # print response
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)  
