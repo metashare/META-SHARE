@@ -7,13 +7,14 @@ import urllib
 import urllib2
 import contextlib
 import json
+import os
+import shutil
 from zipfile import ZipFile
 from StringIO import StringIO
-from metashare.storage.models import compute_digest_checksum
 from traceback import format_exc
-import os
 from metashare import settings
-import shutil
+from metashare.storage.models import compute_digest_checksum
+from metashare.stats.models import LRStats, UsageStats
 
 # Idea taken from 
 # http://stackoverflow.com/questions/5082128/how-do-i-authenticate-a-urllib2-script-in-order-to-access-https-web-services-fro
@@ -101,10 +102,18 @@ def remove_resource(storage_object):
     resource from the storage layer.
     """
     resource = storage_object.resourceinfotype_model_set.all()[0]
+
+    # delete associated statistic objects
+    for lrstat in LRStats.objects.filter(lrid=storage_object.identifier):
+        lrstat.delete()
+    for usagestat in UsageStats.objects.filter(lrid=resource.id):
+        usagestat.delete()
+
     folder = os.path.join(settings.STORAGE_PATH, storage_object.identifier)
     shutil.rmtree(folder)
     resource.delete_deep()
     storage_object.delete()
+
     
 class ConnectionException(Exception):
     pass
