@@ -53,7 +53,7 @@ GLOBAL_STORAGE_ATTS = ['source_url', 'identifier', 'created', 'modified',
 
 # attributes to be serialized in the local JSON of the storage object
 LOCAL_STORAGE_ATTS = ['digest_checksum', 'digest_modified', 
-  'digest_last_checked', 'copy_status']
+  'digest_last_checked', 'copy_status', 'source_node']
 
 
 def _validate_valid_xml(value):
@@ -174,6 +174,11 @@ class StorageObject(models.Model):
     publication_status = models.CharField(default=INTERNAL, max_length=1, choices=STATUS_CHOICES,
         help_text="Generalized publication status flag for this " \
         "storage object instance.")
+    
+    source_node = models.CharField(blank=True, null=True, max_length=32, editable=False, 
+      help_text="(Read-only) id of source node from which the resource " \
+        "originally stems as set in local_settings.py in CORE_NODES and " \
+        "PROXIED_NODES; empty if resource stems from this local node")
     
     deleted = models.BooleanField(default=False, help_text="Deletion " \
       "status flag for this storage object instance.")
