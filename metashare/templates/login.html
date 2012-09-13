@@ -12,12 +12,17 @@
 <h2>User Authentication</h2>
 <div class="content_box">
 <form class="form_helper" method="post" action="{% url metashare.views.login %}">
-{% csrf_token %}
-<table>
-  {{ form.as_table }}
-</table>
-<input class="button middle_button" style="margin-left:auto;margin-right:auto;" type="submit" value="Login" />
-<input type="hidden" name="next" value="{{ next }}" />  
+  {% csrf_token %}
+  <table>
+    {{ form.as_table }}
+    <tr>
+      <td></td>
+      <td>
+        <input class="button middle_button" type="submit" value="Login" />
+      </td>
+    </tr>
+  </table>
+  <input type="hidden" name="next" value="{{ next }}" />  
 </form>
 <p><a href="{% url metashare.accounts.views.reset %}">Forgotten your username or password? Click here to reset your password.</a></p>
 <p><a href="{% url metashare.accounts.views.create %}">Don&rsquo;t have an account, yet? Click here to create one.</a></p>

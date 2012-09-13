@@ -15,9 +15,7 @@ def read_langs(filename):
         return None
     
     file_hnd = os.open(filename, os.O_RDONLY)
-    data = os.read(file_hnd, 10000)
-    print data
-    xml_langs = XML(data)
+    xml_langs = XML(os.read(file_hnd, 10000))
     return xml_langs
 
 def read_languages():

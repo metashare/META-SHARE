@@ -104,6 +104,7 @@ div#content p, span{
 div#footer{
 	height: 10px; 
 	width: 827px;
+	text-align: center;
 	text-shadow: 0px 1px white;
 	font-weight: 600;
 	color: #BBBBBB;
