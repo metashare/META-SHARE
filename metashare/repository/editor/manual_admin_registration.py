@@ -3,6 +3,7 @@ This file contains the manually chosen admin forms, as needed for an easy-to-use
 editor.
 '''
 from django.contrib import admin
+from django.conf import settings
 
 from metashare.repository.editor import admin_site as editor_site
 from metashare.repository.editor.resource_editor import ResourceModelAdmin, \
@@ -27,8 +28,22 @@ from metashare.repository.models import resourceInfoType_model, \
     lexicalConceptualResourceVideoInfoType_model, \
     lexicalConceptualResourceImageInfoType_model, toolServiceInfoType_model, \
     licenceInfoType_model, personInfoType_model, projectInfoType_model, \
-    documentInfoType_model, organizationInfoType_model
+    documentInfoType_model, organizationInfoType_model, \
+    documentUnstructuredString_model
+from metashare.repository.editor.related_mixin import RelatedAdminMixin
+from django.views.decorators.csrf import csrf_protect
+from django.db import transaction
+from django.utils.decorators import method_decorator
+from django.contrib.admin.util import unquote
+from django.core.exceptions import PermissionDenied
+from django.utils.html import escape
+from django.utils.encoding import force_unicode
+from django.http import Http404
+from django.utils.safestring import mark_safe
+from django.contrib.admin import helpers
+from django.utils.translation import ugettext as _
 
+csrf_protect_m = method_decorator(csrf_protect)
 
 # Custom admin classes
 
@@ -66,6 +81,107 @@ class ProjectModelAdmin(SchemaModelAdmin):
 class DocumentModelAdmin(SchemaModelAdmin):
     exclude = ('source_url', 'copy_status')
 
+class DocumentUnstructuredStringModelAdmin(admin.ModelAdmin, RelatedAdminMixin):
+    def response_change(self, request, obj):
+        '''
+        Response sent after a successful submission of a change form.
+        We customize this to allow closing edit popups in the same way
+        as response_add deals with add popups.
+        '''
+        if '_popup_o2m' in request.REQUEST:
+            caller = None
+            if '_caller' in request.REQUEST:
+                caller = request.REQUEST['_caller']
+            return self.edit_response_close_popup_magic_o2m(obj, caller)
+        if '_popup' in request.REQUEST:
+            if request.POST.has_key("_continue"):
+                return self.save_and_continue_in_popup(obj, request)
+            return self.edit_response_close_popup_magic(obj)
+        else:
+            return super(DocumentUnstructuredStringModelAdmin, self).response_change(request, obj)
+
+    @csrf_protect_m
+    @transaction.commit_on_success
+    def change_view(self, request, object_id, extra_context=None):
+        """
+        The 'change' admin view for this model.
+        This follows closely the base implementation from Django 1.3's
+        django.contrib.admin.options.ModelAdmin,
+        with the explicitly marked modifications.
+        """
+        # pylint: disable-msg=C0103
+        model = self.model
+        opts = model._meta
+
+        obj = self.get_object(request, unquote(object_id))
+
+        if not self.has_change_permission(request, obj):
+            raise PermissionDenied
+
+        #### begin modification ####
+        # make sure that the user has a full session length time for the current
+        # edit activity
+        request.session.set_expiry(settings.SESSION_COOKIE_AGE)
+        #### end modification ####
+
+        if obj is None:
+            raise Http404(_('%(name)s object with primary key %(key)r does not exist.') % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
+
+        if request.method == 'POST' and "_saveasnew" in request.POST:
+            return self.add_view(request, form_url='../add/')
+
+        ModelForm = self.get_form(request, obj)
+        formsets = []
+        if request.method == 'POST':
+            form = ModelForm(request.POST, request.FILES, instance=obj)
+            if form.is_valid():
+                form_validated = True
+                new_object = self.save_form(request, form, change=True)
+            else:
+                form_validated = False
+                new_object = obj
+
+            if form_validated:
+                #### begin modification ####
+                self.save_model(request, new_object, form, change=True)
+                #### end modification ####
+
+                change_message = self.construct_change_message(request, form, formsets)
+                self.log_change(request, new_object, change_message)
+                return self.response_change(request, new_object)
+
+        else:
+            form = ModelForm(instance=obj)
+
+        #### begin modification ####
+        media = self.media or []
+        #### end modification ####
+        inline_admin_formsets = []
+
+        #### begin modification ####
+        adminForm = helpers.AdminForm(form, self.get_fieldsets(request, obj),
+            self.prepopulated_fields, self.get_readonly_fields(request, obj),
+            model_admin=self)
+        media = media + adminForm.media
+        #### end modification ####
+
+        context = {
+            'title': _('Change %s') % force_unicode(opts.verbose_name),
+            'adminform': adminForm,
+            'object_id': object_id,
+            'original': obj,
+            'is_popup': "_popup" in request.REQUEST or \
+                        "_popup_o2m" in request.REQUEST,
+            'media': mark_safe(media),
+            'inline_admin_formsets': inline_admin_formsets,
+            'errors': helpers.AdminErrorList(form, formsets),
+            'root_path': self.admin_site.root_path,
+            'app_label': opts.app_label,
+            'kb_link': settings.KNOWLEDGE_BASE_URL,
+            'comp_name': _('%s') % force_unicode(opts.verbose_name),
+        }
+        context.update(extra_context or {})
+        return self.render_change_form(request, context, change=True, obj=obj)
 
 # Models which are always rendered inline so they don't need their own admin form:
 purely_inline_models = (
@@ -105,7 +221,8 @@ custom_admin_classes = {
     personInfoType_model: PersonModelAdmin, 
     organizationInfoType_model: OrganizationModelAdmin, 
     projectInfoType_model: ProjectModelAdmin, 
-    documentInfoType_model: DocumentModelAdmin, 
+    documentInfoType_model: DocumentModelAdmin,
+    documentUnstructuredString_model: DocumentUnstructuredStringModelAdmin, 
 }
 
 def register():
@@ -120,7 +237,7 @@ def register():
     for modelclass, adminclass in custom_admin_classes.items():
         admin.site.unregister(modelclass)
         admin.site.register(modelclass, adminclass)
-    
+        
     # And finally, make sure that our editor has the exact same model/admin pairs registered:
     for modelclass, adminobject in admin.site._registry.items():
         editor_site.register(modelclass, adminobject.__class__)

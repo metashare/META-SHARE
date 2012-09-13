@@ -9,7 +9,7 @@ register = template.Library()
 
 class GetIcon(template.Node):
     """
-    Template tag that allows to display media types in result page template.    
+    Template tag that allows to display an icon in result page template.    
     """
     
     def __init__(self, context_var):
@@ -67,8 +67,17 @@ class GetIcon(template.Node):
             image_tag = image_tag + ' <img title="Language Description" src="{}css/sexybuttons/images/' \
               'icons/silk/script.png" />' \
               .format(MEDIA_URL)
-    
-
+        
+        if result == "male":
+            image_tag = image_tag + ' <img title="Male" src="{}css/sexybuttons/images/' \
+              'icons/silk/male.png" />' \
+              .format(MEDIA_URL)
+        
+        if result == "female":
+            image_tag = image_tag + ' <img title="Female" src="{}css/sexybuttons/images/' \
+              'icons/silk/female.png" />' \
+              .format(MEDIA_URL)
+        
         return image_tag
 
 def get_icon(parser, token):

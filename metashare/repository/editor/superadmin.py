@@ -16,7 +16,7 @@ from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_unicode
-from django.utils.html import escape
+from django.utils.html import escape, escapejs
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 from django.views.decorators.csrf import csrf_protect
@@ -158,21 +158,31 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         return result
 
 
+    def response_add(self, request, obj, post_url_continue='../%s/'):
+        if '_popup' in request.REQUEST:
+            if '_subclass' in request.REQUEST:
+                pk_value = obj._get_pk_val()
+                class_name = obj.__class__.__name__.lower()
+                return HttpResponse('<script type="text/javascript">opener.dismissAddAnotherPopup(window, "%s", "%s", "%s");</script>' % \
+                    # escape() calls force_unicode.
+                    (escape(pk_value), escapejs(obj), escapejs(class_name)))
+        return super(SchemaModelAdmin, self).response_add(request, obj, post_url_continue)
+    
     def response_change(self, request, obj):
         '''
         Response sent after a successful submission of a change form.
         We customize this to allow closing edit popups in the same way
         as response_add deals with add popups.
         '''
-        if '_popup' in request.REQUEST:
-            if request.POST.has_key("_continue"):
-                return self.save_and_continue_in_popup(obj, request)
-            return self.edit_response_close_popup_magic(obj)
-        elif '_popup_o2m' in request.REQUEST:
+        if '_popup_o2m' in request.REQUEST:
             caller = None
             if '_caller' in request.REQUEST:
                 caller = request.REQUEST['_caller']
             return self.edit_response_close_popup_magic_o2m(obj, caller)
+        elif '_popup' in request.REQUEST:
+            if request.POST.has_key("_continue"):
+                return self.save_and_continue_in_popup(obj, request)
+            return self.edit_response_close_popup_magic(obj)
         else:
             return super(SchemaModelAdmin, self).response_change(request, obj)
 
@@ -328,7 +338,8 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         context = {
             'title': _('Add %s') % force_unicode(opts.verbose_name),
             'adminform': adminForm,
-            'is_popup': "_popup" in request.REQUEST,
+            'is_popup': "_popup" in request.REQUEST or \
+                        "_popup_o2m" in request.REQUEST,
             'show_delete': False,
             'media': mark_safe(media),
             'inline_admin_formsets': inline_admin_formsets,
@@ -478,7 +489,8 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             'adminform': adminForm,
             'object_id': object_id,
             'original': obj,
-            'is_popup': "_popup" in request.REQUEST,
+            'is_popup': "_popup" in request.REQUEST or \
+                        "_popup_o2m" in request.REQUEST,
             'media': mark_safe(media),
             'inline_admin_formsets': inline_admin_formsets,
             'errors': helpers.AdminErrorList(form, formsets),

@@ -80,16 +80,17 @@
                 .append(
                     $('<a>')
                     .attr('href', '#')
-                    .button({
-                        icons: {
-                            primary: self.options.removeIcon
-                        },
-                        text: false
-                    })
+                    .append(
+                    	$('<img>')
+                    	.attr('src', window.__admin_media_prefix__ + 'img/admin/icon_deletelink.gif')
+                    	.attr('width', '10px')
+                    	.attr('height', '10px')
+                    	.attr('alt', 'Delete related model')
+                    )
                     .click(function() {
                         if(self.allowEditing)
                         {
-                        	var isSure = confirm("Are you sure you want to delete this item?");
+                        	var isSure = confirm("Are you sure you want to remove this item from the list?");
                         	if(!isSure)
                         	{
                         		return false;
@@ -104,7 +105,16 @@
             );
             self._handleAlignment();
             
-            if(self.allowEditing && (self.baseEditingUrl != null))
+            if(self.isSubclassable)
+            {
+                var modelClass = $(input).attr('model-class');
+                if(modelClass)
+                {
+                	var editingUrl = self.baseUrl + modelClass;
+                	$(input).attr('editing-url', editingUrl);
+                }
+            }
+            if(self.allowEditing && ((self.baseEditingUrl != null) || self.isSubclassable))
             {
                 jqItem.append(
                         $('<div>')
@@ -112,15 +122,25 @@
                         .append(
                             $('<a>')
                             .attr('href', '#')
-                            .button({
-                                icons: {
-                                    primary: self.options.editIcon
-                                },
-                                text: false
-                            })
+                           	.css('margin-right', '4px')
+                            .append(
+                            	$('<img>')
+                            	.attr('src', window.__admin_media_prefix__ + 'img/admin/icon_changelink.gif')
+                            	.attr('width', '10px')
+                            	.attr('height', '10px')
+                            	.attr('alt', 'Edit related model')
+                            )
                             .click(function() {
                                 var recId = $(input).attr('value');
-                                var link = self.baseEditingUrl + "/" + recId + "/";
+                                var link = null;
+                                if(self.isSubclassable)
+                                {
+                                    link = $(input).attr('editing-url') + "/" + recId + "/";
+                                }
+                                else
+                                {
+                                    link = self.baseEditingUrl + "/" + recId + "/";
+                                }
                                 var name = 'id_' + self.textName;
                                 showEditPopup(link, name, self);
                                 return false;
@@ -146,7 +166,8 @@
                             'name': self.hiddenName,
                             'value': item.id,
                             'title': item.value,
-                            'data-selectable-type': 'hidden-multiple'
+                            'data-selectable-type': 'hidden-multiple',
+                            'model-class': item.cls
                         });
                         $(input).after(newInput);
                         self._addDeckItem(newInput);
@@ -166,7 +187,9 @@
             input = this.element,
             data = $(input).data();
             self.allowNew = data.selectableAllowNew || data['selectable-allow-new'];
+            self.isSubclassable = data.selectableIsSubclassable || data['selectable-is-subclassable'];
             self.allowEditing = data.selectableAllowEditing || data['selectable-allow-editing'];
+            self.baseUrl = data.selectableBaseUrl || data['selectable-base-url'];
             self.baseEditingUrl = null;
             var jqParent = $(input).parent();
             var jqA = jqParent.find('a');
@@ -360,7 +383,7 @@ if (typeof(django) !== "undefined" && typeof(django.jQuery) !== "undefined") {
 /* Monkey-patch Django's dismissAddAnotherPopup(), if defined */
 if (typeof(dismissAddAnotherPopup) !== "undefined" && typeof(windowname_to_id) !== "undefined" && typeof(html_unescape) !== "undefined") {
     var django_dismissAddAnotherPopup = dismissAddAnotherPopup;
-    dismissAddAnotherPopup = function(win, newId, newRepr) {
+    dismissAddAnotherPopup = function(win, newId, newRepr, newClass) {
         /* See if the popup came from a selectable field.
            If not, pass control to Django's code.
            If so, handle it. */
@@ -373,9 +396,18 @@ if (typeof(dismissAddAnotherPopup) !== "undefined" && typeof(windowname_to_id) !
         if (singleWidget || multiWidget) {
             // newId and newRepr are expected to have previously been escaped by
             // django.utils.html.escape.
-            var item =  {
+            if(!newClass)
+            {
+            	/*
+            	 * Default value since, for this class, the model name
+            	 * will not be set on the server side.
+            	 */
+            	newClass = 'documentunstructuredstring_model'
+            }
+        	var item =  {
                 id: html_unescape(newId),
-                value: html_unescape(newRepr)
+                value: html_unescape(newRepr),
+                cls: html_unescape(newClass)
             };
             if (singleWidget) {
                 field.djselectable('select', item);

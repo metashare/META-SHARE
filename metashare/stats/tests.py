@@ -86,15 +86,15 @@ class StatsTest(django.test.TestCase):
                 saveLRStats(resource, action)
             self.assertEqual(len(getLRLast(action, 10)), 2)
         
-    def testTop10(self):
+    def testTopStats(self):
         """
-        Tries to load the top 10 page of the META-SHARE website
+        Tries to load the top stats page of the META-SHARE website.
         """
         client = Client()
         response = client.get('/{0}stats/top/'.format(DJANGO_BASE))
-        self.assertEqual('stats/topstats.html',
-          response.templates[0].name)
-            
+        self.assertTemplateUsed(response, 'stats/topstats.html')
+        self.assertContains(response,
+                            "Statistics about visiting this META-SHARE node")
 
     def testLatestQueries(self):
         """
@@ -106,7 +106,6 @@ class StatsTest(django.test.TestCase):
         client = Client()
         _url = "/{0}stats/top/?view=latestqueries".format(DJANGO_BASE)
         response = client.get(_url)
-        self.assertEquals(200, response.status_code)
         self.assertContains(response, 'Statistics about visiting')
         self.assertContains(response, 'http://')
         self.assertGreaterEqual(len(latest_query), 1)
