@@ -321,6 +321,14 @@ class EditorGroupApplicationAdmin(admin.ModelAdmin):
         return super(EditorGroupApplicationAdmin, self) \
             .get_readonly_fields(request, obj)
 
+    def queryset(self, request):
+        result = super(EditorGroupApplicationAdmin, self).queryset(request)
+        if request.user.is_superuser:
+            return result
+        # non-superusers may only see the applications that they may also handle
+        return result.filter(editor_group__name__in=
+                             request.user.groups.values_list('name', flat=True))
+
     # pylint: disable-msg=W0622
     def log_deletion(self, request, obj, object_repr):
         """
