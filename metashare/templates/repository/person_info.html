@@ -10,18 +10,18 @@
 	{# Name, Surname and sex #}
 	<div>
 		<label class="dataline">
-			{% if communication_person_dict.Url %}
-				<a href="{{communication_person_dict.Url}}">
+			{% if contact_person_dict.Contact_person.Communication.Url %}
+				<a href="{{contact_person_dict.Contact_person.Communication.Url}}">
 			{% endif %}
-					{{ contact_person_dict.GivenName }}
-					{{ contact_person_dict.Surname }}
-			{% if communication_person_dict.Url %}
+					{{ contact_person_dict.Contact_person.Given_name }}
+					{{ contact_person_dict.Contact_person.Surname }}
+			{% if contact_person_dict.Contact_person.Communication.Url %}
 				</a>
 			{% endif %}
-			{% if contact_person_dict.Sex == "Male" %}
+			{% if contact_person_dict.Contact_person.Sex == "Male" %}
 				{% get_icon "male" %}
 			{% else %}
-				{% if contact_person_dict.Sex == "Female" %}
+				{% if contact_person_dict.Contact_person.Sex == "Female" %}
 					{% get_icon "female" %}
 				{% endif %}
 			{% endif %}
@@ -29,52 +29,52 @@
 	</div>
 	<div>
 		<label class="dataline">
-			{{ contact_person_dict.Position }}
+			{{ contact_person_dict.Contact_person.Position }}
 		</label>
 	</div>
 	<div>
 		<label class="dataline">
-			{{ affiliation_dict.DepartmentName }}
+			{{ contact_person_dict.Contact_person.Affiliation.Department_name }}
 		</label>
 	</div>
 	<div>
 		<label class="dataline">
-			{{ communication_person_dict.Email }}
+			{{ contact_person_dict.Contact_person.Communication.Email }}
 		</label>
 	</div>
 	<div>
 		<label class="dataline">
-			{{ communication_person_dict.Adress }}
+			{{ contact_person_dict.Contact_person.Communication.Address }}
 		</label>
 	</div>
 	<div>
 		<label class="dataline">
-			{{ communication_person_dict.ZipCode }}
-			{{ communication_person_dict.City }}
+			{{ contact_person_dict.Contact_person.Communication.Zip_code }}
+			{{ contact_person_dict.Contact_person.Communication.City }}
 		</label>
 	</div>
 	<div>
 		<label class="dataline">
-			{{ communication_person_dict.Region }}
+			{{ contact_person_dict.Contact_person.Communication.Region }}
 		</label>
 	</div>
 	<div>
 		<label class="dataline">
-			{{ communication_person_dict.Country }}
+			{{ contact_person_dict.Contact_person.Communication.Country }}
 		</label>
 	</div>
 	
-	{% if communication_person_dict.TelephoneNumber %}
+	{% if contact_person_dict.Contact_person.Communication.Telephone_number %}
 	<div>
 		<label class="dataline">
-			Tel.: {{ communication_person_dict.TelephoneNumber }}
+			Tel.: {{ contact_person_dict.Contact_person.Communication.Telephone_number }}
 		</label>
 	</div>
 	{% endif %}
-	{% if communication_person_dict.FaxNumber %}
+	{% if contact_person_dict.Contact_person.Communication.Fax_number %}
 	<div>
 		<label class="dataline">
-			Fax: {{ communication_person_dict.FaxNumber }}
+			Fax: {{ contact_person_dict.Contact_person.Communication.Fax_number }}
 		</label>
 	</div>
 	{% endif %}
@@ -83,68 +83,68 @@
 
 	<div>
 		<label class="dataline">
-			{{ affiliation_dict.DepartmentName }}
+			{{ contact_person_dict.Contact_person.Affiliation.Department_name }}
 		</label>
 	</div>	
 	<div>
 		<label class="dataline">
-			{% if communication_org_dict.Url %}
+			{% if contact_person_dict.Contact_person.Affiliation.Url %}
 				<a href="{{communication_org_dict.Url}}">
 			{% endif %}
-					{{ affiliation_dict.OrganizationName }}
-			{% if communication_org_dict.Url %}
+					{{ contact_person_dict.Contact_person.Affiliation.Organization_name }}
+			{% if contact_person_dict.Contact_person.Affiliation.Url %}
 				</a>
 			{% endif %}
 		</label>
 	</div>
 	<div>
 		<label class="dataline">
-			{{ affiliation_dict.OrganizationShortName }}
+			{{ contact_person_dict.Contact_person.Affiliation.OrganizationShortName }}
 		</label>
 	</div>
 
 	<div>
 		<label class="dataline">
-			{{ communication_org_dict.Email }}
+			{{ contact_person_dict.Contact_person.Affiliation.Email }}
 		</label>
 	</div>
 	<div>
 		<label class="dataline">
-			{{ communication_org_dict.Address }}
+			{{ contact_person_dict.Contact_person.Affiliation.Communication.Address }}
 		</label>
 	</div>
 	<div>
 		<label class="dataline">
-			{{ communication_org_dict.ZipCode }}
-			{{ communication_org_dict.City }}
+			{{ contact_person_dict.Contact_person.Affiliation.Communication.ZipCode }}
+			{{ contact_person_dict.Contact_person.Affiliation.Communication.City }}
 		</label>
 	</div>
 	<div>
 		<label class="dataline">
-			{{ communication_org_dict.Region }}
+			{{ contact_person_dict.Contact_person.Affiliation.Communication.Region }}
 		</label>
 	</div>
 	<div>
 		<label class="dataline">
-			{{ communication_org_dict.Country }}
+			{{ contact_person_dict.Contact_person.Affiliation.Communication.Country }}
 		</label>
 	</div>
 	<div>
 		<label class="dataline">
-			{{ communication_org_dict.Email }}
+			{{ contact_person_dict.Contact_person.Affiliation.Communication.Email }}
 		</label>
 	</div>
-	{% if communication_org_dict.TelephoneNumber %}
+	{% if contact_person_dict.Contact_person.Affiliation.Communication.TelephoneNumber %}
 	<div>
 		<label class="dataline">
-			Tel.: {{ communication_org_dict.TelephoneNumber }}
+			Tel.: {{ contact_person_dict.Contact_person.Affiliation.Communication.TelephoneNumber }}
 		</label>
 	</div>
 	{% endif %}
-	{% if communication_org_dict.FaxNumber %}
+	{% if contact_person_dict.Contact_person.Affiliation.Communication.FaxNumber %}
 	<div>
 		<label class="dataline">
-			Fax: {{ communication_org_dict.FaxNumber }}
+			Fax: {{ contact_person_dict.Contact_person.Affiliation.Communication.FaxNumber }}
 		</label>
 	</div>
 	{% endif %}	
