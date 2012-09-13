@@ -28,6 +28,21 @@ def print_query_results(results):
             LOGGER.debug(u'No results')
     return
 
+def find_related_objects(inst):
+    inst_model = inst.__class__
+    inst_attrs = dir(inst_model)
+    rel_attrs = []
+    for attr in inst_attrs:
+        if attr.endswith('_related'):
+            rel_attrs.append(attr)
+    
+    count = 0
+    for attr in rel_attrs:
+        num = inst.__getattribute__(attr).values().count()
+        count = count + num
+    #print u'{0} (refs: {1})'.format(inst, count)
+    return count
+
 class PersonLookup(ModelLookup):
     model = personInfoType_model
 
