@@ -117,25 +117,27 @@ class StatsTest(django.test.TestCase):
         checking if there is at least one resource report available
         from the META-SHARE statistics server.
         """
-        print "Connecting... {0}".format(self.stats_server_url)
+        LOGGER.info("Connecting ... %s", self.stats_server_url)
         try:
             response = urllib2.urlopen(self.stats_server_url)
             self.assertEquals(200, response.code)
         except urllib2.URLError:
-            print 'WARNING! Failed contacting statistics server on %s' % self.stats_server_url
-        
+            LOGGER.warn('Failed to contact statistics server on %s',
+                        self.stats_server_url)
+
     def testAddNode(self):
         """
         checking if there is at least one resource report available
         from the META-SHARE statistics server.
         """
-        print "Connecting... {0}".format(self.stats_server_url)
+        LOGGER.info("Connecting ... %s", self.stats_server_url)
         try:
             response = urllib2.urlopen("{0}addnode?{1}".format(self.stats_server_url, urlencode({'url': DJANGO_URL})))
             self.assertEquals(200, response.code)
         except urllib2.URLError:
-            print 'WARNING! Failed contacting statistics server on %s' % self.stats_server_url
-        
+            LOGGER.warn('Failed to contact statistics server on %s',
+                        self.stats_server_url)
+
     def testGetDailyStats(self):
         """
         checking if there are the statistics of the day
@@ -228,8 +230,4 @@ class StatsTest(django.test.TestCase):
             _update_usage_stats(resource.id, resource.export_to_elementtree())
             
         response = client.get('/{0}stats/usage'.format(DJANGO_BASE))
-        if response.status_code != 200:
-            print Exception, 'could not get usage stats: {}'.format(response)
-        else:
-            self.assertContains(response, "identificationInfo")
-
+        self.assertContains(response, "identificationInfo")

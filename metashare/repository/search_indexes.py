@@ -343,12 +343,19 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         # we better recreate our resource instance from the DB as otherwise it
         # has happened for some reason that the instance was not up-to-date
         instance = self.get_model().objects.get(pk=instance.id)
-        if self.should_update(instance):
-            LOGGER.info("Resource #{0} scheduled for reindexing." \
+        # only create/update index entries of published resources
+        if instance.storage_object.publication_status == PUBLISHED:
+            LOGGER.info("Puiblished resource #{0} scheduled for reindexing." \
                         .format(instance.id))
-            super(resourceInfoType_modelIndex, self).update_object(instance,
-                                                                   using=using,
-                                                                   **kwargs)
+            super(resourceInfoType_modelIndex, self) \
+                .update_object(instance, using=using, **kwargs)
+        # make sure that there are no index entries for ingested/unpublished
+        # resources
+        elif instance.storage_object.publication_status == INGESTED:
+            LOGGER.info("Will now remove the ingested resource #{0} from the "
+                        "index if it is currently indexed.".format(instance.id))
+            super(resourceInfoType_modelIndex, self) \
+                .remove_object(instance, using=using, **kwargs)
 
     def _setup_save(self):
         """
