@@ -23,7 +23,7 @@ div#stats{
 	background-color: #EEEEEE;
 	float: right;
 	border-radius:7px;
-        box-shadow:0 3px 10px #CCCCCC, 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
+    box-shadow:0 3px 10px #CCCCCC, 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
 }
 
 .column{
@@ -53,10 +53,10 @@ div.right-corner{
 	border-top-left-radius: 10px;
 	border-top-right-radius: 0;
 	color: #555;
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: 600;
 	margin-bottom: 0.3em;
-	margin-left: 10px;
+	margin-left: 5px;
 	margin-right: 5px;
 	padding-left: 4px;
 	width: 100%;
@@ -67,12 +67,13 @@ label.component{
 	background-color: #fff;
 	color: #FF9900;
 	border-radius:10px;
-	font-size:12px;
+	font-size:14px;
 	display:block;
 }
 
 .title.component + .title.component{
-	margin-left:10px;
+	margin-left:5px;
+	font-size:15px;
 }
 
 .expandable{
@@ -102,8 +103,8 @@ label.component{
 	border-bottom-right-radius: 0;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
-        box-shadow:0 3px 10px #CCCCCC, 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
-	font-size: 12px;
+    box-shadow:0 3px 10px #CCCCCC, 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
+	font-size: 14px;
 	font-weight: 600;
 	margin-right: 1px;	
 	padding-top: 1px;
@@ -248,4 +249,9 @@ label span a{
 	color: #111111;
 	font-weight: normal;
 	padding-bottom:3px;
+}
+
+img.line{
+	width:273px;
+	height:20px;
 }
