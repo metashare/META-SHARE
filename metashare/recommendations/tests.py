@@ -1,3 +1,7 @@
+import datetime
+import django.test
+import shutil
+import logging
 from django.core.urlresolvers import reverse
 from django.test.client import Client
 from metashare import test_utils, settings
@@ -10,10 +14,9 @@ from metashare.repository import views
 from metashare.settings import ROOT_PATH, LOG_HANDLER
 from metashare.storage.models import PUBLISHED, INGESTED
 from metashare.test_utils import create_user
-import datetime
-import django.test
-import shutil
-import logging
+from metashare.stats.models import LRStats, UsageStats
+from metashare.sync.sync_utils import remove_resource
+from metashare.stats.model_utils import saveLRStats, UPDATE_STAT
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -123,7 +126,7 @@ class SimpleTogetherManagerTest(django.test.TestCase):
         self.assertEquals(2, len(ResourceCountPair.objects.all()))
         self.assertEquals(2, len(ResourceCountDict.objects.all()))
         self.res_1.delete_deep()
-        # after deep deletion, only on instance remains:
+        # after deep deletion, only one instance remains:
         # the (empty) resource count dcitionary of res_2            
         self.assertEquals(0, len(ResourceCountPair.objects.all()))
         self.assertEquals(1, len(ResourceCountDict.objects.all()))
@@ -386,6 +389,7 @@ class SessionTest(django.test.TestCase):
         Import test fixtures and add resource pairs to TogetherManager
         """
         test_utils.setup_test_storage()
+        test_utils.clean_stats()
         self.res_1 = _import_downloadable_resource('elra112.xml')
         self.res_2 = _import_downloadable_resource('elra135.xml')
         self.res_3 = _import_downloadable_resource('elra260.xml')
@@ -400,6 +404,7 @@ class SessionTest(django.test.TestCase):
         test_utils.clean_resources_db()
         test_utils.clean_storage()
         test_utils.clean_user_db()
+        test_utils.clean_stats()
         
     def test_views(self):
         # client 1 views all 4 resources
@@ -458,6 +463,18 @@ class SessionTest(django.test.TestCase):
         man = TogetherManager.getManager(Resource.DOWNLOAD)
         download_res = man.getTogetherList(self.res_1, 0)
         self.assertEqual(0, len(download_res))
+        
+        # make sure that statistics are updated when a resource is 
+        # completely removed
+        saveLRStats(self.res_1, UPDATE_STAT)
+        saveLRStats(self.res_2, UPDATE_STAT)
+        saveLRStats(self.res_3, UPDATE_STAT)
+        saveLRStats(self.res_4, UPDATE_STAT)
+        self.assertEquals(9, len(LRStats.objects.all()))
+        self.assertEquals(186, len(UsageStats.objects.all()))
+        remove_resource(self.res_1.storage_object)
+        self.assertEquals(7, len(LRStats.objects.all()))
+        self.assertEquals(139, len(UsageStats.objects.all()))
         
     def test_downloads(self):
         # client 1 downloads all 4 resources
