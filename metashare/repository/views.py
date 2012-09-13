@@ -483,20 +483,11 @@ def view(request, resource_name=None, object_id=None):
     contact_person_list, communication_person_list, affiliation_list, \
       communication_org_list = create_contact_person_list(contact_person_tuples)
     
-    print tuple2dict(contact_person_tuples)
+    contact_person_dicts = []
+    #convert contact_person_tuples to dictionaries
+    for item in contact_person_tuples:
+        contact_person_dicts.append(tuple2dict([item]))
     
-    
-    #print contact_person_list
-    #print communication_person_list
-    #print affiliation_list
-    #print communication_org_list
-
-    #    affiliation_list.append(affiliation_dict)
-    #print contact_person_list
-    #print communication_person_dict
-    #print affiliation_dict
-    #print affiliation_list
-    #print communication_org_dict
 
     # Define context for template rendering.
     context = { 'resource': resource,
@@ -522,6 +513,7 @@ def view(request, resource_name=None, object_id=None):
                 'url': url,
                 'metaShareId': metashare_id,
                 'contact_person_list': contact_person_list,
+                'contact_person_dicts': contact_person_dicts,
                 'communication_person_list' : communication_person_list,
                 'affiliation_list': affiliation_list,
                 'communication_org_list': communication_org_list,
@@ -573,39 +565,22 @@ def view(request, resource_name=None, object_id=None):
 
 def tuple2dict(_tuple):
     '''
-    Recursively converts a tuple to a dictionary.
+    Recursively converts a tuple into a dictionary.
     '''
     _dict = {}
     for item in _tuple:
-#        print item
-#        print item[0]
-#        print type(item[0])
-        #print item[1]
-        #print type(item[1])
-        
-        if type(item[0]) == StringType or type(item[0]) == UnicodeType:
-            if type(item[1]) == StringType or type(item[1]) == UnicodeType:
-                _dict[item[0]] = item[1]
-            else:
+        if (type(item) == TupleType or type(item) == ListType):
+            if (type(item[0]) == StringType or type(item[0]) == UnicodeType):
                 _dict[item[0]] = tuple2dict(item[1])
-        elif type(item[0]) == bool:
-            pass
-        else:
-            _dict[item[0]] = tuple2dict(item)
-    print _dict
+            else:
+                if (type(item[0]) == TupleType):
+                    if item[0][0] in _dict:
+                        _dict[item[0][0]] = " ".join([_dict[item[0][0]], 
+                                                            item[0][1]])
+                    else:
+                        _dict[item[0][0]] = item[0][1]
     return _dict
-#        print item
-#        if item.count(item) > 1:
-#            if not (isinstance(item[1], basestring) or isinstance(item[1], bool)):
-#                #print item
-#                tuple2dict(item)
-#            else:
-#                print item
-#                _dict[item[0]] = item[1]
-#        else:
-#            tuple2dict(item[0])
-
-
+                
 
 def create_contact_person_list(contact_persons_tuple):
     '''
