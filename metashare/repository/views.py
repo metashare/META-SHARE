@@ -4,7 +4,6 @@ from datetime import datetime
 from os.path import split, getsize
 from urllib import urlopen
 from mimetypes import guess_type
-from types import *
 
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
