@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  META-SHARE Search and Browse
+Search and Browse &ndash; META-SHARE 
 {% endblock %}
 
 {% block links %}
@@ -9,6 +9,7 @@
 {% endblock %}
 
 {% block content %}
+{% spaceless %}
 <script language="javascript">
 $(document).ready(function(){
   $("div.filter").each(function() {
@@ -69,11 +70,11 @@ function addStatus(filter){
   <form class="form_helper" id="searchbox" action="." method="get">
     {{ form.non_field_errors }}
 	<table>
-	  <tr><td class="logo"><img src="{{ MEDIA_URL }}images/keyvisual.png" width='200'  /></td>
-	  		<td>
-	       {{ form.q }}              
-	 		</td><td><input id="search_button" style="width:100px;" class="span-4 button middle_button" type="submit" value="Search" /></td>
-		</tr>
+	  <tr>
+        <td><img src="{{ MEDIA_URL }}images/keyvisual.png" /></td>
+	  	<td>{{ form.q }}</td>
+        <td><input id="search_button" class="button middle_button" type="submit" value="Search" /></td>
+      </tr>
 	</table>
   </form>
 </div>  
@@ -81,12 +82,12 @@ function addStatus(filter){
 
 <div class="left_box">
   <div class="filters">
-	  <h4>Filter by:</h4>
-	  <div id="searchFilters">
-	  {% for filter in filters %}
-	    {% include "repository/filter.html" with filter=filter %}
-	  {% endfor %}
-	  </div>
+    <h4>Filter by:</h4>
+    <div id="searchFilters">
+    {% for filter in filters %}
+      {% include "repository/filter.html" with filter=filter %}
+    {% endfor %}
+    </div>
   </div>
 
   <div class="explanation_box">
@@ -145,12 +146,12 @@ function addStatus(filter){
 
 <div class="content_box">          
 
-  <h3>{{ page.paginator.count }} Language Resource{{page.paginator.count|pluralize}} {% if page.paginator.num_pages > 1 %}(Page {{ page.number }}  of {{ page.paginator.num_pages }}) {% endif %}</h3>
+  <h3>{{ paginator.count }} Language Resource{{ paginator.count|pluralize }} {% if paginator.num_pages > 1 %}(Page {{ page.number }}  of {{ paginator.num_pages }}) {% endif %}</h3>
   
   {% if page.object_list %}
 
     <p>
-    {% if page.has_previous or page.has_next %}
+    {% if page.has_other_pages %}
       {% if page.has_previous %}<a href="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key = 'selected_facets' %}{% for facet in values %}&amp;selected_facets={{ facet|urlencode }}{% endfor %}{% endif %}{% if key = 'sort' %}&amp;sort={{values.0}}{% endif %}{% endfor %}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo;&nbsp;Previous{% if page.has_previous %}</a>{% endif %} |
       {% if page.has_next %}<a href="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key = 'selected_facets' %}{% for facet in values %}&amp;selected_facets={{ facet|urlencode }}{% endfor %}{% endif %}{% if key = 'sort' %}&amp;sort={{values.0}}{% endif %}{% endfor %}&amp;page={{ page.next_page_number }}">{% endif %}Next&nbsp;&raquo;{% if page.has_next %}</a>{% endif %}
     {% endif %}
@@ -176,7 +177,7 @@ function addStatus(filter){
     {% endfor %}
     </div>
 
-    {% if page.has_previous or page.has_next %}
+    {% if page.has_other_pages %}
       <p>
         {% if page.has_previous %}<a href="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key = 'selected_facets' %}{% for facet in values %}&amp;selected_facets={{ facet|urlencode }}{% endfor %}{% endif %}{% if key = 'sort' %}&amp;sort={{values.0}}{% endif %}{% endfor %}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo;&nbsp;Previous{% if page.has_previous %}</a>{% endif %} |
         {% if page.has_next %}<a href="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key = 'selected_facets' %}{% for facet in values %}&amp;selected_facets={{ facet|urlencode }}{% endfor %}{% endif %}{% if key = 'sort' %}&amp;sort={{values.0}}{% endif %}{% endfor %}&amp;page={{ page.next_page_number }}">{% endif %}Next&nbsp;&raquo;{% if page.has_next %}</a>{% endif %}
@@ -188,4 +189,5 @@ function addStatus(filter){
   {% endif %}
 
 </div>
+{% endspaceless %}
 {% endblock %}
