@@ -61,11 +61,14 @@
 /* usage metadata */
 div.coverage { 
     display: inline; 
-    border: 1px solid #777; 
-    margin-left: 1px; 
+    margin-left: 2px; 
     margin-right: 2px; 
-    -moz-border-radius: 15px; 
-    border-radius: 15px;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom: 1px solid #999; 
+    border-top: none; 
+    border-right: 1px solid #999; 
+    border-left: none; 
 }
 
 div.required { background-color: lightgreen }
@@ -90,11 +93,16 @@ label.title {background-color: #fda;
         font-size: 12px;
         font-weight: 600;
         margin-bottom: 0.3em;
-        margin-left: 10px;
+        margin-left: 0px;
         margin-right: 5px;
-        padding-left: 4px;
-        width: 100%;
-        cursor: pointer;
+        padding-left: 2px;
+}
+
+label.pointer {padding: 0px;
+    cursor: pointer;
+}
+
+label.indent {margin-left: 19px;
 }
 
 label.component{
@@ -103,6 +111,7 @@ label.component{
         border-radius:10px;
         font-size:12px;
         color: #666;
+        cursor: pointer
 }
 
 

@@ -17,6 +17,16 @@ function getvalues(classname, fieldname) {
     
     document.forms["getusagestats"].submit(); 
 }
+function expandAll () {
+    $("div.accordion").each(function(){
+            $(this).next("div.filter").show(); 
+    });
+}
+function collapseAll () {
+    $("div.accordion").each(function(){
+            $(this).next("div.filter").hide(); 
+    });
+}
 </script>
 
 <script language="javascript">
@@ -91,7 +101,6 @@ function addStatus(filter){
 </div>
 
 <div class="content_tab"> 
-
 {% if usage_fields != None %}
     <table width=100% bgcolor="white" valign=top>
     <tr><td colspan=2>
@@ -109,6 +118,9 @@ function addStatus(filter){
             <input type="hidden" name="field" id="fieldname" value="{{ selected_field }}">
         </form>
         <hr>
+        <div style="float: right"><a href="javascript:expandAll();">Expand all</a>
+            | <a href="javascript:collapseAll();">Collapse all</a></div>
+
     </td></tr>
     {% if errors != None %}
         <tr><td colspan=2>
@@ -119,7 +131,8 @@ function addStatus(filter){
     {% endif %}
     
             
-        <td>  
+        <tr><td> 
+        
         {% for class, fields in usage_fields.items %}
             <!-- used values table -->
             {% if selected_class == fields.0.7 %}
@@ -158,15 +171,16 @@ function addStatus(filter){
                     &nbsp;&nbsp;
                     {% if field.5 > 0 %}
                         <a href="javascript:getvalues('{{ field.7 }}','{{ field.1 }}')" 
+                        {% if selected_class == field.7 and selected_field == field.1 %}
+                            class="addFilter"> 
+                        {% else %}
+                            class="deleteFilter"> 
+                        {% endif %}
+                        <label class="title pointer">&nbsp;{{ field.2 }}&nbsp;</label></a>
                     {% else %}
-                        <a href="#" 
+                        <label class="title indent">&nbsp;{{ field.2 }}&nbsp;</label>
                     {% endif %}
-                    {% if selected_class == field.7 and selected_field == field.1 %}
-                        class="addFilter"   
-                    {% else %}
-                        class="deleteFilter"
-                    {% endif %}
-                    ><label class='title'>&nbsp;{{ field.2 }}&nbsp;</label></a>&nbsp;
+                   
                 {% endif %}
                 
                 

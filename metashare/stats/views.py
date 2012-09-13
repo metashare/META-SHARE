@@ -97,17 +97,17 @@ def usagestats (request):
         dbfields = getattr(mod, _model).__schema_fields__
         for _component, _field, _required in dbfields:
             model_name = _model.replace("Type_model","")
-            component_name = eval(u'{0}Type_model._meta.verbose_name'.format(model_name))
-                    
-            if (not _field.endswith('_set')):
-                if (not model_name+" "+_field in _fields):
+            component_name = eval(u'{0}._meta.verbose_name'.format(_model))
+            
+            if (_component in _classes):
+                if (not model_name+" "+_component in _fields):
+                    field_name = eval(u'{0}Type_model._meta.verbose_name'.format(_classes[_component]))
+                    _fields[model_name+" "+_component] = [component_name, _component, field_name, _required, 0, 0, "component", model_name]
+            else:
+               if (not model_name+" "+_field in _fields):
                     field_name = eval(u'{0}._meta.get_field("{1}").verbose_name'.format(_model, _field))
                     _fields[model_name+" "+_field] = [component_name, _field, field_name, _required, 0, 0, "field", model_name]            
-            else:
-                if (not model_name+" "+_component in _fields):
-                    field_name = eval(u'{0}Type_model._meta.verbose_name'.format(_component))
-                    _fields[model_name+" "+_component] = [component_name, _component, field_name, _required, 0, 0, "component", model_name]
-            
+             
     lrset = resourceInfoType_model.objects.all()
     usageset = UsageStats.objects.values('elname', 'elparent').annotate(Count('lrid', distinct=True), \
         Sum('count')).order_by('elparent', '-lrid__count', 'elname')        
@@ -122,12 +122,12 @@ def usagestats (request):
     if (len(usageset) > 0):
         for item in usageset:
             class_name = str(item["elparent"])
-            if class_name in _classes:
-                class_name = _classes[class_name]
+            #if class_name in _classes:
+            #    class_name = _classes[class_name]
             key = str(class_name) + " " + str(item["elname"])
             if key in _fields:
-                _fields[key][4] = item["lrid__count"]
-                _fields[key][5] = item["count__sum"]
+                _fields[key][4] += item["lrid__count"]
+                _fields[key][5] += item["count__sum"]
             #else:
              #   errors = "Unexpected error occured during usage statistics execution"
                 

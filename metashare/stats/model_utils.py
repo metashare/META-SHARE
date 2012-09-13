@@ -194,6 +194,7 @@ def _update_usage_stats(lrid, element_tree):
     if len(element_tree.getchildren()):
         for child in element_tree.getchildren():
             item = _update_usage_stats(lrid, child)
+            print "# " + str(element_tree.tag) + " " + str(child.tag)
             if (item == None or item[0] == None):
                 lrset = UsageStats.objects.filter(lrid=lrid, elparent=element_tree.tag, elname=child.tag)
                 if (lrset.count() > 1):
