@@ -563,15 +563,15 @@ def tuple2dict(_tuple):
     '''
     _dict = {}
     for item in _tuple:
-        if (type(item) == TupleType or type(item) == ListType):
-            if (type(item[0]) == StringType or type(item[0]) == UnicodeType):
+        if isinstance(item, tuple) or isinstance(item, list):
+            if isinstance(item[0], basestring):
                 # Replace spaces by underscores for template accessibility.
                 if item[0].find(" "):
                     _key = item[0].replace(" ", "_")
                 else: _key = item[0]
                 _dict[_key] = tuple2dict(item[1])
             else:
-                if (type(item[0]) == TupleType):
+                if isinstance(item[0], tuple):
                     # Replace spaces by underscores for template accessibility.
                     if item[0][0].find(" "):
                         _key = item[0][0].replace(" ", "_")
