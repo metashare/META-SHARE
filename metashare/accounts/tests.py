@@ -1,8 +1,9 @@
 import logging
 import django.test
+from django.contrib.admin.helpers import ACTION_CHECKBOX_NAME
 from django.contrib.admin.sites import LOGIN_FORM_KEY
 from django.contrib.auth import REDIRECT_FIELD_NAME
-from django.contrib.auth.models import User, Permission
+from django.contrib.auth.models import User, Permission, Group
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.test.client import Client
@@ -10,7 +11,9 @@ from django.test.client import Client
 from metashare import test_utils
 from metashare.accounts import views
 from metashare.accounts.models import RegistrationRequest, ResetRequest, \
-    EditorGroup, UserProfile, Organization
+    EditorGroup, UserProfile, Organization, EditorGroupApplication, \
+    EditorGroupManagers
+from metashare.repository.management import GROUP_GLOBAL_EDITORS
 from metashare.settings import DJANGO_BASE, LOG_HANDLER
 
 # Setup logging support.
@@ -522,5 +525,141 @@ class ChangePasswordTest(django.test.TestCase):
         # check that password has changed for user
         self.user = User.objects.get(username=self.user.username)
         self.assertNotEquals(old_passwd, self.user.password)
+
+
+class EditorGroupApplicationTest(django.test.TestCase):
+    """
+    A test case for `EditorGroupApplication`-related functionality.
+    """
+    app_url = "/{}accounts/editor_group_application/".format(DJANGO_BASE)
+    manage_url = "/{}admin/accounts/editorgroupapplication/".format(DJANGO_BASE)
+    editor_group_1 = None
+    editor_group_2 = None
+    manager_group_1 = None
+    manager_group_2 = None
+    manager_user_1 = None
+    manager_user_2 = None
+    superuser = None
+
+    @classmethod
+    def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
+        # create two test editor groups
+        EditorGroupApplicationTest.editor_group_1 = \
+            EditorGroup.objects.create(name='test_editor_group_1')
+        EditorGroupApplicationTest.editor_group_2 = \
+            EditorGroup.objects.create(name='test_editor_group_2')
+        # create two test managing editors groups
+        EditorGroupApplicationTest.manager_group_1 = \
+            EditorGroupManagers.objects.create(name='test_manager_group_1',
+                managed_group=EditorGroupApplicationTest.editor_group_1)
+        EditorGroupApplicationTest.manager_group_2 = \
+            EditorGroupManagers.objects.create(name='test_manager_group_2',
+                managed_group=EditorGroupApplicationTest.editor_group_2)
+        # create two test managing editor users for the two created groups
+        EditorGroupApplicationTest.manager_user_1 = \
+            test_utils.create_manager_user('manageruser1', 'mu@example.com',
+                'secret', (EditorGroupApplicationTest.editor_group_1,
+                           EditorGroupApplicationTest.manager_group_1))
+        EditorGroupApplicationTest.manager_user_2 = \
+            test_utils.create_manager_user('manageruser2', 'mu@example.com',
+                'secret', (EditorGroupApplicationTest.editor_group_2,
+                           EditorGroupApplicationTest.manager_group_2))
+        # create a test superuser
+        EditorGroupApplicationTest.superuser = User.objects.create_superuser(
+            'superuser', 'su@example.com', 'secret')
+
+    @classmethod
+    def tearDownClass(cls):
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
+
+    def setUp(self):
+        """
+        Sets up a test user and a `Client` with which to test.
+        """
+        self.normal_user = User.objects.create_user(
+            'normaluser', 'normal@example.com', 'secret')
+        self.client = Client()
+
+    def tearDown(self):
+        """
+        Clean up the test
+        """
+        self.normal_user.delete()
+        EditorGroupApplication.objects.all().delete()
+
+    def test_editor_permissions_are_assigned(self):
+        """
+        Verifies that a registered user who has not been an editor, yet, gets
+        all sufficient permissions for editing resources with a successul editor
+        group application.
         
-        
+        This test also verifies that an editor group manager can accept an
+        editor group application.
+        """
+        # create an editor group application as a normal user:
+        self.client.login(username=self.normal_user.username, password='secret')
+        response = self.client.post(EditorGroupApplicationTest.app_url,
+            {'editor_group': EditorGroupApplicationTest.editor_group_1.pk},
+            follow=True)
+        self.assertContains(response,
+            'You have successfully applied for editor group')
+        self.assertContains(response,
+            EditorGroupApplicationTest.editor_group_1.name)
+        eg_applications = EditorGroupApplication.objects.all()
+        self.assertEqual(eg_applications.count(), 1)
+        # accept the application from a manager account:
+        self.client.logout()
+        self.client.login(
+            username=EditorGroupApplicationTest.superuser.username,
+            password='secret')
+        response = self.client.post(EditorGroupApplicationTest.manage_url,
+            {"action": "accept_selected",
+             ACTION_CHECKBOX_NAME: eg_applications[0].pk}, follow=True)
+        self.assertContains(response, 'You have successfully accepted')
+        self.assertContains(response, '0 editor group applications')
+        # verify that the normal user has all required permissions for editing
+        # language resources:
+        self.normal_user.has_perms(['{}.{}'.format(app, name) for app, name
+            in Group.objects.get(name=GROUP_GLOBAL_EDITORS).permissions \
+                .values_list('content_type__app_label', 'codename')])
+
+
+    def test_only_superuser_and_manager_can_see_group_applications(self):
+        """
+        Verifies that only superusers and managing editor users can see editor
+        group applications.
+        """
+        # create a test editor group application:
+        EditorGroupApplication.objects.create(user=self.normal_user,
+            editor_group=EditorGroupApplicationTest.editor_group_1)
+        # make sure that a normal user cannot see the editor group applications
+        # list:
+        self.client.login(
+            username=self.normal_user.username, password='secret')
+        response = self.client.get(
+            EditorGroupApplicationTest.manage_url, follow=True)
+        if response.status_code == 200:
+            self.assertNotContains(response, "editor group application")
+        else:
+            self.assertEqual(response.status_code, 403)
+        # make sure that non-authorized manager user cannot see "foreign" editor
+        # group applications; they must still be able to see the list:
+        self.client.login(
+            username=self.manager_user_2.username, password='secret')
+        response = self.client.get(
+            EditorGroupApplicationTest.manage_url, follow=True)
+        self.assertContains(response, '0 editor group applications')
+        # make sure that an authorized manager user can see his editor group
+        # applications:
+        self.client.login(
+            username=self.manager_user_1.username, password='secret')
+        response = self.client.get(
+            EditorGroupApplicationTest.manage_url, follow=True)
+        self.assertContains(response, '1 editor group application')
+        # make sure that a superuser can see all editor group applications:
+        self.client.login(
+            username=self.superuser.username, password='secret')
+        response = self.client.get(
+            EditorGroupApplicationTest.manage_url, follow=True)
+        self.assertContains(response, '1 editor group application')
