@@ -160,17 +160,17 @@ from {0}supermodel import SchemaModel, SubclassableModel, \\
   _make_choices_from_int_list
 from {0}editor.widgets import MultiFieldWidget
 from {0}fields import MultiTextField, MetaBooleanField, \\
-  MultiSelectField, DictField, best_lang_value_retriever
+  MultiSelectField, DictField, XmlCharField, best_lang_value_retriever
 from {0}validators import validate_lang_code_keys, \\
-  validate_dict_values, validate_xml_schema_year
-
+  validate_dict_values, validate_xml_schema_year, \\
+  validate_matches_xml_char_production
+from metashare.settings import DJANGO_BASE, LOG_HANDLER, DJANGO_URL
+from metashare.stats.model_utils import saveLRStats, DELETE_STAT
 from metashare.storage.models import StorageObject, MASTER, COPY_CHOICES
 
-from metashare.settings import DJANGO_BASE, LOG_LEVEL, LOG_HANDLER, DJANGO_URL
 
 # Setup logging support.
-logging.basicConfig(level=LOG_LEVEL)
-LOGGER = logging.getLogger('metashare.repository.models')
+LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 
 EMAILADDRESS_VALIDATOR = RegexValidator(r'[^@]+@[^\.]+\..+',
@@ -338,6 +338,14 @@ TOP_LEVEL_TYPE_EXTRA_CODE_TEMPLATE = '''
         
         # Call save() method from super class with all arguments.
         super(resourceInfoType_model, self).save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        """
+        Overrides the predefined delete() method to update the statistics.
+        """
+        saveLRStats(self, DELETE_STAT)
+        # Call delete() method from super class with all arguments.
+        super(resourceInfoType_model, self).delete(*args, **kwargs)
 
     def get_absolute_url(self):
         return '/{0}{1}'.format(DJANGO_BASE, self.get_relative_url())
@@ -752,9 +760,11 @@ class Clazz(object):
         if name == 'metaShareId':
             options += 'default="NOT_DEFINED_FOR_V2", '
         
-        # cfedermann: MetaBooleanField and MultiSelectField don't need the
-        # models. prefix as they are custom fields imported from repository.fields.
-        if field_name in ('MetaBooleanField', 'MultiSelectField'):
+        # XmlCharField, MetaBooleanField and MultiSelectField don't need the
+        # "models." prefix as they are custom fields imported from
+        # "metashare.repository.fields".
+        if field_name in ('XmlCharField', 'MetaBooleanField',
+                          'MultiSelectField'):
             self.wrtmodels('    %s = %s(%s)\n' % ( name, field_name, options, ))
         else:
             self.wrtmodels('    %s = models.%s(%s)\n' % ( name, field_name, options, ))
@@ -857,9 +867,11 @@ class Clazz(object):
                 choice_options = "max_length={}, ".format(maxlen)
 
                 if not member.is_unbounded():
-                    self.generate_simple_field(name, 'CharField',
+                    self.generate_simple_field(name, 'XmlCharField',
                       options + choice_options, '')
                 else:
+                    if not 'validators=' in options:
+                        options += 'validators=[validate_matches_xml_char_production], '
                     self.wrtmodels(
                       '    %s = MultiTextField(%swidget=MultiFieldWidget('
                       'widget_id=%d, max_length=%s), %s)\n' % (

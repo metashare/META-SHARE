@@ -24,6 +24,8 @@ class EncryptEmail(template.Node):
         Renders a given email address as obfuscated JavaScript code.
         """
         email_address = self.context_var.resolve(context)
+        # Clean up the white space in the email address, if any
+        email_address = email_address.strip()
         email_id = 'e' + str(randrange(1, 999999999))
         
         character_set = '+-.0123456789@ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghi' \

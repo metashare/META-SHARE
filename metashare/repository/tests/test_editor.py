@@ -1558,7 +1558,7 @@ class EditorGroupApplicationTests(TestCase):
         """
         client = Client()
         client.login(username='editoruser', password='secret')
-        response = client.post('/{0}accounts/add_default_editor_groups/'.format(DJANGO_BASE), \
+        response = client.post('/{0}accounts/update_default_editor_groups/'.format(DJANGO_BASE), \
           {'editor_group': self.test_editor_group.pk}, follow=True)
         self.assertNotContains(response, 'You have successfully added default editor group "{}".'.format(self.test_editor_group),
           msg_prefix='expected the system to set an editor group as default.')
@@ -1569,10 +1569,10 @@ class EditorGroupApplicationTests(TestCase):
         """
         client = Client()
         client.login(username='editoruser', password='secret')
-        client.post('/{0}accounts/add_default_editor_groups/'.format(DJANGO_BASE), \
+        client.post('/{0}accounts/update_default_editor_groups/'.format(DJANGO_BASE), \
           {'editor_group': self.test_editor_group.pk}, follow=True)
-        response = client.post('/{0}accounts/remove_default_editor_groups/'.format(DJANGO_BASE), \
-          {'editor_group': self.test_editor_group.pk}, follow=True)
+        response = client.post('/{0}accounts/update_default_editor_groups/'.format(DJANGO_BASE), \
+          {'editor_group': []}, follow=True)
         self.assertNotContains(response, 'You have successfully removed default editor group "{}".'.format(self.test_editor_group),
           msg_prefix='expected the system to remove a default editor group.')
         
