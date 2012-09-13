@@ -566,7 +566,7 @@ def tuple2dict(_tuple):
     for item in _tuple:
         if isinstance(item, tuple) or isinstance(item, list):
             if isinstance(item[0], basestring):
-                # Replace spaces by underscores for template accessibility.
+                # Replace spaces by underscores for component names.
                 if item[0].find(" "):
                     _key = item[0].replace(" ", "_")
                 else: 
@@ -587,12 +587,12 @@ def tuple2dict(_tuple):
                     _dict[_key] = tuple2dict(item[1])
             else:
                 if isinstance(item[0], tuple):
-                    # Replace spaces by underscores for template accessibility.
+                    # Replace spaces by underscores for element names.
                     if item[0][0].find(" "):
                         _key = item[0][0].replace(" ", "_")
                     else: _key = item[0][0]
-                    # If the key already exists, then concatenate the old
-                    # value with the new one, adding a space in between.
+                    # If a repeatable element is found, the old value is
+                    # concatenated with the new one, adding a space in between.
                     if _key in _dict:
                         print _key
                         _dict[_key] = " ".join([_dict[_key], item[0][1]])
