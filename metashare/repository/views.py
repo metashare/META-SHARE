@@ -483,7 +483,8 @@ def view(request, resource_name=None, object_id=None):
     #convert contact_person_tuples to dictionaries
     for item in contact_person_tuples:
         contact_person_dicts.append(tuple2dict([item]))
-        
+    
+    print tuple2dict([lr_content])
 
     # Define context for template rendering.
     context = { 'resource': resource,
@@ -561,25 +562,43 @@ def tuple2dict(_tuple):
     in templates.
     '''
     _dict = {}
+    count_dict = {}
     for item in _tuple:
         if isinstance(item, tuple) or isinstance(item, list):
             if isinstance(item[0], basestring):
                 # Replace spaces by underscores for template accessibility.
                 if item[0].find(" "):
                     _key = item[0].replace(" ", "_")
-                else: _key = item[0]
-                _dict[_key] = tuple2dict(item[1])
+                else: 
+                    _key = item[0]
+                if _key in _dict:
+                    # If a repeatable component is found, a customized 
+                    # dictionary is added, since no duplicate key names
+                    # are allowed. We keep a dictionary with counts and
+                    # add a new entry in the original dictionary in the 
+                    # form <component>_<no_of_occurences>
+                    if not _key in count_dict:
+                        count_dict[_key] = 1
+                    else:
+                        count_dict[_key] += 1
+                    new_key = "_".join([_key, str(count_dict[_key])])
+                    _dict[new_key] = tuple2dict(item[1])
+                else:
+                    _dict[_key] = tuple2dict(item[1])
             else:
                 if isinstance(item[0], tuple):
                     # Replace spaces by underscores for template accessibility.
                     if item[0][0].find(" "):
                         _key = item[0][0].replace(" ", "_")
                     else: _key = item[0][0]
-                    # if the key already exists, then concatenate the old
+                    # If the key already exists, then concatenate the old
                     # value with the new one, adding a space in between.
                     if _key in _dict:
+                        print _key
                         _dict[_key] = " ".join([_dict[_key], item[0][1]])
                     else:
+                        #print _key
+                        #print item[0][1]
                         _dict[_key] = item[0][1]
     return _dict
 
