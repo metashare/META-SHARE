@@ -153,12 +153,15 @@ var update_language_name = function(element)
 	}
 }
 
-var autocomp_my_string = function(element)
+var autocomp_my_string = function(elem)
 {
+	var element = autocomp_jquery(elem);
 	var itemList = _lang_code_list;
 	element.autocomplete({
 		select: function(event, ui)
 		{
+			element.val(ui.item.value);
+			element.keyup();
 		},
 		source: itemList,
 		minLength: 0
@@ -175,12 +178,16 @@ var autocomp_my_string = function(element)
 		var a = autocomp_jquery(this);
 		update_language_name(a);
 	});
+	element.change(function(){
+		var a = autocomp_jquery(this);
+		update_language_name(a);
+	});
 	update_language_name(element);
 }
 
 autocomp_jquery(document).ready(function(){
 	$('input.lang_autocomplete').each(function(index){
-		var elem = $(this);
+		var elem = this;
 		autocomp_my_string(elem);
 	});
 });
