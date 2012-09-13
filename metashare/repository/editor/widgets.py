@@ -577,6 +577,8 @@ class LangAutoCompleteWidget(widgets.Widget):
     def render(self, name, value):
         if not value:
             value = u''
-        res = u'<input type="text" class="lang_autocomplete" name="{0}" value="{1}"/>'.format(name, value)
+        res1 = u'<input type="text" class="lang_autocomplete" name="{0}" value="{1}"/>'.format(name, value)
+        res2 = u'<input type="text" class="lang_name" readonly="readonly" for="{0}" value=""/>'.format(name)
+        res = res1 + res2
         res = mark_safe(res)
         return res

@@ -137,8 +137,23 @@ var autocomp_multi = function(fieldType, containerId, elementId, linkedElementId
 	};
 }
 
+var update_language_name = function(element)
+{
+	var val = element.val();
+	var name = element.attr('name');
+	var nameEl = autocomp_jquery('input[for=' + name + ']');
+	var langVal = _lang_code_to_name[val];
+	if(langVal)
+	{
+		nameEl.val(langVal);
+	}
+	else
+	{
+		nameEl.val('');
+	}
+}
 
-var autocomp_my_string= function(element)
+var autocomp_my_string = function(element)
 {
 	var itemList = _lang_code_list;
 	element.autocomplete({
@@ -156,6 +171,11 @@ var autocomp_my_string= function(element)
 		.append(autocomp_jquery("<a></a>")["text"](itemText)).
 		appendTo(ul);
 	};
+	element.keyup(function(){
+		var a = autocomp_jquery(this);
+		update_language_name(a);
+	});
+	update_language_name(element);
 }
 
 autocomp_jquery(document).ready(function(){
