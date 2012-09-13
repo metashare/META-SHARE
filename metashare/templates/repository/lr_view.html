@@ -13,7 +13,9 @@
 
 {% block keywords %}{{ resourceType }}, {{ mediaTypes|join:", " }}, {{ linguality_infos|join:", " }}, {{ resource.distributionInfo.get_availability_display }}, {{ license_types|join:", " }}{% endblock %}
 
+
 {% block content %}
+{% spaceless %}
 	<script type="text/javascript" src="http://plugins.learningjquery.com/expander/jquery.expander.js"></script>
 	<script type="text/javascript">
 		$(function () {
@@ -149,9 +151,11 @@
 	</div>
 	
 		<div class="white_box column corner">
-          {% include "repository/detailed_component.html" with lr_content=distribution_info_tuple %}
-
-          {% include "repository/person_info.html" %}
+			{% include "repository/detailed_component.html" with lr_content=distribution_info_tuple %}
+			
+			{% for contact_person in contact_person_dicts %}
+			     {% include "repository/person_info.html" with contact_person_dict=contact_person %}
+			{% endfor %}
 
 		</div>
 		
@@ -255,5 +259,6 @@
 		</div>
 
 {% include "repository/recomm_view.html" %}
-
+{% endspaceless %}
 {% endblock %}
+
