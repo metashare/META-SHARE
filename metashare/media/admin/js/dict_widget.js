@@ -29,13 +29,18 @@
         var successor = $(this).parent();
         var list = successor.parent();
         var newEntry = $('<li/>').append(list.next().contents().clone(true));
-        newEntry.find('input,textarea').each(function() {
-            $(this).attr('name',
-              $(this).attr('name') + (list.children().length - 1));
+        var fieldName;
+        newEntry.find('input:not(.lang_name),textarea').each(function() {
+            fieldName = $(this).attr('name') + (list.children().length - 1);
+        	$(this).attr('name', fieldName);
           });
         newEntry.find('input.lang_autocomplete').each(function(){
         	var elem = autocomp_jquery(this);
         	autocomp_my_string(elem);
+        });
+        newEntry.find('input.lang_name').each(function(){
+        	var elem = autocomp_jquery(this);
+        	elem.attr('for', fieldName);
         });
         successor.before(newEntry);
         list.find('a.kvPairDeleteButton').removeClass('kvPairDeleteButtonHidden');
