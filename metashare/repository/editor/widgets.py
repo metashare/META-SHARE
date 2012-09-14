@@ -175,7 +175,8 @@ class LangDictWidget(DictWidget):
         from the JavaScript of `DictWidget` and CSS specific to this widget.
         """
         # pylint: disable-msg=E1101
-        return DictWidget().media['js'] \
+        return Media(js = ('{}js/lang_dict_widget.js'\
+                           .format(settings.ADMIN_MEDIA_PREFIX),)) \
             + Media(css={'all': ('{}css/lang_dict_widget.css'.format(
                                         settings.ADMIN_MEDIA_PREFIX),)})
     media = property(_media)
