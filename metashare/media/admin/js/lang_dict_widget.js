@@ -3,11 +3,11 @@
     // add handlers to the delete buttons:
     $('a.kvLangPairDeleteButton').click(function() {
         var liToRemove = $(this).parent();
-        liToRemove.nextAll().find('input:not(.lang_name),textarea').each(function(){
+        liToRemove.nextAll().find('input,textarea').each(function(){
             $(this).attr('name', $(this).attr('name').replace(
                 /(\d+)$/, function(s, n) {return parseInt(n) - 1;}));
           });
-        liToRemove.nextAll().find('input.lang_name').each(function(){
+        liToRemove.nextAll().find('span.lang_name').each(function(){
             $(this).attr('for', $(this).attr('for').replace(
                 /(\d+)$/, function(s, n) {return parseInt(n) - 1;}));
           });
@@ -42,7 +42,7 @@
         
         var newEntry = $('<li/>').append(list.next().contents().clone(true));
         var fieldName;
-        newEntry.find('input:not(.lang_name),textarea').each(function() {
+        newEntry.find('input,textarea').each(function() {
             var name = $(this).attr('name') + (list.children().length - 1);
             if(name.indexOf('key_') == 0)
             {
@@ -50,7 +50,7 @@
             }
         	$(this).attr('name', name);
           });
-        newEntry.find('input.lang_name').each(function(){
+        newEntry.find('span.lang_name').each(function(){
         	var elem = autocomp_jquery(this);
         	elem.attr('for', fieldName);
         });

@@ -141,16 +141,14 @@ var update_language_name = function(element)
 {
 	var val = element.val();
 	var name = element.attr('name');
-	var nameEl = autocomp_jquery('input[for=' + name + ']');
+	var nameEl = autocomp_jquery('span[for=' + name + ']');
 	var langVal = _lang_code_to_name[val];
+	var textVal = '';
 	if(langVal)
 	{
-		nameEl.val(langVal);
+		textVal = '(' + langVal + ')';
 	}
-	else
-	{
-		nameEl.val('');
-	}
+	nameEl.text(textVal);
 }
 
 var autocomp_my_string = function(elem)
