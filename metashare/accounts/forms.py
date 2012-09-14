@@ -1,6 +1,7 @@
 from django import forms
 from metashare.accounts.models import UserProfile, EditorGroupApplication, \
-    OrganizationApplication, Organization, OrganizationManagers
+    OrganizationApplication, Organization, OrganizationManagers, EditorGroup, \
+    EditorGroupManagers
 from django.conf import settings
 from django.contrib.admin import widgets
 from django.contrib.auth.models import User
@@ -237,6 +238,30 @@ class OrganizationApplicationForm(ModelForm):
         super(OrganizationApplicationForm, self).__init__(*args, **kwargs)
         # If there is a list of organizations, then modify the ModelChoiceField
         self.fields['organization'].queryset = organization_qs
+
+
+class EditorGroupForm(ModelForm):
+    """
+    Form used to render the add/change admin views for `EditorGroup` model
+    instances.
+    """
+    class Meta:
+        model = EditorGroup
+        widgets = {
+            'permissions': forms.widgets.MultipleHiddenInput
+        }
+
+
+class EditorGroupManagersForm(ModelForm):
+    """
+    Form used to render the add/change admin views for `EditorGroupManagers`
+    model instances.
+    """
+    class Meta:
+        model = EditorGroupManagers
+        widgets = {
+            'permissions': forms.widgets.MultipleHiddenInput
+        }
 
 
 class OrganizationForm(ModelForm):
