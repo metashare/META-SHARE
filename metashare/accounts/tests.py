@@ -571,6 +571,7 @@ class EditorGroupApplicationTest(django.test.TestCase):
 
     @classmethod
     def tearDownClass(cls):
+        test_utils.clean_user_db()
         LOGGER.info("finished '{}' tests".format(cls.__name__))
 
     def setUp(self):
