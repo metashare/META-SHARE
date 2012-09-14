@@ -6,15 +6,27 @@
 <link rel="stylesheet" href="{{ MEDIA_URL }}/css/results.css" type="text/css" media="screen" />
 
 <script>
+function showdiv (id) {
+    obj = document.getElementById(id)
+    if (obj.style.visibility == 'hidden') {
+        obj.style.visibility = 'visible';
+        obj.style.display = '';
+    } else {
+        obj.style.visibility = 'hidden'; 
+        obj.style.display = 'none';
+    }
+    return
+}
+
 function closetabvals( id ) { 
     document.getElementById(id).style.visibility = 'hidden';
     document.getElementById(id).style.display = 'none';
-    obj = document.getElementById('classname').value='';
+    document.getElementById('classname').value='';
     document.getElementById('fieldname').value='';
-    
 }
+
 function getvalues(classname, fieldname) {
-    obj = document.getElementById('classname').value=classname;
+    document.getElementById('classname').value=classname;
     document.getElementById('fieldname').value=fieldname;
     
     document.forms["getusagestats"].submit(); 
@@ -107,8 +119,8 @@ function addStatus(filter){
 
 <div class='tab-container'>
  <ul class='etabs'>
-   <li class='tab'><a href="{% url metashare.views.frontpage %}stats/top/">Statistics about visiting this META-SHARE node</a></li>
-   <li class='tab tab-nobr'>Statistics about resource metadata</li>
+   <li class='tab'><a href="{% url metashare.views.frontpage %}stats/top/">META-SHARE node visits statistics</a></li>
+   <li class='tab tab-nobr'>Statistics on resource metadata</li>
    {% if user.username and myres %}
         <li class='tab'><a href="{% url metashare.views.frontpage %}stats/mystats/">My resources</a></li>
    {% endif %}
@@ -119,7 +131,9 @@ function addStatus(filter){
 {% if usage_fields != None %}
     <form id="getusagestats" action="." method="POST">           
         <div id="subtab">
-      <div id="colsubtab"><br><h4>Filter by:</h4></div>
+        <div id="section">
+      <div id="colsubtab"><br><h4>Filter by: <img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/help.png" style="cursor: pointer" onclick="showdiv('filtershelp')"></h4></div>  
+      <div id="filtershelp" class=warning style="visibility: hidden; display: none">The filters show:<br>1. Metadata status: the number beside each category: presents the sum of components defined by the system.<br>2. Metadata usage:<br> - at least one : presents the sum of components which have been used in resources.<br> -	never used: presents the sum of components which have not been used in resources.<br><br>You could select from the two filters to have more specific statistics.</div>
       <div id="colsubtab"><div class="accordion">Metadata status</div>
                 {% for filter, counter in usage_filter.items %}
                    {% if filter in 'required recommended optional' %}
@@ -146,7 +160,7 @@ function addStatus(filter){
                    {% endif %}                  
                 {% endfor %}</div>
     </div>
-        
+        </div>
         <input type="hidden" name="class" id="classname" value="{{ selected_class }}">
         <input type="hidden" name="field" id="fieldname" value="{{ selected_field }}">
         <input type="hidden" name="expandall" id="expandall" value="{{ expand_all }}">
@@ -163,7 +177,7 @@ function addStatus(filter){
     {% endif %}
     
        
-        {% for class, fields in usage_fields.items %}
+        {% for class, fields in usage_fields %}
             <!-- used values table -->
             {% if selected_class == fields.0.7 %}
              <a name="fieldvalues"></a>

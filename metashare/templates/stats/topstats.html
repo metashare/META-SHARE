@@ -128,17 +128,16 @@ function addStatus(filter){
 
 <div class='tab-container'>
  <ul class='etabs'>
-   <li class='tab tab-nobr'>Statistics about visiting this META-SHARE node</li>
-    <li class='tab'><a href="{% url metashare.views.frontpage %}stats/usage/">Statistics about resource metadata</a></li>
+   <li class='tab tab-nobr'>META-SHARE node visits statistics</li>
+    <li class='tab'><a href="{% url metashare.views.frontpage %}stats/usage/">Statistics on resource metadata</a></li>
    {% if user.username and myres %}
         <li class='tab'><a href="{% url metashare.views.frontpage %}stats/mystats/">My resources</a></li>
    {% endif %}   
  </ul>
 </div>
 
-
 <div class="content_tab"> 
-	<div style="margin-left: 20px; padding-bottom: 10px">
+	<div style="margin-left: 20px; padding-top: 15px; padding-bottom: 10px">
 	    <form class="form_helper" name="topform" id="topform" action="{% url metashare.views.frontpage %}stats/top/" method="get">
             Show the <select style="color: #000; background: #eee" name='view' onchange="topform.submit();">
             
@@ -169,16 +168,9 @@ function addStatus(filter){
             {% endifequal %}
             > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Latest Updated Resources
             </select>
-
-            {% if countrycode != None and countrycode|length > 0 %}
-                from {{ countryname }} <img height=20 src="{{ MEDIA_URL }}css/international_flags/iso/32x32/flag-{{ countrycode|lower }}.png">
-            {% endif %}         
         </form>
      </div>
 
-     {% if topdata|length <= 0 %}
-        <center><strong>No data found</strong></center>
-{% else %}
     {% if not "late" in view or geovisits|length > 0 %}
     <div class="left_box">
 	  <div class="filters" 
@@ -191,15 +183,15 @@ function addStatus(filter){
                     {% for date in list.split %} 
                         <div>
                         {% ifequal date last %}
-                            <a href="?view={{ view }}" class="addFilter">
+                            <a href="?view={{ view }}&country={{ countrycode }}" class="addFilter">
                         {% else %}
-                            <a href="?view={{ view }}&last={{ date }}" class="deleteFilter">
+                            <a href="?view={{ view }}&last={{ date }}&country={{ countrycode }}" class="deleteFilter">
                         {% endifequal %}
                         last {{ date }}</a></div>
                     {% endfor %}
                 {% endwith %}
             </div>
-        </div>    
+            
 	    {% endif %}
 	    
 	    {% if geovisits|length > 0 %}
@@ -208,9 +200,9 @@ function addStatus(filter){
                 {% for geoinfo in geovisits %}
                 <div>
                         {% ifequal geoinfo.0 countrycode %}
-                            <a href="?view={{ view }}" class="addFilter">
+                            <a href="?view={{ view }}&last={{ last }}" class="addFilter">
                         {% else %}
-                            <a href="?view={{ view }}&country={{ geoinfo.0 }}" class="deleteFilter">
+                            <a href="?view={{ view }}&country={{ geoinfo.0 }}&last={{ last }}" class="deleteFilter">
                         {% endifequal %}
                         {{ geoinfo.2 }} 
                         <img height=20 src="{{ MEDIA_URL }}css/international_flags/iso/32x32/flag-{{ geoinfo.0|lower }}.png"></a>
@@ -219,14 +211,18 @@ function addStatus(filter){
                 </div>
                 {% endfor %}
             </div>
-           <div id="googlemap" style="margin-left: -20px"></div>
+         <div id="googlemap" style="margin-left: -20px"></div>
             <div style="font-size:7pt;text-align:left">* This product includes GeoLite data created by MaxMind, available from http://maxmind.com/ and a Google Maps chart.</div>   
        
          {% endif %}   
        </div>  
+       </div>  
     </div>
     {% endif %}
    	
+     {% if topdata|length <= 0 %}
+        <center><strong>No data found</strong></center>
+{% else %}
 	<div class="content_box">   
     <div class="results" >
        
