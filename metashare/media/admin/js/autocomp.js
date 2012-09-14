@@ -137,4 +137,55 @@ var autocomp_multi = function(fieldType, containerId, elementId, linkedElementId
 	};
 }
 
+var update_language_name = function(element)
+{
+	var val = element.val();
+	var name = element.attr('name');
+	var nameEl = autocomp_jquery('span[for=' + name + ']');
+	var langVal = _lang_code_to_name[val];
+	var textVal = '';
+	if(langVal)
+	{
+		textVal = '(' + langVal + ')';
+	}
+	nameEl.text(textVal);
+}
 
+var autocomp_my_string = function(elem)
+{
+	var element = autocomp_jquery(elem);
+	var itemList = _lang_code_list;
+	element.autocomplete({
+		select: function(event, ui)
+		{
+			element.val(ui.item.value);
+			element.keyup();
+		},
+		source: itemList,
+		minLength: 0
+	}).data("autocomplete")._renderItem = function(ul, item){
+		var itemText;
+		var langName = _lang_code_to_name[item.label];
+		itemText = item.label + " - " + langName;
+		var a = autocomp_jquery('<li></li>')
+		.data("item.autocomplete", item)
+		.append(autocomp_jquery("<a></a>")["text"](itemText)).
+		appendTo(ul);
+	};
+	element.keyup(function(){
+		var a = autocomp_jquery(this);
+		update_language_name(a);
+	});
+	element.change(function(){
+		var a = autocomp_jquery(this);
+		update_language_name(a);
+	});
+	update_language_name(element);
+}
+
+autocomp_jquery(document).ready(function(){
+	$('input.lang_autocomplete').each(function(index){
+		var elem = this;
+		autocomp_my_string(elem);
+	});
+});
