@@ -6,13 +6,13 @@
 
   <div><a href="?q={{ query|urlencode }}{% for target in item.targets %}&amp;selected_facets={{ target|urlencode }}{% endfor %}{% for key, values in request.GET.iterlists %}{% if key = 'sort' %}&amp;sort={{values.0}}{% endif %}{% endfor %}" class="removableFacet{% if filter.subresults %} subfacet{% endif %}">{{ item.label }}</a>&nbsp;({{ item.count }})</div>
 	{% for subresult in item.subresults %}
-      <div class="subresult accordion">&nbsp;&nbsp;<a href="#">{{ subresult.label }}</a></div>
+      <div class="subresult accordion"><a href="#">{{ subresult.label }}</a></div>
       <div class="filter sub">
       {% for subitem in subresult.removable %}
-  	    <div class="subitem">&nbsp;&nbsp;<a href="?q={{ query|urlencode }}{% for target in subitem.targets %}&amp;selected_facets={{ target|urlencode }}{% endfor %}{% for key, values in request.GET.iterlists %}{% if key = 'sort' %}&amp;sort={{values.0}}{% endif %}{% endfor %}" class="removableFacet">{{ subitem.label }}</a>&nbsp;({{ subitem.count }})</div>
+  	    <div class="subitem"><a href="?q={{ query|urlencode }}{% for target in subitem.targets %}&amp;selected_facets={{ target|urlencode }}{% endfor %}{% for key, values in request.GET.iterlists %}{% if key = 'sort' %}&amp;sort={{values.0}}{% endif %}{% endfor %}" class="removableFacet">{{ subitem.label }}</a>&nbsp;({{ subitem.count }})</div>
 	  {% endfor %}
 	  {% for subitem in subresult.addable %}
-	    <div class="subitem">&nbsp;&nbsp;<a href="?q={{ query|urlencode }}{% for target in subitem.targets %}&amp;selected_facets={{ target|urlencode }}{% endfor %}{% for key, values in request.GET.iterlists %}{% if key = 'sort' %}&amp;sort={{values.0}}{% endif %}{% endfor %}" class="addableFacet">{{ subitem.label }}</a>&nbsp;({{ subitem.count }})</div>
+	    <div class="subitem"><a href="?q={{ query|urlencode }}{% for target in subitem.targets %}&amp;selected_facets={{ target|urlencode }}{% endfor %}{% for key, values in request.GET.iterlists %}{% if key = 'sort' %}&amp;sort={{values.0}}{% endif %}{% endfor %}" class="addableFacet">{{ subitem.label }}</a>&nbsp;({{ subitem.count }})</div>
       {% endfor %}
       </div>
     {% endfor %}

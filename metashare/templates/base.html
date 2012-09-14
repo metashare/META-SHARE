@@ -1,13 +1,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 {% load analytical %}
 {% load adminmedia %}
+{% spaceless %}
 <html lang="en">
   <head>
     {% analytical_head_top %}
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>{% spaceless %}{% block title %}META-SHARE{% endblock %}{% endspaceless %}</title>
     <meta name="description" content="{% spaceless %}{% block description %}META-SHARE: a sustainable network of repositories of language resources documented with high-quality metadata, allowing for uniform search and access to resources.{% endblock %}{% endspaceless %}" />
-    <meta name="keywords" content="{% spaceless %}{% block keywords %}META-SHARE, language resources, language tools, META-NET{% endblock %}{% endspaceless %}" /> 
+    <meta name="keywords" content="{% spaceless %}{% block keywords %}META-SHARE, language resources, language tools, META-NET{% endblock %}{% endspaceless %}" />
     <link rel="shortcut icon" href="{{ MEDIA_URL }}images/favicon.ico" />
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/blueprint/screen.css" type="text/css" media="screen, projection">
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/blueprint/print.css" type="text/css" media="print">
@@ -20,7 +21,7 @@
     <link href='http://fonts.googleapis.com/css?family=Rokkitt' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Cantarell:regular,italic,bold,bolditalic&v1' rel='stylesheet' type='text/css'>
     {% block links %}{% endblock %}{% analytical_head_bottom %}
-  </head>    
+  </head>
   <body>
     {% analytical_body_top %}
     {% block header %}
@@ -37,10 +38,11 @@
         {% endif %}
       </div>
       {% block content %}{% endblock %}
-    </div>        
+    </div>
   </div>
   {% include "footer.html" %}
   <script type="text/javascript">addFormHelper()</script>
   {% analytical_body_bottom %}
   </body>
 </html>
+{% endspaceless %}

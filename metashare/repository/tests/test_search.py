@@ -12,7 +12,7 @@ from metashare import test_utils, settings
 from metashare.repository import views
 from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER
 from metashare.stats.models import LRStats
-from metashare.storage.models import INGESTED
+from metashare.storage.models import INGESTED, PUBLISHED
 from metashare.test_utils import create_user
 
 # Setup logging support.
@@ -46,7 +46,7 @@ class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
         self.assert_index_is_empty()
         # import a single resource and save it in the DB
         resource = test_utils.import_xml(SearchIndexUpdateTests.RES_PATH_1)
-        resource.storage_object.publication_status = INGESTED
+        resource.storage_object.publication_status = PUBLISHED
         resource.storage_object.save()
         # make sure the import has automatically changed the search index
         self.assertEqual(SearchQuerySet().count(), 1,
@@ -54,7 +54,7 @@ class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
             "have changed and contain that resource.")
         # import another resource and save it in the DB
         resource = test_utils.import_xml(SearchIndexUpdateTests.RES_PATH_2)
-        resource.storage_object.publication_status = INGESTED
+        resource.storage_object.publication_status = PUBLISHED
         resource.storage_object.save()
         # make sure the import has automatically changed the search index
         self.assertEqual(SearchQuerySet().count(), 2,
@@ -127,7 +127,7 @@ class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
         self.assert_index_is_empty()
         # import a single resource and save it in the DB
         resource = test_utils.import_xml(SearchIndexUpdateTests.RES_PATH_1)
-        resource.storage_object.publication_status = INGESTED
+        resource.storage_object.publication_status = PUBLISHED
         resource.storage_object.save()
         # make sure the import has automatically changed the search index
         self.assertEqual(SearchQuerySet().count(), 1,
@@ -166,18 +166,6 @@ class SearchTest(test_utils.IndexAwareTestCase):
     def importOneFixture(self):
         _currfile = '{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
         test_utils.import_xml_or_zip(_currfile)
-         
-    def importIngestedFixtures(self):
-        _path = '{}/repository/test_fixtures/ingested/'.format(ROOT_PATH)
-        files = os.listdir(_path)   
-        for filename in files:
-            fullpath = os.path.join(_path, filename)  
-            successes, failures = test_utils.import_xml_or_zip(fullpath)
-            if successes:                
-                successes[0].storage_object.publication_status = 'g'
-                successes[0].storage_object.save()    
-            if failures:
-                print failures
 
     def test_view_count_visible_and_updated_in_search_results(self):
         """
@@ -312,8 +300,7 @@ class SearchTest(test_utils.IndexAwareTestCase):
           data={'q':'Italian'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
-    
-     
+
     def testSearchForNoResults(self):        
         client = Client()
         self.importOneFixture()
@@ -322,22 +309,14 @@ class SearchTest(test_utils.IndexAwareTestCase):
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "No results were found for search query", status_code=200)
 
-    def test_normal_user_doesnt_see_ingested_LR(self):
-        client = Client()
-        client.login(username='normaluser', password='secret')
-        self.importIngestedFixtures()
-        response = client.get(_SEARCH_PAGE_PATH, follow=True, 
-          data={'q':'INGESTED'})
-        self.assertEqual('repository/search.html', response.templates[0].name)
-        self.assertContains(response, "No results were found for search query", status_code=200)
-           
-    def test_anonymous_doesnt_sees_ingested_LR(self):
-        client = Client()
-        self.importIngestedFixtures()
-        response = client.get(_SEARCH_PAGE_PATH, follow=True, 
-          data={'q':'INGESTED'})
-        self.assertEqual('repository/search.html', response.templates[0].name)
-        self.assertContains(response, "No results were found for search query", status_code=200)
+    def test_ingested_LRs_are_not_indexed(self):
+        test_res = test_utils.import_xml('{}/repository/test_fixtures/ingested/'
+            'ingested-corpus-AudioVideo-French.xml'.format(ROOT_PATH))
+        test_res.storage_object.publication_status = INGESTED
+        test_res.storage_object.save()
+        response = Client().get(_SEARCH_PAGE_PATH, data={'q': 'INGESTED'})
+        self.assertTemplateUsed(response, 'repository/search.html')
+        self.assertContains(response, "No results were found for search query")
 
 
 class SearchTestPublishedResources(TestCase):
@@ -378,7 +357,6 @@ class SearchTestPublishedResources(TestCase):
         response = client.get(_SEARCH_PAGE_PATH,
             data={'selected_facets':'languageNameFilter_exact:Chinese'})
         self.assertEqual('repository/search.html', response.templates[0].name)
-        print response
         self.assertContains(response, "2 Language Resources", status_code=200)
              
     def testLanguageFacetForNoResults(self):   
@@ -423,7 +401,6 @@ class SearchTestPublishedResources(TestCase):
     #   response = client.get(_SEARCH_PAGE_PATH, follow=True, 
     #     data={'selected_facets':'licenceFilter_exact:ELRA_END_USER', 'selected_facets':'licenceFilter_exact:ELRA_VAR'})
     #   self.assertEqual('repository/search.html', response.templates[0].name)
-    #   print response
     #   self.assertContains(response, "1 Language Resource", status_code=200)
     
     
@@ -503,6 +480,5 @@ class SearchTestPublishedResources(TestCase):
         client = Client()
         response = client.get(_SEARCH_PAGE_PATH, follow=True, 
           data={'q':'recordingFree', 'selected_facets':'languageNameFilter_exact:Chinese'})
-        # print response
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)  

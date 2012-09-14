@@ -69,7 +69,7 @@ class ModelTest(TestCase):
         for _model in _models:
             if hasattr(sys.modules['metashare.repository.models'], _model):
                 _inst = getattr(sys.modules['metashare.repository.models'], _model)
-                print "Testing rollback for {}...".format(_model)
+                LOGGER.info("Testing rollback for %s ...", _model)
                 if _database[_model] != _inst.objects.count():
                     errors.append(_model)
         
