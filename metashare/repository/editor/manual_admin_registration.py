@@ -72,7 +72,7 @@ class CorpusAudioModelAdmin(SchemaModelAdmin):
 
 class PersonModelAdmin(AdminRelatedInfo, SchemaModelAdmin):
     exclude = ('source_url', 'copy_status')
-    list_display = ('instance_data', 'related_objects')
+    list_display = ('instance_data', 'num_related_resources', 'related_resources')
     
     def instance_data(self, obj):
         return obj.__unicode__()
@@ -82,7 +82,7 @@ class PersonModelAdmin(AdminRelatedInfo, SchemaModelAdmin):
 
 class OrganizationModelAdmin(AdminRelatedInfo, SchemaModelAdmin):
     exclude = ('source_url', 'copy_status')
-    list_display = ('instance_data', 'related_objects')
+    list_display = ('instance_data', 'num_related_resources', 'related_resources')
     
     def instance_data(self, obj):
         return obj.__unicode__()
@@ -90,7 +90,7 @@ class OrganizationModelAdmin(AdminRelatedInfo, SchemaModelAdmin):
 
 class ProjectModelAdmin(AdminRelatedInfo, SchemaModelAdmin):
     exclude = ('source_url', 'copy_status')
-    list_display = ('instance_data', 'related_objects')
+    list_display = ('instance_data', 'num_related_resources', 'related_resources')
     
     def instance_data(self, obj):
         return obj.__unicode__()
@@ -98,7 +98,7 @@ class ProjectModelAdmin(AdminRelatedInfo, SchemaModelAdmin):
 
 class DocumentModelAdmin(AdminRelatedInfo, SchemaModelAdmin):
     exclude = ('source_url', 'copy_status')
-    list_display = ('instance_data', 'related_objects')
+    list_display = ('instance_data', 'num_related_resources', 'related_resources')
     
     def instance_data(self, obj):
         return obj.__unicode__()
