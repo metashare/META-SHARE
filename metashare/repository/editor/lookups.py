@@ -205,6 +205,13 @@ class ProjectLookup(ModelLookup):
     
     def get_item_id(self, item):
         return item.id
+
+    def format_item(self, item):
+        fmt_item = super(ProjectLookup, self).format_item(item)
+        count = get_root_resources(item).__len__()
+        lab = fmt_item['label']
+        fmt_item['label'] = u'{0} ({1})'.format(lab, count)
+        return fmt_item
     
 class OrganizationLookup(ModelLookup):
     model = organizationInfoType_model
