@@ -2,7 +2,9 @@
 {% spaceless %}
 <label class='title component'>Languages:</label>
 <div class="dataline">
-	
+	{% for language in languages_tuple %}
+		{{ language.Language_name }}
+	{% endfor %}
 </div>
 
 {% endspaceless %}

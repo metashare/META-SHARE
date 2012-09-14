@@ -456,6 +456,7 @@ def view(request, resource_name=None, object_id=None):
     documentation_info_tuple = None
     resource_creation_info_tuple = None
     relation_info_tuples = []
+    resource_component_tuple = None
     for _tuple in lr_content[1]:
         if _tuple[0] == "Distribution":
             distribution_info_tuple = _tuple
@@ -475,15 +476,24 @@ def view(request, resource_name=None, object_id=None):
             resource_creation_info_tuple = _tuple
         elif _tuple[0] == "Relation":
             relation_info_tuples.append(_tuple)
+        elif _tuple[0] == "Resource component":
+            resource_component_tuple = _tuple[1]
+    #print resource_component_tuple
+    for _tuple in resource_component_tuple[0][1]:
+        print _tuple
+        
 
     # Preprocess some of the information withing the tuples for better
     # presentation in the single resource view.
     # Contact Person:
     contact_person_dicts = []
+    resource_component_dict = {}
     #convert contact_person_tuples to dictionaries
     for item in contact_person_tuples:
         contact_person_dicts.append(tuple2dict([item]))
-    
+    resource_component_dict = tuple2dict(resource_component_tuple)
+    print resource_component_dict
+
     # Define context for template rendering.
     context = { 'resource': resource,
                 'resourceName': resource_name,
@@ -504,6 +514,7 @@ def view(request, resource_name=None, object_id=None):
                 'linguality_infos': linguality_infos,
                 'license_types': license_types,
                 'resourceType': resource_type,
+                'resource_component_dict': resource_component_dict,
                 'mediaTypes': media_types,
                 'url': url,
                 'metaShareId': metashare_id,

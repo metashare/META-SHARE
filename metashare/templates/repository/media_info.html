@@ -1,11 +1,50 @@
-{% for item in lr_content.1 %}
-  {% with "repository/media_info.html" as filename %}
-    {% with item as lr_content %}
-        {% ifnotequal lr_content.0 type %}
-			{% include filename %}
-        {% else %}
-			{% include "repository/detailed_component.html" with lr_content=lr_content %}
-        {% endifnotequal %}
-    {% endwith %}
-  {% endwith %}
+{% with media_info=resource_component_dict.Resource_component %}
+
+
+
+
+
+Languages:
+{% for key, value in media_info.Corpus_media.Corpus_audio.items %}
+	
+		{% for key1, value1 in value.items %}
+			{% if key1 == "Language_name" %}
+				{{ value1}}, 
+			{% endif %}
+		{% endfor %}
 {% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endwith %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

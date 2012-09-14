@@ -157,6 +157,10 @@
 			     {% include "repository/person_info.html" with contact_person_dict=contact_person %}
 			{% endfor %}
 
+
+			{{ resource_component_dict.Resource_component.Resource }}
+
+
 		</div>
 		
 		<div class="column middle">
@@ -185,7 +189,7 @@
 						<div id="{{forloop.counter}}" class="tab_content">
 							{% ifequal resourceType "corpus" %}
 								{% ifequal type "text" %}
-									{% include "repository/media_info.html" with type='Corpus text' %}
+									{% include "repository/media_info.html" with media_type='Corpus_audio' resource_type="Corpus_media" %}
 								{% endifequal %}
 								{% ifequal type "audio" %}
 									{% include "repository/media_info.html" with type='Corpus audio' %}
