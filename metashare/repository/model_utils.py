@@ -253,7 +253,11 @@ def get_resource_media_types(res_obj):
             result.extend(corpus_media.outputInfo \
                           .get_mediaType_display_list())
 
-    return result
+    result_lower = []
+    for res in result:
+        result_lower.append(res.lower())
+
+    return result_lower
 
 def get_lr_stat_action_count(obj_identifier, stats_action):
     """
