@@ -266,12 +266,12 @@ def is_privateIP(ipaddress):
     if ipaddress.startswith('192.168.') or \
         ipaddress.startswith('10.') or \
         ipaddress.startswith('127.'):
-            return True
+        return True
     if ipaddress.startswith('172.'): # skip from 172.16.0.0 - 172.31.255.255
         match2num = re.search( r'\d+\.(\d+)\..*', ipaddress, re.M|re.I)
         if int(match2num.group(1)) >= 16 or \
             int(match2num.group(1)) <= 31:
-                return True
+            return True
     return False
 
 def getcountry_name(countrycode):

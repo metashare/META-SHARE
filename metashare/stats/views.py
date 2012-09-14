@@ -115,7 +115,7 @@ def usagestats (request):
                             verbose_name = eval(u'{0}Type_model._meta.verbose_name'.format(_classes[_component]))
                     _fields[model_name+" "+_component] = [component_name, _classes[_component], verbose_name, _required, 0, 0, "component", model_name]
             else:
-               if (not model_name+" "+_component in _fields):
+                if (not model_name+" "+_component in _fields):
                     if (not verbose_name):
                         verbose_name = eval(u'{0}._meta.get_field("{1}").verbose_name'.format(_model, _field))
                     _fields[model_name+" "+_component] = [component_name, _field, verbose_name, _required, 0, 0, "field", model_name]            
@@ -193,9 +193,9 @@ def usagestats (request):
                 text = "<HIDDEN VALUE>"   
             result.append([text, item["elname__count"], item["count__sum"]])
          
-    expand_all = request.POST.get('expandall')
+    expand_all = request.POST.get('expandall')    
     return render_to_response('stats/usagestats.html',
-        {'usage_fields': usage_fields,
+        {'usage_fields': sorted(usage_fields.iteritems()),
         'usage_filter': usage_filter,
         'fields_count': fields_count,
         'lr_count': len(lrset),
@@ -224,9 +224,9 @@ def topstats (request):
     elif (last == "year"):
         since = date.today() + relativedelta(years = -1)
         
-    countrycode = request.GET.get('country', None)
+    countrycode = request.GET.get('country', '')
     countryname = ""
-    if (countrycode != None):
+    if (countrycode != ''):
         countryname = getcountry_name(countrycode)
     if view == "topviewed":
         geovisits = getCountryActions(VIEW_STAT)

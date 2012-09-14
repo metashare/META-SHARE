@@ -12,10 +12,10 @@ from math import trunc
 import re
 
 USAGETHREADNAME = "usagethread"
-BOT_AGENT_RE=re.compile(r".*(bot|spider|spyder|crawler|archiver|seek|\
-    scooter|wget|misesajour|slurp|agent|gazz|PicoSearch|OnetSzukaj|\
-    Scrubby|asterias|ip3000|knowledge|Rambler|search|link|appie|\
-    web|Lab|Yandex|perl|Iron33|Nazilla|Kototoi).*",re.IGNORECASE)
+BOT_AGENT_RE = re.compile(r".*(bot|spider|spyder|crawler|archiver|seek|\
+    scooter|wget|misesajour|slurp|agent|gazz|onetszukaj|perl|web|lab|\
+    scrubby|asterias|ip3000|knowledge|rambler|search|link|appie|\
+    yandex|iron33|nazilla|kototoi).*", re.IGNORECASE)
 
 #type of monitored actions
 UPDATE_STAT = "u"
@@ -297,7 +297,7 @@ def _get_ipaddress(request):
     """
     Returns the IP address store in META request. Check if the request 
     comes from some automatic programm (bot, spider, ..) removing the IP address
-    (in this way the statistics will not be distorted
+    (in this way the statistics will not be distorted)
     """
     if request != None:
         if request.META.has_key('REMOTE_ADDR'):
