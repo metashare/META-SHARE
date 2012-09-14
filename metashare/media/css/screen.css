@@ -525,10 +525,9 @@ div.accordion{
 	border-radius: 0 10px 10px 0;
 }
 div.subresult{	
-	margin-left: .9em;
+	margin-left: 10px;
 	width: 100%;
 	padding:0 0 0 0;
-	margin: 0 0 0 0;
 	background-color:#fff;
 }
 div.subresult a{	
@@ -537,6 +536,7 @@ div.subresult a{
 
 div.subitem{	
 	width: 300px;	
+	margin-left: 10px;
 }
 
 div.filter.sub{
