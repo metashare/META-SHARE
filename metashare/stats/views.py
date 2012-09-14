@@ -96,23 +96,37 @@ def usagestats (request):
         # get info about fields
         dbfields = getattr(mod, _model).__schema_fields__
         for _component, _field, _required in dbfields:
+            verbose_name = None
+            if ("/" in _component):
+                verbose_name = _component
+                _component = _field    #_component[_component.index('/')+1:]
             model_name = _model.replace("Type_model","")
             component_name = eval(u'{0}._meta.verbose_name'.format(_model))
             
             if (_component in _classes):
                 if (not model_name+" "+_component in _fields):
-                    field_name = eval(u'{0}Type_model._meta.verbose_name'.format(_classes[_component]))
-                    _fields[model_name+" "+_component] = [component_name, _component, field_name, _required, 0, 0, "component", model_name]
+                    if (not verbose_name):
+                        if (not "_set" in _field):
+                            verbose_name = eval(u'{0}._meta.get_field("{1}").verbose_name'.format(_model, _field))
+                            class_name = eval(u'{0}Type_model._meta.verbose_name'.format(_classes[_component]))
+                            if (verbose_name != class_name):
+                                verbose_name = verbose_name + " [" + class_name + "]"
+                        else:
+                            verbose_name = eval(u'{0}Type_model._meta.verbose_name'.format(_classes[_component]))
+                    _fields[model_name+" "+_component] = [component_name, _classes[_component], verbose_name, _required, 0, 0, "component", model_name]
             else:
-               if (not model_name+" "+_field in _fields):
-                    field_name = eval(u'{0}._meta.get_field("{1}").verbose_name'.format(_model, _field))
-                    _fields[model_name+" "+_field] = [component_name, _field, field_name, _required, 0, 0, "field", model_name]            
+               if (not model_name+" "+_component in _fields):
+                    if (not verbose_name):
+                        verbose_name = eval(u'{0}._meta.get_field("{1}").verbose_name'.format(_model, _field))
+                    _fields[model_name+" "+_component] = [component_name, _field, verbose_name, _required, 0, 0, "field", model_name]            
              
     lrset = resourceInfoType_model.objects.all()
     usageset = UsageStats.objects.values('elname', 'elparent').annotate(Count('lrid', distinct=True), \
         Sum('count')).order_by('elparent', '-lrid__count', 'elname')        
+    
     if len(lrset) > 0:
-        if len(usageset) == 0:
+        updateusage = request.GET.get('forceusagestatsupdating','')
+        if len(usageset) == 0 or updateusage == "yes":
             usagethread = updateUsageStats(lrset, True)
         else:
             usagethread = updateUsageStats(lrset)
@@ -122,19 +136,17 @@ def usagestats (request):
     if (len(usageset) > 0):
         for item in usageset:
             class_name = str(item["elparent"])
-            #if class_name in _classes:
-            #    class_name = _classes[class_name]
+            if class_name in _classes:
+                class_name = _classes[class_name]
             key = str(class_name) + " " + str(item["elname"])
             if key in _fields:
                 _fields[key][4] += item["lrid__count"]
                 _fields[key][5] += item["count__sum"]
-            #else:
-             #   errors = "Unexpected error occured during usage statistics execution"
                 
     selected_filters = request.POST.getlist('filter')
     fields_count = 0
     usage_fields = {}
-    usage_filter = {"required": 0, "recommended": 0, "optional": 0, "never used": 0}
+    usage_filter = {"required": 0, "recommended": 0, "optional": 0, "never used": 0, "at least one": 0}
     for key in _fields:
         value = _fields[key]
         _filters = []
@@ -147,7 +159,9 @@ def usagestats (request):
         
         if value[5] == 0:
             _filters.append("never used")
-        
+        else:
+            _filters.append("at least one")
+            
         #filter
         for ifilter in _filters:
             usage_filter[ifilter] += 1
@@ -179,6 +193,7 @@ def usagestats (request):
                 text = "<HIDDEN VALUE>"   
             result.append([text, item["elname__count"], item["count__sum"]])
          
+    expand_all = request.POST.get('expandall')
     return render_to_response('stats/usagestats.html',
         {'usage_fields': usage_fields,
         'usage_filter': usage_filter,
@@ -187,6 +202,7 @@ def usagestats (request):
         'selected_filters': selected_filters,
         'selected_class': selected_class,
         'selected_field': selected_field,
+        'expand_all': expand_all,
         'result': result,
         'errors': errors,
         'myres': isOwner(request.user.username)},
