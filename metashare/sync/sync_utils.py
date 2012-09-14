@@ -96,22 +96,18 @@ def get_full_metadata(opener, full_metadata_url, expected_digest):
             return storage_json, resource_xml_string
 
 
-def remove_resource(storage_object):
+def remove_resource(storage_object, keep_stats=False):
     """
     Completely removes the given storage object and its associated language 
     resource from the storage layer.
+    Also includes deletion of statistics; use keep_stats optional parameter 
+    to suppress deletion of statistics.
     """
     resource = storage_object.resourceinfotype_model_set.all()[0]
 
-    # delete associated statistic objects
-    for lrstat in LRStats.objects.filter(lrid=storage_object.identifier):
-        lrstat.delete()
-    for usagestat in UsageStats.objects.filter(lrid=resource.id):
-        usagestat.delete()
-
     folder = os.path.join(settings.STORAGE_PATH, storage_object.identifier)
     shutil.rmtree(folder)
-    resource.delete_deep()
+    resource.delete_deep(keep_stats=keep_stats)
     storage_object.delete()
 
     

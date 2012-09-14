@@ -1275,12 +1275,15 @@ class SchemaModel(models.Model):
         cache.delete(cache_key)
 
 
-    def delete_deep(self):
+    def delete_deep(self, keep_stats=False):
         '''
         Delete this resource, the corresponding storage object,
         and all descendants connected through either a one-to-one
         or a one-to-many relation (i.e., non-reusable information).
         This will leave many-to-one or many-to-many relations untouched.
+        
+        Also includes deletion of statistics; use keep_stats optional parameter 
+        to suppress deletion of statistics.
         
         This method is not automatically hooked into the default django
         delete mechanism; it needs to be called explicitly.
@@ -1304,7 +1307,12 @@ class SchemaModel(models.Model):
                         child = getattr(obj, fieldname)
                         if child is not None:
                             to_delete.put(child)
-            obj.delete()
+            if obj.__class__.__name__ == 'resourceInfoType_model':
+                # if instance is a resource, pass the keep_stats parameter
+                obj.delete(keep_stats=keep_stats)
+            else:
+                # ignore keep_stats parameter for all other types
+                obj.delete()
             
 class SubclassableModel(SchemaModel):
     """

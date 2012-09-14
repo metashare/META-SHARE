@@ -409,7 +409,7 @@ def restore_from_folder(storage_id, copy_status=MASTER, storage_digest=None):
     
     storage_digest (optional): the digest_checksum to set in the restored
         storage object
-        
+
     Returns the restored resource with its storage object set.
     """
     from metashare.repository.models import resourceInfoType_model
@@ -524,7 +524,8 @@ def update_resource(storage_json, resource_xml_string, storage_digest,
     def remove_database_entries(storage_id):
         storage_object = StorageObject.objects.get(identifier=storage_id)
         resource = storage_object.resourceinfotype_model_set.all()[0]
-        resource.delete_deep()
+        # we have to keep the statistics for this resource since it is only updated
+        resource.delete_deep(keep_stats=True)
         storage_object.delete()
 
     # Now the actual update_resource():
