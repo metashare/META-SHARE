@@ -8,7 +8,7 @@ from django.core.management import call_command
 from selenium.webdriver.support.select import Select
 
 
-TESTFIXTURE_XML = '{}/repository/test_fixtures/ELRA/'.format(ROOT_PATH)
+TESTFIXTURE_XML = '{}/repository/test_fixtures/test_fixtures_for_filtering/'.format(ROOT_PATH)
 
 class FilterTest(SeleniumTestCase):
 
