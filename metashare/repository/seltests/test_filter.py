@@ -226,7 +226,7 @@ class FilterTest(SeleniumTestCase):
           "//div[@id='searchFilters']/div[18]/div[4]").text)
         self.assertEqual("Face Recognition (1)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[18]/div[5]").text)
-        # check Licence filter more/less
+        # check Use Is NLP Specific filter more/less
         click_and_wait(driver.find_element_by_link_text("more"))
         self.assertEqual("Linguistic Research (1)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[18]/div[6]").text)
@@ -273,7 +273,7 @@ class FilterTest(SeleniumTestCase):
           "//div[@id='searchFilters']/div[24]/div[4]").text)
         self.assertEqual("Voice (2)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[24]/div[5]").text)
-        # check Licence filter more/less
+        # check Modality Type filter more/less
         click_and_wait(driver.find_element_by_link_text("more"))
         self.assertEqual("Body Gesture (1)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[24]/div[6]").text)
@@ -296,7 +296,7 @@ class FilterTest(SeleniumTestCase):
           "//div[@id='searchFilters']/div[26]/div[4]").text)
         self.assertEqual("Text/xml (1)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[26]/div[5]").text)
-        # check Licence filter more/less
+        # check MIME Type filter more/less
         click_and_wait(driver.find_element_by_link_text("more"))
         self.assertEqual("Txt/plain (1)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[26]/div[6]").text)
@@ -321,7 +321,7 @@ class FilterTest(SeleniumTestCase):
           "//div[@id='searchFilters']/div[28]/div[4]").text)
         self.assertEqual("BLM (1)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[28]/div[5]").text)
-        # check Licence filter more/less
+        # check Conformance to Standards/Best Practices filter more/less
         click_and_wait(driver.find_element_by_link_text("more"))
         self.assertEqual("EML (1)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[28]/div[6]").text)
@@ -344,7 +344,7 @@ class FilterTest(SeleniumTestCase):
           "//div[@id='searchFilters']/div[30]/div[4]").text)
         self.assertEqual("Fiction (1)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[30]/div[5]").text)
-        # check Licence filter more/less
+        # check Domain filter more/less
         click_and_wait(driver.find_element_by_link_text("more"))
         self.assertEqual("Geography (1)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[30]/div[6]").text)
