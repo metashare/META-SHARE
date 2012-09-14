@@ -484,8 +484,6 @@ def view(request, resource_name=None, object_id=None):
     for item in contact_person_tuples:
         contact_person_dicts.append(tuple2dict([item]))
     
-    print tuple2dict([lr_content])
-
     # Define context for template rendering.
     context = { 'resource': resource,
                 'resourceName': resource_name,
@@ -594,7 +592,6 @@ def tuple2dict(_tuple):
                     # If a repeatable element is found, the old value is
                     # concatenated with the new one, adding a space in between.
                     if _key in _dict:
-                        print _key
                         _dict[_key] = " ".join([_dict[_key], item[0][1]])
                     else:
                         #print _key
