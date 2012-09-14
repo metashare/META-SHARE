@@ -9,8 +9,13 @@ from django.contrib.auth.models import User
 from datetime import datetime
 from metashare.settings import LOG_HANDLER
 from math import trunc
+import re
 
 USAGETHREADNAME = "usagethread"
+BOT_AGENT_RE=re.compile(r".*(bot|spider|spyder|crawler|archiver|seek|\
+    scooter|wget|misesajour|slurp|agent|gazz|PicoSearch|OnetSzukaj|\
+    Scrubby|asterias|ip3000|knowledge|Rambler|search|link|appie|\
+    web|Lab|Yandex|perl|Iron33|Nazilla|Kototoi).*",re.IGNORECASE)
 
 #type of monitored actions
 UPDATE_STAT = "u"
@@ -161,25 +166,25 @@ def getLRLast(action, limit, geoinfo=None):
 def getTopQueries(limit, geoinfo=None, since=None):
     if (geoinfo != None and geoinfo is not ""):
         if (since):
-            topqueries = QueryStats.objects.values('query', 'facets').filter(lasttime__gte=since, \
+            topqueries = QueryStats.objects.values('query', 'facets').exclude(query__startswith="mfsp:").filter(lasttime__gte=since, \
                 geoinfo=geoinfo).annotate(query_count=Count('query'), facets_count=Count('facets')).order_by('-query_count','-facets_count')[:limit]
         else:
-            topqueries = QueryStats.objects.values('query', 'facets').filter(geoinfo=geoinfo).annotate(query_count=Count('query'), \
+            topqueries = QueryStats.objects.values('query', 'facets').exclude(query__startswith="mfsp:").filter(geoinfo=geoinfo).annotate(query_count=Count('query'), \
                 facets_count=Count('facets')).order_by('-query_count','-facets_count')[:limit] 
     else:
         if (since):
-            topqueries = QueryStats.objects.values('query', 'facets').filter(lasttime__gte=since).annotate(query_count=Count('query'), \
+            topqueries = QueryStats.objects.values('query', 'facets').exclude(query__startswith="mfsp:").filter(lasttime__gte=since).annotate(query_count=Count('query'), \
                 facets_count=Count('facets')).order_by('-query_count','-facets_count')[:limit]
         else:
-            topqueries = QueryStats.objects.values('query', 'facets').annotate(query_count=Count('query'), \
+            topqueries = QueryStats.objects.values('query', 'facets').exclude(query__startswith="mfsp:").annotate(query_count=Count('query'), \
                 facets_count=Count('facets')).order_by('-query_count','-facets_count')[:limit]
     return topqueries
     
 def getLastQuery (limit, geoinfo=None):
     if (geoinfo != None and geoinfo is not ""):
-        lastquery = QueryStats.objects.values('query', 'facets', 'lasttime', 'found').filter(geoinfo=geoinfo).order_by('-lasttime')[:limit]
+        lastquery = QueryStats.objects.values('query', 'facets', 'lasttime', 'found').exclude(query__startswith="mfsp:").filter(geoinfo=geoinfo).order_by('-lasttime')[:limit]
     else:
-        lastquery = QueryStats.objects.values('query', 'facets', 'lasttime', 'found').order_by('-lasttime')[:limit]
+        lastquery = QueryStats.objects.values('query', 'facets', 'lasttime', 'found').exclude(query__startswith="mfsp:").order_by('-lasttime')[:limit]
     return lastquery
 
 def statByDate(date):
@@ -194,7 +199,6 @@ def _update_usage_stats(lrid, element_tree):
     if len(element_tree.getchildren()):
         for child in element_tree.getchildren():
             item = _update_usage_stats(lrid, child)
-            print "# " + str(element_tree.tag) + " " + str(child.tag)
             if (item == None or item[0] == None):
                 lrset = UsageStats.objects.filter(lrid=lrid, elparent=element_tree.tag, elname=child.tag)
                 if (lrset.count() > 1):
@@ -291,10 +295,16 @@ def _get_userid(request):
 
 def _get_ipaddress(request):
     """
-    Returns the IP address store in META request.
+    Returns the IP address store in META request. Check if the request 
+    comes from some automatic programm (bot, spider, ..) removing the IP address
+    (in this way the statistics will not be distorted
     """
-    if request != None and request.META.has_key('REMOTE_ADDR'):
-        return request.META['REMOTE_ADDR']
+    if request != None:
+        if request.META.has_key('REMOTE_ADDR'):
+            if not BOT_AGENT_RE.match(request.META['HTTP_USER_AGENT']):
+                return request.META['REMOTE_ADDR']
+        else:
+            return request.META['REMOTE_ADDR']       
     return ''
 
 

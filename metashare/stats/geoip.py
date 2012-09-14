@@ -4,6 +4,7 @@ from os.path import abspath, dirname, join
 parentdir = dirname(dirname(dirname(abspath(__file__))))
 sys.path.insert(0, join(parentdir, 'lib', 'python2.7', 'site-packages'))
 import pygeoip
+import re
 from metashare.settings import ROOT_PATH
 
 
@@ -260,6 +261,19 @@ country_info = {"AD": ["Andorra", "42.5075314,1.5218156"],
 "ZW": ["Zimbabwe", "-19.0,29.0"]}
         
 geoip = pygeoip.GeoIP('{0}/stats/resources/GeoIP.dat'.format(ROOT_PATH))
+
+def is_privateIP(ipaddress):
+    if ipaddress.startswith('192.168.') or \
+        ipaddress.startswith('10.') or \
+        ipaddress.startswith('127.'):
+            return True
+    if ipaddress.startswith('172.'): # skip from 172.16.0.0 - 172.31.255.255
+        match2num = re.search( r'\d+\.(\d+)\..*', ipaddress, re.M|re.I)
+        if int(match2num.group(1)) >= 16 or \
+            int(match2num.group(1)) <= 31:
+                return True
+    return False
+
 def getcountry_name(countrycode):
     if countrycode in country_info:
         return country_info[countrycode][0]
@@ -271,6 +285,6 @@ def getcountry_coords(countrycode):
     return ""
         
 def getcountry_code(ipaddress):
-    if (ipaddress != ""):
+    if (ipaddress != "" and not is_privateIP(ipaddress)):
         return geoip.country_code_by_addr(ipaddress)
     return ""
