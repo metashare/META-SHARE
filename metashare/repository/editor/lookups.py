@@ -15,6 +15,7 @@ from metashare.repository.models import personInfoType_model, \
 from metashare.storage.models import MASTER
 import logging
 from metashare.settings import LOG_HANDLER
+from metashare.repository.editor.related_objects import find_related_objects
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -27,21 +28,6 @@ def print_query_results(results):
         else:
             LOGGER.debug(u'No results')
     return
-
-def find_related_objects(inst):
-    inst_model = inst.__class__
-    inst_attrs = dir(inst_model)
-    rel_attrs = []
-    for attr in inst_attrs:
-        if attr.endswith('_related'):
-            rel_attrs.append(attr)
-    
-    count = 0
-    for attr in rel_attrs:
-        num = inst.__getattribute__(attr).values().count()
-        count = count + num
-    #print u'{0} (refs: {1})'.format(inst, count)
-    return count
 
 class PersonLookup(ModelLookup):
     model = personInfoType_model
@@ -86,7 +72,6 @@ class GenericUnicodeLookup(ModelLookup):
                     return False 
             return lcterm in unicode(item).lower()
         
-        items = ''
         items = self.get_queryset()
         if term == '*':
             results = items
@@ -98,6 +83,9 @@ class GenericUnicodeLookup(ModelLookup):
     
     def format_item(self, item):
         fmt_item = super(GenericUnicodeLookup, self).format_item(item)
+        count = find_related_objects(item).__len__()
+        lab = fmt_item['label']
+        fmt_item['label'] = u'{0} ({1})'.format(lab, count)
         fmt_item['cls'] = item.as_subclass().__class__.__name__.lower()
         return fmt_item
     
