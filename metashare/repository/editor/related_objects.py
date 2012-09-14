@@ -38,7 +38,7 @@ class AdminRelatedInfo(object):
             option_elem = u'<li><a href="{2}">{0}{3} {1}</a></li>'\
                 .format(comp_type, obj.__unicode__(), url, separator)
             option_elems = option_elems + option_elem
-        sel = u'<div style="overflow: auto;"><ul>{0}</ul></div>'.format(option_elems)
+        sel = u'<div style="overflow: auto;"><ul class="related_resources">{0}</ul></div>'.format(option_elems)
         return sel
 
     def related_objects(self, obj):
