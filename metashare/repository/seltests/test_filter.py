@@ -44,7 +44,7 @@ class FilterTest(SeleniumTestCase):
         driver.find_element_by_xpath("//div[@id='header']/ul/li[1]/a").click()
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         self.assertEqual("29 Language Resources (Page 1 of 2)", driver.find_element_by_css_selector("h3").text)
-        """
+
         # make sure all filters are available
         self.assertEqual("Language", driver.find_element_by_link_text("Language").text)
         self.assertEqual("Resource Type", driver.find_element_by_link_text("Resource Type").text)
@@ -551,7 +551,7 @@ class FilterTest(SeleniumTestCase):
         click_and_wait(driver.find_element_by_link_text("Evaluated"))
         # remove Resource Type filter
         click_and_wait(driver.find_element_by_link_text("Tool Service"))
-        """
+
         # Test all sub filter of Media Type / Text are available
         click_and_wait(driver.find_element_by_link_text("Media Type"))
         click_and_wait(driver.find_element_by_link_text("Text"))
