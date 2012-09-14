@@ -90,10 +90,14 @@ div.fieldvalues {background: #E6E6FA;
     vertical-align: top       
 }
     
-div.warning {background: lightyellow; 
-    border: 1px solid #000; 
-    position:relative; 
-    width: 400px}
+div.warning {
+    background: lightyellow; 
+    border: 1px solid #FFA500; 
+    position:relative;
+    padding: 5px;
+    margin-top: -10px;
+    margin-right: 10px;
+}
     
 label.title {background-color: #fda;
         border-bottom-left-radius: 10px;
@@ -139,13 +143,13 @@ a.addFilter:before {
 }
 
 #colsubtab {
-width: auto;
-position: relative;
-margin-left: 10px;
-margin-right: 10px;
-white-space:normal;
-display:INLINE-block;
-vertical-align: top;
+    width: auto;
+    position: relative;
+    margin-left: 10px;
+    margin-right: 10px;
+    white-space:normal;
+    display:INLINE-block;
+    vertical-align: top;
 }
 
 #subtab div {
@@ -153,9 +157,19 @@ vertical-align: top;
 }
 
 #subtab{
-width: 100%;
-margin-bottom: 10px;
-white-space:nowrap;
-position:relative;
-display:block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 0px;
+    white-space:nowrap;
+    position:relative;
+    display:block;
 }
+
+#section {
+    border: solid 1px #ccc;
+    margin-right: 20px;
+    -moz-border-radius: 5px 5px 5px 5px; 
+    -webkit-border-radius: 5px 5px 5px 5px;
+    -khtml-border-radius: 5px 5px 5px 5px;
+}
+
