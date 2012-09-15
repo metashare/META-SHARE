@@ -6,16 +6,16 @@ from django.contrib.auth.models import User
 from django.test.client import Client, RequestFactory
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.admin.sites import LOGIN_FORM_KEY
+from django.contrib.admin.helpers import ACTION_CHECKBOX_NAME
 
 from metashare import test_utils
 from metashare.accounts.models import EditorGroup, EditorGroupManagers
 from metashare.repository.models import resourceInfoType_model
-from metashare.repository.editor.resource_editor import unpublish_resources, \
-    ingest_resources
 from metashare.settings import DJANGO_BASE, DJANGO_URL, ROOT_PATH, LOG_HANDLER
 from metashare.stats.model_utils import _update_usage_stats, saveLRStats, \
     getLRLast, saveQueryStats, getLastQuery, UPDATE_STAT, VIEW_STAT, \
     RETRIEVE_STAT, DOWNLOAD_STAT
+from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, REMOTE
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -93,8 +93,11 @@ class StatsTest(django.test.TestCase):
         client = Client()
         response = client.get('/{0}stats/top/'.format(DJANGO_BASE))
         self.assertTemplateUsed(response, 'stats/topstats.html')
-        self.assertContains(response,
-                            "Statistics about visiting this META-SHARE node")
+        self.assertContains(response, "META-SHARE node visits statistics")
+
+        response = client.get('/{0}stats/usage/'.format(DJANGO_BASE))
+        self.assertTemplateUsed(response, 'stats/usagestats.html')
+        self.assertContains(response, "Statistics on resource metadata")
 
     def testLatestQueries(self):
         """
@@ -106,7 +109,7 @@ class StatsTest(django.test.TestCase):
         client = Client()
         _url = "/{0}stats/top/?view=latestqueries".format(DJANGO_BASE)
         response = client.get(_url)
-        self.assertContains(response, 'Statistics about visiting')
+        self.assertContains(response, 'META-SHARE node visits statistics')
         self.assertContains(response, 'http://')
         self.assertGreaterEqual(len(latest_query), 1)
         for item in latest_query:
@@ -169,46 +172,29 @@ class StatsTest(django.test.TestCase):
             resource = resourceInfoType_model.objects.get(pk=i)
             resource.storage_object.published = True
             resource.storage_object.save()
-            response = client.get(resource.get_absolute_url(), follow=True)
+            resource.storage_object.publication_status = INGESTED
+            client.post(ADMINROOT,
+                {"action": "publish_action", ACTION_CHECKBOX_NAME: resource.id},
+                follow=True)
+        
+            url = resource.get_absolute_url()
+            response = client.get(url, follow = True)
             self.assertTemplateUsed(response, 'repository/lr_view.html')
-            self.assertContains(response, "Edit")
-
+            #self.assertNotContains(response, 'button">Edit Resource<')
+        
         response = client.get('/{0}stats/mystats/'.format(DJANGO_BASE))
         self.assertEquals(200, response.status_code)
         self.assertContains(response, 'My resources')
-        self.assertContains(response, 'Last view:')
+        self.assertContains(response, 'Last update:')
         
         statsdata = getLRLast(VIEW_STAT, 10)
         self.assertEqual(2, len(statsdata))
         
-        ##ingest the first resource
-        #resource = resourceInfoType_model.objects.get(pk=1)
-        #ingest_resources(None, request, (resource,))
-        #statsdata = getLRLast(UPDATE_STAT, 10)
-        #self.assertEqual(1, len(statsdata))
-        #statsdata = getLRLast(VIEW_STAT, 10)
-        #self.assertEqual(1, len(statsdata))
-        #
-        ##publish the second resource again
-        #resource.storage_object.published = True
-        #resource.storage_object.save()
-        #response = client.get(resource.get_absolute_url(), follow=True)
-        #statsdata = getLRLast(VIEW_STAT, 10)
-        #self.assertEqual(2, len(statsdata))
-         
         #delete the second resource
         resource.delete_deep()        
         statsdata = getLRLast(VIEW_STAT, 10)
         self.assertEqual(1, len(statsdata))
-        
-        #unpublish the second resource
-        resource = resourceInfoType_model.objects.get(pk=1)
-        unpublish_resources(None, request, (resource,))
-        statsdata = getLRLast(UPDATE_STAT, 10)
-        self.assertEqual(1, len(statsdata))
-        statsdata = getLRLast(VIEW_STAT, 10)
-        self.assertEqual(1, len(statsdata))
-        
+                
     def client_with_user_logged_in(self, user_credentials):
         client = Client()
         client.get(ADMINROOT)
