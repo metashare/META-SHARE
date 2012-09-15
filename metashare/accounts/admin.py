@@ -10,7 +10,8 @@ from django.utils.translation import ugettext as _
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 
-from metashare.accounts.forms import OrganizationForm, OrganizationManagersForm
+from metashare.accounts.forms import EditorGroupForm, OrganizationForm, \
+  OrganizationManagersForm, EditorGroupManagersForm
 from metashare.accounts.models import RegistrationRequest, ResetRequest, \
   UserProfile, EditorGroup, EditorGroupApplication, EditorGroupManagers, \
   Organization, OrganizationApplication, OrganizationManagers
@@ -99,7 +100,7 @@ class EditorGroupAdmin(admin.ModelAdmin):
                     '_managers_display')
     search_fields = ('name',)
     actions = ('add_user_to_editor_group', 'remove_user_from_editor_group', )
-    exclude = ('permissions',)
+    form = EditorGroupForm
 
     def _members_display(self, obj):
         """
@@ -321,6 +322,14 @@ class EditorGroupApplicationAdmin(admin.ModelAdmin):
         return super(EditorGroupApplicationAdmin, self) \
             .get_readonly_fields(request, obj)
 
+    def queryset(self, request):
+        result = super(EditorGroupApplicationAdmin, self).queryset(request)
+        if request.user.is_superuser:
+            return result
+        # non-superusers may only see the applications that they may also handle
+        return result.filter(editor_group__name__in=
+                             request.user.groups.values_list('name', flat=True))
+
     # pylint: disable-msg=W0622
     def log_deletion(self, request, obj, object_repr):
         """
@@ -427,7 +436,7 @@ class EditorGroupManagersAdmin(admin.ModelAdmin):
     list_display = ('name', 'managed_group', '_members_display')
     search_fields = ('name', 'managed_group')
     actions = ('add_user_to_editor_group_managers', 'remove_user_from_editor_group_managers', )
-    exclude = ('permissions',)
+    form = EditorGroupManagersForm
 
     def _members_display(self, obj):
         """

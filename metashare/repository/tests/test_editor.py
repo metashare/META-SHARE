@@ -279,14 +279,16 @@ class EditorTest(TestCase):
                         if value in admin.site._registry:
                             model_url = key.lower()
                             url = ADMINROOT+"repository/{}/add/".format(model_url)
-                            print "For class {}, trying to access page {} ...".format(cls_name, url)
+                            LOGGER.debug("For class %s, trying to access page "
+                                         "%s ...", cls_name, url)
                             response = client.get(url, follow=True)
                             self.assertEquals(200, response.status_code)
                             num = num + 1
                         else:
-                            print 'Class {} has no registered admin form.'.format(cls_name)
+                            LOGGER.debug('Class %s has no registered admin '
+                                         'form.', cls_name)
                     print
-        print 'Checked models: {0}'.format(num)
+        LOGGER.debug('Checked models: %d', num)
 
     def test_manage_action_visibility(self):
         """

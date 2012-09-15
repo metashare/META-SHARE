@@ -38,7 +38,7 @@ class StatsTest(django.test.TestCase):
     def tearDownClass(cls):
         test_utils.set_index_active(True)
         LOGGER.info("finished '{}' tests".format(cls.__name__))
-    
+
     def setUp(self):
         """
         Sets up some resources with which to test.
@@ -95,10 +95,6 @@ class StatsTest(django.test.TestCase):
         self.assertTemplateUsed(response, 'stats/topstats.html')
         self.assertContains(response, "META-SHARE node visits statistics")
 
-        response = client.get('/{0}stats/usage/'.format(DJANGO_BASE))
-        self.assertTemplateUsed(response, 'stats/usagestats.html')
-        self.assertContains(response, "Statistics on resource metadata")
-
     def testLatestQueries(self):
         """
         Test whether there are latest queries
@@ -121,25 +117,27 @@ class StatsTest(django.test.TestCase):
         checking if there is at least one resource report available
         from the META-SHARE statistics server.
         """
-        print "Connecting... {0}".format(self.stats_server_url)
+        LOGGER.info("Connecting ... %s", self.stats_server_url)
         try:
             response = urllib2.urlopen(self.stats_server_url)
             self.assertEquals(200, response.code)
         except urllib2.URLError:
-            print 'WARNING! Failed contacting statistics server on %s' % self.stats_server_url
-        
+            LOGGER.warn('Failed to contact statistics server on %s',
+                        self.stats_server_url)
+
     def testAddNode(self):
         """
         checking if there is at least one resource report available
         from the META-SHARE statistics server.
         """
-        print "Connecting... {0}".format(self.stats_server_url)
+        LOGGER.info("Connecting ... %s", self.stats_server_url)
         try:
             response = urllib2.urlopen("{0}addnode?{1}".format(self.stats_server_url, urlencode({'url': DJANGO_URL})))
             self.assertEquals(200, response.code)
         except urllib2.URLError:
-            print 'WARNING! Failed contacting statistics server on %s' % self.stats_server_url
-        
+            LOGGER.warn('Failed to contact statistics server on %s',
+                        self.stats_server_url)
+
     def testGetDailyStats(self):
         """
         checking if there are the statistics of the day
@@ -206,23 +204,4 @@ class StatsTest(django.test.TestCase):
 
 
     
-    def testUsage(self):
-        # checking if there are the usage statistics
         
-        client = test_utils.get_client_with_user_logged_in(StatsTest.manager_login)
-        xmlfile = open(TESTFIXTURES_ZIP, 'rb')
-        client.post(ADMINROOT+'upload_xml/', {'description': xmlfile, 'uploadTerms':'on' }, follow=True)
-        
-        statsdata = getLRLast(UPDATE_STAT, 2)
-        self.assertEqual(len(statsdata), 2)
-        
-        for item in statsdata:
-            resource =  resourceInfoType_model.objects.get(storage_object__identifier=item['lrid'])
-            _update_usage_stats(resource.id, resource.export_to_elementtree())
-            
-        response = client.get('/{0}stats/usage'.format(DJANGO_BASE))
-        if response.status_code != 200:
-            print Exception, 'could not get usage stats: {}'.format(response)
-        else:
-            self.assertContains(response, "identificationInfo")
-
