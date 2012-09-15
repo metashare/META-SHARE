@@ -300,11 +300,13 @@ def _get_ipaddress(request):
     (in this way the statistics will not be distorted)
     """
     if request != None:
-        if request.META.has_key('REMOTE_ADDR'):
-            if not BOT_AGENT_RE.match(request.META['HTTP_USER_AGENT']):
-                return request.META['REMOTE_ADDR']
+        remote_addr = getattr(request.META, 'REMOTE_ADDR', '')
+        user_agent = getattr(request.META, 'HTTP_USER_AGENT', '')
+        if user_agent != '':
+            if not BOT_AGENT_RE.match(user_agent):
+                return remote_addr
         else:
-            return request.META['REMOTE_ADDR']       
+            return remote_addr
     return ''
 
 
