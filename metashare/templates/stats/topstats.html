@@ -171,6 +171,9 @@ function addStatus(filter){
         </form>
      </div>
 
+   {% if topdata|length <= 0 and countrycode == '' and last == '' %}
+       <div class="content_box">No data found</div>
+   {% else %}
     {% if not "late" in view or geovisits|length > 0 %}
     <div class="left_box">
 	  <div class="filters" 
@@ -218,11 +221,11 @@ function addStatus(filter){
        </div>  
        </div>  
     </div>
+        {% if topdata|length <= 0 %}
+            <center><strong>No data matched</strong></center>
+        {% endif %}
     {% endif %}
    	
-     {% if topdata|length <= 0 %}
-        <center><strong>No data found</strong></center>
-{% else %}
 	<div class="content_box">   
     <div class="results" >
        

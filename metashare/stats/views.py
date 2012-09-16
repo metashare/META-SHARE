@@ -64,10 +64,13 @@ def mystats (request):
     data = []
     entry_list = getMyResources(request.user.username)
     for resource in entry_list:
-        data.append([resource.id, resource.get_absolute_url, resource, \
-            getLRStats(resource.storage_object.identifier), getUserStats(resource.storage_object.identifier)]) 
-    return render_to_response('stats/mystats.html', {"data": data},
-         context_instance=RequestContext(request))
+        lastaccess = LRStats.objects.values('lasttime').filter(lrid=resource.storage_object.identifier).order_by('-lasttime')[:1]
+        data.append([resource.id, resource.get_absolute_url, resource, resource.storage_object.publication_status, \
+            getLRStats(resource.storage_object.identifier), getUserCount(resource.storage_object.identifier), \
+            lastaccess[0]["lasttime"].strftime("%Y/%m/%d - %I:%M:%S")])
+    return render_to_response('stats/mystats.html', 
+        {"data": data},
+        context_instance=RequestContext(request))
  
 def getMyResources(username):
     return resourceInfoType_model.objects.filter(owners__username=username)
@@ -120,85 +123,88 @@ def usagestats (request):
                         verbose_name = eval(u'{0}._meta.get_field("{1}").verbose_name'.format(_model, _field))
                     _fields[model_name+" "+_component] = [component_name, _field, verbose_name, _required, 0, 0, "field", model_name]            
              
-    lrset = resourceInfoType_model.objects.all()
-    usageset = UsageStats.objects.values('elname', 'elparent').annotate(Count('lrid', distinct=True), \
-        Sum('count')).order_by('elparent', '-lrid__count', 'elname')        
-    
-    if len(lrset) > 0:
-        updateusage = request.GET.get('forceusagestatsupdating','')
-        if len(usageset) == 0 or updateusage == "yes":
-            usagethread = updateUsageStats(lrset, True)
-        else:
-            usagethread = updateUsageStats(lrset)
-        if usagethread != None:
-            errors = "Usage statistics updating is in progress... "+ str(usagethread.getProgress()) +"% completed"
+    lrset = resourceInfoType_model.objects.filter(
+        storage_object__publication_status=PUBLISHED,
+        storage_object__deleted=False)
+    lr_count = len(lrset)
 
-    if (len(usageset) > 0):
-        for item in usageset:
-            class_name = str(item["elparent"])
-            if class_name in _classes:
-                class_name = _classes[class_name]
-            key = str(class_name) + " " + str(item["elname"])
-            if key in _fields:
-                _fields[key][4] += item["lrid__count"]
-                _fields[key][5] += item["count__sum"]
+    try: 
+        usageset = UsageStats.objects.values('elname', 'elparent').annotate(Count('lrid', distinct=True), \
+            Sum('count')).order_by('elparent', '-lrid__count', 'elname')        
+        if (len(usageset) > 0):
+            for item in usageset:
+                class_name = str(item["elparent"])
+                if class_name in _classes:
+                    class_name = _classes[class_name]
+                key = str(class_name) + " " + str(item["elname"])
+                if key in _fields:
+                    _fields[key][4] += item["lrid__count"]
+                    _fields[key][5] += item["count__sum"]
+                    
+        selected_filters = request.POST.getlist('filter')
+        fields_count = 0
+        usage_fields = {}
+        usage_filter = {"required": 0, "recommended": 0, "optional": 0, "never used": 0, "at least one": 0}
+        for key in _fields:
+            value = _fields[key]
+            _filters = []
+            if value[3] == 1:
+                _filters.append("required")
+            elif value[3] == 2:
+                _filters.append("optional")
+            elif value[3] == 3:
+                _filters.append("recommended")
+            
+            if value[5] == 0:
+                _filters.append("never used")
+            else:
+                _filters.append("at least one")
                 
-    selected_filters = request.POST.getlist('filter')
-    fields_count = 0
-    usage_fields = {}
-    usage_filter = {"required": 0, "recommended": 0, "optional": 0, "never used": 0, "at least one": 0}
-    for key in _fields:
-        value = _fields[key]
-        _filters = []
-        if value[3] == 1:
-            _filters.append("required")
-        elif value[3] == 2:
-            _filters.append("optional")
-        elif value[3] == 3:
-            _filters.append("recommended")
+            #filter
+            for ifilter in _filters:
+                usage_filter[ifilter] += 1
+                
+            if len(selected_filters) > 0:
+                usedfilters = 0
+                for ifilter in selected_filters:
+                    if ifilter in _filters:
+                        usedfilters += 1
+                if len(_filters) != usedfilters:
+                    continue 
+                
+            if not value[0] in usage_fields:
+                usage_fields[value[0]] = [value]
+            else:
+                usage_fields[value[0]].append(value)
+            fields_count += 1
+            
         
-        if value[5] == 0:
-            _filters.append("never used")
-        else:
-            _filters.append("at least one")
-            
-        #filter
-        for ifilter in _filters:
-            usage_filter[ifilter] += 1
-            
-        if len(selected_filters) > 0:
-            usedfilters = 0
-            for ifilter in selected_filters:
-                if ifilter in _filters:
-                    usedfilters += 1
-            if len(_filters) != usedfilters:
-                continue 
-            
-        if not value[0] in usage_fields:
-            usage_fields[value[0]] = [value]
-        else:
-            usage_fields[value[0]].append(value)
-        fields_count += 1
-        
-    
-    selected_class = request.POST.get('class')
-    selected_field = request.POST.get('field')
-    result = []
-    resultset = UsageStats.objects.values('text').filter(elparent=selected_class, \
-        elname=selected_field).annotate(Count('elname'), Sum('count')).order_by('-elname__count')
-    if len(resultset) > 0:
-        for item in resultset:
-            text = item["text"]
-            if selected_field in NOACCESS_FIELDS:
-                text = "<HIDDEN VALUE>"   
-            result.append([text, item["elname__count"], item["count__sum"]])
-         
-    expand_all = request.POST.get('expandall')    
+        expand_all = request.POST.get('expandall')    
+        selected_class = request.POST.get('class')
+        selected_field = request.POST.get('field')
+        result = []
+        resultset = UsageStats.objects.values('text').filter(elparent=selected_class, \
+            elname=selected_field).annotate(Count('elname'), Sum('count')).order_by('-elname__count')
+        if len(resultset) > 0:
+            for item in resultset:
+                text = item["text"]
+                if selected_field in NOACCESS_FIELDS:
+                    text = "<HIDDEN VALUE>"   
+                result.append([text, item["elname__count"], item["count__sum"]])
+                    
+        # update usage stats according with published resources
+        lr_usage = UsageStats.objects.filter(elname="resourceName").count()
+        if (lrset.count() != lr_usage):
+            usagethread = updateUsageStats(lrset, True)
+            if usagethread != None:
+                errors = "Usage statistics updating is in progress... "+ str(usagethread.getProgress()) +"% completed"
+    except Exception:
+        errors = "Usage statistics updating is in progress... "
     return render_to_response('stats/usagestats.html',
         {'usage_fields': sorted(usage_fields.iteritems()),
         'usage_filter': usage_filter,
         'fields_count': fields_count,
-        'lr_count': len(lrset),
+        'lr_count': lr_count,
         'selected_filters': selected_filters,
         'selected_class': selected_class,
         'selected_field': selected_field,
@@ -314,7 +320,7 @@ def getstats (request):
     currdate = request.GET.get('date',"")
     if (not currdate):
         currdate = date.today()
-        
+    
     data['date'] = str(currdate)    
     data['metashare_version'] = METASHARE_VERSION  
     data['user'] = LRStats.objects.filter(lasttime__startswith=currdate).values('sessid').annotate(Count('sessid')).count()
@@ -363,8 +369,6 @@ def getstats (request):
             else:
                 usagedata[item["elparent"]].append({"field": item["elname"], "label": verbose, "counters": [int(item["lrid__count"]), int(item["count__sum"])]})
         data["usagestats"] = usagedata
-    
-    #return HttpResponse("["+JSONEncoder().encode(data)+"]", mimetype="application/json")
     return HttpResponse("["+json.dumps(data)+"]", mimetype="application/json")
     
 

@@ -4,6 +4,7 @@
 .tab {display: inline-block;
     zoom: 1; 
     *display:inline; 
+    margin-right: 5px;
     background: url("../images/button_top_bg.png") repeat-x scroll 50% top #f5f3e5; 
     border: solid 1px #ccc; 
     border-bottom: none; 
@@ -95,8 +96,9 @@ div.warning {
     border: 1px solid #FFA500; 
     position:relative;
     padding: 5px;
-    margin-top: -10px;
-    margin-right: 10px;
+    width:550px;
+    margin-top: -15px;
+    height:auto;
 }
     
 label.title {background-color: #fda;

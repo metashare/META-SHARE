@@ -130,12 +130,12 @@ function addStatus(filter){
 <div class="content_tab">
 {% if usage_fields != None %}
     <form id="getusagestats" action="." method="POST">           
-        <div id="subtab">
+      <div id="subtab">
         <div id="section">
-      <div id="colsubtab"><br><h4>Filter by: <img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/help.png" style="cursor: pointer" onclick="showdiv('filtershelp')"></h4></div>  
-      <div id="filtershelp" class=warning style="visibility: hidden; display: none">The filters show:<br>1. Metadata status: the number beside each category: presents the sum of components defined by the system.<br>2. Metadata usage:<br> - at least one : presents the sum of components which have been used in resources.<br> -	never used: presents the sum of components which have not been used in resources.<br><br>You could select from the two filters to have more specific statistics.</div>
-      <div id="colsubtab"><div class="accordion">Metadata status</div>
-                {% for filter, counter in usage_filter.items %}
+          <div id="colsubtab"><br><h4>Filter by: <img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/help.png" style="cursor: pointer; vertical-align: bottom" onclick="showdiv('filtershelp')"></h4></div>  
+          <div id="filtershelp" class="warning" style="visibility: hidden; display: none">This panel shows what metadata have been used to describe the META-SHARE linguistic resources.<br>The metadata defined in the schema can be "required", "recommended" or "optional".<br>Some of them could not be used, contrary for used metadata a pair of numbers is showed like <div class="coverage optional">&nbsp;28/12&nbsp;</div>.<br>The first number tells how many times a metadata has been filled in, while the second how many times<br>the metadata has been used for the linguistic resources.<br>A table with all filled in values is showed when clicking on a used metadata.</div>
+          <div id="colsubtab"><div class="accordion">Metadata status</div>
+                    {% for filter, counter in usage_filter.items %}
                    {% if filter in 'required recommended optional' %}
                         &nbsp;<input type="checkbox" name=filter value="{{ filter }}" onClick="submit()"
                        {% if filter in selected_filters or selected_filters|length == 0 %}
@@ -145,7 +145,7 @@ function addStatus(filter){
                    {% endif %}                  
                 {% endfor %}
                 </div>
-      <div id="colsubtab"><div class="accordion">Metadata usage</div>
+          <div id="colsubtab"><div class="accordion">Metadata usage in {{ lr_count }} resource{{lr_count|pluralize}}</div>
                 {% for filter, counter in usage_filter.items %}
                    {% if filter in 'never used  at least one' %}
                         &nbsp;<input type="checkbox" name=filter value="{{ filter }}" onClick="submit()"
@@ -207,23 +207,23 @@ function addStatus(filter){
             <div class="accordion"><a href="#" onclick="return false"><label class='component'>&nbsp;{{ class }}&nbsp;</label></a></div> 
             <div id="{{ fields.0.7 }}" class="filter">
             {% for field in fields %}
-                <div style="width:100%">
                 {% if field.6 == "component" %}
+                    <div class="tab_content" style="width:100%">
                     <a href="javascript:scrollToAnchor('{{ field.1.split|join:"_" }}')"><label class='component indent'><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/bullet_arrow_right.png">
                      {{ field.2 }}</label></a>
                 {% else %}
-                    &nbsp;&nbsp;
+                    <div class="dataline mandatory" style="width:100%">
                     {% if "/" in field.2 %}
                         <label class="indent">&nbsp;{{ field.2 }}&nbsp;</label>
                     {% else %}
                         {% if field.5 > 0 %}
-                            <a href="javascript:getvalues('{{ field.7 }}','{{ field.1 }}')" 
+                            <a href="javascript:getvalues('{{ field.7 }}','{{ field.1 }}')"
                             {% if selected_class == field.7 and selected_field == field.1 %}
-                                class="addFilter"> 
+                                class="addFilter">
                             {% else %}
                                 class="deleteFilter"> 
                             {% endif %}
-                            <label class="title pointer">&nbsp;{{ field.2 }}&nbsp;</label></a>
+                            <label class="title pointer" style="margin-left: 4px">&nbsp;{{ field.2 }}&nbsp;</label></a>
                         {% else %}
                             <label class="title indent">&nbsp;{{ field.2 }}&nbsp;</label>
                         {% endif %}
