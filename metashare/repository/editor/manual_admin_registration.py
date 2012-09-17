@@ -42,6 +42,7 @@ from django.http import Http404
 from django.utils.safestring import mark_safe
 from django.contrib.admin import helpers
 from django.utils.translation import ugettext as _
+from metashare.repository.editor.related_objects import AdminRelatedInfo
 
 csrf_protect_m = method_decorator(csrf_protect)
 
@@ -69,17 +70,39 @@ class LanguageDescriptionInfoAdmin(SchemaModelAdmin):
 class CorpusAudioModelAdmin(SchemaModelAdmin):
     show_tabbed_fieldsets = True
 
-class PersonModelAdmin(SchemaModelAdmin):
+class PersonModelAdmin(AdminRelatedInfo, SchemaModelAdmin):
     exclude = ('source_url', 'copy_status')
+    list_display = ('instance_data', 'num_related_resources', 'related_resources')
+    
+    def instance_data(self, obj):
+        return obj.__unicode__()
+    instance_data.short_description = 'Person'
+    
+    
 
-class OrganizationModelAdmin(SchemaModelAdmin):
+class OrganizationModelAdmin(AdminRelatedInfo, SchemaModelAdmin):
     exclude = ('source_url', 'copy_status')
+    list_display = ('instance_data', 'num_related_resources', 'related_resources')
+    
+    def instance_data(self, obj):
+        return obj.__unicode__()
+    instance_data.short_description = 'Organization'
 
-class ProjectModelAdmin(SchemaModelAdmin):
+class ProjectModelAdmin(AdminRelatedInfo, SchemaModelAdmin):
     exclude = ('source_url', 'copy_status')
+    list_display = ('instance_data', 'num_related_resources', 'related_resources')
+    
+    def instance_data(self, obj):
+        return obj.__unicode__()
+    instance_data.short_description = 'Project'
 
-class DocumentModelAdmin(SchemaModelAdmin):
+class DocumentModelAdmin(AdminRelatedInfo, SchemaModelAdmin):
     exclude = ('source_url', 'copy_status')
+    list_display = ('instance_data', 'num_related_resources', 'related_resources')
+    
+    def instance_data(self, obj):
+        return obj.__unicode__()
+    instance_data.short_description = 'Document'
 
 class DocumentUnstructuredStringModelAdmin(admin.ModelAdmin, RelatedAdminMixin):
     def response_change(self, request, obj):
