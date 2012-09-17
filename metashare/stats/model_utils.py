@@ -85,8 +85,8 @@ def saveLRStats(resource, action, request=None):
         result = True
     if action == UPDATE_STAT:
         if (resource.storage_object.published):
-            UsageStats.objects.filter(lrid=resource.id).delete()
-            _update_usage_stats(resource.id, resource.export_to_elementtree())
+            UsageStats.objects.filter(lrid=lrid).delete()
+            _update_usage_stats(lrid, resource.export_to_elementtree())
             LOGGER.debug('STATS: Updating usage statistics: resource {0} updated'.format(lrid))
     return result
 

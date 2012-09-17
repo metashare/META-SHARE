@@ -251,13 +251,13 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
     imageTypeOfImageContentFilter = LabeledMultiValueField(
                                 label=_('Type of Image Content'), facet_id=51, parent_id=3,
                                 faceted=True)
-    textNumericalTypeOfTnContentFilter = LabeledMultiValueField(
+    textnumericalTypeOfTnContentFilter = LabeledMultiValueField(
                                 label=_('Type of Text Numerical Content'), facet_id=52, parent_id=3,
                                 faceted=True)
-    textNgramBaseItemFilter = LabeledMultiValueField(
+    textngramBaseItemFilter = LabeledMultiValueField(
                                 label=_('Base Item'), facet_id=53, parent_id=3,
                                 faceted=True)
-    textNgramOrderFilter = LabeledMultiValueField(
+    textngramOrderFilter = LabeledMultiValueField(
                                 label=_('Order'), facet_id=54, parent_id=3,
                                 faceted=True)
     languageVarietyFilter = LabeledMultiValueField(
@@ -345,7 +345,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         instance = self.get_model().objects.get(pk=instance.id)
         # only create/update index entries of published resources
         if instance.storage_object.publication_status == PUBLISHED:
-            LOGGER.info("Puiblished resource #{0} scheduled for reindexing." \
+            LOGGER.info("Published resource #{0} scheduled for reindexing." \
                         .format(instance.id))
             super(resourceInfoType_modelIndex, self) \
                 .update_object(instance, using=using, **kwargs)
@@ -1723,7 +1723,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
 
         return result
     
-    def prepare_textNumericalTypeOfTnContentFilter(self, obj):
+    def prepare_textnumericalTypeOfTnContentFilter(self, obj):
         """
         Collect the data to filter the resources on Media Type children
         """
@@ -1737,7 +1737,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
                     .textNumericalContentInfo.typeOfTextNumericalContent
         return []
     
-    def prepare_textNgramBaseItemFilter(self, obj):
+    def prepare_textngramBaseItemFilter(self, obj):
         """
         Collect the data to filter the resources on Media Type children
         """
@@ -1750,7 +1750,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
                         .get_baseItem_display()]
         return []
 
-    def prepare_textNgramOrderFilter(self, obj):
+    def prepare_textngramOrderFilter(self, obj):
         """
         Collect the data to filter the resources on Media Type children
         """

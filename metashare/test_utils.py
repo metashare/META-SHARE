@@ -23,6 +23,7 @@ from metashare.storage.models import PUBLISHED, MASTER, StorageObject, \
     RemovedObject, INTERNAL
 from metashare.xml_utils import import_from_file
 import os
+from metashare.stats.models import LRStats, UsageStats, QueryStats
 
 
 TEST_STORAGE_PATH = '{0}/test-tmp'.format(settings.ROOT_PATH)
@@ -81,6 +82,14 @@ def clean_user_db():
     ResetRequest.objects.all().delete()
     UserProfile.objects.all().delete()
     User.objects.all().delete()
+
+def clean_stats():
+    """
+    Deletes all static entities from the database.
+    """
+    LRStats.objects.all().delete()
+    UsageStats.objects.all().delete()
+    QueryStats.objects.all().delete()
 
 def clean_storage():
     """

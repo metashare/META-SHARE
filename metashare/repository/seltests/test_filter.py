@@ -43,7 +43,7 @@ class FilterTest(SeleniumTestCase):
         # click 'browse'
         driver.find_element_by_xpath("//div[@id='header']/ul/li[1]/a").click()
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        self.assertEqual("29 Language Resources (Page 1 of 2)", driver.find_element_by_css_selector("h3").text)
+        self.assertEqual("40 Language Resources (Page 1 of 2)", driver.find_element_by_css_selector("h3").text)
 
         # make sure all filters are available
         self.assertEqual("Language", driver.find_element_by_link_text("Language").text)
@@ -66,10 +66,10 @@ class FilterTest(SeleniumTestCase):
         self.assertEqual("Time Coverage", driver.find_element_by_link_text("Time Coverage").text)
         self.assertEqual("Subject", driver.find_element_by_link_text("Subject").text)
         self.assertEqual("Language Variety", driver.find_element_by_link_text("Language Variety").text)
-        
+
         # check Language filter
         click_and_wait(driver.find_element_by_link_text("Language"))
-        self.assertEqual("English (10)", driver.find_element_by_xpath(
+        self.assertEqual("English (15)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[2]/div[1]").text)
         self.assertEqual("Spanish (7)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[2]/div[2]").text)
@@ -80,8 +80,8 @@ class FilterTest(SeleniumTestCase):
         self.assertEqual("French (3)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[2]/div[5]").text)
         self.assertEqual("more", driver.find_element_by_xpath(
-          "//div[@id='searchFilters']/div[2]/div[15]").text)
-        # check language filter more/less
+          "//div[@id='searchFilters']/div[2]/div[19]").text)
+        # check Language filter more/less
         click_and_wait(driver.find_element_by_link_text("more"))
         self.assertEqual("Bulgarian (2)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[2]/div[6]").text)
@@ -91,53 +91,72 @@ class FilterTest(SeleniumTestCase):
           "//div[@id='searchFilters']/div[2]/div[8]").text)
         self.assertEqual("Portuguese (2)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[2]/div[9]").text)
-        self.assertEqual("Arabic (1)", driver.find_element_by_xpath(
+        self.assertEqual("Aleut (1)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[2]/div[10]").text)
-        self.assertEqual("Chinese (1)", driver.find_element_by_xpath(
+        self.assertEqual("Arabic (1)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[2]/div[11]").text)
-        self.assertEqual("Estonian (1)", driver.find_element_by_xpath(
+        self.assertEqual("Asturian; Bable; Leonese; Asturleonese (1)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[2]/div[12]").text)
-        self.assertEqual("Thai (1)", driver.find_element_by_xpath(
+        self.assertEqual("Basque (1)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[2]/div[13]").text)
-        self.assertEqual("Turkish (1)", driver.find_element_by_xpath(
+        self.assertEqual("Chinese (1)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[2]/div[14]").text)
-        self.assertEqual("less", driver.find_element_by_xpath(
+        self.assertEqual("Estonian (1)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[2]/div[15]").text)
+        self.assertEqual("Greek, Modern (1453-) (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[2]/div[16]").text)
+        self.assertEqual("Thai (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[2]/div[17]").text)
+        self.assertEqual("Turkish (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[2]/div[18]").text)
+        self.assertEqual("less", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[2]/div[19]").text)
         click_and_wait(driver.find_element_by_link_text("less"))
         self.assertEqual("more", driver.find_element_by_xpath(
-          "//div[@id='searchFilters']/div[2]/div[15]").text)
+          "//div[@id='searchFilters']/div[2]/div[19]").text)
         click_and_wait(driver.find_element_by_link_text("Language"))
-        
+
         # check Resource Type filter        
         click_and_wait(driver.find_element_by_link_text("Resource Type"))
-        self.assertEqual("Corpus (15)", driver.find_element_by_xpath(
+        self.assertEqual("Corpus (23)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[4]/div[1]").text)
         self.assertEqual("Lexical Conceptual Resource (11)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[4]/div[2]").text)
-        self.assertEqual("Tool Service (3)", driver.find_element_by_xpath(
+        self.assertEqual("Language Description (3)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[4]/div[3]").text)
+        self.assertEqual("Tool Service (3)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[4]/div[4]").text)
         click_and_wait(driver.find_element_by_link_text("Resource Type"))
-        
+
         # check Media Type filter        
         click_and_wait(driver.find_element_by_link_text("Media Type"))
-        self.assertEqual("Text (23)", driver.find_element_by_xpath(
+        self.assertEqual("Text (29)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[6]/div[1]").text)
         self.assertEqual("Audio (8)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[6]/div[2]").text)
-        self.assertEqual("Image (1)", driver.find_element_by_xpath(
+        self.assertEqual("Image (6)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[6]/div[3]").text)
-        self.assertEqual("Video (1)", driver.find_element_by_xpath(
+        self.assertEqual("Textngram (3)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[6]/div[4]").text)
+        self.assertEqual("Textnumerical (3)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[6]/div[5]").text)
+        # check Media Type filter more/less
+        click_and_wait(driver.find_element_by_link_text("more"))
+        self.assertEqual("Video (2)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[6]/div[6]").text)
+        click_and_wait(driver.find_element_by_link_text("less"))
+        self.assertEqual("more", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[6]/div[7]").text)
         click_and_wait(driver.find_element_by_link_text("Media Type"))
-        
+
         # check Availability filter
         click_and_wait(driver.find_element_by_link_text("Availability"))
-        self.assertEqual("Available - Restricted Use (25)", driver.find_element_by_xpath(
+        self.assertEqual("Available - Restricted Use (31)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[8]/div[1]").text)
-        self.assertEqual("Available - Unrestricted Use (4)", driver.find_element_by_xpath(
+        self.assertEqual("Available - Unrestricted Use (9)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[8]/div[2]").text)
         click_and_wait(driver.find_element_by_link_text("Availability"))
-        
+
         # check Licence filter
         click_and_wait(driver.find_element_by_link_text("Licence"))
         self.assertEqual("ELRA_VAR (15)", driver.find_element_by_xpath(
@@ -150,11 +169,26 @@ class FilterTest(SeleniumTestCase):
           "//div[@id='searchFilters']/div[10]/div[4]").text)
         self.assertEqual("BSD - Style (1)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[10]/div[5]").text)
+        # check Licence filter more/less
+        click_and_wait(driver.find_element_by_link_text("more"))
+        self.assertEqual("CC_BY (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[10]/div[6]").text)
+        self.assertEqual("CC_BY - NC - ND (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[10]/div[7]").text)
+        self.assertEqual("CC_BY - NC - SA (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[10]/div[8]").text)
+        self.assertEqual("LGP Lv3 (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[10]/div[9]").text)
+        self.assertEqual("LGPL (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[10]/div[10]").text)
+        click_and_wait(driver.find_element_by_link_text("less"))
+        self.assertEqual("more", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[10]/div[11]").text)
         click_and_wait(driver.find_element_by_link_text("Licence"))
        
         # check Restrictions of Use filter        
         click_and_wait(driver.find_element_by_link_text("Restrictions of Use"))
-        self.assertEqual("Academic - Non Commercial Use (17)", driver.find_element_by_xpath(
+        self.assertEqual("Academic - Non Commercial Use (18)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[12]/div[1]").text)
         self.assertEqual("Commercial Use (15)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[12]/div[2]").text)
@@ -171,7 +205,7 @@ class FilterTest(SeleniumTestCase):
         self.assertEqual("True (6)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[14]/div[1]").text)
         click_and_wait(driver.find_element_by_link_text("Validated"))
-        
+
         # check Foreseen Use filter        
         click_and_wait(driver.find_element_by_link_text("Foreseen Use"))
         self.assertEqual("Nlp Applications (8)", driver.find_element_by_xpath(
@@ -179,7 +213,7 @@ class FilterTest(SeleniumTestCase):
         self.assertEqual("Human Use (2)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[16]/div[2]").text)
         click_and_wait(driver.find_element_by_link_text("Foreseen Use"))
-        
+
         # check Use Is NLP Specific filter        
         click_and_wait(driver.find_element_by_link_text("Use Is NLP Specific"))
         self.assertEqual("Other (2)", driver.find_element_by_xpath(
@@ -192,38 +226,64 @@ class FilterTest(SeleniumTestCase):
           "//div[@id='searchFilters']/div[18]/div[4]").text)
         self.assertEqual("Face Recognition (1)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[18]/div[5]").text)
+        # check Use Is NLP Specific filter more/less
+        click_and_wait(driver.find_element_by_link_text("more"))
+        self.assertEqual("Linguistic Research (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[18]/div[6]").text)
+        self.assertEqual("Pos Tagging (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[18]/div[7]").text)
+        self.assertEqual("Semantic Role Labelling (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[18]/div[8]").text)
+        self.assertEqual("Speech Synthesis (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[18]/div[9]").text)
+        self.assertEqual("Spoken Dialogue Systems (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[18]/div[10]").text)
+        click_and_wait(driver.find_element_by_link_text("less"))
+        self.assertEqual("more", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[18]/div[11]").text)
         click_and_wait(driver.find_element_by_link_text("Use Is NLP Specific"))
-        
+
         # check Linguality Type filter        
         click_and_wait(driver.find_element_by_link_text("Linguality Type"))
-        self.assertEqual("Monolingual (24)", driver.find_element_by_xpath(
+        self.assertEqual("Monolingual (31)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[20]/div[1]").text)
-        self.assertEqual("Bilingual (2)", driver.find_element_by_xpath(
+        self.assertEqual("Bilingual (4)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[20]/div[2]").text)
         click_and_wait(driver.find_element_by_link_text("Linguality Type"))
-        
+
         # check Multilinguality Type filter        
         click_and_wait(driver.find_element_by_link_text("Multilinguality Type"))
         self.assertEqual("Comparable (1)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[22]/div[1]").text)
-        self.assertEqual("Parallel (1)", driver.find_element_by_xpath(
+        self.assertEqual("Other (1)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[22]/div[2]").text)
+        self.assertEqual("Parallel (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[22]/div[3]").text)
         click_and_wait(driver.find_element_by_link_text("Multilinguality Type"))
-        
+
         # check Modality Type filter        
         click_and_wait(driver.find_element_by_link_text("Modality Type"))
-        self.assertEqual("Written Language (6)", driver.find_element_by_xpath(
+        self.assertEqual("Written Language (8)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[24]/div[1]").text)
-        self.assertEqual("Spoken Language (2)", driver.find_element_by_xpath(
+        self.assertEqual("Facial Expression (5)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[24]/div[2]").text)
-        self.assertEqual("Body Gesture (1)", driver.find_element_by_xpath(
+        self.assertEqual("Combination Of Modalities (3)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[24]/div[3]").text)
-        self.assertEqual("Combination Of Modalities (1)", driver.find_element_by_xpath(
+        self.assertEqual("Spoken Language (3)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[24]/div[4]").text)
-        self.assertEqual("Facial Expression (1)", driver.find_element_by_xpath(
+        self.assertEqual("Voice (2)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[24]/div[5]").text)
+        # check Modality Type filter more/less
+        click_and_wait(driver.find_element_by_link_text("more"))
+        self.assertEqual("Body Gesture (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[24]/div[6]").text)
+        self.assertEqual("Other (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[24]/div[7]").text)
+        click_and_wait(driver.find_element_by_link_text("less"))
+        self.assertEqual("more", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[24]/div[8]").text)
         click_and_wait(driver.find_element_by_link_text("Modality Type"))
-        
+
         # check MIME Type filter        
         click_and_wait(driver.find_element_by_link_text("MIME Type"))
         self.assertEqual("Plain text (2)", driver.find_element_by_xpath(
@@ -236,22 +296,42 @@ class FilterTest(SeleniumTestCase):
           "//div[@id='searchFilters']/div[26]/div[4]").text)
         self.assertEqual("Text/xml (1)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[26]/div[5]").text)
+        # check MIME Type filter more/less
+        click_and_wait(driver.find_element_by_link_text("more"))
+        self.assertEqual("Txt/plain (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[26]/div[6]").text)
+        self.assertEqual("Txt/xml (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[26]/div[7]").text)
+        self.assertEqual("Video/mpeg (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[26]/div[8]").text)
+        click_and_wait(driver.find_element_by_link_text("less"))
+        self.assertEqual("more", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[26]/div[9]").text)
         click_and_wait(driver.find_element_by_link_text("MIME Type"))
-        
+
         # check Conformance to Standards/Best Practices filter        
         click_and_wait(driver.find_element_by_link_text("Conformance to Standards/Best Practices"))
         self.assertEqual("Other (3)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[28]/div[1]").text)
-        self.assertEqual("TEI (2)", driver.find_element_by_xpath(
+        self.assertEqual("EAGLES (2)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[28]/div[2]").text)
-        self.assertEqual("XCES (2)", driver.find_element_by_xpath(
+        self.assertEqual("TEI (2)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[28]/div[3]").text)
-        self.assertEqual("EAGLES (1)", driver.find_element_by_xpath(
+        self.assertEqual("XCES (2)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[28]/div[4]").text)
-        self.assertEqual("EML (1)", driver.find_element_by_xpath(
+        self.assertEqual("BLM (1)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[28]/div[5]").text)
+        # check Conformance to Standards/Best Practices filter more/less
+        click_and_wait(driver.find_element_by_link_text("more"))
+        self.assertEqual("EML (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[28]/div[6]").text)
+        self.assertEqual("MUMIN (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[28]/div[7]").text)
+        click_and_wait(driver.find_element_by_link_text("less"))
+        self.assertEqual("more", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[28]/div[8]").text)
         click_and_wait(driver.find_element_by_link_text("Conformance to Standards/Best Practices"))
-        
+
         # check Domain filter        
         click_and_wait(driver.find_element_by_link_text("Domain"))
         self.assertEqual("General (2)", driver.find_element_by_xpath(
@@ -264,8 +344,29 @@ class FilterTest(SeleniumTestCase):
           "//div[@id='searchFilters']/div[30]/div[4]").text)
         self.assertEqual("Fiction (1)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[30]/div[5]").text)
+        # check Domain filter more/less
+        click_and_wait(driver.find_element_by_link_text("more"))
+        self.assertEqual("Geography (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[30]/div[6]").text)
+        self.assertEqual("Health (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[30]/div[7]").text)
+        self.assertEqual("History (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[30]/div[8]").text)
+        self.assertEqual("Humanities (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[30]/div[9]").text)
+        self.assertEqual("Law_politics (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[30]/div[10]").text)
+        self.assertEqual("Leisure (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[30]/div[11]").text)
+        self.assertEqual("Society (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[30]/div[12]").text)
+        self.assertEqual("Travel (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[30]/div[13]").text)
+        click_and_wait(driver.find_element_by_link_text("less"))
+        self.assertEqual("more", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[30]/div[14]").text)
         click_and_wait(driver.find_element_by_link_text("Domain"))
-        
+
         # check Geographic Coverage filter        
         click_and_wait(driver.find_element_by_link_text("Geographic Coverage"))
         self.assertEqual("European Union (1)", driver.find_element_by_xpath(
@@ -273,7 +374,7 @@ class FilterTest(SeleniumTestCase):
         self.assertEqual("Thrace (1)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[32]/div[2]").text)
         click_and_wait(driver.find_element_by_link_text("Geographic Coverage"))
-        
+
         # check Time Coverage filter        
         click_and_wait(driver.find_element_by_link_text("Time Coverage"))
         self.assertEqual("1958-2006 (1)", driver.find_element_by_xpath(
@@ -285,19 +386,19 @@ class FilterTest(SeleniumTestCase):
         self.assertEqual("After 1990 (1)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[34]/div[4]").text)
         click_and_wait(driver.find_element_by_link_text("Time Coverage"))
-        
+
         # check Subject filter        
         click_and_wait(driver.find_element_by_link_text("Subject"))
         self.assertEqual("News (1)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[36]/div[1]").text)
         click_and_wait(driver.find_element_by_link_text("Subject"))
-        
+
         # check Language Variety filter        
         click_and_wait(driver.find_element_by_link_text("Language Variety"))
         self.assertEqual("Castilian (7)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[38]/div[1]").text)
         click_and_wait(driver.find_element_by_link_text("Language Variety"))
-        
+
         # test sorting:
         # default sorting is by resource name, ascending
         self.assertEqual("Resource Name A-Z", driver.find_element_by_xpath(
@@ -327,7 +428,7 @@ class FilterTest(SeleniumTestCase):
           "//div[@class='results']/div/img[2]").get_attribute("title"))
         # now sort by language ascending
         Select(driver.find_element_by_name("ordering")).select_by_visible_text("Language Name A-Z")
-        self.assertEqual("Arabic\nEnglish\nFrench", driver.find_element_by_xpath(
+        self.assertEqual("Aleut", driver.find_element_by_xpath(
           "//div[@class='results']/div/ul").text)
         # now sort by language descending
         Select(driver.find_element_by_name("ordering")).select_by_visible_text("Language Name Z-A")
@@ -339,7 +440,7 @@ class FilterTest(SeleniumTestCase):
         # filter by language English
         driver.find_element_by_link_text("Language").click()
         driver.find_element_by_link_text("English").click()
-        self.assertEqual("10 Language Resources", driver.find_element_by_css_selector("h3").text)
+        self.assertEqual("15 Language Resources", driver.find_element_by_css_selector("h3").text)
         # additionally filter by license
         driver.find_element_by_link_text("Licence").click()
         driver.find_element_by_link_text("ELRA_VAR").click()
@@ -364,7 +465,7 @@ class FilterTest(SeleniumTestCase):
         self.assertEqual("15 Language Resources", driver.find_element_by_css_selector("h3").text)
         # remove restiriction of use filter
         driver.find_element_by_link_text("Commercial Use").click()
-        self.assertEqual("29 Language Resources (Page 1 of 2)", driver.find_element_by_css_selector("h3").text)
+        self.assertEqual("40 Language Resources (Page 1 of 2)", driver.find_element_by_css_selector("h3").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
 
         # Test sub filters
@@ -473,7 +574,48 @@ class FilterTest(SeleniumTestCase):
         click_and_wait(driver.find_element_by_link_text("Linguistic Information"))
         # remove Resource Type filter
         click_and_wait(driver.find_element_by_link_text("Lexical Conceptual Resource"))
-        
+
+        # Test all sub filter of Resource Type / Language Description are available
+        click_and_wait(driver.find_element_by_link_text("Resource Type"))
+        click_and_wait(driver.find_element_by_link_text("Language Description"))
+        self.assertEqual("Language Description Type", driver.find_element_by_link_text("Language Description Type").text)
+        self.assertEqual("Encoding Level", driver.find_element_by_link_text("Encoding Level").text)
+        self.assertEqual("Grammatical Phenomena Coverage", driver.find_element_by_link_text("Grammatical Phenomena Coverage").text)
+        # check content of Language Description Type filter
+        click_and_wait(driver.find_element_by_link_text("Language Description Type"))
+        self.assertEqual("Grammar (2)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[@class='filter']/div[3]/div[1]").text)
+        self.assertEqual("Other (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[@class='filter']/div[3]/div[2]").text)
+        # Close Language Description Type filter
+        click_and_wait(driver.find_element_by_link_text("Language Description Type"))
+        # check content of Encoding Level filter
+        click_and_wait(driver.find_element_by_link_text("Encoding Level"))
+        self.assertEqual("Phonetics (2)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[@class='filter']/div[5]/div[1]").text)
+        self.assertEqual("Syntax (2)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[@class='filter']/div[5]/div[2]").text)
+        self.assertEqual("Morphology (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[@class='filter']/div[5]/div[3]").text)
+        self.assertEqual("Other (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[@class='filter']/div[5]/div[4]").text)
+        self.assertEqual("Semantics (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[@class='filter']/div[5]/div[5]").text)
+        # Close Encoding Level filter
+        click_and_wait(driver.find_element_by_link_text("Encoding Level"))
+        # check content of Grammatical Phenomena Coverage filter
+        click_and_wait(driver.find_element_by_link_text("Grammatical Phenomena Coverage"))
+        self.assertEqual("Clause Structure (2)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[@class='filter']/div[7]/div[1]").text)
+        self.assertEqual("Coordination (2)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[@class='filter']/div[7]/div[2]").text)
+        self.assertEqual("Anaphora (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[@class='filter']/div[7]/div[3]").text)
+        # Close Grammatical Phenomena Coverage filter
+        click_and_wait(driver.find_element_by_link_text("Grammatical Phenomena Coverage"))
+        # remove Resource Type filter
+        click_and_wait(driver.find_element_by_link_text("Language Description"))
+
         # Test all sub filter of Resource Type / Tool Service are available
         click_and_wait(driver.find_element_by_link_text("Resource Type"))
         click_and_wait(driver.find_element_by_link_text("Tool Service"))
@@ -558,6 +700,7 @@ class FilterTest(SeleniumTestCase):
         self.assertEqual("Text Genre", driver.find_element_by_link_text("Text Genre").text)
         self.assertEqual("Text Type", driver.find_element_by_link_text("Text Type").text)
         self.assertEqual("Register", driver.find_element_by_link_text("Register").text)
+        self.assertEqual("Type of Text Numerical Content", driver.find_element_by_link_text("Type of Text Numerical Content").text)
         # check content of Text Genre filter
         click_and_wait(driver.find_element_by_link_text("Text Genre"))
         self.assertEqual("Advertising (1)", driver.find_element_by_xpath(
@@ -610,6 +753,12 @@ class FilterTest(SeleniumTestCase):
         # Close Register filter
         click_and_wait(driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[@class='filter']/div[6]/a"))
+        # check content of Type of Text Numerical Content filter
+        click_and_wait(driver.find_element_by_link_text("Type of Text Numerical Content"))
+        self.assertEqual("Coordinates (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[@class='filter']/div[9]/div[1]").text)
+        # Close Type of Text Numerical Content filter
+        click_and_wait(driver.find_element_by_link_text("Type of Text Numerical Content"))
         click_and_wait(driver.find_element_by_link_text("Text"))
        
         # Test all sub filter of Media Type / Audio are available
@@ -660,8 +809,82 @@ class FilterTest(SeleniumTestCase):
         # remove Media Type filter
         click_and_wait(driver.find_element_by_link_text("Audio"))
        
+        # Test all sub filter of Media Type / Image are available
+        click_and_wait(driver.find_element_by_link_text("Media Type"))
+        click_and_wait(driver.find_element_by_link_text("Image"))
+        self.assertEqual("Image Genre", driver.find_element_by_link_text("Image Genre").text)
+        self.assertEqual("Type of Image Content", driver.find_element_by_link_text("Type of Image Content").text)
+        # check content of Image Genre filter
+        click_and_wait(driver.find_element_by_link_text("Image Genre"))
+        self.assertEqual("Photos (2)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[@class='filter']/div[3]/div[1]").text)
+        self.assertEqual("Paintings (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[@class='filter']/div[3]/div[2]").text)
+        self.assertEqual("Testimage (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[@class='filter']/div[3]/div[3]").text)
+        # Close Image Genre filter
+        click_and_wait(driver.find_element_by_link_text("Image Genre"))
+        # check content of Type of Image Content filter
+        click_and_wait(driver.find_element_by_link_text("Type of Image Content"))
+        self.assertEqual("Nature (3)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[@class='filter']/div[5]/div[1]").text)
+        self.assertEqual("Cars (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[@class='filter']/div[5]/div[2]").text)
+        self.assertEqual("Cartoons (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[@class='filter']/div[5]/div[3]").text)
+        self.assertEqual("Face (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[@class='filter']/div[5]/div[4]").text)
+        # Close Type of Image Content filter
+        click_and_wait(driver.find_element_by_link_text("Type of Image Content"))
+        # remove Media Type filter
+        click_and_wait(driver.find_element_by_link_text("Image"))
+       
+        # Test all sub filter of Media Type / Textngram are available
+        click_and_wait(driver.find_element_by_link_text("Media Type"))
+        click_and_wait(driver.find_element_by_link_text("Textngram"))
+        self.assertEqual("Base Item", driver.find_element_by_link_text("Base Item").text)
+        self.assertEqual("Order", driver.find_element_by_link_text("Order").text)
+        # check content of Base Item filter
+        click_and_wait(driver.find_element_by_link_text("Base Item"))
+        self.assertEqual("Letter (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[@class='filter']/div[3]/div[1]").text)
+        self.assertEqual("Syllable, Letter (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[@class='filter']/div[3]/div[2]").text)
+        self.assertEqual("Word (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[@class='filter']/div[3]/div[3]").text)
+        # Close Base Item filter
+        click_and_wait(driver.find_element_by_link_text("Base Item"))
+        # check content of Order filter
+        click_and_wait(driver.find_element_by_link_text("Order"))
+        self.assertEqual("1 (2)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[@class='filter']/div[5]/div[1]").text)
+        self.assertEqual("2 (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[@class='filter']/div[5]/div[2]").text)
+        # Close Order filter
+        click_and_wait(driver.find_element_by_link_text("Order"))
+        # remove Media Type filter
+        click_and_wait(driver.find_element_by_link_text("Textngram"))
+
+        # Test all sub filter of Media Type / Textnumerical are available
+        click_and_wait(driver.find_element_by_link_text("Media Type"))
+        click_and_wait(driver.find_element_by_link_text("Textnumerical"))
+        self.assertEqual("Type of Text Numerical Content", driver.find_element_by_link_text("Type of Text Numerical Content").text)
+        # check content of Type of Text Numerical Content filter
+        click_and_wait(driver.find_element_by_link_text("Type of Text Numerical Content"))
+        self.assertEqual("Coordinates (2)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[@class='filter']/div[3]/div[1]").text)
+        self.assertEqual("Temperature (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[@class='filter']/div[3]/div[2]").text)
+        self.assertEqual("Testcontent (1)", driver.find_element_by_xpath(
+          "//div[@id='searchFilters']/div[@class='filter']/div[3]/div[3]").text)
+        # Close Type of Text Numerical Content filter
+        click_and_wait(driver.find_element_by_link_text("Type of Text Numerical Content"))
+        # remove Media Type filter
+        click_and_wait(driver.find_element_by_link_text("Textnumerical"))
+       
         # Test all sub filter of Media Type / Video are available
         click_and_wait(driver.find_element_by_link_text("Media Type"))
+        click_and_wait(driver.find_element_by_link_text("more"))
         click_and_wait(driver.find_element_by_link_text("Video"))
         self.assertEqual("Video Genre", driver.find_element_by_link_text("Video Genre").text)
         self.assertEqual("Type of Video Content", driver.find_element_by_link_text("Type of Video Content").text)
@@ -700,5 +923,3 @@ class FilterTest(SeleniumTestCase):
         click_and_wait(driver.find_element_by_link_text("Scenario Type"))
         # remove Media Type filter
         click_and_wait(driver.find_element_by_link_text("Video"))
-       
-
