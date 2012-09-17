@@ -21,6 +21,8 @@ from metashare.repository.validators import validate_lang_code_keys, \
 from metashare.settings import DJANGO_BASE, LOG_HANDLER, DJANGO_URL
 from metashare.stats.model_utils import saveLRStats, DELETE_STAT
 from metashare.storage.models import StorageObject, MASTER, COPY_CHOICES
+from metashare.recommendations.models import ResourceCountPair, \
+    ResourceCountDict
 
 
 # Setup logging support.
@@ -208,7 +210,12 @@ class resourceInfoType_model(SchemaModel):
         suppress deletion of statistics
         """
         if not keep_stats:
+            # delete statistics
             saveLRStats(self, DELETE_STAT)
+            # delete recommendations
+            ResourceCountPair.objects.filter(lrid=self.storage_object.identifier).delete()
+            ResourceCountDict.objects.filter(lrid=self.storage_object.identifier).delete()
+            
         # Call delete() method from super class with all arguments but keep_stats
         super(resourceInfoType_model, self).delete(*args, **kwargs)
 
