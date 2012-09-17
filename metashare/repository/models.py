@@ -201,12 +201,15 @@ class resourceInfoType_model(SchemaModel):
         # Call save() method from super class with all arguments.
         super(resourceInfoType_model, self).save(*args, **kwargs)
 
-    def delete(self, *args, **kwargs):
+    def delete(self, keep_stats=False, *args, **kwargs):
         """
         Overrides the predefined delete() method to update the statistics.
+        Includes deletion of statistics; use keep_stats optional parameter to
+        suppress deletion of statistics
         """
-        saveLRStats(self, DELETE_STAT)
-        # Call delete() method from super class with all arguments.
+        if not keep_stats:
+            saveLRStats(self, DELETE_STAT)
+        # Call delete() method from super class with all arguments but keep_stats
         super(resourceInfoType_model, self).delete(*args, **kwargs)
 
     def get_absolute_url(self):
