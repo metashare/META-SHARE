@@ -1,6 +1,30 @@
-{% with media_info=resource_component_dict.Resource_component %}
+{% load eval %}
 
-{{ lr_content|unordered_list }}
+{% with media_info=resource_component_dict.Resource_component %}
+	{% if media_type == "text" %}
+		{{ resource_component_dicts.text }}
+	{% else %}
+		{% if media_type == "audio" %}
+			{{ resource_component_dicts.audio }}
+		{% else %}
+			{% if media_type == "video" %}
+				{{ resource_component_dicts.video }}
+			{% else %}
+				{% if media_type == "image" %}
+					{{ resource_component_dicts.image }}
+				{% else %}
+					{% if media_type == "textNumerical" %}
+						{{ resource_component_dicts.textNumerical }}
+					{% else %}
+						{% if media_type == "textNumerical" %}
+							{{ resource_component_dicts.textNumerical }}
+						{% endif %}
+					{% endif %}
+				{% endif %}
+			{% endif %}
+		{% endif %}
+	{% endif %}	
+
 {% include "repository/language.html" with languages=media_info.Corpus_media.Corpus_text %}
 
 {% endwith %}

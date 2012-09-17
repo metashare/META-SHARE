@@ -161,8 +161,6 @@
 				{{ person }}
 			{% endfor %}
 			{{ resource_component_dict.Resource_component.Resource }}
-
-
 		</div>
 		
 		<div class="column middle">
@@ -189,52 +187,23 @@
 				{% for type in mediaTypes %}
 					<div id="tabs_content_container">
 						<div id="{{forloop.counter}}" class="tab_content">
-							{% ifequal resourceType "corpus" %}
-								{% ifequal type "text" %}
-									{% include "repository/media_info.html" with media_type='Corpus_audio' resource_type="Corpus_media" %}
-								{% endifequal %}
-								{% ifequal type "audio" %}
-									{% include "repository/media_info.html" with type='Corpus audio' %}
-								{% endifequal %}
-								{% ifequal type "video" %}
-									{% include "repository/media_info.html" with type='Corpus video' %}
-								{% endifequal %}
-								{% ifequal type "image" %}
-									{% include "repository/media_info.html" with type='Corpus image' %}
-								{% endifequal %}
-								{% ifequal type "textNumerical" %}
-									{% include "repository/media_info.html" with type='Corpus text numerical' %}
-								{% endifequal %}
-								{% ifequal type "textNgram" %}
-									{% include "repository/media_info.html" with type='Corpus text ngram' %}
-								{% endifequal %}
-							{% else %}
-								{% ifequal resourceType "lexicalConceptualResource" %}
-									{% ifequal type "text" %}
-										{% include "repository/media_info.html" with type='Lexical conceptual resource text' %}
-									{% endifequal %}
-									{% ifequal type "audio" %}
-										{% include "repository/media_info.html" with type='Lexical conceptual resource audio' %}
-									{% endifequal %}
-									{% ifequal type "video" %}
-										{% include "repository/media_info.html" with type='Lexical conceptual resource video' %}
-									{% endifequal %}
-									{% ifequal type "image" %}
-										{% include "repository/media_info.html" with type='Lexical conceptual resource image' %}
-									{% endifequal %}
-								{% else %}	
-									{% ifequal resourceType "languageDescription" %}
-										{% ifequal type "text" %}
-											{% include "repository/media_info.html" with type='Language description text' %}
-										{% endifequal %}
-										{% ifequal type "video" %}
-											{% include "repository/media_info.html" with type='Language description video' %}
-										{% endifequal %}
-										{% ifequal type "image" %}
-											{% include "repository/media_info.html" with type='Language description image' %}
-										{% endifequal %}										
-									{% endifequal %}		
-								{% endifequal %}
+							{% ifequal type "text" %}
+								{% include "repository/media_info.html" with media_type='text' %}
+							{% endifequal %}
+							{% ifequal type "audio" %}
+								{% include "repository/media_info.html" with media_type='audio' %}
+							{% endifequal %}
+							{% ifequal type "video" %}
+								{% include "repository/media_info.html" with media_type='video' %}
+							{% endifequal %}
+							{% ifequal type "image" %}
+								{% include "repository/media_info.html" with media_type='image' %}
+							{% endifequal %}
+							{% ifequal type "textNumerical" %}
+								{% include "repository/media_info.html" with media_type='textNumerical' %}
+							{% endifequal %}
+							{% ifequal type "textNgram" %}
+								{% include "repository/media_info.html" with media_type='textNgram' %}
 							{% endifequal %}
 						</div>
 					</div>
