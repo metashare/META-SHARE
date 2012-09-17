@@ -14,7 +14,7 @@ from StringIO import StringIO
 from traceback import format_exc
 from metashare import settings
 from metashare.storage.models import compute_digest_checksum
-from metashare.stats.models import LRStats, UsageStats
+
 
 # Idea taken from 
 # http://stackoverflow.com/questions/5082128/how-do-i-authenticate-a-urllib2-script-in-order-to-access-https-web-services-fro
