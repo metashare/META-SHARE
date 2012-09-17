@@ -220,6 +220,8 @@ def topstats (request):
     topdata = []
     view = request.GET.get('view', 'topviewed')
     last = request.GET.get('last', '')
+    limit = int(request.GET.get('limit', '2'))
+    offset = int(request.GET.get('offset', '0'))
     since = None
     if (last == "day"):
         since = date.today() + relativedelta(days = -1)
@@ -237,7 +239,7 @@ def topstats (request):
     if view == "topviewed":
         geovisits = getCountryActions(VIEW_STAT)
         visitstitle = "viewing resources"
-        data = getLRTop(VIEW_STAT, 10, countrycode, since)
+        data = getLRTop(VIEW_STAT, limit, countrycode, since, offset)
         for item in data:
             try:
                 res_info =  resourceInfoType_model.objects.get(storage_object__identifier=item['lrid'])
@@ -247,7 +249,7 @@ def topstats (request):
     elif (view == "latestupdated"):
         geovisits = getCountryActions(UPDATE_STAT)
         visitstitle = "updating resources"
-        data = getLRLast(UPDATE_STAT, 10, countrycode)
+        data = getLRLast(UPDATE_STAT, limit, countrycode, offset)
         for item in data:
             try:
                 res_info =  resourceInfoType_model.objects.get(storage_object__identifier=item['lrid'])
@@ -257,7 +259,7 @@ def topstats (request):
     elif (view == "topdownloaded"):
         geovisits = getCountryActions(DOWNLOAD_STAT)
         visitstitle = "downloading resources"
-        data = getLRTop(DOWNLOAD_STAT, 10, countrycode, since)
+        data = getLRTop(DOWNLOAD_STAT, limit, countrycode, since, offset)
         for item in data:
             try:
                 res_info =  resourceInfoType_model.objects.get(storage_object__identifier=item['lrid'])
@@ -267,7 +269,7 @@ def topstats (request):
     elif view == "topqueries":
         geovisits = getCountryQueries()
         visitstitle = "queries"
-        data = getTopQueries(10, countrycode, since)
+        data = getTopQueries(limit, countrycode, since, offset)
         for item in data:
             url = "q=" + item['query']
             query = urllib.unquote(item['query'])
@@ -282,7 +284,7 @@ def topstats (request):
     elif view == "latestqueries":
         geovisits = getCountryQueries()
         visitstitle = "queries"
-        data = getLastQuery(10, countrycode)
+        data = getLastQuery(limit, countrycode, offset)
         for item in data:
             url = "q=" + item['query']
             query = urllib.unquote(item['query'])
@@ -297,13 +299,15 @@ def topstats (request):
     
     return render_to_response('stats/topstats.html',
         {'user': request.user, 
-        'topdata': topdata[:10], 
+        'topdata': topdata[:limit], 
         'view': view,
         'geovisits': geovisits,
         'countrycode': countrycode,
         'countryname': countryname,
         'visitstitle': visitstitle,
         'last' : last,
+        'offset': offset,
+        'limit': limit,
         'myres': isOwner(request.user.username)},
         context_instance=RequestContext(request))
     

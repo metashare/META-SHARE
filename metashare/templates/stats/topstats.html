@@ -168,7 +168,17 @@ function addStatus(filter){
             {% endifequal %}
             > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Latest Updated Resources
             </select>
-        </form>
+           <div style="float: right; display: inline-block; margin-left: 20px; padding: 0px; margin-top: 0px; margin-bottom:0px; margin-right: 400px; vertical-align: bottom"> 
+	    {% if offset != 0 %}
+	         <div id=morebutton>&nbsp;<a href="?view={{ view }}&offset=0&limit={{ limit }}&last={{ last }}&country={{ countrycode }}">go top</a>&nbsp;</div>	
+        {% endif %}
+        {% if topdata|length >= limit %}
+	        <div id=morebutton>&nbsp;<a href="?view={{ view }}&offset={{ offset|add:limit}}&limit={{ limit }}&last={{ last }}&country={{ countrycode }}">show more</a>&nbsp;</div>	        
+	    {% endif %}
+	    
+	        </div>
+	</form>
+        
      </div>
 
    {% if topdata|length <= 0 and countrycode == '' and last == '' %}
@@ -226,10 +236,8 @@ function addStatus(filter){
         {% endif %}
     {% endif %}
    	
-	<div class="content_box">   
-    <div class="results" >
-       
-
+    <div class="content_box">    
+    <div class="results" >     
     {% spaceless %}
 {% load resource_languages %}
 {% load resource_media_types %}
@@ -237,7 +245,8 @@ function addStatus(filter){
 {% load get_media_url %}
 {% load get_icon %}
 
-{% for object in topdata %}                  
+{% for object in topdata %}
+    {{ forloop.counter|add:offset }}. 
     {% if "quer" in view %}
         <div class="resourceName"><a href="{% url metashare.views.frontpage %}repository/search/?{{ object.4 }}"><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/zoom.png"> {{ object.0 }}</a>
             {% ifnotequal object.1 "" %}  
@@ -268,10 +277,9 @@ function addStatus(filter){
           <img src="{% get_media_url %}stats/img/download_icon.gif" alt="Number of downloads" title="Number of downloads" />&nbsp;{{ object.0.storage_object.identifier|get_download_count }}
           <img src="{% get_media_url %}stats/img/view_icon.gif" alt="Number of views" title="Number of views" />&nbsp;{{ object.0.storage_object.identifier|get_view_count }}
         </div>
-        
-        <!--<ul>
+        <ul>
           {% resource_languages object.0.resourceComponentType.as_subclass %}  
-        </ul>-->
+        </ul>
         {% ifnotequal object.1 "" %}
             <div style="display: inline; font-size:8pt;text-align:left; float: right; padding-right: 20px">{{ object.1 }}</div>
         {% endifnotequal %}

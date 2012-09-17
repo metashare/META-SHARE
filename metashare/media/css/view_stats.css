@@ -175,3 +175,15 @@ a.addFilter:before {
     -khtml-border-radius: 5px 5px 5px 5px;
 }
 
+#morebutton {
+    background: #eee; 
+    border: solid 1px #ccc; 
+    -moz-border-radius: 5px 5px 5px 5px; 
+    -webkit-border-radius: 5px 5px 5px 5px; 
+    -khtml-border-radius: 5px 5px 5px 5px;
+    padding: 0px; margin: 0px;
+    float: left; 
+    display: inline;
+    margin-left: 8px;
+}
+
