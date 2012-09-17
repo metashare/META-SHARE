@@ -345,7 +345,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         instance = self.get_model().objects.get(pk=instance.id)
         # only create/update index entries of published resources
         if instance.storage_object.publication_status == PUBLISHED:
-            LOGGER.info("Puiblished resource #{0} scheduled for reindexing." \
+            LOGGER.info("Published resource #{0} scheduled for reindexing." \
                         .format(instance.id))
             super(resourceInfoType_modelIndex, self) \
                 .update_object(instance, using=using, **kwargs)
