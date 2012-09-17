@@ -390,5 +390,6 @@ div#footer a:hover{
 }
 
 ul.related_resources {
-	max-height: 80px;
+	max-height: 8ex;
+	margin: 0 0 0 0.75em;
 }
