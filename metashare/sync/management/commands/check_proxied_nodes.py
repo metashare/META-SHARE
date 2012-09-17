@@ -1,5 +1,5 @@
 """
-Management utility to trigger digest updating.
+Management utility to handle removed proxy nodes.
 """
 from django.core.management.base import BaseCommand
 from metashare import settings
@@ -14,16 +14,14 @@ class Command(BaseCommand):
     
     def handle(self, *args, **options):
         
-        # collect current proxy urls
-        proxy_urls = []
-        for proxy in settings.PROXIED_NODES:
-            proxy_urls.append(settings.PROXIED_NODES[proxy]['URL'])   
+        # collect current proxied node names
+        proxy_names = [p['NAME'] for p in settings.PROXIED_NODES.values()]
 
-        # iterate over proxy resources and check for each if its source url
-        # is still listed in the proxied node list
+        # iterate over proxy resources and check for each if its source node id
+        # is still listed in the proxied node id list
         remove_count = 0
         for proxy_res in StorageObject.objects.filter(copy_status=PROXY):
-            if not proxy_res.source_url in proxy_urls:
+            if not proxy_res.source_node in proxy_names:
                 # delete the associated resource and create a RemovedObject
                 # to let the other nodes know that the resource has been removed
                 # when synchronizing

@@ -395,7 +395,7 @@ class StorageObject(models.Model):
         # least self.digest_last_checked has changed
         self.save()
 
-def restore_from_folder(storage_id, copy_status=MASTER, storage_digest=None):
+def restore_from_folder(storage_id, copy_status=MASTER, storage_digest=None, source_node=None):
     """
     Restores the storage object and the associated resource for the given
     storage object identifier and makes it persistent in the database. 
@@ -410,6 +410,9 @@ def restore_from_folder(storage_id, copy_status=MASTER, storage_digest=None):
     storage_digest (optional): the digest_checksum to set in the restored
         storage object
 
+    source_node (optional): the source node if to set in the restored
+        storage object
+            
     Returns the restored resource with its storage object set.
     """
     from metashare.repository.models import resourceInfoType_model
@@ -477,6 +480,9 @@ def restore_from_folder(storage_id, copy_status=MASTER, storage_digest=None):
     # If object is synchronized, retain the storage digest
     if storage_digest:
         _storage_object.digest_checksum = storage_digest
+    # If object is non-local, set its source node id
+    if source_node:
+        _storage_object.source_node = source_node
 
     _storage_object.save()
     _storage_object.update_storage()
@@ -484,8 +490,8 @@ def restore_from_folder(storage_id, copy_status=MASTER, storage_digest=None):
     return resource
 
 
-def update_resource(storage_json, resource_xml_string, storage_digest,
-                    copy_status=REMOTE):
+def add_or_update_resource(storage_json, resource_xml_string, storage_digest,
+                    copy_status=REMOTE, source_node=None):
     '''
     For the resource described by storage_json and resource_xml_string,
     do the following:
@@ -524,7 +530,8 @@ def update_resource(storage_json, resource_xml_string, storage_digest,
     def remove_database_entries(storage_id):
         storage_object = StorageObject.objects.get(identifier=storage_id)
         resource = storage_object.resourceinfotype_model_set.all()[0]
-        # we have to keep the statistics for this resource since it is only updated
+        # we have to keep the statistics and recommendations for this resource
+        # since it is only updated
         resource.delete_deep(keep_stats=True)
         storage_object.delete()
 
@@ -537,7 +544,7 @@ def update_resource(storage_json, resource_xml_string, storage_digest,
         remove_database_entries(storage_id)
     write_to_disk(storage_id)
     return restore_from_folder(storage_id, copy_status=copy_status,
-                        storage_digest=storage_digest)
+                        storage_digest=storage_digest, source_node=source_node)
 
 
 def _fill_storage_object(storage_obj, json_file_name):
