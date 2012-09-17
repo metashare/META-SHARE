@@ -128,17 +128,16 @@ function addStatus(filter){
 
 <div class='tab-container'>
  <ul class='etabs'>
-   <li class='tab tab-nobr'>Statistics about visiting this META-SHARE node</li>
-    <li class='tab'><a href="{% url metashare.views.frontpage %}stats/usage/">Statistics about resource metadata</a></li>
+   <li class='tab tab-nobr'>META-SHARE node visits statistics</li>
+    <li class='tab'><a href="{% url metashare.views.frontpage %}stats/usage/">Statistics on resource metadata</a></li>
    {% if user.username and myres %}
         <li class='tab'><a href="{% url metashare.views.frontpage %}stats/mystats/">My resources</a></li>
    {% endif %}   
  </ul>
 </div>
 
-
 <div class="content_tab"> 
-	<div style="margin-left: 20px; padding-bottom: 10px">
+	<div style="margin-left: 20px; padding-top: 15px; padding-bottom: 10px">
 	    <form class="form_helper" name="topform" id="topform" action="{% url metashare.views.frontpage %}stats/top/" method="get">
             Show the <select style="color: #000; background: #eee" name='view' onchange="topform.submit();">
             
@@ -157,29 +156,34 @@ function addStatus(filter){
             {% endifequal %}
             > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Latest Queries
             
-            <option value='latestupdated' style="background-image: url({{ MEDIA_URL }}stats/img/update_icon.gif); background-repeat: no-repeat;"
-            {% ifequal view "latestupdated" %}
-                    selected
-            {% endifequal %}
-            > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Latest Updated Resources
-            
             <option value='topdownloaded' style="background-image: url({{ MEDIA_URL }}stats/img/download_icon.gif); background-repeat: no-repeat;"
             {% ifequal view "topdownloaded" %}
                     selected
             {% endifequal %}
             > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Top Downloaded Resources
             
+            <option value='latestupdated' style="background-image: url({{ MEDIA_URL }}stats/img/update_icon.gif); background-repeat: no-repeat;"
+            {% ifequal view "latestupdated" %}
+                    selected
+            {% endifequal %}
+            > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Latest Updated Resources
             </select>
-
-            {% if countrycode != None and countrycode|length > 0 %}
-                from {{ countryname }} <img height=20 src="{{ MEDIA_URL }}css/international_flags/iso/32x32/flag-{{ countrycode|lower }}.png">
-            {% endif %}         
-        </form>
+           <div style="float: right; display: inline-block; margin-left: 20px; padding: 0px; margin-top: 0px; margin-bottom:0px; margin-right: 400px; vertical-align: bottom"> 
+	    {% if offset != 0 %}
+	         <div id=morebutton>&nbsp;<a href="?view={{ view }}&offset=0&limit={{ limit }}&last={{ last }}&country={{ countrycode }}">go top</a>&nbsp;</div>	
+        {% endif %}
+        {% if topdata|length >= limit %}
+	        <div id=morebutton>&nbsp;<a href="?view={{ view }}&offset={{ offset|add:limit}}&limit={{ limit }}&last={{ last }}&country={{ countrycode }}">show more</a>&nbsp;</div>	        
+	    {% endif %}
+	    
+	        </div>
+	</form>
+        
      </div>
 
-     {% if topdata|length <= 0 %}
-        <center><strong>No data found</strong></center>
-{% else %}
+   {% if topdata|length <= 0 and countrycode == '' and last == '' %}
+       <div class="content_box">No data found</div>
+   {% else %}
     {% if not "late" in view or geovisits|length > 0 %}
     <div class="left_box">
 	  <div class="filters" 
@@ -192,15 +196,15 @@ function addStatus(filter){
                     {% for date in list.split %} 
                         <div>
                         {% ifequal date last %}
-                            <a href="?view={{ view }}" class="addFilter">
+                            <a href="?view={{ view }}&country={{ countrycode }}" class="addFilter">
                         {% else %}
-                            <a href="?view={{ view }}&last={{ date }}" class="deleteFilter">
+                            <a href="?view={{ view }}&last={{ date }}&country={{ countrycode }}" class="deleteFilter">
                         {% endifequal %}
                         last {{ date }}</a></div>
                     {% endfor %}
                 {% endwith %}
             </div>
-        </div>    
+            
 	    {% endif %}
 	    
 	    {% if geovisits|length > 0 %}
@@ -209,9 +213,9 @@ function addStatus(filter){
                 {% for geoinfo in geovisits %}
                 <div>
                         {% ifequal geoinfo.0 countrycode %}
-                            <a href="?view={{ view }}" class="addFilter">
+                            <a href="?view={{ view }}&last={{ last }}" class="addFilter">
                         {% else %}
-                            <a href="?view={{ view }}&country={{ geoinfo.0 }}" class="deleteFilter">
+                            <a href="?view={{ view }}&country={{ geoinfo.0 }}&last={{ last }}" class="deleteFilter">
                         {% endifequal %}
                         {{ geoinfo.2 }} 
                         <img height=20 src="{{ MEDIA_URL }}css/international_flags/iso/32x32/flag-{{ geoinfo.0|lower }}.png"></a>
@@ -220,18 +224,20 @@ function addStatus(filter){
                 </div>
                 {% endfor %}
             </div>
-           <div id="googlemap" style="margin-left: -20px"></div>
+         <div id="googlemap" style="margin-left: -20px"></div>
             <div style="font-size:7pt;text-align:left">* This product includes GeoLite data created by MaxMind, available from http://maxmind.com/ and a Google Maps chart.</div>   
        
          {% endif %}   
        </div>  
+       </div>  
     </div>
+        {% if topdata|length <= 0 %}
+            <center><strong>No data matched</strong></center>
+        {% endif %}
     {% endif %}
    	
-	<div class="content_box">   
-    <div class="results" >
-       
-
+    <div class="content_box">    
+    <div class="results" >     
     {% spaceless %}
 {% load resource_languages %}
 {% load resource_media_types %}
@@ -239,7 +245,8 @@ function addStatus(filter){
 {% load get_media_url %}
 {% load get_icon %}
 
-{% for object in topdata %}                  
+{% for object in topdata %}
+    {{ forloop.counter|add:offset }}. 
     {% if "quer" in view %}
         <div class="resourceName"><a href="{% url metashare.views.frontpage %}repository/search/?{{ object.4 }}"><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/zoom.png"> {{ object.0 }}</a>
             {% ifnotequal object.1 "" %}  
@@ -270,10 +277,9 @@ function addStatus(filter){
           <img src="{% get_media_url %}stats/img/download_icon.gif" alt="Number of downloads" title="Number of downloads" />&nbsp;{{ object.0.storage_object.identifier|get_download_count }}
           <img src="{% get_media_url %}stats/img/view_icon.gif" alt="Number of views" title="Number of views" />&nbsp;{{ object.0.storage_object.identifier|get_view_count }}
         </div>
-        
-        <!--<ul>
+        <ul>
           {% resource_languages object.0.resourceComponentType.as_subclass %}  
-        </ul>-->
+        </ul>
         {% ifnotequal object.1 "" %}
             <div style="display: inline; font-size:8pt;text-align:left; float: right; padding-right: 20px">{{ object.1 }}</div>
         {% endifnotequal %}

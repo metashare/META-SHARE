@@ -10,11 +10,11 @@ class LRStats(models.Model):
     lasttime = models.DateTimeField(blank=False, auto_now_add=True, default=datetime.now())
     action = models.CharField(blank=False, max_length=1)
     count = models.IntegerField(blank=False, default=1)
-
+    ignored = models.BooleanField(default=False)
+    
     #def __unicode__(self):
     #   return "L>> " +  self.userid + "," +self.lrid  + "," + self.action + "," + str(self.count) + "," + str(self.lasttime) + "," + self.sessid
-    
-
+        
 class QueryStats(models.Model):
     userid = models.CharField(blank=False, max_length=64)
     geoinfo = models.CharField(blank=True, max_length=2)
