@@ -1282,8 +1282,9 @@ class SchemaModel(models.Model):
         or a one-to-many relation (i.e., non-reusable information).
         This will leave many-to-one or many-to-many relations untouched.
         
-        Also includes deletion of statistics; use keep_stats optional parameter 
-        to suppress deletion of statistics.
+        Also includes deletion of statistics and recommendations; use keep_stats
+        optional parameter to suppress deletion of statistics and
+        recommendations.
         
         This method is not automatically hooked into the default django
         delete mechanism; it needs to be called explicitly.
