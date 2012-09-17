@@ -76,9 +76,7 @@ class PersonModelAdmin(AdminRelatedInfo, SchemaModelAdmin):
     
     def instance_data(self, obj):
         return obj.__unicode__()
-    instance_data.short_description = 'Person'
-    
-    
+    instance_data.short_description = _('Person')
 
 class OrganizationModelAdmin(AdminRelatedInfo, SchemaModelAdmin):
     exclude = ('source_url', 'copy_status')
@@ -86,7 +84,7 @@ class OrganizationModelAdmin(AdminRelatedInfo, SchemaModelAdmin):
     
     def instance_data(self, obj):
         return obj.__unicode__()
-    instance_data.short_description = 'Organization'
+    instance_data.short_description = _('Organization')
 
 class ProjectModelAdmin(AdminRelatedInfo, SchemaModelAdmin):
     exclude = ('source_url', 'copy_status')
@@ -94,7 +92,7 @@ class ProjectModelAdmin(AdminRelatedInfo, SchemaModelAdmin):
     
     def instance_data(self, obj):
         return obj.__unicode__()
-    instance_data.short_description = 'Project'
+    instance_data.short_description = _('Project')
 
 class DocumentModelAdmin(AdminRelatedInfo, SchemaModelAdmin):
     exclude = ('source_url', 'copy_status')
@@ -102,7 +100,7 @@ class DocumentModelAdmin(AdminRelatedInfo, SchemaModelAdmin):
     
     def instance_data(self, obj):
         return obj.__unicode__()
-    instance_data.short_description = 'Document'
+    instance_data.short_description = _('Document')
 
 class DocumentUnstructuredStringModelAdmin(admin.ModelAdmin, RelatedAdminMixin):
     def response_change(self, request, obj):
