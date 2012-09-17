@@ -8,14 +8,14 @@ class StorageObjectAdmin(admin.ModelAdmin):
     list_filter = ('copy_status', 'publication_status', 'deleted')
     readonly_fields = ('source_url', 'identifier', 'created', 'modified', 
       'checksum', 'digest_checksum', 'digest_modified', 'digest_last_checked', 
-      'metashare_version', 'copy_status')
+      'metashare_version', 'copy_status', 'source_node')
     search_fields = ('metadata', 'global_storage', 'local_storage')
     
     fieldsets = (
       ('Read-only Fields', {
         'fields': ('source_url', 'identifier', 'created', 'modified', 
           'checksum', 'digest_checksum', 'digest_modified', 'digest_last_checked',
-          'metashare_version', 'copy_status'),
+          'metashare_version', 'copy_status', 'source_node'),
       }),
       ('Status Fields', {
         'fields': ('revision', 'publication_status', 'deleted'),
