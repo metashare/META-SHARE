@@ -2,15 +2,21 @@ import logging
 import json
 import threading
 import itertools 
-from metashare.stats.models import LRStats, QueryStats, UsageStats
-from metashare.stats.geoip import getcountry_code, getcountry_name
 from django.db.models import Count, Sum
 from django.contrib.auth.models import User
 from datetime import datetime
-from metashare.settings import LOG_HANDLER
 from math import trunc
+import re
+from metashare.stats.models import LRStats, QueryStats, UsageStats
+from metashare.stats.geoip import getcountry_code, getcountry_name
+from metashare.storage.models import PUBLISHED
+from metashare.settings import LOG_HANDLER
 
 USAGETHREADNAME = "usagethread"
+BOT_AGENT_RE = re.compile(r".*(bot|spider|spyder|crawler|archiver|seek|\
+    scooter|wget|misesajour|slurp|agent|gazz|onetszukaj|perl|web|lab|\
+    scrubby|asterias|ip3000|knowledge|rambler|search|link|appie|\
+    yandex|iron33|nazilla|kototoi).*", re.IGNORECASE)
 
 #type of monitored actions
 UPDATE_STAT = "u"
@@ -37,27 +43,33 @@ def saveLRStats(resource, action, request=None):
     Takes into account the session to avoid to increment more than one time the
     stats counter. Returns whether the stats counter was incremented or not.
     """
+    result = False
     LOGGER.debug("saveLRStats %s %s", action,
                  resource.storage_object.identifier)
     if not hasattr(resource, 'storage_object') or resource.storage_object is None:
-        return
+        return result
         
-    result = False
+    # Manage statistics according with the resource status
     lrid = resource.storage_object.identifier
-    if action == INGEST_STAT or action == DELETE_STAT:
+    ignored = False
+    if action == INGEST_STAT:
+        ignored = True
+        LRStats.objects.filter(lrid=lrid).update(ignored=ignored)
+        UsageStats.objects.filter(lrid=lrid).delete()
+    if action == DELETE_STAT:
         UsageStats.objects.filter(lrid=lrid).delete()
         LRStats.objects.filter(lrid=lrid).delete()
         return
+    if (resource.storage_object.publication_status != PUBLISHED):
+        return False
     
     userid = _get_userid(request)
     sessid = _get_sessionid(request)
     lrset = LRStats.objects.filter(userid=userid, lrid=lrid, sessid=sessid, action=action)
-
     if (lrset.count() > 0):
         record = lrset[0]
-        #record.count = record.count+1
-        #record.sessid = sessid
         record.lasttime = datetime.now()
+        record.ignored = ignored
         record.save(force_update=True)
         LOGGER.debug('UPDATESTATS: Saved LR {0}, {1} action={2} ({3}).'.format(lrid, sessid, action, record.lasttime))
     else:       
@@ -67,13 +79,14 @@ def saveLRStats(resource, action, request=None):
         record.action = action
         record.sessid = sessid
         record.geoinfo = getcountry_code(_get_ipaddress(request))
+        record.ignored = ignored
         record.save(force_insert=True)
         LOGGER.debug('SAVESTATS: Saved LR {0}, {1} action={2}.'.format(lrid, sessid, action))
         result = True
     if action == UPDATE_STAT:
         if (resource.storage_object.published):
-            UsageStats.objects.filter(lrid=resource.id).delete()
-            _update_usage_stats(resource.id, resource.export_to_elementtree())
+            UsageStats.objects.filter(lrid=lrid).delete()
+            _update_usage_stats(lrid, resource.export_to_elementtree())
             LOGGER.debug('STATS: Updating usage statistics: resource {0} updated'.format(lrid))
     return result
 
@@ -104,6 +117,12 @@ def getLRStats(lrid):
     return json.loads("["+data+"]")
 
     
+def getUserCount(lrid):
+    users = LRStats.objects.values('userid').filter(lrid=lrid).annotate(Count('userid'))
+    for key in users:
+        return key['userid__count']
+    return 0
+    
 def getUserStats(lrid):
     data = ""
     action_list = LRStats.objects.values('userid', 'action').filter(lrid=lrid).annotate(Count('action'), Sum('count')).order_by('-action')
@@ -122,7 +141,8 @@ def getUserStats(lrid):
                             user = str(userobj.first_name) + " " +str(userobj.last_name)
                         else:
                             user = str(userobj.username)
-                        user =  user + " (" +str(userobj.email)+")" #userobj.last_activity_ip
+                        if (not userobj.email in user):
+                            user = user + " (" +str(userobj.email)+")" #userobj.last_activity_ip
                         last_login = str(userobj.last_login.strftime("%Y/%m/%d - %I:%M:%S"))
                 data += "{\"action\":\""+ STAT_LABELS[str(key['action'])] +"\",\"count\":\""+ \
                     str(key['count__sum']) +"\",\"last\":\""+str(key2['lasttime'])[:10]+"\",\"user\":\""+ user + "\",\"lastaccess\":\""+ last_login +"\"}"
@@ -131,57 +151,62 @@ def getUserStats(lrid):
 
     
 ## get the top data (limited by a number) 
-def getLRTop(action, limit, geoinfo=None, since=None):
+def getLRTop(action, limit, geoinfo=None, since=None, offset=0):
     action_list = []
     if (action and not action == ""):
         if (geoinfo != None and geoinfo is not ""):
             if (since):
-                action_list = LRStats.objects.values('lrid').filter(action=action, geoinfo=geoinfo, \
-                    lasttime__gte=since).annotate(sum_count=Sum('count')).order_by('-sum_count')[:limit]
+                action_list = LRStats.objects.values('lrid').filter(ignored=False, action=action, geoinfo=geoinfo, \
+                    lasttime__gte=since).annotate(sum_count=Sum('count')).order_by('-sum_count')[offset:offset+limit]
             else:
-                action_list = LRStats.objects.values('lrid').filter(action=action, geoinfo=geoinfo).annotate(sum_count=Sum('count')).order_by('-sum_count')[:limit]
+                action_list = LRStats.objects.values('lrid').filter(ignored=False, action=action, \
+                    geoinfo=geoinfo).annotate(sum_count=Sum('count')).order_by('-sum_count')[offset:offset+limit]
         else:
             if (since):
-                action_list = LRStats.objects.values('lrid').filter(action=action, \
-                    lasttime__gte=since).annotate(sum_count=Sum('count')).order_by('-sum_count')[:limit]
+                action_list = LRStats.objects.values('lrid').filter(ignored=False, action=action, \
+                    lasttime__gte=since).annotate(sum_count=Sum('count')).order_by('-sum_count')[offset:offset+limit]
             else:
-                action_list = LRStats.objects.values('lrid').filter(action=action).annotate(sum_count=Sum('count')).order_by('-sum_count')[:limit]
+                action_list = LRStats.objects.values('lrid').filter(ignored=False, \
+                    action=action).annotate(sum_count=Sum('count')).order_by('-sum_count')[offset:offset+limit]
     return action_list
 
-def getLRLast(action, limit, geoinfo=None):
+def getLRLast(action, limit, geoinfo=None, offset=0):
     action_list = []
     if (action and not action == ""):
         if (geoinfo != None and geoinfo is not ""):
-            action_list =  LRStats.objects.values('lrid', 'action', 'lasttime').filter(action=action, \
-                geoinfo=geoinfo).order_by('-lasttime')[:limit]
+            action_list =  LRStats.objects.values('lrid', 'action', 'lasttime').filter(ignored=False, \
+                action=action, geoinfo=geoinfo).order_by('-lasttime')[offset:offset+limit]
         else:
-            action_list =  LRStats.objects.values('lrid', 'action', 'lasttime').filter(action=action).order_by('-lasttime')[:limit]    
+            action_list =  LRStats.objects.values('lrid', 'action', 'lasttime').filter(ignored=False, \
+                action=action).order_by('-lasttime')[offset:offset+limit]    
     else:
-        action_list =  LRStats.objects.values('lrid', 'action', 'lasttime').order_by('-lasttime')[:limit]
+        action_list =  LRStats.objects.values('lrid', 'action', 'lasttime').filter(ignored=False).\
+            order_by('-lasttime')[offset:offset+limit]
     return action_list
 
-def getTopQueries(limit, geoinfo=None, since=None):
+def getTopQueries(limit, geoinfo=None, since=None, offset=0):
     if (geoinfo != None and geoinfo is not ""):
         if (since):
-            topqueries = QueryStats.objects.values('query', 'facets').filter(lasttime__gte=since, \
-                geoinfo=geoinfo).annotate(query_count=Count('query'), facets_count=Count('facets')).order_by('-query_count','-facets_count')[:limit]
+            topqueries = QueryStats.objects.values('query', 'facets').exclude(query__startswith="mfsp:").filter(lasttime__gte=since, \
+                geoinfo=geoinfo).annotate(query_count=Count('query'), facets_count=Count('facets')).order_by('-query_count','-facets_count')[offset:offset+limit]
         else:
-            topqueries = QueryStats.objects.values('query', 'facets').filter(geoinfo=geoinfo).annotate(query_count=Count('query'), \
-                facets_count=Count('facets')).order_by('-query_count','-facets_count')[:limit] 
+            topqueries = QueryStats.objects.values('query', 'facets').exclude(query__startswith="mfsp:").filter(geoinfo=geoinfo).\
+                annotate(query_count=Count('query'), facets_count=Count('facets')).order_by('-query_count','-facets_count')[offset:offset+limit] 
     else:
         if (since):
-            topqueries = QueryStats.objects.values('query', 'facets').filter(lasttime__gte=since).annotate(query_count=Count('query'), \
-                facets_count=Count('facets')).order_by('-query_count','-facets_count')[:limit]
+            topqueries = QueryStats.objects.values('query', 'facets').exclude(query__startswith="mfsp:").filter(lasttime__gte=since).\
+                annotate(query_count=Count('query'), facets_count=Count('facets')).order_by('-query_count','-facets_count')[offset:offset+limit]
         else:
-            topqueries = QueryStats.objects.values('query', 'facets').annotate(query_count=Count('query'), \
-                facets_count=Count('facets')).order_by('-query_count','-facets_count')[:limit]
+            topqueries = QueryStats.objects.values('query', 'facets').exclude(query__startswith="mfsp:").\
+                annotate(query_count=Count('query'), facets_count=Count('facets')).order_by('-query_count','-facets_count')[offset:offset+limit]
     return topqueries
     
-def getLastQuery (limit, geoinfo=None):
+def getLastQuery(limit, geoinfo=None, offset=0):
     if (geoinfo != None and geoinfo is not ""):
-        lastquery = QueryStats.objects.values('query', 'facets', 'lasttime', 'found').filter(geoinfo=geoinfo).order_by('-lasttime')[:limit]
+        lastquery = QueryStats.objects.values('query', 'facets', 'lasttime', 'found').exclude(query__startswith="mfsp:").\
+            filter(geoinfo=geoinfo).order_by('-lasttime')[offset:offset+limit]
     else:
-        lastquery = QueryStats.objects.values('query', 'facets', 'lasttime', 'found').order_by('-lasttime')[:limit]
+        lastquery = QueryStats.objects.values('query', 'facets', 'lasttime', 'found').exclude(query__startswith="mfsp:").order_by('-lasttime')[offset:offset+limit]
     return lastquery
 
 def statByDate(date):
@@ -242,8 +267,9 @@ def updateUsageStats(resources, create=False):
         if current_thread.getName() == USAGETHREADNAME:
             return current_thread
 
-    #create one
+    #force recreate usage stats
     if create:
+        UsageStats.objects.all().delete()
         usagethread = UsageThread(USAGETHREADNAME, resources)
         usagethread.setName(USAGETHREADNAME)
         usagethread.start()
@@ -292,10 +318,18 @@ def _get_userid(request):
 
 def _get_ipaddress(request):
     """
-    Returns the IP address store in META request.
+    Returns the IP address store in META request. Check if the request 
+    comes from some automatic programm (bot, spider, ..) removing the IP address
+    (in this way the statistics will not be distorted)
     """
-    if request != None and request.META.has_key('REMOTE_ADDR'):
-        return request.META['REMOTE_ADDR']
+    if request != None:
+        remote_addr = getattr(request.META, 'REMOTE_ADDR', '')
+        user_agent = getattr(request.META, 'HTTP_USER_AGENT', '')
+        if user_agent != '':
+            if not BOT_AGENT_RE.match(user_agent):
+                return remote_addr
+        else:
+            return remote_addr
     return ''
 
 

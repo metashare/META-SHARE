@@ -40,7 +40,7 @@ STORAGE_FOLDER = "storage"
 STORAGE = "storage.xml"
 METADATA = "metadata.xml"
 RESOURCE = "resource.xml"
-ARCHIVE = "archive.zip"
+ARCHIVE_TPL = "archive.{}"
 
 XML_DECL = re.compile(r'\s*<\?xml version=".+" encoding=".+"\?>\s*\n?',
   re.I|re.S|re.U)
@@ -215,11 +215,17 @@ def _export_resource(res, folder, serializer):
     
     # copy possible binaries
     source_storage_path = '{0}/{1}/'.format(settings.STORAGE_PATH, storage_obj.identifier)
-    archive_path = os.path.join(source_storage_path, ARCHIVE)
-    if os.path.isfile(archive_path):
-        print "copying archive of resource {}".format(res)
-        shutil.copy(
-          archive_path, os.path.join(target_storage_path, ARCHIVE))
+    from metashare.storage.models import ALLOWED_ARCHIVE_EXTENSIONS
+    for archive_name in [os.path.join(source_storage_path,
+                                      ARCHIVE_TPL.format(_ext))
+                         for _ext in ALLOWED_ARCHIVE_EXTENSIONS]:
+        archive_path = os.path.join(source_storage_path, archive_name)
+        if os.path.isfile(archive_path):
+            print "copying archive of resource {}".format(res)
+            shutil.copy(
+              archive_path, os.path.join(target_storage_path, archive_name))
+            # there can be at most one binary
+            break
 
 
 def _to_xml_string(node, encoding="ASCII"):

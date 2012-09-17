@@ -4,11 +4,13 @@
 .tab {display: inline-block;
     zoom: 1; 
     *display:inline; 
+    margin-right: 5px;
     background: url("../images/button_top_bg.png") repeat-x scroll 50% top #f5f3e5; 
     border: solid 1px #ccc; 
     border-bottom: none; 
     -moz-border-radius: 5px 5px 0 0; 
     -webkit-border-radius: 5px 5px 0 0;
+	-khtml-border-radius: 5px 5px 0 0;
 }
 
 .tab a {font-family: Tahoma,Arial;
@@ -35,6 +37,7 @@
     padding: 10px; 
     -moz-border-radius: 0 5px 5px 5px; 
     -webkit-border-radius: 0 5px 5px 5px;
+    -khtml-border-radius: 0 5px 5px 5px;
 }
 
 .tab.tab-nobr { background: #fff; 
@@ -61,11 +64,15 @@
 /* usage metadata */
 div.coverage { 
     display: inline; 
-    border: 1px solid #777; 
-    margin-left: 1px; 
+    margin-left: 2px; 
     margin-right: 2px; 
-    -moz-border-radius: 15px; 
-    border-radius: 15px;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom: 1px solid #999; 
+    border-top: none; 
+    border-right: 1px solid #999; 
+    border-left: none; 
+    width: auto;
 }
 
 div.required { background-color: lightgreen }
@@ -74,12 +81,57 @@ div.recommended { background-color: orange }
 div.fieldvalues {background: #E6E6FA; 
     border: 1px solid #000; 
     float: right;
-    margin-top: 40px;
-    vertical-align: top}
-div.warning {background: lightyellow; 
-    border: 1px solid #000; 
-    position:relative; 
-    width: 400px}
+    width: 570px;
+    padding: 0px;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    vertical-align: top       
+}
+    
+div.warning {
+    background: lightyellow; 
+    border: 1px solid #FFA500; 
+    position:relative;
+    padding: 5px;
+    width:550px;
+    margin-top: -15px;
+    height:auto;
+}
+    
+label.title {background-color: #fda;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 0;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 0;
+        color: #000;
+        font-size: 12px;
+        font-weight: 600;
+        margin-bottom: 0.3em;
+        margin-left: 0px;
+        margin-right: 5px;
+        padding-left: 2px;
+}
+
+label.pointer {padding: 0px;
+    cursor: pointer;
+}
+
+label.indent {margin-left: 19px;
+}
+
+label.component{
+    padding:3px;
+    background-color: #fff;
+    border-radius:10px;
+    font-size:14px;
+    color: #666;
+    cursor: pointer;
+    color: rgb(255, 153, 0);
+}
+
 
 /* checkable facets */
 a.deleteFilter:before {
@@ -90,5 +142,48 @@ a.deleteFilter:before {
 a.addFilter:before {
     content: " " url("sexybuttons/images/icons/silk/accept.png");
     vertical-align: top;   
+}
+
+#colsubtab {
+    width: auto;
+    position: relative;
+    margin-left: 10px;
+    margin-right: 10px;
+    white-space:normal;
+    display:INLINE-block;
+    vertical-align: top;
+}
+
+#subtab div {
+   margin-left:3px;
+}
+
+#subtab{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 0px;
+    white-space:nowrap;
+    position:relative;
+    display:block;
+}
+
+#section {
+    border: solid 1px #ccc;
+    margin-right: 20px;
+    -moz-border-radius: 5px 5px 5px 5px; 
+    -webkit-border-radius: 5px 5px 5px 5px;
+    -khtml-border-radius: 5px 5px 5px 5px;
+}
+
+#morebutton {
+    background: #eee; 
+    border: solid 1px #ccc; 
+    -moz-border-radius: 5px 5px 5px 5px; 
+    -webkit-border-radius: 5px 5px 5px 5px; 
+    -khtml-border-radius: 5px 5px 5px 5px;
+    padding: 0px; margin: 0px;
+    float: left; 
+    display: inline;
+    margin-left: 8px;
 }
 

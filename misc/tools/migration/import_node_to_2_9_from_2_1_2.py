@@ -37,7 +37,7 @@ STORAGE_FOLDER = "storage"
 STORAGE = "storage.xml"
 METADATA = "metadata.xml"
 RESOURCE = "resource.xml"
-ARCHIVE = "archive.zip"
+ARCHIVE_TPL = "archive.{}"
 
 def import_users(import_folder):
     """
@@ -91,7 +91,7 @@ def import_resources(import_folder):
     
     # iterate over storage folder content
     from django.core import serializers
-    from metashare.storage.models import MASTER
+    from metashare.storage.models import MASTER, ALLOWED_ARCHIVE_EXTENSIONS
     from metashare.repository.models import resourceInfoType_model
 
     imported_resources = []
@@ -140,13 +140,17 @@ def import_resources(import_folder):
                 # and storage object
                 _update_resource(res, res_obj, storage_obj)
                 # copy possible binaries archives
-                archive_filename = os.path.join(folder_path, ARCHIVE)
-                res_storage_path = '{0}/{1}/'.format(
-                  settings.STORAGE_PATH, res.storage_object.identifier)
-                if os.path.isfile(archive_filename):
-                    print "copying archive"
-                    shutil.copy(
-                      archive_filename, os.path.join(res_storage_path, ARCHIVE))
+                for archive_name in [ARCHIVE_TPL.format(_ext)
+                                     for _ext in ALLOWED_ARCHIVE_EXTENSIONS]:
+                    archive_filename = os.path.join(folder_path, archive_name)
+                    if os.path.isfile(archive_filename):
+                        print "copying archive"
+                        res_storage_path = '{0}/{1}/'.format(
+                          settings.STORAGE_PATH, res.storage_object.identifier)
+                        shutil.copy(archive_filename,
+                          os.path.join(res_storage_path, archive_name))
+                        # there can be at most one binary
+                        break
                 imported_resources.append(res)
             except Exception as problem:
                 erroneous_descriptors.append((folder_name, problem))
