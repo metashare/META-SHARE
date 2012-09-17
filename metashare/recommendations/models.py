@@ -1,5 +1,4 @@
 from django.db import models
-from metashare.repository.models import resourceInfoType_model
 
 
 # the following code is based on http://djangosnippets.org/snippets/2451/
@@ -23,10 +22,12 @@ class TogetherManager(models.Model):
         tells the manager that the given resources have appeared together
         """
         # pylint: disable-msg=E1101
-        res_count_dict_1 = self.resourcecountdict_set.get_or_create(resource=res_1)[0]
+        res_count_dict_1 = self.resourcecountdict_set.get_or_create(
+          lrid=res_1.storage_object.identifier)[0]
         res_count_dict_1.addResource(res_2)
         # pylint: disable-msg=E1101
-        res_count_dict_2 = self.resourcecountdict_set.get_or_create(resource=res_2)[0]
+        res_count_dict_2 = self.resourcecountdict_set.get_or_create(
+          lrid=res_2.storage_object.identifier)[0]
         res_count_dict_2.addResource(res_1)
         
     def getTogetherCount(self, res_1, res_2):
@@ -35,11 +36,13 @@ class TogetherManager(models.Model):
         """
         try:
             # pylint: disable-msg=E1101
-            res_count_dict = self.resourcecountdict_set.get(resource=res_1)
+            res_count_dict = self.resourcecountdict_set.get(
+              lrid=res_1.storage_object.identifier)
         except ResourceCountDict.DoesNotExist:
             return 0
         try:
-            res_count_pair = res_count_dict.resourcecountpair_set.get(resource=res_2)
+            res_count_pair = res_count_dict.resourcecountpair_set.get(
+              lrid=res_2.storage_object.identifier)
         except ResourceCountPair.DoesNotExist:
             return 0
         return res_count_pair.count
@@ -50,14 +53,24 @@ class TogetherManager(models.Model):
         given resource; appearance count must have at least the given threshold;
         filters deleted and non-published resources
         """
+        from metashare.repository.models import resourceInfoType_model
         from metashare.storage.models import PUBLISHED   
+        # get pairs with count above threshold
         pairs = ResourceCountPair.objects\
           .filter(container__container__name=self.name)\
-          .filter(container__resource=res)\
-          .filter(resource__storage_object__publication_status=PUBLISHED)\
-          .filter(resource__storage_object__deleted=False)\
+          .filter(container__lrid=res.storage_object.identifier)\
           .filter(count__gte=threshold).order_by('-count')
-        return [p.resource for p in pairs]
+        # collect resources; skip unpublished and deleted resource
+        together_list = []
+        for pair in pairs:
+            resource = resourceInfoType_model.objects.get(
+              storage_object__identifier=pair.lrid)
+            if resource.storage_object.publication_status != PUBLISHED\
+              or resource.storage_object.deleted:
+                continue
+            together_list.append(resource)    
+
+        return together_list
               
     def __unicode__(self):
         """
@@ -73,11 +86,12 @@ class TogetherManager(models.Model):
 
 class ResourceCountDict(models.Model):
     """
-    mapping of resources to key-value pairs of resources and counts, realized as
-    ResourceCountPairs; contains a pointer to the TogetherManager that owns it
+    mapping of resources ids to key-value pairs of resources and counts, 
+    realized as ResourceCountPairs; contains a pointer to the TogetherManager
+    that owns it
     """
     container = models.ForeignKey(TogetherManager, db_index=True)
-    resource = models.ForeignKey(resourceInfoType_model, editable=False, db_index=True)
+    lrid = models.CharField(editable=False, db_index=True, blank=False, max_length=64)
 
     def items(self):
         """
@@ -92,7 +106,8 @@ class ResourceCountDict(models.Model):
         increases the count for the given resource by 1
         """
         # pylint: disable-msg=E1101
-        res_count_pair = self.resourcecountpair_set.get_or_create(resource = res)[0]
+        res_count_pair = self.resourcecountpair_set.get_or_create(
+          lrid = res.storage_object.identifier)[0]
         res_count_pair.increaseCount()
         
     def __unicode__(self):
@@ -100,7 +115,7 @@ class ResourceCountDict(models.Model):
         returns the Unicode representation for this mapping
         """
         unicode_list = []
-        unicode_list.append('{}:\n'.format(self.resource.storage_object.identifier))
+        unicode_list.append('{}:\n'.format(self.lrid))
         # pylint: disable-msg=E1101
         for pair in self.resourcecountpair_set.all():
             unicode_list.append('  {}\n'.format(unicode(pair)))
@@ -109,11 +124,11 @@ class ResourceCountDict(models.Model):
 
 class ResourceCountPair(models.Model):
     """
-    key-value pair holding a resource as key and a counter as value;
+    key-value pair holding a resource id as key and a counter as value;
     contains a pointer to the ResourceCountDict that owns it
     """
     container = models.ForeignKey(ResourceCountDict, db_index=True)
-    resource = models.ForeignKey(resourceInfoType_model, editable=False, db_index=True)
+    lrid = models.CharField(editable=False, db_index=True, blank=False, max_length=64)
     count = models.PositiveIntegerField(default=0)
 
     def increaseCount(self, inc=1):
@@ -127,4 +142,4 @@ class ResourceCountPair(models.Model):
         """
         returns the Unicode representation for this pair
         """
-        return u'{0}: {1}'.format(self.resource.storage_object.identifier, self.count)
+        return u'{0}: {1}'.format(self.lrid, self.count)

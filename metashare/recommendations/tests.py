@@ -127,7 +127,7 @@ class SimpleTogetherManagerTest(django.test.TestCase):
         self.assertEquals(2, len(ResourceCountDict.objects.all()))
         self.res_1.delete_deep()
         # after deep deletion, only one instance remains:
-        # the (empty) resource count dcitionary of res_2            
+        # the (empty) resource count dictionary of res_2            
         self.assertEquals(0, len(ResourceCountPair.objects.all()))
         self.assertEquals(1, len(ResourceCountDict.objects.all()))
         
