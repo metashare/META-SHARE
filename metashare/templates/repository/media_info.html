@@ -1,13 +1,6 @@
 {% with media_info=resource_component_dict.Resource_component %}
 
-Languages:
-{% for key, value in media_info.Corpus_media.Corpus_audio.items %}
-	
-		{% for key1, value1 in value.items %}
-			{% if key1 == "Language_name" %}
-				{{ value1}}, 
-			{% endif %}
-		{% endfor %}
-{% endfor %}
+{{ lr_content|unordered_list }}
+{% include "repository/language.html" with languages=media_info.Corpus_media.Corpus_text %}
 
 {% endwith %}

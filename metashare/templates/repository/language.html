@@ -1,10 +1,15 @@
-{% load email_protection %}
+{% load eval %}
 {% spaceless %}
 <label class='title component'>Languages:</label>
 <div class="dataline">
-	{% for language in languages_tuple %}
-		{{ language.Language_name }}
-	{% endfor %}
+
+{% for key, value in languages.items %}
+		{% for key1, value1 in value.items %}
+			{% if key1 == "Language_name" %}
+				<span title="{{value.Language_id}}">{{ value1 }}</span>
+			{% endif %}
+		{% endfor %}
+{% endfor %}
 </div>
 
 {% endspaceless %}

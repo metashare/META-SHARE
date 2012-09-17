@@ -457,6 +457,7 @@ def view(request, resource_name=None, object_id=None):
     resource_creation_info_tuple = None
     relation_info_tuples = []
     resource_component_tuple = None
+    languages_tuple = []
     for _tuple in lr_content[1]:
         if _tuple[0] == "Distribution":
             distribution_info_tuple = _tuple
@@ -478,6 +479,7 @@ def view(request, resource_name=None, object_id=None):
             relation_info_tuples.append(_tuple)
         elif _tuple[0] == "Resource component":
             resource_component_tuple = _tuple[1]
+            languages_tuple = _tuple
     #print resource_component_tuple
     for _tuple in resource_component_tuple[0][1]:
         print _tuple
@@ -492,8 +494,83 @@ def view(request, resource_name=None, object_id=None):
     for item in contact_person_tuples:
         contact_person_dicts.append(tuple2dict([item]))
     resource_component_dict = tuple2dict(resource_component_tuple)
+    lr_content_dict = tuple2dict([lr_content])
     print resource_component_dict
+    #for media_type in media_types:
+    #   print media_type
+    resource_component_tuples = []
+    print resource_type
+    if resource_type == "corpus" or resource_type == "languageDescription" or resource_type == "lexicalConceptualResource":
+        for media_type in media_types:
+            if media_type == "text":
+                resource_component_tuples.append(resource_component_dict['Resource_component']['Corpus_media']['Corpus_text'])
+            if media_type == "audio":
+                resource_component_tuples.append(resource_component_dict['Resource_component']['Corpus_media']['Corpus_audio'])
+    elif resource_type == "toolService":
+        resource_component_tuples.appen(resource_component_dict
+    for item in resource_component_tuples:
+        print item
+        
+                
+                
 
+    # Create resource component paths list:
+    resource_component_paths = ['Resource_component.Corpus_media.Corpus_audio',
+        'Resource_component.Corpus_media.Corpus_text', 
+        'Resource_component.Corpus_media.Corpus_video',
+        'Resource_component.Corpus_media.Corpus_image',
+        'Lexical_conceptual_resource_media.Lexical_conceptual_resource_text',
+        'Lexical_conceptual_resource_media.Lexical_conceptual_resource_video',
+        
+        
+    ]
+
+    """      
+    'Resource_component.
+        if media_type.corpusAudioInfo:
+            result.append(media_type.corpusAudioInfo.mediaType)
+        for corpus_info in media_type.corpusvideoinfotype_model_set.all():
+            result.append(corpus_info.mediaType)
+        if media_type.corpusTextNgramInfo:
+            result.append(media_type.corpusTextNgramInfo.mediaType)
+        if media_type.corpusImageInfo:
+            result.append(media_type.corpusImageInfo.mediaType)
+        if media_type.corpusTextNumericalInfo:
+            result.append(media_type.corpusTextNumericalInfo.mediaType)
+
+    elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
+        lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
+        if lcr_media_type.lexicalConceptualResourceTextInfo:
+            result.append(
+                lcr_media_type.lexicalConceptualResourceTextInfo.mediaType)
+        if lcr_media_type.lexicalConceptualResourceAudioInfo:
+            result.append(
+                lcr_media_type.lexicalConceptualResourceAudioInfo.mediaType)
+        if lcr_media_type.lexicalConceptualResourceVideoInfo:
+            result.append(
+                lcr_media_type.lexicalConceptualResourceVideoInfo.mediaType)
+        if lcr_media_type.lexicalConceptualResourceImageInfo:
+            result.append(
+                lcr_media_type.lexicalConceptualResourceImageInfo.mediaType)
+
+    elif isinstance(corpus_media, languageDescriptionInfoType_model):
+        ld_media_type = corpus_media.languageDescriptionMediaType
+        if ld_media_type.languageDescriptionTextInfo:
+            result.append(ld_media_type.languageDescriptionTextInfo.mediaType)
+        if ld_media_type.languageDescriptionVideoInfo:
+            result.append(ld_media_type.languageDescriptionVideoInfo.mediaType)
+        if ld_media_type.languageDescriptionImageInfo:
+            result.append(ld_media_type.languageDescriptionImageInfo.mediaType)
+
+    elif isinstance(corpus_media, toolServiceInfoType_model):
+        if corpus_media.inputInfo:
+            result.extend(corpus_media.inputInfo \
+                          .get_mediaType_display_list())
+        if corpus_media.outputInfo:
+            result.extend(corpus_media.outputInfo \
+                          .get_mediaType_display_list())
+    """
+    
     # Define context for template rendering.
     context = { 'resource': resource,
                 'resourceName': resource_name,
@@ -515,6 +592,7 @@ def view(request, resource_name=None, object_id=None):
                 'license_types': license_types,
                 'resourceType': resource_type,
                 'resource_component_dict': resource_component_dict,
+                'lr_content_dict': lr_content_dict,
                 'mediaTypes': media_types,
                 'url': url,
                 'metaShareId': metashare_id,

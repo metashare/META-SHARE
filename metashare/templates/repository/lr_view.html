@@ -157,7 +157,9 @@
 			     {% include "repository/person_info.html" with contact_person_dict=contact_person %}
 			{% endfor %}
 
-
+			{% for person in object.contactPerson_set.all %}
+				{{ person }}
+			{% endfor %}
 			{{ resource_component_dict.Resource_component.Resource }}
 
 
