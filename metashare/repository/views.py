@@ -480,26 +480,20 @@ def view(request, resource_name=None, object_id=None):
         elif _tuple[0] == "Resource component":
             resource_component_tuple = _tuple[1]
             languages_tuple = _tuple
-    #print resource_component_tuple
-    for _tuple in resource_component_tuple[0][1]:
-        print _tuple
-        
 
     # Preprocess some of the information withing the tuples for better
     # presentation in the single resource view.
     # Contact Person:
     contact_person_dicts = []
     resource_component_dict = {}
+
     #convert contact_person_tuples to dictionaries
     for item in contact_person_tuples:
         contact_person_dicts.append(tuple2dict([item]))
     resource_component_dict = tuple2dict(resource_component_tuple)
     lr_content_dict = tuple2dict([lr_content])
-    print resource_component_dict
-    #for media_type in media_types:
-    #   print media_type
     resource_component_dicts = {}
-    print resource_type
+
     if resource_type == "corpus" or resource_type == "languageDescription" or resource_type == "lexicalConceptualResource":
         for media_type in media_types:
             if media_type == "text":
@@ -514,8 +508,6 @@ def view(request, resource_name=None, object_id=None):
                 resource_component_dicts['textNgram'] = resource_component_dict['Resource_component']['Corpus_media']['Corpus_textNgram']
             if media_type == "textNumerical":
                 resource_component_dicts['textNumerical'] = resource_component_dict['Resource_component']['Corpus_media']['Corpus_textNumerical']
-
-            
     elif resource_type == "toolService":
         resource_component_dicts['toolService'] = resource_component_dict['Resource_component']
 
@@ -540,7 +532,7 @@ def view(request, resource_name=None, object_id=None):
                 'linguality_infos': linguality_infos,
                 'license_types': license_types,
                 'resourceType': resource_type,
-                'resource_component_dict': resource_component_dict,
+                'resource_component_dicts': resource_component_dicts,
                 'lr_content_dict': lr_content_dict,
                 'mediaTypes': media_types,
                 'url': url,
