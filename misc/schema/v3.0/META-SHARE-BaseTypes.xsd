@@ -15,7 +15,7 @@
 		<xs:sequence>
 			<xs:element name="resourceName" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>The full name by which the resource is known</xs:documentation>
+					<xs:documentation>The full name by which the resource is known; the element can be repeated for the different language versions using the "lang" attribute to specify the language.</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:simpleContent>
@@ -31,7 +31,7 @@
 			</xs:element>
 			<xs:element name="description" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Provides the description of the resource in prose</xs:documentation>
+					<xs:documentation>Provides the description of the resource in prose; the element can be repeated for the different language versions using the "lang" attribute to specify the language.</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:simpleContent>
@@ -47,7 +47,7 @@
 			</xs:element>
 			<xs:element name="resourceShortName" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>The short form (abbreviation, acronym etc.) used to identify the resource</xs:documentation>
+					<xs:documentation>The short form (abbreviation, acronym etc.) used to identify the resource; the element can be repeated for the different language versions using the "lang" attribute to specify the language.</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:simpleContent>
@@ -72,7 +72,7 @@
 			</xs:element>
 			<xs:element name="metaShareId">
 				<xs:annotation>
-					<xs:documentation>An unambiguous referent to the resource within META-SHARE </xs:documentation>
+					<xs:documentation>An unambiguous referent to the resource within META-SHARE; it reflects to the unique system id provided automatically by the MetaShare software</xs:documentation>
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
@@ -82,7 +82,7 @@
 			</xs:element>
 			<xs:element name="identifier" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>A reference to the resource like a pid or an internal identifier used by the resource provider; the attribute "type" is obligatorily used for further specification</xs:documentation>
+					<xs:documentation>A reference to the resource like a pid or an internal identifier used by the resource provider</xs:documentation>
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
@@ -220,7 +220,7 @@
 			</xs:element>
 			<xs:element name="validationReport" type="ms:documentationInfoType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>A short account of the validation details or a link to the validation report</xs:documentation>
+					<xs:documentation>A short account of the validation details or a bibliographic reference to a document with detailed information on the validation process and results</xs:documentation>
 					<xs:appinfo>
 						<relation>many-to-one</relation>
 					</xs:appinfo>
@@ -345,12 +345,12 @@
 		<xs:sequence>
 			<xs:element name="metadataCreationDate" type="xs:date">
 				<xs:annotation>
-					<xs:documentation>The date of creation of this metadata description</xs:documentation>
+					<xs:documentation>The date of creation of this metadata description (automatically inserted by the MetaShare software)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="metadataCreator" type="ms:personInfoType" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Groups information on the person that created the metadata in META-SHARE editor; to be automatically assigned</xs:documentation>
+					<xs:documentation>Groups information on the person that has created the metadata record</xs:documentation>
 					<xs:appinfo>
 						<relation>many-to-many</relation>
 					</xs:appinfo>
@@ -378,22 +378,22 @@
 			</xs:element>
 			<xs:element name="originalMetadataLink" type="ms:httpURI" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>A link to the metadata of the original source</xs:documentation>
+					<xs:documentation>A link to the original metadata record, in cases of harvesting</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="metadataLanguageName" type="xs:string" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>The name of the language in which the metadata description is written according to IETF BCP47</xs:documentation>
+					<xs:documentation>The name of the language in which the metadata description is written; an autocompletion mechanism with values from the ISO 639 is provided in the editor, but the values can be subsequently edited for further specification (according to the IETF BCP47 guidelines)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="metadataLanguageId" type="xs:string" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>The identifier of the language in which the metadata description is written according to IETF BCP47</xs:documentation>
+					<xs:documentation>The identifier of the language in which the metadata description is written; an autocompletion mechanism with values from the ISO 639 is provided in the editor, but the values can be subsequently edited for further specification (according to the IETF BCP47 guidelines)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="metadataLastDateUpdated" type="xs:date" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>The date of the last updating of the metadata record</xs:documentation>
+					<xs:documentation>The date of the last updating of the metadata record (automatically inserted by the MetaShare software)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="revision" minOccurs="0">
@@ -650,7 +650,7 @@
 			</xs:element>
 			<xs:element name="documentLanguageName" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>The name of the language the document is written in, as mentioned in IETF BCP47</xs:documentation>
+					<xs:documentation>The name of the language the document is written in; an autocompletion mechanism with values from the ISO 639 is provided in the editor, but the values can be subsequently edited for further specification (according to the IETF BCP47 guidelines)</xs:documentation>
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
@@ -660,7 +660,7 @@
 			</xs:element>
 			<xs:element name="documentLanguageId" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>The id of the language the document is written in, as mentioned in IETF BCP47</xs:documentation>
+					<xs:documentation>The id of the language the document is written in; an autocompletion mechanism with values from the ISO 639 is provided in the editor, but the values can be subsequently edited for further specification (according to the IETF BCP47 guidelines)</xs:documentation>
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
@@ -672,7 +672,7 @@
 	</xs:complexType>
 	<xs:complexType name="documentationInfoType">
 		<xs:annotation>
-			<xs:documentation>Groups information on the documentation of the resource pointing to either structured and unstructured presentation of the relevant documents</xs:documentation>
+			<xs:documentation>Used to bring together information on documents (as a structured bibliographic record or in an unstructured format) and free text descriptions</xs:documentation>
 		</xs:annotation>
 		<xs:choice>
 			<xs:element ref="ms:documentUnstructured"/>
@@ -821,7 +821,7 @@
 			</xs:element>
 			<xs:element name="tagsetLanguageId" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>The identifier of the tagset language as expressed in the values of IETF BP47</xs:documentation>
+					<xs:documentation>The identifier of the tagset language; an autocompletion mechanism with values from the ISO 639 is provided in the editor, but the values can be subsequently edited for further specification (according to the IETF BCP47 guidelines)</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
 					</xs:appinfo>
@@ -832,9 +832,9 @@
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
-			<xs:element name="tagsetLanguageName" minOccurs="0" >
+			<xs:element name="tagsetLanguageName" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>The name of the tagset language expressed in the values of IETF BP47</xs:documentation>
+					<xs:documentation>The name of the tagset language; an autocompletion mechanism with values from the ISO 639 is provided in the editor, but the values can be subsequently edited for further specification (according to the IETF BCP47 guidelines)</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
 					</xs:appinfo>
@@ -993,8 +993,8 @@
 			<xs:element name="relationType">
 				<xs:annotation>
 					<xs:documentation>Specifies the type of relation not covered by the ones proposed by META-SHARE</xs:documentation>
-					<xs:appinfo>						
-						<label>Relation type</label>	
+					<xs:appinfo>
+						<label>Relation type</label>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:simpleType>
@@ -1797,7 +1797,7 @@
 		<xs:annotation>
 			<xs:documentation>Groups together information on the image resolution</xs:documentation>
 			<xs:appinfo>
-			    <render-short>{sizeWidth} {sizeHeight} {resolutionStandard}</render-short>
+				<render-short>{sizeWidth} {sizeHeight} {resolutionStandard}</render-short>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
@@ -2062,7 +2062,7 @@
 	</xs:element>
 	<xs:element name="documentationInfo" type="ms:documentationInfoType">
 		<xs:annotation>
-			<xs:documentation>Groups information on the documentation of the resource pointing to either structured and unstructured presentation of the relevant documents</xs:documentation>
+			<xs:documentation>Used to bring together information on documents (as a structured bibliographic record or in an unstructured format) and free text descriptions</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 	<xs:element name="recordingInfo" type="ms:recordingInfoType">
