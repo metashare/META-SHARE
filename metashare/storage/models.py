@@ -432,6 +432,7 @@ def restore_from_folder(storage_id, copy_status=MASTER, storage_digest=None, sou
     if not _metadata_files:
         raise Exception('no metadata.xml found')
     # restore resource from metadata.xml
+    LOGGER.info("restoring from {0}/{1}".format(storage_folder, _metadata_files[0]))
     _metadata_file = open('{0}/{1}'.format(storage_folder, _metadata_files[0]), 'rb')
     _xml_string = _metadata_file.read()
     _metadata_file.close()
