@@ -301,6 +301,36 @@ class StorageObject(models.Model):
         
         self.digest_last_checked = datetime.now()        
 
+        # check metadata serialization
+        metadata_updated = self.check_metadata()
+        
+        # check global storage object serialization
+        global_updated = self.check_global_storage_object()
+        
+        # create new digest zip-archive if required
+        if metadata_updated or global_updated:
+            self.create_digest()
+            
+        # check local storage object serialization
+        local_updated = self.check_local_storage_object()
+        
+        # save storage object if required; this should always happend since
+        # at least self.digest_last_checked in the local storage object 
+        # has changed
+        if metadata_updated or global_updated or local_updated:
+            self.save()
+
+
+    def check_metadata(self):
+        """
+        Checks if the metadata of the resource has changed with respect to the
+        current metadata serialization. If yes, recreates the serialization,
+        updates it in the storage folder and increases the revision (for master
+        copies)
+        
+        Returns a flag indicating if the serialization was updated. 
+        """
+        
         # flag to indicate if rebuilding of metadata.xml is required
         update_xml = False
         
@@ -314,13 +344,14 @@ class StorageObject(models.Model):
         
         if self.metadata != _metadata:
             self.metadata = _metadata
-            self.modified = datetime.now()
-            # increase revision for ingested and published resources whenever 
-            # the metadata XML changes
-            if self.publication_status in (INGESTED, PUBLISHED):
-                self.revision += 1
-                update_xml = True
             LOGGER.debug(u"\nMETADATA: {0}\n".format(self.metadata))
+            self.modified = datetime.now()
+            update_xml = True
+            # increase revision for ingested and published resources whenever 
+            # the metadata XML changes for master copies
+            if self.publication_status in (INGESTED, PUBLISHED) \
+              and self.copy_status == MASTER:
+                self.revision += 1
             
         # check if there exists a metadata XML file; this is not the case if
         # the publication status just changed from internal to ingested
@@ -330,18 +361,23 @@ class StorageObject(models.Model):
           '{0}/metadata-{1:04d}.xml'.format(self._storage_folder(), self.revision)):
             update_xml = True
 
-        # flag to indicate if rebuilding of resource.zip is required
-        update_zip = False
-          
         if update_xml:
             # serialize metadata
             with open('{0}/metadata-{1:04d}.xml'.format(
               self._storage_folder(), self.revision), 'wb') as _out:
                 _out.write(unicode(self.metadata).encode('ASCII'))
-            update_zip = True
         
-        # check if global storage object serialization has changed; if yes,
-        # save it to storage folder
+        return update_xml
+        
+    
+    def check_global_storage_object(self):
+        """
+        Checks if the global storage object serialization has changed. If yes,
+        updates it in the storage folder.
+        
+        Returns a flag indicating if the serialization was updated. 
+        """
+        
         _dict_global = { }
         for item in GLOBAL_STORAGE_ATTS:
             _dict_global[item] = getattr(self, item)
@@ -353,10 +389,17 @@ class StorageObject(models.Model):
                 with open('{0}/storage-global.json'.format(
                   self._storage_folder()), 'wb') as _out:
                     _out.write(unicode(self.global_storage).encode('utf-8'))
-                update_zip = True
-        
-        # create new digest zip if required, but only for master and proxy copies
-        if update_zip and self.copy_status in (MASTER, PROXY):
+                return True
+                
+        return False
+
+    
+    def create_digest(self):
+        """
+        Creates a new digest zip-archive for master and proxy copies.
+        """
+
+        if self.copy_status in (MASTER, PROXY):
             _zf_name = '{0}/resource.zip'.format(self._storage_folder())
             _zf = zipfile.ZipFile(_zf_name, mode='w', compression=ZIP_DEFLATED)
             try:
@@ -374,8 +417,15 @@ class StorageObject(models.Model):
             # update last modified timestamp
             self.digest_modified = datetime.now()
             
-        # check if local storage object serialization has changed; if yes,
-        # save it to storage folder
+            
+    def check_local_storage_object(self):
+        """
+        Checks if the local storage object serialization has changed. If yes,
+        updates it in the storage folder.
+        
+        Returns a flag indicating if the serialization was updated. 
+        """
+        
         _dict_local = { }
         for item in LOCAL_STORAGE_ATTS:
             _dict_local[item] = getattr(self, item)
@@ -387,10 +437,10 @@ class StorageObject(models.Model):
                 with open('{0}/storage-local.json'.format(
                   self._storage_folder()), 'wb') as _out:
                     _out.write(unicode(self.local_storage).encode('utf-8'))
-        
-        # save storage object if required; this is always required since at 
-        # least self.digest_last_checked has changed
-        self.save()
+                return True
+
+        return False
+
 
 def restore_from_folder(storage_id, copy_status=MASTER, storage_digest=None, source_node=None):
     """
@@ -432,7 +482,6 @@ def restore_from_folder(storage_id, copy_status=MASTER, storage_digest=None, sou
     if not _metadata_files:
         raise Exception('no metadata.xml found')
     # restore resource from metadata.xml
-    LOGGER.info("restoring from {0}/{1}".format(storage_folder, _metadata_files[0]))
     _metadata_file = open('{0}/{1}'.format(storage_folder, _metadata_files[0]), 'rb')
     _xml_string = _metadata_file.read()
     _metadata_file.close()
@@ -475,15 +524,20 @@ def restore_from_folder(storage_id, copy_status=MASTER, storage_digest=None, sou
             LOGGER.warn('no copy status provided, using default copy status MASTER')
             _storage_object.copy_status = MASTER
     
-    # If object is synchronized, retain the storage digest
+    # set storage digest if provided (usually for non-local resources)
     if storage_digest:
         _storage_object.digest_checksum = storage_digest
-    # If object is non-local, set its source node id
+    # set source node id if provided (usually for non-local resources)
     if source_node:
         _storage_object.source_node = source_node
+    # create digest for master and proxy copies
+    if _storage_object.copy_status in (MASTER, PROXY):
+        _storage_object.digest_last_checked = datetime.now()
+        _storage_object.create_digest()
+        # check local storage object serialization
+        _storage_object.check_local_storage_object()
 
     _storage_object.save()
-    _storage_object.update_storage()
         
     return resource
 
