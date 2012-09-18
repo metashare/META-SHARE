@@ -509,6 +509,7 @@ def view(request, resource_name=None, object_id=None):
             if media_type == "textNumerical":
                 resource_component_dicts['textNumerical'] = resource_component_dict['Resource_component']['Corpus_media']['Corpus_textNumerical']
     elif resource_type == "languageDescription":
+        for media_type in media_types:
             if media_type == "text":
                 resource_component_dicts['text'] = resource_component_dict['Resource_component']['languageDescription_media']['languageDescription_text']
             if media_type == "image":
@@ -516,6 +517,7 @@ def view(request, resource_name=None, object_id=None):
             if media_type == "video":
                 resource_component_dicts['video'] = resource_component_dict['Resource_component']['languageDescription_media']['languageDescription_video']
     elif resource_type == "lexicalConceptualResource":
+        for media_type in media_types:
             if media_type == "text":
                 resource_component_dicts['text'] = resource_component_dict['Resource_component']['lexicalConceptualResource_media']['lexicalConceptualResource_text']
             if media_type == "audio":
