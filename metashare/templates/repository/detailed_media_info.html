@@ -1,7 +1,13 @@
 {% spaceless %}
 
+{# Type info #}
+<label class='title'>{{ resource_component.Linguality.Linguality_type }} {{ type }}</label>
+
+{# Language Information #}
 {% include "repository/language.html" with languages=resource_component %}
 
+{# Size Information #}
+{% include "repository/size.html" with size=resource_component %}
 
 
 

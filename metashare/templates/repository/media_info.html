@@ -1,40 +1,31 @@
 {% load eval %}
 
 {% with media_info=resource_component_dict.Resource_component %}
-	{% if media_type == "text" %}
-		{% include "repository/detailed_media_info.html" with resource_component = resource_component_dicts.text %}
-		{{ resource_component_dicts.text }}
+	{% if type == "text" %}
+		{% include "repository/detailed_media_info.html" with resource_component=resource_component_dicts.text %}
 	{% else %}
-		{% if media_type == "audio" %}
-			{% include "repository/detailed_media_info.html" with resource_component = resource_component_dicts.audio %}
-			{{ resource_component_dicts.audio }}
+		{% if type == "audio" %}
+			{% include "repository/detailed_media_info.html" with resource_component=resource_component_dicts.audio %}
 		{% else %}
-			{% if media_type == "video" %}
-				{% include "repository/detailed_media_info.html" with resource_component = resource_component_dicts.video %}
-				{{ resource_component_dicts.video }}
+			{% if type == "video" %}
+				{% include "repository/detailed_media_info.html" with resource_component=resource_component_dicts.video %}
 			{% else %}
-				{% if media_type == "image" %}
-					{% include "repository/detailed_media_info.html" with resource_component = resource_component_dicts.image %}
-					{{ resource_component_dicts.image }}
+				{% if type == "image" %}
+					{% include "repository/detailed_media_info.html" with resource_component=resource_component_dicts.image %}
 				{% else %}
-					{% if media_type == "textNumerical" %}
-						{% include "repository/detailed_media_info.html" with resource_component = resource_component_dicts.textNumerical %}
-						{{ resource_component_dicts.textNumerical }}
+					{% if type == "textNumerical" %}
+						{% include "repository/detailed_media_info.html" with resource_component=resource_component_dicts.textNumerical %}
 					{% else %}
-						{% if media_type == "textNgram" %}
-							{% include "repository/detailed_media_info.html" with resource_component = resource_component_dicts.textNgram %}
-							{{ resource_component_dicts.textNgram }}
+						{% if type == "textNgram" %}
+							{% include "repository/detailed_media_info.html" with resource_component=resource_component_dicts.textNgram %}
 						{% else %}
-							{% if media_type == "textNgram" %}
-							{% include "repository/detailed_media_info.html" with resource_component = resource_component_dicts.textNgram %}
-							{{ resource_component_dicts.textNgram }}
+							{% if type == "toolService" %}
+								{% include "repository/detailed_media_info.html" with resource_component=resource_component_dicts.toolService %}
+							{% endif %}
 						{% endif %}
 					{% endif %}
 				{% endif %}
 			{% endif %}
 		{% endif %}
 	{% endif %}
-	
-{% include "repository/language.html" with languages=resource_components_dicts.text %}
-
 {% endwith %}

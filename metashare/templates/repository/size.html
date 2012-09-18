@@ -1,0 +1,15 @@
+{% spaceless %}
+
+<label class='title component'>Size:</label>
+<div class="dataline">
+{% for key, value in size.items %}
+		{% for key1, value1 in value.items %}
+			{% if key1 == "Size_unit" %}
+				<span class="dataline">{{ value.Size }} {{ value.Size_unit }}</span>
+			{% endif %}
+		{% endfor %}
+{% endfor %}
+</div>
+
+
+{% endspaceless %}
