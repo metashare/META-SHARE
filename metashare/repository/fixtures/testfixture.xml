@@ -120,7 +120,7 @@
 		<corpusInfo>
 			<resourceType>corpus</resourceType>
 			<corpusMediaType>
-				<corpusTextInfo>
+				<corpusAudioInfo>
 					<mediaType>audio</mediaType>
 					<lingualityInfo>
 						<lingualityType>monolingual</lingualityType>
@@ -140,7 +140,7 @@
 					<modalityInfo>
 						<modalityType>spokenLanguage</modalityType>
 					</modalityInfo>
-				</corpusTextInfo>
+				</corpusAudioInfo>
 			</corpusMediaType>
 		</corpusInfo>
 	</resourceComponentType>
