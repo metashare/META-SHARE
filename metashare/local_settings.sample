@@ -16,6 +16,7 @@ DJANGO_BASE = 'path/to/metashare/'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
+USE_L10N = True
 LANGUAGE_CODE = 'en-us'
 
 # Path to the local storage layer path used for persistent object storage.
