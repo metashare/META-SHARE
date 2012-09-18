@@ -605,6 +605,8 @@ class AutoCompleteSelectMultipleEditWidget(SelectableMultiWidget, SelectableMedi
             u'data-selectable-position': position,
             u'data-selectable-allow-editing': 'true',
             u'data-selectable-base-url': proto_url,
+            u'data-selectable-throbber-img': '{0}img/admin/throbber_16.gif'.format(settings.ADMIN_MEDIA_PREFIX),
+            u'data-selectable-use-state-error': 'false',
         }
         if more_attrs:
             attrs.update(more_attrs)
@@ -625,9 +627,7 @@ class AutoCompleteSelectMultipleEditWidget(SelectableMultiWidget, SelectableMedi
         if value and not hasattr(value, '__iter__'):
             value = [value]
         value = [u'', value]
-        throbber = u'<img src="{0}img/admin/throbber_16.gif" class="throbber" style="display: none"></img>'.format(settings.ADMIN_MEDIA_PREFIX)
         html_code = super(AutoCompleteSelectMultipleEditWidget, self).render(name, value, attrs)
-        html_code = html_code + throbber
         return html_code
 
     def decompress(self, value):

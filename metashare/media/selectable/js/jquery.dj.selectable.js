@@ -181,6 +181,16 @@
             }
         },
 
+        showThrobber: function() {
+        	var self = this;
+        	$(self.searchIcon).attr('src', self.throbberImg);
+        },
+        
+        hideThrobber: function() {
+        	var self = this;
+        	$(self.searchIcon).attr('src', self.searchImg);
+        },
+        
         _create: function() {
             /* Initialize a new selectable widget */
             var self = this,
@@ -190,11 +200,16 @@
             self.isSubclassable = data.selectableIsSubclassable || data['selectable-is-subclassable'];
             self.allowEditing = data.selectableAllowEditing || data['selectable-allow-editing'];
             self.baseUrl = data.selectableBaseUrl || data['selectable-base-url'];
+            self.throbberImg = data.selectableThrobberImg || data['selectable-throbber-img'];
+            self.useStateError = data.selectableUseStateError;// || data['selectable-use-state-error'];
+            if(self.useStateError == undefined) {
+            	self.useStateError = true;
+            }
             self.baseEditingUrl = null;
             var jqParent = $(input).parent();
             var jqA = jqParent.find('a');
             self.searchIcon = jqParent.children('img').get(0);
-            self.throbber = jqParent.find('.throbber');
+            self.searchImg = $(self.searchIcon).attr('src');
             var href = jqA.attr('href');
             if(href)
             {
@@ -225,7 +240,16 @@
                 if (page) {
                     query.page = page;
                 }
-				$.getJSON(url, query, response);
+				//$.getJSON(url, query, response);
+                $(self.element).removeClass('ui-state-not-found');
+				$.getJSON(url, query, function(data, status){
+					response(data, status);
+					if(!data.length) {
+						// highlight the input element if no data was found
+						$(self.element).addClass('ui-state-not-found');
+					}
+					self.hideThrobber();
+				});
             }
             // Create base auto-complete lookup
             $(input).autocomplete({
@@ -234,11 +258,14 @@
                     $(input).removeClass('ui-state-error');
                     if ($(input).val() && !ui.item) {
                         if (!self.allowNew) {
-                            $(input).addClass('ui-state-error');
+                            if(self.useStateError) {
+                            	$(input).addClass('ui-state-error');
+                            }
                         }
                     }
                     if (self.allowMultiple && !$(input).hasClass('ui-state-error')) {
                         $(input).val("");
+                        $(input).removeClass('ui-state-not-found');
                         $(input).data("autocomplete").term = "";
                     }
                 },
@@ -255,10 +282,10 @@
                     self.select(ui.item);
                 },
                 search: function(event, ui){
-                	self.throbber.show();
+                	self.showThrobber();
                 },
                 open: function(event, ui){
-                	self.throbber.hide();
+                	self.hideThrobber();
                 }
             }).addClass("ui-widget ui-widget-content ui-corner-all");
             // Override the default auto-complete render.
