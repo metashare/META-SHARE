@@ -98,6 +98,21 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                     self.exclude.append(name)
 
 
+    def get_actions(self, request):
+        """
+        Return a dictionary mapping the names of all actions for this
+        `ModelAdmin` to a tuple of (callable, name, description) for each
+        action.
+        """
+        result = super(SchemaModelAdmin, self).get_actions(request)
+        if not request.user.is_superuser:
+            # only superusers can see the delete action; this makes sense as
+            # currently deleting would mostly not work anyway due to related
+            # objects which can't be deleted
+            del result['delete_selected']
+        return result
+
+
     def contains_inlines(self, model_class):
         ''' Determine whether or not the editor for the given model_class will contain inlines '''
         return any(f for f in model_class.get_fields_flat() if f.endswith('_set'))
