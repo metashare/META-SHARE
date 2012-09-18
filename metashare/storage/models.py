@@ -290,19 +290,23 @@ class StorageObject(models.Model):
         Updates the metadata XML if required and serializes it and this storage
         object to the storage folder.
         """
-        # for internal resources, no serialization is done
-        if self.publication_status is INTERNAL:
-            return
-        
         # check if the storage folder for this storage object instance exists
         if self._storage_folder() and not exists(self._storage_folder()):
             # If not, create the storage folder.
             mkdir(self._storage_folder())
-        
+
         # update the checksum, if a downloadable file exists
         if self.master_copy:
-            self._compute_checksum()
-        
+            _so_needs_saving = self._compute_checksum()
+        else:
+            _so_needs_saving = False
+
+        # for internal resources, no serialization is done
+        if self.publication_status is INTERNAL:
+            if _so_needs_saving:
+                self.save()
+            return
+
         self.digest_last_checked = datetime.now()        
 
         # flag to indicate if rebuilding of metadata.xml is required
