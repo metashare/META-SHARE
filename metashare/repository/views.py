@@ -4,7 +4,7 @@ from datetime import datetime
 from os.path import split, getsize
 from urllib import urlopen
 from mimetypes import guess_type
-from time import strptime
+from time import strptime, asctime
 
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
@@ -684,7 +684,7 @@ def tuple2dict(_tuple):
 
                     # If the item is a date, convert it to real datetime
                     if _key.find("date") != -1:
-                        new_item = str(strptime(item[0][1], "%Y-%m-%d"))
+                        new_item = datetime.strptime(item[0][1], "%Y-%m-%d")
                     else:
                         new_item = item[0][1]
                     # If a repeatable element is found, the old value is

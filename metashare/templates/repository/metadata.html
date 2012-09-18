@@ -3,22 +3,21 @@
 <label class='title component'>Metadata Info</label>
 <div>
 
-			{% if metadata_dict.Metadata.Metadata_creation_date %}			
-			     <div class="dataline">
-					<label>
-						Created: {{ metadata_dict.Metadata.Metadata_creation_date }}
-					</label>
-				</div>
-			{% endif %}
-			
-			{% if metadata_dict.Metadata.Metadata_last_date_updated %}			
-			     <div class="dataline">
-					<label>
-						Last Updated: {{ metadata_dict.Metadata.Metadata_last_date_updated }}
-					</label>
-				</div>
-			{% endif %}
-
+		{% if metadata_dict.Metadata.Metadata_creation_date %}			
+			 <div class="dataline">
+				<label>
+					Created: {{ metadata_dict.Metadata.Metadata_creation_date|date:"SHORT_DATE_FORMAT" }}
+				</label>
+			</div>
+		{% endif %}
+		
+		{% if metadata_dict.Metadata.Metadata_last_date_updated %}			
+			 <div class="dataline">
+				<label>
+					Last Updated: {{ metadata_dict.Metadata.Metadata_last_date_updated|date:"SHORT_DATE_FORMAT" }}
+				</label>
+			</div>
+		{% endif %}
 
 		{% if metadata_dict.Metadata.Source %}
 			<div class="dataline">
