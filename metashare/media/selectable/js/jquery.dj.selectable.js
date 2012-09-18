@@ -194,6 +194,7 @@
             var jqParent = $(input).parent();
             var jqA = jqParent.find('a');
             self.searchIcon = jqParent.children('img').get(0);
+            self.throbber = jqParent.find('.throbber');
             var href = jqA.attr('href');
             if(href)
             {
@@ -252,6 +253,12 @@
                         return false;
                     }
                     self.select(ui.item);
+                },
+                search: function(event, ui){
+                	self.throbber.show();
+                },
+                open: function(event, ui){
+                	self.throbber.hide();
                 }
             }).addClass("ui-widget ui-widget-content ui-corner-all");
             // Override the default auto-complete render.
