@@ -26,7 +26,8 @@ class Command(BaseCommand):
                 remove_count += 1
                 LOGGER.info("removing resource {}".format(res.identifier))
                 if res.copy_status == PROXY:
-                    rem_obj = RemovedObject.objects.create(identifier=res.identifier)
+                    # if there is already a RemoveObject, we just use that
+                    rem_obj = RemovedObject.objects.get_or_create(identifier=res.identifier)[0]
                     rem_obj.save()
                     LOGGER.info("creating RemovedObject for resource {}".format(
                       res.identifier))
