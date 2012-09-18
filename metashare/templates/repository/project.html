@@ -1,0 +1,66 @@
+{% spaceless %}
+<label class='title component'>Funding Project</label>
+
+<div class="dataline">
+	<label>
+		{% if project.url %}
+			<a href="{{project.Url}}">
+		{% endif %}
+		
+		{{project.Project_name}}
+		{% if project.Project_short_name %} - {{ project.Project_short_name }} {% endif %}
+		{% if project.Project_id %} - {{ project.Project_id }} {% endif %}
+		
+		{% if project.Url %}
+			</a>
+		{% endif %}
+	</label>
+</div>
+
+
+<div class="dataline">
+	<label>
+		Funding Type: {{ project.Funding_type }}
+	</label>
+</div>
+
+	
+<div class="dataline">
+	<label>
+		{% if project.Funder %}
+		Funder:	{{ project.Funder }}
+		{% endif %}
+	</label>
+</div>
+
+
+
+<div class="dataline">
+	<label>
+		{% if project.Funding_country %}
+		Funding Country:	{{ project.Funding_country }}
+		{% endif %}
+	</label>
+</div>
+
+
+<div class="dataline">
+	<label>
+		{% if project.Project_start_date %}
+		Project started:	{{ project.Project_start_date }}
+		{% endif %}
+	</label>
+</div>
+
+
+<div class="dataline">
+	<label>
+		{% if project.Project_end_date %}
+		Project ended:	{{ project.Project_end_date }}
+		{% endif %}
+	</label>
+</div>
+
+
+<img class='line' src="/site_media/images/line.png" />
+{% endspaceless %}

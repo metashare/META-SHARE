@@ -195,28 +195,26 @@
 			</div>
 		</div>
 		<div class="white_box column corner right-corner">
-          {% if resource_creation_info_tuple %}
-            {% include "repository/detailed_component.html" with lr_content=resource_creation_info_tuple %}
-          {% endif %}
-          {% include "repository/detailed_component.html" with lr_content=metadata_info_tuple %}
-          {% if resource_creation_info_tuple %}
-	        {% include "repository/detailed_component.html" with lr_content=version_info_tuple %}
-          {% endif %}
-          {% for validation_info_tuple in validation_info_tuples %}
-            {% include "repository/detailed_component.html" with lr_content=validation_info_tuple %}
-          {% endfor %}
-          {% if resource_creation_info_tuple %}
-            {% include "repository/detailed_component.html" with lr_content=usage_info_tuple %}
-          {% endif %}
-          {% if resource_creation_info_tuple %}
-            {% include "repository/detailed_component.html" with lr_content=resource_documentation_info_tuple %}
-          {% endif %}
-          {% for relation_info_tuple in relation_info_tuples %}
-            {% include "repository/detailed_component.html" with lr_content=relation_info_tuple %}
-          {% endfor %}
+		
+		  {% if resource_creation_info_tuple %}
+		    {% include "repository/resource_creation.html" %}
+		  {% endif %}
+		  
+		{% include "repository/metadata.html" %}
+		  {% for validation_info_tuple in validation_info_tuples %}
+		    {% include "repository/detailed_component.html" with lr_content=validation_info_tuple %}
+		  {% endfor %}
+		  {% if resource_creation_info_tuple %}
+		    {% include "repository/detailed_component.html" with lr_content=usage_info_tuple %}
+		  {% endif %}
+		  {% if resource_creation_info_tuple %}
+		    {% include "repository/detailed_component.html" with lr_content=resource_documentation_info_tuple %}
+		  {% endif %}
+		  {% for relation_info_tuple in relation_info_tuples %}
+		    {% include "repository/detailed_component.html" with lr_content=relation_info_tuple %}
+		  {% endfor %}
 		</div>
 
 {% include "repository/recomm_view.html" %}
 {% endspaceless %}
 {% endblock %}
-

@@ -489,7 +489,7 @@ def view(request, resource_name=None, object_id=None):
 
     # Convert resource_component_tuple to nested dictionaries
     resource_component_dict = tuple2dict(resource_component_tuple)
-    #lr_content_dict = tuple2dict([lr_content])
+    lr_content_dict = tuple2dict([lr_content])
     resource_component_dicts = {}
 
     resource_creation_dict = {}
@@ -592,11 +592,13 @@ def view(request, resource_name=None, object_id=None):
                 'license_types': license_types,
                 'resourceType': resource_type,
                 'resource_component_dicts': resource_component_dicts,
-                #'lr_content_dict': lr_content_dict,
+                'lr_content_dict': lr_content_dict,
                 'mediaTypes': media_types,
                 'url': url,
                 'metaShareId': metashare_id,
                 'contact_person_dicts': contact_person_dicts,
+                'resource_creation_dict': resource_creation_dict,
+                'metadata_dict': metadata_dict,
                 }
     template = 'repository/lr_view.html'
 
