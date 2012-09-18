@@ -595,7 +595,7 @@ def repair_storage_folder():
             # binary
             folder = os.path.join(settings.STORAGE_PATH, _so.identifier)
             for _file in ('storage-local.json', 'storage-global.json', 
-              'resource.zip', 'metadata-*.xml'):
+              'resource.zip', 'metadata.xml', 'metadata-*.xml'):
                 path = os.path.join(folder, _file)
                 for _path in glob.glob(path):
                     if os.path.exists(_path):
