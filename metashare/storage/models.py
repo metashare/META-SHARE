@@ -197,16 +197,13 @@ class StorageObject(models.Model):
     
     def get_digest_checksum(self):
         """
-        Checks if the current digest is still up-to-date, recreates it if
-        required, and returns the up-to-date digest checksum.
+        Checks if the current digest is till up-to-date, recreates it if
+        required, and return the up-to-date digest checksum.
         """
-        if not self.digest_modified or not self.digest_last_checked:
+        _expiration_date = _get_expiration_date()
+        if _expiration_date > self.digest_modified \
+          and _expiration_date > self.digest_last_checked: 
             self.update_storage()
-        else:
-            _expiration_date = _get_expiration_date()
-            if _expiration_date > self.digest_modified \
-              and _expiration_date > self.digest_last_checked:
-                self.update_storage()
         return self.digest_checksum
     
     def __unicode__(self):
