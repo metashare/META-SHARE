@@ -4,19 +4,17 @@
 		{% for key1, value1 in value.items %}
 			{% if key1 == "Resource_creator" %}
 				{% for key2, value2 in value1.items %}
-			     {% include "repository/person.html" with person_dict=value2 type="resourceCreator" %}
+					{% include "repository/person.html" with person_dict=value2 type="resourceCreator" %}
 				{% endfor %}
 			{% endif %}
 		{% endfor %}
 {% endfor %}
 </div>
 
-
-
 {% if resource_creation_dict.Resource_creation.Creation_start_date %}			
      <div class="dataline">
 		<label>
-			Creation Started: {{resource_creation_dict.Resource_creation.Creation_start_date}}
+			Creation Started: {{resource_creation_dict.Resource_creation.Creation_start_date|date:"DMY"}}
 		</label>
 	</div>
 {% endif %}
@@ -24,7 +22,7 @@
 {% if resource_creation_dict.Resource_creation.Creation_end_date %}			
      <div class="dataline">
 		<label>
-			Creation Started: {{resource_creation_dict.Resource_creation.Creation_end_date}}
+			Creation Ended: {{resource_creation_dict.Resource_creation.Creation_end_date}}
 		</label>
 	</div>
 {% endif %}
