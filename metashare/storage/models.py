@@ -545,7 +545,7 @@ def add_or_update_resource(storage_json, resource_xml_string, storage_digest,
     write_to_disk(storage_id)
     # if the resource was marked for deletion, remove that mark
     try:
-        RemovedObject.objects.get(identifier=storage_id)
+        RemovedObject.objects.get(identifier=storage_id).delete()
     except ObjectDoesNotExist:
         pass
     return restore_from_folder(storage_id, copy_status=copy_status,
