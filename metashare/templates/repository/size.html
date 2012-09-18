@@ -5,7 +5,8 @@
 {% for key, value in size.items %}
 		{% for key1, value1 in value.items %}
 			{% if key1 == "Size_unit" %}
-				<span>{{ value.Size }} {{ value.Size_unit }}</span>
+				<span>{{ value.Size }} {{ value.Size_unit }}{% if not forloop.last %}, {% endif %}</span>
+
 			{% endif %}
 		{% endfor %}
 {% endfor %}
