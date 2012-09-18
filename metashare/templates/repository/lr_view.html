@@ -187,9 +187,7 @@
 				{% for type in mediaTypes %}
 					<div id="tabs_content_container">
 						<div id="{{forloop.counter}}" class="tab_content">
-							{% ifequal type "text" %}
-								{% include "repository/media_info.html" with type=type %}
-							{% endifequal %}
+							{% include "repository/media_info.html" with type=type %}
 						</div>
 					</div>
 				{% endfor %}
