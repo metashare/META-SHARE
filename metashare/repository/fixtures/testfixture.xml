@@ -121,7 +121,7 @@
 			<resourceType>corpus</resourceType>
 			<corpusMediaType>
 				<corpusTextInfo>
-					<mediaType>audio</mediaType>
+					<mediaType>text</mediaType>
 					<lingualityInfo>
 						<lingualityType>monolingual</lingualityType>
 					</lingualityInfo>
