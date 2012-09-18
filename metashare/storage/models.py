@@ -223,16 +223,17 @@ class StorageObject(models.Model):
     
     def _compute_checksum(self):
         """
-        Computes the MD5 hash checksum for this storage object instance.
+        Computes the MD5 hash checksum for the binary archive which may be
+        attached to this storage object instance and sets it in `self.checksum`.
         
-        Reads in the downloadable data in blocks of MAXIMUM_MD5_BLOCK_SIZE
-        bytes which is possible as MD5 allows incremental hash computation.
+        Returns whether `self.checksum` was changed in this method. 
         """
         if not self.master_copy or not self.get_download():
-            return
-        
-        self.checksum = compute_checksum(self.get_download())
+            return False
 
+        _old_checksum = self.checksum
+        self.checksum = compute_checksum(self.get_download())
+        return _old_checksum != self.checksum
 
     def has_local_download_copy(self):
         """
@@ -609,6 +610,8 @@ def compute_checksum(infile):
             instream = infile
         else:
             instream = open(infile, 'rb')
+        # Read in the downloadable data in blocks of MAXIMUM_MD5_BLOCK_SIZE
+        # bytes which is possible as MD5 allows incremental hash computation.
         chunk = instream.read(MAXIMUM_MD5_BLOCK_SIZE)
         while chunk:
             checksum.update(chunk)
