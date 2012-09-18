@@ -157,6 +157,10 @@
 			     {% include "repository/person_info.html" with contact_person_dict=contact_person %}
 			{% endfor %}
 
+			{% for person in object.contactPerson_set.all %}
+				{{ person }}
+			{% endfor %}
+			{{ resource_component_dict.Resource_component.Resource }}
 		</div>
 		
 		<div class="column middle">
@@ -176,60 +180,14 @@
 			{% ifequal resourceType "toolService" %}
 				<div id="tabs_content_container">
 					<div id="1" class="tab_content">
-						{% include "repository/media_info.html" with type='Resource component' %}
+						{% include "repository/media_info.html" with type='toolService' %}
 					</div>
 				</div>
 			{% else %}
 				{% for type in mediaTypes %}
 					<div id="tabs_content_container">
 						<div id="{{forloop.counter}}" class="tab_content">
-							{% ifequal resourceType "corpus" %}
-								{% ifequal type "text" %}
-									{% include "repository/media_info.html" with type='Corpus text' %}
-								{% endifequal %}
-								{% ifequal type "audio" %}
-									{% include "repository/media_info.html" with type='Corpus audio' %}
-								{% endifequal %}
-								{% ifequal type "video" %}
-									{% include "repository/media_info.html" with type='Corpus video' %}
-								{% endifequal %}
-								{% ifequal type "image" %}
-									{% include "repository/media_info.html" with type='Corpus image' %}
-								{% endifequal %}
-								{% ifequal type "textNumerical" %}
-									{% include "repository/media_info.html" with type='Corpus text numerical' %}
-								{% endifequal %}
-								{% ifequal type "textNgram" %}
-									{% include "repository/media_info.html" with type='Corpus text ngram' %}
-								{% endifequal %}
-							{% else %}
-								{% ifequal resourceType "lexicalConceptualResource" %}
-									{% ifequal type "text" %}
-										{% include "repository/media_info.html" with type='Lexical conceptual resource text' %}
-									{% endifequal %}
-									{% ifequal type "audio" %}
-										{% include "repository/media_info.html" with type='Lexical conceptual resource audio' %}
-									{% endifequal %}
-									{% ifequal type "video" %}
-										{% include "repository/media_info.html" with type='Lexical conceptual resource video' %}
-									{% endifequal %}
-									{% ifequal type "image" %}
-										{% include "repository/media_info.html" with type='Lexical conceptual resource image' %}
-									{% endifequal %}
-								{% else %}	
-									{% ifequal resourceType "languageDescription" %}
-										{% ifequal type "text" %}
-											{% include "repository/media_info.html" with type='Language description text' %}
-										{% endifequal %}
-										{% ifequal type "video" %}
-											{% include "repository/media_info.html" with type='Language description video' %}
-										{% endifequal %}
-										{% ifequal type "image" %}
-											{% include "repository/media_info.html" with type='Language description image' %}
-										{% endifequal %}										
-									{% endifequal %}		
-								{% endifequal %}
-							{% endifequal %}
+							{% include "repository/media_info.html" with type=type %}
 						</div>
 					</div>
 				{% endfor %}
@@ -237,25 +195,24 @@
 			</div>
 		</div>
 		<div class="white_box column corner right-corner">
-          {% if resource_creation_info_tuple %}
-            {% include "repository/detailed_component.html" with lr_content=resource_creation_info_tuple %}
-          {% endif %}
-          {% include "repository/detailed_component.html" with lr_content=metadata_info_tuple %}
-          {% if resource_creation_info_tuple %}
-	        {% include "repository/detailed_component.html" with lr_content=version_info_tuple %}
-          {% endif %}
-          {% for validation_info_tuple in validation_info_tuples %}
-            {% include "repository/detailed_component.html" with lr_content=validation_info_tuple %}
-          {% endfor %}
-          {% if resource_creation_info_tuple %}
-            {% include "repository/detailed_component.html" with lr_content=usage_info_tuple %}
-          {% endif %}
-          {% if resource_creation_info_tuple %}
-            {% include "repository/detailed_component.html" with lr_content=resource_documentation_info_tuple %}
-          {% endif %}
-          {% for relation_info_tuple in relation_info_tuples %}
-            {% include "repository/detailed_component.html" with lr_content=relation_info_tuple %}
-          {% endfor %}
+		
+		  {% if resource_creation_info_tuple %}
+		    {% include "repository/resource_creation.html" %}
+		  {% endif %}
+		  
+		{% include "repository/metadata.html" %}
+		  {% for validation_info_tuple in validation_info_tuples %}
+		    {% include "repository/detailed_component.html" with lr_content=validation_info_tuple %}
+		  {% endfor %}
+		  {% if resource_creation_info_tuple %}
+		    {% include "repository/detailed_component.html" with lr_content=usage_info_tuple %}
+		  {% endif %}
+		  {% if resource_creation_info_tuple %}
+		    {% include "repository/detailed_component.html" with lr_content=resource_documentation_info_tuple %}
+		  {% endif %}
+		  {% for relation_info_tuple in relation_info_tuples %}
+		    {% include "repository/detailed_component.html" with lr_content=relation_info_tuple %}
+		  {% endfor %}
 		</div>
 
 {% include "repository/recomm_view.html" %}
