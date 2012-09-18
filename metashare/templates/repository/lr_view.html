@@ -180,7 +180,7 @@
 			{% ifequal resourceType "toolService" %}
 				<div id="tabs_content_container">
 					<div id="1" class="tab_content">
-						{% include "repository/media_info.html" with type='Resource component' %}
+						{% include "repository/media_info.html" with type='toolService' %}
 					</div>
 				</div>
 			{% else %}
@@ -188,22 +188,7 @@
 					<div id="tabs_content_container">
 						<div id="{{forloop.counter}}" class="tab_content">
 							{% ifequal type "text" %}
-								{% include "repository/media_info.html" with media_type='text' %}
-							{% endifequal %}
-							{% ifequal type "audio" %}
-								{% include "repository/media_info.html" with media_type='audio' %}
-							{% endifequal %}
-							{% ifequal type "video" %}
-								{% include "repository/media_info.html" with media_type='video' %}
-							{% endifequal %}
-							{% ifequal type "image" %}
-								{% include "repository/media_info.html" with media_type='image' %}
-							{% endifequal %}
-							{% ifequal type "textNumerical" %}
-								{% include "repository/media_info.html" with media_type='textNumerical' %}
-							{% endifequal %}
-							{% ifequal type "textNgram" %}
-								{% include "repository/media_info.html" with media_type='textNgram' %}
+								{% include "repository/media_info.html" with type=type %}
 							{% endifequal %}
 						</div>
 					</div>
