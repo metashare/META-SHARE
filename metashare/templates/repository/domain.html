@@ -7,7 +7,7 @@
 {% for key, value in domains.items %}
 		{% for key1, value1 in value.items %}
 			{% if key1 == "Domain" %}
-				<span>{{ value1 }}, </span>
+				<span>{{ value1 }}{% if not forloop.last %}, {% endif %}</span>
 			{% endif %}
 		{% endfor %}
 {% endfor %}
