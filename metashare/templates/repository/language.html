@@ -1,12 +1,15 @@
-{% load eval %}
 {% spaceless %}
+
+{# TODO: Add zise info #}
+
+{{ languages }}
 <label class='title component'>Languages:</label>
 <div class="dataline">
 {% for key, value in languages.items %}
 		{% for key1, value1 in value.items %}
 			{% if key1 == "Language_name" %}
-				<span title="{{value.Language_id}}">{{ value1 }}</span>
-				{% if not forloop.last %}, {% endif %}
+				<span title="{{value.Language_id}}">{{ value1 }}{% if not forloop.last %}, {% endif %}</span>
+
 			{% endif %}
 		{% endfor %}
 {% endfor %}
