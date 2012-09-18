@@ -481,18 +481,28 @@ def view(request, resource_name=None, object_id=None):
             resource_component_tuple = _tuple[1]
             languages_tuple = _tuple
 
-    # Preprocess some of the information withing the tuples for better
-    # presentation in the single resource view.
-    # Contact Person:
+    # Convert contact_person_tuples to dictionaries
     contact_person_dicts = []
     resource_component_dict = {}
-
-    #convert contact_person_tuples to dictionaries
     for item in contact_person_tuples:
         contact_person_dicts.append(tuple2dict([item]))
+
+    # Convert resource_component_tuple to nested dictionaries
     resource_component_dict = tuple2dict(resource_component_tuple)
-    lr_content_dict = tuple2dict([lr_content])
+    #lr_content_dict = tuple2dict([lr_content])
     resource_component_dicts = {}
+
+    resource_creation_dict = {}
+    metadata_dict = {}
+    validation_dicts = []
+    relation_dicts = []
+    
+    resource_creation_dict = tuple2dict([resource_creation_info_tuple])
+    metadata_dict = tuple2dict([metadata_info_tuple])
+    for item in validation_info_tuples:
+        validation_dicts.append(tuple2dict([item]))
+    for item in relation_info_tuples:
+        relation_dicts.append(tuple2dict([item]))
 
     if resource_type == "corpus":
         for media_type in media_types:
@@ -537,7 +547,6 @@ def view(request, resource_name=None, object_id=None):
     elif resource_type == "lexicalConceptualResource":
         for media_type in media_types:
             if media_type == "text":
-                print resource_component_dict['Resource_component']
                 resource_component_dicts['text'] = \
                   resource_component_dict['Resource_component'] \
                     ['Lexical_conceptual_resource_media'] \
@@ -583,7 +592,7 @@ def view(request, resource_name=None, object_id=None):
                 'license_types': license_types,
                 'resourceType': resource_type,
                 'resource_component_dicts': resource_component_dicts,
-                'lr_content_dict': lr_content_dict,
+                #'lr_content_dict': lr_content_dict,
                 'mediaTypes': media_types,
                 'url': url,
                 'metaShareId': metashare_id,
