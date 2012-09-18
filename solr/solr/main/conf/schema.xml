@@ -193,6 +193,9 @@
     <field name="availabilityFilter_exact" type="string" indexed="true"
       stored="true" multiValued="false" />
     
+    <field name="textnumericalTypeOfTnContentFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
     <field name="text" type="text_en" indexed="true"
       stored="false" multiValued="false" />
     
@@ -247,13 +250,13 @@
     <field name="audioSpeechGenreFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
     
+    <field name="videoNaturalityFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
     <field name="audioScenarioTypeFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
     
-    <field name="textNgramBaseItemFilter" type="text_en" indexed="true"
-      stored="true" multiValued="true" />
-    
-    <field name="videoNaturalityFilter_exact" type="string" indexed="true"
+    <field name="textngramOrderFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
     
     <field name="videoConversationalTypeFilter_exact" type="string" indexed="true"
@@ -277,6 +280,9 @@
     <field name="geographicCoverageFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
+    <field name="textngramBaseItemFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
     <field name="audioNaturalityFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
     
@@ -284,6 +290,9 @@
       stored="true" multiValued="true" />
     
     <field name="modalityTypeFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="textngramOrderFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
     <field name="toolServiceAnnotationTypeFilter_exact" type="string" indexed="true"
@@ -305,6 +314,9 @@
       stored="true" multiValued="true" />
     
     <field name="validatedFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="textnumericalTypeOfTnContentFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
     
     <field name="resourceTypeFilter" type="text_en" indexed="true"
@@ -338,9 +350,6 @@
       stored="true" multiValued="true" />
     
     <field name="mimeTypeFilter" type="text_en" indexed="true"
-      stored="true" multiValued="true" />
-    
-    <field name="textNumericalTypeOfTnContentFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
     
     <field name="audioConversationalTypeFilter" type="text_en" indexed="true"
@@ -382,9 +391,6 @@
     <field name="languageVarietyFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
-    <field name="textNgramOrderFilter" type="text_en" indexed="true"
-      stored="true" multiValued="true" />
-    
     <field name="modalityTypeFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
     
@@ -415,13 +421,7 @@
     <field name="domainFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
-    <field name="textNgramBaseItemFilter_exact" type="string" indexed="true"
-      stored="true" multiValued="true" />
-    
     <field name="restrictionsOfUseFilter" type="text_en" indexed="true"
-      stored="true" multiValued="true" />
-    
-    <field name="textNgramOrderFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
     <field name="toolServiceToolServiceTypeFilter" type="text_en" indexed="true"
@@ -437,9 +437,6 @@
       stored="true" multiValued="true" />
     
     <field name="lexicalConceptualResourceEncodingLevelFilter_exact" type="string" indexed="true"
-      stored="true" multiValued="true" />
-    
-    <field name="textNumericalTypeOfTnContentFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
     <field name="toolServiceLanguageDependentTypeFilter" type="text_en" indexed="true"
@@ -482,6 +479,9 @@
       stored="true" multiValued="true" />
     
     <field name="languageDescriptionEncodingLevelFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+    
+    <field name="textngramBaseItemFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
     <field name="toolServiceInputOutputResourceTypeFilter_exact" type="string" indexed="true"
