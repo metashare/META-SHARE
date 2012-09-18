@@ -494,7 +494,7 @@ def view(request, resource_name=None, object_id=None):
     lr_content_dict = tuple2dict([lr_content])
     resource_component_dicts = {}
 
-    if resource_type == "corpus" or resource_type == "languageDescription" or resource_type == "lexicalConceptualResource":
+    if resource_type == "corpus":
         for media_type in media_types:
             if media_type == "text":
                 resource_component_dicts['text'] = resource_component_dict['Resource_component']['Corpus_media']['Corpus_text']
@@ -508,6 +508,22 @@ def view(request, resource_name=None, object_id=None):
                 resource_component_dicts['textNgram'] = resource_component_dict['Resource_component']['Corpus_media']['Corpus_textNgram']
             if media_type == "textNumerical":
                 resource_component_dicts['textNumerical'] = resource_component_dict['Resource_component']['Corpus_media']['Corpus_textNumerical']
+    elif resource_type == "languageDescription":
+            if media_type == "text":
+                resource_component_dicts['text'] = resource_component_dict['Resource_component']['languageDescription_media']['languageDescription_text']
+            if media_type == "image":
+                resource_component_dicts['image'] = resource_component_dict['Resource_component']['languageDescription_media']['languageDescription_image']
+            if media_type == "video":
+                resource_component_dicts['video'] = resource_component_dict['Resource_component']['languageDescription_media']['languageDescription_video']
+    elif resource_type == "lexicalConceptualResource":
+            if media_type == "text":
+                resource_component_dicts['text'] = resource_component_dict['Resource_component']['lexicalConceptualResource_media']['lexicalConceptualResource_text']
+            if media_type == "audio":
+                resource_component_dicts['audio'] = resource_component_dict['Resource_component']['lexicalConceptualResource_media']['lexicalConceptualResource_audio']
+            if media_type == "video":
+                resource_component_dicts['video'] = resource_component_dict['Resource_component']['lexicalConceptualResource_media']['lexicalConceptualResource_video']
+            if media_type == "image":
+                resource_component_dicts['image'] = resource_component_dict['Resource_component']['lexicalConceptualResource_media']['lexicalConceptualResource_image']
     elif resource_type == "toolService":
         resource_component_dicts['toolService'] = resource_component_dict['Resource_component']
 
