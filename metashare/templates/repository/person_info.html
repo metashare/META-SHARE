@@ -114,7 +114,7 @@
 	</div>
 	<div>
 		<label class="dataline">
-			{{ contact_person_dict.Contact_person.Affiliation.Communication.ZipCode }}
+			{{ contact_person_dict.Contact_person.Affiliation.Communication.Zip_code }}
 			{{ contact_person_dict.Contact_person.Affiliation.Communication.City }}
 		</label>
 	</div>
@@ -133,17 +133,17 @@
 			{{ contact_person_dict.Contact_person.Affiliation.Communication.Email }}
 		</label>
 	</div>
-	{% if contact_person_dict.Contact_person.Affiliation.Communication.TelephoneNumber %}
+	{% if contact_person_dict.Contact_person.Affiliation.Communication.Telephone_Number %}
 	<div>
 		<label class="dataline">
-			Tel.: {{ contact_person_dict.Contact_person.Affiliation.Communication.TelephoneNumber }}
+			Tel.: {{ contact_person_dict.Contact_person.Affiliation.Communication.Telephone_Number }}
 		</label>
 	</div>
 	{% endif %}
-	{% if contact_person_dict.Contact_person.Affiliation.Communication.FaxNumber %}
+	{% if contact_person_dict.Contact_person.Affiliation.Communication.Fax_number %}
 	<div>
 		<label class="dataline">
-			Fax: {{ contact_person_dict.Contact_person.Affiliation.Communication.FaxNumber }}
+			Fax: {{ contact_person_dict.Contact_person.Affiliation.Communication.Fax_number }}
 		</label>
 	</div>
 	{% endif %}	
