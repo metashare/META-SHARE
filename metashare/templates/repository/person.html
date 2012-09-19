@@ -1,6 +1,7 @@
 {% load email_protection %}
 {% load get_icon %}
 {% spaceless %}
+<img class='line' src="/site_media/images/line.png" />
 
 
 {% if type == "resourceCreator"  %}
@@ -13,7 +14,7 @@
 	<div>
 		<label class="dataline">
 			{% if person_dict.Communication.Url %}
-				<a href="{{person_dict.Communication.Url}}" target='_blank'>
+				<a href="{{person_dict.Communication.Url}}">
 			{% endif %}
 					{{ person_dict.Given_name }}
 					{{ person_dict.Surname }}
@@ -41,7 +42,6 @@
 	</div>
 	<div>
 		<label class="dataline">
-{#			{% encrypt_email person_dict.Communication.Email %}     #}
 			{{ person_dict.Communication.Email }}
 		</label>
 	</div>
@@ -82,7 +82,7 @@
 	</div>
 	{% endif %}
 	
-	<hr/>
+	<img class='line' src="/site_media/images/line.png" />
 
 	<div>
 		<label class="dataline">
@@ -94,7 +94,7 @@
 	<div>
 		<label class="dataline">
 			{% if person_dict.Affiliation.Url %}
-				<a href="{{person_dict.Affiliation.Url}}" target='_blank'>
+				<a href="{{person_dict.Affiliation.Url}}">
 			{% endif %}
 					{{ person_dict.Affiliation.Organization_name }}
 			{% if person_dict.Affiliation.Url %}
@@ -107,9 +107,9 @@
 			{{ person_dict.Affiliation.OrganizationShortName }}
 		</label>
 	</div>
+
 	<div>
 		<label class="dataline">
-			{# {% encrypt_email person_dict.Affiliation.Email %} #}
 			{{ person_dict.Affiliation.Email }}
 		</label>
 	</div>
@@ -154,6 +154,5 @@
 	</div>
 	{% endif %}	
 		
-<hr/>		
-		
+
 {% endspaceless %}

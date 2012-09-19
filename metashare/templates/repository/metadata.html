@@ -3,25 +3,26 @@
 <label class='title component'>Metadata Info</label>
 <div>
 
-		{% if metadata_dict.Metadata.Metadata_creation_date %}			
-			 <div class="dataline">
-				<label>
-					<b>Created:</b> {{ metadata_dict.Metadata.Metadata_creation_date|date:"SHORT_DATE_FORMAT" }}
-				</label>
-			</div>
-		{% endif %}
-		
-		{% if metadata_dict.Metadata.Metadata_last_date_updated %}			
-			 <div class="dataline">
-				<label>
-					<b>Last Updated:</b> {{ metadata_dict.Metadata.Metadata_last_date_updated|date:"SHORT_DATE_FORMAT" }}
-				</label>
-			</div>
-		{% endif %}
+			{% if metadata_dict.Metadata.Metadata_creation_date %}			
+			     <div class="dataline">
+					<label>
+						Created: {{ metadata_dict.Metadata.Metadata_creation_date }}
+					</label>
+				</div>
+			{% endif %}
+			
+			{% if metadata_dict.Metadata.Metadata_last_date_updated %}			
+			     <div class="dataline">
+					<label>
+						Last Updated: {{ metadata_dict.Metadata.Metadata_last_date_updated }}
+					</label>
+				</div>
+			{% endif %}
+
 
 		{% if metadata_dict.Metadata.Source %}
 			<div class="dataline">
-				<label><b>Source:</b> {{ metadata_dict.Metadata.Source }}</label>
+				<label>Source: {{ metadata_dict.Metadata.Source }}</label>
 			</div>
 		{% endif %}
 
@@ -29,7 +30,7 @@
 			<div class="dataline">
 				<label>
 					{% if metadata_dict.Metadata.Original_metadata_link %}
-						<a href="{{metadata_dict.Metadata.Original_metadata_link}}" target='_blank'>
+						<a href="{{metadata_dict.Metadata.Original_metadata_link}}">
 					{% endif %}
 							{{ metadata_dict.Metadata.Original_metadata_schema }}
 					{% if metadata_dict.Metadata.Original_metadata_link %}
@@ -41,7 +42,7 @@
 		
 		{% if metadata_dict.Metadata.Revision %}
 			<div class="dataline">
-				<label><b>Revision:</b> {{  metadata_dict.Metadata.Revision }}</label>
+				<label>Revision: {{  metadata_dict.Metadata.Revision }}</label>
 			</div>
 		{% endif %}
 </div>
@@ -49,7 +50,7 @@
 {% for key, value in metadata_dict.items %}
 		{% for key1, value1 in value.items %}
 			{% if key1 == "Metadata_creator" %}			
-			     {% include "repository/resource_view/person.html" with person_dict=value1 type="metadataCreator" %}
+			     {% include "repository/person.html" with person_dict=value1 type="metadataCreator" %}
 			{% endif %}			
 		{% endfor %}
 {% endfor %}

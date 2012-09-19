@@ -494,11 +494,15 @@ def view(request, resource_name=None, object_id=None):
 
     resource_creation_dict = {}
     metadata_dict = {}
+    usage_dict = {}
+    documentation_dict = {}
     validation_dicts = []
-    relation_dicts = []
+    relation_dicts = []    
     
     resource_creation_dict = tuple2dict([resource_creation_info_tuple])
     metadata_dict = tuple2dict([metadata_info_tuple])
+    usage_dict = tuple2dict([usage_info_tuple])
+    documentation_dict = tuple2dict([documentation_info_tuple])
     for item in validation_info_tuples:
         validation_dicts.append(tuple2dict([item]))
     for item in relation_info_tuples:
@@ -591,12 +595,17 @@ def view(request, resource_name=None, object_id=None):
                 'license_types': license_types,
                 'resourceType': resource_type,
                 'resource_component_dicts': resource_component_dicts,
+                #'lr_content_dict': lr_content_dict,
                 'mediaTypes': media_types,
                 'url': url,
                 'metaShareId': metashare_id,
                 'contact_person_dicts': contact_person_dicts,
                 'resource_creation_dict': resource_creation_dict,
                 'metadata_dict': metadata_dict,
+                'usage_dict': usage_dict,
+                'validation_dicts': validation_dicts,                
+                'documentation_dict': documentation_dict,
+                'relation_dicts': relation_dicts,
                 }
     template = 'repository/resource_view/lr_view.html'
 

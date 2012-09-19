@@ -1,7 +1,7 @@
 {% load email_protection %}
 {% load get_icon %}
 {% spaceless %}
-<img class='line' src="/site_media/images/line.png" />
+<hr />
 
 <label class='title component'>Contact Person:</label>
 <div class="dataline">
@@ -10,7 +10,7 @@
 	<div>
 		<label class="dataline">
 			{% if contact_person_dict.Contact_person.Communication.Url %}
-				<a href="{{contact_person_dict.Contact_person.Communication.Url}}">
+				<a href="{{contact_person_dict.Contact_person.Communication.Url}}" target='_blank'>
 			{% endif %}
 					{{ contact_person_dict.Contact_person.Given_name }}
 					{{ contact_person_dict.Contact_person.Surname }}
@@ -78,7 +78,7 @@
 	</div>
 	{% endif %}
 	
-	<img class='line' src="/site_media/images/line.png" />
+	<hr />
 
 	<div>
 		<label class="dataline">
@@ -88,7 +88,7 @@
 	<div>
 		<label class="dataline">
 			{% if contact_person_dict.Contact_person.Affiliation.Url %}
-				<a href="{{communication_org_dict.Url}}">
+				<a href="{{communication_org_dict.Url}}" target='_blank'>
 			{% endif %}
 					{{ contact_person_dict.Contact_person.Affiliation.Organization_name }}
 			{% if contact_person_dict.Contact_person.Affiliation.Url %}
@@ -114,7 +114,7 @@
 	</div>
 	<div>
 		<label class="dataline">
-			{{ contact_person_dict.Contact_person.Affiliation.Communication.ZipCode }}
+			{{ contact_person_dict.Contact_person.Affiliation.Communication.Zip_code }}
 			{{ contact_person_dict.Contact_person.Affiliation.Communication.City }}
 		</label>
 	</div>
@@ -133,17 +133,17 @@
 			{{ contact_person_dict.Contact_person.Affiliation.Communication.Email }}
 		</label>
 	</div>
-	{% if contact_person_dict.Contact_person.Affiliation.Communication.TelephoneNumber %}
+	{% if contact_person_dict.Contact_person.Affiliation.Communication.Telephone_Number %}
 	<div>
 		<label class="dataline">
-			Tel.: {{ contact_person_dict.Contact_person.Affiliation.Communication.TelephoneNumber }}
+			Tel.: {{ contact_person_dict.Contact_person.Affiliation.Communication.Telephone_Number }}
 		</label>
 	</div>
 	{% endif %}
-	{% if contact_person_dict.Contact_person.Affiliation.Communication.FaxNumber %}
+	{% if contact_person_dict.Contact_person.Affiliation.Communication.Fax_number %}
 	<div>
 		<label class="dataline">
-			Fax: {{ contact_person_dict.Contact_person.Affiliation.Communication.FaxNumber }}
+			Fax: {{ contact_person_dict.Contact_person.Affiliation.Communication.Fax_number }}
 		</label>
 	</div>
 	{% endif %}	

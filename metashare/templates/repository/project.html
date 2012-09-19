@@ -3,8 +3,8 @@
 
 <div class="dataline">
 	<label>
-		{% if project.Url %}
-			<a href="{{project.Url}}" target='_blank'>
+		{% if project.url %}
+			<a href="{{project.Url}}">
 		{% endif %}
 		
 		{{project.Project_name}}
@@ -20,7 +20,7 @@
 
 <div class="dataline">
 	<label>
-		<b>Funding Type:</b> {{ project.Funding_type }}
+		Funding Type: {{ project.Funding_type }}
 	</label>
 </div>
 
@@ -28,7 +28,7 @@
 <div class="dataline">
 	<label>
 		{% if project.Funder %}
-		<b>Funder:</b>	{{ project.Funder }}
+		Funder:	{{ project.Funder }}
 		{% endif %}
 	</label>
 </div>
@@ -38,7 +38,7 @@
 <div class="dataline">
 	<label>
 		{% if project.Funding_country %}
-		<b>Funding Country:</b>	{{ project.Funding_country }}
+		Funding Country:	{{ project.Funding_country }}
 		{% endif %}
 	</label>
 </div>
@@ -47,7 +47,7 @@
 <div class="dataline">
 	<label>
 		{% if project.Project_start_date %}
-			<b>Project started:</b>	{{ project.Project_start_date|date:"SHORT_DATE_FORMAT" }}
+		Project started:	{{ project.Project_start_date }}
 		{% endif %}
 	</label>
 </div>
@@ -56,11 +56,11 @@
 <div class="dataline">
 	<label>
 		{% if project.Project_end_date %}
-			<b>Project ended:</b> {{ project.Project_end_date|date:"SHORT_DATE_FORMAT" }}
+		Project ended:	{{ project.Project_end_date }}
 		{% endif %}
 	</label>
 </div>
 
 
-<hr/>
+<img class='line' src="/site_media/images/line.png" />
 {% endspaceless %}
