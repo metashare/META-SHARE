@@ -2,6 +2,8 @@ import logging
 
 from django.db.models import get_models, signals
 from metashare.sync import models as sync_models
+from metashare.sync.management.commands.createsyncuser import \
+    grant_sync_permissions
 from metashare import settings
 from django.contrib.auth.models import User
 
@@ -19,11 +21,15 @@ def create_syncuser(app, created_models, verbosity, **kwargs):
     for username, password in syncusers.iteritems():
         try:
             _user = User.objects.get(username=username)
+            # the sync permissions might have been removed for some reason; make
+            # sure to restore them
+            grant_sync_permissions(_user)
             # the password may have been changed in the SYNC_USERS dict, so make
             # sure to always update it in the database
             _user.set_password(password)
             LOGGER.info("Reset password for sync user account %s to the "
-                        "SYNC_USERS settings.", username)
+                "SYNC_USERS settings and made sure that appropriate "
+                "permissions are granted.", username)
             _user.save()
         except User.DoesNotExist:
             call_command("createsyncuser", username=username, password=password, verbosity=1)
