@@ -47,7 +47,7 @@
 <div class="dataline">
 	<label>
 		{% if project.Project_start_date %}
-			Project started:	{{ project.Project_start_date|date:"SHORT_DATE_FORMAT" }}
+			<b>Project started:</b>	{{ project.Project_start_date|date:"SHORT_DATE_FORMAT" }}
 		{% endif %}
 	</label>
 </div>
@@ -56,7 +56,7 @@
 <div class="dataline">
 	<label>
 		{% if project.Project_end_date %}
-			Project ended:	{{ project.Project_end_date|date:"SHORT_DATE_FORMAT" }}
+			<b>Project ended:</b> {{ project.Project_end_date|date:"SHORT_DATE_FORMAT" }}
 		{% endif %}
 	</label>
 </div>
