@@ -72,11 +72,12 @@
 	{% endif %}
 	
 	{% if dict.Validation.Validator %}
-	     <div class="dataline">
-			<label>
-				<b>Validator:</b> {{ dict.Validation.Validator }}
-			</label>
-		</div>	
+	
+	    {% if dict.Validation.Validator.Organization %}
+	    {% else %}
+	    	{% include "repository/resource_view/person.html" with person_dict=dict.Validation.Validator.Validator title="Validator" %}
+	    {% endif %}
+	    
 	{% endif %}
 	
 	
