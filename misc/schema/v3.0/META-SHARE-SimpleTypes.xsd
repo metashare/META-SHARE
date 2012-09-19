@@ -302,7 +302,7 @@
 	<!-- definition of re-usable elements -->
 	<xs:element name="documentUnstructured">
 		<xs:annotation>
-			<xs:documentation>Provides information on documents that report on the resource in form of free text</xs:documentation>
+			<xs:documentation>Used either as a free text description or as an unstructured (free form) presentation of a bibliographic record; alternative to the structured presentation of a document (cf. documentInfo)</xs:documentation>
 		</xs:annotation>
 		<xs:simpleType>
 			<xs:restriction base="xs:string">
