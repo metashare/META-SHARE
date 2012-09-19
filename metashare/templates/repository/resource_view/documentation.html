@@ -13,7 +13,7 @@
 			<label>
 				<b>Title:</b> 
 				{% if documentation_dict.Resource_documentation.Documentation.Documentation.Url %}
-					<a href="{{documentation_dict.Resource_documentation.Documentation.Documentation.Url}}">
+					<a href="{{documentation_dict.Resource_documentation.Documentation.Documentation.Url}} target='_blank'">
 				{% endif %}
 				{{ documentation_dict.Resource_documentation.Documentation.Documentation.Title }}
 				{% if documentation_dict.Resource_documentation.Documentation.Documentation.Url %}
