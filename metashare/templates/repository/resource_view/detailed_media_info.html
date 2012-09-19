@@ -1,7 +1,7 @@
 {% spaceless %}
 
 {# Type info #}
-<label class='title'>{{ resource_component.Linguality.Linguality_type }} {{ type }} {{ resourceType }}</label>
+<label class='title'>{% if resource_component.Linguality.Linguality_type %}{{ resource_component.Linguality.Linguality_type }}{% endif %} {{ type }} {{ resourceType }}</label>
 
 {# Language Information #}
 {% if "Language" in resource_component %}
