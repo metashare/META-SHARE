@@ -577,8 +577,8 @@ class LangAutoCompleteWidget(widgets.Widget):
         
     def __init__(self, attrs=None):
         super(LangAutoCompleteWidget, self).__init__(attrs)
-        
-    def render(self, name, value):
+
+    def render(self, name, value, attrs=None):
         if not value:
             value = u''
         res1 = u'<input type="text" class="lang_autocomplete" name="{0}" value="{1}"/>'.format(name, value)

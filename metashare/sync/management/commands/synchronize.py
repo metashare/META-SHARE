@@ -149,11 +149,11 @@ class Command(BaseCommand):
                 # Find the corresponding item in the local inventory
                 # and compare digests
                 for local_item in local_inventory:
-                    if (item_id == local_item['id']) \
-                      and not (item['digest'] == local_item['digest']):
-                        resources_to_update.append(item)
-        
-        
+                    if item_id == local_item['id']:
+                        if item['digest'] != local_item['digest']:
+                            resources_to_update.append(item)
+                        break
+
         # Print informative messages to the user
         new_resources_count = len(new_resources)
         resources_to_update_count = len(resources_to_update)            
