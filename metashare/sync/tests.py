@@ -85,12 +85,14 @@ class MetadataSyncTest (TestCase):
 
 
     @classmethod
-    def import_test_resource(cls, filename, pub_status, copy_status=MASTER, url=settings.DJANGO_URL):
+    def import_test_resource(cls, filename, pub_status, \
+      copy_status=MASTER, url=settings.DJANGO_URL, source_node=None):
         _fixture = '{0}/repository/fixtures/{1}'.format(settings.ROOT_PATH, filename)
         resource = test_utils.import_xml(_fixture)
         resource.storage_object.publication_status = pub_status
         resource.storage_object.copy_status = copy_status
         resource.storage_object.source_url = url
+        resource.storage_object.source_node = source_node
         resource.storage_object.save()
         resource.storage_object.update_storage()
         return resource
@@ -335,13 +337,16 @@ class MetadataSyncTest (TestCase):
         # create 3 proxied resources, 2 from the first proxied node, 1 from the second
         res1 = MetadataSyncTest.import_test_resource(
           'downloadable_1_license.xml', PUBLISHED, copy_status=PROXY,
-          url=proxied_nodes['proxied_node_1']['URL'])
+          url=proxied_nodes['proxied_node_1']['URL'],
+          source_node='proxied_node_1')
         res2 = MetadataSyncTest.import_test_resource(
           'downloadable_3_licenses.xml', PUBLISHED, copy_status=PROXY,
-          url=proxied_nodes['proxied_node_1']['URL'])
+          url=proxied_nodes['proxied_node_1']['URL'],
+          source_node='proxied_node_1')
         res3 = MetadataSyncTest.import_test_resource(
           'downloadable_ms_commons_license.xml', PUBLISHED, copy_status=PROXY,
-          url=proxied_nodes['proxied_node_2']['URL'])
+          url=proxied_nodes['proxied_node_2']['URL'],
+          source_node='proxied_node_2')
         res1_folder = os.path.join(settings.STORAGE_PATH, res1.storage_object.identifier)
         res2_folder = os.path.join(settings.STORAGE_PATH, res2.storage_object.identifier)
         res3_folder = os.path.join(settings.STORAGE_PATH, res3.storage_object.identifier)

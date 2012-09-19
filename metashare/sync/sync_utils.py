@@ -14,7 +14,7 @@ from StringIO import StringIO
 from traceback import format_exc
 from metashare import settings
 from metashare.storage.models import compute_digest_checksum
-from metashare.stats.models import LRStats, UsageStats
+
 
 # Idea taken from 
 # http://stackoverflow.com/questions/5082128/how-do-i-authenticate-a-urllib2-script-in-order-to-access-https-web-services-fro
@@ -100,8 +100,8 @@ def remove_resource(storage_object, keep_stats=False):
     """
     Completely removes the given storage object and its associated language 
     resource from the storage layer.
-    Also includes deletion of statistics; use keep_stats optional parameter 
-    to suppress deletion of statistics.
+    Also includes deletion of statistics and recommendations; use keep_stats
+    optional parameter to suppress deletion of statistics and recommendations.
     """
     resource = storage_object.resourceinfotype_model_set.all()[0]
 

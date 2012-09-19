@@ -3,7 +3,7 @@ from metashare.repository.models import resourceInfoType_model
 from metashare.storage.models import PUBLISHED
 
 class RepositorySitemap(Sitemap):
-    changefreq = "monthly"
+    changefreq = "weekly"
     priority = 0.5
     
     def items(self):

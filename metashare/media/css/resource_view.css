@@ -46,29 +46,18 @@ div.right-corner{
 	color: #333;
 }
 
-.dataline label.title{
-	background-color: #fda;
-	border-bottom-left-radius: 10px;
-	border-bottom-right-radius: 0;
-	border-top-left-radius: 10px;
-	border-top-right-radius: 0;
-	color: #555;
-	font-size: 14px;
-	font-weight: 600;
-	margin-bottom: 0.3em;
-	margin-left: 5px;
-	margin-right: 5px;
-	padding-left: 4px;
-	width: 100%;
-}
-
-label.component{
-	padding:3px;
-	background-color: #fff;
+.dataline label.title, label.component {
+	
+	
 	color: #FF9900;
 	border-radius:10px;
 	font-size:14px;
 	display:block;
+	font-weight:bold;
+}
+
+label.component{
+	padding:3px;
 }
 
 .title.component + .title.component{
@@ -149,10 +138,10 @@ a.tip span {
 }
 a.tip:hover span {
     padding: 5px;
-    display: block;
+    display: inline-block;
     z-index: 100;
     background: #ddd;
-    opacity:0.8;
+    opacity:0.9;
     border-radius:7px;
     position: absolute;
     width:180px;
@@ -161,6 +150,31 @@ a.tip:hover span {
     text-align:justify;
 }   
 
+a.tip:hover span.download {
+	top:40px;
+}
+
+a.tip:hover span.edit {
+	top:40px;
+}
+
+a.info{
+    position:relative; /*this is the key*/
+    z-index:24; background-color:#ccc;
+    color:#000;
+    text-decoration:none}
+
+a.info:hover{z-index:25; background-color:#ff0}
+
+a.info span{display: none}
+
+a.info:hover span{ /*the span will display just on :hover state*/
+    display:block;
+    position:absolute;
+    top:2em; left:2em; width:15em;
+    border:1px solid #0cf;
+    background-color:#cff; color:#000;
+    text-align: center}
 /*End CSS for tooltip*/
 
 .bottom-box{

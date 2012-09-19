@@ -287,7 +287,6 @@ class EditorTest(TestCase):
                         else:
                             LOGGER.debug('Class %s has no registered admin '
                                          'form.', cls_name)
-                    print
         LOGGER.debug('Checked models: %d', num)
 
     def test_manage_action_visibility(self):

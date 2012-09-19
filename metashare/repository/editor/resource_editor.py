@@ -1016,8 +1016,10 @@ class ResourceModelAdmin(SchemaModelAdmin):
         action.
         """
         result = super(ResourceModelAdmin, self).get_actions(request)
-        # always remove the standard Django bulk delete action
-        del result['delete_selected']
+        # always remove the standard Django bulk delete action for resources (if
+        # it hasn't previously been removed, yet)
+        if 'delete_selected' in result:
+            del result['delete_selected']
         if not request.user.is_superuser:
             del result['remove_group']
             del result['remove_owner']
