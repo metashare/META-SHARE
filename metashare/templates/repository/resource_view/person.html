@@ -2,12 +2,7 @@
 {% load get_icon %}
 {% spaceless %}
 
-
-{% if type == "resourceCreator"  %}
-<label class='title component'>Resource Creator:</label>
-{% else %}
-<label class='title component'>Metadata Creator:</label>
-{% endif %}
+<label class='title component'>{{title}}</label>
 	
 		{# Name, Surname and sex #}
 	<div>
