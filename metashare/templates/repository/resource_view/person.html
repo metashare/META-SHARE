@@ -42,6 +42,7 @@
 	</div>
 	<div>
 		<label class="dataline">
+{#			{% encrypt_email person_dict.Communication.Email %}     #}
 			{{ person_dict.Communication.Email }}
 		</label>
 	</div>
@@ -107,9 +108,10 @@
 			{{ person_dict.Affiliation.OrganizationShortName }}
 		</label>
 	</div>
-
 	<div>
 		<label class="dataline">
+			{# {% encrypt_email person_dict.Affiliation.Email %} #}
+			<label>{% encrypt_email person_dict.Affiliation.Email %}</label>
 			{{ person_dict.Affiliation.Email }}
 		</label>
 	</div>
@@ -154,5 +156,4 @@
 	</div>
 	{% endif %}	
 		
-
 {% endspaceless %}

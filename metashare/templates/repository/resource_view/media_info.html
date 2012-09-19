@@ -1,25 +1,25 @@
 
 {% with media_info=resource_component_dict.Resource_component %}
 	{% if type == "text" %}
-		{% include "repository/detailed_media_info.html" with resource_component=resource_component_dicts.text %}
+		{% include "repository/resource_view/detailed_media_info.html" with resource_component=resource_component_dicts.text %}
 	{% else %}
 		{% if type == "audio" %}
-			{% include "repository/detailed_media_info.html" with resource_component=resource_component_dicts.audio %}
+			{% include "repository/resource_view/detailed_media_info.html" with resource_component=resource_component_dicts.audio %}
 		{% else %}
 			{% if type == "video" %}
-				{% include "repository/detailed_media_info.html" with resource_component=resource_component_dicts.video %}
+				{% include "repository/resource_view/detailed_media_info.html" with resource_component=resource_component_dicts.video %}
 			{% else %}
 				{% if type == "image" %}
-					{% include "repository/detailed_media_info.html" with resource_component=resource_component_dicts.image %}
+					{% include "repository/resource_view/detailed_media_info.html" with resource_component=resource_component_dicts.image %}
 				{% else %}
 					{% if type == "textNumerical" %}
-						{% include "repository/detailed_media_info.html" with resource_component=resource_component_dicts.textNumerical %}
+						{% include "repository/resource_view/detailed_media_info.html" with resource_component=resource_component_dicts.textNumerical %}
 					{% else %}
 						{% if type == "textNgram" %}
-							{% include "repository/detailed_media_info.html" with resource_component=resource_component_dicts.textNgram %}
+							{% include "repository/resource_view/detailed_media_info.html" with resource_component=resource_component_dicts.textNgram %}
 						{% else %}
 							{% if type == "toolService" %}
-								{% include "repository/detailed_media_info.html" with resource_component=resource_component_dicts.toolService %}
+								{% include "repository/resource_view/detailed_media_info.html" with resource_component=resource_component_dicts.toolService %}
 							{% endif %}
 						{% endif %}
 					{% endif %}

@@ -578,7 +578,6 @@ def view(request, resource_name=None, object_id=None):
                 'description': description,
                 'other_res_names': other_res_names,
                 'other_descriptions': other_descriptions,
-#                'lr_content': lr_content, 
                 'distribution_info_tuple': distribution_info_tuple,
                 'contact_person_tuples': contact_person_tuples,                
                 'metadata_info_tuple': metadata_info_tuple,               
@@ -592,7 +591,6 @@ def view(request, resource_name=None, object_id=None):
                 'license_types': license_types,
                 'resourceType': resource_type,
                 'resource_component_dicts': resource_component_dicts,
-#                'lr_content_dict': lr_content_dict,
                 'mediaTypes': media_types,
                 'url': url,
                 'metaShareId': metashare_id,
@@ -600,7 +598,7 @@ def view(request, resource_name=None, object_id=None):
                 'resource_creation_dict': resource_creation_dict,
                 'metadata_dict': metadata_dict,
                 }
-    template = 'repository/lr_view.html'
+    template = 'repository/resource_view/lr_view.html'
 
     # For users who have edit permission for this resource, we have to add 
     # LR_EDIT which contains the URL of the Django admin backend page 
