@@ -1,169 +1,186 @@
 <label class='title component'>Documentation:</label>
 	
-	{% if documentation_dict.Resource_documentation.Documentation.Documentation.Document_type %}
-		<div class="dataline">
-			<label>
-				<b>Document Type:</b> {{ documentation_dict.Resource_documentation.Documentation.Documentation.Document_type }}
-			</label>
-		</div>
-	{% endif %}
 	
-	{% if documentation_dict.Resource_documentation.Documentation.Documentation.Title %}
-		<div class="dataline">
-			<label>
-				<b>Title:</b> 
-				{% if documentation_dict.Resource_documentation.Documentation.Documentation.Url %}
-					<a href="{{documentation_dict.Resource_documentation.Documentation.Documentation.Url}}" target='_blank'>
-				{% endif %}
-				{{ documentation_dict.Resource_documentation.Documentation.Documentation.Title }}
-				{% if documentation_dict.Resource_documentation.Documentation.Documentation.Url %}
-					</a>
-				{% endif %}
-			</label>
-		</div>
-	{% endif %}
-	
-	{% if documentation_dict.Resource_documentation.Documentation.Documentation.Author %}
-		<div class="dataline">
-			<label>
-				<b>Author:</b> {{ documentation_dict.Resource_documentation.Documentation.Documentation.Author }}
-			</label>
-		</div>
-	{% endif %}
-	
-	{% if documentation_dict.Resource_documentation.Documentation.Documentation.Editor %}
-		<div class="dataline">
-			<label>
-				<b>Editor:</b> {{ documentation_dict.Resource_documentation.Documentation.Documentation.Editor }}
-			</label>
-		</div>
-	{% endif %}
-	
-	{% if documentation_dict.Resource_documentation.Documentation.Documentation.Year %}
-		<div class="dataline">
-			<label>
-				<b>Year:</b> {{ documentation_dict.Resource_documentation.Documentation.Documentation.Year }}
-			</label>
-		</div>
-	{% endif %}
-	
-	{% if documentation_dict.Resource_documentation.Documentation.Documentation.Publisher %}
-	     <div class="dataline">
-			<label>
-				<b>Publisher:</b> {{ documentation_dict.Resource_documentation.Documentation.Documentation.Publisher }}
-			</label>
-		</div>
-	{% endif %}
-	
-	{% if documentation_dict.Resource_documentation.Documentation.Documentation.Book_title %}
-	     <div class="dataline">
-			<label>
-				<b>Book Title:</b> {{ documentation_dict.Resource_documentation.Documentation.Documentation.Book_title }}
-			</label>
-		</div>
-	{% endif %}
-	
-	{% if documentation_dict.Resource_documentation.Documentation.Documentation.Journal %}
-	     <div class="dataline">
-			<label>
-				<b>Journal:</b> {{ documentation_dict.Resource_documentation.Documentation.Documentation.Journal }}
-			</label>
-		</div>
-	{% endif %}
-	
-	{% if documentation_dict.Resource_documentation.Documentation.Documentation.Volume %}
-	     <div class="dataline">
-			<label>
-				<b>Volume:</b> {{ documentation_dict.Resource_documentation.Documentation.Documentation.Volume }}
-			</label>
-		</div>
-	{% endif %}
-	
-	{% if documentation_dict.Resource_documentation.Documentation.Documentation.Series %}
-	     <div class="dataline">
-			<label>
-				<b>Series:</b> {{ documentation_dict.Resource_documentation.Documentation.Documentation.Series }}
-			</label>
-		</div>
-	{% endif %}
-	
-	{% if documentation_dict.Resource_documentation.Documentation.Documentation.Pages %}
-	     <div class="dataline">
-			<label>
-				<b>Pages:</b> {{ documentation_dict.Resource_documentation.Documentation.Documentation.Pages }}
-			</label>
-		</div>
-	{% endif %}
-	
-	{% if documentation_dict.Resource_documentation.Documentation.Documentation.Edition %}
-	     <div class="dataline">
-			<label>
-				<b>Edition:</b> {{ documentation_dict.Resource_documentation.Documentation.Documentation.Edition }}
-			</label>
-		</div>
-	{% endif %}
-	
-	{% if documentation_dict.Resource_documentation.Documentation.Documentation.Conference %}
-	     <div class="dataline">
-			<label>
-				<b>Conference:</b> {{ documentation_dict.Resource_documentation.Documentation.Documentation.Conference }}
-			</label>
-		</div>
-	{% endif %}
-
-	{% if documentation_dict.Resource_documentation.Documentation.Documentation.Edition %}
-	     <div class="dataline">
-			<label>
-				<b>Edition:</b> {{ documentation_dict.Resource_documentation.Documentation.Documentation.Edition }}
-			</label>
-		</div>
-	{% endif %}
-	
-	{% if documentation_dict.Resource_documentation.Documentation.Documentation.Doi %}
-	     <div class="dataline">
-			<label>
-				<b>Digital Object Identifier - DOI:</b> {{ documentation_dict.Resource_documentation.Documentation.Documentation.Doi }}
-			</label>
-		</div>
-	{% endif %}
-	
-	{% if documentation_dict.Resource_documentation.Documentation.Documentation.Issn %}
-	     <div class="dataline">
-			<label>
-				<b>ISSN:</b> {{ documentation_dict.Resource_documentation.Documentation.Documentation.Issn }}
-			</label>
-		</div>
-	{% endif %}
-	
-	{% if documentation_dict.Resource_documentation.Documentation.Documentation.Isbn %}
-	     <div class="dataline">
-			<label>
-				<b>ISBN:</b> {{ documentation_dict.Resource_documentation.Documentation.Documentation.Isbn }}
-			</label>
-		</div>
-	{% endif %}
-	
-	{% if documentation_dict.Resource_documentation.Documentation.Documentation.Keywords %}
-	     <div class="dataline">
-			<label>
-				<b>Keywords:</b> {{ documentation_dict.Resource_documentation.Documentation.Documentation.Keywords }}
-			</label>
-		</div>
-	{% endif %}
-	
-	{% if documentation_dict.Resource_documentation.Documentation.Documentation.Document_language_name %}
-	     <div class="dataline">
-			<label>
-				<b>Document Language:</b> 
-				{% if documentation_dict.Resource_documentation.Documentation.Documentation.Document_language_id %}
-					<span title="{{documentation_dict.Resource_documentation.Documentation.Documentation.Document_language_id}}">
-				{% endif %}
-				{{ documentation_dict.Resource_documentation.Documentation.Documentation.Document_language_name }}
-				{% if documentation_dict.Resource_documentation.Documentation.Documentation.Document_language_id %}
-					</span>
-				{% endif %}
-			</label>
-		</div>
-	{% endif %}
-
-<hr/>
+{% for key, value in documentation_dict.items %}
+		{% for key1, value1 in value.items %}		
+			{% for key2, value2 in value1.items %}				
+					{% if key2 == "Documentation" %}
+						
+						{% if value2.Document_type %}
+							<div class="dataline">
+								<label>
+									<b>Document Type:</b> {{ value2.Document_type }}
+								</label>
+							</div>
+						{% endif %}
+						
+						<div class="dataline">
+							<label>
+								<b>Title:</b> 
+								{% if value2.Url %}
+									<a href="{{value2.Url}}" target='_blank'>
+								{% endif %}
+								{{ value2.Title }}
+								{% if value2.Url %}
+									</a>
+								{% endif %}
+							</label>
+						</div>
+						
+						{% if value2.Author %}
+							<div class="dataline">
+								<label>
+									<b>Author:</b> {{ value2.Author }}
+								</label>
+							</div>
+						{% endif %}
+						
+						{% if value2.Editor %}
+							<div class="dataline">
+								<label>
+									<b>Editor:</b> {{ value2.Editor }}
+								</label>
+							</div>
+						{% endif %}
+						
+						{% if value2.Year %}
+							<div class="dataline">
+								<label>
+									<b>Year:</b> {{ value2.Year }}
+								</label>
+							</div>
+						{% endif %}
+						
+						{% if value2.Publisher %}
+						     <div class="dataline">
+								<label>
+									<b>Publisher:</b> {{ value2.Publisher }}
+								</label>
+							</div>
+						{% endif %}
+						
+						{% if value2.Book_title %}
+						     <div class="dataline">
+								<label>
+									<b>Book Title:</b> {{ value2.Book_title }}
+								</label>
+							</div>
+						{% endif %}
+						
+						{% if value2.Journal %}
+						     <div class="dataline">
+								<label>
+									<b>Journal:</b> {{ value2.Journal }}
+								</label>
+							</div>
+						{% endif %}
+						
+						{% if value2.Volume %}
+						     <div class="dataline">
+								<label>
+									<b>Volume:</b> {{ value2.Volume }}
+								</label>
+							</div>
+						{% endif %}
+						
+						{% if value2.Series %}
+						     <div class="dataline">
+								<label>
+									<b>Series:</b> {{ value2.Series }}
+								</label>
+							</div>
+						{% endif %}
+						
+						{% if value2.Pages %}
+						     <div class="dataline">
+								<label>
+									<b>Pages:</b> {{ value2.Pages }}
+								</label>
+							</div>
+						{% endif %}
+						
+						{% if value2.Edition %}
+						     <div class="dataline">
+								<label>
+									<b>Edition:</b> {{ value2.Edition }}
+								</label>
+							</div>
+						{% endif %}
+						
+						{% if value2.Conference %}
+						     <div class="dataline">
+								<label>
+									<b>Conference:</b> {{ value2.Conference }}
+								</label>
+							</div>
+						{% endif %}
+					
+						{% if value2.Edition %}
+						     <div class="dataline">
+								<label>
+									<b>Edition:</b> {{ value2.Edition }}
+								</label>
+							</div>
+						{% endif %}
+						
+						{% if value2.Doi %}
+						     <div class="dataline">
+								<label>
+									<b>Digital Object Identifier - DOI:</b> {{ value2.Doi }}
+								</label>
+							</div>
+						{% endif %}
+						
+						{% if value2.Issn %}
+						     <div class="dataline">
+								<label>
+									<b>ISSN:</b> {{ value2.Issn }}
+								</label>
+							</div>
+						{% endif %}
+						
+						{% if value2.Isbn %}
+						     <div class="dataline">
+								<label>
+									<b>ISBN:</b> {{ value2.Isbn }}
+								</label>
+							</div>
+						{% endif %}
+						
+						{% if value2.Keywords %}
+						     <div class="dataline">
+								<label>
+									<b>Keywords:</b> {{ value2.Keywords }}
+								</label>
+							</div>
+						{% endif %}
+						
+						{% if value2.Document_language_name %}
+						     <div class="dataline">
+								<label>
+									<b>Document Language:</b> 
+									{% if value2.Document_language_id %}
+										<span title="{{value2.Document_language_id}}">
+									{% endif %}
+									{{ value2.Document_language_name }}
+									{% if value2.Document_language_id %}
+										</span>
+									{% endif %}
+								</label>
+							</div>
+						{% endif %}
+					
+					<hr/>
+						
+						
+						
+						
+						
+						
+						
+						
+						
+					{% endif %}
+			{% endfor %}
+		{% endfor %}
+{% endfor %}
