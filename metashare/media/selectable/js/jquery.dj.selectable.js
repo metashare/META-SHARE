@@ -332,6 +332,12 @@
                     this.menu.next(new $.Event("mouseover"));
                 }
             };
+            
+            $(input).bind('keyup', function(){
+            	if($(input).val() == '') {
+            		$(input).removeClass('ui-state-not-found');
+            	}
+            });
             // Additional work for combobox widgets
             var selectableType = data.selectableType || data['selectable-type'];
             if (selectableType === 'combobox') {
