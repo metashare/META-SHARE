@@ -489,7 +489,7 @@ def view(request, resource_name=None, object_id=None):
 
     # Convert resource_component_tuple to nested dictionaries
     resource_component_dict = tuple2dict(resource_component_tuple)
-    #lr_content_dict = tuple2dict([lr_content])
+#    lr_content_dict = tuple2dict([lr_content])
     resource_component_dicts = {}
 
     resource_creation_dict = {}
@@ -578,7 +578,6 @@ def view(request, resource_name=None, object_id=None):
                 'description': description,
                 'other_res_names': other_res_names,
                 'other_descriptions': other_descriptions,
-                'lr_content': lr_content, 
                 'distribution_info_tuple': distribution_info_tuple,
                 'contact_person_tuples': contact_person_tuples,                
                 'metadata_info_tuple': metadata_info_tuple,               
@@ -600,7 +599,7 @@ def view(request, resource_name=None, object_id=None):
                 'resource_creation_dict': resource_creation_dict,
                 'metadata_dict': metadata_dict,
                 }
-    template = 'repository/lr_view.html'
+    template = 'repository/resource_view/lr_view.html'
 
     # For users who have edit permission for this resource, we have to add 
     # LR_EDIT which contains the URL of the Django admin backend page 
@@ -680,14 +679,19 @@ def tuple2dict(_tuple):
                     if item[0][0].find(" "):
                         _key = item[0][0].replace(" ", "_")
                     else: _key = item[0][0]
+
+                    # If the item is a date, convert it to real datetime
+                    if _key.find("_date") != -1:
+                        print _key
+                        new_item = datetime.strptime(item[0][1], "%Y-%m-%d")
+                    else:
+                        new_item = item[0][1]
                     # If a repeatable element is found, the old value is
                     # concatenated with the new one, adding a space in between.
                     if _key in _dict:
-                        _dict[_key] = " ".join([_dict[_key], item[0][1]])
+                        _dict[_key] = " ".join([_dict[_key], new_item])
                     else:
-                        #print _key
-                        #print item[0][1]
-                        _dict[_key] = item[0][1]
+                        _dict[_key] = new_item
     return _dict
 
 

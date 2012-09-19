@@ -1,0 +1,29 @@
+{% spaceless %}
+
+{# Type info #}
+<label class='title'>{{ resource_component.Linguality.Linguality_type }} {{ type }} {{ resourceType }}</label>
+
+{# Language Information #}
+{% include "repository/resource_view/language.html" with languages=resource_component %}
+
+{# Text type Information #}
+{% include "repository/resource_view/text_type.html" with text_types=resource_component %}
+
+{# Size Information #}
+{% include "repository/resource_view/size.html" with size=resource_component %}
+
+{# Domain Information #}
+{% include "repository/resource_view/domain.html" with domains=resource_component %}
+
+{# Modality Information #}
+{% include "repository/resource_view/modality.html" with modalities=resource_component %}
+
+{# Annotation Information #}
+{% include "repository/resource_view/annotation.html" with annotations=resource_component %}
+
+
+
+
+
+
+{% endspaceless %}
