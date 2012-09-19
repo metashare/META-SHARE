@@ -571,7 +571,7 @@ class DownloadViewTest(TestCase):
         client.login(username='staffuser', password='secret')
         url = self.downloadable_resource_1.get_absolute_url()
         response = client.get(url, follow = True)
-        self.assertTemplateUsed(response, 'repository/lr_view.html')
+        self.assertTemplateUsed(response, 'repository/resource_view/lr_view.html')
         self.assertContains(response, "repository/download/{0}".format(
                         self.downloadable_resource_1.storage_object.identifier))
 
