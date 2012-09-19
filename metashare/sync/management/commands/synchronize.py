@@ -242,8 +242,8 @@ class Command(BaseCommand):
                 silently_removed.remove(item_id)
         LOGGER.info("{} resources have silently disappeared".format(
           len(silently_removed)))
-        
-        remote_inventory_removed.append(silently_removed)
+          
+        remote_inventory_removed = remote_inventory_removed + silently_removed
         
         removed_count = 0
         for removed_id in remote_inventory_removed:
