@@ -497,8 +497,7 @@ def view(request, resource_name=None, object_id=None):
     usage_dict = {}
     documentation_dict = {}
     validation_dicts = []
-    relation_dicts = []
-    
+    relation_dicts = []    
     
     resource_creation_dict = tuple2dict([resource_creation_info_tuple])
     metadata_dict = tuple2dict([metadata_info_tuple])
