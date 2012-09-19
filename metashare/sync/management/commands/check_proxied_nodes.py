@@ -19,14 +19,14 @@ class Command(BaseCommand):
     
     def handle(self, *args, **options):
         
-        # collect current proxied node names
-        proxy_names = [p['NAME'] for p in settings.PROXIED_NODES.values()]
+        # collect current proxied node ids
+        proxied_ids = [p for p in settings.PROXIED_NODES]
 
         # iterate over proxy resources and check for each if its source node id
         # is still listed in the proxied node id list
         remove_count = 0
         for proxy_res in StorageObject.objects.filter(copy_status=PROXY):
-            if not proxy_res.source_node in proxy_names:
+            if not proxy_res.source_node in proxied_ids:
                 # delete the associated resource and create a RemovedObject
                 # to let the other nodes know that the resource has been removed
                 # when synchronizing
