@@ -256,7 +256,7 @@ class Command(BaseCommand):
                 LOGGER.info("removing resource {}".format(removed_id))
                 removed_count += 1
                 _so_to_remove = StorageObject.objects.get(identifier=removed_id)
-                if _so_to_remove.copy_status is PROXY:
+                if _so_to_remove.copy_status == PROXY:
                     _rem_obj = RemovedObject.objects.create(identifier=removed_id)
                     _rem_obj.save()
                 remove_resource(_so_to_remove) 
