@@ -1,9 +1,5 @@
 <label class='title component'>Usage:</label>
 
-
-{{usage_dict}}!
-
-
 {% if usage_dict.Usage.Access_tool %}			
     {% include "repository/resource_view/target_resource.html" with target=usage_dict.Usage.Access_tool title="Access Tool" %}
 {% endif %}
