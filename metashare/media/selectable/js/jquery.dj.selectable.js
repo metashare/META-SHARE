@@ -171,6 +171,12 @@
                         });
                         $(input).after(newInput);
                         self._addDeckItem(newInput);
+                        /* Clear the input text again after some time since
+                         * some other event handler tries to set the selected value
+                         */
+                        setTimeout(function(){
+                        	$(input).val("");
+                        }, 200);
                         return false;
                     }
                 } else {
