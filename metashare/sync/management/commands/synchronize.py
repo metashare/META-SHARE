@@ -85,22 +85,25 @@ class Command(BaseCommand):
         `is_proxy` must be True if this node is a proxy for the given nodes;
             it must be False if the given nodes are not proxied by this node
         """
-        for server in nodes.values():
-            LOGGER.info("syncing with server {} at {} ...".format(
-              server['NAME'], server['URL']))
+        for node_id, node in nodes.items():
+            LOGGER.info("syncing with node {} at {} ...".format(
+              node_id, node['URL']))
             try:
-                Command.sync_with_server(server, is_proxy, id_file=id_file)
+                Command.sync_with_single_node(
+                  node_id, node, is_proxy, id_file=id_file)
             except:
                 LOGGER.error(traceback.format_exc())
 
     @staticmethod
-    def sync_with_server(server, is_proxy, id_file=None):
+    def sync_with_single_node(node_id, node, is_proxy, id_file=None):
         """
         Synchronizes this META-SHARE node with another META-SHARE node using
-        the given server description.
+        the given node description.
         
-        `nodes` is a dict of dicts with synchronization settings for the nodes
-            to synchronize with
+        `node_id` is the unique key under which the node settings are stored in 
+            the dict
+        `node` is a dict with synchronization settings for the node to
+            synchronize with
         `is_proxy` must be True if this node is a proxy for the given nodes;
             it must be False if the given nodes are not proxied by this node
         """
@@ -110,10 +113,9 @@ class Command(BaseCommand):
         local_inventory = []
         
         # Login
-        url = server['URL']
-        server_name = server['NAME']
-        user_name = server['USERNAME']
-        password = server['PASSWORD']
+        url = node['URL']
+        user_name = node['USERNAME']
+        password = node['PASSWORD']
         opener = login("{0}/login/".format(url), user_name, password)
         
         # Get the inventory list. 
@@ -124,21 +126,21 @@ class Command(BaseCommand):
         remote_inventory_count = len(remote_inventory_existing)
         sys.stdout.write("\nRemote node " + BOLD + url + RESET + " contains " \
           + BOLD + str(remote_inventory_count) + " resources.\n" + RESET)
-        LOGGER.info("Remote server {} contains {} resources".format(
-          server_name, remote_inventory_count))
+        LOGGER.info("Remote node {} contains {} resources".format(
+          node_id, remote_inventory_count))
         
         # Get a list of uuid's and digests of resource from the local inventory
-        # that stem from the remote server
-        remote_storage_objects = StorageObject.objects.filter(source_node=server_name)
+        # that stem from the remote node
+        remote_storage_objects = StorageObject.objects.filter(source_node=node_id)
         for item in remote_storage_objects:
             local_inventory.append({'id':str(item.identifier), 'digest':str(item.digest_checksum)})
         local_inventory_count = len(local_inventory)
         sys.stdout.write("\nLocal node contains " + BOLD + str(local_inventory_count) \
           + " resources.\n" + RESET)
-        LOGGER.info("Local server contains {} resources stemming from remote server {}".format(
-          local_inventory_count, server_name))
+        LOGGER.info("Local node contains {} resources stemming from remote node {}".format(
+          local_inventory_count, node_id))
         
-        # Create an list of ids to speed-up matching
+        # Create a list of ids to speed-up matching
         local_inventory_indexed = []
         for item in local_inventory:
             local_inventory_indexed.append(item['id'])
@@ -151,16 +153,16 @@ class Command(BaseCommand):
         for item in remote_inventory_existing:
             item_id = item['id']
             if item_id not in local_inventory_indexed:
-                # make sure that the remote server does not try to add a resource
+                # make sure that the remote node does not try to add a resource
                 # for which we now that it stems from ANOTHER node or OUR node 
                 try:
                     local_so = StorageObject.objects.get(identifier=item_id)
                     source_node = local_so.source_node
                     if not source_node:
-                        source_node = 'LOCAL SERVER'
+                        source_node = 'LOCAL NODE'
                     LOGGER.warn(
-                      "{} wants to add resource {} that we already know from {}".format(
-                      server_name, item_id, source_node))
+                      "Node {} wants to add resource {} that we already know from node {}".format(
+                      node_id, item_id, source_node))
                 except ObjectDoesNotExist:
                     new_resources.append(item)
             else:
@@ -201,14 +203,14 @@ class Command(BaseCommand):
             
             # Get the full xmls from remote inventory and update local inventory
             for resource in new_resources:
-                res_obj = Command._get_remote_resource(resource, server, opener, _copy_status)
+                res_obj = Command._get_remote_resource(resource, node_id, node, opener, _copy_status)
                 LOGGER.info("adding resource {}".format(res_obj.storage_object.identifier))
                 if not id_file is None:
                     id_file.write("--->RESOURCE_ID:{0};STORAGE_IDENTIFIER:{1}\n"\
                         .format(res_obj.id, res_obj.storage_object.identifier))
         
             for resource in resources_to_update:
-                res_obj = Command._get_remote_resource(resource, server, opener, _copy_status)
+                res_obj = Command._get_remote_resource(resource, node_id, node, opener, _copy_status)
                 LOGGER.info("updating resource {}".format(res_obj.storage_object.identifier))
                 if not id_file is None:
                     id_file.write("--->RESOURCE_ID:{0};STORAGE_IDENTIFIER:{1}\n"\
@@ -223,8 +225,8 @@ class Command(BaseCommand):
         remote_inventory_removed_count = len(remote_inventory_removed)
         sys.stdout.write("\nRemote node " + BOLD + url + RESET + " lists " \
           + BOLD + str(remote_inventory_removed_count) + " resources as removed.\n" + RESET)
-        LOGGER.info("Remote server {} lists {} resources as removed".format(
-          server_name, remote_inventory_removed_count))
+        LOGGER.info("Remote node {} lists {} resources as removed".format(
+          node_id, remote_inventory_removed_count))
         
         # add to removed resources those that have silently disappeared; these
         # are resources that are not mentioned in either the inventory or the 
@@ -266,18 +268,18 @@ class Command(BaseCommand):
             
 
     @staticmethod
-    def _get_remote_resource(digest_item, server, opener, copy_status):
+    def _get_remote_resource(digest_item, node_id, node, opener, copy_status):
         """
-        retrieves from the given server the resource for the given inventory 
+        retrieves from the given node the resource for the given inventory 
         item consisting of the resource id and its digest and add/update it at
         the current node with the given copy status using the given opener 
         """
         # Get the json storage object and the actual metadata xml
         storage_json, resource_xml_string = \
           get_full_metadata(opener, "{0}/sync/{1}/metadata/" \
-                .format(server['URL'], digest_item['id']), digest_item['digest'])
+                .format(node['URL'], digest_item['id']), digest_item['digest'])
         res_obj = add_or_update_resource(storage_json, resource_xml_string,
                         digest_item['digest'], copy_status, 
-                        source_node=server['NAME'])
+                        source_node=node_id)
         return res_obj
         
