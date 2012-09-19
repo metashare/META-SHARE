@@ -1,0 +1,40 @@
+{% spaceless %}
+
+{# Type info #}
+<label class='title'>{% if resource_component.Linguality.Linguality_type %}{{ resource_component.Linguality.Linguality_type }}{% endif %} {{ type }} {{ resourceType }}</label>
+
+{# Language Information #}
+{% if "Language" in resource_component %}
+	{% include "repository/resource_view/language.html" with languages=resource_component %}
+{% endif %}
+
+{# Text type Information #}
+{% if "Text_format" in resource_component %}
+	{% include "repository/resource_view/text_type.html" with text_types=resource_component %}
+{% endif %}
+
+{# Size Information #}
+{% if "Size" in resource_component %}
+	{% include "repository/resource_view/size.html" with size=resource_component %}
+{% endif %}
+
+{# Domain Information #}
+{% if "Domain" in resource_component %}
+	{% include "repository/resource_view/domain.html" with domains=resource_component %}
+{% endif %}
+
+{# Modality Information #}
+{% if "Modality" in resource_component %}
+	{% include "repository/resource_view/modality.html" with modalities=resource_component %}
+{% endif %}
+
+{# Annotation Information #}
+{% if "Annotation" in resource_component %}
+	{% include "repository/resource_view/annotation.html" with annotations=resource_component %}
+{% endif %}
+
+
+
+
+
+{% endspaceless %}

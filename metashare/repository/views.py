@@ -456,6 +456,8 @@ def view(request, resource_name=None, object_id=None):
     documentation_info_tuple = None
     resource_creation_info_tuple = None
     relation_info_tuples = []
+    resource_component_tuple = None
+    languages_tuple = []
     for _tuple in lr_content[1]:
         if _tuple[0] == "Distribution":
             distribution_info_tuple = _tuple
@@ -475,14 +477,99 @@ def view(request, resource_name=None, object_id=None):
             resource_creation_info_tuple = _tuple
         elif _tuple[0] == "Relation":
             relation_info_tuples.append(_tuple)
+        elif _tuple[0] == "Resource component":
+            resource_component_tuple = _tuple[1]
+            languages_tuple = _tuple
 
-    # Preprocess some of the information withing the tuples for better
-    # presentation in the single resource view.
-    # Contact Person:
+    # Convert contact_person_tuples to dictionaries
     contact_person_dicts = []
-    #convert contact_person_tuples to dictionaries
+    resource_component_dict = {}
     for item in contact_person_tuples:
         contact_person_dicts.append(tuple2dict([item]))
+
+    # Convert resource_component_tuple to nested dictionaries
+    resource_component_dict = tuple2dict(resource_component_tuple)
+#    lr_content_dict = tuple2dict([lr_content])
+    resource_component_dicts = {}
+
+    resource_creation_dict = {}
+    metadata_dict = {}
+    validation_dicts = []
+    relation_dicts = []
+    
+    resource_creation_dict = tuple2dict([resource_creation_info_tuple])
+    metadata_dict = tuple2dict([metadata_info_tuple])
+    for item in validation_info_tuples:
+        validation_dicts.append(tuple2dict([item]))
+    for item in relation_info_tuples:
+        relation_dicts.append(tuple2dict([item]))
+
+    if resource_type == "corpus":
+        for media_type in media_types:
+            if media_type == "text":
+                resource_component_dicts['text'] = \
+                  resource_component_dict['Resource_component'] \
+                    ['Corpus_media']['Corpus_text']
+            if media_type == "audio":
+                resource_component_dicts['audio'] = \
+                  resource_component_dict['Resource_component'] \
+                    ['Corpus_media']['Corpus_audio']
+            if media_type == "video":
+                resource_component_dicts['video'] = \
+                  resource_component_dict['Resource_component'] \
+                    ['Corpus_media']['Corpus_video']
+            if media_type == "image":
+                resource_component_dicts['image'] = \
+                  resource_component_dict['Resource_component'] \
+                    ['Corpus_media']['Corpus_image']
+            if media_type == "textNgram":
+                resource_component_dicts['textNgram'] = \
+                  resource_component_dict['Resource_component'] \
+                     ['Corpus_media']['Corpus_textNgram']
+            if media_type == "textNumerical":
+                resource_component_dicts['textNumerical'] = \
+                  resource_component_dict['Resource_component'] \
+                     ['Corpus_media']['Corpus_textNumerical']
+    elif resource_type == "languageDescription":
+        for media_type in media_types:
+            if media_type == "text":
+                resource_component_dicts['text'] = \
+                  resource_component_dict['Resource_component'] \
+                    ['Language_description_media']['Language_description_text']
+            if media_type == "image":
+                resource_component_dicts['image'] = \
+                  resource_component_dict['Resource_component'] \
+                    ['Language_description_media']['Language_description_image']
+            if media_type == "video":
+                resource_component_dicts['video'] = \
+                  resource_component_dict['Resource_component'] \
+                    ['Language_description_media']['Language_description_video']
+    elif resource_type == "lexicalConceptualResource":
+        for media_type in media_types:
+            if media_type == "text":
+                resource_component_dicts['text'] = \
+                  resource_component_dict['Resource_component'] \
+                    ['Lexical_conceptual_resource_media'] \
+                    ['Lexical_conceptual_resource_text']
+            if media_type == "audio":
+                resource_component_dicts['audio'] = \
+                  resource_component_dict['Resource_component'] \
+                  ['Lexical_conceptual_resource_media'] \
+                  ['Lexical_conceptual_resource_audio']
+            if media_type == "video":
+                resource_component_dicts['video'] = \
+                  resource_component_dict['Resource_component'] \
+                  ['Lexical_conceptual_resource_media'] \
+                  ['Lexical_conceptual_resource_video']
+            if media_type == "image":
+                resource_component_dicts['image'] = \
+                  resource_component_dict['Resource_component'] \
+                  ['Lexical_conceptual_resource_media'] \
+                  ['Lexical_conceptual_resource_image']
+    elif resource_type == "toolService":
+        resource_component_dicts['toolService'] = \
+          resource_component_dict['Resource_component']
+
     
     # Define context for template rendering.
     context = { 'resource': resource,
@@ -491,7 +578,6 @@ def view(request, resource_name=None, object_id=None):
                 'description': description,
                 'other_res_names': other_res_names,
                 'other_descriptions': other_descriptions,
-                'lr_content': lr_content, 
                 'distribution_info_tuple': distribution_info_tuple,
                 'contact_person_tuples': contact_person_tuples,                
                 'metadata_info_tuple': metadata_info_tuple,               
@@ -504,12 +590,15 @@ def view(request, resource_name=None, object_id=None):
                 'linguality_infos': linguality_infos,
                 'license_types': license_types,
                 'resourceType': resource_type,
+                'resource_component_dicts': resource_component_dicts,
                 'mediaTypes': media_types,
                 'url': url,
                 'metaShareId': metashare_id,
                 'contact_person_dicts': contact_person_dicts,
+                'resource_creation_dict': resource_creation_dict,
+                'metadata_dict': metadata_dict,
                 }
-    template = 'repository/lr_view.html'
+    template = 'repository/resource_view/lr_view.html'
 
     # For users who have edit permission for this resource, we have to add 
     # LR_EDIT which contains the URL of the Django admin backend page 
@@ -589,14 +678,19 @@ def tuple2dict(_tuple):
                     if item[0][0].find(" "):
                         _key = item[0][0].replace(" ", "_")
                     else: _key = item[0][0]
+
+                    # If the item is a date, convert it to real datetime
+                    if _key.find("_date") != -1:
+                        print _key
+                        new_item = datetime.strptime(item[0][1], "%Y-%m-%d")
+                    else:
+                        new_item = item[0][1]
                     # If a repeatable element is found, the old value is
                     # concatenated with the new one, adding a space in between.
                     if _key in _dict:
-                        _dict[_key] = " ".join([_dict[_key], item[0][1]])
+                        _dict[_key] = " ".join([_dict[_key], new_item])
                     else:
-                        #print _key
-                        #print item[0][1]
-                        _dict[_key] = item[0][1]
+                        _dict[_key] = new_item
     return _dict
 
 
