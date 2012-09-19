@@ -201,18 +201,26 @@
 		  {% endif %}
 		  
 		{% include "repository/resource_view/metadata.html" %}
-		  {% for validation_info_tuple in validation_info_tuples %}
-		    {% include "repository/resource_view/detailed_component.html" with lr_content=validation_info_tuple %}
-		  {% endfor %}
-		  {% if resource_creation_info_tuple %}
-		    {% include "repository/resource_view/detailed_component.html" with lr_content=usage_info_tuple %}
-		  {% endif %}
-		  {% if resource_creation_info_tuple %}
-		    {% include "repository/resource_view/detailed_component.html" with lr_content=resource_documentation_info_tuple %}
-		  {% endif %}
-		  {% for relation_info_tuple in relation_info_tuples %}
-		    {% include "repository/resource_view/detailed_component.html" with lr_content=relation_info_tuple %}
-		  {% endfor %}
+		
+		{% if validation_info_tuples %}
+			{% include "repository/resource_view/validation.html" %}
+		{% endif %}
+		
+		{% if usage_info_tuple %}
+			{% include "repository/resource_view/usage.html" %}
+		{% endif %}
+		
+		{% if relation_info_tuples %}
+			{% include "repository/resource_view/relation.html" %}
+		{% endif %}
+		
+		{% if documentation_info_tuple %}
+				{% include "repository/resource_view/documentation.html"  %}
+		{% endif %}
+		
+		{% if documentation_info_tuple %}
+			{% include "repository/resource_view/detailed_component.html" with lr_content=documentation_info_tuple %}
+		{% endif %}
 		</div>
 
 {% include "repository/resource_view/recomm_view.html" %}
