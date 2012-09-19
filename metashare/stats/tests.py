@@ -164,7 +164,8 @@ class StatsTest(TestCase):
             follow=True)
             url = resource.get_absolute_url()
             response = client.get(url, follow = True)
-            self.assertTemplateUsed(response, 'repository/lr_view.html')
+            self.assertTemplateUsed(response,
+                'repository/resource_view/lr_view.html')
         
         statsdata = getLRLast(VIEW_STAT, 10)
         self.assertEqual(2, len(statsdata))
