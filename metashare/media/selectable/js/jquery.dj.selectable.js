@@ -171,6 +171,12 @@
                         });
                         $(input).after(newInput);
                         self._addDeckItem(newInput);
+                        /* Clear the input text again after some time since
+                         * some other event handler tries to set the selected value
+                         */
+                        setTimeout(function(){
+                        	$(input).val("");
+                        }, 200);
                         return false;
                     }
                 } else {
@@ -332,6 +338,14 @@
                     this.menu.next(new $.Event("mouseover"));
                 }
             };
+            
+            // Remove 'not-found' state when the input is cleared
+            $(input).bind('keyup', function(){
+            	if($(input).val() == '') {
+            		$(input).removeClass('ui-state-not-found');
+            	}
+            });
+            
             // Additional work for combobox widgets
             var selectableType = data.selectableType || data['selectable-type'];
             if (selectableType === 'combobox') {
