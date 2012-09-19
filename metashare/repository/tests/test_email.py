@@ -49,8 +49,9 @@ class EmailProtectionTest(TestCase):
         response = client.get(url, follow = True)
 
         # Verify that the response contains an email field.
-        self.assertContains(response, ">Email: <",
-            msg_prefix="There must be an 'email' field to test.")
+        # The response doesn't contain an Email field any more
+        #self.assertContains(response, ">Email: <",
+        #    msg_prefix="There must be an 'email' field to test.")
         # Verify that the response does NOT contain any email addresses.
         for person in self.resource.contactPerson.all():
             self.assertNotContains(response, person.communicationInfo.email)

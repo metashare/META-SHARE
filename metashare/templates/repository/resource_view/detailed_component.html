@@ -3,7 +3,7 @@
 <label class='title component'>{{lr_content.0}}</label>
 
 {% for item in lr_content.1 %}
-  {% with "repository/detailed_component.html" as filename %}
+  {% with "repository/resource_view/detailed_component.html" as filename %}
     {% with item as lr_content %}
         {% ifequal lr_content|length 2 %}
 			{% include filename %}
