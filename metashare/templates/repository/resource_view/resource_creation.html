@@ -14,7 +14,7 @@
 {% if resource_creation_dict.Resource_creation.Creation_start_date %}			
      <div class="dataline">
 		<label>
-			Creation Started: {{resource_creation_dict.Resource_creation.Creation_start_date|date:"DMY"}}
+			Creation Started: {{resource_creation_dict.Resource_creation.Creation_start_date|date:"SHORT_DATE_FORMAT"}}
 		</label>
 	</div>
 {% endif %}
@@ -22,7 +22,7 @@
 {% if resource_creation_dict.Resource_creation.Creation_end_date %}			
      <div class="dataline">
 		<label>
-			Creation Ended: {{resource_creation_dict.Resource_creation.Creation_end_date}}
+			Creation Ended: {{resource_creation_dict.Resource_creation.Creation_end_date|date:"SHORT_DATE_FORMAT"}}
 		</label>
 	</div>
 {% endif %}
