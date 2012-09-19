@@ -1,0 +1,87 @@
+<label class='title component'>Validation:</label>
+
+{% for dict in validation_dicts %}
+     <div class="dataline">
+		<label>
+			{% ifequal dict.Validation.Validated "True" %}Validated{% else %}Not Validated{% endifequal %}
+		</label>
+	</div>
+		
+	{% if dict.Validation.Validation_type %}
+	     <div class="dataline">
+			<label>
+				<b>Type of Validation:</b> {{ dict.Validation.Validation_type }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if dict.Validation.Validation_mode %}
+	     <div class="dataline">
+			<label>
+				<b>Validation Mode:</b> {{ dict.Validation.Validation_mode }}
+			</label>
+		</div>	
+	{% endif %}
+	
+	{% if dict.Validation.Validation_mode_details %}
+	     <div class="dataline">
+			<label>
+				<b>Mode Details:</b> {{ dict.Validation.Validation_mode_details }}
+			</label>
+		</div>	
+	{% endif %}
+	
+	{% if dict.Validation.Validation_extent %}
+	     <div class="dataline">
+			<label>
+				<b>Extent:</b> {{ dict.Validation.Validation_extent }}
+			</label>
+		</div>	
+	{% endif %}
+
+	{% if dict.Validation.Validation_extent_details %}
+	     <div class="dataline">
+			<label>
+				<b>Extent Details:</b> {{ dict.Validation.Validation_extent_details }}
+			</label>
+		</div>	
+	{% endif %}
+	
+	{% if dict.Validation.Size_per_validation %}
+	     <div class="dataline">
+			<label>
+				<b>Size per Validation:</b> {{ dict.Validation.Size_per_validation }}
+			</label>
+		</div>	
+	{% endif %}
+
+	{% if dict.Validation.Validation_report %}
+	     <div class="dataline">
+			<label>
+				<b>Validation Report:</b> {{ dict.Validation.Validation_report }}
+			</label>
+		</div>	
+	{% endif %}
+
+	{% if dict.Validation.Validation_tool %}
+	     <div class="dataline">
+			<label>
+				<b>Validation Tool:</b> {{ dict.Validation.Validation_tool }}
+			</label>
+		</div>	
+	{% endif %}
+	
+	{% if dict.Validation.Validator %}
+	     <div class="dataline">
+			<label>
+				<b>Validator:</b> {{ dict.Validation.Validator }}
+			</label>
+		</div>	
+	{% endif %}
+	
+	
+	
+	
+{% endfor %}
+
+<hr/>
