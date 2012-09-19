@@ -122,8 +122,8 @@ class resourceInfoType_model(SchemaModel):
 
     contactPerson = models.ManyToManyField("personInfoType_model", 
       verbose_name='Contact person', 
-      help_text='Groups information on the person(s) that is responsible' \
-      ' for giving information for the resource',
+      help_text='Groups information on the person(s) that is/are respons' \
+      'ible for providing further information regarding the resource',
       related_name="contactPerson_%(class)s_related", )
 
     metadataInfo = models.OneToOneField("metadataInfoType_model", 
@@ -354,14 +354,18 @@ class identificationInfoType_model(SchemaModel):
       default_retriever=best_lang_value_retriever, 
       verbose_name='Resource name', 
       max_val_length=500, 
-      help_text='The full name by which the resource is known',
+      help_text='The full name by which the resource is known; the eleme' \
+      'nt can be repeated for the different language versions using the ' \
+      '"lang" attribute to specify the language.',
       )
 
     description = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Description', 
       max_val_length=10000, 
-      help_text='Provides the description of the resource in prose',
+      help_text='Provides the description of the resource in prose; the ' \
+      'element can be repeated for the different language versions using' \
+      ' the "lang" attribute to specify the language.',
       )
 
     resourceShortName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
@@ -369,7 +373,9 @@ class identificationInfoType_model(SchemaModel):
       verbose_name='Resource short name', 
       max_val_length=500, 
       help_text='The short form (abbreviation, acronym etc.) used to ide' \
-      'ntify the resource',
+      'ntify the resource; the element can be repeated for the different' \
+      ' language versions using the "lang" attribute to specify the lang' \
+      'uage.',
       blank=True)
 
     url = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=0, max_length=1000), 
@@ -382,14 +388,14 @@ class identificationInfoType_model(SchemaModel):
     metaShareId = XmlCharField(
       verbose_name='Meta share id', 
       help_text='An unambiguous referent to the resource within META-SHA' \
-      'RE',
+      'RE; it reflects to the unique system id provided automatically by' \
+      ' the MetaShare software',
       max_length=100, default="NOT_DEFINED_FOR_V2", )
 
     identifier = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=1, max_length=100), 
       verbose_name='Identifier', 
       help_text='A reference to the resource like a pid or an internal i' \
-      'dentifier used by the resource provider; the attribute "type" is ' \
-      'obligatorily used for further specification',
+      'dentifier used by the resource provider',
       blank=True, validators=[validate_matches_xml_char_production], )
 
     def __unicode__(self):
@@ -545,8 +551,9 @@ class validationInfoType_model(SchemaModel):
 
     validationReport = models.ForeignKey("documentationInfoType_model", 
       verbose_name='Validation report', 
-      help_text='A short account of the validation details or a link to ' \
-      'the validation report',
+      help_text='A short account of the validation details or a bibliogr' \
+      'aphic reference to a document with detailed information on the va' \
+      'lidation process and results',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
     validationTool = models.ForeignKey("targetResourceInfoType_model", 
@@ -709,13 +716,14 @@ class metadataInfoType_model(SchemaModel):
 
     metadataCreationDate = models.DateField(
       verbose_name='Metadata creation date', 
-      help_text='The date of creation of this metadata description',
+      help_text='The date of creation of this metadata description (auto' \
+      'matically inserted by the MetaShare software)',
       )
 
     metadataCreator = models.ManyToManyField("personInfoType_model", 
       verbose_name='Metadata creator', 
-      help_text='Groups information on the person that created the metad' \
-      'ata in META-SHARE editor; to be automatically assigned',
+      help_text='Groups information on the person that has created the m' \
+      'etadata record',
       blank=True, null=True, related_name="metadataCreator_%(class)s_related", )
 
     source = XmlCharField(
@@ -732,24 +740,32 @@ class metadataInfoType_model(SchemaModel):
 
     originalMetadataLink = XmlCharField(
       verbose_name='Original metadata link', validators=[HTTPURI_VALIDATOR], 
-      help_text='A link to the metadata of the original source',
+      help_text='A link to the original metadata record, in cases of har' \
+      'vesting',
       blank=True, max_length=1000, )
 
     metadataLanguageName = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=2, max_length=1000), 
       verbose_name='Metadata language name', 
       help_text='The name of the language in which the metadata descript' \
-      'ion is written according to IETF BCP47',
+      'ion is written; an autocompletion mechanism with values from the ' \
+      'ISO 639 is provided in the editor, but the values can be subseque' \
+      'ntly edited for further specification (according to the IETF BCP4' \
+      '7 guidelines)',
       blank=True, validators=[validate_matches_xml_char_production], )
 
     metadataLanguageId = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=3, max_length=1000), 
       verbose_name='Metadata language id', 
       help_text='The identifier of the language in which the metadata de' \
-      'scription is written according to IETF BCP47',
+      'scription is written; an autocompletion mechanism with values fro' \
+      'm the ISO 639 is provided in the editor, but the values can be su' \
+      'bsequently edited for further specification (according to the IET' \
+      'F BCP47 guidelines)',
       blank=True, validators=[validate_matches_xml_char_production], )
 
     metadataLastDateUpdated = models.DateField(
       verbose_name='Metadata last date updated', 
-      help_text='The date of the last updating of the metadata record',
+      help_text='The date of the last updating of the metadata record (a' \
+      'utomatically inserted by the MetaShare software)',
       blank=True, null=True, )
 
     revision = XmlCharField(
@@ -765,9 +781,9 @@ class metadataInfoType_model(SchemaModel):
 # pylint: disable-msg=C0103
 class documentationInfoType_model(SubclassableModel):
     """
-    Groups information on the documentation of the resource pointing to
-    either structured and unstructured presentation of the relevant
-    documents
+    Used to bring together information on documents (as a structured
+    bibliographic record or in an unstructured format) and free text
+    descriptions
     """
 
     __schema_name__ = 'SUBCLASSABLE'
@@ -929,14 +945,18 @@ class documentInfoType_model(documentationInfoType_model):
 
     documentLanguageName = XmlCharField(
       verbose_name='Document language name', 
-      help_text='The name of the language the document is written in, as' \
-      ' mentioned in IETF BCP47',
+      help_text='The name of the language the document is written in; an' \
+      ' autocompletion mechanism with values from the ISO 639 is provide' \
+      'd in the editor, but the values can be subsequently edited for fu' \
+      'rther specification (according to the IETF BCP47 guidelines)',
       blank=True, max_length=150, )
 
     documentLanguageId = XmlCharField(
       verbose_name='Document language id', 
-      help_text='The id of the language the document is written in, as m' \
-      'entioned in IETF BCP47',
+      help_text='The id of the language the document is written in; an a' \
+      'utocompletion mechanism with values from the ISO 639 is provided ' \
+      'in the editor, but the values can be subsequently edited for furt' \
+      'her specification (according to the IETF BCP47 guidelines)',
       blank=True, max_length=20, )
 
 
@@ -1250,14 +1270,18 @@ class annotationInfoType_model(SchemaModel):
 
     tagsetLanguageId = XmlCharField(
       verbose_name='Tagset language id', 
-      help_text='The identifier of the tagset language as expressed in t' \
-      'he values of IETF BP47',
+      help_text='The identifier of the tagset language; an autocompletio' \
+      'n mechanism with values from the ISO 639 is provided in the edito' \
+      'r, but the values can be subsequently edited for further specific' \
+      'ation (according to the IETF BCP47 guidelines)',
       blank=True, max_length=20, )
 
     tagsetLanguageName = XmlCharField(
       verbose_name='Tagset language name', 
-      help_text='The name of the tagset language expressed in the values' \
-      ' of IETF BP47',
+      help_text='The name of the tagset language; an autocompletion mech' \
+      'anism with values from the ISO 639 is provided in the editor, but' \
+      ' the values can be subsequently edited for further specification ' \
+      '(according to the IETF BCP47 guidelines)',
       blank=True, max_length=100, )
 
     conformanceToStandardsBestPractices = MultiSelectField(
@@ -2759,12 +2783,16 @@ class distributionInfoType_model(SchemaModel):
 
     availabilityEndDate = models.DateField(
       verbose_name='Availability end date', 
-      help_text='Specifies the end date of availability of a resource',
+      help_text='Specifies the end date of availability of a resource - ' \
+      'only for cases where a resource is available for a restricted tim' \
+      'e period.',
       blank=True, null=True, )
 
     availabilityStartDate = models.DateField(
       verbose_name='Availability start date', 
-      help_text='Specifies the start date of availability of a resource',
+      help_text='Specifies the start date of availability of a resource ' \
+      '- only for cases where a resource is available for a restricted t' \
+      'ime period.',
       blank=True, null=True, )
 
     def real_unicode_(self):
@@ -2891,8 +2919,7 @@ class licenceInfoType_model(SchemaModel):
 
     restrictionsOfUse = MultiSelectField(
       verbose_name='Restrictions of use', 
-      help_text='Specifies the restrictions imposed by the type of the l' \
-      'icence',
+      help_text='Specifies the restrictions imposed by the licence',
       blank=True, 
       max_length=1 + len(LICENCEINFOTYPE_RESTRICTIONSOFUSE_CHOICES['choices']) / 4,
       choices=LICENCEINFOTYPE_RESTRICTIONSOFUSE_CHOICES['choices'],
@@ -2921,7 +2948,7 @@ class licenceInfoType_model(SchemaModel):
     fee = XmlCharField(
       verbose_name='Fee', 
       help_text='Specifies the costs that are required to access the res' \
-      'ource, a fragment of the resource or to use atool or service',
+      'ource, a fragment of the resource or to use a tool or service',
       blank=True, max_length=100, )
 
     attributionText = DictField(validators=[validate_lang_code_keys, validate_dict_values],
@@ -2929,24 +2956,25 @@ class licenceInfoType_model(SchemaModel):
       verbose_name='Attribution text', 
       max_val_length=1000, 
       help_text='The text that must be quoted for attribution purposes w' \
-      'hen using a resource',
+      'hen using a resource - for cases where a resource is provided wit' \
+      'h a restriction on attribution',
       blank=True)
 
     licensor = models.ManyToManyField("actorInfoType_model", 
       verbose_name='Licensor', 
-      help_text='Groups information on person who is legally eligible to' \
-      ' licence and actually licenses the resource. The licensor could b' \
-      'e different from the creator, the distributor or the IP rightshol' \
-      'der. The licensor has the necessary rights or licences to license' \
-      ' the work and is the party that actually licenses the resource th' \
-      'at enters the META-SHARE network. She will have obtained the nece' \
-      'ssary rights or licences from the IPR holder and she may have a d' \
-      'istribution agreement with a distributor that disseminates the wo' \
-      'rk under a set of conditions defined in the specific licence and ' \
-      'collects revenue on the licensor\'s behalf. The attribution of th' \
-      'e creator, separately from the attribution of the licensor, may b' \
-      'e part of the licence under which the resource is distributed (as' \
-      ' e.g. is the case with Creative Commons Licences)',
+      help_text='Groups information on the person who is legally eligibl' \
+      'e to licence and actually licenses the resource. The licensor cou' \
+      'ld be different from the creator, the distributor or the IP right' \
+      'sholder. The licensor has the necessary rights or licences to lic' \
+      'ense the work and is the party that actually licenses the resourc' \
+      'e that enters the META-SHARE network. She will have obtained the ' \
+      'necessary rights or licences from the IPR holder and she may have' \
+      ' a distribution agreement with a distributor that disseminates th' \
+      'e work under a set of conditions defined in the specific licence ' \
+      'and collects revenue on the licensor\'s behalf. The attribution o' \
+      'f the creator, separately from the attribution of the licensor, m' \
+      'ay be part of the licence under which the resource is distributed' \
+      ' (as e.g. is the case with Creative Commons Licences)',
       blank=True, null=True, related_name="licensor_%(class)s_related", )
 
     distributionRightsHolder = models.ManyToManyField("actorInfoType_model", 
@@ -3317,15 +3345,19 @@ class languageInfoType_model(SchemaModel):
     languageId = XmlCharField(
       verbose_name='Language id', 
       help_text='The identifier of the language that is included in the ' \
-      'resource or supported by the tool/service according to the IETF B' \
-      'CP47 standard',
+      'resource or supported by the tool/service; an autocompletion mech' \
+      'anism with values from the ISO 639 is provided in the editor, but' \
+      ' the values can be subsequently edited for further specification ' \
+      '(according to the IETF BCP47 guidelines)',
       max_length=1000, )
 
     languageName = XmlCharField(
       verbose_name='Language name', 
       help_text='A human understandable name of the language that is use' \
-      'd in the resource or supported by the tool/service according to t' \
-      'he IETF BCP47 standard',
+      'd in the resource or supported by the tool/service; an autocomple' \
+      'tion mechanism with values from the ISO 639 is provided in the ed' \
+      'itor, but the values can be subsequently edited for further speci' \
+      'fication (according to the IETF BCP47 guidelines)',
       max_length=1000, )
 
     languageScript = XmlCharField(
