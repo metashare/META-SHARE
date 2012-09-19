@@ -10,7 +10,7 @@
 	<div>
 		<label class="dataline">
 			{% if contact_person_dict.Contact_person.Communication.Url %}
-				<a href="{{contact_person_dict.Contact_person.Communication.Url}}">
+				<a href="{{contact_person_dict.Contact_person.Communication.Url}}" target='_blank'>
 			{% endif %}
 					{{ contact_person_dict.Contact_person.Given_name }}
 					{{ contact_person_dict.Contact_person.Surname }}
@@ -88,7 +88,7 @@
 	<div>
 		<label class="dataline">
 			{% if contact_person_dict.Contact_person.Affiliation.Url %}
-				<a href="{{communication_org_dict.Url}}">
+				<a href="{{communication_org_dict.Url}}" target='_blank'>
 			{% endif %}
 					{{ contact_person_dict.Contact_person.Affiliation.Organization_name }}
 			{% if contact_person_dict.Contact_person.Affiliation.Url %}
