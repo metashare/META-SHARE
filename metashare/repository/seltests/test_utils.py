@@ -43,8 +43,7 @@ def click_menu_item(driver, web_ele):
 def save_and_close(driver, target_id):
     """
     Clicks the save button in the current window, waits until it is closed and
-    then changes to the window with the given target id.
-    is closed.
+    then changes to the window with the given target id is closed.
     """
     current_id = driver.current_window_handle
     driver.find_element_by_name("_save").click()
@@ -59,8 +58,8 @@ def save_and_close(driver, target_id):
 
 def cancel_and_close(driver, target_id):
     """
-    Clicks the cancel button in the current window, waits until it is closed and
-    then changes to the window with the given target id.
+    Clicks the cancel button in the current window, confirm the alert dialog,
+    waits until it is closed and then changes to the window with the given target id
     is closed.
     """
     current_id = driver.current_window_handle
@@ -76,6 +75,17 @@ def cancel_and_close(driver, target_id):
     # TODO remove this workaround when Selenium starts working again as intended
     time.sleep(1)
     driver.switch_to_window(target_id)
+
+def cancel_and_continue(driver, target_id):
+    """
+    Clicks the cancel button in the current window, confirm the alert dialog and continue
+    """
+    current_id = driver.current_window_handle
+    driver.find_element_by_name("_cancel").click()
+    alert = driver.switch_to_alert()
+    alert.accept()
+    # TODO remove this workaround when Selenium starts working again as intended
+    time.sleep(1)
 
 def click_and_wait(web_ele):
     """
