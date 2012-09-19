@@ -92,7 +92,7 @@ label.component{
 	border-bottom-right-radius: 0;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
-    box-shadow:0 3px 10px #CCCCCC, 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
+	box-shadow:0 3px 10px #CCCCCC, 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
 	font-size: 14px;
 	font-weight: 600;
 	margin-right: 1px;	
@@ -268,4 +268,10 @@ label span a{
 img.line{
 	width:273px;
 	height:20px;
+}
+
+hr{
+	height:2px;
+	margin:10px 0 10px 0;
+	box-shadow:1px 3px 5px #CCCCCC;
 }
