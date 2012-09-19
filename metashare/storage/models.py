@@ -302,7 +302,7 @@ class StorageObject(models.Model):
             _so_needs_saving = False
 
         # for internal resources, no serialization is done
-        if self.publication_status is INTERNAL:
+        if self.publication_status == INTERNAL:
             if _so_needs_saving:
                 self.save()
             return
