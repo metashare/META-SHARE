@@ -352,7 +352,10 @@ def expandGroupReferences(grp):
 
 class XschemaElementBase:
     def __init__(self):
-        pass
+        self.restrictionMaxLength = -1
+
+    def getRestrictionMaxLength(self): return self.restrictionMaxLength
+    def setRestrictionMaxLength(self, mxLen): self.restrictionMaxLength = mxLen
 
 
 class SimpleTypeElement(XschemaElementBase):
@@ -484,7 +487,6 @@ class XschemaElement(XschemaElementBase):
         self.listType = 0
         self.simpleBase = []
         self.documentation = ''
-        self.restrictionMaxLength = -1
         self.restrictionBase = None
         self.simpleContent = False
         self.extended = False
@@ -551,8 +553,6 @@ class XschemaElement(XschemaElementBase):
     def getSimpleBase(self): return self.simpleBase
     def setSimpleBase(self, simpleBase): self.simpleBase = simpleBase
     def addSimpleBase(self, simpleBase): self.simpleBase.append(simpleBase)
-    def getRestrictionMaxLength(self): return self.restrictionMaxLength
-    def setRestrictionMaxLength(self, mxLen): self.restrictionMaxLength = mxLen
     def getRestrictionBase(self): return self.restrictionBase
     def setRestrictionBase(self, base): self.restrictionBase = base
     def getRestrictionBaseObj(self):
@@ -781,9 +781,13 @@ class XschemaElement(XschemaElementBase):
                     # and can return the correct base type.
                     t = element.resolve_type_1()
                     if t in SimpleTypeDict:
-                        type_val1 = SimpleTypeDict[t].getBase()
+                        _simple_type = SimpleTypeDict[t]
+                        type_val1 = _simple_type.getBase()
                         if type_val1 and not is_builtin_simple_type(type_val1):
                             type_val1 = strip_namespace(type_val1)
+                        # Resolve our potential maxLength restriction if present
+                        self.setRestrictionMaxLength(
+                            _simple_type.getRestrictionMaxLength())
                         break
                     # If the type name is the same as the previous type name
                     # then we know we've fully resolved the Element hierarchy
@@ -799,8 +803,14 @@ class XschemaElement(XschemaElementBase):
                     #   </xsd:simpleType>
                     if t == type_val1 and i != 0:
                         break
+                    # If the type is not in the ElementDict, then `element` may
+                    # have been resolved previously already (?) and we can
+                    # inherit properties like the maxLength restriction
                     if t not in ElementDict:
                         type_val1 = t
+                        # inherit a maxLength restriction if present
+                        self.setRestrictionMaxLength(
+                            element.getRestrictionMaxLength())
                         break
                     type_val1 = t
                     i += 1
@@ -814,6 +824,9 @@ class XschemaElement(XschemaElementBase):
                 while True:
                     element = SimpleTypeDict[type_val1]
                     type_val1 = element.getBase()
+                    # inherit a maxLength restriction if present
+                    self.setRestrictionMaxLength(
+                        element.getRestrictionMaxLength())
                     if type_val1 and not is_builtin_simple_type(type_val1):
                         type_val1 = strip_namespace(type_val1)
                     if type_val1 is None:
@@ -1383,14 +1396,7 @@ class XschemaHandler(handler.ContentHandler):
         elif name == MaxLengthType:
             # currently we only handle "maxLength" elements in restrictions
             if self.inRestrictionType and attrs.has_key('value'):
-                parent_elem = self.stack[-1]
-                if isinstance(parent_elem, SimpleTypeElement):
-                    if len(self.stack) > 1:
-                        self.stack[-2].setRestrictionMaxLength(
-                                                        attrs.getValue('value'))
-                    # otherwise we currently don't use the maxLength restriction
-                else:
-                    parent_elem.setRestrictionMaxLength(attrs.getValue('value'))
+                self.stack[-1].setRestrictionMaxLength(attrs.getValue('value'))
         logging.debug("Start element stack: %d" % len(self.stack))
 
     def endElement(self, name):
