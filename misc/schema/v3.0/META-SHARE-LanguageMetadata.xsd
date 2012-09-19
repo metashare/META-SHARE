@@ -7,7 +7,7 @@
 	<!-- definition of complex types -->
 	<!-- media type info TextInfo/imageInfo/AudioInfo/VideInfo etc-->
 	<xs:complexType name="characterEncodingInfoType">
-		<xs:annotation>	
+		<xs:annotation>
 			<xs:documentation>Groups together information on character encoding of the resource</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
@@ -200,7 +200,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="sizePerLanguageVariety" type="ms:sizeInfoType" minOccurs="0" maxOccurs="1">				
+			<xs:element name="sizePerLanguageVariety" type="ms:sizeInfoType" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Provides information on the size per language variety component</xs:documentation>
 					<xs:appinfo>
@@ -213,7 +213,7 @@
 	</xs:complexType>
 	<xs:element name="languageName">
 		<xs:annotation>
-			<xs:documentation>A human understandable name of the language that is used in the resource or supported by the tool/service according to the IETF BCP47 standard</xs:documentation>
+			<xs:documentation>A human understandable name of the language that is used in the resource or supported by the tool/service; an autocompletion mechanism with values from the ISO 639 is provided in the editor, but the values can be subsequently edited for further specification (according to the IETF BCP47 guidelines)</xs:documentation>
 		</xs:annotation>
 		<xs:simpleType>
 			<xs:restriction base="xs:string">
@@ -223,7 +223,7 @@
 	</xs:element>
 	<xs:element name="languageId">
 		<xs:annotation>
-			<xs:documentation>The identifier of the language that is included in the resource or supported by the tool/service according to the IETF BCP47 standard</xs:documentation>
+			<xs:documentation>The identifier of the language that is included in the resource or supported by the tool/service; an autocompletion mechanism with values from the ISO 639 is provided in the editor, but the values can be subsequently edited for further specification (according to the IETF BCP47 guidelines)</xs:documentation>
 		</xs:annotation>
 		<xs:simpleType>
 			<xs:restriction base="xs:string">
@@ -241,7 +241,7 @@
 		<xs:sequence>
 			<xs:element ref="ms:languageId">
 				<xs:annotation>
-					<xs:documentation>The identifier of the language that is included in the resource or supported by the tool/service according to the IETF BCP47 standard</xs:documentation>
+					<xs:documentation>The identifier of the language that is included in the resource or supported by the tool/service; an autocompletion mechanism with values from the ISO 639 is provided in the editor, but the values can be subsequently edited for further specification (according to the IETF BCP47 guidelines)</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
 					</xs:appinfo>
@@ -249,7 +249,7 @@
 			</xs:element>
 			<xs:element ref="ms:languageName">
 				<xs:annotation>
-					<xs:documentation>A human understandable name of the language that is used in the resource or supported by the tool/service according to the IETF BCP47 standard</xs:documentation>
+					<xs:documentation>A human understandable name of the language that is used in the resource or supported by the tool/service; an autocompletion mechanism with values from the ISO 639 is provided in the editor, but the values can be subsequently edited for further specification (according to the IETF BCP47 guidelines)</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
 					</xs:appinfo>

@@ -57,9 +57,9 @@ sqs = SearchQuerySet() \
   .facet("videoScenarioTypeFilter") \
   .facet("imageImageGenreFilter") \
   .facet("imageTypeOfImageContentFilter") \
-  .facet("textNumericalTypeOfTnContentFilter") \
-  .facet("textNgramBaseItemFilter") \
-  .facet("textNgramOrderFilter") \
+  .facet("textnumericalTypeOfTnContentFilter") \
+  .facet("textngramBaseItemFilter") \
+  .facet("textngramOrderFilter") \
   .facet("languageVarietyFilter")
 
 urlpatterns = patterns('metashare.repository.views',

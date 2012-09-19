@@ -145,8 +145,8 @@ def checksum(object_id):
     
     else:
         storage_object = storage_object[0]
-    
-    storage_object.save()
+
+    storage_object.update_storage()
     print "Checksum: {0}".format(storage_object.checksum)
 
 def folder(object_id):
