@@ -489,7 +489,7 @@ def view(request, resource_name=None, object_id=None):
 
     # Convert resource_component_tuple to nested dictionaries
     resource_component_dict = tuple2dict(resource_component_tuple)
-#    lr_content_dict = tuple2dict([lr_content])
+
     resource_component_dicts = {}
 
     resource_creation_dict = {}
