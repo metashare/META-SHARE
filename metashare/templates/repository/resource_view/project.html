@@ -20,7 +20,7 @@
 
 <div class="dataline">
 	<label>
-		Funding Type: {{ project.Funding_type }}
+		<b>Funding Type:</b> {{ project.Funding_type }}
 	</label>
 </div>
 
@@ -28,7 +28,7 @@
 <div class="dataline">
 	<label>
 		{% if project.Funder %}
-		Funder:	{{ project.Funder }}
+		<b>Funder:</b>	{{ project.Funder }}
 		{% endif %}
 	</label>
 </div>
@@ -38,7 +38,7 @@
 <div class="dataline">
 	<label>
 		{% if project.Funding_country %}
-		Funding Country:	{{ project.Funding_country }}
+		<b>Funding Country:</b>	{{ project.Funding_country }}
 		{% endif %}
 	</label>
 </div>
