@@ -1,11 +1,16 @@
 """
-Management utility to trigger digest updating.
+Management utility to handle removed proxy nodes.
 """
 from django.core.management.base import BaseCommand
 from metashare import settings
 from metashare.storage.models import PROXY, StorageObject, RemovedObject
 from metashare.sync.sync_utils import remove_resource
 import sys
+import logging
+
+# Setup logging support.
+LOGGER = logging.getLogger(__name__)
+LOGGER.addHandler(settings.LOG_HANDLER)
 
 class Command(BaseCommand):
     
@@ -14,22 +19,23 @@ class Command(BaseCommand):
     
     def handle(self, *args, **options):
         
-        # collect current proxy urls
-        proxy_urls = []
-        for proxy in settings.PROXIED_NODES:
-            proxy_urls.append(settings.PROXIED_NODES[proxy]['URL'])   
+        # collect current proxied node ids
+        proxied_ids = [p for p in settings.PROXIED_NODES]
 
-        # iterate over proxy resources and check for each if its source url
-        # is still listed in the proxied node list
+        # iterate over proxy resources and check for each if its source node id
+        # is still listed in the proxied node id list
         remove_count = 0
         for proxy_res in StorageObject.objects.filter(copy_status=PROXY):
-            if not proxy_res.source_url in proxy_urls:
+            if not proxy_res.source_node in proxied_ids:
                 # delete the associated resource and create a RemovedObject
                 # to let the other nodes know that the resource has been removed
                 # when synchronizing
                 sys.stdout.write("\nremoving proxied resource {}\n".format(proxy_res.identifier))
+                LOGGER.info("removing from proxied node {} resource {}".format(proxy_res.source_node, proxy_res.identifier))
                 remove_count += 1
-                rem_obj = RemovedObject.objects.create(identifier=proxy_res.identifier)
+                # if there is already a RemoveObject, we just use that
+                rem_obj = RemovedObject.objects.get_or_create(identifier=proxy_res.identifier)[0]
                 rem_obj.save()
                 remove_resource(proxy_res)
         sys.stdout.write("\n{} proxied resources removed\n".format(remove_count))
+        LOGGER.info("A total of {} resources have been removed".format(remove_count))
