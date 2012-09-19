@@ -281,13 +281,15 @@ class StorageObject(models.Model):
         # Call save() method from super class with all arguments.
         super(StorageObject, self).save(*args, **kwargs)
     
-    def update_storage(self):
+    def update_storage(self, force_digest=False):
         """
         Updates the metadata XML if required and serializes it and this storage
         object to the storage folder.
+        
+        force_digest (optional): if True, always recreate the digest zip-archive
         """
         # for internal resources, no serialization is done
-        if self.publication_status is INTERNAL:
+        if self.publication_status == INTERNAL:
             return
         
         # check if the storage folder for this storage object instance exists
@@ -308,13 +310,13 @@ class StorageObject(models.Model):
         global_updated = self.check_global_storage_object()
         
         # create new digest zip-archive if required
-        if metadata_updated or global_updated:
+        if force_digest or metadata_updated or global_updated:
             self.create_digest()
             
         # check local storage object serialization
         local_updated = self.check_local_storage_object()
         
-        # save storage object if required; this should always happend since
+        # save storage object if required; this should always happen since
         # at least self.digest_last_checked in the local storage object 
         # has changed
         if metadata_updated or global_updated or local_updated:
@@ -442,7 +444,8 @@ class StorageObject(models.Model):
         return False
 
 
-def restore_from_folder(storage_id, copy_status=MASTER, storage_digest=None, source_node=None):
+def restore_from_folder(storage_id, copy_status=MASTER, \
+  storage_digest=None, source_node=None, force_digest=False):
     """
     Restores the storage object and the associated resource for the given
     storage object identifier and makes it persistent in the database. 
@@ -459,7 +462,9 @@ def restore_from_folder(storage_id, copy_status=MASTER, storage_digest=None, sou
 
     source_node (optional): the source node if to set in the restored
         storage object
-            
+    
+    force_digest (optional): if True, always recreate the digest zip-archive
+    
     Returns the restored resource with its storage object set.
     """
     from metashare.repository.models import resourceInfoType_model
@@ -504,6 +509,7 @@ def restore_from_folder(storage_id, copy_status=MASTER, storage_digest=None, sou
     else:
         LOGGER.warn('missing storage-global.json, importing resource as new')
         _storage_object.identifier = storage_id
+        
     # add local storage object attributes if available 
     if os.path.isfile('{0}/storage-local.json'.format(storage_folder)):
         _local_json = \
@@ -530,14 +536,10 @@ def restore_from_folder(storage_id, copy_status=MASTER, storage_digest=None, sou
     # set source node id if provided (usually for non-local resources)
     if source_node:
         _storage_object.source_node = source_node
-    # create digest for master and proxy copies
-    if _storage_object.copy_status in (MASTER, PROXY):
-        _storage_object.digest_last_checked = datetime.now()
-        _storage_object.create_digest()
-        # check local storage object serialization
-        _storage_object.check_local_storage_object()
-
-    _storage_object.save()
+    
+    _storage_object.update_storage(force_digest=force_digest)
+    # update_storage includes saving
+    #_storage_object.save()
         
     return resource
 
@@ -601,7 +603,7 @@ def add_or_update_resource(storage_json, resource_xml_string, storage_digest,
     except ObjectDoesNotExist:
         pass
     return restore_from_folder(storage_id, copy_status=copy_status,
-                        storage_digest=storage_digest, source_node=source_node)
+      storage_digest=storage_digest, source_node=source_node, force_digest=True)
 
 
 def _fill_storage_object(storage_obj, json_file_name):
