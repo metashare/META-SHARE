@@ -381,6 +381,10 @@ div#footer{
 	clear: both;
 }
 
+img.throbber {
+	background-image: url(../img/admin/throbber_16.gif);
+	/*background-repeat: no-repeat;*/
+}
 div#footer a{
 	text-decoration: none;
 	color: 	#FF9900;
@@ -392,4 +396,8 @@ div#footer a:hover{
 ul.related_resources {
 	max-height: 8ex;
 	margin: 0 0 0 0.75em;
+}
+
+input.ui-state-not-found {
+	background:#FF8888;
 }

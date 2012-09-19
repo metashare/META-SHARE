@@ -223,16 +223,17 @@ class StorageObject(models.Model):
     
     def _compute_checksum(self):
         """
-        Computes the MD5 hash checksum for this storage object instance.
+        Computes the MD5 hash checksum for the binary archive which may be
+        attached to this storage object instance and sets it in `self.checksum`.
         
-        Reads in the downloadable data in blocks of MAXIMUM_MD5_BLOCK_SIZE
-        bytes which is possible as MD5 allows incremental hash computation.
+        Returns whether `self.checksum` was changed in this method. 
         """
         if not self.master_copy or not self.get_download():
-            return
-        
-        self.checksum = compute_checksum(self.get_download())
+            return False
 
+        _old_checksum = self.checksum
+        self.checksum = compute_checksum(self.get_download())
+        return _old_checksum != self.checksum
 
     def has_local_download_copy(self):
         """
@@ -289,19 +290,23 @@ class StorageObject(models.Model):
         Updates the metadata XML if required and serializes it and this storage
         object to the storage folder.
         """
-        # for internal resources, no serialization is done
-        if self.publication_status is INTERNAL:
-            return
-        
         # check if the storage folder for this storage object instance exists
         if self._storage_folder() and not exists(self._storage_folder()):
             # If not, create the storage folder.
             mkdir(self._storage_folder())
-        
+
         # update the checksum, if a downloadable file exists
         if self.master_copy:
-            self._compute_checksum()
-        
+            _so_needs_saving = self._compute_checksum()
+        else:
+            _so_needs_saving = False
+
+        # for internal resources, no serialization is done
+        if self.publication_status is INTERNAL:
+            if _so_needs_saving:
+                self.save()
+            return
+
         self.digest_last_checked = datetime.now()        
 
         # flag to indicate if rebuilding of metadata.xml is required
@@ -609,6 +614,8 @@ def compute_checksum(infile):
             instream = infile
         else:
             instream = open(infile, 'rb')
+        # Read in the downloadable data in blocks of MAXIMUM_MD5_BLOCK_SIZE
+        # bytes which is possible as MD5 allows incremental hash computation.
         chunk = instream.read(MAXIMUM_MD5_BLOCK_SIZE)
         while chunk:
             checksum.update(chunk)

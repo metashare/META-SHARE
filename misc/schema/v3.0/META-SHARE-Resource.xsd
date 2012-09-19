@@ -8,7 +8,7 @@
 		<xs:annotation>
 			<xs:documentation>Groups together all information required for the description of language resources</xs:documentation>
 			<xs:appinfo>
-			    <render-short>{identificationInfo/resourceName}</render-short>
+				<render-short>{identificationInfo/resourceName}</render-short>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
@@ -30,7 +30,7 @@
 			</xs:element>
 			<xs:element name="contactPerson" type="ms:personInfoType" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Groups information on the person(s) that is responsible for giving information for the resource </xs:documentation>
+					<xs:documentation>Groups information on the person(s) that is/are responsible for providing further information regarding the resource</xs:documentation>
 					<xs:appinfo>
 						<relation>many-to-many</relation>
 					</xs:appinfo>
