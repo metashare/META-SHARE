@@ -297,13 +297,13 @@ class StorageObject(models.Model):
 
         # update the checksum, if a downloadable file exists
         if self.master_copy:
-            _so_needs_saving = self._compute_checksum()
+            checksum_updated = self._compute_checksum()
         else:
-            _so_needs_saving = False
+            checksum_updated = False
 
         # for internal resources, no serialization is done
         if self.publication_status == INTERNAL:
-            if _so_needs_saving:
+            if checksum_updated:
                 self.save()
             return
 
@@ -325,7 +325,8 @@ class StorageObject(models.Model):
         # save storage object if required; this should always happen since
         # at least self.digest_last_checked in the local storage object 
         # has changed
-        if metadata_updated or global_updated or local_updated:
+        if checksum_updated or metadata_updated or global_updated \
+                or local_updated:
             self.save()
 
 
