@@ -4,23 +4,34 @@
 <label class='title'>{{ resource_component.Linguality.Linguality_type }} {{ type }} {{ resourceType }}</label>
 
 {# Language Information #}
-{% include "repository/resource_view/language.html" with languages=resource_component %}
+{% if "Language" in resource_component %}
+	{% include "repository/resource_view/language.html" with languages=resource_component %}
+{% endif %}
 
 {# Text type Information #}
-{% include "repository/resource_view/text_type.html" with text_types=resource_component %}
+{% if "Text_format" in resource_component %}
+	{% include "repository/resource_view/text_type.html" with text_types=resource_component %}
+{% endif %}
 
 {# Size Information #}
-{% include "repository/resource_view/size.html" with size=resource_component %}
+{% if "Size" in resource_component %}
+	{% include "repository/resource_view/size.html" with size=resource_component %}
+{% endif %}
 
 {# Domain Information #}
-{% include "repository/resource_view/domain.html" with domains=resource_component %}
+{% if "Domain" in resource_component %}
+	{% include "repository/resource_view/domain.html" with domains=resource_component %}
+{% endif %}
 
 {# Modality Information #}
-{% include "repository/resource_view/modality.html" with modalities=resource_component %}
+{% if "Modality" in resource_component %}
+	{% include "repository/resource_view/modality.html" with modalities=resource_component %}
+{% endif %}
 
 {# Annotation Information #}
-{% include "repository/resource_view/annotation.html" with annotations=resource_component %}
-
+{% if "Annotation" in resource_component %}
+	{% include "repository/resource_view/annotation.html" with annotations=resource_component %}
+{% endif %}
 
 
 
