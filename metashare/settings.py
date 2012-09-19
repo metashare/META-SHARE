@@ -191,6 +191,7 @@ except ImportError:
 PROJECT_APPS = (
     'metashare.repository',
     'metashare.accounts',
+    'metashare.stats',
     'metashare.storage',
     'metashare.sync',
     'metashare.recommendations',
