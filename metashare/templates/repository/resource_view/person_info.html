@@ -3,7 +3,25 @@
 {% spaceless %}
 
 <label class='component'>Contact Person</label>
-<div class="dataline contact">
+
+
+
+	<label class="dataline" style="float:left;">
+		{% if contact_person_dict.Contact_person.Communication.Url %}
+			<a href="{{contact_person_dict.Contact_person.Communication.Url}}" target='_blank'>
+		{% endif %}
+				{{ contact_person_dict.Contact_person.Given_name }}
+				{{ contact_person_dict.Contact_person.Surname }}
+		{% if contact_person_dict.Contact_person.Communication.Url %}
+			</a>
+		{% endif %}
+	</label>
+
+		<a href='#' class="contactcard" title="Click to view contact card">
+		<img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/vcard.png" class='vcard'/>
+		</a>
+
+<div class="contact hidden">
 	
 	{# Name, Surname and sex #}
 	<div>
