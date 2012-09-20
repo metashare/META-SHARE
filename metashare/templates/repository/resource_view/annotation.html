@@ -47,16 +47,15 @@
 				</label>
 			</div>
 		{% endif %}
+		
 		{% if value.Annotation_manual %}
 			<div>
 				<label class="dataline">
-					{% include "repository/resource_view/documentation.html" with documentation_dict=value.Annotation_manual type="Annotation_manual" %}
+					{% include "repository/resource_view/documentation.html" with documentation=value.Annotation_manual.Annotation_manual type="Annotation_manual" %}
 				</label>
 			</div>
 		{% endif %}
 
-
-		{{ value.Annotation_manual }}
 		{% if value.Annotation_tool %}
 			<b>Tool:</b> {{ value.Annotation_tool }}
 		{% endif %}

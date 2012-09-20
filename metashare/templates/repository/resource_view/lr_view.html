@@ -213,8 +213,16 @@
 			{% include "repository/resource_view/relation.html" %}
 		{% endif %}
 		
-		{% if documentation_info_tuple %}
-				{% include "repository/resource_view/documentation.html" with type="Documentation" %}
+		{% if documentation_dict %}
+			{% for key, value in documentation_dict.items %}
+					{% for key1, value1 in value.items %}		
+						{% for key2, value2 in value1.items %}				
+							{% if key2 == "Documentation" %}
+								{% include "repository/resource_view/documentation.html" with documentation=value2 type="Documentation" %}
+							{% endif %}
+						{% endfor %}
+					{% endfor %}
+			{% endfor %}
 		{% endif %}
 		
 		</div>
