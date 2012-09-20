@@ -35,12 +35,9 @@ div#stats{
 	margin-bottom:10px;
 }
 
-
 div.right-corner{
 	margin-right:0px!important;
 }
-
-
 
 .dataline label{
 	font-size: 14px;
@@ -55,13 +52,12 @@ label.title{
 	border-bottom:solid 1px #ccc;
 	border-left:solid 1px #ccc;
 	padding-left:2px;
-	
+	color:#333;	
 }
 
 label.title, label.component {
 	font-weight:bold;
-	margin: 0.3em 0 0.3em 0;
-	color:#777;
+	margin: 0.3em 0 0.3em 0;	
 	display:block;
 }
 
@@ -311,4 +307,12 @@ hr{
 
 .indented{
 	padding:0 10px 0 10px;
+}
+
+.hidden{
+	display:none;
+}
+
+.vcard{
+	padding-left:5px;
 }
