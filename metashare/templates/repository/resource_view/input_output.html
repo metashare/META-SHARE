@@ -1,0 +1,90 @@
+
+
+	<label class='component'>{{ type }}</label>
+	{% if data.Media_type %}
+		 <div class="dataline">
+			<label>
+				<b>Media type: </b>{{ data.Media_type }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if data.Resource_type %}
+		 <div class="dataline">
+			<label>
+				<b>Resource type: </b>{{ data.Resource_type }}
+			</label>
+		</div>
+	{% endif %}
+
+	{% if data.Modality_type %}
+		 <div class="dataline">
+			<label>
+				<b>Modality: </b>{{ data.Modality_type }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if data.Language_name %}
+		 <div class="dataline">
+			<label title="{{ data.Language_id }} {{ data.Language_variety_name }}">
+				<b>Language: </b>{{ data.Language_name }}
+			</label>
+		</div>
+	{% endif %}
+
+	{% if data.Mime_type %}
+		 <div class="dataline">
+			<label>
+				<b>Mime type: </b>{{ data.Mime_type }}
+			</label>
+		</div>
+	{% endif %}
+
+	{% if data.Character_encoding %}
+		 <div class="dataline">
+			<label>
+				<b>Character encoding: </b>{{ data.Character_encoding }}
+			</label>
+		</div>
+	{% endif %}
+
+	{% if data.Annotation_type %}
+		 <div class="dataline">
+			<label>
+				<b>Annotation type: </b>{{ data.Annotation_type }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if data.Annotation_format %}
+		 <div class="dataline">
+			<label>
+				<b>Annotation format: </b>{{ data.Annotation_format }}
+			</label>
+		</div>
+	{% endif %}
+
+	{% if data.Tagset %}
+		 <div class="dataline">
+			<label>
+				<b>Tagset: </b>{{ data.Tagset }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if data.Segmentation_level %}
+		 <div class="dataline">
+			<label>
+				<b>Segmentation level: </b>{{ data.Segmentation_level }}
+			</label>
+		</div>
+	{% endif %}
+
+	{% if data.Conformance_to_standards_best_practices %}
+		 <div class="dataline">
+			<label>
+				<b>Conformance to standards best practices:</b> {{ data.Conformance_to_standards_best_practices }}
+			</label>
+		</div>
+	{% endif %}

@@ -1,0 +1,164 @@
+{% spaceless %}
+
+
+
+	{% if tool_service.Tool_service_type %}			
+		 <div class="dataline">
+			<label>
+				<b>Type: </b>{{ tool_service.Tool_service_type }}
+			</label>
+		</div>
+	{% endif %}
+
+	{% if tool_service.Tool_service_subtype %}			
+		 <div class="dataline">
+			<label>
+				<b>Sub-type: </b>{{ tool_service.Tool_service_subtype }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if tool_service.Language_dependent %}			
+		 <div class="dataline">
+			<label>
+				<b>Language dependent: </b>{{ tool_service.Language_dependent }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% include "repository/resource_view/input_output.html" with type="Input" data=tool_service.Input %}
+	{% include "repository/resource_view/input_output.html" with type="Output" data=tool_service.Output %}
+	
+	{% if tool_service.tool_service_operation %}
+		<label class='Operation'></label>
+		{% if tool_service.tool_service_operation.Operating_system %}
+			 <div class="dataline">
+				<label>
+					<b>Operating system: </b>{{ tool_service.tool_service_operation.Operating_system }}
+				</label>
+			</div>
+		{% endif %}
+		
+		{% if tool_service.tool_service_operation.Running_environment %}
+			
+				 <div class="dataline">
+					<label>
+						<b>Operating system: </b>{{ tool_service.tool_service_operation.Operating_system }}
+					</label>
+				</div>
+			{% endif %}
+			
+			{% if tool_service.tool_service_operation.Operating_system %}
+				 <div class="dataline">
+					<label>
+						<b>Operating system: </b>{{ tool_service.tool_service_operation.Operating_system }}
+					</label>
+				</div>
+			{% endif %}
+		{% endif %}
+	
+	
+	
+	
+	
+	{% if tool_service.Language_dependent %}			
+		 <div class="dataline">
+			<label>
+				<b>Language dependent: </b>{{ tool_service.Language_dependent }}
+			</label>
+		</div>
+	{% endif %}
+
+
+	{% if tool_service.Language_dependent %}			
+		 <div class="dataline">
+			<label>
+				<b>Language dependent: </b>{{ tool_service.Language_dependent }}
+			</label>
+		</div>
+	{% endif %}
+
+
+	{% if tool_service.Language_dependent %}			
+		 <div class="dataline">
+			<label>
+				<b>Language dependent: </b>{{ tool_service.Language_dependent }}
+			</label>
+		</div>
+	{% endif %}
+
+
+	{% if tool_service.Language_dependent %}			
+		 <div class="dataline">
+			<label>
+				<b>Language dependent: </b>{{ tool_service.Language_dependent }}
+			</label>
+		</div>
+	{% endif %}
+
+
+	{% if tool_service.Language_dependent %}			
+		 <div class="dataline">
+			<label>
+				<b>Language dependent: </b>{{ tool_service.Language_dependent }}
+			</label>
+		</div>
+	{% endif %}
+
+
+	{% if tool_service.Language_dependent %}			
+		 <div class="dataline">
+			<label>
+				<b>Language dependent: </b>{{ tool_service.Language_dependent }}
+			</label>
+		</div>
+	{% endif %}
+
+
+	{% if tool_service.Language_dependent %}			
+		 <div class="dataline">
+			<label>
+				<b>Language dependent: </b>{{ tool_service.Language_dependent }}
+			</label>
+		</div>
+	{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="dataline">
+{% for key, value in metadata_dict.items %}
+		{% for key1, value1 in value.items %}
+			{% if key1 == "Metadata_creator" %}			
+			     {% include "repository/resource_view/person.html" with person_dict=value1 title="Metadata Creator" %}
+			{% endif %}			
+		{% endfor %}
+{% endfor %}
+</div>
+
+{% endspaceless %}
