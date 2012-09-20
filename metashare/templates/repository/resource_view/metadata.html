@@ -1,8 +1,5 @@
-{# MISSING: metadataLanguageName, metadataLanguageId #}
-
-<label class='component'>Metadata Info</label>
+<label class='component'>Metadata</label>
 <div>
-
 		{% if metadata_dict.Metadata.Metadata_creation_date %}			
 			 <div class="dataline indented">
 				<label>
@@ -18,7 +15,8 @@
 				</label>
 			</div>
 		{% endif %}
-
+		
+		
 		{% if metadata_dict.Metadata.Source %}
 			<div class="dataline indented">
 				<label>
@@ -36,6 +34,21 @@
 							{{ metadata_dict.Metadata.Original_metadata_schema }}
 					{% if metadata_dict.Metadata.Original_metadata_link %}
 						</a>
+					{% endif %}
+				</label>
+			</div>
+		{% endif %}
+		
+		{% if value2.Document_language_name %}
+		     <div class="dataline indented">
+				<label>
+					<b>Document Language:</b> 
+					{% if value2.Document_language_id %}
+						<span title="{{value2.Document_language_id}}">
+					{% endif %}
+					{{ value2.Document_language_name }}
+					{% if value2.Document_language_id %}
+						</span>
 					{% endif %}
 				</label>
 			</div>
