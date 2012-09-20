@@ -43,51 +43,11 @@
 				$(selected_tab).fadeIn();
 				return false;
 	  		});
-
-			$(".title.component").each(function() {
-				if($(this).nextUntil(".title.component").hasClass("optional")){
-					$(this).addClass("expandable");
-				}
-			});
 			
-			$(".dataline.optional").hide();
-			$(".expandable").addClass("collapsed");
-			$(".expandable").click(function() {
-				if($(this).hasClass("collapsed")){
-					$(this).removeClass('collapsed');
-					$(this).addClass('expanded');
-					$(this).nextUntil(".title.component").show();
-				}
-				else{
-					$(this).removeClass('expanded');
-					$(this).addClass('collapsed');						
-					 $(this).nextAll().each( function() {
-				           if ($(this).filter('.title').length) {
-				              return false;
-				           }
-				           $(this).filter('.optional').hide();
-				       });
-					
-				}
-			});
-			
-			$(".more").addClass("collapsed");
-			$(".otherlang").hide();
-			$(".more").click(function() {
-				if($(this).hasClass("collapsed")){
-					$(this).removeClass('collapsed');
-					$(this).addClass('expanded');
-				}
-				else{
-					$(this).removeClass('expanded');
-					$(this).addClass('collapsed');					
-				}
-				
-				
+			$(".contactcard").click(function() {				
 				$(this).next().toggle();
-				
+				return false;				
 			});
-			
 		});
 	</script>
 
