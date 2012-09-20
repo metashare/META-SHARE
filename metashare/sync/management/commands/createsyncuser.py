@@ -69,8 +69,15 @@ class Command(BaseCommand):
             sys.exit(1)
 
         user = User.objects.create_user(username, email, password)
-        syncpermission = Permission.objects.get(codename='can_sync', content_type__app_label='storage')
-        user.user_permissions.add(syncpermission)
+        grant_sync_permissions(user)
         if verbosity >= 1:
             self.stdout.write("User '{0}' with synchronization permissions created successfully.\n".format(username))
 
+
+def grant_sync_permissions(user):
+    """
+    Grant the permissions required for syncing to the given `User` object.
+    """
+    sync_permission = Permission.objects.get(codename='can_sync',
+        content_type__app_label='storage')
+    user.user_permissions.add(sync_permission)

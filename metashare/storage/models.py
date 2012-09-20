@@ -197,16 +197,13 @@ class StorageObject(models.Model):
     
     def get_digest_checksum(self):
         """
-        Checks if the current digest is still up-to-date, recreates it if
-        required, and returns the up-to-date digest checksum.
+        Checks if the current digest is till up-to-date, recreates it if
+        required, and return the up-to-date digest checksum.
         """
-        if not self.digest_modified or not self.digest_last_checked:
+        _expiration_date = _get_expiration_date()
+        if _expiration_date > self.digest_modified \
+          and _expiration_date > self.digest_last_checked: 
             self.update_storage()
-        else:
-            _expiration_date = _get_expiration_date()
-            if _expiration_date > self.digest_modified \
-              and _expiration_date > self.digest_last_checked:
-                self.update_storage()
         return self.digest_checksum
     
     def __unicode__(self):
@@ -234,6 +231,7 @@ class StorageObject(models.Model):
         _old_checksum = self.checksum
         self.checksum = compute_checksum(self.get_download())
         return _old_checksum != self.checksum
+
 
     def has_local_download_copy(self):
         """
@@ -285,10 +283,12 @@ class StorageObject(models.Model):
         # Call save() method from super class with all arguments.
         super(StorageObject, self).save(*args, **kwargs)
     
-    def update_storage(self):
+    def update_storage(self, force_digest=False):
         """
         Updates the metadata XML if required and serializes it and this storage
         object to the storage folder.
+        
+        force_digest (optional): if True, always recreate the digest zip-archive
         """
         # check if the storage folder for this storage object instance exists
         if self._storage_folder() and not exists(self._storage_folder()):
@@ -297,18 +297,49 @@ class StorageObject(models.Model):
 
         # update the checksum, if a downloadable file exists
         if self.master_copy:
-            _so_needs_saving = self._compute_checksum()
+            checksum_updated = self._compute_checksum()
         else:
-            _so_needs_saving = False
+            checksum_updated = False
 
         # for internal resources, no serialization is done
-        if self.publication_status is INTERNAL:
-            if _so_needs_saving:
+        if self.publication_status == INTERNAL:
+            if checksum_updated:
                 self.save()
             return
 
         self.digest_last_checked = datetime.now()        
 
+        # check metadata serialization
+        metadata_updated = self.check_metadata()
+        
+        # check global storage object serialization
+        global_updated = self.check_global_storage_object()
+        
+        # create new digest zip-archive if required
+        if force_digest or metadata_updated or global_updated:
+            self.create_digest()
+            
+        # check local storage object serialization
+        local_updated = self.check_local_storage_object()
+        
+        # save storage object if required; this should always happen since
+        # at least self.digest_last_checked in the local storage object 
+        # has changed
+        if checksum_updated or metadata_updated or global_updated \
+                or local_updated:
+            self.save()
+
+
+    def check_metadata(self):
+        """
+        Checks if the metadata of the resource has changed with respect to the
+        current metadata serialization. If yes, recreates the serialization,
+        updates it in the storage folder and increases the revision (for master
+        copies)
+        
+        Returns a flag indicating if the serialization was updated. 
+        """
+        
         # flag to indicate if rebuilding of metadata.xml is required
         update_xml = False
         
@@ -322,13 +353,14 @@ class StorageObject(models.Model):
         
         if self.metadata != _metadata:
             self.metadata = _metadata
-            self.modified = datetime.now()
-            # increase revision for ingested and published resources whenever 
-            # the metadata XML changes
-            if self.publication_status in (INGESTED, PUBLISHED):
-                self.revision += 1
-                update_xml = True
             LOGGER.debug(u"\nMETADATA: {0}\n".format(self.metadata))
+            self.modified = datetime.now()
+            update_xml = True
+            # increase revision for ingested and published resources whenever 
+            # the metadata XML changes for master copies
+            if self.publication_status in (INGESTED, PUBLISHED) \
+              and self.copy_status == MASTER:
+                self.revision += 1
             
         # check if there exists a metadata XML file; this is not the case if
         # the publication status just changed from internal to ingested
@@ -338,18 +370,23 @@ class StorageObject(models.Model):
           '{0}/metadata-{1:04d}.xml'.format(self._storage_folder(), self.revision)):
             update_xml = True
 
-        # flag to indicate if rebuilding of resource.zip is required
-        update_zip = False
-          
         if update_xml:
             # serialize metadata
             with open('{0}/metadata-{1:04d}.xml'.format(
               self._storage_folder(), self.revision), 'wb') as _out:
                 _out.write(unicode(self.metadata).encode('ASCII'))
-            update_zip = True
         
-        # check if global storage object serialization has changed; if yes,
-        # save it to storage folder
+        return update_xml
+        
+    
+    def check_global_storage_object(self):
+        """
+        Checks if the global storage object serialization has changed. If yes,
+        updates it in the storage folder.
+        
+        Returns a flag indicating if the serialization was updated. 
+        """
+        
         _dict_global = { }
         for item in GLOBAL_STORAGE_ATTS:
             _dict_global[item] = getattr(self, item)
@@ -361,10 +398,17 @@ class StorageObject(models.Model):
                 with open('{0}/storage-global.json'.format(
                   self._storage_folder()), 'wb') as _out:
                     _out.write(unicode(self.global_storage).encode('utf-8'))
-                update_zip = True
-        
-        # create new digest zip if required, but only for master and proxy copies
-        if update_zip and self.copy_status in (MASTER, PROXY):
+                return True
+                
+        return False
+
+    
+    def create_digest(self):
+        """
+        Creates a new digest zip-archive for master and proxy copies.
+        """
+
+        if self.copy_status in (MASTER, PROXY):
             _zf_name = '{0}/resource.zip'.format(self._storage_folder())
             _zf = zipfile.ZipFile(_zf_name, mode='w', compression=ZIP_DEFLATED)
             try:
@@ -382,8 +426,15 @@ class StorageObject(models.Model):
             # update last modified timestamp
             self.digest_modified = datetime.now()
             
-        # check if local storage object serialization has changed; if yes,
-        # save it to storage folder
+            
+    def check_local_storage_object(self):
+        """
+        Checks if the local storage object serialization has changed. If yes,
+        updates it in the storage folder.
+        
+        Returns a flag indicating if the serialization was updated. 
+        """
+        
         _dict_local = { }
         for item in LOCAL_STORAGE_ATTS:
             _dict_local[item] = getattr(self, item)
@@ -395,12 +446,13 @@ class StorageObject(models.Model):
                 with open('{0}/storage-local.json'.format(
                   self._storage_folder()), 'wb') as _out:
                     _out.write(unicode(self.local_storage).encode('utf-8'))
-        
-        # save storage object if required; this is always required since at 
-        # least self.digest_last_checked has changed
-        self.save()
+                return True
 
-def restore_from_folder(storage_id, copy_status=MASTER, storage_digest=None):
+        return False
+
+
+def restore_from_folder(storage_id, copy_status=MASTER, \
+  storage_digest=None, source_node=None, force_digest=False):
     """
     Restores the storage object and the associated resource for the given
     storage object identifier and makes it persistent in the database. 
@@ -415,6 +467,11 @@ def restore_from_folder(storage_id, copy_status=MASTER, storage_digest=None):
     storage_digest (optional): the digest_checksum to set in the restored
         storage object
 
+    source_node (optional): the source node if to set in the restored
+        storage object
+    
+    force_digest (optional): if True, always recreate the digest zip-archive
+    
     Returns the restored resource with its storage object set.
     """
     from metashare.repository.models import resourceInfoType_model
@@ -459,6 +516,7 @@ def restore_from_folder(storage_id, copy_status=MASTER, storage_digest=None):
     else:
         LOGGER.warn('missing storage-global.json, importing resource as new')
         _storage_object.identifier = storage_id
+        
     # add local storage object attributes if available 
     if os.path.isfile('{0}/storage-local.json'.format(storage_folder)):
         _local_json = \
@@ -479,18 +537,22 @@ def restore_from_folder(storage_id, copy_status=MASTER, storage_digest=None):
             LOGGER.warn('no copy status provided, using default copy status MASTER')
             _storage_object.copy_status = MASTER
     
-    # If object is synchronized, retain the storage digest
+    # set storage digest if provided (usually for non-local resources)
     if storage_digest:
         _storage_object.digest_checksum = storage_digest
-
-    _storage_object.save()
-    _storage_object.update_storage()
+    # set source node id if provided (usually for non-local resources)
+    if source_node:
+        _storage_object.source_node = source_node
+    
+    _storage_object.update_storage(force_digest=force_digest)
+    # update_storage includes saving
+    #_storage_object.save()
         
     return resource
 
 
-def update_resource(storage_json, resource_xml_string, storage_digest,
-                    copy_status=REMOTE):
+def add_or_update_resource(storage_json, resource_xml_string, storage_digest,
+                    copy_status=REMOTE, source_node=None):
     '''
     For the resource described by storage_json and resource_xml_string,
     do the following:
@@ -529,7 +591,8 @@ def update_resource(storage_json, resource_xml_string, storage_digest,
     def remove_database_entries(storage_id):
         storage_object = StorageObject.objects.get(identifier=storage_id)
         resource = storage_object.resourceinfotype_model_set.all()[0]
-        # we have to keep the statistics for this resource since it is only updated
+        # we have to keep the statistics and recommendations for this resource
+        # since it is only updated
         resource.delete_deep(keep_stats=True)
         storage_object.delete()
 
@@ -541,8 +604,13 @@ def update_resource(storage_json, resource_xml_string, storage_digest,
         remove_files_from_disk(storage_id)
         remove_database_entries(storage_id)
     write_to_disk(storage_id)
+    # if the resource was marked for deletion, remove that mark
+    try:
+        RemovedObject.objects.get(identifier=storage_id).delete()
+    except ObjectDoesNotExist:
+        pass
     return restore_from_folder(storage_id, copy_status=copy_status,
-                        storage_digest=storage_digest)
+      storage_digest=storage_digest, source_node=source_node, force_digest=True)
 
 
 def _fill_storage_object(storage_obj, json_file_name):
@@ -591,7 +659,7 @@ def repair_storage_folder():
             # binary
             folder = os.path.join(settings.STORAGE_PATH, _so.identifier)
             for _file in ('storage-local.json', 'storage-global.json', 
-              'resource.zip', 'metadata-*.xml'):
+              'resource.zip', 'metadata.xml', 'metadata-*.xml'):
                 path = os.path.join(folder, _file)
                 for _path in glob.glob(path):
                     if os.path.exists(_path):
@@ -614,8 +682,6 @@ def compute_checksum(infile):
             instream = infile
         else:
             instream = open(infile, 'rb')
-        # Read in the downloadable data in blocks of MAXIMUM_MD5_BLOCK_SIZE
-        # bytes which is possible as MD5 allows incremental hash computation.
         chunk = instream.read(MAXIMUM_MD5_BLOCK_SIZE)
         while chunk:
             checksum.update(chunk)

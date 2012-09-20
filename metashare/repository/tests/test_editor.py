@@ -32,6 +32,7 @@ BROKENFIXTURE_XML = '{}/repository/fixtures/broken.xml'.format(ROOT_PATH)
 TESTFIXTURES_ZIP = '{}/repository/fixtures/tworesources.zip'.format(ROOT_PATH)
 BROKENFIXTURES_ZIP = '{}/repository/fixtures/onegood_onebroken.zip'.format(ROOT_PATH)
 LEX_CONC_RES_XML = '{}/repository/test_fixtures/published-lexConcept-Audio-EnglishGerman.xml'.format(ROOT_PATH)
+DATA_UPLOAD_ZIP = '{}/repository/fixtures/data_upload_test.zip'.format(ROOT_PATH)
 
 
 def _import_test_resource(editor_group=None, path=TESTFIXTURE_XML,
@@ -208,47 +209,6 @@ class EditorTest(TestCase):
         response = client.get(ADMINROOT+'repository/corpusinfotype_model/add/')
         self.assertContains(response, 'Permission denied', status_code=403)
 
-    def test_superuser_can_always_upload_data(self):
-        """
-        Verifies that a superuser may upload actual resource data to any
-        resource.
-        """
-        client = test_utils.get_client_with_user_logged_in(EditorTest.superuser_login)
-        for res in (EditorTest.testfixture, EditorTest.testfixture2,
-                    EditorTest.testfixture3, EditorTest.testfixture4):
-            response = client.get("{}repository/resourceinfotype_model/{}/" \
-                    "upload-data/".format(ADMINROOT, res.id))
-            self.assertEquals(200, response.status_code, "expected that a " \
-                              "superuser may always upload resource data")
-
-    def test_editor_can_upload_data(self):
-        """
-        Verifies that an editor user may upload actual resource data to owned
-        resources and to resources that are in her editor group.
-        """
-        client = test_utils.get_client_with_user_logged_in(EditorTest.editor_login)
-        # make sure data can be uploaded to owned resources:
-        response = client.get("{}repository/resourceinfotype_model/{}/" \
-                "upload-data/".format(ADMINROOT, EditorTest.testfixture3.id))
-        self.assertEquals(200, response.status_code, "expected that an " \
-                          "editor may upload resource data to owned resources")
-        # make sure data can be uploaded to editable resources:
-        response = client.get("{}repository/resourceinfotype_model/{}/" \
-                "upload-data/".format(ADMINROOT, EditorTest.testfixture.id))
-        self.assertEquals(200, response.status_code, "expected that an " \
-            "editor may upload resource data to resources of her editor group")
-
-    def test_editor_cannot_upload_data_to_invisible_resources(self):
-        """
-        Verifies that an editor user must not upload actual resource data to
-        resources that do not belong to her editor group and which are not hers.
-        """
-        client = test_utils.get_client_with_user_logged_in(EditorTest.editor_login)
-        response = client.get("{}repository/resourceinfotype_model/{}/" \
-                "upload-data/".format(ADMINROOT, EditorTest.testfixture2.id))
-        self.assertIn(response.status_code, (403, 404), "expected that an " \
-            "editor must not upload resource data to invisible resources")
-
     def test_editor_can_see_models_add(self):
         # We don't expect the following add forms to work, because the editor
         # always and exclusively uses the change form for these:
@@ -287,7 +247,6 @@ class EditorTest(TestCase):
                         else:
                             LOGGER.debug('Class %s has no registered admin '
                                          'form.', cls_name)
-                    print
         LOGGER.debug('Checked models: %d', num)
 
     def test_manage_action_visibility(self):
@@ -806,6 +765,168 @@ class EditorTest(TestCase):
                               .format(ADMINROOT, EditorTest.test_editor_group_manager.id))
         self.assertContains(response, 'Are you sure?', msg_prefix=
             'expected the superuser to be allowed to delete manager')
+
+
+class DataUploadTests(TestCase):
+    """
+    Tests related to uploading actual resource data for a pure resource
+    description.
+    """
+    # static variables to be initialized in setUpClass():
+    test_editor_group = None
+    editor_user = None
+    editor_login = None
+    superuser_login = None
+    testfixture = None
+    testfixture2 = None
+    testfixture3 = None
+    testfixture4 = None
+    
+    @classmethod
+    def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
+        test_utils.set_index_active(False)
+
+        DataUploadTests.test_editor_group = \
+            EditorGroup.objects.create(name='test_editor_group')
+
+        # test user accounts
+        DataUploadTests.editor_user = test_utils.create_editor_user(
+            'editoruser', 'editor@example.com', 'secret',
+            (DataUploadTests.test_editor_group,))
+        superuser = User.objects.create_superuser(
+            'superuser', 'su@example.com', 'secret')
+
+        # login POST dicts
+        DataUploadTests.editor_login = {
+            REDIRECT_FIELD_NAME: ADMINROOT,
+            LOGIN_FORM_KEY: 1,
+            'username': DataUploadTests.editor_user.username,
+            'password': 'secret',
+        }
+        DataUploadTests.superuser_login = {
+            REDIRECT_FIELD_NAME: ADMINROOT,
+            LOGIN_FORM_KEY: 1,
+            'username': superuser.username,
+            'password': 'secret',
+        }
+
+    @classmethod
+    def tearDownClass(cls):
+        test_utils.clean_user_db()
+        test_utils.set_index_active(True)
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
+
+    def setUp(self):
+        test_utils.setup_test_storage()
+        # first test resource
+        DataUploadTests.testfixture = \
+            _import_test_resource(DataUploadTests.test_editor_group)
+        # second test resource which is only visible by the superuser
+        DataUploadTests.testfixture2 = \
+            _import_test_resource(None, TESTFIXTURE2_XML)
+        # third test resource which is owned by the editoruser
+        DataUploadTests.testfixture3 = \
+            _import_test_resource(None, TESTFIXTURE3_XML, pub_status=PUBLISHED)
+        DataUploadTests.testfixture3.owners.add(DataUploadTests.editor_user)
+        DataUploadTests.testfixture3.save()
+        # fourth test resource which is owned by the editor user
+        DataUploadTests.testfixture4 = _import_test_resource(
+            DataUploadTests.test_editor_group, TESTFIXTURE4_XML,
+            pub_status=INTERNAL)
+        DataUploadTests.testfixture4.owners.add(DataUploadTests.editor_user)
+        DataUploadTests.testfixture4.save()
+
+    def tearDown(self):
+        # we have to clean up both the resources DB and the storage folder as
+        # uploads change the storage folder
+        test_utils.clean_resources_db()
+        test_utils.clean_storage()
+
+    def test_superuser_can_always_upload_data(self):
+        """
+        Verifies that a superuser may upload actual resource data to any
+        resource.
+        """
+        client = test_utils.get_client_with_user_logged_in(
+            DataUploadTests.superuser_login)
+        for res in (DataUploadTests.testfixture, DataUploadTests.testfixture2,
+                    DataUploadTests.testfixture3, DataUploadTests.testfixture4):
+            self.assertFalse(res.storage_object.has_local_download_copy(),
+                "the test LR must not have a local download before the test")
+            _data_upload_url = "{}repository/resourceinfotype_model/{}/" \
+                "upload-data/".format(ADMINROOT, res.id)
+            response = client.get(_data_upload_url)
+            self.assertEquals(200, response.status_code, "expected that a " \
+                              "superuser may always upload resource data")
+            with open(DATA_UPLOAD_ZIP, 'rb') as _fhandle:
+                response = client.post(_data_upload_url,
+                    {'uploadTerms': 'on', 'resource': _fhandle}, follow=True)
+                self.assertContains(response, "was changed successfully.")
+            # refetch the storage object from the data base to make sure we have
+            # the latest version
+            _so = StorageObject.objects.get(pk=res.storage_object.pk)
+            self.assertTrue(_so.has_local_download_copy(),
+                "uploaded LR data must be available as a local download")
+
+    def test_editor_can_upload_data(self):
+        """
+        Verifies that an editor user may upload actual resource data to owned
+        resources and to resources that are in her editor group.
+        """
+        client = test_utils.get_client_with_user_logged_in(
+            DataUploadTests.editor_login)
+        # make sure data can be uploaded to owned resources:
+        self.assertFalse(DataUploadTests.testfixture3.storage_object \
+                .has_local_download_copy(),
+            "the test LR must not have a local download before the test")
+        _data_upload_url = "{}repository/resourceinfotype_model/{}/" \
+            "upload-data/".format(ADMINROOT, DataUploadTests.testfixture3.id)
+        response = client.get(_data_upload_url)
+        self.assertEquals(200, response.status_code, "expected that an " \
+                          "editor may upload resource data to owned resources")
+        with open(DATA_UPLOAD_ZIP, 'rb') as _fhandle:
+            response = client.post(_data_upload_url,
+                {'uploadTerms': 'on', 'resource': _fhandle}, follow=True)
+            self.assertContains(response, "was changed successfully.")
+        # refetch the storage object from the data base to make sure we have
+        # the latest version
+        _so = StorageObject.objects.get(
+            pk=DataUploadTests.testfixture3.storage_object.pk)
+        self.assertTrue(_so.has_local_download_copy(),
+            "expected that uploaded LR data is available as a local download")
+        # make sure data can be uploaded to editable resources:
+        self.assertFalse(
+            DataUploadTests.testfixture.storage_object \
+                .has_local_download_copy(),
+            "the test LR must not have a local download before the test")
+        _data_upload_url = "{}repository/resourceinfotype_model/{}/" \
+            "upload-data/".format(ADMINROOT, DataUploadTests.testfixture.id)
+        response = client.get(_data_upload_url)
+        self.assertEquals(200, response.status_code, "expected that an " \
+            "editor may upload resource data to resources of her editor group")
+        with open(DATA_UPLOAD_ZIP, 'rb') as _fhandle:
+            response = client.post(_data_upload_url,
+                {'uploadTerms': 'on', 'resource': _fhandle}, follow=True)
+            self.assertContains(response, "was changed successfully.")
+        # refetch the storage object from the data base to make sure we have
+        # the latest version
+        _so = StorageObject.objects.get(
+            pk=DataUploadTests.testfixture.storage_object.pk)
+        self.assertTrue(_so.has_local_download_copy(),
+            "expected that uploaded LR data is available as a local download")
+
+    def test_editor_cannot_upload_data_to_invisible_resources(self):
+        """
+        Verifies that an editor user must not upload actual resource data to
+        resources that do not belong to her editor group and which are not hers.
+        """
+        client = test_utils.get_client_with_user_logged_in(
+            DataUploadTests.editor_login)
+        response = client.get("{}repository/resourceinfotype_model/{}/" \
+            "upload-data/".format(ADMINROOT, DataUploadTests.testfixture2.id))
+        self.assertIn(response.status_code, (403, 404), "expected that an " \
+            "editor must not upload resource data to invisible resources")
 
 
 class DestructiveTests(TestCase):

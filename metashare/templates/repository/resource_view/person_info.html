@@ -38,7 +38,7 @@
 	</div>
 	<div>
 		<label class="dataline">
-			{{ contact_person_dict.Contact_person.Communication.Email }}
+			{% encrypt_email contact_person_dict.Contact_person.Communication.Email %}
 		</label>
 	</div>
 	<div>
@@ -104,7 +104,9 @@
 
 	<div>
 		<label class="dataline">
-			{{ contact_person_dict.Contact_person.Affiliation.Email }}
+			{% if contact_person_dict.Contact_person.Affiliation.Email %}
+			{% encrypt_email contact_person_dict.Contact_person.Affiliation.Email %}
+			{% endif %}
 		</label>
 	</div>
 	<div>
@@ -130,7 +132,9 @@
 	</div>
 	<div>
 		<label class="dataline">
-			{{ contact_person_dict.Contact_person.Affiliation.Communication.Email }}
+			{% if contact_person_dict.Contact_person.Affiliation.Communication.Email %}
+			{% encrypt_email contact_person_dict.Contact_person.Affiliation.Communication.Email %}
+			{% endif %}
 		</label>
 	</div>
 	{% if contact_person_dict.Contact_person.Affiliation.Communication.Telephone_Number %}

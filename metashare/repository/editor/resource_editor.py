@@ -795,8 +795,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
                         for _chunk in resource.chunks():
                             _out_file.write(_chunk)
 
-                    # Save corresponding StorageObject to update its checksum.
-                    obj.storage_object.save()
+                    # Update the corresponding StorageObject to update its
+                    # download data checksum.
+                    obj.storage_object.update_storage()
 
                     change_message = 'Uploaded "{}" to "{}" in {}.'.format(
                       resource.name, storage_object._storage_folder(),
