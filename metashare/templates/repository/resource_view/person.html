@@ -2,7 +2,8 @@
 {% load get_icon %}
 {% spaceless %}
 
-<label class='title component'>{{title}}</label>
+<label class='title'>{{title}}</label>
+<div class="dataline contact">
 	{# Name, Surname and sex #}
 	<div>
 		<label class="dataline">
@@ -95,7 +96,9 @@
 	</div>
 	{% endif %}
 	
-	<hr/>
+	{% if person_dict.Affiliation %}
+		<hr/>
+	{% endif %}
 
 	<div>
 		<label class="dataline">
@@ -169,7 +172,7 @@
 		</label>
 	</div>
 	{% endif %}	
-		
-<hr/>		
+	
+</div>
 		
 {% endspaceless %}

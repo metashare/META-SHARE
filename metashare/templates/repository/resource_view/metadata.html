@@ -1,32 +1,34 @@
 {# MISSING: metadataLanguageName, metadataLanguageId #}
 
-<label class='title component'>Metadata Info</label>
+<label class='component'>Metadata Info</label>
 <div>
 
 		{% if metadata_dict.Metadata.Metadata_creation_date %}			
-			 <div class="dataline">
+			 <div class="dataline indented">
 				<label>
-					<b>Created:</b> {{ metadata_dict.Metadata.Metadata_creation_date|date:"SHORT_DATE_FORMAT" }}
+					<b>Created: </b>{{ metadata_dict.Metadata.Metadata_creation_date|date:"SHORT_DATE_FORMAT" }}
 				</label>
 			</div>
 		{% endif %}
 		
 		{% if metadata_dict.Metadata.Metadata_last_date_updated %}			
-			 <div class="dataline">
+			 <div class="dataline indented">
 				<label>
-					<b>Last Updated:</b> {{ metadata_dict.Metadata.Metadata_last_date_updated|date:"SHORT_DATE_FORMAT" }}
+					<b>Last Updated: </b>{{ metadata_dict.Metadata.Metadata_last_date_updated|date:"SHORT_DATE_FORMAT" }}
 				</label>
 			</div>
 		{% endif %}
 
 		{% if metadata_dict.Metadata.Source %}
-			<div class="dataline">
-				<label><b>Source:</b> {{ metadata_dict.Metadata.Source }}</label>
+			<div class="dataline indented">
+				<label>
+				<b>Source: </b>{{ metadata_dict.Metadata.Source }}
+				</label>
 			</div>
 		{% endif %}
 
 		{% if metadata_dict.Metadata.Original_metadata_schema %}
-			<div class="dataline">
+			<div class="dataline indented">
 				<label>
 					{% if metadata_dict.Metadata.Original_metadata_link %}
 						<a href="{{metadata_dict.Metadata.Original_metadata_link}}" target='_blank'>
@@ -40,8 +42,10 @@
 		{% endif %}
 		
 		{% if metadata_dict.Metadata.Revision %}
-			<div class="dataline">
-				<label><b>Revision:</b> {{  metadata_dict.Metadata.Revision }}</label>
+			<div class="dataline indented">
+				<label>
+					<b>Revision: </b>{{  metadata_dict.Metadata.Revision }}
+				</label>
 			</div>
 		{% endif %}
 </div>

@@ -40,30 +40,42 @@ div.right-corner{
 	margin-right:0px!important;
 }
 
+
+
 .dataline label{
 	font-size: 14px;
 	font-weight: normal;
 	color: #333;
 }
 
-.dataline label.title, label.component {
-	
-	
-	color: #FF9900;
-	border-radius:10px;
-	font-size:14px;
+label.title{
 	display:block;
+	font-size:14px;
+	background:#eee;
+	border-bottom:solid 1px #ccc;
+	border-left:solid 1px #ccc;
+	padding-left:2px;
+	
+}
+
+label.title, label.component {
 	font-weight:bold;
+	margin: 0.3em 0 0.3em 0;
+	color:#777;
+	display:block;
 }
 
 label.component{
+	/*background-color: #fda;*/
+	color: #fff;
+	font-size: 16px;
 	padding:3px;
+	background: #FF6633;
+	background: -moz-linear-gradient(top, #FFCC00, #FF6633);
+	background: -webkit-gradient(linear, left top, left bottom, from(#FFCC00), to(#FF6633));	
+	filter:progid:DXImageTransform.Microsoft.Gradient(endColorstr='#FFCC00', startColorstr='#FF6633', gradientType='0');
 }
 
-.title.component + .title.component{
-	margin-left:5px;
-	font-size:15px;
-}
 
 .expandable{
 	cursor: pointer; 
@@ -94,7 +106,7 @@ label.component{
 	border-top-right-radius: 10px;
 	box-shadow:0 3px 10px #CCCCCC, 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
 	font-size: 14px;
-	font-weight: 600;
+	font-weight: bold;
 	margin-right: 1px;	
 	padding-top: 1px;
 	padding-bottom: 1px;
@@ -126,9 +138,13 @@ label.component{
 
 /*CSS for tooltip*/
 
+a span{
+	display:none;
+}
+
 a.tip {    
     text-decoration: none;
-        float:left;
+    float:left;
 }
 a.tip:hover {
     cursor: default;
@@ -284,7 +300,15 @@ img.line{
 }
 
 hr{
-	height:2px;
 	margin:10px 0 10px 0;
-	box-shadow:1px 3px 5px #CCCCCC;
+}
+
+.contact{
+	padding:2px 10px 2px 10px;
+	border:solid 2px #ccc;
+	background:#eee;
+}
+
+.indented{
+	padding:0 10px 0 10px;
 }

@@ -140,7 +140,7 @@
 		  		<span class="download">You don&rsquo;t have the permission to download this resource. Please log in.</span>
 		       	<button class="span-4 button {% if LR_DOWNLOAD %}middle_button{% else %}middle_gray_button{% endif %}">Download</button>
 		    </a>
-		  	<a {% if LR_EDIT %} href="{% url metashare.repository.views.download resource.storage_object.identifier %}" {% else %} href="#" class="tip" {% endif %}>
+		  	<a {% if LR_EDIT %} href="{{ LR_EDIT }}" {% else %} href="#" class="tip" {% endif %}>
 				<span class="edit">You don&rsquo;t have the permission to edit this resource.</span>
 		       	<button class="span-4 button {% if LR_EDIT %}middle_button{% else %}middle_gray_button{% endif %}">Edit Resource</button>
 		    </a>

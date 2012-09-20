@@ -1,6 +1,5 @@
-
 {% if type == "Documentation" %}
-<label class='title component'>Documentation:</label>
+<label class='component'>Documentation:</label>
 {% else %}
 	{% if type == "Annotation_manual" %}
 		<b>Annotation_manual: </b>
@@ -8,14 +7,14 @@
 {% endif %}
 
 	{% if documentation.Document_type %}
-		<div class="dataline">
+		<div class="dataline indented">
 			<label>
 				<b>Document Type:</b> {{ documentation.Document_type }}
 			</label>
 		</div>
 	{% endif %}
 	
-	<div class="dataline">
+	<div class="dataline indented">
 		<label>
 			<b>Title:</b> 
 			{% if documentation.Url %}
@@ -29,7 +28,7 @@
 	</div>
 	
 	{% if documentation.Author %}
-		<div class="dataline">
+		<div class="dataline indented">
 			<label>
 				<b>Author:</b> {{ documentation.Author }}
 			</label>
@@ -37,7 +36,7 @@
 	{% endif %}
 	
 	{% if documentation.Editor %}
-		<div class="dataline">
+		<div class="dataline indented">
 			<label>
 				<b>Editor:</b> {{ documentation.Editor }}
 			</label>
@@ -45,7 +44,7 @@
 	{% endif %}
 	
 	{% if documentation.Year %}
-		<div class="dataline">
+		<div class="dataline indented">
 			<label>
 				<b>Year:</b> {{ documentation.Year }}
 			</label>
@@ -53,7 +52,7 @@
 	{% endif %}
 	
 	{% if documentation.Publisher %}
-		 <div class="dataline">
+		 <div class="dataline indented">
 			<label>
 				<b>Publisher:</b> {{ documentation.Publisher }}
 			</label>
@@ -61,7 +60,7 @@
 	{% endif %}
 	
 	{% if documentation.Book_title %}
-		 <div class="dataline">
+		 <div class="dataline indented">
 			<label>
 				<b>Book Title:</b> {{ documentation.Book_title }}
 			</label>
@@ -69,7 +68,7 @@
 	{% endif %}
 	
 	{% if documentation.Journal %}
-		 <div class="dataline">
+		 <div class="dataline indented">
 			<label>
 				<b>Journal:</b> {{ documentation.Journal }}
 			</label>
@@ -77,7 +76,7 @@
 	{% endif %}
 	
 	{% if documentation.Volume %}
-		 <div class="dataline">
+		 <div class="dataline indented">
 			<label>
 				<b>Volume:</b> {{ documentation.Volume }}
 			</label>
@@ -85,7 +84,7 @@
 	{% endif %}
 	
 	{% if documentation.Series %}
-		 <div class="dataline">
+		 <div class="dataline indented">
 			<label>
 				<b>Series:</b> {{ documentation.Series }}
 			</label>
@@ -93,7 +92,7 @@
 	{% endif %}
 	
 	{% if documentation.Pages %}
-		 <div class="dataline">
+		 <div class="dataline indented">
 			<label>
 				<b>Pages:</b> {{ documentation.Pages }}
 			</label>
@@ -101,7 +100,7 @@
 	{% endif %}
 	
 	{% if documentation.Edition %}
-		 <div class="dataline">
+		 <div class="dataline indented">
 			<label>
 				<b>Edition:</b> {{ documentation.Edition }}
 			</label>
@@ -109,7 +108,7 @@
 	{% endif %}
 	
 	{% if documentation.Conference %}
-		 <div class="dataline">
+		 <div class="dataline indented">
 			<label>
 				<b>Conference:</b> {{ documentation.Conference }}
 			</label>
@@ -117,7 +116,7 @@
 	{% endif %}
 
 	{% if documentation.Edition %}
-		 <div class="dataline">
+		 <div class="dataline indented">
 			<label>
 				<b>Edition:</b> {{ documentation.Edition }}
 			</label>
@@ -125,7 +124,7 @@
 	{% endif %}
 	
 	{% if documentation.Doi %}
-		 <div class="dataline">
+		 <div class="dataline indented">
 			<label>
 				<b>Digital Object Identifier - DOI:</b> {{ documentation.Doi }}
 			</label>
@@ -133,7 +132,7 @@
 	{% endif %}
 	
 	{% if documentation.Issn %}
-		 <div class="dataline">
+		 <div class="dataline indented">
 			<label>
 				<b>ISSN:</b> {{ documentation.Issn }}
 			</label>
@@ -141,7 +140,7 @@
 	{% endif %}
 	
 	{% if documentation.Isbn %}
-		 <div class="dataline">
+		 <div class="dataline indented">
 			<label>
 				<b>ISBN:</b> {{ documentation.Isbn }}
 			</label>
@@ -149,7 +148,7 @@
 	{% endif %}
 	
 	{% if documentation.Keywords %}
-		 <div class="dataline">
+		 <div class="dataline indented">
 			<label>
 				<b>Keywords:</b> {{ documentation.Keywords }}
 			</label>
@@ -157,7 +156,7 @@
 	{% endif %}
 	
 	{% if documentation.Document_language_name %}
-		 <div class="dataline">
+		 <div class="dataline indented">
 			<label>
 				<b>Document Language:</b> 
 				{% if documentation.Document_language_id %}
@@ -170,5 +169,3 @@
 			</label>
 		</div>
 	{% endif %}
-<hr/>
-
