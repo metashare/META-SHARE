@@ -1,1 +1,60 @@
+{% spaceless %}
 
+<label class='component'>Distribution</label>
+
+{% if distribution.Distribution.Availability %}
+	 <div class="dataline">
+		<label>
+			<b>Availability: </b>{{ distribution.Distribution.Availability }}
+		</label>
+	</div>
+{% endif %}
+
+{% if distribution.Distribution.Licence %}
+<label class="title">Licence Information</label>
+{% if distribution.Distribution.Licence.Licence %}
+	 <div class="dataline">
+		<label>
+			<b>Licence: </b>{{ distribution.Distribution.Licence.Licence }}
+		</label>
+	</div>
+{% endif %}
+
+{% if distribution.Distribution.Licence. %}
+	 <div class="dataline">
+		<label>
+			<b>Availability: </b>{{ distribution.Distribution.Availability }}
+		</label>
+	</div>
+{% endif %}
+
+{% if distribution.Distribution.Availability %}
+	 <div class="dataline">
+		<label>
+			<b>Availability: </b>{{ distribution.Distribution.Availability }}
+		</label>
+	</div>
+{% endif %}
+
+{% if distribution.Distribution.Availability %}
+	 <div class="dataline">
+		<label>
+			<b>Availability: </b>{{ distribution.Distribution.Availability }}
+		</label>
+	</div>
+{% endif %}
+
+
+
+
+{% endif %}
+
+
+
+
+
+{{ distribution }}
+
+
+
+{% endspaceless %}

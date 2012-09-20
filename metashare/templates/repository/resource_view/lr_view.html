@@ -144,8 +144,8 @@
 	</div>
 	
 	<div class="white_box column corner">
-		{{ distribution_dict }}
-		{% include "repository/resource_view/detailed_component.html" with lr_content=distribution_info_tuple %}
+
+		{% include "repository/resource_view/distribution.html" with distribution=distribution_dict %}
 		
 		{% for contact_person in contact_person_dicts %}
 			 {% include "repository/resource_view/person.html" with person_dict=contact_person.Contact_person %}

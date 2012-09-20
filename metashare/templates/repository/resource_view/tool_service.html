@@ -32,7 +32,7 @@
 	{% endif %}
 	
 	{% if tool_service.tool_service_operation %}
-		<label class='Operation'></label>
+		<label class='component'>Operation</label>
 		{% if tool_service.tool_service_operation.Operating_system %}
 			 <div class="dataline">
 				<label>
@@ -88,7 +88,7 @@
 	{% endif %}
 
 	{% if tool_service.Tool_service_evaluation %}
-		<label class='Evaluation'></label>
+		<label class='component'>Evaluation</label>
 		{% if tool_service.Tool_service_evaluation.Evaluated %}
 			 <div class="dataline">
 				<label>
@@ -157,6 +157,7 @@
 	{% endif %}
 
 	{% if tool_service.Tool_service_creation %}
+		<label class='component'>Creation</label>
 		{% if tool_service.Tool_service_creation.Implementation_language %}
 			 <div class="dataline">
 				<label>
