@@ -38,24 +38,95 @@
 				</label>
 			</div>
 		{% endif %}
+	
+	
 		
-		{% if tool_service.tool_service_operation.Running_environment %}
+		{% if tool_service.tool_service_operation.Operating_system.Running_environment %}
+		
+			{% if tool_service.tool_service_operation.Running_environment.Required_software %}
+
+				{% if tool_service.tool_service_operation.Running_environment.Required_software. %}
+					 <div class="dataline">
+						<label>
+							<b>  </b>{{ tool_service.tool_service_operation.Running_environment.Required_software. }}
+						</label>
+					</div>
+				{% endif %}
+				
+				{% if tool_service.tool_service_operation.Running_environment.Required_software. %}
+					 <div class="dataline">
+						<label>
+							<b>  </b>{{ tool_service.tool_service_operation.Running_environment.Required_software. }}
+						</label>
+					</div>
+				{% endif %}
+
+			{% endif %}
 			
+			{% if tool_service.tool_service_operation.Running_environment.Required_hardware %}
 				 <div class="dataline">
 					<label>
-						<b>Operating system: </b>{{ tool_service.tool_service_operation.Operating_system }}
+						<b>Required hardware: </b>{{ tool_service.tool_service_operation.Running_environment.Required_hardware }}
 					</label>
 				</div>
 			{% endif %}
 			
-			{% if tool_service.tool_service_operation.Operating_system %}
+			{% if tool_service.tool_service_operation.Running_environment.Required_lrs %}
+
+				{% if tool_service.tool_service_operation.Running_environment.Required_software. %}
+					 <div class="dataline">
+						<label>
+							<b>  </b>{{ tool_service.tool_service_operation.Running_environment.Required_software. }}
+						</label>
+					</div>
+				{% endif %}
+				
+				{% if tool_service.tool_service_operation.Running_environment.Required_software. %}
+					 <div class="dataline">
+						<label>
+							<b>  </b>{{ tool_service.tool_service_operation.Running_environment.Required_software. }}
+						</label>
+					</div>
+				{% endif %}
+
+			{% endif %}
+			
+			
+			{% if tool_service.tool_service_operation.Running_environment.Running_environment_details %}
 				 <div class="dataline">
 					<label>
-						<b>Operating system: </b>{{ tool_service.tool_service_operation.Operating_system }}
+						<b>Running environment details: </b>{{ tool_service.tool_service_operation.Running_environment.Running_environment_details }}
 					</label>
 				</div>
 			{% endif %}
+			
+	
+		
+		
+		
+		
+		
 		{% endif %}
+
+		
+		
+		
+		{% if tool_service.tool_service_operation.Operating_system %}
+			 <div class="dataline">
+				<label>
+					<b>Operating system: </b>{{ tool_service.tool_service_operation.Operating_system }}
+				</label>
+			</div>
+		{% endif %}
+		
+		{% if tool_service.tool_service_operation.Operating_system %}
+			 <div class="dataline">
+				<label>
+					<b>Operating system: </b>{{ tool_service.tool_service_operation.Operating_system }}
+				</label>
+			</div>
+		{% endif %}
+	
 	
 	
 	
