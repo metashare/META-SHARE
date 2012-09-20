@@ -24,8 +24,12 @@
 		</div>
 	{% endif %}
 	
-	{% include "repository/resource_view/input_output.html" with type="Input" data=tool_service.Input %}
-	{% include "repository/resource_view/input_output.html" with type="Output" data=tool_service.Output %}
+	{% if tool_service.Input %}
+		{% include "repository/resource_view/input_output.html" with type="Input" data=tool_service.Input %}
+	{% endif %}
+	{% if tool_service.Output %}
+		{% include "repository/resource_view/input_output.html" with type="Output" data=tool_service.Output %}
+	{% endif %}
 	
 	{% if tool_service.tool_service_operation %}
 		<label class='Operation'></label>
