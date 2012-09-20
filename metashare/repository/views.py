@@ -687,7 +687,6 @@ def tuple2dict(_tuple):
 
                     # If the item is a date, convert it to real datetime
                     if _key.find("_date") != -1:
-                        print _key
                         new_item = datetime.strptime(item[0][1], "%Y-%m-%d")
                     else:
                         new_item = item[0][1]
