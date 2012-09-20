@@ -1,10 +1,11 @@
 <label class='title component'>Resource Creation Info:</label>
+
 <div class="dataline">
 {% for key, value in resource_creation_dict.items %}
 		{% for key1, value1 in value.items %}
 			{% if key1 == "Resource_creator" %}
 				{% for key2, value2 in value1.items %}
-					{% include "repository/resource_view/person.html" with person_dict=value2 type="resourceCreator" %}
+					{% include "repository/resource_view/person.html" with person_dict=value2 title="Resource Creator" %}
 				{% endfor %}
 			{% endif %}
 		{% endfor %}
@@ -26,7 +27,6 @@
 		</label>
 	</div>
 {% endif %}
-
 
 {% if resource_creation_dict.Resource_creation.Funding_project %}			
     {% include "repository/resource_view/project.html" with project=resource_creation_dict.Resource_creation.Funding_project %}

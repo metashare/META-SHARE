@@ -49,7 +49,7 @@
 {% for key, value in metadata_dict.items %}
 		{% for key1, value1 in value.items %}
 			{% if key1 == "Metadata_creator" %}			
-			     {% include "repository/resource_view/person.html" with person_dict=value1 type="metadataCreator" %}
+			     {% include "repository/resource_view/person.html" with person_dict=value1 title="Metadata Creator" %}
 			{% endif %}			
 		{% endfor %}
 {% endfor %}

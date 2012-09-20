@@ -100,9 +100,10 @@
                 	<a href="#" class="tip">
                     <img src="{{ MEDIA_URL }}stats/img/{{ stat.action }}_icon.gif"
                     alt="Last {{ stat.action }}: {{ stat.last }}"/>
+                    <b>{{ stat.count }}</b>&nbsp;
                     <span>Last {{ stat.action }}: {{ stat.last }}</span>
                     </a>
-                    <b>{{ stat.count }}</b>&nbsp;
+                    
                 {% endif %}
             {% endfor %}
         </div>
@@ -128,23 +129,21 @@
 			<div class='otherlang'>
 			{% for desc in other_descriptions %}<h4 style="text-align:justify" class="readmore">{{ desc }}</h4>{% endfor %} 
 			</div> 
-		{% endifnotequal %}			
+		{% endifnotequal %}
 		
 		<div style="clear: both;">
 	        
-		  <a href="javascript:history.back();"><button class="span-12 button middle_button">&laquo; Back</button></a>
-		  {% if LR_DOWNLOAD %}
-		    <a href="{% url metashare.repository.views.download resource.storage_object.identifier %}"><button class="span-4 button middle_button">Download</button></a>
-		  {% else %}
-		    <div class="popup_box">
-		      <div onmouseover="$(this).siblings('div.popup').show();" onmouseout="$(this).siblings('div.popup').hide();"><button class="span-4 button middle_gray_button">Download</button></div><div class="popup" style="height:50px; left:190px; width:270px; top:50px;"><img style="left:10px;" src="{{ MEDIA_URL }}images/adv_search_pfeil.png" />&nbsp;You don&rsquo;t have the permission to download this resource. Please log in.</div>
-		    </div>
-		  {% endif %}
-		  {% if LR_EDIT %}
-		    <a href="{{ LR_EDIT }}"><button class="span-4 button middle_button">Edit Resource</button></a>
-		  {% else %}
-		    <div onmouseover="$(this).siblings('div.popup').show();" onmouseout="$(this).siblings('div.popup').hide();"><button class="span-4 button middle_gray_button">Edit Resource</button></div><div class="popup" style="height:50px; left:350px; width:270px; top:60px;"><img style="left:10px;" src="{{ MEDIA_URL }}images/adv_search_pfeil.png" />&nbsp;You don&rsquo;t have the permission to edit this resource.</div>
-		  {% endif %}
+		 
+			<a href="javascript:history.back();"><button class="span-12 button middle_button">&laquo; Back</button></a>
+		  
+		    <a {% if LR_DOWNLOAD %} href="{% url metashare.repository.views.download resource.storage_object.identifier %}" {% else %} href="#" class="tip" {% endif %}>
+		  		<span class="download">You don&rsquo;t have the permission to download this resource. Please log in.</span>
+		       	<button class="span-4 button {% if LR_DOWNLOAD %}middle_button{% else %}middle_gray_button{% endif %}">Download</button>
+		    </a>
+		  	<a {% if LR_EDIT %} href="{% url metashare.repository.views.download resource.storage_object.identifier %}" {% else %} href="#" class="tip" {% endif %}>
+				<span class="edit">You don&rsquo;t have the permission to edit this resource.</span>
+		       	<button class="span-4 button {% if LR_EDIT %}middle_button{% else %}middle_gray_button{% endif %}">Edit Resource</button>
+		    </a>		  
 			<div style="clear: both;"></div>
 		</div>
 		
@@ -218,9 +217,6 @@
 				{% include "repository/resource_view/documentation.html"  %}
 		{% endif %}
 		
-		{% if documentation_info_tuple %}
-			{% include "repository/resource_view/detailed_component.html" with lr_content=documentation_info_tuple %}
-		{% endif %}
 		</div>
 
 {% include "repository/resource_view/recomm_view.html" %}

@@ -2,14 +2,8 @@
 {% load get_icon %}
 {% spaceless %}
 
-
-{% if type == "resourceCreator"  %}
-<label class='title component'>Resource Creator:</label>
-{% else %}
-<label class='title component'>Metadata Creator:</label>
-{% endif %}
-	
-		{# Name, Surname and sex #}
+<label class='title component'>{{title}}</label>
+	{# Name, Surname and sex #}
 	<div>
 		<label class="dataline">
 			{% if person_dict.Communication.Url %}
@@ -29,6 +23,25 @@
 			{% endif %}
 		</label>
 	</div>
+	
+	<div>
+		<label class="dataline">
+			{{ person_dict.Organization_name }}		
+		</label>
+	</div>
+	
+	<div>
+		<label class="dataline">
+			{{ person_dict.Organization_short_name }}		
+		</label>
+	</div>
+	
+	<div>
+		<label class="dataline">
+			{{ person_dict.Department_name }}		
+		</label>
+	</div>
+	
 	<div>
 		<label class="dataline">
 			{{ person_dict.Position }}
@@ -39,6 +52,7 @@
 			{{ person_dict.Affiliation.Department_name }}
 		</label>
 	</div>
+	
 	<div>
 		<label class="dataline">
 			{% encrypt_email person_dict.Communication.Email %}
