@@ -149,11 +149,6 @@
 		{% for contact_person in contact_person_dicts %}
 			 {% include "repository/resource_view/person_info.html" with contact_person_dict=contact_person %}
 		{% endfor %}
-
-		{% for person in object.contactPerson_set.all %}
-			{{ person }}
-		{% endfor %}
-		{{ resource_component_dict.Resource_component.Resource }}
 	</div>
 		
 	<div class="column middle">
@@ -165,8 +160,7 @@
 						{% for type in mediaTypes %}
 							<li><a href="#{{forloop.counter}}">{{type}}{% get_icon type %}</a></li>
 						{% endfor %}
-					{% endifequal %}						
-					
+					{% endifequal %}
 				</ul>
 			</div>
 		<div class="white_box middle_box">
@@ -190,21 +184,21 @@
 
 	<div class="white_box column corner right-corner">
 	
-		{% if resource_creation_info_tuple %}
+		{% if resource_creation_dict %}
 			{% include "repository/resource_view/resource_creation.html" %}
 		{% endif %}
 		  
 		{% include "repository/resource_view/metadata.html" %}
 		
-		{% if validation_info_tuples %}
+		{% if validation_dicts %}
 			{% include "repository/resource_view/validation.html" %}
 		{% endif %}
 		
-		{% if usage_info_tuple %}
+		{% if usage_dict %}
 			{% include "repository/resource_view/usage.html" %}
 		{% endif %}
 		
-		{% if relation_info_tuples %}
+		{% if relation_dict %}
 			{% include "repository/resource_view/relation.html" %}
 		{% endif %}
 		
