@@ -3,7 +3,7 @@
 {% spaceless %}
 
 <label class='title component'>Contact Person</label>
-<div class="dataline indented">
+<div class="dataline contact">
 	
 	{# Name, Surname and sex #}
 	<div>
@@ -75,6 +75,10 @@
 			Fax: {{ contact_person_dict.Contact_person.Communication.Fax_number }}
 		</label>
 	</div>
+	{% endif %}
+	
+	{% if contact_person_dict.Contact_person.Affiliation %}
+		<hr/>
 	{% endif %}
 	
 	<div>
