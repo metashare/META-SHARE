@@ -138,9 +138,13 @@ label.component{
 
 /*CSS for tooltip*/
 
+a span{
+	display:none;
+}
+
 a.tip {    
     text-decoration: none;
-        float:left;
+    float:left;
 }
 a.tip:hover {
     cursor: default;
