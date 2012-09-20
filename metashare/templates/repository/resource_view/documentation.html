@@ -1,10 +1,10 @@
-<label class='title component'>Documentation:</label>
-	
+{% spaceless %}
 	
 {% for key, value in documentation_dict.items %}
 		{% for key1, value1 in value.items %}		
 			{% for key2, value2 in value1.items %}				
 					{% if key2 == "Documentation" %}
+					<label class='title component'>Documentation:</label>
 						
 						{% if value2.Document_type %}
 							<div class="dataline">
@@ -170,17 +170,11 @@
 							</div>
 						{% endif %}
 					
-					<hr/>
-						
-						
-						
-						
-						
-						
-						
-						
+					<hr/>						
 						
 					{% endif %}
 			{% endfor %}
 		{% endfor %}
 {% endfor %}
+
+{% endspaceless %}
