@@ -44,23 +44,13 @@
 		{% if tool_service.tool_service_operation.Operating_system.Running_environment %}
 		
 			{% if tool_service.tool_service_operation.Running_environment.Required_software %}
-
-				{% if tool_service.tool_service_operation.Running_environment.Required_software. %}
+				{% if tool_service.tool_service_operation.Running_environment.Required_software.Target_resource.Target_resource_name_uri %}
 					 <div class="dataline">
 						<label>
-							<b>  </b>{{ tool_service.tool_service_operation.Running_environment.Required_software. }}
+							<b>Required Software: </b>{{ tool_service.tool_service_operation.Running_environment.Required_software.Target_resource.Target_resource_name_uri }}
 						</label>
 					</div>
 				{% endif %}
-				
-				{% if tool_service.tool_service_operation.Running_environment.Required_software. %}
-					 <div class="dataline">
-						<label>
-							<b>  </b>{{ tool_service.tool_service_operation.Running_environment.Required_software. }}
-						</label>
-					</div>
-				{% endif %}
-
 			{% endif %}
 			
 			{% if tool_service.tool_service_operation.Running_environment.Required_hardware %}
@@ -73,18 +63,18 @@
 			
 			{% if tool_service.tool_service_operation.Running_environment.Required_lrs %}
 
-				{% if tool_service.tool_service_operation.Running_environment.Required_software. %}
+				{% if tool_service.tool_service_operation.Running_environment.Required_lrs. %}
 					 <div class="dataline">
 						<label>
-							<b>  </b>{{ tool_service.tool_service_operation.Running_environment.Required_software. }}
+							<b>  </b>{{ tool_service.tool_service_operation.Running_environment.Required_lrs. }}
 						</label>
 					</div>
 				{% endif %}
 				
-				{% if tool_service.tool_service_operation.Running_environment.Required_software. %}
+				{% if tool_service.tool_service_operation.Running_environment.Required_lrs. %}
 					 <div class="dataline">
 						<label>
-							<b>  </b>{{ tool_service.tool_service_operation.Running_environment.Required_software. }}
+							<b>  </b>{{ tool_service.tool_service_operation.Running_environment.Required_lrs. }}
 						</label>
 					</div>
 				{% endif %}
