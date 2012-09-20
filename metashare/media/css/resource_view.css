@@ -309,6 +309,10 @@ hr{
 	padding:0 10px 0 10px;
 }
 
+a .indented{
+	color: #FF9900;
+}
+
 .hidden{
 	display:none;
 }
@@ -316,3 +320,4 @@ hr{
 .vcard{
 	padding-left:5px;
 }
+
