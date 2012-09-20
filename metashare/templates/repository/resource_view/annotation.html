@@ -4,7 +4,7 @@
 <div class="dataline">
 {% for key, value in annotations.items %}
 	{% if "Annotation" in key %}
-		<div class="dataline"><b>{{ value.Annotation_type }}</b></div>
+		<label class="title"><b>{{ value.Annotation_type }}</b></label>
 		{% if value.Tagset %}
 			<div>
 				<label class="dataline">
@@ -81,7 +81,7 @@
 		{% endif %}
 		
 		{% if value.Size_per_annotation %}
-			{% include "repository/resource_view/size.html" with size=value %}
+			{% include "repository/resource_view/size.html" with size=value type="sub" %}
 		{% endif %}
 		
 	{% endif %}
