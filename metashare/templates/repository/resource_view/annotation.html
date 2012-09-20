@@ -1,2 +1,50 @@
 {% spaceless %}
+
+<label class='title component'>Annotation:</label>
+<div class="dataline">
+{% for key, value in annotations.items %}
+	{% if "Annotation" in key %}
+		<div class="dataline"><b>{{ value.Annotation_type }}</b></div>
+		{% if value.Tagset %}
+			<span><b>Tagset: </b> {{ value.Tagset }}{% if value.Tagset_language_name %}({{ value.tagset_language_name }}){% endif %}</span> 
+		{% endif %}
+		{% if value.Annotated_elements %}
+			<span><b>Annotated elements: </b>{{ value.Annotated_elements_set|join:"," }}</span>
+		{% endif %}
+		{if value.Annotation_standoff %}
+			<span><b>StandOff: </b>{{ value.Annotation_standoff }}</span>
+		{% endif %}
+		{% if value.Annotation_format %}
+			<span><b>Format: </b>{{ value.Annotation_format }}</span>
+		{% endif %}
+
+		{{ value.Conformance_to_standard_practices }}
+		{{ value.Theoretic_modelconformance_to_standard_practices }}
+		{{ value.Annotation_manual }}
+		{% if value.Annotation_tool %}
+			<b>Tool:</b> {{ value.Annotation_tool }}
+		{% endif %}
+		{% if value.Annotation_start_date %}
+			<b>Start date:</b> {{ value.Annotation_start_date|date:"SHORT_DATE_FORMAT" }}
+		{% endif %}
+		{% if value.Annotation_end_date %}
+			<b>End date:</b> {{ value.Annotation_end_date|date:"SHORT_DATE_FORMAT" }}
+		{% endif %}
+		{% if value.Size_per_annotation %}
+			{% include "repository/resource_view/size.html" with size=value %}
+		{% endif %}
+
+		{% if value.Annotation_tool %}
+			Tool: {{ value.Annotation_tool }}
+		{% endif %}
+
+
+
+		{{ value.conformance_to_standard_practices }}
+		{{ value.conformance_to_standard_practices }}
+		
+	{% endif %}
+{% endfor %}
+</div>
+
 {% endspaceless %}
