@@ -85,14 +85,70 @@
 		{% endif %}
 	{% endif %}
 
-	{% if tool_service.tool_service_evaluation %}
-		{% if tool_service.tool_service_evaluation.evaluated %}
+	{% if tool_service.Tool_service_evaluation %}
+		<label class='Evaluation'></label>
+		{% if tool_service.Tool_service_evaluation.Evaluated %}
 			 <div class="dataline">
 				<label>
-					<b>Running time: </b>{{ tool_service.tool_service_evaluation.evaluated }}
+					<b>Evaluated: </b>{{ tool_service.Tool_service_evaluation.Evaluated }}
 				</label>
 			</div>
 		{% endif %}
+
+		{% if tool_service.Tool_service_evaluation.Evaluation_level %}
+			 <div class="dataline">
+				<label>
+					<b>Evaluation level: </b>{{ tool_service.Tool_service_evaluation.Evaluation_level }}
+				</label>
+			</div>
+		{% endif %}
+
+		{% if tool_service.Tool_service_evaluation.Evaluation_type %}
+			 <div class="dataline">
+				<label>
+					<b>Evaluation type: </b>{{ tool_service.Tool_service_evaluation.Evaluation_type }}
+				</label>
+			</div>
+		{% endif %}
+
+		{% if tool_service.Tool_service_evaluation.Evaluation_criteria %}
+			 <div class="dataline">
+				<label>
+					<b>Evaluation criteria: </b>{{ tool_service.Tool_service_evaluation.Evaluation_criteria }}
+				</label>
+			</div>
+		{% endif %}
+
+		{% if tool_service.Tool_service_evaluation.Evaluation_measure %}
+			 <div class="dataline">
+				<label>
+					<b>Evaluation measure: </b>{{ tool_service.Tool_service_evaluation.Evaluation_measure }}
+				</label>
+			</div>
+		{% endif %}
+		
+		{% if tool_service.Tool_service_evaluation.Evaluation_report %}
+			{% include "repository/resource_view/documentation.html" with documentation=tool_service.Tool_service_evaluation.Evaluation_report.Evaluation_report type="Evaluation_report" %}
+		{% endif %}
+
+		{% if tool_service.Tool_service_evaluation.Evaluation_tool %}
+			{% if tool_service.Tool_service_evaluation.Evaluation_tool.Target_resource.Target_resource_name_uri %}
+				 <div class="dataline">
+					<label>
+						<b>Evaluation tool: </b>{{ tool_service.Tool_service_evaluation.Evaluation_tool.Target_resource.Target_resource_name_uri }}
+					</label>
+				</div>
+			{% endif %}
+		{% endif %}
+		
+		{% if tool_service.Tool_service_evaluation.Evaluation_details %}
+			 <div class="dataline">
+				<label>
+					<b>Evaluation details: </b>{{ tool_service.Tool_service_evaluation.Evaluation_details }}
+				</label>
+			</div>
+		{% endif %}
+		
 		
 	
 	{% endif %}
