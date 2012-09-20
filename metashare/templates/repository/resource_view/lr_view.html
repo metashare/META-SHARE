@@ -13,7 +13,6 @@
 
 {% block keywords %}{{ resourceType }}, {{ mediaTypes|join:", " }}, {{ linguality_infos|join:", " }}, {{ resource.distributionInfo.get_availability_display }}, {{ license_types|join:", " }}{% endblock %}
 
-
 {% block content %}
 {% spaceless %}
 	<script type="text/javascript" src="http://plugins.learningjquery.com/expander/jquery.expander.js"></script>
@@ -92,10 +91,7 @@
 		{% endifnotequal %}
 		
 		<div style="clear: both;">
-	        
-		 
 			<a href="javascript:history.back();"><button class="span-12 button middle_button">&laquo; Back</button></a>
-		  
 		    <a {% if LR_DOWNLOAD %} href="{% url metashare.repository.views.download resource.storage_object.identifier %}" {% else %} href="#" class="tip" {% endif %}>
 		  		<span class="download">You don&rsquo;t have the permission to download this resource. Please log in.</span>
 		       	<button class="span-4 button {% if LR_DOWNLOAD %}middle_button{% else %}middle_gray_button{% endif %}">Download</button>
@@ -106,58 +102,58 @@
 		    </a>
 			<div style="clear: both;"></div>
 		</div>
-		
 	</div>
 	
-		<div class="white_box column corner">
-			{% include "repository/resource_view/detailed_component.html" with lr_content=distribution_info_tuple %}
-			
-			{% for contact_person in contact_person_dicts %}
-			     {% include "repository/resource_view/person_info.html" with contact_person_dict=contact_person %}
-			{% endfor %}
+	<div class="white_box column corner">
+		{% include "repository/resource_view/detailed_component.html" with lr_content=distribution_info_tuple %}
+		
+		{% for contact_person in contact_person_dicts %}
+			 {% include "repository/resource_view/person_info.html" with contact_person_dict=contact_person %}
+		{% endfor %}
 
-			{% for person in object.contactPerson_set.all %}
-				{{ person }}
-			{% endfor %}
-			{{ resource_component_dict.Resource_component.Resource }}
-		</div>
+		{% for person in object.contactPerson_set.all %}
+			{{ person }}
+		{% endfor %}
+		{{ resource_component_dict.Resource_component.Resource }}
+	</div>
 		
-		<div class="column middle">
-			<div class="fields">
-					<ul>
-						{% ifequal resourceType "toolService" %}
-							<li><a href="#1">toolService{% get_icon "toolService" %}</a></li>
-						{% else %}
-							{% for type in mediaTypes %}
-								<li><a href="#{{forloop.counter}}">{{type}}{% get_icon type %}</a></li>
-							{% endfor %}
-						{% endifequal %}						
-						
-					</ul>
-				</div>
-			<div class="white_box middle_box">
-			{% ifequal resourceType "toolService" %}
-				<div id="tabs_content_container">
-					<div id="1" class="tab_content">
-						{% include "repository/resource_view/media_info.html" with type='toolService' %}
-					</div>
-				</div>
-			{% else %}
-				{% for type in mediaTypes %}
-					<div id="tabs_content_container">
-						<div id="{{forloop.counter}}" class="tab_content">
-							{% include "repository/resource_view/media_info.html" with type=type %}
-						</div>
-					</div>
-				{% endfor %}
-			{% endifequal %}
+	<div class="column middle">
+		<div class="fields">
+				<ul>
+					{% ifequal resourceType "toolService" %}
+						<li><a href="#1">toolService{% get_icon "toolService" %}</a></li>
+					{% else %}
+						{% for type in mediaTypes %}
+							<li><a href="#{{forloop.counter}}">{{type}}{% get_icon type %}</a></li>
+						{% endfor %}
+					{% endifequal %}						
+					
+				</ul>
 			</div>
+		<div class="white_box middle_box">
+		{% ifequal resourceType "toolService" %}
+			<div id="tabs_content_container">
+				<div id="1" class="tab_content">
+					{% include "repository/resource_view/media_info.html" with type='toolService' %}
+				</div>
+			</div>
+		{% else %}
+			{% for type in mediaTypes %}
+				<div id="tabs_content_container">
+					<div id="{{forloop.counter}}" class="tab_content">
+						{% include "repository/resource_view/media_info.html" with type=type %}
+					</div>
+				</div>
+			{% endfor %}
+		{% endifequal %}
 		</div>
-		<div class="white_box column corner right-corner">
-		
-		  {% if resource_creation_info_tuple %}
-		    {% include "repository/resource_view/resource_creation.html" %}
-		  {% endif %}
+	</div>
+
+	<div class="white_box column corner right-corner">
+	
+		{% if resource_creation_info_tuple %}
+			{% include "repository/resource_view/resource_creation.html" %}
+		{% endif %}
 		  
 		{% include "repository/resource_view/metadata.html" %}
 		
@@ -184,8 +180,8 @@
 				{% endfor %}
 			{% endfor %}
 		{% endif %}
-		
-		</div>
+	
+	</div>
 
 {% include "repository/resource_view/recomm_view.html" %}
 {% endspaceless %}
