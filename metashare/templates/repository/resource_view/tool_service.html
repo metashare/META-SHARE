@@ -149,8 +149,23 @@
 			</div>
 		{% endif %}
 		
-		
-	
+		{% if tool_service.Tool_service_evaluation.Evaluator %}
+			{% include "repository/resource_view/person.html" with person_dict=tool_service.Tool_service_evaluation.Evaluator type="Evaluation_report" %}
+		{% endif %}		
 	{% endif %}
+
+	{% if tool_service.Tool_service_creation %}
+		{% if tool_service.Tool_service_evaluation.Evaluation_details %}
+			 <div class="dataline">
+				<label>
+					<b>Evaluation details: </b>{{ tool_service.Tool_service_evaluation.Evaluation_details }}
+				</label>
+			</div>
+		{% endif %}
+		
+		Implementation language
+	{% endif %}
+	
+
 
 {% endspaceless %}
