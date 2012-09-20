@@ -3,7 +3,8 @@ from metashare import settings, test_utils
 from metashare.accounts.models import EditorGroup, EditorGroupManagers
 from metashare.repository.models import resourceInfoType_model
 from metashare.repository.seltests.test_utils import login_user, mouse_over, \
-    setup_screenshots_folder, click_menu_item, save_and_close
+    setup_screenshots_folder, click_menu_item, save_and_close, cancel_and_close, \
+    cancel_and_continue
 from metashare.settings import DJANGO_BASE, ROOT_PATH
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support.ui import Select
@@ -99,8 +100,8 @@ class EditorTest(SeleniumTestCase):
               driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr/td[3]").text)
         except AssertionError as e: 
             self.verification_errors.append(str(e))
-            
-    
+        
+
     def test_LR_creation_corpus_text(self):
         driver = self.driver
         driver.get(self.base_url)
@@ -887,3 +888,888 @@ class EditorTest(SeleniumTestCase):
             return False
         return True
 
+
+    def test_error_messages_LR_creation(self):
+        driver = self.driver
+        driver.get(self.base_url)
+        ss_path = setup_screenshots_folder(
+          "PNG-metashare.repository.seltests.test_editor.EditorTest",
+          "LR_creation_corpus_text")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))  
+        # login user
+        login_user(driver, "manageruser", "secret")
+        # make sure login was successful
+        self.assertEqual("Logout", 
+          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+
+        # Tests for TEXT CORPUS
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
+        #Select resource type
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
+        driver.find_element_by_id("id_corpusTextInfo").click()
+        driver.find_element_by_id("id_submit").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("Add Resource", 
+          driver.find_element_by_css_selector("#content > h1").text)
+        # remember root window id
+        root_id = driver.current_window_handle
+
+        # save text corpus
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("_save").click()
+
+        self.assertEqual("Please correct the errors below.", driver.find_element_by_xpath(
+          "//p[@class='errornote']").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors resourceName']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors description']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row distributionInfo']/div/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row contactPerson']/div/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        self.assertEqual("Add Corpus Text Info", driver.find_element_by_xpath(
+          "//div[@id='contentInfoStuff']/h1/a[@class='error']").text)
+
+        # corpus text info popup
+        driver.find_element_by_id("add_id_corpusTextInfo-0").click()
+        driver.switch_to_window("id_corpusTextInfo__dash__0")
+        driver.find_element_by_name("_save").click()
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors lingualityType']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors languageId']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors languageName']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//tr[@id='sizeinfotype_model_set-0']/td[@class='size']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//tr[@id='sizeinfotype_model_set-0']/td[@class='sizeUnit']/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        cancel_and_close(driver, root_id)
+        cancel_and_continue(driver, root_id)
+
+        # Tests for AUDIO CORPUS
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
+        #Select resource type
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
+        driver.find_element_by_id("id_corpusAudioInfo").click()
+        driver.find_element_by_id("id_submit").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("Add Resource", 
+          driver.find_element_by_css_selector("#content > h1").text)
+        # remember root window id
+        root_id = driver.current_window_handle
+
+        # save Audio corpus
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("_save").click()
+
+        self.assertEqual("Please correct the errors below.", driver.find_element_by_xpath(
+          "//p[@class='errornote']").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors resourceName']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors description']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row distributionInfo']/div/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row contactPerson']/div/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        self.assertEqual("Add Corpus Audio Info", driver.find_element_by_xpath(
+          "//div[@id='contentInfoStuff']/h1/a[@class='error']").text)
+
+        # corpus audio info popup
+        driver.find_element_by_id("add_id_corpusAudioInfo").click()
+        driver.switch_to_window("id_corpusAudioInfo")
+        driver.find_element_by_name("_save").click()
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors lingualityType']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors languageId']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors languageName']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row audioSizeInfo']/div/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        cancel_and_close(driver, root_id)
+        cancel_and_continue(driver, root_id)
+
+        # Tests for VIDEO CORPUS
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
+        #Select resource type
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
+        driver.find_element_by_id("id_corpusVideoInfo").click()
+        driver.find_element_by_id("id_submit").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("Add Resource", 
+          driver.find_element_by_css_selector("#content > h1").text)
+        # remember root window id
+        root_id = driver.current_window_handle
+
+        # save Video corpus
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("_save").click()
+
+        self.assertEqual("Please correct the errors below.", driver.find_element_by_xpath(
+          "//p[@class='errornote']").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors resourceName']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors description']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row distributionInfo']/div/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row contactPerson']/div/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        self.assertEqual("Add Corpus Video Info", driver.find_element_by_xpath(
+          "//div[@id='contentInfoStuff']/h1/a[@class='error']").text)
+
+        # corpus video info popup
+        driver.find_element_by_id("add_id_corpusVideoInfo-0").click()
+        driver.switch_to_window("id_corpusVideoInfo__dash__0")
+        driver.find_element_by_name("_save").click()
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//tr[@id='sizeinfotype_model_set-0']/td[@class='size']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//tr[@id='sizeinfotype_model_set-0']/td[@class='sizeUnit']/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        cancel_and_close(driver, root_id)
+        cancel_and_continue(driver, root_id)
+
+        # Tests for IMAGE CORPUS
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
+        #Select resource type
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
+        driver.find_element_by_id("id_corpusImageInfo").click()
+        driver.find_element_by_id("id_submit").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("Add Resource", 
+          driver.find_element_by_css_selector("#content > h1").text)
+        # remember root window id
+        root_id = driver.current_window_handle
+
+        # save Image corpus
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("_save").click()
+
+        self.assertEqual("Please correct the errors below.", driver.find_element_by_xpath(
+          "//p[@class='errornote']").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors resourceName']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors description']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row distributionInfo']/div/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row contactPerson']/div/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        self.assertEqual("Add Corpus Image Info", driver.find_element_by_xpath(
+          "//div[@id='contentInfoStuff']/h1/a[@class='error']").text)
+
+        # corpus image info popup
+        driver.find_element_by_id("add_id_corpusImageInfo").click()
+        driver.switch_to_window("id_corpusImageInfo")
+        driver.find_element_by_name("_save").click()
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//tr[@id='sizeinfotype_model_set-0']/td[@class='size']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//tr[@id='sizeinfotype_model_set-0']/td[@class='sizeUnit']/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        cancel_and_close(driver, root_id)
+        cancel_and_continue(driver, root_id)
+
+        # Tests for TEXT NUMERICAL CORPUS
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
+        #Select resource type
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
+        driver.find_element_by_id("id_corpusTextNumericalInfo").click()
+        driver.find_element_by_id("id_submit").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("Add Resource", 
+          driver.find_element_by_css_selector("#content > h1").text)
+        # remember root window id
+        root_id = driver.current_window_handle
+
+        # save text numerical corpus
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("_save").click()
+
+        self.assertEqual("Please correct the errors below.", driver.find_element_by_xpath(
+          "//p[@class='errornote']").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors resourceName']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors description']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row distributionInfo']/div/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row contactPerson']/div/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        cancel_and_continue(driver, root_id)
+
+        # Tests for TEXT N-GRAM CORPUS
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
+        #Select resource type
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
+        driver.find_element_by_id("id_corpusTextNgramInfo").click()
+        driver.find_element_by_id("id_submit").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("Add Resource", 
+          driver.find_element_by_css_selector("#content > h1").text)
+        # remember root window id
+        root_id = driver.current_window_handle
+
+        # save text n-gram corpus
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("_save").click()
+
+        self.assertEqual("Please correct the errors below.", driver.find_element_by_xpath(
+          "//p[@class='errornote']").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors resourceName']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors description']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row distributionInfo']/div/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row contactPerson']/div/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        self.assertEqual("Add Corpus Text N-gram Info", driver.find_element_by_xpath(
+          "//div[@id='contentInfoStuff']/h1/a[@class='error']").text)
+
+        # corpus text n-gram info popup
+        driver.find_element_by_id("add_id_corpusTextNgramInfo").click()
+        driver.switch_to_window("id_corpusTextNgramInfo")
+        driver.find_element_by_name("_save").click()
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors baseItem']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors order']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors lingualityType']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors languageId']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors languageName']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//tr[@id='sizeinfotype_model_set-0']/td[@class='size']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//tr[@id='sizeinfotype_model_set-0']/td[@class='sizeUnit']/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        cancel_and_close(driver, root_id)
+        cancel_and_continue(driver, root_id)
+
+        # Tests for TEXT LANGUAGE DESCRIPTION
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
+        #Select resource type
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Language description")
+        driver.find_element_by_id("id_submit").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("Add Resource", 
+          driver.find_element_by_css_selector("#content > h1").text)
+        # remember root window id
+        root_id = driver.current_window_handle
+
+        # save text language description
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("_save").click()
+
+        self.assertEqual("Please correct the errors below.", driver.find_element_by_xpath(
+          "//p[@class='errornote']").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors resourceName']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors description']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row distributionInfo']/div/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row contactPerson']/div/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        self.assertEqual("Edit Language Description General Info", driver.find_element_by_xpath(
+          "//div[@id='contentInfoStuff']/h1[1]/a[@class='error']").text)
+        self.assertEqual("Add Language Description Text Info", driver.find_element_by_xpath(
+          "//div[@id='contentInfoStuff']/h1[2]/a[@class='error']").text)
+
+        # corpus general info popup
+        driver.find_element_by_id("edit_id_langdescInfo").click()
+        driver.switch_to_window("edit_id_langdescInfo")
+        driver.find_element_by_name("_save").click()
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row languageDescriptionType']/div/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        cancel_and_close(driver, root_id)
+
+        # corpus text info popup
+        driver.find_element_by_id("add_id_languageDescriptionTextInfo").click()
+        driver.switch_to_window("id_languageDescriptionTextInfo")
+        driver.find_element_by_name("_save").click()
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors lingualityType']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors languageId']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors languageName']/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        cancel_and_close(driver, root_id)
+        cancel_and_continue(driver, root_id)
+
+        # Tests for VIDEO LANGUAGE DESCRIPTION
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
+        #Select resource type
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Language description")
+        driver.find_element_by_id("id_langdescVideoInfo").click()
+        driver.find_element_by_id("id_submit").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("Add Resource", 
+          driver.find_element_by_css_selector("#content > h1").text)
+        # remember root window id
+        root_id = driver.current_window_handle
+
+        # save video language description
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("_save").click()
+
+        self.assertEqual("Please correct the errors below.", driver.find_element_by_xpath(
+          "//p[@class='errornote']").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors resourceName']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors description']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row distributionInfo']/div/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row contactPerson']/div/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        self.assertEqual("Edit Language Description General Info", driver.find_element_by_xpath(
+          "//div[@id='contentInfoStuff']/h1[1]/a[@class='error']").text)
+        self.assertEqual("Add Language Description Text Info", driver.find_element_by_xpath(
+          "//div[@id='contentInfoStuff']/h1[2]/a[@class='error']").text)
+        self.assertEqual("Add Language Description Video Info", driver.find_element_by_xpath(
+          "//div[@id='contentInfoStuff']/h1[3]/a[@class='error']").text)
+
+        # corpus general info popup
+        driver.find_element_by_id("edit_id_langdescInfo").click()
+        driver.switch_to_window("edit_id_langdescInfo")
+        driver.find_element_by_name("_save").click()
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row languageDescriptionType']/div/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        cancel_and_close(driver, root_id)
+
+        # corpus text info popup
+        driver.find_element_by_id("add_id_languageDescriptionTextInfo").click()
+        driver.switch_to_window("id_languageDescriptionTextInfo")
+        driver.find_element_by_name("_save").click()
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors lingualityType']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors languageId']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors languageName']/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        cancel_and_close(driver, root_id)
+
+        # corpus video info popup
+        driver.find_element_by_id("add_id_languageDescriptionVideoInfo").click()
+        driver.switch_to_window("id_languageDescriptionVideoInfo")
+        driver.find_element_by_name("_save").click()
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors otherMedia']/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        cancel_and_close(driver, root_id)
+        cancel_and_continue(driver, root_id)
+
+        # Tests for IMAGE LANGUAGE DESCRIPTION
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
+        #Select resource type
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Language description")
+        driver.find_element_by_id("id_langdescImageInfo").click()
+        driver.find_element_by_id("id_submit").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("Add Resource", 
+          driver.find_element_by_css_selector("#content > h1").text)
+        # remember root window id
+        root_id = driver.current_window_handle
+
+        # save image language description
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("_save").click()
+
+        self.assertEqual("Please correct the errors below.", driver.find_element_by_xpath(
+          "//p[@class='errornote']").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors resourceName']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors description']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row distributionInfo']/div/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row contactPerson']/div/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        self.assertEqual("Edit Language Description General Info", driver.find_element_by_xpath(
+          "//div[@id='contentInfoStuff']/h1[1]/a[@class='error']").text)
+        self.assertEqual("Add Language Description Text Info", driver.find_element_by_xpath(
+          "//div[@id='contentInfoStuff']/h1[2]/a[@class='error']").text)
+        self.assertEqual("Add Language Description Image Info", driver.find_element_by_xpath(
+          "//div[@id='contentInfoStuff']/h1[3]/a[@class='error']").text)
+
+        # corpus general info popup
+        driver.find_element_by_id("edit_id_langdescInfo").click()
+        driver.switch_to_window("edit_id_langdescInfo")
+        driver.find_element_by_name("_save").click()
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row languageDescriptionType']/div/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        cancel_and_close(driver, root_id)
+
+        # corpus text info popup
+        driver.find_element_by_id("add_id_languageDescriptionTextInfo").click()
+        driver.switch_to_window("id_languageDescriptionTextInfo")
+        driver.find_element_by_name("_save").click()
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors lingualityType']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors languageId']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors languageName']/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        cancel_and_close(driver, root_id)
+
+        # corpus image info popup
+        driver.find_element_by_id("add_id_languageDescriptionImageInfo").click()
+        driver.switch_to_window("id_languageDescriptionImageInfo")
+        driver.find_element_by_name("_save").click()
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors otherMedia']/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        cancel_and_close(driver, root_id)
+        cancel_and_continue(driver, root_id)
+
+        # Tests for TEXT LEXICAL CONCEPTUAL RESOURCE
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
+        #Select resource type
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Lexical conceptual resource")
+        driver.find_element_by_id("id_submit").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("Add Resource", 
+          driver.find_element_by_css_selector("#content > h1").text)
+        # remember root window id
+        root_id = driver.current_window_handle
+
+        # save text lexical conceptual resource
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("_save").click()
+
+        self.assertEqual("Please correct the errors below.", driver.find_element_by_xpath(
+          "//p[@class='errornote']").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors resourceName']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors description']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row distributionInfo']/div/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row contactPerson']/div/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        self.assertEqual("Edit Lexical Conceptual Resource General Info", driver.find_element_by_xpath(
+          "//div[@id='contentInfoStuff']/h1[1]/a[@class='error']").text)
+        self.assertEqual("Add Lexical Conceptual Resource Text Info", driver.find_element_by_xpath(
+          "//div[@id='contentInfoStuff']/h1[2]/a[@class='error']").text)
+
+        # corpus general info popup
+        driver.find_element_by_id("edit_id_lexiconInfo").click()
+        driver.switch_to_window("edit_id_lexiconInfo")
+        driver.find_element_by_name("_save").click()
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row lexicalConceptualResourceType']/div/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        cancel_and_close(driver, root_id)
+
+        # corpus text info popup
+        driver.find_element_by_id("add_id_lexicalConceptualResourceTextInfo").click()
+        driver.switch_to_window("id_lexicalConceptualResourceTextInfo")
+        driver.find_element_by_name("_save").click()
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors lingualityType']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors languageId']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors languageName']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//tr[@id='sizeinfotype_model_set-0']/td[@class='size']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//tr[@id='sizeinfotype_model_set-0']/td[@class='sizeUnit']/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        cancel_and_close(driver, root_id)
+        cancel_and_continue(driver, root_id)
+
+        # Tests for AUDIO LEXICAL CONCEPTUAL RESOURCE
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
+        #Select resource type
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Lexical conceptual resource")
+        driver.find_element_by_id("id_lexiconAudioInfo").click()
+        driver.find_element_by_id("id_submit").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("Add Resource", 
+          driver.find_element_by_css_selector("#content > h1").text)
+        # remember root window id
+        root_id = driver.current_window_handle
+
+        # save audio lexical conceptual resource
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("_save").click()
+
+        self.assertEqual("Please correct the errors below.", driver.find_element_by_xpath(
+          "//p[@class='errornote']").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors resourceName']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors description']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row distributionInfo']/div/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row contactPerson']/div/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        self.assertEqual("Edit Lexical Conceptual Resource General Info", driver.find_element_by_xpath(
+          "//div[@id='contentInfoStuff']/h1[1]/a[@class='error']").text)
+        self.assertEqual("Add Lexical Conceptual Resource Text Info", driver.find_element_by_xpath(
+          "//div[@id='contentInfoStuff']/h1[2]/a[@class='error']").text)
+        self.assertEqual("Add Lexical Conceptual Resource Audio Info", driver.find_element_by_xpath(
+          "//div[@id='contentInfoStuff']/h1[3]/a[@class='error']").text)
+
+        # corpus general info popup
+        driver.find_element_by_id("edit_id_lexiconInfo").click()
+        driver.switch_to_window("edit_id_lexiconInfo")
+        driver.find_element_by_name("_save").click()
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row lexicalConceptualResourceType']/div/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        cancel_and_close(driver, root_id)
+
+        # corpus text info popup
+        driver.find_element_by_id("add_id_lexicalConceptualResourceTextInfo").click()
+        driver.switch_to_window("id_lexicalConceptualResourceTextInfo")
+        driver.find_element_by_name("_save").click()
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors lingualityType']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors languageId']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors languageName']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//tr[@id='sizeinfotype_model_set-0']/td[@class='size']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//tr[@id='sizeinfotype_model_set-0']/td[@class='sizeUnit']/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        cancel_and_close(driver, root_id)
+        cancel_and_continue(driver, root_id)
+
+        # Tests for VIDEO LEXICAL CONCEPTUAL RESOURCE
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
+        #Select resource type
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Lexical conceptual resource")
+        driver.find_element_by_id("id_lexiconVideoInfo").click()
+        driver.find_element_by_id("id_submit").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("Add Resource", 
+          driver.find_element_by_css_selector("#content > h1").text)
+        # remember root window id
+        root_id = driver.current_window_handle
+
+        # save video lexical conceptual resource
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("_save").click()
+
+        self.assertEqual("Please correct the errors below.", driver.find_element_by_xpath(
+          "//p[@class='errornote']").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors resourceName']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors description']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row distributionInfo']/div/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row contactPerson']/div/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        self.assertEqual("Edit Lexical Conceptual Resource General Info", driver.find_element_by_xpath(
+          "//div[@id='contentInfoStuff']/h1[1]/a[@class='error']").text)
+        self.assertEqual("Add Lexical Conceptual Resource Text Info", driver.find_element_by_xpath(
+          "//div[@id='contentInfoStuff']/h1[2]/a[@class='error']").text)
+        self.assertEqual("Add Lexical Conceptual Resource Video Info", driver.find_element_by_xpath(
+          "//div[@id='contentInfoStuff']/h1[3]/a[@class='error']").text)
+
+        # corpus general info popup
+        driver.find_element_by_id("edit_id_lexiconInfo").click()
+        driver.switch_to_window("edit_id_lexiconInfo")
+        driver.find_element_by_name("_save").click()
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row lexicalConceptualResourceType']/div/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        cancel_and_close(driver, root_id)
+
+        # corpus text info popup
+        driver.find_element_by_id("add_id_lexicalConceptualResourceTextInfo").click()
+        driver.switch_to_window("id_lexicalConceptualResourceTextInfo")
+        driver.find_element_by_name("_save").click()
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors lingualityType']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors languageId']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors languageName']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//tr[@id='sizeinfotype_model_set-0']/td[@class='size']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//tr[@id='sizeinfotype_model_set-0']/td[@class='sizeUnit']/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        cancel_and_close(driver, root_id)
+
+        # corpus video info popup
+        driver.find_element_by_id("add_id_lexicalConceptualResourceVideoInfo").click()
+        driver.switch_to_window("id_lexicalConceptualResourceVideoInfo")
+        driver.find_element_by_name("_save").click()
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors typeOfVideoContent']/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        cancel_and_close(driver, root_id)
+        cancel_and_continue(driver, root_id)
+
+        # Tests for IMAGE LEXICAL CONCEPTUAL RESOURCE
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
+        #Select resource type
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Lexical conceptual resource")
+        driver.find_element_by_id("id_lexiconImageInfo").click()
+        driver.find_element_by_id("id_submit").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("Add Resource", 
+          driver.find_element_by_css_selector("#content > h1").text)
+        # remember root window id
+        root_id = driver.current_window_handle
+
+        # save image lexical conceptual resource
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("_save").click()
+
+        self.assertEqual("Please correct the errors below.", driver.find_element_by_xpath(
+          "//p[@class='errornote']").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors resourceName']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors description']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row distributionInfo']/div/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row contactPerson']/div/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        self.assertEqual("Edit Lexical Conceptual Resource General Info", driver.find_element_by_xpath(
+          "//div[@id='contentInfoStuff']/h1[1]/a[@class='error']").text)
+        self.assertEqual("Add Lexical Conceptual Resource Text Info", driver.find_element_by_xpath(
+          "//div[@id='contentInfoStuff']/h1[2]/a[@class='error']").text)
+        self.assertEqual("Add Lexical Conceptual Resource Image Info", driver.find_element_by_xpath(
+          "//div[@id='contentInfoStuff']/h1[3]/a[@class='error']").text)
+
+        # corpus general info popup
+        driver.find_element_by_id("edit_id_lexiconInfo").click()
+        driver.switch_to_window("edit_id_lexiconInfo")
+        driver.find_element_by_name("_save").click()
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row lexicalConceptualResourceType']/div/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        cancel_and_close(driver, root_id)
+
+        # corpus text info popup
+        driver.find_element_by_id("add_id_lexicalConceptualResourceTextInfo").click()
+        driver.switch_to_window("id_lexicalConceptualResourceTextInfo")
+        driver.find_element_by_name("_save").click()
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors lingualityType']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors languageId']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors languageName']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//tr[@id='sizeinfotype_model_set-0']/td[@class='size']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//tr[@id='sizeinfotype_model_set-0']/td[@class='sizeUnit']/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        cancel_and_close(driver, root_id)
+        cancel_and_continue(driver, root_id)
+
+        # Tests for TEXT LEXICAL CONCEPTUAL RESOURCE
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
+        #Select resource type
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Tool / Service")
+        driver.find_element_by_id("id_submit").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("Add Resource", 
+          driver.find_element_by_css_selector("#content > h1").text)
+        # remember root window id
+        root_id = driver.current_window_handle
+
+        # save tool / service resource
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("_save").click()
+
+        self.assertEqual("Please correct the errors below.", driver.find_element_by_xpath(
+          "//p[@class='errornote']").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors resourceName']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row errors description']/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row distributionInfo']/div/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row contactPerson']/div/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        self.assertEqual("Edit Tool / Service Info", driver.find_element_by_xpath(
+          "//div[@id='contentInfoStuff']/h1[1]/a[@class='error']").text)
+
+        # corpus tool / service info popup
+        driver.find_element_by_id("edit_id_toolServiceInfo").click()
+        driver.switch_to_window("edit_id_toolServiceInfo")
+        driver.find_element_by_name("_save").click()
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row toolServiceType']/div/ul/li[1]").text)
+        self.assertEqual("This field is required.", driver.find_element_by_xpath(
+          "//div[@class='form-row languageDependent']/div/ul/li[1]").text)
+        self.assertEqual("Required", driver.find_element_by_xpath(
+          "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
+        cancel_and_close(driver, root_id)
+        cancel_and_continue(driver, root_id)
