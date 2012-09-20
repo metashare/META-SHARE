@@ -197,7 +197,7 @@ class ViewTest(TestCase):
         client.login(username='editoruser', password='secret')
         url = self.resource.get_absolute_url()
         response = client.get(url, follow = True)
-        self.assertTemplateUsed(response, 'repository/lr_view.html')
+        self.assertTemplateUsed(response, 'repository/resource_view/lr_view.html')
         self.assertContains(response, 'middle_button">Edit Resource<')
         self.assertNotContains(response, 'middle_gray_button">Edit Resource<')
 
@@ -209,7 +209,7 @@ class ViewTest(TestCase):
         client.login(username='normaluser', password='secret')
         url = self.resource.get_absolute_url()
         response = client.get(url, follow = True)
-        self.assertTemplateUsed(response, 'repository/lr_view.html')
+        self.assertTemplateUsed(response, 'repository/resource_view/lr_view.html')
         self.assertNotContains(response, 'middle_button">Edit Resource<')
         self.assertContains(response, 'middle_gray_button">Edit Resource<')
 
@@ -220,7 +220,7 @@ class ViewTest(TestCase):
         client = Client()
         url = self.resource.get_absolute_url()
         response = client.get(url, follow = True)
-        self.assertTemplateUsed(response, 'repository/lr_view.html')
+        self.assertTemplateUsed(response, 'repository/resource_view/lr_view.html')
         self.assertNotContains(response, 'middle_button">Edit Resource<')
         self.assertContains(response, 'middle_gray_button">Edit Resource<')
 
@@ -232,7 +232,7 @@ class ViewTest(TestCase):
         client = Client()
         url = self.resource.get_absolute_url()
         response = client.get(url, follow = True)
-        self.assertTemplateUsed(response, 'repository/lr_view.html')
+        self.assertTemplateUsed(response, 'repository/resource_view/lr_view.html')
         self.assertContains(response, '<title>Italian TTS Speech Corpus ' \
                             '(Appen) &ndash; META-SHARE</title>')
 
@@ -243,7 +243,7 @@ class ViewTest(TestCase):
         client = Client()
         url = self.resource.get_absolute_url()
         response = client.get(url, follow = True)
-        self.assertTemplateUsed(response, 'repository/lr_view.html')
+        self.assertTemplateUsed(response, 'repository/resource_view/lr_view.html')
         self.assertContains(response, '<h2>Italian TTS Speech Corpus (Appen)')
 
     def test_owner_can_edit_resource(self):
@@ -255,7 +255,7 @@ class ViewTest(TestCase):
         self.resource.owners.add(ViewTest.test_editor)
         self.resource.save()
         response = client.get(self.resource.get_absolute_url())
-        self.assertTemplateUsed(response, 'repository/lr_view.html')
+        self.assertTemplateUsed(response, 'repository/resource_view/lr_view.html')
         self.assertContains(response,
             "repository/resourceinfotype_model/{0}/".format(self.resource.id))
 
@@ -266,7 +266,7 @@ class ViewTest(TestCase):
         client = Client()
         client.login(username='normaluser', password='secret')
         response = client.get(self.resource.get_absolute_url())
-        self.assertTemplateUsed(response, 'repository/lr_view.html')
+        self.assertTemplateUsed(response, 'repository/resource_view/lr_view.html')
         self.assertNotContains(response,
             "repository/resourceinfotype_model/{0}/".format(self.resource.id))
 
@@ -571,7 +571,7 @@ class DownloadViewTest(TestCase):
         client.login(username='staffuser', password='secret')
         url = self.downloadable_resource_1.get_absolute_url()
         response = client.get(url, follow = True)
-        self.assertTemplateUsed(response, 'repository/lr_view.html')
+        self.assertTemplateUsed(response, 'repository/resource_view/lr_view.html')
         self.assertContains(response, "repository/download/{0}".format(
                         self.downloadable_resource_1.storage_object.identifier))
 
