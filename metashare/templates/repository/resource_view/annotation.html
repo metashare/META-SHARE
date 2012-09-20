@@ -57,28 +57,35 @@
 		{% endif %}
 
 		{% if value.Annotation_tool %}
-			<b>Tool:</b> {{ value.Annotation_tool }}
+			<div>
+				<label class="dataline">
+					<b>Annotation Tool: </b> {{ value.Annotation_tool.Target_resource_name_uri }}
+				</label>
+			</div>
 		{% endif %}
+		
 		{% if value.Annotation_start_date %}
-			<b>Start date:</b> {{ value.Annotation_start_date|date:"SHORT_DATE_FORMAT" }}
+			<div>
+				<label class="dataline">
+					<b>Start date:</b> {{ value.Annotation_start_date|date:"SHORT_DATE_FORMAT" }}
+				</label>
+			</div>
 		{% endif %}
+		
 		{% if value.Annotation_end_date %}
-			<b>End date:</b> {{ value.Annotation_end_date|date:"SHORT_DATE_FORMAT" }}
+			<div>
+				<label class="dataline">
+					<b>End date:</b> {{ value.Annotation_end_date|date:"SHORT_DATE_FORMAT" }}
+				</label>
+			</div>
 		{% endif %}
+		
 		{% if value.Size_per_annotation %}
 			{% include "repository/resource_view/size.html" with size=value %}
 		{% endif %}
-
-		{% if value.Annotation_tool %}
-			Tool: {{ value.Annotation_tool }}
-		{% endif %}
-
-
-
-		{{ value.conformance_to_standard_practices }}
-		{{ value.conformance_to_standard_practices }}
 		
 	{% endif %}
+
 {% endfor %}
 </div>
 
