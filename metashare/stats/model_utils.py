@@ -15,7 +15,7 @@ from metashare.settings import LOG_HANDLER
 USAGETHREADNAME = "usagethread"
 BOT_AGENT_RE = re.compile(r".*(bot|spider|spyder|crawler|archiver|seek|\
     scooter|wget|misesajour|slurp|agent|gazz|onetszukaj|perl|web|lab|\
-    scrubby|asterias|ip3000|knowledge|rambler|search|link|appie|\
+    scrubby|asterias|ip3000|knowledge|rambler|search|link|zmeu|hat|appie|\
     yandex|iron33|nazilla|kototoi).*", re.IGNORECASE)
 
 #type of monitored actions
@@ -187,26 +187,26 @@ def getLRLast(action, limit, geoinfo=None, offset=0):
 def getTopQueries(limit, geoinfo=None, since=None, offset=0):
     if (geoinfo != None and geoinfo is not ""):
         if (since):
-            topqueries = QueryStats.objects.values('query', 'facets').exclude(query__startswith="mfsp:").filter(lasttime__gte=since, \
+            topqueries = QueryStats.objects.values('query', 'facets').exclude(query__startswith="mfs").filter(lasttime__gte=since, \
                 geoinfo=geoinfo).annotate(query_count=Count('query'), facets_count=Count('facets')).order_by('-query_count','-facets_count')[offset:offset+limit]
         else:
-            topqueries = QueryStats.objects.values('query', 'facets').exclude(query__startswith="mfsp:").filter(geoinfo=geoinfo).\
+            topqueries = QueryStats.objects.values('query', 'facets').exclude(query__startswith="mfs").filter(geoinfo=geoinfo).\
                 annotate(query_count=Count('query'), facets_count=Count('facets')).order_by('-query_count','-facets_count')[offset:offset+limit] 
     else:
         if (since):
-            topqueries = QueryStats.objects.values('query', 'facets').exclude(query__startswith="mfsp:").filter(lasttime__gte=since).\
+            topqueries = QueryStats.objects.values('query', 'facets').exclude(query__startswith="mfs").filter(lasttime__gte=since).\
                 annotate(query_count=Count('query'), facets_count=Count('facets')).order_by('-query_count','-facets_count')[offset:offset+limit]
         else:
-            topqueries = QueryStats.objects.values('query', 'facets').exclude(query__startswith="mfsp:").\
+            topqueries = QueryStats.objects.values('query', 'facets').exclude(query__startswith="mfs").\
                 annotate(query_count=Count('query'), facets_count=Count('facets')).order_by('-query_count','-facets_count')[offset:offset+limit]
     return topqueries
     
 def getLastQuery(limit, geoinfo=None, offset=0):
     if (geoinfo != None and geoinfo is not ""):
-        lastquery = QueryStats.objects.values('query', 'facets', 'lasttime', 'found').exclude(query__startswith="mfsp:").\
+        lastquery = QueryStats.objects.values('query', 'facets', 'lasttime', 'found').exclude(query__startswith="mfs").\
             filter(geoinfo=geoinfo).order_by('-lasttime')[offset:offset+limit]
     else:
-        lastquery = QueryStats.objects.values('query', 'facets', 'lasttime', 'found').exclude(query__startswith="mfsp:").order_by('-lasttime')[offset:offset+limit]
+        lastquery = QueryStats.objects.values('query', 'facets', 'lasttime', 'found').exclude(query__startswith="mfs").order_by('-lasttime')[offset:offset+limit]
     return lastquery
 
 def statByDate(date):
