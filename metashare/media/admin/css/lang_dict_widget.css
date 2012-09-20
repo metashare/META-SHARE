@@ -1,5 +1,6 @@
 ul.keyLangValuePairs,ul.keyLangValuePairs>li {
   list-style: none;
+  overflow: hidden;
 }
 
 ul.keyLangValuePairs>li>textarea {

@@ -82,19 +82,41 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
     The `SearchIndex` which indexes `resourceInfoType_model`s.
     """
     # in the text field we list all resource model field that shall be searched
+    # search fields are defined in templates/search/indexes/repository/resourceinfotype_model_text.txt 
     text = CharField(document=True, use_template=True, stored=False)
 
     # view and download counts of the resource
     dl_count = IntegerField(stored=False)
     view_count = IntegerField(stored=False)
 
-    # List of sorting results
+    # list of sorting results
+    # the access to the sorting results is made in the MetashareFacetedSearchView function of views.py
     resourceNameSort = CharField(indexed=True, faceted=True)
     resourceTypeSort = CharField(indexed=True, faceted=True)
     mediaTypeSort = CharField(indexed=True, faceted=True)
     languageNameSort = CharField(indexed=True, faceted=True)
 
-    # List of filters
+    # list of filters
+    #
+    # filter fields are described using:
+    #   - label: the display of the filter in the interface,
+    #   - facet_id: a unique id per filter,
+    #   - parent_id: used for sub filters, indicates which filter is the parent of a sub filter
+    #       (parent_id=0 is mandatory for top filters)
+    #   - faceted=True: mandatory to indicate the field is a filter
+    #
+    # notice: variable names must end by "Filter"
+    #
+    # important notice: the definition of the variable name is important for sub filters:
+    #   The item name of the sub filter must be lower cased for (e.g. textngram),
+    #     then followed by the sub filter name with the first character upper cased (e.g. textngramOrder),
+    #     and finalised with "Filter" (e.g. textngramOrderFilter). Otherwise, another item of the same top filter
+    #     could be considered as parent (here, for instance, "text" instead of "textngram")
+    #
+    # for each filter, a facet function must be added to "SearchQuerySet()" in urls.py
+    #   (e.g. .facet("textngramOrderFilter"), the function parameter corresponding to the variable name of the filter
+    #
+    # the creation of the filter structure is made in the _create_filters_structure function of views.py
     languageNameFilter = LabeledMultiValueField(
                                 label=_('Language'), facet_id=1, parent_id=0,
                                 faceted=True)
@@ -199,7 +221,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
     toolServiceEvaluatedFilter = LabeledMultiValueField(
                                 label=_('Evaluated'), facet_id=34, parent_id=2,
                                 faceted=True)
-
+    #Start sub filters
     textTextGenreFilter = LabeledMultiValueField(
                                 label=_('Text Genre'), facet_id=35, parent_id=3,
                                 faceted=True)

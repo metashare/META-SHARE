@@ -21,6 +21,8 @@ from metashare.repository.validators import validate_lang_code_keys, \
 from metashare.settings import DJANGO_BASE, LOG_HANDLER, DJANGO_URL
 from metashare.stats.model_utils import saveLRStats, DELETE_STAT
 from metashare.storage.models import StorageObject, MASTER, COPY_CHOICES
+from metashare.recommendations.models import ResourceCountPair, \
+    ResourceCountDict
 
 
 # Setup logging support.
@@ -120,8 +122,8 @@ class resourceInfoType_model(SchemaModel):
 
     contactPerson = models.ManyToManyField("personInfoType_model", 
       verbose_name='Contact person', 
-      help_text='Groups information on the person(s) that is responsible' \
-      ' for giving information for the resource',
+      help_text='Groups information on the person(s) that is/are respons' \
+      'ible for providing further information regarding the resource',
       related_name="contactPerson_%(class)s_related", )
 
     metadataInfo = models.OneToOneField("metadataInfoType_model", 
@@ -208,7 +210,12 @@ class resourceInfoType_model(SchemaModel):
         suppress deletion of statistics
         """
         if not keep_stats:
+            # delete statistics
             saveLRStats(self, DELETE_STAT)
+            # delete recommendations
+            ResourceCountPair.objects.filter(lrid=self.storage_object.identifier).delete()
+            ResourceCountDict.objects.filter(lrid=self.storage_object.identifier).delete()
+            
         # Call delete() method from super class with all arguments but keep_stats
         super(resourceInfoType_model, self).delete(*args, **kwargs)
 
@@ -347,14 +354,18 @@ class identificationInfoType_model(SchemaModel):
       default_retriever=best_lang_value_retriever, 
       verbose_name='Resource name', 
       max_val_length=500, 
-      help_text='The full name by which the resource is known',
+      help_text='The full name by which the resource is known; the eleme' \
+      'nt can be repeated for the different language versions using the ' \
+      '"lang" attribute to specify the language.',
       )
 
     description = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever, 
       verbose_name='Description', 
       max_val_length=10000, 
-      help_text='Provides the description of the resource in prose',
+      help_text='Provides the description of the resource in prose; the ' \
+      'element can be repeated for the different language versions using' \
+      ' the "lang" attribute to specify the language.',
       )
 
     resourceShortName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
@@ -362,7 +373,9 @@ class identificationInfoType_model(SchemaModel):
       verbose_name='Resource short name', 
       max_val_length=500, 
       help_text='The short form (abbreviation, acronym etc.) used to ide' \
-      'ntify the resource',
+      'ntify the resource; the element can be repeated for the different' \
+      ' language versions using the "lang" attribute to specify the lang' \
+      'uage.',
       blank=True)
 
     url = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=0, max_length=1000), 
@@ -375,14 +388,14 @@ class identificationInfoType_model(SchemaModel):
     metaShareId = XmlCharField(
       verbose_name='Meta share id', 
       help_text='An unambiguous referent to the resource within META-SHA' \
-      'RE',
+      'RE; it reflects to the unique system id provided automatically by' \
+      ' the MetaShare software',
       max_length=100, default="NOT_DEFINED_FOR_V2", )
 
     identifier = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=1, max_length=100), 
       verbose_name='Identifier', 
       help_text='A reference to the resource like a pid or an internal i' \
-      'dentifier used by the resource provider; the attribute "type" is ' \
-      'obligatorily used for further specification',
+      'dentifier used by the resource provider',
       blank=True, validators=[validate_matches_xml_char_production], )
 
     def __unicode__(self):
@@ -538,8 +551,9 @@ class validationInfoType_model(SchemaModel):
 
     validationReport = models.ForeignKey("documentationInfoType_model", 
       verbose_name='Validation report', 
-      help_text='A short account of the validation details or a link to ' \
-      'the validation report',
+      help_text='A short account of the validation details or a bibliogr' \
+      'aphic reference to a document with detailed information on the va' \
+      'lidation process and results',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
     validationTool = models.ForeignKey("targetResourceInfoType_model", 
@@ -702,13 +716,14 @@ class metadataInfoType_model(SchemaModel):
 
     metadataCreationDate = models.DateField(
       verbose_name='Metadata creation date', 
-      help_text='The date of creation of this metadata description',
+      help_text='The date of creation of this metadata description (auto' \
+      'matically inserted by the MetaShare software)',
       )
 
     metadataCreator = models.ManyToManyField("personInfoType_model", 
       verbose_name='Metadata creator', 
-      help_text='Groups information on the person that created the metad' \
-      'ata in META-SHARE editor; to be automatically assigned',
+      help_text='Groups information on the person that has created the m' \
+      'etadata record',
       blank=True, null=True, related_name="metadataCreator_%(class)s_related", )
 
     source = XmlCharField(
@@ -725,24 +740,32 @@ class metadataInfoType_model(SchemaModel):
 
     originalMetadataLink = XmlCharField(
       verbose_name='Original metadata link', validators=[HTTPURI_VALIDATOR], 
-      help_text='A link to the metadata of the original source',
+      help_text='A link to the original metadata record, in cases of har' \
+      'vesting',
       blank=True, max_length=1000, )
 
     metadataLanguageName = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=2, max_length=1000), 
       verbose_name='Metadata language name', 
       help_text='The name of the language in which the metadata descript' \
-      'ion is written according to IETF BCP47',
+      'ion is written; an autocompletion mechanism with values from the ' \
+      'ISO 639 is provided in the editor, but the values can be subseque' \
+      'ntly edited for further specification (according to the IETF BCP4' \
+      '7 guidelines)',
       blank=True, validators=[validate_matches_xml_char_production], )
 
     metadataLanguageId = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=3, max_length=1000), 
       verbose_name='Metadata language id', 
       help_text='The identifier of the language in which the metadata de' \
-      'scription is written according to IETF BCP47',
+      'scription is written; an autocompletion mechanism with values fro' \
+      'm the ISO 639 is provided in the editor, but the values can be su' \
+      'bsequently edited for further specification (according to the IET' \
+      'F BCP47 guidelines)',
       blank=True, validators=[validate_matches_xml_char_production], )
 
     metadataLastDateUpdated = models.DateField(
       verbose_name='Metadata last date updated', 
-      help_text='The date of the last updating of the metadata record',
+      help_text='The date of the last updating of the metadata record (a' \
+      'utomatically inserted by the MetaShare software)',
       blank=True, null=True, )
 
     revision = XmlCharField(
@@ -758,9 +781,9 @@ class metadataInfoType_model(SchemaModel):
 # pylint: disable-msg=C0103
 class documentationInfoType_model(SubclassableModel):
     """
-    Groups information on the documentation of the resource pointing to
-    either structured and unstructured presentation of the relevant
-    documents
+    Used to bring together information on documents (as a structured
+    bibliographic record or in an unstructured format) and free text
+    descriptions
     """
 
     __schema_name__ = 'SUBCLASSABLE'
@@ -922,14 +945,18 @@ class documentInfoType_model(documentationInfoType_model):
 
     documentLanguageName = XmlCharField(
       verbose_name='Document language name', 
-      help_text='The name of the language the document is written in, as' \
-      ' mentioned in IETF BCP47',
+      help_text='The name of the language the document is written in; an' \
+      ' autocompletion mechanism with values from the ISO 639 is provide' \
+      'd in the editor, but the values can be subsequently edited for fu' \
+      'rther specification (according to the IETF BCP47 guidelines)',
       blank=True, max_length=150, )
 
     documentLanguageId = XmlCharField(
       verbose_name='Document language id', 
-      help_text='The id of the language the document is written in, as m' \
-      'entioned in IETF BCP47',
+      help_text='The id of the language the document is written in; an a' \
+      'utocompletion mechanism with values from the ISO 639 is provided ' \
+      'in the editor, but the values can be subsequently edited for furt' \
+      'her specification (according to the IETF BCP47 guidelines)',
       blank=True, max_length=20, )
 
 
@@ -1055,8 +1082,9 @@ class domainInfoType_model(SchemaModel):
       verbose_name='Conformance to classification scheme', 
       help_text='Specifies the external classification schemes',
       blank=True, 
-      max_length=DOMAININFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES['max_length'],
-      choices=DOMAININFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES['choices'],
+      max_length=100,
+      choices=sorted(DOMAININFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
@@ -1199,8 +1227,9 @@ class annotationInfoType_model(SchemaModel):
       help_text='Specifies the annotation level of the resource or the a' \
       'nnotation type a tool/ service requires or produces as an output',
       
-      max_length=ANNOTATIONINFOTYPE_ANNOTATIONTYPE_CHOICES['max_length'],
-      choices=ANNOTATIONINFOTYPE_ANNOTATIONTYPE_CHOICES['choices'],
+      max_length=150,
+      choices=sorted(ANNOTATIONINFOTYPE_ANNOTATIONTYPE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     annotatedElements = MultiSelectField(
@@ -1233,24 +1262,28 @@ class annotationInfoType_model(SchemaModel):
       help_text='Specifies the format that is used in the annotation pro' \
       'cess since often the mime type will not be sufficient for machine' \
       ' processing',
-      blank=True, max_length=1000, )
+      blank=True, max_length=100, )
 
     tagset = XmlCharField(
       verbose_name='Tagset', 
       help_text='A name or a url reference to the tagset used in the ann' \
       'otation of the resource or used by the tool/service',
-      blank=True, max_length=1000, )
+      blank=True, max_length=500, )
 
     tagsetLanguageId = XmlCharField(
       verbose_name='Tagset language id', 
-      help_text='The identifier of the tagset language as expressed in t' \
-      'he values of IETF BP47',
+      help_text='The identifier of the tagset language; an autocompletio' \
+      'n mechanism with values from the ISO 639 is provided in the edito' \
+      'r, but the values can be subsequently edited for further specific' \
+      'ation (according to the IETF BCP47 guidelines)',
       blank=True, max_length=20, )
 
     tagsetLanguageName = XmlCharField(
       verbose_name='Tagset language name', 
-      help_text='The name of the tagset language expressed in the values' \
-      ' of IETF BP47',
+      help_text='The name of the tagset language; an autocompletion mech' \
+      'anism with values from the ISO 639 is provided in the editor, but' \
+      ' the values can be subsequently edited for further specification ' \
+      '(according to the IETF BCP47 guidelines)',
       blank=True, max_length=100, )
 
     conformanceToStandardsBestPractices = MultiSelectField(
@@ -2421,7 +2454,7 @@ class communicationInfoType_model(SchemaModel):
       ( u'faxNumber', u'faxNumber', OPTIONAL ),
     )
 
-    email = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=13, max_length=1000), 
+    email = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=13, max_length=100), 
       verbose_name='Email', validators=[EMAILADDRESS_VALIDATOR], 
       help_text='The email address of a person or an organization',
       )
@@ -2752,12 +2785,16 @@ class distributionInfoType_model(SchemaModel):
 
     availabilityEndDate = models.DateField(
       verbose_name='Availability end date', 
-      help_text='Specifies the end date of availability of a resource',
+      help_text='Specifies the end date of availability of a resource - ' \
+      'only for cases where a resource is available for a restricted tim' \
+      'e period.',
       blank=True, null=True, )
 
     availabilityStartDate = models.DateField(
       verbose_name='Availability start date', 
-      help_text='Specifies the start date of availability of a resource',
+      help_text='Specifies the start date of availability of a resource ' \
+      '- only for cases where a resource is available for a restricted t' \
+      'ime period.',
       blank=True, null=True, )
 
     def real_unicode_(self):
@@ -2884,8 +2921,7 @@ class licenceInfoType_model(SchemaModel):
 
     restrictionsOfUse = MultiSelectField(
       verbose_name='Restrictions of use', 
-      help_text='Specifies the restrictions imposed by the type of the l' \
-      'icence',
+      help_text='Specifies the restrictions imposed by the licence',
       blank=True, 
       max_length=1 + len(LICENCEINFOTYPE_RESTRICTIONSOFUSE_CHOICES['choices']) / 4,
       choices=LICENCEINFOTYPE_RESTRICTIONSOFUSE_CHOICES['choices'],
@@ -2914,7 +2950,7 @@ class licenceInfoType_model(SchemaModel):
     fee = XmlCharField(
       verbose_name='Fee', 
       help_text='Specifies the costs that are required to access the res' \
-      'ource, a fragment of the resource or to use atool or service',
+      'ource, a fragment of the resource or to use a tool or service',
       blank=True, max_length=100, )
 
     attributionText = DictField(validators=[validate_lang_code_keys, validate_dict_values],
@@ -2922,24 +2958,25 @@ class licenceInfoType_model(SchemaModel):
       verbose_name='Attribution text', 
       max_val_length=1000, 
       help_text='The text that must be quoted for attribution purposes w' \
-      'hen using a resource',
+      'hen using a resource - for cases where a resource is provided wit' \
+      'h a restriction on attribution',
       blank=True)
 
     licensor = models.ManyToManyField("actorInfoType_model", 
       verbose_name='Licensor', 
-      help_text='Groups information on person who is legally eligible to' \
-      ' licence and actually licenses the resource. The licensor could b' \
-      'e different from the creator, the distributor or the IP rightshol' \
-      'der. The licensor has the necessary rights or licences to license' \
-      ' the work and is the party that actually licenses the resource th' \
-      'at enters the META-SHARE network. She will have obtained the nece' \
-      'ssary rights or licences from the IPR holder and she may have a d' \
-      'istribution agreement with a distributor that disseminates the wo' \
-      'rk under a set of conditions defined in the specific licence and ' \
-      'collects revenue on the licensor\'s behalf. The attribution of th' \
-      'e creator, separately from the attribution of the licensor, may b' \
-      'e part of the licence under which the resource is distributed (as' \
-      ' e.g. is the case with Creative Commons Licences)',
+      help_text='Groups information on the person who is legally eligibl' \
+      'e to licence and actually licenses the resource. The licensor cou' \
+      'ld be different from the creator, the distributor or the IP right' \
+      'sholder. The licensor has the necessary rights or licences to lic' \
+      'ense the work and is the party that actually licenses the resourc' \
+      'e that enters the META-SHARE network. She will have obtained the ' \
+      'necessary rights or licences from the IPR holder and she may have' \
+      ' a distribution agreement with a distributor that disseminates th' \
+      'e work under a set of conditions defined in the specific licence ' \
+      'and collects revenue on the licensor\'s behalf. The attribution o' \
+      'f the creator, separately from the attribution of the licensor, m' \
+      'ay be part of the licence under which the resource is distributed' \
+      ' (as e.g. is the case with Creative Commons Licences)',
       blank=True, null=True, related_name="licensor_%(class)s_related", )
 
     distributionRightsHolder = models.ManyToManyField("actorInfoType_model", 
@@ -3033,8 +3070,9 @@ class characterEncodingInfoType_model(SchemaModel):
       help_text='The name of the character encoding used in the resource' \
       ' or accepted by the tool/service',
       
-      max_length=CHARACTERENCODINGINFOTYPE_CHARACTERENCODING_CHOICES['max_length'],
-      choices=CHARACTERENCODINGINFOTYPE_CHARACTERENCODING_CHOICES['choices'],
+      max_length=100,
+      choices=sorted(CHARACTERENCODINGINFOTYPE_CHARACTERENCODING_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     sizePerCharacterEncoding = models.OneToOneField("sizeInfoType_model", 
@@ -3270,7 +3308,7 @@ class languageVarietyInfoType_model(SchemaModel):
       verbose_name='Language variety name', 
       help_text='The name of the language variety that occurs in the res' \
       'ource or is supported by a tool/service',
-      max_length=1000, )
+      max_length=100, )
 
     sizePerLanguageVariety = models.OneToOneField("sizeInfoType_model", 
       verbose_name='Size per language variety', 
@@ -3310,16 +3348,20 @@ class languageInfoType_model(SchemaModel):
     languageId = XmlCharField(
       verbose_name='Language id', 
       help_text='The identifier of the language that is included in the ' \
-      'resource or supported by the tool/service according to the IETF B' \
-      'CP47 standard',
-      max_length=1000, )
+      'resource or supported by the tool/service; an autocompletion mech' \
+      'anism with values from the ISO 639 is provided in the editor, but' \
+      ' the values can be subsequently edited for further specification ' \
+      '(according to the IETF BCP47 guidelines)',
+      max_length=100, )
 
     languageName = XmlCharField(
       verbose_name='Language name', 
       help_text='A human understandable name of the language that is use' \
-      'd in the resource or supported by the tool/service according to t' \
-      'he IETF BCP47 standard',
-      max_length=1000, )
+      'd in the resource or supported by the tool/service; an autocomple' \
+      'tion mechanism with values from the ISO 639 is provided in the ed' \
+      'itor, but the values can be subsequently edited for further speci' \
+      'fication (according to the IETF BCP47 guidelines)',
+      max_length=100, )
 
     languageScript = XmlCharField(
       verbose_name='Language script', 
@@ -3998,8 +4040,9 @@ class durationOfEffectiveSpeechInfoType_model(SchemaModel):
       help_text='Specification of the unit of size that is used when pro' \
       'viding information on the size of a resource',
       
-      max_length=DURATIONOFEFFECTIVESPEECHINFOTYPE_DURATIONUNIT_CHOICES['max_length'],
-      choices=DURATIONOFEFFECTIVESPEECHINFOTYPE_DURATIONUNIT_CHOICES['choices'],
+      max_length=30,
+      choices=sorted(DURATIONOFEFFECTIVESPEECHINFOTYPE_DURATIONUNIT_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     back_to_audiosizeinfotype_model = models.ForeignKey("audioSizeInfoType_model",  blank=True, null=True)
@@ -4120,7 +4163,7 @@ class audioFormatInfoType_model(SchemaModel):
       'ce accepts; value to be taken from a subset of the official mime ' \
       'types of the Internet Assigned Numbers Authority (http://www.iana' \
       '.org/)',
-      max_length=1000, )
+      max_length=50, )
 
     signalEncoding = MultiSelectField(
       verbose_name='Signal encoding', 
@@ -4289,8 +4332,9 @@ class audioClassificationInfoType_model(SchemaModel):
       verbose_name='Conformance to classification scheme', 
       help_text='Specifies the external classification schemes',
       blank=True, 
-      max_length=AUDIOCLASSIFICATIONINFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES['max_length'],
-      choices=AUDIOCLASSIFICATIONINFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES['choices'],
+      max_length=100,
+      choices=sorted(AUDIOCLASSIFICATIONINFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     sizePerAudioClassification = models.OneToOneField("sizeInfoType_model", 
@@ -4509,8 +4553,9 @@ class textClassificationInfoType_model(SchemaModel):
       verbose_name='Conformance to classification scheme', 
       help_text='Specifies the external classification schemes',
       blank=True, 
-      max_length=TEXTCLASSIFICATIONINFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES['max_length'],
-      choices=TEXTCLASSIFICATIONINFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES['choices'],
+      max_length=100,
+      choices=sorted(TEXTCLASSIFICATIONINFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     sizePerTextClassification = models.OneToOneField("sizeInfoType_model", 
@@ -4749,7 +4794,7 @@ class videoFormatInfoType_model(SchemaModel):
       'ce accepts; value to be taken from a subset of the official mime ' \
       'types of the Internet Assigned Numbers Authority (http://www.iana' \
       '.org/)',
-      max_length=1000, )
+      max_length=50, )
 
     colourSpace = MultiSelectField(
       verbose_name='Colour space', 
@@ -4779,8 +4824,9 @@ class videoFormatInfoType_model(SchemaModel):
       verbose_name='Visual modelling', 
       help_text='The dimensional form applied on video or image corpus',
       blank=True, 
-      max_length=VIDEOFORMATINFOTYPE_VISUALMODELLING_CHOICES['max_length'],
-      choices=VIDEOFORMATINFOTYPE_VISUALMODELLING_CHOICES['choices'],
+      max_length=30,
+      choices=sorted(VIDEOFORMATINFOTYPE_VISUALMODELLING_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     fidelity = MetaBooleanField(
@@ -4856,8 +4902,9 @@ class videoClassificationInfoType_model(SchemaModel):
       verbose_name='Conformance to classification scheme', 
       help_text='Specifies the external classification schemes',
       blank=True, 
-      max_length=VIDEOCLASSIFICATIONINFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES['max_length'],
-      choices=VIDEOCLASSIFICATIONINFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES['choices'],
+      max_length=100,
+      choices=sorted(VIDEOCLASSIFICATIONINFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     sizePerVideoClassification = models.OneToOneField("sizeInfoType_model", 
@@ -5081,7 +5128,7 @@ class imageFormatInfoType_model(SchemaModel):
       'ce accepts; value to be taken from a subset of the official mime ' \
       'types of the Internet Assigned Numbers Authority (http://www.iana' \
       '.org/)',
-      max_length=1000, )
+      max_length=50, )
 
     colourSpace = MultiSelectField(
       verbose_name='Colour space', 
@@ -5197,8 +5244,9 @@ class imageClassificationInfoType_model(SchemaModel):
       verbose_name='Conformance to classification scheme', 
       help_text='Specifies the external classification schemes',
       blank=True, 
-      max_length=IMAGECLASSIFICATIONINFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES['max_length'],
-      choices=IMAGECLASSIFICATIONINFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES['choices'],
+      max_length=100,
+      choices=sorted(IMAGECLASSIFICATIONINFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
       )
 
     sizePerImageClassification = models.OneToOneField("sizeInfoType_model", 
@@ -6651,27 +6699,27 @@ class inputInfoType_model(SchemaModel):
       choices=INPUTINFOTYPE_MODALITYTYPE_CHOICES['choices'],
       )
 
-    languageName = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=29, max_length=1000), 
+    languageName = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=29, max_length=100), 
       verbose_name='Language name', 
       help_text='A human understandable name of the language that is use' \
       'd in the resource or supported by the tool/service according to t' \
       'he IETF BCP47 standard',
       blank=True, validators=[validate_matches_xml_char_production], )
 
-    languageId = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=30, max_length=1000), 
+    languageId = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=30, max_length=100), 
       verbose_name='Language id', 
       help_text='The identifier of the language that is included in the ' \
       'resource or supported by the tool/service according to the IETF B' \
       'CP47 standard',
       blank=True, validators=[validate_matches_xml_char_production], )
 
-    languageVarietyName = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=31, max_length=1000), 
+    languageVarietyName = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=31, max_length=100), 
       verbose_name='Language variety name', 
       help_text='Specifies the type of the language variety that occurs ' \
       'in the resource or is supported by a tool/service',
       blank=True, validators=[validate_matches_xml_char_production], )
 
-    mimeType = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=32, max_length=1000), 
+    mimeType = MultiTextField(max_length=50, widget=MultiFieldWidget(widget_id=32, max_length=50), 
       verbose_name='Mime type', 
       help_text='The mime-type of the resource which is a formalized spe' \
       'cifier for the format included or a mime-type that the tool/servi' \
@@ -6698,14 +6746,14 @@ class inputInfoType_model(SchemaModel):
       choices=INPUTINFOTYPE_ANNOTATIONTYPE_CHOICES['choices'],
       )
 
-    annotationFormat = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=33, max_length=1000), 
+    annotationFormat = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=33, max_length=100), 
       verbose_name='Annotation format', 
       help_text='Specifies the format that is used in the annotation pro' \
       'cess since often the mime type will not be sufficient for machine' \
       ' processing',
       blank=True, validators=[validate_matches_xml_char_production], )
 
-    tagset = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=34, max_length=1000), 
+    tagset = MultiTextField(max_length=500, widget=MultiFieldWidget(widget_id=34, max_length=500), 
       verbose_name='Tagset', 
       help_text='A name or a url reference to the tagset used in the ann' \
       'otation of the resource or used by the tool/service',
@@ -6889,27 +6937,27 @@ class outputInfoType_model(SchemaModel):
       choices=OUTPUTINFOTYPE_MODALITYTYPE_CHOICES['choices'],
       )
 
-    languageName = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=35, max_length=1000), 
+    languageName = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=35, max_length=100), 
       verbose_name='Language name', 
       help_text='A human understandable name of the language that is use' \
       'd in the resource or supported by the tool/service according to t' \
       'he IETF BCP47 standard',
       blank=True, validators=[validate_matches_xml_char_production], )
 
-    languageId = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=36, max_length=1000), 
+    languageId = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=36, max_length=100), 
       verbose_name='Language id', 
       help_text='The identifier of the language that is included in the ' \
       'resource or supported by the tool/service according to the IETF B' \
       'CP47 standard',
       blank=True, validators=[validate_matches_xml_char_production], )
 
-    languageVarietyName = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=37, max_length=1000), 
+    languageVarietyName = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=37, max_length=100), 
       verbose_name='Language variety name', 
       help_text='Specifies the type of the language variety that occurs ' \
       'in the resource or is supported by a tool/service',
       blank=True, validators=[validate_matches_xml_char_production], )
 
-    mimeType = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=38, max_length=1000), 
+    mimeType = MultiTextField(max_length=50, widget=MultiFieldWidget(widget_id=38, max_length=50), 
       verbose_name='Mime type', 
       help_text='The mime-type of the resource which is a formalized spe' \
       'cifier for the format included or a mime-type that the tool/servi' \
@@ -6936,14 +6984,14 @@ class outputInfoType_model(SchemaModel):
       choices=OUTPUTINFOTYPE_ANNOTATIONTYPE_CHOICES['choices'],
       )
 
-    annotationFormat = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=39, max_length=1000), 
+    annotationFormat = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=39, max_length=100), 
       verbose_name='Annotation format', 
       help_text='Specifies the format that is used in the annotation pro' \
       'cess since often the mime type will not be sufficient for machine' \
       ' processing',
       blank=True, validators=[validate_matches_xml_char_production], )
 
-    tagset = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=40, max_length=1000), 
+    tagset = MultiTextField(max_length=500, widget=MultiFieldWidget(widget_id=40, max_length=500), 
       verbose_name='Tagset', 
       help_text='A name or a url reference to the tagset used in the ann' \
       'otation of the resource or used by the tool/service',

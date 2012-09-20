@@ -795,8 +795,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
                         for _chunk in resource.chunks():
                             _out_file.write(_chunk)
 
-                    # Save corresponding StorageObject to update its checksum.
-                    obj.storage_object.save()
+                    # Update the corresponding StorageObject to update its
+                    # download data checksum.
+                    obj.storage_object.update_storage()
 
                     change_message = 'Uploaded "{}" to "{}" in {}.'.format(
                       resource.name, storage_object._storage_folder(),
@@ -1016,8 +1017,10 @@ class ResourceModelAdmin(SchemaModelAdmin):
         action.
         """
         result = super(ResourceModelAdmin, self).get_actions(request)
-        # always remove the standard Django bulk delete action
-        del result['delete_selected']
+        # always remove the standard Django bulk delete action for resources (if
+        # it hasn't previously been removed, yet)
+        if 'delete_selected' in result:
+            del result['delete_selected']
         if not request.user.is_superuser:
             del result['remove_group']
             del result['remove_owner']

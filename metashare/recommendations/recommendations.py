@@ -27,14 +27,14 @@ class SessionResourcesTracker:
     
     def __init__(self):
         
-        # set of resource ids that have been downloaded together; 
+        # set of resources that have been downloaded together; 
         # time intervals between downloads are not longer than MAX_DOWNLOAD_INTERVAL     
         self.downloads = set()
         
         # time of last download
         self.last_download = None
         
-        # set of resource ids that have been downloaded together; 
+        # set of resources that have been viewed together; 
         # time intervals between downloads are not longer than MAX_VIEW_INTERVAL
         self.views = set()
         

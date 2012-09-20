@@ -1,6 +1,7 @@
 '''
 This file contains the lookup logic for ajax-based editor search widgets.
 '''
+from django.utils.translation import ungettext
 
 from selectable.base import ModelLookup
 from selectable.registry import registry
@@ -15,10 +16,16 @@ from metashare.repository.models import personInfoType_model, \
 from metashare.storage.models import MASTER
 import logging
 from metashare.settings import LOG_HANDLER
+from metashare.repository.model_utils import get_root_resources
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
+
+
+_AUTO_SUGGEST_SG_TPL = u'%(label)s (used %(count)d time)'
+_AUTO_SUGGEST_PL_TPL = u'%(label)s (used %(count)d times)'
+
 
 def print_query_results(results):
     if LOGGER.isEnabledFor(logging.DEBUG):
@@ -52,6 +59,13 @@ class PersonLookup(ModelLookup):
         print_query_results(results)
         return results
 
+    def format_item(self, item):
+        fmt_item = super(PersonLookup, self).format_item(item)
+        count = get_root_resources(item).__len__()
+        lab = fmt_item['label']
+        fmt_item['label'] = ungettext(_AUTO_SUGGEST_SG_TPL,
+            _AUTO_SUGGEST_PL_TPL, count) % {'label': lab, 'count': count}
+        return fmt_item
 
 class GenericUnicodeLookup(ModelLookup):
     '''
@@ -71,7 +85,6 @@ class GenericUnicodeLookup(ModelLookup):
                     return False 
             return lcterm in unicode(item).lower()
         
-        items = ''
         items = self.get_queryset()
         if term == '*':
             results = items
@@ -83,6 +96,10 @@ class GenericUnicodeLookup(ModelLookup):
     
     def format_item(self, item):
         fmt_item = super(GenericUnicodeLookup, self).format_item(item)
+        count = get_root_resources(item).__len__()
+        lab = fmt_item['label']
+        fmt_item['label'] = ungettext(_AUTO_SUGGEST_SG_TPL,
+            _AUTO_SUGGEST_PL_TPL, count) % {'label': lab, 'count': count}
         fmt_item['cls'] = item.as_subclass().__class__.__name__.lower()
         return fmt_item
     
@@ -196,6 +213,14 @@ class ProjectLookup(ModelLookup):
     
     def get_item_id(self, item):
         return item.id
+
+    def format_item(self, item):
+        fmt_item = super(ProjectLookup, self).format_item(item)
+        count = get_root_resources(item).__len__()
+        lab = fmt_item['label']
+        fmt_item['label'] = ungettext(_AUTO_SUGGEST_SG_TPL,
+            _AUTO_SUGGEST_PL_TPL, count) % {'label': lab, 'count': count}
+        return fmt_item
     
 class OrganizationLookup(ModelLookup):
     model = organizationInfoType_model

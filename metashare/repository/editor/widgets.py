@@ -577,8 +577,8 @@ class LangAutoCompleteWidget(widgets.Widget):
         
     def __init__(self, attrs=None):
         super(LangAutoCompleteWidget, self).__init__(attrs)
-        
-    def render(self, name, value):
+
+    def render(self, name, value, attrs=None):
         if not value:
             value = u''
         res1 = u'<input type="text" class="lang_autocomplete" name="{0}" value="{1}"/>'.format(name, value)
@@ -605,6 +605,8 @@ class AutoCompleteSelectMultipleEditWidget(SelectableMultiWidget, SelectableMedi
             u'data-selectable-position': position,
             u'data-selectable-allow-editing': 'true',
             u'data-selectable-base-url': proto_url,
+            u'data-selectable-throbber-img': '{0}img/admin/throbber_16.gif'.format(settings.ADMIN_MEDIA_PREFIX),
+            u'data-selectable-use-state-error': 'false',
         }
         if more_attrs:
             attrs.update(more_attrs)
@@ -625,7 +627,8 @@ class AutoCompleteSelectMultipleEditWidget(SelectableMultiWidget, SelectableMedi
         if value and not hasattr(value, '__iter__'):
             value = [value]
         value = [u'', value]
-        return super(AutoCompleteSelectMultipleEditWidget, self).render(name, value, attrs)
+        html_code = super(AutoCompleteSelectMultipleEditWidget, self).render(name, value, attrs)
+        return html_code
 
     def decompress(self, value):
         pass
