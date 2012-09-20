@@ -1,6 +1,6 @@
 {% spaceless %}
 
-<label class='title component'>Resource Creation Info:</label>
+<label class='title component'>Resource Creation Info</label>
 
 <div class="dataline">
 {% for key, value in resource_creation_dict.items %}
@@ -15,7 +15,7 @@
 </div>
 
 {% if resource_creation_dict.Resource_creation.Creation_start_date %}			
-     <div class="dataline">
+     <div class="dataline indented">
 		<label>
 			<b>Creation Started:</b> {{resource_creation_dict.Resource_creation.Creation_start_date|date:"SHORT_DATE_FORMAT"}}
 		</label>
@@ -23,7 +23,7 @@
 {% endif %}
 
 {% if resource_creation_dict.Resource_creation.Creation_end_date %}			
-     <div class="dataline">
+     <div class="dataline indented">
 		<label>
 			<b>Creation Ended:</b> {{resource_creation_dict.Resource_creation.Creation_end_date|date:"SHORT_DATE_FORMAT"}}
 		</label>
