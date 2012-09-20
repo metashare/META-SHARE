@@ -4,21 +4,16 @@
 
 <label class='title'>{{title}}</label>
 
-<label class="dataline" style="float:left;">
-		{% if person_dict.Communication.Url %}
-			<a href="{{person_dict.Communication.Url}}" target='_blank'>
-		{% endif %}
+<a href='#' class="contactcard" title="Click to view contact card">
+	<label class="dataline indented" style="float:left;">
 				{{ person_dict.Given_name }}
 				{{ person_dict.Surname }}
-		{% if person_dict.Communication.Url %}
-			</a>
-		{% endif %}
-		{{ person_dict.Organization_name }}	
+				{{ person_dict.Organization_name }}	
 	</label>
 
-	<a href='#' class="contactcard" title="Click to view contact card">
+	
 	<img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/vcard.png" class='vcard'/>
-	</a>
+</a>
 
 <div class="contact hidden">
 
