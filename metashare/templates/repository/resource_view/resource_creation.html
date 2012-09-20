@@ -1,3 +1,5 @@
+{% spaceless %}
+
 <label class='title component'>Resource Creation Info:</label>
 
 <div class="dataline">
@@ -31,3 +33,5 @@
 {% if resource_creation_dict.Resource_creation.Funding_project %}			
     {% include "repository/resource_view/project.html" with project=resource_creation_dict.Resource_creation.Funding_project %}
 {% endif %}
+
+{% endspaceless %}
