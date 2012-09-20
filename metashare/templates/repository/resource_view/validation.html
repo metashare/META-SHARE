@@ -3,14 +3,14 @@
 <label class='title component'>Validation:</label>
 
 {% for dict in validation_dicts %}
-     <div class="dataline">
+     <div class="dataline indented">
 		<label>
 			{% ifequal dict.Validation.Validated "True" %}Validated{% else %}Not Validated{% endifequal %}
 		</label>
 	</div>
 		
 	{% if dict.Validation.Validation_type %}
-	     <div class="dataline">
+	     <div class="dataline indented">
 			<label>
 				<b>Type of Validation:</b> {{ dict.Validation.Validation_type }}
 			</label>
@@ -18,7 +18,7 @@
 	{% endif %}
 	
 	{% if dict.Validation.Validation_mode %}
-	     <div class="dataline">
+	     <div class="dataline indented">
 			<label>
 				<b>Validation Mode:</b> {{ dict.Validation.Validation_mode }}
 			</label>
@@ -26,7 +26,7 @@
 	{% endif %}
 	
 	{% if dict.Validation.Validation_mode_details %}
-	     <div class="dataline">
+	     <div class="dataline indented">
 			<label>
 				<b>Mode Details:</b> {{ dict.Validation.Validation_mode_details }}
 			</label>
@@ -34,7 +34,7 @@
 	{% endif %}
 	
 	{% if dict.Validation.Validation_extent %}
-	     <div class="dataline">
+	     <div class="dataline indented">
 			<label>
 				<b>Extent:</b> {{ dict.Validation.Validation_extent }}
 			</label>
@@ -42,7 +42,7 @@
 	{% endif %}
 
 	{% if dict.Validation.Validation_extent_details %}
-	     <div class="dataline">
+	     <div class="dataline indented">
 			<label>
 				<b>Extent Details:</b> {{ dict.Validation.Validation_extent_details }}
 			</label>
@@ -50,7 +50,7 @@
 	{% endif %}
 	
 	{% if dict.Validation.Size_per_validation %}
-	     <div class="dataline">
+	     <div class="dataline indented">
 			<label>
 				<b>Size per Validation:</b> {{ dict.Validation.Size_per_validation }}
 			</label>
@@ -58,7 +58,7 @@
 	{% endif %}
 
 	{% if dict.Validation.Validation_report %}
-	     <div class="dataline">
+	     <div class="dataline indented">
 			<label>
 				<b>Validation Report:</b> {{ dict.Validation.Validation_report }}
 			</label>
@@ -66,7 +66,7 @@
 	{% endif %}
 
 	{% if dict.Validation.Validation_tool %}
-	     <div class="dataline">
+	     <div class="dataline indented">
 			<label>
 				<b>Validation Tool:</b> {{ dict.Validation.Validation_tool }}
 			</label>
