@@ -102,7 +102,7 @@ def usagestats (request):
             verbose_name = None
             if ("/" in _component):
                 verbose_name = _component
-                _component = _field    #_component[_component.index('/')+1:]
+                _component = _field
             model_name = _model.replace("Type_model","")
             component_name = eval(u'{0}._meta.verbose_name'.format(_model))
             
@@ -331,6 +331,7 @@ def getstats (request):
     data['lrcount'] = resourceInfoType_model.objects.filter(
         storage_object__publication_status=PUBLISHED,
         storage_object__deleted=False).count()
+    data['lrmastercount'] = StorageObject.objects.filter(copy_status=MASTER).count()
     data['lrupdate'] = LRStats.objects.filter(lasttime__startswith=currdate, action=UPDATE_STAT).count()
     data['lrview'] = LRStats.objects.filter(lasttime__startswith=currdate, action=VIEW_STAT).count()
     data['lrdown'] = LRStats.objects.filter(lasttime__startswith=currdate, action=DOWNLOAD_STAT).count()
