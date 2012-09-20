@@ -487,6 +487,98 @@ class EditorTest(SeleniumTestCase):
          driver.find_element_by_css_selector("ul.messagelist>li").text)
 
         
+    def test_LR_creation_corpus_text_numerical(self):
+        driver = self.driver
+        driver.get(self.base_url)
+        ss_path = setup_screenshots_folder(
+          "PNG-metashare.repository.seltests.test_editor.EditorTest",
+          "LR_creation_corpus_text_numerical")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))  
+        # login user
+        login_user(driver, "manageruser", "secret")
+        # make sure login was successful
+        self.assertEqual("Logout", 
+          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
+        # create audio corpus
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
+        driver.find_element_by_id("id_corpusTextNumericalInfo").click()
+        driver.find_element_by_id("id_submit").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("Add Resource", 
+          driver.find_element_by_css_selector("#content > h1").text)
+        # remember root window id
+        root_id = driver.current_window_handle
+        # add required fields
+        driver.find_element_by_name("key_form-0-resourceName_0").clear()
+        driver.find_element_by_name("key_form-0-resourceName_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-resourceName_0").clear()
+        driver.find_element_by_name("val_form-0-resourceName_0").send_keys("Test Text Numerical Corpus")
+        driver.find_element_by_name("key_form-0-description_0").clear()
+        driver.find_element_by_name("key_form-0-description_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-description_0").clear()
+        driver.find_element_by_name("val_form-0-description_0").send_keys("Test Description")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # distribution popup
+        driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
+        self.fill_distribution(driver, ss_path, root_id)
+        # contact person popup
+        driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
+        self.fill_contact_person(driver, ss_path, root_id)
+        
+        # TODO check if this behaviour is normal
+        # corpus text numerical info popup
+        driver.find_element_by_id("add_id_corpusTextNumericalInfo").click()
+        driver.switch_to_window("id_corpusTextNumericalInfo")
+        # save and close corpus text numerical info popup
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        save_and_close(driver, root_id)
+
+        # save text numerical corpus
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("_save").click()
+        # TODO remove this workaround when Selenium starts working again as intended
+        time.sleep(1)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("The Resource \"Test Text Numerical Corpus\" was added successfully.", 
+          driver.find_element_by_css_selector("li.info").text)
+
+        # check the editor group of the resource is the default editor group of the user
+        self.assertEqual(self.test_editor_group.name, 
+          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
+
+        # make sure an internal resource cannot be published
+        self.publish(driver)
+        self.assertEqual("internal",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Only ingested resources can be published.", 
+         driver.find_element_by_css_selector("ul.messagelist>li.error").text)
+        # ingest resource
+        self.ingest(driver)
+        self.assertEqual("ingested",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully ingested 1 internal resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
+        # publish resource
+        self.publish(driver)
+        self.assertEqual("published",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully published 1 ingested resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
+        # delete resource
+        self.delete(driver)
+        self.assertEqual("Successfully deleted 1 resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
+
+        
     def test_LR_creation_lang_descr_text(self):
         driver = self.driver
         driver.get(self.base_url)
