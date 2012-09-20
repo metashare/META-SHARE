@@ -9,32 +9,12 @@ sys.path.insert(0, join(parentdir, 'lib', 'python2.7', 'site-packages'))
 # Insert our parent directory (the one containing the folder metashare/):
 sys.path.insert(0, parentdir)
 
-from traceback import format_exc
-
-def _import_xml_from_string(x, y):
-    """
-    Reminder that actual import XML code has to be integrated here.
-    """
-    _msg = "XML upload code needs to be integrated!"
-    raise NotImplementedError, _msg
 
 USAGE_INFORMATION = {
   'help': {
     'required': ('MODE',),
     'optional': (),
     'description': 'Prints usage instructions for the given MODE.'
-  },
-  'create': {
-    'required': ('xml-file',),
-    'optional': (),
-    'description': 'Allows to create a new storage object from the given ' \
-      'XML file.\n\tThis will also create all corresponding object instances.'
-  },
-  'update': {
-    'required': ('object-id', 'xml-file'),
-    'optional': (),
-    'description': 'Updates the storage object instance with the given ' \
-      'identifier using the contents of the given XML file.'
   },
   'checksum': {
     'required': ('object-id',),
@@ -47,11 +27,6 @@ USAGE_INFORMATION = {
     'optional': (),
     'description': 'Prints the storage folder path for the given object id.'
   },
-  'delete': {
-    'required': ('object-id',),
-    'optional': (),
-    'description': 'NOT IMPLEMENTED YET'
-  },
   'purge': {
     'required': (),
     'optional': (),
@@ -61,77 +36,6 @@ USAGE_INFORMATION = {
   }
 }
 
-
-def create(xml_file):
-    """
-    Creates a new storage object instance for the given XML file.
-    
-    This also creates all corresponding object instances.
-    """
-    # Check if the given input file exists.
-    if not os.path.exists(xml_file):
-        print "Error: input file '{0}' does not exist!".format(xml_file)
-        sys.exit(-1)
-    
-    with open(xml_file, 'r') as _handle:
-        _metadata = _handle.read()
-        storage_object = StorageObject.objects.create(metadata=_metadata)
-        
-        try:
-            _import_xml_from_string(_metadata, storage_object)
-            storage_object.published = True
-            storage_object.save()
-        
-        except:
-            print format_exc()
-            storage_object.delete()
-            print "Error: could not create object model instances, aborting!"
-            return
-    
-    #statistics call
-    #saveLRStats("", storage_object.identifier, "", UPDATE_STAT)
-    
-    print "Success: created new storage object {0} with id '{1}'.".format(
-      storage_object, storage_object.identifier)
-
-def update(object_id, xml_file):
-    """
-    Updates the storage object instance with the given object_id using the
-    contents of the given XML file.
-    """
-    # Check if the given input file exists.
-    if not os.path.exists(xml_file):
-        print "Error: input file '{0}' does not exist!".format(xml_file)
-        sys.exit(-1)
-    
-    # Check that the storage object instance exists.
-    storage_object = StorageObject.objects.filter(identifier=object_id)
-    if not storage_object:
-        print "Error: no storage object with the given identifier exists!"
-        return
-    
-    else:
-        storage_object = storage_object[0]
-    
-    with open(xml_file, 'r') as _handle:
-        _metadata = _handle.read()
-        
-        try:
-            _import_xml_from_string(_metadata, storage_object)
-        
-        except:
-            print format_exc()
-            print "Error: could not update object model instances, aborting!"
-            return
-        
-        storage_object.metadata = _metadata
-        storage_object.save()
-
-    #statistics call
-    #saveLRStats("", storage_object.identifier, "", UPDATE_STAT)
-    
-    print "Success: updated storage object {0} with id '{1}'.".format(
-      storage_object, storage_object.identifier)
 
 def checksum(object_id):
     """
@@ -258,13 +162,7 @@ if __name__ == "__main__":
     settings.DEBUG = False
     
     MODE = sys.argv[1]
-    if MODE == 'create':
-        create(sys.argv[2])
-    
-    elif MODE == 'update':
-        update(sys.argv[2], sys.argv[3])
-    
-    elif MODE == 'checksum':
+    if MODE == 'checksum':
         checksum(sys.argv[2])
     
     elif MODE == 'folder':
