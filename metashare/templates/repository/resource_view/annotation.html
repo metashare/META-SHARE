@@ -1,2 +1,92 @@
 {% spaceless %}
+
+<label class='title component'>Annotation:</label>
+<div class="dataline">
+{% for key, value in annotations.items %}
+	{% if "Annotation" in key %}
+		<label class="title"><b>{{ value.Annotation_type }}</b></label>
+		{% if value.Tagset %}
+			<div>
+				<label class="dataline">
+					<b>Tagset: </b> {{ value.Tagset }}
+				</label>
+			</div>
+		{% endif %}
+		{% if value.Annotated_elements %}		
+			<div>
+				<label class="dataline">
+					<b>Annotated elements: </b>{{ value.Annotated_elements_set|join:"," }}
+				</label>
+			</div>
+		{% endif %}
+		{% if value.Annotation_standoff %}
+			<div>
+				<label class="dataline">
+					<b>StandOff: </b>{{ value.Annotation_standoff }}
+				</label>
+			</div>
+		{% endif %}
+		{% if value.Annotation_format %}
+			<div>
+				<label class="dataline">
+					<b>Format: </b>{{ value.Annotation_format }}
+				</label>
+			</div>
+		{% endif %}
+		{% if value.Conformance_to_standard_practices %}
+			<div>
+				<label class="dataline">
+					<b>Standard practices conformance: </b> {{ value.Conformance_to_standard_practices }}
+				</label>
+			</div>
+		{% endif %}
+		{% if value.Theoretic_modelconformance_to_standard_practices %}
+			<div>
+				<label class="dataline">
+					<b>Theoretic Model: </b> {{ value.Theoretic_model }}
+				</label>
+			</div>
+		{% endif %}
+		
+		{% if value.Annotation_manual %}
+			<div>
+				<label class="dataline">
+					{% include "repository/resource_view/documentation.html" with documentation=value.Annotation_manual.Annotation_manual type="Annotation_manual" %}
+				</label>
+			</div>
+		{% endif %}
+
+		{% if value.Annotation_tool %}
+			<div>
+				<label class="dataline">
+					<b>Annotation Tool: </b> {{ value.Annotation_tool.Target_resource_name_uri }}
+				</label>
+			</div>
+		{% endif %}
+		
+		{% if value.Annotation_start_date %}
+			<div>
+				<label class="dataline">
+					<b>Start date:</b> {{ value.Annotation_start_date|date:"SHORT_DATE_FORMAT" }}
+				</label>
+			</div>
+		{% endif %}
+		
+		{% if value.Annotation_end_date %}
+			<div>
+				<label class="dataline">
+					<b>End date:</b> {{ value.Annotation_end_date|date:"SHORT_DATE_FORMAT" }}
+				</label>
+			</div>
+		{% endif %}
+		
+		{% if value.Size_per_annotation %}
+			{% include "repository/resource_view/size.html" with size=value type="sub" %}
+		{% endif %}
+		
+	{% endif %}
+
+{% endfor %}
+</div>
+
 {% endspaceless %}

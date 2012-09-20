@@ -2,12 +2,12 @@
 
 {# TODO: Add zise info #}
 
-<label class='title component'>Domains:</label>
+<label class='component'>Domains:</label>
 <div class="dataline">
 {% for key, value in domains.items %}
 		{% for key1, value1 in value.items %}
 			{% if key1 == "Domain" %}
-				<span>{{ value1 }}, </span>
+				<label>{{ value1 }}, </label>
 			{% endif %}
 		{% endfor %}
 {% endfor %}

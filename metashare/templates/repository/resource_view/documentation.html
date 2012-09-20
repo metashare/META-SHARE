@@ -1,177 +1,171 @@
-{% spaceless %}
-	
-{% for key, value in documentation_dict.items %}
-		{% for key1, value1 in value.items %}		
-			{% for key2, value2 in value1.items %}				
-					{% if key2 == "Documentation" %}
-					<label class='component'>Documentation</label>
-						
-						{% if value2.Document_type %}
-							<div class="dataline indented">
-								<label>
-									<b>Document Type:</b> {{ value2.Document_type }}
-								</label>
-							</div>
-						{% endif %}
-						
-						<div class="dataline indented">
-							<label>
-								<b>Title:</b> 
-								{% if value2.Url %}
-									<a href="{{value2.Url}}" target='_blank'>
-								{% endif %}
-								{{ value2.Title }}
-								{% if value2.Url %}
-									</a>
-								{% endif %}
-							</label>
-						</div>
-						
-						{% if value2.Author %}
-							<div class="dataline indented">
-								<label>
-									<b>Author:</b> {{ value2.Author }}
-								</label>
-							</div>
-						{% endif %}
-						
-						{% if value2.Editor %}
-							<div class="dataline indented">
-								<label>
-									<b>Editor:</b> {{ value2.Editor }}
-								</label>
-							</div>
-						{% endif %}
-						
-						{% if value2.Year %}
-							<div class="dataline indented">
-								<label>
-									<b>Year:</b> {{ value2.Year }}
-								</label>
-							</div>
-						{% endif %}
-						
-						{% if value2.Publisher %}
-						     <div class="dataline indented">
-								<label>
-									<b>Publisher:</b> {{ value2.Publisher }}
-								</label>
-							</div>
-						{% endif %}
-						
-						{% if value2.Book_title %}
-						     <div class="dataline indented">
-								<label>
-									<b>Book Title:</b> {{ value2.Book_title }}
-								</label>
-							</div>
-						{% endif %}
-						
-						{% if value2.Journal %}
-						     <div class="dataline indented">
-								<label>
-									<b>Journal:</b> {{ value2.Journal }}
-								</label>
-							</div>
-						{% endif %}
-						
-						{% if value2.Volume %}
-						     <div class="dataline indented">
-								<label>
-									<b>Volume:</b> {{ value2.Volume }}
-								</label>
-							</div>
-						{% endif %}
-						
-						{% if value2.Series %}
-						     <div class="dataline indented">
-								<label>
-									<b>Series:</b> {{ value2.Series }}
-								</label>
-							</div>
-						{% endif %}
-						
-						{% if value2.Pages %}
-						     <div class="dataline indented">
-								<label>
-									<b>Pages:</b> {{ value2.Pages }}
-								</label>
-							</div>
-						{% endif %}
-						
-						{% if value2.Edition %}
-						     <div class="dataline indented">
-								<label>
-									<b>Edition:</b> {{ value2.Edition }}
-								</label>
-							</div>
-						{% endif %}
-						
-						{% if value2.Conference %}
-						     <div class="dataline indented">
-								<label>
-									<b>Conference:</b> {{ value2.Conference }}
-								</label>
-							</div>
-						{% endif %}
-					
-						{% if value2.Edition %}
-						     <div class="dataline indented">
-								<label>
-									<b>Edition:</b> {{ value2.Edition }}
-								</label>
-							</div>
-						{% endif %}
-						
-						{% if value2.Doi %}
-						     <div class="dataline indented">
-								<label>
-									<b>Digital Object Identifier - DOI:</b> {{ value2.Doi }}
-								</label>
-							</div>
-						{% endif %}
-						
-						{% if value2.Issn %}
-						     <div class="dataline indented">
-								<label>
-									<b>ISSN:</b> {{ value2.Issn }}
-								</label>
-							</div>
-						{% endif %}
-						
-						{% if value2.Isbn %}
-						     <div class="dataline indented">
-								<label>
-									<b>ISBN:</b> {{ value2.Isbn }}
-								</label>
-							</div>
-						{% endif %}
-						
-						{% if value2.Keywords %}
-						     <div class="dataline indented">
-								<label>
-									<b>Keywords:</b> {{ value2.Keywords }}
-								</label>
-							</div>
-						{% endif %}
-						
-						{% if value2.Document_language_name %}
-						     <div class="dataline indented">
-								<label>
-									<b>Document Language:</b> 
-									{% if value2.Document_language_id %}
-										<span title="{{value2.Document_language_id}}">
-									{% endif %}
-									{{ value2.Document_language_name }}
-									{% if value2.Document_language_id %}
-										</span>
-									{% endif %}
-								</label>
-							</div>
-						{% endif %}
-					{% endif %}
-			{% endfor %}
-		{% endfor %}
-{% endfor %}
+{% if type == "Documentation" %}
+<label class='component'>Documentation:</label>
+{% else %}
+	{% if type == "Annotation_manual" %}
+		<b>Annotation_manual: </b>
+	{% endif %}
+{% endif %}
 
-{% endspaceless %}
+	{% if documentation.Document_type %}
+		<div class="dataline indented">
+			<label>
+				<b>Document Type:</b> {{ documentation.Document_type }}
+			</label>
+		</div>
+	{% endif %}
+	
+	<div class="dataline indented">
+		<label>
+			<b>Title:</b> 
+			{% if documentation.Url %}
+				<a href="{{documentation.Url}}" target='_blank'>
+			{% endif %}
+			{{ documentation.Title }}
+			{% if documentation.Url %}
+				</a>
+			{% endif %}
+		</label>
+	</div>
+	
+	{% if documentation.Author %}
+		<div class="dataline indented">
+			<label>
+				<b>Author:</b> {{ documentation.Author }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if documentation.Editor %}
+		<div class="dataline indented">
+			<label>
+				<b>Editor:</b> {{ documentation.Editor }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if documentation.Year %}
+		<div class="dataline indented">
+			<label>
+				<b>Year:</b> {{ documentation.Year }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if documentation.Publisher %}
+		 <div class="dataline indented">
+			<label>
+				<b>Publisher:</b> {{ documentation.Publisher }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if documentation.Book_title %}
+		 <div class="dataline indented">
+			<label>
+				<b>Book Title:</b> {{ documentation.Book_title }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if documentation.Journal %}
+		 <div class="dataline indented">
+			<label>
+				<b>Journal:</b> {{ documentation.Journal }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if documentation.Volume %}
+		 <div class="dataline indented">
+			<label>
+				<b>Volume:</b> {{ documentation.Volume }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if documentation.Series %}
+		 <div class="dataline indented">
+			<label>
+				<b>Series:</b> {{ documentation.Series }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if documentation.Pages %}
+		 <div class="dataline indented">
+			<label>
+				<b>Pages:</b> {{ documentation.Pages }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if documentation.Edition %}
+		 <div class="dataline indented">
+			<label>
+				<b>Edition:</b> {{ documentation.Edition }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if documentation.Conference %}
+		 <div class="dataline indented">
+			<label>
+				<b>Conference:</b> {{ documentation.Conference }}
+			</label>
+		</div>
+	{% endif %}
+
+	{% if documentation.Edition %}
+		 <div class="dataline indented">
+			<label>
+				<b>Edition:</b> {{ documentation.Edition }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if documentation.Doi %}
+		 <div class="dataline indented">
+			<label>
+				<b>Digital Object Identifier - DOI:</b> {{ documentation.Doi }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if documentation.Issn %}
+		 <div class="dataline indented">
+			<label>
+				<b>ISSN:</b> {{ documentation.Issn }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if documentation.Isbn %}
+		 <div class="dataline indented">
+			<label>
+				<b>ISBN:</b> {{ documentation.Isbn }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if documentation.Keywords %}
+		 <div class="dataline indented">
+			<label>
+				<b>Keywords:</b> {{ documentation.Keywords }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if documentation.Document_language_name %}
+		 <div class="dataline indented">
+			<label>
+				<b>Document Language:</b> 
+				{% if documentation.Document_language_id %}
+					<span title="{{documentation.Document_language_id}}">
+				{% endif %}
+				{{ documentation.Document_language_name }}
+				{% if documentation.Document_language_id %}
+					</span>
+				{% endif %}
+			</label>
+		</div>
+	{% endif %}

@@ -479,19 +479,9 @@ def view(request, resource_name=None, object_id=None):
             relation_info_tuples.append(_tuple)
         elif _tuple[0] == "Resource component":
             resource_component_tuple = _tuple[1]
-            languages_tuple = _tuple
-
-    # Convert contact_person_tuples to dictionaries
-    contact_person_dicts = []
-    resource_component_dict = {}
-    for item in contact_person_tuples:
-        contact_person_dicts.append(tuple2dict([item]))
-
+    
     # Convert resource_component_tuple to nested dictionaries
-    resource_component_dict = tuple2dict(resource_component_tuple)
-#    lr_content_dict = tuple2dict([lr_content])
     resource_component_dicts = {}
-
     resource_creation_dict = {}
     metadata_dict = {}
     usage_dict = {}
@@ -499,6 +489,13 @@ def view(request, resource_name=None, object_id=None):
     validation_dicts = []
     relation_dicts = []    
     
+    # Convert several tuples to dictionaries to facilitate rendering
+    # the templates.
+    contact_person_dicts = []
+    resource_component_dict = {}
+    for item in contact_person_tuples:
+        contact_person_dicts.append(tuple2dict([item]))
+    resource_component_dict = tuple2dict(resource_component_tuple)
     resource_creation_dict = tuple2dict([resource_creation_info_tuple])
     metadata_dict = tuple2dict([metadata_info_tuple])
     usage_dict = tuple2dict([usage_info_tuple])

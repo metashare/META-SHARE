@@ -103,7 +103,7 @@
 		  	<a {% if LR_EDIT %} href="{{ LR_EDIT }}" {% else %} href="#" class="tip" {% endif %}>
 				<span class="edit">You don&rsquo;t have the permission to edit this resource.</span>
 		       	<button class="span-4 button {% if LR_EDIT %}middle_button{% else %}middle_gray_button{% endif %}">Edit Resource</button>
-		    </a>		  
+		    </a>
 			<div style="clear: both;"></div>
 		</div>
 		
@@ -173,8 +173,16 @@
 			{% include "repository/resource_view/relation.html" %}
 		{% endif %}
 		
-		{% if documentation_info_tuple %}
-				{% include "repository/resource_view/documentation.html"  %}
+		{% if documentation_dict %}
+			{% for key, value in documentation_dict.items %}
+				{% for key1, value1 in value.items %}		
+					{% for key2, value2 in value1.items %}				
+						{% if key2 == "Documentation" %}
+							{% include "repository/resource_view/documentation.html" with documentation=value2 type="Documentation" %}
+						{% endif %}
+					{% endfor %}
+				{% endfor %}
+			{% endfor %}
 		{% endif %}
 		
 		</div>
