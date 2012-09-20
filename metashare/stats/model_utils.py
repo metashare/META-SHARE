@@ -187,8 +187,12 @@ def getLRLast(action, limit, geoinfo=None, offset=0):
 def getTopQueries(limit, geoinfo=None, since=None, offset=0):
     if (geoinfo != None and geoinfo is not ""):
         if (since):
-            topqueries = QueryStats.objects.values('query', 'facets').exclude(query__startswith="mfsp:").filter(lasttime__gte=since, \
-                geoinfo=geoinfo).annotate(query_count=Count('query'), facets_count=Count('facets')).order_by('-query_count','-facets_count')[offset:offset+limit]
+            topqueries = QueryStats.objects.values('query', 'facets') \
+                .exclude(query__startswith="mfsp:") \
+                .filter(lasttime__gte=since, geoinfo=geoinfo) \
+                .annotate(query_count=Count('query'),
+                          facets_count=Count('facets')) \
+                .order_by('-query_count','-facets_count')[offset:offset+limit]
         else:
             topqueries = QueryStats.objects.values('query', 'facets').exclude(query__startswith="mfsp:").filter(geoinfo=geoinfo).\
                 annotate(query_count=Count('query'), facets_count=Count('facets')).order_by('-query_count','-facets_count')[offset:offset+limit] 
@@ -206,7 +210,10 @@ def getLastQuery(limit, geoinfo=None, offset=0):
         lastquery = QueryStats.objects.values('query', 'facets', 'lasttime', 'found').exclude(query__startswith="mfsp:").\
             filter(geoinfo=geoinfo).order_by('-lasttime')[offset:offset+limit]
     else:
-        lastquery = QueryStats.objects.values('query', 'facets', 'lasttime', 'found').exclude(query__startswith="mfsp:").order_by('-lasttime')[offset:offset+limit]
+        lastquery = QueryStats.objects \
+            .values('query', 'facets', 'lasttime', 'found') \
+            .exclude(query__startswith="mfsp:") \
+            .order_by('-lasttime')[offset:offset+limit]
     return lastquery
 
 def statByDate(date):
