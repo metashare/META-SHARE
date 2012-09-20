@@ -1,5 +1,11 @@
+
+{% if type == "Documentation" %}
 <label class='title component'>Documentation:</label>
-	
+{% else %}
+	{% if type == "Annotation_manual" %}
+		<b>Annotation_manual: </b>
+	{% endif %}
+{% endif %}
 	
 {% for key, value in documentation_dict.items %}
 		{% for key1, value1 in value.items %}		
@@ -169,17 +175,7 @@
 								</label>
 							</div>
 						{% endif %}
-					
 					<hr/>
-						
-						
-						
-						
-						
-						
-						
-						
-						
 					{% endif %}
 			{% endfor %}
 		{% endfor %}

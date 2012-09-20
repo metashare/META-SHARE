@@ -6,20 +6,56 @@
 	{% if "Annotation" in key %}
 		<div class="dataline"><b>{{ value.Annotation_type }}</b></div>
 		{% if value.Tagset %}
-			<span><b>Tagset: </b> {{ value.Tagset }}{% if value.Tagset_language_name %}({{ value.tagset_language_name }}){% endif %}</span> 
+			<div>
+				<label class="dataline">
+					<b>Tagset: </b> {{ value.Tagset }}
+				</label>
+			</div>
 		{% endif %}
-		{% if value.Annotated_elements %}
-			<span><b>Annotated elements: </b>{{ value.Annotated_elements_set|join:"," }}</span>
+		{% if value.Annotated_elements %}		
+			<div>
+				<label class="dataline">
+					<b>Annotated elements: </b>{{ value.Annotated_elements_set|join:"," }}
+				</label>
+			</div>
 		{% endif %}
-		{if value.Annotation_standoff %}
-			<span><b>StandOff: </b>{{ value.Annotation_standoff }}</span>
+		{% if value.Annotation_standoff %}
+			<div>
+				<label class="dataline">
+					<b>StandOff: </b>{{ value.Annotation_standoff }}
+				</label>
+			</div>
 		{% endif %}
 		{% if value.Annotation_format %}
-			<span><b>Format: </b>{{ value.Annotation_format }}</span>
+			<div>
+				<label class="dataline">
+					<b>Format: </b>{{ value.Annotation_format }}
+				</label>
+			</div>
+		{% endif %}
+		{% if value.Conformance_to_standard_practices %}
+			<div>
+				<label class="dataline">
+					<b>Standard practices conformance: </b> {{ value.Conformance_to_standard_practices }}
+				</label>
+			</div>
+		{% endif %}
+		{% if value.Theoretic_modelconformance_to_standard_practices %}
+			<div>
+				<label class="dataline">
+					<b>Theoretic Model: </b> {{ value.Theoretic_model }}
+				</label>
+			</div>
+		{% endif %}
+		{% if value.Annotation_manual %}
+			<div>
+				<label class="dataline">
+					{% include "repository/resource_view/documentation.html" with documentation_dict=value.Annotation_manual type="Annotation_manual" %}
+				</label>
+			</div>
 		{% endif %}
 
-		{{ value.Conformance_to_standard_practices }}
-		{{ value.Theoretic_modelconformance_to_standard_practices }}
+
 		{{ value.Annotation_manual }}
 		{% if value.Annotation_tool %}
 			<b>Tool:</b> {{ value.Annotation_tool }}
