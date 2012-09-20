@@ -38,11 +38,8 @@
 				</label>
 			</div>
 		{% endif %}
-	
-	
-		
-		{% if tool_service.tool_service_operation.Operating_system.Running_environment %}
-		
+			
+		{% if tool_service.tool_service_operation.Running_environment %}
 			{% if tool_service.tool_service_operation.Running_environment.Required_software %}
 				{% if tool_service.tool_service_operation.Running_environment.Required_software.Target_resource.Target_resource_name_uri %}
 					 <div class="dataline">
@@ -62,26 +59,14 @@
 			{% endif %}
 			
 			{% if tool_service.tool_service_operation.Running_environment.Required_lrs %}
-
-				{% if tool_service.tool_service_operation.Running_environment.Required_lrs. %}
+				{% if tool_service.tool_service_operation.Running_environment.Required_lrs.Target_resource.Target_resource_name_uri %}
 					 <div class="dataline">
 						<label>
-							<b>  </b>{{ tool_service.tool_service_operation.Running_environment.Required_lrs. }}
+							<b>Required Software: </b>{{ tool_service.tool_service_operation.Running_environment.Required_lrs.Target_resource.Target_resource_name_uri }}
 						</label>
 					</div>
 				{% endif %}
-				
-				{% if tool_service.tool_service_operation.Running_environment.Required_lrs. %}
-					 <div class="dataline">
-						<label>
-							<b>  </b>{{ tool_service.tool_service_operation.Running_environment.Required_lrs. }}
-						</label>
-					</div>
-				{% endif %}
-
 			{% endif %}
-			
-			
 			{% if tool_service.tool_service_operation.Running_environment.Running_environment_details %}
 				 <div class="dataline">
 					<label>
@@ -89,137 +74,27 @@
 					</label>
 				</div>
 			{% endif %}
-			
-	
-		
-		
-		
-		
-		
 		{% endif %}
 
-		
-		
-		
-		{% if tool_service.tool_service_operation.Operating_system %}
+		{% if tool_service.tool_service_operation.Running_time %}
 			 <div class="dataline">
 				<label>
-					<b>Operating system: </b>{{ tool_service.tool_service_operation.Operating_system }}
+					<b>Running time: </b>{{ tool_service.tool_service_operation.Running_time }}
+				</label>
+			</div>
+		{% endif %}
+	{% endif %}
+
+	{% if tool_service.tool_service_evaluation %}
+		{% if tool_service.tool_service_evaluation.evaluated %}
+			 <div class="dataline">
+				<label>
+					<b>Running time: </b>{{ tool_service.tool_service_evaluation.evaluated }}
 				</label>
 			</div>
 		{% endif %}
 		
-		{% if tool_service.tool_service_operation.Operating_system %}
-			 <div class="dataline">
-				<label>
-					<b>Operating system: </b>{{ tool_service.tool_service_operation.Operating_system }}
-				</label>
-			</div>
-		{% endif %}
 	
-	
-	
-	
-	
-	
-	{% if tool_service.Language_dependent %}			
-		 <div class="dataline">
-			<label>
-				<b>Language dependent: </b>{{ tool_service.Language_dependent }}
-			</label>
-		</div>
 	{% endif %}
-
-
-	{% if tool_service.Language_dependent %}			
-		 <div class="dataline">
-			<label>
-				<b>Language dependent: </b>{{ tool_service.Language_dependent }}
-			</label>
-		</div>
-	{% endif %}
-
-
-	{% if tool_service.Language_dependent %}			
-		 <div class="dataline">
-			<label>
-				<b>Language dependent: </b>{{ tool_service.Language_dependent }}
-			</label>
-		</div>
-	{% endif %}
-
-
-	{% if tool_service.Language_dependent %}			
-		 <div class="dataline">
-			<label>
-				<b>Language dependent: </b>{{ tool_service.Language_dependent }}
-			</label>
-		</div>
-	{% endif %}
-
-
-	{% if tool_service.Language_dependent %}			
-		 <div class="dataline">
-			<label>
-				<b>Language dependent: </b>{{ tool_service.Language_dependent }}
-			</label>
-		</div>
-	{% endif %}
-
-
-	{% if tool_service.Language_dependent %}			
-		 <div class="dataline">
-			<label>
-				<b>Language dependent: </b>{{ tool_service.Language_dependent }}
-			</label>
-		</div>
-	{% endif %}
-
-
-	{% if tool_service.Language_dependent %}			
-		 <div class="dataline">
-			<label>
-				<b>Language dependent: </b>{{ tool_service.Language_dependent }}
-			</label>
-		</div>
-	{% endif %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="dataline">
-{% for key, value in metadata_dict.items %}
-		{% for key1, value1 in value.items %}
-			{% if key1 == "Metadata_creator" %}			
-			     {% include "repository/resource_view/person.html" with person_dict=value1 title="Metadata Creator" %}
-			{% endif %}			
-		{% endfor %}
-{% endfor %}
-</div>
 
 {% endspaceless %}
