@@ -1,13 +1,7 @@
 {% if type == "Documentation" %}
 <label class='component'>Documentation:</label>
 {% else %}
-	{% if type == "Annotation_manual" %}
-		<label class='title'>Annotation manual</label>
-	{% else %}
-		{% if type == "Evaluation_report" %}
-			<label class='title'>Evaluation report</label>
-		{% endif %}
-	{% endif %}
+	<label class='title'>{{type}}</label>
 {% endif %}
 
 	{% if documentation.Document_type %}
