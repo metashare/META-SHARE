@@ -249,7 +249,7 @@ def topstats (request):
     topdata = []
     view = request.GET.get('view', 'topviewed')
     last = request.GET.get('last', '')
-    limit = int(request.GET.get('limit', '2'))
+    limit = int(request.GET.get('limit', '10'))
     offset = int(request.GET.get('offset', '0'))
     since = None
     if (last == "day"):
