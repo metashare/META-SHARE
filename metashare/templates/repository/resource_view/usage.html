@@ -45,8 +45,8 @@
 		{% endif %}
 	
 		{% if usage_dict.Usage.Actual_use.Usage_report %}
-			{% if usage_dict.Usage.Actual_use.Usage_report.Usage_report.Document_info %}
-				{% include "repository/resource_view/documentation.html" with documentation=usage_dict.Usage.Actual_use.Usage_report.Usage_report.Documentation type="Usage Report" %}
+			{% if usage_dict.Usage.Actual_use.Usage_report.Usage_report.Title %}
+				{% include "repository/resource_view/documentation.html" with documentation=usage_dict.Usage.Actual_use.Usage_report.Usage_report type="Usage Report" %}
 			{% else %}
 				<div class="dataline indented">
 					<label>
