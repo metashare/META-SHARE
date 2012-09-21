@@ -311,6 +311,7 @@ hr{
 
 a .indented{
 	color: #FF9900;
+	float:left;
 }
 
 .hidden{
@@ -319,5 +320,14 @@ a .indented{
 
 .vcard{
 	padding-left:5px;
+}
+
+.contactcard .dataline:hover{
+	cursor:pointer;
+}
+
+.dataline span a{
+	padding:0px;
+	margin:0px;
 }
 
