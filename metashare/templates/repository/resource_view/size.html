@@ -1,19 +1,25 @@
+{% load humanize %}
 {% spaceless %}
 
 {% if type == "sub" %}
-	<label class="dataline b"><strong>Size: </strong></label>
+	
 {% else %}
 	<label class='component'>Size: </label>
 {% endif %}
 
-
-<label class="dataline">	
-{% for key, value in size.items %}
+{% if type == "sub" %}
+	{{ size.Size }} {{ size.Size_unit }}
+{% else %}
+	<div class="dataline">	
+	{% for key, value in size.items %}
 		{% for key1, value1 in value.items %}
 			{% if key1 == "Size_unit" %}
-				<label class="dataline">{% if not forloop.first %}, {% endif %}{{ value.Size }}  {{ value.Size_unit }}{% if not forloop.last %}, {% endif %}</label>
+			<div>
+				<label class="dataline">{{ value.Size|intcomma }} {{ value.Size_unit }}</label>
+			</div>
 			{% endif %}
 		{% endfor %}
-{% endfor %}
-</label>
+	{% endfor %}
+	</div>
+{% endif %}
 {% endspaceless %}
