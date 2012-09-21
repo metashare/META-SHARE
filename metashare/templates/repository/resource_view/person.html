@@ -67,11 +67,13 @@
 		</label>
 	</div>
 	
+	{% if person_dict.Communication.Email %}
 	<div>
 		<label class="dataline">
 			{% encrypt_email person_dict.Communication.Email %}
 		</label>
 	</div>
+	{% endif %}
 	<div>
 		<label class="dataline">
 			{{ person_dict.Communication.Address }}

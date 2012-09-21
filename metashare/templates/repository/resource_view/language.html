@@ -3,13 +3,33 @@
 {# TODO: Add zise info #}
 <label class='component'>Languages:</label>
 <div class="dataline">
+
+{% for key, value in language.items %}
+	{% regroup value by Language_name as language_list %}
+	{{ language_list }}
+{% endfor %}
+
+
+		
+{% comment %}		
+
 	{% for key, value in languages.items %}
-		{% for key1, value1 in value.items %}
-			{% if key1 == "Language_name" %}
-				<label class="dataline" title="{{value.Language_id}}">{{ value1 }}{% if not forloop.first %}, {% endif %}</label>
-			{% endif %}
+	
+		{% for key1, value1 in value.Language_name %}
+			{{ value1 }}{% if not forloop.last %}, {% endif %}
 		{% endfor %}
 	{% endfor %}
+
+{#		{% regroup value.items by Language_name as new_language %} #}
+		{% for key1, value1 in value.items %}
+			{% if key1 == "Language_name" %}
+				<label class="dataline" title="{{value.Language_id}}">{% if not forloop.first %}, {% endif %}{{ value1 }}{% if not forloop.last %}, {% endif %}</label>
+			{% endif %}
+
+		{% endfor %}
+{% endcomment %}
+
+
 </div>
 
 {% endspaceless %}
