@@ -87,7 +87,7 @@ class StatsTest(TestCase):
             follow=True)
         
         for i in range(1, 3):
-            resource = resourceInfoType_model.objects.get(pk=i)
+            resource = resourceInfoType_model.objects.get(pk=resources[i - 1].pk)
             for action in (VIEW_STAT, RETRIEVE_STAT, DOWNLOAD_STAT):
                 saveLRStats(resource, action)
                 self.assertEqual(len(getLRLast(action, 10)), i)
@@ -171,7 +171,7 @@ class StatsTest(TestCase):
         self.assertEqual(2, len(statsdata))
         
         #delete the second resource
-        resource = resourceInfoType_model.objects.get(pk=1)
+        resource = resourceInfoType_model.objects.all()[1]
         resource.delete_deep()        
         statsdata = getLRLast(VIEW_STAT, 10)
         self.assertEqual(1, len(statsdata))

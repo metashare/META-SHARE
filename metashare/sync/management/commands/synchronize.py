@@ -242,8 +242,8 @@ class Command(BaseCommand):
                 silently_removed.remove(item_id)
         LOGGER.info("{} resources have silently disappeared".format(
           len(silently_removed)))
-        
-        remote_inventory_removed.append(silently_removed)
+          
+        remote_inventory_removed = remote_inventory_removed + silently_removed
         
         removed_count = 0
         for removed_id in remote_inventory_removed:
@@ -256,7 +256,7 @@ class Command(BaseCommand):
                 LOGGER.info("removing resource {}".format(removed_id))
                 removed_count += 1
                 _so_to_remove = StorageObject.objects.get(identifier=removed_id)
-                if _so_to_remove.copy_status is PROXY:
+                if _so_to_remove.copy_status == PROXY:
                     _rem_obj = RemovedObject.objects.create(identifier=removed_id)
                     _rem_obj.save()
                 remove_resource(_so_to_remove) 
