@@ -131,7 +131,7 @@
 				
 		{% if tool_service.Tool_service_evaluation.Evaluation_report %}
 			{% if tool_service.Tool_service_evaluation.Evaluation_report.Evaluation_report.Documentation %}
-				{% include "repository/resource_view/documentation.html" with documentation=tool_service.Tool_service_evaluation.Evaluation_report.Evaluation_report type="Evaluation_report" %}
+				{% include "repository/resource_view/documentation.html" with documentation=tool_service.Tool_service_evaluation.Evaluation_report.Evaluation_report type="Evaluation Report" %}
 			{% else %}
 				<div class="dataline">
 					<label>
