@@ -273,12 +273,14 @@ label span a{
 }
 
 .read-more{
-	padding-bottom:3px;
+    padding-bottom:3px;
+    line-height: 1;
 }
 
 
 .read-less{
-	padding-bottom:3px;
+    padding-bottom:3px;
+    line-height: 1;
 }
 
 .details{
@@ -326,8 +328,21 @@ a .indented{
 	cursor:pointer;
 }
 
+.contactcard{
+	clear:both;
+}
+
 .dataline span a{
 	padding:0px;
 	margin:0px;
+}
+
+.mediatitle label{
+	background:#bbb;
+}
+
+.mediatitle{
+	display: inline-block;
+	background:#333;
 }
 
