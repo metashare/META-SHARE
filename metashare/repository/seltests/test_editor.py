@@ -297,6 +297,395 @@ class EditorTest(SeleniumTestCase):
          driver.find_element_by_css_selector("ul.messagelist>li").text)
 
         
+    def test_LR_creation_corpus_video(self):
+        driver = self.driver
+        driver.get(self.base_url)
+        ss_path = setup_screenshots_folder(
+          "PNG-metashare.repository.seltests.test_editor.EditorTest",
+          "LR_creation_corpus_video")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))  
+        # login user
+        login_user(driver, "manageruser", "secret")
+        # make sure login was successful
+        self.assertEqual("Logout", 
+          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
+        # create audio corpus
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
+        driver.find_element_by_id("id_corpusVideoInfo").click()
+        driver.find_element_by_id("id_submit").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("Add Resource", 
+          driver.find_element_by_css_selector("#content > h1").text)
+        # remember root window id
+        root_id = driver.current_window_handle
+        # add required fields
+        driver.find_element_by_name("key_form-0-resourceName_0").clear()
+        driver.find_element_by_name("key_form-0-resourceName_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-resourceName_0").clear()
+        driver.find_element_by_name("val_form-0-resourceName_0").send_keys("Test Video Corpus")
+        driver.find_element_by_name("key_form-0-description_0").clear()
+        driver.find_element_by_name("key_form-0-description_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-description_0").clear()
+        driver.find_element_by_name("val_form-0-description_0").send_keys("Test Description")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # distribution popup
+        driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
+        self.fill_distribution(driver, ss_path, root_id)
+        # contact person popup
+        driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
+        self.fill_contact_person(driver, ss_path, root_id)
+        
+        # corpus video info popup
+        driver.find_element_by_id("add_id_corpusVideoInfo-0").click()
+        driver.switch_to_window("id_corpusVideoInfo__dash__0")
+        # corpus video info / size popup
+        driver.find_element_by_name("sizeinfotype_model_set-0-size").clear()
+        driver.find_element_by_name("sizeinfotype_model_set-0-size").send_keys("100")
+        driver.find_element_by_name("sizeinfotype_model_set-0-sizeUnit").send_keys("Gb")
+        # save and close corpus video info popup
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        save_and_close(driver, root_id)
+        
+        # save video corpus
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("_save").click()
+        # TODO remove this workaround when Selenium starts working again as intended
+        time.sleep(1)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("The Resource \"Test Video Corpus\" was added successfully.", 
+          driver.find_element_by_css_selector("li.info").text)
+
+        # check the editor group of the resource is the default editor group of the user
+        self.assertEqual(self.test_editor_group.name, 
+          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
+
+        # make sure an internal resource cannot be published
+        self.publish(driver)
+        self.assertEqual("internal",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Only ingested resources can be published.", 
+         driver.find_element_by_css_selector("ul.messagelist>li.error").text)
+        # ingest resource
+        self.ingest(driver)
+        self.assertEqual("ingested",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully ingested 1 internal resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
+        # publish resource
+        self.publish(driver)
+        self.assertEqual("published",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully published 1 ingested resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
+        # delete resource
+        self.delete(driver)
+        self.assertEqual("Successfully deleted 1 resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
+
+        
+    def test_LR_creation_corpus_image(self):
+        driver = self.driver
+        driver.get(self.base_url)
+        ss_path = setup_screenshots_folder(
+          "PNG-metashare.repository.seltests.test_editor.EditorTest",
+          "LR_creation_corpus_image")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))  
+        # login user
+        login_user(driver, "manageruser", "secret")
+        # make sure login was successful
+        self.assertEqual("Logout", 
+          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
+        # create audio corpus
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
+        driver.find_element_by_id("id_corpusImageInfo").click()
+        driver.find_element_by_id("id_submit").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("Add Resource", 
+          driver.find_element_by_css_selector("#content > h1").text)
+        # remember root window id
+        root_id = driver.current_window_handle
+        # add required fields
+        driver.find_element_by_name("key_form-0-resourceName_0").clear()
+        driver.find_element_by_name("key_form-0-resourceName_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-resourceName_0").clear()
+        driver.find_element_by_name("val_form-0-resourceName_0").send_keys("Test Image Corpus")
+        driver.find_element_by_name("key_form-0-description_0").clear()
+        driver.find_element_by_name("key_form-0-description_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-description_0").clear()
+        driver.find_element_by_name("val_form-0-description_0").send_keys("Test Description")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # distribution popup
+        driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
+        self.fill_distribution(driver, ss_path, root_id)
+        # contact person popup
+        driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
+        self.fill_contact_person(driver, ss_path, root_id)
+        
+        # corpus image info popup
+        driver.find_element_by_id("add_id_corpusImageInfo").click()
+        driver.switch_to_window("id_corpusImageInfo")
+        # corpus image info / size popup
+        driver.find_element_by_name("sizeinfotype_model_set-0-size").clear()
+        driver.find_element_by_name("sizeinfotype_model_set-0-size").send_keys("100")
+        driver.find_element_by_name("sizeinfotype_model_set-0-sizeUnit").send_keys("Gb")
+        # save and close corpus image info popup
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        save_and_close(driver, root_id)
+        
+        # save image corpus
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("_save").click()
+        # TODO remove this workaround when Selenium starts working again as intended
+        time.sleep(1)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("The Resource \"Test Image Corpus\" was added successfully.", 
+          driver.find_element_by_css_selector("li.info").text)
+
+        # check the editor group of the resource is the default editor group of the user
+        self.assertEqual(self.test_editor_group.name, 
+          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
+
+        # make sure an internal resource cannot be published
+        self.publish(driver)
+        self.assertEqual("internal",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Only ingested resources can be published.", 
+         driver.find_element_by_css_selector("ul.messagelist>li.error").text)
+        # ingest resource
+        self.ingest(driver)
+        self.assertEqual("ingested",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully ingested 1 internal resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
+        # publish resource
+        self.publish(driver)
+        self.assertEqual("published",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully published 1 ingested resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
+        # delete resource
+        self.delete(driver)
+        self.assertEqual("Successfully deleted 1 resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
+
+        
+    def test_LR_creation_corpus_text_numerical(self):
+        driver = self.driver
+        driver.get(self.base_url)
+        ss_path = setup_screenshots_folder(
+          "PNG-metashare.repository.seltests.test_editor.EditorTest",
+          "LR_creation_corpus_text_numerical")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))  
+        # login user
+        login_user(driver, "manageruser", "secret")
+        # make sure login was successful
+        self.assertEqual("Logout", 
+          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
+        # create audio corpus
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
+        driver.find_element_by_id("id_corpusTextNumericalInfo").click()
+        driver.find_element_by_id("id_submit").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("Add Resource", 
+          driver.find_element_by_css_selector("#content > h1").text)
+        # remember root window id
+        root_id = driver.current_window_handle
+        # add required fields
+        driver.find_element_by_name("key_form-0-resourceName_0").clear()
+        driver.find_element_by_name("key_form-0-resourceName_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-resourceName_0").clear()
+        driver.find_element_by_name("val_form-0-resourceName_0").send_keys("Test Text Numerical Corpus")
+        driver.find_element_by_name("key_form-0-description_0").clear()
+        driver.find_element_by_name("key_form-0-description_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-description_0").clear()
+        driver.find_element_by_name("val_form-0-description_0").send_keys("Test Description")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # distribution popup
+        driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
+        self.fill_distribution(driver, ss_path, root_id)
+        # contact person popup
+        driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
+        self.fill_contact_person(driver, ss_path, root_id)
+        
+        # TODO check if this behaviour is normal
+        # corpus text numerical info popup
+        driver.find_element_by_id("add_id_corpusTextNumericalInfo").click()
+        driver.switch_to_window("id_corpusTextNumericalInfo")
+        # save and close corpus text numerical info popup
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        save_and_close(driver, root_id)
+
+        # save text numerical corpus
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("_save").click()
+        # TODO remove this workaround when Selenium starts working again as intended
+        time.sleep(1)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("The Resource \"Test Text Numerical Corpus\" was added successfully.", 
+          driver.find_element_by_css_selector("li.info").text)
+
+        # check the editor group of the resource is the default editor group of the user
+        self.assertEqual(self.test_editor_group.name, 
+          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
+
+        # make sure an internal resource cannot be published
+        self.publish(driver)
+        self.assertEqual("internal",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Only ingested resources can be published.", 
+         driver.find_element_by_css_selector("ul.messagelist>li.error").text)
+        # ingest resource
+        self.ingest(driver)
+        self.assertEqual("ingested",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully ingested 1 internal resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
+        # publish resource
+        self.publish(driver)
+        self.assertEqual("published",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully published 1 ingested resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
+        # delete resource
+        self.delete(driver)
+        self.assertEqual("Successfully deleted 1 resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
+
+        
+    def test_LR_creation_corpus_ngram(self):
+        driver = self.driver
+        driver.get(self.base_url)
+        ss_path = setup_screenshots_folder(
+          "PNG-metashare.repository.seltests.test_editor.EditorTest",
+          "LR_creation_corpus_ngram")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))  
+        # login user
+        login_user(driver, "manageruser", "secret")
+        # make sure login was successful
+        self.assertEqual("Logout", 
+          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
+        # create audio corpus
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
+        driver.find_element_by_id("id_corpusTextNgramInfo").click()
+        driver.find_element_by_id("id_submit").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("Add Resource", 
+          driver.find_element_by_css_selector("#content > h1").text)
+        # remember root window id
+        root_id = driver.current_window_handle
+        # add required fields
+        driver.find_element_by_name("key_form-0-resourceName_0").clear()
+        driver.find_element_by_name("key_form-0-resourceName_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-resourceName_0").clear()
+        driver.find_element_by_name("val_form-0-resourceName_0").send_keys("Test Ngram Corpus")
+        driver.find_element_by_name("key_form-0-description_0").clear()
+        driver.find_element_by_name("key_form-0-description_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-description_0").clear()
+        driver.find_element_by_name("val_form-0-description_0").send_keys("Test Description")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # distribution popup
+        driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
+        self.fill_distribution(driver, ss_path, root_id)
+        # contact person popup
+        driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
+        self.fill_contact_person(driver, ss_path, root_id)
+        
+        # corpus ngram info popup
+        driver.find_element_by_id("add_id_corpusTextNgramInfo").click()
+        driver.switch_to_window("id_corpusTextNgramInfo")
+        # corpus ngram info / base item
+        #driver.find_element_by_name("form-0-baseItem_old").send_keys("Other")
+        Select(driver.find_element_by_name("form-0-baseItem_old")).select_by_visible_text("Other")
+        driver.find_element_by_xpath("//a[@class='selector-add']").click()
+        # corpus ngram info / order
+        driver.find_element_by_name("form-0-order").clear()
+        driver.find_element_by_name("form-0-order").send_keys("5")
+        # corpus ngram info / linguality type
+        Select(driver.find_element_by_id("id_form-2-0-lingualityType")).select_by_visible_text(
+          "Monolingual")
+        # corpus ngram info / language
+        self.fill_language(driver, ss_path, "languageinfotype_model_set-0-")
+        # corpus ngram info / size popup
+        driver.find_element_by_name("sizeinfotype_model_set-0-size").clear()
+        driver.find_element_by_name("sizeinfotype_model_set-0-size").send_keys("100")
+        driver.find_element_by_name("sizeinfotype_model_set-0-sizeUnit").send_keys("Gb")
+        # save and close corpus ngram info popup
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        save_and_close(driver, root_id)
+        
+        # save ngram corpus
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("_save").click()
+        # TODO remove this workaround when Selenium starts working again as intended
+        time.sleep(1)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("The Resource \"Test Ngram Corpus\" was added successfully.", 
+          driver.find_element_by_css_selector("li.info").text)
+
+        # check the editor group of the resource is the default editor group of the user
+        self.assertEqual(self.test_editor_group.name, 
+          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
+
+        # make sure an internal resource cannot be published
+        self.publish(driver)
+        self.assertEqual("internal",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Only ingested resources can be published.", 
+         driver.find_element_by_css_selector("ul.messagelist>li.error").text)
+        # ingest resource
+        self.ingest(driver)
+        self.assertEqual("ingested",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully ingested 1 internal resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
+        # publish resource
+        self.publish(driver)
+        self.assertEqual("published",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully published 1 ingested resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
+        # delete resource
+        self.delete(driver)
+        self.assertEqual("Successfully deleted 1 resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
+
+        
     def test_LR_creation_lang_descr_text(self):
         driver = self.driver
         driver.get(self.base_url)
@@ -371,6 +760,234 @@ class EditorTest(SeleniumTestCase):
         time.sleep(1)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         self.assertEqual("The Resource \"Test Text Language Description\" was added successfully.", 
+          driver.find_element_by_css_selector("li.info").text)
+        
+        # check the editor group of the resource is the default editor group of the user
+        self.assertEqual(self.test_editor_group.name, 
+          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
+
+        # make sure an internal resource cannot be published
+        self.publish(driver)
+        self.assertEqual("internal",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Only ingested resources can be published.", 
+         driver.find_element_by_css_selector("ul.messagelist>li.error").text)
+        # ingest resource
+        self.ingest(driver)
+        self.assertEqual("ingested",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully ingested 1 internal resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
+        # publish resource
+        self.publish(driver)
+        self.assertEqual("published",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully published 1 ingested resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
+        # delete resource
+        self.delete(driver)
+        self.assertEqual("Successfully deleted 1 resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
+        
+
+    def test_LR_creation_lang_descr_video(self):
+        driver = self.driver
+        driver.get(self.base_url)
+        ss_path = setup_screenshots_folder(
+          "PNG-metashare.repository.seltests.test_editor.EditorTest",
+          "LR_creation_lang_descr_video")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))  
+        # login user
+        login_user(driver, "manageruser", "secret")
+        # make sure login was successful
+        self.assertEqual("Logout", 
+          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
+        # create language description
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text(
+          "Language description")
+        driver.find_element_by_id("id_langdescVideoInfo").click()
+        driver.find_element_by_id("id_submit").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("Add Resource", 
+          driver.find_element_by_css_selector("#content > h1").text)
+        # remember root window id
+        root_id = driver.current_window_handle
+        # add required fields
+        driver.find_element_by_name("key_form-0-resourceName_0").clear()
+        driver.find_element_by_name("key_form-0-resourceName_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-resourceName_0").clear()
+        driver.find_element_by_name("val_form-0-resourceName_0").send_keys("Test Video Language Description")
+        driver.find_element_by_name("key_form-0-description_0").clear()
+        driver.find_element_by_name("key_form-0-description_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-description_0").clear()
+        driver.find_element_by_name("val_form-0-description_0").send_keys("Test Description")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # distribution popup
+        driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()
+        self.fill_distribution(driver, ss_path, root_id)
+        # contact person popup
+        driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
+        self.fill_contact_person(driver, ss_path, root_id)
+        
+        # language description general info popup
+        driver.find_element_by_id("edit_id_langdescInfo").click()
+        driver.switch_to_window("edit_id_langdescInfo")
+        Select(driver.find_element_by_id("id_languageDescriptionType")).select_by_visible_text(
+          "Grammar")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time())) 
+        save_and_close(driver, root_id)
+          
+        # language description info text popup
+        driver.find_element_by_id("add_id_languageDescriptionTextInfo").click()
+        driver.switch_to_window("id_languageDescriptionTextInfo")
+        Select(driver.find_element_by_id("id_form-2-0-lingualityType")).select_by_visible_text(
+          "Monolingual")
+        # language description info text / language
+        driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
+        self.fill_language(driver, ss_path, "languageinfotype_model_set-0-")
+        # save and close language description info text popup
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        save_and_close(driver, root_id)
+
+        # language description info video popup
+        driver.find_element_by_id("add_id_languageDescriptionVideoInfo").click()
+        driver.switch_to_window("id_languageDescriptionVideoInfo")
+        Select(driver.find_element_by_id("id_linktoothermediainfotype_model_set-0-otherMedia")) \
+          .select_by_visible_text("Audio")
+        # save and close language description info video popup
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        save_and_close(driver, root_id)
+
+        # save language description text - video
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("_save").click()
+        # TODO remove this workaround when Selenium starts working again as intended
+        time.sleep(1)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("The Resource \"Test Video Language Description\" was added successfully.", 
+          driver.find_element_by_css_selector("li.info").text)
+        
+        # check the editor group of the resource is the default editor group of the user
+        self.assertEqual(self.test_editor_group.name, 
+          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
+
+        # make sure an internal resource cannot be published
+        self.publish(driver)
+        self.assertEqual("internal",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Only ingested resources can be published.", 
+         driver.find_element_by_css_selector("ul.messagelist>li.error").text)
+        # ingest resource
+        self.ingest(driver)
+        self.assertEqual("ingested",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully ingested 1 internal resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
+        # publish resource
+        self.publish(driver)
+        self.assertEqual("published",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully published 1 ingested resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
+        # delete resource
+        self.delete(driver)
+        self.assertEqual("Successfully deleted 1 resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
+        
+
+    def test_LR_creation_lang_descr_image(self):
+        driver = self.driver
+        driver.get(self.base_url)
+        ss_path = setup_screenshots_folder(
+          "PNG-metashare.repository.seltests.test_editor.EditorTest",
+          "LR_creation_lang_descr_image")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))  
+        # login user
+        login_user(driver, "manageruser", "secret")
+        # make sure login was successful
+        self.assertEqual("Logout", 
+          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
+        # create language description
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text(
+          "Language description")
+        driver.find_element_by_id("id_langdescImageInfo").click()
+        driver.find_element_by_id("id_submit").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("Add Resource", 
+          driver.find_element_by_css_selector("#content > h1").text)
+        # remember root window id
+        root_id = driver.current_window_handle
+        # add required fields
+        driver.find_element_by_name("key_form-0-resourceName_0").clear()
+        driver.find_element_by_name("key_form-0-resourceName_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-resourceName_0").clear()
+        driver.find_element_by_name("val_form-0-resourceName_0").send_keys("Test Image Language Description")
+        driver.find_element_by_name("key_form-0-description_0").clear()
+        driver.find_element_by_name("key_form-0-description_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-description_0").clear()
+        driver.find_element_by_name("val_form-0-description_0").send_keys("Test Description")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # distribution popup
+        driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()
+        self.fill_distribution(driver, ss_path, root_id)
+        # contact person popup
+        driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
+        self.fill_contact_person(driver, ss_path, root_id)
+        
+        # language description general info popup
+        driver.find_element_by_id("edit_id_langdescInfo").click()
+        driver.switch_to_window("edit_id_langdescInfo")
+        Select(driver.find_element_by_id("id_languageDescriptionType")).select_by_visible_text(
+          "Grammar")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time())) 
+        save_and_close(driver, root_id)
+          
+        # language description info text popup
+        driver.find_element_by_id("add_id_languageDescriptionTextInfo").click()
+        driver.switch_to_window("id_languageDescriptionTextInfo")
+        Select(driver.find_element_by_id("id_form-2-0-lingualityType")).select_by_visible_text(
+          "Monolingual")
+        # language description info text / language
+        driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
+        self.fill_language(driver, ss_path, "languageinfotype_model_set-0-")
+        # save and close language description info text popup
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        save_and_close(driver, root_id)
+
+        # language description info image popup
+        driver.find_element_by_id("add_id_languageDescriptionImageInfo").click()
+        driver.switch_to_window("id_languageDescriptionImageInfo")
+        Select(driver.find_element_by_id("id_linktoothermediainfotype_model_set-0-otherMedia")) \
+          .select_by_visible_text("Audio")
+        # save and close language description info video popup
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        save_and_close(driver, root_id)
+
+        # save language description text - image
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("_save").click()
+        # TODO remove this workaround when Selenium starts working again as intended
+        time.sleep(1)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("The Resource \"Test Image Language Description\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
         
         # check the editor group of the resource is the default editor group of the user
@@ -476,6 +1093,346 @@ class EditorTest(SeleniumTestCase):
         time.sleep(1)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         self.assertEqual("The Resource \"Test Lexical Resource Text\" was added successfully.", 
+          driver.find_element_by_css_selector("li.info").text)
+
+        # check the editor group of the resource is the default editor group of the user
+        self.assertEqual(self.test_editor_group.name, 
+          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
+
+        # make sure an internal resource cannot be published
+        self.publish(driver)
+        self.assertEqual("internal",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Only ingested resources can be published.", 
+         driver.find_element_by_css_selector("ul.messagelist>li.error").text)
+        # ingest resource
+        self.ingest(driver)
+        self.assertEqual("ingested",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully ingested 1 internal resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
+        # publish resource
+        self.publish(driver)
+        self.assertEqual("published",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully published 1 ingested resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
+        # delete resource
+        self.delete(driver)
+        self.assertEqual("Successfully deleted 1 resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
+        
+        
+    def test_LR_creation_lex_resource_audio(self):
+        driver = self.driver
+        driver.get(self.base_url)
+        ss_path = setup_screenshots_folder(
+          "PNG-metashare.repository.seltests.test_editor.EditorTest",
+          "LR_creation_lex_resource_audio")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))  
+        # login user
+        login_user(driver, "manageruser", "secret")
+        # make sure login was successful
+        self.assertEqual("Logout", 
+          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
+        # create lexical resource
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text(
+          "Lexical conceptual resource")
+        driver.find_element_by_id("id_lexiconAudioInfo").click()
+        driver.find_element_by_id("id_submit").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("Add Resource", 
+          driver.find_element_by_css_selector("#content > h1").text)
+        # remember root window id
+        root_id = driver.current_window_handle
+        # add required fields
+        driver.find_element_by_name("key_form-0-resourceName_0").clear()
+        driver.find_element_by_name("key_form-0-resourceName_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-resourceName_0").clear()
+        driver.find_element_by_name("val_form-0-resourceName_0").send_keys("Test Lexical Resource Audio")
+        driver.find_element_by_name("key_form-0-description_0").clear()
+        driver.find_element_by_name("key_form-0-description_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-description_0").clear()
+        driver.find_element_by_name("val_form-0-description_0").send_keys("Test Description")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # distribution popup
+        driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()
+        self.fill_distribution(driver, ss_path, root_id)
+        # contact person popup
+        driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
+        self.fill_contact_person(driver, ss_path, root_id)
+        
+        # lexical resource general info popup
+        driver.find_element_by_id("edit_id_lexiconInfo").click()
+        driver.switch_to_window("edit_id_lexiconInfo")
+        Select(driver.find_element_by_id("id_lexicalConceptualResourceType")).select_by_visible_text(
+          "Word List")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time())) 
+        save_and_close(driver, root_id)
+          
+        # lexical resource text info popup
+        driver.find_element_by_id("add_id_lexicalConceptualResourceTextInfo").click()
+        driver.switch_to_window("id_lexicalConceptualResourceTextInfo")
+        Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
+          "Monolingual")
+        # lexical resource text info / language
+        self.fill_language(driver, ss_path, "languageinfotype_model_set-0-")
+        # lexical resource text info / size
+        self.fill_text_size(driver, ss_path, "sizeinfotype_model_set-0-")
+        # save and close lexical resource text info popup
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        save_and_close(driver, root_id)
+
+        # lexical resource audio info popup
+        driver.find_element_by_id("add_id_lexicalConceptualResourceAudioInfo").click()
+        driver.switch_to_window("id_lexicalConceptualResourceAudioInfo")
+        # save and close lexical resource text info popup
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        save_and_close(driver, root_id)
+
+        # save lexical resource text - audio
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("_save").click()
+        # TODO remove this workaround when Selenium starts working again as intended
+        time.sleep(1)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("The Resource \"Test Lexical Resource Audio\" was added successfully.", 
+          driver.find_element_by_css_selector("li.info").text)
+
+        # check the editor group of the resource is the default editor group of the user
+        self.assertEqual(self.test_editor_group.name, 
+          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
+
+        # make sure an internal resource cannot be published
+        self.publish(driver)
+        self.assertEqual("internal",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Only ingested resources can be published.", 
+         driver.find_element_by_css_selector("ul.messagelist>li.error").text)
+        # ingest resource
+        self.ingest(driver)
+        self.assertEqual("ingested",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully ingested 1 internal resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
+        # publish resource
+        self.publish(driver)
+        self.assertEqual("published",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully published 1 ingested resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
+        # delete resource
+        self.delete(driver)
+        self.assertEqual("Successfully deleted 1 resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
+        
+        
+    def test_LR_creation_lex_resource_video(self):
+        driver = self.driver
+        driver.get(self.base_url)
+        ss_path = setup_screenshots_folder(
+          "PNG-metashare.repository.seltests.test_editor.EditorTest",
+          "LR_creation_lex_resource_video")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))  
+        # login user
+        login_user(driver, "manageruser", "secret")
+        # make sure login was successful
+        self.assertEqual("Logout", 
+          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
+        # create lexical resource
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text(
+          "Lexical conceptual resource")
+        driver.find_element_by_id("id_lexiconVideoInfo").click()
+        driver.find_element_by_id("id_submit").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("Add Resource", 
+          driver.find_element_by_css_selector("#content > h1").text)
+        # remember root window id
+        root_id = driver.current_window_handle
+        # add required fields
+        driver.find_element_by_name("key_form-0-resourceName_0").clear()
+        driver.find_element_by_name("key_form-0-resourceName_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-resourceName_0").clear()
+        driver.find_element_by_name("val_form-0-resourceName_0").send_keys("Test Lexical Resource Video")
+        driver.find_element_by_name("key_form-0-description_0").clear()
+        driver.find_element_by_name("key_form-0-description_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-description_0").clear()
+        driver.find_element_by_name("val_form-0-description_0").send_keys("Test Description")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # distribution popup
+        driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()
+        self.fill_distribution(driver, ss_path, root_id)
+        # contact person popup
+        driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
+        self.fill_contact_person(driver, ss_path, root_id)
+        
+        # lexical resource general info popup
+        driver.find_element_by_id("edit_id_lexiconInfo").click()
+        driver.switch_to_window("edit_id_lexiconInfo")
+        Select(driver.find_element_by_id("id_lexicalConceptualResourceType")).select_by_visible_text(
+          "Word List")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time())) 
+        save_and_close(driver, root_id)
+          
+        # lexical resource text info popup
+        driver.find_element_by_id("add_id_lexicalConceptualResourceTextInfo").click()
+        driver.switch_to_window("id_lexicalConceptualResourceTextInfo")
+        Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
+          "Monolingual")
+        # lexical resource text info / language
+        self.fill_language(driver, ss_path, "languageinfotype_model_set-0-")
+        # lexical resource text info / size
+        self.fill_text_size(driver, ss_path, "sizeinfotype_model_set-0-")
+        # save and close lexical resource text info popup
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        save_and_close(driver, root_id)
+
+        # lexical resource video info popup
+        driver.find_element_by_id("add_id_lexicalConceptualResourceVideoInfo").click()
+        driver.switch_to_window("id_lexicalConceptualResourceVideoInfo")
+        driver.find_element_by_name("form-2-0-typeOfVideoContent").send_keys("Other")
+        # save and close lexical resource video info popup
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        save_and_close(driver, root_id)
+
+        # save lexical resource text - video
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("_save").click()
+        # TODO remove this workaround when Selenium starts working again as intended
+        time.sleep(1)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("The Resource \"Test Lexical Resource Video\" was added successfully.", 
+          driver.find_element_by_css_selector("li.info").text)
+
+        # check the editor group of the resource is the default editor group of the user
+        self.assertEqual(self.test_editor_group.name, 
+          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
+
+        # make sure an internal resource cannot be published
+        self.publish(driver)
+        self.assertEqual("internal",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Only ingested resources can be published.", 
+         driver.find_element_by_css_selector("ul.messagelist>li.error").text)
+        # ingest resource
+        self.ingest(driver)
+        self.assertEqual("ingested",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully ingested 1 internal resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
+        # publish resource
+        self.publish(driver)
+        self.assertEqual("published",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully published 1 ingested resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
+        # delete resource
+        self.delete(driver)
+        self.assertEqual("Successfully deleted 1 resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
+        
+        
+    def test_LR_creation_lex_resource_image(self):
+        driver = self.driver
+        driver.get(self.base_url)
+        ss_path = setup_screenshots_folder(
+          "PNG-metashare.repository.seltests.test_editor.EditorTest",
+          "LR_creation_lex_resource_image")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))  
+        # login user
+        login_user(driver, "manageruser", "secret")
+        # make sure login was successful
+        self.assertEqual("Logout", 
+          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
+        # create lexical resource
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text(
+          "Lexical conceptual resource")
+        driver.find_element_by_id("id_lexiconImageInfo").click()
+        driver.find_element_by_id("id_submit").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("Add Resource", 
+          driver.find_element_by_css_selector("#content > h1").text)
+        # remember root window id
+        root_id = driver.current_window_handle
+        # add required fields
+        driver.find_element_by_name("key_form-0-resourceName_0").clear()
+        driver.find_element_by_name("key_form-0-resourceName_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-resourceName_0").clear()
+        driver.find_element_by_name("val_form-0-resourceName_0").send_keys("Test Lexical Resource Image")
+        driver.find_element_by_name("key_form-0-description_0").clear()
+        driver.find_element_by_name("key_form-0-description_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-description_0").clear()
+        driver.find_element_by_name("val_form-0-description_0").send_keys("Test Description")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # distribution popup
+        driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()
+        self.fill_distribution(driver, ss_path, root_id)
+        # contact person popup
+        driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
+        self.fill_contact_person(driver, ss_path, root_id)
+        
+        # lexical resource general info popup
+        driver.find_element_by_id("edit_id_lexiconInfo").click()
+        driver.switch_to_window("edit_id_lexiconInfo")
+        Select(driver.find_element_by_id("id_lexicalConceptualResourceType")).select_by_visible_text(
+          "Word List")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time())) 
+        save_and_close(driver, root_id)
+          
+        # lexical resource text info popup
+        driver.find_element_by_id("add_id_lexicalConceptualResourceTextInfo").click()
+        driver.switch_to_window("id_lexicalConceptualResourceTextInfo")
+        Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
+          "Monolingual")
+        # lexical resource text info / language
+        self.fill_language(driver, ss_path, "languageinfotype_model_set-0-")
+        # lexical resource text info / size
+        self.fill_text_size(driver, ss_path, "sizeinfotype_model_set-0-")
+        # save and close lexical resource text info popup
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        save_and_close(driver, root_id)
+
+        # lexical resource image info popup
+        driver.find_element_by_id("add_id_lexicalConceptualResourceImageInfo").click()
+        driver.switch_to_window("id_lexicalConceptualResourceImageInfo")
+        # save and close lexical resource video info popup
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        save_and_close(driver, root_id)
+
+        # save lexical resource text - image
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("_save").click()
+        # TODO remove this workaround when Selenium starts working again as intended
+        time.sleep(1)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("The Resource \"Test Lexical Resource Image\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
 
         # check the editor group of the resource is the default editor group of the user

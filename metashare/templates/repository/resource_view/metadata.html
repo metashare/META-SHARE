@@ -1,35 +1,35 @@
-{# MISSING: metadataLanguageName, metadataLanguageId #}
-
-<label class='title component'>Metadata Info</label>
+<label class='component'>Metadata</label>
 <div>
-
 		{% if metadata_dict.Metadata.Metadata_creation_date %}			
-			 <div class="dataline">
+			 <div class="dataline indented">
 				<label>
-					Created: {{ metadata_dict.Metadata.Metadata_creation_date|date:"SHORT_DATE_FORMAT" }}
+					<b>Created: </b>{{ metadata_dict.Metadata.Metadata_creation_date|date:"SHORT_DATE_FORMAT" }}
 				</label>
 			</div>
 		{% endif %}
 		
 		{% if metadata_dict.Metadata.Metadata_last_date_updated %}			
-			 <div class="dataline">
+			 <div class="dataline indented">
 				<label>
-					Last Updated: {{ metadata_dict.Metadata.Metadata_last_date_updated|date:"SHORT_DATE_FORMAT" }}
+					<b>Last Updated: </b>{{ metadata_dict.Metadata.Metadata_last_date_updated|date:"SHORT_DATE_FORMAT" }}
+				</label>
+			</div>
+		{% endif %}
+		
+		
+		{% if metadata_dict.Metadata.Source %}
+			<div class="dataline indented">
+				<label>
+				<b>Source: </b>{{ metadata_dict.Metadata.Source }}
 				</label>
 			</div>
 		{% endif %}
 
-		{% if metadata_dict.Metadata.Source %}
-			<div class="dataline">
-				<label>Source: {{ metadata_dict.Metadata.Source }}</label>
-			</div>
-		{% endif %}
-
 		{% if metadata_dict.Metadata.Original_metadata_schema %}
-			<div class="dataline">
+			<div class="dataline indented">
 				<label>
 					{% if metadata_dict.Metadata.Original_metadata_link %}
-						<a href="{{metadata_dict.Metadata.Original_metadata_link}}">
+						<a href="{{metadata_dict.Metadata.Original_metadata_link}}" target='_blank'>
 					{% endif %}
 							{{ metadata_dict.Metadata.Original_metadata_schema }}
 					{% if metadata_dict.Metadata.Original_metadata_link %}
@@ -39,9 +39,26 @@
 			</div>
 		{% endif %}
 		
+		{% if value2.Document_language_name %}
+		     <div class="dataline indented">
+				<label>
+					<b>Document Language:</b> 
+					{% if value2.Document_language_id %}
+						<span title="{{value2.Document_language_id}}">
+					{% endif %}
+					{{ value2.Document_language_name }}
+					{% if value2.Document_language_id %}
+						</span>
+					{% endif %}
+				</label>
+			</div>
+		{% endif %}
+		
 		{% if metadata_dict.Metadata.Revision %}
-			<div class="dataline">
-				<label>Revision: {{  metadata_dict.Metadata.Revision }}</label>
+			<div class="dataline indented">
+				<label>
+					<b>Revision: </b>{{  metadata_dict.Metadata.Revision }}
+				</label>
 			</div>
 		{% endif %}
 </div>
@@ -49,7 +66,7 @@
 {% for key, value in metadata_dict.items %}
 		{% for key1, value1 in value.items %}
 			{% if key1 == "Metadata_creator" %}			
-			     {% include "repository/resource_view/person.html" with person_dict=value1 type="metadataCreator" %}
+			     {% include "repository/resource_view/person.html" with person_dict=value1 title="Metadata Creator" %}
 			{% endif %}			
 		{% endfor %}
 {% endfor %}

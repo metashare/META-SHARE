@@ -13,7 +13,6 @@
 
 {% block keywords %}{{ resourceType }}, {{ mediaTypes|join:", " }}, {{ linguality_infos|join:", " }}, {{ resource.distributionInfo.get_availability_display }}, {{ license_types|join:", " }}{% endblock %}
 
-
 {% block content %}
 {% spaceless %}
 	<script type="text/javascript" src="http://plugins.learningjquery.com/expander/jquery.expander.js"></script>
@@ -43,51 +42,50 @@
 				$(selected_tab).fadeIn();
 				return false;
 	  		});
-
-			$(".title.component").each(function() {
-				if($(this).nextUntil(".title.component").hasClass("optional")){
-					$(this).addClass("expandable");
-				}
-			});
-			
+	  		
+	  		
 			$(".dataline.optional").hide();
-			$(".expandable").addClass("collapsed");
-			$(".expandable").click(function() {
+				$(".expandable").addClass("collapsed");
+				$(".expandable").click(function() {
 				if($(this).hasClass("collapsed")){
-					$(this).removeClass('collapsed');
-					$(this).addClass('expanded');
-					$(this).nextUntil(".title.component").show();
+				$(this).removeClass('collapsed');
+				$(this).addClass('expanded');
+				$(this).nextUntil(".title.component").show();
 				}
 				else{
 					$(this).removeClass('expanded');
-					$(this).addClass('collapsed');						
-					 $(this).nextAll().each( function() {
-				           if ($(this).filter('.title').length) {
-				              return false;
-				           }
-				           $(this).filter('.optional').hide();
-				       });
-					
+					$(this).addClass('collapsed');	
+					$(this).nextAll().each( function() {
+					if ($(this).filter('.title').length) {
+					return false;
+					}
+					$(this).filter('.optional').hide();
+					});
+				
 				}
-			});
-			
-			$(".more").addClass("collapsed");
-			$(".otherlang").hide();
-			$(".more").click(function() {
-				if($(this).hasClass("collapsed")){
+				});
+				
+				$(".more").addClass("collapsed");
+				$(".otherlang").hide();
+				$(".more").click(function() {
+					if($(this).hasClass("collapsed")){
 					$(this).removeClass('collapsed');
 					$(this).addClass('expanded');
 				}
 				else{
 					$(this).removeClass('expanded');
-					$(this).addClass('collapsed');					
+					$(this).addClass('collapsed');	
 				}
 				
 				
 				$(this).next().toggle();
-				
+			
 			});
 			
+			$(".contactcard").click(function() {				
+				$(this).next().toggle();
+				return false;				
+			});
 		});
 	</script>
 
@@ -100,9 +98,10 @@
                 	<a href="#" class="tip">
                     <img src="{{ MEDIA_URL }}stats/img/{{ stat.action }}_icon.gif"
                     alt="Last {{ stat.action }}: {{ stat.last }}"/>
+                    <b>{{ stat.count }}</b>&nbsp;
                     <span>Last {{ stat.action }}: {{ stat.last }}</span>
                     </a>
-                    <b>{{ stat.count }}</b>&nbsp;
+                    
                 {% endif %}
             {% endfor %}
         </div>
@@ -128,92 +127,95 @@
 			<div class='otherlang'>
 			{% for desc in other_descriptions %}<h4 style="text-align:justify" class="readmore">{{ desc }}</h4>{% endfor %} 
 			</div> 
-		{% endifnotequal %}			
+		{% endifnotequal %}
 		
 		<div style="clear: both;">
-	        
-		  <a href="javascript:history.back();"><button class="span-12 button middle_button">&laquo; Back</button></a>
-		  {% if LR_DOWNLOAD %}
-		    <a href="{% url metashare.repository.views.download resource.storage_object.identifier %}"><button class="span-4 button middle_button">Download</button></a>
-		  {% else %}
-		    <div class="popup_box">
-		      <div onmouseover="$(this).siblings('div.popup').show();" onmouseout="$(this).siblings('div.popup').hide();"><button class="span-4 button middle_gray_button">Download</button></div><div class="popup" style="height:50px; left:190px; width:270px; top:50px;"><img style="left:10px;" src="{{ MEDIA_URL }}images/adv_search_pfeil.png" />&nbsp;You don&rsquo;t have the permission to download this resource. Please log in.</div>
-		    </div>
-		  {% endif %}
-		  {% if LR_EDIT %}
-		    <a href="{{ LR_EDIT }}"><button class="span-4 button middle_button">Edit Resource</button></a>
-		  {% else %}
-		    <div onmouseover="$(this).siblings('div.popup').show();" onmouseout="$(this).siblings('div.popup').hide();"><button class="span-4 button middle_gray_button">Edit Resource</button></div><div class="popup" style="height:50px; left:350px; width:270px; top:60px;"><img style="left:10px;" src="{{ MEDIA_URL }}images/adv_search_pfeil.png" />&nbsp;You don&rsquo;t have the permission to edit this resource.</div>
-		  {% endif %}
+			<a href="javascript:history.back();"><button class="span-12 button middle_button">&laquo; Back</button></a>
+		    <a {% if LR_DOWNLOAD %} href="{% url metashare.repository.views.download resource.storage_object.identifier %}" {% else %} href="#" class="tip" {% endif %}>
+		  		<span class="download">You don&rsquo;t have the permission to download this resource. Please log in.</span>
+		       	<button class="span-4 button {% if LR_DOWNLOAD %}middle_button{% else %}middle_gray_button{% endif %}">Download</button>
+		    </a>
+		  	<a {% if LR_EDIT %} href="{{ LR_EDIT }}" {% else %} href="#" class="tip" {% endif %}>
+				<span class="edit">You don&rsquo;t have the permission to edit this resource.</span>
+		       	<button class="span-4 button {% if LR_EDIT %}middle_button{% else %}middle_gray_button{% endif %}">Edit Resource</button>
+		    </a>
 			<div style="clear: both;"></div>
 		</div>
-		
 	</div>
 	
-		<div class="white_box column corner">
-			{% include "repository/resource_view/detailed_component.html" with lr_content=distribution_info_tuple %}
-			
-			{% for contact_person in contact_person_dicts %}
-			     {% include "repository/resource_view/person_info.html" with contact_person_dict=contact_person %}
-			{% endfor %}
+	<div class="white_box column corner">
 
-			{% for person in object.contactPerson_set.all %}
-				{{ person }}
-			{% endfor %}
-			{{ resource_component_dict.Resource_component.Resource }}
-		</div>
+		{% include "repository/resource_view/distribution.html" with distribution=distribution_dict %}
 		
-		<div class="column middle">
-			<div class="fields">
-					<ul>
-						{% ifequal resourceType "toolService" %}
-							<li><a href="#1">toolService{% get_icon "toolService" %}</a></li>
-						{% else %}
-							{% for type in mediaTypes %}
-								<li><a href="#{{forloop.counter}}">{{type}}{% get_icon type %}</a></li>
-							{% endfor %}
-						{% endifequal %}						
-						
-					</ul>
-				</div>
-			<div class="white_box middle_box">
-			{% ifequal resourceType "toolService" %}
-				<div id="tabs_content_container">
-					<div id="1" class="tab_content">
-						{% include "repository/resource_view/media_info.html" with type='toolService' %}
-					</div>
-				</div>
-			{% else %}
-				{% for type in mediaTypes %}
-					<div id="tabs_content_container">
-						<div id="{{forloop.counter}}" class="tab_content">
-							{% include "repository/resource_view/media_info.html" with type=type %}
-						</div>
-					</div>
-				{% endfor %}
-			{% endifequal %}
+		{% for contact_person in contact_person_dicts %}
+			 {% include "repository/resource_view/person.html" with person_dict=contact_person.Contact_person %}
+		{% endfor %}
+	</div>
+		
+	<div class="column middle">
+		<div class="fields">
+				<ul>
+					{% ifequal resourceType "toolService" %}
+						<li><a href="#1">toolService{% get_icon "toolService" %}</a></li>
+					{% else %}
+						{% for type in mediaTypes %}
+							<li><a href="#{{forloop.counter}}">{{type}}{% get_icon type %}</a></li>
+						{% endfor %}
+					{% endifequal %}
+				</ul>
 			</div>
+		<div class="white_box middle_box">
+		{% ifequal resourceType "toolService" %}
+			<div id="tabs_content_container">
+				<div id="1" class="tab_content">
+					{% include "repository/resource_view/media_info.html" with type='toolService' %}
+				</div>
+			</div>
+		{% else %}
+			{% for type in mediaTypes %}
+				<div id="tabs_content_container">
+					<div id="{{forloop.counter}}" class="tab_content">
+						{% include "repository/resource_view/media_info.html" with type=type %}
+					</div>
+				</div>
+			{% endfor %}
+		{% endifequal %}
 		</div>
-		<div class="white_box column corner right-corner">
-		
-		  {% if resource_creation_info_tuple %}
-		    {% include "repository/resource_view/resource_creation.html" %}
-		  {% endif %}
+	</div>
+
+	<div class="white_box column corner right-corner">
+	
+		{% if resource_creation_dict %}
+			{% include "repository/resource_view/resource_creation.html" %}
+		{% endif %}
 		  
 		{% include "repository/resource_view/metadata.html" %}
-		  {% for validation_info_tuple in validation_info_tuples %}
-		    {% include "repository/resource_view/detailed_component.html" with lr_content=validation_info_tuple %}
-		  {% endfor %}
-		  {% if resource_creation_info_tuple %}
-		    {% include "repository/resource_view/detailed_component.html" with lr_content=usage_info_tuple %}
-		  {% endif %}
-		  {% if resource_creation_info_tuple %}
-		    {% include "repository/resource_view/detailed_component.html" with lr_content=resource_documentation_info_tuple %}
-		  {% endif %}
-		  {% for relation_info_tuple in relation_info_tuples %}
-		    {% include "repository/resource_view/detailed_component.html" with lr_content=relation_info_tuple %}
-		  {% endfor %}
-		</div>
+		
+		{% if validation_dicts %}
+			{% include "repository/resource_view/validation.html" %}
+		{% endif %}
+		
+		{% if usage_dict %}
+			{% include "repository/resource_view/usage.html" %}
+		{% endif %}
+		
+		{% if relation_dict %}
+			{% include "repository/resource_view/relation.html" %}
+		{% endif %}
+		
+		{% if documentation_dict %}
+			{% for key, value in documentation_dict.items %}
+				{% for key1, value1 in value.items %}		
+					{% for key2, value2 in value1.items %}				
+						{% if key2 == "Documentation" %}
+							{% include "repository/resource_view/documentation.html" with documentation=value2 type="Documentation" %}
+						{% endif %}
+					{% endfor %}
+				{% endfor %}
+			{% endfor %}
+		{% endif %}
+	
+	</div>
 
 {% include "repository/resource_view/recomm_view.html" %}
 {% endspaceless %}

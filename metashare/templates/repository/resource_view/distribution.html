@@ -1,0 +1,72 @@
+{% spaceless %}
+
+<label class='component'>Distribution</label>
+
+
+<label class="title">Availability</label>
+
+{% if distribution.Distribution.Availability %}
+	 <div class="dataline">
+		<label>
+			{{ distribution.Distribution.Availability }}
+		</label>
+	</div>
+{% endif %}
+
+{% if distribution.Distribution.Availability_start_date %}
+	 <div class="dataline">
+		<label>
+			<b>Start date: </b>{{ distribution.Distribution.Availability_start_date|date:"SHORT_DATE_FORMAT" }}
+		</label>
+	</div>
+{% endif %}
+
+{% if distribution.Distribution.Availability_end_date %}
+	 <div class="dataline">
+		<label>
+			<b>End date: </b>{{ distribution.Distribution.Availability_end_date|date:"SHORT_DATE_FORMAT" }}
+		</label>
+	</div>
+{% endif %}
+
+
+
+
+{% if distribution.Distribution.Licence %}
+<label class="title">Licence Information</label>
+{% if distribution.Distribution.Licence.Licence %}
+	 <div class="dataline">
+		<label>
+			<b>Licence: </b>{{ distribution.Distribution.Licence.Licence }}
+		</label>
+	</div>
+{% endif %}
+
+{% if distribution.Distribution.Licence.Restrictions_of_use %}
+	 <div class="dataline">
+		<label>
+			<b>Restrictions: </b>{{ distribution.Distribution.Licence.Restrictions_of_use }}
+		</label>
+	</div>
+{% endif %}
+
+{% if distribution.Distribution.Licence.Distribution_access_medium %}
+	 <div class="dataline">
+		<label>
+			<b>Distribution Access/Medium: </b>{{ distribution.Distribution.Licence.Distribution_access_medium }}
+		</label>
+	</div>
+{% endif %}
+
+{% if distribution.Distribution.Licence.Restrictions_of_use %}
+	 <div class="dataline">
+		<label>
+			<b>Restrictions: </b>{{ distribution.Distribution.Restrictions_of_use }}
+		</label>
+	</div>
+{% endif %}
+
+
+{% endif %}
+
+{% endspaceless %}
