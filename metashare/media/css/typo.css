@@ -1,6 +1,8 @@
 @font-face {
         font-family: 'TitilliumText25L';
         src: url('../fonts/TitilliumText25L002.otf') format('opentype');
+        font-weight:normal;
+        font-style:normal;
 }
 
 body{
