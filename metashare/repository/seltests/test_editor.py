@@ -143,10 +143,10 @@ class EditorTest(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
-        self.fill_distribution(driver, ss_path, root_id)
+        _fill_distribution(driver, ss_path, root_id)
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        self.fill_contact_person(driver, ss_path, root_id)
+        _fill_contact_person(driver, ss_path, root_id)
         
         # corpus text info popup
         driver.find_element_by_id("add_id_corpusTextInfo-0").click()
@@ -154,9 +154,9 @@ class EditorTest(SeleniumTestCase):
         Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
           "Monolingual")
         # corpus text info / language
-        self.fill_language(driver, ss_path, "languageinfotype_model_set-0-")
+        _fill_language(driver, ss_path, "languageinfotype_model_set-0-")
         # corpus text info / size
-        self.fill_text_size(driver, ss_path, "sizeinfotype_model_set-0-")
+        _fill_text_size(driver, ss_path, "sizeinfotype_model_set-0-")
         # save and close corpus text info popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         save_and_close(driver, root_id)
@@ -175,25 +175,25 @@ class EditorTest(SeleniumTestCase):
           driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
 
         # make sure an internal resource cannot be published
-        self.publish(driver)
+        _publish(driver)
         self.assertEqual("internal",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Only ingested resources can be published.", 
          driver.find_element_by_css_selector("ul.messagelist>li.error").text)
         # ingest resource
-        self.ingest(driver)
+        _ingest(driver)
         self.assertEqual("ingested",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Successfully ingested 1 internal resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         # publish resource
-        self.publish(driver)
+        _publish(driver)
         self.assertEqual("published",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Successfully published 1 ingested resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         # delete resource
-        self.delete(driver)
+        _delete(driver)
         self.assertEqual("Successfully deleted 1 resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         
@@ -240,10 +240,10 @@ class EditorTest(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
-        self.fill_distribution(driver, ss_path, root_id)
+        _fill_distribution(driver, ss_path, root_id)
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        self.fill_contact_person(driver, ss_path, root_id)
+        _fill_contact_person(driver, ss_path, root_id)
         
         # corpus audio info popup
         driver.find_element_by_id("add_id_corpusAudioInfo").click()
@@ -251,10 +251,10 @@ class EditorTest(SeleniumTestCase):
         Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
           "Monolingual")
         # corpus audio info / language
-        self.fill_language(driver, ss_path, "languageinfotype_model_set-0-")
+        _fill_language(driver, ss_path, "languageinfotype_model_set-0-")
         # corpus audio info / size popup
         driver.find_element_by_css_selector("#add_id_audioSizeInfo > img[alt=\"Add Another\"]").click()
-        self.fill_audio_size(driver, ss_path, "id_corpusAudioInfo")
+        _fill_audio_size(driver, ss_path, "id_corpusAudioInfo")
         # save and close corpus audio info popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         save_and_close(driver, root_id)
@@ -273,25 +273,25 @@ class EditorTest(SeleniumTestCase):
           driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
 
         # make sure an internal resource cannot be published
-        self.publish(driver)
+        _publish(driver)
         self.assertEqual("internal",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Only ingested resources can be published.", 
          driver.find_element_by_css_selector("ul.messagelist>li.error").text)
         # ingest resource
-        self.ingest(driver)
+        _ingest(driver)
         self.assertEqual("ingested",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Successfully ingested 1 internal resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         # publish resource
-        self.publish(driver)
+        _publish(driver)
         self.assertEqual("published",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Successfully published 1 ingested resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         # delete resource
-        self.delete(driver)
+        _delete(driver)
         self.assertEqual("Successfully deleted 1 resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
 
@@ -338,10 +338,10 @@ class EditorTest(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
-        self.fill_distribution(driver, ss_path, root_id)
+        _fill_distribution(driver, ss_path, root_id)
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        self.fill_contact_person(driver, ss_path, root_id)
+        _fill_contact_person(driver, ss_path, root_id)
         
         # corpus video info popup
         driver.find_element_by_id("add_id_corpusVideoInfo-0").click()
@@ -368,25 +368,25 @@ class EditorTest(SeleniumTestCase):
           driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
 
         # make sure an internal resource cannot be published
-        self.publish(driver)
+        _publish(driver)
         self.assertEqual("internal",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Only ingested resources can be published.", 
          driver.find_element_by_css_selector("ul.messagelist>li.error").text)
         # ingest resource
-        self.ingest(driver)
+        _ingest(driver)
         self.assertEqual("ingested",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Successfully ingested 1 internal resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         # publish resource
-        self.publish(driver)
+        _publish(driver)
         self.assertEqual("published",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Successfully published 1 ingested resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         # delete resource
-        self.delete(driver)
+        _delete(driver)
         self.assertEqual("Successfully deleted 1 resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
 
@@ -433,10 +433,10 @@ class EditorTest(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
-        self.fill_distribution(driver, ss_path, root_id)
+        _fill_distribution(driver, ss_path, root_id)
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        self.fill_contact_person(driver, ss_path, root_id)
+        _fill_contact_person(driver, ss_path, root_id)
         
         # corpus image info popup
         driver.find_element_by_id("add_id_corpusImageInfo").click()
@@ -463,25 +463,25 @@ class EditorTest(SeleniumTestCase):
           driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
 
         # make sure an internal resource cannot be published
-        self.publish(driver)
+        _publish(driver)
         self.assertEqual("internal",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Only ingested resources can be published.", 
          driver.find_element_by_css_selector("ul.messagelist>li.error").text)
         # ingest resource
-        self.ingest(driver)
+        _ingest(driver)
         self.assertEqual("ingested",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Successfully ingested 1 internal resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         # publish resource
-        self.publish(driver)
+        _publish(driver)
         self.assertEqual("published",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Successfully published 1 ingested resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         # delete resource
-        self.delete(driver)
+        _delete(driver)
         self.assertEqual("Successfully deleted 1 resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
 
@@ -528,10 +528,10 @@ class EditorTest(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
-        self.fill_distribution(driver, ss_path, root_id)
+        _fill_distribution(driver, ss_path, root_id)
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        self.fill_contact_person(driver, ss_path, root_id)
+        _fill_contact_person(driver, ss_path, root_id)
         
         # TODO check if this behaviour is normal
         # corpus text numerical info popup
@@ -555,25 +555,25 @@ class EditorTest(SeleniumTestCase):
           driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
 
         # make sure an internal resource cannot be published
-        self.publish(driver)
+        _publish(driver)
         self.assertEqual("internal",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Only ingested resources can be published.", 
          driver.find_element_by_css_selector("ul.messagelist>li.error").text)
         # ingest resource
-        self.ingest(driver)
+        _ingest(driver)
         self.assertEqual("ingested",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Successfully ingested 1 internal resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         # publish resource
-        self.publish(driver)
+        _publish(driver)
         self.assertEqual("published",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Successfully published 1 ingested resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         # delete resource
-        self.delete(driver)
+        _delete(driver)
         self.assertEqual("Successfully deleted 1 resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
 
@@ -620,10 +620,10 @@ class EditorTest(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
-        self.fill_distribution(driver, ss_path, root_id)
+        _fill_distribution(driver, ss_path, root_id)
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        self.fill_contact_person(driver, ss_path, root_id)
+        _fill_contact_person(driver, ss_path, root_id)
         
         # corpus ngram info popup
         driver.find_element_by_id("add_id_corpusTextNgramInfo").click()
@@ -639,7 +639,7 @@ class EditorTest(SeleniumTestCase):
         Select(driver.find_element_by_id("id_form-2-0-lingualityType")).select_by_visible_text(
           "Monolingual")
         # corpus ngram info / language
-        self.fill_language(driver, ss_path, "languageinfotype_model_set-0-")
+        _fill_language(driver, ss_path, "languageinfotype_model_set-0-")
         # corpus ngram info / size popup
         driver.find_element_by_name("sizeinfotype_model_set-0-size").clear()
         driver.find_element_by_name("sizeinfotype_model_set-0-size").send_keys("100")
@@ -662,25 +662,25 @@ class EditorTest(SeleniumTestCase):
           driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
 
         # make sure an internal resource cannot be published
-        self.publish(driver)
+        _publish(driver)
         self.assertEqual("internal",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Only ingested resources can be published.", 
          driver.find_element_by_css_selector("ul.messagelist>li.error").text)
         # ingest resource
-        self.ingest(driver)
+        _ingest(driver)
         self.assertEqual("ingested",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Successfully ingested 1 internal resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         # publish resource
-        self.publish(driver)
+        _publish(driver)
         self.assertEqual("published",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Successfully published 1 ingested resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         # delete resource
-        self.delete(driver)
+        _delete(driver)
         self.assertEqual("Successfully deleted 1 resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
 
@@ -727,10 +727,10 @@ class EditorTest(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()
-        self.fill_distribution(driver, ss_path, root_id)
+        _fill_distribution(driver, ss_path, root_id)
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        self.fill_contact_person(driver, ss_path, root_id)
+        _fill_contact_person(driver, ss_path, root_id)
         
         # language description general info popup
         driver.find_element_by_id("edit_id_langdescInfo").click()
@@ -747,7 +747,7 @@ class EditorTest(SeleniumTestCase):
           "Monolingual")
         # language description info text / language
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        self.fill_language(driver, ss_path, "languageinfotype_model_set-0-")
+        _fill_language(driver, ss_path, "languageinfotype_model_set-0-")
         # save and close language description info text popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         save_and_close(driver, root_id)
@@ -766,25 +766,25 @@ class EditorTest(SeleniumTestCase):
           driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
 
         # make sure an internal resource cannot be published
-        self.publish(driver)
+        _publish(driver)
         self.assertEqual("internal",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Only ingested resources can be published.", 
          driver.find_element_by_css_selector("ul.messagelist>li.error").text)
         # ingest resource
-        self.ingest(driver)
+        _ingest(driver)
         self.assertEqual("ingested",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Successfully ingested 1 internal resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         # publish resource
-        self.publish(driver)
+        _publish(driver)
         self.assertEqual("published",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Successfully published 1 ingested resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         # delete resource
-        self.delete(driver)
+        _delete(driver)
         self.assertEqual("Successfully deleted 1 resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         
@@ -832,10 +832,10 @@ class EditorTest(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()
-        self.fill_distribution(driver, ss_path, root_id)
+        _fill_distribution(driver, ss_path, root_id)
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        self.fill_contact_person(driver, ss_path, root_id)
+        _fill_contact_person(driver, ss_path, root_id)
         
         # language description general info popup
         driver.find_element_by_id("edit_id_langdescInfo").click()
@@ -852,7 +852,7 @@ class EditorTest(SeleniumTestCase):
           "Monolingual")
         # language description info text / language
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        self.fill_language(driver, ss_path, "languageinfotype_model_set-0-")
+        _fill_language(driver, ss_path, "languageinfotype_model_set-0-")
         # save and close language description info text popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         save_and_close(driver, root_id)
@@ -880,25 +880,25 @@ class EditorTest(SeleniumTestCase):
           driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
 
         # make sure an internal resource cannot be published
-        self.publish(driver)
+        _publish(driver)
         self.assertEqual("internal",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Only ingested resources can be published.", 
          driver.find_element_by_css_selector("ul.messagelist>li.error").text)
         # ingest resource
-        self.ingest(driver)
+        _ingest(driver)
         self.assertEqual("ingested",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Successfully ingested 1 internal resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         # publish resource
-        self.publish(driver)
+        _publish(driver)
         self.assertEqual("published",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Successfully published 1 ingested resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         # delete resource
-        self.delete(driver)
+        _delete(driver)
         self.assertEqual("Successfully deleted 1 resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         
@@ -946,10 +946,10 @@ class EditorTest(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()
-        self.fill_distribution(driver, ss_path, root_id)
+        _fill_distribution(driver, ss_path, root_id)
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        self.fill_contact_person(driver, ss_path, root_id)
+        _fill_contact_person(driver, ss_path, root_id)
         
         # language description general info popup
         driver.find_element_by_id("edit_id_langdescInfo").click()
@@ -966,7 +966,7 @@ class EditorTest(SeleniumTestCase):
           "Monolingual")
         # language description info text / language
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        self.fill_language(driver, ss_path, "languageinfotype_model_set-0-")
+        _fill_language(driver, ss_path, "languageinfotype_model_set-0-")
         # save and close language description info text popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         save_and_close(driver, root_id)
@@ -994,25 +994,25 @@ class EditorTest(SeleniumTestCase):
           driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
 
         # make sure an internal resource cannot be published
-        self.publish(driver)
+        _publish(driver)
         self.assertEqual("internal",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Only ingested resources can be published.", 
          driver.find_element_by_css_selector("ul.messagelist>li.error").text)
         # ingest resource
-        self.ingest(driver)
+        _ingest(driver)
         self.assertEqual("ingested",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Successfully ingested 1 internal resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         # publish resource
-        self.publish(driver)
+        _publish(driver)
         self.assertEqual("published",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Successfully published 1 ingested resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         # delete resource
-        self.delete(driver)
+        _delete(driver)
         self.assertEqual("Successfully deleted 1 resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         
@@ -1059,10 +1059,10 @@ class EditorTest(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()
-        self.fill_distribution(driver, ss_path, root_id)
+        _fill_distribution(driver, ss_path, root_id)
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        self.fill_contact_person(driver, ss_path, root_id)
+        _fill_contact_person(driver, ss_path, root_id)
         
         # lexical resource general info popup
         driver.find_element_by_id("edit_id_lexiconInfo").click()
@@ -1078,9 +1078,9 @@ class EditorTest(SeleniumTestCase):
         Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
           "Monolingual")
         # lexical resource text info / language
-        self.fill_language(driver, ss_path, "languageinfotype_model_set-0-")
+        _fill_language(driver, ss_path, "languageinfotype_model_set-0-")
         # lexical resource text info / size
-        self.fill_text_size(driver, ss_path, "sizeinfotype_model_set-0-")
+        _fill_text_size(driver, ss_path, "sizeinfotype_model_set-0-")
         # save and close lexical resource text info popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         save_and_close(driver, root_id)
@@ -1099,25 +1099,25 @@ class EditorTest(SeleniumTestCase):
           driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
 
         # make sure an internal resource cannot be published
-        self.publish(driver)
+        _publish(driver)
         self.assertEqual("internal",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Only ingested resources can be published.", 
          driver.find_element_by_css_selector("ul.messagelist>li.error").text)
         # ingest resource
-        self.ingest(driver)
+        _ingest(driver)
         self.assertEqual("ingested",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Successfully ingested 1 internal resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         # publish resource
-        self.publish(driver)
+        _publish(driver)
         self.assertEqual("published",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Successfully published 1 ingested resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         # delete resource
-        self.delete(driver)
+        _delete(driver)
         self.assertEqual("Successfully deleted 1 resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         
@@ -1165,10 +1165,10 @@ class EditorTest(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()
-        self.fill_distribution(driver, ss_path, root_id)
+        _fill_distribution(driver, ss_path, root_id)
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        self.fill_contact_person(driver, ss_path, root_id)
+        _fill_contact_person(driver, ss_path, root_id)
         
         # lexical resource general info popup
         driver.find_element_by_id("edit_id_lexiconInfo").click()
@@ -1184,9 +1184,9 @@ class EditorTest(SeleniumTestCase):
         Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
           "Monolingual")
         # lexical resource text info / language
-        self.fill_language(driver, ss_path, "languageinfotype_model_set-0-")
+        _fill_language(driver, ss_path, "languageinfotype_model_set-0-")
         # lexical resource text info / size
-        self.fill_text_size(driver, ss_path, "sizeinfotype_model_set-0-")
+        _fill_text_size(driver, ss_path, "sizeinfotype_model_set-0-")
         # save and close lexical resource text info popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         save_and_close(driver, root_id)
@@ -1212,25 +1212,25 @@ class EditorTest(SeleniumTestCase):
           driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
 
         # make sure an internal resource cannot be published
-        self.publish(driver)
+        _publish(driver)
         self.assertEqual("internal",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Only ingested resources can be published.", 
          driver.find_element_by_css_selector("ul.messagelist>li.error").text)
         # ingest resource
-        self.ingest(driver)
+        _ingest(driver)
         self.assertEqual("ingested",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Successfully ingested 1 internal resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         # publish resource
-        self.publish(driver)
+        _publish(driver)
         self.assertEqual("published",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Successfully published 1 ingested resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         # delete resource
-        self.delete(driver)
+        _delete(driver)
         self.assertEqual("Successfully deleted 1 resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         
@@ -1278,10 +1278,10 @@ class EditorTest(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()
-        self.fill_distribution(driver, ss_path, root_id)
+        _fill_distribution(driver, ss_path, root_id)
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        self.fill_contact_person(driver, ss_path, root_id)
+        _fill_contact_person(driver, ss_path, root_id)
         
         # lexical resource general info popup
         driver.find_element_by_id("edit_id_lexiconInfo").click()
@@ -1297,9 +1297,9 @@ class EditorTest(SeleniumTestCase):
         Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
           "Monolingual")
         # lexical resource text info / language
-        self.fill_language(driver, ss_path, "languageinfotype_model_set-0-")
+        _fill_language(driver, ss_path, "languageinfotype_model_set-0-")
         # lexical resource text info / size
-        self.fill_text_size(driver, ss_path, "sizeinfotype_model_set-0-")
+        _fill_text_size(driver, ss_path, "sizeinfotype_model_set-0-")
         # save and close lexical resource text info popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         save_and_close(driver, root_id)
@@ -1326,25 +1326,25 @@ class EditorTest(SeleniumTestCase):
           driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
 
         # make sure an internal resource cannot be published
-        self.publish(driver)
+        _publish(driver)
         self.assertEqual("internal",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Only ingested resources can be published.", 
          driver.find_element_by_css_selector("ul.messagelist>li.error").text)
         # ingest resource
-        self.ingest(driver)
+        _ingest(driver)
         self.assertEqual("ingested",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Successfully ingested 1 internal resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         # publish resource
-        self.publish(driver)
+        _publish(driver)
         self.assertEqual("published",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Successfully published 1 ingested resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         # delete resource
-        self.delete(driver)
+        _delete(driver)
         self.assertEqual("Successfully deleted 1 resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         
@@ -1392,10 +1392,10 @@ class EditorTest(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()
-        self.fill_distribution(driver, ss_path, root_id)
+        _fill_distribution(driver, ss_path, root_id)
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        self.fill_contact_person(driver, ss_path, root_id)
+        _fill_contact_person(driver, ss_path, root_id)
         
         # lexical resource general info popup
         driver.find_element_by_id("edit_id_lexiconInfo").click()
@@ -1411,9 +1411,9 @@ class EditorTest(SeleniumTestCase):
         Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
           "Monolingual")
         # lexical resource text info / language
-        self.fill_language(driver, ss_path, "languageinfotype_model_set-0-")
+        _fill_language(driver, ss_path, "languageinfotype_model_set-0-")
         # lexical resource text info / size
-        self.fill_text_size(driver, ss_path, "sizeinfotype_model_set-0-")
+        _fill_text_size(driver, ss_path, "sizeinfotype_model_set-0-")
         # save and close lexical resource text info popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         save_and_close(driver, root_id)
@@ -1439,25 +1439,25 @@ class EditorTest(SeleniumTestCase):
           driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
 
         # make sure an internal resource cannot be published
-        self.publish(driver)
+        _publish(driver)
         self.assertEqual("internal",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Only ingested resources can be published.", 
          driver.find_element_by_css_selector("ul.messagelist>li.error").text)
         # ingest resource
-        self.ingest(driver)
+        _ingest(driver)
         self.assertEqual("ingested",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Successfully ingested 1 internal resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         # publish resource
-        self.publish(driver)
+        _publish(driver)
         self.assertEqual("published",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Successfully published 1 ingested resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         # delete resource
-        self.delete(driver)
+        _delete(driver)
         self.assertEqual("Successfully deleted 1 resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         
@@ -1510,10 +1510,10 @@ class EditorTest(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()
-        self.fill_distribution(driver, ss_path, root_id)
+        _fill_distribution(driver, ss_path, root_id)
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        self.fill_contact_person(driver, ss_path, root_id)
+        _fill_contact_person(driver, ss_path, root_id)
         
         # tool info popup
         driver.find_element_by_id("edit_id_toolServiceInfo").click()
@@ -1584,25 +1584,25 @@ class EditorTest(SeleniumTestCase):
         _created_res.editor_groups.add(self.test_editor_group)
 
         # make sure an internal resource cannot be published
-        self.publish(driver)
+        _publish(driver)
         self.assertEqual("internal",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Only ingested resources can be published.", 
          driver.find_element_by_css_selector("ul.messagelist>li.error").text)
         # ingest resource
-        self.ingest(driver)
+        _ingest(driver)
         self.assertEqual("ingested",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Successfully ingested 1 internal resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         # publish resource
-        self.publish(driver)
+        _publish(driver)
         self.assertEqual("published",
          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
         self.assertEqual("Successfully published 1 ingested resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
         # delete resource
-        self.delete(driver)
+        _delete(driver)
         self.assertEqual("Successfully deleted 1 resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
 
@@ -1743,98 +1743,6 @@ class EditorTest(SeleniumTestCase):
         # entry is now at last position on left site
         self.assertEqual("AGPL", driver.find_element_by_xpath(
           "//select[@id='id_licenceinfotype_model_set-0-licence_from']/option[41]").text)
-        
-        
-    def fill_distribution(self, driver, ss_path, parent_id):
-        """
-        fills the distribution popup with required information and returns
-        to the parent window
-        """
-        driver.switch_to_window("id_distributionInfo")
-        Select(driver.find_element_by_id("id_availability")).select_by_visible_text(
-          "Available - Unrestricted Use")
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        save_and_close(driver, parent_id)
-        
-        
-    def fill_contact_person(self, driver, ss_path, parent_id):
-        """
-        fills the contact person popup with required information and returns
-        to the parent window
-        """
-        driver.switch_to_window("id_contactPerson")
-        driver.find_element_by_name("key_surname_0").clear()
-        driver.find_element_by_name("key_surname_0").send_keys("en")
-        driver.find_element_by_name("val_surname_0").clear()
-        driver.find_element_by_name("val_surname_0").send_keys("Mustermann")
-        driver.find_element_by_id("id_form-0-email").clear()
-        driver.find_element_by_id("id_form-0-email").send_keys("mustermann@org.com")
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        save_and_close(driver, parent_id)
-        
-        
-    def fill_language(self, driver, ss_path, id_infix):
-        """
-        fills the language with required information
-        """
-        driver.find_element_by_id("id_{}languageId".format(id_infix)).clear()
-        driver.find_element_by_id("id_{}languageId".format(id_infix)).send_keys("De")
-        driver.find_element_by_id("id_{}languageName".format(id_infix)).clear()
-        driver.find_element_by_id("id_{}languageName".format(id_infix)).send_keys("German")
-        
-        
-    def fill_text_size(self, driver, ss_path, id_infix):
-        """
-        fills the text size with required information
-        """
-        driver.find_element_by_id("id_{}size".format(id_infix)).clear()
-        driver.find_element_by_id("id_{}size".format(id_infix)).send_keys("10000")
-        Select(driver.find_element_by_id("id_{}sizeUnit".format(id_infix))).select_by_visible_text("Tokens")
-        
-        
-    def fill_audio_size(self, driver, ss_path, parent_id):
-        """
-        fills the text size with required information
-        """
-        driver.switch_to_window("id_audioSizeInfo")
-
-        driver.find_element_by_id("id_sizeinfotype_model_set-0-size").send_keys("100")
-        
-        Select(driver.find_element_by_id("id_sizeinfotype_model_set-0-sizeUnit")).select_by_visible_text("Gb")
-        save_and_close(driver, parent_id) 
-        
-        
-    def ingest(self, driver):
-        """
-        selects all resources and ingests them
-        """
-        driver.find_element_by_id("action-toggle").click()
-        Select(driver.find_element_by_name("action")).select_by_visible_text("Ingest selected internal resources")
-        driver.find_element_by_name("index").click()
-        # TODO remove this workaround when Selenium starts working again as intended
-        time.sleep(1)
-
-        
-    def publish(self, driver):
-        """
-        selects all resources and publishes them
-        """
-        driver.find_element_by_id("action-toggle").click()
-        Select(driver.find_element_by_name("action")).select_by_visible_text("Publish selected ingested resources")
-        driver.find_element_by_name("index").click()
-        # TODO remove this workaround when Selenium starts working again as intended
-        time.sleep(1)
-        
-    def delete(self, driver):
-        """
-        selects all resources and deletes them
-        """
-        driver.find_element_by_id("action-toggle").click()
-        Select(driver.find_element_by_name("action")).select_by_visible_text("Mark selected resources as deleted")
-        driver.find_element_by_name("index").click()
-        driver.find_element_by_css_selector("input[type=\"submit\"]").click()
-        # TODO remove this workaround when Selenium starts working again as intended
-        time.sleep(1)
 
 
     def test_error_messages_LR_creation(self):
@@ -2721,3 +2629,97 @@ class EditorTest(SeleniumTestCase):
           "//div[@id='firstlevel']/div[@class='fields']/ul/li[1]/a[@class='error']").text)
         cancel_and_close(driver, root_id)
         cancel_and_continue(driver, root_id)
+
+
+def _fill_distribution(driver, ss_path, parent_id):
+    """
+    fills the distribution popup with required information and returns
+    to the parent window
+    """
+    driver.switch_to_window("id_distributionInfo")
+    Select(driver.find_element_by_id("id_availability")).select_by_visible_text(
+      "Available - Unrestricted Use")
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_contact_person(driver, ss_path, parent_id):
+    """
+    fills the contact person popup with required information and returns
+    to the parent window
+    """
+    driver.switch_to_window("id_contactPerson")
+    driver.find_element_by_name("key_surname_0").clear()
+    driver.find_element_by_name("key_surname_0").send_keys("en")
+    driver.find_element_by_name("val_surname_0").clear()
+    driver.find_element_by_name("val_surname_0").send_keys("Mustermann")
+    driver.find_element_by_id("id_form-0-email").clear()
+    driver.find_element_by_id("id_form-0-email").send_keys("mustermann@org.com")
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_language(driver, ss_path, id_infix):
+    """
+    fills the language with required information
+    """
+    driver.find_element_by_id("id_{}languageId".format(id_infix)).clear()
+    driver.find_element_by_id("id_{}languageId".format(id_infix)).send_keys("De")
+    driver.find_element_by_id("id_{}languageName".format(id_infix)).clear()
+    driver.find_element_by_id("id_{}languageName".format(id_infix)).send_keys("German")
+
+
+def _fill_text_size(driver, ss_path, id_infix):
+    """
+    fills the text size with required information
+    """
+    driver.find_element_by_id("id_{}size".format(id_infix)).clear()
+    driver.find_element_by_id("id_{}size".format(id_infix)).send_keys("10000")
+    Select(driver.find_element_by_id("id_{}sizeUnit".format(id_infix))).select_by_visible_text("Tokens")
+
+
+def _fill_audio_size(driver, ss_path, parent_id):
+    """
+    fills the text size with required information
+    """
+    driver.switch_to_window("id_audioSizeInfo")
+    driver.find_element_by_id("id_sizeinfotype_model_set-0-size").send_keys("100")
+    Select(driver.find_element_by_id("id_sizeinfotype_model_set-0-sizeUnit")).select_by_visible_text("Gb")
+    save_and_close(driver, parent_id) 
+
+
+def _ingest(driver):
+    """
+    selects all resources and ingests them
+    """
+    driver.find_element_by_id("action-toggle").click()
+    Select(driver.find_element_by_name("action")) \
+        .select_by_visible_text("Ingest selected internal resources")
+    driver.find_element_by_name("index").click()
+    # TODO remove this workaround when Selenium starts working again as intended
+    time.sleep(1)
+
+
+def _publish(driver):
+    """
+    selects all resources and publishes them
+    """
+    driver.find_element_by_id("action-toggle").click()
+    Select(driver.find_element_by_name("action")) \
+        .select_by_visible_text("Publish selected ingested resources")
+    driver.find_element_by_name("index").click()
+    # TODO remove this workaround when Selenium starts working again as intended
+    time.sleep(1)
+
+
+def _delete(driver):
+    """
+    selects all resources and deletes them
+    """
+    driver.find_element_by_id("action-toggle").click()
+    Select(driver.find_element_by_name("action")) \
+        .select_by_visible_text("Mark selected resources as deleted")
+    driver.find_element_by_name("index").click()
+    driver.find_element_by_css_selector("input[type=\"submit\"]").click()
+    # TODO remove this workaround when Selenium starts working again as intended
+    time.sleep(1)
