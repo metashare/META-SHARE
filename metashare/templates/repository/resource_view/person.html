@@ -1,20 +1,27 @@
 {% load email_protection %}
 {% load get_icon %}
 {% spaceless %}
-<img class='line' src="/site_media/images/line.png" />
 
+<label class='title'>{{title}}</label>
 
-{% if type == "resourceCreator"  %}
-<label class='title component'>Resource Creator:</label>
-{% else %}
-<label class='title component'>Metadata Creator:</label>
-{% endif %}
+<a href='#' class="contactcard" title="Click to view contact card">
+	<label class="dataline indented" style="float:left;">
+				{{ person_dict.Given_name }}
+				{{ person_dict.Surname }}
+				{{ person_dict.Organization_name }}	
+	</label>
+
 	
-		{# Name, Surname and sex #}
+	<img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/vcard.png" class='vcard'/>
+</a>
+
+<div class="contact hidden">
+
+	{# Name, Surname and sex #}
 	<div>
 		<label class="dataline">
 			{% if person_dict.Communication.Url %}
-				<a href="{{person_dict.Communication.Url}}">
+				<a href="{{person_dict.Communication.Url}}" target='_blank'>
 			{% endif %}
 					{{ person_dict.Given_name }}
 					{{ person_dict.Surname }}
@@ -30,6 +37,25 @@
 			{% endif %}
 		</label>
 	</div>
+	
+	<div>
+		<label class="dataline">
+			{{ person_dict.Organization_name }}	
+		</label>
+	</div>
+	
+	<div>
+		<label class="dataline">
+			{{ person_dict.Organization_short_name }}		
+		</label>
+	</div>
+	
+	<div>
+		<label class="dataline">
+			{{ person_dict.Department_name }}		
+		</label>
+	</div>
+	
 	<div>
 		<label class="dataline">
 			{{ person_dict.Position }}
@@ -40,6 +66,7 @@
 			{{ person_dict.Affiliation.Department_name }}
 		</label>
 	</div>
+	
 	<div>
 		<label class="dataline">
 			{% encrypt_email person_dict.Communication.Email %}
@@ -82,7 +109,9 @@
 	</div>
 	{% endif %}
 	
-	<img class='line' src="/site_media/images/line.png" />
+	{% if person_dict.Affiliation %}
+		<hr/>
+	{% endif %}
 
 	<div>
 		<label class="dataline">
@@ -94,7 +123,7 @@
 	<div>
 		<label class="dataline">
 			{% if person_dict.Affiliation.Url %}
-				<a href="{{person_dict.Affiliation.Url}}">
+				<a href="{{person_dict.Affiliation.Url}}" target='_blank'>
 			{% endif %}
 					{{ person_dict.Affiliation.Organization_name }}
 			{% if person_dict.Affiliation.Url %}
@@ -156,5 +185,7 @@
 		</label>
 	</div>
 	{% endif %}	
+	
+</div>
 		
 {% endspaceless %}

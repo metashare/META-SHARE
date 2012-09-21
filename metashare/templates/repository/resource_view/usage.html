@@ -1,0 +1,78 @@
+{% spaceless %}
+
+<label class='component'>Usage</label>
+<div class="dataline">
+	{% if usage_dict.Usage.Access_tool %}			
+	    {% include "repository/resource_view/target_resource.html" with target=usage_dict.Usage.Access_tool title="Access Tool" %}
+	{% endif %}
+	
+	{% if usage_dict.Usage.Resource_associated_with %}			
+	    {% include "repository/resource_view/target_resource.html" with target=usage_dict.Usage.Resource_associated_with title="Associated Resource" %}
+	{% endif %}
+	
+	
+	<label class='title'>Foreseen Use</label>	
+			
+	     <div class="dataline indented">
+			<label>
+				<b>Foreseen Use:</b> {{ usage_dict.Usage.Foreseen_use.Foreseen_use }}
+			</label>
+		</div>
+		
+		{% if usage_dict.Usage.Foreseen_use.UseNLPSpecific %}
+		     <div class="dataline indented">
+				<label>
+					<b>Use NLP Specific:</b> {{ usage_dict.Usage.Foreseen_use.UseNLPSpecific }}
+				</label>
+			</div>
+		{% endif %}
+		
+	
+	<label class='title'>Actual Use</label>	
+			
+	     <div class="dataline indented">
+			<label>
+				<b>Actual Use:</b> {{ usage_dict.Usage.Actual_use.Actual_use }}
+			</label>
+		</div>
+		
+		{% if usage_dict.Usage.Actual_use.UseNLPSpecific %}
+		     <div class="dataline indented">
+				<label>
+					<b>Use NLP Specific:</b> {{ usage_dict.Usage.Actual_use.UseNLPSpecific }}
+				</label>
+			</div>
+		{% endif %}
+		
+		{% if usage_dict.Usage.Actual_use.Usage_report %}
+		     <div class="dataline indented">
+				<label>
+					<b>Usage Report:</b> {{ usage_dict.Usage.Actual_use.Usage_report }}
+				</label>
+			</div>
+		{% endif %}
+		
+		{% if usage_dict.Usage.Actual_use.Derived_resource %}
+		     <div class="dataline indented">
+				<label>
+					<b>Derived Resource:</b> {{ usage_dict.Usage.Actual_use.Derived_resource }}
+				</label>
+			</div>
+		{% endif %}
+		
+		
+		{% if usage_dict.Usage.Actual_use.Usage_project %}			
+		    {% include "repository/resource_view/project.html" with project=usage_dict.Usage.Actual_use.Usage_project %}
+		{% endif %}
+		
+		{% if usage_dict.Usage.Actual_use.Actual_use_details %}
+		     <div class="dataline indented">
+				<label>
+					<b>Details:</b> {{ usage_dict.Usage.Actual_use.Actual_use_details }}
+				</label>
+			</div>
+		{% endif %}
+</div>	
+
+
+{% endspaceless %}

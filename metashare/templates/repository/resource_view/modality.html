@@ -2,12 +2,12 @@
 
 {# TODO: Add zise info #}
 
-<label class='title component'>Modality:</label>
+<label class='component'>Modality:</label>
 <div class="dataline">
 {% for key, value in modalities.items %}
 		{% for key1, value1 in value.items %}
 			{% if key1 == "Modality_type" %}
-				<span>{{ value1 }}{% if not forloop.last %}, {% endif %}</span>
+				<label>{{ value1 }}{% if not forloop.last %}, {% endif %}</label>
 			{% endif %}
 		{% endfor %}
 {% endfor %}
