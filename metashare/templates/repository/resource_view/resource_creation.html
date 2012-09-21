@@ -17,7 +17,7 @@
 {% if resource_creation_dict.Resource_creation.Creation_start_date %}			
      <div class="dataline indented">
 		<label>
-			<b>Creation Started:</b> {{resource_creation_dict.Resource_creation.Creation_start_date|date:"SHORT_DATE_FORMAT"}}
+			<strong>Creation Started:</strong> {{resource_creation_dict.Resource_creation.Creation_start_date|date:"SHORT_DATE_FORMAT"}}
 		</label>
 	</div>
 {% endif %}
@@ -25,7 +25,7 @@
 {% if resource_creation_dict.Resource_creation.Creation_end_date %}			
      <div class="dataline indented">
 		<label>
-			<b>Creation Ended:</b> {{resource_creation_dict.Resource_creation.Creation_end_date|date:"SHORT_DATE_FORMAT"}}
+			<strong>Creation Ended:</strong> {{resource_creation_dict.Resource_creation.Creation_end_date|date:"SHORT_DATE_FORMAT"}}
 		</label>
 	</div>
 {% endif %}

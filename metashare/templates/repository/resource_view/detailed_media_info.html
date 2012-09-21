@@ -7,7 +7,7 @@
 {% else %}
 
 	{# Type info #}
-	<label class='title'><B>{% if resource_component.Linguality.Linguality_type %}{{ resource_component.Linguality.Linguality_type }}{% endif %} {{ type }} {{ resourceType }}</B></label>
+	<label class='title'><strong>{% if resource_component.Linguality.Linguality_type %}{{ resource_component.Linguality.Linguality_type }}{% endif %} {{ type }} {{ resourceType }}</strong></label>
 
 	{# Language Information #}
 	{% if "Language" in resource_component %}

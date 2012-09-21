@@ -16,7 +16,7 @@
 {% if distribution.Distribution.Availability_start_date %}
 	 <div class="dataline indented">
 		<label>
-			<b>Start date: </b>{{ distribution.Distribution.Availability_start_date|date:"SHORT_DATE_FORMAT" }}
+			<strong>Start date: </strong>{{ distribution.Distribution.Availability_start_date|date:"SHORT_DATE_FORMAT" }}
 		</label>
 	</div>
 {% endif %}
@@ -24,7 +24,7 @@
 {% if distribution.Distribution.Availability_end_date %}
 	 <div class="dataline indented">
 		<label>
-			<b>End date: </b>{{ distribution.Distribution.Availability_end_date|date:"SHORT_DATE_FORMAT" }}
+			<strong>End date: </strong>{{ distribution.Distribution.Availability_end_date|date:"SHORT_DATE_FORMAT" }}
 		</label>
 	</div>
 {% endif %}
@@ -37,7 +37,7 @@
 {% if distribution.Distribution.Licence.Licence %}
 	 <div class="dataline indented">
 		<label>
-			<b>Licence: </b>{{ distribution.Distribution.Licence.Licence }}
+			<strong>Licence: </strong>{{ distribution.Distribution.Licence.Licence }}
 		</label>
 	</div>
 {% endif %}
@@ -45,7 +45,7 @@
 {% if distribution.Distribution.Licence.Restrictions_of_use %}
 	 <div class="dataline indented">
 		<label>
-			<b>Restrictions: </b>{{ distribution.Distribution.Licence.Restrictions_of_use }}
+			<strong>Restrictions: </strong>{{ distribution.Distribution.Licence.Restrictions_of_use }}
 		</label>
 	</div>
 {% endif %}
@@ -53,15 +53,7 @@
 {% if distribution.Distribution.Licence.Distribution_access_medium %}
 	 <div class="dataline indented">
 		<label>
-			<b>Distribution Access/Medium: </b>{{ distribution.Distribution.Licence.Distribution_access_medium }}
-		</label>
-	</div>
-{% endif %}
-
-{% if distribution.Distribution.Licence.Restrictions_of_use %}
-	 <div class="dataline indented">
-		<label>
-			<b>Restrictions: </b>{{ distribution.Distribution.Licence.Restrictions_of_use }}
+			<strong>Distribution Access/Medium: </strong>{{ distribution.Distribution.Licence.Distribution_access_medium }}
 		</label>
 	</div>
 {% endif %}
@@ -69,10 +61,45 @@
 {% if distribution.Distribution.Licence.Download_location %}
 	 <div class="dataline">
 		<label>
-			<b>Download location: </b>{{ distribution.Distribution.Licence.Download_location }}
+			<strong>Download location: </strong>{{ distribution.Distribution.Licence.Download_location|urlize }}
 		</label>
 	</div>
 {% endif %}
+
+{% if distribution.Distribution.Licence.Execution_location %}
+	 <div class="dataline">
+		<label>
+			<strong>Execution location: </strong>{{ distribution.Distribution.Licence.Execution_location|urlize }}
+		</label>
+	</div>
+{% endif %}
+
+{% if distribution.Distribution.Licence.Fee %}
+	 <div class="dataline">
+		<label>
+			<strong>Fee: </strong>{{ distribution.Distribution.Licence.Fee }}
+		</label>
+	</div>
+{% endif %}
+
+{% if distribution.Distribution.Licence.Attribution %}
+	 <div class="dataline">
+		<label>
+			<strong>Attribution details: </strong>{{ distribution.Distribution.Licence.Attribution }}
+		</label>
+	</div>
+{% endif %}
+
+{% if distribution.Distribution.Licence.Attribution %}
+	 <div class="dataline">
+		<label>
+			<strong>Attribution details: </strong>{{ distribution.Distribution.Licence.Attribution }}
+		</label>
+	</div>
+{% endif %}
+
+
+
 
 
 

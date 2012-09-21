@@ -2,10 +2,10 @@
 <label class='component'>Documentation:</label>
 {% else %}
 	{% if type == "Annotation_manual" %}
-		<b>Annotation manual: </b>
+		<strong>Annotation manual: </strong>
 	{% else %}
 		{% if type == "Evaluation_report" %}
-			<b>Evaluation report: </b>
+			<strong>Evaluation report: </strong>
 		{% endif %}
 	{% endif %}
 {% endif %}
@@ -13,14 +13,14 @@
 	{% if documentation.Document_type %}
 		<div class="dataline indented">
 			<label>
-				<b>Document Type:</b> {{ documentation.Document_type }}
+				<strong>Document Type:</strong> {{ documentation.Document_type }}
 			</label>
 		</div>
 	{% endif %}
 	
 	<div class="dataline indented">
 		<label>
-			<b>Title:</b> 
+			<strong>Title:</strong> 
 			{% if documentation.Url %}
 				<a href="{{documentation.Url}}" target='_blank'>
 			{% endif %}
@@ -34,7 +34,7 @@
 	{% if documentation.Author %}
 		<div class="dataline indented">
 			<label>
-				<b>Author:</b> {{ documentation.Author }}
+				<strong>Author:</strong> {{ documentation.Author }}
 			</label>
 		</div>
 	{% endif %}
@@ -42,7 +42,7 @@
 	{% if documentation.Editor %}
 		<div class="dataline indented">
 			<label>
-				<b>Editor:</b> {{ documentation.Editor }}
+				<strong>Editor:</strong> {{ documentation.Editor }}
 			</label>
 		</div>
 	{% endif %}
@@ -50,7 +50,7 @@
 	{% if documentation.Year %}
 		<div class="dataline indented">
 			<label>
-				<b>Year:</b> {{ documentation.Year }}
+				<strong>Year:</strong> {{ documentation.Year }}
 			</label>
 		</div>
 	{% endif %}
@@ -58,7 +58,7 @@
 	{% if documentation.Publisher %}
 		 <div class="dataline indented">
 			<label>
-				<b>Publisher:</b> {{ documentation.Publisher }}
+				<strong>Publisher:</strong> {{ documentation.Publisher }}
 			</label>
 		</div>
 	{% endif %}
@@ -66,7 +66,7 @@
 	{% if documentation.Book_title %}
 		 <div class="dataline indented">
 			<label>
-				<b>Book Title:</b> {{ documentation.Book_title }}
+				<strong>Book Title:</strong> {{ documentation.Book_title }}
 			</label>
 		</div>
 	{% endif %}
@@ -74,7 +74,7 @@
 	{% if documentation.Journal %}
 		 <div class="dataline indented">
 			<label>
-				<b>Journal:</b> {{ documentation.Journal }}
+				<strong>Journal:</strong> {{ documentation.Journal }}
 			</label>
 		</div>
 	{% endif %}
@@ -82,7 +82,7 @@
 	{% if documentation.Volume %}
 		 <div class="dataline indented">
 			<label>
-				<b>Volume:</b> {{ documentation.Volume }}
+				<strong>Volume:</strong> {{ documentation.Volume }}
 			</label>
 		</div>
 	{% endif %}
@@ -90,7 +90,7 @@
 	{% if documentation.Series %}
 		 <div class="dataline indented">
 			<label>
-				<b>Series:</b> {{ documentation.Series }}
+				<strong>Series:</strong> {{ documentation.Series }}
 			</label>
 		</div>
 	{% endif %}
@@ -98,7 +98,7 @@
 	{% if documentation.Pages %}
 		 <div class="dataline indented">
 			<label>
-				<b>Pages:</b> {{ documentation.Pages }}
+				<strong>Pages:</strong> {{ documentation.Pages }}
 			</label>
 		</div>
 	{% endif %}
@@ -106,7 +106,7 @@
 	{% if documentation.Edition %}
 		 <div class="dataline indented">
 			<label>
-				<b>Edition:</b> {{ documentation.Edition }}
+				<strong>Edition:</strong> {{ documentation.Edition }}
 			</label>
 		</div>
 	{% endif %}
@@ -114,7 +114,7 @@
 	{% if documentation.Conference %}
 		 <div class="dataline indented">
 			<label>
-				<b>Conference:</b> {{ documentation.Conference }}
+				<strong>Conference:</strong> {{ documentation.Conference }}
 			</label>
 		</div>
 	{% endif %}
@@ -122,7 +122,7 @@
 	{% if documentation.Edition %}
 		 <div class="dataline indented">
 			<label>
-				<b>Edition:</b> {{ documentation.Edition }}
+				<strong>Edition:</strong> {{ documentation.Edition }}
 			</label>
 		</div>
 	{% endif %}
@@ -130,7 +130,7 @@
 	{% if documentation.Doi %}
 		 <div class="dataline indented">
 			<label>
-				<b>Digital Object Identifier - DOI:</b> {{ documentation.Doi }}
+				<strong>Digital Object Identifier - DOI:</strong> {{ documentation.Doi }}
 			</label>
 		</div>
 	{% endif %}
@@ -138,7 +138,7 @@
 	{% if documentation.Issn %}
 		 <div class="dataline indented">
 			<label>
-				<b>ISSN:</b> {{ documentation.Issn }}
+				<strong>ISSN:</strong> {{ documentation.Issn }}
 			</label>
 		</div>
 	{% endif %}
@@ -146,7 +146,7 @@
 	{% if documentation.Isbn %}
 		 <div class="dataline indented">
 			<label>
-				<b>ISBN:</b> {{ documentation.Isbn }}
+				<strong>ISBN:</strong> {{ documentation.Isbn }}
 			</label>
 		</div>
 	{% endif %}
@@ -154,7 +154,7 @@
 	{% if documentation.Keywords %}
 		 <div class="dataline indented">
 			<label>
-				<b>Keywords:</b> {{ documentation.Keywords }}
+				<strong>Keywords:</strong> {{ documentation.Keywords }}
 			</label>
 		</div>
 	{% endif %}
@@ -162,7 +162,7 @@
 	{% if documentation.Document_language_name %}
 		 <div class="dataline indented">
 			<label>
-				<b>Document Language:</b> 
+				<strong>Document Language:</strong> 
 				{% if documentation.Document_language_id %}
 					<span title="{{documentation.Document_language_id}}">
 				{% endif %}
