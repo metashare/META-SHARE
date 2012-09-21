@@ -6,7 +6,7 @@
 <label class="title">Availability</label>
 
 {% if distribution.Distribution.Availability %}
-	 <div class="dataline">
+	 <div class="dataline indented">
 		<label>
 			{{ distribution.Distribution.Availability }}
 		</label>
@@ -14,7 +14,7 @@
 {% endif %}
 
 {% if distribution.Distribution.Availability_start_date %}
-	 <div class="dataline">
+	 <div class="dataline indented">
 		<label>
 			<b>Start date: </b>{{ distribution.Distribution.Availability_start_date|date:"SHORT_DATE_FORMAT" }}
 		</label>
@@ -22,7 +22,7 @@
 {% endif %}
 
 {% if distribution.Distribution.Availability_end_date %}
-	 <div class="dataline">
+	 <div class="dataline indented">
 		<label>
 			<b>End date: </b>{{ distribution.Distribution.Availability_end_date|date:"SHORT_DATE_FORMAT" }}
 		</label>
@@ -35,7 +35,7 @@
 {% if distribution.Distribution.Licence %}
 <label class="title">Licence Information</label>
 {% if distribution.Distribution.Licence.Licence %}
-	 <div class="dataline">
+	 <div class="dataline indented">
 		<label>
 			<b>Licence: </b>{{ distribution.Distribution.Licence.Licence }}
 		</label>
@@ -43,7 +43,7 @@
 {% endif %}
 
 {% if distribution.Distribution.Licence.Restrictions_of_use %}
-	 <div class="dataline">
+	 <div class="dataline indented">
 		<label>
 			<b>Restrictions: </b>{{ distribution.Distribution.Licence.Restrictions_of_use }}
 		</label>
@@ -51,7 +51,7 @@
 {% endif %}
 
 {% if distribution.Distribution.Licence.Distribution_access_medium %}
-	 <div class="dataline">
+	 <div class="dataline indented">
 		<label>
 			<b>Distribution Access/Medium: </b>{{ distribution.Distribution.Licence.Distribution_access_medium }}
 		</label>
@@ -59,7 +59,7 @@
 {% endif %}
 
 {% if distribution.Distribution.Licence.Restrictions_of_use %}
-	 <div class="dataline">
+	 <div class="dataline indented">
 		<label>
 			<b>Restrictions: </b>{{ distribution.Distribution.Licence.Restrictions_of_use }}
 		</label>
