@@ -181,7 +181,7 @@ function addStatus(filter){
             <!-- used values table -->
             {% if selected_class == fields.0.7 %}
              <a name="fieldvalues"></a>
-             {% if result != None and result|length > 0 %}
+             {% if textvalues != None and textvalues|length > 0 %}
             <div id=fieldvalues class=fieldvalues>
              <table width=100% border=1 valign=top>
                 <tr bgcolor=lightgray>
@@ -190,7 +190,7 @@ function addStatus(filter){
                     <td style="text-align: right" nowrap>resources<br>counter</th>                    
                 </tr>
                  
-            {% for field in result %}
+            {% for field in textvalues %}
                 <tr>
                 <th>{{ field.0 }}</th>
                 <th style="text-align: right">{{ field.2 }}</th>
@@ -216,6 +216,9 @@ function addStatus(filter){
                     {% if "/" in field.2 %}
                         <label class="indent">&nbsp;{{ field.2 }}&nbsp;</label>
                     {% else %}
+                        {% if field.6 == "ifield" %}
+                            <label class='indent'>&nbsp;&nbsp;&nbsp;
+                        {% endif %}   
                         {% if field.5 > 0 %}
                             <a href="javascript:getvalues('{{ field.7 }}','{{ field.1 }}')"
                             {% if selected_class == field.7 and selected_field == field.1 %}
@@ -227,6 +230,10 @@ function addStatus(filter){
                         {% else %}
                             <label class="title indent">&nbsp;{{ field.2 }}&nbsp;</label>
                         {% endif %}
+                        {% if field.6 == "ifield" %}
+                            </label>
+                        {% endif %}   
+                        
                     {% endif %}   
                 {% endif %}
                 
@@ -244,10 +251,10 @@ function addStatus(filter){
                         {% endif %}
                     {% endif %}
                 {% endif %}
-                {% if field.5 == 0 %}
+                {% if field.4 == 0 %}
                     &nbsp;<i>never used</i>&nbsp;
                 {% else %}
-                    &nbsp; {{ field.5 }}/{{ field.4 }} &nbsp;
+                    &nbsp; {{ field.4 }}/{{ field.5 }} &nbsp;
                 {% endif %}
                 </div>
                 

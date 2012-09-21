@@ -3,10 +3,7 @@ from datetime import datetime
 
         
 class LRStats(models.Model):
-    # the storage object identifier of the language resource, 
-    # NOT the pk of the resource!
-    lrid = models.CharField(blank=False, max_length=64)
-    
+    lrid = models.CharField(blank=False, max_length=64)    
     userid = models.CharField(blank=False, max_length=64)
     geoinfo = models.CharField(blank=True, max_length=2)
     sessid = models.CharField(blank=False, max_length=64)
@@ -31,10 +28,7 @@ class QueryStats(models.Model):
     #    return "Q>> " +self.userid + "," + self.query + "," + str(self.lasttime)
 
 class UsageStats(models.Model):
-    # the storage object identifier of the language resource, 
-    # NOT the pk of the resource!
-    lrid = models.CharField(blank=False, max_length=64)
-    
+    lrid = models.CharField(blank=False, max_length=64)    
     elname = models.CharField(blank=False, max_length=64)
     elparent = models.CharField(blank=True, max_length=64)
     text = models.TextField(blank=True)

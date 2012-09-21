@@ -1,5 +1,6 @@
 import logging
 import urllib2
+from time import sleep
 from urllib import urlencode
 
 from django.contrib.admin.helpers import ACTION_CHECKBOX_NAME
@@ -11,7 +12,7 @@ from metashare.accounts.models import EditorGroup, EditorGroupManagers
 from metashare.repository.models import resourceInfoType_model
 from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER, STATS_SERVER_URL, DJANGO_URL
 from metashare.storage.models import INGESTED
-from metashare.stats.model_utils import saveLRStats, getLRLast, saveQueryStats, getLastQuery, \
+from metashare.stats.model_utils import UsageStats, saveLRStats, getLRLast, saveQueryStats, getLastQuery, \
     UPDATE_STAT, VIEW_STAT, RETRIEVE_STAT, DOWNLOAD_STAT
 
 
@@ -196,7 +197,14 @@ class StatsTest(TestCase):
         
         statsdata = getLRLast(UPDATE_STAT, 2)
         self.assertEqual(len(statsdata), 2)
-                        
+        response = client.get('/{0}stats/usage/'.format(DJANGO_BASE))
+        self.assertContains(response, "identificationInfo")
+
+        # remove all usage stats and check its automatically updating
+        UsageStats.objects.all().delete()                
+        response = client.get('/{0}stats/usage/'.format(DJANGO_BASE))
+        self.assertContains(response, "statistics updating is in progress")
+        sleep(3)
         response = client.get('/{0}stats/usage/'.format(DJANGO_BASE))
         self.assertContains(response, "identificationInfo")
         
