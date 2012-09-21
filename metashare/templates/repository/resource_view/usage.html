@@ -43,13 +43,18 @@
 				</label>
 			</div>
 		{% endif %}
-		
+	
 		{% if usage_dict.Usage.Actual_use.Usage_report %}
-		     <div class="dataline indented">
-				<label>
-					<strong>Usage Report:</strong> {{ usage_dict.Usage.Actual_use.Usage_report }}
-				</label>
-			</div>
+			{% if usage_dict.Usage.Actual_use.Usage_report.Usage_report.Title %}
+				{% include "repository/resource_view/documentation.html" with documentation=usage_dict.Usage.Actual_use.Usage_report.Usage_report type="Usage Report" %}
+			{% else %}
+				<div class="dataline indented">
+					<label>
+						<strong>Usage Report: </strong>{{ usage_dict.Usage.Actual_use.Usage_report.Usage_report }}
+					</label>
+				</div>
+			{% endif %}
+					
 		{% endif %}
 		
 		{% if usage_dict.Usage.Actual_use.Derived_resource %}
