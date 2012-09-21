@@ -147,10 +147,15 @@
 
 		{% include "repository/resource_view/distribution.html" with distribution=distribution_dict %}
 		
-		{% for contact_person in contact_person_dicts %}
-			 {% include "repository/resource_view/person.html" with person_dict=contact_person.Contact_person %}
-		{% endfor %}
+		
+		{% if contact_person_dicts %}
+			<label class='component'>Contact Person{{ contact_person_dicts|length|pluralize }}</label>
+			{% for contact_person in contact_person_dicts %}
+				 {% include "repository/resource_view/person.html" with person_dict=contact_person.Contact_person %}
+			{% endfor %}
+		{% endif %}
 	</div>
+	
 		
 	<div class="column middle">
 		<div class="fields">
