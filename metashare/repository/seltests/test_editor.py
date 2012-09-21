@@ -6,7 +6,6 @@ from metashare.repository.seltests.test_utils import login_user, mouse_over, \
     setup_screenshots_folder, click_menu_item, save_and_close, cancel_and_close, \
     cancel_and_continue
 from metashare.settings import DJANGO_BASE, ROOT_PATH
-from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support.ui import Select
 import time
 from django.core.management import call_command
@@ -1836,14 +1835,6 @@ class EditorTest(SeleniumTestCase):
         driver.find_element_by_css_selector("input[type=\"submit\"]").click()
         # TODO remove this workaround when Selenium starts working again as intended
         time.sleep(1)
-
-
-    def is_element_present(self, how, what):
-        try: 
-            self.driver.find_element(by=how, value=what)
-        except NoSuchElementException:
-            return False
-        return True
 
 
     def test_error_messages_LR_creation(self):
