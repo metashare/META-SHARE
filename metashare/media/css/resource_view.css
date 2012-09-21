@@ -331,3 +331,12 @@ a .indented{
 	margin:0px;
 }
 
+.mediatitle label{
+	background:#bbb;
+}
+
+.mediatitle{
+	display: inline-block;
+	background:#333;
+}
+

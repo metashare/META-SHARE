@@ -14,24 +14,26 @@
 {% endfor %}
 </div>
 
-{% if resource_creation_dict.Resource_creation.Creation_start_date %}			
-     <div class="dataline indented">
-		<label>
-			<strong>Creation Started:</strong> {{resource_creation_dict.Resource_creation.Creation_start_date|date:"SHORT_DATE_FORMAT"}}
-		</label>
-	</div>
-{% endif %}
-
-{% if resource_creation_dict.Resource_creation.Creation_end_date %}			
-     <div class="dataline indented">
-		<label>
-			<strong>Creation Ended:</strong> {{resource_creation_dict.Resource_creation.Creation_end_date|date:"SHORT_DATE_FORMAT"}}
-		</label>
-	</div>
-{% endif %}
-
-{% if resource_creation_dict.Resource_creation.Funding_project %}			
-    {% include "repository/resource_view/project.html" with project=resource_creation_dict.Resource_creation.Funding_project %}
-{% endif %}
-
+<div style="margin-bottom:1px;"></div>
+<div class="dataline">
+	{% if resource_creation_dict.Resource_creation.Creation_start_date %}			
+	     <div class="dataline">
+			<label>
+				<strong>Creation Started:</strong> {{resource_creation_dict.Resource_creation.Creation_start_date|date:"SHORT_DATE_FORMAT"}}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if resource_creation_dict.Resource_creation.Creation_end_date %}			
+	     <div class="dataline">
+			<label>
+				<strong>Creation Ended:</strong> {{resource_creation_dict.Resource_creation.Creation_end_date|date:"SHORT_DATE_FORMAT"}}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if resource_creation_dict.Resource_creation.Funding_project %}			
+	    {% include "repository/resource_view/project.html" with project=resource_creation_dict.Resource_creation.Funding_project %}
+	{% endif %}
+</div>
 {% endspaceless %}
