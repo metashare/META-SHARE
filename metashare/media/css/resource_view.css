@@ -273,14 +273,12 @@ label span a{
 }
 
 .read-more{
-    padding-bottom:3px;
-    line-height: 1;
+	padding-bottom:3px;
 }
 
 
 .read-less{
-    padding-bottom:3px;
-    line-height: 1;
+	padding-bottom:3px;
 }
 
 .details{
@@ -326,10 +324,6 @@ a .indented{
 
 .contactcard .dataline:hover{
 	cursor:pointer;
-}
-
-.contactcard{
-	clear:both;
 }
 
 .dataline span a{
