@@ -61,10 +61,20 @@
 {% if distribution.Distribution.Licence.Restrictions_of_use %}
 	 <div class="dataline">
 		<label>
-			<b>Restrictions: </b>{{ distribution.Distribution.Restrictions_of_use }}
+			<b>Restrictions: </b>{{ distribution.Distribution.Licence.Restrictions_of_use }}
 		</label>
 	</div>
 {% endif %}
+
+{% if distribution.Distribution.Licence.Download_location %}
+	 <div class="dataline">
+		<label>
+			<b>Download location: </b>{{ distribution.Distribution.Licence.Download_location }}
+		</label>
+	</div>
+{% endif %}
+
+
 
 
 {% endif %}

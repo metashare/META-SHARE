@@ -687,7 +687,7 @@ def tuple2dict(_tuple):
                     # If a repeatable element is found, the old value is
                     # concatenated with the new one, adding a space in between.
                     if _key in _dict:
-                        _dict[_key] = " ".join([_dict[_key], new_item])
+                        _dict[_key] = ", ".join([_dict[_key], new_item])
                     else:
                         _dict[_key] = new_item
     return _dict
