@@ -6,7 +6,7 @@ import os
 from metashare import test_utils
 import time
 from selenium.common.exceptions import NoSuchWindowException
-from selenium.webdriver.common.alert import Alert
+
 
 def login_user(driver, user_name, user_passwd):
     """
@@ -80,7 +80,6 @@ def cancel_and_continue(driver, target_id):
     """
     Clicks the cancel button in the current window, confirm the alert dialog and continue
     """
-    current_id = driver.current_window_handle
     driver.find_element_by_name("_cancel").click()
     alert = driver.switch_to_alert()
     alert.accept()
