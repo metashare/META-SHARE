@@ -7,3 +7,8 @@
 from metashare.repository.seltests.test_editor import *
 from metashare.repository.seltests.test_filter import *
 from metashare.repository.seltests.test_example import *
+
+import os
+if 'METASHARE_NIGHTLY_BUILD' in os.environ.keys() \
+      and os.environ['METASHARE_NIGHTLY_BUILD'] == 'true':
+    from metashare.repository.seltests.test_editor_nightly import *

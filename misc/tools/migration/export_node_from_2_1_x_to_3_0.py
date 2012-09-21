@@ -35,7 +35,6 @@ USERS = "users.xml"
 USER_PROFILES = "user-profiles.xml"
 LR_STATS = "lr-stats.xml"
 QUERY_STATS = "query-stats.xml"
-USAGE_STATS = "usage-stats.xml"
 STORAGE_FOLDER = "storage"
 STORAGE = "storage.xml"
 METADATA = "metadata.xml"
@@ -127,8 +126,8 @@ def export_stats(export_folder):
     Exports statistic related entities as XML into the given folder.
     """
 
-    from metashare.stats.models import LRStats, QueryStats, UsageStats
-    
+    from metashare.stats.models import LRStats, QueryStats
+
     # create export folder if required
     _check_folder(export_folder)
     
@@ -143,11 +142,6 @@ def export_stats(export_folder):
       QueryStats.objects.all(), 
       os.path.join(export_folder, "{}".format(QUERY_STATS)), 
       mig_serializer, skip_fields=('ipaddress'))
-    # export usage stats
-    _export(
-      UsageStats.objects.all(), 
-      os.path.join(export_folder, "{}".format(USAGE_STATS)), 
-      mig_serializer)
 
 
 def export_resources(export_folder):
