@@ -1,7 +1,7 @@
 <label class='component'>Metadata</label>
 <div>
 		{% if metadata_dict.Metadata.Metadata_creation_date %}			
-			 <div class="dataline indented">
+			 <div class="dataline">
 				<label>
 					<strong>Created: </strong>{{ metadata_dict.Metadata.Metadata_creation_date|date:"SHORT_DATE_FORMAT" }}
 				</label>
@@ -9,7 +9,7 @@
 		{% endif %}
 		
 		{% if metadata_dict.Metadata.Metadata_last_date_updated %}			
-			 <div class="dataline indented">
+			 <div class="dataline">
 				<label>
 					<strong>Last Updated: </strong>{{ metadata_dict.Metadata.Metadata_last_date_updated|date:"SHORT_DATE_FORMAT" }}
 				</label>
@@ -18,7 +18,7 @@
 		
 		
 		{% if metadata_dict.Metadata.Source %}
-			<div class="dataline indented">
+			<div class="dataline">
 				<label>
 				<strong>Source: </strong>{{ metadata_dict.Metadata.Source }}
 				</label>
@@ -26,7 +26,7 @@
 		{% endif %}
 
 		{% if metadata_dict.Metadata.Original_metadata_schema %}
-			<div class="dataline indented">
+			<div class="dataline">
 				<label>
 					{% if metadata_dict.Metadata.Original_metadata_link %}
 						<a href="{{metadata_dict.Metadata.Original_metadata_link}}" target='_blank'>
@@ -40,7 +40,7 @@
 		{% endif %}
 		
 		{% if value2.Document_language_name %}
-		     <div class="dataline indented">
+		     <div class="dataline">
 				<label>
 					<strong>Document Language:</strong> 
 					{% if value2.Document_language_id %}
@@ -55,7 +55,7 @@
 		{% endif %}
 		
 		{% if metadata_dict.Metadata.Revision %}
-			<div class="dataline indented">
+			<div class="dataline">
 				<label>
 					<strong>Revision: </strong>{{  metadata_dict.Metadata.Revision }}
 				</label>
