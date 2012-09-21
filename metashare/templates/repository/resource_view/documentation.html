@@ -2,7 +2,11 @@
 <label class='component'>Documentation:</label>
 {% else %}
 	{% if type == "Annotation_manual" %}
-		<b>Annotation_manual: </b>
+		<b>Annotation manual: </b>
+	{% else %}
+		{% if type == "Evaluation_report" %}
+			<b>Evaluation report: </b>
+		{% endif %}
 	{% endif %}
 {% endif %}
 

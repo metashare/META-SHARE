@@ -495,6 +495,7 @@ def view(request, resource_name=None, object_id=None):
     resource_component_dict = {}
     for item in contact_person_tuples:
         contact_person_dicts.append(tuple2dict([item]))
+    distribution_dict = tuple2dict([distribution_info_tuple])
     resource_component_dict = tuple2dict(resource_component_tuple)
     resource_creation_dict = tuple2dict([resource_creation_info_tuple])
     metadata_dict = tuple2dict([metadata_info_tuple])
@@ -580,19 +581,12 @@ def view(request, resource_name=None, object_id=None):
                 'other_res_names': other_res_names,
                 'other_descriptions': other_descriptions,
                 'distribution_info_tuple': distribution_info_tuple,
-                'contact_person_tuples': contact_person_tuples,                
-                'metadata_info_tuple': metadata_info_tuple,               
                 'version_info_tuple': version_info_tuple,
-                'validation_info_tuples': validation_info_tuples,
-                'usage_info_tuple': usage_info_tuple,
-                'documentation_info_tuple': documentation_info_tuple,
-                'resource_creation_info_tuple': resource_creation_info_tuple,
-                'relation_info_tuples': relation_info_tuples,
                 'linguality_infos': linguality_infos,
                 'license_types': license_types,
                 'resourceType': resource_type,
                 'resource_component_dicts': resource_component_dicts,
-                #'lr_content_dict': lr_content_dict,
+                'distribution_dict': distribution_dict,
                 'mediaTypes': media_types,
                 'url': url,
                 'metaShareId': metashare_id,
@@ -687,7 +681,6 @@ def tuple2dict(_tuple):
 
                     # If the item is a date, convert it to real datetime
                     if _key.find("_date") != -1:
-                        print _key
                         new_item = datetime.strptime(item[0][1], "%Y-%m-%d")
                     else:
                         new_item = item[0][1]
