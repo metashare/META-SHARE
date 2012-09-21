@@ -479,26 +479,28 @@ def view(request, resource_name=None, object_id=None):
             relation_info_tuples.append(_tuple)
         elif _tuple[0] == "Resource component":
             resource_component_tuple = _tuple[1]
-            languages_tuple = _tuple
-
-    # Convert contact_person_tuples to dictionaries
+    
+    # Convert resource_component_tuple to nested dictionaries
+    resource_component_dicts = {}
+    resource_creation_dict = {}
+    metadata_dict = {}
+    usage_dict = {}
+    documentation_dict = {}
+    validation_dicts = []
+    relation_dicts = []    
+    
+    # Convert several tuples to dictionaries to facilitate rendering
+    # the templates.
     contact_person_dicts = []
     resource_component_dict = {}
     for item in contact_person_tuples:
         contact_person_dicts.append(tuple2dict([item]))
-
-    # Convert resource_component_tuple to nested dictionaries
+    distribution_dict = tuple2dict([distribution_info_tuple])
     resource_component_dict = tuple2dict(resource_component_tuple)
-#    lr_content_dict = tuple2dict([lr_content])
-    resource_component_dicts = {}
-
-    resource_creation_dict = {}
-    metadata_dict = {}
-    validation_dicts = []
-    relation_dicts = []
-    
     resource_creation_dict = tuple2dict([resource_creation_info_tuple])
     metadata_dict = tuple2dict([metadata_info_tuple])
+    usage_dict = tuple2dict([usage_info_tuple])
+    documentation_dict = tuple2dict([documentation_info_tuple])
     for item in validation_info_tuples:
         validation_dicts.append(tuple2dict([item]))
     for item in relation_info_tuples:
@@ -579,24 +581,22 @@ def view(request, resource_name=None, object_id=None):
                 'other_res_names': other_res_names,
                 'other_descriptions': other_descriptions,
                 'distribution_info_tuple': distribution_info_tuple,
-                'contact_person_tuples': contact_person_tuples,                
-                'metadata_info_tuple': metadata_info_tuple,               
                 'version_info_tuple': version_info_tuple,
-                'validation_info_tuples': validation_info_tuples,
-                'usage_info_tuple': usage_info_tuple,
-                'documentation_info_tuple': documentation_info_tuple,
-                'resource_creation_info_tuple': resource_creation_info_tuple,
-                'relation_info_tuples': relation_info_tuples,
                 'linguality_infos': linguality_infos,
                 'license_types': license_types,
                 'resourceType': resource_type,
                 'resource_component_dicts': resource_component_dicts,
+                'distribution_dict': distribution_dict,
                 'mediaTypes': media_types,
                 'url': url,
                 'metaShareId': metashare_id,
                 'contact_person_dicts': contact_person_dicts,
                 'resource_creation_dict': resource_creation_dict,
                 'metadata_dict': metadata_dict,
+                'usage_dict': usage_dict,
+                'validation_dicts': validation_dicts,                
+                'documentation_dict': documentation_dict,
+                'relation_dicts': relation_dicts,
                 }
     template = 'repository/resource_view/lr_view.html'
 
@@ -681,7 +681,6 @@ def tuple2dict(_tuple):
 
                     # If the item is a date, convert it to real datetime
                     if _key.find("_date") != -1:
-                        print _key
                         new_item = datetime.strptime(item[0][1], "%Y-%m-%d")
                     else:
                         new_item = item[0][1]
