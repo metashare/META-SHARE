@@ -128,18 +128,24 @@
 				</label>
 			</div>
 		{% endif %}
-		
+				
 		{% if tool_service.Tool_service_evaluation.Evaluation_report %}
-			{% include "repository/resource_view/documentation.html" with documentation=tool_service.Tool_service_evaluation.Evaluation_report.Evaluation_report type="Evaluation_report" %}
+			{% if tool_service.Tool_service_evaluation.Evaluation_report.Evaluation_report.documentation %}
+				{% include "repository/resource_view/documentation.html" with documentation=tool_service.Tool_service_evaluation.Evaluation_report.Evaluation_report type="Evaluation_report" %}
+			{% else %}
+				<div class="dataline">
+					<label>
+						<strong>Evaluation Report: </strong>{{ tool_service.Tool_service_evaluation.Evaluation_report.Evaluation_report }}
+					</label>
+				</div>
+			{% endif %}
+				
+			
 		{% endif %}
 
 		{% if tool_service.Tool_service_evaluation.Evaluation_tool %}
-			{% if tool_service.Tool_service_evaluation.Evaluation_tool.Target_resource.Target_resource_name_uri %}
-				 <div class="dataline">
-					<label>
-						<strong>Evaluation tool: </strong>{{ tool_service.Tool_service_evaluation.Evaluation_tool.Target_resource.Target_resource_name_uri }}
-					</label>
-				</div>
+			{% if tool_service.Tool_service_evaluation.Evaluation_tool.Target_resource %}
+				{% include "repository/resource_view/target_resource.html" with target=tool_service.Tool_service_evaluation.Evaluation_tool.Target_resource  title="Evaluation Tool" %}
 			{% endif %}
 		{% endif %}
 		
@@ -176,11 +182,7 @@
 		
 		{% if tool_service.Tool_service_creation.Original_source %}
 			{% if tool_service.Tool_service_creation.Original_source.Target_resource.Target_resource_name_uri %}
-				 <div class="dataline">
-					<label>
-						<strong>Evaluation tool: </strong>{{ tool_service.Tool_service_creation.Original_source.Target_resource.Target_resource_name_uri }}
-					</label>
-				</div>
+				{% include "repository/resource_view/target_resource.html" with target=tool_service.Tool_service_creation.Original_source.Target_resource  title="Original Source" %}
 			{% endif %}
 		{% endif %}
 
