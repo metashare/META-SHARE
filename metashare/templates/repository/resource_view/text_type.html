@@ -5,7 +5,7 @@
 {% for key, value in text_types.items %}
 	{% if key == "Text_format" %}
 		{% for key1, value1 in value.items %}
-			<label><b>{{ key1 }}: </b> {{ value1 }}{% if not forloop.last %}, {% endif %}</label>
+			<label><strong>{{ key1 }}: </strong> {{ value1 }}{% if not forloop.last %}, {% endif %}</label>
 		{% endfor %}
 	{% endif %}
 {% endfor %}
