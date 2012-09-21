@@ -80,20 +80,20 @@ class mconfig:
 
 	def get_outer_nodes_data(self, escape=False):
 		return self._get_other_nodes_data(
-			self.get_outer_nodes(), 'PROXIED_NODES', escape)
+			self.get_outer_nodes(), 'PROXIED_NODES', escape, 'outer_node')
 
 	def get_core_nodes_data(self, escape=False):
 		return self._get_other_nodes_data(
 			self.get_other_inner_nodes(), 'CORE_NODES', escape)
 
-	def _get_other_nodes_data(self, nodes, data_name, escape):
+	def _get_other_nodes_data(self, nodes, data_name, escape, node_prefix='node'):
 		counter = 1
 		end_str = ''
 		if escape:
 			end_str = '\\'
 		data_str = "{0} = {{{1}\n".format(data_name, end_str)
 		for n in nodes:
-			data_str = data_str + "\t'node{0}' : {{{1}\n".format(counter, end_str)
+			data_str = data_str + "\t'{2}{0}' : {{{1}\n".format(counter, end_str, node_prefix)
 			data_str = data_str + "\t\t'NAME': '{0}',{1}\n".format(n.node_name, end_str)
 			data_str = data_str + "\t\t'DESCRIPTION': '{0} Metashare node',{1}\n".format(n.node_name, end_str)
 			data_str = data_str + "\t\t'URL': 'http://127.0.0.1:{0}/metashare',{1}\n".format(n.django_port, end_str)
