@@ -150,6 +150,10 @@ class StatsTest(TestCase):
         checking if there are the statistics of the day
         """
         client = Client()
+        # get stats days date 
+        response = client.get('/{0}stats/days'.format(DJANGO_BASE))
+        self.assertEquals(200, response.status_code)
+        # get stats info of the node 
         response = client.get('/{0}stats/get'.format(DJANGO_BASE))
         self.assertEquals(200, response.status_code)
     
@@ -204,6 +208,7 @@ class StatsTest(TestCase):
         UsageStats.objects.all().delete()                
         response = client.get('/{0}stats/usage/'.format(DJANGO_BASE))
         self.assertContains(response, "statistics updating is in progress")
+        self.assertNotContains(response, "identificationInfo")
         sleep(3)
         response = client.get('/{0}stats/usage/'.format(DJANGO_BASE))
         self.assertContains(response, "identificationInfo")

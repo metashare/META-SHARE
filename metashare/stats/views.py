@@ -109,6 +109,7 @@ def usagestats (request):
         storage_object__deleted=False)
     lr_count = len(lrset)
 
+    usage_filter = {"required": 0, "optional": 0, "recommended": 0, "never used": 0, "at least one": 0}
     usage_fields = {}
     usagedata = {}    
     usageset = UsageStats.objects.values('elparent','elname').annotate(Count('lrid', distinct=True), \
@@ -138,89 +139,41 @@ def usagestats (request):
             model_name = _model.replace("Type_model","")
             component_name = eval(u'{0}._meta.verbose_name'.format(_model))
             metaname = model_name +" "+ _component
-            val_counter = 0
-            lrs_counter = 0
-            if metaname in usagedata:
-                val_counter = usagedata[metaname][0]
-                lrs_counter = usagedata[metaname][1]
             if _component in _classes:
                 style = "component"
                 metadata_type = model_name
-                if (not metaname in _fields):
-                    if (not verbose_name):
-                        if (not "_set" in _field):
+                if not metaname in _fields:
+                    if not verbose_name:
+                        if not "_set" in _field:
                             verbose_name = eval(u'{0}._meta.get_field("{1}").verbose_name'.format(_model, _field))
                             class_name = eval(u'{0}Type_model._meta.verbose_name'.format(_classes[_component]))
-                            if (verbose_name != class_name):
+                            if verbose_name != class_name:
                                 verbose_name = verbose_name + " [" + class_name +"]"
                                 style = "instance"
                                 metadata_type = _component
                         else:
                             verbose_name = eval(u'{0}Type_model._meta.verbose_name'.format(_classes[_component]))
-                    _fields[metaname] = [component_name, _classes[_component], verbose_name, \
-                        _required, val_counter, lrs_counter, "component", metadata_type]
-                    if not component_name in usage_fields:
-                        usage_fields[component_name] = [_fields[metaname]]
-                    else:
-                        usage_fields[component_name].append(_fields[metaname])
+                    added = _add_usage_meta(usage_fields, component_name, _classes[_component], verbose_name, \
+                        _required, "component", metadata_type, usagedata.get(metaname, None), selected_filters, usage_filter)
             
                     # add the sub metadata fields
-                    if style == "instance":
+                    if added and style == "instance":
                         instance_dbfields = getattr(mod, _classes[_component] +"Type_model").__schema_fields__
                         for _icomponent, _ifield, _irequired in instance_dbfields:
                             if not _icomponent in _classes:
                                 verbose_name = eval(u'{0}Type_model._meta.get_field("{1}").verbose_name'.format(_classes[_component], _ifield))
                                 metaname = metadata_type +" "+ _ifield
-                                if metaname in usagedata:
-                                    val_counter = usagedata[metaname][0]
-                                    lrs_counter = usagedata[metaname][1]
-                                else:
-                                    val_counter = 0
-                                    lrs_counter = 0
-                                _fields[metaname] = [component_name, _ifield, verbose_name, _irequired, val_counter, lrs_counter, "ifield", metadata_type]
+                                _add_usage_meta(usage_fields, component_name, \
+                                    _ifield, verbose_name, _irequired, \
+                                    "ifield", metadata_type, usagedata.get(metaname, None), selected_filters, usage_filter)
                                 if selected_class == metadata_type:
                                     selected_class = model_name
-                                if not component_name in usage_fields:
-                                    usage_fields[component_name] = [_fields[metaname]]
-                                else:
-                                    usage_fields[component_name].append(_fields[metaname])
             else:
-                if (not verbose_name):
+                if not verbose_name:
                     verbose_name = eval(u'{0}._meta.get_field("{1}").verbose_name'.format(_model, _field))
-                _fields[metaname] = [component_name, _field, verbose_name, _required, val_counter, lrs_counter, "field", model_name]            
-                if not component_name in usage_fields:
-                    usage_fields[component_name] = [_fields[metaname]]
-                else:
-                    usage_fields[component_name].append(_fields[metaname])
-             
-    fields_count = 0
-    usage_filter = {"required": 0, "recommended": 0, "optional": 0, "never used": 0, "at least one": 0}
-    for key in _fields:
-        value = _fields[key]
-        _filters = []
-        if value[3] == 1:
-            _filters.append("required")
-        elif value[3] == 2:
-            _filters.append("optional")
-        elif value[3] == 3:
-            _filters.append("recommended")
-        
-        if value[5] == 0:
-            _filters.append("never used")
-        else:
-            _filters.append("at least one")
-            
-        #filter
-        for ifilter in _filters:
-            usage_filter[ifilter] += 1               
-        if len(selected_filters) > 0:
-            usedfilters = 0
-            for ifilter in selected_filters:
-                if ifilter in _filters:
-                    usedfilters += 1
-            if len(_filters) != usedfilters:
-                continue                 
-        fields_count += 1
+                _add_usage_meta(usage_fields, component_name, _field, verbose_name, _required, "field", model_name, usagedata.get(metaname, None), selected_filters, usage_filter)       
+         
+    fields_count = usage_filter["required"] + usage_filter["optional"]+ usage_filter["recommended"]
              
     # update usage stats according with the published resources
     lr_usage = UsageStats.objects.values('lrid').distinct('lrid').count()
@@ -243,7 +196,39 @@ def usagestats (request):
         'myres': isOwner(request.user.username)},
         context_instance=RequestContext(request))
 
-    
+def _add_usage_meta(usage_fields, component_name, field, verbose_name, status, metaname_type, model_name, counters, selected_filters, usage_filter):
+    if counters is None:
+        counters = [0, 0]
+    _filters = []
+    if status == 1:
+        _filters.append("required")
+    elif status == 2:
+        _filters.append("optional")
+    elif status == 3:
+        _filters.append("recommended")
+        
+    if counters[0] == 0:
+        _filters.append("never used")
+    else:
+        _filters.append("at least one")
+    if len(selected_filters) > 0:
+        usedfilters = 0
+        for ifilter in selected_filters:
+            if ifilter in _filters:
+                usedfilters += 1
+        if len(_filters) != usedfilters:
+            return False
+    for ifilter in _filters:
+        usage_filter[ifilter] += 1               
+
+    metadata = [component_name, field, verbose_name, status, counters[0], counters[1], metaname_type, model_name]
+    if not component_name in usage_fields:
+        usage_fields[component_name] = [metadata]
+    else:
+        usage_fields[component_name].append(metadata)
+    return True
+
+
 def topstats (request):
     """ viewing statistics about the top LR and latest queries. """    
     topdata = []
@@ -348,7 +333,7 @@ def statdays (request):
     return HttpResponse(JSONEncoder().encode(dates), mimetype="application/json")
 
 def getstats (request):
-    """ get statistics for a date in terms of user action made """
+    """ get statistics for a date in terms of user action made, amount of resources, info about usage, ... """
     data = {}
     currdate = request.GET.get('date',"")
     if (not currdate):
