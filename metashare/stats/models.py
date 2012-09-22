@@ -7,11 +7,20 @@ class LRStats(models.Model):
     userid = models.CharField(blank=False, max_length=64)
     geoinfo = models.CharField(blank=True, max_length=2)
     sessid = models.CharField(blank=False, max_length=64)
-    lasttime = models.DateTimeField(blank=False, auto_now_add=True, default=datetime.now())
+    lasttime = models.DateTimeField(blank=False)
     action = models.CharField(blank=False, max_length=1)
     count = models.IntegerField(blank=False, default=1)
     ignored = models.BooleanField(default=False)
-    
+
+    def save(self, **kwargs):
+        # automatically set the `lasttime` value if it is not given; we are not
+        # using Django's `auto_now_add` on purpose, as we'd like to be able to
+        # override the timestamp upon object creation (e.g., during node
+        # migration)
+        if self.lasttime is None:
+            self.lasttime = datetime.now()
+        super(LRStats, self).save(**kwargs)
+
     #def __unicode__(self):
     #   return "L>> " +  self.userid + "," +self.lrid  + "," + self.action + "," + str(self.count) + "," + str(self.lasttime) + "," + self.sessid
         
@@ -20,10 +29,19 @@ class QueryStats(models.Model):
     geoinfo = models.CharField(blank=True, max_length=2)
     query = models.TextField(blank=False)
     facets = models.TextField(blank=False)
-    lasttime = models.DateTimeField(blank=False, auto_now_add=True, default=datetime.now())
+    lasttime = models.DateTimeField(blank=False)
     found = models.IntegerField(blank=False, default=0)
     exectime = models.IntegerField(blank=False, default=0)
-    
+
+    def save(self, **kwargs):
+        # automatically set the `lasttime` value if it is not given; we are not
+        # using Django's `auto_now_add` on purpose, as we'd like to be able to
+        # override the timestamp upon object creation (e.g., during node
+        # migration)
+        if self.lasttime is None:
+            self.lasttime = datetime.now()
+        super(QueryStats, self).save(**kwargs)
+
     #def __unicode__(self):
     #    return "Q>> " +self.userid + "," + self.query + "," + str(self.lasttime)
 
