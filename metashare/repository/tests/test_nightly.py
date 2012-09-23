@@ -96,7 +96,7 @@ class NightlyTests(TestCase):
             client = Client()
             response = client.get(_res.get_absolute_url(), follow = True)
             self.assertEquals(200, response.status_code)
-            self.assertTemplateUsed(response, 'repository/lr_view.html')
+            self.assertTemplateUsed(response, 'repository/resource_view/lr_view.html')
             self.assertContains(response, xml_utils.html_escape(_res.real_unicode_()))
 
         # enable indexing 
