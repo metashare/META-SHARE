@@ -62,13 +62,12 @@ def saveLRStats(resource, action, request=None):
         return
     if (resource.storage_object.publication_status != PUBLISHED):
         return False
-    
+        
     userid = _get_userid(request)
     sessid = _get_sessionid(request)
     lrset = LRStats.objects.filter(userid=userid, lrid=lrid, sessid=sessid, action=action)
     if (lrset.count() > 0):
         record = lrset[0]
-        record.lasttime = datetime.now()
         record.ignored = ignored
         record.save(force_update=True)
         LOGGER.debug('UPDATESTATS: Saved LR {0}, {1} action={2} ({3}).'.format(lrid, sessid, action, record.lasttime))

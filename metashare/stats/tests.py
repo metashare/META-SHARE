@@ -39,17 +39,19 @@ class StatsTest(TestCase):
         _test_manager_group = \
             EditorGroupManagers.objects.create(name='test_manager_group',
                                                managed_group=_test_editor_group)            
-        test_utils.create_manager_user(
+        owner = test_utils.create_manager_user(
             'manageruser', 'manager@example.com', 'secret',
             (_test_editor_group, _test_manager_group))
-        
+        # load first resource
         _fixture = '{0}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
         _result = test_utils.import_xml(_fixture)
         _result.editor_groups.add(_test_editor_group)
-        #StatsTest.resource_id = _result.id      
+        _result.owners.add(owner)
+        # load second resource
         _fixture = '{0}/repository/test_fixtures/ingested-corpus-AudioVideo-French.xml'.format(ROOT_PATH)
         _result = test_utils.import_xml(_fixture)
         _result.editor_groups.add(_test_editor_group)
+        _result.owners.add(owner)
         
     
     @classmethod
@@ -164,9 +166,9 @@ class StatsTest(TestCase):
         for resource in resources:
             resource.storage_object.publication_status = INGESTED
             resource.storage_object.save()
-            client.post(ADMINROOT,
-            {"action": "publish_action", ACTION_CHECKBOX_NAME: resource.id},
-            follow=True)
+            client.post(ADMINROOT, \
+                {"action": "publish_action", ACTION_CHECKBOX_NAME: resource.id}, \
+                follow=True)
             url = resource.get_absolute_url()
             response = client.get(url, follow = True)
             self.assertTemplateUsed(response,
@@ -174,14 +176,38 @@ class StatsTest(TestCase):
         
         statsdata = getLRLast(VIEW_STAT, 10)
         self.assertEqual(2, len(statsdata))
+
+        response = client.get('/{0}stats/top/'.format(DJANGO_BASE))
+        self.assertNotContains(response, ">No data found<")
+        self.assertContains(response, ">My resources<")
         
-        #delete the second resource
-        resource = resourceInfoType_model.objects.all()[1]
+        response = client.get('/{0}stats/mystats/'.format(DJANGO_BASE))
+        self.assertTemplateUsed(response, 'stats/mystats.html')
+        self.assertContains(response, "Resource name")
+
+        
+        # make sure delete a resource from storage_object.deleted may delete any part of its statistics:
+        # delete the second resource
+        resource = resourceInfoType_model.objects.all()[0]
         resource.delete_deep()        
+        #resource.storage_object.delete()
         statsdata = getLRLast(VIEW_STAT, 10)
         self.assertEqual(1, len(statsdata))
-                
-    
+        
+        response = client.get('/{0}stats/usage/'.format(DJANGO_BASE))
+        self.assertContains(response, "Metadata usage in 1 resource")
+
+        #delete the first resource
+        resource = resourceInfoType_model.objects.all()[0]
+        resource.delete_deep()        
+        statsdata = getLRLast(VIEW_STAT, 10)
+        self.assertEqual(0, len(statsdata))
+
+        response = client.get('/{0}stats/mystats/'.format(DJANGO_BASE))
+        self.assertContains(response, ">No data found<")
+        response = client.get('/{0}stats/top/'.format(DJANGO_BASE))
+        self.assertContains(response, ">No data found<")
+            
     def test_usage(self):
         # checking if there are the usage statistics
         client = Client()
@@ -202,15 +228,15 @@ class StatsTest(TestCase):
         statsdata = getLRLast(UPDATE_STAT, 2)
         self.assertEqual(len(statsdata), 2)
         response = client.get('/{0}stats/usage/'.format(DJANGO_BASE))
-        self.assertContains(response, "identificationInfo")
+        self.assertNotContains(response, "statistics updating is in progress")
+        self.assertContains(response, "Metadata usage in 2 resources")
 
         # remove all usage stats and check its automatically updating
         UsageStats.objects.all().delete()                
         response = client.get('/{0}stats/usage/'.format(DJANGO_BASE))
         self.assertContains(response, "statistics updating is in progress")
-        self.assertNotContains(response, "identificationInfo")
         sleep(3)
         response = client.get('/{0}stats/usage/'.format(DJANGO_BASE))
-        self.assertContains(response, "identificationInfo")
+        self.assertContains(response, "Metadata usage in 2 resources")
         
 

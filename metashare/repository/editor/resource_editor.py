@@ -1188,7 +1188,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
 
     def save_model(self, request, obj, form, change):
         super(ResourceModelAdmin, self).save_model(request, obj, form, change)
-        #update statistics
+        # update statistics
         if hasattr(obj, 'storage_object') and obj.storage_object is not None:
             saveLRStats(obj, UPDATE_STAT, request)          
     
@@ -1197,7 +1197,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
         obj.storage_object.save()
         # explicitly write metadata XML and storage object to the storage folder
         obj.storage_object.update_storage()
-        
+        # update statistics
+        saveLRStats(obj, INGEST_STAT, request)          
+                
     def change_view(self, request, object_id, extra_context=None):
         _extra_context = extra_context or {}
         _extra_context.update({'DJANGO_BASE':settings.DJANGO_BASE})

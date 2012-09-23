@@ -64,10 +64,11 @@ def mystats (request):
     data = []
     entry_list = getMyResources(request.user.username)
     for resource in entry_list:
-        lastaccess = LRStats.objects.values('lasttime').filter(lrid=resource.storage_object.identifier).order_by('-lasttime')[:1]
-        data.append([resource.id, resource.get_absolute_url, resource, resource.storage_object.publication_status, \
-            getLRStats(resource.storage_object.identifier), getUserCount(resource.storage_object.identifier), \
-            lastaccess[0]["lasttime"].strftime("%Y/%m/%d - %I:%M:%S")])
+        if not resource.storage_object.deleted:
+            lastaccess = LRStats.objects.values('lasttime').filter(lrid=resource.storage_object.identifier).order_by('-lasttime')[:1]
+            data.append([resource.id, resource.get_absolute_url, resource, resource.storage_object.publication_status, \
+                getLRStats(resource.storage_object.identifier), getUserCount(resource.storage_object.identifier), \
+                lastaccess[0]["lasttime"].strftime("%Y/%m/%d - %I:%M:%S")])
     return render_to_response('stats/mystats.html', 
         {"data": data},
         context_instance=RequestContext(request))
@@ -310,7 +311,7 @@ def topstats (request):
                     facets += ", " + face.replace("Filter_exact:",": ")
                 facets = facets.replace(", ", "", 1) 
             topdata.append([query, facets, pretty_timeago(item['lasttime']), item['found'], url])       
-    
+
     return render_to_response('stats/topstats.html',
         {'user': request.user, 
         'topdata': topdata[:limit], 
