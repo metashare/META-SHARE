@@ -22,7 +22,9 @@ class LRStats(models.Model):
         super(LRStats, self).save(**kwargs)
 
     #def __unicode__(self):
-    #   return "L>> " +  self.userid + "," +self.lrid  + "," + self.action  + "," + str(self.lasttime) + "," + self.sessid+ "," + str(self.count)+ "," + str(self.ignored)
+    #   return "L>> " +  self.userid + "," +self.lrid  + "," + self.action  + "," \
+    #        + str(self.lasttime) + "," + self.sessid+ "," + str(self.count)+ "," \
+    #        + str(self.ignored)
         
 class QueryStats(models.Model):
     userid = models.CharField(blank=False, max_length=64)

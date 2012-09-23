@@ -4,7 +4,6 @@ import threading
 import itertools 
 from django.db.models import Count, Sum
 from django.contrib.auth.models import User
-from datetime import datetime
 from math import trunc
 import re
 from metashare.stats.models import LRStats, QueryStats, UsageStats
@@ -116,8 +115,8 @@ def getLRStats(lrid):
     return json.loads("["+data+"]")
 
     
-def getUserCount(lrid):
-    users = LRStats.objects.values('userid').filter(lrid=lrid).annotate(Count('userid'))
+def getUserCount(lrid, user):
+    users = LRStats.objects.values('userid').filter(lrid=lrid).exclude(userid=user).annotate(Count('userid'))
     for key in users:
         return key['userid__count']
     return 0

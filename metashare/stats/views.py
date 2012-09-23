@@ -19,7 +19,6 @@ from django.template import RequestContext
 from django.core.paginator import Paginator
 
 from json import JSONEncoder
-import datetime
 from datetime import datetime, date
 from dateutil.relativedelta import relativedelta
 import urllib, urllib2
@@ -67,7 +66,7 @@ def mystats (request):
         if not resource.storage_object.deleted:
             lastaccess = LRStats.objects.values('lasttime').filter(lrid=resource.storage_object.identifier).order_by('-lasttime')[:1]
             data.append([resource.id, resource.get_absolute_url, resource, resource.storage_object.publication_status, \
-                getLRStats(resource.storage_object.identifier), getUserCount(resource.storage_object.identifier), \
+                getLRStats(resource.storage_object.identifier), getUserCount(resource.storage_object.identifier, request.user.username), \
                 lastaccess[0]["lasttime"].strftime("%Y/%m/%d - %I:%M:%S")])
     return render_to_response('stats/mystats.html', 
         {"data": data},
@@ -172,7 +171,8 @@ def usagestats (request):
             else:
                 if not verbose_name:
                     verbose_name = eval(u'{0}._meta.get_field("{1}").verbose_name'.format(_model, _field))
-                _add_usage_meta(usage_fields, component_name, _field, verbose_name, _required, "field", model_name, usagedata.get(metaname, None), selected_filters, usage_filter)       
+                _add_usage_meta(usage_fields, component_name, _field, verbose_name, _required, \
+                    "field", model_name, usagedata.get(metaname, None), selected_filters, usage_filter)       
          
     fields_count = usage_filter["required"] + usage_filter["optional"]+ usage_filter["recommended"]
              

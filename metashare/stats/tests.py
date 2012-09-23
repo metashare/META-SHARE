@@ -103,23 +103,26 @@ class StatsTest(TestCase):
         response = client.get('/{0}stats/top/'.format(DJANGO_BASE))
         self.assertTemplateUsed(response, 'stats/topstats.html')
         self.assertContains(response, "META-SHARE node visits statistics")
+        #self.assertNotContains(response, "No data found")
+
 
     def test_latest_queries(self):
         """
         Test whether there are latest queries
         """
-        saveQueryStats("tesQuerytquery 001", "", 10)
-        saveQueryStats("tesQuerytquery 002", "", 2)
-        latest_query = getLastQuery(2)
         client = Client()
-        _url = "/{0}stats/top/?view=latestqueries".format(DJANGO_BASE)
-        response = client.get(_url)
-        self.assertContains(response, 'META-SHARE node visits statistics')
-        self.assertContains(response, 'http://')
+        response = client.get('/{0}repository/search/?q=test'.format(DJANGO_BASE))
+        response = client.get('/{0}repository/search/?q=italian'.format(DJANGO_BASE))
+        response = client.get('/{0}stats/top/?view=topqueries'.format(DJANGO_BASE))
+        self.assertNotContains(response, "No data found")
+
+        response = client.get('/{0}stats/top/?view=latestqueries'.format(DJANGO_BASE))
+        self.assertNotContains(response, "No data found")
+        latest_query = getLastQuery(2)
         self.assertGreaterEqual(len(latest_query), 1)
         for item in latest_query:
             self.assertContains(response, item['query'])
-            
+                            
  
     def test_stats_server(self):
         """
@@ -174,6 +177,9 @@ class StatsTest(TestCase):
             self.assertTemplateUsed(response,
                 'repository/resource_view/lr_view.html')
         
+        response = client.get('/{0}stats/top/?view=latestupdated'.format(DJANGO_BASE))
+        self.assertNotContains(response, "No data found")
+
         statsdata = getLRLast(VIEW_STAT, 10)
         self.assertEqual(2, len(statsdata))
 
