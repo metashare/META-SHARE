@@ -2,7 +2,10 @@
 {% load get_icon %}
 {% spaceless %}
 
-<label class='title'>{{title}}</label>
+{% if type == "Contact Person" %}
+{% else %}
+	<label class='title'>{{title}}</label>
+{% endif %}
 
 <a href='#' class="contactcard" title="Click to view contact card">
 	<label class="dataline indented" style="float:left;">
@@ -10,7 +13,6 @@
 				{{ person_dict.Surname }}
 				{{ person_dict.Organization_name }}	
 	</label>
-
 	
 	<img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/vcard.png" class='vcard'/>
 </a>
