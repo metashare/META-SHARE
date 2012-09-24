@@ -25,7 +25,10 @@
 				expandEffect: 'show',
 				expandSpeed: 0,
 				collapseEffect: 'hide',
-				collapseSpeed: 0
+				collapseSpeed: 0,
+                afterExpand: function() {
+                    $(this).find('.details').css({display: 'inline'});
+                } 
 			});
 		});
 
@@ -151,7 +154,10 @@
 		{% if contact_person_dicts %}
 			<label class='component'>Contact Person{{ contact_person_dicts|length|pluralize }}</label>
 			{% for contact_person in contact_person_dicts %}
-				 {% include "repository/resource_view/person.html" with person_dict=contact_person.Contact_person %}
+				 {% include "repository/resource_view/person.html" with person_dict=contact_person.Contact_person type="Contact Person" %}
+				{% if not forloop.last %}
+				<hr/>
+				{% endif %}
 			{% endfor %}
 		{% endif %}
 	</div>
