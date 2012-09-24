@@ -2,7 +2,7 @@
 {% load get_icon %}
 {% spaceless %}
 
-{% if type == "Contact Person" %}
+{% if type == "Contact Person" or type == "Metadata Creator" %}
 {% else %}
 	<label class='title'>{{title}}</label>
 {% endif %}

@@ -64,7 +64,7 @@
 </div>
 <div class="dataline">
 {% for key, value in metadata_dict.items %}
-	{% if "Metadata_creator" in value %}
+	{% if "Metadata_creator" in key1 %}
 		<label class="title">Metadata Creator</label>
 	{% endif %}
 	{% for key1, value1 in value.items %}
