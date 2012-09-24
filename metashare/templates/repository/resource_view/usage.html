@@ -10,9 +10,12 @@
 	    {% include "repository/resource_view/target_resource.html" with target=usage_dict.Usage.Resource_associated_with title="Associated Resource" %}
 	{% endif %}
 	
-	<label class='title'>Foreseen Use</label>	
+	
+
+
 		{% for key, value in usage_dict.items %}
 			{% if "Foreseen_use" in value %}
+				<label class='title'>Foreseen Use</label>	
 				{% for key1, value1 in value.items %}
 					{% if "Foreseen_use" in key1 %}
 						<div class="dataline indented">
@@ -35,10 +38,11 @@
 			{% endif %}
 		{% endfor %}
 	
-	<label class='title'>Actual Use</label>	
+	
 	
 	{% for key, value in usage_dict.items %}
 		{% if "Actual_use" in value %}
+			<label class='title'>Actual Use</label>	
 			{% for key1, value1 in value.items %}
 				{% if "Actual_use" in key1 %}
 					<div class="dataline indented">
@@ -54,7 +58,24 @@
 							</label>
 						</div>
 					{% endif %}
-																		
+					
+					
+					{% if "Usage_report" in value1 %}
+						{% for key2, value2 in value1.items %}												
+							{% if value2.Usage_report.Title %}
+								{% include "repository/resource_view/documentation.html" with documentation=value2.Usage_report type="Usage Report" %}
+							{% else %}
+								<div class="dataline indented">
+									<label>
+										<strong>Usage Report: </strong>{{ value2.Usage_report }}
+									</label>
+								</div>
+							{% endif %}								
+						{% endfor %}						     
+					{% endif %}
+					
+					
+								
 					{% if value1.Actual_use_details %}
 					     <div class="dataline indented">
 							<label>
@@ -102,7 +123,6 @@
 		{% if usage_dict.Usage.Actual_use.Usage_project %}			
 		    {% include "repository/resource_view/project.html" with project=usage_dict.Usage.Actual_use.Usage_project %}
 		{% endif %}
-		
 		
 </div>	
 
