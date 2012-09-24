@@ -10,39 +10,72 @@
 	    {% include "repository/resource_view/target_resource.html" with target=usage_dict.Usage.Resource_associated_with title="Associated Resource" %}
 	{% endif %}
 	
-	
 	<label class='title'>Foreseen Use</label>	
-			
-	     <div class="dataline indented">
-			<label>
-				<strong>Foreseen Use:</strong> {{ usage_dict.Usage.Foreseen_use.Foreseen_use }}
-			</label>
-		</div>
-		
-		{% if usage_dict.Usage.Foreseen_use.UseNLPSpecific %}
-		     <div class="dataline indented">
-				<label>
-					<strong>Use NLP Specific:</strong> {{ usage_dict.Usage.Foreseen_use.UseNLPSpecific }}
-				</label>
-			</div>
-		{% endif %}
-		
+		{% for key, value in usage_dict.items %}
+			{% if "Foreseen_use" in value %}
+				{% for key1, value1 in value.items %}
+					{% if "Foreseen_use" in key1 %}
+						<div class="dataline indented">
+							<label>
+								<strong>Foreseen Use:</strong> {{ value1.Foreseen_use }}
+							</label>
+						</div>					
+								
+						{% if value1.Use_nlpspecific %}
+						     <div class="dataline indented">
+								<label>
+									<strong>Use NLP Specific:</strong> {{ value1.Use_nlpspecific }}
+								</label>
+							</div>
+						{% endif %}
+					<hr/>
+					{% endif %}
+				{% endfor %}
+				
+			{% endif %}
+		{% endfor %}
 	
 	<label class='title'>Actual Use</label>	
+	
+	{% for key, value in usage_dict.items %}
+		{% if "Actual_use" in value %}
+			{% for key1, value1 in value.items %}
+				{% if "Actual_use" in key1 %}
+					<div class="dataline indented">
+						<label>
+							<strong>Actual Use:</strong> {{ value1.Actual_use }}
+						</label>
+					</div>					
+							
+					{% if value1.Use_nlpspecific %}
+					     <div class="dataline indented">
+							<label>
+								<strong>Use NLP Specific:</strong> {{ value1.Use_nlpspecific }}
+							</label>
+						</div>
+					{% endif %}
+																		
+					{% if value1.Actual_use_details %}
+					     <div class="dataline indented">
+							<label>
+								<strong>Details:</strong> {{ value1.Actual_use_details }}
+							</label>
+						</div>
+					{% endif %}
+					
+				<hr/>
+				{% endif %}
+			{% endfor %}
 			
-	     <div class="dataline indented">
-			<label>
-				<strong>Actual Use:</strong> {{ usage_dict.Usage.Actual_use.Actual_use }}
-			</label>
-		</div>
-		
-		{% if usage_dict.Usage.Actual_use.UseNLPSpecific %}
-		     <div class="dataline indented">
-				<label>
-					<strong>Use NLP Specific:</strong> {{ usage_dict.Usage.Actual_use.UseNLPSpecific }}
-				</label>
-			</div>
 		{% endif %}
+	{% endfor %}	
+	
+	
+	
+	
+			
+			
+	    
 	
 		{% if usage_dict.Usage.Actual_use.Usage_report %}
 			{% if usage_dict.Usage.Actual_use.Usage_report.Usage_report.Title %}
