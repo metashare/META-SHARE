@@ -447,6 +447,7 @@ def view(request, resource_name=None, object_id=None):
     linguality_infos = set(model_utils.get_resource_linguality_infos(resource))
     license_types = set(model_utils.get_resource_license_types(resource))
 
+    
     distribution_info_tuple = None
     contact_person_tuples = []
     metadata_info_tuple = None
@@ -506,6 +507,7 @@ def view(request, resource_name=None, object_id=None):
     for item in relation_info_tuples:
         relation_dicts.append(tuple2dict([item]))
 
+	# Create a list of resource components dictionaries
     if resource_type == "corpus":
         for media_type in media_types:
             if media_type == "text":
@@ -574,29 +576,30 @@ def view(request, resource_name=None, object_id=None):
 
     
     # Define context for template rendering.
-    context = { 'resource': resource,
-                'resourceName': resource_name,
-                'res_short_names': res_short_names,
+    context = {
+                'contact_person_dicts': contact_person_dicts,
                 'description': description,
+                'distribution_dict': distribution_dict,
+                'documentation_dict': documentation_dict,
+                'license_types': license_types,
+                'linguality_infos': linguality_infos,
+                'mediaTypes': media_types,
+                'metadata_dict': metadata_dict,
+                'metaShareId': metashare_id,
                 'other_res_names': other_res_names,
                 'other_descriptions': other_descriptions,
-                'distribution_info_tuple': distribution_info_tuple,
-                'version_info_tuple': version_info_tuple,
-                'linguality_infos': linguality_infos,
-                'license_types': license_types,
-                'resourceType': resource_type,
+                'relation_dicts': relation_dicts,
+                'res_short_names': res_short_names,
+                'resource': resource,
                 'resource_component_dicts': resource_component_dicts,
-                'distribution_dict': distribution_dict,
-                'mediaTypes': media_types,
-                'url': url,
-                'metaShareId': metashare_id,
-                'contact_person_dicts': contact_person_dicts,
+                'resourceName': resource_name,
+                'resourceType': resource_type,
                 'resource_creation_dict': resource_creation_dict,
-                'metadata_dict': metadata_dict,
+                'url': url,
                 'usage_dict': usage_dict,
                 'validation_dicts': validation_dicts,                
-                'documentation_dict': documentation_dict,
-                'relation_dicts': relation_dicts,
+                'version_info_tuple': version_info_tuple,
+
                 }
     template = 'repository/resource_view/lr_view.html'
 

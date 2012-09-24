@@ -30,73 +30,80 @@
 {% endif %}
 
 
-
-
 {% if distribution.Distribution.Licence %}
 <label class="title">Licence Information</label>
-{% if distribution.Distribution.Licence.Licence %}
-	 <div class="dataline indented">
-		<label>
-			<strong>Licence: </strong>{{ distribution.Distribution.Licence.Licence }}
-		</label>
-	</div>
-{% endif %}
+	{% if distribution.Distribution.Licence.Licence %}
+		 <div class="dataline indented">
+			<label>
+				<strong>Licence: </strong>{{ distribution.Distribution.Licence.Licence }}
+			</label>
+		</div>
+	{% endif %}
 
-{% if distribution.Distribution.Licence.Restrictions_of_use %}
-	 <div class="dataline indented">
-		<label>
-			<strong>Restrictions: </strong>{{ distribution.Distribution.Licence.Restrictions_of_use }}
-		</label>
-	</div>
-{% endif %}
+	{% if distribution.Distribution.Licence.Restrictions_of_use %}
+		 <div class="dataline indented">
+			<label>
+				<strong>Restrictions: </strong>{{ distribution.Distribution.Licence.Restrictions_of_use }}
+			</label>
+		</div>
+	{% endif %}
 
-{% if distribution.Distribution.Licence.Distribution_access_medium %}
-	 <div class="dataline indented">
-		<label>
-			<strong>Distribution Access/Medium: </strong>{{ distribution.Distribution.Licence.Distribution_access_medium }}
-		</label>
-	</div>
-{% endif %}
+	{% if distribution.Distribution.Licence.Distribution_access_medium %}
+		 <div class="dataline indented">
+			<label>
+				<strong>Distribution Access/Medium: </strong>{{ distribution.Distribution.Licence.Distribution_access_medium }}
+			</label>
+		</div>
+	{% endif %}
 
-{% if distribution.Distribution.Licence.Download_location %}
-	 <div class="dataline indented">
-		<label>
-			<strong>Download location: </strong>{{ distribution.Distribution.Licence.Download_location|urlize }}
-		</label>
-	</div>
-{% endif %}
+	{% if distribution.Distribution.Licence.Download_location %}
+		 <div class="dataline indented">
+			<label>
+				<strong>Download location: </strong>{{ distribution.Distribution.Licence.Download_location|urlize }}
+			</label>
+		</div>
+	{% endif %}
 
-{% if distribution.Distribution.Licence.Execution_location %}
-	 <div class="dataline indented">
-		<label>
-			<strong>Execution location: </strong>{{ distribution.Distribution.Licence.Execution_location|urlize }}
-		</label>
-	</div>
-{% endif %}
+	{% if distribution.Distribution.Licence.Execution_location %}
+		 <div class="dataline indented">
+			<label>
+				<strong>Execution location: </strong>{{ distribution.Distribution.Licence.Execution_location|urlize }}
+			</label>
+		</div>
+	{% endif %}
 
-{% if distribution.Distribution.Licence.Fee %}
-	 <div class="dataline indented">
-		<label>
-			<strong>Fee: </strong>{{ distribution.Distribution.Licence.Fee }}
-		</label>
-	</div>
-{% endif %}
+	{% if distribution.Distribution.Licence.Fee %}
+		 <div class="dataline indented">
+			<label>
+				<strong>Fee: </strong>{{ distribution.Distribution.Licence.Fee }}
+			</label>
+		</div>
+	{% endif %}
 
-{% if distribution.Distribution.Licence.Attribution %}
-	 <div class="dataline indented">
-		<label>
-			<strong>Attribution details: </strong>{{ distribution.Distribution.Licence.Attribution }}
-		</label>
-	</div>
-{% endif %}
+	{% if distribution.Distribution.Licence.Attribution %}
+		 <div class="dataline indented">
+			<label>
+				<strong>Attribution details: </strong>{{ distribution.Distribution.Licence.Attribution }}
+			</label>
+		</div>
+	{% endif %}
 
-{% if distribution.Distribution.Licence.Attribution %}
-	 <div class="dataline indented">
-		<label>
-			<strong>Attribution details: </strong>{{ distribution.Distribution.Licence.Attribution }}
-		</label>
-	</div>
-{% endif %}
+	{% if distribution.Distribution.Licence.Attribution %}
+		 <div class="dataline indented">
+			<label>
+				<strong>Attribution details: </strong>{{ distribution.Distribution.Licence.Attribution }}
+			</label>
+		</div>
+	{% endif %}
+
+	{% if distribution.Distribution.Ipr_holder %}
+		<label class='title'>IPR Holder</label>
+		{% for key, value in distribution.Distribution.items %}
+			{% if "Ipr_holder" in key %}
+				{% include "repository/resource_view/person.html" with person_dict=value.Ipr_holder %}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
 
 {% endif %}
 

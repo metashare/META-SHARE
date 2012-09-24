@@ -1,15 +1,34 @@
 {% spaceless %}
 
-{# TODO: Add zise info #}
-<label class='component'>Languages:</label>
+<label class='component'>Languages</label>
 <div class="dataline">
-	{% for key, value in languages.items %}
+{% for key, value in languages.items %}
 		{% for key1, value1 in value.items %}
-			{% if key1 == "Language_name" %}
-				<label class="dataline" title="{{value.Language_id}}">{{ value1 }}{% if not forloop.last %}, {% endif %}</label>
-			{% endif %}
+			<div>
+				{% if key1 == "Language_name" %}
+					<label class="dataline" title="{{value.Language_id}}">
+						{{ value1 }}
+						{# Take care of size #}
+						{% if "Size_per_language" in value %} 
+							{% if value.Size_per_language %}
+								({% include "repository/resource_view/size.html" with size=value.Size_per_language type="sub" %}) 
+							{% endif %}
+						{% endif %}
+						 
+						{# Take care of language variety #}
+						{% if "Language_variety" in value %}&mdash; 
+							<strong>variety: </strong>
+							{{ value.Language_variety.Language_variety_name }}
+							{% if value.Language_variety.Size_per_language_variety %}
+								({% include "repository/resource_view/size.html" with size=value.Language_variety.Size_per_language_variety type="sub" %})
+							{% endif %}
+						{% endif %}		 
+					</label>
+				{% endif %}
+			</div>
 		{% endfor %}
-	{% endfor %}
+{% endfor %}
+
 </div>
 
 {% endspaceless %}
