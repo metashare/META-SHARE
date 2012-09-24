@@ -295,15 +295,20 @@ class StorageObject(models.Model):
             # If not, create the storage folder.
             mkdir(self._storage_folder())
 
-        # update the checksum, if a downloadable file exists
         if self.master_copy:
-            checksum_updated = self._compute_checksum()
+            # update the checksum, if a downloadable file exists
+            checksum_or_url_updated = self._compute_checksum()
+            # make sure that any changes to the DJANGO_URL are also reflected
+            # in the `source_url` field of master copies
+            if self.source_url != settings.DJANGO_URL:
+                self.source_url = settings.DJANGO_URL
+                checksum_or_url_updated = True
         else:
-            checksum_updated = False
+            checksum_or_url_updated = False
 
         # for internal resources, no serialization is done
         if self.publication_status == INTERNAL:
-            if checksum_updated:
+            if checksum_or_url_updated:
                 self.save()
             return
 
@@ -325,7 +330,7 @@ class StorageObject(models.Model):
         # save storage object if required; this should always happen since
         # at least self.digest_last_checked in the local storage object 
         # has changed
-        if checksum_updated or metadata_updated or global_updated \
+        if checksum_or_url_updated or metadata_updated or global_updated \
                 or local_updated:
             self.save()
 
