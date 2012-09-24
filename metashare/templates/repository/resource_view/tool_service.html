@@ -157,6 +157,7 @@
 		{% endif %}
 		
 		{% if tool_service.Tool_service_evaluation.Evaluator %}
+			<label class="title">Evaluator</label>
 			{% include "repository/resource_view/person.html" with person_dict=tool_service.Tool_service_evaluation.Evaluator.Evaluator title="Evaluator" %}
 			<hr/>
 		{% endif %}		
