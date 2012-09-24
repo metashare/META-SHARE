@@ -99,6 +99,7 @@
 	{% if distribution.Distribution.Ipr_holder %}
 		{% for key, value in distribution.Distribution.items %}
 			{% if "Ipr_holder" in key %}
+				<label class="title">IPR Holder</label>
 				{% include "repository/resource_view/person.html" with person_dict=value.Ipr_holder title="IPR Holder" %}
 				<hr/>
 			{% endif %}

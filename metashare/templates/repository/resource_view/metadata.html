@@ -64,11 +64,14 @@
 </div>
 <div class="dataline">
 {% for key, value in metadata_dict.items %}
-		{% for key1, value1 in value.items %}
-			{% if key1 == "Metadata_creator" %}			
-			     {% include "repository/resource_view/person.html" with person_dict=value1 title="Metadata Creator" %}
-				<hr/>
-			{% endif %}			
-		{% endfor %}
+	{% if "Metadata_creator" in value %}
+		<label class="title">Metadata Creator</label>
+	{% endif %}
+	{% for key1, value1 in value.items %}
+		{% if "Metadata_creator" in key1 %}
+		     {% include "repository/resource_view/person.html" with person_dict=value1 title="Metadata Creator" %}
+			<hr/>
+		{% endif %}			
+	{% endfor %}
 {% endfor %}
 </div>
