@@ -4,9 +4,7 @@ from zipfile import ZipFile
 from metashare import settings
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
-from metashare.storage.models import StorageObject, MASTER, PROXY, INTERNAL, \
-    RemovedObject
-import dateutil.parser
+from metashare.storage.models import StorageObject, MASTER, PROXY, INTERNAL
 
 def inventory(request):
     if settings.SYNC_NEEDS_AUTHENTICATION and not request.user.has_perm('storage.can_sync'):
@@ -15,36 +13,23 @@ def inventory(request):
     response['Metashare-Version'] = settings.METASHARE_VERSION
     response['Content-Disposition'] = 'attachment; filename="inventory.zip"'
 
+    # collect inventory for existing resources;
+    # consists of key - value pairs of resource identifiers and digest checksums
     json_response = {}
-    # collect inventory for existing resources
-    json_existing = []
     objects_to_sync = StorageObject.objects \
         .filter(Q(copy_status=MASTER) | Q(copy_status=PROXY)) \
         .exclude(publication_status=INTERNAL)
-    if 'from' in request.GET:
-        try:
-            fromdate = dateutil.parser.parse(request.GET['from'])
-            objects_to_sync = objects_to_sync.filter(digest_modified__gte=fromdate)
-        except ValueError:
-            # If we cannot parse the date string, act as if none was provided
-            pass
+    # 'from' parameter for restricting the inventory CAN NOT be used anymore
+    # since it would break to automatic detection of deleted resources
+#    if 'from' in request.GET:
+#        try:
+#            fromdate = dateutil.parser.parse(request.GET['from'])
+#            objects_to_sync = objects_to_sync.filter(digest_modified__gte=fromdate)
+#        except ValueError:
+#            # If we cannot parse the date string, act as if none was provided
+#            pass
     for obj in objects_to_sync:
-        json_existing.append({'id':str(obj.identifier), 'digest':str(obj.get_digest_checksum())})
-    json_response['existing'] = json_existing
-    
-    # collect inventory for removed resources
-    json_removed = []
-    objects_to_remove = RemovedObject.objects.all()
-    if 'from' in request.GET:
-        try:
-            fromdate = dateutil.parser.parse(request.GET['from'])
-            objects_to_remove = objects_to_remove.filter(removed__gte=fromdate)
-        except ValueError:
-            # If we cannot parse the date string, act as if none was provided
-            pass
-    for obj in objects_to_remove:
-        json_removed.append(str(obj.identifier))
-    json_response['removed'] = json_removed
+        json_response[obj.identifier] = obj.get_digest_checksum()
     
     with ZipFile(response, 'w') as outzip:
         outzip.writestr('inventory.json', json.dumps(json_response))
