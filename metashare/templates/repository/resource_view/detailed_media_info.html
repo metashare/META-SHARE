@@ -1,9 +1,7 @@
 {% spaceless %}
 
 {% if type == "toolService" %}
-
 	{% include "repository/resource_view/tool_service.html" with tool_service=resource_component %}
-
 {% else %}
 
 	{# Type info #}
@@ -23,6 +21,19 @@
 	{% if "Size" in resource_component %}
 		{% include "repository/resource_view/size.html" with size=resource_component %}
 	{% endif %}
+	
+	{% if "Audio_size" in resource_component %}
+		{% include "repository/resource_view/size.html" with size=resource_component.Audio_size %}
+	{% endif %}
+	
+	{% if "Video_size" in resource_component %}
+		{% include "repository/resource_view/size.html" with size=resource_component.Video_size %}
+	{% endif %}
+
+	{% if "Image_size" in resource_component %}
+		{% include "repository/resource_view/size.html" with size=resource_component.Image_size %}
+	{% endif %}	
+	
 
 	{# Domain Information #}
 	{% if "Domain" in resource_component %}
@@ -45,7 +56,5 @@
 	{% endif %}
 
 {% endif %}
-
-
 
 {% endspaceless %}
