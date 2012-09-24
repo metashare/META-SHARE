@@ -115,8 +115,11 @@ def getLRStats(lrid):
     return json.loads("["+data+"]")
 
     
-def getUserCount(lrid, user):
-    users = LRStats.objects.values('userid').filter(lrid=lrid).exclude(userid=user).annotate(Count('userid'))
+def getUserCount(lrid, user = None):
+    if user != None:
+        users = LRStats.objects.values('userid').filter(lrid=lrid).exclude(userid=user).annotate(Count('userid'))
+    else:
+        users = LRStats.objects.values('userid').filter(lrid=lrid).annotate(Count('userid'))
     for key in users:
         return key['userid__count']
     return 0
@@ -172,14 +175,17 @@ def getLRLast(action, limit, geoinfo=None, offset=0):
     action_list = []
     if (action and not action == ""):
         if (geoinfo != None and geoinfo is not ""):
-            action_list =  LRStats.objects.values('lrid', 'action', 'lasttime').filter(ignored=False, \
-                action=action, geoinfo=geoinfo).order_by('-lasttime')[offset:offset+limit]
+            action_list = LRStats.objects.values('lrid', 'action', 'lasttime') \
+                .filter(ignored=False, action=action, geoinfo=geoinfo) \
+                .order_by('-lasttime')[offset:offset+limit]
         else:
-            action_list =  LRStats.objects.values('lrid', 'action', 'lasttime').filter(ignored=False, \
-                action=action).order_by('-lasttime')[offset:offset+limit]    
+            action_list = LRStats.objects.values('lrid', 'action', 'lasttime') \
+                .filter(ignored=False, action=action) \
+                .order_by('-lasttime')[offset:offset+limit]    
     else:
-        action_list =  LRStats.objects.values('lrid', 'action', 'lasttime').filter(ignored=False).\
-            order_by('-lasttime')[offset:offset+limit]
+        action_list = LRStats.objects.values('lrid', 'action', 'lasttime') \
+            .filter(ignored=False) \
+            .order_by('-lasttime')[offset:offset+limit]
     return action_list
 
 def getTopQueries(limit, geoinfo=None, since=None, offset=0):

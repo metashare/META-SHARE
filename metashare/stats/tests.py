@@ -12,7 +12,7 @@ from metashare.accounts.models import EditorGroup, EditorGroupManagers
 from metashare.repository.models import resourceInfoType_model
 from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER, STATS_SERVER_URL, DJANGO_URL
 from metashare.storage.models import INGESTED
-from metashare.stats.model_utils import UsageStats, saveLRStats, getLRLast, saveQueryStats, getLastQuery, \
+from metashare.stats.model_utils import UsageStats, saveLRStats, getLRLast, getLastQuery, \
     UPDATE_STAT, VIEW_STAT, RETRIEVE_STAT, DOWNLOAD_STAT
 
 
@@ -261,4 +261,4 @@ class StatsTest(TestCase):
         response = client.get('/{0}stats/usage/'.format(DJANGO_BASE))
         self.assertContains(response, "Metadata usage in 2 resources")
         
-
+        

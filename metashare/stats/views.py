@@ -64,12 +64,18 @@ def mystats (request):
     entry_list = getMyResources(request.user.username)
     for resource in entry_list:
         if not resource.storage_object.deleted:
-            lastaccess = LRStats.objects.values('lasttime').filter(lrid=resource.storage_object.identifier).order_by('-lasttime')[:1]
+            lastaccesstime = ""
+            lastaccess = LRStats.objects.values('lasttime').filter(lrid=resource.storage_object.identifier) \
+                .exclude(userid=request.user.username).order_by('-lasttime')[:1]
+            if len(lastaccess) > 0:
+                lastaccesstime = lastaccess[0]["lasttime"].strftime("%Y/%m/%d - %I:%M:%S")
+                
             data.append([resource.id, resource.get_absolute_url, resource, resource.storage_object.publication_status, \
                 getLRStats(resource.storage_object.identifier), getUserCount(resource.storage_object.identifier, request.user.username), \
-                lastaccess[0]["lasttime"].strftime("%Y/%m/%d - %I:%M:%S")])
+                lastaccesstime])
     return render_to_response('stats/mystats.html', 
-        {"data": data},
+        {'data': data,
+        'myres': isOwner(request.user.username)},
         context_instance=RequestContext(request))
  
 def getMyResources(username):
@@ -347,7 +353,7 @@ def getstats (request):
     data['lrcount'] = resourceInfoType_model.objects.filter(
         storage_object__publication_status=PUBLISHED,
         storage_object__deleted=False).count()
-    data['lrmastercount'] = StorageObject.objects.filter(copy_status=MASTER).count()
+    data['lrmastercount'] = StorageObject.objects.filter(copy_status=MASTER, publication_status=PUBLISHED, deleted=False).count()
     data['lrupdate'] = LRStats.objects.filter(lasttime__startswith=currdate, action=UPDATE_STAT).count()
     data['lrview'] = LRStats.objects.filter(lasttime__startswith=currdate, action=VIEW_STAT).count()
     data['lrdown'] = LRStats.objects.filter(lasttime__startswith=currdate, action=DOWNLOAD_STAT).count()
@@ -435,4 +441,4 @@ def pretty_timeago(timein=False):
     if day_diff < 365:
         return str(day_diff/30) + " months ago"
     return str(day_diff/365) + " years ago"
-    
+

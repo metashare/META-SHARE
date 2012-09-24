@@ -2,6 +2,10 @@
 
 {% block content %}
 
+
+{% if not myres %}
+    <script>window.location.replace("{% url metashare.views.frontpage %}stats/top/");</script>
+{% endif %}
 <link rel="stylesheet" href="{{ MEDIA_URL }}/css/view_stats.css" type="text/css" media="screen" />
 
 <div class='tab-container'>

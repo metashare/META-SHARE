@@ -1198,7 +1198,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         # explicitly write metadata XML and storage object to the storage folder
         obj.storage_object.update_storage()
         # update statistics
-        saveLRStats(obj, INGEST_STAT, request)          
+        saveLRStats(obj, DELETE_STAT, request)          
                 
     def change_view(self, request, object_id, extra_context=None):
         _extra_context = extra_context or {}
