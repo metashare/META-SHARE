@@ -1,6 +1,6 @@
 {% spaceless %}
 
-<label class='component'>Validation:</label>
+<label class='component'>Validation</label>
 
 {% for dict in validation_dicts %}
      <div class="dataline indented">
@@ -56,8 +56,6 @@
 			</label>
 		</div>	
 	{% endif %}
-
-
 	
 	{% if dict.Validation.Validation_report %}
 		{% if dict.Validation.Validation_report.Validation_report.Title %}
@@ -74,8 +72,6 @@
 	{% if dict.Validation.Validation_tool %}
 			{% include "repository/resource_view/target_resource.html" with target=dict.Validation.Validation_tool title="Validation Tool" %}
 	{% endif %}
-	
-	
 	
 	<div class="dataline">
 		{% for key, value in dict.items %}
