@@ -3,7 +3,6 @@
 <label class='component'>Resource Creation</label>
 
 <div class="dataline">
-
 {% for key, value in resource_creation_dict.items %}
 	{% if "Resource_creator" in value %}
 		<label class="title">Resource Creator</label>
@@ -11,7 +10,7 @@
 	{% for key1, value1 in value.items %}
 		{% if "Resource_creator" in key1 %}		
 			{% for key2, value2 in value1.items %}
-				{% include "repository/resource_view/person.html" with person_dict=value2 %}
+				{% include "repository/resource_view/person.html" with person_dict=value2 type="Resource Creator" %}
 				<hr/>
 			{% endfor %}
 		{% endif %}

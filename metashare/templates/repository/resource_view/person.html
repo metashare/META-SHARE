@@ -2,9 +2,8 @@
 {% load get_icon %}
 {% spaceless %}
 
-{% if type == "Contact Person" or type == "Metadata Creator" %}
-{% else %}
-	<label class='title'>{{title}}</label>
+{% if type != "Contact Person" and type != "Metadata Creator" and type != "Resource Creator" %}
+	<label class='title'>{{type}}</label>
 {% endif %}
 
 <a href='#' class="contactcard" title="Click to view contact card">
