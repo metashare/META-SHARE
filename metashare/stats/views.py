@@ -86,22 +86,23 @@ def isOwner(username):
 def usagestats (request):
     """  Get usage of fields LR """        
     expand_all = request.POST.get('expandall')    
-    selected_class = request.POST.get('class')
-    selected_field = request.POST.get('field')
+    selected_class = request.POST.get('class', "")
+    selected_field = request.POST.get('field', "")
     selected_filters = request.POST.getlist('filter')
 
     textvalues = []
-    resultset = UsageStats.objects.values('text') \
-        .filter(elparent=selected_class, \
-            elname=selected_field) \
-        .annotate(Count('elname'), Sum('count')) \
-        .order_by('-elname__count')
-    if len(resultset) > 0:
-        for item in resultset:
-            text = item["text"]
-            if selected_field in NOACCESS_FIELDS:
-                text = "<HIDDEN VALUE>"   
-            textvalues.append([text, item['elname__count'], item['count__sum']])
+    if selected_class != "" and selected_field != "":
+        resultset = UsageStats.objects.values('text') \
+            .filter(elparent=selected_class, \
+                elname=selected_field) \
+            .annotate(Count('elname'), Sum('count')) \
+            .order_by('-elname__count')
+        if len(resultset) > 0:
+            for item in resultset:
+                text = item["text"]
+                if selected_field in NOACCESS_FIELDS:
+                    text = "<HIDDEN VALUE>"   
+                textvalues.append([text, item['elname__count'], item['count__sum']])
 
     #published resource counter
     lrset = resourceInfoType_model.objects.filter(

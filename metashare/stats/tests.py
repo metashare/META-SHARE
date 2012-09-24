@@ -100,10 +100,29 @@ class StatsTest(TestCase):
         Tries to load the visiting stats page of the META-SHARE website.
         """
         client = Client()
+        client.login(username='manageruser', password='secret')
+        resources =  resourceInfoType_model.objects.all()
+        for resource in resources:
+            resource.storage_object.publication_status = INGESTED
+            resource.storage_object.save()
+            client.post(ADMINROOT, \
+                {"action": "publish_action", ACTION_CHECKBOX_NAME: resource.id}, \
+                follow=True)
+            url = resource.get_absolute_url()
+            response = client.get(url, follow = True)
+            self.assertTemplateUsed(response,
+                'repository/resource_view/lr_view.html')
+
+        response = client.get('/{0}stats/top/?view=latestupdated'.format(DJANGO_BASE))
+        self.assertNotContains(response, "No data found")
+
         response = client.get('/{0}stats/top/'.format(DJANGO_BASE))
         self.assertTemplateUsed(response, 'stats/topstats.html')
         self.assertContains(response, "META-SHARE node visits statistics")
-        #self.assertNotContains(response, "No data found")
+        self.assertNotContains(response, "No data found")
+
+        response = client.get('/{0}stats/top/?last=week'.format(DJANGO_BASE))
+        self.assertNotContains(response, "No data found")
 
 
     def test_latest_queries(self):
@@ -177,9 +196,6 @@ class StatsTest(TestCase):
             self.assertTemplateUsed(response,
                 'repository/resource_view/lr_view.html')
         
-        response = client.get('/{0}stats/top/?view=latestupdated'.format(DJANGO_BASE))
-        self.assertNotContains(response, "No data found")
-
         statsdata = getLRLast(VIEW_STAT, 10)
         self.assertEqual(2, len(statsdata))
 
