@@ -31,57 +31,50 @@
 		{% include "repository/resource_view/input_output.html" with type="Output" data=tool_service.Output %}
 	{% endif %}
 	
-	{% if tool_service.tool_service_operation %}
+	{% if tool_service.Tool_service_operation %}
 		<label class='component'>Operation</label>
-		{% if tool_service.tool_service_operation.Operating_system %}
+		{% if tool_service.Tool_service_operation.Operating_system %}
 			 <div class="dataline">
 				<label>
-					<strong>Operating system: </strong>{{ tool_service.tool_service_operation.Operating_system }}
+					<strong>Operating system: </strong>{{ tool_service.Tool_service_operation.Operating_system }}
 				</label>
 			</div>
 		{% endif %}
-			
-		{% if tool_service.tool_service_operation.Running_environment %}
-			{% if tool_service.tool_service_operation.Running_environment.Required_software %}
-				{% if tool_service.tool_service_operation.Running_environment.Required_software.Target_resource.Target_resource_name_uri %}
-					 <div class="dataline">
-						<label>
-							<strong>Required Software: </strong>{{ tool_service.tool_service_operation.Running_environment.Required_software.Target_resource.Target_resource_name_uri }}
-						</label>
-					</div>
-				{% endif %}
+		
+		{% if tool_service.Tool_service_operation.Running_environment %}
+			{% if tool_service.Tool_service_operation.Running_environment.Required_software %}
+				{% include "repository/resource_view/target_resource.html" with target=tool_service.Tool_service_operation.Running_environment.Required_software title="Required Software" %}
 			{% endif %}
 			
-			{% if tool_service.tool_service_operation.Running_environment.Required_hardware %}
+			{% if tool_service.Tool_service_operation.Running_environment.Required_hardware %}
 				 <div class="dataline">
 					<label>
-						<strong>Required hardware: </strong>{{ tool_service.tool_service_operation.Running_environment.Required_hardware }}
+						<strong>Required hardware: </strong>{{ tool_service.Tool_service_operation.Running_environment.Required_hardware }}
 					</label>
 				</div>
 			{% endif %}
 			
-			{% if tool_service.tool_service_operation.Running_environment.Required_lrs %}
-				{% if tool_service.tool_service_operation.Running_environment.Required_lrs.Target_resource.Target_resource_name_uri %}
-					 <div class="dataline">
-						<label>
-							<strong>Required Software: </strong>{{ tool_service.tool_service_operation.Running_environment.Required_lrs.Target_resource.Target_resource_name_uri }}
-						</label>
-					</div>
+			{% if tool_service.Tool_service_operation.Running_environment.Required_lrs %}
+				{% if tool_service.Tool_service_operation.Running_environment %}
+					{% if tool_service.Tool_service_operation.Running_environment.Required_software %}
+						{% include "repository/resource_view/target_resource.html" with target=tool_service.Tool_service_operation.Running_environment.Required_lrs title="Required LRs" %}
+					{% endif %}
 				{% endif %}
 			{% endif %}
-			{% if tool_service.tool_service_operation.Running_environment.Running_environment_details %}
+			
+			{% if tool_service.Tool_service_operation.Running_environment.Running_environment_details %}
 				 <div class="dataline">
 					<label>
-						<strong>Running environment details: </strong>{{ tool_service.tool_service_operation.Running_environment.Running_environment_details }}
+						<strong>Running environment details: </strong>{{ tool_service.Tool_service_operation.Running_environment.Running_environment_details }}
 					</label>
 				</div>
 			{% endif %}
 		{% endif %}
 
-		{% if tool_service.tool_service_operation.Running_time %}
+		{% if tool_service.Tool_service_operation.Running_time %}
 			 <div class="dataline">
 				<label>
-					<strong>Running time: </strong>{{ tool_service.tool_service_operation.Running_time }}
+					<strong>Running time: </strong>{{ tool_service.Tool_service_operation.Running_time }}
 				</label>
 			</div>
 		{% endif %}
@@ -138,8 +131,7 @@
 						<strong>Evaluation Report: </strong>{{ tool_service.Tool_service_evaluation.Evaluation_report.Evaluation_report }}
 					</label>
 				</div>
-			{% endif %}
-					
+			{% endif %}					
 		{% endif %}
 
 		{% if tool_service.Tool_service_evaluation.Evaluation_tool %}
@@ -186,7 +178,7 @@
 		{% endif %}
 		
 		{% if tool_service.Tool_service_creation.Original_source %}
-			{% if tool_service.Tool_service_creation.Original_source.Target_resource.Target_resource_name_uri %}
+			{% if tool_service.Tool_service_creation.Original_source.Target_resource %}
 				{% include "repository/resource_view/target_resource.html" with target=tool_service.Tool_service_creation.Original_source.Target_resource  title="Original Source" %}
 			{% endif %}
 		{% endif %}
