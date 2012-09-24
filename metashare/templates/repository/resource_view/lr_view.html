@@ -202,6 +202,10 @@
 		  
 		{% include "repository/resource_view/metadata.html" %}
 		
+		{% if version_dict %}
+			{% include "repository/resource_view/version.html" %}
+		{% endif %}
+		
 		{% if validation_dicts %}
 			{% include "repository/resource_view/validation.html" %}
 		{% endif %}
@@ -210,7 +214,7 @@
 			{% include "repository/resource_view/usage.html" %}
 		{% endif %}
 		
-		{% if relation_dict %}
+		{% if relation_dicts %}
 			{% include "repository/resource_view/relation.html" %}
 		{% endif %}
 		
@@ -244,10 +248,7 @@
 								</div>
 							{% endif %}
 							<hr/>
-						{% endif %}
-						
-						
-						
+						{% endif %}						
 					{% endfor %}
 				{% endfor %}
 			{% endfor %}
