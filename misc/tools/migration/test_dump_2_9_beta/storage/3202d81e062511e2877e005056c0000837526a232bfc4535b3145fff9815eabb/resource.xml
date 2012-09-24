@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<django-objects version="1.0"><object pk="1" model="repository.resourceinfotype_model"><field to="accounts.editorgroup" name="editor_groups" rel="ManyToManyRel"></field><field to="auth.user" name="owners" rel="ManyToManyRel"><object pk="2"></object><object pk="3"></object><object pk="5"></object><object pk="6"></object><object pk="7"></object></field></object></django-objects>
