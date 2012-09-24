@@ -176,12 +176,18 @@ def browse(request):
         host_info.append(pretty_timeago(node['timestamp']))
         for datakey, datalabel in DATA_STATS_CHOICES:
             if (currdate):
-                datastats = NodeStats.objects.values('node__hostname').filter(node__hostname=hostname, date=currdate, datakey=datakey).annotate(Sum('dataval'))
+                datastats = NodeStats.objects.values('node__hostname') \
+                    .filter(node__hostname=hostname, date=currdate, datakey=datakey) \
+                    .annotate(Sum('dataval'))
             else:
                 if (datalabel[1] == "global"):
-                    datastats = NodeStats.objects.values('node__hostname').filter(node__hostname=hostname, datakey=datakey).order_by("-date")[:1].annotate(Sum('dataval'))
+                    datastats = NodeStats.objects.values('node__hostname') \
+                        .filter(node__hostname=hostname, datakey=datakey) \
+                        .order_by("-date")[:1].annotate(Sum('dataval'))
                 else:
-                    datastats = NodeStats.objects.values('node__hostname').filter(node__hostname=hostname, datakey=datakey).annotate(Sum('dataval'))
+                    datastats = NodeStats.objects.values('node__hostname') \
+                        .filter(node__hostname=hostname, datakey=datakey) \
+                        .annotate(Sum('dataval'))
                     
             if (datastats):
                 if (datakey not in total_counter):
@@ -197,7 +203,7 @@ def browse(request):
                     else:
                         total_counter[datakey] += int(datastats[0]["dataval__sum"])
             else:
-                host_info.append(0)
+                host_info.append("N/A")
         hosts.append(host_info) 
             
     if ("qexec_time_avg" in total_counter):
@@ -228,7 +234,9 @@ def browse(request):
             continue
           
         for node in traffic:
-            host_action = NodeStats.objects.values('node__hostname').filter(node__hostname=node['hostname'], datakey=afield).annotate(Sum("dataval"))
+            host_action = NodeStats.objects.values('node__hostname') \
+                .filter(node__hostname=node['hostname'], datakey=afield) \
+                .annotate(Sum("dataval"))
             for action in host_action:
                 actions_byhost[alabel].append(int(action["dataval__sum"]))
         
@@ -240,9 +248,16 @@ def browse(request):
             labeldate = day[0:4] +","+str(int(day[5:7])-1)+","+day[8:10]
             dates[labeldate] = int(key["dataval__sum"])
         actions_bydate[alabel] = dates
-    return render_to_response('templates/metastats.html', {'host_labels': host_labels, \
-            'stats_fields': DATA_STATS_CHOICES, 'traffic': hosts, 'actions_byhost': actions_byhost, \
-    'actions_bydate': actions_bydate, 'media_prefix': MEDIA_URL, 'date': days, 'currdate': currdate, 'showupnodes': showupnodes})
+    return render_to_response('templates/metastats.html',
+        {'host_labels': host_labels,
+        'stats_fields': DATA_STATS_CHOICES,
+        'traffic': hosts, 
+        'actions_byhost': actions_byhost,
+        'actions_bydate': actions_bydate,
+        'media_prefix': MEDIA_URL, 
+        'date': days, 
+        'currdate': currdate, 
+        'showupnodes': showupnodes})
 
 
 def collectnodestats(node=None):
