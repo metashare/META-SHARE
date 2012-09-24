@@ -332,6 +332,11 @@ a .indented{
 	cursor:pointer;
 }
 
+.contactcard .dataline{
+	font-weight:normal;
+	font-size:14px;
+}
+
 .dataline span a{
 	padding:0px;
 	margin:0px;
