@@ -32,7 +32,6 @@ USERS = "users.xml"
 USER_PROFILES = "user-profiles.xml"
 LR_STATS = "lr-stats.xml"
 QUERY_STATS = "query-stats.xml"
-USAGE_STATS = "usage-stats.xml"
 STORAGE_FOLDER = "storage"
 STORAGE = "storage.xml"
 METADATA = "metadata.xml"
@@ -66,10 +65,37 @@ def import_stats(import_folder):
     _import(os.path.join(import_folder, "{}".format(LR_STATS)))
     # import query stats
     _import(os.path.join(import_folder, "{}".format(QUERY_STATS)))
-    # import usage stats
-    _import(os.path.join(import_folder, "{}".format(USAGE_STATS)))
 
     _update_pk("stats")
+
+    from metashare.stats.models import LRStats
+    from metashare.storage.models import StorageObject, PUBLISHED
+    # make sure that the newly introduced `ignored` flag of all `LRStats` is
+    # properly set:
+    _change_count = LRStats.objects \
+        .filter(lrid__in=StorageObject.objects \
+            .exclude(publication_status=PUBLISHED) \
+            .values_list('identifier', flat=True)) \
+        .update(ignored=True)
+    print "Updated the new `ignored` flag on {} imported `LRStats` objects." \
+        .format(_change_count)
+    # make sure that there a no stats objects left that have wrongly not been
+    # deleted in the old META-SHARE version:
+    # (1) delete stats objects for LRs which are marked as deleted
+    _objs_to_del = LRStats.objects \
+        .filter(lrid__in=StorageObject.objects.filter(deleted=True) \
+            .values_list('identifier', flat=True))
+    _change_count = _objs_to_del.count()
+    _objs_to_del.delete()
+    print "Deleted {} imported `LRStats` objects which belong to now " \
+        "deleted LRs.".format(_change_count)
+    # (2) delete stats objects with non-existing LR IDs
+    _objs_to_del = LRStats.objects.exclude(lrid__in=
+            StorageObject.objects.values_list('identifier', flat=True))
+    _change_count = _objs_to_del.count()
+    _objs_to_del.delete()
+    print "Deleted {} imported `LRStats` objects which refer to " \
+        "non-existing LR IDs.".format(_change_count)
 
 
 def import_resources(import_folder):
@@ -186,7 +212,8 @@ def _update_resource(res, res_obj, storage_obj):
     # available in 2.1.2
     skip_fields = (
       'id', 'copy_status', 'digest_checksum', 'digest_last_checked', 'digest_modified', 
-      'global_storage', 'local_storage', 'metashare_version', 'source_url',)
+      'global_storage', 'local_storage', 'metashare_version', 'source_url',
+      'source_node',)
     for field in storage_obj._meta.local_fields:
         if field.attname in skip_fields:
             continue
@@ -259,6 +286,6 @@ if __name__ == "__main__":
         sys.exit(-1)
 
     import_users(sys.argv[1])
-    import_stats(sys.argv[1])
     import_resources(sys.argv[1])
+    import_stats(sys.argv[1])
     recreate_sync_users()

@@ -35,7 +35,6 @@ USERS = "users.xml"
 USER_PROFILES = "user-profiles.xml"
 LR_STATS = "lr-stats.xml"
 QUERY_STATS = "query-stats.xml"
-USAGE_STATS = "usage-stats.xml"
 STORAGE_FOLDER = "storage"
 STORAGE = "storage.xml"
 METADATA = "metadata.xml"
@@ -127,8 +126,8 @@ def export_stats(export_folder):
     Exports statistic related entities as XML into the given folder.
     """
 
-    from metashare.stats.models import LRStats, QueryStats, UsageStats
-    
+    from metashare.stats.models import LRStats, QueryStats
+
     # create export folder if required
     _check_folder(export_folder)
     
@@ -143,11 +142,6 @@ def export_stats(export_folder):
       QueryStats.objects.all(), 
       os.path.join(export_folder, "{}".format(QUERY_STATS)), 
       mig_serializer, skip_fields=('ipaddress'))
-    # export usage stats
-    _export(
-      UsageStats.objects.all(), 
-      os.path.join(export_folder, "{}".format(USAGE_STATS)), 
-      mig_serializer)
 
 
 def export_resources(export_folder):
@@ -216,8 +210,7 @@ def _export_resource(res, folder, serializer):
     # copy possible binaries
     source_storage_path = '{0}/{1}/'.format(settings.STORAGE_PATH, storage_obj.identifier)
     from metashare.storage.models import ALLOWED_ARCHIVE_EXTENSIONS
-    for archive_name in [os.path.join(source_storage_path,
-                                      ARCHIVE_TPL.format(_ext))
+    for archive_name in [ARCHIVE_TPL.format(_ext)
                          for _ext in ALLOWED_ARCHIVE_EXTENSIONS]:
         archive_path = os.path.join(source_storage_path, archive_name)
         if os.path.isfile(archive_path):
