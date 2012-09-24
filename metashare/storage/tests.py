@@ -44,6 +44,43 @@ class StorageObjectTestCase(unittest.TestCase):
         """
         test_utils.clean_resources_db()
 
+    def test_source_url_auto_updating(self):
+        """
+        Verifies that the `source_url` of master copy storage objects is
+        automatically updated when the `DJANGO_URL` setting should change.
+        """
+        _old_django_url = settings.DJANGO_URL
+        _new_django_url = 'http://example.org/metashare'
+        # make sure the `source_url` changes for master copies:
+        _test_so = StorageObject.objects.get(pk=self.object_id)
+        _test_so.copy_status = MASTER
+        _test_so.save()
+        settings.DJANGO_URL = _new_django_url
+        _test_so.update_storage()
+        self.assertEquals(_test_so.source_url, _new_django_url)
+        settings.DJANGO_URL = _old_django_url
+        _test_so.update_storage()
+        self.assertEquals(_test_so.source_url, _old_django_url)
+        # make sure the `source_url` doesn't change for remote copies:
+        _test_so = StorageObject.objects.get(pk=self.object_id)
+        _test_so.copy_status = REMOTE
+        _test_so.save()
+        settings.DJANGO_URL = _new_django_url
+        _test_so.update_storage()
+        self.assertEquals(_test_so.source_url, _old_django_url)
+        settings.DJANGO_URL = _old_django_url
+        _test_so.update_storage()
+        self.assertEquals(_test_so.source_url, _old_django_url)
+        # make sure the `source_url` doesn't change for proxy copies:
+        _test_so = StorageObject.objects.get(pk=self.object_id)
+        _test_so.copy_status = PROXY
+        _test_so.save()
+        settings.DJANGO_URL = _new_django_url
+        _test_so.update_storage()
+        self.assertEquals(_test_so.source_url, _old_django_url)
+        settings.DJANGO_URL = _old_django_url
+        _test_so.update_storage()
+        self.assertEquals(_test_so.source_url, _old_django_url)
 
     def test_revision_view(self):
         """

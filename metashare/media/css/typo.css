@@ -1,10 +1,17 @@
 @font-face {
-        font-family: 'TitilliumText25L';
-        src: url('../fonts/TitilliumText25L002.otf') format('opentype');
+    font-family: 'TitilliumText';
+    src: url('../fonts/TitilliumTextRegular.woff') format('woff');
 }
 
+@font-face {
+    font-family: 'TitilliumText';
+    src: url('../fonts/TitilliumTextBold.woff') format('woff');
+    font-weight: bold;
+}
+
+
 body{
-	font-family: 'TitilliumText25L', "Helvetica Neue", "Helvetica", Arial, sans-serif;
+	font-family: 'TitilliumText', "Helvetica Neue", "Helvetica", Arial, sans-serif;
 	font-weight: 200;
 
 }
@@ -14,7 +21,7 @@ p.bold{
 }
 
 h1,h2,h3,h4,h5,h6{
-	font-family: "TitilliumText25L", "Helvetica Neue", "Helvetica", Arial, sans-serif;
+	font-family: "TitilliumText", "Helvetica Neue", "Helvetica", Arial, sans-serif;
 }
 
 h1{
@@ -34,7 +41,7 @@ h2{
 }
 
 p, span{
-	font-family: 	'TitilliumText25L', "Helvetica",arial, serif;
+	font-family: 	'TitilliumText', "Helvetica",arial, serif;
 	font-size: 16px;
 	line-height: 	1.6;
 	color: 			#FF6600;
@@ -44,7 +51,7 @@ p, span{
 
 
 .button{
-	font-family: 	'TitilliumText25L', "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: 	'TitilliumText', "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-weight: 	600;
   	text-shadow: 	0px -1px 1px #FF9900;
 	color: 			white;
@@ -56,14 +63,14 @@ p, span{
 }
 
 input{
-	font-family: 	'TitilliumText25L', "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: 	'TitilliumText', "Helvetica Neue", Helvetica, Arial, sans-serif;
 	color: 			#999999;
 	font-size: 		28px;
 	font-weight: 	600;
 }
 
 textarea {
-	font-family: 	'TitilliumText25L', "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: 	'TitilliumText', "Helvetica Neue", Helvetica, Arial, sans-serif;
 	color: 			#999999;
 	font-size: 		18px;
 	font-weight: 	600;
@@ -88,7 +95,7 @@ input.middle_input:focus{
 }
 
 div#content p, span{
-	font-family: 	'TitilliumText25L', "Helvetica Neue", "Helvetica", Arial, sans-serif;
+	font-family: 	'TitilliumText', "Helvetica Neue", "Helvetica", Arial, sans-serif;
 	color: #666666;
 	line-height: 1.7;
 	font-size: 16px;
