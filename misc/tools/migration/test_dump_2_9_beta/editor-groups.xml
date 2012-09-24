@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<django-objects version="1.0"><object pk="4" model="accounts.editorgroup"><field to="auth.permission" name="permissions" rel="ManyToManyRel"></field></object><object pk="5" model="accounts.editorgroup"><field to="auth.permission" name="permissions" rel="ManyToManyRel"></field></object></django-objects>
