@@ -129,8 +129,10 @@ MAX_DIGEST_AGE = 60 * 60 * 24
 # List of other META-SHARE Managing Nodes from which the local node imports
 # resource descriptions. Any remote changes will later be updated
 # ("synchronized"). Use this if you are a META-SHARE Managing Node!
+# Important: make sure to use node IDs which are unique across both CORE_NODES
+#            and PROXIED_NODES!
 CORE_NODES = {
-#    'node1': {
+#    'node_id_1': {
 #        'NAME': 'AUNI',                       # The short name of the node.
 #        'DESCRIPTION': 'xxx',                 # A short descpription of the node.
 #        'URL': 'metashare.example.com:8000',  # The URL of the other META-SHARE
@@ -140,7 +142,7 @@ CORE_NODES = {
 #                                              # the META-SHARE Managing Nodes.
 #        'PASSWORD': 'sync-user-pass',         # Sync user's password.
 #    },
-#    'node2': {
+#    'node_id_2': {
 #        'NAME': 'BUNI',                     
 #        'DESCRIPTION': 'xxx',               
 #        'URL': 'metashare.test.com',
@@ -164,8 +166,10 @@ SYNC_USERS = {
 # listed nodes. This setting is meant to be used by META-SHARE Managing Nodes
 # which make normal META-SHARE Node resource descriptions available on the
 # META-SHARE Managing Nodes.
+# Important: make sure to use node IDs which are unique across both CORE_NODES
+#            and PROXIED_NODES!
 PROXIED_NODES = {
-#    'proxied_node_1': {
+#    'proxied_node_id_1': {
 #        'NAME': 'Proxied Node 1',
 #        'DESCRIPTION': 'xxx',
 #        'URL': 'metashare.example.org',
