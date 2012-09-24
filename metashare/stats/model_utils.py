@@ -58,9 +58,9 @@ def saveLRStats(resource, action, request=None):
     if action == DELETE_STAT:
         UsageStats.objects.filter(lrid=lrid).delete()
         LRStats.objects.filter(lrid=lrid).delete()
-        return
+        return result
     if (resource.storage_object.publication_status != PUBLISHED):
-        return False
+        return result
         
     userid = _get_userid(request)
     sessid = _get_sessionid(request)

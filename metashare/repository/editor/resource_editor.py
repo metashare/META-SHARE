@@ -35,7 +35,7 @@ from metashare.repository.models import resourceComponentTypeType_model, \
     lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model, \
     licenceInfoType_model, User
 from metashare.repository.supermodel import SchemaModel
-from metashare.stats.model_utils import saveLRStats, UPDATE_STAT, INGEST_STAT
+from metashare.stats.model_utils import saveLRStats, UPDATE_STAT, INGEST_STAT, DELETE_STAT
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
     ALLOWED_ARCHIVE_EXTENSIONS
 from metashare.utils import verify_subclass, create_breadcrumb_template_params
