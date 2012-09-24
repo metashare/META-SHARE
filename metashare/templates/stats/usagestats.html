@@ -174,10 +174,10 @@ function addStatus(filter){
     
        
         {% for class, fields in usage_fields %}
-            <!-- used values table -->
             {% if selected_class == fields.0.7 %}
-             <a name="fieldvalues"></a>
              {% if textvalues != None and textvalues|length > 0 %}
+            <!-- used values table -->
+            <a name="fieldvalues"></a>
             <div id=fieldvalues class=fieldvalues>
              <table width=100% border=1 valign=top>
                 <tr bgcolor=lightgray>

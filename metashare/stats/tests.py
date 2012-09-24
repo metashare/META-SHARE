@@ -253,12 +253,11 @@ class StatsTest(TestCase):
         self.assertNotContains(response, "statistics updating is in progress")
         self.assertContains(response, "Metadata usage in 2 resources")
 
-        # remove all usage stats and check its automatically updating
+        response = client.post('/{0}stats/usage/'.format(DJANGO_BASE), {'class': 'identificationInfo', 'field': 'resourceName'})
+        self.assertContains(response, "div id=fieldvalues")
+        
+        # remove all usage stats and check if there is the updating automatically
         UsageStats.objects.all().delete()                
         response = client.get('/{0}stats/usage/'.format(DJANGO_BASE))
         self.assertContains(response, "statistics updating is in progress")
-        sleep(3)
-        response = client.get('/{0}stats/usage/'.format(DJANGO_BASE))
-        self.assertContains(response, "Metadata usage in 2 resources")
-        
-        
+
