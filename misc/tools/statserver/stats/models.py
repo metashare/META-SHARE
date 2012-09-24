@@ -3,6 +3,7 @@ from datetime import datetime
 
 DATA_STATS_CHOICES = (
     ('lrcount', ['Available resources', 'global']),
+    ('lrmastercount', ['Master copy', 'global']),
     ('user', ['Users', 'incremental']),
     ('lrupdate', ['Updated actions', 'incremental']),
     ('lrdown', ['Downloaded actions', 'incremental']),
