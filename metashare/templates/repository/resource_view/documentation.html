@@ -1,5 +1,4 @@
 {% if type == "Documentation" %}
-<label class='component'>Documentation:</label>
 {% else %}
 	<label class='title'>{{type}}</label>
 {% endif %}
@@ -12,26 +11,32 @@
 		</div>
 	{% endif %}
 	
+
+	
 	<div class="dataline indented">
 		<label>
-			<strong>Title:</strong> 
-			{% if documentation.Url %}
-				<a href="{{documentation.Url}}" target='_blank'>
-			{% endif %}
-			{{ documentation.Title }}
-			{% if documentation.Url %}
-				</a>
-			{% endif %}
+		{% if documentation.Author %}
+			{{ documentation.Author }}, 			
+		{% endif %}
+		{% if documentation.Url %}
+			<a href="{{documentation.Url}}" target='_blank'>
+		{% endif %}
+		{{ documentation.Title }}
+		{% if documentation.Url %}
+			</a>.
+		{% endif %}
+		{% if documentation.Journal %}
+			In: {{ documentation.Journal }}
+		{% endif %}
+		{% if documentation.Volume %}
+			{{ documentation.Volume }}
+		{% endif %}
+		{% if documentation.Pages %}
+			, pp. {{ documentation.Pages }}
+		{% endif %}
+		
 		</label>
 	</div>
-	
-	{% if documentation.Author %}
-		<div class="dataline indented">
-			<label>
-				<strong>Author:</strong> {{ documentation.Author }}
-			</label>
-		</div>
-	{% endif %}
 	
 	{% if documentation.Editor %}
 		<div class="dataline indented">
@@ -63,23 +68,8 @@
 				<strong>Book Title:</strong> {{ documentation.Book_title }}
 			</label>
 		</div>
-	{% endif %}
+	{% endif %}	
 	
-	{% if documentation.Journal %}
-		 <div class="dataline indented">
-			<label>
-				<strong>Journal:</strong> {{ documentation.Journal }}
-			</label>
-		</div>
-	{% endif %}
-	
-	{% if documentation.Volume %}
-		 <div class="dataline indented">
-			<label>
-				<strong>Volume:</strong> {{ documentation.Volume }}
-			</label>
-		</div>
-	{% endif %}
 	
 	{% if documentation.Series %}
 		 <div class="dataline indented">
@@ -87,15 +77,8 @@
 				<strong>Series:</strong> {{ documentation.Series }}
 			</label>
 		</div>
-	{% endif %}
+	{% endif %}	
 	
-	{% if documentation.Pages %}
-		 <div class="dataline indented">
-			<label>
-				<strong>Pages:</strong> {{ documentation.Pages }}
-			</label>
-		</div>
-	{% endif %}
 	
 	{% if documentation.Edition %}
 		 <div class="dataline indented">
@@ -109,14 +92,6 @@
 		 <div class="dataline indented">
 			<label>
 				<strong>Conference:</strong> {{ documentation.Conference }}
-			</label>
-		</div>
-	{% endif %}
-
-	{% if documentation.Edition %}
-		 <div class="dataline indented">
-			<label>
-				<strong>Edition:</strong> {{ documentation.Edition }}
 			</label>
 		</div>
 	{% endif %}

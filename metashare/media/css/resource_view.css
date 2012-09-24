@@ -305,6 +305,11 @@ hr{
 	background:#eee;
 }
 
+.contact .dataline{
+	font-weight:bold;
+	font-size:12px;
+}
+
 .indented{
 	padding:0 10px 0 10px;
 }
@@ -320,6 +325,7 @@ a .indented{
 
 .vcard{
 	padding-left:5px;
+	vertical-align:top;
 }
 
 .contactcard .dataline:hover{

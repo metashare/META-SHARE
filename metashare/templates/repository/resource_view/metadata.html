@@ -67,6 +67,7 @@
 		{% for key1, value1 in value.items %}
 			{% if key1 == "Metadata_creator" %}			
 			     {% include "repository/resource_view/person.html" with person_dict=value1 title="Metadata Creator" %}
+				<hr/>
 			{% endif %}			
 		{% endfor %}
 {% endfor %}
