@@ -158,8 +158,14 @@
 		
 		{% if tool_service.Tool_service_evaluation.Evaluator %}
 			<label class="title">Evaluator</label>
-			{% include "repository/resource_view/person.html" with person_dict=tool_service.Tool_service_evaluation.Evaluator.Evaluator title="Evaluator" %}
-			<hr/>
+			{% for key, value in tool_service.Tool_service_evaluation.items %}
+				{% for key1, value1 in value %}
+					{% if "Evaluator" in key %}
+						{% include "repository/resource_view/person.html" with person_dict=tool_service.Tool_service_evaluation.Evaluator type="Evaluator" %}
+						<hr/>
+					{% endif %}
+				{% endfor %}
+			{% endfor %}
 		{% endif %}		
 	{% endif %}
 
@@ -194,7 +200,6 @@
 				</label>
 			</div>
 		{% endif %}
-
 	{% endif %}
 
 {% endspaceless %}
