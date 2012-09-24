@@ -21,7 +21,7 @@
 
 	{# Size Information #}
 	{% if "Size" in resource_component %}
-		{% include "repository/resource_view/size.html" with size=resource_component %}
+		{% include "repository/resource_view/size.html" with size=resource_component type="component" %}
 	{% endif %}
 
 	{# Domain Information #}
@@ -32,6 +32,11 @@
 	{# Modality Information #}
 	{% if "Modality" in resource_component %}
 		{% include "repository/resource_view/modality.html" with modalities=resource_component %}
+	{% endif %}
+
+	{# Classification Information #}
+	{% if "Classification" in resource_component %}
+		{% include "repository/resource_view/classification.html" with classifications=resource_component %}
 	{% endif %}
 
 	{# Annotation Information #}
