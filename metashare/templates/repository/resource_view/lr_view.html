@@ -215,12 +215,39 @@
 		{% endif %}
 		
 		{% if documentation_dict %}
+		<label class="component">Documentation</label>
 			{% for key, value in documentation_dict.items %}
 				{% for key1, value1 in value.items %}		
+					{% if "Samples_location" in key1 %}
+						 <div class="dataline">
+									<label>
+										<strong>Samples Location: </strong><a href="{{value1}}">{{value1}}</a>
+									</label>
+								</div>
+					{% endif %}
+					{% if "Tool_documentation" in key1 %}
+						 <div class="dataline">
+									<label>
+										<strong>Tool Documentation: </strong>{{value1}}
+									</label>
+								</div>
+					{% endif %}	
 					{% for key2, value2 in value1.items %}				
-						{% if key2 == "Documentation" %}
-							{% include "repository/resource_view/documentation.html" with documentation=value2 type="Documentation" %}
+						{% if "Documentation" in key2 %}
+							{% if value2.Title %}
+								{% include "repository/resource_view/documentation.html" with documentation=value2 type="Documentation" %}
+							{% else %}
+								<div class="dataline">
+									<label>
+										{{value2}}
+									</label>
+								</div>
+							{% endif %}
+							<hr/>
 						{% endif %}
+						
+						
+						
 					{% endfor %}
 				{% endfor %}
 			{% endfor %}
