@@ -7,7 +7,7 @@
 {% for key, value in modalities.items %}
 		{% for key1, value1 in value.items %}
 			{% if key1 == "Modality_type" %}
-				<label>{{ value1 }}{% if not forloop.last %}, {% endif %}</label>
+				<label>{{ value1 }}</label>
 			{% endif %}
 		{% endfor %}
 {% endfor %}
