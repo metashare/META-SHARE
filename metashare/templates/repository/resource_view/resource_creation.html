@@ -8,13 +8,13 @@
 			{% if key1 == "Resource_creator" %}
 				{% for key2, value2 in value1.items %}
 					{% include "repository/resource_view/person.html" with person_dict=value2 title="Resource Creator" %}
+					<hr/>
 				{% endfor %}
 			{% endif %}
 		{% endfor %}
 {% endfor %}
 </div>
 
-<div style="margin-bottom:3px;"></div>
 <div class="dataline">
 	{% if resource_creation_dict.Resource_creation.Creation_start_date %}			
 	     <div class="dataline">
