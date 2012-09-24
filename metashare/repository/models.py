@@ -202,10 +202,9 @@ class resourceInfoType_model(SchemaModel):
         
         # Call save() method from super class with all arguments.
         super(resourceInfoType_model, self).save(*args, **kwargs)
-        
+
         # update statistics
         saveLRStats(self, UPDATE_STAT)
-            
 
     def delete(self, keep_stats=False, *args, **kwargs):
         """
