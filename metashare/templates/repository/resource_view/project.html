@@ -3,17 +3,19 @@
 	
 	<div class="dataline indented">
 		<label>
-			{% if project.Url %}
-				<a href="{{project.Url}}" target='_blank'>
-			{% endif %}
-			
-			{{project.Project_name}}
-			{% if project.Project_short_name %} - {{ project.Project_short_name }} {% endif %}
-			{% if project.Project_id %} - {{ project.Project_id }} {% endif %}
-			
-			{% if project.Url %}
-				</a>
-			{% endif %}
+			<strong><i>
+				{% if project.Url %}
+					<a href="{{project.Url}}" target='_blank'>
+				{% endif %}
+				
+				{{project.Project_name}}
+				{% if project.Project_short_name %} - {{ project.Project_short_name }} {% endif %}
+				{% if project.Project_id %} - {{ project.Project_id }} {% endif %}
+				
+				{% if project.Url %}
+					</a>
+				{% endif %}</i>
+			</strong>
 		</label>
 	</div>
 		

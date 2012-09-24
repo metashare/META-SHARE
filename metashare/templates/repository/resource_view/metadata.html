@@ -38,18 +38,12 @@
 				</label>
 			</div>
 		{% endif %}
-		
-		{% if value2.Document_language_name %}
+	
+		{% if metadata_dict.Metadata.Metadata_language_name %}
 		     <div class="dataline">
 				<label>
-					<strong>Document Language:</strong> 
-					{% if value2.Document_language_id %}
-						<span title="{{value2.Document_language_id}}">
-					{% endif %}
-					{{ value2.Document_language_name }}
-					{% if value2.Document_language_id %}
-						</span>
-					{% endif %}
+					<strong>Metadata Language:</strong>
+					{{ metadata_dict.Metadata.Metadata_language_name }}
 				</label>
 			</div>
 		{% endif %}
@@ -62,6 +56,7 @@
 			</div>
 		{% endif %}
 </div>
+
 <div class="dataline">
 {% for key, value in metadata_dict.items %}
 	{% if "Metadata_creator" in value %}
