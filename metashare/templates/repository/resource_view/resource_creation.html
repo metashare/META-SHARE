@@ -19,21 +19,40 @@
 </div>
 
 <div class="dataline">
-	{% if resource_creation_dict.Resource_creation.Creation_start_date %}			
-	     <div class="dataline">
-			<label>
-				<strong>Creation Started:</strong> {{resource_creation_dict.Resource_creation.Creation_start_date|date:"SHORT_DATE_FORMAT"}}
-			</label>
-		</div>
-	{% endif %}
 	
-	{% if resource_creation_dict.Resource_creation.Creation_end_date %}			
-	     <div class="dataline">
+	{% if resource_creation_dict.Resource_creation.Creation_start_date and resource_creation_dict.Resource_creation.Creation_end_date %}
+		<div class="dataline">
 			<label>
-				<strong>Creation Ended:</strong> {{resource_creation_dict.Resource_creation.Creation_end_date|date:"SHORT_DATE_FORMAT"}}
+				<strong>Creation lasted:</strong> {{resource_creation_dict.Resource_creation.Creation_start_date|date:"SHORT_DATE_FORMAT"}} - {{resource_creation_dict.Resource_creation.Creation_end_date|date:"SHORT_DATE_FORMAT"}}
 			</label>
 		</div>
-	{% endif %}
+		
+	{% else %}
+		{% if resource_creation_dict.Resource_creation.Creation_start_date %}
+			<div class="dataline">
+				<label>					
+					<strong>Creation started:</strong> {{resource_creation_dict.Resource_creation.Creation_start_date|date:"SHORT_DATE_FORMAT"}}
+				</label>
+			</div>
+		{% endif %}
+		
+		{% if resource_creation_dict.Resource_creation.Creation_end_date %}
+			<div class="dataline">
+				<label>				
+					<strong>Creation ended:</strong> {{resource_creation_dict.Resource_creation.Creation_end_date|date:"SHORT_DATE_FORMAT"}}
+				</label>
+			</div>
+		{% endif %}
+	
+	{% endif %}	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	
 	<div class="dataline">
