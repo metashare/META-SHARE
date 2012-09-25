@@ -1,6 +1,5 @@
 import logging
 import urllib2
-from time import sleep
 from urllib import urlencode
 
 from django.contrib.admin.helpers import ACTION_CHECKBOX_NAME
@@ -253,7 +252,8 @@ class StatsTest(TestCase):
         self.assertNotContains(response, "statistics updating is in progress")
         self.assertContains(response, "Metadata usage in 2 resources")
 
-        response = client.post('/{0}stats/usage/'.format(DJANGO_BASE), {'class': 'identificationInfo', 'field': 'resourceName'})
+        response = client.post('/{0}stats/usage/'.format(DJANGO_BASE), {'model': 'identificationInfoType_model',
+                'class': 'identificationInfoType_model', 'field': 'resourceName'})
         self.assertContains(response, "div id=fieldvalues")
         
         # remove all usage stats and check if there is the updating automatically
