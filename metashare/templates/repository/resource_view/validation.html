@@ -85,12 +85,14 @@
 				    {% else %}
 				    	{% include "repository/resource_view/person.html" with person_dict=value1.Validator type="Validator" %}
 				    {% endif %}
-					 <hr/>
+				    <div class="separation"><hr/></div>
 				{% endif %}
 			{% endfor %}
 		{% endfor %}
 	</div>
-	
+	{% if not forloop.last %}
+		<div class="hr"><hr/></div>
+	{% endif %}
 {% endfor %}
 
 
