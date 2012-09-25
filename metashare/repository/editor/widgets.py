@@ -681,12 +681,13 @@ class AutoCompleteSelectSingleWidget(AutoCompleteSelectWidget):
             u'data-selectable-throbber-img': '{0}img/admin/throbber_16.gif'.format(settings.ADMIN_MEDIA_PREFIX),
             u'data-selectable-use-state-error': 'false',
         }
-        widgets = [
+        widget_list = [
             AutoCompleteWidget(
                 lookup_class, allow_new=self.allow_new,
                 limit=self.limit, query_params=query_params, attrs=attrs
             ),
             forms.HiddenInput(attrs={u'data-selectable-type': 'hidden'})
         ]
-        super(AutoCompleteSelectWidget, self).__init__(widgets, *args, **kwargs)
+        # pylint: disable-msg=E1003
+        super(AutoCompleteSelectWidget, self).__init__(widget_list, *args, **kwargs)
     
