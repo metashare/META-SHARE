@@ -35,7 +35,7 @@ from metashare.repository.models import resourceComponentTypeType_model, \
     lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model, \
     licenceInfoType_model, User
 from metashare.repository.supermodel import SchemaModel
-from metashare.stats.model_utils import saveLRStats, UPDATE_STAT, INGEST_STAT
+from metashare.stats.model_utils import saveLRStats, UPDATE_STAT, INGEST_STAT, DELETE_STAT
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
     ALLOWED_ARCHIVE_EXTENSIONS
 from metashare.utils import verify_subclass, create_breadcrumb_template_params
@@ -1188,7 +1188,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
 
     def save_model(self, request, obj, form, change):
         super(ResourceModelAdmin, self).save_model(request, obj, form, change)
-        #update statistics
+        # update statistics
         if hasattr(obj, 'storage_object') and obj.storage_object is not None:
             saveLRStats(obj, UPDATE_STAT, request)          
     
@@ -1197,7 +1197,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
         obj.storage_object.save()
         # explicitly write metadata XML and storage object to the storage folder
         obj.storage_object.update_storage()
-        
+        # update statistics
+        saveLRStats(obj, DELETE_STAT, request)          
+                
     def change_view(self, request, object_id, extra_context=None):
         _extra_context = extra_context or {}
         _extra_context.update({'DJANGO_BASE':settings.DJANGO_BASE})

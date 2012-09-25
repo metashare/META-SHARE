@@ -25,7 +25,10 @@
 				expandEffect: 'show',
 				expandSpeed: 0,
 				collapseEffect: 'hide',
-				collapseSpeed: 0
+				collapseSpeed: 0,
+                afterExpand: function() {
+                    $(this).find('.details').css({display: 'inline'});
+                } 
 			});
 		});
 
@@ -98,7 +101,7 @@
                 	<a href="#" class="tip">
                     <img src="{{ MEDIA_URL }}stats/img/{{ stat.action }}_icon.gif"
                     alt="Last {{ stat.action }}: {{ stat.last }}"/>
-                    <b>{{ stat.count }}</b>&nbsp;
+                    <strong>{{ stat.count }}</strong>&nbsp;
                     <span>Last {{ stat.action }}: {{ stat.last }}</span>
                     </a>
                     
@@ -147,10 +150,18 @@
 
 		{% include "repository/resource_view/distribution.html" with distribution=distribution_dict %}
 		
-		{% for contact_person in contact_person_dicts %}
-			 {% include "repository/resource_view/person.html" with person_dict=contact_person.Contact_person %}
-		{% endfor %}
+		
+		{% if contact_person_dicts %}
+			<label class='component'>Contact Person{{ contact_person_dicts|length|pluralize }}</label>
+			{% for contact_person in contact_person_dicts %}
+				 {% include "repository/resource_view/person.html" with person_dict=contact_person.Contact_person type="Contact Person" %}
+				{% if not forloop.last %}
+				<hr/>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
 	</div>
+	
 		
 	<div class="column middle">
 		<div class="fields">
@@ -191,6 +202,10 @@
 		  
 		{% include "repository/resource_view/metadata.html" %}
 		
+		{% if version_dict %}
+			{% include "repository/resource_view/version.html" %}
+		{% endif %}
+		
 		{% if validation_dicts %}
 			{% include "repository/resource_view/validation.html" %}
 		{% endif %}
@@ -199,17 +214,41 @@
 			{% include "repository/resource_view/usage.html" %}
 		{% endif %}
 		
-		{% if relation_dict %}
+		{% if relation_dicts %}
 			{% include "repository/resource_view/relation.html" %}
 		{% endif %}
 		
 		{% if documentation_dict %}
+		<label class="component">Documentation</label>
 			{% for key, value in documentation_dict.items %}
 				{% for key1, value1 in value.items %}		
+					{% if "Samples_location" in key1 %}
+						 <div class="dataline">
+									<label>
+										<strong>Samples Location: </strong><a href="{{value1}}">{{value1}}</a>
+									</label>
+								</div>
+					{% endif %}
+					{% if "Tool_documentation" in key1 %}
+						 <div class="dataline">
+									<label>
+										<strong>Tool Documentation: </strong>{{value1}}
+									</label>
+								</div>
+					{% endif %}	
 					{% for key2, value2 in value1.items %}				
-						{% if key2 == "Documentation" %}
-							{% include "repository/resource_view/documentation.html" with documentation=value2 type="Documentation" %}
-						{% endif %}
+						{% if "Documentation" in key2 %}
+							{% if value2.Title %}
+								{% include "repository/resource_view/documentation.html" with documentation=value2 type="Documentation" %}
+							{% else %}
+								<div class="dataline">
+									<label>
+										{{value2}}
+									</label>
+								</div>
+							{% endif %}
+							<hr/>
+						{% endif %}						
 					{% endfor %}
 				{% endfor %}
 			{% endfor %}

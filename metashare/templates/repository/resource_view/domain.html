@@ -1,15 +1,24 @@
 {% spaceless %}
 
-{# TODO: Add zise info #}
-
 <label class='component'>Domains:</label>
 <div class="dataline">
 {% for key, value in domains.items %}
-		{% for key1, value1 in value.items %}
-			{% if key1 == "Domain" %}
-				<label>{{ value1 }}, </label>
-			{% endif %}
-		{% endfor %}
+	{% for key1, value1 in value.items %}
+		<div>
+			<label class="dataline">
+				{% if "Domain" in key1 %}
+					{{ value1 }}
+					{% if "Size_per_domain" in value %}
+						({% include "repository/resource_view/size.html" with size=value.Size_per_domain type="sub" %})
+					{% endif %}
+					{% if "Conformance_to_classification_scheme" in value %}
+						&mdash;<label class="dataline indented">Conforms to {{ value.Conformance_to_classification_scheme }}</label>
+					{% endif %}
+				{% endif %}
+
+			</label>
+		</div>
+	{% endfor %}
 {% endfor %}
 </div>
 

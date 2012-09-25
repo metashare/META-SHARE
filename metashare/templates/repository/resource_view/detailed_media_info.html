@@ -1,13 +1,11 @@
 {% spaceless %}
 
 {% if type == "toolService" %}
-
 	{% include "repository/resource_view/tool_service.html" with tool_service=resource_component %}
-
 {% else %}
 
 	{# Type info #}
-	<label class='title'><B>{% if resource_component.Linguality.Linguality_type %}{{ resource_component.Linguality.Linguality_type }}{% endif %} {{ type }} {{ resourceType }}</B></label>
+	<label class='title'><strong>{% if resource_component.Linguality.Linguality_type %}{{ resource_component.Linguality.Linguality_type }}{% endif %} {{ type }} {{ resourceType }}</strong></label>
 
 	{# Language Information #}
 	{% if "Language" in resource_component %}
@@ -23,7 +21,22 @@
 	{% if "Size" in resource_component %}
 		{% include "repository/resource_view/size.html" with size=resource_component %}
 	{% endif %}
+	{% if "Audio_size" in resource_component %}
+		{% include "repository/resource_view/size.html" with size=resource_component.Audio_size %}
+	{% endif %}
+	{% if "Video_size" in resource_component %}
+		{% include "repository/resource_view/size.html" with size=resource_component.Video_size %}
+	{% endif %}
+	{% if "Image_size" in resource_component %}
+		{% include "repository/resource_view/size.html" with size=resource_component.Image_size %}
+	{% endif %}
 
+	{# Character Encoding Information #}
+	{% if "Character_encoding" in resource_component %}
+		{% include "repository/resource_view/character_encoding.html" with encodings=resource_component %}
+	{% endif %}
+
+	
 	{# Domain Information #}
 	{% if "Domain" in resource_component %}
 		{% include "repository/resource_view/domain.html" with domains=resource_component %}
@@ -34,13 +47,18 @@
 		{% include "repository/resource_view/modality.html" with modalities=resource_component %}
 	{% endif %}
 
+	{# Classification Information #}
+	{% if "Text_classification" in resource_component %}
+		{% include "repository/resource_view/classification.html" with classifications=resource_component %}
+	{% endif %}
+
 	{# Annotation Information #}
 	{% if "Annotation" in resource_component %}
 		{% include "repository/resource_view/annotation.html" with annotations=resource_component %}
 	{% endif %}
 
+	
+
 {% endif %}
-
-
 
 {% endspaceless %}
