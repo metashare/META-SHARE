@@ -11,8 +11,7 @@ from django.utils.translation import ugettext as _
 from metashare.repository.editor.related_widget import RelatedFieldWidgetWrapper
 from metashare.repository.editor.widgets import SubclassableRelatedFieldWidgetWrapper, \
     OneToManyWidget
-from selectable.forms.widgets import AutoCompleteSelectMultipleWidget, \
-    AutoCompleteSelectWidget
+from selectable.forms.widgets import AutoCompleteSelectMultipleWidget
 from django.db import models
 from metashare.repository.models import actorInfoType_model, \
     documentationInfoType_model, \
@@ -29,6 +28,7 @@ from metashare.repository.editor.lookups import ActorLookup, \
     ResolutionDummyLookup, AudioSizeDummyLookup
 from metashare.repository.editor.widgets import AutoCompleteSelectMultipleSubClsWidget
 from metashare.repository.editor.widgets import AutoCompleteSelectMultipleEditWidget
+from metashare.repository.editor.widgets import AutoCompleteSelectSingleWidget
 
 class RelatedAdminMixin(object):
     '''
@@ -55,8 +55,8 @@ class RelatedAdminMixin(object):
     }
     
     custom_m2o_widget_overrides = {
-        documentationInfoType_model: AutoCompleteSelectWidget(lookup_class=DocumentationLookup),
-        targetResourceInfoType_model: AutoCompleteSelectWidget(lookup_class=TargetResourceLookup),
+        documentationInfoType_model: AutoCompleteSelectSingleWidget(lookup_class=DocumentationLookup),
+        targetResourceInfoType_model: AutoCompleteSelectSingleWidget(lookup_class=TargetResourceLookup),
     }
     
     def hide_hidden_fields(self, db_field, kwargs):

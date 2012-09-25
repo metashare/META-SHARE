@@ -14,9 +14,10 @@ from selectable.forms.widgets import SelectableMediaMixin, SelectableMultiWidget
     LookupMultipleHiddenInput
 from django.utils.http import urlencode
 from metashare import settings
-from selectable.forms.widgets import AutoCompleteWidget        
+from selectable.forms.widgets import AutoCompleteWidget, AutoCompleteSelectWidget        
 from django.forms.util import flatatt
 from django.utils.encoding import force_unicode
+from django import forms
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -668,3 +669,24 @@ class LookupMultipleHiddenInputMS(LookupMultipleHiddenInput):
                 input_attrs['model-class'] = item_cls
             inputs.append(u'<input%s />' % flatatt(input_attrs))
         return mark_safe(u'\n'.join(inputs))
+
+class AutoCompleteSelectSingleWidget(AutoCompleteSelectWidget):
+
+    def __init__(self, lookup_class, *args, **kwargs):
+        self.lookup_class = lookup_class
+        self.allow_new = kwargs.pop('allow_new', False)
+        self.limit = kwargs.pop('limit', None)
+        query_params = kwargs.pop('query_params', {})
+        attrs = {
+            u'data-selectable-throbber-img': '{0}img/admin/throbber_16.gif'.format(settings.ADMIN_MEDIA_PREFIX),
+            u'data-selectable-use-state-error': 'false',
+        }
+        widgets = [
+            AutoCompleteWidget(
+                lookup_class, allow_new=self.allow_new,
+                limit=self.limit, query_params=query_params, attrs=attrs
+            ),
+            forms.HiddenInput(attrs={u'data-selectable-type': 'hidden'})
+        ]
+        super(AutoCompleteSelectWidget, self).__init__(widgets, *args, **kwargs)
+    
