@@ -251,6 +251,17 @@ label span a{
 	margin-right:5px;
 }
 
+.licence{
+	background-color: #FFDDAA;
+	padding:3px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	color: #555555;
+	margin-right:5px;
+}
+
 .otherLang {
 	display:none;
 }
