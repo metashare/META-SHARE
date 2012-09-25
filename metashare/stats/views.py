@@ -180,14 +180,19 @@ def usagestats (request):
                                 metaname = metadata_type +" "+ _ifield
                                 _add_usage_meta(usage_fields, component_name, \
                                     _ifield, verbose_name, _irequired, \
-                                    "ifield", metadata_type, usagedata.get(metaname.replace("Type_model","").replace("String_model",""), None), selected_filters, usage_filter)
+                                    "ifield", metadata_type, \
+                                    usagedata.get(metaname.replace("Type_model","").replace("String_model",""), None), 
+                                    selected_filters, usage_filter)
                                 if selected_class == metadata_type:
                                     selected_class = model_name
             else:
                 if not verbose_name:
                     verbose_name = eval(u'{0}._meta.get_field("{1}").verbose_name'.format(_model, _field))
-                _add_usage_meta(usage_fields, component_name, _field, verbose_name, _required, \
-                    "field", model_name, usagedata.get(metaname.replace("Type_model","").replace("String_model",""), None), selected_filters, usage_filter)       
+                _add_usage_meta(usage_fields, component_name, \
+                    _field, verbose_name, _required, \
+                    "field", model_name, \
+                    usagedata.get(metaname.replace("Type_model","").replace("String_model",""), None), \
+                    selected_filters, usage_filter)       
          
     fields_count = usage_filter["required"] + usage_filter["optional"]+ usage_filter["recommended"]
              
