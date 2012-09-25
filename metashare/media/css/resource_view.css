@@ -297,8 +297,23 @@ img.line{
 	height:20px;
 }
 
-hr{
-	margin:10px 0 10px 0;
+.hr hr{
+	background:#bbb;
+	height:0.2em;
+	box-shadow: 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
+}
+
+.separation hr{
+	margin-left:auto;
+	margin-right:auto;
+	width:250px;
+	border: 0;
+	height: 1px;
+	background: #333;
+	background-image: -webkit-linear-gradient(left, #eee, #aaa, #eee); 
+	background-image:    -moz-linear-gradient(left, #eee, #aaa, #eee); 
+	background-image:     -ms-linear-gradient(left, #eee, #aaa, #eee); 
+	background-image:      -o-linear-gradient(left, #eee, #aaa, #eee); 
 }
 
 .contact{
