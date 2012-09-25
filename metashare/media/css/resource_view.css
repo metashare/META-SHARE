@@ -23,7 +23,11 @@ div#stats{
 	background-color: #EEEEEE;
 	float: right;
 	border-radius:7px;
-    box-shadow:0 3px 10px #CCCCCC, 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
+    	box-shadow:0 3px 10px #CCCCCC, 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
+}
+
+div#stats a{
+	color:#333;
 }
 
 .column{
