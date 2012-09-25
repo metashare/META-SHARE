@@ -152,8 +152,12 @@
 			<label class="title">Evaluator</label>
 			{% for key, value in tool_service.Tool_service_evaluation.items %}
 				{% if "Evaluator" in key %}
-						{% include "repository/resource_view/person.html" with person_dict=value.Evaluator type="Evaluator" %}
-						<hr/>
+					{% if value.Organization %}
+				    	{% include "repository/resource_view/person.html" with person_dict=value.Organization type="Evaluator" %}
+				    {% else %}
+				    	{% include "repository/resource_view/person.html" with person_dict=value.Evaluator type="Evaluator" %}
+				    {% endif %}
+					<hr/>
 				{% endif %}
 			{% endfor %}
 		{% endif %}	
