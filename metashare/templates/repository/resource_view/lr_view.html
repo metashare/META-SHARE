@@ -167,7 +167,7 @@
 			{% for contact_person in contact_person_dicts %}
 				 {% include "repository/resource_view/person.html" with person_dict=contact_person.Contact_person type="Contact Person" %}
 				{% if not forloop.last %}
-				<hr/>
+				<div class="separation"><hr/></div>
 				{% endif %}
 			{% endfor %}
 		{% endif %}
@@ -232,7 +232,7 @@
 		{% if documentation_dict %}
 		<label class="component">Documentation</label>
 			{% for key, value in documentation_dict.items %}
-				{% for key1, value1 in value.items %}		
+				{% for key1, value1 in value.items %}
 					{% if "Samples_location" in key1 %}
 						 <div class="dataline">
 									<label>
@@ -258,7 +258,7 @@
 									</label>
 								</div>
 							{% endif %}
-							<hr/>
+							<div class="separation"><hr/></div>
 						{% endif %}						
 					{% endfor %}
 				{% endfor %}
