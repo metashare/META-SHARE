@@ -165,7 +165,7 @@ from {0}validators import validate_lang_code_keys, \\
   validate_dict_values, validate_xml_schema_year, \\
   validate_matches_xml_char_production
 from metashare.settings import DJANGO_BASE, LOG_HANDLER, DJANGO_URL
-from metashare.stats.model_utils import saveLRStats, DELETE_STAT
+from metashare.stats.model_utils import saveLRStats, DELETE_STAT, UPDATE_STAT
 from metashare.storage.models import StorageObject, MASTER, COPY_CHOICES
 from metashare.recommendations.models import ResourceCountPair, \\
     ResourceCountDict
@@ -340,6 +340,9 @@ TOP_LEVEL_TYPE_EXTRA_CODE_TEMPLATE = '''
         
         # Call save() method from super class with all arguments.
         super(resourceInfoType_model, self).save(*args, **kwargs)
+
+        # update statistics
+        saveLRStats(self, UPDATE_STAT)
 
     def delete(self, keep_stats=False, *args, **kwargs):
         """
