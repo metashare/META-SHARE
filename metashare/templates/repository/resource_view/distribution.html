@@ -100,7 +100,11 @@
 		<label class="title">IPR Holder</label>
 		{% for key, value in distribution.Distribution.items %}
 			{% if "Ipr_holder" in key %}
-				{% include "repository/resource_view/person.html" with person_dict=value.Ipr_holder type="IPR Holder" %}
+				{% if value.Organization %}
+			    	{% include "repository/resource_view/person.html" with person_dict=value.Organization type="IPR Holder" %}
+			    {% else %}
+			    	{% include "repository/resource_view/person.html" with person_dict=value.Ipr_holder type="IPR Holder" %}
+			    {% endif %}
 				<hr/>
 			{% endif %}
 		{% endfor %}
