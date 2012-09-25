@@ -247,6 +247,8 @@ label span a{
 	border-top-right-radius: 10px;
 	color: #555555;
 	display:inline-block;
+	float:left;
+	margin-right:5px;
 }
 
 .otherLang {
@@ -262,11 +264,6 @@ label span a{
 	float:left;
 }
 
-.url{
-	display:inline-block;
-	float:right;
-}
-
 .more{
 	color:#666;
 	margin-bottom:20px;
@@ -277,12 +274,13 @@ label span a{
 }
 
 .read-more{
-	padding-bottom:3px;
+    padding-bottom:3px;
+    line-height: 1;
 }
 
-
 .read-less{
-	padding-bottom:3px;
+    padding-bottom:3px;
+    line-height: 1;
 }
 
 .details{
