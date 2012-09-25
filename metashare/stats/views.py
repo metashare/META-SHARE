@@ -94,13 +94,14 @@ def usagestats (request):
     expand_all = request.POST.get('expandall')    
     selected_class = request.POST.get('class', "")
     selected_field = request.POST.get('field', "")
+    selected_model = request.POST.get('model', "")
     selected_filters = request.POST.getlist('filter')
 
     textvalues = []
     if selected_class != "" and selected_field != "":
         resultset = UsageStats.objects.values('text') \
-            .filter(elparent=selected_class, \
-                elname=selected_field) \
+            .filter(elparent=selected_class.replace("Type_model",""), \
+                elname=selected_field.replace("Type_model","")) \
             .annotate(Count('elname'), Sum('count')) \
             .order_by('-elname__count')
         if len(resultset) > 0:
@@ -124,7 +125,7 @@ def usagestats (request):
     if (len(usageset) > 0):
         for item in usageset:
             usagedata[item['elparent'] +" "+ item['elname']] = [item['count__sum'], item['lrid__count']]                    
-
+    
     _models = [x for x in dir(sys.modules['metashare.repository.models']) if x.endswith('_model')]
     mod = import_module("metashare.repository.models")
     _fields = {}
@@ -134,52 +135,59 @@ def usagestats (request):
         # get info about classes
         dbfields = getattr(mod, _model).__schema_classes__
         for _class in dbfields:
-            _classes[_class] = dbfields[_class].replace("Type_model","")
+            _classes[_class] = dbfields[_class]
             
         # get info about fields
         dbfields = getattr(mod, _model).__schema_fields__
         for _component, _field, _required in dbfields:
             verbose_name = None
+            model_name = _model
             if "/" in _component:
-                verbose_name = _component
-                _component = _field
-            model_name = _model.replace("Type_model","")
+                items = _component.split("/")
+                model_name = items[0]
+                _component = items[1]
+                _field = items[1]
+                verbose_name = model_name + "/" + _component
+                if _component in _classes:
+                    verbose_name = model_name + "/" + eval(u'{0}._meta.verbose_name'.format(_classes[_component]))
+                verbose_name = verbose_name.replace("string_model","")
+           
             component_name = eval(u'{0}._meta.verbose_name'.format(_model))
             metaname = model_name +" "+ _component
-            if _component in _classes:
+            if _component in _classes and _field != "documentUnstructured":
                 style = "component"
                 metadata_type = model_name
                 if not metaname in _fields:
                     if not verbose_name:
                         if not "_set" in _field:
                             verbose_name = eval(u'{0}._meta.get_field("{1}").verbose_name'.format(_model, _field))
-                            class_name = eval(u'{0}Type_model._meta.verbose_name'.format(_classes[_component]))
+                            class_name = eval(u'{0}._meta.verbose_name'.format(_classes[_component]))
                             if verbose_name != class_name:
                                 verbose_name = verbose_name + " [" + class_name +"]"
                                 style = "instance"
                                 metadata_type = _component
                         else:
-                            verbose_name = eval(u'{0}Type_model._meta.verbose_name'.format(_classes[_component]))
+                            verbose_name = eval(u'{0}._meta.verbose_name'.format(_classes[_component]))
                     added = _add_usage_meta(usage_fields, component_name, _classes[_component], verbose_name, \
-                        _required, "component", metadata_type, usagedata.get(metaname, None), selected_filters, usage_filter)
+                        _required, "component", metadata_type, usagedata.get(metaname.replace("Type_model",""), None), selected_filters, usage_filter)
             
                     # add the sub metadata fields
                     if added and style == "instance":
-                        instance_dbfields = getattr(mod, _classes[_component] +"Type_model").__schema_fields__
+                        instance_dbfields = getattr(mod, _classes[_component]).__schema_fields__
                         for _icomponent, _ifield, _irequired in instance_dbfields:
                             if not _icomponent in _classes:
-                                verbose_name = eval(u'{0}Type_model._meta.get_field("{1}").verbose_name'.format(_classes[_component], _ifield))
+                                verbose_name = eval(u'{0}._meta.get_field("{1}").verbose_name'.format(_classes[_component], _ifield))
                                 metaname = metadata_type +" "+ _ifield
                                 _add_usage_meta(usage_fields, component_name, \
                                     _ifield, verbose_name, _irequired, \
-                                    "ifield", metadata_type, usagedata.get(metaname, None), selected_filters, usage_filter)
+                                    "ifield", metadata_type, usagedata.get(metaname.replace("Type_model","").replace("String_model",""), None), selected_filters, usage_filter)
                                 if selected_class == metadata_type:
                                     selected_class = model_name
             else:
                 if not verbose_name:
                     verbose_name = eval(u'{0}._meta.get_field("{1}").verbose_name'.format(_model, _field))
                 _add_usage_meta(usage_fields, component_name, _field, verbose_name, _required, \
-                    "field", model_name, usagedata.get(metaname, None), selected_filters, usage_filter)       
+                    "field", model_name, usagedata.get(metaname.replace("Type_model","").replace("String_model",""), None), selected_filters, usage_filter)       
          
     fields_count = usage_filter["required"] + usage_filter["optional"]+ usage_filter["recommended"]
              
@@ -196,6 +204,7 @@ def usagestats (request):
         'fields_count': fields_count,
         'lr_count': lr_count,
         'selected_filters': selected_filters,
+        'selected_model': selected_model,
         'selected_class': selected_class,
         'selected_field': selected_field,
         'expand_all': expand_all,
