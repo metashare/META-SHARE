@@ -80,7 +80,7 @@
 			{% endif %}
 			{% for key1, value1 in value.items %}
 				{% if "Validator" in key1 %}
-					 {% if value1.Organization %}
+					{% if value1.Organization %}
 				    	{% include "repository/resource_view/person.html" with person_dict=value1.Organization type="Validator" %}
 				    {% else %}
 				    	{% include "repository/resource_view/person.html" with person_dict=value1.Validator type="Validator" %}
