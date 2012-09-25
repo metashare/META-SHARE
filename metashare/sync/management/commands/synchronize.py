@@ -113,8 +113,16 @@ class Command(BaseCommand):
         password = node['PASSWORD']
         opener = login("{0}/login/".format(url), user_name, password)
         
+        # create inventory url
+        inv_url = "{0}/sync/?".format(url)
+        # add sync protocols to url
+        for index, _prot in enumerate(settings.SYNC_PROTOCOLS):
+            inv_url = inv_url + "sync_protocol={}".format(_prot)
+            if (index < len(settings.SYNC_PROTOCOLS) - 1):
+                inv_url = inv_url + "&"
+        
         # get the inventory list 
-        remote_inventory = get_inventory(opener, "{0}/sync/".format(url))
+        remote_inventory = get_inventory(opener, inv_url)
         remote_inventory_count = len(remote_inventory)
         sys.stdout.write("\nRemote node " + BOLD + url + RESET + " contains " \
           + BOLD + str(remote_inventory_count) + " resources.\n" + RESET)
