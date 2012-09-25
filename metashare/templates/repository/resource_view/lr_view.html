@@ -108,7 +108,7 @@
                 {% endif %}
             {% endfor %}
         </div>
-		<h2>{{ resourceName }} {% get_icon resourceType %}</h2>
+		<h2>{% if url.0 %}<a href="{{url.0}}" target="_blank" title="Click here to view the resource's original metadata record">{% endif %}{{ resourceName }} {% if url.0 %}</a>{% endif %}{% get_icon resourceType %}</h2>
 		
 		{% ifnotequal other_res_names|length 0 %}
 			<div class='more'>View resource name in all available languages</div>
@@ -118,9 +118,6 @@
 		{% endifnotequal %}
 		
 		<h3 class="shortnames">{% for name in res_short_names %}{{ name }}<img src="{{ MEDIA_URL }}images/trenner.png" class="trenner" />{% endfor %}</h3> 
-		{% if url.0 %}
-		<h4 class='url'><a href="{{url.0}}" target="_blank">{{url.0}}</a></h4>
-		{% endif %}
 		
 		{% if not 'NOT_DEFINED' in metaShareId %}<h4 class="identifier">{{ metaShareId }}</h4>{% endif %}
 		<h4 style="text-align:justify" class="readmore desc">{{ description }}</h4>
