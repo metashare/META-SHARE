@@ -2,16 +2,16 @@
 {% load get_icon %}
 {% spaceless %}
 
-<label class='title'>{{title}}</label>
+{% if type != "Contact Person" and type != "Metadata Creator" and type != "Resource Creator" and type != "IPR Holder" and type != "Evaluator" and type != "Validator" %}
+	<label class='title'>{{type}}</label>
+{% endif %}
 
 <a href='#' class="contactcard" title="Click to view contact card">
 	<label class="dataline indented" style="float:left;">
-				{{ person_dict.Given_name }}
-				{{ person_dict.Surname }}
-				{{ person_dict.Organization_name }}	
+		{{ person_dict.Given_name }}
+		{{ person_dict.Surname }}
+		{{ person_dict.Organization_name }}	
 	</label>
-
-	
 	<img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/vcard.png" class='vcard'/>
 </a>
 
@@ -67,11 +67,13 @@
 		</label>
 	</div>
 	
+	{% if person_dict.Communication.Email %}
 	<div>
 		<label class="dataline">
 			{% encrypt_email person_dict.Communication.Email %}
 		</label>
 	</div>
+	{% endif %}
 	<div>
 		<label class="dataline">
 			{{ person_dict.Communication.Address }}

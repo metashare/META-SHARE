@@ -1,6 +1,6 @@
 {% spaceless %}
 
-<label class='component'>Validation:</label>
+<label class='component'>Validation</label>
 
 {% for dict in validation_dicts %}
      <div class="dataline indented">
@@ -12,7 +12,7 @@
 	{% if dict.Validation.Validation_type %}
 	     <div class="dataline indented">
 			<label>
-				<b>Type of Validation:</b> {{ dict.Validation.Validation_type }}
+				<strong>Type of Validation:</strong> {{ dict.Validation.Validation_type }}
 			</label>
 		</div>
 	{% endif %}
@@ -20,7 +20,7 @@
 	{% if dict.Validation.Validation_mode %}
 	     <div class="dataline indented">
 			<label>
-				<b>Validation Mode:</b> {{ dict.Validation.Validation_mode }}
+				<strong>Validation Mode:</strong> {{ dict.Validation.Validation_mode }}
 			</label>
 		</div>	
 	{% endif %}
@@ -28,7 +28,7 @@
 	{% if dict.Validation.Validation_mode_details %}
 	     <div class="dataline indented">
 			<label>
-				<b>Mode Details:</b> {{ dict.Validation.Validation_mode_details }}
+				<strong>Mode Details:</strong> {{ dict.Validation.Validation_mode_details }}
 			</label>
 		</div>	
 	{% endif %}
@@ -36,7 +36,7 @@
 	{% if dict.Validation.Validation_extent %}
 	     <div class="dataline indented">
 			<label>
-				<b>Extent:</b> {{ dict.Validation.Validation_extent }}
+				<strong>Extent:</strong> {{ dict.Validation.Validation_extent }}
 			</label>
 		</div>	
 	{% endif %}
@@ -44,7 +44,7 @@
 	{% if dict.Validation.Validation_extent_details %}
 	     <div class="dataline indented">
 			<label>
-				<b>Extent Details:</b> {{ dict.Validation.Validation_extent_details }}
+				<strong>Extent Details:</strong> {{ dict.Validation.Validation_extent_details }}
 			</label>
 		</div>	
 	{% endif %}
@@ -52,35 +52,44 @@
 	{% if dict.Validation.Size_per_validation %}
 	     <div class="dataline indented">
 			<label>
-				<b>Size per Validation:</b> {{ dict.Validation.Size_per_validation }}
+				<strong>Size per Validation:</strong> {{ dict.Validation.Size_per_validation }}
 			</label>
 		</div>	
 	{% endif %}
-
+	
 	{% if dict.Validation.Validation_report %}
-	     <div class="dataline indented">
-			<label>
-				<b>Validation Report:</b> {{ dict.Validation.Validation_report }}
-			</label>
-		</div>	
+		{% if dict.Validation.Validation_report.Validation_report.Title %}
+			{% include "repository/resource_view/documentation.html" with documentation=dict.Validation.Validation_report.Validation_report type="Validation Report" %}
+		{% else %}
+			<div class="dataline">
+				<label>
+					<strong>Validation Report: </strong>{{ dict.Validation.Validation_report.Validation_report }}
+				</label>
+			</div>
+		{% endif %}					
 	{% endif %}
-
+	
 	{% if dict.Validation.Validation_tool %}
-	     <div class="dataline indented">
-			<label>
-				<b>Validation Tool:</b> {{ dict.Validation.Validation_tool }}
-			</label>
-		</div>	
+			{% include "repository/resource_view/target_resource.html" with target=dict.Validation.Validation_tool title="Validation Tool" %}
 	{% endif %}
 	
-	{% if dict.Validation.Validator %}
-	
-	    {% if dict.Validation.Validator.Organization %}
-	    {% else %}
-	    	{% include "repository/resource_view/person.html" with person_dict=dict.Validation.Validator.Validator title="Validator" %}
-	    {% endif %}
-	    
-	{% endif %}
+	<div class="dataline">
+		{% for key, value in dict.items %}
+			{% if "Validator" in value %}
+				<label class="title">Validator</label>
+			{% endif %}
+			{% for key1, value1 in value.items %}
+				{% if "Validator" in key1 %}
+					 {% if value1.Organization %}
+				    	{% include "repository/resource_view/person.html" with person_dict=value1.Organization type="Validator" %}
+				    {% else %}
+				    	{% include "repository/resource_view/person.html" with person_dict=value1.Validator type="Validator" %}
+				    {% endif %}
+					 <hr/>
+				{% endif %}
+			{% endfor %}
+		{% endfor %}
+	</div>
 	
 {% endfor %}
 
