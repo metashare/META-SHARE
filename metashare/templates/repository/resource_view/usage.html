@@ -10,9 +10,6 @@
 	    {% include "repository/resource_view/target_resource.html" with target=usage_dict.Usage.Resource_associated_with title="Associated Resource" %}
 	{% endif %}
 	
-	
-
-
 		{% for key, value in usage_dict.items %}
 			{% if "Foreseen_use" in value %}
 				<label class='title'>Foreseen Use</label>	
@@ -31,7 +28,7 @@
 								</label>
 							</div>
 						{% endif %}
-					<hr/>
+					<div class="hr"><hr/></div>
 					{% endif %}
 				{% endfor %}
 				
@@ -84,7 +81,7 @@
 						</div>
 					{% endif %}
 					
-				<hr/>
+				<div class="hr"><hr/></div>
 				{% endif %}
 			{% endfor %}
 			
