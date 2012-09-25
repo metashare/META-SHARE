@@ -118,13 +118,16 @@
 			{% for name in other_res_names %}<h3>{{ name }}</h3>{% endfor %} 
 			</div>
 		{% endifnotequal %}
-		<div style='clear:both;'>
+
 			<h3 class="shortnames">{% for name in res_short_names %}{{ name }}<img src="{{ MEDIA_URL }}images/trenner.png" class="trenner" />{% endfor %}</h3> 
-		</div>
-		{% if not 'NOT_DEFINED' in metaShareId %}<h4 class="identifier">{{ metaShareId }}</h4>{% endif %}
-		{% for id in identifier %}
- 			<h4 class="identifier">{{ id }}</h4>
- 		{% endfor %}
+
+			{% if not 'NOT_DEFINED' in metaShareId %}<h4 class="identifier">{{ metaShareId }}</h4>{% endif %}
+
+			{% for id in identifier %}
+				<h4 class="identifier">{{ id }}</h4>
+	 		{% endfor %}
+
+	 		
 		<h4 style="text-align:justify" class="readmore desc">{{ description }}</h4>
 		
 		{% ifnotequal other_descriptions|length 0 %}
