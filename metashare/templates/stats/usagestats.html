@@ -25,7 +25,8 @@ function closetabvals( id ) {
     document.getElementById('fieldname').value='';
 }
 
-function getvalues(classname, fieldname) {
+function getvalues(modelname, classname, fieldname) {
+    document.getElementById('modelname').value=modelname;
     document.getElementById('classname').value=classname;
     document.getElementById('fieldname').value=fieldname;
     
@@ -158,6 +159,7 @@ function addStatus(filter){
           </div>
         </div>
       </div>
+      <input type="hidden" name="model" id="modelname" value="{{ selected_model }}">
       <input type="hidden" name="class" id="classname" value="{{ selected_class }}">
       <input type="hidden" name="field" id="fieldname" value="{{ selected_field }}">
       <input type="hidden" name="expandall" id="expandall" value="{{ expand_all }}">
@@ -174,7 +176,7 @@ function addStatus(filter){
     
        
         {% for class, fields in usage_fields %}
-            {% if selected_class == fields.0.7 %}
+            {% if selected_model == fields.0.7 %}
              {% if textvalues != None and textvalues|length > 0 %}
             <!-- used values table -->
             <a name="fieldvalues"></a>
@@ -195,9 +197,9 @@ function addStatus(filter){
             {% endfor %}
             </table>
             </div>
-            {% endif %} 
-            {% endif %} 
             <!-- end table -->
+            {% endif %} 
+            {% endif %} 
             
             <a name="{{ fields.0.7 }}"></a>
             <div class="accordion"><a href="#" onclick="return false"><label class='component'>&nbsp;{{ class }}&nbsp;</label></a></div> 
@@ -209,14 +211,11 @@ function addStatus(filter){
                      {{ field.2 }}</label></a>
                 {% else %}
                     <div class="dataline mandatory" style="width:100%">
-                    {% if "/" in field.2 %}
-                        <label class="indent">&nbsp;{{ field.2 }}&nbsp;</label>
-                    {% else %}
                         {% if field.6 == "ifield" %}
                             <label class='indent'>&nbsp;&nbsp;&nbsp;
                         {% endif %}   
                         {% if field.5 > 0 %}
-                            <a href="javascript:getvalues('{{ field.7 }}','{{ field.1 }}')"
+                            <a href="javascript:getvalues('{{ fields.0.7 }}','{{ field.7 }}','{{ field.1 }}')"
                             {% if selected_class == field.7 and selected_field == field.1 %}
                                 class="addFilter">
                             {% else %}
@@ -229,8 +228,6 @@ function addStatus(filter){
                         {% if field.6 == "ifield" %}
                             </label>
                         {% endif %}   
-                        
-                    {% endif %}   
                 {% endif %}
                 
                 
