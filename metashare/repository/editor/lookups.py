@@ -80,9 +80,10 @@ class GenericUnicodeLookup(ModelLookup):
         lcterm = term.lower()
         def matches(item):
             'Helper function to group the search code for a database item'
-            if hasattr(item.as_subclass(), 'copy_status'):
-                if item.as_subclass().copy_status != MASTER:
-                    return False 
+            if hasattr(item, 'as_subclass'):
+                if hasattr(item.as_subclass(), 'copy_status'):
+                    if item.as_subclass().copy_status != MASTER:
+                        return False 
             return lcterm in unicode(item).lower()
         
         items = self.get_queryset()
@@ -100,7 +101,8 @@ class GenericUnicodeLookup(ModelLookup):
         lab = fmt_item['label']
         fmt_item['label'] = ungettext(_AUTO_SUGGEST_SG_TPL,
             _AUTO_SUGGEST_PL_TPL, count) % {'label': lab, 'count': count}
-        fmt_item['cls'] = item.as_subclass().__class__.__name__.lower()
+        if hasattr(item, 'as_subclass'):
+            fmt_item['cls'] = item.as_subclass().__class__.__name__.lower()
         return fmt_item
     
     def filter_results(self, results):
