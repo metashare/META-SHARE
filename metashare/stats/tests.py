@@ -40,7 +40,8 @@ class StatsTest(TestCase):
                                                managed_group=_test_editor_group)            
         owner = test_utils.create_manager_user(
             'manageruser', 'manager@example.com', 'secret',
-            (_test_editor_group, _test_manager_group))
+            (_test_editor_group, _test_manager_group))       
+        
         # load first resource
         _fixture = '{0}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
         _result = test_utils.import_xml(_fixture)
@@ -51,6 +52,9 @@ class StatsTest(TestCase):
         _result = test_utils.import_xml(_fixture)
         _result.editor_groups.add(_test_editor_group)
         _result.owners.add(owner)
+        
+        # create a normal user
+        test_utils.create_user('user', 'user@example.com', 'mypasswd')
         
     
     @classmethod
@@ -88,11 +92,11 @@ class StatsTest(TestCase):
             {"action": "publish_action", ACTION_CHECKBOX_NAME: resource.id},
             follow=True)
         
-        for i in range(1, 3):
-            resource = resourceInfoType_model.objects.get(pk=resources[i - 1].pk)
+        for i in range(0, 2):
+            resource = resourceInfoType_model.objects.get(pk=resources[i].pk)
             for action in (VIEW_STAT, RETRIEVE_STAT, DOWNLOAD_STAT):
                 saveLRStats(resource, action)
-                self.assertEqual(len(getLRLast(action, 10)), i)
+                self.assertEqual(len(getLRLast(action, 10)), i+1)
  
     def test_visiting_stats(self):
         """
@@ -100,6 +104,8 @@ class StatsTest(TestCase):
         """
         client = Client()
         client.login(username='manageruser', password='secret')
+        client_user = Client()
+        client_user.login(username='user', password='secret')
         resources =  resourceInfoType_model.objects.all()
         for resource in resources:
             resource.storage_object.publication_status = INGESTED
@@ -113,15 +119,24 @@ class StatsTest(TestCase):
                 'repository/resource_view/lr_view.html')
 
         response = client.get('/{0}stats/top/?view=latestupdated'.format(DJANGO_BASE))
-        self.assertNotContains(response, "No data found")
-
+        self.assertNotContains(response, ">No data found<")
+        
+        response = client.get('/{0}stats/top/?view=topdownloaded'.format(DJANGO_BASE))
+        self.assertContains(response, ">No data found<")
+        
         response = client.get('/{0}stats/top/'.format(DJANGO_BASE))
         self.assertTemplateUsed(response, 'stats/topstats.html')
         self.assertContains(response, "META-SHARE node visits statistics")
-        self.assertNotContains(response, "No data found")
+        self.assertNotContains(response, ">No data found<")
 
         response = client.get('/{0}stats/top/?last=week'.format(DJANGO_BASE))
-        self.assertNotContains(response, "No data found")
+        self.assertNotContains(response, ">No data found<")
+
+        response = client.get('/{0}stats/top/?country=IT'.format(DJANGO_BASE))
+        self.assertContains(response, ">No data matched<")
+
+        response = client.get('/{0}stats/top/?last=week&country=IT'.format(DJANGO_BASE))
+        self.assertContains(response, ">No data matched<")
 
 
     def test_latest_queries(self):
@@ -132,10 +147,10 @@ class StatsTest(TestCase):
         response = client.get('/{0}repository/search/?q=test'.format(DJANGO_BASE))
         response = client.get('/{0}repository/search/?q=italian'.format(DJANGO_BASE))
         response = client.get('/{0}stats/top/?view=topqueries'.format(DJANGO_BASE))
-        self.assertNotContains(response, "No data found")
+        self.assertNotContains(response, ">No data found<")
 
         response = client.get('/{0}stats/top/?view=latestqueries'.format(DJANGO_BASE))
-        self.assertNotContains(response, "No data found")
+        self.assertNotContains(response, ">No data found<")
         latest_query = getLastQuery(2)
         self.assertGreaterEqual(len(latest_query), 1)
         for item in latest_query:
