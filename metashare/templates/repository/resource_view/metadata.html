@@ -51,7 +51,7 @@
 		{% if metadata_dict.Metadata.Revision %}
 			<div class="dataline">
 				<label>
-					<strong>Revision: </strong>{{  metadata_dict.Metadata.Revision }}
+					<strong>Revision: </strong>{{ metadata_dict.Metadata.Revision }}
 				</label>
 			</div>
 		{% endif %}
@@ -65,7 +65,7 @@
 	{% for key1, value1 in value.items %}
 		{% if "Metadata_creator" in key1 %}
 			 {% include "repository/resource_view/person.html" with person_dict=value1 type="Metadata Creator" %}
-			 <hr/>
+			 <div class="separation"><hr/></div>
 		{% endif %}
 	{% endfor %}
 {% endfor %}

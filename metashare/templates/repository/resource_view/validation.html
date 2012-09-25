@@ -3,14 +3,14 @@
 <label class='component'>Validation</label>
 
 {% for dict in validation_dicts %}
-     <div class="dataline indented">
+     <div class="dataline">
 		<label>
 			{% ifequal dict.Validation.Validated "True" %}Validated{% else %}Not Validated{% endifequal %}
 		</label>
 	</div>
 		
 	{% if dict.Validation.Validation_type %}
-	     <div class="dataline indented">
+	     <div class="dataline">
 			<label>
 				<strong>Type of Validation:</strong> {{ dict.Validation.Validation_type }}
 			</label>
@@ -18,7 +18,7 @@
 	{% endif %}
 	
 	{% if dict.Validation.Validation_mode %}
-	     <div class="dataline indented">
+	     <div class="dataline">
 			<label>
 				<strong>Validation Mode:</strong> {{ dict.Validation.Validation_mode }}
 			</label>
@@ -26,7 +26,7 @@
 	{% endif %}
 	
 	{% if dict.Validation.Validation_mode_details %}
-	     <div class="dataline indented">
+	     <div class="dataline">
 			<label>
 				<strong>Mode Details:</strong> {{ dict.Validation.Validation_mode_details }}
 			</label>
@@ -34,7 +34,7 @@
 	{% endif %}
 	
 	{% if dict.Validation.Validation_extent %}
-	     <div class="dataline indented">
+	     <div class="dataline">
 			<label>
 				<strong>Extent:</strong> {{ dict.Validation.Validation_extent }}
 			</label>
@@ -42,7 +42,7 @@
 	{% endif %}
 
 	{% if dict.Validation.Validation_extent_details %}
-	     <div class="dataline indented">
+	     <div class="dataline">
 			<label>
 				<strong>Extent Details:</strong> {{ dict.Validation.Validation_extent_details }}
 			</label>
@@ -50,7 +50,7 @@
 	{% endif %}
 	
 	{% if dict.Validation.Size_per_validation %}
-	     <div class="dataline indented">
+	     <div class="dataline">
 			<label>
 				<strong>Size per Validation:</strong> {{ dict.Validation.Size_per_validation }}
 			</label>
@@ -80,17 +80,19 @@
 			{% endif %}
 			{% for key1, value1 in value.items %}
 				{% if "Validator" in key1 %}
-					 {% if value1.Organization %}
+					{% if value1.Organization %}
 				    	{% include "repository/resource_view/person.html" with person_dict=value1.Organization type="Validator" %}
 				    {% else %}
 				    	{% include "repository/resource_view/person.html" with person_dict=value1.Validator type="Validator" %}
 				    {% endif %}
-					 <hr/>
+				    <div class="separation"><hr/></div>
 				{% endif %}
 			{% endfor %}
 		{% endfor %}
 	</div>
-	
+	{% if not forloop.last %}
+		<div class="hr"><hr/></div>
+	{% endif %}
 {% endfor %}
 
 
