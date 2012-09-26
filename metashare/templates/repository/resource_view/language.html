@@ -4,10 +4,8 @@
 <div class="dataline">
 <ul>
 
-{% for key, value in languages.items %}
-
+	{% for key, value in languages.items %}
 		{% for key1, value1 in value.items %}
-
 				{% if key1 == "Language_name" %}
 					<li class="dataline" title="{{value.Language_id}}">
 						{{ value1 }}
@@ -29,8 +27,7 @@
 					</li>
 				{% endif %}
 		{% endfor %}
-
-{% endfor %}
+	{% endfor %}
 </ul>
 </div>
 
