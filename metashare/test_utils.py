@@ -19,8 +19,7 @@ from metashare.repository.models import resourceInfoType_model, \
     documentInfoType_model, targetResourceInfoType_model, organizationInfoType_model, \
     projectInfoType_model
 from metashare.settings import LOGIN_URL
-from metashare.storage.models import PUBLISHED, MASTER, StorageObject, \
-    RemovedObject, INTERNAL
+from metashare.storage.models import PUBLISHED, MASTER, StorageObject, INTERNAL
 from metashare.xml_utils import import_from_file
 import os
 from metashare.stats.models import LRStats, UsageStats, QueryStats
@@ -41,11 +40,9 @@ def clean_resources_db():
     """
     for res in resourceInfoType_model.objects.all():
         res.delete_deep()
-    # delete storage objects and removed objects
+    # delete storage objects
     for sto in StorageObject.objects.all():
         sto.delete()
-    for rmo in RemovedObject.objects.all():
-        rmo.delete()
     # delete all reusable entities
     for ait in actorInfoType_model.objects.all():
         ait.delete()

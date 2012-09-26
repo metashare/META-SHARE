@@ -3,7 +3,7 @@ Management utility to handle removed proxy nodes.
 """
 from django.core.management.base import BaseCommand
 from metashare import settings
-from metashare.storage.models import PROXY, StorageObject, RemovedObject
+from metashare.storage.models import PROXY, StorageObject
 from metashare.sync.sync_utils import remove_resource
 import sys
 import logging
@@ -27,15 +27,10 @@ class Command(BaseCommand):
         remove_count = 0
         for proxy_res in StorageObject.objects.filter(copy_status=PROXY):
             if not proxy_res.source_node in proxied_ids:
-                # delete the associated resource and create a RemovedObject
-                # to let the other nodes know that the resource has been removed
-                # when synchronizing
+                # delete the associated resource
                 sys.stdout.write("\nremoving proxied resource {}\n".format(proxy_res.identifier))
                 LOGGER.info("removing from proxied node {} resource {}".format(proxy_res.source_node, proxy_res.identifier))
                 remove_count += 1
-                # if there is already a RemoveObject, we just use that
-                rem_obj = RemovedObject.objects.get_or_create(identifier=proxy_res.identifier)[0]
-                rem_obj.save()
                 remove_resource(proxy_res)
         sys.stdout.write("\n{} proxied resources removed\n".format(remove_count))
         LOGGER.info("A total of {} resources have been removed".format(remove_count))

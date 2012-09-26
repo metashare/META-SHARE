@@ -1,4 +1,5 @@
 import logging
+import shutil
 import django.db.models
 
 from django.contrib import admin
@@ -33,6 +34,7 @@ TESTFIXTURES_ZIP = '{}/repository/fixtures/tworesources.zip'.format(ROOT_PATH)
 BROKENFIXTURES_ZIP = '{}/repository/fixtures/onegood_onebroken.zip'.format(ROOT_PATH)
 LEX_CONC_RES_XML = '{}/repository/test_fixtures/published-lexConcept-Audio-EnglishGerman.xml'.format(ROOT_PATH)
 DATA_UPLOAD_ZIP = '{}/repository/fixtures/data_upload_test.zip'.format(ROOT_PATH)
+DATA_UPLOAD_ZIP_2 = '{}/repository/fixtures/data_upload_test_2.zip'.format(ROOT_PATH)
 
 
 def _import_test_resource(editor_group=None, path=TESTFIXTURE_XML,
@@ -915,6 +917,36 @@ class DataUploadTests(TestCase):
             pk=DataUploadTests.testfixture.storage_object.pk)
         self.assertTrue(_so.has_local_download_copy(),
             "expected that uploaded LR data is available as a local download")
+
+    def test_editor_can_update_own_upload_data(self):
+        """
+        Verifies that an editor user may update actual resource data by
+        re-uploading to owned resources.
+        """
+        client = test_utils.get_client_with_user_logged_in(
+            DataUploadTests.editor_login)
+        # add resource data first which can be updated later:
+        shutil.copy(DATA_UPLOAD_ZIP, u'{}/archive.zip'.format(
+                DataUploadTests.testfixture3.storage_object._storage_folder()))
+        DataUploadTests.testfixture3.storage_object.update_storage()
+        # make sure that there is really resource data stored now:
+        _so = StorageObject.objects.get(
+            pk=DataUploadTests.testfixture3.storage_object.pk)
+        _old_checksum = _so.checksum
+        self.assertNotEqual(None, _old_checksum)
+        # vreify that the resource data update works:
+        _data_upload_url = "{}repository/resourceinfotype_model/{}/" \
+            "upload-data/".format(ADMINROOT, DataUploadTests.testfixture3.id)
+        response = client.get(_data_upload_url)
+        self.assertContains(response,
+            DataUploadTests.testfixture3.storage_object.get_download())
+        with open(DATA_UPLOAD_ZIP_2, 'rb') as _fhandle:
+            response = client.post(_data_upload_url,
+                {'uploadTerms': 'on', 'resource': _fhandle}, follow=True)
+            self.assertContains(response, "was changed successfully.")
+        _so = StorageObject.objects.get(
+            pk=DataUploadTests.testfixture3.storage_object.pk)
+        self.assertNotEqual(_so.checksum, _old_checksum)
 
     def test_editor_cannot_upload_data_to_invisible_resources(self):
         """

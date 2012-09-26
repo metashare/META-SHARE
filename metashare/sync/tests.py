@@ -16,7 +16,7 @@ from django.core.management import call_command
 from metashare import settings, test_utils
 from metashare.repository.models import resourceInfoType_model
 from metashare.storage.models import INGESTED, INTERNAL, StorageObject, \
-    PUBLISHED, compute_digest_checksum, RemovedObject, MASTER, PROXY
+    PUBLISHED, compute_digest_checksum, MASTER, PROXY
 from metashare.settings import DJANGO_BASE, LOGIN_URL, LOG_HANDLER
 from metashare.test_utils import set_index_active
 
@@ -44,21 +44,9 @@ class MetadataSyncTest (TestCase):
     def assertIsForbidden(self, response):
         self.assertContains(response, "Forbidden", status_code=403)
 
-    def assertValidInventoryItem(self, entry):
-        if not (entry['id'] and entry['digest']):
-            raise Exception(
-              'Inventory item does not have "id" and "digest" key-value pairs: {}'.format(entry))
-        
     def assertValidInventory(self, json_inventory):
-        # inventory contains a 'removed' and an 'existing' section
-        if not (json_inventory['removed'] or json_inventory['existing']):
-            raise Exception(
-              'Inventory item does not have "removed" or "existing" key-value pairs: {}'.format(json_inventory))
-        is_empty = True
-        for entry in json_inventory['existing']:
-            is_empty = False
-            self.assertValidInventoryItem(entry)
-        if is_empty:
+        # inventory contains pairs of resource ids and digests
+        if len(json_inventory) == 0:
             raise Exception(
               'Not a valid inventory because it does not have any existing inventory items: {}'.format(json_inventory))
 
@@ -68,7 +56,7 @@ class MetadataSyncTest (TestCase):
         self.assertEquals(settings.METASHARE_VERSION, response['Metashare-Version'])
         with ZipFile(StringIO(response.content), 'r') as inzip:
             json_inventory = json.load(inzip.open('inventory.json'))
-        self.assertValidInventory(json_inventory)
+        self.assertNotEquals(0, len(json_inventory))
 
     def assertValidFullMetadataResponse(self, response):
         self.assertEquals(200, response.status_code)
@@ -153,14 +141,6 @@ class MetadataSyncTest (TestCase):
         pubres = cls.import_test_resource('ILSP10.xml', PUBLISHED)
         pubres.storage_object.digest_modified = datetime.date(2012, 1, 1)
         pubres.storage_object.save()
-        
-        # some resources have been removed
-        rem1 = RemovedObject.objects.create(identifier='rem1')
-        rem1.save()
-        rem2 = RemovedObject.objects.create(identifier='rem2')
-        rem2.save()
-        rem3 = RemovedObject.objects.create(identifier='rem4')
-        rem3.save()
 
 
     @classmethod
@@ -175,31 +155,31 @@ class MetadataSyncTest (TestCase):
     def test_unprotected_inventory(self):
         settings.SYNC_NEEDS_AUTHENTICATION = False
         client = Client()
-        response = client.get(self.INVENTORY_URL)
+        response = client.get(self.INVENTORY_URL + "?sync_protocol=1.0")
         self.assertValidInventoryResponse(response)
 
     def test_syncuser_get_inventory(self):
         settings.SYNC_NEEDS_AUTHENTICATION = True
         client = test_utils.get_client_with_user_logged_in(self.syncuser_login)
-        response = client.get(self.INVENTORY_URL)
+        response = client.get(self.INVENTORY_URL + "?sync_protocol=1.0")
         self.assertValidInventoryResponse(response)
 
     def test_normaluser_cannot_reach_inventory(self):
         settings.SYNC_NEEDS_AUTHENTICATION = True
         client = test_utils.get_client_with_user_logged_in(self.normal_login)
-        response = client.get(self.INVENTORY_URL)
+        response = client.get(self.INVENTORY_URL + "?sync_protocol=1.0")
         self.assertIsForbidden(response)
 
     def test_editoruser_cannot_reach_inventory(self):
         settings.SYNC_NEEDS_AUTHENTICATION = True
         client = test_utils.get_client_with_user_logged_in(self.editor_login)
-        response = client.get(self.INVENTORY_URL)
+        response = client.get(self.INVENTORY_URL + "?sync_protocol=1.0")
         self.assertIsForbidden(response)    
 
     def test_anonymous_cannot_reach_inventory(self):
         settings.SYNC_NEEDS_AUTHENTICATION = True
         client = Client()
-        response = client.get(self.INVENTORY_URL)
+        response = client.get(self.INVENTORY_URL + "?sync_protocol=1.0")
         self.assertIsForbidden(response)
         
     def test_unprotected_full_metadata(self):
@@ -235,14 +215,14 @@ class MetadataSyncTest (TestCase):
     def test_inventory_doesnt_include_internal(self):
         settings.SYNC_NEEDS_AUTHENTICATION = False
         client = Client()
-        response = client.get(self.INVENTORY_URL)
+        response = client.get(self.INVENTORY_URL + "?sync_protocol=1.0")
         self.assertValidInventoryResponse(response)
         json_inventory = self.extract_inventory(response)
-        self.assertEquals(2, len(json_inventory['existing']))
-        for struct in json_inventory['existing']:
-            storage_object = StorageObject.objects.get(identifier=struct['id'])
+        self.assertEquals(2, len(json_inventory))
+        for resource_id in json_inventory:
+            storage_object = StorageObject.objects.get(identifier=resource_id)
             self.assertTrue(storage_object.publication_status in (INGESTED, PUBLISHED),
-              "Resource {0} should not be included in inventory because it is not ingested or published".format(struct['id']))
+              "Resource {0} should not be included in inventory because it is not ingested or published".format(resource_id))
 
     def test_can_get_ingested_metadata(self):
         settings.SYNC_NEEDS_AUTHENTICATION = False
@@ -284,35 +264,27 @@ class MetadataSyncTest (TestCase):
                 storage_json_string = storage_file.read() 
         self.assertEquals(expected_digest, compute_digest_checksum(
           resource_xml_string, storage_json_string))
-    
-    def test_inventory_undated(self):
+
+    def test_inventory_no_sync_protocol(self):
         settings.SYNC_NEEDS_AUTHENTICATION = False
         response = Client().get(self.INVENTORY_URL)
-        inventory = self.extract_inventory(response)
-        self.assertEquals(2, len(inventory['existing']))
-        self.assertEquals(3, len(inventory['removed']))
+        self.assertEquals(501, response.status_code)
 
-    def test_inventory_veryolddate(self):
+    def test_inventory_no_matching_sync_protocol(self):
         settings.SYNC_NEEDS_AUTHENTICATION = False
-        response = Client().get(self.INVENTORY_URL+"?from=2011-01-01")
-        inventory = self.extract_inventory(response)
-        self.assertEquals(2, len(inventory['existing']))
-        self.assertEquals(3, len(inventory['removed']))
-
-    def test_inventory_mediumdate(self):
+        response = Client().get(
+          self.INVENTORY_URL + "?sync_protocol=3.0&sync_protocol=3.5&sync_protocol=4.0")
+        self.assertEquals(501, response.status_code)
+    
+    def test_inventory_matching_sync_protocol(self):
         settings.SYNC_NEEDS_AUTHENTICATION = False
-        response = Client().get(self.INVENTORY_URL+"?from=2012-02-01")
+        response = Client().get(
+          self.INVENTORY_URL + "?sync_protocol=1.0&sync_protocol=1.5&sync_protocol=2.0")
+        self.assertEquals(200, response.status_code)
+        self.assertEquals("1.0", response['Sync-Protocol'])
         inventory = self.extract_inventory(response)
-        self.assertEquals(1, len(inventory['existing']))
-        self.assertEquals(3, len(inventory['removed']))
-
-    def test_inventory_toorecentdate(self):
-        settings.SYNC_NEEDS_AUTHENTICATION = False
-        response = Client().get(self.INVENTORY_URL+"?from=2099-01-01")
-        inventory = self.extract_inventory(response)
-        self.assertEquals(0, len(inventory['existing']))
-        self.assertEquals(0, len(inventory['removed']))
-
+        self.assertNotEquals(0, len(inventory))
+     
     def test_proxy_check(self):
         
         # define proxied nodes
@@ -351,8 +323,6 @@ class MetadataSyncTest (TestCase):
         res2_folder = os.path.join(settings.STORAGE_PATH, res2.storage_object.identifier)
         res3_folder = os.path.join(settings.STORAGE_PATH, res3.storage_object.identifier)
         self.assertEquals(3, StorageObject.objects.filter(copy_status=PROXY).count())
-        # there are already 3 RemovedObjects from the setup method
-        self.assertEquals(3, RemovedObject.objects.count())
         self.assertTrue(os.path.isdir(res1_folder))
         self.assertTrue(os.path.isdir(res2_folder))
         self.assertTrue(os.path.isdir(res3_folder))
@@ -361,8 +331,6 @@ class MetadataSyncTest (TestCase):
         call_command('check_proxied_nodes', interactive=False)
         # no proxied resource has been removed
         self.assertEquals(3, StorageObject.objects.filter(copy_status=PROXY).count())
-        # there are already 3 RemovedObjects from the setup method
-        self.assertEquals(3, RemovedObject.objects.count())
 
         # remove proxied node
         del settings.PROXIED_NODES['proxied_node_1']
@@ -373,5 +341,3 @@ class MetadataSyncTest (TestCase):
         self.assertFalse(os.path.isdir(res1_folder))
         self.assertFalse(os.path.isdir(res2_folder))
         self.assertTrue(os.path.isdir(res3_folder))        
-        # two more RemovedObjects have been created
-        self.assertEquals(5, RemovedObject.objects.count())

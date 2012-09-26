@@ -25,7 +25,8 @@ function closetabvals( id ) {
     document.getElementById('fieldname').value='';
 }
 
-function getvalues(classname, fieldname) {
+function getvalues(modelname, classname, fieldname) {
+    document.getElementById('modelname').value=modelname;
     document.getElementById('classname').value=classname;
     document.getElementById('fieldname').value=fieldname;
     
@@ -133,55 +134,52 @@ function addStatus(filter){
       <div id="subtab">
         <div id="section">
           <div id="colsubtab"><br><h4>Filter by: <img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/help.png" style="cursor: pointer; vertical-align: bottom" onclick="showdiv('filtershelp')"></h4></div>  
-          <div id="filtershelp" class="warning" style="visibility: hidden; display: none">This panel shows what metadata have been used to describe the META-SHARE linguistic resources.<br>The metadata defined in the schema can be "required", "recommended" or "optional".<br>Some of them could not be used, contrary for used metadata a pair of numbers is showed like <div class="coverage optional">&nbsp;28/12&nbsp;</div>.<br>The first number tells how many times a metadata has been filled in, while the second how many times<br>the metadata has been used for the linguistic resources.<br>A table with all filled in values is showed when clicking on a used metadata.</div>
+          <div id="filtershelp" class="warning" style="visibility: hidden; display: none">This panel shows which metadata have been used to describe the META-SHARE linguistic resources.<br><br>Each metadata defined in the schema can be either "required", "recommended" or "optional".<br>The metadata usage statistics reports two counters. The first counter says how many times a metadata has been filled in with a certain value, while<br>the second counter says the number of resources for which the metadata has been used.<br>For instance <div class="coverage required">&nbsp;28/12&nbsp;</div> means that the corresponding required metadata has been filled in 28 times (possibly with redundant values), and that 12 different resources<br>have been described with that metadata.<br><br>You can click on a metadata name to see a table with all the actual values used to fill in that metadata.</div>
           <div id="colsubtab"><div class="accordion">Metadata status</div>
-                    {% for filter, counter in usage_filter.items %}
-                   {% if filter in 'required recommended optional' %}
-                        &nbsp;<input type="checkbox" name=filter value="{{ filter }}" onClick="submit()"
-                       {% if filter in selected_filters or selected_filters|length == 0 %}
-                            checked
-                       {% endif %}     
-                       ><div class="coverage {{ filter }}">&nbsp; {{ filter }} &nbsp;</div>({{ counter }})<br>
-                   {% endif %}                  
-                {% endfor %}
-                </div>
-          <div id="colsubtab"><div class="accordion">Metadata usage in {{ lr_count }} resource{{lr_count|pluralize}}</div>
-                {% for filter, counter in usage_filter.items %}
-                   {% if filter in 'never used  at least one' %}
-                        &nbsp;<input type="checkbox" name=filter value="{{ filter }}" onClick="submit()"
-                       {% if filter in selected_filters or selected_filters|length == 0 %}
-                            checked
-                       {% endif %}     
-                       ><div class="coverage">&nbsp;{{ filter }}
-                       {% if filter == "at least one" %}
-                            ( value counter / resources counter)
-                       {% endif %}
-                       &nbsp;</div>({{ counter }})<br>
-                   {% endif %}                  
-                {% endfor %}</div>
-    </div>
+          {% for filter, counter in usage_filter.items %}
+            {% if filter in "required optional recommended" %}
+                &nbsp;<input type="checkbox" name=filter value="{{ filter }}" onClick="submit()"
+                {% if filter in selected_filters or selected_filters|length == 0 %} checked{% endif %}                  
+                 ><div class="coverage {{ filter }}">&nbsp; {{ filter }} &nbsp;</div>({{ counter }})<br>
+            {% endif %}
+          {% endfor %}
+          </div>
+          <div id="colsubtab"><div class="accordion">Metadata usage in {{ lr_count }} resource{{ lr_count|pluralize }}</div>
+          {% for filter, counter in usage_filter.items %}
+            {% if filter in "never used at least one" %}
+                &nbsp;<input type="checkbox" name=filter value="{{ filter }}" onClick="submit()"
+                {% if filter in selected_filters or selected_filters|length == 0 %} checked{% endif %}     
+                ><div class="coverage">&nbsp;{{ filter }}&nbsp;</div>({{ counter }})
+                {% if filter == "at least one" %}
+                    &nbsp;( value counter / resources counter)
+                {% endif %}
+                <br>
+            {% endif %}
+          {% endfor %}
+          </div>
         </div>
-        <input type="hidden" name="class" id="classname" value="{{ selected_class }}">
-        <input type="hidden" name="field" id="fieldname" value="{{ selected_field }}">
-        <input type="hidden" name="expandall" id="expandall" value="{{ expand_all }}">
-</form>
+      </div>
+      <input type="hidden" name="model" id="modelname" value="{{ selected_model }}">
+      <input type="hidden" name="class" id="classname" value="{{ selected_class }}">
+      <input type="hidden" name="field" id="fieldname" value="{{ selected_field }}">
+      <input type="hidden" name="expandall" id="expandall" value="{{ expand_all }}">
+   </form>
     
 <div style="*display: inline;"><h4>&nbsp;&nbsp;Found <font size=+1>{{ fields_count }}</font> metadata</h4>
     <div style="float: right; margin-top: -20px; margin-right: 20px">[ <a href="javascript:expandAll();">Expand all</a>
             | <a href="javascript:collapseAll();">Collapse all</a> ]</div>
 </div>    
     {% if errors != None %}
-       <div id=warning class=warning>
             &nbsp; <img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/error.png"> &nbsp; {{ errors }} &nbsp;
        </div>
     {% endif %}
     
        
         {% for class, fields in usage_fields %}
+            {% if selected_model == fields.0.7 %}
+             {% if textvalues != None and textvalues|length > 0 %}
             <!-- used values table -->
-            {% if selected_class == fields.0.7 %}
-             <a name="fieldvalues"></a>
-             {% if result != None and result|length > 0 %}
+            <a name="fieldvalues"></a>
             <div id=fieldvalues class=fieldvalues>
              <table width=100% border=1 valign=top>
                 <tr bgcolor=lightgray>
@@ -190,7 +188,7 @@ function addStatus(filter){
                     <td style="text-align: right" nowrap>resources<br>counter</th>                    
                 </tr>
                  
-            {% for field in result %}
+            {% for field in textvalues %}
                 <tr>
                 <th>{{ field.0 }}</th>
                 <th style="text-align: right">{{ field.2 }}</th>
@@ -199,9 +197,9 @@ function addStatus(filter){
             {% endfor %}
             </table>
             </div>
-            {% endif %} 
-            {% endif %} 
             <!-- end table -->
+            {% endif %} 
+            {% endif %} 
             
             <a name="{{ fields.0.7 }}"></a>
             <div class="accordion"><a href="#" onclick="return false"><label class='component'>&nbsp;{{ class }}&nbsp;</label></a></div> 
@@ -213,11 +211,11 @@ function addStatus(filter){
                      {{ field.2 }}</label></a>
                 {% else %}
                     <div class="dataline mandatory" style="width:100%">
-                    {% if "/" in field.2 %}
-                        <label class="indent">&nbsp;{{ field.2 }}&nbsp;</label>
-                    {% else %}
+                        {% if field.6 == "ifield" %}
+                            <label class='indent'>&nbsp;&nbsp;&nbsp;
+                        {% endif %}   
                         {% if field.5 > 0 %}
-                            <a href="javascript:getvalues('{{ field.7 }}','{{ field.1 }}')"
+                            <a href="javascript:getvalues('{{ fields.0.7 }}','{{ field.7 }}','{{ field.1 }}')"
                             {% if selected_class == field.7 and selected_field == field.1 %}
                                 class="addFilter">
                             {% else %}
@@ -227,7 +225,9 @@ function addStatus(filter){
                         {% else %}
                             <label class="title indent">&nbsp;{{ field.2 }}&nbsp;</label>
                         {% endif %}
-                    {% endif %}   
+                        {% if field.6 == "ifield" %}
+                            </label>
+                        {% endif %}   
                 {% endif %}
                 
                 
@@ -244,10 +244,10 @@ function addStatus(filter){
                         {% endif %}
                     {% endif %}
                 {% endif %}
-                {% if field.5 == 0 %}
+                {% if field.4 == 0 %}
                     &nbsp;<i>never used</i>&nbsp;
                 {% else %}
-                    &nbsp; {{ field.5 }}/{{ field.4 }} &nbsp;
+                    &nbsp; {{ field.4 }}/{{ field.5 }} &nbsp;
                 {% endif %}
                 </div>
                 

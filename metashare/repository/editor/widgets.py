@@ -14,9 +14,10 @@ from selectable.forms.widgets import SelectableMediaMixin, SelectableMultiWidget
     LookupMultipleHiddenInput
 from django.utils.http import urlencode
 from metashare import settings
-from selectable.forms.widgets import AutoCompleteWidget        
+from selectable.forms.widgets import AutoCompleteWidget, AutoCompleteSelectWidget        
 from django.forms.util import flatatt
 from django.utils.encoding import force_unicode
+from django import forms
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -175,7 +176,12 @@ class LangDictWidget(DictWidget):
         from the JavaScript of `DictWidget` and CSS specific to this widget.
         """
         # pylint: disable-msg=E1101
-        return Media(js = ('{}js/lang_dict_widget.js'\
+        return Media(js = ('js/jquery-ui.min.js',
+                           '{}js/pycountry.js'\
+                           .format(settings.ADMIN_MEDIA_PREFIX),
+                           '{}js/autocomp.js'\
+                           .format(settings.ADMIN_MEDIA_PREFIX),
+                           '{}js/lang_dict_widget.js'\
                            .format(settings.ADMIN_MEDIA_PREFIX),)) \
             + Media(css={'all': ('{}css/lang_dict_widget.css'.format(
                                         settings.ADMIN_MEDIA_PREFIX),)})
@@ -668,3 +674,30 @@ class LookupMultipleHiddenInputMS(LookupMultipleHiddenInput):
                 input_attrs['model-class'] = item_cls
             inputs.append(u'<input%s />' % flatatt(input_attrs))
         return mark_safe(u'\n'.join(inputs))
+
+class AutoCompleteSelectSingleWidget(AutoCompleteSelectWidget):
+
+    def __init__(self, lookup_class, *args, **kwargs):
+        self.lookup_class = lookup_class
+        self.allow_new = kwargs.pop('allow_new', False)
+        self.limit = kwargs.pop('limit', None)
+        query_params = kwargs.pop('query_params', {})
+        attrs = {
+            u'data-selectable-throbber-img': '{0}img/admin/throbber_16.gif'.format(settings.ADMIN_MEDIA_PREFIX),
+            u'data-selectable-use-state-error': 'false',
+        }
+        widget_list = [
+            AutoCompleteWidget(
+                lookup_class, allow_new=self.allow_new,
+                limit=self.limit, query_params=query_params, attrs=attrs
+            ),
+            forms.HiddenInput(attrs={u'data-selectable-type': 'hidden'})
+        ]
+        # Directly call the super-super-class __init__ method.
+        # The super-class __init__ method does not allow custom attributes
+        # to be passed to the AutoCompleteWidget. For this reason this
+        # __init__ method is a modified version of the super-class one
+        # and replaces it.
+        # pylint: disable-msg=E1003
+        super(AutoCompleteSelectWidget, self).__init__(widget_list, *args, **kwargs)
+    

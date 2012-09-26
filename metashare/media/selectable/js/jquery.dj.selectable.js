@@ -189,7 +189,10 @@
 
         showThrobber: function() {
         	var self = this;
-        	$(self.searchIcon).attr('src', self.throbberImg);
+        	if(self.throbberImg)
+        	{
+            	$(self.searchIcon).attr('src', self.throbberImg);
+        	}
         },
         
         hideThrobber: function() {
