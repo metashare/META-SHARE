@@ -1,13 +1,22 @@
 
 {% with media_info=resource_component_dict.Resource_component %}
 	{% if type == "text" %}
-		{% include "repository/resource_view/detailed_media_info.html" with resource_component=resource_component_dicts.text %}
+		{% for key, value in resource_component_dict.Resource_component.Corpus_media.items %}
+			{% if "text" in key %}
+				{% include "repository/resource_view/detailed_media_info.html" with resource_component=value %}
+			{% endif %}
+		{% endfor %}
 	{% else %}
 		{% if type == "audio" %}
 			{% include "repository/resource_view/detailed_media_info.html" with resource_component=resource_component_dicts.audio %}
 		{% else %}
 			{% if type == "video" %}
-				{% include "repository/resource_view/detailed_media_info.html" with resource_component=resource_component_dicts.video %}
+				{% for key, value in resource_component_dict.Resource_component.Corpus_media.items %}
+					{% if "video" in key %}
+						{% include "repository/resource_view/detailed_media_info.html" with resource_component=value %}
+					{% endif %}
+				{% endfor %}
+				
 			{% else %}
 				{% if type == "image" %}
 					{% include "repository/resource_view/detailed_media_info.html" with resource_component=resource_component_dicts.image %}

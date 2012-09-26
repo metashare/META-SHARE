@@ -57,7 +57,7 @@ div.right-corner{
 label.title{
 	display:block;
 	font-size:14px;
-	background:#eee;
+	background:#FFDDAA;
 	border-bottom:solid 1px #ccc;
 	border-left:solid 1px #ccc;
 	padding-left:2px;
@@ -256,15 +256,18 @@ label span a{
 	margin-right:5px;
 }
 
-.licence{
-	background-color: #FFDDAA;
-	padding:3px;
-	border-bottom-left-radius: 10px;
-	border-bottom-right-radius: 10px;
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
-	color: #555555;
-	margin-right:5px;
+.subtitle{
+	background-color: #e1e1e1;
+	padding-left:3px;
+	padding-right:3px;	
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	color: #333;
+	margin-left:10px;
+	margin-bottom:2px;
+	display:table;	
 }
 
 .otherLang {
@@ -342,6 +345,7 @@ img.line{
 .contact .dataline{
 	font-weight:bold;
 	font-size:12px;
+	display:block;	
 }
 
 .indented{

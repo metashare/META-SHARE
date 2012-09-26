@@ -131,6 +131,9 @@ class ResourceCountPair(models.Model):
     lrid = models.CharField(editable=False, db_index=True, blank=False, max_length=64)
     count = models.PositiveIntegerField(default=0)
 
+    class Meta:
+        unique_together = (("container", "lrid"), )   
+        
     def increaseCount(self, inc=1):
         """
         increases the count and save the model
