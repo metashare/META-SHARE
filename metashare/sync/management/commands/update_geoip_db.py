@@ -20,19 +20,20 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         geogzfile = ROOT_PATH+'/stats/resources/GeoIP.dat.gz'
         geodatfile = ROOT_PATH+'/stats/resources/GeoIP.dat'
-        f = urllib2.urlopen(GEOIP_DATA_URL)
-        with open(geogzfile, 'wb') as db:
-            db.write(f.read())
-            
-        if os.path.exists(geogzfile) and os.path.getsize(geogzfile) > 0:
-            try:
-                db = gzip.open(geogzfile, 'r:gz')
-                datfile = open(geodatfile, 'w')
-                datfile.write(db.read())
-                datfile.close()
-                LOGGER.info("Updated "+geodatfile+" file")
-            except:
-                LOGGER.info("ERROR! Gzip decompression failure on "+geogzfile+".")
-        else:
-            LOGGER.info("ERROR! Downloading GeoIP database from "+GEOIP_DATA_URL+" failed")
+        try:
+            urldoc = urllib2.urlopen(GEOIP_DATA_URL)
+            with open(geogzfile, 'wb') as db:
+                db.write(urldoc.read())
+                
+            if os.path.exists(geogzfile) and os.path.getsize(geogzfile) > 0:
+                try:
+                    db = gzip.open(geogzfile, 'r:gz')
+                    datfile = open(geodatfile, 'w')
+                    datfile.write(db.read())
+                    datfile.close()
+                    LOGGER.info("Updated "+geodatfile+" file")
+                except:
+                    LOGGER.info("ERROR! Gzip decompression failure on "+geogzfile+".")
+        except:
+            LOGGER.info("ERROR! Download the GeoIP resource "+GEOIP_DATA_URL+" failed")
 
