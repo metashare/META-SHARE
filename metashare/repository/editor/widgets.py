@@ -706,6 +706,11 @@ class AutoCompleteSelectSingleWidget(AutoCompleteSelectWidget):
             ),
             forms.HiddenInput(attrs={u'data-selectable-type': 'hidden'})
         ]
+        # Directly call the super-super-class __init__ method.
+        # The super-class __init__ method does not allow custom attributes
+        # to be passed to the AutoCompleteWidget. For this reason this
+        # __init__ method is a modified version of the super-class one
+        # and replaces it.
         # pylint: disable-msg=E1003
         super(AutoCompleteSelectWidget, self).__init__(widget_list, *args, **kwargs)
     
