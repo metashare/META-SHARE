@@ -1,10 +1,10 @@
 {% spaceless %}
 
-<label class='component'>Annotation:</label>
+<label class='title'>Annotation:</label>
 <div class="dataline">
 {% for key, value in annotations.items %}
 	{% if "Annotation" in key %}
-		<label class="title"><strong>{{ value.Annotation_type }}</strong></label>
+		<label class="subtitle"><strong>{{ value.Annotation_type }}</strong></label>
 		{% if value.Tagset %}
 			<div>
 				<label class="dataline indented">

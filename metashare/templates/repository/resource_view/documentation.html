@@ -1,17 +1,19 @@
 {% if type == "Documentation" %}
 {% else %}
-	<label class='title'>{{type}}</label>
+	<label class={% if level == "sub" %}'subtitle'{% else %}'title'{% endif %}>{{type}}</label>
 {% endif %}
 
+{% if level == "sub" %}<div class="indented">{% endif %}
+
 	{% if documentation.Document_type %}
-		<div class="dataline indented">
+		<div class="dataline">
 			<label>
 				<strong>Document Type:</strong> {{ documentation.Document_type }}
 			</label>
 		</div>
 	{% endif %}
 		
-	<div class="dataline indented">
+	<div class="dataline">
 		<label>
 		{% if documentation.Author %}
 			{{ documentation.Author }}, 			
@@ -37,7 +39,7 @@
 	</div>
 	
 	{% if documentation.Editor %}
-		<div class="dataline indented">
+		<div class="dataline">
 			<label>
 				<strong>Editor:</strong> {{ documentation.Editor }}
 			</label>
@@ -45,7 +47,7 @@
 	{% endif %}
 	
 	{% if documentation.Year %}
-		<div class="dataline indented">
+		<div class="dataline">
 			<label>
 				<strong>Year:</strong> {{ documentation.Year }}
 			</label>
@@ -53,7 +55,7 @@
 	{% endif %}
 	
 	{% if documentation.Publisher %}
-		 <div class="dataline indented">
+		 <div class="dataline">
 			<label>
 				<strong>Publisher:</strong> {{ documentation.Publisher }}
 			</label>
@@ -61,7 +63,7 @@
 	{% endif %}
 	
 	{% if documentation.Book_title %}
-		 <div class="dataline indented">
+		 <div class="dataline">
 			<label>
 				<strong>Book Title:</strong> {{ documentation.Book_title }}
 			</label>
@@ -70,7 +72,7 @@
 	
 	
 	{% if documentation.Series %}
-		 <div class="dataline indented">
+		 <div class="dataline">
 			<label>
 				<strong>Series:</strong> {{ documentation.Series }}
 			</label>
@@ -79,7 +81,7 @@
 	
 	
 	{% if documentation.Edition %}
-		 <div class="dataline indented">
+		 <div class="dataline">
 			<label>
 				<strong>Edition:</strong> {{ documentation.Edition }}
 			</label>
@@ -87,7 +89,7 @@
 	{% endif %}
 	
 	{% if documentation.Conference %}
-		 <div class="dataline indented">
+		 <div class="dataline">
 			<label>
 				<strong>Conference:</strong> {{ documentation.Conference }}
 			</label>
@@ -95,7 +97,7 @@
 	{% endif %}
 	
 	{% if documentation.Doi %}
-		 <div class="dataline indented">
+		 <div class="dataline">
 			<label>
 				<strong>Digital Object Identifier - DOI:</strong> {{ documentation.Doi }}
 			</label>
@@ -103,7 +105,7 @@
 	{% endif %}
 	
 	{% if documentation.Issn %}
-		 <div class="dataline indented">
+		 <div class="dataline">
 			<label>
 				<strong>ISSN:</strong> {{ documentation.Issn }}
 			</label>
@@ -111,7 +113,7 @@
 	{% endif %}
 	
 	{% if documentation.Isbn %}
-		 <div class="dataline indented">
+		 <div class="dataline">
 			<label>
 				<strong>ISBN:</strong> {{ documentation.Isbn }}
 			</label>
@@ -119,7 +121,7 @@
 	{% endif %}
 	
 	{% if documentation.Keywords %}
-		 <div class="dataline indented">
+		 <div class="dataline">
 			<label>
 				<strong>Keywords:</strong> {{ documentation.Keywords }}
 			</label>
@@ -127,7 +129,7 @@
 	{% endif %}
 	
 	{% if documentation.Document_language_name %}
-		 <div class="dataline indented">
+		 <div class="dataline">
 			<label>
 				<strong>Document Language:</strong> 
 				{% if documentation.Document_language_id %}
@@ -140,3 +142,4 @@
 			</label>
 		</div>
 	{% endif %}
+{% if level == "sub" %}</div>{% endif %}
