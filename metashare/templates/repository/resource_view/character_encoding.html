@@ -8,7 +8,7 @@
 				{{ value.Character_encoding }}
 				{% if "Size_per_character_encoding" in value %} 
 					{% if value.Size_per_character_encoding %}
-						({% include "repository/resource_view/size.html" with size=value.Size_per_character_encoding type="sub" %}) 
+						{% include "repository/resource_view/size.html" with size=value.Size_per_character_encoding type="sub" %}
 					{% endif %}
 				{% endif %}					
 			</label>

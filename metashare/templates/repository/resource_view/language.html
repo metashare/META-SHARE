@@ -11,7 +11,7 @@
 						{# Take care of size #}
 						{% if "Size_per_language" in value %} 
 							{% if value.Size_per_language %}
-								({% include "repository/resource_view/size.html" with size=value.Size_per_language type="sub" %}) 
+								{% include "repository/resource_view/size.html" with size=value.Size_per_language type="sub" %}
 							{% endif %}
 						{% endif %}
 						 
@@ -20,7 +20,7 @@
 							<strong>variety: </strong>
 							{{ value.Language_variety.Language_variety_name }}
 							{% if value.Language_variety.Size_per_language_variety %}
-								({% include "repository/resource_view/size.html" with size=value.Language_variety.Size_per_language_variety type="sub" %})
+								{% include "repository/resource_view/size.html" with size=value.Language_variety.Size_per_language_variety type="sub" %}
 							{% endif %}
 						{% endif %}		 
 					</label>
