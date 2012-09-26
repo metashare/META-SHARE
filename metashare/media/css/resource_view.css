@@ -48,6 +48,11 @@ div.right-corner{
 	font-weight: normal;
 	color: #333;
 }
+.dataline li{
+	font-size: 14px;
+	font-weight: normal;
+	color: #333;
+}
 
 label.title{
 	display:block;
