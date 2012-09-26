@@ -3,11 +3,11 @@
 <label class='component'>Usage</label>
 <div class="dataline">
 	{% if usage_dict.Usage.Access_tool %}			
-	    {% include "repository/resource_view/target_resource.html" with target=usage_dict.Usage.Access_tool title="Access Tool" level="top" %}
+	    {% include "repository/resource_view/target_resource.html" with target=usage_dict.Usage.Access_tool title="Access Tool" %}
 	{% endif %}
 	
 	{% if usage_dict.Usage.Resource_associated_with %}			
-	    {% include "repository/resource_view/target_resource.html" with target=usage_dict.Usage.Resource_associated_with title="Associated Resource" level="top" %}
+	    {% include "repository/resource_view/target_resource.html" with target=usage_dict.Usage.Resource_associated_with title="Associated Resource" %}
 	{% endif %}
 	
 		{% for key, value in usage_dict.items %}
@@ -28,7 +28,7 @@
 								</label>
 							</div>
 						{% endif %}
-					<div class="hr"><hr/></div>
+					<div class="separation"><hr/></div>
 					{% endif %}
 				{% endfor %}
 				
@@ -57,19 +57,7 @@
 					{% endif %}
 					
 					
-					{% if "Usage_report" in value1 %}
-						{% for key2, value2 in value1.items %}												
-							{% if value2.Usage_report.Title %}
-								{% include "repository/resource_view/documentation.html" with documentation=value2.Usage_report type="Usage Report" level="sub" %}
-							{% else %}
-								<div class="dataline indented">
-									<label>
-										<strong>Usage Report: </strong>{{ value2.Usage_report }}
-									</label>
-								</div>
-							{% endif %}								
-						{% endfor %}						     
-					{% endif %}
+					
 								
 					{% if value1.Actual_use_details %}
 					     <div class="dataline indented">
@@ -79,7 +67,7 @@
 						</div>
 					{% endif %}
 					
-				<div class="hr"><hr/></div>
+				<div class="separation"><hr/></div>
 				{% endif %}
 			{% endfor %}
 			
@@ -89,13 +77,13 @@
 	
 	
 	
-			
-			
-	    
+	
+	
+		    
 	
 		{% if usage_dict.Usage.Actual_use.Usage_report %}
 			{% if usage_dict.Usage.Actual_use.Usage_report.Usage_report.Title %}
-				{% include "repository/resource_view/documentation.html" with documentation=usage_dict.Usage.Actual_use.Usage_report.Usage_report type="Usage Report" %}
+				{% include "repository/resource_view/documentation.html" with documentation=usage_dict.Usage.Actual_use.Usage_report.Usage_report type="Usage Report" level="sub" %}
 			{% else %}
 				<div class="dataline indented">
 					<label>
@@ -107,15 +95,12 @@
 		{% endif %}
 		
 		{% if usage_dict.Usage.Actual_use.Derived_resource %}
-		     <div class="dataline indented">
-				<label>
-					<strong>Derived Resource:</strong> {{ usage_dict.Usage.Actual_use.Derived_resource }}
-				</label>
-			</div>
+		    {% include "repository/resource_view/target_resource.html" with target=usage_dict.Usage.Actual_use.Derived_resource title="Derived Resource" %}
 		{% endif %}
 		
 		
-		{% if usage_dict.Usage.Actual_use.Usage_project %}			
+		{% if usage_dict.Usage.Actual_use.Usage_project %}	
+			<label class='subtitle'>Usage Project</label>			
 		    {% include "repository/resource_view/project.html" with project=usage_dict.Usage.Actual_use.Usage_project %}
 		{% endif %}
 		
