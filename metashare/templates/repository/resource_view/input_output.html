@@ -27,8 +27,8 @@
 	
 	{% if data.Language_name %}
 		 <div class="dataline">
-			<label title="{{ data.Language_id }} {{ data.Language_variety_name }}">
-				<strong>Language: </strong>{{ data.Language_name }}
+			<label title="{{ data.Language_id }}">
+				<strong>Language: </strong>{{ data.Language_name }} ({{ data.Language_variety_name }})
 			</label>
 		</div>
 	{% endif %}
