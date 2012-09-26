@@ -17,6 +17,7 @@ from metashare.test_utils import create_user
 from metashare.stats.models import LRStats, UsageStats
 from metashare.sync.sync_utils import remove_resource
 from metashare.stats.model_utils import saveLRStats, UPDATE_STAT
+from django.db.utils import IntegrityError
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -146,6 +147,18 @@ class SimpleTogetherManagerTest(django.test.TestCase):
         self.assertEquals(2, len(ResourceCountPair.objects.all()))
         self.assertEquals(2, len(ResourceCountDict.objects.all()))
         
+    def test_unique_together_constraint(self):
+        man = TogetherManager.getManager(Resource.VIEW)
+        man.addResourcePair(self.res_1, self.res_2)
+        res_count_dict = man.resourcecountdict_set.get(
+          lrid=self.res_1.storage_object.identifier)
+        try:
+            res_count_dict.resourcecountpair_set.create(
+              lrid = self.res_2.storage_object.identifier)
+            self.fail("Should have raised an exception")
+        except IntegrityError:
+            pass # expected exception
+            
 
 class TogetherManagerTest(django.test.TestCase):
     

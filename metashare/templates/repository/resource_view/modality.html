@@ -1,15 +1,20 @@
 {% spaceless %}
 
-{# TODO: Add zise info #}
-
 <label class='component'>Modality:</label>
 <div class="dataline">
 {% for key, value in modalities.items %}
-		{% for key1, value1 in value.items %}
-			{% if key1 == "Modality_type" %}
-				<label>{{ value1 }}{% if not forloop.last %}, {% endif %}</label>
-			{% endif %}
-		{% endfor %}
+	{% for key1, value1 in value.items %}
+		<div>
+			<label class="dataline">
+				{% if "Modality_type" in key1 %}
+					{{ value1 }}
+					{% if "Size_per_modality" in value %}
+						({% include "repository/resource_view/size.html" with size=value.Size_per_modality type="sub" %})
+					{% endif %}
+				{% endif %}
+			</label>
+		</div>
+	{% endfor %}
 {% endfor %}
 </div>
 

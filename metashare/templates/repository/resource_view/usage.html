@@ -10,52 +10,108 @@
 	    {% include "repository/resource_view/target_resource.html" with target=usage_dict.Usage.Resource_associated_with title="Associated Resource" %}
 	{% endif %}
 	
+		{% for key, value in usage_dict.items %}
+			{% if "Foreseen_use" in value %}
+				<label class='title'>Foreseen Use</label>	
+				{% for key1, value1 in value.items %}
+					{% if "Foreseen_use" in key1 %}
+						<div class="dataline indented">
+							<label>
+								<strong>Foreseen Use:</strong> {{ value1.Foreseen_use }}
+							</label>
+						</div>					
+								
+						{% if value1.Use_nlpspecific %}
+						     <div class="dataline indented">
+								<label>
+									<strong>Use NLP Specific:</strong> {{ value1.Use_nlpspecific }}
+								</label>
+							</div>
+						{% endif %}
+					<div class="hr"><hr/></div>
+					{% endif %}
+				{% endfor %}
+				
+			{% endif %}
+		{% endfor %}
 	
-	<label class='title'>Foreseen Use</label>	
-			
-	     <div class="dataline indented">
-			<label>
-				<b>Foreseen Use:</b> {{ usage_dict.Usage.Foreseen_use.Foreseen_use }}
-			</label>
-		</div>
-		
-		{% if usage_dict.Usage.Foreseen_use.UseNLPSpecific %}
-		     <div class="dataline indented">
-				<label>
-					<b>Use NLP Specific:</b> {{ usage_dict.Usage.Foreseen_use.UseNLPSpecific }}
-				</label>
-			</div>
-		{% endif %}
-		
 	
-	<label class='title'>Actual Use</label>	
+	
+	{% for key, value in usage_dict.items %}
+		{% if "Actual_use" in value %}
+			<label class='title'>Actual Use</label>	
+			{% for key1, value1 in value.items %}
+				{% if "Actual_use" in key1 %}
+					<div class="dataline indented">
+						<label>
+							<strong>Actual Use:</strong> {{ value1.Actual_use }}
+						</label>
+					</div>					
+							
+					{% if value1.Use_nlpspecific %}
+					     <div class="dataline indented">
+							<label>
+								<strong>Use NLP Specific:</strong> {{ value1.Use_nlpspecific }}
+							</label>
+						</div>
+					{% endif %}
+					
+					
+					{% if "Usage_report" in value1 %}
+						{% for key2, value2 in value1.items %}												
+							{% if value2.Usage_report.Title %}
+								{% include "repository/resource_view/documentation.html" with documentation=value2.Usage_report type="Usage Report" %}
+							{% else %}
+								<div class="dataline indented">
+									<label>
+										<strong>Usage Report: </strong>{{ value2.Usage_report }}
+									</label>
+								</div>
+							{% endif %}								
+						{% endfor %}						     
+					{% endif %}
+					
+					
+								
+					{% if value1.Actual_use_details %}
+					     <div class="dataline indented">
+							<label>
+								<strong>Details:</strong> {{ value1.Actual_use_details }}
+							</label>
+						</div>
+					{% endif %}
+					
+				<div class="hr"><hr/></div>
+				{% endif %}
+			{% endfor %}
 			
-	     <div class="dataline indented">
-			<label>
-				<b>Actual Use:</b> {{ usage_dict.Usage.Actual_use.Actual_use }}
-			</label>
-		</div>
-		
-		{% if usage_dict.Usage.Actual_use.UseNLPSpecific %}
-		     <div class="dataline indented">
-				<label>
-					<b>Use NLP Specific:</b> {{ usage_dict.Usage.Actual_use.UseNLPSpecific }}
-				</label>
-			</div>
 		{% endif %}
-		
+	{% endfor %}	
+	
+	
+	
+	
+			
+			
+	    
+	
 		{% if usage_dict.Usage.Actual_use.Usage_report %}
-		     <div class="dataline indented">
-				<label>
-					<b>Usage Report:</b> {{ usage_dict.Usage.Actual_use.Usage_report }}
-				</label>
-			</div>
+			{% if usage_dict.Usage.Actual_use.Usage_report.Usage_report.Title %}
+				{% include "repository/resource_view/documentation.html" with documentation=usage_dict.Usage.Actual_use.Usage_report.Usage_report type="Usage Report" %}
+			{% else %}
+				<div class="dataline indented">
+					<label>
+						<strong>Usage Report: </strong>{{ usage_dict.Usage.Actual_use.Usage_report.Usage_report }}
+					</label>
+				</div>
+			{% endif %}
+					
 		{% endif %}
 		
 		{% if usage_dict.Usage.Actual_use.Derived_resource %}
 		     <div class="dataline indented">
 				<label>
-					<b>Derived Resource:</b> {{ usage_dict.Usage.Actual_use.Derived_resource }}
+					<strong>Derived Resource:</strong> {{ usage_dict.Usage.Actual_use.Derived_resource }}
 				</label>
 			</div>
 		{% endif %}
@@ -65,13 +121,6 @@
 		    {% include "repository/resource_view/project.html" with project=usage_dict.Usage.Actual_use.Usage_project %}
 		{% endif %}
 		
-		{% if usage_dict.Usage.Actual_use.Actual_use_details %}
-		     <div class="dataline indented">
-				<label>
-					<b>Details:</b> {{ usage_dict.Usage.Actual_use.Actual_use_details }}
-				</label>
-			</div>
-		{% endif %}
 </div>	
 
 

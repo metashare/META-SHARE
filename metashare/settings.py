@@ -244,3 +244,9 @@ MAX_VIEW_INTERVAL = 60 * 5
 # that the resources are still considered as 'downloaded together';
 # used in recommendations
 MAX_DOWNLOAD_INTERVAL = 60 * 10
+
+# list of synchronization protocols supported by this node
+SYNC_PROTOCOLS = (
+    '1.0',
+)
+

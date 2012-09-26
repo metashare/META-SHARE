@@ -23,7 +23,11 @@ div#stats{
 	background-color: #EEEEEE;
 	float: right;
 	border-radius:7px;
-    box-shadow:0 3px 10px #CCCCCC, 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
+    	box-shadow:0 3px 10px #CCCCCC, 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
+}
+
+div#stats a{
+	color:#333;
 }
 
 .column{
@@ -52,7 +56,7 @@ label.title{
 	border-bottom:solid 1px #ccc;
 	border-left:solid 1px #ccc;
 	padding-left:2px;
-	color:#333;	
+	color:#000;	
 }
 
 label.title, label.component {
@@ -243,6 +247,19 @@ label span a{
 	border-top-right-radius: 10px;
 	color: #555555;
 	display:inline-block;
+	float:left;
+	margin-right:5px;
+}
+
+.licence{
+	background-color: #FFDDAA;
+	padding:3px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	color: #555555;
+	margin-right:5px;
 }
 
 .otherLang {
@@ -258,11 +275,6 @@ label span a{
 	float:left;
 }
 
-.url{
-	display:inline-block;
-	float:right;
-}
-
 .more{
 	color:#666;
 	margin-bottom:20px;
@@ -273,12 +285,13 @@ label span a{
 }
 
 .read-more{
-	padding-bottom:3px;
+    padding-bottom:3px;
+    line-height: 1;
 }
 
-
 .read-less{
-	padding-bottom:3px;
+    padding-bottom:3px;
+    line-height: 1;
 }
 
 .details{
@@ -295,14 +308,35 @@ img.line{
 	height:20px;
 }
 
-hr{
-	margin:10px 0 10px 0;
+.hr hr{
+	background:#bbb;
+	height:0.2em;
+	box-shadow: 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
+}
+
+.separation hr{
+	margin-left:auto;
+	margin-right:auto;
+	width:250px;
+	border: 0;
+	height: 1px;
+	background: #333;
+	background-image: -webkit-linear-gradient(left, #eee, #aaa, #eee); 
+	background-image:    -moz-linear-gradient(left, #eee, #aaa, #eee); 
+	background-image:     -ms-linear-gradient(left, #eee, #aaa, #eee); 
+	background-image:      -o-linear-gradient(left, #eee, #aaa, #eee); 
 }
 
 .contact{
 	padding:2px 10px 2px 10px;
 	border:solid 2px #ccc;
 	background:#eee;
+	margin-top:5px;
+}
+
+.contact .dataline{
+	font-weight:bold;
+	font-size:12px;
 }
 
 .indented{
@@ -311,6 +345,7 @@ hr{
 
 a .indented{
 	color: #FF9900;
+	float:left;
 }
 
 .hidden{
@@ -319,5 +354,29 @@ a .indented{
 
 .vcard{
 	padding-left:5px;
+	vertical-align:top;
+}
+
+.contactcard .dataline:hover{
+	cursor:pointer;
+}
+
+.contactcard .dataline{
+	font-weight:normal;
+	font-size:14px;
+}
+
+.dataline span a{
+	padding:0px;
+	margin:0px;
+}
+
+.mediatitle label{
+	background:#bbb;
+}
+
+.mediatitle{
+	display: inline-block;
+	background:#333;
 }
 
