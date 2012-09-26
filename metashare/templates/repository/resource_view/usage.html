@@ -3,7 +3,7 @@
 <label class='component'>Usage</label>
 <div class="dataline">
 	{% if usage_dict.Usage.Access_tool %}			
-	    {% include "repository/resource_view/target_resource.html" with target=usage_dict.Usage.Access_tool title="Access Tool" %}
+	    {% include "repository/resource_view/target_resource.html" with target=usage_dict.Usage.Access_tool title="Access Tool" level="top" %}
 	{% endif %}
 	
 	{% if usage_dict.Usage.Resource_associated_with %}			
@@ -70,8 +70,6 @@
 							{% endif %}								
 						{% endfor %}						     
 					{% endif %}
-					
-					
 								
 					{% if value1.Actual_use_details %}
 					     <div class="dataline indented">
