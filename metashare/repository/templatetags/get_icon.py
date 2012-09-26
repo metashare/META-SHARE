@@ -77,6 +77,11 @@ class GetIcon(template.Node):
             image_tag = image_tag + ' <img title="Female" src="{}css/sexybuttons/images/' \
               'icons/silk/female.png" />' \
               .format(MEDIA_URL)
+              
+        if result == "link":
+            image_tag = image_tag + ' <img title="External Link" src="{}css/sexybuttons/images/' \
+              'icons/silk/link.png" />' \
+              .format(MEDIA_URL)
         
         return image_tag
 
