@@ -638,6 +638,19 @@ class AutoCompleteSelectMultipleEditWidget(SelectableMultiWidget, SelectableMedi
 
     def decompress(self, value):
         pass
+    
+    # Copied from django.contrib.admin.widgets.ManyToManyRawIdWidget class
+    def _has_changed(self, initial, data):
+        if initial is None:
+            initial = []
+        if data is None:
+            data = []
+        if len(initial) != len(data):
+            return True
+        for pk1, pk2 in zip(initial, data):
+            if force_unicode(pk1) != force_unicode(pk2):
+                return True
+        return False
 
 class AutoCompleteSelectMultipleSubClsWidget(AutoCompleteSelectMultipleEditWidget):
 
@@ -693,11 +706,6 @@ class AutoCompleteSelectSingleWidget(AutoCompleteSelectWidget):
             ),
             forms.HiddenInput(attrs={u'data-selectable-type': 'hidden'})
         ]
-        # Directly call the super-super-class __init__ method.
-        # The super-class __init__ method does not allow custom attributes
-        # to be passed to the AutoCompleteWidget. For this reason this
-        # __init__ method is a modified version of the super-class one
-        # and replaces it.
         # pylint: disable-msg=E1003
         super(AutoCompleteSelectWidget, self).__init__(widget_list, *args, **kwargs)
     
