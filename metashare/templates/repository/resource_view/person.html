@@ -2,12 +2,14 @@
 {% load get_icon %}
 {% spaceless %}
 
-{% if type != "Contact Person" and type != "Metadata Creator" and type != "Resource Creator" and type != "IPR Holder" and type != "Evaluator" and type != "Validator" %}
-	<label class='title'>{{type}}</label>
-{% endif %}
+
 
 {% if level == "sub" %}
 	<label class='subtitle'>{{type}}</label>
+{% else %}	
+	{% if type != "Contact Person" and type != "Metadata Creator" and type != "Resource Creator" and type != "IPR Holder" and type != "Evaluator" and type != "Validator" %}
+		<span class='title'>{{type}}</span>		
+	{% endif %}
 {% endif %}
 
 <a href='#' class="contactcard" title="Click to view contact card">
