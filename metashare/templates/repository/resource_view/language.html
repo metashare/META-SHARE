@@ -1,12 +1,12 @@
 {% spaceless %}
 
 <label class='component'>Languages</label>
-<div class="dataline readmore">
+<div class="dataline">
 {% for key, value in languages.items %}
 		{% for key1, value1 in value.items %}
 			<div>
 				{% if key1 == "Language_name" %}
-					<label class="dataline" title="{{value.Language_id}}">
+					<li class="dataline" title="{{value.Language_id}}">
 						{{ value1 }}
 						{# Take care of size #}
 						{% if "Size_per_language" in value %} 
@@ -23,7 +23,7 @@
 								{% include "repository/resource_view/size.html" with size=value.Language_variety.Size_per_language_variety type="sub" %}
 							{% endif %}
 						{% endif %}		 
-					</label>
+					</li>
 				{% endif %}
 			</div>
 		{% endfor %}
