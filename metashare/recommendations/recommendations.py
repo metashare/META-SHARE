@@ -1,7 +1,9 @@
+import datetime
+import threading
 from metashare import settings
 from metashare.recommendations.models import TogetherManager
-import datetime
 from metashare.repository.models import resourceInfoType_model
+
 
 # viewed and downloaded resources are tracked
 class Resource:
@@ -47,6 +49,7 @@ class SessionResourcesTracker:
         Tells the tracker that the given resource has been viewed 
         at the given time.
         """
+        
         # check if this view is still considered 'together' with 
         # the previous views
         _expiration_date = \
@@ -90,10 +93,13 @@ class SessionResourcesTracker:
         """  
         if not res in res_set:
             # update TogetherManager with new pairs
-            man = TogetherManager.getManager(res_type)
-            for _res in res_set:
-                man.addResourcePair(_res, res)
-            res_set.add(res)
+            lock = threading.RLock()
+            # make sure that only one thread updates the TogetherManager at a time 
+            with lock:
+                man = TogetherManager.getManager(res_type)
+                for _res in res_set:
+                    man.addResourcePair(_res, res)
+                res_set.add(res)
             
             
     def _get_expiration_date(self, seconds, time):
