@@ -196,9 +196,9 @@ function addStatus(filter){
                     {% for date in list.split %} 
                         <div>
                         {% ifequal date last %}
-                            <a href="?view={{ view }}&country={{ countrycode }}" class="addFilter">
+                            <a style="vertical-align: top" href="?view={{ view }}&country={{ countrycode }}" class="addFilter">
                         {% else %}
-                            <a href="?view={{ view }}&last={{ date }}&country={{ countrycode }}" class="deleteFilter">
+                            <a style="vertical-align: top" href="?view={{ view }}&last={{ date }}&country={{ countrycode }}" class="deleteFilter">
                         {% endifequal %}
                         last {{ date }}</a></div>
                     {% endfor %}
@@ -211,11 +211,11 @@ function addStatus(filter){
 	    <div class="accordion"><a href="#" onclick="return false">Provenance of {{ visitstitle }}</a></div>
             <div class="filter">
                 {% for geoinfo in geovisits %}
-                <div>
+                <div style="vertical-align: top">
                         {% ifequal geoinfo.0 countrycode %}
-                            <a href="?view={{ view }}&last={{ last }}" class="addFilter">
+                            <a style="vertical-align: top" href="?view={{ view }}&last={{ last }}" class="addFilter">
                         {% else %}
-                            <a href="?view={{ view }}&country={{ geoinfo.0 }}&last={{ last }}" class="deleteFilter">
+                            <a style="vertical-align: top" href="?view={{ view }}&country={{ geoinfo.0 }}&last={{ last }}" class="deleteFilter">
                         {% endifequal %}
                         {{ geoinfo.2 }} 
                         <img height=20 src="{{ MEDIA_URL }}css/international_flags/iso/32x32/flag-{{ geoinfo.0|lower }}.png"></a>
