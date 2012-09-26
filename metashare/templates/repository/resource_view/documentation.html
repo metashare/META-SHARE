@@ -1,6 +1,6 @@
 {% if type == "Documentation" %}
 {% else %}
-	<label class='title'>{{type}}</label>
+	<label class={% if level == "sub" %}'subtitle'{% else %}'title'{% endif %}>{{type}}</label>
 {% endif %}
 
 	{% if documentation.Document_type %}
