@@ -9,9 +9,26 @@ from metashare.storage.models import StorageObject, MASTER, PROXY, INTERNAL
 def inventory(request):
     if settings.SYNC_NEEDS_AUTHENTICATION and not request.user.has_perm('storage.can_sync'):
         return HttpResponse("Forbidden: only synchronization users can access this page.", status=403)
+    
+    # check for compatible sync protocol version
+    sync_protocol = None
+    if 'sync_protocol' in request.GET:
+        for _prot in request.GET.getlist('sync_protocol'):
+            if _prot in  settings.SYNC_PROTOCOLS:
+                sync_protocol = _prot
+                break
+    
+    if not sync_protocol:
+        # either no sync protocol parameter was send (which means the client is 
+        # pre 3.0 and that synchronization protocol is no longer supported) or
+        # no match was found between the client and server supported sync 
+        # protocols
+        return HttpResponse(status=501)
+    
     response = HttpResponse(status=200, content_type='application/zip')
     response['Metashare-Version'] = settings.METASHARE_VERSION
     response['Content-Disposition'] = 'attachment; filename="inventory.zip"'
+    response['Sync-Protocol'] = sync_protocol
 
     # collect inventory for existing resources;
     # consists of key - value pairs of resource identifiers and digest checksums

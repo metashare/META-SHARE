@@ -155,31 +155,31 @@ class MetadataSyncTest (TestCase):
     def test_unprotected_inventory(self):
         settings.SYNC_NEEDS_AUTHENTICATION = False
         client = Client()
-        response = client.get(self.INVENTORY_URL)
+        response = client.get(self.INVENTORY_URL + "?sync_protocol=1.0")
         self.assertValidInventoryResponse(response)
 
     def test_syncuser_get_inventory(self):
         settings.SYNC_NEEDS_AUTHENTICATION = True
         client = test_utils.get_client_with_user_logged_in(self.syncuser_login)
-        response = client.get(self.INVENTORY_URL)
+        response = client.get(self.INVENTORY_URL + "?sync_protocol=1.0")
         self.assertValidInventoryResponse(response)
 
     def test_normaluser_cannot_reach_inventory(self):
         settings.SYNC_NEEDS_AUTHENTICATION = True
         client = test_utils.get_client_with_user_logged_in(self.normal_login)
-        response = client.get(self.INVENTORY_URL)
+        response = client.get(self.INVENTORY_URL + "?sync_protocol=1.0")
         self.assertIsForbidden(response)
 
     def test_editoruser_cannot_reach_inventory(self):
         settings.SYNC_NEEDS_AUTHENTICATION = True
         client = test_utils.get_client_with_user_logged_in(self.editor_login)
-        response = client.get(self.INVENTORY_URL)
+        response = client.get(self.INVENTORY_URL + "?sync_protocol=1.0")
         self.assertIsForbidden(response)    
 
     def test_anonymous_cannot_reach_inventory(self):
         settings.SYNC_NEEDS_AUTHENTICATION = True
         client = Client()
-        response = client.get(self.INVENTORY_URL)
+        response = client.get(self.INVENTORY_URL + "?sync_protocol=1.0")
         self.assertIsForbidden(response)
         
     def test_unprotected_full_metadata(self):
@@ -215,7 +215,7 @@ class MetadataSyncTest (TestCase):
     def test_inventory_doesnt_include_internal(self):
         settings.SYNC_NEEDS_AUTHENTICATION = False
         client = Client()
-        response = client.get(self.INVENTORY_URL)
+        response = client.get(self.INVENTORY_URL + "?sync_protocol=1.0")
         self.assertValidInventoryResponse(response)
         json_inventory = self.extract_inventory(response)
         self.assertEquals(2, len(json_inventory))
@@ -265,6 +265,26 @@ class MetadataSyncTest (TestCase):
         self.assertEquals(expected_digest, compute_digest_checksum(
           resource_xml_string, storage_json_string))
 
+    def test_inventory_no_sync_protocol(self):
+        settings.SYNC_NEEDS_AUTHENTICATION = False
+        response = Client().get(self.INVENTORY_URL)
+        self.assertEquals(501, response.status_code)
+
+    def test_inventory_no_matching_sync_protocol(self):
+        settings.SYNC_NEEDS_AUTHENTICATION = False
+        response = Client().get(
+          self.INVENTORY_URL + "?sync_protocol=3.0&sync_protocol=3.5&sync_protocol=4.0")
+        self.assertEquals(501, response.status_code)
+    
+    def test_inventory_matching_sync_protocol(self):
+        settings.SYNC_NEEDS_AUTHENTICATION = False
+        response = Client().get(
+          self.INVENTORY_URL + "?sync_protocol=1.0&sync_protocol=1.5&sync_protocol=2.0")
+        self.assertEquals(200, response.status_code)
+        self.assertEquals("1.0", response['Sync-Protocol'])
+        inventory = self.extract_inventory(response)
+        self.assertNotEquals(0, len(inventory))
+     
     def test_proxy_check(self):
         
         # define proxied nodes
