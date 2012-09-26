@@ -120,13 +120,14 @@
 		{% endifnotequal %}
 			
 			{% if res_short_names %}
-				<h3 class="shortnames">{% for name in res_short_names %}{{ name }}<img src="{{ MEDIA_URL }}images/trenner.png" class="trenner" />{% endfor %}</h3> 
+				<h3 class="shortnames"><i>{% for name in res_short_names %}{{ name }}<img src="{{ MEDIA_URL }}images/trenner.png" class="trenner" />{% endfor %}</i></h3> 
 				<div style="clear:both"></div>
 			{% endif %}
 			
 			{% if not 'NOT_DEFINED' in metaShareId %}<h4 class="identifier">{{ metaShareId }}</h4>{% endif %}
 			{% if identifier %}
 				<div style="display:block;">
+				<h4 style="float:left; padding:3px;">ID: </h4>
 				{% for id in identifier %}
 					<h4 class="identifier">{{ id }}</h4>
 		 		{% endfor %}
