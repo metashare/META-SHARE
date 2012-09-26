@@ -410,6 +410,13 @@ def getstats (request):
             else:
                 usagedata[item["elparent"]].append({"field": item["elname"], "label": verbose, "counters": [int(item["lrid__count"]), int(item["count__sum"])]})
         data["usagestats"] = usagedata
+        
+    resources =  resourceInfoType_model.objects.all()
+    lrstats = {}
+    for resource in resources:
+        lrstats[resource.storage_object.identifier] = getLRStats(resource.storage_object.identifier)
+    data["lrstats"] = lrstats
+        
     return HttpResponse("["+json.dumps(data)+"]", mimetype="application/json")
     
 
