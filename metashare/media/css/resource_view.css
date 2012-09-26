@@ -266,10 +266,11 @@ label span a{
 	border-top-right-radius: 5px;
 	color: #333;
 	margin-left:5px;
+	margin-right:5px;
 	margin-bottom:2px;
 	font-size:14px;
 	font-weight:bold !important;
-	display:table;	
+	display:block;	
 }
 
 .otherLang {
