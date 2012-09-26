@@ -157,8 +157,10 @@ class SimpleTogetherManagerTest(django.test.TestCase):
               lrid = self.res_2.storage_object.identifier)
             self.fail("Should have raised an exception")
         except IntegrityError:
-            pass # expected exception
-            
+            # reset database connection; required for PostgreSQL
+            from django import db
+            db.close_connection()
+
 
 class TogetherManagerTest(django.test.TestCase):
     
