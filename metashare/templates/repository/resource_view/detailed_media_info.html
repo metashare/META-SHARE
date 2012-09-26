@@ -5,7 +5,7 @@
 {% else %}
 
 	{# Type info #}
-	<label class='title'><strong>{% if resource_component.Linguality.Linguality_type %}{{ resource_component.Linguality.Linguality_type }}{% endif %} {{ type }} {{ resourceType }}</strong></label>
+	<label class='component'><strong>{% if resource_component.Linguality.Linguality_type %}{{ resource_component.Linguality.Linguality_type }}{% endif %} {{ type }} {{ resourceType }}</strong></label>
 
 	{# Language Information #}
 	{% if "Language" in resource_component %}
@@ -56,8 +56,6 @@
 	{% if "Annotation" in resource_component %}
 		{% include "repository/resource_view/annotation.html" with annotations=resource_component %}
 	{% endif %}
-
-	
 
 {% endif %}
 

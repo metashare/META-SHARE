@@ -6,12 +6,12 @@
 {% else %}
 	{% if type == "sub" %}
 	{% else %}
-		<label class='component'>Size: </label>
+		<label class='title'>Size: </label>
 	{% endif %}
 {% endif %}
 
 {% if type == "sub" %}
-	{{ size.Size|intcomma }} {{ size.Size_unit }}
+	({{ size.Size|intcomma }} {{ size.Size_unit }})
 {% else %}
 	{% if type == "component" %}
 		{% for key, value in size.items %}

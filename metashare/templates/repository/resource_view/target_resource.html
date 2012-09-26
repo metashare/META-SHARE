@@ -1,5 +1,5 @@
 {% spaceless %}
-<label class='title'>{{title}}</label>
+<label class={% if level == "top" %}'title'{% else %}'subtitle'{% endif %}>{{title}}</label>
 
 <div class="dataline indented">
 	<label>
