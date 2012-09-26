@@ -2,192 +2,201 @@
 {% load get_icon %}
 {% spaceless %}
 
-{% if type != "Contact Person" and type != "Metadata Creator" and type != "Resource Creator" and type != "IPR Holder" and type != "Evaluator" and type != "Validator" %}
-	<label class='title'>{{type}}</label>
-{% endif %}
 
-<a href='#' class="contactcard" title="Click to view contact card">
-	<label class="dataline indented" style="float:left;">
-		{{ person_dict.Given_name }}
-		{{ person_dict.Surname }}
-		{{ person_dict.Organization_name }}	
-	</label>
-	<img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/vcard.png" class='vcard'/>
-</a>
-
-<div class="contact hidden">
-
-	{# Name, Surname and sex #}
-	<div>
-		<label class="dataline">
-			{% if person_dict.Communication.Url %}
-				<a href="{{person_dict.Communication.Url}}" target='_blank'>
-			{% endif %}
-					{{ person_dict.Given_name }}
-					{{ person_dict.Surname }}
-			{% if person_dict.Communication.Url %}
-				</a>
-			{% endif %}
-			{% if person_dict.Sex == "Male" %}
-				{% get_icon "male" %}
-			{% else %}
-				{% if person_dict.Sex == "Female" %}
-					{% get_icon "female" %}
-				{% endif %}
-			{% endif %}
-		</label>
-	</div>
+<div class="dataline" style="margin-bottom:3px;">
+	{% if level == "sub" %}
+		<label class='subtitle'>{{type}}</label>
+	{% else %}	
+		{% if type != "Contact Person" and type != "Metadata Creator" and type != "Resource Creator" and type != "IPR Holder" and type != "Evaluator" and type != "Validator" %}
+			<span class='title'>{{type}}</span>		
+		{% endif %}
+	{% endif %}
 	
-	<div>
-		<label class="dataline">
+	<a href='#' class="contactcard" title="Click to view contact card">
+		<label class="dataline indented" style="float:left;">
+			{{ person_dict.Given_name }}
+			{{ person_dict.Surname }}
 			{{ person_dict.Organization_name }}	
 		</label>
-	</div>
-	
-	<div>
-		<label class="dataline">
-			{{ person_dict.Organization_short_name }}		
-		</label>
-	</div>
-	
-	<div>
-		<label class="dataline">
-			{{ person_dict.Department_name }}		
-		</label>
-	</div>
-	
-	<div>
-		<label class="dataline">
-			{{ person_dict.Position }}
-		</label>
-	</div>
-	<div>
-		<label class="dataline">
-			{{ person_dict.Affiliation.Department_name }}
-		</label>
-	</div>
-	
-	{% if person_dict.Communication.Email %}
-	<div>
-		<label class="dataline">
-			{% encrypt_email person_dict.Communication.Email %}
-		</label>
-	</div>
-	{% endif %}
-	<div>
-		<label class="dataline">
-			{{ person_dict.Communication.Address }}
-		</label>
-	</div>
-	<div>
-		<label class="dataline">
-			{{ person_dict.Communication.Zip_code }}
-			{{ person_dict.Communication.City }}
-		</label>
-	</div>
-	<div>
-		<label class="dataline">
-			{{ person_dict.Communication.Region }}
-		</label>
-	</div>
-	<div>
-		<label class="dataline">
-			{{ person_dict.Communication.Country }}
-		</label>
-	</div>
-	
-	{% if person_dict.Communication.Telephone_number %}
-	<div>
-		<label class="dataline">
-			Tel.: {{ person_dict.Communication.Telephone_number }}
-		</label>
-	</div>
-	{% endif %}
-	{% if person_dict.Communication.Fax_number %}
-	<div>
-		<label class="dataline">
-			Fax: {{ person_dict.Communication.Fax_number }}
-		</label>
-	</div>
-	{% endif %}
-	
-	{% if person_dict.Affiliation %}
-		<hr/>
-	{% endif %}
+		<img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/vcard.png" class='vcard'/>
+	</a>
 
-	<div>
-		<label class="dataline">
-			{{ person_dict.Affiliation.Department_name }}
-		</label>
-	</div>
+
+	<div class="contact hidden">
 	
+		{# Name, Surname and sex #}
+		<div>
+			<label class="dataline">
+				{% if person_dict.Communication.Url %}
+					<a href="{{person_dict.Communication.Url}}" target='_blank'>
+				{% endif %}
+						{{ person_dict.Given_name }}
+						{{ person_dict.Surname }}
+				{% if person_dict.Communication.Url %}
+					</a>
+				{% endif %}
+				{% if person_dict.Sex == "Male" %}
+					{% get_icon "male" %}
+				{% else %}
+					{% if person_dict.Sex == "Female" %}
+						{% get_icon "female" %}
+					{% endif %}
+				{% endif %}
+			</label>
+		</div>
+		
+		<div>
+			<label class="dataline">
+				{{ person_dict.Organization_name }}	
+			</label>
+		</div>
+		
+		<div>
+			<label class="dataline">
+				{{ person_dict.Organization_short_name }}		
+			</label>
+		</div>
+		
+		<div>
+			<label class="dataline">
+				{{ person_dict.Department_name }}		
+			</label>
+		</div>
+		
+		<div>
+			<label class="dataline">
+				{{ person_dict.Position }}
+			</label>
+		</div>
+		<div>
+			<label class="dataline">
+				{{ person_dict.Affiliation.Department_name }}
+			</label>
+		</div>
+		
+		{% if person_dict.Communication.Email %}
+		<div>
+			<label class="dataline">
+				{% encrypt_email person_dict.Communication.Email %}
+			</label>
+		</div>
+		{% endif %}
+		<div>
+			<label class="dataline">
+				{{ person_dict.Communication.Address }}
+			</label>
+		</div>
+		<div>
+			<label class="dataline">
+				{{ person_dict.Communication.Zip_code }}
+				{{ person_dict.Communication.City }}
+			</label>
+		</div>
+		<div>
+			<label class="dataline">
+				{{ person_dict.Communication.Region }}
+			</label>
+		</div>
+		<div>
+			<label class="dataline">
+				{{ person_dict.Communication.Country }}
+			</label>
+		</div>
+		
+		{% if person_dict.Communication.Telephone_number %}
+		<div>
+			<label class="dataline">
+				Tel.: {{ person_dict.Communication.Telephone_number }}
+			</label>
+		</div>
+		{% endif %}
+		{% if person_dict.Communication.Fax_number %}
+		<div>
+			<label class="dataline">
+				Fax: {{ person_dict.Communication.Fax_number }}
+			</label>
+		</div>
+		{% endif %}
+		
+		{% if person_dict.Affiliation %}
+			<hr/>
+		{% endif %}
 	
-	<div>
-		<label class="dataline">
-			{% if person_dict.Affiliation.Url %}
-				<a href="{{person_dict.Affiliation.Url}}" target='_blank'>
-			{% endif %}
-					{{ person_dict.Affiliation.Organization_name }}
-			{% if person_dict.Affiliation.Url %}
-				</a>
-			{% endif %}
-		</label>
+		<div>
+			<label class="dataline">
+				{{ person_dict.Affiliation.Department_name }}
+			</label>
+		</div>
+		
+		
+		<div>
+			<label class="dataline">
+				{% if person_dict.Affiliation.Url %}
+					<a href="{{person_dict.Affiliation.Url}}" target='_blank'>
+				{% endif %}
+						{{ person_dict.Affiliation.Organization_name }}
+				{% if person_dict.Affiliation.Url %}
+					</a>
+				{% endif %}
+			</label>
+		</div>
+		<div>
+			<label class="dataline">
+				{{ person_dict.Affiliation.OrganizationShortName }}
+			</label>
+		</div>
+		<div>
+			<label class="dataline">
+				{% if person_dict.Affiliation.Email %}
+				{% encrypt_email person_dict.Affiliation.Email %}
+				{% endif %}
+			</label>
+		</div>
+		<div>
+			<label class="dataline">
+				{{ person_dict.Affiliation.Communication.Address }}
+			</label>
+		</div>
+		<div>
+			<label class="dataline">
+				{{ person_dict.Affiliation.Communication.Zip_code }}
+				{{ person_dict.Affiliation.Communication.City }}
+			</label>
+		</div>
+		<div>
+			<label class="dataline">
+				{{ person_dict.Affiliation.Communication.Region }}
+			</label>
+		</div>
+		<div>
+			<label class="dataline">
+				{{ person_dict.Affiliation.Communication.Country }}
+			</label>
+		</div>
+		<div>
+			<label class="dataline">
+	            {% if person_dict.Affiliation.Communication.Email %}
+				{% encrypt_email person_dict.Affiliation.Communication.Email %}
+				{% endif %}
+			</label>
+		</div>
+		{% if person_dict.Affiliation.Communication.Telephone_number %}
+		<div>
+			<label class="dataline">
+				Tel.: {{ person_dict.Affiliation.Communication.Telephone_number }}
+			</label>
+		</div>
+		{% endif %}
+		{% if person_dict.Affiliation.Communication.Fax_number %}
+		<div>
+			<label class="dataline">
+				Fax: {{ person_dict.Affiliation.Communication.Fax_number }}
+			</label>
+		</div>
+		{% endif %}	
+		
 	</div>
-	<div>
-		<label class="dataline">
-			{{ person_dict.Affiliation.OrganizationShortName }}
-		</label>
-	</div>
-	<div>
-		<label class="dataline">
-			{% if person_dict.Affiliation.Email %}
-			{% encrypt_email person_dict.Affiliation.Email %}
-			{% endif %}
-		</label>
-	</div>
-	<div>
-		<label class="dataline">
-			{{ person_dict.Affiliation.Communication.Address }}
-		</label>
-	</div>
-	<div>
-		<label class="dataline">
-			{{ person_dict.Affiliation.Communication.Zip_code }}
-			{{ person_dict.Affiliation.Communication.City }}
-		</label>
-	</div>
-	<div>
-		<label class="dataline">
-			{{ person_dict.Affiliation.Communication.Region }}
-		</label>
-	</div>
-	<div>
-		<label class="dataline">
-			{{ person_dict.Affiliation.Communication.Country }}
-		</label>
-	</div>
-	<div>
-		<label class="dataline">
-            {% if person_dict.Affiliation.Communication.Email %}
-			{% encrypt_email person_dict.Affiliation.Communication.Email %}
-			{% endif %}
-		</label>
-	</div>
-	{% if person_dict.Affiliation.Communication.Telephone_number %}
-	<div>
-		<label class="dataline">
-			Tel.: {{ person_dict.Affiliation.Communication.Telephone_number }}
-		</label>
-	</div>
-	{% endif %}
-	{% if person_dict.Affiliation.Communication.Fax_number %}
-	<div>
-		<label class="dataline">
-			Fax: {{ person_dict.Affiliation.Communication.Fax_number }}
-		</label>
-	</div>
-	{% endif %}	
-	
+
 </div>
 		
 {% endspaceless %}

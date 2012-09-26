@@ -39,7 +39,7 @@
 			{% if "Licence" in key1 %}
 				<div class="dataline indented">
 					<label class="licence">
-						<strong>Licence: </strong>{{ value1 }}
+						<strong><i>{{ value1 }}</i></strong>
 					</label>
 				</div>
 			{% endif %}
@@ -102,20 +102,18 @@
 			
 			{% if "Licensor" in key1 %}
 				{% if value1.Organization %}
-			    	{% include "repository/resource_view/person.html" with person_dict=value1.Organization type="Licensor" %}
+			    	{% include "repository/resource_view/person.html" with person_dict=value1.Organization type="Licensor" level="sub" %}
 			    {% else %}
-			    	{% include "repository/resource_view/person.html" with person_dict=value1.Licensor type="Licensor" %}
+			    	{% include "repository/resource_view/person.html" with person_dict=value1.Licensor type="Licensor" level="sub" %}
 			    {% endif %}
-				<div class="separation"><hr/></div>
 			{% endif %}	
 			
 			{% if "Distribution_rights_holder" in key1 %}
 				{% if value1.Organization %}
-			    	{% include "repository/resource_view/person.html" with person_dict=value1.Organization type="Distribution Rights Holder" %}
+			    	{% include "repository/resource_view/person.html" with person_dict=value1.Organization type="Distribution Rights Holder" level="sub" %}
 			    {% else %}
-			    	{% include "repository/resource_view/person.html" with person_dict=value1.Distribution_rights_holder type="Distribution Rights Holder" %}
+			    	{% include "repository/resource_view/person.html" with person_dict=value1.Distribution_rights_holder type="Distribution Rights Holder" level="sub" %}
 			    {% endif %}
-				<div class="separation"><hr/></div>
 			{% endif %}	
 			
 			{% if "User_nature" in key1 %}
@@ -132,8 +130,7 @@
 			
 		{% endfor %}
 		<div class="separation"><hr/></div>
-	{% endif %}
-	
+	{% endif %}	
 
 {% endfor %}
 
@@ -146,11 +143,8 @@
 		    {% else %}
 		    	{% include "repository/resource_view/person.html" with person_dict=value.Ipr_holder type="IPR Holder" %}
 		    {% endif %}
-			<div class="separation"><hr/></div>
 		{% endif %}
 	{% endfor %}
 {% endif %}
-
-
 
 {% endspaceless %}

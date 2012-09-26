@@ -596,6 +596,7 @@ def view(request, resource_name=None, object_id=None):
                 'res_short_names': res_short_names,
                 'resource': resource,
                 'resource_component_dicts': resource_component_dicts,
+                'resource_component_dict': resource_component_dict,
                 'resourceName': resource_name,
                 'resourceType': resource_type,
                 'resource_creation_dict': resource_creation_dict,
