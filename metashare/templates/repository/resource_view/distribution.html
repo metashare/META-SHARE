@@ -106,7 +106,6 @@
 			    {% else %}
 			    	{% include "repository/resource_view/person.html" with person_dict=value1.Licensor type="Licensor" level="sub" %}
 			    {% endif %}
-				<div class="separation"><hr/></div>
 			{% endif %}	
 			
 			{% if "Distribution_rights_holder" in key1 %}
@@ -115,7 +114,6 @@
 			    {% else %}
 			    	{% include "repository/resource_view/person.html" with person_dict=value1.Distribution_rights_holder type="Distribution Rights Holder" level="sub" %}
 			    {% endif %}
-				<div class="separation"><hr/></div>
 			{% endif %}	
 			
 			{% if "User_nature" in key1 %}
@@ -145,7 +143,6 @@
 		    {% else %}
 		    	{% include "repository/resource_view/person.html" with person_dict=value.Ipr_holder type="IPR Holder" %}
 		    {% endif %}
-			<div class="separation"><hr/></div>
 		{% endif %}
 	{% endfor %}
 {% endif %}
