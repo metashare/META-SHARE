@@ -1,0 +1,22 @@
+{% spaceless %}
+<label class='subtitle'>{{ audio_format.Mime_type }} {% include "repository/ </label>
+{% for key, value in audio_format.items %}
+	{% if key == "Compression" %}
+		{% for key1, value1 in value.items %}
+			 <div class="dataline indented">
+				<label>
+					<strong>{{ key1 }}:</strong> {{ value1 }}
+				</label>
+			</div>
+		{% endfor %}
+	{% else %}		
+		{% if key != "Mime_type" %}
+			 <div class="dataline indented">
+				<label>
+					<strong>{{ key }}:</strong> {{ value }}
+				</label>
+			</div>
+		{% endif %}
+	{% endif %}
+{% endfor %}
+{% endspaceless %}
