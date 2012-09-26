@@ -781,13 +781,14 @@ class LookupTest(TestCase):
     Test the lookup functionalities
     """
     # static variables to be initialized in setUpClass():
-    superuser_login = None
+    editor_login = None
     testfixture = None
+    client = None
     
     @classmethod
     def setUpClass(cls):
         """
-        set up test users with and without staff permissions.
+        set up test editor user with staff permissions.
         These will live in the test database only, so will not
         pollute the "normal" development db or the production db.
         As a consequence, they need no valuable password.
@@ -796,17 +797,24 @@ class LookupTest(TestCase):
         test_utils.set_index_active(False)
         test_utils.setup_test_storage()
 
-        User.objects.create_superuser('superuser', 'su@example.com', 'secret')
+        test_editor_group = EditorGroup.objects.create(name='test_editor_group')
+        
+        EditorGroupManagers.objects.create(name='test_editor_group_manager',
+          managed_group=test_editor_group)
 
-        EditorTest.superuser_login = {
+        editoruser = test_utils.create_editor_user('editoruser',
+            'editor@example.com', 'secret', (test_editor_group,))
+
+        LookupTest.editor_login = {
             REDIRECT_FIELD_NAME: ADMINROOT,
             LOGIN_FORM_KEY: 1,
-            'username': 'superuser',
+            'username': 'editoruser',
             'password': 'secret',
         }
         
-        # second resource which is only visible by the superuser
-        EditorTest.testfixture = _import_test_resource(None, COMPLETION_XML)
+        LookupTest.testfixture = _import_test_resource(test_editor_group, COMPLETION_XML)
+
+        LookupTest.client = test_utils.get_client_with_user_logged_in(LookupTest.editor_login)
 
     @classmethod
     def tearDownClass(cls):
@@ -820,11 +828,10 @@ class LookupTest(TestCase):
         """
         Verifies that the auto-completion works for PersonLookup.
         """
-        client = test_utils.get_client_with_user_logged_in(EditorTest.superuser_login)
         lookup = PersonLookup
         test_term = "val"
         # now the manual auto-completion lookup call with a test term:
-        response = client.get(reverse(get_lookup, args=(force_unicode(lookup.name()),)), {'term': test_term})
+        response = LookupTest.client.get(reverse(get_lookup, args=(force_unicode(lookup.name()),)), {'term': test_term})
         self.assertContains(response, 'Valérie Mapelli',
             msg_prefix='a superuser must see the lookup for Person.')
 
@@ -832,11 +839,10 @@ class LookupTest(TestCase):
         """
         Verifies that the auto-completion works for ActorLookup.
         """
-        client = test_utils.get_client_with_user_logged_in(EditorTest.superuser_login)
         lookup = ActorLookup
         test_term = "val"
         # now the manual auto-completion lookup call with a test term:
-        response = client.get(reverse(get_lookup, args=(force_unicode(lookup.name()),)), {'term': test_term})
+        response = LookupTest.client.get(reverse(get_lookup, args=(force_unicode(lookup.name()),)), {'term': test_term})
         self.assertContains(response, 'Valérie Mapelli',
             msg_prefix='a superuser must see the lookup for Actor.')
 
@@ -844,11 +850,10 @@ class LookupTest(TestCase):
         """
         Verifies that the auto-completion works for DocumentationLookup.
         """
-        client = test_utils.get_client_with_user_logged_in(EditorTest.superuser_login)
         lookup = DocumentationLookup
         test_term = "SMP"
         # now the manual auto-completion lookup call with a test term:
-        response = client.get(reverse(get_lookup, args=(force_unicode(lookup.name()),)), {'term': test_term})
+        response = LookupTest.client.get(reverse(get_lookup, args=(force_unicode(lookup.name()),)), {'term': test_term})
         self.assertContains(response, 'SMP_E0021_TRS_AUTO.pdf',
             msg_prefix='a superuser must see the lookup for Documentation.')
 
@@ -856,11 +861,10 @@ class LookupTest(TestCase):
         """
         Verifies that the auto-completion works for DocumentLookup.
         """
-        client = test_utils.get_client_with_user_logged_in(EditorTest.superuser_login)
         lookup = DocumentLookup
         test_term = "SMP"
         # now the manual auto-completion lookup call with a test term:
-        response = client.get(reverse(get_lookup, args=(force_unicode(lookup.name()),)), {'term': test_term})
+        response = LookupTest.client.get(reverse(get_lookup, args=(force_unicode(lookup.name()),)), {'term': test_term})
         self.assertContains(response, 'SMP_E0021_TRS_AUTO.pdf',
             msg_prefix='a superuser must see the lookup for Document.')
 
@@ -868,11 +872,10 @@ class LookupTest(TestCase):
         """
         Verifies that the auto-completion works for ProjectLookup.
         """
-        client = test_utils.get_client_with_user_logged_in(EditorTest.superuser_login)
         lookup = ProjectLookup
         test_term = "ver"
         # now the manual auto-completion lookup call with a test term:
-        response = client.get(reverse(get_lookup, args=(force_unicode(lookup.name()),)), {'term': test_term})
+        response = LookupTest.client.get(reverse(get_lookup, args=(force_unicode(lookup.name()),)), {'term': test_term})
         self.assertContains(response, 'Verbmobil II',
             msg_prefix='a superuser must see the lookup for Project.')
 
@@ -880,11 +883,10 @@ class LookupTest(TestCase):
         """
         Verifies that the auto-completion works for OrganizationLookup.
         """
-        client = test_utils.get_client_with_user_logged_in(EditorTest.superuser_login)
         lookup = OrganizationLookup
         test_term = "lan"
         # now the manual auto-completion lookup call with a test term:
-        response = client.get(reverse(get_lookup, args=(force_unicode(lookup.name()),)), {'term': test_term})
+        response = LookupTest.client.get(reverse(get_lookup, args=(force_unicode(lookup.name()),)), {'term': test_term})
         self.assertContains(response, 'Evaluations and Language Resources Distribution Agency',
             msg_prefix='a superuser must see the lookup for Organization.')
             
@@ -892,11 +894,10 @@ class LookupTest(TestCase):
         """
         Verifies that the auto-completion works for TargetResourceLookup.
         """
-        client = test_utils.get_client_with_user_logged_in(EditorTest.superuser_login)
         lookup = TargetResourceLookup
         test_term = "proj"
         # now the manual auto-completion lookup call with a test term:
-        response = client.get(reverse(get_lookup, args=(force_unicode(lookup.name()),)), {'term': test_term})
+        response = LookupTest.client.get(reverse(get_lookup, args=(force_unicode(lookup.name()),)), {'term': test_term})
         self.assertContains(response, 'Nice project',
             msg_prefix='a superuser must see the lookup for TargetResource.')
 
