@@ -6,6 +6,10 @@
 	<label class='title'>{{type}}</label>
 {% endif %}
 
+{% if level == "sub" %}
+	<label class='subtitle'>{{type}}</label>
+{% endif %}
+
 <a href='#' class="contactcard" title="Click to view contact card">
 	<label class="dataline indented" style="float:left;">
 		{{ person_dict.Given_name }}
