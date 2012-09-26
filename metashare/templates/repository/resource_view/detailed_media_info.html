@@ -57,6 +57,12 @@
 		{% include "repository/resource_view/annotation.html" with annotations=resource_component %}
 	{% endif %}
 
+	{# Subject-topic Information #}
+	{{ resource_component }}
+	{% if "Subject" in resource_component %}
+		{% include "repository/resource_view/annotation.html" with annotations=resource_component %}
+	{% endif %}
+
 	
 
 {% endif %}
