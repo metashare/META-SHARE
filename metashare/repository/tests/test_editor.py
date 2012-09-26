@@ -808,7 +808,6 @@ class LookupTest(TestCase):
         # second resource which is only visible by the superuser
         EditorTest.testfixture = _import_test_resource(None, COMPLETION_XML)
 
-
     @classmethod
     def tearDownClass(cls):
         test_utils.clean_resources_db()
@@ -816,7 +815,6 @@ class LookupTest(TestCase):
         test_utils.clean_user_db()
         test_utils.set_index_active(True)
         LOGGER.info("finished '{}' tests".format(cls.__name__))
-
 
     def test_editor_autocompletion_for_person(self):
         """
@@ -829,7 +827,6 @@ class LookupTest(TestCase):
         response = client.get(reverse(get_lookup, args=(force_unicode(lookup.name()),)), {'term': test_term})
         self.assertContains(response, 'Valérie Mapelli',
             msg_prefix='a superuser must see the lookup for Person.')
-
 
     def test_editor_autocompletion_for_actor(self):
         """
