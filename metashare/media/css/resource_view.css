@@ -381,6 +381,7 @@ a .indented{
 .contactcard .dataline{
 	font-weight:normal;
 	font-size:14px;
+	padding-top:5px;
 }
 
 .dataline span a{
