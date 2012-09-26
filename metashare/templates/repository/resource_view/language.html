@@ -2,9 +2,11 @@
 
 <label class='component'>Languages</label>
 <div class="dataline">
+<ul>
 {% for key, value in languages.items %}
+
 		{% for key1, value1 in value.items %}
-			<div>
+
 				{% if key1 == "Language_name" %}
 					<li class="dataline" title="{{value.Language_id}}">
 						{{ value1 }}
@@ -25,10 +27,10 @@
 						{% endif %}		 
 					</li>
 				{% endif %}
-			</div>
 		{% endfor %}
-{% endfor %}
 
+{% endfor %}
+</ul>
 </div>
 
 {% endspaceless %}
