@@ -86,7 +86,7 @@ div.resourceName ul li{
 	list-style-type: none;	
 }
 
-div.resourceName ul li:not(:empty) {
+div.resourceName ul li {
 	list-style-type: none;
 	margin: 2px 2px 2px 2px;
 	padding: 1px 1px 1px 1px;
