@@ -265,9 +265,12 @@ label span a{
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 	color: #333;
-	margin-left:10px;
+	margin-left:5px;
+	margin-right:5px;
 	margin-bottom:2px;
-	display:table;	
+	font-size:14px;
+	font-weight:bold !important;
+	display:block;	
 }
 
 .otherLang {
