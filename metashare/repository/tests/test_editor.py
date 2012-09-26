@@ -7,19 +7,25 @@ from django.contrib import admin
 from django.contrib.admin.sites import LOGIN_FORM_KEY
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.client import Client
+from django.utils.encoding import force_unicode
 from metashare import test_utils
 from metashare.accounts.models import EditorGroup, EditorGroupManagers, \
     EditorGroupApplication, Organization, OrganizationManagers, \
     OrganizationApplication
 from metashare.repository import models
+from metashare.repository.editor.lookups import PersonLookup, ActorLookup, \
+    DocumentationLookup, DocumentLookup, ProjectLookup, OrganizationLookup, \
+    TargetResourceLookup
 from metashare.repository.models import languageDescriptionInfoType_model, \
     lexicalConceptualResourceInfoType_model, personInfoType_model,\
     resourceInfoType_model
 from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, REMOTE, \
     StorageObject
+from selectable.views import get_lookup
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -816,16 +822,11 @@ class LookupTest(TestCase):
         """
         Verifies that the auto-completion works for PersonLookup.
         """
-        from selectable.views import get_lookup
-        from django.utils.encoding import force_unicode
-        from django.core.urlresolvers import reverse
-        from metashare.repository.editor.lookups import PersonLookup
         client = test_utils.get_client_with_user_logged_in(EditorTest.superuser_login)
         lookup = PersonLookup
         test_term = "val"
         # now the manual auto-completion lookup call with a test term:
         response = client.get(reverse(get_lookup, args=(force_unicode(lookup.name()),)), {'term': test_term})
-        print response
         self.assertContains(response, 'Valérie Mapelli',
             msg_prefix='a superuser must see the lookup for Person.')
 
@@ -834,16 +835,11 @@ class LookupTest(TestCase):
         """
         Verifies that the auto-completion works for ActorLookup.
         """
-        from selectable.views import get_lookup
-        from django.utils.encoding import force_unicode
-        from django.core.urlresolvers import reverse
-        from metashare.repository.editor.lookups import ActorLookup
         client = test_utils.get_client_with_user_logged_in(EditorTest.superuser_login)
         lookup = ActorLookup
         test_term = "val"
         # now the manual auto-completion lookup call with a test term:
         response = client.get(reverse(get_lookup, args=(force_unicode(lookup.name()),)), {'term': test_term})
-        print response
         self.assertContains(response, 'Valérie Mapelli',
             msg_prefix='a superuser must see the lookup for Actor.')
 
@@ -851,16 +847,11 @@ class LookupTest(TestCase):
         """
         Verifies that the auto-completion works for DocumentationLookup.
         """
-        from selectable.views import get_lookup
-        from django.utils.encoding import force_unicode
-        from django.core.urlresolvers import reverse
-        from metashare.repository.editor.lookups import DocumentationLookup
         client = test_utils.get_client_with_user_logged_in(EditorTest.superuser_login)
         lookup = DocumentationLookup
         test_term = "SMP"
         # now the manual auto-completion lookup call with a test term:
         response = client.get(reverse(get_lookup, args=(force_unicode(lookup.name()),)), {'term': test_term})
-        print response
         self.assertContains(response, 'SMP_E0021_TRS_AUTO.pdf',
             msg_prefix='a superuser must see the lookup for Documentation.')
 
@@ -868,16 +859,11 @@ class LookupTest(TestCase):
         """
         Verifies that the auto-completion works for DocumentLookup.
         """
-        from selectable.views import get_lookup
-        from django.utils.encoding import force_unicode
-        from django.core.urlresolvers import reverse
-        from metashare.repository.editor.lookups import DocumentLookup
         client = test_utils.get_client_with_user_logged_in(EditorTest.superuser_login)
         lookup = DocumentLookup
         test_term = "SMP"
         # now the manual auto-completion lookup call with a test term:
         response = client.get(reverse(get_lookup, args=(force_unicode(lookup.name()),)), {'term': test_term})
-        print response
         self.assertContains(response, 'SMP_E0021_TRS_AUTO.pdf',
             msg_prefix='a superuser must see the lookup for Document.')
 
@@ -885,16 +871,11 @@ class LookupTest(TestCase):
         """
         Verifies that the auto-completion works for ProjectLookup.
         """
-        from selectable.views import get_lookup
-        from django.utils.encoding import force_unicode
-        from django.core.urlresolvers import reverse
-        from metashare.repository.editor.lookups import ProjectLookup
         client = test_utils.get_client_with_user_logged_in(EditorTest.superuser_login)
         lookup = ProjectLookup
         test_term = "ver"
         # now the manual auto-completion lookup call with a test term:
         response = client.get(reverse(get_lookup, args=(force_unicode(lookup.name()),)), {'term': test_term})
-        print response
         self.assertContains(response, 'Verbmobil II',
             msg_prefix='a superuser must see the lookup for Project.')
 
@@ -902,16 +883,11 @@ class LookupTest(TestCase):
         """
         Verifies that the auto-completion works for OrganizationLookup.
         """
-        from selectable.views import get_lookup
-        from django.utils.encoding import force_unicode
-        from django.core.urlresolvers import reverse
-        from metashare.repository.editor.lookups import OrganizationLookup
         client = test_utils.get_client_with_user_logged_in(EditorTest.superuser_login)
         lookup = OrganizationLookup
         test_term = "lan"
         # now the manual auto-completion lookup call with a test term:
         response = client.get(reverse(get_lookup, args=(force_unicode(lookup.name()),)), {'term': test_term})
-        print response
         self.assertContains(response, 'Evaluations and Language Resources Distribution Agency',
             msg_prefix='a superuser must see the lookup for Organization.')
             
@@ -919,16 +895,11 @@ class LookupTest(TestCase):
         """
         Verifies that the auto-completion works for TargetResourceLookup.
         """
-        from selectable.views import get_lookup
-        from django.utils.encoding import force_unicode
-        from django.core.urlresolvers import reverse
-        from metashare.repository.editor.lookups import TargetResourceLookup
         client = test_utils.get_client_with_user_logged_in(EditorTest.superuser_login)
         lookup = TargetResourceLookup
         test_term = "proj"
         # now the manual auto-completion lookup call with a test term:
         response = client.get(reverse(get_lookup, args=(force_unicode(lookup.name()),)), {'term': test_term})
-        print response
         self.assertContains(response, 'Nice project',
             msg_prefix='a superuser must see the lookup for TargetResource.')
 
