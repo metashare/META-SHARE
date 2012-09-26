@@ -5,7 +5,7 @@
 {% for dict in validation_dicts %}
      <div class="dataline">
 		<label>
-			{% ifequal dict.Validation.Validated "True" %}Validated{% else %}Not Validated{% endifequal %}
+			<strong><i>{% ifequal dict.Validation.Validated "True" %}Validated{% else %}Not Validated{% endifequal %}</i></strong>
 		</label>
 	</div>
 		
@@ -70,7 +70,7 @@
 	{% endif %}
 	
 	{% if dict.Validation.Validation_tool %}
-			{% include "repository/resource_view/target_resource.html" with target=dict.Validation.Validation_tool title="Validation Tool" %}
+			{% include "repository/resource_view/target_resource.html" with target=dict.Validation.Validation_tool title="Validation Tool" level="top" %}
 	{% endif %}
 	
 	<div class="dataline">
