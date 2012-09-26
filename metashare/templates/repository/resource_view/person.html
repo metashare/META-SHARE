@@ -17,8 +17,8 @@
 			{{ person_dict.Given_name }}
 			{{ person_dict.Surname }}
 			{{ person_dict.Organization_name }}	
+			<img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/vcard.png" />
 		</label>
-		<img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/vcard.png" class='vcard'/>
 	</a>
 
 
@@ -27,20 +27,20 @@
 		{# Name, Surname and sex #}
 		<div>
 			<label class="dataline">
-				{% if person_dict.Communication.Url %}
-					<a href="{{person_dict.Communication.Url}}" target='_blank'>
-				{% endif %}
-						{{ person_dict.Given_name }}
-						{{ person_dict.Surname }}
-				{% if person_dict.Communication.Url %}
-					</a>
-				{% endif %}
 				{% if person_dict.Sex == "Male" %}
 					{% get_icon "male" %}
 				{% else %}
 					{% if person_dict.Sex == "Female" %}
 						{% get_icon "female" %}
 					{% endif %}
+				{% endif %}
+			</label>
+		</div>
+		
+		<div>
+			<label class="dataline" style="clear:both;">
+				{% if person_dict.Communication.Url %}
+					<a href="{{person_dict.Communication.Url}}" target='_blank' style="vertical-align:super;">Homepage {% get_icon "link" %}</a>
 				{% endif %}
 			</label>
 		</div>
@@ -198,5 +198,6 @@
 	</div>
 
 </div>
+<div style="clear:both;"></div>
 		
 {% endspaceless %}
