@@ -75,7 +75,7 @@ def saveLRStats(resource, action, request=None):
         record.userid = userid
         record.lrid = lrid
         record.action = action
-        record.sessid = sessid
+        record.sessid = sessid    
         record.geoinfo = getcountry_code(_get_ipaddress(request))
         record.ignored = ignored
         record.save(force_insert=True)
@@ -344,15 +344,15 @@ def _get_ipaddress(request):
     Returns the IP address store in META request. Check if the request 
     comes from some automatic programm (bot, spider, ..) removing the IP address
     (in this way the statistics will not be distorted)
-    """
+    """    
     if request != None:
-        remote_addr = getattr(request.META, 'REMOTE_ADDR', '')
-        user_agent = getattr(request.META, 'HTTP_USER_AGENT', '')
+        ip_address = request.META.get('HTTP_X_FORWARDED_FOR', '') or request.META.get('REMOTE_ADDR') or ''
+        user_agent = request.META.get('HTTP_USER_AGENT') or ''
         if user_agent != '':
             if not BOT_AGENT_RE.match(user_agent):
-                return remote_addr
+                return ip_address
         else:
-            return remote_addr
+            return ip_address
     return ''
 
 

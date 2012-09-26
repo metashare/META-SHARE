@@ -101,8 +101,9 @@ class StatsTest(TestCase):
     def test_visiting_stats(self):
         """
         Tries to load the visiting stats page of the META-SHARE website.
+        Using 193.254.26.9 as example of Italian IP address
         """
-        client = Client()
+        client = Client(REMOTE_ADDR="193.254.26.9")
         client.login(username='manageruser', password='secret')
         client_user = Client()
         client_user.login(username='user', password='secret')
@@ -133,12 +134,11 @@ class StatsTest(TestCase):
         self.assertNotContains(response, ">No data found<")
 
         response = client.get('/{0}stats/top/?country=IT'.format(DJANGO_BASE))
+        self.assertNotContains(response, ">No data matched<")
+
+        response = client.get('/{0}stats/top/?last=week&country=DE'.format(DJANGO_BASE))
         self.assertContains(response, ">No data matched<")
-
-        response = client.get('/{0}stats/top/?last=week&country=IT'.format(DJANGO_BASE))
-        self.assertContains(response, ">No data matched<")
-
-
+        
     def test_latest_queries(self):
         """
         Test whether there are latest queries
