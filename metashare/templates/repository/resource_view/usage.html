@@ -3,11 +3,11 @@
 <label class='component'>Usage</label>
 <div class="dataline">
 	{% if usage_dict.Usage.Access_tool %}			
-	    {% include "repository/resource_view/target_resource.html" with target=usage_dict.Usage.Access_tool title="Access Tool" %}
+	    {% include "repository/resource_view/target_resource.html" with target=usage_dict.Usage.Access_tool title="Access Tool" level="top" %}
 	{% endif %}
 	
 	{% if usage_dict.Usage.Resource_associated_with %}			
-	    {% include "repository/resource_view/target_resource.html" with target=usage_dict.Usage.Resource_associated_with title="Associated Resource" %}
+	    {% include "repository/resource_view/target_resource.html" with target=usage_dict.Usage.Resource_associated_with title="Associated Resource" level="top" %}
 	{% endif %}
 	
 		{% for key, value in usage_dict.items %}
@@ -17,7 +17,7 @@
 					{% if "Foreseen_use" in key1 %}
 						<div class="dataline indented">
 							<label>
-								<strong>Foreseen Use:</strong> {{ value1.Foreseen_use }}
+								<strong><i>{{ value1.Foreseen_use }}</i></strong>
 							</label>
 						</div>					
 								
@@ -44,7 +44,7 @@
 				{% if "Actual_use" in key1 %}
 					<div class="dataline indented">
 						<label>
-							<strong>Actual Use:</strong> {{ value1.Actual_use }}
+							<strong><i>{{ value1.Actual_use }}</i></strong>
 						</label>
 					</div>					
 							
@@ -60,7 +60,7 @@
 					{% if "Usage_report" in value1 %}
 						{% for key2, value2 in value1.items %}												
 							{% if value2.Usage_report.Title %}
-								{% include "repository/resource_view/documentation.html" with documentation=value2.Usage_report type="Usage Report" %}
+								{% include "repository/resource_view/documentation.html" with documentation=value2.Usage_report type="Usage Report" level="sub" %}
 							{% else %}
 								<div class="dataline indented">
 									<label>
@@ -70,8 +70,6 @@
 							{% endif %}								
 						{% endfor %}						     
 					{% endif %}
-					
-					
 								
 					{% if value1.Actual_use_details %}
 					     <div class="dataline indented">
