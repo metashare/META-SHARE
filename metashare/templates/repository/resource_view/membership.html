@@ -4,15 +4,9 @@
 	
 	<div class="dataline indented">
 		<label>
-			<strong>Member: </strong>{{membership.Member}}
+			<strong><i>For {% if membership.Member == "False" %}Non{% endif %} Members of {{membership.Membership_institution}}</i></strong>
 		</label>
-	</div>
-	<div class="dataline indented">
-		<label>
-			<strong>Membership Institution: </strong>{{membership.Membership_institution}}
-		</label>
-	</div>
-		
+	</div>		
 
 </div>
 
