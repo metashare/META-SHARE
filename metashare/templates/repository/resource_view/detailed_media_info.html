@@ -17,7 +17,6 @@
 		{% include "repository/resource_view/linguality.html" with linguality=resource_component.Linguality %}
 	{% endif %}
 	
-
 	{# Text type Information #}
 	{% if "Text_format" in resource_component %}
 		{% include "repository/resource_view/text_type.html" with text_types=resource_component %}
@@ -63,7 +62,11 @@
 		{% include "repository/resource_view/annotation.html" with annotations=resource_component %}
 	{% endif %}
 
-	{# 	
+	{# Audio Content Information #}
+	{% if "Audio_content" in resource_component %}
+		{% include "repository/resource_view/content.html" with content=resource_component %}
+	{% endif %}
+	
 
 
 
