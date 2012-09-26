@@ -43,24 +43,33 @@
 			{% endif %}
 		</label>
 	</div>
+		
+	{% if project.Project_start_date and project.Project_end_date %}
+		<div class="dataline indented">
+			<label>
+				<strong>Project duration:</strong> {{ project.Project_start_date|date:"SHORT_DATE_FORMAT" }} - {{ project.Project_end_date|date:"SHORT_DATE_FORMAT" }}
+			</label>
+		</div>
+		
+	{% else %}
+		{% if project.Project_start_date %}
+			<div class="dataline indented">
+				<label>					
+					<strong>Project started:</strong> {{ project.Project_start_date|date:"SHORT_DATE_FORMAT" }}					
+				</label>
+			</div>
+		{% endif %}
+		
+		{% if project.Project_end_date %}
+			<div class="dataline indented">
+				<label>				
+					<strong>Project ended:</strong> {{ project.Project_end_date|date:"SHORT_DATE_FORMAT" }}
+				</label>
+			</div>
+		{% endif %}
 	
+	{% endif %}		
 	
-	<div class="dataline indented">
-		<label>
-			{% if project.Project_start_date %}
-				<strong>Project started:</strong>	{{ project.Project_start_date|date:"SHORT_DATE_FORMAT" }}
-			{% endif %}
-		</label>
-	</div>
-	
-	
-	<div class="dataline indented">
-		<label>
-			{% if project.Project_end_date %}
-				<strong>Project ended:</strong> {{ project.Project_end_date|date:"SHORT_DATE_FORMAT" }}
-			{% endif %}
-		</label>
-	</div>
 </div>
 
 {% endspaceless %}
