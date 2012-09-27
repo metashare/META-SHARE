@@ -1,3 +1,4 @@
+{% load replace %}
 {% spaceless %}
 
 <label class='component'>Distribution</label>
@@ -39,7 +40,7 @@
 			{% if "Licence" in key1 %}
 				<div class="dataline indented">
 					<label class="licence">
-						<strong><i>{{ value1 }}</i></strong>
+						<strong><i>{{ value1|rep }}</i></strong>
 					</label>
 				</div>
 			{% endif %}
