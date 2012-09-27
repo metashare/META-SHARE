@@ -415,6 +415,71 @@ class BasicEditorTests(SeleniumTestCase):
           'the created organization must not be related to any resource')
 
 
+    def test_Project_creation_tool(self):
+        driver = self.driver
+        driver.get(self.base_url)
+        ss_path = setup_screenshots_folder(
+          "PNG-metashare.repository.seltests.test_editor.EditorTest",
+          "Project_creation_tool")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))  
+        # login user
+        login_user(driver, "manageruser", "secret")
+        # make sure login was successful
+        self.assertEqual("Logout", 
+          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Manage Resources -> Manage project objects
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage project objects"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Add project
+        driver.find_element_by_link_text("Add Project").click()
+        # create tool
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("Add Project", 
+          driver.find_element_by_css_selector("#content > h1").text)
+        # add required fields
+        driver.find_element_by_name("key_projectName_0").clear()
+        driver.find_element_by_name("key_projectName_0").send_keys("en")
+        driver.find_element_by_name("val_projectName_0").clear()
+        driver.find_element_by_name("val_projectName_0").send_keys("Project")
+        driver.find_element_by_xpath("//div[@class='form-row projectShortName']/div/ul/li/a").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("key_projectShortName_0").clear()
+        driver.find_element_by_name("key_projectShortName_0").send_keys("en")
+        driver.find_element_by_name("val_projectShortName_0").clear()
+        driver.find_element_by_name("val_projectShortName_0").send_keys("Short name")
+        driver.find_element_by_name("projectID").clear()
+        driver.find_element_by_name("projectID").send_keys("A-123")
+        driver.find_element_by_name("url").clear()
+        driver.find_element_by_name("url").send_keys("http://www.project.org")
+        Select(driver.find_element_by_name("fundingType_old")).select_by_visible_text("Other")
+        driver.find_element_by_xpath("//a[@class='selector-add']").click()
+        driver.find_element_by_name("funder").clear()
+        driver.find_element_by_name("funder").send_keys("Funder of the project")
+        driver.find_element_by_name("fundingCountry").clear()
+        driver.find_element_by_name("fundingCountry").send_keys("world")
+        driver.find_element_by_name("projectStartDate").clear()
+        driver.find_element_by_name("projectStartDate").send_keys("2012-09-27")
+        driver.find_element_by_name("projectEndDate").clear()
+        driver.find_element_by_name("projectEndDate").send_keys("2012-09-27")
+        # save tool
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("_save").click()
+        # TODO remove this workaround when Selenium starts working again as intended
+        time.sleep(1)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual(
+          u"The Project \"Project (Short name)\" was added successfully.", 
+          driver.find_element_by_css_selector("li.info").text)
+
+        # make sure that there is no related resource linked to this project
+        self.assertEqual("0", driver.find_element_by_xpath(
+          "//table[@id='result_list']/tbody/tr[1]/td[1]").text,
+          'the created project must not be related to any resource')
+
+
     def test_sorting(self):
         """
         tests the sorting of controlled vocabulary in some examplary CharFields
