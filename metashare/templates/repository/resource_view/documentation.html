@@ -1,9 +1,13 @@
 {% if type == "Documentation" %}
 {% else %}
-	<label class={% if level == "sub" %}'subtitle'{% else %}'title'{% endif %}>{{type}}</label>
+	{% if level == "simple" %}
+		<label class='indented'><strong>{{type}}:</strong></label>
+	{% else %}
+		<label class={% if level == "sub" %}'subtitle'{% else %}'title'{% endif %}>{{type}}</label>
+	{% endif %}
 {% endif %}
 
-{% if level == "sub" or indent == "yes" %}<div class="indented">{% endif %}
+{% if level == "sub" or level == "simple" or indent == "yes" %}<div class="indented">{% endif %}
 
 	{% if documentation.Document_type %}
 		<div class="dataline">
@@ -142,4 +146,4 @@
 			</label>
 		</div>
 	{% endif %}
-{% if level == "sub" or indent == "yes" %}</div>{% endif %}
+{% if level == "sub" or level == "simple" or indent == "yes" %}</div>{% endif %}
