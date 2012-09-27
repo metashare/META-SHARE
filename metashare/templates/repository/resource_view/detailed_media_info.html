@@ -59,7 +59,12 @@
 
 	{# Annotation Information #}
 	{% if "Annotation" in resource_component %}
-		{% include "repository/resource_view/annotation.html" with annotations=resource_component %}
+		<label class='title'>Annotation</label>
+		{% for key, value in resource_component.items %}
+			{% if "Annotation" in key %}
+				{% include "repository/resource_view/annotation.html" with annotations=value %}
+			{% endif %}
+		{% endfor %}
 	{% endif %}
 
 	{# Audio Content Information #}
