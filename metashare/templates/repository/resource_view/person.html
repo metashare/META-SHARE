@@ -7,8 +7,8 @@
 	{% if level == "sub" %}
 		<label class='subtitle'>{{type}}</label>
 	{% else %}	
-		{% if type != "Contact Person" and type != "Metadata Creator" and type != "Resource Creator" and type != "IPR Holder" and type != "Evaluator" and type != "Validator" %}
-			<span class='title'>{{type}}</span>		
+		{% if type != "Contact Person" and type != "Metadata Creator" and type != "Resource Creator" and type != "IPR Holder" and type != "Evaluator" and type != "Validator" and type != "Annotator" %}
+			<span class='title'>{{type}}</span>
 		{% endif %}
 	{% endif %}
 	

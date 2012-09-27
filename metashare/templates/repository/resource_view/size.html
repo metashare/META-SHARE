@@ -2,7 +2,7 @@
 {% spaceless %}
 
 {% if type == "component" %}
-	<strong> Size: </strong>
+	<strong class='indented'> Size: </strong>
 {% else %}
 	{% if type == "sub" %}
 	{% else %}
@@ -22,7 +22,7 @@
 			{% endfor %}
 		{% endfor %}
 	{% else %}
-		<div class="dataline">	
+		<div class="dataline">
 		{% for key, value in size.items %}
 			{% for key1, value1 in value.items %}
 				{% if key1 == "Size_unit" %}
