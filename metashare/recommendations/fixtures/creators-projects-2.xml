@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourceInfo xmlns:xslt="http://xml.apache.org/xsltm"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema"
-  xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema">
+<resourceInfo xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
   <identificationInfo>
     <resourceName lang="en">The CINTIL Corpus – International
       Corpus of Portuguese
@@ -17,7 +15,7 @@
       Português est un corpus du portugais européen écrit et parlé,
       fourni avec une interprétation linguistique.
     </description>
-    <resourceShortName />
+    <resourceShortName/>
     <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
     <url>http://catalog.elra.info/product_info.php?products_id=1102
     </url>

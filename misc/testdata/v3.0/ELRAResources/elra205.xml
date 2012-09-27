@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">Cebuano =&gt; English Bilingual Lexicon</resourceName>
+      <resourceName lang="fr">Lexique bilingue cebuano =&gt; anglais</resourceName>
+      <description lang="en">This is a bilingual Cebuano=&gt;English lexicon, provided in structured XML of OLIF (Open Lexicon Interchange Format) format. The XML conversion is provided by Digital Sonata Pty Ltd.The lexicon comprises 1,988 entries in Cebuano and 1,990 in English. In terms of entry types, the lexicon comprises 1,052 nous, 462 adjectives, 405 verbs and 69 closed-class entries.The entries contain semantic information in terms of domain specification or style information (e.g., colloquial, regional use, etc.). Collocational information is also available for 500 entries.</description>
+      <description lang="fr">Ce lexique bilingue cebuano=&gt;anglais est fourni en format XML structuré selon le standard OLIF (Open Lexicon Interchange Format). La conversion XML a été fournie par Digital Sonata Pty Ltd.Le lexique contient 1 988 entrées en cebuano et 1 990 entrées en anglais. En termes de types d’entrées, le lexique comprend 1,052 noms, 462 adjectifs, 405 verbes et 69 entrées de classe fermée.Les entrées contiennent des informations sémantiques en termes de spécification de domaine et information de style (par exemple, usage conversationnel, régional, etc.). L’information collocationnelle est également disponible pour 500 entrées.</description>
+      <resourceShortName/>
+      <url>http://catalog.elra.info/product_info.php?products_id=1059</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-M0045</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>45.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_VAR</licence>
+         <restrictionsOfUse>commercialUse</restrictionsOfUse>
+         <fee>45.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>45.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_VAR</licence>
+         <restrictionsOfUse>commercialUse</restrictionsOfUse>
+         <fee>45.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>45.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_VAR</licence>
+         <restrictionsOfUse>commercialUse</restrictionsOfUse>
+         <fee>45.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>45.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_VAR</licence>
+         <restrictionsOfUse>commercialUse</restrictionsOfUse>
+         <fee>45.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <availabilityStartDate>2008-04-22</availabilityStartDate>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Valérie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <revision>Creation date:  November 15, 2007Last update:   November 15, 2007</revision>
+      <lastDateUpdated>2008-04-22</lastDateUpdated>
+   </versionInfo>
+   <resourceCreationInfo>
+      <creationEndDate>2007-01-01</creationEndDate>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>N/A</languageId>
+                  <languageName>No Language</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>no size available</size>
+                  <sizeUnit>other</sizeUnit>
+               </sizeInfo>
+               <textFormatInfo>
+                  <mimeType>Plain text</mimeType>
+               </textFormatInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>

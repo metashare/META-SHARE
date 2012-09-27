@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">ILSP/ELEFTHEROTYPIA Corpus (Greek corpus)</resourceName>
+      <resourceName lang="fr">Corpus ILSP/ELEFTHEROTYPIA (corpus grec)</resourceName>
+      <description lang="en">The ILSP/ELEFTHEROTYPIA Corpus contains approximately 3 million words classified and annotated according to the common core PAROLE encoding standard. Thus, each file is classified according to the parameters of Medium, Topic and Genre, and structurally annotated at paragraph level (CES Level 1). The format of the corpus is SGML files. The source of the files is the Greek daily newspaper ELEFTHEROTYPIA.A subset of the corpus (250,000 words) is morpho-syntactically tagged; all the words are also lemmatised and checked. For the morphosyntactic annotation of the corpus, a stepwise procedure consisting of the following four steps was used: automatic morphosyntactic annotation, automatic disambiguation, manual disambiguation and checking, conversion into the PAROLE format requirements. In certain texts, some passages are written in "katharevoussa", an older version of Greek; these passages are marked as "distinct" and have not been morpho-syntactically annotated.The tagset used for the morphological annotation of the corpus is presented in the "Addendum to TA - Encoding features and values for the morphological layer in the lexicon Merged Tags" (P-WP1.1.-MEMO-ERLI-5).More information about the PAROLE project: http://www.elda.org/catalogue/fr/text/doc/parole.html</description>
+      <description lang="fr">Le corpus ILSP/ELEFTHEROTYPIA (corpus PAROLE grec) comprend environ 3 millions de mots classés et annotés conformément au noyau commun du standard de codage PAROLE. Chaque fichier a été classé selon les paramètres Source, Thème et Genre, et annoté au niveau du paragraphe (Niveau 1 du CES). Le format du corpus est SGML. La source des fichiers est le quotidien grec ELEFTHEROTYPIA.Un sous-ensemble du corpus (250 000 mots) a été étiqueté au niveau morpho-syntaxique ; tous les mots ont été lemmatisés et vérifiés. L'annotation morpho-syntaxique du corpus a été réalisée en 4 étapes : annotation morpho-syntaxique automatique, désambiguïsation automatique, désambiguïsation et vérification manuelle, conversion vers le format PAROLE. Dans certains textes, quelques passages écrits en "katharevoussa", une ancienne écriture du grec, ont été marqués par la balise "distinct" et n'ont pas été annotés au niveau morpho-syntaxique.Le jeu d'étiquettes utilisé pour l'annotation morphologique de ce corpus est présenté dans le document intitulé "Addendum to TA - Encoding features and values for the morphological layer in the lexicon Merged Tags" (P-WP1.1.-MEMO-ERLI-5).Plus d'informations sur le projet Parole: http://www.elda.org/catalogue/fr/text/doc/parole.html</description>
+      <resourceShortName/>
+      <url>http://catalog.elra.info/product_info.php?products_id=763</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-W0022</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>850.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>850.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>1275.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>1275.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <availabilityStartDate>2000-03-09</availabilityStartDate>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Valérie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <lastDateUpdated>2004-05-12</lastDateUpdated>
+   </versionInfo>
+   <resourceCreationInfo>
+      <fundingProject>
+         <projectName>PAROLE</projectName>
+         <fundingType>euFunds</fundingType>
+      </fundingProject>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>gre/ell</languageId>
+                  <languageName>Greek</languageName>
+                  <languageVarietyInfo>
+                     <languageVarietyType>dialect</languageVarietyType>
+                     <languageVarietyName>Modern (1453-)</languageVarietyName>
+                     <sizePerLanguageVariety>
+                        <size>2</size>
+                        <sizeUnit>gb</sizeUnit>
+                     </sizePerLanguageVariety>
+                  </languageVarietyInfo>
+               </languageInfo>
+               <sizeInfo>
+                  <size>no size available</size>
+                  <sizeUnit>other</sizeUnit>
+               </sizeInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

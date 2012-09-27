@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+      <identificationInfo>
+        <resourceName lang="en">Greek Sign Language Corpus</resourceName>
+        <description lang="en">Video Corpus of Greek Sign Language annotated with specific grammatical phenomena of both natural and sign language through the ELAN annotation tool</description>
+        <resourceShortName lang="en">GSLC</resourceShortName>
+        <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      </identificationInfo>
+      <distributionInfo>
+        <availability>available-restrictedUse</availability>
+          <licenceInfo>
+            <licence>proprietary</licence>
+          </licenceInfo>
+      </distributionInfo>
+      <contactPerson>
+        <surname lang="en">Efthimiou</surname>
+        <givenName lang="en">Eleni</givenName>
+        <sex>female</sex>
+          <communicationInfo>
+            <email>eleni_e@ilsp.athena-innovation.gr</email>
+            <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=28&amp;Itemid=156</url>
+            <telephoneNumber>+302106875356</telephoneNumber>
+            <faxNumber>+302106854270</faxNumber>
+          </communicationInfo>
+        <position>Research Director</position>
+          <affiliation>
+            <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+            <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+              <communicationInfo>
+                <email>www@ilsp.athena-innovation.gr</email>
+                <url>http://www.ilsp.gr/</url>
+                <address>Artemidos 6 &amp; Epidavrou</address>
+                <zipCode>GR-15125</zipCode>
+                <city>Maroussi</city>
+                <country>GR</country>
+                <telephoneNumber>+302106875300</telephoneNumber>
+                <faxNumber>+302106854270</faxNumber>
+                <faxNumber>+302106856794</faxNumber>
+              </communicationInfo>
+          </affiliation>
+      </contactPerson>
+      <contactPerson>
+        <surname lang="en">Fotinea</surname>
+        <givenName lang="en">Evita-Stavroula</givenName>
+        <sex>female</sex>
+          <communicationInfo>
+            <email>evita@ilsp.athena-innovation.gr</email>
+            <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=67&amp;Itemid=156</url>
+            <telephoneNumber>+302106875404</telephoneNumber>
+            <faxNumber>+302106854270</faxNumber>
+          </communicationInfo>
+        <position>Principal Researcher</position>
+          <affiliation>
+            <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+            <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+              <communicationInfo>
+                <email>www@ilsp.athena-innovation.gr</email>
+                <url>http://www.ilsp.gr/</url>
+                <address>Artemidos 6 &amp; Epidavrou</address>
+                <zipCode>GR-15125</zipCode>
+                <city>Maroussi</city>
+                <country>GR</country>
+                <telephoneNumber>+302106875300</telephoneNumber>
+                <faxNumber>+302106854270</faxNumber>
+                <faxNumber>+302106856794</faxNumber>
+              </communicationInfo>
+          </affiliation>
+      </contactPerson>
+      <metadataInfo>
+        <metadataCreationDate>2012-02-02</metadataCreationDate>
+          <metadataCreator>
+            <surname lang="en">Desipri</surname>
+            <givenName lang="en">Elina</givenName>
+            <sex>female</sex>
+              <communicationInfo>
+                <email>elina@ilsp.athena-innovation.gr</email>
+                <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=23&amp;Itemid=156</url>
+                <telephoneNumber>+302106875442</telephoneNumber>
+                <faxNumber>+302106854270</faxNumber>
+                <faxNumber>+302106856794</faxNumber>
+              </communicationInfo>
+            <position>Scientific Associate</position>
+              <affiliation>
+                <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                  <communicationInfo>
+                    <email>www@ilsp.athena-innovation.gr</email>
+                    <url>http://www.ilsp.gr/</url>
+                    <address>Artemidos 6 &amp; Epidavrou</address>
+                    <zipCode>GR-15125</zipCode>
+                    <city>Maroussi</city>
+                    <country>GR</country>
+                    <telephoneNumber>+302106875300</telephoneNumber>
+                    <faxNumber>+302106854270</faxNumber>
+                    <faxNumber>+302106856794</faxNumber>
+                  </communicationInfo>
+              </affiliation>
+          </metadataCreator>
+        <source>META-SHARE/ILSP</source>
+        <metadataLastDateUpdated>2012-05-16</metadataLastDateUpdated>
+      </metadataInfo>
+      <validationInfo>
+        <validated>true</validated>
+        <validationType>content</validationType>
+        <validationExtent>partial</validationExtent>
+      </validationInfo>
+      <usageInfo>
+          <foreseenUseInfo>
+            <foreseenUse>nlpApplications</foreseenUse>
+            <useNLPSpecific>signLanguageRecognition</useNLPSpecific>
+          </foreseenUseInfo>
+          <actualUseInfo>
+            <actualUse>nlpApplications</actualUse>
+            <useNLPSpecific>signLanguageRecognition</useNLPSpecific>
+          </actualUseInfo>
+      </usageInfo>
+      <resourceComponentType>
+          <corpusInfo>
+            <resourceType>corpus</resourceType>
+              <corpusMediaType>
+                  <corpusTextInfo>
+                    <mediaType>text</mediaType>
+                      <lingualityInfo>
+                        <lingualityType>monolingual</lingualityType>
+                      </lingualityInfo>
+                      <languageInfo>
+                        <languageId>ell</languageId>
+                        <languageName>Modern Greek (1453-)</languageName>
+                      </languageInfo>
+                      <sizeInfo>
+                        <size>2</size>
+                        <sizeUnit>hours</sizeUnit>
+                      </sizeInfo>
+                      <annotationInfo>
+                        <annotationType>lemmatization</annotationType>
+                      </annotationInfo>
+                      <annotationInfo>
+                        <annotationType>morphosyntacticAnnotation-bPosTagging</annotationType>
+                      </annotationInfo>
+                      <annotationInfo>
+                        <annotationType>semanticAnnotation</annotationType>
+                      </annotationInfo>
+                      <annotationInfo>
+                        <annotationType>other</annotationType>
+                      </annotationInfo>
+                      <annotationInfo>
+                        <annotationType>discourseAnnotation</annotationType>
+                      </annotationInfo>
+                  </corpusTextInfo>
+                  <corpusVideoInfo>
+                    <mediaType>video</mediaType>
+                      <lingualityInfo>
+                        <lingualityType>monolingual</lingualityType>
+                      </lingualityInfo>
+                      <languageInfo>
+                        <languageId>ell</languageId>
+                        <languageName>Modern Greek (1453-)</languageName>
+                      </languageInfo>
+                      <sizeInfo>
+                        <size>2</size>
+                        <sizeUnit>hours</sizeUnit>
+                      </sizeInfo>
+                      <annotationInfo>
+                        <annotationType>lemmatization</annotationType>
+                      </annotationInfo>
+                      <annotationInfo>
+                        <annotationType>morphosyntacticAnnotation-bPosTagging</annotationType>
+                      </annotationInfo>
+                      <annotationInfo>
+                        <annotationType>semanticAnnotation</annotationType>
+                      </annotationInfo>
+                      <annotationInfo>
+                        <annotationType>other</annotationType>
+                      </annotationInfo>
+                      <annotationInfo>
+                        <annotationType>discourseAnnotation</annotationType>
+                      </annotationInfo>
+                  </corpusVideoInfo>
+              </corpusMediaType>
+          </corpusInfo>
+      </resourceComponentType>
+  </resourceInfo>

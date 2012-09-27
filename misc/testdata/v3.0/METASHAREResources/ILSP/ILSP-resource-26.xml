@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+      <identificationInfo>
+        <resourceName lang="und">LEXIS Computational Lexicon</resourceName>
+        <description lang="und">Computational lexicon of Greek language with morphological, syntactic and semantic information.</description>
+        <resourceShortName lang="und">LEXIS</resourceShortName>
+          <metaShareId>
+            NOT_DEFINED_FOR_V2
+          </metaShareId>
+      </identificationInfo>
+      <distributionInfo>
+        <availability>available-restrictedUse</availability>
+      </distributionInfo>
+      <contactPerson>
+        <surname lang="und">Gavrilidou</surname>
+        <givenName lang="und">Maria</givenName>
+          <communicationInfo>
+            <email>maria@ilsp.athena-innovation.gr</email>
+          </communicationInfo>
+      </contactPerson>
+      <contactPerson>
+        <surname lang="und">Labropoulou</surname>
+        <givenName lang="und">Penny</givenName>
+          <communicationInfo>
+            <email>penny@ilsp.athena-innovation.gr</email>
+          </communicationInfo>
+      </contactPerson>
+      <metadataInfo>
+        <metadataCreationDate>2012-02-02</metadataCreationDate>
+        <source>META</source>
+      </metadataInfo>
+      <usageInfo>
+          <foreseenUseInfo>
+            <foreseenUse>nlpApplications</foreseenUse>
+          </foreseenUseInfo>
+      </usageInfo>
+      <resourceComponentType>
+          <lexicalConceptualResourceInfo>
+            <resourceType>lexicalConceptualResource</resourceType>
+            <lexicalConceptualResourceType>computationalLexicon</lexicalConceptualResourceType>
+              <lexicalConceptualResourceEncodingInfo>
+                <encodingLevel>morphology</encodingLevel>
+                <encodingLevel>semantics</encodingLevel>
+                <encodingLevel>syntax</encodingLevel>
+              </lexicalConceptualResourceEncodingInfo>
+              <lexicalConceptualResourceMediaType>
+                  <lexicalConceptualResourceTextInfo>
+                    <mediaType>text</mediaType>
+                      <lingualityInfo>
+                        <lingualityType>monolingual</lingualityType>
+                      </lingualityInfo>
+                      <languageInfo>
+                        <languageId>ell</languageId>
+                        <languageName>Modern Greek (1453-)</languageName>
+                      </languageInfo>
+                      <sizeInfo>
+                        <size>68000</size>
+                        <sizeUnit>entries</sizeUnit>
+                      </sizeInfo>
+                  </lexicalConceptualResourceTextInfo>
+              </lexicalConceptualResourceMediaType>
+          </lexicalConceptualResourceInfo>
+      </resourceComponentType>
+  </resourceInfo>
