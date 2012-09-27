@@ -86,6 +86,14 @@
 			{% endif %}
 		{% endfor %}
 	{% endif %}
+	
+	{# Video Content Information #}
+	{% if "Video_content" in resource_component %}
+		{% include "repository/resource_view/video_content.html" with video=resource_component.Video_content %}
+	{% endif %}
+	
+	
+	
 
 
 {% endif %}
