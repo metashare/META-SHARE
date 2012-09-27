@@ -292,7 +292,7 @@ class DownloadViewTest(TestCase):
         """
         test_utils.setup_test_storage()
         # set up different test resources
-        self.non_downloadable_resource = _import_resource('testfixture.xml')
+        self.non_downloadable_resource = _import_resource('ILSP10.xml')
         self.downloadable_resource_1 = \
             _import_resource('downloadable_1_license.xml')
         self.downloadable_resource_3 = \
@@ -353,14 +353,16 @@ class DownloadViewTest(TestCase):
         response = client.get(reverse(views.download, args=
                 (self.non_downloadable_resource.storage_object.identifier,)),
             follow = True)
-        self.assertTemplateUsed(response, 'repository/lr_not_downloadable.html')
+        self.assertContains(response, 'license terms for the download of the '
+                'selected resource are not available')
         # make sure a normal user gets the information page, too:
         client = Client()
         client.login(username='normaluser', password='secret')
         response = client.get(reverse(views.download, args=
                 (self.non_downloadable_resource.storage_object.identifier,)),
             follow = True)
-        self.assertTemplateUsed(response, 'repository/lr_not_downloadable.html')
+        self.assertContains(response, 'license terms for the download of the '
+                'selected resource are not available')
 
     def test_downloadable_resource_with_one_license(self):
         """
@@ -389,7 +391,7 @@ class DownloadViewTest(TestCase):
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
-        self.assertContains(response, 'licences/CC-BYNCSAv2.5.htm',
+        self.assertContains(response, 'licences/CC-BYNCSAv3.0.htm',
                             msg_prefix="the correct license appears to not " \
                                 "be shown in an iframe")
         # make sure the license agreement page is shown again if the license was
@@ -397,18 +399,18 @@ class DownloadViewTest(TestCase):
         response = client.post(reverse(views.download,
                 args=(self.downloadable_resource_1.storage_object.identifier,)),
             { 'in_licence_agree_form': 'True', 'licence_agree': 'False',
-              'licence': 'CC_BY-NC-SA' },
+              'licence': 'CC-BY-NC-SA' },
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
-        self.assertContains(response, 'licences/CC-BYNCSAv2.5.htm',
+        self.assertContains(response, 'licences/CC-BYNCSAv3.0.htm',
                             msg_prefix="the correct license appears to not " \
                                 "be shown in an iframe")
         # make sure the download was started after accepting the license:
         response = client.post(reverse(views.download,
                 args=(self.downloadable_resource_1.storage_object.identifier,)),
             { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
-              'licence': 'CC_BY-NC-SA' },
+              'licence': 'CC-BY-NC-SA' },
             follow = True)
         self.assertTemplateNotUsed(response, 'repository/licence_agreement.html',
                             msg_prefix="a download should have been started")
@@ -444,13 +446,13 @@ class DownloadViewTest(TestCase):
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_selection.html',
                                 "license selection page expected")
-        self.assertContains(response, 'CC_BY-NC-SA',
+        self.assertContains(response, 'CC-BY-NC-SA',
                             msg_prefix="an expected license appears to not " \
                                 "be shown")
         self.assertContains(response, 'GPL',
                             msg_prefix="an expected license appears to not " \
                                 "be shown")
-        self.assertContains(response, 'CC_BY-SA_3.0',
+        self.assertContains(response, 'CC-BY-SA',
                             msg_prefix="an expected license appears to not " \
                                 "be shown")
         # make sure the license selection page is shown again if no license is selected
@@ -460,13 +462,13 @@ class DownloadViewTest(TestCase):
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_selection.html',
                                 "license selection page expected")
-        self.assertContains(response, 'CC_BY-NC-SA',
+        self.assertContains(response, 'CC-BY-NC-SA',
                             msg_prefix="an expected license appears to not " \
                                 "be shown")
         self.assertContains(response, 'GPL',
                             msg_prefix="an expected license appears to not " \
                                 "be shown")
-        self.assertContains(response, 'CC_BY-SA_3.0',
+        self.assertContains(response, 'CC-BY-SA',
                             msg_prefix="an expected license appears to not " \
                                 "be shown")
         # make sure the license page is shown after selecting a license
@@ -530,7 +532,7 @@ class DownloadViewTest(TestCase):
         response = client.post(reverse(views.download, args=
                 (self.downloadable_resource_1.storage_object.identifier,)),
             { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
-              'licence': 'CC_BY-NC-SA' },
+              'licence': 'CC-BY-NC-SA' },
             follow = True)
         self.assertIn(("http://www.example.org/dl1", 302),
                       response.redirect_chain,
@@ -542,22 +544,22 @@ class DownloadViewTest(TestCase):
         """
         # neither via GET ...
         response = Client().get(reverse(views.download, args=
-                (self.non_downloadable_resource.storage_object.identifier,)),
+                (self.downloadable_resource_3.storage_object.identifier,)),
             follow = True)
         self.assertTemplateUsed(response, 'login.html')
         # ... nor via POST with no data ...
         response = Client().post(reverse(views.download, args=
-                (self.non_downloadable_resource.storage_object.identifier,)),
+                (self.downloadable_resource_3.storage_object.identifier,)),
             follow = True)
         self.assertTemplateUsed(response, 'login.html')
         # ... nor via POST with a selected license ...
         response = Client().post(reverse(views.download, args=
-                (self.non_downloadable_resource.storage_object.identifier,)),
+                (self.downloadable_resource_3.storage_object.identifier,)),
             { 'licence': 'GPL' },
             follow = True)
         # ... nor via POST with an agreement to some license:
         response = Client().post(reverse(views.download, args=
-                (self.non_downloadable_resource.storage_object.identifier,)),
+                (self.downloadable_resource_3.storage_object.identifier,)),
             { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
               'licence': 'GPL' },
             follow = True)
@@ -604,7 +606,7 @@ class DownloadViewTest(TestCase):
         # LR must not be downloadable via POST with just a selected license ...
         response = client.post(reverse(views.download,
                     args=(self.ms_commons_resource.storage_object.identifier,)),
-            { 'licence': 'MSCommons_BY-NC-SA' },
+            { 'licence': 'MSCommons-BY-NC-SA' },
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
@@ -616,7 +618,7 @@ class DownloadViewTest(TestCase):
         response = client.post(reverse(views.download,
                     args=(self.ms_commons_resource.storage_object.identifier,)),
             { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
-              'licence': 'MSCommons_BY-NC-SA' },
+              'licence': 'MSCommons-BY-NC-SA' },
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
@@ -647,7 +649,7 @@ class DownloadViewTest(TestCase):
         response = client.post(reverse(views.download,
                     args=(self.ms_commons_resource.storage_object.identifier,)),
             { 'in_licence_agree_form': 'True', 'licence_agree': 'False',
-              'licence': 'MSCommons_BY-NC-SA' },
+              'licence': 'MSCommons-BY-NC-SA' },
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
@@ -659,7 +661,7 @@ class DownloadViewTest(TestCase):
         response = client.post(reverse(views.download,
                     args=(self.ms_commons_resource.storage_object.identifier,)),
             { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
-              'licence': 'MSCommons_BY-NC-SA' },
+              'licence': 'MSCommons-BY-NC-SA' },
             follow = True)
         self.assertTemplateNotUsed(response, 'repository/licence_agreement.html',
                             msg_prefix="a download should have been started")
@@ -709,7 +711,7 @@ class DownloadViewTest(TestCase):
             reverse(views.download,
                     args=(self.ms_commons_resource.storage_object.identifier,)),
             { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
-              'licence': 'MSCommons_BY-NC-SA' },
+              'licence': 'MSCommons-BY-NC-SA' },
             follow = True)
         self.assertTemplateNotUsed(response,
             'repository/licence_agreement.html',
@@ -747,7 +749,7 @@ class DownloadViewTest(TestCase):
             reverse(views.download,
                     args=(self.ms_commons_resource.storage_object.identifier,)),
             { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
-              'licence': 'MSCommons_BY-NC-SA' },
+              'licence': 'MSCommons-BY-NC-SA' },
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
             msg_prefix="a download should not have been started")

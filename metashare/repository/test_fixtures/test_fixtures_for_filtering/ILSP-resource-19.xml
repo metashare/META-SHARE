@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v2.1/META-SHARE-Resource.xsd">
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
       <identificationInfo>
         <resourceName lang="en">Cultural Parallels: Study and promotion of the cultural inheritance of the neighbouring areas in Greece and Bulgaria through internet technology</resourceName>
         <description lang="en">Collection of Greek and Bulgarian literary texts for the promotion of the common cultural inheritance of the neighbouring areas in Greee and Bulgaria.</description>

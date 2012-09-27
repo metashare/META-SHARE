@@ -167,23 +167,21 @@ class FilterTest(SeleniumTestCase):
           "//div[@id='searchFilters']/div[10]/div[3]").text)
         self.assertEqual("ELRA_EVALUATION (3)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[10]/div[4]").text)
-        self.assertEqual("BSD - Style (1)", driver.find_element_by_xpath(
+        self.assertEqual("LGPL (2)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[10]/div[5]").text)
         # check Licence filter more/less
         click_and_wait(driver.find_element_by_link_text("more"))
-        self.assertEqual("CC_BY (1)", driver.find_element_by_xpath(
+        self.assertEqual("BSD - Style (1)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[10]/div[6]").text)
-        self.assertEqual("CC_BY - NC - ND (1)", driver.find_element_by_xpath(
+        self.assertEqual("CC - BY (1)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[10]/div[7]").text)
-        self.assertEqual("CC_BY - NC - SA (1)", driver.find_element_by_xpath(
+        self.assertEqual("CC - BY - NC - ND (1)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[10]/div[8]").text)
-        self.assertEqual("LGP Lv3 (1)", driver.find_element_by_xpath(
+        self.assertEqual("CC - BY - NC - SA (1)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[10]/div[9]").text)
-        self.assertEqual("LGPL (1)", driver.find_element_by_xpath(
-          "//div[@id='searchFilters']/div[10]/div[10]").text)
         click_and_wait(driver.find_element_by_link_text("less"))
         self.assertEqual("more", driver.find_element_by_xpath(
-          "//div[@id='searchFilters']/div[10]/div[11]").text)
+          "//div[@id='searchFilters']/div[10]/div[10]").text)
         click_and_wait(driver.find_element_by_link_text("Licence"))
        
         # check Restrictions of Use filter        

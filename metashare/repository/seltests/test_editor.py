@@ -380,7 +380,7 @@ class BasicEditorTests(SeleniumTestCase):
         driver.find_element_by_id("fieldsetcollapser0").click()
         # check that the left window contains all entries
         self.assertEqual("Under Negotiation", driver.find_element_by_xpath(
-          "//select[@id='id_licenceinfotype_model_set-0-licence_from']/option[41]").text)
+          "//select[@id='id_licenceinfotype_model_set-0-licence_from']/option[39]").text)
         # add an entry
         driver.find_element_by_xpath(
           "//select[@id='id_licenceinfotype_model_set-0-licence_from']/option[1]").click()
@@ -388,7 +388,7 @@ class BasicEditorTests(SeleniumTestCase):
         # check that entry has moved to right site
         self.assertEqual("AGPL", driver.find_element_by_xpath(
           "//select[@id='id_licenceinfotype_model_set-0-licence_to']/option[1]").text)
-        self.assertEqual("Apache Licence_V2.0", driver.find_element_by_xpath(
+        self.assertEqual("Apache Licence_2.0", driver.find_element_by_xpath(
           "//select[@id='id_licenceinfotype_model_set-0-licence_from']/option[1]").text)
         # remove entry
         driver.find_element_by_xpath(
@@ -396,7 +396,7 @@ class BasicEditorTests(SeleniumTestCase):
         driver.find_element_by_link_text("Remove").click()
         # entry is now at last position on left site
         self.assertEqual("AGPL", driver.find_element_by_xpath(
-          "//select[@id='id_licenceinfotype_model_set-0-licence_from']/option[41]").text)
+          "//select[@id='id_licenceinfotype_model_set-0-licence_from']/option[39]").text)
 
 
 def _fill_distribution(driver, ss_path, parent_id):

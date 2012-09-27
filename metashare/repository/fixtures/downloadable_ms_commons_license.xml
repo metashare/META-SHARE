@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourceInfo xmlns:ms="http://www.ilsp.gr/META-XMLSchema"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
   <identificationInfo>
     <resourceName lang="en-us">MS Members Test Resource</resourceName>
     <description lang="en-us">another resource for testing</description>
@@ -10,7 +11,7 @@
   <distributionInfo>
     <availability>available-unrestrictedUse</availability>
     <licenceInfo>
-      <licence>MSCommons_BY-NC-SA</licence>
+      <licence>MSCommons-BY-NC-SA</licence>
       <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
       <restrictionsOfUse>shareAlike</restrictionsOfUse>
       <restrictionsOfUse>attribution</restrictionsOfUse>
