@@ -1,6 +1,7 @@
 import logging
 import urllib2
 from urllib import urlencode
+import uuid
 
 from django.contrib.admin.helpers import ACTION_CHECKBOX_NAME
 from django.test.client import Client
@@ -9,11 +10,11 @@ from django.test.testcases import TestCase
 from metashare import test_utils
 from metashare.accounts.models import EditorGroup, EditorGroupManagers
 from metashare.repository.models import resourceInfoType_model
-from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER, STATS_SERVER_URL, DJANGO_URL
+from metashare.settings import ROOT_PATH, STORAGE_PATH, LOG_HANDLER, DJANGO_BASE, STATS_SERVER_URL, DJANGO_URL
 from metashare.storage.models import INGESTED
 from metashare.stats.model_utils import UsageStats, saveLRStats, getLRLast, getLastQuery, \
     UPDATE_STAT, VIEW_STAT, RETRIEVE_STAT, DOWNLOAD_STAT
-
+from metashare.stats.views import callServerStats
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -101,11 +102,11 @@ class StatsTest(TestCase):
     def test_visiting_stats(self):
         """
         Tries to load the visiting stats page of the META-SHARE website.
-        Using 193.254.26.9 as example of Italian IP address
+        Some user calls from 193.254.26.9 are used as example of Italian IP address
         """
-        client = Client(REMOTE_ADDR="193.254.26.9")
+        client = Client()
         client.login(username='manageruser', password='secret')
-        client_user = Client()
+        client_user = Client(REMOTE_ADDR="193.254.26.9")
         client_user.login(username='user', password='secret')
         resources =  resourceInfoType_model.objects.all()
         for resource in resources:
@@ -115,28 +116,28 @@ class StatsTest(TestCase):
                 {"action": "publish_action", ACTION_CHECKBOX_NAME: resource.id}, \
                 follow=True)
             url = resource.get_absolute_url()
-            response = client.get(url, follow = True)
+            response = client_user.get(url, follow = True)
             self.assertTemplateUsed(response,
                 'repository/resource_view/lr_view.html')
 
-        response = client.get('/{0}stats/top/?view=latestupdated'.format(DJANGO_BASE))
+        response = client_user.get('/{0}stats/top/?view=latestupdated'.format(DJANGO_BASE))
         self.assertNotContains(response, ">No data found<")
         
-        response = client.get('/{0}stats/top/?view=topdownloaded'.format(DJANGO_BASE))
+        response = client_user.get('/{0}stats/top/?view=topdownloaded'.format(DJANGO_BASE))
         self.assertContains(response, ">No data found<")
         
-        response = client.get('/{0}stats/top/'.format(DJANGO_BASE))
+        response = client_user.get('/{0}stats/top/'.format(DJANGO_BASE))
         self.assertTemplateUsed(response, 'stats/topstats.html')
         self.assertContains(response, "META-SHARE node visits statistics")
         self.assertNotContains(response, ">No data found<")
 
-        response = client.get('/{0}stats/top/?last=week'.format(DJANGO_BASE))
+        response = client_user.get('/{0}stats/top/?last=week'.format(DJANGO_BASE))
         self.assertNotContains(response, ">No data found<")
 
-        response = client.get('/{0}stats/top/?country=IT'.format(DJANGO_BASE))
+        response = client_user.get('/{0}stats/top/?country=IT'.format(DJANGO_BASE))
         self.assertNotContains(response, ">No data matched<")
 
-        response = client.get('/{0}stats/top/?last=week&country=DE'.format(DJANGO_BASE))
+        response = client_user.get('/{0}stats/top/?last=week&country=DE'.format(DJANGO_BASE))
         self.assertContains(response, ">No data matched<")
         
     def test_latest_queries(self):
@@ -144,8 +145,8 @@ class StatsTest(TestCase):
         Test whether there are latest queries
         """
         client = Client()
-        response = client.get('/{0}repository/search/?q=test'.format(DJANGO_BASE))
         response = client.get('/{0}repository/search/?q=italian'.format(DJANGO_BASE))
+        response = client.get('/{0}repository/search/?q=italian&selected_facets=languageNameFilter_exact:Italian'.format(DJANGO_BASE))
         response = client.get('/{0}stats/top/?view=topqueries'.format(DJANGO_BASE))
         self.assertNotContains(response, ">No data found<")
 
@@ -166,9 +167,13 @@ class StatsTest(TestCase):
         try:
             response = urllib2.urlopen(STATS_SERVER_URL)
             self.assertEquals(200, response.code)
+            response = callServerStats()
+            self.assertEquals(True, response)
+
         except urllib2.URLError:
             LOGGER.warn('Failed to contact statistics server on %s',
                         STATS_SERVER_URL)
+            
 
     def test_add_new_node(self):
         """
@@ -188,12 +193,27 @@ class StatsTest(TestCase):
         checking if there are the statistics of the day
         """
         client = Client()
+        client.login(username='manageruser', password='secret')
+        resources =  resourceInfoType_model.objects.all()
+        for resource in resources:
+            resource.storage_object.publication_status = INGESTED
+            resource.storage_object.save()
+            client.post(ADMINROOT, \
+                {"action": "publish_action", ACTION_CHECKBOX_NAME: resource.id}, \
+                follow=True)
+            
         # get stats days date 
         response = client.get('/{0}stats/days'.format(DJANGO_BASE))
         self.assertEquals(200, response.status_code)
         # get stats info of the node 
         response = client.get('/{0}stats/get'.format(DJANGO_BASE))
         self.assertEquals(200, response.status_code)
+        self.assertContains(response, "lrcount")
+        self.assertNotContains(response, "usagestats")
+        # get full stats info of the node 
+        response = client.get('/{0}stats/get/?statsid={1}'.format(DJANGO_BASE, str(uuid.uuid3(uuid.NAMESPACE_DNS, STORAGE_PATH))))
+        self.assertEquals(200, response.status_code)
+        self.assertContains(response, "usagestats")
     
     def test_my_resources(self):
         client = Client()

@@ -1,6 +1,7 @@
 import sys
-import logging 
-from metashare.settings import DJANGO_URL, STATS_SERVER_URL, METASHARE_VERSION
+import logging
+import uuid
+from metashare.settings import DJANGO_URL, STATS_SERVER_URL, METASHARE_VERSION, STORAGE_PATH
 from metashare.repository.models import resourceInfoType_model
 from metashare.storage.models import PUBLISHED
 from metashare.stats.models import LRStats, QueryStats, UsageStats
@@ -50,11 +51,13 @@ class CountIf(aggregates.Count):
 
 def callServerStats():
     url = urllib.urlencode({'url': DJANGO_URL})
+    stats_uuid = urllib.urlencode({'statsid': uuid.uuid3(uuid.NAMESPACE_DNS, STORAGE_PATH)})
     try:
-        req = urllib2.Request("{0}stats/addnode?{1}".format(STATS_SERVER_URL, url))
+        req = urllib2.Request("{0}stats/addnode?{1}&{2}".format(STATS_SERVER_URL, url, stats_uuid))
         urllib2.urlopen(req)
     except:
         LOGGER.debug('WARNING! Failed contacting statistics server on %s' % STATS_SERVER_URL)
+    return True
                   
 thread = Timer(2.0, callServerStats)
 thread.start()
@@ -357,7 +360,8 @@ def statdays (request):
 def getstats (request):
     """ get statistics for a date in terms of user action made, amount of resources, info about usage, ... """
     data = {}
-    currdate = request.GET.get('date',"")
+    stats_uuid = request.GET.get('statsid',"")
+    currdate = request.GET.get('date', '')
     if (not currdate):
         currdate = date.today()
     
@@ -384,38 +388,39 @@ def getstats (request):
     data['qlt_avg'] = qltavg
     
     ###get usage statistics
-    _models = [x for x in dir(sys.modules['metashare.repository.models']) if x.endswith('_model')]
-    mod = import_module("metashare.repository.models")
-    _fields = {}
-    for _model in _models:
-        # get info about fields
-        dbfields = getattr(mod, _model).__schema_fields__
-        for _not_used, _field, _required in dbfields:
-            model_name = _model.replace("Type_model","")
-            if not _field.endswith('_set') and not model_name+" " + _field in _fields:
-                verbose_name = eval(u'{0}._meta.get_field("{1}").verbose_name'.format(_model, _field))
-                _fields[model_name+" " + _field] = [model_name, _field, verbose_name, _required, 0, 0]
-   
-    usageset = UsageStats.objects.values('elname', 'elparent').annotate(Count('lrid', distinct=True), \
-        Sum('count')).order_by('elparent', '-lrid__count', 'elname')        
-    if (len(usageset) > 0):
+    if (stats_uuid == str(uuid.uuid3(uuid.NAMESPACE_DNS, STORAGE_PATH))):
+        _models = [x for x in dir(sys.modules['metashare.repository.models']) if x.endswith('_model')]
+        mod = import_module("metashare.repository.models")
+        _fields = {}
+        for _model in _models:
+            # get info about fields
+            dbfields = getattr(mod, _model).__schema_fields__
+            for _not_used, _field, _required in dbfields:
+                model_name = _model.replace("Type_model","")
+                if not _field.endswith('_set') and not model_name+" " + _field in _fields:
+                    verbose_name = eval(u'{0}._meta.get_field("{1}").verbose_name'.format(_model, _field))
+                    _fields[model_name+" " + _field] = [model_name, _field, verbose_name, _required, 0, 0]
+       
+        usageset = UsageStats.objects.values('elname', 'elparent').annotate(Count('lrid', distinct=True), \
+            Sum('count')).order_by('elparent', '-lrid__count', 'elname')        
         usagedata = {}
-        currclass = {}
-        for item in usageset:
-            verbose = item["elname"]
-            if item["elparent"]+" "+item["elname"] in _fields:
-                verbose = _fields[item["elparent"]+" "+item["elname"]][2]
-            if not item["elparent"] in currclass:
-                usagedata[item["elparent"]] = [{"field": item["elname"], "label": verbose, "counters": [int(item["lrid__count"]), int(item["count__sum"])]}]
-            else:
-                usagedata[item["elparent"]].append({"field": item["elname"], "label": verbose, "counters": [int(item["lrid__count"]), int(item["count__sum"])]})
+        if (len(usageset) > 0):
+            currclass = {}
+            for item in usageset:
+                verbose = item["elname"]
+                if item["elparent"]+" "+item["elname"] in _fields:
+                    verbose = _fields[item["elparent"]+" "+item["elname"]][2]
+                if not item["elparent"] in currclass:
+                    usagedata[item["elparent"]] = [{"field": item["elname"], "label": verbose, "counters": [int(item["lrid__count"]), int(item["count__sum"])]}]
+                else:
+                    usagedata[item["elparent"]].append({"field": item["elname"], "label": verbose, "counters": [int(item["lrid__count"]), int(item["count__sum"])]})
         data["usagestats"] = usagedata
-        
-    resources =  resourceInfoType_model.objects.all()
-    lrstats = {}
-    for resource in resources:
-        lrstats[resource.storage_object.identifier] = getLRStats(resource.storage_object.identifier)
-    data["lrstats"] = lrstats
+            
+        resources =  resourceInfoType_model.objects.all()
+        lrstats = {}
+        for resource in resources:
+            lrstats[resource.storage_object.identifier] = getLRStats(resource.storage_object.identifier)
+        data["lrstats"] = lrstats
         
     return HttpResponse("["+json.dumps(data)+"]", mimetype="application/json")
     

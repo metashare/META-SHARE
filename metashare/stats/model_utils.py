@@ -43,7 +43,7 @@ def saveLRStats(resource, action, request=None):
     stats counter. Returns whether the stats counter was incremented or not.
     """
     result = False
-    LOGGER.debug("saveLRStats %s %s", action,
+    LOGGER.debug("saveLRStats action=%s lrid=%s", action,
                  resource.storage_object.identifier)
     if not hasattr(resource, 'storage_object') or resource.storage_object is None:
         return result
@@ -69,7 +69,7 @@ def saveLRStats(resource, action, request=None):
         record = lrset[0]
         record.ignored = ignored
         record.save(force_update=True)
-        LOGGER.debug('UPDATESTATS: Saved LR {0}, {1} action={2} ({3}).'.format(lrid, sessid, action, record.lasttime))
+        #LOGGER.debug('UPDATESTATS: Saved LR {0}, {1} action={2} ({3}).'.format(lrid, sessid, action, record.lasttime))
     else:       
         record = LRStats()
         record.userid = userid
@@ -79,13 +79,13 @@ def saveLRStats(resource, action, request=None):
         record.geoinfo = getcountry_code(_get_ipaddress(request))
         record.ignored = ignored
         record.save(force_insert=True)
-        LOGGER.debug('SAVESTATS: Saved LR {0}, {1} action={2}.'.format(lrid, sessid, action))
+        #LOGGER.debug('SAVESTATS: Saved LR {0}, {1} action={2}.'.format(lrid, sessid, action))
         result = True
     if action == UPDATE_STAT:
         if (resource.storage_object.published):
             UsageStats.objects.filter(lrid=lrid).delete()
             _update_usage_stats(lrid, resource.export_to_elementtree())
-            LOGGER.debug('STATS: Updating usage statistics: resource {0} updated'.format(lrid))
+            #LOGGER.debug('STATS: Updating usage statistics: resource {0} updated'.format(lrid))
     return result
 
 def saveQueryStats(query, facets, found, exectime=0, request=None): 
@@ -97,7 +97,7 @@ def saveQueryStats(query, facets, found, exectime=0, request=None):
     stat.found = found
     stat.exectime = exectime    
     stat.save()
-    LOGGER.debug(u'STATS: Query {0}.'.format(query))
+    LOGGER.debug(u'saveQueryStats q={0}.'.format(query))
 
 def getLRStats(lrid):
     data = ""
