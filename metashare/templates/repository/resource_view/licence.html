@@ -45,7 +45,7 @@
 			{% if "Execution_location" in key1 %}
 				<div class="dataline indented">
 					<label>
-						<strong>Execution Location: </strong><a href="{{value1}}" target='_blank'>{{ value1 }}</a>
+						<strong>Execution Location: </strong>{{ value1|urlize }}
 					</label>
 				</div>
 			{% endif %}
