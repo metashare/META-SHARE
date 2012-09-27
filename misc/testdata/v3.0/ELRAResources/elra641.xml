@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">Oxford French Minidictionary</resourceName>
+      <resourceName lang="fr">Mini Dictionnaire bilingue anglais-français Oxford</resourceName>
+      <description lang="en">This revised edition offers thoroughly up-to-date vocabulary (over 100,000 words, phrases and translations), along with many helpful features such as frequently-used words in French and English are given usage notes; it also comprises clear warning symbols for slang and informal language. It is available in SGML.</description>
+      <description lang="fr">Cette édition révisée propose un vocabulaire mis à jour de plus de 100 000 mots, expressions et traductions, avec quelques informations complémentaires appréciables comme des notes d'usage pour les mots français et anglais utilisés couramment ; des notes claires sont également indiquées pour les mots appartenant au langage familier et informel. Le mini dictionnaire est disponible au format SGML.</description>
+      <resourceShortName/>
+      <url>http://catalog.elra.info/product_info.php?products_id=683</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-M0027</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>4000.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>3500.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <availabilityStartDate>2002-10-25</availabilityStartDate>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Valérie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <lastDateUpdated>2006-04-03</lastDateUpdated>
+   </versionInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>eng</languageId>
+                  <languageName>English</languageName>
+               </languageInfo>
+               <languageInfo>
+                  <languageId>fre/fra</languageId>
+                  <languageName>French</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>no size available</size>
+                  <sizeUnit>other</sizeUnit>
+               </sizeInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>

@@ -91,45 +91,41 @@ MEMBER_TYPES = type('MemberEnum', (), dict(GOD=100, FULL=3, ASSOCIATE=2, NON=1))
 # straight away; otherwise the licence requires a hard-copy signature
 LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
   'AGPL': (MEDIA_URL + 'licences/GNU_agpl-3.0.htm', MEMBER_TYPES.NON),
-  'LGPL': (MEDIA_URL + 'licences/GNU_lgpl-2.0.htm', MEMBER_TYPES.NON),
-  'LGPLv3': (MEDIA_URL + 'licences/GNU_lgpl-3.0.htm', MEMBER_TYPES.NON),
-  'CC0': (MEDIA_URL + 'licences/CC0v1.0.htm', MEMBER_TYPES.NON),
-  'CC_BY-SA_3.0': (MEDIA_URL + 'licences/CC-BYSAv3.0.htm', MEMBER_TYPES.NON),
-  'CC_BY-NC-ND': (MEDIA_URL + 'licences/CC-BYNCNDv3.0.htm', MEMBER_TYPES.NON),
-  'CC_BY-NC-SA': (MEDIA_URL + 'licences/CC-BYNCSAv2.5.htm', MEMBER_TYPES.NON),
-  'CC_BY-NC': (MEDIA_URL + 'licences/CC-BYNCv3.0.htm', MEMBER_TYPES.NON),
-  'CC_BY-ND': (MEDIA_URL + 'licences/CC-BYNDv3.0.htm', MEMBER_TYPES.NON),
-  'CC_BY-SA': (MEDIA_URL + 'licences/CC-BYSAv2.5.htm', MEMBER_TYPES.NON),
-  'CC_BY': (MEDIA_URL + 'licences/CC-BYv3.0.htm', MEMBER_TYPES.NON),
-  'CC_BY-NC-SA_3.0': (MEDIA_URL + 'licences/CC-BYNCSAv3.0.htm',
-                      MEMBER_TYPES.NON),
-  'MSCommons_BY': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BY_v1.0.htm',
+  'LGPL': (MEDIA_URL + 'licences/GNU_lgpl-3.0.htm', MEMBER_TYPES.NON),
+  'CC-ZERO': (MEDIA_URL + 'licences/CC0v1.0.htm', MEMBER_TYPES.NON),
+  'CC-BY-NC-ND': (MEDIA_URL + 'licences/CC-BYNCNDv3.0.htm', MEMBER_TYPES.NON),
+  'CC-BY-NC-SA': (MEDIA_URL + 'licences/CC-BYNCSAv3.0.htm', MEMBER_TYPES.NON),
+  'CC-BY-NC': (MEDIA_URL + 'licences/CC-BYNCv3.0.htm', MEMBER_TYPES.NON),
+  'CC-BY-ND': (MEDIA_URL + 'licences/CC-BYNDv3.0.htm', MEMBER_TYPES.NON),
+  'CC-BY-SA': (MEDIA_URL + 'licences/CC-BYSAv3.0.htm', MEMBER_TYPES.NON),
+  'CC-BY': (MEDIA_URL + 'licences/CC-BYv3.0.htm', MEMBER_TYPES.NON),
+  'MSCommons-BY': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BY_v1.0.htm',
                    MEMBER_TYPES.FULL),
-  'MSCommons_BY-NC': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNC_v1.0.htm',
+  'MSCommons-BY-NC': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNC_v1.0.htm',
                       MEMBER_TYPES.FULL),
-  'MSCommons_BY-NC-ND': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNCND_' \
+  'MSCommons-BY-NC-ND': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNCND_' \
                          'v1.0.htm', MEMBER_TYPES.FULL),
-  'MSCommons_BY-NC-SA': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNCSA' \
+  'MSCommons-BY-NC-SA': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNCSA' \
                          '_v1.0.htm', MEMBER_TYPES.FULL),
-  'MSCommons_BY-ND': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYND_v1.0.htm',
+  'MSCommons-BY-ND': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYND_v1.0.htm',
                       MEMBER_TYPES.FULL),
-  'MSCommons_BY-SA': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYSA_v1.0.htm',
+  'MSCommons-BY-SA': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYSA_v1.0.htm',
                       MEMBER_TYPES.FULL),
-  'MSCommons_COM-NR-FF': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
+  'MS-C-NoReD-FF': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
         'NoRedistribution_For-a-Fee_v0.7.htm', MEMBER_TYPES.GOD),
-  'MSCommons_COM-NR': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
+  'MS-C-NoReD': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
         'NoRedistribution_v0.7.htm', MEMBER_TYPES.GOD),
-  'MSCommons_COM-NR-ND-FF': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
+  'MS-C-NoReD-ND-FF': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
         'NoRedistribution_NoDerivatives_For-a-fee-v1.0.htm', MEMBER_TYPES.GOD),
-  'MSCommons_COM-NR-ND': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
+  'MS-C-NoReD-ND': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
         'NoRedistribution_NoDerivatives-v1.0.htm', MEMBER_TYPES.GOD),
-  'MSCommons_NoCOM-NC-NR-ND-FF': (MEDIA_URL + 'licences/META-SHARE_' \
+  'MS-NC-NoReD-ND-FF': (MEDIA_URL + 'licences/META-SHARE_' \
         '_NoRedistribution_NoDerivatives_For-a-fee-v1.0.htm', MEMBER_TYPES.GOD),
-  'MSCommons_NoCOM-NC-NR-ND': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
+  'MS-NC-NoReD-ND': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
         'NoRedistribution_NoDerivatives-v1.0.htm', MEMBER_TYPES.GOD),
-  'MSCommons_NoCOM-NC-NR-FF': (MEDIA_URL + 'licences/META-SHARE_NonCommercial' \
+  'MS-NC-NoReD-FF': (MEDIA_URL + 'licences/META-SHARE_NonCommercial' \
         '_NoRedistribution_For-a-Fee-v1.0.htm', MEMBER_TYPES.GOD),
-  'MSCommons_NoCOM-NC-NR': (MEDIA_URL + 'licences/META-SHARE_NonCommercial_' \
+  'MS-NC-NoReD': (MEDIA_URL + 'licences/META-SHARE_NonCommercial_' \
         'NoRedistribution-v1.0.htm', MEMBER_TYPES.GOD),
   'ELRA_EVALUATION': (MEDIA_URL + 'licences/EVALUATION.htm', MEMBER_TYPES.GOD),
   'ELRA_VAR': (MEDIA_URL + 'licences/VAR-v3_2007.htm', MEMBER_TYPES.GOD),
@@ -144,8 +140,8 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
                         MEMBER_TYPES.NON),
   'GPL': (MEDIA_URL + 'licences/GNU_gpl-3.0.htm', MEMBER_TYPES.NON),
   'GFDL': (MEDIA_URL + 'licences/GNU_fdl-1.3.htm', MEMBER_TYPES.NON),
-  'ApacheLicence_V2.0': (MEDIA_URL + 'licences/Apache-2.0.htm',
-                         MEMBER_TYPES.NON),
+  'ApacheLicence_2.0': (MEDIA_URL + 'licences/Apache-2.0.htm',
+                        MEMBER_TYPES.NON),
   'BSD-style': (MEDIA_URL + 'licences/BSD_licence.htm', MEMBER_TYPES.NON),
   'underNegotiation': ('', MEMBER_TYPES.GOD),
   'other': ('', MEMBER_TYPES.GOD)

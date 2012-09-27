@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+      <identificationInfo>
+        <resourceName lang="en">Italwordnet</resourceName>
+        <description lang="en">Wordnet for Italian</description>
+        <resourceShortName lang="en">IWN</resourceShortName>
+        <url>http://www.ilc.cnr.it/viewpage.php/sez=ricerca/id=834/vers=ing</url>
+        <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      </identificationInfo>
+      <distributionInfo>
+        <availability>available-restrictedUse</availability>
+          <iprHolder>
+              <organizationInfo>
+                <organizationName lang="en">ELDA</organizationName>
+                  <communicationInfo>
+                    <email>mapelli@elda.org</email>
+                    <city>Paris</city>
+                  </communicationInfo>
+              </organizationInfo>
+          </iprHolder>
+      </distributionInfo>
+      <contactPerson>
+        <surname lang="en">Monica</surname>
+        <givenName lang="en">Monachini</givenName>
+        <sex>female</sex>
+          <communicationInfo>
+            <email>monca.monachini@ilc.cnr.it</email>
+          </communicationInfo>
+          <affiliation>
+            <organizationName lang="en">Istituto di Linguistica Computazionale</organizationName>
+            <organizationShortName lang="en">ILC CNR</organizationShortName>
+              <communicationInfo>
+                <email>monica.monachini@ilc.cnr.it</email>
+                <address>via Moruzzi 1</address>
+                <zipCode>56124</zipCode>
+                <city>Pisa</city>
+                <country>Italy</country>
+              </communicationInfo>
+          </affiliation>
+      </contactPerson>
+      <metadataInfo>
+        <metadataCreationDate>2012-05-17</metadataCreationDate>
+          <metadataCreator>
+            <surname lang="en">Monica</surname>
+            <givenName lang="en">Monachini</givenName>
+            <sex>female</sex>
+              <communicationInfo>
+                <email>monca.monachini@ilc.cnr.it</email>
+              </communicationInfo>
+              <affiliation>
+                <organizationName lang="en">Istituto di Linguistica Computazionale</organizationName>
+                <organizationShortName lang="en">ILC CNR</organizationShortName>
+                  <communicationInfo>
+                    <email>monica.monachini@ilc.cnr.it</email>
+                    <address>via Moruzzi 1</address>
+                    <zipCode>56124</zipCode>
+                    <city>Pisa</city>
+                    <country>Italy</country>
+                  </communicationInfo>
+              </affiliation>
+          </metadataCreator>
+        <metadataLastDateUpdated>2012-05-17</metadataLastDateUpdated>
+      </metadataInfo>
+      <versionInfo>
+        <version>3.0</version>
+        <revision>ILI mapping</revision>
+        <lastDateUpdated>2010-05-17</lastDateUpdated>
+      </versionInfo>
+      <usageInfo>
+          <foreseenUseInfo>
+            <foreseenUse>nlpApplications</foreseenUse>
+            <useNLPSpecific>wordSenseDisambiguation</useNLPSpecific>
+          </foreseenUseInfo>
+          <actualUseInfo>
+            <actualUse>nlpApplications</actualUse>
+            <useNLPSpecific>wordSenseDisambiguation</useNLPSpecific>
+          </actualUseInfo>
+      </usageInfo>
+      <resourceDocumentationInfo>
+          <documentation>
+              <documentInfo>
+                <documentType>inProceedings</documentType>
+                <title lang="en">All Greek to me! An automatic Greeklish to Greek Transliteration System</title>
+                <author>Χαλαμανδάρης, Α., Πρωτόπαπας, Α., Τσιάκουλης, Π. &amp; Ράπτης, Σ.</author>
+                <year>2006</year>
+                <conference>Language Resources and Evaluation Conference (LREC-2006)</conference>
+              </documentInfo>
+          </documentation>
+      </resourceDocumentationInfo>
+      <resourceCreationInfo>
+          <resourceCreator>
+              <organizationInfo>
+                <organizationName lang="en">Istituto di Linguistica Computazionale</organizationName>
+                <organizationShortName lang="en">ILC CNR</organizationShortName>
+                  <communicationInfo>
+                    <email>francesca.frontini@ilc.cnr.it</email>
+                  </communicationInfo>
+              </organizationInfo>
+          </resourceCreator>
+      </resourceCreationInfo>
+      <resourceComponentType>
+          <lexicalConceptualResourceInfo>
+            <resourceType>lexicalConceptualResource</resourceType>
+            <lexicalConceptualResourceType>wordnet</lexicalConceptualResourceType>
+              <lexicalConceptualResourceEncodingInfo>
+                <encodingLevel>morphology</encodingLevel>
+                <encodingLevel>semantics</encodingLevel>
+                <linguisticInformation>definition/gloss</linguisticInformation>
+                <linguisticInformation>lemma</linguisticInformation>
+                <linguisticInformation>semantics-Relations</linguisticInformation>
+                <conformanceToStandardsBestPractices>EAGLES</conformanceToStandardsBestPractices>
+                <theoreticModel>Wordnet</theoreticModel>
+              </lexicalConceptualResourceEncodingInfo>
+              <creationInfo>
+                <creationMode>manual</creationMode>
+              </creationInfo>
+              <lexicalConceptualResourceMediaType>
+                  <lexicalConceptualResourceTextInfo>
+                    <mediaType>text</mediaType>
+                      <lingualityInfo>
+                        <lingualityType>multilingual</lingualityType>
+                      </lingualityInfo>
+                      <languageInfo>
+                        <languageId>ita</languageId>
+                        <languageName>Italian</languageName>
+                      </languageInfo>
+                      <sizeInfo>
+                        <size>50,000</size>
+                        <sizeUnit>synsets</sizeUnit>
+                      </sizeInfo>
+                  </lexicalConceptualResourceTextInfo>
+              </lexicalConceptualResourceMediaType>
+          </lexicalConceptualResourceInfo>
+      </resourceComponentType>
+  </resourceInfo>
