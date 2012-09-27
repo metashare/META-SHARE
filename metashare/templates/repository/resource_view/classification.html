@@ -1,30 +1,29 @@
+{% load replace %}
+
 {% spaceless %}
 
 <label class='title'>Classification</label>
 <div class="dataline">
 {% for key, value in classifications.items %}
-	{% if "Text_classification" in key %}
+	{% if "classification" in key %}
 		{% for key1, value1 in value.items %}
-
 			<label class="dataline">
-				{% if "Subject_topic" in key1 %}
-					<label class="subtitle"> {{ value1 }} {% include "repository/resource_view/size.html" with size=value.Size_per_text_classification type="sub" %}</label>
+				{% if "Size_per" in key1 %}
+					<label class="subtitle"> {{ value.Subject_topic }} {% include "repository/resource_view/size.html" with size=value1 type="sub" %}</label>
 				{% endif %}
-				<div class="indented">
-					{% if "Conformance_to_classification_scheme" in key1 %}
-						<strong>Conforms to: </strong>{{ value.Conformance_to_classification_scheme }}
-					{% endif %}
-					{% if "Text_type" in key1 %}
-						<strong>Text Type: </strong> {{ value1 }}
-					{% endif %}
-					{% if "Register" in key1 %}
-						<strong>Register: </strong> {{ value1 }}
-					{% endif %}
-					{% if "Text_genre" in key1 %}
-						<strong>Text Genre: </strong> {{ value1 }}
-					{% endif %}
-				</div>
 			</label>
+		{% endfor %}
+		{% for key1, value1 in value.items %}
+			{% if "Size_per" in key1 %}
+			{% else %}
+				{% if key1 != "Subject_topic" %}
+					<div class="indented">
+						<label>
+							<strong>{{ key1|rep }}:</strong> {{ value1 }}
+						</label>
+					</div>
+				{% endif %}
+			{% endif %}
 
 		{% endfor %}
 	{% endif %}
