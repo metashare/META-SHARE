@@ -411,9 +411,11 @@ def getstats (request):
                 if item["elparent"]+" "+item["elname"] in _fields:
                     verbose = _fields[item["elparent"]+" "+item["elname"]][2]
                 if not item["elparent"] in currclass:
-                    usagedata[item["elparent"]] = [{"field": item["elname"], "label": verbose, "counters": [int(item["lrid__count"]), int(item["count__sum"])]}]
+                    usagedata[item["elparent"]] = [{"field": item["elname"], "label": verbose, \
+                        "counters": [int(item["lrid__count"]), int(item["count__sum"])]}]
                 else:
-                    usagedata[item["elparent"]].append({"field": item["elname"], "label": verbose, "counters": [int(item["lrid__count"]), int(item["count__sum"])]})
+                    usagedata[item["elparent"]].append({"field": item["elname"], "label": verbose, 
+                        "counters": [int(item["lrid__count"]), int(item["count__sum"])]})
         data["usagestats"] = usagedata
             
         resources =  resourceInfoType_model.objects.all()
