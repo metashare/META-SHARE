@@ -8,9 +8,11 @@
 	{% if "classification" in key %}
 		{% for key1, value1 in value.items %}
 			<label class="dataline">
+				<label class="subtitle"> {{ value.Subject_topic }}
 				{% if "Size_per" in key1 %}
-					<label class="subtitle"> {{ value.Subject_topic }} {% include "repository/resource_view/size.html" with size=value1 type="sub" %}</label>
+					 {% include "repository/resource_view/size.html" with size=value1 type="sub" %}
 				{% endif %}
+				</label>
 			</label>
 		{% endfor %}
 		{% for key1, value1 in value.items %}
