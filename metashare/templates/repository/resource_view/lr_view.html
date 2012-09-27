@@ -167,9 +167,6 @@
 			<label class='component'>Contact Person{{ contact_person_dicts|length|pluralize }}</label>
 			{% for contact_person in contact_person_dicts %}
 				 {% include "repository/resource_view/person.html" with person_dict=contact_person.Contact_person type="Contact Person" %}
-				{% if not forloop.last %}
-				<div class="separation"><hr/></div>
-				{% endif %}
 			{% endfor %}
 		{% endif %}
 	</div>
