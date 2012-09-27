@@ -7,12 +7,17 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.client import Client
 
-from metashare import test_utils, settings
+from metashare import test_utils, settings, xml_utils
 from metashare.accounts.models import UserProfile, EditorGroup, \
     EditorGroupManagers, Organization
 from metashare.repository import views
-from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER
+from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER, \
+    TEST_MODE_NAME
 from metashare.test_utils import create_user
+from metashare.repository.supermodel import OBJECT_XML_CACHE
+from metashare.repository.models import resourceInfoType_model
+from metashare.repository.tests.test_nightly import NightlyTests
+from django.utils.encoding import smart_str
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -751,3 +756,99 @@ class DownloadViewTest(TestCase):
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
             msg_prefix="a download should not have been started")
+
+
+class FullViewTest(TestCase):
+    """
+    Defines a number of tests for teh details of the single resource view
+    """
+    
+    @classmethod
+    def setUpClass(cls):
+        """
+        Set up the test
+        """
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
+        
+        # disable indexing during import
+        test_utils.set_index_active(False)
+        
+        # import resources
+        test_utils.setup_test_storage()
+        OBJECT_XML_CACHE.clear()
+        test_utils.import_xml_or_zip(
+          "{}/repository/fixtures/full-resource.xml".format(ROOT_PATH))
+
+        # enable indexing 
+        test_utils.set_index_active(True)
+    
+        # update index
+        from django.core.management import call_command
+        call_command('rebuild_index', interactive=False, using=TEST_MODE_NAME)
+        
+    
+    @classmethod
+    def tearDownClass(cls):
+        """
+        Clean up the test
+        """
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
+        
+        # disable indexing during import
+        test_utils.set_index_active(False)
+        
+        test_utils.clean_resources_db()
+        test_utils.clean_storage()
+        OBJECT_XML_CACHE.clear()
+        
+        # enable indexing 
+        test_utils.set_index_active(True)
+    
+        # update index
+        from django.core.management import call_command
+        call_command('rebuild_index', interactive=False, using=TEST_MODE_NAME)
+        
+    
+    def testSingleResourceView(self):
+        """
+        Checks that each resource's single view is displayed correctly.
+        """
+        
+        # disable indexing; we don't need stat updates for this test
+        test_utils.set_index_active(False)
+        
+        count = 0
+        error_atts = []
+        for _res in resourceInfoType_model.objects.all():
+            parent_dict = {}
+            _res.export_to_elementtree(pretty=True, parent_dict=parent_dict)       
+
+            count += 1
+            LOGGER.info("calling {}. resource at {}".format(
+              count, _res.get_absolute_url()))
+            # always create a new client to force a new session
+            client = Client()
+            response = client.get(_res.get_absolute_url(), follow = True)
+            self.assertEquals(200, response.status_code)
+            self.assertTemplateUsed(response, 'repository/resource_view/lr_view.html')
+            for _ele in parent_dict:
+                if not _ele.text:
+                    continue
+                text = smart_str(xml_utils.html_escape(_ele.text), response._charset)
+                real_count = response.content.count(text)
+                if real_count == 0:
+                    path = NightlyTests.path_to_root(_ele, parent_dict)
+                    if "email" in path \
+                      or "metaShareId" in path:
+                        continue
+                    LOGGER.error(u"missing {}: {}".format(path, _ele.text))
+                    error_atts.append(path)
+                # TODO activate when single resource view is complete
+                #self.assertContains(response, xml_utils.html_escape(_ele.text))
+
+        if LOGGER.isEnabledFor(logging.WARN):
+            LOGGER.warn("missing paths:")
+            for path in sorted(set(error_atts)):
+                LOGGER.warn(path)
+        # enable indexing 
+        test_utils.set_index_active(True)

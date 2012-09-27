@@ -125,7 +125,7 @@ class NightlyTests(TestCase):
             client = Client()
             response = client.get(_res.get_absolute_url(), follow = True)
             self.assertEquals(200, response.status_code)
-            self.assertTemplateUsed(response, 'repository/lr_view.html')
+            self.assertTemplateUsed(response, 'repository/resource_view/lr_view.html')
             for _ele in parent_dict:
                 if not _ele.text:
                     continue
@@ -149,7 +149,8 @@ class NightlyTests(TestCase):
         test_utils.set_index_active(True)
         
         
-    def path_to_root(self, element, parent_dict):
+    @classmethod
+    def path_to_root(cls, element, parent_dict):
         """
         Returns the path to the given element using the given parent dictionary.
         """
@@ -166,3 +167,4 @@ class NightlyTests(TestCase):
             path += ele
             path += "/"
         return path[:-1]
+
