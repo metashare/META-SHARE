@@ -251,9 +251,10 @@
 					{% for key2, value2 in value1.items %}				
 						{% if "Documentation" in key2 %}
 							{% if value2.Title %}
-								{% include "repository/resource_view/documentation.html" with documentation=value2 type="Documentation" %}
+								{% include "repository/resource_view/documentation.html" with documentation=value2 type="Documentation" level="sub" %}
 							{% else %}
-								<div class="dataline">
+								<label class="title">Document</label>
+								<div class="dataline indented">
 									<label>
 										{{value2}}
 									</label>

@@ -37,10 +37,10 @@
 			</label>
 		</div>
 	{% endif %}
-	{% if annotations.Conformance_to_standard_practices %}
+	{% if annotations.Conformance_to_standards_best_practices %}
 		<div>
 			<label class="dataline indented">
-				<strong>Standard practices conformance: </strong> {{ annotations.Conformance_to_standard_practices }}
+				<strong>Standard practices conformance: </strong> {{ annotations.Conformance_to_standards_best_practices }}
 			</label>
 		</div>
 	{% endif %}
@@ -62,10 +62,9 @@
 	
 	{% if "Annotation_tool" in annotations %}
 		<div>
-			<label class='dataline'><strong>Annotation tool:</strong></label>
 			{% for key1, value1 in annotations.items %}
 				{% if "Annotation_tool" in key1 %}
-					{{ value1.Target_resource_name_uri }}
+					{% include "repository/resource_view/target_resource.html" with target=value1 title="Annotation Tool" %}
 				{% endif %}
 			{% endfor %}
 		</div>
@@ -92,9 +91,30 @@
 	{% endif %}
 	
 	{% if annotations.Annotation_manual %}
+		{% if annotations.Annotation_manual.Annotation_manual.Title %}
+			{% include "repository/resource_view/documentation.html" with documentation=annotations.Annotation_manual.Annotation_manual level="sub" type="Annotation Manual" %}	
+		{% else %}
+			<label class="subtitle">Document</label>
+			<div class="dataline indented">
+				<label>
+					{{annotations.Annotation_manual}}
+				</label>
+			</div>
+		{% endif %}
+	{% endif %}
+	
+	{% if annotations.Interannotator_agreement %}
 		<div>
-			<label class="dataline">
-				{% include "repository/resource_view/documentation.html" with documentation=annotations.Annotation_manual.Annotation_manual level="simple" type="Annotation Manual" %}
+			<label class="dataline indented">
+				<strong>Interannotator Agreement:</strong> {{ annotations.Interannotator_agreement }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if annotations.Intraannotator_agreement %}
+		<div>
+			<label class="dataline indented">
+				<strong>Intraannotator Agreement:</strong> {{ annotations.Intraannotator_agreement }}
 			</label>
 		</div>
 	{% endif %}
