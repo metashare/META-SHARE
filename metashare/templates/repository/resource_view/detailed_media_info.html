@@ -72,6 +72,15 @@
 		{% include "repository/resource_view/setting.html" with setting=resource_component %}
 	{% endif %}
 	
+	{# Audio Format Information #}
+	{% if "Audio_format" in resource_component %}
+		<label class='title'>Audio Formats</label>
+		{% for key, value in resource_component.items %}
+			{% if "Audio_format" in key %}
+				{% include "repository/resource_view/audio_format.html" with audio_format=value %}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
 
 
 {% endif %}
