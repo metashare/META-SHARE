@@ -66,16 +66,6 @@
 				</div>
 			{% endif %}
 			
-
-			
-			{% if "Distribution_rights_holder" in key1 %}
-				{% if value1.Organization %}
-			    	{% include "repository/resource_view/person.html" with person_dict=value1.Organization type="Distribution Rights Holder" level="sub" %}
-			    {% else %}
-			    	{% include "repository/resource_view/person.html" with person_dict=value1.Distribution_rights_holder type="Distribution Rights Holder" level="sub" %}
-			    {% endif %}
-			{% endif %}	
-			
 			{% if "User_nature" in key1 %}
 				<div class="dataline indented">
 					<label>
@@ -101,5 +91,15 @@
 			{% endfor %}
 		</div>
 		
-		<div class="separation"><hr/></div>
+		
+		<div class="dataline">
+			{% if "Distribution_rights_holder" in value %}
+				<label class="dataline indented"><strong>Distribution rights holder:</strong></label>
+			{% endif %}
+			{% for key1, value1 in value.items %}
+				{% if "Distribution_rights_holder" in key1 %}
+					{% include "repository/resource_view/person.html" with person_dict=value1.Distribution_rights_holder type="Distribution_rights_holder" %}
+				{% endif %}
+			{% endfor %}
+		</div>
 	{% endif %}	
