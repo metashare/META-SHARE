@@ -261,6 +261,86 @@ class BasicEditorTests(SeleniumTestCase):
          driver.find_element_by_css_selector("ul.messagelist>li").text)
 
 
+    def test_Person_creation_tool(self):
+        driver = self.driver
+        driver.get(self.base_url)
+        ss_path = setup_screenshots_folder(
+          "PNG-metashare.repository.seltests.test_editor.EditorTest",
+          "Person_creation_tool")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))  
+        # login user
+        login_user(driver, "manageruser", "secret")
+        # make sure login was successful
+        self.assertEqual("Logout", 
+          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Manage Resources -> Manage person objects
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage person objects"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Add person
+        driver.find_element_by_link_text("Add Person").click()
+        # create tool
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("Add Person", 
+          driver.find_element_by_css_selector("#content > h1").text)
+        # remember root window id
+        root_id = driver.current_window_handle
+        # add required fields
+        driver.find_element_by_name("key_surname_0").clear()
+        driver.find_element_by_name("key_surname_0").send_keys("en")
+        driver.find_element_by_name("val_surname_0").clear()
+        driver.find_element_by_name("val_surname_0").send_keys("Smith")
+        driver.find_element_by_xpath("//div[@class='form-row givenName']/div/ul/li/a").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("key_givenName_0").clear()
+        driver.find_element_by_name("key_givenName_0").send_keys("en")
+        driver.find_element_by_name("val_givenName_0").clear()
+        driver.find_element_by_name("val_givenName_0").send_keys("John")
+        Select(driver.find_element_by_id("id_sex")).select_by_visible_text("Male")
+        driver.find_element_by_name("form-0-email").clear()
+        driver.find_element_by_name("form-0-email").send_keys("john.smith@institution.org")
+        driver.find_element_by_name("form-0-url").clear()
+        driver.find_element_by_name("form-0-url").send_keys("http://www.institution.org")
+        driver.find_element_by_name("form-0-address").clear()
+        driver.find_element_by_name("form-0-address").send_keys("1st main street")
+        driver.find_element_by_name("form-0-zipCode").clear()
+        driver.find_element_by_name("form-0-zipCode").send_keys("95000")
+        driver.find_element_by_name("form-0-city").clear()
+        driver.find_element_by_name("form-0-city").send_keys("somewhere")
+        driver.find_element_by_name("form-0-region").clear()
+        driver.find_element_by_name("form-0-region").send_keys("far away")
+        driver.find_element_by_name("form-0-country").clear()
+        driver.find_element_by_name("form-0-country").send_keys("world")
+        driver.find_element_by_name("form-0-telephoneNumber").clear()
+        driver.find_element_by_name("form-0-telephoneNumber").send_keys("1234567890")
+        driver.find_element_by_name("form-0-faxNumber").clear()
+        driver.find_element_by_name("form-0-faxNumber").send_keys("1234567890")
+        driver.find_element_by_name("position").clear()
+        driver.find_element_by_name("position").send_keys("Professor")
+        driver.find_element_by_name("form-0-country").clear()
+        driver.find_element_by_name("form-0-country").send_keys("world")
+        # affiliation popup
+        driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
+        _fill_affiliation(driver, ss_path, root_id)
+        # save tool
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("_save").click()
+        # TODO remove this workaround when Selenium starts working again as intended
+        time.sleep(1)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual(
+          u"The Person \"Smith John john.smith@institution.org Organization \u2013 department: Department\" was added successfully.", 
+          driver.find_element_by_css_selector("li.info").text)
+
+        # make sure that there is no related resource linked to this person
+        self.assertEqual("0", driver.find_element_by_xpath(
+          "//table[@id='result_list']/tbody/tr[1]/td[1]").text,
+          'the created person must not be related to any resource groups')
+
+
     def test_sorting(self):
         """
         tests the sorting of controlled vocabulary in some examplary CharFields
@@ -423,6 +503,52 @@ def _fill_contact_person(driver, ss_path, parent_id):
     driver.find_element_by_name("val_surname_0").send_keys("Mustermann")
     driver.find_element_by_id("id_form-0-email").clear()
     driver.find_element_by_id("id_form-0-email").send_keys("mustermann@org.com")
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_affiliation(driver, ss_path, parent_id):
+    """
+    fills the affiliation popup with required information and returns
+    to the parent window
+    """
+    driver.switch_to_window("id_affiliation")
+    driver.find_element_by_name("key_organizationName_0").clear()
+    driver.find_element_by_name("key_organizationName_0").send_keys("en")
+    driver.find_element_by_name("val_organizationName_0").clear()
+    driver.find_element_by_name("val_organizationName_0").send_keys("Organization")
+    driver.find_element_by_xpath("//div[@class='form-row organizationShortName']/div/ul/li/a").click()
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    driver.find_element_by_name("key_organizationShortName_0").clear()
+    driver.find_element_by_name("key_organizationShortName_0").send_keys("en")
+    driver.find_element_by_name("val_organizationShortName_0").clear()
+    driver.find_element_by_name("val_organizationShortName_0").send_keys("Short name")
+    driver.find_element_by_xpath("//div[@class='form-row departmentName']/div/ul/li/a").click()
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    driver.find_element_by_name("key_departmentName_0").clear()
+    driver.find_element_by_name("key_departmentName_0").send_keys("en")
+    driver.find_element_by_name("val_departmentName_0").clear()
+    driver.find_element_by_name("val_departmentName_0").send_keys("Department")
+
+    driver.find_element_by_name("form-0-email").clear()
+    driver.find_element_by_name("form-0-email").send_keys("john.smith@institution.org")
+    driver.find_element_by_name("form-0-url").clear()
+    driver.find_element_by_name("form-0-url").send_keys("http://www.institution.org")
+    driver.find_element_by_name("form-0-address").clear()
+    driver.find_element_by_name("form-0-address").send_keys("1st main street")
+    driver.find_element_by_name("form-0-zipCode").clear()
+    driver.find_element_by_name("form-0-zipCode").send_keys("95000")
+    driver.find_element_by_name("form-0-city").clear()
+    driver.find_element_by_name("form-0-city").send_keys("somewhere")
+    driver.find_element_by_name("form-0-region").clear()
+    driver.find_element_by_name("form-0-region").send_keys("far away")
+    driver.find_element_by_name("form-0-country").clear()
+    driver.find_element_by_name("form-0-country").send_keys("world")
+    driver.find_element_by_name("form-0-telephoneNumber").clear()
+    driver.find_element_by_name("form-0-telephoneNumber").send_keys("1234567890")
+    driver.find_element_by_name("form-0-faxNumber").clear()
+    driver.find_element_by_name("form-0-faxNumber").send_keys("1234567890")
+
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
 
