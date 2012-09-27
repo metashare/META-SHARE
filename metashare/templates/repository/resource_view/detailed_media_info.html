@@ -95,6 +95,14 @@
 		{% endfor %}
 	{% endif %}
 	
+	{% if "Geographic_coverage" in resource_component %}
+		<label class='title'>Geographic coverage</label>
+		{% for key, value in resource_component.items %}
+			{% if "Geographic_coverage" in key %}
+				{% include "repository/resource_view/geographic_coverage.html" with geographic_coverage=value %}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
 	
 	
 
