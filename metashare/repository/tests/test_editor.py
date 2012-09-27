@@ -802,7 +802,7 @@ class LookupTest(TestCase):
         EditorGroupManagers.objects.create(name='test_editor_group_manager',
           managed_group=test_editor_group)
 
-        editoruser = test_utils.create_editor_user('editoruser',
+        test_utils.create_editor_user('editoruser',
             'editor@example.com', 'secret', (test_editor_group,))
 
         LookupTest.editor_login = {
