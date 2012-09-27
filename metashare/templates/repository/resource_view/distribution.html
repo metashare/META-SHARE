@@ -29,12 +29,6 @@
 	</div>
 {% endif %}
 
-
-{% if distribution.Distribution.Licence %}
-		<label class="title">Licence</label>
-{% endif %}
-
-
 {% if "Licence" in distribution.Distribution %}
 	<label class="title">Licence</label>
 	{% for key, value in distribution.Distribution.items %}
@@ -43,7 +37,6 @@
 		{% endif %}
 	{% endfor %}
 {% endif %}
-
 
 {% if distribution.Distribution.Ipr_holder %}
 	<label class="title">IPR Holder</label>
