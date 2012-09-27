@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import logging
 import shutil
 import django.db.models
@@ -6,19 +7,25 @@ from django.contrib import admin
 from django.contrib.admin.sites import LOGIN_FORM_KEY
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.client import Client
+from django.utils.encoding import force_unicode
 from metashare import test_utils
 from metashare.accounts.models import EditorGroup, EditorGroupManagers, \
     EditorGroupApplication, Organization, OrganizationManagers, \
     OrganizationApplication
 from metashare.repository import models
+from metashare.repository.editor.lookups import PersonLookup, ActorLookup, \
+    DocumentationLookup, DocumentLookup, ProjectLookup, OrganizationLookup, \
+    TargetResourceLookup
 from metashare.repository.models import languageDescriptionInfoType_model, \
     lexicalConceptualResourceInfoType_model, personInfoType_model,\
     resourceInfoType_model
 from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, REMOTE, \
     StorageObject
+from selectable.views import get_lookup
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -35,6 +42,7 @@ BROKENFIXTURES_ZIP = '{}/repository/fixtures/onegood_onebroken.zip'.format(ROOT_
 LEX_CONC_RES_XML = '{}/repository/test_fixtures/published-lexConcept-Audio-EnglishGerman.xml'.format(ROOT_PATH)
 DATA_UPLOAD_ZIP = '{}/repository/fixtures/data_upload_test.zip'.format(ROOT_PATH)
 DATA_UPLOAD_ZIP_2 = '{}/repository/fixtures/data_upload_test_2.zip'.format(ROOT_PATH)
+COMPLETION_XML = '{}/repository/fixtures/completiontestfixture.xml'.format(ROOT_PATH)
 
 
 def _import_test_resource(editor_group=None, path=TESTFIXTURE_XML,
@@ -767,6 +775,131 @@ class EditorTest(TestCase):
                               .format(ADMINROOT, EditorTest.test_editor_group_manager.id))
         self.assertContains(response, 'Are you sure?', msg_prefix=
             'expected the superuser to be allowed to delete manager')
+
+class LookupTest(TestCase):
+    """
+    Test the lookup functionalities
+    """
+    # static variables to be initialized in setUpClass():
+    editor_login = None
+    testfixture = None
+    client = None
+    
+    @classmethod
+    def setUpClass(cls):
+        """
+        set up test editor user with staff permissions.
+        These will live in the test database only, so will not
+        pollute the "normal" development db or the production db.
+        As a consequence, they need no valuable password.
+        """
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
+        test_utils.set_index_active(False)
+        test_utils.setup_test_storage()
+
+        test_editor_group = EditorGroup.objects.create(name='test_editor_group')
+        
+        EditorGroupManagers.objects.create(name='test_editor_group_manager',
+          managed_group=test_editor_group)
+
+        test_utils.create_editor_user('editoruser',
+            'editor@example.com', 'secret', (test_editor_group,))
+
+        LookupTest.editor_login = {
+            REDIRECT_FIELD_NAME: ADMINROOT,
+            LOGIN_FORM_KEY: 1,
+            'username': 'editoruser',
+            'password': 'secret',
+        }
+        
+        LookupTest.testfixture = _import_test_resource(test_editor_group, COMPLETION_XML)
+
+        LookupTest.client = test_utils.get_client_with_user_logged_in(LookupTest.editor_login)
+
+    @classmethod
+    def tearDownClass(cls):
+        test_utils.clean_resources_db()
+        test_utils.clean_storage()
+        test_utils.clean_user_db()
+        test_utils.set_index_active(True)
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
+
+    def test_editor_autocompletion_for_person(self):
+        """
+        Verifies that the auto-completion works for PersonLookup.
+        """
+        lookup = PersonLookup
+        test_term = "val"
+        # now the manual auto-completion lookup call with a test term:
+        response = LookupTest.client.get(reverse(get_lookup, args=(force_unicode(lookup.name()),)), {'term': test_term})
+        self.assertContains(response, 'Valérie Mapelli',
+            msg_prefix='a superuser must see the lookup for Person.')
+
+    def test_editor_autocompletion_for_actor(self):
+        """
+        Verifies that the auto-completion works for ActorLookup.
+        """
+        lookup = ActorLookup
+        test_term = "val"
+        # now the manual auto-completion lookup call with a test term:
+        response = LookupTest.client.get(reverse(get_lookup, args=(force_unicode(lookup.name()),)), {'term': test_term})
+        self.assertContains(response, 'Valérie Mapelli',
+            msg_prefix='a superuser must see the lookup for Actor.')
+
+    def test_editor_autocompletion_for_documentation(self):
+        """
+        Verifies that the auto-completion works for DocumentationLookup.
+        """
+        lookup = DocumentationLookup
+        test_term = "SMP"
+        # now the manual auto-completion lookup call with a test term:
+        response = LookupTest.client.get(reverse(get_lookup, args=(force_unicode(lookup.name()),)), {'term': test_term})
+        self.assertContains(response, 'SMP_E0021_TRS_AUTO.pdf',
+            msg_prefix='a superuser must see the lookup for Documentation.')
+
+    def test_editor_autocompletion_for_document(self):
+        """
+        Verifies that the auto-completion works for DocumentLookup.
+        """
+        lookup = DocumentLookup
+        test_term = "SMP"
+        # now the manual auto-completion lookup call with a test term:
+        response = LookupTest.client.get(reverse(get_lookup, args=(force_unicode(lookup.name()),)), {'term': test_term})
+        self.assertContains(response, 'SMP_E0021_TRS_AUTO.pdf',
+            msg_prefix='a superuser must see the lookup for Document.')
+
+    def test_editor_autocompletion_for_project(self):
+        """
+        Verifies that the auto-completion works for ProjectLookup.
+        """
+        lookup = ProjectLookup
+        test_term = "ver"
+        # now the manual auto-completion lookup call with a test term:
+        response = LookupTest.client.get(reverse(get_lookup, args=(force_unicode(lookup.name()),)), {'term': test_term})
+        self.assertContains(response, 'Verbmobil II',
+            msg_prefix='a superuser must see the lookup for Project.')
+
+    def test_editor_autocompletion_for_Organization(self):
+        """
+        Verifies that the auto-completion works for OrganizationLookup.
+        """
+        lookup = OrganizationLookup
+        test_term = "lan"
+        # now the manual auto-completion lookup call with a test term:
+        response = LookupTest.client.get(reverse(get_lookup, args=(force_unicode(lookup.name()),)), {'term': test_term})
+        self.assertContains(response, 'Evaluations and Language Resources Distribution Agency',
+            msg_prefix='a superuser must see the lookup for Organization.')
+            
+    def test_editor_autocompletion_for_targetresource(self):
+        """
+        Verifies that the auto-completion works for TargetResourceLookup.
+        """
+        lookup = TargetResourceLookup
+        test_term = "proj"
+        # now the manual auto-completion lookup call with a test term:
+        response = LookupTest.client.get(reverse(get_lookup, args=(force_unicode(lookup.name()),)), {'term': test_term})
+        self.assertContains(response, 'Nice project',
+            msg_prefix='a superuser must see the lookup for TargetResource.')
 
 
 class DataUploadTests(TestCase):
