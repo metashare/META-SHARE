@@ -52,7 +52,7 @@
 	{% endif %}
 
 	{# Classification Information #}
-	{% if "Text_classification" in resource_component %}
+	{% if "Text_classification" or "Audio_classification" or "Video_classification" in resource_component %}
 		{% include "repository/resource_view/classification.html" with classifications=resource_component %}
 	{% endif %}
 
