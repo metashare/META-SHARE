@@ -1,7 +1,6 @@
 {% spaceless %}
 <label class="subtitle"><strong>{{ annotations.Annotation_type }}</strong></label>
 <div class="dataline">
-	{% if "Annotation" in key %}
 		{% if annotations.Tagset %}
 			<div>
 				<label class="dataline indented">
@@ -12,7 +11,7 @@
 		{% if annotations.Annotated_elements %}		
 			<div>
 				<label class="dataline indented">
-					<strong>Annotated elements: </strong>{{ annotations.Annotated_elements_set|join:"," }}
+					<strong>Annotated elements: </strong>{{ annotations.Annotated_elements }}
 				</label>
 			</div>
 		{% endif %}
@@ -48,7 +47,7 @@
 		{% if annotations.Annotation_manual %}
 			<div>
 				<label class="dataline">
-					{% include "repository/resource_view/documentation.html" with documentation=annotations.Annotation_manual.Annotation_manual type="Annotation Manual" %}
+					{% include "repository/resource_view/documentation.html" with documentation=annotations.Annotation_manual.Annotation_manual level="sub" type="Annotation Manual" %}
 				</label>
 			</div>
 		{% endif %}
@@ -80,7 +79,6 @@
 		{% if annotations.Size_per_annotation %}
 			{% include "repository/resource_view/size.html" with size=annotations type="component" %}
 		{% endif %}
-	{% endif %}
 </div>
 
 {% endspaceless %}
