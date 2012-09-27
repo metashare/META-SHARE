@@ -22,19 +22,20 @@ class Command(BaseCommand):
         geodatfile = ROOT_PATH+'/stats/resources/GeoIP.dat'
         try:
             urldoc = urllib2.urlopen(GEOIP_DATA_URL)
-            with open(geogzfile, 'wb') as db:
-                db.write(urldoc.read())
-                
+            with open(geogzfile, 'wb') as out_file_handle:
+                out_file_handle.write(urldoc.read())
+
             if os.path.exists(geogzfile) and os.path.getsize(geogzfile) > 0:
                 try:
-                    db = gzip.open(geogzfile, 'r:gz')
-                    datfile = open(geodatfile, 'w')
-                    datfile.write(db.read())
-                    datfile.close()
+                    with gzip.open(geogzfile, 'rb') as db_file_handle, \
+                            open(geodatfile, 'wb') as datfile:
+                        datfile.write(db_file_handle.read())
                     LOGGER.info("Updated the GeoIP database file at: %s",
                         geodatfile)
                 except:
-                    LOGGER.fatal("Gzip decompression failure on %s.", geogzfile)
+                    LOGGER.fatal("Gzip decompression failure on %s.", geogzfile,
+                        exc_info=True)
         except:
             LOGGER.error("Downloading a new GeoIP database from %s failed. "
-                    "Continuing to use the existing version.", GEOIP_DATA_URL)
+                    "Continuing to use the existing version.", GEOIP_DATA_URL,
+                exc_info=True)
