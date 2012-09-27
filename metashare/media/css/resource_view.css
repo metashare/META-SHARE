@@ -49,6 +49,16 @@ div.right-corner{
 	color: #333;
 }
 
+.dataline ul{
+	margin:0px;
+}
+
+.dataline li{
+	font-size: 14px;
+	font-weight: normal;
+	color: #333;
+}
+
 label.title{
 	display:block;
 	font-size:14px;
@@ -252,7 +262,7 @@ label span a{
 }
 
 .subtitle{
-	background-color: #e1e1e1;
+	background-color: #d1d1d1;
 	padding-left:3px;
 	padding-right:3px;	
 	border-bottom-left-radius: 5px;
@@ -260,9 +270,12 @@ label span a{
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 	color: #333;
-	margin-left:10px;
+	margin-left:5px;
+	margin-right:5px;
 	margin-bottom:2px;
-	display:table;	
+	font-size:14px;
+	font-weight:bold !important;
+	display:block;	
 }
 
 .otherLang {
@@ -368,6 +381,7 @@ a .indented{
 .contactcard .dataline{
 	font-weight:normal;
 	font-size:14px;
+	padding-top:5px;
 }
 
 .dataline span a{

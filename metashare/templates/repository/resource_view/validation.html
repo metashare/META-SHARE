@@ -59,7 +59,7 @@
 	
 	{% if dict.Validation.Validation_report %}
 		{% if dict.Validation.Validation_report.Validation_report.Title %}
-			{% include "repository/resource_view/documentation.html" with documentation=dict.Validation.Validation_report.Validation_report type="Validation Report" level="sub" %}
+			{% include "repository/resource_view/documentation.html" with documentation=dict.Validation.Validation_report.Validation_report type="Validation Report" indent="yes" %}
 		{% else %}
 			<div class="dataline">
 				<label>
@@ -85,13 +85,12 @@
 				    {% else %}
 				    	{% include "repository/resource_view/person.html" with person_dict=value1.Validator type="Validator" %}
 				    {% endif %}
-				    <div class="separation"><hr/></div>
 				{% endif %}
 			{% endfor %}
 		{% endfor %}
 	</div>
 	{% if not forloop.last %}
-		<div class="hr"><hr/></div>
+		<div class="separation"><hr/></div>
 	{% endif %}
 {% endfor %}
 

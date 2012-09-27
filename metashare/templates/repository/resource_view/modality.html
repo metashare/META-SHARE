@@ -9,7 +9,7 @@
 				{% if "Modality_type" in key1 %}
 					{{ value1 }}
 					{% if "Size_per_modality" in value %}
-						({% include "repository/resource_view/size.html" with size=value.Size_per_modality type="sub" %})
+						{% include "repository/resource_view/size.html" with size=value.Size_per_modality type="sub" %}
 					{% endif %}
 				{% endif %}
 			</label>
