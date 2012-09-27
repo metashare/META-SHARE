@@ -17,7 +17,7 @@
 		{% if version_dict.Version.Last_date_updated %}			
 			 <div class="dataline">
 				<label>
-					<strong>Last Updated: </strong>{{ version_dict.Version.Last_date_updated }}
+					<strong>Last Updated: </strong>{{ version_dict.Version.Last_date_updated|date:"SHORT_DATE_FORMAT" }}
 				</label>
 			</div>
 		{% endif %}

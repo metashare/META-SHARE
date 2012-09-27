@@ -1,0 +1,9 @@
+{% spaceless %}
+
+	 <div class="dataline indented">
+		<label>
+			{{ time_coverage.Time_coverage }} {% if time_coverage.Size_per_time_coverage %}{% include "repository/resource_view/size.html" with size=time_coverage.Size_per_time_coverage type="sub" %}{% endif %}
+		</label>
+	</div>
+
+{% endspaceless %}

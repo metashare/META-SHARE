@@ -7,7 +7,7 @@
 	{% if level == "sub" %}
 		<label class='subtitle'>{{type}}</label>
 	{% else %}	
-		{% if type != "Contact Person" and type != "Metadata Creator" and type != "Resource Creator" and type != "IPR Holder" and type != "Evaluator" and type != "Validator" and type != "Annotator" %}
+		{% if type != "Contact Person" and type != "Metadata Creator" and type != "Resource Creator" and type != "IPR Holder" and type != "Evaluator" and type != "Validator" and type != "Annotator" and type != "Licensor" and type != "Distribution_rights_holder" %}
 			<span class='title'>{{type}}</span>
 		{% endif %}
 	{% endif %}
@@ -127,8 +127,7 @@
 				{{ person_dict.Affiliation.Department_name }}
 			</label>
 		</div>
-		
-		
+
 		<div>
 			<label class="dataline">
 				{% if person_dict.Affiliation.Url %}
