@@ -92,9 +92,10 @@
 		{% include "repository/resource_view/video_content.html" with video=resource_component.Video_content %}
 	{% endif %}
 	
-	
-	
-
+	{# Video Format Information #}
+	{% if "Video_format" in resource_component %}
+		{% include "repository/resource_view/video_format.html" with video=resource_component.Video_format %}
+	{% endif %}
 
 {% endif %}
 
