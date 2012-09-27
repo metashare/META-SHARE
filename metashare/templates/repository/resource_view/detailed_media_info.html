@@ -40,7 +40,6 @@
 	{% if "Character_encoding" in resource_component %}
 		{% include "repository/resource_view/character_encoding.html" with encodings=resource_component %}
 	{% endif %}
-
 	
 	{# Domain Information #}
 	{% if "Domain" in resource_component %}
@@ -59,7 +58,12 @@
 
 	{# Annotation Information #}
 	{% if "Annotation" in resource_component %}
-		{% include "repository/resource_view/annotation.html" with annotations=resource_component %}
+		<label class='title'>Annotation</label>
+		{% for key, value in resource_component.items %}
+			{% if "Annotation" in key %}
+				{% include "repository/resource_view/annotation.html" with annotations=value %}
+			{% endif %}
+		{% endfor %}
 	{% endif %}
 
 	{# Audio Content Information #}
@@ -72,6 +76,15 @@
 		{% include "repository/resource_view/setting.html" with setting=resource_component %}
 	{% endif %}
 	
+	{# Audio Format Information #}
+	{% if "Audio_format" in resource_component %}
+		<label class='title'>Audio Formats</label>
+		{% for key, value in resource_component.items %}
+			{% if "Audio_format" in key %}
+				{% include "repository/resource_view/audio_format.html" with audio_format=value %}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
 
 
 {% endif %}
