@@ -1,25 +1,13 @@
 {% spaceless %}
 
-	{% if tool_service.Tool_service_type %}
-		 <div class="dataline">
-			<label>
-				<strong>Type: </strong>{{ tool_service.Tool_service_type }}
-			</label>
-		</div>
-	{% endif %}
-
-	{% if tool_service.Tool_service_subtype %}			
-		 <div class="dataline">
-			<label>
-				<strong>Sub-type: </strong>{{ tool_service.Tool_service_subtype }}
-			</label>
-		</div>
-	{% endif %}
-	
+	<label class='component'>{{ tool_service.Tool_service_type }} {{ tool_service.Tool_service_subtype }}</label>
+		
 	{% if tool_service.Language_dependent %}			
 		 <div class="dataline">
 			<label>
-				<strong>Language dependent: </strong>{{ tool_service.Language_dependent }}
+				<strong><i>
+					{% if tool_service.Language_dependent == "True" %}Language Dependent{% else %}Language Independent{% endif %}
+				</i></strong>
 			</label>
 		</div>
 	{% endif %}
