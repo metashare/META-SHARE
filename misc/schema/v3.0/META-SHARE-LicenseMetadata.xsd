@@ -125,7 +125,7 @@
 		<xs:sequence>
 			<xs:element name="licence" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>The licence of use for the resource</xs:documentation>
+					<xs:documentation>The licence of use for the resource; for an overview of licences, please visit: http://www.meta-net.eu/meta-share/licenses</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-many</relation>
 					</xs:appinfo>
@@ -133,49 +133,45 @@
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
 						<xs:maxLength value="100"/>
-						<xs:enumeration value="AGPL"/>
-						<xs:enumeration value="LGPL"/>
-						<xs:enumeration value="CC_BY-NC-ND"/>
-						<xs:enumeration value="CC_BY-NC-SA"/>
-						<xs:enumeration value="CC_BY-NC"/>
-						<xs:enumeration value="CC_BY-ND"/>
-						<xs:enumeration value="CC_BY-SA"/>
-						<xs:enumeration value="CC_BY"/>
-						<xs:enumeration value="MSCommons_BY"/>
-						<xs:enumeration value="MSCommons_BY-NC"/>
-						<xs:enumeration value="MSCommons_BY-NC-ND"/>
-						<xs:enumeration value="MSCommons_BY-NC-SA"/>
-						<xs:enumeration value="MSCommons_BY-ND"/>
-						<xs:enumeration value="MSCommons_BY-SA"/>
-						<xs:enumeration value="MSCommons_COM-NR-FF"/>
-						<xs:enumeration value="MSCommons_COM-NR"/>
-						<xs:enumeration value="MSCommons_COM-NR-ND-FF"/>
-						<xs:enumeration value="MSCommons_COM-NR-ND"/>
-						<xs:enumeration value="MSCommons_NoCOM-NC-NR-ND-FF"/>
-						<xs:enumeration value="MSCommons_NoCOM-NC-NR-ND"/>
-						<xs:enumeration value="MSCommons_NoCOM-NC-NR-FF"/>
-						<xs:enumeration value="MSCommons_NoCOM-NC-NR"/>
+						<xs:enumeration value="CC-BY"/>
+						<xs:enumeration value="CC-BY-NC"/>
+						<xs:enumeration value="CC-BY-NC-ND"/>
+						<xs:enumeration value="CC-BY-NC-SA"/>
+						<xs:enumeration value="CC-BY-ND"/>
+						<xs:enumeration value="CC-BY-SA"/>
+						<xs:enumeration value="CC-ZERO"/>
+						<xs:enumeration value="MS-C-NoReD"/>
+						<xs:enumeration value="MS-C-NoReD-FF"/>
+						<xs:enumeration value="MS-C-NoReD-ND"/>
+						<xs:enumeration value="MS-C-NoReD-ND-FF"/>
+						<xs:enumeration value="MS-NC-NoReD"/>
+						<xs:enumeration value="MS-NC-NoReD-FF"/>
+						<xs:enumeration value="MS-NC-NoReD-ND"/>
+						<xs:enumeration value="MS-NC-NoReD-ND-FF"/>
+						<xs:enumeration value="MSCommons-BY"/>
+						<xs:enumeration value="MSCommons-BY-NC"/>
+						<xs:enumeration value="MSCommons-BY-NC-ND"/>
+						<xs:enumeration value="MSCommons-BY-NC-SA"/>
+						<xs:enumeration value="MSCommons-BY-ND"/>
+						<xs:enumeration value="MSCommons-BY-SA"/>
+						<xs:enumeration value="CLARIN_ACA"/>
+						<xs:enumeration value="CLARIN_ACA-NC"/>
+						<xs:enumeration value="CLARIN_PUB"/>
+						<xs:enumeration value="CLARIN_RES"/>
+						<xs:enumeration value="ELRA_END_USER"/>
 						<xs:enumeration value="ELRA_EVALUATION"/>
 						<xs:enumeration value="ELRA_VAR"/>
-						<xs:enumeration value="ELRA_END_USER"/>
-						<xs:enumeration value="proprietary"/>
-						<xs:enumeration value="CC0"/>
-						<xs:enumeration value="CLARIN_PUB"/>
-						<xs:enumeration value="CLARIN_ACA-NC"/>
-						<xs:enumeration value="CC_BY-SA_3.0"/>
-						<xs:enumeration value="LGPLv3"/>
-						<xs:enumeration value="CLARIN_ACA"/>
-						<xs:enumeration value="CLARIN_RES"/>
-						<xs:enumeration value="Princeton_Wordnet"/>
-						<xs:enumeration value="GPL"/>
-						<xs:enumeration value="GFDL"/>
-						<xs:enumeration value="CC_BY-NC-SA_3.0"/>
-						<xs:enumeration value="ApacheLicence_V2.0"/>
+						<xs:enumeration value="AGPL"/>
+						<xs:enumeration value="ApacheLicence_2.0"/>
+						<xs:enumeration value="BSD"/>
 						<xs:enumeration value="BSD-style"/>
+						<xs:enumeration value="GFDL"/>
+						<xs:enumeration value="GPL"/>
+						<xs:enumeration value="LGPL"/>
+						<xs:enumeration value="Princeton_Wordnet"/>
+						<xs:enumeration value="proprietary"/>
 						<xs:enumeration value="underNegotiation"/>
 						<xs:enumeration value="other"/>
-						<!-- xs:enumeration value="MSCommons"/-->
-						<!-- xs:enumeration value="MSCommons_NC"/-->
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>

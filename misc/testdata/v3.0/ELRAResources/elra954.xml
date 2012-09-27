@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">PAROLE Italian Corpus</resourceName>
+      <resourceName lang="fr">Corpus PAROLE italien</resourceName>
+      <description lang="en">The PAROLE Italian Corpus comprises 3,135,651 words collected from four different domains: •	newspapers: 2,179,800 words from La Stampa, La Repubblica, Il Corriere della Sera, L’Unione Sarda, Il Sole 24ore, between 1992 and 1996, •	periodicals: 143,810 words from Casaviva, 100cose, Epoca, Espansione, Grazia, Panorama, Starbene, Storia Illustrata, Zerouno, between 1985 and 1988, •	books: 564,964 words, between 1970 and 1989,•	miscellaneous: 247,077 words from CNR documents, Patents, Maritime documents, Theater, between 1987 and 1997.About 250,000 words were morphosyntactically annotated and lemmatized.</description>
+      <description lang="fr">Le corpus PAROLE italien comprend 3 135 651 mots collectés à partir de quatre domaines différents : •	journaux : 2 179 800 mots issus de La Stampa, La Repubblica, Il Corriere della Sera, L’Unione Sarda, Il Sole 24ore, entre 1992 et 1996, •	périodiques : 143 810 mots issus de Casaviva, 100cose, Epoca, Espansione, Grazia, Panorama, Starbene, Storia Illustrata, Zerouno, entre 1985 et 1988, •	livres : 564 964 mots, entre 1970 et 1989,•	divers : 247 077 mots issus de documents du CNR, de licences, de documents maritimes, de théatre, entre 1987 et 1997.Environ 250 000 mots sont annotés au niveau morpho-syntaxique et lemmatisés.</description>
+      <resourceShortName/>
+      <url>http://catalog.elra.info/product_info.php?products_id=886</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-W0043</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>150.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>150.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>100.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>100.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <availabilityStartDate>2006-09-18</availabilityStartDate>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Valérie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <revision>Update frequency: every 3 yearsLast update: 2004</revision>
+      <lastDateUpdated>2009-01-15</lastDateUpdated>
+   </versionInfo>
+   <usageInfo>
+      <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+         <useNLPSpecific>textMining</useNLPSpecific>
+      </actualUseInfo>
+   </usageInfo>
+   <resourceCreationInfo>
+      <fundingProject>
+         <projectName>PAROLE</projectName>
+         <fundingType>euFunds</fundingType>
+      </fundingProject>
+      <creationEndDate>1998-01-01</creationEndDate>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>ita</languageId>
+                  <languageName>Italian</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>no size available</size>
+                  <sizeUnit>other</sizeUnit>
+               </sizeInfo>
+               <textFormatInfo>
+                  <mimeType>Plain text</mimeType>
+               </textFormatInfo>
+               <annotationInfo>
+                  <annotationType>other</annotationType>
+                  <conformanceToStandardsBestPractices>TEI</conformanceToStandardsBestPractices>
+               </annotationInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

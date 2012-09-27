@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+      <identificationInfo>
+        <resourceName lang="und">Terminology collections in the Greek Sign Language</resourceName>
+        <description lang="und">The resourse comprises more than 1000 terms for the Greek Sign Language for the domain of public administration, Transportation, Seismology and Computer use.</description>
+        <resourceShortName lang="und">Terms GSL</resourceShortName>
+          <metaShareId>
+            NOT_DEFINED_FOR_V2
+          </metaShareId>
+      </identificationInfo>
+      <distributionInfo>
+        <availability>available-unrestrictedUse</availability>
+          <licenceInfo>
+            <licence>proprietary</licence>
+            <downloadLocation>http://lrt.ilsp.gr:8081/data/TerminologyCollectionsInTheGreekSignLanguage.rar</downloadLocation>
+          </licenceInfo>
+      </distributionInfo>
+      <contactPerson>
+        <surname lang="en">Fotinea</surname>
+        <givenName lang="en">Evita-Stavroula</givenName>
+        <sex>female</sex>
+          <communicationInfo>
+            <email>evita@ilsp.athena-innovation.gr</email>
+            <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=67&amp;Itemid=156</url>
+            <telephoneNumber>+302106875404</telephoneNumber>
+            <faxNumber>+302106854270</faxNumber>
+          </communicationInfo>
+        <position>Principal Researcher</position>
+          <affiliation>
+            <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+            <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+              <communicationInfo>
+                <email>www@ilsp.athena-innovation.gr</email>
+                <url>http://www.ilsp.gr/</url>
+                <address>Artemidos 6 &amp; Epidavrou</address>
+                <zipCode>GR-15125</zipCode>
+                <city>Maroussi</city>
+                <country>GR</country>
+                <telephoneNumber>+302106875300</telephoneNumber>
+                <faxNumber>+302106854270</faxNumber>
+                <faxNumber>+302106856794</faxNumber>
+              </communicationInfo>
+          </affiliation>
+      </contactPerson>
+      <metadataInfo>
+        <metadataCreationDate>2012-02-02</metadataCreationDate>
+        <source>META</source>
+        <metadataLastDateUpdated>2012-06-11</metadataLastDateUpdated>
+      </metadataInfo>
+      <usageInfo>
+          <foreseenUseInfo>
+            <foreseenUse>nlpApplications</foreseenUse>
+          </foreseenUseInfo>
+          <actualUseInfo>
+            <actualUse>nlpApplications</actualUse>
+          </actualUseInfo>
+      </usageInfo>
+      <resourceComponentType>
+          <lexicalConceptualResourceInfo>
+            <resourceType>lexicalConceptualResource</resourceType>
+            <lexicalConceptualResourceType>computationalLexicon</lexicalConceptualResourceType>
+              <lexicalConceptualResourceMediaType>
+                  <lexicalConceptualResourceTextInfo>
+                    <mediaType>text</mediaType>
+                      <lingualityInfo>
+                        <lingualityType>multilingual</lingualityType>
+                      </lingualityInfo>
+                      <languageInfo>
+                        <languageId>gss</languageId>
+                        <languageName>Greek Sign Language</languageName>
+                      </languageInfo>
+                      <languageInfo>
+                        <languageId>eng</languageId>
+                        <languageName>English</languageName>
+                      </languageInfo>
+                      <languageInfo>
+                        <languageId>ell</languageId>
+                        <languageName>Modern Greek (1453-)</languageName>
+                      </languageInfo>
+                      <sizeInfo>
+                        <size>1000</size>
+                        <sizeUnit>terms</sizeUnit>
+                      </sizeInfo>
+                  </lexicalConceptualResourceTextInfo>
+                  <lexicalConceptualResourceVideoInfo>
+                    <mediaType>video</mediaType>
+                      <lingualityInfo>
+                        <lingualityType>multilingual</lingualityType>
+                      </lingualityInfo>
+                      <languageInfo>
+                        <languageId>gss</languageId>
+                        <languageName>Greek Sign Language</languageName>
+                      </languageInfo>
+                      <languageInfo>
+                        <languageId>eng</languageId>
+                        <languageName>English</languageName>
+                      </languageInfo>
+                      <languageInfo>
+                        <languageId>ell</languageId>
+                        <languageName>Modern Greek (1453-)</languageName>
+                      </languageInfo>
+                      <sizeInfo>
+                        <size>1000</size>
+                        <sizeUnit>terms</sizeUnit>
+                      </sizeInfo>
+                      <videoContentInfo>
+                        <typeOfVideoContent>natural signers</typeOfVideoContent>
+                      </videoContentInfo>
+                  </lexicalConceptualResourceVideoInfo>
+              </lexicalConceptualResourceMediaType>
+          </lexicalConceptualResourceInfo>
+      </resourceComponentType>
+  </resourceInfo>

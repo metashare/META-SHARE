@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+      <identificationInfo>
+        <resourceName lang="en">Greek Textual Entailment Corpus</resourceName>
+        <description lang="en">GTEC consits of 600 T-H pairs manually annotated for entailment (i.e. whether T entails H or not) by human annotators. The dataset which is tailored to guide training and evaluation of prospect RTE systems, is equally divided in three subsets each one representing the output of certain HLT application: Question Answering (QA), Comparable Documents (CD) and Machine Translation (MT), and pertaining to specific subject fields (i.e., law, politics, travel). T-H examples that correspond to success and failure cases of the afore-mentioned applications have been included in the corpus. The annotations provided are conformant to the RTE1 and RTE2 challenges.</description>
+        <resourceShortName lang="en">GTEC</resourceShortName>
+          <metaShareId>
+            NOT_DEFINED_FOR_V2
+          </metaShareId>
+      </identificationInfo>
+      <distributionInfo>
+        <availability>available-restrictedUse</availability>
+          <licenceInfo>
+            <licence>proprietary</licence>
+            <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+            <downloadLocation>http://lrt.ilsp.gr:8081/data/GTEC-v1.0-sample.zip</downloadLocation>
+          </licenceInfo>
+      </distributionInfo>
+      <contactPerson>
+        <surname lang="en">Piperidis</surname>
+        <givenName lang="en">Stelios</givenName>
+        <sex>male</sex>
+          <communicationInfo>
+            <email>spip@ilsp.athena-innovation.gr</email>
+            <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=51&amp;Itemid=156</url>
+            <telephoneNumber>+302106875421</telephoneNumber>
+            <faxNumber>+302106854270</faxNumber>
+          </communicationInfo>
+        <position>Senior Research Fellow</position>
+          <affiliation>
+            <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+            <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+              <communicationInfo>
+                <email>www@ilsp.athena-innovation.gr</email>
+                <url>http://www.ilsp.gr/</url>
+                <address>Artemidos 6 &amp; Epidavrou</address>
+                <zipCode>GR-15125</zipCode>
+                <city>Maroussi</city>
+                <country>GR</country>
+                <telephoneNumber>+302106875300</telephoneNumber>
+                <faxNumber>+302106854270</faxNumber>
+                <faxNumber>+302106856794</faxNumber>
+              </communicationInfo>
+          </affiliation>
+      </contactPerson>
+      <contactPerson>
+        <surname lang="en">Giouli</surname>
+        <givenName lang="en">Voula</givenName>
+        <sex>female</sex>
+          <communicationInfo>
+            <email>voula@ilsp.athena-innovation.gr</email>
+            <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=19&amp;Itemid=156</url>
+            <telephoneNumber>+302106875448</telephoneNumber>
+            <faxNumber>+302106854270</faxNumber>
+          </communicationInfo>
+        <position>Scientific Associate</position>
+          <affiliation>
+            <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+            <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+              <communicationInfo>
+                <email>www@ilsp.athena-innovation.gr</email>
+                <url>http://www.ilsp.gr/</url>
+                <address>Artemidos 6 &amp; Epidavrou</address>
+                <zipCode>GR-15125</zipCode>
+                <city>Maroussi</city>
+                <country>GR</country>
+                <telephoneNumber>+302106875300</telephoneNumber>
+                <faxNumber>+302106854270</faxNumber>
+                <faxNumber>+302106856794</faxNumber>
+              </communicationInfo>
+          </affiliation>
+      </contactPerson>
+      <metadataInfo>
+        <metadataCreationDate>2012-02-02</metadataCreationDate>
+          <metadataCreator>
+            <surname lang="en">Labropoulou</surname>
+            <givenName lang="en">Penny</givenName>
+            <sex>female</sex>
+              <communicationInfo>
+                <email>penny@ilsp.athena-innovation.gr</email>
+                <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=37&amp;Itemid=156</url>
+                <telephoneNumber>+302106875445</telephoneNumber>
+                <faxNumber>+302106854270</faxNumber>
+              </communicationInfo>
+            <position>Senior Research Fellow</position>
+              <affiliation>
+                <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                  <communicationInfo>
+                    <email>www@ilsp.athena-innovation.gr</email>
+                    <url>http://www.ilsp.gr/</url>
+                    <address>Artemidos 6 &amp; Epidavrou</address>
+                    <zipCode>GR-15125</zipCode>
+                    <city>Maroussi</city>
+                    <country>GR</country>
+                    <telephoneNumber>+302106875300</telephoneNumber>
+                    <faxNumber>+302106854270</faxNumber>
+                    <faxNumber>+302106856794</faxNumber>
+                  </communicationInfo>
+              </affiliation>
+          </metadataCreator>
+        <source>META-SHARE/ILSP</source>
+        <metadataLastDateUpdated>2012-05-16</metadataLastDateUpdated>
+      </metadataInfo>
+      <usageInfo>
+          <foreseenUseInfo>
+            <foreseenUse>nlpApplications</foreseenUse>
+            <useNLPSpecific>textualEntailment</useNLPSpecific>
+          </foreseenUseInfo>
+          <actualUseInfo>
+            <actualUse>nlpApplications</actualUse>
+            <useNLPSpecific>textualEntailment</useNLPSpecific>
+          </actualUseInfo>
+      </usageInfo>
+      <resourceComponentType>
+          <corpusInfo>
+            <resourceType>corpus</resourceType>
+              <corpusMediaType>
+                  <corpusTextInfo>
+                    <mediaType>text</mediaType>
+                      <lingualityInfo>
+                        <lingualityType>monolingual</lingualityType>
+                      </lingualityInfo>
+                      <languageInfo>
+                        <languageId>el</languageId>
+                        <languageName>Modern Greek (1453-)</languageName>
+                      </languageInfo>
+                      <sizeInfo>
+                        <size>600</size>
+                        <sizeUnit>T-HPairs</sizeUnit>
+                      </sizeInfo>
+                      <annotationInfo>
+                        <annotationType>lemmatization</annotationType>
+                      </annotationInfo>
+                      <annotationInfo>
+                        <annotationType>morphosyntacticAnnotation-posTagging</annotationType>
+                      </annotationInfo>
+                      <annotationInfo>
+                        <annotationType>morphosyntacticAnnotation-bPosTagging</annotationType>
+                      </annotationInfo>
+                      <annotationInfo>
+                        <annotationType>syntacticAnnotation-shallowParsing</annotationType>
+                      </annotationInfo>
+                      <annotationInfo>
+                        <annotationType>syntacticAnnotation-treebanks</annotationType>
+                      </annotationInfo>
+                      <domainInfo>
+                        <domain>law</domain>
+                      </domainInfo>
+                      <domainInfo>
+                        <domain>politics</domain>
+                      </domainInfo>
+                      <domainInfo>
+                        <domain>travel</domain>
+                      </domainInfo>
+                  </corpusTextInfo>
+              </corpusMediaType>
+          </corpusInfo>
+      </resourceComponentType>
+  </resourceInfo>

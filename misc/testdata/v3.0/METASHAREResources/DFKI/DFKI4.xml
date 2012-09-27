@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+  <identificationInfo>
+    <resourceName>MT Server Land</resourceName>
+    <description>MT Server Land is an open-source architecture for MT, developed by DFKI’s MT Group in Saarbrόcken.</description>
+    <url>https://github.com/cfedermann/mt-serverland</url>
+    <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+  </identificationInfo>
+  <distributionInfo>
+    <availability>available-unrestrictedUse</availability>
+    <licenceInfo>
+      <licence>BSD-style</licence>
+    </licenceInfo>
+  </distributionInfo>
+  <contactPerson>
+    <surname>Federmann</surname>
+    <givenName>Christian</givenName>
+    <sex>male</sex>
+    <communicationInfo>
+      <email>cfedermann@dfki.de</email>
+    </communicationInfo>
+    <affiliation>
+      <organizationName>Deutsches Forschungszentrum für Künstliche Intelligenz</organizationName>
+      <organizationShortName>DFKI</organizationShortName>
+      <departmentName>Language Technology Lab</departmentName>
+      <communicationInfo>
+        <email>sek-hu@dfki.de</email>
+        <url>http://www.dfki.de/lt</url>
+        <address>Stuhlsatzenhausweg 3</address>
+        <zipCode>66123</zipCode>
+        <city>Saarbrücken</city>
+        <country>DE</country>
+        <telephoneNumber>+49_681_857755282</telephoneNumber>
+        <faxNumber>+49_681_857755338</faxNumber>
+      </communicationInfo>
+    </affiliation>
+  </contactPerson>
+  <metadataInfo>
+    <metadataCreationDate>2012-05-15</metadataCreationDate>
+  </metadataInfo>
+  <usageInfo>
+    <foreseenUseInfo>
+      <foreseenUse>nlpApplications</foreseenUse>
+    </foreseenUseInfo>
+  </usageInfo>
+  <resourceComponentType>
+    <toolServiceInfo>
+      <resourceType>toolService</resourceType>
+      <toolServiceType>other</toolServiceType>
+      <languageDependent>false</languageDependent>
+    </toolServiceInfo>
+  </resourceComponentType>
+</resourceInfo>
