@@ -6,15 +6,13 @@
 <div class="dataline">
 {% for key, value in classifications.items %}
 	{% if "classification" in key %}
-		{% for key1, value1 in value.items %}
-			<label class="dataline">
-				<label class="subtitle"> {{ value.Subject_topic }}
-				{% if "Size_per" in key1 %}
-					 {% include "repository/resource_view/size.html" with size=value1 type="sub" %}
-				{% endif %}
-				</label>
+		<label class="dataline">
+			<label class="subtitle"> {{ value.Subject_topic }}
+			{% if "Size_per" in key1 %}
+				 {% include "repository/resource_view/size.html" with size=value1 type="sub" %}
+			{% endif %}
 			</label>
-		{% endfor %}
+		</label>
 		{% for key1, value1 in value.items %}
 			{% if "Size_per" in key1 %}
 			{% else %}
