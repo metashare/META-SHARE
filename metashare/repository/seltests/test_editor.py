@@ -480,6 +480,88 @@ class BasicEditorTests(SeleniumTestCase):
           'the created project must not be related to any resource')
 
 
+    def test_Document_creation_tool(self):
+        driver = self.driver
+        driver.get(self.base_url)
+        ss_path = setup_screenshots_folder(
+          "PNG-metashare.repository.seltests.test_editor.EditorTest",
+          "Document_creation_tool")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))  
+        # login user
+        login_user(driver, "manageruser", "secret")
+        # make sure login was successful
+        self.assertEqual("Logout", 
+          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Manage Resources -> Manage document objects
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage document objects"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Add document
+        driver.find_element_by_link_text("Add Document").click()
+        # create tool
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("Add Document", 
+          driver.find_element_by_css_selector("#content > h1").text)
+        # add required fields
+        Select(driver.find_element_by_id("id_documentType")).select_by_visible_text("Article")
+        driver.find_element_by_name("key_title_0").clear()
+        driver.find_element_by_name("key_title_0").send_keys("en")
+        driver.find_element_by_name("val_title_0").clear()
+        driver.find_element_by_name("val_title_0").send_keys("Document title")
+        driver.find_element_by_name("author").clear()
+        driver.find_element_by_name("author").send_keys("John Smith")
+        driver.find_element_by_name("editor").clear()
+        driver.find_element_by_name("editor").send_keys("Smith Ed.")
+        driver.find_element_by_name("year").clear()
+        driver.find_element_by_name("year").send_keys("1981")
+        driver.find_element_by_name("publisher").clear()
+        driver.find_element_by_name("publisher").send_keys("John Smith & Co")
+        driver.find_element_by_name("bookTitle").clear()
+        driver.find_element_by_name("bookTitle").send_keys("Life of John Smith")
+        driver.find_element_by_name("journal").clear()
+        driver.find_element_by_name("journal").send_keys("Journal")
+        driver.find_element_by_name("volume").clear()
+        driver.find_element_by_name("volume").send_keys("7")
+        driver.find_element_by_name("series").clear()
+        driver.find_element_by_name("series").send_keys("9")
+        driver.find_element_by_name("pages").clear()
+        driver.find_element_by_name("pages").send_keys("289-290")
+        driver.find_element_by_name("edition").clear()
+        driver.find_element_by_name("edition").send_keys("1st")
+        driver.find_element_by_name("conference").clear()
+        driver.find_element_by_name("conference").send_keys("Main conference")
+        driver.find_element_by_name("doi").clear()
+        driver.find_element_by_name("doi").send_keys("123-35-1243")
+        driver.find_element_by_name("url").clear()
+        driver.find_element_by_name("url").send_keys("http://www.mainconference.org")
+        driver.find_element_by_name("ISSN").clear()
+        driver.find_element_by_name("ISSN").send_keys("12-435-464-467")
+        driver.find_element_by_name("ISBN").clear()
+        driver.find_element_by_name("ISBN").send_keys("12-435-464-467")
+        driver.find_element_by_name("keywords").clear()
+        driver.find_element_by_name("keywords").send_keys("John Smith, life")
+        driver.find_element_by_name("documentLanguageName").clear()
+        driver.find_element_by_name("documentLanguageName").send_keys("English")
+        driver.find_element_by_name("documentLanguageId").clear()
+        driver.find_element_by_name("documentLanguageId").send_keys("en")
+        # save tool
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("_save").click()
+        # TODO remove this workaround when Selenium starts working again as intended
+        time.sleep(1)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual(
+          u"The Document \"John Smith: Document title\" was added successfully.", 
+          driver.find_element_by_css_selector("li.info").text)
+
+        # make sure that there is no related resource linked to this document
+        self.assertEqual("0", driver.find_element_by_xpath(
+          "//table[@id='result_list']/tbody/tr[1]/td[1]").text,
+          'the created document must not be related to any resource')
+
+
     def test_sorting(self):
         """
         tests the sorting of controlled vocabulary in some examplary CharFields
