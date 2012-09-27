@@ -77,7 +77,7 @@ class DictWidget(widgets.Widget):
             # (we have gotten an existing Python dict)
             idx = 0
             for key, val in value.iteritems():
-                _entries.append(self._get_dict_entry(name, idx, key, val))
+                _entries.append(self._get_dict_entry(name, idx, key, val, value))
                 idx += 1
         elif isinstance(value, list):
             # (we have gotten a non-valid key/value pair list that was created
@@ -85,7 +85,7 @@ class DictWidget(widgets.Widget):
             idx = 0
             for entry in value:
                 _entries.append(self._get_dict_entry(name, idx, entry[0],
-                                                     entry[1]))
+                                                     entry[1], value))
                 idx += 1
         elif not self.blank:
             # (we probably have gotten the value None, i.e., the dictionary is
@@ -95,7 +95,7 @@ class DictWidget(widgets.Widget):
         # render final HTML for this widget instance
         return mark_safe(render_to_string(self._template, _context))
 
-    def _get_dict_entry(self, field_name, idx, key, value):
+    def _get_dict_entry(self, field_name, idx, key, value, values_list=None):
         """
         Returns a tuple (pair) with a rendered key and value input field.
         
@@ -162,8 +162,11 @@ class LangDictWidget(DictWidget):
         # path to the Django template which is used to render this widget
         self._template = 'repository/editor/lang_dict_widget.html'
 
-    def _get_dict_entry(self, field_name, idx, key, value):
-        if not key:
+    def _get_dict_entry(self, field_name, idx, key, value, values_list=None):
+        # Set the default value only if the values_list is empty.
+        # This should occur if the key,value does not come from
+        # the database nor from user input.
+        if not values_list and not key and not value:
             # by default we (blindly) propose the ISO 639-1 language code for
             # English (as per WP7 request in issue #206)
             key = 'en'
