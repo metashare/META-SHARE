@@ -85,7 +85,18 @@
 			{% endif %}
 		{% endfor %}
 	{% endif %}
-
+	
+	{% if "Time_coverage" in resource_component %}
+		<label class='title'>Time Coverage</label>
+		{% for key, value in resource_component.items %}
+			{% if "Time_coverage" in key %}
+				{% include "repository/resource_view/time_coverage.html" with time_coverage=value %}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+	
+	
+	
 
 {% endif %}
 
