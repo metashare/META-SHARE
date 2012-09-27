@@ -31,9 +31,10 @@ class Command(BaseCommand):
                     datfile = open(geodatfile, 'w')
                     datfile.write(db.read())
                     datfile.close()
-                    LOGGER.info("Updated "+geodatfile+" file")
+                    LOGGER.info("Updated the GeoIP database file at: %s",
+                        geodatfile)
                 except:
-                    LOGGER.info("ERROR! Gzip decompression failure on "+geogzfile+".")
+                    LOGGER.fatal("Gzip decompression failure on %s.", geogzfile)
         except:
-            LOGGER.info("ERROR! Download the GeoIP resource "+GEOIP_DATA_URL+" failed")
-
+            LOGGER.error("Downloading a new GeoIP database from %s failed. "
+                    "Continuing to use the existing version.", GEOIP_DATA_URL)
