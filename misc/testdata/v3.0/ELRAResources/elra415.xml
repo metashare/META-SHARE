@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">EASy Evaluation Package</resourceName>
+      <resourceName lang="fr">Package d’évaluation EASy</resourceName>
+      <description lang="en">The EASy Evaluation Package was produced within the French national project EASy (Evaluation of syntactic parsers of French), as part of the Technolangue programme funded by the French Ministry of Research and New Technologies (MRNT). The project enabled to carry out a campaign for the evaluation of syntactic parsers of French. This package includes the material that was used for the EASy evaluation campaign. It includes resources, protocols, scoring tools, results of the campaign, etc., that were used or produced during the campaign. The aim of these evaluation packages is to enable external players to evaluate their own system and compare their results with those obtained during the campaign itself. The campaign is distributed over two actions: 1)	Evaluation of constituent annotation: it consists in evaluating the ability of parsers with respect to the type of corpus (e.g. literature, conversation transcription, parliamentary speech, questions for information retrieval tools).2)	Evaluation of dependency relation annotation: it consists in evaluating the ability of parsers with respect to the relations between constituents or words.The EASy evaluation package contains the following data and tools:1)	A collection of syntactically tagged French texts gathered over 6 domains (about one million words) : -	medicine: 100,000 words, including 5,000 annotated words, -	literature: 150,000 words, including 15,000 annotated words, -	emails: 2,250 anonymised personal emails (121,000 words), -	general: 250,000 words, including 24,000 annotated words, extracted from Le Monde newspaper, reports from the French Senate and the European Assembly (MLCC, MultiLingual Corpora for Co-operation, catalogue ref: ELRA-W0023),-	speech: 10 passages of transcribed dialogues from the Spoken French corpus (8,000 annotated words),-	questions: corpus of 137,000 words, extracted from the TREC and AMARYLLIS campaigns, including 5,000 annotated words. 2)	PASTK++: gathers evaluation tools for constituents and relations. It includes a version of the EASy campaign tools that were modified during the PASSAGE campaign (which followed the EASy campaigns).3)	Visualization tools for constituents and relations A description of the project is available at the following address:http://www.technolangue.net/article.php3?id_article=198 (in French language)</description>
+      <description lang="fr">Le package d’évaluation EASy a été produit dans le cadre du projet national français EASy (« Evaluation des Analyseurs Syntaxiques du français »), issu du programme Technolangue, financé par le Ministère français délégué à la Recherche et aux Nouvelles Technologies (MRNT). Le projet EASy a permis de réaliser une campagne d'évaluation des analyseurs syntaxiques du français. Ce package comprend l’ensemble des données utilisées lors de la campagne d’évaluation EASy. Il regroupe des ressources, des protocoles, des outils de notation, les résultats de la campagne officielle, etc., qui ont été utilisés ou produits pendant la campagne. Le but de ce « package » d’évaluation est de permettre à tout acteur externe de pouvoir évaluer son propre système et ainsi de pouvoir comparer ses résultats à ceux obtenus pendant la campagne.La campagne se décompose en deux actions : 3)	Evaluation sur l’annotation en constituants : consiste à évaluer la capacité des analyseurs en fonction du type de corpus (par exemple littérature, transcription de conversation, discours parlementaires, questions pour des moteurs de recherche).4)	Evaluation sur l’annotation en relations de dépendances : consiste à évaluer la capacité des analyseurs en fonction des relations entre constituants ou entre mots.Le package d’évaluation EASy contient les données et outils suivants :4)	Collection de textes français étiquetés syntaxiquement couvrant 6 domaines (près d’un million de mots) : -	médical : 100 000 mots dont 5 000 annotés, -	littéraire : 150 000 mots dont 15 000 annotés, -	emails : 2 250 courriers électroniques personnels anonymisés, soit 121 000 mots, -	général : 250 000 mots dont 24 000 annotés extraits du journal Le Monde, de rapports du Sénat et de l’assemblée européenne (MLCC, MultiLingual Corpora for Co-operation, réf. Catalogue : ELRA-W0023),-	oral : 10 fragments de dialogues transcrits du Corpus du Français Parlé, soit 8 000 mots annotés,-	questions : corpus de 137 000 mots extraits des campagnes TREC et AMARYLLIS dont 5 000 annotés. 5)	PASTK++ : regroupe les outils d’évaluation en constituants et en relations. Il s’agit d’une version des outils des campagnes EASy qui ont été améliorés au cours de la campagne PASSAGE (suite des campagnes EASy).6)	Outil de visualisation des constituants et des relations Une description du projet est disponible à l'adresse suivante :http://www.technolangue.net/article.php3?id_article=198</description>
+      <resourceShortName/>
+      <url>http://catalog.elra.info/product_info.php?products_id=1112</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-E0034</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>ELRA_EVALUATION</licence>
+         <restrictionsOfUse>evaluationUse</restrictionsOfUse>
+         <fee>1000.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_EVALUATION</licence>
+         <restrictionsOfUse>evaluationUse</restrictionsOfUse>
+         <fee>300.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_EVALUATION</licence>
+         <restrictionsOfUse>evaluationUse</restrictionsOfUse>
+         <fee>500.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_EVALUATION</licence>
+         <restrictionsOfUse>evaluationUse</restrictionsOfUse>
+         <fee>150.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <availabilityStartDate>2009-07-08</availabilityStartDate>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Valérie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <lastDateUpdated>2009-11-25</lastDateUpdated>
+   </versionInfo>
+   <resourceCreationInfo>
+      <fundingProject>
+         <projectName>EVALDA</projectName>
+         <fundingType>nationalFunds</fundingType>
+      </fundingProject>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>fre/fra</languageId>
+                  <languageName>French</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>no size available</size>
+                  <sizeUnit>other</sizeUnit>
+               </sizeInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

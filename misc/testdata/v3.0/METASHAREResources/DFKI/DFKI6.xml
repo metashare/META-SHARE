@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+  <identificationInfo>
+    <resourceName>Shallow Processing with Unification and Typed Feature Structures</resourceName>
+    <description>A platform for development of multilingual shallow text processing and information extraction systems.</description>
+    <resourceShortName>SProUT</resourceShortName>
+    <url>http://sprout.dfki.de</url>
+    <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+  </identificationInfo>
+  <distributionInfo>
+    <availability>underNegotiation</availability>
+  </distributionInfo>
+  <contactPerson>
+    <surname>Schäfer</surname>
+    <givenName>Ulrich</givenName>
+    <sex>male</sex>
+    <communicationInfo>
+      <email>ulrich.schaefer@dfki.de</email>
+      <url>http://www.dfki.de/~uschaefer</url>
+      <address>Campus D 3 1</address>
+      <zipCode>66123</zipCode>
+      <city>Saarbrücken</city>
+      <country>Germany</country>
+      <telephoneNumber>+49681857755154</telephoneNumber>
+      <faxNumber>+49681857755338</faxNumber>
+    </communicationInfo>
+    <affiliation>
+      <organizationName>Deutsches Forschungszentrum für Künstliche Intelligenz</organizationName>
+      <organizationShortName>DFKI</organizationShortName>
+      <departmentName>Language Technology Lab</departmentName>
+      <communicationInfo>
+        <email>sek-hu@dfki.de</email>
+        <url>http://www.dfki.de/lt</url>
+        <address>Stuhlsatzenhausweg 3</address>
+        <zipCode>66123</zipCode>
+        <city>Saarbrücken</city>
+        <country>DE</country>
+        <telephoneNumber>+49_681_857755282</telephoneNumber>
+        <faxNumber>+49_681_857755338</faxNumber>
+      </communicationInfo>
+    </affiliation>
+  </contactPerson>
+  <metadataInfo>
+    <metadataCreationDate>2012-05-15</metadataCreationDate>
+  </metadataInfo>
+  <versionInfo>
+    <version>6</version>
+    <updateFrequency>irregularly</updateFrequency>
+  </versionInfo>
+  <usageInfo>
+    <foreseenUseInfo>
+      <foreseenUse>nlpApplications</foreseenUse>
+    </foreseenUseInfo>
+  </usageInfo>
+  <resourceDocumentationInfo>
+    <documentation>
+      <documentInfo>
+        <documentType>article</documentType>
+        <title>Shallow Processing with Unification and Typed Feature Structures - Foundations and Applications</title>
+        <author>Witold Drozdzynski</author>
+        <author>Hans-Ulrich Krieger</author>
+        <author>Jakub Piskorski</author>
+        <author>Ulrich Schäfer</author>
+        <author>Feiyu Xu</author>
+        <ms:year xmlns:ms="http://www.ilsp.gr/META-XMLSchema">2004</ms:year>
+        <journal>Künstliche Intelligenz</journal>
+        <volume>1</volume>
+        <pages>17-23</pages>
+        <url>http://www.kuenstliche-intelligenz.de/fileadmin/template/main/archiv/2004_1/sprout-web.pdf</url>
+      </documentInfo>
+    </documentation>
+  </resourceDocumentationInfo>
+  <resourceComponentType>
+    <toolServiceInfo>
+      <resourceType>toolService</resourceType>
+      <toolServiceType>other</toolServiceType>
+      <languageDependent>false</languageDependent>
+    </toolServiceInfo>
+  </resourceComponentType>
+</resourceInfo>

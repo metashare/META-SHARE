@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+      <identificationInfo>
+        <resourceName lang="en">Greek Predicate-Argument Lexical Resource</resourceName>
+        <description lang="en">Computation lexicon of general language with semantic role information.</description>
+          <metaShareId>
+            NOT_DEFINED_FOR_V2
+          </metaShareId>
+      </identificationInfo>
+      <distributionInfo>
+        <availability>available-restrictedUse</availability>
+          <licenceInfo>
+            <licence>proprietary</licence>
+          </licenceInfo>
+      </distributionInfo>
+      <contactPerson>
+        <surname lang="und">Piperidis</surname>
+        <givenName lang="und">Stelios</givenName>
+          <communicationInfo>
+            <email>spip@ilsp.athena-innovation.gr</email>
+          </communicationInfo>
+      </contactPerson>
+      <contactPerson>
+        <surname lang="und">Desipri</surname>
+        <givenName lang="und">Elina</givenName>
+          <communicationInfo>
+            <email>elina@ilsp.athena-innovation.gr</email>
+          </communicationInfo>
+      </contactPerson>
+      <metadataInfo>
+        <metadataCreationDate>2012-02-02</metadataCreationDate>
+          <metadataCreator>
+            <surname lang="en">Desipri</surname>
+            <givenName lang="en">Elina</givenName>
+            <sex>female</sex>
+              <communicationInfo>
+                <email>elina@ilsp.athena-innovation.gr</email>
+                <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=23&amp;Itemid=156</url>
+                <telephoneNumber>+302106875442</telephoneNumber>
+                <faxNumber>+302106854270</faxNumber>
+                <faxNumber>+302106856794</faxNumber>
+              </communicationInfo>
+            <position>Scientific Associate</position>
+              <affiliation>
+                <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                  <communicationInfo>
+                    <email>www@ilsp.athena-innovation.gr</email>
+                    <url>http://www.ilsp.gr/</url>
+                    <address>Artemidos 6 &amp; Epidavrou</address>
+                    <zipCode>GR-15125</zipCode>
+                    <city>Maroussi</city>
+                    <country>GR</country>
+                    <telephoneNumber>+302106875300</telephoneNumber>
+                    <faxNumber>+302106854270</faxNumber>
+                    <faxNumber>+302106856794</faxNumber>
+                  </communicationInfo>
+              </affiliation>
+          </metadataCreator>
+        <source>META-SHARE/ILSP</source>
+        <metadataLastDateUpdated>2012-06-14</metadataLastDateUpdated>
+      </metadataInfo>
+      <validationInfo>
+        <validated>true</validated>
+        <validationType>content</validationType>
+        <validationMode>manual</validationMode>
+        <validationExtent>full</validationExtent>
+      </validationInfo>
+      <usageInfo>
+          <foreseenUseInfo>
+            <foreseenUse>nlpApplications</foreseenUse>
+            <useNLPSpecific>semanticRoleLabelling</useNLPSpecific>
+          </foreseenUseInfo>
+          <actualUseInfo>
+            <actualUse>nlpApplications</actualUse>
+            <useNLPSpecific>semanticRoleLabelling</useNLPSpecific>
+              <usageProject>
+                <projectName lang="en">Retrieval of Video And Language for The Home user in an Information Society</projectName>
+                <projectShortName lang="en">REVEAL THIS</projectShortName>
+                <projectID>FP6-IST-511689</projectID>
+                <url>http://sifnos.ilsp.gr/RevealThis/</url>
+                <fundingType>euFunds</fundingType>
+                <funder>IST</funder>
+                <projectStartDate>2004-11-01</projectStartDate>
+                <projectEndDate>2007-04-20</projectEndDate>
+              </usageProject>
+          </actualUseInfo>
+      </usageInfo>
+      <resourceDocumentationInfo>
+          <documentation>
+              <documentInfo>
+                <documentType>inProceedings</documentType>
+                <title lang="en">Adding multi-layer semantics to the Greek Dependency Treebank</title>
+                <author>H. Papageorgiou; E. Desipri; M. Koutsombogera; K. Pouli; P.
+                Prokopidis</author>
+                <year>2006</year>
+                <bookTitle>Proceedings of The Fifth International Conference on Language and Evaluation (LREC-2006)</bookTitle>
+                <conference>Language Resources and Evaluation Conference (LREC 2006)</conference>
+              </documentInfo>
+          </documentation>
+      </resourceDocumentationInfo>
+      <resourceCreationInfo>
+          <fundingProject>
+            <projectName lang="en">Retrieval of Video And Language for The Home user in an Information Society</projectName>
+            <projectShortName lang="en">REVEAL THIS</projectShortName>
+            <projectID>FP6-IST-511689</projectID>
+            <url>http://sifnos.ilsp.gr/RevealThis/</url>
+            <fundingType>euFunds</fundingType>
+            <funder>IST</funder>
+            <projectStartDate>2004-11-01</projectStartDate>
+            <projectEndDate>2007-04-20</projectEndDate>
+          </fundingProject>
+      </resourceCreationInfo>
+      <resourceComponentType>
+          <lexicalConceptualResourceInfo>
+            <resourceType>lexicalConceptualResource</resourceType>
+            <lexicalConceptualResourceType>computationalLexicon</lexicalConceptualResourceType>
+              <lexicalConceptualResourceEncodingInfo>
+                <encodingLevel>morphology</encodingLevel>
+                <encodingLevel>semantics</encodingLevel>
+                <encodingLevel>syntax</encodingLevel>
+                <linguisticInformation>definition/gloss</linguisticInformation>
+                <linguisticInformation>partOfSpeech</linguisticInformation>
+                <linguisticInformation>semantics-EventType</linguisticInformation>
+                <linguisticInformation>semantics-SemanticRoles</linguisticInformation>
+              </lexicalConceptualResourceEncodingInfo>
+              <creationInfo>
+                  <originalSource>
+                    <targetResourceNameURI>Greek Dependency Treebank</targetResourceNameURI>
+                  </originalSource>
+              </creationInfo>
+              <lexicalConceptualResourceMediaType>
+                  <lexicalConceptualResourceTextInfo>
+                    <mediaType>text</mediaType>
+                      <lingualityInfo>
+                        <lingualityType>monolingual</lingualityType>
+                      </lingualityInfo>
+                      <languageInfo>
+                        <languageId>el</languageId>
+                        <languageName>Modern Greek (1453-)</languageName>
+                      </languageInfo>
+                      <modalityInfo>
+                        <modalityType>writtenLanguage</modalityType>
+                      </modalityInfo>
+                      <sizeInfo>
+                        <size>900</size>
+                        <sizeUnit>entries</sizeUnit>
+                      </sizeInfo>
+                      <domainInfo>
+                        <domain>travel</domain>
+                      </domainInfo>
+                      <domainInfo>
+                        <domain>EU parliamentary sessions</domain>
+                      </domainInfo>
+                  </lexicalConceptualResourceTextInfo>
+              </lexicalConceptualResourceMediaType>
+          </lexicalConceptualResourceInfo>
+      </resourceComponentType>
+  </resourceInfo>
