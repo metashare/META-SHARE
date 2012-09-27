@@ -2,7 +2,7 @@
 import os
 import sys
 
-RES_ROOT = '{0}/misc/testdata/v2.1'.format(os.environ['METASHARE_SW_DIR'])
+RES_ROOT = '{0}/misc/testdata/v3.0'.format(os.environ['METASHARE_SW_DIR'])
 FILESETS={}
 
 fileset = []

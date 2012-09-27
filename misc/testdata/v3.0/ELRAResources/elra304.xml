@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">Monolingual Greek corpus</resourceName>
+      <resourceName lang="fr">Corpus grec monolingue</resourceName>
+      <description lang="en">Monolingual Greek corpus of 1 million words. The corpus consists of articles written in 1996 from the Greek daily newspaper ELEFTHEROTIPIA. Each file contains annotated text with SGML mark-up accompanied by a text header.</description>
+      <description lang="fr">Ce corpus grec monolingue comporte 1 million de mots. Il est composé d'articles écrits en 1996 et extraits du quotidien grec ELEFTHEROTIPIA. Chaque fichier contient un texte balisé SGML comportant un en-tête CES (Corpus Encoding Standard).</description>
+      <resourceShortName/>
+      <url>http://catalog.elra.info/product_info.php?products_id=716</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-W0014</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>600.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>600.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>360.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>360.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <availabilityStartDate>1997-02-17</availabilityStartDate>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Valérie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <lastDateUpdated>2005-05-24</lastDateUpdated>
+   </versionInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>gre/ell</languageId>
+                  <languageName>Greek</languageName>
+                  <languageVarietyInfo>
+                     <languageVarietyType>dialect</languageVarietyType>
+                     <languageVarietyName>Modern (1453-)</languageVarietyName>
+                     <sizePerLanguageVariety>
+                        <size>2</size>
+                        <sizeUnit>gb</sizeUnit>
+                     </sizePerLanguageVariety>
+                  </languageVarietyInfo>
+               </languageInfo>
+               <sizeInfo>
+                  <size>no size available</size>
+                  <sizeUnit>other</sizeUnit>
+               </sizeInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

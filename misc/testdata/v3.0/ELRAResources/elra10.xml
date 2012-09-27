@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">ECI-ELSNET Italian &amp; German tagged sub-corpus</resourceName>
+      <resourceName lang="fr">ECI-ELSNET Sous-corpus balisé en italien et allemand</resourceName>
+      <description lang="en">The objective is to provide a small but fine grained morphosyntactically tagged corpus, 50.000 running words for each of the two languages (Italian and German) to be used in research work on tagging methods and models. The text for German comes from the Frankfurter Rundschau extracted from the ECI corpus, the Italian material comes from the Italian corpus of ILC - CNR. For German the data concerns several domains including Economy (17,000 word forms), Politics (14,000 word forms), Culture (18,000 word forms), Sports (9,000 word forms), and Local Events (8500 word forms). The situation for Italian is comparable to that. Word occurrences are tagged with very fine grained tagsets which are based on the EAGLES morphosyntactic guidelines.The tagging, done automatically, has been manually checked. The CD-ROM contains: the text in SGML format; the DBT software which allows different browsing and operations on the annotated text and the EAGLES guidelines for morphosyntactic.</description>
+      <description lang="fr">Sous-corpus balisé en italien et en allemand - Les données allemandes sont extraites du quotidien allemand Frankfurter Rundschau du corpus ECI et les données italiennes de ILC/CNR, et traitent toutes de domaines tels que l'économie, la politique, la culture, le sport et les événements locaux.Le corpus comprend les domaines suivants: Economie (17,000 mots), Politique (14,000 mots), Culture (18,000 mots), Sports (9,000 mots), Evénements locaux (8,500 mots).Le balisage des mots, fait automatiquement suivant les recommandations d'EAGLES pour le codage du niveau morphosyntaxique, a été vérifié manuellement.</description>
+      <resourceShortName/>
+      <url>http://catalog.elra.info/product_info.php?products_id=86</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-W0005</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>45.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>45.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>20.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>20.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <availabilityStartDate>1996-09-01</availabilityStartDate>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Valérie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <lastDateUpdated>2005-05-24</lastDateUpdated>
+   </versionInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>ita</languageId>
+                  <languageName>Italian</languageName>
+               </languageInfo>
+               <languageInfo>
+                  <languageId>ger/deu</languageId>
+                  <languageName>German</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>no size available</size>
+                  <sizeUnit>other</sizeUnit>
+               </sizeInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

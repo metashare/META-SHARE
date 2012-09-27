@@ -220,7 +220,7 @@ class SearchTest(test_utils.IndexAwareTestCase):
         client.post(
             reverse(views.download, args=(test_res.storage_object.identifier,)),
             { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
-              'licence': 'CC_BY-NC-SA' })
+              'licence': 'CC-BY-NC-SA' })
         response = client.get(_SEARCH_PAGE_PATH)
         self.assertContains(response, 'title="Number of downloads" />&nbsp;1')
         self.assertContains(response, 'title="Number of views" />&nbsp;1')
