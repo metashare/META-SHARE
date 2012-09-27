@@ -6,7 +6,7 @@
 	{% if "Text_format" in key %}		
 		{% for key1, value1 in value.items %}
 			<div>
-				<label class="dataline">
+				<label class="dataline indented">
 					{% if "Mime_type" in key1 %}
 						{{ value1 }}
 						{% if "Size_per_text_format" in value %}

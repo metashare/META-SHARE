@@ -71,7 +71,7 @@ label.title{
 
 label.title, label.component {
 	font-weight:bold;
-	margin: 0.3em 0 0.3em 0;	
+	margin: 5px 0 0.3em 0;	
 	display:block;
 }
 
@@ -273,6 +273,7 @@ label span a{
 	margin-left:5px;
 	margin-right:5px;
 	margin-bottom:2px;
+	margin-top:8px;
 	font-size:14px;
 	font-weight:bold !important;
 	display:block;	
