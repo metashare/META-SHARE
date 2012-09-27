@@ -48,6 +48,11 @@ div.right-corner{
 	font-weight: normal;
 	color: #333;
 }
+
+.dataline ul{
+	margin:0px;
+}
+
 .dataline li{
 	font-size: 14px;
 	font-weight: normal;
@@ -257,7 +262,7 @@ label span a{
 }
 
 .subtitle{
-	background-color: #e1e1e1;
+	background-color: #d1d1d1;
 	padding-left:3px;
 	padding-right:3px;	
 	border-bottom-left-radius: 5px;
@@ -376,6 +381,7 @@ a .indented{
 .contactcard .dataline{
 	font-weight:normal;
 	font-size:14px;
+	padding-top:5px;
 }
 
 .dataline span a{
