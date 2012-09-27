@@ -32,9 +32,9 @@
 	{% endif %}
 	
 	{% if tool_service.Tool_service_operation %}
-		<label class='component'>Operation</label>
+		<label class='title'>Operation</label>
 		{% if tool_service.Tool_service_operation.Operating_system %}
-			 <div class="dataline">
+			 <div class="dataline indented">
 				<label>
 					<strong>Operating system: </strong>{{ tool_service.Tool_service_operation.Operating_system }}
 				</label>
@@ -47,7 +47,7 @@
 			{% endif %}
 			
 			{% if tool_service.Tool_service_operation.Running_environment.Required_hardware %}
-				 <div class="dataline">
+				 <div class="dataline indented">
 					<label>
 						<strong>Required hardware: </strong>{{ tool_service.Tool_service_operation.Running_environment.Required_hardware }}
 					</label>
@@ -63,7 +63,7 @@
 			{% endif %}
 			
 			{% if tool_service.Tool_service_operation.Running_environment.Running_environment_details %}
-				 <div class="dataline">
+				 <div class="dataline indented">
 					<label>
 						<strong>Running environment details: </strong>{{ tool_service.Tool_service_operation.Running_environment.Running_environment_details }}
 					</label>
@@ -72,7 +72,7 @@
 		{% endif %}
 
 		{% if tool_service.Tool_service_operation.Running_time %}
-			 <div class="dataline">
+			 <div class="dataline indented">
 				<label>
 					<strong>Running time: </strong>{{ tool_service.Tool_service_operation.Running_time }}
 				</label>
@@ -81,9 +81,9 @@
 	{% endif %}
 
 	{% if tool_service.Tool_service_evaluation %}
-		<label class='component'>Evaluation</label>
+		<label class='title'>Evaluation</label>
 		{% if tool_service.Tool_service_evaluation.Evaluated %}
-			 <div class="dataline">
+			 <div class="dataline indented">
 				<label>
 					<strong>Evaluated: </strong>{{ tool_service.Tool_service_evaluation.Evaluated }}
 				</label>
@@ -91,7 +91,7 @@
 		{% endif %}
 
 		{% if tool_service.Tool_service_evaluation.Evaluation_level %}
-			 <div class="dataline">
+			 <div class="dataline indented">
 				<label>
 					<strong>Evaluation level: </strong>{{ tool_service.Tool_service_evaluation.Evaluation_level }}
 				</label>
@@ -99,7 +99,7 @@
 		{% endif %}
 
 		{% if tool_service.Tool_service_evaluation.Evaluation_type %}
-			 <div class="dataline">
+			 <div class="dataline indented">
 				<label>
 					<strong>Evaluation type: </strong>{{ tool_service.Tool_service_evaluation.Evaluation_type }}
 				</label>
@@ -107,7 +107,7 @@
 		{% endif %}
 
 		{% if tool_service.Tool_service_evaluation.Evaluation_criteria %}
-			 <div class="dataline">
+			 <div class="dataline indented">
 				<label>
 					<strong>Evaluation criteria: </strong>{{ tool_service.Tool_service_evaluation.Evaluation_criteria }}
 				</label>
@@ -115,7 +115,7 @@
 		{% endif %}
 
 		{% if tool_service.Tool_service_evaluation.Evaluation_measure %}
-			 <div class="dataline">
+			 <div class="dataline indented">
 				<label>
 					<strong>Evaluation measure: </strong>{{ tool_service.Tool_service_evaluation.Evaluation_measure }}
 				</label>
@@ -126,7 +126,7 @@
 			{% if tool_service.Tool_service_evaluation.Evaluation_report.Evaluation_report.Title %}
 				{% include "repository/resource_view/documentation.html" with documentation=tool_service.Tool_service_evaluation.Evaluation_report.Evaluation_report type="Evaluation Report" %}
 			{% else %}
-				<div class="dataline">
+				<div class="dataline indented">
 					<label>
 						<strong>Evaluation Report: </strong>{{ tool_service.Tool_service_evaluation.Evaluation_report.Evaluation_report }}
 					</label>
@@ -141,7 +141,7 @@
 		{% endif %}
 		
 		{% if tool_service.Tool_service_evaluation.Evaluation_details %}
-			 <div class="dataline">
+			 <div class="dataline indented">
 				<label>
 					<strong>Evaluation details: </strong>{{ tool_service.Tool_service_evaluation.Evaluation_details }}
 				</label>
@@ -149,13 +149,12 @@
 		{% endif %}
 	
 		{% if tool_service.Tool_service_evaluation.Evaluator %}
-			<label class="title">Evaluator</label>
 			{% for key, value in tool_service.Tool_service_evaluation.items %}
 				{% if "Evaluator" in key %}
 					{% if value.Organization %}
-				    	{% include "repository/resource_view/person.html" with person_dict=value.Organization type="Evaluator" %}
+				    	{% include "repository/resource_view/person.html" with person_dict=value.Organization type="Evaluator" level="sub" %}
 				    {% else %}
-				    	{% include "repository/resource_view/person.html" with person_dict=value.Evaluator type="Evaluator" %}
+				    	{% include "repository/resource_view/person.html" with person_dict=value.Evaluator type="Evaluator" level="sub" %}
 				    {% endif %}
 				{% endif %}
 			{% endfor %}
@@ -163,9 +162,9 @@
 	{% endif %}
 	
 	{% if tool_service.Tool_service_creation %}
-		<label class='component'>Creation</label>
+		<label class='title'>Creation</label>
 		{% if tool_service.Tool_service_creation.Implementation_language %}
-			 <div class="dataline">
+			 <div class="dataline indented indented">
 				<label>
 					<strong>Programming language: </strong>{{ tool_service.Tool_service_creation.Implementation_language }}
 				</label>
@@ -173,7 +172,7 @@
 		{% endif %}
 
 		{% if tool_service.Tool_service_creation.Formalism %}
-			 <div class="dataline">
+			 <div class="dataline indented">
 				<label>
 					<strong>Formalism: </strong>{{ tool_service.Tool_service_creation.Formalism }}
 				</label>
@@ -187,7 +186,7 @@
 		{% endif %}
 
 		{% if tool_service.Tool_service_creation.Creation_details %}
-			 <div class="dataline">
+			 <div class="dataline indented">
 				<label>
 					<strong>Details: </strong>{{ tool_service.Tool_service_creation.Creation_details }}
 				</label>
