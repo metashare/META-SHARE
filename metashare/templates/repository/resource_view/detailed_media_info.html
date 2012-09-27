@@ -52,7 +52,7 @@
 	{% endif %}
 
 	{# Classification Information #}
-	 {% if "Text_classification" in resource_component or "Audio_classification" in resource_component or "Video_classification" in resource_component %}
+	 {% if "Text_classification" in resource_component or "Audio_classification" in resource_component or "Video_classification" in resource_component or "Image_classification" in resource_component %}
 		{% include "repository/resource_view/classification.html" with classifications=resource_component %}
 	{% endif %}
 
@@ -109,9 +109,19 @@
 		{% include "repository/resource_view/video_content.html" with video=resource_component.Video_content %}
 	{% endif %}
 	
+	{# Image Content Information #}
+	{% if "Image_content" in resource_component %}
+		{% include "repository/resource_view/image_content.html" with image=resource_component.Image_content %}
+	{% endif %}
+	
 	{# Video Format Information #}
 	{% if "Video_format" in resource_component %}
 		{% include "repository/resource_view/video_format.html" with video=resource_component.Video_format %}
+	{% endif %}
+	
+	{# Image Format Information #}
+	{% if "Image_format" in resource_component %}
+		{% include "repository/resource_view/video_format.html" with video=resource_component.Image_format %}
 	{% endif %}
 	
 	{# Recording Information #}
