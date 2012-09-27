@@ -1,4 +1,5 @@
-{% for key, value in distribution.Distribution.items %}
+{% load replace %}
+{% load humanize %}
 	{% if "Licence" in key %}
 		{% for key1, value1 in value.items %}
 			{% if "Licence" in key1 %}
@@ -36,7 +37,7 @@
 			{% if "Download_location" in key1 %}
 				<div class="dataline indented">
 					<label>
-						<strong>Download Location: </strong>{{ value1 }}
+						<strong>Download Location: </strong>{{ value1|urlize }}
 					</label>
 				</div>
 			{% endif %}
@@ -52,7 +53,7 @@
 			{% if "Fee" in key1 %}
 				<div class="dataline indented">
 					<label>
-						<strong>Fee: </strong>{{ value1 }}
+						<strong>Fee: </strong>{{ value1|intcomma }}
 					</label>
 				</div>
 			{% endif %}
@@ -65,16 +66,7 @@
 				</div>
 			{% endif %}
 			
-			<div class="dataline">
-				{% if "Licensor" in key1 %}
-					<label class="dataline indented"><strong>Licensors:</strong></label>
-				{% endif %}
-					{% for key2, value2 in value1.items %}
-						{% if "Licensor" in key2 %}
-							{% include "repository/resource_view/person.html" with person_dict=value2 type="Licensor" %}
-						{% endif %}
-					{% endfor %}
-			</div>
+
 			
 			{% if "Distribution_rights_holder" in key1 %}
 				{% if value1.Organization %}
@@ -97,7 +89,17 @@
 			{% endif %}	
 			
 		{% endfor %}
+		
+		<div class="dataline">
+			{% if "Licensor" in value %}
+				<label class="dataline indented"><strong>Licensors:</strong></label>
+			{% endif %}
+			{% for key1, value1 in value.items %}
+				{% if "Licensor" in key1 %}
+					{% include "repository/resource_view/person.html" with person_dict=value1.Licensor type="Licensor" %}
+				{% endif %}
+			{% endfor %}
+		</div>
+		
 		<div class="separation"><hr/></div>
 	{% endif %}	
-
-{% endfor %}
