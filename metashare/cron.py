@@ -57,3 +57,10 @@ update_interval_settings = "{} {} {} {} {}".format( \
 @kronos.register(update_interval_settings)
 def run_digest_update():
     call_command('update_digests', interactive=False)
+    
+# update the GeoIP database every first day of the month
+@kronos.register("12 4 1 * *")
+def run_update_geoip_db():
+    LOGGER.info("Will now update the GeoIP database.")
+    call_command('update_geoip_db', interactive=False)
+

@@ -48,6 +48,9 @@ KNOWLEDGE_BASE_URL = 'http://www.meta-share.org/portal/knowledgebase/'
 # The URL for META-SHARE statistics server.
 STATS_SERVER_URL = "http://metastats.fbk.eu/"
 
+# The URL for GeoIP database.
+GEOIP_DATA_URL = "http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz" 
+
 
 # If STORAGE_PATH does not exist, try to create it and halt if not possible.
 from os.path import exists
