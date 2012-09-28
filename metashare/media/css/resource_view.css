@@ -334,6 +334,8 @@ img.line{
 .separation hr{
 	margin-left:auto;
 	margin-right:auto;
+	margin-top:5px;
+	margin-bottom:5px;
 	width:250px;
 	border: 0;
 	height: 1px;
