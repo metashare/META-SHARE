@@ -49,25 +49,21 @@
 		{% endif %}
 	{% endfor %}
 
+
 	{% for key, value in usage_dict.items %}
 		{% if "Actual_use" in value %}
 			<label class='title'>Actual Use</label>	
 			{% for key1, value1 in value.items %}
 				{% if "Actual_use" in key1 %}
-					<div class="dataline indented">
-						<label>
-							<strong><i>{{ value1.Actual_use }}</i></strong>
-						</label>
-					</div>					
-							
+						<label class="subtitle">{{ value1.Actual_use }}</label>							
 					{% if value1.Use_nlpspecific %}
 					     <div class="dataline indented">
 							<label>
 								<strong>Use NLP Specific:</strong> {{ value1.Use_nlpspecific }}
 							</label>
 						</div>
-					{% endif %}
 
+					{% endif %}
 					{% if value1.Actual_use_details %}
 					     <div class="dataline indented">
 							<label>
@@ -76,7 +72,6 @@
 						</div>
 					{% endif %}
 					
-				<div class="separation"><hr/></div>
 				{% endif %}
 			{% endfor %}
 			
@@ -84,7 +79,6 @@
 	{% endfor %}
 
 		{% if "Usage_report" in usage_dict.Usage.Actual_use %}
-		
 		
 			{% if usage_dict.Usage.Actual_use.Usage_report.Usage_report.Title %}
 				{% include "repository/resource_view/documentation.html" with documentation=usage_dict.Usage.Actual_use.Usage_report.Usage_report type="Usage Report" level="sub" %}
