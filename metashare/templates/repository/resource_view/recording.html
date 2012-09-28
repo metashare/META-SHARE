@@ -3,7 +3,7 @@
 {% spaceless %}
 <label class='title'>Recording</label>
 {% for key, value in recording.items %}
-	{% if key != "Recorder" %}
+	{% if not "Recorder" in key %}
 		 <div class="dataline indented">
 			<label>
 				<strong>{{ key|rep }}:</strong> {{ value }}
