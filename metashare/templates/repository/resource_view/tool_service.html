@@ -112,7 +112,7 @@
 				
 		{% if tool_service.Tool_service_evaluation.Evaluation_report %}
 			{% if tool_service.Tool_service_evaluation.Evaluation_report.Evaluation_report.Title %}
-				{% include "repository/resource_view/documentation.html" with documentation=tool_service.Tool_service_evaluation.Evaluation_report.Evaluation_report type="Evaluation Report" %}
+				{% include "repository/resource_view/documentation.html" with documentation=tool_service.Tool_service_evaluation.Evaluation_report.Evaluation_report type="Evaluation Report" level="sub" %}
 			{% else %}
 				<div class="dataline indented">
 					<label>
