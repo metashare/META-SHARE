@@ -16,7 +16,7 @@ from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER, \
 from metashare.test_utils import create_user
 from metashare.repository.supermodel import OBJECT_XML_CACHE
 from metashare.repository.models import resourceInfoType_model
-from metashare.repository.tests.test_nightly import NightlyTests
+from metashare.repository.tests.test_nightly import path_to_root
 from django.utils.encoding import smart_str
 
 # Setup logging support.
@@ -839,7 +839,7 @@ class FullViewTest(TestCase):
                 text = smart_str(xml_utils.html_escape(_ele.text), response._charset)
                 real_count = response.content.count(text)
                 if real_count == 0:
-                    path = NightlyTests.path_to_root(_ele, parent_dict)
+                    path = path_to_root(_ele, parent_dict)
                     if "email" in path \
                       or "metaShareId" in path:
                         continue
