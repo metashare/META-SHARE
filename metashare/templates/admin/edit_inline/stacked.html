@@ -76,6 +76,13 @@
         	autocomp_single("id", idElemId, nameElemId);
         	autocomp_single("name", nameElemId, idElemId);
         }
+        var updateMultifieldWidgets = function(row) {
+        	// If Multifield widgets are present, be sure to use unique ID for them
+        	row.find('.multifield_list').each(function(index, elem) {
+	        	var wId = getNextMultifieldWidgetId();
+    			setWidgetId($(elem), wId);
+        	});
+        }
         $(rows).formset({
             prefix: "{{ inline_admin_formset.formset.prefix }}",
             addText: "{% blocktrans with inline_admin_formset.opts.verbose_name|title as verbose_name %}Add another {{ verbose_name }}{% endblocktrans %}",
@@ -90,6 +97,7 @@
                 updateSelectFilter();
                 updateInlineLabel(row);
                 {% if inline_admin_formset.has_lang %}customHook(row, "{{ inline_admin_formset.lang_id }}", "{{ inline_admin_formset.lang_name }}");{% endif %}
+                updateMultifieldWidgets(row);
             })
         });
     });

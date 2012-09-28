@@ -13,7 +13,7 @@
 
 
 {% for key, value in recording.items %}
-	{% if "Recorder" not in key %}
+	{% if not "Recorder" in key %}
 		 <div class="dataline indented">
 			<label>
 				<strong>{{ key|rep }}:</strong> {{ value }}
