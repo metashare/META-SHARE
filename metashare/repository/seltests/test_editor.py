@@ -429,7 +429,7 @@ def _fill_contact_person(driver, ss_path, parent_id):
 
 def _fill_affiliation(driver, ss_path, parent_id):
     """
-    fills the affiliation popup with required information and returns
+    fills the affiliation popup with complete information and returns
     to the parent window
     """
     driver.switch_to_window("id_affiliation")
@@ -471,7 +471,6 @@ def _fill_affiliation(driver, ss_path, parent_id):
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
-
 
 def _fill_language(driver, ss_path, id_infix):
     """
