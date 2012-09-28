@@ -14,27 +14,25 @@
 							{% endif %}
 						{% endif %}
 					</label> 
-						{# Take care of language variety #}
-						{% if "Language_variety" in value %}
+					{# Take care of language variety #}
+					{% if "Language_variety" in value %}
+						<div class="dataline indented">
+							<label class="dataline"><strong>Variety: </strong>
+							{{ value.Language_variety.Language_variety_name }}
+							{% if value.Language_variety.Size_per_language_variety %}
+								{% include "repository/resource_view/size.html" with size=value.Language_variety.Size_per_language_variety type="sub" %}
+							{% endif %}
+							</label> 
+						</div>						
+						{% if value.Language_variety.Language_variety_type %}
 							<div class="dataline indented">
-								<label class="dataline"><strong>Variety: </strong>
-								{{ value.Language_variety.Language_variety_name }}
-								{% if value.Language_variety.Size_per_language_variety %}
-									{% include "repository/resource_view/size.html" with size=value.Language_variety.Size_per_language_variety type="sub" %}
-								{% endif %}
+								<label class="dataline">
+									<strong>Type: </strong>
+									{{ value.Language_variety.Language_variety_type }}
 								</label> 
 							</div>
-							{% if value.Language_variety.Language_variety_type %}
-								<div class="dataline indented">
-									<label class="dataline">
-										<strong>Type: </strong>
-										{{ value.Language_variety.Language_variety_type }}
-									</label> 
-								</div>
-							{% endif %}
-								
-							</div>
-						{% endif %}					
+						{% endif %} 
+					{% endif %} 
 				{% endif %}
 		{% endfor %}
 	{% endfor %}
