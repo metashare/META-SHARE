@@ -332,6 +332,10 @@ img.line{
 	box-shadow: 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
 }
 
+.title + .separation {
+	display:none;
+}
+
 .separation hr{
 	margin-left:auto;
 	margin-right:auto;
