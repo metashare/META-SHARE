@@ -4,7 +4,7 @@
 {% for key, value in encodings.items %}
 	<div>
 		{% if "Character_encoding" in key %}
-			<label class="dataline">
+			<label class="dataline indented">
 				{{ value.Character_encoding }}
 				{% if "Size_per_character_encoding" in value %} 
 					{% if value.Size_per_character_encoding %}

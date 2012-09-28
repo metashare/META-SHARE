@@ -1,0 +1,16 @@
+{% load replace %}
+
+{% spaceless %}
+<label class='title'>Recording</label>
+{% for key, value in recording.items %}
+	{% if not "Recorder" in key %}
+		 <div class="dataline indented">
+			<label>
+				<strong>{{ key|rep }}:</strong> {{ value }}
+			</label>
+		</div>
+	{% else %}
+			{% include "repository/resource_view/person.html" with person_dict=value.Recorder type="Recorder" level="sub" %}
+	{% endif %}
+{% endfor %}
+{% endspaceless %}

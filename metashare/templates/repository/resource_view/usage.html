@@ -3,11 +3,11 @@
 <label class='component'>Usage</label>
 <div class="dataline">
 	{% if usage_dict.Usage.Access_tool %}			
-	    {% include "repository/resource_view/target_resource.html" with target=usage_dict.Usage.Access_tool title="Access Tool" %}
+	    {% include "repository/resource_view/target_resource.html" with target=usage_dict.Usage.Access_tool title="Access Tool" level="top" %}
 	{% endif %}
 	
 	{% if usage_dict.Usage.Resource_associated_with %}			
-	    {% include "repository/resource_view/target_resource.html" with target=usage_dict.Usage.Resource_associated_with title="Associated Resource" %}
+	    {% include "repository/resource_view/target_resource.html" with target=usage_dict.Usage.Resource_associated_with title="Associated Resource" level="top" %}
 	{% endif %}
 	
 		{% for key, value in usage_dict.items %}
@@ -15,26 +15,18 @@
 				<label class='title'>Foreseen Use</label>	
 				{% for key1, value1 in value.items %}
 					{% if "Foreseen_use" in key1 %}
-						<div class="dataline indented">
-							<label>
-								<strong><i>{{ value1.Foreseen_use }}</i></strong>
-							</label>
-						</div>					
-								
+							<label class="subtitle">{{ value1.Foreseen_use }}</label>								
 						{% if value1.Use_nlpspecific %}
 						     <div class="dataline indented">
 								<label>
 									<strong>Use NLP Specific:</strong> {{ value1.Use_nlpspecific }}
 								</label>
 							</div>
-						{% endif %}
-					<div class="separation"><hr/></div>
+						{% endif %}					
 					{% endif %}
-				{% endfor %}
-				
+				{% endfor %}				
 			{% endif %}
 		{% endfor %}
-	
 	
 	
 	{% for key, value in usage_dict.items %}
@@ -42,22 +34,14 @@
 			<label class='title'>Actual Use</label>	
 			{% for key1, value1 in value.items %}
 				{% if "Actual_use" in key1 %}
-					<div class="dataline indented">
-						<label>
-							<strong><i>{{ value1.Actual_use }}</i></strong>
-						</label>
-					</div>					
-							
+						<label class="subtitle">{{ value1.Actual_use }}</label>							
 					{% if value1.Use_nlpspecific %}
 					     <div class="dataline indented">
 							<label>
 								<strong>Use NLP Specific:</strong> {{ value1.Use_nlpspecific }}
 							</label>
 						</div>
-					{% endif %}
-					
-					
-					
+					{% endif %}					
 								
 					{% if value1.Actual_use_details %}
 					     <div class="dataline indented">
@@ -67,17 +51,11 @@
 						</div>
 					{% endif %}
 					
-				<div class="separation"><hr/></div>
 				{% endif %}
 			{% endfor %}
 			
 		{% endif %}
 	{% endfor %}	
-	
-	
-	
-	
-	
 	
 		    
 	

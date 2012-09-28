@@ -1,0 +1,20 @@
+{% load replace %}
+
+{% spaceless %}
+<label class='title'>Creation</label>
+{% for key, value in creation.items %}
+	{% if not "Original_source" in key and not "Creation_tool" in key %}
+		 <div class="dataline indented">
+			<label>
+				<strong>{{ key|rep }}:</strong> {{ value }}
+			</label>
+		</div>
+	{% else %}
+		{% if "Original_source" in key %}
+			{% include "repository/resource_view/target_resource.html" with target=value title="Original Source" %}
+		{% else %}
+			{% include "repository/resource_view/target_resource.html" with target=value title="Creation Tool" %}
+		{% endif %}			
+	{% endif %}
+{% endfor %}
+{% endspaceless %}

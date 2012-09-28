@@ -2,11 +2,11 @@
 {% spaceless %}
 
 {% if type == "component" %}
-	<strong class='indented'> Size: </strong>
+	<label class='indented'><strong>Size</strong></label>
 {% else %}
 	{% if type == "sub" %}
 	{% else %}
-		<label class='title'>Size: </label>
+		<label class='title'>Size </label>
 	{% endif %}
 {% endif %}
 
@@ -17,7 +17,7 @@
 		{% for key, value in size.items %}
 			{% for key1, value1 in value.items %}
 				{% if key1 == "Size_unit" %}
-					<label class="dataline">{{ value.Size|intcomma }} {{ value.Size_unit }}</label>
+					<label class="dataline indented">{{ value.Size|intcomma }} {{ value.Size_unit }}</label>
 				{% endif %}
 			{% endfor %}
 		{% endfor %}
@@ -27,7 +27,7 @@
 			{% for key1, value1 in value.items %}
 				{% if key1 == "Size_unit" %}
 				<div>
-					<label class="dataline">{{ value.Size|intcomma }} {{ value.Size_unit }}</label>
+					<label class="dataline indented">{{ value.Size|intcomma }} {{ value.Size_unit }}</label>
 				</div>
 				{% endif %}
 			{% endfor %}

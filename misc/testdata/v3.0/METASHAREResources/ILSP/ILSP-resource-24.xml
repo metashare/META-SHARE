@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+      <identificationInfo>
+        <resourceName lang="und">Greek-Turkish lexicon for children</resourceName>
+        <description lang="und">Greek-Turkish lexicon comprising 6000 lemas. Available in CD-ROM and in book edition. Each lemma is accompanied by usage examples translated in turkish, as well as grammatical and lexical information.</description>
+          <metaShareId>
+            NOT_DEFINED_FOR_V2
+          </metaShareId>
+      </identificationInfo>
+      <distributionInfo>
+        <availability>available-restrictedUse</availability>
+          <licenceInfo>
+            <licence>MSCommons-BY-NC-ND</licence>
+            <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+            <restrictionsOfUse>attribution</restrictionsOfUse>
+            <restrictionsOfUse>noDerivatives</restrictionsOfUse>
+            <restrictionsOfUse>noRedistribution</restrictionsOfUse>
+          </licenceInfo>
+      </distributionInfo>
+      <contactPerson>
+        <surname lang="und">Tzevelekou</surname>
+        <givenName lang="und">Maria</givenName>
+          <communicationInfo>
+            <email>mtzevelekou@ilsp.athena-innovation.gr</email>
+          </communicationInfo>
+      </contactPerson>
+      <contactPerson>
+        <surname lang="und">Vacalopoulou</surname>
+        <givenName lang="und">Anna</givenName>
+          <communicationInfo>
+            <email>avacalop@ilsp.athena-innovation.gr</email>
+          </communicationInfo>
+      </contactPerson>
+      <metadataInfo>
+        <metadataCreationDate>2012-02-02</metadataCreationDate>
+        <source>META</source>
+      </metadataInfo>
+      <resourceComponentType>
+          <lexicalConceptualResourceInfo>
+            <resourceType>lexicalConceptualResource</resourceType>
+            <lexicalConceptualResourceType>machineReadableDictionary</lexicalConceptualResourceType>
+              <lexicalConceptualResourceMediaType>
+                  <lexicalConceptualResourceTextInfo>
+                    <mediaType>text</mediaType>
+                      <lingualityInfo>
+                        <lingualityType>bilingual</lingualityType>
+                      </lingualityInfo>
+                      <languageInfo>
+                        <languageId>ell</languageId>
+                        <languageName>Modern Greek (1453-)</languageName>
+                      </languageInfo>
+                      <languageInfo>
+                        <languageId>tur</languageId>
+                        <languageName>Turkish</languageName>
+                      </languageInfo>
+                      <sizeInfo>
+                        <size>6000</size>
+                        <sizeUnit>entries</sizeUnit>
+                      </sizeInfo>
+                  </lexicalConceptualResourceTextInfo>
+              </lexicalConceptualResourceMediaType>
+          </lexicalConceptualResourceInfo>
+      </resourceComponentType>
+  </resourceInfo>

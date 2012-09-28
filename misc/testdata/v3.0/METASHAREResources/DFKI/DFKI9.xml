@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+  <identificationInfo>
+    <resourceName>JTok Tokenizer</resourceName>
+    <description>JTok provides a tokenizer in Java that identifies paragraphs,
+      sentences and tokens of an input text. Non-word tokens are further
+      classified into abbreviations, numbers, punctuation and clitics.</description>
+    <resourceShortName>JTok</resourceShortName>
+    <url>http://heartofgold.opendfki.de/browser/trunk/jtok</url>
+    <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+  </identificationInfo>
+  <distributionInfo>
+    <availability>available-unrestrictedUse</availability>
+    <licenceInfo>
+      <licence>LGPL</licence>
+      <distributionAccessMedium>downloadable</distributionAccessMedium>
+      <downloadLocation>http://heartofgold.opendfki.de/browser/trunk/jtok</downloadLocation>
+    </licenceInfo>
+  </distributionInfo>
+  <contactPerson>
+    <surname>Steffen</surname>
+    <givenName>Jörg</givenName>
+    <sex>male</sex>
+    <communicationInfo>
+      <email>steffen@dfki.de</email>
+    </communicationInfo>
+    <affiliation>
+      <organizationName>Deutsches Forschungszentrum für Künstliche Intelligenz</organizationName>
+      <organizationShortName>DFKI</organizationShortName>
+      <departmentName>Language Technology Lab</departmentName>
+      <communicationInfo>
+        <email>sek-hu@dfki.de</email>
+        <url>http://www.dfki.de/lt</url>
+        <address>Stuhlsatzenhausweg 3</address>
+        <zipCode>66123</zipCode>
+        <city>Saarbrücken</city>
+        <country>DE</country>
+        <telephoneNumber>+49_681_857755282</telephoneNumber>
+        <faxNumber>+49_681_857755338</faxNumber>
+      </communicationInfo>
+    </affiliation>
+  </contactPerson>
+  <metadataInfo>
+    <metadataCreationDate>2012-05-10</metadataCreationDate>
+  </metadataInfo>
+  <versionInfo>
+    <version>1.9</version>
+    <lastDateUpdated>2011-10-11</lastDateUpdated>
+  </versionInfo>
+  <resourceComponentType>
+    <toolServiceInfo>
+      <resourceType>toolService</resourceType>
+      <toolServiceType>tool</toolServiceType>
+      <toolServiceSubtype>tokenizer and sentence splitter</toolServiceSubtype>
+      <languageDependent>true</languageDependent>
+      <inputInfo>
+        <mediaType>text</mediaType>
+        <languageName>German</languageName>
+        <languageName>English</languageName>
+        <languageId>de</languageId>
+        <languageId>en</languageId>
+      </inputInfo>
+      <outputInfo>
+        <mediaType>text</mediaType>
+        <languageName>German</languageName>
+        <languageName>English</languageName>
+        <languageId>de</languageId>
+        <languageId>en</languageId>
+        <characterEncoding>UTF-8</characterEncoding>
+        <annotationType>segmentation</annotationType>
+        <annotationFormat>XML</annotationFormat>
+        <segmentationLevel>paragraph</segmentationLevel>
+        <segmentationLevel>sentence</segmentationLevel>
+        <segmentationLevel>word</segmentationLevel>
+      </outputInfo>
+      <toolServiceOperationInfo>
+        <operatingSystem>os-independent</operatingSystem>
+        <runningEnvironmentInfo>
+          <requiredSoftware>
+            <targetResourceNameURI>Java</targetResourceNameURI>
+          </requiredSoftware>
+        </runningEnvironmentInfo>
+      </toolServiceOperationInfo>
+      <toolServiceCreationInfo>
+        <implementationLanguage>Java</implementationLanguage>
+      </toolServiceCreationInfo>
+    </toolServiceInfo>
+  </resourceComponentType>
+</resourceInfo>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceInfo xmlns:ms="http://www.ilsp.gr/META-XMLSchema"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
   <identificationInfo>
     <resourceName lang="en-us">Download Test Resource</resourceName>
     <description lang="en-us">a resource for testing downloads</description>
