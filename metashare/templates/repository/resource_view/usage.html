@@ -95,12 +95,15 @@
 			{% endif %}
 		{% endfor %}
 	{% endif %}
-	
-	{% if usage_dict.Usage.Actual_use.Usage_project %}
+
+	{% if "Usage_project" in usage_dict.Usage.Actual_use %}
 		<label class='subtitle'>Used in:</label>
-		{% include "repository/resource_view/project.html" with project=usage_dict.Usage.Actual_use.Usage_project %}
+		{% for key, value in usage_dict.Usage.Actual_use.items %}
+			{% if "Usage_project" in key %}
+				{% include "repository/resource_view/project.html" with project=value %}
+			{% endif %}
+		{% endfor %}
 	{% endif %}
-	
 </div>	
 
 {% endspaceless %}
