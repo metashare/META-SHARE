@@ -399,6 +399,128 @@ class BasicEditorTests(SeleniumTestCase):
           "//select[@id='id_licenceinfotype_model_set-0-licence_from']/option[39]").text)
 
 
+    def test_full_LR_creation_corpus_text(self):
+        driver = self.driver
+        driver.get(self.base_url)
+        ss_path = setup_screenshots_folder(
+          "PNG-metashare.repository.seltests.test_editor.EditorTest",
+          "LR_creation_corpus_text")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))  
+        # login user
+        login_user(driver, "manageruser", "secret")
+        # make sure login was successful
+        self.assertEqual("Logout", 
+          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Manage Resources -> Manage all resources
+        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # Add resource
+        driver.find_element_by_link_text("Add Resource").click()
+        #Select resource type
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
+        driver.find_element_by_id("id_corpusTextInfo").click()
+        driver.find_element_by_id("id_submit").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("Add Resource", 
+          driver.find_element_by_css_selector("#content > h1").text)
+        # remember root window id
+        root_id = driver.current_window_handle
+        # add required fields
+        driver.find_element_by_name("key_form-0-resourceName_0").clear()
+        driver.find_element_by_name("key_form-0-resourceName_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-resourceName_0").clear()
+        driver.find_element_by_name("val_form-0-resourceName_0").send_keys("Test Text Corpus")
+        driver.find_element_by_name("key_form-0-description_0").clear()
+        driver.find_element_by_name("key_form-0-description_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-description_0").clear()
+        driver.find_element_by_name("val_form-0-description_0").send_keys("Test Description")
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_xpath("//div[@class='form-row resourceShortName']/div/ul/li/a").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("key_form-0-resourceShortName_0").clear()
+        driver.find_element_by_name("key_form-0-resourceShortName_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-resourceShortName_0").clear()
+        driver.find_element_by_name("val_form-0-resourceShortName_0").send_keys("TTC")
+        driver.find_element_by_name("form-0-url").clear()
+        driver.find_element_by_name("form-0-url").send_keys("http://www.ttc.org")
+        driver.find_element_by_name("form-0-identifier").clear()
+        driver.find_element_by_name("form-0-identifier").send_keys("A-123")
+        # distribution popup
+        driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
+        _fill_distribution(driver, ss_path, root_id)
+        # contact person popup
+        driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
+        _fill_contact_person(driver, ss_path, root_id)
+        # contact metadata creator popup
+        driver.find_element_by_xpath("//a[@id='add_id_form-2-0-metadataCreator']/img").click()
+        _fill_metadata_creator(driver, ss_path, root_id)
+        driver.find_element_by_name("form-2-0-source").clear()
+        driver.find_element_by_name("form-2-0-source").send_keys("catalogue")
+        driver.find_element_by_name("form-2-0-originalMetadataSchema").clear()
+        driver.find_element_by_name("form-2-0-originalMetadataSchema").send_keys("metadata")
+        driver.find_element_by_name("form-2-0-originalMetadataLink").clear()
+        driver.find_element_by_name("form-2-0-originalMetadataLink").send_keys("http://catalogue.org/ttc")
+        driver.find_element_by_name("form-2-0-metadataLanguageName").clear()
+        driver.find_element_by_name("form-2-0-metadataLanguageName").send_keys("english")
+        driver.find_element_by_name("form-2-0-metadataLanguageId").clear()
+        driver.find_element_by_name("form-2-0-metadataLanguageId").send_keys("en")
+        driver.find_element_by_name("form-2-0-revision").clear()
+        driver.find_element_by_name("form-2-0-revision").send_keys("1.0")
+        
+        # corpus text info popup
+        driver.find_element_by_id("add_id_corpusTextInfo-0").click()
+        driver.switch_to_window("id_corpusTextInfo__dash__0")
+        Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
+          "Monolingual")
+        # corpus text info / language
+        _fill_language(driver, ss_path, "languageinfotype_model_set-0-")
+        # corpus text info / size
+        _fill_text_size(driver, ss_path, "sizeinfotype_model_set-0-")
+        # save and close corpus text info popup
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        save_and_close(driver, root_id)
+        
+        # save text corpus
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("_save").click()
+        # TODO remove this workaround when Selenium starts working again as intended
+        time.sleep(1)
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        self.assertEqual("The Resource \"Test Text Corpus\" was added successfully.", 
+          driver.find_element_by_css_selector("li.info").text)
+        
+        # check the editor group of the resource is the default editor group of the user
+        self.assertEqual(self.test_editor_group.name, 
+          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
+
+        # make sure an internal resource cannot be published
+        _publish(driver)
+        self.assertEqual("internal",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Only ingested resources can be published.", 
+         driver.find_element_by_css_selector("ul.messagelist>li.error").text)
+        # ingest resource
+        _ingest(driver)
+        self.assertEqual("ingested",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully ingested 1 internal resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
+        # publish resource
+        _publish(driver)
+        self.assertEqual("published",
+         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
+        self.assertEqual("Successfully published 1 ingested resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
+        # delete resource
+        _delete(driver)
+        self.assertEqual("Successfully deleted 1 resource.", 
+         driver.find_element_by_css_selector("ul.messagelist>li").text)
+        
+        
 def _fill_distribution(driver, ss_path, parent_id):
     """
     fills the distribution popup with required information and returns
