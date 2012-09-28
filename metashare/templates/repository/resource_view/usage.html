@@ -4,24 +4,24 @@
 <div class="dataline">
 	{% if "Access_tool" in usage_dict.Usage %}
 	<label class='title'>Access tool</label>
-	<ul>
-		{% for key, value in usage_dict.Usage.items %}
-			{% if "Access_tool" in key %}
-				{% include "repository/resource_view/target_resource.html" with target=value title="Access Tool" %}
-			{% endif %}
-		{% endfor %}
-	</ul>
+		<ul>
+			{% for key, value in usage_dict.Usage.items %}
+				{% if "Access_tool" in key %}
+					{% include "repository/resource_view/target_resource.html" with target=value title="Access Tool" %}
+				{% endif %}
+			{% endfor %}
+		</ul>
 	{% endif %}
 	
 	{% if "Resource_associated_with" in usage_dict.Usage %}
 	<label class='title'>Associated resources</label>
-	<ul>
-		{% for key, value in usage_dict.Usage.items %}
-			{% if "Resource_associated_with" in key %}
-				{% include "repository/resource_view/target_resource.html" with target=value title="Associated resources" %}
-			{% endif %}
-		{% endfor %}
-	</ul>
+		<ul>
+			{% for key, value in usage_dict.Usage.items %}
+				{% if "Resource_associated_with" in key %}
+					{% include "repository/resource_view/target_resource.html" with target=value title="Associated resources" %}
+				{% endif %}
+			{% endfor %}
+		</ul>
 	{% endif %}
 	
 	{% for key, value in usage_dict.items %}
@@ -33,8 +33,7 @@
 						<label>
 							<strong><i>{{ value1.Foreseen_use }}</i></strong>
 						</label>
-					</div>					
-							
+					</div>
 					{% if value1.Use_nlpspecific %}
 						 <div class="dataline indented">
 							<label>
@@ -62,7 +61,6 @@
 								<strong>Use NLP Specific:</strong> {{ value1.Use_nlpspecific }}
 							</label>
 						</div>
-
 					{% endif %}
 					{% if value1.Actual_use_details %}
 					     <div class="dataline indented">
@@ -71,36 +69,41 @@
 							</label>
 						</div>
 					{% endif %}
-					
 				{% endif %}
 			{% endfor %}
-			
 		{% endif %}
 	{% endfor %}
 
-		{% if "Usage_report" in usage_dict.Usage.Actual_use %}
-		
-			{% if usage_dict.Usage.Actual_use.Usage_report.Usage_report.Title %}
-				{% include "repository/resource_view/documentation.html" with documentation=usage_dict.Usage.Actual_use.Usage_report.Usage_report type="Usage Report" level="sub" %}
-			{% else %}
-				<div class="dataline indented">
-					<label>
-						<strong>Usage Report: </strong>{{ usage_dict.Usage.Actual_use.Usage_report.Usage_report }}
-					</label>
-				</div>
+	{% if "Usage_report" in usage_dict.Usage.Actual_use %}
+		{% if usage_dict.Usage.Actual_use.Usage_report.Usage_report.Title %}
+			{% include "repository/resource_view/documentation.html" with documentation=usage_dict.Usage.Actual_use.Usage_report.Usage_report type="Usage Report" level="sub" %}
+		{% else %}
+			<div class="dataline indented">
+				<label>
+					<strong>Usage Report: </strong>{{ usage_dict.Usage.Actual_use.Usage_report.Usage_report }}
+				</label>
+			</div>
+		{% endif %}
+	{% endif %}
+	
+	
+	{% if "Derived_resource" in usage_dict.Usage.Actual_use %}
+		<label class='subtitle'>Derived resources</label>
+		{% for key, value in usage_dict.Usage.Actual_use.items %}
+			{% if "Derived_resource" in key %}
+				{% include "repository/resource_view/target_resource.html" with target=value title="Derived Resource" %}
 			{% endif %}
-		{% endif %}
-		
-		{% if usage_dict.Usage.Actual_use.Derived_resource %}
-		    {% include "repository/resource_view/target_resource.html" with target=usage_dict.Usage.Actual_use.Derived_resource title="Derived Resource" %}
-		{% endif %}
-		
-		
-		{% if usage_dict.Usage.Actual_use.Usage_project %}
-			<label class='subtitle'>Used in:</label>
-		    {% include "repository/resource_view/project.html" with project=usage_dict.Usage.Actual_use.Usage_project %}
-		{% endif %}
-		
+		{% endfor %}
+	{% endif %}
+	{% if usage_dict.Usage.Actual_use.Derived_resource %}
+	{% endif %}
+	
+	
+	{% if usage_dict.Usage.Actual_use.Usage_project %}
+		<label class='subtitle'>Used in:</label>
+		{% include "repository/resource_view/project.html" with project=usage_dict.Usage.Actual_use.Usage_project %}
+	{% endif %}
+	
 </div>	
 
 {% endspaceless %}
