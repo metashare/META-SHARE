@@ -78,8 +78,8 @@ synchronize_node()
 {
 	local NODE_NUM="$1"
 
-	local REMOTE_DATA_FILE=$TEST_DIR/rem.log
 	local NODE_NAME=`get_node_info $NODE_NUM NODE_NAME`
+	local REMOTE_DATA_FILE=$TEST_DIR/rem_$NODE_NAME
 	export NODE_DIR=$TEST_DIR/$NODE_NAME
 	echo "Synchronizing $NODE_NAME"
 	cd "$METASHARE_DIR"
@@ -89,7 +89,7 @@ synchronize_node()
 		echo -n "Error in synchronizing $NODE_NAME" >&3
 		return $ret_val
 	fi
-	rm -f "$REMOTE_DATA_FILE"
+	#rm -f "$REMOTE_DATA_FILE"
 	local ret_val=$?
 	cd "$CURRENT_DIR"
 	return $ret_val
@@ -233,28 +233,41 @@ check_resources_2()
 	echo " and the corresponding resources have the same digest"
 	local CHECK_OK=1
 	local PREVIOUS_RES=""
+	local PREVIOUS_NODE_NAME=""
+	local RES_DETAILS=$TEST_DIR/res-details.log
+	touch "$RES_DETAILS"
 	for NODE_NUM in $NODES
 	do
 		local NODE_NAME=`get_node_info $NODE_NUM NODE_NAME`
 		local RES_FILE=$TEST_DIR/stat-$NODE_NAME.res
 		get_node_resource_list $NODE_NUM > "$RES_FILE"
+		cat "$RES_FILE" >> "$RES_DETAILS"
 		if [[ "$PREVIOUS_RES" != "" ]] ; then
 			echo "Comparing $RES_FILE and $PREVIOUS_RES."
 			C=`diff "$RES_FILE" "$PREVIOUS_RES" | wc -l`
 			if [[ "$C" != "0" ]] ; then
 				echo "FAILED"
 				CHECK_OK=0
+				echo "Resource list for node $NODE_NAME:"
+				cat "$RES_FILE"
+				echo "Resource list for node $PREVIOUS_NODE_NAME:"
+				cat "$PREVIOUS_RES"
 			fi
 		fi
 		rm -f "$PREVIOUS_RES"
 		PREVIOUS_RES=$RES_FILE
+		PREVIOUS_NODE_NAME=$NODE_NAME
 	done
-	rm -f $PREVIOUS_RES
+	#rm -f $PREVIOUS_RES
 	if [[ "$CHECK_OK" == "1" ]] ; then
 		echo "Synchronization successful"
+		rm -f "$RES_DETAILS"
 	else
-		echo "Synchronization failed"
-		echo -n "Synchronization failed" >&3
+		echo "Synchronization failed aaa"
+		echo -n "Synchronization failed bbb" >&3
+		echo "Dumping details"
+		cat "$RES_DETAILS"
+		#rm -f "$RES_DETAILS"
 		return 1
 	fi
 }

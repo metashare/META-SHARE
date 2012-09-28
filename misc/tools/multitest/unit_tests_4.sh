@@ -27,7 +27,7 @@ tearDown()
 	fi
 
 	cd "$MSERV_DIR"
-	"$MSERV_DIR"/mserv.sh clean
+	#"$MSERV_DIR"/mserv.sh clean
 	local ret_val=$?
 
 	return $ret_val
