@@ -132,7 +132,7 @@ class NightlyTests(TestCase):
                 text = smart_str(xml_utils.html_escape(_ele.text), response._charset)
                 real_count = response.content.count(text)
                 if real_count == 0:
-                    path = self.path_to_root(_ele, parent_dict)
+                    path = path_to_root(_ele, parent_dict)
                     if "email" in path \
                       or "metaShareId" in path:
                         continue
@@ -147,24 +147,22 @@ class NightlyTests(TestCase):
                 LOGGER.warn(path)
         # enable indexing 
         test_utils.set_index_active(True)
-        
-        
-    @classmethod
-    def path_to_root(cls, element, parent_dict):
-        """
-        Returns the path to the given element using the given parent dictionary.
-        """
-        current = element
-        ele_path = []
-        ele_path.append(element.tag)
-        while current in parent_dict:
-            parent = parent_dict[current] 
-            ele_path.append(parent.tag)
-            current = parent
-        ele_path.reverse()
-        path = ""
-        for ele in ele_path:
-            path += ele
-            path += "/"
-        return path[:-1]
 
+
+def path_to_root(element, parent_dict):
+    """
+    Returns the path to the given element using the given parent dictionary.
+    """
+    current = element
+    ele_path = []
+    ele_path.append(element.tag)
+    while current in parent_dict:
+        parent = parent_dict[current] 
+        ele_path.append(parent.tag)
+        current = parent
+    ele_path.reverse()
+    path = ""
+    for ele in ele_path:
+        path += ele
+        path += "/"
+    return path[:-1]

@@ -9,10 +9,10 @@
 
 {% if level == "sub" or level == "simple" or indent == "yes" %}<div class="indented">{% endif %}
 
-	{% if documentation.Document_type %}
+	{% if documentation.Document %}
 		<div class="dataline">
 			<label class="indented">
-				<strong>Document Type:</strong> {{ documentation.Document_type }}
+				<strong>Document Type:</strong> {{ documentation.Document }}
 			</label>
 		</div>
 	{% endif %}

@@ -3,7 +3,7 @@
 {% spaceless %}
 <label class='title'>Capture</label>
 {% for key, value in capture.items %}
-	{% if key != "Person_source_set_info" %}
+	{% if key != "Person_source_set" %}
 		 <div class="dataline indented">
 			<label>
 				<strong>{{ key|rep }}:</strong> {{ value }}
@@ -13,12 +13,15 @@
 		<label class='subtitle'>Person SourceSet</label>
 		{% for key1, value1 in value.items %}
 			{% if not "Participant" in key1 %}
-			<div class="dataline indented">
-				<label>
-					<strong>{{ key1|rep }}:</strong> {{ value1 }}
-				</label>
-			</div>
-			{% else %}
+				<div class="dataline indented">
+					<label>
+						<strong>{{ key1|rep }}:</strong> {{ value1 }}
+					</label>
+				</div>
+			{% endif %}
+		{% endfor %}
+		{% for key1, value1 in value.items %}
+			{% if "Participant" in key1 %}
 				<label class='subtitle'>Participant Information</label>
 				{% for key2, value2 in value1.items %}
 					<div class="dataline indented">
