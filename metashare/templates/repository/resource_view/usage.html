@@ -3,7 +3,7 @@
 <label class='component'>Usage</label>
 <div class="dataline">
 	{% if "Access_tool" in usage_dict.Usage %}
-	<label class='subtitle'>Access tool</label>
+	<label class='title'>Access tool</label>
 	<ul>
 		{% for key, value in usage_dict.Usage.items %}
 			{% if "Access_tool" in key %}
@@ -14,7 +14,7 @@
 	{% endif %}
 	
 	{% if "Resource_associated_with" in usage_dict.Usage %}
-	<label class='subtitle'>Associated resources</label>
+	<label class='title'>Associated resources</label>
 	<ul>
 		{% for key, value in usage_dict.Usage.items %}
 			{% if "Resource_associated_with" in key %}
