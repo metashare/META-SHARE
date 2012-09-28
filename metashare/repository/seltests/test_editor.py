@@ -472,6 +472,54 @@ def _fill_affiliation(driver, ss_path, parent_id):
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
 
+
+def _fill_metadata_creator(driver, ss_path, parent_id):
+    """
+    fills the metadata creator popup with complete information and returns
+    to the parent window
+    """
+    driver.switch_to_window("id_form__dash__2__dash__0__dash__metadataCreator")
+    current_id = driver.current_window_handle
+    driver.find_element_by_name("key_surname_0").clear()
+    driver.find_element_by_name("key_surname_0").send_keys("en")
+    driver.find_element_by_name("val_surname_0").clear()
+    driver.find_element_by_name("val_surname_0").send_keys("Smith")
+    driver.find_element_by_xpath("//div[@class='form-row givenName']/div/ul/li/a").click()
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    driver.find_element_by_name("key_givenName_0").clear()
+    driver.find_element_by_name("key_givenName_0").send_keys("en")
+    driver.find_element_by_name("val_givenName_0").clear()
+    driver.find_element_by_name("val_givenName_0").send_keys("John")
+    Select(driver.find_element_by_id("id_sex")).select_by_visible_text("Male")
+
+    driver.find_element_by_name("form-0-email").clear()
+    driver.find_element_by_name("form-0-email").send_keys("john.smith@institution.org")
+    driver.find_element_by_name("form-0-url").clear()
+    driver.find_element_by_name("form-0-url").send_keys("http://www.institution.org")
+    driver.find_element_by_name("form-0-address").clear()
+    driver.find_element_by_name("form-0-address").send_keys("1st main street")
+    driver.find_element_by_name("form-0-zipCode").clear()
+    driver.find_element_by_name("form-0-zipCode").send_keys("95000")
+    driver.find_element_by_name("form-0-city").clear()
+    driver.find_element_by_name("form-0-city").send_keys("somewhere")
+    driver.find_element_by_name("form-0-region").clear()
+    driver.find_element_by_name("form-0-region").send_keys("far away")
+    driver.find_element_by_name("form-0-country").clear()
+    driver.find_element_by_name("form-0-country").send_keys("world")
+    driver.find_element_by_name("form-0-telephoneNumber").clear()
+    driver.find_element_by_name("form-0-telephoneNumber").send_keys("1234567890")
+    driver.find_element_by_name("form-0-faxNumber").clear()
+    driver.find_element_by_name("form-0-faxNumber").send_keys("1234567890")
+    driver.find_element_by_name("position").clear()
+    driver.find_element_by_name("position").send_keys("Organization")
+    # affiliation popup
+    driver.find_element_by_xpath("//a[@id='add_id_affiliation']/img").click()
+    _fill_affiliation(driver, ss_path, current_id)
+
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
 def _fill_language(driver, ss_path, id_infix):
     """
     fills the language with required information
