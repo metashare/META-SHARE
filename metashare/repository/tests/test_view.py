@@ -762,7 +762,7 @@ class DownloadViewTest(TestCase):
 
 class FullViewTest(TestCase):
     """
-    Defines a number of tests for teh details of the single resource view
+    Defines a number of tests for the details of the single resource view
     """
     
     @classmethod
@@ -778,8 +778,8 @@ class FullViewTest(TestCase):
         # import resources
         test_utils.setup_test_storage()
         OBJECT_XML_CACHE.clear()
-        test_utils.import_xml_or_zip(
-          "{}/repository/fixtures/full-resource.xml".format(ROOT_PATH))
+        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
+                "full-corpus.xml".format(ROOT_PATH))
 
         # enable indexing 
         test_utils.set_index_active(True)
