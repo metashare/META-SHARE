@@ -80,7 +80,7 @@ class mconfig:
 
 	def get_outer_nodes_data(self, escape=False):
 		return self._get_other_nodes_data(
-			self.get_outer_nodes(), 'PROXIED_NODES', escape, 'outer_node')
+			self.get_outer_nodes(), 'PROXIED_NODES', escape, 'node')
 
 	def get_core_nodes_data(self, escape=False):
 		return self._get_other_nodes_data(
