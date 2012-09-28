@@ -4,7 +4,6 @@ import threading
 import itertools 
 from django.db.models import Count, Sum
 from django.contrib.auth.models import User
-from datetime import datetime
 from math import trunc
 import re
 from metashare.stats.models import LRStats, QueryStats, UsageStats
@@ -15,7 +14,7 @@ from metashare.settings import LOG_HANDLER
 USAGETHREADNAME = "usagethread"
 BOT_AGENT_RE = re.compile(r".*(bot|spider|spyder|crawler|archiver|seek|\
     scooter|wget|misesajour|slurp|agent|gazz|onetszukaj|perl|web|lab|\
-    scrubby|asterias|ip3000|knowledge|rambler|search|link|appie|\
+    scrubby|asterias|ip3000|knowledge|rambler|search|link|zmeu|hat|appie|\
     yandex|iron33|nazilla|kototoi).*", re.IGNORECASE)
 
 #type of monitored actions
@@ -44,7 +43,7 @@ def saveLRStats(resource, action, request=None):
     stats counter. Returns whether the stats counter was incremented or not.
     """
     result = False
-    LOGGER.debug("saveLRStats %s %s", action,
+    LOGGER.debug("saveLRStats action=%s lrid=%s", action,
                  resource.storage_object.identifier)
     if not hasattr(resource, 'storage_object') or resource.storage_object is None:
         return result
@@ -59,35 +58,34 @@ def saveLRStats(resource, action, request=None):
     if action == DELETE_STAT:
         UsageStats.objects.filter(lrid=lrid).delete()
         LRStats.objects.filter(lrid=lrid).delete()
-        return
+        return result
     if (resource.storage_object.publication_status != PUBLISHED):
-        return False
-    
+        return result
+        
     userid = _get_userid(request)
     sessid = _get_sessionid(request)
     lrset = LRStats.objects.filter(userid=userid, lrid=lrid, sessid=sessid, action=action)
     if (lrset.count() > 0):
         record = lrset[0]
-        record.lasttime = datetime.now()
         record.ignored = ignored
         record.save(force_update=True)
-        LOGGER.debug('UPDATESTATS: Saved LR {0}, {1} action={2} ({3}).'.format(lrid, sessid, action, record.lasttime))
+        #LOGGER.debug('UPDATESTATS: Saved LR {0}, {1} action={2} ({3}).'.format(lrid, sessid, action, record.lasttime))
     else:       
         record = LRStats()
         record.userid = userid
         record.lrid = lrid
         record.action = action
-        record.sessid = sessid
+        record.sessid = sessid    
         record.geoinfo = getcountry_code(_get_ipaddress(request))
         record.ignored = ignored
         record.save(force_insert=True)
-        LOGGER.debug('SAVESTATS: Saved LR {0}, {1} action={2}.'.format(lrid, sessid, action))
+        #LOGGER.debug('SAVESTATS: Saved LR {0}, {1} action={2}.'.format(lrid, sessid, action))
         result = True
     if action == UPDATE_STAT:
         if (resource.storage_object.published):
             UsageStats.objects.filter(lrid=lrid).delete()
             _update_usage_stats(lrid, resource.export_to_elementtree())
-            LOGGER.debug('STATS: Updating usage statistics: resource {0} updated'.format(lrid))
+            #LOGGER.debug('STATS: Updating usage statistics: resource {0} updated'.format(lrid))
     return result
 
 def saveQueryStats(query, facets, found, exectime=0, request=None): 
@@ -99,7 +97,7 @@ def saveQueryStats(query, facets, found, exectime=0, request=None):
     stat.found = found
     stat.exectime = exectime    
     stat.save()
-    LOGGER.debug(u'STATS: Query {0}.'.format(query))
+    LOGGER.debug(u'saveQueryStats q={0}.'.format(query))
 
 def getLRStats(lrid):
     data = ""
@@ -117,8 +115,11 @@ def getLRStats(lrid):
     return json.loads("["+data+"]")
 
     
-def getUserCount(lrid):
-    users = LRStats.objects.values('userid').filter(lrid=lrid).annotate(Count('userid'))
+def getUserCount(lrid, user = None):
+    if user != None:
+        users = LRStats.objects.values('userid').filter(lrid=lrid).exclude(userid=user).annotate(Count('userid'))
+    else:
+        users = LRStats.objects.values('userid').filter(lrid=lrid).annotate(Count('userid'))
     for key in users:
         return key['userid__count']
     return 0
@@ -174,45 +175,61 @@ def getLRLast(action, limit, geoinfo=None, offset=0):
     action_list = []
     if (action and not action == ""):
         if (geoinfo != None and geoinfo is not ""):
-            action_list =  LRStats.objects.values('lrid', 'action', 'lasttime').filter(ignored=False, \
-                action=action, geoinfo=geoinfo).order_by('-lasttime')[offset:offset+limit]
+            action_list = LRStats.objects.values('lrid', 'action', 'lasttime') \
+                .filter(ignored=False, action=action, geoinfo=geoinfo) \
+                .order_by('-lasttime')[offset:offset+limit]
         else:
-            action_list =  LRStats.objects.values('lrid', 'action', 'lasttime').filter(ignored=False, \
-                action=action).order_by('-lasttime')[offset:offset+limit]    
+            action_list = LRStats.objects.values('lrid', 'action', 'lasttime') \
+                .filter(ignored=False, action=action) \
+                .order_by('-lasttime')[offset:offset+limit]    
     else:
-        action_list =  LRStats.objects.values('lrid', 'action', 'lasttime').filter(ignored=False).\
-            order_by('-lasttime')[offset:offset+limit]
+        action_list = LRStats.objects.values('lrid', 'action', 'lasttime') \
+            .filter(ignored=False) \
+            .order_by('-lasttime')[offset:offset+limit]
     return action_list
 
 def getTopQueries(limit, geoinfo=None, since=None, offset=0):
     if (geoinfo != None and geoinfo is not ""):
         if (since):
             topqueries = QueryStats.objects.values('query', 'facets') \
-                .exclude(query__startswith="mfsp:") \
+                .exclude(query__startswith="mfs") \
                 .filter(lasttime__gte=since, geoinfo=geoinfo) \
                 .annotate(query_count=Count('query'),
                           facets_count=Count('facets')) \
                 .order_by('-query_count','-facets_count')[offset:offset+limit]
         else:
-            topqueries = QueryStats.objects.values('query', 'facets').exclude(query__startswith="mfsp:").filter(geoinfo=geoinfo).\
-                annotate(query_count=Count('query'), facets_count=Count('facets')).order_by('-query_count','-facets_count')[offset:offset+limit] 
+            topqueries = QueryStats.objects.values('query', 'facets') \
+                .exclude(query__startswith="mfs") \
+                .filter(geoinfo=geoinfo) \
+                .annotate(query_count=Count('query'), 
+                    facets_count=Count('facets')) \
+                .order_by('-query_count','-facets_count')[offset:offset+limit] 
     else:
         if (since):
-            topqueries = QueryStats.objects.values('query', 'facets').exclude(query__startswith="mfsp:").filter(lasttime__gte=since).\
-                annotate(query_count=Count('query'), facets_count=Count('facets')).order_by('-query_count','-facets_count')[offset:offset+limit]
+            topqueries = QueryStats.objects.values('query', 'facets') \
+                .exclude(query__startswith="mfs") \
+                .filter(lasttime__gte=since) \
+                .annotate(query_count=Count('query'), 
+                    facets_count=Count('facets')) \
+                .order_by('-query_count','-facets_count')[offset:offset+limit]
         else:
-            topqueries = QueryStats.objects.values('query', 'facets').exclude(query__startswith="mfsp:").\
-                annotate(query_count=Count('query'), facets_count=Count('facets')).order_by('-query_count','-facets_count')[offset:offset+limit]
+            topqueries = QueryStats.objects.values('query', 'facets') \
+                .exclude(query__startswith="mfs") \
+                .annotate(query_count=Count('query'), 
+                    facets_count=Count('facets')) \
+                .order_by('-query_count','-facets_count')[offset:offset+limit]
     return topqueries
     
 def getLastQuery(limit, geoinfo=None, offset=0):
     if (geoinfo != None and geoinfo is not ""):
-        lastquery = QueryStats.objects.values('query', 'facets', 'lasttime', 'found').exclude(query__startswith="mfsp:").\
-            filter(geoinfo=geoinfo).order_by('-lasttime')[offset:offset+limit]
+        lastquery = QueryStats.objects.values('query', 'facets', 'lasttime', 'found') \
+            .exclude(query__startswith="mfs") \
+            .filter(geoinfo=geoinfo) \
+            .order_by('-lasttime')[offset:offset+limit]
     else:
         lastquery = QueryStats.objects \
             .values('query', 'facets', 'lasttime', 'found') \
-            .exclude(query__startswith="mfsp:") \
+            .exclude(query__startswith="mfs") \
             .order_by('-lasttime')[offset:offset+limit]
     return lastquery
 
@@ -276,7 +293,6 @@ def updateUsageStats(resources, create=False):
 
     #force recreate usage stats
     if create:
-        UsageStats.objects.all().delete()
         usagethread = UsageThread(USAGETHREADNAME, resources)
         usagethread.setName(USAGETHREADNAME)
         usagethread.start()
@@ -328,15 +344,15 @@ def _get_ipaddress(request):
     Returns the IP address store in META request. Check if the request 
     comes from some automatic programm (bot, spider, ..) removing the IP address
     (in this way the statistics will not be distorted)
-    """
+    """    
     if request != None:
-        remote_addr = getattr(request.META, 'REMOTE_ADDR', '')
-        user_agent = getattr(request.META, 'HTTP_USER_AGENT', '')
+        ip_address = request.META.get('HTTP_X_FORWARDED_FOR', '') or request.META.get('REMOTE_ADDR') or ''
+        user_agent = request.META.get('HTTP_USER_AGENT') or ''
         if user_agent != '':
             if not BOT_AGENT_RE.match(user_agent):
-                return remote_addr
+                return ip_address
         else:
-            return remote_addr
+            return ip_address
     return ''
 
 
@@ -367,9 +383,11 @@ class UsageThread(threading.Thread):
         for resource in self.resources:
             if (resource.storage_object.published):
                 try:
-                    _update_usage_stats(resource.id, resource.export_to_elementtree())
-                    self.done += 1
+                    # pylint: disable-msg=E1101
+                    if not UsageStats.filter(lrid=resource.storage_object.identifier).exists():
+                        _update_usage_stats(resource.storage_object.identifier, resource.export_to_elementtree())
+                        self.done += 1
                 # pylint: disable-msg=W0703
                 except Exception, e:
-                    LOGGER.debug('ERROR! Usage statistics updating failed on resource {}: {}'.format(resource.id, e))
+                    LOGGER.debug('ERROR! Usage statistics updating failed on resource {}: {}'.format(resource.storage_object.identifier, e))
 

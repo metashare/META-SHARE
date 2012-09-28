@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourceInfo xmlns:ms="http://www.ilsp.gr/META-XMLSchema"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
   <identificationInfo>
     <resourceName lang="en-us">Test Resource 2</resourceName>
     <description lang="en-us">another resource for testing</description>
@@ -10,7 +11,7 @@
   <distributionInfo>
     <availability>available-unrestrictedUse</availability>
     <licenceInfo>
-      <licence>CC_BY-NC-SA</licence>
+      <licence>CC-BY-NC-SA</licence>
       <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
       <restrictionsOfUse>shareAlike</restrictionsOfUse>
       <restrictionsOfUse>attribution</restrictionsOfUse>
@@ -27,7 +28,7 @@
       <downloadLocation>http://www.example.org/dl2</downloadLocation>
     </licenceInfo>
     <licenceInfo>
-      <licence>CC_BY-SA_3.0</licence>
+      <licence>CC-BY-SA</licence>
       <restrictionsOfUse>attribution</restrictionsOfUse>
       <restrictionsOfUse>shareAlike</restrictionsOfUse>
       <distributionAccessMedium>downloadable</distributionAccessMedium>

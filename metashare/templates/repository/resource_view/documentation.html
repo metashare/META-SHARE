@@ -1,175 +1,149 @@
 {% if type == "Documentation" %}
-<label class='component'>Documentation:</label>
 {% else %}
-	{% if type == "Annotation_manual" %}
-		<b>Annotation manual: </b>
+	{% if level == "simple" %}
+		<label class='indented'><strong>{{type}}:</strong></label>
 	{% else %}
-		{% if type == "Evaluation_report" %}
-			<b>Evaluation report: </b>
-		{% endif %}
+		<label class={% if level == "sub" %}'subtitle'{% else %}'title'{% endif %}>{{type}}</label>
 	{% endif %}
 {% endif %}
 
-	{% if documentation.Document_type %}
-		<div class="dataline indented">
+{% if level == "sub" or level == "simple" or indent == "yes" %}<div class="indented">{% endif %}
+
+	{% if documentation.Document %}
+		<div class="dataline">
 			<label>
-				<b>Document Type:</b> {{ documentation.Document_type }}
+				<strong>Document Type:</strong> {{ documentation.Document }}
 			</label>
 		</div>
 	{% endif %}
-	
-	<div class="dataline indented">
+		
+	<div class="dataline">
 		<label>
-			<b>Title:</b> 
-			{% if documentation.Url %}
-				<a href="{{documentation.Url}}" target='_blank'>
-			{% endif %}
-			{{ documentation.Title }}
-			{% if documentation.Url %}
-				</a>
-			{% endif %}
+		{% if documentation.Author %}
+			{{ documentation.Author }}, 			
+		{% endif %}
+		{% if documentation.Url %}
+			<a href="{{documentation.Url}}" target='_blank'>
+		{% endif %}
+		<strong><i>{{ documentation.Title }}</i></strong>
+		{% if documentation.Url %}
+			</a>
+		{% endif %}
+		{% if documentation.Journal %}
+			. In: {{ documentation.Journal }}
+		{% endif %}
+		{% if documentation.Volume %}
+			{{ documentation.Volume }}
+		{% endif %}
+		{% if documentation.Pages %}
+			, pp. {{ documentation.Pages }}
+		{% endif %}
+		
 		</label>
 	</div>
 	
-	{% if documentation.Author %}
-		<div class="dataline indented">
-			<label>
-				<b>Author:</b> {{ documentation.Author }}
-			</label>
-		</div>
-	{% endif %}
-	
 	{% if documentation.Editor %}
-		<div class="dataline indented">
+		<div class="dataline">
 			<label>
-				<b>Editor:</b> {{ documentation.Editor }}
+				<strong>Editor:</strong> {{ documentation.Editor }}
 			</label>
 		</div>
 	{% endif %}
 	
 	{% if documentation.Year %}
-		<div class="dataline indented">
+		<div class="dataline">
 			<label>
-				<b>Year:</b> {{ documentation.Year }}
+				<strong>Year:</strong> {{ documentation.Year }}
 			</label>
 		</div>
 	{% endif %}
 	
 	{% if documentation.Publisher %}
-		 <div class="dataline indented">
+		 <div class="dataline">
 			<label>
-				<b>Publisher:</b> {{ documentation.Publisher }}
+				<strong>Publisher:</strong> {{ documentation.Publisher }}
 			</label>
 		</div>
 	{% endif %}
 	
 	{% if documentation.Book_title %}
-		 <div class="dataline indented">
+		 <div class="dataline">
 			<label>
-				<b>Book Title:</b> {{ documentation.Book_title }}
+				<strong>Book Title:</strong> {{ documentation.Book_title }}
 			</label>
 		</div>
-	{% endif %}
+	{% endif %}	
 	
-	{% if documentation.Journal %}
-		 <div class="dataline indented">
-			<label>
-				<b>Journal:</b> {{ documentation.Journal }}
-			</label>
-		</div>
-	{% endif %}
-	
-	{% if documentation.Volume %}
-		 <div class="dataline indented">
-			<label>
-				<b>Volume:</b> {{ documentation.Volume }}
-			</label>
-		</div>
-	{% endif %}
 	
 	{% if documentation.Series %}
-		 <div class="dataline indented">
+		 <div class="dataline">
 			<label>
-				<b>Series:</b> {{ documentation.Series }}
+				<strong>Series:</strong> {{ documentation.Series }}
 			</label>
 		</div>
-	{% endif %}
+	{% endif %}	
 	
-	{% if documentation.Pages %}
-		 <div class="dataline indented">
-			<label>
-				<b>Pages:</b> {{ documentation.Pages }}
-			</label>
-		</div>
-	{% endif %}
 	
 	{% if documentation.Edition %}
-		 <div class="dataline indented">
+		 <div class="dataline">
 			<label>
-				<b>Edition:</b> {{ documentation.Edition }}
+				<strong>Edition:</strong> {{ documentation.Edition }}
 			</label>
 		</div>
 	{% endif %}
 	
 	{% if documentation.Conference %}
-		 <div class="dataline indented">
+		 <div class="dataline">
 			<label>
-				<b>Conference:</b> {{ documentation.Conference }}
-			</label>
-		</div>
-	{% endif %}
-
-	{% if documentation.Edition %}
-		 <div class="dataline indented">
-			<label>
-				<b>Edition:</b> {{ documentation.Edition }}
+				<strong>Conference:</strong> {{ documentation.Conference }}
 			</label>
 		</div>
 	{% endif %}
 	
 	{% if documentation.Doi %}
-		 <div class="dataline indented">
+		 <div class="dataline">
 			<label>
-				<b>Digital Object Identifier - DOI:</b> {{ documentation.Doi }}
+				<strong>Digital Object Identifier - DOI:</strong> {{ documentation.Doi }}
 			</label>
 		</div>
 	{% endif %}
 	
 	{% if documentation.Issn %}
-		 <div class="dataline indented">
+		 <div class="dataline">
 			<label>
-				<b>ISSN:</b> {{ documentation.Issn }}
+				<strong>ISSN:</strong> {{ documentation.Issn }}
 			</label>
 		</div>
 	{% endif %}
 	
 	{% if documentation.Isbn %}
-		 <div class="dataline indented">
+		 <div class="dataline">
 			<label>
-				<b>ISBN:</b> {{ documentation.Isbn }}
+				<strong>ISBN:</strong> {{ documentation.Isbn }}
 			</label>
 		</div>
 	{% endif %}
 	
 	{% if documentation.Keywords %}
-		 <div class="dataline indented">
+		 <div class="dataline">
 			<label>
-				<b>Keywords:</b> {{ documentation.Keywords }}
+				<strong>Keywords:</strong> {{ documentation.Keywords }}
 			</label>
 		</div>
 	{% endif %}
 	
 	{% if documentation.Document_language_name %}
-		 <div class="dataline indented">
+		 <div class="dataline">
 			<label>
-				<b>Document Language:</b> 
+				<strong>Document Language:</strong> 
 				{% if documentation.Document_language_id %}
-					<span title="{{documentation.Document_language_id}}">
+					<label title="{{documentation.Document_language_id}}">
 				{% endif %}
 				{{ documentation.Document_language_name }}
 				{% if documentation.Document_language_id %}
-					</span>
+					</label>
 				{% endif %}
 			</label>
 		</div>
 	{% endif %}
+{% if level == "sub" or level == "simple" or indent == "yes" %}</div>{% endif %}

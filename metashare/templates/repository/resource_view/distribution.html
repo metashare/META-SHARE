@@ -1,12 +1,12 @@
+{% load replace %}
 {% spaceless %}
 
 <label class='component'>Distribution</label>
 
-
 <label class="title">Availability</label>
 
 {% if distribution.Distribution.Availability %}
-	 <div class="dataline">
+	 <div class="dataline indented">
 		<label>
 			{{ distribution.Distribution.Availability }}
 		</label>
@@ -14,59 +14,37 @@
 {% endif %}
 
 {% if distribution.Distribution.Availability_start_date %}
-	 <div class="dataline">
+	 <div class="dataline indented">
 		<label>
-			<b>Start date: </b>{{ distribution.Distribution.Availability_start_date|date:"SHORT_DATE_FORMAT" }}
+			<strong>Start date: </strong>{{ distribution.Distribution.Availability_start_date|date:"SHORT_DATE_FORMAT" }}
 		</label>
 	</div>
 {% endif %}
 
 {% if distribution.Distribution.Availability_end_date %}
-	 <div class="dataline">
+	 <div class="dataline indented">
 		<label>
-			<b>End date: </b>{{ distribution.Distribution.Availability_end_date|date:"SHORT_DATE_FORMAT" }}
+			<strong>End date: </strong>{{ distribution.Distribution.Availability_end_date|date:"SHORT_DATE_FORMAT" }}
 		</label>
 	</div>
 {% endif %}
 
-
-
-
-{% if distribution.Distribution.Licence %}
-<label class="title">Licence Information</label>
-{% if distribution.Distribution.Licence.Licence %}
-	 <div class="dataline">
-		<label>
-			<b>Licence: </b>{{ distribution.Distribution.Licence.Licence }}
-		</label>
-	</div>
+{% if "Licence" in distribution.Distribution %}
+	<label class="title">Licence</label>
+	{% for key, value in distribution.Distribution.items %}
+		{% if "Licence" in key %}
+	    	{% include "repository/resource_view/licence.html" with licence=value %}
+		{% endif %}
+	{% endfor %}
 {% endif %}
 
-{% if distribution.Distribution.Licence.Restrictions_of_use %}
-	 <div class="dataline">
-		<label>
-			<b>Restrictions: </b>{{ distribution.Distribution.Licence.Restrictions_of_use }}
-		</label>
-	</div>
-{% endif %}
-
-{% if distribution.Distribution.Licence.Distribution_access_medium %}
-	 <div class="dataline">
-		<label>
-			<b>Distribution Access/Medium: </b>{{ distribution.Distribution.Licence.Distribution_access_medium }}
-		</label>
-	</div>
-{% endif %}
-
-{% if distribution.Distribution.Licence.Restrictions_of_use %}
-	 <div class="dataline">
-		<label>
-			<b>Restrictions: </b>{{ distribution.Distribution.Restrictions_of_use }}
-		</label>
-	</div>
-{% endif %}
-
-
+{% if distribution.Distribution.Ipr_holder %}
+	<label class="title">IPR Holder</label>
+	{% for key, value in distribution.Distribution.items %}
+		{% if "Ipr_holder" in key %}
+	    	{% include "repository/resource_view/person.html" with person_dict=value.Ipr_holder type="IPR Holder" %}
+		{% endif %}
+	{% endfor %}
 {% endif %}
 
 {% endspaceless %}

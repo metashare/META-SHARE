@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+	<identificationInfo>
+		<resourceName lang="en-us">Italian TTS Speech Corpus (Appen)</resourceName>
+		<description lang="en-us">The Italian TTS Speech Corpus contains the recordings of 1 native Italian speaker recorded in a studio over 1 channel. The Italian TTS Speech Corpus contains the recordings of 1 native Italian speaker (male, 50 years old) recorded in a studio over 1 channel (Shure SM15 unidirectional professional head-word condenser microphone). The data collection and transcription were performed by Appen (Australia). Speech samples are stored as sequences of 16-bit 22.05 kHz PCM in uncompressed WAV files. The speaker read 3,300 prompted sentences covering all legal triphones and diphones. The database is provided with orthographic transcriptions in SAMPA, including canonical and alternative pronunciation, and syllable, stress and acoustic events markings. All transcriptions were segmented at the utterance (sentence/command word) level, annotated at the word level and checked manually. A pronunciation lexicon including 7,300 headwords (plus variants) is also available. This database is aimed to be used within text-to-speech and speech synthesis applications.</description>
+        <url>http://catalog.elra.info/product_info.php?products_id=1</url>
+        <metaShareId>String</metaShareId>
+		<identifier>S0148</identifier>
+	</identificationInfo>
+	<distributionInfo>
+		<availability>available-restrictedUse</availability>
+		<licenceInfo>
+			<licence>ELRA_END_USER</licence>
+			<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+			<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+			<fee>Academic org. ELRA Members: 2000.00€</fee>
+		</licenceInfo>
+		<licenceInfo>
+			<licence>ELRA_END_USER</licence>
+			<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+			<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+			<fee>Academic org. Non ELRA Members: 3500.00€</fee>
+		</licenceInfo>
+		<licenceInfo>
+			<licence>ELRA_END_USER</licence>
+			<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+			<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+			<fee>Commercial org. ELRA Members: 9000.00€</fee>
+		</licenceInfo>
+		<licenceInfo>
+			<licence>ELRA_END_USER</licence>
+			<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+			<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+			<fee>Commercial org. Non ELRA Members: 11000.00€</fee>
+		</licenceInfo>
+		<licenceInfo>
+			<licence>ELRA_VAR</licence>
+			<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+			<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+			<fee>Academic org. ELRA Members: 9000.00€</fee>
+		</licenceInfo>
+		<licenceInfo>
+			<licence>ELRA_VAR</licence>
+			<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+			<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+			<fee>Academic org. Non ELRA Members: 11000.00€</fee>
+		</licenceInfo>
+		<licenceInfo>
+			<licence>ELRA_VAR</licence>
+			<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+			<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+			<fee>Commercial org. ELRA Members: 9000.00€</fee>
+		</licenceInfo>
+		<licenceInfo>
+			<licence>ELRA_VAR</licence>
+			<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+			<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+			<fee>Commercial org. Non ELRA Members: 11000.00€</fee>
+		</licenceInfo>
+      <availabilityStartDate>2003-07-15</availabilityStartDate>
+	</distributionInfo>
+	<contactPerson>
+		<surname lang="en-us">Valérie</surname>
+		<givenName lang="en-us">Mapelli</givenName>
+		<communicationInfo>
+			<email>mapelli@elda.org</email>
+			<url>http://www.elda.org</url>
+			<address>55-57 rue Brillat-Savarin</address>
+			<zipCode>75013</zipCode>
+			<city>Paris</city>
+			<country>France</country>
+			<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+			<faxNumber>+1 43 14 33 30</faxNumber>
+		</communicationInfo>
+		<affiliation>
+			<organizationName lang="en-us">Evaluations and Language Resources Distribution Agency</organizationName>
+			<organizationShortName lang="en-us">ELDA</organizationShortName>
+			<departmentName lang="en-us">Sales</departmentName>
+			<communicationInfo>
+				<email>secretariat@elda.org</email>
+				<url>http://www.elda.org</url>
+				<address>55-57 rue Brillat-Savarin</address>
+				<zipCode>75013</zipCode>
+				<city>Paris</city>
+				<country>France</country>
+				<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+				<faxNumber>+1 43 14 33 30</faxNumber>
+			</communicationInfo>
+		</affiliation>
+	</contactPerson>
+	<metadataInfo>
+		<metadataCreationDate>2005-05-12</metadataCreationDate>
+		<metadataCreator>
+			<surname lang="en-us">Valérie</surname>
+			<givenName lang="en-us">Mapelli</givenName>
+			<communicationInfo>
+				<email>mapelli@elda.org</email>
+				<url>http://www.elda.org</url>
+				<address>55-57 rue Brillat-Savarin</address>
+				<zipCode>75013</zipCode>
+				<city>Paris</city>
+				<country>France</country>
+				<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+				<faxNumber>+1 43 14 33 30</faxNumber>
+			</communicationInfo>
+		</metadataCreator>
+	</metadataInfo>
+	<versionInfo>
+		<version>1.0</version>
+		<lastDateUpdated>2005-05-12</lastDateUpdated>
+	</versionInfo>
+    <resourceDocumentationInfo>
+       <documentation>
+          <documentInfo>
+             <documentType>unpublished</documentType>
+             <title>SMP_E0021_TRS_AUTO.pdf</title>
+          </documentInfo>
+       </documentation>
+    </resourceDocumentationInfo>
+  <resourceCreationInfo>
+    <resourceCreator><personInfo>
+      <surname lang="en-us">Valérie</surname>
+      <givenName lang="en-us">Mapelli</givenName>
+      <communicationInfo>
+        <email>mapelli@elda.org</email>
+        <url>http://www.elda.org</url>
+        <address>55-57 rue Brillat-Savarin</address>
+        <zipCode>75013</zipCode>
+        <city>Paris</city>
+        <country>France</country>
+        <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+        <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+      <affiliation>
+        <organizationName lang="en-us">Evaluations and Language Resources Distribution Agency</organizationName>
+        <organizationShortName lang="en-us">ELDA</organizationShortName>
+        <departmentName lang="en-us">Sales</departmentName>
+        <communicationInfo>
+          <email>secretariat@elda.org</email>
+          <url>http://www.elda.org</url>
+          <address>55-57 rue Brillat-Savarin</address>
+          <zipCode>75013</zipCode>
+          <city>Paris</city>
+          <country>France</country>
+          <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+          <faxNumber>+1 43 14 33 30</faxNumber>
+        </communicationInfo>
+      </affiliation></personInfo>
+    </resourceCreator>
+        <fundingProject>
+           <projectName>Verbmobil II</projectName>
+           <fundingType>other</fundingType>
+        </fundingProject>
+  </resourceCreationInfo>
+  <relationInfo>
+    <relationType>isExtensionOf</relationType>
+    <relatedResource>
+      <targetResourceNameURI>Nice project</targetResourceNameURI>
+    </relatedResource>
+  </relationInfo>
+	<resourceComponentType>
+		<corpusInfo>
+			<resourceType>corpus</resourceType>
+			<corpusMediaType>
+				<corpusTextInfo>
+					<mediaType>text</mediaType>
+					<lingualityInfo>
+						<lingualityType>monolingual</lingualityType>
+					</lingualityInfo>
+					<languageInfo>
+						<languageId>ita</languageId>
+						<languageName>Italian</languageName>
+						<languageVarietyInfo>
+							<languageVarietyType>other</languageVarietyType>
+							<languageVarietyName>Italy</languageVarietyName>
+							<sizePerLanguageVariety>
+								<size>123</size>
+								<sizeUnit>terms</sizeUnit>
+							</sizePerLanguageVariety>
+						</languageVarietyInfo>
+					</languageInfo>
+					<modalityInfo>
+						<modalityType>spokenLanguage</modalityType>
+					</modalityInfo>
+                    <sizeInfo><size>12</size><sizeUnit>bytes</sizeUnit></sizeInfo>
+				</corpusTextInfo>
+			</corpusMediaType>
+		</corpusInfo>
+	</resourceComponentType>
+</resourceInfo>

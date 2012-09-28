@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+      <identificationInfo>
+        <resourceName lang="und">ILSP PsychoLinguistic Resource</resourceName>
+        <description lang="und">Word list with corresponding quantative lexical and subl-lexical properties useful to psycholinguistic research</description>
+        <resourceShortName lang="und">IPLR</resourceShortName>
+          <metaShareId>
+            NOT_DEFINED_FOR_V2
+          </metaShareId>
+      </identificationInfo>
+      <distributionInfo>
+        <availability>available-restrictedUse</availability>
+          <licenceInfo>
+            <licence>MSCommons-BY-NC-ND</licence>
+            <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+            <restrictionsOfUse>attribution</restrictionsOfUse>
+            <restrictionsOfUse>noDerivatives</restrictionsOfUse>
+            <restrictionsOfUse>noRedistribution</restrictionsOfUse>
+          </licenceInfo>
+      </distributionInfo>
+      <contactPerson>
+        <surname lang="und">Chalamandaris</surname>
+        <givenName lang="und">Aimilios</givenName>
+          <communicationInfo>
+            <email>achalam@ilsp.athena-innovation.gr</email>
+          </communicationInfo>
+      </contactPerson>
+      <metadataInfo>
+        <metadataCreationDate>2012-02-02</metadataCreationDate>
+        <source>META</source>
+      </metadataInfo>
+      <resourceDocumentationInfo>
+          <documentation>
+              <documentInfo>
+                <documentType>inProceedings</documentType>
+                <title lang="en">All Greek to me! An automatic Greeklish to Greek Transliteration System</title>
+                <author>Χαλαμανδάρης, Α., Πρωτόπαπας, Α., Τσιάκουλης, Π. &amp; Ράπτης, Σ.</author>
+                <year>2006</year>
+                <conference>Language Resources and Evaluation Conference (LREC-2006)</conference>
+              </documentInfo>
+          </documentation>
+      </resourceDocumentationInfo>
+      <resourceCreationInfo>
+          <resourceCreator>
+              <personInfo>
+                <surname lang="und">Protopapas</surname>
+                <givenName lang="und">Athanassios</givenName>
+                  <communicationInfo>
+                    <email>aprotopapas@phs.uoa.gr</email>
+                  </communicationInfo>
+              </personInfo>
+          </resourceCreator>
+        <creationEndDate>2009-12-31</creationEndDate>
+      </resourceCreationInfo>
+      <resourceComponentType>
+          <lexicalConceptualResourceInfo>
+            <resourceType>lexicalConceptualResource</resourceType>
+            <lexicalConceptualResourceType>wordList</lexicalConceptualResourceType>
+              <lexicalConceptualResourceEncodingInfo>
+                <encodingLevel>other</encodingLevel>
+              </lexicalConceptualResourceEncodingInfo>
+              <lexicalConceptualResourceMediaType>
+                  <lexicalConceptualResourceTextInfo>
+                    <mediaType>text</mediaType>
+                      <lingualityInfo>
+                        <lingualityType>monolingual</lingualityType>
+                      </lingualityInfo>
+                      <languageInfo>
+                        <languageId>ell</languageId>
+                        <languageName>Modern Greek (1453-)</languageName>
+                      </languageInfo>
+                      <sizeInfo>
+                        <size>217664</size>
+                        <sizeUnit>entries</sizeUnit>
+                      </sizeInfo>
+                  </lexicalConceptualResourceTextInfo>
+              </lexicalConceptualResourceMediaType>
+          </lexicalConceptualResourceInfo>
+      </resourceComponentType>
+  </resourceInfo>

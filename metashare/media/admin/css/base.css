@@ -1,6 +1,17 @@
 /*
     DJANGO Admin styles
 */
+@font-face {
+    font-family: 'TitilliumText';
+    src: url('../../fonts/TitilliumTextRegular.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'TitilliumText';
+    src: url('../../fonts/TitilliumTextBold.woff') format('woff');
+    font-weight: bold;
+}
+
 
 body {
     margin: 0;

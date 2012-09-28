@@ -14,9 +14,10 @@ from selectable.forms.widgets import SelectableMediaMixin, SelectableMultiWidget
     LookupMultipleHiddenInput
 from django.utils.http import urlencode
 from metashare import settings
-from selectable.forms.widgets import AutoCompleteWidget        
+from selectable.forms.widgets import AutoCompleteWidget, AutoCompleteSelectWidget        
 from django.forms.util import flatatt
 from django.utils.encoding import force_unicode
+from django import forms
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -76,7 +77,7 @@ class DictWidget(widgets.Widget):
             # (we have gotten an existing Python dict)
             idx = 0
             for key, val in value.iteritems():
-                _entries.append(self._get_dict_entry(name, idx, key, val))
+                _entries.append(self._get_dict_entry(name, idx, key, val, value))
                 idx += 1
         elif isinstance(value, list):
             # (we have gotten a non-valid key/value pair list that was created
@@ -84,7 +85,7 @@ class DictWidget(widgets.Widget):
             idx = 0
             for entry in value:
                 _entries.append(self._get_dict_entry(name, idx, entry[0],
-                                                     entry[1]))
+                                                     entry[1], value))
                 idx += 1
         elif not self.blank:
             # (we probably have gotten the value None, i.e., the dictionary is
@@ -94,7 +95,7 @@ class DictWidget(widgets.Widget):
         # render final HTML for this widget instance
         return mark_safe(render_to_string(self._template, _context))
 
-    def _get_dict_entry(self, field_name, idx, key, value):
+    def _get_dict_entry(self, field_name, idx, key, value, values_list=None):
         """
         Returns a tuple (pair) with a rendered key and value input field.
         
@@ -161,8 +162,11 @@ class LangDictWidget(DictWidget):
         # path to the Django template which is used to render this widget
         self._template = 'repository/editor/lang_dict_widget.html'
 
-    def _get_dict_entry(self, field_name, idx, key, value):
-        if not key:
+    def _get_dict_entry(self, field_name, idx, key, value, values_list=None):
+        # Set the default value only if the values_list is empty.
+        # This should occur if the key,value does not come from
+        # the database nor from user input.
+        if not values_list and not key and not value:
             # by default we (blindly) propose the ISO 639-1 language code for
             # English (as per WP7 request in issue #206)
             key = 'en'
@@ -175,7 +179,12 @@ class LangDictWidget(DictWidget):
         from the JavaScript of `DictWidget` and CSS specific to this widget.
         """
         # pylint: disable-msg=E1101
-        return Media(js = ('{}js/lang_dict_widget.js'\
+        return Media(js = ('js/jquery-ui.min.js',
+                           '{}js/pycountry.js'\
+                           .format(settings.ADMIN_MEDIA_PREFIX),
+                           '{}js/autocomp.js'\
+                           .format(settings.ADMIN_MEDIA_PREFIX),
+                           '{}js/lang_dict_widget.js'\
                            .format(settings.ADMIN_MEDIA_PREFIX),)) \
             + Media(css={'all': ('{}css/lang_dict_widget.css'.format(
                                         settings.ADMIN_MEDIA_PREFIX),)})
@@ -632,6 +641,19 @@ class AutoCompleteSelectMultipleEditWidget(SelectableMultiWidget, SelectableMedi
 
     def decompress(self, value):
         pass
+    
+    # Copied from django.contrib.admin.widgets.ManyToManyRawIdWidget class
+    def _has_changed(self, initial, data):
+        if initial is None:
+            initial = []
+        if data is None:
+            data = []
+        if len(initial) != len(data):
+            return True
+        for pk1, pk2 in zip(initial, data):
+            if force_unicode(pk1) != force_unicode(pk2):
+                return True
+        return False
 
 class AutoCompleteSelectMultipleSubClsWidget(AutoCompleteSelectMultipleEditWidget):
 
@@ -668,3 +690,30 @@ class LookupMultipleHiddenInputMS(LookupMultipleHiddenInput):
                 input_attrs['model-class'] = item_cls
             inputs.append(u'<input%s />' % flatatt(input_attrs))
         return mark_safe(u'\n'.join(inputs))
+
+class AutoCompleteSelectSingleWidget(AutoCompleteSelectWidget):
+
+    def __init__(self, lookup_class, *args, **kwargs):
+        self.lookup_class = lookup_class
+        self.allow_new = kwargs.pop('allow_new', False)
+        self.limit = kwargs.pop('limit', None)
+        query_params = kwargs.pop('query_params', {})
+        attrs = {
+            u'data-selectable-throbber-img': '{0}img/admin/throbber_16.gif'.format(settings.ADMIN_MEDIA_PREFIX),
+            u'data-selectable-use-state-error': 'false',
+        }
+        widget_list = [
+            AutoCompleteWidget(
+                lookup_class, allow_new=self.allow_new,
+                limit=self.limit, query_params=query_params, attrs=attrs
+            ),
+            forms.HiddenInput(attrs={u'data-selectable-type': 'hidden'})
+        ]
+        # Directly call the super-super-class __init__ method.
+        # The super-class __init__ method does not allow custom attributes
+        # to be passed to the AutoCompleteWidget. For this reason this
+        # __init__ method is a modified version of the super-class one
+        # and replaces it.
+        # pylint: disable-msg=E1003
+        super(AutoCompleteSelectWidget, self).__init__(widget_list, *args, **kwargs)
+    

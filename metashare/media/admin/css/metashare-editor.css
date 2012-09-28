@@ -21,6 +21,7 @@
 	-moz-box-shadow: 0px  5px 10px #CCCCCC;
 	-webkit-box-shadow: 0px  5px 10px #CCCCCC;
 	box-shadow: 0px 5px 10px #CCCCCC;
+	line-height: 1.5;
 }
 
 #container > div:nth-child(2){
@@ -112,7 +113,7 @@ div#header a:link, a:visited,a:hover,a:active{
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 	white-space: nowrap;
-	font-family: 'TitilliumText25L', "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: 'TitilliumText', "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-weight: 600;
   	text-shadow: 0px -1px 1px #FF9900;
 	color: white;
@@ -189,7 +190,6 @@ div.form-row.distributionInfo > div.field-box, div.form-row.usageInfo > div.fiel
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 	white-space: nowrap;
-	font-family: 'TitilliumText25L', "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-weight: 600;
   	text-shadow: 0px -1px 1px #FF9900;
 	color: white !important;

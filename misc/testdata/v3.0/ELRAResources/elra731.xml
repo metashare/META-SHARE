@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">ISLE Speech Corpus</resourceName>
+      <resourceName lang="fr">Corpus de parole ISLE</resourceName>
+      <description lang="en">Approx. 20 minutes of speech (per speaker) from 23 German and 23 Italian intermediate learners of English. Each speaker recorded sentences from several blocks of differing types (reading simple sentences, using minimal pairs, giving answers to multiple choice questions). The prompts were of varying perplexities.About 2/3 of the data for each speaker was annotated by one of a team of linguists. The files were corrected first at the word  level, and an automatic recognizer was then used to produce phone-level annotations. The annotator then re-annotated each sentence to mark phone and stress errors (e.g., substitutions, insertions, or deletions).Corpus details:    * a total of 46 speakers (23 German and 23 Italian.)    * 11484 utterances    * 1.92 gigabytes of WAV files (4 CDs)    * 17 hours, 54 minutes, and 44 seconds of speech data A much more detailed explanation of the ISLE corpus will be available in the proceedings of LREC 2000. An electronic copy of this paper may be obtained by sending an email to Dr. Wolfgang Menzel at &lt;menzel@nats.informatik.uni-hamburg.de&gt;.W. Menzel, E. Atwell, P. Bonaventura, D. Herron, P. Howarth, R. Morton, and C. Souter. "The ISLE corpus of non-native spoken English", Proc. Second LREC.</description>
+      <description lang="fr">Ce corpus comprend environ 20 minutes (par locuteur) d'enregistrements de 23 locuteurs allemands et 23 locuteurs italiens d'un niveau intermédiaire d'apprentissage de l'anglais. Chaque locuteur a enregistré des phrases de plusieurs blocs et différents types (lecture de phrases simples, usage de paires minimales, réponses à des questions à choix multiples).Près des 2/3 des données pour chaque locuteur ont été annotés par une équipe de linguistes. Les fichiers ont d'abord été corrigés au niveau du mot, puis une reconnaissance automatique a été utilisée pour produire les annotations phonétiques. Une nouvelle annotation a ensuite été réalisée afin de marquer les phonèmes et les erreurs d'accents (par ex: substitutions, insertions, ou suppressions).Contenu du corpus :    * 46 locuteurs (23 allemands et 23 italiens)    * 11484 occurrences    * 1,92 gigabytes de fichiers WAV (4 CD)    * 17 heures, 54 minutes, et 44 secondes de données de paroleUne description plus détaillée du corpus sera disponible dans les actes de LREC 2000. Une copie électronique du papier peut être obtenue en s'adressant directement à ELRA (Référence : W. Menzel, E. Atwell, P. Bonaventura, D. Herron, P. Howarth, R. Morton et C. Souter. "The ISLE corpus of non-native spoken English", Actes de la deuxième conférence LREC.</description>
+      <resourceShortName/>
+      <url>http://catalog.elra.info/product_info.php?products_id=568</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-S0083</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>1500.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>100.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>500.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>50.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <availabilityStartDate>2000-05-02</availabilityStartDate>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Valérie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <lastDateUpdated>2009-01-14</lastDateUpdated>
+   </versionInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusAudioInfo>
+               <mediaType>audio</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>eng</languageId>
+                  <languageName>English</languageName>
+               </languageInfo>
+               <audioSizeInfo>
+                  <sizeInfo>
+                     <size>no size available</size>
+                     <sizeUnit>other</sizeUnit>
+                  </sizeInfo>
+               </audioSizeInfo>
+            </corpusAudioInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

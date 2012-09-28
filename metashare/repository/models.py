@@ -19,7 +19,7 @@ from metashare.repository.validators import validate_lang_code_keys, \
   validate_dict_values, validate_xml_schema_year, \
   validate_matches_xml_char_production
 from metashare.settings import DJANGO_BASE, LOG_HANDLER, DJANGO_URL
-from metashare.stats.model_utils import saveLRStats, DELETE_STAT
+from metashare.stats.model_utils import saveLRStats, DELETE_STAT, UPDATE_STAT
 from metashare.storage.models import StorageObject, MASTER, COPY_CHOICES
 from metashare.recommendations.models import ResourceCountPair, \
     ResourceCountDict
@@ -202,6 +202,9 @@ class resourceInfoType_model(SchemaModel):
         
         # Call save() method from super class with all arguments.
         super(resourceInfoType_model, self).save(*args, **kwargs)
+
+        # update statistics
+        saveLRStats(self, UPDATE_STAT)
 
     def delete(self, keep_stats=False, *args, **kwargs):
         """
@@ -2847,17 +2850,15 @@ class membershipInfoType_model(SchemaModel):
         return self.unicode_(formatstring, formatargs)
 
 LICENCEINFOTYPE_LICENCE_CHOICES = _make_choices_from_list([
-  u'AGPL', u'LGPL', u'CC_BY-NC-ND', u'CC_BY-NC-SA', u'CC_BY-NC',
-  u'CC_BY-ND',u'CC_BY-SA', u'CC_BY', u'MSCommons_BY', u'MSCommons_BY-NC',
-  u'MSCommons_BY-NC-ND',u'MSCommons_BY-NC-SA', u'MSCommons_BY-ND',
-  u'MSCommons_BY-SA',u'MSCommons_COM-NR-FF', u'MSCommons_COM-NR',
-  u'MSCommons_COM-NR-ND-FF',u'MSCommons_COM-NR-ND',
-  u'MSCommons_NoCOM-NC-NR-ND-FF',u'MSCommons_NoCOM-NC-NR-ND',
-  u'MSCommons_NoCOM-NC-NR-FF',u'MSCommons_NoCOM-NC-NR', u'ELRA_EVALUATION',
-  u'ELRA_VAR',u'ELRA_END_USER', u'proprietary', u'CC0', u'CLARIN_PUB',
-  u'CLARIN_ACA-NC',u'CC_BY-SA_3.0', u'LGPLv3', u'CLARIN_ACA', u'CLARIN_RES',
-  u'Princeton_Wordnet',u'GPL', u'GFDL', u'CC_BY-NC-SA_3.0',
-  u'ApacheLicence_V2.0',u'BSD-style', u'underNegotiation', u'other', 
+  u'CC-BY', u'CC-BY-NC', u'CC-BY-NC-ND', u'CC-BY-NC-SA', u'CC-BY-ND',
+  u'CC-BY-SA',u'CC-ZERO', u'MS-C-NoReD', u'MS-C-NoReD-FF', u'MS-C-NoReD-ND',
+  u'MS-C-NoReD-ND-FF',u'MS-NC-NoReD', u'MS-NC-NoReD-FF', u'MS-NC-NoReD-ND',
+  u'MS-NC-NoReD-ND-FF',u'MSCommons-BY', u'MSCommons-BY-NC',
+  u'MSCommons-BY-NC-ND',u'MSCommons-BY-NC-SA', u'MSCommons-BY-ND',
+  u'MSCommons-BY-SA',u'CLARIN_ACA', u'CLARIN_ACA-NC', u'CLARIN_PUB',
+  u'CLARIN_RES',u'ELRA_END_USER', u'ELRA_EVALUATION', u'ELRA_VAR', u'AGPL',
+  u'ApacheLicence_2.0',u'BSD', u'BSD-style', u'GFDL', u'GPL', u'LGPL',
+  u'Princeton_Wordnet',u'proprietary', u'underNegotiation', u'other', 
 ])
 
 LICENCEINFOTYPE_RESTRICTIONSOFUSE_CHOICES = _make_choices_from_list([
@@ -2913,7 +2914,9 @@ class licenceInfoType_model(SchemaModel):
 
     licence = MultiSelectField(
       verbose_name='Licence', 
-      help_text='The licence of use for the resource',
+      help_text='The licence of use for the resource; for an overview of' \
+      ' licences, please visit: http://www.meta-net.eu/meta-share/licens' \
+      'es',
       
       max_length=1 + len(LICENCEINFOTYPE_LICENCE_CHOICES['choices']) / 4,
       choices=LICENCEINFOTYPE_LICENCE_CHOICES['choices'],

@@ -1,90 +1,90 @@
 
 
-	<label class='component'>{{ type }}</label>
+	<label class='title'>{{ type }}</label>
 	{% if data.Media_type %}
-		 <div class="dataline">
+		 <div class="dataline indented">
 			<label>
-				<b>Media type: </b>{{ data.Media_type }}
+				<strong>Media type: </strong>{{ data.Media_type }}
 			</label>
 		</div>
 	{% endif %}
 	
 	{% if data.Resource_type %}
-		 <div class="dataline">
+		 <div class="dataline indented">
 			<label>
-				<b>Resource type: </b>{{ data.Resource_type }}
+				<strong>Resource type: </strong>{{ data.Resource_type }}
 			</label>
 		</div>
 	{% endif %}
 
 	{% if data.Modality_type %}
-		 <div class="dataline">
+		 <div class="dataline indented">
 			<label>
-				<b>Modality: </b>{{ data.Modality_type }}
+				<strong>Modality: </strong>{{ data.Modality_type }}
 			</label>
 		</div>
 	{% endif %}
 	
 	{% if data.Language_name %}
-		 <div class="dataline">
-			<label title="{{ data.Language_id }} {{ data.Language_variety_name }}">
-				<b>Language: </b>{{ data.Language_name }}
+		 <div class="dataline indented">
+			<label title="{{ data.Language_id }}">
+				<strong>Language: </strong>{{ data.Language_name }} {% if data.Language_variety_name %} &mdash; <strong>variety:</strong> {{ data.Language_variety_name }} {% endif %}
 			</label>
 		</div>
 	{% endif %}
 
 	{% if data.Mime_type %}
-		 <div class="dataline">
+		 <div class="dataline indented">
 			<label>
-				<b>Mime type: </b>{{ data.Mime_type }}
+				<strong>Mime type: </strong>{{ data.Mime_type }}
 			</label>
 		</div>
 	{% endif %}
 
 	{% if data.Character_encoding %}
-		 <div class="dataline">
+		 <div class="dataline indented">
 			<label>
-				<b>Character encoding: </b>{{ data.Character_encoding }}
+				<strong>Character encoding: </strong>{{ data.Character_encoding }}
 			</label>
 		</div>
 	{% endif %}
 
 	{% if data.Annotation_type %}
-		 <div class="dataline">
+		 <div class="dataline indented">
 			<label>
-				<b>Annotation type: </b>{{ data.Annotation_type }}
+				<strong>Annotation type: </strong>{{ data.Annotation_type }}
 			</label>
 		</div>
 	{% endif %}
 	
 	{% if data.Annotation_format %}
-		 <div class="dataline">
+		 <div class="dataline indented">
 			<label>
-				<b>Annotation format: </b>{{ data.Annotation_format }}
+				<strong>Annotation format: </strong>{{ data.Annotation_format }}
 			</label>
 		</div>
 	{% endif %}
 
 	{% if data.Tagset %}
-		 <div class="dataline">
+		 <div class="dataline indented">
 			<label>
-				<b>Tagset: </b>{{ data.Tagset }}
+				<strong>Tagset: </strong>{{ data.Tagset }}
 			</label>
 		</div>
 	{% endif %}
 	
 	{% if data.Segmentation_level %}
-		 <div class="dataline">
+		 <div class="dataline indented">
 			<label>
-				<b>Segmentation level: </b>{{ data.Segmentation_level }}
+				<strong>Segmentation level: </strong>{{ data.Segmentation_level }}
 			</label>
 		</div>
 	{% endif %}
 
 	{% if data.Conformance_to_standards_best_practices %}
-		 <div class="dataline">
+		 <div class="dataline indented">
 			<label>
-				<b>Conformance to standards best practices:</b> {{ data.Conformance_to_standards_best_practices }}
+				<strong>Conformance to standards best practices:</strong> {{ data.Conformance_to_standards_best_practices }}
 			</label>
 		</div>
 	{% endif %}

@@ -25,7 +25,10 @@
 				expandEffect: 'show',
 				expandSpeed: 0,
 				collapseEffect: 'hide',
-				collapseSpeed: 0
+				collapseSpeed: 0,
+                afterExpand: function() {
+                    $(this).find('.details').css({display: 'inline'});
+                } 
 			});
 		});
 
@@ -98,14 +101,16 @@
                 	<a href="#" class="tip">
                     <img src="{{ MEDIA_URL }}stats/img/{{ stat.action }}_icon.gif"
                     alt="Last {{ stat.action }}: {{ stat.last }}"/>
-                    <b>{{ stat.count }}</b>&nbsp;
+                    <strong>{{ stat.count }}</strong>&nbsp;
                     <span>Last {{ stat.action }}: {{ stat.last }}</span>
                     </a>
                     
                 {% endif %}
             {% endfor %}
         </div>
-		<h2>{{ resourceName }} {% get_icon resourceType %}</h2>
+        {% if url.0 %}<a href="{{url.0}}" target="_blank" title="Click here to view the resource's original metadata record">{% endif %}
+			<h2>{{ resourceName }}{% get_icon resourceType %}</h2>
+	 	{% if url.0 %}</a>{% endif %}
 		
 		{% ifnotequal other_res_names|length 0 %}
 			<div class='more'>View resource name in all available languages</div>
@@ -113,13 +118,23 @@
 			{% for name in other_res_names %}<h3>{{ name }}</h3>{% endfor %} 
 			</div>
 		{% endifnotequal %}
-		
-		<h3 class="shortnames">{% for name in res_short_names %}{{ name }}<img src="{{ MEDIA_URL }}images/trenner.png" class="trenner" />{% endfor %}</h3> 
-		{% if url.0 %}
-		<h4 class='url'><a href="{{url.0}}" target="_blank">{{url.0}}</a></h4>
-		{% endif %}
-		
-		{% if not 'NOT_DEFINED' in metaShareId %}<h4 class="identifier">{{ metaShareId }}</h4>{% endif %}
+			
+			{% if res_short_names %}
+				<h3 class="shortnames"><i>{% for name in res_short_names %}{{ name }}<img src="{{ MEDIA_URL }}images/trenner.png" class="trenner" />{% endfor %}</i></h3> 
+				<div style="clear:both"></div>
+			{% endif %}
+			
+			{% if not 'NOT_DEFINED' in metaShareId %}<h4 class="identifier">{{ metaShareId }}</h4>{% endif %}
+			{% if identifier %}
+				<div style="display:block;">
+				<h4 style="float:left; padding:3px;">ID: </h4>
+				{% for id in identifier %}
+					<h4 class="identifier">{{ id }}</h4>
+		 		{% endfor %}
+		 		</div>
+	 		{% endif %}
+
+	 		
 		<h4 style="text-align:justify" class="readmore desc">{{ description }}</h4>
 		
 		{% ifnotequal other_descriptions|length 0 %}
@@ -147,10 +162,15 @@
 
 		{% include "repository/resource_view/distribution.html" with distribution=distribution_dict %}
 		
-		{% for contact_person in contact_person_dicts %}
-			 {% include "repository/resource_view/person.html" with person_dict=contact_person.Contact_person %}
-		{% endfor %}
+		
+		{% if contact_person_dicts %}
+			<label class='component'>Contact Person{{ contact_person_dicts|length|pluralize }}</label>
+			{% for contact_person in contact_person_dicts %}
+				 {% include "repository/resource_view/person.html" with person_dict=contact_person.Contact_person type="Contact Person" %}
+			{% endfor %}
+		{% endif %}
 	</div>
+	
 		
 	<div class="column middle">
 		<div class="fields">
@@ -191,6 +211,10 @@
 		  
 		{% include "repository/resource_view/metadata.html" %}
 		
+		{% if version_dict %}
+			{% include "repository/resource_view/version.html" %}
+		{% endif %}
+		
 		{% if validation_dicts %}
 			{% include "repository/resource_view/validation.html" %}
 		{% endif %}
@@ -199,17 +223,42 @@
 			{% include "repository/resource_view/usage.html" %}
 		{% endif %}
 		
-		{% if relation_dict %}
+		{% if relation_dicts %}
 			{% include "repository/resource_view/relation.html" %}
 		{% endif %}
 		
 		{% if documentation_dict %}
+		<label class="component">Documentation</label>
 			{% for key, value in documentation_dict.items %}
-				{% for key1, value1 in value.items %}		
+				{% for key1, value1 in value.items %}
+					{% if "Samples_location" in key1 %}
+						 <div class="dataline">
+									<label>
+										<strong>Samples Location: </strong><a href="{{value1}}">{{value1}}</a>
+									</label>
+								</div>
+					{% endif %}
+					{% if "Tool_documentation" in key1 %}
+						 <div class="dataline">
+									<label>
+										<strong>Tool Documentation: </strong>{{value1}}
+									</label>
+								</div>
+					{% endif %}	
 					{% for key2, value2 in value1.items %}				
-						{% if key2 == "Documentation" %}
-							{% include "repository/resource_view/documentation.html" with documentation=value2 type="Documentation" %}
-						{% endif %}
+						{% if "Documentation" in key2 %}
+							{% if value2.Title %}
+								{% include "repository/resource_view/documentation.html" with documentation=value2 type="Documentation" level="sub" %}
+							{% else %}
+								<label class="title">Document</label>
+								<div class="dataline indented">
+									<label>
+										{{value2}}
+									</label>
+								</div>
+							{% endif %}
+							<div class="separation"><hr/></div>
+						{% endif %}						
 					{% endfor %}
 				{% endfor %}
 			{% endfor %}

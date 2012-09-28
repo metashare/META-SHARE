@@ -295,15 +295,20 @@ class StorageObject(models.Model):
             # If not, create the storage folder.
             mkdir(self._storage_folder())
 
-        # update the checksum, if a downloadable file exists
         if self.master_copy:
-            checksum_updated = self._compute_checksum()
+            # update the checksum, if a downloadable file exists
+            checksum_or_url_updated = self._compute_checksum()
+            # make sure that any changes to the DJANGO_URL are also reflected
+            # in the `source_url` field of master copies
+            if self.source_url != settings.DJANGO_URL:
+                self.source_url = settings.DJANGO_URL
+                checksum_or_url_updated = True
         else:
-            checksum_updated = False
+            checksum_or_url_updated = False
 
         # for internal resources, no serialization is done
         if self.publication_status == INTERNAL:
-            if checksum_updated:
+            if checksum_or_url_updated:
                 self.save()
             return
 
@@ -325,7 +330,7 @@ class StorageObject(models.Model):
         # save storage object if required; this should always happen since
         # at least self.digest_last_checked in the local storage object 
         # has changed
-        if checksum_updated or metadata_updated or global_updated \
+        if checksum_or_url_updated or metadata_updated or global_updated \
                 or local_updated:
             self.save()
 
@@ -604,11 +609,6 @@ def add_or_update_resource(storage_json, resource_xml_string, storage_digest,
         remove_files_from_disk(storage_id)
         remove_database_entries(storage_id)
     write_to_disk(storage_id)
-    # if the resource was marked for deletion, remove that mark
-    try:
-        RemovedObject.objects.get(identifier=storage_id).delete()
-    except ObjectDoesNotExist:
-        pass
     return restore_from_folder(storage_id, copy_status=copy_status,
       storage_digest=storage_digest, source_node=source_node, force_digest=True)
 
@@ -711,23 +711,3 @@ def _get_expiration_date():
     _td = timedelta(seconds=_half_time)
     _expiration_date = datetime.now() - _td
     return _expiration_date
-
-
-class RemovedObject(models.Model):
-    """
-    Models a language resource that was completely removed from the storage layer.
-    """
-    
-    identifier = models.CharField(max_length=64, blank=False,
-      editable=False, unique=True, help_text="(Read-only) unique " \
-      "identifier holding the identifier of the removed language resource.")
-    
-    removed = models.DateTimeField(editable=False, default=datetime.now(),
-      help_text="(Read-only) removal date of the metadata XML " \
-        "for this removed object instance.")
-    
-    def __unicode__(self):
-        """
-        Returns the Unicode representation for this reomved object instance.
-        """
-        return u'<RemovedObject id="{0}">'.format(self.id)

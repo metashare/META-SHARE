@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourceInfo xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema">
+<resourceInfo xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
 <identificationInfo>
 <resourceName lang="en">C-ORAL-ROM - Integrated reference corpora for spoken romance languages. Multi-media edition; tools of analysis; standard linguistic measurements for validation in HLT</resourceName>
 <resourceName lang="fr">C-ORAL-ROM - Corpus oral de référence intégrés pour les langues romanes. Edition multimédia ; outils d'analyse, mesures linguistiques standards pour la validation en HLT</resourceName>

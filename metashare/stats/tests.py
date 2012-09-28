@@ -1,6 +1,7 @@
 import logging
 import urllib2
 from urllib import urlencode
+import uuid
 
 from django.contrib.admin.helpers import ACTION_CHECKBOX_NAME
 from django.test.client import Client
@@ -9,11 +10,11 @@ from django.test.testcases import TestCase
 from metashare import test_utils
 from metashare.accounts.models import EditorGroup, EditorGroupManagers
 from metashare.repository.models import resourceInfoType_model
-from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER, STATS_SERVER_URL, DJANGO_URL
+from metashare.settings import ROOT_PATH, STORAGE_PATH, LOG_HANDLER, DJANGO_BASE, STATS_SERVER_URL, DJANGO_URL
 from metashare.storage.models import INGESTED
-from metashare.stats.model_utils import saveLRStats, getLRLast, saveQueryStats, getLastQuery, \
+from metashare.stats.model_utils import UsageStats, saveLRStats, getLRLast, getLastQuery, \
     UPDATE_STAT, VIEW_STAT, RETRIEVE_STAT, DOWNLOAD_STAT
-
+from metashare.stats.views import callServerStats
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -38,17 +39,23 @@ class StatsTest(TestCase):
         _test_manager_group = \
             EditorGroupManagers.objects.create(name='test_manager_group',
                                                managed_group=_test_editor_group)            
-        test_utils.create_manager_user(
+        owner = test_utils.create_manager_user(
             'manageruser', 'manager@example.com', 'secret',
-            (_test_editor_group, _test_manager_group))
+            (_test_editor_group, _test_manager_group))       
         
+        # load first resource
         _fixture = '{0}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
         _result = test_utils.import_xml(_fixture)
         _result.editor_groups.add(_test_editor_group)
-        #StatsTest.resource_id = _result.id      
+        _result.owners.add(owner)
+        # load second resource
         _fixture = '{0}/repository/test_fixtures/ingested-corpus-AudioVideo-French.xml'.format(ROOT_PATH)
         _result = test_utils.import_xml(_fixture)
         _result.editor_groups.add(_test_editor_group)
+        _result.owners.add(owner)
+        
+        # create a normal user
+        test_utils.create_user('user', 'user@example.com', 'mypasswd')
         
     
     @classmethod
@@ -86,37 +93,70 @@ class StatsTest(TestCase):
             {"action": "publish_action", ACTION_CHECKBOX_NAME: resource.id},
             follow=True)
         
-        for i in range(1, 3):
-            resource = resourceInfoType_model.objects.get(pk=resources[i - 1].pk)
+        for i in range(0, 2):
+            resource = resourceInfoType_model.objects.get(pk=resources[i].pk)
             for action in (VIEW_STAT, RETRIEVE_STAT, DOWNLOAD_STAT):
                 saveLRStats(resource, action)
-                self.assertEqual(len(getLRLast(action, 10)), i)
+                self.assertEqual(len(getLRLast(action, 10)), i+1)
  
     def test_visiting_stats(self):
         """
         Tries to load the visiting stats page of the META-SHARE website.
+        Some user calls from 193.254.26.9 are used as example of Italian IP address
         """
         client = Client()
-        response = client.get('/{0}stats/top/'.format(DJANGO_BASE))
+        client.login(username='manageruser', password='secret')
+        client_user = Client(REMOTE_ADDR="193.254.26.9")
+        client_user.login(username='user', password='secret')
+        resources =  resourceInfoType_model.objects.all()
+        for resource in resources:
+            resource.storage_object.publication_status = INGESTED
+            resource.storage_object.save()
+            client.post(ADMINROOT, \
+                {"action": "publish_action", ACTION_CHECKBOX_NAME: resource.id}, \
+                follow=True)
+            url = resource.get_absolute_url()
+            response = client_user.get(url, follow = True)
+            self.assertTemplateUsed(response,
+                'repository/resource_view/lr_view.html')
+
+        response = client_user.get('/{0}stats/top/?view=latestupdated'.format(DJANGO_BASE))
+        self.assertNotContains(response, ">No data found<")
+        
+        response = client_user.get('/{0}stats/top/?view=topdownloaded'.format(DJANGO_BASE))
+        self.assertContains(response, ">No data found<")
+        
+        response = client_user.get('/{0}stats/top/'.format(DJANGO_BASE))
         self.assertTemplateUsed(response, 'stats/topstats.html')
         self.assertContains(response, "META-SHARE node visits statistics")
+        self.assertNotContains(response, ">No data found<")
 
+        response = client_user.get('/{0}stats/top/?last=week'.format(DJANGO_BASE))
+        self.assertNotContains(response, ">No data found<")
+
+        response = client_user.get('/{0}stats/top/?country=IT'.format(DJANGO_BASE))
+        self.assertNotContains(response, ">No data matched<")
+
+        response = client_user.get('/{0}stats/top/?last=week&country=DE'.format(DJANGO_BASE))
+        self.assertContains(response, ">No data matched<")
+        
     def test_latest_queries(self):
         """
         Test whether there are latest queries
         """
-        saveQueryStats("tesQuerytquery 001", "", 10)
-        saveQueryStats("tesQuerytquery 002", "", 2)
-        latest_query = getLastQuery(2)
         client = Client()
-        _url = "/{0}stats/top/?view=latestqueries".format(DJANGO_BASE)
-        response = client.get(_url)
-        self.assertContains(response, 'META-SHARE node visits statistics')
-        self.assertContains(response, 'http://')
+        response = client.get('/{0}repository/search/?q=italian'.format(DJANGO_BASE))
+        response = client.get('/{0}repository/search/?q=italian&selected_facets=languageNameFilter_exact:Italian'.format(DJANGO_BASE))
+        response = client.get('/{0}stats/top/?view=topqueries'.format(DJANGO_BASE))
+        self.assertNotContains(response, ">No data found<")
+
+        response = client.get('/{0}stats/top/?view=latestqueries'.format(DJANGO_BASE))
+        self.assertNotContains(response, ">No data found<")
+        latest_query = getLastQuery(2)
         self.assertGreaterEqual(len(latest_query), 1)
         for item in latest_query:
             self.assertContains(response, item['query'])
-            
+                            
  
     def test_stats_server(self):
         """
@@ -127,9 +167,13 @@ class StatsTest(TestCase):
         try:
             response = urllib2.urlopen(STATS_SERVER_URL)
             self.assertEquals(200, response.code)
+            response = callServerStats()
+            self.assertEquals(True, response)
+
         except urllib2.URLError:
             LOGGER.warn('Failed to contact statistics server on %s',
                         STATS_SERVER_URL)
+            
 
     def test_add_new_node(self):
         """
@@ -149,8 +193,27 @@ class StatsTest(TestCase):
         checking if there are the statistics of the day
         """
         client = Client()
+        client.login(username='manageruser', password='secret')
+        resources =  resourceInfoType_model.objects.all()
+        for resource in resources:
+            resource.storage_object.publication_status = INGESTED
+            resource.storage_object.save()
+            client.post(ADMINROOT, \
+                {"action": "publish_action", ACTION_CHECKBOX_NAME: resource.id}, \
+                follow=True)
+            
+        # get stats days date 
+        response = client.get('/{0}stats/days'.format(DJANGO_BASE))
+        self.assertEquals(200, response.status_code)
+        # get stats info of the node 
         response = client.get('/{0}stats/get'.format(DJANGO_BASE))
         self.assertEquals(200, response.status_code)
+        self.assertContains(response, "lrcount")
+        self.assertNotContains(response, "usagestats")
+        # get full stats info of the node 
+        response = client.get('/{0}stats/get/?statsid={1}'.format(DJANGO_BASE, str(uuid.uuid3(uuid.NAMESPACE_DNS, STORAGE_PATH))))
+        self.assertEquals(200, response.status_code)
+        self.assertContains(response, "usagestats")
     
     def test_my_resources(self):
         client = Client()
@@ -159,9 +222,9 @@ class StatsTest(TestCase):
         for resource in resources:
             resource.storage_object.publication_status = INGESTED
             resource.storage_object.save()
-            client.post(ADMINROOT,
-            {"action": "publish_action", ACTION_CHECKBOX_NAME: resource.id},
-            follow=True)
+            client.post(ADMINROOT, \
+                {"action": "publish_action", ACTION_CHECKBOX_NAME: resource.id}, \
+                follow=True)
             url = resource.get_absolute_url()
             response = client.get(url, follow = True)
             self.assertTemplateUsed(response,
@@ -169,14 +232,38 @@ class StatsTest(TestCase):
         
         statsdata = getLRLast(VIEW_STAT, 10)
         self.assertEqual(2, len(statsdata))
+
+        response = client.get('/{0}stats/top/'.format(DJANGO_BASE))
+        self.assertNotContains(response, ">No data found<")
+        self.assertContains(response, ">My resources<")
         
-        #delete the second resource
-        resource = resourceInfoType_model.objects.all()[1]
+        response = client.get('/{0}stats/mystats/'.format(DJANGO_BASE))
+        self.assertTemplateUsed(response, 'stats/mystats.html')
+        self.assertContains(response, "Resource name")
+
+        
+        # make sure delete a resource from storage_object.deleted may delete any part of its statistics:
+        # delete the second resource
+        resource = resourceInfoType_model.objects.all()[0]
         resource.delete_deep()        
+        #resource.storage_object.delete()
         statsdata = getLRLast(VIEW_STAT, 10)
         self.assertEqual(1, len(statsdata))
-                
-    
+        
+        response = client.get('/{0}stats/usage/'.format(DJANGO_BASE))
+        self.assertContains(response, "Metadata usage in 1 resource")
+
+        #delete the first resource
+        resource = resourceInfoType_model.objects.all()[0]
+        resource.delete_deep()        
+        statsdata = getLRLast(VIEW_STAT, 10)
+        self.assertEqual(0, len(statsdata))
+
+        response = client.get('/{0}stats/mystats/'.format(DJANGO_BASE))
+        self.assertContains(response, ">No data found<")
+        response = client.get('/{0}stats/top/'.format(DJANGO_BASE))
+        self.assertContains(response, ">No data found<")
+            
     def test_usage(self):
         # checking if there are the usage statistics
         client = Client()
@@ -196,8 +283,16 @@ class StatsTest(TestCase):
         
         statsdata = getLRLast(UPDATE_STAT, 2)
         self.assertEqual(len(statsdata), 2)
-                        
         response = client.get('/{0}stats/usage/'.format(DJANGO_BASE))
-        self.assertContains(response, "identificationInfo")
+        self.assertNotContains(response, "statistics updating is in progress")
+        self.assertContains(response, "Metadata usage in 2 resources")
+
+        response = client.post('/{0}stats/usage/'.format(DJANGO_BASE), {'model': 'identificationInfoType_model',
+                'class': 'identificationInfoType_model', 'field': 'resourceName'})
+        self.assertContains(response, "div id=fieldvalues")
         
+        # remove all usage stats and check if there is the updating automatically
+        UsageStats.objects.all().delete()                
+        response = client.get('/{0}stats/usage/'.format(DJANGO_BASE))
+        self.assertContains(response, "statistics updating is in progress")
 
