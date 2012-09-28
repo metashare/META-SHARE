@@ -28,10 +28,6 @@ urlpatterns += patterns('metashare.accounts.views',
   (r'^{0}accounts/'.format(DJANGO_BASE), include('metashare.accounts.urls')),
 )
 
-urlpatterns += patterns('metashare.storage.views',
-  (r'^{0}storage/'.format(DJANGO_BASE), include('metashare.storage.urls')),
-)
-
 urlpatterns += patterns('metashare.stats.views',
   (r'^{0}stats/'.format(DJANGO_BASE), include('metashare.stats.urls')),
 )
