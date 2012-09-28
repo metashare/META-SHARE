@@ -13,15 +13,8 @@
 	</ul>
 	{% endif %}
 	
-	{% if "Resource_associated_with" in usage_dict.Usage %}
-	<label class='subtitle'>Associated resources</label>
-	<ul>
-		{% for key, value in usage_dict.Usage.items %}
-			{% if "Resource_associated_with" in key %}
-				{% include "repository/resource_view/target_resource.html" with target=value title="Associated resources" %}
-			{% endif %}
-		{% endfor %}
-	</ul>
+	{% if usage_dict.Usage.Resource_associated_with %}			
+	    {% include "repository/resource_view/target_resource.html" with target=usage_dict.Usage.Resource_associated_with title="Associated Resource" %}
 	{% endif %}
 	
 	{% for key, value in usage_dict.items %}
