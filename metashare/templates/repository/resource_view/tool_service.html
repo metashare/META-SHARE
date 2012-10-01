@@ -30,7 +30,8 @@
 		
 		{% if tool_service.Tool_service_operation.Running_environment %}
 			{% if tool_service.Tool_service_operation.Running_environment.Required_software %}
-				{% include "repository/resource_view/target_resource.html" with target=tool_service.Tool_service_operation.Running_environment.Required_software title="Required Software" %}
+				<label class="subtitle">Required Software</label>
+				{% include "repository/resource_view/target_resource.html" with target=tool_service.Tool_service_operation.Running_environment.Required_software %}
 			{% endif %}
 			
 			{% if tool_service.Tool_service_operation.Running_environment.Required_hardware %}
@@ -42,11 +43,8 @@
 			{% endif %}
 			
 			{% if tool_service.Tool_service_operation.Running_environment.Required_lrs %}
-				{% if tool_service.Tool_service_operation.Running_environment %}
-					{% if tool_service.Tool_service_operation.Running_environment.Required_software %}
-						{% include "repository/resource_view/target_resource.html" with target=tool_service.Tool_service_operation.Running_environment.Required_lrs title="Required LRs" %}
-					{% endif %}
-				{% endif %}
+				<label class="subtitle">Required LRs</label>
+				{% include "repository/resource_view/target_resource.html" with target=tool_service.Tool_service_operation.Running_environment.Required_lrs title="Required LRs" %}
 			{% endif %}
 			
 			{% if tool_service.Tool_service_operation.Running_environment.Running_environment_details %}
@@ -123,9 +121,13 @@
 		 	{% endif %}
 		 {% endfor %}
 		 
+	 		{% if "Evaluation_tool" in tool_service.Tool_service_evaluation %}
+			<label class="subtitle">Evaluation Tool</label>
+		{% endif %}
  		 {% for key, value in tool_service.Tool_service_evaluation.items %}
 		 	{% if "Evaluation_tool" in key %}
-				{% include "repository/resource_view/target_resource.html" with target=value  title="Evaluation Tool" %}
+		 		<div class="separation"><hr/></div>		 		
+				{% include "repository/resource_view/target_resource.html" with target=value %}
 		 	{% endif %}
 		 {% endfor %}
 		
@@ -168,8 +170,12 @@
 			</div>
 		{% endif %}
 		
+		{% if "Original_source" in tool_service.Tool_service_creation %}
+			<label class="subtitle">Original Source</label>
+		{% endif %}
 		{% for key, value in tool_service.Tool_service_creation.items %}
 			{% if "Original_source" in key %}
+				<div class="separation"><hr/></div>
 				{% include "repository/resource_view/target_resource.html" with target=value  title="Original Source" %}
 			{% endif %}
 		{% endfor %}
