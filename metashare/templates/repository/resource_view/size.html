@@ -21,9 +21,7 @@
 			{% for key1, value1 in value.items %}
 				{% if key1 == "Size_unit" %}
 					<label class="dataline indented">
-						{% if value.Size == "0" %}
-							In {{ value.Size_unit }}
-						{% else %}
+						{% if value.Size != "0" %}
 							{{ value.Size|intcomma }} {{ value.Size_unit }}
 						{% endif %}
 					</label>
