@@ -89,7 +89,7 @@ synchronize_node()
 		echo -n "Error in synchronizing $NODE_NAME" >&3
 		return $ret_val
 	fi
-	#rm -f "$REMOTE_DATA_FILE"
+	rm -f "$REMOTE_DATA_FILE"
 	local ret_val=$?
 	cd "$CURRENT_DIR"
 	return $ret_val
@@ -129,14 +129,19 @@ synchronize_nodes()
 
 get_node_resource_list()
 {
-	local NODE_NUM="$1"
+	local NODE_NUM="$1" ; shift
+	local EXT="$1" ; shift
 
 	local NODE_NAME=`get_node_info $NODE_NUM NODE_NAME`
 	#echo "NODE_NUM = $NODE_NUM , NODE_NAME = $NODE_NAME"
 	export NODE_DIR=$TEST_DIR/$NODE_NAME
 	#echo "Get resource list for node $NODE_NAME"
+	local EXTRA_INFO=""
+	if [ "$EXT" == "ext" ] ; then
+		EXTRA_INFO="--extended"
+	fi
 	cd "$METASHARE_DIR"
-	"$PYTHON" manage.py get_resource_list | sort
+	"$PYTHON" manage.py get_resource_list "$EXTRA_INFO" | sort
 	cd "$CURRENT_DIR"
 }
 
@@ -240,8 +245,10 @@ check_resources_2()
 	do
 		local NODE_NAME=`get_node_info $NODE_NUM NODE_NAME`
 		local RES_FILE=$TEST_DIR/stat-$NODE_NAME.res
-		get_node_resource_list $NODE_NUM > "$RES_FILE"
+		get_node_resource_list $NODE_NUM "ext" > "$RES_FILE"
+		echo "Resources on node $NODE_NAME: (id:digest:source_url)" >> "$RES_DETAILS"
 		cat "$RES_FILE" >> "$RES_DETAILS"
+		get_node_resource_list $NODE_NUM > "$RES_FILE"
 		if [[ "$PREVIOUS_RES" != "" ]] ; then
 			echo "Comparing $RES_FILE and $PREVIOUS_RES."
 			C=`diff "$RES_FILE" "$PREVIOUS_RES" | wc -l`
@@ -258,7 +265,7 @@ check_resources_2()
 		PREVIOUS_RES=$RES_FILE
 		PREVIOUS_NODE_NAME=$NODE_NAME
 	done
-	#rm -f $PREVIOUS_RES
+	rm -f $PREVIOUS_RES
 	if [[ "$CHECK_OK" == "1" ]] ; then
 		echo "Synchronization successful"
 		rm -f "$RES_DETAILS"
@@ -267,7 +274,7 @@ check_resources_2()
 		echo -n "Synchronization failed bbb" >&3
 		echo "Dumping details"
 		cat "$RES_DETAILS"
-		#rm -f "$RES_DETAILS"
+		rm -f "$RES_DETAILS"
 		return 1
 	fi
 }
