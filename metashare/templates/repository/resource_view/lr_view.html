@@ -179,7 +179,7 @@
 						<li><a href="#1">toolService{% get_icon "toolService" %}</a></li>
 					{% else %}
 						{% for type in mediaTypes %}
-							<li><a href="#{{forloop.counter}}">{{type}}{% get_icon type %}</a></li>
+							<li><a href="#{{forloop.counter}}">{% if mediaTypes|length < 4%}{{type}}{% endif %}{% get_icon type %}</a></li>
 						{% endfor %}
 					{% endifequal %}
 				</ul>
