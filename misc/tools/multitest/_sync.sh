@@ -78,8 +78,8 @@ synchronize_node()
 {
 	local NODE_NUM="$1"
 
-	local REMOTE_DATA_FILE=$TEST_DIR/rem.log
 	local NODE_NAME=`get_node_info $NODE_NUM NODE_NAME`
+	local REMOTE_DATA_FILE=$TEST_DIR/rem_$NODE_NAME
 	export NODE_DIR=$TEST_DIR/$NODE_NAME
 	echo "Synchronizing $NODE_NAME"
 	cd "$METASHARE_DIR"
@@ -129,14 +129,19 @@ synchronize_nodes()
 
 get_node_resource_list()
 {
-	local NODE_NUM="$1"
+	local NODE_NUM="$1" ; shift
+	local EXT="$1" ; shift
 
 	local NODE_NAME=`get_node_info $NODE_NUM NODE_NAME`
 	#echo "NODE_NUM = $NODE_NUM , NODE_NAME = $NODE_NAME"
 	export NODE_DIR=$TEST_DIR/$NODE_NAME
 	#echo "Get resource list for node $NODE_NAME"
+	local EXTRA_INFO=""
+	if [ "$EXT" == "ext" ] ; then
+		EXTRA_INFO="--extended"
+	fi
 	cd "$METASHARE_DIR"
-	"$PYTHON" manage.py get_resource_list | sort
+	"$PYTHON" manage.py get_resource_list "$EXTRA_INFO" | sort
 	cd "$CURRENT_DIR"
 }
 
@@ -233,10 +238,16 @@ check_resources_2()
 	echo " and the corresponding resources have the same digest"
 	local CHECK_OK=1
 	local PREVIOUS_RES=""
+	local PREVIOUS_NODE_NAME=""
+	local RES_DETAILS=$TEST_DIR/res-details.log
+	touch "$RES_DETAILS"
 	for NODE_NUM in $NODES
 	do
 		local NODE_NAME=`get_node_info $NODE_NUM NODE_NAME`
 		local RES_FILE=$TEST_DIR/stat-$NODE_NAME.res
+		get_node_resource_list $NODE_NUM "ext" > "$RES_FILE"
+		echo "Resources on node $NODE_NAME: (id:digest:source_url)" >> "$RES_DETAILS"
+		cat "$RES_FILE" >> "$RES_DETAILS"
 		get_node_resource_list $NODE_NUM > "$RES_FILE"
 		if [[ "$PREVIOUS_RES" != "" ]] ; then
 			echo "Comparing $RES_FILE and $PREVIOUS_RES."
@@ -244,17 +255,26 @@ check_resources_2()
 			if [[ "$C" != "0" ]] ; then
 				echo "FAILED"
 				CHECK_OK=0
+				echo "Resource list for node $NODE_NAME:"
+				cat "$RES_FILE"
+				echo "Resource list for node $PREVIOUS_NODE_NAME:"
+				cat "$PREVIOUS_RES"
 			fi
 		fi
 		rm -f "$PREVIOUS_RES"
 		PREVIOUS_RES=$RES_FILE
+		PREVIOUS_NODE_NAME=$NODE_NAME
 	done
 	rm -f $PREVIOUS_RES
 	if [[ "$CHECK_OK" == "1" ]] ; then
 		echo "Synchronization successful"
+		rm -f "$RES_DETAILS"
 	else
 		echo "Synchronization failed"
 		echo -n "Synchronization failed" >&3
+		echo "Dumping details"
+		cat "$RES_DETAILS"
+		rm -f "$RES_DETAILS"
 		return 1
 	fi
 }

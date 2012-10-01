@@ -155,7 +155,7 @@ def getUserStats(lrid):
 def getLRTop(action, limit, geoinfo=None, since=None, offset=0):
     action_list = []
     if (action and not action == ""):
-        if (geoinfo != None and geoinfo is not ""):
+        if (geoinfo != None and geoinfo != ''):
             if (since):
                 action_list = LRStats.objects.values('lrid').filter(ignored=False, action=action, geoinfo=geoinfo, \
                     lasttime__gte=since).annotate(sum_count=Sum('count')).order_by('-sum_count')[offset:offset+limit]
@@ -174,7 +174,7 @@ def getLRTop(action, limit, geoinfo=None, since=None, offset=0):
 def getLRLast(action, limit, geoinfo=None, offset=0):
     action_list = []
     if (action and not action == ""):
-        if (geoinfo != None and geoinfo is not ""):
+        if (geoinfo != None and geoinfo != ''):
             action_list = LRStats.objects.values('lrid', 'action', 'lasttime') \
                 .filter(ignored=False, action=action, geoinfo=geoinfo) \
                 .order_by('-lasttime')[offset:offset+limit]
@@ -189,7 +189,7 @@ def getLRLast(action, limit, geoinfo=None, offset=0):
     return action_list
 
 def getTopQueries(limit, geoinfo=None, since=None, offset=0):
-    if (geoinfo != None and geoinfo is not ""):
+    if (geoinfo != None and geoinfo != ''):
         if (since):
             topqueries = QueryStats.objects.values('query', 'facets') \
                 .exclude(query__startswith="mfs") \
@@ -221,7 +221,7 @@ def getTopQueries(limit, geoinfo=None, since=None, offset=0):
     return topqueries
     
 def getLastQuery(limit, geoinfo=None, offset=0):
-    if (geoinfo != None and geoinfo is not ""):
+    if (geoinfo != None and geoinfo != ''):
         lastquery = QueryStats.objects.values('query', 'facets', 'lasttime', 'found') \
             .exclude(query__startswith="mfs") \
             .filter(geoinfo=geoinfo) \
@@ -293,6 +293,7 @@ def updateUsageStats(resources, create=False):
 
     #force recreate usage stats
     if create:
+        UsageStats.objects.all().delete()
         usagethread = UsageThread(USAGETHREADNAME, resources)
         usagethread.setName(USAGETHREADNAME)
         usagethread.start()
@@ -380,14 +381,16 @@ class UsageThread(threading.Thread):
         
     def run(self):       
         self.done = 0
-        for resource in self.resources:
-            if (resource.storage_object.published):
+        for resource in self.resources.filter(
+                storage_object__publication_status=PUBLISHED):
+            if not UsageStats.objects.filter(
+                    lrid=resource.storage_object.identifier).exists():
                 try:
-                    # pylint: disable-msg=E1101
-                    if not UsageStats.filter(lrid=resource.storage_object.identifier).exists():
-                        _update_usage_stats(resource.storage_object.identifier, resource.export_to_elementtree())
-                        self.done += 1
-                # pylint: disable-msg=W0703
-                except Exception, e:
-                    LOGGER.debug('ERROR! Usage statistics updating failed on resource {}: {}'.format(resource.storage_object.identifier, e))
+                    _update_usage_stats(resource.storage_object.identifier,
+                        resource.export_to_elementtree())
+                    self.done += 1
+                except:
+                    LOGGER.error('Usage statistics updating failed on resource '
+                            '%s.', resource.storage_object.identifier,
+                        exc_info=True)
 
