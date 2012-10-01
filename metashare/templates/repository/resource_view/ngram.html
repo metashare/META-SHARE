@@ -1,0 +1,16 @@
+{% load replace %}
+
+{% spaceless %}
+
+<label class='title'>NGram</label>
+<div class="dataline">
+{% for key, value in ngram.items %}	
+		<div class="dataline indented">
+			<label>
+				<strong>{{ key|rep }}:</strong> {{ value }}
+			</label>
+		</div>
+{% endfor %}
+</div>
+
+{% endspaceless %}
