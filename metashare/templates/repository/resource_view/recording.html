@@ -2,6 +2,16 @@
 
 {% spaceless %}
 <label class='title'>Recording</label>
+{% if "Recorder" in recording %}
+	<label class='subtitle'>Recorders</label>
+	{% for key, value in recording.items %}
+		{% if "Recorder" in key %}
+			{% include "repository/resource_view/person.html" with person_dict=value.Recorder type="Recorder" %}
+		{% endif %}
+	{% endfor %}
+{% endif %}
+
+
 {% for key, value in recording.items %}
 	{% if not "Recorder" in key %}
 		 <div class="dataline indented">
@@ -9,8 +19,7 @@
 				<strong>{{ key|rep }}:</strong> {{ value }}
 			</label>
 		</div>
-	{% else %}
-			{% include "repository/resource_view/person.html" with person_dict=value.Recorder type="Recorder" level="sub" %}
 	{% endif %}
 {% endfor %}
+
 {% endspaceless %}
