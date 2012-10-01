@@ -75,15 +75,20 @@
 	{% endfor %}
 
 	{% if "Usage_report" in usage_dict.Usage.Actual_use %}
-		{% if usage_dict.Usage.Actual_use.Usage_report.Usage_report.Title %}
-			{% include "repository/resource_view/documentation.html" with documentation=usage_dict.Usage.Actual_use.Usage_report.Usage_report type="Usage Report" level="sub" %}
-		{% else %}
-			<div class="dataline indented">
-				<label>
-					<strong>Usage Report: </strong>{{ usage_dict.Usage.Actual_use.Usage_report.Usage_report }}
-				</label>
-			</div>
-		{% endif %}
+		{% for key, value in usage_dict.Usage.Actual_use.items %}
+			{% if "Usage_report" in value %}
+				
+				{% if "Title" in value.Usage_report %}
+					{% include "repository/resource_view/documentation.html" with documentation=value.Usage_report type="Usage Report" level="sub" %}
+				{% else %}
+					<div class="dataline indented">
+						<label>
+							<strong>Usage Report: </strong>{{ value.Usage_report }}
+						</label>
+					</div>
+				{% endif %}
+			{% endif %}
+		{% endfor %}
 	{% endif %}
 	
 	
