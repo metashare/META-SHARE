@@ -57,8 +57,9 @@
 		{% endif %}					
 	{% endif %}
 	
+	<label class="subtitle">Validation Tool</label>
 	{% if dict.Validation.Validation_tool %}
-			{% include "repository/resource_view/target_resource.html" with target=dict.Validation.Validation_tool title="Validation Tool" level="sub" %}
+			{% include "repository/resource_view/target_resource.html" with target=dict.Validation.Validation_tool title="Validation Tool" %}
 	{% endif %}
 	
 	<div class="dataline">
