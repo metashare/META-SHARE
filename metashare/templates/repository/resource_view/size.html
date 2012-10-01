@@ -20,7 +20,7 @@
 		{% for key, value in size.items %}
 			{% for key1, value1 in value.items %}
 				{% if key1 == "Size_unit" %}
-					<label class="dataline indented">
+					<label class='dataline indented'>
 						{% if value.Size != "0" %}
 							{{ value.Size|intcomma }} {{ value.Size_unit }}
 						{% endif %}
@@ -29,12 +29,12 @@
 			{% endfor %}
 		{% endfor %}
 	{% else %}
-		<div class="dataline">
+		<div class='dataline'>
 		{% for key, value in size.items %}
 			{% for key1, value1 in value.items %}
 				{% if key1 == "Size_unit" %}
 				<div>
-					<label class="dataline indented">
+					<label class='dataline indented'>
 						{% if value.Size != "0" %}
 							{{ value.Size|intcomma }} {{ value.Size_unit }}
 						{% endif %}
@@ -46,5 +46,34 @@
 		</div>
 	{% endif %}
 {% endif %}
+
+{% if "Duration_of_effective_speech" in size %}
+	<label class='subtitle'>Effective speech duration</label>
+	{% for key, value in size.items %}
+		{% if "Duration_of_effective_speech" in key %}
+			<div class='dataline indented'>
+				<label>
+					{{ value.Size|intcomma }} {{ value.Duration_unit }}
+				</label>
+			</div>
+		{% endif %}
+	{% endfor %}
+{% endif %}
+
+{% if "Duration_of_audio" in size %}
+	<label class='subtitle'>Audio duration</label>
+	{% for key, value in size.items %}
+		{% if "Duration_of_audio" in key %}
+			<div class='dataline indented'>
+				<label>
+					{{ value.Size|intcomma }} {{ value.Duration_unit }}
+				</label>
+			</div>
+		{% endif %}
+	{% endfor %}
+{% endif %}
+
+
+
 
 {% endspaceless %}
