@@ -163,19 +163,23 @@ function addStatus(filter){
       <input type="hidden" name="class" id="classname" value="{{ selected_class }}">
       <input type="hidden" name="field" id="fieldname" value="{{ selected_field }}">
       <input type="hidden" name="expandall" id="expandall" value="{{ expand_all }}">
-   </form>
-    
-<div style="*display: inline;"><h4>&nbsp;&nbsp;Found <font size=+1>{{ fields_count }}</font> metadata</h4>
-    <div style="float: right; margin-top: -20px; margin-right: 20px">[ <a href="javascript:expandAll();">Expand all</a>
-            | <a href="javascript:collapseAll();">Collapse all</a> ]</div>
+ <div style="display: inline; float: left"><h4>&nbsp;&nbsp;Found <font size=+1>{{ fields_count }}</font> metadata<br>
+ &nbsp;<font size=-2>(the following lines are the metadata components and elements included in the <a href="http://www.meta-share.org/portal/knowledgebase/DetailedPresentationOfTheModel" target="metamodel">META-SHARE model</a> grouped by different roles and alphabetically sorted)</font> &nbsp;</h4>
 </div>    
+  </form>
+    
     {% if errors != None %}
-            &nbsp; <img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/error.png"> &nbsp; {{ errors }} &nbsp;
+       <div class="warning">
+            &nbsp;<img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/error.png"> &nbsp; {{ errors }} &nbsp;
        </div>
     {% endif %}
     
-       
-        {% for class, fields in usage_fields %}
+ </div>
+ <br>
+  <div id=expand style="float: right; margin-top: -20px; margin-right: 20px">[ <a href="javascript:expandAll();">Expand all</a>
+            | <a href="javascript:collapseAll();">Collapse all</a> ]</div>
+    
+            {% for class, fields in usage_fields %}
             {% if selected_model == fields.0.7 %}
              {% if textvalues != None and textvalues|length > 0 %}
             <!-- used values table -->
@@ -256,7 +260,6 @@ function addStatus(filter){
              </div> <!-- end filter -->
              
         {% endfor %}
- </div>
 
     <script>
     function scrollToAnchor(name) {

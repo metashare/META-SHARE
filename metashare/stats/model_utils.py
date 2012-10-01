@@ -155,7 +155,7 @@ def getUserStats(lrid):
 def getLRTop(action, limit, geoinfo=None, since=None, offset=0):
     action_list = []
     if (action and not action == ""):
-        if (geoinfo != None and geoinfo is not ""):
+        if (geoinfo != None and geoinfo != ''):
             if (since):
                 action_list = LRStats.objects.values('lrid').filter(ignored=False, action=action, geoinfo=geoinfo, \
                     lasttime__gte=since).annotate(sum_count=Sum('count')).order_by('-sum_count')[offset:offset+limit]
@@ -174,7 +174,7 @@ def getLRTop(action, limit, geoinfo=None, since=None, offset=0):
 def getLRLast(action, limit, geoinfo=None, offset=0):
     action_list = []
     if (action and not action == ""):
-        if (geoinfo != None and geoinfo is not ""):
+        if (geoinfo != None and geoinfo != ''):
             action_list = LRStats.objects.values('lrid', 'action', 'lasttime') \
                 .filter(ignored=False, action=action, geoinfo=geoinfo) \
                 .order_by('-lasttime')[offset:offset+limit]
@@ -189,7 +189,7 @@ def getLRLast(action, limit, geoinfo=None, offset=0):
     return action_list
 
 def getTopQueries(limit, geoinfo=None, since=None, offset=0):
-    if (geoinfo != None and geoinfo is not ""):
+    if (geoinfo != None and geoinfo != ''):
         if (since):
             topqueries = QueryStats.objects.values('query', 'facets') \
                 .exclude(query__startswith="mfs") \
@@ -221,7 +221,7 @@ def getTopQueries(limit, geoinfo=None, since=None, offset=0):
     return topqueries
     
 def getLastQuery(limit, geoinfo=None, offset=0):
-    if (geoinfo != None and geoinfo is not ""):
+    if (geoinfo != None and geoinfo != ''):
         lastquery = QueryStats.objects.values('query', 'facets', 'lasttime', 'found') \
             .exclude(query__startswith="mfs") \
             .filter(geoinfo=geoinfo) \
