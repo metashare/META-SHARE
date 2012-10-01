@@ -29,6 +29,7 @@
 			<label class='title'>Foreseen Use</label>	
 			{% for key1, value1 in value.items %}
 				{% if "Foreseen_use" in key1 %}
+					<div class="separation"><hr/></div>
 					<div class="dataline indented">
 						<label>
 							<strong><i>{{ value1.Foreseen_use }}</i></strong>
@@ -40,8 +41,7 @@
 								<strong>Use NLP Specific:</strong> {{ value1.Use_nlpspecific }}
 							</label>
 						</div>
-					{% endif %}
-				<div class="separation"><hr/></div>
+					{% endif %}					
 				{% endif %}
 			{% endfor %}
 			
