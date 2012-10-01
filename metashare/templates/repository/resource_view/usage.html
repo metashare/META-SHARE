@@ -101,7 +101,7 @@
 	{% endif %}
 
 	{% if "Usage_project" in usage_dict.Usage.Actual_use %}
-		<label class='subtitle'>Used in:</label>
+		<label class='subtitle'>Used in</label>
 		{% for key, value in usage_dict.Usage.Actual_use.items %}
 			{% if "Usage_project" in key %}
 				<div class="separation"><hr/></div>
