@@ -336,6 +336,10 @@ img.line{
 	display:none;
 }
 
+.component + .separation {
+	display:none;
+}
+
 .separation hr{
 	margin-left:auto;
 	margin-right:auto;
