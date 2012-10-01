@@ -29,19 +29,21 @@ def run_account_registration_request_cleanup():
         created_lt=(datetime.now() - timedelta(days=3))).delete()
 
 
-sync_interval_settings = ""
-# Get sync interval settings
-sync_interval_settings = "{} {} {} {} {}".format( \
-    settings.SYNC_INTERVALS['MINUTE'],
-    settings.SYNC_INTERVALS['HOUR'],
-    settings.SYNC_INTERVALS['DAY_OF_MONTH'],
-    settings.SYNC_INTERVALS['MONTH'],
-    settings.SYNC_INTERVALS['DAY_OF_WEEK']
-    )
-
-@kronos.register(sync_interval_settings)
-def run_synchronization():
-    call_command('synchronize', interactive=False)
+# periodically run the synchronization on META-SHARE Managing Nodes
+if len(settings.CORE_NODES) or len(settings.PROXIED_NODES):
+    sync_interval_settings = ""
+    # Get sync interval settings
+    sync_interval_settings = "{} {} {} {} {}".format( \
+        settings.SYNC_INTERVALS['MINUTE'],
+        settings.SYNC_INTERVALS['HOUR'],
+        settings.SYNC_INTERVALS['DAY_OF_MONTH'],
+        settings.SYNC_INTERVALS['MONTH'],
+        settings.SYNC_INTERVALS['DAY_OF_WEEK']
+        )
+    
+    @kronos.register(sync_interval_settings)
+    def run_synchronization():
+        call_command('synchronize', interactive=False)
 
 
 update_interval_settings = ""
