@@ -170,7 +170,6 @@
 			{% endfor %}
 		{% endif %}
 	</div>
-	
 		
 	<div class="column middle">
 		<div class="fields">
@@ -204,7 +203,7 @@
 	</div>
 
 	<div class="white_box column corner right-corner">
-	
+
 		{% if resource_creation_dict %}
 			{% include "repository/resource_view/resource_creation.html" %}
 		{% endif %}
@@ -249,7 +248,7 @@
 					{% if "Samples_location" in key1 %}
 						 <div class="dataline">
 									<label>
-										<strong>Samples Location: </strong><a href="{{value1}}">{{value1}}</a>
+										<strong>Samples Location: </strong>{{value1|urlizetrunc:17}}
 									</label>
 								</div>
 					{% endif %}
