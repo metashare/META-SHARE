@@ -17,7 +17,13 @@
 		{% for key, value in size.items %}
 			{% for key1, value1 in value.items %}
 				{% if key1 == "Size_unit" %}
-					<label class="dataline indented">{{ value.Size|intcomma }} {{ value.Size_unit }}</label>
+					<label class="dataline indented">
+						{% if value.Size == "0" %}
+							In {{ value.Size_unit }}
+						{% else %}
+							{{ value.Size|intcomma }} {{ value.Size_unit }}
+						{% endif %}
+					</label>
 				{% endif %}
 			{% endfor %}
 		{% endfor %}
@@ -27,7 +33,14 @@
 			{% for key1, value1 in value.items %}
 				{% if key1 == "Size_unit" %}
 				<div>
-					<label class="dataline indented">{{ value.Size|intcomma }} {{ value.Size_unit }}</label>
+					<label class="dataline indented">
+						{% if value.Size == "0" %}
+							In {{ value.Size_unit }}
+						{% else %}
+							{{ value.Size|intcomma }} {{ value.Size_unit }}</label>
+						{% endif %}
+						
+						
 				</div>
 				{% endif %}
 			{% endfor %}
