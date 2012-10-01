@@ -293,6 +293,7 @@ def updateUsageStats(resources, create=False):
 
     #force recreate usage stats
     if create:
+        UsageStats.objects.all().delete()
         usagethread = UsageThread(USAGETHREADNAME, resources)
         usagethread.setName(USAGETHREADNAME)
         usagethread.start()
@@ -380,14 +381,16 @@ class UsageThread(threading.Thread):
         
     def run(self):       
         self.done = 0
-        for resource in self.resources:
-            if (resource.storage_object.published):
+        for resource in self.resources.filter(
+                storage_object__publication_status=PUBLISHED):
+            if not UsageStats.objects.filter(
+                    lrid=resource.storage_object.identifier).exists():
                 try:
-                    # pylint: disable-msg=E1101
-                    if not UsageStats.filter(lrid=resource.storage_object.identifier).exists():
-                        _update_usage_stats(resource.storage_object.identifier, resource.export_to_elementtree())
-                        self.done += 1
-                # pylint: disable-msg=W0703
-                except Exception, e:
-                    LOGGER.debug('ERROR! Usage statistics updating failed on resource {}: {}'.format(resource.storage_object.identifier, e))
+                    _update_usage_stats(resource.storage_object.identifier,
+                        resource.export_to_elementtree())
+                    self.done += 1
+                except:
+                    LOGGER.error('Usage statistics updating failed on resource '
+                            '%s.', resource.storage_object.identifier,
+                        exc_info=True)
 

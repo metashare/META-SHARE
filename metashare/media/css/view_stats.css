@@ -52,7 +52,9 @@
     border-bottom: none; 
 }
 
-.content_tab {vertical-align: top;
+.content_tab {
+    padding: 10px;
+    vertical-align: top;
     color: #000;
     padding-bottom: 40px;
 	background-color: white; 
@@ -94,11 +96,7 @@ div.fieldvalues {background: #E6E6FA;
 div.warning {
     background: lightyellow; 
     border: 1px solid #FFA500; 
-    position:relative;
     padding: 5px;
-    width:630px;
-    margin-top: -15px;
-    height:auto;
 }
     
 label.title {background-color: #fda;
