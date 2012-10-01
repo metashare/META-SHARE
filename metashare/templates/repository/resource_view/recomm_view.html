@@ -1,3 +1,5 @@
+{% spaceless %}
+
 {% if also_viewed or also_downloaded or search_rel_projects or search_rel_creators %}
 <div class="recommendations content_box" style="float: left">
     {% if also_viewed %}
@@ -28,3 +30,5 @@
     {% endif %}
 </div>
 {% endif %}
+
+{% endspaceless %}
