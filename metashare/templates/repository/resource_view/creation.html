@@ -12,9 +12,11 @@
 		</div>
 	{% else %}
 		{% if "Original_source" in key %}
-			{% include "repository/resource_view/target_resource.html" with target=value title="Original Source" %}
+			<label class="subtitle">Original Source</label>
+			{% include "repository/resource_view/target_resource.html" with target=value %}
 		{% else %}
-			{% include "repository/resource_view/target_resource.html" with target=value title="Creation Tool" %}
+			<label class="subtitle">Creation Tool</label>
+			{% include "repository/resource_view/target_resource.html" with target=value %}
 		{% endif %}			
 	{% endif %}
 {% endfor %}
