@@ -53,8 +53,8 @@
 			{% endif %}
 				{% for key1, value1 in value.items %}
 					{% if "Funding_project" in key1 %}
-						{% include "repository/resource_view/project.html" with project=value1 %}
 						<div class="separation"><hr/></div>
+						{% include "repository/resource_view/project.html" with project=value1 %}						
 					{% endif %}
 				{% endfor %}
 		{% endfor %}
