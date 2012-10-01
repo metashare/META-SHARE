@@ -40,11 +40,11 @@ class GetIcon(template.Node):
             image_tag = image_tag + ' <img title="video" src="{}css/sexybuttons/images/' \
               'icons/silk/film.png" />' \
               .format(MEDIA_URL)
-        if result == "textNumerical":
+        if result == "textnumerical":
             image_tag = image_tag + ' <img title="textNumerical" src="{}css/sexybuttons/images/' \
               'icons/silk/eye.png" />' \
               .format(MEDIA_URL)
-        if result == "textNgram":
+        if result == "textngram":
             image_tag = image_tag + ' <img title="textNgram" src="{}css/sexybuttons/images/' \
               'icons/silk/text_align_left.png" />' \
               .format(MEDIA_URL)              
