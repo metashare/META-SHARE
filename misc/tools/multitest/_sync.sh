@@ -270,8 +270,8 @@ check_resources_2()
 		echo "Synchronization successful"
 		rm -f "$RES_DETAILS"
 	else
-		echo "Synchronization failed aaa"
-		echo -n "Synchronization failed bbb" >&3
+		echo "Synchronization failed"
+		echo -n "Synchronization failed" >&3
 		echo "Dumping details"
 		cat "$RES_DETAILS"
 		rm -f "$RES_DETAILS"
