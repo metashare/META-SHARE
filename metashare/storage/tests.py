@@ -82,46 +82,6 @@ class StorageObjectTestCase(unittest.TestCase):
         _test_so.update_storage()
         self.assertEquals(_test_so.source_url, _old_django_url)
 
-    def test_revision_view(self):
-        """
-        Checks that the get_latest_revision view is working correctly.
-        """
-        # Load storage object instance from database.
-        storage_object = StorageObject.objects.get(pk=self.object_id)
-        
-        # The revision for our storage object should be 0, HTTP status 200.
-        _url = '/{0}storage/revision/{1}/'.format(DJANGO_BASE, storage_object.identifier)
-        response = self.client.get(_url)
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(int(response.content), 1)
-        
-        # If we update the revision information for the object, this should
-        # also produce an updated result for the current URL.
-        storage_object.revision = 13
-        storage_object.save()
-        response = self.client.get(_url)
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(int(response.content), 13)
-        
-        # If the storage object is not a master copy, the result should be 0.
-        storage_object.master_copy = False
-        storage_object.save()
-        response = self.client.get(_url)
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(int(response.content), 0)
-        
-        # Set master_copy again to allow cleanup of storage folder.
-        storage_object.master_copy = True
-        storage_object.save()
-        
-        # Using an unknown identifier should result in a '-1' response.
-        _identifier = list(storage_object.identifier)
-        _identifier.reverse()
-        _url = '/{0}storage/revision/{1}/'.format(DJANGO_BASE, ''.join(_identifier))
-        response = self.client.get(_url)
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(int(response.content), -1)
-
     def test_validation(self):
         """
         Checks that no object without validating XML metadata can be created.

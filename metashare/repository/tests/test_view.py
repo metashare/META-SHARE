@@ -779,7 +779,21 @@ class FullViewTest(TestCase):
         test_utils.setup_test_storage()
         OBJECT_XML_CACHE.clear()
         test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
-                "full-corpus.xml".format(ROOT_PATH))
+                "partial-corpus.xml".format(ROOT_PATH))
+        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
+                "full-lang-description.xml".format(ROOT_PATH))
+        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
+                "full-corpus-text.xml".format(ROOT_PATH))
+        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
+                "full-corpus-image.xml".format(ROOT_PATH))
+        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
+                "full-corpus-audio.xml".format(ROOT_PATH))
+        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
+                "full-corpus-video.xml".format(ROOT_PATH))
+        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
+                "full-corpus-textngram.xml".format(ROOT_PATH))
+        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
+                "full-corpus-textnumerical.xml".format(ROOT_PATH))
 
         # enable indexing 
         test_utils.set_index_active(True)
