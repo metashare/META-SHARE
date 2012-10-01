@@ -634,7 +634,7 @@ def update_digests():
     This assumes that this method is called in MAX_DIGEST_AGE / 2 intervals to
     guarantee a maximum digest age of MAX_DIGEST_AGE.
     """
-    
+    LOGGER.info('Starting to update digests.')
     _expiration_date = _get_expiration_date()
     
     # get all master copy storage object of ingested and published resources
@@ -647,6 +647,9 @@ def update_digests():
             _so.update_storage()
         else:
             LOGGER.info('{} is up to date'.format(_so.identifier))
+
+    LOGGER.info('Finished updating digests.')
+
 
 def repair_storage_folder():
     """
