@@ -28,14 +28,14 @@
 				{% if type == "image" %}
 					{% include "repository/resource_view/detailed_media_info.html" with resource_component=resource_component_dicts.image %}
 				{% else %}
-					{% if type == "textNumerical" %}
-						{% include "repository/resource_view/detailed_media_info.html" with resource_component=resource_component_dicts.textNumerical %}
+					{% if type == "textnumerical" %}
+						{% include "repository/resource_view/detailed_media_info.html" with resource_component=media_info.Corpus_media.Corpus_text_numerical %}
 					{% else %}
-						{% if type == "textNgram" %}
-							{% include "repository/resource_view/detailed_media_info.html" with resource_component=resource_component_dicts.textNgram %}
+						{% if type == "textngram" %}
+							{% include "repository/resource_view/detailed_media_info.html" with resource_component=media_info.Corpus_media.Corpus_text_ngram %}
 						{% else %}
 							{% if type == "toolService" %}
-								{% include "repository/resource_view/detailed_media_info.html" with resource_component=resource_component_dicts.toolService %}
+								{% include "repository/resource_view/detailed_media_info.html" with resource_component=resource_component_dict.toolService %}
 							{% endif %}
 						{% endif %}
 					{% endif %}
