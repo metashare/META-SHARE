@@ -783,9 +783,9 @@ class FullViewTest(TestCase):
         test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
                 "full-lang-description.xml".format(ROOT_PATH))
         test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
-                "corpus-text.xml".format(ROOT_PATH))
+                "full-corpus-text.xml".format(ROOT_PATH))
         test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
-                "corpus-video.xml".format(ROOT_PATH))
+                "full-corpus-video.xml".format(ROOT_PATH))
 
         # enable indexing 
         test_utils.set_index_active(True)
