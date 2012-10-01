@@ -11,13 +11,20 @@
 {% endif %}
 
 {% if type == "sub" %}
-	({{ size.Size|intcomma }} {{ size.Size_unit }})
+	{% if size.Size != "0" %}
+		({{ size.Size|intcomma }} {{ size.Size_unit }})
+	{% endif %}
+
 {% else %}
 	{% if type == "component" %}
 		{% for key, value in size.items %}
 			{% for key1, value1 in value.items %}
 				{% if key1 == "Size_unit" %}
-					<label class="dataline indented">{{ value.Size|intcomma }} {{ value.Size_unit }}</label>
+					<label class="dataline indented">
+						{% if value.Size != "0" %}
+							{{ value.Size|intcomma }} {{ value.Size_unit }}
+						{% endif %}
+					</label>
 				{% endif %}
 			{% endfor %}
 		{% endfor %}
@@ -27,7 +34,11 @@
 			{% for key1, value1 in value.items %}
 				{% if key1 == "Size_unit" %}
 				<div>
-					<label class="dataline indented">{{ value.Size|intcomma }} {{ value.Size_unit }}</label>
+					<label class="dataline indented">
+						{% if value.Size != "0" %}
+							{{ value.Size|intcomma }} {{ value.Size_unit }}
+						{% endif %}
+					</label>
 				</div>
 				{% endif %}
 			{% endfor %}
