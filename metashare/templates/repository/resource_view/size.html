@@ -14,7 +14,6 @@
 	{% if size.Size != "0" %}
 		({{ size.Size|intcomma }} {{ size.Size_unit }})
 	{% endif %}
-
 {% else %}
 	{% if type == "component" %}
 		{% for key, value in size.items %}
@@ -72,8 +71,5 @@
 		{% endif %}
 	{% endfor %}
 {% endif %}
-
-
-
 
 {% endspaceless %}
