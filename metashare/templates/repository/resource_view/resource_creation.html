@@ -18,14 +18,12 @@
 </div>
 
 <div class="dataline">
-	
 	{% if resource_creation_dict.Resource_creation.Creation_start_date and resource_creation_dict.Resource_creation.Creation_end_date %}
 		<div class="dataline">
 			<label>
 				<strong>Creation lasted:</strong> {{resource_creation_dict.Resource_creation.Creation_start_date|date:"SHORT_DATE_FORMAT"}} - {{resource_creation_dict.Resource_creation.Creation_end_date|date:"SHORT_DATE_FORMAT"}}
 			</label>
 		</div>
-		
 	{% else %}
 		{% if resource_creation_dict.Resource_creation.Creation_start_date %}
 			<div class="dataline">
@@ -34,7 +32,6 @@
 				</label>
 			</div>
 		{% endif %}
-		
 		{% if resource_creation_dict.Resource_creation.Creation_end_date %}
 			<div class="dataline">
 				<label>				
@@ -42,10 +39,7 @@
 				</label>
 			</div>
 		{% endif %}
-	
-	{% endif %}	
-	
-		
+	{% endif %}
 	<div class="dataline">
 		{% for key, value in resource_creation_dict.items %}
 			{% if "Funding_project" in value %}
@@ -59,6 +53,5 @@
 				{% endfor %}
 		{% endfor %}
 	</div>
-	
 </div>
 {% endspaceless %}

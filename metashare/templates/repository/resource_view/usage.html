@@ -90,8 +90,7 @@
 			{% endif %}
 		{% endfor %}
 	{% endif %}
-	
-	
+
 	{% if "Derived_resource" in usage_dict.Usage.Actual_use %}
 		<label class='subtitle'>Derived resources</label>
 		{% for key, value in usage_dict.Usage.Actual_use.items %}

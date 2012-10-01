@@ -1,3 +1,4 @@
+{% spaceless %}
 
 {% with media_info=resource_component_dict.Resource_component %}
 	{% if type == "text" %}
@@ -44,3 +45,5 @@
 		{% endif %}
 	{% endif %}
 {% endwith %}
+
+{% endspaceless %}

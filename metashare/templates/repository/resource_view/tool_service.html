@@ -1,7 +1,6 @@
 {% spaceless %}
 
 	<label class='component'>{{ tool_service.Tool_service_type }} {{ tool_service.Tool_service_subtype }}</label>
-		
 	{% if tool_service.Language_dependent %}			
 		 <div class="dataline">
 			<label>
@@ -168,13 +167,12 @@
 				</label>
 			</div>
 		{% endif %}
-
 		
- 		 {% for key, value in tool_service.Tool_service_creation.items %}
-		 	{% if "Original_source" in key %}
+		{% for key, value in tool_service.Tool_service_creation.items %}
+			{% if "Original_source" in key %}
 				{% include "repository/resource_view/target_resource.html" with target=value  title="Original Source" %}
-		 	{% endif %}
-		 {% endfor %}
+			{% endif %}
+		{% endfor %}
 
 		{% if tool_service.Tool_service_creation.Creation_details %}
 			 <div class="dataline indented">
