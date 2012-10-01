@@ -7,8 +7,6 @@
 		<div>
 			{% if "Modality_type" in key1 %}
 				<label class='subtitle'>{{ value1 }} {% if "Size_per_modality" in value %}{% include "repository/resource_view/size.html" with size=value.Size_per_modality type="sub" %}{% endif %}</label>
-				<label class="dataline indented">
-				</label>
 			{% endif %}			
 		</div>
 	{% endfor %}
