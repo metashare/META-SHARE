@@ -2,11 +2,10 @@
 
 <label class='title'>Languages</label>
 <div class="dataline">
-<ul>
 	{% for key, value in languages.items %}
 		{% for key1, value1 in value.items %}
 				{% if key1 == "Language_name" %}
-					<li class="dataline" title="{{value.Language_id}}">
+					<label class="subtitle" title="{{value.Language_id}}">
 						{{ value1 }}
 						{# Take care of size #}
 						{% if "Size_per_language" in value %} 
@@ -14,20 +13,25 @@
 								{% include "repository/resource_view/size.html" with size=value.Size_per_language type="sub" %}
 							{% endif %}
 						{% endif %}
-						 
-						{# Take care of language variety #}
-						{% if "Language_variety" in value %}&mdash; 
-							<strong>variety: </strong>
+					</label> 
+					{# Take care of language variety #}
+					{% if "Language_variety" in value %}
+						<div class="dataline indented">
+							<label class="dataline"><strong>Variety: </strong>
 							{{ value.Language_variety.Language_variety_name }}
+							{% if value.Language_variety.Language_variety_type %}							
+								(Type: {{ value.Language_variety.Language_variety_type }})							
+							{% endif %} 
 							{% if value.Language_variety.Size_per_language_variety %}
 								{% include "repository/resource_view/size.html" with size=value.Language_variety.Size_per_language_variety type="sub" %}
 							{% endif %}
-						{% endif %}		 
-					</li>
+							</label> 
+						</div>
+						
+					{% endif %} 
 				{% endif %}
 		{% endfor %}
 	{% endfor %}
-</ul>
 </div>
 
 {% endspaceless %}

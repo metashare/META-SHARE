@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+  <identificationInfo>
+    <resourceName>PET</resourceName>
+    <description>The PET system is a production-quality run-time system for processing, especially analysis, of natural language using unification or constraint-based grammars</description>
+    <url>http://pet.opendfki.de/</url>
+    <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+  </identificationInfo>
+  <distributionInfo>
+    <availability>available-unrestrictedUse</availability>
+    <licenceInfo>
+      <licence>LGPL</licence>
+      <downloadLocation>http://pet.opendfki.de/browser/pet/main</downloadLocation>
+    </licenceInfo>
+  </distributionInfo>
+  <contactPerson>
+    <surname>Kiefer</surname>
+    <givenName>Bernd</givenName>
+    <sex>male</sex>
+    <communicationInfo>
+      <email>kiefer@dfki.de</email>
+      <url>http://www.dfki.de/~kiefer/</url>
+    </communicationInfo>
+    <affiliation>
+      <organizationName>Deutsches Forschungszentrum für Künstliche Intelligenz</organizationName>
+      <organizationShortName>DFKI</organizationShortName>
+      <departmentName>Language Technology Lab</departmentName>
+      <communicationInfo>
+        <email>sek-hu@dfki.de</email>
+        <url>http://www.dfki.de/lt</url>
+        <address>Stuhlsatzenhausweg 3</address>
+        <zipCode>66123</zipCode>
+        <city>Saarbrücken</city>
+        <country>DE</country>
+        <telephoneNumber>+49_681_857755282</telephoneNumber>
+        <faxNumber>+49_681_857755338</faxNumber>
+      </communicationInfo>
+    </affiliation>
+  </contactPerson>
+  <metadataInfo>
+    <metadataCreationDate>2012-05-15</metadataCreationDate>
+  </metadataInfo>
+  <usageInfo>
+    <foreseenUseInfo>
+      <foreseenUse>nlpApplications</foreseenUse>
+    </foreseenUseInfo>
+  </usageInfo>
+  <resourceComponentType>
+    <toolServiceInfo>
+      <resourceType>toolService</resourceType>
+      <toolServiceType>other</toolServiceType>
+      <languageDependent>false</languageDependent>
+      <toolServiceCreationInfo>
+        <implementationLanguage>C++</implementationLanguage>
+      </toolServiceCreationInfo>
+    </toolServiceInfo>
+  </resourceComponentType>
+</resourceInfo>

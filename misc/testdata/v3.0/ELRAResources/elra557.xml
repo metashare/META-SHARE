@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">N4 (NATO Native and Non Native) database</resourceName>
+      <resourceName lang="fr">Base de données N4 (NATO Native and Non Native)</resourceName>
+      <description lang="en">Speech technology is covering an increasing number of languages, and systems are becoming more robust with regard to speech variability such as speaking style and accents. However, for real applications, especially in a multilingual and multinational context, further robustness to regional and even non-native accents is necessary. Among numerous corpora available for speech research few have specifically addressed this issue. The NATO Speech and Language Technology group decided to create a corpus geared towards the study of non-native accents. The group chose naval communications as the common task because it naturally includes a great deal of non-native speech and because there were training facilities where data could be collected in several countries. The N4 NATO Native and Non-Native Speech corpus was developed by the NATO research group on Speech and Language Technology in order to provide a military-oriented database for multilingual and non-native speech processing studies. Speech data was recorded in the naval transmission training centers of four countries (Germany, The Netherlands, United Kingdom, and Canada) during naval communication training sessions in 2000-2002. The material consists of native and non-native speakers using NATO Naval English procedure between ships where the typical sentence sounds like “This is alpha, whiskey, roger. I make two seven zero six hostile, two seven zero six. Out”, and reading from a text, "The North Wind and the Sun," in both English and the speaker's native language. The audio material was recorded on DAT and downsampled to 16kHz-16bit, and all the audio files have been manually transcribed and annotated with speakers identities using the Transcriber tool. Navy procedure recordings and text readings have been stored in different files. The first digit in the filename indicates the type of speech. Among speech segments, the duration of Navy procedure recordings range from 1.3 to 2.3 hours for a total of 7.5 hours. The duration of the native language text readings range from 1.5 minutes to 22.9 minutes for a total of around one hour. &lt;table  border="0" width="100%" cellspacing="0" cellpadding="2" class="infoBoxContents"&gt;&lt;tr align=center&gt;&lt;td&gt; &lt;/td&gt;&lt;td&gt;Canada&lt;/td&gt;&lt;td&gt;Germany&lt;/td&gt;&lt;td&gt;The Netherlands&lt;/td&gt;&lt;td&gt;United Kingdom&lt;/td&gt;&lt;td&gt;All&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;&lt;strong&gt;Signal&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;5.30&lt;/td&gt;&lt;td&gt;3.20&lt;/td&gt;&lt;td&gt;5.00&lt;/td&gt;&lt;td&gt;6.30&lt;/td&gt;&lt;td&gt;19.80&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=right&gt;Silence&lt;/td&gt;&lt;td&gt;3.00&lt;/td&gt;&lt;td&gt;0.56&lt;/td&gt;&lt;td&gt;2.00&lt;/td&gt;&lt;td&gt;4.70&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=right&gt;Speech&lt;/td&gt;&lt;td&gt;2.30&lt;/td&gt;&lt;td&gt;2.64&lt;/td&gt;&lt;td&gt;3.00&lt;/td&gt;&lt;td&gt;1.60&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;&lt;strong&gt;Speech&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;2.30&lt;/td&gt;&lt;td&gt;2.64&lt;/td&gt;&lt;td&gt;3.00&lt;/td&gt;&lt;td&gt;1.60&lt;/td&gt;&lt;td&gt;9.54&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=right&gt;Navy proc&lt;/td&gt;&lt;td&gt;2.00&lt;/td&gt;&lt;td&gt;1.90&lt;/td&gt;&lt;td&gt;2.30&lt;/td&gt;&lt;td&gt;1.30&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=right&gt;Read text&lt;/td&gt;&lt;td&gt;0.30&lt;/td&gt;&lt;td&gt;0.74&lt;/td&gt;&lt;td&gt;0.70&lt;/td&gt;&lt;td&gt;0.30&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;&lt;strong&gt;Read text&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;0.30&lt;/td&gt;&lt;td&gt;0.74&lt;/td&gt;&lt;td&gt;0.70&lt;/td&gt;&lt;td&gt;0.30&lt;/td&gt;&lt;td&gt;2.04&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=right&gt;Non-native&lt;/td&gt;&lt;td&gt;0.27&lt;/td&gt;&lt;td&gt;0.37&lt;/td&gt;&lt;td&gt;0.32&lt;/td&gt;&lt;td&gt;0.00&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=right&gt;Native&lt;/td&gt;&lt;td&gt;0.03&lt;/td&gt;&lt;td&gt;0.37&lt;/td&gt;&lt;td&gt;0.38&lt;/td&gt;&lt;td&gt;0.30&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;The database contains the following information about each speaker: gender, age, weight, length, possible speaking or hearing disorders, education level, living area, accent, second language, the year English was learned(for non-native speakers). The speaker accents vary widely from country to country. The speaker's average age was 22.6 years. Nineteen women participated, accounting for 18% of the study participants. There were a total of 115 speakers. &lt;table  border="0" width="100%" cellspacing="0" cellpadding="2" class="infoBoxContents"&gt;&lt;tr align=center&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;Canada&lt;/td&gt;&lt;td&gt;Germany&lt;/td&gt;&lt;td&gt;The Netherlands&lt;/td&gt;&lt;td&gt;United Kingdom&lt;/td&gt;&lt;td&gt;All&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;&lt;strong&gt;#Speakers&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;22&lt;/td&gt;&lt;td&gt;51&lt;/td&gt;&lt;td&gt;31&lt;/td&gt;&lt;td&gt;11&lt;/td&gt;&lt;td&gt;115&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;&lt;strong&gt;#Women&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;5&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;9&lt;/td&gt;&lt;td&gt;5&lt;/td&gt;&lt;td&gt;19&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;&lt;strong&gt;Age&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;22-35&lt;/td&gt;&lt;td&gt;17-23&lt;/td&gt;&lt;td&gt;17-61&lt;/td&gt;&lt;td&gt;19-62&lt;/td&gt;&lt;td&gt;17-62&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;&lt;strong&gt;Age mean&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;28.3&lt;/td&gt;&lt;td&gt;20.1&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;td&gt;27.5&lt;/td&gt;&lt;td&gt;22.6&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+      <description lang="fr">La technologie de la parole couvre un nombre croissant de langues et les systèmes deviennent plus robustes vis-à-vis de la variabilité de la parole tel que le style de parole et les accents. Cependant, pour les applications réelles, en particulier dans un contexte multilingue et multinational, plus de robustesse est nécessaire vis-à-vis des accents régionaux et mêmes des accents non natifs. Parmi les nombreux corpus disponibles pour la recherche en parole, peu répondent spécifiquement à cette question. Le groupe de technologie de la langue et de la parole de l’OTAN a décidé de créer un corpus orienté vers l’étude des accents non natifs. Le groupe a choisi la communication navale comme tâche commune car elle comprend très naturellement une grande variété de parole non native et il existait des facilités d’expérimentation puisque les données pouvaient être collectées dans plusieurs pays. Le corpus de parole N4 (NATO Native and Non-Native) a été développé par le groupe de recherché en parole et technologie de la langue de l’OTAN, afin d’offrir une base de données de type militaire pour les études de traitement de la parole multilingue et non native. Les données de parole ont été enregistrées dans des centres d’entraînement de transmission navale de quatre pays (Allemagne, Pays-Bas, Royaume Uni et Canada) au cours des sessions d’entraînement en communication navale entre 2000 et 2002. Le matériel consiste en l’enregistrement de locuteurs natifs et non natifs, utilisant une procédure navale de l’OTAN en anglais, avec des phrases types ressemblant à “This is alpha, whiskey, roger. I make two seven zero six hostile, two seven zero six. Out”. Les locuteurs ont également lu un texte, "The North Wind and the Sun," à la fois en anglais et dans la langue du locuteur. Le matériel audio a été enregistré sur DAT et échantillonné en 16kHz-16bit. Tous les fichiers audio ont été transcrits manuellement et annotés avec l’identité des locuteurs grâce à l’outil Transcriber. Les enregistrements des procédures de navigation et les textes lus ont été stockés dans des fichiers différents. Le premier numéro du fichier précise le type de parole. Pour les segments de parole, la durée des enregistrements de procédure navale se situe entre 1,3 et 2,3 heures pour un total de 7,5 heures. La durée du texte lu dans la langue native se situe entre 1,5 minutes et 22,9 minutes pour un total d’environ une heure. &lt;table  border="0" width="100%" cellspacing="0" cellpadding="2" class="infoBoxContents"&gt;&lt;tr align=center&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;Canada&lt;/td&gt;&lt;td&gt;Allemagne&lt;/td&gt;&lt;td&gt;Pays-Bas&lt;/td&gt;&lt;td&gt;Royaume Uni&lt;/td&gt;&lt;td&gt;All&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;&lt;strong&gt;Signal&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;5.30&lt;/td&gt;&lt;td&gt;3.20&lt;/td&gt;&lt;td&gt;5.00&lt;/td&gt;&lt;td&gt;6.30&lt;/td&gt;&lt;td&gt;19.80&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=right&gt;Silence&lt;/td&gt;&lt;td&gt;3.00&lt;/td&gt;&lt;td&gt;0.56&lt;/td&gt;&lt;td&gt;2.00&lt;/td&gt;&lt;td&gt;4.70&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=right&gt;Parole&lt;/td&gt;&lt;td&gt;2.30&lt;/td&gt;&lt;td&gt;2.64&lt;/td&gt;&lt;td&gt;3.00&lt;/td&gt;&lt;td&gt;1.60&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;&lt;strong&gt;Parole&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;2.30&lt;/td&gt;&lt;td&gt;2.64&lt;/td&gt;&lt;td&gt;3.00&lt;/td&gt;&lt;td&gt;1.60&lt;/td&gt;&lt;td&gt;9.54&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align= right&gt;Procédure navale&lt;/td&gt;&lt;td&gt;2.00&lt;/td&gt;&lt;td&gt;1.90&lt;/td&gt;&lt;td&gt;2.30&lt;/td&gt;&lt;td&gt;1.30&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=right&gt;Texte lu&lt;/td&gt;&lt;td&gt;0.30&lt;/td&gt;&lt;td&gt;0.74&lt;/td&gt;&lt;td&gt;0.70&lt;/td&gt;&lt;td&gt;0.30&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;&lt;strong&gt;Texte lu&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;0.30&lt;/td&gt;&lt;td&gt;0.74&lt;/td&gt;&lt;td&gt;0.70&lt;/td&gt;&lt;td&gt;0.30&lt;/td&gt;&lt;td&gt;2.04&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=right&gt;Non natif&lt;/td&gt;&lt;td&gt;0.27&lt;/td&gt;&lt;td&gt;0.37&lt;/td&gt;&lt;td&gt;0.32&lt;/td&gt;&lt;td&gt;0.00&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=right&gt;Natif&lt;/td&gt;&lt;td&gt;0.03&lt;/td&gt;&lt;td&gt;0.37&lt;/td&gt;&lt;td&gt;0.38&lt;/td&gt;&lt;td&gt;0.30&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;La base de données contient l’information suivante pour chaque locuteur : sexe, âge, poids, taille, éventuels troubles de parole ou d’audition, niveau de formation, lieu de résidence, accent, deuxième langue, l’année où il/elle a appris l’anglais (pour les locuteurs non natifs). Les accents des locuteurs varient de manière importante d’un pays à l’autre. La moyenne d’âge des locuteurs est de 22,6 ans. Dix-neuf femmes ont participaté, soit 18% des participants à l’étude. Un total de 115 locuteurs a été enregistré. &lt;table  border="0" width="100%" cellspacing="0" cellpadding="2" class="infoBoxContents"&gt;&lt;tr align=center&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;Canada&lt;/td&gt;&lt;td&gt;Allemagne&lt;/td&gt;&lt;td&gt;Pays-Bas&lt;/td&gt;&lt;td&gt;Royaume Uni&lt;/td&gt;&lt;td&gt;All&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;&lt;strong&gt;#Locuteurs&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;22&lt;/td&gt;&lt;td&gt;51&lt;/td&gt;&lt;td&gt;31&lt;/td&gt;&lt;td&gt;11&lt;/td&gt;&lt;td&gt;115&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;&lt;strong&gt;#Femmes&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;5&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;9&lt;/td&gt;&lt;td&gt;5&lt;/td&gt;&lt;td&gt;19&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;&lt;strong&gt;Age&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;22-35&lt;/td&gt;&lt;td&gt;17-23&lt;/td&gt;&lt;td&gt;17-61&lt;/td&gt;&lt;td&gt;19-62&lt;/td&gt;&lt;td&gt;17-62&lt;/td&gt;&lt;/tr&gt;&lt;tr align=center&gt;&lt;td align=left&gt;&lt;strong&gt;Moyenne d'âge&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;28.3&lt;/td&gt;&lt;td&gt;20.1&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;td&gt;27.5&lt;/td&gt;&lt;td&gt;22.6&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+      <resourceShortName/>
+      <url>http://catalog.elra.info/product_info.php?products_id=989</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-S0239</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>500.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>500.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>400.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>400.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <availabilityStartDate>2007-05-31</availabilityStartDate>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Valérie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <lastDateUpdated>2007-06-04</lastDateUpdated>
+   </versionInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusAudioInfo>
+               <mediaType>audio</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>eng</languageId>
+                  <languageName>English</languageName>
+               </languageInfo>
+               <audioSizeInfo>
+                  <sizeInfo>
+                     <size>no size available</size>
+                     <sizeUnit>other</sizeUnit>
+                  </sizeInfo>
+               </audioSizeInfo>
+            </corpusAudioInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

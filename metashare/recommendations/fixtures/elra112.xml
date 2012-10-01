@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourceInfo xmlns:xslt="http://xml.apache.org/xsltm"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema"
-  xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema">
+<resourceInfo xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
   <identificationInfo>
     <resourceName lang="en">Thai Speecon database</resourceName>
     <resourceName lang="fr">Base de données Speecon thaï
@@ -90,7 +88,7 @@
       31 locuteurs ont entre 11 et 15 ans.Un lexique de prononciation
       avec sa transcription phonétique en SAMPA est également fourni.
     </description>
-    <resourceShortName />
+    <resourceShortName/>
     <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
     <url>http://catalog.elra.info/product_info.php?products_id=1076
     </url>

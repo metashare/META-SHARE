@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+      <identificationInfo>
+        <resourceName lang="en">EuroParl-NE Corpus</resourceName>
+        <description lang="en">Corpus of transcribed Europarliament Sessions in Greek Language. It amounts 54.756 words. Annotated with Named Entities [person, organization, location] according to the ACE guidelines.</description>
+          <metaShareId>
+            NOT_DEFINED_FOR_V2
+          </metaShareId>
+      </identificationInfo>
+      <distributionInfo>
+        <availability>available-unrestrictedUse</availability>
+          <licenceInfo>
+            <licence>proprietary</licence>
+          </licenceInfo>
+      </distributionInfo>
+      <contactPerson>
+        <surname lang="en">Piperidis</surname>
+        <givenName lang="en">Stelios</givenName>
+        <sex>male</sex>
+          <communicationInfo>
+            <email>spip@ilsp.athena-innovation.gr</email>
+            <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=51&amp;Itemid=156</url>
+            <telephoneNumber>+302106875421</telephoneNumber>
+            <faxNumber>+302106854270</faxNumber>
+          </communicationInfo>
+        <position>Senior Research Fellow</position>
+          <affiliation>
+            <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+            <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+              <communicationInfo>
+                <email>www@ilsp.athena-innovation.gr</email>
+                <url>http://www.ilsp.gr/</url>
+                <address>Artemidos 6 &amp; Epidavrou</address>
+                <zipCode>GR-15125</zipCode>
+                <city>Maroussi</city>
+                <country>GR</country>
+                <telephoneNumber>+302106875300</telephoneNumber>
+                <faxNumber>+302106854270</faxNumber>
+                <faxNumber>+302106856794</faxNumber>
+              </communicationInfo>
+          </affiliation>
+      </contactPerson>
+      <contactPerson>
+        <surname lang="en">Konstandinidis </surname>
+        <givenName lang="en">Alexis</givenName>
+          <communicationInfo>
+            <email>unknown@unknown.gr</email>
+          </communicationInfo>
+      </contactPerson>
+      <metadataInfo>
+        <metadataCreationDate>2012-02-02</metadataCreationDate>
+          <metadataCreator>
+            <surname lang="en">Desipri</surname>
+            <givenName lang="en">Elina</givenName>
+            <sex>female</sex>
+              <communicationInfo>
+                <email>elina@ilsp.athena-innovation.gr</email>
+                <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=23&amp;Itemid=156</url>
+                <telephoneNumber>+302106875442</telephoneNumber>
+                <faxNumber>+302106854270</faxNumber>
+                <faxNumber>+302106856794</faxNumber>
+              </communicationInfo>
+            <position>Scientific Associate</position>
+              <affiliation>
+                <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                  <communicationInfo>
+                    <email>www@ilsp.athena-innovation.gr</email>
+                    <url>http://www.ilsp.gr/</url>
+                    <address>Artemidos 6 &amp; Epidavrou</address>
+                    <zipCode>GR-15125</zipCode>
+                    <city>Maroussi</city>
+                    <country>GR</country>
+                    <telephoneNumber>+302106875300</telephoneNumber>
+                    <faxNumber>+302106854270</faxNumber>
+                    <faxNumber>+302106856794</faxNumber>
+                  </communicationInfo>
+              </affiliation>
+          </metadataCreator>
+        <source>META-SHARE/ILSP</source>
+        <metadataLastDateUpdated>2012-05-14</metadataLastDateUpdated>
+      </metadataInfo>
+      <usageInfo>
+          <foreseenUseInfo>
+            <foreseenUse>nlpApplications</foreseenUse>
+            <useNLPSpecific>namedEntityRecognition</useNLPSpecific>
+          </foreseenUseInfo>
+      </usageInfo>
+      <resourceCreationInfo>
+          <resourceCreator>
+              <organizationInfo>
+                <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                  <communicationInfo>
+                    <email>www@ilsp.athena-innovation.gr</email>
+                    <url>http://www.ilsp.gr/</url>
+                    <address>Artemidos 6 &amp; Epidavrou</address>
+                    <zipCode>GR-15125</zipCode>
+                    <city>Maroussi</city>
+                    <country>GR</country>
+                    <telephoneNumber>+302106875300</telephoneNumber>
+                    <faxNumber>+302106854270</faxNumber>
+                    <faxNumber>+302106856794</faxNumber>
+                  </communicationInfo>
+              </organizationInfo>
+          </resourceCreator>
+      </resourceCreationInfo>
+      <resourceComponentType>
+          <corpusInfo>
+            <resourceType>corpus</resourceType>
+              <corpusMediaType>
+                  <corpusTextInfo>
+                    <mediaType>text</mediaType>
+                      <lingualityInfo>
+                        <lingualityType>monolingual</lingualityType>
+                      </lingualityInfo>
+                      <languageInfo>
+                        <languageId>el</languageId>
+                        <languageName>Modern Greek (1453-)</languageName>
+                      </languageInfo>
+                      <modalityInfo>
+                        <modalityType>spokenLanguage</modalityType>
+                      </modalityInfo>
+                      <sizeInfo>
+                        <size>54756</size>
+                        <sizeUnit>words</sizeUnit>
+                      </sizeInfo>
+                      <annotationInfo>
+                        <annotationType>semanticAnnotation-namedEntities</annotationType>
+                      </annotationInfo>
+                      <domainInfo>
+                        <domain>politics</domain>
+                      </domainInfo>
+                      <creationInfo>
+                          <originalSource>
+                            <targetResourceNameURI> Europarliament Sessions in Greek Language</targetResourceNameURI>
+                          </originalSource>
+                      </creationInfo>
+                  </corpusTextInfo>
+              </corpusMediaType>
+          </corpusInfo>
+      </resourceComponentType>
+  </resourceInfo>

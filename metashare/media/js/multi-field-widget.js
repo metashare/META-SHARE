@@ -81,3 +81,47 @@ function add_container(widget_id) {
 
     input.focus();
 }
+
+var setWidgetId = function(jqElem, idNumber)
+{
+	var widgetId = 'widget_' + idNumber;
+	jqElem.attr('id', widgetId);
+	
+	// <li> with text field
+	jqElem.find('li.container[id]').each(function(liIndex, liElem){
+		var liId = $(liElem).attr('id');
+		$(liElem).attr('id', 'container_' + idNumber + '_' + liIndex);
+		$(liElem).find('a').attr('href', 'javascript:delete_container(' + idNumber + ', ' + liIndex + ');')
+	});
+	
+	// <li> 'Add another field'
+	jqElem.find('li.container:not([id])').each(function(liIndex, liElem){
+		$(liElem).find('a').attr('id', 'add_button_' + idNumber).attr('href', 'javascript:add_container(' + idNumber + ');')
+	});
+	
+	// Empty element
+	jqElem.find('li.empty_widget').each(function(liIndex, liElem){
+		$(liElem).attr('id', 'empty_widget_' + idNumber);
+		$(liElem).find('a').attr('href', 'javascript:delete_container(' + idNumber + ');')
+	});
+}
+
+var lastMultifieldWidgetId = 0;
+
+var getNextMultifieldWidgetId = function()
+{
+	lastMultifieldWidgetId++;
+	return lastMultifieldWidgetId;
+}
+
+django.jQuery(document).ready(function() {
+	/*
+	 * Force id of multifield widgets to be unique.
+	 */
+	var $ = django.jQuery;
+	
+	$('body').find('ul.multifield_list').each(function(index, elem){
+		var wId = getNextMultifieldWidgetId();
+		setWidgetId($(elem), wId);
+	});
+});
