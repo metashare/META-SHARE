@@ -162,22 +162,23 @@ function addStatus(filter){
       <input type="hidden" name="model" id="modelname" value="{{ selected_model }}">
       <input type="hidden" name="class" id="classname" value="{{ selected_class }}">
       <input type="hidden" name="field" id="fieldname" value="{{ selected_field }}">
-      <input type="hidden" name="expandall" id="expandall" value="{{ expand_all }}">
-   </form>
-    
-<div style="*display: inline;"><h4>&nbsp;&nbsp;Found <font size=+1>{{ fields_count }}</font> metadata</h4>
-    <div style="float: right; margin-top: -20px; margin-right: 20px">[ <a href="javascript:expandAll();">Expand all</a>
-            | <a href="javascript:collapseAll();">Collapse all</a> ]</div>
-</div>    
+      <input type="hidden" name="expandall" id="expandall" value="{{ expand_all }}"> 
+    </form>
+    <h3>Found {{ fields_count }} metadata</h3>
+    <div>(the following lines are the metadata components and elements included in the <a href="http://www.meta-share.org/portal/knowledgebase/DetailedPresentationOfTheModel" target="metamodel">META-SHARE model</a> grouped by different roles and alphabetically sorted)</div>
     {% if errors != None %}
-            &nbsp; <img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/error.png"> &nbsp; {{ errors }} &nbsp;
+       <div class="warning">
+            &nbsp;<img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/error.png"> &nbsp; {{ errors }} &nbsp;
        </div>
     {% endif %}
-    
-       
-        {% for class, fields in usage_fields %}
-            {% if selected_model == fields.0.7 %}
-             {% if textvalues != None and textvalues|length > 0 %}
+  <div>
+    <span style="float: right;">[ <a href="javascript:expandAll();">Expand all</a> | <a href="javascript:collapseAll();">Collapse all</a> ]</span>
+    <div style="clear: both;"></div>
+  </div>
+
+  {% for class, fields in usage_fields %}
+    {% if selected_model == fields.0.7 %}
+      {% if textvalues != None and textvalues|length > 0 %}
             <!-- used values table -->
             <a name="fieldvalues"></a>
             <div id=fieldvalues class=fieldvalues>
@@ -198,65 +199,63 @@ function addStatus(filter){
             </table>
             </div>
             <!-- end table -->
-            {% endif %} 
-            {% endif %} 
+      {% endif %} 
+    {% endif %}
             
-            <a name="{{ fields.0.7 }}"></a>
-            <div class="accordion"><a href="#" onclick="return false"><label class='component'>&nbsp;{{ class }}&nbsp;</label></a></div> 
-            <div id="{{ fields.0.7 }}" class="filter">
-            {% for field in fields %}
-                {% if field.6 == "component" %}
-                    <div class="tab_content" style="width:100%">
-                    <a href="javascript:scrollToAnchor('{{ field.1.split|join:"_" }}')"><label class='component indent'><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/bullet_arrow_right.png">
-                     {{ field.2 }}</label></a>
-                {% else %}
-                    <div class="dataline mandatory" style="width:100%">
-                        {% if field.6 == "ifield" %}
-                            <label class='indent'>&nbsp;&nbsp;&nbsp;
-                        {% endif %}   
-                        {% if field.5 > 0 %}
-                            <a href="javascript:getvalues('{{ fields.0.7 }}','{{ field.7 }}','{{ field.1 }}')"
-                            {% if selected_class == field.7 and selected_field == field.1 %}
-                                class="addFilter">
-                            {% else %}
-                                class="deleteFilter"> 
-                            {% endif %}
-                            <label class="title pointer" style="margin-left: 4px">&nbsp;{{ field.2 }}&nbsp;</label></a>
-                        {% else %}
-                            <label class="title indent">&nbsp;{{ field.2 }}&nbsp;</label>
-                        {% endif %}
-                        {% if field.6 == "ifield" %}
-                            </label>
-                        {% endif %}   
-                {% endif %}
-                
-                
-                {% if field.3 == 1 %}
-                      <div class="coverage required">
-                {% else %}
-                    {% if field.3 == 2 %}
-                         <div class="coverage optional">
-                    {% else %}
-                        {% if field.3 == 3 %}
-                            <div class="coverage recommended">
-                        {% else %}
-                            <div class="coverage never">
-                        {% endif %}
-                    {% endif %}
-                {% endif %}
-                {% if field.4 == 0 %}
-                    &nbsp;<i>never used</i>&nbsp;
-                {% else %}
-                    &nbsp; {{ field.4 }}/{{ field.5 }} &nbsp;
-                {% endif %}
-                </div>
-                
-                </div>                
-            {% endfor %}
-             </div> <!-- end filter -->
+    <a name="{{ fields.0.7 }}"></a>
+    <div class="accordion"><a href="#" onclick="return false"><label class='component'>&nbsp;{{ class }}&nbsp;</label></a></div> 
+    <div id="{{ fields.0.7 }}" class="filter">
+    {% for field in fields %}
+      {% if field.6 == "component" %}
+          <div class="tab_content" style="width:100%">
+          <a href="javascript:scrollToAnchor('{{ field.1.split|join:"_" }}')"><label class='component indent'><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/bullet_arrow_right.png">
+           {{ field.2 }}</label></a>
+      {% else %}
+          <div class="dataline mandatory" style="width:100%">
+              {% if field.6 == "ifield" %}
+                  <label class='indent'>&nbsp;&nbsp;&nbsp;
+              {% endif %}   
+              {% if field.5 > 0 %}
+                  <a href="javascript:getvalues('{{ fields.0.7 }}','{{ field.7 }}','{{ field.1 }}')"
+                  {% if selected_class == field.7 and selected_field == field.1 %}
+                      class="addFilter">
+                  {% else %}
+                      class="deleteFilter"> 
+                  {% endif %}
+                  <label class="title pointer" style="margin-left: 4px">&nbsp;{{ field.2 }}&nbsp;</label></a>
+              {% else %}
+                  <label class="title indent">&nbsp;{{ field.2 }}&nbsp;</label>
+              {% endif %}
+              {% if field.6 == "ifield" %}
+                  </label>
+              {% endif %}   
+      {% endif %}
+
+      {% if field.3 == 1 %}
+            <div class="coverage required">
+      {% else %}
+          {% if field.3 == 2 %}
+               <div class="coverage optional">
+          {% else %}
+              {% if field.3 == 3 %}
+                  <div class="coverage recommended">
+              {% else %}
+                  <div class="coverage never">
+              {% endif %}
+          {% endif %}
+      {% endif %}
+      {% if field.4 == 0 %}
+          &nbsp;<i>never used</i>&nbsp;
+      {% else %}
+          &nbsp; {{ field.4 }}/{{ field.5 }} &nbsp;
+      {% endif %}
+      </div>{# end coverage #}
+
+      </div>{# end tab_content/dataline #}
+    {% endfor %}
+    </div>{# end filter #}
              
-        {% endfor %}
- </div>
+  {% endfor %}
 
     <script>
     function scrollToAnchor(name) {
@@ -279,5 +278,6 @@ function addStatus(filter){
     {% endif %}
     
     </script>
-{% endif %} 
+{% endif %}
+</div>{# end content_tab #}
 {% endblock %}

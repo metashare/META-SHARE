@@ -5,11 +5,15 @@
     JavaScript should be enabled in order to support all functionalities.
     Enable JavaScript by changing your browser options, and then try again.
 </noscript>
-
+{% if geovisits|length > 0 %}
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script type="text/javascript">
-    google.load('visualization', '1', {packages: ['geochart']});
-    google.setOnLoadCallback(drawVisualization);
+    try {
+        google.load('visualization', '1', {packages: ['geochart']});
+        google.setOnLoadCallback(drawVisualization);
+    } catch ( e ) {
+        // error calling Google occured
+    }
     var data; 
     var setOn = 0;
     function drawVisualization() {
@@ -33,35 +37,11 @@
                window.location.replace("{% url metashare.views.frontpage %}stats/top/?view={{ view }}&country="+countrycode);
             });
       
-        geochart.draw(data, options);     
+        geochart.draw(data, options);
+        
     }
-   
-    
-    function print_r(arr,level) {
-        var dumped_text = "";
-        if(!level) level = 0;
-        
-        //The padding given at the beginning of the line.
-        var level_padding = "";
-        for(var j=0;j<level+1;j++) level_padding += "    ";
-        
-        if(typeof(arr) == 'object') { //Array/Hashes/Objects 
-            for(var item in arr) {
-                var value = arr[item];
-        
-                if(typeof(value) == 'object') { //If it is an array,
-                    dumped_text += level_padding + "'" + item + "' ...\n";
-                    dumped_text += print_r(value,level+1);
-                } else {
-                    dumped_text += level_padding + "'" + item + "' => \"" + value + "\"\n";
-                }
-            }
-        } else { //Stings/Chars/Numbers etc.
-            dumped_text = "===>"+arr+"<===("+typeof(arr)+")";
-        }
-            return dumped_text;
-        }
 </script>
+{% endif %}
 
 <script language="javascript">
 $(document).ready(function(){
@@ -139,7 +119,7 @@ function addStatus(filter){
 <div class="content_tab"> 
 	<div style="margin-left: 20px; padding-top: 15px; padding-bottom: 10px">
 	    <form class="form_helper" name="topform" id="topform" action="{% url metashare.views.frontpage %}stats/top/" method="get">
-            Show the <select style="color: #000; background: #eee" name='view' onchange="topform.submit();">
+            <h4>Show the <select style="color: #000; background: #eee" name='view' onchange="topform.submit();">
             
             <option value='topviewed' style="background-image: url({{ MEDIA_URL }}stats/img/view_icon.gif); background-repeat: no-repeat;"
             > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Most Viewed Resources
@@ -168,15 +148,7 @@ function addStatus(filter){
             {% endifequal %}
             > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Latest Updated Resources
             </select>
-           <div style="float: right; display: inline-block; margin-left: 20px; padding: 0px; margin-top: 0px; margin-bottom:0px; margin-right: 400px; vertical-align: bottom"> 
-	    {% if offset != 0 %}
-	         <div id=morebutton>&nbsp;<a href="?view={{ view }}&offset=0&limit={{ limit }}&last={{ last }}&country={{ countrycode }}">go top</a>&nbsp;</div>	
-        {% endif %}
-        {% if topdata|length >= limit %}
-	        <div id=morebutton>&nbsp;<a href="?view={{ view }}&offset={{ offset|add:limit}}&limit={{ limit }}&last={{ last }}&country={{ countrycode }}">show more</a>&nbsp;</div>	        
-	    {% endif %}
-	    
-	        </div>
+            </h4>
 	</form>
         
      </div>
@@ -185,12 +157,12 @@ function addStatus(filter){
        <div class="content_box">No data found</div>
    {% else %}
     {% if not "late" in view or geovisits|length > 0 %}
-    <div class="left_box">
-	  <div class="filters" 
+     <div class="left_box">
+	  <div class="filters">
 	  <h4>Filter by:</h4>
 	  <div id="searchFilters">
 	    {% if not "late" in view %}
-	    <div class="accordion"><a href="#" onclick="return false">Date</a></div>
+	        <div class="accordion"><a href="#" onclick="return false">Date</a></div>
             <div class="filter">
                 {% with "day week month year" as list %}
                     {% for date in list.split %} 
@@ -204,11 +176,10 @@ function addStatus(filter){
                     {% endfor %}
                 {% endwith %}
             </div>
-            
 	    {% endif %}
 	    
 	    {% if geovisits|length > 0 %}
-	    <div class="accordion"><a href="#" onclick="return false">Provenance of {{ visitstitle }}</a></div>
+	        <div class="accordion"><a href="#" onclick="return false">Provenance of {{ visitstitle }}</a></div>
             <div class="filter">
                 {% for geoinfo in geovisits %}
                 <div style="vertical-align: top">
@@ -224,20 +195,34 @@ function addStatus(filter){
                 </div>
                 {% endfor %}
             </div>
-         <div id="googlemap" style="margin-left: -20px"></div>
-            <div style="font-size:7pt;text-align:left">* This product includes GeoLite data created by MaxMind, available from http://maxmind.com/ and a Google Maps chart.</div>   
-       
-         {% endif %}   
-       </div>  
-       </div>  
-    </div>
-        {% if topdata|length <= 0 %}
-            <center><strong>No data matched</strong></center>
-        {% endif %}
+            <div id="googlemap" style="margin-left: -20px"></div>
+            <div style="font-size:7pt;text-align:left">* This product includes GeoLite data created by MaxMind, available from http://maxmind.com/ and a Google Maps chart.</div>
+        {% endif %}  
+      </div>{# end searchFilters #}
+      </div>{# end filters #}
+     </div>{# end left_box #}
+     {% if topdata|length <= 0 %}
+        <center><strong>No data matched</strong></center>
+     {% endif %}
     {% endif %}
    	
-    <div class="content_box">    
-    <div class="results" >     
+    <div class="content_box">  
+    <p>
+    {% if offset != 0 or has_next %}
+	     {% if offset != 0 %}
+	         <a href="?view={{ view }}&offset={{ offset|add:-10 }}&last={{ last }}&country={{ countrycode }}">&laquo;&nbsp;Previous</a>
+	     {% else %}
+	         &laquo;&nbsp;Previous
+	     {% endif %}
+            |
+         {% if has_next %}
+            <a href="?view={{ view }}&offset={{ offset|add:10 }}&last={{ last }}&country={{ countrycode }}">Next&nbsp;&raquo;</a>
+	     {% else %}
+	         Next&nbsp;&raquo;
+	     {% endif %}
+	{% endif %}
+	     
+    <div class="results">     
     {% spaceless %}
 {% load resource_languages %}
 {% load resource_media_types %}
@@ -246,19 +231,19 @@ function addStatus(filter){
 {% load get_icon %}
 
 {% for object in topdata %}
-    {{ forloop.counter|add:offset }}. 
+    <div class="itemcounter">{{ forloop.counter|add:offset }}.&nbsp;</div><div class="resourceName">
     {% if "quer" in view %}
-        <div class="resourceName"><a href="{% url metashare.views.frontpage %}repository/search/?{{ object.4 }}"><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/zoom.png"> {{ object.0 }}</a>
+        <a href="{% url metashare.views.frontpage %}repository/search/?{{ object.4 }}"><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/zoom.png"> {{ object.0 }}</a>
             {% ifnotequal object.1 "" %}  
                 &nbsp;&nbsp;filter by: <div style="display: inline; font-size: 8pt; color: #000">{{ object.1 }}</div>
             {% endifnotequal %}
             <div class="accessStats">
                 <div style="display: inline; font-size: 12pt; color: #000">&nbsp;{{ object.3 }}</div> 
                 {% ifequal view "latestqueries" %}
-                    results
+                    result{{object.3|pluralize}}
                 {% endifequal %}
                 {% ifequal view "topqueries" %}
-                    times
+                    time{{object.3|pluralize}}
                 {% endifequal %}
             </div>
             {% ifnotequal object.2 "" %}  
@@ -267,7 +252,6 @@ function addStatus(filter){
         </div>
             
     {% else %}   
-        <div class="resourceName">
         {% get_icon object.0.resourceComponentType.as_subclass.resourceType %}
         &nbsp;<a href="{{ object.0.get_absolute_url }}"{% ifnotequal object.0.identificationInfo.get_default_description "METASHARE_NULL" %} title="{{ object.0.identificationInfo.get_default_description|escape }}"{% endifnotequal %}>{{ object.0 }}</a>
         
@@ -284,7 +268,8 @@ function addStatus(filter){
             <div style="display: inline; font-size:8pt;text-align:left; float: right; padding-right: 20px">{{ object.1 }}</div>
         {% endifnotequal %}
         </div>
-     {% endif %}
+     {% endif %}  
+     <br> 
 {% endfor %}
 {% endspaceless %}
 
