@@ -5,7 +5,7 @@
     JavaScript should be enabled in order to support all functionalities.
     Enable JavaScript by changing your browser options, and then try again.
 </noscript>
-
+{% if geovisits|length > 0 %}
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script type="text/javascript">
     try {
@@ -40,8 +40,8 @@
         geochart.draw(data, options);
         
     }
-   
 </script>
+{% endif %}
 
 <script language="javascript">
 $(document).ready(function(){
@@ -157,12 +157,12 @@ function addStatus(filter){
        <div class="content_box">No data found</div>
    {% else %}
     {% if not "late" in view or geovisits|length > 0 %}
-    <div class="left_box">
+     <div class="left_box">
 	  <div class="filters">
 	  <h4>Filter by:</h4>
 	  <div id="searchFilters">
 	    {% if not "late" in view %}
-	    <div class="accordion"><a href="#" onclick="return false">Date</a></div>
+	        <div class="accordion"><a href="#" onclick="return false">Date</a></div>
             <div class="filter">
                 {% with "day week month year" as list %}
                     {% for date in list.split %} 
@@ -176,11 +176,10 @@ function addStatus(filter){
                     {% endfor %}
                 {% endwith %}
             </div>
-            
 	    {% endif %}
 	    
 	    {% if geovisits|length > 0 %}
-	    <div class="accordion"><a href="#" onclick="return false">Provenance of {{ visitstitle }}</a></div>
+	        <div class="accordion"><a href="#" onclick="return false">Provenance of {{ visitstitle }}</a></div>
             <div class="filter">
                 {% for geoinfo in geovisits %}
                 <div style="vertical-align: top">
@@ -196,16 +195,15 @@ function addStatus(filter){
                 </div>
                 {% endfor %}
             </div>
-         <div id="googlemap" style="margin-left: -20px"></div>
-            <div style="font-size:7pt;text-align:left">* This product includes GeoLite data created by MaxMind, available from http://maxmind.com/ and a Google Maps chart.</div>   
-       
-         {% endif %}   
-       </div>  
-       </div>  
-    </div>
-        {% if topdata|length <= 0 %}
-            <center><strong>No data matched</strong></center>
-        {% endif %}
+            <div id="googlemap" style="margin-left: -20px"></div>
+            <div style="font-size:7pt;text-align:left">* This product includes GeoLite data created by MaxMind, available from http://maxmind.com/ and a Google Maps chart.</div>
+        {% endif %}  
+      </div>{# end searchFilters #}
+      </div>{# end filters #}
+     </div>{# end left_box #}
+     {% if topdata|length <= 0 %}
+        <center><strong>No data matched</strong></center>
+     {% endif %}
     {% endif %}
    	
     <div class="content_box">  
