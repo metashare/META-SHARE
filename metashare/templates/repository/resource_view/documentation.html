@@ -1,3 +1,5 @@
+{% spaceless %}
+
 {% if type == "Documentation" %}
 {% else %}
 	{% if level == "simple" %}
@@ -138,3 +140,5 @@
 		</div>
 	{% endif %}
 {% if level == "sub" or level == "simple" or indent == "yes" %}</div>{% endif %}
+
+{% endspaceless %}

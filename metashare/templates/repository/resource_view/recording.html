@@ -1,6 +1,7 @@
 {% load replace %}
 
 {% spaceless %}
+
 <label class='title'>Recording</label>
 {% if "Recorder" in recording %}
 	<label class='subtitle'>Recorders</label>
@@ -10,7 +11,6 @@
 		{% endif %}
 	{% endfor %}
 {% endif %}
-
 
 {% for key, value in recording.items %}
 	{% if not "Recorder" in key %}
