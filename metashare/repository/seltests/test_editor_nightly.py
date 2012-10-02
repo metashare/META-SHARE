@@ -9,11 +9,9 @@ from metashare import settings, test_utils
 from metashare.accounts.models import EditorGroup, EditorGroupManagers
 from metashare.repository.seltests.test_editor import _delete, _publish, \
     _ingest, _fill_distribution, _fill_contact_person, _fill_affiliation, \
-    _fill_usage, _fill_access_tool, _fill_resource_associated_with, \
-    _fill_usage_report, _fill_documentation, _fill_derived_resource, \
-    _fill_related_resource, _fill_project, _fill_funding_project, \
-    _fill_metadata_creator, _fill_resource_creator, _fill_language, \
-    _fill_text_size, _fill_audio_size
+    _fill_usage, _fill_documentation, _fill_related_resource, \
+    _fill_funding_project, _fill_metadata_creator, _fill_resource_creator, \
+    _fill_language, _fill_text_size, _fill_audio_size
 from metashare.repository.seltests.test_utils import login_user, mouse_over, \
     setup_screenshots_folder, click_menu_item, save_and_close, \
     cancel_and_close, cancel_and_continue

@@ -1667,13 +1667,13 @@ class participantInfoType_model(SchemaModel):
       help_text='Provides information on the participant\'s profession',
       blank=True, max_length=100, )
 
-    height = models.IntegerField(
+    height = models.BigIntegerField(
       verbose_name='Height', 
       help_text='Provides information on the height of the participant i' \
       'n cm',
       blank=True, null=True, )
 
-    weight = models.IntegerField(
+    weight = models.BigIntegerField(
       verbose_name='Weight', 
       help_text='Provides information on the weight of the participant',
       blank=True, null=True, )
@@ -1852,7 +1852,7 @@ class personSourceSetInfoType_model(SchemaModel):
       u'participantInfo': "participantInfoType_model",
     }
 
-    numberOfPersons = models.IntegerField(
+    numberOfPersons = models.BigIntegerField(
       verbose_name='Number of persons', 
       help_text='The number of the persons participating in the audio or' \
       ' video part of the resource',
@@ -1867,12 +1867,12 @@ class personSourceSetInfoType_model(SchemaModel):
       choices=PERSONSOURCESETINFOTYPE_AGEOFPERSONS_CHOICES['choices'],
       )
 
-    ageRangeStart = models.IntegerField(
+    ageRangeStart = models.BigIntegerField(
       verbose_name='Age range start', 
       help_text='Start of age range of the group of participants',
       blank=True, null=True, )
 
-    ageRangeEnd = models.IntegerField(
+    ageRangeEnd = models.BigIntegerField(
       verbose_name='Age range end', 
       help_text='End of age range of the group of participants',
       blank=True, null=True, )
@@ -1927,7 +1927,7 @@ class personSourceSetInfoType_model(SchemaModel):
                      key=lambda choice: choice[1].lower()),
       )
 
-    numberOfTrainedSpeakers = models.IntegerField(
+    numberOfTrainedSpeakers = models.BigIntegerField(
       verbose_name='Number of trained speakers', 
       help_text='The number of participants that have been trained for t' \
       'he specific task',
@@ -4032,7 +4032,7 @@ class durationOfEffectiveSpeechInfoType_model(SchemaModel):
       ( u'durationUnit', u'durationUnit', REQUIRED ),
     )
 
-    size = models.IntegerField(
+    size = models.BigIntegerField(
       verbose_name='Size', 
       help_text='Specifies the size of the resource with regard to the S' \
       'izeUnit measurement in form of a number',
@@ -4077,7 +4077,7 @@ class durationOfAudioInfoType_model(SchemaModel):
       ( u'durationUnit', u'durationUnit', REQUIRED ),
     )
 
-    size = models.IntegerField(
+    size = models.BigIntegerField(
       verbose_name='Size', 
       help_text='Specifies the size of the resource with regard to the S' \
       'izeUnit measurement in form of a number',
@@ -4176,7 +4176,7 @@ class audioFormatInfoType_model(SchemaModel):
       choices=AUDIOFORMATINFOTYPE_SIGNALENCODING_CHOICES['choices'],
       )
 
-    samplingRate = models.IntegerField(
+    samplingRate = models.BigIntegerField(
       verbose_name='Sampling rate', 
       help_text='Specifies the format of files contained in the resource' \
       ' in Hertz',
