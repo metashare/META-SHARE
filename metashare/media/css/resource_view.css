@@ -50,6 +50,14 @@ div.right-corner{
 	display:table;
 }
 
+.dataline a{
+	font-weight:bold;
+	font-style:normal;
+	font-size:14px;
+	color: #FF9900;
+	text-decoration:none;
+	}
+
 .dataline ul{
 	margin:0px;
 }
@@ -332,6 +340,10 @@ img.line{
 	box-shadow: 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
 }
 
+.subtitle + .separation {
+	display:none;
+}
+
 .title + .separation {
 	display:none;
 }
@@ -390,7 +402,7 @@ a .indented{
 }
 
 .contactcard .dataline{
-	font-weight:normal;
+	font-weight:bold;
 	font-size:14px;
 	padding-top:1px;
 }

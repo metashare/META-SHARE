@@ -2,8 +2,10 @@
 
 <label class='component'>Relation</label>
 
+<label class="title">Related Resources</label>
 {% for dict in relation_dicts %}
-	{% include "repository/resource_view/target_resource.html" with target=dict.Relation.Related_resource  title="Related Resource" %}
+	<div class="separation"><hr/></div>
+	{% include "repository/resource_view/target_resource.html" with target=dict.Relation.Related_resource %}     
      <div class="dataline indented">
 		<label>
 			<strong>Relation Type:</strong> {{ dict.Relation.Relation_type }}
