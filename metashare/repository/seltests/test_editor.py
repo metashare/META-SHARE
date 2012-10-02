@@ -1047,7 +1047,7 @@ def _fill_licensor(driver, ss_path, parent_id):
     fills the licensor popup with required information and returns
     to the parent window
     """
-    driver.switch_to_window("id_licenceinfotype_model_set-0-licensor")
+    driver.switch_to_window("id_licenceinfotype_model_set__dash__0__dash__licensor")
     driver.find_element_by_name("key_surname_0").clear()
     driver.find_element_by_name("key_surname_0").send_keys("en")
     driver.find_element_by_name("val_surname_0").clear()
@@ -1056,7 +1056,6 @@ def _fill_licensor(driver, ss_path, parent_id):
     driver.find_element_by_id("id_form-0-email").send_keys("mustermann@org.com")
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
-
 
 def _fill_language(driver, ss_path, id_infix):
     """
