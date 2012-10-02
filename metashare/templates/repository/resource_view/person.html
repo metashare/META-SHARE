@@ -37,7 +37,7 @@
 		{% if person_dict.Communication.Url %}
 			<div>
 				<label class="dataline" style="clear:both;">		
-					<a href="{{person_dict.Communication.Url}}" target='_blank' style="vertical-align:super;">Homepage {% get_icon "link" %}</a>
+					{{ person_dict.Communication.Url|urlizetrunc:17 }}{% get_icon "link" %}</a>
 				</label>
 			</div>
 		{% endif %}

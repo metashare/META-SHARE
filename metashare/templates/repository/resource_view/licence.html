@@ -4,6 +4,7 @@
 {% spaceless %}
 
 {% if "Licence" in key %}
+
 	{% for key1, value1 in value.items %}
 		{% if "Licence" in key1 %}
 			<div class="subtitle">
@@ -13,7 +14,6 @@
 			</div>
 		{% endif %}
 	{% endfor %}
-	
 	
 	{% for key1, value1 in value.items %}
 		{% if "Restrictions_of_use" in key1 %}
@@ -25,10 +25,8 @@
 		{% endif %}
 	{% endfor %}
 	
-	
 	{% for key1, value1 in value.items %}
-		
-		
+
 		{% if "Distribution_access_medium" in key1 %}
 			<div class="dataline indented">
 				<label>
@@ -93,8 +91,7 @@
 			{% endif %}
 		{% endfor %}
 	</div>
-	
-	
+
 	<div class="dataline">
 		{% if "Distribution_rights_holder" in value %}
 			<label class="dataline indented"><strong>Distribution rights holders:</strong></label>
