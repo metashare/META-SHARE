@@ -778,6 +778,18 @@ def _fill_derived_resource(driver, ss_path, parent_id):
     save_and_close(driver, parent_id)
 
 
+def _fill_related_resource(driver, ss_path, parent_id):
+    """
+    fills the related resource popup with complete information and returns
+    to the parent window
+    """
+    driver.switch_to_window("id_relationinfotype_model_set__dash__0__dash__relatedResource")
+    driver.find_element_by_name("targetResourceNameURI").clear()
+    driver.find_element_by_name("targetResourceNameURI").send_keys("578DFDG8DF")
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
 def _fill_metadata_creator(driver, ss_path, parent_id):
     """
     fills the metadata creator popup with complete information and returns
