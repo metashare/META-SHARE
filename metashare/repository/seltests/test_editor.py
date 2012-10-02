@@ -486,7 +486,8 @@ class BasicEditorTests(SeleniumTestCase):
         driver.find_element_by_xpath("//a[@id='add_id_usageInfo']/img").click()  
         _fill_usage(driver, ss_path, root_id)
         # documentation popup
-        Select(driver.find_element_by_xpath("//div[@class='form-row documentation']/div/select")).select_by_visible_text("documentInfoType")
+        Select(driver.find_element_by_xpath("//div[@class='form-row documentation']/div/select")) \
+          .select_by_visible_text("documentInfoType")
         _fill_documentation(driver, ss_path, root_id)
         driver.find_element_by_name("form-4-0-samplesLocation").clear()
         driver.find_element_by_name("form-4-0-samplesLocation").send_keys("http://ttc.samples.org")
@@ -495,7 +496,8 @@ class BasicEditorTests(SeleniumTestCase):
         driver.find_element_by_xpath("//div[@class='form-row toolDocumentationType']/div/div/div/a") \
           .click()
         # resource creator popup
-        Select(driver.find_element_by_xpath("//div[@class='form-row resourceCreator']/div/select")).select_by_visible_text("personInfoType")
+        Select(driver.find_element_by_xpath("//div[@class='form-row resourceCreator']/div/select")) \
+          .select_by_visible_text("personInfoType")
         _fill_resource_creator(driver, ss_path, root_id)
         # funding project popup
         driver.find_element_by_xpath("//a[@id='add_id_form-5-0-fundingProject']/img").click()  
@@ -509,7 +511,8 @@ class BasicEditorTests(SeleniumTestCase):
         driver.find_element_by_name("relationinfotype_model_set-0-relationType").clear()
         driver.find_element_by_name("relationinfotype_model_set-0-relationType").send_keys("new type")
         # related resource popup
-        driver.find_element_by_xpath("//a[@id='add_id_relationinfotype_model_set-0-relatedResource']/img").click()  
+        driver.find_element_by_xpath("//a[@id='add_id_relationinfotype_model_set-0-relatedResource']/img") \
+          .click()  
         _fill_related_resource(driver, ss_path, root_id)
         
         # corpus text info popup
@@ -591,9 +594,11 @@ def _fill_distribution(driver, ss_path, parent_id):
       "//div[@class='form-row distributionAccessMedium']/div/div/ul/li/a") \
       .click()
     driver.find_element_by_name("licenceinfotype_model_set-0-downloadLocation").clear()
-    driver.find_element_by_name("licenceinfotype_model_set-0-downloadLocation").send_keys("http://mylicence.org")
+    driver.find_element_by_name("licenceinfotype_model_set-0-downloadLocation") \
+      .send_keys("http://mylicence.org")
     driver.find_element_by_name("licenceinfotype_model_set-0-executionLocation").clear()
-    driver.find_element_by_name("licenceinfotype_model_set-0-executionLocation").send_keys("http://myexecution.org")
+    driver.find_element_by_name("licenceinfotype_model_set-0-executionLocation") \
+      .send_keys("http://myexecution.org")
     driver.find_element_by_name("licenceinfotype_model_set-0-fee").clear()
     driver.find_element_by_name("licenceinfotype_model_set-0-fee").send_keys("1.10")
     driver.find_element_by_xpath("//div[@class='form-row attributionText']/div/ul/li/a").click()
@@ -601,20 +606,25 @@ def _fill_distribution(driver, ss_path, parent_id):
     driver.find_element_by_name("key_licenceinfotype_model_set-0-attributionText_0").clear()
     driver.find_element_by_name("key_licenceinfotype_model_set-0-attributionText_0").send_keys("en")
     driver.find_element_by_name("val_licenceinfotype_model_set-0-attributionText_0").clear()
-    driver.find_element_by_name("val_licenceinfotype_model_set-0-attributionText_0").send_keys("The attribution text.")
-    Select(driver.find_element_by_xpath("//div[@class='form-row licensor']/div/select")).select_by_visible_text("personInfoType")
+    driver.find_element_by_name("val_licenceinfotype_model_set-0-attributionText_0") \
+      .send_keys("The attribution text.")
+    Select(driver.find_element_by_xpath("//div[@class='form-row licensor']/div/select")) \
+      .select_by_visible_text("personInfoType")
     _fill_licensor(driver, ss_path, current_id)
-    Select(driver.find_element_by_xpath("//div[@class='form-row distributionRightsHolder']/div/select")).select_by_visible_text("personInfoType")
+    Select(driver.find_element_by_xpath("//div[@class='form-row distributionRightsHolder']/div/select")) \
+      .select_by_visible_text("personInfoType")
     _fill_distribution_rights_holder(driver, ss_path, current_id)
     Select(driver.find_element_by_name(
       "licenceinfotype_model_set-0-userNature_old")).select_by_visible_text("Academic")
     driver.find_element_by_xpath(
       "//div[@class='form-row userNature']/div/div/ul/li/a") \
       .click()
-    driver.find_element_by_xpath("//a[@id='add_id_licenceinfotype_model_set-0-membershipInfo']/img").click()  
+    driver.find_element_by_xpath("//a[@id='add_id_licenceinfotype_model_set-0-membershipInfo']/img") \
+      .click()  
     _fill_membership(driver, ss_path, current_id)
 
-    Select(driver.find_element_by_xpath("//div[@class='form-row iprHolder']/div/select")).select_by_visible_text("personInfoType")
+    Select(driver.find_element_by_xpath("//div[@class='form-row iprHolder']/div/select")) \
+      .select_by_visible_text("personInfoType")
     _fill_ipr_holder(driver, ss_path, current_id)
     driver.find_element_by_name("availabilityStartDate").clear()
     driver.find_element_by_name("availabilityStartDate").send_keys("2012-10-02")
@@ -731,8 +741,8 @@ def _fill_usage(driver, ss_path, parent_id):
     _fill_resource_associated_with(driver, ss_path, current_id)
     # foreseen use
     driver.find_element_by_id("fieldsetcollapser0").click()
-    Select(driver.find_element_by_name("foreseenuseinfotype_model_set-0-foreseenUse")).select_by_visible_text(
-      "Human Use")
+    Select(driver.find_element_by_name("foreseenuseinfotype_model_set-0-foreseenUse")) \
+      .select_by_visible_text("Human Use")
     Select(driver.find_element_by_name(
       "foreseenuseinfotype_model_set-0-useNLPSpecific_old")).select_by_visible_text("Annotation")
     driver.find_element_by_xpath(
@@ -1217,7 +1227,8 @@ def _fill_membership(driver, ss_path, parent_id):
     information and returns to the parent window
     """
     driver.switch_to_window("id_licenceinfotype_model_set__dash__0__dash__membershipInfo")
-    Select(driver.find_element_by_xpath("//div[@class='form-row member']/div/select")).select_by_visible_text("Yes")
+    Select(driver.find_element_by_xpath("//div[@class='form-row member']/div/select")) \
+      .select_by_visible_text("Yes")
     Select(driver.find_element_by_name(
       "membershipInstitution_old")).select_by_visible_text("LDC")
     driver.find_element_by_xpath(
@@ -1231,9 +1242,9 @@ def _fill_linguality(driver, ss_path, id_infix):
     """
     fills the linguality with required, recommended and optional information
     """
-    Select(driver.find_element_by_id("id_{}lingualityType").format(id_infix)).select_by_visible_text(
+    Select(driver.find_element_by_id("id_{}lingualityType".format(id_infix))).select_by_visible_text(
       "Monolingual")
-    Select(driver.find_element_by_id("id_{}multilingualityType").format(id_infix)).select_by_visible_text(
+    Select(driver.find_element_by_id("id_{}multilingualityType".format(id_infix))).select_by_visible_text(
       "Other")
     driver.find_element_by_id("id_{}multilingualityTypeDetails".format(id_infix)).clear()
     driver.find_element_by_id("id_{}multilingualityTypeDetails".format(id_infix)).send_keys("Information")
@@ -1259,7 +1270,8 @@ def _fill_size_per_language(driver, ss_path, id_infix):
     driver.switch_to_window("id_languageinfotype_model_set__dash__0__dash__sizePerLanguage")
     driver.find_element_by_id("id_size").clear()
     driver.find_element_by_id("id_size").send_keys("12")
-    Select(driver.find_element_by_xpath("//div[@class='form-row sizeUnit']/div/select")).select_by_visible_text("Classes")
+    Select(driver.find_element_by_xpath("//div[@class='form-row sizeUnit']/div/select")) \
+      .select_by_visible_text("Classes")
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
 
@@ -1275,7 +1287,8 @@ def _fill_language_variety(driver, ss_path, id_infix):
     driver.find_element_by_id("id_form-0-size").send_keys("Jargon")
     driver.find_element_by_id("languageVarietyName").clear()
     driver.find_element_by_id("languageVarietyName").send_keys("Jargon name")
-    Select(driver.find_element_by_xpath("//div[@class='form-row sizeUnit']/div/select")).select_by_visible_text("Classes")
+    Select(driver.find_element_by_xpath("//div[@class='form-row sizeUnit']/div/select")) \
+      .select_by_visible_text("Classes")
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
 
