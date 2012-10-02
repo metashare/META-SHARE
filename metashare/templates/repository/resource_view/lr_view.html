@@ -161,8 +161,7 @@
 	<div class="white_box column corner">
 
 		{% include "repository/resource_view/distribution.html" with distribution=distribution_dict %}
-		
-		
+
 		{% if contact_person_dicts %}
 			<label class='component'>Contact Person{{ contact_person_dicts|length|pluralize }}</label>
 			{% for contact_person in contact_person_dicts %}
@@ -178,7 +177,7 @@
 						<li><a href="#1">toolService{% get_icon "toolService" %}</a></li>
 					{% else %}
 						{% for type in mediaTypes %}
-							<li><a href="#{{forloop.counter}}">{% if mediaTypes|length < 4%}{{type}}{% endif %}{% get_icon type %}</a></li>
+							<li><a href="#{{forloop.counter}}">{% if mediaTypes|length < 4 %}{{type}}{% endif %}{% get_icon type %}</a></li>
 						{% endfor %}
 					{% endifequal %}
 				</ul>
