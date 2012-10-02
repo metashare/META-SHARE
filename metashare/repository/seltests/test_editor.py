@@ -580,19 +580,16 @@ def _fill_distribution(driver, ss_path, parent_id):
     driver.find_element_by_xpath(
       "//div[@class='form-row licence']/div/div/ul/li/a") \
       .click()
-    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     Select(driver.find_element_by_name(
       "licenceinfotype_model_set-0-restrictionsOfUse_old")).select_by_visible_text("Attribution")
     driver.find_element_by_xpath(
       "//div[@class='form-row restrictionsOfUse']/div/div/ul/li/a") \
       .click()
-    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     Select(driver.find_element_by_name(
       "licenceinfotype_model_set-0-distributionAccessMedium_old")).select_by_visible_text("CD - ROM")
     driver.find_element_by_xpath(
       "//div[@class='form-row distributionAccessMedium']/div/div/ul/li/a") \
       .click()
-    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     driver.find_element_by_name("licenceinfotype_model_set-0-downloadLocation").clear()
     driver.find_element_by_name("licenceinfotype_model_set-0-downloadLocation").send_keys("http://mylicence.org")
     driver.find_element_by_name("licenceinfotype_model_set-0-executionLocation").clear()
@@ -605,11 +602,15 @@ def _fill_distribution(driver, ss_path, parent_id):
     driver.find_element_by_name("key_licenceinfotype_model_set-0-attributionText_0").send_keys("en")
     driver.find_element_by_name("val_licenceinfotype_model_set-0-attributionText_0").clear()
     driver.find_element_by_name("val_licenceinfotype_model_set-0-attributionText_0").send_keys("The attribution text.")
-
     Select(driver.find_element_by_xpath("//div[@class='form-row licensor']/div/select")).select_by_visible_text("personInfoType")
     _fill_licensor(driver, ss_path, current_id)
     Select(driver.find_element_by_xpath("//div[@class='form-row distributionRightsHolder']/div/select")).select_by_visible_text("personInfoType")
     _fill_distribution_rights_holder(driver, ss_path, current_id)
+    Select(driver.find_element_by_name(
+      "licenceinfotype_model_set-0-userNature_old")).select_by_visible_text("Academic")
+    driver.find_element_by_xpath(
+      "//div[@class='form-row userNature']/div/div/ul/li/a") \
+      .click()
 
     Select(driver.find_element_by_xpath("//div[@class='form-row iprHolder']/div/select")).select_by_visible_text("personInfoType")
     _fill_ipr_holder(driver, ss_path, current_id)
