@@ -1,4 +1,5 @@
 {% spaceless %}
+
 <div class="dataline">	
 	
 	<div class="dataline indented">
@@ -24,8 +25,7 @@
 			<strong>Funding Type:</strong> {{ project.Funding_type }}
 		</label>
 	</div>
-	
-		
+
 	<div class="dataline indented">
 		<label>
 			{% if project.Funder %}
@@ -33,9 +33,7 @@
 			{% endif %}
 		</label>
 	</div>
-	
-	
-	
+
 	<div class="dataline indented">
 		<label>
 			{% if project.Funding_country %}
@@ -50,7 +48,6 @@
 				<strong>Project duration:</strong> {{ project.Project_start_date|date:"SHORT_DATE_FORMAT" }} - {{ project.Project_end_date|date:"SHORT_DATE_FORMAT" }}
 			</label>
 		</div>
-		
 	{% else %}
 		{% if project.Project_start_date %}
 			<div class="dataline indented">
@@ -67,9 +64,7 @@
 				</label>
 			</div>
 		{% endif %}
-	
 	{% endif %}		
-	
 </div>
 
 {% endspaceless %}

@@ -1,6 +1,7 @@
 {% load replace %}
 
 {% spaceless %}
+
 <label class='title'>Creation</label>
 {% for key, value in creation.items %}
 	{% if not "Original_source" in key and not "Creation_tool" in key %}
@@ -17,4 +18,5 @@
 		{% endif %}			
 	{% endif %}
 {% endfor %}
+
 {% endspaceless %}
