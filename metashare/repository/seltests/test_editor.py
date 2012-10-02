@@ -470,6 +470,47 @@ class BasicEditorTests(SeleniumTestCase):
         driver.find_element_by_name("form-2-0-metadataLanguageId").send_keys("en")
         driver.find_element_by_name("form-2-0-revision").clear()
         driver.find_element_by_name("form-2-0-revision").send_keys("1.0")
+
+        # recommended page
+        driver.find_element_by_css_selector("a[href=\"#field-2\"]").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("form-3-0-version").clear()
+        driver.find_element_by_name("form-3-0-version").send_keys("1.0")
+        driver.find_element_by_name("form-3-0-revision").clear()
+        driver.find_element_by_name("form-3-0-revision").send_keys("1.0")
+        driver.find_element_by_name("form-3-0-lastDateUpdated").clear()
+        driver.find_element_by_name("form-3-0-lastDateUpdated").send_keys("2012-09-28")
+        driver.find_element_by_name("form-3-0-updateFrequency").clear()
+        driver.find_element_by_name("form-3-0-updateFrequency").send_keys("1")
+        # usage popup
+        driver.find_element_by_xpath("//a[@id='add_id_usageInfo']/img").click()  
+        _fill_usage(driver, ss_path, root_id)
+        # documentation popup
+        Select(driver.find_element_by_xpath("//div[@class='form-row documentation']/div/select")).select_by_visible_text("documentInfoType")
+        _fill_documentation(driver, ss_path, root_id)
+        driver.find_element_by_name("form-4-0-samplesLocation").clear()
+        driver.find_element_by_name("form-4-0-samplesLocation").send_keys("http://ttc.samples.org")
+        Select(driver.find_element_by_name(
+          "form-4-0-toolDocumentationType_old")).select_by_visible_text("Manual")
+        driver.find_element_by_xpath("//div[@class='form-row toolDocumentationType']/div/div/div/a") \
+          .click()
+        # resource creator popup
+        Select(driver.find_element_by_xpath("//div[@class='form-row resourceCreator']/div/select")).select_by_visible_text("personInfoType")
+        _fill_resource_creator(driver, ss_path, root_id)
+        # funding project popup
+        driver.find_element_by_xpath("//a[@id='add_id_form-5-0-fundingProject']/img").click()  
+        _fill_funding_project(driver, ss_path, root_id)
+        driver.find_element_by_name("form-5-0-creationStartDate").clear()
+        driver.find_element_by_name("form-5-0-creationStartDate").send_keys("2012-09-28")
+        driver.find_element_by_name("form-5-0-creationEndDate").clear()
+        driver.find_element_by_name("form-5-0-creationEndDate").send_keys("2012-09-28")
+        # relations field
+        driver.find_element_by_id("fieldsetcollapser1").click()
+        driver.find_element_by_name("relationinfotype_model_set-0-relationType").clear()
+        driver.find_element_by_name("relationinfotype_model_set-0-relationType").send_keys("new type")
+        # related resource popup
+        driver.find_element_by_xpath("//a[@id='add_id_relationinfotype_model_set-0-relatedResource']/img").click()  
+        _fill_related_resource(driver, ss_path, root_id)
         
         # corpus text info popup
         driver.find_element_by_id("add_id_corpusTextInfo-0").click()
@@ -519,8 +560,8 @@ class BasicEditorTests(SeleniumTestCase):
         _delete(driver)
         self.assertEqual("Successfully deleted 1 resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
-        
-        
+
+
 def _fill_distribution(driver, ss_path, parent_id):
     """
     fills the distribution popup with required information and returns
