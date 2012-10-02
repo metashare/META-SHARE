@@ -570,6 +570,14 @@ def _fill_distribution(driver, ss_path, parent_id):
     driver.switch_to_window("id_distributionInfo")
     Select(driver.find_element_by_id("id_availability")).select_by_visible_text(
       "Available - Unrestricted Use")
+    # remember current window id
+    current_id = driver.current_window_handle
+    Select(driver.find_element_by_xpath("//div[@class='form-row iprHolder']/div/select")).select_by_visible_text("personInfoType")
+    _fill_ipr_holder(driver, ss_path, current_id)
+    driver.find_element_by_name("availabilityStartDate").clear()
+    driver.find_element_by_name("availabilityStartDate").send_keys("2012-10-02")
+    driver.find_element_by_name("availabilityEndDate").clear()
+    driver.find_element_by_name("availabilityEndDate").send_keys("2012-10-02")
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
 
