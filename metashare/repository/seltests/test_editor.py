@@ -718,8 +718,8 @@ def _fill_affiliation(driver, ss_path, parent_id):
 
 def _fill_usage(driver, ss_path, parent_id):
     """
-    fills the usage popup with complete information and returns
-    to the parent window
+    fills the usage popup with all required, recommended and optional
+    information and returns to the parent window
     """
     driver.switch_to_window("id_usageInfo")
     current_id = driver.current_window_handle
@@ -763,8 +763,8 @@ def _fill_usage(driver, ss_path, parent_id):
 
 def _fill_access_tool(driver, ss_path, parent_id):
     """
-    fills the access tool popup with complete information and returns
-    to the parent window
+    fills the access tool popup with all required, recommended and optional
+    information and returns to the parent window
     """
     driver.switch_to_window("id_accessTool")
     driver.find_element_by_name("targetResourceNameURI").clear()
@@ -775,8 +775,8 @@ def _fill_access_tool(driver, ss_path, parent_id):
 
 def _fill_resource_associated_with(driver, ss_path, parent_id):
     """
-    fills the resource associated with popup with complete information and returns
-    to the parent window
+    fills the resource associated with popup with all required, recommended and optional
+    information and returns to the parent window
     """
     driver.switch_to_window("id_resourceAssociatedWith")
     driver.find_element_by_name("targetResourceNameURI").clear()
@@ -787,8 +787,8 @@ def _fill_resource_associated_with(driver, ss_path, parent_id):
 
 def _fill_usage_report(driver, ss_path, parent_id):
     """
-    fills the usage report popup with complete information and returns
-    to the parent window
+    fills the usage report popup with all required, recommended and optional
+    information and returns to the parent window
     """
     driver.switch_to_window("id_actualuseinfotype_model_set__dash__0__dash__usageReport")
     Select(driver.find_element_by_id("id_documentType")).select_by_visible_text("Article")
@@ -838,8 +838,8 @@ def _fill_usage_report(driver, ss_path, parent_id):
 
 def _fill_documentation(driver, ss_path, parent_id):
     """
-    fills the documentation popup with complete information and returns
-    to the parent window
+    fills the documentation popup with all required, recommended and optional
+    information and returns to the parent window
     """
     driver.switch_to_window("id_form__dash__4__dash__0__dash__documentation")
     Select(driver.find_element_by_id("id_documentType")).select_by_visible_text("Article")
@@ -889,8 +889,8 @@ def _fill_documentation(driver, ss_path, parent_id):
 
 def _fill_derived_resource(driver, ss_path, parent_id):
     """
-    fills the derived resource popup with complete information and returns
-    to the parent window
+    fills the derived resource popup with all required, recommended and optional
+    information and returns to the parent window
     """
     driver.switch_to_window("id_actualuseinfotype_model_set__dash__0__dash__derivedResource")
     driver.find_element_by_name("targetResourceNameURI").clear()
@@ -901,8 +901,8 @@ def _fill_derived_resource(driver, ss_path, parent_id):
 
 def _fill_related_resource(driver, ss_path, parent_id):
     """
-    fills the related resource popup with complete information and returns
-    to the parent window
+    fills the related resource popup with all required, recommended and optional
+    information and returns to the parent window
     """
     driver.switch_to_window("id_relationinfotype_model_set__dash__0__dash__relatedResource")
     driver.find_element_by_name("targetResourceNameURI").clear()
@@ -913,8 +913,8 @@ def _fill_related_resource(driver, ss_path, parent_id):
 
 def _fill_project(driver, ss_path, parent_id):
     """
-    fills the project popup with complete information and returns
-    to the parent window
+    fills the project popup with all required, recommended and optional
+    information and returns to the parent window
     """
     driver.switch_to_window("id_actualuseinfotype_model_set__dash__0__dash__usageProject")
     driver.find_element_by_name("key_projectName_0").clear()
@@ -947,8 +947,8 @@ def _fill_project(driver, ss_path, parent_id):
 
 def _fill_funding_project(driver, ss_path, parent_id):
     """
-    fills the funding project popup with complete information and returns
-    to the parent window
+    fills the funding project popup with all required, recommended and optional
+    information and returns to the parent window
     """
     driver.switch_to_window("id_form__dash__5__dash__0__dash__fundingProject")
     driver.find_element_by_name("key_projectName_0").clear()
@@ -981,8 +981,8 @@ def _fill_funding_project(driver, ss_path, parent_id):
 
 def _fill_metadata_creator(driver, ss_path, parent_id):
     """
-    fills the metadata creator popup with complete information and returns
-    to the parent window
+    fills the metadata creator popup with all required, recommended and optional
+    information and returns to the parent window
     """
     driver.switch_to_window("id_form__dash__2__dash__0__dash__metadataCreator")
     current_id = driver.current_window_handle
@@ -1028,8 +1028,8 @@ def _fill_metadata_creator(driver, ss_path, parent_id):
 
 def _fill_resource_creator(driver, ss_path, parent_id):
     """
-    fills the resource creator popup with complete information and returns
-    to the parent window
+    fills the resource creator popup with all required, recommended and optional
+    information and returns to the parent window
     """
     driver.switch_to_window("id_form__dash__5__dash__0__dash__resourceCreator")
     current_id = driver.current_window_handle
@@ -1075,8 +1075,8 @@ def _fill_resource_creator(driver, ss_path, parent_id):
 
 def _fill_ipr_holder(driver, ss_path, parent_id):
     """
-    fills the ipr holder popup with required information and returns
-    to the parent window
+    fills the ipr holder popup with all required, recommended and optional
+    information and returns to the parent window
     """
     driver.switch_to_window("id_iprHolder")
     driver.find_element_by_name("key_surname_0").clear()
@@ -1091,8 +1091,8 @@ def _fill_ipr_holder(driver, ss_path, parent_id):
 
 def _fill_licensor(driver, ss_path, parent_id):
     """
-    fills the licensor popup with required information and returns
-    to the parent window
+    fills the licensor popup with all required, recommended and optional
+    information and returns to the parent window
     """
     driver.switch_to_window("id_licenceinfotype_model_set__dash__0__dash__licensor")
     driver.find_element_by_name("key_surname_0").clear()
@@ -1107,8 +1107,8 @@ def _fill_licensor(driver, ss_path, parent_id):
 
 def _fill_distribution_rights_holder(driver, ss_path, parent_id):
     """
-    fills the distribution rights holder popup with required information and returns
-    to the parent window
+    fills the distributino rights holder popup with all required, recommended and optional
+    information and returns to the parent window
     """
     driver.switch_to_window("id_licenceinfotype_model_set__dash__0__dash__distributionRightsHolder")
     driver.find_element_by_name("key_surname_0").clear()
@@ -1123,8 +1123,8 @@ def _fill_distribution_rights_holder(driver, ss_path, parent_id):
 
 def _fill_membership(driver, ss_path, parent_id):
     """
-    fills the membership popup with required information and returns
-    to the parent window
+    fills the membership popup with all required, recommended and optional
+    information and returns to the parent window
     """
     driver.switch_to_window("id_licenceinfotype_model_set__dash__0__dash__membershipInfo")
     Select(driver.find_element_by_xpath("//div[@class='form-row member']/div/select")).select_by_visible_text("Yes")
