@@ -568,10 +568,35 @@ def _fill_distribution(driver, ss_path, parent_id):
     to the parent window
     """
     driver.switch_to_window("id_distributionInfo")
-    Select(driver.find_element_by_id("id_availability")).select_by_visible_text(
-      "Available - Unrestricted Use")
     # remember current window id
     current_id = driver.current_window_handle
+    Select(driver.find_element_by_id("id_availability")).select_by_visible_text(
+      "Available - Unrestricted Use")
+
+    # licences
+    driver.find_element_by_id("fieldsetcollapser0").click()
+    Select(driver.find_element_by_name(
+      "licenceinfotype_model_set-0-licence_old")).select_by_visible_text("AGPL")
+    driver.find_element_by_xpath(
+      "//div[@class='form-row licence']/div/div/ul/li/a") \
+      .click()
+    Select(driver.find_element_by_name(
+      "licenceinfotype_model_set-0-restrictionsOfUse_old")).select_by_visible_text("Attribution")
+    driver.find_element_by_xpath(
+      "//div[@class='form-row restrictionsOfUse']/div/div/ul/li/a") \
+      .click()
+    Select(driver.find_element_by_name(
+      "licenceinfotype_model_set-0-distributionAccessMedium_old")).select_by_visible_text("CD - ROM")
+    driver.find_element_by_xpath(
+      "//div[@class='form-row distributionAccessMedium']/div/div/ul/li/a") \
+      .click()
+    driver.find_element_by_name("licenceinfotype_model_set-0-downloadLocation").clear()
+    driver.find_element_by_name("licenceinfotype_model_set-0-downloadLocation").send_keys("http://mylicence.org")
+    driver.find_element_by_name("licenceinfotype_model_set-0-executionLocation").clear()
+    driver.find_element_by_name("licenceinfotype_model_set-0-executionLocation").send_keys("http://myexecution.org")
+    driver.find_element_by_name("licenceinfotype_model_set-0-fee").clear()
+    driver.find_element_by_name("licenceinfotype_model_set-0-fee").send_keys("1.10")
+
     Select(driver.find_element_by_xpath("//div[@class='form-row iprHolder']/div/select")).select_by_visible_text("personInfoType")
     _fill_ipr_holder(driver, ss_path, current_id)
     driver.find_element_by_name("availabilityStartDate").clear()
