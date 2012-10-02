@@ -1089,6 +1089,22 @@ def _fill_distribution_rights_holder(driver, ss_path, parent_id):
     save_and_close(driver, parent_id)
 
 
+def _fill_membership(driver, ss_path, parent_id):
+    """
+    fills the membership popup with required information and returns
+    to the parent window
+    """
+    driver.switch_to_window("id_licenceinfotype_model_set__dash__0__dash__distributionRightsHolder")
+    Select(driver.find_element_by_xpath("//div[@class='form-row member']/div/select")).select_by_visible_text("Yes")
+    Select(driver.find_element_by_name(
+      "membershipInstitution_old")).select_by_visible_text("LDC")
+    driver.find_element_by_xpath(
+      "//div[@class='form-row membershipInstitution']/div/div/ul/li/a") \
+      .click()
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
 def _fill_language(driver, ss_path, id_infix):
     """
     fills the language with required information
