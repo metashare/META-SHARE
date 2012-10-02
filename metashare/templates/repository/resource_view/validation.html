@@ -57,9 +57,18 @@
 		{% endif %}					
 	{% endif %}
 	
-	{% if dict.Validation.Validation_tool %}
-			{% include "repository/resource_view/target_resource.html" with target=dict.Validation.Validation_tool title="Validation Tool" level="sub" %}
-	{% endif %}
+	 {% if "Validation_tool" in  dict.Validation %}	 	
+	 	<div class="dataline indented">
+	 		<label><strong>Validation Tools:</strong></label>
+	 		<ul>					 	
+				 {% for key, value in dict.Validation.items %}
+				 	{% if "Validation_tool" in key %}
+				 		{% include "repository/resource_view/target_resource.html" with target=value title="Validation Tool" level="list" %}
+				 	{% endif %}
+				 {% endfor %}
+			 </ul>
+		</div>
+	{% endif %}			
 	
 	<div class="dataline">
 		{% for key, value in dict.items %}

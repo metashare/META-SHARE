@@ -3,11 +3,11 @@
 <label class='component'>Usage</label>
 <div class="dataline">
 	{% if "Access_tool" in usage_dict.Usage %}
-	<label class='title'>Access tool</label>
+	<label class='title'>Access tools</label>
 		<ul>
 			{% for key, value in usage_dict.Usage.items %}
 				{% if "Access_tool" in key %}
-					{% include "repository/resource_view/target_resource.html" with target=value title="Access Tool" %}
+					{% include "repository/resource_view/target_resource.html" with target=value title="Access Tool" level="list" %}
 				{% endif %}
 			{% endfor %}
 		</ul>
@@ -18,7 +18,7 @@
 		<ul>
 			{% for key, value in usage_dict.Usage.items %}
 				{% if "Resource_associated_with" in key %}
-					{% include "repository/resource_view/target_resource.html" with target=value title="Associated resources" %}
+					{% include "repository/resource_view/target_resource.html" with target=value title="Associated resources" level="list" %}
 				{% endif %}
 			{% endfor %}
 		</ul>
@@ -92,20 +92,24 @@
 	{% endif %}
 
 	{% if "Derived_resource" in usage_dict.Usage.Actual_use %}
-		<label class='subtitle'>Derived resources</label>
-		{% for key, value in usage_dict.Usage.Actual_use.items %}
-			{% if "Derived_resource" in key %}
-				{% include "repository/resource_view/target_resource.html" with target=value title="Derived Resource" %}
-			{% endif %}
-		{% endfor %}
+		<label class='subtitle'>Derived Resources</label>
+		<div class="dataline indented">
+			<ul>
+				{% for key, value in usage_dict.Usage.Actual_use.items %}
+					{% if "Derived_resource" in key %}
+						{% include "repository/resource_view/target_resource.html" with target=value title="Derived Resource" level="list" %}
+					{% endif %}
+				{% endfor %}
+			</ul>
+		</div>
 	{% endif %}
 
 	{% if "Usage_project" in usage_dict.Usage.Actual_use %}
-		<label class='subtitle'>Used in:</label>
+		<label class='subtitle'>Used in</label>
 		{% for key, value in usage_dict.Usage.Actual_use.items %}
 			{% if "Usage_project" in key %}
 				<div class="separation"><hr/></div>
-				{% include "repository/resource_view/project.html" with project=value %}
+				{% include "repository/resource_view/project.html" with project=value level="sub" %}
 			{% endif %}
 		{% endfor %}
 	{% endif %}

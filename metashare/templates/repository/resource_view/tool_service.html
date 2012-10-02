@@ -29,9 +29,18 @@
 		{% endif %}
 		
 		{% if tool_service.Tool_service_operation.Running_environment %}
-			{% if tool_service.Tool_service_operation.Running_environment.Required_software %}
-				{% include "repository/resource_view/target_resource.html" with target=tool_service.Tool_service_operation.Running_environment.Required_software title="Required Software" %}
-			{% endif %}
+			 {% if "Required_software" in tool_service.Tool_service_operation.Running_environment %}
+			 	<label class='subtitle'>Required Software</label>
+			 	<div class="dataline indented">			 		
+			 		<ul>					 	
+						 {% for key, value in tool_service.Tool_service_operation.Running_environment.items %}
+						 	{% if "Required_software" in key %}
+						 		{% include "repository/resource_view/target_resource.html" with target=value title="Required Software" level="list" %}
+						 	{% endif %}
+						 {% endfor %}
+					 </ul>
+				</div>
+			{% endif %}			
 			
 			{% if tool_service.Tool_service_operation.Running_environment.Required_hardware %}
 				 <div class="dataline indented">
@@ -41,13 +50,22 @@
 				</div>
 			{% endif %}
 			
-			{% if tool_service.Tool_service_operation.Running_environment.Required_lrs %}
-				{% if tool_service.Tool_service_operation.Running_environment %}
-					{% if tool_service.Tool_service_operation.Running_environment.Required_software %}
-						{% include "repository/resource_view/target_resource.html" with target=tool_service.Tool_service_operation.Running_environment.Required_lrs title="Required LRs" %}
-					{% endif %}
-				{% endif %}
+			
+			
+		 	{% if "Required_lrs" in tool_service.Tool_service_operation.Running_environment %}
+			 	<label class='subtitle'>Required LRs</label>
+			 	<div class="dataline indented">			 		
+			 		<ul>					 	
+						 {% for key, value in tool_service.Tool_service_operation.Running_environment.items %}
+						 	{% if "Required_lrs" in key %}
+						 		{% include "repository/resource_view/target_resource.html" with target=value title="Required LRs" level="list" %}
+						 	{% endif %}
+						 {% endfor %}
+					 </ul>
+				</div>
 			{% endif %}
+			
+			
 			
 			{% if tool_service.Tool_service_operation.Running_environment.Running_environment_details %}
 				 <div class="dataline indented">
@@ -123,11 +141,18 @@
 		 	{% endif %}
 		 {% endfor %}
 		 
- 		 {% for key, value in tool_service.Tool_service_evaluation.items %}
-		 	{% if "Evaluation_tool" in key %}
-				{% include "repository/resource_view/target_resource.html" with target=value  title="Evaluation Tool" %}
-		 	{% endif %}
-		 {% endfor %}
+ 		{% if "Evaluation_tool" in tool_service.Tool_service_evaluation %}
+			<label class="subtitle">Evaluation Tool</label>
+		<div class="dataline indented">
+			<ul>		
+	 		 {% for key, value in tool_service.Tool_service_evaluation.items %}
+			 	{% if "Evaluation_tool" in key %}
+					{% include "repository/resource_view/target_resource.html" with target=value level="list" %}
+			 	{% endif %}
+			 {% endfor %}
+			</ul>
+		</div>
+		{% endif %}
 		
 		{% if tool_service.Tool_service_evaluation.Evaluation_details %}
 			 <div class="dataline indented">
@@ -168,11 +193,18 @@
 			</div>
 		{% endif %}
 		
-		{% for key, value in tool_service.Tool_service_creation.items %}
-			{% if "Original_source" in key %}
-				{% include "repository/resource_view/target_resource.html" with target=value  title="Original Source" %}
-			{% endif %}
-		{% endfor %}
+		{% if "Original_source" in tool_service.Tool_service_creation %}
+			<label class="subtitle">Original Source</label>
+			<div class="dataline indented">
+				<ul>
+					{% for key, value in tool_service.Tool_service_creation.items %}
+						{% if "Original_source" in key %}
+							{% include "repository/resource_view/target_resource.html" with target=value  title="Original Source" level="list" %}
+						{% endif %}
+					{% endfor %}
+				</ul>
+			</div>
+		{% endif %}
 
 		{% if tool_service.Tool_service_creation.Creation_details %}
 			 <div class="dataline indented">
