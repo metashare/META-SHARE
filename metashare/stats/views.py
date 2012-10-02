@@ -71,7 +71,7 @@ def mystats (request):
             lastaccess = LRStats.objects.values('lasttime').filter(lrid=resource.storage_object.identifier) \
                 .exclude(userid=request.user.username).order_by('-lasttime')[:1]
             if len(lastaccess) > 0:
-                lastaccesstime = lastaccess[0]["lasttime"].strftime("%Y/%m/%d - %I:%M:%S")
+                lastaccesstime = lastaccess[0]["lasttime"].strftime("%Y/%m/%d - %H:%M:%S")
                 
             data.append([resource.id, resource.get_absolute_url, resource, resource.storage_object.publication_status, \
                 getLRStats(resource.storage_object.identifier), getUserCount(resource.storage_object.identifier, request.user.username), \
@@ -260,7 +260,7 @@ def topstats (request):
     view = request.GET.get('view', 'topviewed')
     last = request.GET.get('last', '')
     limit = int(request.GET.get('limit', '10'))
-    offset = int(request.GET.get('offset', '0'))
+    offset = int(request.GET.get('offset', '0'))    
     since = None
     if (last == "day"):
         since = date.today() + relativedelta(days = -1)
@@ -273,12 +273,12 @@ def topstats (request):
         
     countrycode = request.GET.get('country', '')
     countryname = ""
-    if (countrycode != ''):
+    if (len(countrycode) > 0):
         countryname = getcountry_name(countrycode)
     if view == "topviewed":
         geovisits = getCountryActions(VIEW_STAT)
         visitstitle = "viewing resources"
-        data = getLRTop(VIEW_STAT, limit, countrycode, since, offset)
+        data = getLRTop(VIEW_STAT, limit+1, countrycode, since, offset)
         for item in data:
             try:
                 res_info =  resourceInfoType_model.objects.get(storage_object__identifier=item['lrid'])
@@ -288,7 +288,7 @@ def topstats (request):
     elif (view == "latestupdated"):
         geovisits = getCountryActions(UPDATE_STAT)
         visitstitle = "updating resources"
-        data = getLRLast(UPDATE_STAT, limit, countrycode, offset)
+        data = getLRLast(UPDATE_STAT, limit+1, countrycode, offset)
         for item in data:
             try:
                 res_info =  resourceInfoType_model.objects.get(storage_object__identifier=item['lrid'])
@@ -298,7 +298,7 @@ def topstats (request):
     elif (view == "topdownloaded"):
         geovisits = getCountryActions(DOWNLOAD_STAT)
         visitstitle = "downloading resources"
-        data = getLRTop(DOWNLOAD_STAT, limit, countrycode, since, offset)
+        data = getLRTop(DOWNLOAD_STAT, limit+1, countrycode, since, offset)
         for item in data:
             try:
                 res_info =  resourceInfoType_model.objects.get(storage_object__identifier=item['lrid'])
@@ -308,7 +308,7 @@ def topstats (request):
     elif view == "topqueries":
         geovisits = getCountryQueries()
         visitstitle = "queries"
-        data = getTopQueries(limit, countrycode, since, offset)
+        data = getTopQueries(limit+1, countrycode, since, offset)
         for item in data:
             url = "q=" + item['query']
             query = urllib.unquote(item['query'])
@@ -323,7 +323,7 @@ def topstats (request):
     elif view == "latestqueries":
         geovisits = getCountryQueries()
         visitstitle = "queries"
-        data = getLastQuery(limit, countrycode, offset)
+        data = getLastQuery(limit+1, countrycode, offset)
         for item in data:
             url = "q=" + item['query']
             query = urllib.unquote(item['query'])
@@ -335,10 +335,13 @@ def topstats (request):
                     facets += ", " + face.replace("Filter_exact:",": ")
                 facets = facets.replace(", ", "", 1) 
             topdata.append([query, facets, pretty_timeago(item['lasttime']), item['found'], url])       
-
+    has_next = False
+    if len(topdata) > limit:
+        topdata = topdata[:limit]
+        has_next = True
     return render_to_response('stats/topstats.html',
         {'user': request.user, 
-        'topdata': topdata[:limit], 
+        'topdata': topdata, 
         'view': view,
         'geovisits': geovisits,
         'countrycode': countrycode,
@@ -346,7 +349,7 @@ def topstats (request):
         'visitstitle': visitstitle,
         'last' : last,
         'offset': offset,
-        'limit': limit,
+        'has_next': has_next,
         'myres': isOwner(request.user.username)},
         context_instance=RequestContext(request))
     
@@ -418,8 +421,10 @@ def getstats (request):
                         "counters": [int(item["lrid__count"]), int(item["count__sum"])]})
         data["usagestats"] = usagedata
             
-        resources =  resourceInfoType_model.objects.all()
+        # export stats about published LRs only
         lrstats = {}
+        resources =  resourceInfoType_model.objects \
+            .filter(storage_object__publication_status=PUBLISHED, storage_object__deleted=False)
         for resource in resources:
             lrstats[resource.storage_object.identifier] = getLRStats(resource.storage_object.identifier)
         data["lrstats"] = lrstats

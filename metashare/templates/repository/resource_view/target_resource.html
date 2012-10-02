@@ -1,9 +1,9 @@
 {% spaceless %}
-<label class={% if level == "top" %}'title'{% else %}'subtitle'{% endif %}>{{title}}</label>
 
 <div class="dataline indented">
-	<label>
-		<strong>Resource Identifier:</strong> {{target.Target_resource_name_uri}}
-	</label>
+	<li>
+		{{target.Target_resource_name_uri|urlizetrunc:17}}
+	</li>
 </div>
+
 {% endspaceless %}

@@ -1,34 +1,42 @@
+{% spaceless %}
 
 {% with media_info=resource_component_dict.Resource_component %}
 	{% if type == "text" %}
-		{% for key, value in resource_component_dict.Resource_component.Corpus_media.items %}
-			{% if "text" in key %}
-				{% include "repository/resource_view/detailed_media_info.html" with resource_component=value %}
+		{% for key, value in resource_component_dict.Resource_component.items %}
+			{% if "media" in key %}
+				{% for key1, value1 in value.items %}
+					{% if "text" in key1 and not "numerical" in key1 and not "ngram" in key1 %}
+						{% include "repository/resource_view/detailed_media_info.html" with resource_component=value1 %}
+					{% endif %}
+				{% endfor %}		
 			{% endif %}
 		{% endfor %}
 	{% else %}
 		{% if type == "audio" %}
 			{% include "repository/resource_view/detailed_media_info.html" with resource_component=resource_component_dicts.audio %}
 		{% else %}
-			{% if type == "video" %}
-				{% for key, value in resource_component_dict.Resource_component.Corpus_media.items %}
-					{% if "video" in key %}
-						{% include "repository/resource_view/detailed_media_info.html" with resource_component=value %}
+			{% if type == "video" %}				
+				{% for key, value in resource_component_dict.Resource_component.items %}
+					{% if "media" in key %}
+						{% for key1, value1 in value.items %}
+							{% if "video" in key1 %}
+								{% include "repository/resource_view/detailed_media_info.html" with resource_component=value1 %}
+							{% endif %}
+						{% endfor %}		
 					{% endif %}
 				{% endfor %}
-				
 			{% else %}
 				{% if type == "image" %}
 					{% include "repository/resource_view/detailed_media_info.html" with resource_component=resource_component_dicts.image %}
 				{% else %}
-					{% if type == "textNumerical" %}
-						{% include "repository/resource_view/detailed_media_info.html" with resource_component=resource_component_dicts.textNumerical %}
+					{% if type == "textnumerical" %}
+						{% include "repository/resource_view/detailed_media_info.html" with resource_component=media_info.Corpus_media.Corpus_text_numerical %}
 					{% else %}
-						{% if type == "textNgram" %}
-							{% include "repository/resource_view/detailed_media_info.html" with resource_component=resource_component_dicts.textNgram %}
+						{% if type == "textngram" %}
+							{% include "repository/resource_view/detailed_media_info.html" with resource_component=media_info.Corpus_media.Corpus_text_ngram %}
 						{% else %}
 							{% if type == "toolService" %}
-								{% include "repository/resource_view/detailed_media_info.html" with resource_component=resource_component_dicts.toolService %}
+								{% include "repository/resource_view/detailed_media_info.html" with resource_component=resource_component_dict.toolService %}
 							{% endif %}
 						{% endif %}
 					{% endif %}
@@ -37,3 +45,5 @@
 		{% endif %}
 	{% endif %}
 {% endwith %}
+
+{% endspaceless %}

@@ -1,6 +1,7 @@
 {% load replace %}
 
 {% spaceless %}
+
 <label class='subtitle'>{{ audio_format.Mime_type }}{% if audio_format.Size_per_audio_format %}{% include "repository/resource_view/size.html" with size=audio_format.Size_per_audio_format type="sub" %} {% endif %}</label>
 {% for key, value in audio_format.items %}
 	{% if key == "Compression" %}
@@ -21,4 +22,5 @@
 		{% endif %}
 	{% endif %}
 {% endfor %}
+
 {% endspaceless %}

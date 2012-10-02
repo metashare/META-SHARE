@@ -2,12 +2,11 @@
 {% load get_icon %}
 {% spaceless %}
 
-
 <div class="dataline" style="margin-bottom:3px;">
 	{% if level == "sub" %}
 		<label class='subtitle'>{{type}}</label>
 	{% else %}	
-		{% if type != "Contact Person" and type != "Metadata Creator" and type != "Resource Creator" and type != "IPR Holder" and type != "Evaluator" and type != "Validator" and type != "Annotator" and type != "Licensor" and type != "Distribution_rights_holder" %}
+		{% if type != "Contact Person" and type != "Metadata Creator" and type != "Resource Creator" and type != "IPR Holder" and type != "Evaluator" and type != "Validator" and type != "Annotator" and type != "Licensor" and type != "Distribution_rights_holder" and type != "Validator" and type != "Recorder" %}
 			<span class='title'>{{type}}</span>
 		{% endif %}
 	{% endif %}
@@ -21,9 +20,7 @@
 		</label>
 	</a>
 
-
 	<div class="contact hidden">
-	
 		{# Name, Surname and sex #}
 		<div>
 			<label class="dataline">
@@ -37,13 +34,13 @@
 			</label>
 		</div>
 		
-		<div>
-			<label class="dataline" style="clear:both;">
-				{% if person_dict.Communication.Url %}
+		{% if person_dict.Communication.Url %}
+			<div>
+				<label class="dataline" style="clear:both;">		
 					<a href="{{person_dict.Communication.Url}}" target='_blank' style="vertical-align:super;">Homepage {% get_icon "link" %}</a>
-				{% endif %}
-			</label>
-		</div>
+				</label>
+			</div>
+		{% endif %}
 		
 		<div>
 			<label class="dataline">
@@ -81,6 +78,7 @@
 			</label>
 		</div>
 		{% endif %}
+		
 		<div>
 			<label class="dataline">
 				{{ person_dict.Communication.Address }}
@@ -130,18 +128,18 @@
 
 		<div>
 			<label class="dataline">
-				{% if person_dict.Affiliation.Url %}
-					<a href="{{person_dict.Affiliation.Url}}" target='_blank'>
+				{% if person_dict.Affiliation.Communication.Url %}
+					<a href="{{person_dict.Affiliation.Communication.Url}}" target='_blank'>
 				{% endif %}
 						{{ person_dict.Affiliation.Organization_name }}
-				{% if person_dict.Affiliation.Url %}
+				{% if person_dict.Affiliation.Communication.Url %}
 					</a>
 				{% endif %}
 			</label>
 		</div>
 		<div>
 			<label class="dataline">
-				{{ person_dict.Affiliation.OrganizationShortName }}
+				{{ person_dict.Affiliation.Organization_short_name }}
 			</label>
 		</div>
 		<div>
@@ -193,9 +191,7 @@
 			</label>
 		</div>
 		{% endif %}	
-		
 	</div>
-
 </div>
 <div style="clear:both;"></div>
 		

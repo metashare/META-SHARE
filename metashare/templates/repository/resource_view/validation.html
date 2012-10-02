@@ -3,14 +3,10 @@
 <label class='component'>Validation</label>
 
 {% for dict in validation_dicts %}
-     <div class="dataline">
-		<label>
-			<strong><i>{% ifequal dict.Validation.Validated "True" %}Validated{% else %}Not Validated{% endifequal %}</i></strong>
-		</label>
-	</div>
+	<label class='title'>{% ifequal dict.Validation.Validated "True" %}Validated{% else %}Not Validated{% endifequal %} {% if dict.Validation.Size_per_validation %}{% include "repository/resource_view/size.html" with size=dict.Validation.Size_per_validation type="sub" %}{% endif %}</label> 
 		
 	{% if dict.Validation.Validation_type %}
-	     <div class="dataline">
+	     <div class="dataline indented">
 			<label>
 				<strong>Type of Validation:</strong> {{ dict.Validation.Validation_type }}
 			</label>
@@ -18,7 +14,7 @@
 	{% endif %}
 	
 	{% if dict.Validation.Validation_mode %}
-	     <div class="dataline">
+	     <div class="dataline indented">
 			<label>
 				<strong>Validation Mode:</strong> {{ dict.Validation.Validation_mode }}
 			</label>
@@ -26,7 +22,7 @@
 	{% endif %}
 	
 	{% if dict.Validation.Validation_mode_details %}
-	     <div class="dataline">
+	     <div class="dataline indented">
 			<label>
 				<strong>Mode Details:</strong> {{ dict.Validation.Validation_mode_details }}
 			</label>
@@ -34,7 +30,7 @@
 	{% endif %}
 	
 	{% if dict.Validation.Validation_extent %}
-	     <div class="dataline">
+	     <div class="dataline indented">
 			<label>
 				<strong>Extent:</strong> {{ dict.Validation.Validation_extent }}
 			</label>
@@ -42,26 +38,18 @@
 	{% endif %}
 
 	{% if dict.Validation.Validation_extent_details %}
-	     <div class="dataline">
+	     <div class="dataline indented">
 			<label>
 				<strong>Extent Details:</strong> {{ dict.Validation.Validation_extent_details }}
 			</label>
 		</div>	
 	{% endif %}
-	
-	{% if dict.Validation.Size_per_validation %}
-	     <div class="dataline">
-			<label>
-				<strong>Size per Validation:</strong> {{ dict.Validation.Size_per_validation }}
-			</label>
-		</div>	
-	{% endif %}
-	
+
 	{% if dict.Validation.Validation_report %}
 		{% if dict.Validation.Validation_report.Validation_report.Title %}
-			{% include "repository/resource_view/documentation.html" with documentation=dict.Validation.Validation_report.Validation_report type="Validation Report" indent="yes" %}
+			{% include "repository/resource_view/documentation.html" with documentation=dict.Validation.Validation_report.Validation_report type="Validation Report" level="sub" %}
 		{% else %}
-			<div class="dataline">
+			<div class="dataline indented">
 				<label>
 					<strong>Validation Report: </strong>{{ dict.Validation.Validation_report.Validation_report }}
 				</label>
@@ -70,13 +58,13 @@
 	{% endif %}
 	
 	{% if dict.Validation.Validation_tool %}
-			{% include "repository/resource_view/target_resource.html" with target=dict.Validation.Validation_tool title="Validation Tool" level="top" %}
+			{% include "repository/resource_view/target_resource.html" with target=dict.Validation.Validation_tool title="Validation Tool" level="sub" %}
 	{% endif %}
 	
 	<div class="dataline">
 		{% for key, value in dict.items %}
 			{% if "Validator" in value %}
-				<label class="title">Validator</label>
+				<label class="subtitle">Validator</label>
 			{% endif %}
 			{% for key1, value1 in value.items %}
 				{% if "Validator" in key1 %}
@@ -90,9 +78,7 @@
 		{% endfor %}
 	</div>
 	{% if not forloop.last %}
-		<div class="separation"><hr/></div>
 	{% endif %}
 {% endfor %}
-
 
 {% endspaceless %}
