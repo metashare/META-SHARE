@@ -969,6 +969,7 @@
           <audioContentInfo>
             <speechItems>phoneticallyRichSentences</speechItems>
             <speechItems>phoneticallyRichWords</speechItems>
+            <nonSpeechItems>commercial </nonSpeechItems>
             <nonSpeechItems>noise</nonSpeechItems>
             <textualDescription>blabla</textualDescription>
             <noiseLevel>low</noiseLevel>
