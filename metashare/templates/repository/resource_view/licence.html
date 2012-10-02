@@ -38,7 +38,7 @@
 		{% if "Download_location" in key1 %}
 			<div class="dataline indented">
 				<label>
-					<strong>Download location{% if "," in value1 %}s{% endif %}: </strong>{{value1|urlizetrunc:17}}
+					<strong>Download location{% if ", " in value1 %}s{% endif %}: </strong>{{value1|urlizetrunc:17}}
 				</label>
 			</div>
 		{% endif %}
@@ -46,7 +46,7 @@
 		{% if "Execution_location" in key1 %}
 			<div class="dataline indented">
 				<label>
-					<strong>Execution location{% if "," in value1 %}s{% endif %}: </strong>{{value1|urlizetrunc:17}}
+					<strong>Execution location{% if ", " in value1 %}s{% endif %}: </strong>{{value1|urlizetrunc:17}}
 				</label>
 			</div>
 		{% endif %}
