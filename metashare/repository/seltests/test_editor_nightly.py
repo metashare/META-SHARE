@@ -8,8 +8,12 @@ from selenium.webdriver.support.ui import Select
 from metashare import settings, test_utils
 from metashare.accounts.models import EditorGroup, EditorGroupManagers
 from metashare.repository.seltests.test_editor import _delete, _publish, \
-    _ingest, _fill_audio_size, _fill_contact_person, _fill_distribution, \
-    _fill_language, _fill_text_size, _fill_affiliation
+    _ingest, _fill_distribution, _fill_contact_person, _fill_affiliation, \
+    _fill_usage, _fill_access_tool, _fill_resource_associated_with, \
+    _fill_usage_report, _fill_documentation, _fill_derived_resource, \
+    _fill_related_resource, _fill_project, _fill_funding_project, \
+    _fill_metadata_creator, _fill_resource_creator, _fill_language, \
+    _fill_text_size, _fill_audio_size
 from metashare.repository.seltests.test_utils import login_user, mouse_over, \
     setup_screenshots_folder, click_menu_item, save_and_close, \
     cancel_and_close, cancel_and_continue
@@ -53,7 +57,7 @@ class NightlyEditorTests(SeleniumTestCase):
         self.assertEqual([], self.verification_errors)
 
 
-    def test_LR_creation_corpus_text(self):
+    def test_full_LR_creation_corpus_text(self):
         driver = self.driver
         driver.get(self.base_url)
         ss_path = setup_screenshots_folder(
@@ -93,12 +97,80 @@ class NightlyEditorTests(SeleniumTestCase):
         driver.find_element_by_name("val_form-0-description_0").clear()
         driver.find_element_by_name("val_form-0-description_0").send_keys("Test Description")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_xpath("//div[@class='form-row resourceShortName']/div/ul/li/a").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("key_form-0-resourceShortName_0").clear()
+        driver.find_element_by_name("key_form-0-resourceShortName_0").send_keys("en")
+        driver.find_element_by_name("val_form-0-resourceShortName_0").clear()
+        driver.find_element_by_name("val_form-0-resourceShortName_0").send_keys("TTC")
+        driver.find_element_by_name("form-0-url").clear()
+        driver.find_element_by_name("form-0-url").send_keys("http://www.ttc.org")
+        driver.find_element_by_name("form-0-identifier").clear()
+        driver.find_element_by_name("form-0-identifier").send_keys("A-123")
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
         _fill_distribution(driver, ss_path, root_id)
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
         _fill_contact_person(driver, ss_path, root_id)
+        # contact metadata creator popup
+        driver.find_element_by_xpath("//a[@id='add_id_form-2-0-metadataCreator']/img").click()
+        _fill_metadata_creator(driver, ss_path, root_id)
+        driver.find_element_by_name("form-2-0-source").clear()
+        driver.find_element_by_name("form-2-0-source").send_keys("catalogue")
+        driver.find_element_by_name("form-2-0-originalMetadataSchema").clear()
+        driver.find_element_by_name("form-2-0-originalMetadataSchema").send_keys("metadata")
+        driver.find_element_by_name("form-2-0-originalMetadataLink").clear()
+        driver.find_element_by_name("form-2-0-originalMetadataLink").send_keys("http://catalogue.org/ttc")
+        driver.find_element_by_name("form-2-0-metadataLanguageName").clear()
+        driver.find_element_by_name("form-2-0-metadataLanguageName").send_keys("english")
+        driver.find_element_by_name("form-2-0-metadataLanguageId").clear()
+        driver.find_element_by_name("form-2-0-metadataLanguageId").send_keys("en")
+        driver.find_element_by_name("form-2-0-revision").clear()
+        driver.find_element_by_name("form-2-0-revision").send_keys("1.0")
+
+        # recommended page
+        driver.find_element_by_css_selector("a[href=\"#field-2\"]").click()
+        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        driver.find_element_by_name("form-3-0-version").clear()
+        driver.find_element_by_name("form-3-0-version").send_keys("1.0")
+        driver.find_element_by_name("form-3-0-revision").clear()
+        driver.find_element_by_name("form-3-0-revision").send_keys("1.0")
+        driver.find_element_by_name("form-3-0-lastDateUpdated").clear()
+        driver.find_element_by_name("form-3-0-lastDateUpdated").send_keys("2012-09-28")
+        driver.find_element_by_name("form-3-0-updateFrequency").clear()
+        driver.find_element_by_name("form-3-0-updateFrequency").send_keys("1")
+        # usage popup
+        driver.find_element_by_xpath("//a[@id='add_id_usageInfo']/img").click()  
+        _fill_usage(driver, ss_path, root_id)
+        # documentation popup
+        Select(driver.find_element_by_xpath("//div[@class='form-row documentation']/div/select")) \
+          .select_by_visible_text("documentInfoType")
+        _fill_documentation(driver, ss_path, root_id)
+        driver.find_element_by_name("form-4-0-samplesLocation").clear()
+        driver.find_element_by_name("form-4-0-samplesLocation").send_keys("http://ttc.samples.org")
+        Select(driver.find_element_by_name(
+          "form-4-0-toolDocumentationType_old")).select_by_visible_text("Manual")
+        driver.find_element_by_xpath("//div[@class='form-row toolDocumentationType']/div/div/div/a") \
+          .click()
+        # resource creator popup
+        Select(driver.find_element_by_xpath("//div[@class='form-row resourceCreator']/div/select")) \
+          .select_by_visible_text("personInfoType")
+        _fill_resource_creator(driver, ss_path, root_id)
+        # funding project popup
+        driver.find_element_by_xpath("//a[@id='add_id_form-5-0-fundingProject']/img").click()  
+        _fill_funding_project(driver, ss_path, root_id)
+        driver.find_element_by_name("form-5-0-creationStartDate").clear()
+        driver.find_element_by_name("form-5-0-creationStartDate").send_keys("2012-09-28")
+        driver.find_element_by_name("form-5-0-creationEndDate").clear()
+        driver.find_element_by_name("form-5-0-creationEndDate").send_keys("2012-09-28")
+        # relations field
+        driver.find_element_by_id("fieldsetcollapser1").click()
+        driver.find_element_by_name("relationinfotype_model_set-0-relationType").clear()
+        driver.find_element_by_name("relationinfotype_model_set-0-relationType").send_keys("new type")
+        # related resource popup
+        driver.find_element_by_xpath("//a[@id='add_id_relationinfotype_model_set-0-relatedResource']/img").click()  
+        _fill_related_resource(driver, ss_path, root_id)
         
         # corpus text info popup
         driver.find_element_by_id("add_id_corpusTextInfo-0").click()
@@ -148,8 +220,8 @@ class NightlyEditorTests(SeleniumTestCase):
         _delete(driver)
         self.assertEqual("Successfully deleted 1 resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
-        
-        
+
+
     def test_LR_creation_corpus_audio(self):
         driver = self.driver
         driver.get(self.base_url)
