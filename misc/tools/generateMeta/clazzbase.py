@@ -60,17 +60,17 @@ Simple_type_table = {
     'NMTOKENS': None,
 }
 Integer_type_table = {
-    'integer': None,
-    'positiveInteger': None,
-    'negativeInteger': None,
-    'nonNegativeInteger': None,
-    'nonPositiveInteger': None,
-    'long': None,
-    'unsignedLong': None,
-    'int': None,
-    'unsignedInt': None,
-    'short': None,
-    'unsignedShort': None,
+    'integer': 'BigIntegerField',
+    'positiveInteger': 'BigIntegerField',
+    'negativeInteger': 'BigIntegerField',
+    'nonNegativeInteger': 'BigIntegerField',
+    'nonPositiveInteger': 'BigIntegerField',
+    'long': 'BigIntegerField',
+    'unsignedLong': 'BigIntegerField',
+    'int': 'IntegerField',
+    'unsignedInt': 'IntegerField',
+    'short': 'IntegerField',
+    'unsignedShort': 'IntegerField',
 }
 Float_type_table = {
     'decimal': None,
@@ -822,10 +822,19 @@ class Clazz(object):
                       options + choice_options, required)
 
                 else:
+                    # here we do not need anything larger than `xs:int`, even if
+                    # it is defined as such; we probably can safely assume that
+                    # none of the enumeration values has more than 2 billion
+                    # digits ...; still we log this assumption
+                    if Integer_type_table[data_type] != 'IntegerField':
+                        logging.warn('Ignoring a probably too broad type (%s) '
+                          'for "%s". Using a standard "IntegerField" instead.',
+                          data_type, name)
                     self.generate_simple_field(name, 'IntegerField',
                       options + choice_options, required)
             else:
-                self.generate_simple_field(name, 'IntegerField', options, required)
+                self.generate_simple_field(name, Integer_type_table[data_type],
+                  options, required)
         elif data_type in Float_type_table:
             self.generate_simple_field(name, 'FloatField', options, required)
         elif data_type in Date_type_table:

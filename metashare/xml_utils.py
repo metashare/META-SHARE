@@ -10,6 +10,7 @@ import sys
 from subprocess import call, STDOUT
 from zipfile import is_zipfile, ZipFile
 
+from django import db
 from django.contrib.admin.models import LogEntry, ADDITION
 from django.contrib.contenttypes.models import ContentType
 from django.utils.encoding import force_unicode
@@ -146,7 +147,13 @@ def import_from_file(filehandle, descriptor, targetstatus, copy_status, owner_id
             xml_string = filehandle.read()
             resource = import_from_string(xml_string, targetstatus, copy_status, owner_id)
             imported_resources.append(resource)
+        # pylint: disable-msg=W0703
         except Exception as problem:
+            LOGGER.warn('Caught an exception while importing %s:',
+                descriptor, exc_info=True)
+            if isinstance(problem, db.utils.DatabaseError):
+                # reset database connection (required for PostgreSQL)
+                db.close_connection()
             erroneous_descriptors.append((descriptor, problem))
     
     else:
@@ -163,7 +170,13 @@ def import_from_file(filehandle, descriptor, targetstatus, copy_status, owner_id
                 xml_string = temp_zip.read(xml_name)
                 resource = import_from_string(xml_string, targetstatus, copy_status, owner_id)
                 imported_resources.append(resource)
+            # pylint: disable-msg=W0703
             except Exception as problem:
+                LOGGER.warn('Caught an exception while importing %s from %s:',
+                    xml_name, descriptor, exc_info=True)
+                if isinstance(problem, db.utils.DatabaseError):
+                    # reset database connection (required for PostgreSQL)
+                    db.close_connection()
                 erroneous_descriptors.append((xml_name, problem))
     return imported_resources, erroneous_descriptors
 
