@@ -129,7 +129,7 @@
 		<div>
 			<label class="dataline">
 				{% if person_dict.Affiliation.Communication.Url %}
-					{{ person_dict.Affiliation.Organization_name|urlizetrunc:17 }}
+					{{ person_dict.Affiliation.Communication.Url|urlizetrunc:17 }}
 				{% endif %}
 			</label>
 		</div>
