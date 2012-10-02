@@ -29,9 +29,18 @@
 		{% endif %}
 		
 		{% if tool_service.Tool_service_operation.Running_environment %}
-			{% if tool_service.Tool_service_operation.Running_environment.Required_software %}
-				{% include "repository/resource_view/target_resource.html" with target=tool_service.Tool_service_operation.Running_environment.Required_software title="Required Software" %}
-			{% endif %}
+			 {% if "Required_software" in tool_service.Tool_service_operation.Running_environment %}
+			 	<label class='subtitle'>Required Software</label>
+			 	<div class="dataline indented">			 		
+			 		<ul>					 	
+						 {% for key, value in tool_service.Tool_service_operation.Running_environment.items %}
+						 	{% if "Required_software" in key %}
+						 		{% include "repository/resource_view/target_resource.html" with target=value title="Required Software" level="list" %}
+						 	{% endif %}
+						 {% endfor %}
+					 </ul>
+				</div>
+			{% endif %}			
 			
 			{% if tool_service.Tool_service_operation.Running_environment.Required_hardware %}
 				 <div class="dataline indented">
@@ -41,9 +50,22 @@
 				</div>
 			{% endif %}
 			
-			{% if tool_service.Tool_service_operation.Running_environment.Required_lrs %}
-				{% include "repository/resource_view/target_resource.html" with target=tool_service.Tool_service_operation.Running_environment.Required_lrs title="Required LRs" %}
+			
+			
+		 	{% if "Required_lrs" in tool_service.Tool_service_operation.Running_environment %}
+			 	<label class='subtitle'>Required LRs</label>
+			 	<div class="dataline indented">			 		
+			 		<ul>					 	
+						 {% for key, value in tool_service.Tool_service_operation.Running_environment.items %}
+						 	{% if "Required_lrs" in key %}
+						 		{% include "repository/resource_view/target_resource.html" with target=value title="Required LRs" level="list" %}
+						 	{% endif %}
+						 {% endfor %}
+					 </ul>
+				</div>
 			{% endif %}
+			
+			
 			
 			{% if tool_service.Tool_service_operation.Running_environment.Running_environment_details %}
 				 <div class="dataline indented">
