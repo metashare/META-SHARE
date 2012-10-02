@@ -2430,8 +2430,6 @@ class NightlyEditorTests(SeleniumTestCase):
         driver.find_element_by_name("form-0-faxNumber").send_keys("1234567890")
         driver.find_element_by_name("position").clear()
         driver.find_element_by_name("position").send_keys("Professor")
-        driver.find_element_by_name("affiliation").clear()
-        driver.find_element_by_name("affiliation").send_keys("world")
         # affiliation popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
         _fill_affiliation(driver, ss_path, root_id)
