@@ -228,6 +228,22 @@
 		{% if documentation_dict %}
 		<label class="component">Documentation</label>
 			{% for key, value in documentation_dict.items %}
+				{% for key1, value1 in value.items %}		
+					{% if "Samples_location" in key1 %}
+						 <div class="dataline">
+							<label>
+								<strong>Samples Location: </strong>{{value1|urlizetrunc:17}}
+							</label>
+						</div>
+					{% endif %}
+					{% if "Tool_documentation" in key1 %}
+						 <div class="dataline">
+							<label>
+								<strong>Tool Documentation: </strong>{{value1}}
+							</label>
+						</div>
+					{% endif %}						
+				{% endfor %}
 				{% for key1, value1 in value.items %}
 					{% for key2, value2 in value1.items %}				
 						{% if "Documentation" in key2 %}
@@ -241,23 +257,9 @@
 										{{value2}}
 									</label>
 								</div>
-							{% endif %}							
-						{% endif %}						
-					{% endfor %}				
-					{% if "Samples_location" in key1 %}
-						 <div class="dataline">
-									<label>
-										<strong>Samples Location: </strong>{{value1|urlizetrunc:17}}
-									</label>
-								</div>
-					{% endif %}
-					{% if "Tool_documentation" in key1 %}
-						 <div class="dataline">
-							<label>
-								<strong>Tool Documentation: </strong>{{value1}}
-							</label>
-						</div>
-					{% endif %}						
+							{% endif %}
+						{% endif %}
+					{% endfor %}
 				{% endfor %}
 			{% endfor %}
 		{% endif %}
