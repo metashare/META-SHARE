@@ -45,7 +45,7 @@
 	{% if "Domain" in resource_component %}
 		{% include "repository/resource_view/domain.html" with domains=resource_component %}
 	{% endif %}
-
+	
 	{# Modality Information #}
 	{% if "Modality" in resource_component %}
 		{% include "repository/resource_view/modality.html" with modalities=resource_component %}
@@ -114,15 +114,36 @@
 		{% include "repository/resource_view/image_content.html" with image=resource_component.Image_content %}
 	{% endif %}
 	
-	{# Video Format Information #}
-	{% if "Video_format" in resource_component %}
-		{% include "repository/resource_view/video_format.html" with video=resource_component.Video_format %}
+	{# Text Ngram Information #}
+	{% if "Ngram" in resource_component %}
+		{% include "repository/resource_view/ngram.html" with ngram=resource_component.Ngram title="NGram" %}
 	{% endif %}
 	
-	{# Image Format Information #}
-	{% if "Image_format" in resource_component %}
-		{% include "repository/resource_view/video_format.html" with video=resource_component.Image_format %}
+	{# Text Numerical Content Information #}
+	{% if "Text_numerical_content" in resource_component %}
+		{% include "repository/resource_view/ngram.html" with ngram=resource_component.Text_numerical_content title="Text Numerical Content" %}
 	{% endif %}
+	
+	{# Text Numerical Format Information #}
+	{% for key, value in resource_component.items %}		
+		{% if "Text_numerical_format" in key %}
+			{% include "repository/resource_view/video_format.html" with video=value %}
+		{% endif %}
+	{% endfor %}
+	
+	{# Video Format Information #}
+	{% for key, value in resource_component.items %}		
+		{% if "Video_format" in key %}
+			{% include "repository/resource_view/video_format.html" with video=value %}
+		{% endif %}
+	{% endfor %}
+	
+	{# Image Format Information #}
+	{% for key, value in resource_component.items %}		
+		{% if "Image_format" in key %}
+			{% include "repository/resource_view/video_format.html" with video=value %}
+		{% endif %}
+	{% endfor %}
 	
 	{# Recording Information #}
 	{% if "Recording" in resource_component %}
@@ -140,9 +161,11 @@
 	{% endif %}
 	
 	{# Link to Other Media Information #}
-	{% if "Link_to_other_media" in resource_component %}
-		{% include "repository/resource_view/linktoothermedia.html" with link=resource_component.Link_to_other_media %}
-	{% endif %}
+	{% for key, value in resource_component.items %}		
+		{% if "Link_to_other_media" in key %}
+			{% include "repository/resource_view/linktoothermedia.html" with link=value %}
+		{% endif %}
+	{% endfor %}
 	
 {% endif %}
 

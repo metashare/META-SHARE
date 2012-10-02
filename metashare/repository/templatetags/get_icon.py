@@ -42,7 +42,7 @@ class GetIcon(template.Node):
               .format(MEDIA_URL)
         if result == "textnumerical":
             image_tag = image_tag + ' <img title="textNumerical" src="{}css/sexybuttons/images/' \
-              'icons/silk/eye.png" />' \
+              'icons/silk/numerical_text.png" />' \
               .format(MEDIA_URL)
         if result == "textngram":
             image_tag = image_tag + ' <img title="textNgram" src="{}css/sexybuttons/images/' \
