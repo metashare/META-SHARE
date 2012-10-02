@@ -515,8 +515,8 @@ class BasicEditorTests(SeleniumTestCase):
         # corpus text info popup
         driver.find_element_by_id("add_id_corpusTextInfo-0").click()
         driver.switch_to_window("id_corpusTextInfo__dash__0")
-        Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
-          "Monolingual")
+        # corpus text info / linguality
+        _fill_linguality(driver, ss_path, "form-0-")
         # corpus text info / language
         _fill_language(driver, ss_path, "languageinfotype_model_set-0-")
         # corpus text info / size
@@ -1225,6 +1225,18 @@ def _fill_membership(driver, ss_path, parent_id):
       .click()
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
+
+
+def _fill_linguality(driver, ss_path, id_infix):
+    """
+    fills the linguality with required, recommended and optional information
+    """
+    Select(driver.find_element_by_id("id_{}lingualityType").format(id_infix)).select_by_visible_text(
+      "Monolingual")
+    Select(driver.find_element_by_id("id_{}multilingualityType").format(id_infix)).select_by_visible_text(
+      "Other")
+    driver.find_element_by_id("id_{}multilingualityTypeDetails".format(id_infix)).clear()
+    driver.find_element_by_id("id_{}multilingualityTypeDetails".format(id_infix)).send_keys("Information")
 
 
 def _fill_language(driver, ss_path, id_infix):
