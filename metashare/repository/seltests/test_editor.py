@@ -564,7 +564,7 @@ class BasicEditorTests(SeleniumTestCase):
 
 def _fill_distribution(driver, ss_path, parent_id):
     """
-    fills the distribution popup with required information and returns
+    fills the distribution popup with all required, recommended and optional information and returns
     to the parent window
     """
     driver.switch_to_window("id_distributionInfo")
