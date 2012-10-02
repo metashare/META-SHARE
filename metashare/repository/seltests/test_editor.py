@@ -1235,6 +1235,8 @@ def _fill_language(driver, ss_path, id_infix):
     driver.find_element_by_id("id_{}languageId".format(id_infix)).send_keys("De")
     driver.find_element_by_id("id_{}languageName".format(id_infix)).clear()
     driver.find_element_by_id("id_{}languageName".format(id_infix)).send_keys("German")
+    driver.find_element_by_id("id_{}languageScript".format(id_infix)).clear()
+    driver.find_element_by_id("id_{}languageScript".format(id_infix)).send_keys("Script")
 
 
 def _fill_size_per_language(driver, ss_path, id_infix):
