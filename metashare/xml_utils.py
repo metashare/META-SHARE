@@ -147,6 +147,7 @@ def import_from_file(filehandle, descriptor, targetstatus, copy_status, owner_id
             xml_string = filehandle.read()
             resource = import_from_string(xml_string, targetstatus, copy_status, owner_id)
             imported_resources.append(resource)
+        # pylint: disable-msg=W0703
         except Exception as problem:
             LOGGER.warn('Caught an exception while importing %s:',
                 descriptor, exc_info=True)
@@ -169,6 +170,7 @@ def import_from_file(filehandle, descriptor, targetstatus, copy_status, owner_id
                 xml_string = temp_zip.read(xml_name)
                 resource = import_from_string(xml_string, targetstatus, copy_status, owner_id)
                 imported_resources.append(resource)
+            # pylint: disable-msg=W0703
             except Exception as problem:
                 if isinstance(problem, db.utils.DatabaseError):
                     # reset database connection (required for PostgreSQL)
