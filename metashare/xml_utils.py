@@ -172,6 +172,8 @@ def import_from_file(filehandle, descriptor, targetstatus, copy_status, owner_id
                 imported_resources.append(resource)
             # pylint: disable-msg=W0703
             except Exception as problem:
+                LOGGER.warn('Caught an exception while importing %s from %s:',
+                    xml_name, descriptor, exc_info=True)
                 if isinstance(problem, db.utils.DatabaseError):
                     # reset database connection (required for PostgreSQL)
                     db.close_connection()
