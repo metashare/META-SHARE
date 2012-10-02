@@ -38,7 +38,13 @@
 
 	{# Character Encoding Information #}
 	{% if "Character_encoding" in resource_component %}
-		{% include "repository/resource_view/character_encoding.html" with encodings=resource_component %}
+		<label class='title'>Character encoding</label>
+		{% for key, value in resource_component.items %}		
+			{% if "Character_encoding" in key %}
+				<div class="separation"><hr/></div>
+				{% include "repository/resource_view/character_encoding.html" with encodings=value %}
+			{% endif %}
+		{% endfor %}
 	{% endif %}
 	
 	{# Domain Information #}
