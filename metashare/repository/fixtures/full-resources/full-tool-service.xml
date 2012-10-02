@@ -2,7 +2,7 @@
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
   <identificationInfo>
     <resourceName lang="el">Οργάνωση ψηφιακού υλικού</resourceName>
-    <resourceName lang="en">Organizing digitized material</resourceName>
+    <resourceName lang="en">full-tool-service</resourceName>
     <description lang="el">Περιγραφή</description>
     <description lang="en">This tool is an application for collecting and presenting multimedia informations. It works with multmedial documents and enables database search using different criteria. For various multimedia documents metadata describing them as well as links to their location (on web or locally) are stored into NDX database. Metadata define search criteria that is enabled through web interface. The demo-version illustrates its functionalities with soem data about CESAR project and its participants.</description>
     <resourceShortName lang="el">InfoBeaver</resourceShortName>

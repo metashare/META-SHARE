@@ -799,6 +799,8 @@ class FullViewTest(TestCase):
                 "full-corpus-textngram.xml".format(ROOT_PATH))
         test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
                 "full-corpus-textnumerical.xml".format(ROOT_PATH))
+        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
+                "full-tool-service.xml".format(ROOT_PATH))
                 
         # enable indexing 
         test_utils.set_index_active(True)
@@ -889,7 +891,8 @@ def check_resource_view(queryset, test_case):
       '/creationEndDate',
       '/projectStartDate',
       '/projectEndDate',
-      'lastDateUpdated',
+      '/lastDateUpdated',
+      '/metadataLastDateUpdated',
     )
     
     count = 0
@@ -914,6 +917,10 @@ def check_resource_view(queryset, test_case):
         
             path = path_to_root(_ele, parent_dict)
             text = smart_str(xml_utils.html_escape(_ele.text), response._charset)
+
+            # skip boolean values, as they cannot reasonably be verified
+            if text == "true" or text == "false":
+                continue 
                             
             # check if path should be skipped
             skip = False
