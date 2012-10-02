@@ -1244,9 +1244,25 @@ def _fill_size_per_language(driver, ss_path, id_infix):
     fills the size per language popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("add_id_languageinfotype_model_set__dash__0__dash__sizePerLanguage")
-    driver.find_element_by_id("id_size".format(id_infix)).clear()
-    driver.find_element_by_id("id_size".format(id_infix)).send_keys("12")
+    driver.switch_to_window("id_languageinfotype_model_set__dash__0__dash__sizePerLanguage")
+    driver.find_element_by_id("id_size").clear()
+    driver.find_element_by_id("id_size").send_keys("12")
+    Select(driver.find_element_by_xpath("//div[@class='form-row sizeUnit']/div/select")).select_by_visible_text("Classes")
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_language_variety(driver, ss_path, id_infix):
+    """
+    fills the language variety popup with all required, recommended and optional
+    information and returns to the parent window
+    """
+    driver.switch_to_window("id_languageinfotype_model_set__dash__0__dash__languageVarietyInfo")
+    Select(find_element_by_id("id_languageVarietyType")).select_by_visible_text("Classes")
+    driver.find_element_by_id("id_form-0-size").clear()
+    driver.find_element_by_id("id_form-0-size").send_keys("Jargon")
+    driver.find_element_by_id("languageVarietyName").clear()
+    driver.find_element_by_id("languageVarietyName").send_keys("Jargon name")
     Select(driver.find_element_by_xpath("//div[@class='form-row sizeUnit']/div/select")).select_by_visible_text("Classes")
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
