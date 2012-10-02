@@ -824,6 +824,40 @@ def _fill_project(driver, ss_path, parent_id):
     save_and_close(driver, parent_id)
 
 
+def _fill_funding_project(driver, ss_path, parent_id):
+    """
+    fills the funding project popup with complete information and returns
+    to the parent window
+    """
+    driver.switch_to_window("id_form__dash__5__dash__0__dash__fundingProject")
+    driver.find_element_by_name("key_projectName_0").clear()
+    driver.find_element_by_name("key_projectName_0").send_keys("en")
+    driver.find_element_by_name("val_projectName_0").clear()
+    driver.find_element_by_name("val_projectName_0").send_keys("Project")
+    driver.find_element_by_xpath("//div[@class='form-row projectShortName']/div/ul/li/a").click()
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    driver.find_element_by_name("key_projectShortName_0").clear()
+    driver.find_element_by_name("key_projectShortName_0").send_keys("en")
+    driver.find_element_by_name("val_projectShortName_0").clear()
+    driver.find_element_by_name("val_projectShortName_0").send_keys("Short name")
+    driver.find_element_by_name("projectID").clear()
+    driver.find_element_by_name("projectID").send_keys("A-123")
+    driver.find_element_by_name("url").clear()
+    driver.find_element_by_name("url").send_keys("http://www.project.org")
+    Select(driver.find_element_by_name("fundingType_old")).select_by_visible_text("Other")
+    driver.find_element_by_xpath("//a[@class='selector-add']").click()
+    driver.find_element_by_name("funder").clear()
+    driver.find_element_by_name("funder").send_keys("Funder of the project")
+    driver.find_element_by_name("fundingCountry").clear()
+    driver.find_element_by_name("fundingCountry").send_keys("world")
+    driver.find_element_by_name("projectStartDate").clear()
+    driver.find_element_by_name("projectStartDate").send_keys("2012-09-27")
+    driver.find_element_by_name("projectEndDate").clear()
+    driver.find_element_by_name("projectEndDate").send_keys("2012-09-27")
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
 def _fill_metadata_creator(driver, ss_path, parent_id):
     """
     fills the metadata creator popup with complete information and returns
