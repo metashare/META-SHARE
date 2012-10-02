@@ -672,8 +672,8 @@ def _fill_contact_person(driver, ss_path, parent_id):
 
 def _fill_affiliation(driver, ss_path, parent_id):
     """
-    fills the affiliation popup with complete information and returns
-    to the parent window
+    fills the affiliation popup with all required, recommended and optional
+    information and returns to the parent window
     """
     driver.switch_to_window("id_affiliation")
     driver.find_element_by_name("key_organizationName_0").clear()
