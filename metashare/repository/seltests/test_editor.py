@@ -595,6 +595,51 @@ def _fill_affiliation(driver, ss_path, parent_id):
     save_and_close(driver, parent_id)
 
 
+def _fill_usage(driver, ss_path, parent_id):
+    """
+    fills the usage popup with complete information and returns
+    to the parent window
+    """
+    driver.switch_to_window("id_usageInfo")
+    current_id = driver.current_window_handle
+    # access tool popup
+    driver.find_element_by_xpath("//a[@id='add_id_accessTool']/img").click()  
+    _fill_access_tool(driver, ss_path, current_id)
+     # resource associated with popup
+    driver.find_element_by_xpath("//a[@id='add_id_resourceAssociatedWith']/img").click()  
+    _fill_resource_associated_with(driver, ss_path, current_id)
+    # foreseen use
+    driver.find_element_by_id("fieldsetcollapser0").click()
+    Select(driver.find_element_by_name("foreseenuseinfotype_model_set-0-foreseenUse")).select_by_visible_text(
+      "Human Use")
+    Select(driver.find_element_by_name(
+      "foreseenuseinfotype_model_set-0-useNLPSpecific_old")).select_by_visible_text("Annotation")
+    driver.find_element_by_xpath(
+      "//div[@id='foreseenuseinfotype_model_set-0']/fieldset/div[@class='form-row useNLPSpecific']/div/div/ul/li/a") \
+      .click()
+    
+    # actual uses
+    driver.find_element_by_id("fieldsetcollapser1").click()
+    Select(driver.find_element_by_name("actualuseinfotype_model_set-0-actualUse")).select_by_visible_text(
+      "Human Use")
+    Select(driver.find_element_by_name(
+      "actualuseinfotype_model_set-0-useNLPSpecific_old")).select_by_visible_text("Annotation")
+    driver.find_element_by_xpath(
+      "//div[@id='actualuseinfotype_model_set-0']/fieldset/div[@class='form-row useNLPSpecific']/div/div/ul/li/a") \
+      .click()
+    Select(driver.find_element_by_name("subclass_select")).select_by_visible_text("documentInfoType")
+    _fill_usage_report(driver, ss_path, current_id)
+    driver.find_element_by_xpath("//a[@id='add_id_actualuseinfotype_model_set-0-derivedResource']/img").click()  
+    _fill_derived_resource(driver, ss_path, current_id)
+    driver.find_element_by_xpath("//a[@id='add_id_actualuseinfotype_model_set-0-usageProject']/img").click()  
+    _fill_project(driver, ss_path, current_id)
+    driver.find_element_by_name("actualuseinfotype_model_set-0-actualUseDetails").clear()
+    driver.find_element_by_name("actualuseinfotype_model_set-0-actualUseDetails").send_keys("details")
+    
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
 def _fill_metadata_creator(driver, ss_path, parent_id):
     """
     fills the metadata creator popup with complete information and returns
