@@ -13,7 +13,8 @@ from metashare.repository.seltests.test_editor import _delete, _publish, \
     _fill_usage_report, _fill_documentation, _fill_derived_resource, \
     _fill_related_resource, _fill_project, _fill_funding_project, \
     _fill_metadata_creator, _fill_resource_creator, _fill_language, \
-    _fill_text_size, _fill_audio_size
+    _fill_text_size, _fill_audio_size, _fill_ipr_holder, _fill_licensor, \
+    _fill_distribution_rights_holder, _fill_membership
 from metashare.repository.seltests.test_utils import login_user, mouse_over, \
     setup_screenshots_folder, click_menu_item, save_and_close, \
     cancel_and_close, cancel_and_continue
