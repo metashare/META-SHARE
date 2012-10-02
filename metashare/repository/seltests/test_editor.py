@@ -611,6 +611,8 @@ def _fill_distribution(driver, ss_path, parent_id):
     driver.find_element_by_xpath(
       "//div[@class='form-row userNature']/div/div/ul/li/a") \
       .click()
+    driver.find_element_by_xpath("//a[@id='add_id_licenceinfotype_model_set-0-membershipInfo']/img").click()  
+    _fill_membership(driver, ss_path, current_id)
 
     Select(driver.find_element_by_xpath("//div[@class='form-row iprHolder']/div/select")).select_by_visible_text("personInfoType")
     _fill_ipr_holder(driver, ss_path, current_id)
@@ -1094,7 +1096,7 @@ def _fill_membership(driver, ss_path, parent_id):
     fills the membership popup with required information and returns
     to the parent window
     """
-    driver.switch_to_window("id_licenceinfotype_model_set__dash__0__dash__distributionRightsHolder")
+    driver.switch_to_window("id_licenceinfotype_model_set__dash__0__dash__membershipInfo")
     Select(driver.find_element_by_xpath("//div[@class='form-row member']/div/select")).select_by_visible_text("Yes")
     Select(driver.find_element_by_name(
       "membershipInstitution_old")).select_by_visible_text("LDC")
