@@ -12,13 +12,16 @@
 							{% if value.Size_per_language %}
 								{% include "repository/resource_view/size.html" with size=value.Size_per_language type="sub" %}
 							{% endif %}
+						{% endif %}						
+					</label>
+					{% if "Language_script" in value %} 
+						{% if value.Language_script %}
+							<div class="dataline indented">
+								<label class="dataline"><strong>Language Script: </strong>{{value.Language_script}}
+							</label> 
+						</div>
 						{% endif %}
-						{% if "Language_script" in value %} 
-							{% if value.Language_script %}
-								(Language Script: {{value.Language_script}})
-							{% endif %}
-						{% endif %}
-					</label> 
+					{% endif %}
 					{# Take care of language variety #}
 					{% if "Language_variety" in value %}
 						<div class="dataline indented">

@@ -1,9 +1,12 @@
 {% spaceless %}
 
-<div class="dataline indented">
-	<li>
-		{{target.Target_resource_name_uri|urlizetrunc:17}}
-	</li>
-</div>
-
+{% if level == "list" %}
+	<li>{{target.Target_resource_name_uri|urlizetrunc:17}}</li>
+{% else %}
+	<div class="dataline {% if level != "top" %}indented{% endif %}">
+		<label>
+			<strong>{{title}}: </strong>{{target.Target_resource_name_uri|urlizetrunc:17}}
+		</label>
+	</div>
+{% endif %}
 {% endspaceless %}

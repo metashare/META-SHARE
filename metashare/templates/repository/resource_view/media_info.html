@@ -36,7 +36,7 @@
 							{% include "repository/resource_view/detailed_media_info.html" with resource_component=media_info.Corpus_media.Corpus_text_ngram %}
 						{% else %}
 							{% if type == "toolService" %}
-								{% include "repository/resource_view/detailed_media_info.html" with resource_component=resource_component_dict.toolService %}
+								{% include "repository/resource_view/detailed_media_info.html" with resource_component=resource_component_dicts.toolService %}
 							{% endif %}
 						{% endif %}
 					{% endif %}
