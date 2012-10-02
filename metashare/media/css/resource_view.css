@@ -50,12 +50,13 @@ div.right-corner{
 	display:table;
 }
 
-.dataline label a{
+.dataline a{
 	font-weight:bold;
+	font-style:normal;
+	font-size:14px;
 	color: #FF9900;
 	text-decoration:none;
-	font-style:normal;
-}
+	}
 
 .dataline ul{
 	margin:0px;
