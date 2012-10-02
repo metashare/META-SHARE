@@ -664,6 +664,57 @@ def _fill_resource_associated_with(driver, ss_path, parent_id):
     save_and_close(driver, parent_id)
 
 
+def _fill_usage_report(driver, ss_path, parent_id):
+    """
+    fills the usage report popup with complete information and returns
+    to the parent window
+    """
+    driver.switch_to_window("id_actualuseinfotype_model_set__dash__0__dash__usageReport")
+    Select(driver.find_element_by_id("id_documentType")).select_by_visible_text("Article")
+    driver.find_element_by_name("key_title_0").clear()
+    driver.find_element_by_name("key_title_0").send_keys("en")
+    driver.find_element_by_name("val_title_0").clear()
+    driver.find_element_by_name("val_title_0").send_keys("Document title")
+    driver.find_element_by_name("author").clear()
+    driver.find_element_by_name("author").send_keys("John Smith")
+    driver.find_element_by_name("editor").clear()
+    driver.find_element_by_name("editor").send_keys("Smith Ed.")
+    driver.find_element_by_name("year").clear()
+    driver.find_element_by_name("year").send_keys("1981")
+    driver.find_element_by_name("publisher").clear()
+    driver.find_element_by_name("publisher").send_keys("John Smith & Co")
+    driver.find_element_by_name("bookTitle").clear()
+    driver.find_element_by_name("bookTitle").send_keys("Life of John Smith")
+    driver.find_element_by_name("journal").clear()
+    driver.find_element_by_name("journal").send_keys("Journal")
+    driver.find_element_by_name("volume").clear()
+    driver.find_element_by_name("volume").send_keys("7")
+    driver.find_element_by_name("series").clear()
+    driver.find_element_by_name("series").send_keys("9")
+    driver.find_element_by_name("pages").clear()
+    driver.find_element_by_name("pages").send_keys("289-290")
+    driver.find_element_by_name("edition").clear()
+    driver.find_element_by_name("edition").send_keys("1st")
+    driver.find_element_by_name("conference").clear()
+    driver.find_element_by_name("conference").send_keys("Main conference")
+    driver.find_element_by_name("doi").clear()
+    driver.find_element_by_name("doi").send_keys("123-35-1243")
+    driver.find_element_by_name("url").clear()
+    driver.find_element_by_name("url").send_keys("http://www.mainconference.org")
+    driver.find_element_by_name("ISSN").clear()
+    driver.find_element_by_name("ISSN").send_keys("12-435-464-467")
+    driver.find_element_by_name("ISBN").clear()
+    driver.find_element_by_name("ISBN").send_keys("12-435-464-467")
+    driver.find_element_by_name("keywords").clear()
+    driver.find_element_by_name("keywords").send_keys("John Smith, life")
+    driver.find_element_by_name("documentLanguageName").clear()
+    driver.find_element_by_name("documentLanguageName").send_keys("English")
+    driver.find_element_by_name("documentLanguageId").clear()
+    driver.find_element_by_name("documentLanguageId").send_keys("en")
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
 def _fill_metadata_creator(driver, ss_path, parent_id):
     """
     fills the metadata creator popup with complete information and returns
