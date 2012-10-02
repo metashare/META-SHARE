@@ -429,7 +429,7 @@ def _fill_contact_person(driver, ss_path, parent_id):
 
 def _fill_affiliation(driver, ss_path, parent_id):
     """
-    fills the affiliation popup with required information and returns
+    fills the affiliation popup with complete information and returns
     to the parent window
     """
     driver.switch_to_window("id_affiliation")
@@ -468,6 +468,363 @@ def _fill_affiliation(driver, ss_path, parent_id):
     driver.find_element_by_name("form-0-telephoneNumber").send_keys("1234567890")
     driver.find_element_by_name("form-0-faxNumber").clear()
     driver.find_element_by_name("form-0-faxNumber").send_keys("1234567890")
+
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_usage(driver, ss_path, parent_id):
+    """
+    fills the usage popup with complete information and returns
+    to the parent window
+    """
+    driver.switch_to_window("id_usageInfo")
+    current_id = driver.current_window_handle
+    # access tool popup
+    driver.find_element_by_xpath("//a[@id='add_id_accessTool']/img").click()  
+    _fill_access_tool(driver, ss_path, current_id)
+     # resource associated with popup
+    driver.find_element_by_xpath("//a[@id='add_id_resourceAssociatedWith']/img").click()  
+    _fill_resource_associated_with(driver, ss_path, current_id)
+    # foreseen use
+    driver.find_element_by_id("fieldsetcollapser0").click()
+    Select(driver.find_element_by_name("foreseenuseinfotype_model_set-0-foreseenUse")).select_by_visible_text(
+      "Human Use")
+    Select(driver.find_element_by_name(
+      "foreseenuseinfotype_model_set-0-useNLPSpecific_old")).select_by_visible_text("Annotation")
+    driver.find_element_by_xpath(
+      "//div[@id='foreseenuseinfotype_model_set-0']/fieldset/div[@class='form-row useNLPSpecific']/div/div/ul/li/a") \
+      .click()
+    
+    # actual uses
+    driver.find_element_by_id("fieldsetcollapser1").click()
+    Select(driver.find_element_by_name("actualuseinfotype_model_set-0-actualUse")).select_by_visible_text(
+      "Human Use")
+    Select(driver.find_element_by_name(
+      "actualuseinfotype_model_set-0-useNLPSpecific_old")).select_by_visible_text("Annotation")
+    driver.find_element_by_xpath(
+      "//div[@id='actualuseinfotype_model_set-0']/fieldset/div[@class='form-row useNLPSpecific']/div/div/ul/li/a") \
+      .click()
+    Select(driver.find_element_by_name("subclass_select")).select_by_visible_text("documentInfoType")
+    _fill_usage_report(driver, ss_path, current_id)
+    driver.find_element_by_xpath("//a[@id='add_id_actualuseinfotype_model_set-0-derivedResource']/img").click()  
+    _fill_derived_resource(driver, ss_path, current_id)
+    driver.find_element_by_xpath("//a[@id='add_id_actualuseinfotype_model_set-0-usageProject']/img").click()  
+    _fill_project(driver, ss_path, current_id)
+    driver.find_element_by_name("actualuseinfotype_model_set-0-actualUseDetails").clear()
+    driver.find_element_by_name("actualuseinfotype_model_set-0-actualUseDetails").send_keys("details")
+    
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_access_tool(driver, ss_path, parent_id):
+    """
+    fills the access tool popup with complete information and returns
+    to the parent window
+    """
+    driver.switch_to_window("id_accessTool")
+    driver.find_element_by_name("targetResourceNameURI").clear()
+    driver.find_element_by_name("targetResourceNameURI").send_keys("578DFDG8DF")
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_resource_associated_with(driver, ss_path, parent_id):
+    """
+    fills the resource associated with popup with complete information and returns
+    to the parent window
+    """
+    driver.switch_to_window("id_resourceAssociatedWith")
+    driver.find_element_by_name("targetResourceNameURI").clear()
+    driver.find_element_by_name("targetResourceNameURI").send_keys("578DFDG8DF")
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_usage_report(driver, ss_path, parent_id):
+    """
+    fills the usage report popup with complete information and returns
+    to the parent window
+    """
+    driver.switch_to_window("id_actualuseinfotype_model_set__dash__0__dash__usageReport")
+    Select(driver.find_element_by_id("id_documentType")).select_by_visible_text("Article")
+    driver.find_element_by_name("key_title_0").clear()
+    driver.find_element_by_name("key_title_0").send_keys("en")
+    driver.find_element_by_name("val_title_0").clear()
+    driver.find_element_by_name("val_title_0").send_keys("Document title")
+    driver.find_element_by_name("author").clear()
+    driver.find_element_by_name("author").send_keys("John Smith")
+    driver.find_element_by_name("editor").clear()
+    driver.find_element_by_name("editor").send_keys("Smith Ed.")
+    driver.find_element_by_name("year").clear()
+    driver.find_element_by_name("year").send_keys("1981")
+    driver.find_element_by_name("publisher").clear()
+    driver.find_element_by_name("publisher").send_keys("John Smith & Co")
+    driver.find_element_by_name("bookTitle").clear()
+    driver.find_element_by_name("bookTitle").send_keys("Life of John Smith")
+    driver.find_element_by_name("journal").clear()
+    driver.find_element_by_name("journal").send_keys("Journal")
+    driver.find_element_by_name("volume").clear()
+    driver.find_element_by_name("volume").send_keys("7")
+    driver.find_element_by_name("series").clear()
+    driver.find_element_by_name("series").send_keys("9")
+    driver.find_element_by_name("pages").clear()
+    driver.find_element_by_name("pages").send_keys("289-290")
+    driver.find_element_by_name("edition").clear()
+    driver.find_element_by_name("edition").send_keys("1st")
+    driver.find_element_by_name("conference").clear()
+    driver.find_element_by_name("conference").send_keys("Main conference")
+    driver.find_element_by_name("doi").clear()
+    driver.find_element_by_name("doi").send_keys("123-35-1243")
+    driver.find_element_by_name("url").clear()
+    driver.find_element_by_name("url").send_keys("http://www.mainconference.org")
+    driver.find_element_by_name("ISSN").clear()
+    driver.find_element_by_name("ISSN").send_keys("12-435-464-467")
+    driver.find_element_by_name("ISBN").clear()
+    driver.find_element_by_name("ISBN").send_keys("12-435-464-467")
+    driver.find_element_by_name("keywords").clear()
+    driver.find_element_by_name("keywords").send_keys("John Smith, life")
+    driver.find_element_by_name("documentLanguageName").clear()
+    driver.find_element_by_name("documentLanguageName").send_keys("English")
+    driver.find_element_by_name("documentLanguageId").clear()
+    driver.find_element_by_name("documentLanguageId").send_keys("en")
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_documentation(driver, ss_path, parent_id):
+    """
+    fills the documentation popup with complete information and returns
+    to the parent window
+    """
+    driver.switch_to_window("id_form__dash__4__dash__0__dash__documentation")
+    Select(driver.find_element_by_id("id_documentType")).select_by_visible_text("Article")
+    driver.find_element_by_name("key_title_0").clear()
+    driver.find_element_by_name("key_title_0").send_keys("en")
+    driver.find_element_by_name("val_title_0").clear()
+    driver.find_element_by_name("val_title_0").send_keys("Document title")
+    driver.find_element_by_name("author").clear()
+    driver.find_element_by_name("author").send_keys("John Smith")
+    driver.find_element_by_name("editor").clear()
+    driver.find_element_by_name("editor").send_keys("Smith Ed.")
+    driver.find_element_by_name("year").clear()
+    driver.find_element_by_name("year").send_keys("1981")
+    driver.find_element_by_name("publisher").clear()
+    driver.find_element_by_name("publisher").send_keys("John Smith & Co")
+    driver.find_element_by_name("bookTitle").clear()
+    driver.find_element_by_name("bookTitle").send_keys("Life of John Smith")
+    driver.find_element_by_name("journal").clear()
+    driver.find_element_by_name("journal").send_keys("Journal")
+    driver.find_element_by_name("volume").clear()
+    driver.find_element_by_name("volume").send_keys("7")
+    driver.find_element_by_name("series").clear()
+    driver.find_element_by_name("series").send_keys("9")
+    driver.find_element_by_name("pages").clear()
+    driver.find_element_by_name("pages").send_keys("289-290")
+    driver.find_element_by_name("edition").clear()
+    driver.find_element_by_name("edition").send_keys("1st")
+    driver.find_element_by_name("conference").clear()
+    driver.find_element_by_name("conference").send_keys("Main conference")
+    driver.find_element_by_name("doi").clear()
+    driver.find_element_by_name("doi").send_keys("123-35-1243")
+    driver.find_element_by_name("url").clear()
+    driver.find_element_by_name("url").send_keys("http://www.mainconference.org")
+    driver.find_element_by_name("ISSN").clear()
+    driver.find_element_by_name("ISSN").send_keys("12-435-464-467")
+    driver.find_element_by_name("ISBN").clear()
+    driver.find_element_by_name("ISBN").send_keys("12-435-464-467")
+    driver.find_element_by_name("keywords").clear()
+    driver.find_element_by_name("keywords").send_keys("John Smith, life")
+    driver.find_element_by_name("documentLanguageName").clear()
+    driver.find_element_by_name("documentLanguageName").send_keys("English")
+    driver.find_element_by_name("documentLanguageId").clear()
+    driver.find_element_by_name("documentLanguageId").send_keys("en")
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_derived_resource(driver, ss_path, parent_id):
+    """
+    fills the derived resource popup with complete information and returns
+    to the parent window
+    """
+    driver.switch_to_window("id_actualuseinfotype_model_set__dash__0__dash__derivedResource")
+    driver.find_element_by_name("targetResourceNameURI").clear()
+    driver.find_element_by_name("targetResourceNameURI").send_keys("578DFDG8DF")
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_related_resource(driver, ss_path, parent_id):
+    """
+    fills the related resource popup with complete information and returns
+    to the parent window
+    """
+    driver.switch_to_window("id_relationinfotype_model_set__dash__0__dash__relatedResource")
+    driver.find_element_by_name("targetResourceNameURI").clear()
+    driver.find_element_by_name("targetResourceNameURI").send_keys("578DFDG8DF")
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_project(driver, ss_path, parent_id):
+    """
+    fills the project popup with complete information and returns
+    to the parent window
+    """
+    driver.switch_to_window("id_actualuseinfotype_model_set__dash__0__dash__usageProject")
+    driver.find_element_by_name("key_projectName_0").clear()
+    driver.find_element_by_name("key_projectName_0").send_keys("en")
+    driver.find_element_by_name("val_projectName_0").clear()
+    driver.find_element_by_name("val_projectName_0").send_keys("Project")
+    driver.find_element_by_xpath("//div[@class='form-row projectShortName']/div/ul/li/a").click()
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    driver.find_element_by_name("key_projectShortName_0").clear()
+    driver.find_element_by_name("key_projectShortName_0").send_keys("en")
+    driver.find_element_by_name("val_projectShortName_0").clear()
+    driver.find_element_by_name("val_projectShortName_0").send_keys("Short name")
+    driver.find_element_by_name("projectID").clear()
+    driver.find_element_by_name("projectID").send_keys("A-123")
+    driver.find_element_by_name("url").clear()
+    driver.find_element_by_name("url").send_keys("http://www.project.org")
+    Select(driver.find_element_by_name("fundingType_old")).select_by_visible_text("Other")
+    driver.find_element_by_xpath("//a[@class='selector-add']").click()
+    driver.find_element_by_name("funder").clear()
+    driver.find_element_by_name("funder").send_keys("Funder of the project")
+    driver.find_element_by_name("fundingCountry").clear()
+    driver.find_element_by_name("fundingCountry").send_keys("world")
+    driver.find_element_by_name("projectStartDate").clear()
+    driver.find_element_by_name("projectStartDate").send_keys("2012-09-27")
+    driver.find_element_by_name("projectEndDate").clear()
+    driver.find_element_by_name("projectEndDate").send_keys("2012-09-27")
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_funding_project(driver, ss_path, parent_id):
+    """
+    fills the funding project popup with complete information and returns
+    to the parent window
+    """
+    driver.switch_to_window("id_form__dash__5__dash__0__dash__fundingProject")
+    driver.find_element_by_name("key_projectName_0").clear()
+    driver.find_element_by_name("key_projectName_0").send_keys("en")
+    driver.find_element_by_name("val_projectName_0").clear()
+    driver.find_element_by_name("val_projectName_0").send_keys("Project")
+    driver.find_element_by_xpath("//div[@class='form-row projectShortName']/div/ul/li/a").click()
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    driver.find_element_by_name("key_projectShortName_0").clear()
+    driver.find_element_by_name("key_projectShortName_0").send_keys("en")
+    driver.find_element_by_name("val_projectShortName_0").clear()
+    driver.find_element_by_name("val_projectShortName_0").send_keys("Short name")
+    driver.find_element_by_name("projectID").clear()
+    driver.find_element_by_name("projectID").send_keys("A-123")
+    driver.find_element_by_name("url").clear()
+    driver.find_element_by_name("url").send_keys("http://www.project.org")
+    Select(driver.find_element_by_name("fundingType_old")).select_by_visible_text("Other")
+    driver.find_element_by_xpath("//a[@class='selector-add']").click()
+    driver.find_element_by_name("funder").clear()
+    driver.find_element_by_name("funder").send_keys("Funder of the project")
+    driver.find_element_by_name("fundingCountry").clear()
+    driver.find_element_by_name("fundingCountry").send_keys("world")
+    driver.find_element_by_name("projectStartDate").clear()
+    driver.find_element_by_name("projectStartDate").send_keys("2012-09-27")
+    driver.find_element_by_name("projectEndDate").clear()
+    driver.find_element_by_name("projectEndDate").send_keys("2012-09-27")
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_metadata_creator(driver, ss_path, parent_id):
+    """
+    fills the metadata creator popup with complete information and returns
+    to the parent window
+    """
+    driver.switch_to_window("id_form__dash__2__dash__0__dash__metadataCreator")
+    current_id = driver.current_window_handle
+    driver.find_element_by_name("key_surname_0").clear()
+    driver.find_element_by_name("key_surname_0").send_keys("en")
+    driver.find_element_by_name("val_surname_0").clear()
+    driver.find_element_by_name("val_surname_0").send_keys("Smith")
+    driver.find_element_by_xpath("//div[@class='form-row givenName']/div/ul/li/a").click()
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    driver.find_element_by_name("key_givenName_0").clear()
+    driver.find_element_by_name("key_givenName_0").send_keys("en")
+    driver.find_element_by_name("val_givenName_0").clear()
+    driver.find_element_by_name("val_givenName_0").send_keys("John")
+    Select(driver.find_element_by_id("id_sex")).select_by_visible_text("Male")
+
+    driver.find_element_by_name("form-0-email").clear()
+    driver.find_element_by_name("form-0-email").send_keys("john.smith@institution.org")
+    driver.find_element_by_name("form-0-url").clear()
+    driver.find_element_by_name("form-0-url").send_keys("http://www.institution.org")
+    driver.find_element_by_name("form-0-address").clear()
+    driver.find_element_by_name("form-0-address").send_keys("1st main street")
+    driver.find_element_by_name("form-0-zipCode").clear()
+    driver.find_element_by_name("form-0-zipCode").send_keys("95000")
+    driver.find_element_by_name("form-0-city").clear()
+    driver.find_element_by_name("form-0-city").send_keys("somewhere")
+    driver.find_element_by_name("form-0-region").clear()
+    driver.find_element_by_name("form-0-region").send_keys("far away")
+    driver.find_element_by_name("form-0-country").clear()
+    driver.find_element_by_name("form-0-country").send_keys("world")
+    driver.find_element_by_name("form-0-telephoneNumber").clear()
+    driver.find_element_by_name("form-0-telephoneNumber").send_keys("1234567890")
+    driver.find_element_by_name("form-0-faxNumber").clear()
+    driver.find_element_by_name("form-0-faxNumber").send_keys("1234567890")
+    driver.find_element_by_name("position").clear()
+    driver.find_element_by_name("position").send_keys("Organization")
+    # affiliation popup
+    driver.find_element_by_xpath("//a[@id='add_id_affiliation']/img").click()
+    _fill_affiliation(driver, ss_path, current_id)
+
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_resource_creator(driver, ss_path, parent_id):
+    """
+    fills the resource creator popup with complete information and returns
+    to the parent window
+    """
+    driver.switch_to_window("id_form__dash__5__dash__0__dash__resourceCreator")
+    current_id = driver.current_window_handle
+    driver.find_element_by_name("key_surname_0").clear()
+    driver.find_element_by_name("key_surname_0").send_keys("en")
+    driver.find_element_by_name("val_surname_0").clear()
+    driver.find_element_by_name("val_surname_0").send_keys("Smith")
+    driver.find_element_by_xpath("//div[@class='form-row givenName']/div/ul/li/a").click()
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    driver.find_element_by_name("key_givenName_0").clear()
+    driver.find_element_by_name("key_givenName_0").send_keys("en")
+    driver.find_element_by_name("val_givenName_0").clear()
+    driver.find_element_by_name("val_givenName_0").send_keys("John")
+    Select(driver.find_element_by_id("id_sex")).select_by_visible_text("Male")
+
+    driver.find_element_by_name("form-0-email").clear()
+    driver.find_element_by_name("form-0-email").send_keys("john.smith@institution.org")
+    driver.find_element_by_name("form-0-url").clear()
+    driver.find_element_by_name("form-0-url").send_keys("http://www.institution.org")
+    driver.find_element_by_name("form-0-address").clear()
+    driver.find_element_by_name("form-0-address").send_keys("1st main street")
+    driver.find_element_by_name("form-0-zipCode").clear()
+    driver.find_element_by_name("form-0-zipCode").send_keys("95000")
+    driver.find_element_by_name("form-0-city").clear()
+    driver.find_element_by_name("form-0-city").send_keys("somewhere")
+    driver.find_element_by_name("form-0-region").clear()
+    driver.find_element_by_name("form-0-region").send_keys("far away")
+    driver.find_element_by_name("form-0-country").clear()
+    driver.find_element_by_name("form-0-country").send_keys("world")
+    driver.find_element_by_name("form-0-telephoneNumber").clear()
+    driver.find_element_by_name("form-0-telephoneNumber").send_keys("1234567890")
+    driver.find_element_by_name("form-0-faxNumber").clear()
+    driver.find_element_by_name("form-0-faxNumber").send_keys("1234567890")
+    driver.find_element_by_name("position").clear()
+    driver.find_element_by_name("position").send_keys("Organization")
+    # affiliation popup
+    driver.find_element_by_xpath("//a[@id='add_id_affiliation']/img").click()
+    _fill_affiliation(driver, ss_path, current_id)
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
