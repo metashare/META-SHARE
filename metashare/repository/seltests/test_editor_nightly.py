@@ -14,7 +14,7 @@ from metashare.repository.seltests.test_editor import _delete, _publish, \
     _fill_related_resource, _fill_project, _fill_funding_project, \
     _fill_metadata_creator, _fill_resource_creator, _fill_language, \
     _fill_text_size, _fill_audio_size, _fill_ipr_holder, _fill_licensor, \
-    _fill_distribution_rights_holder, _fill_membership
+    _fill_distribution_rights_holder, _fill_membership, _fill_language
 from metashare.repository.seltests.test_utils import login_user, mouse_over, \
     setup_screenshots_folder, click_menu_item, save_and_close, \
     cancel_and_close, cancel_and_continue
@@ -176,8 +176,8 @@ class NightlyEditorTests(SeleniumTestCase):
         # corpus text info popup
         driver.find_element_by_id("add_id_corpusTextInfo-0").click()
         driver.switch_to_window("id_corpusTextInfo__dash__0")
-        Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
-          "Monolingual")
+        # corpus text info / linguality
+        _fill_linguality(driver, ss_path, "form-0-")
         # corpus text info / language
         _fill_language(driver, ss_path, "languageinfotype_model_set-0-")
         # corpus text info / size
