@@ -92,11 +92,16 @@
 	{% endif %}
 
 	{% if "Derived_resource" in usage_dict.Usage.Actual_use %}
-		{% for key, value in usage_dict.Usage.Actual_use.items %}
-			{% if "Derived_resource" in key %}
-				{% include "repository/resource_view/target_resource.html" with target=value title="Derived Resource" %}
-			{% endif %}
-		{% endfor %}
+		<label class='subtitle'>Derived Resources</label>
+		<div class="dataline indented">
+			<ul>
+				{% for key, value in usage_dict.Usage.Actual_use.items %}
+					{% if "Derived_resource" in key %}
+						{% include "repository/resource_view/target_resource.html" with target=value title="Derived Resource" level="list" %}
+					{% endif %}
+				{% endfor %}
+			</ul>
+		</div>
 	{% endif %}
 
 	{% if "Usage_project" in usage_dict.Usage.Actual_use %}
