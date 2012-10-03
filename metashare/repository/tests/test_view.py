@@ -18,6 +18,7 @@ from metashare.repository.supermodel import OBJECT_XML_CACHE
 from metashare.repository.models import resourceInfoType_model
 from django.utils.encoding import smart_str
 from django.contrib.humanize.templatetags import humanize
+from django.template.defaultfilters import urlizetrunc
 from metashare.utils import prettify_camel_case_string
 from django.utils.formats import date_format
 from datetime import datetime
@@ -953,10 +954,7 @@ def check_resource_view(queryset, test_case):
             # strip "http://" or "https://" from urls
             for _sp in stripped_paths:        
                 if path.endswith(_sp):
-                    for prefix in ('http://', 'https://'):
-                        text = text.strip().replace('~', '%7')
-                        if text.strip().startswith(prefix):
-                            text = unicode(text.strip()[len(prefix):]).encode("utf-8")
+                    text = unicode(urlizetrunc(text, '17')).encode("utf-8")
 
             # apply date transformation if required
             for _dp in date_paths:
