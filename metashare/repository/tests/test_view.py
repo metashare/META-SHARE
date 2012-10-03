@@ -874,6 +874,15 @@ def check_resource_view(queryset, test_case):
       'metaShareId',
     )
     
+    # paths with a url, which should be stripped off "http://" and "https://"
+    stripped_paths = (
+        'url',
+        'downloadLocation',
+        'executionLocation',
+        'samplesLocation',
+        'targetResourceNameUri',
+    )
+    
     # path suffixes where to apply a number transformation on the value
     number_paths = (
       '/size',
@@ -940,6 +949,20 @@ def check_resource_view(queryset, test_case):
                     break
             if skip:
                 continue
+
+            # strip "http://" or "https://" from urls
+            for _np in stripped_paths:        
+                if path.endswith(_np):
+                    for prefix in ('http://', 'https://'):
+                        if text.startswith(prefix):
+                            text = text[len(prefix):].encode("utf-8").strip()
+                    break
+                    if text == '0':
+                        skip = True
+                    break
+            if skip:
+                continue
+                
                 
             # apply date transformation if required
             for _dp in date_paths:
@@ -947,7 +970,6 @@ def check_resource_view(queryset, test_case):
                     date_object = datetime.strptime(text, '%Y-%m-%d')
                     text = unicode(
                       date_format(date_object, format='SHORT_DATE_FORMAT', use_l10n=True)).encode("utf-8")
-
             real_count = response.content.count(text)
             if real_count == 0:
                 # try with beautified string
