@@ -37,13 +37,6 @@
 							</label>
 						</div>
 					{% endif %}
-					{% if value1.Actual_use_details %}
-					     <div class="dataline indented">
-							<label>
-								<strong>Details:</strong> {{ value1.Actual_use_details }}
-							</label>
-						</div>
-					{% endif %}
 				{% endif %}
 			{% endfor %}
 		{% endif %}
@@ -73,7 +66,7 @@
 			{% endfor %}
 		{% endif %}
 	{% endfor %}
-	{{ usage_dict
+
 	{% if "Usage_report" in usage_dict.Usage.Actual_use %}
 		{% for key, value in usage_dict.Usage.Actual_use.items %}
 			{% if "Usage_report" in value %}
