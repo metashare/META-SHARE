@@ -952,10 +952,11 @@ def check_resource_view(queryset, test_case):
 
             # strip "http://" or "https://" from urls
             for _sp in stripped_paths:        
-                if path.endswith(_np):
+                if path.endswith(_sp):
                     for prefix in ('http://', 'https://'):
+                        text = text.strip().replace('~', '%7')
                         if text.strip().startswith(prefix):
-                            text = unicode(text[len(prefix):]).encode("utf-8")
+                            text = unicode(text.strip()[len(prefix):]).encode("utf-8")
 
             # apply date transformation if required
             for _dp in date_paths:

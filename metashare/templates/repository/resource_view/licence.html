@@ -14,7 +14,7 @@
 			</div>
 		{% endif %}
 	{% endfor %}
-	
+
 	{% for key1, value1 in value.items %}
 		{% if "Restrictions_of_use" in key1 %}
 			<div class="dataline indented">
@@ -24,7 +24,7 @@
 			</div>
 		{% endif %}
 	{% endfor %}
-	
+
 	{% for key1, value1 in value.items %}
 
 		{% if "Distribution_access_medium" in key1 %}
@@ -34,7 +34,7 @@
 				</label>
 			</div>
 		{% endif %}
-		
+
 		{% if "Download_location" in key1 %}
 			<div class="dataline indented">
 				<label>
@@ -42,7 +42,7 @@
 				</label>
 			</div>
 		{% endif %}
-		
+
 		{% if "Execution_location" in key1 %}
 			<div class="dataline indented">
 				<label>
@@ -50,7 +50,7 @@
 				</label>
 			</div>
 		{% endif %}
-		
+
 		{% if "Fee" in key1 %}
 			<div class="dataline indented">
 				<label>
@@ -58,7 +58,7 @@
 				</label>
 			</div>
 		{% endif %}
-		
+
 		{% if "Attribution" in key1 %}
 			<div class="dataline indented">
 				<label>
@@ -66,7 +66,7 @@
 				</label>
 			</div>
 		{% endif %}
-		
+
 		{% if "User_nature" in key1 %}
 			<div class="dataline indented">
 				<label>
@@ -74,13 +74,13 @@
 				</label>
 			</div>
 		{% endif %}
-		
+
 		{% if "Membership" in key1 %}
 			{% include "repository/resource_view/membership.html" with membership=value1 %}
-		{% endif %}	
-		
+		{% endif %}
+
 	{% endfor %}
-	
+
 	<div class="dataline">
 		{% if "Licensor" in value %}
 			<label class="dataline indented"><strong>Licensors:</strong></label>
@@ -102,6 +102,6 @@
 			{% endif %}
 		{% endfor %}
 	</div>
-{% endif %}	
+{% endif %}
 
 {% endspaceless %}
