@@ -233,6 +233,7 @@ function addStatus(filter){
 {% load get_icon %}
 
 {% for object in topdata %}
+    <div>
     <div class="itemcounter">{{ forloop.counter|add:offset }}.&nbsp;</div><div class="resourceName">
     {% if "quer" in view %}
         <a href="{% url metashare.views.frontpage %}repository/search/?{{ object.4 }}"><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/zoom.png"> {{ object.0 }}</a>
@@ -271,7 +272,7 @@ function addStatus(filter){
         {% endifnotequal %}
         </div>
      {% endif %}  
-     <br> 
+     </div>
 {% endfor %}
 {% endspaceless %}
 
