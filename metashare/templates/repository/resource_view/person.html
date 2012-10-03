@@ -34,11 +34,16 @@
 			</label>
 		</div>
 		
-		{% if person_dict.Communication.Url %}
+		{% if "Url" in person_dict.Communication %}
 			<div>
-				<label class="dataline" style="clear:both;">		
-					{{ person_dict.Communication.Url|urlizetrunc:17 }}</a>
-				</label>
+				{% for key, value in person_dict.Communication.items %}
+					{% if "Url" in key %}
+						<label class="dataline" style="clear:both;">
+							{{ value }}
+							{{ value|urlizetrunc:17 }}</a>
+						</label>
+					{% endif %}
+				{% endfor %}
 			</div>
 		{% endif %}
 	
