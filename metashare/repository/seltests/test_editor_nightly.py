@@ -8,11 +8,11 @@ from selenium.webdriver.support.ui import Select
 from metashare import settings, test_utils
 from metashare.accounts.models import EditorGroup, EditorGroupManagers
 from metashare.repository.seltests.test_editor import _delete, _publish, \
-    _ingest, _fill_distribution, _fill_contact_person, _fill_affiliation, \
-    _fill_usage, _fill_documentation, _fill_related_resource, \
-    _fill_funding_project, _fill_metadata_creator, _fill_resource_creator, \
-    _fill_language, _fill_text_size, _fill_audio_size, _fill_linguality, \
-    _add_new_resource
+    _ingest, _fill_distribution_popup, _fill_contactPerson_popup, \
+    _fill_affiliation_popup, _fill_usage_popup, _fill_documentation_popup, \
+    _fill_relatedResource_popup, _fill_fundingProject_popup, _fill_metadataCreator_popup, \
+    _fill_resourceCreator_popup, _fill_language_form, _fill_textSize_form, \
+    _fill_audioSize_form, _fill_linguality_form, _add_new_resource
 from metashare.repository.seltests.test_utils import login_user, mouse_over, \
     setup_screenshots_folder, click_menu_item, save_and_close, \
     cancel_and_close, cancel_and_continue
@@ -97,13 +97,13 @@ class NightlyEditorTests(SeleniumTestCase):
         driver.find_element_by_name("form-0-identifier").send_keys("A-123")
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
-        _fill_distribution(driver, ss_path, root_id)
+        _fill_distribution_popup(driver, ss_path, root_id)
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        _fill_contact_person(driver, ss_path, root_id)
+        _fill_contactPerson_popup(driver, ss_path, root_id)
         # contact metadata creator popup
         driver.find_element_by_xpath("//a[@id='add_id_form-2-0-metadataCreator']/img").click()
-        _fill_metadata_creator(driver, ss_path, root_id)
+        _fill_metadataCreator_popup(driver, ss_path, root_id)
         driver.find_element_by_name("form-2-0-source").clear()
         driver.find_element_by_name("form-2-0-source").send_keys("catalogue")
         driver.find_element_by_name("form-2-0-originalMetadataSchema").clear()
@@ -130,11 +130,11 @@ class NightlyEditorTests(SeleniumTestCase):
         driver.find_element_by_name("form-3-0-updateFrequency").send_keys("1")
         # usage popup
         driver.find_element_by_xpath("//a[@id='add_id_usageInfo']/img").click()  
-        _fill_usage(driver, ss_path, root_id)
+        _fill_usage_popup(driver, ss_path, root_id)
         # documentation popup
         Select(driver.find_element_by_xpath("//div[@class='form-row documentation']/div/select")) \
           .select_by_visible_text("documentInfoType")
-        _fill_documentation(driver, ss_path, root_id)
+        _fill_documentation_popup(driver, ss_path, root_id)
         driver.find_element_by_name("form-4-0-samplesLocation").clear()
         driver.find_element_by_name("form-4-0-samplesLocation").send_keys("http://ttc.samples.org")
         Select(driver.find_element_by_name(
@@ -144,10 +144,10 @@ class NightlyEditorTests(SeleniumTestCase):
         # resource creator popup
         Select(driver.find_element_by_xpath("//div[@class='form-row resourceCreator']/div/select")) \
           .select_by_visible_text("personInfoType")
-        _fill_resource_creator(driver, ss_path, root_id)
+        _fill_resourceCreator_popup(driver, ss_path, root_id)
         # funding project popup
         driver.find_element_by_xpath("//a[@id='add_id_form-5-0-fundingProject']/img").click()  
-        _fill_funding_project(driver, ss_path, root_id)
+        _fill_fundingProject_popup(driver, ss_path, root_id)
         driver.find_element_by_name("form-5-0-creationStartDate").clear()
         driver.find_element_by_name("form-5-0-creationStartDate").send_keys("2012-09-28")
         driver.find_element_by_name("form-5-0-creationEndDate").clear()
@@ -158,17 +158,17 @@ class NightlyEditorTests(SeleniumTestCase):
         driver.find_element_by_name("relationinfotype_model_set-0-relationType").send_keys("new type")
         # related resource popup
         driver.find_element_by_xpath("//a[@id='add_id_relationinfotype_model_set-0-relatedResource']/img").click()  
-        _fill_related_resource(driver, ss_path, root_id)
+        _fill_relatedResource_popup(driver, ss_path, root_id)
         
         # corpus text info popup
         driver.find_element_by_id("add_id_corpusTextInfo-0").click()
         driver.switch_to_window("id_corpusTextInfo__dash__0")
         # corpus text info / linguality
-        _fill_linguality(driver, ss_path, "form-0-")
+        _fill_linguality_form(driver, ss_path, "form-0-")
         # corpus text info / language
-        _fill_language(driver, ss_path, "languageinfotype_model_set-0-")
+        _fill_language_form(driver, ss_path, "languageinfotype_model_set-0-")
         # corpus text info / size
-        _fill_text_size(driver, ss_path, "sizeinfotype_model_set-0-")
+        _fill_textSize_form(driver, ss_path, "sizeinfotype_model_set-0-")
         # save and close corpus text info popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         save_and_close(driver, root_id)
@@ -252,10 +252,10 @@ class NightlyEditorTests(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
-        _fill_distribution(driver, ss_path, root_id)
+        _fill_distribution_popup(driver, ss_path, root_id)
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        _fill_contact_person(driver, ss_path, root_id)
+        _fill_contactPerson_popup(driver, ss_path, root_id)
         
         # corpus audio info popup
         driver.find_element_by_id("add_id_corpusAudioInfo").click()
@@ -263,10 +263,10 @@ class NightlyEditorTests(SeleniumTestCase):
         Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
           "Monolingual")
         # corpus audio info / language
-        _fill_language(driver, ss_path, "languageinfotype_model_set-0-")
+        _fill_language_form(driver, ss_path, "languageinfotype_model_set-0-")
         # corpus audio info / size popup
         driver.find_element_by_css_selector("#add_id_audioSizeInfo > img[alt=\"Add Another\"]").click()
-        _fill_audio_size(driver, ss_path, "id_corpusAudioInfo")
+        _fill_audioSize_form(driver, ss_path, "id_corpusAudioInfo")
         # save and close corpus audio info popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         save_and_close(driver, root_id)
@@ -350,10 +350,10 @@ class NightlyEditorTests(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
-        _fill_distribution(driver, ss_path, root_id)
+        _fill_distribution_popup(driver, ss_path, root_id)
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        _fill_contact_person(driver, ss_path, root_id)
+        _fill_contactPerson_popup(driver, ss_path, root_id)
         
         # corpus video info popup
         driver.find_element_by_id("add_id_corpusVideoInfo-0").click()
@@ -445,10 +445,10 @@ class NightlyEditorTests(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
-        _fill_distribution(driver, ss_path, root_id)
+        _fill_distribution_popup(driver, ss_path, root_id)
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        _fill_contact_person(driver, ss_path, root_id)
+        _fill_contactPerson_popup(driver, ss_path, root_id)
         
         # corpus image info popup
         driver.find_element_by_id("add_id_corpusImageInfo").click()
@@ -540,10 +540,10 @@ class NightlyEditorTests(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
-        _fill_distribution(driver, ss_path, root_id)
+        _fill_distribution_popup(driver, ss_path, root_id)
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        _fill_contact_person(driver, ss_path, root_id)
+        _fill_contactPerson_popup(driver, ss_path, root_id)
         
         # TODO check if this behaviour is normal
         # corpus text numerical info popup
@@ -632,10 +632,10 @@ class NightlyEditorTests(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
-        _fill_distribution(driver, ss_path, root_id)
+        _fill_distribution_popup(driver, ss_path, root_id)
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        _fill_contact_person(driver, ss_path, root_id)
+        _fill_contactPerson_popup(driver, ss_path, root_id)
         
         # corpus ngram info popup
         driver.find_element_by_id("add_id_corpusTextNgramInfo").click()
@@ -651,7 +651,7 @@ class NightlyEditorTests(SeleniumTestCase):
         Select(driver.find_element_by_id("id_form-2-0-lingualityType")).select_by_visible_text(
           "Monolingual")
         # corpus ngram info / language
-        _fill_language(driver, ss_path, "languageinfotype_model_set-0-")
+        _fill_language_form(driver, ss_path, "languageinfotype_model_set-0-")
         # corpus ngram info / size popup
         driver.find_element_by_name("sizeinfotype_model_set-0-size").clear()
         driver.find_element_by_name("sizeinfotype_model_set-0-size").send_keys("100")
@@ -739,10 +739,10 @@ class NightlyEditorTests(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()
-        _fill_distribution(driver, ss_path, root_id)
+        _fill_distribution_popup(driver, ss_path, root_id)
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        _fill_contact_person(driver, ss_path, root_id)
+        _fill_contactPerson_popup(driver, ss_path, root_id)
         
         # language description general info popup
         driver.find_element_by_id("edit_id_langdescInfo").click()
@@ -759,7 +759,7 @@ class NightlyEditorTests(SeleniumTestCase):
           "Monolingual")
         # language description info text / language
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        _fill_language(driver, ss_path, "languageinfotype_model_set-0-")
+        _fill_language_form(driver, ss_path, "languageinfotype_model_set-0-")
         # save and close language description info text popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         save_and_close(driver, root_id)
@@ -844,10 +844,10 @@ class NightlyEditorTests(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()
-        _fill_distribution(driver, ss_path, root_id)
+        _fill_distribution_popup(driver, ss_path, root_id)
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        _fill_contact_person(driver, ss_path, root_id)
+        _fill_contactPerson_popup(driver, ss_path, root_id)
         
         # language description general info popup
         driver.find_element_by_id("edit_id_langdescInfo").click()
@@ -864,7 +864,7 @@ class NightlyEditorTests(SeleniumTestCase):
           "Monolingual")
         # language description info text / language
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        _fill_language(driver, ss_path, "languageinfotype_model_set-0-")
+        _fill_language_form(driver, ss_path, "languageinfotype_model_set-0-")
         # save and close language description info text popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         save_and_close(driver, root_id)
@@ -958,10 +958,10 @@ class NightlyEditorTests(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()
-        _fill_distribution(driver, ss_path, root_id)
+        _fill_distribution_popup(driver, ss_path, root_id)
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        _fill_contact_person(driver, ss_path, root_id)
+        _fill_contactPerson_popup(driver, ss_path, root_id)
         
         # language description general info popup
         driver.find_element_by_id("edit_id_langdescInfo").click()
@@ -978,7 +978,7 @@ class NightlyEditorTests(SeleniumTestCase):
           "Monolingual")
         # language description info text / language
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        _fill_language(driver, ss_path, "languageinfotype_model_set-0-")
+        _fill_language_form(driver, ss_path, "languageinfotype_model_set-0-")
         # save and close language description info text popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         save_and_close(driver, root_id)
@@ -1071,10 +1071,10 @@ class NightlyEditorTests(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()
-        _fill_distribution(driver, ss_path, root_id)
+        _fill_distribution_popup(driver, ss_path, root_id)
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        _fill_contact_person(driver, ss_path, root_id)
+        _fill_contactPerson_popup(driver, ss_path, root_id)
         
         # lexical resource general info popup
         driver.find_element_by_id("edit_id_lexiconInfo").click()
@@ -1090,9 +1090,9 @@ class NightlyEditorTests(SeleniumTestCase):
         Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
           "Monolingual")
         # lexical resource text info / language
-        _fill_language(driver, ss_path, "languageinfotype_model_set-0-")
+        _fill_language_form(driver, ss_path, "languageinfotype_model_set-0-")
         # lexical resource text info / size
-        _fill_text_size(driver, ss_path, "sizeinfotype_model_set-0-")
+        _fill_textsize_form(driver, ss_path, "sizeinfotype_model_set-0-")
         # save and close lexical resource text info popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         save_and_close(driver, root_id)
@@ -1177,10 +1177,10 @@ class NightlyEditorTests(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()
-        _fill_distribution(driver, ss_path, root_id)
+        _fill_distribution_popup(driver, ss_path, root_id)
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        _fill_contact_person(driver, ss_path, root_id)
+        _fill_contactPerson_popup(driver, ss_path, root_id)
         
         # lexical resource general info popup
         driver.find_element_by_id("edit_id_lexiconInfo").click()
@@ -1196,9 +1196,9 @@ class NightlyEditorTests(SeleniumTestCase):
         Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
           "Monolingual")
         # lexical resource text info / language
-        _fill_language(driver, ss_path, "languageinfotype_model_set-0-")
+        _fill_language_form(driver, ss_path, "languageinfotype_model_set-0-")
         # lexical resource text info / size
-        _fill_text_size(driver, ss_path, "sizeinfotype_model_set-0-")
+        _fill_textSize_form(driver, ss_path, "sizeinfotype_model_set-0-")
         # save and close lexical resource text info popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         save_and_close(driver, root_id)
@@ -1290,10 +1290,10 @@ class NightlyEditorTests(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()
-        _fill_distribution(driver, ss_path, root_id)
+        _fill_distribution_popup(driver, ss_path, root_id)
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        _fill_contact_person(driver, ss_path, root_id)
+        _fill_contactPerson_popup(driver, ss_path, root_id)
         
         # lexical resource general info popup
         driver.find_element_by_id("edit_id_lexiconInfo").click()
@@ -1309,9 +1309,9 @@ class NightlyEditorTests(SeleniumTestCase):
         Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
           "Monolingual")
         # lexical resource text info / language
-        _fill_language(driver, ss_path, "languageinfotype_model_set-0-")
+        _fill_language_form(driver, ss_path, "languageinfotype_model_set-0-")
         # lexical resource text info / size
-        _fill_text_size(driver, ss_path, "sizeinfotype_model_set-0-")
+        _fill_textSize_form(driver, ss_path, "sizeinfotype_model_set-0-")
         # save and close lexical resource text info popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         save_and_close(driver, root_id)
@@ -1404,10 +1404,10 @@ class NightlyEditorTests(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()
-        _fill_distribution(driver, ss_path, root_id)
+        _fill_distribution_popup(driver, ss_path, root_id)
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        _fill_contact_person(driver, ss_path, root_id)
+        _fill_contactPerson_popup(driver, ss_path, root_id)
         
         # lexical resource general info popup
         driver.find_element_by_id("edit_id_lexiconInfo").click()
@@ -1423,9 +1423,9 @@ class NightlyEditorTests(SeleniumTestCase):
         Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
           "Monolingual")
         # lexical resource text info / language
-        _fill_language(driver, ss_path, "languageinfotype_model_set-0-")
+        _fill_language_form(driver, ss_path, "languageinfotype_model_set-0-")
         # lexical resource text info / size
-        _fill_text_size(driver, ss_path, "sizeinfotype_model_set-0-")
+        _fill_textSize_form(driver, ss_path, "sizeinfotype_model_set-0-")
         # save and close lexical resource text info popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         save_and_close(driver, root_id)
@@ -2420,7 +2420,7 @@ class NightlyEditorTests(SeleniumTestCase):
         driver.find_element_by_name("position").send_keys("Professor")
         # affiliation popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        _fill_affiliation(driver, ss_path, root_id)
+        _fill_affiliation_popup(driver, ss_path, root_id)
         # save tool
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         driver.find_element_by_name("_save").click()
