@@ -418,101 +418,43 @@ class BasicEditorTests(SeleniumTestCase):
           driver.find_element_by_css_selector("#content > h1").text)
         # remember root window id
         root_id = driver.current_window_handle
-        # add required fields
-        driver.find_element_by_name("key_form-0-resourceName_0").clear()
-        driver.find_element_by_name("key_form-0-resourceName_0").send_keys("en")
-        driver.find_element_by_name("val_form-0-resourceName_0").clear()
-        driver.find_element_by_name("val_form-0-resourceName_0").send_keys("Test Text Corpus")
-        driver.find_element_by_name("key_form-0-description_0").clear()
-        driver.find_element_by_name("key_form-0-description_0").send_keys("en")
-        driver.find_element_by_name("val_form-0-description_0").clear()
-        driver.find_element_by_name("val_form-0-description_0").send_keys("Test Description")
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        driver.find_element_by_xpath("//div[@class='form-row resourceShortName']/div/ul/li/a").click()
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        driver.find_element_by_name("key_form-0-resourceShortName_0").clear()
-        driver.find_element_by_name("key_form-0-resourceShortName_0").send_keys("en")
-        driver.find_element_by_name("val_form-0-resourceShortName_0").clear()
-        driver.find_element_by_name("val_form-0-resourceShortName_0").send_keys("TTC")
-        driver.find_element_by_name("form-0-url").clear()
-        driver.find_element_by_name("form-0-url").send_keys("http://www.ttc.org")
-        driver.find_element_by_name("form-0-identifier").clear()
-        driver.find_element_by_name("form-0-identifier").send_keys("A-123")
+        # identification fields
+        _fill_identification_form(driver, ss_path, "form-0-")
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
-        _fill_distribution(driver, ss_path, root_id)
+        _fill_distribution_popup(driver, ss_path, root_id)
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        _fill_contact_person(driver, ss_path, root_id)
-        # contact metadata creator popup
-        driver.find_element_by_xpath("//a[@id='add_id_form-2-0-metadataCreator']/img").click()
-        _fill_metadata_creator(driver, ss_path, root_id)
-        driver.find_element_by_name("form-2-0-source").clear()
-        driver.find_element_by_name("form-2-0-source").send_keys("catalogue")
-        driver.find_element_by_name("form-2-0-originalMetadataSchema").clear()
-        driver.find_element_by_name("form-2-0-originalMetadataSchema").send_keys("metadata")
-        driver.find_element_by_name("form-2-0-originalMetadataLink").clear()
-        driver.find_element_by_name("form-2-0-originalMetadataLink").send_keys("http://catalogue.org/ttc")
-        driver.find_element_by_name("form-2-0-metadataLanguageName").clear()
-        driver.find_element_by_name("form-2-0-metadataLanguageName").send_keys("english")
-        driver.find_element_by_name("form-2-0-metadataLanguageId").clear()
-        driver.find_element_by_name("form-2-0-metadataLanguageId").send_keys("en")
-        driver.find_element_by_name("form-2-0-revision").clear()
-        driver.find_element_by_name("form-2-0-revision").send_keys("1.0")
+        _fill_contactPerson_popup(driver, ss_path, root_id)
+        # metadata fields
+        _fill_metadata_form(driver, ss_path, "form-2-0-")
 
         # recommended page
         driver.find_element_by_css_selector("a[href=\"#field-2\"]").click()
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        driver.find_element_by_name("form-3-0-version").clear()
-        driver.find_element_by_name("form-3-0-version").send_keys("1.0")
-        driver.find_element_by_name("form-3-0-revision").clear()
-        driver.find_element_by_name("form-3-0-revision").send_keys("1.0")
-        driver.find_element_by_name("form-3-0-lastDateUpdated").clear()
-        driver.find_element_by_name("form-3-0-lastDateUpdated").send_keys("2012-09-28")
-        driver.find_element_by_name("form-3-0-updateFrequency").clear()
-        driver.find_element_by_name("form-3-0-updateFrequency").send_keys("1")
+        # version fields
+        _fill_version_form(driver, ss_path, "form-3-0-")
         # usage popup
         driver.find_element_by_xpath("//a[@id='add_id_usageInfo']/img").click()  
-        _fill_usage(driver, ss_path, root_id)
-        # documentation popup
-        Select(driver.find_element_by_xpath("//div[@class='form-row documentation']/div/select")) \
-          .select_by_visible_text("documentInfoType")
-        _fill_documentation(driver, ss_path, root_id)
-        driver.find_element_by_name("form-4-0-samplesLocation").clear()
-        driver.find_element_by_name("form-4-0-samplesLocation").send_keys("http://ttc.samples.org")
-        Select(driver.find_element_by_name(
-          "form-4-0-toolDocumentationType_old")).select_by_visible_text("Manual")
-        driver.find_element_by_xpath("//div[@class='form-row toolDocumentationType']/div/div/div/a") \
-          .click()
-        # resource creator popup
-        Select(driver.find_element_by_xpath("//div[@class='form-row resourceCreator']/div/select")) \
-          .select_by_visible_text("personInfoType")
-        _fill_resource_creator(driver, ss_path, root_id)
-        # funding project popup
-        driver.find_element_by_xpath("//a[@id='add_id_form-5-0-fundingProject']/img").click()  
-        _fill_funding_project(driver, ss_path, root_id)
-        driver.find_element_by_name("form-5-0-creationStartDate").clear()
-        driver.find_element_by_name("form-5-0-creationStartDate").send_keys("2012-09-28")
-        driver.find_element_by_name("form-5-0-creationEndDate").clear()
-        driver.find_element_by_name("form-5-0-creationEndDate").send_keys("2012-09-28")
-        # relations field
+        _fill_usage_popup(driver, ss_path, root_id)
+        # resource documentation fields 
+        _fill_resourceDocumentation_form(driver, ss_path, "form-4-0-")
+        # resource creation fields 
+        _fill_resourceCreation_form(driver, ss_path, "form-5-0-")
+        # relations fields
         driver.find_element_by_id("fieldsetcollapser1").click()
-        driver.find_element_by_name("relationinfotype_model_set-0-relationType").clear()
-        driver.find_element_by_name("relationinfotype_model_set-0-relationType").send_keys("new type")
-        # related resource popup
-        driver.find_element_by_xpath("//a[@id='add_id_relationinfotype_model_set-0-relatedResource']/img") \
-          .click()  
-        _fill_related_resource(driver, ss_path, root_id)
+        _fill_relations_form(driver, ss_path, "0-")
+
         
         # corpus text info popup
         driver.find_element_by_id("add_id_corpusTextInfo-0").click()
         driver.switch_to_window("id_corpusTextInfo__dash__0")
         # corpus text info / linguality
-        _fill_linguality(driver, ss_path, "form-0-")
+        _fill_linguality_form(driver, ss_path, "form-0-")
         # corpus text info / language
-        _fill_language(driver, ss_path, "languageinfotype_model_set-0-")
+        _fill_language_form(driver, ss_path, "languageinfotype_model_set-0-")
         # corpus text info / size
-        _fill_text_size(driver, ss_path, "sizeinfotype_model_set-0-")
+        _fill_textSize_form(driver, ss_path, "sizeinfotype_model_set-0-")
         # save and close corpus text info popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         save_and_close(driver, root_id)
@@ -523,7 +465,7 @@ class BasicEditorTests(SeleniumTestCase):
         # TODO remove this workaround when Selenium starts working again as intended
         time.sleep(1)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        self.assertEqual("The Resource \"Test Text Corpus\" was added successfully.", 
+        self.assertEqual("The Resource \"Resource Name\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
         
         # check the editor group of the resource is the default editor group of the user
@@ -556,7 +498,7 @@ class BasicEditorTests(SeleniumTestCase):
 
 def _add_new_resource(driver, ss_path, resource_type, media_types):
     """
-    Adds a new resource with specific resource type and media types
+    adds a new resource with specific resource type and media types
     """
     # Manage Resources -> Manage all resources
     mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
@@ -574,7 +516,121 @@ def _add_new_resource(driver, ss_path, resource_type, media_types):
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
 
 
-def _fill_distribution(driver, ss_path, parent_id):
+def _fill_identification_form(driver, ss_path, id_infix):
+    """
+    fills the identification form with required, recommended and optional information
+    """
+    driver.find_element_by_name("key_{}resourceName_0".format(id_infix)).clear()
+    driver.find_element_by_name("key_{}resourceName_0".format(id_infix)).send_keys("en")
+    driver.find_element_by_name("val_{}resourceName_0".format(id_infix)).clear()
+    driver.find_element_by_name("val_{}resourceName_0".format(id_infix)).send_keys("Resource Name")
+    driver.find_element_by_name("key_{}description_0".format(id_infix)).clear()
+    driver.find_element_by_name("key_{}description_0".format(id_infix)).send_keys("en")
+    driver.find_element_by_name("val_{}description_0".format(id_infix)).clear()
+    driver.find_element_by_name("val_{}description_0".format(id_infix)).send_keys("Test Description")
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    driver.find_element_by_xpath("//div[@class='form-row resourceShortName']/div/ul/li/a").click()
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    driver.find_element_by_name("key_{}resourceShortName_0".format(id_infix)).clear()
+    driver.find_element_by_name("key_{}resourceShortName_0".format(id_infix)).send_keys("en")
+    driver.find_element_by_name("val_{}resourceShortName_0".format(id_infix)).clear()
+    driver.find_element_by_name("val_{}resourceShortName_0".format(id_infix)).send_keys("RN")
+    driver.find_element_by_name("{}url".format(id_infix)).clear()
+    driver.find_element_by_name("{}url".format(id_infix)).send_keys("http://www.rn.org")
+    driver.find_element_by_name("{}identifier".format(id_infix)).clear()
+    driver.find_element_by_name("{}identifier".format(id_infix)).send_keys("A-123")
+
+
+def _fill_metadata_form(driver, ss_path, id_infix):
+    """
+    fills the metadata form with required, recommended and optional information
+    """
+    # remember current window id
+    current_id = driver.current_window_handle
+    # contact metadata creator popup
+    driver.find_element_by_xpath("//a[@id='add_id_{}metadataCreator']/img".format(id_infix)).click()
+    _fill_metadataCreator_popup(driver, ss_path, current_id)
+    driver.find_element_by_name("{}source".format(id_infix)).clear()
+    driver.find_element_by_name("{}source".format(id_infix)).send_keys("catalogue")
+    driver.find_element_by_name("{}originalMetadataSchema".format(id_infix)).clear()
+    driver.find_element_by_name("{}originalMetadataSchema".format(id_infix)).send_keys("metadata")
+    driver.find_element_by_name("{}originalMetadataLink".format(id_infix)).clear()
+    driver.find_element_by_name("{}originalMetadataLink".format(id_infix)).send_keys("http://catalogue.org/rn")
+    driver.find_element_by_name("{}metadataLanguageName".format(id_infix)).clear()
+    driver.find_element_by_name("{}metadataLanguageName".format(id_infix)).send_keys("english")
+    driver.find_element_by_name("{}metadataLanguageId".format(id_infix)).clear()
+    driver.find_element_by_name("{}metadataLanguageId".format(id_infix)).send_keys("en")
+    driver.find_element_by_name("{}revision".format(id_infix)).clear()
+    driver.find_element_by_name("{}revision".format(id_infix)).send_keys("1.0")
+
+
+def _fill_version_form(driver, ss_path, id_infix):
+    """
+    fills the version form with required, recommended and optional information
+    """
+    driver.find_element_by_name("{}version".format(id_infix)).clear()
+    driver.find_element_by_name("{}version".format(id_infix)).send_keys("1.0")
+    driver.find_element_by_name("{}revision".format(id_infix)).clear()
+    driver.find_element_by_name("{}revision".format(id_infix)).send_keys("1.0")
+    driver.find_element_by_name("{}lastDateUpdated".format(id_infix)).clear()
+    driver.find_element_by_name("{}lastDateUpdated".format(id_infix)).send_keys("2012-09-28")
+    driver.find_element_by_name("{}updateFrequency".format(id_infix)).clear()
+    driver.find_element_by_name("{}updateFrequency".format(id_infix)).send_keys("1")
+
+
+def _fill_resourceDocumentation_form(driver, ss_path, id_infix):
+    """
+    fills the resource documentation form with required, recommended and optional information
+    """
+    # remember current window id
+    current_id = driver.current_window_handle
+    # documentation popup
+    Select(driver.find_element_by_xpath("//div[@class='form-row documentation']/div/select")) \
+      .select_by_visible_text("documentInfoType")
+    _fill_documentation_popup(driver, ss_path, current_id)
+    driver.find_element_by_name("{}samplesLocation".format(id_infix)).clear()
+    driver.find_element_by_name("{}samplesLocation".format(id_infix)).send_keys("http://rn.samples.org")
+    Select(driver.find_element_by_name(
+      "{}toolDocumentationType_old".format(id_infix))).select_by_visible_text("Manual")
+    driver.find_element_by_xpath("//div[@class='form-row toolDocumentationType']/div/div/div/a") \
+      .click()
+
+
+def _fill_resourceCreation_form(driver, ss_path, id_infix):
+    """
+    fills the resource creation form with required, recommended and optional information
+    """
+    # remember current window id
+    current_id = driver.current_window_handle
+    # resource creator popup
+    Select(driver.find_element_by_xpath("//div[@class='form-row resourceCreator']/div/select")) \
+      .select_by_visible_text("personInfoType")
+    _fill_resourceCreator_popup(driver, ss_path, current_id)
+    # funding project popup
+    driver.find_element_by_xpath("//a[@id='add_id_{}fundingProject']/img".format(id_infix)).click()  
+    _fill_fundingProject_popup(driver, ss_path, current_id)
+    driver.find_element_by_name("{}creationStartDate".format(id_infix)).clear()
+    driver.find_element_by_name("{}creationStartDate".format(id_infix)).send_keys("2012-09-28")
+    driver.find_element_by_name("{}creationEndDate".format(id_infix)).clear()
+    driver.find_element_by_name("{}creationEndDate".format(id_infix)).send_keys("2012-09-28")
+
+
+def _fill_relations_form(driver, ss_path, id_infix):
+    """
+    fills the relations form with required, recommended and optional information
+    """
+    # remember current window id
+    current_id = driver.current_window_handle
+    driver.find_element_by_name("relationinfotype_model_set-{}relationType".format(id_infix)).clear()
+    driver.find_element_by_name("relationinfotype_model_set-{}relationType".format(id_infix)) \
+      .send_keys("new type")
+    # related resource popup
+    driver.find_element_by_xpath("//a[@id='add_id_relationinfotype_model_set-{}relatedResource']/img" \
+      .format(id_infix)).click()  
+    _fill_relatedResource_popup(driver, ss_path, current_id)
+
+
+def _fill_distribution_popup(driver, ss_path, parent_id):
     """
     fills the distribution popup with all required, recommended and optional
     information and returns to the parent window
@@ -617,24 +673,28 @@ def _fill_distribution(driver, ss_path, parent_id):
     driver.find_element_by_name("val_licenceinfotype_model_set-0-attributionText_0").clear()
     driver.find_element_by_name("val_licenceinfotype_model_set-0-attributionText_0") \
       .send_keys("The attribution text.")
+    # licensor popup
     Select(driver.find_element_by_xpath("//div[@class='form-row licensor']/div/select")) \
       .select_by_visible_text("personInfoType")
-    _fill_licensor(driver, ss_path, current_id)
+    _fill_licensor_popup(driver, ss_path, current_id)
+    # distribution rights holder popup
     Select(driver.find_element_by_xpath("//div[@class='form-row distributionRightsHolder']/div/select")) \
       .select_by_visible_text("personInfoType")
-    _fill_distribution_rights_holder(driver, ss_path, current_id)
+    _fill_distributionRightsHolder_popup(driver, ss_path, current_id)
     Select(driver.find_element_by_name(
       "licenceinfotype_model_set-0-userNature_old")).select_by_visible_text("Academic")
     driver.find_element_by_xpath(
       "//div[@class='form-row userNature']/div/div/ul/li/a") \
       .click()
+    # membership popup
     driver.find_element_by_xpath("//a[@id='add_id_licenceinfotype_model_set-0-membershipInfo']/img") \
       .click()  
-    _fill_membership(driver, ss_path, current_id)
+    _fill_membership_popup(driver, ss_path, current_id)
 
+    # ipr holder popup
     Select(driver.find_element_by_xpath("//div[@class='form-row iprHolder']/div/select")) \
       .select_by_visible_text("personInfoType")
-    _fill_ipr_holder(driver, ss_path, current_id)
+    _fill_iprHolder_popup(driver, ss_path, current_id)
     driver.find_element_by_name("availabilityStartDate").clear()
     driver.find_element_by_name("availabilityStartDate").send_keys("2012-10-02")
     driver.find_element_by_name("availabilityEndDate").clear()
@@ -643,7 +703,7 @@ def _fill_distribution(driver, ss_path, parent_id):
     save_and_close(driver, parent_id)
 
 
-def _fill_contact_person(driver, ss_path, parent_id):
+def _fill_contactPerson_popup(driver, ss_path, parent_id):
     """
     fills the contact person popup with all required, recommended and optional
     information and returns to the parent window
@@ -684,12 +744,12 @@ def _fill_contact_person(driver, ss_path, parent_id):
     driver.find_element_by_name("position").send_keys("Professor")
     # affiliation popup
     driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-    _fill_affiliation(driver, ss_path, current_id)
+    _fill_affiliation_popup(driver, ss_path, current_id)
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
 
 
-def _fill_affiliation(driver, ss_path, parent_id):
+def _fill_affiliation_popup(driver, ss_path, parent_id):
     """
     fills the affiliation popup with all required, recommended and optional
     information and returns to the parent window
@@ -735,7 +795,7 @@ def _fill_affiliation(driver, ss_path, parent_id):
     save_and_close(driver, parent_id)
 
 
-def _fill_usage(driver, ss_path, parent_id):
+def _fill_usage_popup(driver, ss_path, parent_id):
     """
     fills the usage popup with all required, recommended and optional
     information and returns to the parent window
@@ -744,10 +804,10 @@ def _fill_usage(driver, ss_path, parent_id):
     current_id = driver.current_window_handle
     # access tool popup
     driver.find_element_by_xpath("//a[@id='add_id_accessTool']/img").click()  
-    _fill_access_tool(driver, ss_path, current_id)
+    _fill_accessTool_popup(driver, ss_path, current_id)
      # resource associated with popup
     driver.find_element_by_xpath("//a[@id='add_id_resourceAssociatedWith']/img").click()  
-    _fill_resource_associated_with(driver, ss_path, current_id)
+    _fill_resourceAssociatedWith_popup(driver, ss_path, current_id)
     # foreseen use
     driver.find_element_by_id("fieldsetcollapser0").click()
     Select(driver.find_element_by_name("foreseenuseinfotype_model_set-0-foreseenUse")) \
@@ -767,12 +827,15 @@ def _fill_usage(driver, ss_path, parent_id):
     driver.find_element_by_xpath(
       "//div[@id='actualuseinfotype_model_set-0']/fieldset/div[@class='form-row useNLPSpecific']/div/div/ul/li/a") \
       .click()
+    # usage report popup
     Select(driver.find_element_by_name("subclass_select")).select_by_visible_text("documentInfoType")
-    _fill_usage_report(driver, ss_path, current_id)
+    _fill_usageReport_popup(driver, ss_path, current_id)
+    # derived resource popup
     driver.find_element_by_xpath("//a[@id='add_id_actualuseinfotype_model_set-0-derivedResource']/img").click()  
-    _fill_derived_resource(driver, ss_path, current_id)
+    _fill_derivedResource_popup(driver, ss_path, current_id)
+    # project popup
     driver.find_element_by_xpath("//a[@id='add_id_actualuseinfotype_model_set-0-usageProject']/img").click()  
-    _fill_project(driver, ss_path, current_id)
+    _fill_project_popup(driver, ss_path, current_id)
     driver.find_element_by_name("actualuseinfotype_model_set-0-actualUseDetails").clear()
     driver.find_element_by_name("actualuseinfotype_model_set-0-actualUseDetails").send_keys("details")
     
@@ -780,7 +843,7 @@ def _fill_usage(driver, ss_path, parent_id):
     save_and_close(driver, parent_id)
 
 
-def _fill_access_tool(driver, ss_path, parent_id):
+def _fill_accessTool_popup(driver, ss_path, parent_id):
     """
     fills the access tool popup with all required, recommended and optional
     information and returns to the parent window
@@ -792,7 +855,7 @@ def _fill_access_tool(driver, ss_path, parent_id):
     save_and_close(driver, parent_id)
 
 
-def _fill_resource_associated_with(driver, ss_path, parent_id):
+def _fill_resourceAssociatedWith_popup(driver, ss_path, parent_id):
     """
     fills the resource associated with popup with all required, recommended and optional
     information and returns to the parent window
@@ -804,7 +867,7 @@ def _fill_resource_associated_with(driver, ss_path, parent_id):
     save_and_close(driver, parent_id)
 
 
-def _fill_usage_report(driver, ss_path, parent_id):
+def _fill_usageReport_popup(driver, ss_path, parent_id):
     """
     fills the usage report popup with all required, recommended and optional
     information and returns to the parent window
@@ -855,7 +918,7 @@ def _fill_usage_report(driver, ss_path, parent_id):
     save_and_close(driver, parent_id)
 
 
-def _fill_documentation(driver, ss_path, parent_id):
+def _fill_documentation_popup(driver, ss_path, parent_id):
     """
     fills the documentation popup with all required, recommended and optional
     information and returns to the parent window
@@ -906,7 +969,7 @@ def _fill_documentation(driver, ss_path, parent_id):
     save_and_close(driver, parent_id)
 
 
-def _fill_derived_resource(driver, ss_path, parent_id):
+def _fill_derivedResource_popup(driver, ss_path, parent_id):
     """
     fills the derived resource popup with all required, recommended and optional
     information and returns to the parent window
@@ -918,7 +981,7 @@ def _fill_derived_resource(driver, ss_path, parent_id):
     save_and_close(driver, parent_id)
 
 
-def _fill_related_resource(driver, ss_path, parent_id):
+def _fill_relatedResource_popup(driver, ss_path, parent_id):
     """
     fills the related resource popup with all required, recommended and optional
     information and returns to the parent window
@@ -930,7 +993,7 @@ def _fill_related_resource(driver, ss_path, parent_id):
     save_and_close(driver, parent_id)
 
 
-def _fill_project(driver, ss_path, parent_id):
+def _fill_project_popup(driver, ss_path, parent_id):
     """
     fills the project popup with all required, recommended and optional
     information and returns to the parent window
@@ -964,7 +1027,7 @@ def _fill_project(driver, ss_path, parent_id):
     save_and_close(driver, parent_id)
 
 
-def _fill_funding_project(driver, ss_path, parent_id):
+def _fill_fundingProject_popup(driver, ss_path, parent_id):
     """
     fills the funding project popup with all required, recommended and optional
     information and returns to the parent window
@@ -998,7 +1061,7 @@ def _fill_funding_project(driver, ss_path, parent_id):
     save_and_close(driver, parent_id)
 
 
-def _fill_metadata_creator(driver, ss_path, parent_id):
+def _fill_metadataCreator_popup(driver, ss_path, parent_id):
     """
     fills the metadata creator popup with all required, recommended and optional
     information and returns to the parent window
@@ -1039,13 +1102,13 @@ def _fill_metadata_creator(driver, ss_path, parent_id):
     driver.find_element_by_name("position").send_keys("Organization")
     # affiliation popup
     driver.find_element_by_xpath("//a[@id='add_id_affiliation']/img").click()
-    _fill_affiliation(driver, ss_path, current_id)
+    _fill_affiliation_popup(driver, ss_path, current_id)
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
 
 
-def _fill_resource_creator(driver, ss_path, parent_id):
+def _fill_resourceCreator_popup(driver, ss_path, parent_id):
     """
     fills the resource creator popup with all required, recommended and optional
     information and returns to the parent window
@@ -1086,13 +1149,13 @@ def _fill_resource_creator(driver, ss_path, parent_id):
     driver.find_element_by_name("position").send_keys("Organization")
     # affiliation popup
     driver.find_element_by_xpath("//a[@id='add_id_affiliation']/img").click()
-    _fill_affiliation(driver, ss_path, current_id)
+    _fill_affiliation_popup(driver, ss_path, current_id)
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
 
 
-def _fill_ipr_holder(driver, ss_path, parent_id):
+def _fill_iprHolder_popup(driver, ss_path, parent_id):
     """
     fills the ipr holder popup with all required, recommended and optional
     information and returns to the parent window
@@ -1133,12 +1196,12 @@ def _fill_ipr_holder(driver, ss_path, parent_id):
     driver.find_element_by_name("position").send_keys("Professor")
     # affiliation popup
     driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-    _fill_affiliation(driver, ss_path, current_id)
+    _fill_affiliation_popup(driver, ss_path, current_id)
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
 
 
-def _fill_licensor(driver, ss_path, parent_id):
+def _fill_licensor_popup(driver, ss_path, parent_id):
     """
     fills the licensor popup with all required, recommended and optional
     information and returns to the parent window
@@ -1179,12 +1242,12 @@ def _fill_licensor(driver, ss_path, parent_id):
     driver.find_element_by_name("position").send_keys("Professor")
     # affiliation popup
     driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-    _fill_affiliation(driver, ss_path, current_id)
+    _fill_affiliation_popup(driver, ss_path, current_id)
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
 
 
-def _fill_distribution_rights_holder(driver, ss_path, parent_id):
+def _fill_distributionRightsHolder_popup(driver, ss_path, parent_id):
     """
     fills the distributino rights holder popup with all required, recommended and optional
     information and returns to the parent window
@@ -1225,12 +1288,12 @@ def _fill_distribution_rights_holder(driver, ss_path, parent_id):
     driver.find_element_by_name("position").send_keys("Professor")
     # affiliation popup
     driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-    _fill_affiliation(driver, ss_path, current_id)
+    _fill_affiliation_popup(driver, ss_path, current_id)
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
 
 
-def _fill_membership(driver, ss_path, parent_id):
+def _fill_membership_popup(driver, ss_path, parent_id):
     """
     fills the membership popup with all required, recommended and optional
     information and returns to the parent window
@@ -1247,7 +1310,7 @@ def _fill_membership(driver, ss_path, parent_id):
     save_and_close(driver, parent_id)
 
 
-def _fill_linguality(driver, ss_path, id_infix):
+def _fill_linguality_form(driver, ss_path, id_infix):
     """
     fills the linguality with required, recommended and optional information
     """
@@ -1259,19 +1322,26 @@ def _fill_linguality(driver, ss_path, id_infix):
     driver.find_element_by_id("id_{}multilingualityTypeDetails".format(id_infix)).send_keys("Information")
 
 
-def _fill_language(driver, ss_path, id_infix):
+def _fill_language_form(driver, ss_path, id_infix):
     """
     fills the language with required, recommended and optional information
     """
+    # remember current window id
+    current_id = driver.current_window_handle
     driver.find_element_by_id("id_{}languageId".format(id_infix)).clear()
     driver.find_element_by_id("id_{}languageId".format(id_infix)).send_keys("De")
     driver.find_element_by_id("id_{}languageName".format(id_infix)).clear()
     driver.find_element_by_id("id_{}languageName".format(id_infix)).send_keys("German")
     driver.find_element_by_id("id_{}languageScript".format(id_infix)).clear()
     driver.find_element_by_id("id_{}languageScript".format(id_infix)).send_keys("Script")
+    # size per language popup
+    driver.find_element_by_xpath("//a[@id='add_id_languageinfotype_model_set-0-sizePerLanguage']/img").click()
+    _fill_sizePerLanguage_popup(driver, ss_path, current_id)
+    # language variety popup
+    driver.find_element_by_xpath("//a[@id='add_id_languageinfotype_model_set-0-languageVarietyInfo']/img").click()
+    _fill_languageVariety_popup(driver, ss_path, current_id)
 
-
-def _fill_size_per_language(driver, ss_path, id_infix):
+def _fill_sizePerLanguage_popup(driver, ss_path, parent_id):
     """
     fills the size per language popup with all required, recommended and optional
     information and returns to the parent window
@@ -1285,24 +1355,24 @@ def _fill_size_per_language(driver, ss_path, id_infix):
     save_and_close(driver, parent_id)
 
 
-def _fill_language_variety(driver, ss_path, id_infix):
+def _fill_languageVariety_popup(driver, ss_path, parent_id):
     """
     fills the language variety popup with all required, recommended and optional
     information and returns to the parent window
     """
     driver.switch_to_window("id_languageinfotype_model_set__dash__0__dash__languageVarietyInfo")
-    Select(find_element_by_id("id_languageVarietyType")).select_by_visible_text("Classes")
+    Select(driver.find_element_by_id("id_languageVarietyType")).select_by_visible_text("Jargon")
+    driver.find_element_by_id("id_languageVarietyName").clear()
+    driver.find_element_by_id("id_languageVarietyName").send_keys("Jargon name")
     driver.find_element_by_id("id_form-0-size").clear()
-    driver.find_element_by_id("id_form-0-size").send_keys("Jargon")
-    driver.find_element_by_id("languageVarietyName").clear()
-    driver.find_element_by_id("languageVarietyName").send_keys("Jargon name")
+    driver.find_element_by_id("id_form-0-size").send_keys("10")
     Select(driver.find_element_by_xpath("//div[@class='form-row sizeUnit']/div/select")) \
       .select_by_visible_text("Classes")
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
 
 
-def _fill_text_size(driver, ss_path, id_infix):
+def _fill_textSize_form(driver, ss_path, id_infix):
     """
     fills the text size with required information
     """
@@ -1311,7 +1381,7 @@ def _fill_text_size(driver, ss_path, id_infix):
     Select(driver.find_element_by_id("id_{}sizeUnit".format(id_infix))).select_by_visible_text("Tokens")
 
 
-def _fill_audio_size(driver, ss_path, parent_id):
+def _fill_audioSize_form(driver, ss_path, parent_id):
     """
     fills the text size with required information
     """
