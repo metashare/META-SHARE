@@ -67,15 +67,17 @@
 		{% endif %}
 	{% endfor %}
 
-	{% if "Usage_report" in usage_dict.Usage.Actual_use %}
+	{% if "Usage_report" in usage_dict.Usage.Actual_use %}		
+		<label class='subtitle'>Usage Report</label>
 		{% for key, value in usage_dict.Usage.Actual_use.items %}
 			{% if "Usage_report" in value %}
+				<div class="separation"><hr/></div>
 				{% if "Title" in value.Usage_report %}
-					{% include "repository/resource_view/documentation.html" with documentation=value.Usage_report type="Usage Report" level="sub" %}
+					{% include "repository/resource_view/documentation.html" with documentation=value.Usage_report type="Documentation" level="sub" %}
 				{% else %}
 					<div class="dataline indented">
 						<label>
-							<strong>Usage Report: </strong>{{ value.Usage_report }}
+							{{ value.Usage_report }}
 						</label>
 					</div>
 				{% endif %}
