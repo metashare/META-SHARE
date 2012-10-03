@@ -880,7 +880,7 @@ def check_resource_view(queryset, test_case):
         'downloadLocation',
         'executionLocation',
         'samplesLocation',
-        'targetResourceNameUri',
+        'targetResourceNameURI',
     )
     
     # path suffixes where to apply a number transformation on the value
@@ -928,7 +928,7 @@ def check_resource_view(queryset, test_case):
             text = smart_str(xml_utils.html_escape(_ele.text), response._charset)
 
             # skip boolean values, as they cannot reasonably be verified
-            if text == "true" or text == "false":
+            if text == "true" or text == "false" or text == "True" or text == "False":
                 continue 
                             
             # check if path should be skipped
@@ -951,19 +951,12 @@ def check_resource_view(queryset, test_case):
                 continue
 
             # strip "http://" or "https://" from urls
-            for _np in stripped_paths:        
+            for _sp in stripped_paths:        
                 if path.endswith(_np):
                     for prefix in ('http://', 'https://'):
-                        if text.startswith(prefix):
-                            text = text[len(prefix):].encode("utf-8").strip()
-                    break
-                    if text == '0':
-                        skip = True
-                    break
-            if skip:
-                continue
-                
-                
+                        if text.strip().startswith(prefix):
+                            text = unicode(text[len(prefix):]).encode("utf-8")
+
             # apply date transformation if required
             for _dp in date_paths:
                 if path.endswith(_dp):

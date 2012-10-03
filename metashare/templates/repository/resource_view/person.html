@@ -39,7 +39,6 @@
 				{% for key, value in person_dict.Communication.items %}
 					{% if "Url" in key %}
 						<label class="dataline" style="clear:both;">
-							{{ value }}
 							{{ value|urlizetrunc:17 }}</a>
 						</label>
 					{% endif %}
