@@ -47,6 +47,26 @@
 			</div>
 		{% endif %}
 	
+		
+		<div>
+			<label class="dataline">
+				{{ person_dict.Department_name }}
+			</label>
+		</div>
+		
+		<div>
+			<label class="dataline">
+				{{ person_dict.Organization_name }}	
+			</label>
+		</div>
+		
+		
+		<div>
+			<label class="dataline">
+				{{ person_dict.Organization_short_name }}		
+			</label>
+		</div>
+		
 		<div>
 			<label class="dataline">
 				{{ person_dict.Affiliation.Organization_name }}	
@@ -64,11 +84,18 @@
 				{{ person_dict.Position }}
 			</label>
 		</div>
+		
+		{% if "Department_name" in person_dict.Affiliation %}
 		<div>
-			<label class="dataline">
-				{{ person_dict.Affiliation.Department_name }}
-			</label>
+			{% for key, value in person_dict.Affiliation %}
+				{% if "Department_name" in key %}
+					<label class="dataline">
+						{{ value.Department_name }}
+					</label>
+				{% endif %}
+			{% endfor %}
 		</div>
+		{% endif %}
 		
 		{% if person_dict.Communication.Email %}
 		<div>
@@ -136,7 +163,7 @@
 		{% if person_dict.Affiliation.Communication.Affiliation.Organization_name %}
 			<div>
 				<label class="dataline">
-						{{ person_dict.Affiliation.Organization_name }}
+					{{ person_dict.Affiliation.Organization_name }}
 				</label>
 			</div>
 		{% endif %}
