@@ -20,7 +20,7 @@ class BasicEditorTests(SeleniumTestCase):
     """
     Basic tests for the metadata editor which are meant to be run in every
     Jenkins build.
-    
+
     The test case contains only one full LR creation test (for a tool/service
     LR); other LR creation tests can be found in the `NightlyEditorTests` test
     case.
@@ -70,7 +70,7 @@ class BasicEditorTests(SeleniumTestCase):
         resource.storage_object.published = True
         # this also saves the storage object:
         resource.save()
-    
+
         driver = self.driver
         driver.get(self.base_url)
         # login user
@@ -168,7 +168,7 @@ class BasicEditorTests(SeleniumTestCase):
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
         _fill_contact_person(driver, ss_path, root_id)
-        
+
         # tool info popup
         driver.find_element_by_id("edit_id_toolServiceInfo").click()
         driver.switch_to_window("edit_id_toolServiceInfo")
@@ -304,7 +304,7 @@ class BasicEditorTests(SeleniumTestCase):
         self.assertEqual("Available - Unrestricted Use", driver.find_element_by_xpath(
           "//select[@id='id_availability']/option[3]").text)
         self.assertEqual("Not Available Through Meta Share", driver.find_element_by_xpath(
-          "//select[@id='id_availability']/option[4]").text)        
+          "//select[@id='id_availability']/option[4]").text)
         self.assertEqual("Under Negotiation", driver.find_element_by_xpath(
           "//select[@id='id_availability']/option[5]").text)
         save_and_close(driver, root_id)
@@ -332,16 +332,16 @@ class BasicEditorTests(SeleniumTestCase):
         self.assertEqual("Classes", driver.find_element_by_xpath(
           "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[7]").text)
         self.assertEqual("Concepts", driver.find_element_by_xpath(
-          "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[8]").text)                                        
+          "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[8]").text)
         self.assertEqual("Diphones", driver.find_element_by_xpath(
           "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[9]").text)
         self.assertEqual("Elements", driver.find_element_by_xpath(
-          "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[10]").text)    
+          "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[10]").text)
         # skip to end of list 
         self.assertEqual("Words", driver.find_element_by_xpath(
-          "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[50]").text)        
+          "//select[@id='id_sizeinfotype_model_set-0-sizeUnit']/option[50]").text)
 
-    
+
     def test_multi_select_widget(self):
         """
         tests the usage of the FilteredSelectMultiple widget for multi select fields
@@ -448,20 +448,14 @@ class BasicEditorTests(SeleniumTestCase):
         driver.find_element_by_id("fieldsetcollapser1").click()
         _fill_relations_form(driver, ss_path, "0-")
 
-        
+
         # corpus text info popup
         driver.find_element_by_id("add_id_corpusTextInfo-0").click()
-        driver.switch_to_window("id_corpusTextInfo__dash__0")
-        # corpus text info / linguality
-        _fill_linguality_form(driver, ss_path, "form-0-")
-        # corpus text info / language
-        _fill_language_form(driver, ss_path, "languageinfotype_model_set-0-")
-        # corpus text info / size
-        _fill_textSize_form(driver, ss_path, "sizeinfotype_model_set-0-")
+        _fill_corpusTextInfo_popup(driver, ss_path, root_id)
         # save and close corpus text info popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         save_and_close(driver, root_id)
-        
+
         # save text corpus
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         driver.find_element_by_name("_save").click()
@@ -470,7 +464,7 @@ class BasicEditorTests(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         self.assertEqual("The Resource \"Resource Name\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
-        
+
         # check the editor group of the resource is the default editor group of the user
         self.assertEqual(self.test_editor_group.name, 
           driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
@@ -682,7 +676,6 @@ def _fill_distribution_popup(driver, ss_path, parent_id):
     current_id = driver.current_window_handle
     Select(driver.find_element_by_id("id_availability")).select_by_visible_text(
       "Available - Unrestricted Use")
-
     # licences
     driver.find_element_by_id("fieldsetcollapser0").click()
     Select(driver.find_element_by_name(
@@ -732,7 +725,6 @@ def _fill_distribution_popup(driver, ss_path, parent_id):
     driver.find_element_by_xpath("//a[@id='add_id_licenceinfotype_model_set-0-membershipInfo']/img") \
       .click()  
     _fill_membership_popup(driver, ss_path, current_id)
-
     # ipr holder popup
     Select(driver.find_element_by_xpath("//div[@class='form-row iprHolder']/div/select")) \
       .select_by_visible_text("personInfoType")
@@ -751,6 +743,16 @@ def _fill_contactPerson_popup(driver, ss_path, parent_id):
     information and returns to the parent window
     """
     driver.switch_to_window("id_contactPerson")
+    _fill_personInfo_form(driver, ss_path, "form-0-")
+
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_personInfo_form(driver, ss_path, id_infix):
+    """
+    fills the person info form with required, recommended and optional information
+    """
     # remember current window id
     current_id = driver.current_window_handle
     driver.find_element_by_name("key_surname_0").clear()
@@ -764,31 +766,29 @@ def _fill_contactPerson_popup(driver, ss_path, parent_id):
     driver.find_element_by_name("val_givenName_0").clear()
     driver.find_element_by_name("val_givenName_0").send_keys("John")
     Select(driver.find_element_by_id("id_sex")).select_by_visible_text("Male")
-    driver.find_element_by_name("form-0-email").clear()
-    driver.find_element_by_name("form-0-email").send_keys("john.smith@institution.org")
-    driver.find_element_by_name("form-0-url").clear()
-    driver.find_element_by_name("form-0-url").send_keys("http://www.institution.org")
-    driver.find_element_by_name("form-0-address").clear()
-    driver.find_element_by_name("form-0-address").send_keys("1st main street")
-    driver.find_element_by_name("form-0-zipCode").clear()
-    driver.find_element_by_name("form-0-zipCode").send_keys("95000")
-    driver.find_element_by_name("form-0-city").clear()
-    driver.find_element_by_name("form-0-city").send_keys("somewhere")
-    driver.find_element_by_name("form-0-region").clear()
-    driver.find_element_by_name("form-0-region").send_keys("far away")
-    driver.find_element_by_name("form-0-country").clear()
-    driver.find_element_by_name("form-0-country").send_keys("world")
-    driver.find_element_by_name("form-0-telephoneNumber").clear()
-    driver.find_element_by_name("form-0-telephoneNumber").send_keys("1234567890")
-    driver.find_element_by_name("form-0-faxNumber").clear()
-    driver.find_element_by_name("form-0-faxNumber").send_keys("1234567890")
+    driver.find_element_by_name("{}email".format(id_infix)).clear()
+    driver.find_element_by_name("{}email".format(id_infix)).send_keys("john.smith@institution.org")
+    driver.find_element_by_name("{}url".format(id_infix)).clear()
+    driver.find_element_by_name("{}url".format(id_infix)).send_keys("http://www.institution.org")
+    driver.find_element_by_name("{}address".format(id_infix)).clear()
+    driver.find_element_by_name("{}address".format(id_infix)).send_keys("1st main street")
+    driver.find_element_by_name("{}zipCode".format(id_infix)).clear()
+    driver.find_element_by_name("{}zipCode".format(id_infix)).send_keys("95000")
+    driver.find_element_by_name("{}city".format(id_infix)).clear()
+    driver.find_element_by_name("{}city".format(id_infix)).send_keys("somewhere")
+    driver.find_element_by_name("{}region".format(id_infix)).clear()
+    driver.find_element_by_name("{}region".format(id_infix)).send_keys("far away")
+    driver.find_element_by_name("{}country".format(id_infix)).clear()
+    driver.find_element_by_name("{}country".format(id_infix)).send_keys("world")
+    driver.find_element_by_name("{}telephoneNumber".format(id_infix)).clear()
+    driver.find_element_by_name("{}telephoneNumber".format(id_infix)).send_keys("1234567890")
+    driver.find_element_by_name("{}faxNumber".format(id_infix)).clear()
+    driver.find_element_by_name("{}faxNumber".format(id_infix)).send_keys("1234567890")
     driver.find_element_by_name("position").clear()
     driver.find_element_by_name("position").send_keys("Professor")
     # affiliation popup
     driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
     _fill_affiliation_popup(driver, ss_path, current_id)
-    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-    save_and_close(driver, parent_id)
 
 
 def _fill_affiliation_popup(driver, ss_path, parent_id):
@@ -813,7 +813,6 @@ def _fill_affiliation_popup(driver, ss_path, parent_id):
     driver.find_element_by_name("key_departmentName_0").send_keys("en")
     driver.find_element_by_name("val_departmentName_0").clear()
     driver.find_element_by_name("val_departmentName_0").send_keys("Department")
-
     driver.find_element_by_name("form-0-email").clear()
     driver.find_element_by_name("form-0-email").send_keys("john.smith@institution.org")
     driver.find_element_by_name("form-0-url").clear()
@@ -859,7 +858,6 @@ def _fill_usage_popup(driver, ss_path, parent_id):
     driver.find_element_by_xpath(
       "//div[@id='foreseenuseinfotype_model_set-0']/fieldset/div[@class='form-row useNLPSpecific']/div/div/ul/li/a") \
       .click()
-    
     # actual uses
     driver.find_element_by_id("fieldsetcollapser1").click()
     Select(driver.find_element_by_name("actualuseinfotype_model_set-0-actualUse")).select_by_visible_text(
@@ -880,7 +878,7 @@ def _fill_usage_popup(driver, ss_path, parent_id):
     _fill_project_popup(driver, ss_path, current_id)
     driver.find_element_by_name("actualuseinfotype_model_set-0-actualUseDetails").clear()
     driver.find_element_by_name("actualuseinfotype_model_set-0-actualUseDetails").send_keys("details")
-    
+
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
 
@@ -891,11 +889,18 @@ def _fill_accessTool_popup(driver, ss_path, parent_id):
     information and returns to the parent window
     """
     driver.switch_to_window("id_accessTool")
-    driver.find_element_by_name("targetResourceNameURI").clear()
-    driver.find_element_by_name("targetResourceNameURI").send_keys("578DFDG8DF")
+    _fill_targetResource_form(driver, ss_path)
+
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
 
+
+def _fill_targetResource_form(driver, ss_path):
+    """
+    fills the target resource form with required, recommended and optional information
+    """
+    driver.find_element_by_name("targetResourceNameURI").clear()
+    driver.find_element_by_name("targetResourceNameURI").send_keys("578DFDG8DF")
 
 def _fill_validationTool_popup(driver, ss_path, parent_id):
     """
@@ -903,8 +908,8 @@ def _fill_validationTool_popup(driver, ss_path, parent_id):
     information and returns to the parent window
     """
     driver.switch_to_window("id_validationinfotype_model_set__dash__0__dash__validationTool")
-    driver.find_element_by_name("targetResourceNameURI").clear()
-    driver.find_element_by_name("targetResourceNameURI").send_keys("578DFDG8DF")
+    _fill_targetResource_form(driver, ss_path)
+
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
 
@@ -915,8 +920,8 @@ def _fill_resourceAssociatedWith_popup(driver, ss_path, parent_id):
     information and returns to the parent window
     """
     driver.switch_to_window("id_resourceAssociatedWith")
-    driver.find_element_by_name("targetResourceNameURI").clear()
-    driver.find_element_by_name("targetResourceNameURI").send_keys("578DFDG8DF")
+    _fill_targetResource_form(driver, ss_path)
+
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
 
@@ -927,47 +932,8 @@ def _fill_usageReport_popup(driver, ss_path, parent_id):
     information and returns to the parent window
     """
     driver.switch_to_window("id_actualuseinfotype_model_set__dash__0__dash__usageReport")
-    Select(driver.find_element_by_id("id_documentType")).select_by_visible_text("Article")
-    driver.find_element_by_name("key_title_0").clear()
-    driver.find_element_by_name("key_title_0").send_keys("en")
-    driver.find_element_by_name("val_title_0").clear()
-    driver.find_element_by_name("val_title_0").send_keys("Document title")
-    driver.find_element_by_name("author").clear()
-    driver.find_element_by_name("author").send_keys("John Smith")
-    driver.find_element_by_name("editor").clear()
-    driver.find_element_by_name("editor").send_keys("Smith Ed.")
-    driver.find_element_by_name("year").clear()
-    driver.find_element_by_name("year").send_keys("1981")
-    driver.find_element_by_name("publisher").clear()
-    driver.find_element_by_name("publisher").send_keys("John Smith & Co")
-    driver.find_element_by_name("bookTitle").clear()
-    driver.find_element_by_name("bookTitle").send_keys("Life of John Smith")
-    driver.find_element_by_name("journal").clear()
-    driver.find_element_by_name("journal").send_keys("Journal")
-    driver.find_element_by_name("volume").clear()
-    driver.find_element_by_name("volume").send_keys("7")
-    driver.find_element_by_name("series").clear()
-    driver.find_element_by_name("series").send_keys("9")
-    driver.find_element_by_name("pages").clear()
-    driver.find_element_by_name("pages").send_keys("289-290")
-    driver.find_element_by_name("edition").clear()
-    driver.find_element_by_name("edition").send_keys("1st")
-    driver.find_element_by_name("conference").clear()
-    driver.find_element_by_name("conference").send_keys("Main conference")
-    driver.find_element_by_name("doi").clear()
-    driver.find_element_by_name("doi").send_keys("123-35-1243")
-    driver.find_element_by_name("url").clear()
-    driver.find_element_by_name("url").send_keys("http://www.mainconference.org")
-    driver.find_element_by_name("ISSN").clear()
-    driver.find_element_by_name("ISSN").send_keys("12-435-464-467")
-    driver.find_element_by_name("ISBN").clear()
-    driver.find_element_by_name("ISBN").send_keys("12-435-464-467")
-    driver.find_element_by_name("keywords").clear()
-    driver.find_element_by_name("keywords").send_keys("John Smith, life")
-    driver.find_element_by_name("documentLanguageName").clear()
-    driver.find_element_by_name("documentLanguageName").send_keys("English")
-    driver.find_element_by_name("documentLanguageId").clear()
-    driver.find_element_by_name("documentLanguageId").send_keys("en")
+    _fill_documentInfo_form(driver, ss_path)
+
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
 
@@ -978,47 +944,8 @@ def _fill_validationReport_popup(driver, ss_path, parent_id):
     information and returns to the parent window
     """
     driver.switch_to_window("id_validationinfotype_model_set__dash__0__dash__validationReport")
-    Select(driver.find_element_by_id("id_documentType")).select_by_visible_text("Article")
-    driver.find_element_by_name("key_title_0").clear()
-    driver.find_element_by_name("key_title_0").send_keys("en")
-    driver.find_element_by_name("val_title_0").clear()
-    driver.find_element_by_name("val_title_0").send_keys("Document title")
-    driver.find_element_by_name("author").clear()
-    driver.find_element_by_name("author").send_keys("John Smith")
-    driver.find_element_by_name("editor").clear()
-    driver.find_element_by_name("editor").send_keys("Smith Ed.")
-    driver.find_element_by_name("year").clear()
-    driver.find_element_by_name("year").send_keys("1981")
-    driver.find_element_by_name("publisher").clear()
-    driver.find_element_by_name("publisher").send_keys("John Smith & Co")
-    driver.find_element_by_name("bookTitle").clear()
-    driver.find_element_by_name("bookTitle").send_keys("Life of John Smith")
-    driver.find_element_by_name("journal").clear()
-    driver.find_element_by_name("journal").send_keys("Journal")
-    driver.find_element_by_name("volume").clear()
-    driver.find_element_by_name("volume").send_keys("7")
-    driver.find_element_by_name("series").clear()
-    driver.find_element_by_name("series").send_keys("9")
-    driver.find_element_by_name("pages").clear()
-    driver.find_element_by_name("pages").send_keys("289-290")
-    driver.find_element_by_name("edition").clear()
-    driver.find_element_by_name("edition").send_keys("1st")
-    driver.find_element_by_name("conference").clear()
-    driver.find_element_by_name("conference").send_keys("Main conference")
-    driver.find_element_by_name("doi").clear()
-    driver.find_element_by_name("doi").send_keys("123-35-1243")
-    driver.find_element_by_name("url").clear()
-    driver.find_element_by_name("url").send_keys("http://www.mainconference.org")
-    driver.find_element_by_name("ISSN").clear()
-    driver.find_element_by_name("ISSN").send_keys("12-435-464-467")
-    driver.find_element_by_name("ISBN").clear()
-    driver.find_element_by_name("ISBN").send_keys("12-435-464-467")
-    driver.find_element_by_name("keywords").clear()
-    driver.find_element_by_name("keywords").send_keys("John Smith, life")
-    driver.find_element_by_name("documentLanguageName").clear()
-    driver.find_element_by_name("documentLanguageName").send_keys("English")
-    driver.find_element_by_name("documentLanguageId").clear()
-    driver.find_element_by_name("documentLanguageId").send_keys("en")
+    _fill_documentInfo_form(driver, ss_path)
+
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
 
@@ -1029,6 +956,16 @@ def _fill_documentation_popup(driver, ss_path, parent_id):
     information and returns to the parent window
     """
     driver.switch_to_window("id_form__dash__4__dash__0__dash__documentation")
+    _fill_documentInfo_form(driver, ss_path)
+
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_documentInfo_form(driver, ss_path):
+    """
+    fills the document info form with required, recommended and optional information
+    """
     Select(driver.find_element_by_id("id_documentType")).select_by_visible_text("Article")
     driver.find_element_by_name("key_title_0").clear()
     driver.find_element_by_name("key_title_0").send_keys("en")
@@ -1070,8 +1007,6 @@ def _fill_documentation_popup(driver, ss_path, parent_id):
     driver.find_element_by_name("documentLanguageName").send_keys("English")
     driver.find_element_by_name("documentLanguageId").clear()
     driver.find_element_by_name("documentLanguageId").send_keys("en")
-    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-    save_and_close(driver, parent_id)
 
 
 def _fill_derivedResource_popup(driver, ss_path, parent_id):
@@ -1080,8 +1015,8 @@ def _fill_derivedResource_popup(driver, ss_path, parent_id):
     information and returns to the parent window
     """
     driver.switch_to_window("id_actualuseinfotype_model_set__dash__0__dash__derivedResource")
-    driver.find_element_by_name("targetResourceNameURI").clear()
-    driver.find_element_by_name("targetResourceNameURI").send_keys("578DFDG8DF")
+    _fill_targetResource_form(driver, ss_path)
+
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
 
@@ -1092,8 +1027,8 @@ def _fill_relatedResource_popup(driver, ss_path, parent_id):
     information and returns to the parent window
     """
     driver.switch_to_window("id_relationinfotype_model_set__dash__0__dash__relatedResource")
-    driver.find_element_by_name("targetResourceNameURI").clear()
-    driver.find_element_by_name("targetResourceNameURI").send_keys("578DFDG8DF")
+    _fill_targetResource_form(driver, ss_path)
+
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
 
@@ -1104,30 +1039,8 @@ def _fill_project_popup(driver, ss_path, parent_id):
     information and returns to the parent window
     """
     driver.switch_to_window("id_actualuseinfotype_model_set__dash__0__dash__usageProject")
-    driver.find_element_by_name("key_projectName_0").clear()
-    driver.find_element_by_name("key_projectName_0").send_keys("en")
-    driver.find_element_by_name("val_projectName_0").clear()
-    driver.find_element_by_name("val_projectName_0").send_keys("Project")
-    driver.find_element_by_xpath("//div[@class='form-row projectShortName']/div/ul/li/a").click()
-    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-    driver.find_element_by_name("key_projectShortName_0").clear()
-    driver.find_element_by_name("key_projectShortName_0").send_keys("en")
-    driver.find_element_by_name("val_projectShortName_0").clear()
-    driver.find_element_by_name("val_projectShortName_0").send_keys("Short name")
-    driver.find_element_by_name("projectID").clear()
-    driver.find_element_by_name("projectID").send_keys("A-123")
-    driver.find_element_by_name("url").clear()
-    driver.find_element_by_name("url").send_keys("http://www.project.org")
-    Select(driver.find_element_by_name("fundingType_old")).select_by_visible_text("Other")
-    driver.find_element_by_xpath("//a[@class='selector-add']").click()
-    driver.find_element_by_name("funder").clear()
-    driver.find_element_by_name("funder").send_keys("Funder of the project")
-    driver.find_element_by_name("fundingCountry").clear()
-    driver.find_element_by_name("fundingCountry").send_keys("world")
-    driver.find_element_by_name("projectStartDate").clear()
-    driver.find_element_by_name("projectStartDate").send_keys("2012-09-27")
-    driver.find_element_by_name("projectEndDate").clear()
-    driver.find_element_by_name("projectEndDate").send_keys("2012-09-27")
+    _fill_projectInfo_form(driver, ss_path)
+
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
 
@@ -1138,6 +1051,16 @@ def _fill_fundingProject_popup(driver, ss_path, parent_id):
     information and returns to the parent window
     """
     driver.switch_to_window("id_form__dash__5__dash__0__dash__fundingProject")
+    _fill_projectInfo_form(driver, ss_path)
+
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_projectInfo_form(driver, ss_path):
+    """
+    fills the project info form with required, recommended and optional information
+    """
     driver.find_element_by_name("key_projectName_0").clear()
     driver.find_element_by_name("key_projectName_0").send_keys("en")
     driver.find_element_by_name("val_projectName_0").clear()
@@ -1162,8 +1085,6 @@ def _fill_fundingProject_popup(driver, ss_path, parent_id):
     driver.find_element_by_name("projectStartDate").send_keys("2012-09-27")
     driver.find_element_by_name("projectEndDate").clear()
     driver.find_element_by_name("projectEndDate").send_keys("2012-09-27")
-    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-    save_and_close(driver, parent_id)
 
 
 def _fill_metadataCreator_popup(driver, ss_path, parent_id):
@@ -1172,42 +1093,7 @@ def _fill_metadataCreator_popup(driver, ss_path, parent_id):
     information and returns to the parent window
     """
     driver.switch_to_window("id_form__dash__2__dash__0__dash__metadataCreator")
-    current_id = driver.current_window_handle
-    driver.find_element_by_name("key_surname_0").clear()
-    driver.find_element_by_name("key_surname_0").send_keys("en")
-    driver.find_element_by_name("val_surname_0").clear()
-    driver.find_element_by_name("val_surname_0").send_keys("Smith")
-    driver.find_element_by_xpath("//div[@class='form-row givenName']/div/ul/li/a").click()
-    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-    driver.find_element_by_name("key_givenName_0").clear()
-    driver.find_element_by_name("key_givenName_0").send_keys("en")
-    driver.find_element_by_name("val_givenName_0").clear()
-    driver.find_element_by_name("val_givenName_0").send_keys("John")
-    Select(driver.find_element_by_id("id_sex")).select_by_visible_text("Male")
-
-    driver.find_element_by_name("form-0-email").clear()
-    driver.find_element_by_name("form-0-email").send_keys("john.smith@institution.org")
-    driver.find_element_by_name("form-0-url").clear()
-    driver.find_element_by_name("form-0-url").send_keys("http://www.institution.org")
-    driver.find_element_by_name("form-0-address").clear()
-    driver.find_element_by_name("form-0-address").send_keys("1st main street")
-    driver.find_element_by_name("form-0-zipCode").clear()
-    driver.find_element_by_name("form-0-zipCode").send_keys("95000")
-    driver.find_element_by_name("form-0-city").clear()
-    driver.find_element_by_name("form-0-city").send_keys("somewhere")
-    driver.find_element_by_name("form-0-region").clear()
-    driver.find_element_by_name("form-0-region").send_keys("far away")
-    driver.find_element_by_name("form-0-country").clear()
-    driver.find_element_by_name("form-0-country").send_keys("world")
-    driver.find_element_by_name("form-0-telephoneNumber").clear()
-    driver.find_element_by_name("form-0-telephoneNumber").send_keys("1234567890")
-    driver.find_element_by_name("form-0-faxNumber").clear()
-    driver.find_element_by_name("form-0-faxNumber").send_keys("1234567890")
-    driver.find_element_by_name("position").clear()
-    driver.find_element_by_name("position").send_keys("Organization")
-    # affiliation popup
-    driver.find_element_by_xpath("//a[@id='add_id_affiliation']/img").click()
-    _fill_affiliation_popup(driver, ss_path, current_id)
+    _fill_personInfo_form(driver, ss_path, "form-0-")
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
@@ -1219,42 +1105,7 @@ def _fill_resourceCreator_popup(driver, ss_path, parent_id):
     information and returns to the parent window
     """
     driver.switch_to_window("id_form__dash__5__dash__0__dash__resourceCreator")
-    current_id = driver.current_window_handle
-    driver.find_element_by_name("key_surname_0").clear()
-    driver.find_element_by_name("key_surname_0").send_keys("en")
-    driver.find_element_by_name("val_surname_0").clear()
-    driver.find_element_by_name("val_surname_0").send_keys("Smith")
-    driver.find_element_by_xpath("//div[@class='form-row givenName']/div/ul/li/a").click()
-    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-    driver.find_element_by_name("key_givenName_0").clear()
-    driver.find_element_by_name("key_givenName_0").send_keys("en")
-    driver.find_element_by_name("val_givenName_0").clear()
-    driver.find_element_by_name("val_givenName_0").send_keys("John")
-    Select(driver.find_element_by_id("id_sex")).select_by_visible_text("Male")
-
-    driver.find_element_by_name("form-0-email").clear()
-    driver.find_element_by_name("form-0-email").send_keys("john.smith@institution.org")
-    driver.find_element_by_name("form-0-url").clear()
-    driver.find_element_by_name("form-0-url").send_keys("http://www.institution.org")
-    driver.find_element_by_name("form-0-address").clear()
-    driver.find_element_by_name("form-0-address").send_keys("1st main street")
-    driver.find_element_by_name("form-0-zipCode").clear()
-    driver.find_element_by_name("form-0-zipCode").send_keys("95000")
-    driver.find_element_by_name("form-0-city").clear()
-    driver.find_element_by_name("form-0-city").send_keys("somewhere")
-    driver.find_element_by_name("form-0-region").clear()
-    driver.find_element_by_name("form-0-region").send_keys("far away")
-    driver.find_element_by_name("form-0-country").clear()
-    driver.find_element_by_name("form-0-country").send_keys("world")
-    driver.find_element_by_name("form-0-telephoneNumber").clear()
-    driver.find_element_by_name("form-0-telephoneNumber").send_keys("1234567890")
-    driver.find_element_by_name("form-0-faxNumber").clear()
-    driver.find_element_by_name("form-0-faxNumber").send_keys("1234567890")
-    driver.find_element_by_name("position").clear()
-    driver.find_element_by_name("position").send_keys("Organization")
-    # affiliation popup
-    driver.find_element_by_xpath("//a[@id='add_id_affiliation']/img").click()
-    _fill_affiliation_popup(driver, ss_path, current_id)
+    _fill_personInfo_form(driver, ss_path, "form-0-")
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
@@ -1266,42 +1117,8 @@ def _fill_iprHolder_popup(driver, ss_path, parent_id):
     information and returns to the parent window
     """
     driver.switch_to_window("id_iprHolder")
-    # remember current window id
-    current_id = driver.current_window_handle
-    driver.find_element_by_name("key_surname_0").clear()
-    driver.find_element_by_name("key_surname_0").send_keys("en")
-    driver.find_element_by_name("val_surname_0").clear()
-    driver.find_element_by_name("val_surname_0").send_keys("Smith")
-    driver.find_element_by_xpath("//div[@class='form-row givenName']/div/ul/li/a").click()
-    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-    driver.find_element_by_name("key_givenName_0").clear()
-    driver.find_element_by_name("key_givenName_0").send_keys("en")
-    driver.find_element_by_name("val_givenName_0").clear()
-    driver.find_element_by_name("val_givenName_0").send_keys("John")
-    Select(driver.find_element_by_id("id_sex")).select_by_visible_text("Male")
-    driver.find_element_by_name("form-0-email").clear()
-    driver.find_element_by_name("form-0-email").send_keys("john.smith@institution.org")
-    driver.find_element_by_name("form-0-url").clear()
-    driver.find_element_by_name("form-0-url").send_keys("http://www.institution.org")
-    driver.find_element_by_name("form-0-address").clear()
-    driver.find_element_by_name("form-0-address").send_keys("1st main street")
-    driver.find_element_by_name("form-0-zipCode").clear()
-    driver.find_element_by_name("form-0-zipCode").send_keys("95000")
-    driver.find_element_by_name("form-0-city").clear()
-    driver.find_element_by_name("form-0-city").send_keys("somewhere")
-    driver.find_element_by_name("form-0-region").clear()
-    driver.find_element_by_name("form-0-region").send_keys("far away")
-    driver.find_element_by_name("form-0-country").clear()
-    driver.find_element_by_name("form-0-country").send_keys("world")
-    driver.find_element_by_name("form-0-telephoneNumber").clear()
-    driver.find_element_by_name("form-0-telephoneNumber").send_keys("1234567890")
-    driver.find_element_by_name("form-0-faxNumber").clear()
-    driver.find_element_by_name("form-0-faxNumber").send_keys("1234567890")
-    driver.find_element_by_name("position").clear()
-    driver.find_element_by_name("position").send_keys("Professor")
-    # affiliation popup
-    driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-    _fill_affiliation_popup(driver, ss_path, current_id)
+    _fill_personInfo_form(driver, ss_path, "form-0-")
+
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
 
@@ -1312,42 +1129,8 @@ def _fill_licensor_popup(driver, ss_path, parent_id):
     information and returns to the parent window
     """
     driver.switch_to_window("id_licenceinfotype_model_set__dash__0__dash__licensor")
-    # remember current window id
-    current_id = driver.current_window_handle
-    driver.find_element_by_name("key_surname_0").clear()
-    driver.find_element_by_name("key_surname_0").send_keys("en")
-    driver.find_element_by_name("val_surname_0").clear()
-    driver.find_element_by_name("val_surname_0").send_keys("Smith")
-    driver.find_element_by_xpath("//div[@class='form-row givenName']/div/ul/li/a").click()
-    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-    driver.find_element_by_name("key_givenName_0").clear()
-    driver.find_element_by_name("key_givenName_0").send_keys("en")
-    driver.find_element_by_name("val_givenName_0").clear()
-    driver.find_element_by_name("val_givenName_0").send_keys("John")
-    Select(driver.find_element_by_id("id_sex")).select_by_visible_text("Male")
-    driver.find_element_by_name("form-0-email").clear()
-    driver.find_element_by_name("form-0-email").send_keys("john.smith@institution.org")
-    driver.find_element_by_name("form-0-url").clear()
-    driver.find_element_by_name("form-0-url").send_keys("http://www.institution.org")
-    driver.find_element_by_name("form-0-address").clear()
-    driver.find_element_by_name("form-0-address").send_keys("1st main street")
-    driver.find_element_by_name("form-0-zipCode").clear()
-    driver.find_element_by_name("form-0-zipCode").send_keys("95000")
-    driver.find_element_by_name("form-0-city").clear()
-    driver.find_element_by_name("form-0-city").send_keys("somewhere")
-    driver.find_element_by_name("form-0-region").clear()
-    driver.find_element_by_name("form-0-region").send_keys("far away")
-    driver.find_element_by_name("form-0-country").clear()
-    driver.find_element_by_name("form-0-country").send_keys("world")
-    driver.find_element_by_name("form-0-telephoneNumber").clear()
-    driver.find_element_by_name("form-0-telephoneNumber").send_keys("1234567890")
-    driver.find_element_by_name("form-0-faxNumber").clear()
-    driver.find_element_by_name("form-0-faxNumber").send_keys("1234567890")
-    driver.find_element_by_name("position").clear()
-    driver.find_element_by_name("position").send_keys("Professor")
-    # affiliation popup
-    driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-    _fill_affiliation_popup(driver, ss_path, current_id)
+    _fill_personInfo_form(driver, ss_path, "form-0-")
+
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
 
@@ -1358,42 +1141,8 @@ def _fill_validator_popup(driver, ss_path, parent_id):
     information and returns to the parent window
     """
     driver.switch_to_window("id_validationinfotype_model_set__dash__0__dash__validator")
-    # remember current window id
-    current_id = driver.current_window_handle
-    driver.find_element_by_name("key_surname_0").clear()
-    driver.find_element_by_name("key_surname_0").send_keys("en")
-    driver.find_element_by_name("val_surname_0").clear()
-    driver.find_element_by_name("val_surname_0").send_keys("Smith")
-    driver.find_element_by_xpath("//div[@class='form-row givenName']/div/ul/li/a").click()
-    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-    driver.find_element_by_name("key_givenName_0").clear()
-    driver.find_element_by_name("key_givenName_0").send_keys("en")
-    driver.find_element_by_name("val_givenName_0").clear()
-    driver.find_element_by_name("val_givenName_0").send_keys("John")
-    Select(driver.find_element_by_id("id_sex")).select_by_visible_text("Male")
-    driver.find_element_by_name("form-0-email").clear()
-    driver.find_element_by_name("form-0-email").send_keys("john.smith@institution.org")
-    driver.find_element_by_name("form-0-url").clear()
-    driver.find_element_by_name("form-0-url").send_keys("http://www.institution.org")
-    driver.find_element_by_name("form-0-address").clear()
-    driver.find_element_by_name("form-0-address").send_keys("1st main street")
-    driver.find_element_by_name("form-0-zipCode").clear()
-    driver.find_element_by_name("form-0-zipCode").send_keys("95000")
-    driver.find_element_by_name("form-0-city").clear()
-    driver.find_element_by_name("form-0-city").send_keys("somewhere")
-    driver.find_element_by_name("form-0-region").clear()
-    driver.find_element_by_name("form-0-region").send_keys("far away")
-    driver.find_element_by_name("form-0-country").clear()
-    driver.find_element_by_name("form-0-country").send_keys("world")
-    driver.find_element_by_name("form-0-telephoneNumber").clear()
-    driver.find_element_by_name("form-0-telephoneNumber").send_keys("1234567890")
-    driver.find_element_by_name("form-0-faxNumber").clear()
-    driver.find_element_by_name("form-0-faxNumber").send_keys("1234567890")
-    driver.find_element_by_name("position").clear()
-    driver.find_element_by_name("position").send_keys("Professor")
-    # affiliation popup
-    driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-    _fill_affiliation_popup(driver, ss_path, current_id)
+    _fill_personInfo_form(driver, ss_path, "form-0-")
+
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
 
@@ -1404,42 +1153,8 @@ def _fill_distributionRightsHolder_popup(driver, ss_path, parent_id):
     information and returns to the parent window
     """
     driver.switch_to_window("id_licenceinfotype_model_set__dash__0__dash__distributionRightsHolder")
-    # remember current window id
-    current_id = driver.current_window_handle
-    driver.find_element_by_name("key_surname_0").clear()
-    driver.find_element_by_name("key_surname_0").send_keys("en")
-    driver.find_element_by_name("val_surname_0").clear()
-    driver.find_element_by_name("val_surname_0").send_keys("Smith")
-    driver.find_element_by_xpath("//div[@class='form-row givenName']/div/ul/li/a").click()
-    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-    driver.find_element_by_name("key_givenName_0").clear()
-    driver.find_element_by_name("key_givenName_0").send_keys("en")
-    driver.find_element_by_name("val_givenName_0").clear()
-    driver.find_element_by_name("val_givenName_0").send_keys("John")
-    Select(driver.find_element_by_id("id_sex")).select_by_visible_text("Male")
-    driver.find_element_by_name("form-0-email").clear()
-    driver.find_element_by_name("form-0-email").send_keys("john.smith@institution.org")
-    driver.find_element_by_name("form-0-url").clear()
-    driver.find_element_by_name("form-0-url").send_keys("http://www.institution.org")
-    driver.find_element_by_name("form-0-address").clear()
-    driver.find_element_by_name("form-0-address").send_keys("1st main street")
-    driver.find_element_by_name("form-0-zipCode").clear()
-    driver.find_element_by_name("form-0-zipCode").send_keys("95000")
-    driver.find_element_by_name("form-0-city").clear()
-    driver.find_element_by_name("form-0-city").send_keys("somewhere")
-    driver.find_element_by_name("form-0-region").clear()
-    driver.find_element_by_name("form-0-region").send_keys("far away")
-    driver.find_element_by_name("form-0-country").clear()
-    driver.find_element_by_name("form-0-country").send_keys("world")
-    driver.find_element_by_name("form-0-telephoneNumber").clear()
-    driver.find_element_by_name("form-0-telephoneNumber").send_keys("1234567890")
-    driver.find_element_by_name("form-0-faxNumber").clear()
-    driver.find_element_by_name("form-0-faxNumber").send_keys("1234567890")
-    driver.find_element_by_name("position").clear()
-    driver.find_element_by_name("position").send_keys("Professor")
-    # affiliation popup
-    driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-    _fill_affiliation_popup(driver, ss_path, current_id)
+    _fill_personInfo_form(driver, ss_path, "form-0-")
+
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
 
@@ -1454,11 +1169,25 @@ def _fill_membership_popup(driver, ss_path, parent_id):
       .select_by_visible_text("Yes")
     Select(driver.find_element_by_name(
       "membershipInstitution_old")).select_by_visible_text("LDC")
-    driver.find_element_by_xpath(
-      "//div[@class='form-row membershipInstitution']/div/div/ul/li/a") \
+    driver.find_element_by_xpath("//div[@class='form-row membershipInstitution']/div/div/ul/li/a") \
       .click()
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
+
+
+def _fill_corpusTextInfo_popup(driver, ss_path, parent_id):
+    """
+    fills the corpus text info popup with all required, recommended and optional
+    information and returns to the parent window
+    """
+    driver.switch_to_window("id_corpusTextInfo__dash__0")
+    # required fields
+    # corpus text info / linguality
+    _fill_linguality_form(driver, ss_path, "form-0-")
+    # corpus text info / language
+    _fill_language_form(driver, ss_path, "languageinfotype_model_set-0-")
+    # corpus text info / size
+    _fill_textSize_form(driver, ss_path, "sizeinfotype_model_set-0-")
 
 
 def _fill_linguality_form(driver, ss_path, id_infix):
@@ -1475,7 +1204,7 @@ def _fill_linguality_form(driver, ss_path, id_infix):
 
 def _fill_language_form(driver, ss_path, id_infix):
     """
-    fills the language with required, recommended and optional information
+    fills the language form with required, recommended and optional information
     """
     # remember current window id
     current_id = driver.current_window_handle
@@ -1492,19 +1221,27 @@ def _fill_language_form(driver, ss_path, id_infix):
     driver.find_element_by_xpath("//a[@id='add_id_languageinfotype_model_set-0-languageVarietyInfo']/img").click()
     _fill_languageVariety_popup(driver, ss_path, current_id)
 
+
 def _fill_sizePerLanguage_popup(driver, ss_path, parent_id):
     """
     fills the size per language popup with all required, recommended and optional
     information and returns to the parent window
     """
     driver.switch_to_window("id_languageinfotype_model_set__dash__0__dash__sizePerLanguage")
-    driver.find_element_by_id("id_size").clear()
-    driver.find_element_by_id("id_size").send_keys("12")
-    Select(driver.find_element_by_xpath("//div[@class='form-row sizeUnit']/div/select")) \
-      .select_by_visible_text("Classes")
+    _fill_size_form(driver, ss_path, "")
+
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
 
+
+def _fill_size_form(driver, ss_path, id_infix):
+    """
+    fills the size form with required, recommended and optional information
+    """
+    driver.find_element_by_id("id_{}size".format(id_infix)).clear()
+    driver.find_element_by_id("id_{}size".format(id_infix)).send_keys("12")
+    Select(driver.find_element_by_xpath("//div[@class='form-row sizeUnit']/div/select")) \
+      .select_by_visible_text("Gb")
 
 def _fill_languageVariety_popup(driver, ss_path, parent_id):
     """
@@ -1515,10 +1252,8 @@ def _fill_languageVariety_popup(driver, ss_path, parent_id):
     Select(driver.find_element_by_id("id_languageVarietyType")).select_by_visible_text("Jargon")
     driver.find_element_by_id("id_languageVarietyName").clear()
     driver.find_element_by_id("id_languageVarietyName").send_keys("Jargon name")
-    driver.find_element_by_id("id_form-0-size").clear()
-    driver.find_element_by_id("id_form-0-size").send_keys("10")
-    Select(driver.find_element_by_xpath("//div[@class='form-row sizeUnit']/div/select")) \
-      .select_by_visible_text("Classes")
+    _fill_size_form(driver, ss_path, "form-0-")
+
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
 
@@ -1548,10 +1283,8 @@ def _fill_sizePerValidation_popup(driver, ss_path, parent_id):
     information and returns to the parent window
     """
     driver.switch_to_window("id_validationinfotype_model_set__dash__0__dash__sizePerValidation")
-    driver.find_element_by_id("id_size").clear()
-    driver.find_element_by_id("id_size").send_keys("12")
-    Select(driver.find_element_by_xpath("//div[@class='form-row sizeUnit']/div/select")) \
-      .select_by_visible_text("Classes")
+    _fill_size_form(driver, ss_path, "")
+
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
 
