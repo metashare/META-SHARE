@@ -107,11 +107,10 @@
                     
                 {% endif %}
             {% endfor %}
-        </div>
-        {% if url.0 %}<a href="{{url.0}}" target="_blank" title="Click here to view the resource's original metadata record">{% endif %}
-			<h2>{{ resourceName }}{% get_icon resourceType %}</h2>
-	 	{% if url.0 %}</a>{% endif %}
+        </div>        
 		
+		<h2>{{ resourceName }}{% get_icon resourceType %}</h2>
+	 			
 		{% ifnotequal other_res_names|length 0 %}
 			<div class='more'>View resource name in all available languages</div>
 			<div class='otherlang'>
@@ -124,6 +123,16 @@
 				<div style="clear:both"></div>
 			{% endif %}
 			
+			{% if url|length > 1 %}
+		 		<h3 style="font-size:14px;">
+		 			<label>
+			 			{% for address in url %}
+					 		{{address|urlizetrunc:17}}{% if not forloop.last %},{% endif %}
+					 	{% endfor %}
+			 		</label>
+			 	</h3>
+		 	{% endif %}
+			
 			{% if not 'NOT_DEFINED' in metaShareId %}<h4 class="identifier">{{ metaShareId }}</h4>{% endif %}
 			{% if identifier %}
 				<div style="display:block;">
@@ -133,7 +142,6 @@
 		 		{% endfor %}
 		 		</div>
 	 		{% endif %}
-
 	 		
 		<h4 style="text-align:justify" class="readmore desc">{{ description }}</h4>
 		
@@ -174,13 +182,13 @@
 		<div class="fields">
 				<ul>
 					{% ifequal resourceType "toolService" %}
-						<li><a href="#1">toolService{% get_icon "toolService" %}</a></li>
+						<li class="tab1"><a href="#tab1">toolService{% get_icon "toolService" %}</a></li>
 					{% else %}
 						{% if resourceType == "lexicalConceptualResource" or resourceType == "languageDescription" %}
-							<li><a href="#0">{% get_icon resourceType %}</a></li>
+							<li class="tab0"><a href="#tab0">{% get_icon resourceType %}</a></li>
 						{% endif %}
 						{% for type in mediaTypes %}
-							<li><a href="#{{forloop.counter}}">{% if mediaTypes|length < 4 %}{{type}}{% endif %}{% get_icon type %}</a></li>
+							<li class="tab{{forloop.counter}}"> <a href="#tab{{forloop.counter}}">{% if mediaTypes|length < 4 %}{{type}}{% endif %}{% get_icon type %}</a></li>
 						{% endfor %}
 					{% endifequal %}
 				</ul>
@@ -188,21 +196,21 @@
 		<div class="white_box middle_box">
 		{% ifequal resourceType "toolService" %}
 			<div id="tabs_content_container">
-				<div id="1" class="tab_content">
+				<div id="tab1" class="tab_content">
 					{% include "repository/resource_view/media_info.html" with type='toolService' %}
 				</div>
 			</div>
 		{% else %}
 			<div id="tabs_content_container">
 			{% if resourceType == "lexicalConceptualResource" or resourceType == "languageDescription" %}
-				<div id="0" class="tab_content">
+				<div id="tab0" class="tab_content">
 					{% include "repository/resource_view/resource_type.html" with type=resourceType %}
 				</div>
 			{% endif %}
 			{% for type in mediaTypes %}				
-					<div id="{{forloop.counter}}" class="tab_content">
-						{% include "repository/resource_view/media_info.html" with type=type %}
-					</div>
+				<div id="tab{{forloop.counter}}" class="tab_content">
+					{% include "repository/resource_view/media_info.html" with type=type %}
+				</div>
 			{% endfor %}
 			</div>
 		{% endifequal %}
