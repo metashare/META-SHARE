@@ -412,19 +412,8 @@ class BasicEditorTests(SeleniumTestCase):
         self.assertEqual("Logout", 
           driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Manage Resources -> Manage all resources
-        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Add resource
-        driver.find_element_by_link_text("Add Resource").click()
-        #Select resource type
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
-        driver.find_element_by_id("id_corpusTextInfo").click()
-        driver.find_element_by_id("id_submit").click()
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # new resource with specific resource type and media types
+        _add_new_resource(driver, ss_path, "Corpus", ["id_corpusTextInfo"])
         self.assertEqual("Add Resource", 
           driver.find_element_by_css_selector("#content > h1").text)
         # remember root window id
@@ -563,6 +552,26 @@ class BasicEditorTests(SeleniumTestCase):
         _delete(driver)
         self.assertEqual("Successfully deleted 1 resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
+
+
+def _add_new_resource(driver, ss_path, resource_type, media_types):
+    """
+    Adds a new resource with specific resource type and media types
+    """
+    # Manage Resources -> Manage all resources
+    mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    # Add resource
+    driver.find_element_by_link_text("Add Resource").click()
+    #Select resource type
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text(resource_type)
+    for media_type in media_types:
+        driver.find_element_by_id(media_type).click()
+    driver.find_element_by_id("id_submit").click()
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
 
 
 def _fill_distribution(driver, ss_path, parent_id):
