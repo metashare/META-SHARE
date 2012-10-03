@@ -46,6 +46,7 @@
 			<label>
 				<strong>Metadata Language:</strong>
 				{{ metadata_dict.Metadata.Metadata_language_name }}
+				{% if metadata_dict.Metadata.Metadata_language_id %}({{ metadata_dict.Metadata.Metadata_language_id }}){% endif %}
 			</label>
 		</div>
 	{% endif %}

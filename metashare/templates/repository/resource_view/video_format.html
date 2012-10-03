@@ -2,6 +2,7 @@
 {% load replace %}
 
 {% spaceless %}
+
 <label class='title'>{{ video.Mime_type }}
 {% if video.Size_per_video_format %}
 	{% include "repository/resource_view/size.html" with size=video.Size_per_video_format type="sub" %} 
@@ -19,7 +20,7 @@
 	{% if "Size_per" not in key and "Compression" not in key and "Resolution" not in key and "Mime_type" not in key %}
 		 <div class="dataline indented">
 			<label>
-				<strong>{{ key|rep }}:</strong> {{ value }}
+				<strong>{{ key|rep }}: </strong>{{ value }}
 			</label>
 		</div>
 	{% endif %}
@@ -33,7 +34,7 @@
 			{% for key1, value1 in value.items %}			
 				<div class="dataline indented">
 					<label>
-						<strong>{{ key1|rep }}:</strong> {{ value1 }}
+						<strong>{{ key1|rep }}: </strong>{{ value1 }}
 					</label>
 				</div>
 			{% endfor %}
