@@ -3,7 +3,7 @@
 <label class='component'>Validation</label>
 
 {% for dict in validation_dicts %}
-	<label class='title'>{% ifequal dict.Validation.Validated "True" %}Validated{% else %}Not Validated{% endifequal %}</label>
+	<label class='title'>{% ifequal dict.Validation.Validated "True" %}Validated{% else %}Not Validated{% endifequal %} {% if dict.Validation.Size_per_validation %}{% include "repository/resource_view/size.html" with size=dict.Validation.Size_per_validation type="sub" %}{% endif %}</label> 
 		
 	{% if dict.Validation.Validation_type %}
 	     <div class="dataline indented">
@@ -44,15 +44,7 @@
 			</label>
 		</div>	
 	{% endif %}
-	
-	{% if dict.Validation.Size_per_validation %}
-	     <div class="dataline indented">
-			<label>
-				<strong>Size per Validation:</strong> {{ dict.Validation.Size_per_validation }}
-			</label>
-		</div>	
-	{% endif %}
-	
+
 	{% if dict.Validation.Validation_report %}
 		{% if dict.Validation.Validation_report.Validation_report.Title %}
 			{% include "repository/resource_view/documentation.html" with documentation=dict.Validation.Validation_report.Validation_report type="Validation Report" level="sub" %}
@@ -65,9 +57,18 @@
 		{% endif %}					
 	{% endif %}
 	
-	{% if dict.Validation.Validation_tool %}
-			{% include "repository/resource_view/target_resource.html" with target=dict.Validation.Validation_tool title="Validation Tool" level="sub" %}
-	{% endif %}
+	 {% if "Validation_tool" in  dict.Validation %}	 	
+	 	<div class="dataline indented">
+	 		<label><strong>Validation Tools:</strong></label>
+	 		<ul>					 	
+				 {% for key, value in dict.Validation.items %}
+				 	{% if "Validation_tool" in key %}
+				 		{% include "repository/resource_view/target_resource.html" with target=value title="Validation Tool" level="list" %}
+				 	{% endif %}
+				 {% endfor %}
+			 </ul>
+		</div>
+	{% endif %}			
 	
 	<div class="dataline">
 		{% for key, value in dict.items %}
@@ -88,6 +89,5 @@
 	{% if not forloop.last %}
 	{% endif %}
 {% endfor %}
-
 
 {% endspaceless %}

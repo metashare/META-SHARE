@@ -285,7 +285,6 @@ def update_usage_stats(lrid, element_tree):
     # Otherwise, we return a tuple containg (key, value), i.e., (tag, text).
     else:
         return ((element_tree.tag, element_tree.text),)
-  
     
 def getCountryActions(action):
     result = []
@@ -341,5 +340,4 @@ def _get_ipaddress(request):
         else:
             return ip_address
     return ''
-
 

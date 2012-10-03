@@ -1,45 +1,50 @@
 {% spaceless %}
+
 <div class="dataline">	
 	
-	<div class="dataline indented">
+	{% if level == "sub" %}
+		<div class='dataline indented'>
+			<label>
+				<strong><i>{{ project.Project_name }} </i></strong>{% if project.Project_short_name %}({{ project.Project_short_name }}{% if project.Project_id %} - {{ project.Project_id }}{% endif %}){% endif %}
+			</label>
+		</div>
+	{% else %}
+	<div class="subtitle">
 		<label>
-			<strong><i>
-				{% if project.Url %}
-					<a href="{{project.Url}}" target='_blank'>
-				{% endif %}
-				
-				{{project.Project_name}}
-				{% if project.Project_short_name %} - {{ project.Project_short_name }} {% endif %}
-				{% if project.Project_id %} - {{ project.Project_id }} {% endif %}
-				
-				{% if project.Url %}
-					</a>
-				{% endif %}</i>
-			</strong>
-		</label>
-	</div>
-		
-	<div class="dataline indented">
-		<label>
-			<strong>Funding Type:</strong> {{ project.Funding_type }}
-		</label>
-	</div>
-	
-		
-	<div class="dataline indented">
-		<label>
-			{% if project.Funder %}
-			<strong>Funder:</strong>	{{ project.Funder }}
-			{% endif %}
+			<strong>{{ project.Project_name }} </strong>{% if project.Project_short_name %}({{ project.Project_short_name }}{% if project.Project_id %} - {{ project.Project_id }}{% endif %}){% endif %}
 		</label>
 	</div>
 	
 	
+	{% endif %}
 	
+	
+	{% if project.Url %}
+		<div class='dataline indented'>
+			<label>
+				<strong>URL{% if ", " in project.Url %}s{% endif %}: </strong>{{ project.Url|urlizetrunc:17 }} 
+			</label>
+		</div>
+	{% endif %}
+	
+	<div class="dataline indented">
+		<label>
+			<strong>Funding Type{% if ", " in project.Funding_type%}s{% endif %}: </strong>{{ project.Funding_type }}
+		</label>
+	</div>
+
+	{% if project.Funder %}
+	<div class="dataline indented">
+		<label>
+			<strong>Funder{% if ", " in project.Funder%}s{% endif %}: </strong>{{ project.Funder }}
+		</label>
+	</div>
+	{% endif %}
+
 	<div class="dataline indented">
 		<label>
 			{% if project.Funding_country %}
-			<strong>Funding Countries:</strong>	{{ project.Funding_country }}
+			<strong>Funding {% if "," in project.Funding_country%}Countries{% else %}Country{% endif %}: </strong>{{ project.Funding_country }}
 			{% endif %}
 		</label>
 	</div>
@@ -50,12 +55,11 @@
 				<strong>Project duration:</strong> {{ project.Project_start_date|date:"SHORT_DATE_FORMAT" }} - {{ project.Project_end_date|date:"SHORT_DATE_FORMAT" }}
 			</label>
 		</div>
-		
 	{% else %}
 		{% if project.Project_start_date %}
 			<div class="dataline indented">
 				<label>					
-					<strong>Project started:</strong> {{ project.Project_start_date|date:"SHORT_DATE_FORMAT" }}					
+					<strong>Project started: </strong>{{ project.Project_start_date|date:"SHORT_DATE_FORMAT" }}					
 				</label>
 			</div>
 		{% endif %}
@@ -63,13 +67,11 @@
 		{% if project.Project_end_date %}
 			<div class="dataline indented">
 				<label>				
-					<strong>Project ended:</strong> {{ project.Project_end_date|date:"SHORT_DATE_FORMAT" }}
+					<strong>Project ended: </strong>{{ project.Project_end_date|date:"SHORT_DATE_FORMAT" }}
 				</label>
 			</div>
 		{% endif %}
-	
 	{% endif %}		
-	
 </div>
 
 {% endspaceless %}

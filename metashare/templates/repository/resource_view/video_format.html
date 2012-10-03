@@ -2,9 +2,21 @@
 {% load replace %}
 
 {% spaceless %}
-<label class='title'>{{ video.Mime_type }} {% if video_format.Size_per_video_format %}{% include "repository/resource_view/size.html" with size=video_format.Size_per_video_format type="sub" %} {% else %} {% if video_format.Size_per_image_format %}{% include "repository/resource_view/size.html" with size=video_format.Size_per_image_format type="sub" %}{% endif %} {% endif %}</label>
+<label class='title'>{{ video.Mime_type }}
+ {% if video.Size_per_video_format %}
+	 {% include "repository/resource_view/size.html" with size=video.Size_per_video_format type="sub" %} 
+ {% else %}
+	 {% if video.Size_per_image_format %}
+	 	{% include "repository/resource_view/size.html" with size=video.Size_per_image_format type="sub" %}
+	 {% else %} 
+		 {% if video.Size_per_text_numerical_format %} 
+	 	{% include "repository/resource_view/size.html" with size=video.Size_per_text_numerical_format type="sub" %} 
+		 {% endif %}
+	 {% endif %} 
+ {% endif %}
+ </label>
 {% for key, value in video.items %}
-	{% if key != "Size_per_video_format" and key != "Size_per_image_format" and key != "Compression" and key != "Resolution" %}
+	{% if "Size_per" not in key and "Compression" not in key and "Resolution" not in key and "Mime_type" not in key %}
 		 <div class="dataline indented">
 			<label>
 				<strong>{{ key|rep }}:</strong> {{ value }}
@@ -13,16 +25,36 @@
 	{% endif %}
 {% endfor %}
 	
-{% for key, value in video.items %}
-	{% if key == "Compression" or key == "Resolution" %}
-		<label class='subtitle'>{{key}}</label>
-		{% for key1, value1 in value.items %}
-			<div class="dataline indented">
-				<label>
-					<strong>{{ key1|rep }}:</strong> {{ value1 }}
-				</label>
-			</div>
-		{% endfor %}
-	{% endif %}
-{% endfor %}
+{% if "Resolution" in video %}
+	<label class='subtitle'>Resolution</label>
+	{% for key, value in video.items %}
+		{% if "Resolution" in key %}
+			<div class="separation"><hr/></div>
+			{% for key1, value1 in value.items %}			
+				<div class="dataline indented">
+					<label>
+						<strong>{{ key1|rep }}:</strong> {{ value1 }}
+					</label>
+				</div>
+			{% endfor %}
+		{% endif %}
+	{% endfor %}
+{% endif %}
+
+{% if "Compression" in video %}
+	<label class='subtitle'>Compression</label>
+	{% for key, value in video.items %}
+		{% if "Compression" in key %}
+			<div class="separation"><hr/></div>
+			{% for key1, value1 in value.items %}			
+				<div class="dataline indented">
+					<label>
+						<strong>{{ key1|rep }}:</strong> {{ value1 }}
+					</label>
+				</div>
+			{% endfor %}
+		{% endif %}
+	{% endfor %}
+{% endif %}
+
 {% endspaceless %}

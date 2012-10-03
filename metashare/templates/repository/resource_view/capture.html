@@ -1,6 +1,7 @@
 {% load replace %}
 
 {% spaceless %}
+
 <label class='title'>Capture</label>
 {% for key, value in capture.items %}
 	{% if key != "Person_source_set" %}
@@ -34,4 +35,5 @@
 		{% endfor %}
 	{% endif %}
 {% endfor %}
+
 {% endspaceless %}

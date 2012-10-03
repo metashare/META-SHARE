@@ -1,4 +1,5 @@
 {% spaceless %}
+
 <label class="subtitle"><strong>{{ annotations.Annotation_type }}</strong></label>
 <div class="dataline">
 	{% if annotations.Tagset %}
@@ -61,12 +62,15 @@
 	{% endif %}
 	
 	{% if "Annotation_tool" in annotations %}
-		<div>
-			{% for key1, value1 in annotations.items %}
-				{% if "Annotation_tool" in key1 %}
-					{% include "repository/resource_view/target_resource.html" with target=value1 title="Annotation Tool" %}
-				{% endif %}
-			{% endfor %}
+		<div class="dataline indented">
+		<label><strong>Annotation Tools:</strong></label>
+			<ul>
+				{% for key1, value1 in annotations.items %}
+					{% if "Annotation_tool" in key1 %}
+						{% include "repository/resource_view/target_resource.html" with target=value1 level="list" %}
+					{% endif %}
+				{% endfor %}
+			</ul>
 		</div>
 	{% endif %}
 	

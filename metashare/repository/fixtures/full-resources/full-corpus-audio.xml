@@ -2,7 +2,7 @@
 <resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
   <identificationInfo>
     <resourceName lang="el">DBSC</resourceName>
-    <resourceName lang="en">Database of Bulgarian speech recordings</resourceName>
+    <resourceName lang="en">full-corpus-audio</resourceName>
     <description lang="en">Database of recordings of Bulgarian language annotated in phoneme level. Manual validation.</description>
     <description lang="bg">DBSCd</description>
     <resourceShortName lang="el">ΜΙΚΡΗ</resourceShortName>
@@ -969,7 +969,7 @@
           <audioContentInfo>
             <speechItems>phoneticallyRichSentences</speechItems>
             <speechItems>phoneticallyRichWords</speechItems>
-            <nonSpeechItems>commercial</nonSpeechItems>
+            <nonSpeechItems>commercial </nonSpeechItems>
             <nonSpeechItems>noise</nonSpeechItems>
             <textualDescription>blabla</textualDescription>
             <noiseLevel>low</noiseLevel>

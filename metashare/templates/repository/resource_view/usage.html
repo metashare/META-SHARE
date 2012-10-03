@@ -3,11 +3,11 @@
 <label class='component'>Usage</label>
 <div class="dataline">
 	{% if "Access_tool" in usage_dict.Usage %}
-	<label class='title'>Access tool</label>
+	<label class='title'>Access tools</label>
 		<ul>
 			{% for key, value in usage_dict.Usage.items %}
 				{% if "Access_tool" in key %}
-					{% include "repository/resource_view/target_resource.html" with target=value title="Access Tool" %}
+					{% include "repository/resource_view/target_resource.html" with target=value title="Access Tool" level="list" %}
 				{% endif %}
 			{% endfor %}
 		</ul>
@@ -18,36 +18,36 @@
 		<ul>
 			{% for key, value in usage_dict.Usage.items %}
 				{% if "Resource_associated_with" in key %}
-					{% include "repository/resource_view/target_resource.html" with target=value title="Associated resources" %}
+					{% include "repository/resource_view/target_resource.html" with target=value title="Associated resources" level="list" %}
 				{% endif %}
 			{% endfor %}
 		</ul>
 	{% endif %}
-	
+
 	{% for key, value in usage_dict.items %}
 		{% if "Foreseen_use" in value %}
-			<label class='title'>Foreseen Use</label>	
+			<label class='title'>Foreseen Use</label>
 			{% for key1, value1 in value.items %}
 				{% if "Foreseen_use" in key1 %}
-					<div class="dataline indented">
-						<label>
-							<strong><i>{{ value1.Foreseen_use }}</i></strong>
-						</label>
-					</div>
+						<label class="subtitle">{{ value1.Foreseen_use }}</label>
 					{% if value1.Use_nlpspecific %}
-						 <div class="dataline indented">
+					     <div class="dataline indented">
 							<label>
 								<strong>Use NLP Specific:</strong> {{ value1.Use_nlpspecific }}
 							</label>
 						</div>
 					{% endif %}
-				<div class="separation"><hr/></div>
+					{% if value1.Actual_use_details %}
+					     <div class="dataline indented">
+							<label>
+								<strong>Details:</strong> {{ value1.Actual_use_details }}
+							</label>
+						</div>
+					{% endif %}
 				{% endif %}
 			{% endfor %}
-			
 		{% endif %}
 	{% endfor %}
-
 
 	{% for key, value in usage_dict.items %}
 		{% if "Actual_use" in value %}
@@ -75,32 +75,41 @@
 	{% endfor %}
 
 	{% if "Usage_report" in usage_dict.Usage.Actual_use %}
-		{% if usage_dict.Usage.Actual_use.Usage_report.Usage_report.Title %}
-			{% include "repository/resource_view/documentation.html" with documentation=usage_dict.Usage.Actual_use.Usage_report.Usage_report type="Usage Report" level="sub" %}
-		{% else %}
-			<div class="dataline indented">
-				<label>
-					<strong>Usage Report: </strong>{{ usage_dict.Usage.Actual_use.Usage_report.Usage_report }}
-				</label>
-			</div>
-		{% endif %}
-	{% endif %}
-	
-	
-	{% if "Derived_resource" in usage_dict.Usage.Actual_use %}
-		<label class='subtitle'>Derived resources</label>
 		{% for key, value in usage_dict.Usage.Actual_use.items %}
-			{% if "Derived_resource" in key %}
-				{% include "repository/resource_view/target_resource.html" with target=value title="Derived Resource" %}
+			{% if "Usage_report" in value %}
+				
+				{% if "Title" in value.Usage_report %}
+					{% include "repository/resource_view/documentation.html" with documentation=value.Usage_report type="Usage Report" level="sub" %}
+				{% else %}
+					<div class="dataline indented">
+						<label>
+							<strong>Usage Report: </strong>{{ value.Usage_report }}
+						</label>
+					</div>
+				{% endif %}
 			{% endif %}
 		{% endfor %}
 	{% endif %}
 
+	{% if "Derived_resource" in usage_dict.Usage.Actual_use %}
+		<label class='subtitle'>Derived Resources</label>
+		<div class="dataline indented">
+			<ul>
+				{% for key, value in usage_dict.Usage.Actual_use.items %}
+					{% if "Derived_resource" in key %}
+						{% include "repository/resource_view/target_resource.html" with target=value title="Derived Resource" level="list" %}
+					{% endif %}
+				{% endfor %}
+			</ul>
+		</div>
+	{% endif %}
+
 	{% if "Usage_project" in usage_dict.Usage.Actual_use %}
-		<label class='subtitle'>Used in:</label>
+		<label class='subtitle'>Used in</label>
 		{% for key, value in usage_dict.Usage.Actual_use.items %}
 			{% if "Usage_project" in key %}
-				{% include "repository/resource_view/project.html" with project=value %}
+				<div class="separation"><hr/></div>
+				{% include "repository/resource_view/project.html" with project=value level="sub" %}
 			{% endif %}
 		{% endfor %}
 	{% endif %}

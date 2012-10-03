@@ -188,15 +188,15 @@ function addStatus(filter){
             <img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/error.png"> {{ errors }}
        </div>
     {% endif %}
-    
+   
  </div>
 
   <div id=expand style="float: right; margin-top: -20px; margin-right: 20px">[ <a href="javascript:expandAll();">Expand all</a>
             | <a href="javascript:collapseAll();">Collapse all</a> ]</div>
     
-            {% for class, fields in usage_fields %}
-            {% if selected_model == fields.0.7 %}
-             {% if textvalues != None and textvalues|length > 0 %}
+     {% for class, fields in usage_fields %}
+        {% if selected_model == fields.0.7 %}
+           {% if textvalues != None and textvalues|length > 0 %}
             <!-- used values table -->
             <a name="fieldvalues"></a>
             <div id=fieldvalues class=fieldvalues>
@@ -217,8 +217,8 @@ function addStatus(filter){
             </table>
             </div>
             <!-- end table -->
-            {% endif %} 
-            {% endif %} 
+      {% endif %} 
+    {% endif %}
             
             <a name="{{ fields.0.7 }}"></a>
             <div class="accordion"><a href="#" onclick="return false"><label class='component'> {{ class }} </label></a></div> 
@@ -273,8 +273,8 @@ function addStatus(filter){
                 </div>                
             {% endfor %}
              </div> <!-- end filter -->
-             
-        {% endfor %}
+            
+  {% endfor %}
 
     <script>
     function scrollToAnchor(name) {
@@ -297,5 +297,6 @@ function addStatus(filter){
     {% endif %}
     
     </script>
-{% endif %} 
+{% endif %}
+</div>{# end content_tab #}
 {% endblock %}

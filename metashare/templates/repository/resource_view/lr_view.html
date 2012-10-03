@@ -161,8 +161,7 @@
 	<div class="white_box column corner">
 
 		{% include "repository/resource_view/distribution.html" with distribution=distribution_dict %}
-		
-		
+
 		{% if contact_person_dicts %}
 			<label class='component'>Contact Person{{ contact_person_dicts|length|pluralize }}</label>
 			{% for contact_person in contact_person_dicts %}
@@ -170,7 +169,6 @@
 			{% endfor %}
 		{% endif %}
 	</div>
-	
 		
 	<div class="column middle">
 		<div class="fields">
@@ -179,7 +177,7 @@
 						<li><a href="#1">toolService{% get_icon "toolService" %}</a></li>
 					{% else %}
 						{% for type in mediaTypes %}
-							<li><a href="#{{forloop.counter}}">{{type}}{% get_icon type %}</a></li>
+							<li><a href="#{{forloop.counter}}">{% if mediaTypes|length < 4 %}{{type}}{% endif %}{% get_icon type %}</a></li>
 						{% endfor %}
 					{% endifequal %}
 				</ul>
@@ -204,7 +202,7 @@
 	</div>
 
 	<div class="white_box column corner right-corner">
-	
+
 		{% if resource_creation_dict %}
 			{% include "repository/resource_view/resource_creation.html" %}
 		{% endif %}
@@ -230,35 +228,36 @@
 		{% if documentation_dict %}
 		<label class="component">Documentation</label>
 			{% for key, value in documentation_dict.items %}
-				{% for key1, value1 in value.items %}
+				{% for key1, value1 in value.items %}		
 					{% if "Samples_location" in key1 %}
 						 <div class="dataline">
-									<label>
-										<strong>Samples Location: </strong><a href="{{value1}}">{{value1}}</a>
-									</label>
-								</div>
+							<label>
+								<strong>Samples Location: </strong>{{value1|urlizetrunc:17}}
+							</label>
+						</div>
 					{% endif %}
 					{% if "Tool_documentation" in key1 %}
 						 <div class="dataline">
-									<label>
-										<strong>Tool Documentation: </strong>{{value1}}
-									</label>
-								</div>
-					{% endif %}	
+							<label>
+								<strong>Tool Documentation: </strong>{{value1}}
+							</label>
+						</div>
+					{% endif %}						
+				{% endfor %}
+				{% for key1, value1 in value.items %}
 					{% for key2, value2 in value1.items %}				
 						{% if "Documentation" in key2 %}
+							<div class="separation"><hr/></div>
 							{% if value2.Title %}
-								{% include "repository/resource_view/documentation.html" with documentation=value2 type="Documentation" level="sub" %}
+								{% include "repository/resource_view/documentation.html" with documentation=value2 type="Documentation" %}
 							{% else %}
-								<label class="title">Document</label>
 								<div class="dataline indented">
 									<label>
 										{{value2}}
 									</label>
 								</div>
 							{% endif %}
-							<div class="separation"><hr/></div>
-						{% endif %}						
+						{% endif %}
 					{% endfor %}
 				{% endfor %}
 			{% endfor %}

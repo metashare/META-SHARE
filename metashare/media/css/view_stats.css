@@ -52,7 +52,9 @@
     border-bottom: none; 
 }
 
-.content_tab {vertical-align: top;
+.content_tab {
+    padding: 10px;
+    vertical-align: top;
     color: #000;
     padding-bottom: 40px;
 	background-color: white; 

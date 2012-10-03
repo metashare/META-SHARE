@@ -1,3 +1,5 @@
+{% spaceless %}
+
 {% if type == "Documentation" %}
 {% else %}
 	{% if level == "simple" %}
@@ -39,6 +41,14 @@
 			, pp. {{ documentation.Pages }}
 		{% endif %}
 		
+		{% if documentation.Conference %}
+			, {{ documentation.Conference }}
+		{% endif %}
+		
+		{% if documentation.Year %}
+			, {{ documentation.Year }}
+		{% endif %}		
+		
 		</label>
 	</div>
 	
@@ -46,14 +56,6 @@
 		<div class="dataline">
 			<label>
 				<strong>Editor:</strong> {{ documentation.Editor }}
-			</label>
-		</div>
-	{% endif %}
-	
-	{% if documentation.Year %}
-		<div class="dataline">
-			<label>
-				<strong>Year:</strong> {{ documentation.Year }}
 			</label>
 		</div>
 	{% endif %}
@@ -72,8 +74,7 @@
 				<strong>Book Title:</strong> {{ documentation.Book_title }}
 			</label>
 		</div>
-	{% endif %}	
-	
+	{% endif %}		
 	
 	{% if documentation.Series %}
 		 <div class="dataline">
@@ -81,8 +82,7 @@
 				<strong>Series:</strong> {{ documentation.Series }}
 			</label>
 		</div>
-	{% endif %}	
-	
+	{% endif %}		
 	
 	{% if documentation.Edition %}
 		 <div class="dataline">
@@ -90,15 +90,8 @@
 				<strong>Edition:</strong> {{ documentation.Edition }}
 			</label>
 		</div>
-	{% endif %}
-	
-	{% if documentation.Conference %}
-		 <div class="dataline">
-			<label>
-				<strong>Conference:</strong> {{ documentation.Conference }}
-			</label>
-		</div>
-	{% endif %}
+	{% endif %}	
+
 	
 	{% if documentation.Doi %}
 		 <div class="dataline">
@@ -147,3 +140,5 @@
 		</div>
 	{% endif %}
 {% if level == "sub" or level == "simple" or indent == "yes" %}</div>{% endif %}
+
+{% endspaceless %}

@@ -69,7 +69,8 @@ function add_container(widget_id) {
         {
         	var scr_content = scr_div.text();
         	var scr = django.jQuery('<script></script>');
-        	scr_content = scr_content.replace('__ID__', id)
+        	// Compute the field ID based on both the widget_id and the field number
+        	scr_content = scr_content.replace(/container_\d+___ID__/, 'container_' + widget_id + '_' + id);
         	scr.text(scr_content);
         	scr_div.replaceWith(scr);
         	
