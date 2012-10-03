@@ -11,7 +11,8 @@ from metashare.repository.seltests.test_editor import _delete, _publish, \
     _ingest, _fill_distribution, _fill_contact_person, _fill_affiliation, \
     _fill_usage, _fill_documentation, _fill_related_resource, \
     _fill_funding_project, _fill_metadata_creator, _fill_resource_creator, \
-    _fill_language, _fill_text_size, _fill_audio_size, _fill_linguality
+    _fill_language, _fill_text_size, _fill_audio_size, _fill_linguality, \
+    _add_new_resource
 from metashare.repository.seltests.test_utils import login_user, mouse_over, \
     setup_screenshots_folder, click_menu_item, save_and_close, \
     cancel_and_close, cancel_and_continue
@@ -68,19 +69,8 @@ class NightlyEditorTests(SeleniumTestCase):
         self.assertEqual("Logout", 
           driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Manage Resources -> Manage all resources
-        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Add resource
-        driver.find_element_by_link_text("Add Resource").click()
-        #Select resource type
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
-        driver.find_element_by_id("id_corpusTextInfo").click()
-        driver.find_element_by_id("id_submit").click()
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # new resource with specific resource type and media types
+        _add_new_resource(driver, ss_path, "Corpus", ["id_corpusTextInfo"])
         self.assertEqual("Add Resource", 
           driver.find_element_by_css_selector("#content > h1").text)
         # remember root window id
