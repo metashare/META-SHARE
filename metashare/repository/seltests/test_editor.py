@@ -164,10 +164,10 @@ class BasicEditorTests(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()
-        _fill_distribution(driver, ss_path, root_id)
+        _fill_distribution_popup(driver, ss_path, root_id)
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        _fill_contact_person(driver, ss_path, root_id)
+        _fill_contactPerson_popup(driver, ss_path, root_id)
 
         # tool info popup
         driver.find_element_by_id("edit_id_toolServiceInfo").click()
@@ -436,7 +436,7 @@ class BasicEditorTests(SeleniumTestCase):
         _fill_version_form(driver, ss_path, "form-3-0-")
         # validations fields
         driver.find_element_by_id("fieldsetcollapser0").click()
-        _fill_validations_form(driver, ss_path, "0-")
+        _fill_validations_form(driver, ss_path, "validationinfotype_model_set-0-")
         # usage popup
         driver.find_element_by_xpath("//a[@id='add_id_usageInfo']/img").click()  
         _fill_usage_popup(driver, ss_path, root_id)
@@ -446,7 +446,7 @@ class BasicEditorTests(SeleniumTestCase):
         _fill_resourceCreation_form(driver, ss_path, "form-5-0-")
         # relations fields
         driver.find_element_by_id("fieldsetcollapser1").click()
-        _fill_relations_form(driver, ss_path, "0-")
+        _fill_relations_form(driver, ss_path, "relationinfotype_model_set-0-")
 
 
         # corpus text info popup
@@ -575,6 +575,49 @@ def _fill_version_form(driver, ss_path, id_infix):
     driver.find_element_by_name("{}updateFrequency".format(id_infix)).send_keys("1")
 
 
+def _fill_modalities_form(driver, ss_path, id_infix):
+    """
+    fills the modalities form with required, recommended and optional information
+    """
+    # remember current window id
+    current_id = driver.current_window_handle
+    Select(driver.find_element_by_name(
+      "{}modalityType_old".format(id_infix))).select_by_visible_text("Voice")
+    driver.find_element_by_xpath("//td[@class='modalityType']/span/div/ul/li/a") \
+      .click()
+    driver.find_element_by_name("{}modalityTypeDetails".format(id_infix)).clear()
+    driver.find_element_by_name("{}modalityTypeDetails".format(id_infix)).send_keys("Details")
+    # size per modalities popup
+    driver.find_element_by_xpath("//a[@id='add_id_{}sizePerModality']/img".format(id_infix)).click()  
+    _fill_sizePerModalities_form(driver, ss_path, current_id)
+
+
+def _fill_textFormats_form(driver, ss_path, id_infix):
+    """
+    fills the text formats form with required, recommended and optional information
+    """
+    # remember current window id
+    current_id = driver.current_window_handle
+    driver.find_element_by_name("{}mimeType".format(id_infix)).clear()
+    driver.find_element_by_name("{}mimeType".format(id_infix)).send_keys("application/pdf")
+    # size per text format popup
+    driver.find_element_by_xpath("//a[@id='add_id_{}sizePerTextFormat']/img".format(id_infix)).click()  
+    _fill_sizePerTextFormats_form(driver, ss_path, current_id)
+
+
+def _fill_characterEncodings_form(driver, ss_path, id_infix):
+    """
+    fills the character encodings form with required, recommended and optional information
+    """
+    # remember current window id
+    current_id = driver.current_window_handle
+    Select(driver.find_element_by_name(
+      "{}characterEncoding".format(id_infix))).select_by_visible_text("Cp1097")
+    # size per character encodings popup
+    driver.find_element_by_xpath("//a[@id='add_id_{}sizePerCharacterEncoding']/img".format(id_infix)).click()  
+    _fill_sizePerCharacterEncodings_form(driver, ss_path, current_id)
+
+
 def _fill_resourceDocumentation_form(driver, ss_path, id_infix):
     """
     fills the resource documentation form with required, recommended and optional information
@@ -618,11 +661,11 @@ def _fill_relations_form(driver, ss_path, id_infix):
     """
     # remember current window id
     current_id = driver.current_window_handle
-    driver.find_element_by_name("relationinfotype_model_set-{}relationType".format(id_infix)).clear()
-    driver.find_element_by_name("relationinfotype_model_set-{}relationType".format(id_infix)) \
+    driver.find_element_by_name("{}relationType".format(id_infix)).clear()
+    driver.find_element_by_name("{}relationType".format(id_infix)) \
       .send_keys("new type")
     # related resource popup
-    driver.find_element_by_xpath("//a[@id='add_id_relationinfotype_model_set-{}relatedResource']/img" \
+    driver.find_element_by_xpath("//a[@id='add_id_{}relatedResource']/img" \
       .format(id_infix)).click()  
     _fill_relatedResource_popup(driver, ss_path, current_id)
 
@@ -640,16 +683,16 @@ def _fill_validations_form(driver, ss_path, id_infix):
       .select_by_visible_text("Content")
     Select(driver.find_element_by_xpath("//div[@class='form-row validationMode']/div/select")) \
       .select_by_visible_text("Automatic")
-    driver.find_element_by_name("validationinfotype_model_set-{}validationModeDetails".format(id_infix)) \
+    driver.find_element_by_name("{}validationModeDetails".format(id_infix)) \
       .clear()
-    driver.find_element_by_name("validationinfotype_model_set-{}validationModeDetails".format(id_infix)) \
+    driver.find_element_by_name("{}validationModeDetails".format(id_infix)) \
       .send_keys("Additional information")
     Select(driver.find_element_by_xpath("//div[@class='form-row validationExtent']/div/select")) \
       .select_by_visible_text("Full")
-    driver.find_element_by_name("validationinfotype_model_set-{}validationExtentDetails".format(id_infix)) \
+    driver.find_element_by_name("{}validationExtentDetails".format(id_infix)) \
       .send_keys("Details")
     # size per validation popup
-    driver.find_element_by_xpath("//a[@id='add_id_validationinfotype_model_set-0-sizePerValidation']/img") \
+    driver.find_element_by_xpath("//a[@id='add_id_{}sizePerValidation']/img".format(id_infix)) \
       .click()  
     _fill_sizePerValidation_popup(driver, ss_path, current_id)
     # validation report popup
@@ -657,7 +700,7 @@ def _fill_validations_form(driver, ss_path, id_infix):
       .select_by_visible_text("documentInfoType")
     _fill_validationReport_popup(driver, ss_path, current_id)
     # validation tool popup
-    driver.find_element_by_xpath("//a[@id='add_id_validationinfotype_model_set-0-validationTool']/img") \
+    driver.find_element_by_xpath("//a[@id='add_id_validationinfotype_model_set-0-validationTool']/img".format(id_infix)) \
       .click()  
     _fill_validationTool_popup(driver, ss_path, current_id)
     # validator popup
@@ -733,6 +776,7 @@ def _fill_distribution_popup(driver, ss_path, parent_id):
     driver.find_element_by_name("availabilityStartDate").send_keys("2012-10-02")
     driver.find_element_by_name("availabilityEndDate").clear()
     driver.find_element_by_name("availabilityEndDate").send_keys("2012-10-02")
+
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
 
@@ -1171,6 +1215,7 @@ def _fill_membership_popup(driver, ss_path, parent_id):
       "membershipInstitution_old")).select_by_visible_text("LDC")
     driver.find_element_by_xpath("//div[@class='form-row membershipInstitution']/div/div/ul/li/a") \
       .click()
+
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
 
@@ -1188,6 +1233,14 @@ def _fill_corpusTextInfo_popup(driver, ss_path, parent_id):
     _fill_language_form(driver, ss_path, "languageinfotype_model_set-0-")
     # corpus text info / size
     _fill_textSize_form(driver, ss_path, "sizeinfotype_model_set-0-")
+    # recommended fields
+    driver.find_element_by_css_selector("a[href=\"#field-2\"]").click()
+    # corpus text info / modalities
+    _fill_modalities_form(driver, ss_path, "modalityinfotype_model_set-0-")
+    # corpus text info / text formats
+    _fill_textFormats_form(driver, ss_path, "textformatinfotype_model_set-0-")
+    # corpus text info / character encodings
+    _fill_characterEncodings_form(driver, ss_path, "characterencodinginfotype_model_set-0-")
 
 
 def _fill_linguality_form(driver, ss_path, id_infix):
@@ -1228,6 +1281,42 @@ def _fill_sizePerLanguage_popup(driver, ss_path, parent_id):
     information and returns to the parent window
     """
     driver.switch_to_window("id_languageinfotype_model_set__dash__0__dash__sizePerLanguage")
+    _fill_size_form(driver, ss_path, "")
+
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_sizePerModalities_form(driver, ss_path, parent_id):
+    """
+    fills the size per modalities popup with all required, recommended and optional
+    information and returns to the parent window
+    """
+    driver.switch_to_window("id_modalityinfotype_model_set__dash__0__dash__sizePerModality")
+    _fill_size_form(driver, ss_path, "")
+
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_sizePerTextFormats_form(driver, ss_path, parent_id):
+    """
+    fills the size per text formats popup with all required, recommended and optional
+    information and returns to the parent window
+    """
+    driver.switch_to_window("id_textformatinfotype_model_set__dash__0__dash__sizePerTextFormat")
+    _fill_size_form(driver, ss_path, "")
+
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_sizePerCharacterEncodings_form(driver, ss_path, parent_id):
+    """
+    fills the size per character encodings popup with all required, recommended and optional
+    information and returns to the parent window
+    """
+    driver.switch_to_window("id_characterencodinginfotype_model_set__dash__0__dash__sizePerCharacterEncoding")
     _fill_size_form(driver, ss_path, "")
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
