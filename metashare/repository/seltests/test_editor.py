@@ -434,6 +434,9 @@ class BasicEditorTests(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         # version fields
         _fill_version_form(driver, ss_path, "form-3-0-")
+        # validations fields
+        driver.find_element_by_id("fieldsetcollapser0").click()
+        _fill_validations_form(driver, ss_path, "0-")
         # usage popup
         driver.find_element_by_xpath("//a[@id='add_id_usageInfo']/img").click()  
         _fill_usage_popup(driver, ss_path, root_id)
@@ -628,6 +631,45 @@ def _fill_relations_form(driver, ss_path, id_infix):
     driver.find_element_by_xpath("//a[@id='add_id_relationinfotype_model_set-{}relatedResource']/img" \
       .format(id_infix)).click()  
     _fill_relatedResource_popup(driver, ss_path, current_id)
+
+
+def _fill_validations_form(driver, ss_path, id_infix):
+    """
+    fills the validations form with required, recommended and optional information
+    """
+    # remember current window id
+    current_id = driver.current_window_handle
+    # documentation popup
+    Select(driver.find_element_by_xpath("//div[@class='form-row validated']/div/select")) \
+      .select_by_visible_text("Yes")
+    Select(driver.find_element_by_xpath("//div[@class='form-row validationType']/div/select")) \
+      .select_by_visible_text("Content")
+    Select(driver.find_element_by_xpath("//div[@class='form-row validationMode']/div/select")) \
+      .select_by_visible_text("Automatic")
+    driver.find_element_by_name("validationinfotype_model_set-{}validationModeDetails".format(id_infix)) \
+      .clear()
+    driver.find_element_by_name("validationinfotype_model_set-{}validationModeDetails".format(id_infix)) \
+      .send_keys("Additional information")
+    Select(driver.find_element_by_xpath("//div[@class='form-row validationExtent']/div/select")) \
+      .select_by_visible_text("Full")
+    driver.find_element_by_name("validationinfotype_model_set-{}validationExtentDetails".format(id_infix)) \
+      .send_keys("Details")
+    # size per validation popup
+    driver.find_element_by_xpath("//a[@id='add_id_validationinfotype_model_set-0-sizePerValidation']/img") \
+      .click()  
+    _fill_sizePerValidation_popup(driver, ss_path, current_id)
+    # validation report popup
+    Select(driver.find_element_by_xpath("//div[@class='form-row validationReport']/div/select")) \
+      .select_by_visible_text("documentInfoType")
+    _fill_validationReport_popup(driver, ss_path, current_id)
+    # validation tool popup
+    driver.find_element_by_xpath("//a[@id='add_id_validationinfotype_model_set-0-validationTool']/img") \
+      .click()  
+    _fill_validationTool_popup(driver, ss_path, current_id)
+    # validator popup
+    Select(driver.find_element_by_xpath("//div[@class='form-row validator']/div/select")) \
+      .select_by_visible_text("personInfoType")
+    _fill_validator_popup(driver, ss_path, current_id)
 
 
 def _fill_distribution_popup(driver, ss_path, parent_id):
@@ -855,6 +897,18 @@ def _fill_accessTool_popup(driver, ss_path, parent_id):
     save_and_close(driver, parent_id)
 
 
+def _fill_validationTool_popup(driver, ss_path, parent_id):
+    """
+    fills the validation tool popup with all required, recommended and optional
+    information and returns to the parent window
+    """
+    driver.switch_to_window("id_validationinfotype_model_set__dash__0__dash__validationTool")
+    driver.find_element_by_name("targetResourceNameURI").clear()
+    driver.find_element_by_name("targetResourceNameURI").send_keys("578DFDG8DF")
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
 def _fill_resourceAssociatedWith_popup(driver, ss_path, parent_id):
     """
     fills the resource associated with popup with all required, recommended and optional
@@ -873,6 +927,57 @@ def _fill_usageReport_popup(driver, ss_path, parent_id):
     information and returns to the parent window
     """
     driver.switch_to_window("id_actualuseinfotype_model_set__dash__0__dash__usageReport")
+    Select(driver.find_element_by_id("id_documentType")).select_by_visible_text("Article")
+    driver.find_element_by_name("key_title_0").clear()
+    driver.find_element_by_name("key_title_0").send_keys("en")
+    driver.find_element_by_name("val_title_0").clear()
+    driver.find_element_by_name("val_title_0").send_keys("Document title")
+    driver.find_element_by_name("author").clear()
+    driver.find_element_by_name("author").send_keys("John Smith")
+    driver.find_element_by_name("editor").clear()
+    driver.find_element_by_name("editor").send_keys("Smith Ed.")
+    driver.find_element_by_name("year").clear()
+    driver.find_element_by_name("year").send_keys("1981")
+    driver.find_element_by_name("publisher").clear()
+    driver.find_element_by_name("publisher").send_keys("John Smith & Co")
+    driver.find_element_by_name("bookTitle").clear()
+    driver.find_element_by_name("bookTitle").send_keys("Life of John Smith")
+    driver.find_element_by_name("journal").clear()
+    driver.find_element_by_name("journal").send_keys("Journal")
+    driver.find_element_by_name("volume").clear()
+    driver.find_element_by_name("volume").send_keys("7")
+    driver.find_element_by_name("series").clear()
+    driver.find_element_by_name("series").send_keys("9")
+    driver.find_element_by_name("pages").clear()
+    driver.find_element_by_name("pages").send_keys("289-290")
+    driver.find_element_by_name("edition").clear()
+    driver.find_element_by_name("edition").send_keys("1st")
+    driver.find_element_by_name("conference").clear()
+    driver.find_element_by_name("conference").send_keys("Main conference")
+    driver.find_element_by_name("doi").clear()
+    driver.find_element_by_name("doi").send_keys("123-35-1243")
+    driver.find_element_by_name("url").clear()
+    driver.find_element_by_name("url").send_keys("http://www.mainconference.org")
+    driver.find_element_by_name("ISSN").clear()
+    driver.find_element_by_name("ISSN").send_keys("12-435-464-467")
+    driver.find_element_by_name("ISBN").clear()
+    driver.find_element_by_name("ISBN").send_keys("12-435-464-467")
+    driver.find_element_by_name("keywords").clear()
+    driver.find_element_by_name("keywords").send_keys("John Smith, life")
+    driver.find_element_by_name("documentLanguageName").clear()
+    driver.find_element_by_name("documentLanguageName").send_keys("English")
+    driver.find_element_by_name("documentLanguageId").clear()
+    driver.find_element_by_name("documentLanguageId").send_keys("en")
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_validationReport_popup(driver, ss_path, parent_id):
+    """
+    fills the validation report popup with all required, recommended and optional
+    information and returns to the parent window
+    """
+    driver.switch_to_window("id_validationinfotype_model_set__dash__0__dash__validationReport")
     Select(driver.find_element_by_id("id_documentType")).select_by_visible_text("Article")
     driver.find_element_by_name("key_title_0").clear()
     driver.find_element_by_name("key_title_0").send_keys("en")
@@ -1247,6 +1352,52 @@ def _fill_licensor_popup(driver, ss_path, parent_id):
     save_and_close(driver, parent_id)
 
 
+def _fill_validator_popup(driver, ss_path, parent_id):
+    """
+    fills the validator popup with all required, recommended and optional
+    information and returns to the parent window
+    """
+    driver.switch_to_window("id_validationinfotype_model_set__dash__0__dash__validator")
+    # remember current window id
+    current_id = driver.current_window_handle
+    driver.find_element_by_name("key_surname_0").clear()
+    driver.find_element_by_name("key_surname_0").send_keys("en")
+    driver.find_element_by_name("val_surname_0").clear()
+    driver.find_element_by_name("val_surname_0").send_keys("Smith")
+    driver.find_element_by_xpath("//div[@class='form-row givenName']/div/ul/li/a").click()
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    driver.find_element_by_name("key_givenName_0").clear()
+    driver.find_element_by_name("key_givenName_0").send_keys("en")
+    driver.find_element_by_name("val_givenName_0").clear()
+    driver.find_element_by_name("val_givenName_0").send_keys("John")
+    Select(driver.find_element_by_id("id_sex")).select_by_visible_text("Male")
+    driver.find_element_by_name("form-0-email").clear()
+    driver.find_element_by_name("form-0-email").send_keys("john.smith@institution.org")
+    driver.find_element_by_name("form-0-url").clear()
+    driver.find_element_by_name("form-0-url").send_keys("http://www.institution.org")
+    driver.find_element_by_name("form-0-address").clear()
+    driver.find_element_by_name("form-0-address").send_keys("1st main street")
+    driver.find_element_by_name("form-0-zipCode").clear()
+    driver.find_element_by_name("form-0-zipCode").send_keys("95000")
+    driver.find_element_by_name("form-0-city").clear()
+    driver.find_element_by_name("form-0-city").send_keys("somewhere")
+    driver.find_element_by_name("form-0-region").clear()
+    driver.find_element_by_name("form-0-region").send_keys("far away")
+    driver.find_element_by_name("form-0-country").clear()
+    driver.find_element_by_name("form-0-country").send_keys("world")
+    driver.find_element_by_name("form-0-telephoneNumber").clear()
+    driver.find_element_by_name("form-0-telephoneNumber").send_keys("1234567890")
+    driver.find_element_by_name("form-0-faxNumber").clear()
+    driver.find_element_by_name("form-0-faxNumber").send_keys("1234567890")
+    driver.find_element_by_name("position").clear()
+    driver.find_element_by_name("position").send_keys("Professor")
+    # affiliation popup
+    driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
+    _fill_affiliation_popup(driver, ss_path, current_id)
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
 def _fill_distributionRightsHolder_popup(driver, ss_path, parent_id):
     """
     fills the distributino rights holder popup with all required, recommended and optional
@@ -1389,6 +1540,20 @@ def _fill_audioSize_form(driver, ss_path, parent_id):
     driver.find_element_by_id("id_sizeinfotype_model_set-0-size").send_keys("100")
     Select(driver.find_element_by_id("id_sizeinfotype_model_set-0-sizeUnit")).select_by_visible_text("Gb")
     save_and_close(driver, parent_id) 
+
+
+def _fill_sizePerValidation_popup(driver, ss_path, parent_id):
+    """
+    fills the size per validation popup with all required, recommended and optional
+    information and returns to the parent window
+    """
+    driver.switch_to_window("id_validationinfotype_model_set__dash__0__dash__sizePerValidation")
+    driver.find_element_by_id("id_size").clear()
+    driver.find_element_by_id("id_size").send_keys("12")
+    Select(driver.find_element_by_xpath("//div[@class='form-row sizeUnit']/div/select")) \
+      .select_by_visible_text("Classes")
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
 
 
 def _ingest(driver):
