@@ -588,13 +588,12 @@ def _fill_modalities_form(driver, ss_path, id_infix):
     current_id = driver.current_window_handle
     Select(driver.find_element_by_name(
       "{}modalityType_old".format(id_infix))).select_by_visible_text("Voice")
-    driver.find_element_by_xpath("//td[@class='modalityType']/span/div/ul/li/a") \
-      .click()
+    driver.find_element_by_xpath("//td[@class='modalityType']/span/div/ul/li/a").click()
     driver.find_element_by_name("{}modalityTypeDetails".format(id_infix)).clear()
     driver.find_element_by_name("{}modalityTypeDetails".format(id_infix)).send_keys("Details")
     # size per modalities popup
     driver.find_element_by_xpath("//a[@id='add_id_{}sizePerModality']/img".format(id_infix)).click()  
-    _fill_sizePerModalities_form(driver, ss_path, current_id)
+    _fill_sizePerModalities_popup(driver, ss_path, current_id)
 
 
 def _fill_textFormats_form(driver, ss_path, id_infix):
@@ -607,7 +606,7 @@ def _fill_textFormats_form(driver, ss_path, id_infix):
     driver.find_element_by_name("{}mimeType".format(id_infix)).send_keys("application/pdf")
     # size per text format popup
     driver.find_element_by_xpath("//a[@id='add_id_{}sizePerTextFormat']/img".format(id_infix)).click()  
-    _fill_sizePerTextFormats_form(driver, ss_path, current_id)
+    _fill_sizePerTextFormats_popup(driver, ss_path, current_id)
 
 
 def _fill_characterEncodings_form(driver, ss_path, id_infix):
@@ -619,8 +618,180 @@ def _fill_characterEncodings_form(driver, ss_path, id_infix):
     Select(driver.find_element_by_name(
       "{}characterEncoding".format(id_infix))).select_by_visible_text("Cp1097")
     # size per character encodings popup
-    driver.find_element_by_xpath("//a[@id='add_id_{}sizePerCharacterEncoding']/img".format(id_infix)).click()  
-    _fill_sizePerCharacterEncodings_form(driver, ss_path, current_id)
+    driver.find_element_by_xpath("//a[@id='add_id_{}sizePerCharacterEncoding']/img".format(id_infix)) \
+      .click()  
+    _fill_sizePerCharacterEncodings_popup(driver, ss_path, current_id)
+
+
+def _fill_annotations_form(driver, ss_path, id_infix):
+    """
+    fills the annotations form with required, recommended and optional information
+    """
+    # remember current window id
+    current_id = driver.current_window_handle
+    Select(driver.find_element_by_name(
+      "{}annotationType".format(id_infix))).select_by_visible_text("Alignment")
+    Select(driver.find_element_by_name(
+      "{}annotatedElements_old".format(id_infix))).select_by_visible_text("Truncation")
+    driver.find_element_by_xpath("//div[@class='form-row annotatedElements']/div/div/div/a") \
+      .click()
+    Select(driver.find_element_by_name(
+      "{}annotationStandoff".format(id_infix))).select_by_visible_text("Yes")
+    Select(driver.find_element_by_name(
+      "{}segmentationLevel_old".format(id_infix))).select_by_visible_text("Phoneme")
+    driver.find_element_by_xpath("//div[@class='form-row segmentationLevel']/div/div/div/a") \
+      .click()
+    driver.find_element_by_name("{}annotationFormat".format(id_infix)).clear()
+    driver.find_element_by_name("{}annotationFormat".format(id_infix)).send_keys("Format")
+    driver.find_element_by_name("{}tagset".format(id_infix)).clear()
+    driver.find_element_by_name("{}tagset".format(id_infix)).send_keys("tagset")
+    driver.find_element_by_name("{}tagsetLanguageId".format(id_infix)).clear()
+    driver.find_element_by_name("{}tagsetLanguageId".format(id_infix)).send_keys("En")
+    driver.find_element_by_name("{}tagsetLanguageName".format(id_infix)).clear()
+    driver.find_element_by_name("{}tagsetLanguageName".format(id_infix)).send_keys("English")
+    Select(driver.find_element_by_name(
+      "{}conformanceToStandardsBestPractices_old".format(id_infix))).select_by_visible_text("EMMA")
+    driver.find_element_by_xpath(
+      "//div[@class='form-row conformanceToStandardsBestPractices']/div/div/div/a").click()
+    driver.find_element_by_name("{}theoreticModel".format(id_infix)).clear()
+    driver.find_element_by_name("{}theoreticModel".format(id_infix)).send_keys("Model")
+    # annotation manual popup
+    Select(driver.find_element_by_xpath("//div[@class='form-row annotationManual']/div/select")) \
+      .select_by_visible_text("documentInfoType")
+    _fill_annotationManual_popup(driver, ss_path, current_id)
+    Select(driver.find_element_by_name(
+      "{}annotationMode".format(id_infix))).select_by_visible_text("Automatic")
+    driver.find_element_by_name("{}annotationModeDetails".format(id_infix)).clear()
+    driver.find_element_by_name("{}annotationModeDetails".format(id_infix)).send_keys("Details")
+    # annotation tool popup
+    driver.find_element_by_xpath("//a[@id='add_id_{}annotationTool']/img".format(id_infix)) \
+      .click()  
+    _fill_annotationTool_popup(driver, ss_path, current_id)
+    driver.find_element_by_name("{}annotationStartDate".format(id_infix)).clear()
+    driver.find_element_by_name("{}annotationStartDate".format(id_infix)).send_keys("2012-10-04")
+    driver.find_element_by_name("{}annotationEndDate".format(id_infix)).clear()
+    driver.find_element_by_name("{}annotationEndDate".format(id_infix)).send_keys("2012-10-04")
+    # size per annotation popup
+    driver.find_element_by_xpath("//a[@id='add_id_{}sizePerAnnotation']/img".format(id_infix)) \
+      .click()  
+    _fill_sizePerAnnotation_popup(driver, ss_path, current_id)
+    driver.find_element_by_name("{}interannotatorAgreement".format(id_infix)).clear()
+    driver.find_element_by_name("{}interannotatorAgreement".format(id_infix)).send_keys("Metric")
+    driver.find_element_by_name("{}intraannotatorAgreement".format(id_infix)).clear()
+    driver.find_element_by_name("{}intraannotatorAgreement".format(id_infix)).send_keys("Metric")
+    # annotator popup
+    Select(driver.find_element_by_xpath("//div[@class='form-row annotator']/div/select")) \
+      .select_by_visible_text("personInfoType")
+    _fill_annotator_popup(driver, ss_path, current_id)
+
+
+def _fill_domains_form(driver, ss_path, id_infix):
+    """
+    fills the domains form with required, recommended and optional information
+    """
+    # remember current window id
+    current_id = driver.current_window_handle
+    driver.find_element_by_name("{}domain".format(id_infix)).clear()
+    driver.find_element_by_name("{}domain".format(id_infix)).send_keys("Domain")
+    # size per domains popup
+    driver.find_element_by_xpath("//a[@id='add_id_{}sizePerDomain']/img".format(id_infix)).click()  
+    _fill_sizePerDomains_popup(driver, ss_path, current_id)
+    Select(driver.find_element_by_name(
+      "{}conformanceToClassificationScheme".format(id_infix))).select_by_visible_text(
+      "UDC_classification")
+
+
+def _fill_textClassifications_form(driver, ss_path, id_infix):
+    """
+    fills the annotations form with required, recommended and optional information
+    """
+    # remember current window id
+    current_id = driver.current_window_handle
+    driver.find_element_by_name("{}textGenre".format(id_infix)).clear()
+    driver.find_element_by_name("{}textGenre".format(id_infix)).send_keys("Genre")
+    driver.find_element_by_name("{}textType".format(id_infix)).clear()
+    driver.find_element_by_name("{}textType".format(id_infix)).send_keys("Type")
+    driver.find_element_by_name("{}register".format(id_infix)).clear()
+    driver.find_element_by_name("{}register".format(id_infix)).send_keys("Register")
+    driver.find_element_by_name("{}subject_topic".format(id_infix)).clear()
+    driver.find_element_by_name("{}subject_topic".format(id_infix)).send_keys("Topic")
+    Select(driver.find_element_by_name(
+      "{}conformanceToClassificationScheme".format(id_infix))).select_by_visible_text(
+      "UDC_classification")
+    # size per text classification popup
+    driver.find_element_by_xpath("//a[@id='add_id_{}sizePerTextClassification']/img".format(id_infix)) \
+      .click()  
+    _fill_sizePerTextClassification_popup(driver, ss_path, current_id)
+
+
+def _fill_timeCoverage_form(driver, ss_path, id_infix):
+    """
+    fills the time coverage form with required, recommended and optional information
+    """
+    # remember current window id
+    current_id = driver.current_window_handle
+    driver.find_element_by_name("{}timeCoverage".format(id_infix)).clear()
+    driver.find_element_by_name("{}timeCoverage".format(id_infix)).send_keys("coverage")
+    # size per time coverage popup
+    driver.find_element_by_xpath("//a[@id='add_id_{}sizePerTimeCoverage']/img".format(id_infix)).click()  
+    _fill_sizePerTimeCoverage_popup(driver, ss_path, current_id)
+
+
+def _fill_geographicCoverage_form(driver, ss_path, id_infix):
+    """
+    fills the geographic coverage form with required, recommended and optional information
+    """
+    # remember current window id
+    current_id = driver.current_window_handle
+    driver.find_element_by_name("{}geographicCoverage".format(id_infix)).clear()
+    driver.find_element_by_name("{}geographicCoverage".format(id_infix)).send_keys("coverage")
+    # size per time coverage popup
+    driver.find_element_by_xpath("//a[@id='add_id_{}sizePerGeographicCoverage']/img".format(id_infix)) \
+      .click()  
+    _fill_sizePerGeographicCoverage_popup(driver, ss_path, current_id)
+
+
+def _fill_creation_form(driver, ss_path, id_infix):
+    """
+    fills the creation form with required, recommended and optional information
+    """
+    # remember current window id
+    current_id = driver.current_window_handle
+    # annotation tool popup
+    driver.find_element_by_xpath("//a[@id='add_id_form-2-0-originalSource']/img".format(id_infix)) \
+      .click()  
+    _fill_originalSource_popup(driver, ss_path, current_id)
+    Select(driver.find_element_by_name(
+      "form-2-0-creationMode".format(id_infix))).select_by_visible_text("Automatic")
+    driver.find_element_by_name("form-2-0-creationModeDetails".format(id_infix)).clear()
+    driver.find_element_by_name("form-2-0-creationModeDetails".format(id_infix)).send_keys("Details")
+    # creation tool popup
+    driver.find_element_by_xpath("//a[@id='add_id_form-2-0-creationTool']/img".format(id_infix)) \
+      .click()  
+    _fill_creationTool_popup(driver, ss_path, current_id)
+
+
+def _fill_linkToOtherMedias_form(driver, ss_path, id_infix):
+    """
+    fills the link to other medias form with required, recommended and optional information
+    """
+    # remember current window id
+    current_id = driver.current_window_handle
+    driver.find_element_by_id("fieldsetcollapser2").click()
+    Select(driver.find_element_by_name(
+      "{}otherMedia".format(id_infix))).select_by_visible_text("Audio")
+    driver.find_element_by_name("{}mediaTypeDetails".format(id_infix)).clear()
+    driver.find_element_by_name("{}mediaTypeDetails".format(id_infix)).send_keys("Details")
+    Select(driver.find_element_by_name(
+      "{}synchronizedWithText".format(id_infix))).select_by_visible_text("No")
+    Select(driver.find_element_by_name(
+      "{}synchronizedWithAudio".format(id_infix))).select_by_visible_text("Yes")
+    Select(driver.find_element_by_name(
+      "{}synchronizedWithVideo".format(id_infix))).select_by_visible_text("No")
+    Select(driver.find_element_by_name(
+      "{}sycnhronizedWithImage".format(id_infix))).select_by_visible_text("No")
+    Select(driver.find_element_by_name(
+      "{}synchronizedWithTextNumerical".format(id_infix))).select_by_visible_text("No")
 
 
 def _fill_resourceDocumentation_form(driver, ss_path, id_infix):
@@ -634,7 +805,8 @@ def _fill_resourceDocumentation_form(driver, ss_path, id_infix):
       .select_by_visible_text("documentInfoType")
     _fill_documentation_popup(driver, ss_path, current_id)
     driver.find_element_by_name("{}samplesLocation".format(id_infix)).clear()
-    driver.find_element_by_name("{}samplesLocation".format(id_infix)).send_keys("http://rn.samples.org")
+    driver.find_element_by_name("{}samplesLocation".format(id_infix)).send_keys(
+      "http://rn.samples.org")
     Select(driver.find_element_by_name(
       "{}toolDocumentationType_old".format(id_infix))).select_by_visible_text("Manual")
     driver.find_element_by_xpath("//div[@class='form-row toolDocumentationType']/div/div/div/a") \
@@ -705,7 +877,7 @@ def _fill_validations_form(driver, ss_path, id_infix):
       .select_by_visible_text("documentInfoType")
     _fill_validationReport_popup(driver, ss_path, current_id)
     # validation tool popup
-    driver.find_element_by_xpath("//a[@id='add_id_validationinfotype_model_set-0-validationTool']/img".format(id_infix)) \
+    driver.find_element_by_xpath("//a[@id='add_id_{}validationTool']/img".format(id_infix)) \
       .click()  
     _fill_validationTool_popup(driver, ss_path, current_id)
     # validator popup
@@ -951,12 +1123,49 @@ def _fill_targetResource_form(driver, ss_path):
     driver.find_element_by_name("targetResourceNameURI").clear()
     driver.find_element_by_name("targetResourceNameURI").send_keys("578DFDG8DF")
 
+
 def _fill_validationTool_popup(driver, ss_path, parent_id):
     """
     fills the validation tool popup with all required, recommended and optional
     information and returns to the parent window
     """
     driver.switch_to_window("id_validationinfotype_model_set__dash__0__dash__validationTool")
+    _fill_targetResource_form(driver, ss_path)
+
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_annotationTool_popup(driver, ss_path, parent_id):
+    """
+    fills the annotation tool popup with all required, recommended and optional
+    information and returns to the parent window
+    """
+    driver.switch_to_window("id_annotationinfotype_model_set__dash__0__dash__annotationTool")
+    _fill_targetResource_form(driver, ss_path)
+
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_originalSource_popup(driver, ss_path, parent_id):
+    """
+    fills the original source popup with all required, recommended and optional
+    information and returns to the parent window
+    """
+    driver.switch_to_window("id_form__dash__2__dash__0__dash__originalSource")
+    _fill_targetResource_form(driver, ss_path)
+
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_creationTool_popup(driver, ss_path, parent_id):
+    """
+    fills the creation tool popup with all required, recommended and optional
+    information and returns to the parent window
+    """
+    driver.switch_to_window("id_form__dash__2__dash__0__dash__creationTool")
     _fill_targetResource_form(driver, ss_path)
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -1005,6 +1214,18 @@ def _fill_documentation_popup(driver, ss_path, parent_id):
     information and returns to the parent window
     """
     driver.switch_to_window("id_form__dash__4__dash__0__dash__documentation")
+    _fill_documentInfo_form(driver, ss_path)
+
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_annotationManual_popup(driver, ss_path, parent_id):
+    """
+    fills the annotation manual popup with all required, recommended and optional
+    information and returns to the parent window
+    """
+    driver.switch_to_window("id_annotationinfotype_model_set__dash__0__dash__annotationManual")
     _fill_documentInfo_form(driver, ss_path)
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -1160,6 +1381,18 @@ def _fill_resourceCreator_popup(driver, ss_path, parent_id):
     save_and_close(driver, parent_id)
 
 
+def _fill_annotator_popup(driver, ss_path, parent_id):
+    """
+    fills the annotator popup with all required, recommended and optional
+    information and returns to the parent window
+    """
+    driver.switch_to_window("id_annotationinfotype_model_set__dash__0__dash__annotator")
+    _fill_personInfo_form(driver, ss_path, "form-0-")
+
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
 def _fill_iprHolder_popup(driver, ss_path, parent_id):
     """
     fills the ipr holder popup with all required, recommended and optional
@@ -1246,6 +1479,27 @@ def _fill_corpusTextInfo_popup(driver, ss_path, parent_id):
     _fill_textFormats_form(driver, ss_path, "textformatinfotype_model_set-0-")
     # corpus text info / character encodings
     _fill_characterEncodings_form(driver, ss_path, "characterencodinginfotype_model_set-0-")
+    # show annotations
+    driver.find_element_by_id("fieldsetcollapser0").click()
+    # corpus text info / annotations
+    _fill_annotations_form(driver, ss_path, "annotationinfotype_model_set-0-")
+    # corpus text info / domains
+    _fill_domains_form(driver, ss_path, "domaininfotype_model_set-0-")
+    # show text classifications
+    driver.find_element_by_id("fieldsetcollapser1").click()
+    # corpus text info / text classifications
+    _fill_textClassifications_form(driver, ss_path, "textclassificationinfotype_model_set-0-")
+    # corpus text info / time coverage
+    _fill_timeCoverage_form(driver, ss_path, "timecoverageinfotype_model_set-0-")
+    # corpus text info / geographic coverage
+    _fill_geographicCoverage_form(driver, ss_path, "geographiccoverageinfotype_model_set-0-")
+    # corpus text info / creation
+    _fill_creation_form(driver, ss_path, "creationinfotype_model_set-0-")
+    # optional fields
+    driver.find_element_by_css_selector("a[href=\"#field-3\"]").click()
+    # corpus text info / link to other media
+    _fill_linkToOtherMedias_form(driver, ss_path, "linktoothermediainfotype_model_set-0-")
+
     # save and close corpus text info popup
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
@@ -1295,7 +1549,7 @@ def _fill_sizePerLanguage_popup(driver, ss_path, parent_id):
     save_and_close(driver, parent_id)
 
 
-def _fill_sizePerModalities_form(driver, ss_path, parent_id):
+def _fill_sizePerModalities_popup(driver, ss_path, parent_id):
     """
     fills the size per modalities popup with all required, recommended and optional
     information and returns to the parent window
@@ -1307,7 +1561,7 @@ def _fill_sizePerModalities_form(driver, ss_path, parent_id):
     save_and_close(driver, parent_id)
 
 
-def _fill_sizePerTextFormats_form(driver, ss_path, parent_id):
+def _fill_sizePerTextFormats_popup(driver, ss_path, parent_id):
     """
     fills the size per text formats popup with all required, recommended and optional
     information and returns to the parent window
@@ -1319,12 +1573,24 @@ def _fill_sizePerTextFormats_form(driver, ss_path, parent_id):
     save_and_close(driver, parent_id)
 
 
-def _fill_sizePerCharacterEncodings_form(driver, ss_path, parent_id):
+def _fill_sizePerCharacterEncodings_popup(driver, ss_path, parent_id):
     """
     fills the size per character encodings popup with all required, recommended and optional
     information and returns to the parent window
     """
     driver.switch_to_window("id_characterencodinginfotype_model_set__dash__0__dash__sizePerCharacterEncoding")
+    _fill_size_form(driver, ss_path, "")
+
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_sizePerDomains_popup(driver, ss_path, parent_id):
+    """
+    fills the size per domains popup with all required, recommended and optional
+    information and returns to the parent window
+    """
+    driver.switch_to_window("id_domaininfotype_model_set__dash__0__dash__sizePerDomain")
     _fill_size_form(driver, ss_path, "")
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -1380,6 +1646,54 @@ def _fill_sizePerValidation_popup(driver, ss_path, parent_id):
     information and returns to the parent window
     """
     driver.switch_to_window("id_validationinfotype_model_set__dash__0__dash__sizePerValidation")
+    _fill_size_form(driver, ss_path, "")
+
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_sizePerAnnotation_popup(driver, ss_path, parent_id):
+    """
+    fills the size per annotation popup with all required, recommended and optional
+    information and returns to the parent window
+    """
+    driver.switch_to_window("id_annotationinfotype_model_set__dash__0__dash__sizePerAnnotation")
+    _fill_size_form(driver, ss_path, "")
+
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_sizePerTextClassification_popup(driver, ss_path, parent_id):
+    """
+    fills the size per text classification popup with all required, recommended and optional
+    information and returns to the parent window
+    """
+    driver.switch_to_window("id_textclassificationinfotype_model_set__dash__0__dash__sizePerTextClassification")
+    _fill_size_form(driver, ss_path, "")
+
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_sizePerTimeCoverage_popup(driver, ss_path, parent_id):
+    """
+    fills the size per time coverage popup with all required, recommended and optional
+    information and returns to the parent window
+    """
+    driver.switch_to_window("id_timecoverageinfotype_model_set__dash__0__dash__sizePerTimeCoverage")
+    _fill_size_form(driver, ss_path, "")
+
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_sizePerGeographicCoverage_popup(driver, ss_path, parent_id):
+    """
+    fills the size per geographic coverage popup with all required, recommended and optional
+    information and returns to the parent window
+    """
+    driver.switch_to_window("id_geographiccoverageinfotype_model_set__dash__0__dash__sizePerGeographicCoverage")
     _fill_size_form(driver, ss_path, "")
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
