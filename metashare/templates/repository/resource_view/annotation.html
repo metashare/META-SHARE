@@ -93,19 +93,28 @@
 	{% if annotations.Size_per_annotation %}
 		{% include "repository/resource_view/size.html" with size=annotations type="component" %}
 	{% endif %}
-	
-	{% if annotations.Annotation_manual %}
-		{% if annotations.Annotation_manual.Annotation_manual.Title %}
-			{% include "repository/resource_view/documentation.html" with documentation=annotations.Annotation_manual.Annotation_manual level="sub" type="Annotation Manual" %}	
-		{% else %}
-			<label class="subtitle">Document</label>
-			<div class="dataline indented">
-				<label>
-					{{annotations.Annotation_manual}}
-				</label>
-			</div>
-		{% endif %}
+
+	{% if "Annotation_manual" in annotations %}
+		<div>
+			<label class="dataline indented">
+				<strong>Annotation Manual:</strong>
+			</label>
+		</div><div class="subtitle"></div>
 	{% endif %}
+	{% for key, value in annotations.items %}
+		{% if "Annotation_manual" in key %}
+			<div class="separation"><hr/></div>
+			{% if value.Annotation_manual.Title %}
+				{% include "repository/resource_view/documentation.html" with documentation=value.Annotation_manual level="simple" type="Documentation" %}	
+			{% else %}
+				<div class="dataline indented">
+					<label>
+						{{value.Annotation_manual}}
+					</label>
+				</div>
+			{% endif %}
+		{% endif %}
+	{% endfor %}
 	
 	{% if annotations.Interannotator_agreement %}
 		<div>

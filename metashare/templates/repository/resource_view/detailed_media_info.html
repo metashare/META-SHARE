@@ -3,7 +3,6 @@
 {% if type == "toolService" %}
 	{% include "repository/resource_view/tool_service.html" with tool_service=resource_component %}
 {% else %}
-
 	{# Type info #}
 	<label class='component'><strong>{% if resource_component.Linguality.Linguality_type %}{{ resource_component.Linguality.Linguality_type }}{% endif %} {{ type }} {{ resourceType }}</strong></label>
 
@@ -26,9 +25,12 @@
 	{% if "Size" in resource_component %}
 		{% include "repository/resource_view/size.html" with size=resource_component %}
 	{% endif %}
-	{% if "Audio_size" in resource_component %}
-		{% include "repository/resource_view/size.html" with size=resource_component.Audio_size %}
-	{% endif %}
+	
+	{% for key, value in resource_component.items %}		
+		{% if "Audio_size" in key %}
+			{% include "repository/resource_view/size.html" with size=value %}
+		{% endif %}
+	{% endfor %}
 	{% if "Video_size" in resource_component %}
 		{% include "repository/resource_view/size.html" with size=resource_component.Video_size %}
 	{% endif %}
@@ -38,7 +40,13 @@
 
 	{# Character Encoding Information #}
 	{% if "Character_encoding" in resource_component %}
-		{% include "repository/resource_view/character_encoding.html" with encodings=resource_component %}
+		<label class='title'>Character encoding</label>
+		{% for key, value in resource_component.items %}		
+			{% if "Character_encoding" in key %}
+				<div class="separation"><hr/></div>
+				{% include "repository/resource_view/character_encoding.html" with encodings=value %}
+			{% endif %}
+		{% endfor %}
 	{% endif %}
 	
 	{# Domain Information #}
